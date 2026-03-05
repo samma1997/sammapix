@@ -4,7 +4,6 @@ import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
-  // Suppress unused var warning — req is required by Next.js route signature
   void req;
 
   const session = await getServerSession(authOptions);
@@ -21,24 +20,13 @@ export async function POST(req: NextRequest) {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
-      line_items: [
-        {
-          price: process.env.STRIPE_PRO_PRICE_ID!,
-          quantity: 1,
-        },
-      ],
+      line_items: [{ price: process.env.STRIPE_PRO_PRICE_ID!, quantity: 1 }],
       customer_email: session.user.email,
       success_url: `${appUrl}/pricing?success=true`,
       cancel_url: `${appUrl}/pricing?canceled=true`,
-      metadata: {
-        userId:
-          (session.user as { id?: string }).id ?? session.user.email,
-      },
+      metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       subscription_data: {
-        metadata: {
-          userId:
-            (session.user as { id?: string }).id ?? session.user.email,
-        },
+        metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       },
     });
 
@@ -46,9 +34,6 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const message = err instanceof Error ? err.message : "Stripe error";
     console.error("[checkout] Stripe error:", message);
-    return NextResponse.json(
-      { error: "Failed to create checkout session", code: "STRIPE_ERROR" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: message, code: "STRIPE_ERROR" }, { status: 500 });
   }
 }
