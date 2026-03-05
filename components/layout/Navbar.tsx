@@ -31,11 +31,116 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex flex-col leading-none hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 group select-none"
+          aria-label="SammaPix — home"
         >
-          <span className="font-semibold text-gray-900 text-base">SammaPix</span>
-          <span className="hidden sm:block text-xs text-gray-400 font-normal">
-            by Luca Sammarco
+          <style>{`
+            @keyframes sammapix-compress {
+              0%, 100% { transform: scale(1); }
+              50%       { transform: scale(0.88); }
+            }
+            @keyframes sammapix-spark {
+              0%, 100% { opacity: 1;   transform: scale(1)   rotate(0deg); }
+              40%       { opacity: 0.5; transform: scale(0.7) rotate(15deg); }
+              70%       { opacity: 1;   transform: scale(1.2) rotate(-8deg); }
+            }
+            .sammapix-icon {
+              animation: sammapix-compress 3.6s ease-in-out infinite;
+              transform-origin: center;
+            }
+            .sammapix-spark {
+              animation: sammapix-spark 3.6s ease-in-out infinite;
+              transform-origin: 14px 4px;
+            }
+            .sammapix-logo-link:hover .sammapix-icon {
+              animation: sammapix-compress 0.45s ease-in-out 1 forwards;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .sammapix-icon,
+              .sammapix-spark {
+                animation: none !important;
+              }
+            }
+          `}</style>
+
+          {/* SVG icon: image frame with inner compressed frame + indigo sparkle */}
+          <svg
+            className="sammapix-logo-link"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+          >
+            {/* Outer rounded container */}
+            <rect
+              x="0.75"
+              y="0.75"
+              width="18.5"
+              height="18.5"
+              rx="4.5"
+              fill="#F5F5F5"
+              stroke="#E5E5E5"
+              strokeWidth="1.5"
+            />
+
+            {/* Back image frame (lighter, offset slightly) */}
+            <rect
+              className="sammapix-icon"
+              x="5"
+              y="5.5"
+              width="9.5"
+              height="8"
+              rx="1.25"
+              fill="none"
+              stroke="#D4D4D4"
+              strokeWidth="1.25"
+            />
+
+            {/* Front image frame (darker, compressed toward center) */}
+            <rect
+              className="sammapix-icon"
+              x="6.5"
+              y="7"
+              width="9.5"
+              height="8"
+              rx="1.25"
+              fill="white"
+              stroke="#404040"
+              strokeWidth="1.25"
+            />
+
+            {/* Tiny landscape mountain inside front frame — image metaphor */}
+            <path
+              className="sammapix-icon"
+              d="M8 13.5 L10 10.5 L12.5 13.5"
+              stroke="#A3A3A3"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+            <circle
+              className="sammapix-icon"
+              cx="13.5"
+              cy="11"
+              r="0.9"
+              fill="#D4D4D4"
+            />
+
+            {/* Indigo sparkle — top-right accent, AI metaphor */}
+            <g className="sammapix-spark">
+              {/* vertical arm */}
+              <line x1="14" y1="2.25" x2="14" y2="5.75" stroke="#6366f1" strokeWidth="1.25" strokeLinecap="round" />
+              {/* horizontal arm */}
+              <line x1="12.25" y1="4" x2="15.75" y2="4" stroke="#6366f1" strokeWidth="1.25" strokeLinecap="round" />
+            </g>
+          </svg>
+
+          <span className="font-semibold text-gray-900 text-base tracking-tight group-hover:text-gray-700 transition-colors duration-150">
+            SammaPix
           </span>
         </Link>
 
