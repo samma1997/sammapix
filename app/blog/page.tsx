@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Learn how to optimize images for the web, improve SEO, and use AI tools to rename your photos automatically.",
 };
 
-type PostCategory = "SEO" | "Tools" | "Privacy";
+type PostCategory = "SEO" | "Tools" | "Privacy" | "Performance";
 
 const categoryConfig: Record<
   PostCategory,
@@ -29,6 +29,11 @@ const categoryConfig: Record<
     dot: "bg-purple-500",
     label: "text-purple-700",
     gradient: "from-purple-50 to-violet-50",
+  },
+  Performance: {
+    dot: "bg-orange-500",
+    label: "text-orange-700",
+    gradient: "from-orange-50 to-amber-50",
   },
 };
 
@@ -62,6 +67,66 @@ const posts = [
     readTime: "5 min read",
     tag: "Privacy",
     category: "Privacy" as PostCategory,
+  },
+  {
+    slug: "compress-images-for-website",
+    title: "How to Compress Images for a Website Without Losing Quality",
+    description:
+      "A practical guide to compressing images for web — the right formats, tools, and settings to reduce file size while keeping images sharp.",
+    date: "2026-03-05",
+    readTime: "7 min read",
+    tag: "Performance",
+    category: "Performance" as PostCategory,
+  },
+  {
+    slug: "jpg-to-webp-converter",
+    title: "How to Convert JPG to WebP for Free (Without Losing Quality)",
+    description:
+      "Convert JPG to WebP online for free — smaller files, faster pages, better SEO. No upload required, your images stay on your device.",
+    date: "2026-03-05",
+    readTime: "5 min read",
+    tag: "Tools",
+    category: "Tools" as PostCategory,
+  },
+  {
+    slug: "reduce-image-size-without-losing-quality",
+    title: "How to Reduce Image Size Without Losing Quality (2026 Guide)",
+    description:
+      "Reduce image file size without visible quality loss — the right format, quality settings, and tools that actually work for web images.",
+    date: "2026-03-05",
+    readTime: "6 min read",
+    tag: "Performance",
+    category: "Performance" as PostCategory,
+  },
+  {
+    slug: "best-image-format-for-web",
+    title: "Best Image Format for Web in 2026: JPEG vs PNG vs WebP vs AVIF",
+    description:
+      "Which image format should you use for your website in 2026? A clear comparison of JPEG, PNG, WebP, and AVIF — when to use each and why.",
+    date: "2026-03-05",
+    readTime: "8 min read",
+    tag: "SEO",
+    category: "SEO" as PostCategory,
+  },
+  {
+    slug: "image-seo-guide",
+    title: "Image SEO: The Complete Guide to Optimizing Images for Google (2026)",
+    description:
+      "A complete image SEO guide — filenames, alt text, structured data, page speed, and Google Image Search. Everything you need to rank your images.",
+    date: "2026-03-05",
+    readTime: "10 min read",
+    tag: "SEO",
+    category: "SEO" as PostCategory,
+  },
+  {
+    slug: "compress-png-without-losing-quality",
+    title: "How to Compress PNG Without Losing Quality (Free & Online)",
+    description:
+      "Reduce PNG file size without visible quality loss — the right tools, methods, and settings for lossless and near-lossless PNG compression.",
+    date: "2026-03-05",
+    readTime: "6 min read",
+    tag: "Performance",
+    category: "Performance" as PostCategory,
   },
 ];
 

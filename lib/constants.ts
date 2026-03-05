@@ -62,6 +62,12 @@ export const BLOG_SLUGS = [
   "ai-image-renaming-seo",
   "tinypng-alternative",
   "remove-exif-data-photos",
+  "compress-images-for-website",
+  "jpg-to-webp-converter",
+  "reduce-image-size-without-losing-quality",
+  "best-image-format-for-web",
+  "image-seo-guide",
+  "compress-png-without-losing-quality",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

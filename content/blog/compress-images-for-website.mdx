@@ -1,0 +1,148 @@
+---
+title: "How to Compress Images for a Website (Step-by-Step, 2026)"
+slug: "compress-images-for-website"
+date: "2026-03-05"
+description: "Learn how to compress images for your website to pass Core Web Vitals, reduce bounce rate, and load faster. Step-by-step guide with optimal sizes."
+keywords: ["compress images for website", "image compression tutorial", "core web vitals images", "reduce image file size", "website image optimization", "webp compression"]
+ogImage: "/blog/og/compress-images-for-website.png"
+author: "Luca Sammarco"
+readingTime: "8 min read"
+---
+
+Images are the single largest contributor to page weight on the average website. According to HTTP Archive data from early 2026, images account for roughly 50% of the total bytes transferred on a median web page. If your site feels slow, images are the first place to look — and compressing them is the highest-leverage thing you can do.
+
+This guide covers everything: why image size matters for Core Web Vitals, what the right file sizes are for different use cases, and a complete walkthrough for compressing images without touching a command line.
+
+## Why Image Size Directly Affects Your Rankings
+
+Google has made page speed a ranking factor since 2010, but it became much more concrete in 2021 with the rollout of Core Web Vitals as official ranking signals. Two of the three Core Web Vitals metrics are directly influenced by image optimization:
+
+**Largest Contentful Paint (LCP)** measures how quickly the largest visible element in the viewport loads. On most pages, that element is a hero image or a product photo. A hero image that weighs 2 MB on a mobile connection can single-handedly push your LCP above the 4-second "poor" threshold. Google's own data shows that sites with an LCP under 2.5 seconds have significantly higher conversion rates than those above it.
+
+**Cumulative Layout Shift (CLS)** is affected when images load without explicit dimensions, causing the page to reflow. While this is a separate issue from compression, it's closely related — large images that load slowly create more opportunities for layout shifts.
+
+### The Business Case in Numbers
+
+A 1-second delay in page load time reduces conversions by approximately 7%, according to a widely cited study by Akamai. For an e-commerce site doing $50,000/month in revenue, that's $3,500/month lost to slow images — every second of delay.
+
+Beyond conversions, slow pages have higher bounce rates. Google's research found that as page load time goes from 1 second to 5 seconds, the probability of a mobile visitor bouncing increases by 90%.
+
+## Optimal Image Sizes by Use Case
+
+"Compress your images" is good advice. "Compress them to these specific targets" is better advice.
+
+### Hero Images (Full-Width Banners)
+
+- **Maximum file size:** 150–200 KB in WebP, 200–250 KB in JPEG
+- **Dimensions:** 1400–1920px wide, no wider
+- **Notes:** Most visitors view hero images at 1200–1400px on desktop. Serving a 3000px wide image is wasted data. Use `srcset` to serve different sizes to mobile vs desktop.
+
+### Thumbnail Images (Blog Cards, Product Grids)
+
+- **Maximum file size:** 20–40 KB in WebP, 30–50 KB in JPEG
+- **Dimensions:** 400–600px wide
+- **Notes:** Thumbnails are small on screen. A 40 KB thumbnail that's sharp is always preferable to a 200 KB thumbnail that's "technically higher quality."
+
+### Product Photos (E-commerce)
+
+- **Maximum file size:** 80–120 KB in WebP, 100–150 KB in JPEG
+- **Dimensions:** 800–1200px wide
+- **Notes:** Product photos need to be clear enough for the zoom feature. If your product page uses a lightbox zoom, consider a compressed thumbnail for initial load and a full-resolution version loaded on interaction.
+
+### Blog Post Body Images
+
+- **Maximum file size:** 50–80 KB in WebP, 70–100 KB in JPEG
+- **Dimensions:** 700–900px wide
+- **Notes:** Body images are rarely wider than the text column. A 1600px wide image in a 700px content column is pure waste.
+
+### Background Textures and Decorative Images
+
+- **Maximum file size:** 10–30 KB
+- **Notes:** Background images often have low visual complexity. Heavily compress them — visitors won't notice.
+
+## The Science of Image Compression
+
+Before the walkthrough, a quick primer on what actually happens during compression.
+
+**Lossy compression** (used by JPEG and WebP) permanently removes image data that human eyes are unlikely to notice. The algorithm exploits the fact that our eyes are more sensitive to changes in brightness than color. It groups pixels together and averages out subtle variations. The "quality" slider in any compression tool controls how aggressively this is done.
+
+**Lossless compression** (used by PNG and lossless WebP) reorganizes the image data more efficiently without discarding any of it. It's like repacking a suitcase — same clothes, smaller bag.
+
+The key insight: for photographs, lossy compression at 75–85% quality produces files that are indistinguishable from the original to the human eye while being 60–80% smaller. The remaining 15–25% quality drop from there causes visible artifacts without meaningful file size benefit.
+
+## Step-by-Step: Compressing Images with SammaPix
+
+[SammaPix](https://sammapix.com) does all processing directly in your browser — your files never leave your device. Here's the complete workflow.
+
+### Step 1: Open SammaPix and Upload Your Images
+
+Go to [sammapix.com](https://sammapix.com) and drag your images into the drop zone, or click to browse. You can upload JPG, PNG, or WebP files. The free plan handles up to 5 files at once; Pro handles 100.
+
+### Step 2: Choose Your Output Format
+
+For most web images, select **WebP** as the output format. WebP is 25–35% smaller than JPEG at equivalent quality — a benchmark established by Google's original research when they released the format in 2010 and consistently replicated since. As of 2026, WebP has 96%+ browser support globally, which makes the JPEG fallback argument largely obsolete.
+
+If you're compressing images specifically for WordPress or a CMS that doesn't handle WebP well, JPEG is the correct choice.
+
+### Step 3: Set the Quality Level
+
+The default quality setting of 80% is appropriate for most use cases. Here's how to think about it:
+
+- **90–100%:** Use only for professional photography archives or print-ready images. File sizes are 3–5× larger than 80% with no visible improvement on screen.
+- **75–85%:** The sweet spot for web images. Sharp, professional-looking, small file sizes.
+- **60–75%:** Acceptable for thumbnails, background images, and decorative elements where detail isn't critical.
+- **Below 60%:** Visible artifacts. Avoid for anything a user will look at closely.
+
+### Step 4: Download and Deploy
+
+After compression, SammaPix shows you the original and compressed file sizes side-by-side. Download the compressed files and replace the originals in your CMS, static asset folder, or image CDN.
+
+## After Compression: Make Sure You're Serving Them Correctly
+
+Compressing images is necessary but not sufficient. You also need to serve them correctly.
+
+### Use `width` and `height` Attributes
+
+Always specify dimensions on `<img>` tags. This prevents layout shift (CLS) and allows the browser to reserve space before the image loads.
+
+```html
+<img src="hero.webp" width="1400" height="600" alt="Product hero image" loading="lazy">
+```
+
+### Add `loading="lazy"` to Below-the-Fold Images
+
+The browser won't fetch lazy-loaded images until they're about to enter the viewport. This reduces initial page load time significantly. Only skip `loading="lazy"` for the LCP image (usually the hero).
+
+### Use a CDN
+
+A CDN (Content Delivery Network) serves your images from the server geographically closest to each visitor. For a US-based server, a visitor in Tokyo might wait 150ms just for the network round-trip, before a single byte of the image is transferred. A CDN eliminates this. Cloudflare's free tier is sufficient for most small to medium sites.
+
+## Common Mistakes to Avoid
+
+**Scaling images in HTML/CSS instead of the file.** Serving a 2000px image and constraining it to 400px with CSS wastes bandwidth. Resize the image file itself.
+
+**Forgetting mobile.** A desktop hero image displayed at 1400px on desktop might display at 400px on a phone. Serve different sizes using `srcset` and `sizes` attributes.
+
+**Re-compressing already-compressed images.** If you run a JPEG through a lossy compressor twice, you stack the quality loss. Always keep original high-quality source files and only compress for output.
+
+**Ignoring EXIF data.** Photos taken on smartphones contain GPS coordinates, device model, and timestamp data. This data adds file size and poses a privacy risk. SammaPix strips EXIF data automatically during compression — no configuration required.
+
+---
+
+## FAQ
+
+**How much can I reduce image file size without visible quality loss?**
+
+For JPEGs and WebP at 80% quality, you can typically achieve 50–70% file size reduction compared to a camera-original file with no visible quality loss on screen. For PNGs, lossless compression gives 20–40% reduction; converting a PNG to WebP lossy can give 60–80% reduction.
+
+**Should I always convert to WebP?**
+
+For web use in 2026, yes — WebP support is at 96%+ globally. The main exception is if your CMS or hosting pipeline doesn't support WebP, though most modern platforms do. If you're generating Open Graph images for social sharing, some platforms still prefer JPEG, so check the platform's documentation.
+
+**How large should my hero image be?**
+
+Target under 150 KB in WebP format. For dimensions, 1400–1600px wide covers all common desktop resolutions. Serve a smaller version (600–800px) to mobile via `srcset`.
+
+**Do I need to compress images if I'm using a CDN?**
+
+Yes. A CDN reduces latency by serving files from nearby servers, but it doesn't reduce file size. A 2 MB hero image served from a CDN is still a 2 MB download — just delivered faster. Compression and CDN are complementary, not interchangeable.
