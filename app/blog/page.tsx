@@ -1,0 +1,159 @@
+import React from "react";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Blog — Image Optimization Tips & Guides",
+  description:
+    "Learn how to optimize images for the web, improve SEO, and use AI tools to rename your photos automatically.",
+};
+
+type PostCategory = "SEO" | "Tools" | "Privacy";
+
+const categoryConfig: Record<
+  PostCategory,
+  { dot: string; label: string; gradient: string }
+> = {
+  SEO: {
+    dot: "bg-green-500",
+    label: "text-green-700",
+    gradient: "from-green-50 to-emerald-50",
+  },
+  Tools: {
+    dot: "bg-blue-500",
+    label: "text-blue-700",
+    gradient: "from-blue-50 to-sky-50",
+  },
+  Privacy: {
+    dot: "bg-purple-500",
+    label: "text-purple-700",
+    gradient: "from-purple-50 to-violet-50",
+  },
+};
+
+const posts = [
+  {
+    slug: "ai-image-renaming-seo",
+    title: "How to Rename Images for SEO Automatically with AI",
+    description:
+      "Stop naming your images IMG_4521.jpg. Learn how AI can generate SEO-friendly filenames and alt text in seconds.",
+    date: "2026-01-15",
+    readTime: "5 min read",
+    tag: "AI",
+    category: "SEO" as PostCategory,
+  },
+  {
+    slug: "tinypng-alternative",
+    title: "TinyPNG vs SammaPix: Which Free Image Compressor is Better in 2026?",
+    description:
+      "We compare TinyPNG and SammaPix head-to-head on compression ratio, speed, privacy, and features.",
+    date: "2026-01-22",
+    readTime: "7 min read",
+    tag: "Comparison",
+    category: "Tools" as PostCategory,
+  },
+  {
+    slug: "remove-exif-data-photos",
+    title: "How to Remove EXIF Data from Photos Online (Free)",
+    description:
+      "Your photos contain hidden GPS coordinates, camera model, and more. Learn how to strip metadata before sharing.",
+    date: "2026-02-01",
+    readTime: "4 min read",
+    tag: "Privacy",
+    category: "Privacy" as PostCategory,
+  },
+];
+
+export default function BlogPage() {
+  return (
+    <div className="py-16 px-4 sm:px-6">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-12">
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-3">
+            Blog
+          </h1>
+          <p className="text-gray-500">
+            Tips, guides, and comparisons for image optimization.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {posts.map((post) => {
+            const cat = categoryConfig[post.category];
+            return (
+              <article
+                key={post.slug}
+                className="border border-gray-200 rounded-md overflow-hidden bg-white hover:shadow-sm transition-shadow"
+              >
+                {/* Gradient header */}
+                <div
+                  className={`h-2 w-full bg-gradient-to-r ${cat.gradient}`}
+                />
+
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group block p-6 hover:no-underline"
+                >
+                  {/* Meta row */}
+                  <div className="flex items-center gap-2 mb-3">
+                    {/* Category dot + label */}
+                    <span className="flex items-center gap-1.5">
+                      <span
+                        className={`inline-block h-2 w-2 rounded-full ${cat.dot}`}
+                      />
+                      <span
+                        className={`text-xs font-medium uppercase tracking-wide ${cat.label}`}
+                      >
+                        {post.category}
+                      </span>
+                    </span>
+                    <span className="text-gray-300">·</span>
+                    <time
+                      className="text-xs text-gray-400"
+                      dateTime={post.date}
+                    >
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </time>
+                    <span className="text-gray-300">·</span>
+                    <span className="text-xs text-gray-400">
+                      {post.readTime}
+                    </span>
+                  </div>
+
+                  <h2 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors leading-snug">
+                    {post.title}
+                  </h2>
+
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    {post.description}
+                  </p>
+
+                  {/* Author + CTA row */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center text-[10px] font-semibold text-gray-600">
+                        LS
+                      </div>
+                      <span className="text-xs text-gray-400">
+                        Luca Sammarco
+                      </span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-sm text-gray-700 font-medium group-hover:gap-2 transition-all">
+                      Read article
+                      <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </span>
+                  </div>
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
