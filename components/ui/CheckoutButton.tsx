@@ -31,11 +31,14 @@ export default function CheckoutButton({
         method: "POST",
         credentials: "include",
       });
-      const data = (await res.json()) as { url?: string; error?: string };
+      const data = (await res.json()) as { url?: string; error?: string; code?: string };
       if (data.url) {
         window.location.href = data.url;
+      } else {
+        alert(`Checkout error: ${data.error ?? "no URL returned"} [${data.code ?? res.status}]`);
       }
     } catch (err) {
+      alert(`Network error: ${err instanceof Error ? err.message : String(err)}`);
       console.error("Checkout error:", err);
     } finally {
       setLoading(false);
