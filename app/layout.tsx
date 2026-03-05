@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Providers } from "./providers";
 import { APP_NAME, APP_URL } from "@/lib/constants";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -97,6 +98,7 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         )}
+        <Analytics />
       </body>
     </html>
   );
