@@ -37,14 +37,15 @@ export default function HomePage() {
       {/* Hero */}
       <section className="pt-16 pb-12 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-4 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium">
-            <Lock className="h-3 w-3" strokeWidth={1.5} />
-            Images never leave your browser
-          </div>
-
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-6 rounded-full text-xs font-medium bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 text-indigo-600">
-            <Sparkles className="h-3 w-3" strokeWidth={1.5} />
-            Now with AI Rename powered by Gemini
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium">
+              <Lock className="h-3 w-3" strokeWidth={1.5} />
+              Images never leave your browser
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 text-indigo-600">
+              <Sparkles className="h-3 w-3" strokeWidth={1.5} />
+              Now with AI Rename powered by Gemini
+            </div>
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
