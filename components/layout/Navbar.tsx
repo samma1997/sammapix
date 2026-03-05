@@ -35,37 +35,66 @@ export default function Navbar() {
           aria-label="SammaPix — home"
         >
           <style>{`
-            @keyframes sammapix-compress {
-              0%, 100% { transform: scale(1); }
-              50%       { transform: scale(0.88); }
+            /*
+             * Pixel compression animation — 4x4 grid collapses inward toward center.
+             * Each pixel ring (outer → inner) is staggered so the collapse reads
+             * as a wave moving inward, then snapping back out.
+             * steps() timing gives the authentic pixel/digital feel.
+             */
+
+            /* Outer ring — 12 pixels along the perimeter */
+            @keyframes sp-outer {
+              0%        { transform: translate(0, 0);    opacity: 1; }
+              30%       { transform: translate(0, 0);    opacity: 1; }
+              55%       { transform: translate(var(--sp-dx), var(--sp-dy)) scale(0.01); opacity: 0; }
+              80%       { transform: translate(var(--sp-dx), var(--sp-dy)) scale(0.01); opacity: 0; }
+              100%      { transform: translate(0, 0);    opacity: 1; }
             }
-            @keyframes sammapix-spark {
-              0%, 100% { opacity: 1;   transform: scale(1)   rotate(0deg); }
-              40%       { opacity: 0.5; transform: scale(0.7) rotate(15deg); }
-              70%       { opacity: 1;   transform: scale(1.2) rotate(-8deg); }
+
+            /* Inner ring — 4 pixels (the 2x2 center block) */
+            @keyframes sp-inner {
+              0%        { transform: scale(1);    opacity: 1; }
+              50%       { transform: scale(1);    opacity: 1; }
+              70%       { transform: scale(0.01); opacity: 0; }
+              85%       { transform: scale(0.01); opacity: 0; }
+              100%      { transform: scale(1);    opacity: 1; }
             }
-            .sammapix-icon {
-              animation: sammapix-compress 3.6s ease-in-out infinite;
+
+            .sp-pixel-outer {
+              animation: sp-outer 2.4s steps(6, end) infinite;
+              transform-box: fill-box;
               transform-origin: center;
             }
-            .sammapix-spark {
-              animation: sammapix-spark 3.6s ease-in-out infinite;
-              transform-origin: 14px 4px;
+            .sp-pixel-inner {
+              animation: sp-inner 2.4s steps(6, end) infinite;
+              transform-box: fill-box;
+              transform-origin: center;
             }
-            .sammapix-logo-link:hover .sammapix-icon {
-              animation: sammapix-compress 0.45s ease-in-out 1 forwards;
-            }
+
+            /* Stagger: inner fires slightly after outer starts collapsing */
+            .sp-pixel-inner { animation-delay: 0.15s; }
+
             @media (prefers-reduced-motion: reduce) {
-              .sammapix-icon,
-              .sammapix-spark {
+              .sp-pixel-outer,
+              .sp-pixel-inner {
                 animation: none !important;
               }
             }
           `}</style>
 
-          {/* SVG icon: image frame with inner compressed frame + indigo sparkle */}
+          {/*
+           * SVG icon: 4x4 pixel grid.
+           * viewBox 0 0 20 20. Each pixel is a 3x3 rect with 1px gap.
+           * Grid starts at x=2, y=2. Cell size = 4 (3px rect + 1px gap).
+           *
+           * Layout (col, row) — 0-indexed:
+           *   Outer ring: all cells where col=0|3 OR row=0|3  (12 cells)
+           *   Inner 2x2:  (1,1) (2,1) (1,2) (2,2)            (4 cells)
+           *
+           * Each outer pixel has a CSS custom property --sp-dx/dy pointing
+           * toward the grid center (pixel 9.5, 9.5) so it collapses inward.
+           */}
           <svg
-            className="sammapix-logo-link"
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -74,69 +103,29 @@ export default function Navbar() {
             aria-hidden="true"
             focusable="false"
           >
-            {/* Outer rounded container */}
-            <rect
-              x="0.75"
-              y="0.75"
-              width="18.5"
-              height="18.5"
-              rx="4.5"
-              fill="#F5F5F5"
-              stroke="#E5E5E5"
-              strokeWidth="1.5"
-            />
+            {/* ── Outer ring ── */}
+            {/* row 0 */}
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"3px"} as React.CSSProperties}  x="2"  y="2"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="6"  y="2"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="10" y="2"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"3px"} as React.CSSProperties} x="14" y="2"  width="3" height="3" fill="#171717" />
+            {/* row 1 — sides only */}
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="6"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="6"  width="3" height="3" fill="#171717" />
+            {/* row 2 — sides only */}
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="10" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="10" width="3" height="3" fill="#171717" />
+            {/* row 3 */}
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"-3px"} as React.CSSProperties}  x="2"  y="14" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"-3px"} as React.CSSProperties}  x="6"  y="14" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"-3px"} as React.CSSProperties}  x="10" y="14" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"-3px"} as React.CSSProperties} x="14" y="14" width="3" height="3" fill="#171717" />
 
-            {/* Back image frame (lighter, offset slightly) */}
-            <rect
-              className="sammapix-icon"
-              x="5"
-              y="5.5"
-              width="9.5"
-              height="8"
-              rx="1.25"
-              fill="none"
-              stroke="#D4D4D4"
-              strokeWidth="1.25"
-            />
-
-            {/* Front image frame (darker, compressed toward center) */}
-            <rect
-              className="sammapix-icon"
-              x="6.5"
-              y="7"
-              width="9.5"
-              height="8"
-              rx="1.25"
-              fill="white"
-              stroke="#404040"
-              strokeWidth="1.25"
-            />
-
-            {/* Tiny landscape mountain inside front frame — image metaphor */}
-            <path
-              className="sammapix-icon"
-              d="M8 13.5 L10 10.5 L12.5 13.5"
-              stroke="#A3A3A3"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-            <circle
-              className="sammapix-icon"
-              cx="13.5"
-              cy="11"
-              r="0.9"
-              fill="#D4D4D4"
-            />
-
-            {/* Indigo sparkle — top-right accent, AI metaphor */}
-            <g className="sammapix-spark">
-              {/* vertical arm */}
-              <line x1="14" y1="2.25" x2="14" y2="5.75" stroke="#6366f1" strokeWidth="1.25" strokeLinecap="round" />
-              {/* horizontal arm */}
-              <line x1="12.25" y1="4" x2="15.75" y2="4" stroke="#6366f1" strokeWidth="1.25" strokeLinecap="round" />
-            </g>
+            {/* ── Inner 2x2 ── */}
+            <rect className="sp-pixel-inner" x="6"  y="6"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-inner" x="10" y="6"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-inner" x="6"  y="10" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-inner" x="10" y="10" width="3" height="3" fill="#171717" />
           </svg>
 
           <span className="font-semibold text-gray-900 text-base tracking-tight group-hover:text-gray-700 transition-colors duration-150">
