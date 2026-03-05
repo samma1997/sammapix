@@ -40,7 +40,6 @@ function incrementToday(email: string): number {
 export async function POST(req: NextRequest) {
   // 1. Check auth
   const session = await getServerSession(authOptions);
-  console.log("[ai/rename] session:", session?.user?.email ?? "null");
   if (!session?.user?.email) {
     return NextResponse.json(
       { error: "Authentication required", code: "UNAUTHENTICATED" },

@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import AdUnit from "@/components/ads/AdUnit";
 
 type BlogSlug =
   | "ai-image-renaming-seo"
@@ -1401,20 +1402,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
       type: "article",
       publishedTime: post.date,
       authors: ["Luca Sammarco"],
-      images: [
-        {
-          url: `/blog/og/${post.slug}.png`,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [`/blog/og/${post.slug}.png`],
       creator: "@lucasammarco",
     },
   };
@@ -1585,8 +1577,13 @@ export default function BlogPostPage({ params }: PageProps) {
               .map((line, i) => renderLine(line, i))}
           </div>
 
-          {/* Affiliate banner — contextual based on post tag */}
+          {/* AdSense unit — between content and affiliate banner */}
           <div className="mt-8">
+            <AdUnit adSlot="blog-inline" adFormat="horizontal" className="w-full" />
+          </div>
+
+          {/* Affiliate banner — contextual based on post tag */}
+          <div className="mt-4">
             {(post.tag === "SEO" || post.tag === "AI") && (
               <AffiliateBanner variant="semrush" />
             )}

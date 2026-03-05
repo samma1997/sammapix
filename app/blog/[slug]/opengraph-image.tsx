@@ -4,7 +4,16 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "SammaPix Blog";
 
-type BlogSlug = "ai-image-renaming-seo" | "tinypng-alternative" | "remove-exif-data-photos";
+type BlogSlug =
+  | "ai-image-renaming-seo"
+  | "tinypng-alternative"
+  | "remove-exif-data-photos"
+  | "compress-images-for-website"
+  | "jpg-to-webp-converter"
+  | "reduce-image-size-without-losing-quality"
+  | "best-image-format-for-web"
+  | "image-seo-guide"
+  | "compress-png-without-losing-quality";
 
 const posts: Record<BlogSlug, { title: string; tag: string; tagColor: string; tagBg: string }> = {
   "ai-image-renaming-seo": {
@@ -24,6 +33,42 @@ const posts: Record<BlogSlug, { title: string; tag: string; tagColor: string; ta
     tag: "Privacy",
     tagColor: "#D1FAE5",
     tagBg: "#065F46",
+  },
+  "compress-images-for-website": {
+    title: "How to Compress Images for Website Without Losing Quality",
+    tag: "Performance",
+    tagColor: "#FEF3C7",
+    tagBg: "#B45309",
+  },
+  "jpg-to-webp-converter": {
+    title: "JPG to WebP Converter: Why and How to Convert Your Images",
+    tag: "WebP",
+    tagColor: "#E0F2FE",
+    tagBg: "#0369A1",
+  },
+  "reduce-image-size-without-losing-quality": {
+    title: "How to Reduce Image Size Without Losing Quality",
+    tag: "Performance",
+    tagColor: "#FEF3C7",
+    tagBg: "#B45309",
+  },
+  "best-image-format-for-web": {
+    title: "Best Image Format for Web in 2026: JPEG, PNG, or WebP?",
+    tag: "Guide",
+    tagColor: "#F3F4F6",
+    tagBg: "#374151",
+  },
+  "image-seo-guide": {
+    title: "Image SEO Guide: How to Optimize Images for Google Search",
+    tag: "SEO",
+    tagColor: "#EDE9FE",
+    tagBg: "#7C3AED",
+  },
+  "compress-png-without-losing-quality": {
+    title: "How to Compress PNG Without Losing Quality",
+    tag: "Performance",
+    tagColor: "#FEF3C7",
+    tagBg: "#B45309",
   },
 };
 

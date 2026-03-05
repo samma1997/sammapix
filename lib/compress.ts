@@ -62,10 +62,11 @@ export async function compressImage(
 
   onProgress?.(90);
 
-  // For WebP: also guard against size increase (rare but possible for tiny images)
+  // For WebP: guard against size increase (rare but possible for tiny/already-optimized images)
+  // If the WebP output is larger, return the original file to avoid inflating the download
   if (config.convertToWebP && resultBlob.size >= originalSize) {
-    // Keep WebP output anyway (format change is still valuable for browser caching)
-    // but don't pretend we saved space
+    resultBlob = file;
+    outputFormat = getMimeOutputFormat(file.type);
   }
 
   const { savedBytes, savedPercent } = calculateSavings(originalSize, resultBlob.size);

@@ -6,6 +6,11 @@ import { GEMINI_MODEL } from "@/lib/constants";
 
 export async function GET(req: NextRequest) {
   void req;
+  // Block in production — this endpoint consumes Gemini quota
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
   const session = await getServerSession(authOptions);
 
   const apiKey = process.env.GEMINI_API_KEY;

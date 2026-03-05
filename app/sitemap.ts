@@ -6,11 +6,11 @@ const BASE_URL = "https://sammapix.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/compress",
-    "/convert/to-webp",
-    "/ai-rename",
     "/pricing",
     "/blog",
+    "/privacy",
+    "/vs/tinypng",
+    "/vs/squoosh",
   ];
 
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
