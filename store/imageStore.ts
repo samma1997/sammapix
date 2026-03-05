@@ -267,8 +267,9 @@ export const useImageStore = create<ImageStoreState>()(
         applyAiName(id, filename, altText);
         updateItem(id, { aiRenameStatus: "done" });
       } catch (err) {
-        updateItem(id, { aiRenameStatus: "error" });
-        console.error("[aiRenameFile] failed:", err);
+        const errMsg = err instanceof Error ? err.message : String(err);
+        updateItem(id, { aiRenameStatus: "error", aiRenameError: errMsg });
+        console.error("[aiRenameFile] failed:", errMsg);
       }
     },
   }))

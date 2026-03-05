@@ -30,6 +30,7 @@ export interface ProcessedFile {
   aiSuggestedName?: string;
   aiAltText?: string;
   aiRenameStatus?: "idle" | "loading" | "done" | "error";
+  aiRenameError?: string; // actual error message for display
 
   // Preview
   previewUrl?: string;

@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
-import { APP_URL, BLOG_SLUGS } from "@/lib/constants";
+import { BLOG_SLUGS } from "@/lib/constants";
+
+const BASE_URL = "https://sammapix.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -14,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
 
   return [...routes, ...blogRoutes].map((route) => ({
-    url: `${APP_URL}${route}`,
+    url: `${BASE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "daily" : "weekly",
     priority: route === "" ? 1 : 0.8,
