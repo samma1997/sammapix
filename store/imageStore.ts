@@ -6,7 +6,8 @@ import { ProcessedFile, CompressOptions, FileStatus } from "@/types/image";
 import { generateId, sanitizeFilename, calculateSavings, getFilenameWithoutExtension } from "@/lib/utils";
 import { compressImage } from "@/lib/compress";
 import { downloadSingleFile, downloadAllAsZip } from "@/lib/zip";
-import { DEFAULT_QUALITY, DEFAULT_CONVERT_WEBP, DEFAULT_AI_RENAME, MAX_FILES_FREE } from "@/lib/constants";
+import { DEFAULT_QUALITY, DEFAULT_CONVERT_WEBP, DEFAULT_AI_RENAME, MAX_FILES_FREE, AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { getUsedToday, setUsedToday } from "@/lib/aiRenameCounter";
 import imageCompression from "browser-image-compression";
 
 interface ImageSettings {
@@ -35,6 +36,9 @@ interface ImageStoreState {
   setAiRenameEnabled: (value: boolean) => void;
   applyAiName: (id: string, name: string, altText?: string) => void;
   aiRenameFile: (id: string) => Promise<void>;
+  aiRenameUsedToday: number;
+  setAiRenameUsedToday: (n: number) => void;
+  initAiRenameCounter: (email: string) => void;
 }
 
 export const useImageStore = create<ImageStoreState>()(
@@ -47,6 +51,7 @@ export const useImageStore = create<ImageStoreState>()(
     },
     isProcessing: false,
     isZipping: false,
+    aiRenameUsedToday: 0,
 
     addFiles: (files: File[]) => {
       set((state) => {
@@ -211,6 +216,13 @@ export const useImageStore = create<ImageStoreState>()(
       });
     },
 
+    setAiRenameUsedToday: (n: number) => set((state) => { state.aiRenameUsedToday = n; }),
+
+    initAiRenameCounter: (email: string) => {
+      const used = getUsedToday(email);
+      set((state) => { state.aiRenameUsedToday = used; });
+    },
+
     aiRenameFile: async (id: string) => {
       const { updateItem, applyAiName } = get();
       // Re-fetch item fresh from state
@@ -260,22 +272,46 @@ export const useImageStore = create<ImageStoreState>()(
         });
 
         if (!response.ok) {
-          const errJson = await response.json().catch(() => ({}));
+          const errJson = await response.json().catch(() => ({})) as { error?: string; code?: string };
           console.error("[aiRenameFile] API error:", response.status, errJson);
-          throw new Error(errJson.error || `HTTP ${response.status}`);
+          throw new Error(
+            (errJson.code ? `${errJson.code}: ` : "") + (errJson.error || `HTTP ${response.status}`)
+          );
         }
 
-        const json = await response.json();
-        const data = json.data ?? json;
-        const filename = data.filename as string | undefined;
-        const altText = data.altText as string | undefined;
+        const json = await response.json() as { data?: { filename?: string; altText?: string }; remaining?: number };
+        const data = json.data ?? {};
+        const filename = data.filename;
+        const altText = data.altText;
 
         if (!filename) throw new Error("No filename in response");
+
+        // Update client-side counter from server's authoritative remaining value
+        const remaining = (json.remaining as number) ?? (AI_RENAME_FREE_PER_DAY - 1);
+        const usedNow = AI_RENAME_FREE_PER_DAY - remaining;
+        get().setAiRenameUsedToday(usedNow);
+
+        // Persist to localStorage — resolve email from NextAuth client session
+        try {
+          const { getSession } = await import("next-auth/react");
+          const clientSession = await getSession();
+          if (clientSession?.user?.email) {
+            setUsedToday(clientSession.user.email, usedNow);
+          }
+        } catch {
+          // Ignore — localStorage sync is best-effort; server enforces the real limit
+        }
 
         applyAiName(id, filename, altText);
         updateItem(id, { aiRenameStatus: "done" });
       } catch (err) {
         const errMsg = err instanceof Error ? err.message : String(err);
+        // Handle daily limit specifically
+        if (errMsg.includes("DAILY_LIMIT_REACHED") || errMsg.includes("Daily limit")) {
+          updateItem(id, { aiRenameStatus: "error", aiRenameError: "Daily limit reached — upgrade to Pro for 200/day" });
+          get().setAiRenameUsedToday(AI_RENAME_FREE_PER_DAY); // show 0 remaining
+          return;
+        }
         updateItem(id, { aiRenameStatus: "error", aiRenameError: errMsg });
         console.error("[aiRenameFile] failed:", errMsg);
       }

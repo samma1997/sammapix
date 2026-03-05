@@ -18,20 +18,37 @@ const RequestSchema = z.object({
   locale: z.string().max(10).optional(), // e.g. "it", "en", "fr"
 });
 
-// Suppress unused import warning — AI_RENAME_FREE_PER_DAY is used for
-// rate-limit documentation and future server-side enforcement.
-void AI_RENAME_FREE_PER_DAY;
+// In-memory store: key = "email:YYYY-MM-DD", value = count used
+const dailyUsage = new Map<string, number>();
+
+function getTodayKey(email: string): string {
+  const today = new Date().toISOString().split("T")[0];
+  return `${email}:${today}`;
+}
+
+function getUsedToday(email: string): number {
+  return dailyUsage.get(getTodayKey(email)) ?? 0;
+}
+
+function incrementToday(email: string): number {
+  const key = getTodayKey(email);
+  const next = (dailyUsage.get(key) ?? 0) + 1;
+  dailyUsage.set(key, next);
+  return next;
+}
 
 export async function POST(req: NextRequest) {
   // 1. Check auth
   const session = await getServerSession(authOptions);
   console.log("[ai/rename] session:", session?.user?.email ?? "null");
-  if (!session?.user) {
+  if (!session?.user?.email) {
     return NextResponse.json(
       { error: "Authentication required", code: "UNAUTHENTICATED" },
       { status: 401 }
     );
   }
+
+  const email = session.user.email;
 
   // 2. Validate origin in production (allow both apex and www)
   const origin = req.headers.get("origin");
@@ -72,11 +89,12 @@ export async function POST(req: NextRequest) {
 
   const { imageBase64, mimeType, locale = "en" } = parsed.data;
 
-  // Language for alt text generation (filenames always in English for SEO)
+  // Language mapping for both alt text and filename generation
   const altTextLanguage: Record<string, string> = {
     it: "Italian", fr: "French", es: "Spanish", de: "German", pt: "Portuguese",
   };
   const altLang = altTextLanguage[locale] ?? "English";
+  const filenameLang = altTextLanguage[locale] ?? "English";
 
   // 4. Guard: Gemini API key must be server-side only
   const apiKey = process.env.GEMINI_API_KEY;
@@ -84,6 +102,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { error: "AI service unavailable", code: "SERVICE_UNAVAILABLE" },
       { status: 503 }
+    );
+  }
+
+  // 5. Rate limit check — BEFORE calling Gemini
+  if (getUsedToday(email) >= AI_RENAME_FREE_PER_DAY) {
+    return NextResponse.json(
+      { error: "Daily limit reached", code: "DAILY_LIMIT_REACHED", remaining: 0 },
+      { status: 429 }
     );
   }
 
@@ -98,7 +124,8 @@ Return ONLY valid JSON (no markdown, no code blocks, just raw JSON):
 
 Rules for filename:
 - Describe EXACTLY what you see (objects, people, scene, colors, actions)
-- Use lowercase English words, numbers, and hyphens ONLY
+- Use lowercase ${filenameLang} words, numbers, and hyphens ONLY
+- No accented characters (è, à, ü, ö, etc.) — use plain equivalents (e, a, u, o)
 - 3-6 words ideal, max 8 words
 - Be specific: "golden-retriever-puppy-park" not "dog-photo"
 - No words like "image", "photo", "picture", "file"
@@ -137,11 +164,15 @@ Examples:
       altText?: string;
     };
 
+    // 6. Increment usage AFTER a successful Gemini call
+    incrementToday(email);
+
     return NextResponse.json({
       data: {
         filename: aiResult.filename ?? "optimized-image",
         altText: aiResult.altText ?? "",
       },
+      remaining: Math.max(0, AI_RENAME_FREE_PER_DAY - getUsedToday(email)),
     });
   } catch (error) {
     // Never log the image data — only log the error message

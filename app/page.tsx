@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Lock, Zap, FileImage, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -13,9 +13,15 @@ import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 
 export default function HomePage() {
-  const { items, aiRenameFile } = useImageStore();
+  const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
   const { data: session } = useSession();
   const d = useLocale();
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      initAiRenameCounter(session.user.email);
+    }
+  }, [session?.user?.email, initAiRenameCounter]);
   const hasFiles = items.length > 0;
 
   const [aiModalOpen, setAiModalOpen] = useState(false);

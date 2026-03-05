@@ -24,17 +24,23 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
     setConvertToWebP,
     setAiRenameEnabled,
     processAll,
+    aiRenameUsedToday,
   } = useImageStore();
 
   const { data: session } = useSession();
   const d = useLocale();
   const hasQueuedItems = items.some((i) => i.status === "queued");
   const allDone = items.length > 0 && items.every((i) => i.status === "done" || i.status === "error");
+  const remaining = Math.max(0, AI_RENAME_FREE_PER_DAY - aiRenameUsedToday);
 
   const handleAiRenameToggle = () => {
     if (!session) {
       // Prompt sign-in
       onAiRenameClick?.();
+      return;
+    }
+    if (remaining === 0 && session) {
+      // Don't toggle — limit reached
       return;
     }
     setAiRenameEnabled(!settings.aiRenameEnabled);
@@ -98,11 +104,28 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
               {d.toolbar.ai_rename}
             </span>
             {session ? (
-              <Badge variant="brand">{AI_RENAME_FREE_PER_DAY}/day</Badge>
+              <span
+                className={cn(
+                  "text-xs font-semibold tabular-nums px-1.5 py-0.5 rounded",
+                  remaining === 0
+                    ? "bg-red-100 text-red-600"
+                    : remaining <= 2
+                    ? "bg-orange-50 text-orange-600"
+                    : "bg-gray-100 text-gray-500"
+                )}
+              >
+                {remaining}/{AI_RENAME_FREE_PER_DAY}
+              </span>
             ) : (
               <Badge variant="default">Login</Badge>
             )}
           </label>
+          {remaining === 0 && session && (
+            <span className="text-[10px] text-red-500">
+              Limit reached &middot;{" "}
+              <a href="/pricing" className="underline">Go Pro</a>
+            </span>
+          )}
         </div>
 
         {/* Process button */}
