@@ -15,6 +15,7 @@ const RequestSchema = z.object({
     "image/avif",
   ]),
   currentName: z.string().max(255).optional(),
+  locale: z.string().max(10).optional(), // e.g. "it", "en", "fr"
 });
 
 // Suppress unused import warning — AI_RENAME_FREE_PER_DAY is used for
@@ -69,7 +70,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { imageBase64, mimeType } = parsed.data;
+  const { imageBase64, mimeType, locale = "en" } = parsed.data;
+
+  // Language for alt text generation (filenames always in English for SEO)
+  const altTextLanguage: Record<string, string> = {
+    it: "Italian", fr: "French", es: "Spanish", de: "German", pt: "Portuguese",
+  };
+  const altLang = altTextLanguage[locale] ?? "English";
 
   // 4. Guard: Gemini API key must be server-side only
   const apiKey = process.env.GEMINI_API_KEY;
@@ -84,20 +91,21 @@ export async function POST(req: NextRequest) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
-    const prompt = `You are an SEO expert. Analyze this image carefully and generate an SEO-optimized filename.
+    const prompt = `You are an SEO expert. Analyze this image carefully and generate an SEO-optimized filename and alt text.
 
 Return ONLY valid JSON (no markdown, no code blocks, just raw JSON):
 {"filename":"...","altText":"..."}
 
 Rules for filename:
 - Describe EXACTLY what you see (objects, people, scene, colors, actions)
-- Use lowercase letters, numbers, and hyphens ONLY
+- Use lowercase English words, numbers, and hyphens ONLY
 - 3-6 words ideal, max 8 words
 - Be specific: "golden-retriever-puppy-park" not "dog-photo"
 - No words like "image", "photo", "picture", "file"
 - SEO-friendly: think how someone would search for this on Google Images
 
 Rules for altText:
+- Write in ${altLang}
 - Full descriptive sentence for screen readers
 - Max 120 characters
 - Describe the main subject and context

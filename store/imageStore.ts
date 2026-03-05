@@ -220,6 +220,10 @@ export const useImageStore = create<ImageStoreState>()(
       updateItem(id, { aiRenameStatus: "loading" });
 
       try {
+        // Create a small thumbnail (max 1024px) for sending to Gemini.
+        // This ensures fast API calls even for large compressed blobs.
+        const thumbnailBlob = await createThumbnailForAI(item.compressedBlob, 1024);
+
         // Use FileReader for reliable base64 (works on all sizes, no btoa issues)
         const base64 = await new Promise<string>((resolve, reject) => {
           const reader = new FileReader();
@@ -231,14 +235,17 @@ export const useImageStore = create<ImageStoreState>()(
             else reject(new Error("FileReader returned empty result"));
           };
           reader.onerror = () => reject(new Error("FileReader failed"));
-          reader.readAsDataURL(item.compressedBlob!);
+          reader.readAsDataURL(thumbnailBlob);
         });
 
-        const mimeType =
-          item.compressedFormat === "jpeg" ? "image/jpeg" :
-          item.compressedFormat === "png" ? "image/png" :
-          item.compressedFormat === "gif" ? "image/gif" :
-          item.compressedFormat === "avif" ? "image/avif" : "image/webp";
+        // Always send as WebP (thumbnail output)
+        const mimeType = "image/webp";
+
+        // Read locale from cookie for localized alt text generation
+        const localeMatch = typeof document !== "undefined"
+          ? document.cookie.match(/(?:^|;)\s*NEXT_LOCALE=([^;]+)/)
+          : null;
+        const locale = localeMatch ? decodeURIComponent(localeMatch[1]) : "en";
 
         const response = await fetch("/api/ai/rename", {
           method: "POST",
@@ -248,6 +255,7 @@ export const useImageStore = create<ImageStoreState>()(
             imageBase64: base64,
             mimeType,
             currentName: item.originalName,
+            locale,
           }),
         });
 
@@ -274,6 +282,45 @@ export const useImageStore = create<ImageStoreState>()(
     },
   }))
 );
+
+/** Creates a max-{maxPx}px WebP thumbnail from any blob for AI analysis. */
+async function createThumbnailForAI(blob: Blob, maxPx: number): Promise<Blob> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(blob);
+    img.onload = () => {
+      let { naturalWidth: w, naturalHeight: h } = img;
+      if (w > maxPx || h > maxPx) {
+        const ratio = Math.min(maxPx / w, maxPx / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, w, h);
+        canvas.toBlob(
+          (result) => {
+            URL.revokeObjectURL(url);
+            resolve(result ?? blob); // fallback to original blob if canvas fails
+          },
+          "image/webp",
+          0.75
+        );
+      } else {
+        URL.revokeObjectURL(url);
+        resolve(blob); // fallback
+      }
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      resolve(blob); // fallback
+    };
+    img.src = url;
+  });
+}
 
 function getMimeFormat(mimeType: string): import("@/types/image").ImageFormat {
   const map: Record<string, import("@/types/image").ImageFormat> = {

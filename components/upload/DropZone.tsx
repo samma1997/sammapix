@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ACCEPTED_MIME_TYPES, MAX_FILE_SIZE_FREE, MAX_FILES_FREE } from "@/lib/constants";
 import { isValidImageFile } from "@/lib/utils";
 import { useImageStore } from "@/store/imageStore";
+import { useLocale } from "@/hooks/useLocale";
 
 interface DropZoneProps {
   onFilesAdded?: (files: File[]) => void;
@@ -15,6 +16,7 @@ interface DropZoneProps {
 
 export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
   const { addFiles, items } = useImageStore();
+  const d = useLocale();
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -96,13 +98,13 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
         ) : (
           <>
             <p className="text-sm font-medium text-gray-700">
-              Drop images here or{" "}
+              {d.dropzone.title}{" "}
               <span className="text-gray-900 underline underline-offset-2">
-                click to upload
+                {d.dropzone.click}
               </span>
             </p>
             <p className="text-xs text-gray-400 mt-1">
-              PNG, JPG, WebP, GIF — up to 10MB each
+              {d.dropzone.subtitle}
             </p>
           </>
         )}

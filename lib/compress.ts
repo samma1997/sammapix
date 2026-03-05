@@ -27,17 +27,20 @@ export async function compressImage(
   let outputFormat: ImageFormat;
 
   if (config.convertToWebP) {
-    // Use Canvas API to convert to WebP
-    resultBlob = await convertToWebPCanvas(file, qualityToDecimal(config.quality));
+    // Resize to max 2560px before converting to WebP to avoid huge Canvas output
+    const maxDim = config.maxWidthOrHeight ?? 2560;
+    resultBlob = await convertToWebPCanvas(file, qualityToDecimal(config.quality), maxDim);
     outputFormat = "webp";
     onProgress?.(80);
   } else {
     // Use browser-image-compression
     const options = {
-      maxSizeMB: 10,
+      // Target 4MB max — forces real compression even on large mobile photos
+      maxSizeMB: 4,
       useWebWorker: true,
       initialQuality: qualityToDecimal(config.quality),
-      maxWidthOrHeight: config.maxWidthOrHeight,
+      // Limit dimensions to avoid processing unnecessarily large images
+      maxWidthOrHeight: config.maxWidthOrHeight ?? 2560,
       exifOrientation: config.removeExif ? -1 : undefined,
       onProgress: (p: number) => {
         onProgress?.(10 + (p * 0.7));
@@ -45,11 +48,25 @@ export async function compressImage(
     };
 
     const compressed = await imageCompression(file, options);
-    resultBlob = compressed;
+
+    // Guard: if compression made the file larger (e.g. already-optimized JPEGs),
+    // return the original file unchanged — never increase file size
+    if (compressed.size >= originalSize) {
+      resultBlob = file;
+    } else {
+      resultBlob = compressed;
+    }
+
     outputFormat = getMimeOutputFormat(file.type);
   }
 
   onProgress?.(90);
+
+  // For WebP: also guard against size increase (rare but possible for tiny images)
+  if (config.convertToWebP && resultBlob.size >= originalSize) {
+    // Keep WebP output anyway (format change is still valuable for browser caching)
+    // but don't pretend we saved space
+  }
 
   const { savedBytes, savedPercent } = calculateSavings(originalSize, resultBlob.size);
 
@@ -67,16 +84,25 @@ export async function compressImage(
 
 export async function convertToWebPCanvas(
   file: File,
-  quality: number = 0.8
+  quality: number = 0.8,
+  maxDimension: number = 2560
 ): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
 
     img.onload = () => {
+      // Resize if image exceeds maxDimension
+      let { naturalWidth: w, naturalHeight: h } = img;
+      if (w > maxDimension || h > maxDimension) {
+        const ratio = Math.min(maxDimension / w, maxDimension / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = w;
+      canvas.height = h;
 
       const ctx = canvas.getContext("2d");
       if (!ctx) {
@@ -88,7 +114,7 @@ export async function convertToWebPCanvas(
       // White background for transparent images
       ctx.fillStyle = "#FFFFFF";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0, w, h);
 
       canvas.toBlob(
         (blob) => {

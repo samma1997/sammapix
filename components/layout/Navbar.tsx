@@ -6,9 +6,11 @@ import { useSession, signOut } from "next-auth/react";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/hooks/useLocale";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
+  const d = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -43,19 +45,19 @@ export default function Navbar() {
             href="/"
             className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
           >
-            Tools
+            {d.nav.tools}
           </Link>
           <Link
             href="/pricing"
             className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
           >
-            Pricing
+            {d.nav.pricing}
           </Link>
           <Link
             href="/blog"
             className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
           >
-            Blog
+            {d.nav.blog}
           </Link>
         </nav>
 
@@ -71,19 +73,19 @@ export default function Navbar() {
                 size="sm"
                 onClick={() => signOut()}
               >
-                Sign out
+                {d.nav.signout}
               </Button>
             </>
           ) : (
             <Link href="/api/auth/signin">
               <Button variant="ghost" size="sm">
-                Sign in
+                {d.nav.signin}
               </Button>
             </Link>
           )}
           <Link href="/pricing">
             <Button variant="primary" size="sm" className="gap-1">
-              Get Pro
+              {d.nav.get_pro}
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
             </Button>
           </Link>
@@ -112,21 +114,21 @@ export default function Navbar() {
               className="py-2 text-sm text-gray-600 hover:text-gray-900"
               onClick={() => setMobileOpen(false)}
             >
-              Tools
+              {d.nav.tools}
             </Link>
             <Link
               href="/pricing"
               className="py-2 text-sm text-gray-600 hover:text-gray-900"
               onClick={() => setMobileOpen(false)}
             >
-              Pricing
+              {d.nav.pricing}
             </Link>
             <Link
               href="/blog"
               className="py-2 text-sm text-gray-600 hover:text-gray-900"
               onClick={() => setMobileOpen(false)}
             >
-              Blog
+              {d.nav.blog}
             </Link>
             <div className="pt-2 border-t border-gray-100 mt-1 flex gap-2">
               {status === "authenticated" ? (
@@ -136,18 +138,18 @@ export default function Navbar() {
                   className="w-full"
                   onClick={() => { signOut(); setMobileOpen(false); }}
                 >
-                  Sign out
+                  {d.nav.signout}
                 </Button>
               ) : (
                 <Link href="/api/auth/signin" className="flex-1" onClick={() => setMobileOpen(false)}>
                   <Button variant="secondary" size="sm" className="w-full">
-                    Sign in
+                    {d.nav.signin}
                   </Button>
                 </Link>
               )}
               <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
                 <Button variant="primary" size="sm" className="w-full">
-                  Get Pro
+                  {d.nav.get_pro}
                 </Button>
               </Link>
             </div>

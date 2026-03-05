@@ -9,6 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { useLocale } from "@/hooks/useLocale";
 
 interface SettingsToolbarProps {
   onAiRenameClick?: () => void;
@@ -26,6 +27,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
   } = useImageStore();
 
   const { data: session } = useSession();
+  const d = useLocale();
   const hasQueuedItems = items.some((i) => i.status === "queued");
   const allDone = items.length > 0 && items.every((i) => i.status === "done" || i.status === "error");
 
@@ -44,7 +46,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
         {/* Quality slider */}
         <div className="flex-1 min-w-[160px]">
           <Slider
-            label="Quality"
+            label={d.toolbar.quality}
             showValue
             min={1}
             max={100}
@@ -72,7 +74,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
                 )}
               />
             </div>
-            <span className="text-sm text-gray-600">Convert to WebP</span>
+            <span className="text-sm text-gray-600">{d.toolbar.convert_webp}</span>
           </label>
 
           {/* AI Rename */}
@@ -93,7 +95,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
             </div>
             <span className="text-sm text-gray-600 flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-brand" strokeWidth={1.5} />
-              AI Rename
+              {d.toolbar.ai_rename}
             </span>
             {session ? (
               <Badge variant="brand">{AI_RENAME_FREE_PER_DAY}/day</Badge>
@@ -113,13 +115,13 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
           onClick={processAll}
         >
           {isProcessing ? (
-            "Compressing..."
+            "..."
           ) : allDone ? (
-            "Reprocess"
+            d.toolbar.compress_all
           ) : (
             <>
               <Zap className="h-4 w-4" strokeWidth={1.5} />
-              Compress all
+              {d.toolbar.compress_all}
             </>
           )}
         </Button>
