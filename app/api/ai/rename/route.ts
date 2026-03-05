@@ -32,14 +32,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 2. Validate origin in production
+  // 2. Validate origin in production (allow both apex and www)
   const origin = req.headers.get("origin");
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").trim();
-  if (
-    origin &&
-    !origin.startsWith(appUrl) &&
-    process.env.NODE_ENV === "production"
-  ) {
+  const allowedOrigins = [
+    "https://sammapix.com",
+    "https://www.sammapix.com",
+    "http://localhost:3000",
+  ];
+  if (origin && process.env.NODE_ENV === "production" && !allowedOrigins.some((o) => origin.startsWith(o))) {
     return NextResponse.json(
       { error: "Forbidden", code: "FORBIDDEN_ORIGIN" },
       { status: 403 }
