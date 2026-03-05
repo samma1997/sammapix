@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
   // 2. Validate origin in production
   const origin = req.headers.get("origin");
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").trim();
   if (
     origin &&
     !origin.startsWith(appUrl) &&
