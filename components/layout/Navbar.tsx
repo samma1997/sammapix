@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,14 +11,8 @@ import { useLocale } from "@/hooks/useLocale";
 export default function Navbar() {
   const { data: session, status } = useSession();
   const d = useLocale();
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const isToolsSection =
-    pathname.startsWith("/tools") ||
-    pathname.startsWith("/pricing") ||
-    pathname.startsWith("/dashboard");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -140,94 +133,47 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop nav — adattiva per sezione */}
+        {/* Desktop nav — unico per tutto il sito */}
         <nav className="hidden md:flex items-center gap-1">
-          {isToolsSection ? (
-            /* ── Menu tools section ── */
-            <>
-              <Link
-                href="/tools"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                {d.nav.tools}
-              </Link>
-              <Link
-                href="/pricing"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                {d.nav.pricing}
-              </Link>
-              <Link
-                href="/blog"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                {d.nav.blog}
-              </Link>
-            </>
-          ) : (
-            /* ── Menu photo section ── */
-            <>
-              <Link
-                href="/portfolio"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                Portfolio
-              </Link>
-              <Link
-                href="/tools"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                {d.nav.tools}
-              </Link>
-              <Link
-                href="/blog"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                {d.nav.blog}
-              </Link>
-              <Link
-                href="/about"
-                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-              >
-                Chi sono
-              </Link>
-            </>
-          )}
+          <Link href="/portfolio" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+            Portfolio
+          </Link>
+          <Link href="/tools" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+            {d.nav.tools}
+          </Link>
+          <Link href="/pricing" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+            {d.nav.pricing}
+          </Link>
+          <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+            {d.nav.blog}
+          </Link>
+          <Link href="/about" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+            Chi sono
+          </Link>
         </nav>
 
-        {/* Right side — adattivo */}
+        {/* Right side */}
         <div className="hidden md:flex items-center gap-2">
-          {isToolsSection ? (
-            /* ── Auth + Pro — solo nella tools section ── */
+          {status === "authenticated" && session ? (
             <>
-              {status === "authenticated" && session ? (
-                <>
-                  <span className="text-sm text-gray-500 mr-1">
-                    {session.user?.name?.split(" ")[0]}
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => signOut()}
-                  >
-                    {d.nav.signout}
-                  </Button>
-                </>
-              ) : (
-                <Link href="/api/auth/signin">
-                  <Button variant="ghost" size="sm">
-                    {d.nav.signin}
-                  </Button>
-                </Link>
-              )}
-              <Link href="/pricing">
-                <Button variant="primary" size="sm" className="gap-1">
-                  {d.nav.get_pro}
-                  <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
-                </Button>
-              </Link>
+              <span className="text-sm text-gray-500 mr-1">
+                {session.user?.name?.split(" ")[0]}
+              </span>
+              <Button variant="ghost" size="sm" onClick={() => signOut()}>
+                {d.nav.signout}
+              </Button>
             </>
-          ) : null}
+          ) : (
+            <Link href="/api/auth/signin">
+              <Button variant="ghost" size="sm">{d.nav.signin}</Button>
+            </Link>
+          )}
+          <Link href="/pricing">
+            <Button variant="primary" size="sm" className="gap-1">
+              {d.nav.get_pro}
+              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -248,90 +194,26 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 bg-white animate-slide-down">
           <div className="px-4 py-3 flex flex-col gap-1">
-            {isToolsSection ? (
-              /* ── Mobile tools section ── */
-              <>
-                <Link
-                  href="/tools"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {d.nav.tools}
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {d.nav.pricing}
-                </Link>
-                <Link
-                  href="/blog"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {d.nav.blog}
-                </Link>
-              </>
-            ) : (
-              /* ── Mobile photo section ── */
-              <>
-                <Link
-                  href="/portfolio"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Portfolio
-                </Link>
-                <Link
-                  href="/tools"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {d.nav.tools}
-                </Link>
-                <Link
-                  href="/blog"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {d.nav.blog}
-                </Link>
-                <Link
-                  href="/about"
-                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Chi sono
-                </Link>
-              </>
-            )}
+            <Link href="/portfolio" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>Portfolio</Link>
+            <Link href="/tools" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>{d.nav.tools}</Link>
+            <Link href="/pricing" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>{d.nav.pricing}</Link>
+            <Link href="/blog" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>{d.nav.blog}</Link>
+            <Link href="/about" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>Chi sono</Link>
 
-            {isToolsSection && (
             <div className="pt-2 border-t border-gray-100 mt-1 flex gap-2">
               {status === "authenticated" ? (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full"
-                  onClick={() => { signOut(); setMobileOpen(false); }}
-                >
+                <Button variant="ghost" size="sm" className="w-full" onClick={() => { signOut(); setMobileOpen(false); }}>
                   {d.nav.signout}
                 </Button>
               ) : (
                 <Link href="/api/auth/signin" className="flex-1" onClick={() => setMobileOpen(false)}>
-                  <Button variant="secondary" size="sm" className="w-full">
-                    {d.nav.signin}
-                  </Button>
+                  <Button variant="secondary" size="sm" className="w-full">{d.nav.signin}</Button>
                 </Link>
               )}
               <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
-                  <Button variant="primary" size="sm" className="w-full">
-                    {d.nav.get_pro}
-                  </Button>
-                </Link>
+                <Button variant="primary" size="sm" className="w-full">{d.nav.get_pro}</Button>
+              </Link>
             </div>
-            )}
           </div>
         </div>
       )}
