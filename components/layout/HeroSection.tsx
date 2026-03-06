@@ -1,22 +1,51 @@
 // HeroSection — server component
-// Carica i dati dei viaggi dal data layer e renderizza il hero fotografico
-// full-width con griglia editoriale. Nessun testo sovrapposto alle foto.
+// Griglia fotografica con più foto random da tutti i viaggi.
+// Ogni foto linka direttamente alla galleria del viaggio specifico.
 
 import Image from "next/image";
 import Link from "next/link";
 import { getAllTrips } from "@/lib/destinations";
 
+interface HeroPhoto {
+  src: string;
+  slug: string;
+  destination: string;
+  alt: string;
+  span?: "tall"; // alcune foto occupano 2 righe per varietà
+}
+
 export default function HeroSection() {
   const trips = getAllTrips();
 
-  // I 4 viaggi principali nell'ordine: sri-lanka, bali, japan, thailand
-  const heroSlugs = ["sri-lanka-2025", "bali-2024", "japan-2023", "thailand-2024"];
-  const heroTrips = heroSlugs
-    .map((slug) => trips.find((t) => t.slug === slug))
-    .filter((t): t is NonNullable<typeof t> => t !== undefined);
+  // Raccoglie cover + 2 foto per viaggio → ~15 foto totali
+  const pool: HeroPhoto[] = trips.flatMap((trip) => [
+    {
+      src: trip.coverSrc,
+      slug: trip.slug,
+      destination: trip.destination,
+      alt: `${trip.destination} travel photography`,
+    },
+    ...trip.photos.slice(0, 2).map((p) => ({
+      src: p.srcThumb,
+      slug: trip.slug,
+      destination: trip.destination,
+      alt: p.alt,
+    })),
+  ]);
 
-  // Fallback: se un viaggio mancasse, usa i primi 4 disponibili
-  const displayTrips = heroTrips.length >= 4 ? heroTrips : trips.slice(0, 4);
+  // Shuffle deterministico — ordine fisso ma che mescola i viaggi
+  // (interleave: trip0-cover, trip1-cover, trip2-cover, trip0-ph1, ...)
+  const display: HeroPhoto[] = [];
+  const byTrip = trips.map((_, i) => pool.slice(i * 3, i * 3 + 3));
+  const maxPhotosPerTrip = 3;
+  for (let row = 0; row < maxPhotosPerTrip; row++) {
+    for (const tripPhotos of byTrip) {
+      if (tripPhotos[row]) display.push(tripPhotos[row]);
+    }
+  }
+
+  // Prendi le prime 12 per non riempire troppo
+  const photos = display.slice(0, 12);
 
   return (
     <section className="px-4 sm:px-6 pb-8">
@@ -33,82 +62,36 @@ export default function HeroSection() {
           </p>
         </div>
 
-        {/* Griglia hero fotografica */}
-        <Link href="/portfolio" className="group block">
-          <div
-            className="grid gap-1.5 min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]"
-            style={{
-              gridTemplateColumns: "2fr 1fr",
-              gridTemplateRows: "1fr 1fr",
-            }}
-          >
-            {/* Foto 1 — grande, copre tutta la colonna sinistra */}
-            {displayTrips[0] && (
-              <div
-                className="relative overflow-hidden rounded-md bg-gray-100"
-                style={{ gridRow: "1 / 3" }}
-              >
-                <Image
-                  src={displayTrips[0].coverSrc}
-                  alt={`${displayTrips[0].destination} travel photography`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  sizes="(max-width: 640px) 67vw, (max-width: 1024px) 50vw, 660px"
-                  priority
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+        {/* Griglia foto — 3 colonne, aspect 4/3, ogni foto → proprio viaggio */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1 sm:gap-1.5">
+          {photos.map((photo, i) => (
+            <Link
+              key={`${photo.slug}-${i}`}
+              href={`/portfolio/${photo.slug}`}
+              className="group relative block overflow-hidden bg-gray-100 aspect-[4/3]"
+              aria-label={`View ${photo.destination} gallery`}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                priority={i < 4}
+                unoptimized
+              />
+              {/* Overlay con destinazione su hover */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 px-2 pb-2 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                <p className="text-white text-xs font-medium leading-tight truncate">
+                  {photo.destination}
+                </p>
               </div>
-            )}
+            </Link>
+          ))}
+        </div>
 
-            {/* Foto 2 — top destra */}
-            {displayTrips[1] && (
-              <div className="relative overflow-hidden rounded-md bg-gray-100">
-                <Image
-                  src={displayTrips[1].coverSrc}
-                  alt={`${displayTrips[1].destination} travel photography`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 320px"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
-              </div>
-            )}
-
-            {/* Foto 3 e 4 — bottom destra, due foto affiancate */}
-            <div className="grid grid-cols-2 gap-1.5" style={{ gridColumn: "2 / 3", gridRow: "2 / 3" }}>
-              {displayTrips[2] && (
-                <div className="relative overflow-hidden rounded-md bg-gray-100">
-                  <Image
-                    src={displayTrips[2].coverSrc}
-                    alt={`${displayTrips[2].destination} travel photography`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                    sizes="(max-width: 640px) 17vw, (max-width: 1024px) 13vw, 160px"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
-                </div>
-              )}
-              {displayTrips[3] && (
-                <div className="relative overflow-hidden rounded-md bg-gray-100">
-                  <Image
-                    src={displayTrips[3].coverSrc}
-                    alt={`${displayTrips[3].destination} travel photography`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                    sizes="(max-width: 640px) 17vw, (max-width: 1024px) 13vw, 160px"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
-                </div>
-              )}
-            </div>
-          </div>
-        </Link>
-
-        {/* Link "view all trips" — centrato, sotto il hero */}
+        {/* Link "view all" */}
         <div className="mt-4 text-center">
           <Link
             href="/portfolio"

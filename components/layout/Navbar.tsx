@@ -174,6 +174,12 @@ export default function Navbar() {
                 Portfolio
               </Link>
               <Link
+                href="/tools"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                {d.nav.tools}
+              </Link>
+              <Link
                 href="/blog"
                 className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
               >
@@ -185,36 +191,37 @@ export default function Navbar() {
 
         {/* Right side — adattivo */}
         <div className="hidden md:flex items-center gap-2">
-          {status === "authenticated" && session ? (
+          {isToolsSection ? (
+            /* ── Auth + Pro — solo nella tools section ── */
             <>
-              <span className="text-sm text-gray-500 mr-1">
-                {session.user?.name?.split(" ")[0]}
-              </span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => signOut()}
-              >
-                {d.nav.signout}
-              </Button>
+              {status === "authenticated" && session ? (
+                <>
+                  <span className="text-sm text-gray-500 mr-1">
+                    {session.user?.name?.split(" ")[0]}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => signOut()}
+                  >
+                    {d.nav.signout}
+                  </Button>
+                </>
+              ) : (
+                <Link href="/api/auth/signin">
+                  <Button variant="ghost" size="sm">
+                    {d.nav.signin}
+                  </Button>
+                </Link>
+              )}
+              <Link href="/pricing">
+                <Button variant="primary" size="sm" className="gap-1">
+                  {d.nav.get_pro}
+                  <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
+                </Button>
+              </Link>
             </>
-          ) : (
-            <Link href="/api/auth/signin">
-              <Button variant="ghost" size="sm">
-                {d.nav.signin}
-              </Button>
-            </Link>
-          )}
-
-          {/* Get Pro — solo nella tools section */}
-          {isToolsSection && (
-            <Link href="/pricing">
-              <Button variant="primary" size="sm" className="gap-1">
-                {d.nav.get_pro}
-                <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
-              </Button>
-            </Link>
-          )}
+          ) : null}
         </div>
 
         {/* Mobile menu button */}
@@ -271,6 +278,13 @@ export default function Navbar() {
                   Portfolio
                 </Link>
                 <Link
+                  href="/tools"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {d.nav.tools}
+                </Link>
+                <Link
                   href="/blog"
                   className="py-2 text-sm text-gray-600 hover:text-gray-900"
                   onClick={() => setMobileOpen(false)}
@@ -280,6 +294,7 @@ export default function Navbar() {
               </>
             )}
 
+            {isToolsSection && (
             <div className="pt-2 border-t border-gray-100 mt-1 flex gap-2">
               {status === "authenticated" ? (
                 <Button
@@ -297,14 +312,13 @@ export default function Navbar() {
                   </Button>
                 </Link>
               )}
-              {isToolsSection && (
-                <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
+              <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
                   <Button variant="primary" size="sm" className="w-full">
                     {d.nav.get_pro}
                   </Button>
                 </Link>
-              )}
             </div>
+            )}
           </div>
         </div>
       )}

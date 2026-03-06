@@ -1,83 +1,17 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
-import { getAllTrips } from "@/lib/destinations";
 
 export default function HomePage() {
-  const trips = getAllTrips();
-
   return (
     <>
-      {/* 1. Hero fotografico editoriale */}
+      {/* 1. Hero fotografico — griglia foto random, ogni foto → viaggio specifico */}
       <HeroSection />
 
       <div className="border-t border-gray-100" />
 
-      {/* 2. Trips list — griglia compatta */}
-      <section className="py-10 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <header className="mb-6">
-            <h2 className="text-sm font-normal text-gray-400 lowercase tracking-wide">
-              trips
-            </h2>
-            <div className="mt-3 h-px bg-gray-100 w-full" />
-          </header>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {trips.map((trip) => {
-              const year = new Date(trip.startDate).getFullYear();
-              return (
-                <Link
-                  key={trip.slug}
-                  href={`/portfolio/${trip.slug}`}
-                  aria-label={`${trip.destination} ${year}`}
-                  className="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
-                >
-                  <Image
-                    src={trip.coverSrc}
-                    alt={`${trip.destination} travel photography ${year}`}
-                    fill
-                    sizes="(max-width: 640px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.02]"
-                    unoptimized
-                  />
-
-                  {/* Gradient overlay */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    aria-hidden="true"
-                  />
-
-                  {/* Testo overlay — visibile su hover */}
-                  <div className="absolute bottom-0 left-0 right-0 px-3 pb-3 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <p className="text-white text-sm font-bold leading-tight">
-                      {trip.destination}
-                    </p>
-                    <p className="text-white/60 text-xs mt-0.5">{year}</p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Link view all */}
-          <div className="mt-6 text-right">
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-gray-700 transition-colors"
-            >
-              view all
-              <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <div className="border-t border-gray-100" />
-
-      {/* 3. Tools teaser */}
+      {/* 2. Tools teaser */}
       <section className="py-10 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <header className="mb-6">
@@ -147,6 +81,17 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Link all tools */}
+          <div className="mt-6 text-right">
+            <Link
+              href="/tools"
+              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-gray-700 transition-colors"
+            >
+              all tools
+              <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
           </div>
         </div>
       </section>
