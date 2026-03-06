@@ -13,17 +13,17 @@ const banners: Record<
 > = {
   "web-hosting": {
     href: "https://siteground.com/web-hosting.htm?afimagecode=b623f3d79fea007675c3ea3bff2f4faf",
-    src: "https://www.siteground.com/static/affiliate/en/NOPRICE/general_EN_general-hosting-leaderboard-light.jpg",
+    src: "/ads/sg-web-hosting.jpg",
     alt: "Ad - Web Hosting from SiteGround - Crafted for easy site management. Click to learn more.",
   },
   wordpress: {
     href: "https://siteground.com/wordpress-hosting.htm?afimagecode=c8c199b7a58b7ad816a77848ac02fe03",
-    src: "https://www.siteground.com/static/affiliate/en/NOPRICE/general_EN_wordpress-leaderboard-blue.jpg",
+    src: "/ads/sg-wordpress.jpg",
     alt: "Ad - Hosting for WordPress from SiteGround - Powerful, yet simple to use. Click to learn more.",
   },
   woocommerce: {
     href: "https://siteground.com/woocommerce-hosting.htm?afimagecode=ff88bb6c1ccfcb42d8728a403e96cfd4",
-    src: "https://www.siteground.com/static/affiliate/en/NOPRICE/general_EN_woocommerce-leaderboard-violet.jpg",
+    src: "/ads/sg-woocommerce.jpg",
     alt: "Ad - Hosting for WooCommerce from SiteGround - The best home for your online store. Click to learn more.",
   },
 };
