@@ -35,16 +35,10 @@ function delay(ms: number): Promise<void> {
 }
 
 async function reverseGeocode(lat: number, lon: number): Promise<string> {
-  const res = await fetch(
-    `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=5`,
-    {
-      headers: {
-        "User-Agent": "SammaPix/1.0 (sammapix.com)",
-        "Accept-Language": "en",
-      },
-    }
-  );
-  if (!res.ok) throw new Error(`Nominatim error: ${res.status}`);
+  // Chiamata alla nostra API route server-side — il browser non può impostare
+  // User-Agent (header bloccato), quindi proxiamo attraverso Next.js
+  const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`);
+  if (!res.ok) throw new Error(`Geocode error: ${res.status}`);
   const data = (await res.json()) as {
     address?: { country?: string };
     display_name?: string;
