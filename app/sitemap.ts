@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/ai-rename",
     "/tools/exif",
     "/tools/cull",
+    "/tools/geosort",
     "/vs/tinypng",
     "/vs/squoosh",
     "/vs/imageoptim",
