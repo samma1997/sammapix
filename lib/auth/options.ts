@@ -51,6 +51,17 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
+  events: {
+    async signIn({ user }) {
+      if (!user.email) return;
+      const { addToAudience } = await import("@/lib/resend");
+      const isNew = await addToAudience(user.email, user.name ?? null);
+      if (isNew) {
+        const { sendWelcomeEmail } = await import("@/lib/email-service");
+        await sendWelcomeEmail(user.email, user.name ?? null);
+      }
+    },
+  },
   pages: {
     signIn: "/auth/signin",
   },
