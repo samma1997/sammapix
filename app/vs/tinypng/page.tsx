@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
-import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
@@ -184,7 +183,6 @@ export default function VsTinyPngPage() {
       {/* Affiliate banners */}
       <div className="mt-8 space-y-3">
         <SiteGroundBanner variant="web-hosting" />
-        <AffiliateBanner variant="shortpixel" />
       </div>
 
       {/* Schema.org comparison */}

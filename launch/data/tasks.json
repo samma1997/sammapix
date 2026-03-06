@@ -1,0 +1,327 @@
+{
+  "lastUpdated": "2026-03-06",
+  "lastResearch": null,
+  "weeks": [
+    {
+      "id": "week1",
+      "label": "Settimana 1",
+      "dates": "6–12 Marzo 2026",
+      "tasks": [
+        {
+          "id": "hn",
+          "platform": "Hacker News Show HN",
+          "url": "https://news.ycombinator.com/submit",
+          "done": false,
+          "timing": "Domenica 8 Mar, ore 07:00 IT",
+          "priority": "high",
+          "notes": "Titolo: Show HN: SammaPix – Free in-browser image compressor with AI rename",
+          "content": "Show HN: SammaPix – Free in-browser image compressor with AI rename\n\nHi HN! I built SammaPix (https://sammapix.com) — a browser-based image optimizer that:\n\n- Batch compresses up to 20 images at once\n- Converts to WebP\n- Uses Google Gemini to rename files semantically (IMG_1234.jpg → product-hero-blue-sneakers.webp)\n- 100% client-side — nothing is uploaded to any server\n- Free forever, no account required for compression\n\nThe AI rename feature requires a free account (I needed some rate limiting). Everything else works without signing up.\n\nTech stack: Next.js 14 App Router, browser-image-compression library, Google Gemini 2.5 Flash for vision, Canvas API for format conversion.\n\nHappy to answer any questions about the implementation!"
+        },
+        {
+          "id": "reddit-iib",
+          "platform": "Reddit r/InternetIsBeautiful",
+          "url": "https://reddit.com/r/InternetIsBeautiful/submit",
+          "done": false,
+          "timing": "Lunedì 9 Mar, ore 13:00 IT",
+          "priority": "high",
+          "notes": "NON mostrare il signup. URL: sammapix.com/?ref=iib",
+          "content": "This website compresses, converts, and AI-renames your images — entirely in your browser\n\nJust found SammaPix and it's genuinely impressive. You drag in a bunch of photos, it compresses them, converts to WebP if you want, and uses AI to rename them from IMG_1234.jpg to something actually descriptive like 'sunset-over-mountains.webp'.\n\nThe wild part: nothing gets uploaded. It all happens in your browser. No accounts, no waiting, no privacy concerns.\n\nhttps://sammapix.com/?ref=iib"
+        },
+        {
+          "id": "reddit-sideproject",
+          "platform": "Reddit r/SideProject",
+          "url": "https://reddit.com/r/SideProject/submit",
+          "done": false,
+          "timing": "Mercoledì 11 Mar, ore 13:00 IT",
+          "priority": "medium",
+          "notes": "Angolo personale: 'I built this because...'",
+          "content": "I built SammaPix — a free browser image optimizer with AI rename. Here's what I learned.\n\nI built this because I kept getting frustrated renaming product photos manually. IMG_4523.jpg tells you nothing. I wanted something that could look at the image and give it a real name.\n\nSo I built SammaPix (https://sammapix.com):\n- Batch image compression (up to 20 images)\n- WebP conversion\n- AI rename using Google Gemini Vision\n- 100% client-side, nothing uploaded\n\nBiggest technical challenge: keeping everything in the browser while still calling Gemini API (the API call goes through a Next.js route to protect the key, but the image data itself never touches a server).\n\nWould love feedback from fellow builders!"
+        },
+        {
+          "id": "reddit-webdev",
+          "platform": "Reddit r/webdev",
+          "url": "https://reddit.com/r/webdev/submit",
+          "done": false,
+          "timing": "Giovedì 12 Mar, ore 13:00 IT",
+          "priority": "medium",
+          "notes": "Angolo tecnico: Next.js + Gemini + Canvas API",
+          "content": "How I used Canvas API + Google Gemini to build a client-side image optimizer with AI rename [Next.js 14]\n\nBuilt SammaPix (https://sammapix.com) — here's the technical breakdown:\n\n**Compression**: browser-image-compression library runs entirely in a Web Worker. No WASM, no server.\n\n**WebP conversion**: Canvas API toBlob() with 'image/webp' mime type. Simple but effective.\n\n**AI Rename**: The tricky part. I send a base64 thumbnail (300px max) to Gemini 2.5 Flash via a Next.js API route. The route adds auth + rate limiting. The full image never leaves the browser.\n\n**State management**: Zustand with immer for the file queue. Each file goes through states: queued → compressing → done/error.\n\nStack: Next.js 14 App Router, TypeScript, Tailwind, Zustand, NextAuth v4\n\nLive: https://sammapix.com\nHappy to discuss any implementation details!"
+        },
+        {
+          "id": "stackshare",
+          "platform": "StackShare",
+          "url": "https://stackshare.io",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "Cerca SammaPix → se non esiste → Add Tool",
+          "content": ""
+        },
+        {
+          "id": "toolify",
+          "platform": "Toolify.ai",
+          "url": "https://www.toolify.ai/submit",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "aixploria",
+          "platform": "AIxploria",
+          "url": "https://www.aixploria.com/en/submit-ai-tool-or-feature-company/",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "futuretools",
+          "platform": "FutureTools",
+          "url": "https://www.futuretools.io/submit-a-tool",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "opentools",
+          "platform": "OpenTools",
+          "url": "https://friends.opentools.ai",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "aitoolsdirectory",
+          "platform": "AI Tools Directory",
+          "url": "https://aitoolsdirectory.com/submit-tool",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "altern",
+          "platform": "Altern.ai",
+          "url": "https://altern.ai/submit",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "Backlink dofollow + homepage 1 settimana",
+          "content": ""
+        },
+        {
+          "id": "basedtools",
+          "platform": "BasedTools.ai",
+          "url": "https://www.basedtools.ai/submit",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "low",
+          "notes": "Listato entro 24h",
+          "content": ""
+        },
+        {
+          "id": "aiscout",
+          "platform": "AI Scout",
+          "url": "https://aiscout.net/submit-listing/",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "low",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "topai",
+          "platform": "TopAI.tools",
+          "url": "https://topai.tools/submit",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "low",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "uneed",
+          "platform": "Uneed",
+          "url": "https://www.uneed.best/submit-a-tool",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "high",
+          "notes": "Competizione 24h — promuovi per votare!",
+          "content": ""
+        },
+        {
+          "id": "fazier",
+          "platform": "Fazier",
+          "url": "https://fazier.com",
+          "done": false,
+          "timing": "Qualsiasi giorno settimana 1",
+          "priority": "medium",
+          "notes": "Prima fai upvote su 2 prodotti → sblocchi il submit",
+          "content": ""
+        }
+      ]
+    },
+    {
+      "id": "week2",
+      "label": "Settimana 2",
+      "dates": "13–19 Marzo 2026",
+      "tasks": [
+        {
+          "id": "devto",
+          "platform": "DEV.to — Articolo tecnico",
+          "url": "https://dev.to/new",
+          "done": false,
+          "timing": "Lunedì 16 Mar",
+          "priority": "high",
+          "notes": "Titolo: How I built a client-side image compressor with AI rename using Next.js and Google Gemini",
+          "content": ""
+        },
+        {
+          "id": "microlaunch",
+          "platform": "MicroLaunch",
+          "url": "https://microlaunch.net",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "medium",
+          "notes": "Prodotto attivo per 1 mese, community feedback",
+          "content": ""
+        },
+        {
+          "id": "peerlist",
+          "platform": "Peerlist",
+          "url": "https://peerlist.io",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "medium",
+          "notes": "Weekly Spotlight, 188K visitatori/mese",
+          "content": ""
+        },
+        {
+          "id": "productburst",
+          "platform": "ProductBurst",
+          "url": "https://productburst.com",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "medium",
+          "notes": "Backlink dofollow per tutti i prodotti",
+          "content": ""
+        },
+        {
+          "id": "launchingnext",
+          "platform": "Launching Next",
+          "url": "https://www.launchingnext.com/submit/",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "low",
+          "notes": "45K+ startup listate",
+          "content": ""
+        },
+        {
+          "id": "insidr",
+          "platform": "Insidr.ai",
+          "url": "https://www.insidr.ai/submit-tools/",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "low",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "submitaitool",
+          "platform": "SubmitYourAITool",
+          "url": "https://submityouraitool.com/",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "low",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "dropyourai",
+          "platform": "DropYourAI",
+          "url": "https://www.dropyourai.com/submit-tool",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "low",
+          "notes": "",
+          "content": ""
+        },
+        {
+          "id": "gh-mahseema",
+          "platform": "GitHub PR — mahseema/awesome-ai-tools",
+          "url": "https://github.com/mahseema/awesome-ai-tools/blob/main/IMAGE.md",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "high",
+          "notes": "Fork → aggiungi in IMAGE.md → PR",
+          "content": "- [SammaPix](https://sammapix.com) - Free browser-based image compressor with batch processing, WebP conversion, and AI-powered filename renaming via Google Gemini."
+        },
+        {
+          "id": "gh-ikaijua",
+          "platform": "GitHub PR — ikaijua/Awesome-AITools",
+          "url": "https://github.com/ikaijua/Awesome-AITools",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "medium",
+          "notes": "Welcome to submit pull requests (dal README)",
+          "content": "- [SammaPix](https://sammapix.com) - Free browser-based image compressor with batch processing, WebP conversion, and AI-powered filename renaming via Google Gemini."
+        },
+        {
+          "id": "gh-eudk",
+          "platform": "GitHub PR — eudk/awesome-ai-tools",
+          "url": "https://github.com/eudk/awesome-ai-tools",
+          "done": false,
+          "timing": "Settimana 2",
+          "priority": "medium",
+          "notes": "",
+          "content": "- [SammaPix](https://sammapix.com) - Free browser-based image compressor with batch processing, WebP conversion, and AI-powered filename renaming via Google Gemini."
+        }
+      ]
+    },
+    {
+      "id": "week3",
+      "label": "Settimana 3 — Product Hunt Prep",
+      "dates": "20–26 Marzo 2026",
+      "tasks": [
+        {
+          "id": "ph-assets",
+          "platform": "Product Hunt — Prepara assets",
+          "url": "https://www.producthunt.com/launch",
+          "done": false,
+          "timing": "20–23 Mar",
+          "priority": "high",
+          "notes": "Logo 240x240, 3 screenshot, video demo 30s, GIF demo",
+          "content": ""
+        },
+        {
+          "id": "ph-hunter",
+          "platform": "Product Hunt — Trova un hunter",
+          "url": "https://www.producthunt.com",
+          "done": false,
+          "timing": "20–23 Mar",
+          "priority": "high",
+          "notes": "Cerca maker con 500+ follower su PH. Chiedi via Twitter DM.",
+          "content": ""
+        },
+        {
+          "id": "ph-launch",
+          "platform": "Product Hunt — LANCIO",
+          "url": "https://www.producthunt.com/launch",
+          "done": false,
+          "timing": "Lunedì 23 Mar, ore 09:01 IT (= 00:01 PST)",
+          "priority": "high",
+          "notes": "Lancia lunedì o venerdì per meno competizione. Promuovi nelle prime 2 ore.",
+          "content": "Tagline: Free batch image optimizer with AI rename — no uploads\n\nDescription: SammaPix compresses, converts, and AI-renames your images — all in the browser.\n✦ Batch process up to 20 images\n✦ Convert to WebP\n✦ AI rename: IMG_1234.jpg → product-hero-blue-sneakers.webp\n✦ 100% client-side — no uploads\n✦ Free forever"
+        }
+      ]
+    }
+  ]
+}

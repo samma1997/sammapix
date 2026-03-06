@@ -1651,7 +1651,7 @@ export default function BlogPostPage({ params }: PageProps) {
               <AffiliateBanner variant="siteground-hosting" />
             )}
             {post.tag === "Privacy" && (
-              <AffiliateBanner variant="shortpixel" />
+              <AffiliateBanner variant="siteground" />
             )}
           </div>
 
