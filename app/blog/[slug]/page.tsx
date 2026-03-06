@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import AdUnit from "@/components/ads/AdUnit";
+import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 type BlogSlug =
   | "ai-image-renaming-seo"
@@ -1612,13 +1613,24 @@ export default function BlogPostPage({ params }: PageProps) {
             <AdUnit adSlot="blog-inline" adFormat="horizontal" className="w-full" />
           </div>
 
-          {/* Affiliate banner — contextual based on post tag */}
-          <div className="mt-4">
+          {/* SiteGround image banner — shown on all articles */}
+          <div className="mt-6">
+            <SiteGroundBanner
+              variant={
+                post.tag === "Tools" || post.tag === "Performance"
+                  ? "wordpress"
+                  : "web-hosting"
+              }
+            />
+          </div>
+
+          {/* Affiliate text banner — contextual based on post tag */}
+          <div className="mt-3">
             {(post.tag === "SEO" || post.tag === "AI") && (
               <AffiliateBanner variant="semrush" />
             )}
             {(post.tag === "Performance" || post.tag === "Tools") && (
-              <AffiliateBanner variant="siteground" />
+              <AffiliateBanner variant="siteground-hosting" />
             )}
             {post.tag === "Privacy" && (
               <AffiliateBanner variant="shortpixel" />
