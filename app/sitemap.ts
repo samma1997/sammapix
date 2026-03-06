@@ -6,6 +6,7 @@ const BASE_URL = "https://sammapix.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/about",
     "/pricing",
     "/blog",
     "/privacy",

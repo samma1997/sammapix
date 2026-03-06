@@ -48,19 +48,8 @@ export default function HeroSection() {
   const photos = display.slice(0, 12);
 
   return (
-    <section className="px-4 sm:px-6 pb-8">
+    <section className="px-4 sm:px-6 pt-8 pb-8">
       <div className="max-w-5xl mx-auto">
-
-        {/* Intro testuale minimal — sopra il hero */}
-        <div className="mb-6 pt-10">
-          <p className="text-sm text-gray-500 font-medium tracking-tight">
-            Luca Sammarco
-          </p>
-          <div className="w-full h-px bg-gray-200 my-2" />
-          <p className="text-xs text-gray-400 tracking-wide">
-            travel photographer&nbsp;&middot;&nbsp;tool builder
-          </p>
-        </div>
 
         {/* Griglia foto — 3 colonne, aspect 4/3, ogni foto → proprio viaggio */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1 sm:gap-1.5">

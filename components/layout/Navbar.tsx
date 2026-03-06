@@ -185,6 +185,12 @@ export default function Navbar() {
               >
                 {d.nav.blog}
               </Link>
+              <Link
+                href="/about"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                Chi sono
+              </Link>
             </>
           )}
         </nav>
@@ -290,6 +296,13 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                 >
                   {d.nav.blog}
+                </Link>
+                <Link
+                  href="/about"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Chi sono
                 </Link>
               </>
             )}
