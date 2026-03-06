@@ -1,262 +1,155 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-import { Lock, Zap, FileImage, Sparkles, ArrowRight } from "lucide-react";
+import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import DropZone from "@/components/upload/DropZone";
-import SettingsToolbar from "@/components/upload/SettingsToolbar";
-import FileList from "@/components/files/FileList";
-import AiRenameModal from "@/components/ai/AiRenameModal";
+import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
-import { useImageStore } from "@/store/imageStore";
-import { cn } from "@/lib/utils";
-import { useLocale } from "@/hooks/useLocale";
-import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
-
-const tools = [
-  { name: "compress", href: "/tools/compress", active: true },
-  { name: "→ webp", href: "/tools/webp", active: true },
-  { name: "ai rename", href: "/tools/ai-rename", active: true },
-  { name: "exif inspector", href: "/tools/exif", active: false, badge: "soon" },
-  { name: "photo culling", href: "/tools/cull", active: false, badge: "soon" },
-];
+import { getAllTrips } from "@/lib/destinations";
 
 export default function HomePage() {
-  const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
-  const { data: session } = useSession();
-  const d = useLocale();
-
-  useEffect(() => {
-    if (session?.user?.email) {
-      initAiRenameCounter(session.user.email);
-    }
-  }, [session?.user?.email, initAiRenameCounter]);
-  const hasFiles = items.length > 0;
-
-  const [aiModalOpen, setAiModalOpen] = useState(false);
-  const [aiRenameFileId, setAiRenameFileId] = useState<string | undefined>();
-
-  const handleAiRenameClick = async (fileId?: string) => {
-    if (!session) {
-      setAiRenameFileId(fileId);
-      setAiModalOpen(true);
-      return;
-    }
-    if (fileId) {
-      await aiRenameFile(fileId);
-    }
-  };
+  const trips = getAllTrips();
 
   return (
     <>
-      {/* ── Hero fotografico ── visibile solo quando non ci sono file */}
-      {!hasFiles && <HeroSection />}
+      {/* 1. Hero fotografico editoriale */}
+      <HeroSection />
 
-      {/* ── Separatore visivo ── */}
-      {!hasFiles && <div className="border-t border-gray-100" />}
+      <div className="border-t border-gray-100" />
 
-      {/* ── Tools section ── */}
-      <section className="pt-10 pb-4 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto">
-
-          {/* Header tools — visibile sempre */}
-          <div className="mb-8">
-            <h2 className="text-sm font-semibold text-gray-900 mb-1">
-              tools for photographers
+      {/* 2. Trips list — griglia compatta */}
+      <section className="py-10 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <header className="mb-6">
+            <h2 className="text-sm font-normal text-gray-400 lowercase tracking-wide">
+              trips
             </h2>
-            <div className="w-full h-px bg-gray-200 my-2" />
-            <p className="text-xs text-gray-400 mb-4">
-              Free browser-based tools. Nothing leaves your device.
-            </p>
+            <div className="mt-3 h-px bg-gray-100 w-full" />
+          </header>
 
-            {/* Pill tags */}
-            <div className="flex flex-wrap gap-2">
-              {tools.map((tool) => (
-                tool.active ? (
-                  <Link
-                    key={tool.href}
-                    href={tool.href}
-                    className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors",
-                      "border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 bg-white"
-                    )}
-                  >
-                    {tool.name}
-                  </Link>
-                ) : (
-                  <span
-                    key={tool.href}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-dashed border-gray-200 text-gray-400 cursor-default"
-                  >
-                    {tool.name}
-                    {tool.badge && (
-                      <span className="text-[10px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">
-                        {tool.badge}
-                      </span>
-                    )}
-                  </span>
-                )
-              ))}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {trips.map((trip) => {
+              const year = new Date(trip.startDate).getFullYear();
+              return (
+                <Link
+                  key={trip.slug}
+                  href={`/portfolio/${trip.slug}`}
+                  aria-label={`${trip.destination} ${year}`}
+                  className="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
+                >
+                  <Image
+                    src={trip.coverSrc}
+                    alt={`${trip.destination} travel photography ${year}`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.02]"
+                    unoptimized
+                  />
+
+                  {/* Gradient overlay */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    aria-hidden="true"
+                  />
+
+                  {/* Testo overlay — visibile su hover */}
+                  <div className="absolute bottom-0 left-0 right-0 px-3 pb-3 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <p className="text-white text-sm font-bold leading-tight">
+                      {trip.destination}
+                    </p>
+                    <p className="text-white/60 text-xs mt-0.5">{year}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
-          {/* ── Tool di compressione funzionante ── */}
-          <DropZone />
-
-          {/* Settings toolbar — appare dopo upload */}
-          {hasFiles && (
-            <div className="mt-3">
-              <SettingsToolbar onAiRenameClick={() => handleAiRenameClick()} />
-            </div>
-          )}
-
-          {/* File list — appare dopo upload */}
-          {hasFiles && (
-            <div className="mt-3">
-              <FileList onAiRename={handleAiRenameClick} />
-            </div>
-          )}
+          {/* Link view all */}
+          <div className="mt-6 text-right">
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-gray-700 transition-colors"
+            >
+              view all
+              <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ── Features ── */}
-      {!hasFiles && (
-        <section className="py-20 px-4 sm:px-6 border-t border-gray-100">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <FeatureCard
-                icon={<Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                title={d.features.compress_title}
-                description={d.features.compress_desc}
-              />
-              <FeatureCard
-                icon={<FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                title={d.features.webp_title}
-                description={d.features.webp_desc}
-              />
-              <FeatureCard
-                icon={<Sparkles className="h-5 w-5 text-brand" strokeWidth={1.5} />}
-                title={d.features.ai_title}
-                description={d.features.ai_desc}
-                highlight
-              />
-            </div>
-          </div>
-        </section>
-      )}
+      <div className="border-t border-gray-100" />
 
-      {/* ── Privacy badge ── */}
-      {!hasFiles && (
-        <section className="py-12 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <div className="border border-gray-200 rounded-md p-6 bg-gray-50">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <div className="h-10 w-10 rounded-md border border-gray-200 bg-white flex items-center justify-center shrink-0">
-                  <Lock className="h-5 w-5 text-gray-600" strokeWidth={1.5} />
+      {/* 3. Tools teaser */}
+      <section className="py-10 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <header className="mb-6">
+            <h2 className="text-sm font-normal text-gray-400 lowercase tracking-wide">
+              image tools
+            </h2>
+            <div className="mt-2 h-px bg-gray-100 w-full" />
+            <p className="mt-3 text-xs text-gray-400">
+              Free browser-based tools for photographers and web creators.
+            </p>
+          </header>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {/* Compress */}
+            <Link
+              href="/tools/compress"
+              className="group flex flex-col justify-between p-4 border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
+            >
+              <div>
+                <p className="text-sm font-medium text-gray-900 mb-1">Compress</p>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Reduce file size without quality loss
+                </p>
+              </div>
+              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors mt-4 self-end" strokeWidth={1.5} />
+            </Link>
+
+            {/* WebP */}
+            <Link
+              href="/tools/webp"
+              className="group flex flex-col justify-between p-4 border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
+            >
+              <div>
+                <p className="text-sm font-medium text-gray-900 mb-1">WebP</p>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Convert to modern format, 30% lighter
+                </p>
+              </div>
+              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors mt-4 self-end" strokeWidth={1.5} />
+            </Link>
+
+            {/* AI Rename */}
+            <Link
+              href="/tools/ai-rename"
+              className="group flex flex-col justify-between p-4 border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
+            >
+              <div>
+                <p className="text-sm font-medium text-gray-900 mb-1">AI Rename</p>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Auto-generate SEO filenames with AI
+                </p>
+              </div>
+              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors mt-4 self-end" strokeWidth={1.5} />
+            </Link>
+
+            {/* EXIF — coming soon */}
+            <div className="flex flex-col justify-between p-4 border border-dashed border-gray-200 rounded-md bg-white cursor-default">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <p className="text-sm font-medium text-gray-400">EXIF</p>
+                  <span className="text-[10px] font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-dashed border-gray-200">
+                    soon
+                  </span>
                 </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                    {d.privacy.title}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    {d.privacy.desc}
-                  </p>
-                </div>
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  Strip metadata and GPS data from photos
+                </p>
               </div>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* ── SiteGround banner ── sempre visibile */}
-      <div className="px-4 sm:px-6 pb-6">
-        <div className="max-w-3xl mx-auto">
-          <SiteGroundBanner variant="web-hosting" />
         </div>
-      </div>
-
-      {/* ── CTA ── */}
-      {!hasFiles && (
-        <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
-          <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-3 tracking-tight">
-              {d.pro_banner.title}
-            </h2>
-            <p className="text-gray-500 mb-6 text-sm leading-relaxed">
-              {d.pro_banner.desc}
-            </p>
-            <Link href="/pricing">
-              <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
-                {d.pro_banner.cta}
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </button>
-            </Link>
-          </div>
-        </section>
-      )}
-
-      {/* Schema.org WebApplication */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            name: "SammaPix",
-            url: "https://sammapix.com",
-            description:
-              "Free online image optimizer. Compress JPG, PNG, WebP. Convert to WebP. AI-powered image renaming.",
-            applicationCategory: "MultimediaApplication",
-            operatingSystem: "Web Browser",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            author: {
-              "@type": "Person",
-              name: "Luca Sammarco",
-            },
-          }),
-        }}
-      />
-
-      {/* AI Rename Modal */}
-      <AiRenameModal
-        open={aiModalOpen}
-        onClose={() => setAiModalOpen(false)}
-        fileId={aiRenameFileId}
-      />
+      </section>
     </>
-  );
-}
-
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  highlight?: boolean;
-}
-
-function FeatureCard({ icon, title, description, highlight }: FeatureCardProps) {
-  return (
-    <div
-      className={cn(
-        "p-5 border border-gray-200 rounded-md bg-white transition-colors",
-        highlight && "border-indigo-200 bg-brand-light/30"
-      )}
-    >
-      <div
-        className={cn(
-          "h-9 w-9 rounded-md border flex items-center justify-center mb-4",
-          highlight ? "border-indigo-200 bg-white" : "border-gray-200 bg-gray-50"
-        )}
-      >
-        {icon}
-      </div>
-      <h3 className="text-sm font-semibold text-gray-900 mb-1.5">{title}</h3>
-      <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
-    </div>
   );
 }

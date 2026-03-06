@@ -1,7 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Sparkles, Search, Clock } from "lucide-react";
+import Link from "next/link";
+import ToolInterface from "@/components/tools/ToolInterface";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -20,12 +21,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const relatedTools = [
-  { name: "Compress Images", href: "/tools/compress" },
-  { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "All tools", href: "/tools" },
-];
 
 const features = [
   {
@@ -51,51 +46,25 @@ const features = [
   },
 ];
 
-export default function AiRenameToolPage() {
-  return (
-    <>
-      {/* Hero SEO */}
-      <section className="pt-16 pb-10 px-4 sm:px-6 border-b border-[#E5E5E5]">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-2">
-            <span className="text-xs font-medium text-[#6366F1] uppercase tracking-widest">
-              Free tool
-            </span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#171717] tracking-tight mb-4 leading-tight">
-            AI Image Renaming — Auto SEO Filenames
-          </h1>
-          <p className="text-[#737373] text-base leading-relaxed max-w-xl">
-            Let AI read your images and generate descriptive, SEO-friendly
-            filenames automatically. Stop uploading photos named{" "}
-            <code className="text-xs bg-[#F5F5F5] border border-[#E5E5E5] px-1.5 py-0.5 rounded font-mono">
-              DSC_0042.jpg
-            </code>{" "}
-            — improve your Google Image Search rankings with zero effort.
-          </p>
-        </div>
-      </section>
+const relatedTools = [
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Convert to WebP", href: "/tools/webp" },
+  { name: "All tools", href: "/tools" },
+];
 
-      {/* Tool embed */}
-      <section className="py-10 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-md bg-[#FAFAFA] p-8 text-center">
-            <p className="text-sm text-[#737373] mb-2">
-              AI Rename requires a free account to prevent API abuse. Sign in
-              with Google or GitHub — it takes 10 seconds.
-            </p>
-            <p className="text-xs text-[#A3A3A3] mb-5">
-              Free plan: 5 renames/day &nbsp;·&nbsp; Pro plan: 200 renames/day
-            </p>
-            <Link href="/?tool=ai-rename">
-              <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors">
-                Open AI Rename Tool
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
+export default function AiRenamePage() {
+  return (
+    <main>
+      {/* Hero SEO */}
+      <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
+        <h1 className="text-2xl font-semibold text-[#171717] mb-1">AI Image Renaming</h1>
+        <p className="text-sm text-[#737373]">
+          Auto-generate SEO-friendly filenames with AI. Upload your images and let Gemini describe them — nothing uploaded to any server except the thumbnail for AI analysis.
+        </p>
+      </div>
+
+      {/* Tool */}
+      <ToolInterface defaultMode="ai-rename" />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
@@ -159,7 +128,7 @@ export default function AiRenameToolPage() {
             descriptive SEO-optimized filenames.
           </p>
           <h3 className="text-base font-semibold text-[#171717] mb-3">
-            What does &ldquo;AI-generated filename&rdquo; look like?
+            What does an AI-generated filename look like?
           </h3>
           <div className="border border-[#E5E5E5] rounded-md bg-[#FAFAFA] p-4 space-y-2">
             <div className="flex items-center gap-3">
@@ -224,6 +193,6 @@ export default function AiRenameToolPage() {
           }),
         }}
       />
-    </>
+    </main>
   );
 }

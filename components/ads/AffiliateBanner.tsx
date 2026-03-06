@@ -49,6 +49,7 @@ const affiliates: Record<
     iconColor: "text-orange-500",
   },
   shortpixel: {
+    // eslint-disable-next-line jsx-a11y/alt-text
     icon: <Image className="h-4 w-4" strokeWidth={1.5} />,
     eyebrow: "Automate",
     headline: "Optimize images automatically on every WordPress upload.",

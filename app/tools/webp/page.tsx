@@ -1,7 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, FileImage, Shield, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingUp, Shield, FileImage } from "lucide-react";
+import Link from "next/link";
+import ToolInterface from "@/components/tools/ToolInterface";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -20,12 +21,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const relatedTools = [
-  { name: "Compress Images", href: "/tools/compress" },
-  { name: "AI Rename", href: "/tools/ai-rename" },
-  { name: "All tools", href: "/tools" },
-];
 
 const features = [
   {
@@ -48,45 +43,25 @@ const features = [
   },
 ];
 
-export default function WebpToolPage() {
-  return (
-    <>
-      {/* Hero SEO */}
-      <section className="pt-16 pb-10 px-4 sm:px-6 border-b border-[#E5E5E5]">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-2">
-            <span className="text-xs font-medium text-[#6366F1] uppercase tracking-widest">
-              Free tool
-            </span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#171717] tracking-tight mb-4 leading-tight">
-            Convert Images to WebP — Free &amp; Online
-          </h1>
-          <p className="text-[#737373] text-base leading-relaxed max-w-xl">
-            Convert JPG, PNG, and GIF images to WebP format instantly in your
-            browser. WebP files are up to 30% smaller than JPEG — the fastest
-            way to improve your website load speed and Core Web Vitals.
-          </p>
-        </div>
-      </section>
+const relatedTools = [
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "AI Rename", href: "/tools/ai-rename" },
+  { name: "All tools", href: "/tools" },
+];
 
-      {/* Tool embed */}
-      <section className="py-10 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-md bg-[#FAFAFA] p-8 text-center">
-            <p className="text-sm text-[#737373] mb-5">
-              The WebP converter runs on the homepage — open it below and enable
-              the &ldquo;Convert to WebP&rdquo; toggle in the toolbar.
-            </p>
-            <Link href="/?tool=webp">
-              <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors">
-                Open WebP Converter
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
+export default function WebpPage() {
+  return (
+    <main>
+      {/* Hero SEO */}
+      <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
+        <h1 className="text-2xl font-semibold text-[#171717] mb-1">WebP Converter</h1>
+        <p className="text-sm text-[#737373]">
+          Convert JPG, PNG and GIF to WebP format directly in your browser. WebP files are up to 30% smaller — nothing uploaded to any server.
+        </p>
+      </div>
+
+      {/* Tool */}
+      <ToolInterface defaultMode="webp" />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
@@ -187,6 +162,6 @@ export default function WebpToolPage() {
           }),
         }}
       />
-    </>
+    </main>
   );
 }

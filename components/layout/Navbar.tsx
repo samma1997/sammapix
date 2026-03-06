@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,8 +12,14 @@ import { useLocale } from "@/hooks/useLocale";
 export default function Navbar() {
   const { data: session, status } = useSession();
   const d = useLocale();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isToolsSection =
+    pathname.startsWith("/tools") ||
+    pathname.startsWith("/pricing") ||
+    pathname.startsWith("/dashboard");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -28,7 +35,7 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo — linka sempre a / */}
         <Link
           href="/"
           className="flex items-center gap-2 group select-none"
@@ -133,35 +140,50 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — adattiva per sezione */}
         <nav className="hidden md:flex items-center gap-1">
-          <Link
-            href="/"
-            className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-          >
-            {d.nav.tools}
-          </Link>
-          <Link
-            href="/portfolio"
-            className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-          >
-            Portfolio
-          </Link>
-          <Link
-            href="/pricing"
-            className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-          >
-            {d.nav.pricing}
-          </Link>
-          <Link
-            href="/blog"
-            className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
-          >
-            {d.nav.blog}
-          </Link>
+          {isToolsSection ? (
+            /* ── Menu tools section ── */
+            <>
+              <Link
+                href="/tools"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                {d.nav.tools}
+              </Link>
+              <Link
+                href="/pricing"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                {d.nav.pricing}
+              </Link>
+              <Link
+                href="/blog"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                {d.nav.blog}
+              </Link>
+            </>
+          ) : (
+            /* ── Menu photo section ── */
+            <>
+              <Link
+                href="/portfolio"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                Portfolio
+              </Link>
+              <Link
+                href="/blog"
+                className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                {d.nav.blog}
+              </Link>
+            </>
+          )}
         </nav>
 
-        {/* Right side */}
+        {/* Right side — adattivo */}
         <div className="hidden md:flex items-center gap-2">
           {status === "authenticated" && session ? (
             <>
@@ -183,12 +205,16 @@ export default function Navbar() {
               </Button>
             </Link>
           )}
-          <Link href="/pricing">
-            <Button variant="primary" size="sm" className="gap-1">
-              {d.nav.get_pro}
-              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
-            </Button>
-          </Link>
+
+          {/* Get Pro — solo nella tools section */}
+          {isToolsSection && (
+            <Link href="/pricing">
+              <Button variant="primary" size="sm" className="gap-1">
+                {d.nav.get_pro}
+                <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -209,34 +235,51 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 bg-white animate-slide-down">
           <div className="px-4 py-3 flex flex-col gap-1">
-            <Link
-              href="/"
-              className="py-2 text-sm text-gray-600 hover:text-gray-900"
-              onClick={() => setMobileOpen(false)}
-            >
-              {d.nav.tools}
-            </Link>
-            <Link
-              href="/portfolio"
-              className="py-2 text-sm text-gray-600 hover:text-gray-900"
-              onClick={() => setMobileOpen(false)}
-            >
-              Portfolio
-            </Link>
-            <Link
-              href="/pricing"
-              className="py-2 text-sm text-gray-600 hover:text-gray-900"
-              onClick={() => setMobileOpen(false)}
-            >
-              {d.nav.pricing}
-            </Link>
-            <Link
-              href="/blog"
-              className="py-2 text-sm text-gray-600 hover:text-gray-900"
-              onClick={() => setMobileOpen(false)}
-            >
-              {d.nav.blog}
-            </Link>
+            {isToolsSection ? (
+              /* ── Mobile tools section ── */
+              <>
+                <Link
+                  href="/tools"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {d.nav.tools}
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {d.nav.pricing}
+                </Link>
+                <Link
+                  href="/blog"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {d.nav.blog}
+                </Link>
+              </>
+            ) : (
+              /* ── Mobile photo section ── */
+              <>
+                <Link
+                  href="/portfolio"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Portfolio
+                </Link>
+                <Link
+                  href="/blog"
+                  className="py-2 text-sm text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {d.nav.blog}
+                </Link>
+              </>
+            )}
+
             <div className="pt-2 border-t border-gray-100 mt-1 flex gap-2">
               {status === "authenticated" ? (
                 <Button
@@ -254,11 +297,13 @@ export default function Navbar() {
                   </Button>
                 </Link>
               )}
-              <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
-                <Button variant="primary" size="sm" className="w-full">
-                  {d.nav.get_pro}
-                </Button>
-              </Link>
+              {isToolsSection && (
+                <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
+                  <Button variant="primary" size="sm" className="w-full">
+                    {d.nav.get_pro}
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
