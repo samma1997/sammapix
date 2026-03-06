@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import HeroSection from "@/components/layout/HeroSection";
 
 export const metadata: Metadata = {
   title: "Free Image Tools for Photographers | SammaPix",
@@ -67,10 +66,7 @@ const SOON = [
 export default function ToolsPage() {
   return (
     <>
-      {/* Stessa strip della homepage */}
-      <HeroSection />
-
-      <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
+      <section className="py-16 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
 
           <div className="mb-10">
