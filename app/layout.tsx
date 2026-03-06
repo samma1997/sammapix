@@ -71,6 +71,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: APP_URL,
   },
+  other: {
+    "impact-site-verification": "ea5238e5-3e70-4cdb-b4d2-ebdd254df866",
+  },
 };
 
 export default function RootLayout({
@@ -80,7 +83,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-
       <body className="font-sans antialiased bg-white text-gray-900 min-h-screen flex flex-col">
         <Providers>
           <Navbar />
