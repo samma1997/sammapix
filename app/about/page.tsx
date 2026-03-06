@@ -140,35 +140,25 @@ export default function AboutPage() {
           strumenti che ho costruito
         </h2>
         <div className="space-y-3">
-          {[
-            {
-              name: "Image Compressor",
-              href: "/tools/compress",
-              desc: "Compressione batch JPG, PNG, WebP, GIF — client-side, nessun upload.",
-            },
-            {
-              name: "WebP Converter",
-              href: "/tools/webp",
-              desc: "Conversione bulk in formato WebP direttamente nel browser.",
-            },
-            {
-              name: "AI Rename",
-              href: "/tools/ai-rename",
-              desc: "Rinomino automatico con Gemini AI. Da DSC_4821.jpg a nomi descrittivi SEO-friendly.",
-            },
-          ].map((tool) => (
             <Link
-              key={tool.href}
-              href={tool.href}
-              className="group flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
-            >
-              <div>
-                <p className="text-sm font-medium text-[#171717]">{tool.name}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{tool.desc}</p>
+            href="/tools"
+            className="group flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+          >
+            <div>
+              <p className="text-sm font-medium text-[#171717]">SammaPix — Image Optimizer</p>
+              <p className="text-xs text-gray-400 mt-0.5">
+                Comprimi, converti in WebP e rinomina con AI — tutto in una passata, nel browser.
+              </p>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {["Compress", "WebP", "AI Rename", "Batch ZIP"].map((f) => (
+                  <span key={f} className="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                    {f}
+                  </span>
+                ))}
               </div>
-              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors flex-shrink-0 ml-4" strokeWidth={1.5} />
-            </Link>
-          ))}
+            </div>
+            <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors flex-shrink-0 ml-4" strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
 

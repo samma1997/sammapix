@@ -1,94 +1,68 @@
-// HeroSection — server component
-// Griglia fotografica con più foto random da tutti i viaggi.
-// Ogni foto linka direttamente alla galleria del viaggio specifico.
+"use client";
+
+// HeroSection — strip fotografica a tutta altezza, ispirata a Ralph Gibson
+// Sfondo scuro, foto a colonne verticali, ogni foto → viaggio specifico
 
 import Image from "next/image";
 import Link from "next/link";
-import { getAllTrips } from "@/lib/destinations";
 
-interface HeroPhoto {
-  src: string;
-  slug: string;
-  destination: string;
-  alt: string;
-  span?: "tall"; // alcune foto occupano 2 righe per varietà
-}
+// Una foto rappresentativa per ogni viaggio
+const HERO_PHOTOS = [
+  { slug: "sri-lanka-2025",  src: "https://picsum.photos/seed/srilanka3/600/900",  destination: "Sri Lanka",  year: "2025" },
+  { slug: "bali-2024",       src: "https://picsum.photos/seed/bali2/600/900",       destination: "Bali",       year: "2024" },
+  { slug: "japan-2023",      src: "https://picsum.photos/seed/japan2/600/900",      destination: "Japan",      year: "2023" },
+  { slug: "thailand-2024",   src: "https://picsum.photos/seed/thailand3/600/900",   destination: "Thailand",   year: "2024" },
+  { slug: "china-2023",      src: "https://picsum.photos/seed/china1/600/900",      destination: "China",      year: "2023" },
+];
 
 export default function HeroSection() {
-  const trips = getAllTrips();
-
-  // Raccoglie cover + 2 foto per viaggio → ~15 foto totali
-  const pool: HeroPhoto[] = trips.flatMap((trip) => [
-    {
-      src: trip.coverSrc,
-      slug: trip.slug,
-      destination: trip.destination,
-      alt: `${trip.destination} travel photography`,
-    },
-    ...trip.photos.slice(0, 2).map((p) => ({
-      src: p.srcThumb,
-      slug: trip.slug,
-      destination: trip.destination,
-      alt: p.alt,
-    })),
-  ]);
-
-  // Shuffle deterministico — ordine fisso ma che mescola i viaggi
-  // (interleave: trip0-cover, trip1-cover, trip2-cover, trip0-ph1, ...)
-  const display: HeroPhoto[] = [];
-  const byTrip = trips.map((_, i) => pool.slice(i * 3, i * 3 + 3));
-  const maxPhotosPerTrip = 3;
-  for (let row = 0; row < maxPhotosPerTrip; row++) {
-    for (const tripPhotos of byTrip) {
-      if (tripPhotos[row]) display.push(tripPhotos[row]);
-    }
-  }
-
-  // Prendi le prime 12 per non riempire troppo
-  const photos = display.slice(0, 12);
-
   return (
-    <section className="px-4 sm:px-6 pt-8 pb-8">
-      <div className="max-w-5xl mx-auto">
-
-        {/* Griglia foto — 3 colonne, aspect 4/3, ogni foto → proprio viaggio */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1 sm:gap-1.5">
-          {photos.map((photo, i) => (
-            <Link
-              key={`${photo.slug}-${i}`}
-              href={`/portfolio/${photo.slug}`}
-              className="group relative block overflow-hidden bg-gray-100 aspect-[4/3]"
-              aria-label={`View ${photo.destination} gallery`}
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-                priority={i < 4}
-                unoptimized
-              />
-              {/* Overlay con destinazione su hover */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 px-2 pb-2 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-white text-xs font-medium leading-tight truncate">
-                  {photo.destination}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Link "view all" */}
-        <div className="mt-4 text-center">
+    <section
+      className="w-full bg-[#0a0a0a] overflow-x-auto"
+      style={{ height: "calc(100vh - 56px)" }}
+    >
+      {/* Strip orizzontale — 5 colonne uguali, scorrimento su mobile */}
+      <div
+        className="flex h-full min-w-max md:min-w-0 md:grid"
+        style={{
+          gridTemplateColumns: `repeat(${HERO_PHOTOS.length}, 1fr)`,
+        }}
+      >
+        {HERO_PHOTOS.map((photo, i) => (
           <Link
-            href="/portfolio"
-            className="text-xs text-gray-400 hover:text-gray-700 transition-colors hover:underline underline-offset-4"
+            key={photo.slug}
+            href={`/portfolio/${photo.slug}`}
+            className="group relative block h-full overflow-hidden"
+            style={{ minWidth: "220px" }}
+            aria-label={`${photo.destination} ${photo.year}`}
           >
-            &rarr; view all trips
+            {/* Foto */}
+            <Image
+              src={photo.src}
+              alt={`${photo.destination} travel photography ${photo.year}`}
+              fill
+              className="object-cover transition-all duration-700 group-hover:scale-[1.04] brightness-90 group-hover:brightness-100"
+              sizes="(max-width: 768px) 220px, 20vw"
+              priority={i < 3}
+              unoptimized
+            />
+
+            {/* Separatore verticale sottile tra le foto */}
+            {i < HERO_PHOTOS.length - 1 && (
+              <div className="absolute top-0 right-0 w-px h-full bg-white/10 z-10" />
+            )}
+
+            {/* Label destinazione — bottom left, sempre visibile, minimal */}
+            <div className="absolute bottom-5 left-5 z-20">
+              <p className="text-white/40 text-[11px] font-medium tracking-widest uppercase transition-colors duration-300 group-hover:text-white/90">
+                {photo.destination}
+              </p>
+              <p className="text-white/20 text-[10px] tracking-widest group-hover:text-white/50 transition-colors duration-300">
+                {photo.year}
+              </p>
+            </div>
           </Link>
-        </div>
+        ))}
       </div>
     </section>
   );

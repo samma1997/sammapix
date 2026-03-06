@@ -3,96 +3,98 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
 
+const COMING_SOON_TOOLS = [
+  {
+    name: "EXIF Inspector",
+    desc: "Visualizza e rimuovi metadati GPS, camera, e dati privati dalle foto.",
+  },
+  {
+    name: "Photo Culling",
+    desc: "Seleziona rapidamente le migliori foto da un batch con tastiera.",
+  },
+  {
+    name: "Image Resizer",
+    desc: "Ridimensiona in px o percentuale, mantieni aspect ratio.",
+  },
+  {
+    name: "Background Remover",
+    desc: "Rimuovi lo sfondo con AI in un click. Nessun upload.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
-      {/* 1. Hero fotografico — griglia foto random, ogni foto → viaggio specifico */}
+      {/* Hero — strip fotografica full-height */}
       <HeroSection />
 
-      <div className="border-t border-gray-100" />
-
-      {/* 2. Tools teaser */}
-      <section className="py-10 px-4 sm:px-6">
+      {/* Tools */}
+      <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
-          <header className="mb-6">
-            <h2 className="text-sm font-normal text-gray-400 lowercase tracking-wide">
-              image tools
+
+          {/* Header sezione */}
+          <div className="mb-10">
+            <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">
+              Image Tools
             </h2>
-            <div className="mt-2 h-px bg-gray-100 w-full" />
-            <p className="mt-3 text-xs text-gray-400">
-              Free browser-based tools for photographers and web creators.
+            <p className="text-sm text-gray-500 max-w-lg">
+              Strumenti gratuiti per ottimizzare immagini nel browser — nessun upload, nessun account richiesto per le funzioni base.
             </p>
-          </header>
+          </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {/* Compress */}
-            <Link
-              href="/tools/compress"
-              className="group flex flex-col justify-between p-4 border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
-            >
-              <div>
-                <p className="text-sm font-medium text-gray-900 mb-1">Compress</p>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Reduce file size without quality loss
+          {/* Tool principale — card grande */}
+          <Link
+            href="/tools"
+            className="group block mb-4 p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-base font-semibold text-[#171717]">SammaPix</span>
+                  <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                    Free
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                  Comprimi, converti in WebP e rinomina le tue immagini con AI — tutto in una sola passata, direttamente nel browser.
                 </p>
+                {/* Feature pills */}
+                <div className="flex flex-wrap gap-2">
+                  {["Compress", "WebP Converter", "AI Rename", "Batch ZIP"].map((f) => (
+                    <span
+                      key={f}
+                      className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors mt-4 self-end" strokeWidth={1.5} />
-            </Link>
+              <ArrowRight
+                className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1"
+                strokeWidth={1.5}
+              />
+            </div>
+          </Link>
 
-            {/* WebP */}
-            <Link
-              href="/tools/webp"
-              className="group flex flex-col justify-between p-4 border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
-            >
-              <div>
-                <p className="text-sm font-medium text-gray-900 mb-1">WebP</p>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Convert to modern format, 30% lighter
-                </p>
-              </div>
-              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors mt-4 self-end" strokeWidth={1.5} />
-            </Link>
-
-            {/* AI Rename */}
-            <Link
-              href="/tools/ai-rename"
-              className="group flex flex-col justify-between p-4 border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
-            >
-              <div>
-                <p className="text-sm font-medium text-gray-900 mb-1">AI Rename</p>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Auto-generate SEO filenames with AI
-                </p>
-              </div>
-              <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-gray-600 transition-colors mt-4 self-end" strokeWidth={1.5} />
-            </Link>
-
-            {/* EXIF — coming soon */}
-            <div className="flex flex-col justify-between p-4 border border-dashed border-gray-200 rounded-md bg-white cursor-default">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="text-sm font-medium text-gray-400">EXIF</p>
-                  <span className="text-[10px] font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-dashed border-gray-200">
+          {/* Grid coming soon */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {COMING_SOON_TOOLS.map((tool) => (
+              <div
+                key={tool.name}
+                className="p-4 border border-dashed border-gray-200 rounded-lg bg-white"
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-sm font-medium text-gray-400">{tool.name}</span>
+                  <span className="text-[9px] font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-dashed border-gray-200 uppercase tracking-wide">
                     soon
                   </span>
                 </div>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Strip metadata and GPS data from photos
-                </p>
+                <p className="text-xs text-gray-300 leading-relaxed">{tool.desc}</p>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Link all tools */}
-          <div className="mt-6 text-right">
-            <Link
-              href="/tools"
-              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-gray-700 transition-colors"
-            >
-              all tools
-              <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
-            </Link>
-          </div>
         </div>
       </section>
     </>
