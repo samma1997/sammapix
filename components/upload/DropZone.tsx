@@ -110,11 +110,29 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
         )}
       </div>
 
-      {/* File count indicator */}
+      {/* File count indicator with upgrade nudge */}
       {items.length > 0 && canAddMore && (
-        <p className="text-xs text-gray-400">
-          {items.length}/{MAX_FILES_FREE} files added
-        </p>
+        <div className="w-full max-w-xs">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs text-gray-400">
+              {items.length} / {MAX_FILES_FREE} files
+            </span>
+            {items.length >= 3 && (
+              <a href="/pricing" className="text-xs text-indigo-500 hover:underline font-medium">
+                Upgrade for 100 →
+              </a>
+            )}
+          </div>
+          <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className={cn(
+                "h-full rounded-full transition-all duration-300",
+                items.length >= 4 ? "bg-orange-400" : "bg-indigo-400"
+              )}
+              style={{ width: `${(items.length / MAX_FILES_FREE) * 100}%` }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

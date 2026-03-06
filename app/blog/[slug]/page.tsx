@@ -17,7 +17,8 @@ type BlogSlug =
   | "reduce-image-size-without-losing-quality"
   | "best-image-format-for-web"
   | "image-seo-guide"
-  | "compress-png-without-losing-quality";
+  | "compress-png-without-losing-quality"
+  | "optimize-images-wordpress";
 
 interface BlogPost {
   slug: BlogSlug;
@@ -1387,6 +1388,184 @@ For photographs saved as PNG: always convert to JPEG (or WebP) for web use — y
 True lossless PNG optimization (metadata removal + algorithm tuning) typically achieves 10–30% reduction. Color quantization achieves 40–80% reduction with near-lossless results for most content. Converting to WebP lossless achieves an additional 20–30% on top of PNG. Combined, converting and compressing a PNG to WebP lossless can produce a file 50–70% smaller than the original PNG, with no visible quality difference for typical web graphics.
     `,
   },
+
+  "optimize-images-wordpress": {
+    slug: "optimize-images-wordpress",
+    title: "How to Optimize Images for WordPress (Complete Guide 2026)",
+    description:
+      "Learn how to optimize images for WordPress step by step — compress, convert to WebP, rename for SEO, and automate with plugins. Faster site, better rankings.",
+    date: "2026-03-06",
+    readTime: "8 min read",
+    tag: "Performance",
+    keywords: [
+      "optimize images wordpress",
+      "wordpress image optimization",
+      "compress images wordpress",
+      "webp wordpress",
+      "image seo wordpress",
+    ],
+    content: `
+## Why slow images destroy WordPress sites
+
+Every second of load time costs you. Google's own data shows that as page load time goes from 1 second to 3 seconds, the probability of bounce increases by 32%. At 5 seconds, that number jumps to 90%. Images are the single largest contributor to page weight on most WordPress sites — and they're also the easiest thing to fix.
+
+Google's Core Web Vitals directly penalize slow image delivery. **LCP (Largest Contentful Paint)** — the metric that measures how fast the main visual content loads — is almost always tied to a hero image or a featured image at the top of a post. If your LCP image is a 4MB PNG you uploaded directly from your phone without a second thought, you're failing the test before visitors even read your headline.
+
+The benchmark is clear: LCP should be under 2.5 seconds. For most WordPress sites, unoptimized images are the primary reason that threshold gets missed. A single high-resolution JPEG straight from a DSLR can be 8–15MB. Compressed and converted to WebP, the same image can be under 200KB — a 97%+ reduction — with no visible quality difference to the human eye.
+
+The fix is not complicated, but it requires a consistent workflow. This guide walks you through it in four steps, starting with the most important one that most guides skip entirely.
+
+## The two-phase approach to WordPress image optimization
+
+Most guides jump straight to plugins. Plugins are part of the solution — but they're not the beginning of it. The correct workflow has two distinct phases:
+
+**Phase 1: Optimize before you upload.** Compress the file, convert it to WebP, and rename it with a descriptive SEO-friendly filename — all before it ever touches your WordPress media library.
+
+**Phase 2: Configure WordPress and your hosting to handle the rest.** Enable native WebP support, set quality defaults, configure lazy loading, and add a CDN layer.
+
+This matters because plugins that optimize images after upload are working on files that are already in your media library, often re-compressing images that were already compressed — which can degrade quality. Starting with a properly optimized file gives plugins less work to do and produces better end results.
+
+## Step 1 — Before you upload: compress and rename
+
+This is the step that most WordPress guides skip. It's also the most impactful.
+
+Before you upload any image to WordPress, it should already be:
+- Compressed to under 200KB for standard content images (under 500KB for large hero images)
+- Converted to WebP format
+- Renamed with a descriptive, SEO-friendly filename
+
+**Why WebP before upload?** WordPress 6.x has built-in WebP support, but if you upload a JPEG, WordPress stores the JPEG as the primary file and may or may not generate a WebP alternative depending on your configuration. If you upload a WebP directly, WordPress uses it as the source file — cleaner, simpler, and guaranteed.
+
+**Why rename before upload?** WordPress uses your filename as the URL for the image. If you upload \`IMG_4829.jpg\`, the image URL becomes \`yoursite.com/wp-content/uploads/2026/03/img_4829.jpg\`. Google reads that URL. A filename like \`wordpress-hero-image-blue-theme.webp\` tells Google something meaningful about the image. \`IMG_4829\` tells Google nothing.
+
+**Google explicitly states** in its image SEO documentation: "The filename can give Google clues about the subject matter of the image." This is a direct ranking signal you're discarding every time you upload an unedited camera file.
+
+### How to do this with SammaPix
+
+SammaPix handles all three optimizations — compression, WebP conversion, and AI-powered renaming — in a single workflow, entirely in your browser. No uploads to external servers for the compression step.
+
+1. Go to **sammapix.com** and drag your images onto the drop zone. SammaPix accepts JPG, PNG, WebP, and GIF.
+2. Set your compression quality (80 is the sweet spot for web — visually lossless, significantly smaller).
+3. Enable **Convert to WebP** — this alone reduces file size by 25–34% compared to an equivalent JPEG.
+4. Sign in with Google or GitHub (free, takes 10 seconds) and toggle **AI Rename**. SammaPix sends a thumbnail to Google Gemini Flash, which analyzes the image content and generates a descriptive, hyphenated, lowercase filename: \`IMG_4829.jpg\` becomes something like \`wordpress-hero-blue-team-meeting.webp\`.
+5. Click **Compress all**, review the AI-suggested filenames (you can edit any of them manually), and download as ZIP.
+
+The result: a folder of WebP images under 200KB each, with clean SEO filenames, ready to upload to WordPress. This takes 2–3 minutes for a batch of 10 images.
+
+## Step 2 — WordPress settings: what to configure natively
+
+WordPress has added meaningful native optimization features in recent versions. Use them before adding plugins.
+
+### Native WebP support (WordPress 6.1+)
+
+Since WordPress 6.1, the core image processing library (Imagick) generates WebP versions of uploaded images by default when the server supports it. To verify this is working, upload a JPEG and check the media library — you should see a WebP variant generated alongside the original.
+
+If you're uploading WebP files directly (as recommended above), this is already handled at the source.
+
+### Configuring JPEG quality
+
+WordPress defaults to 82% JPEG quality, which is reasonable but can be adjusted. For sites where bandwidth is a priority, 80% is often the right balance. Add this to your \`functions.php\` or a site-specific plugin:
+
+\`\`\`php
+add_filter( 'jpeg_quality', function() { return 80; } );
+add_filter( 'wp_editor_set_quality', function() { return 80; } );
+\`\`\`
+
+This affects images processed by WordPress after upload — not files you've already compressed client-side. If you follow the Step 1 workflow, this setting applies to any image manipulations WordPress performs (like generating thumbnail sizes).
+
+### Native lazy loading
+
+Since WordPress 5.5, images in post content get \`loading="lazy"\` added automatically. This means images below the fold are not loaded until the user scrolls to them — a significant performance win on long posts with many images.
+
+**One important exception:** your hero image or featured image (the first visible image on the page) should never be lazy-loaded. Loading the LCP element lazily delays it and hurts your Core Web Vitals score. WordPress 6.3 introduced \`fetchpriority="high"\` on featured images to address this — verify your theme applies it correctly by checking the rendered HTML of your page.
+
+### Define image dimensions
+
+Always set width and height attributes on your images. WordPress does this for media library images, but inline images added via HTML or certain page builders may lack them. Missing dimensions cause **CLS (Cumulative Layout Shift)** — content jumping as images load — which is a Core Web Vitals failure.
+
+## Step 3 — Plugins worth using
+
+Plugins handle images that are already in your media library and provide additional optimization for dynamically generated thumbnails. Here are the main options, with no specific endorsement — choose based on your needs.
+
+### Smush (free tier available)
+
+Smush is the most widely used WordPress image optimization plugin, with over one million active installs. The free tier compresses images on upload and can bulk-process your existing media library. It supports lazy loading and integrates with popular page builders. WebP conversion and CDN delivery are Pro features.
+
+**Good for:** Sites that want a set-it-and-forget-it free solution for newly uploaded images.
+
+### ShortPixel (paid, usage-based)
+
+ShortPixel sends images to its own servers for compression using multiple algorithms (lossy, glossy, lossless). The compression results are often better than server-side tools, particularly for JPEGs. It includes WebP conversion and AVIF support. Pricing is credit-based — you buy a block of image credits rather than a monthly subscription.
+
+**Good for:** Sites with large existing media libraries that need to be retroactively optimized with high-quality results.
+
+### Imagify (freemium)
+
+Made by the WP Rocket team, Imagify offers a clean interface and solid compression results. Free tier has a monthly data limit. Paid tiers remove limits and add WebP conversion. Integrates natively with WP Rocket for combined performance optimization.
+
+**Good for:** Sites already using WP Rocket for caching who want a tightly integrated optimization stack.
+
+A note on using plugins alongside the pre-upload workflow: if you're already uploading compressed WebP files (Step 1), the plugin has less work to do. You may want to configure the plugin to skip re-compression of files that are already below a target file size — most offer this setting.
+
+## Step 4 — Hosting and CDN: the layer that multiplies everything
+
+Even perfectly optimized images will load slowly if served from an underpowered hosting environment. This is the point where many site owners hit a ceiling — they've optimized their images, installed plugins, and still get poor PageSpeed scores. The bottleneck is the server.
+
+### Hosting matters more than most guides admit
+
+Shared hosting with overloaded servers adds latency to every asset request, including images. Managed WordPress hosting with server-level caching and modern infrastructure (HTTP/2, HTTP/3, PHP 8.3+) delivers images significantly faster. SiteGround, for example, uses a proprietary caching system (SuperCacher) and serves static assets through its own CDN — images cached at the edge load in milliseconds regardless of where your visitors are.
+
+If you're on slow shared hosting and wondering why your PageSpeed score is still poor after image optimization, the bottleneck is likely the server, not the images.
+
+### Cloudflare CDN (free tier)
+
+Cloudflare's free tier is one of the highest-leverage performance moves available to any WordPress site owner. Putting your site behind Cloudflare means:
+
+- Static assets (including images) are cached at Cloudflare's global edge network — over 300 data centers worldwide
+- Images are served from the nearest point of presence to each visitor, reducing latency dramatically
+- Cloudflare's free tier includes image compression (Polish feature — WebP delivery, metadata stripping) on paid plans, but even the free CDN caching alone delivers measurable performance gains
+
+Setting up Cloudflare requires pointing your domain's nameservers to Cloudflare and configuring your cache rules. The process takes about 30 minutes and the performance impact is immediate.
+
+The combination of pre-optimized WebP images + WordPress native optimization + a plugin for the media library + CDN delivery is the full stack. Each layer compounds the previous one.
+
+## Common mistakes that undo all your work
+
+Even with the right tools in place, these mistakes are common and each one can negate significant optimization effort.
+
+**Uploading PNG when JPEG (or WebP) is the right format.** PNG is a lossless format — it's designed for graphics with flat colors, hard edges, and transparency (logos, icons, illustrations). For photographs and complex images, PNG produces files 3–10x larger than an equivalent JPEG or WebP. If you're uploading a photo of your team or a product shot as a PNG, you're doing it wrong. Use WebP (or JPEG as a fallback) for all photographic content.
+
+**Not renaming files before upload.** Camera filenames (\`DSC_0042.jpg\`, \`IMG_4829.jpg\`, \`20260301_143022.jpg\`) are meaningless to Google. Every image you upload with a camera-generated name is a missed SEO opportunity. The fix takes seconds with AI renaming — there's no excuse for skipping it at this point.
+
+**Not applying \`fetchpriority="high"\` to the hero image.** Lazy loading is great — except for your LCP element. If your theme or page builder applies lazy loading to the first visible image, your LCP score will suffer. Check the HTML source of your page and verify that your hero or featured image has either no \`loading\` attribute, or has \`loading="eager"\` and \`fetchpriority="high"\`.
+
+**Re-uploading the same image in multiple sizes manually.** WordPress generates thumbnail sizes automatically. If you're manually uploading a small version and a large version of the same image, you're cluttering your media library and creating inconsistency. Upload the full-resolution (but optimized) image and let WordPress handle size generation. Define your required sizes in \`functions.php\` and let the system do the work.
+
+---
+
+## FAQ
+
+### Do I need a plugin if I upload pre-optimized WebP images?
+
+A plugin is still useful for two reasons: retroactively optimizing your existing media library, and handling WordPress-generated thumbnail sizes. WordPress generates multiple image sizes (thumbnail, medium, large) from your uploaded image. A plugin ensures those derivatives are also compressed and served as WebP. For new sites with a clean workflow, the plugin handles progressively less work over time.
+
+### Does converting to WebP break compatibility with older browsers?
+
+No — as of 2026, WebP is supported by 97%+ of browsers globally. Safari added full WebP support in version 14 (2020). The only edge cases are very old mobile browsers and Internet Explorer, which has zero market share. If you're still supporting IE for any reason, use a \`<picture>\` element with a JPEG fallback — but for the vast majority of sites, serving WebP universally is the correct decision.
+
+### What quality setting should I use for WordPress images?
+
+For WebP: 80–82% quality delivers visually lossless results at significantly reduced file size. For JPEG: the same range applies. Going below 75% produces visible artifacts on photographs. Going above 85% increases file size with diminishing visual returns. Use 80 as your default across the board — it's the industry standard for web delivery and the setting used by major sites including Google's own image CDN.
+
+---
+
+## Start with the images, not the plugins
+
+The most common mistake WordPress site owners make is installing plugins before optimizing the source files. Plugins compress already-bloated images. If you start with well-optimized WebP files with clean SEO filenames, every other part of the stack — plugins, CDN, hosting — works better.
+
+Before your next WordPress upload, run your images through SammaPix first. Compress, convert to WebP, rename with AI. It takes two minutes. The performance and SEO gains compound over every image you publish from that point forward.
+    `,
+  },
 };
 
 interface PageProps {
@@ -1529,6 +1708,7 @@ const relatedMap: Record<BlogSlug, BlogSlug[]> = {
   "best-image-format-for-web": ["jpg-to-webp-converter", "compress-images-for-website", "image-seo-guide"],
   "image-seo-guide": ["ai-image-renaming-seo", "best-image-format-for-web", "compress-images-for-website"],
   "compress-png-without-losing-quality": ["compress-images-for-website", "reduce-image-size-without-losing-quality", "best-image-format-for-web"],
+  "optimize-images-wordpress": ["compress-images-for-website", "jpg-to-webp-converter", "ai-image-renaming-seo"],
 };
 
 export default function BlogPostPage({ params }: PageProps) {

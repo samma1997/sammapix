@@ -68,6 +68,7 @@ export const BLOG_SLUGS = [
   "best-image-format-for-web",
   "image-seo-guide",
   "compress-png-without-losing-quality",
+  "optimize-images-wordpress",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
