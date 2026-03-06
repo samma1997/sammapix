@@ -63,7 +63,7 @@ const affiliates: Record<
     eyebrow: "SEO",
     headline: "You optimized image SEO. Now track how you rank.",
     cta: "Try Semrush free →",
-    href: "https://www.semrush.com/?utm_source=sammapix&utm_medium=blog&utm_campaign=seo-tools",
+    href: "https://www.semrush.com/berush/medium/?via=sammapix&utm_source=sammapix&utm_medium=blog",
     bg: "bg-green-50",
     border: "border-green-100",
     iconColor: "text-green-600",

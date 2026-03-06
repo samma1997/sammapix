@@ -80,10 +80,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
+
       <body className="font-sans antialiased bg-white text-gray-900 min-h-screen flex flex-col">
         <Providers>
           <Navbar />

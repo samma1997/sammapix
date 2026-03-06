@@ -1406,6 +1406,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
     description: post.description,
     keywords: post.keywords,
     authors: [{ name: "Luca Sammarco", url: "https://lucasammarco.com" }],
+    alternates: {
+      canonical: `https://sammapix.com/blog/${params.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -1516,6 +1519,18 @@ function renderLine(line: string, i: number): React.ReactNode {
   );
 }
 
+const relatedMap: Record<BlogSlug, BlogSlug[]> = {
+  "ai-image-renaming-seo": ["image-seo-guide", "best-image-format-for-web", "tinypng-alternative"],
+  "tinypng-alternative": ["compress-images-for-website", "compress-png-without-losing-quality", "jpg-to-webp-converter"],
+  "remove-exif-data-photos": ["compress-images-for-website", "reduce-image-size-without-losing-quality", "best-image-format-for-web"],
+  "compress-images-for-website": ["jpg-to-webp-converter", "reduce-image-size-without-losing-quality", "best-image-format-for-web"],
+  "jpg-to-webp-converter": ["compress-images-for-website", "best-image-format-for-web", "reduce-image-size-without-losing-quality"],
+  "reduce-image-size-without-losing-quality": ["compress-images-for-website", "jpg-to-webp-converter", "compress-png-without-losing-quality"],
+  "best-image-format-for-web": ["jpg-to-webp-converter", "compress-images-for-website", "image-seo-guide"],
+  "image-seo-guide": ["ai-image-renaming-seo", "best-image-format-for-web", "compress-images-for-website"],
+  "compress-png-without-losing-quality": ["compress-images-for-website", "reduce-image-size-without-losing-quality", "best-image-format-for-web"],
+};
+
 export default function BlogPostPage({ params }: PageProps) {
   const post = posts[params.slug as BlogSlug];
   if (!post) notFound();
@@ -1537,6 +1552,9 @@ export default function BlogPostPage({ params }: PageProps) {
     Performance: "text-orange-700",
     AI: "text-indigo-700",
   };
+
+  const relatedSlugs = relatedMap[post.slug] ?? [];
+  const relatedPosts = relatedSlugs.map((s) => posts[s]).filter(Boolean);
 
   return (
     <div className="py-12 px-4 sm:px-6">
@@ -1698,7 +1716,79 @@ export default function BlogPostPage({ params }: PageProps) {
               </Link>
             </div>
           </div>
+
+          {/* Related articles */}
+          {relatedPosts.length > 0 && (
+            <div className="mt-10 pt-8 border-t border-gray-100">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">
+                Related articles
+              </h3>
+              <div className="space-y-3">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related.slug}
+                    href={`/blog/${related.slug}`}
+                    className="flex items-start gap-3 group"
+                  >
+                    <span className={`text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 ${tagColors[related.tag] ?? "text-gray-500"}`}>
+                      {related.tag}
+                    </span>
+                    <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
+                      {related.title}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
+
+        {/* Article schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: post.title,
+              description: post.description,
+              datePublished: post.date,
+              dateModified: post.date,
+              author: {
+                "@type": "Person",
+                name: "Luca Sammarco",
+                url: "https://lucasammarco.com",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "SammaPix",
+                url: "https://sammapix.com",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://sammapix.com/og-image.png",
+                },
+              },
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://sammapix.com/blog/${post.slug}`,
+              },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://sammapix.com" },
+                { "@type": "ListItem", position: 2, name: "Blog", item: "https://sammapix.com/blog" },
+                { "@type": "ListItem", position: 3, name: post.title, item: `https://sammapix.com/blog/${post.slug}` },
+              ],
+            }),
+          }}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
   title: "SammaPix vs TinyPNG — Which Free Image Compressor is Better in 2026?",
@@ -12,6 +14,9 @@ export const metadata: Metadata = {
     "tinypng competitor",
     "image compression tool comparison",
   ],
+  alternates: {
+    canonical: "https://sammapix.com/vs/tinypng",
+  },
   openGraph: {
     title: "SammaPix vs TinyPNG — Honest Comparison 2026",
     description: "TinyPNG is good. SammaPix is better. See the feature-by-feature comparison.",
@@ -174,6 +179,12 @@ export default function VsTinyPngPage() {
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </button>
         </Link>
+      </div>
+
+      {/* Affiliate banners */}
+      <div className="mt-8 space-y-3">
+        <SiteGroundBanner variant="web-hosting" />
+        <AffiliateBanner variant="shortpixel" />
       </div>
 
       {/* Schema.org comparison */}

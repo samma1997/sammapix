@@ -11,6 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/vs/tinypng",
     "/vs/squoosh",
+    "/vs/imageoptim",
+    "/vs/compressor-io",
+    "/vs/iloveimg",
   ];
 
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
