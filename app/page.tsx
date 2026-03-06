@@ -11,6 +11,7 @@ import AiRenameModal from "@/components/ai/AiRenameModal";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
+import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export default function HomePage() {
   const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
@@ -145,6 +146,13 @@ export default function HomePage() {
           </div>
         </section>
       )}
+
+      {/* SiteGround banner — always visible */}
+      <div className="px-4 sm:px-6 pb-6">
+        <div className="max-w-3xl mx-auto">
+          <SiteGroundBanner variant="web-hosting" />
+        </div>
+      </div>
 
       {/* CTA */}
       {!hasFiles && (
