@@ -46,7 +46,6 @@ export default function SiteGroundBanner({
         src={banner.src}
         alt={banner.alt}
         className="w-full h-auto border-0"
-        loading="lazy"
       />
     </a>
   );
