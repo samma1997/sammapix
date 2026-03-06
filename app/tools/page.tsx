@@ -1,160 +1,132 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Zap, FileImage, Sparkles, ScanLine, Layers } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import HeroSection from "@/components/layout/HeroSection";
 
 export const metadata: Metadata = {
-  title: "Free Image Tools Online — Compress, Convert, Rename | SammaPix",
+  title: "Free Image Tools for Photographers | SammaPix",
   description:
-    "All free browser-based image tools in one place. Compress JPG PNG WebP, convert to WebP, AI rename filenames, inspect EXIF data. No upload, no signup needed.",
-  alternates: {
-    canonical: "https://sammapix.com/tools",
-  },
+    "Browser-based image tools for photographers — compress, convert to WebP, AI rename, GeoSort by location, and more. No upload, no account needed.",
+  alternates: { canonical: "https://sammapix.com/tools" },
 };
 
-type ToolStatus = "active" | "coming-soon";
-
-interface Tool {
-  name: string;
-  description: string;
-  href: string;
-  status: ToolStatus;
-  icon: React.ReactNode;
-  badge?: string;
-}
-
-const tools: Tool[] = [
+const ACTIVE = [
   {
-    name: "Compress Images",
-    description:
-      "Reduce JPG, PNG, WebP and GIF file size directly in your browser. Lossless and lossy modes, ZIP download, no upload required.",
+    name: "Crunch",
     href: "/tools/compress",
-    status: "active",
-    icon: <Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
-  },
-  {
-    name: "Convert to WebP",
+    tagline: "Compress · WebP · AI Rename · Batch ZIP",
     description:
-      "Convert any image to WebP format in one click. WebP files are up to 30% smaller than JPEG — ideal for faster websites and better Core Web Vitals.",
-    href: "/tools/webp",
-    status: "active",
-    icon: <FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
-  },
-  {
-    name: "AI Rename",
-    description:
-      "Let AI read your images and generate descriptive, SEO-friendly filenames automatically. Stop uploading images named DSC_0042.jpg.",
-    href: "/tools/ai-rename",
-    status: "active",
-    icon: <Sparkles className="h-5 w-5 text-[#6366F1]" strokeWidth={1.5} />,
-  },
-  {
-    name: "EXIF Inspector",
-    description:
-      "Read and remove EXIF metadata from your photos — GPS coordinates, camera model, timestamps and more. Protect your privacy before sharing images.",
-    href: "/tools/exif",
-    status: "coming-soon",
-    icon: <ScanLine className="h-5 w-5 text-gray-400" strokeWidth={1.5} />,
-    badge: "Coming soon",
-  },
-  {
-    name: "Photo Culling",
-    description:
-      "Smart batch review tool for photographers. Quickly pick your best shots, reject blurry or duplicate frames, and export your selection.",
-    href: "/tools/cull",
-    status: "coming-soon",
-    icon: <Layers className="h-5 w-5 text-gray-400" strokeWidth={1.5} />,
-    badge: "Coming soon",
+      "Comprimi, converti in WebP e rinomina con AI — tutto in una passata. Nessun upload, tutto nel browser.",
   },
 ];
 
-export default function ToolsHubPage() {
-  const activeTools = tools.filter((t) => t.status === "active");
-  const comingSoonTools = tools.filter((t) => t.status === "coming-soon");
+const SOON = [
+  {
+    name: "GeoSort",
+    description:
+      "Legge il GPS dalle foto e crea cartelle per destinazione. Scarichi uno ZIP già organizzato: Thailand/, Japan/, Italy/... senza fare nulla.",
+  },
+  {
+    name: "EXIF Lens",
+    description:
+      "Visualizza e rimuovi metadati GPS, camera, timestamps. Proteggi la privacy prima di pubblicare. Export CSV.",
+  },
+  {
+    name: "Cull",
+    description:
+      "Review rapida con tastiera: K per tenere, X per scartare. Esporta solo le migliori. Lightroom-style, gratis.",
+  },
+  {
+    name: "ResizePack",
+    description:
+      "Ridimensiona in batch: px, percentuale o target file-size ('max 500KB'). Preset per web, social, stampa.",
+  },
+  {
+    name: "StampIt",
+    description:
+      "Aggiungi testo o logo watermark in batch. Posizione, opacità, dimensione. Modalità tiled per protezione avanzata.",
+  },
+  {
+    name: "CropRatio",
+    description:
+      "Ritaglia in formato preciso: 1:1, 4:5, 16:9, A4, custom. Smart centering opzionale con face detection.",
+  },
+  {
+    name: "TwinHunt",
+    description:
+      "Trova foto duplicate e quasi-identiche con perceptual hashing — client-side, nessun upload.",
+  },
+  {
+    name: "FilmLab",
+    description:
+      "Grain cinematografico, vignette e color grading analogico su batch. WebGL-accelerated.",
+  },
+];
 
+export default function ToolsPage() {
   return (
-    <div className="py-16 px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-3xl font-bold text-[#171717] tracking-tight mb-3">
-            Image Tools
-          </h1>
-          <p className="text-[#737373] leading-relaxed">
-            Free browser-based tools for images. Everything runs in your browser —
-            your files never leave your device.
-          </p>
-        </div>
+    <>
+      {/* Stessa strip della homepage */}
+      <HeroSection />
 
-        {/* Active tools */}
-        <div className="mb-10">
-          <h2 className="text-xs font-semibold text-[#737373] uppercase tracking-widest mb-4">
-            Available now
-          </h2>
-          <div className="flex flex-col gap-3">
-            {activeTools.map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="group flex items-start gap-4 p-5 border border-[#E5E5E5] rounded-md bg-white hover:border-[#A3A3A3] hover:shadow-sm transition-all"
-              >
-                <div className="h-10 w-10 rounded-md border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center shrink-0 group-hover:border-[#D4D4D4] transition-colors">
-                  {tool.icon}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-[#171717]">
-                      {tool.name}
-                    </h3>
-                    <ArrowRight
-                      className="h-4 w-4 text-gray-400 shrink-0 group-hover:text-gray-700 group-hover:translate-x-0.5 transition-all"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <p className="text-sm text-[#737373] leading-relaxed">
-                    {tool.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
+      <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
+        <div className="max-w-5xl mx-auto">
+
+          <div className="mb-10">
+            <h1 className="text-xs text-gray-400 uppercase tracking-widest mb-2">Image Tools</h1>
+            <p className="text-sm text-gray-500 max-w-lg">
+              Strumenti gratuiti per fotografi. Tutto nel browser — nessun upload, nessuna registrazione per le funzioni base.
+            </p>
           </div>
-        </div>
 
-        {/* Coming soon tools */}
-        <div>
-          <h2 className="text-xs font-semibold text-[#737373] uppercase tracking-widest mb-4">
-            Coming soon
-          </h2>
-          <div className="flex flex-col gap-3">
-            {comingSoonTools.map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="group flex items-start gap-4 p-5 border border-dashed border-[#E5E5E5] rounded-md bg-white hover:border-[#D4D4D4] transition-colors"
-              >
-                <div className="h-10 w-10 rounded-md border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center shrink-0">
-                  {tool.icon}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-[#404040]">
-                      {tool.name}
-                    </h3>
-                    {tool.badge && (
-                      <span className="text-[10px] font-medium uppercase tracking-wide bg-[#EEF2FF] text-[#6366F1] px-2 py-0.5 rounded">
-                        {tool.badge}
+          {/* Tool attivo */}
+          {ACTIVE.map((tool) => (
+            <Link
+              key={tool.name}
+              href={tool.href}
+              className="group block mb-4 p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-base font-semibold text-[#171717]">{tool.name}</span>
+                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                      Free
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-3">{tool.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {tool.tagline.split(" · ").map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
                       </span>
-                    )}
+                    ))}
                   </div>
-                  <p className="text-sm text-[#A3A3A3] leading-relaxed">
-                    {tool.description}
-                  </p>
                 </div>
-              </Link>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+          ))}
+
+          {/* Coming soon */}
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-4 mt-10">In arrivo</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {SOON.map((tool) => (
+              <div key={tool.name} className="p-5 border border-dashed border-gray-200 rounded-lg bg-white">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-sm font-medium text-gray-500">{tool.name}</span>
+                  <span className="text-[9px] font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-dashed border-gray-200 uppercase tracking-wide">
+                    soon
+                  </span>
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">{tool.description}</p>
+              </div>
             ))}
           </div>
+
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

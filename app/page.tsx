@@ -5,20 +5,20 @@ import HeroSection from "@/components/layout/HeroSection";
 
 const COMING_SOON_TOOLS = [
   {
-    name: "EXIF Inspector",
-    desc: "Visualizza e rimuovi metadati GPS, camera, e dati privati dalle foto.",
+    name: "GeoSort",
+    desc: "Legge il GPS dalle foto, crea cartelle per destinazione e scarica ZIP organizzato.",
   },
   {
-    name: "Photo Culling",
-    desc: "Seleziona rapidamente le migliori foto da un batch con tastiera.",
+    name: "Cull",
+    desc: "Review rapida da tastiera: K tieni, X scarta. Esporta solo le migliori.",
   },
   {
-    name: "Image Resizer",
-    desc: "Ridimensiona in px o percentuale, mantieni aspect ratio.",
+    name: "StampIt",
+    desc: "Watermark testo o logo in batch con posizione, opacità e modalità tiled.",
   },
   {
-    name: "Background Remover",
-    desc: "Rimuovi lo sfondo con AI in un click. Nessun upload.",
+    name: "EXIF Lens",
+    desc: "Visualizza e rimuovi metadati GPS e dati privati prima di pubblicare.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function HomePage() {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-base font-semibold text-[#171717]">SammaPix</span>
+                  <span className="text-base font-semibold text-[#171717]">Crunch</span>
                   <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
                     Free
                   </span>

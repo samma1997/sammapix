@@ -145,7 +145,7 @@ export default function AboutPage() {
             className="group flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
           >
             <div>
-              <p className="text-sm font-medium text-[#171717]">SammaPix — Image Optimizer</p>
+              <p className="text-sm font-medium text-[#171717]">Crunch — Image Optimizer</p>
               <p className="text-xs text-gray-400 mt-0.5">
                 Comprimi, converti in WebP e rinomina con AI — tutto in una passata, nel browser.
               </p>
