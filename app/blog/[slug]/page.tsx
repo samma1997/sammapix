@@ -1,6 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
@@ -45,6 +46,8 @@ const posts: Record<BlogSlug, BlogPost> = {
       "image filename seo",
     ],
     content: `
+![SammaPix homepage — free image optimizer with drag and drop interface](/blog/sammapix-homepage-dropzone.png)
+
 ## Why image filenames are an SEO signal
 
 When Googlebot crawls your page, it processes every asset — including images. It can't "see" an image the way a human can, but it can read:
@@ -96,6 +99,8 @@ The quality of the output depends heavily on the prompt. A well-crafted prompt a
 
 ## How to rename images for SEO with SammaPix
 
+![SammaPix tool interface — quality slider, WebP conversion toggle and AI Rename enabled](/blog/sammapix-tool-file-loaded.png)
+
 SammaPix's AI Rename feature is built into the core compression workflow, so renaming and optimizing happen in a single step.
 
 **Step 1.** Go to sammapix.com and upload your images. SammaPix accepts JPG, PNG, and WebP. You can upload multiple files at once.
@@ -111,6 +116,8 @@ SammaPix's AI Rename feature is built into the core compression workflow, so ren
 **Step 6.** Review the suggestions. You can click any filename to edit it manually before downloading — useful when the AI gets the general description right but misses a specific product name or brand term.
 
 **Step 7.** Download your files individually or as a ZIP. The files already have the SEO-optimized names applied.
+
+![SammaPix AI rename result — file automatically renamed with SEO-optimized filename and ZIP download](/blog/sammapix-ai-rename-result.png)
 
 Everything — compression, WebP conversion, renaming — happens without your images ever leaving your browser for the compression step. For AI rename, only a small compressed thumbnail is sent to Google's API, never the full-resolution file.
 
@@ -216,6 +223,8 @@ The workflow is extremely simple: drag files onto the web interface, wait a few 
 - Proven reliability built over 14 years
 
 ## How SammaPix works — and what it does differently
+
+![SammaPix batch compression interface — compress multiple images at once with WebP conversion and AI rename](/blog/sammapix-tool-file-loaded.png)
 
 SammaPix takes a fundamentally different approach: **all processing happens in your browser**, using browser-native APIs and JavaScript libraries. When you drag a JPEG onto SammaPix, it's compressed locally on your CPU using browser-image-compression. When you convert to WebP, your browser's Canvas API does the work. Your file never touches an external server.
 
@@ -1413,6 +1422,27 @@ export function generateMetadata({ params }: PageProps): Metadata {
 }
 
 function renderLine(line: string, i: number): React.ReactNode {
+  // Image: ![alt](src)
+  const imgMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+  if (imgMatch) {
+    const [, alt, src] = imgMatch;
+    return (
+      <figure key={i} className="my-6">
+        <Image
+          src={src}
+          alt={alt}
+          width={900}
+          height={500}
+          className="rounded-md border border-gray-200 w-full h-auto"
+        />
+        {alt && (
+          <figcaption className="text-xs text-gray-400 text-center mt-2 italic">
+            {alt}
+          </figcaption>
+        )}
+      </figure>
+    );
+  }
   // H2
   if (line.startsWith("## ")) {
     return (
