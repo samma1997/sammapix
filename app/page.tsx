@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Lock, Zap, FileImage, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSession } from "next-auth/react";
 import DropZone from "@/components/upload/DropZone";
 import SettingsToolbar from "@/components/upload/SettingsToolbar";
@@ -12,6 +13,9 @@ import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
+import { getAllTrips } from "@/lib/destinations";
+
+const trips = getAllTrips();
 
 export default function HomePage() {
   const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
@@ -97,6 +101,76 @@ export default function HomePage() {
           )}
         </div>
       </section>
+
+      {/* Travel Portfolio */}
+      {!hasFiles && (
+        <section className="border-t border-gray-100 py-16 px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 rounded text-xs text-gray-500 font-medium mb-4">
+              Travel Portfolio
+            </div>
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900 tracking-tight">
+                  Photographs from across Asia
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {trips.length} trips &middot;{" "}
+                  {trips.reduce((acc, t) => acc + t.photos.length, 0)} photographs
+                </p>
+              </div>
+              <Link
+                href="/destinations"
+                className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden sm:block"
+              >
+                View all &rarr;
+              </Link>
+            </div>
+
+            {/* Destination cards — horizontal scroll on mobile, 5-col grid on desktop */}
+            <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-5">
+              {trips.map((trip) => (
+                <Link
+                  key={trip.slug}
+                  href={`/destinations/${trip.slug}`}
+                  className="flex-shrink-0 w-44 sm:w-auto group"
+                >
+                  <div className="aspect-[3/4] rounded-lg overflow-hidden border border-gray-200 relative">
+                    <Image
+                      src={trip.coverSrc}
+                      alt={`${trip.destination} travel photography`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <p className="text-white text-sm font-semibold leading-tight">
+                        {trip.destination}
+                      </p>
+                      <p className="text-white/70 text-xs mt-0.5">
+                        {new Date(trip.startDate).getFullYear()}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile CTA */}
+            <div className="mt-4 sm:hidden text-center">
+              <Link
+                href="/destinations"
+                className="text-sm text-gray-500 hover:text-gray-900"
+              >
+                View all destinations &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Features */}
       {!hasFiles && (
