@@ -3,19 +3,24 @@
 import React, { useState, useEffect } from "react";
 import { Lock, Zap, FileImage, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import DropZone from "@/components/upload/DropZone";
 import SettingsToolbar from "@/components/upload/SettingsToolbar";
 import FileList from "@/components/files/FileList";
 import AiRenameModal from "@/components/ai/AiRenameModal";
+import HeroSection from "@/components/layout/HeroSection";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
-import { getAllTrips } from "@/lib/destinations";
 
-const trips = getAllTrips();
+const tools = [
+  { name: "compress", href: "/tools/compress", active: true },
+  { name: "→ webp", href: "/tools/webp", active: true },
+  { name: "ai rename", href: "/tools/ai-rename", active: true },
+  { name: "exif inspector", href: "/tools/exif", active: false, badge: "soon" },
+  { name: "photo culling", href: "/tools/cull", active: false, badge: "soon" },
+];
 
 export default function HomePage() {
   const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
@@ -34,12 +39,10 @@ export default function HomePage() {
 
   const handleAiRenameClick = async (fileId?: string) => {
     if (!session) {
-      // Not logged in — show login modal
       setAiRenameFileId(fileId);
       setAiModalOpen(true);
       return;
     }
-    // Logged in — call API directly
     if (fileId) {
       await aiRenameFile(fileId);
     }
@@ -47,53 +50,68 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="pt-16 pb-12 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium">
-              <Lock className="h-3 w-3" strokeWidth={1.5} />
-              {d.hero.badge_privacy}
-            </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 text-indigo-600">
-              <Sparkles className="h-3 w-3" strokeWidth={1.5} />
-              {d.hero.badge_ai}
-            </div>
-          </div>
+      {/* ── Hero fotografico ── visibile solo quando non ci sono file */}
+      {!hasFiles && <HeroSection />}
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
-            {d.hero.title_1}{" "}
-            <span className="text-gray-500 font-normal">{d.hero.title_2}</span>
-          </h1>
+      {/* ── Separatore visivo ── */}
+      {!hasFiles && <div className="border-t border-gray-100" />}
 
-          <p className="text-lg text-gray-500 mb-8 max-w-xl mx-auto leading-relaxed">
-            {d.hero.subtitle.split("\n").map((line, i) => (
-              <React.Fragment key={i}>{line}{i === 0 && <br />}</React.Fragment>
-            ))}
-          </p>
-
-          {/* Stats bar */}
-          <div className="flex items-center justify-center gap-2 mb-10 text-xs text-gray-400">
-            <span>{d.hero.stat_images}</span>
-            <span className="text-gray-300">·</span>
-            <span>{d.hero.stat_free}</span>
-            <span className="text-gray-300">·</span>
-            <span>{d.hero.stat_signup}</span>
-          </div>
-        </div>
-
-        {/* Tool area */}
+      {/* ── Tools section ── */}
+      <section className="pt-10 pb-4 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
+
+          {/* Header tools — visibile sempre */}
+          <div className="mb-8">
+            <h2 className="text-sm font-semibold text-gray-900 mb-1">
+              tools for photographers
+            </h2>
+            <div className="w-full h-px bg-gray-200 my-2" />
+            <p className="text-xs text-gray-400 mb-4">
+              Free browser-based tools. Nothing leaves your device.
+            </p>
+
+            {/* Pill tags */}
+            <div className="flex flex-wrap gap-2">
+              {tools.map((tool) => (
+                tool.active ? (
+                  <Link
+                    key={tool.href}
+                    href={tool.href}
+                    className={cn(
+                      "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors",
+                      "border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 bg-white"
+                    )}
+                  >
+                    {tool.name}
+                  </Link>
+                ) : (
+                  <span
+                    key={tool.href}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-dashed border-gray-200 text-gray-400 cursor-default"
+                  >
+                    {tool.name}
+                    {tool.badge && (
+                      <span className="text-[10px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">
+                        {tool.badge}
+                      </span>
+                    )}
+                  </span>
+                )
+              ))}
+            </div>
+          </div>
+
+          {/* ── Tool di compressione funzionante ── */}
           <DropZone />
 
-          {/* Settings toolbar — appears after upload */}
+          {/* Settings toolbar — appare dopo upload */}
           {hasFiles && (
             <div className="mt-3">
               <SettingsToolbar onAiRenameClick={() => handleAiRenameClick()} />
             </div>
           )}
 
-          {/* File list — appears after upload */}
+          {/* File list — appare dopo upload */}
           {hasFiles && (
             <div className="mt-3">
               <FileList onAiRename={handleAiRenameClick} />
@@ -102,77 +120,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Travel Portfolio */}
-      {!hasFiles && (
-        <section className="border-t border-gray-100 py-16 px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 rounded text-xs text-gray-500 font-medium mb-4">
-              Travel Portfolio
-            </div>
-            <div className="flex items-end justify-between mb-8">
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-900 tracking-tight">
-                  Photographs from across Asia
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">
-                  {trips.length} trips &middot;{" "}
-                  {trips.reduce((acc, t) => acc + t.photos.length, 0)} photographs
-                </p>
-              </div>
-              <Link
-                href="/destinations"
-                className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden sm:block"
-              >
-                View all &rarr;
-              </Link>
-            </div>
-
-            {/* Destination cards — horizontal scroll on mobile, 5-col grid on desktop */}
-            <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-5">
-              {trips.map((trip) => (
-                <Link
-                  key={trip.slug}
-                  href={`/destinations/${trip.slug}`}
-                  className="flex-shrink-0 w-44 sm:w-auto group"
-                >
-                  <div className="aspect-[3/4] rounded-lg overflow-hidden border border-gray-200 relative">
-                    <Image
-                      src={trip.coverSrc}
-                      alt={`${trip.destination} travel photography`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      unoptimized
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <p className="text-white text-sm font-semibold leading-tight">
-                        {trip.destination}
-                      </p>
-                      <p className="text-white/70 text-xs mt-0.5">
-                        {new Date(trip.startDate).getFullYear()}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* Mobile CTA */}
-            <div className="mt-4 sm:hidden text-center">
-              <Link
-                href="/destinations"
-                className="text-sm text-gray-500 hover:text-gray-900"
-              >
-                View all destinations &rarr;
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Features */}
+      {/* ── Features ── */}
       {!hasFiles && (
         <section className="py-20 px-4 sm:px-6 border-t border-gray-100">
           <div className="max-w-5xl mx-auto">
@@ -198,7 +146,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* Privacy badge */}
+      {/* ── Privacy badge ── */}
       {!hasFiles && (
         <section className="py-12 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
@@ -221,14 +169,14 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* SiteGround banner — always visible */}
+      {/* ── SiteGround banner ── sempre visibile */}
       <div className="px-4 sm:px-6 pb-6">
         <div className="max-w-3xl mx-auto">
           <SiteGroundBanner variant="web-hosting" />
         </div>
       </div>
 
-      {/* CTA */}
+      {/* ── CTA ── */}
       {!hasFiles && (
         <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
           <div className="max-w-xl mx-auto text-center">

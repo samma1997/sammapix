@@ -142,7 +142,7 @@ export default function Navbar() {
             {d.nav.tools}
           </Link>
           <Link
-            href="/destinations"
+            href="/portfolio"
             className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
           >
             Portfolio
@@ -217,7 +217,7 @@ export default function Navbar() {
               {d.nav.tools}
             </Link>
             <Link
-              href="/destinations"
+              href="/portfolio"
               className="py-2 text-sm text-gray-600 hover:text-gray-900"
               onClick={() => setMobileOpen(false)}
             >

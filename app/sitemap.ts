@@ -18,16 +18,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
 
-  const destinationRoutes = [
-    "/destinations",
-    "/destinations/sri-lanka-2025",
-    "/destinations/bali-2024",
-    "/destinations/thailand-2024",
-    "/destinations/japan-2023",
-    "/destinations/china-2023",
+  const portfolioRoutes = [
+    "/portfolio",
+    "/portfolio/sri-lanka-2025",
+    "/portfolio/bali-2024",
+    "/portfolio/thailand-2024",
+    "/portfolio/japan-2023",
+    "/portfolio/china-2023",
   ];
 
-  const destinationEntries: MetadataRoute.Sitemap = destinationRoutes.map((route) => ({
+  const portfolioEntries: MetadataRoute.Sitemap = portfolioRoutes.map((route) => ({
     url: `${BASE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
@@ -41,6 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: (route === "" ? "daily" : "weekly") as MetadataRoute.Sitemap[number]["changeFrequency"],
       priority: route === "" ? 1 : 0.8,
     })),
-    ...destinationEntries,
+    ...portfolioEntries,
   ];
 }
