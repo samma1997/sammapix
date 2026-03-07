@@ -368,30 +368,48 @@ export default function TravelMapClient() {
             date = new Date(exifData.CreateDate);
           }
 
-          // Try to extract embedded JPEG thumbnail via exifr (works for HEIC and JPEG)
+          // Extract thumbnail: use exifr.thumbnail for HEIC/JPEG embedded preview,
+          // fall back to heic2any conversion for HEIC without embedded thumb.
           let thumbnailUrl: string | undefined;
+          const isHeic =
+            file.name.toLowerCase().endsWith(".heic") ||
+            file.name.toLowerCase().endsWith(".heif") ||
+            file.type === "image/heic" ||
+            file.type === "image/heif";
+          const isJpeg =
+            file.type === "image/jpeg" ||
+            file.name.toLowerCase().endsWith(".jpg") ||
+            file.name.toLowerCase().endsWith(".jpeg");
+
           try {
             const thumbData = await exifr.thumbnail(file);
-            if (thumbData) {
-              // thumbData may be Buffer or Uint8Array; copy into a plain ArrayBuffer
-              // so it is a valid BlobPart in strict TypeScript
-              const buf = thumbData.buffer.slice(
-                thumbData.byteOffset,
-                thumbData.byteOffset + thumbData.byteLength
-              ) as ArrayBuffer;
-              const blob = new Blob([buf], { type: "image/jpeg" });
+            if (thumbData && thumbData.length > 0) {
+              // Copy into a clean Uint8Array to satisfy strict BlobPart types
+              const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
               thumbnailUrl = URL.createObjectURL(blob);
             }
           } catch {
-            // no embedded thumbnail — skip
+            // no embedded thumbnail
           }
-          // Fallback for JPEG only (Chrome cannot display HEIC blobs)
-          if (
-            !thumbnailUrl &&
-            (file.type === "image/jpeg" ||
-              file.name.toLowerCase().endsWith(".jpg") ||
-              file.name.toLowerCase().endsWith(".jpeg"))
-          ) {
+
+          // For HEIC without embedded thumb: convert first slice via heic2any
+          if (!thumbnailUrl && isHeic) {
+            try {
+              const heic2anyLib = await import("heic2any");
+              const heic2any = (heic2anyLib as unknown as { default: (o: {blob: Blob; toType: string; quality: number}) => Promise<Blob | Blob[]> }).default ?? heic2anyLib;
+              const jpegBlob = await (heic2any as (o: {blob: Blob; toType: string; quality: number}) => Promise<Blob | Blob[]>)({
+                blob: file,
+                toType: "image/jpeg",
+                quality: 0.3,
+              });
+              thumbnailUrl = URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
+            } catch {
+              // conversion failed — no thumbnail
+            }
+          }
+
+          // Fallback for plain JPEG
+          if (!thumbnailUrl && isJpeg) {
             thumbnailUrl = URL.createObjectURL(file);
           }
 
