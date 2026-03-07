@@ -13,22 +13,52 @@ export const metadata: Metadata = {
 // ─── Mini SVG illustrations ────────────────────────────────────────────────
 
 function IconCrunch() {
+  const css = `
+    @keyframes crunch-photo-shrink {
+      0%, 100% { transform: scale(1); transform-origin: center center; }
+      50% { transform: scale(0.88); transform-origin: center center; }
+    }
+    @keyframes crunch-arrow-slide {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(5px); }
+    }
+    @keyframes crunch-small-pop {
+      0%, 40% { transform: scale(0.7); opacity: 0.4; }
+      60%, 100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes crunch-wave-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    #crunch-big-photo { animation: crunch-photo-shrink 2.4s ease-in-out infinite; }
+    #crunch-arrow-group { animation: crunch-arrow-slide 2.4s ease-in-out infinite; }
+    #crunch-small-photo { animation: crunch-small-pop 2.4s ease-in-out infinite; }
+    #crunch-wave-top { animation: crunch-wave-pulse 2.4s ease-in-out 0s infinite; }
+    #crunch-wave-bot { animation: crunch-wave-pulse 2.4s ease-in-out 0.4s infinite; }
+  `;
   return (
     <svg width="80" height="64" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Foto originale grande */}
-      <rect x="4" y="8" width="32" height="24" rx="2" stroke="#171717" strokeWidth="1.5" fill="#F5F5F5"/>
-      <rect x="8" y="12" width="10" height="7" rx="1" fill="#D4D4D4"/>
-      <path d="M8 28 L16 20 L24 26 L32 18" stroke="#A3A3A3" strokeWidth="1" fill="none"/>
+      <g id="crunch-big-photo">
+        <rect x="4" y="8" width="32" height="24" rx="2" stroke="#171717" strokeWidth="1.5" fill="#F5F5F5"/>
+        <rect x="8" y="12" width="10" height="7" rx="1" fill="#D4D4D4"/>
+        <path d="M8 28 L16 20 L24 26 L32 18" stroke="#A3A3A3" strokeWidth="1" fill="none"/>
+      </g>
       {/* Freccia compressione */}
-      <path d="M40 20 L52 20" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M49 17 L52 20 L49 23" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <g id="crunch-arrow-group">
+        <path d="M40 20 L52 20" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M49 17 L52 20 L49 23" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </g>
       {/* Onde compressione */}
-      <path d="M43 16 Q45 14 47 16 Q49 18 51 16" stroke="#6366F1" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      <path d="M43 24 Q45 22 47 24 Q49 26 51 24" stroke="#6366F1" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <path id="crunch-wave-top" d="M43 16 Q45 14 47 16 Q49 18 51 16" stroke="#6366F1" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <path id="crunch-wave-bot" d="M43 24 Q45 22 47 24 Q49 26 51 24" stroke="#6366F1" strokeWidth="1" fill="none" strokeLinecap="round"/>
       {/* Foto compressa piccola */}
-      <rect x="56" y="12" width="20" height="15" rx="2" stroke="#171717" strokeWidth="1.5" fill="#F5F5F5"/>
-      <rect x="59" y="15" width="6" height="4" rx="1" fill="#D4D4D4"/>
-      <path d="M59 25 L62 21 L66 24 L72 19" stroke="#A3A3A3" strokeWidth="1" fill="none"/>
+      <g id="crunch-small-photo">
+        <rect x="56" y="12" width="20" height="15" rx="2" stroke="#171717" strokeWidth="1.5" fill="#F5F5F5"/>
+        <rect x="59" y="15" width="6" height="4" rx="1" fill="#D4D4D4"/>
+        <path d="M59 25 L62 21 L66 24 L72 19" stroke="#A3A3A3" strokeWidth="1" fill="none"/>
+      </g>
       {/* Label WebP */}
       <rect x="54" y="42" width="26" height="12" rx="3" fill="#171717"/>
       <text x="67" y="51" fontSize="7" fontWeight="600" fill="white" textAnchor="middle" fontFamily="monospace">WebP</text>
@@ -37,33 +67,73 @@ function IconCrunch() {
 }
 
 function IconGeoSort() {
+  const css = `
+    @keyframes geosort-pin-drop {
+      0%, 15% { transform: translateY(-12px); opacity: 0; }
+      30% { transform: translateY(2px); opacity: 1; }
+      40%, 100% { transform: translateY(0px); opacity: 1; }
+    }
+    @keyframes geosort-wave-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    #geosort-pin-1 { animation: geosort-pin-drop 3s ease-out 0s infinite; }
+    #geosort-pin-2 { animation: geosort-pin-drop 3s ease-out 0.5s infinite; }
+    #geosort-pin-3 { animation: geosort-pin-drop 3s ease-out 1s infinite; }
+    #geosort-wave { animation: geosort-wave-pulse 3s ease-in-out infinite; }
+  `;
   return (
     <svg width="80" height="64" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Mappa stilizzata */}
       <rect x="8" y="10" width="64" height="44" rx="3" stroke="#6366F1" strokeWidth="1.5" fill="#EEF2FF"/>
       {/* Linee mappa */}
-      <path d="M8 28 Q25 22 40 30 Q55 38 72 28" stroke="#C7D2FE" strokeWidth="1" fill="none"/>
+      <path id="geosort-wave" d="M8 28 Q25 22 40 30 Q55 38 72 28" stroke="#C7D2FE" strokeWidth="1" fill="none"/>
       <path d="M20 10 L20 54" stroke="#C7D2FE" strokeWidth="0.75" strokeDasharray="3 3"/>
       <path d="M50 10 L50 54" stroke="#C7D2FE" strokeWidth="0.75" strokeDasharray="3 3"/>
       {/* Pin Giappone */}
-      <circle cx="56" cy="20" r="5" fill="#6366F1"/>
-      <path d="M56 25 L56 32" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="56" cy="20" r="2" fill="white"/>
+      <g id="geosort-pin-1">
+        <circle cx="56" cy="20" r="5" fill="#6366F1"/>
+        <path d="M56 25 L56 32" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="56" cy="20" r="2" fill="white"/>
+      </g>
       {/* Pin Italia */}
-      <circle cx="26" cy="35" r="5" fill="#171717"/>
-      <path d="M26 40 L26 47" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="26" cy="35" r="2" fill="white"/>
+      <g id="geosort-pin-2">
+        <circle cx="26" cy="35" r="5" fill="#171717"/>
+        <path d="M26 40 L26 47" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="26" cy="35" r="2" fill="white"/>
+      </g>
       {/* Pin Thailandia */}
-      <circle cx="44" cy="18" r="4" fill="#F59E0B"/>
-      <path d="M44 22 L44 28" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="44" cy="18" r="1.5" fill="white"/>
+      <g id="geosort-pin-3">
+        <circle cx="44" cy="18" r="4" fill="#F59E0B"/>
+        <path d="M44 22 L44 28" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="44" cy="18" r="1.5" fill="white"/>
+      </g>
     </svg>
   );
 }
 
 function IconExifLens() {
+  const css = `
+    @keyframes exif-scan {
+      0%, 100% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+    }
+    @keyframes exif-line-1 {
+      0%, 30% { opacity: 0; }
+      50%, 100% { opacity: 1; }
+    }
+    @keyframes exif-line-2 {
+      0%, 50% { opacity: 0; }
+      70%, 100% { opacity: 1; }
+    }
+    #exif-magnifier { animation: exif-scan 2s ease-in-out infinite; }
+    #exif-meta-1 { animation: exif-line-1 2s ease-in-out infinite; }
+    #exif-meta-2 { animation: exif-line-2 2s ease-in-out infinite; }
+  `;
   return (
     <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Corpo macchina */}
       <rect x="8" y="16" width="40" height="30" rx="3" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
       <rect x="12" y="10" width="12" height="8" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
@@ -71,72 +141,138 @@ function IconExifLens() {
       <circle cx="28" cy="31" r="9" stroke="#404040" strokeWidth="1.5" fill="white"/>
       <circle cx="28" cy="31" r="5" stroke="#D4D4D4" strokeWidth="1"/>
       <circle cx="28" cy="31" r="2" fill="#404040"/>
-      {/* Lente/Magnifier overlay */}
-      <circle cx="52" cy="20" r="12" stroke="#6366F1" strokeWidth="1.5" fill="white" fillOpacity="0.9"/>
-      <circle cx="52" cy="20" r="7" stroke="#6366F1" strokeWidth="1"/>
-      {/* Linee metadata dentro la lente */}
-      <line x1="47" y1="18" x2="57" y2="18" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
-      <line x1="47" y1="21" x2="54" y2="21" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
-      {/* Handle lente */}
-      <line x1="61" y1="29" x2="66" y2="34" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/>
+      {/* Lente/Magnifier overlay — si muove left-right */}
+      <g id="exif-magnifier">
+        <circle cx="52" cy="20" r="12" stroke="#6366F1" strokeWidth="1.5" fill="white" fillOpacity="0.9"/>
+        <circle cx="52" cy="20" r="7" stroke="#6366F1" strokeWidth="1"/>
+        {/* Linee metadata dentro la lente */}
+        <line id="exif-meta-1" x1="47" y1="18" x2="57" y2="18" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
+        <line id="exif-meta-2" x1="47" y1="21" x2="54" y2="21" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
+        {/* Handle lente */}
+        <line x1="61" y1="29" x2="66" y2="34" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/>
+      </g>
     </svg>
   );
 }
 
 function IconCull() {
+  const css = `
+    @keyframes cull-stack-flip {
+      0%, 100% { transform: rotate(-8deg); transform-origin: center center; }
+      50% { transform: rotate(0deg); transform-origin: center center; }
+    }
+    @keyframes cull-check-pulse {
+      0%, 100% { transform: scale(1); transform-origin: 54px 20px; }
+      50% { transform: scale(1.12); transform-origin: 54px 20px; }
+    }
+    @keyframes cull-x-pulse {
+      0%, 100% { transform: scale(1); transform-origin: 54px 44px; }
+      50% { transform: scale(1.12); transform-origin: 54px 44px; }
+    }
+    #cull-stack { animation: cull-stack-flip 2s ease-in-out infinite; }
+    #cull-check { animation: cull-check-pulse 1.6s ease-in-out 0s infinite; }
+    #cull-x { animation: cull-x-pulse 1.6s ease-in-out 0.5s infinite; }
+  `;
   return (
     <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Stack foto dietro */}
-      <rect x="18" y="8" width="36" height="26" rx="2" stroke="#D4D4D4" strokeWidth="1.5" fill="#FAFAFA" transform="rotate(-6 18 8)"/>
-      <rect x="16" y="12" width="36" height="26" rx="2" stroke="#A3A3A3" strokeWidth="1.5" fill="#F5F5F5" transform="rotate(-2 16 12)"/>
+      <g id="cull-stack">
+        <rect x="18" y="8" width="36" height="26" rx="2" stroke="#D4D4D4" strokeWidth="1.5" fill="#FAFAFA" transform="rotate(-6 18 8)"/>
+        <rect x="16" y="12" width="36" height="26" rx="2" stroke="#A3A3A3" strokeWidth="1.5" fill="#F5F5F5" transform="rotate(-2 16 12)"/>
+      </g>
       {/* Foto principale */}
       <rect x="14" y="16" width="36" height="26" rx="2" stroke="#171717" strokeWidth="1.5" fill="white"/>
       <rect x="18" y="20" width="12" height="8" rx="1" fill="#E5E5E5"/>
       <path d="M18 38 L26 30 L34 36 L42 26" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
       {/* Checkmark verde */}
-      <circle cx="54" cy="20" r="9" fill="#16A34A"/>
-      <path d="M49 20 L52 23 L59 16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <g id="cull-check">
+        <circle cx="54" cy="20" r="9" fill="#16A34A"/>
+        <path d="M49 20 L52 23 L59 16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </g>
       {/* X rossa */}
-      <circle cx="54" cy="44" r="9" fill="#DC2626"/>
-      <path d="M50 40 L58 48 M58 40 L50 48" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+      <g id="cull-x">
+        <circle cx="54" cy="44" r="9" fill="#DC2626"/>
+        <path d="M50 40 L58 48 M58 40 L50 48" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+      </g>
     </svg>
   );
 }
 
 function IconResizePack() {
+  const css = `
+    @keyframes resize-photo-shrink {
+      0%, 100% { transform: scale(1); transform-origin: 22px 20px; }
+      50% { transform: scale(0.85); transform-origin: 22px 20px; }
+    }
+    @keyframes resize-result-pop {
+      0%, 40% { transform: scale(0.7); opacity: 0.3; transform-origin: 56px 41px; }
+      65%, 100% { transform: scale(1); opacity: 1; transform-origin: 56px 41px; }
+    }
+    @keyframes resize-arrow-draw {
+      0% { stroke-dashoffset: 40; opacity: 1; }
+      50% { stroke-dashoffset: 0; opacity: 1; }
+      75% { stroke-dashoffset: 0; opacity: 0.3; }
+      100% { stroke-dashoffset: 40; opacity: 1; }
+    }
+    #resize-big-photo { animation: resize-photo-shrink 2.4s ease-in-out infinite; }
+    #resize-result { animation: resize-result-pop 2.4s ease-in-out infinite; }
+    #resize-arrow-1 { stroke-dasharray: 40; animation: resize-arrow-draw 2.4s ease-in-out 0s infinite; }
+    #resize-arrow-2 { stroke-dasharray: 40; animation: resize-arrow-draw 2.4s ease-in-out 0.3s infinite; }
+  `;
   return (
     <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Foto grande */}
-      <rect x="4" y="6" width="36" height="28" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
-      <rect x="8" y="10" width="10" height="7" rx="1" fill="#E5E5E5"/>
-      {/* Frecce resize che puntano inward */}
-      <path d="M44 14 L54 14 L54 24" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M44 14 L48 10" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M4 40 L4 50 L14 50" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M4 50 L0 54" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
+      <g id="resize-big-photo">
+        <rect x="4" y="6" width="36" height="28" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
+        <rect x="8" y="10" width="10" height="7" rx="1" fill="#E5E5E5"/>
+      </g>
+      {/* Frecce resize */}
+      <path id="resize-arrow-1" d="M44 14 L54 14 L54 24" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      <path id="resize-arrow-2" d="M4 40 L4 50 L14 50" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
       {/* Foto piccola risultato */}
-      <rect x="44" y="32" width="24" height="18" rx="2" stroke="#6366F1" strokeWidth="1.5" fill="#EEF2FF"/>
-      <rect x="47" y="35" width="6" height="4" rx="1" fill="#C7D2FE"/>
-      {/* Misure */}
-      <text x="56" y="52" fontSize="7" fill="#6366F1" textAnchor="middle" fontWeight="600" fontFamily="monospace">500KB</text>
+      <g id="resize-result">
+        <rect x="44" y="32" width="24" height="18" rx="2" stroke="#6366F1" strokeWidth="1.5" fill="#EEF2FF"/>
+        <rect x="47" y="35" width="6" height="4" rx="1" fill="#C7D2FE"/>
+        <text x="56" y="52" fontSize="7" fill="#6366F1" textAnchor="middle" fontWeight="600" fontFamily="monospace">500KB</text>
+      </g>
     </svg>
   );
 }
 
 function IconStampIt() {
+  const css = `
+    @keyframes stamp-press {
+      0%, 100% { transform: translateY(-18px); }
+      40%, 60% { transform: translateY(8px); }
+      50% { transform: translateY(6px); }
+    }
+    @keyframes stamp-mark-flash {
+      0%, 35% { opacity: 0; transform: scaleY(0.6); transform-origin: center bottom; }
+      50%, 100% { opacity: 1; transform: scaleY(1); transform-origin: center bottom; }
+    }
+    #stamp-tool { animation: stamp-press 2s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite; }
+    #stamp-mark { animation: stamp-mark-flash 2s ease-out infinite; }
+  `;
   return (
     <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Foto sotto */}
       <rect x="6" y="24" width="60" height="32" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
       <rect x="10" y="28" width="14" height="10" rx="1" fill="#E5E5E5"/>
-      {/* Stamp tool */}
-      <rect x="26" y="2" width="20" height="10" rx="2" fill="#171717"/>
-      <rect x="30" y="12" width="12" height="6" rx="1" fill="#404040"/>
-      {/* Timbro applicato */}
-      <rect x="20" y="38" width="32" height="12" rx="1" stroke="#6366F1" strokeWidth="1.5" strokeDasharray="3 2" fill="#EEF2FF"/>
-      <text x="36" y="47" fontSize="7" fill="#6366F1" textAnchor="middle" fontWeight="600" fontFamily="monospace">© 2025</text>
+      {/* Stamp tool — si abbassa e risale */}
+      <g id="stamp-tool">
+        <rect x="26" y="2" width="20" height="10" rx="2" fill="#171717"/>
+        <rect x="30" y="12" width="12" height="6" rx="1" fill="#404040"/>
+      </g>
       {/* Freccia applicazione */}
       <path d="M36 18 L36 36" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3"/>
+      {/* Timbro applicato — appare quando lo stamp tocca */}
+      <g id="stamp-mark">
+        <rect x="20" y="38" width="32" height="12" rx="1" stroke="#6366F1" strokeWidth="1.5" strokeDasharray="3 2" fill="#EEF2FF"/>
+        <text x="36" y="47" fontSize="7" fill="#6366F1" textAnchor="middle" fontWeight="600" fontFamily="monospace">© 2025</text>
+      </g>
     </svg>
   );
 }
@@ -164,49 +300,116 @@ function IconCropRatio() {
 }
 
 function IconTwinHunt() {
+  const css = `
+    @keyframes twin-marching-ants {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -16; }
+    }
+    @keyframes twin-equals-pulse {
+      0%, 100% { transform: scale(1); transform-origin: 36px 30px; }
+      50% { transform: scale(1.25); transform-origin: 36px 30px; }
+    }
+    @keyframes twin-frame-glow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    #twin-line { stroke-dasharray: 4 4; animation: twin-marching-ants 0.8s linear infinite; }
+    #twin-equals { animation: twin-equals-pulse 1.8s ease-in-out infinite; }
+    #twin-frame-1 { animation: twin-frame-glow 1.8s ease-in-out 0s infinite; }
+    #twin-frame-2 { animation: twin-frame-glow 1.8s ease-in-out 0.9s infinite; }
+  `;
   return (
     <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>{css}</style>
       {/* Foto 1 */}
-      <rect x="2" y="10" width="30" height="40" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
-      <rect x="6" y="14" width="10" height="7" rx="1" fill="#E5E5E5"/>
-      <path d="M6 42 L12 34 L18 40 L26 30" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
+      <g id="twin-frame-1">
+        <rect x="2" y="10" width="30" height="40" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
+        <rect x="6" y="14" width="10" height="7" rx="1" fill="#E5E5E5"/>
+        <path d="M6 42 L12 34 L18 40 L26 30" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
+      </g>
       {/* Foto 2 — quasi identica */}
-      <rect x="40" y="10" width="30" height="40" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
-      <rect x="44" y="14" width="10" height="7" rx="1" fill="#E5E5E5"/>
-      <path d="M44 42 L50 34 L56 40 L64 30" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
-      {/* Connessione similiarity */}
-      <path d="M32 30 L40 30" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 2"/>
-      <circle cx="36" cy="30" r="5" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5"/>
-      <text x="36" y="33" fontSize="6" fill="#92400E" textAnchor="middle" fontWeight="700">=</text>
+      <g id="twin-frame-2">
+        <rect x="40" y="10" width="30" height="40" rx="2" stroke="#404040" strokeWidth="1.5" fill="#FAFAFA"/>
+        <rect x="44" y="14" width="10" height="7" rx="1" fill="#E5E5E5"/>
+        <path d="M44 42 L50 34 L56 40 L64 30" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
+      </g>
+      {/* Linea tratteggiata animata — marching ants */}
+      <path id="twin-line" d="M32 30 L40 30" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Centro equals */}
+      <g id="twin-equals">
+        <circle cx="36" cy="30" r="5" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5"/>
+        <text x="36" y="33" fontSize="6" fill="#92400E" textAnchor="middle" fontWeight="700">=</text>
+      </g>
     </svg>
   );
 }
 
 function IconFilmLab() {
+  const css = `
+    @keyframes film-scroll {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(-20px); }
+    }
+    @keyframes film-frame-1 {
+      0%, 30% { opacity: 1; }
+      40%, 66% { opacity: 0.25; }
+      75%, 100% { opacity: 1; }
+    }
+    @keyframes film-frame-2 {
+      0%, 10% { opacity: 0.25; }
+      30%, 60% { opacity: 1; }
+      70%, 100% { opacity: 0.25; }
+    }
+    @keyframes film-frame-3 {
+      0%, 55% { opacity: 0.25; }
+      70%, 90% { opacity: 1; }
+      100% { opacity: 0.25; }
+    }
+    #film-strip { animation: film-scroll 2.4s ease-in-out infinite; }
+    #film-f1 { animation: film-frame-1 2.4s ease-in-out infinite; }
+    #film-f2 { animation: film-frame-2 2.4s ease-in-out infinite; }
+    #film-f3 { animation: film-frame-3 2.4s ease-in-out infinite; }
+  `;
   return (
-    <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Film strip */}
-      <rect x="4" y="10" width="64" height="40" rx="2" fill="#171717"/>
-      {/* Perforazioni sinistra */}
-      {[14, 26, 38, 50].map(x => (
-        <rect key={x} x={x} y="13" width="6" height="8" rx="1" fill="#404040"/>
-      ))}
-      {[14, 26, 38, 50].map(x => (
-        <rect key={x + 100} x={x} y="39" width="6" height="8" rx="1" fill="#404040"/>
-      ))}
-      {/* Frame 1 — con grain/colore */}
-      <rect x="8" y="24" width="18" height="12" rx="1" fill="#92400E" fillOpacity="0.7"/>
-      <circle cx="11" cy="27" r="1" fill="#FEF3C7" fillOpacity="0.6"/>
-      <circle cx="16" cy="31" r="0.75" fill="#FEF3C7" fillOpacity="0.5"/>
-      <circle cx="22" cy="26" r="0.75" fill="#FEF3C7" fillOpacity="0.6"/>
-      {/* Frame 2 — B&W */}
-      <rect x="28" y="24" width="18" height="12" rx="1" fill="#737373"/>
-      <circle cx="31" cy="28" r="1" fill="white" fillOpacity="0.4"/>
-      <circle cx="38" cy="32" r="0.75" fill="white" fillOpacity="0.3"/>
-      {/* Frame 3 — cross process */}
-      <rect x="48" y="24" width="18" height="12" rx="1" fill="#0369A1" fillOpacity="0.6"/>
-      <circle cx="52" cy="27" r="1" fill="#7DD3FC" fillOpacity="0.7"/>
-      <circle cx="59" cy="31" r="0.75" fill="#7DD3FC" fillOpacity="0.5"/>
+    <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "hidden" }}>
+      <style>{css}</style>
+      {/* Clip per tenere il film dentro i bordi */}
+      <clipPath id="film-clip">
+        <rect x="4" y="10" width="64" height="40" rx="2"/>
+      </clipPath>
+      <g id="film-strip" clipPath="url(#film-clip)">
+        {/* Film strip background — più largo per permettere scroll */}
+        <rect x="4" y="10" width="84" height="40" rx="2" fill="#171717"/>
+        {/* Perforazioni top */}
+        {[14, 26, 38, 50, 62, 74].map(x => (
+          <rect key={x} x={x} y="13" width="6" height="8" rx="1" fill="#404040"/>
+        ))}
+        {/* Perforazioni bottom */}
+        {[14, 26, 38, 50, 62, 74].map(x => (
+          <rect key={x + 100} x={x} y="39" width="6" height="8" rx="1" fill="#404040"/>
+        ))}
+        {/* Frame 1 — warm/sepia */}
+        <g id="film-f1">
+          <rect x="8" y="24" width="18" height="12" rx="1" fill="#92400E" fillOpacity="0.7"/>
+          <circle cx="11" cy="27" r="1" fill="#FEF3C7" fillOpacity="0.6"/>
+          <circle cx="16" cy="31" r="0.75" fill="#FEF3C7" fillOpacity="0.5"/>
+          <circle cx="22" cy="26" r="0.75" fill="#FEF3C7" fillOpacity="0.6"/>
+        </g>
+        {/* Frame 2 — B&W */}
+        <g id="film-f2">
+          <rect x="28" y="24" width="18" height="12" rx="1" fill="#737373"/>
+          <circle cx="31" cy="28" r="1" fill="white" fillOpacity="0.4"/>
+          <circle cx="38" cy="32" r="0.75" fill="white" fillOpacity="0.3"/>
+        </g>
+        {/* Frame 3 — cross process */}
+        <g id="film-f3">
+          <rect x="48" y="24" width="18" height="12" rx="1" fill="#0369A1" fillOpacity="0.6"/>
+          <circle cx="52" cy="27" r="1" fill="#7DD3FC" fillOpacity="0.7"/>
+          <circle cx="59" cy="31" r="0.75" fill="#7DD3FC" fillOpacity="0.5"/>
+        </g>
+        {/* Frame 4 — extra per continuità scroll */}
+        <rect x="68" y="24" width="18" height="12" rx="1" fill="#166534" fillOpacity="0.5"/>
+      </g>
     </svg>
   );
 }
