@@ -29,7 +29,7 @@ interface PhotoEntry {
   previewUrl: string | null | undefined;
 }
 
-const MAX_CULL_FREE = 100;
+const MAX_CULL_FREE = 150;
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
