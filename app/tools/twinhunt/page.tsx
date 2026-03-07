@@ -1,0 +1,152 @@
+import { Metadata } from "next";
+import { Copy, Search, Zap, HardDrive } from "lucide-react";
+import TwinHunt from "@/components/tools/TwinHunt";
+import ToolHeader from "@/components/tools/ToolHeader";
+import { APP_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Duplicate Photo Finder Online — Free | SammaPix TwinHunt",
+  description:
+    "Find and identify duplicate and near-duplicate photos in your browser. No upload — perceptual hashing runs 100% client-side. Free.",
+  alternates: { canonical: `${APP_URL}/tools/twinhunt` },
+  openGraph: {
+    title: "Duplicate Photo Finder Online — Free | SammaPix TwinHunt",
+    description:
+      "Find and identify duplicate and near-duplicate photos in your browser. No upload — perceptual hashing runs 100% client-side. Free.",
+    url: `${APP_URL}/tools/twinhunt`,
+    siteName: "SammaPix",
+    type: "website",
+  },
+};
+
+const features = [
+  {
+    icon: <Search className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Perceptual hashing",
+    description:
+      "Uses pHash (Discrete Cosine Transform) to compare images by visual content, not file bytes. Finds duplicates even after resizing, re-saving, or minor edits.",
+  },
+  {
+    icon: <Copy className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Near-duplicate detection",
+    description:
+      "Adjustable sensitivity finds exact copies (Hamming distance 0–5), very similar images (6–10), and looser matches (11–20). Tune it to your library.",
+  },
+  {
+    icon: <Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "100% client-side",
+    description:
+      "Every pixel is processed in your browser using Canvas API and DCT. No photo ever leaves your device. Works offline once the page is loaded.",
+  },
+  {
+    icon: <HardDrive className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Reclaim disk space",
+    description:
+      "TwinHunt shows you which photos to delete and how much space you would free. Actual deletion is done in your file manager — we never touch your files.",
+  },
+];
+
+const steps = [
+  {
+    n: "1",
+    title: "Drop your photos",
+    desc: "Select or drag up to 50 images (free) or 500 (Pro). JPG, PNG, WebP, and HEIC are all supported.",
+  },
+  {
+    n: "2",
+    title: "Analysis runs in browser",
+    desc: "A perceptual hash is computed for each photo using DCT. Then every pair is compared. Processing is fast — around 50ms per image.",
+  },
+  {
+    n: "3",
+    title: "Review duplicate groups",
+    desc: "Duplicates are shown side-by-side with file names, sizes, and similarity badges. Check which ones to delete and export a report.",
+  },
+];
+
+const faqs = [
+  {
+    q: "What is perceptual hashing (pHash)?",
+    a: "pHash is an algorithm that generates a 64-bit fingerprint for an image based on its visual content, not its raw bytes. Two images with the same visual content — even if saved differently, resized, or lightly edited — will have fingerprints that are close together (low Hamming distance). TwinHunt uses a DCT-based pHash: the image is reduced to 32×32 grayscale, the Discrete Cosine Transform extracts frequency components, and the top-left 8×8 block encodes the visual signature.",
+  },
+  {
+    q: "Will it find photos that are slightly cropped or colour-adjusted?",
+    a: "It depends on the degree of change. Minor colour adjustments, small crops, and re-compression artefacts are usually within the 'Very similar' threshold (Hamming ≤ 10). Heavy crops, filters, or significant edits will produce a higher Hamming distance and may not be matched at the Normal sensitivity setting. Use the Loose setting to cast a wider net.",
+  },
+  {
+    q: "Are my photos uploaded to a server?",
+    a: "No. TwinHunt processes everything in your browser using the Canvas API and JavaScript. No image data is transmitted to any server. The tool works completely offline once the page has loaded.",
+  },
+  {
+    q: "Does it work with HEIC files from iPhone?",
+    a: "Yes. For preview thumbnails, TwinHunt uses the embedded JPEG thumbnail inside the HEIC file (extracted via exifr) — this is fast and requires no conversion library. The pHash is computed from the full image data via a standard canvas draw, which browsers support for HEIC on macOS and iOS.",
+  },
+  {
+    q: "Can TwinHunt delete my files?",
+    a: "No. Browsers cannot delete files from your filesystem. TwinHunt only identifies duplicates and lets you download a plain-text report listing the files you selected for removal. Actual deletion must be done in your file manager or Finder.",
+  },
+];
+
+export default function TwinHuntPage() {
+  return (
+    <main>
+      <ToolHeader
+        title="TwinHunt"
+        description="Find duplicate and near-duplicate photos in your browser. Perceptual hashing compares visual content — not file bytes. Nothing uploaded, nothing stored."
+      />
+
+      <TwinHunt />
+
+      {/* How it works */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">How it works</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {steps.map((s) => (
+              <div key={s.n} className="p-4 border border-[#E5E5E5] rounded-md bg-white">
+                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] flex items-center justify-center mb-3">
+                  <span className="text-xs font-semibold text-[#525252]">{s.n}</span>
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] mb-1">{s.title}</h3>
+                <p className="text-xs text-[#737373] leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">What TwinHunt does</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {features.map((f) => (
+              <div key={f.title} className="p-5 border border-[#E5E5E5] rounded-md bg-white">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                  {f.icon}
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{f.title}</h3>
+                <p className="text-sm text-[#737373] leading-relaxed">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">Common questions</h2>
+          <div className="space-y-5">
+            {faqs.map((faq) => (
+              <div key={faq.q} className="pb-5 border-b border-[#E5E5E5] last:border-0">
+                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{faq.q}</h3>
+                <p className="text-sm text-[#737373] leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
