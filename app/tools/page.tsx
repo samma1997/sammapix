@@ -14,225 +14,109 @@ export const metadata: Metadata = {
 
 function IconCrunch() {
   const css = `
-    /* ── Phase timing (4s loop) ──────────────────────────────────────────
-       0%–20%   : idle — big photo visible, result hidden
-       25%–55%  : CRUSH — photo squishes horizontally
-       30%–55%  : PARTICLES scatter outward
-       40%–65%  : SIZE COUNTER animates 4.2MB → 890KB
-       50%–70%  : PROGRESS BAR fills
-       65%–80%  : result photo pops in on the right with checkmark
-       85%–100% : hold success → reset
-    ─────────────────────────────────────────────────────────────────── */
+    /*
+      2.5s loop — phases:
+      0%–30%   : idle, big photo visible, result hidden
+      30%–60%  : big photo gently squeezes (scaleX 1 → 0.7 → 1)
+      35%–65%  : arrow pulses rightward
+      55%–80%  : result photo pops in
+      60%–85%  : badge fades in
+      88%–100% : reset (result + badge fade out)
+    */
 
-    /* Big photo — squish scaleX then vanish */
-    @keyframes crunch-squish {
-      0%, 20%  { transform: scaleX(1);    opacity: 1; }
-      45%      { transform: scaleX(0.18); opacity: 1; }
-      60%      { transform: scaleX(0.18); opacity: 0; }
-      61%, 100%{ transform: scaleX(1);    opacity: 0; }
-    }
-    /* Indigo energy glow that pulses during crush */
-    @keyframes crunch-glow {
-      0%, 18%  { opacity: 0; r: 0; }
-      35%      { opacity: 0.55; r: 14; }
-      58%      { opacity: 0;   r: 20; }
-      100%     { opacity: 0;   r: 0; }
-    }
-    /* Left jaw — slides right */
-    @keyframes crunch-jaw-left {
-      0%, 20%  { transform: translateX(0); }
-      50%      { transform: translateX(9px); }
-      62%      { transform: translateX(0); }
-      100%     { transform: translateX(0); }
-    }
-    /* Right jaw — slides left */
-    @keyframes crunch-jaw-right {
-      0%, 20%  { transform: translateX(0); }
-      50%      { transform: translateX(-9px); }
-      62%      { transform: translateX(0); }
-      100%     { transform: translateX(0); }
-    }
-    /* Particles — each bursts out and fades */
-    @keyframes crunch-p1 {
-      0%,28%  { transform: translate(0,0);      opacity: 0; }
-      32%     { opacity: 1; }
-      58%     { transform: translate(-14px,-10px); opacity: 0; }
-      100%    { transform: translate(0,0);      opacity: 0; }
-    }
-    @keyframes crunch-p2 {
-      0%,30%  { transform: translate(0,0);      opacity: 0; }
-      34%     { opacity: 1; }
-      60%     { transform: translate(14px,-12px); opacity: 0; }
-      100%    { transform: translate(0,0);      opacity: 0; }
-    }
-    @keyframes crunch-p3 {
-      0%,29%  { transform: translate(0,0);      opacity: 0; }
-      33%     { opacity: 1; }
-      59%     { transform: translate(-10px,12px); opacity: 0; }
-      100%    { transform: translate(0,0);      opacity: 0; }
-    }
-    @keyframes crunch-p4 {
-      0%,31%  { transform: translate(0,0);      opacity: 0; }
-      35%     { opacity: 1; }
-      61%     { transform: translate(12px,11px);  opacity: 0; }
-      100%    { transform: translate(0,0);      opacity: 0; }
-    }
-    @keyframes crunch-p5 {
-      0%,33%  { transform: translate(0,0);      opacity: 0; }
-      37%     { opacity: 0.9; }
-      63%     { transform: translate(-5px,-16px); opacity: 0; }
-      100%    { transform: translate(0,0);      opacity: 0; }
-    }
-    @keyframes crunch-p6 {
-      0%,32%  { transform: translate(0,0);      opacity: 0; }
-      36%     { opacity: 0.9; }
-      62%     { transform: translate(8px,-15px);  opacity: 0; }
-      100%    { transform: translate(0,0);      opacity: 0; }
-    }
-    /* Progress bar fill */
-    @keyframes crunch-bar {
-      0%,38%  { width: 0; }
-      68%     { width: 38px; }
-      85%,100%{ width: 38px; }
-    }
-    /* File size label — first label fades out, second fades in */
-    @keyframes crunch-size-out {
-      0%,35%  { opacity: 1; }
-      50%,100%{ opacity: 0; }
-    }
-    @keyframes crunch-size-in {
-      0%,48%  { opacity: 0; }
-      62%,100%{ opacity: 1; }
-    }
-    /* Result photo — pops in */
-    @keyframes crunch-result-pop {
-      0%,60%   { transform: scale(0.4); opacity: 0; }
-      72%      { transform: scale(1.08); opacity: 1; }
-      80%,100% { transform: scale(1);   opacity: 1; }
-    }
-    /* Checkmark draw */
-    @keyframes crunch-check-draw {
-      0%,65%  { stroke-dashoffset: 14; opacity: 0; }
-      72%     { opacity: 1; }
-      85%,100%{ stroke-dashoffset: 0;  opacity: 1; }
-    }
-    /* Whole icon resets: result fades out just before loop */
-    @keyframes crunch-result-out {
-      0%,80%  { opacity: 1; }
-      96%,100%{ opacity: 0; }
+    /* Big photo frame — gentle squeeze, no text inside so nothing distorts */
+    @keyframes crunch-squeeze {
+      0%, 28%  { transform: scaleX(1); }
+      52%      { transform: scaleX(0.7); }
+      72%      { transform: scaleX(1); }
+      100%     { transform: scaleX(1); }
     }
 
-    #crunch-big-photo   { transform-origin: 30px 28px; animation: crunch-squish       4s cubic-bezier(0.4,0,0.2,1) infinite; }
-    #crunch-glow        { transform-origin: 30px 28px; animation: crunch-glow         4s ease-in-out infinite; }
-    #crunch-jaw-left    { animation: crunch-jaw-left  4s cubic-bezier(0.4,0,0.2,1) infinite; }
-    #crunch-jaw-right   { animation: crunch-jaw-right 4s cubic-bezier(0.4,0,0.2,1) infinite; }
-    #crunch-p1          { animation: crunch-p1 4s ease-out infinite; }
-    #crunch-p2          { animation: crunch-p2 4s ease-out infinite; }
-    #crunch-p3          { animation: crunch-p3 4s ease-out infinite; }
-    #crunch-p4          { animation: crunch-p4 4s ease-out infinite; }
-    #crunch-p5          { animation: crunch-p5 4s ease-out infinite; }
-    #crunch-p6          { animation: crunch-p6 4s ease-out infinite; }
-    #crunch-bar-fill    { animation: crunch-bar      4s ease-in-out infinite; }
-    #crunch-size-old    { animation: crunch-size-out 4s ease-in-out infinite; }
-    #crunch-size-new    { animation: crunch-size-in  4s ease-in-out infinite; }
-    #crunch-result      { transform-origin: 88px 28px; animation: crunch-result-pop 4s cubic-bezier(0.34,1.56,0.64,1) infinite, crunch-result-out 4s ease-in-out infinite; }
-    #crunch-check-path  { stroke-dasharray: 14; animation: crunch-check-draw 4s ease-out infinite; }
+    /* Arrow — slides right in a push loop during the squeeze phase */
+    @keyframes crunch-arrow {
+      0%, 25%  { transform: translateX(0px); opacity: 0.35; }
+      50%      { transform: translateX(5px); opacity: 1; }
+      72%      { transform: translateX(0px); opacity: 0.35; }
+      100%     { transform: translateX(0px); opacity: 0.35; }
+    }
+
+    /* Result photo — pops in after squeeze */
+    @keyframes crunch-result-in {
+      0%, 52%  { transform: scale(0.5); opacity: 0; }
+      64%      { transform: scale(1.05); opacity: 1; }
+      72%, 86% { transform: scale(1);   opacity: 1; }
+      96%, 100%{ transform: scale(0.5); opacity: 0; }
+    }
+
+    /* Badge — fades in after result appears */
+    @keyframes crunch-badge {
+      0%, 58%  { opacity: 0; }
+      74%, 86% { opacity: 1; }
+      96%, 100%{ opacity: 0; }
+    }
+
+    #crunch-big-frame { transform-origin: 22px 28px; animation: crunch-squeeze 2.5s cubic-bezier(0.4,0,0.2,1) infinite; }
+    #crunch-arrow     { animation: crunch-arrow  2.5s ease-in-out infinite; }
+    #crunch-result    { transform-origin: 76px 25px; animation: crunch-result-in 2.5s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    #crunch-badge     { animation: crunch-badge 2.5s ease-in-out infinite; }
   `;
 
   return (
-    <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="110" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
       <style>{css}</style>
 
-      {/* ── BIG PHOTO (left) ─────────────────────────────────────────────── */}
-      <g id="crunch-big-photo">
-        {/* Frame */}
-        <rect x="6" y="10" width="48" height="36" rx="3" fill="#171717" stroke="#0A0A0A" strokeWidth="1"/>
-        {/* Sky gradient band */}
-        <rect x="9" y="13" width="42" height="18" rx="1" fill="#1E3A5F"/>
-        {/* Sun */}
-        <circle cx="44" cy="19" r="4" fill="#F59E0B" fillOpacity="0.9"/>
-        {/* Mountain silhouette */}
-        <path d="M9 31 L17 20 L25 28 L33 16 L42 28 L51 22 L51 31 Z" fill="#0F2744"/>
-        {/* Ground / landscape lines */}
-        <rect x="9" y="31" width="42" height="12" rx="0" fill="#2D4A2D"/>
-        <path d="M9 35 Q20 32 30 36 Q40 40 51 34" stroke="#1A3A1A" strokeWidth="0.75" fill="none"/>
-        {/* Inner frame highlight */}
-        <rect x="9" y="13" width="42" height="30" rx="1" stroke="#ffffff10" strokeWidth="0.5" fill="none"/>
-        {/* File size label OLD: 4.2 MB */}
-        <g id="crunch-size-old">
-          <rect x="6" y="49" width="48" height="11" rx="2" fill="#F5F5F5" stroke="#E5E5E5" strokeWidth="0.75"/>
-          <text x="30" y="58" fontSize="6.5" fontWeight="700" fill="#171717" textAnchor="middle" fontFamily="monospace">4.2 MB</text>
-        </g>
-        {/* File size label NEW: 890 KB */}
-        <g id="crunch-size-new" style={{ opacity: 0 }}>
-          <rect x="6" y="49" width="48" height="11" rx="2" fill="#DCFCE7" stroke="#16A34A" strokeWidth="0.75"/>
-          <text x="30" y="58" fontSize="6.5" fontWeight="700" fill="#16A34A" textAnchor="middle" fontFamily="monospace">890 KB</text>
-        </g>
+      {/* ── BIG PHOTO (left) — frame + landscape lines, NO text inside ── */}
+      <g id="crunch-big-frame">
+        {/* Outer frame */}
+        <rect x="4" y="10" width="36" height="26" rx="2.5" fill="#E5E5E5" stroke="#171717" strokeWidth="1.25"/>
+        {/* Sky band */}
+        <rect x="7" y="13" width="30" height="12" rx="1" fill="#D4D4D4"/>
+        {/* Horizon line */}
+        <line x1="7" y1="25" x2="37" y2="25" stroke="#A3A3A3" strokeWidth="0.75"/>
+        {/* Ground band */}
+        <rect x="7" y="25" width="30" height="8" rx="0" fill="#C4C4C4"/>
+        {/* Simple mountain peak */}
+        <path d="M12 25 L19 17 L26 25" fill="#A3A3A3"/>
+        {/* Rolling hill */}
+        <path d="M7 25 Q14 21 22 25 Q30 29 37 24" stroke="#909090" strokeWidth="0.6" fill="none"/>
       </g>
 
-      {/* ── INDIGO ENERGY GLOW (center burst during crush) ───────────────── */}
-      <circle id="crunch-glow" cx="30" cy="28" r="0" fill="#6366F1" fillOpacity="0.18" style={{ opacity: 0 }}/>
-
-      {/* ── CRUSH JAWS ───────────────────────────────────────────────────── */}
-      {/* Left jaw — a thick indigo chevron pointing right */}
-      <g id="crunch-jaw-left">
-        <path d="M2 22 L10 28 L2 34" stroke="#6366F1" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        <path d="M6 22 L14 28 L6 34" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.5"/>
-      </g>
-      {/* Right jaw — pointing left */}
-      <g id="crunch-jaw-right">
-        <path d="M58 22 L50 28 L58 34" stroke="#6366F1" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        <path d="M54 22 L46 28 L54 34" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.5"/>
-      </g>
-
-      {/* ── PARTICLES (origin: center of big photo) ──────────────────────── */}
-      <circle id="crunch-p1" cx="30" cy="28" r="2"   fill="#6366F1" style={{ opacity: 0 }}/>
-      <circle id="crunch-p2" cx="30" cy="28" r="1.5" fill="#818CF8" style={{ opacity: 0 }}/>
-      <circle id="crunch-p3" cx="30" cy="28" r="2"   fill="#6366F1" style={{ opacity: 0 }}/>
-      <circle id="crunch-p4" cx="30" cy="28" r="1.5" fill="#A5B4FC" style={{ opacity: 0 }}/>
-      <circle id="crunch-p5" cx="30" cy="28" r="1"   fill="#C7D2FE" style={{ opacity: 0 }}/>
-      <circle id="crunch-p6" cx="30" cy="28" r="1"   fill="#6366F1" style={{ opacity: 0 }}/>
-
-      {/* ── PROGRESS BAR ─────────────────────────────────────────────────── */}
-      {/* Track */}
-      <rect x="38" y="72" width="38" height="3.5" rx="1.75" fill="#E5E5E5"/>
-      {/* Fill — width animated via CSS but SVG doesn't support width keyframes easily,
-          so we fake it with a clipPath trick using scaleX on a full-width rect */}
-      <clipPath id="crunch-bar-clip">
-        <rect id="crunch-bar-fill" x="38" y="72" width="0" height="3.5" rx="1.75"/>
-      </clipPath>
-      <rect x="38" y="72" width="38" height="3.5" rx="1.75" fill="#6366F1" clipPath="url(#crunch-bar-clip)"/>
-      {/* Label */}
-      <text x="57" y="70" fontSize="5.5" fill="#A3A3A3" textAnchor="middle" fontFamily="monospace">Compressing…</text>
-
-      {/* ── RESULT PHOTO (right) ─────────────────────────────────────────── */}
-      <g id="crunch-result" style={{ opacity: 0 }}>
-        {/* Frame — smaller, green border = success */}
-        <rect x="74" y="14" width="32" height="24" rx="3" fill="#171717" stroke="#16A34A" strokeWidth="1.5"/>
-        {/* Sky */}
-        <rect x="77" y="17" width="26" height="12" rx="1" fill="#1E3A5F"/>
-        {/* Sun */}
-        <circle cx="97" cy="21" r="2.5" fill="#F59E0B" fillOpacity="0.9"/>
-        {/* Mountain */}
-        <path d="M77 29 L82 22 L87 27 L92 19 L98 27 L103 24 L103 29 Z" fill="#0F2744"/>
-        {/* Ground */}
-        <rect x="77" y="29" width="26" height="8" rx="0" fill="#2D4A2D"/>
-        {/* Green checkmark badge */}
-        <circle cx="106" cy="14" r="7" fill="#16A34A"/>
+      {/* ── ARROW (middle) — indigo, animates right ── */}
+      <g id="crunch-arrow">
         <path
-          id="crunch-check-path"
-          d="M102 14 L105 17 L110 11"
-          stroke="white"
-          strokeWidth="2"
+          d="M46 28 L54 28 M50 24 L54 28 L50 32"
+          stroke="#6366F1"
+          strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
-          strokeDasharray="14"
-          strokeDashoffset="14"
         />
-        {/* Compressed size badge */}
-        <rect x="74" y="41" width="32" height="10" rx="2" fill="#DCFCE7" stroke="#16A34A" strokeWidth="0.75"/>
-        <text x="90" y="49" fontSize="6" fontWeight="700" fill="#16A34A" textAnchor="middle" fontFamily="monospace">890 KB  -79%</text>
+      </g>
+
+      {/* ── RESULT PHOTO (right) — smaller frame, pops in ── */}
+      <g id="crunch-result" style={{ opacity: 0 }}>
+        {/* Outer frame — black stroke, gray fill */}
+        <rect x="60" y="14" width="24" height="18" rx="2" fill="#E5E5E5" stroke="#171717" strokeWidth="1.25"/>
+        {/* Sky band */}
+        <rect x="63" y="17" width="18" height="7" rx="0.75" fill="#D4D4D4"/>
+        {/* Ground band */}
+        <rect x="63" y="24" width="18" height="5" rx="0" fill="#C4C4C4"/>
+        {/* Mountain peak — smaller */}
+        <path d="M66 24 L71 19 L76 24" fill="#A3A3A3"/>
+      </g>
+
+      {/* ── BADGE "-78%" — fades in below result, indigo accent ── */}
+      <g id="crunch-badge" style={{ opacity: 0 }}>
+        <rect x="62" y="35" width="20" height="9" rx="4.5" fill="#6366F1"/>
+        <text
+          x="72"
+          y="42"
+          fontSize="5.5"
+          fontWeight="700"
+          fill="white"
+          textAnchor="middle"
+          fontFamily="ui-monospace, monospace"
+        >−78%</text>
       </g>
     </svg>
   );
