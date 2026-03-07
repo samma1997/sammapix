@@ -170,26 +170,120 @@ function IconGeoSort() {
 }
 
 function IconTravelMap() {
+  const css = `
+    /*
+      4s loop — phases:
+      0%–25%   : pin 1 appears (indigo, bottom-left) + ping ripple
+      25%–55%  : route path draws from pin 1 toward pin 2
+      50%–70%  : pin 2 drops in (dark, top-center)
+      65%–85%  : route continues and pin 3 appears (indigo, right)
+      85%–100% : all visible, globe gently pulses, then resets
+    */
+
+    /* Route path draw — stroke-dashoffset animates to reveal the path */
+    @keyframes tmap-route-draw {
+      0%, 15%  { stroke-dashoffset: 60; opacity: 0.4; }
+      55%, 90% { stroke-dashoffset: 0;  opacity: 1; }
+      100%     { stroke-dashoffset: 60; opacity: 0.4; }
+    }
+
+    /* Pin 1 — drops in from above */
+    @keyframes tmap-pin1-drop {
+      0%, 5%   { transform: translateY(-10px); opacity: 0; }
+      22%      { transform: translateY(2px);   opacity: 1; }
+      28%, 95% { transform: translateY(0);     opacity: 1; }
+      100%     { transform: translateY(-10px); opacity: 0; }
+    }
+
+    /* Ping ripple on pin 1 — GPS lock feel */
+    @keyframes tmap-ping {
+      0%, 10%  { r: 3.5; opacity: 0.7; }
+      50%      { r: 9;   opacity: 0; }
+      51%, 100%{ r: 3.5; opacity: 0; }
+    }
+
+    /* Second ping wave — slightly delayed */
+    @keyframes tmap-ping2 {
+      0%, 18%  { r: 3.5; opacity: 0.45; }
+      60%      { r: 12;  opacity: 0; }
+      61%, 100%{ r: 3.5; opacity: 0; }
+    }
+
+    /* Pin 2 — drops in mid-cycle */
+    @keyframes tmap-pin2-drop {
+      0%, 48%  { transform: translateY(-10px); opacity: 0; }
+      65%      { transform: translateY(2px);   opacity: 1; }
+      70%, 95% { transform: translateY(0);     opacity: 1; }
+      100%     { transform: translateY(-10px); opacity: 0; }
+    }
+
+    /* Pin 3 — drops in last */
+    @keyframes tmap-pin3-drop {
+      0%, 68%  { transform: translateY(-10px); opacity: 0; }
+      82%      { transform: translateY(2px);   opacity: 1; }
+      86%, 95% { transform: translateY(0);     opacity: 1; }
+      100%     { transform: translateY(-10px); opacity: 0; }
+    }
+
+    /* Subtle globe pulse — breathing feel */
+    @keyframes tmap-globe-breathe {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.85; }
+    }
+
+    #tmap-globe        { animation: tmap-globe-breathe 4s ease-in-out infinite; }
+    #tmap-route        { stroke-dasharray: 60; animation: tmap-route-draw 4s ease-in-out infinite; }
+    #tmap-pin1         { transform-origin: 22px 38px; animation: tmap-pin1-drop 4s cubic-bezier(0.34,1.3,0.64,1) infinite; }
+    #tmap-ping-r1      { animation: tmap-ping  4s ease-out 0.2s infinite; }
+    #tmap-ping-r2      { animation: tmap-ping2 4s ease-out 0.2s infinite; }
+    #tmap-pin2         { transform-origin: 44px 24px; animation: tmap-pin2-drop 4s cubic-bezier(0.34,1.3,0.64,1) infinite; }
+    #tmap-pin3         { transform-origin: 50px 36px; animation: tmap-pin3-drop 4s cubic-bezier(0.34,1.3,0.64,1) infinite; }
+  `;
+
   return (
     <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Globe outline */}
-      <circle cx="36" cy="30" r="22" stroke="#171717" strokeWidth="1.5" fill="#EEF2FF"/>
-      {/* Latitude lines */}
-      <ellipse cx="36" cy="30" rx="22" ry="10" stroke="#C7D2FE" strokeWidth="0.75" fill="none"/>
-      <line x1="14" y1="30" x2="58" y2="30" stroke="#C7D2FE" strokeWidth="0.75"/>
-      {/* Longitude line */}
-      <line x1="36" y1="8" x2="36" y2="52" stroke="#C7D2FE" strokeWidth="0.75"/>
-      {/* Travel path */}
-      <path d="M22 38 Q30 20 44 24 Q52 26 50 36" stroke="#6366F1" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" fill="none" strokeDasharray="3 2"/>
-      {/* Pin 1 — bottom-left */}
-      <circle cx="22" cy="38" r="3.5" fill="#6366F1"/>
-      <circle cx="22" cy="38" r="1.5" fill="white"/>
-      {/* Pin 2 — top-center */}
-      <circle cx="44" cy="24" r="3.5" fill="#171717"/>
-      <circle cx="44" cy="24" r="1.5" fill="white"/>
-      {/* Pin 3 — right */}
-      <circle cx="50" cy="36" r="3.5" fill="#6366F1"/>
-      <circle cx="50" cy="36" r="1.5" fill="white"/>
+      <style>{css}</style>
+
+      {/* Globe outline + grid */}
+      <g id="tmap-globe">
+        <circle cx="36" cy="30" r="22" stroke="#171717" strokeWidth="1.5" fill="#EEF2FF"/>
+        <ellipse cx="36" cy="30" rx="22" ry="10" stroke="#C7D2FE" strokeWidth="0.75" fill="none"/>
+        <line x1="14" y1="30" x2="58" y2="30" stroke="#C7D2FE" strokeWidth="0.75"/>
+        <line x1="36" y1="8"  x2="36" y2="52" stroke="#C7D2FE" strokeWidth="0.75"/>
+      </g>
+
+      {/* Travel path — draws itself */}
+      <path
+        id="tmap-route"
+        d="M22 38 Q30 20 44 24 Q52 26 50 36"
+        stroke="#6366F1"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+
+      {/* Pin 1 — indigo, bottom-left (appears first) */}
+      <g id="tmap-pin1" style={{ opacity: 0 }}>
+        {/* GPS ping ripple rings */}
+        <circle id="tmap-ping-r1" cx="22" cy="38" r="3.5" fill="none" stroke="#6366F1" strokeWidth="1"/>
+        <circle id="tmap-ping-r2" cx="22" cy="38" r="3.5" fill="none" stroke="#6366F1" strokeWidth="0.6"/>
+        {/* Pin body */}
+        <circle cx="22" cy="38" r="3.5" fill="#6366F1"/>
+        <circle cx="22" cy="38" r="1.5" fill="white"/>
+      </g>
+
+      {/* Pin 2 — dark, top-center (appears mid) */}
+      <g id="tmap-pin2" style={{ opacity: 0 }}>
+        <circle cx="44" cy="24" r="3.5" fill="#171717"/>
+        <circle cx="44" cy="24" r="1.5" fill="white"/>
+      </g>
+
+      {/* Pin 3 — indigo, right (appears last) */}
+      <g id="tmap-pin3" style={{ opacity: 0 }}>
+        <circle cx="50" cy="36" r="3.5" fill="#6366F1"/>
+        <circle cx="50" cy="36" r="1.5" fill="white"/>
+      </g>
     </svg>
   );
 }
