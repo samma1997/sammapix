@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 
 const features = [
-  { label: "Crunch — compress + WebP",   free: true,       pro: true },
+  { label: "Crunch — compress + WebP",   free: true,        pro: true },
   { label: "GeoSort — sort by GPS",      free: "50 photos", pro: "500 photos" },
   { label: "TravelMap — GPS map",        free: true,        pro: true },
+  { label: "EXIF Lens — metadata",       free: "20 files",  pro: "500 files" },
+  { label: "Cull — keyboard review",     free: "50 photos", pro: "500 photos" },
   { label: "AI Rename",                  free: "5 / day",   pro: "200 / day" },
   { label: "Files per batch",            free: "20",        pro: "500" },
   { label: "Max file size",              free: "20 MB",     pro: "50 MB" },
@@ -24,7 +26,7 @@ const tools = [
   { icon: <Zap className="h-4 w-4" strokeWidth={1.5} />,     name: "Crunch",    desc: "Compress · WebP · AI Rename",    status: "live" },
   { icon: <MapPin className="h-4 w-4" strokeWidth={1.5} />,  name: "GeoSort",   desc: "Sort photos by GPS country",     status: "live" },
   { icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,   name: "TravelMap", desc: "Interactive travel map",          status: "live" },
-  { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,name: "Cull",      desc: "Quick keyboard review",          status: "soon" },
+  { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,name: "Cull",      desc: "Quick keyboard review",          status: "live" },
   { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "live" },
   { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,   name: "StampIt",   desc: "Batch watermark",                status: "soon" },
   { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "soon" },
@@ -202,7 +204,7 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What new tools are coming?"
-              a="Cull (keyboard-based photo selection), StampIt (batch watermark), and ResizePack (batch resize). Pro users get early access to all of them."
+              a="TwinHunt (duplicate photo finder), StampIt (batch watermark), FilmLab (film grain & analog effects), and ResizePack (batch resize). Pro users get early access to all of them."
             />
           </div>
         </div>

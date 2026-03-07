@@ -5,16 +5,16 @@ import HeroSection from "@/components/layout/HeroSection";
 
 const COMING_SOON_TOOLS = [
   {
-    name: "Cull",
-    desc: "Review rapida da tastiera: K tieni, X scarta. Esporta solo le migliori.",
+    name: "TwinHunt",
+    desc: "Find duplicate and near-duplicate photos using perceptual hashing — 100% in-browser.",
   },
   {
     name: "StampIt",
-    desc: "Watermark testo o logo in batch con posizione, opacità e modalità tiled.",
+    desc: "Batch watermark with text or logo — position, opacity, tiled mode.",
   },
   {
     name: "ResizePack",
-    desc: "Ridimensiona in batch in px o percentuale, esporta ZIP pronto.",
+    desc: "Batch resize in px or %, preset social/web sizes, download as ZIP.",
   },
 ];
 
@@ -34,12 +34,12 @@ export default function HomePage() {
               Image Tools
             </h2>
             <p className="text-sm text-gray-500 max-w-lg">
-              Strumenti gratuiti per ottimizzare immagini nel browser — nessun upload, nessun account richiesto per le funzioni base.
+              Free browser-based tools for photographers — no uploads, no account required for the basics.
             </p>
           </div>
 
           {/* Tool attivi — card grandi */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             <Link
               href="/tools/compress"
               className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
@@ -58,7 +58,7 @@ export default function HomePage() {
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Comprimi, converti in WebP e rinomina con AI — tutto nel browser.
+                    Compress, convert to WebP and AI-rename — all in one pass, no upload.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["Compress", "WebP", "AI Rename", "ZIP"].map((f) => (
@@ -89,7 +89,7 @@ export default function HomePage() {
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Legge il GPS dalle foto e crea cartelle per paese — scarica ZIP organizzato.
+                    Reads GPS from your photos and sorts them into country folders — download as organized ZIP.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["GPS EXIF", "Country Folders", "ZIP"].map((f) => (
@@ -120,7 +120,7 @@ export default function HomePage() {
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Carica le foto di viaggio — vedi tutti i tuoi posti su una mappa interattiva. Conta paesi e km percorsi.
+                    Drop travel photos — see all your spots on an interactive map. Counts countries and km traveled.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["GPS Map", "Countries", "Travel route", "Interactive"].map((f) => (
@@ -154,10 +154,42 @@ export default function HomePage() {
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Visualizza e rimuovi metadati GPS e dati privati prima di pubblicare.
+                    View and remove GPS, camera info and private metadata before sharing your photos.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["GPS Remove", "HEIC", "Batch ZIP", "Privacy"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/cull"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="1" y="3" width="10" height="10" rx="1.5" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
+                      <circle cx="12" cy="5" r="3" fill="#16A34A"/>
+                      <path d="M10.5 5 L11.5 6 L13.5 4" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">Cull</span>
+                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                      Free
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Review photos one by one with keyboard shortcuts. K to keep, X to reject. Download keepers as ZIP.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["K / X keys", "Keyboard review", "HEIC", "ZIP keepers"].map((f) => (
                       <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
                         {f}
                       </span>

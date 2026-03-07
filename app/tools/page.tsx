@@ -595,7 +595,7 @@ const ACTIVE = [
   {
     name: "Crunch",
     href: "/tools/compress",
-    description: "Comprimi, converti in WebP e rinomina con AI — tutto in una passata. Nessun upload.",
+    description: "Compress, convert to WebP and AI-rename your photos — all in one pass. No upload required.",
     features: ["Compress", "WebP", "AI Rename", "Batch ZIP"],
     bg: "#F5F5F5",
     Illustration: IconCrunch,
@@ -603,7 +603,7 @@ const ACTIVE = [
   {
     name: "GeoSort",
     href: "/tools/geosort",
-    description: "Legge il GPS dalle foto e organizza in cartelle per paese. Scarichi uno ZIP pronto: Japan/, Thailand/, Italy/...",
+    description: "Reads GPS from your photos and sorts them into country folders. Download a ready ZIP: Japan/, Thailand/, Italy/...",
     features: ["GPS EXIF", "Auto folders", "Batch ZIP", "No upload"],
     bg: "#EEF2FF",
     Illustration: IconGeoSort,
@@ -611,7 +611,7 @@ const ACTIVE = [
   {
     name: "EXIF Lens",
     href: "/tools/exif",
-    description: "Visualizza e rimuovi GPS, camera model, timestamps e dati privati dalle foto — prima di pubblicarle online.",
+    description: "View and remove GPS, camera model, timestamps and private data from photos — before publishing online.",
     features: ["GPS removal", "Privacy clean", "Batch", "No upload"],
     bg: "#F0FDF4",
     Illustration: IconExifLens,
@@ -619,20 +619,27 @@ const ACTIVE = [
   {
     name: "TravelMap",
     href: "/tools/travelmap",
-    description: "Carica le foto di viaggio — GeoSort legge il GPS e genera una mappa interattiva con tutti i luoghi visitati, conteggio paesi e km percorsi.",
+    description: "Drop travel photos — reads GPS and plots an interactive map with all your visited spots, country count and km traveled.",
     features: ["Interactive map", "GPS EXIF", "Countries counter", "No upload"],
     bg: "#EFF6FF",
     Illustration: IconTravelMap,
   },
+  {
+    name: "Cull",
+    href: "/tools/cull",
+    description: "Review photos one by one with keyboard shortcuts. K to keep, X to reject. Download only your best shots as a ZIP.",
+    features: ["K / X keys", "Keyboard review", "HEIC", "ZIP keepers"],
+    bg: "#F9FAFB",
+    Illustration: IconCull,
+  },
 ];
 
 const SOON = [
-  { name: "Cull",       Illustration: IconCull,      description: "Review rapida con tastiera: K tieni, X scarta. Lightroom-style, gratis." },
-  { name: "ResizePack", Illustration: IconResizePack, description: "Ridimensiona in batch: px, % o target file-size. Preset web, social, stampa." },
-  { name: "StampIt",    Illustration: IconStampIt,   description: "Watermark testo o logo in batch. Posizione, opacità, modalità tiled anti-ritaglio." },
-  { name: "CropRatio",  Illustration: IconCropRatio, description: "Ritaglia in formato preciso: 1:1, 4:5, 16:9, A4. Smart centering opzionale." },
-  { name: "TwinHunt",   Illustration: IconTwinHunt,  description: "Trova duplicati e quasi-identici con perceptual hashing — tutto client-side." },
-  { name: "FilmLab",    Illustration: IconFilmLab,   description: "Grain cinematografico, vignette e color grading analogico su batch." },
+  { name: "TwinHunt",   Illustration: IconTwinHunt,  description: "Find duplicates and near-identical photos with perceptual hashing — 100% client-side." },
+  { name: "StampIt",    Illustration: IconStampIt,   description: "Batch watermark with text or logo. Position, opacity, tiled anti-crop mode." },
+  { name: "FilmLab",    Illustration: IconFilmLab,   description: "Cinematic grain, vignette and analog color grading on batch." },
+  { name: "ResizePack", Illustration: IconResizePack, description: "Batch resize in px, % or target file-size. Web, social and print presets." },
+  { name: "CropRatio",  Illustration: IconCropRatio, description: "Crop to exact ratio: 1:1, 4:5, 16:9, A4. Optional smart centering." },
 ];
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
