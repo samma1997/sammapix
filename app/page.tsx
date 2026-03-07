@@ -13,10 +13,6 @@ const COMING_SOON_TOOLS = [
     desc: "Watermark testo o logo in batch con posizione, opacità e modalità tiled.",
   },
   {
-    name: "EXIF Lens",
-    desc: "Visualizza e rimuovi metadati GPS e dati privati prima di pubblicare.",
-  },
-  {
     name: "ResizePack",
     desc: "Ridimensiona in batch in px o percentuale, esporta ZIP pronto.",
   },
@@ -43,7 +39,7 @@ export default function HomePage() {
           </div>
 
           {/* Tool attivi — card grandi */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <Link
               href="/tools/compress"
               className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
@@ -137,10 +133,44 @@ export default function HomePage() {
                 <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
               </div>
             </Link>
+
+            <Link
+              href="/tools/exif"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="2" y="3" width="9" height="11" rx="1.5" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
+                      <line x1="4" y1="6.5" x2="9" y2="6.5" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
+                      <line x1="4" y1="9" x2="7" y2="9" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
+                      <circle cx="11.5" cy="10.5" r="2.5" stroke="#6366F1" strokeWidth="1.2" fill="none"/>
+                      <line x1="13.3" y1="12.3" x2="14.5" y2="13.5" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">EXIF Lens</span>
+                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                      Free
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Visualizza e rimuovi metadati GPS e dati privati prima di pubblicare.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["GPS Remove", "HEIC", "Batch ZIP", "Privacy"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
           </div>
 
           {/* Grid coming soon */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {COMING_SOON_TOOLS.map((tool) => (
               <div
                 key={tool.name}

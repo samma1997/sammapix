@@ -25,7 +25,7 @@ const tools = [
   { icon: <MapPin className="h-4 w-4" strokeWidth={1.5} />,  name: "GeoSort",   desc: "Sort photos by GPS country",     status: "live" },
   { icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,   name: "TravelMap", desc: "Interactive travel map",          status: "live" },
   { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,name: "Cull",      desc: "Quick keyboard review",          status: "soon" },
-  { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "soon" },
+  { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "live" },
   { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,   name: "StampIt",   desc: "Batch watermark",                status: "soon" },
   { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "soon" },
   // eslint-disable-next-line jsx-a11y/alt-text
@@ -202,7 +202,7 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What new tools are coming?"
-              a="Cull (keyboard-based photo selection), EXIF Lens (view and strip metadata), StampIt (batch watermark), and ResizePack (batch resize). Pro users get early access to all of them."
+              a="Cull (keyboard-based photo selection), StampIt (batch watermark), and ResizePack (batch resize). Pro users get early access to all of them."
             />
           </div>
         </div>
