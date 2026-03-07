@@ -4,11 +4,11 @@ import { ImageFormat } from "@/types/image";
 // File limits
 export const MAX_FILE_SIZE_FREE = 20 * 1024 * 1024; // 20MB
 export const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024; // 50MB
-export const MAX_FILES_FREE = 20;
+export const MAX_FILES_FREE = 100;
 export const MAX_FILES_PRO = 500;
 
 // GeoSort limits
-export const MAX_GEOSORT_FREE = 50;
+export const MAX_GEOSORT_FREE = 100;
 export const MAX_GEOSORT_PRO = 500;
 
 // AI Rename limits

@@ -127,7 +127,7 @@ function colorForCountry(country: string, colorMap: Map<string, string>): string
   return color;
 }
 
-const MAX_TRAVELMAP_FREE = 50;
+const MAX_TRAVELMAP_FREE = 100;
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
@@ -438,23 +438,41 @@ export default function TravelMapClient() {
             file.name.toLowerCase().endsWith(".jpg") ||
             file.name.toLowerCase().endsWith(".jpeg");
 
+          // Tier 1: embedded JPEG thumbnail via exifr (fast, no server)
           try {
             const thumbData = await withTimeout(exifr.thumbnail(file), 5000, null);
             if (thumbData && thumbData.length > 0) {
-              // Copy into a clean Uint8Array to satisfy strict BlobPart types
               const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
               thumbnailUrl = URL.createObjectURL(blob);
-              console.log("[TravelMap] ✅ Thumbnail extracted for:", file.name);
-            } else {
-              console.log("[TravelMap] No embedded thumbnail for:", file.name);
+              console.log("[TravelMap] ✅ Thumbnail (exifr) OK:", file.name);
             }
           } catch (e) {
-            console.warn("[TravelMap] Thumbnail extraction failed for:", file.name, e);
+            console.warn("[TravelMap] Thumbnail exifr failed:", file.name, e);
           }
 
-          // Fallback for plain JPEG
+          // Tier 2: plain JPEG — direct object URL
           if (!thumbnailUrl && isJpeg) {
             thumbnailUrl = URL.createObjectURL(file);
+          }
+
+          // Tier 3: HEIC without embedded thumbnail → server-side sharp conversion
+          const isHeic =
+            file.type === "image/heic" ||
+            file.type === "image/heif" ||
+            file.name.toLowerCase().endsWith(".heic") ||
+            file.name.toLowerCase().endsWith(".heif");
+          if (!thumbnailUrl && isHeic) {
+            try {
+              const fd = new FormData();
+              fd.append("file", file);
+              const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
+              if (res.ok) {
+                thumbnailUrl = URL.createObjectURL(await res.blob());
+                console.log("[TravelMap] ✅ Thumbnail (sharp API) OK:", file.name);
+              }
+            } catch (e) {
+              console.warn("[TravelMap] Sharp API thumbnail failed:", file.name, e);
+            }
           }
 
           rawPoints.push({ file, lat: gps.latitude, lon: gps.longitude, date, thumbnailUrl });

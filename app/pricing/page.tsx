@@ -8,14 +8,15 @@ import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 
 const features = [
-  { label: "Crunch — compress + WebP",   free: true,        pro: true },
-  { label: "GeoSort — sort by GPS",      free: "50 photos", pro: "500 photos" },
-  { label: "TravelMap — GPS map",        free: true,        pro: true },
-  { label: "EXIF Lens — metadata",       free: "20 files",  pro: "500 files" },
-  { label: "Cull — keyboard review",     free: "50 photos", pro: "500 photos" },
-  { label: "AI Rename",                  free: "5 / day",   pro: "200 / day" },
-  { label: "Files per batch",            free: "20",        pro: "500" },
-  { label: "Max file size",              free: "20 MB",     pro: "50 MB" },
+  { label: "Crunch — compress + WebP",   free: true,         pro: true },
+  { label: "GeoSort — sort by GPS",      free: "100 photos", pro: "500 photos" },
+  { label: "TravelMap — GPS map",        free: "100 photos", pro: "500 photos" },
+  { label: "EXIF Lens — metadata",       free: "100 files",  pro: "500 files" },
+  { label: "Cull — keyboard review",     free: "100 photos", pro: "500 photos" },
+  { label: "TwinHunt — find dupes",      free: "100 photos", pro: "500 photos" },
+  { label: "AI Rename",                  free: "5 / day",    pro: "200 / day" },
+  { label: "Files per batch",            free: "100",        pro: "500" },
+  { label: "Max file size",              free: "20 MB",      pro: "50 MB" },
   { label: "ZIP download",              free: true,        pro: true },
   { label: "Ads",                        free: true,        pro: false },
   { label: "Early access to new tools", free: false,       pro: true },

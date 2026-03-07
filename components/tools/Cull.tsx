@@ -29,7 +29,7 @@ interface PhotoEntry {
   previewUrl: string | null | undefined;
 }
 
-const MAX_CULL_FREE = 20;
+const MAX_CULL_FREE = 100;
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -50,73 +50,33 @@ function isHeicFile(file: File): boolean {
 
 // Returns: blob URL string, or null if completely unsupported
 async function buildPreviewUrl(file: File): Promise<string | null> {
-  const inner = async (): Promise<string | null> => {
-    if (!isHeicFile(file)) {
-      return URL.createObjectURL(file);
+  // Non-HEIC: direct object URL
+  if (!isHeicFile(file)) {
+    return URL.createObjectURL(file);
+  }
+
+  // HEIC Tier 1: embedded JPEG thumbnail via exifr (~50ms, no server round-trip)
+  try {
+    const exifr = await import("exifr");
+    const thumbData = await exifr.thumbnail(file);
+    if (thumbData && thumbData.length > 0) {
+      const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
+      return URL.createObjectURL(blob);
     }
+  } catch { /* no embedded thumbnail */ }
 
-    console.log("[Cull] HEIC detected — building preview for:", file.name);
-
-    // Tier 1: embedded JPEG thumbnail via exifr (~50ms, no conversion)
-    try {
-      const exifr = await import("exifr");
-      const thumbData = await exifr.thumbnail(file);
-      if (thumbData && thumbData.length > 0) {
-        console.log("[Cull] ✅ Tier 1 (exifr thumbnail) OK:", file.name);
-        const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
-        return URL.createObjectURL(blob);
-      }
-      console.log("[Cull] Tier 1: no embedded thumbnail in", file.name);
-    } catch (e) {
-      console.warn("[Cull] Tier 1 error:", e);
+  // HEIC Tier 2: server-side conversion via sharp (100% reliable, ~200-500ms)
+  try {
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
+    if (res.ok) {
+      const blob = await res.blob();
+      return URL.createObjectURL(blob);
     }
+  } catch { /* network or server error */ }
 
-    // Tier 2: native OS decode via createImageBitmap (Safari/macOS only)
-    try {
-      const bitmap = await createImageBitmap(file);
-      const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.drawImage(bitmap, 0, 0);
-        bitmap.close();
-        const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.75 });
-        console.log("[Cull] ✅ Tier 2 (createImageBitmap) OK:", file.name);
-        return URL.createObjectURL(blob);
-      }
-      bitmap.close();
-    } catch (e) {
-      console.warn("[Cull] Tier 2 (createImageBitmap) failed (Chrome doesn't support HEIC natively):", e);
-    }
-
-    // Tier 3: heic2any at low quality — always works but ~3-5s
-    console.log("[Cull] Trying Tier 3 (heic2any) for:", file.name);
-    try {
-      const heic2anyLib = await import("heic2any");
-      const heic2any = (
-        (heic2anyLib as unknown as { default: (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]> }).default
-        ?? heic2anyLib
-      ) as (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>;
-      const jpegBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.15 });
-      console.log("[Cull] ✅ Tier 3 (heic2any) OK:", file.name);
-      return URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
-    } catch (e) {
-      console.error("[Cull] Tier 3 (heic2any) failed:", e);
-    }
-
-    console.log("[Cull] All tiers failed for:", file.name);
-    return null;
-  };
-
-  // 20s timeout — prevents UI stuck on "Loading preview..." if heic2any hangs
-  return Promise.race([
-    inner(),
-    new Promise<null>((resolve) =>
-      setTimeout(() => {
-        console.warn("[Cull] Preview timeout (20s) for:", file.name);
-        resolve(null);
-      }, 20000)
-    ),
-  ]);
+  return null;
 }
 
 // ── Main component ─────────────────────────────────────────────────────────────

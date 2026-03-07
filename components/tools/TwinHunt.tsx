@@ -18,7 +18,7 @@ import Link from "next/link";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
-const MAX_FREE = 50;
+const MAX_FREE = 100;
 const MAX_PRO = 500;
 
 // Sensitivity thresholds (Hamming distance)
