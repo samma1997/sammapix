@@ -51,6 +51,11 @@ export default function HomePage() {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M2 5 L5 8 L2 11" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M14 5 L11 8 L14 11" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <rect x="6" y="5" width="4" height="6" rx="1" fill="#6366F1" fillOpacity="0.15" stroke="#6366F1" strokeWidth="1"/>
+                    </svg>
                     <span className="text-base font-semibold text-[#171717]">Crunch</span>
                     <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
                       Free
@@ -78,6 +83,10 @@ export default function HomePage() {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5C5.79 1.5 4 3.29 4 5.5C4 8.5 8 14.5 8 14.5C8 14.5 12 8.5 12 5.5C12 3.29 10.21 1.5 8 1.5Z" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="#6366F1" fillOpacity="0.12"/>
+                      <circle cx="8" cy="5.5" r="1.5" fill="#6366F1"/>
+                    </svg>
                     <span className="text-base font-semibold text-[#171717]">GeoSort</span>
                     <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
                       Free

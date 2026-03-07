@@ -605,10 +605,17 @@ const ACTIVE = [
     bg: "#EEF2FF",
     Illustration: IconGeoSort,
   },
+  {
+    name: "EXIF Lens",
+    href: "/tools/exif",
+    description: "Visualizza e rimuovi GPS, camera model, timestamps e dati privati dalle foto — prima di pubblicarle online.",
+    features: ["GPS removal", "Privacy clean", "Batch", "No upload"],
+    bg: "#F0FDF4",
+    Illustration: IconExifLens,
+  },
 ];
 
 const SOON = [
-  { name: "EXIF Lens",  Illustration: IconExifLens,  description: "Visualizza e rimuovi GPS, camera, timestamps. Proteggi la privacy prima di pubblicare." },
   { name: "Cull",       Illustration: IconCull,      description: "Review rapida con tastiera: K tieni, X scarta. Lightroom-style, gratis." },
   { name: "ResizePack", Illustration: IconResizePack, description: "Ridimensiona in batch: px, % o target file-size. Preset web, social, stampa." },
   { name: "StampIt",    Illustration: IconStampIt,   description: "Watermark testo o logo in batch. Posizione, opacità, modalità tiled anti-ritaglio." },
