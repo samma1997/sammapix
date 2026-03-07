@@ -48,13 +48,13 @@ function isHeicFile(file: File): boolean {
   );
 }
 
-// Returns: blob URL string, or null if no preview available (never blocks for HEIC)
+// Returns: blob URL string, or null if completely unsupported
 async function buildPreviewUrl(file: File): Promise<string | null> {
   if (!isHeicFile(file)) {
     return URL.createObjectURL(file);
   }
 
-  // HEIC tier 1: embedded JPEG thumbnail via exifr (fastest, ~50ms)
+  // Tier 1: embedded JPEG thumbnail via exifr (~50ms, no conversion)
   try {
     const exifr = await import("exifr");
     const thumbData = await exifr.thumbnail(file);
@@ -62,12 +62,9 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
       const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
       return URL.createObjectURL(blob);
     }
-  } catch {
-    // no embedded thumbnail
-  }
+  } catch { /* no embedded thumbnail */ }
 
-  // HEIC tier 2: native browser decode via createImageBitmap (macOS/iOS, fast)
-  // Uses OS codec — no WASM, no large library. Falls through on unsupported platforms.
+  // Tier 2: native OS decode via createImageBitmap (Safari/macOS only)
   try {
     const bitmap = await createImageBitmap(file);
     const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
@@ -79,9 +76,18 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
       return URL.createObjectURL(blob);
     }
     bitmap.close();
-  } catch {
-    // browser doesn't support HEIC natively — show placeholder
-  }
+  } catch { /* Chrome doesn't support HEIC natively */ }
+
+  // Tier 3: heic2any at low quality (preview only — ~3-5s but always works)
+  try {
+    const heic2anyLib = await import("heic2any");
+    const heic2any = (
+      (heic2anyLib as unknown as { default: (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]> }).default
+      ?? heic2anyLib
+    ) as (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>;
+    const jpegBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.15 });
+    return URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
+  } catch { /* conversion failed */ }
 
   return null;
 }
