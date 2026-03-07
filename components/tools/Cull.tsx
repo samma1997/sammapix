@@ -54,8 +54,7 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
     return URL.createObjectURL(file);
   }
 
-  // HEIC: use only the embedded JPEG thumbnail (fast, ~100ms, no conversion)
-  // iPhone photos always have an embedded thumbnail. If missing, show placeholder.
+  // HEIC tier 1: embedded JPEG thumbnail via exifr (fastest, ~50ms)
   try {
     const exifr = await import("exifr");
     const thumbData = await exifr.thumbnail(file);
@@ -67,7 +66,23 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
     // no embedded thumbnail
   }
 
-  // No thumbnail available — return null to show placeholder immediately
+  // HEIC tier 2: native browser decode via createImageBitmap (macOS/iOS, fast)
+  // Uses OS codec — no WASM, no large library. Falls through on unsupported platforms.
+  try {
+    const bitmap = await createImageBitmap(file);
+    const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.drawImage(bitmap, 0, 0);
+      bitmap.close();
+      const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.75 });
+      return URL.createObjectURL(blob);
+    }
+    bitmap.close();
+  } catch {
+    // browser doesn't support HEIC natively — show placeholder
+  }
+
   return null;
 }
 
