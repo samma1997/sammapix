@@ -24,12 +24,10 @@ type PiexifType = {
   insert: (exifBytes: string, data: string) => string;
 };
 
-// Lazy-load piexifjs to avoid SSR issues (it accesses `window` at module init)
+/** Lazy-load piexifjs to avoid SSR issues. */
 async function loadPiexif(): Promise<PiexifType> {
   const mod = await import("piexifjs");
-  // piexifjs exports itself as default or as the module object directly
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return ((mod as any).default ?? mod) as PiexifType;
+  return ((mod as unknown as { default: PiexifType }).default ?? mod) as unknown as PiexifType;
 }
 
 /** Lazy-load heic2any only in the browser (it accesses `window` at module init). */
@@ -37,6 +35,7 @@ async function loadHeic2any(): Promise<typeof import("heic2any").default> {
   const mod = await import("heic2any");
   return (mod as unknown as { default: typeof import("heic2any").default }).default ?? (mod as unknown as typeof import("heic2any").default);
 }
+
 import { MAX_FILES_FREE } from "@/lib/constants";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
