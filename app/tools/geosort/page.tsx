@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { MapPin, Shield, FolderOpen, Smartphone } from "lucide-react";
+import { MapPin, Shield, FolderOpen, Smartphone, FileText, Zap } from "lucide-react";
 import GeoSortClient from "@/components/tools/GeoSort";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
@@ -27,10 +27,22 @@ const features = [
       "Every photo taken with a smartphone or GPS-enabled camera stores coordinates in the file. GeoSort reads them instantly.",
   },
   {
+    icon: <Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Smart — only 2-3 API calls for a full trip",
+    description:
+      "200 photos from Japan? GeoSort detects they're all in the same area and makes just 2–3 location lookups instead of 200. Done in seconds.",
+  },
+  {
     icon: <FolderOpen className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
     title: "Auto-organizes by country",
     description:
       "Photos are grouped into folders like Japan/, Thailand/, Italy/. Mixed trips sorted in seconds — no manual work.",
+  },
+  {
+    icon: <FileText className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "ZIP or sorting guide for large batches",
+    description:
+      "Small batch? Download a ZIP. Big shoot (200+ RAW files at 7 MB each)? Download a lightweight CSV guide with filename → folder — no need to re-download 1.4 GB.",
   },
   {
     icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
@@ -85,7 +97,7 @@ export default function GeoSortPage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-sm font-semibold text-[#171717] mb-6">Why GeoSort?</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
               <div key={f.title} className="p-5 border border-[#E5E5E5] rounded-md bg-white">
                 <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
@@ -116,6 +128,10 @@ export default function GeoSortPage() {
               {
                 q: "Are my photos uploaded to a server?",
                 a: "No. Everything runs inside your browser. The GPS coordinates are sent to OpenStreetMap only to get the country name (no photo data), and the ZIP is created locally on your device.",
+              },
+              {
+                q: "I have 200 RAW files at 7 MB each — will it crash?",
+                a: "No. GeoSort reads only the EXIF header of each file (a few KB), not the full image. For geocoding, it detects photos taken in the same area and makes just 2–3 API calls instead of 200 — so it finishes in seconds. For the download: if your total batch exceeds 150 MB, GeoSort automatically offers a sorting guide (.csv) instead of a ZIP. Open the CSV, see which file goes in which folder, and move them manually — no need to re-download gigabytes you already have.",
               },
             ].map((faq) => (
               <div key={faq.q} className="pb-5 border-b border-[#E5E5E5] last:border-0">
