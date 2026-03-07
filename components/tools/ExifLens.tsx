@@ -17,6 +17,10 @@ import {
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Link from "next/link";
+import { MAX_FILES_FREE } from "@/lib/constants";
+
+// ── Lazy library loaders (browser-only) ───────────────────────────────────────
+
 type PiexifType = {
   remove: (data: string) => string;
   load: (data: string) => Record<string, unknown>;
@@ -24,19 +28,31 @@ type PiexifType = {
   insert: (exifBytes: string, data: string) => string;
 };
 
-/** Lazy-load piexifjs to avoid SSR issues. */
-async function loadPiexif(): Promise<PiexifType> {
-  const mod = await import("piexifjs");
-  return ((mod as unknown as { default: PiexifType }).default ?? mod) as unknown as PiexifType;
+let _piexif: PiexifType | null = null;
+async function getPiexif(): Promise<PiexifType> {
+  if (!_piexif) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    _piexif = require("piexifjs") as PiexifType;
+  }
+  return _piexif;
 }
 
-/** Lazy-load heic2any only in the browser (it accesses `window` at module init). */
-async function loadHeic2any(): Promise<typeof import("heic2any").default> {
-  const mod = await import("heic2any");
-  return (mod as unknown as { default: typeof import("heic2any").default }).default ?? (mod as unknown as typeof import("heic2any").default);
-}
+type Heic2AnyFn = (opts: {
+  blob: Blob;
+  toType: string;
+  quality: number;
+}) => Promise<Blob | Blob[]>;
 
-import { MAX_FILES_FREE } from "@/lib/constants";
+let _heic2any: Heic2AnyFn | null = null;
+async function getHeic2Any(): Promise<Heic2AnyFn> {
+  if (!_heic2any) {
+    const mod = await import("heic2any");
+    _heic2any = (
+      (mod as unknown as { default: Heic2AnyFn }).default ?? mod
+    ) as Heic2AnyFn;
+  }
+  return _heic2any;
+}
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -76,7 +92,14 @@ interface ParsedExif {
   raw?: Record<string, unknown>;
 }
 
-type FileStatus = "ready" | "removing-gps" | "removing-exif" | "done-gps" | "done-exif" | "error" | "no-support";
+type FileStatus =
+  | "ready"
+  | "removing-gps"
+  | "removing-exif"
+  | "done-gps"
+  | "done-exif"
+  | "error"
+  | "no-support";
 
 interface ProcessedFile {
   id: string;
@@ -84,10 +107,9 @@ interface ProcessedFile {
   exif: ParsedExif | null;
   hasGps: boolean;
   status: FileStatus;
-  currentBlob: Blob | null; // null = use original
+  currentBlob: Blob | null;
   errorMessage?: string;
   fileType: "jpeg" | "heic" | "png" | "other";
-  /** For HEIC files that have been converted+stripped — download as .jpg */
   downloadAsJpg?: boolean;
 }
 
@@ -113,21 +135,29 @@ function formatExposure(val: number): string {
 }
 
 function formatDate(date: Date): string {
-  return date.toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).replace(",", " ·");
+  return date
+    .toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    })
+    .replace(",", " ·");
 }
 
 function detectFileType(file: File): "jpeg" | "heic" | "png" | "other" {
   const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
   const mime = file.type.toLowerCase();
   if (ext === "jpg" || ext === "jpeg" || mime === "image/jpeg") return "jpeg";
-  if (ext === "heic" || ext === "heif" || mime === "image/heic" || mime === "image/heif") return "heic";
+  if (
+    ext === "heic" ||
+    ext === "heif" ||
+    mime === "image/heic" ||
+    mime === "image/heif"
+  )
+    return "heic";
   if (ext === "png" || mime === "image/png") return "png";
   return "other";
 }
@@ -136,7 +166,6 @@ function generateId(): string {
   return Math.random().toString(36).slice(2, 10);
 }
 
-/** Derive the download filename for a processed file */
 function downloadName(f: ProcessedFile): string {
   if (f.downloadAsJpg) {
     const base = f.original.name.replace(/\.(heic|heif)$/i, "");
@@ -148,7 +177,7 @@ function downloadName(f: ProcessedFile): string {
 // ── HEIC → JPEG conversion ────────────────────────────────────────────────────
 
 async function convertHeicToJpegBlob(file: File): Promise<Blob> {
-  const heic2any = await loadHeic2any();
+  const heic2any = await getHeic2Any();
   const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.95 });
   return result as Blob;
 }
@@ -165,7 +194,7 @@ async function blobToDataURL(blob: Blob): Promise<string> {
 // ── EXIF Removal ──────────────────────────────────────────────────────────────
 
 async function removeAllExif(file: File): Promise<Blob> {
-  const piexif = await loadPiexif();
+  const piexif = await getPiexif();
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -186,7 +215,7 @@ async function removeAllExif(file: File): Promise<Blob> {
 }
 
 async function removeGpsOnly(file: File): Promise<Blob> {
-  const piexif = await loadPiexif();
+  const piexif = await getPiexif();
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -209,11 +238,8 @@ async function removeGpsOnly(file: File): Promise<Blob> {
   });
 }
 
-/**
- * For HEIC: convert to JPEG first, then remove GPS from the resulting JPEG blob.
- */
 async function heicRemoveGps(file: File): Promise<Blob> {
-  const piexif = await loadPiexif();
+  const piexif = await getPiexif();
   const jpegBlob = await convertHeicToJpegBlob(file);
   const dataUrl = await blobToDataURL(jpegBlob);
   const exifObj = piexif.load(dataUrl);
@@ -226,11 +252,8 @@ async function heicRemoveGps(file: File): Promise<Blob> {
   return new Blob([arr], { type: "image/jpeg" });
 }
 
-/**
- * For HEIC: convert to JPEG first, then strip all EXIF.
- */
 async function heicRemoveAllExif(file: File): Promise<Blob> {
-  const piexif = await loadPiexif();
+  const piexif = await getPiexif();
   const jpegBlob = await convertHeicToJpegBlob(file);
   const dataUrl = await blobToDataURL(jpegBlob);
   const stripped = piexif.remove(dataUrl);
@@ -247,17 +270,25 @@ async function parseExif(file: File): Promise<ParsedExif | null> {
     const exifr = await import("exifr");
     const raw = await exifr.parse(file, {
       pick: [
-        "GPSLatitude", "GPSLongitude", "GPSAltitude",
-        "GPSLatitudeRef", "GPSLongitudeRef",
-        "Make", "Model", "LensModel",
-        "ISO", "FNumber", "ExposureTime", "FocalLength",
-        "DateTimeOriginal", "Software",
+        "GPSLatitude",
+        "GPSLongitude",
+        "GPSAltitude",
+        "GPSLatitudeRef",
+        "GPSLongitudeRef",
+        "Make",
+        "Model",
+        "LensModel",
+        "ISO",
+        "FNumber",
+        "ExposureTime",
+        "FocalLength",
+        "DateTimeOriginal",
+        "Software",
       ],
     });
 
     if (!raw) return null;
 
-    // GPS
     let location: ExifLocation | undefined;
     try {
       const gps = await exifr.gps(file);
@@ -265,7 +296,8 @@ async function parseExif(file: File): Promise<ParsedExif | null> {
         location = {
           latitude: gps.latitude,
           longitude: gps.longitude,
-          altitude: typeof raw.GPSAltitude === "number" ? raw.GPSAltitude : undefined,
+          altitude:
+            typeof raw.GPSAltitude === "number" ? raw.GPSAltitude : undefined,
         };
       }
     } catch {
@@ -280,11 +312,14 @@ async function parseExif(file: File): Promise<ParsedExif | null> {
     const settings: ExifSettings = {};
     if (typeof raw.ISO === "number") settings.iso = raw.ISO;
     if (typeof raw.FNumber === "number") settings.fNumber = raw.FNumber;
-    if (typeof raw.ExposureTime === "number") settings.exposureTime = raw.ExposureTime;
-    if (typeof raw.FocalLength === "number") settings.focalLength = raw.FocalLength;
+    if (typeof raw.ExposureTime === "number")
+      settings.exposureTime = raw.ExposureTime;
+    if (typeof raw.FocalLength === "number")
+      settings.focalLength = raw.FocalLength;
 
     const date: ExifDate = {};
-    if (raw.DateTimeOriginal instanceof Date) date.dateTimeOriginal = raw.DateTimeOriginal;
+    if (raw.DateTimeOriginal instanceof Date)
+      date.dateTimeOriginal = raw.DateTimeOriginal;
 
     const software: ExifSoftware = {};
     if (raw.Software) software.software = String(raw.Software);
@@ -333,184 +368,215 @@ export default function ExifLens() {
 
   const isAccepted = useCallback((file: File): boolean => {
     const ext = "." + (file.name.split(".").pop()?.toLowerCase() ?? "");
-    return ACCEPTED_EXTENSIONS.includes(ext) || ACCEPTED_MIME.includes(file.type.toLowerCase());
+    return (
+      ACCEPTED_EXTENSIONS.includes(ext) ||
+      ACCEPTED_MIME.includes(file.type.toLowerCase())
+    );
   }, []);
 
-  const processFiles = useCallback(async (rawFiles: File[]) => {
-    const accepted = rawFiles.filter(isAccepted).slice(0, MAX_FILES_FREE);
-    if (accepted.length === 0) return;
+  const processFiles = useCallback(
+    async (rawFiles: File[]) => {
+      const accepted = rawFiles.filter(isAccepted).slice(0, MAX_FILES_FREE);
+      if (accepted.length === 0) return;
 
-    setUiState("parsing");
-    setParseProgress(0);
-    setParseMessage("Reading metadata...");
+      setUiState("parsing");
+      setParseProgress(0);
+      setParseMessage("Reading metadata...");
 
-    const processed: ProcessedFile[] = [];
+      const processed: ProcessedFile[] = [];
 
-    for (let i = 0; i < accepted.length; i++) {
-      const file = accepted[i];
-      setParseMessage(`Reading ${file.name} (${i + 1}/${accepted.length})`);
-      setParseProgress(Math.round(((i + 1) / accepted.length) * 100));
+      for (let i = 0; i < accepted.length; i++) {
+        const file = accepted[i];
+        setParseMessage(`Reading ${file.name} (${i + 1}/${accepted.length})`);
+        setParseProgress(Math.round(((i + 1) / accepted.length) * 100));
 
-      const fileType = detectFileType(file);
-      let exif: ParsedExif | null = null;
-      let status: FileStatus = "ready";
+        const fileType = detectFileType(file);
+        let exif: ParsedExif | null = null;
+        let status: FileStatus = "ready";
 
-      if (fileType === "png") {
-        status = "no-support";
-      } else if (fileType === "heic") {
-        exif = await parseExif(file);
-        // HEIC is now fully supported via heic2any conversion
-        status = "ready";
-      } else if (fileType === "jpeg") {
-        exif = await parseExif(file);
-        status = "ready";
-      } else {
-        status = "no-support";
+        if (fileType === "png") {
+          status = "no-support";
+        } else if (fileType === "heic") {
+          exif = await parseExif(file);
+          status = "ready";
+        } else if (fileType === "jpeg") {
+          exif = await parseExif(file);
+          status = "ready";
+        } else {
+          status = "no-support";
+        }
+
+        processed.push({
+          id: generateId(),
+          original: file,
+          exif,
+          hasGps: !!(exif?.location),
+          status,
+          currentBlob: null,
+          fileType,
+          downloadAsJpg: false,
+        });
       }
 
-      processed.push({
-        id: generateId(),
-        original: file,
-        exif,
-        hasGps: !!(exif?.location),
-        status,
-        currentBlob: null,
-        fileType,
-        downloadAsJpg: false,
-      });
-    }
+      setFiles(processed);
+      setUiState("results");
+    },
+    [isAccepted]
+  );
 
-    setFiles(processed);
-    setUiState("results");
-  }, [isAccepted]);
+  const handleDrop = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      setIsDragOver(false);
+      processFiles(Array.from(e.dataTransfer.files));
+    },
+    [processFiles]
+  );
 
-  const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    processFiles(Array.from(e.dataTransfer.files));
-  }, [processFiles]);
+  const handleFileInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      processFiles(Array.from(e.target.files ?? []));
+    },
+    [processFiles]
+  );
 
-  const handleFileInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    processFiles(Array.from(e.target.files ?? []));
-  }, [processFiles]);
-
-  // Per-file: remove GPS
-  const handleRemoveGps = useCallback(async (id: string) => {
-    setFiles((prev) =>
-      prev.map((f) => f.id === id ? { ...f, status: "removing-gps" } : f)
-    );
-
-    const target = files.find((f) => f.id === id);
-    if (!target) return;
-
-    try {
-      let blob: Blob;
-
-      if (target.fileType === "heic") {
-        // Convert HEIC → JPEG, then remove GPS
-        blob = await heicRemoveGps(target.original);
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === id
-              ? {
-                  ...f,
-                  currentBlob: blob,
-                  hasGps: false,
-                  status: "done-gps",
-                  exif: f.exif ? { ...f.exif, location: undefined } : null,
-                  downloadAsJpg: true,
-                }
-              : f
-          )
-        );
-      } else if (target.fileType === "jpeg") {
-        const sourceFile = target.currentBlob
-          ? new File([target.currentBlob], target.original.name, { type: "image/jpeg" })
-          : target.original;
-        blob = await removeGpsOnly(sourceFile);
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === id
-              ? {
-                  ...f,
-                  currentBlob: blob,
-                  hasGps: false,
-                  status: "done-gps",
-                  exif: f.exif ? { ...f.exif, location: undefined } : null,
-                }
-              : f
-          )
-        );
-      }
-    } catch {
+  const handleRemoveGps = useCallback(
+    async (id: string) => {
       setFiles((prev) =>
-        prev.map((f) => f.id === id ? { ...f, status: "error", errorMessage: "Failed to remove GPS" } : f)
+        prev.map((f) => (f.id === id ? { ...f, status: "removing-gps" } : f))
       );
-    }
-  }, [files]);
 
-  // Per-file: remove all EXIF
-  const handleRemoveExif = useCallback(async (id: string) => {
-    setFiles((prev) =>
-      prev.map((f) => f.id === id ? { ...f, status: "removing-exif" } : f)
-    );
+      const target = files.find((f) => f.id === id);
+      if (!target) return;
 
-    const target = files.find((f) => f.id === id);
-    if (!target) return;
+      try {
+        if (target.fileType === "heic") {
+          const blob = await heicRemoveGps(target.original);
+          setFiles((prev) =>
+            prev.map((f) =>
+              f.id === id
+                ? {
+                    ...f,
+                    currentBlob: blob,
+                    hasGps: false,
+                    status: "done-gps",
+                    exif: f.exif ? { ...f.exif, location: undefined } : null,
+                    downloadAsJpg: true,
+                  }
+                : f
+            )
+          );
+        } else if (target.fileType === "jpeg") {
+          const sourceFile = target.currentBlob
+            ? new File([target.currentBlob], target.original.name, {
+                type: "image/jpeg",
+              })
+            : target.original;
+          const blob = await removeGpsOnly(sourceFile);
+          setFiles((prev) =>
+            prev.map((f) =>
+              f.id === id
+                ? {
+                    ...f,
+                    currentBlob: blob,
+                    hasGps: false,
+                    status: "done-gps",
+                    exif: f.exif ? { ...f.exif, location: undefined } : null,
+                  }
+                : f
+            )
+          );
+        }
+      } catch {
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === id
+              ? { ...f, status: "error", errorMessage: "Failed to remove GPS" }
+              : f
+          )
+        );
+      }
+    },
+    [files]
+  );
 
-    try {
-      let blob: Blob;
+  const handleRemoveExif = useCallback(
+    async (id: string) => {
+      setFiles((prev) =>
+        prev.map((f) => (f.id === id ? { ...f, status: "removing-exif" } : f))
+      );
 
-      if (target.fileType === "heic") {
-        blob = await heicRemoveAllExif(target.original);
+      const target = files.find((f) => f.id === id);
+      if (!target) return;
+
+      try {
+        if (target.fileType === "heic") {
+          const blob = await heicRemoveAllExif(target.original);
+          setFiles((prev) =>
+            prev.map((f) =>
+              f.id === id
+                ? {
+                    ...f,
+                    currentBlob: blob,
+                    hasGps: false,
+                    status: "done-exif",
+                    exif: null,
+                    downloadAsJpg: true,
+                  }
+                : f
+            )
+          );
+        } else if (target.fileType === "jpeg") {
+          const blob = await removeAllExif(target.original);
+          setFiles((prev) =>
+            prev.map((f) =>
+              f.id === id
+                ? {
+                    ...f,
+                    currentBlob: blob,
+                    hasGps: false,
+                    status: "done-exif",
+                    exif: null,
+                  }
+                : f
+            )
+          );
+        }
+      } catch {
         setFiles((prev) =>
           prev.map((f) =>
             f.id === id
               ? {
                   ...f,
-                  currentBlob: blob,
-                  hasGps: false,
-                  status: "done-exif",
-                  exif: null,
-                  downloadAsJpg: true,
+                  status: "error",
+                  errorMessage: "Failed to remove EXIF",
                 }
               : f
           )
         );
-      } else if (target.fileType === "jpeg") {
-        blob = await removeAllExif(target.original);
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === id
-              ? { ...f, currentBlob: blob, hasGps: false, status: "done-exif", exif: null }
-              : f
-          )
-        );
       }
-    } catch {
-      setFiles((prev) =>
-        prev.map((f) => f.id === id ? { ...f, status: "error", errorMessage: "Failed to remove EXIF" } : f)
-      );
-    }
-  }, [files]);
+    },
+    [files]
+  );
 
-  // Global: remove GPS from all (JPEG + HEIC)
   const handleRemoveAllGps = useCallback(async () => {
-    const targets = files.filter((f) => f.hasGps && (f.fileType === "jpeg" || f.fileType === "heic"));
+    const targets = files.filter(
+      (f) => f.hasGps && (f.fileType === "jpeg" || f.fileType === "heic")
+    );
     for (const t of targets) {
       await handleRemoveGps(t.id);
     }
   }, [files, handleRemoveGps]);
 
-  // Global: remove all EXIF (JPEG + HEIC)
   const handleRemoveAllExif = useCallback(async () => {
-    const targets = files.filter((f) => f.fileType === "jpeg" || f.fileType === "heic");
+    const targets = files.filter(
+      (f) => f.fileType === "jpeg" || f.fileType === "heic"
+    );
     for (const t of targets) {
       await handleRemoveExif(t.id);
     }
   }, [files, handleRemoveExif]);
 
-  // Download all as ZIP
   const handleDownloadZip = useCallback(async () => {
     setUiState("downloading");
     try {
@@ -537,14 +603,13 @@ export default function ExifLens() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
-  const actionableFiles = files.filter((f) => f.fileType === "jpeg" || f.fileType === "heic");
+  const actionableFiles = files.filter(
+    (f) => f.fileType === "jpeg" || f.fileType === "heic"
+  );
   const filesWithGps = files.filter((f) => f.hasGps);
-
-  // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
-      {/* Idle: dropzone */}
       {uiState === "idle" && (
         <div
           role="button"
@@ -563,7 +628,10 @@ export default function ExifLens() {
               fileInputRef.current?.click();
             }
           }}
-          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragOver(true);
+          }}
           onDragLeave={() => setIsDragOver(false)}
           onDrop={handleDrop}
         >
@@ -588,7 +656,8 @@ export default function ExifLens() {
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              Your photos never leave your device — all processing happens in your browser
+              Your photos never leave your device — all processing happens in
+              your browser
             </p>
             <p className="text-[11px] text-[#C4C4C4]">
               Free: up to {MAX_FILES_FREE} files &middot;{" "}
@@ -600,12 +669,13 @@ export default function ExifLens() {
         </div>
       )}
 
-      {/* Parsing: progress */}
       {uiState === "parsing" && (
         <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-medium text-[#525252]">Reading metadata</span>
+              <span className="text-xs font-medium text-[#525252]">
+                Reading metadata
+              </span>
               <span className="text-xs text-[#A3A3A3]">{parseProgress}%</span>
             </div>
             <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
@@ -619,10 +689,8 @@ export default function ExifLens() {
         </div>
       )}
 
-      {/* Results */}
       {(uiState === "results" || uiState === "downloading") && (
         <div className="space-y-4">
-          {/* Header */}
           <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5]">
             <p className="text-sm font-medium text-[#171717]">
               {files.length} file{files.length !== 1 ? "s" : ""}
@@ -641,10 +709,11 @@ export default function ExifLens() {
             </button>
           </div>
 
-          {/* Action bar */}
           {actionableFiles.length > 0 && (
             <div className="flex flex-wrap gap-2 p-3 border border-[#E5E5E5] rounded-md bg-[#FAFAFA]">
-              {filesWithGps.filter((f) => f.fileType === "jpeg" || f.fileType === "heic").length > 0 && (
+              {filesWithGps.filter(
+                (f) => f.fileType === "jpeg" || f.fileType === "heic"
+              ).length > 0 && (
                 <button
                   onClick={handleRemoveAllGps}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] bg-white text-[#525252] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
@@ -680,7 +749,6 @@ export default function ExifLens() {
             </div>
           )}
 
-          {/* File cards */}
           <div className="space-y-3">
             {files.map((f) => (
               <ExifFileCard
@@ -707,13 +775,12 @@ interface ExifFileCardProps {
 
 const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) => {
   const [expanded, setExpanded] = useState(true);
-  const isProcessing = file.status === "removing-gps" || file.status === "removing-exif";
+  const isProcessing =
+    file.status === "removing-gps" || file.status === "removing-exif";
   const isJpeg = file.fileType === "jpeg";
   const isPng = file.fileType === "png";
   const isHeic = file.fileType === "heic";
   const isActionable = isJpeg || isHeic;
-
-  // A HEIC file becomes downloadable only after removal has been performed
   const heicNotYetProcessed = isHeic && !file.currentBlob;
 
   const handleDownload = () => {
@@ -728,7 +795,6 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
 
   return (
     <div className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden">
-      {/* Card header */}
       <div className="flex items-center gap-3 px-4 py-3">
         <button
           className="flex items-center gap-3 flex-1 min-w-0 text-left"
@@ -745,12 +811,17 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
             stroke="currentColor"
             strokeWidth={1.5}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
           </svg>
-          <span className="text-sm font-medium text-[#171717] truncate">{file.original.name}</span>
+          <span className="text-sm font-medium text-[#171717] truncate">
+            {file.original.name}
+          </span>
         </button>
 
-        {/* Badges */}
         <div className="flex items-center gap-2 shrink-0">
           <span className="text-[11px] text-[#737373] bg-[#F5F5F5] border border-[#E5E5E5] px-2 py-0.5 rounded">
             {formatBytes(file.original.size)}
@@ -768,7 +839,6 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
           )}
         </div>
 
-        {/* Per-file actions */}
         <div className="flex items-center gap-1.5 shrink-0">
           {isActionable && file.hasGps && (
             <button
@@ -800,7 +870,6 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
               EXIF
             </button>
           )}
-          {/* Per-file download button — shown after removal for JPEG; after conversion for HEIC */}
           {isJpeg && file.currentBlob && (
             <button
               onClick={handleDownload}
@@ -824,13 +893,13 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
         </div>
       </div>
 
-      {/* Expanded: metadata */}
       {expanded && (
         <div className="border-t border-[#E5E5E5] bg-[#FAFAFA]">
           {isPng && (
             <div className="px-4 py-3">
               <p className="text-xs text-[#737373]">
-                PNG files do not contain EXIF metadata — nothing to display or remove.
+                PNG files do not contain EXIF metadata — nothing to display or
+                remove.
               </p>
             </div>
           )}
@@ -839,7 +908,9 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
             <>
               {file.status === "done-exif" ? (
                 <div className="px-4 py-3">
-                  <p className="text-xs text-[#16A34A]">All EXIF metadata has been removed from this file.</p>
+                  <p className="text-xs text-[#16A34A]">
+                    All EXIF metadata has been removed from this file.
+                  </p>
                 </div>
               ) : (
                 <ExifMetadataGrid exif={file.exif} />
@@ -847,7 +918,8 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
               <div className="px-4 pb-3">
                 {heicNotYetProcessed ? (
                   <p className="text-xs text-[#A3A3A3]">
-                    Convert to JPG to enable download — use the GPS or EXIF removal buttons above.
+                    Convert to JPG to enable download — use the GPS or EXIF
+                    removal buttons above.
                   </p>
                 ) : (
                   <p className="text-xs text-[#737373]">
@@ -862,7 +934,9 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
             <>
               {file.status === "done-exif" ? (
                 <div className="px-4 py-3">
-                  <p className="text-xs text-[#16A34A]">All EXIF metadata has been removed from this file.</p>
+                  <p className="text-xs text-[#16A34A]">
+                    All EXIF metadata has been removed from this file.
+                  </p>
                 </div>
               ) : (
                 <ExifMetadataGrid exif={file.exif} />
@@ -872,7 +946,10 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
 
           {file.status === "error" && (
             <div className="px-4 pb-3 flex items-center gap-2">
-              <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0" strokeWidth={1.5} />
+              <AlertCircle
+                className="h-4 w-4 text-[#D97706] shrink-0"
+                strokeWidth={1.5}
+              />
               <p className="text-xs text-[#D97706]">{file.errorMessage}</p>
             </div>
           )}
@@ -892,19 +969,19 @@ const ExifMetadataGrid = ({ exif }: ExifMetadataGridProps) => {
   if (!exif) {
     return (
       <div className="px-4 py-3">
-        <p className="text-xs text-[#A3A3A3]">No EXIF metadata found in this file.</p>
+        <p className="text-xs text-[#A3A3A3]">
+          No EXIF metadata found in this file.
+        </p>
       </div>
     );
   }
 
-  const googleMapsUrl =
-    exif.location
-      ? `https://www.google.com/maps?q=${exif.location.latitude},${exif.location.longitude}`
-      : null;
+  const googleMapsUrl = exif.location
+    ? `https://www.google.com/maps?q=${exif.location.latitude},${exif.location.longitude}`
+    : null;
 
   return (
     <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {/* Location */}
       <MetaSection
         icon={<MapPin className="h-3.5 w-3.5" strokeWidth={1.5} />}
         label="Location"
@@ -918,7 +995,9 @@ const ExifMetadataGrid = ({ exif }: ExifMetadataGridProps) => {
               {formatCoord(exif.location.longitude, "E", "W")}
             </p>
             {exif.location.altitude !== undefined && (
-              <p className="text-xs text-[#737373]">{exif.location.altitude.toFixed(0)} m altitude</p>
+              <p className="text-xs text-[#737373]">
+                {exif.location.altitude.toFixed(0)} m altitude
+              </p>
             )}
             {googleMapsUrl && (
               <a
@@ -936,7 +1015,6 @@ const ExifMetadataGrid = ({ exif }: ExifMetadataGridProps) => {
         )}
       </MetaSection>
 
-      {/* Camera */}
       <MetaSection
         icon={<Camera className="h-3.5 w-3.5" strokeWidth={1.5} />}
         label="Camera"
@@ -959,7 +1037,6 @@ const ExifMetadataGrid = ({ exif }: ExifMetadataGridProps) => {
         )}
       </MetaSection>
 
-      {/* Settings */}
       <MetaSection
         icon={<Settings className="h-3.5 w-3.5" strokeWidth={1.5} />}
         label="Settings"
@@ -974,7 +1051,10 @@ const ExifMetadataGrid = ({ exif }: ExifMetadataGridProps) => {
               <MetaBadge label="f/" value={String(exif.settings.fNumber)} />
             )}
             {exif.settings.exposureTime !== undefined && (
-              <MetaBadge label="" value={formatExposure(exif.settings.exposureTime)} />
+              <MetaBadge
+                label=""
+                value={formatExposure(exif.settings.exposureTime)}
+              />
             )}
             {exif.settings.focalLength !== undefined && (
               <MetaBadge label="" value={`${exif.settings.focalLength}mm`} />
@@ -985,20 +1065,20 @@ const ExifMetadataGrid = ({ exif }: ExifMetadataGridProps) => {
         )}
       </MetaSection>
 
-      {/* Date */}
       <MetaSection
         icon={<Calendar className="h-3.5 w-3.5" strokeWidth={1.5} />}
         label="Date"
         present={!!exif.date?.dateTimeOriginal}
       >
         {exif.date?.dateTimeOriginal ? (
-          <p className="text-xs text-[#525252]">{formatDate(exif.date.dateTimeOriginal)}</p>
+          <p className="text-xs text-[#525252]">
+            {formatDate(exif.date.dateTimeOriginal)}
+          </p>
         ) : (
           <NoData />
         )}
       </MetaSection>
 
-      {/* Software */}
       {exif.software?.software && (
         <MetaSection
           icon={<HardDrive className="h-3.5 w-3.5" strokeWidth={1.5} />}
@@ -1023,11 +1103,21 @@ interface MetaSectionProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const MetaSection = ({ icon, label, present, warning, children }: MetaSectionProps) => (
+const MetaSection = ({
+  icon,
+  label,
+  present: __present, // eslint-disable-line @typescript-eslint/no-unused-vars
+  warning,
+  children,
+}: MetaSectionProps) => (
   <div className="p-3 border border-[#E5E5E5] rounded-md bg-white">
     <div className="flex items-center gap-1.5 mb-2">
-      <span className={warning ? "text-[#DC2626]" : "text-[#737373]"}>{icon}</span>
-      <span className="text-[11px] font-semibold text-[#525252] uppercase tracking-wider">{label}</span>
+      <span className={warning ? "text-[#DC2626]" : "text-[#737373]"}>
+        {icon}
+      </span>
+      <span className="text-[11px] font-semibold text-[#525252] uppercase tracking-wider">
+        {label}
+      </span>
       {warning && (
         <span className="text-[10px] font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA] px-1.5 py-0.5 rounded ml-auto">
           Privacy risk
@@ -1038,9 +1128,7 @@ const MetaSection = ({ icon, label, present, warning, children }: MetaSectionPro
   </div>
 );
 
-const NoData = () => (
-  <p className="text-xs text-[#A3A3A3]">No data</p>
-);
+const NoData = () => <p className="text-xs text-[#A3A3A3]">No data</p>;
 
 interface MetaBadgeProps {
   label: string;
@@ -1049,6 +1137,7 @@ interface MetaBadgeProps {
 
 const MetaBadge = ({ label, value }: MetaBadgeProps) => (
   <span className="text-[11px] font-medium bg-[#F5F5F5] border border-[#E5E5E5] text-[#525252] px-2 py-0.5 rounded">
-    {label}{value}
+    {label}
+    {value}
   </span>
 );
