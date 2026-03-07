@@ -15,21 +15,22 @@ import {
   Download,
   Image as ImageIcon,
   Flag,
+  Camera,
 } from "lucide-react";
 import Link from "next/link";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 type FileDecision = "keep" | "reject" | null;
-type UIState = "idle" | "reviewing" | "done";
+type UIState = "idle" | "preparing" | "reviewing" | "done";
 
 interface PhotoEntry {
   file: File;
-  // undefined = not yet loaded, null = loaded but no preview available, string = blob URL
-  previewUrl: string | null | undefined;
+  previewUrl: string | null; // null = no preview available
 }
 
 const MAX_CULL_FREE = 150;
+const CONCURRENCY = 5; // parallel conversions
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -48,14 +49,12 @@ function isHeicFile(file: File): boolean {
   );
 }
 
-// Returns: blob URL string, or null if completely unsupported
 async function buildPreviewUrl(file: File): Promise<string | null> {
-  // Non-HEIC: direct object URL
   if (!isHeicFile(file)) {
     return URL.createObjectURL(file);
   }
 
-  // HEIC Tier 1: embedded JPEG thumbnail via exifr (~50ms, no server round-trip)
+  // Tier 1: embedded JPEG thumbnail via exifr (~50ms, no server round-trip)
   try {
     const exifr = await import("exifr");
     const thumbData = await exifr.thumbnail(file);
@@ -65,7 +64,7 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
     }
   } catch { /* no embedded thumbnail */ }
 
-  // HEIC Tier 2: server-side conversion via sharp (100% reliable, ~200-500ms)
+  // Tier 2: server-side conversion via heic-convert (100% reliable)
   try {
     const fd = new FormData();
     fd.append("file", file);
@@ -79,6 +78,39 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
   return null;
 }
 
+// Run async tasks with max N concurrent at a time
+async function runConcurrent<T>(
+  tasks: (() => Promise<T>)[],
+  concurrency: number,
+  onProgress: (done: number) => void
+): Promise<T[]> {
+  const results: T[] = new Array(tasks.length);
+  let nextIndex = 0;
+  let done = 0;
+
+  async function worker() {
+    while (nextIndex < tasks.length) {
+      const i = nextIndex++;
+      results[i] = await tasks[i]();
+      done++;
+      onProgress(done);
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(concurrency, tasks.length) }, () => worker());
+  await Promise.all(workers);
+  return results;
+}
+
+// Rotating fun messages during preparation
+const PREP_MESSAGES = [
+  "Getting your photos ready…",
+  "Processing your shots…",
+  "Almost there, hang tight…",
+  "Preparing your session…",
+  "Loading previews…",
+];
+
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function CullClient() {
@@ -87,62 +119,29 @@ export default function CullClient() {
   const [decisions, setDecisions] = useState<FileDecision[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragOver, setIsDragOver] = useState(false);
-  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+
+  // Preparation progress
+  const [prepTotal, setPrepTotal] = useState(0);
+  const [prepDone, setPrepDone] = useState(0);
+  const [prepMsgIndex, setPrepMsgIndex] = useState(0);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Track which preview URLs we created so we can revoke them on cleanup
   const previewUrlsRef = useRef<Set<string>>(new Set());
 
   // ── Cleanup blob URLs on unmount ──────────────────────────────────────────
   useEffect(() => {
-    // Capture the Set reference at effect-run time so the cleanup closure
-    // holds a stable reference (satisfies react-hooks/exhaustive-deps).
     const urlSet = previewUrlsRef.current;
-    return () => {
-      urlSet.forEach((url) => URL.revokeObjectURL(url));
-    };
+    return () => { urlSet.forEach((url) => URL.revokeObjectURL(url)); };
   }, []);
 
-  // ── Load preview for current photo ───────────────────────────────────────
+  // ── Rotate prep message every 2s during preparation ──────────────────────
   useEffect(() => {
-    if (uiState !== "reviewing") return;
-    const entry = photos[currentIndex];
-    if (!entry || entry.previewUrl !== undefined) return; // already loaded (string or null)
-
-    let cancelled = false;
-    setIsLoadingPreview(true);
-
-    buildPreviewUrl(entry.file)
-      .then((url) => {
-        if (cancelled) {
-          if (url) URL.revokeObjectURL(url);
-          return;
-        }
-        if (url) previewUrlsRef.current.add(url);
-        setPhotos((prev) => {
-          const next = [...prev];
-          next[currentIndex] = { ...next[currentIndex], previewUrl: url };
-          return next;
-        });
-        setIsLoadingPreview(false);
-      })
-      .catch((err) => {
-        console.error("[Cull] buildPreviewUrl threw unexpectedly:", err);
-        if (!cancelled) {
-          setPhotos((prev) => {
-            const next = [...prev];
-            next[currentIndex] = { ...next[currentIndex], previewUrl: null };
-            return next;
-          });
-          setIsLoadingPreview(false);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [uiState, currentIndex, photos]);
+    if (uiState !== "preparing") return;
+    const interval = setInterval(() => {
+      setPrepMsgIndex((i) => (i + 1) % PREP_MESSAGES.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [uiState]);
 
   // ── Keyboard shortcuts (only during review) ───────────────────────────────
   useEffect(() => {
@@ -153,28 +152,10 @@ export default function CullClient() {
       if (tag === "input" || tag === "textarea") return;
 
       switch (e.key) {
-        case "k":
-        case "K":
-          e.preventDefault();
-          markAndAdvance("keep");
-          break;
-        case "x":
-        case "X":
-          e.preventDefault();
-          markAndAdvance("reject");
-          break;
-        case "ArrowRight":
-        case "ArrowDown":
-          e.preventDefault();
-          goNext();
-          break;
-        case "ArrowLeft":
-        case "ArrowUp":
-          e.preventDefault();
-          goPrev();
-          break;
-        default:
-          break;
+        case "k": case "K": e.preventDefault(); markAndAdvance("keep"); break;
+        case "x": case "X": e.preventDefault(); markAndAdvance("reject"); break;
+        case "ArrowRight": case "ArrowDown": e.preventDefault(); goNext(); break;
+        case "ArrowLeft": case "ArrowUp": e.preventDefault(); goPrev(); break;
       }
     };
 
@@ -186,11 +167,7 @@ export default function CullClient() {
   // ── Navigation helpers ────────────────────────────────────────────────────
 
   const goNext = useCallback(() => {
-    setCurrentIndex((idx) => {
-      const next = idx + 1;
-      if (next >= photos.length) return idx; // at end
-      return next;
-    });
+    setCurrentIndex((idx) => (idx + 1 < photos.length ? idx + 1 : idx));
   }, [photos.length]);
 
   const goPrev = useCallback(() => {
@@ -204,7 +181,6 @@ export default function CullClient() {
         next[currentIndex] = decision;
         return next;
       });
-      // If last photo, go to done
       if (currentIndex >= photos.length - 1) {
         setUiState("done");
       } else {
@@ -214,9 +190,9 @@ export default function CullClient() {
     [currentIndex, photos.length]
   );
 
-  // ── File ingestion ─────────────────────────────────────────────────────────
+  // ── File ingestion — pre-convert all previews in parallel ─────────────────
 
-  const processFiles = useCallback((files: File[]) => {
+  const processFiles = useCallback(async (files: File[]) => {
     const imageFiles = files.filter(
       (f) =>
         f.type.startsWith("image/") ||
@@ -227,20 +203,19 @@ export default function CullClient() {
 
     const accepted = imageFiles.slice(0, MAX_CULL_FREE);
 
-    // Initialize entries with undefined previewUrl — loaded lazily on demand
-    const entries: PhotoEntry[] = accepted.map((file) => ({
-      file,
-      previewUrl: undefined,
-    }));
+    setPrepTotal(accepted.length);
+    setPrepDone(0);
+    setPrepMsgIndex(0);
+    setUiState("preparing");
 
-    // Immediately build preview URL for the first photo so it renders fast
-    buildPreviewUrl(accepted[0]).then((url) => {
+    const tasks = accepted.map((file) => async () => {
+      const url = await buildPreviewUrl(file);
       if (url) previewUrlsRef.current.add(url);
-      setPhotos((prev) => {
-        const next = [...prev];
-        if (next[0]) next[0] = { ...next[0], previewUrl: url };
-        return next;
-      });
+      return { file, previewUrl: url } as PhotoEntry;
+    });
+
+    const entries = await runConcurrent(tasks, CONCURRENCY, (done) => {
+      setPrepDone(done);
     });
 
     setPhotos(entries);
@@ -274,15 +249,12 @@ export default function CullClient() {
     setDecisions([]);
     setCurrentIndex(0);
     setUiState("idle");
-    setIsLoadingPreview(false);
+    setPrepDone(0);
+    setPrepTotal(0);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
-  // ── Finish early ──────────────────────────────────────────────────────────
-
-  const handleFinishEarly = useCallback(() => {
-    setUiState("done");
-  }, []);
+  const handleFinishEarly = useCallback(() => { setUiState("done"); }, []);
 
   // ── ZIP download ──────────────────────────────────────────────────────────
 
@@ -308,6 +280,7 @@ export default function CullClient() {
   const keptCount = decisions.filter((d) => d === "keep").length;
   const rejectedCount = decisions.filter((d) => d === "reject").length;
   const progressPct = total > 0 ? ((currentIndex + 1) / total) * 100 : 0;
+  const prepPct = prepTotal > 0 ? (prepDone / prepTotal) * 100 : 0;
 
   const currentPhoto = photos[currentIndex];
   const currentDecision = decisions[currentIndex] ?? null;
@@ -336,10 +309,7 @@ export default function CullClient() {
               fileInputRef.current?.click();
             }
           }}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setIsDragOver(true);
-          }}
+          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
           onDragLeave={() => setIsDragOver(false)}
           onDrop={handleDrop}
         >
@@ -389,6 +359,52 @@ export default function CullClient() {
         </div>
       )}
 
+      {/* ── Preparing: animated loading screen ──────────────────────────────── */}
+      {uiState === "preparing" && (
+        <div className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white">
+          <div className="flex flex-col items-center justify-center gap-6 px-8 py-16 text-center">
+
+            {/* Animated camera icon */}
+            <div className="relative">
+              <div className="h-16 w-16 rounded-2xl border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center">
+                <Camera className="h-8 w-8 text-[#525252]" strokeWidth={1.5} />
+              </div>
+              {/* spinning ring */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent border-t-[#171717] animate-spin" />
+            </div>
+
+            {/* Rotating message */}
+            <div>
+              <p className="text-sm font-medium text-[#171717] mb-1 transition-all">
+                {PREP_MESSAGES[prepMsgIndex]}
+              </p>
+              <p className="text-xs text-[#A3A3A3]">
+                {prepDone} of {prepTotal} photo{prepTotal !== 1 ? "s" : ""} ready
+              </p>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full max-w-xs">
+              <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                  style={{ width: `${prepPct}%` }}
+                />
+              </div>
+              <div className="flex justify-between mt-1.5">
+                <span className="text-[10px] text-[#C4C4C4]">0</span>
+                <span className="text-[10px] text-[#737373] font-medium">{Math.round(prepPct)}%</span>
+                <span className="text-[10px] text-[#C4C4C4]">{prepTotal}</span>
+              </div>
+            </div>
+
+            <p className="text-[11px] text-[#C4C4C4] max-w-xs">
+              HEIC photos are being converted in the background — this only happens once
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* ── Reviewing: photo viewer ─────────────────────────────────────────── */}
       {uiState === "reviewing" && currentPhoto && (
         <div className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white">
@@ -414,7 +430,6 @@ export default function CullClient() {
               <button
                 onClick={handleFinishEarly}
                 className="text-xs text-[#737373] hover:text-[#171717] transition-colors"
-                title="Finish review early"
               >
                 Finish review
               </button>
@@ -430,10 +445,7 @@ export default function CullClient() {
           </div>
 
           {/* Photo preview */}
-          <div className="relative bg-[#0A0A0A] flex items-center justify-center"
-            style={{ minHeight: "380px" }}
-          >
-            {/* Decision badge — shown when navigating back to already-decided photos */}
+          <div className="relative bg-[#0A0A0A] flex items-center justify-center" style={{ minHeight: "380px" }}>
             {currentDecision === "keep" && (
               <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-[#16A34A] text-white text-xs font-medium rounded-md shadow-sm">
                 <Check className="h-3.5 w-3.5" strokeWidth={2} />
@@ -447,17 +459,12 @@ export default function CullClient() {
               </div>
             )}
 
-            {isLoadingPreview || currentPhoto.previewUrl === undefined ? (
-              <div className="flex flex-col items-center gap-3 text-[#525252]">
-                <div className="h-8 w-8 rounded-full border-2 border-[#525252] border-t-transparent animate-spin" />
-                <span className="text-xs text-[#737373]">Loading preview…</span>
-              </div>
-            ) : currentPhoto.previewUrl === null ? (
+            {currentPhoto.previewUrl === null ? (
               <div className="flex flex-col items-center gap-3 py-8">
                 <ImageIcon className="h-10 w-10 text-[#404040]" strokeWidth={1} />
                 <div className="text-center">
                   <p className="text-sm font-medium text-[#A3A3A3]">{currentPhoto.file.name}</p>
-                  <p className="text-xs text-[#525252] mt-1">No preview — HEIC without embedded thumbnail</p>
+                  <p className="text-xs text-[#525252] mt-1">Preview not available</p>
                   <p className="text-xs text-[#737373] mt-0.5">Use K to keep or X to reject</p>
                 </div>
               </div>
@@ -481,12 +488,10 @@ export default function CullClient() {
               {formatBytes(currentPhoto.file.size)}
             </p>
 
-            {/* Action buttons */}
             <div className="flex items-center justify-between gap-2">
-              {/* Reject */}
               <button
                 onClick={() => markAndAdvance("reject")}
-                aria-label="Reject this photo (X)"
+                aria-label="Reject (X)"
                 className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-[#E5E5E5] rounded-md text-sm font-medium text-[#737373] bg-white hover:border-[#DC2626] hover:text-[#DC2626] hover:bg-[#FEF2F2] transition-colors"
               >
                 <X className="h-4 w-4" strokeWidth={1.5} />
@@ -494,32 +499,27 @@ export default function CullClient() {
                 <kbd className="hidden sm:inline ml-0.5 px-1 py-0.5 text-[9px] bg-[#F5F5F5] border border-[#E5E5E5] rounded font-mono text-[#A3A3A3]">X</kbd>
               </button>
 
-              {/* Prev */}
               <button
                 onClick={goPrev}
                 disabled={currentIndex === 0}
-                aria-label="Previous photo"
                 className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
                 <span className="hidden sm:inline text-xs">Prev</span>
               </button>
 
-              {/* Next */}
               <button
                 onClick={goNext}
                 disabled={currentIndex >= total - 1}
-                aria-label="Next photo (without deciding)"
                 className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <span className="hidden sm:inline text-xs">Next</span>
                 <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
               </button>
 
-              {/* Keep */}
               <button
                 onClick={() => markAndAdvance("keep")}
-                aria-label="Keep this photo (K)"
+                aria-label="Keep (K)"
                 className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
               >
                 <Check className="h-4 w-4" strokeWidth={1.5} />
@@ -534,16 +534,12 @@ export default function CullClient() {
       {/* ── Done: summary + download ────────────────────────────────────────── */}
       {uiState === "done" && (
         <div className="space-y-6">
-
-          {/* Summary header */}
           <div className="border border-[#E5E5E5] rounded-lg p-6 bg-white">
             <div className="flex items-center gap-3 mb-1">
               <div className="h-8 w-8 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] flex items-center justify-center">
                 <Check className="h-4 w-4 text-[#16A34A]" strokeWidth={2} />
               </div>
-              <h2 className="text-base font-semibold text-[#171717]">
-                Review complete
-              </h2>
+              <h2 className="text-base font-semibold text-[#171717]">Review complete</h2>
             </div>
             <p className="text-sm text-[#737373] ml-11">
               {keptCount} photo{keptCount !== 1 ? "s" : ""} kept
@@ -553,27 +549,17 @@ export default function CullClient() {
             </p>
           </div>
 
-          {/* Thumbnail grid of kept photos */}
           {keptCount > 0 && (
             <div>
-              <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-3">
-                Your keepers
-              </p>
+              <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-3">Your keepers</p>
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {photos.map((entry, i) => {
                   if (decisions[i] !== "keep") return null;
                   return (
-                    <div
-                      key={i}
-                      className="relative aspect-square rounded-md overflow-hidden border border-[#E5E5E5] bg-[#F5F5F5]"
-                    >
+                    <div key={i} className="relative aspect-square rounded-md overflow-hidden border border-[#E5E5E5] bg-[#F5F5F5]">
                       {entry.previewUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={entry.previewUrl}
-                          alt={entry.file.name}
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={entry.previewUrl} alt={entry.file.name} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <Flag className="h-5 w-5 text-[#A3A3A3]" strokeWidth={1.5} />
@@ -589,7 +575,6 @@ export default function CullClient() {
             </div>
           )}
 
-          {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-3">
             {keptCount > 0 ? (
               <button
@@ -604,7 +589,6 @@ export default function CullClient() {
                 No photos marked as keep
               </div>
             )}
-
             <button
               onClick={handleReset}
               className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors"

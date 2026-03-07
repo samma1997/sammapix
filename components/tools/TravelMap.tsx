@@ -388,123 +388,80 @@ export default function TravelMapClient() {
       return;
     }
 
-    // ── Step 1: Read GPS, date, and create thumbnail blob URLs ─────────────
-    const rawPoints: Array<{
-      file: File;
-      lat: number;
-      lon: number;
-      date: Date | null;
-      thumbnailUrl: string | undefined;
-    }> = [];
+    // Timeout helper
+    const withTimeout = <T,>(p: Promise<T>, ms: number, fallback: T) =>
+      Promise.race([p, new Promise<T>((r) => setTimeout(() => r(fallback), ms))]);
 
-    for (let i = 0; i < accepted.length; i++) {
-      const file = accepted[i];
-      setProgressMessage(
-        `Reading GPS from photo ${i + 1} of ${accepted.length} — ${file.name}`
-      );
-      setProgressPercent(Math.round(((i + 1) / accepted.length) * 90));
+    const isHeicFile = (f: File) =>
+      f.type === "image/heic" || f.type === "image/heif" ||
+      f.name.toLowerCase().endsWith(".heic") || f.name.toLowerCase().endsWith(".heif");
+    const isJpegFile = (f: File) =>
+      f.type === "image/jpeg" || f.name.toLowerCase().endsWith(".jpg") || f.name.toLowerCase().endsWith(".jpeg");
 
-      try {
-        console.log("[TravelMap] Reading EXIF from:", file.name, "type:", file.type || "(no mime)");
+    // ── Step 1: Read GPS from ALL files in parallel (fast) ─────────────────
+    setProgressMessage(`Reading GPS from ${accepted.length} photos…`);
+    setProgressPercent(20);
 
-        // Timeout wrapper to prevent exifr hanging on certain HEIC files
-        const withTimeout = <T,>(p: Promise<T>, ms: number, fallback: T) =>
-          Promise.race([p, new Promise<T>((r) => setTimeout(() => r(fallback), ms))]);
-
-        const [gps, exifData] = await Promise.all([
-          withTimeout(exifr.gps(file), 8000, null),
-          withTimeout(
-            exifr.parse(file, ["DateTimeOriginal", "CreateDate"]).catch(() => null),
-            8000,
-            null
-          ),
-        ]);
-
-        console.log("[TravelMap] GPS result for", file.name, ":", gps);
-
-        if (gps) {
+    const gpsResults = await Promise.all(
+      accepted.map(async (file) => {
+        try {
+          const [gps, exifData] = await Promise.all([
+            withTimeout(exifr.gps(file), 8000, null),
+            withTimeout(exifr.parse(file, ["DateTimeOriginal", "CreateDate"]).catch(() => null), 8000, null),
+          ]);
+          if (!gps) return null;
           let date: Date | null = null;
-          if (exifData?.DateTimeOriginal) {
-            date = new Date(exifData.DateTimeOriginal);
-          } else if (exifData?.CreateDate) {
-            date = new Date(exifData.CreateDate);
-          }
-
-          // Extract thumbnail: exifr.thumbnail for embedded JPEG preview (fast),
-          // fallback direct objectURL for JPEG, emoji placeholder for HEIC.
-          let thumbnailUrl: string | undefined;
-          const isJpeg =
-            file.type === "image/jpeg" ||
-            file.name.toLowerCase().endsWith(".jpg") ||
-            file.name.toLowerCase().endsWith(".jpeg");
-
-          // Tier 1: embedded JPEG thumbnail via exifr (fast, no server)
-          try {
-            const thumbData = await withTimeout(exifr.thumbnail(file), 5000, null);
-            if (thumbData && thumbData.length > 0) {
-              const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
-              thumbnailUrl = URL.createObjectURL(blob);
-              console.log("[TravelMap] ✅ Thumbnail (exifr) OK:", file.name);
-            }
-          } catch (e) {
-            console.warn("[TravelMap] Thumbnail exifr failed:", file.name, e);
-          }
-
-          // Tier 2: plain JPEG — direct object URL
-          if (!thumbnailUrl && isJpeg) {
-            thumbnailUrl = URL.createObjectURL(file);
-          }
-
-          // Tier 3: HEIC without embedded thumbnail → server-side sharp conversion
-          const isHeic =
-            file.type === "image/heic" ||
-            file.type === "image/heif" ||
-            file.name.toLowerCase().endsWith(".heic") ||
-            file.name.toLowerCase().endsWith(".heif");
-          if (!thumbnailUrl && isHeic) {
-            try {
-              const fd = new FormData();
-              fd.append("file", file);
-              const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
-              if (res.ok) {
-                thumbnailUrl = URL.createObjectURL(await res.blob());
-                console.log("[TravelMap] ✅ Thumbnail (sharp API) OK:", file.name);
-              }
-            } catch (e) {
-              console.warn("[TravelMap] Sharp API thumbnail failed:", file.name, e);
-            }
-          }
-
-          rawPoints.push({ file, lat: gps.latitude, lon: gps.longitude, date, thumbnailUrl });
-        } else {
-          console.log("[TravelMap] No GPS found in:", file.name, "— skipped");
-          errorMessages.push(`No GPS data in ${file.name} — skipped.`);
+          if (exifData?.DateTimeOriginal) date = new Date(exifData.DateTimeOriginal);
+          else if (exifData?.CreateDate) date = new Date(exifData.CreateDate);
+          return { file, lat: gps.latitude, lon: gps.longitude, date };
+        } catch {
+          errorMessages.push(`Could not read EXIF from ${file.name} — skipped.`);
+          return null;
         }
-      } catch (e) {
-        console.error("[TravelMap] Error reading EXIF from:", file.name, e);
-        errorMessages.push(`Could not read EXIF from ${file.name} — skipped.`);
-      }
-    }
+      })
+    );
+
+    const rawPoints = gpsResults.filter(Boolean) as Array<{
+      file: File; lat: number; lon: number; date: Date | null;
+    }>;
 
     if (rawPoints.length === 0) {
-      setErrors([
-        ...errorMessages,
-        "No GPS data found in any of the uploaded photos.",
-      ]);
+      setErrors([...errorMessages, "No GPS data found in any of the uploaded photos."]);
       setUiState("idle");
       return;
     }
 
-    // Sort by date (photos without dates go to end)
-    rawPoints.sort((a, b) => {
+    setProgressMessage("Almost ready…");
+    setProgressPercent(80);
+
+    // ── Step 2: Fast thumbnails — exifr embedded or direct JPEG URL ─────────
+    // (HEIC API conversion runs in background AFTER map is shown)
+    const rawWithThumb = await Promise.all(
+      rawPoints.map(async (p) => {
+        let thumbnailUrl: string | undefined;
+        try {
+          const thumbData = await withTimeout(exifr.thumbnail(p.file), 3000, null);
+          if (thumbData && thumbData.length > 0) {
+            thumbnailUrl = URL.createObjectURL(new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" }));
+          }
+        } catch { /* skip */ }
+        if (!thumbnailUrl && isJpegFile(p.file)) {
+          thumbnailUrl = URL.createObjectURL(p.file);
+        }
+        return { ...p, thumbnailUrl };
+      })
+    );
+
+    // Sort by date
+    rawWithThumb.sort((a, b) => {
       if (!a.date && !b.date) return 0;
       if (!a.date) return 1;
       if (!b.date) return -1;
       return a.date.getTime() - b.date.getTime();
     });
 
-    // ── Step 2: Show map immediately with coordinates only (no country names yet)
-    const initialPoints: PhotoPoint[] = rawPoints.map((p) => ({
+    // ── Step 3: Show map immediately with what we have ──────────────────────
+    const initialPoints: PhotoPoint[] = rawWithThumb.map((p) => ({
       file: p.file,
       lat: p.lat,
       lon: p.lon,
@@ -520,6 +477,38 @@ export default function TravelMapClient() {
     setPoints(initialPoints);
     setErrors(errorMessages);
     setUiState("map");
+
+    // ── Step 4: Load HEIC thumbnails in background (5 concurrent) ──────────
+    const heicPoints = rawWithThumb
+      .map((p, i) => ({ p, i }))
+      .filter(({ p }) => !p.thumbnailUrl && isHeicFile(p.file));
+
+    if (heicPoints.length > 0) {
+      const CONCURRENCY = 5;
+      let nextIdx = 0;
+      const heicWorker = async () => {
+        while (nextIdx < heicPoints.length) {
+          const item = heicPoints[nextIdx++];
+          if (!item) continue;
+          const { p, i } = item;
+          try {
+            const fd = new FormData();
+            fd.append("file", p.file);
+            const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
+            if (res.ok) {
+              const url = URL.createObjectURL(await res.blob());
+              setPoints((prev) => {
+                const updated = [...prev];
+                updated[i] = { ...updated[i], thumbnailUrl: url };
+                return updated;
+              });
+            }
+          } catch { /* skip */ }
+        }
+      };
+      // Fire and forget — map is already shown
+      Promise.all(Array.from({ length: Math.min(CONCURRENCY, heicPoints.length) }, () => heicWorker()));
+    }
 
     // ── Step 3: Reverse-geocode unique grid areas in background ───────────
     const uniqueKeys: string[] = [];
