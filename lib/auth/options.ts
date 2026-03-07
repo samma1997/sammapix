@@ -18,35 +18,21 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.plan = "free";
+      if (user?.email) {
+        // Detect plan on sign-in (user object only present at sign-in time)
+        const { getUserPlan } = await import("@/lib/user-plan");
+        token.plan = await getUserPlan(user.email);
         token.aiRenameUsedToday = 0;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        (
-          session.user as {
-            id?: string;
-            plan?: string;
-            aiRenameUsedToday?: number;
-          }
-        ).id = token.sub;
-        (
-          session.user as {
-            id?: string;
-            plan?: string;
-            aiRenameUsedToday?: number;
-          }
-        ).plan = (token.plan as string) ?? "free";
-        (
-          session.user as {
-            id?: string;
-            plan?: string;
-            aiRenameUsedToday?: number;
-          }
-        ).aiRenameUsedToday = (token.aiRenameUsedToday as number) ?? 0;
+        (session.user as { id?: string; plan?: string; aiRenameUsedToday?: number }).id = token.sub;
+        (session.user as { id?: string; plan?: string; aiRenameUsedToday?: number }).plan =
+          (token.plan as string) ?? "free";
+        (session.user as { id?: string; plan?: string; aiRenameUsedToday?: number }).aiRenameUsedToday =
+          (token.aiRenameUsedToday as number) ?? 0;
       }
       return session;
     },

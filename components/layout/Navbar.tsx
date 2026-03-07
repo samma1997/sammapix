@@ -156,24 +156,31 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           {status === "authenticated" && session ? (
             <>
-              <span className="text-sm text-gray-500 mr-1">
+              <Link
+                href="/account"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+              >
+                {(session.user as { plan?: string })?.plan === "pro" && (
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded">
+                    PRO
+                  </span>
+                )}
                 {session.user?.name?.split(" ")[0]}
-              </span>
-              <Button variant="ghost" size="sm" onClick={() => signOut()}>
-                {d.nav.signout}
-              </Button>
+              </Link>
             </>
           ) : (
             <Link href="/api/auth/signin">
               <Button variant="ghost" size="sm">{d.nav.signin}</Button>
             </Link>
           )}
-          <Link href="/pricing">
-            <Button variant="primary" size="sm" className="gap-1">
-              {d.nav.get_pro}
-              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
-            </Button>
-          </Link>
+          {(session?.user as { plan?: string })?.plan !== "pro" && (
+            <Link href="/pricing">
+              <Button variant="primary" size="sm" className="gap-1">
+                {d.nav.get_pro}
+                <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile menu button */}
