@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight, Shield, Archive, Zap } from "lucide-react";
 import Link from "next/link";
 import ToolInterface from "@/components/tools/ToolInterface";
+import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -52,13 +53,10 @@ const relatedTools = [
 export default function CompressPage() {
   return (
     <main>
-      {/* Hero SEO */}
-      <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
-        <h1 className="text-2xl font-semibold text-[#171717] mb-1">Image Compressor</h1>
-        <p className="text-sm text-[#737373]">
-          Compress JPG, PNG, WebP and GIF files directly in your browser — nothing uploaded to any server.
-        </p>
-      </div>
+      <ToolHeader
+        title="Image Compressor"
+        description="Compress JPG, PNG, WebP and GIF files directly in your browser — nothing uploaded to any server."
+      />
 
       {/* Tool */}
       <ToolInterface defaultMode="compress" />
