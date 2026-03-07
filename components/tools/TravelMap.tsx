@@ -10,18 +10,35 @@ import {
   Camera,
   Navigation,
   AlertCircle,
+  Share2,
+  Link as LinkIcon,
 } from "lucide-react";
 import Link from "next/link";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface PhotoPoint {
-  file: File;
+  file: File | null;       // null in shared/read-only mode
   lat: number;
   lon: number;
   date: Date | null;
   country: string | null;
   displayName: string | null;
+  thumbnailUrl?: string;   // blob URL created from file, revoked on reset
+  name: string;            // filename (available even in shared mode)
+  isShared?: boolean;      // true when loaded from URL hash
+}
+
+interface ShareData {
+  points: Array<{
+    lat: number;
+    lon: number;
+    country: string | null;
+    displayName: string | null;
+    date: string | null;
+    name: string;
+  }>;
+  generatedAt: string;
 }
 
 type UIState = "idle" | "processing" | "map";
@@ -82,7 +99,10 @@ async function reverseGeocode(
     data.address?.town ||
     data.address?.village ||
     null;
-  const displayName = city && country ? `${city}, ${country}` : country || data.display_name?.split(",")[0] || null;
+  const displayName =
+    city && country
+      ? `${city}, ${country}`
+      : country || data.display_name?.split(",")[0] || null;
   return { country, displayName };
 }
 
@@ -120,13 +140,17 @@ export default function TravelMapClient() {
   const [errors, setErrors] = useState<string[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [isSharedView, setIsSharedView] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const leafletMapRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const markersRef = useRef<any[]>([]);
 
-  // Inject Leaflet CSS once
+  // ── Inject Leaflet CSS once ────────────────────────────────────────────────
   useEffect(() => {
     const id = "leaflet-css";
     if (!document.getElementById(id)) {
@@ -138,12 +162,52 @@ export default function TravelMapClient() {
     }
   }, []);
 
-  // Build/update Leaflet map when points change and we're in map state
+  // ── Check URL hash for shared map on mount ────────────────────────────────
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.startsWith("#map=")) {
+      try {
+        const raw = decodeURIComponent(atob(hash.slice(5)));
+        const shareData = JSON.parse(raw) as ShareData;
+        const sharedPoints: PhotoPoint[] = shareData.points.map((sp) => ({
+          file: null,
+          lat: sp.lat,
+          lon: sp.lon,
+          date: sp.date ? new Date(sp.date) : null,
+          country: sp.country,
+          displayName: sp.displayName,
+          thumbnailUrl: undefined,
+          name: sp.name,
+          isShared: true,
+        }));
+        setPoints(sharedPoints);
+        setIsSharedView(true);
+        setUiState("map");
+      } catch {
+        // Ignore malformed hash
+      }
+    }
+  }, []);
+
+  // ── Cleanup blob URLs on unmount ───────────────────────────────────────────
+  useEffect(() => {
+    return () => {
+      points.forEach((p) => {
+        if (p.thumbnailUrl) URL.revokeObjectURL(p.thumbnailUrl);
+      });
+      if (leafletMapRef.current) {
+        leafletMapRef.current.remove();
+        leafletMapRef.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ── Build/update Leaflet map when points change ────────────────────────────
   useEffect(() => {
     if (uiState !== "map" || points.length === 0) return;
     if (!mapContainerRef.current) return;
 
-    // Small timeout to ensure DOM is ready
     const timer = setTimeout(async () => {
       const L = (await import("leaflet")).default;
 
@@ -164,6 +228,7 @@ export default function TravelMapClient() {
         leafletMapRef.current.remove();
         leafletMapRef.current = null;
       }
+      markersRef.current = [];
 
       const container = mapContainerRef.current!;
       const map = L.map(container, { zoomControl: true }).setView(
@@ -177,7 +242,6 @@ export default function TravelMapClient() {
         maxZoom: 19,
       }).addTo(map);
 
-      // Build country color map
       const colorMap = new Map<string, string>();
 
       // Draw dashed polyline connecting all points in order
@@ -195,7 +259,6 @@ export default function TravelMapClient() {
         const country = p.country || "Unknown";
         const color = colorForCountry(country, colorMap);
 
-        // Circular DivIcon
         const icon = L.divIcon({
           className: "",
           html: `<div style="
@@ -217,17 +280,26 @@ export default function TravelMapClient() {
             })
           : "Unknown date";
 
+        // Build popup content — include thumbnail only when file is available
+        let thumbnailHtml = "";
+        if (p.thumbnailUrl) {
+          thumbnailHtml = `<img src="${p.thumbnailUrl}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;margin-bottom:6px;display:block;" alt="${p.name}" />`;
+        }
+
         const popupContent = `
           <div style="font-family:Inter,sans-serif;min-width:160px;">
-            <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:4px;">${p.file.name}</div>
+            ${thumbnailHtml}
+            <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:4px;">${p.name}</div>
             <div style="font-size:12px;color:#737373;margin-bottom:2px;">${p.displayName || p.country || "Unknown location"}</div>
             <div style="font-size:11px;color:#A3A3A3;">${dateStr}</div>
           </div>
         `;
 
-        L.marker([p.lat, p.lon], { icon })
+        const marker = L.marker([p.lat, p.lon], { icon })
           .bindPopup(popupContent, { maxWidth: 220 })
           .addTo(map);
+
+        markersRef.current.push(marker);
       }
 
       // Fit map to all points
@@ -241,16 +313,6 @@ export default function TravelMapClient() {
 
     return () => clearTimeout(timer);
   }, [uiState, points]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (leafletMapRef.current) {
-        leafletMapRef.current.remove();
-        leafletMapRef.current = null;
-      }
-    };
-  }, []);
 
   // ── Process uploaded files ─────────────────────────────────────────────────
 
@@ -270,7 +332,6 @@ export default function TravelMapClient() {
     setUiState("processing");
     setProgressPercent(0);
 
-    // Lazy-load exifr
     let exifr: typeof import("exifr");
     try {
       exifr = await import("exifr");
@@ -280,12 +341,13 @@ export default function TravelMapClient() {
       return;
     }
 
-    // ── Step 1: Read GPS and date from every file ──────────────────────────
+    // ── Step 1: Read GPS, date, and create thumbnail blob URLs ─────────────
     const rawPoints: Array<{
       file: File;
       lat: number;
       lon: number;
       date: Date | null;
+      thumbnailUrl: string;
     }> = [];
 
     for (let i = 0; i < accepted.length; i++) {
@@ -308,7 +370,8 @@ export default function TravelMapClient() {
           } else if (exifData?.CreateDate) {
             date = new Date(exifData.CreateDate);
           }
-          rawPoints.push({ file, lat: gps.latitude, lon: gps.longitude, date });
+          const thumbnailUrl = URL.createObjectURL(file);
+          rawPoints.push({ file, lat: gps.latitude, lon: gps.longitude, date, thumbnailUrl });
         }
       } catch {
         errorMessages.push(`Could not read EXIF from ${file.name} — skipped.`);
@@ -324,7 +387,7 @@ export default function TravelMapClient() {
       return;
     }
 
-    // Sort by date if available (photos without dates go to end)
+    // Sort by date (photos without dates go to end)
     rawPoints.sort((a, b) => {
       if (!a.date && !b.date) return 0;
       if (!a.date) return 1;
@@ -364,9 +427,7 @@ export default function TravelMapClient() {
         gridToGeo.set(key, geo);
       } catch {
         gridToGeo.set(key, { country: null, displayName: null });
-        errorMessages.push(
-          `Could not fetch location name for area ${key}.`
-        );
+        errorMessages.push(`Could not fetch location name for area ${key}.`);
       }
 
       if (k < uniqueKeys.length - 1) {
@@ -385,6 +446,8 @@ export default function TravelMapClient() {
         date: p.date,
         country: geo.country,
         displayName: geo.displayName,
+        thumbnailUrl: p.thumbnailUrl,
+        name: p.file.name,
       };
     });
 
@@ -414,23 +477,34 @@ export default function TravelMapClient() {
   );
 
   const handleReset = useCallback(() => {
+    // Revoke all blob URLs to avoid memory leaks
+    points.forEach((p) => {
+      if (p.thumbnailUrl) URL.revokeObjectURL(p.thumbnailUrl);
+    });
     if (leafletMapRef.current) {
       leafletMapRef.current.remove();
       leafletMapRef.current = null;
     }
+    markersRef.current = [];
     setUiState("idle");
     setPoints([]);
     setErrors([]);
     setProgressPercent(0);
     setProgressMessage("");
     setCopied(false);
+    setLinkCopied(false);
+    setIsSharedView(false);
+    // Clear the hash
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
     if (fileInputRef.current) fileInputRef.current.value = "";
-  }, []);
+  }, [points]);
 
   const handleCopyCoordinates = useCallback(() => {
     const json = JSON.stringify(
       points.map((p) => ({
-        file: p.file.name,
+        file: p.name,
         lat: p.lat,
         lon: p.lon,
         date: p.date?.toISOString() ?? null,
@@ -445,8 +519,35 @@ export default function TravelMapClient() {
     });
   }, [points]);
 
+  const handleShareMap = useCallback(() => {
+    const shareData: ShareData = {
+      points: points.map((p) => ({
+        lat: p.lat,
+        lon: p.lon,
+        country: p.country,
+        displayName: p.displayName,
+        date: p.date?.toISOString() ?? null,
+        name: p.name,
+      })),
+      generatedAt: new Date().toISOString(),
+    };
+    const encoded = btoa(encodeURIComponent(JSON.stringify(shareData)));
+    window.location.hash = `map=${encoded}`;
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 3000);
+    });
+  }, [points]);
+
+  const handlePanToPoint = useCallback((index: number) => {
+    if (!leafletMapRef.current) return;
+    const p = points[index];
+    leafletMapRef.current.setView([p.lat, p.lon], 10, { animate: true });
+    const marker = markersRef.current[index];
+    if (marker) marker.openPopup();
+  }, [points]);
+
   const googleMapsUrl = useCallback(() => {
-    // Google Maps directions with up to 8 waypoints (API limit)
     const sample = points.slice(0, 10);
     if (sample.length < 2) return null;
     const origin = `${sample[0].lat},${sample[0].lon}`;
@@ -456,7 +557,9 @@ export default function TravelMapClient() {
       .map((p) => `${p.lat},${p.lon}`)
       .join("|");
     const base = "https://www.google.com/maps/dir/";
-    return `${base}?api=1&origin=${origin}&destination=${destination}${waypoints ? `&waypoints=${waypoints}` : ""}`;
+    return `${base}?api=1&origin=${origin}&destination=${destination}${
+      waypoints ? `&waypoints=${waypoints}` : ""
+    }`;
   }, [points]);
 
   // ── Stats ──────────────────────────────────────────────────────────────────
@@ -467,7 +570,6 @@ export default function TravelMapClient() {
 
   const distanceKm = Math.round(totalDistanceKm(points));
 
-  // Country list with counts
   const countryCounts = new Map<string, number>();
   for (const p of points) {
     const c = p.country || "Unknown";
@@ -480,7 +582,31 @@ export default function TravelMapClient() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+
+      {/* ── Shared view banner ── */}
+      {isSharedView && uiState === "map" && (
+        <div className="mb-4 flex items-center justify-between gap-3 px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-md">
+          <p className="text-sm text-[#525252]">
+            <span className="mr-1">📍</span>
+            Viewing a shared TravelMap &mdash;{" "}
+            <span className="font-medium text-[#171717]">
+              {uniqueCountries.length} {uniqueCountries.length === 1 ? "country" : "countries"}
+            </span>
+            ,{" "}
+            <span className="font-medium text-[#171717]">
+              {points.length} {points.length === 1 ? "photo" : "photos"}
+            </span>
+          </p>
+          <button
+            onClick={handleReset}
+            className="shrink-0 text-xs font-medium text-[#6366F1] hover:underline"
+          >
+            Create yours →
+          </button>
+        </div>
+      )}
+
       {/* ── Idle: DropZone ── */}
       {uiState === "idle" && (
         <div
@@ -567,6 +693,7 @@ export default function TravelMapClient() {
       {/* ── Map view ── */}
       {uiState === "map" && (
         <div className="space-y-4">
+
           {/* Header row */}
           <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5]">
             <p className="text-sm font-medium text-[#171717]">
@@ -603,52 +730,142 @@ export default function TravelMapClient() {
             </div>
           )}
 
+          {/* Stats bar — above the map */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="border border-[#E5E5E5] rounded-md p-3 bg-white flex items-center gap-3">
+              <Globe className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
+              <div>
+                <p className="text-lg font-semibold text-[#171717] leading-none">
+                  {uniqueCountries.length}
+                </p>
+                <p className="text-xs text-[#737373] mt-0.5">
+                  {uniqueCountries.length === 1 ? "country" : "countries"}
+                </p>
+              </div>
+            </div>
+            <div className="border border-[#E5E5E5] rounded-md p-3 bg-white flex items-center gap-3">
+              <Camera className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
+              <div>
+                <p className="text-lg font-semibold text-[#171717] leading-none">
+                  {points.length}
+                </p>
+                <p className="text-xs text-[#737373] mt-0.5">
+                  {points.length === 1 ? "photo" : "photos"}
+                </p>
+              </div>
+            </div>
+            <div className="border border-[#E5E5E5] rounded-md p-3 bg-white flex items-center gap-3">
+              <Navigation className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
+              <div>
+                <p className="text-lg font-semibold text-[#171717] leading-none">
+                  {distanceKm.toLocaleString()}
+                </p>
+                <p className="text-xs text-[#737373] mt-0.5">km traveled</p>
+              </div>
+            </div>
+          </div>
+
           {/* Map container */}
           <div className="border border-[#E5E5E5] rounded-lg overflow-hidden">
             <div
               ref={mapContainerRef}
-              style={{ height: "480px", width: "100%" }}
+              style={{ height: "350px", width: "100%" }}
+              className="sm:!h-[500px]"
               aria-label="Interactive travel map"
             />
           </div>
 
-          {/* Stats bar */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="border border-[#E5E5E5] rounded-md p-4 bg-white text-center">
-              <div className="flex items-center justify-center mb-1">
-                <Globe className="h-4 w-4 text-[#737373]" strokeWidth={1.5} />
+          {/* Photo strip — only shown when files are available (not shared mode) */}
+          {!isSharedView && points.some((p) => p.thumbnailUrl) && (
+            <div>
+              <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-2">
+                Photo timeline
+              </p>
+              <div
+                className="border border-[#E5E5E5] rounded-lg bg-white p-2"
+                style={{ overflowX: "auto" }}
+              >
+                <div style={{ display: "flex", gap: "8px", padding: "4px" }}>
+                  {points.map((p, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handlePanToPoint(i)}
+                      title={`${p.name} — ${p.displayName || p.country || "Unknown"}`}
+                      className="shrink-0 flex flex-col items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded"
+                      style={{ width: "80px" }}
+                    >
+                      {p.thumbnailUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={p.thumbnailUrl}
+                          alt={p.name}
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            objectFit: "cover",
+                            borderRadius: "6px",
+                            display: "block",
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            borderRadius: "6px",
+                            background: "#F5F5F5",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Camera
+                            className="h-5 w-5 text-[#A3A3A3]"
+                            strokeWidth={1.5}
+                          />
+                        </div>
+                      )}
+                      {p.country && (
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            fontWeight: 500,
+                            color: "#525252",
+                            background: "#F5F5F5",
+                            border: "1px solid #E5E5E5",
+                            borderRadius: "4px",
+                            padding: "1px 4px",
+                            maxWidth: "78px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            display: "block",
+                            textAlign: "center",
+                          }}
+                        >
+                          {p.country}
+                        </span>
+                      )}
+                      {p.date && (
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            color: "#A3A3A3",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {p.date.toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <p className="text-xl font-semibold text-[#171717]">
-                {uniqueCountries.length}
-              </p>
-              <p className="text-xs text-[#737373] mt-0.5">
-                {uniqueCountries.length === 1 ? "country" : "countries"}
-              </p>
             </div>
-            <div className="border border-[#E5E5E5] rounded-md p-4 bg-white text-center">
-              <div className="flex items-center justify-center mb-1">
-                <Camera className="h-4 w-4 text-[#737373]" strokeWidth={1.5} />
-              </div>
-              <p className="text-xl font-semibold text-[#171717]">
-                {points.length}
-              </p>
-              <p className="text-xs text-[#737373] mt-0.5">
-                {points.length === 1 ? "photo" : "photos"}
-              </p>
-            </div>
-            <div className="border border-[#E5E5E5] rounded-md p-4 bg-white text-center">
-              <div className="flex items-center justify-center mb-1">
-                <Navigation
-                  className="h-4 w-4 text-[#737373]"
-                  strokeWidth={1.5}
-                />
-              </div>
-              <p className="text-xl font-semibold text-[#171717]">
-                {distanceKm.toLocaleString()}
-              </p>
-              <p className="text-xs text-[#737373] mt-0.5">km traveled</p>
-            </div>
-          </div>
+          )}
 
           {/* Two-column lower section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -678,13 +895,35 @@ export default function TravelMapClient() {
 
             {/* Export actions */}
             <div className="space-y-2">
-              <button
-                onClick={handleCopyCoordinates}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
-              >
-                <Copy className="h-4 w-4" strokeWidth={1.5} />
-                {copied ? "Copied!" : "Copy coordinates as JSON"}
-              </button>
+              {/* Share map button — only in non-shared mode */}
+              {!isSharedView && (
+                <button
+                  onClick={handleShareMap}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-[#4F46E5] transition-colors"
+                >
+                  {linkCopied ? (
+                    <>
+                      <LinkIcon className="h-4 w-4" strokeWidth={1.5} />
+                      Link copied!
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="h-4 w-4" strokeWidth={1.5} />
+                      Share your map
+                    </>
+                  )}
+                </button>
+              )}
+
+              {!isSharedView && (
+                <button
+                  onClick={handleCopyCoordinates}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
+                >
+                  <Copy className="h-4 w-4" strokeWidth={1.5} />
+                  {copied ? "Copied!" : "Copy coordinates as JSON"}
+                </button>
+              )}
 
               {googleMapsUrl() && (
                 <a
@@ -698,9 +937,17 @@ export default function TravelMapClient() {
                 </a>
               )}
 
-              <p className="text-xs text-[#A3A3A3] text-center leading-relaxed px-2">
-                Use your browser&rsquo;s screenshot tool to save the map as an image
-              </p>
+              {!isSharedView && (
+                <p className="text-xs text-[#A3A3A3] text-center leading-relaxed px-2">
+                  Use your browser&rsquo;s screenshot tool to save the map as an image
+                </p>
+              )}
+
+              {isSharedView && (
+                <p className="text-xs text-[#A3A3A3] text-center leading-relaxed px-2">
+                  This is a read-only shared map. Upload your own photos to create yours.
+                </p>
+              )}
             </div>
           </div>
         </div>
