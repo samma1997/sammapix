@@ -28,6 +28,7 @@ const tools = [
   { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "soon" },
   { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,   name: "StampIt",   desc: "Batch watermark",                status: "soon" },
   { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "soon" },
+  // eslint-disable-next-line jsx-a11y/alt-text
   { icon: <Image className="h-4 w-4" strokeWidth={1.5} />,   name: "More...",   desc: "New tools every month (Pro first)", status: "soon" },
 ];
 

@@ -17,13 +17,26 @@ import {
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Link from "next/link";
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const piexif = require("piexifjs") as {
+type PiexifType = {
   remove: (data: string) => string;
   load: (data: string) => Record<string, unknown>;
   dump: (exifObj: Record<string, unknown>) => string;
   insert: (exifBytes: string, data: string) => string;
 };
+
+// Lazy-load piexifjs to avoid SSR issues (it accesses `window` at module init)
+async function loadPiexif(): Promise<PiexifType> {
+  const mod = await import("piexifjs");
+  // piexifjs exports itself as default or as the module object directly
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return ((mod as any).default ?? mod) as PiexifType;
+}
+
+/** Lazy-load heic2any only in the browser (it accesses `window` at module init). */
+async function loadHeic2any(): Promise<typeof import("heic2any").default> {
+  const mod = await import("heic2any");
+  return (mod as unknown as { default: typeof import("heic2any").default }).default ?? (mod as unknown as typeof import("heic2any").default);
+}
 import { MAX_FILES_FREE } from "@/lib/constants";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -75,6 +88,8 @@ interface ProcessedFile {
   currentBlob: Blob | null; // null = use original
   errorMessage?: string;
   fileType: "jpeg" | "heic" | "png" | "other";
+  /** For HEIC files that have been converted+stripped — download as .jpg */
+  downloadAsJpg?: boolean;
 }
 
 type UIState = "idle" | "parsing" | "results" | "downloading";
@@ -122,9 +137,36 @@ function generateId(): string {
   return Math.random().toString(36).slice(2, 10);
 }
 
+/** Derive the download filename for a processed file */
+function downloadName(f: ProcessedFile): string {
+  if (f.downloadAsJpg) {
+    const base = f.original.name.replace(/\.(heic|heif)$/i, "");
+    return `${base}.jpg`;
+  }
+  return f.original.name;
+}
+
+// ── HEIC → JPEG conversion ────────────────────────────────────────────────────
+
+async function convertHeicToJpegBlob(file: File): Promise<Blob> {
+  const heic2any = await loadHeic2any();
+  const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.95 });
+  return result as Blob;
+}
+
+async function blobToDataURL(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => resolve(e.target?.result as string);
+    reader.onerror = () => reject(new Error("Failed to read blob"));
+    reader.readAsDataURL(blob);
+  });
+}
+
 // ── EXIF Removal ──────────────────────────────────────────────────────────────
 
 async function removeAllExif(file: File): Promise<Blob> {
+  const piexif = await loadPiexif();
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -145,6 +187,7 @@ async function removeAllExif(file: File): Promise<Blob> {
 }
 
 async function removeGpsOnly(file: File): Promise<Blob> {
+  const piexif = await loadPiexif();
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -165,6 +208,37 @@ async function removeGpsOnly(file: File): Promise<Blob> {
     reader.onerror = () => reject(new Error("Failed to read file"));
     reader.readAsDataURL(file);
   });
+}
+
+/**
+ * For HEIC: convert to JPEG first, then remove GPS from the resulting JPEG blob.
+ */
+async function heicRemoveGps(file: File): Promise<Blob> {
+  const piexif = await loadPiexif();
+  const jpegBlob = await convertHeicToJpegBlob(file);
+  const dataUrl = await blobToDataURL(jpegBlob);
+  const exifObj = piexif.load(dataUrl);
+  delete exifObj["GPS"];
+  const exifBytes = piexif.dump(exifObj);
+  const newData = piexif.insert(exifBytes, dataUrl);
+  const binary = atob(newData.split(",")[1]);
+  const arr = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) arr[i] = binary.charCodeAt(i);
+  return new Blob([arr], { type: "image/jpeg" });
+}
+
+/**
+ * For HEIC: convert to JPEG first, then strip all EXIF.
+ */
+async function heicRemoveAllExif(file: File): Promise<Blob> {
+  const piexif = await loadPiexif();
+  const jpegBlob = await convertHeicToJpegBlob(file);
+  const dataUrl = await blobToDataURL(jpegBlob);
+  const stripped = piexif.remove(dataUrl);
+  const binary = atob(stripped.split(",")[1]);
+  const arr = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) arr[i] = binary.charCodeAt(i);
+  return new Blob([arr], { type: "image/jpeg" });
 }
 
 // ── EXIF Parsing ──────────────────────────────────────────────────────────────
@@ -286,7 +360,8 @@ export default function ExifLens() {
         status = "no-support";
       } else if (fileType === "heic") {
         exif = await parseExif(file);
-        status = "no-support"; // can read but not modify
+        // HEIC is now fully supported via heic2any conversion
+        status = "ready";
       } else if (fileType === "jpeg") {
         exif = await parseExif(file);
         status = "ready";
@@ -302,6 +377,7 @@ export default function ExifLens() {
         status,
         currentBlob: null,
         fileType,
+        downloadAsJpg: false,
       });
     }
 
@@ -324,27 +400,49 @@ export default function ExifLens() {
     setFiles((prev) =>
       prev.map((f) => f.id === id ? { ...f, status: "removing-gps" } : f)
     );
-    setFiles((prev) => {
-      const target = prev.find((f) => f.id === id);
-      if (!target) return prev;
-      return prev;
-    });
 
     const target = files.find((f) => f.id === id);
-    if (!target || target.fileType !== "jpeg") return;
+    if (!target) return;
 
     try {
-      const sourceFile = target.currentBlob
-        ? new File([target.currentBlob], target.original.name, { type: "image/jpeg" })
-        : target.original;
-      const blob = await removeGpsOnly(sourceFile);
-      setFiles((prev) =>
-        prev.map((f) =>
-          f.id === id
-            ? { ...f, currentBlob: blob, hasGps: false, status: "done-gps", exif: f.exif ? { ...f.exif, location: undefined } : null }
-            : f
-        )
-      );
+      let blob: Blob;
+
+      if (target.fileType === "heic") {
+        // Convert HEIC → JPEG, then remove GPS
+        blob = await heicRemoveGps(target.original);
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === id
+              ? {
+                  ...f,
+                  currentBlob: blob,
+                  hasGps: false,
+                  status: "done-gps",
+                  exif: f.exif ? { ...f.exif, location: undefined } : null,
+                  downloadAsJpg: true,
+                }
+              : f
+          )
+        );
+      } else if (target.fileType === "jpeg") {
+        const sourceFile = target.currentBlob
+          ? new File([target.currentBlob], target.original.name, { type: "image/jpeg" })
+          : target.original;
+        blob = await removeGpsOnly(sourceFile);
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === id
+              ? {
+                  ...f,
+                  currentBlob: blob,
+                  hasGps: false,
+                  status: "done-gps",
+                  exif: f.exif ? { ...f.exif, location: undefined } : null,
+                }
+              : f
+          )
+        );
+      }
     } catch {
       setFiles((prev) =>
         prev.map((f) => f.id === id ? { ...f, status: "error", errorMessage: "Failed to remove GPS" } : f)
@@ -359,17 +457,37 @@ export default function ExifLens() {
     );
 
     const target = files.find((f) => f.id === id);
-    if (!target || target.fileType !== "jpeg") return;
+    if (!target) return;
 
     try {
-      const blob = await removeAllExif(target.original);
-      setFiles((prev) =>
-        prev.map((f) =>
-          f.id === id
-            ? { ...f, currentBlob: blob, hasGps: false, status: "done-exif", exif: null }
-            : f
-        )
-      );
+      let blob: Blob;
+
+      if (target.fileType === "heic") {
+        blob = await heicRemoveAllExif(target.original);
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === id
+              ? {
+                  ...f,
+                  currentBlob: blob,
+                  hasGps: false,
+                  status: "done-exif",
+                  exif: null,
+                  downloadAsJpg: true,
+                }
+              : f
+          )
+        );
+      } else if (target.fileType === "jpeg") {
+        blob = await removeAllExif(target.original);
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === id
+              ? { ...f, currentBlob: blob, hasGps: false, status: "done-exif", exif: null }
+              : f
+          )
+        );
+      }
     } catch {
       setFiles((prev) =>
         prev.map((f) => f.id === id ? { ...f, status: "error", errorMessage: "Failed to remove EXIF" } : f)
@@ -377,17 +495,17 @@ export default function ExifLens() {
     }
   }, [files]);
 
-  // Global: remove GPS from all
+  // Global: remove GPS from all (JPEG + HEIC)
   const handleRemoveAllGps = useCallback(async () => {
-    const targets = files.filter((f) => f.hasGps && f.fileType === "jpeg");
+    const targets = files.filter((f) => f.hasGps && (f.fileType === "jpeg" || f.fileType === "heic"));
     for (const t of targets) {
       await handleRemoveGps(t.id);
     }
   }, [files, handleRemoveGps]);
 
-  // Global: remove all EXIF
+  // Global: remove all EXIF (JPEG + HEIC)
   const handleRemoveAllExif = useCallback(async () => {
-    const targets = files.filter((f) => f.fileType === "jpeg");
+    const targets = files.filter((f) => f.fileType === "jpeg" || f.fileType === "heic");
     for (const t of targets) {
       await handleRemoveExif(t.id);
     }
@@ -401,7 +519,7 @@ export default function ExifLens() {
       for (const f of files) {
         const source = f.currentBlob ?? f.original;
         const buffer = await source.arrayBuffer();
-        zip.file(f.original.name, buffer);
+        zip.file(downloadName(f), buffer);
       }
       const blob = await zip.generateAsync({ type: "blob" });
       saveAs(blob, "exiflens-cleaned.zip");
@@ -420,7 +538,7 @@ export default function ExifLens() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
-  const jpegFiles = files.filter((f) => f.fileType === "jpeg");
+  const actionableFiles = files.filter((f) => f.fileType === "jpeg" || f.fileType === "heic");
   const filesWithGps = files.filter((f) => f.hasGps);
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -525,9 +643,9 @@ export default function ExifLens() {
           </div>
 
           {/* Action bar */}
-          {jpegFiles.length > 0 && (
+          {actionableFiles.length > 0 && (
             <div className="flex flex-wrap gap-2 p-3 border border-[#E5E5E5] rounded-md bg-[#FAFAFA]">
-              {filesWithGps.filter((f) => f.fileType === "jpeg").length > 0 && (
+              {filesWithGps.filter((f) => f.fileType === "jpeg" || f.fileType === "heic").length > 0 && (
                 <button
                   onClick={handleRemoveAllGps}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] bg-white text-[#525252] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
@@ -594,6 +712,20 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
   const isJpeg = file.fileType === "jpeg";
   const isPng = file.fileType === "png";
   const isHeic = file.fileType === "heic";
+  const isActionable = isJpeg || isHeic;
+
+  // A HEIC file becomes downloadable only after removal has been performed
+  const heicNotYetProcessed = isHeic && !file.currentBlob;
+
+  const handleDownload = () => {
+    if (!file.currentBlob) return;
+    const url = URL.createObjectURL(file.currentBlob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = downloadName(file);
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden">
@@ -639,7 +771,7 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
 
         {/* Per-file actions */}
         <div className="flex items-center gap-1.5 shrink-0">
-          {isJpeg && file.hasGps && (
+          {isActionable && file.hasGps && (
             <button
               onClick={onRemoveGps}
               disabled={isProcessing}
@@ -654,7 +786,7 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
               GPS
             </button>
           )}
-          {isJpeg && file.status !== "done-exif" && (
+          {isActionable && file.status !== "done-exif" && (
             <button
               onClick={onRemoveExif}
               disabled={isProcessing}
@@ -667,6 +799,27 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
                 <ShieldOff className="h-3 w-3" strokeWidth={1.5} />
               )}
               EXIF
+            </button>
+          )}
+          {/* Per-file download button — shown after removal for JPEG; after conversion for HEIC */}
+          {isJpeg && file.currentBlob && (
+            <button
+              onClick={handleDownload}
+              title="Download cleaned file"
+              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-1 border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
+            >
+              <Download className="h-3 w-3" strokeWidth={1.5} />
+              Save
+            </button>
+          )}
+          {isHeic && file.currentBlob && (
+            <button
+              onClick={handleDownload}
+              title="Download as JPG"
+              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-1 border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
+            >
+              <Download className="h-3 w-3" strokeWidth={1.5} />
+              Save .jpg
             </button>
           )}
         </div>
@@ -685,11 +838,23 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
 
           {isHeic && (
             <>
-              <ExifMetadataGrid exif={file.exif} />
+              {file.status === "done-exif" ? (
+                <div className="px-4 py-3">
+                  <p className="text-xs text-[#16A34A]">All EXIF metadata has been removed from this file.</p>
+                </div>
+              ) : (
+                <ExifMetadataGrid exif={file.exif} />
+              )}
               <div className="px-4 pb-3">
-                <p className="text-xs text-[#A3A3A3]">
-                  Download not available for HEIC — convert to JPG first to strip metadata.
-                </p>
+                {heicNotYetProcessed ? (
+                  <p className="text-xs text-[#A3A3A3]">
+                    Convert to JPG to enable download — use the GPS or EXIF removal buttons above.
+                  </p>
+                ) : (
+                  <p className="text-xs text-[#737373]">
+                    Will be downloaded as .jpg (HEIC converted automatically)
+                  </p>
+                )}
               </div>
             </>
           )}
