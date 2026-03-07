@@ -42,8 +42,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Tool attivi — 2 card grandi */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          {/* Tool attivi — card grandi */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             <Link
               href="/tools/compress"
               className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
@@ -97,6 +97,37 @@ export default function HomePage() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["GPS EXIF", "Country Folders", "ZIP"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/travelmap"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <circle cx="8" cy="8" r="6.5" stroke="#6366F1" strokeWidth="1.5" fill="#6366F1" fillOpacity="0.08"/>
+                      <circle cx="8" cy="8" r="1.5" fill="#6366F1"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">TravelMap</span>
+                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                      Free
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Carica le foto di viaggio — vedi tutti i tuoi posti su una mappa interattiva. Conta paesi e km percorsi.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["GPS Map", "Countries", "Travel route", "Interactive"].map((f) => (
                       <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
                         {f}
                       </span>

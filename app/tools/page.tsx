@@ -169,6 +169,31 @@ function IconGeoSort() {
   );
 }
 
+function IconTravelMap() {
+  return (
+    <svg width="72" height="60" viewBox="0 0 72 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Globe outline */}
+      <circle cx="36" cy="30" r="22" stroke="#171717" strokeWidth="1.5" fill="#EEF2FF"/>
+      {/* Latitude lines */}
+      <ellipse cx="36" cy="30" rx="22" ry="10" stroke="#C7D2FE" strokeWidth="0.75" fill="none"/>
+      <line x1="14" y1="30" x2="58" y2="30" stroke="#C7D2FE" strokeWidth="0.75"/>
+      {/* Longitude line */}
+      <line x1="36" y1="8" x2="36" y2="52" stroke="#C7D2FE" strokeWidth="0.75"/>
+      {/* Travel path */}
+      <path d="M22 38 Q30 20 44 24 Q52 26 50 36" stroke="#6366F1" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" fill="none" strokeDasharray="3 2"/>
+      {/* Pin 1 — bottom-left */}
+      <circle cx="22" cy="38" r="3.5" fill="#6366F1"/>
+      <circle cx="22" cy="38" r="1.5" fill="white"/>
+      {/* Pin 2 — top-center */}
+      <circle cx="44" cy="24" r="3.5" fill="#171717"/>
+      <circle cx="44" cy="24" r="1.5" fill="white"/>
+      {/* Pin 3 — right */}
+      <circle cx="50" cy="36" r="3.5" fill="#6366F1"/>
+      <circle cx="50" cy="36" r="1.5" fill="white"/>
+    </svg>
+  );
+}
+
 function IconExifLens() {
   const css = `
     @keyframes exif-scan {
@@ -496,6 +521,14 @@ const ACTIVE = [
     features: ["GPS removal", "Privacy clean", "Batch", "No upload"],
     bg: "#F0FDF4",
     Illustration: IconExifLens,
+  },
+  {
+    name: "TravelMap",
+    href: "/tools/travelmap",
+    description: "Carica le foto di viaggio — GeoSort legge il GPS e genera una mappa interattiva con tutti i luoghi visitati, conteggio paesi e km percorsi.",
+    features: ["Interactive map", "GPS EXIF", "Countries counter", "No upload"],
+    bg: "#EFF6FF",
+    Illustration: IconTravelMap,
   },
 ];
 

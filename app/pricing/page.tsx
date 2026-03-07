@@ -2,7 +2,7 @@
 
 import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Check, X, ArrowRight, Zap, Image, MapPin, Scissors, Stamp, ScanEye, Package } from "lucide-react";
+import { Check, X, ArrowRight, Zap, Image, MapPin, Globe, Scissors, Stamp, ScanEye, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
@@ -10,6 +10,7 @@ import CheckoutButton from "@/components/ui/CheckoutButton";
 const features = [
   { label: "Crunch — compress + WebP",   free: true,       pro: true },
   { label: "GeoSort — sort by GPS",      free: "50 photos", pro: "500 photos" },
+  { label: "TravelMap — GPS map",        free: true,        pro: true },
   { label: "AI Rename",                  free: "5 / day",   pro: "200 / day" },
   { label: "Files per batch",            free: "20",        pro: "500" },
   { label: "Max file size",              free: "20 MB",     pro: "50 MB" },
@@ -22,6 +23,7 @@ const features = [
 const tools = [
   { icon: <Zap className="h-4 w-4" strokeWidth={1.5} />,     name: "Crunch",    desc: "Compress · WebP · AI Rename",    status: "live" },
   { icon: <MapPin className="h-4 w-4" strokeWidth={1.5} />,  name: "GeoSort",   desc: "Sort photos by GPS country",     status: "live" },
+  { icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,   name: "TravelMap", desc: "Interactive travel map",          status: "live" },
   { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,name: "Cull",      desc: "Quick keyboard review",          status: "soon" },
   { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "soon" },
   { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,   name: "StampIt",   desc: "Batch watermark",                status: "soon" },
