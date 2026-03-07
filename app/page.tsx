@@ -5,10 +5,6 @@ import HeroSection from "@/components/layout/HeroSection";
 
 const COMING_SOON_TOOLS = [
   {
-    name: "GeoSort",
-    desc: "Legge il GPS dalle foto, crea cartelle per destinazione e scarica ZIP organizzato.",
-  },
-  {
     name: "Cull",
     desc: "Review rapida da tastiera: K tieni, X scarta. Esporta solo le migliori.",
   },
@@ -19,6 +15,10 @@ const COMING_SOON_TOOLS = [
   {
     name: "EXIF Lens",
     desc: "Visualizza e rimuovi metadati GPS e dati privati prima di pubblicare.",
+  },
+  {
+    name: "ResizePack",
+    desc: "Ridimensiona in batch in px o percentuale, esporta ZIP pronto.",
   },
 ];
 
@@ -42,40 +42,62 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Tool principale — card grande */}
-          <Link
-            href="/tools"
-            className="group block mb-4 p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-base font-semibold text-[#171717]">Crunch</span>
-                  <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
-                    Free
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                  Comprimi, converti in WebP e rinomina le tue immagini con AI — tutto in una sola passata, direttamente nel browser.
-                </p>
-                {/* Feature pills */}
-                <div className="flex flex-wrap gap-2">
-                  {["Compress", "WebP Converter", "AI Rename", "Batch ZIP"].map((f) => (
-                    <span
-                      key={f}
-                      className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200"
-                    >
-                      {f}
+          {/* Tool attivi — 2 card grandi */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <Link
+              href="/tools/compress"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-base font-semibold text-[#171717]">Crunch</span>
+                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                      Free
                     </span>
-                  ))}
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Comprimi, converti in WebP e rinomina con AI — tutto nel browser.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Compress", "WebP", "AI Rename", "ZIP"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
               </div>
-              <ArrowRight
-                className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1"
-                strokeWidth={1.5}
-              />
-            </div>
-          </Link>
+            </Link>
+
+            <Link
+              href="/tools/geosort"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-base font-semibold text-[#171717]">GeoSort</span>
+                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
+                      Free
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Legge il GPS dalle foto e crea cartelle per paese — scarica ZIP organizzato.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["GPS EXIF", "Country Folders", "ZIP"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+          </div>
 
           {/* Grid coming soon */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
