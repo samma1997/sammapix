@@ -4,8 +4,6 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import {
   MapPin,
   RotateCcw,
-  Copy,
-  ExternalLink,
   Globe,
   Camera,
   Navigation,
@@ -139,7 +137,6 @@ export default function TravelMapClient() {
   const [points, setPoints] = useState<PhotoPoint[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [isSharedView, setIsSharedView] = useState(false);
 
@@ -233,7 +230,7 @@ export default function TravelMapClient() {
       const container = mapContainerRef.current!;
       const map = L.map(container, { zoomControl: true }).setView(
         [points[0].lat, points[0].lon],
-        4
+        5
       );
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -280,32 +277,32 @@ export default function TravelMapClient() {
             })
           : "Unknown date";
 
-        // Build popup content — include thumbnail only when file is available
+        // Build popup content — include thumbnail only when available
         let thumbnailHtml = "";
         if (p.thumbnailUrl) {
-          thumbnailHtml = `<img src="${p.thumbnailUrl}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;margin-bottom:6px;display:block;" alt="${p.name}" />`;
+          thumbnailHtml = `<img src="${p.thumbnailUrl}" style="width:100px;height:75px;object-fit:cover;border-radius:4px;margin-bottom:6px;display:block;" alt="${p.name}" />`;
         }
 
         const popupContent = `
-          <div style="font-family:Inter,sans-serif;min-width:160px;">
+          <div style="font-family:Inter,sans-serif;min-width:180px;max-width:220px;">
             ${thumbnailHtml}
-            <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:4px;">${p.name}</div>
-            <div style="font-size:12px;color:#737373;margin-bottom:2px;">${p.displayName || p.country || "Unknown location"}</div>
-            <div style="font-size:11px;color:#A3A3A3;">${dateStr}</div>
+            <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:2px;">${p.displayName || p.country || "Unknown location"}</div>
+            <div style="font-size:11px;color:#A3A3A3;margin-bottom:2px;">${p.name}</div>
+            <div style="font-size:11px;color:#737373;">${dateStr}</div>
           </div>
         `;
 
         const marker = L.marker([p.lat, p.lon], { icon })
-          .bindPopup(popupContent, { maxWidth: 220 })
+          .bindPopup(popupContent, { maxWidth: 240 })
           .addTo(map);
 
         markersRef.current.push(marker);
       }
 
-      // Fit map to all points
+      // Fit map to all points — cap zoom so nearby clusters don't zoom to street level
       if (points.length > 1) {
         const bounds = L.latLngBounds(latlngs);
-        map.fitBounds(bounds, { padding: [40, 40] });
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
       }
 
       leafletMapRef.current = map;
@@ -317,7 +314,7 @@ export default function TravelMapClient() {
   // ── Process uploaded files ─────────────────────────────────────────────────
 
   const processFiles = useCallback(async (files: File[]) => {
-    const imageFiles = files.filter((f) => f.type.startsWith("image/"));
+    const imageFiles = files.filter((f) => f.type.startsWith("image/") || f.name.toLowerCase().endsWith(".heic") || f.name.toLowerCase().endsWith(".heif"));
     if (imageFiles.length === 0) return;
 
     const accepted = imageFiles.slice(0, MAX_TRAVELMAP_FREE);
@@ -347,7 +344,7 @@ export default function TravelMapClient() {
       lat: number;
       lon: number;
       date: Date | null;
-      thumbnailUrl: string;
+      thumbnailUrl: string | undefined;
     }> = [];
 
     for (let i = 0; i < accepted.length; i++) {
@@ -370,7 +367,34 @@ export default function TravelMapClient() {
           } else if (exifData?.CreateDate) {
             date = new Date(exifData.CreateDate);
           }
-          const thumbnailUrl = URL.createObjectURL(file);
+
+          // Try to extract embedded JPEG thumbnail via exifr (works for HEIC and JPEG)
+          let thumbnailUrl: string | undefined;
+          try {
+            const thumbData = await exifr.thumbnail(file);
+            if (thumbData) {
+              // thumbData may be Buffer or Uint8Array; copy into a plain ArrayBuffer
+              // so it is a valid BlobPart in strict TypeScript
+              const buf = thumbData.buffer.slice(
+                thumbData.byteOffset,
+                thumbData.byteOffset + thumbData.byteLength
+              ) as ArrayBuffer;
+              const blob = new Blob([buf], { type: "image/jpeg" });
+              thumbnailUrl = URL.createObjectURL(blob);
+            }
+          } catch {
+            // no embedded thumbnail — skip
+          }
+          // Fallback for JPEG only (Chrome cannot display HEIC blobs)
+          if (
+            !thumbnailUrl &&
+            (file.type === "image/jpeg" ||
+              file.name.toLowerCase().endsWith(".jpg") ||
+              file.name.toLowerCase().endsWith(".jpeg"))
+          ) {
+            thumbnailUrl = URL.createObjectURL(file);
+          }
+
           rawPoints.push({ file, lat: gps.latitude, lon: gps.longitude, date, thumbnailUrl });
         }
       } catch {
@@ -491,7 +515,6 @@ export default function TravelMapClient() {
     setErrors([]);
     setProgressPercent(0);
     setProgressMessage("");
-    setCopied(false);
     setLinkCopied(false);
     setIsSharedView(false);
     // Clear the hash
@@ -499,24 +522,6 @@ export default function TravelMapClient() {
       window.history.replaceState(null, "", window.location.pathname);
     }
     if (fileInputRef.current) fileInputRef.current.value = "";
-  }, [points]);
-
-  const handleCopyCoordinates = useCallback(() => {
-    const json = JSON.stringify(
-      points.map((p) => ({
-        file: p.name,
-        lat: p.lat,
-        lon: p.lon,
-        date: p.date?.toISOString() ?? null,
-        location: p.displayName ?? p.country ?? null,
-      })),
-      null,
-      2
-    );
-    navigator.clipboard.writeText(json).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
   }, [points]);
 
   const handleShareMap = useCallback(() => {
@@ -545,21 +550,6 @@ export default function TravelMapClient() {
     leafletMapRef.current.setView([p.lat, p.lon], 10, { animate: true });
     const marker = markersRef.current[index];
     if (marker) marker.openPopup();
-  }, [points]);
-
-  const googleMapsUrl = useCallback(() => {
-    const sample = points.slice(0, 10);
-    if (sample.length < 2) return null;
-    const origin = `${sample[0].lat},${sample[0].lon}`;
-    const destination = `${sample[sample.length - 1].lat},${sample[sample.length - 1].lon}`;
-    const waypoints = sample
-      .slice(1, -1)
-      .map((p) => `${p.lat},${p.lon}`)
-      .join("|");
-    const base = "https://www.google.com/maps/dir/";
-    return `${base}?api=1&origin=${origin}&destination=${destination}${
-      waypoints ? `&waypoints=${waypoints}` : ""
-    }`;
   }, [points]);
 
   // ── Stats ──────────────────────────────────────────────────────────────────
@@ -637,7 +627,7 @@ export default function TravelMapClient() {
             ref={fileInputRef}
             type="file"
             multiple
-            accept="image/*"
+            accept="image/*,.heic,.heif"
             className="hidden"
             onChange={handleFileInput}
           />
@@ -765,8 +755,11 @@ export default function TravelMapClient() {
             </div>
           </div>
 
-          {/* Map container */}
-          <div className="border border-[#E5E5E5] rounded-lg overflow-hidden">
+          {/* Map container — isolation:isolate traps all Leaflet z-indexes so the map never overlaps the navbar */}
+          <div
+            className="border border-[#E5E5E5] rounded-lg overflow-hidden"
+            style={{ isolation: "isolate" }}
+          >
             <div
               ref={mapContainerRef}
               style={{ height: "350px", width: "100%" }}
@@ -775,7 +768,7 @@ export default function TravelMapClient() {
             />
           </div>
 
-          {/* Photo strip — only shown when files are available (not shared mode) */}
+          {/* Photo strip — shown when any point has a thumbnail (local uploads) */}
           {!isSharedView && points.some((p) => p.thumbnailUrl) && (
             <div>
               <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-2">
@@ -792,7 +785,7 @@ export default function TravelMapClient() {
                       onClick={() => handlePanToPoint(i)}
                       title={`${p.name} — ${p.displayName || p.country || "Unknown"}`}
                       className="shrink-0 flex flex-col items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded"
-                      style={{ width: "80px" }}
+                      style={{ width: "72px" }}
                     >
                       {p.thumbnailUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -800,29 +793,27 @@ export default function TravelMapClient() {
                           src={p.thumbnailUrl}
                           alt={p.name}
                           style={{
-                            width: "80px",
-                            height: "80px",
+                            width: 72,
+                            height: 72,
                             objectFit: "cover",
-                            borderRadius: "6px",
+                            borderRadius: 6,
                             display: "block",
                           }}
                         />
                       ) : (
                         <div
                           style={{
-                            width: "80px",
-                            height: "80px",
-                            borderRadius: "6px",
+                            width: 72,
+                            height: 72,
+                            borderRadius: 6,
                             background: "#F5F5F5",
+                            border: "1px solid #E5E5E5",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                           }}
                         >
-                          <Camera
-                            className="h-5 w-5 text-[#A3A3A3]"
-                            strokeWidth={1.5}
-                          />
+                          <span style={{ fontSize: 20 }}>📷</span>
                         </div>
                       )}
                       {p.country && (
@@ -835,7 +826,7 @@ export default function TravelMapClient() {
                             border: "1px solid #E5E5E5",
                             borderRadius: "4px",
                             padding: "1px 4px",
-                            maxWidth: "78px",
+                            maxWidth: "70px",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
@@ -893,7 +884,7 @@ export default function TravelMapClient() {
               </div>
             )}
 
-            {/* Export actions */}
+            {/* Actions */}
             <div className="space-y-2">
               {/* Share map button — only in non-shared mode */}
               {!isSharedView && (
@@ -913,28 +904,6 @@ export default function TravelMapClient() {
                     </>
                   )}
                 </button>
-              )}
-
-              {!isSharedView && (
-                <button
-                  onClick={handleCopyCoordinates}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
-                >
-                  <Copy className="h-4 w-4" strokeWidth={1.5} />
-                  {copied ? "Copied!" : "Copy coordinates as JSON"}
-                </button>
-              )}
-
-              {googleMapsUrl() && (
-                <a
-                  href={googleMapsUrl()!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#E5E5E5] text-[#171717] text-sm font-medium rounded-md hover:bg-[#F5F5F5] transition-colors"
-                >
-                  <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
-                  Open route in Google Maps
-                </a>
               )}
 
               {!isSharedView && (
