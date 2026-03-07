@@ -405,10 +405,22 @@ export default function TravelMapClient() {
       setProgressPercent(Math.round(((i + 1) / accepted.length) * 90));
 
       try {
+        console.log("[TravelMap] Reading EXIF from:", file.name, "type:", file.type || "(no mime)");
+
+        // Timeout wrapper to prevent exifr hanging on certain HEIC files
+        const withTimeout = <T,>(p: Promise<T>, ms: number, fallback: T) =>
+          Promise.race([p, new Promise<T>((r) => setTimeout(() => r(fallback), ms))]);
+
         const [gps, exifData] = await Promise.all([
-          exifr.gps(file),
-          exifr.parse(file, ["DateTimeOriginal", "CreateDate"]).catch(() => null),
+          withTimeout(exifr.gps(file), 8000, null),
+          withTimeout(
+            exifr.parse(file, ["DateTimeOriginal", "CreateDate"]).catch(() => null),
+            8000,
+            null
+          ),
         ]);
+
+        console.log("[TravelMap] GPS result for", file.name, ":", gps);
 
         if (gps) {
           let date: Date | null = null;
@@ -427,18 +439,18 @@ export default function TravelMapClient() {
             file.name.toLowerCase().endsWith(".jpeg");
 
           try {
-            const thumbData = await exifr.thumbnail(file);
+            const thumbData = await withTimeout(exifr.thumbnail(file), 5000, null);
             if (thumbData && thumbData.length > 0) {
               // Copy into a clean Uint8Array to satisfy strict BlobPart types
               const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
               thumbnailUrl = URL.createObjectURL(blob);
+              console.log("[TravelMap] ✅ Thumbnail extracted for:", file.name);
+            } else {
+              console.log("[TravelMap] No embedded thumbnail for:", file.name);
             }
-          } catch {
-            // no embedded thumbnail
+          } catch (e) {
+            console.warn("[TravelMap] Thumbnail extraction failed for:", file.name, e);
           }
-
-          // Note: skipping heic2any fallback for HEIC without embedded thumb
-          // to keep processing fast — emoji placeholder shown instead.
 
           // Fallback for plain JPEG
           if (!thumbnailUrl && isJpeg) {
@@ -446,8 +458,12 @@ export default function TravelMapClient() {
           }
 
           rawPoints.push({ file, lat: gps.latitude, lon: gps.longitude, date, thumbnailUrl });
+        } else {
+          console.log("[TravelMap] No GPS found in:", file.name, "— skipped");
+          errorMessages.push(`No GPS data in ${file.name} — skipped.`);
         }
-      } catch {
+      } catch (e) {
+        console.error("[TravelMap] Error reading EXIF from:", file.name, e);
         errorMessages.push(`Could not read EXIF from ${file.name} — skipped.`);
       }
     }

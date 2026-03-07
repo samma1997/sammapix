@@ -50,46 +50,73 @@ function isHeicFile(file: File): boolean {
 
 // Returns: blob URL string, or null if completely unsupported
 async function buildPreviewUrl(file: File): Promise<string | null> {
-  if (!isHeicFile(file)) {
-    return URL.createObjectURL(file);
-  }
-
-  // Tier 1: embedded JPEG thumbnail via exifr (~50ms, no conversion)
-  try {
-    const exifr = await import("exifr");
-    const thumbData = await exifr.thumbnail(file);
-    if (thumbData && thumbData.length > 0) {
-      const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
-      return URL.createObjectURL(blob);
+  const inner = async (): Promise<string | null> => {
+    if (!isHeicFile(file)) {
+      return URL.createObjectURL(file);
     }
-  } catch { /* no embedded thumbnail */ }
 
-  // Tier 2: native OS decode via createImageBitmap (Safari/macOS only)
-  try {
-    const bitmap = await createImageBitmap(file);
-    const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      ctx.drawImage(bitmap, 0, 0);
+    console.log("[Cull] HEIC detected — building preview for:", file.name);
+
+    // Tier 1: embedded JPEG thumbnail via exifr (~50ms, no conversion)
+    try {
+      const exifr = await import("exifr");
+      const thumbData = await exifr.thumbnail(file);
+      if (thumbData && thumbData.length > 0) {
+        console.log("[Cull] ✅ Tier 1 (exifr thumbnail) OK:", file.name);
+        const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
+        return URL.createObjectURL(blob);
+      }
+      console.log("[Cull] Tier 1: no embedded thumbnail in", file.name);
+    } catch (e) {
+      console.warn("[Cull] Tier 1 error:", e);
+    }
+
+    // Tier 2: native OS decode via createImageBitmap (Safari/macOS only)
+    try {
+      const bitmap = await createImageBitmap(file);
+      const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.drawImage(bitmap, 0, 0);
+        bitmap.close();
+        const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.75 });
+        console.log("[Cull] ✅ Tier 2 (createImageBitmap) OK:", file.name);
+        return URL.createObjectURL(blob);
+      }
       bitmap.close();
-      const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.75 });
-      return URL.createObjectURL(blob);
+    } catch (e) {
+      console.warn("[Cull] Tier 2 (createImageBitmap) failed (Chrome doesn't support HEIC natively):", e);
     }
-    bitmap.close();
-  } catch { /* Chrome doesn't support HEIC natively */ }
 
-  // Tier 3: heic2any at low quality (preview only — ~3-5s but always works)
-  try {
-    const heic2anyLib = await import("heic2any");
-    const heic2any = (
-      (heic2anyLib as unknown as { default: (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]> }).default
-      ?? heic2anyLib
-    ) as (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>;
-    const jpegBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.15 });
-    return URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
-  } catch { /* conversion failed */ }
+    // Tier 3: heic2any at low quality — always works but ~3-5s
+    console.log("[Cull] Trying Tier 3 (heic2any) for:", file.name);
+    try {
+      const heic2anyLib = await import("heic2any");
+      const heic2any = (
+        (heic2anyLib as unknown as { default: (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]> }).default
+        ?? heic2anyLib
+      ) as (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>;
+      const jpegBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.15 });
+      console.log("[Cull] ✅ Tier 3 (heic2any) OK:", file.name);
+      return URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
+    } catch (e) {
+      console.error("[Cull] Tier 3 (heic2any) failed:", e);
+    }
 
-  return null;
+    console.log("[Cull] All tiers failed for:", file.name);
+    return null;
+  };
+
+  // 20s timeout — prevents UI stuck on "Loading preview..." if heic2any hangs
+  return Promise.race([
+    inner(),
+    new Promise<null>((resolve) =>
+      setTimeout(() => {
+        console.warn("[Cull] Preview timeout (20s) for:", file.name);
+        resolve(null);
+      }, 20000)
+    ),
+  ]);
 }
 
 // ── Main component ─────────────────────────────────────────────────────────────
@@ -126,19 +153,31 @@ export default function CullClient() {
     let cancelled = false;
     setIsLoadingPreview(true);
 
-    buildPreviewUrl(entry.file).then((url) => {
-      if (cancelled) {
-        if (url) URL.revokeObjectURL(url);
-        return;
-      }
-      if (url) previewUrlsRef.current.add(url);
-      setPhotos((prev) => {
-        const next = [...prev];
-        next[currentIndex] = { ...next[currentIndex], previewUrl: url };
-        return next;
+    buildPreviewUrl(entry.file)
+      .then((url) => {
+        if (cancelled) {
+          if (url) URL.revokeObjectURL(url);
+          return;
+        }
+        if (url) previewUrlsRef.current.add(url);
+        setPhotos((prev) => {
+          const next = [...prev];
+          next[currentIndex] = { ...next[currentIndex], previewUrl: url };
+          return next;
+        });
+        setIsLoadingPreview(false);
+      })
+      .catch((err) => {
+        console.error("[Cull] buildPreviewUrl threw unexpectedly:", err);
+        if (!cancelled) {
+          setPhotos((prev) => {
+            const next = [...prev];
+            next[currentIndex] = { ...next[currentIndex], previewUrl: null };
+            return next;
+          });
+          setIsLoadingPreview(false);
+        }
       });
-      setIsLoadingPreview(false);
-    });
 
     return () => {
       cancelled = true;
