@@ -8,6 +8,7 @@ import {
   FolderOpen,
   ImageOff,
   AlertCircle,
+  FileText,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -30,6 +31,8 @@ interface ProcessedPhoto {
 
 type UIState = "idle" | "processing" | "results" | "downloading";
 
+const SIZE_THRESHOLD_BYTES = 150 * 1024 * 1024; // 150 MB
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function delay(ms: number): Promise<void> {
@@ -37,8 +40,7 @@ function delay(ms: number): Promise<void> {
 }
 
 async function reverseGeocode(lat: number, lon: number): Promise<string> {
-  // Chiamata alla nostra API route server-side — il browser non può impostare
-  // User-Agent (header bloccato), quindi proxiamo attraverso Next.js
+  // Proxy through Next.js API route — browser cannot set User-Agent header
   const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`);
   if (!res.ok) throw new Error(`Geocode error: ${res.status}`);
   const data = (await res.json()) as {
@@ -50,6 +52,10 @@ async function reverseGeocode(lat: number, lon: number): Promise<string> {
     data.display_name?.split(",").pop()?.trim() ||
     "Unknown";
   return country;
+}
+
+function gridKey(lat: number, lon: number): string {
+  return `${lat.toFixed(1)}_${lon.toFixed(1)}`;
 }
 
 function groupByLocation(photos: ProcessedPhoto[]): {
@@ -80,10 +86,25 @@ function groupByLocation(photos: ProcessedPhoto[]): {
     })
   );
 
-  // Sort groups alphabetically
   groups.sort((a, b) => a.location.localeCompare(b.location));
 
   return { groups, unsorted };
+}
+
+function buildCsvContent(
+  groups: PhotoGroup[],
+  unsorted: File[]
+): string {
+  const rows: string[] = ["filename,folder"];
+  for (const group of groups) {
+    for (const file of group.files) {
+      rows.push(`${file.name},${group.location}`);
+    }
+  }
+  for (const file of unsorted) {
+    rows.push(`${file.name},_unsorted`);
+  }
+  return rows.join("\n");
 }
 
 // ── Main Component ────────────────────────────────────────────────────────────
@@ -105,6 +126,7 @@ export default function GeoSortClient() {
   const [unsorted, setUnsorted] = useState<File[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
+  const [totalSizeBytes, setTotalSizeBytes] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isAccepted = useCallback((file: File): boolean => {
@@ -118,16 +140,22 @@ export default function GeoSortClient() {
     const allAccepted = files.filter(isAccepted);
     if (allAccepted.length === 0) return;
     const accepted = allAccepted.slice(0, MAX_GEOSORT_FREE);
+    const errorMessages: string[] = [];
+
     if (allAccepted.length > MAX_GEOSORT_FREE) {
-      setErrors([
-        `Free plan: only the first ${MAX_GEOSORT_FREE} photos were processed. Upgrade to Pro to sort up to 500 photos at once.`,
-      ]);
+      errorMessages.push(
+        `Free plan: only the first ${MAX_GEOSORT_FREE} photos were processed. Upgrade to Pro to sort up to 500 photos at once.`
+      );
     }
+
+    // Compute total size of accepted files
+    const totalSize = accepted.reduce((sum, f) => sum + f.size, 0);
+    setTotalSizeBytes(totalSize);
 
     setUiState("processing");
     setProgressPercent(0);
 
-    // Lazy-load exifr only in the browser (it's a client-only lib)
+    // Lazy-load exifr only in the browser (client-only lib)
     let exifr: typeof import("exifr");
     try {
       exifr = await import("exifr");
@@ -137,10 +165,10 @@ export default function GeoSortClient() {
       return;
     }
 
-    const processed: ProcessedPhoto[] = [];
-    const errorMessages: string[] = [];
-
     // ── Step 1: Read GPS from every file ──────────────────────────────────
+    // Store GPS per-photo using a parallel array
+    const gpsData: Array<{ lat: number; lon: number } | null> = [];
+
     for (let i = 0; i < accepted.length; i++) {
       const file = accepted[i];
       setProgressMessage(
@@ -150,52 +178,70 @@ export default function GeoSortClient() {
 
       try {
         const gps = await exifr.gps(file);
-        processed.push({
-          file,
-          location: null, // will be resolved in step 2
-          // store gps temporarily using a custom field
-          ...(gps ? { _lat: gps.latitude, _lon: gps.longitude } : {}),
-        } as ProcessedPhoto & { _lat?: number; _lon?: number });
+        gpsData.push(gps ? { lat: gps.latitude, lon: gps.longitude } : null);
       } catch {
         errorMessages.push(`Could not read ${file.name} — skipped.`);
-        processed.push({ file, location: null, error: "unreadable" });
+        gpsData.push(null);
       }
     }
 
-    // ── Step 2: Reverse geocode photos that have GPS ──────────────────────
-    const withGps = processed.filter(
-      (p) => (p as ProcessedPhoto & { _lat?: number }).hasOwnProperty("_lat")
-    ) as (ProcessedPhoto & { _lat: number; _lon: number })[];
+    // ── Step 2: Deduplicate by grid key and reverse geocode unique areas ──
+    // Build map: gridKey → country name (populated lazily)
+    const gridToCountry = new Map<string, string>();
 
-    let geocoded = 0;
-    for (let i = 0; i < processed.length; i++) {
-      const p = processed[i] as ProcessedPhoto & {
-        _lat?: number;
-        _lon?: number;
-      };
-      if (p._lat === undefined || p._lon === undefined) continue;
+    // Collect unique keys that need geocoding (only from photos with GPS)
+    const uniqueKeys: string[] = [];
+    for (let i = 0; i < accepted.length; i++) {
+      const gps = gpsData[i];
+      if (!gps) continue;
+      const key = gridKey(gps.lat, gps.lon);
+      if (!gridToCountry.has(key) && !uniqueKeys.includes(key)) {
+        uniqueKeys.push(key);
+      }
+    }
 
-      geocoded++;
+    // Geocode each unique grid area
+    for (let k = 0; k < uniqueKeys.length; k++) {
+      const key = uniqueKeys[k];
       setProgressMessage(
-        `Fetching location for photo ${geocoded} of ${withGps.length} — ${p.file.name}`
+        `Fetching location for area ${k + 1} of ${uniqueKeys.length} unique areas...`
       );
-      setProgressPercent(40 + Math.round((geocoded / Math.max(withGps.length, 1)) * 55));
+      setProgressPercent(
+        40 + Math.round(((k + 1) / Math.max(uniqueKeys.length, 1)) * 55)
+      );
+
+      // Parse lat/lon back from the key
+      const [latStr, lonStr] = key.split("_");
+      const lat = parseFloat(latStr);
+      const lon = parseFloat(lonStr);
 
       try {
-        const country = await reverseGeocode(p._lat, p._lon);
-        processed[i].location = country;
+        const country = await reverseGeocode(lat, lon);
+        gridToCountry.set(key, country);
       } catch {
-        // Nominatim error → unsorted
+        // Mark as failed — photos will go to _unsorted
+        gridToCountry.set(key, "");
         errorMessages.push(
-          `Could not fetch location for ${p.file.name} — placed in _unsorted.`
+          `Could not fetch location for grid area ${key} — affected photos placed in _unsorted.`
         );
       }
 
-      // Rate limit: 1 req/sec with extra buffer
-      if (geocoded < withGps.length) {
+      // Nominatim rate limit: 1 req/sec with buffer
+      if (k < uniqueKeys.length - 1) {
         await delay(1100);
       }
     }
+
+    // ── Step 3: Assign country to each photo via its grid key ─────────────
+    const processed: ProcessedPhoto[] = accepted.map((file, i) => {
+      const gps = gpsData[i];
+      if (!gps) {
+        return { file, location: null };
+      }
+      const key = gridKey(gps.lat, gps.lon);
+      const country = gridToCountry.get(key) || null;
+      return { file, location: country || null };
+    });
 
     setProgressPercent(100);
     setProgressMessage("Done!");
@@ -225,7 +271,7 @@ export default function GeoSortClient() {
     [processFiles]
   );
 
-  const handleDownload = useCallback(async () => {
+  const handleDownloadZip = useCallback(async () => {
     setUiState("downloading");
     try {
       const zip = new JSZip();
@@ -252,10 +298,16 @@ export default function GeoSortClient() {
       const blob = await zip.generateAsync({ type: "blob" });
       saveAs(blob, "geosort.zip");
     } catch {
-      // If download fails, go back to results
+      // If download fails, fall back to results state
     } finally {
       setUiState("results");
     }
+  }, [groups, unsorted]);
+
+  const handleDownloadCsv = useCallback(() => {
+    const csv = buildCsvContent(groups, unsorted);
+    const blob = new Blob([csv], { type: "text/csv" });
+    saveAs(blob, "geosort-guide.csv");
   }, [groups, unsorted]);
 
   const handleReset = useCallback(() => {
@@ -265,11 +317,14 @@ export default function GeoSortClient() {
     setErrors([]);
     setProgressPercent(0);
     setProgressMessage("");
+    setTotalSizeBytes(0);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
   const totalPhotos =
     groups.reduce((acc, g) => acc + g.files.length, 0) + unsorted.length;
+
+  const isLargeFile = totalSizeBytes > SIZE_THRESHOLD_BYTES;
 
   // ── Render ───────────────────────────────────────────────────────────────
 
@@ -328,7 +383,7 @@ export default function GeoSortClient() {
               GPS metadata is read locally — photos never leave your device
             </p>
             <p className="text-[11px] text-[#C4C4C4]">
-              Free: up to {MAX_GEOSORT_FREE} photos ·{" "}
+              Free: up to {MAX_GEOSORT_FREE} photos &middot;{" "}
               <Link href="/pricing" className="underline hover:text-[#737373]">
                 Pro: 500
               </Link>
@@ -414,29 +469,68 @@ export default function GeoSortClient() {
             <UnsortedCard files={unsorted} />
           )}
 
-          {/* Download button */}
-          <div className="pt-2">
-            <button
-              onClick={handleDownload}
-              disabled={uiState === "downloading"}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
-            >
-              {uiState === "downloading" ? (
-                <>
-                  <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Creating ZIP...
-                </>
-              ) : (
-                <>
-                  <Download className="h-4 w-4" strokeWidth={1.5} />
-                  Download geosort.zip
-                </>
-              )}
-            </button>
-            <p className="text-center text-xs text-[#A3A3A3] mt-2">
-              ZIP contains folders for each country + _unsorted for photos
-              without GPS
-            </p>
+          {/* Download buttons */}
+          <div className="pt-2 space-y-2">
+            {isLargeFile ? (
+              <>
+                {/* Large file: show both ZIP (with warning) and CSV */}
+                <button
+                  onClick={handleDownloadZip}
+                  disabled={uiState === "downloading"}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                >
+                  {uiState === "downloading" ? (
+                    <>
+                      <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Creating ZIP...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-4 w-4" strokeWidth={1.5} />
+                      Download ZIP
+                      <span className="text-white/60 text-xs font-normal">(large file, may be slow)</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleDownloadCsv}
+                  disabled={uiState === "downloading"}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#E5E5E5] text-[#171717] text-sm font-medium rounded-md hover:bg-[#F5F5F5] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                >
+                  <FileText className="h-4 w-4" strokeWidth={1.5} />
+                  Download sorting guide (.csv)
+                </button>
+
+                <p className="text-center text-xs text-[#A3A3A3]">
+                  The CSV lists each filename and its destination folder — sort files manually without re-downloading.
+                </p>
+              </>
+            ) : (
+              <>
+                {/* Normal size: single ZIP button */}
+                <button
+                  onClick={handleDownloadZip}
+                  disabled={uiState === "downloading"}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                >
+                  {uiState === "downloading" ? (
+                    <>
+                      <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Creating ZIP...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-4 w-4" strokeWidth={1.5} />
+                      Download geosort.zip
+                    </>
+                  )}
+                </button>
+                <p className="text-center text-xs text-[#A3A3A3]">
+                  ZIP contains folders for each country + _unsorted for photos without GPS
+                </p>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -551,8 +645,7 @@ const UnsortedCard = ({ files }: UnsortedCardProps) => {
             _unsorted/
           </p>
           <p className="text-xs text-[#A3A3A3]">
-            {files.length} photo{files.length !== 1 ? "s" : ""} without GPS
-            data
+            {files.length} photo{files.length !== 1 ? "s" : ""} without GPS data
           </p>
         </div>
         <svg
