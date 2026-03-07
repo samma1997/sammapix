@@ -25,7 +25,8 @@ type UIState = "idle" | "reviewing" | "done";
 
 interface PhotoEntry {
   file: File;
-  previewUrl: string | null; // blob URL — may be null while loading for HEIC
+  // undefined = not yet loaded, null = loaded but no preview available, string = blob URL
+  previewUrl: string | null | undefined;
 }
 
 const MAX_CULL_FREE = 20;
@@ -47,12 +48,14 @@ function isHeicFile(file: File): boolean {
   );
 }
 
+// Returns: blob URL string, or null if no preview available (never blocks for HEIC)
 async function buildPreviewUrl(file: File): Promise<string | null> {
   if (!isHeicFile(file)) {
     return URL.createObjectURL(file);
   }
 
-  // HEIC: try exifr.thumbnail first (fast embedded JPEG preview)
+  // HEIC: use only the embedded JPEG thumbnail (fast, ~100ms, no conversion)
+  // iPhone photos always have an embedded thumbnail. If missing, show placeholder.
   try {
     const exifr = await import("exifr");
     const thumbData = await exifr.thumbnail(file);
@@ -64,22 +67,7 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
     // no embedded thumbnail
   }
 
-  // HEIC fallback: convert via heic2any
-  try {
-    const heic2anyLib = await import("heic2any");
-    const heic2any = (
-      heic2anyLib as unknown as {
-        default: (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>;
-      }
-    ).default ?? heic2anyLib;
-    const jpegBlob = await (
-      heic2any as (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>
-    )({ blob: file, toType: "image/jpeg", quality: 0.5 });
-    return URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
-  } catch {
-    // conversion failed — show placeholder
-  }
-
+  // No thumbnail available — return null to show placeholder immediately
   return null;
 }
 
@@ -112,7 +100,7 @@ export default function CullClient() {
   useEffect(() => {
     if (uiState !== "reviewing") return;
     const entry = photos[currentIndex];
-    if (!entry || entry.previewUrl !== null) return; // already loaded or explicitly null
+    if (!entry || entry.previewUrl !== undefined) return; // already loaded (string or null)
 
     let cancelled = false;
     setIsLoadingPreview(true);
@@ -219,10 +207,10 @@ export default function CullClient() {
 
     const accepted = imageFiles.slice(0, MAX_CULL_FREE);
 
-    // Initialize entries with null previewUrl — they are loaded lazily
+    // Initialize entries with undefined previewUrl — loaded lazily on demand
     const entries: PhotoEntry[] = accepted.map((file) => ({
       file,
-      previewUrl: null,
+      previewUrl: undefined,
     }));
 
     // Immediately build preview URL for the first photo so it renders fast
@@ -439,10 +427,19 @@ export default function CullClient() {
               </div>
             )}
 
-            {isLoadingPreview || currentPhoto.previewUrl === null ? (
+            {isLoadingPreview || currentPhoto.previewUrl === undefined ? (
               <div className="flex flex-col items-center gap-3 text-[#525252]">
                 <div className="h-8 w-8 rounded-full border-2 border-[#525252] border-t-transparent animate-spin" />
                 <span className="text-xs text-[#737373]">Loading preview…</span>
+              </div>
+            ) : currentPhoto.previewUrl === null ? (
+              <div className="flex flex-col items-center gap-3 py-8">
+                <ImageIcon className="h-10 w-10 text-[#404040]" strokeWidth={1} />
+                <div className="text-center">
+                  <p className="text-sm font-medium text-[#A3A3A3]">{currentPhoto.file.name}</p>
+                  <p className="text-xs text-[#525252] mt-1">No preview — HEIC without embedded thumbnail</p>
+                  <p className="text-xs text-[#737373] mt-0.5">Use K to keep or X to reject</p>
+                </div>
               </div>
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
