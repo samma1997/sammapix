@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "nodejs";
+const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
 
@@ -11,34 +11,24 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Missing lat/lon" }, { status: 400 });
   }
 
-  const numLat = parseFloat(lat);
-  const numLon = parseFloat(lon);
-  if (isNaN(numLat) || isNaN(numLon)) {
-    return NextResponse.json({ error: "Invalid coordinates" }, { status: 400 });
-  }
+  const url = `${NOMINATIM_URL}?lat=${lat}&lon=${lon}&format=json&zoom=10`;
 
   try {
-    const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?lat=${numLat}&lon=${numLon}&format=json&zoom=5`,
-      {
-        headers: {
-          "User-Agent": "SammaPix/1.0 (sammapix.com)",
-          "Accept-Language": "en",
-          "Referer": "https://sammapix.com",
-        },
-        next: { revalidate: 86400 }, // cache 24h — stessa coordinata, stesso paese
-      }
-    );
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent": "SammaPix/1.0 (https://www.sammapix.com)",
+        "Accept-Language": "en",
+      },
+      next: { revalidate: 86400 }, // cache 24h — same location = same result
+    });
 
     if (!res.ok) {
-      return NextResponse.json({ error: `Nominatim error ${res.status}` }, { status: 502 });
+      return NextResponse.json({ error: "Geocoding failed" }, { status: 502 });
     }
 
     const data = await res.json();
-    return NextResponse.json(data, {
-      headers: { "Cache-Control": "public, max-age=86400" },
-    });
+    return NextResponse.json(data);
   } catch {
-    return NextResponse.json({ error: "Geocode failed" }, { status: 502 });
+    return NextResponse.json({ error: "Geocoding error" }, { status: 500 });
   }
 }
