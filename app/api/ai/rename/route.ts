@@ -2,43 +2,81 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { AI_RENAME_FREE_PER_DAY, GEMINI_MODEL } from "@/lib/constants";
+import {
+  AI_RENAME_FREE_PER_DAY,
+  AI_RENAME_PRO_PER_DAY,
+  GEMINI_MODEL,
+} from "@/lib/constants";
 import { z } from "zod";
+import { incrWithTTL, getInt } from "@/lib/redis";
+
+// ── Request schema ──────────────────────────────────────────────────────────
 
 const RequestSchema = z.object({
-  imageBase64: z.string().max(10_000_000), // ~7.5MB base64
-  mimeType: z.enum([
-    "image/jpeg",
-    "image/png",
-    "image/webp",
-    "image/gif",
-    "image/avif",
-  ]),
+  imageBase64: z.string().max(10_000_000),
+  mimeType: z.enum(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"]),
   currentName: z.string().max(255).optional(),
-  locale: z.string().max(10).optional(), // e.g. "it", "en", "fr"
+  locale: z.string().max(10).optional(),
 });
 
-// In-memory store: key = "email:YYYY-MM-DD", value = count used
-const dailyUsage = new Map<string, number>();
+// ── In-memory fallback (when Redis not configured) ──────────────────────────
+// Not reliable across cold starts — just a best-effort guard.
 
-function getTodayKey(email: string): string {
-  const today = new Date().toISOString().split("T")[0];
-  return `${email}:${today}`;
+const memoryUsage = new Map<string, number>();
+
+function todayStr(): string {
+  return new Date().toISOString().split("T")[0];
 }
 
-function getUsedToday(email: string): number {
-  return dailyUsage.get(getTodayKey(email)) ?? 0;
+function getRateLimitKey(email: string): string {
+  return `ai_rename:${email}:${todayStr()}`;
 }
 
-function incrementToday(email: string): number {
-  const key = getTodayKey(email);
-  const next = (dailyUsage.get(key) ?? 0) + 1;
-  dailyUsage.set(key, next);
-  return next;
+async function checkAndIncrement(
+  email: string,
+  limit: number
+): Promise<{ allowed: boolean; used: number; remaining: number }> {
+  const key = getRateLimitKey(email);
+  const ttl = 60 * 60 * 26; // 26 hours — ensures daily reset even with timezone drift
+
+  // Try Redis first
+  const current = await getInt(key);
+  const usedBefore = current ?? 0;
+
+  if (usedBefore >= limit) {
+    return { allowed: false, used: usedBefore, remaining: 0 };
+  }
+
+  // Increment in Redis
+  const newValue = await incrWithTTL(key, ttl);
+
+  if (newValue !== null) {
+    return {
+      allowed: true,
+      used: newValue,
+      remaining: Math.max(0, limit - newValue),
+    };
+  }
+
+  // Redis unavailable — fallback to in-memory
+  const memKey = key;
+  const memUsed = memoryUsage.get(memKey) ?? 0;
+  if (memUsed >= limit) {
+    return { allowed: false, used: memUsed, remaining: 0 };
+  }
+  const memNew = memUsed + 1;
+  memoryUsage.set(memKey, memNew);
+  return {
+    allowed: true,
+    used: memNew,
+    remaining: Math.max(0, limit - memNew),
+  };
 }
+
+// ── Route handler ───────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
-  // 1. Check auth
+  // 1. Auth
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json(
@@ -48,69 +86,83 @@ export async function POST(req: NextRequest) {
   }
 
   const email = session.user.email;
+  const isPro = (session.user as { plan?: string }).plan === "pro";
+  const dailyLimit = isPro ? AI_RENAME_PRO_PER_DAY : AI_RENAME_FREE_PER_DAY;
 
-  // 2. Validate origin in production (allow both apex and www)
+  // 2. Origin check in production
   const origin = req.headers.get("origin");
   const allowedOrigins = [
     "https://sammapix.com",
     "https://www.sammapix.com",
     "http://localhost:3000",
   ];
-  if (origin && process.env.NODE_ENV === "production" && !allowedOrigins.some((o) => origin.startsWith(o))) {
-    return NextResponse.json(
-      { error: "Forbidden", code: "FORBIDDEN_ORIGIN" },
-      { status: 403 }
-    );
+  if (
+    origin &&
+    process.env.NODE_ENV === "production" &&
+    !allowedOrigins.some((o) => origin.startsWith(o))
+  ) {
+    return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
   }
 
-  // 3. Parse and validate body
+  // 3. Parse body
   let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json(
-      { error: "Invalid JSON", code: "INVALID_JSON" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid JSON", code: "INVALID_JSON" }, { status: 400 });
   }
 
   const parsed = RequestSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
-      {
-        error: "Invalid request",
-        code: "VALIDATION_ERROR",
-        details: parsed.error.flatten(),
-      },
+      { error: "Invalid request", code: "VALIDATION_ERROR", details: parsed.error.flatten() },
       { status: 400 }
     );
   }
 
-  const { imageBase64, mimeType, locale = "en" } = parsed.data;
+  const { imageBase64, locale = "en" } = parsed.data;
 
-  // Language mapping for both alt text and filename generation
+  // 4. Gemini API key guard
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: "AI service unavailable", code: "SERVICE_UNAVAILABLE" }, { status: 503 });
+  }
+
+  // 5. Rate limit check — BEFORE calling Gemini (saves cost on exceeded requests)
+  const rateCheck = await checkAndIncrement(email, dailyLimit);
+  if (!rateCheck.allowed) {
+    return NextResponse.json(
+      {
+        error: "Daily limit reached",
+        code: "DAILY_LIMIT_REACHED",
+        remaining: 0,
+        limit: dailyLimit,
+        resetAt: "midnight UTC",
+      },
+      { status: 429 }
+    );
+  }
+
+  // 6. Resize image to max 512px before sending to Gemini — saves ~90% cost + latency
+  let finalBase64 = imageBase64;
+  try {
+    const inputBuffer = Buffer.from(imageBase64, "base64");
+    const sharp = (await import("sharp")).default;
+    const resized = await sharp(inputBuffer)
+      .resize(512, 512, { fit: "inside", withoutEnlargement: true })
+      .jpeg({ quality: 75 })
+      .toBuffer();
+    finalBase64 = resized.toString("base64");
+  } catch {
+    // If resize fails (e.g. format not supported), use original — still works
+  }
+
+  // 7. Call Gemini
   const altTextLanguage: Record<string, string> = {
     it: "Italian", fr: "French", es: "Spanish", de: "German", pt: "Portuguese",
   };
   const altLang = altTextLanguage[locale] ?? "English";
   const filenameLang = altTextLanguage[locale] ?? "English";
-
-  // 4. Guard: Gemini API key must be server-side only
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "AI service unavailable", code: "SERVICE_UNAVAILABLE" },
-      { status: 503 }
-    );
-  }
-
-  // 5. Rate limit check — BEFORE calling Gemini
-  if (getUsedToday(email) >= AI_RENAME_FREE_PER_DAY) {
-    return NextResponse.json(
-      { error: "Daily limit reached", code: "DAILY_LIMIT_REACHED", remaining: 0 },
-      { status: 429 }
-    );
-  }
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -142,44 +194,27 @@ Examples:
 
     const result = await model.generateContent([
       prompt,
-      {
-        inlineData: {
-          data: imageBase64,
-          mimeType,
-        },
-      },
+      { inlineData: { data: finalBase64, mimeType: "image/jpeg" as const } },
     ]);
 
     const text = result.response.text();
-
-    // Extract JSON from the response safely
     const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      throw new Error("Invalid AI response format: no JSON object found");
-    }
+    if (!jsonMatch) throw new Error("Invalid AI response: no JSON found");
 
-    const aiResult = JSON.parse(jsonMatch[0]) as {
-      filename?: string;
-      altText?: string;
-    };
-
-    // 6. Increment usage AFTER a successful Gemini call
-    incrementToday(email);
+    const aiResult = JSON.parse(jsonMatch[0]) as { filename?: string; altText?: string };
 
     return NextResponse.json({
       data: {
         filename: aiResult.filename ?? "optimized-image",
         altText: aiResult.altText ?? "",
       },
-      remaining: Math.max(0, AI_RENAME_FREE_PER_DAY - getUsedToday(email)),
+      remaining: rateCheck.remaining,
+      limit: dailyLimit,
+      plan: isPro ? "pro" : "free",
     });
   } catch (error) {
-    // Never log the image data — only log the error message
     const message = error instanceof Error ? error.message : "Unknown error";
-    console.error("[ai/rename] Gemini API error:", message);
-    return NextResponse.json(
-      { error: "AI processing failed", code: "AI_ERROR" },
-      { status: 500 }
-    );
+    console.error("[ai/rename] Error:", message);
+    return NextResponse.json({ error: "AI processing failed", code: "AI_ERROR" }, { status: 500 });
   }
 }
