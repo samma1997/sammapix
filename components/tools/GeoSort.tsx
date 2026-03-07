@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import Link from "next/link";
+import { MAX_GEOSORT_FREE } from "@/lib/constants";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -113,12 +115,17 @@ export default function GeoSortClient() {
   }, []);
 
   const processFiles = useCallback(async (files: File[]) => {
-    const accepted = files.filter(isAccepted);
-    if (accepted.length === 0) return;
+    const allAccepted = files.filter(isAccepted);
+    if (allAccepted.length === 0) return;
+    const accepted = allAccepted.slice(0, MAX_GEOSORT_FREE);
+    if (allAccepted.length > MAX_GEOSORT_FREE) {
+      setErrors([
+        `Free plan: only the first ${MAX_GEOSORT_FREE} photos were processed. Upgrade to Pro to sort up to 500 photos at once.`,
+      ]);
+    }
 
     setUiState("processing");
     setProgressPercent(0);
-    setErrors([]);
 
     // Lazy-load exifr only in the browser (it's a client-only lib)
     let exifr: typeof import("exifr");
@@ -319,6 +326,12 @@ export default function GeoSortClient() {
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
               GPS metadata is read locally — photos never leave your device
+            </p>
+            <p className="text-[11px] text-[#C4C4C4]">
+              Free: up to {MAX_GEOSORT_FREE} photos ·{" "}
+              <Link href="/pricing" className="underline hover:text-[#737373]">
+                Pro: 500
+              </Link>
             </p>
           </div>
         </div>

@@ -2,10 +2,14 @@ import { PlanLimits } from "@/types/user";
 import { ImageFormat } from "@/types/image";
 
 // File limits
-export const MAX_FILE_SIZE_FREE = 10 * 1024 * 1024; // 10MB
+export const MAX_FILE_SIZE_FREE = 20 * 1024 * 1024; // 20MB
 export const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024; // 50MB
-export const MAX_FILES_FREE = 5;
-export const MAX_FILES_PRO = 100;
+export const MAX_FILES_FREE = 20;
+export const MAX_FILES_PRO = 500;
+
+// GeoSort limits
+export const MAX_GEOSORT_FREE = 50;
+export const MAX_GEOSORT_PRO = 500;
 
 // AI Rename limits
 export const AI_RENAME_FREE_PER_DAY = 5;
@@ -30,7 +34,7 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
     maxFiles: MAX_FILES_FREE,
     aiRenamePerDay: AI_RENAME_FREE_PER_DAY,
     maxFileSizeBytes: MAX_FILE_SIZE_FREE,
-    zipDownload: false,
+    zipDownload: true,
     ads: true,
   },
   pro: {
