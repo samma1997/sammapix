@@ -368,14 +368,9 @@ export default function TravelMapClient() {
             date = new Date(exifData.CreateDate);
           }
 
-          // Extract thumbnail: use exifr.thumbnail for HEIC/JPEG embedded preview,
-          // fall back to heic2any conversion for HEIC without embedded thumb.
+          // Extract thumbnail: exifr.thumbnail for embedded JPEG preview (fast),
+          // fallback direct objectURL for JPEG, emoji placeholder for HEIC.
           let thumbnailUrl: string | undefined;
-          const isHeic =
-            file.name.toLowerCase().endsWith(".heic") ||
-            file.name.toLowerCase().endsWith(".heif") ||
-            file.type === "image/heic" ||
-            file.type === "image/heif";
           const isJpeg =
             file.type === "image/jpeg" ||
             file.name.toLowerCase().endsWith(".jpg") ||
@@ -392,21 +387,8 @@ export default function TravelMapClient() {
             // no embedded thumbnail
           }
 
-          // For HEIC without embedded thumb: convert first slice via heic2any
-          if (!thumbnailUrl && isHeic) {
-            try {
-              const heic2anyLib = await import("heic2any");
-              const heic2any = (heic2anyLib as unknown as { default: (o: {blob: Blob; toType: string; quality: number}) => Promise<Blob | Blob[]> }).default ?? heic2anyLib;
-              const jpegBlob = await (heic2any as (o: {blob: Blob; toType: string; quality: number}) => Promise<Blob | Blob[]>)({
-                blob: file,
-                toType: "image/jpeg",
-                quality: 0.3,
-              });
-              thumbnailUrl = URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
-            } catch {
-              // conversion failed — no thumbnail
-            }
-          }
+          // Note: skipping heic2any fallback for HEIC without embedded thumb
+          // to keep processing fast — emoji placeholder shown instead.
 
           // Fallback for plain JPEG
           if (!thumbnailUrl && isJpeg) {

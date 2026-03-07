@@ -176,8 +176,9 @@ function downloadName(f: ProcessedFile): string {
 
 async function convertHeicToJpegBlob(file: File): Promise<Blob> {
   const heic2any = await getHeic2Any();
-  const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.95 });
-  return result as Blob;
+  // quality 0.82: good output, ~2x faster than 0.95 for EXIF stripping purposes
+  const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.82 });
+  return Array.isArray(result) ? result[0] : result;
 }
 
 async function blobToDataURL(blob: Blob): Promise<string> {
@@ -452,7 +453,9 @@ export default function ExifLens() {
     for (let i = 0; i < actionable.length; i++) {
       const f = actionable[i];
       setParseMessage(`Cleaning ${f.original.name} (${i + 1}/${actionable.length})`);
-      setParseProgress(Math.round(((i + 1) / actionable.length) * 100));
+      setParseProgress(Math.round((i / actionable.length) * 100));
+      // Yield to browser so progress bar updates before heavy conversion
+      await new Promise((r) => setTimeout(r, 0));
 
       try {
         let blob: Blob;
