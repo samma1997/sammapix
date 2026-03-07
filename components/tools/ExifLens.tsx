@@ -176,8 +176,8 @@ function downloadName(f: ProcessedFile): string {
 
 async function convertHeicToJpegBlob(file: File): Promise<Blob> {
   const heic2any = await getHeic2Any();
-  // quality 0.82: good output, ~2x faster than 0.95 for EXIF stripping purposes
-  const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.82 });
+  // quality 0.6: faster conversion (~2x vs 0.82), acceptable for EXIF stripping
+  const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.6 });
   return Array.isArray(result) ? result[0] : result;
 }
 
@@ -366,6 +366,7 @@ export default function ExifLens() {
   const [parseProgress, setParseProgress] = useState(0);
   const [parseMessage, setParseMessage] = useState("");
   const [cleanMode, setCleanMode] = useState<CleanMode>("gps");
+  const [heicWarningDismissed, setHeicWarningDismissed] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isAccepted = useCallback((file: File): boolean => {
@@ -454,8 +455,8 @@ export default function ExifLens() {
       const f = actionable[i];
       setParseMessage(`Cleaning ${f.original.name} (${i + 1}/${actionable.length})`);
       setParseProgress(Math.round((i / actionable.length) * 100));
-      // Yield to browser so progress bar updates before heavy conversion
-      await new Promise((r) => setTimeout(r, 0));
+      // 50ms yield: gives browser time to repaint the progress bar before heavy WASM work
+      await new Promise((r) => setTimeout(r, 50));
 
       try {
         let blob: Blob;
@@ -514,6 +515,7 @@ export default function ExifLens() {
     setParseProgress(0);
     setParseMessage("");
     setCleanMode("gps");
+    setHeicWarningDismissed(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
@@ -521,6 +523,7 @@ export default function ExifLens() {
   const actionableCount = files.filter(
     (f) => f.fileType === "jpeg" || f.fileType === "heic"
   ).length;
+  const heicCount = files.filter((f) => f.fileType === "heic").length;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
@@ -694,6 +697,30 @@ export default function ExifLens() {
                   </button>
                 </div>
               </div>
+
+              {/* HEIC warning banner — shown before first clean when HEIC files are present */}
+              {heicCount > 0 && !heicWarningDismissed && (
+                <div className="flex items-start justify-between gap-3 px-4 py-3 border border-[#FED7AA] bg-[#FFF7ED] rounded-md">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0 mt-0.5" strokeWidth={1.5} />
+                    <div>
+                      <p className="text-xs font-medium text-[#92400E] mb-0.5">
+                        HEIC files take 15–30s each — please keep this tab open
+                      </p>
+                      <p className="text-xs text-[#B45309]">
+                        {heicCount} HEIC file{heicCount !== 1 ? "s" : ""} detected. The browser converts them to JPEG locally before stripping EXIF. This is CPU-intensive — the progress bar will update between files.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setHeicWarningDismissed(true)}
+                    className="shrink-0 text-[#D97706] hover:text-[#92400E] text-xs font-medium"
+                    aria-label="Dismiss warning"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
 
               {/* Clean & Download button */}
               <button

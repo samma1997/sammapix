@@ -40,6 +40,7 @@ interface ShareData {
 }
 
 type UIState = "idle" | "processing" | "map";
+type GeocodingState = "idle" | "running" | "done";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -139,6 +140,10 @@ export default function TravelMapClient() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [isSharedView, setIsSharedView] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [geocodingState, setGeocodingState] = useState<GeocodingState>("idle");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [geocodingProgress, setGeocodingProgress] = useState({ current: 0, total: 0 });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -200,10 +205,16 @@ export default function TravelMapClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Build/update Leaflet map when points change ────────────────────────────
+  // Stable ref to always-current points so the marker-update effect can read them
+  const pointsRef = useRef<PhotoPoint[]>([]);
+  pointsRef.current = points;
+
+  // ── Build Leaflet map once when entering "map" state ──────────────────────
   useEffect(() => {
     if (uiState !== "map" || points.length === 0) return;
     if (!mapContainerRef.current) return;
+    // Don't rebuild if map already exists (e.g. points updated during geocoding)
+    if (leafletMapRef.current) return;
 
     const timer = setTimeout(async () => {
       const L = (await import("leaflet")).default;
@@ -220,16 +231,14 @@ export default function TravelMapClient() {
           "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
       });
 
-      // Destroy existing map if re-initializing
-      if (leafletMapRef.current) {
-        leafletMapRef.current.remove();
-        leafletMapRef.current = null;
-      }
+      // Read current points from ref (may be ahead of closure)
+      const currentPoints = pointsRef.current;
+
       markersRef.current = [];
 
       const container = mapContainerRef.current!;
       const map = L.map(container, { zoomControl: true }).setView(
-        [points[0].lat, points[0].lon],
+        [currentPoints[0].lat, currentPoints[0].lon],
         5
       );
 
@@ -242,7 +251,7 @@ export default function TravelMapClient() {
       const colorMap = new Map<string, string>();
 
       // Draw dashed polyline connecting all points in order
-      const latlngs: [number, number][] = points.map((p) => [p.lat, p.lon]);
+      const latlngs: [number, number][] = currentPoints.map((p) => [p.lat, p.lon]);
       L.polyline(latlngs, {
         color: "#A3A3A3",
         weight: 2,
@@ -251,8 +260,8 @@ export default function TravelMapClient() {
       }).addTo(map);
 
       // Add markers
-      for (let i = 0; i < points.length; i++) {
-        const p = points[i];
+      for (let i = 0; i < currentPoints.length; i++) {
+        const p = currentPoints[i];
         const country = p.country || "Unknown";
         const color = colorForCountry(country, colorMap);
 
@@ -286,7 +295,7 @@ export default function TravelMapClient() {
         const popupContent = `
           <div style="font-family:Inter,sans-serif;min-width:180px;max-width:220px;">
             ${thumbnailHtml}
-            <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:2px;">${p.displayName || p.country || "Unknown location"}</div>
+            <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:2px;">${p.displayName || p.country || "Loading..."}</div>
             <div style="font-size:11px;color:#A3A3A3;margin-bottom:2px;">${p.name}</div>
             <div style="font-size:11px;color:#737373;">${dateStr}</div>
           </div>
@@ -300,7 +309,7 @@ export default function TravelMapClient() {
       }
 
       // Fit map to all points — cap zoom so nearby clusters don't zoom to street level
-      if (points.length > 1) {
+      if (currentPoints.length > 1) {
         const bounds = L.latLngBounds(latlngs);
         map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
       }
@@ -309,7 +318,46 @@ export default function TravelMapClient() {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, [uiState, points]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uiState]);
+
+  // ── Update marker popups when geocoding fills in country names ────────────
+  useEffect(() => {
+    if (uiState !== "map") return;
+    if (!leafletMapRef.current) return;
+    if (geocodingState !== "running" && geocodingState !== "done") return;
+
+    // Update popup content for each marker that now has a country name
+    points.forEach((p, i) => {
+      const marker = markersRef.current[i];
+      if (!marker) return;
+      if (!p.country && !p.displayName) return;
+
+      const dateStr = p.date
+        ? p.date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        : "Unknown date";
+
+      let thumbnailHtml = "";
+      if (p.thumbnailUrl) {
+        thumbnailHtml = `<img src="${p.thumbnailUrl}" style="width:100px;height:75px;object-fit:cover;border-radius:4px;margin-bottom:6px;display:block;" alt="${p.name}" />`;
+      }
+
+      const popupContent = `
+        <div style="font-family:Inter,sans-serif;min-width:180px;max-width:220px;">
+          ${thumbnailHtml}
+          <div style="font-weight:600;font-size:13px;color:#171717;margin-bottom:2px;">${p.displayName || p.country || "Unknown location"}</div>
+          <div style="font-size:11px;color:#A3A3A3;margin-bottom:2px;">${p.name}</div>
+          <div style="font-size:11px;color:#737373;">${dateStr}</div>
+        </div>
+      `;
+
+      marker.setPopupContent(popupContent);
+    });
+  }, [points, uiState, geocodingState]);
 
   // ── Process uploaded files ─────────────────────────────────────────────────
 
@@ -328,6 +376,8 @@ export default function TravelMapClient() {
 
     setUiState("processing");
     setProgressPercent(0);
+    setGeocodingState("idle");
+    setGeocodingProgress({ current: 0, total: 0 });
 
     let exifr: typeof import("exifr");
     try {
@@ -352,7 +402,7 @@ export default function TravelMapClient() {
       setProgressMessage(
         `Reading GPS from photo ${i + 1} of ${accepted.length} — ${file.name}`
       );
-      setProgressPercent(Math.round(((i + 1) / accepted.length) * 40));
+      setProgressPercent(Math.round(((i + 1) / accepted.length) * 90));
 
       try {
         const [gps, exifData] = await Promise.all([
@@ -419,28 +469,46 @@ export default function TravelMapClient() {
       return a.date.getTime() - b.date.getTime();
     });
 
-    // ── Step 2: Reverse-geocode unique grid areas ──────────────────────────
+    // ── Step 2: Show map immediately with coordinates only (no country names yet)
+    const initialPoints: PhotoPoint[] = rawPoints.map((p) => ({
+      file: p.file,
+      lat: p.lat,
+      lon: p.lon,
+      date: p.date,
+      country: null,
+      displayName: null,
+      thumbnailUrl: p.thumbnailUrl,
+      name: p.file.name,
+    }));
+
+    setProgressPercent(100);
+    setProgressMessage("Map ready!");
+    setPoints(initialPoints);
+    setErrors(errorMessages);
+    setUiState("map");
+
+    // ── Step 3: Reverse-geocode unique grid areas in background ───────────
+    const uniqueKeys: string[] = [];
+    for (const p of rawPoints) {
+      const key = gridKey(p.lat, p.lon);
+      if (!uniqueKeys.includes(key)) {
+        uniqueKeys.push(key);
+      }
+    }
+
+    if (uniqueKeys.length === 0) return;
+
+    setGeocodingState("running");
+    setGeocodingProgress({ current: 0, total: uniqueKeys.length });
+
     const gridToGeo = new Map<
       string,
       { country: string | null; displayName: string | null }
     >();
 
-    const uniqueKeys: string[] = [];
-    for (const p of rawPoints) {
-      const key = gridKey(p.lat, p.lon);
-      if (!gridToGeo.has(key) && !uniqueKeys.includes(key)) {
-        uniqueKeys.push(key);
-      }
-    }
-
     for (let k = 0; k < uniqueKeys.length; k++) {
       const key = uniqueKeys[k];
-      setProgressMessage(
-        `Fetching location for area ${k + 1} of ${uniqueKeys.length}...`
-      );
-      setProgressPercent(
-        40 + Math.round(((k + 1) / Math.max(uniqueKeys.length, 1)) * 55)
-      );
+      setGeocodingProgress({ current: k + 1, total: uniqueKeys.length });
 
       const [latStr, lonStr] = key.split("_");
       const lat = parseFloat(latStr);
@@ -451,35 +519,24 @@ export default function TravelMapClient() {
         gridToGeo.set(key, geo);
       } catch {
         gridToGeo.set(key, { country: null, displayName: null });
-        errorMessages.push(`Could not fetch location name for area ${key}.`);
       }
+
+      // Update the points state incrementally so the map/sidebar refreshes
+      setPoints((prev) =>
+        prev.map((p) => {
+          const pKey = gridKey(p.lat, p.lon);
+          const geo = gridToGeo.get(pKey);
+          if (!geo) return p;
+          return { ...p, country: geo.country, displayName: geo.displayName };
+        })
+      );
 
       if (k < uniqueKeys.length - 1) {
         await delay(1100);
       }
     }
 
-    // ── Step 3: Build final points array ──────────────────────────────────
-    const finalPoints: PhotoPoint[] = rawPoints.map((p) => {
-      const key = gridKey(p.lat, p.lon);
-      const geo = gridToGeo.get(key) || { country: null, displayName: null };
-      return {
-        file: p.file,
-        lat: p.lat,
-        lon: p.lon,
-        date: p.date,
-        country: geo.country,
-        displayName: geo.displayName,
-        thumbnailUrl: p.thumbnailUrl,
-        name: p.file.name,
-      };
-    });
-
-    setProgressPercent(100);
-    setProgressMessage("Done!");
-    setPoints(finalPoints);
-    setErrors(errorMessages);
-    setUiState("map");
+    setGeocodingState("done");
   }, []);
 
   // ── Event handlers ─────────────────────────────────────────────────────────
@@ -517,6 +574,8 @@ export default function TravelMapClient() {
     setProgressMessage("");
     setLinkCopied(false);
     setIsSharedView(false);
+    setGeocodingState("idle");
+    setGeocodingProgress({ current: 0, total: 0 });
     // Clear the hash
     if (typeof window !== "undefined") {
       window.history.replaceState(null, "", window.location.pathname);
@@ -697,6 +756,31 @@ export default function TravelMapClient() {
               Start over
             </button>
           </div>
+
+          {/* Geocoding in-progress banner */}
+          {geocodingState === "running" && (
+            <div className="flex items-center gap-3 px-4 py-3 border border-[#E5E5E5] bg-[#FAFAFA] rounded-md">
+              <div className="h-3 w-3 rounded-full border-2 border-[#6366F1] border-t-transparent animate-spin shrink-0" />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-[#525252]">
+                  Fetching location names... {geocodingProgress.current}/{geocodingProgress.total}
+                </p>
+                <p className="text-xs text-[#A3A3A3]">
+                  1 request/sec (Nominatim limit) — map is already usable
+                </p>
+              </div>
+              <div className="shrink-0 w-24 h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#6366F1] rounded-full transition-all duration-500"
+                  style={{
+                    width: geocodingProgress.total > 0
+                      ? `${Math.round((geocodingProgress.current / geocodingProgress.total) * 100)}%`
+                      : "0%"
+                  }}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Error notices */}
           {errors.length > 0 && (
