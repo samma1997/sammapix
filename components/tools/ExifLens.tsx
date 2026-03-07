@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback, useRef } from "react";
 import {
-  Download,
   RotateCcw,
   AlertCircle,
   Camera,
@@ -12,7 +11,6 @@ import {
   HardDrive,
   Shield,
   ShieldOff,
-  X,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -358,12 +356,15 @@ const ACCEPTED_MIME = [
   "image/png",
 ];
 
+type CleanMode = "gps" | "all";
+
 export default function ExifLens() {
   const [uiState, setUiState] = useState<UIState>("idle");
   const [files, setFiles] = useState<ProcessedFile[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const [parseProgress, setParseProgress] = useState(0);
   const [parseMessage, setParseMessage] = useState("");
+  const [cleanMode, setCleanMode] = useState<CleanMode>("gps");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isAccepted = useCallback((file: File): boolean => {
@@ -396,10 +397,7 @@ export default function ExifLens() {
 
         if (fileType === "png") {
           status = "no-support";
-        } else if (fileType === "heic") {
-          exif = await parseExif(file);
-          status = "ready";
-        } else if (fileType === "jpeg") {
+        } else if (fileType === "heic" || fileType === "jpeg") {
           exif = await parseExif(file);
           status = "ready";
         } else {
@@ -440,148 +438,58 @@ export default function ExifLens() {
     [processFiles]
   );
 
-  const handleRemoveGps = useCallback(
-    async (id: string) => {
-      setFiles((prev) =>
-        prev.map((f) => (f.id === id ? { ...f, status: "removing-gps" } : f))
-      );
+  // Clean all files and download ZIP in one step
+  const handleCleanAndDownload = useCallback(async () => {
+    setUiState("downloading");
+    setParseProgress(0);
 
-      const target = files.find((f) => f.id === id);
-      if (!target) return;
-
-      try {
-        if (target.fileType === "heic") {
-          const blob = await heicRemoveGps(target.original);
-          setFiles((prev) =>
-            prev.map((f) =>
-              f.id === id
-                ? {
-                    ...f,
-                    currentBlob: blob,
-                    hasGps: false,
-                    status: "done-gps",
-                    exif: f.exif ? { ...f.exif, location: undefined } : null,
-                    downloadAsJpg: true,
-                  }
-                : f
-            )
-          );
-        } else if (target.fileType === "jpeg") {
-          const sourceFile = target.currentBlob
-            ? new File([target.currentBlob], target.original.name, {
-                type: "image/jpeg",
-              })
-            : target.original;
-          const blob = await removeGpsOnly(sourceFile);
-          setFiles((prev) =>
-            prev.map((f) =>
-              f.id === id
-                ? {
-                    ...f,
-                    currentBlob: blob,
-                    hasGps: false,
-                    status: "done-gps",
-                    exif: f.exif ? { ...f.exif, location: undefined } : null,
-                  }
-                : f
-            )
-          );
-        }
-      } catch {
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === id
-              ? { ...f, status: "error", errorMessage: "Failed to remove GPS" }
-              : f
-          )
-        );
-      }
-    },
-    [files]
-  );
-
-  const handleRemoveExif = useCallback(
-    async (id: string) => {
-      setFiles((prev) =>
-        prev.map((f) => (f.id === id ? { ...f, status: "removing-exif" } : f))
-      );
-
-      const target = files.find((f) => f.id === id);
-      if (!target) return;
-
-      try {
-        if (target.fileType === "heic") {
-          const blob = await heicRemoveAllExif(target.original);
-          setFiles((prev) =>
-            prev.map((f) =>
-              f.id === id
-                ? {
-                    ...f,
-                    currentBlob: blob,
-                    hasGps: false,
-                    status: "done-exif",
-                    exif: null,
-                    downloadAsJpg: true,
-                  }
-                : f
-            )
-          );
-        } else if (target.fileType === "jpeg") {
-          const blob = await removeAllExif(target.original);
-          setFiles((prev) =>
-            prev.map((f) =>
-              f.id === id
-                ? {
-                    ...f,
-                    currentBlob: blob,
-                    hasGps: false,
-                    status: "done-exif",
-                    exif: null,
-                  }
-                : f
-            )
-          );
-        }
-      } catch {
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === id
-              ? {
-                  ...f,
-                  status: "error",
-                  errorMessage: "Failed to remove EXIF",
-                }
-              : f
-          )
-        );
-      }
-    },
-    [files]
-  );
-
-  const handleRemoveAllGps = useCallback(async () => {
-    const targets = files.filter(
-      (f) => f.hasGps && (f.fileType === "jpeg" || f.fileType === "heic")
-    );
-    for (const t of targets) {
-      await handleRemoveGps(t.id);
-    }
-  }, [files, handleRemoveGps]);
-
-  const handleRemoveAllExif = useCallback(async () => {
-    const targets = files.filter(
+    const actionable = files.filter(
       (f) => f.fileType === "jpeg" || f.fileType === "heic"
     );
-    for (const t of targets) {
-      await handleRemoveExif(t.id);
-    }
-  }, [files, handleRemoveExif]);
 
-  const handleDownloadZip = useCallback(async () => {
-    setUiState("downloading");
+    const cleaned: ProcessedFile[] = [...files];
+
+    for (let i = 0; i < actionable.length; i++) {
+      const f = actionable[i];
+      setParseMessage(`Cleaning ${f.original.name} (${i + 1}/${actionable.length})`);
+      setParseProgress(Math.round(((i + 1) / actionable.length) * 100));
+
+      try {
+        let blob: Blob;
+        if (cleanMode === "gps") {
+          blob = f.fileType === "heic"
+            ? await heicRemoveGps(f.original)
+            : await removeGpsOnly(f.original);
+        } else {
+          blob = f.fileType === "heic"
+            ? await heicRemoveAllExif(f.original)
+            : await removeAllExif(f.original);
+        }
+
+        const idx = cleaned.findIndex((c) => c.id === f.id);
+        if (idx !== -1) {
+          cleaned[idx] = {
+            ...cleaned[idx],
+            currentBlob: blob,
+            hasGps: false,
+            status: cleanMode === "gps" ? "done-gps" : "done-exif",
+            downloadAsJpg: f.fileType === "heic",
+          };
+        }
+      } catch {
+        const idx = cleaned.findIndex((c) => c.id === f.id);
+        if (idx !== -1) {
+          cleaned[idx] = { ...cleaned[idx], status: "error", errorMessage: "Failed to clean" };
+        }
+      }
+    }
+
+    setFiles(cleaned);
+
+    // Build ZIP
     try {
       const zip = new JSZip();
-      for (const f of files) {
+      for (const f of cleaned) {
         const source = f.currentBlob ?? f.original;
         const buffer = await source.arrayBuffer();
         zip.file(downloadName(f), buffer);
@@ -590,23 +498,26 @@ export default function ExifLens() {
       saveAs(blob, "exiflens-cleaned.zip");
     } catch {
       // silently continue
-    } finally {
-      setUiState("results");
     }
-  }, [files]);
+
+    setUiState("results");
+    setParseMessage("");
+    setParseProgress(0);
+  }, [files, cleanMode]);
 
   const handleReset = useCallback(() => {
     setFiles([]);
     setUiState("idle");
     setParseProgress(0);
     setParseMessage("");
+    setCleanMode("gps");
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
-  const actionableFiles = files.filter(
-    (f) => f.fileType === "jpeg" || f.fileType === "heic"
-  );
   const filesWithGps = files.filter((f) => f.hasGps);
+  const actionableCount = files.filter(
+    (f) => f.fileType === "jpeg" || f.fileType === "heic"
+  ).length;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
@@ -689,13 +600,35 @@ export default function ExifLens() {
         </div>
       )}
 
-      {(uiState === "results" || uiState === "downloading") && (
+      {uiState === "downloading" && (
+        <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
+          <div className="mb-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-xs font-medium text-[#525252]">
+                Removing sensitive data
+              </span>
+              <span className="text-xs text-[#A3A3A3]">{parseProgress}%</span>
+            </div>
+            <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+              <div
+                className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                style={{ width: `${parseProgress}%` }}
+              />
+            </div>
+          </div>
+          <p className="text-xs text-[#737373] truncate">{parseMessage || "Processing…"}</p>
+        </div>
+      )}
+
+      {uiState === "results" && (
         <div className="space-y-4">
+          {/* Summary bar */}
           <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5]">
             <p className="text-sm font-medium text-[#171717]">
               {files.length} file{files.length !== 1 ? "s" : ""}
               {filesWithGps.length > 0 && (
                 <span className="ml-2 inline-flex items-center gap-1 text-[11px] font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA] px-2 py-0.5 rounded">
+                  <MapPin className="h-3 w-3" strokeWidth={2} />
                   {filesWithGps.length} with GPS
                 </span>
               )}
@@ -709,54 +642,71 @@ export default function ExifLens() {
             </button>
           </div>
 
-          {actionableFiles.length > 0 && (
-            <div className="flex flex-wrap gap-2 p-3 border border-[#E5E5E5] rounded-md bg-[#FAFAFA]">
-              {filesWithGps.filter(
-                (f) => f.fileType === "jpeg" || f.fileType === "heic"
-              ).length > 0 && (
-                <button
-                  onClick={handleRemoveAllGps}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] bg-white text-[#525252] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
-                >
-                  <MapPin className="h-3.5 w-3.5" strokeWidth={1.5} />
-                  Remove GPS only
-                </button>
-              )}
+          {actionableCount > 0 && (
+            <>
+              {/* Mode selector */}
+              <div>
+                <p className="text-xs font-medium text-[#525252] mb-2">What do you want to remove?</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <button
+                    onClick={() => setCleanMode("gps")}
+                    className={[
+                      "text-left p-3 border rounded-md transition-colors",
+                      cleanMode === "gps"
+                        ? "border-[#171717] bg-white"
+                        : "border-[#E5E5E5] bg-[#FAFAFA] hover:border-[#A3A3A3]",
+                    ].join(" ")}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className={[
+                        "h-3.5 w-3.5 rounded-full border-2 flex items-center justify-center shrink-0",
+                        cleanMode === "gps" ? "border-[#171717]" : "border-[#D4D4D4]",
+                      ].join(" ")}>
+                        {cleanMode === "gps" && <div className="h-1.5 w-1.5 rounded-full bg-[#171717]" />}
+                      </div>
+                      <span className="text-sm font-medium text-[#171717]">GPS location only</span>
+                    </div>
+                    <p className="text-xs text-[#737373] pl-5.5">Keeps camera, date, settings. Removes just the coordinates.</p>
+                  </button>
+
+                  <button
+                    onClick={() => setCleanMode("all")}
+                    className={[
+                      "text-left p-3 border rounded-md transition-colors",
+                      cleanMode === "all"
+                        ? "border-[#171717] bg-white"
+                        : "border-[#E5E5E5] bg-[#FAFAFA] hover:border-[#A3A3A3]",
+                    ].join(" ")}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className={[
+                        "h-3.5 w-3.5 rounded-full border-2 flex items-center justify-center shrink-0",
+                        cleanMode === "all" ? "border-[#171717]" : "border-[#D4D4D4]",
+                      ].join(" ")}>
+                        {cleanMode === "all" && <div className="h-1.5 w-1.5 rounded-full bg-[#171717]" />}
+                      </div>
+                      <span className="text-sm font-medium text-[#171717]">All EXIF data</span>
+                    </div>
+                    <p className="text-xs text-[#737373] pl-5.5">Complete clean — removes GPS, camera, date, everything.</p>
+                  </button>
+                </div>
+              </div>
+
+              {/* Clean & Download button */}
               <button
-                onClick={handleRemoveAllExif}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] bg-white text-[#525252] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
+                onClick={handleCleanAndDownload}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
               >
-                <ShieldOff className="h-3.5 w-3.5" strokeWidth={1.5} />
-                Remove all EXIF
+                <ShieldOff className="h-4 w-4" strokeWidth={1.5} />
+                {cleanMode === "gps" ? "Remove GPS & Download ZIP" : "Remove all EXIF & Download ZIP"}
               </button>
-              <button
-                onClick={handleDownloadZip}
-                disabled={uiState === "downloading"}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] disabled:opacity-60 disabled:cursor-not-allowed transition-colors ml-auto"
-              >
-                {uiState === "downloading" ? (
-                  <>
-                    <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Creating ZIP...
-                  </>
-                ) : (
-                  <>
-                    <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
-                    Download all as ZIP
-                  </>
-                )}
-              </button>
-            </div>
+            </>
           )}
 
+          {/* File list — read-only, shows metadata */}
           <div className="space-y-3">
             {files.map((f) => (
-              <ExifFileCard
-                key={f.id}
-                file={f}
-                onRemoveGps={() => handleRemoveGps(f.id)}
-                onRemoveExif={() => handleRemoveExif(f.id)}
-              />
+              <ExifFileCard key={f.id} file={f} />
             ))}
           </div>
         </div>
@@ -769,29 +719,12 @@ export default function ExifLens() {
 
 interface ExifFileCardProps {
   file: ProcessedFile;
-  onRemoveGps: () => void;
-  onRemoveExif: () => void;
 }
 
-const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) => {
-  const [expanded, setExpanded] = useState(true);
-  const isProcessing =
-    file.status === "removing-gps" || file.status === "removing-exif";
-  const isJpeg = file.fileType === "jpeg";
+const ExifFileCard = ({ file }: ExifFileCardProps) => {
+  const [expanded, setExpanded] = useState(false);
   const isPng = file.fileType === "png";
   const isHeic = file.fileType === "heic";
-  const isActionable = isJpeg || isHeic;
-  const heicNotYetProcessed = isHeic && !file.currentBlob;
-
-  const handleDownload = () => {
-    if (!file.currentBlob) return;
-    const url = URL.createObjectURL(file.currentBlob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = downloadName(file);
-    a.click();
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <div className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden">
@@ -826,69 +759,21 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
           <span className="text-[11px] text-[#737373] bg-[#F5F5F5] border border-[#E5E5E5] px-2 py-0.5 rounded">
             {formatBytes(file.original.size)}
           </span>
-          {file.hasGps && (
+          {file.hasGps && file.status !== "done-gps" && file.status !== "done-exif" && (
             <span className="inline-flex items-center gap-1 text-[11px] font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA] px-2 py-0.5 rounded">
               <MapPin className="h-3 w-3" strokeWidth={2} />
-              Has GPS
+              GPS
             </span>
           )}
           {(file.status === "done-gps" || file.status === "done-exif") && (
             <span className="text-[11px] font-medium bg-[#F0FDF4] text-[#16A34A] border border-[#BBF7D0] px-2 py-0.5 rounded">
-              {file.status === "done-gps" ? "GPS removed" : "EXIF stripped"}
+              ✓ Cleaned
             </span>
           )}
-        </div>
-
-        <div className="flex items-center gap-1.5 shrink-0">
-          {isActionable && file.hasGps && (
-            <button
-              onClick={onRemoveGps}
-              disabled={isProcessing}
-              title="Remove GPS only"
-              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-1 border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {file.status === "removing-gps" ? (
-                <span className="h-3 w-3 border-2 border-[#525252]/30 border-t-[#525252] rounded-full animate-spin" />
-              ) : (
-                <X className="h-3 w-3" strokeWidth={2} />
-              )}
-              GPS
-            </button>
-          )}
-          {isActionable && file.status !== "done-exif" && (
-            <button
-              onClick={onRemoveExif}
-              disabled={isProcessing}
-              title="Remove all EXIF"
-              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-1 border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {file.status === "removing-exif" ? (
-                <span className="h-3 w-3 border-2 border-[#525252]/30 border-t-[#525252] rounded-full animate-spin" />
-              ) : (
-                <ShieldOff className="h-3 w-3" strokeWidth={1.5} />
-              )}
-              EXIF
-            </button>
-          )}
-          {isJpeg && file.currentBlob && (
-            <button
-              onClick={handleDownload}
-              title="Download cleaned file"
-              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-1 border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
-            >
-              <Download className="h-3 w-3" strokeWidth={1.5} />
-              Save
-            </button>
-          )}
-          {isHeic && file.currentBlob && (
-            <button
-              onClick={handleDownload}
-              title="Download as JPG"
-              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-1 border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] transition-colors"
-            >
-              <Download className="h-3 w-3" strokeWidth={1.5} />
-              Save .jpg
-            </button>
+          {file.status === "error" && (
+            <span className="text-[11px] font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA] px-2 py-0.5 rounded">
+              Error
+            </span>
           )}
         </div>
       </div>
@@ -898,50 +783,22 @@ const ExifFileCard = ({ file, onRemoveGps, onRemoveExif }: ExifFileCardProps) =>
           {isPng && (
             <div className="px-4 py-3">
               <p className="text-xs text-[#737373]">
-                PNG files do not contain EXIF metadata — nothing to display or
-                remove.
+                PNG files do not contain EXIF metadata.
               </p>
             </div>
           )}
 
-          {isHeic && (
-            <>
-              {file.status === "done-exif" ? (
-                <div className="px-4 py-3">
-                  <p className="text-xs text-[#16A34A]">
-                    All EXIF metadata has been removed from this file.
-                  </p>
-                </div>
-              ) : (
-                <ExifMetadataGrid exif={file.exif} />
-              )}
-              <div className="px-4 pb-3">
-                {heicNotYetProcessed ? (
-                  <p className="text-xs text-[#A3A3A3]">
-                    Convert to JPG to enable download — use the GPS or EXIF
-                    removal buttons above.
-                  </p>
-                ) : (
-                  <p className="text-xs text-[#737373]">
-                    Will be downloaded as .jpg (HEIC converted automatically)
-                  </p>
-                )}
+          {(isHeic || file.fileType === "jpeg") && (
+            (file.status === "done-gps" || file.status === "done-exif") ? (
+              <div className="px-4 py-3">
+                <p className="text-xs text-[#16A34A]">
+                  {file.status === "done-gps" ? "GPS location removed." : "All EXIF metadata removed."}
+                  {isHeic && " Downloaded as .jpg."}
+                </p>
               </div>
-            </>
-          )}
-
-          {isJpeg && (
-            <>
-              {file.status === "done-exif" ? (
-                <div className="px-4 py-3">
-                  <p className="text-xs text-[#16A34A]">
-                    All EXIF metadata has been removed from this file.
-                  </p>
-                </div>
-              ) : (
-                <ExifMetadataGrid exif={file.exif} />
-              )}
-            </>
+            ) : (
+              <ExifMetadataGrid exif={file.exif} />
+            )
           )}
 
           {file.status === "error" && (
