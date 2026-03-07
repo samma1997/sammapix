@@ -29,7 +29,7 @@ interface PhotoEntry {
   previewUrl: string | null; // null = no preview available
 }
 
-const MAX_CULL_FREE = 150;
+const MAX_CULL_FREE = 100;
 const CONCURRENCY = 5; // parallel conversions
 
 // ── Helpers ────────────────────────────────────────────────────────────────────

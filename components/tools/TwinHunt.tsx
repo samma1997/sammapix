@@ -198,6 +198,8 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
   if (!isHeicFile(file)) {
     return URL.createObjectURL(file);
   }
+
+  // Tier 1: embedded JPEG thumbnail via exifr (~50ms, no server round-trip)
   try {
     const exifr = await import("exifr");
     const thumbData = await exifr.thumbnail(file);
@@ -208,6 +210,15 @@ async function buildPreviewUrl(file: File): Promise<string | null> {
   } catch {
     // no embedded thumbnail
   }
+
+  // Tier 2: server-side via heic-convert
+  try {
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
+    if (res.ok) return URL.createObjectURL(await res.blob());
+  } catch { /* skip */ }
+
   return null;
 }
 
