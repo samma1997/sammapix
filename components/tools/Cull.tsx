@@ -1,0 +1,603 @@
+"use client";
+
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
+import {
+  Check,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Download,
+  Image as ImageIcon,
+  Flag,
+} from "lucide-react";
+import Link from "next/link";
+
+// ── Types ──────────────────────────────────────────────────────────────────────
+
+type FileDecision = "keep" | "reject" | null;
+type UIState = "idle" | "reviewing" | "done";
+
+interface PhotoEntry {
+  file: File;
+  previewUrl: string | null; // blob URL — may be null while loading for HEIC
+}
+
+const MAX_CULL_FREE = 20;
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function isHeicFile(file: File): boolean {
+  return (
+    file.type === "image/heic" ||
+    file.type === "image/heif" ||
+    file.name.toLowerCase().endsWith(".heic") ||
+    file.name.toLowerCase().endsWith(".heif")
+  );
+}
+
+async function buildPreviewUrl(file: File): Promise<string | null> {
+  if (!isHeicFile(file)) {
+    return URL.createObjectURL(file);
+  }
+
+  // HEIC: try exifr.thumbnail first (fast embedded JPEG preview)
+  try {
+    const exifr = await import("exifr");
+    const thumbData = await exifr.thumbnail(file);
+    if (thumbData && thumbData.length > 0) {
+      const blob = new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" });
+      return URL.createObjectURL(blob);
+    }
+  } catch {
+    // no embedded thumbnail
+  }
+
+  // HEIC fallback: convert via heic2any
+  try {
+    const heic2anyLib = await import("heic2any");
+    const heic2any = (
+      heic2anyLib as unknown as {
+        default: (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>;
+      }
+    ).default ?? heic2anyLib;
+    const jpegBlob = await (
+      heic2any as (o: { blob: Blob; toType: string; quality: number }) => Promise<Blob | Blob[]>
+    )({ blob: file, toType: "image/jpeg", quality: 0.5 });
+    return URL.createObjectURL(Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob);
+  } catch {
+    // conversion failed — show placeholder
+  }
+
+  return null;
+}
+
+// ── Main component ─────────────────────────────────────────────────────────────
+
+export default function CullClient() {
+  const [uiState, setUiState] = useState<UIState>("idle");
+  const [photos, setPhotos] = useState<PhotoEntry[]>([]);
+  const [decisions, setDecisions] = useState<FileDecision[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Track which preview URLs we created so we can revoke them on cleanup
+  const previewUrlsRef = useRef<Set<string>>(new Set());
+
+  // ── Cleanup blob URLs on unmount ──────────────────────────────────────────
+  useEffect(() => {
+    // Capture the Set reference at effect-run time so the cleanup closure
+    // holds a stable reference (satisfies react-hooks/exhaustive-deps).
+    const urlSet = previewUrlsRef.current;
+    return () => {
+      urlSet.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, []);
+
+  // ── Load preview for current photo ───────────────────────────────────────
+  useEffect(() => {
+    if (uiState !== "reviewing") return;
+    const entry = photos[currentIndex];
+    if (!entry || entry.previewUrl !== null) return; // already loaded or explicitly null
+
+    let cancelled = false;
+    setIsLoadingPreview(true);
+
+    buildPreviewUrl(entry.file).then((url) => {
+      if (cancelled) {
+        if (url) URL.revokeObjectURL(url);
+        return;
+      }
+      if (url) previewUrlsRef.current.add(url);
+      setPhotos((prev) => {
+        const next = [...prev];
+        next[currentIndex] = { ...next[currentIndex], previewUrl: url };
+        return next;
+      });
+      setIsLoadingPreview(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [uiState, currentIndex, photos]);
+
+  // ── Keyboard shortcuts (only during review) ───────────────────────────────
+  useEffect(() => {
+    if (uiState !== "reviewing") return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement).tagName.toLowerCase();
+      if (tag === "input" || tag === "textarea") return;
+
+      switch (e.key) {
+        case "k":
+        case "K":
+          e.preventDefault();
+          markAndAdvance("keep");
+          break;
+        case "x":
+        case "X":
+          e.preventDefault();
+          markAndAdvance("reject");
+          break;
+        case "ArrowRight":
+        case "ArrowDown":
+          e.preventDefault();
+          goNext();
+          break;
+        case "ArrowLeft":
+        case "ArrowUp":
+          e.preventDefault();
+          goPrev();
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uiState, currentIndex, decisions, photos]);
+
+  // ── Navigation helpers ────────────────────────────────────────────────────
+
+  const goNext = useCallback(() => {
+    setCurrentIndex((idx) => {
+      const next = idx + 1;
+      if (next >= photos.length) return idx; // at end
+      return next;
+    });
+  }, [photos.length]);
+
+  const goPrev = useCallback(() => {
+    setCurrentIndex((idx) => Math.max(0, idx - 1));
+  }, []);
+
+  const markAndAdvance = useCallback(
+    (decision: "keep" | "reject") => {
+      setDecisions((prev) => {
+        const next = [...prev];
+        next[currentIndex] = decision;
+        return next;
+      });
+      // If last photo, go to done
+      if (currentIndex >= photos.length - 1) {
+        setUiState("done");
+      } else {
+        setCurrentIndex((idx) => idx + 1);
+      }
+    },
+    [currentIndex, photos.length]
+  );
+
+  // ── File ingestion ─────────────────────────────────────────────────────────
+
+  const processFiles = useCallback((files: File[]) => {
+    const imageFiles = files.filter(
+      (f) =>
+        f.type.startsWith("image/") ||
+        f.name.toLowerCase().endsWith(".heic") ||
+        f.name.toLowerCase().endsWith(".heif")
+    );
+    if (imageFiles.length === 0) return;
+
+    const accepted = imageFiles.slice(0, MAX_CULL_FREE);
+
+    // Initialize entries with null previewUrl — they are loaded lazily
+    const entries: PhotoEntry[] = accepted.map((file) => ({
+      file,
+      previewUrl: null,
+    }));
+
+    // Immediately build preview URL for the first photo so it renders fast
+    buildPreviewUrl(accepted[0]).then((url) => {
+      if (url) previewUrlsRef.current.add(url);
+      setPhotos((prev) => {
+        const next = [...prev];
+        if (next[0]) next[0] = { ...next[0], previewUrl: url };
+        return next;
+      });
+    });
+
+    setPhotos(entries);
+    setDecisions(new Array(accepted.length).fill(null) as FileDecision[]);
+    setCurrentIndex(0);
+    setUiState("reviewing");
+  }, []);
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      setIsDragOver(false);
+      processFiles(Array.from(e.dataTransfer.files));
+    },
+    [processFiles]
+  );
+
+  const handleFileInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      processFiles(Array.from(e.target.files ?? []));
+    },
+    [processFiles]
+  );
+
+  // ── Reset ─────────────────────────────────────────────────────────────────
+
+  const handleReset = useCallback(() => {
+    previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+    previewUrlsRef.current.clear();
+    setPhotos([]);
+    setDecisions([]);
+    setCurrentIndex(0);
+    setUiState("idle");
+    setIsLoadingPreview(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }, []);
+
+  // ── Finish early ──────────────────────────────────────────────────────────
+
+  const handleFinishEarly = useCallback(() => {
+    setUiState("done");
+  }, []);
+
+  // ── ZIP download ──────────────────────────────────────────────────────────
+
+  const handleDownloadZip = useCallback(async () => {
+    const keptPhotos = photos.filter((_, i) => decisions[i] === "keep");
+    if (keptPhotos.length === 0) return;
+
+    const JSZip = (await import("jszip")).default;
+    const { saveAs } = await import("file-saver");
+
+    const zip = new JSZip();
+    for (const entry of keptPhotos) {
+      zip.file(entry.file.name, entry.file);
+    }
+
+    const blob = await zip.generateAsync({ type: "blob" });
+    saveAs(blob, "sammapix-cull-keepers.zip");
+  }, [photos, decisions]);
+
+  // ── Computed values ───────────────────────────────────────────────────────
+
+  const total = photos.length;
+  const keptCount = decisions.filter((d) => d === "keep").length;
+  const rejectedCount = decisions.filter((d) => d === "reject").length;
+  const progressPct = total > 0 ? ((currentIndex + 1) / total) * 100 : 0;
+
+  const currentPhoto = photos[currentIndex];
+  const currentDecision = decisions[currentIndex] ?? null;
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+
+      {/* ── Idle: DropZone ─────────────────────────────────────────────────── */}
+      {uiState === "idle" && (
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label="Drop zone — click or drag photos to start culling"
+          className={[
+            "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
+            isDragOver
+              ? "border-[#6366F1] bg-[#6366F1]/5"
+              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+          ].join(" ")}
+          onClick={() => fileInputRef.current?.click()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              fileInputRef.current?.click();
+            }
+          }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragOver(true);
+          }}
+          onDragLeave={() => setIsDragOver(false)}
+          onDrop={handleDrop}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept="image/*,.heic,.heif"
+            className="hidden"
+            onChange={handleFileInput}
+          />
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+              <ImageIcon className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-[#171717] mb-1">
+                Drop your photos to start culling
+              </p>
+              <p className="text-xs text-[#737373]">
+                JPG, PNG, WebP, HEIC &mdash; reviewed one at a time
+              </p>
+            </div>
+            <div className="flex items-center gap-3 text-xs text-[#A3A3A3]">
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 text-[10px] bg-white border border-[#E5E5E5] rounded font-mono">K</kbd>
+                Keep
+              </span>
+              <span className="text-[#E5E5E5]">·</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 text-[10px] bg-white border border-[#E5E5E5] rounded font-mono">X</kbd>
+                Reject
+              </span>
+              <span className="text-[#E5E5E5]">·</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 text-[10px] bg-white border border-[#E5E5E5] rounded font-mono">←→</kbd>
+                Navigate
+              </span>
+            </div>
+            <p className="text-[11px] text-[#C4C4C4]">
+              Free: up to {MAX_CULL_FREE} files &middot;{" "}
+              <Link href="/pricing" className="underline hover:text-[#737373]">
+                Pro: 500
+              </Link>
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* ── Reviewing: photo viewer ─────────────────────────────────────────── */}
+      {uiState === "reviewing" && currentPhoto && (
+        <div className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white">
+
+          {/* Header row */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5]">
+            <span className="text-xs font-medium text-[#525252]">
+              Photo {currentIndex + 1} of {total}
+            </span>
+            <div className="flex items-center gap-3">
+              {keptCount > 0 && (
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#16A34A] bg-[#F0FDF4] border border-[#BBF7D0] px-2 py-0.5 rounded">
+                  <Check className="h-3 w-3" strokeWidth={2} />
+                  {keptCount} kept
+                </span>
+              )}
+              {rejectedCount > 0 && (
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#DC2626] bg-[#FEF2F2] border border-[#FECACA] px-2 py-0.5 rounded">
+                  <X className="h-3 w-3" strokeWidth={2} />
+                  {rejectedCount} rejected
+                </span>
+              )}
+              <button
+                onClick={handleFinishEarly}
+                className="text-xs text-[#737373] hover:text-[#171717] transition-colors"
+                title="Finish review early"
+              >
+                Finish review
+              </button>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full h-0.5 bg-[#F5F5F5]">
+            <div
+              className="h-full bg-[#171717] transition-all duration-200"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+
+          {/* Photo preview */}
+          <div className="relative bg-[#0A0A0A] flex items-center justify-center"
+            style={{ minHeight: "380px" }}
+          >
+            {/* Decision badge — shown when navigating back to already-decided photos */}
+            {currentDecision === "keep" && (
+              <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-[#16A34A] text-white text-xs font-medium rounded-md shadow-sm">
+                <Check className="h-3.5 w-3.5" strokeWidth={2} />
+                Kept
+              </div>
+            )}
+            {currentDecision === "reject" && (
+              <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-[#DC2626] text-white text-xs font-medium rounded-md shadow-sm">
+                <X className="h-3.5 w-3.5" strokeWidth={2} />
+                Rejected
+              </div>
+            )}
+
+            {isLoadingPreview || currentPhoto.previewUrl === null ? (
+              <div className="flex flex-col items-center gap-3 text-[#525252]">
+                <div className="h-8 w-8 rounded-full border-2 border-[#525252] border-t-transparent animate-spin" />
+                <span className="text-xs text-[#737373]">Loading preview…</span>
+              </div>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={currentIndex}
+                src={currentPhoto.previewUrl}
+                alt={currentPhoto.file.name}
+                className="max-w-full object-contain"
+                style={{ maxHeight: "65vh", display: "block" }}
+              />
+            )}
+          </div>
+
+          {/* Footer: filename + controls */}
+          <div className="border-t border-[#E5E5E5] px-4 py-4">
+            <p className="text-xs text-[#737373] mb-4 truncate">
+              <span className="font-medium text-[#171717]">{currentPhoto.file.name}</span>
+              <span className="mx-1.5 text-[#D4D4D4]">&middot;</span>
+              {formatBytes(currentPhoto.file.size)}
+            </p>
+
+            {/* Action buttons */}
+            <div className="flex items-center justify-between gap-2">
+              {/* Reject */}
+              <button
+                onClick={() => markAndAdvance("reject")}
+                aria-label="Reject this photo (X)"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-[#E5E5E5] rounded-md text-sm font-medium text-[#737373] bg-white hover:border-[#DC2626] hover:text-[#DC2626] hover:bg-[#FEF2F2] transition-colors"
+              >
+                <X className="h-4 w-4" strokeWidth={1.5} />
+                Reject
+                <kbd className="hidden sm:inline ml-0.5 px-1 py-0.5 text-[9px] bg-[#F5F5F5] border border-[#E5E5E5] rounded font-mono text-[#A3A3A3]">X</kbd>
+              </button>
+
+              {/* Prev */}
+              <button
+                onClick={goPrev}
+                disabled={currentIndex === 0}
+                aria-label="Previous photo"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
+                <span className="hidden sm:inline text-xs">Prev</span>
+              </button>
+
+              {/* Next */}
+              <button
+                onClick={goNext}
+                disabled={currentIndex >= total - 1}
+                aria-label="Next photo (without deciding)"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <span className="hidden sm:inline text-xs">Next</span>
+                <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
+              </button>
+
+              {/* Keep */}
+              <button
+                onClick={() => markAndAdvance("keep")}
+                aria-label="Keep this photo (K)"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
+              >
+                <Check className="h-4 w-4" strokeWidth={1.5} />
+                Keep
+                <kbd className="hidden sm:inline ml-0.5 px-1 py-0.5 text-[9px] bg-white/20 border border-white/30 rounded font-mono">K</kbd>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Done: summary + download ────────────────────────────────────────── */}
+      {uiState === "done" && (
+        <div className="space-y-6">
+
+          {/* Summary header */}
+          <div className="border border-[#E5E5E5] rounded-lg p-6 bg-white">
+            <div className="flex items-center gap-3 mb-1">
+              <div className="h-8 w-8 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] flex items-center justify-center">
+                <Check className="h-4 w-4 text-[#16A34A]" strokeWidth={2} />
+              </div>
+              <h2 className="text-base font-semibold text-[#171717]">
+                Review complete
+              </h2>
+            </div>
+            <p className="text-sm text-[#737373] ml-11">
+              {keptCount} photo{keptCount !== 1 ? "s" : ""} kept
+              {rejectedCount > 0 && `, ${rejectedCount} rejected`}
+              {decisions.filter((d) => d === null).length > 0 &&
+                `, ${decisions.filter((d) => d === null).length} undecided`}
+            </p>
+          </div>
+
+          {/* Thumbnail grid of kept photos */}
+          {keptCount > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-3">
+                Your keepers
+              </p>
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                {photos.map((entry, i) => {
+                  if (decisions[i] !== "keep") return null;
+                  return (
+                    <div
+                      key={i}
+                      className="relative aspect-square rounded-md overflow-hidden border border-[#E5E5E5] bg-[#F5F5F5]"
+                    >
+                      {entry.previewUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={entry.previewUrl}
+                          alt={entry.file.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Flag className="h-5 w-5 text-[#A3A3A3]" strokeWidth={1.5} />
+                        </div>
+                      )}
+                      <div className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[#16A34A] flex items-center justify-center">
+                        <Check className="h-2.5 w-2.5 text-white" strokeWidth={2.5} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            {keptCount > 0 ? (
+              <button
+                onClick={handleDownloadZip}
+                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
+              >
+                <Download className="h-4 w-4" strokeWidth={1.5} />
+                Download {keptCount} kept photo{keptCount !== 1 ? "s" : ""} as ZIP
+              </button>
+            ) : (
+              <div className="flex-1 px-5 py-3 text-sm text-[#737373] border border-[#E5E5E5] rounded-md text-center bg-[#FAFAFA]">
+                No photos marked as keep
+              </div>
+            )}
+
+            <button
+              onClick={handleReset}
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors"
+            >
+              <RotateCcw className="h-4 w-4" strokeWidth={1.5} />
+              Start over
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

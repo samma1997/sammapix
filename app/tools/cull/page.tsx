@@ -1,124 +1,128 @@
-"use client";
+import { Metadata } from "next";
+import { Keyboard, FileImage, Shield } from "lucide-react";
+import ToolHeader from "@/components/tools/ToolHeader";
+import CullClient from "@/components/tools/Cull";
+import { APP_URL } from "@/lib/constants";
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Layers, CheckCircle } from "lucide-react";
+export const metadata: Metadata = {
+  title: "Cull — Keyboard Photo Review | SammaPix",
+  description:
+    "Review your photos fast with keyboard shortcuts. Press K to keep, X to reject. Download only your best shots as a ZIP. Works entirely in your browser.",
+  alternates: { canonical: `${APP_URL}/tools/cull` },
+  openGraph: {
+    title: "Cull — Keyboard Photo Review | SammaPix",
+    description:
+      "Review your photos fast with keyboard shortcuts. Press K to keep, X to reject. Download only your best shots as a ZIP. Works entirely in your browser.",
+    url: `${APP_URL}/tools/cull`,
+    siteName: "SammaPix",
+    type: "website",
+  },
+};
 
-const activeTools = [
-  { name: "Compress Images", href: "/tools/compress" },
-  { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "AI Rename", href: "/tools/ai-rename" },
+const steps = [
+  {
+    n: "1",
+    title: "Drop your photos",
+    desc: "Upload any batch of JPG or HEIC photos. Up to 20 files on the free plan.",
+  },
+  {
+    n: "2",
+    title: "K to keep, X to reject",
+    desc: "Review each photo full-screen with keyboard shortcuts. Navigate with arrow keys. No clicking required.",
+  },
+  {
+    n: "3",
+    title: "Download your keepers",
+    desc: "When you're done, download a ZIP containing only the photos you marked as keep.",
+  },
 ];
 
-export default function CullToolPage() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+const features = [
+  {
+    icon: <Keyboard className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Keyboard-first",
+    description:
+      "K/X review is 10x faster than clicking. Go through 100 photos in minutes without ever touching the mouse.",
+  },
+  {
+    icon: <FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Works with HEIC",
+    description:
+      "iPhone photos in HEIC format are fully supported. Preview and cull directly — no conversion step needed.",
+  },
+  {
+    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "100% private",
+    description:
+      "Photos never leave your device. Everything happens in your browser — no upload, no server, no cloud.",
+  },
+];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubmitted(true);
-    }
-  };
-
+export default function CullPage() {
   return (
-    <div className="py-16 px-4 sm:px-6">
-      <div className="max-w-xl mx-auto">
-        {/* Badge */}
-        <div className="mb-6">
-          <span className="inline-flex items-center text-[10px] font-medium uppercase tracking-widest bg-[#EEF2FF] text-[#6366F1] px-2.5 py-1 rounded border border-[#C7D2FE]">
-            Coming soon
-          </span>
-        </div>
+    <main>
+      <ToolHeader
+        title="Cull"
+        description="Review your photos one at a time with keyboard shortcuts. K to keep, X to reject. Download only your best shots as a ZIP."
+      />
 
-        {/* Icon */}
-        <div className="h-12 w-12 rounded-md border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center mb-6">
-          <Layers className="h-6 w-6 text-[#525252]" strokeWidth={1.5} />
-        </div>
+      <CullClient />
 
-        {/* Heading */}
-        <h1 className="text-3xl font-bold text-[#171717] tracking-tight mb-4 leading-tight">
-          Photo Culling Tool
-        </h1>
-
-        {/* Description */}
-        <p className="text-[#737373] text-base leading-relaxed mb-8">
-          A smart batch review tool built for photographers. Quickly flip
-          through your shots, pick your best frames, reject blurry or duplicate
-          images, and export your selection — all without leaving the browser.
-        </p>
-
-        {/* Feature list */}
-        <ul className="space-y-3 mb-10">
-          {[
-            "Keyboard-driven review: arrow keys to navigate, P to pick, X to reject",
-            "Side-by-side comparison of similar shots",
-            "Filter by pick, reject, or unreviewed",
-            "Export only your selected images",
-            "Fully browser-based — your photos never leave your device",
-          ].map((item) => (
-            <li key={item} className="flex items-start gap-2.5">
-              <div className="h-5 w-5 rounded-full bg-[#EEF2FF] border border-[#C7D2FE] flex items-center justify-center shrink-0 mt-0.5">
-                <div className="h-1.5 w-1.5 rounded-full bg-[#6366F1]" />
-              </div>
-              <span className="text-sm text-[#525252]">{item}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* Notify form */}
-        <div className="border border-[#E5E5E5] rounded-md p-6 bg-[#FAFAFA] mb-10">
-          <h2 className="text-sm font-semibold text-[#171717] mb-1">
-            Get notified when it&apos;s ready
+      {/* How it works */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+            How it works
           </h2>
-          <p className="text-xs text-[#A3A3A3] mb-4">
-            No spam. One email when Photo Culling launches.
-          </p>
-
-          {submitted ? (
-            <div className="flex items-center gap-2 text-sm text-[#16A34A]">
-              <CheckCircle className="h-4 w-4" strokeWidth={1.5} />
-              You&apos;re on the list — we&apos;ll notify you at launch.
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                className="flex-1 min-w-0 px-3 py-2 text-sm border border-[#E5E5E5] rounded-md bg-white placeholder-[#A3A3A3] text-[#171717] focus:outline-none focus:border-[#6366F1] transition-colors"
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors whitespace-nowrap"
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {steps.map((s) => (
+              <div
+                key={s.n}
+                className="p-4 border border-[#E5E5E5] rounded-md bg-white"
               >
-                Notify me
-              </button>
-            </form>
-          )}
-        </div>
-
-        {/* Meanwhile CTA */}
-        <div>
-          <p className="text-xs text-[#A3A3A3] mb-3 uppercase tracking-widest font-medium">
-            Meanwhile, try
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {activeTools.map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] bg-white transition-colors"
-              >
-                {tool.name}
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
+                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] flex items-center justify-center mb-3">
+                  <span className="text-xs font-semibold text-[#525252]">
+                    {s.n}
+                  </span>
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] mb-1">
+                  {s.title}
+                </h3>
+                <p className="text-xs text-[#737373] leading-relaxed">
+                  {s.desc}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+            Why Cull?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+              >
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                  {f.icon}
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                  {f.title}
+                </h3>
+                <p className="text-sm text-[#737373] leading-relaxed">
+                  {f.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
