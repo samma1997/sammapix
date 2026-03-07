@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import sharp from "sharp";
+import { NextRequest } from "next/server";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const convert = require("heic-convert");
 
-// Max file size accepted: 50MB
-const MAX_SIZE = 50 * 1024 * 1024;
+const MAX_SIZE = 50 * 1024 * 1024; // 50MB
 
 export const runtime = "nodejs";
 
@@ -12,23 +12,23 @@ export async function POST(req: NextRequest) {
     const file = formData.get("file") as File | null;
 
     if (!file) {
-      return NextResponse.json({ error: "No file provided" }, { status: 400 });
+      return Response.json({ error: "No file provided" }, { status: 400 });
     }
 
     if (file.size > MAX_SIZE) {
-      return NextResponse.json({ error: "File too large (max 50MB)" }, { status: 413 });
+      return Response.json({ error: "File too large (max 50MB)" }, { status: 413 });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Convert HEIC/HEIF to JPEG thumbnail via sharp (libvips — 100% reliable)
-    const jpeg = await sharp(buffer)
-      .rotate() // honour EXIF orientation
-      .resize(800, 800, { fit: "inside", withoutEnlargement: true })
-      .jpeg({ quality: 60 })
-      .toBuffer();
+    // heic-convert: pure JS/WASM — works on Vercel without native libheif
+    const outputBuffer: Buffer = await convert({
+      buffer,
+      format: "JPEG",
+      quality: 0.6,
+    });
 
-    return new Response(new Uint8Array(jpeg), {
+    return new Response(new Uint8Array(outputBuffer), {
       status: 200,
       headers: {
         "Content-Type": "image/jpeg",
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (err) {
-    console.error("[heic-preview] Error:", err);
-    return NextResponse.json({ error: "Conversion failed" }, { status: 500 });
+    console.error("[heic-preview] Conversion error:", err);
+    return Response.json({ error: "Conversion failed" }, { status: 500 });
   }
 }
