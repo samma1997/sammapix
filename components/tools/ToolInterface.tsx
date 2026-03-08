@@ -11,7 +11,6 @@ import AiRenameModal from "@/components/ai/AiRenameModal";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/hooks/useLocale";
 
 export type ToolMode = "compress" | "webp" | "ai-rename";
 
@@ -23,7 +22,6 @@ interface ToolInterfaceProps {
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
   const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
   const { data: session } = useSession();
-  const d = useLocale();
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -79,18 +77,18 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <FeatureCard
                 icon={<Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                title={d.features.compress_title}
-                description={d.features.compress_desc}
+                title="Smart Compress"
+                description="Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser — nothing uploaded."
               />
               <FeatureCard
                 icon={<FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                title={d.features.webp_title}
-                description={d.features.webp_desc}
+                title="Convert to WebP"
+                description="Google's next-gen format. 30% smaller than JPEG with same quality."
               />
               <FeatureCard
                 icon={<Sparkles className="h-5 w-5 text-brand" strokeWidth={1.5} />}
-                title={d.features.ai_title}
-                description={d.features.ai_desc}
+                title="AI Rename"
+                description="Gemini reads your image and generates an SEO-optimized filename + alt text."
                 highlight
               />
             </div>
@@ -109,10 +107,10 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">
-                    {d.privacy.title}
+                    Your images never leave your browser
                   </h3>
                   <p className="text-sm text-gray-500 dark:text-[#737373]">
-                    {d.privacy.desc}
+                    All processing happens locally using your device&apos;s CPU. No uploads, no servers, no data retention. The only exception is AI Rename, which sends a thumbnail to Google Gemini for analysis.
                   </p>
                 </div>
               </div>
@@ -133,14 +131,14 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
         <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3 tracking-tight">
-              {d.pro_banner.title}
+              Need more? Go Pro.
             </h2>
             <p className="text-gray-500 dark:text-[#737373] mb-6 text-sm leading-relaxed">
-              {d.pro_banner.desc}
+              Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads — all for $7/month.
             </p>
             <Link href="/pricing">
               <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#E5E5E5] transition-colors">
-                {d.pro_banner.cta}
+                View pricing
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </button>
             </Link>

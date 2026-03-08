@@ -9,7 +9,6 @@ import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
-import { useLocale } from "@/hooks/useLocale";
 
 interface SettingsToolbarProps {
   onAiRenameClick?: () => void;
@@ -28,7 +27,6 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
   } = useImageStore();
 
   const { data: session } = useSession();
-  const d = useLocale();
   const hasQueuedItems = items.some((i) => i.status === "queued");
   const allDone = items.length > 0 && items.every((i) => i.status === "done" || i.status === "error");
   const remaining = Math.max(0, AI_RENAME_FREE_PER_DAY - aiRenameUsedToday);
@@ -52,7 +50,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
         {/* Quality slider */}
         <div className="flex-1 min-w-[160px]">
           <Slider
-            label={d.toolbar.quality}
+            label="Quality"
             showValue
             min={1}
             max={100}
@@ -80,7 +78,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
                 )}
               />
             </div>
-            <span className="text-sm text-gray-600 dark:text-[#A3A3A3]">{d.toolbar.convert_webp}</span>
+            <span className="text-sm text-gray-600 dark:text-[#A3A3A3]">Convert to WebP</span>
           </label>
 
           {/* AI Rename */}
@@ -101,7 +99,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
             </div>
             <span className="text-sm text-gray-600 dark:text-[#A3A3A3] flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-brand" strokeWidth={1.5} />
-              {d.toolbar.ai_rename}
+              AI Rename
             </span>
             {session ? (
               <span
@@ -140,11 +138,11 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
           {isProcessing ? (
             "..."
           ) : allDone ? (
-            d.toolbar.compress_all
+            "Compress all"
           ) : (
             <>
               <Zap className="h-4 w-4" strokeWidth={1.5} />
-              {d.toolbar.compress_all}
+              Compress all
             </>
           )}
         </Button>

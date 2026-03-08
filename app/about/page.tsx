@@ -3,9 +3,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Chi sono — Luca Sammarco, Travel Photographer & Tool Builder | SammaPix",
+  title: "About — Luca Sammarco, Travel Photographer & Tool Builder | SammaPix",
   description:
-    "Sono Luca Sammarco: fotografo di viaggio e sviluppatore. Ho costruito SammaPix per risolvere i problemi che avevo io stesso con l'ottimizzazione delle immagini. Scopri la mia storia e il mio workflow.",
+    "I'm Luca Sammarco: travel photographer and developer. I built SammaPix to solve my own image optimization problems. Read my story and my post-trip workflow.",
 };
 
 export default function AboutPage() {
@@ -15,40 +15,40 @@ export default function AboutPage() {
 
         {/* Header */}
         <header className="mb-12">
-          <p className="text-xs text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-3">Chi sono</p>
+          <p className="text-xs text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-3">About</p>
           <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-4">
             Luca Sammarco
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed">
-            Travel photographer. Developer. Costruisco strumenti per risolvere problemi che incontro io stesso sul campo.
+            Travel photographer. Developer. I build tools to solve problems I run into myself in the field.
           </p>
           <div className="mt-6 h-px bg-gray-100 dark:bg-[#2A2A2A]" />
         </header>
 
-        {/* Storia */}
+        {/* Story */}
         <section className="mb-12 space-y-5 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
           <p>
-            Ho iniziato a fotografare seriamente durante il primo viaggio in Asia — Sri Lanka, 2025.
-            Tornavo a casa con centinaia di file: RAW da convertire, JPEG da comprimere, nomi casuali
-            da sistemare prima di caricarli sul sito. Un processo lungo, ripetitivo, che rubava tempo
-            che avrei preferito passare a scattare o a editare.
+            I started taking photography seriously during my first trip to Asia — Sri Lanka, 2025.
+            I came home with hundreds of files: RAW files to convert, JPEGs to compress, random names
+            to fix before uploading to my site. A long, repetitive process that stole time
+            I would rather have spent shooting or editing.
           </p>
           <p>
-            Ho cercato una soluzione: nessuno strumento gratuito faceva tutto in un posto solo.
-            TinyPNG comprime ma non rinomina. Squoosh è ottimo per un file alla volta ma non gestisce
-            batch. I tool con AI per il rinomino o costano o caricano le tue foto su server di terzi.
-            Per un fotografo che vuole proteggere il proprio lavoro, non va bene.
+            I looked for a solution: no free tool did everything in one place.
+            TinyPNG compresses but doesn&apos;t rename. Squoosh is great for one file at a time but
+            doesn&apos;t handle batches. AI renaming tools either cost money or upload your photos to
+            third-party servers. For a photographer who wants to protect their work, that doesn&apos;t work.
           </p>
           <p>
-            Così ho costruito <strong className="text-[#171717] dark:text-[#E5E5E5] font-medium">SammaPix</strong>: compressione batch,
-            conversione WebP, e rinomino AI — tutto direttamente nel browser.
-            Nessun upload, nessun account obbligatorio per le funzioni base, nessuna foto che lascia
-            il tuo dispositivo senza il tuo consenso.
+            So I built <strong className="text-[#171717] dark:text-[#E5E5E5] font-medium">SammaPix</strong>: batch compression,
+            WebP conversion, and AI rename — all directly in the browser.
+            No uploads, no mandatory account for the basic features, no photos leaving
+            your device without your consent.
           </p>
           <p>
-            L&apos;obiettivo non è diventare un&apos;altra piattaforma di massa. È costruire il workflow
-            che avrei voluto avere io — e renderlo disponibile a chiunque lavori con le immagini:
-            fotografi di viaggio, wedding photographer, content creator, sviluppatori web.
+            The goal isn&apos;t to become another mass-market platform. It&apos;s to build the workflow
+            I wish I&apos;d had — and make it available to anyone who works with images:
+            travel photographers, wedding photographers, content creators, web developers.
           </p>
         </section>
 
@@ -58,48 +58,48 @@ export default function AboutPage() {
         {/* Workflow */}
         <section className="mb-12">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4 lowercase tracking-wide">
-            il mio workflow post-viaggio
+            my post-trip workflow
           </h2>
           <ol className="space-y-4 text-sm text-gray-600 dark:text-[#A3A3A3]">
             <li className="flex gap-3">
               <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">01</span>
               <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Selezione e edit in Lightroom</p>
+                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Select and edit in Lightroom</p>
                 <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  Export JPEG a qualità 85 — bilanciamento qualità/peso ottimale per il web.
+                  Export JPEG at quality 85 — the optimal quality/weight balance for the web.
                 </p>
               </div>
             </li>
             <li className="flex gap-3">
               <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">02</span>
               <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Compressione batch + conversione WebP</p>
+                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Batch compress + convert to WebP</p>
                 <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  Trascino tutto in SammaPix. I file passano da 2-3 MB a 400-600 KB in formato WebP,
-                  senza perdita percettibile. Il browser non carica tutto questo peso inutilmente.
+                  I drag everything into SammaPix. Files go from 2–3 MB down to 400–600 KB in WebP format,
+                  with no perceptible quality loss. The browser doesn&apos;t have to load all that unnecessary weight.
                 </p>
               </div>
             </li>
             <li className="flex gap-3">
               <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">03</span>
               <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Rinomino AI con filename SEO</p>
+                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">AI rename with SEO filenames</p>
                 <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  L&apos;AI analizza ogni immagine e genera nomi descrittivi:
+                  The AI analyzes each image and generates descriptive names:
                   <code className="text-[11px] bg-gray-100 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] px-1 rounded mx-1">DSC_4821.jpg</code>
-                  diventa
+                  becomes
                   <code className="text-[11px] bg-gray-100 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] px-1 rounded mx-1">sigiriya-rock-fortress-sunrise-sri-lanka.webp</code>.
-                  Google capisce cosa c&apos;è nell&apos;immagine, la indicizza meglio in Google Images.
+                  Google understands what&apos;s in the image and indexes it better in Google Images.
                 </p>
               </div>
             </li>
             <li className="flex gap-3">
               <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">04</span>
               <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Upload sul sito</p>
+                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Upload to the site</p>
                 <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  File già ottimizzati, già rinominati. Il sito carica veloce, le immagini
-                  compaiono in Google Images con context corretto.
+                  Files already optimized, already renamed. The site loads fast, and images
+                  appear in Google Images with the right context.
                 </p>
               </div>
             </li>
@@ -108,37 +108,37 @@ export default function AboutPage() {
 
         <div className="h-px bg-gray-100 dark:bg-[#2A2A2A] mb-12" />
 
-        {/* Per i fotografi */}
+        {/* Why photographers should optimize */}
         <section className="mb-12">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3 lowercase tracking-wide">
-            perché i fotografi dovrebbero ottimizzare le immagini
+            why photographers should optimize their images
           </h2>
           <div className="space-y-4 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
             <p>
-              La maggior parte dei fotografi cura ogni dettaglio dello scatto e dell&apos;editing,
-              poi carica file da 4 MB su WordPress senza pensarci. Il risultato: il sito è lento,
-              il PageSpeed score è basso, Google penalizza il ranking.
+              Most photographers obsess over every detail of the shot and the edit,
+              then upload 4 MB files to WordPress without a second thought. The result: a slow site,
+              a low PageSpeed score, and Google penalizing your ranking.
             </p>
             <p>
-              WebP al posto di JPEG riduce il peso del 25-35% a parità di qualità visiva.
-              La compressione intelligente porta a riduzioni del 60-70% rispetto all&apos;originale.
-              Un sito portfolio che carica in 1.5 secondi invece di 4 secondi converte molto meglio —
-              che tu stia vendendo print, cercando collaborazioni, o costruendo un pubblico.
+              WebP instead of JPEG reduces file size by 25–35% at the same visual quality.
+              Smart compression brings reductions of 60–70% compared to the original.
+              A portfolio site that loads in 1.5 seconds instead of 4 converts much better —
+              whether you&apos;re selling prints, looking for collaborations, or building an audience.
             </p>
             <p>
-              I filename SEO non sono fondamentali come la link building o il contenuto,
-              ma contribuiscono al relevance signal per Google Images — una fonte di traffico
-              spesso ignorata dai fotografi, che invece può portare clienti qualificati.
+              SEO filenames aren&apos;t as critical as link building or content,
+              but they contribute to the relevance signal for Google Images — a traffic source
+              often ignored by photographers, yet one that can bring in qualified clients.
             </p>
           </div>
         </section>
 
         <div className="h-px bg-gray-100 dark:bg-[#2A2A2A] mb-12" />
 
-        {/* I tool */}
+        {/* Tools */}
         <section className="mb-12">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4 lowercase tracking-wide">
-            strumenti che ho costruito
+            tools I&apos;ve built
           </h2>
           <div className="space-y-3">
             <Link
@@ -148,7 +148,7 @@ export default function AboutPage() {
               <div>
                 <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Crunch — Image Optimizer</p>
                 <p className="text-xs text-gray-400 dark:text-[#737373] mt-0.5">
-                  Comprimi, converti in WebP e rinomina con AI — tutto in una passata, nel browser.
+                  Compress, convert to WebP, and AI rename — all in one pass, in the browser.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {["Compress", "WebP", "AI Rename", "Batch ZIP"].map((f) => (
@@ -168,18 +168,18 @@ export default function AboutPage() {
         {/* Portfolio */}
         <section className="mb-4">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3 lowercase tracking-wide">
-            i miei viaggi
+            my travels
           </h2>
           <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed mb-4">
-            Ho fotografato in Sri Lanka, Bali, Giappone, Thailandia e Cina.
-            Ogni viaggio ha la sua galleria — ogni foto ha una descrizione del contesto,
-            del luogo, della luce. Fotografia di viaggio documentaria, non patinata.
+            I&apos;ve photographed in Sri Lanka, Bali, Japan, Thailand, and China.
+            Each trip has its own gallery — each photo has a description of the context,
+            the place, the light. Documentary travel photography, not polished.
           </p>
           <Link
             href="/portfolio"
             className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-gray-500 dark:hover:text-[#A3A3A3] transition-colors font-medium"
           >
-            Vai al portfolio
+            View portfolio
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
           </Link>
         </section>

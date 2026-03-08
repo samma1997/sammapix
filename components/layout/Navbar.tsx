@@ -6,12 +6,10 @@ import { useSession, signOut } from "next-auth/react";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/hooks/useLocale";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const d = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -141,16 +139,16 @@ export default function Navbar() {
             Portfolio
           </Link>
           <Link href="/tools" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            {d.nav.tools}
+            Tools
           </Link>
           <Link href="/pricing" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            {d.nav.pricing}
+            Pricing
           </Link>
           <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            {d.nav.blog}
+            Blog
           </Link>
           <Link href="/about" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            Chi sono
+            About
           </Link>
         </nav>
 
@@ -173,13 +171,13 @@ export default function Navbar() {
             </>
           ) : (
             <Link href="/api/auth/signin">
-              <Button variant="ghost" size="sm">{d.nav.signin}</Button>
+              <Button variant="ghost" size="sm">Sign in</Button>
             </Link>
           )}
           {(session?.user as { plan?: string })?.plan !== "pro" && (
             <Link href="/pricing">
               <Button variant="primary" size="sm" className="gap-1">
-                {d.nav.get_pro}
+                Get Pro →
                 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
               </Button>
             </Link>
@@ -208,23 +206,23 @@ export default function Navbar() {
         <div className="md:hidden border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] animate-slide-down">
           <div className="px-4 py-3 flex flex-col gap-1">
             <Link href="/portfolio" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Portfolio</Link>
-            <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{d.nav.tools}</Link>
-            <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{d.nav.pricing}</Link>
-            <Link href="/blog" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{d.nav.blog}</Link>
-            <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Chi sono</Link>
+            <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Tools</Link>
+            <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Pricing</Link>
+            <Link href="/blog" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Blog</Link>
+            <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>About</Link>
 
             <div className="pt-2 border-t border-gray-100 dark:border-[#2A2A2A] mt-1 flex gap-2">
               {status === "authenticated" ? (
                 <Button variant="ghost" size="sm" className="w-full" onClick={() => { signOut(); setMobileOpen(false); }}>
-                  {d.nav.signout}
+                  Sign out
                 </Button>
               ) : (
                 <Link href="/api/auth/signin" className="flex-1" onClick={() => setMobileOpen(false)}>
-                  <Button variant="secondary" size="sm" className="w-full">{d.nav.signin}</Button>
+                  <Button variant="secondary" size="sm" className="w-full">Sign in</Button>
                 </Link>
               )}
               <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
-                <Button variant="primary" size="sm" className="w-full">{d.nav.get_pro}</Button>
+                <Button variant="primary" size="sm" className="w-full">Get Pro →</Button>
               </Link>
             </div>
           </div>
