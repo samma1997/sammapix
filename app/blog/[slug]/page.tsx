@@ -2041,15 +2041,16 @@ TwinHunt is designed for large libraries. It processes photos incrementally and 
 };
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return Object.keys(posts).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const post = posts[params.slug as BlogSlug];
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = posts[slug as BlogSlug];
   if (!post) return {};
 
   return {
@@ -2058,7 +2059,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
     keywords: post.keywords,
     authors: [{ name: "Luca Sammarco", url: "https://lucasammarco.com" }],
     alternates: {
-      canonical: `https://sammapix.com/blog/${params.slug}`,
+      canonical: `https://sammapix.com/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
@@ -2088,10 +2089,10 @@ function renderLine(line: string, i: number): React.ReactNode {
           alt={alt}
           width={900}
           height={500}
-          className="rounded-md border border-gray-200 w-full h-auto"
+          className="rounded-md border border-gray-200 dark:border-[#2A2A2A] w-full h-auto"
         />
         {alt && (
-          <figcaption className="text-xs text-gray-400 text-center mt-2 italic">
+          <figcaption className="text-xs text-gray-400 dark:text-[#737373] text-center mt-2 italic">
             {alt}
           </figcaption>
         )}
@@ -2103,7 +2104,7 @@ function renderLine(line: string, i: number): React.ReactNode {
     return (
       <h2
         key={i}
-        className="text-xl font-semibold text-gray-900 mt-10 mb-3 tracking-tight"
+        className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight"
       >
         {line.slice(3)}
       </h2>
@@ -2114,7 +2115,7 @@ function renderLine(line: string, i: number): React.ReactNode {
     return (
       <h3
         key={i}
-        className="text-base font-semibold text-gray-900 mt-6 mb-2"
+        className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2"
       >
         {line.slice(4)}
       </h3>
@@ -2124,7 +2125,7 @@ function renderLine(line: string, i: number): React.ReactNode {
   if (/^\d+\. /.test(line)) {
     const text = line.replace(/^\d+\. /, "").replace(/\*\*(.*?)\*\*/g, "$1");
     return (
-      <li key={i} className="text-sm text-gray-600 ml-5 mb-1.5 list-decimal">
+      <li key={i} className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-decimal">
         {text}
       </li>
     );
@@ -2133,7 +2134,7 @@ function renderLine(line: string, i: number): React.ReactNode {
   if (line.startsWith("- ")) {
     const text = line.slice(2).replace(/\*\*(.*?)\*\*/g, "$1");
     return (
-      <li key={i} className="text-sm text-gray-600 ml-5 mb-1.5 list-disc">
+      <li key={i} className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
         {text}
       </li>
     );
@@ -2144,7 +2145,7 @@ function renderLine(line: string, i: number): React.ReactNode {
   }
   // Horizontal rule
   if (line.trim() === "---") {
-    return <hr key={i} className="my-8 border-gray-100" />;
+    return <hr key={i} className="my-8 border-gray-100 dark:border-[#2A2A2A]" />;
   }
   // Empty line
   if (line.trim() === "") {
@@ -2153,7 +2154,7 @@ function renderLine(line: string, i: number): React.ReactNode {
   // Bold-only lines (e.g. "**Section label:**")
   if (line.startsWith("**") && line.endsWith("**")) {
     return (
-      <p key={i} className="text-sm font-semibold text-gray-800 mt-4 mb-1">
+      <p key={i} className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
         {line.replace(/\*\*(.*?)\*\*/g, "$1")}
       </p>
     );
@@ -2164,7 +2165,7 @@ function renderLine(line: string, i: number): React.ReactNode {
     .replace(/`([^`]+)`/g, "$1")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
   return (
-    <p key={i} className="text-sm text-gray-600 leading-relaxed mb-3">
+    <p key={i} className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
       {cleaned}
     </p>
   );
@@ -2204,8 +2205,9 @@ const relatedMap: Record<BlogSlug, BlogSlug[]> = {
   "find-duplicate-photos-free": ["how-to-cull-photos-fast", "geosort-sort-photos-by-location", "remove-exif-data-photos"],
 };
 
-export default function BlogPostPage({ params }: PageProps) {
-  const post = posts[params.slug as BlogSlug];
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = posts[slug as BlogSlug];
   if (!post) notFound();
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
@@ -2230,12 +2232,12 @@ export default function BlogPostPage({ params }: PageProps) {
   const relatedPosts = relatedSlugs.map((s) => posts[s]).filter(Boolean);
 
   return (
-    <div className="py-12 px-4 sm:px-6">
+    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
       <div className="max-w-2xl mx-auto">
         {/* Back link */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-700 mb-8 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           Back to Blog
@@ -2249,41 +2251,41 @@ export default function BlogPostPage({ params }: PageProps) {
               >
                 {post.tag}
               </span>
-              <span className="text-gray-200">·</span>
-              <time className="text-xs text-gray-400" dateTime={post.date}>
+              <span className="text-gray-200 dark:text-[#333]">·</span>
+              <time className="text-xs text-gray-400 dark:text-[#737373]" dateTime={post.date}>
                 {formattedDate}
               </time>
-              <span className="text-gray-200">·</span>
-              <span className="text-xs text-gray-400">{post.readTime}</span>
+              <span className="text-gray-200 dark:text-[#333]">·</span>
+              <span className="text-xs text-gray-400 dark:text-[#737373]">{post.readTime}</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight leading-tight mb-4">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight leading-tight mb-4">
               {post.title}
             </h1>
 
-            <p className="text-base text-gray-500 leading-relaxed mb-5">
+            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
               {post.description}
             </p>
 
             {/* Author byline */}
-            <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
-              <div className="h-7 w-7 rounded-full bg-gray-200 flex items-center justify-center text-[10px] font-semibold text-gray-600 shrink-0">
+            <div className="flex items-center gap-2 pt-4 border-t border-gray-100 dark:border-[#2A2A2A]">
+              <div className="h-7 w-7 rounded-full bg-gray-200 dark:bg-[#333] flex items-center justify-center text-[10px] font-semibold text-gray-600 dark:text-[#A3A3A3] shrink-0">
                 LS
               </div>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
                 By{" "}
                 <a
                   href="https://lucasammarco.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-700 font-medium hover:underline"
+                  className="text-gray-700 dark:text-[#E5E5E5] font-medium hover:underline"
                 >
                   Luca Sammarco
                 </a>{" "}
                 ·{" "}
                 <a
                   href="https://sammapix.com"
-                  className="text-gray-500 hover:underline"
+                  className="text-gray-500 dark:text-[#A3A3A3] hover:underline"
                 >
                   sammapix.com
                 </a>
@@ -2352,8 +2354,8 @@ export default function BlogPostPage({ params }: PageProps) {
           </div>
 
           {/* Share section */}
-          <div className="mt-10 pt-6 border-t border-gray-100">
-            <p className="text-sm font-medium text-gray-700 mb-3">
+          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
+            <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5] mb-3">
               Share this article
             </p>
             <div className="flex items-center gap-3">
@@ -2361,7 +2363,7 @@ export default function BlogPostPage({ params }: PageProps) {
                 href={twitterShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
               >
                 <svg
                   role="img"
@@ -2377,7 +2379,7 @@ export default function BlogPostPage({ params }: PageProps) {
                 href={linkedinShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
               >
                 <svg
                   role="img"
@@ -2393,19 +2395,19 @@ export default function BlogPostPage({ params }: PageProps) {
           </div>
 
           {/* CTA */}
-          <div className="mt-8 pt-8 border-t border-gray-100">
-            <div className="bg-indigo-50 border border-indigo-200 rounded-md p-6">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
+          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
+            <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
+              <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
                 Try SammaPix free
               </h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Compress, convert to WebP, and AI-rename your images — no
                 signup needed for compression. 100% client-side, images never
                 leave your browser.
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
                 Start optimizing
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -2415,8 +2417,8 @@ export default function BlogPostPage({ params }: PageProps) {
 
           {/* Related articles */}
           {relatedPosts.length > 0 && (
-            <div className="mt-10 pt-8 border-t border-gray-100">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">
+            <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
                 Related articles
               </h3>
               <div className="space-y-3">
@@ -2429,7 +2431,7 @@ export default function BlogPostPage({ params }: PageProps) {
                     <span className={`text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 ${tagColors[related.tag] ?? "text-gray-500"}`}>
                       {related.tag}
                     </span>
-                    <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
+                    <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
                       {related.title}
                     </span>
                   </Link>

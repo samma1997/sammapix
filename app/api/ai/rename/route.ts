@@ -139,7 +139,15 @@ export async function POST(req: NextRequest) {
         limit: dailyLimit,
         resetAt: "midnight UTC",
       },
-      { status: 429 }
+      {
+        status: 429,
+        headers: {
+          "X-RateLimit-Limit": String(dailyLimit),
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": "daily-utc-midnight",
+          "Retry-After": "86400",
+        },
+      }
     );
   }
 
@@ -203,15 +211,24 @@ Examples:
 
     const aiResult = JSON.parse(jsonMatch[0]) as { filename?: string; altText?: string };
 
-    return NextResponse.json({
-      data: {
-        filename: aiResult.filename ?? "optimized-image",
-        altText: aiResult.altText ?? "",
+    return NextResponse.json(
+      {
+        data: {
+          filename: aiResult.filename ?? "optimized-image",
+          altText: aiResult.altText ?? "",
+        },
+        remaining: rateCheck.remaining,
+        limit: dailyLimit,
+        plan: isPro ? "pro" : "free",
       },
-      remaining: rateCheck.remaining,
-      limit: dailyLimit,
-      plan: isPro ? "pro" : "free",
-    });
+      {
+        headers: {
+          "X-RateLimit-Limit": String(dailyLimit),
+          "X-RateLimit-Remaining": String(rateCheck.remaining),
+          "X-RateLimit-Reset": "daily-utc-midnight",
+        },
+      }
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("[ai/rename] Error:", message);

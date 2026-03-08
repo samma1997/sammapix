@@ -3,8 +3,20 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 
+const ALLOWED_ORIGINS = [
+  "https://sammapix.com",
+  "https://www.sammapix.com",
+  "http://localhost:3000",
+];
+
 export async function POST(req: NextRequest) {
-  void req;
+  // CSRF: verify request originates from our own frontend in production
+  const origin = req.headers.get("origin");
+  if (origin && process.env.NODE_ENV === "production") {
+    if (!ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+      return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
+    }
+  }
 
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {

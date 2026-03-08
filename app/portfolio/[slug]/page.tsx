@@ -18,9 +18,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const trip = getTripBySlug(params.slug);
+  const { slug } = await params;
+  const trip = getTripBySlug(slug);
   if (!trip) return {};
 
   const year = new Date(trip.startDate).getFullYear();
@@ -72,12 +73,13 @@ function formatDateRange(start: string, end: string): string {
 // ---------------------------------------------------------------------------
 // Page component (server component)
 // ---------------------------------------------------------------------------
-export default function TripPage({
+export default async function TripPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const trip = getTripBySlug(params.slug);
+  const { slug } = await params;
+  const trip = getTripBySlug(slug);
   if (!trip) notFound();
 
   const year = new Date(trip.startDate).getFullYear();

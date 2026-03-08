@@ -1,11 +1,25 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { getStripeCustomerId } from "@/lib/user-plan";
 
+const ALLOWED_ORIGINS = [
+  "https://sammapix.com",
+  "https://www.sammapix.com",
+  "http://localhost:3000",
+];
+
 export const runtime = "nodejs";
 
-export async function POST() {
+export async function POST(req: NextRequest) {
+  // CSRF: verify request originates from our own frontend in production
+  const origin = req.headers.get("origin");
+  if (origin && process.env.NODE_ENV === "production") {
+    if (!ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+      return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
+    }
+  }
+
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Login required" }, { status: 401 });

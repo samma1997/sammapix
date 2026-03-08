@@ -9,9 +9,24 @@ export async function POST(req: NextRequest) {
   const sig = req.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-  if (!sig || !webhookSecret || webhookSecret === "whsec_placeholder" || webhookSecret === "whsec_...") {
-    console.log("[stripe/webhook] No secret configured — accepting in dev mode");
-    return NextResponse.json({ received: true });
+  // Never accept unsigned webhooks, even in development.
+  // Missing or placeholder secrets should be an immediate hard failure.
+  if (!sig) {
+    console.error("[stripe/webhook] Missing Stripe-Signature header");
+    return NextResponse.json({ error: "Missing signature" }, { status: 400 });
+  }
+
+  const isPlaceholder =
+    !webhookSecret ||
+    webhookSecret === "whsec_placeholder" ||
+    webhookSecret === "whsec_..." ||
+    webhookSecret.length < 20;
+
+  if (isPlaceholder) {
+    // In development without a configured secret, warn loudly but still reject.
+    // Use `stripe listen --forward-to localhost:3000/api/webhook/stripe` locally.
+    console.error("[stripe/webhook] STRIPE_WEBHOOK_SECRET is not configured — request rejected");
+    return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 });
   }
 
   let event: Stripe.Event;
