@@ -36,23 +36,6 @@ async function getPiexif(): Promise<PiexifType> {
   return _piexif;
 }
 
-type Heic2AnyFn = (opts: {
-  blob: Blob;
-  toType: string;
-  quality: number;
-}) => Promise<Blob | Blob[]>;
-
-let _heic2any: Heic2AnyFn | null = null;
-async function getHeic2Any(): Promise<Heic2AnyFn> {
-  if (!_heic2any) {
-    const mod = await import("heic2any");
-    _heic2any = (
-      (mod as unknown as { default: Heic2AnyFn }).default ?? mod
-    ) as Heic2AnyFn;
-  }
-  return _heic2any;
-}
-
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface ExifLocation {
@@ -173,13 +156,16 @@ function downloadName(f: ProcessedFile): string {
   return f.original.name;
 }
 
-// ── HEIC → JPEG conversion ────────────────────────────────────────────────────
+// ── HEIC → JPEG conversion via server API ─────────────────────────────────────
 
 async function convertHeicToJpegBlob(file: File): Promise<Blob> {
-  const heic2any = await getHeic2Any();
-  // quality 0.6: faster conversion (~2x vs 0.82), acceptable for EXIF stripping
-  const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.6 });
-  return Array.isArray(result) ? result[0] : result;
+  const fd = new FormData();
+  fd.append("file", file);
+  const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
+  if (!res.ok) {
+    throw new Error(`HEIC conversion failed: ${res.status}`);
+  }
+  return res.blob();
 }
 
 async function blobToDataURL(blob: Blob): Promise<string> {
@@ -485,10 +471,12 @@ export default function ExifLens() {
             downloadAsJpg: f.fileType === "heic",
           };
         }
-      } catch {
+      } catch (err) {
         const idx = cleaned.findIndex((c) => c.id === f.id);
         if (idx !== -1) {
-          cleaned[idx] = { ...cleaned[idx], status: "error", errorMessage: "Failed to clean" };
+          const msg =
+            err instanceof Error ? err.message : "Failed to clean";
+          cleaned[idx] = { ...cleaned[idx], status: "error", errorMessage: msg };
         }
       }
     }
@@ -720,7 +708,7 @@ export default function ExifLens() {
                         HEIC files take 15–30s each — please keep this tab open
                       </p>
                       <p className="text-xs text-[#B45309]">
-                        {heicCount} HEIC file{heicCount !== 1 ? "s" : ""} detected. The browser converts them to JPEG locally before stripping EXIF. This is CPU-intensive — the progress bar will update between files.
+                        {heicCount} HEIC file{heicCount !== 1 ? "s" : ""} detected. They will be converted to JPEG server-side before stripping EXIF. Output files will be saved as .jpg. Keep this tab open during processing.
                       </p>
                     </div>
                   </div>
