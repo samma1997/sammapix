@@ -101,63 +101,63 @@ const PRESETS: Record<PresetName, FilmSettings> = {
     highlightSat: 1, shadowSat: 1,
   },
 
-  // ── Samma Presets ── (translated from personal Lightroom presets, orange -8 applied)
+  // ── Samma Presets ── (translated from original Lightroom XMP presets)
 
   /** Adriatico — cool cyan highlights + warm orange shadows, moody split toning */
   Adriatico: {
-    grain: 10, vignette: 25, fade: 6, temperature: 0,
-    contrast: 8, saturation: -5,
+    grain: 0, vignette: 0, fade: 6, temperature: 0,
+    contrast: 8, saturation: -7,
     highlightHue: 198, shadowHue: 12,
-    highlightSat: 0.70, shadowSat: 0.43,
+    highlightSat: 0.70, shadowSat: 0.49,
   },
   /** Dorado — warm golden soft, dreamy clarity, honey tones */
   Dorado: {
-    grain: 12, vignette: 20, fade: 7, temperature: 10,
-    contrast: 7, saturation: -5,
+    grain: 0, vignette: 10, fade: 6, temperature: 0,
+    contrast: 7, saturation: -18,
     highlightHue: 41, shadowHue: 129,
-    highlightSat: 0.48, shadowSat: 0.13,
+    highlightSat: 0.48, shadowSat: 0.14,
   },
   /** Lagos — strong teal-orange split, cinematic city/travel look */
   Lagos: {
-    grain: 12, vignette: 35, fade: 5, temperature: 0,
-    contrast: -3, saturation: -5,
+    grain: 0, vignette: 6, fade: 1, temperature: 0,
+    contrast: -3, saturation: -10,
     highlightHue: 42, shadowHue: 215,
-    highlightSat: 0.66, shadowSat: 1.35,
+    highlightSat: 0.66, shadowSat: 1.54,
   },
   /** Alba — very lifted shadows, airy dawn feel, almost no grain */
   Alba: {
-    grain: 8, vignette: 15, fade: 16, temperature: 5,
-    contrast: -2, saturation: -5,
-    highlightHue: 0, shadowHue: 0,
-    highlightSat: 0, shadowSat: 0,
+    grain: 0, vignette: 10, fade: 15, temperature: 0,
+    contrast: -2, saturation: -12,
+    highlightHue: 139, shadowHue: 211,
+    highlightSat: 0.00, shadowSat: 0.00,
   },
   /** Etere — ethereal, lifted, minimal — gentle mood */
   Etere: {
-    grain: 10, vignette: 20, fade: 13, temperature: 5,
-    contrast: 7, saturation: -8,
-    highlightHue: 0, shadowHue: 0,
-    highlightSat: 0, shadowSat: 0,
+    grain: 0, vignette: 16, fade: 10, temperature: 0,
+    contrast: 7, saturation: -20,
+    highlightHue: 139, shadowHue: 265,
+    highlightSat: 0.00, shadowSat: 0.00,
   },
   /** Foschia — warm haze, slightly desaturated blues, travel warmth */
   Foschia: {
-    grain: 12, vignette: 25, fade: 9, temperature: 8,
-    contrast: 5, saturation: 0,
+    grain: 0, vignette: 10, fade: 7, temperature: 0,
+    contrast: 5, saturation: -20,
     highlightHue: 41, shadowHue: 213,
-    highlightSat: 0.22, shadowSat: 0.05,
+    highlightSat: 0.22, shadowSat: 0.06,
   },
   /** Rame — copper-warm autumn, rich earthy tones */
   Rame: {
-    grain: 10, vignette: 20, fade: 11, temperature: 10,
-    contrast: 8, saturation: -5,
+    grain: 0, vignette: 10, fade: 6, temperature: 0,
+    contrast: 8, saturation: -15,
     highlightHue: 48, shadowHue: 37,
-    highlightSat: 0.44, shadowSat: 0.20,
+    highlightSat: 0.44, shadowSat: 0.23,
   },
   /** Pietra — very muted/desaturated, stone-like, subtle green-gold cast */
   Pietra: {
-    grain: 15, vignette: 25, fade: 15, temperature: -5,
+    grain: 0, vignette: 8, fade: 9, temperature: 0,
     contrast: 4, saturation: -20,
     highlightHue: 53, shadowHue: 135,
-    highlightSat: 0.70, shadowSat: 0.10,
+    highlightSat: 0.70, shadowSat: 0.11,
   },
 };
 
