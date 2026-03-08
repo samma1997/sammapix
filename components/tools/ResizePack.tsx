@@ -13,6 +13,7 @@ import {
   Lock,
   Unlock,
   ArrowDownToLine,
+  Crop,
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -27,7 +28,7 @@ const CONCURRENCY = 5;
 
 type Mode = "pixel" | "percentage";
 type FitMode = "cover" | "contain" | "stretch";
-type UIState = "idle" | "config" | "processing" | "done";
+type UIState = "idle" | "config" | "crop" | "processing" | "done";
 
 interface SocialPreset {
   label: string;
@@ -44,6 +45,11 @@ interface ResizeEntry {
   resultH: number;
   previewUrl: string | null;
   error: string | null;
+}
+
+interface CropOffset {
+  x: number; // 0–1, default 0.5 (center)
+  y: number; // 0–1, default 0.5 (center)
 }
 
 // ── Presets ────────────────────────────────────────────────────────────────────
@@ -75,15 +81,32 @@ function getImageDimensions(file: File): Promise<{ w: number; h: number }> {
   });
 }
 
+/**
+ * Ritorna true se il ratio target differisce dall'originale di più del 5%.
+ */
+function ratioDiffers(
+  origW: number,
+  origH: number,
+  targetW: number,
+  targetH: number
+): boolean {
+  if (origW === 0 || origH === 0 || targetW === 0 || targetH === 0) return false;
+  const origRatio = origW / origH;
+  const targetRatio = targetW / targetH;
+  return Math.abs(origRatio - targetRatio) / origRatio > 0.05;
+}
+
 // fitMode:
 //   "stretch" — stira esattamente alle dimensioni target (distorce se ratio diverso)
-//   "cover"   — ritaglia dal centro mantenendo il ratio (nessuna distorsione)
+//   "cover"   — ritaglia mantenendo il ratio, offset customizzabile (0–1)
 //   "contain" — ridimensiona per stare dentro le dimensioni, aggiunge barre bianche
 async function resizeImage(
   file: File,
   targetW: number,
   targetH: number,
-  fitMode: "stretch" | "cover" | "contain" = "cover"
+  fitMode: "stretch" | "cover" | "contain" = "cover",
+  offsetX = 0.5,
+  offsetY = 0.5
 ): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -97,23 +120,40 @@ async function resizeImage(
       if (fitMode === "stretch") {
         ctx.drawImage(img, 0, 0, targetW, targetH);
       } else if (fitMode === "cover") {
-        // Scale to cover target, crop from center
-        const scale = Math.max(targetW / img.naturalWidth, targetH / img.naturalHeight);
+        const scale = Math.max(
+          targetW / img.naturalWidth,
+          targetH / img.naturalHeight
+        );
         const sw = targetW / scale;
         const sh = targetH / scale;
-        const sx = (img.naturalWidth - sw) / 2;
-        const sy = (img.naturalHeight - sh) / 2;
+        const maxSx = img.naturalWidth - sw;
+        const maxSy = img.naturalHeight - sh;
+        const sx = maxSx * offsetX;
+        const sy = maxSy * offsetY;
         ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
       } else {
         // contain — fit inside, white background
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, targetW, targetH);
-        const scale = Math.min(targetW / img.naturalWidth, targetH / img.naturalHeight);
+        const scale = Math.min(
+          targetW / img.naturalWidth,
+          targetH / img.naturalHeight
+        );
         const dw = img.naturalWidth * scale;
         const dh = img.naturalHeight * scale;
         const dx = (targetW - dw) / 2;
         const dy = (targetH - dh) / 2;
-        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, dx, dy, dw, dh);
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          img.naturalWidth,
+          img.naturalHeight,
+          dx,
+          dy,
+          dw,
+          dh
+        );
       }
 
       URL.revokeObjectURL(url);
@@ -166,6 +206,262 @@ async function runConcurrent<T>(
   return results;
 }
 
+// ── CropPreview Component ───────────────────────────────────────────────────────
+
+interface CropPreviewProps {
+  previewUrl: string;
+  originalW: number;
+  originalH: number;
+  targetW: number;
+  targetH: number;
+  offset: CropOffset;
+  onOffsetChange: (offset: CropOffset) => void;
+}
+
+const CONTAINER_MAX_W = 500;
+const CONTAINER_MAX_H = 400;
+
+const CropPreview = ({
+  previewUrl,
+  originalW,
+  originalH,
+  targetW,
+  targetH,
+  offset,
+  onOffsetChange,
+}: CropPreviewProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const dragStart = useRef<{ mouseX: number; mouseY: number; offsetX: number; offsetY: number } | null>(null);
+
+  // Scala il container per mostrare l'intera immagine originale
+  const scaleToFit = Math.min(
+    CONTAINER_MAX_W / originalW,
+    CONTAINER_MAX_H / originalH,
+    1
+  );
+  const displayW = Math.round(originalW * scaleToFit);
+  const displayH = Math.round(originalH * scaleToFit);
+
+  // Dimensioni del rettangolo di crop sullo schermo
+  const cropDisplayW = Math.min(Math.round(targetW * scaleToFit), displayW);
+  const cropDisplayH = Math.min(Math.round(targetH * scaleToFit), displayH);
+
+  // Area disponibile per il frame (lo spazio rimanente fuori dal frame)
+  const maxOffsetDisplayX = displayW - cropDisplayW;
+  const maxOffsetDisplayY = displayH - cropDisplayH;
+
+  // Posizione del frame in pixel display
+  const frameLeft = Math.round(offset.x * maxOffsetDisplayX);
+  const frameTop = Math.round(offset.y * maxOffsetDisplayY);
+
+  const updateOffsetFromMouse = useCallback(
+    (clientX: number, clientY: number) => {
+      if (!dragStart.current || !containerRef.current) return;
+      const deltaX = clientX - dragStart.current.mouseX;
+      const deltaY = clientY - dragStart.current.mouseY;
+
+      const newOffsetX =
+        maxOffsetDisplayX > 0
+          ? Math.max(0, Math.min(1, dragStart.current.offsetX + deltaX / maxOffsetDisplayX))
+          : 0.5;
+      const newOffsetY =
+        maxOffsetDisplayY > 0
+          ? Math.max(0, Math.min(1, dragStart.current.offsetY + deltaY / maxOffsetDisplayY))
+          : 0.5;
+
+      onOffsetChange({ x: newOffsetX, y: newOffsetY });
+    },
+    [maxOffsetDisplayX, maxOffsetDisplayY, onOffsetChange]
+  );
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      isDragging.current = true;
+      dragStart.current = {
+        mouseX: e.clientX,
+        mouseY: e.clientY,
+        offsetX: offset.x,
+        offsetY: offset.y,
+      };
+    },
+    [offset]
+  );
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      const touch = e.touches[0];
+      isDragging.current = true;
+      dragStart.current = {
+        mouseX: touch.clientX,
+        mouseY: touch.clientY,
+        offsetX: offset.x,
+        offsetY: offset.y,
+      };
+    },
+    [offset]
+  );
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return;
+      updateOffsetFromMouse(e.clientX, e.clientY);
+    };
+    const handleMouseUp = () => {
+      isDragging.current = false;
+      dragStart.current = null;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging.current) return;
+      const touch = e.touches[0];
+      updateOffsetFromMouse(touch.clientX, touch.clientY);
+    };
+    const handleTouchEnd = () => {
+      isDragging.current = false;
+      dragStart.current = null;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [updateOffsetFromMouse]);
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      {/* Container immagine con overlay */}
+      <div
+        ref={containerRef}
+        className="relative select-none overflow-hidden rounded-md"
+        style={{
+          width: displayW,
+          height: displayH,
+          background: "#0A0A0A",
+        }}
+      >
+        {/* Immagine di sfondo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={previewUrl}
+          alt="Crop preview"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          draggable={false}
+        />
+
+        {/* Overlay scuro — zona esclusa dal crop */}
+        {/* Top */}
+        {frameTop > 0 && (
+          <div
+            className="absolute left-0 right-0 top-0 pointer-events-none"
+            style={{
+              height: frameTop,
+              background: "rgba(0,0,0,0.55)",
+            }}
+          />
+        )}
+        {/* Bottom */}
+        {frameTop + cropDisplayH < displayH && (
+          <div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{
+              top: frameTop + cropDisplayH,
+              bottom: 0,
+              background: "rgba(0,0,0,0.55)",
+            }}
+          />
+        )}
+        {/* Left (solo tra top e bottom del frame) */}
+        {frameLeft > 0 && (
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              top: frameTop,
+              left: 0,
+              width: frameLeft,
+              height: cropDisplayH,
+              background: "rgba(0,0,0,0.55)",
+            }}
+          />
+        )}
+        {/* Right (solo tra top e bottom del frame) */}
+        {frameLeft + cropDisplayW < displayW && (
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              top: frameTop,
+              left: frameLeft + cropDisplayW,
+              right: 0,
+              height: cropDisplayH,
+              background: "rgba(0,0,0,0.55)",
+            }}
+          />
+        )}
+
+        {/* Frame del crop — draggabile */}
+        <div
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          className="absolute"
+          style={{
+            top: frameTop,
+            left: frameLeft,
+            width: cropDisplayW,
+            height: cropDisplayH,
+            border: "2px solid rgba(255,255,255,0.95)",
+            cursor: isDragging.current ? "grabbing" : "grab",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* Label dimensioni al centro del frame */}
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          >
+            <span
+              className="text-white text-[11px] font-semibold px-1.5 py-0.5 rounded"
+              style={{ background: "rgba(0,0,0,0.5)", letterSpacing: "0.02em" }}
+            >
+              {targetW} &times; {targetH}
+            </span>
+          </div>
+
+          {/* Handles agli angoli — 8×8px */}
+          {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map((pos) => {
+            const isTop = pos.startsWith("top");
+            const isLeft = pos.endsWith("left");
+            return (
+              <div
+                key={pos}
+                className="absolute pointer-events-none"
+                style={{
+                  width: 8,
+                  height: 8,
+                  background: "white",
+                  top: isTop ? -1 : undefined,
+                  bottom: !isTop ? -1 : undefined,
+                  left: isLeft ? -1 : undefined,
+                  right: !isLeft ? -1 : undefined,
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Hint */}
+      <p className="text-[11px] text-[#A3A3A3] text-center">
+        Drag the frame to choose which area to keep
+      </p>
+    </div>
+  );
+};
+
 // ── Main Component ─────────────────────────────────────────────────────────────
 
 export default function ResizePack() {
@@ -184,6 +480,11 @@ export default function ResizePack() {
   const [lockAspect, setLockAspect] = useState(true);
   const [percentage, setPercentage] = useState<number>(50);
 
+  // Crop state
+  const [cropOffset, setCropOffset] = useState<CropOffset>({ x: 0.5, y: 0.5 });
+  const cropPreviewUrlRef = useRef<string | null>(null);
+  const [cropPreviewUrl, setCropPreviewUrl] = useState<string | null>(null);
+
   // Files awaiting config (before processing)
   const [pendingFiles, setPendingFiles] = useState<
     { file: File; originalW: number; originalH: number }[]
@@ -200,14 +501,35 @@ export default function ResizePack() {
   const blobUrlsRef = useRef<Set<string>>(new Set());
 
   // Used to track aspect ratio when width/height changes in pixel mode
-  // We keep first file's ratio for the input fields (representative)
   const representativeRatio = useRef<number>(1);
+
+  // ── Computed: should we offer crop step? ──────────────────────────────────
+  const shouldShowCrop =
+    mode === "pixel" &&
+    !lockAspect &&
+    fitMode === "cover" &&
+    pendingFiles.length > 0 &&
+    ratioDiffers(
+      pendingFiles[0].originalW,
+      pendingFiles[0].originalH,
+      widthVal,
+      heightVal
+    );
 
   // ── Cleanup ───────────────────────────────────────────────────────────────
   useEffect(() => {
     const urlSet = blobUrlsRef.current;
     return () => {
       urlSet.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, []);
+
+  // Cleanup crop preview URL on unmount
+  useEffect(() => {
+    return () => {
+      if (cropPreviewUrlRef.current) {
+        URL.revokeObjectURL(cropPreviewUrlRef.current);
+      }
     };
   }, []);
 
@@ -219,7 +541,6 @@ export default function ResizePack() {
 
       const accepted = imageFiles.slice(0, limit);
 
-      // Load original dimensions for all files
       const withDims = await Promise.all(
         accepted.map(async (file) => {
           try {
@@ -231,7 +552,6 @@ export default function ResizePack() {
         })
       );
 
-      // Set representative ratio from first file
       if (withDims.length > 0) {
         representativeRatio.current =
           withDims[0].originalH / withDims[0].originalW;
@@ -283,70 +603,115 @@ export default function ResizePack() {
   const applyPreset = useCallback((preset: SocialPreset) => {
     setWidthVal(preset.w);
     setHeightVal(preset.h);
-    setLockAspect(false); // presets have fixed dimensions
+    setLockAspect(false);
   }, []);
 
+  // ── Enter crop step ───────────────────────────────────────────────────────
+  const handleEnterCrop = useCallback(() => {
+    if (pendingFiles.length === 0) return;
+    // Revoca eventuale URL precedente
+    if (cropPreviewUrlRef.current) {
+      URL.revokeObjectURL(cropPreviewUrlRef.current);
+    }
+    const url = URL.createObjectURL(pendingFiles[0].file);
+    cropPreviewUrlRef.current = url;
+    setCropPreviewUrl(url);
+    setCropOffset({ x: 0.5, y: 0.5 });
+    setUiState("crop");
+  }, [pendingFiles]);
+
   // ── Process / resize all files ────────────────────────────────────────────
-  const handleResize = useCallback(async () => {
-    setProcessingTotal(pendingFiles.length);
-    setProcessingDone(0);
-    setUiState("processing");
+  const handleResize = useCallback(
+    async (useCustomOffset = false) => {
+      setProcessingTotal(pendingFiles.length);
+      setProcessingDone(0);
+      setUiState("processing");
 
-    const tasks = pendingFiles.map(({ file, originalW, originalH }) => async (): Promise<ResizeEntry> => {
-      try {
-        let targetW: number;
-        let targetH: number;
+      const offsetX = useCustomOffset ? cropOffset.x : 0.5;
+      const offsetY = useCustomOffset ? cropOffset.y : 0.5;
 
-        if (mode === "percentage") {
-          targetW = Math.max(1, Math.round((originalW * percentage) / 100));
-          targetH = Math.max(1, Math.round((originalH * percentage) / 100));
-        } else {
-          if (lockAspect) {
-            // Respect each file's own aspect ratio
-            const ratio = originalH / originalW;
-            targetW = widthVal;
-            targetH = Math.round(widthVal * ratio);
-          } else {
-            targetW = widthVal;
-            targetH = heightVal;
+      const tasks = pendingFiles.map(
+        ({ file, originalW, originalH }) =>
+          async (): Promise<ResizeEntry> => {
+            try {
+              let targetW: number;
+              let targetH: number;
+
+              if (mode === "percentage") {
+                targetW = Math.max(
+                  1,
+                  Math.round((originalW * percentage) / 100)
+                );
+                targetH = Math.max(
+                  1,
+                  Math.round((originalH * percentage) / 100)
+                );
+              } else {
+                if (lockAspect) {
+                  const ratio = originalH / originalW;
+                  targetW = widthVal;
+                  targetH = Math.round(widthVal * ratio);
+                } else {
+                  targetW = widthVal;
+                  targetH = heightVal;
+                }
+              }
+
+              const blob = await resizeImage(
+                file,
+                targetW,
+                targetH,
+                fitMode,
+                offsetX,
+                offsetY
+              );
+              const previewUrl = URL.createObjectURL(blob);
+              blobUrlsRef.current.add(previewUrl);
+
+              return {
+                file,
+                originalW,
+                originalH,
+                resultBlob: blob,
+                resultW: targetW,
+                resultH: targetH,
+                previewUrl,
+                error: null,
+              };
+            } catch (err) {
+              return {
+                file,
+                originalW,
+                originalH,
+                resultBlob: null,
+                resultW: 0,
+                resultH: 0,
+                previewUrl: null,
+                error:
+                  err instanceof Error ? err.message : "Unknown error",
+              };
+            }
           }
-        }
+      );
 
-        const blob = await resizeImage(file, targetW, targetH, fitMode);
-        const previewUrl = URL.createObjectURL(blob);
-        blobUrlsRef.current.add(previewUrl);
+      const results = await runConcurrent(tasks, CONCURRENCY, (done) => {
+        setProcessingDone(done);
+      });
 
-        return {
-          file,
-          originalW,
-          originalH,
-          resultBlob: blob,
-          resultW: targetW,
-          resultH: targetH,
-          previewUrl,
-          error: null,
-        };
-      } catch (err) {
-        return {
-          file,
-          originalW,
-          originalH,
-          resultBlob: null,
-          resultW: 0,
-          resultH: 0,
-          previewUrl: null,
-          error: err instanceof Error ? err.message : "Unknown error",
-        };
-      }
-    });
-
-    const results = await runConcurrent(tasks, CONCURRENCY, (done) => {
-      setProcessingDone(done);
-    });
-
-    setEntries(results);
-    setUiState("done");
-  }, [pendingFiles, mode, fitMode, percentage, lockAspect, widthVal, heightVal]);
+      setEntries(results);
+      setUiState("done");
+    },
+    [
+      pendingFiles,
+      mode,
+      fitMode,
+      percentage,
+      lockAspect,
+      widthVal,
+      heightVal,
+      cropOffset,
+    ]
+  );
 
   // ── Single download ───────────────────────────────────────────────────────
   const handleDownloadSingle = useCallback((entry: ResizeEntry) => {
@@ -370,7 +735,11 @@ export default function ResizePack() {
     const zip = new JSZip();
 
     for (const entry of successful) {
-      const name = resizedFilename(entry.file.name, entry.resultW, entry.resultH);
+      const name = resizedFilename(
+        entry.file.name,
+        entry.resultW,
+        entry.resultH
+      );
       zip.file(name, entry.resultBlob!);
     }
 
@@ -389,6 +758,12 @@ export default function ResizePack() {
   const handleReset = useCallback(() => {
     blobUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
     blobUrlsRef.current.clear();
+    if (cropPreviewUrlRef.current) {
+      URL.revokeObjectURL(cropPreviewUrlRef.current);
+      cropPreviewUrlRef.current = null;
+    }
+    setCropPreviewUrl(null);
+    setCropOffset({ x: 0.5, y: 0.5 });
     setPendingFiles([]);
     setEntries([]);
     setProcessingDone(0);
@@ -425,7 +800,10 @@ export default function ResizePack() {
               fileInputRef.current?.click();
             }
           }}
-          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragOver(true);
+          }}
           onDragLeave={() => setIsDragOver(false)}
           onDrop={handleDrop}
         >
@@ -439,7 +817,10 @@ export default function ResizePack() {
           />
           <div className="flex flex-col items-center gap-4">
             <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
-              <ImageIcon className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
+              <ImageIcon
+                className="h-6 w-6 text-[#737373]"
+                strokeWidth={1.5}
+              />
             </div>
             <div>
               <p className="text-sm font-medium text-[#171717] mb-1">
@@ -459,7 +840,10 @@ export default function ResizePack() {
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
                 Free: up to {MAX_FREE} files &middot;{" "}
-                <Link href="/pricing" className="underline hover:text-[#737373]">
+                <Link
+                  href="/pricing"
+                  className="underline hover:text-[#737373]"
+                >
                   Pro: 500
                 </Link>
               </p>
@@ -474,7 +858,8 @@ export default function ResizePack() {
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5]">
             <span className="text-xs font-medium text-[#525252]">
-              {pendingFiles.length} image{pendingFiles.length !== 1 ? "s" : ""} ready to resize
+              {pendingFiles.length} image
+              {pendingFiles.length !== 1 ? "s" : ""} ready to resize
             </span>
             <button
               onClick={handleReset}
@@ -531,7 +916,9 @@ export default function ResizePack() {
                       min={1}
                       max={10000}
                       value={widthVal}
-                      onChange={(e) => handleWidthChange(Number(e.target.value))}
+                      onChange={(e) =>
+                        handleWidthChange(Number(e.target.value))
+                      }
                       className="w-28 px-3 py-2 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717]"
                     />
                   </div>
@@ -539,7 +926,11 @@ export default function ResizePack() {
                   <div className="flex items-end pb-1">
                     <button
                       onClick={() => setLockAspect((v) => !v)}
-                      title={lockAspect ? "Unlock aspect ratio" : "Lock aspect ratio"}
+                      title={
+                        lockAspect
+                          ? "Unlock aspect ratio"
+                          : "Lock aspect ratio"
+                      }
                       className={[
                         "flex items-center justify-center h-8 w-8 rounded-md border transition-colors",
                         lockAspect
@@ -565,7 +956,9 @@ export default function ResizePack() {
                       max={10000}
                       value={heightVal}
                       disabled={lockAspect}
-                      onChange={(e) => handleHeightChange(Number(e.target.value))}
+                      onChange={(e) =>
+                        handleHeightChange(Number(e.target.value))
+                      }
                       className={[
                         "w-28 px-3 py-2 text-sm border rounded-md focus:outline-none text-[#171717]",
                         lockAspect
@@ -578,7 +971,8 @@ export default function ResizePack() {
 
                 {lockAspect && (
                   <p className="text-[11px] text-[#A3A3A3]">
-                    Aspect ratio is locked. Height auto-adjusts per file based on its original ratio.
+                    Aspect ratio is locked. Height auto-adjusts per file
+                    based on its original ratio.
                   </p>
                 )}
 
@@ -594,7 +988,9 @@ export default function ResizePack() {
                         onClick={() => applyPreset(preset)}
                         className={[
                           "px-3 py-1.5 text-[11px] border rounded-md transition-colors",
-                          widthVal === preset.w && heightVal === preset.h && !lockAspect
+                          widthVal === preset.w &&
+                          heightVal === preset.h &&
+                          !lockAspect
                             ? "border-[#171717] bg-[#171717] text-white"
                             : "border-[#E5E5E5] bg-white text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717]",
                         ].join(" ")}
@@ -640,7 +1036,8 @@ export default function ResizePack() {
                 </div>
                 {pendingFiles.length > 0 && (
                   <p className="text-[11px] text-[#A3A3A3]">
-                    Each image will be resized to {percentage}% of its original dimensions.
+                    Each image will be resized to {percentage}% of its
+                    original dimensions.
                     {percentage < 100
                       ? " Images will shrink."
                       : percentage > 100
@@ -658,11 +1055,25 @@ export default function ResizePack() {
                   Fit mode
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {([
-                    { value: "cover",   label: "Cover",   desc: "Crop to fill — no distortion" },
-                    { value: "contain", label: "Contain", desc: "Fit inside — white bars" },
-                    { value: "stretch", label: "Stretch", desc: "Exact dimensions — may distort" },
-                  ] as { value: FitMode; label: string; desc: string }[]).map((opt) => (
+                  {(
+                    [
+                      {
+                        value: "cover",
+                        label: "Cover",
+                        desc: "Crop to fill — no distortion",
+                      },
+                      {
+                        value: "contain",
+                        label: "Contain",
+                        desc: "Fit inside — white bars",
+                      },
+                      {
+                        value: "stretch",
+                        label: "Stretch",
+                        desc: "Exact dimensions — may distort",
+                      },
+                    ] as { value: FitMode; label: string; desc: string }[]
+                  ).map((opt) => (
                     <button
                       key={opt.value}
                       onClick={() => setFitMode(opt.value)}
@@ -679,21 +1090,97 @@ export default function ResizePack() {
                   ))}
                 </div>
                 <p className="text-[11px] text-[#A3A3A3] mt-2">
-                  {fitMode === "cover" && "Crops from center to fill exactly — no distortion, some edges may be cut."}
-                  {fitMode === "contain" && "Fits the entire image inside — adds white padding if ratio differs."}
-                  {fitMode === "stretch" && "Forces exact dimensions — image may look distorted."}
+                  {fitMode === "cover" &&
+                    "Crops from center to fill exactly — no distortion, some edges may be cut."}
+                  {fitMode === "contain" &&
+                    "Fits the entire image inside — adds white padding if ratio differs."}
+                  {fitMode === "stretch" &&
+                    "Forces exact dimensions — image may look distorted."}
                 </p>
               </div>
             )}
 
             {/* CTA */}
-            <div className="pt-2">
+            <div className="pt-2 flex items-center gap-3 flex-wrap">
               <button
-                onClick={handleResize}
+                onClick={() => handleResize(false)}
                 disabled={pendingFiles.length === 0}
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Resize {pendingFiles.length} photo{pendingFiles.length !== 1 ? "s" : ""}
+                Resize {pendingFiles.length} photo
+                {pendingFiles.length !== 1 ? "s" : ""}
+              </button>
+
+              {/* Bottone crop — solo quando il ratio differisce e fitMode è cover */}
+              {shouldShowCrop && (
+                <button
+                  onClick={handleEnterCrop}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E5E5E5] bg-white text-[#525252] text-sm rounded-md hover:border-[#A3A3A3] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
+                >
+                  <Crop className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  Preview crop position
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Crop: interactive crop step ────────────────────────────────────── */}
+      {uiState === "crop" && (
+        <div className="border border-[#E5E5E5] rounded-lg bg-white overflow-hidden">
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5]">
+            <span className="text-xs font-medium text-[#525252]">
+              Position crop area
+            </span>
+            <button
+              onClick={() => setUiState("config")}
+              className="text-xs text-[#737373] hover:text-[#171717] transition-colors"
+            >
+              Back to settings
+            </button>
+          </div>
+
+          <div className="p-6 space-y-6">
+            {/* Info */}
+            <p className="text-[12px] text-[#737373]">
+              The target size ({widthVal}&times;{heightVal}) has a different
+              ratio than the original image. Drag the frame to choose which
+              area to keep. This offset will be applied to all{" "}
+              {pendingFiles.length} photo
+              {pendingFiles.length !== 1 ? "s" : ""}.
+            </p>
+
+            {/* CropPreview */}
+            {cropPreviewUrl && pendingFiles.length > 0 && (
+              <div className="flex justify-center">
+                <CropPreview
+                  previewUrl={cropPreviewUrl}
+                  originalW={pendingFiles[0].originalW}
+                  originalH={pendingFiles[0].originalH}
+                  targetW={widthVal}
+                  targetH={heightVal}
+                  offset={cropOffset}
+                  onOffsetChange={setCropOffset}
+                />
+              </div>
+            )}
+
+            {/* CTAs */}
+            <div className="flex items-center gap-3 flex-wrap pt-1">
+              <button
+                onClick={() => handleResize(true)}
+                disabled={pendingFiles.length === 0}
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Resize now — apply to all photos
+              </button>
+              <button
+                onClick={() => handleResize(false)}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E5E5E5] bg-white text-[#525252] text-sm rounded-md hover:border-[#A3A3A3] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
+              >
+                Use center crop instead
               </button>
             </div>
           </div>
@@ -706,7 +1193,10 @@ export default function ResizePack() {
           <div className="flex flex-col items-center justify-center gap-6 px-8 py-16 text-center">
             <div className="relative flex items-center justify-center h-20 w-20">
               <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center">
-                <ImageIcon className="h-7 w-7 text-[#525252]" strokeWidth={1.5} />
+                <ImageIcon
+                  className="h-7 w-7 text-[#525252]"
+                  strokeWidth={1.5}
+                />
               </div>
               <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] border-t-[#171717] animate-spin" />
             </div>
@@ -732,7 +1222,9 @@ export default function ResizePack() {
                 <span className="text-[10px] text-[#737373] font-medium">
                   {Math.round(progressPct)}%
                 </span>
-                <span className="text-[10px] text-[#C4C4C4]">{processingTotal}</span>
+                <span className="text-[10px] text-[#C4C4C4]">
+                  {processingTotal}
+                </span>
               </div>
             </div>
           </div>
@@ -781,10 +1273,12 @@ export default function ResizePack() {
                 key={i}
                 className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white"
               >
-                {/* Thumbnail — aspect ratio nativo dell'immagine */}
+                {/* Thumbnail */}
                 <div
                   className="relative bg-[#F5F5F5] overflow-hidden"
-                  style={{ aspectRatio: `${entry.resultW} / ${entry.resultH}` }}
+                  style={{
+                    aspectRatio: `${entry.resultW} / ${entry.resultH}`,
+                  }}
                 >
                   {entry.previewUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -795,7 +1289,10 @@ export default function ResizePack() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <ImageIcon className="h-10 w-10 text-[#D4D4D4]" strokeWidth={1} />
+                      <ImageIcon
+                        className="h-10 w-10 text-[#D4D4D4]"
+                        strokeWidth={1}
+                      />
                     </div>
                   )}
                 </div>
@@ -803,14 +1300,19 @@ export default function ResizePack() {
                 {/* Info + download */}
                 <div className="px-3 py-3 flex items-center justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="text-[12px] font-medium text-[#171717] truncate" title={entry.file.name}>
+                    <p
+                      className="text-[12px] font-medium text-[#171717] truncate"
+                      title={entry.file.name}
+                    >
                       {entry.file.name}
                     </p>
                     {entry.error ? (
-                      <p className="text-[11px] text-[#DC2626] mt-0.5">Failed</p>
+                      <p className="text-[11px] text-[#DC2626] mt-0.5">
+                        Failed
+                      </p>
                     ) : (
                       <p className="text-[11px] text-[#A3A3A3] mt-0.5">
-                        {entry.resultW} × {entry.resultH} px
+                        {entry.resultW} &times; {entry.resultH} px
                       </p>
                     )}
                   </div>
@@ -820,7 +1322,10 @@ export default function ResizePack() {
                       title="Download this image"
                       className="shrink-0 flex items-center justify-center h-8 w-8 rounded-md border border-[#E5E5E5] text-[#525252] hover:border-[#171717] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
                     >
-                      <ArrowDownToLine className="h-3.5 w-3.5" strokeWidth={1.5} />
+                      <ArrowDownToLine
+                        className="h-3.5 w-3.5"
+                        strokeWidth={1.5}
+                      />
                     </button>
                   )}
                 </div>
