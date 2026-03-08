@@ -4,8 +4,6 @@ import {
   ToolCard,
   type ToolCardData,
   IconCompress,
-  IconWebP,
-  IconAIRename,
   IconEXIF,
   IconFilmLab,
   IconStampIt,
@@ -46,28 +44,12 @@ export const metadata = {
 
 const TOOLS: ToolCardData[] = [
   {
-    name: "Compress",
+    name: "Crunch",
     href: "/tools/compress",
-    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
+    tagline: "Compress, convert to WebP, and AI-rename your photos — all in one tool.",
     accent: "#6366F1",
-    badges: ["100% Free", "No Signup", "Browser-only"],
+    badges: ["100% Free", "WebP", "AI Rename"],
     Icon: IconCompress,
-  },
-  {
-    name: "WebP",
-    href: "/tools/compress",
-    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
-    accent: "#10B981",
-    badges: ["100% Free", "Browser-only"],
-    Icon: IconWebP,
-  },
-  {
-    name: "AI Rename",
-    href: "/tools/compress",
-    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
-    accent: "#8B5CF6",
-    badges: ["Free", "AI-powered", "Gemini Flash"],
-    Icon: IconAIRename,
   },
   {
     name: "EXIF Lens",
