@@ -92,6 +92,15 @@ export default function ResizePackPage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] mb-4">
+            What is ResizePack?
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            ResizePack is a free browser-based batch image resizer. Resize multiple JPG, PNG, and WebP images at once — by exact pixel dimensions, percentage, or using built-in social media presets for Instagram, Twitter/X, LinkedIn, and YouTube. Download all resized images in a single ZIP archive.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed mb-6">
+            ResizePack includes 6 social media presets and supports cover and contain fit modes for precise cropping. All resizing runs in the browser using the Canvas API — no files are uploaded to any server.
+          </p>
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">
             How batch image resizing works
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -157,17 +166,23 @@ export default function ResizePackPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix ResizePack",
-            url: `${APP_URL}/tools/resizepack`,
+            name: "ResizePack — Batch Image Resizer",
             description:
-              "Free online batch image resizer. Resize JPG, PNG and WebP by pixel dimensions or percentage. Social media presets. Download as ZIP.",
-            applicationCategory: "MultimediaApplication",
+              "Resize multiple images at once to exact pixels, percentage or social media presets (Instagram, Twitter, LinkedIn). Download all as ZIP.",
+            url: "https://sammapix.com/tools/resizepack",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            featureList: [
+              "Social media presets",
+              "Pixel or percentage resize",
+              "Batch ZIP download",
+              "Cover/contain fit modes",
+            ],
           }),
         }}
       />

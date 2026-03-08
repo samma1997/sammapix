@@ -92,6 +92,15 @@ export default function StampItPage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] mb-4">
+            What is StampIt?
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            StampIt is a free browser-based batch watermarking tool. Add text or logo watermarks to multiple images at once using 9 position options (top-left, center, bottom-right, and more), adjustable opacity, and font size. For maximum protection, tiled filigrana mode repeats your watermark in a diagonal grid across the entire image — making it impossible to crop out.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed mb-6">
+            StampIt supports SVG logos and text watermarks. All processing runs in the browser using the Canvas API — your images are never uploaded to any server. Download all watermarked images in a single ZIP archive.
+          </p>
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">
             How batch image watermarking works
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -158,17 +167,23 @@ export default function StampItPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix StampIt",
-            url: `${APP_URL}/tools/stampit`,
+            name: "StampIt — Batch Image Watermark",
             description:
-              "Free online batch image watermark tool. Add text or logo watermarks to multiple images. 9 positions, tiled mode, download as ZIP.",
-            applicationCategory: "MultimediaApplication",
+              "Add text or logo watermarks to multiple images at once. True tiled filigrana mode with diagonal stagger for professional watermarking.",
+            url: "https://sammapix.com/tools/stampit",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            featureList: [
+              "Text and logo watermarks",
+              "9 position options",
+              "Tiled filigrana mode",
+              "SVG logo support",
+            ],
           }),
         }}
       />

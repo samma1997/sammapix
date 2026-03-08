@@ -92,6 +92,15 @@ export default function FilmLabPage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] mb-4">
+            What is FilmLab?
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            FilmLab is a free browser-based photo editing tool that applies analog film looks to your photos. It includes 14 presets: 6 classic film stocks (Kodak Gold, Fuji Pro 400H, Ilford HP5, Cinematic Teal, Faded 70s, Cross Process) and 8 exclusive Samma signature presets. Each preset adjusts grain, vignette, fade, temperature, contrast, saturation, and split toning.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed mb-6">
+            FilmLab processes images fully in the browser using the Canvas API — your photos never leave your device. Live preview updates within 100ms as you adjust sliders. Apply the same look to a full batch and download all results as a ZIP.
+          </p>
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">
             How FilmLab analog effects work
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -183,17 +192,23 @@ export default function FilmLabPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix FilmLab",
-            url: `${APP_URL}/tools/filmlab`,
+            name: "FilmLab — Film Grain & Analog Effects",
             description:
-              "Free online analog film effects tool. Add film grain, vignette, fade and color grading with 6 film stock presets. Batch process and download as ZIP.",
-            applicationCategory: "MultimediaApplication",
+              "Apply analog film looks to photos with 14 presets including Kodak Gold, Fuji Pro 400H, Ilford HP5 and 8 Samma signature presets. Grain, vignette, fade and color grading.",
+            url: "https://sammapix.com/tools/filmlab",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            featureList: [
+              "14 film presets",
+              "Grain, vignette, fade controls",
+              "Split toning",
+              "HEIC support",
+            ],
           }),
         }}
       />

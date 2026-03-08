@@ -160,17 +160,23 @@ export default function WebpPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix WebP Converter",
-            url: `${APP_URL}/tools/webp`,
+            name: "WebP Converter — Convert Images to WebP Free",
             description:
-              "Free online WebP converter. Convert JPG, PNG and GIF to WebP in your browser. No upload needed.",
-            applicationCategory: "MultimediaApplication",
+              "Convert JPG, PNG and GIF images to WebP format directly in your browser. WebP files are 25-35% smaller than JPEG with same visual quality.",
+            url: "https://sammapix.com/tools/webp",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            featureList: [
+              "JPG/PNG/GIF to WebP",
+              "25-35% file size reduction",
+              "Batch conversion",
+              "Quality slider",
+            ],
           }),
         }}
       />

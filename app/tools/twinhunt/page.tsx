@@ -97,6 +97,19 @@ export default function TwinHuntPage() {
 
       <TwinHunt />
 
+      {/* What is TwinHunt */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is TwinHunt?</h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            TwinHunt is a free browser-based duplicate photo finder that uses perceptual hashing (pHash) technology to detect visually similar and identical images. Unlike byte-level comparison, pHash finds duplicates even when photos have been resized, re-saved, or lightly edited. Processing runs at approximately 50ms per image — entirely in your browser.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed">
+            Sensitivity is adjustable: strict mode catches exact duplicates (Hamming distance 0–5), normal mode catches very similar images (6–10), and loose mode catches broader matches (11–20). No photo data is ever uploaded to any server. TwinHunt works offline once the page is loaded.
+          </p>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-3xl mx-auto">
@@ -152,13 +165,41 @@ export default function TwinHuntPage() {
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
           <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
-            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
+            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">Related guide</p>
             <a href="/blog/find-duplicate-photos-free" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
               Find and Remove Duplicate Photos Free →
             </a>
           </div>
         </div>
       </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "TwinHunt — Duplicate Photo Finder",
+            description:
+              "Find visually similar and duplicate photos using perceptual hashing technology. Works entirely in-browser with no file uploads.",
+            url: "https://sammapix.com/tools/twinhunt",
+            applicationCategory: "PhotographyApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            featureList: [
+              "Perceptual hash comparison",
+              "Adjustable sensitivity",
+              "Zero uploads",
+              "Visual similarity detection",
+            ],
+          }),
+        }}
+      />
     </main>
   );
 }

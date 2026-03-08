@@ -107,6 +107,12 @@ export default function AiRenamePage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] mb-4">
+            What is AI Image Rename?
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-6">
+            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename — the exact format Google recommends for image SEO. Free accounts get 5 renames per day. Each rename takes under 3 seconds.
+          </p>
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">
             Why image filenames matter for SEO
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -191,17 +197,23 @@ export default function AiRenamePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix AI Image Rename",
-            url: `${APP_URL}/tools/ai-rename`,
+            name: "AI Image Rename — SEO Filename Generator",
             description:
-              "AI-powered image renaming tool. Generate descriptive SEO-friendly filenames automatically using Google Gemini.",
-            applicationCategory: "MultimediaApplication",
+              "Automatically rename images with SEO-friendly filenames using Google Gemini AI. Generates descriptive, lowercase, hyphenated filenames optimized for search engines.",
+            url: "https://sammapix.com/tools/ai-rename",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            featureList: [
+              "Gemini AI powered",
+              "SEO-optimized filenames",
+              "Batch rename",
+              "Free 5 renames/day",
+            ],
           }),
         }}
       />
