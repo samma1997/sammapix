@@ -73,6 +73,10 @@ export const BLOG_SLUGS = [
   "image-seo-guide",
   "compress-png-without-losing-quality",
   "optimize-images-wordpress",
+  "geosort-sort-photos-by-location",
+  "travel-map-gps-photos",
+  "how-to-cull-photos-fast",
+  "find-duplicate-photos-free",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

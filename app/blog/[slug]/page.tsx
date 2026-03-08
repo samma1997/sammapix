@@ -34,7 +34,7 @@ interface BlogPost {
 const posts: Record<BlogSlug, BlogPost> = {
   "ai-image-renaming-seo": {
     slug: "ai-image-renaming-seo",
-    title: "How to Rename Images for SEO with AI (The Right Way)",
+    title: "How to Rename Images for SEO with AI",
     description:
       "Learn how to rename images for SEO using AI — automatically generate descriptive filenames and alt text that help Google rank your pages.",
     date: "2026-03-05",
@@ -177,7 +177,7 @@ The filename is what you call the file locally and what gets used in the src att
   "tinypng-alternative": {
     slug: "tinypng-alternative",
     title:
-      "TinyPNG vs SammaPix: Which Is the Better Free Image Compressor in 2026?",
+      "TinyPNG vs SammaPix: Which Free Image Compressor is Better?",
     description:
       "Comparing TinyPNG vs SammaPix on compression quality, privacy, WebP support, and AI features. Find the best free image compressor for 2026.",
     date: "2026-03-05",
@@ -467,7 +467,7 @@ Removing EXIF data from your own photos is completely legal in virtually all jur
 
   "compress-images-for-website": {
     slug: "compress-images-for-website",
-    title: "How to Compress Images for a Website Without Losing Quality",
+    title: "How to Compress Images for Web Without Losing Quality",
     description:
       "A practical guide to compressing images for web — the right formats, tools, and settings to reduce file size while keeping images sharp.",
     date: "2026-03-05",
@@ -722,7 +722,7 @@ Yes. Google indexes WebP images exactly like JPEG or PNG. The format doesn't aff
 
   "reduce-image-size-without-losing-quality": {
     slug: "reduce-image-size-without-losing-quality",
-    title: "How to Reduce Image Size Without Losing Quality (2026 Guide)",
+    title: "How to Reduce Image Size Without Quality Loss",
     description:
       "Reduce image file size without visible quality loss — the right format, quality settings, and tools that actually work for web images.",
     date: "2026-03-05",
@@ -852,7 +852,7 @@ Each round of lossy compression degrades the image. The first compression (from 
 
   "best-image-format-for-web": {
     slug: "best-image-format-for-web",
-    title: "Best Image Format for Web in 2026: JPEG vs PNG vs WebP vs AVIF",
+    title: "Best Web Image Format: JPEG vs PNG vs WebP vs AVIF",
     description:
       "Which image format should you use for your website in 2026? A clear comparison of JPEG, PNG, WebP, and AVIF — when to use each and why.",
     date: "2026-03-05",
@@ -1049,7 +1049,7 @@ For high-traffic sites where performance is a priority, yes — the compression 
 
   "image-seo-guide": {
     slug: "image-seo-guide",
-    title: "Image SEO: The Complete Guide to Optimizing Images for Google (2026)",
+    title: "Image SEO: Complete Guide to Google Image Rankings",
     description:
       "A complete image SEO guide — filenames, alt text, structured data, page speed, and Google Image Search. Everything you need to rank your images.",
     date: "2026-03-05",
@@ -1255,7 +1255,7 @@ There's no specific size target — Google cares about load speed (LCP) rather t
 
   "compress-png-without-losing-quality": {
     slug: "compress-png-without-losing-quality",
-    title: "How to Compress PNG Without Losing Quality (Free & Online)",
+    title: "How to Compress PNG Without Losing Quality",
     description:
       "Reduce PNG file size without visible quality loss — the right tools, methods, and settings for lossless and near-lossless PNG compression.",
     date: "2026-03-05",
