@@ -2170,6 +2170,23 @@ function renderLine(line: string, i: number): React.ReactNode {
   );
 }
 
+const relatedToolMap: Record<BlogSlug, string> = {
+  "tinypng-alternative": "/tools/compress",
+  "remove-exif-data-photos": "/tools/exif",
+  "ai-image-renaming-seo": "/tools/ai-rename",
+  "compress-images-for-website": "/tools/compress",
+  "jpg-to-webp-converter": "/tools/webp",
+  "reduce-image-size-without-losing-quality": "/tools/compress",
+  "best-image-format-for-web": "/tools/webp",
+  "image-seo-guide": "/tools/ai-rename",
+  "compress-png-without-losing-quality": "/tools/compress",
+  "optimize-images-wordpress": "/tools/compress",
+  "geosort-sort-photos-by-location": "/tools/geosort",
+  "travel-map-gps-photos": "/tools/travelmap",
+  "how-to-cull-photos-fast": "/tools/cull",
+  "find-duplicate-photos-free": "/tools/twinhunt",
+};
+
 const relatedMap: Record<BlogSlug, BlogSlug[]> = {
   "ai-image-renaming-seo": ["image-seo-guide", "best-image-format-for-web", "tinypng-alternative"],
   "tinypng-alternative": ["compress-images-for-website", "compress-png-without-losing-quality", "jpg-to-webp-converter"],
@@ -2281,6 +2298,29 @@ export default function BlogPostPage({ params }: PageProps) {
               .split("\n")
               .map((line, i) => renderLine(line, i))}
           </div>
+
+          {/* Related tool CTA */}
+          {relatedToolMap[post.slug] && (
+            <div className="mt-10">
+              <Link
+                href={relatedToolMap[post.slug]}
+                className="flex items-center justify-between gap-4 bg-[#171717] text-white rounded-md px-6 py-5 hover:bg-[#262626] transition-colors group"
+              >
+                <div>
+                  <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
+                    Free tool
+                  </p>
+                  <p className="text-sm font-semibold text-white leading-snug">
+                    Try the free tool — no signup required
+                  </p>
+                </div>
+                <ArrowRight
+                  className="h-4 w-4 text-[#737373] group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0"
+                  strokeWidth={1.5}
+                />
+              </Link>
+            </div>
+          )}
 
           {/* AdSense unit — between content and affiliate banner */}
           <div className="mt-8">
@@ -2408,8 +2448,9 @@ export default function BlogPostPage({ params }: PageProps) {
               "@type": "Article",
               headline: post.title,
               description: post.description,
+              url: `https://sammapix.com/blog/${post.slug}`,
               datePublished: post.date,
-              dateModified: post.date,
+              dateModified: "2026-03-08",
               author: {
                 "@type": "Person",
                 name: "Luca Sammarco",
