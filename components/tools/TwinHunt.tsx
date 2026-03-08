@@ -595,7 +595,7 @@ export default function TwinHunt() {
             </div>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
-                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded mr-1">PRO</span>
                 Up to 500 photos
               </span>
             ) : (
@@ -706,7 +706,7 @@ export default function TwinHunt() {
                 </div>
                 <button
                   onClick={handleDownloadReport}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] text-white text-xs font-medium rounded-md hover:bg-[#262626] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-xs font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                 >
                   <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
                   Download report as TXT

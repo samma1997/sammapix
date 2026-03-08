@@ -857,7 +857,7 @@ export default function FilmLab() {
             <div className="flex items-center gap-2 mb-2">
               <p className="text-[10px] text-[#A3A3A3] uppercase tracking-widest font-medium">{groupName}</p>
               {groupName === "Samma" && (
-                <span className="text-[9px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded tracking-wide">
+                <span className="text-[9px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded tracking-wide">
                   Original
                 </span>
               )}
@@ -1035,7 +1035,7 @@ export default function FilmLab() {
 
                   {/* Status badge */}
                   {entry.resultBlob && !entry.processing && (
-                    <div className="absolute top-1.5 left-1.5 bg-[#171717] text-white text-[10px] px-1.5 py-0.5 rounded">
+                    <div className="absolute top-1.5 left-1.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-[10px] px-1.5 py-0.5 rounded">
                       Done
                     </div>
                   )}

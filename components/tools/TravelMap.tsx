@@ -694,7 +694,7 @@ export default function TravelMapClient() {
               {uniqueCountries.length} {uniqueCountries.length === 1 ? "country" : "countries"}
             </span>
             ,{" "}
-            <span className="font-medium text-[#171717]">
+            <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
               {points.length} {points.length === 1 ? "photo" : "photos"}
             </span>
           </p>
@@ -758,7 +758,7 @@ export default function TravelMapClient() {
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
-                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded mr-1">PRO</span>
                 Up to 500 photos
               </span>
             ) : (

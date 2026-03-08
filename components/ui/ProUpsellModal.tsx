@@ -75,7 +75,7 @@ export default function ProUpsellModal({
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
       <Dialog.Portal>
         {/* Overlay */}
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40 dark:bg-black/70 backdrop-blur-[2px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
 
         {/* Content */}
         <Dialog.Content

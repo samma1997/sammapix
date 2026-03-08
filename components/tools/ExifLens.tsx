@@ -604,7 +604,7 @@ export default function ExifLens() {
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
-                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded mr-1">PRO</span>
                 Up to 500 photos
               </span>
             ) : (
@@ -758,7 +758,7 @@ export default function ExifLens() {
               {/* Clean & Download button */}
               <button
                 onClick={handleCleanAndDownload}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
               >
                 <ShieldOff className="h-4 w-4" strokeWidth={1.5} />
                 {cleanMode === "gps" ? "Remove GPS & Download ZIP" : "Remove all EXIF & Download ZIP"}

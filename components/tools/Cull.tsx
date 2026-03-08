@@ -389,7 +389,7 @@ export default function CullClient() {
             </div>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
-                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded mr-1">PRO</span>
                 Up to 500 photos
               </span>
             ) : (
@@ -565,7 +565,7 @@ export default function CullClient() {
               <button
                 onClick={() => markAndAdvance("keep")}
                 aria-label="Keep (K)"
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
               >
                 <Check className="h-4 w-4" strokeWidth={1.5} />
                 Keep
@@ -624,7 +624,7 @@ export default function CullClient() {
             {keptCount > 0 ? (
               <button
                 onClick={handleDownloadZip}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
               >
                 <Download className="h-4 w-4" strokeWidth={1.5} />
                 Download {keptCount} kept photo{keptCount !== 1 ? "s" : ""} as ZIP
