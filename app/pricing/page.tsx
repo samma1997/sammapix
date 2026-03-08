@@ -2,43 +2,118 @@
 
 import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Check, X, ArrowRight, Zap, Image, MapPin, Globe, Scissors, Stamp, ScanEye, Package, Crop, Film } from "lucide-react";
+import {
+  Check,
+  X,
+  ArrowRight,
+  Zap,
+  Image,
+  MapPin,
+  Globe,
+  Scissors,
+  Stamp,
+  ScanEye,
+  Package,
+  Crop,
+  Film,
+  Minimize2,
+  Keyboard,
+  Copy,
+  Sparkles,
+  Layers,
+  HardDrive,
+  Archive,
+  EyeOff,
+  Rocket,
+  LifeBuoy,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 
-const features = [
-  { label: "Crunch — compress + WebP",   free: true,         pro: true },
-  { label: "GeoSort — sort by GPS",      free: "100 photos", pro: "500 photos" },
-  { label: "TravelMap — GPS map",        free: "100 photos", pro: "500 photos" },
-  { label: "EXIF Lens — metadata",       free: "100 files",  pro: "500 files" },
-  { label: "Cull — keyboard review",     free: "100 photos", pro: "500 photos" },
-  { label: "ResizePack — batch resize",  free: "100 photos", pro: "500 photos" },
-  { label: "CropRatio — crop to ratio",  free: "100 photos", pro: "500 photos" },
-  { label: "StampIt — batch watermark",  free: "100 photos", pro: "500 photos" },
-  { label: "FilmLab — analog effects",   free: "100 photos", pro: "500 photos" },
-  { label: "TwinHunt — find dupes",      free: "200 photos", pro: "500 photos" },
-  { label: "AI Rename",                  free: "5 / day",    pro: "200 / day" },
-  { label: "Files per batch",            free: "100",        pro: "500" },
-  { label: "Max file size",              free: "20 MB",      pro: "50 MB" },
-  { label: "ZIP download",              free: true,        pro: true },
-  { label: "Ads",                        free: true,        pro: false },
-  { label: "Early access to new tools", free: false,       pro: true },
-  { label: "Priority support",          free: false,       pro: true },
+type FeatureIcon = React.ReactElement;
+
+interface Feature {
+  label: string;
+  free: boolean | string;
+  pro: boolean | string;
+  icon: FeatureIcon;
+}
+
+const features: Feature[] = [
+  { label: "Crunch — compress + WebP",   free: true,         pro: true,          icon: <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "GeoSort — sort by GPS",      free: "100 photos", pro: "500 photos",  icon: <MapPin    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "TravelMap — GPS map",        free: "100 photos", pro: "500 photos",  icon: <Globe     className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "EXIF Lens — metadata",       free: "100 files",  pro: "500 files",   icon: <ScanEye   className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "Cull — keyboard review",     free: "100 photos", pro: "500 photos",  icon: <Keyboard  className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "ResizePack — batch resize",  free: "100 photos", pro: "500 photos",  icon: <Package   className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "CropRatio — crop to ratio",  free: "100 photos", pro: "500 photos",  icon: <Crop      className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "StampIt — batch watermark",  free: "100 photos", pro: "500 photos",  icon: <Stamp     className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "FilmLab — analog effects",   free: "100 photos", pro: "500 photos",  icon: <Film      className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "TwinHunt — find dupes",      free: "200 photos", pro: "500 photos",  icon: <Copy      className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "AI Rename",                  free: "5 / day",    pro: "200 / day",   icon: <Sparkles  className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "Files per batch",            free: "100",        pro: "500",         icon: <Layers    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "Max file size",              free: "20 MB",      pro: "50 MB",       icon: <HardDrive className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "ZIP download",               free: true,         pro: true,          icon: <Archive   className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "Ads",                        free: true,         pro: false,         icon: <EyeOff    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "Early access to new tools",  free: false,        pro: true,          icon: <Rocket    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
+  { label: "Priority support",           free: false,        pro: true,          icon: <LifeBuoy  className="h-3.5 w-3.5" strokeWidth={1.5} /> },
 ];
 
-const tools = [
-  { icon: <Zap className="h-4 w-4" strokeWidth={1.5} />,     name: "Crunch",    desc: "Compress · WebP · AI Rename",    status: "live" },
-  { icon: <MapPin className="h-4 w-4" strokeWidth={1.5} />,  name: "GeoSort",   desc: "Sort photos by GPS country",     status: "live" },
-  { icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,   name: "TravelMap", desc: "Interactive travel map",          status: "live" },
-  { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,name: "Cull",      desc: "Quick keyboard review",          status: "live" },
-  { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "live" },
-  { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "live" },
-  { icon: <Crop className="h-4 w-4" strokeWidth={1.5} />,   name: "CropRatio", desc: "Crop to exact ratio + ZIP",      status: "live" },
-  { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,  name: "StampIt",   desc: "Batch watermark",                status: "live" },
-  { icon: <Film className="h-4 w-4" strokeWidth={1.5} />,   name: "FilmLab",   desc: "Analog film effects + grain",     status: "live" },
+interface Tool {
+  icon: React.ReactElement;
+  name: string;
+  desc: string;
+  status: "live" | "soon";
+  accent: string;
+}
+
+const tools: Tool[] = [
+  { icon: <Zap      className="h-4 w-4" strokeWidth={1.5} />, name: "Crunch",     desc: "Compress · WebP · AI Rename",       status: "live", accent: "#6366F1" },
+  { icon: <MapPin   className="h-4 w-4" strokeWidth={1.5} />, name: "GeoSort",    desc: "Sort photos by GPS country",        status: "live", accent: "#22C55E" },
+  { icon: <Globe    className="h-4 w-4" strokeWidth={1.5} />, name: "TravelMap",  desc: "Interactive travel map",             status: "live", accent: "#3B82F6" },
+  { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />, name: "Cull",       desc: "Quick keyboard review",             status: "live", accent: "#F43F5E" },
+  { icon: <ScanEye  className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens",  desc: "View & remove metadata",            status: "live", accent: "#EF4444" },
+  { icon: <Package  className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack", desc: "Batch resize + ZIP",                status: "live", accent: "#14B8A6" },
+  { icon: <Crop     className="h-4 w-4" strokeWidth={1.5} />, name: "CropRatio",  desc: "Crop to exact ratio + ZIP",         status: "live", accent: "#EC4899" },
+  { icon: <Stamp    className="h-4 w-4" strokeWidth={1.5} />, name: "StampIt",    desc: "Batch watermark",                   status: "live", accent: "#06B6D4" },
+  { icon: <Film     className="h-4 w-4" strokeWidth={1.5} />, name: "FilmLab",    desc: "Analog film effects + grain",        status: "live", accent: "#F59E0B" },
   // eslint-disable-next-line jsx-a11y/alt-text
-  { icon: <Image className="h-4 w-4" strokeWidth={1.5} />,   name: "More...",   desc: "New tools every month (Pro first)", status: "soon" },
+  { icon: <Image    className="h-4 w-4" strokeWidth={1.5} />, name: "More...",    desc: "New tools every month (Pro first)", status: "soon", accent: "#A3A3A3" },
+];
+
+interface ProUnlockCard {
+  icon: string;
+  iconBg: string;
+  title: string;
+  description: string;
+}
+
+const proUnlockCards: ProUnlockCard[] = [
+  {
+    icon: "🚀",
+    iconBg: "#6366F1",
+    title: "500 files per batch",
+    description: "Process an entire wedding shoot or travel trip in one go. No more splitting into groups of 100.",
+  },
+  {
+    icon: "🤖",
+    iconBg: "#8B5CF6",
+    title: "AI Rename × 200/day",
+    description: "Let Gemini Flash analyze and name your photos with SEO-optimized filenames automatically.",
+  },
+  {
+    icon: "🔇",
+    iconBg: "#525252",
+    title: "Zero ads",
+    description: "Clean workspace, no distractions. Just you and your photos.",
+  },
+  {
+    icon: "⚡",
+    iconBg: "#F59E0B",
+    title: "50MB per file",
+    description: "Work with high-res RAW exports and large panoramas without limits.",
+  },
 ];
 
 function PaymentBanners() {
@@ -113,7 +188,7 @@ export default function PricingPage() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
           {/* Free */}
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-6 bg-white dark:bg-[#1E1E1E]">
             <div className="mb-6">
@@ -134,12 +209,17 @@ export default function PricingPage() {
           </div>
 
           {/* Pro */}
-          <div className="border-2 border-[#171717] dark:border-[#E5E5E5] rounded-md p-6 bg-white dark:bg-[#1E1E1E] relative">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] border-l-4 border-l-[#6366F1] rounded-md p-6 bg-white dark:bg-[#1E1E1E] relative">
             <div className="absolute -top-3 left-6">
               <Badge variant="black">Most popular</Badge>
             </div>
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Pro</h2>
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Pro</h2>
+                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold tracking-wide bg-indigo-100 dark:bg-indigo-950 text-[#6366F1] border border-indigo-200 dark:border-indigo-800">
+                  ✦ PRO
+                </span>
+              </div>
               <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">For serious photographers.</p>
               <div className="mt-4">
                 <span className="text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">
@@ -151,13 +231,40 @@ export default function PricingPage() {
                 {annual && (
                   <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1">Billed annually — save ~30% vs monthly</p>
                 )}
+                <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1.5">⭐ 30-day money-back guarantee</p>
               </div>
             </div>
-            <CheckoutButton size="md" className="w-full mb-6 gap-1">
+            <CheckoutButton size="md" className="w-full mb-2 gap-1">
               Get Pro — {annual ? "$59/yr" : "$7/mo"}
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </CheckoutButton>
+            <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373] mt-2 mb-6">30-day money-back guarantee · Cancel anytime</p>
             <FeatureList features={features} plan="pro" />
+          </div>
+        </div>
+
+        {/* What Pro unlocks */}
+        <div className="mb-16">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1 text-center">What Pro unlocks</h2>
+          <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-6">The four limits that matter most — removed.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {proUnlockCards.map((card) => (
+              <div
+                key={card.title}
+                className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-5 bg-white dark:bg-[#1E1E1E] flex gap-4 items-start"
+              >
+                <div
+                  className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-base"
+                  style={{ backgroundColor: card.iconBg + "22" }}
+                >
+                  <span>{card.icon}</span>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">{card.title}</p>
+                  <p className="text-xs text-[#737373] dark:text-[#737373] leading-relaxed">{card.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -184,7 +291,11 @@ export default function PricingPage() {
                     {t.name}
                   </span>
                   {t.status === "live" && (
-                    <span className="ml-auto text-[9px] font-medium text-white dark:text-[#171717] bg-[#171717] dark:bg-white px-1.5 py-0.5 rounded-full">live</span>
+                    <span
+                      className="ml-auto shrink-0 w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: t.accent }}
+                      aria-hidden="true"
+                    />
                   )}
                 </div>
                 <p className={cn("text-xs leading-relaxed", t.status === "live" ? "text-[#737373] dark:text-[#A3A3A3]" : "text-[#C4C4C4] dark:text-[#525252]")}>
@@ -216,6 +327,13 @@ export default function PricingPage() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Social proof bar */}
+        <div className="text-center mb-8">
+          <p className="text-xs text-[#A3A3A3] dark:text-[#737373]">
+            Trusted by photographers in 40+ countries · 100% browser-based · No data shared
+          </p>
         </div>
 
         {/* FAQ */}
@@ -315,7 +433,7 @@ export default function PricingPage() {
 }
 
 interface FeatureListProps {
-  features: { label: string; free: boolean | string; pro: boolean | string }[];
+  features: Feature[];
   plan: "free" | "pro";
 }
 
@@ -332,6 +450,9 @@ function FeatureList({ features, plan }: FeatureListProps) {
             ) : (
               <X className="h-4 w-4 text-[#D4D4D4] dark:text-[#444] shrink-0" strokeWidth={1.5} />
             )}
+            <span className={cn("text-[#A3A3A3] dark:text-[#737373] shrink-0", !isPositive && "opacity-50")}>
+              {f.icon}
+            </span>
             <span className={cn(isPositive ? "text-[#525252] dark:text-[#A3A3A3]" : "text-[#C4C4C4] dark:text-[#525252]")}>
               {f.label}
             </span>
