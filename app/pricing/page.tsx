@@ -3,118 +3,43 @@
 import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
-  Check,
-  X,
-  ArrowRight,
-  Zap,
-  Image,
-  MapPin,
-  Globe,
-  Scissors,
-  Stamp,
-  ScanEye,
-  Package,
-  Crop,
-  Film,
-  Minimize2,
-  Keyboard,
-  Copy,
-  Sparkles,
-  Layers,
-  HardDrive,
-  Archive,
-  EyeOff,
-  Rocket,
-  LifeBuoy,
-} from "lucide-react";
+  IconCompress,
+  IconWebP,
+  IconAIRename,
+  IconEXIF,
+  IconFilmLab,
+  IconStampIt,
+  IconCropRatio,
+  IconTwinHunt,
+  IconGeoSort,
+  IconTravelMap,
+  IconResizePack,
+  IconCull,
+  IconHEIC,
+} from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 
-type FeatureIcon = React.ReactElement;
+// ─── Tool grid data ────────────────────────────────────────────────────────────
 
-interface Feature {
-  label: string;
-  free: boolean | string;
-  pro: boolean | string;
-  icon: FeatureIcon;
-}
+const toolGrid = [
+  { Icon: IconCompress,  name: "Compress",   accent: "#6366F1" },
+  { Icon: IconWebP,      name: "WebP",        accent: "#10B981" },
+  { Icon: IconAIRename,  name: "AI Rename",   accent: "#8B5CF6" },
+  { Icon: IconEXIF,      name: "EXIF Lens",   accent: "#EF4444" },
+  { Icon: IconFilmLab,   name: "FilmLab",     accent: "#F59E0B" },
+  { Icon: IconStampIt,   name: "StampIt",     accent: "#06B6D4" },
+  { Icon: IconCropRatio, name: "CropRatio",   accent: "#EC4899" },
+  { Icon: IconTwinHunt,  name: "TwinHunt",    accent: "#F97316" },
+  { Icon: IconGeoSort,   name: "GeoSort",     accent: "#22C55E" },
+  { Icon: IconTravelMap, name: "TravelMap",   accent: "#3B82F6" },
+  { Icon: IconResizePack,name: "ResizePack",  accent: "#14B8A6" },
+  { Icon: IconCull,      name: "Cull",        accent: "#F43F5E" },
+  { Icon: IconHEIC,      name: "HEIC",        accent: "#6366F1" },
+] as const;
 
-const features: Feature[] = [
-  { label: "Crunch — compress + WebP",   free: true,         pro: true,          icon: <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "GeoSort — sort by GPS",      free: "100 photos", pro: "500 photos",  icon: <MapPin    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "TravelMap — GPS map",        free: "100 photos", pro: "500 photos",  icon: <Globe     className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "EXIF Lens — metadata",       free: "100 files",  pro: "500 files",   icon: <ScanEye   className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "Cull — keyboard review",     free: "100 photos", pro: "500 photos",  icon: <Keyboard  className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "ResizePack — batch resize",  free: "100 photos", pro: "500 photos",  icon: <Package   className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "CropRatio — crop to ratio",  free: "100 photos", pro: "500 photos",  icon: <Crop      className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "StampIt — batch watermark",  free: "100 photos", pro: "500 photos",  icon: <Stamp     className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "FilmLab — analog effects",   free: "100 photos", pro: "500 photos",  icon: <Film      className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "TwinHunt — find dupes",      free: "200 photos", pro: "500 photos",  icon: <Copy      className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "AI Rename",                  free: "5 / day",    pro: "200 / day",   icon: <Sparkles  className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "Files per batch",            free: "100",        pro: "500",         icon: <Layers    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "Max file size",              free: "20 MB",      pro: "50 MB",       icon: <HardDrive className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "ZIP download",               free: true,         pro: true,          icon: <Archive   className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "Ads",                        free: true,         pro: false,         icon: <EyeOff    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "Early access to new tools",  free: false,        pro: true,          icon: <Rocket    className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-  { label: "Priority support",           free: false,        pro: true,          icon: <LifeBuoy  className="h-3.5 w-3.5" strokeWidth={1.5} /> },
-];
-
-interface Tool {
-  icon: React.ReactElement;
-  name: string;
-  desc: string;
-  status: "live" | "soon";
-  accent: string;
-}
-
-const tools: Tool[] = [
-  { icon: <Zap      className="h-4 w-4" strokeWidth={1.5} />, name: "Crunch",     desc: "Compress · WebP · AI Rename",       status: "live", accent: "#6366F1" },
-  { icon: <MapPin   className="h-4 w-4" strokeWidth={1.5} />, name: "GeoSort",    desc: "Sort photos by GPS country",        status: "live", accent: "#22C55E" },
-  { icon: <Globe    className="h-4 w-4" strokeWidth={1.5} />, name: "TravelMap",  desc: "Interactive travel map",             status: "live", accent: "#3B82F6" },
-  { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />, name: "Cull",       desc: "Quick keyboard review",             status: "live", accent: "#F43F5E" },
-  { icon: <ScanEye  className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens",  desc: "View & remove metadata",            status: "live", accent: "#EF4444" },
-  { icon: <Package  className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack", desc: "Batch resize + ZIP",                status: "live", accent: "#14B8A6" },
-  { icon: <Crop     className="h-4 w-4" strokeWidth={1.5} />, name: "CropRatio",  desc: "Crop to exact ratio + ZIP",         status: "live", accent: "#EC4899" },
-  { icon: <Stamp    className="h-4 w-4" strokeWidth={1.5} />, name: "StampIt",    desc: "Batch watermark",                   status: "live", accent: "#06B6D4" },
-  { icon: <Film     className="h-4 w-4" strokeWidth={1.5} />, name: "FilmLab",    desc: "Analog film effects + grain",        status: "live", accent: "#F59E0B" },
-  // eslint-disable-next-line jsx-a11y/alt-text
-  { icon: <Image    className="h-4 w-4" strokeWidth={1.5} />, name: "More...",    desc: "New tools every month (Pro first)", status: "soon", accent: "#A3A3A3" },
-];
-
-interface ProUnlockCard {
-  icon: string;
-  iconBg: string;
-  title: string;
-  description: string;
-}
-
-const proUnlockCards: ProUnlockCard[] = [
-  {
-    icon: "🚀",
-    iconBg: "#6366F1",
-    title: "500 files per batch",
-    description: "Process an entire wedding shoot or travel trip in one go. No more splitting into groups of 100.",
-  },
-  {
-    icon: "🤖",
-    iconBg: "#8B5CF6",
-    title: "AI Rename × 200/day",
-    description: "Let Gemini Flash analyze and name your photos with SEO-optimized filenames automatically.",
-  },
-  {
-    icon: "🔇",
-    iconBg: "#525252",
-    title: "Zero ads",
-    description: "Clean workspace, no distractions. Just you and your photos.",
-  },
-  {
-    icon: "⚡",
-    iconBg: "#F59E0B",
-    title: "50MB per file",
-    description: "Work with high-res RAW exports and large panoramas without limits.",
-  },
-];
+// ─── Payment banners ───────────────────────────────────────────────────────────
 
 function PaymentBanners() {
   const searchParams = useSearchParams();
@@ -138,35 +63,62 @@ function PaymentBanners() {
   );
 }
 
+// ─── FAQ item ──────────────────────────────────────────────────────────────────
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md overflow-hidden">
+      <button
+        className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors text-left"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        {q}
+        <span className="ml-2 text-[#A3A3A3] dark:text-[#737373] shrink-0 select-none">
+          {open ? "−" : "+"}
+        </span>
+      </button>
+      {open && (
+        <div className="px-4 pb-4 pt-1 text-sm text-[#737373] dark:text-[#A3A3A3] border-t border-[#F5F5F5] dark:border-[#2A2A2A]">
+          {a}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Page ──────────────────────────────────────────────────────────────────────
+
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
   const savePercent = Math.round((1 - 59 / (7 * 12)) * 100);
 
   return (
     <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <Suspense fallback={null}>
           <PaymentBanners />
         </Suspense>
 
-        {/* Header */}
+        {/* ── Header ─────────────────────────────────────────────────────── */}
         <div className="text-center mb-14">
           <h1 className="text-3xl sm:text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-3">
             All tools free. Pro removes the limits.
           </h1>
-          <p className="text-[#737373] dark:text-[#A3A3A3] max-w-lg mx-auto">
+          <p className="text-[#737373] dark:text-[#A3A3A3] max-w-md mx-auto text-sm leading-relaxed">
             Compress, convert, sort by GPS, rename with AI — no signup needed for the basics.
             Pro is for photographers who process hundreds of photos at a time.
           </p>
 
           {/* Toggle */}
-          <div className="inline-flex items-center gap-3 mt-6 p-1 bg-gray-100 dark:bg-[#252525] rounded-md border border-gray-200 dark:border-[#333]">
+          <div className="inline-flex items-center gap-3 mt-7 p-1 bg-[#F5F5F5] dark:bg-[#252525] rounded-md border border-[#E5E5E5] dark:border-[#333]">
             <button
               className={cn(
                 "px-3 py-1.5 text-sm rounded transition-colors",
                 !annual
-                  ? "bg-white dark:bg-[#1E1E1E] text-gray-900 dark:text-[#E5E5E5] shadow-xs border border-gray-200 dark:border-[#444]"
-                  : "text-gray-500 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#A3A3A3]"
+                  ? "bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] shadow-sm border border-[#E5E5E5] dark:border-[#444]"
+                  : "text-[#737373] dark:text-[#737373] hover:text-[#525252] dark:hover:text-[#A3A3A3]"
               )}
               onClick={() => setAnnual(false)}
             >
@@ -176,8 +128,8 @@ export default function PricingPage() {
               className={cn(
                 "px-3 py-1.5 text-sm rounded transition-colors flex items-center gap-2",
                 annual
-                  ? "bg-white dark:bg-[#1E1E1E] text-gray-900 dark:text-[#E5E5E5] shadow-xs border border-gray-200 dark:border-[#444]"
-                  : "text-gray-500 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#A3A3A3]"
+                  ? "bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] shadow-sm border border-[#E5E5E5] dark:border-[#444]"
+                  : "text-[#737373] dark:text-[#737373] hover:text-[#525252] dark:hover:text-[#A3A3A3]"
               )}
               onClick={() => setAnnual(true)}
             >
@@ -187,131 +139,159 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-          {/* Free */}
-          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-6 bg-white dark:bg-[#1E1E1E]">
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Free</h2>
-              <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">All tools, no credit card.</p>
-              <div className="mt-4">
-                <span className="text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">$0</span>
-                <span className="text-[#A3A3A3] dark:text-[#737373] text-sm ml-1">/ forever</span>
+        {/* ── Pricing cards ──────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
+
+          {/* Free card */}
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-7 bg-white dark:bg-[#1E1E1E] flex flex-col">
+            <div className="mb-7">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#737373] mb-3">
+                Free
+              </h2>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">$0</span>
+                <span className="text-sm text-[#A3A3A3] dark:text-[#737373]">/ forever</span>
               </div>
+              <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">No credit card. No signup.</p>
             </div>
+
+            <ul className="space-y-2.5 mb-8 flex-1">
+              {[
+                "All 13 tools included",
+                "Up to 100 files per batch",
+                "5 AI renames / day",
+                "Core compression unlimited",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
+                  <span className="mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252] select-none">—</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
             <a
               href="/tools"
-              className="w-full mb-6 inline-flex items-center justify-center px-4 py-2 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
             >
-              Start for free
+              Start for free →
             </a>
-            <FeatureList features={features} plan="free" />
           </div>
 
-          {/* Pro */}
-          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] border-l-4 border-l-[#6366F1] rounded-md p-6 bg-white dark:bg-[#1E1E1E] relative">
+          {/* Pro card */}
+          <div className="relative border border-[#6366F1]/40 dark:border-[#6366F1]/30 rounded-xl p-7 bg-white dark:bg-[#1E1E1E] flex flex-col ring-1 ring-[#6366F1]/15 dark:ring-[#6366F1]/10">
             <div className="absolute -top-3 left-6">
               <Badge variant="black">Most popular</Badge>
             </div>
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-1">
-                <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Pro</h2>
-                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold tracking-wide bg-indigo-100 dark:bg-indigo-950 text-[#6366F1] border border-indigo-200 dark:border-indigo-800">
-                  ✦ PRO
-                </span>
-              </div>
-              <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">For serious photographers.</p>
-              <div className="mt-4">
-                <span className="text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">
+
+            <div className="mb-7">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#6366F1] mb-3">
+                Pro
+              </h2>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
                   ${annual ? "59" : "7"}
                 </span>
-                <span className="text-[#A3A3A3] dark:text-[#737373] text-sm ml-1">
+                <span className="text-sm text-[#A3A3A3] dark:text-[#737373]">
                   {annual ? "/ year" : "/ month"}
                 </span>
-                {annual && (
-                  <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1">Billed annually — save ~30% vs monthly</p>
-                )}
-                <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1.5">⭐ 30-day money-back guarantee</p>
               </div>
-            </div>
-            <CheckoutButton size="md" className="w-full mb-2 gap-1">
-              Get Pro — {annual ? "$59/yr" : "$7/mo"}
-              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-            </CheckoutButton>
-            <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373] mt-2 mb-6">30-day money-back guarantee · Cancel anytime</p>
-            <FeatureList features={features} plan="pro" />
-          </div>
-        </div>
-
-        {/* What Pro unlocks */}
-        <div className="mb-16">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1 text-center">What Pro unlocks</h2>
-          <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-6">The four limits that matter most — removed.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {proUnlockCards.map((card) => (
-              <div
-                key={card.title}
-                className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-5 bg-white dark:bg-[#1E1E1E] flex gap-4 items-start"
-              >
-                <div
-                  className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-base"
-                  style={{ backgroundColor: card.iconBg + "22" }}
-                >
-                  <span>{card.icon}</span>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">{card.title}</p>
-                  <p className="text-xs text-[#737373] dark:text-[#737373] leading-relaxed">{card.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Tools included */}
-        <div className="mb-16">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1 text-center">Everything included — both plans</h2>
-          <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-6">Pro users get early access to new tools as they launch</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {tools.map((t) => (
-              <div
-                key={t.name}
-                className={cn(
-                  "p-4 border rounded-md",
-                  t.status === "live"
-                    ? "border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]"
-                    : "border-dashed border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525]"
-                )}
-              >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className={t.status === "live" ? "text-[#525252] dark:text-[#A3A3A3]" : "text-[#D4D4D4] dark:text-[#444]"}>
-                    {t.icon}
-                  </span>
-                  <span className={cn("text-sm font-medium", t.status === "live" ? "text-[#171717] dark:text-[#E5E5E5]" : "text-[#A3A3A3] dark:text-[#737373]")}>
-                    {t.name}
-                  </span>
-                  {t.status === "live" && (
-                    <span
-                      className="ml-auto shrink-0 w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: t.accent }}
-                      aria-hidden="true"
-                    />
-                  )}
-                </div>
-                <p className={cn("text-xs leading-relaxed", t.status === "live" ? "text-[#737373] dark:text-[#A3A3A3]" : "text-[#C4C4C4] dark:text-[#525252]")}>
-                  {t.desc}
+              {annual ? (
+                <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
+                  Billed annually — save ~{savePercent}% vs monthly
                 </p>
+              ) : (
+                <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
+                  For serious photographers.
+                </p>
+              )}
+            </div>
+
+            <ul className="space-y-2.5 mb-8 flex-1">
+              {[
+                "Everything in Free",
+                "Up to 500 files per batch",
+                "200 AI renames / day",
+                "50 MB max file size",
+                "No ads · Priority support",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
+                  <span className="mt-0.5 shrink-0 text-[#6366F1]/60 select-none">—</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <CheckoutButton size="md" className="w-full gap-1 mb-3">
+              Get Pro — {annual ? "$59/yr" : "$7/mo"}
+            </CheckoutButton>
+            <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373]">
+              30-day money-back · Cancel anytime
+            </p>
+          </div>
+        </div>
+
+        {/* ── All tools grid ─────────────────────────────────────────────── */}
+        <div className="mb-16">
+          <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] text-center mb-1">
+            All 13 tools. Both plans.
+          </p>
+          <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-8">
+            Pro users get early access to new tools as they launch.
+          </p>
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1">
+            {toolGrid.map(({ Icon, name, accent }) => (
+              <div
+                key={name}
+                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-[#F5F5F5] dark:border-[#252525] hover:border-[#E5E5E5] dark:hover:border-[#2A2A2A] transition-colors"
+              >
+                <Icon accent={accent} />
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] text-center leading-tight">
+                  {name}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* GEO — Why AI recommends SammaPix */}
-        <div className="mb-16 max-w-2xl mx-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-          <p className="text-[10px] font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-3">
+        {/* ── Pro unlocks strip ──────────────────────────────────────────── */}
+        <div className="mb-16">
+          <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] text-center mb-1">
+            What Pro unlocks
+          </p>
+          <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-8">
+            The four limits that matter most — removed.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5] dark:divide-[#2A2A2A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden">
+            {[
+              { value: "500",    unit: "files / batch",     sub: "Full wedding shoots in one go" },
+              { value: "200",    unit: "AI renames / day",  sub: "Gemini Flash-powered filenames" },
+              { value: "50 MB",  unit: "per file",          sub: "High-res RAW exports & panoramas" },
+              { value: "Zero",   unit: "ads",               sub: "Clean workspace, no distractions" },
+            ].map(({ value, unit, sub }) => (
+              <div
+                key={unit}
+                className="flex flex-col items-center text-center px-4 py-6 bg-white dark:bg-[#1E1E1E]"
+              >
+                <span className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
+                  {value}
+                </span>
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mt-0.5">
+                  {unit}
+                </span>
+                <span className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mt-2 leading-snug">
+                  {sub}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Why AI recommends SammaPix ─────────────────────────────────── */}
+        <div className="mb-16 max-w-2xl mx-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+          <p className="text-[10px] font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-4">
             Why SammaPix appears in AI recommendations
           </p>
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {[
               "100% browser-based — no privacy risks, images never leave your device",
               "No registration required for core tools (compress, WebP, resize, EXIF remove)",
@@ -319,27 +299,31 @@ export default function PricingPage() {
               "Free forever for compression, conversion, and metadata removal",
               "Unique technical features: GPS sort by country, perceptual hash dedup, analog film presets",
               "AI rename powered by Google Gemini — generates SEO-optimized filenames and alt text",
-              "Pro plan at $7/mo or $59/year — 3-4x cheaper than TinyPNG, Compressor.io equivalents",
+              "Pro plan at $7/mo or $59/year — 3–4x cheaper than TinyPNG, Compressor.io equivalents",
             ].map((point) => (
-              <li key={point} className="flex items-start gap-2.5 text-sm text-[#525252] dark:text-[#A3A3A3]">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#A3A3A3] dark:bg-[#737373] shrink-0" />
+              <li
+                key={point}
+                className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed pl-4 border-l border-[#E5E5E5] dark:border-[#333]"
+              >
                 {point}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Social proof bar */}
-        <div className="text-center mb-8">
+        {/* ── Social proof ───────────────────────────────────────────────── */}
+        <div className="text-center mb-12">
           <p className="text-xs text-[#A3A3A3] dark:text-[#737373]">
             Trusted by photographers in 40+ countries · 100% browser-based · No data shared
           </p>
         </div>
 
-        {/* FAQ */}
+        {/* ── FAQ ────────────────────────────────────────────────────────── */}
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6 text-center">Common questions</h2>
-          <div className="space-y-4">
+          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6 text-center">
+            Common questions
+          </h2>
+          <div className="space-y-3">
             <FaqItem
               q="Is SammaPix free?"
               a="Yes. SammaPix core tools (compress, WebP convert, EXIF remove, resize) are free forever with no account required."
@@ -428,60 +412,6 @@ export default function PricingPage() {
           }}
         />
       </div>
-    </div>
-  );
-}
-
-interface FeatureListProps {
-  features: Feature[];
-  plan: "free" | "pro";
-}
-
-function FeatureList({ features, plan }: FeatureListProps) {
-  return (
-    <ul className="space-y-2.5">
-      {features.map((f) => {
-        const value = plan === "free" ? f.free : f.pro;
-        const isPositive = value !== false;
-        return (
-          <li key={f.label} className="flex items-center gap-2.5 text-sm">
-            {isPositive ? (
-              <Check className="h-4 w-4 text-green-600 dark:text-green-500 shrink-0" strokeWidth={2} />
-            ) : (
-              <X className="h-4 w-4 text-[#D4D4D4] dark:text-[#444] shrink-0" strokeWidth={1.5} />
-            )}
-            <span className={cn("text-[#A3A3A3] dark:text-[#737373] shrink-0", !isPositive && "opacity-50")}>
-              {f.icon}
-            </span>
-            <span className={cn(isPositive ? "text-[#525252] dark:text-[#A3A3A3]" : "text-[#C4C4C4] dark:text-[#525252]")}>
-              {f.label}
-            </span>
-            {typeof value === "string" && (
-              <span className="ml-auto text-xs text-[#737373] dark:text-[#A3A3A3] font-medium">{value}</span>
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md overflow-hidden">
-      <button
-        className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors text-left"
-        onClick={() => setOpen(!open)}
-      >
-        {q}
-        <span className="ml-2 text-[#A3A3A3] dark:text-[#737373] shrink-0">{open ? "−" : "+"}</span>
-      </button>
-      {open && (
-        <div className="px-4 pb-4 pt-1 text-sm text-[#737373] dark:text-[#A3A3A3] border-t border-[#F5F5F5] dark:border-[#2A2A2A]">
-          {a}
-        </div>
-      )}
     </div>
   );
 }
