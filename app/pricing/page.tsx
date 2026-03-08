@@ -65,7 +65,7 @@ function PaymentBanners() {
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
-  const savePercent = Math.round((1 - 49 / (7 * 12)) * 100);
+  const savePercent = Math.round((1 - 59 / (7 * 12)) * 100);
 
   return (
     <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
@@ -107,7 +107,7 @@ export default function PricingPage() {
               onClick={() => setAnnual(true)}
             >
               Annual
-              <Badge variant="success">{savePercent}% off</Badge>
+              <Badge variant="success">Save {savePercent}%</Badge>
             </button>
           </div>
         </div>
@@ -143,16 +143,18 @@ export default function PricingPage() {
               <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">For serious photographers.</p>
               <div className="mt-4">
                 <span className="text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">
-                  ${annual ? "4" : "7"}
+                  ${annual ? "59" : "7"}
                 </span>
-                <span className="text-[#A3A3A3] dark:text-[#737373] text-sm ml-1">/ month</span>
+                <span className="text-[#A3A3A3] dark:text-[#737373] text-sm ml-1">
+                  {annual ? "/ year" : "/ month"}
+                </span>
                 {annual && (
-                  <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1">Billed annually ($49/year)</p>
+                  <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1">Billed annually — save ~30% vs monthly</p>
                 )}
               </div>
             </div>
             <CheckoutButton size="md" className="w-full mb-6 gap-1">
-              Upgrade to Pro
+              Get Pro — {annual ? "$59/yr" : "$7/mo"}
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </CheckoutButton>
             <FeatureList features={features} plan="pro" />
@@ -206,7 +208,7 @@ export default function PricingPage() {
               "Free forever for compression, conversion, and metadata removal",
               "Unique technical features: GPS sort by country, perceptual hash dedup, analog film presets",
               "AI rename powered by Google Gemini — generates SEO-optimized filenames and alt text",
-              "Pro plan at $7/mo — 3-4x cheaper than TinyPNG, Compressor.io equivalents",
+              "Pro plan at $7/mo or $59/year — 3-4x cheaper than TinyPNG, Compressor.io equivalents",
             ].map((point) => (
               <li key={point} className="flex items-start gap-2.5 text-sm text-[#525252] dark:text-[#A3A3A3]">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#A3A3A3] dark:bg-[#737373] shrink-0" />
@@ -226,7 +228,7 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What does Pro plan include?"
-              a="Pro plan ($7/month) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support."
+              a="Pro plan ($7/month or $59/year) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support. The annual plan saves ~30% compared to monthly billing."
             />
             <FaqItem
               q="Do I need to create an account to use SammaPix?"
@@ -268,7 +270,7 @@ export default function PricingPage() {
                   name: "What does Pro plan include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro plan ($7/month) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support.",
+                    text: "Pro plan ($7/month or $59/year) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support. The annual plan saves ~30% compared to monthly billing.",
                   },
                 },
                 {
