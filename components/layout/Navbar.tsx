@@ -27,7 +27,7 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-        {/* Logo — linka sempre a / */}
+        {/* Logo — always links to / */}
         <Link
           href="/"
           className="flex items-center gap-2 group select-none"
@@ -133,7 +133,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop nav — unico per tutto il sito */}
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           <Link href="/portfolio" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             Portfolio

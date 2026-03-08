@@ -15,14 +15,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/webp",
     "/tools/ai-rename",
     "/tools/exif",
-    "/tools/cull",
+    "/tools/filmlab",
+    "/tools/stampit",
+    "/tools/croproatio",
+    "/tools/twinhunt",
     "/tools/geosort",
     "/tools/travelmap",
+    "/tools/resizepack",
+    "/tools/cull",
+    "/tools/heic",
     "/vs/tinypng",
     "/vs/squoosh",
     "/vs/imageoptim",
     "/vs/compressor-io",
     "/vs/iloveimg",
+    "/vs/vsco",
+    "/vs/filterpixel",
   ];
 
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
