@@ -127,6 +127,14 @@ const POSTS: Post[] = [
     date: "2026-03-08",
     tags: ["Tools"],
   },
+  {
+    slug: "remove-gps-from-photos",
+    title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
+    description:
+      "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
+    date: "2026-03-08",
+    tags: ["Privacy"],
+  },
 ];
 
 const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy"];
