@@ -250,12 +250,25 @@ Respond ONLY with valid JSON:
 
 // ── Cloudinary Upload ──────────────────────────────────────────────────────
 
-async function uploadToCloudinary(filePath, publicId) {
+async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif) {
+  // Build context string — pipe-separated key=value pairs for Cloudinary
+  function escapeCtx(v) {
+    return String(v ?? "").replace(/\|/g, "\\|").replace(/=/g, "\\=");
+  }
+  const contextStr = [
+    `caption=${escapeCtx(aiData.caption)}`,
+    `description=${escapeCtx(aiData.description)}`,
+    `alt=${escapeCtx(aiData.alt)}`,
+    `location=${escapeCtx(gpsLocation || aiData.location)}`,
+    `date=${escapeCtx(formatDate(exif?.date))}`,
+  ].join("|");
+
   const result = await cloudinary.uploader.upload(filePath, {
     public_id: publicId,
     folder: `sammapix/portfolio/${slugify(destination)}`,
     overwrite: false,
     resource_type: "image",
+    context: contextStr,
   });
 
   const base = `sammapix/portfolio/${slugify(destination)}/${publicId}`;
@@ -310,10 +323,10 @@ async function main() {
     const aiData = await generatePhotoData(filePath, exif, gpsLocation, destination, country, i);
     console.log(` "${aiData.caption}"`);
 
-    // Upload Cloudinary
+    // Upload Cloudinary (with AI-generated context metadata)
     process.stdout.write(`  ☁️  Upload Cloudinary...`);
     const publicId = `${String(i + 1).padStart(2, "0")}-${aiData.filename}`.slice(0, 80);
-    const { srcFull, srcThumb } = await uploadToCloudinary(filePath, publicId);
+    const { srcFull, srcThumb } = await uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif);
     console.log(` ✅`);
 
     photos.push({
