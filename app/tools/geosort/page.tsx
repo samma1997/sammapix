@@ -1,18 +1,19 @@
 import { Metadata } from "next";
-import { MapPin, Shield, FolderOpen, Smartphone, FileText, Zap } from "lucide-react";
+import { MapPin, Shield, FolderOpen, Smartphone, FileText, Zap, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import GeoSortClient from "@/components/tools/GeoSort";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "GeoSort — Organize Photos by Location | SammaPix",
+  title: "Sort Photos by Location Free — GPS Photo Organizer | SammaPix",
   description:
-    "Upload travel photos and GeoSort automatically reads GPS data to organize them into folders by country and city. Download a ZIP ready to use.",
+    "Sort photos by location free using GPS data from EXIF. Organize travel photos by country automatically. No upload needed.",
   alternates: { canonical: `${APP_URL}/tools/geosort` },
   openGraph: {
-    title: "GeoSort — Organize Photos by Location | SammaPix",
+    title: "Sort Photos by Location Free — GPS Photo Organizer | SammaPix",
     description:
-      "Upload travel photos and GeoSort automatically reads GPS data to organize them into folders by country and city. Download a ZIP ready to use.",
+      "Sort photos by location free using GPS data from EXIF. Organize travel photos by country automatically. No upload needed.",
     url: `${APP_URL}/tools/geosort`,
     siteName: "SammaPix",
     type: "website",
@@ -166,6 +167,31 @@ export default function GeoSortPage() {
             <a href="/blog/geosort-sort-photos-by-location" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               GeoSort: Sort Your Photos by Location Automatically →
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Related tools */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More free image tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { name: "Create Travel Map", href: "/tools/travelmap" },
+              { name: "Remove EXIF", href: "/tools/exif" },
+              { name: "All tools", href: "/tools" },
+            ].map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {tool.name}
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

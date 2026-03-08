@@ -49,7 +49,7 @@ const features = [
 const relatedTools = [
   { name: "Compress Images", href: "/tools/compress" },
   { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "All tools", href: "/tools" },
+  { name: "Resize Images", href: "/tools/resizepack" },
 ];
 
 export default function AiRenamePage() {

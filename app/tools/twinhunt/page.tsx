@@ -1,18 +1,19 @@
 import { Metadata } from "next";
-import { Copy, Search, Zap, HardDrive } from "lucide-react";
+import { Copy, Search, Zap, HardDrive, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import TwinHunt from "@/components/tools/TwinHunt";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Duplicate Photo Finder Online — Free | SammaPix TwinHunt",
+  title: "Find Duplicate Photos Online Free — Photo Deduplicator | SammaPix",
   description:
-    "Find and identify duplicate and near-duplicate photos in your browser. No upload — perceptual hashing runs 100% client-side. Free.",
+    "Find duplicate photos online free using perceptual hashing. Identify similar images, save disk space. No upload needed. Browser-based.",
   alternates: { canonical: `${APP_URL}/tools/twinhunt` },
   openGraph: {
-    title: "Duplicate Photo Finder Online — Free | SammaPix TwinHunt",
+    title: "Find Duplicate Photos Online Free — Photo Deduplicator | SammaPix",
     description:
-      "Find and identify duplicate and near-duplicate photos in your browser. No upload — perceptual hashing runs 100% client-side. Free.",
+      "Find duplicate photos online free using perceptual hashing. Identify similar images, save disk space. No upload needed. Browser-based.",
     url: `${APP_URL}/tools/twinhunt`,
     siteName: "SammaPix",
     type: "website",
@@ -171,6 +172,31 @@ export default function TwinHuntPage() {
             <a href="/blog/find-duplicate-photos-free" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               Find and Remove Duplicate Photos Free →
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Related tools */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More free image tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { name: "Compress Images", href: "/tools/compress" },
+              { name: "Cull Photos Fast", href: "/tools/cull" },
+              { name: "All tools", href: "/tools" },
+            ].map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {tool.name}
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

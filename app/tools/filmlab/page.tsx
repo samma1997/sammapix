@@ -7,16 +7,16 @@ import FilmLab from "@/components/tools/FilmLab";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free Film Grain & Analog Photo Effects | FilmLab by SammaPix",
+  title: "Analog Photo Filter Online Free — Vintage Film Effects | SammaPix",
   description:
-    "Add film grain, vignette, fade and analog color grading to your photos. 6 film stock presets (Kodak Gold, Fuji Pro, Ilford HP5…). Batch process and download as ZIP. No upload, no signup.",
+    "Apply analog photo filters and vintage film effects online free. Add film grain, vignette, fade. 6 film stock presets. No upload needed.",
   alternates: {
     canonical: `${APP_URL}/tools/filmlab`,
   },
   openGraph: {
-    title: "Free Film Grain & Analog Photo Effects | FilmLab by SammaPix",
+    title: "Analog Photo Filter Online Free — Vintage Film Effects | SammaPix",
     description:
-      "Add film grain, vignette, fade and analog color grading to your photos. 6 film stock presets. Batch process and download as ZIP.",
+      "Apply analog photo filters and vintage film effects online free. Add film grain, vignette, fade. 6 film stock presets. No upload needed.",
     url: `${APP_URL}/tools/filmlab`,
     siteName: "SammaPix",
     type: "website",
@@ -45,10 +45,9 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Crunch — Compress", href: "/tools/compress" },
-  { name: "ResizePack", href: "/tools/resizepack" },
-  { name: "Cull", href: "/tools/cull" },
-  { name: "All tools", href: "/tools" },
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Resize Images", href: "/tools/resizepack" },
+  { name: "Find Duplicates", href: "/tools/twinhunt" },
 ];
 
 export default function FilmLabPage() {

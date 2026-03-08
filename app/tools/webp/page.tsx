@@ -45,8 +45,8 @@ const features = [
 
 const relatedTools = [
   { name: "Compress Images", href: "/tools/compress" },
+  { name: "Resize Images", href: "/tools/resizepack" },
   { name: "AI Rename", href: "/tools/ai-rename" },
-  { name: "All tools", href: "/tools" },
 ];
 
 export default function WebpPage() {

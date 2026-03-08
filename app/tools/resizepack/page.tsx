@@ -7,16 +7,16 @@ import ResizePack from "@/components/tools/ResizePack";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Batch Image Resizer Online — Free | SammaPix",
+  title: "Resize Image for Instagram Free Online — Batch Resizer | SammaPix",
   description:
-    "Resize JPG, PNG and WebP images in bulk — pixel or percentage mode, social media presets, download all as ZIP. No upload, no signup.",
+    "Resize image for Instagram free online. Batch resize for all social media platforms. Pixel dimensions or percentage mode. No upload needed.",
   alternates: {
     canonical: `${APP_URL}/tools/resizepack`,
   },
   openGraph: {
-    title: "Batch Image Resizer Online — Free | SammaPix",
+    title: "Resize Image for Instagram Free Online — Batch Resizer | SammaPix",
     description:
-      "Resize JPG, PNG and WebP images in bulk — pixel or percentage mode, social media presets, download all as ZIP. No upload, no signup.",
+      "Resize image for Instagram free online. Batch resize for all social media platforms. Pixel dimensions or percentage mode. No upload needed.",
     url: `${APP_URL}/tools/resizepack`,
     siteName: "SammaPix",
     type: "website",
@@ -45,10 +45,9 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Crunch — Compress", href: "/tools/compress" },
-  { name: "EXIF Lens", href: "/tools/exif" },
-  { name: "Cull", href: "/tools/cull" },
-  { name: "All tools", href: "/tools" },
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Crop to Ratio", href: "/tools/croproatio" },
+  { name: "Cull Photos", href: "/tools/cull" },
 ];
 
 export default function ResizePackPage() {

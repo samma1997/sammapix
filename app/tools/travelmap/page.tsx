@@ -1,18 +1,19 @@
 import { Metadata } from "next";
-import { MapPin, Globe, Navigation, Shield, Camera, Map } from "lucide-react";
+import { MapPin, Globe, Navigation, Shield, Camera, Map, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import TravelMapClient from "@/components/tools/TravelMap";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "TravelMap — Visualize Your Travel Photos on a Map | SammaPix",
+  title: "Create Travel Photo Map from GPS — Interactive Visualization | SammaPix",
   description:
-    "Upload your travel photos and TravelMap automatically plots every GPS location on an interactive map. See your journey, count countries, measure distance.",
+    "Create travel photo map from GPS coordinates automatically. Visualize your journey on interactive map, count countries, measure distance traveled.",
   alternates: { canonical: `${APP_URL}/tools/travelmap` },
   openGraph: {
-    title: "TravelMap — Visualize Your Travel Photos on a Map | SammaPix",
+    title: "Create Travel Photo Map from GPS — Interactive Visualization | SammaPix",
     description:
-      "Upload your travel photos and TravelMap automatically plots every GPS location on an interactive map. See your journey, count countries, measure distance.",
+      "Create travel photo map from GPS coordinates automatically. Visualize your journey on interactive map, count countries, measure distance traveled.",
     url: `${APP_URL}/tools/travelmap`,
     siteName: "SammaPix",
     type: "website",
@@ -208,6 +209,31 @@ export default function TravelMapPage() {
             <a href="/blog/travel-map-gps-photos" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               Turn Your GPS Photos into a Travel Map →
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Related tools */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More free image tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { name: "Sort Photos by Location", href: "/tools/geosort" },
+              { name: "Remove EXIF", href: "/tools/exif" },
+              { name: "All tools", href: "/tools" },
+            ].map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {tool.name}
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

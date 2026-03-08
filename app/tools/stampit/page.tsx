@@ -7,16 +7,16 @@ import StampIt from "@/components/tools/StampIt";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free Batch Image Watermark Tool | StampIt by SammaPix",
+  title: "Add Watermark to Photo Batch Free — Online Tool | SammaPix",
   description:
-    "Add text or logo watermarks to multiple images at once. 9 positions, opacity control, tiled anti-crop mode, download all as ZIP. No upload, no signup.",
+    "Add watermark to photo batch free. Text or logo watermarks on multiple images at once. No upload, no signup needed.",
   alternates: {
     canonical: `${APP_URL}/tools/stampit`,
   },
   openGraph: {
-    title: "Free Batch Image Watermark Tool | StampIt by SammaPix",
+    title: "Add Watermark to Photo Batch Free — Online Tool | SammaPix",
     description:
-      "Add text or logo watermarks to multiple images at once. 9 positions, opacity control, tiled anti-crop mode, download all as ZIP. No upload, no signup.",
+      "Add watermark to photo batch free. Text or logo watermarks on multiple images at once. No upload, no signup needed.",
     url: `${APP_URL}/tools/stampit`,
     siteName: "SammaPix",
     type: "website",
@@ -45,10 +45,9 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Crunch — Compress", href: "/tools/compress" },
-  { name: "ResizePack", href: "/tools/resizepack" },
-  { name: "EXIF Lens", href: "/tools/exif" },
-  { name: "All tools", href: "/tools" },
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Resize Images", href: "/tools/resizepack" },
+  { name: "Remove EXIF", href: "/tools/exif" },
 ];
 
 export default function StampItPage() {

@@ -7,16 +7,16 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free Image Compressor Online — JPG PNG WebP | SammaPix",
+  title: "Compress Image Without Losing Quality Online Free | SammaPix",
   description:
-    "Compress JPG, PNG, WebP and GIF images for free in your browser. No upload, no signup. Reduce file size by up to 80% without visible quality loss.",
+    "Compress image without losing quality. Reduce JPG, PNG, WebP and GIF files by up to 80% free online. No upload needed, no quality loss.",
   alternates: {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Free Image Compressor Online — JPG PNG WebP | SammaPix",
+    title: "Compress Image Without Losing Quality Online Free | SammaPix",
     description:
-      "Compress JPG, PNG, WebP and GIF images for free in your browser. No upload, no signup. Reduce file size by up to 80% without visible quality loss.",
+      "Compress image without losing quality. Reduce JPG, PNG, WebP and GIF files by up to 80% free online. No upload needed, no quality loss.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",
@@ -45,9 +45,9 @@ const features = [
 ];
 
 const relatedTools = [
+  { name: "Resize Images", href: "/tools/resizepack" },
   { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "AI Rename", href: "/tools/ai-rename" },
-  { name: "All tools", href: "/tools" },
+  { name: "Remove EXIF", href: "/tools/exif" },
 ];
 
 export default function CompressPage() {
