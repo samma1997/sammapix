@@ -4,11 +4,88 @@ import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
 import PlanBadge from "@/components/ui/PlanBadge";
 
+export const metadata = {
+  title: "SammaPix — Free Image Tools for Photographers | Compress, WebP, EXIF, AI Rename",
+  description:
+    "Free browser-based image tools: compress JPG/PNG/WebP, convert to WebP, remove EXIF/GPS data, AI rename for SEO, batch resize, film effects and more. No uploads. No account needed.",
+  keywords: [
+    "image compressor",
+    "free image tools",
+    "webp converter",
+    "exif remover",
+    "ai image rename",
+    "batch resize",
+    "film effects",
+    "photo tools",
+  ],
+  alternates: { canonical: "https://sammapix.com" },
+  openGraph: {
+    title: "SammaPix — Free Image Tools for Photographers",
+    description:
+      "Compress, convert, rename and edit images in your browser. Free forever. No uploads.",
+    url: "https://sammapix.com",
+    type: "website",
+  },
+};
+
 const COMING_SOON_TOOLS: { name: string; desc: string }[] = [];
 
+const FAQ_ITEMS: { question: string; answer: string }[] = [
+  {
+    question: "Is SammaPix completely free?",
+    answer:
+      "Yes. Compress, convert, resize, remove EXIF and more are free forever. No signup required.",
+  },
+  {
+    question: "Do my images get uploaded to a server?",
+    answer:
+      "No. All processing happens in your browser using JavaScript. Your images never leave your device.",
+  },
+  {
+    question: "What image formats does SammaPix support?",
+    answer:
+      "JPG, PNG, WebP, GIF, HEIC and more depending on the tool.",
+  },
+  {
+    question: "Do I need to create an account?",
+    answer:
+      "No account needed for most tools. AI Rename requires a free account to prevent API abuse.",
+  },
+];
+
 export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "SammaPix",
+        url: "https://sammapix.com",
+        logo: "https://sammapix.com/icon.svg",
+        description:
+          "Free browser-based image optimization tools for photographers and web developers.",
+      },
+      {
+        "@type": "WebSite",
+        name: "SammaPix",
+        url: "https://sammapix.com",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: "https://sammapix.com/tools?q={search_term_string}",
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
+
   return (
     <>
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero — strip fotografica full-height */}
       <HeroSection />
 
@@ -18,9 +95,9 @@ export default function HomePage() {
 
           {/* Header sezione */}
           <div className="mb-10">
-            <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">
-              Image Tools
-            </h2>
+            <h1 className="text-2xl font-semibold text-[#171717] mb-2">
+              Free Image Tools for Photographers
+            </h1>
             <p className="text-sm text-gray-500 max-w-lg">
               Free browser-based tools for photographers — no uploads, no account required for the basics.
             </p>
@@ -328,6 +405,26 @@ export default function HomePage() {
             ))}
           </div>
 
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 px-4 sm:px-6 border-t border-gray-100 bg-[#FAFAFA]">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">FAQ</h2>
+            <p className="text-sm text-gray-500">Common questions about SammaPix.</p>
+          </div>
+          <dl className="divide-y divide-gray-100">
+            {FAQ_ITEMS.map((item) => (
+              <div key={item.question} className="py-5">
+                <dt className="text-sm font-semibold text-[#171717] mb-1.5">
+                  {item.question}
+                </dt>
+                <dd className="text-sm text-gray-500 leading-relaxed">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
     </>
