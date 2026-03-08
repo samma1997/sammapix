@@ -1,4 +1,5 @@
 {
+  "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" = \"develop\" ] && exit 1 || exit 0",
   "crons": [
     {
       "path": "/api/cron/email-drip",
