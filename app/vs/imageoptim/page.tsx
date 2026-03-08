@@ -187,7 +187,7 @@ export default function VsImageOptimPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org comparison */}
+      {/* Schema.org — Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -200,7 +200,34 @@ export default function VsImageOptimPage() {
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
             datePublished: "2026-03-06",
-            dateModified: "2026-03-06",
+            dateModified: "2026-03-08",
+          }),
+        }}
+      />
+
+      {/* Schema.org — WebPage + ItemList comparison */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "SammaPix vs ImageOptim",
+            description: "Feature-by-feature comparison between SammaPix and ImageOptim",
+            url: "https://sammapix.com/vs/imageoptim",
+            mainEntity: {
+              "@type": "ItemList",
+              name: "Feature Comparison",
+              itemListElement: [
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | ImageOptim: Free" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | ImageOptim: Yes" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — browser-based | ImageOptim: Yes — desktop app" },
+                { "@type": "ListItem", "position": 4, name: "Platform availability", description: "SammaPix: Any OS, browser-based | ImageOptim: macOS only" },
+                { "@type": "ListItem", "position": 5, name: "WebP conversion", description: "SammaPix: Yes | ImageOptim: No" },
+                { "@type": "ListItem", "position": 6, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | ImageOptim: No" },
+                { "@type": "ListItem", "position": 7, name: "Mobile-friendly", description: "SammaPix: Yes | ImageOptim: No" },
+              ],
+            },
           }),
         }}
       />

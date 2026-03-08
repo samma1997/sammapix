@@ -186,7 +186,7 @@ export default function VsILoveImgPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org comparison */}
+      {/* Schema.org — Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -199,7 +199,34 @@ export default function VsILoveImgPage() {
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
             datePublished: "2026-03-06",
-            dateModified: "2026-03-06",
+            dateModified: "2026-03-08",
+          }),
+        }}
+      />
+
+      {/* Schema.org — WebPage + ItemList comparison */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "SammaPix vs iLoveIMG",
+            description: "Feature-by-feature comparison between SammaPix and iLoveIMG",
+            url: "https://sammapix.com/vs/iloveimg",
+            mainEntity: {
+              "@type": "ItemList",
+              name: "Feature Comparison",
+              itemListElement: [
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | iLoveIMG: Free (Pro available)" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | iLoveIMG: Yes" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | iLoveIMG: No — uploads to server" },
+                { "@type": "ListItem", "position": 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | iLoveIMG: No" },
+                { "@type": "ListItem", "position": 5, name: "EXIF metadata removal", description: "SammaPix: Yes | iLoveIMG: No" },
+                { "@type": "ListItem", "position": 6, name: "WebP conversion", description: "SammaPix: Yes | iLoveIMG: Yes" },
+                { "@type": "ListItem", "position": 7, name: "File privacy (client-side)", description: "SammaPix: Yes — files never leave device | iLoveIMG: No — server-side processing" },
+              ],
+            },
           }),
         }}
       />

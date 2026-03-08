@@ -186,7 +186,7 @@ export default function VsSquooshPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org */}
+      {/* Schema.org — Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -198,7 +198,34 @@ export default function VsSquooshPage() {
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
             datePublished: "2026-03-05",
-            dateModified: "2026-03-05",
+            dateModified: "2026-03-08",
+          }),
+        }}
+      />
+
+      {/* Schema.org — WebPage + ItemList comparison */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "SammaPix vs Squoosh",
+            description: "Feature-by-feature comparison between SammaPix and Squoosh",
+            url: "https://sammapix.com/vs/squoosh",
+            mainEntity: {
+              "@type": "ItemList",
+              name: "Feature Comparison",
+              itemListElement: [
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Squoosh: Free" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Squoosh: No — one file at a time" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | Squoosh: Yes — 100% browser-based" },
+                { "@type": "ListItem", "position": 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Squoosh: No" },
+                { "@type": "ListItem", "position": 5, name: "Actively maintained", description: "SammaPix: Yes | Squoosh: No — archived by Google in 2023" },
+                { "@type": "ListItem", "position": 6, name: "WebP conversion", description: "SammaPix: Yes | Squoosh: Yes" },
+                { "@type": "ListItem", "position": 7, name: "Mobile-friendly UX", description: "SammaPix: Yes | Squoosh: No" },
+              ],
+            },
           }),
         }}
       />

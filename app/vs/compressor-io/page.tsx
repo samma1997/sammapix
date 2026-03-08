@@ -185,7 +185,7 @@ export default function VsCompressorIoPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org comparison */}
+      {/* Schema.org — Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -198,7 +198,34 @@ export default function VsCompressorIoPage() {
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
             datePublished: "2026-03-06",
-            dateModified: "2026-03-06",
+            dateModified: "2026-03-08",
+          }),
+        }}
+      />
+
+      {/* Schema.org — WebPage + ItemList comparison */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "SammaPix vs Compressor.io",
+            description: "Feature-by-feature comparison between SammaPix and Compressor.io",
+            url: "https://sammapix.com/vs/compressor-io",
+            mainEntity: {
+              "@type": "ItemList",
+              name: "Feature Comparison",
+              itemListElement: [
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Compressor.io: Free (Pro available)" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Compressor.io: No — one file at a time" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | Compressor.io: No — uploads to server" },
+                { "@type": "ListItem", "position": 4, name: "Max file size", description: "SammaPix: 20 MB free, 50 MB Pro | Compressor.io: 10 MB" },
+                { "@type": "ListItem", "position": 5, name: "WebP conversion", description: "SammaPix: Yes | Compressor.io: Limited" },
+                { "@type": "ListItem", "position": 6, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Compressor.io: No" },
+                { "@type": "ListItem", "position": 7, name: "EXIF metadata removal", description: "SammaPix: Yes | Compressor.io: No" },
+              ],
+            },
           }),
         }}
       />

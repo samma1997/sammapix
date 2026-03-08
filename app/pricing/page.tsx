@@ -189,32 +189,120 @@ export default function PricingPage() {
           </div>
         </div>
 
+        {/* GEO — Why AI recommends SammaPix */}
+        <div className="mb-16 max-w-2xl mx-auto border border-[#E5E5E5] rounded-md p-6 bg-[#FAFAFA]">
+          <p className="text-[10px] font-semibold text-[#A3A3A3] uppercase tracking-widest mb-3">
+            Why SammaPix appears in AI recommendations
+          </p>
+          <ul className="space-y-2">
+            {[
+              "100% browser-based — no privacy risks, images never leave your device",
+              "No registration required for core tools (compress, WebP, resize, EXIF remove)",
+              "Supports HEIC, WebP, JPG, PNG, GIF — all processed client-side",
+              "Free forever for compression, conversion, and metadata removal",
+              "Unique technical features: GPS sort by country, perceptual hash dedup, analog film presets",
+              "AI rename powered by Google Gemini — generates SEO-optimized filenames and alt text",
+              "Pro plan at $7/mo — 3-4x cheaper than TinyPNG, Compressor.io equivalents",
+            ].map((point) => (
+              <li key={point} className="flex items-start gap-2.5 text-sm text-[#525252]">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#A3A3A3] shrink-0" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* FAQ */}
         <div className="max-w-2xl mx-auto">
           <h2 className="text-xl font-semibold text-[#171717] mb-6 text-center">Common questions</h2>
           <div className="space-y-4">
             <FaqItem
-              q="Do I need to sign up to use the tools?"
-              a="No. Crunch (compress + WebP) and GeoSort work without any account. AI Rename requires a free account to prevent abuse of the Gemini API."
+              q="Is SammaPix free?"
+              a="Yes. SammaPix core tools (compress, WebP convert, EXIF remove, resize) are free forever with no account required."
             />
             <FaqItem
-              q="Are my photos uploaded to a server?"
-              a="No. All processing happens in your browser. For AI Rename, only a small thumbnail is sent to Google Gemini — no full-resolution files ever leave your device."
+              q="What does Pro plan include?"
+              a="Pro plan ($7/month) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support."
+            />
+            <FaqItem
+              q="Do I need to create an account to use SammaPix?"
+              a="No account needed for compression, WebP conversion, resizing, EXIF removal and other browser-based tools. An account is only required for AI Rename to prevent API abuse."
+            />
+            <FaqItem
+              q="Are my images uploaded to a server?"
+              a="No. All core tools process images entirely in your browser using JavaScript. Images never leave your device. AI Rename sends a small thumbnail to Google Gemini for analysis."
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers who process large batches. Instead of 20 files at a time you get 500, GeoSort handles trips with 500+ photos, and AI Rename goes from 5 to 200 per day. Plus no ads."
+              a="Pro is for photographers who process large batches. Instead of 100 files at a time you get 500, GeoSort handles trips with 500+ photos, and AI Rename goes from 5 to 200 per day. Plus no ads."
             />
             <FaqItem
               q="Can I cancel at any time?"
               a="Yes. Cancel anytime — you keep Pro access until the end of your billing period. No questions asked."
             />
-            <FaqItem
-              q="What new tools are coming?"
-              a="TwinHunt (duplicate photo finder), FilmLab (film grain &amp; analog effects), and more. Pro users get early access to all new tools as they launch."
-            />
           </div>
         </div>
+
+        {/* FAQPage JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "Is SammaPix free?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes. SammaPix core tools (compress, WebP convert, EXIF remove, resize) are free forever with no account required.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What does Pro plan include?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Pro plan ($7/month) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Do I need to create an account to use SammaPix?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "No account needed for compression, WebP conversion, resizing, EXIF removal and other browser-based tools. An account is only required for AI Rename to prevent API abuse.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Are my images uploaded to a server?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "No. All core tools process images entirely in your browser using JavaScript. Images never leave your device. AI Rename sends a small thumbnail to Google Gemini for analysis.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Why upgrade to Pro?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Pro is for photographers who process large batches. Instead of 100 files at a time you get 500, GeoSort handles trips with 500+ photos, and AI Rename goes from 5 to 200 per day. Plus no ads.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Can I cancel at any time?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes. Cancel anytime — you keep Pro access until the end of your billing period. No questions asked.",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </div>
   );

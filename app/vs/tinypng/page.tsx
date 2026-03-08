@@ -185,7 +185,7 @@ export default function VsTinyPngPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org comparison */}
+      {/* Schema.org — Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -197,7 +197,34 @@ export default function VsTinyPngPage() {
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
             datePublished: "2026-03-05",
-            dateModified: "2026-03-05",
+            dateModified: "2026-03-08",
+          }),
+        }}
+      />
+
+      {/* Schema.org — WebPage + ItemList comparison */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "SammaPix vs TinyPNG",
+            description: "Feature-by-feature comparison between SammaPix and TinyPNG",
+            url: "https://sammapix.com/vs/tinypng",
+            mainEntity: {
+              "@type": "ItemList",
+              name: "Feature Comparison",
+              itemListElement: [
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | TinyPNG: Free (Pro $25/mo)" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | TinyPNG: Yes, 20 files/month free" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | TinyPNG: No — uploads to server" },
+                { "@type": "ListItem", "position": 4, name: "WebP conversion", description: "SammaPix: Yes | TinyPNG: No" },
+                { "@type": "ListItem", "position": 5, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | TinyPNG: No" },
+                { "@type": "ListItem", "position": 6, name: "EXIF metadata removal", description: "SammaPix: Yes | TinyPNG: No" },
+                { "@type": "ListItem", "position": 7, name: "Quality slider", description: "SammaPix: Yes | TinyPNG: No (fixed algorithm)" },
+              ],
+            },
           }),
         }}
       />
