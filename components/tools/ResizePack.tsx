@@ -243,9 +243,16 @@ const CropPreview = ({
   const displayW = Math.round(originalW * scaleToFit);
   const displayH = Math.round(originalH * scaleToFit);
 
-  // Dimensioni del rettangolo di crop sullo schermo
-  const cropDisplayW = Math.min(Math.round(targetW * scaleToFit), displayW);
-  const cropDisplayH = Math.min(Math.round(targetH * scaleToFit), displayH);
+  // In "cover" mode, l'area SOURCE usata per il crop è:
+  //   cropSrcW = targetW / coverScale
+  //   cropSrcH = targetH / coverScale
+  // dove coverScale = max(targetW/origW, targetH/origH)
+  // Il frame nel preview rappresenta quest'area source, NON le dimensioni target.
+  const coverScale = Math.max(targetW / originalW, targetH / originalH);
+  const cropSrcW = targetW / coverScale;
+  const cropSrcH = targetH / coverScale;
+  const cropDisplayW = Math.round(cropSrcW * scaleToFit);
+  const cropDisplayH = Math.round(cropSrcH * scaleToFit);
 
   // Area disponibile per il frame (lo spazio rimanente fuori dal frame)
   const maxOffsetDisplayX = displayW - cropDisplayW;
@@ -1103,24 +1110,16 @@ export default function ResizePack() {
             {/* CTA */}
             <div className="pt-2 flex items-center gap-3 flex-wrap">
               <button
-                onClick={() => handleResize(false)}
+                onClick={() => shouldShowCrop ? handleEnterCrop() : handleResize(false)}
                 disabled={pendingFiles.length === 0}
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Resize {pendingFiles.length} photo
-                {pendingFiles.length !== 1 ? "s" : ""}
+                {shouldShowCrop && <Crop className="h-3.5 w-3.5" strokeWidth={1.5} />}
+                {shouldShowCrop
+                  ? `Position crop — ${pendingFiles.length} photo${pendingFiles.length !== 1 ? "s" : ""}`
+                  : `Resize ${pendingFiles.length} photo${pendingFiles.length !== 1 ? "s" : ""}`
+                }
               </button>
-
-              {/* Bottone crop — solo quando il ratio differisce e fitMode è cover */}
-              {shouldShowCrop && (
-                <button
-                  onClick={handleEnterCrop}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E5E5E5] bg-white text-[#525252] text-sm rounded-md hover:border-[#A3A3A3] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
-                >
-                  <Crop className="h-3.5 w-3.5" strokeWidth={1.5} />
-                  Preview crop position
-                </button>
-              )}
             </div>
           </div>
         </div>
