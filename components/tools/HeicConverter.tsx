@@ -590,6 +590,24 @@ export default function HeicConverter() {
             ))}
           </div>
 
+          {/* Post-conversion tip */}
+          {hasAnyDone && uiState === "results" && (
+            <div className="flex items-start gap-3 px-4 py-3 rounded-md bg-[#F5F3FF] dark:bg-[#1E1B2E] border border-[#DDD6FE] dark:border-[#4C1D95]">
+              <span className="text-base leading-none mt-0.5">💡</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-[#5B21B6] dark:text-[#A78BFA] mb-0.5">
+                  HEIC → JPG doesn&apos;t reduce file size much — HEIC is already compressed.
+                </p>
+                <p className="text-xs text-[#7C3AED] dark:text-[#8B5CF6]">
+                  To shrink your JPGs further, run them through{" "}
+                  <Link href="/tools/compress" className="underline font-semibold hover:text-[#5B21B6]">
+                    Compress →
+                  </Link>
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Download all ZIP */}
           {hasAnyDone && uiState === "results" && (
             <div className="pt-2 flex flex-col sm:flex-row gap-2">
