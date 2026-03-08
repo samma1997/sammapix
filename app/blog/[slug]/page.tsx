@@ -18,7 +18,11 @@ type BlogSlug =
   | "best-image-format-for-web"
   | "image-seo-guide"
   | "compress-png-without-losing-quality"
-  | "optimize-images-wordpress";
+  | "optimize-images-wordpress"
+  | "geosort-sort-photos-by-location"
+  | "travel-map-gps-photos"
+  | "how-to-cull-photos-fast"
+  | "find-duplicate-photos-free";
 
 interface BlogPost {
   slug: BlogSlug;
@@ -1566,6 +1570,474 @@ The most common mistake WordPress site owners make is installing plugins before 
 Before your next WordPress upload, run your images through SammaPix first. Compress, convert to WebP, rename with AI. It takes two minutes. The performance and SEO gains compound over every image you publish from that point forward.
     `,
   },
+
+  "geosort-sort-photos-by-location": {
+    slug: "geosort-sort-photos-by-location",
+    title: "GeoSort: Sort Your Photos by Location Automatically",
+    description:
+      "GeoSort reads the GPS data in your photos and groups them by place — no manual sorting, no uploads, no cloud required. Works entirely in your browser.",
+    date: "2026-03-08",
+    readTime: "5 min read",
+    tag: "Tools",
+    keywords: [
+      "sort photos by location",
+      "organize photos by gps",
+      "geosort photos",
+      "sort images by exif gps",
+      "organize travel photos by place",
+    ],
+    content: `
+## The problem every travel photographer knows
+
+You come back from a two-week trip with 1,400 photos. They're all in one folder, sorted by timestamp — which means Rome, Barcelona, and Lisbon are interleaved based on the time you shot them, not where you were. Separating them manually means scrolling through thumbnails, opening files, checking filenames, and drag-dropping into folders for hours.
+
+GPS metadata solves this problem — in theory. Every smartphone and most modern cameras embed latitude and longitude directly into the EXIF data of each photo. The location is already there. The problem is that almost no tool reads it and sorts for you automatically, without requiring an upload to the cloud.
+
+GeoSort does exactly this.
+
+## How GeoSort works
+
+GeoSort reads the EXIF GPS data embedded in your photos and groups them by geographic location — entirely in your browser. Nothing is uploaded. No account needed. No file size limit.
+
+The process:
+
+1. Drop your photos onto the GeoSort interface
+2. GeoSort reads the EXIF GPS coordinates from each file (latitude + longitude)
+3. It groups photos by proximity — nearby shots are grouped together as one location
+4. You see your photos organized by place, with a map preview showing where each group was taken
+5. Download each location group as a separate ZIP
+
+The grouping algorithm uses a configurable radius: by default, photos taken within 500 meters of each other are grouped as one location. You can adjust this — tighter for city-by-city organization in a dense trip, looser for regional grouping across a country.
+
+## What EXIF GPS data actually contains
+
+Every photo with GPS enabled contains — buried in its metadata — a precise set of coordinates. A typical EXIF GPS block includes:
+
+- **GPSLatitude** and **GPSLongitude** — the exact coordinates at the moment of capture
+- **GPSAltitude** — elevation above sea level
+- **GPSDateStamp** — the UTC date of capture
+- **GPSTimeStamp** — the UTC time of capture to the second
+
+GeoSort uses the latitude and longitude to determine location. The other fields are preserved but not used for sorting.
+
+Photos taken with GPS disabled — some cameras, some phones in airplane mode — will not have this data. GeoSort places them in an "Untagged" group so you can handle them separately.
+
+## Browser-based processing: why it matters for photographers
+
+Most photo organization tools that use GPS data require cloud uploads. You send your files to a server, the server reads the metadata, and results come back. For travel photos — especially unreleased travel work, client shoots, or simply large batches — this creates real friction:
+
+- Upload time for hundreds of files on a hotel or airport Wi-Fi connection
+- Privacy concerns: your photos live on someone else's server, even temporarily
+- File size limits and free tier restrictions
+- Slow or broken processing if the server is under load
+
+GeoSort processes everything locally. Your CPU reads the EXIF data directly. A batch of 500 photos is sorted in under 10 seconds on any modern laptop. The photos never leave your machine.
+
+## Practical use cases
+
+**Travel and vacation photos.** The most obvious use — separate a multi-city trip into per-city folders automatically. Instead of "Italy Trip 2026," end up with "Rome," "Florence," "Venice," and "Cinque Terre."
+
+**Wedding and event photography.** Multi-location events (ceremony to reception to after-party) at different venues sort themselves automatically.
+
+**Real estate photography.** You shoot 12 properties in a day. GeoSort separates the shots by address without any manual work.
+
+**Landscape and nature work.** A day shooting across a national park with multiple distinct locations — trailhead, summit, lake, forest — groups naturally by proximity.
+
+**Client delivery.** If a client needs photos organized by location for a travel campaign, GeoSort handles the preliminary sort so you spend time on selection and editing, not file management.
+
+## How to sort photos by location with GeoSort
+
+**Step 1.** Go to sammapix.com/tools/geosort and drop your photos onto the upload area. You can add hundreds at once — there is no limit.
+
+**Step 2.** GeoSort immediately reads the GPS data from each file and builds a location map. You will see groups appear as it processes.
+
+**Step 3.** Review the groupings on the map. If photos that should be in the same group are split, reduce the grouping radius. If unrelated locations are merged, tighten it.
+
+**Step 4.** Download individual location groups as ZIPs, or download everything with folder structure preserved.
+
+The entire workflow — from drop to download — typically takes under two minutes for a 200-photo batch.
+
+## What if some photos do not have GPS data?
+
+Not all photos have GPS coordinates. Common reasons:
+
+- Camera GPS was disabled (intentionally or from a low battery saving mode)
+- The photo was taken indoors where GPS could not get a fix
+- The file was edited and GPS data was stripped during export
+- The camera is older and does not have built-in GPS
+
+GeoSort places these photos in a separate "No GPS data" group. You can review them and manually move them to the correct location group, or keep them separate.
+
+---
+
+## FAQ
+
+### Does GeoSort work with RAW files?
+
+GeoSort reads EXIF data from JPEG, PNG, WebP, and HEIC files. RAW files (CR2, NEF, ARW, etc.) contain EXIF data but are not currently supported for processing. If you need to sort RAW files, export JPEGs from your RAW processor first, sort with GeoSort, then apply the same organization to your RAW originals.
+
+### How accurate is the location grouping?
+
+Accuracy depends on the GPS data quality in the original photos. Smartphone GPS is typically accurate to 3-5 meters in open sky conditions. Camera GPS (if present) is similar. The grouping radius you set determines how tight the clusters are — the default 500m works well for most travel photography. Urban shooting with many distinct locations in a small area benefits from a tighter radius (100-200m).
+
+### Can I sort by country or city name instead of coordinates?
+
+GeoSort groups by GPS coordinates and proximity radius, not by named administrative regions. This is intentional — political boundaries are not reliable for photo organization, and reverse geocoding (converting coordinates to place names) requires an API call with your coordinates. GeoSort keeps all processing local. You can rename the output folders to city names after sorting.
+    `,
+  },
+
+  "travel-map-gps-photos": {
+    slug: "travel-map-gps-photos",
+    title: "Turn Your GPS Photos into a Travel Map (Free Tool)",
+    description:
+      "TravelMap plots your photos on an interactive map using GPS EXIF data — visualize every trip in seconds, no upload required.",
+    date: "2026-03-08",
+    readTime: "5 min read",
+    tag: "Tools",
+    keywords: [
+      "travel map from photos",
+      "gps photo map online",
+      "visualize travel photos on map",
+      "photo map from exif gps",
+      "travel photography map tool",
+    ],
+    content: `
+## Your photos already know where they were taken
+
+Every photo you take with a smartphone — and most taken with a modern camera — contains a precise GPS coordinate embedded in the file. It is stored invisibly in the EXIF metadata, logged automatically the moment you press the shutter. Latitude, longitude, altitude, and timestamp, all recorded without you doing anything.
+
+The problem is that this data sits unused. You have years of travel photos with precise location data, and nothing shows you where they were actually taken in a way that makes sense visually.
+
+TravelMap changes that.
+
+## What TravelMap does
+
+TravelMap reads the GPS coordinates from your photos and plots each one as a pin on an interactive map. Drop a folder of travel photos — from one trip or from years of travel — and within seconds you have a visual record of everywhere those photos were taken.
+
+Everything runs in your browser. Your photos are never uploaded. The GPS coordinates are read locally, plotted on the map, and the photos stay on your machine.
+
+The result: an interactive map where each pin represents a photo location. Click a pin to see the photo and its location details. Zoom and pan to explore. Filter by date range to isolate a specific trip.
+
+## Why this matters for photographers
+
+For most photographers, the relationship between photos and place lives only in memory and folder names. "Italy 2024" tells you the country and year. The map tells you that you were at a specific viewpoint overlooking the Arno in Florence at 7:42am on a Tuesday in April.
+
+The geographic dimension of a trip is often what makes it memorable — the route you took, the detour that led to an unexpected viewpoint, the distance you covered between shots. A chronological grid of thumbnails does not show any of this. A map does.
+
+Beyond personal value, travel maps have practical uses:
+
+**Client presentations.** Showing a travel client not just the photos but the geographic coverage — where you went, how much ground you covered — adds context that builds confidence in the work.
+
+**Editorial pitch decks.** Mapping the photo locations for a travel story makes it immediately clear what the story covers geographically.
+
+**Personal travel journals.** A map of your photos is a more evocative record of a trip than a date-sorted gallery.
+
+**Planning future trips.** Seeing where you have photographed before helps identify gaps — places you passed through but did not stop, areas you want to return to.
+
+## How TravelMap reads your photos
+
+TravelMap uses the EXIF GPS fields embedded in each image file. For a typical smartphone photo, these fields include:
+
+- **GPSLatitude** and **GPSLongitude** — the precise capture location
+- **GPSDateStamp** and **GPSTimeStamp** — when the photo was taken (UTC)
+- **GPSAltitude** — elevation at capture
+
+TravelMap reads these fields client-side using JavaScript's FileReader API — no server involved. The coordinates are converted to map pins using an open-source mapping library. Your actual photo data stays on your device unless you choose to display a thumbnail in the pin popup.
+
+Photos without GPS data are noted but not plotted. The tool shows you a count of how many photos had valid GPS data vs. how many were missing coordinates.
+
+## How to create a travel map from your photos
+
+**Step 1.** Go to sammapix.com/tools/travelmap and drop your photos onto the interface. You can add hundreds at once.
+
+**Step 2.** TravelMap reads the GPS data from each file and plots pins on the map in real time. Large batches (500+ photos) take a few seconds.
+
+**Step 3.** Explore the map. Zoom in to see individual photo locations. Click any pin to see the photo thumbnail, capture time, and coordinates.
+
+**Step 4.** Use the date filter to isolate a specific trip or date range. If you have dropped photos from multiple trips, this lets you view them one at a time.
+
+**Step 5.** Export the map as a static image, or share a link to your interactive map (premium feature).
+
+## The privacy angle
+
+GPS metadata in photos is a privacy consideration most people do not think about. If you share a photo from your home, and that photo has GPS data, you have shared your home address.
+
+TravelMap processes everything locally — so using it to visualize your photos does not expose your location data to any server. But it also shows you exactly what GPS data is embedded in your files, which is useful before sharing them publicly.
+
+If you want to strip GPS data before sharing a photo, SammaPix's EXIF Remover tool removes all location metadata from the file without touching the image quality. Use TravelMap to explore, then EXIF Remover to clean before publishing.
+
+## What makes a good travel photo map
+
+The most useful travel maps are specific. A map of 50 photos from a focused 5-day trip tells a cleaner story than 2,000 photos from 10 years of travel dumped together.
+
+Tips for better maps:
+
+**Filter by trip before visualizing.** Use date ranges to isolate a single trip rather than mapping everything at once.
+
+**Keep photos with GPS enabled.** For future trips, make sure location services are enabled in your camera app before you start shooting. A photo without GPS data is a missing pin on the map.
+
+**Use GeoSort first.** If you want to organize before mapping, run your photos through GeoSort to separate them by location, then map each group individually for cleaner results.
+
+---
+
+## FAQ
+
+### Does TravelMap work with photos taken on a camera (not a smartphone)?
+
+Yes, if your camera has built-in GPS or if you used a GPS logger that geotags your files. Most modern mirrorless cameras have optional GPS tagging via a companion smartphone app. Check your camera settings — if GPS tagging was enabled, TravelMap will plot those photos. If not, you will need a geotagging workflow before the coordinates are available.
+
+### Can I share my travel map with others?
+
+The interactive map runs locally in your browser. Sharing it requires exporting a static image (free) or using the shareable link feature (SammaPix Pro). The static export captures the map view at your current zoom level as a PNG or JPEG.
+
+### Are my photo locations sent to any server?
+
+No. TravelMap reads GPS coordinates from your files locally and renders them using a client-side mapping library. Your coordinates are not transmitted to SammaPix servers or any third party. The map tiles (the visual map layer) come from an open-source tile provider — this is standard for any map application — but those requests contain only the map coordinates you are viewing, not your photo data.
+    `,
+  },
+
+  "how-to-cull-photos-fast": {
+    slug: "how-to-cull-photos-fast",
+    title: "How to Cull Photos Fast: A Practical Workflow for Photographers",
+    description:
+      "Culling photos does not have to take hours. This guide covers fast, practical culling workflows — from keyboard shortcuts to browser-based tools.",
+    date: "2026-03-08",
+    readTime: "6 min read",
+    tag: "Tools",
+    keywords: [
+      "how to cull photos fast",
+      "photo culling workflow",
+      "cull photos quickly",
+      "photo selection workflow photographers",
+      "fast photo culling tool",
+    ],
+    content: `
+## Culling is where most photographers lose the most time
+
+Editing gets all the attention. Culling — the process of going through raw captures and selecting the keepers — gets almost none, despite often taking as long or longer than editing.
+
+A wedding photographer who shoots 2,000 frames needs to get to 400-600 selects before editing begins. A portrait session with 300 captures might yield 30 final images. The ratio of shot to delivered is brutal, and the time spent getting there compounds across every shoot.
+
+This guide covers how to cull photos fast — the mindset, the workflow, and the tools that actually help.
+
+## The first principle: cull fast, edit slow
+
+Most photographers cull too slowly because they are mentally editing while they cull. They are thinking about whether they could fix the exposure, whether a crop would save the composition, whether the expression could be acceptable with a little cleanup.
+
+This doubles the time and produces worse results.
+
+The correct approach: cull decisions should be made in 1-3 seconds per image. You are answering a single question — is this technically acceptable and worth editing? — not evaluating creative potential. If you find yourself pausing for more than a few seconds, flag it and move on. Staring longer does not make a blurry photo sharp.
+
+Rules for fast culling decisions:
+
+- **Sharp (on the subject)?** If not, reject. Blur is rarely fixable.
+- **Correct exposure range?** If hopelessly overexposed or underexposed and unrecoverable, reject.
+- **Eyes open (for portraits)?** If not, reject unless it is the only frame with an otherwise perfect expression.
+- **Expression or moment?** For portraits and events, keep only the best expression from each sequence.
+- **Duplicate?** Keep one — the technically best frame from a burst.
+
+Everything else is a keeper worth editing.
+
+## The two-pass method
+
+Professional cullers often use a two-pass system rather than making final keep/reject decisions in one pass.
+
+**Pass 1 — Reject the obvious failures.** Move fast. Mark anything that is blurry, badly exposed, has eyes closed, or is clearly worse than another frame in the same sequence. Do not pause to appreciate the rest — just reject the definitive misses. This eliminates 30-50% of the shoot quickly.
+
+**Pass 2 — Select the best keepers.** From the remaining images, make your final selections. Now you are working with a much smaller pool, which makes comparison easier. Pick the best expression from a burst sequence. Choose the composition variant with better framing. Flag the hero shots for priority editing.
+
+This two-step approach is faster than trying to make nuanced selection decisions from 2,000 unfiltered frames.
+
+## Keyboard shortcuts that matter
+
+If you are not culling with keyboard shortcuts, you are adding seconds to every single decision. Over 2,000 images, that adds up significantly.
+
+In Lightroom Classic:
+
+- **X** — Reject (flag as rejected)
+- **P** — Pick (flag as keeper)
+- **U** — Unflag (clear flag)
+- **Arrow keys** — Next/previous image
+- **E** — Loupe view (full image)
+- **G** — Grid view (overview)
+
+The goal is to never touch the mouse during culling. Arrow key to advance, X to reject, P to pick — that is the entire workflow.
+
+## The browser-based cull tool: no import required
+
+Traditional culling in Lightroom requires importing first. For a 2,000-image shoot, import can take 10-20 minutes, plus the time to build previews before you can cull at speed. That is a real friction point.
+
+SammaPix's Cull tool lets you cull directly from your file system — no import, no catalog, no preview building wait. Drop a folder of photos into the browser interface and start culling immediately.
+
+How it works:
+
+**Step 1.** Go to sammapix.com/tools/cull and drop your shoot folder onto the interface.
+
+**Step 2.** Photos load for display in your browser. SammaPix generates display-quality previews client-side — your original files are never uploaded.
+
+**Step 3.** Cull using keyboard shortcuts: right arrow to advance, K to keep, R to reject. Move at whatever speed feels right.
+
+**Step 4.** When you are done, download your selections. Keepers are packaged as a ZIP or you can generate a text file listing the selected filenames to use as a reference when importing into Lightroom or Capture One.
+
+This workflow is particularly useful for:
+
+- Pre-culling before Lightroom import to reduce catalog size
+- Culling on a machine without Lightroom installed
+- Quick reviews of a second shooter's work before passing it off
+- Sharing a culled selection with a client for their input
+
+## Culling by similarity: dealing with bursts
+
+Burst shooting creates a specific culling problem: 15 frames of the same moment, all technically acceptable, where you need to keep 1. Scanning through 15 near-identical images takes time that adds up across a whole event shoot.
+
+Efficient burst culling:
+
+1. **Jump to the middle of the burst.** Do not start from frame 1. Jump to the middle, evaluate expression and sharpness, then compare 2-3 frames on either side.
+2. **Do not review every frame.** If frame 8 has a great expression, check frames 6-10. If one of those is better, take it.
+3. **Use TwinHunt before culling.** SammaPix's TwinHunt tool identifies visually similar photos in your set before you begin culling. Grouping similar images together makes burst culling faster — you deal with each burst as a group, not as scattered individual frames.
+
+## How fast should you cull?
+
+As a benchmark:
+
+- An experienced photographer culling a 2,000-image wedding should complete pass 1 in 45-60 minutes
+- Pass 2 from the remaining pool (roughly 1,000 images) should take another 30-45 minutes
+- Total culling time: 90 minutes to 2 hours for a 2,000-image shoot
+
+If you are significantly over this, the bottleneck is usually hesitation — pausing too long on individual frames. The fix is enforcing the 1-3 second rule: if you cannot decide in 3 seconds, flag it and move on.
+
+---
+
+## FAQ
+
+### What is the difference between culling and editing?
+
+Culling is the selection process — deciding which photos are worth editing. Editing is the processing step — adjusting exposure, color, contrast, and retouching. Culling should always come first and should be done quickly, without getting into editing decisions. The two workflows require different mental modes: culling is fast and decisive, editing is slow and deliberate.
+
+### Should I cull in Lightroom or a dedicated culling tool?
+
+Lightroom's culling is functional but requires import, preview building, and catalog management overhead. Dedicated culling tools (like SammaPix's Cull tool, or standalone apps like Photo Mechanic) are faster for the culling step itself. Many professional photographers use Photo Mechanic for culling and Lightroom for editing — importing only the selected photos into Lightroom, which keeps catalogs lean and workflows fast.
+
+### How do I avoid culling the same photo twice in a burst?
+
+Sort your photos chronologically before culling. In burst sequences, photos from the same moment will be adjacent. Make your selection from the burst, mark the rest as rejected, and move on. Grouping similar photos with TwinHunt before you start culling ensures bursts stay together and are easy to identify.
+    `,
+  },
+
+  "find-duplicate-photos-free": {
+    slug: "find-duplicate-photos-free",
+    title: "Find and Remove Duplicate Photos Free (No Upload Required)",
+    description:
+      "TwinHunt finds duplicate and near-duplicate photos in your library — runs entirely in your browser, no cloud upload, no software to install.",
+    date: "2026-03-08",
+    readTime: "5 min read",
+    tag: "Tools",
+    keywords: [
+      "find duplicate photos free",
+      "remove duplicate photos online",
+      "duplicate photo finder browser",
+      "find similar photos free tool",
+      "near duplicate photo detection",
+    ],
+    content: `
+## Duplicate photos are quietly taking up your storage
+
+Every photographer accumulates duplicates. They come from multiple sources: downloading the same card twice, syncing across devices, copying folders for backup with overlapping files, burst shooting where you kept more frames than intended, or importing the same shoot into Lightroom multiple times.
+
+A 10,000-photo library with 15% duplicates is 1,500 extra files. On a MacBook with a 512GB SSD, that is potentially 30-60GB of wasted space — space you are paying for in hardware, cloud backup costs, and slower library performance.
+
+TwinHunt finds them without requiring you to upload anything.
+
+## Exact duplicates vs. near-duplicates
+
+Not all duplicates are identical files. TwinHunt handles both categories:
+
+**Exact duplicates** are files with identical content — the same bytes, the same image, just stored twice (sometimes with different filenames). These are the easiest to find and the safest to delete. One copy can go without any review needed.
+
+**Near-duplicates** are visually similar but not identical files. The most common sources:
+
+- Burst sequences where you kept 3 frames of the same moment instead of 1
+- The same image exported at different quality settings or file sizes
+- Slight recompositions from a bracket or panorama attempt
+- A JPEG and a RAW of the same shot (these are intentional, but TwinHunt can surface them)
+- The same photo with different edits applied (crop, color grade)
+
+Near-duplicate detection is more nuanced. TwinHunt uses perceptual hashing — an algorithm that creates a fingerprint of each image based on its visual content rather than its exact bytes. Two photos that look nearly identical will have similar perceptual hashes, even if the files are different sizes or formats.
+
+## How perceptual hashing works
+
+A perceptual hash (pHash or dHash) is a compact fingerprint of an image's visual content. Unlike a cryptographic hash (which changes completely if a single pixel changes), a perceptual hash changes gradually as the image changes — similar images produce similar hashes.
+
+The process:
+
+1. The image is resized to a very small thumbnail (typically 8x8 or 32x32 pixels)
+2. Color is converted to grayscale for basic variants, or retained as a color hash
+3. A fixed transformation is applied (DCT for pHash, pixel difference for dHash)
+4. The result is a 64-bit or 128-bit integer that represents the image
+
+To find near-duplicates, TwinHunt compares hashes from all photos in your set and groups those with hash distance below a threshold. The threshold is configurable: tighter finds only very similar photos, looser catches images with more differences (different crops, different exposures of the same scene).
+
+All of this runs in your browser. No images are sent anywhere.
+
+## Privacy: why browser-based detection matters
+
+Duplicate photo finders that work via upload send your entire photo library to a server. For personal photos — especially anything with location data, personal moments, unreleased work — this is a meaningful privacy consideration.
+
+TwinHunt processes everything locally. When you drop your photos onto the interface, JavaScript reads the file data and computes perceptual hashes in your browser. The comparison and grouping happen on your machine. The only network requests are for the web page itself — not your photo data.
+
+This also makes TwinHunt fast. There is no upload queue, no server processing wait, no download of results. A 1,000-photo library typically completes analysis in under 30 seconds on a modern machine.
+
+## How to find duplicate photos with TwinHunt
+
+**Step 1.** Go to sammapix.com/tools/twinhunt and drop your photos or a folder onto the interface.
+
+**Step 2.** TwinHunt analyzes each photo and generates perceptual hashes. A progress bar shows how many files have been processed. Large libraries (5,000+ photos) take a minute or two.
+
+**Step 3.** Results appear as groups of similar photos. Each group shows the duplicate or near-duplicate set side by side, with file size and similarity score displayed.
+
+**Step 4.** Review each group and mark which files to keep and which to delete. TwinHunt never deletes anything automatically — you always make the final decision.
+
+**Step 5.** Download a list of files marked for deletion, or select them in your file manager to remove them. TwinHunt produces a plain-text file with the full paths of files you have marked for deletion — compatible with any OS file manager or batch delete script.
+
+## What to do with the results
+
+The standard workflow after TwinHunt analysis:
+
+**For exact duplicates:** Delete without review. If two files are byte-for-byte identical, keeping both serves no purpose.
+
+**For near-duplicates from bursts:** Keep the sharpest, best-exposed frame. Delete the rest. If you have already culled and selected your keepers, use your cull selections as the guide — if a near-duplicate was not selected in culling, it is a delete.
+
+**For different-format pairs (RAW + JPEG):** These are intentional pairs in most workflows. TwinHunt will flag them — review and keep both if that is your intention, or delete the JPEG if you are working from RAW.
+
+**For different-edit versions:** If you have the same photo edited two different ways, keep both only if both serve a purpose. Otherwise, keep your final edit and delete the intermediate versions.
+
+## Integrating TwinHunt into your photo workflow
+
+TwinHunt is most effective at two workflow points:
+
+**Before import into Lightroom.** Run TwinHunt on the raw card contents before importing. Remove exact duplicates and obvious burst extras before they enter your catalog. This keeps the catalog lean from the start.
+
+**Quarterly library cleanup.** Run TwinHunt across your full library (or a date-range subset) every few months to catch duplicates that have accumulated from syncing, backup copying, or multiple imports.
+
+Combining TwinHunt with SammaPix's Cull tool gives you a fast pre-processing workflow: TwinHunt finds and removes duplicates, Cull handles the selection pass, and then only your keepers go into your editing workflow.
+
+---
+
+## FAQ
+
+### Will TwinHunt find duplicates across different folders?
+
+Yes. TwinHunt analyzes all photos you drop into the interface regardless of which folder they came from. If you drop an entire hard drive or multiple card contents at once, TwinHunt compares across all of them and finds matches.
+
+### Can TwinHunt distinguish between a RAW and its JPEG version?
+
+Yes — perceptual hashing is format-agnostic. A RAW file and its JPEG equivalent will appear as near-duplicates with a high similarity score. TwinHunt labels these as cross-format pairs so you can review them separately from same-format duplicates.
+
+### Is it safe to use on a large library?
+
+TwinHunt is designed for large libraries. It processes photos incrementally and does not load all files into memory at once — hashes are computed file by file and stored in an in-memory index. A 10,000-photo library requires roughly 200MB of browser memory for the hash index, which is well within normal browser limits on any modern device. TwinHunt never modifies or deletes your files — it only identifies duplicates and lets you decide what to do with them.
+    `,
+  },
 };
 
 interface PageProps {
@@ -1709,6 +2181,10 @@ const relatedMap: Record<BlogSlug, BlogSlug[]> = {
   "image-seo-guide": ["ai-image-renaming-seo", "best-image-format-for-web", "compress-images-for-website"],
   "compress-png-without-losing-quality": ["compress-images-for-website", "reduce-image-size-without-losing-quality", "best-image-format-for-web"],
   "optimize-images-wordpress": ["compress-images-for-website", "jpg-to-webp-converter", "ai-image-renaming-seo"],
+  "geosort-sort-photos-by-location": ["travel-map-gps-photos", "remove-exif-data-photos", "how-to-cull-photos-fast"],
+  "travel-map-gps-photos": ["geosort-sort-photos-by-location", "remove-exif-data-photos", "how-to-cull-photos-fast"],
+  "how-to-cull-photos-fast": ["find-duplicate-photos-free", "geosort-sort-photos-by-location", "travel-map-gps-photos"],
+  "find-duplicate-photos-free": ["how-to-cull-photos-fast", "geosort-sort-photos-by-location", "remove-exif-data-photos"],
 };
 
 export default function BlogPostPage({ params }: PageProps) {
