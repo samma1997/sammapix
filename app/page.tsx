@@ -1,8 +1,21 @@
 import React from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
-import PlanBadge from "@/components/ui/PlanBadge";
+import {
+  ToolCard,
+  type ToolCardData,
+  IconCompress,
+  IconWebP,
+  IconAIRename,
+  IconEXIF,
+  IconFilmLab,
+  IconStampIt,
+  IconCropRatio,
+  IconTwinHunt,
+  IconGeoSort,
+  IconTravelMap,
+  IconResizePack,
+  IconCull,
+} from "@/components/ui/ToolCard";
 
 export const metadata = {
   title: "SammaPix — Free Image Tools for Photographers | Compress, WebP, EXIF, AI Rename",
@@ -28,7 +41,117 @@ export const metadata = {
   },
 };
 
-const COMING_SOON_TOOLS: { name: string; desc: string }[] = [];
+// ─── Tool data ────────────────────────────────────────────────────────────────
+
+const TOOLS: ToolCardData[] = [
+  {
+    name: "Compress",
+    href: "/tools/compress",
+    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
+    accent: "#6366F1",
+    badges: ["100% Free", "No Signup", "Browser-only"],
+    Icon: IconCompress,
+  },
+  {
+    name: "WebP",
+    href: "/tools/compress",
+    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
+    accent: "#10B981",
+    badges: ["100% Free", "Browser-only"],
+    Icon: IconWebP,
+  },
+  {
+    name: "AI Rename",
+    href: "/tools/compress",
+    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
+    accent: "#8B5CF6",
+    badges: ["Free", "AI-powered", "Gemini Flash"],
+    Icon: IconAIRename,
+  },
+  {
+    name: "EXIF Lens",
+    href: "/tools/exif",
+    tagline: "Strip GPS, camera data and all metadata from photos.",
+    accent: "#EF4444",
+    badges: ["100% Free", "Privacy", "Browser-only"],
+    Icon: IconEXIF,
+  },
+  {
+    name: "FilmLab",
+    href: "/tools/filmlab",
+    tagline: "14 analog film presets — Kodak Gold, Fuji, Ilford and 8 Samma originals.",
+    accent: "#F59E0B",
+    badges: ["100% Free", "HEIC support"],
+    Icon: IconFilmLab,
+  },
+  {
+    name: "StampIt",
+    href: "/tools/stampit",
+    tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
+    accent: "#06B6D4",
+    badges: ["100% Free", "Batch"],
+    Icon: IconStampIt,
+  },
+  {
+    name: "CropRatio",
+    href: "/tools/croproatio",
+    tagline: "Crop to exact ratios — 1:1, 16:9, 4:3, A4 and more.",
+    accent: "#EC4899",
+    badges: ["100% Free", "Browser-only"],
+    Icon: IconCropRatio,
+  },
+  {
+    name: "TwinHunt",
+    href: "/tools/twinhunt",
+    tagline: "Perceptual hashing finds exact and near-duplicate photos.",
+    accent: "#F97316",
+    badges: ["100% Free", "pHash"],
+    Icon: IconTwinHunt,
+  },
+  {
+    name: "GeoSort",
+    href: "/tools/geosort",
+    tagline: "Sort photos by country using GPS EXIF data.",
+    accent: "#22C55E",
+    badges: ["100% Free", "HEIC", "GPS"],
+    Icon: IconGeoSort,
+  },
+  {
+    name: "TravelMap",
+    href: "/tools/travelmap",
+    tagline: "Generate an interactive map from your travel photos.",
+    accent: "#3B82F6",
+    badges: ["100% Free", "GPS"],
+    Icon: IconTravelMap,
+  },
+  {
+    name: "ResizePack",
+    href: "/tools/resizepack",
+    tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
+    accent: "#14B8A6",
+    badges: ["100% Free", "Social presets"],
+    Icon: IconResizePack,
+  },
+  {
+    name: "Cull",
+    href: "/tools/cull",
+    tagline: "Rate and cull a shoot in minutes. Star rating system.",
+    accent: "#F43F5E",
+    badges: ["100% Free", "HEIC"],
+    Icon: IconCull,
+  },
+];
+
+// ─── Trust items ──────────────────────────────────────────────────────────────
+
+const TRUST_ITEMS = [
+  "Images never leave your browser",
+  "No account required for core tools",
+  "Works on mobile, tablet, desktop",
+  "HEIC supported everywhere",
+];
+
+// ─── FAQ ──────────────────────────────────────────────────────────────────────
 
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
@@ -52,6 +175,8 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
       "No account needed for most tools. AI Rename requires a free account to prevent API abuse.",
   },
 ];
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
   const jsonLd = {
@@ -86,325 +211,53 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero — strip fotografica full-height */}
+      {/* Hero */}
       <HeroSection />
 
-      {/* Tools */}
-      <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
+      {/* Tools section */}
+      <section className="py-14 px-4 sm:px-6 border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
 
-          {/* Header sezione */}
-          <div className="mb-10">
-            <h1 className="text-2xl font-semibold text-[#171717] mb-2">
+          {/* Section header */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-[#171717] mb-1.5">
               Free Image Tools for Photographers
-            </h1>
-            <p className="text-sm text-gray-500 max-w-lg">
-              Free browser-based tools for photographers — no uploads, no account required for the basics.
+            </h2>
+            <p className="text-sm text-gray-500">
+              Browser-based — no uploads, no account required for the basics.
             </p>
           </div>
 
-          {/* Tool attivi — card grandi */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <Link
-              href="/tools/compress"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M2 5 L5 8 L2 11" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M14 5 L11 8 L14 11" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <rect x="6" y="5" width="4" height="6" rx="1" fill="#6366F1" fillOpacity="0.15" stroke="#6366F1" strokeWidth="1"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">Crunch</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Compress, convert to WebP and AI-rename — all in one pass, no upload.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["Compress", "WebP", "AI Rename", "ZIP"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/geosort"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5C5.79 1.5 4 3.29 4 5.5C4 8.5 8 14.5 8 14.5C8 14.5 12 8.5 12 5.5C12 3.29 10.21 1.5 8 1.5Z" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="#6366F1" fillOpacity="0.12"/>
-                      <circle cx="8" cy="5.5" r="1.5" fill="#6366F1"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">GeoSort</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Reads GPS from your photos and sorts them into country folders — download as organized ZIP.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["GPS EXIF", "Country Folders", "ZIP"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/travelmap"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <circle cx="8" cy="8" r="6.5" stroke="#6366F1" strokeWidth="1.5" fill="#6366F1" fillOpacity="0.08"/>
-                      <circle cx="8" cy="8" r="1.5" fill="#6366F1"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">TravelMap</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Drop travel photos — see all your spots on an interactive map. Counts countries and km traveled.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["GPS Map", "Countries", "Travel route", "Interactive"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/exif"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <rect x="2" y="3" width="9" height="11" rx="1.5" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
-                      <line x1="4" y1="6.5" x2="9" y2="6.5" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
-                      <line x1="4" y1="9" x2="7" y2="9" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
-                      <circle cx="11.5" cy="10.5" r="2.5" stroke="#6366F1" strokeWidth="1.2" fill="none"/>
-                      <line x1="13.3" y1="12.3" x2="14.5" y2="13.5" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">EXIF Lens</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    View and remove GPS, camera info and private metadata before sharing your photos.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["GPS Remove", "HEIC", "Batch ZIP", "Privacy"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/cull"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <rect x="1" y="3" width="10" height="10" rx="1.5" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
-                      <circle cx="12" cy="5" r="3" fill="#16A34A"/>
-                      <path d="M10.5 5 L11.5 6 L13.5 4" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">Cull</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Review photos one by one with keyboard shortcuts. K to keep, X to reject. Download keepers as ZIP.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["K / X keys", "Keyboard review", "HEIC", "ZIP keepers"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/resizepack"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <rect x="1" y="1" width="9" height="7" rx="1.2" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
-                      <path d="M11 2 L15 2 L15 6" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M1 10 L1 14 L5 14" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">ResizePack</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Batch resize in px or %, social media presets for Instagram, Twitter and more. Download all as ZIP.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["Pixel", "Percentage", "Presets", "Batch ZIP"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/stampit"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <rect x="1" y="9" width="14" height="6" rx="1.2" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
-                      <rect x="5" y="1" width="6" height="4" rx="1" stroke="#6366F1" strokeWidth="1.2" fill="none"/>
-                      <rect x="6.5" y="5" width="3" height="3" rx="0.5" fill="#6366F1" fillOpacity="0.4"/>
-                      <line x1="8" y1="5" x2="8" y2="9" stroke="#6366F1" strokeWidth="1" strokeDasharray="1.5 1"/>
-                      <line x1="4" y1="12" x2="12" y2="12" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">StampIt</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Batch watermark with text or logo. 9 positions, opacity, tiled anti-crop mode. Download all as ZIP.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["Text", "Logo", "9 Positions", "Batch ZIP"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/croproatio"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <rect x="1" y="1" width="14" height="10" rx="1.2" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
-                      <rect x="4" y="3" width="8" height="6" rx="0.8" stroke="#6366F1" strokeWidth="1.2" fill="none"/>
-                      <rect x="3" y="2.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
-                      <rect x="11" y="2.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
-                      <rect x="3" y="7.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
-                      <rect x="11" y="7.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">CropRatio</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Crop images to exact ratios: 1:1, 4:5, 9:16, 16:9, A4. Interactive drag-to-position crop. Batch ZIP download.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["1:1 Square", "9:16 Story", "Custom Ratio", "Batch ZIP"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-
-            <Link
-              href="/tools/filmlab"
-              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <rect x="1" y="3" width="14" height="10" rx="1.2" fill="#171717" stroke="#171717" strokeWidth="0.5"/>
-                      <rect x="3" y="3" width="2" height="2.5" rx="0.4" fill="#404040"/>
-                      <rect x="7" y="3" width="2" height="2.5" rx="0.4" fill="#404040"/>
-                      <rect x="11" y="3" width="2" height="2.5" rx="0.4" fill="#404040"/>
-                      <rect x="3" y="10.5" width="2" height="2.5" rx="0.4" fill="#404040"/>
-                      <rect x="7" y="10.5" width="2" height="2.5" rx="0.4" fill="#404040"/>
-                      <rect x="11" y="10.5" width="2" height="2.5" rx="0.4" fill="#404040"/>
-                      <rect x="4" y="6" width="3" height="4" rx="0.6" fill="#92400E" fillOpacity="0.8"/>
-                      <rect x="9" y="6" width="3" height="4" rx="0.6" fill="#737373"/>
-                    </svg>
-                    <span className="text-base font-semibold text-[#171717]">FilmLab</span>
-                    <PlanBadge />
-                  </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    Film grain, vignette, fade and analog color grading. 6 film stock presets. Batch process all photos.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["Film Grain", "Vignette", "Presets", "Batch ZIP"].map((f) => (
-                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
-              </div>
-            </Link>
-          </div>
-
-          {/* Grid coming soon */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {COMING_SOON_TOOLS.map((tool) => (
-              <div
-                key={tool.name}
-                className="p-4 border border-dashed border-gray-200 rounded-lg bg-white"
-              >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-sm font-medium text-gray-400">{tool.name}</span>
-                  <span className="text-[9px] font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-dashed border-gray-200 uppercase tracking-wide">
-                    soon
-                  </span>
-                </div>
-                <p className="text-xs text-gray-300 leading-relaxed">{tool.desc}</p>
-              </div>
+          {/* Tool grid — 1 col mobile, 2 tablet, 3 desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+            {TOOLS.map((tool) => (
+              <ToolCard key={tool.name} tool={tool} />
             ))}
           </div>
 
+          {/* Trust strip */}
+          <ul
+            className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2.5 pt-8 border-t border-gray-100"
+            role="list"
+          >
+            {TRUST_ITEMS.map((item) => (
+              <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  className="flex-shrink-0"
+                >
+                  <circle cx="8" cy="8" r="7.5" fill="#D1FAE5" stroke="#6EE7B7" strokeWidth="0.5"/>
+                  <path d="M5 8 L7 10 L11 6" stroke="#059669" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
