@@ -13,6 +13,7 @@ const features = [
   { label: "TravelMap — GPS map",        free: "100 photos", pro: "500 photos" },
   { label: "EXIF Lens — metadata",       free: "100 files",  pro: "500 files" },
   { label: "Cull — keyboard review",     free: "100 photos", pro: "500 photos" },
+  { label: "ResizePack — batch resize",  free: "100 photos", pro: "500 photos" },
   { label: "TwinHunt — find dupes",      free: "200 photos", pro: "500 photos" },
   { label: "AI Rename",                  free: "5 / day",    pro: "200 / day" },
   { label: "Files per batch",            free: "100",        pro: "500" },
@@ -29,8 +30,8 @@ const tools = [
   { icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,   name: "TravelMap", desc: "Interactive travel map",          status: "live" },
   { icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,name: "Cull",      desc: "Quick keyboard review",          status: "live" },
   { icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />, name: "EXIF Lens", desc: "View & remove metadata",         status: "live" },
+  { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "live" },
   { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,   name: "StampIt",   desc: "Batch watermark",                status: "soon" },
-  { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "soon" },
   // eslint-disable-next-line jsx-a11y/alt-text
   { icon: <Image className="h-4 w-4" strokeWidth={1.5} />,   name: "More...",   desc: "New tools every month (Pro first)", status: "soon" },
 ];
@@ -205,7 +206,7 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What new tools are coming?"
-              a="TwinHunt (duplicate photo finder), StampIt (batch watermark), FilmLab (film grain & analog effects), and ResizePack (batch resize). Pro users get early access to all of them."
+              a="TwinHunt (duplicate photo finder), StampIt (batch watermark), FilmLab (film grain &amp; analog effects), and CropRatio (smart crop). Pro users get early access to all of them."
             />
           </div>
         </div>

@@ -1,0 +1,176 @@
+import React from "react";
+import type { Metadata } from "next";
+import { ArrowRight, Shield, Layout, Archive } from "lucide-react";
+import Link from "next/link";
+import ToolHeader from "@/components/tools/ToolHeader";
+import ResizePack from "@/components/tools/ResizePack";
+import { APP_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Batch Image Resizer Online — Free | SammaPix",
+  description:
+    "Resize JPG, PNG and WebP images in bulk — pixel or percentage mode, social media presets, download all as ZIP. No upload, no signup.",
+  alternates: {
+    canonical: `${APP_URL}/tools/resizepack`,
+  },
+  openGraph: {
+    title: "Batch Image Resizer Online — Free | SammaPix",
+    description:
+      "Resize JPG, PNG and WebP images in bulk — pixel or percentage mode, social media presets, download all as ZIP. No upload, no signup.",
+    url: `${APP_URL}/tools/resizepack`,
+    siteName: "SammaPix",
+    type: "website",
+  },
+};
+
+const features = [
+  {
+    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Browser-based — 100% private",
+    description:
+      "All resizing happens in your browser using the Canvas API. Your images are never uploaded to any server.",
+  },
+  {
+    icon: <Layout className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Social media presets",
+    description:
+      "One-click presets for Instagram Post, Story, Twitter/X, LinkedIn, YouTube Thumbnail and A4 print at 300 dpi.",
+  },
+  {
+    icon: <Archive className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Batch ZIP download",
+    description:
+      "Resize hundreds of images at once and download all results in a single ZIP archive. Files are renamed with their new dimensions.",
+  },
+];
+
+const relatedTools = [
+  { name: "Crunch — Compress", href: "/tools/compress" },
+  { name: "EXIF Lens", href: "/tools/exif" },
+  { name: "Cull", href: "/tools/cull" },
+  { name: "All tools", href: "/tools" },
+];
+
+export default function ResizePackPage() {
+  return (
+    <main>
+      <ToolHeader
+        title="ResizePack"
+        description="Batch resize images by pixel dimensions or percentage. Social media presets included. Download all as ZIP."
+      />
+
+      <ResizePack />
+
+      {/* Features */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+            Why use SammaPix to resize images?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+              >
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                  {f.icon}
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                  {f.title}
+                </h3>
+                <p className="text-sm text-[#737373] leading-relaxed">
+                  {f.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Long-form SEO content */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+            How batch image resizing works
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            SammaPix resizes images using the browser&apos;s native Canvas API — no
+            server involved. Drop your images, choose pixel dimensions or a
+            percentage scale, optionally lock the aspect ratio, and hit resize.
+            All images are processed concurrently in your browser.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            When you lock the aspect ratio, each file is resized independently
+            based on its own original dimensions, so portrait and landscape shots
+            both come out proportional.
+          </p>
+          <h3 className="text-base font-semibold text-[#171717] mb-3">
+            When should you resize images?
+          </h3>
+          <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Before uploading to Instagram, Twitter/X or LinkedIn to meet platform requirements
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Before adding to a website or CMS to improve page load speed
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              To generate thumbnails from high-resolution source images
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              To prepare photos for print at exact DPI targets (e.g. A4 at 300 dpi)
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Related tools */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-4">
+            More free image tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {relatedTools.map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] bg-white transition-colors"
+              >
+                {tool.name}
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "SammaPix ResizePack",
+            url: `${APP_URL}/tools/resizepack`,
+            description:
+              "Free online batch image resizer. Resize JPG, PNG and WebP by pixel dimensions or percentage. Social media presets. Download as ZIP.",
+            applicationCategory: "MultimediaApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          }),
+        }}
+      />
+    </main>
+  );
+}

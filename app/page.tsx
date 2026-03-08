@@ -13,10 +13,6 @@ const COMING_SOON_TOOLS = [
     name: "StampIt",
     desc: "Batch watermark with text or logo — position, opacity, tiled mode.",
   },
-  {
-    name: "ResizePack",
-    desc: "Batch resize in px or %, preset social/web sizes, download as ZIP.",
-  },
 ];
 
 export default function HomePage() {
@@ -181,6 +177,36 @@ export default function HomePage() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["K / X keys", "Keyboard review", "HEIC", "ZIP keepers"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/resizepack"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="1" y="1" width="9" height="7" rx="1.2" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
+                      <path d="M11 2 L15 2 L15 6" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M1 10 L1 14 L5 14" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">ResizePack</span>
+                    <PlanBadge />
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Batch resize in px or %, social media presets for Instagram, Twitter and more. Download all as ZIP.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Pixel", "Percentage", "Presets", "Batch ZIP"].map((f) => (
                       <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
                         {f}
                       </span>

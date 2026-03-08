@@ -633,14 +633,21 @@ const ACTIVE = [
     bg: "#F9FAFB",
     Illustration: IconCull,
   },
+  {
+    name: "ResizePack",
+    href: "/tools/resizepack",
+    description: "Batch resize images by pixel dimensions or percentage. Social media presets for Instagram, Twitter, LinkedIn and more. Download as ZIP.",
+    features: ["Pixel", "Percentage", "Presets", "Batch ZIP"],
+    bg: "#F0F9FF",
+    Illustration: IconResizePack,
+  },
 ];
 
 const SOON = [
-  { name: "TwinHunt",   Illustration: IconTwinHunt,  description: "Find duplicates and near-identical photos with perceptual hashing — 100% client-side." },
-  { name: "StampIt",    Illustration: IconStampIt,   description: "Batch watermark with text or logo. Position, opacity, tiled anti-crop mode." },
-  { name: "FilmLab",    Illustration: IconFilmLab,   description: "Cinematic grain, vignette and analog color grading on batch." },
-  { name: "ResizePack", Illustration: IconResizePack, description: "Batch resize in px, % or target file-size. Web, social and print presets." },
-  { name: "CropRatio",  Illustration: IconCropRatio, description: "Crop to exact ratio: 1:1, 4:5, 16:9, A4. Optional smart centering." },
+  { name: "TwinHunt",  Illustration: IconTwinHunt,  description: "Find duplicates and near-identical photos with perceptual hashing — 100% client-side." },
+  { name: "StampIt",   Illustration: IconStampIt,   description: "Batch watermark with text or logo. Position, opacity, tiled anti-crop mode." },
+  { name: "FilmLab",   Illustration: IconFilmLab,   description: "Cinematic grain, vignette and analog color grading on batch." },
+  { name: "CropRatio", Illustration: IconCropRatio, description: "Crop to exact ratio: 1:1, 4:5, 16:9, A4. Optional smart centering." },
 ];
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
