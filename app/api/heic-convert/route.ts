@@ -19,6 +19,7 @@ function isHeicBuffer(buf: Buffer): boolean {
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
+  "https://staging-sammapix.vercel.app",
   "http://localhost:3000",
 ];
 
