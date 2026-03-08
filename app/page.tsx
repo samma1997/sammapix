@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
+import PlanBadge from "@/components/ui/PlanBadge";
 
 const COMING_SOON_TOOLS = [
   {
@@ -53,9 +54,7 @@ export default function HomePage() {
                       <rect x="6" y="5" width="4" height="6" rx="1" fill="#6366F1" fillOpacity="0.15" stroke="#6366F1" strokeWidth="1"/>
                     </svg>
                     <span className="text-base font-semibold text-[#171717]">Crunch</span>
-                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
-                      Free
-                    </span>
+                    <PlanBadge />
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
                     Compress, convert to WebP and AI-rename — all in one pass, no upload.
@@ -84,9 +83,7 @@ export default function HomePage() {
                       <circle cx="8" cy="5.5" r="1.5" fill="#6366F1"/>
                     </svg>
                     <span className="text-base font-semibold text-[#171717]">GeoSort</span>
-                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
-                      Free
-                    </span>
+                    <PlanBadge />
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
                     Reads GPS from your photos and sorts them into country folders — download as organized ZIP.
@@ -115,9 +112,7 @@ export default function HomePage() {
                       <circle cx="8" cy="8" r="1.5" fill="#6366F1"/>
                     </svg>
                     <span className="text-base font-semibold text-[#171717]">TravelMap</span>
-                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
-                      Free
-                    </span>
+                    <PlanBadge />
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
                     Drop travel photos — see all your spots on an interactive map. Counts countries and km traveled.
@@ -149,9 +144,7 @@ export default function HomePage() {
                       <line x1="13.3" y1="12.3" x2="14.5" y2="13.5" stroke="#6366F1" strokeWidth="1.2" strokeLinecap="round"/>
                     </svg>
                     <span className="text-base font-semibold text-[#171717]">EXIF Lens</span>
-                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
-                      Free
-                    </span>
+                    <PlanBadge />
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
                     View and remove GPS, camera info and private metadata before sharing your photos.
@@ -181,9 +174,7 @@ export default function HomePage() {
                       <path d="M10.5 5 L11.5 6 L13.5 4" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="text-base font-semibold text-[#171717]">Cull</span>
-                    <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">
-                      Free
-                    </span>
+                    <PlanBadge />
                   </div>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4">
                     Review photos one by one with keyboard shortcuts. K to keep, X to reject. Download keepers as ZIP.
