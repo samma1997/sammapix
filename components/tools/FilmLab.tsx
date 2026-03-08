@@ -329,13 +329,31 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
   }
 }
 
+// ── HEIC helpers ─────────────────────────────────────────────────────────────────
+
+function isHeic(file: File): boolean {
+  const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+  return file.type === "image/heic" || file.type === "image/heif" || ext === "heic" || ext === "heif";
+}
+
+/** Convert HEIC via server, return a JPEG Blob URL ready for <img> */
+async function heicToObjectUrl(file: File): Promise<string> {
+  const fd = new FormData();
+  fd.append("file", file);
+  const res = await fetch("/api/heic-preview", { method: "POST", body: fd });
+  if (!res.ok) throw new Error(`HEIC conversion failed: ${res.status}`);
+  const blob = await res.blob();
+  return URL.createObjectURL(blob);
+}
+
 /**
  * Process a File through the film pipeline and return a JPEG Blob.
  */
 async function processImage(file: File, settings: FilmSettings): Promise<Blob> {
+  const objectUrl = isHeic(file) ? await heicToObjectUrl(file) : URL.createObjectURL(file);
   return new Promise((resolve, reject) => {
     const img = new Image();
-    const url = URL.createObjectURL(file);
+    const url = objectUrl;
 
     img.onload = () => {
       URL.revokeObjectURL(url);
@@ -383,9 +401,10 @@ async function renderPreview(
   maxW: number,
   maxH: number
 ): Promise<string> {
+  const objectUrl = isHeic(file) ? await heicToObjectUrl(file) : URL.createObjectURL(file);
   return new Promise((resolve, reject) => {
     const img = new Image();
-    const url = URL.createObjectURL(file);
+    const url = objectUrl;
 
     img.onload = () => {
       URL.revokeObjectURL(url);
@@ -562,7 +581,7 @@ function DropZone({ onFiles }: DropZoneProps) {
       e.preventDefault();
       setDragging(false);
       const files = Array.from(e.dataTransfer.files).filter((f) =>
-        f.type.startsWith("image/")
+        f.type.startsWith("image/") || isHeic(f)
       );
       if (files.length > 0) onFiles(files);
     },
@@ -571,7 +590,7 @@ function DropZone({ onFiles }: DropZoneProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []).filter((f) =>
-      f.type.startsWith("image/")
+      f.type.startsWith("image/") || isHeic(f)
     );
     if (files.length > 0) onFiles(files);
     e.target.value = "";
@@ -596,7 +615,7 @@ function DropZone({ onFiles }: DropZoneProps) {
         ref={inputRef}
         type="file"
         multiple
-        accept="image/*"
+        accept="image/*,.heic,.heif"
         className="sr-only"
         onChange={handleChange}
         aria-label="Upload images"
@@ -900,10 +919,10 @@ export default function FilmLab() {
                 <input
                   type="file"
                   multiple
-                  accept="image/*"
+                  accept="image/*,.heic,.heif"
                   className="sr-only"
                   onChange={(e) => {
-                    const f = Array.from(e.target.files ?? []).filter((f) => f.type.startsWith("image/"));
+                    const f = Array.from(e.target.files ?? []).filter((f) => f.type.startsWith("image/") || isHeic(f));
                     if (f.length) handleFiles(f);
                     e.target.value = "";
                   }}
