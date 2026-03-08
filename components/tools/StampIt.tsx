@@ -74,6 +74,8 @@ interface WatermarkOptions {
   opacity: number; // 0–1
   position: Position;
   tiled: boolean;
+  tiledAngle: number; // degrees, e.g. -30
+  tiledDensity: number; // spacing multiplier, 1 = tight, 3 = loose
   logoImage: HTMLImageElement | null;
   logoSize: number; // % of image width, 5–50
 }
@@ -103,6 +105,69 @@ function getPositionXY(
   return { x, y };
 }
 
+/**
+ * Filigrana tiling helpers — staggered diagonal grid, Shutterstock-style.
+ * Every odd row is offset by stepX/2 to prevent straight lines (anti-crop).
+ * Coverage is based on the full diagonal so no corner is ever empty after rotation.
+ */
+function drawTiledText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  wmW: number,
+  wmH: number,
+  imgW: number,
+  imgH: number,
+  angleDeg: number,
+  density: number
+): void {
+  const rad = (angleDeg * Math.PI) / 180;
+  const stepX = wmW * density;
+  const stepY = wmH * density * 2;
+  const diag = Math.sqrt(imgW * imgW + imgH * imgH);
+  const cols = Math.ceil(diag / stepX) + 2;
+  const rows = Math.ceil(diag / stepY) + 2;
+
+  ctx.save();
+  ctx.translate(imgW / 2, imgH / 2);
+  ctx.rotate(rad);
+  for (let r = -rows; r <= rows; r++) {
+    const stagger = r % 2 === 0 ? 0 : stepX / 2;
+    for (let c = -cols; c <= cols; c++) {
+      ctx.fillText(text, c * stepX + stagger, r * stepY);
+    }
+  }
+  ctx.restore();
+}
+
+function drawTiledImage(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  logoW: number,
+  logoH: number,
+  imgW: number,
+  imgH: number,
+  angleDeg: number,
+  density: number
+): void {
+  const rad = (angleDeg * Math.PI) / 180;
+  const stepX = logoW * density;
+  const stepY = logoH * density * 2;
+  const diag = Math.sqrt(imgW * imgW + imgH * imgH);
+  const cols = Math.ceil(diag / stepX) + 2;
+  const rows = Math.ceil(diag / stepY) + 2;
+
+  ctx.save();
+  ctx.translate(imgW / 2, imgH / 2);
+  ctx.rotate(rad);
+  for (let r = -rows; r <= rows; r++) {
+    const stagger = r % 2 === 0 ? 0 : stepX / 2;
+    for (let c = -cols; c <= cols; c++) {
+      ctx.drawImage(img, c * stepX + stagger - logoW / 2, r * stepY - logoH / 2, logoW, logoH);
+    }
+  }
+  ctx.restore();
+}
+
 function applyWatermark(
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
@@ -123,23 +188,7 @@ function applyWatermark(
     const wmH = fontSize * 1.2;
 
     if (opts.tiled) {
-      const stepX = wmW * 2.5;
-      const stepY = wmH * 4;
-      ctx.save();
-      ctx.translate(imgW / 2, imgH / 2);
-      ctx.rotate(-Math.PI / 6);
-      const cols = Math.ceil(imgW / stepX) + 2;
-      const rows = Math.ceil(imgH / stepY) + 2;
-      for (let r = -rows; r <= rows; r++) {
-        for (let c = -cols; c <= cols; c++) {
-          ctx.fillText(
-            opts.text,
-            c * stepX - wmW / 2,
-            r * stepY
-          );
-        }
-      }
-      ctx.restore();
+      drawTiledText(ctx, opts.text, wmW, wmH, imgW, imgH, opts.tiledAngle, opts.tiledDensity);
     } else {
       const { x, y } = getPositionXY(opts.position, imgW, imgH, wmW, wmH, padding);
       ctx.fillText(opts.text, x, y + fontSize);
@@ -149,25 +198,7 @@ function applyWatermark(
     const logoH = Math.round((opts.logoImage.naturalHeight / opts.logoImage.naturalWidth) * logoW);
 
     if (opts.tiled) {
-      const stepX = logoW * 2.5;
-      const stepY = logoH * 4;
-      ctx.save();
-      ctx.translate(imgW / 2, imgH / 2);
-      ctx.rotate(-Math.PI / 6);
-      const cols = Math.ceil(imgW / stepX) + 2;
-      const rows = Math.ceil(imgH / stepY) + 2;
-      for (let r = -rows; r <= rows; r++) {
-        for (let c = -cols; c <= cols; c++) {
-          ctx.drawImage(
-            opts.logoImage,
-            c * stepX - logoW / 2,
-            r * stepY - logoH / 2,
-            logoW,
-            logoH
-          );
-        }
-      }
-      ctx.restore();
+      drawTiledImage(ctx, opts.logoImage, logoW, logoH, imgW, imgH, opts.tiledAngle, opts.tiledDensity);
     } else {
       const { x, y } = getPositionXY(opts.position, imgW, imgH, logoW, logoH, padding);
       ctx.drawImage(opts.logoImage, x, y, logoW, logoH);
@@ -285,6 +316,8 @@ export default function StampIt() {
   const [opacity, setOpacity] = useState(70);
   const [position, setPosition] = useState<Position>("bottom-right");
   const [tiled, setTiled] = useState(false);
+  const [tiledAngle, setTiledAngle] = useState(-30);
+  const [tiledDensity, setTiledDensity] = useState(2.5);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null);
   const [logoSize, setLogoSize] = useState(15);
@@ -356,7 +389,7 @@ export default function StampIt() {
     e.preventDefault();
     setIsLogoDragging(false);
     const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith("image/")) setLogoFile(file);
+    if (file && (file.type.startsWith("image/") || file.type === "image/svg+xml")) setLogoFile(file);
   }, []);
 
   const buildOpts = useCallback((): WatermarkOptions => ({
@@ -367,9 +400,11 @@ export default function StampIt() {
     opacity: opacity / 100,
     position,
     tiled,
+    tiledAngle,
+    tiledDensity,
     logoImage: logoImg,
     logoSize,
-  }), [wmType, text, fontSize, color, customColor, opacity, position, tiled, logoImg, logoSize]);
+  }), [wmType, text, fontSize, color, customColor, opacity, position, tiled, tiledAngle, tiledDensity, logoImg, logoSize]);
 
   const handleProcess = useCallback(async () => {
     setUiState("processing");
@@ -710,15 +745,15 @@ export default function StampIt() {
                           <ImageIcon className="h-5 w-5 text-[#A3A3A3]" strokeWidth={1.5} />
                         </div>
                         <div>
-                          <p className="text-sm text-[#171717]">Drop logo PNG here</p>
-                          <p className="text-xs text-[#A3A3A3] mt-0.5">Supports transparency (PNG recommended)</p>
+                          <p className="text-sm text-[#171717]">Drop logo PNG or SVG here</p>
+                          <p className="text-xs text-[#A3A3A3] mt-0.5">PNG with transparency or SVG vector recommended</p>
                         </div>
                       </>
                     )}
                     <input
                       ref={logoInputRef}
                       type="file"
-                      accept="image/*"
+                      accept="image/png,image/svg+xml,image/webp,image/*"
                       className="hidden"
                       onChange={(e) => {
                         const f = e.target.files?.[0];
@@ -755,7 +790,7 @@ export default function StampIt() {
                     Position
                   </p>
                   {tiled && (
-                    <span className="text-[10px] text-[#A3A3A3] italic">Tiled mode — position ignored</span>
+                    <span className="text-[10px] text-[#A3A3A3] italic">Filigrana mode — position ignored</span>
                   )}
                 </div>
                 <div className="grid grid-cols-3 gap-1.5 w-32">
@@ -779,8 +814,8 @@ export default function StampIt() {
                 </div>
               </div>
 
-              {/* Tiled mode */}
-              <div className="px-5 py-4">
+              {/* Filigrana mode */}
+              <div className="px-5 py-4 space-y-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <div className="relative mt-0.5">
                     <input
@@ -795,13 +830,58 @@ export default function StampIt() {
                   <div>
                     <span className="flex items-center gap-1.5 text-sm font-medium text-[#171717]">
                       <Layers className="h-3.5 w-3.5" strokeWidth={1.5} />
-                      Tiled mode
+                      Filigrana mode
                     </span>
                     <p className="text-xs text-[#A3A3A3] mt-0.5">
-                      Repeats watermark across entire image in a diagonal grid — anti-crop protection.
+                      Staggered diagonal grid across the entire image — impossible to crop out. Like Shutterstock.
                     </p>
                   </div>
                 </label>
+
+                {tiled && (
+                  <div className="space-y-4 pl-12">
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="text-xs text-[#525252]">Angle</label>
+                        <span className="text-xs font-medium text-[#171717]">{tiledAngle}°</span>
+                      </div>
+                      <input
+                        type="range"
+                        min={-60}
+                        max={0}
+                        value={tiledAngle}
+                        onChange={(e) => setTiledAngle(Number(e.target.value))}
+                        className="w-full h-1.5 bg-[#E5E5E5] rounded-full appearance-none cursor-pointer accent-[#171717]"
+                      />
+                      <div className="flex justify-between text-[10px] text-[#A3A3A3] mt-0.5">
+                        <span>-60° steep</span>
+                        <span>0° horizontal</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="text-xs text-[#525252]">Density</label>
+                        <span className="text-xs font-medium text-[#171717]">
+                          {tiledDensity <= 1.5 ? "Tight" : tiledDensity <= 2.5 ? "Normal" : "Loose"}
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min={1}
+                        max={4}
+                        step={0.5}
+                        value={tiledDensity}
+                        onChange={(e) => setTiledDensity(Number(e.target.value))}
+                        className="w-full h-1.5 bg-[#E5E5E5] rounded-full appearance-none cursor-pointer accent-[#171717]"
+                      />
+                      <div className="flex justify-between text-[10px] text-[#A3A3A3] mt-0.5">
+                        <span>Dense</span>
+                        <span>Sparse</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
