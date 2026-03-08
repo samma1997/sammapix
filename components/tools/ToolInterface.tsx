@@ -19,14 +19,6 @@ interface ToolInterfaceProps {
   defaultMode?: ToolMode;
 }
 
-const tools = [
-  { name: "compress", href: "/tools/compress", active: true },
-  { name: "→ webp", href: "/tools/webp", active: true },
-  { name: "ai rename", href: "/tools/ai-rename", active: true },
-  { name: "exif inspector", href: "/tools/exif", active: false, badge: "soon" },
-  { name: "photo culling", href: "/tools/cull", active: false, badge: "soon" },
-];
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
   const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
@@ -60,44 +52,6 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
       {/* ── Tools section ── */}
       <section className="pt-6 pb-4 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-
-          {/* Header tools */}
-          <div className="mb-8">
-            <div className="w-full h-px bg-gray-200 dark:bg-[#2A2A2A] my-2" />
-            <p className="text-xs text-gray-400 dark:text-[#737373] mb-4">
-              Free browser-based tools. Nothing leaves your device.
-            </p>
-
-            {/* Pill tags */}
-            <div className="flex flex-wrap gap-2">
-              {tools.map((tool) => (
-                tool.active ? (
-                  <Link
-                    key={tool.href}
-                    href={tool.href}
-                    className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors",
-                      "border-gray-200 dark:border-[#2A2A2A] text-gray-700 dark:text-[#A3A3A3] hover:border-gray-400 dark:hover:border-[#444] hover:text-gray-900 dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E]"
-                    )}
-                  >
-                    {tool.name}
-                  </Link>
-                ) : (
-                  <span
-                    key={tool.href}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-dashed border-gray-200 dark:border-[#2A2A2A] text-gray-400 dark:text-[#737373] cursor-default"
-                  >
-                    {tool.name}
-                    {tool.badge && (
-                      <span className="text-[10px] bg-gray-100 dark:bg-[#252525] text-gray-400 dark:text-[#737373] px-1.5 py-0.5 rounded">
-                        {tool.badge}
-                      </span>
-                    )}
-                  </span>
-                )
-              ))}
-            </div>
-          </div>
 
           {/* ── DropZone ── */}
           <DropZone />

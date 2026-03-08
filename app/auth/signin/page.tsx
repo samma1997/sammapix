@@ -49,22 +49,22 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-white dark:bg-[#191919] flex flex-col items-center justify-center px-4">
       {/* Card */}
       <div className="w-full max-w-sm">
         {/* Logo mark */}
         <div className="flex justify-center mb-8">
-          <div className="h-10 w-10 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-lg border border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#1E1E1E] flex items-center justify-center">
             <Sparkles className="h-5 w-5 text-brand" strokeWidth={1.5} />
           </div>
         </div>
 
         {/* Heading */}
         <div className="text-center mb-8">
-          <h1 className="text-xl font-semibold text-gray-900 tracking-tight">
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] tracking-tight">
             Sign in to SammaPix
           </h1>
-          <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+          <p className="mt-2 text-sm text-gray-500 dark:text-[#737373] leading-relaxed">
             Continue with your account to use AI Rename
           </p>
         </div>
@@ -101,19 +101,19 @@ export default function SignInPage() {
           ) : (
             // Skeleton while providers load
             <>
-              <div className="h-10 rounded-md bg-gray-100 animate-pulse" />
-              <div className="h-10 rounded-md bg-gray-100 animate-pulse" />
+              <div className="h-10 rounded-md bg-gray-100 dark:bg-[#2A2A2A] animate-pulse" />
+              <div className="h-10 rounded-md bg-gray-100 dark:bg-[#2A2A2A] animate-pulse" />
             </>
           )}
         </div>
 
         {/* Divider */}
-        <div className="mt-6 pt-6 border-t border-gray-100">
-          <p className="text-xs text-gray-400 text-center leading-relaxed">
+        <div className="mt-6 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
+          <p className="text-xs text-gray-400 dark:text-[#525252] text-center leading-relaxed">
             By continuing, you agree to our{" "}
             <a
               href="/privacy"
-              className="underline underline-offset-2 hover:text-gray-600 transition-colors"
+              className="underline underline-offset-2 hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors"
             >
               Privacy Policy
             </a>
@@ -125,7 +125,7 @@ export default function SignInPage() {
         <div className="mt-4 text-center">
           <a
             href="/"
-            className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-xs text-gray-400 dark:text-[#525252] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors"
           >
             Back to SammaPix
           </a>
