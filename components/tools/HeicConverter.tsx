@@ -518,6 +518,16 @@ export default function HeicConverter() {
             </button>
           </div>
 
+          {/* "Ready" banner — shown before conversion starts */}
+          {uiState === "results" && allPending && (
+            <div className="flex items-center gap-3 px-4 py-3 rounded-md bg-[#F0FDF4] dark:bg-[#052E16] border border-[#BBF7D0] dark:border-[#166534]">
+              <div className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0" />
+              <p className="text-xs font-medium text-[#166534] dark:text-[#4ADE80]">
+                {files.length} file{files.length !== 1 ? "s" : ""} ready — choose format and quality, then click Convert
+              </p>
+            </div>
+          )}
+
           {/* Settings — only show when all pending (before convert) */}
           {uiState === "results" && allPending && (
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-white dark:bg-[#1E1E1E] space-y-5">
@@ -562,10 +572,10 @@ export default function HeicConverter() {
           {uiState === "results" && allPending && (
             <button
               onClick={handleConvertAll}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors shadow-sm"
             >
               <FileImage className="h-4 w-4" strokeWidth={1.5} />
-              Convert {files.length} file{files.length !== 1 ? "s" : ""} to {outputFormat}
+              Convert {files.length} file{files.length !== 1 ? "s" : ""} to {outputFormat} →
             </button>
           )}
 
@@ -585,7 +595,7 @@ export default function HeicConverter() {
             <div className="pt-2 flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleDownloadAll}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
               >
                 <Download className="h-4 w-4" strokeWidth={1.5} />
                 Download all as ZIP ({doneCount})
