@@ -641,10 +641,17 @@ const ACTIVE = [
     bg: "#F0F9FF",
     Illustration: IconResizePack,
   },
+  {
+    name: "TwinHunt",
+    href: "/tools/twinhunt",
+    description: "Find duplicates and near-identical photos with perceptual hashing — 100% client-side, no upload.",
+    features: ["Perceptual hash", "Near-dupes", "HEIC", "Batch"],
+    bg: "#FFF7ED",
+    Illustration: IconTwinHunt,
+  },
 ];
 
 const SOON = [
-  { name: "TwinHunt",  Illustration: IconTwinHunt,  description: "Find duplicates and near-identical photos with perceptual hashing — 100% client-side." },
   { name: "StampIt",   Illustration: IconStampIt,   description: "Batch watermark with text or logo. Position, opacity, tiled anti-crop mode." },
   { name: "FilmLab",   Illustration: IconFilmLab,   description: "Cinematic grain, vignette and analog color grading on batch." },
   { name: "CropRatio", Illustration: IconCropRatio, description: "Crop to exact ratio: 1:1, 4:5, 16:9, A4. Optional smart centering." },
