@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
+import PlanBadge from "@/components/ui/PlanBadge";
 
 export const metadata: Metadata = {
   title: "Free Image Tools for Photographers | SammaPix",
@@ -677,7 +678,7 @@ export default function ToolsPage() {
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-base font-semibold text-[#171717]">{tool.name}</span>
-                  <span className="text-[10px] font-medium text-white bg-[#171717] px-2 py-0.5 rounded-full">Free</span>
+                  <PlanBadge />
                 </div>
                 <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{tool.description}</p>
                 <div className="flex flex-wrap gap-1.5">
