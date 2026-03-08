@@ -29,6 +29,10 @@ interface FilmSettings {
   saturation: number;
   highlightHue: number;
   shadowHue: number;
+  /** Multiplier for highlight split tone blend strength (0 = off, 1 = standard, 2 = strong) */
+  highlightSat: number;
+  /** Multiplier for shadow split tone blend strength */
+  shadowSat: number;
 }
 
 interface ProcessedFile {
@@ -46,74 +50,117 @@ type PresetName =
   | "Ilford HP5"
   | "Cinematic Teal"
   | "Faded 70s"
-  | "Raw";
+  | "Raw"
+  | "Adriatico"
+  | "Dorado"
+  | "Lagos"
+  | "Alba"
+  | "Etere"
+  | "Foschia"
+  | "Rame"
+  | "Pietra";
 
 // ── Presets ─────────────────────────────────────────────────────────────────────
 
+// Collection labels for UI grouping
+export const PRESET_GROUPS: Record<string, PresetName[]> = {
+  "Film Stocks": ["Raw", "Kodak Gold", "Fuji Pro 400H", "Ilford HP5", "Cinematic Teal", "Faded 70s"],
+  "Samma": ["Adriatico", "Dorado", "Lagos", "Alba", "Etere", "Foschia", "Rame", "Pietra"],
+};
+
 const PRESETS: Record<PresetName, FilmSettings> = {
   Raw: {
-    grain: 0,
-    vignette: 0,
-    fade: 0,
-    temperature: 0,
-    contrast: 0,
-    saturation: 0,
-    highlightHue: 0,
-    shadowHue: 0,
+    grain: 0, vignette: 0, fade: 0, temperature: 0,
+    contrast: 0, saturation: 0, highlightHue: 0, shadowHue: 0,
+    highlightSat: 1, shadowSat: 1,
   },
   "Kodak Gold": {
-    grain: 22,
-    vignette: 30,
-    fade: 15,
-    temperature: 15,
-    contrast: 10,
-    saturation: 15,
-    highlightHue: 40,
-    shadowHue: 30,
+    grain: 22, vignette: 30, fade: 15, temperature: 15,
+    contrast: 10, saturation: 15, highlightHue: 40, shadowHue: 30,
+    highlightSat: 1, shadowSat: 1,
   },
   "Fuji Pro 400H": {
-    grain: 14,
-    vignette: 18,
-    fade: 8,
-    temperature: -8,
-    contrast: -5,
-    saturation: -10,
-    highlightHue: 120,
-    shadowHue: 140,
+    grain: 14, vignette: 18, fade: 8, temperature: -8,
+    contrast: -5, saturation: -10, highlightHue: 120, shadowHue: 140,
+    highlightSat: 1, shadowSat: 1,
   },
   "Ilford HP5": {
-    grain: 40,
-    vignette: 40,
-    fade: 5,
-    temperature: 0,
-    contrast: 20,
-    saturation: -100,
-    highlightHue: 0,
-    shadowHue: 0,
+    grain: 40, vignette: 40, fade: 5, temperature: 0,
+    contrast: 20, saturation: -100, highlightHue: 0, shadowHue: 0,
+    highlightSat: 1, shadowSat: 1,
   },
   "Cinematic Teal": {
-    grain: 18,
-    vignette: 50,
-    fade: 10,
-    temperature: -5,
-    contrast: 15,
-    saturation: 10,
-    highlightHue: 25,
-    shadowHue: 185,
+    grain: 18, vignette: 50, fade: 10, temperature: -5,
+    contrast: 15, saturation: 10, highlightHue: 25, shadowHue: 185,
+    highlightSat: 1, shadowSat: 1,
   },
   "Faded 70s": {
-    grain: 35,
-    vignette: 25,
-    fade: 45,
-    temperature: 20,
-    contrast: -20,
-    saturation: -20,
-    highlightHue: 35,
-    shadowHue: 20,
+    grain: 35, vignette: 25, fade: 45, temperature: 20,
+    contrast: -20, saturation: -20, highlightHue: 35, shadowHue: 20,
+    highlightSat: 1, shadowSat: 1,
+  },
+
+  // ── Samma Presets ── (translated from personal Lightroom presets, orange -8 applied)
+
+  /** Adriatico — cool cyan highlights + warm orange shadows, moody split toning */
+  Adriatico: {
+    grain: 10, vignette: 25, fade: 6, temperature: 0,
+    contrast: 8, saturation: -5,
+    highlightHue: 198, shadowHue: 12,
+    highlightSat: 0.70, shadowSat: 0.43,
+  },
+  /** Dorado — warm golden soft, dreamy clarity, honey tones */
+  Dorado: {
+    grain: 12, vignette: 20, fade: 7, temperature: 10,
+    contrast: 7, saturation: -5,
+    highlightHue: 41, shadowHue: 129,
+    highlightSat: 0.48, shadowSat: 0.13,
+  },
+  /** Lagos — strong teal-orange split, cinematic city/travel look */
+  Lagos: {
+    grain: 12, vignette: 35, fade: 5, temperature: 0,
+    contrast: -3, saturation: -5,
+    highlightHue: 42, shadowHue: 215,
+    highlightSat: 0.66, shadowSat: 1.35,
+  },
+  /** Alba — very lifted shadows, airy dawn feel, almost no grain */
+  Alba: {
+    grain: 8, vignette: 15, fade: 16, temperature: 5,
+    contrast: -2, saturation: -5,
+    highlightHue: 0, shadowHue: 0,
+    highlightSat: 0, shadowSat: 0,
+  },
+  /** Etere — ethereal, lifted, minimal — gentle mood */
+  Etere: {
+    grain: 10, vignette: 20, fade: 13, temperature: 5,
+    contrast: 7, saturation: -8,
+    highlightHue: 0, shadowHue: 0,
+    highlightSat: 0, shadowSat: 0,
+  },
+  /** Foschia — warm haze, slightly desaturated blues, travel warmth */
+  Foschia: {
+    grain: 12, vignette: 25, fade: 9, temperature: 8,
+    contrast: 5, saturation: 0,
+    highlightHue: 41, shadowHue: 213,
+    highlightSat: 0.22, shadowSat: 0.05,
+  },
+  /** Rame — copper-warm autumn, rich earthy tones */
+  Rame: {
+    grain: 10, vignette: 20, fade: 11, temperature: 10,
+    contrast: 8, saturation: -5,
+    highlightHue: 48, shadowHue: 37,
+    highlightSat: 0.44, shadowSat: 0.20,
+  },
+  /** Pietra — very muted/desaturated, stone-like, subtle green-gold cast */
+  Pietra: {
+    grain: 15, vignette: 25, fade: 15, temperature: -5,
+    contrast: 4, saturation: -20,
+    highlightHue: 53, shadowHue: 135,
+    highlightSat: 0.70, shadowSat: 0.10,
   },
 };
 
-const PRESET_NAMES = Object.keys(PRESETS) as PresetName[];
+const PRESET_GROUP_NAMES = Object.keys(PRESET_GROUPS) as string[];
 
 const DEFAULT_SETTINGS: FilmSettings = PRESETS["Raw"];
 
@@ -171,6 +218,8 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
     saturation,
     highlightHue,
     shadowHue,
+    highlightSat,
+    shadowSat,
   } = settings;
 
   // Pre-compute split tone colors
@@ -245,15 +294,15 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
       // 6. Split toning (highlights & shadows)
       const lum = 0.299 * r + 0.587 * g + 0.114 * b;
 
-      if (lum > 180 && (highlightHue !== 0 || shadowHue !== 0)) {
-        // Highlight toning
-        const blend = 0.15 * ((lum - 180) / 75);
+      if (lum > 180 && highlightSat > 0) {
+        // Highlight toning — strength controlled by highlightSat
+        const blend = 0.15 * ((lum - 180) / 75) * highlightSat;
         r = clamp(r * (1 - blend) + highlightRgb[0] * blend);
         g = clamp(g * (1 - blend) + highlightRgb[1] * blend);
         b = clamp(b * (1 - blend) + highlightRgb[2] * blend);
-      } else if (lum < 80 && (highlightHue !== 0 || shadowHue !== 0)) {
-        // Shadow toning
-        const blend = 0.15 * (1 - lum / 80);
+      } else if (lum < 80 && shadowSat > 0) {
+        // Shadow toning — strength controlled by shadowSat
+        const blend = 0.15 * (1 - lum / 80) * shadowSat;
         r = clamp(r * (1 - blend) + shadowRgb[0] * blend);
         g = clamp(g * (1 - blend) + shadowRgb[1] * blend);
         b = clamp(b * (1 - blend) + shadowRgb[2] * blend);
@@ -724,24 +773,35 @@ export default function FilmLab() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
 
-      {/* Preset pills */}
-      <div className="mb-6">
-        <p className="text-xs text-[#A3A3A3] uppercase tracking-widest mb-3">Film Stock</p>
-        <div className="flex flex-wrap gap-2">
-          {PRESET_NAMES.map((name) => (
-            <button
-              key={name}
-              onClick={() => applyPreset(name)}
-              className={`px-3 py-1.5 text-sm rounded-md border transition-all duration-150 ${
-                activePreset === name
-                  ? "bg-[#171717] text-white border-[#171717]"
-                  : "bg-white text-[#525252] border-[#E5E5E5] hover:border-[#A3A3A3] hover:text-[#171717]"
-              }`}
-            >
-              {name}
-            </button>
-          ))}
-        </div>
+      {/* Preset pills — two groups */}
+      <div className="mb-6 space-y-4">
+        {PRESET_GROUP_NAMES.map((groupName) => (
+          <div key={groupName}>
+            <div className="flex items-center gap-2 mb-2">
+              <p className="text-[10px] text-[#A3A3A3] uppercase tracking-widest font-medium">{groupName}</p>
+              {groupName === "Samma" && (
+                <span className="text-[9px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded tracking-wide">
+                  Original
+                </span>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {PRESET_GROUPS[groupName].map((name) => (
+                <button
+                  key={name}
+                  onClick={() => applyPreset(name)}
+                  className={`px-3 py-1.5 text-sm rounded-md border transition-all duration-150 ${
+                    activePreset === name
+                      ? "bg-[#171717] text-white border-[#171717]"
+                      : "bg-white text-[#525252] border-[#E5E5E5] hover:border-[#A3A3A3] hover:text-[#171717]"
+                  }`}
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Main layout: controls + preview */}
