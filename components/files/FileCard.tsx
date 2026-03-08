@@ -36,15 +36,15 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
   return (
     <div
       className={cn(
-        "flex flex-col p-3 bg-white border border-gray-200 rounded-md transition-all duration-150",
-        isDone && "hover:bg-gray-50",
-        isError && "border-red-100 bg-red-50/50"
+        "flex flex-col p-3 bg-white dark:bg-[#1E1E1E] border border-gray-200 dark:border-[#2A2A2A] rounded-md transition-all duration-150",
+        isDone && "hover:bg-gray-50 dark:hover:bg-[#242424]",
+        isError && "border-red-100 dark:border-red-900/30 bg-red-50/50 dark:bg-red-950/20"
       )}
     >
       {/* Main row */}
       <div className="flex items-center gap-3">
         {/* Thumbnail */}
-        <div className="shrink-0 w-10 h-10 rounded overflow-hidden bg-gray-100 border border-gray-200">
+        <div className="shrink-0 w-10 h-10 rounded overflow-hidden bg-gray-100 dark:bg-[#2A2A2A] border border-gray-200 dark:border-[#3A3A3A]">
           {file.previewUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -54,7 +54,7 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-[10px] text-gray-400 font-mono uppercase">
+              <span className="text-[10px] text-gray-400 dark:text-[#525252] font-mono uppercase">
                 {file.originalFormat}
               </span>
             </div>
@@ -64,7 +64,7 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
         {/* File info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5] truncate">
               {truncate(file.compressedName || file.originalName, 40)}
             </p>
             {file.aiSuggestedName && (
@@ -79,10 +79,10 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
           <div className="flex items-center gap-2 mt-0.5">
             {isDone && file.compressedSize !== undefined ? (
               <>
-                <span className="text-xs text-gray-400 line-through">
+                <span className="text-xs text-gray-400 dark:text-[#525252] line-through">
                   {formatBytes(file.originalSize)}
                 </span>
-                <span className="text-xs text-gray-600">
+                <span className="text-xs text-gray-600 dark:text-[#A3A3A3]">
                   {formatBytes(file.compressedSize)}
                 </span>
                 {file.savedPercent !== undefined && file.savedPercent > 0 && (
@@ -92,7 +92,7 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
                 )}
               </>
             ) : (
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-gray-400 dark:text-[#525252]">
                 {formatBytes(file.originalSize)}
               </span>
             )}
@@ -127,10 +127,10 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
         {/* Status icon */}
         <div className="shrink-0">
           {isQueued && (
-            <Clock className="h-4 w-4 text-gray-300" strokeWidth={1.5} />
+            <Clock className="h-4 w-4 text-gray-300 dark:text-[#525252]" strokeWidth={1.5} />
           )}
           {isProcessing && (
-            <RefreshCw className="h-4 w-4 text-gray-400 animate-spin" strokeWidth={1.5} />
+            <RefreshCw className="h-4 w-4 text-gray-400 dark:text-[#525252] animate-spin" strokeWidth={1.5} />
           )}
           {isDone && (
             <CheckCircle2 className="h-4 w-4 text-success" strokeWidth={1.5} />
@@ -165,7 +165,7 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
               title={showComparison ? "Hide comparison" : "Before/After"}
               onClick={() => setShowComparison(!showComparison)}
             >
-              <Eye className="h-3.5 w-3.5 text-gray-500" strokeWidth={1.5} />
+              <Eye className="h-3.5 w-3.5 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
             </Button>
           )}
 
@@ -176,7 +176,7 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
               title="Download"
               onClick={() => downloadFile(file.id)}
             >
-              <Download className="h-3.5 w-3.5 text-gray-500" strokeWidth={1.5} />
+              <Download className="h-3.5 w-3.5 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
             </Button>
           )}
 
@@ -186,7 +186,7 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
             title="Remove"
             onClick={() => removeFile(file.id)}
           >
-            <X className="h-3.5 w-3.5 text-gray-400 hover:text-gray-700" strokeWidth={1.5} />
+            <X className="h-3.5 w-3.5 text-gray-400 dark:text-[#525252] hover:text-gray-700 dark:hover:text-[#A3A3A3]" strokeWidth={1.5} />
           </Button>
         </div>
       </div>

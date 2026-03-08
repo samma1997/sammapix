@@ -19,11 +19,11 @@ export default function FileList({ onAiRename }: FileListProps) {
   if (items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="h-10 w-10 rounded-lg border border-gray-200 flex items-center justify-center mb-3 bg-gray-50">
-          <ImageOff className="h-5 w-5 text-gray-300" strokeWidth={1.5} />
+        <div className="h-10 w-10 rounded-lg border border-gray-200 dark:border-[#2A2A2A] flex items-center justify-center mb-3 bg-gray-50 dark:bg-[#1E1E1E]">
+          <ImageOff className="h-5 w-5 text-gray-300 dark:text-[#525252]" strokeWidth={1.5} />
         </div>
-        <p className="text-sm text-gray-400">No images yet</p>
-        <p className="text-xs text-gray-300 mt-1">Drop some images above to get started</p>
+        <p className="text-sm text-gray-400 dark:text-[#525252]">No images yet</p>
+        <p className="text-xs text-gray-300 dark:text-[#525252] mt-1">Drop some images above to get started</p>
       </div>
     );
   }
@@ -36,10 +36,10 @@ export default function FileList({ onAiRename }: FileListProps) {
     <div className="space-y-3 animate-fade-in">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-gray-700">
+        <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5]">
           {items.length} {items.length === 1 ? "file" : "files"}
           {hasDoneFiles && (
-            <span className="text-gray-400 font-normal ml-1">
+            <span className="text-gray-400 dark:text-[#525252] font-normal ml-1">
               — {doneFiles.length} done
             </span>
           )}
@@ -48,7 +48,7 @@ export default function FileList({ onAiRename }: FileListProps) {
           variant="ghost"
           size="sm"
           onClick={clearAll}
-          className="text-gray-400 hover:text-gray-700 text-xs"
+          className="text-gray-400 dark:text-[#525252] hover:text-gray-700 dark:hover:text-[#A3A3A3] text-xs"
         >
           <Trash2 className="h-3.5 w-3.5" strokeWidth={1.5} />
           Clear all
@@ -66,11 +66,11 @@ export default function FileList({ onAiRename }: FileListProps) {
       {hasDoneFiles && (
         <div
           className={cn(
-            "pt-3 border-t border-gray-100 flex items-center justify-between",
+            "pt-3 border-t border-gray-100 dark:border-[#2A2A2A] flex items-center justify-between",
             "animate-slide-up"
           )}
         >
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-400 dark:text-[#525252]">
             {doneFiles.length} {doneFiles.length === 1 ? "file" : "files"} ready
           </p>
           <Button

@@ -47,7 +47,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
   };
 
   return (
-    <div className="animate-slide-down border border-gray-200 rounded-md bg-white p-4">
+    <div className="animate-slide-down border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] p-4">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
         {/* Quality slider */}
         <div className="flex-1 min-w-[160px]">
@@ -69,7 +69,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
             <div
               className={cn(
                 "relative w-9 h-5 rounded-full transition-colors duration-150",
-                settings.convertToWebP ? "bg-gray-900" : "bg-gray-200"
+                settings.convertToWebP ? "bg-gray-900" : "bg-gray-200 dark:bg-[#3A3A3A]"
               )}
               onClick={() => setConvertToWebP(!settings.convertToWebP)}
             >
@@ -80,7 +80,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
                 )}
               />
             </div>
-            <span className="text-sm text-gray-600">{d.toolbar.convert_webp}</span>
+            <span className="text-sm text-gray-600 dark:text-[#A3A3A3]">{d.toolbar.convert_webp}</span>
           </label>
 
           {/* AI Rename */}
@@ -88,7 +88,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
             <div
               className={cn(
                 "relative w-9 h-5 rounded-full transition-colors duration-150",
-                settings.aiRenameEnabled ? "bg-brand" : "bg-gray-200"
+                settings.aiRenameEnabled ? "bg-brand" : "bg-gray-200 dark:bg-[#3A3A3A]"
               )}
               onClick={handleAiRenameToggle}
             >
@@ -99,7 +99,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
                 )}
               />
             </div>
-            <span className="text-sm text-gray-600 flex items-center gap-1.5">
+            <span className="text-sm text-gray-600 dark:text-[#A3A3A3] flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-brand" strokeWidth={1.5} />
               {d.toolbar.ai_rename}
             </span>
@@ -108,10 +108,10 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
                 className={cn(
                   "text-xs font-semibold tabular-nums px-1.5 py-0.5 rounded",
                   remaining === 0
-                    ? "bg-red-100 text-red-600"
+                    ? "bg-red-100 text-red-600 dark:bg-red-950/30 dark:text-red-400"
                     : remaining <= 2
-                    ? "bg-orange-50 text-orange-600"
-                    : "bg-gray-100 text-gray-500"
+                    ? "bg-orange-50 text-orange-600 dark:bg-orange-950/30 dark:text-orange-400"
+                    : "bg-gray-100 text-gray-500 dark:bg-[#2A2A2A] dark:text-[#737373]"
                 )}
               >
                 {remaining}/{AI_RENAME_FREE_PER_DAY}
