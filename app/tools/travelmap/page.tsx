@@ -105,6 +105,19 @@ export default function TravelMapPage() {
 
       <TravelMapClient />
 
+      {/* What is TravelMap */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is TravelMap?</h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            TravelMap is a free browser-based tool that reads GPS coordinates from your photo EXIF data and visualizes them on an interactive map powered by OpenStreetMap. Each photo appears as a numbered pin, color-coded by country, connected by a dashed line in chronological order of capture date.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed">
+            TravelMap calculates total distance traveled using the Haversine formula, counts countries visited, and shows a breakdown of photos per country. It supports JPG and HEIC files. No photo data is ever uploaded — only GPS coordinates are sent to the reverse geocoding API to resolve location names.
+          </p>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-3xl mx-auto">
@@ -184,6 +197,46 @@ export default function TravelMapPage() {
           </div>
         </div>
       </section>
+
+      {/* Related guide */}
+      <section className="py-8 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
+            <a href="/blog/travel-map-gps-photos" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+              Turn Your GPS Photos into a Travel Map →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "TravelMap — GPS Photo Travel Map",
+            description:
+              "Visualize your travel photos on an interactive map using GPS metadata. See routes, distances traveled and countries visited. No upload required.",
+            url: "https://sammapix.com/tools/travelmap",
+            applicationCategory: "PhotographyApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            featureList: [
+              "Interactive travel map",
+              "Countries visited counter",
+              "Distance traveled calculation",
+              "GPS EXIF reading",
+            ],
+          }),
+        }}
+      />
     </main>
   );
 }

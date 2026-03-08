@@ -75,6 +75,19 @@ export default function GeoSortPage() {
 
       <GeoSortClient />
 
+      {/* What is GeoSort */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is GeoSort?</h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            GeoSort is a free browser-based tool that reads GPS coordinates from your photo EXIF data and automatically sorts images into folders by country. It processes all files locally — no photos are uploaded to any server. A trip of 200 photos typically requires only 2–3 location API calls due to smart geographic clustering.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed">
+            It supports JPG and HEIC (iPhone format). Photos without GPS coordinates are placed in an <code className="text-xs bg-[#F5F5F5] border border-[#E5E5E5] px-1.5 py-0.5 rounded font-mono">_unsorted/</code> folder. For batches over 150 MB, GeoSort generates a CSV sorting guide instead of a ZIP to avoid re-downloading large RAW files.
+          </p>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-3xl mx-auto">
@@ -142,6 +155,46 @@ export default function GeoSortPage() {
           </div>
         </div>
       </section>
+
+      {/* Related guide */}
+      <section className="py-8 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
+            <a href="/blog/geosort-sort-photos-by-location" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+              GeoSort: Sort Your Photos by Location Automatically →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "GeoSort — GPS Photo Organizer",
+            description:
+              "Free tool that reads GPS EXIF data from photos and sorts them by location, creating folders per city or country. Works 100% in-browser, no uploads.",
+            url: "https://sammapix.com/tools/geosort",
+            applicationCategory: "PhotographyApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            featureList: [
+              "GPS EXIF reading",
+              "Sort by city or country",
+              "Batch rename with location",
+              "Zero uploads",
+            ],
+          }),
+        }}
+      />
     </main>
   );
 }

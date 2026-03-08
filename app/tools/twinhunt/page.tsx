@@ -147,6 +147,18 @@ export default function TwinHuntPage() {
           </div>
         </div>
       </section>
+
+      {/* Related guide */}
+      <section className="py-8 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
+            <a href="/blog/find-duplicate-photos-free" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+              Find and Remove Duplicate Photos Free →
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

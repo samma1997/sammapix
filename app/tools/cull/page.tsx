@@ -68,6 +68,19 @@ export default function CullPage() {
 
       <CullClient />
 
+      {/* What is Cull */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is Cull?</h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            Cull is a free browser-based photo culling tool that lets you review photos up to 10x faster than traditional methods using keyboard shortcuts. Press K to keep a photo, X to reject it, and arrow keys to navigate. When finished, download a ZIP containing only the photos you marked as keep.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed">
+            It supports JPG and HEIC (iPhone format). All processing happens locally in your browser — no photos are uploaded. Go through 100 photos in minutes without touching the mouse.
+          </p>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
         <div className="max-w-3xl mx-auto">
@@ -123,6 +136,46 @@ export default function CullPage() {
           </div>
         </div>
       </section>
+
+      {/* Related guide */}
+      <section className="py-8 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
+            <a href="/blog/how-to-cull-photos-fast" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+              How to Cull Photos Fast: A Practical Workflow →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Cull — Keyboard Photo Review",
+            description:
+              "Fast photo culling tool with keyboard shortcuts. Press K to keep, X to reject photos at up to 10x speed. Batch download kept photos as ZIP.",
+            url: "https://sammapix.com/tools/cull",
+            applicationCategory: "PhotographyApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            featureList: [
+              "Keyboard shortcuts",
+              "Keep/reject workflow",
+              "10x faster culling",
+              "HEIC support",
+            ],
+          }),
+        }}
+      />
     </main>
   );
 }

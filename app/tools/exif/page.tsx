@@ -143,6 +143,18 @@ export default function ExifPage() {
           </div>
         </div>
       </section>
+
+      {/* Related guide */}
+      <section className="py-8 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+            <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
+            <a href="/blog/remove-exif-data-photos" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+              How to Remove EXIF Data from Photos (Protect Your Privacy) →
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
