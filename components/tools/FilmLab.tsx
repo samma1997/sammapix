@@ -36,6 +36,7 @@ interface FilmSettings {
 }
 
 interface ProcessedFile {
+  id: string;
   file: File;
   originalUrl: string;
   resultBlob: Blob | null;
@@ -673,14 +674,35 @@ export default function FilmLab() {
 
   const handleFiles = useCallback((incoming: File[]) => {
     const newEntries: ProcessedFile[] = incoming.map((file) => ({
+      id: `${file.name}-${file.size}-${file.lastModified}-${Math.random()}`,
       file,
-      originalUrl: URL.createObjectURL(file),
+      // For HEIC files the browser cannot render the raw object URL natively.
+      // We use an empty string as a placeholder and replace it asynchronously
+      // once the server-side HEIC→JPEG conversion completes.
+      originalUrl: isHeic(file) ? "" : URL.createObjectURL(file),
       resultBlob: null,
       resultUrl: null,
       error: null,
       processing: false,
     }));
     setFiles((prev) => [...prev, ...newEntries]);
+
+    // Resolve HEIC thumbnails asynchronously
+    newEntries.forEach((entry) => {
+      if (!isHeic(entry.file)) return;
+      heicToObjectUrl(entry.file)
+        .then((url) => {
+          setFiles((prev) =>
+            prev.map((e) =>
+              e.id === entry.id ? { ...e, originalUrl: url } : e
+            )
+          );
+        })
+        .catch(() => {
+          // Conversion failed — leave originalUrl as "" which shows a
+          // spinner indefinitely, already better than a broken image icon.
+        });
+    });
   }, []);
 
   const applyPreset = (name: PresetName) => {
@@ -704,7 +726,8 @@ export default function FilmLab() {
     setFiles((prev) => {
       const next = [...prev];
       const removed = next.splice(idx, 1)[0];
-      URL.revokeObjectURL(removed.originalUrl);
+      // originalUrl may be "" while HEIC conversion is still in flight
+      if (removed.originalUrl) URL.revokeObjectURL(removed.originalUrl);
       if (removed.resultUrl) URL.revokeObjectURL(removed.resultUrl);
       return next;
     });
@@ -769,7 +792,8 @@ export default function FilmLab() {
   useEffect(() => {
     return () => {
       files.forEach((f) => {
-        URL.revokeObjectURL(f.originalUrl);
+        // originalUrl may be "" if HEIC conversion was still in flight
+        if (f.originalUrl) URL.revokeObjectURL(f.originalUrl);
         if (f.resultUrl) URL.revokeObjectURL(f.resultUrl);
       });
     };
@@ -951,15 +975,22 @@ export default function FilmLab() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {files.map((entry, idx) => (
-              <div key={entry.originalUrl} className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white relative group">
+              <div key={entry.id} className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white relative group">
                 {/* Thumbnail */}
                 <div className="relative aspect-video bg-[#FAFAFA] overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={entry.resultUrl ?? entry.originalUrl}
-                    alt={entry.file.name}
-                    className="w-full h-full object-cover"
-                  />
+                  {entry.originalUrl === "" ? (
+                    /* HEIC conversion still in flight — show a spinner */
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-[#D4D4D4] border-t-[#171717] rounded-full animate-spin" />
+                    </div>
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={entry.resultUrl ?? entry.originalUrl}
+                      alt={entry.file.name}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
 
                   {/* Processing overlay */}
                   {entry.processing && (
