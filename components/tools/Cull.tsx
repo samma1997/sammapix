@@ -18,6 +18,7 @@ import {
   Camera,
 } from "lucide-react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -114,6 +115,10 @@ const PREP_MESSAGES = [
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function CullClient() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const cullLimit = isPro ? 500 : MAX_CULL_FREE;
+
   const [uiState, setUiState] = useState<UIState>("idle");
   const [photos, setPhotos] = useState<PhotoEntry[]>([]);
   const [decisions, setDecisions] = useState<FileDecision[]>([]);
@@ -201,7 +206,7 @@ export default function CullClient() {
     );
     if (imageFiles.length === 0) return;
 
-    const accepted = imageFiles.slice(0, MAX_CULL_FREE);
+    const accepted = imageFiles.slice(0, cullLimit);
 
     setPrepTotal(accepted.length);
     setPrepDone(0);
@@ -222,7 +227,7 @@ export default function CullClient() {
     setDecisions(new Array(accepted.length).fill(null) as FileDecision[]);
     setCurrentIndex(0);
     setUiState("reviewing");
-  }, []);
+  }, [cullLimit]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -355,12 +360,19 @@ export default function CullClient() {
                 Navigate
               </span>
             </div>
-            <p className="text-[11px] text-[#C4C4C4]">
-              Free: up to {MAX_CULL_FREE} files &middot;{" "}
-              <Link href="/pricing" className="underline hover:text-[#737373]">
-                Pro: 500
-              </Link>
-            </p>
+            {isPro ? (
+              <span className="text-[11px] text-[#A3A3A3]">
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                Up to 500 photos
+              </span>
+            ) : (
+              <p className="text-[11px] text-[#C4C4C4]">
+                Free: up to {MAX_CULL_FREE} files &middot;{" "}
+                <Link href="/pricing" className="underline hover:text-[#737373]">
+                  Pro: 500
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       )}

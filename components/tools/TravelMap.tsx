@@ -12,6 +12,7 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -128,10 +129,14 @@ function colorForCountry(country: string, colorMap: Map<string, string>): string
 }
 
 const MAX_TRAVELMAP_FREE = 100;
+const MAX_TRAVELMAP_PRO = 500;
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function TravelMapClient() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const travelLimit = isPro ? MAX_TRAVELMAP_PRO : MAX_TRAVELMAP_FREE;
   const [uiState, setUiState] = useState<UIState>("idle");
   const [progressMessage, setProgressMessage] = useState("");
   const [progressPercent, setProgressPercent] = useState(0);
@@ -365,12 +370,14 @@ export default function TravelMapClient() {
     const imageFiles = files.filter((f) => f.type.startsWith("image/") || f.name.toLowerCase().endsWith(".heic") || f.name.toLowerCase().endsWith(".heif"));
     if (imageFiles.length === 0) return;
 
-    const accepted = imageFiles.slice(0, MAX_TRAVELMAP_FREE);
+    const accepted = imageFiles.slice(0, travelLimit);
     const errorMessages: string[] = [];
 
-    if (imageFiles.length > MAX_TRAVELMAP_FREE) {
+    if (imageFiles.length > travelLimit) {
       errorMessages.push(
-        `Free plan: only the first ${MAX_TRAVELMAP_FREE} photos were processed. Upgrade to Pro to plot up to 500 photos.`
+        isPro
+          ? `Pro plan: only the first ${travelLimit} photos were processed.`
+          : `Free plan: only the first ${travelLimit} photos were processed. Upgrade to Pro to plot up to 500 photos.`
       );
     }
 
@@ -560,7 +567,7 @@ export default function TravelMapClient() {
     }
 
     setGeocodingState("done");
-  }, []);
+  }, [travelLimit, isPro]);
 
   // ── Event handlers ─────────────────────────────────────────────────────────
 
@@ -728,12 +735,19 @@ export default function TravelMapClient() {
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
               All processing happens in your browser — photos never leave your device
             </p>
-            <p className="text-[11px] text-[#C4C4C4]">
-              Free: up to {MAX_TRAVELMAP_FREE} photos &middot;{" "}
-              <Link href="/pricing" className="underline hover:text-[#737373]">
-                Pro: 500
-              </Link>
-            </p>
+            {isPro ? (
+              <span className="text-[11px] text-[#A3A3A3]">
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                Up to 500 photos
+              </span>
+            ) : (
+              <p className="text-[11px] text-[#C4C4C4]">
+                Free: up to {MAX_TRAVELMAP_FREE} photos &middot;{" "}
+                <Link href="/pricing" className="underline hover:text-[#737373]">
+                  Pro: 500
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       )}

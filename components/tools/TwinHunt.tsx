@@ -15,6 +15,7 @@ import {
   Copy,
 } from "lucide-react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -289,6 +290,10 @@ function buildGroups(
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function TwinHunt() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const twinLimit = isPro ? MAX_PRO : MAX_FREE;
+
   const [uiState, setUiState] = useState<UIState>("idle");
   const [photos, setPhotos] = useState<PhotoEntry[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -344,7 +349,7 @@ export default function TwinHunt() {
     );
     if (imageFiles.length < 2) return;
 
-    const accepted = imageFiles.slice(0, MAX_FREE);
+    const accepted = imageFiles.slice(0, twinLimit);
     abortRef.current = false;
 
     // Initialize entries
@@ -422,7 +427,7 @@ export default function TwinHunt() {
     setToDelete(newToDelete);
     setUiState("results");
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sensitivity]);
+  }, [sensitivity, twinLimit]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -561,12 +566,19 @@ export default function TwinHunt() {
                 Drop JPG, PNG, WebP, HEIC &mdash; perceptual hashing runs in your browser
               </p>
             </div>
-            <p className="text-[11px] text-[#C4C4C4]">
-              Free: up to {MAX_FREE} files &middot;{" "}
-              <Link href="/pricing" className="underline hover:text-[#737373]">
-                Pro: {MAX_PRO}
-              </Link>
-            </p>
+            {isPro ? (
+              <span className="text-[11px] text-[#A3A3A3]">
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                Up to 500 photos
+              </span>
+            ) : (
+              <p className="text-[11px] text-[#C4C4C4]">
+                Free: up to {MAX_FREE} files &middot;{" "}
+                <Link href="/pricing" className="underline hover:text-[#737373]">
+                  Pro: {MAX_PRO}
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       )}

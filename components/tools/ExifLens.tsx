@@ -15,7 +15,8 @@ import {
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Link from "next/link";
-import { MAX_FILES_FREE } from "@/lib/constants";
+import { useSession } from "next-auth/react";
+import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 
 // ── Lazy library loaders (browser-only) ───────────────────────────────────────
 
@@ -360,6 +361,10 @@ const ACCEPTED_MIME = [
 type CleanMode = "gps" | "all";
 
 export default function ExifLens() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const exifLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+
   const [uiState, setUiState] = useState<UIState>("idle");
   const [files, setFiles] = useState<ProcessedFile[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -379,7 +384,7 @@ export default function ExifLens() {
 
   const processFiles = useCallback(
     async (rawFiles: File[]) => {
-      const accepted = rawFiles.filter(isAccepted).slice(0, MAX_FILES_FREE);
+      const accepted = rawFiles.filter(isAccepted).slice(0, exifLimit);
       if (accepted.length === 0) return;
 
       setUiState("parsing");
@@ -421,7 +426,7 @@ export default function ExifLens() {
       setFiles(processed);
       setUiState("results");
     },
-    [isAccepted]
+    [isAccepted, exifLimit]
   );
 
   const handleDrop = useCallback(
@@ -576,12 +581,19 @@ export default function ExifLens() {
               Your photos never leave your device — all processing happens in
               your browser
             </p>
-            <p className="text-[11px] text-[#C4C4C4]">
-              Free: up to {MAX_FILES_FREE} files &middot;{" "}
-              <Link href="/pricing" className="underline hover:text-[#737373]">
-                Pro: 500
-              </Link>
-            </p>
+            {isPro ? (
+              <span className="text-[11px] text-[#A3A3A3]">
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded mr-1">PRO</span>
+                Up to 500 photos
+              </span>
+            ) : (
+              <p className="text-[11px] text-[#C4C4C4]">
+                Free: up to {MAX_FILES_FREE} files &middot;{" "}
+                <Link href="/pricing" className="underline hover:text-[#737373]">
+                  Pro: 500
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       )}
