@@ -625,7 +625,7 @@ function DropZone({ onFiles }: DropZoneProps) {
         <p className="text-sm text-[#525252]">
           Drop photos here or <span className="text-[#171717] font-medium">click to browse</span>
         </p>
-        <p className="text-xs text-[#A3A3A3] mt-1">JPG, PNG, WebP — multiple files supported</p>
+        <p className="text-xs text-[#A3A3A3] mt-1">JPG, PNG, WebP, HEIC — multiple files supported</p>
       </div>
     </div>
   );
