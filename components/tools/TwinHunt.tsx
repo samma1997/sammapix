@@ -530,7 +530,7 @@ export default function TwinHunt() {
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
               ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
@@ -555,11 +555,11 @@ export default function TwinHunt() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
               <Copy className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Find duplicate and near-duplicate photos
               </p>
               <p className="text-xs text-[#737373]">
@@ -585,18 +585,18 @@ export default function TwinHunt() {
 
       {/* ── Processing ─────────────────────────────────────────────────────── */}
       {uiState === "processing" && (
-        <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
           <div className="max-w-sm mx-auto">
-            <p className="text-sm font-medium text-[#171717] mb-1 text-center">
+            <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1 text-center">
               Analyzing photo {processingIdx + 1} of {totalPhotos}...
             </p>
             <p className="text-xs text-[#737373] text-center mb-5">
               Computing perceptual hash &mdash; this runs entirely in your browser
             </p>
             {/* Progress bar */}
-            <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#171717] rounded-full transition-all duration-200"
+                className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-200"
                 style={{
                   width: totalPhotos > 0
                     ? `${((processingIdx + 1) / totalPhotos) * 100}%`
@@ -616,9 +616,9 @@ export default function TwinHunt() {
         <div className="space-y-5">
 
           {/* Sensitivity slider */}
-          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-white">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-white dark:bg-[#191919]">
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <span className="text-xs font-semibold text-[#525252] shrink-0">Sensitivity</span>
+              <span className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] shrink-0">Sensitivity</span>
               <div className="flex items-center gap-1 flex-1">
                 {(["strict", "normal", "loose"] as SensitivityLevel[]).map((level) => (
                   <button
@@ -627,8 +627,8 @@ export default function TwinHunt() {
                     className={[
                       "flex-1 py-1.5 text-xs font-medium rounded border transition-colors capitalize",
                       sensitivity === level
-                        ? "bg-[#171717] text-white border-[#171717]"
-                        : "bg-white text-[#737373] border-[#E5E5E5] hover:bg-[#F5F5F5]",
+                        ? "bg-[#171717] dark:bg-white text-white dark:text-[#171717] border-[#171717] dark:border-white"
+                        : "bg-white dark:bg-[#252525] text-[#737373] dark:text-[#A3A3A3] border-[#E5E5E5] dark:border-[#333] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]",
                     ].join(" ")}
                   >
                     {level}
@@ -642,7 +642,7 @@ export default function TwinHunt() {
               </div>
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#E5E5E5] rounded text-xs text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors shrink-0"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#E5E5E5] dark:border-[#333] rounded text-xs text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#252525] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors shrink-0"
               >
                 <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
                 New scan
@@ -652,11 +652,11 @@ export default function TwinHunt() {
 
           {/* Summary header */}
           {groups.length === 0 ? (
-            <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white text-center">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919] text-center">
               <div className="h-10 w-10 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] flex items-center justify-center mx-auto mb-3">
                 <Check className="h-5 w-5 text-[#16A34A]" strokeWidth={2} />
               </div>
-              <p className="text-sm font-semibold text-[#171717] mb-1">
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
                 No duplicates found in your {totalPhotos} photo{totalPhotos !== 1 ? "s" : ""}
               </p>
               <p className="text-xs text-[#737373]">
@@ -668,7 +668,7 @@ export default function TwinHunt() {
               {/* Stats bar */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-1">
                 <div>
-                  <span className="text-sm font-semibold text-[#171717]">
+                  <span className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
                     {groups.length} duplicate group{groups.length !== 1 ? "s" : ""} found
                   </span>
                   {totalDeletable > 0 && (
@@ -701,7 +701,7 @@ export default function TwinHunt() {
               </div>
 
               {/* Footer note */}
-              <div className="flex items-start gap-2.5 px-1 py-3 border-t border-[#E5E5E5]">
+              <div className="flex items-start gap-2.5 px-1 py-3 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
                 <FileText className="h-4 w-4 text-[#A3A3A3] shrink-0 mt-0.5" strokeWidth={1.5} />
                 <p className="text-xs text-[#737373] leading-relaxed">
                   TwinHunt can only show you duplicates &mdash; actual deletion must be done in
@@ -746,10 +746,10 @@ const GroupCard = ({
   onToggleDelete,
 }: GroupCardProps) => {
   return (
-    <div className="border border-[#E5E5E5] rounded-lg bg-white overflow-hidden">
+    <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#191919] overflow-hidden">
       {/* Group header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] bg-[#FAFAFA]">
-        <span className="text-xs font-medium text-[#525252]">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
+        <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
           Group {groupIdx + 1} &mdash; {group.indices.length} photos
         </span>
         <span
@@ -799,8 +799,8 @@ const PhotoThumbnail = ({ entry, markedForDelete, onToggle }: PhotoThumbnailProp
       {/* Thumbnail box */}
       <div
         className={[
-          "relative rounded border overflow-hidden bg-[#F5F5F5] transition-all",
-          markedForDelete ? "border-[#DC2626] opacity-60" : "border-[#E5E5E5]",
+          "relative rounded border overflow-hidden bg-[#F5F5F5] dark:bg-[#252525] transition-all",
+          markedForDelete ? "border-[#DC2626] opacity-60" : "border-[#E5E5E5] dark:border-[#2A2A2A]",
         ].join(" ")}
         style={{ width: "150px", height: "150px" }}
       >
@@ -836,7 +836,7 @@ const PhotoThumbnail = ({ entry, markedForDelete, onToggle }: PhotoThumbnailProp
       {/* File info */}
       <div className="space-y-0.5">
         <p
-          className="text-[11px] font-medium text-[#171717] truncate"
+          className="text-[11px] font-medium text-[#171717] dark:text-[#E5E5E5] truncate"
           title={entry.file.name}
         >
           {entry.file.name}
@@ -860,12 +860,12 @@ const PhotoThumbnail = ({ entry, markedForDelete, onToggle }: PhotoThumbnailProp
           className={[
             "h-4 w-4 rounded-sm border flex items-center justify-center transition-colors shrink-0",
             markedForDelete
-              ? "bg-[#171717] border-[#171717]"
-              : "bg-white border-[#D4D4D4] group-hover:border-[#A3A3A3]",
+              ? "bg-[#171717] dark:bg-white border-[#171717] dark:border-white"
+              : "bg-white dark:bg-[#252525] border-[#D4D4D4] dark:border-[#555] group-hover:border-[#A3A3A3]",
           ].join(" ")}
         >
           {markedForDelete && (
-            <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} />
+            <Check className="h-2.5 w-2.5 text-white dark:text-[#171717]" strokeWidth={3} />
           )}
         </span>
         <span className="text-[11px] text-[#737373]">

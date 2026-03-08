@@ -462,7 +462,7 @@ function FilmSlider({ label, value, min, max, onChange }: SliderProps) {
         </span>
       </div>
       <div className="relative h-5 flex items-center">
-        <div className="w-full h-1 bg-[#E5E5E5] rounded-full relative">
+        <div className="w-full h-1 bg-[#E5E5E5] dark:bg-[#333] rounded-full relative">
           {/* Filled track */}
           {min < 0 ? (
             // Bipolar slider — fill from center
@@ -497,7 +497,7 @@ function FilmSlider({ label, value, min, max, onChange }: SliderProps) {
         />
         {/* Thumb indicator */}
         <div
-          className="absolute w-3.5 h-3.5 bg-white border border-[#D4D4D4] rounded-full shadow-sm pointer-events-none"
+          className="absolute w-3.5 h-3.5 bg-white dark:bg-[#333] border border-[#D4D4D4] dark:border-[#555] rounded-full shadow-sm pointer-events-none"
           style={{ left: `calc(${pct}% - 7px)` }}
         />
       </div>
@@ -539,8 +539,8 @@ function HuePicker({ label, value, onChange }: HuePickerProps) {
             onClick={() => onChange(p.value)}
             className={`w-5 h-5 rounded border transition-all ${
               value === p.value
-                ? "border-[#171717] scale-110"
-                : "border-[#E5E5E5] hover:border-[#A3A3A3]"
+                ? "border-[#171717] dark:border-white scale-110"
+                : "border-[#E5E5E5] dark:border-[#444] hover:border-[#A3A3A3]"
             }`}
             style={{ backgroundColor: p.color }}
             aria-label={p.label}
@@ -608,8 +608,8 @@ function DropZone({ onFiles }: DropZoneProps) {
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
       className={`relative flex flex-col items-center justify-center gap-3 rounded-lg border-[1.5px] border-dashed py-12 px-6 cursor-pointer transition-colors ${
         dragging
-          ? "border-[#6366F1] bg-[#EEF2FF]"
-          : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]"
+          ? "border-[#6366F1] bg-[#EEF2FF] dark:bg-[#1e1e3f]"
+          : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
       }`}
     >
       <input
@@ -623,8 +623,8 @@ function DropZone({ onFiles }: DropZoneProps) {
       />
       <Upload className="h-6 w-6 text-[#A3A3A3]" strokeWidth={1.5} />
       <div className="text-center">
-        <p className="text-sm text-[#525252]">
-          Drop photos here or <span className="text-[#171717] font-medium">click to browse</span>
+        <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
+          Drop photos here or <span className="text-[#171717] dark:text-[#E5E5E5] font-medium">click to browse</span>
         </p>
         <p className="text-xs text-[#A3A3A3] mt-1">JPG, PNG, WebP, HEIC — multiple files supported</p>
       </div>
@@ -835,8 +835,8 @@ export default function FilmLab() {
                   onClick={() => applyPreset(name)}
                   className={`px-3 py-1.5 text-sm rounded-md border transition-all duration-150 ${
                     activePreset === name
-                      ? "bg-[#171717] text-white border-[#171717]"
-                      : "bg-white text-[#525252] border-[#E5E5E5] hover:border-[#A3A3A3] hover:text-[#171717]"
+                      ? "bg-[#171717] text-white border-[#171717] dark:bg-white dark:text-[#171717] dark:border-white"
+                      : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] border-[#E5E5E5] dark:border-[#333] hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
                   }`}
                 >
                   {name}
@@ -851,7 +851,7 @@ export default function FilmLab() {
       <div className="grid grid-cols-1 sm:grid-cols-[260px_1fr] gap-6 mb-6">
 
         {/* Controls panel */}
-        <div className="space-y-4 border border-[#E5E5E5] rounded-lg p-4 bg-white">
+        <div className="space-y-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-white dark:bg-[#191919]">
           <p className="text-xs text-[#A3A3A3] uppercase tracking-widest">Manual Controls</p>
 
           {/* Basic sliders */}
@@ -869,10 +869,10 @@ export default function FilmLab() {
           </div>
 
           {/* Advanced: split toning */}
-          <div className="border-t border-[#E5E5E5] pt-3">
+          <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-3">
             <button
               onClick={() => setShowAdvanced((v) => !v)}
-              className="flex items-center gap-1.5 text-xs text-[#525252] hover:text-[#171717] transition-colors w-full"
+              className="flex items-center gap-1.5 text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors w-full"
             >
               Split Toning
               {showAdvanced
@@ -901,7 +901,7 @@ export default function FilmLab() {
         {/* Preview area */}
         <div className="flex flex-col gap-3">
           {/* Preview canvas */}
-          <div className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-[#FAFAFA] flex items-center justify-center min-h-[220px] relative">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] flex items-center justify-center min-h-[220px] relative">
             {previewUrl ? (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -911,14 +911,14 @@ export default function FilmLab() {
                   className="w-full h-full object-contain max-h-72"
                 />
                 {previewLoading && (
-                  <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-                    <div className="w-5 h-5 border-2 border-[#171717] border-t-transparent rounded-full animate-spin" />
+                  <div className="absolute inset-0 bg-white/60 dark:bg-black/60 flex items-center justify-center">
+                    <div className="w-5 h-5 border-2 border-[#171717] dark:border-white border-t-transparent rounded-full animate-spin" />
                   </div>
                 )}
               </>
             ) : (
               <div className="flex flex-col items-center gap-2 text-center p-6">
-                <div className="w-10 h-10 rounded-md border border-[#E5E5E5] bg-white flex items-center justify-center">
+                <div className="w-10 h-10 rounded-md border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                     <rect x="2" y="2" width="14" height="14" rx="2" stroke="#D4D4D4" strokeWidth="1.5"/>
                     <circle cx="6.5" cy="6.5" r="1.5" fill="#D4D4D4"/>
@@ -936,8 +936,8 @@ export default function FilmLab() {
           {files.length === 0 ? (
             <DropZone onFiles={handleFiles} />
           ) : (
-            <div className="border border-dashed border-[#E5E5E5] rounded-lg p-3 flex items-center gap-2 cursor-pointer hover:bg-[#FAFAFA] transition-colors">
-              <label className="flex items-center gap-2 cursor-pointer w-full text-xs text-[#525252]">
+            <div className="border border-dashed border-[#E5E5E5] dark:border-[#333] rounded-lg p-3 flex items-center gap-2 cursor-pointer hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors">
+              <label className="flex items-center gap-2 cursor-pointer w-full text-xs text-[#525252] dark:text-[#A3A3A3]">
                 <Upload className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
                 Add more photos
                 <input
@@ -975,13 +975,13 @@ export default function FilmLab() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {files.map((entry, idx) => (
-              <div key={entry.id} className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white relative group">
+              <div key={entry.id} className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-white dark:bg-[#1E1E1E] relative group">
                 {/* Thumbnail */}
-                <div className="relative aspect-video bg-[#FAFAFA] overflow-hidden">
+                <div className="relative aspect-video bg-[#FAFAFA] dark:bg-[#252525] overflow-hidden">
                   {entry.originalUrl === "" ? (
                     /* HEIC conversion still in flight — show a spinner */
                     <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-[#D4D4D4] border-t-[#171717] rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-[#D4D4D4] dark:border-[#555] border-t-[#171717] dark:border-t-white rounded-full animate-spin" />
                     </div>
                   ) : (
                     /* eslint-disable-next-line @next/next/no-img-element */
@@ -994,8 +994,8 @@ export default function FilmLab() {
 
                   {/* Processing overlay */}
                   {entry.processing && (
-                    <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-[#171717] border-t-transparent rounded-full animate-spin" />
+                    <div className="absolute inset-0 bg-white/70 dark:bg-black/70 flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-[#171717] dark:border-white border-t-transparent rounded-full animate-spin" />
                     </div>
                   )}
 
@@ -1015,7 +1015,7 @@ export default function FilmLab() {
                   {/* Remove button */}
                   <button
                     onClick={() => removeFile(idx)}
-                    className="absolute top-1.5 right-1.5 w-5 h-5 bg-white border border-[#E5E5E5] rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-1.5 right-1.5 w-5 h-5 bg-white dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                     aria-label="Remove photo"
                   >
                     <X className="h-3 w-3 text-[#525252]" strokeWidth={1.5} />
@@ -1023,7 +1023,7 @@ export default function FilmLab() {
                 </div>
 
                 {/* Info row */}
-                <div className="px-2.5 py-2 flex items-center justify-between gap-1">
+                <div className="px-2.5 py-2 flex items-center justify-between gap-1 bg-white dark:bg-[#1E1E1E]">
                   <span className="text-[11px] text-[#A3A3A3] truncate flex-1">
                     {entry.file.name}
                   </span>
@@ -1049,7 +1049,7 @@ export default function FilmLab() {
           <button
             onClick={processBatch}
             disabled={batchProcessing}
-            className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {batchProcessing ? (
               <>
@@ -1066,7 +1066,7 @@ export default function FilmLab() {
           {batchDone && (
             <button
               onClick={downloadZip}
-              className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-white text-[#171717] border border-[#E5E5E5] rounded-md hover:bg-[#F5F5F5] hover:border-[#A3A3A3] transition-colors"
+              className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#333] rounded-md hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:border-[#A3A3A3] transition-colors"
             >
               <Archive className="h-4 w-4" strokeWidth={1.5} />
               Download ZIP

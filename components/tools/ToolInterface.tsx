@@ -63,8 +63,8 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
 
           {/* Header tools */}
           <div className="mb-8">
-            <div className="w-full h-px bg-gray-200 my-2" />
-            <p className="text-xs text-gray-400 mb-4">
+            <div className="w-full h-px bg-gray-200 dark:bg-[#2A2A2A] my-2" />
+            <p className="text-xs text-gray-400 dark:text-[#737373] mb-4">
               Free browser-based tools. Nothing leaves your device.
             </p>
 
@@ -77,7 +77,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
                     href={tool.href}
                     className={cn(
                       "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors",
-                      "border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 bg-white"
+                      "border-gray-200 dark:border-[#2A2A2A] text-gray-700 dark:text-[#A3A3A3] hover:border-gray-400 dark:hover:border-[#444] hover:text-gray-900 dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E]"
                     )}
                   >
                     {tool.name}
@@ -85,11 +85,11 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
                 ) : (
                   <span
                     key={tool.href}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-dashed border-gray-200 text-gray-400 cursor-default"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-dashed border-gray-200 dark:border-[#2A2A2A] text-gray-400 dark:text-[#737373] cursor-default"
                   >
                     {tool.name}
                     {tool.badge && (
-                      <span className="text-[10px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">
+                      <span className="text-[10px] bg-gray-100 dark:bg-[#252525] text-gray-400 dark:text-[#737373] px-1.5 py-0.5 rounded">
                         {tool.badge}
                       </span>
                     )}
@@ -120,7 +120,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
 
       {/* ── Features ── */}
       {!hasFiles && (
-        <section className="py-20 px-4 sm:px-6 border-t border-gray-100">
+        <section className="py-20 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <FeatureCard
@@ -148,16 +148,16 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
       {!hasFiles && (
         <section className="py-12 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
-            <div className="border border-gray-200 rounded-md p-6 bg-gray-50">
+            <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md p-6 bg-gray-50 dark:bg-[#1E1E1E]">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <div className="h-10 w-10 rounded-md border border-gray-200 bg-white flex items-center justify-center shrink-0">
-                  <Lock className="h-5 w-5 text-gray-600" strokeWidth={1.5} />
+                <div className="h-10 w-10 rounded-md border border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#252525] flex items-center justify-center shrink-0">
+                  <Lock className="h-5 w-5 text-gray-600 dark:text-[#A3A3A3]" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">
                     {d.privacy.title}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-[#737373]">
                     {d.privacy.desc}
                   </p>
                 </div>
@@ -176,16 +176,16 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
 
       {/* ── CTA ── */}
       {!hasFiles && (
-        <section className="py-16 px-4 sm:px-6 border-t border-gray-100">
+        <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-3 tracking-tight">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3 tracking-tight">
               {d.pro_banner.title}
             </h2>
-            <p className="text-gray-500 mb-6 text-sm leading-relaxed">
+            <p className="text-gray-500 dark:text-[#737373] mb-6 text-sm leading-relaxed">
               {d.pro_banner.desc}
             </p>
             <Link href="/pricing">
-              <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+              <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#E5E5E5] transition-colors">
                 {d.pro_banner.cta}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </button>
@@ -241,20 +241,20 @@ function FeatureCard({ icon, title, description, highlight }: FeatureCardProps) 
   return (
     <div
       className={cn(
-        "p-5 border border-gray-200 rounded-md bg-white transition-colors",
-        highlight && "border-indigo-200 bg-brand-light/30"
+        "p-5 border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] transition-colors",
+        highlight && "border-indigo-200 dark:border-indigo-900 bg-brand-light/30 dark:bg-indigo-950/20"
       )}
     >
       <div
         className={cn(
           "h-9 w-9 rounded-md border flex items-center justify-center mb-4",
-          highlight ? "border-indigo-200 bg-white" : "border-gray-200 bg-gray-50"
+          highlight ? "border-indigo-200 dark:border-indigo-900 bg-white dark:bg-[#252525]" : "border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#252525]"
         )}
       >
         {icon}
       </div>
-      <h3 className="text-sm font-semibold text-gray-900 mb-1.5">{title}</h3>
-      <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+      <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1.5">{title}</h3>
+      <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed">{description}</p>
     </div>
   );
 }

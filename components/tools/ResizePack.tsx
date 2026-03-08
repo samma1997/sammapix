@@ -798,7 +798,7 @@ export default function ResizePack() {
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
               ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
@@ -823,14 +823,14 @@ export default function ResizePack() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
               <ImageIcon
                 className="h-6 w-6 text-[#737373]"
                 strokeWidth={1.5}
               />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Drop images to resize
               </p>
               <p className="text-xs text-[#737373]">
@@ -861,16 +861,16 @@ export default function ResizePack() {
 
       {/* ── Config: mode selector + settings ───────────────────────────────── */}
       {uiState === "config" && (
-        <div className="border border-[#E5E5E5] rounded-lg bg-white overflow-hidden">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#191919] overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5]">
-            <span className="text-xs font-medium text-[#525252]">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
               {pendingFiles.length} image
               {pendingFiles.length !== 1 ? "s" : ""} ready to resize
             </span>
             <button
               onClick={handleReset}
-              className="text-xs text-[#737373] hover:text-[#171717] transition-colors"
+              className="text-xs text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
             >
               Clear
             </button>
@@ -880,17 +880,17 @@ export default function ResizePack() {
 
             {/* Mode toggle */}
             <div>
-              <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-3">
+              <p className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide mb-3">
                 Resize mode
               </p>
-              <div className="inline-flex rounded-md border border-[#E5E5E5] overflow-hidden">
+              <div className="inline-flex rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden">
                 <button
                   onClick={() => setMode("pixel")}
                   className={[
                     "px-4 py-2 text-sm transition-colors",
                     mode === "pixel"
-                      ? "bg-[#171717] text-white"
-                      : "bg-white text-[#525252] hover:bg-[#F5F5F5]",
+                      ? "bg-[#171717] text-white dark:bg-white dark:text-[#171717]"
+                      : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]",
                   ].join(" ")}
                 >
                   Pixel
@@ -898,10 +898,10 @@ export default function ResizePack() {
                 <button
                   onClick={() => setMode("percentage")}
                   className={[
-                    "px-4 py-2 text-sm border-l border-[#E5E5E5] transition-colors",
+                    "px-4 py-2 text-sm border-l border-[#E5E5E5] dark:border-[#2A2A2A] transition-colors",
                     mode === "percentage"
-                      ? "bg-[#171717] text-white"
-                      : "bg-white text-[#525252] hover:bg-[#F5F5F5]",
+                      ? "bg-[#171717] text-white dark:bg-white dark:text-[#171717]"
+                      : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]",
                   ].join(" ")}
                 >
                   Percentage
@@ -926,7 +926,7 @@ export default function ResizePack() {
                       onChange={(e) =>
                         handleWidthChange(Number(e.target.value))
                       }
-                      className="w-28 px-3 py-2 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717]"
+                      className="w-28 px-3 py-2 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525]"
                     />
                   </div>
 
@@ -941,8 +941,8 @@ export default function ResizePack() {
                       className={[
                         "flex items-center justify-center h-8 w-8 rounded-md border transition-colors",
                         lockAspect
-                          ? "border-[#171717] bg-[#F5F5F5] text-[#171717]"
-                          : "border-[#E5E5E5] bg-white text-[#A3A3A3] hover:border-[#A3A3A3]",
+                          ? "border-[#171717] dark:border-white bg-[#F5F5F5] dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5]"
+                          : "border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#252525] text-[#A3A3A3] hover:border-[#A3A3A3]",
                       ].join(" ")}
                     >
                       {lockAspect ? (
@@ -969,8 +969,8 @@ export default function ResizePack() {
                       className={[
                         "w-28 px-3 py-2 text-sm border rounded-md focus:outline-none text-[#171717]",
                         lockAspect
-                          ? "border-[#E5E5E5] bg-[#FAFAFA] text-[#A3A3A3] cursor-not-allowed"
-                          : "border-[#E5E5E5] focus:border-[#6366F1]",
+                          ? "border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E] text-[#A3A3A3] cursor-not-allowed"
+                          : "border-[#E5E5E5] dark:border-[#2A2A2A] focus:border-[#6366F1] dark:bg-[#252525] dark:text-[#E5E5E5]",
                       ].join(" ")}
                     />
                   </div>
@@ -998,8 +998,8 @@ export default function ResizePack() {
                           widthVal === preset.w &&
                           heightVal === preset.h &&
                           !lockAspect
-                            ? "border-[#171717] bg-[#171717] text-white"
-                            : "border-[#E5E5E5] bg-white text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717]",
+                            ? "border-[#171717] bg-[#171717] text-white dark:border-white dark:bg-white dark:text-[#171717]"
+                            : "border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
                         ].join(" ")}
                       >
                         {preset.label}
@@ -1036,7 +1036,7 @@ export default function ResizePack() {
                           Math.min(200, Math.max(1, Number(e.target.value)))
                         )
                       }
-                      className="w-16 px-2 py-1.5 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] text-center"
+                      className="w-16 px-2 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525] text-center"
                     />
                     <span className="text-sm text-[#737373]">%</span>
                   </div>
@@ -1058,7 +1058,7 @@ export default function ResizePack() {
             {/* Fit mode — solo in pixel mode con lock OFF */}
             {mode === "pixel" && !lockAspect && (
               <div>
-                <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-3">
+                <p className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide mb-3">
                   Fit mode
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -1088,8 +1088,8 @@ export default function ResizePack() {
                       className={[
                         "px-3 py-1.5 text-[11px] border rounded-md transition-colors",
                         fitMode === opt.value
-                          ? "border-[#171717] bg-[#171717] text-white"
-                          : "border-[#E5E5E5] bg-white text-[#525252] hover:border-[#A3A3A3]",
+                          ? "border-[#171717] bg-[#171717] text-white dark:border-white dark:bg-white dark:text-[#171717]"
+                          : "border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3]",
                       ].join(" ")}
                     >
                       {opt.label}
@@ -1112,7 +1112,7 @@ export default function ResizePack() {
               <button
                 onClick={() => shouldShowCrop ? handleEnterCrop() : handleResize(false)}
                 disabled={pendingFiles.length === 0}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {shouldShowCrop && <Crop className="h-3.5 w-3.5" strokeWidth={1.5} />}
                 {shouldShowCrop
@@ -1127,15 +1127,15 @@ export default function ResizePack() {
 
       {/* ── Crop: interactive crop step ────────────────────────────────────── */}
       {uiState === "crop" && (
-        <div className="border border-[#E5E5E5] rounded-lg bg-white overflow-hidden">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#191919] overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5]">
-            <span className="text-xs font-medium text-[#525252]">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
               Position crop area
             </span>
             <button
               onClick={() => setUiState("config")}
-              className="text-xs text-[#737373] hover:text-[#171717] transition-colors"
+              className="text-xs text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
             >
               Back to settings
             </button>
@@ -1171,13 +1171,13 @@ export default function ResizePack() {
               <button
                 onClick={() => handleResize(true)}
                 disabled={pendingFiles.length === 0}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Resize now — apply to all photos
               </button>
               <button
                 onClick={() => handleResize(false)}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E5E5E5] bg-white text-[#525252] text-sm rounded-md hover:border-[#A3A3A3] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] text-sm rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
               >
                 Use center crop instead
               </button>
@@ -1188,20 +1188,20 @@ export default function ResizePack() {
 
       {/* ── Processing: progress bar ────────────────────────────────────────── */}
       {uiState === "processing" && (
-        <div className="border border-[#E5E5E5] rounded-lg bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#191919]">
           <div className="flex flex-col items-center justify-center gap-6 px-8 py-16 text-center">
             <div className="relative flex items-center justify-center h-20 w-20">
-              <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center">
+              <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] flex items-center justify-center">
                 <ImageIcon
                   className="h-7 w-7 text-[#525252]"
                   strokeWidth={1.5}
                 />
               </div>
-              <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] border-t-[#171717] animate-spin" />
+              <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] dark:border-[#333] border-t-[#171717] dark:border-t-white animate-spin" />
             </div>
 
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Resizing your images&hellip;
               </p>
               <p className="text-xs text-[#A3A3A3]">
@@ -1210,9 +1210,9 @@ export default function ResizePack() {
             </div>
 
             <div className="w-full max-w-xs">
-              <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                  className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
@@ -1234,9 +1234,9 @@ export default function ResizePack() {
       {uiState === "done" && (
         <div className="space-y-6">
           {/* Summary */}
-          <div className="border border-[#E5E5E5] rounded-lg p-5 bg-white flex items-center justify-between gap-4 flex-wrap">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-white dark:bg-[#191919] flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-sm font-semibold text-[#171717]">
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
                 {successCount} image{successCount !== 1 ? "s" : ""} resized
               </p>
               {entries.length - successCount > 0 && (
@@ -1248,7 +1248,7 @@ export default function ResizePack() {
             <div className="flex gap-3">
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#252525] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
               >
                 <RotateCcw className="h-4 w-4" strokeWidth={1.5} />
                 Start over
@@ -1256,7 +1256,7 @@ export default function ResizePack() {
               {successCount > 0 && (
                 <button
                   onClick={handleDownloadZip}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                 >
                   <Download className="h-4 w-4" strokeWidth={1.5} />
                   Download all as ZIP
@@ -1270,11 +1270,11 @@ export default function ResizePack() {
             {entries.map((entry, i) => (
               <div
                 key={i}
-                className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white"
+                className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-white dark:bg-[#191919]"
               >
                 {/* Thumbnail */}
                 <div
-                  className="relative bg-[#F5F5F5] overflow-hidden"
+                  className="relative bg-[#F5F5F5] dark:bg-[#252525] overflow-hidden"
                   style={{
                     aspectRatio: `${entry.resultW} / ${entry.resultH}`,
                   }}
@@ -1300,7 +1300,7 @@ export default function ResizePack() {
                 <div className="px-3 py-3 flex items-center justify-between gap-2">
                   <div className="min-w-0">
                     <p
-                      className="text-[12px] font-medium text-[#171717] truncate"
+                      className="text-[12px] font-medium text-[#171717] dark:text-[#E5E5E5] truncate"
                       title={entry.file.name}
                     >
                       {entry.file.name}
@@ -1319,7 +1319,7 @@ export default function ResizePack() {
                     <button
                       onClick={() => handleDownloadSingle(entry)}
                       title="Download this image"
-                      className="shrink-0 flex items-center justify-center h-8 w-8 rounded-md border border-[#E5E5E5] text-[#525252] hover:border-[#171717] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
+                      className="shrink-0 flex items-center justify-center h-8 w-8 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] hover:border-[#171717] dark:hover:border-[#E5E5E5] hover:text-[#171717] dark:hover:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
                     >
                       <ArrowDownToLine
                         className="h-3.5 w-3.5"

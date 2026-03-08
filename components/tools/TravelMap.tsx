@@ -665,11 +665,11 @@ export default function TravelMapClient() {
 
       {/* ── Shared view banner ── */}
       {isSharedView && uiState === "map" && (
-        <div className="mb-4 flex items-center justify-between gap-3 px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-md">
-          <p className="text-sm text-[#525252]">
+        <div className="mb-4 flex items-center justify-between gap-3 px-4 py-3 bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md">
+          <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
             <span className="mr-1">📍</span>
             Viewing a shared TravelMap &mdash;{" "}
-            <span className="font-medium text-[#171717]">
+            <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
               {uniqueCountries.length} {uniqueCountries.length === 1 ? "country" : "countries"}
             </span>
             ,{" "}
@@ -696,7 +696,7 @@ export default function TravelMapClient() {
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
               ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
@@ -721,11 +721,11 @@ export default function TravelMapClient() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
               <MapPin className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Drop your travel photos
               </p>
               <p className="text-xs text-[#737373]">
@@ -754,17 +754,17 @@ export default function TravelMapClient() {
 
       {/* ── Processing: progress bar ── */}
       {uiState === "processing" && (
-        <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-medium text-[#525252]">
+              <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                 Processing
               </span>
               <span className="text-xs text-[#A3A3A3]">{progressPercent}%</span>
             </div>
-            <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -781,8 +781,8 @@ export default function TravelMapClient() {
         <div className="space-y-4">
 
           {/* Header row */}
-          <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5]">
-            <p className="text-sm font-medium text-[#171717]">
+          <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
               {points.length} photo{points.length !== 1 ? "s" : ""} plotted
             </p>
             <button
@@ -796,17 +796,17 @@ export default function TravelMapClient() {
 
           {/* Geocoding in-progress banner */}
           {geocodingState === "running" && (
-            <div className="flex items-center gap-3 px-4 py-3 border border-[#E5E5E5] bg-[#FAFAFA] rounded-md">
+            <div className="flex items-center gap-3 px-4 py-3 border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E] rounded-md">
               <div className="h-3 w-3 rounded-full border-2 border-[#6366F1] border-t-transparent animate-spin shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-[#525252]">
+                <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                   Fetching location names... {geocodingProgress.current}/{geocodingProgress.total}
                 </p>
                 <p className="text-xs text-[#A3A3A3]">
                   1 request/sec (Nominatim limit) — map is already usable
                 </p>
               </div>
-              <div className="shrink-0 w-24 h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
+              <div className="shrink-0 w-24 h-1.5 bg-[#E5E5E5] dark:bg-[#333] rounded-full overflow-hidden">
                 <div
                   className="h-full bg-[#6366F1] rounded-full transition-all duration-500"
                   style={{
@@ -821,13 +821,13 @@ export default function TravelMapClient() {
 
           {/* Error notices */}
           {errors.length > 0 && (
-            <div className="border border-[#E5E5E5] rounded-md p-4 bg-[#FAFAFA]">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-4 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
               <div className="flex items-center gap-2 mb-2">
                 <AlertCircle
                   className="h-4 w-4 text-[#D97706] shrink-0"
                   strokeWidth={1.5}
                 />
-                <span className="text-xs font-medium text-[#525252]">
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                   {errors.length} notice{errors.length !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -843,10 +843,10 @@ export default function TravelMapClient() {
 
           {/* Stats bar — above the map */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="border border-[#E5E5E5] rounded-md p-3 bg-white flex items-center gap-3">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-3 bg-white dark:bg-[#1E1E1E] flex items-center gap-3">
               <Globe className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
               <div>
-                <p className="text-lg font-semibold text-[#171717] leading-none">
+                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] leading-none">
                   {uniqueCountries.length}
                 </p>
                 <p className="text-xs text-[#737373] mt-0.5">
@@ -854,10 +854,10 @@ export default function TravelMapClient() {
                 </p>
               </div>
             </div>
-            <div className="border border-[#E5E5E5] rounded-md p-3 bg-white flex items-center gap-3">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-3 bg-white dark:bg-[#1E1E1E] flex items-center gap-3">
               <Camera className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
               <div>
-                <p className="text-lg font-semibold text-[#171717] leading-none">
+                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] leading-none">
                   {points.length}
                 </p>
                 <p className="text-xs text-[#737373] mt-0.5">
@@ -865,10 +865,10 @@ export default function TravelMapClient() {
                 </p>
               </div>
             </div>
-            <div className="border border-[#E5E5E5] rounded-md p-3 bg-white flex items-center gap-3">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-3 bg-white dark:bg-[#1E1E1E] flex items-center gap-3">
               <Navigation className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
               <div>
-                <p className="text-lg font-semibold text-[#171717] leading-none">
+                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] leading-none">
                   {distanceKm.toLocaleString()}
                 </p>
                 <p className="text-xs text-[#737373] mt-0.5">km traveled</p>
@@ -878,7 +878,7 @@ export default function TravelMapClient() {
 
           {/* Map container — isolation:isolate traps all Leaflet z-indexes so the map never overlaps the navbar */}
           <div
-            className="border border-[#E5E5E5] rounded-lg overflow-hidden"
+            className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden"
             style={{ isolation: "isolate" }}
           >
             <div
@@ -896,7 +896,7 @@ export default function TravelMapClient() {
                 Photo timeline
               </p>
               <div
-                className="border border-[#E5E5E5] rounded-lg bg-white p-2"
+                className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#1E1E1E] p-2"
                 style={{ overflowX: "auto" }}
               >
                 <div style={{ display: "flex", gap: "8px", padding: "4px" }}>
@@ -983,19 +983,19 @@ export default function TravelMapClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Country list */}
             {countryList.length > 0 && (
-              <div className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden">
-                <div className="px-4 py-3 border-b border-[#E5E5E5]">
-                  <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide">
+              <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] overflow-hidden">
+                <div className="px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+                  <p className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide">
                     Countries visited
                   </p>
                 </div>
-                <ul className="divide-y divide-[#F5F5F5]">
+                <ul className="divide-y divide-[#F5F5F5] dark:divide-[#2A2A2A]">
                   {countryList.map(([country, count]) => (
                     <li
                       key={country}
                       className="flex items-center justify-between px-4 py-2.5"
                     >
-                      <span className="text-sm text-[#171717]">{country}</span>
+                      <span className="text-sm text-[#171717] dark:text-[#E5E5E5]">{country}</span>
                       <span className="text-xs text-[#A3A3A3]">
                         {count} photo{count !== 1 ? "s" : ""}
                       </span>

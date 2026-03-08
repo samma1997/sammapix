@@ -311,7 +311,7 @@ export default function CullClient() {
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
               ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
@@ -333,11 +333,11 @@ export default function CullClient() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
               <ImageIcon className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Drop your photos to start culling
               </p>
               <p className="text-xs text-[#737373]">
@@ -346,17 +346,17 @@ export default function CullClient() {
             </div>
             <div className="flex items-center gap-3 text-xs text-[#A3A3A3]">
               <span className="flex items-center gap-1.5">
-                <kbd className="px-1.5 py-0.5 text-[10px] bg-white border border-[#E5E5E5] rounded font-mono">K</kbd>
+                <kbd className="px-1.5 py-0.5 text-[10px] bg-white dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded font-mono dark:text-[#E5E5E5]">K</kbd>
                 Keep
               </span>
               <span className="text-[#E5E5E5]">·</span>
               <span className="flex items-center gap-1.5">
-                <kbd className="px-1.5 py-0.5 text-[10px] bg-white border border-[#E5E5E5] rounded font-mono">X</kbd>
+                <kbd className="px-1.5 py-0.5 text-[10px] bg-white dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded font-mono dark:text-[#E5E5E5]">X</kbd>
                 Reject
               </span>
-              <span className="text-[#E5E5E5]">·</span>
+              <span className="text-[#E5E5E5] dark:text-[#333]">·</span>
               <span className="flex items-center gap-1.5">
-                <kbd className="px-1.5 py-0.5 text-[10px] bg-white border border-[#E5E5E5] rounded font-mono">←→</kbd>
+                <kbd className="px-1.5 py-0.5 text-[10px] bg-white dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded font-mono dark:text-[#E5E5E5]">←→</kbd>
                 Navigate
               </span>
             </div>
@@ -379,21 +379,21 @@ export default function CullClient() {
 
       {/* ── Preparing: animated loading screen ──────────────────────────────── */}
       {uiState === "preparing" && (
-        <div className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-white dark:bg-[#191919]">
           <div className="flex flex-col items-center justify-center gap-6 px-8 py-16 text-center">
 
             {/* Animated camera icon */}
             <div className="relative flex items-center justify-center h-20 w-20">
-              <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center">
-                <Camera className="h-7 w-7 text-[#525252]" strokeWidth={1.5} />
+              <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] flex items-center justify-center">
+                <Camera className="h-7 w-7 text-[#525252] dark:text-[#A3A3A3]" strokeWidth={1.5} />
               </div>
               {/* spinning ring — circle */}
-              <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] border-t-[#171717] animate-spin" />
+              <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] dark:border-[#333] border-t-[#171717] dark:border-t-white animate-spin" />
             </div>
 
             {/* Rotating message */}
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1 transition-all">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1 transition-all">
                 {PREP_MESSAGES[prepMsgIndex]}
               </p>
               <p className="text-xs text-[#A3A3A3]">
@@ -403,9 +403,9 @@ export default function CullClient() {
 
             {/* Progress bar */}
             <div className="w-full max-w-xs">
-              <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                  className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                   style={{ width: `${prepPct}%` }}
                 />
               </div>
@@ -425,11 +425,11 @@ export default function CullClient() {
 
       {/* ── Reviewing: photo viewer ─────────────────────────────────────────── */}
       {uiState === "reviewing" && currentPhoto && (
-        <div className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-white dark:bg-[#191919]">
 
           {/* Header row */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5]">
-            <span className="text-xs font-medium text-[#525252]">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
               Photo {currentIndex + 1} of {total}
             </span>
             <div className="flex items-center gap-3">
@@ -455,9 +455,9 @@ export default function CullClient() {
           </div>
 
           {/* Progress bar */}
-          <div className="w-full h-0.5 bg-[#F5F5F5]">
+          <div className="w-full h-0.5 bg-[#F5F5F5] dark:bg-[#333]">
             <div
-              className="h-full bg-[#171717] transition-all duration-200"
+              className="h-full bg-[#171717] dark:bg-white transition-all duration-200"
               style={{ width: `${progressPct}%` }}
             />
           </div>
@@ -499,10 +499,10 @@ export default function CullClient() {
           </div>
 
           {/* Footer: filename + controls */}
-          <div className="border-t border-[#E5E5E5] px-4 py-4">
+          <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 py-4">
             <p className="text-xs text-[#737373] mb-4 truncate">
-              <span className="font-medium text-[#171717]">{currentPhoto.file.name}</span>
-              <span className="mx-1.5 text-[#D4D4D4]">&middot;</span>
+              <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">{currentPhoto.file.name}</span>
+              <span className="mx-1.5 text-[#D4D4D4] dark:text-[#444]">&middot;</span>
               {formatBytes(currentPhoto.file.size)}
             </p>
 
@@ -510,7 +510,7 @@ export default function CullClient() {
               <button
                 onClick={() => markAndAdvance("reject")}
                 aria-label="Reject (X)"
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-[#E5E5E5] rounded-md text-sm font-medium text-[#737373] bg-white hover:border-[#DC2626] hover:text-[#DC2626] hover:bg-[#FEF2F2] transition-colors"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-[#E5E5E5] dark:border-[#333] rounded-md text-sm font-medium text-[#737373] bg-white dark:bg-[#252525] hover:border-[#DC2626] hover:text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#2A1A1A] transition-colors"
               >
                 <X className="h-4 w-4" strokeWidth={1.5} />
                 Reject
@@ -520,7 +520,7 @@ export default function CullClient() {
               <button
                 onClick={goPrev}
                 disabled={currentIndex === 0}
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] dark:border-[#333] rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#252525] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
                 <span className="hidden sm:inline text-xs">Prev</span>
@@ -529,7 +529,7 @@ export default function CullClient() {
               <button
                 onClick={goNext}
                 disabled={currentIndex >= total - 1}
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 border border-[#E5E5E5] dark:border-[#333] rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#252525] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <span className="hidden sm:inline text-xs">Next</span>
                 <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
@@ -552,12 +552,12 @@ export default function CullClient() {
       {/* ── Done: summary + download ────────────────────────────────────────── */}
       {uiState === "done" && (
         <div className="space-y-6">
-          <div className="border border-[#E5E5E5] rounded-lg p-6 bg-white">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-6 bg-white dark:bg-[#191919]">
             <div className="flex items-center gap-3 mb-1">
               <div className="h-8 w-8 rounded-full bg-[#F0FDF4] border border-[#BBF7D0] flex items-center justify-center">
                 <Check className="h-4 w-4 text-[#16A34A]" strokeWidth={2} />
               </div>
-              <h2 className="text-base font-semibold text-[#171717]">Review complete</h2>
+              <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">Review complete</h2>
             </div>
             <p className="text-sm text-[#737373] ml-11">
               {keptCount} photo{keptCount !== 1 ? "s" : ""} kept
@@ -574,7 +574,7 @@ export default function CullClient() {
                 {photos.map((entry, i) => {
                   if (decisions[i] !== "keep") return null;
                   return (
-                    <div key={i} className="relative aspect-square rounded-md overflow-hidden border border-[#E5E5E5] bg-[#F5F5F5]">
+                    <div key={i} className="relative aspect-square rounded-md overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525]">
                       {entry.previewUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={entry.previewUrl} alt={entry.file.name} className="w-full h-full object-cover" />
@@ -603,13 +603,13 @@ export default function CullClient() {
                 Download {keptCount} kept photo{keptCount !== 1 ? "s" : ""} as ZIP
               </button>
             ) : (
-              <div className="flex-1 px-5 py-3 text-sm text-[#737373] border border-[#E5E5E5] rounded-md text-center bg-[#FAFAFA]">
+              <div className="flex-1 px-5 py-3 text-sm text-[#737373] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-center bg-[#FAFAFA] dark:bg-[#1E1E1E]">
                 No photos marked as keep
               </div>
             )}
             <button
               onClick={handleReset}
-              className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-[#E5E5E5] rounded-md text-sm text-[#525252] bg-white hover:bg-[#F5F5F5] transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-[#E5E5E5] dark:border-[#333] rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#252525] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
             >
               <RotateCcw className="h-4 w-4" strokeWidth={1.5} />
               Start over

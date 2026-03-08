@@ -277,8 +277,8 @@ interface SliderProps {
 const StampSlider = ({ min, max, value, onChange, label, unit = "" }: SliderProps) => (
   <div>
     <div className="flex items-center justify-between mb-1.5">
-      <label className="text-xs text-[#525252]">{label}</label>
-      <span className="text-xs font-medium text-[#171717]">{value}{unit}</span>
+      <label className="text-xs text-[#525252] dark:text-[#A3A3A3]">{label}</label>
+      <span className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">{value}{unit}</span>
     </div>
     <input
       type="range"
@@ -286,7 +286,7 @@ const StampSlider = ({ min, max, value, onChange, label, unit = "" }: SliderProp
       max={max}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full h-1.5 bg-[#E5E5E5] rounded-full appearance-none cursor-pointer accent-[#171717]"
+      className="w-full h-1.5 bg-[#E5E5E5] dark:bg-[#333] rounded-full appearance-none cursor-pointer accent-[#171717]"
     />
   </div>
 );
@@ -495,13 +495,13 @@ export default function StampIt() {
 
       {/* Pro badge banner */}
       {!isPro && entries.length >= MAX_FREE && (
-        <div className="mb-4 flex items-center justify-between gap-4 px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-md">
-          <p className="text-sm text-[#525252]">
+        <div className="mb-4 flex items-center justify-between gap-4 px-4 py-3 bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md">
+          <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
             Free plan: up to {MAX_FREE} images. Upgrade to Pro for {MAX_PRO}.
           </p>
           <Link
             href="/pricing"
-            className="shrink-0 text-xs font-medium bg-[#171717] text-white px-3 py-1.5 rounded-md hover:bg-[#262626] transition-colors"
+            className="shrink-0 text-xs font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-3 py-1.5 rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
           >
             Get Pro
           </Link>
@@ -519,15 +519,15 @@ export default function StampIt() {
             "flex flex-col items-center justify-center gap-4 py-16 px-8",
             "border-[1.5px] border-dashed rounded-lg cursor-pointer transition-all duration-150",
             isDragging
-              ? "border-[#6366F1] bg-[#EEF2FF]"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              ? "border-[#6366F1] bg-[#EEF2FF] dark:bg-[#1e1e3f]"
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
         >
-          <div className="h-10 w-10 rounded-md border border-[#E5E5E5] bg-white flex items-center justify-center">
+          <div className="h-10 w-10 rounded-md border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
             <Upload className="h-5 w-5 text-[#A3A3A3]" strokeWidth={1.5} />
           </div>
           <div className="text-center">
-            <p className="text-sm font-medium text-[#171717]">Drop images here</p>
+            <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Drop images here</p>
             <p className="text-xs text-[#A3A3A3] mt-1">
               JPG, PNG, WebP — up to {maxFiles} images
               {!isPro && (
@@ -553,7 +553,7 @@ export default function StampIt() {
         <>
           {/* Files summary bar */}
           <div className="flex items-center justify-between mb-4">
-            <span className="text-sm text-[#525252]">
+            <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
               {entries.length} image{entries.length !== 1 ? "s" : ""} selected
               {uiState === "processing" && ` — processing ${processedCount}/${entries.length}`}
               {uiState === "done" && ` — ${doneCount} watermarked`}
@@ -562,14 +562,14 @@ export default function StampIt() {
               {uiState === "config" && (
                 <button
                   onClick={() => mainInputRef.current?.click()}
-                  className="text-xs text-[#525252] border border-[#E5E5E5] px-3 py-1.5 rounded-md hover:border-[#A3A3A3] hover:bg-[#F5F5F5] transition-colors"
+                  className="text-xs text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#333] px-3 py-1.5 rounded-md hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
                 >
                   + Add more
                 </button>
               )}
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-1.5 text-xs text-[#525252] border border-[#E5E5E5] px-3 py-1.5 rounded-md hover:border-[#A3A3A3] hover:bg-[#F5F5F5] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#333] px-3 py-1.5 rounded-md hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
                 Reset
@@ -587,19 +587,19 @@ export default function StampIt() {
 
           {/* Options panel */}
           {uiState === "config" && (
-            <div className="border border-[#E5E5E5] rounded-lg bg-white mb-6 overflow-hidden">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#191919] mb-6 overflow-hidden">
 
               {/* Watermark type toggle */}
-              <div className="px-5 py-4 border-b border-[#E5E5E5]">
+              <div className="px-5 py-4 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wider mb-3">Watermark type</p>
-                <div className="inline-flex bg-[#F5F5F5] border border-[#E5E5E5] rounded-md p-0.5">
+                <div className="inline-flex bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded-md p-0.5">
                   <button
                     onClick={() => setWmType("text")}
                     className={[
                       "flex items-center gap-1.5 px-3 py-1.5 text-sm rounded transition-colors",
                       wmType === "text"
-                        ? "bg-white text-[#171717] border border-[#E5E5E5] shadow-sm"
-                        : "text-[#737373] hover:text-[#525252]",
+                        ? "bg-white dark:bg-[#191919] text-[#171717] dark:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#333] shadow-sm"
+                        : "text-[#737373] hover:text-[#525252] dark:hover:text-[#A3A3A3]",
                     ].join(" ")}
                   >
                     <Type className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -610,8 +610,8 @@ export default function StampIt() {
                     className={[
                       "flex items-center gap-1.5 px-3 py-1.5 text-sm rounded transition-colors",
                       wmType === "image"
-                        ? "bg-white text-[#171717] border border-[#E5E5E5] shadow-sm"
-                        : "text-[#737373] hover:text-[#525252]",
+                        ? "bg-white dark:bg-[#191919] text-[#171717] dark:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#333] shadow-sm"
+                        : "text-[#737373] hover:text-[#525252] dark:hover:text-[#A3A3A3]",
                     ].join(" ")}
                   >
                     <ImageIcon className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -622,18 +622,18 @@ export default function StampIt() {
 
               {/* Text options */}
               {wmType === "text" && (
-                <div className="px-5 py-4 border-b border-[#E5E5E5] space-y-4">
+                <div className="px-5 py-4 border-b border-[#E5E5E5] dark:border-[#2A2A2A] space-y-4">
                   <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wider">Text settings</p>
 
                   <div>
-                    <label className="text-xs text-[#525252] block mb-1.5">Watermark text</label>
+                    <label className="text-xs text-[#525252] dark:text-[#A3A3A3] block mb-1.5">Watermark text</label>
                     <input
                       type="text"
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                       placeholder="© Your Name 2026"
                       maxLength={120}
-                      className="w-full px-3 py-2 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] placeholder:text-[#D4D4D4] bg-white"
+                      className="w-full px-3 py-2 text-sm border border-[#E5E5E5] dark:border-[#333] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] placeholder:text-[#D4D4D4] bg-white dark:bg-[#252525]"
                     />
                   </div>
 
@@ -647,7 +647,7 @@ export default function StampIt() {
                   />
 
                   <div>
-                    <label className="text-xs text-[#525252] block mb-2">Color</label>
+                    <label className="text-xs text-[#525252] dark:text-[#A3A3A3] block mb-2">Color</label>
                     <div className="flex items-center gap-2 flex-wrap">
                       {[
                         { value: "#ffffff", label: "White" },
@@ -660,8 +660,8 @@ export default function StampIt() {
                           className={[
                             "px-3 py-1.5 text-xs rounded-md border transition-colors",
                             color === c.value
-                              ? "border-[#171717] bg-[#171717] text-white"
-                              : "border-[#E5E5E5] text-[#525252] hover:border-[#A3A3A3]",
+                              ? "border-[#171717] dark:border-white bg-[#171717] dark:bg-white text-white dark:text-[#171717]"
+                              : "border-[#E5E5E5] dark:border-[#333] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3]",
                           ].join(" ")}
                         >
                           {c.value !== "custom" && (
@@ -690,7 +690,7 @@ export default function StampIt() {
                             }}
                             maxLength={7}
                             placeholder="#ffffff"
-                            className="w-24 px-2 py-1.5 text-xs border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] font-mono"
+                            className="w-24 px-2 py-1.5 text-xs border border-[#E5E5E5] dark:border-[#333] rounded-md focus:outline-none focus:border-[#6366F1] font-mono text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525]"
                           />
                         </div>
                       )}
@@ -710,7 +710,7 @@ export default function StampIt() {
 
               {/* Logo options */}
               {wmType === "image" && (
-                <div className="px-5 py-4 border-b border-[#E5E5E5] space-y-4">
+                <div className="px-5 py-4 border-b border-[#E5E5E5] dark:border-[#2A2A2A] space-y-4">
                   <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wider">Logo settings</p>
 
                   {/* Logo dropzone */}
@@ -722,8 +722,8 @@ export default function StampIt() {
                     className={[
                       "flex items-center gap-4 p-4 border rounded-md cursor-pointer transition-all",
                       isLogoDragging
-                        ? "border-[#6366F1] bg-[#EEF2FF]"
-                        : "border-dashed border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3]",
+                        ? "border-[#6366F1] bg-[#EEF2FF] dark:bg-[#1e1e3f]"
+                        : "border-dashed border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] dark:hover:bg-[#252525]",
                     ].join(" ")}
                   >
                     {logoPreviewUrl ? (
@@ -732,20 +732,20 @@ export default function StampIt() {
                         <img
                           src={logoPreviewUrl}
                           alt="Logo preview"
-                          className="h-12 w-12 object-contain rounded border border-[#E5E5E5] bg-white p-1"
+                          className="h-12 w-12 object-contain rounded border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] p-1"
                         />
                         <div>
-                          <p className="text-sm text-[#171717] font-medium">{logoFile?.name}</p>
+                          <p className="text-sm text-[#171717] dark:text-[#E5E5E5] font-medium">{logoFile?.name}</p>
                           <p className="text-xs text-[#A3A3A3] mt-0.5">Click to replace</p>
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className="h-10 w-10 rounded-md border border-[#E5E5E5] bg-white flex items-center justify-center">
+                        <div className="h-10 w-10 rounded-md border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
                           <ImageIcon className="h-5 w-5 text-[#A3A3A3]" strokeWidth={1.5} />
                         </div>
                         <div>
-                          <p className="text-sm text-[#171717]">Drop logo PNG or SVG here</p>
+                          <p className="text-sm text-[#171717] dark:text-[#E5E5E5]">Drop logo PNG or SVG here</p>
                           <p className="text-xs text-[#A3A3A3] mt-0.5">PNG with transparency or SVG vector recommended</p>
                         </div>
                       </>
@@ -783,7 +783,7 @@ export default function StampIt() {
               )}
 
               {/* Position grid */}
-              <div className="px-5 py-4 border-b border-[#E5E5E5]">
+              <div className="px-5 py-4 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wider flex items-center gap-1.5">
                     <Grid3x3 className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -804,8 +804,8 @@ export default function StampIt() {
                         "h-9 w-full rounded border text-sm font-medium transition-colors",
                         tiled ? "opacity-30 cursor-not-allowed" : "cursor-pointer",
                         position === p.value && !tiled
-                          ? "bg-[#171717] text-white border-[#171717]"
-                          : "bg-[#F5F5F5] text-[#525252] border-[#E5E5E5] hover:border-[#A3A3A3]",
+                          ? "bg-[#171717] dark:bg-white text-white dark:text-[#171717] border-[#171717] dark:border-white"
+                          : "bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] border-[#E5E5E5] dark:border-[#333] hover:border-[#A3A3A3]",
                       ].join(" ")}
                     >
                       {p.label}
@@ -824,11 +824,11 @@ export default function StampIt() {
                       onChange={(e) => setTiled(e.target.checked)}
                       className="sr-only peer"
                     />
-                    <div className="w-9 h-5 bg-[#E5E5E5] rounded-full peer-checked:bg-[#171717] transition-colors" />
-                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full border border-[#D4D4D4] transition-transform peer-checked:translate-x-4" />
+                    <div className="w-9 h-5 bg-[#E5E5E5] dark:bg-[#333] rounded-full peer-checked:bg-[#171717] dark:peer-checked:bg-white transition-colors" />
+                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white dark:bg-[#252525] rounded-full border border-[#D4D4D4] dark:border-[#555] transition-transform peer-checked:translate-x-4" />
                   </div>
                   <div>
-                    <span className="flex items-center gap-1.5 text-sm font-medium text-[#171717]">
+                    <span className="flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
                       <Layers className="h-3.5 w-3.5" strokeWidth={1.5} />
                       Filigrana mode
                     </span>
@@ -842,8 +842,8 @@ export default function StampIt() {
                   <div className="space-y-4 pl-12">
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <label className="text-xs text-[#525252]">Angle</label>
-                        <span className="text-xs font-medium text-[#171717]">{tiledAngle}°</span>
+                        <label className="text-xs text-[#525252] dark:text-[#A3A3A3]">Angle</label>
+                        <span className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">{tiledAngle}°</span>
                       </div>
                       <input
                         type="range"
@@ -851,7 +851,7 @@ export default function StampIt() {
                         max={0}
                         value={tiledAngle}
                         onChange={(e) => setTiledAngle(Number(e.target.value))}
-                        className="w-full h-1.5 bg-[#E5E5E5] rounded-full appearance-none cursor-pointer accent-[#171717]"
+                        className="w-full h-1.5 bg-[#E5E5E5] dark:bg-[#333] rounded-full appearance-none cursor-pointer accent-[#171717]"
                       />
                       <div className="flex justify-between text-[10px] text-[#A3A3A3] mt-0.5">
                         <span>-60° steep</span>
@@ -861,8 +861,8 @@ export default function StampIt() {
 
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <label className="text-xs text-[#525252]">Density</label>
-                        <span className="text-xs font-medium text-[#171717]">
+                        <label className="text-xs text-[#525252] dark:text-[#A3A3A3]">Density</label>
+                        <span className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
                           {tiledDensity <= 1.5 ? "Tight" : tiledDensity <= 2.5 ? "Normal" : "Loose"}
                         </span>
                       </div>
@@ -873,7 +873,7 @@ export default function StampIt() {
                         step={0.5}
                         value={tiledDensity}
                         onChange={(e) => setTiledDensity(Number(e.target.value))}
-                        className="w-full h-1.5 bg-[#E5E5E5] rounded-full appearance-none cursor-pointer accent-[#171717]"
+                        className="w-full h-1.5 bg-[#E5E5E5] dark:bg-[#333] rounded-full appearance-none cursor-pointer accent-[#171717]"
                       />
                       <div className="flex justify-between text-[10px] text-[#A3A3A3] mt-0.5">
                         <span>Dense</span>
@@ -891,7 +891,7 @@ export default function StampIt() {
             <button
               onClick={handleProcess}
               disabled={entries.length === 0 || (wmType === "image" && !logoImg)}
-              className="w-full py-2.5 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] disabled:opacity-40 disabled:cursor-not-allowed transition-colors mb-8"
+              className="w-full py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors mb-8"
             >
               Apply watermark to {entries.length} image{entries.length !== 1 ? "s" : ""}
               {wmType === "image" && !logoImg && " — upload a logo first"}
@@ -902,12 +902,12 @@ export default function StampIt() {
           {uiState === "processing" && (
             <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-[#525252]">Processing…</span>
+                <span className="text-xs text-[#525252] dark:text-[#A3A3A3]">Processing…</span>
                 <span className="text-xs text-[#A3A3A3]">{processedCount} / {entries.length}</span>
               </div>
-              <div className="h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
+              <div className="h-1.5 bg-[#E5E5E5] dark:bg-[#333] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                  className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                   style={{ width: `${(processedCount / entries.length) * 100}%` }}
                 />
               </div>
@@ -918,7 +918,7 @@ export default function StampIt() {
           {uiState === "done" && doneCount > 0 && (
             <button
               onClick={handleDownloadAll}
-              className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors mb-6"
+              className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-6"
             >
               <ArrowDownToLine className="h-4 w-4" strokeWidth={1.5} />
               Download all as ZIP ({doneCount} image{doneCount !== 1 ? "s" : ""})
@@ -931,10 +931,10 @@ export default function StampIt() {
               {entries.map((entry, idx) => (
                 <div
                   key={idx}
-                  className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden"
+                  className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] overflow-hidden"
                 >
                   {/* Thumbnail */}
-                  <div className="aspect-[4/3] bg-[#F5F5F5] flex items-center justify-center relative overflow-hidden">
+                  <div className="aspect-[4/3] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center relative overflow-hidden">
                     {entry.resultUrl ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -969,7 +969,7 @@ export default function StampIt() {
                   {/* Info */}
                   <div className="p-2.5">
                     <p
-                      className="text-[11px] text-[#525252] truncate mb-1"
+                      className="text-[11px] text-[#525252] dark:text-[#A3A3A3] truncate mb-1"
                       title={entry.file.name}
                     >
                       {entry.file.name}
@@ -982,7 +982,7 @@ export default function StampIt() {
                     {entry.resultUrl && (
                       <button
                         onClick={() => handleDownloadOne(entry)}
-                        className="w-full flex items-center justify-center gap-1 py-1.5 text-[11px] font-medium border border-[#E5E5E5] rounded text-[#525252] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] transition-colors"
+                        className="w-full flex items-center justify-center gap-1 py-1.5 text-[11px] font-medium border border-[#E5E5E5] dark:border-[#333] rounded text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
                       >
                         <Download className="h-3 w-3" strokeWidth={1.5} />
                         Download

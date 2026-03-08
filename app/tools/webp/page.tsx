@@ -54,7 +54,7 @@ export default function WebpPage() {
     <main>
       {/* Hero SEO */}
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
-        <h1 className="text-2xl font-semibold text-[#171717] mb-1">WebP Converter</h1>
+        <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">WebP Converter</h1>
         <p className="text-sm text-[#737373]">
           Convert JPG, PNG and GIF to WebP format directly in your browser. WebP files are up to 30% smaller — nothing uploaded to any server.
         </p>
@@ -64,21 +64,21 @@ export default function WebpPage() {
       <ToolInterface defaultMode="webp" />
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             Why convert to WebP?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {f.title}
                 </h3>
                 <p className="text-sm text-[#737373] leading-relaxed">
@@ -91,9 +91,9 @@ export default function WebpPage() {
       </section>
 
       {/* SEO content */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             What is WebP and why does it matter?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -108,7 +108,7 @@ export default function WebpPage() {
             can directly improve your Core Web Vitals, particularly Largest
             Contentful Paint (LCP).
           </p>
-          <h3 className="text-base font-semibold text-[#171717] mb-3">
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             Is WebP supported by all browsers?
           </h3>
           <p className="text-sm text-[#737373] leading-relaxed">
@@ -123,9 +123,9 @@ export default function WebpPage() {
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA] mt-8">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA] dark:bg-[#1E1E1E] mt-8">
             <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
-            <a href="/blog/jpg-to-webp-converter" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+            <a href="/blog/jpg-to-webp-converter" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               How to Convert JPG to WebP (and Why You Should) →
             </a>
           </div>
@@ -133,9 +133,9 @@ export default function WebpPage() {
       </section>
 
       {/* Related tools */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-4">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             More free image tools
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export default function WebpPage() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] bg-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
               >
                 {tool.name}
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />

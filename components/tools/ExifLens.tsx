@@ -529,7 +529,7 @@ export default function ExifLens() {
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
               ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
@@ -554,11 +554,11 @@ export default function ExifLens() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
               <Shield className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Drop photos or click to browse
               </p>
               <p className="text-xs text-[#737373]">
@@ -587,17 +587,17 @@ export default function ExifLens() {
       )}
 
       {uiState === "parsing" && (
-        <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-medium text-[#525252]">
+              <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                 Reading metadata
               </span>
               <span className="text-xs text-[#A3A3A3]">{parseProgress}%</span>
             </div>
-            <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                 style={{ width: `${parseProgress}%` }}
               />
             </div>
@@ -607,17 +607,17 @@ export default function ExifLens() {
       )}
 
       {uiState === "downloading" && (
-        <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-medium text-[#525252]">
+              <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                 Removing sensitive data
               </span>
               <span className="text-xs text-[#A3A3A3]">{parseProgress}%</span>
             </div>
-            <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                 style={{ width: `${parseProgress}%` }}
               />
             </div>
@@ -629,8 +629,8 @@ export default function ExifLens() {
       {uiState === "results" && (
         <div className="space-y-4">
           {/* Summary bar */}
-          <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5]">
-            <p className="text-sm font-medium text-[#171717]">
+          <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
               {files.length} file{files.length !== 1 ? "s" : ""}
               {filesWithGps.length > 0 && (
                 <span className="ml-2 inline-flex items-center gap-1 text-[11px] font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA] px-2 py-0.5 rounded">
@@ -652,25 +652,25 @@ export default function ExifLens() {
             <>
               {/* Mode selector */}
               <div>
-                <p className="text-xs font-medium text-[#525252] mb-2">What do you want to remove?</p>
+                <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2">What do you want to remove?</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <button
                     onClick={() => setCleanMode("gps")}
                     className={[
                       "text-left p-3 border rounded-md transition-colors",
                       cleanMode === "gps"
-                        ? "border-[#171717] bg-white"
-                        : "border-[#E5E5E5] bg-[#FAFAFA] hover:border-[#A3A3A3]",
+                        ? "border-[#171717] dark:border-white bg-white dark:bg-[#252525]"
+                        : "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3]",
                     ].join(" ")}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <div className={[
                         "h-3.5 w-3.5 rounded-full border-2 flex items-center justify-center shrink-0",
-                        cleanMode === "gps" ? "border-[#171717]" : "border-[#D4D4D4]",
+                        cleanMode === "gps" ? "border-[#171717] dark:border-white" : "border-[#D4D4D4] dark:border-[#555]",
                       ].join(" ")}>
-                        {cleanMode === "gps" && <div className="h-1.5 w-1.5 rounded-full bg-[#171717]" />}
+                        {cleanMode === "gps" && <div className="h-1.5 w-1.5 rounded-full bg-[#171717] dark:bg-white" />}
                       </div>
-                      <span className="text-sm font-medium text-[#171717]">GPS location only</span>
+                      <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">GPS location only</span>
                     </div>
                     <p className="text-xs text-[#737373] pl-5.5">Keeps camera, date, settings. Removes just the coordinates.</p>
                   </button>
@@ -680,18 +680,18 @@ export default function ExifLens() {
                     className={[
                       "text-left p-3 border rounded-md transition-colors",
                       cleanMode === "all"
-                        ? "border-[#171717] bg-white"
-                        : "border-[#E5E5E5] bg-[#FAFAFA] hover:border-[#A3A3A3]",
+                        ? "border-[#171717] dark:border-white bg-white dark:bg-[#252525]"
+                        : "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3]",
                     ].join(" ")}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <div className={[
                         "h-3.5 w-3.5 rounded-full border-2 flex items-center justify-center shrink-0",
-                        cleanMode === "all" ? "border-[#171717]" : "border-[#D4D4D4]",
+                        cleanMode === "all" ? "border-[#171717] dark:border-white" : "border-[#D4D4D4] dark:border-[#555]",
                       ].join(" ")}>
-                        {cleanMode === "all" && <div className="h-1.5 w-1.5 rounded-full bg-[#171717]" />}
+                        {cleanMode === "all" && <div className="h-1.5 w-1.5 rounded-full bg-[#171717] dark:bg-white" />}
                       </div>
-                      <span className="text-sm font-medium text-[#171717]">All EXIF data</span>
+                      <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">All EXIF data</span>
                     </div>
                     <p className="text-xs text-[#737373] pl-5.5">Complete clean — removes GPS, camera, date, everything.</p>
                   </button>
@@ -757,7 +757,7 @@ const ExifFileCard = ({ file }: ExifFileCardProps) => {
   const isHeic = file.fileType === "heic";
 
   return (
-    <div className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden">
+    <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] overflow-hidden">
       <div className="flex items-center gap-3 px-4 py-3">
         <button
           className="flex items-center gap-3 flex-1 min-w-0 text-left"
@@ -780,13 +780,13 @@ const ExifFileCard = ({ file }: ExifFileCardProps) => {
               d="M19.5 8.25l-7.5 7.5-7.5-7.5"
             />
           </svg>
-          <span className="text-sm font-medium text-[#171717] truncate">
+          <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
             {file.original.name}
           </span>
         </button>
 
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-[11px] text-[#737373] bg-[#F5F5F5] border border-[#E5E5E5] px-2 py-0.5 rounded">
+          <span className="text-[11px] text-[#737373] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] px-2 py-0.5 rounded">
             {formatBytes(file.original.size)}
           </span>
           {file.hasGps && file.status !== "done-gps" && file.status !== "done-exif" && (
@@ -809,7 +809,7 @@ const ExifFileCard = ({ file }: ExifFileCardProps) => {
       </div>
 
       {expanded && (
-        <div className="border-t border-[#E5E5E5] bg-[#FAFAFA]">
+        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919]">
           {isPng && (
             <div className="px-4 py-3">
               <p className="text-xs text-[#737373]">
@@ -997,12 +997,12 @@ const MetaSection = ({
   warning,
   children,
 }: MetaSectionProps) => (
-  <div className="p-3 border border-[#E5E5E5] rounded-md bg-white">
+  <div className="p-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
     <div className="flex items-center gap-1.5 mb-2">
       <span className={warning ? "text-[#DC2626]" : "text-[#737373]"}>
         {icon}
       </span>
-      <span className="text-[11px] font-semibold text-[#525252] uppercase tracking-wider">
+      <span className="text-[11px] font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider">
         {label}
       </span>
       {warning && (
@@ -1023,7 +1023,7 @@ interface MetaBadgeProps {
 }
 
 const MetaBadge = ({ label, value }: MetaBadgeProps) => (
-  <span className="text-[11px] font-medium bg-[#F5F5F5] border border-[#E5E5E5] text-[#525252] px-2 py-0.5 rounded">
+  <span className="text-[11px] font-medium bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded">
     {label}
     {value}
   </span>

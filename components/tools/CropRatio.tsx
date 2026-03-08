@@ -698,8 +698,8 @@ export default function CropRatio() {
           className={[
             "flex flex-col items-center justify-center gap-4 h-64 border-2 border-dashed rounded-lg cursor-pointer transition-colors",
             isDragOver
-              ? "border-[#6366F1] bg-[#EEF2FF]"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              ? "border-[#6366F1] bg-[#EEF2FF] dark:bg-[#1E1E1E]"
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
         >
           <input
@@ -714,10 +714,10 @@ export default function CropRatio() {
               className="h-8 w-8 text-[#A3A3A3]"
               strokeWidth={1.5}
             />
-            <p className="text-sm font-medium text-[#525252]">
+            <p className="text-sm font-medium text-[#525252] dark:text-[#A3A3A3]">
               Drop images here or click to browse
             </p>
-            <p className="text-xs text-[#A3A3A3]">
+            <p className="text-xs text-[#A3A3A3] dark:text-[#737373]">
               JPG, PNG, WebP — up to {limit} images
             </p>
             {!isPro && (
@@ -745,7 +745,7 @@ export default function CropRatio() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ImageIcon className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
-            <span className="text-sm text-[#525252]">
+            <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
               {pendingFiles.length} image{pendingFiles.length !== 1 ? "s" : ""} ready
             </span>
           </div>
@@ -760,7 +760,7 @@ export default function CropRatio() {
 
         {/* Ratio selector */}
         <div>
-          <label className="block text-xs font-medium text-[#525252] uppercase tracking-wider mb-3">
+          <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider mb-3">
             Crop Ratio
           </label>
           <div className="flex flex-wrap gap-2">
@@ -771,8 +771,8 @@ export default function CropRatio() {
                 className={[
                   "px-3 py-1.5 text-sm border rounded-md transition-colors",
                   selectedRatio === r.label
-                    ? "bg-[#171717] text-white border-[#171717]"
-                    : "bg-white text-[#525252] border-[#E5E5E5] hover:border-[#A3A3A3]",
+                    ? "bg-[#171717] text-white border-[#171717] dark:bg-white dark:text-[#171717] dark:border-white"
+                    : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] border-[#E5E5E5] dark:border-[#333] hover:border-[#A3A3A3]",
                 ].join(" ")}
               >
                 {r.label === "A4" ? "A4 Print" : r.label}
@@ -783,8 +783,8 @@ export default function CropRatio() {
               className={[
                 "px-3 py-1.5 text-sm border rounded-md transition-colors",
                 selectedRatio === "Custom"
-                  ? "bg-[#171717] text-white border-[#171717]"
-                  : "bg-white text-[#525252] border-[#E5E5E5] hover:border-[#A3A3A3]",
+                  ? "bg-[#171717] text-white border-[#171717] dark:bg-white dark:text-[#171717] dark:border-white"
+                  : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] border-[#E5E5E5] dark:border-[#333] hover:border-[#A3A3A3]",
               ].join(" ")}
             >
               Custom
@@ -800,7 +800,7 @@ export default function CropRatio() {
                 max={9999}
                 value={customW}
                 onChange={(e) => setCustomW(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-20 px-2 py-1.5 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717]"
+                className="w-20 px-2 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#333] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525]"
                 aria-label="Custom width ratio"
               />
               <span className="text-[#A3A3A3] font-medium">:</span>
@@ -810,7 +810,7 @@ export default function CropRatio() {
                 max={9999}
                 value={customH}
                 onChange={(e) => setCustomH(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-20 px-2 py-1.5 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717]"
+                className="w-20 px-2 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#333] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525]"
                 aria-label="Custom height ratio"
               />
               <span className="text-xs text-[#A3A3A3]">W : H</span>
@@ -820,7 +820,7 @@ export default function CropRatio() {
 
         {/* Output max dimension */}
         <div>
-          <label className="block text-xs font-medium text-[#525252] uppercase tracking-wider mb-3">
+          <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider mb-3">
             Max Output Dimension{" "}
             <span className="text-[#A3A3A3] normal-case font-normal tracking-normal">
               (optional — leave blank to keep original size)
@@ -834,7 +834,7 @@ export default function CropRatio() {
               placeholder="e.g. 2000"
               value={maxDim}
               onChange={(e) => setMaxDim(e.target.value)}
-              className="w-32 px-2 py-1.5 text-sm border border-[#E5E5E5] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717]"
+              className="w-32 px-2 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#333] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525]"
               aria-label="Maximum output dimension in pixels"
             />
             <span className="text-xs text-[#A3A3A3]">px</span>
@@ -844,7 +844,7 @@ export default function CropRatio() {
         {/* Interactive crop preview — always shown */}
         {cropPreviewUrl && firstPending && (
           <div>
-            <label className="block text-xs font-medium text-[#525252] uppercase tracking-wider mb-3">
+            <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider mb-3">
               Crop Position
             </label>
             <CropPreview
@@ -887,9 +887,9 @@ export default function CropRatio() {
             <span>Cropping...</span>
             <span>{progress}%</span>
           </div>
-          <div className="h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+          <div className="h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#171717] rounded-full transition-all duration-300"
+              className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -911,7 +911,7 @@ export default function CropRatio() {
       {/* Toolbar */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-[#525252]">
+          <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
             {successCount} of {results.length} cropped successfully
           </span>
           {successCount < results.length && (
@@ -932,7 +932,7 @@ export default function CropRatio() {
           )}
           <button
             onClick={handleReset}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:bg-[#F5F5F5] transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
           >
             <RotateCcw className="h-4 w-4" strokeWidth={1.5} />
             New batch
@@ -970,7 +970,7 @@ function ResultCard({ entry, ratioW, ratioH, onDownload }: ResultCardProps) {
   const paddingTop = `${(ratioH / ratioW) * 100}%`;
 
   return (
-    <div className="group border border-[#E5E5E5] rounded-md bg-white overflow-hidden hover:border-[#A3A3A3] transition-colors">
+    <div className="group border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] overflow-hidden hover:border-[#A3A3A3] dark:hover:border-[#444] transition-colors">
       {/* Thumbnail */}
       <div className="relative w-full" style={{ paddingTop }}>
         {entry.previewUrl ? (
@@ -981,7 +981,7 @@ function ResultCard({ entry, ratioW, ratioH, onDownload }: ResultCardProps) {
             className="absolute inset-0 w-full h-full object-cover"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#FAFAFA]">
+          <div className="absolute inset-0 flex items-center justify-center bg-[#FAFAFA] dark:bg-[#252525]">
             <span className="text-xs text-[#DC2626]">Error</span>
           </div>
         )}
@@ -990,7 +990,7 @@ function ResultCard({ entry, ratioW, ratioH, onDownload }: ResultCardProps) {
       {/* Info */}
       <div className="p-2.5">
         <p
-          className="text-[11px] text-[#525252] font-medium truncate mb-1"
+          className="text-[11px] text-[#525252] dark:text-[#A3A3A3] font-medium truncate mb-1"
           title={entry.file.name}
         >
           {entry.file.name.replace(/\.[^.]+$/, "")}

@@ -7,12 +7,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-gray-900 text-white border-gray-900 hover:bg-gray-800 hover:border-gray-800",
-        secondary: "bg-white text-gray-900 border-gray-200 hover:bg-gray-50",
-        ghost: "bg-transparent text-gray-600 border-transparent hover:bg-gray-100 hover:text-gray-900",
+        primary: "bg-gray-900 text-white border-gray-900 hover:bg-gray-800 hover:border-gray-800 dark:bg-white dark:text-[#171717] dark:border-white dark:hover:bg-[#E5E5E5]",
+        secondary: "bg-white text-gray-900 border-gray-200 hover:bg-gray-50 dark:bg-[#252525] dark:text-[#E5E5E5] dark:border-[#333] dark:hover:bg-[#2A2A2A]",
+        ghost: "bg-transparent text-gray-600 border-transparent hover:bg-gray-100 hover:text-gray-900 dark:text-[#A3A3A3] dark:hover:bg-[#252525] dark:hover:text-[#E5E5E5]",
         destructive: "bg-error text-white border-error hover:bg-red-700",
         brand: "bg-brand text-white border-brand hover:bg-brand-hover",
-        outline: "bg-transparent text-gray-700 border-gray-200 hover:bg-gray-50",
+        outline: "bg-transparent text-gray-700 border-gray-200 hover:bg-gray-50 dark:text-[#A3A3A3] dark:border-[#333] dark:hover:bg-[#252525]",
       },
       size: {
         sm: "h-7 px-3 text-xs rounded",

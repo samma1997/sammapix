@@ -59,7 +59,7 @@ export default function BeforeAfterSlider({
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-hidden rounded-md border border-gray-200 select-none cursor-col-resize",
+        "relative overflow-hidden rounded-md border border-gray-200 dark:border-[#2A2A2A] select-none cursor-col-resize",
         isDragging && "cursor-grabbing",
         className
       )}
@@ -97,7 +97,7 @@ export default function BeforeAfterSlider({
       >
         {/* Handle */}
         <div
-          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-7 h-7 bg-white rounded-full border border-gray-200 shadow-md flex items-center justify-center cursor-grab active:cursor-grabbing"
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-7 h-7 bg-white dark:bg-[#252525] rounded-full border border-gray-200 dark:border-[#444] shadow-md flex items-center justify-center cursor-grab active:cursor-grabbing"
           onMouseDown={onMouseDown}
           onTouchStart={() => setIsDragging(true)}
         >

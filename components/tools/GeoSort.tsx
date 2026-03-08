@@ -347,7 +347,7 @@ export default function GeoSortClient() {
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
               ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] bg-[#FAFAFA] hover:border-[#A3A3A3] hover:bg-[#F5F5F5]",
+              : "border-[#D4D4D4] dark:border-[#444] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]",
           ].join(" ")}
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => {
@@ -372,14 +372,14 @@ export default function GeoSortClient() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] bg-white flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
               <MapPin
                 className="h-6 w-6 text-[#737373]"
                 strokeWidth={1.5}
               />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#171717] mb-1">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
                 Drop photos or click to browse
               </p>
               <p className="text-xs text-[#737373]">
@@ -408,17 +408,17 @@ export default function GeoSortClient() {
 
       {/* ── Processing: progress bar ── */}
       {uiState === "processing" && (
-        <div className="border border-[#E5E5E5] rounded-lg p-8 bg-white">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-medium text-[#525252]">
+              <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                 Processing
               </span>
               <span className="text-xs text-[#A3A3A3]">{progressPercent}%</span>
             </div>
-            <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#171717] rounded-full transition-all duration-300"
+                className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -434,9 +434,9 @@ export default function GeoSortClient() {
       {(uiState === "results" || uiState === "downloading") && (
         <div className="space-y-4">
           {/* Summary header */}
-          <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5]">
+          <div className="flex items-center justify-between py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
             <div>
-              <p className="text-sm font-medium text-[#171717]">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
                 {totalPhotos} photo{totalPhotos !== 1 ? "s" : ""} sorted into{" "}
                 {groups.length} location{groups.length !== 1 ? "s" : ""}
                 {unsorted.length > 0 && ` + ${unsorted.length} unsorted`}
@@ -453,13 +453,13 @@ export default function GeoSortClient() {
 
           {/* Error messages */}
           {errors.length > 0 && (
-            <div className="border border-[#E5E5E5] rounded-md p-4 bg-[#FAFAFA]">
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-4 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
               <div className="flex items-center gap-2 mb-2">
                 <AlertCircle
                   className="h-4 w-4 text-[#D97706] shrink-0"
                   strokeWidth={1.5}
                 />
-                <span className="text-xs font-medium text-[#525252]">
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
                   {errors.length} notice{errors.length !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -491,7 +491,7 @@ export default function GeoSortClient() {
                 <button
                   onClick={handleDownloadZip}
                   disabled={uiState === "downloading"}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 >
                   {uiState === "downloading" ? (
                     <>
@@ -502,7 +502,7 @@ export default function GeoSortClient() {
                     <>
                       <Download className="h-4 w-4" strokeWidth={1.5} />
                       Download ZIP
-                      <span className="text-white/60 text-xs font-normal">(large file, may be slow)</span>
+                      <span className="text-white/60 dark:text-[#171717]/60 text-xs font-normal">(large file, may be slow)</span>
                     </>
                   )}
                 </button>
@@ -510,7 +510,7 @@ export default function GeoSortClient() {
                 <button
                   onClick={handleDownloadCsv}
                   disabled={uiState === "downloading"}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#E5E5E5] text-[#171717] text-sm font-medium rounded-md hover:bg-[#F5F5F5] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] text-[#171717] dark:text-[#E5E5E5] text-sm font-medium rounded-md hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 >
                   <FileText className="h-4 w-4" strokeWidth={1.5} />
                   Download sorting guide (.csv)
@@ -526,7 +526,7 @@ export default function GeoSortClient() {
                 <button
                   onClick={handleDownloadZip}
                   disabled={uiState === "downloading"}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 >
                   {uiState === "downloading" ? (
                     <>
@@ -564,17 +564,17 @@ const LocationCard = ({ group }: LocationCardProps) => {
   const remainder = group.files.length - preview.length;
 
   return (
-    <div className="border border-[#E5E5E5] rounded-md bg-white overflow-hidden">
+    <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] overflow-hidden">
       <button
-        className="w-full flex items-center gap-3 p-4 text-left hover:bg-[#FAFAFA] transition-colors"
+        className="w-full flex items-center gap-3 p-4 text-left hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
       >
-        <div className="h-8 w-8 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center shrink-0">
-          <FolderOpen className="h-4 w-4 text-[#525252]" strokeWidth={1.5} />
+        <div className="h-8 w-8 rounded-md border border-[#E5E5E5] dark:border-[#333] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center shrink-0">
+          <FolderOpen className="h-4 w-4 text-[#525252] dark:text-[#A3A3A3]" strokeWidth={1.5} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-[#171717] truncate">
+          <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
             {group.location}/
           </p>
           <p className="text-xs text-[#737373]">
@@ -600,12 +600,12 @@ const LocationCard = ({ group }: LocationCardProps) => {
       </button>
 
       {expanded && (
-        <div className="border-t border-[#E5E5E5] px-4 py-3 bg-[#FAFAFA]">
+        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 py-3 bg-[#FAFAFA] dark:bg-[#252525]">
           <ul className="space-y-1">
             {group.files.map((file, i) => (
               <li
                 key={i}
-                className="text-xs text-[#525252] truncate flex items-center gap-2"
+                className="text-xs text-[#525252] dark:text-[#A3A3A3] truncate flex items-center gap-2"
               >
                 <span className="h-1 w-1 rounded-full bg-[#D4D4D4] shrink-0" />
                 {file.name}
@@ -617,11 +617,11 @@ const LocationCard = ({ group }: LocationCardProps) => {
 
       {/* Preview thumbnails (hidden when expanded) */}
       {!expanded && (
-        <div className="border-t border-[#E5E5E5] px-4 py-2.5 bg-[#FAFAFA] flex items-center gap-1">
+        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 py-2.5 bg-[#FAFAFA] dark:bg-[#252525] flex items-center gap-1">
           {preview.map((file, i) => (
             <span
               key={i}
-              className="text-[11px] text-[#737373] border border-[#E5E5E5] bg-white rounded px-1.5 py-0.5 truncate max-w-[100px]"
+              className="text-[11px] text-[#737373] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#1E1E1E] rounded px-1.5 py-0.5 truncate max-w-[100px]"
             >
               {file.name}
             </span>
@@ -645,13 +645,13 @@ const UnsortedCard = ({ files }: UnsortedCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="border-2 border-dashed border-[#E5E5E5] rounded-md bg-white overflow-hidden">
+    <div className="border-2 border-dashed border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] overflow-hidden">
       <button
-        className="w-full flex items-center gap-3 p-4 text-left hover:bg-[#FAFAFA] transition-colors"
+        className="w-full flex items-center gap-3 p-4 text-left hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
       >
-        <div className="h-8 w-8 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center shrink-0">
+        <div className="h-8 w-8 rounded-md border border-[#E5E5E5] dark:border-[#333] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center shrink-0">
           <ImageOff className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
         </div>
         <div className="flex-1 min-w-0">
@@ -681,12 +681,12 @@ const UnsortedCard = ({ files }: UnsortedCardProps) => {
       </button>
 
       {expanded && (
-        <div className="border-t border-[#E5E5E5] px-4 py-3 bg-[#FAFAFA]">
+        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 py-3 bg-[#FAFAFA] dark:bg-[#252525]">
           <ul className="space-y-1">
             {files.map((file, i) => (
               <li
                 key={i}
-                className="text-xs text-[#737373] truncate flex items-center gap-2"
+                className="text-xs text-[#737373] dark:text-[#A3A3A3] truncate flex items-center gap-2"
               >
                 <span className="h-1 w-1 rounded-full bg-[#D4D4D4] shrink-0" />
                 {file.name}
