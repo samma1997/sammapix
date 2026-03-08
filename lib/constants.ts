@@ -11,6 +11,10 @@ export const MAX_FILES_PRO = 500;
 export const MAX_GEOSORT_FREE = 100;
 export const MAX_GEOSORT_PRO = 500;
 
+// HEIC Converter limits
+export const MAX_HEIC_FREE = 100;
+export const MAX_HEIC_PRO = 500;
+
 // AI Rename limits
 export const AI_RENAME_FREE_PER_DAY = 5;
 export const AI_RENAME_PRO_PER_DAY = 200;
@@ -24,9 +28,11 @@ export const ACCEPTED_MIME_TYPES: Record<string, string[]> = {
   "image/webp": [".webp"],
   "image/gif": [".gif"],
   "image/avif": [".avif"],
+  "image/heic": [".heic"],
+  "image/heif": [".heif"],
 };
 
-export const ACCEPTED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"];
+export const ACCEPTED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".heic", ".heif"];
 
 // Plan limits
 export const PLAN_LIMITS: Record<string, PlanLimits> = {

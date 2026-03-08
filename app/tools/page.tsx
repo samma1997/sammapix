@@ -15,6 +15,7 @@ import {
   IconTravelMap,
   IconResizePack,
   IconCull,
+  IconHEIC,
 } from "@/components/ui/ToolCard";
 
 export const metadata: Metadata = {
@@ -42,6 +43,14 @@ const TOOLS: ToolCardData[] = [
     accent: "#10B981",
     badges: ["100% Free", "Browser-only"],
     Icon: IconWebP,
+  },
+  {
+    name: "HEIC Converter",
+    href: "/tools/heic",
+    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
+    accent: "#6366F1",
+    badges: ["100% Free", "iPhone", "Batch"],
+    Icon: IconHEIC,
   },
   {
     name: "AI Rename",

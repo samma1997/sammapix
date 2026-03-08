@@ -342,6 +342,44 @@ export const IconResizePack: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconHEIC: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes heic-slide {
+        0%, 20%  { transform: translateX(0px); }
+        50%       { transform: translateX(6px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes heic-badge {
+        0%, 30%  { opacity: 0; transform: scale(0.7); }
+        55%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.7); }
+      }
+      .heic-phone { animation: heic-slide 2.6s ease-in-out infinite; }
+      .heic-badge { transform-origin: 36px 30px; animation: heic-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Phone outline */}
+    <g className="heic-phone">
+      <rect x="8" y="4" width="20" height="32" rx="3.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="13" y="7" width="10" height="6" rx="1.5" fill={accent} fillOpacity="0.2"/>
+      <circle cx="18" cy="32" r="1.5" fill={accent} fillOpacity="0.4"/>
+      {/* Photo thumbnail inside phone */}
+      <rect x="11" y="15" width="14" height="12" rx="1.5" fill={accent} fillOpacity="0.15"/>
+      <path d="M11 24 L15 20 L19 23 L23 19" stroke={accent} strokeWidth="1" strokeLinecap="round" fill="none" strokeOpacity="0.6"/>
+    </g>
+    {/* Conversion badge */}
+    <g className="heic-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="24" width="20" height="10" rx="2.5" fill={accent}/>
+      <text x="36" y="31.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+    </g>
+    {/* Arrow */}
+    <path d="M30 14 L34 14 M32 12 L34 14 L32 16" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
+    {/* Output file icon */}
+    <rect x="34" y="6" width="12" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+    <path d="M40 4 L40 6" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
+  </svg>
+);
+
 export const IconCull: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`

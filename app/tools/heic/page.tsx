@@ -1,0 +1,216 @@
+import React from "react";
+import type { Metadata } from "next";
+import { ArrowRight, Smartphone, Layers, FileImage } from "lucide-react";
+import Link from "next/link";
+import HeicConverter from "@/components/tools/HeicConverter";
+import ToolHeader from "@/components/tools/ToolHeader";
+import { APP_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Free HEIC to JPG/WebP Converter Online — No Upload Needed | SammaPix",
+  description:
+    "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files, no signup required. Fast, private, works on any device.",
+  alternates: {
+    canonical: `${APP_URL}/tools/heic`,
+  },
+  openGraph: {
+    title: "Free HEIC to JPG/WebP Converter Online — No Upload Needed | SammaPix",
+    description:
+      "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files, no signup required.",
+    url: `${APP_URL}/tools/heic`,
+    siteName: "SammaPix",
+    type: "website",
+  },
+};
+
+const features = [
+  {
+    icon: <Smartphone className="h-5 w-5 text-gray-700 dark:text-gray-400" strokeWidth={1.5} />,
+    title: "Convert iPhone photos",
+    description:
+      "Every iPhone photo taken since iOS 11 is HEIC. SammaPix converts them instantly to universally supported JPG or WebP.",
+  },
+  {
+    icon: <Layers className="h-5 w-5 text-gray-700 dark:text-gray-400" strokeWidth={1.5} />,
+    title: "Batch conversion",
+    description:
+      "Convert up to 100 HEIC files at once on the free plan. Pro users can batch convert 500 files in a single session.",
+  },
+  {
+    icon: <FileImage className="h-5 w-5 text-gray-700 dark:text-gray-400" strokeWidth={1.5} />,
+    title: "JPG or WebP output",
+    description:
+      "Choose JPG for maximum compatibility or WebP for ~25% smaller files. Adjustable quality from 60% to 100%.",
+  },
+];
+
+const relatedTools = [
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Convert to WebP", href: "/tools/webp" },
+  { name: "Remove EXIF", href: "/tools/exif" },
+];
+
+export default function HeicPage() {
+  return (
+    <main>
+      <ToolHeader
+        title="HEIC Converter"
+        description="Convert iPhone HEIC photos to JPG or WebP. Batch convert, adjustable quality, download as ZIP."
+        icon={FileImage}
+        accentColor="#6366F1"
+      />
+
+      {/* Tool */}
+      <HeicConverter />
+
+      {/* Features */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
+            Why use SammaPix to convert HEIC?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
+              >
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
+                  {f.icon}
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+                  {f.title}
+                </h3>
+                <p className="text-sm text-[#737373] leading-relaxed">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Long-form SEO content */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            What is HEIC?
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            HEIC (High Efficiency Image Container) is Apple&apos;s default photo format since iOS 11.
+            It uses the HEIF (High Efficiency Image Format) standard developed by the Moving Picture
+            Experts Group (MPEG). HEIC files are roughly half the size of equivalent JPEG files at
+            the same visual quality, which is why Apple switched to it — iPhone storage is limited
+            and HEIC saves significant space.
+          </p>
+
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Why convert HEIC to JPG?
+          </h3>
+          <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0 mb-6">
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Windows and older software often cannot open HEIC files natively
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Most websites, CMSs, and social platforms require JPG or PNG
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Email clients and messaging apps may strip or fail to display HEIC
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Printing services and photo labs typically require JPG
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Stock photo sites and client deliverables expect universal formats
+            </li>
+          </ul>
+
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Why convert HEIC to WebP?
+          </h3>
+          <p className="text-sm text-[#737373] leading-relaxed mb-6">
+            WebP is Google&apos;s modern image format supported by all major browsers since 2020. It
+            produces files 25–34% smaller than JPEG at equivalent quality — making it ideal for
+            websites, e-commerce product images, and any web publishing workflow. If you&apos;re
+            optimizing iPhone photos for the web, converting HEIC directly to WebP skips an
+            intermediate JPG step and preserves more quality.
+          </p>
+
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            How SammaPix converts HEIC
+          </h3>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            SammaPix uses a server-side conversion pipeline powered by{" "}
+            <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded border border-[#E5E5E5] dark:border-[#2A2A2A] dark:text-[#E5E5E5]">
+              heic-convert
+            </code>
+            , a pure JavaScript/WebAssembly library that does not require native system libraries.
+            This means it runs reliably on any server and produces consistent output.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            Your HEIC file is sent over an encrypted HTTPS connection, converted in memory, and the
+            JPG or WebP result is returned immediately. No files are stored on our servers — the
+            conversion is ephemeral. We validate the actual file magic bytes (not just the
+            extension) to ensure only genuine HEIC/HEIF files are processed.
+          </p>
+
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Quality settings explained
+          </h3>
+          <p className="text-sm text-[#737373] leading-relaxed">
+            The quality slider controls the compression level of the output file. At 85% (the
+            default), the result is visually indistinguishable from the original at a significantly
+            smaller file size. At 60%, you get the smallest possible file — useful for thumbnails or
+            email attachments. At 100%, virtually no lossy compression is applied.
+          </p>
+        </div>
+      </section>
+
+      {/* Related tools */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More free image tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {relatedTools.map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {tool.name}
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "SammaPix HEIC Converter",
+            url: `${APP_URL}/tools/heic`,
+            description:
+              "Free online HEIC to JPG and WebP converter. Batch convert iPhone photos, no signup required.",
+            applicationCategory: "MultimediaApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          }),
+        }}
+      />
+    </main>
+  );
+}
