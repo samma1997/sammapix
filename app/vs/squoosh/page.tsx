@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, X, ArrowRight, Sparkles, Lock, Globe } from "lucide-react";
+import { Check, X, ArrowRight, Sparkles, Lock, Globe, Zap } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
@@ -164,6 +164,71 @@ export default function VsSquooshPage() {
               Squoosh exposes low-level codec settings: MozJPEG chroma subsampling, OxiPNG filter strategies, AVIF encoder settings. If you&apos;re a developer who needs to squeeze every byte and tune codec-level parameters, Squoosh&apos;s advanced controls are unmatched. SammaPix focuses on the 95% use case: good quality, small size, fast workflow.
             </p>
           </div>
+          <div>
+            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
+              <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+              EXIF removal — a privacy feature Squoosh skips
+            </h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Squoosh preserves EXIF metadata in your output files. That metadata contains GPS coordinates, device model, lens info, and timestamps. For photographers who publish images to the web, this can be a significant privacy leak — especially if you photograph from home or work locations. SammaPix&apos;s EXIF Remover strips all metadata client-side before you download the file. No server needed, no data sent anywhere.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
+              <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+              Price — both free, but SammaPix has a Pro tier for power users
+            </h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Squoosh is completely free with no plans or tiers — it&apos;s a Google open-source project. SammaPix is also free for core tools, with a Pro plan at $59/year that adds 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. For most users, both tools are free. The difference is that SammaPix is actively evolving its feature set, while Squoosh is archived and frozen.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Who should switch */}
+      <div className="mb-14 p-6 border border-gray-200 rounded-md bg-gray-50/40">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Who should switch from Squoosh to SammaPix?</h2>
+        <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          Squoosh is not going away — it still works. But it is no longer maintained, and it has never supported batch workflows or AI features. You should consider switching if:
+        </p>
+        <ul className="space-y-3 text-sm text-gray-600">
+          <li className="flex items-start gap-3">
+            <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
+            <span><strong className="text-gray-800">You process more than one image at a time.</strong> Squoosh&apos;s one-file-at-a-time design becomes painful fast when you have 20+ images to optimize for a blog post or product launch.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
+            <span><strong className="text-gray-800">You publish to a website and care about SEO.</strong> AI rename generates descriptive filenames and alt text that Squoosh cannot produce.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
+            <span><strong className="text-gray-800">You want EXIF data removed.</strong> Squoosh outputs files with full metadata intact.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
+            <span><strong className="text-gray-800">You need a tool that will receive updates.</strong> Squoosh was archived by Google in 2023. SammaPix ships new features regularly.</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Internal links */}
+      <div className="mb-14">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Explore SammaPix tools</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Link href="/tools" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">All tools</p>
+              <p className="text-xs text-gray-500 mt-0.5">Compress, convert, rename, resize, EXIF strip</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+          <Link href="/pricing" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Pricing</p>
+              <p className="text-xs text-gray-500 mt-0.5">Free forever — Pro at $59/year for power users</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
         </div>
       </div>
 
