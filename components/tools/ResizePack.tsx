@@ -12,6 +12,7 @@ import {
   RotateCcw,
   Lock,
   Unlock,
+  ArrowDownToLine,
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -317,6 +318,19 @@ export default function ResizePack() {
     setEntries(results);
     setUiState("done");
   }, [pendingFiles, mode, percentage, lockAspect, widthVal, heightVal]);
+
+  // ── Single download ───────────────────────────────────────────────────────
+  const handleDownloadSingle = useCallback((entry: ResizeEntry) => {
+    if (!entry.resultBlob) return;
+    const url = URL.createObjectURL(entry.resultBlob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = resizedFilename(entry.file.name, entry.resultW, entry.resultH);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, []);
 
   // ── ZIP download ──────────────────────────────────────────────────────────
   const handleDownloadZip = useCallback(async () => {
@@ -697,40 +711,48 @@ export default function ResizePack() {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {entries.map((entry, i) => (
               <div
                 key={i}
-                className="border border-[#E5E5E5] rounded-md overflow-hidden bg-white"
+                className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white"
               >
                 {/* Thumbnail */}
-                <div className="aspect-square bg-[#F5F5F5] flex items-center justify-center overflow-hidden">
+                <div className="relative bg-[#F5F5F5] flex items-center justify-center overflow-hidden" style={{ height: "180px" }}>
                   {entry.previewUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={entry.previewUrl}
                       alt={entry.file.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   ) : (
-                    <ImageIcon className="h-8 w-8 text-[#D4D4D4]" strokeWidth={1} />
+                    <ImageIcon className="h-10 w-10 text-[#D4D4D4]" strokeWidth={1} />
                   )}
                 </div>
 
-                {/* Info */}
-                <div className="p-2.5">
-                  <p
-                    className="text-[11px] font-medium text-[#171717] truncate mb-1"
-                    title={entry.file.name}
-                  >
-                    {entry.file.name}
-                  </p>
-                  {entry.error ? (
-                    <p className="text-[10px] text-[#DC2626]">Failed</p>
-                  ) : (
-                    <p className="text-[10px] text-[#A3A3A3]">
-                      {entry.resultW}&times;{entry.resultH}px
+                {/* Info + download */}
+                <div className="px-3 py-3 flex items-center justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-[12px] font-medium text-[#171717] truncate" title={entry.file.name}>
+                      {entry.file.name}
                     </p>
+                    {entry.error ? (
+                      <p className="text-[11px] text-[#DC2626] mt-0.5">Failed</p>
+                    ) : (
+                      <p className="text-[11px] text-[#A3A3A3] mt-0.5">
+                        {entry.resultW} × {entry.resultH} px
+                      </p>
+                    )}
+                  </div>
+                  {entry.resultBlob && (
+                    <button
+                      onClick={() => handleDownloadSingle(entry)}
+                      title="Download this image"
+                      className="shrink-0 flex items-center justify-center h-8 w-8 rounded-md border border-[#E5E5E5] text-[#525252] hover:border-[#171717] hover:text-[#171717] hover:bg-[#F5F5F5] transition-colors"
+                    >
+                      <ArrowDownToLine className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </button>
                   )}
                 </div>
               </div>
