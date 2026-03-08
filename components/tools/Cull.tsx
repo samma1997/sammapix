@@ -365,12 +365,12 @@ export default function CullClient() {
           <div className="flex flex-col items-center justify-center gap-6 px-8 py-16 text-center">
 
             {/* Animated camera icon */}
-            <div className="relative">
-              <div className="h-16 w-16 rounded-2xl border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center">
-                <Camera className="h-8 w-8 text-[#525252]" strokeWidth={1.5} />
+            <div className="relative flex items-center justify-center h-20 w-20">
+              <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] flex items-center justify-center">
+                <Camera className="h-7 w-7 text-[#525252]" strokeWidth={1.5} />
               </div>
-              {/* spinning ring */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent border-t-[#171717] animate-spin" />
+              {/* spinning ring — circle */}
+              <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] border-t-[#171717] animate-spin" />
             </div>
 
             {/* Rotating message */}
