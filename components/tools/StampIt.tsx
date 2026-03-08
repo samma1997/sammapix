@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -326,6 +327,8 @@ export default function StampIt() {
 
   const mainInputRef = useRef<HTMLInputElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [upsellIncoming, setUpsellIncoming] = useState<File[]>([]);
 
   // Cleanup blob URLs on unmount
   useEffect(() => {
@@ -350,12 +353,10 @@ export default function StampIt() {
     return () => URL.revokeObjectURL(url);
   }, [logoFile]);
 
-  const addFiles = useCallback(
-    (files: FileList | File[]) => {
-      const arr = Array.from(files).filter((f) => f.type.startsWith("image/"));
+  const actuallyAddFiles = useCallback(
+    (arr: File[]) => {
       if (arr.length === 0) return;
-      const limited = arr.slice(0, maxFiles - entries.length);
-      const newEntries: StampEntry[] = limited.map((file) => {
+      const newEntries: StampEntry[] = arr.map((file) => {
         const previewUrl = URL.createObjectURL(file);
         return {
           file,
@@ -373,8 +374,33 @@ export default function StampIt() {
       });
       setUiState("config");
     },
-    [entries.length, maxFiles]
+    [maxFiles]
   );
+
+  const addFiles = useCallback(
+    (files: FileList | File[]) => {
+      const arr = Array.from(files).filter((f) => f.type.startsWith("image/"));
+      if (arr.length === 0) return;
+
+      const totalAfter = entries.length + arr.length;
+      if (totalAfter > maxFiles && !isPro) {
+        setUpsellIncoming(arr);
+        setUpsellOpen(true);
+        return;
+      }
+
+      actuallyAddFiles(arr.slice(0, maxFiles - entries.length));
+    },
+    [entries.length, maxFiles, isPro, actuallyAddFiles]
+  );
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (upsellIncoming.length > 0) {
+      actuallyAddFiles(upsellIncoming.slice(0, maxFiles - entries.length));
+      setUpsellIncoming([]);
+    }
+  }, [upsellIncoming, maxFiles, entries.length, actuallyAddFiles]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -492,6 +518,13 @@ export default function StampIt() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={entries.length + upsellIncoming.length}
+        freeLimit={maxFiles}
+      />
 
       {/* Pro badge banner */}
       {!isPro && entries.length >= MAX_FREE && (

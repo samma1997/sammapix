@@ -9,8 +9,10 @@ import SettingsToolbar from "@/components/upload/SettingsToolbar";
 import FileList from "@/components/files/FileList";
 import AiRenameModal from "@/components/ai/AiRenameModal";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
+import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
 
 export type ToolMode = "compress" | "webp" | "ai-rename";
 
@@ -20,8 +22,9 @@ interface ToolInterfaceProps {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
-  const { items, aiRenameFile, initAiRenameCounter } = useImageStore();
+  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday } = useImageStore();
   const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -33,11 +36,17 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
 
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [aiRenameFileId, setAiRenameFileId] = useState<string | undefined>();
+  const [aiUpsellOpen, setAiUpsellOpen] = useState(false);
 
   const handleAiRenameClick = async (fileId?: string) => {
     if (!session) {
       setAiRenameFileId(fileId);
       setAiModalOpen(true);
+      return;
+    }
+    // Check daily limit for free users
+    if (!isPro && aiRenameUsedToday >= AI_RENAME_FREE_PER_DAY) {
+      setAiUpsellOpen(true);
       return;
     }
     if (fileId) {
@@ -177,6 +186,13 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
         open={aiModalOpen}
         onClose={() => setAiModalOpen(false)}
         fileId={aiRenameFileId}
+      />
+
+      {/* Pro Upsell Modal — AI rename daily limit */}
+      <ProUpsellModal
+        open={aiUpsellOpen}
+        onClose={() => setAiUpsellOpen(false)}
+        trigger="ai_rename"
       />
     </>
   );

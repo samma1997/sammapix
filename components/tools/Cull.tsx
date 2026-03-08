@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -132,6 +133,8 @@ export default function CullClient() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const previewUrlsRef = useRef<Set<string>>(new Set());
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
 
   // ── Cleanup blob URLs on unmount ──────────────────────────────────────────
   useEffect(() => {
@@ -197,16 +200,7 @@ export default function CullClient() {
 
   // ── File ingestion — pre-convert all previews in parallel ─────────────────
 
-  const processFiles = useCallback(async (files: File[]) => {
-    const imageFiles = files.filter(
-      (f) =>
-        f.type.startsWith("image/") ||
-        f.name.toLowerCase().endsWith(".heic") ||
-        f.name.toLowerCase().endsWith(".heif")
-    );
-    if (imageFiles.length === 0) return;
-
-    const accepted = imageFiles.slice(0, cullLimit);
+  const actuallyProcessFiles = useCallback(async (accepted: File[]) => {
 
     setPrepTotal(accepted.length);
     setPrepDone(0);
@@ -227,7 +221,33 @@ export default function CullClient() {
     setDecisions(new Array(accepted.length).fill(null) as FileDecision[]);
     setCurrentIndex(0);
     setUiState("reviewing");
-  }, [cullLimit]);
+  }, []);
+
+  const processFiles = useCallback((files: File[]) => {
+    const imageFiles = files.filter(
+      (f) =>
+        f.type.startsWith("image/") ||
+        f.name.toLowerCase().endsWith(".heic") ||
+        f.name.toLowerCase().endsWith(".heif")
+    );
+    if (imageFiles.length === 0) return;
+
+    if (imageFiles.length > cullLimit && !isPro) {
+      setPendingFiles(imageFiles);
+      setUpsellOpen(true);
+      return;
+    }
+
+    actuallyProcessFiles(imageFiles.slice(0, cullLimit));
+  }, [cullLimit, isPro, actuallyProcessFiles]);
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (pendingFiles.length > 0) {
+      actuallyProcessFiles(pendingFiles.slice(0, cullLimit));
+      setPendingFiles([]);
+    }
+  }, [pendingFiles, cullLimit, actuallyProcessFiles]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -300,6 +320,13 @@ export default function CullClient() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={pendingFiles.length}
+        freeLimit={cullLimit}
+      />
 
       {/* ── Idle: DropZone ─────────────────────────────────────────────────── */}
       {uiState === "idle" && (

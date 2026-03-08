@@ -17,6 +17,7 @@ import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Lazy library loaders (browser-only) ───────────────────────────────────────
 
@@ -359,6 +360,8 @@ export default function ExifLens() {
   const [cleanMode, setCleanMode] = useState<CleanMode>("gps");
   const [heicWarningDismissed, setHeicWarningDismissed] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
 
   const isAccepted = useCallback((file: File): boolean => {
     const ext = "." + (file.name.split(".").pop()?.toLowerCase() ?? "");
@@ -368,9 +371,8 @@ export default function ExifLens() {
     );
   }, []);
 
-  const processFiles = useCallback(
-    async (rawFiles: File[]) => {
-      const accepted = rawFiles.filter(isAccepted).slice(0, exifLimit);
+  const actuallyProcessFiles = useCallback(
+    async (accepted: File[]) => {
       if (accepted.length === 0) return;
 
       setUiState("parsing");
@@ -412,8 +414,32 @@ export default function ExifLens() {
       setFiles(processed);
       setUiState("results");
     },
-    [isAccepted, exifLimit]
+    [isAccepted]
   );
+
+  const processFiles = useCallback(
+    (rawFiles: File[]) => {
+      const allAccepted = rawFiles.filter(isAccepted);
+      if (allAccepted.length === 0) return;
+
+      if (allAccepted.length > exifLimit && !isPro) {
+        setPendingFiles(allAccepted);
+        setUpsellOpen(true);
+        return;
+      }
+
+      actuallyProcessFiles(allAccepted.slice(0, exifLimit));
+    },
+    [isAccepted, exifLimit, isPro, actuallyProcessFiles]
+  );
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (pendingFiles.length > 0) {
+      actuallyProcessFiles(pendingFiles.slice(0, exifLimit));
+      setPendingFiles([]);
+    }
+  }, [pendingFiles, exifLimit, actuallyProcessFiles]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -520,6 +546,13 @@ export default function ExifLens() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={pendingFiles.length}
+        freeLimit={exifLimit}
+      />
       {uiState === "idle" && (
         <div
           role="button"

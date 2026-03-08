@@ -17,6 +17,9 @@ import {
   ChevronUp,
 } from "lucide-react";
 import JSZip from "jszip";
+import { useSession } from "next-auth/react";
+import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Types ───────────────────────────────────────────────────────────────────────
 
@@ -635,6 +638,10 @@ function DropZone({ onFiles }: DropZoneProps) {
 // ── Main component ───────────────────────────────────────────────────────────────
 
 export default function FilmLab() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const filmLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+
   const [files, setFiles] = useState<ProcessedFile[]>([]);
   const [settings, setSettings] = useState<FilmSettings>(DEFAULT_SETTINGS);
   const [activePreset, setActivePreset] = useState<PresetName>("Raw");
@@ -643,6 +650,8 @@ export default function FilmLab() {
   const [batchProcessing, setBatchProcessing] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [upsellIncoming, setUpsellIncoming] = useState<File[]>([]);
 
   const firstFile = files[0]?.file ?? null;
   const batchDone = files.length > 0 && files.every((f) => f.resultBlob !== null || f.error !== null);
@@ -672,7 +681,7 @@ export default function FilmLab() {
     };
   }, [firstFile, settings]);
 
-  const handleFiles = useCallback((incoming: File[]) => {
+  const actuallyHandleFiles = useCallback((incoming: File[]) => {
     const newEntries: ProcessedFile[] = incoming.map((file) => ({
       id: `${file.name}-${file.size}-${file.lastModified}-${Math.random()}`,
       file,
@@ -704,6 +713,24 @@ export default function FilmLab() {
         });
     });
   }, []);
+
+  const handleFiles = useCallback((incoming: File[]) => {
+    const totalAfter = files.length + incoming.length;
+    if (totalAfter > filmLimit && !isPro) {
+      setUpsellIncoming(incoming);
+      setUpsellOpen(true);
+      return;
+    }
+    actuallyHandleFiles(incoming.slice(0, filmLimit - files.length));
+  }, [files.length, filmLimit, isPro, actuallyHandleFiles]);
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (upsellIncoming.length > 0) {
+      actuallyHandleFiles(upsellIncoming.slice(0, filmLimit - files.length));
+      setUpsellIncoming([]);
+    }
+  }, [upsellIncoming, filmLimit, files.length, actuallyHandleFiles]);
 
   const applyPreset = (name: PresetName) => {
     setActivePreset(name);
@@ -815,6 +842,13 @@ export default function FilmLab() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={files.length + upsellIncoming.length}
+        freeLimit={filmLimit}
+      />
 
       {/* Preset pills — two groups */}
       <div className="mb-6 space-y-4">

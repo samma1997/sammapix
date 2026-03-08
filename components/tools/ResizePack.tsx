@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -497,6 +498,10 @@ export default function ResizePack() {
     { file: File; originalW: number; originalH: number }[]
   >([]);
 
+  // Upsell modal state
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
+
   // Processing state
   const [processingTotal, setProcessingTotal] = useState(0);
   const [processingDone, setProcessingDone] = useState(0);
@@ -541,12 +546,8 @@ export default function ResizePack() {
   }, []);
 
   // ── File ingestion ────────────────────────────────────────────────────────
-  const processFiles = useCallback(
-    async (files: File[]) => {
-      const imageFiles = files.filter((f) => f.type.startsWith("image/"));
-      if (imageFiles.length === 0) return;
-
-      const accepted = imageFiles.slice(0, limit);
+  const actuallyProcessFiles = useCallback(
+    async (accepted: File[]) => {
 
       const withDims = await Promise.all(
         accepted.map(async (file) => {
@@ -567,8 +568,32 @@ export default function ResizePack() {
       setPendingFiles(withDims);
       setUiState("config");
     },
-    [limit]
+    []
   );
+
+  const processFiles = useCallback(
+    (files: File[]) => {
+      const imageFiles = files.filter((f) => f.type.startsWith("image/"));
+      if (imageFiles.length === 0) return;
+
+      if (imageFiles.length > limit && !isPro) {
+        setUpsellFiles(imageFiles);
+        setUpsellOpen(true);
+        return;
+      }
+
+      actuallyProcessFiles(imageFiles.slice(0, limit));
+    },
+    [limit, isPro, actuallyProcessFiles]
+  );
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (upsellFiles.length > 0) {
+      actuallyProcessFiles(upsellFiles.slice(0, limit));
+      setUpsellFiles([]);
+    }
+  }, [upsellFiles, limit, actuallyProcessFiles]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -787,6 +812,13 @@ export default function ResizePack() {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={upsellFiles.length}
+        freeLimit={limit}
+      />
 
       {/* ── Idle: Dropzone ─────────────────────────────────────────────────── */}
       {uiState === "idle" && (

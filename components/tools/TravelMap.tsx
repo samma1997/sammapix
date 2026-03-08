@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -152,6 +153,8 @@ export default function TravelMapClient() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const leafletMapRef = useRef<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -366,20 +369,8 @@ export default function TravelMapClient() {
 
   // ── Process uploaded files ─────────────────────────────────────────────────
 
-  const processFiles = useCallback(async (files: File[]) => {
-    const imageFiles = files.filter((f) => f.type.startsWith("image/") || f.name.toLowerCase().endsWith(".heic") || f.name.toLowerCase().endsWith(".heif"));
-    if (imageFiles.length === 0) return;
-
-    const accepted = imageFiles.slice(0, travelLimit);
+  const actuallyProcessFiles = useCallback(async (accepted: File[]) => {
     const errorMessages: string[] = [];
-
-    if (imageFiles.length > travelLimit) {
-      errorMessages.push(
-        isPro
-          ? `Pro plan: only the first ${travelLimit} photos were processed.`
-          : `Free plan: only the first ${travelLimit} photos were processed. Upgrade to Pro to plot up to 500 photos.`
-      );
-    }
 
     setUiState("processing");
     setProgressPercent(0);
@@ -567,7 +558,30 @@ export default function TravelMapClient() {
     }
 
     setGeocodingState("done");
-  }, [travelLimit, isPro]);
+  }, []);
+
+  const processFiles = useCallback((files: File[]) => {
+    const imageFiles = files.filter(
+      (f) => f.type.startsWith("image/") || f.name.toLowerCase().endsWith(".heic") || f.name.toLowerCase().endsWith(".heif")
+    );
+    if (imageFiles.length === 0) return;
+
+    if (imageFiles.length > travelLimit && !isPro) {
+      setPendingFiles(imageFiles);
+      setUpsellOpen(true);
+      return;
+    }
+
+    actuallyProcessFiles(imageFiles.slice(0, travelLimit));
+  }, [travelLimit, isPro, actuallyProcessFiles]);
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (pendingFiles.length > 0) {
+      actuallyProcessFiles(pendingFiles.slice(0, travelLimit));
+      setPendingFiles([]);
+    }
+  }, [pendingFiles, travelLimit, actuallyProcessFiles]);
 
   // ── Event handlers ─────────────────────────────────────────────────────────
 
@@ -662,6 +676,13 @@ export default function TravelMapClient() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={pendingFiles.length}
+        freeLimit={travelLimit}
+      />
 
       {/* ── Shared view banner ── */}
       {isSharedView && uiState === "map" && (

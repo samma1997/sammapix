@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -306,6 +307,8 @@ export default function TwinHunt() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const previewUrlsRef = useRef<Set<string>>(new Set());
   const abortRef = useRef(false);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
 
   // Cleanup blob URLs on unmount
   useEffect(() => {
@@ -340,16 +343,7 @@ export default function TwinHunt() {
 
   // ── File ingestion ──────────────────────────────────────────────────────────
 
-  const processFiles = useCallback(async (files: File[]) => {
-    const imageFiles = files.filter(
-      (f) =>
-        f.type.startsWith("image/") ||
-        f.name.toLowerCase().endsWith(".heic") ||
-        f.name.toLowerCase().endsWith(".heif")
-    );
-    if (imageFiles.length < 2) return;
-
-    const accepted = imageFiles.slice(0, twinLimit);
+  const actuallyProcessFiles = useCallback(async (accepted: File[]) => {
     abortRef.current = false;
 
     // Initialize entries
@@ -427,7 +421,33 @@ export default function TwinHunt() {
     setToDelete(newToDelete);
     setUiState("results");
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sensitivity, twinLimit]);
+  }, [sensitivity]);
+
+  const processFiles = useCallback((files: File[]) => {
+    const imageFiles = files.filter(
+      (f) =>
+        f.type.startsWith("image/") ||
+        f.name.toLowerCase().endsWith(".heic") ||
+        f.name.toLowerCase().endsWith(".heif")
+    );
+    if (imageFiles.length < 2) return;
+
+    if (imageFiles.length > twinLimit && !isPro) {
+      setPendingFiles(imageFiles);
+      setUpsellOpen(true);
+      return;
+    }
+
+    actuallyProcessFiles(imageFiles.slice(0, twinLimit));
+  }, [twinLimit, isPro, actuallyProcessFiles]);
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (pendingFiles.length > 0) {
+      actuallyProcessFiles(pendingFiles.slice(0, twinLimit));
+      setPendingFiles([]);
+    }
+  }, [pendingFiles, twinLimit, actuallyProcessFiles]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -519,6 +539,13 @@ export default function TwinHunt() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={pendingFiles.length}
+        freeLimit={twinLimit}
+      />
 
       {/* ── Idle: DropZone ─────────────────────────────────────────────────── */}
       {uiState === "idle" && (

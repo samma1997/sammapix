@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -467,6 +468,10 @@ export default function CropRatio() {
   const [results, setResults] = useState<CropEntry[]>([]);
   const [progress, setProgress] = useState(0);
 
+  // Upsell modal state
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
+
   // Derived ratio
   const getRatio = useCallback((): { w: number; h: number; label: string } => {
     if (selectedRatio === "Custom") {
@@ -480,13 +485,8 @@ export default function CropRatio() {
 
   // ── File acceptance ────────────────────────────────────────────────────────
 
-  const acceptFiles = useCallback(
-    async (raw: FileList | File[]) => {
-      const allowed = ["image/jpeg", "image/png", "image/webp"];
-      const files = Array.from(raw)
-        .filter((f) => allowed.includes(f.type))
-        .slice(0, limit);
-
+  const actuallyAcceptFiles = useCallback(
+    async (files: File[]) => {
       if (files.length === 0) return;
 
       // Load dimensions for all files
@@ -513,8 +513,34 @@ export default function CropRatio() {
       setCropOffset({ x: 0.5, y: 0.5 });
       setUiState("config");
     },
-    [limit]
+    []
   );
+
+  const acceptFiles = useCallback(
+    (raw: FileList | File[]) => {
+      const allowed = ["image/jpeg", "image/png", "image/webp"];
+      const filtered = Array.from(raw).filter((f) => allowed.includes(f.type));
+
+      if (filtered.length === 0) return;
+
+      if (filtered.length > limit && !isPro) {
+        setUpsellFiles(filtered);
+        setUpsellOpen(true);
+        return;
+      }
+
+      actuallyAcceptFiles(filtered.slice(0, limit));
+    },
+    [limit, isPro, actuallyAcceptFiles]
+  );
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (upsellFiles.length > 0) {
+      actuallyAcceptFiles(upsellFiles.slice(0, limit));
+      setUpsellFiles([]);
+    }
+  }, [upsellFiles, limit, actuallyAcceptFiles]);
 
   // ── Drop handlers ──────────────────────────────────────────────────────────
 
@@ -691,6 +717,13 @@ export default function CropRatio() {
   if (uiState === "idle") {
     return (
       <div className="max-w-2xl mx-auto">
+        <ProUpsellModal
+          open={upsellOpen}
+          onClose={handleUpsellClose}
+          trigger="files"
+          filesDropped={upsellFiles.length}
+          freeLimit={limit}
+        />
         <label
           onDrop={handleDrop}
           onDragOver={handleDragOver}

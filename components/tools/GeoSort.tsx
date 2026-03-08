@@ -15,6 +15,7 @@ import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { MAX_GEOSORT_FREE, MAX_GEOSORT_PRO } from "@/lib/constants";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -133,6 +134,8 @@ export default function GeoSortClient() {
   const [errors, setErrors] = useState<string[]>([]);
   const [totalSizeBytes, setTotalSizeBytes] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
 
   const isAccepted = useCallback((file: File): boolean => {
     const ext = "." + file.name.split(".").pop()?.toLowerCase();
@@ -141,19 +144,8 @@ export default function GeoSortClient() {
     );
   }, []);
 
-  const processFiles = useCallback(async (files: File[]) => {
-    const allAccepted = files.filter(isAccepted);
-    if (allAccepted.length === 0) return;
-    const accepted = allAccepted.slice(0, limit);
+  const actuallyProcessFiles = useCallback(async (accepted: File[]) => {
     const errorMessages: string[] = [];
-
-    if (allAccepted.length > limit) {
-      errorMessages.push(
-        isPro
-          ? `Pro plan: only the first ${limit} photos were processed.`
-          : `Free plan: only the first ${limit} photos were processed. Upgrade to Pro to sort up to 500 photos at once.`
-      );
-    }
 
     // Compute total size of accepted files
     const totalSize = accepted.reduce((sum, f) => sum + f.size, 0);
@@ -258,7 +250,28 @@ export default function GeoSortClient() {
     setUnsorted(u);
     setErrors(errorMessages);
     setUiState("results");
-  }, [isAccepted, limit, isPro]);
+  }, [isAccepted]);
+
+  const processFiles = useCallback((files: File[]) => {
+    const allAccepted = files.filter(isAccepted);
+    if (allAccepted.length === 0) return;
+
+    if (allAccepted.length > limit && !isPro) {
+      setPendingFiles(allAccepted);
+      setUpsellOpen(true);
+      return;
+    }
+
+    actuallyProcessFiles(allAccepted.slice(0, limit));
+  }, [isAccepted, limit, isPro, actuallyProcessFiles]);
+
+  const handleUpsellClose = useCallback(() => {
+    setUpsellOpen(false);
+    if (pendingFiles.length > 0) {
+      actuallyProcessFiles(pendingFiles.slice(0, limit));
+      setPendingFiles([]);
+    }
+  }, [pendingFiles, limit, actuallyProcessFiles]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -337,6 +350,13 @@ export default function GeoSortClient() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={handleUpsellClose}
+        trigger="files"
+        filesDropped={pendingFiles.length}
+        freeLimit={limit}
+      />
       {/* ── Idle: DropZone ── */}
       {uiState === "idle" && (
         <div
