@@ -717,17 +717,22 @@ export default function ResizePack() {
                 key={i}
                 className="border border-[#E5E5E5] rounded-lg overflow-hidden bg-white"
               >
-                {/* Thumbnail */}
-                <div className="relative bg-[#F5F5F5] flex items-center justify-center overflow-hidden" style={{ height: "180px" }}>
+                {/* Thumbnail — aspect ratio nativo dell'immagine */}
+                <div
+                  className="relative bg-[#F5F5F5] overflow-hidden"
+                  style={{ aspectRatio: `${entry.resultW} / ${entry.resultH}` }}
+                >
                   {entry.previewUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={entry.previewUrl}
                       alt={entry.file.name}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
-                    <ImageIcon className="h-10 w-10 text-[#D4D4D4]" strokeWidth={1} />
+                    <div className="w-full h-full flex items-center justify-center">
+                      <ImageIcon className="h-10 w-10 text-[#D4D4D4]" strokeWidth={1} />
+                    </div>
                   )}
                 </div>
 
