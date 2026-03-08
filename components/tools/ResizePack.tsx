@@ -26,6 +26,7 @@ const CONCURRENCY = 5;
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 type Mode = "pixel" | "percentage";
+type FitMode = "cover" | "contain" | "stretch";
 type UIState = "idle" | "config" | "processing" | "done";
 
 interface SocialPreset {
@@ -74,10 +75,15 @@ function getImageDimensions(file: File): Promise<{ w: number; h: number }> {
   });
 }
 
+// fitMode:
+//   "stretch" — stira esattamente alle dimensioni target (distorce se ratio diverso)
+//   "cover"   — ritaglia dal centro mantenendo il ratio (nessuna distorsione)
+//   "contain" — ridimensiona per stare dentro le dimensioni, aggiunge barre bianche
 async function resizeImage(
   file: File,
   targetW: number,
-  targetH: number
+  targetH: number,
+  fitMode: "stretch" | "cover" | "contain" = "cover"
 ): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -87,7 +93,29 @@ async function resizeImage(
       canvas.width = targetW;
       canvas.height = targetH;
       const ctx = canvas.getContext("2d")!;
-      ctx.drawImage(img, 0, 0, targetW, targetH);
+
+      if (fitMode === "stretch") {
+        ctx.drawImage(img, 0, 0, targetW, targetH);
+      } else if (fitMode === "cover") {
+        // Scale to cover target, crop from center
+        const scale = Math.max(targetW / img.naturalWidth, targetH / img.naturalHeight);
+        const sw = targetW / scale;
+        const sh = targetH / scale;
+        const sx = (img.naturalWidth - sw) / 2;
+        const sy = (img.naturalHeight - sh) / 2;
+        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
+      } else {
+        // contain — fit inside, white background
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, targetW, targetH);
+        const scale = Math.min(targetW / img.naturalWidth, targetH / img.naturalHeight);
+        const dw = img.naturalWidth * scale;
+        const dh = img.naturalHeight * scale;
+        const dx = (targetW - dw) / 2;
+        const dy = (targetH - dh) / 2;
+        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, dx, dy, dw, dh);
+      }
+
       URL.revokeObjectURL(url);
       canvas.toBlob(
         (blob) => {
@@ -150,6 +178,7 @@ export default function ResizePack() {
 
   // Config state
   const [mode, setMode] = useState<Mode>("pixel");
+  const [fitMode, setFitMode] = useState<FitMode>("cover");
   const [widthVal, setWidthVal] = useState<number>(1080);
   const [heightVal, setHeightVal] = useState<number>(1080);
   const [lockAspect, setLockAspect] = useState(true);
@@ -283,7 +312,7 @@ export default function ResizePack() {
           }
         }
 
-        const blob = await resizeImage(file, targetW, targetH);
+        const blob = await resizeImage(file, targetW, targetH, fitMode);
         const previewUrl = URL.createObjectURL(blob);
         blobUrlsRef.current.add(previewUrl);
 
@@ -317,7 +346,7 @@ export default function ResizePack() {
 
     setEntries(results);
     setUiState("done");
-  }, [pendingFiles, mode, percentage, lockAspect, widthVal, heightVal]);
+  }, [pendingFiles, mode, fitMode, percentage, lockAspect, widthVal, heightVal]);
 
   // ── Single download ───────────────────────────────────────────────────────
   const handleDownloadSingle = useCallback((entry: ResizeEntry) => {
@@ -619,6 +648,41 @@ export default function ResizePack() {
                       : " No change in size."}
                   </p>
                 )}
+              </div>
+            )}
+
+            {/* Fit mode — solo in pixel mode con lock OFF */}
+            {mode === "pixel" && !lockAspect && (
+              <div>
+                <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-3">
+                  Fit mode
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {([
+                    { value: "cover",   label: "Cover",   desc: "Crop to fill — no distortion" },
+                    { value: "contain", label: "Contain", desc: "Fit inside — white bars" },
+                    { value: "stretch", label: "Stretch", desc: "Exact dimensions — may distort" },
+                  ] as { value: FitMode; label: string; desc: string }[]).map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => setFitMode(opt.value)}
+                      title={opt.desc}
+                      className={[
+                        "px-3 py-1.5 text-[11px] border rounded-md transition-colors",
+                        fitMode === opt.value
+                          ? "border-[#171717] bg-[#171717] text-white"
+                          : "border-[#E5E5E5] bg-white text-[#525252] hover:border-[#A3A3A3]",
+                      ].join(" ")}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[11px] text-[#A3A3A3] mt-2">
+                  {fitMode === "cover" && "Crops from center to fill exactly — no distortion, some edges may be cut."}
+                  {fitMode === "contain" && "Fits the entire image inside — adds white padding if ratio differs."}
+                  {fitMode === "stretch" && "Forces exact dimensions — image may look distorted."}
+                </p>
               </div>
             )}
 
