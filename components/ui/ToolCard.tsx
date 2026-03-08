@@ -124,7 +124,7 @@ export const IconEXIF: React.FC<{ accent: string }> = ({ accent }) => (
     <line x1="9" y1="24" x2="22" y2="24" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/>
     <line x1="9" y1="28" x2="17" y2="28" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/>
     <g className="exif-scan">
-      <circle cx="36" cy="18" r="8" fill="white" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="36" cy="18" r="8" className="fill-white dark:fill-[#1E1E1E]" stroke={accent} strokeWidth="1.5"/>
       <circle cx="36" cy="18" r="4.5" stroke={accent} strokeWidth="1"/>
       <circle cx="36" cy="18" r="1.5" fill={accent} fillOpacity="0.5"/>
       <line x1="42" y1="24" x2="46" y2="28" stroke={accent} strokeWidth="2" strokeLinecap="round"/>
@@ -151,12 +151,12 @@ export const IconFilmLab: React.FC<{ accent: string }> = ({ accent }) => (
       <rect x="2" y="10" width="44" height="28" rx="3"/>
     </clipPath>
     <g className="film-roll" clipPath="url(#fc-clip)">
-      <rect x="2" y="10" width="56" height="28" rx="3" fill="#171717"/>
+      <rect x="2" y="10" width="56" height="28" rx="3" className="fill-[#171717] dark:fill-[#0A0A0A]"/>
       {[8,16,24,32,40,48].map(x => (
-        <rect key={x} x={x} y="12" width="4" height="5" rx="1" fill="#404040"/>
+        <rect key={x} x={x} y="12" width="4" height="5" rx="1" className="fill-[#404040] dark:fill-[#2A2A2A]"/>
       ))}
       {[8,16,24,32,40,48].map(x => (
-        <rect key={x+100} x={x} y="31" width="4" height="5" rx="1" fill="#404040"/>
+        <rect key={x+100} x={x} y="31" width="4" height="5" rx="1" className="fill-[#404040] dark:fill-[#2A2A2A]"/>
       ))}
       <rect x="6" y="19" width="12" height="10" rx="1.5" fill={accent} fillOpacity="0.6" className="film-glow"/>
       <rect x="22" y="19" width="12" height="10" rx="1.5" fill="#737373" fillOpacity="0.7"/>
@@ -182,10 +182,10 @@ export const IconStampIt: React.FC<{ accent: string }> = ({ accent }) => (
     <rect x="4" y="26" width="40" height="16" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
     <rect x="8" y="30" width="10" height="8" rx="1.5" fill={accent} fillOpacity="0.2"/>
     <g className="stamp-tool">
-      <rect x="16" y="4" width="16" height="8" rx="2" fill="#171717"/>
-      <rect x="20" y="12" width="8" height="5" rx="1" fill="#404040"/>
+      <rect x="16" y="4" width="16" height="8" rx="2" className="fill-[#171717] dark:fill-[#525252]"/>
+      <rect x="20" y="12" width="8" height="5" rx="1" className="fill-[#404040] dark:fill-[#6A6A6A]"/>
     </g>
-    <line x1="24" y1="16" x2="24" y2="28" stroke="#D4D4D4" strokeWidth="1.2" strokeDasharray="2.5 2"/>
+    <line x1="24" y1="16" x2="24" y2="28" className="stroke-[#D4D4D4] dark:stroke-[#525252]" strokeWidth="1.2" strokeDasharray="2.5 2"/>
     <g className="stamp-mark" style={{ opacity: 0 }}>
       <rect x="12" y="32" width="24" height="8" rx="1.5" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" fill={accent} fillOpacity="0.12"/>
       <text x="24" y="38.5" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">© 2025</text>
@@ -202,7 +202,7 @@ export const IconCropRatio: React.FC<{ accent: string }> = ({ accent }) => (
       }
       .crop-inner { transform-origin: 24px 24px; animation: crop-handles 2s ease-in-out infinite; }
     `}</style>
-    <rect x="4" y="6" width="40" height="36" rx="3" fill={accent} fillOpacity="0.08" stroke="#D4D4D4" strokeWidth="1.2"/>
+    <rect x="4" y="6" width="40" height="36" rx="3" fill={accent} fillOpacity="0.08" className="stroke-[#D4D4D4] dark:stroke-[#404040]" strokeWidth="1.2"/>
     <g className="crop-inner">
       <rect x="10" y="12" width="28" height="22" fill="none" stroke={accent} strokeWidth="1.75"/>
       <rect x="8" y="10" width="5" height="5" rx="1" fill={accent}/>
@@ -229,12 +229,12 @@ export const IconTwinHunt: React.FC<{ accent: string }> = ({ accent }) => (
       .twin-ants  { stroke-dasharray: 5 5; animation: twin-ants 0.9s linear infinite; }
       .twin-pulse { transform-origin: 24px 24px; animation: twin-pulse 1.8s ease-in-out infinite; }
     `}</style>
-    <rect x="1" y="8" width="20" height="32" rx="2.5" fill={accent} fillOpacity="0.1" stroke="#D4D4D4" strokeWidth="1.2"/>
-    <rect x="4" y="11" width="8" height="6" rx="1" fill="#E5E5E5"/>
-    <path d="M4 32 L9 26 L13 30 L18 22" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
-    <rect x="27" y="8" width="20" height="32" rx="2.5" fill={accent} fillOpacity="0.1" stroke="#D4D4D4" strokeWidth="1.2"/>
-    <rect x="30" y="11" width="8" height="6" rx="1" fill="#E5E5E5"/>
-    <path d="M30 32 L35 26 L39 30 L44 22" stroke="#D4D4D4" strokeWidth="1" fill="none"/>
+    <rect x="1" y="8" width="20" height="32" rx="2.5" fill={accent} fillOpacity="0.1" className="stroke-[#D4D4D4] dark:stroke-[#404040]" strokeWidth="1.2"/>
+    <rect x="4" y="11" width="8" height="6" rx="1" className="fill-[#E5E5E5] dark:fill-[#404040]"/>
+    <path d="M4 32 L9 26 L13 30 L18 22" className="stroke-[#D4D4D4] dark:stroke-[#525252]" strokeWidth="1" fill="none"/>
+    <rect x="27" y="8" width="20" height="32" rx="2.5" fill={accent} fillOpacity="0.1" className="stroke-[#D4D4D4] dark:stroke-[#404040]" strokeWidth="1.2"/>
+    <rect x="30" y="11" width="8" height="6" rx="1" className="fill-[#E5E5E5] dark:fill-[#404040]"/>
+    <path d="M30 32 L35 26 L39 30 L44 22" className="stroke-[#D4D4D4] dark:stroke-[#525252]" strokeWidth="1" fill="none"/>
     <line className="twin-ants" x1="21" y1="24" x2="27" y2="24" stroke={accent} strokeWidth="1.5"/>
     <g className="twin-pulse">
       <circle cx="24" cy="24" r="5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
@@ -265,9 +265,9 @@ export const IconGeoSort: React.FC<{ accent: string }> = ({ accent }) => (
       <circle cx="34" cy="16" r="2" fill="white"/>
     </g>
     <g className="geo-p2">
-      <circle cx="16" cy="26" r="4.5" fill="#171717"/>
-      <path d="M16 30 L16 35" stroke="#171717" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="16" cy="26" r="1.8" fill="white"/>
+      <circle cx="16" cy="26" r="4.5" className="fill-[#171717] dark:fill-[#D4D4D4]"/>
+      <path d="M16 30 L16 35" className="stroke-[#171717] dark:stroke-[#D4D4D4]" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="16" cy="26" r="1.8" className="fill-white dark:fill-[#1E1E1E]"/>
     </g>
     <g className="geo-p3">
       <circle cx="26" cy="14" r="3.5" fill={accent} fillOpacity="0.7"/>
@@ -309,8 +309,8 @@ export const IconTravelMap: React.FC<{ accent: string }> = ({ accent }) => (
       <circle cx="14" cy="30" r="1.5" fill="white"/>
     </g>
     <g className="tmap-p2" style={{ opacity: 0 }}>
-      <circle cx="34" cy="18" r="3.5" fill="#171717"/>
-      <circle cx="34" cy="18" r="1.5" fill="white"/>
+      <circle cx="34" cy="18" r="3.5" className="fill-[#171717] dark:fill-[#D4D4D4]"/>
+      <circle cx="34" cy="18" r="1.5" className="fill-white dark:fill-[#1E1E1E]"/>
     </g>
   </svg>
 );
@@ -380,21 +380,21 @@ export const IconCull: React.FC<{ accent: string }> = ({ accent }) => (
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
-  "100% Free": "bg-emerald-50 text-emerald-700 border-emerald-200",
-  "Free":      "bg-emerald-50 text-emerald-700 border-emerald-200",
-  "No Signup": "bg-gray-50 text-gray-500 border-gray-200",
-  "AI-powered":"bg-violet-50 text-violet-700 border-violet-200",
-  "Gemini Flash": "bg-violet-50 text-violet-600 border-violet-200",
-  "Privacy":   "bg-red-50 text-red-600 border-red-200",
-  "HEIC support": "bg-amber-50 text-amber-700 border-amber-200",
-  "HEIC":      "bg-amber-50 text-amber-700 border-amber-200",
-  "GPS":       "bg-blue-50 text-blue-700 border-blue-200",
-  "pHash":     "bg-orange-50 text-orange-700 border-orange-200",
-  "Social presets": "bg-pink-50 text-pink-700 border-pink-200",
-  "Batch":     "bg-gray-50 text-gray-600 border-gray-200",
+  "100% Free":    "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900",
+  "Free":         "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900",
+  "No Signup":    "bg-gray-50 text-gray-500 border-gray-200 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] dark:border-[#3A3A3A]",
+  "AI-powered":   "bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-950/30 dark:text-violet-400 dark:border-violet-900",
+  "Gemini Flash": "bg-violet-50 text-violet-600 border-violet-200 dark:bg-violet-950/30 dark:text-violet-400 dark:border-violet-900",
+  "Privacy":      "bg-red-50 text-red-600 border-red-200 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900",
+  "HEIC support": "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-900",
+  "HEIC":         "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-900",
+  "GPS":          "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-900",
+  "pHash":        "bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/30 dark:text-orange-400 dark:border-orange-900",
+  "Social presets":"bg-pink-50 text-pink-700 border-pink-200 dark:bg-pink-950/30 dark:text-pink-400 dark:border-pink-900",
+  "Batch":        "bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] dark:border-[#3A3A3A]",
 };
 
-const DEFAULT_BADGE = "bg-gray-50 text-gray-500 border-gray-200";
+const DEFAULT_BADGE = "bg-gray-50 text-gray-500 border-gray-200 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] dark:border-[#3A3A3A]";
 
 function ToolBadge({ label }: { label: string }) {
   const cls = BADGE_STYLES[label] ?? DEFAULT_BADGE;

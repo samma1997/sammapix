@@ -138,23 +138,23 @@ const TRUST_ITEMS = [
 
 export default function ToolsPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-[#191919]">
 
       {/* Hero */}
-      <section className="border-b border-gray-100 bg-[#FAFAFA]">
+      <section className="border-b border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-4">
+          <p className="text-xs font-medium text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-4">
             Image Tools
           </p>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] leading-tight mb-3 max-w-xl">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-tight mb-3 max-w-xl">
             Every tool you need. All free. No account required.
           </h1>
-          <p className="text-sm text-gray-500 max-w-lg leading-relaxed mb-6">
+          <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed mb-6">
             12 browser-based image tools — nothing uploaded, nothing stored. Works on any device.
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             {["12 tools", "100% free", "Works offline"].map((stat) => (
-              <span key={stat} className="flex items-center gap-1.5 text-sm text-gray-500">
+              <span key={stat} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-[#737373]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1] inline-block" aria-hidden="true" />
                 {stat}
               </span>
@@ -164,7 +164,7 @@ export default function ToolsPage() {
       </section>
 
       {/* Tool grid */}
-      <section className="py-12 px-4 sm:px-6">
+      <section className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {TOOLS.map((tool) => (
@@ -175,20 +175,12 @@ export default function ToolsPage() {
       </section>
 
       {/* Trust section */}
-      <section className="border-t border-gray-100 bg-[#FAFAFA] py-10 px-4 sm:px-6">
+      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919] py-10 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3" role="list">
             {TRUST_ITEMS.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  className="flex-shrink-0"
-                >
+              <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-[#A3A3A3]">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="flex-shrink-0">
                   <circle cx="8" cy="8" r="7.5" fill="#D1FAE5" stroke="#6EE7B7" strokeWidth="0.5"/>
                   <path d="M5 8 L7 10 L11 6" stroke="#059669" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
