@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Keyboard, FileImage, Shield } from "lucide-react";
+import { Keyboard, FileImage, Shield, Star } from "lucide-react";
 import ToolHeader from "@/components/tools/ToolHeader";
 import CullClient from "@/components/tools/Cull";
 import { APP_URL } from "@/lib/constants";
@@ -64,6 +64,8 @@ export default function CullPage() {
       <ToolHeader
         title="Cull"
         description="Review your photos one at a time with keyboard shortcuts. K to keep, X to reject. Download only your best shots as a ZIP."
+        icon={Star}
+        accentColor="#F43F5E"
       />
 
       <CullClient />

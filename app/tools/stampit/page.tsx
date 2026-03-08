@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowRight, Shield, Layers, Archive } from "lucide-react";
+import { ArrowRight, Shield, Layers, Archive, Stamp } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
 import StampIt from "@/components/tools/StampIt";
@@ -57,6 +57,8 @@ export default function StampItPage() {
       <ToolHeader
         title="StampIt"
         description="Batch watermark images with text or your logo. 9 positions, opacity, tiled mode. Download all as ZIP."
+        icon={Stamp}
+        accentColor="#06B6D4"
       />
 
       <StampIt />

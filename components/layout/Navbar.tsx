@@ -7,6 +7,7 @@ import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -23,8 +24,8 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-gray-200 bg-white transition-all duration-150",
-        scrolled && "backdrop-blur-sm bg-white/95"
+        "sticky top-0 z-50 w-full border-b border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] transition-all duration-150",
+        scrolled && "backdrop-blur-sm bg-white/95 dark:bg-[#191919]/95"
       )}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
@@ -102,66 +103,68 @@ export default function Navbar() {
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             focusable="false"
+            className="[--sp-fill:#171717] dark:[--sp-fill:#E5E5E5]"
           >
             {/* ── Outer ring ── */}
             {/* row 0 */}
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"3px"} as React.CSSProperties}  x="2"  y="2"  width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="6"  y="2"  width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="10" y="2"  width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"3px"} as React.CSSProperties} x="14" y="2"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"3px"} as React.CSSProperties}  x="2"  y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="6"  y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="10" y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"3px"} as React.CSSProperties} x="14" y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
             {/* row 1 — sides only */}
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="6"  width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="6"  width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="6"  width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="6"  width="3" height="3" fill="var(--sp-fill,#171717)" />
             {/* row 2 — sides only */}
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="10" width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="10" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
             {/* row 3 */}
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"-3px"} as React.CSSProperties}  x="2"  y="14" width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"-3px"} as React.CSSProperties}  x="6"  y="14" width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"-3px"} as React.CSSProperties}  x="10" y="14" width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"-3px"} as React.CSSProperties} x="14" y="14" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"-3px"} as React.CSSProperties}  x="2"  y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"-3px"} as React.CSSProperties}  x="6"  y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"-3px"} as React.CSSProperties}  x="10" y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"-3px"} as React.CSSProperties} x="14" y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
 
             {/* ── Inner 2x2 ── */}
-            <rect className="sp-pixel-inner" x="6"  y="6"  width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-inner" x="10" y="6"  width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-inner" x="6"  y="10" width="3" height="3" fill="#171717" />
-            <rect className="sp-pixel-inner" x="10" y="10" width="3" height="3" fill="#171717" />
+            <rect className="sp-pixel-inner" x="6"  y="6"  width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-inner" x="10" y="6"  width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-inner" x="6"  y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect className="sp-pixel-inner" x="10" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
           </svg>
 
-          <span className="font-semibold text-gray-900 text-base tracking-tight group-hover:text-gray-700 transition-colors duration-150">
+          <span className="font-semibold text-gray-900 dark:text-[#E5E5E5] text-base tracking-tight group-hover:text-gray-700 dark:group-hover:text-white transition-colors duration-150">
             SammaPix
           </span>
         </Link>
 
         {/* Desktop nav — unico per tutto il sito */}
         <nav className="hidden md:flex items-center gap-1">
-          <Link href="/portfolio" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+          <Link href="/portfolio" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             Portfolio
           </Link>
-          <Link href="/tools" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+          <Link href="/tools" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             {d.nav.tools}
           </Link>
-          <Link href="/pricing" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+          <Link href="/pricing" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             {d.nav.pricing}
           </Link>
-          <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+          <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             {d.nav.blog}
           </Link>
-          <Link href="/about" className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors">
+          <Link href="/about" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             Chi sono
           </Link>
         </nav>
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
           {status === "authenticated" && session ? (
             <>
               <Link
                 href="/account"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 rounded transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors"
               >
                 {(session.user as { plan?: string })?.plan === "pro" && (
-                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] text-white px-1.5 py-0.5 rounded">
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded">
                     PRO
                   </span>
                 )}
@@ -184,30 +187,33 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu button */}
-        <button
-          className="md:hidden p-1.5 text-gray-500 hover:text-gray-900 rounded"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? (
-            <X className="h-5 w-5" strokeWidth={1.5} />
-          ) : (
-            <Menu className="h-5 w-5" strokeWidth={1.5} />
-          )}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <ThemeToggle />
+          <button
+            className="p-1.5 text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <X className="h-5 w-5" strokeWidth={1.5} />
+            ) : (
+              <Menu className="h-5 w-5" strokeWidth={1.5} />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white animate-slide-down">
+        <div className="md:hidden border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] animate-slide-down">
           <div className="px-4 py-3 flex flex-col gap-1">
-            <Link href="/portfolio" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>Portfolio</Link>
-            <Link href="/tools" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>{d.nav.tools}</Link>
-            <Link href="/pricing" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>{d.nav.pricing}</Link>
-            <Link href="/blog" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>{d.nav.blog}</Link>
-            <Link href="/about" className="py-2 text-sm text-gray-600 hover:text-gray-900" onClick={() => setMobileOpen(false)}>Chi sono</Link>
+            <Link href="/portfolio" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Portfolio</Link>
+            <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{d.nav.tools}</Link>
+            <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{d.nav.pricing}</Link>
+            <Link href="/blog" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{d.nav.blog}</Link>
+            <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Chi sono</Link>
 
-            <div className="pt-2 border-t border-gray-100 mt-1 flex gap-2">
+            <div className="pt-2 border-t border-gray-100 dark:border-[#2A2A2A] mt-1 flex gap-2">
               {status === "authenticated" ? (
                 <Button variant="ghost" size="sm" className="w-full" onClick={() => { signOut(); setMobileOpen(false); }}>
                   {d.nav.signout}

@@ -71,6 +71,8 @@ export default function GeoSortPage() {
       <ToolHeader
         title="GeoSort"
         description="Drop your travel photos — GPS data is read locally and photos are organized into folders by country. Nothing leaves your device."
+        icon={MapPin}
+        accentColor="#22C55E"
       />
 
       <GeoSortClient />

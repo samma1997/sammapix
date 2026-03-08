@@ -413,8 +413,8 @@ export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
   return (
     <Link
       href={href}
-      className="group flex items-start gap-4 p-4 sm:p-5 border border-gray-200 rounded-xl bg-white
-                 hover:border-gray-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]
+      className="group flex items-start gap-4 p-4 sm:p-5 border border-gray-200 dark:border-[#2A2A2A] rounded-xl bg-white dark:bg-[#1E1E1E]
+                 hover:border-gray-300 dark:hover:border-[#444] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]
                  hover:-translate-y-0.5 transition-all duration-200 ease-out"
       aria-label={`Open ${name} tool`}
     >
@@ -433,9 +433,9 @@ export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2 mb-1">
-          <span className="text-[15px] font-semibold text-[#171717] leading-tight">{name}</span>
+          <span className="text-[15px] font-semibold text-[#171717] dark:text-[#E5E5E5] leading-tight">{name}</span>
         </div>
-        <p className="text-sm text-gray-500 leading-snug mb-2.5">{tagline}</p>
+        <p className="text-sm text-gray-500 dark:text-[#A3A3A3] leading-snug mb-2.5">{tagline}</p>
         <div className="flex flex-wrap gap-1.5">
           {badges.map((b) => (
             <ToolBadge key={b} label={b} />

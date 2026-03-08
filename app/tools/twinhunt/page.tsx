@@ -93,6 +93,8 @@ export default function TwinHuntPage() {
       <ToolHeader
         title="TwinHunt"
         description="Find duplicate and near-duplicate photos in your browser. Perceptual hashing compares visual content — not file bytes. Nothing uploaded, nothing stored."
+        icon={Copy}
+        accentColor="#F97316"
       />
 
       <TwinHunt />

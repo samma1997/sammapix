@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { MapPin, Globe, Navigation, Shield, Camera } from "lucide-react";
+import { MapPin, Globe, Navigation, Shield, Camera, Map } from "lucide-react";
 import TravelMapClient from "@/components/tools/TravelMap";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
@@ -101,6 +101,8 @@ export default function TravelMapPage() {
       <ToolHeader
         title="TravelMap"
         description="Drop your travel photos — GPS coordinates are read locally and plotted on an interactive map. See your journey, count countries, measure distance."
+        icon={Map}
+        accentColor="#3B82F6"
       />
 
       <TravelMapClient />

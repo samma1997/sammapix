@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowRight, Shield, Archive, Zap } from "lucide-react";
+import { ArrowRight, Shield, Archive, Zap, Minimize2 } from "lucide-react";
 import Link from "next/link";
 import ToolInterface from "@/components/tools/ToolInterface";
 import ToolHeader from "@/components/tools/ToolHeader";
@@ -56,6 +56,8 @@ export default function CompressPage() {
       <ToolHeader
         title="Image Compressor"
         description="Compress JPG, PNG, WebP and GIF files directly in your browser — nothing uploaded to any server."
+        icon={Minimize2}
+        accentColor="#6366F1"
       />
 
       {/* Tool */}

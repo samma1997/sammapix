@@ -49,13 +49,13 @@ function PaymentBanners() {
   return (
     <>
       {success && (
-        <div className="mb-8 flex items-start gap-3 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+        <div className="mb-8 flex items-start gap-3 rounded-md border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 px-4 py-3 text-sm text-green-800 dark:text-green-400">
           <span className="shrink-0 text-base leading-5">🎉</span>
           <span>Welcome to Pro! Your account has been upgraded.</span>
         </div>
       )}
       {canceled && (
-        <div className="mb-8 flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-600">
+        <div className="mb-8 flex items-start gap-3 rounded-md border border-gray-200 dark:border-[#333] bg-gray-50 dark:bg-[#252525] px-4 py-3 text-sm text-gray-600 dark:text-[#A3A3A3]">
           <span>Payment canceled. You&apos;re still on the free plan.</span>
         </div>
       )}
@@ -68,7 +68,7 @@ export default function PricingPage() {
   const savePercent = Math.round((1 - 49 / (7 * 12)) * 100);
 
   return (
-    <div className="py-20 px-4 sm:px-6">
+    <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
       <div className="max-w-4xl mx-auto">
         <Suspense fallback={null}>
           <PaymentBanners />
@@ -76,20 +76,22 @@ export default function PricingPage() {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#171717] tracking-tight mb-3">
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-3">
             All tools free. Pro removes the limits.
           </h1>
-          <p className="text-[#737373] max-w-lg mx-auto">
+          <p className="text-[#737373] dark:text-[#A3A3A3] max-w-lg mx-auto">
             Compress, convert, sort by GPS, rename with AI — no signup needed for the basics.
             Pro is for photographers who process hundreds of photos at a time.
           </p>
 
           {/* Toggle */}
-          <div className="inline-flex items-center gap-3 mt-6 p-1 bg-gray-100 rounded-md border border-gray-200">
+          <div className="inline-flex items-center gap-3 mt-6 p-1 bg-gray-100 dark:bg-[#252525] rounded-md border border-gray-200 dark:border-[#333]">
             <button
               className={cn(
                 "px-3 py-1.5 text-sm rounded transition-colors",
-                !annual ? "bg-white text-gray-900 shadow-xs border border-gray-200" : "text-gray-500 hover:text-gray-700"
+                !annual
+                  ? "bg-white dark:bg-[#1E1E1E] text-gray-900 dark:text-[#E5E5E5] shadow-xs border border-gray-200 dark:border-[#444]"
+                  : "text-gray-500 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#A3A3A3]"
               )}
               onClick={() => setAnnual(false)}
             >
@@ -98,7 +100,9 @@ export default function PricingPage() {
             <button
               className={cn(
                 "px-3 py-1.5 text-sm rounded transition-colors flex items-center gap-2",
-                annual ? "bg-white text-gray-900 shadow-xs border border-gray-200" : "text-gray-500 hover:text-gray-700"
+                annual
+                  ? "bg-white dark:bg-[#1E1E1E] text-gray-900 dark:text-[#E5E5E5] shadow-xs border border-gray-200 dark:border-[#444]"
+                  : "text-gray-500 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#A3A3A3]"
               )}
               onClick={() => setAnnual(true)}
             >
@@ -111,18 +115,18 @@ export default function PricingPage() {
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
           {/* Free */}
-          <div className="border border-[#E5E5E5] rounded-md p-6 bg-white">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-6 bg-white dark:bg-[#1E1E1E]">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-[#171717] mb-1">Free</h2>
-              <p className="text-sm text-[#737373]">All tools, no credit card.</p>
+              <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Free</h2>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">All tools, no credit card.</p>
               <div className="mt-4">
-                <span className="text-3xl font-bold text-[#171717]">$0</span>
-                <span className="text-[#A3A3A3] text-sm ml-1">/ forever</span>
+                <span className="text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">$0</span>
+                <span className="text-[#A3A3A3] dark:text-[#737373] text-sm ml-1">/ forever</span>
               </div>
             </div>
             <a
               href="/tools"
-              className="w-full mb-6 inline-flex items-center justify-center px-4 py-2 text-sm font-medium border border-[#E5E5E5] rounded-md bg-white text-[#171717] hover:bg-[#F5F5F5] transition-colors"
+              className="w-full mb-6 inline-flex items-center justify-center px-4 py-2 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
             >
               Start for free
             </a>
@@ -130,20 +134,20 @@ export default function PricingPage() {
           </div>
 
           {/* Pro */}
-          <div className="border-2 border-[#171717] rounded-md p-6 bg-white relative">
+          <div className="border-2 border-[#171717] dark:border-[#E5E5E5] rounded-md p-6 bg-white dark:bg-[#1E1E1E] relative">
             <div className="absolute -top-3 left-6">
               <Badge variant="black">Most popular</Badge>
             </div>
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-[#171717] mb-1">Pro</h2>
-              <p className="text-sm text-[#737373]">For serious photographers.</p>
+              <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Pro</h2>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">For serious photographers.</p>
               <div className="mt-4">
-                <span className="text-3xl font-bold text-[#171717]">
+                <span className="text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">
                   ${annual ? "4" : "7"}
                 </span>
-                <span className="text-[#A3A3A3] text-sm ml-1">/ month</span>
+                <span className="text-[#A3A3A3] dark:text-[#737373] text-sm ml-1">/ month</span>
                 {annual && (
-                  <p className="text-xs text-[#A3A3A3] mt-1">Billed annually ($49/year)</p>
+                  <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1">Billed annually ($49/year)</p>
                 )}
               </div>
             </div>
@@ -157,8 +161,8 @@ export default function PricingPage() {
 
         {/* Tools included */}
         <div className="mb-16">
-          <h2 className="text-sm font-semibold text-[#171717] mb-1 text-center">Everything included — both plans</h2>
-          <p className="text-xs text-[#A3A3A3] text-center mb-6">Pro users get early access to new tools as they launch</p>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1 text-center">Everything included — both plans</h2>
+          <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-6">Pro users get early access to new tools as they launch</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {tools.map((t) => (
               <div
@@ -166,22 +170,22 @@ export default function PricingPage() {
                 className={cn(
                   "p-4 border rounded-md",
                   t.status === "live"
-                    ? "border-[#E5E5E5] bg-white"
-                    : "border-dashed border-[#E5E5E5] bg-[#FAFAFA]"
+                    ? "border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]"
+                    : "border-dashed border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525]"
                 )}
               >
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className={t.status === "live" ? "text-[#525252]" : "text-[#D4D4D4]"}>
+                  <span className={t.status === "live" ? "text-[#525252] dark:text-[#A3A3A3]" : "text-[#D4D4D4] dark:text-[#444]"}>
                     {t.icon}
                   </span>
-                  <span className={cn("text-sm font-medium", t.status === "live" ? "text-[#171717]" : "text-[#A3A3A3]")}>
+                  <span className={cn("text-sm font-medium", t.status === "live" ? "text-[#171717] dark:text-[#E5E5E5]" : "text-[#A3A3A3] dark:text-[#737373]")}>
                     {t.name}
                   </span>
                   {t.status === "live" && (
-                    <span className="ml-auto text-[9px] font-medium text-white bg-[#171717] px-1.5 py-0.5 rounded-full">live</span>
+                    <span className="ml-auto text-[9px] font-medium text-white dark:text-[#171717] bg-[#171717] dark:bg-white px-1.5 py-0.5 rounded-full">live</span>
                   )}
                 </div>
-                <p className={cn("text-xs leading-relaxed", t.status === "live" ? "text-[#737373]" : "text-[#C4C4C4]")}>
+                <p className={cn("text-xs leading-relaxed", t.status === "live" ? "text-[#737373] dark:text-[#A3A3A3]" : "text-[#C4C4C4] dark:text-[#525252]")}>
                   {t.desc}
                 </p>
               </div>
@@ -190,8 +194,8 @@ export default function PricingPage() {
         </div>
 
         {/* GEO — Why AI recommends SammaPix */}
-        <div className="mb-16 max-w-2xl mx-auto border border-[#E5E5E5] rounded-md p-6 bg-[#FAFAFA]">
-          <p className="text-[10px] font-semibold text-[#A3A3A3] uppercase tracking-widest mb-3">
+        <div className="mb-16 max-w-2xl mx-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+          <p className="text-[10px] font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-3">
             Why SammaPix appears in AI recommendations
           </p>
           <ul className="space-y-2">
@@ -204,8 +208,8 @@ export default function PricingPage() {
               "AI rename powered by Google Gemini — generates SEO-optimized filenames and alt text",
               "Pro plan at $7/mo — 3-4x cheaper than TinyPNG, Compressor.io equivalents",
             ].map((point) => (
-              <li key={point} className="flex items-start gap-2.5 text-sm text-[#525252]">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#A3A3A3] shrink-0" />
+              <li key={point} className="flex items-start gap-2.5 text-sm text-[#525252] dark:text-[#A3A3A3]">
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#A3A3A3] dark:bg-[#737373] shrink-0" />
                 {point}
               </li>
             ))}
@@ -214,7 +218,7 @@ export default function PricingPage() {
 
         {/* FAQ */}
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-xl font-semibold text-[#171717] mb-6 text-center">Common questions</h2>
+          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6 text-center">Common questions</h2>
           <div className="space-y-4">
             <FaqItem
               q="Is SammaPix free?"
@@ -322,15 +326,15 @@ function FeatureList({ features, plan }: FeatureListProps) {
         return (
           <li key={f.label} className="flex items-center gap-2.5 text-sm">
             {isPositive ? (
-              <Check className="h-4 w-4 text-green-600 shrink-0" strokeWidth={2} />
+              <Check className="h-4 w-4 text-green-600 dark:text-green-500 shrink-0" strokeWidth={2} />
             ) : (
-              <X className="h-4 w-4 text-[#D4D4D4] shrink-0" strokeWidth={1.5} />
+              <X className="h-4 w-4 text-[#D4D4D4] dark:text-[#444] shrink-0" strokeWidth={1.5} />
             )}
-            <span className={cn(isPositive ? "text-[#525252]" : "text-[#C4C4C4]")}>
+            <span className={cn(isPositive ? "text-[#525252] dark:text-[#A3A3A3]" : "text-[#C4C4C4] dark:text-[#525252]")}>
               {f.label}
             </span>
             {typeof value === "string" && (
-              <span className="ml-auto text-xs text-[#737373] font-medium">{value}</span>
+              <span className="ml-auto text-xs text-[#737373] dark:text-[#A3A3A3] font-medium">{value}</span>
             )}
           </li>
         );
@@ -342,16 +346,16 @@ function FeatureList({ features, plan }: FeatureListProps) {
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-[#E5E5E5] rounded-md overflow-hidden">
+    <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md overflow-hidden">
       <button
-        className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-[#171717] hover:bg-[#FAFAFA] transition-colors text-left"
+        className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors text-left"
         onClick={() => setOpen(!open)}
       >
         {q}
-        <span className="ml-2 text-[#A3A3A3] shrink-0">{open ? "−" : "+"}</span>
+        <span className="ml-2 text-[#A3A3A3] dark:text-[#737373] shrink-0">{open ? "−" : "+"}</span>
       </button>
       {open && (
-        <div className="px-4 pb-4 pt-1 text-sm text-[#737373] border-t border-[#F5F5F5]">
+        <div className="px-4 pb-4 pt-1 text-sm text-[#737373] dark:text-[#A3A3A3] border-t border-[#F5F5F5] dark:border-[#2A2A2A]">
           {a}
         </div>
       )}

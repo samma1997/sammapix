@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ScanLine, Shield, MapPin, Download } from "lucide-react";
+import { ScanLine, Shield, MapPin, Download, ShieldOff } from "lucide-react";
 import ExifLens from "@/components/tools/ExifLens";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
@@ -89,6 +89,8 @@ export default function ExifPage() {
       <ToolHeader
         title="EXIF Lens"
         description="View all metadata in your photos — GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser."
+        icon={ShieldOff}
+        accentColor="#EF4444"
       />
 
       <ExifLens />

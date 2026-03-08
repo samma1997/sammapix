@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowRight, Shield, Layout, Archive } from "lucide-react";
+import { ArrowRight, Shield, Layout, Archive, Maximize2 } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
 import ResizePack from "@/components/tools/ResizePack";
@@ -57,6 +57,8 @@ export default function ResizePackPage() {
       <ToolHeader
         title="ResizePack"
         description="Batch resize images by pixel dimensions or percentage. Social media presets included. Download all as ZIP."
+        icon={Maximize2}
+        accentColor="#14B8A6"
       />
 
       <ResizePack />

@@ -215,15 +215,15 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Tools section */}
-      <section className="py-14 px-4 sm:px-6 border-t border-gray-100">
+      <section className="py-14 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto">
 
           {/* Section header */}
           <div className="mb-8">
-            <h2 className="text-xl font-semibold text-[#171717] mb-1.5">
+            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
               Free Image Tools for Photographers
             </h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
               Browser-based — no uploads, no account required for the basics.
             </p>
           </div>
@@ -237,11 +237,11 @@ export default function HomePage() {
 
           {/* Trust strip */}
           <ul
-            className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2.5 pt-8 border-t border-gray-100"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2.5 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]"
             role="list"
           >
             {TRUST_ITEMS.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
+              <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-[#A3A3A3]">
                 <svg
                   width="16"
                   height="16"
@@ -262,19 +262,19 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 px-4 sm:px-6 border-t border-gray-100 bg-[#FAFAFA]">
+      <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
-            <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">FAQ</h2>
-            <p className="text-sm text-gray-500">Common questions about SammaPix.</p>
+            <h2 className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-widest mb-2">FAQ</h2>
+            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">Common questions about SammaPix.</p>
           </div>
-          <dl className="divide-y divide-gray-100">
+          <dl className="divide-y divide-gray-100 dark:divide-[#2A2A2A]">
             {FAQ_ITEMS.map((item) => (
               <div key={item.question} className="py-5">
-                <dt className="text-sm font-semibold text-[#171717] mb-1.5">
+                <dt className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {item.question}
                 </dt>
-                <dd className="text-sm text-gray-500 leading-relaxed">{item.answer}</dd>
+                <dd className="text-sm text-gray-500 dark:text-[#A3A3A3] leading-relaxed">{item.answer}</dd>
               </div>
             ))}
           </dl>

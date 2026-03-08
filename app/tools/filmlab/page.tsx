@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowRight, Shield, Layers, Archive } from "lucide-react";
+import { ArrowRight, Shield, Layers, Archive, Film } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
 import FilmLab from "@/components/tools/FilmLab";
@@ -57,6 +57,8 @@ export default function FilmLabPage() {
       <ToolHeader
         title="FilmLab"
         description="Film grain, vignette, fade and analog color grading. 6 film stock presets. Live preview. Batch process all photos."
+        icon={Film}
+        accentColor="#F59E0B"
       />
 
       <FilmLab />
