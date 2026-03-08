@@ -263,7 +263,6 @@ export default function CullClient() {
     if (keptPhotos.length === 0) return;
 
     const JSZip = (await import("jszip")).default;
-    const { saveAs } = await import("file-saver");
 
     const zip = new JSZip();
     for (const entry of keptPhotos) {
@@ -271,7 +270,14 @@ export default function CullClient() {
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
-    saveAs(blob, "sammapix-cull-keepers.zip");
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "sammapix-cull-keepers.zip";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }, [photos, decisions]);
 
   // ── Computed values ───────────────────────────────────────────────────────
