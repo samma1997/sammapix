@@ -4,16 +4,7 @@ import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
 import PlanBadge from "@/components/ui/PlanBadge";
 
-const COMING_SOON_TOOLS = [
-  {
-    name: "TwinHunt",
-    desc: "Find duplicate and near-duplicate photos using perceptual hashing — 100% in-browser.",
-  },
-  {
-    name: "StampIt",
-    desc: "Batch watermark with text or logo — position, opacity, tiled mode.",
-  },
-];
+const COMING_SOON_TOOLS: { name: string; desc: string }[] = [];
 
 export default function HomePage() {
   return (
@@ -207,6 +198,107 @@ export default function HomePage() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {["Pixel", "Percentage", "Presets", "Batch ZIP"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/stampit"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="1" y="9" width="14" height="6" rx="1.2" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
+                      <rect x="5" y="1" width="6" height="4" rx="1" stroke="#6366F1" strokeWidth="1.2" fill="none"/>
+                      <rect x="6.5" y="5" width="3" height="3" rx="0.5" fill="#6366F1" fillOpacity="0.4"/>
+                      <line x1="8" y1="5" x2="8" y2="9" stroke="#6366F1" strokeWidth="1" strokeDasharray="1.5 1"/>
+                      <line x1="4" y1="12" x2="12" y2="12" stroke="#6366F1" strokeWidth="1" strokeLinecap="round"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">StampIt</span>
+                    <PlanBadge />
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Batch watermark with text or logo. 9 positions, opacity, tiled anti-crop mode. Download all as ZIP.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Text", "Logo", "9 Positions", "Batch ZIP"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/croproatio"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="1" y="1" width="14" height="10" rx="1.2" stroke="#6366F1" strokeWidth="1.2" fill="#6366F1" fillOpacity="0.08"/>
+                      <rect x="4" y="3" width="8" height="6" rx="0.8" stroke="#6366F1" strokeWidth="1.2" fill="none"/>
+                      <rect x="3" y="2.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
+                      <rect x="11" y="2.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
+                      <rect x="3" y="7.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
+                      <rect x="11" y="7.5" width="2" height="2" rx="0.4" fill="#6366F1"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">CropRatio</span>
+                    <PlanBadge />
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Crop images to exact ratios: 1:1, 4:5, 9:16, 16:9, A4. Interactive drag-to-position crop. Batch ZIP download.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["1:1 Square", "9:16 Story", "Custom Ratio", "Batch ZIP"].map((f) => (
+                      <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-700 transition-colors flex-shrink-0 mt-1" strokeWidth={1.5} />
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/filmlab"
+              className="group block p-6 border border-gray-200 rounded-lg bg-white hover:border-gray-400 transition-all duration-200 hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="1" y="3" width="14" height="10" rx="1.2" fill="#171717" stroke="#171717" strokeWidth="0.5"/>
+                      <rect x="3" y="3" width="2" height="2.5" rx="0.4" fill="#404040"/>
+                      <rect x="7" y="3" width="2" height="2.5" rx="0.4" fill="#404040"/>
+                      <rect x="11" y="3" width="2" height="2.5" rx="0.4" fill="#404040"/>
+                      <rect x="3" y="10.5" width="2" height="2.5" rx="0.4" fill="#404040"/>
+                      <rect x="7" y="10.5" width="2" height="2.5" rx="0.4" fill="#404040"/>
+                      <rect x="11" y="10.5" width="2" height="2.5" rx="0.4" fill="#404040"/>
+                      <rect x="4" y="6" width="3" height="4" rx="0.6" fill="#92400E" fillOpacity="0.8"/>
+                      <rect x="9" y="6" width="3" height="4" rx="0.6" fill="#737373"/>
+                    </svg>
+                    <span className="text-base font-semibold text-[#171717]">FilmLab</span>
+                    <PlanBadge />
+                  </div>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Film grain, vignette, fade and analog color grading. 6 film stock presets. Batch process all photos.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Film Grain", "Vignette", "Presets", "Batch ZIP"].map((f) => (
                       <span key={f} className="text-[11px] text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
                         {f}
                       </span>

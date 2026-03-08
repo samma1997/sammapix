@@ -475,6 +475,7 @@ function IconCropRatio() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function IconTwinHunt() {
   const css = `
     @keyframes twin-marching-ants {
@@ -642,20 +643,32 @@ const ACTIVE = [
     Illustration: IconResizePack,
   },
   {
-    name: "TwinHunt",
-    href: "/tools/twinhunt",
-    description: "Find duplicates and near-identical photos with perceptual hashing — 100% client-side, no upload.",
-    features: ["Perceptual hash", "Near-dupes", "HEIC", "Batch"],
+    name: "CropRatio",
+    href: "/tools/croproatio",
+    description: "Crop images to exact ratios: 1:1, 4:5, 9:16, 16:9, A4. Interactive drag-to-position crop. Same offset applied to all images in batch.",
+    features: ["1:1 Square", "9:16 Story", "Custom Ratio", "Batch ZIP"],
     bg: "#FFF7ED",
-    Illustration: IconTwinHunt,
+    Illustration: IconCropRatio,
+  },
+  {
+    name: "StampIt",
+    href: "/tools/stampit",
+    description: "Batch watermark with text or logo. 9 positions, opacity, tiled mode. Download as ZIP.",
+    features: ["Text", "Logo", "9 Positions", "Batch ZIP"],
+    bg: "#F0FDF4",
+    Illustration: IconStampIt,
+  },
+  {
+    name: "FilmLab",
+    href: "/tools/filmlab",
+    description: "Film grain, vignette, fade and analog color grading. 6 film stock presets. Batch process.",
+    features: ["Film Grain", "Vignette", "Presets", "Batch ZIP"],
+    bg: "#FDF4FF",
+    Illustration: IconFilmLab,
   },
 ];
 
-const SOON = [
-  { name: "StampIt",   Illustration: IconStampIt,   description: "Batch watermark with text or logo. Position, opacity, tiled anti-crop mode." },
-  { name: "FilmLab",   Illustration: IconFilmLab,   description: "Cinematic grain, vignette and analog color grading on batch." },
-  { name: "CropRatio", Illustration: IconCropRatio, description: "Crop to exact ratio: 1:1, 4:5, 16:9, A4. Optional smart centering." },
-];
+const SOON: { name: string; Illustration: () => React.JSX.Element; description: string }[] = [];
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
