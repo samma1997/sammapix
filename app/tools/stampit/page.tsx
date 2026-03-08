@@ -1,0 +1,177 @@
+import React from "react";
+import type { Metadata } from "next";
+import { ArrowRight, Shield, Layers, Archive } from "lucide-react";
+import Link from "next/link";
+import ToolHeader from "@/components/tools/ToolHeader";
+import StampIt from "@/components/tools/StampIt";
+import { APP_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Free Batch Image Watermark Tool | StampIt by SammaPix",
+  description:
+    "Add text or logo watermarks to multiple images at once. 9 positions, opacity control, tiled anti-crop mode, download all as ZIP. No upload, no signup.",
+  alternates: {
+    canonical: `${APP_URL}/tools/stampit`,
+  },
+  openGraph: {
+    title: "Free Batch Image Watermark Tool | StampIt by SammaPix",
+    description:
+      "Add text or logo watermarks to multiple images at once. 9 positions, opacity control, tiled anti-crop mode, download all as ZIP. No upload, no signup.",
+    url: `${APP_URL}/tools/stampit`,
+    siteName: "SammaPix",
+    type: "website",
+  },
+};
+
+const features = [
+  {
+    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "100% private — no upload",
+    description:
+      "All watermarking happens in your browser using the Canvas API. Your images never leave your device.",
+  },
+  {
+    icon: <Layers className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Tiled anti-crop mode",
+    description:
+      "Repeats the watermark across the entire image in a diagonal grid — making it impossible to crop out.",
+  },
+  {
+    icon: <Archive className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    title: "Batch ZIP download",
+    description:
+      "Watermark hundreds of images in one go and download all results in a single ZIP archive.",
+  },
+];
+
+const relatedTools = [
+  { name: "Crunch — Compress", href: "/tools/compress" },
+  { name: "ResizePack", href: "/tools/resizepack" },
+  { name: "EXIF Lens", href: "/tools/exif" },
+  { name: "All tools", href: "/tools" },
+];
+
+export default function StampItPage() {
+  return (
+    <main>
+      <ToolHeader
+        title="StampIt"
+        description="Batch watermark images with text or your logo. 9 positions, opacity, tiled mode. Download all as ZIP."
+      />
+
+      <StampIt />
+
+      {/* Features */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+            Why use SammaPix to watermark images?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+              >
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                  {f.icon}
+                </div>
+                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                  {f.title}
+                </h3>
+                <p className="text-sm text-[#737373] leading-relaxed">
+                  {f.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Long-form SEO content */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+            How batch image watermarking works
+          </h2>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            StampIt uses the browser&apos;s native Canvas API to draw watermarks
+            directly onto your images — no server, no upload. Drop your images,
+            configure the watermark text or logo, choose a position and opacity,
+            then hit apply. All images are processed concurrently.
+          </p>
+          <p className="text-sm text-[#737373] leading-relaxed mb-4">
+            The tiled mode repeats your watermark in a diagonal grid across the
+            entire image at reduced opacity. This makes it virtually impossible
+            to crop or clone-stamp the watermark out, giving you maximum
+            copyright protection.
+          </p>
+          <h3 className="text-base font-semibold text-[#171717] mb-3">
+            When should you watermark images?
+          </h3>
+          <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              Before sharing photos on social media to protect your copyright
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              When sending proofs to clients — they can preview but not use the full image
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              To brand a batch of product photos before publishing to a website or marketplace
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#6366F1] mt-0.5">—</span>
+              To add a subtle logo or copyright to stock photos you sell online
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Related tools */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] mb-4">
+            More free image tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {relatedTools.map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] bg-white transition-colors"
+              >
+                {tool.name}
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "SammaPix StampIt",
+            url: `${APP_URL}/tools/stampit`,
+            description:
+              "Free online batch image watermark tool. Add text or logo watermarks to multiple images. 9 positions, tiled mode, download as ZIP.",
+            applicationCategory: "MultimediaApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          }),
+        }}
+      />
+    </main>
+  );
+}

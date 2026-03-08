@@ -2,7 +2,7 @@
 
 import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Check, X, ArrowRight, Zap, Image, MapPin, Globe, Scissors, Stamp, ScanEye, Package, Crop } from "lucide-react";
+import { Check, X, ArrowRight, Zap, Image, MapPin, Globe, Scissors, Stamp, ScanEye, Package, Crop, Film } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
@@ -36,6 +36,7 @@ const tools = [
   { icon: <Package className="h-4 w-4" strokeWidth={1.5} />, name: "ResizePack",desc: "Batch resize + ZIP",             status: "live" },
   { icon: <Crop className="h-4 w-4" strokeWidth={1.5} />,   name: "CropRatio", desc: "Crop to exact ratio + ZIP",      status: "live" },
   { icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,  name: "StampIt",   desc: "Batch watermark",                status: "live" },
+  { icon: <Film className="h-4 w-4" strokeWidth={1.5} />,   name: "FilmLab",   desc: "Analog film effects + grain",     status: "live" },
   // eslint-disable-next-line jsx-a11y/alt-text
   { icon: <Image className="h-4 w-4" strokeWidth={1.5} />,   name: "More...",   desc: "New tools every month (Pro first)", status: "soon" },
 ];
