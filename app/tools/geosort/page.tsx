@@ -21,37 +21,37 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    icon: <MapPin className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <MapPin className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Reads GPS from EXIF",
     description:
       "Every photo taken with a smartphone or GPS-enabled camera stores coordinates in the file. GeoSort reads them instantly.",
   },
   {
-    icon: <Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Zap className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Smart — only 2-3 API calls for a full trip",
     description:
       "200 photos from Japan? GeoSort detects they're all in the same area and makes just 2–3 location lookups instead of 200. Done in seconds.",
   },
   {
-    icon: <FolderOpen className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <FolderOpen className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Auto-organizes by country",
     description:
       "Photos are grouped into folders like Japan/, Thailand/, Italy/. Mixed trips sorted in seconds — no manual work.",
   },
   {
-    icon: <FileText className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <FileText className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "ZIP or sorting guide for large batches",
     description:
       "Small batch? Download a ZIP. Big shoot (200+ RAW files at 7 MB each)? Download a lightweight CSV guide with filename → folder — no need to re-download 1.4 GB.",
   },
   {
-    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% private — runs in your browser",
     description:
       "GPS reading and file sorting happen entirely on your device. Your photos are never uploaded to any server.",
   },
   {
-    icon: <Smartphone className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Smartphone className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Works with iPhone & Android",
     description:
       "Supports JPG and HEIC (iPhone format). Photos from any camera with GPS are supported — travel, street, landscape.",
@@ -78,29 +78,29 @@ export default function GeoSortPage() {
       <GeoSortClient />
 
       {/* What is GeoSort */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is GeoSort?</h2>
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">What is GeoSort?</h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             GeoSort is a free browser-based tool that reads GPS coordinates from your photo EXIF data and automatically sorts images into folders by country. It processes all files locally — no photos are uploaded to any server. A trip of 200 photos typically requires only 2–3 location API calls due to smart geographic clustering.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed">
-            It supports JPG and HEIC (iPhone format). Photos without GPS coordinates are placed in an <code className="text-xs bg-[#F5F5F5] border border-[#E5E5E5] px-1.5 py-0.5 rounded font-mono">_unsorted/</code> folder. For batches over 150 MB, GeoSort generates a CSV sorting guide instead of a ZIP to avoid re-downloading large RAW files.
+            It supports JPG and HEIC (iPhone format). Photos without GPS coordinates are placed in an <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] px-1.5 py-0.5 rounded font-mono">_unsorted/</code> folder. For batches over 150 MB, GeoSort generates a CSV sorting guide instead of a ZIP to avoid re-downloading large RAW files.
           </p>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">How it works</h2>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">How it works</h2>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             {steps.map((s) => (
-              <div key={s.n} className="p-4 border border-[#E5E5E5] rounded-md bg-white">
-                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] flex items-center justify-center mb-3">
+              <div key={s.n} className="p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
+                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center justify-center mb-3">
                   <span className="text-xs font-semibold text-[#525252]">{s.n}</span>
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1">{s.title}</h3>
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">{s.title}</h3>
                 <p className="text-xs text-[#737373] leading-relaxed">{s.desc}</p>
               </div>
             ))}
@@ -109,16 +109,16 @@ export default function GeoSortPage() {
       </section>
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">Why GeoSort?</h2>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Why GeoSort?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
-              <div key={f.title} className="p-5 border border-[#E5E5E5] rounded-md bg-white">
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+              <div key={f.title} className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{f.title}</h3>
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">{f.title}</h3>
                 <p className="text-sm text-[#737373] leading-relaxed">{f.description}</p>
               </div>
             ))}
@@ -127,9 +127,9 @@ export default function GeoSortPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">Common questions</h2>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Common questions</h2>
           <div className="space-y-5">
             {[
               {
@@ -149,8 +149,8 @@ export default function GeoSortPage() {
                 a: "No. GeoSort reads only the EXIF header of each file (a few KB), not the full image. For geocoding, it detects photos taken in the same area and makes just 2–3 API calls instead of 200 — so it finishes in seconds. For the download: if your total batch exceeds 150 MB, GeoSort automatically offers a sorting guide (.csv) instead of a ZIP. Open the CSV, see which file goes in which folder, and move them manually — no need to re-download gigabytes you already have.",
               },
             ].map((faq) => (
-              <div key={faq.q} className="pb-5 border-b border-[#E5E5E5] last:border-0">
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{faq.q}</h3>
+              <div key={faq.q} className="pb-5 border-b border-[#E5E5E5] dark:border-[#2A2A2A] last:border-0">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">{faq.q}</h3>
                 <p className="text-sm text-[#737373] leading-relaxed">{faq.a}</p>
               </div>
             ))}
@@ -161,9 +161,9 @@ export default function GeoSortPage() {
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA]">
             <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
-            <a href="/blog/geosort-sort-photos-by-location" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+            <a href="/blog/geosort-sort-photos-by-location" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               GeoSort: Sort Your Photos by Location Automatically →
             </a>
           </div>

@@ -21,25 +21,25 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    icon: <Search className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Search className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Perceptual hashing",
     description:
       "Uses pHash (Discrete Cosine Transform) to compare images by visual content, not file bytes. Finds duplicates even after resizing, re-saving, or minor edits.",
   },
   {
-    icon: <Copy className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Copy className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Near-duplicate detection",
     description:
       "Adjustable sensitivity finds exact copies (Hamming distance 0–5), very similar images (6–10), and looser matches (11–20). Tune it to your library.",
   },
   {
-    icon: <Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Zap className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% client-side",
     description:
       "Every pixel is processed in your browser using Canvas API and DCT. No photo ever leaves your device. Works offline once the page is loaded.",
   },
   {
-    icon: <HardDrive className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <HardDrive className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Reclaim disk space",
     description:
       "TwinHunt shows you which photos to delete and how much space you would free. Actual deletion is done in your file manager — we never touch your files.",
@@ -100,9 +100,9 @@ export default function TwinHuntPage() {
       <TwinHunt />
 
       {/* What is TwinHunt */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is TwinHunt?</h2>
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">What is TwinHunt?</h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             TwinHunt is a free browser-based duplicate photo finder that uses perceptual hashing (pHash) technology to detect visually similar and identical images. Unlike byte-level comparison, pHash finds duplicates even when photos have been resized, re-saved, or lightly edited. Processing runs at approximately 50ms per image — entirely in your browser.
           </p>
@@ -113,16 +113,16 @@ export default function TwinHuntPage() {
       </section>
 
       {/* How it works */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">How it works</h2>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">How it works</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {steps.map((s) => (
-              <div key={s.n} className="p-4 border border-[#E5E5E5] rounded-md bg-white">
-                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] flex items-center justify-center mb-3">
+              <div key={s.n} className="p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
+                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center justify-center mb-3">
                   <span className="text-xs font-semibold text-[#525252]">{s.n}</span>
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1">{s.title}</h3>
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">{s.title}</h3>
                 <p className="text-xs text-[#737373] leading-relaxed">{s.desc}</p>
               </div>
             ))}
@@ -131,16 +131,16 @@ export default function TwinHuntPage() {
       </section>
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">What TwinHunt does</h2>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">What TwinHunt does</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {features.map((f) => (
-              <div key={f.title} className="p-5 border border-[#E5E5E5] rounded-md bg-white">
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+              <div key={f.title} className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{f.title}</h3>
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">{f.title}</h3>
                 <p className="text-sm text-[#737373] leading-relaxed">{f.description}</p>
               </div>
             ))}
@@ -149,13 +149,13 @@ export default function TwinHuntPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">Common questions</h2>
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Common questions</h2>
           <div className="space-y-5">
             {faqs.map((faq) => (
-              <div key={faq.q} className="pb-5 border-b border-[#E5E5E5] last:border-0">
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{faq.q}</h3>
+              <div key={faq.q} className="pb-5 border-b border-[#E5E5E5] dark:border-[#2A2A2A] last:border-0">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">{faq.q}</h3>
                 <p className="text-sm text-[#737373] leading-relaxed">{faq.a}</p>
               </div>
             ))}
@@ -166,9 +166,9 @@ export default function TwinHuntPage() {
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA]">
             <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">Related guide</p>
-            <a href="/blog/find-duplicate-photos-free" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+            <a href="/blog/find-duplicate-photos-free" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               Find and Remove Duplicate Photos Free →
             </a>
           </div>

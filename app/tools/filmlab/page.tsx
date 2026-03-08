@@ -25,19 +25,19 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% browser-based — nothing uploaded",
     description:
       "All image processing runs on your device using the Canvas API. Your photos never leave your browser.",
   },
   {
-    icon: <Layers className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Layers className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "6 film stock presets + manual controls",
     description:
       "Start from Kodak Gold, Fuji Pro 400H, Ilford HP5 or Cinematic Teal, then fine-tune grain, vignette, fade, temperature, contrast, saturation and split toning.",
   },
   {
-    icon: <Archive className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Archive className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Batch processing with ZIP download",
     description:
       "Apply the same analog look to all your photos at once and download all processed images in a single ZIP archive.",
@@ -64,21 +64,21 @@ export default function FilmLabPage() {
       <FilmLab />
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             Why use FilmLab for analog effects?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {f.title}
                 </h3>
                 <p className="text-sm text-[#737373] leading-relaxed">
@@ -91,9 +91,9 @@ export default function FilmLabPage() {
       </section>
 
       {/* Long-form SEO content */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             What is FilmLab?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -102,7 +102,7 @@ export default function FilmLabPage() {
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
             FilmLab processes images fully in the browser using the Canvas API — your photos never leave your device. Live preview updates within 100ms as you adjust sliders. Apply the same look to a full batch and download all results as a ZIP.
           </p>
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             How FilmLab analog effects work
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -116,7 +116,7 @@ export default function FilmLabPage() {
             and download them individually or as a ZIP.
           </p>
 
-          <h3 className="text-base font-semibold text-[#171717] mb-3">
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             Film stock presets explained
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0 mb-4">
@@ -142,7 +142,7 @@ export default function FilmLabPage() {
             </li>
           </ul>
 
-          <h3 className="text-base font-semibold text-[#171717] mb-3">
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             Tips for better analog results
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
@@ -167,9 +167,9 @@ export default function FilmLabPage() {
       </section>
 
       {/* Related tools */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-4">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             More free image tools
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -177,7 +177,7 @@ export default function FilmLabPage() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] bg-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
               >
                 {tool.name}
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />

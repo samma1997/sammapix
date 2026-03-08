@@ -21,37 +21,37 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    icon: <MapPin className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <MapPin className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Interactive map",
     description:
       "Powered by OpenStreetMap and Leaflet. Zoom, pan, and click each pin to see the photo filename, location name, and date it was taken.",
   },
   {
-    icon: <Globe className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Globe className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Counts countries",
     description:
       "TravelMap automatically groups your photos by country and shows a country breakdown with photo counts — see exactly which countries you covered.",
   },
   {
-    icon: <Navigation className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Navigation className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Measures km traveled",
     description:
       "Using the Haversine formula, TravelMap calculates the straight-line distance between all your GPS points in chronological order and shows total km.",
   },
   {
-    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% private",
     description:
       "GPS coordinates are extracted from EXIF data entirely inside your browser. Your photos never leave your device — only lat/lon values hit our API for location names.",
   },
   {
-    icon: <Camera className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Camera className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Works with any camera",
     description:
       "iPhone HEIC, Android JPG, mirrorless cameras with GPS — if the file has GPS in its EXIF, TravelMap plots it. Sorted chronologically by capture date.",
   },
   {
-    icon: <MapPin className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <MapPin className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Export your journey",
     description:
       "Copy all coordinates as JSON for use in other apps, or open the full route in Google Maps. Use browser screenshot for a quick map image.",
@@ -108,9 +108,9 @@ export default function TravelMapPage() {
       <TravelMapClient />
 
       {/* What is TravelMap */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is TravelMap?</h2>
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">What is TravelMap?</h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             TravelMap is a free browser-based tool that reads GPS coordinates from your photo EXIF data and visualizes them on an interactive map powered by OpenStreetMap. Each photo appears as a numbered pin, color-coded by country, connected by a dashed line in chronological order of capture date.
           </p>
@@ -121,23 +121,23 @@ export default function TravelMapPage() {
       </section>
 
       {/* How it works */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             How it works
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {steps.map((s) => (
               <div
                 key={s.n}
-                className="p-4 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] flex items-center justify-center mb-3">
+                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center justify-center mb-3">
                   <span className="text-xs font-semibold text-[#525252]">
                     {s.n}
                   </span>
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
                   {s.title}
                 </h3>
                 <p className="text-xs text-[#737373] leading-relaxed">
@@ -150,21 +150,21 @@ export default function TravelMapPage() {
       </section>
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             Why TravelMap?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {f.title}
                 </h3>
                 <p className="text-sm text-[#737373] leading-relaxed">
@@ -177,18 +177,18 @@ export default function TravelMapPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             Common questions
           </h2>
           <div className="space-y-5">
             {faqs.map((faq) => (
               <div
                 key={faq.q}
-                className="pb-5 border-b border-[#E5E5E5] last:border-0"
+                className="pb-5 border-b border-[#E5E5E5] dark:border-[#2A2A2A] last:border-0"
               >
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {faq.q}
                 </h3>
                 <p className="text-sm text-[#737373] leading-relaxed">
@@ -203,9 +203,9 @@ export default function TravelMapPage() {
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA]">
             <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
-            <a href="/blog/travel-map-gps-photos" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+            <a href="/blog/travel-map-gps-photos" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               Turn Your GPS Photos into a Travel Map →
             </a>
           </div>

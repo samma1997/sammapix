@@ -25,19 +25,19 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Browser-based — 100% private",
     description:
       "All resizing happens in your browser using the Canvas API. Your images are never uploaded to any server.",
   },
   {
-    icon: <Layout className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Layout className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Social media presets",
     description:
       "One-click presets for Instagram Post, Story, Twitter/X, LinkedIn, YouTube Thumbnail and A4 print at 300 dpi.",
   },
   {
-    icon: <Archive className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Archive className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Batch ZIP download",
     description:
       "Resize hundreds of images at once and download all results in a single ZIP archive. Files are renamed with their new dimensions.",
@@ -64,21 +64,21 @@ export default function ResizePackPage() {
       <ResizePack />
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             Why use SammaPix to resize images?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {f.title}
                 </h3>
                 <p className="text-sm text-[#737373] leading-relaxed">
@@ -91,9 +91,9 @@ export default function ResizePackPage() {
       </section>
 
       {/* Long-form SEO content */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             What is ResizePack?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -102,7 +102,7 @@ export default function ResizePackPage() {
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
             ResizePack includes 6 social media presets and supports cover and contain fit modes for precise cropping. All resizing runs in the browser using the Canvas API — no files are uploaded to any server.
           </p>
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             How batch image resizing works
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -116,7 +116,7 @@ export default function ResizePackPage() {
             based on its own original dimensions, so portrait and landscape shots
             both come out proportional.
           </p>
-          <h3 className="text-base font-semibold text-[#171717] mb-3">
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             When should you resize images?
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
@@ -141,9 +141,9 @@ export default function ResizePackPage() {
       </section>
 
       {/* Related tools */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-4">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             More free image tools
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -151,7 +151,7 @@ export default function ResizePackPage() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] bg-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
               >
                 {tool.name}
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />

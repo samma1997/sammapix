@@ -39,19 +39,19 @@ const steps = [
 
 const features = [
   {
-    icon: <Keyboard className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Keyboard className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Keyboard-first",
     description:
       "K/X review is 10x faster than clicking. Go through 100 photos in minutes without ever touching the mouse.",
   },
   {
-    icon: <FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <FileImage className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Works with HEIC",
     description:
       "iPhone photos in HEIC format are fully supported. Preview and cull directly — no conversion step needed.",
   },
   {
-    icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
+    icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% private",
     description:
       "Photos never leave your device. Everything happens in your browser — no upload, no server, no cloud.",
@@ -71,9 +71,9 @@ export default function CullPage() {
       <CullClient />
 
       {/* What is Cull */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-[#171717] mb-4">What is Cull?</h2>
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">What is Cull?</h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             Cull is a free browser-based photo culling tool that lets you review photos up to 10x faster than traditional methods using keyboard shortcuts. Press K to keep a photo, X to reject it, and arrow keys to navigate. When finished, download a ZIP containing only the photos you marked as keep.
           </p>
@@ -84,23 +84,23 @@ export default function CullPage() {
       </section>
 
       {/* How it works */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             How it works
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {steps.map((s) => (
               <div
                 key={s.n}
-                className="p-4 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] border border-[#E5E5E5] flex items-center justify-center mb-3">
+                <div className="h-7 w-7 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center justify-center mb-3">
                   <span className="text-xs font-semibold text-[#525252]">
                     {s.n}
                   </span>
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
                   {s.title}
                 </h3>
                 <p className="text-xs text-[#737373] leading-relaxed">
@@ -113,21 +113,21 @@ export default function CullPage() {
       </section>
 
       {/* Features */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5]">
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] mb-6">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
             Why Cull?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="p-5 border border-[#E5E5E5] rounded-md bg-white"
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
               >
-                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] bg-[#F5F5F5] flex items-center justify-center mb-4">
+                <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-[#171717] mb-1.5">
+                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {f.title}
                 </h3>
                 <p className="text-sm text-[#737373] leading-relaxed">
@@ -142,9 +142,9 @@ export default function CullPage() {
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="border border-[#E5E5E5] rounded-lg p-4 bg-[#FAFAFA]">
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA]">
             <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
-            <a href="/blog/how-to-cull-photos-fast" className="text-sm font-medium text-[#171717] hover:text-[#6366F1] flex items-center gap-1">
+            <a href="/blog/how-to-cull-photos-fast" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               How to Cull Photos Fast: A Practical Workflow →
             </a>
           </div>
