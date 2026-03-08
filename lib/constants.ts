@@ -59,7 +59,7 @@ export const DEFAULT_AI_RENAME = false;
 
 // Pricing
 export const PRICE_PRO_MONTHLY = 7;
-export const PRICE_PRO_YEARLY = 49;
+export const PRICE_PRO_YEARLY = 59;
 
 // App info
 export const APP_NAME = "SammaPix";
@@ -83,6 +83,8 @@ export const BLOG_SLUGS = [
   "travel-map-gps-photos",
   "how-to-cull-photos-fast",
   "find-duplicate-photos-free",
+  "remove-gps-from-photos",
+  "create-travel-photo-map",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

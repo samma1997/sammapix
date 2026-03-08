@@ -135,6 +135,14 @@ const POSTS: Post[] = [
     date: "2026-03-08",
     tags: ["Privacy"],
   },
+  {
+    slug: "create-travel-photo-map",
+    title: "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
+    description:
+      "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
+    date: "2026-03-08",
+    tags: ["Tools"],
+  },
 ];
 
 const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy"];
