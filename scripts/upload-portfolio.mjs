@@ -33,14 +33,14 @@ cloudinary.config({
 });
 
 const genAI = new GoogleGenerativeAI("REDACTED_GEMINI_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 // ── Args ───────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
 const limitFlag = args.indexOf("--limit");
 const limit = limitFlag !== -1 ? parseInt(args[limitFlag + 1]) : null;
-const cleanArgs = args.filter((a, i) => a !== "--limit" && i !== limitFlag + 1);
+const cleanArgs = args.filter((a, i) => a !== "--limit" && (limitFlag === -1 || i !== limitFlag + 1));
 const [folderArg, destination, country, year] = cleanArgs;
 
 if (!folderArg || !destination || !country || !year) {
