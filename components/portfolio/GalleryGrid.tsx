@@ -132,17 +132,12 @@ function PhotoTile({
     >
       <Image
         src={photo.srcThumb}
-        alt={photo.alt}
+        alt={photo.alt || "Travel photograph"}
         fill
         sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
         unoptimized
       />
-      {/* Caption overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      <p className="absolute bottom-3 left-3 right-3 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-1">
-        {photo.caption}
-      </p>
     </button>
   );
 }

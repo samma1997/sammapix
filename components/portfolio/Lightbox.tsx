@@ -47,7 +47,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Photo ${current + 1} of ${photos.length}: ${photo.caption}`}
+      aria-label={`Photo ${current + 1} of ${photos.length}${photo.caption ? `: ${photo.caption}` : ""}`}
     >
       {/* Contatore — in alto a sinistra */}
       <div className="absolute top-4 left-4 text-[#737373] text-xs tabular-nums select-none">
@@ -84,19 +84,25 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
       >
         <Image
           src={photo.src}
-          alt={photo.alt}
+          alt={photo.alt || "Travel photograph"}
           width={1200}
           height={800}
           className="max-h-[75vh] w-auto object-contain rounded-sm border border-[#E5E5E5]"
           unoptimized
           priority
         />
-        <div className="text-center px-4">
-          <p className="text-[#171717] text-sm font-medium leading-snug">
-            {photo.caption}
-          </p>
-          <p className="text-[#A3A3A3] text-xs mt-1">{photo.location}</p>
-        </div>
+        {(photo.caption || photo.location) && (
+          <div className="text-center px-4">
+            {photo.caption && (
+              <p className="text-[#171717] text-sm font-medium leading-snug">
+                {photo.caption}
+              </p>
+            )}
+            {photo.location && (
+              <p className="text-[#A3A3A3] text-xs mt-1">{photo.location}</p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Freccia destra */}
