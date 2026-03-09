@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { v2 as cloudinary } from "cloudinary";
 import { z } from "zod";
 
@@ -112,6 +113,10 @@ export async function POST(req: NextRequest) {
       resource_type: "image",
       context: contextString,
     });
+
+    // Invalidate all portfolio pages so changes appear immediately
+    revalidatePath("/portfolio", "layout");
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[admin/photos POST]", error);

@@ -1,5 +1,10 @@
 import { v2 as cloudinary } from "cloudinary";
-import { getTripBySlug, getAllTrips, type Trip, type TripPhoto } from "./destinations";
+import {
+  getTripBySlug,
+  getAllTrips,
+  type Trip,
+  type TripPhoto,
+} from "./destinations";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME ?? "do9hrcwn1",
@@ -13,12 +18,27 @@ function extractPublicId(url: string): string {
   return match ? match[1] : "";
 }
 
+/** Fetch context for a single photo (real-time, no index delay) */
+async function fetchPhotoContext(
+  publicId: string
+): Promise<Record<string, string> | null> {
+  try {
+    const result = await cloudinary.api.resource(publicId, {
+      context: true,
+    });
+    return (result.context?.custom as Record<string, string>) ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Fetch a trip with photo texts enriched from Cloudinary context metadata.
- * Falls back to destinations.ts defaults if Cloudinary is unreachable or
- * if the trip uses placeholder images.
+ * Uses api.resource() per photo for real-time data (no search index delay).
  */
-export async function getEnrichedTrip(slug: string): Promise<Trip | undefined> {
+export async function getEnrichedTrip(
+  slug: string
+): Promise<Trip | undefined> {
   const trip = getTripBySlug(slug);
   if (!trip) return undefined;
 
@@ -27,28 +47,16 @@ export async function getEnrichedTrip(slug: string): Promise<Trip | undefined> {
     return trip;
   }
 
-  const firstPublicId = extractPublicId(trip.photos[0].src);
-  const folder = firstPublicId.split("/").slice(0, -1).join("/");
-
   try {
-    const result = await cloudinary.search
-      .expression(`folder:${folder}`)
-      .with_field("context")
-      .sort_by("public_id", "asc")
-      .max_results(200)
-      .execute();
+    // Fetch context for all photos in parallel
+    const contextResults = await Promise.all(
+      trip.photos.map((photo) =>
+        fetchPhotoContext(extractPublicId(photo.src))
+      )
+    );
 
-    const contextMap = new Map<string, Record<string, string>>();
-    for (const resource of result.resources ?? []) {
-      contextMap.set(
-        resource.public_id,
-        (resource.context?.custom as Record<string, string>) ?? {}
-      );
-    }
-
-    const enrichedPhotos: TripPhoto[] = trip.photos.map((photo) => {
-      const publicId = extractPublicId(photo.src);
-      const ctx = contextMap.get(publicId);
+    const enrichedPhotos: TripPhoto[] = trip.photos.map((photo, i) => {
+      const ctx = contextResults[i];
       if (!ctx) return photo;
 
       return {
