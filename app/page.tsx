@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import HeroSection from "@/components/layout/HeroSection";
-import { getAllTrips } from "@/lib/destinations";
 import {
   ToolCard,
   type ToolCardData,
@@ -170,104 +169,6 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   },
 ];
 
-// ─── Portfolio Preview ────────────────────────────────────────────────────────
-
-function PortfolioPreview() {
-  const trips = getAllTrips();
-  const featured = trips[0];
-  // Hero photo (first) + grid of next 4
-  const hero = featured.photos[0];
-  const grid = featured.photos.slice(1, 5);
-
-  return (
-    <section className="py-14 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex items-end justify-between mb-6">
-          <div>
-            <p className="text-xs font-medium text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-1">
-              Travel Portfolio
-            </p>
-            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
-              {featured.destination} — {new Date(featured.startDate).getFullYear()}
-            </h2>
-          </div>
-          <Link
-            href={`/portfolio/${featured.slug}`}
-            className="text-sm text-gray-500 dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-          >
-            View all {featured.photos.length} photos →
-          </Link>
-        </div>
-
-        {/* Hero + grid layout */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
-          {/* Hero: large photo spanning 2 cols and 2 rows */}
-          <Link
-            href={`/portfolio/${featured.slug}`}
-            className="col-span-2 row-span-2 relative overflow-hidden rounded-sm group"
-            style={{ aspectRatio: `${hero.width || 3}/${hero.height || 4}` }}
-          >
-            <Image
-              src={hero.srcThumb}
-              alt={hero.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, 50vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              priority
-              unoptimized
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <p className="absolute bottom-3 left-3 right-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {hero.caption}
-            </p>
-          </Link>
-
-          {/* 4 smaller photos */}
-          {grid.map((photo) => (
-            <Link
-              key={photo.id}
-              href={`/portfolio/${featured.slug}`}
-              className="relative overflow-hidden rounded-sm group"
-              style={{ aspectRatio: `${photo.width || 3}/${photo.height || 4}` }}
-            >
-              <Image
-                src={photo.srcThumb}
-                alt={photo.alt}
-                fill
-                sizes="(max-width: 640px) 50vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-            </Link>
-          ))}
-        </div>
-
-        {/* Other trips */}
-        {trips.length > 1 && (
-          <div className="mt-6 flex flex-wrap gap-2">
-            {trips.slice(1).map(trip => (
-              <Link
-                key={trip.slug}
-                href={`/portfolio/${trip.slug}`}
-                className="text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#737373] hover:border-gray-400 dark:hover:border-[#525252] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                {trip.destination} {new Date(trip.startDate).getFullYear()}
-              </Link>
-            ))}
-            <Link
-              href="/portfolio"
-              className="text-xs px-3 py-1.5 rounded-full bg-[#171717] dark:bg-white text-white dark:text-[#171717] font-medium"
-            >
-              All trips →
-            </Link>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -352,9 +253,6 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
-
-      {/* Portfolio preview */}
-      <PortfolioPreview />
 
       {/* FAQ */}
       <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">

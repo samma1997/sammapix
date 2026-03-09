@@ -8,7 +8,7 @@ import Link from "next/link";
 
 // Una foto rappresentativa per ogni viaggio
 const HERO_PHOTOS = [
-  { slug: "sri-lanka-2025",  src: "https://picsum.photos/seed/srilanka3/600/900",  destination: "Sri Lanka",  year: "2025" },
+  { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_900,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-colombo-sri-lanka-buddha-statues",  destination: "Sri Lanka",  year: "2025" },
   { slug: "bali-2024",       src: "https://picsum.photos/seed/bali2/600/900",       destination: "Bali",       year: "2024" },
   { slug: "japan-2023",      src: "https://picsum.photos/seed/japan2/600/900",      destination: "Japan",      year: "2023" },
   { slug: "thailand-2024",   src: "https://picsum.photos/seed/thailand3/600/900",   destination: "Thailand",   year: "2024" },
