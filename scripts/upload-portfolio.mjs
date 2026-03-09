@@ -280,10 +280,10 @@ async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif)
 
   const srcThumb = cloudinary.url(result.public_id, {
     fetch_format: "auto", quality: "auto",
-    width: 600, height: 400, crop: "fill", gravity: "auto", secure: true,
+    width: 600, crop: "limit", secure: true,
   });
 
-  return { srcFull, srcThumb };
+  return { srcFull, srcThumb, width: result.width, height: result.height };
 }
 
 // ── Main ───────────────────────────────────────────────────────────────────
@@ -326,8 +326,8 @@ async function main() {
     // Upload Cloudinary (with AI-generated context metadata)
     process.stdout.write(`  ☁️  Upload Cloudinary...`);
     const publicId = `${String(i + 1).padStart(2, "0")}-${aiData.filename}`.slice(0, 80);
-    const { srcFull, srcThumb } = await uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif);
-    console.log(` ✅`);
+    const { srcFull, srcThumb, width, height } = await uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif);
+    console.log(` ✅ (${width}x${height})`);
 
     photos.push({
       id,
@@ -338,6 +338,8 @@ async function main() {
       description: aiData.description,
       location: gpsLocation || aiData.location,
       date: formatDate(exif?.date),
+      width,
+      height,
     });
 
     // Salva progresso dopo ogni foto (in caso di interruzione)
@@ -352,11 +354,11 @@ async function main() {
 
   const outputPath = path.join(outputDir, `${slugify(destination)}.json`);
   console.log(`\n✅ ${photos.length} foto elaborate con successo!`);
-  console.log(`📄 JSON salvato in: ${outputPath}`);
+  console.log(`📄 JSON di backup: ${outputPath}`);
   console.log(`\n📋 Prossimo step:`);
-  console.log(`   1. Apri ${outputPath}`);
-  console.log(`   2. Controlla le descrizioni e correggi quello che non va`);
-  console.log(`   3. Copia l'array 'photos' in lib/destinations.ts`);
+  console.log(`   1. I testi AI sono già salvati nei metadati Cloudinary`);
+  console.log(`   2. Vai su /admin/photos?key=... per rivederli e migliorarli`);
+  console.log(`   3. Aggiungi il trip in lib/destinations.ts (URL foto dal JSON)`);
 }
 
 main().catch(err => {

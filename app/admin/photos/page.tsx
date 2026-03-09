@@ -12,6 +12,7 @@ import {
   Tag,
   AlignLeft,
   ArrowLeft,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -194,6 +195,7 @@ function AdminPhotosContent() {
                 {selectedId === photo.publicId && selectedPhoto && (
                   <EditPanel
                     photo={selectedPhoto}
+                    adminKey={adminKey}
                     onSave={handleSave}
                     onCancel={() => setSelectedId(null)}
                   />
@@ -211,16 +213,19 @@ function AdminPhotosContent() {
 
 function EditPanel({
   photo,
+  adminKey,
   onSave,
   onCancel,
 }: {
   photo: Photo;
+  adminKey: string;
   onSave: (publicId: string, ctx: PhotoContext) => Promise<void>;
   onCancel: () => void;
 }) {
   const [form, setForm] = useState<PhotoContext>({ ...photo.context });
   const [status, setStatus] = useState<SaveStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     setForm({ ...photo.context });
@@ -238,6 +243,32 @@ function EditPanel({
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Save failed");
+    }
+  };
+
+  const handleGenerate = async () => {
+    setGenerating(true);
+    try {
+      // Use a small version of the image for Gemini
+      const analyzeUrl = photo.url.replace(
+        /upload\/.*/,
+        `upload/c_limit,f_jpg,q_auto,w_800/${photo.publicId}`
+      );
+      const res = await fetch("/api/admin/photos/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-key": adminKey,
+        },
+        body: JSON.stringify({ imageUrl: analyzeUrl }),
+      });
+      if (!res.ok) throw new Error("AI generation failed");
+      const data = (await res.json()) as PhotoContext;
+      setForm(data);
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "AI error");
+    } finally {
+      setGenerating(false);
     }
   };
 
@@ -322,10 +353,23 @@ function EditPanel({
           {field("alt", "Alt text", <FileText className="h-3 w-3" />)}
           {field("location", "Location", <MapPin className="h-3 w-3" />)}
 
-          <div className="flex items-center gap-3 pt-1">
+          <div className="flex items-center gap-3 pt-1 flex-wrap">
+            <button
+              onClick={handleGenerate}
+              disabled={generating || status === "saving"}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-[#5558E6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {generating ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <Sparkles className="h-3.5 w-3.5" />
+              )}
+              {generating ? "Generating..." : "Generate with AI"}
+            </button>
+
             <button
               onClick={handleSave}
-              disabled={status === "saving"}
+              disabled={status === "saving" || generating}
               className="inline-flex items-center gap-2 px-4 py-2 bg-[#E5E5E5] text-[#171717] text-sm font-medium rounded-md hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {status === "saving" && (

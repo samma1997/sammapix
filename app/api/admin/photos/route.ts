@@ -107,7 +107,11 @@ export async function POST(req: NextRequest) {
   ].join("|");
 
   try {
-    await cloudinary.uploader.add_context(contextString, [publicId]);
+    await cloudinary.uploader.explicit(publicId, {
+      type: "upload",
+      resource_type: "image",
+      context: contextString,
+    });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[admin/photos POST]", error);
