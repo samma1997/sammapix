@@ -12,6 +12,7 @@ const nextConfig = {
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
       { protocol: "https", hostname: "picsum.photos" },
       { protocol: "https", hostname: "fastly.picsum.photos" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
   async headers() {
@@ -49,7 +50,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com data:",
               // blob: is required for client-side image preview URLs (createObjectURL)
               // data: is required for base64 thumbnails sent to the AI rename API
-              "img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com https://siteground.com https://*.siteground.com https://picsum.photos https://fastly.picsum.photos https://*.tile.openstreetmap.org https://tile.openstreetmap.org",
+              "img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com https://siteground.com https://*.siteground.com https://picsum.photos https://fastly.picsum.photos https://res.cloudinary.com https://*.tile.openstreetmap.org https://tile.openstreetmap.org",
               // worker-src blob: is required for JSZip and browser-image-compression workers
               "worker-src 'self' blob:",
               // Nominatim geocoding is called server-side; client only hits /api/geocode
