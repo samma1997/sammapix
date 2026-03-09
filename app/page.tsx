@@ -174,9 +174,10 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
 
 function PortfolioPreview() {
   const trips = getAllTrips();
-  // Show first trip (Sri Lanka) — 6 photos preview
   const featured = trips[0];
-  const preview = featured.photos.slice(0, 6);
+  // Hero photo (first) + grid of next 4
+  const hero = featured.photos[0];
+  const grid = featured.photos.slice(1, 5);
 
   return (
     <section className="py-14 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
@@ -198,30 +199,51 @@ function PortfolioPreview() {
           </Link>
         </div>
 
-        {/* 3-col masonry preview */}
-        <div className="flex gap-1">
-          {[0, 1, 2].map(ci => (
-            <div key={ci} className="flex flex-col gap-1 flex-1">
-              {preview.filter((_, i) => i % 3 === ci).map(photo => (
-                <Link key={photo.id} href={`/portfolio/${featured.slug}`}>
-                  <div className="relative w-full overflow-hidden rounded-sm group" style={{ aspectRatio: "3/4" }}>
-                    <Image
-                      src={photo.srcThumb}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 640px) 33vw, 20vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 rounded-sm" />
-                  </div>
-                </Link>
-              ))}
-            </div>
+        {/* Hero + grid layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
+          {/* Hero: large photo spanning 2 cols and 2 rows */}
+          <Link
+            href={`/portfolio/${featured.slug}`}
+            className="col-span-2 row-span-2 relative overflow-hidden rounded-sm group"
+            style={{ aspectRatio: `${hero.width || 3}/${hero.height || 4}` }}
+          >
+            <Image
+              src={hero.srcThumb}
+              alt={hero.alt}
+              fill
+              sizes="(max-width: 640px) 100vw, 50vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              priority
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <p className="absolute bottom-3 left-3 right-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {hero.caption}
+            </p>
+          </Link>
+
+          {/* 4 smaller photos */}
+          {grid.map((photo) => (
+            <Link
+              key={photo.id}
+              href={`/portfolio/${featured.slug}`}
+              className="relative overflow-hidden rounded-sm group"
+              style={{ aspectRatio: `${photo.width || 3}/${photo.height || 4}` }}
+            >
+              <Image
+                src={photo.srcThumb}
+                alt={photo.alt}
+                fill
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                unoptimized
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+            </Link>
           ))}
         </div>
 
-        {/* Altri viaggi */}
+        {/* Other trips */}
         {trips.length > 1 && (
           <div className="mt-6 flex flex-wrap gap-2">
             {trips.slice(1).map(trip => (
