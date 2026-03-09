@@ -13,6 +13,8 @@ export interface TripPhoto {
   description: string; // 60-80 word SEO paragraph describing the scene
   location: string;  // precise location name
   date: string;      // ISO date string, within the trip's date range
+  width?: number;    // original photo width in pixels
+  height?: number;   // original photo height in pixels
 }
 
 export interface Trip {
@@ -34,94 +36,21 @@ export interface Trip {
 // SRI LANKA 2025
 // -----------------------------------------------------------------------------
 const sriLankaPhotos: TripPhoto[] = [
-  {
-    id: "sl-01",
-    src: "https://picsum.photos/seed/srilanka1/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka1/600/400",
-    alt: "Sigiriya Rock Fortress rising above the jungle at sunrise, Sri Lanka",
-    caption: "Sigiriya — the lion rock at dawn",
-    description:
-      "At first light, Sigiriya Rock Fortress erupts from a sea of tropical mist. The ancient citadel, built atop a volcanic plug 180 metres above the plains, catches the earliest rays while the jungle below is still wrapped in shadow. The warm ochre stone glows against a cobalt sky, making this one of the most rewarding pre-dawn climbs in all of Asia. A UNESCO World Heritage Site with a view to match.",
-    location: "Sigiriya Rock Fortress, Sri Lanka",
-    date: "2025-03-08",
-  },
-  {
-    id: "sl-02",
-    src: "https://picsum.photos/seed/srilanka2/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka2/600/400",
-    alt: "Temple of the Tooth Relic illuminated at dusk, Kandy, Sri Lanka",
-    caption: "Kandy — the temple at golden hour",
-    description:
-      "The Sri Dalada Maligawa, home to the sacred tooth relic of the Buddha, turns to pure gold as the sun dips behind the Kandyan hills. The reflection shimmers across the adjacent Kandy Lake, doubling the spectacle. Evening puja drums begin to roll through the air just as the last warm light touches the ornate roof — a moment where architecture, religion, and landscape unite in a single frame.",
-    location: "Temple of the Tooth Relic, Kandy, Sri Lanka",
-    date: "2025-03-10",
-  },
-  {
-    id: "sl-03",
-    src: "https://picsum.photos/seed/srilanka3/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka3/600/400",
-    alt: "Nine Arch Bridge in Ella surrounded by lush tea plantations, Sri Lanka",
-    caption: "Ella — nine arches through the mist",
-    description:
-      "The Nine Arch Bridge of Ella is Sri Lanka's most photographed railway structure, and for good reason. Built entirely of stone and brick during the British colonial era, it disappears into tropical greenery on either side. The real magic happens when the blue hill country train clatters across the viaduct with clouds of steam — a scene that feels lifted from a different century, framed by manicured tea bushes and mountain mist.",
-    location: "Nine Arch Bridge, Ella, Sri Lanka",
-    date: "2025-03-12",
-  },
-  {
-    id: "sl-04",
-    src: "https://picsum.photos/seed/srilanka4/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka4/600/400",
-    alt: "Tea picker working on terraced hillside in Nuwara Eliya, Sri Lanka",
-    caption: "Nuwara Eliya — hands in the green",
-    description:
-      "High in the central highlands, a tea picker moves with practiced rhythm through the emerald terraces of Nuwara Eliya — known as Little England for its colonial architecture and cool climate. The picker's bright sari creates a vivid contrast against the deep green carpet of Camellia sinensis bushes. Early morning fog clings to the valley below, softening distant ridges into layers of blue and grey.",
-    location: "Nuwara Eliya Tea Estates, Sri Lanka",
-    date: "2025-03-11",
-  },
-  {
-    id: "sl-05",
-    src: "https://picsum.photos/seed/srilanka5/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka5/600/400",
-    alt: "Stilt fishermen at sunset on the southern coast of Galle, Sri Lanka",
-    caption: "Galle — fishermen on stilts at dusk",
-    description:
-      "Along the southern coastline near Galle, traditional stilt fishermen perch silently above the Indian Ocean surf on their cross-poles, lines trailing into the turquoise water below. At sunset, their silhouettes become graphic sculptures against a sky burning from orange to deep magenta. The tradition dates back centuries; today it is as much performance as livelihood, yet the image remains timeless and compositionally perfect.",
-    location: "Koggala Beach, Galle, Sri Lanka",
-    date: "2025-03-15",
-  },
-  {
-    id: "sl-06",
-    src: "https://picsum.photos/seed/srilanka6/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka6/600/400",
-    alt: "Galle Fort colonial street at blue hour with lanterns glowing, Sri Lanka",
-    caption: "Galle Fort — cobblestones at blue hour",
-    description:
-      "Inside Galle Fort, the world's best-preserved colonial sea fortress, blue hour transforms Dutch-era cobblestone streets into a cinematic tableau. Street lanterns begin to glow amber, casting long shadows across whitewashed walls. The fortified ramparts just beyond frame a slice of deep indigo ocean. Locals stroll unhurriedly past boutique cafes and churches — a living museum where four centuries of history are embedded in every stone.",
-    location: "Galle Fort, Galle, Sri Lanka",
-    date: "2025-03-16",
-  },
-  {
-    id: "sl-07",
-    src: "https://picsum.photos/seed/srilanka7/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka7/600/400",
-    alt: "Gangaramaya Temple in Colombo decorated with colourful lanterns, Sri Lanka",
-    caption: "Colombo — temple of a thousand lights",
-    description:
-      "In the heart of Colombo, the Gangaramaya Temple is a festival of colour and devotion. Hundreds of hanging lanterns in red, gold, and saffron bathe the courtyards in warm, diffused light after dark. The temple blends Sinhalese, Thai, Indian, and Chinese architectural elements into a singular, exuberant whole. Incense smoke drifts between ornate pillars as monks in orange robes move silently through the flickering glow.",
-    location: "Gangaramaya Temple, Colombo, Sri Lanka",
-    date: "2025-03-07",
-  },
-  {
-    id: "sl-08",
-    src: "https://picsum.photos/seed/srilanka8/1200/800",
-    srcThumb: "https://picsum.photos/seed/srilanka8/600/400",
-    alt: "Unawatuna Beach turquoise water and palm trees, southern Sri Lanka",
-    caption: "Unawatuna — where the ocean is glass",
-    description:
-      "Unawatuna Bay curves in a perfect crescent of white sand backed by swaying coconut palms. Mid-morning, before the sea breeze picks up, the shallow lagoon turns to plate glass — a mirror reflecting the palms and the surrounding jungle hillside in perfect symmetry. The warm, gin-clear water is shallow enough to wade far out, and the coral reef just offshore draws snorkellers seeking a different perspective beneath the surface.",
-    location: "Unawatuna Beach, Galle, Sri Lanka",
-    date: "2025-03-17",
-  },
+  { id: "sri-01", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka", alt: "Tiered Buddha statues at Seema Malaka, Gangaramaya Temple, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 2692, height: 3589 },
+  { id: "sri-02", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/02-gangaramaya-temple-buddha-statues-colombo-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/02-gangaramaya-temple-buddha-statues-colombo-sri-lanka", alt: "Bronze and golden Buddha statues inside Gangaramaya Temple, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-03", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/03-colombo-sri-lanka-fierce-dvarapala-guardian-statue", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/03-colombo-sri-lanka-fierce-dvarapala-guardian-statue", alt: "Fierce Sri Lankan Dvarapala guardian statue in Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-04", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/04-gangaramaya-temple-buddha-shrine-colombo-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/04-gangaramaya-temple-buddha-shrine-colombo-sri-lanka", alt: "Golden Buddha statue in Gangaramaya Temple shrine, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 2855, height: 3807 },
+  { id: "sri-05", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/05-gangaramaya-temple-colombo-sri-lanka-buddha-interior-art", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/05-gangaramaya-temple-colombo-sri-lanka-buddha-interior-art", alt: "Gangaramaya Temple interior with golden Buddha statues and murals, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-06", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/06-golden-buddha-statue-colombo-sri-lanka-temple-art", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/06-golden-buddha-statue-colombo-sri-lanka-temple-art", alt: "Close-up golden Buddha statue, Sri Lankan temple art, Colombo", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 2738, height: 3651 },
+  { id: "sri-07", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/07-gangarama-temple-colombo-sri-lanka-colorful-deities", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/07-gangarama-temple-colombo-sri-lanka-colorful-deities", alt: "Vibrant painted deity statues inside Gangarama Temple, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-08", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/08-gangaramaya-temple-buddhist-statues-murals-colombo-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/08-gangaramaya-temple-buddhist-statues-murals-colombo-sri-lanka", alt: "Buddhist statues and murals inside Gangaramaya Temple, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-09", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/09-golden-buddha-head-statue-colombo-sri-lanka-portrait", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/09-golden-buddha-head-statue-colombo-sri-lanka-portrait", alt: "Golden Buddha head statue reflecting warm light, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-10", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/10-ascetic-buddha-wooden-statue-colombo-sri-lanka-temple", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/10-ascetic-buddha-wooden-statue-colombo-sri-lanka-temple", alt: "Wooden emaciated ascetic Buddha statue, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-11", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/11-gangaramaya-temple-colombo-buddha-elephant-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/11-gangaramaya-temple-colombo-buddha-elephant-sri-lanka", alt: "Bronze Buddha statues and ceremonial elephant at Gangaramaya Temple, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-12", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/12-seema-malaka-buddha-statues-modern-stupa-colombo-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/12-seema-malaka-buddha-statues-modern-stupa-colombo-sri-lanka", alt: "Seema Malaka Temple Buddha statues and modern stupa, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-13", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/13-seema-malaka-temple-buddha-statues-colombo-sri-lanka", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/13-seema-malaka-temple-buddha-statues-colombo-sri-lanka", alt: "Rows of Buddha statues and silver stupa at Seema Malaka Temple, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-14", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/14-colombo-galle-face-green-skyscrapers-kites-sri-lanka-urban", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/14-colombo-galle-face-green-skyscrapers-kites-sri-lanka-urban", alt: "Galle Face Green with skyscrapers and kites, Colombo, Sri Lanka", caption: "", description: "", location: "Colombo, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
+  { id: "sri-15", src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/15-sri-lankan-elephant-mahout-maharagama-golden-light", srcThumb: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/15-sri-lankan-elephant-mahout-maharagama-golden-light", alt: "Mahout with Sri Lankan elephant in golden light, Maharagama, Sri Lanka", caption: "", description: "", location: "Maharagama, Sri Lanka", date: "2025-03-09", width: 3024, height: 4032 },
 ];
 
 // -----------------------------------------------------------------------------
@@ -511,7 +440,7 @@ export const trips: Trip[] = [
     continent: "Asia",
     startDate: "2025-03-06",
     endDate: "2025-03-20",
-    coverSrc: "https://picsum.photos/seed/srilanka-cover/1200/800",
+    coverSrc: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka",
     excerpt:
       "An island of extraordinary contrasts — jungle-covered ruins, emerald tea hills, and powder-white beaches, all within a few hours' drive of each other.",
     description:
