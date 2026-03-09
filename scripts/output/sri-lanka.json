@@ -1,0 +1,159 @@
+{
+  "_instructions": "Copia il contenuto di 'photos' in lib/destinations.ts nella Trip corrispondente",
+  "destination": "Sri Lanka",
+  "country": "Sri Lanka",
+  "year": 2025,
+  "photoCount": 15,
+  "photos": [
+    {
+      "id": "sri-01",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-colombo-sri-lanka-buddha-statues?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-colombo-sri-lanka-buddha-statues?_a=BAMAOGJx0",
+      "alt": "Gangaramaya Temple Colombo, Sri Lanka: hundreds of Buddha statues ascend towards a gleaming white stupa under clear blue sky.",
+      "caption": "Colombo — sacred serenity, tiered statues, bright sky",
+      "description": "Serene Buddha statues line a grand tiered platform at Colombo's Gangaramaya Temple. Sunlight illuminates the intricate details of countless seated figures, creating a profound spiritual ambiance. A modern, gleaming stupa rises majestically against a vivid blue sky, anchoring this sacred space. This architectural marvel showcases Sri Lanka's rich Buddhist heritage amidst urban vibrancy.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-02",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/02-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/02-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Row of bronze Buddha statues on golden-draped altars with intricate copper relief panels at Gangaramaya Temple, Colombo, Sri Lanka",
+      "caption": "Gangaramaya — golden serenity of ancient wisdom",
+      "description": "Gleaming bronze Buddha statues sit in meditative repose on golden-draped altars within the historic Gangaramaya Temple in Colombo, Sri Lanka. Intricate copper relief panels adorn the wall behind, depicting sacred stories and figures. Soft light illuminates the detailed craftsmanship and the serene expressions, evoking a profound sense of peace and spiritual devotion. This sacred space showcases the rich cultural heritage of Sri Lankan Buddhism, inviting contemplation.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-03",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/03-colombo-dvarapala-guardian-statue-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/03-colombo-dvarapala-guardian-statue-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Fierce Dvarapala guardian statue, muscular, green robes, angry expression, inside temple, Colombo, Sri Lanka.",
+      "caption": "Colombo — fiery guardian's ancient gaze",
+      "description": "A powerful, intricately carved guardian deity stands sentinel in a sacred space in Colombo. Its muscular physique and fierce, wide-eyed expression with vibrant red details convey immense strength and protection. Emerald green sashes and flowing garments beautifully contrast with the statue's terracotta-hued skin, all bathed in soft, diffused interior light. This imposing figure, likely a Dvarapala, embodies ancient Sri Lankan protective symbolism, captivating visitors with its dramatic presence.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-04",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/04-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/04-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Vibrant Buddha statues, ornate frescoes, golden offerings within Gangaramaya Temple, Colombo, Sri Lanka.",
+      "caption": "Gangaramaya Temple — golden glow of devotion",
+      "description": "Golden Buddha statues illuminate the richly decorated interior of Gangaramaya Temple in Colombo. Vibrant hues of orange, blue, and red adorn the ornate frescoes and numerous figures depicting Buddhist narratives. A central seated Buddha radiates serenity, flanked by other sacred forms. Traditional lamps cast a soft glow, highlighting intricate details and creating a profound atmosphere of spiritual devotion within this iconic Sri Lankan landmark.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-05",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/05-gangaramaya-temple-colombo-sri-lanka-buddha-statues?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/05-gangaramaya-temple-colombo-sri-lanka-buddha-statues?_a=BAMAOGJx0",
+      "alt": "Vibrant Gangaramaya Temple interior, Colombo, Sri Lanka, with golden Buddha statues, intricate painted murals, and patterned ceiling.",
+      "caption": "Gangaramaya Temple — vibrant hues of devotion",
+      "description": "Inside Colombo's revered Gangaramaya Temple, golden Buddha statues in serene poses radiate spiritual calm. Walls and ceilings showcase exquisitely detailed, vibrant murals and traditional patterns, telling ancient stories. Soft, warm light from delicate lamps illuminates the polished, patterned floor. This rich tapestry of color and devotion creates an atmosphere of profound cultural richness and spiritual solace within this sacred Sri Lankan sanctuary.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-06",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/06-golden-buddha-statue-gangarama-temple-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/06-golden-buddha-statue-gangarama-temple-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Close-up of a serene golden Buddha statue's face in Gangarama Temple, Colombo, Sri Lanka, with intricate traditional art halo",
+      "caption": "Colombo Gangarama — tranquil golden wisdom",
+      "description": "A magnificent golden Buddha statue emanates profound tranquility within the sacred walls of Gangarama Temple. Its serene face, painted in a striking yellow, features closed eyes and subtle pink lips, framed by tight black curls. The golden halo behind is adorned with rich, traditional Sri Lankan patterns in deep reds and oranges. Soft, ambient light highlights the statue’s ancient surface and the gentle folds of its orange robe. This iconic spiritual art piece offers a moment of reflective peace within the heart of Colombo, Sri Lanka.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-07",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/07-gangaramaya-temple-colombo-sri-lanka-vibrant-deity-statues?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/07-gangaramaya-temple-colombo-sri-lanka-vibrant-deity-statues?_a=BAMAOGJx0",
+      "alt": "Vibrant Sri Lankan temple statues, intricate painted carvings of deities in Gangaramaya Temple, Colombo, Sri Lanka.",
+      "caption": "Gangaramaya — spiritual artistry, vivid sacred hues",
+      "description": "A kaleidoscope of vivid hues illuminates intricate statues within a Sri Lankan temple in Colombo. Glossy painted deities, adorned with elaborate crowns, garlands, and jewels, emanate spiritual serenity. Golden skin tones contrast with vibrant blues, greens, and reds of their traditional attire. This close-up captures the meticulous craftsmanship and cultural richness of the sacred art, inviting viewers into an ancient narrative of devotion and beauty.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-08",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/08-buddha-statues-colorful-gangaramaya-temple-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/08-buddha-statues-colorful-gangaramaya-temple-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Vibrant yellow Buddha statue alongside colorful deities and murals in traditional Sri Lankan style, Gangaramaya Temple, Colombo.",
+      "caption": "Colombo — vibrant deities, silent devotion",
+      "description": "A rich tapestry of vibrant Buddhist statues fills a temple interior in Colombo, Sri Lanka. Golden-hued figures of Buddha and other deities gleam under soft, diffused light, highlighting intricate carvings and painted murals. Ornate robes, serene expressions, and a backdrop of traditional patterns evoke a deep sense of spiritual heritage and artistic devotion within this sacred space. The meticulous detailing captures a timeless cultural reverence.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-09",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/09-golden-buddha-head-colombo-sri-lanka-buddhist-art?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/09-golden-buddha-head-colombo-sri-lanka-buddhist-art?_a=BAMAOGJx0",
+      "alt": "Gleaming golden Buddha head statue close-up, Colombo, Sri Lanka. Polished brass, serene expression, Buddhist art.",
+      "caption": "Colombo — golden Buddha, serene wisdom",
+      "description": "A magnificent golden Buddha head dominates the frame, its polished surface reflecting warm ambient light. Intricate details of the serene face are highlighted by the gleam of the metal. This exquisite Buddhist artwork embodies tranquility, nestled within a rich cultural setting in Colombo, Sri Lanka. Abstract reflections dance across its contours, enhancing the spiritual ambiance.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-10",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/10-emaciated-buddha-wooden-statue-colombo-sri-lanka-ascetic?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/10-emaciated-buddha-wooden-statue-colombo-sri-lanka-ascetic?_a=BAMAOGJx0",
+      "alt": "Detailed wooden emaciated Buddha statue depicting asceticism, showing ribs and veins, in a Colombo temple, Sri Lanka.",
+      "caption": "Colombo — Ascetic Buddha's profound path to awakening",
+      "description": "An intricately carved wooden statue of the emaciated Buddha commands attention. Subtle lighting illuminates the profound detail, highlighting visible ribs, sinews, and a serene, contemplative expression. This powerful depiction of Prince Siddhartha's ascetic journey before enlightenment stands within a sacred space in Colombo, Sri Lanka. It inspires reflection on the arduous path to spiritual wisdom and inner peace, a revered symbol of Buddhist devotion.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-11",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/11-gangaramaya-temple-buddha-elephant-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/11-gangaramaya-temple-buddha-elephant-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Bronze Buddha statues lined before a large, textured elephant effigy with a tusk, inside a temple with ornate wooden staircase, Colombo, Sri Lanka.",
+      "caption": "Colombo — serene Buddhas, ancient guardian",
+      "description": "Golden light gently illuminates a row of serene bronze Buddha statues, poised thoughtfully on a shimmering golden cloth. Behind them stands a colossal, textured elephant effigy, its weathered form a silent guardian. Rich, polished wooden staircases rise majestically in the background, adding warmth and intricate detail to the sacred space. This tableau evokes a profound sense of peace and reverence, showcasing Sri Lanka's rich Buddhist artistry and cultural heritage.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-12",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/12-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/12-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Rows of serene Buddha statues with a modern mirrored Viharageya stupa under a clear blue sky at Gangaramaya Temple, Colombo, Sri Lanka.",
+      "caption": "Gangaramaya Temple — enlightened serenity under a clear sky",
+      "description": "A multitude of seated Buddha statues ascend towards the striking modern Viharageya stupa at Gangaramaya Temple, Colombo. The unique silver-clad architecture gleams under a brilliant blue sky. Sunlight casts deep shadows across the foreground figures, while others catch the light, revealing intricate details and serene expressions. This iconic Sri Lankan Buddhist sanctuary blends ancient traditions with contemporary design, creating a captivating spiritual landscape.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-13",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/13-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/13-gangaramaya-temple-buddha-statues-colombo-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Gangaramaya Temple, Colombo, Sri Lanka: Rows of bronze Buddha statues, golden head, modern silver stupa against blue sky.",
+      "caption": "Colombo — silent wisdom in shimmering rows",
+      "description": "Rows of contemplative Buddha statues sit in tranquil repose at Colombo's Gangaramaya Temple. Golden light delicately illuminates a foreground bronze head, contrasting with the profound shadows cloaking the multitude of figures. A striking modern, metallic stupa rises majestically against the vibrant blue sky. This captivating scene beautifully blends ancient spiritual tradition with contemporary architectural brilliance, evoking a sense of peaceful serenity and timeless devotion.",
+      "location": "Colombo, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-14",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/14-colombo-galle-face-green-kites-skyscrapers-sri-lanka?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/14-colombo-galle-face-green-kites-skyscrapers-sri-lanka?_a=BAMAOGJx0",
+      "alt": "Galle Face Green, Colombo, Sri Lanka, with kites flying over people, food stalls, and modern high-rise skyscrapers against a clear blue sky.",
+      "caption": "Colombo — urban kites dance above vibrant green",
+      "description": "Sun-drenched Galle Face Green in Colombo bursts with life under a brilliant blue sky. Kites soar gracefully above, their colorful streamers a playful contrast to the towering, futuristic skyscrapers of Port City. Locals and visitors gather on the expansive lawn, enjoying the ocean breeze. Vibrant stalls offer treats, adding to the bustling energy. This scene perfectly encapsulates Colombo's dynamic blend of tradition and modernity, with the active port hinting at its global connections.",
+      "location": "Galle Face Green, Colombo, Western Province, Sri Lanka",
+      "date": "2025-03-09"
+    },
+    {
+      "id": "sri-15",
+      "src": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/15-sri-lanka-maharagama-elephant-mahout-golden-hour-portrait?_a=BAMAOGJx0",
+      "srcThumb": "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,g_auto,h_400,q_auto,w_600/v1/sammapix/portfolio/sri-lanka/15-sri-lanka-maharagama-elephant-mahout-golden-hour-portrait?_a=BAMAOGJx0",
+      "alt": "Sri Lankan elephant with mahout in golden hour light, Maharagama, Sri Lanka. Majestic animal, lush tropical foliage, traditional scene.",
+      "caption": "Maharagama — mahout and elephant's quiet connection",
+      "description": "Golden hour sunlight bathes a magnificent Sri Lankan elephant and its mahout in Maharagama. Lush tropical foliage frames this intimate scene, highlighting the animal's textured skin and the mahout's weathered back. The soft, warm light evokes a serene atmosphere, emphasizing the deep, traditional bond between man and beast. This powerful portrait captures a timeless moment amidst Sri Lanka's vibrant natural and cultural tapestry.",
+      "location": "Maharagama, Sri Lanka",
+      "date": "2025-03-09"
+    }
+  ]
+}
