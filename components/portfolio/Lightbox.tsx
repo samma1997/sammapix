@@ -43,20 +43,20 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-white flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-white dark:bg-[#0A0A0A] flex items-center justify-center"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={`Photo ${current + 1} of ${photos.length}: ${photo.caption}`}
     >
       {/* Contatore — in alto a sinistra */}
-      <div className="absolute top-4 left-4 text-[#737373] text-xs tabular-nums select-none">
+      <div className="absolute top-4 left-4 text-[#737373] dark:text-[#525252] text-xs tabular-nums select-none">
         {current + 1} / {photos.length}
       </div>
 
       {/* Pulsante chiudi — in alto a destra */}
       <button
-        className="absolute top-3 right-4 text-[#737373] hover:text-[#171717] text-3xl leading-none transition-colors duration-150 p-1"
+        className="absolute top-3 right-4 text-[#737373] hover:text-[#171717] dark:text-[#525252] dark:hover:text-[#E5E5E5] text-3xl leading-none transition-colors duration-150 p-1"
         onClick={onClose}
         aria-label="Close lightbox"
       >
@@ -66,7 +66,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
       {/* Freccia sinistra */}
       {current > 0 && (
         <button
-          className="absolute left-2 sm:left-4 text-[#737373] hover:text-[#171717] text-4xl px-3 py-8 transition-colors duration-150 select-none"
+          className="absolute left-2 sm:left-4 text-[#737373] hover:text-[#171717] dark:text-[#525252] dark:hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none"
           onClick={(e) => {
             e.stopPropagation();
             goPrev();
@@ -87,22 +87,28 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           alt={photo.alt}
           width={1200}
           height={800}
-          className="max-h-[75vh] w-auto object-contain rounded-sm border border-[#E5E5E5]"
+          className="max-h-[75vh] w-auto object-contain rounded-sm border border-[#E5E5E5] dark:border-[#2A2A2A]"
           unoptimized
           priority
         />
-        <div className="text-center px-4">
-          <p className="text-[#171717] text-sm font-medium leading-snug">
-            {photo.caption}
-          </p>
-          <p className="text-[#A3A3A3] text-xs mt-1">{photo.location}</p>
-        </div>
+        {(photo.caption || photo.location) && (
+          <div className="text-center px-4">
+            {photo.caption && (
+              <p className="text-[#171717] dark:text-[#E5E5E5] text-sm font-medium leading-snug">
+                {photo.caption}
+              </p>
+            )}
+            {photo.location && (
+              <p className="text-[#A3A3A3] text-xs mt-1">{photo.location}</p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Freccia destra */}
       {current < photos.length - 1 && (
         <button
-          className="absolute right-2 sm:right-4 text-[#737373] hover:text-[#171717] text-4xl px-3 py-8 transition-colors duration-150 select-none"
+          className="absolute right-2 sm:right-4 text-[#737373] hover:text-[#171717] dark:text-[#525252] dark:hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none"
           onClick={(e) => {
             e.stopPropagation();
             goNext();
