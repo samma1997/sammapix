@@ -113,7 +113,7 @@ function PhotoTile({
       aria-label={`Open photo: ${photo.caption || photo.alt}`}
     >
       <Image
-        src={thumbUrl(photo.srcThumb, 400)}
+        src={photo.srcThumb}
         alt={photo.alt || "Travel photograph"}
         fill
         sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 33vw"
