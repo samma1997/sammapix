@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import type { TripPhoto } from "@/lib/destinations";
 
@@ -12,6 +12,9 @@ interface LightboxProps {
 
 export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
   const [current, setCurrent] = useState(initialIndex);
+  const [loaded, setLoaded] = useState<Set<number>>(new Set([initialIndex]));
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
   const goNext = useCallback(() => {
     setCurrent((i) => Math.min(i + 1, photos.length - 1));
@@ -21,6 +24,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
     setCurrent((i) => Math.max(i - 1, 0));
   }, []);
 
+  // Keyboard navigation
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -31,7 +35,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose, goNext, goPrev]);
 
-  // Blocca scroll del body mentre lightbox e aperto
+  // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -39,34 +43,66 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
     };
   }, []);
 
+  // Preload adjacent images
+  useEffect(() => {
+    const toPreload = [current - 1, current + 1].filter(
+      (i) => i >= 0 && i < photos.length
+    );
+    toPreload.forEach((i) => {
+      if (!loaded.has(i)) {
+        const img = new window.Image();
+        img.src = photos[i].src;
+        setLoaded((prev) => new Set(prev).add(i));
+      }
+    });
+  }, [current, photos, loaded]);
+
+  // Touch swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    // Only swipe if horizontal movement > vertical and > 50px
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) goNext();
+      else goPrev();
+    }
+  };
+
   const photo = photos[current];
 
   return (
     <div
       className="fixed inset-0 z-50 bg-[#0A0A0A] flex items-center justify-center"
       onClick={onClose}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
       role="dialog"
       aria-modal="true"
       aria-label={`Photo ${current + 1} of ${photos.length}${photo.caption ? `: ${photo.caption}` : ""}`}
     >
-      {/* Contatore — in alto a sinistra */}
-      <div className="absolute top-4 left-4 text-[#525252] text-xs tabular-nums select-none">
+      {/* Counter */}
+      <div className="absolute top-4 left-4 text-[#525252] text-xs tabular-nums select-none z-10">
         {current + 1} / {photos.length}
       </div>
 
-      {/* Pulsante chiudi — in alto a destra */}
+      {/* Close button */}
       <button
-        className="absolute top-3 right-4 text-[#525252] hover:text-[#E5E5E5] text-3xl leading-none transition-colors duration-150 p-1"
+        className="absolute top-3 right-4 text-[#525252] hover:text-[#E5E5E5] text-3xl leading-none transition-colors duration-150 p-1 z-10"
         onClick={onClose}
         aria-label="Close lightbox"
       >
         &times;
       </button>
 
-      {/* Freccia sinistra */}
+      {/* Previous arrow */}
       {current > 0 && (
         <button
-          className="absolute left-2 sm:left-4 text-[#525252] hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none"
+          className="absolute left-2 sm:left-4 text-[#525252] hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none z-10"
           onClick={(e) => {
             e.stopPropagation();
             goPrev();
@@ -77,18 +113,19 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
         </button>
       )}
 
-      {/* Foto + caption — click su questo blocco non chiude il lightbox */}
+      {/* Photo + caption */}
       <div
         className="flex flex-col items-center gap-3 max-w-[90vw]"
         onClick={(e) => e.stopPropagation()}
       >
         <Image
+          key={photo.id}
           src={photo.src}
           alt={photo.alt || "Travel photograph"}
-          width={1200}
-          height={800}
-          className="max-h-[75vh] w-auto object-contain rounded-sm border border-[#2A2A2A]"
-          unoptimized
+          width={photo.width || 1200}
+          height={photo.height || 800}
+          className="max-h-[75vh] w-auto object-contain rounded-sm"
+          sizes="90vw"
           priority
         />
         {(photo.caption || photo.location) && (
@@ -105,10 +142,10 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
         )}
       </div>
 
-      {/* Freccia destra */}
+      {/* Next arrow */}
       {current < photos.length - 1 && (
         <button
-          className="absolute right-2 sm:right-4 text-[#525252] hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none"
+          className="absolute right-2 sm:right-4 text-[#525252] hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none z-10"
           onClick={(e) => {
             e.stopPropagation();
             goNext();
@@ -118,6 +155,18 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           &#8250;
         </button>
       )}
+
+      {/* Hidden preload for adjacent images */}
+      {[current - 1, current + 1]
+        .filter((i) => i >= 0 && i < photos.length)
+        .map((i) => (
+          <link
+            key={photos[i].id}
+            rel="preload"
+            as="image"
+            href={photos[i].src}
+          />
+        ))}
     </div>
   );
 }
