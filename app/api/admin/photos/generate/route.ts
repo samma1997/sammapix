@@ -13,10 +13,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { imageUrl } = (await req.json()) as { imageUrl: string };
+  const { imageUrl, locale = "en" } = (await req.json()) as { imageUrl: string; locale?: string };
   if (!imageUrl) {
     return NextResponse.json({ error: "Missing imageUrl" }, { status: 400 });
   }
+
+  const langMap: Record<string, string> = {
+    it: "Italian", fr: "French", es: "Spanish", de: "German", pt: "Portuguese",
+  };
+  const language = langMap[locale] ?? "English";
 
   try {
     const imageResp = await fetch(imageUrl);
@@ -25,16 +30,17 @@ export async function POST(req: NextRequest) {
     const base64 = Buffer.from(buffer).toString("base64");
 
     const prompt = `You are a travel photography curator writing for a high-end portfolio website.
+Write ALL text in ${language}.
 
 Analyze this travel photo and provide:
 
-1. CAPTION: Short poetic caption (max 8 words, no period). Format: "Place — poetic description". E.g. "Sigiriya — the lion rock at dawn"
+1. CAPTION: Short poetic caption in ${language} (max 8 words, no period). Format: "Place — poetic description". E.g. "Sigiriya — the lion rock at dawn"
 
-2. DESCRIPTION: Vivid, evocative 60-80 word description for SEO. Present tense. Specific details about light, atmosphere, cultural/geographical context. No first-person.
+2. DESCRIPTION: Vivid, evocative 60-80 word description in ${language} for SEO. Present tense. Specific details about light, atmosphere, cultural/geographical context. No first-person.
 
-3. ALT: Precise, keyword-rich alt text for accessibility and SEO (max 125 chars). Describe what is visually in the image. Include place name if identifiable.
+3. ALT: Precise, keyword-rich alt text in ${language} for accessibility and SEO (max 125 chars). Describe what is visually in the image. Include place name if identifiable.
 
-4. LOCATION: Specific location name (place, city/region, country). Be as precise as possible.
+4. LOCATION: Specific location name (place, city/region, country). Keep location names in their original/English form.
 
 Respond ONLY with valid JSON:
 {"caption":"...","description":"...","alt":"...","location":"..."}`;

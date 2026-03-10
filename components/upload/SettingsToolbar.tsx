@@ -9,6 +9,16 @@ import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { Globe } from "lucide-react";
+
+const AI_RENAME_LANGUAGES = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "pt", label: "Português", flag: "🇵🇹" },
+];
 
 interface SettingsToolbarProps {
   onAiRenameClick?: () => void;
@@ -22,6 +32,7 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
     setQuality,
     setConvertToWebP,
     setAiRenameEnabled,
+    setAiRenameLocale,
     processAll,
     aiRenameUsedToday,
   } = useImageStore();
@@ -118,6 +129,24 @@ export default function SettingsToolbar({ onAiRenameClick }: SettingsToolbarProp
               <Badge variant="default">Login</Badge>
             )}
           </label>
+          {/* Language selector — visible when AI Rename is enabled */}
+          {settings.aiRenameEnabled && session && (
+            <div className="flex items-center gap-1.5">
+              <Globe className="h-3.5 w-3.5 text-[#737373]" strokeWidth={1.5} />
+              <select
+                value={settings.aiRenameLocale}
+                onChange={(e) => setAiRenameLocale(e.target.value)}
+                className="text-xs bg-transparent border border-gray-200 dark:border-[#2A2A2A] rounded px-1.5 py-1 text-gray-600 dark:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1] cursor-pointer"
+              >
+                {AI_RENAME_LANGUAGES.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.flag} {lang.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
           {remaining === 0 && session && (
             <span className="text-[10px] text-red-500">
               Limit reached &middot;{" "}

@@ -14,6 +14,7 @@ interface ImageSettings {
   quality: number;
   convertToWebP: boolean;
   aiRenameEnabled: boolean;
+  aiRenameLocale: string;
 }
 
 interface ImageStoreState {
@@ -34,6 +35,7 @@ interface ImageStoreState {
   setQuality: (quality: number) => void;
   setConvertToWebP: (value: boolean) => void;
   setAiRenameEnabled: (value: boolean) => void;
+  setAiRenameLocale: (locale: string) => void;
   applyAiName: (id: string, name: string, altText?: string) => void;
   aiRenameFile: (id: string) => Promise<void>;
   aiRenameUsedToday: number;
@@ -48,6 +50,7 @@ export const useImageStore = create<ImageStoreState>()(
       quality: DEFAULT_QUALITY,
       convertToWebP: DEFAULT_CONVERT_WEBP,
       aiRenameEnabled: DEFAULT_AI_RENAME,
+      aiRenameLocale: "en",
     },
     isProcessing: false,
     isZipping: false,
@@ -202,6 +205,10 @@ export const useImageStore = create<ImageStoreState>()(
       set((state) => { state.settings.aiRenameEnabled = value; });
     },
 
+    setAiRenameLocale: (locale: string) => {
+      set((state) => { state.settings.aiRenameLocale = locale; });
+    },
+
     applyAiName: (id: string, name: string, altText?: string) => {
       set((state) => {
         const item = state.items.find((i) => i.id === id);
@@ -253,11 +260,7 @@ export const useImageStore = create<ImageStoreState>()(
         // Always send as WebP (thumbnail output)
         const mimeType = "image/webp";
 
-        // Read locale from cookie for localized alt text generation
-        const localeMatch = typeof document !== "undefined"
-          ? document.cookie.match(/(?:^|;)\s*NEXT_LOCALE=([^;]+)/)
-          : null;
-        const locale = localeMatch ? decodeURIComponent(localeMatch[1]) : "en";
+        const locale = get().settings.aiRenameLocale || "en";
 
         const response = await fetch("/api/ai/rename", {
           method: "POST",
