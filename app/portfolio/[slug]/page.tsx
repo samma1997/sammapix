@@ -2,12 +2,15 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllTrips, getTripBySlug } from "@/lib/destinations";
+import { getAllTrips } from "@/lib/destinations";
+import { getEnrichedTrip } from "@/lib/portfolio-data";
 import { GalleryGrid } from "@/components/portfolio/GalleryGrid";
 
 // ---------------------------------------------------------------------------
 // Static params
 // ---------------------------------------------------------------------------
+export const revalidate = 60; // ISR: refresh every 60s
+
 export async function generateStaticParams() {
   return getAllTrips().map((t) => ({ slug: t.slug }));
 }
@@ -21,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const trip = getTripBySlug(slug);
+  const trip = await getEnrichedTrip(slug);
   if (!trip) return {};
 
   const year = new Date(trip.startDate).getFullYear();
@@ -79,7 +82,7 @@ export default async function TripPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const trip = getTripBySlug(slug);
+  const trip = await getEnrichedTrip(slug);
   if (!trip) notFound();
 
   const year = new Date(trip.startDate).getFullYear();
