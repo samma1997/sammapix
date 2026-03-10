@@ -35,13 +35,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
 
+  // Only include portfolio destinations with real Cloudinary photos
   const portfolioRoutes = [
     "/portfolio",
     "/portfolio/sri-lanka-2025",
-    "/portfolio/bali-2024",
-    "/portfolio/thailand-2024",
-    "/portfolio/japan-2023",
-    "/portfolio/china-2023",
   ];
 
   const portfolioEntries: MetadataRoute.Sitemap = portfolioRoutes.map((route) => ({
