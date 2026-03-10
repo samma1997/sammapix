@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import HeroSection from "@/components/layout/HeroSection";
 import {
   ToolCard,
   type ToolCardData,
   IconCompress,
+  IconWebP,
+  IconAIRename,
   IconEXIF,
   IconFilmLab,
   IconStampIt,
@@ -15,7 +15,6 @@ import {
   IconTravelMap,
   IconResizePack,
   IconCull,
-  IconHEIC,
 } from "@/components/ui/ToolCard";
 
 export const metadata = {
@@ -46,12 +45,28 @@ export const metadata = {
 
 const TOOLS: ToolCardData[] = [
   {
-    name: "Crunch",
+    name: "Compress",
     href: "/tools/compress",
-    tagline: "Compress, convert to WebP, and AI-rename your photos — all in one tool.",
+    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
     accent: "#6366F1",
-    badges: ["100% Free", "WebP", "AI Rename"],
+    badges: ["100% Free", "No Signup", "Browser-only"],
     Icon: IconCompress,
+  },
+  {
+    name: "WebP",
+    href: "/tools/webp",
+    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
+    accent: "#10B981",
+    badges: ["100% Free", "Browser-only"],
+    Icon: IconWebP,
+  },
+  {
+    name: "AI Rename",
+    href: "/tools/ai-rename",
+    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
+    accent: "#8B5CF6",
+    badges: ["Free", "AI-powered", "Gemini Flash"],
+    Icon: IconAIRename,
   },
   {
     name: "EXIF Lens",
@@ -124,14 +139,6 @@ const TOOLS: ToolCardData[] = [
     accent: "#F43F5E",
     badges: ["100% Free", "HEIC"],
     Icon: IconCull,
-  },
-  {
-    name: "HEIC Converter",
-    href: "/tools/heic",
-    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
-    accent: "#6366F1",
-    badges: ["100% Free", "iPhone", "Batch"],
-    Icon: IconHEIC,
   },
 ];
 

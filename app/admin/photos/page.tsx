@@ -226,6 +226,7 @@ function EditPanel({
   const [status, setStatus] = useState<SaveStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [generating, setGenerating] = useState(false);
+  const [genLang, setGenLang] = useState("en");
 
   useEffect(() => {
     setForm({ ...photo.context });
@@ -260,7 +261,7 @@ function EditPanel({
           "Content-Type": "application/json",
           "x-admin-key": adminKey,
         },
-        body: JSON.stringify({ imageUrl: analyzeUrl }),
+        body: JSON.stringify({ imageUrl: analyzeUrl, locale: genLang }),
       });
       if (!res.ok) throw new Error("AI generation failed");
       const data = (await res.json()) as PhotoContext;
@@ -354,18 +355,32 @@ function EditPanel({
           {field("location", "Location", <MapPin className="h-3 w-3" />)}
 
           <div className="flex items-center gap-3 pt-1 flex-wrap">
-            <button
-              onClick={handleGenerate}
-              disabled={generating || status === "saving"}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-[#5558E6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {generating ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <Sparkles className="h-3.5 w-3.5" />
-              )}
-              {generating ? "Generating..." : "Generate with AI"}
-            </button>
+            <div className="inline-flex items-center gap-1.5">
+              <select
+                value={genLang}
+                onChange={(e) => setGenLang(e.target.value)}
+                className="text-xs bg-[#252525] border border-[#2A2A2A] rounded px-2 py-2 text-[#A3A3A3] focus:outline-none focus:border-[#6366F1] cursor-pointer"
+              >
+                <option value="en">🇬🇧 EN</option>
+                <option value="it">🇮🇹 IT</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="fr">🇫🇷 FR</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="pt">🇵🇹 PT</option>
+              </select>
+              <button
+                onClick={handleGenerate}
+                disabled={generating || status === "saving"}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-[#5558E6] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {generating ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Sparkles className="h-3.5 w-3.5" />
+                )}
+                {generating ? "Generating..." : "Generate with AI"}
+              </button>
+            </div>
 
             <button
               onClick={handleSave}
