@@ -54,7 +54,7 @@ const TOOLS: ToolCardData[] = [
   },
   {
     name: "WebP",
-    href: "/tools/compress",
+    href: "/tools/webp",
     tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
     accent: "#10B981",
     badges: ["100% Free", "Browser-only"],
@@ -62,7 +62,7 @@ const TOOLS: ToolCardData[] = [
   },
   {
     name: "AI Rename",
-    href: "/tools/compress",
+    href: "/tools/ai-rename",
     tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
     accent: "#8B5CF6",
     badges: ["Free", "AI-powered", "Gemini Flash"],
