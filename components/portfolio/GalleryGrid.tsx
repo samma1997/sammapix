@@ -19,9 +19,7 @@ function distributePhotos(photos: TripPhoto[], cols: number): TripPhoto[][] {
   const heights: number[] = new Array(cols).fill(0);
 
   for (const photo of photos) {
-    // Normalised height (width=1)
     const ratio = (photo.height || 800) / (photo.width || 1200);
-    // Find shortest column
     const minIdx = heights.indexOf(Math.min(...heights));
     columns[minIdx].push(photo);
     heights[minIdx] += ratio;
@@ -30,71 +28,53 @@ function distributePhotos(photos: TripPhoto[], cols: number): TripPhoto[][] {
   return columns;
 }
 
+/** Swap Cloudinary URL width for optimized thumbnails */
+function thumbUrl(url: string, width: number): string {
+  return url.replace(/w_\d+/, `w_${width}`);
+}
+
 export function GalleryGrid({ photos }: GalleryGridProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  // Map photo to its original index for lightbox
   const photoIndex = (photo: TripPhoto) =>
     photos.findIndex((p) => p.id === photo.id);
+
+  const renderColumn = (col: TripPhoto[]) =>
+    col.map((photo, i) => (
+      <PhotoTile
+        key={photo.id}
+        photo={photo}
+        index={photoIndex(photo)}
+        onOpen={setLightboxIndex}
+        eager={i < 2}
+      />
+    ));
 
   return (
     <>
       {/* Desktop: 3 columns */}
-      <div
-        className="hidden md:flex gap-1"
-        role="list"
-        aria-label="Photo gallery"
-      >
+      <div className="hidden md:flex gap-1" role="list" aria-label="Photo gallery">
         {distributePhotos(photos, 3).map((col, ci) => (
           <div key={ci} className="flex flex-col gap-1 flex-1 min-w-0">
-            {col.map((photo) => (
-              <PhotoTile
-                key={photo.id}
-                photo={photo}
-                index={photoIndex(photo)}
-                onOpen={setLightboxIndex}
-              />
-            ))}
+            {renderColumn(col)}
           </div>
         ))}
       </div>
 
       {/* Tablet: 2 columns */}
-      <div
-        className="hidden sm:flex md:hidden gap-1"
-        role="list"
-        aria-label="Photo gallery"
-      >
+      <div className="hidden sm:flex md:hidden gap-1" role="list" aria-label="Photo gallery">
         {distributePhotos(photos, 2).map((col, ci) => (
           <div key={ci} className="flex flex-col gap-1 flex-1 min-w-0">
-            {col.map((photo) => (
-              <PhotoTile
-                key={photo.id}
-                photo={photo}
-                index={photoIndex(photo)}
-                onOpen={setLightboxIndex}
-              />
-            ))}
+            {renderColumn(col)}
           </div>
         ))}
       </div>
 
-      {/* Mobile: 2 columns (più compatto) */}
-      <div
-        className="flex sm:hidden gap-1"
-        role="list"
-        aria-label="Photo gallery"
-      >
+      {/* Mobile: 2 columns */}
+      <div className="flex sm:hidden gap-1" role="list" aria-label="Photo gallery">
         {distributePhotos(photos, 2).map((col, ci) => (
           <div key={ci} className="flex flex-col gap-1 flex-1 min-w-0">
-            {col.map((photo) => (
-              <PhotoTile
-                key={photo.id}
-                photo={photo}
-                index={photoIndex(photo)}
-                onOpen={setLightboxIndex}
-              />
-            ))}
+            {renderColumn(col)}
           </div>
         ))}
       </div>
@@ -114,10 +94,12 @@ function PhotoTile({
   photo,
   index,
   onOpen,
+  eager,
 }: {
   photo: TripPhoto;
   index: number;
   onOpen: (i: number) => void;
+  eager: boolean;
 }) {
   const w = photo.width || 1200;
   const h = photo.height || 800;
@@ -125,10 +107,10 @@ function PhotoTile({
   return (
     <button
       role="listitem"
-      className="relative w-full overflow-hidden group cursor-pointer focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+      className="relative w-full overflow-hidden group cursor-pointer focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 bg-[#1A1A1A]"
       style={{ aspectRatio: `${w}/${h}` }}
       onClick={() => onOpen(index)}
-      aria-label={`Open photo: ${photo.caption}`}
+      aria-label={`Open photo: ${photo.caption || photo.alt}`}
     >
       <Image
         src={photo.srcThumb}
@@ -136,7 +118,7 @@ function PhotoTile({
         fill
         sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
-        unoptimized
+        loading={eager ? "eager" : "lazy"}
       />
     </button>
   );
