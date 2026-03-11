@@ -323,11 +323,27 @@ export default function TravelMapClient() {
       }
 
       leafletMapRef.current = map;
+
+      // Force Leaflet to recalculate container size — fixes partial tile rendering
+      requestAnimationFrame(() => {
+        map.invalidateSize();
+      });
+      // Belt-and-suspenders: retry after CSS/layout settles
+      setTimeout(() => map.invalidateSize(), 300);
+      setTimeout(() => map.invalidateSize(), 800);
     }, 100);
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiState]);
+
+  // Invalidate map size on window resize
+  useEffect(() => {
+    if (!leafletMapRef.current) return;
+    const onResize = () => leafletMapRef.current?.invalidateSize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  });
 
   // ── Update marker popups when geocoding fills in country names ────────────
   useEffect(() => {
@@ -773,27 +789,44 @@ export default function TravelMapClient() {
         </div>
       )}
 
-      {/* ── Processing: progress bar ── */}
+      {/* ── Processing: animated loading experience ── */}
       {uiState === "processing" && (
-        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
-                Processing
-              </span>
-              <span className="text-xs text-[#A3A3A3]">{progressPercent}%</span>
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-10 bg-white dark:bg-[#191919] flex flex-col items-center gap-5">
+          {/* Animated map icon */}
+          <div className="relative">
+            <div className="h-16 w-16 rounded-full border-2 border-[#E5E5E5] dark:border-[#333] flex items-center justify-center">
+              <Navigation className="h-7 w-7 text-[#6366F1] animate-pulse" strokeWidth={1.5} />
             </div>
+            <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#6366F1] flex items-center justify-center">
+              <div className="h-2.5 w-2.5 rounded-full border-2 border-white border-t-transparent animate-spin" />
+            </div>
+          </div>
+
+          {/* Message */}
+          <div className="text-center">
+            <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
+              {progressPercent < 30
+                ? "Reading GPS coordinates from your photos..."
+                : progressPercent < 70
+                ? "Building your travel route..."
+                : progressPercent < 95
+                ? "Almost there — preparing your map..."
+                : "Your map is ready!"}
+            </p>
+            <p className="text-xs text-[#A3A3A3]">
+              This usually takes just a few seconds
+            </p>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full max-w-xs">
             <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#171717] dark:bg-white rounded-full transition-all duration-300"
+                className="h-full bg-[#6366F1] rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
-          <p className="text-xs text-[#737373] truncate">{progressMessage}</p>
-          <p className="text-xs text-[#A3A3A3] mt-2">
-            Nominatim requires 1 request/sec — please wait
-          </p>
         </div>
       )}
 
