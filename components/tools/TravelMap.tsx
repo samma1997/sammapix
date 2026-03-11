@@ -160,16 +160,26 @@ export default function TravelMapClient() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const markersRef = useRef<any[]>([]);
 
-  // ── Inject Leaflet CSS once ────────────────────────────────────────────────
+  // ── Leaflet CSS — load once and track ready state ──────────────────────────
+  const [leafletCssReady, setLeafletCssReady] = useState(false);
   useEffect(() => {
     const id = "leaflet-css";
-    if (!document.getElementById(id)) {
-      const link = document.createElement("link");
-      link.id = id;
-      link.rel = "stylesheet";
-      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-      document.head.appendChild(link);
+    const existing = document.getElementById(id) as HTMLLinkElement | null;
+    if (existing) {
+      // Already injected — check if loaded
+      if (existing.sheet) {
+        setLeafletCssReady(true);
+      } else {
+        existing.addEventListener("load", () => setLeafletCssReady(true));
+      }
+      return;
     }
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "stylesheet";
+    link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+    link.onload = () => setLeafletCssReady(true);
+    document.head.appendChild(link);
   }, []);
 
   // ── Check URL hash for shared map on mount ────────────────────────────────
@@ -217,33 +227,24 @@ export default function TravelMapClient() {
   const pointsRef = useRef<PhotoPoint[]>([]);
   pointsRef.current = points;
 
-  // ── Build Leaflet map once when entering "map" state ──────────────────────
+  // ── Build Leaflet map once CSS is ready + entering "map" state ─────────────
   useEffect(() => {
     if (uiState !== "map" || points.length === 0) return;
+    if (!leafletCssReady) return;           // ← wait for CSS!
     if (!mapContainerRef.current) return;
     if (leafletMapRef.current) return;
 
     let cancelled = false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let resizeObserver: ResizeObserver | null = null;
+    let resizeHandler: (() => void) | null = null;
 
     const initMap = async () => {
       const container = mapContainerRef.current;
       if (!container || cancelled) return;
 
-      // Wait until the container has real dimensions in the DOM
-      await new Promise<void>((resolve) => {
-        const check = () => {
-          if (container.offsetWidth > 0 && container.offsetHeight > 0) {
-            resolve();
-          } else {
-            requestAnimationFrame(check);
-          }
-        };
-        check();
-      });
-
-      if (cancelled || leafletMapRef.current) return;
-
       const L = (await import("leaflet")).default;
+      if (cancelled) return;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -259,23 +260,16 @@ export default function TravelMapClient() {
       const currentPoints = pointsRef.current;
       markersRef.current = [];
 
-      // Lock container dimensions so Leaflet reads them correctly
-      container.style.width = `${container.offsetWidth}px`;
-      container.style.height = `${container.offsetHeight}px`;
-
       const map = L.map(container, { zoomControl: true }).setView(
         [currentPoints[0].lat, currentPoints[0].lon],
         5
       );
 
-      const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
       }).addTo(map);
-
-      // invalidateSize every time tiles finish loading
-      tileLayer.on("load", () => map.invalidateSize());
 
       const colorMap = new Map<string, string>();
 
@@ -341,46 +335,28 @@ export default function TravelMapClient() {
 
       leafletMapRef.current = map;
 
-      // Unlock container to be responsive again
-      container.style.width = "100%";
-
-      // Aggressive invalidateSize after insertion
-      map.invalidateSize();
-      requestAnimationFrame(() => map.invalidateSize());
-      setTimeout(() => map.invalidateSize(), 200);
-      setTimeout(() => map.invalidateSize(), 600);
-      setTimeout(() => {
+      // Single invalidateSize after a paint cycle
+      requestAnimationFrame(() => {
         map.invalidateSize();
-        if (currentPoints.length > 1) {
-          const b = L.latLngBounds(latlngs);
-          map.fitBounds(b, { padding: [40, 40], maxZoom: 13 });
-        }
-      }, 1200);
+      });
 
-      // ResizeObserver for future container size changes
-      const ro = new ResizeObserver(() => map.invalidateSize());
-      ro.observe(container);
+      // ResizeObserver — handles container size changes cleanly
+      resizeObserver = new ResizeObserver(() => map.invalidateSize());
+      resizeObserver.observe(container);
 
-      const onResize = () => map.invalidateSize();
-      window.addEventListener("resize", onResize);
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (map as any)._spCleanup = () => {
-        ro.disconnect();
-        window.removeEventListener("resize", onResize);
-      };
+      resizeHandler = () => map.invalidateSize();
+      window.addEventListener("resize", resizeHandler);
     };
 
     initMap();
 
     return () => {
       cancelled = true;
-      if (leafletMapRef.current?._spCleanup) {
-        leafletMapRef.current._spCleanup();
-      }
+      resizeObserver?.disconnect();
+      if (resizeHandler) window.removeEventListener("resize", resizeHandler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uiState]);
+  }, [uiState, leafletCssReady]);
 
   // ── Update marker popups when geocoding fills in country names ────────────
   useEffect(() => {
