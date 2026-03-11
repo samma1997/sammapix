@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { MapPin, Globe, Navigation, Shield, Camera, Map, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import "leaflet/dist/leaflet.css";
 import TravelMapClient from "@/components/tools/TravelMap";
 import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";

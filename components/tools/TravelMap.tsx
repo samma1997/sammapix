@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
+import "leaflet/dist/leaflet.css";
 import {
   MapPin,
   RotateCcw,
