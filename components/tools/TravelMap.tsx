@@ -160,27 +160,8 @@ export default function TravelMapClient() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const markersRef = useRef<any[]>([]);
 
-  // ── Leaflet CSS — load once and track ready state ──────────────────────────
-  const [leafletCssReady, setLeafletCssReady] = useState(false);
-  useEffect(() => {
-    const id = "leaflet-css";
-    const existing = document.getElementById(id) as HTMLLinkElement | null;
-    if (existing) {
-      // Already injected — check if loaded
-      if (existing.sheet) {
-        setLeafletCssReady(true);
-      } else {
-        existing.addEventListener("load", () => setLeafletCssReady(true));
-      }
-      return;
-    }
-    const link = document.createElement("link");
-    link.id = id;
-    link.rel = "stylesheet";
-    link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-    link.onload = () => setLeafletCssReady(true);
-    document.head.appendChild(link);
-  }, []);
+  // Leaflet CSS is imported statically in the page component (app/tools/travelmap/page.tsx)
+  // so it's always available before this client component renders.
 
   // ── Check URL hash for shared map on mount ────────────────────────────────
   useEffect(() => {
@@ -230,7 +211,7 @@ export default function TravelMapClient() {
   // ── Build Leaflet map once CSS is ready + entering "map" state ─────────────
   useEffect(() => {
     if (uiState !== "map" || points.length === 0) return;
-    if (!leafletCssReady) return;           // ← wait for CSS!
+    // Leaflet CSS loaded statically via page import — always ready
     if (!mapContainerRef.current) return;
     if (leafletMapRef.current) return;
 
@@ -356,7 +337,7 @@ export default function TravelMapClient() {
       if (resizeHandler) window.removeEventListener("resize", resizeHandler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uiState, leafletCssReady]);
+  }, [uiState]);
 
   // ── Update marker popups when geocoding fills in country names ────────────
   useEffect(() => {
