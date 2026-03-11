@@ -221,13 +221,30 @@ export default function TravelMapClient() {
   useEffect(() => {
     if (uiState !== "map" || points.length === 0) return;
     if (!mapContainerRef.current) return;
-    // Don't rebuild if map already exists (e.g. points updated during geocoding)
     if (leafletMapRef.current) return;
 
-    const timer = setTimeout(async () => {
+    let cancelled = false;
+
+    const initMap = async () => {
+      const container = mapContainerRef.current;
+      if (!container || cancelled) return;
+
+      // Wait until the container has real dimensions in the DOM
+      await new Promise<void>((resolve) => {
+        const check = () => {
+          if (container.offsetWidth > 0 && container.offsetHeight > 0) {
+            resolve();
+          } else {
+            requestAnimationFrame(check);
+          }
+        };
+        check();
+      });
+
+      if (cancelled || leafletMapRef.current) return;
+
       const L = (await import("leaflet")).default;
 
-      // Fix default icon webpack issue
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (L.Icon.Default.prototype as any)._getIconUrl;
       L.Icon.Default.mergeOptions({
@@ -239,12 +256,13 @@ export default function TravelMapClient() {
           "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
       });
 
-      // Read current points from ref (may be ahead of closure)
       const currentPoints = pointsRef.current;
-
       markersRef.current = [];
 
-      const container = mapContainerRef.current!;
+      // Lock container dimensions so Leaflet reads them correctly
+      container.style.width = `${container.offsetWidth}px`;
+      container.style.height = `${container.offsetHeight}px`;
+
       const map = L.map(container, { zoomControl: true }).setView(
         [currentPoints[0].lat, currentPoints[0].lon],
         5
@@ -256,18 +274,11 @@ export default function TravelMapClient() {
         maxZoom: 19,
       }).addTo(map);
 
-      // Multiple invalidateSize strategies to ensure full tile rendering
-      map.whenReady(() => {
-        map.invalidateSize();
-      });
-
-      tileLayer.on('load', () => {
-        map.invalidateSize();
-      });
+      // invalidateSize every time tiles finish loading
+      tileLayer.on("load", () => map.invalidateSize());
 
       const colorMap = new Map<string, string>();
 
-      // Draw dashed polyline connecting all points in order
       const latlngs: [number, number][] = currentPoints.map((p) => [p.lat, p.lon]);
       L.polyline(latlngs, {
         color: "#A3A3A3",
@@ -276,7 +287,6 @@ export default function TravelMapClient() {
         opacity: 0.8,
       }).addTo(map);
 
-      // Add markers
       for (let i = 0; i < currentPoints.length; i++) {
         const p = currentPoints[i];
         const country = p.country || "Unknown";
@@ -303,7 +313,6 @@ export default function TravelMapClient() {
             })
           : "Unknown date";
 
-        // Build popup content — include thumbnail only when available
         let thumbnailHtml = "";
         if (p.thumbnailUrl) {
           thumbnailHtml = `<img src="${p.thumbnailUrl}" style="width:100px;height:75px;object-fit:cover;border-radius:4px;margin-bottom:6px;display:block;" alt="${p.name}" />`;
@@ -325,7 +334,6 @@ export default function TravelMapClient() {
         markersRef.current.push(marker);
       }
 
-      // Fit map to all points — cap zoom so nearby clusters don't zoom to street level
       if (currentPoints.length > 1) {
         const bounds = L.latLngBounds(latlngs);
         map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
@@ -333,28 +341,46 @@ export default function TravelMapClient() {
 
       leafletMapRef.current = map;
 
-      // Force Leaflet to recalculate container size — fixes partial tile rendering
-      requestAnimationFrame(() => {
-        map.invalidateSize();
-      });
-      // Belt-and-suspenders: retry after CSS/layout settles
-      setTimeout(() => map.invalidateSize(), 300);
-      setTimeout(() => map.invalidateSize(), 800);
-      setTimeout(() => map.invalidateSize(), 1500);
-      setTimeout(() => map.invalidateSize(), 3000);
-    }, 100);
+      // Unlock container to be responsive again
+      container.style.width = "100%";
 
-    return () => clearTimeout(timer);
+      // Aggressive invalidateSize after insertion
+      map.invalidateSize();
+      requestAnimationFrame(() => map.invalidateSize());
+      setTimeout(() => map.invalidateSize(), 200);
+      setTimeout(() => map.invalidateSize(), 600);
+      setTimeout(() => {
+        map.invalidateSize();
+        if (currentPoints.length > 1) {
+          const b = L.latLngBounds(latlngs);
+          map.fitBounds(b, { padding: [40, 40], maxZoom: 13 });
+        }
+      }, 1200);
+
+      // ResizeObserver for future container size changes
+      const ro = new ResizeObserver(() => map.invalidateSize());
+      ro.observe(container);
+
+      const onResize = () => map.invalidateSize();
+      window.addEventListener("resize", onResize);
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (map as any)._spCleanup = () => {
+        ro.disconnect();
+        window.removeEventListener("resize", onResize);
+      };
+    };
+
+    initMap();
+
+    return () => {
+      cancelled = true;
+      if (leafletMapRef.current?._spCleanup) {
+        leafletMapRef.current._spCleanup();
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiState]);
-
-  // Invalidate map size on window resize
-  useEffect(() => {
-    if (!leafletMapRef.current) return;
-    const onResize = () => leafletMapRef.current?.invalidateSize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  });
 
   // ── Update marker popups when geocoding fills in country names ────────────
   useEffect(() => {
@@ -948,8 +974,7 @@ export default function TravelMapClient() {
           >
             <div
               ref={mapContainerRef}
-              style={{ height: "350px", width: "100%", position: "relative" }}
-              className="sm:!h-[500px]"
+              style={{ height: "500px", width: "100%", position: "relative", minHeight: "350px" }}
               aria-label="Interactive travel map"
             />
           </div>
