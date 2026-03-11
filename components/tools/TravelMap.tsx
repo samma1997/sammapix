@@ -454,7 +454,8 @@ export default function TravelMapClient() {
             thumbnailUrl = URL.createObjectURL(new Blob([new Uint8Array(thumbData)], { type: "image/jpeg" }));
           }
         } catch { /* skip */ }
-        if (!thumbnailUrl && isJpegFile(p.file)) {
+        if (!thumbnailUrl && !isHeicFile(p.file)) {
+          // Direct blob URL works for JPEG, PNG, WebP — anything the browser can display
           thumbnailUrl = URL.createObjectURL(p.file);
         }
         return { ...p, thumbnailUrl };
@@ -937,8 +938,8 @@ export default function TravelMapClient() {
             />
           </div>
 
-          {/* Photo strip — shown when any point has a thumbnail (local uploads) */}
-          {!isSharedView && points.some((p) => p.thumbnailUrl) && (
+          {/* Photo strip — always shown for local uploads */}
+          {!isSharedView && (
             <div>
               <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-2">
                 Photo timeline
