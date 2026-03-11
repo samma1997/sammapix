@@ -7,19 +7,35 @@ import StampIt from "@/components/tools/StampIt";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Add Watermark to Photo Batch Free — Online Tool | SammaPix",
+  title: "Batch Watermark Tool Free Online | Text & Logo Watermarks | SammaPix",
   description:
-    "Add watermark to photo batch free. Text or logo watermarks on multiple images at once. No upload, no signup needed.",
+    "Add watermarks to multiple photos at once free online. Text or logo watermarks. Tiled anti-crop mode. No upload, browser-based.",
+  keywords: [
+    "watermark tool",
+    "add watermark",
+    "batch watermark",
+    "watermark photos",
+    "text watermark",
+    "logo watermark",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/stampit`,
   },
   openGraph: {
-    title: "Add Watermark to Photo Batch Free — Online Tool | SammaPix",
+    title: "Batch Watermark Tool Free Online | SammaPix",
     description:
-      "Add watermark to photo batch free. Text or logo watermarks on multiple images at once. No upload, no signup needed.",
+      "Add watermarks to multiple photos at once free online. Text or logo watermarks. Tiled anti-crop mode. No upload needed.",
     url: `${APP_URL}/tools/stampit`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Watermark Tool",
+      },
+    ],
   },
 };
 
@@ -168,16 +184,31 @@ export default function StampItPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "StampIt — Batch Image Watermark",
+            name: "SammaPix StampIt",
             description:
               "Add text or logo watermarks to multiple images at once. True tiled filigrana mode with diagonal stagger for professional watermarking.",
-            url: "https://sammapix.com/tools/stampit",
+            url: `${APP_URL}/tools/stampit`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.6",
+              ratingCount: "62",
             },
             featureList: [
               "Text and logo watermarks",

@@ -3,9 +3,24 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About — Luca Sammarco, Travel Photographer & Tool Builder | SammaPix",
+  title: "About SammaPix — Built by Luca Sammarco, Travel Photographer",
   description:
-    "I'm Luca Sammarco: travel photographer and developer. I built SammaPix to solve my own image optimization problems. Read my story and my post-trip workflow.",
+    "Learn about Luca Sammarco, the travel photographer and developer who built SammaPix to solve real image optimization problems. Read his story.",
+  keywords: [
+    "luca sammarco",
+    "travel photographer",
+    "developer",
+    "sammapix",
+    "image optimization",
+  ],
+  alternates: { canonical: "https://sammapix.com/about" },
+  openGraph: {
+    title: "About SammaPix — Built by Luca Sammarco",
+    description:
+      "Learn why Luca Sammarco built SammaPix and the philosophy behind it: no uploads, privacy first, open-source tools.",
+    url: "https://sammapix.com/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

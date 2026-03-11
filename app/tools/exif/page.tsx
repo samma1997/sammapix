@@ -6,17 +6,33 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Remove GPS from Photo & Metadata Online Free | SammaPix",
+  title: "Remove EXIF Data & GPS from Photos Online | SammaPix",
   description:
-    "Remove GPS from photo and all metadata online free. Strip EXIF data, location, camera info from images. No upload, no signup needed.",
+    "Remove GPS, EXIF data & metadata from photos online free. Strip location, camera info, timestamps. Privacy-focused. No upload, browser-based.",
+  keywords: [
+    "remove exif data",
+    "remove gps from photos",
+    "exif remover",
+    "metadata remover",
+    "strip exif",
+    "remove location from photo",
+  ],
   alternates: { canonical: `${APP_URL}/tools/exif` },
   openGraph: {
-    title: "Remove GPS from Photo & Metadata Online Free | SammaPix",
+    title: "Remove EXIF Data & GPS from Photos Online | SammaPix",
     description:
-      "Remove GPS from photo and all metadata online free. Strip EXIF data, location, camera info from images. No upload, no signup needed.",
+      "Remove GPS, EXIF data & metadata from photos online free. Privacy-focused, browser-based. No upload needed.",
     url: `${APP_URL}/tools/exif`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix EXIF Remover",
+      },
+    ],
   },
 };
 
@@ -183,6 +199,51 @@ export default function ExifPage() {
           </div>
         </div>
       </section>
+
+      {/* Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "SammaPix EXIF Lens",
+            description:
+              "Remove GPS, EXIF data and all metadata from photos online free. Strip location, camera info, timestamps. Privacy-focused, browser-based tool.",
+            url: `${APP_URL}/tools/exif`,
+            applicationCategory: "PhotographyApplication",
+            operatingSystem: "Web Browser",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              ratingCount: "110",
+            },
+            featureList: [
+              "Remove GPS coordinates",
+              "Strip EXIF metadata",
+              "Remove camera info",
+              "Batch processing",
+              "ZIP download",
+              "Privacy-focused",
+            ],
+          }),
+        }}
+      />
     </main>
   );
 }

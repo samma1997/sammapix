@@ -4,8 +4,8 @@ import { Check, X, ArrowRight, Sparkles, Lock, Globe, Zap } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Squoosh — Which Image Optimizer Should You Use in 2026?",
-  description: "SammaPix vs Squoosh by Google: compare features, supported formats, AI capabilities, and batch processing. Find the best free image optimizer for your workflow.",
+  title: "SammaPix vs Squoosh — Image Optimizer Comparison 2026",
+  description: "SammaPix vs Squoosh by Google. Both free, but SammaPix adds batch processing, AI rename, WebP conversion, and privacy (no uploads).",
   keywords: [
     "squoosh alternative",
     "sammapix vs squoosh",
@@ -18,8 +18,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "SammaPix vs Squoosh — Image Optimizer Comparison 2026",
-    description: "Squoosh is powerful but single-file only. SammaPix adds batch processing, AI rename, and a simpler UX.",
+    description: "Squoosh is powerful but single-file only. SammaPix adds batch processing, AI rename, and no file upload to server.",
     type: "website",
+    url: "https://sammapix.com/vs/squoosh",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix vs Squoosh comparison",
+      },
+    ],
   },
 };
 

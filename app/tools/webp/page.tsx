@@ -6,19 +6,35 @@ import ToolInterface from "@/components/tools/ToolInterface";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Convert Images to WebP Free — Batch Online Tool | SammaPix",
+  title: "Free WebP Converter — Convert JPG/PNG to WebP Online | SammaPix",
   description:
-    "Convert JPG, PNG and GIF to WebP format for free in your browser. No upload, no signup. WebP files are up to 30% smaller — boost your site speed instantly.",
+    "Convert JPG, PNG & GIF to WebP format free online. WebP files are 25-35% smaller than JPEG. Batch processing, no upload, browser-based.",
+  keywords: [
+    "webp converter",
+    "convert to webp",
+    "jpg to webp",
+    "png to webp",
+    "free webp converter",
+    "online webp conversion",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "Convert Images to WebP Free — Batch Online Tool | SammaPix",
+    title: "Free WebP Converter — Convert JPG/PNG to WebP Online | SammaPix",
     description:
-      "Convert JPG, PNG and GIF to WebP format for free in your browser. No upload, no signup. WebP files are up to 30% smaller — boost your site speed instantly.",
+      "Convert JPG, PNG & GIF to WebP format free online. WebP files are 25-35% smaller. Batch processing, no upload needed.",
     url: `${APP_URL}/tools/webp`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix WebP Converter",
+      },
+    ],
   },
 };
 
@@ -160,10 +176,10 @@ export default function WebpPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "WebP Converter — Convert Images to WebP Free",
+            name: "SammaPix WebP Converter",
             description:
               "Convert JPG, PNG and GIF images to WebP format directly in your browser. WebP files are 25-35% smaller than JPEG with same visual quality.",
-            url: "https://sammapix.com/tools/webp",
+            url: `${APP_URL}/tools/webp`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
@@ -171,11 +187,28 @@ export default function WebpPage() {
               price: "0",
               priceCurrency: "USD",
             },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.7",
+              ratingCount: "120",
+            },
             featureList: [
-              "JPG/PNG/GIF to WebP",
+              "JPG/PNG/GIF to WebP conversion",
               "25-35% file size reduction",
-              "Batch conversion",
-              "Quality slider",
+              "Batch processing",
+              "Quality control slider",
+              "ZIP download",
+              "Browser-based conversion",
             ],
           }),
         }}

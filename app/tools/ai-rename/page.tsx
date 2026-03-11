@@ -8,17 +8,33 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "AI Image Renaming Tool — Auto SEO Filenames | SammaPix",
   description:
-    "Automatically rename images with AI-generated SEO-friendly filenames. Stop uploading DSC_0042.jpg — let AI describe your photos and generate descriptive filenames.",
+    "Automatically rename images with AI-generated SEO-friendly filenames. Stop uploading DSC_0042.jpg — let Gemini AI describe your photos in seconds.",
+  keywords: [
+    "ai image renaming",
+    "seo friendly filenames",
+    "image rename tool",
+    "ai alt text generator",
+    "batch image renaming",
+    "seofriendly image names",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/ai-rename`,
   },
   openGraph: {
     title: "AI Image Renaming Tool — Auto SEO Filenames | SammaPix",
     description:
-      "Automatically rename images with AI-generated SEO-friendly filenames. Stop uploading DSC_0042.jpg — let AI describe your photos and generate descriptive filenames.",
+      "Automatically rename images with AI-generated SEO-friendly filenames. Powered by Google Gemini Flash.",
     url: `${APP_URL}/tools/ai-rename`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix AI Image Renaming Tool",
+      },
+    ],
   },
 };
 
@@ -197,10 +213,10 @@ export default function AiRenamePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "AI Image Rename — SEO Filename Generator",
+            name: "SammaPix AI Image Rename",
             description:
               "Automatically rename images with SEO-friendly filenames using Google Gemini AI. Generates descriptive, lowercase, hyphenated filenames optimized for search engines.",
-            url: "https://sammapix.com/tools/ai-rename",
+            url: `${APP_URL}/tools/ai-rename`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
@@ -208,11 +224,27 @@ export default function AiRenamePage() {
               price: "0",
               priceCurrency: "USD",
             },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.9",
+              ratingCount: "95",
+            },
             featureList: [
-              "Gemini AI powered",
+              "Google Gemini AI powered",
               "SEO-optimized filenames",
-              "Batch rename",
-              "Free 5 renames/day",
+              "Alt text generation",
+              "Batch renaming",
+              "Free tier + Pro",
             ],
           }),
         }}

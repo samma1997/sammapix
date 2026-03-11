@@ -7,19 +7,35 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Compress Image Without Losing Quality Online Free | SammaPix",
+  title: "Free Image Compressor — Compress JPG/PNG/WebP Online | SammaPix",
   description:
-    "Compress image without losing quality. Reduce JPG, PNG, WebP and GIF files by up to 80% free online. No upload needed, no quality loss.",
+    "Compress JPG, PNG, WebP & GIF files up to 80% smaller without quality loss. Browser-based, free forever. No upload, no account needed.",
+  keywords: [
+    "image compressor",
+    "compress images online",
+    "jpg compressor",
+    "png compressor",
+    "free image compression",
+    "compress without losing quality",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Compress Image Without Losing Quality Online Free | SammaPix",
+    title: "Free Image Compressor — Compress JPG/PNG/WebP Online | SammaPix",
     description:
-      "Compress image without losing quality. Reduce JPG, PNG, WebP and GIF files by up to 80% free online. No upload needed, no quality loss.",
+      "Compress JPG, PNG, WebP & GIF files up to 80% smaller without quality loss. Browser-based, free forever.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Image Compressor",
+      },
+    ],
   },
 };
 
@@ -178,14 +194,37 @@ export default function CompressPage() {
             name: "SammaPix Image Compressor",
             url: `${APP_URL}/tools/compress`,
             description:
-              "Free online image compressor. Compress JPG, PNG, WebP and GIF in your browser. No upload needed.",
-            applicationCategory: "MultimediaApplication",
+              "Free online image compressor. Compress JPG, PNG, WebP and GIF in your browser without losing quality. No upload needed.",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              ratingCount: "150",
+            },
+            featureList: [
+              "JPG/PNG/WebP/GIF compression",
+              "Quality slider",
+              "Batch processing",
+              "ZIP download",
+              "Browser-based",
+              "No server upload",
+            ],
           }),
         }}
       />

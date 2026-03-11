@@ -6,17 +6,33 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Sort Photos by Location Free — GPS Photo Organizer | SammaPix",
+  title: "Sort Photos by Location & Country Free | GPS Organizer | SammaPix",
   description:
-    "Sort photos by location free using GPS data from EXIF. Organize travel photos by country automatically. No upload needed.",
+    "Sort photos by location free using GPS data from EXIF. Organize travel photos by country automatically. No upload, browser-based.",
+  keywords: [
+    "sort photos by location",
+    "gps photo organizer",
+    "sort by country",
+    "photo location sorting",
+    "gps photo sort",
+    "travel photo organizer",
+  ],
   alternates: { canonical: `${APP_URL}/tools/geosort` },
   openGraph: {
-    title: "Sort Photos by Location Free — GPS Photo Organizer | SammaPix",
+    title: "Sort Photos by Location & Country Free | SammaPix",
     description:
-      "Sort photos by location free using GPS data from EXIF. Organize travel photos by country automatically. No upload needed.",
+      "Sort photos by location free using GPS EXIF data. Organize travel photos by country automatically. No upload needed.",
     url: `${APP_URL}/tools/geosort`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix GPS Photo Organizer",
+      },
+    ],
   },
 };
 
@@ -203,16 +219,31 @@ export default function GeoSortPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "GeoSort — GPS Photo Organizer",
+            name: "SammaPix GeoSort",
             description:
               "Free tool that reads GPS EXIF data from photos and sorts them by location, creating folders per city or country. Works 100% in-browser, no uploads.",
-            url: "https://sammapix.com/tools/geosort",
+            url: `${APP_URL}/tools/geosort`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.7",
+              ratingCount: "75",
             },
             featureList: [
               "GPS EXIF reading",

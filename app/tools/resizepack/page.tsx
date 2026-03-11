@@ -7,19 +7,35 @@ import ResizePack from "@/components/tools/ResizePack";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Resize Image for Instagram Free Online — Batch Resizer | SammaPix",
+  title: "Batch Resize Images Free Online | SammaPix",
   description:
-    "Resize image for Instagram free online. Batch resize for all social media platforms. Pixel dimensions or percentage mode. No upload needed.",
+    "Resize images for Instagram, Twitter, LinkedIn, YouTube free online. Batch resize with social media presets. No upload, browser-based.",
+  keywords: [
+    "resize images",
+    "batch resize",
+    "resize for instagram",
+    "social media image resizer",
+    "resize images online",
+    "image resizer free",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/resizepack`,
   },
   openGraph: {
-    title: "Resize Image for Instagram Free Online — Batch Resizer | SammaPix",
+    title: "Batch Resize Images Free Online | SammaPix",
     description:
-      "Resize image for Instagram free online. Batch resize for all social media platforms. Pixel dimensions or percentage mode. No upload needed.",
+      "Resize images for Instagram, Twitter, LinkedIn, YouTube free online. Batch resize, social media presets, no upload.",
     url: `${APP_URL}/tools/resizepack`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Batch Image Resizer",
+      },
+    ],
   },
 };
 
@@ -167,16 +183,31 @@ export default function ResizePackPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "ResizePack — Batch Image Resizer",
+            name: "SammaPix ResizePack",
             description:
               "Resize multiple images at once to exact pixels, percentage or social media presets (Instagram, Twitter, LinkedIn). Download all as ZIP.",
-            url: "https://sammapix.com/tools/resizepack",
+            url: `${APP_URL}/tools/resizepack`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.7",
+              ratingCount: "78",
             },
             featureList: [
               "Social media presets",

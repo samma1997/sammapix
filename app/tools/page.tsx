@@ -19,22 +19,61 @@ import {
 } from "@/components/ui/ToolCard";
 
 export const metadata: Metadata = {
-  title: "Free Image Tools for Photographers | SammaPix",
+  title: "Free Image Tools for Photographers & Web Developers | SammaPix",
   description:
-    "Browser-based image tools for photographers — compress, WebP, AI rename, GeoSort, EXIF and more. No upload, no account needed.",
+    "Browser-based image tools for photographers and developers. Compress, WebP, AI rename, EXIF removal, GeoSort, FilmLab, batch processing. No upload, no account.",
+  keywords: [
+    "free image tools",
+    "photo editing tools",
+    "image optimizer",
+    "batch image processing",
+    "online photo tools",
+    "browser-based tools",
+  ],
   alternates: { canonical: "https://sammapix.com/tools" },
+  openGraph: {
+    title: "Free Image Tools for Photographers & Web Developers | SammaPix",
+    description:
+      "Browser-based image tools: compress, convert WebP, AI rename, remove EXIF, sort by GPS, apply film effects. No upload, no account needed.",
+    url: "https://sammapix.com/tools",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Free Image Tools",
+      },
+    ],
+  },
 };
 
 // ─── Tool data ────────────────────────────────────────────────────────────────
 
 const TOOLS: ToolCardData[] = [
   {
-    name: "Crunch",
+    name: "Compress",
     href: "/tools/compress",
-    tagline: "Compress, convert to WebP, and AI-rename your photos — all in one tool.",
+    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
     accent: "#6366F1",
-    badges: ["100% Free", "WebP", "AI Rename"],
+    badges: ["100% Free", "No Signup", "Browser-only"],
     Icon: IconCompress,
+  },
+  {
+    name: "WebP",
+    href: "/tools/webp",
+    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
+    accent: "#10B981",
+    badges: ["100% Free", "Browser-only"],
+    Icon: IconWebP,
+  },
+  {
+    name: "AI Rename",
+    href: "/tools/ai-rename",
+    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
+    accent: "#8B5CF6",
+    badges: ["Free", "AI-powered", "Gemini Flash"],
+    Icon: IconAIRename,
   },
   {
     name: "HEIC Converter",
@@ -143,10 +182,10 @@ export default function ToolsPage() {
             Every tool you need. All free. No account required.
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed mb-6">
-            12 browser-based image tools — nothing uploaded, nothing stored. Works on any device.
+            14 browser-based image tools — nothing uploaded, nothing stored. Works on any device.
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            {["12 tools", "100% free", "Works offline"].map((stat) => (
+            {["14 tools", "100% free", "Works offline"].map((stat) => (
               <span key={stat} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-[#737373]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1] inline-block" aria-hidden="true" />
                 {stat}

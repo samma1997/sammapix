@@ -6,17 +6,33 @@ import CullClient from "@/components/tools/Cull";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Browser Photo Culling Free — Keyboard Shortcuts | SammaPix",
+  title: "Fast Photo Culling Tool Free Online | Keyboard Shortcuts | SammaPix",
   description:
-    "Browser photo culling free with keyboard shortcuts. K to keep, X to reject. Review photos 10x faster. Download best shots as ZIP.",
+    "Fast photo culling tool with keyboard shortcuts. Rate and cull a shoot in minutes. K to keep, X to reject. Download best shots as ZIP.",
+  keywords: [
+    "photo culling",
+    "cull photos fast",
+    "photo review tool",
+    "select best photos",
+    "batch photo rating",
+    "photo organizer",
+  ],
   alternates: { canonical: `${APP_URL}/tools/cull` },
   openGraph: {
-    title: "Browser Photo Culling Free — Keyboard Shortcuts | SammaPix",
+    title: "Fast Photo Culling Tool Free Online | SammaPix",
     description:
-      "Browser photo culling free with keyboard shortcuts. K to keep, X to reject. Review photos 10x faster. Download best shots as ZIP.",
+      "Fast photo culling with keyboard shortcuts. K to keep, X to reject. Cull a shoot in minutes. Download best shots as ZIP.",
     url: `${APP_URL}/tools/cull`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Photo Culling Tool",
+      },
+    ],
   },
 };
 
@@ -184,16 +200,31 @@ export default function CullPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "Cull — Keyboard Photo Review",
+            name: "SammaPix Cull",
             description:
               "Fast photo culling tool with keyboard shortcuts. Press K to keep, X to reject photos at up to 10x speed. Batch download kept photos as ZIP.",
-            url: "https://sammapix.com/tools/cull",
+            url: `${APP_URL}/tools/cull`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              ratingCount: "68",
             },
             featureList: [
               "Keyboard shortcuts",

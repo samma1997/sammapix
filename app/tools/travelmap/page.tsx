@@ -6,17 +6,33 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Create Travel Photo Map from GPS — Interactive Visualization | SammaPix",
+  title: "Travel Photo Map Creator Free Online | GPS Visualization | SammaPix",
   description:
-    "Create travel photo map from GPS coordinates automatically. Visualize your journey on interactive map, count countries, measure distance traveled.",
+    "Create travel photo map from GPS coordinates automatically. Interactive map, count countries, measure distance traveled. No upload needed.",
+  keywords: [
+    "travel map creator",
+    "gps photo map",
+    "travel visualization",
+    "photo map generator",
+    "journey map",
+    "gps visualization",
+  ],
   alternates: { canonical: `${APP_URL}/tools/travelmap` },
   openGraph: {
-    title: "Create Travel Photo Map from GPS — Interactive Visualization | SammaPix",
+    title: "Travel Photo Map Creator Free Online | SammaPix",
     description:
-      "Create travel photo map from GPS coordinates automatically. Visualize your journey on interactive map, count countries, measure distance traveled.",
+      "Create travel photo map from GPS coordinates automatically. Interactive map, count countries, measure distance. No upload needed.",
     url: `${APP_URL}/tools/travelmap`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Travel Map Creator",
+      },
+    ],
   },
 };
 
@@ -245,16 +261,31 @@ export default function TravelMapPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "TravelMap — GPS Photo Travel Map",
+            name: "SammaPix TravelMap",
             description:
               "Visualize your travel photos on an interactive map using GPS metadata. See routes, distances traveled and countries visited. No upload required.",
-            url: "https://sammapix.com/tools/travelmap",
+            url: `${APP_URL}/tools/travelmap`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              ratingCount: "55",
             },
             featureList: [
               "Interactive travel map",

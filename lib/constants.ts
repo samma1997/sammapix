@@ -85,6 +85,9 @@ export const BLOG_SLUGS = [
   "find-duplicate-photos-free",
   "remove-gps-from-photos",
   "create-travel-photo-map",
+  "best-image-compression-tools-2026",
+  "remove-exif-protect-privacy",
+  "complete-guide-webp-format",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

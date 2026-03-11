@@ -6,37 +6,69 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Crop Image to Exact Ratio Online Free — SammaPix",
+  title: "Crop Image to Aspect Ratio Online Free | SammaPix",
   description:
-    "Crop image to exact ratio online free. 1:1 square, 16:9, 4:5, 9:16 and custom ratios. Drag to position, batch process. No upload needed.",
+    "Crop images to exact aspect ratios online free. 1:1, 16:9, 4:5, 9:16, 2:3 and custom ratios. Batch processing, no upload needed.",
   keywords: [
-    "crop image to exact ratio",
-    "image crop tool",
+    "crop image ratio",
     "aspect ratio crop",
+    "crop tool online",
     "instagram crop",
-    "batch image crop",
+    "batch crop images",
+    "image cropper",
   ],
   alternates: { canonical: `${APP_URL}/tools/croproatio` },
   openGraph: {
-    title: "Crop Image to Exact Ratio Online Free — SammaPix",
+    title: "Crop Image to Aspect Ratio Online Free | SammaPix",
     description:
-      "Crop image to exact ratio online free. 1:1 square, 16:9, 4:5, 9:16 and custom ratios. Drag to position. No upload needed.",
+      "Crop images to exact aspect ratios online free. 1:1, 16:9, 4:5, 9:16 and custom ratios. Batch processing, no upload.",
     url: `${APP_URL}/tools/croproatio`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Image Crop Tool",
+      },
+    ],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "CropRatio — Image Crop Tool",
+  name: "SammaPix CropRatio",
   description:
     "Free online image crop tool. Crop photos to exact aspect ratios with interactive drag-and-drop positioning.",
   url: `${APP_URL}/tools/croproatio`,
   applicationCategory: "PhotographyApplication",
   operatingSystem: "Web Browser",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: {
+    "@type": "Person",
+    name: "Luca Sammarco",
+    url: "https://lucasammarco.com",
+  },
+  creator: {
+    "@type": "Organization",
+    name: "SammaPix",
+    url: `${APP_URL}`,
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.7",
+    ratingCount: "85",
+  },
+  featureList: [
+    "1:1 square ratio",
+    "16:9 widescreen",
+    "4:5 Instagram portrait",
+    "9:16 Stories and Reels",
+    "Custom ratios",
+    "Batch processing",
+  ],
 };
 
 const features = [

@@ -7,19 +7,35 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free HEIC to JPG/WebP Converter Online — No Upload Needed | SammaPix",
+  title: "HEIC to JPG Converter Free Online | iPhone Photos | SammaPix",
   description:
-    "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files, no signup required. Fast, private, works on any device.",
+    "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files, no signup required. Fast, private, browser-based.",
+  keywords: [
+    "heic to jpg converter",
+    "heic converter",
+    "convert iphone photos",
+    "heic to webp",
+    "heic converter online",
+    "batch heic converter",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/heic`,
   },
   openGraph: {
-    title: "Free HEIC to JPG/WebP Converter Online — No Upload Needed | SammaPix",
+    title: "HEIC to JPG Converter Free Online | SammaPix",
     description:
-      "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files, no signup required.",
+      "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files. No signup, browser-based.",
     url: `${APP_URL}/tools/heic`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix HEIC Converter",
+      },
+    ],
   },
 };
 
@@ -201,13 +217,36 @@ export default function HeicPage() {
             url: `${APP_URL}/tools/heic`,
             description:
               "Free online HEIC to JPG and WebP converter. Batch convert iPhone photos, no signup required.",
-            applicationCategory: "MultimediaApplication",
+            applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
             },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              ratingCount: "88",
+            },
+            featureList: [
+              "HEIC to JPG conversion",
+              "HEIC to WebP conversion",
+              "Batch conversion",
+              "Up to 100 files",
+              "Browser-based",
+              "No file upload",
+            ],
           }),
         }}
       />

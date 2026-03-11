@@ -9,10 +9,10 @@ import Link from "next/link";
 // Una foto rappresentativa per ogni viaggio
 const HERO_PHOTOS = [
   { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,q_auto,w_600,h_900/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka",  destination: "Sri Lanka",  year: "2025" },
-  { slug: "bali-2024",       src: "https://picsum.photos/seed/bali2/600/900",       destination: "Bali",       year: "2024" },
-  { slug: "japan-2023",      src: "https://picsum.photos/seed/japan2/600/900",      destination: "Japan",      year: "2023" },
-  { slug: "thailand-2024",   src: "https://picsum.photos/seed/thailand3/600/900",   destination: "Thailand",   year: "2024" },
-  { slug: "china-2023",      src: "https://picsum.photos/seed/china1/600/900",      destination: "China",      year: "2023" },
+  { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,q_auto,w_600,h_900/v1/sammapix/portfolio/sri-lanka/05-nine-arches-bridge-ella-train-sri-lanka",  destination: "Ella",  year: "2025" },
+  { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,q_auto,w_600,h_900/v1/sammapix/portfolio/sri-lanka/08-sigiriya-lion-rock-fortress-aerial-view-sri-lanka",  destination: "Sigiriya",  year: "2025" },
+  { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,q_auto,w_600,h_900/v1/sammapix/portfolio/sri-lanka/11-galle-fort-lighthouse-colonial-architecture-sri-lanka",  destination: "Galle",  year: "2025" },
+  { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,q_auto,w_600,h_900/v1/sammapix/portfolio/sri-lanka/15-mirissa-beach-palm-tree-sunset-sri-lanka",  destination: "Mirissa",  year: "2025" },
 ];
 
 export default function HeroSection() {

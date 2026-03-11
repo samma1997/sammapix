@@ -250,11 +250,20 @@ export default function TravelMapClient() {
         5
       );
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
       }).addTo(map);
+
+      // Multiple invalidateSize strategies to ensure full tile rendering
+      map.whenReady(() => {
+        map.invalidateSize();
+      });
+
+      tileLayer.on('load', () => {
+        map.invalidateSize();
+      });
 
       const colorMap = new Map<string, string>();
 
@@ -331,6 +340,8 @@ export default function TravelMapClient() {
       // Belt-and-suspenders: retry after CSS/layout settles
       setTimeout(() => map.invalidateSize(), 300);
       setTimeout(() => map.invalidateSize(), 800);
+      setTimeout(() => map.invalidateSize(), 1500);
+      setTimeout(() => map.invalidateSize(), 3000);
     }, 100);
 
     return () => clearTimeout(timer);
@@ -937,7 +948,7 @@ export default function TravelMapClient() {
           >
             <div
               ref={mapContainerRef}
-              style={{ height: "350px", width: "100%" }}
+              style={{ height: "350px", width: "100%", position: "relative" }}
               className="sm:!h-[500px]"
               aria-label="Interactive travel map"
             />
@@ -981,14 +992,24 @@ export default function TravelMapClient() {
                             width: 72,
                             height: 72,
                             borderRadius: 6,
-                            background: "#F5F5F5",
-                            border: "1px solid #E5E5E5",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            overflow: "hidden",
+                            position: "relative",
                           }}
+                          className="bg-[#F0F0F0] dark:bg-[#2A2A2A]"
                         >
-                          <span style={{ fontSize: 20 }}>📷</span>
+                          {/* Shimmer animation */}
+                          <div
+                            className="absolute inset-0 animate-pulse"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)",
+                              backgroundSize: "200% 100%",
+                            }}
+                          />
+                          <Camera className="h-5 w-5 text-[#A3A3A3]" strokeWidth={1.5} />
                         </div>
                       )}
                       {p.country && (

@@ -3,7 +3,17 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — SammaPix",
-  description: "Learn how SammaPix handles your data. Image compression and conversion happen entirely in your browser — your files never leave your device.",
+  description:
+    "SammaPix privacy policy. Image compression happens in your browser only. Files never leave your device unless you use AI Rename.",
+  alternates: {
+    canonical: "https://sammapix.com/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy — SammaPix",
+    description:
+      "Learn how SammaPix protects your privacy. All processing happens in your browser. No server uploads for compression.",
+    type: "website",
+  },
 };
 
 export default function PrivacyPage() {

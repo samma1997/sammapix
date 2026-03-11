@@ -15,6 +15,7 @@ import {
   IconTravelMap,
   IconResizePack,
   IconCull,
+  IconHEIC,
 } from "@/components/ui/ToolCard";
 
 export const metadata = {
@@ -38,6 +39,14 @@ export const metadata = {
       "Compress, convert, rename and edit images in your browser. Free forever. No uploads.",
     url: "https://sammapix.com",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix — Free Image Tools for Photographers",
+      },
+    ],
   },
 };
 
@@ -140,6 +149,14 @@ const TOOLS: ToolCardData[] = [
     badges: ["100% Free", "HEIC"],
     Icon: IconCull,
   },
+  {
+    name: "HEIC Converter",
+    href: "/tools/heic",
+    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
+    accent: "#6366F1",
+    badges: ["100% Free", "iPhone", "Batch"],
+    Icon: IconHEIC,
+  },
 ];
 
 // ─── Trust items ──────────────────────────────────────────────────────────────
@@ -189,6 +206,15 @@ export default function HomePage() {
         logo: "https://sammapix.com/icon.svg",
         description:
           "Free browser-based image optimization tools for photographers and web developers.",
+        sameAs: [
+          "https://twitter.com/lucasammarco",
+          "https://github.com/lucasammarco",
+        ],
+        founder: {
+          "@type": "Person",
+          name: "Luca Sammarco",
+          url: "https://lucasammarco.com",
+        },
       },
       {
         "@type": "WebSite",
@@ -199,6 +225,43 @@ export default function HomePage() {
           target: "https://sammapix.com/tools?q={search_term_string}",
           "query-input": "required name=search_term_string",
         },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Is SammaPix completely free?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Compress, convert, resize, remove EXIF and more are free forever. No signup required.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Do my images get uploaded to a server?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "No. All processing happens in your browser using JavaScript. Your images never leave your device.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What image formats does SammaPix support?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "JPG, PNG, WebP, GIF, HEIC and more depending on the tool.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Do I need to create an account?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "No account needed for most tools. AI Rename requires a free account to prevent API abuse.",
+            },
+          },
+        ],
       },
     ],
   };

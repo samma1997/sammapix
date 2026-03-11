@@ -4,8 +4,8 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs TinyPNG — Which Free Image Compressor is Better in 2026?",
-  description: "SammaPix vs TinyPNG: detailed comparison of features, quality, limits, and AI capabilities. Find out which free image compressor is right for you.",
+  title: "SammaPix vs TinyPNG — Comparison 2026 | Free Image Compressor",
+  description: "SammaPix vs TinyPNG comparison. Both free, but SammaPix adds WebP conversion, AI rename, and no file limits. Feature-by-feature breakdown.",
   keywords: [
     "tinypng alternative",
     "sammapix vs tinypng",
@@ -18,8 +18,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "SammaPix vs TinyPNG — Honest Comparison 2026",
-    description: "TinyPNG is good. SammaPix is better. See the feature-by-feature comparison.",
+    description: "TinyPNG is good. SammaPix is better. WebP, AI rename, no uploads, no limits. See the full feature-by-feature comparison.",
     type: "website",
+    url: "https://sammapix.com/vs/tinypng",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix vs TinyPNG comparison",
+      },
+    ],
   },
 };
 

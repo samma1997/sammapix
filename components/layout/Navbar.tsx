@@ -177,7 +177,7 @@ export default function Navbar() {
           {(session?.user as { plan?: string })?.plan !== "pro" && (
             <Link href="/pricing">
               <Button variant="primary" size="sm" className="gap-1">
-                Get Pro →
+                Get Pro
                 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
               </Button>
             </Link>

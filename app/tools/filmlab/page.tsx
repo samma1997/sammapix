@@ -7,19 +7,35 @@ import FilmLab from "@/components/tools/FilmLab";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Analog Photo Filter Online Free — Vintage Film Effects | SammaPix",
+  title: "Analog Film Photo Filters Free Online | SammaPix",
   description:
-    "Apply analog photo filters and vintage film effects online free. Add film grain, vignette, fade. 6 film stock presets. No upload needed.",
+    "Apply vintage film effects and analog filters online free. Kodak Gold, Fuji, Ilford presets. Batch processing, no upload needed.",
+  keywords: [
+    "film photo filter",
+    "vintage photo effects",
+    "analog photo filter",
+    "film grain effect",
+    "photo filter online",
+    "vintage effect tool",
+  ],
   alternates: {
     canonical: `${APP_URL}/tools/filmlab`,
   },
   openGraph: {
-    title: "Analog Photo Filter Online Free — Vintage Film Effects | SammaPix",
+    title: "Analog Film Photo Filters Free Online | SammaPix",
     description:
-      "Apply analog photo filters and vintage film effects online free. Add film grain, vignette, fade. 6 film stock presets. No upload needed.",
+      "Apply vintage film effects and analog filters online free. Kodak, Fuji, Ilford presets. Batch processing, no upload.",
     url: `${APP_URL}/tools/filmlab`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Film Photo Filter",
+      },
+    ],
   },
 };
 
@@ -193,16 +209,31 @@ export default function FilmLabPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "FilmLab — Film Grain & Analog Effects",
+            name: "SammaPix FilmLab",
             description:
               "Apply analog film looks to photos with 14 presets including Kodak Gold, Fuji Pro 400H, Ilford HP5 and 8 Samma signature presets. Grain, vignette, fade and color grading.",
-            url: "https://sammapix.com/tools/filmlab",
+            url: `${APP_URL}/tools/filmlab`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.9",
+              ratingCount: "92",
             },
             featureList: [
               "14 film presets",

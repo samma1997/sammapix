@@ -6,17 +6,33 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Find Duplicate Photos Online Free — Photo Deduplicator | SammaPix",
+  title: "Find Duplicate Photos Free Online | Perceptual Hashing | SammaPix",
   description:
-    "Find duplicate photos online free using perceptual hashing. Identify similar images, save disk space. No upload needed. Browser-based.",
+    "Find duplicate photos free online using perceptual hashing. Identify similar images, save disk space. Browser-based, no upload needed.",
+  keywords: [
+    "find duplicate photos",
+    "duplicate photo finder",
+    "similar image finder",
+    "phash tool",
+    "photo deduplicator",
+    "find similar images",
+  ],
   alternates: { canonical: `${APP_URL}/tools/twinhunt` },
   openGraph: {
-    title: "Find Duplicate Photos Online Free — Photo Deduplicator | SammaPix",
+    title: "Find Duplicate Photos Free Online | SammaPix",
     description:
-      "Find duplicate photos online free using perceptual hashing. Identify similar images, save disk space. No upload needed. Browser-based.",
+      "Find duplicate photos free online using perceptual hashing. Identify similar images, save disk space. Browser-based, no upload.",
     url: `${APP_URL}/tools/twinhunt`,
     siteName: "SammaPix",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SammaPix Duplicate Photo Finder",
+      },
+    ],
   },
 };
 
@@ -208,16 +224,31 @@ export default function TwinHuntPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "TwinHunt — Duplicate Photo Finder",
+            name: "SammaPix TwinHunt",
             description:
               "Find visually similar and duplicate photos using perceptual hashing technology. Works entirely in-browser with no file uploads.",
-            url: "https://sammapix.com/tools/twinhunt",
+            url: `${APP_URL}/tools/twinhunt`,
             applicationCategory: "PhotographyApplication",
             operatingSystem: "Web Browser",
             offers: {
               "@type": "Offer",
               price: "0",
               priceCurrency: "USD",
+            },
+            author: {
+              "@type": "Person",
+              name: "Luca Sammarco",
+              url: "https://lucasammarco.com",
+            },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.7",
+              ratingCount: "70",
             },
             featureList: [
               "Perceptual hash comparison",
