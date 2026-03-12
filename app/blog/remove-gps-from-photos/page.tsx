@@ -22,7 +22,7 @@ export const metadata: Metadata = {
       "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos for free.",
     url: "https://sammapix.com/blog/remove-gps-from-photos",
     type: "article",
-    publishedTime: "2026-03-08",
+    publishedTime: "2026-02-24",
   },
 };
 
@@ -51,7 +51,7 @@ export default function RemoveGpsFromPhotosPage() {
                 Privacy
               </span>
               <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                Mar 8, 2026
+                Feb 24, 2026
               </span>
               <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
                 &middot; 6 min read
@@ -75,12 +75,24 @@ export default function RemoveGpsFromPhotosPage() {
 
           <div className="prose-custom space-y-0">
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80"
+                alt="Digital privacy and security concept representing hidden data in photos"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Your photos carry more data than you think — Photo by Scott Webb on Unsplash
+              </figcaption>
+            </figure>
+
             {/* Section 1 */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               What is GPS metadata and where does it come from?
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Every digital photo contains a hidden block of data called EXIF (Exchangeable Image File Format). This metadata is written by your camera or smartphone at the moment you take the shot, and it travels with the file everywhere you copy or upload it.
+              Every digital photo contains a hidden block of data called <a href="https://en.wikipedia.org/wiki/Exif" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">EXIF (Exchangeable Image File Format)</a>. This metadata is written by your camera or smartphone at the moment you take the shot, and it travels with the file everywhere you copy or upload it.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               EXIF data includes useful information like camera model, lens settings, shutter speed, and ISO. But when location services are enabled on your phone — which they are by default on most devices — it also records GPS coordinates: latitude, longitude, and often altitude, accurate to within a few meters.
@@ -105,6 +117,18 @@ export default function RemoveGpsFromPhotosPage() {
                 </div>
               ))}
             </div>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80"
+                alt="Smartphone camera being used to take a photo, embedding GPS metadata"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Every smartphone photo embeds GPS coordinates by default — Photo by Rodion Kutsaiev on Unsplash
+              </figcaption>
+            </figure>
 
             {/* Section 2 */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
@@ -266,7 +290,7 @@ export default function RemoveGpsFromPhotosPage() {
               iPhone: Settings
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              You can prevent GPS data from being written in the first place. Go to Settings &rarr; Privacy &amp; Security &rarr; Location Services &rarr; Camera, and set it to "Never." This stops your camera app from embedding GPS coordinates in new photos. To strip GPS from existing photos before sharing, use the Share sheet and enable "Strip location data" in iOS 17+.
+              You can prevent GPS data from being written in the first place. Go to Settings &rarr; Privacy &amp; Security &rarr; <a href="https://support.apple.com/guide/iphone/control-the-location-information-you-share-iph3dd5f9be/ios" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Location Services</a> &rarr; Camera, and set it to "Never." This stops your camera app from embedding GPS coordinates in new photos. To strip GPS from existing photos before sharing, use the Share sheet and enable "Strip location data" in iOS 17+.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -275,6 +299,18 @@ export default function RemoveGpsFromPhotosPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               For technical users and batch processing, ExifTool is the standard: <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">exiftool -gps:all= -overwrite_original photo.jpg</code> removes all GPS tags from a file. Use <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">-r</code> flag for recursive directory processing. Powerful but requires installation and command-line comfort.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80"
+                alt="Location pin on a map representing GPS coordinates embedded in photos"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                GPS coordinates in your photos can pinpoint your exact location — Photo by Capturing the human heart on Unsplash
+              </figcaption>
+            </figure>
 
             {/* Section 6 */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
@@ -454,8 +490,8 @@ export default function RemoveGpsFromPhotosPage() {
               description:
                 "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
               url: "https://sammapix.com/blog/remove-gps-from-photos",
-              datePublished: "2026-03-08",
-              dateModified: "2026-03-08",
+              datePublished: "2026-02-24",
+              dateModified: "2026-02-24",
               author: {
                 "@type": "Person",
                 name: "Luca Sammarco",

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "The complete guide to image compression: lossy vs lossless, PNG vs JPEG vs WebP, quality settings, and how to reduce file size without visible quality loss.",
     url: "https://sammapix.com/blog/compress-images-without-losing-quality",
     type: "article",
-    publishedTime: "2026-03-12",
+    publishedTime: "2026-03-07",
     authors: ["https://lucasammarco.com"],
   },
   twitter: {
@@ -43,8 +43,8 @@ const articleSchema = {
   description:
     "Learn how to compress images without losing quality. Compare lossy vs lossless compression, PNG vs JPEG vs WebP, and find the right quality settings for every use case.",
   url: "https://sammapix.com/blog/compress-images-without-losing-quality",
-  datePublished: "2026-03-12",
-  dateModified: "2026-03-12",
+  datePublished: "2026-03-07",
+  dateModified: "2026-03-07",
   author: {
     "@type": "Person",
     name: "Luca Sammarco",
@@ -90,8 +90,8 @@ const breadcrumbSchema = {
   ],
 };
 
-const POST_DATE = "2026-03-12";
-const POST_DATE_FORMATTED = "March 12, 2026";
+const POST_DATE = "2026-03-07";
+const POST_DATE_FORMATTED = "March 7, 2026";
 const POST_URL = "https://sammapix.com/blog/compress-images-without-losing-quality";
 const POST_TITLE = "Compress Images Without Losing Quality (2026)";
 
@@ -146,6 +146,18 @@ export default function CompressImagesWithoutLosingQualityPage() {
 
           <div className="prose-content">
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85f1d7?w=800&q=80"
+                alt="Developer working on image optimization code on a laptop"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Image compression is one of the highest-leverage performance wins for any website — Photo by Fotis Fotopoulos on Unsplash
+              </figcaption>
+            </figure>
+
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Why image compression matters more than ever in 2026
             </h2>
@@ -165,6 +177,9 @@ export default function CompressImagesWithoutLosingQualityPage() {
               </a>
               , the LCP element is an image in approximately 70% of all web
               pages.
+            </p>
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Google&apos;s <a href="https://web.dev/learn/performance" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">web.dev performance guide</a> covers Core Web Vitals in detail and explains how image optimization directly affects your LCP score.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Beyond rankings, there are hard business reasons to compress
@@ -335,9 +350,22 @@ export default function CompressImagesWithoutLosingQualityPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               If you are optimizing images for a modern web audience, WebP
               should be your default output format for nearly all use cases.
+              The <a href="https://developers.google.com/speed/webp" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">official WebP documentation from Google</a> provides technical details on the format&apos;s compression algorithms and encoding options.
               The only reason to keep JPEG or PNG is compatibility with legacy
               software pipelines or email clients that do not support WebP.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                alt="Website speed optimization dashboard showing performance metrics"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Faster page loads mean better user experience and higher search rankings — Photo by Carlos Muza on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Quality settings: what the numbers actually mean
@@ -467,6 +495,18 @@ export default function CompressImagesWithoutLosingQualityPage() {
               quality 80, the compressed version is indistinguishable from the
               original at normal viewing sizes.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80"
+                alt="Data visualization representing image file optimization and size reduction"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                The right quality settings can reduce file size by 70% with no visible difference — Photo by Markus Spiske on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Common compression mistakes (and how to avoid them)

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "WebP images load faster, rank better, and look identical to JPEG. Here is everything you need to know about the format — and how to convert your entire library for free.",
     url: "https://sammapix.com/blog/complete-guide-webp-format",
     type: "article",
-    publishedTime: "2026-03-11",
+    publishedTime: "2026-01-28",
     authors: ["https://lucasammarco.com"],
   },
   twitter: {
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-const POST_DATE = "2026-03-11";
-const POST_DATE_FORMATTED = "March 11, 2026";
+const POST_DATE = "2026-01-28";
+const POST_DATE_FORMATTED = "January 28, 2026";
 const POST_URL = "https://sammapix.com/blog/complete-guide-webp-format";
 const POST_TITLE = "The Complete Guide to WebP: Why Every Photographer Should Use It";
 
@@ -147,8 +147,21 @@ export default function CompleteGuideWebpFormatPage() {
               >
                 the WebP compression study
               </a>
-              {" "}— lossy WebP files were 25–34% smaller than JPEG at equivalent quality. Lossless WebP files were 26% smaller than PNG.
+              {" "}— lossy WebP files were 25–34% smaller than JPEG at equivalent quality. Lossless WebP files were 26% smaller than PNG. You can read more about the format on the official{" "}
+              <a href="https://developers.google.com/speed/webp" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Google WebP developer page</a>.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80"
+                alt="Web developer working on responsive design at a modern desk setup"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Modern web development workflows increasingly default to WebP for image delivery — Photo by Domenico Loia on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               WebP capabilities: what makes it versatile
@@ -202,8 +215,21 @@ export default function CompleteGuideWebpFormatPage() {
               . The last major holdout was Safari on iOS and macOS — Apple added full WebP support in Safari 14 (released September 2020). Every iPhone running iOS 14 or later supports WebP natively.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The era of needing fallback JPEG alternatives for Safari is over. If you are still serving JPEG to all users out of caution, you are leaving significant performance gains on the table for no practical reason.
+              The era of needing fallback JPEG alternatives for Safari is over. If you are still serving JPEG to all users out of caution, you are leaving significant performance gains on the table for no practical reason. Check the latest compatibility data on{" "}
+              <a href="https://caniuse.com/webp" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Can I Use: WebP</a>.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+                alt="Developer coding on a laptop with multiple browser windows open"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                WebP is now supported by every major browser — no fallbacks needed in 2026 — Photo by Christopher Gower on Unsplash
+              </figcaption>
+            </figure>
 
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A] mb-6">
               {[
@@ -462,6 +488,18 @@ export default function CompleteGuideWebpFormatPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Squarespace automatically converts uploaded images to WebP since 2022. Webflow serves WebP via its CDN for all images uploaded after mid-2023. If you are on either platform, your images may already be served as WebP — check your network tab in browser DevTools to confirm.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80"
+                alt="Code on a computer screen showing web development in progress"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Implementing WebP in your site is straightforward with modern frameworks — Photo by Clement Helardot on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               WebP and photography workflows: practical tips

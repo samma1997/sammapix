@@ -146,6 +146,18 @@ export default function FindDeleteDuplicatePhotosPage() {
 
           <div className="prose-content">
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85f1d7?w=800&q=80"
+                alt="Laptop showing photo management software with multiple image files"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                A cluttered photo library wastes storage and makes finding the right image harder — Photo by Fotis Fotopoulos on Unsplash
+              </figcaption>
+            </figure>
+
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Why duplicate photos accumulate faster than you think
             </h2>
@@ -208,12 +220,24 @@ export default function FindDeleteDuplicatePhotosPage() {
               hashing comes in.
             </p>
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                alt="Data analysis visualization representing hash-based duplicate detection"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Perceptual hashing analyzes image content rather than raw bytes to find visual duplicates — Photo by Luke Chesser on Unsplash
+              </figcaption>
+            </figure>
+
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
               Near duplicates: perceptual hashing
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Perceptual hashing is one of the most elegant algorithms in
+              <a href="https://en.wikipedia.org/wiki/Perceptual_hashing" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Perceptual hashing</a> is one of the most elegant algorithms in
               computer vision. Instead of hashing the raw file bytes, it hashes
               the visual content of the image in a way that is tolerant of minor
               variations. Two images that look the same to the human eye will
@@ -392,6 +416,18 @@ export default function FindDeleteDuplicatePhotosPage() {
               </li>
             </ul>
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80"
+                alt="Clean code on screen representing organized file management and deduplication"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                A systematic approach to photo management keeps your library clean long-term — Photo by Clement Helardot on Unsplash
+              </figcaption>
+            </figure>
+
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Preventing duplicate accumulation going forward
             </h2>
@@ -406,7 +442,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Decide where your canonical photo library lives — whether that is
-              Apple Photos, Google Photos, Lightroom, or a folder structure on
+              Apple Photos, <a href="https://support.google.com/photos/answer/6220791" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Google Photos</a>, Lightroom, or a folder structure on
               an external drive. All other locations (phone camera roll, cloud
               syncs, backup folders) feed into this one library and are cleared
               regularly.

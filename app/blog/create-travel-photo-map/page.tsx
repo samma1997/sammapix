@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       "Your iPhone quietly records GPS coordinates in every photo. Here is how to turn that hidden data into an interactive travel map — in minutes, with no uploads.",
     url: "https://sammapix.com/blog/create-travel-photo-map",
     type: "article",
-    publishedTime: "2026-03-08",
+    publishedTime: "2026-02-18",
     authors: ["https://lucasammarco.com"],
   },
   twitter: {
@@ -47,8 +47,8 @@ const articleSchema = {
   description:
     "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
   url: "https://sammapix.com/blog/create-travel-photo-map",
-  datePublished: "2026-03-08",
-  dateModified: "2026-03-08",
+  datePublished: "2026-02-18",
+  dateModified: "2026-02-18",
   author: {
     "@type": "Person",
     name: "Luca Sammarco",
@@ -94,8 +94,8 @@ const breadcrumbSchema = {
   ],
 };
 
-const POST_DATE = "2026-03-08";
-const POST_DATE_FORMATTED = "March 8, 2026";
+const POST_DATE = "2026-02-18";
+const POST_DATE_FORMATTED = "February 18, 2026";
 const POST_URL = "https://sammapix.com/blog/create-travel-photo-map";
 const POST_TITLE =
   "How to Create an Interactive Travel Photo Map from Your iPhone Photos";
@@ -174,6 +174,18 @@ export default function CreateTravelPhotoMapPage() {
               of everywhere you have been. The right tool can turn that invisible
               metadata into a visual travel map in seconds.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80"
+                alt="Travel photographer reviewing photos on camera while sitting at a scenic overlook"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Every travel photo carries hidden GPS coordinates that can be turned into an interactive map — Photo by Annie Spratt on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               How GPS EXIF data works in iPhone photos
@@ -315,11 +327,27 @@ export default function CreateTravelPhotoMapPage() {
               Step 4 — Explore your travel map
             </h3>
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&q=80"
+                alt="Vintage world map spread out on a table with travel planning items"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Your iPhone photos contain all the data needed to build a detailed travel map — Photo by Andrew Stutesman on Unsplash
+              </figcaption>
+            </figure>
+
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Zoom and pan to explore the map. Click any pin to see the photo
               thumbnail, the exact capture time, and the GPS coordinates. Pins
               cluster automatically when zoomed out — zoom in to separate
-              nearby locations.
+              nearby locations. The map uses{" "}
+              <a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Leaflet.js</a>{" "}
+              with tiles from{" "}
+              <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">OpenStreetMap</a>{" "}
+              — both open-source and free.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Use the date range filter to isolate a specific trip. If you have
@@ -336,6 +364,18 @@ export default function CreateTravelPhotoMapPage() {
               zoom level. SammaPix Pro users can generate a shareable link that
               lets anyone view the interactive map in their browser.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80"
+                alt="Stunning landscape view of mountains and lake from an elevated vantage point"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Travel photos with GPS data enabled become pins on your personal world map — Photo by Luca Bravo on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Tips for better travel photo maps

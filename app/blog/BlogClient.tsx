@@ -132,7 +132,7 @@ const POSTS: Post[] = [
     title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
     description:
       "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
-    date: "2026-03-08",
+    date: "2026-02-24",
     tags: ["Privacy"],
   },
   {
@@ -140,7 +140,7 @@ const POSTS: Post[] = [
     title: "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
     description:
       "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
-    date: "2026-03-08",
+    date: "2026-02-18",
     tags: ["Tools"],
   },
 ];

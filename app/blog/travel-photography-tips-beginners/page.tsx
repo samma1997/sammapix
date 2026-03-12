@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       "Composition, light, gear, and GPS tagging — 10 proven travel photography tips that will immediately improve your shots.",
     url: "https://sammapix.com/blog/travel-photography-tips-beginners",
     type: "article",
-    publishedTime: "2026-03-12",
+    publishedTime: "2026-03-03",
     authors: ["https://lucasammarco.com"],
   },
   twitter: {
@@ -45,8 +45,8 @@ const articleSchema = {
   description:
     "Master travel photography with 10 proven tips covering composition, golden hour, gear essentials, and GPS tagging. A complete beginner's guide for 2026.",
   url: "https://sammapix.com/blog/travel-photography-tips-beginners",
-  datePublished: "2026-03-12",
-  dateModified: "2026-03-12",
+  datePublished: "2026-03-03",
+  dateModified: "2026-03-03",
   author: {
     "@type": "Person",
     name: "Luca Sammarco",
@@ -92,8 +92,8 @@ const breadcrumbSchema = {
   ],
 };
 
-const POST_DATE = "2026-03-12";
-const POST_DATE_FORMATTED = "March 12, 2026";
+const POST_DATE = "2026-03-03";
+const POST_DATE_FORMATTED = "March 3, 2026";
 const POST_URL =
   "https://sammapix.com/blog/travel-photography-tips-beginners";
 const POST_TITLE =
@@ -150,6 +150,18 @@ export default function TravelPhotographyTipsBeginnersPage() {
           {/* Article body */}
           <div className="prose-content">
 
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80"
+                alt="Traveler with camera and backpack exploring a scenic destination"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Travel photography starts with showing up at the right place, at the right time — Photo by Annie Spratt on Unsplash
+              </figcaption>
+            </figure>
+
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Why most travel photos disappoint
             </h2>
@@ -189,12 +201,24 @@ export default function TravelPhotographyTipsBeginnersPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Enable the grid overlay on your camera or phone before your next
               trip. You will use it constantly until the framing becomes
-              instinctive.
+              instinctive. For a deeper dive into composition principles, <a href="https://digital-photography-school.com/rule-of-thirds/" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Digital Photography School</a> has an excellent breakdown of the rule of thirds with visual examples.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Tip 2 — Shoot during golden hour, always
             </h2>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80"
+                alt="Golden hour sunrise over a dramatic landscape with warm directional light"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Golden hour light transforms any scene into something extraordinary — Photo by Kalen Emsley on Unsplash
+              </figcaption>
+            </figure>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Golden hour — the 40 to 60 minutes after sunrise and before sunset
@@ -221,7 +245,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Blue hour — the 20 minutes after sunset — is equally valuable for
               cityscapes and long exposures. The sky turns a deep, saturated
-              blue that complements artificial light beautifully.
+              blue that complements artificial light beautifully. <a href="https://photographylife.com/landscapes/golden-hour" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Photography Life</a> has an in-depth guide to shooting during golden and blue hour with practical examples.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
@@ -280,6 +304,18 @@ export default function TravelPhotographyTipsBeginnersPage() {
               need to be the subject — they are an element that makes the
               composition more alive.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80"
+                alt="Adventure travel photography in a stunning natural landscape"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Changing your perspective transforms familiar scenes into striking compositions — Photo by Luke Ellis-Craven on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Tip 6 — Pack only the gear you will actually carry

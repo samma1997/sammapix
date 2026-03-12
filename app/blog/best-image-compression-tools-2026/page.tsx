@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "We tested every major free image compressor so you do not have to. Here is the honest breakdown — output quality, speed, privacy, and limits — for 2026.",
     url: "https://sammapix.com/blog/best-image-compression-tools-2026",
     type: "article",
-    publishedTime: "2026-03-11",
+    publishedTime: "2026-01-15",
     authors: ["https://lucasammarco.com"],
   },
   twitter: {
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-const POST_DATE = "2026-03-11";
-const POST_DATE_FORMATTED = "March 11, 2026";
+const POST_DATE = "2026-01-15";
+const POST_DATE_FORMATTED = "January 15, 2026";
 const POST_URL =
   "https://sammapix.com/blog/best-image-compression-tools-2026";
 const POST_TITLE = "Best Free Image Compression Tools in 2026 — Compared";
@@ -286,8 +286,21 @@ export default function BestImageCompressionTools2026Page() {
               , images are consistently the single largest contributor to page weight on most websites. Compressing them correctly — without visible quality degradation — is one of the highest-ROI optimizations available, and it costs nothing when you use the right free tool.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The challenge is that not every free compressor is created equal. File size limits, upload privacy concerns, batch caps, and output quality vary enormously. This comparison cuts through the noise.
+              The challenge is that not every free compressor is created equal. File size limits, upload privacy concerns, batch caps, and output quality vary enormously. This comparison cuts through the noise. For a deeper dive into how browsers handle image formats, see the{" "}
+              <a href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">MDN guide to image file types</a>.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                alt="Website performance metrics dashboard showing page load speed improvements"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Page speed is directly tied to image optimization — Photo by Carlos Muza on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               What we tested and how
@@ -296,8 +309,22 @@ export default function BestImageCompressionTools2026Page() {
               Each tool was tested with the same set of reference images: a 12 MP JPEG landscape photo from a mirrorless camera, a high-DPI PNG logo with transparency, a GIF animation, and a WebP banner image. We measured output file size reduction, visual quality at default settings, and any privacy or usability friction encountered along the way.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              We also paid attention to what happens to your files. Tools that upload images to cloud servers are noted clearly — because for many photographers and designers, that is a dealbreaker.
+              We also paid attention to what happens to your files. Tools that upload images to cloud servers are noted clearly — because for many photographers and designers, that is a dealbreaker. Google&apos;s{" "}
+              <a href="https://web.dev/learn/performance" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">web.dev performance course</a>{" "}
+              covers the fundamentals of why image optimization matters so much for page load times.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85f1d7?w=800&q=80"
+                alt="Laptop with code editor open showing web development workflow"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Choosing the right compression tool is part of every web development workflow — Photo by Ilya Pavlov on Unsplash
+              </figcaption>
+            </figure>
 
             {/* Tools comparison */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-6">
@@ -391,6 +418,18 @@ export default function BestImageCompressionTools2026Page() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               ImageOptim stands apart because it is fully lossless for its default mode — it removes invisible bloat and metadata without touching the pixel data at all. The file size reductions are smaller (typically 10–30% versus 50–80% for lossy tools), but there is genuinely zero quality impact.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                alt="Data analytics dashboard showing metrics and performance charts"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Compression ratios vary by tool — but the real differences go beyond the numbers — Photo by Luke Chesser on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Which tool should you use in 2026?

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Your photos reveal more than you think. Hidden EXIF metadata includes your GPS location, device serial number, and timestamp. Here is how to strip it — for free, in seconds.",
     url: "https://sammapix.com/blog/remove-exif-protect-privacy",
     type: "article",
-    publishedTime: "2026-03-11",
+    publishedTime: "2026-02-06",
     authors: ["https://lucasammarco.com"],
   },
   twitter: {
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-const POST_DATE = "2026-03-11";
-const POST_DATE_FORMATTED = "March 11, 2026";
+const POST_DATE = "2026-02-06";
+const POST_DATE_FORMATTED = "February 6, 2026";
 const POST_URL = "https://sammapix.com/blog/remove-exif-protect-privacy";
 const POST_TITLE = "How to Remove EXIF Data and Protect Your Privacy";
 
@@ -183,8 +183,21 @@ export default function RemoveExifProtectPrivacyPage() {
               EXIF stands for Exchangeable Image File Format. It is a standard for embedding technical metadata directly inside digital image files — specifically JPEG, TIFF, and RAW formats. The standard was developed by the Japan Electronic Industries Development Association in 1995 and is now used by virtually every digital camera and smartphone camera app in the world.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              When you press the shutter, the camera writes a block of data into the file alongside the image pixels. This block is invisible when you view the photo but can be read by any software that knows where to look — including free online tools, desktop apps, and command-line utilities.
+              When you press the shutter, the camera writes a block of data into the file alongside the image pixels. This block is invisible when you view the photo but can be read by any software that knows where to look — including free online tools, desktop apps, and command-line utilities. The full technical specification is documented on the{" "}
+              <a href="https://en.wikipedia.org/wiki/Exif" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">EXIF Wikipedia page</a>.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80"
+                alt="Digital security concept with lock icon and data protection visualization"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Hidden metadata in photos is a real privacy risk most people overlook — Photo by FLY:D on Unsplash
+              </figcaption>
+            </figure>
 
             {/* EXIF fields grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 mt-4">
@@ -257,6 +270,18 @@ export default function RemoveExifProtectPrivacyPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               A series of photos posted to a public social account over time can map an entire daily routine. GPS timestamps reveal where you work, where your children attend school, and what routes you travel regularly. This kind of pattern data is exactly what stalkers and abusive ex-partners look for — and it is sitting in plain sight for anyone who knows to look at EXIF metadata.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80"
+                alt="Person taking a photo with a smartphone outdoors"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Every smartphone photo can carry precise GPS coordinates in its metadata — Photo by Jonas Leupe on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Do social platforms strip EXIF automatically?
@@ -391,7 +416,8 @@ export default function RemoveExifProtectPrivacyPage() {
               Use a dedicated workflow for client photos
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              If you are a photographer delivering images to clients, EXIF data contains your camera serial number, lens details, and shooting settings. Some clients or agencies specify that delivered files should have metadata stripped. Build EXIF removal into your export workflow rather than doing it manually per job.
+              If you are a photographer delivering images to clients, EXIF data contains your camera serial number, lens details, and shooting settings. Some clients or agencies specify that delivered files should have metadata stripped — particularly in line with{" "}
+              <a href="https://iptc.org/standards/photo-metadata/" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">IPTC photo metadata standards</a>. Build EXIF removal into your export workflow rather than doing it manually per job.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
@@ -407,6 +433,18 @@ export default function RemoveExifProtectPrivacyPage() {
               </Link>{" "}
               strips all EXIF metadata automatically as part of the compression process. You get a lighter file with no metadata in a single operation — no separate EXIF removal step needed.
             </p>
+
+            <figure className="my-8">
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+                alt="Digital privacy concept showing a person using a secure device"
+                className="w-full rounded-lg"
+                loading="lazy"
+              />
+              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                Building good metadata hygiene into your photo sharing workflow protects your privacy — Photo by John Schnobrich on Unsplash
+              </figcaption>
+            </figure>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Alternative methods for removing EXIF data

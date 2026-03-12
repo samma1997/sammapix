@@ -91,6 +91,12 @@ export const BLOG_SLUGS = [
   "travel-photography-tips-beginners",
   "compress-images-without-losing-quality",
   "find-delete-duplicate-photos",
+  "iphone-heic-to-jpg-guide",
+  "batch-watermark-photos-free",
+  "image-sizes-social-media-2026",
+  "organize-travel-photos-by-country",
+  "crop-photos-perfect-ratios",
+  "ai-image-renaming-seo-guide",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
