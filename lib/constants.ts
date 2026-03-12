@@ -76,6 +76,8 @@ export const BLOG_SLUGS = [
   "compress-images-without-losing-quality",
   "create-travel-photo-map",
   "crop-photos-perfect-ratios",
+  "cull-photos-faster-workflow",
+  "film-effects-digital-photos-free",
   "find-delete-duplicate-photos",
   "image-sizes-social-media-2026",
   "iphone-heic-to-jpg-guide",

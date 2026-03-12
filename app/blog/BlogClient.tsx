@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { Search, ArrowRight, X } from "lucide-react";
 
-type PostTag = "Tools" | "SEO" | "Performance" | "Privacy";
+type PostTag = "Tools" | "SEO" | "Performance" | "Privacy" | "Workflow" | "Creative";
 
 interface Post {
   slug: string;
@@ -72,6 +72,22 @@ const POSTS: Post[] = [
     tags: ["Tools"],
   },
   {
+    slug: "cull-photos-faster-workflow",
+    title: "How to Cull Photos 10x Faster: The Complete Workflow Guide",
+    description:
+      "Master the art of photo culling with keyboard-driven workflows, rating systems, and side-by-side comparison. Stop wasting hours on selection.",
+    date: "2026-02-10",
+    tags: ["Workflow"],
+  },
+  {
+    slug: "film-effects-digital-photos-free",
+    title: "How to Add Film Effects to Digital Photos for Free (No Photoshop)",
+    description:
+      "Recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on your digital photos. Free browser-based film emulation with FilmLab.",
+    date: "2026-02-14",
+    tags: ["Creative"],
+  },
+  {
     slug: "find-delete-duplicate-photos",
     title: "Find and Delete Duplicate Photos Free (No Upload Required)",
     description:
@@ -129,7 +145,7 @@ const POSTS: Post[] = [
   },
 ];
 
-const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy"];
+const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy", "Workflow", "Creative"];
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
