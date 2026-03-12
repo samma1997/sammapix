@@ -1,16 +1,55 @@
 import { MetadataRoute } from "next";
-import { BLOG_SLUGS } from "@/lib/constants";
-
-const BASE_URL = "https://sammapix.com";
+import { BLOG_SLUGS, APP_URL } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    "",
-    "/about",
-    "/pricing",
-    "/blog",
-    "/privacy",
-    "/tools",
+  // Static pages with different priorities and change frequencies
+  const staticPages: MetadataRoute.Sitemap = [
+    {
+      url: `${APP_URL}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
+      url: `${APP_URL}/tools`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${APP_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${APP_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${APP_URL}/pricing`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${APP_URL}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${APP_URL}/portfolio`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ];
+
+  // Tool pages (13 total)
+  const toolPages: MetadataRoute.Sitemap = [
     "/tools/compress",
     "/tools/webp",
     "/tools/ai-rename",
@@ -24,6 +63,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/resizepack",
     "/tools/cull",
     "/tools/heic",
+  ].map((route) => ({
+    url: `${APP_URL}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  // VS comparison pages (12 total)
+  const vsPages: MetadataRoute.Sitemap = [
     "/vs/tinypng",
     "/vs/squoosh",
     "/vs/imageoptim",
@@ -36,30 +84,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/vs/photopea",
     "/vs/birme",
     "/vs/optimizilla",
-  ];
-
-  const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
-
-  // Only include portfolio destinations with real Cloudinary photos
-  const portfolioRoutes = [
-    "/portfolio",
-    "/portfolio/sri-lanka-2025",
-  ];
-
-  const portfolioEntries: MetadataRoute.Sitemap = portfolioRoutes.map((route) => ({
-    url: `${BASE_URL}${route}`,
+  ].map((route) => ({
+    url: `${APP_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
-  return [
-    ...[...routes, ...blogRoutes].map((route) => ({
-      url: `${BASE_URL}${route}`,
+  // Blog pages (14 total)
+  const blogPages: MetadataRoute.Sitemap = BLOG_SLUGS.map((slug) => ({
+    url: `${APP_URL}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Portfolio sub-pages
+  const portfolioPages: MetadataRoute.Sitemap = [
+    {
+      url: `${APP_URL}/portfolio/sri-lanka-2025`,
       lastModified: new Date(),
-      changeFrequency: (route === "" ? "daily" : "weekly") as MetadataRoute.Sitemap[number]["changeFrequency"],
-      priority: route === "" ? 1 : 0.8,
-    })),
-    ...portfolioEntries,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+  ];
+
+  return [
+    ...staticPages,
+    ...toolPages,
+    ...vsPages,
+    ...blogPages,
+    ...portfolioPages,
   ];
 }

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Shield, MapPin, Camera, AlertTriangle } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
   description:
     "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
   alternates: {
-    canonical: "https://sammapix.com/blog/remove-gps-from-photos",
+    canonical: `${APP_URL}/blog/remove-gps-from-photos`,
   },
   keywords: [
     "remove GPS from photos online free",
@@ -20,14 +21,14 @@ export const metadata: Metadata = {
     title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
     description:
       "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos for free.",
-    url: "https://sammapix.com/blog/remove-gps-from-photos",
+    url: `${APP_URL}/blog/remove-gps-from-photos`,
     type: "article",
     publishedTime: "2026-02-24",
   },
 };
 
 export default function RemoveGpsFromPhotosPage() {
-  const postUrl = "https://sammapix.com/blog/remove-gps-from-photos";
+  const postUrl = `${APP_URL}/blog/remove-gps-from-photos`;
   const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("How to Remove GPS Location from Photos Before Posting Online (Free)")}&url=${encodeURIComponent(postUrl)}&via=lucasammarco`;
   const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
 
@@ -489,7 +490,7 @@ export default function RemoveGpsFromPhotosPage() {
               headline: "How to Remove GPS Location from Photos Before Posting Online (Free)",
               description:
                 "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
-              url: "https://sammapix.com/blog/remove-gps-from-photos",
+              url: `${APP_URL}/blog/remove-gps-from-photos`,
               datePublished: "2026-02-24",
               dateModified: "2026-02-24",
               author: {
@@ -500,7 +501,7 @@ export default function RemoveGpsFromPhotosPage() {
               publisher: {
                 "@type": "Organization",
                 name: "SammaPix",
-                url: "https://sammapix.com",
+                url: APP_URL,
                 logo: {
                   "@type": "ImageObject",
                   url: "https://sammapix.com/og-image.png",
@@ -508,7 +509,7 @@ export default function RemoveGpsFromPhotosPage() {
               },
               mainEntityOfPage: {
                 "@type": "WebPage",
-                "@id": "https://sammapix.com/blog/remove-gps-from-photos",
+                "@id": `${APP_URL}/blog/remove-gps-from-photos`,
               },
               keywords: [
                 "remove GPS from photos online free",
@@ -526,13 +527,13 @@ export default function RemoveGpsFromPhotosPage() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: "https://sammapix.com" },
-                { "@type": "ListItem", position: 2, name: "Blog", item: "https://sammapix.com/blog" },
+                { "@type": "ListItem", position: 1, name: "Home", item: APP_URL },
+                { "@type": "ListItem", position: 2, name: "Blog", item: `${APP_URL}/blog` },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: "How to Remove GPS Location from Photos Before Posting Online (Free)",
-                  item: "https://sammapix.com/blog/remove-gps-from-photos",
+                  item: `${APP_URL}/blog/remove-gps-from-photos`,
                 },
               ],
             }),

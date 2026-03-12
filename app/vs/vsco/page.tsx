@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Sparkles, Lock, Globe, DollarSign, Camera } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     "browser photo editor",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/vsco",
+    canonical: `${APP_URL}/vs/vsco`,
   },
   openGraph: {
     title: "SammaPix vs VSCO — Best Photo Editor for Travel Photographers (2026)",
@@ -274,7 +275,7 @@ export default function VsVscoPage() {
             description:
               "Detailed feature comparison between SammaPix and VSCO for travel photographers. Covers batch processing, EXIF removal, AI rename, WebP export, and pricing.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-08",
             dateModified: "2026-03-08",
           }),
@@ -290,7 +291,7 @@ export default function VsVscoPage() {
             "@type": "WebPage",
             name: "SammaPix vs VSCO",
             description: "Feature-by-feature comparison between SammaPix and VSCO photo editing tools",
-            url: "https://sammapix.com/vs/vsco",
+            url: `${APP_URL}/vs/vsco`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

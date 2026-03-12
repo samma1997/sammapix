@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "About SammaPix — Built by Luca Sammarco, Travel Photographer & Developer",
   description:
-    "SammaPix is built by Luca Sammarco, a travel photographer and full-stack developer who created these tools to solve real image optimization problems. Learn about his expertise and philosophy.",
+    "Meet Luca Sammarco — travel photographer & developer who built SammaPix to solve real image optimization challenges. Privacy-first, browser-based tools.",
   keywords: [
     "luca sammarco",
     "travel photographer",
@@ -15,12 +16,12 @@ export const metadata: Metadata = {
     "photography tools",
     "web developer",
   ],
-  alternates: { canonical: "https://sammapix.com/about" },
+  alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
     title: "About SammaPix — Built by Luca Sammarco",
     description:
       "Discover how Luca Sammarco, a travel photographer and developer, built SammaPix with privacy first and browser-based processing.",
-    url: "https://sammapix.com/about",
+    url: `${APP_URL}/about`,
     type: "website",
     images: [
       {

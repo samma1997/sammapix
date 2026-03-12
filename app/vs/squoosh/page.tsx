@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Sparkles, Lock, Globe, Zap } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "google squoosh vs",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/squoosh",
+    canonical: `${APP_URL}/vs/squoosh`,
   },
   openGraph: {
     title: "SammaPix vs Squoosh — Image Optimizer Comparison 2026",
     description: "Squoosh is powerful but single-file only. SammaPix adds batch processing, AI rename, and no file upload to server.",
     type: "website",
-    url: "https://sammapix.com/vs/squoosh",
+    url: `${APP_URL}/vs/squoosh`,
     images: [
       {
         url: "/og-image.png",
@@ -270,7 +271,7 @@ export default function VsSquooshPage() {
             headline: "SammaPix vs Squoosh — Which Image Optimizer Should You Use in 2026?",
             description: "Detailed feature comparison between SammaPix and Squoosh image optimization tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-05",
             dateModified: "2026-03-08",
           }),
@@ -286,7 +287,7 @@ export default function VsSquooshPage() {
             "@type": "WebPage",
             name: "SammaPix vs Squoosh",
             description: "Feature-by-feature comparison between SammaPix and Squoosh",
-            url: "https://sammapix.com/vs/squoosh",
+            url: `${APP_URL}/vs/squoosh`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

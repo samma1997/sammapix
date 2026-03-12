@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "How to Convert iPhone HEIC Photos to JPG Free (No Software) | SammaPix Blog",
   description:
     "Learn how to convert HEIC to JPG free without installing any software. Step-by-step guide covering iPhone camera settings, Mac Preview, and the fastest browser-based method.",
   alternates: {
-    canonical: "https://sammapix.com/blog/iphone-heic-to-jpg-guide",
+    canonical: `${APP_URL}/blog/iphone-heic-to-jpg-guide`,
   },
   keywords: [
     "convert heic to jpg free",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     title: "How to Convert iPhone HEIC Photos to JPG Free (No Software)",
     description:
       "HEIC files not opening on your PC or Windows app? This guide shows every method to convert HEIC to JPG free — from iPhone settings to a browser tool that needs zero installs.",
-    url: "https://sammapix.com/blog/iphone-heic-to-jpg-guide",
+    url: `${APP_URL}/blog/iphone-heic-to-jpg-guide`,
     type: "article",
     publishedTime: "2026-02-12",
     authors: ["https://lucasammarco.com"],
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
 
 const POST_DATE = "2026-02-12";
 const POST_DATE_FORMATTED = "February 12, 2026";
-const POST_URL = "https://sammapix.com/blog/iphone-heic-to-jpg-guide";
+const POST_URL = `${APP_URL}/blog/iphone-heic-to-jpg-guide`;
 const POST_TITLE = "How to Convert iPhone HEIC Photos to JPG Free (No Software)";
 
 const articleSchema = {
@@ -60,7 +61,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -86,8 +87,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://sammapix.com" },
-    { "@type": "ListItem", position: 2, name: "Blog", item: "https://sammapix.com/blog" },
+    { "@type": "ListItem", position: 1, name: "Home", item: APP_URL },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${APP_URL}/blog` },
     { "@type": "ListItem", position: 3, name: POST_TITLE, item: POST_URL },
   ],
 };

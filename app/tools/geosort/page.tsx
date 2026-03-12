@@ -6,9 +6,9 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Sort Photos by Location & Country Free | GPS Organizer | SammaPix",
+  title: "Sort Photos by Location Free — GPS Organizer | SammaPix",
   description:
-    "Sort photos by location free using GPS data from EXIF. Organize travel photos by country automatically. No upload, browser-based.",
+    "Organize travel photos by country instantly. GPS sorting, auto-grouping, ZIP download. Free, zero uploads. Perfect for photographers.",
   keywords: [
     "sort photos by location",
     "gps photo organizer",
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
     "photo location sorting",
     "gps photo sort",
     "travel photo organizer",
+    "gps photo organizer",
+    "travel photo organizer",
+    "auto-sort",
   ],
   alternates: { canonical: `${APP_URL}/tools/geosort` },
   openGraph: {
-    title: "Sort Photos by Location & Country Free | SammaPix",
+    title: "Sort Photos by Location Free — GPS Organizer | SammaPix",
     description:
-      "Sort photos by location free using GPS EXIF data. Organize travel photos by country automatically. No upload needed.",
+      "Organize travel photos by country instantly. GPS sorting, auto-grouping, ZIP download. Free, zero uploads. Perfect for photographers.",
     url: `${APP_URL}/tools/geosort`,
     siteName: "SammaPix",
     type: "website",

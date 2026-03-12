@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Honest comparison of the best free image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Pros, cons, and our verdict.",
   alternates: {
-    canonical: "https://sammapix.com/blog/best-image-compression-tools-2026",
+    canonical: `${APP_URL}/blog/best-image-compression-tools-2026`,
   },
   keywords: [
     "best image compression tools 2026",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     title: "Best Free Image Compression Tools in 2026 — Compared",
     description:
       "We tested every major free image compressor so you do not have to. Here is the honest breakdown — output quality, speed, privacy, and limits — for 2026.",
-    url: "https://sammapix.com/blog/best-image-compression-tools-2026",
+    url: `${APP_URL}/blog/best-image-compression-tools-2026`,
     type: "article",
     publishedTime: "2026-01-15",
     authors: ["https://lucasammarco.com"],
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-01-15";
 const POST_DATE_FORMATTED = "January 15, 2026";
 const POST_URL =
-  "https://sammapix.com/blog/best-image-compression-tools-2026";
+  `${APP_URL}/blog/best-image-compression-tools-2026`;
 const POST_TITLE = "Best Free Image Compression Tools in 2026 — Compared";
 
 const articleSchema = {
@@ -60,7 +61,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -86,13 +87,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",

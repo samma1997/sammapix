@@ -6,9 +6,9 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Remove EXIF Data & GPS from Photos Online | SammaPix",
+  title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
   description:
-    "Remove GPS, EXIF data & metadata from photos online free. Strip location, camera info, timestamps. Privacy-focused. No upload, browser-based.",
+    "Remove GPS & EXIF instantly — protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
   keywords: [
     "remove exif data",
     "remove gps from photos",
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
     "metadata remover",
     "strip exif",
     "remove location from photo",
+    "privacy tool",
+    "metadata remover",
+    "location privacy",
   ],
   alternates: { canonical: `${APP_URL}/tools/exif` },
   openGraph: {
-    title: "Remove EXIF Data & GPS from Photos Online | SammaPix",
+    title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
     description:
-      "Remove GPS, EXIF data & metadata from photos online free. Privacy-focused, browser-based. No upload needed.",
+      "Remove GPS & EXIF instantly — protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
     url: `${APP_URL}/tools/exif`,
     siteName: "SammaPix",
     type: "website",

@@ -7,9 +7,9 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free Image Compressor — Compress JPG/PNG/WebP Online | SammaPix",
+  title: "Compress Images Free Online — JPG, PNG, WebP | SammaPix",
   description:
-    "Compress JPG, PNG, WebP & GIF files up to 80% smaller without quality loss. Browser-based, free forever. No upload, no account needed.",
+    "Compress images 80% smaller instantly. JPG, PNG, WebP & GIF — free forever, browser-based, zero uploads. Optimize for web today.",
   keywords: [
     "image compressor",
     "compress images online",
@@ -17,14 +17,17 @@ export const metadata: Metadata = {
     "png compressor",
     "free image compression",
     "compress without losing quality",
+    "reduce image size",
+    "image optimization tool",
+    "lossless compression",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Free Image Compressor — Compress JPG/PNG/WebP Online | SammaPix",
+    title: "Compress Images Free Online — JPG, PNG, WebP | SammaPix",
     description:
-      "Compress JPG, PNG, WebP & GIF files up to 80% smaller without quality loss. Browser-based, free forever.",
+      "Compress images 80% smaller instantly. JPG, PNG, WebP & GIF — free forever, browser-based, zero uploads. Optimize for web today.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",

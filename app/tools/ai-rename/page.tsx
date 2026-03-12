@@ -6,9 +6,9 @@ import ToolInterface from "@/components/tools/ToolInterface";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI Image Renaming Tool — Auto SEO Filenames | SammaPix",
+  title: "AI Image Renaming Tool — Auto SEO Filenames Free | SammaPix",
   description:
-    "Automatically rename images with AI-generated SEO-friendly filenames. Stop uploading DSC_0042.jpg — let Gemini AI describe your photos in seconds.",
+    "Rename images automatically with AI. Stop DSC_0042.jpg. Google Gemini generates SEO filenames + alt text in seconds. Free, 5/day.",
   keywords: [
     "ai image renaming",
     "seo friendly filenames",
@@ -16,14 +16,17 @@ export const metadata: Metadata = {
     "ai alt text generator",
     "batch image renaming",
     "seofriendly image names",
+    "batch renaming",
+    "filename generator",
+    "seo optimization",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/ai-rename`,
   },
   openGraph: {
-    title: "AI Image Renaming Tool — Auto SEO Filenames | SammaPix",
+    title: "AI Image Renaming Tool — Auto SEO Filenames Free | SammaPix",
     description:
-      "Automatically rename images with AI-generated SEO-friendly filenames. Powered by Google Gemini Flash.",
+      "Rename images automatically with AI. Stop DSC_0042.jpg. Google Gemini generates SEO filenames + alt text in seconds. Free, 5/day.",
     url: `${APP_URL}/tools/ai-rename`,
     siteName: "SammaPix",
     type: "website",

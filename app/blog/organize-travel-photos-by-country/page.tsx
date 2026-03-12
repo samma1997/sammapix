@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "How to Organize Travel Photos by Country Automatically (Free) | SammaPix",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
     "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically — free, in-browser, no software needed.",
   alternates: {
     canonical:
-      "https://sammapix.com/blog/organize-travel-photos-by-country",
+      `${APP_URL}/blog/organize-travel-photos-by-country`,
   },
   keywords: [
     "organize travel photos by country",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     title: "How to Organize Travel Photos by Country Automatically (Free)",
     description:
       "GPS EXIF data makes automatic photo organization possible. Here is the complete guide to sorting your travel archive by country — no manual work required.",
-    url: "https://sammapix.com/blog/organize-travel-photos-by-country",
+    url: `${APP_URL}/blog/organize-travel-photos-by-country`,
     type: "article",
     publishedTime: "2026-02-28",
     authors: ["https://lucasammarco.com"],
@@ -47,7 +48,7 @@ const articleSchema = {
     "How to Organize Travel Photos by Country Automatically (Free)",
   description:
     "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically — free, in-browser, no software needed.",
-  url: "https://sammapix.com/blog/organize-travel-photos-by-country",
+  url: `${APP_URL}/blog/organize-travel-photos-by-country`,
   datePublished: "2026-02-28",
   dateModified: "2026-02-28",
   author: {
@@ -58,7 +59,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -67,7 +68,7 @@ const articleSchema = {
   mainEntityOfPage: {
     "@type": "WebPage",
     "@id":
-      "https://sammapix.com/blog/organize-travel-photos-by-country",
+      `${APP_URL}/blog/organize-travel-photos-by-country`,
   },
   image: {
     "@type": "ImageObject",
@@ -83,19 +84,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Organize Travel Photos by Country Automatically (Free)",
-      item: "https://sammapix.com/blog/organize-travel-photos-by-country",
+      item: `${APP_URL}/blog/organize-travel-photos-by-country`,
     },
   ],
 };
@@ -142,7 +143,7 @@ const faqSchema = {
 const POST_DATE = "2026-02-28";
 const POST_DATE_FORMATTED = "February 28, 2026";
 const POST_URL =
-  "https://sammapix.com/blog/organize-travel-photos-by-country";
+  `${APP_URL}/blog/organize-travel-photos-by-country`;
 const POST_TITLE =
   "How to Organize Travel Photos by Country Automatically (Free)";
 

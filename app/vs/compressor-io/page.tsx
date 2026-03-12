@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     "compressor io replacement",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/compressor-io",
+    canonical: `${APP_URL}/vs/compressor-io`,
   },
   openGraph: {
     title: "SammaPix vs Compressor.io — Honest Comparison 2026",
@@ -196,7 +197,7 @@ export default function VsCompressorIoPage() {
             description:
               "SammaPix vs Compressor.io: compare batch processing, AI features, file limits, and privacy.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-06",
             dateModified: "2026-03-08",
           }),
@@ -212,7 +213,7 @@ export default function VsCompressorIoPage() {
             "@type": "WebPage",
             name: "SammaPix vs Compressor.io",
             description: "Feature-by-feature comparison between SammaPix and Compressor.io",
-            url: "https://sammapix.com/vs/compressor-io",
+            url: `${APP_URL}/vs/compressor-io`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

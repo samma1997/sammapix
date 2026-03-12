@@ -6,9 +6,9 @@ import ToolInterface from "@/components/tools/ToolInterface";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free WebP Converter — Convert JPG/PNG to WebP Online | SammaPix",
+  title: "WebP Converter Free Online — Convert JPG to WebP | SammaPix",
   description:
-    "Convert JPG, PNG & GIF to WebP format free online. WebP files are 25-35% smaller than JPEG. Batch processing, no upload, browser-based.",
+    "Convert JPG to WebP instantly — 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
   keywords: [
     "webp converter",
     "convert to webp",
@@ -16,14 +16,17 @@ export const metadata: Metadata = {
     "png to webp",
     "free webp converter",
     "online webp conversion",
+    "convert image online",
+    "web performance",
+    "modern image format",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "Free WebP Converter — Convert JPG/PNG to WebP Online | SammaPix",
+    title: "WebP Converter Free Online — Convert JPG to WebP | SammaPix",
     description:
-      "Convert JPG, PNG & GIF to WebP format free online. WebP files are 25-35% smaller. Batch processing, no upload needed.",
+      "Convert JPG to WebP instantly — 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
     url: `${APP_URL}/tools/webp`,
     siteName: "SammaPix",
     type: "website",

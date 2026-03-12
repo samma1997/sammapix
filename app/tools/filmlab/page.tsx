@@ -7,9 +7,9 @@ import FilmLab from "@/components/tools/FilmLab";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Analog Film Photo Filters Free Online | SammaPix",
+  title: "Film Photo Filters Free Online — Vintage Effects | SammaPix",
   description:
-    "Apply vintage film effects and analog filters online free. Kodak Gold, Fuji, Ilford presets. Batch processing, no upload needed.",
+    "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
   keywords: [
     "film photo filter",
     "vintage photo effects",
@@ -17,14 +17,17 @@ export const metadata: Metadata = {
     "film grain effect",
     "photo filter online",
     "vintage effect tool",
+    "vintage photo effects",
+    "analog photo filter",
+    "film grain effect",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/filmlab`,
   },
   openGraph: {
-    title: "Analog Film Photo Filters Free Online | SammaPix",
+    title: "Film Photo Filters Free Online — Vintage Effects | SammaPix",
     description:
-      "Apply vintage film effects and analog filters online free. Kodak, Fuji, Ilford presets. Batch processing, no upload.",
+      "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
     url: `${APP_URL}/tools/filmlab`,
     siteName: "SammaPix",
     type: "website",

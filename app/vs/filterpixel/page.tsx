@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Sparkles, Lock, Globe, DollarSign, Shield } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     "filterpixel free alternative",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/filterpixel",
+    canonical: `${APP_URL}/vs/filterpixel`,
   },
   openGraph: {
     title: "SammaPix vs FilterPixel — Which Photo Optimizer is Better? (2026)",
@@ -270,7 +271,7 @@ export default function VsFilterPixelPage() {
             description:
               "Detailed feature comparison between SammaPix and FilterPixel. Covers privacy, pricing, EXIF removal, WebP export, AI rename, and format support.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-08",
             dateModified: "2026-03-08",
           }),
@@ -286,7 +287,7 @@ export default function VsFilterPixelPage() {
             "@type": "WebPage",
             name: "SammaPix vs FilterPixel",
             description: "Feature-by-feature comparison between SammaPix and FilterPixel photo optimization tools",
-            url: "https://sammapix.com/vs/filterpixel",
+            url: `${APP_URL}/vs/filterpixel`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

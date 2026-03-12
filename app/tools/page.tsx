@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ToolCard,
@@ -365,6 +366,80 @@ export default function ToolsPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* Blog guides section */}
+      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] py-12 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+              Learn & Master Image Optimization
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
+              Read guides on image compression, SEO, format conversion, and photography workflows.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <Link
+              href="/blog/compress-images-without-losing-quality"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
+                Compression
+              </span>
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Compress Images Without Quality Loss
+              </h3>
+            </Link>
+
+            <Link
+              href="/blog/ai-image-renaming-seo-guide"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
+                SEO
+              </span>
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                AI Image Renaming for SEO
+              </h3>
+            </Link>
+
+            <Link
+              href="/blog/iphone-heic-to-jpg-guide"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
+                FORMAT CONVERSION
+              </span>
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Convert HEIC to JPG Free
+              </h3>
+            </Link>
+
+            <Link
+              href="/blog/image-sizes-social-media-2026"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
+                SOCIAL MEDIA
+              </span>
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Image Sizes for Social Media 2026
+              </h3>
+            </Link>
+          </div>
+
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#6366F1] hover:text-[#6366F1] opacity-80 hover:opacity-100 transition-opacity"
+          >
+            View all articles
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
       </section>
 

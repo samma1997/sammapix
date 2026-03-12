@@ -8,7 +8,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Crop Image to Aspect Ratio Online Free | SammaPix",
   description:
-    "Crop images to exact aspect ratios online free. 1:1, 16:9, 4:5, 9:16, 2:3 and custom ratios. Batch processing, no upload needed.",
+    "Crop to any ratio — 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
   keywords: [
     "crop image ratio",
     "aspect ratio crop",
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
     "instagram crop",
     "batch crop images",
     "image cropper",
+    "aspect ratio crop",
+    "batch crop images",
+    "instagram crop",
   ],
   alternates: { canonical: `${APP_URL}/tools/croproatio` },
   openGraph: {
     title: "Crop Image to Aspect Ratio Online Free | SammaPix",
     description:
-      "Crop images to exact aspect ratios online free. 1:1, 16:9, 4:5, 9:16 and custom ratios. Batch processing, no upload.",
+      "Crop to any ratio — 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
     url: `${APP_URL}/tools/croproatio`,
     siteName: "SammaPix",
     type: "website",

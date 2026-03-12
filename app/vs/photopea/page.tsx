@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "image compressor vs photopea",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/photopea",
+    canonical: `${APP_URL}/vs/photopea`,
   },
   openGraph: {
     title: "SammaPix vs Photopea — Image Optimization Comparison 2026",
     description: "Photopea is a full Photoshop clone. SammaPix is the dedicated tool for compression, WebP conversion, and AI rename — no learning curve, no upload.",
     type: "website",
-    url: "https://sammapix.com/vs/photopea",
+    url: `${APP_URL}/vs/photopea`,
     images: [
       {
         url: "/og-image.png",
@@ -262,7 +263,7 @@ export default function VsPhotopeaPage() {
             headline: "SammaPix vs Photopea — Which Free Tool Should You Use for Image Optimization in 2026?",
             description: "Detailed comparison between SammaPix and Photopea for image compression, WebP conversion, and batch optimization.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-12",
             dateModified: "2026-03-12",
           }),
@@ -278,7 +279,7 @@ export default function VsPhotopeaPage() {
             "@type": "WebPage",
             name: "SammaPix vs Photopea",
             description: "Feature-by-feature comparison between SammaPix and Photopea",
-            url: "https://sammapix.com/vs/photopea",
+            url: `${APP_URL}/vs/photopea`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

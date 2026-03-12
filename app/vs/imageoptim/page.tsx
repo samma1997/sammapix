@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Globe } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     "online image optimizer vs desktop",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/imageoptim",
+    canonical: `${APP_URL}/vs/imageoptim`,
   },
   openGraph: {
     title: "SammaPix vs ImageOptim — Honest Comparison 2026",
@@ -198,7 +199,7 @@ export default function VsImageOptimPage() {
             description:
               "SammaPix vs ImageOptim: compare features, web vs desktop, AI capabilities, and batch processing.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-06",
             dateModified: "2026-03-08",
           }),
@@ -214,7 +215,7 @@ export default function VsImageOptimPage() {
             "@type": "WebPage",
             name: "SammaPix vs ImageOptim",
             description: "Feature-by-feature comparison between SammaPix and ImageOptim",
-            url: "https://sammapix.com/vs/imageoptim",
+            url: `${APP_URL}/vs/imageoptim`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Compress Images Without Losing Quality (2026)",
   description:
     "Learn how to compress images without losing quality. Compare lossy vs lossless compression, PNG vs JPEG vs WebP, and find the right quality settings for every use case.",
   alternates: {
-    canonical: "https://sammapix.com/blog/compress-images-without-losing-quality",
+    canonical: `${APP_URL}/blog/compress-images-without-losing-quality`,
   },
   keywords: [
     "compress images without losing quality",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: "Compress Images Without Losing Quality (2026)",
     description:
       "The complete guide to image compression: lossy vs lossless, PNG vs JPEG vs WebP, quality settings, and how to reduce file size without visible quality loss.",
-    url: "https://sammapix.com/blog/compress-images-without-losing-quality",
+    url: `${APP_URL}/blog/compress-images-without-losing-quality`,
     type: "article",
     publishedTime: "2026-03-07",
     authors: ["https://lucasammarco.com"],
@@ -42,7 +43,7 @@ const articleSchema = {
   headline: "Compress Images Without Losing Quality (2026)",
   description:
     "Learn how to compress images without losing quality. Compare lossy vs lossless compression, PNG vs JPEG vs WebP, and find the right quality settings for every use case.",
-  url: "https://sammapix.com/blog/compress-images-without-losing-quality",
+  url: `${APP_URL}/blog/compress-images-without-losing-quality`,
   datePublished: "2026-03-07",
   dateModified: "2026-03-07",
   author: {
@@ -53,7 +54,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -61,7 +62,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/compress-images-without-losing-quality",
+    "@id": `${APP_URL}/blog/compress-images-without-losing-quality`,
   },
 };
 
@@ -73,26 +74,26 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Compress Images Without Losing Quality (2026)",
-      item: "https://sammapix.com/blog/compress-images-without-losing-quality",
+      item: `${APP_URL}/blog/compress-images-without-losing-quality`,
     },
   ],
 };
 
 const POST_DATE = "2026-03-07";
 const POST_DATE_FORMATTED = "March 7, 2026";
-const POST_URL = "https://sammapix.com/blog/compress-images-without-losing-quality";
+const POST_URL = `${APP_URL}/blog/compress-images-without-losing-quality`;
 const POST_TITLE = "Compress Images Without Losing Quality (2026)";
 
 export default function CompressImagesWithoutLosingQualityPage() {

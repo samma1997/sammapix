@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "How AI Image Renaming Boosts Your SEO (2026 Guide) | SammaPix",
   description:
-    "Learn how AI image rename SEO techniques transform generic filenames like IMG_0001.jpg into keyword-rich names that rank in Google Image Search. Complete 2026 guide.",
+    "Transform generic camera filenames into keyword-rich image names that rank in Google Image Search. AI-powered SEO guide for photographers.",
   alternates: {
-    canonical: "https://sammapix.com/blog/ai-image-renaming-seo-guide",
+    canonical: `${APP_URL}/blog/ai-image-renaming-seo-guide`,
   },
   keywords: [
     "ai image rename seo",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     title: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
     description:
       "Discover how AI-powered image renaming turns IMG_0001.jpg into golden-gate-bridge-sunset-san-francisco.jpg — and why that difference matters for your Google rankings.",
-    url: "https://sammapix.com/blog/ai-image-renaming-seo-guide",
+    url: `${APP_URL}/blog/ai-image-renaming-seo-guide`,
     type: "article",
     publishedTime: "2026-03-10",
     authors: ["https://lucasammarco.com"],
@@ -45,7 +46,7 @@ const articleSchema = {
   headline: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
   description:
     "Learn how AI image rename SEO techniques transform generic filenames like IMG_0001.jpg into keyword-rich names that rank in Google Image Search.",
-  url: "https://sammapix.com/blog/ai-image-renaming-seo-guide",
+  url: `${APP_URL}/blog/ai-image-renaming-seo-guide`,
   datePublished: "2026-03-10",
   dateModified: "2026-03-10",
   author: {
@@ -56,7 +57,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -64,7 +65,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/ai-image-renaming-seo-guide",
+    "@id": `${APP_URL}/blog/ai-image-renaming-seo-guide`,
   },
   image: {
     "@type": "ImageObject",
@@ -81,19 +82,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
-      item: "https://sammapix.com/blog/ai-image-renaming-seo-guide",
+      item: `${APP_URL}/blog/ai-image-renaming-seo-guide`,
     },
   ],
 };
@@ -139,7 +140,7 @@ const faqSchema = {
 
 const POST_DATE = "2026-03-10";
 const POST_DATE_FORMATTED = "March 10, 2026";
-const POST_URL = "https://sammapix.com/blog/ai-image-renaming-seo-guide";
+const POST_URL = `${APP_URL}/blog/ai-image-renaming-seo-guide`;
 const POST_TITLE = "How AI Image Renaming Boosts Your SEO (2026 Guide)";
 
 export default function AiImageRenamingSeoGuidePage() {

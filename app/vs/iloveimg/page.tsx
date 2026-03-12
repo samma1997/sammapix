@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     "browser image optimizer",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/iloveimg",
+    canonical: `${APP_URL}/vs/iloveimg`,
   },
   openGraph: {
     title: "SammaPix vs iLoveIMG — Honest Comparison 2026",
@@ -197,7 +198,7 @@ export default function VsILoveImgPage() {
             description:
               "SammaPix vs iLoveIMG: compare privacy, AI features, batch processing, and free plan limits.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-06",
             dateModified: "2026-03-08",
           }),
@@ -213,7 +214,7 @@ export default function VsILoveImgPage() {
             "@type": "WebPage",
             name: "SammaPix vs iLoveIMG",
             description: "Feature-by-feature comparison between SammaPix and iLoveIMG",
-            url: "https://sammapix.com/vs/iloveimg",
+            url: `${APP_URL}/vs/iloveimg`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

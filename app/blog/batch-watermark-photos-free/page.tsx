@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
   description:
     "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once — browser-based, no uploads required.",
   alternates: {
-    canonical: "https://sammapix.com/blog/batch-watermark-photos-free",
+    canonical: `${APP_URL}/blog/batch-watermark-photos-free`,
   },
   keywords: [
     "batch watermark photos free",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
     description:
       "Add watermarks to hundreds of photos in seconds — no Photoshop, no subscription. Step-by-step guide to batch watermarking with best practices for placement, opacity, and branding.",
-    url: "https://sammapix.com/blog/batch-watermark-photos-free",
+    url: `${APP_URL}/blog/batch-watermark-photos-free`,
     type: "article",
     publishedTime: "2026-01-22",
     authors: ["https://lucasammarco.com"],
@@ -44,7 +45,7 @@ const articleSchema = {
   headline: "How to Batch Watermark Photos for Free (No Photoshop Needed)",
   description:
     "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once — browser-based, no uploads required.",
-  url: "https://sammapix.com/blog/batch-watermark-photos-free",
+  url: `${APP_URL}/blog/batch-watermark-photos-free`,
   datePublished: "2026-01-22",
   dateModified: "2026-01-22",
   author: {
@@ -55,7 +56,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -63,7 +64,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/batch-watermark-photos-free",
+    "@id": `${APP_URL}/blog/batch-watermark-photos-free`,
   },
   image: {
     "@type": "ImageObject",
@@ -81,26 +82,26 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Batch Watermark Photos for Free (No Photoshop Needed)",
-      item: "https://sammapix.com/blog/batch-watermark-photos-free",
+      item: `${APP_URL}/blog/batch-watermark-photos-free`,
     },
   ],
 };
 
 const POST_DATE = "2026-01-22";
 const POST_DATE_FORMATTED = "January 22, 2026";
-const POST_URL = "https://sammapix.com/blog/batch-watermark-photos-free";
+const POST_URL = `${APP_URL}/blog/batch-watermark-photos-free`;
 const POST_TITLE =
   "How to Batch Watermark Photos for Free (No Photoshop Needed)";
 

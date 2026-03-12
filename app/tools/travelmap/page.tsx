@@ -6,9 +6,9 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Travel Photo Map Creator Free Online | GPS Visualization | SammaPix",
+  title: "Travel Photo Map Maker — Visualize GPS Routes Free | SammaPix",
   description:
-    "Create travel photo map from GPS coordinates automatically. Interactive map, count countries, measure distance traveled. No upload needed.",
+    "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
   keywords: [
     "travel map creator",
     "gps photo map",
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
     "photo map generator",
     "journey map",
     "gps visualization",
+    "gps photo map",
+    "travel visualization",
+    "journey map",
   ],
   alternates: { canonical: `${APP_URL}/tools/travelmap` },
   openGraph: {
-    title: "Travel Photo Map Creator Free Online | SammaPix",
+    title: "Travel Photo Map Maker — Visualize GPS Routes Free | SammaPix",
     description:
-      "Create travel photo map from GPS coordinates automatically. Interactive map, count countries, measure distance. No upload needed.",
+      "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
     url: `${APP_URL}/tools/travelmap`,
     siteName: "SammaPix",
     type: "website",

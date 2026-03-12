@@ -8,7 +8,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Find Duplicate Photos Free Online | Perceptual Hashing | SammaPix",
   description:
-    "Find duplicate photos free online using perceptual hashing. Identify similar images, save disk space. Browser-based, no upload needed.",
+    "Find duplicate photos instantly with AI hashing. Reclaim disk space, identify near-duplicates. Free online, zero uploads, no sorting.",
   keywords: [
     "find duplicate photos",
     "duplicate photo finder",
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
     "phash tool",
     "photo deduplicator",
     "find similar images",
+    "duplicate photo finder",
+    "similar image finder",
+    "photo deduplicator",
   ],
   alternates: { canonical: `${APP_URL}/tools/twinhunt` },
   openGraph: {
-    title: "Find Duplicate Photos Free Online | SammaPix",
+    title: "Find Duplicate Photos Free Online | Perceptual Hashing | SammaPix",
     description:
-      "Find duplicate photos free online using perceptual hashing. Identify similar images, save disk space. Browser-based, no upload.",
+      "Find duplicate photos instantly with AI hashing. Reclaim disk space, identify near-duplicates. Free online, zero uploads, no sorting.",
     url: `${APP_URL}/tools/twinhunt`,
     siteName: "SammaPix",
     type: "website",

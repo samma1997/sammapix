@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "free bulk image resizer",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/birme",
+    canonical: `${APP_URL}/vs/birme`,
   },
   openGraph: {
     title: "SammaPix vs Birme — Bulk Image Tools Comparison 2026",
     description: "Birme is handy for bulk resizing. SammaPix does that and more — compression, WebP conversion, AI rename, EXIF removal — all free in-browser.",
     type: "website",
-    url: "https://sammapix.com/vs/birme",
+    url: `${APP_URL}/vs/birme`,
     images: [
       {
         url: "/og-image.png",
@@ -261,7 +262,7 @@ export default function VsBirmePage() {
             headline: "SammaPix vs Birme — Which Free Bulk Image Tool is Better in 2026?",
             description: "Detailed comparison between SammaPix and Birme for bulk image resizing, compression, and optimization.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-12",
             dateModified: "2026-03-12",
           }),
@@ -277,7 +278,7 @@ export default function VsBirmePage() {
             "@type": "WebPage",
             name: "SammaPix vs Birme",
             description: "Feature-by-feature comparison between SammaPix and Birme for bulk image resizing and optimization",
-            url: "https://sammapix.com/vs/birme",
+            url: `${APP_URL}/vs/birme`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

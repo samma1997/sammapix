@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, AlertTriangle, Shield, Eye, MapPin } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Every photo you share contains hidden metadata that can reveal your location, device, and identity. Learn what EXIF data is, why it is a privacy risk, and how to strip it for free.",
   alternates: {
-    canonical: "https://sammapix.com/blog/remove-exif-protect-privacy",
+    canonical: `${APP_URL}/blog/remove-exif-protect-privacy`,
   },
   keywords: [
     "remove exif data",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     title: "How to Remove EXIF Data and Protect Your Privacy",
     description:
       "Your photos reveal more than you think. Hidden EXIF metadata includes your GPS location, device serial number, and timestamp. Here is how to strip it — for free, in seconds.",
-    url: "https://sammapix.com/blog/remove-exif-protect-privacy",
+    url: `${APP_URL}/blog/remove-exif-protect-privacy`,
     type: "article",
     publishedTime: "2026-02-06",
     authors: ["https://lucasammarco.com"],
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 
 const POST_DATE = "2026-02-06";
 const POST_DATE_FORMATTED = "February 6, 2026";
-const POST_URL = "https://sammapix.com/blog/remove-exif-protect-privacy";
+const POST_URL = `${APP_URL}/blog/remove-exif-protect-privacy`;
 const POST_TITLE = "How to Remove EXIF Data and Protect Your Privacy";
 
 const articleSchema = {
@@ -59,7 +60,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -122,8 +123,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://sammapix.com" },
-    { "@type": "ListItem", position: 2, name: "Blog", item: "https://sammapix.com/blog" },
+    { "@type": "ListItem", position: 1, name: "Home", item: APP_URL },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${APP_URL}/blog` },
     { "@type": "ListItem", position: 3, name: POST_TITLE, item: POST_URL },
   ],
 };

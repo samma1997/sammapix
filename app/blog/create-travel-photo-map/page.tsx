@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
   alternates: {
-    canonical: "https://sammapix.com/blog/create-travel-photo-map",
+    canonical: `${APP_URL}/blog/create-travel-photo-map`,
   },
   keywords: [
     "create travel photo map from iPhone photos",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
       "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
     description:
       "Your iPhone quietly records GPS coordinates in every photo. Here is how to turn that hidden data into an interactive travel map — in minutes, with no uploads.",
-    url: "https://sammapix.com/blog/create-travel-photo-map",
+    url: `${APP_URL}/blog/create-travel-photo-map`,
     type: "article",
     publishedTime: "2026-02-18",
     authors: ["https://lucasammarco.com"],
@@ -46,7 +47,7 @@ const articleSchema = {
     "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
   description:
     "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
-  url: "https://sammapix.com/blog/create-travel-photo-map",
+  url: `${APP_URL}/blog/create-travel-photo-map`,
   datePublished: "2026-02-18",
   dateModified: "2026-02-18",
   author: {
@@ -57,7 +58,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -65,7 +66,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/create-travel-photo-map",
+    "@id": `${APP_URL}/blog/create-travel-photo-map`,
   },
 };
 
@@ -77,26 +78,26 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
-      item: "https://sammapix.com/blog/create-travel-photo-map",
+      item: `${APP_URL}/blog/create-travel-photo-map`,
     },
   ],
 };
 
 const POST_DATE = "2026-02-18";
 const POST_DATE_FORMATTED = "February 18, 2026";
-const POST_URL = "https://sammapix.com/blog/create-travel-photo-map";
+const POST_URL = `${APP_URL}/blog/create-travel-photo-map`;
 const POST_TITLE =
   "How to Create an Interactive Travel Photo Map from Your iPhone Photos";
 

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Social Media Image Sizes 2026: Complete Cheat Sheet | SammaPix",
   description:
     "Every social media image size you need in 2026 — Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest. Exact dimensions, aspect ratios, and file size limits in one reference guide.",
   alternates: {
-    canonical: "https://sammapix.com/blog/image-sizes-social-media-2026",
+    canonical: `${APP_URL}/blog/image-sizes-social-media-2026`,
   },
   keywords: [
     "social media image sizes 2026",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     title: "Social Media Image Sizes 2026: Complete Cheat Sheet",
     description:
       "Every platform, every image type, exact dimensions and aspect ratios. The only social media image size guide you need in 2026.",
-    url: "https://sammapix.com/blog/image-sizes-social-media-2026",
+    url: `${APP_URL}/blog/image-sizes-social-media-2026`,
     type: "article",
     publishedTime: "2026-03-01",
     authors: ["https://lucasammarco.com"],
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
 
 const POST_DATE = "2026-03-01";
 const POST_DATE_FORMATTED = "March 1, 2026";
-const POST_URL = "https://sammapix.com/blog/image-sizes-social-media-2026";
+const POST_URL = `${APP_URL}/blog/image-sizes-social-media-2026`;
 const POST_TITLE = "The Complete Guide to Image Sizes for Social Media in 2026";
 
 const articleSchema = {
@@ -61,7 +62,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -88,13 +89,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",

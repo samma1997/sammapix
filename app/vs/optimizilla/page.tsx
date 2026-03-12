@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "optimizilla vs",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/optimizilla",
+    canonical: `${APP_URL}/vs/optimizilla`,
   },
   openGraph: {
     title: "SammaPix vs Optimizilla — Free Image Compressor Comparison 2026",
     description: "Optimizilla uploads your files and limits you to 20 per session. SammaPix is browser-based, unlimited, and adds WebP + AI rename — for free.",
     type: "website",
-    url: "https://sammapix.com/vs/optimizilla",
+    url: `${APP_URL}/vs/optimizilla`,
     images: [
       {
         url: "/og-image.png",
@@ -261,7 +262,7 @@ export default function VsOptimizillaPage() {
             headline: "SammaPix vs Optimizilla — Which Free Image Compressor is Better in 2026?",
             description: "Detailed feature comparison between SammaPix and Optimizilla free image compression tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-12",
             dateModified: "2026-03-12",
           }),
@@ -277,7 +278,7 @@ export default function VsOptimizillaPage() {
             "@type": "WebPage",
             name: "SammaPix vs Optimizilla",
             description: "Feature-by-feature comparison between SammaPix and Optimizilla",
-            url: "https://sammapix.com/vs/optimizilla",
+            url: `${APP_URL}/vs/optimizilla`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

@@ -7,9 +7,9 @@ import ResizePack from "@/components/tools/ResizePack";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Batch Resize Images Free Online | SammaPix",
+  title: "Batch Resize Images Free Online — Social Media Presets | SammaPix",
   description:
-    "Resize images for Instagram, Twitter, LinkedIn, YouTube free online. Batch resize with social media presets. No upload, browser-based.",
+    "Resize for Instagram, Twitter, LinkedIn, YouTube in seconds. Social presets, batch ZIP download, free online. Optimize now.",
   keywords: [
     "resize images",
     "batch resize",
@@ -17,14 +17,17 @@ export const metadata: Metadata = {
     "social media image resizer",
     "resize images online",
     "image resizer free",
+    "batch resize",
+    "social media image resizer",
+    "image resizer free",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/resizepack`,
   },
   openGraph: {
-    title: "Batch Resize Images Free Online | SammaPix",
+    title: "Batch Resize Images Free Online — Social Media Presets | SammaPix",
     description:
-      "Resize images for Instagram, Twitter, LinkedIn, YouTube free online. Batch resize, social media presets, no upload.",
+      "Resize for Instagram, Twitter, LinkedIn, YouTube in seconds. Social presets, batch ZIP download, free online. Optimize now.",
     url: `${APP_URL}/tools/resizepack`,
     siteName: "SammaPix",
     type: "website",

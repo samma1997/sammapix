@@ -3,19 +3,20 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllTrips } from "@/lib/destinations";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Portfolio — Luca Sammarco Photography",
   description:
     "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China. Curated travel photographs with stories from each journey.",
   alternates: {
-    canonical: "https://sammapix.com/portfolio",
+    canonical: `${APP_URL}/portfolio`,
   },
   openGraph: {
     title: "Portfolio — Luca Sammarco Photography",
     description:
       "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China.",
-    url: "https://sammapix.com/portfolio",
+    url: `${APP_URL}/portfolio`,
     type: "website",
   },
 };

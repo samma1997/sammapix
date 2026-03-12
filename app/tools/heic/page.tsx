@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "HEIC to JPG Converter Free Online | iPhone Photos | SammaPix",
   description:
-    "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files, no signup required. Fast, private, browser-based.",
+    "Convert HEIC to JPG & WebP free. Batch convert 100 iPhone photos instantly. Zero signup, browser-based, zero uploads.",
   keywords: [
     "heic to jpg converter",
     "heic converter",
@@ -17,14 +17,17 @@ export const metadata: Metadata = {
     "heic to webp",
     "heic converter online",
     "batch heic converter",
+    "heic converter",
+    "convert iphone photos",
+    "batch heic converter",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/heic`,
   },
   openGraph: {
-    title: "HEIC to JPG Converter Free Online | SammaPix",
+    title: "HEIC to JPG Converter Free Online | iPhone Photos | SammaPix",
     description:
-      "Convert iPhone HEIC photos to JPG or WebP online free. Batch convert up to 100 files. No signup, browser-based.",
+      "Convert HEIC to JPG & WebP free. Batch convert 100 iPhone photos instantly. Zero signup, browser-based, zero uploads.",
     url: `${APP_URL}/tools/heic`,
     siteName: "SammaPix",
     type: "website",

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — SammaPix",
   description:
     "SammaPix privacy policy. Image compression happens in your browser only. Files never leave your device unless you use AI Rename.",
   alternates: {
-    canonical: "https://sammapix.com/privacy",
+    canonical: `${APP_URL}/privacy`,
   },
   openGraph: {
     title: "Privacy Policy — SammaPix",

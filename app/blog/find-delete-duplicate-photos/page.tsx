@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "How to Find and Delete Duplicate Photos (Free Tool)",
   description:
     "Learn how to find and delete duplicate photos using perceptual hashing. Step-by-step guide to photo deduplication with TwinHunt — free, browser-based, no uploads.",
   alternates: {
-    canonical: "https://sammapix.com/blog/find-delete-duplicate-photos",
+    canonical: `${APP_URL}/blog/find-delete-duplicate-photos`,
   },
   keywords: [
     "find duplicate photos",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: "How to Find and Delete Duplicate Photos (Free Tool)",
     description:
       "Stop wasting storage on duplicate and near-duplicate photos. Learn how perceptual hashing works and how to clean your photo library in minutes with TwinHunt.",
-    url: "https://sammapix.com/blog/find-delete-duplicate-photos",
+    url: `${APP_URL}/blog/find-delete-duplicate-photos`,
     type: "article",
     publishedTime: "2026-03-12",
     authors: ["https://lucasammarco.com"],
@@ -42,7 +43,7 @@ const articleSchema = {
   headline: "How to Find and Delete Duplicate Photos (Free Tool)",
   description:
     "Learn how to find and delete duplicate photos using perceptual hashing. Step-by-step guide to photo deduplication with TwinHunt — free, browser-based, no uploads.",
-  url: "https://sammapix.com/blog/find-delete-duplicate-photos",
+  url: `${APP_URL}/blog/find-delete-duplicate-photos`,
   datePublished: "2026-03-12",
   dateModified: "2026-03-12",
   author: {
@@ -53,7 +54,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -61,7 +62,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/find-delete-duplicate-photos",
+    "@id": `${APP_URL}/blog/find-delete-duplicate-photos`,
   },
 };
 
@@ -73,26 +74,26 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Find and Delete Duplicate Photos (Free Tool)",
-      item: "https://sammapix.com/blog/find-delete-duplicate-photos",
+      item: `${APP_URL}/blog/find-delete-duplicate-photos`,
     },
   ],
 };
 
 const POST_DATE = "2026-03-12";
 const POST_DATE_FORMATTED = "March 12, 2026";
-const POST_URL = "https://sammapix.com/blog/find-delete-duplicate-photos";
+const POST_URL = `${APP_URL}/blog/find-delete-duplicate-photos`;
 const POST_TITLE = "How to Find and Delete Duplicate Photos (Free Tool)";
 
 export default function FindDeleteDuplicatePhotosPage() {

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Crop Photos to Perfect Ratios for Print & Social | SammaPix",
   description:
     "Learn every crop photo ratio you need: 1:1 for Instagram, 4:6 for print, 16:9 for widescreen, 9:16 for Stories. Includes DPI requirements, composition tips, and batch cropping guide.",
   alternates: {
-    canonical: "https://sammapix.com/blog/crop-photos-perfect-ratios",
+    canonical: `${APP_URL}/blog/crop-photos-perfect-ratios`,
   },
   keywords: [
     "crop photo ratio",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     title: "How to Crop Photos to Perfect Ratios for Print and Social Media",
     description:
       "Every crop photo ratio explained: 1:1, 4:3, 3:2, 16:9, 9:16, and 5:4 — with use cases for Instagram, print, widescreen, and Stories. Includes DPI and composition guidance.",
-    url: "https://sammapix.com/blog/crop-photos-perfect-ratios",
+    url: `${APP_URL}/blog/crop-photos-perfect-ratios`,
     type: "article",
     publishedTime: "2026-02-20",
     authors: ["https://lucasammarco.com"],
@@ -46,7 +47,7 @@ const articleSchema = {
     "How to Crop Photos to Perfect Ratios for Print and Social Media",
   description:
     "Learn every crop photo ratio you need: 1:1 for Instagram, 4:6 for print, 16:9 for widescreen, 9:16 for Stories. Includes DPI requirements, composition tips, and batch cropping guide.",
-  url: "https://sammapix.com/blog/crop-photos-perfect-ratios",
+  url: `${APP_URL}/blog/crop-photos-perfect-ratios`,
   datePublished: "2026-02-20",
   dateModified: "2026-02-20",
   author: {
@@ -57,7 +58,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -65,7 +66,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/crop-photos-perfect-ratios",
+    "@id": `${APP_URL}/blog/crop-photos-perfect-ratios`,
   },
 };
 
@@ -77,26 +78,26 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Crop Photos to Perfect Ratios for Print and Social Media",
-      item: "https://sammapix.com/blog/crop-photos-perfect-ratios",
+      item: `${APP_URL}/blog/crop-photos-perfect-ratios`,
     },
   ],
 };
 
 const POST_DATE = "2026-02-20";
 const POST_DATE_FORMATTED = "February 20, 2026";
-const POST_URL = "https://sammapix.com/blog/crop-photos-perfect-ratios";
+const POST_URL = `${APP_URL}/blog/crop-photos-perfect-ratios`;
 const POST_TITLE =
   "How to Crop Photos to Perfect Ratios for Print and Social Media";
 

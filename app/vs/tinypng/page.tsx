@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "image compression tool comparison",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/tinypng",
+    canonical: `${APP_URL}/vs/tinypng`,
   },
   openGraph: {
     title: "SammaPix vs TinyPNG — Honest Comparison 2026",
     description: "TinyPNG is good. SammaPix is better. WebP, AI rename, no uploads, no limits. See the full feature-by-feature comparison.",
     type: "website",
-    url: "https://sammapix.com/vs/tinypng",
+    url: `${APP_URL}/vs/tinypng`,
     images: [
       {
         url: "/og-image.png",
@@ -204,7 +205,7 @@ export default function VsTinyPngPage() {
             headline: "SammaPix vs TinyPNG — Which Free Image Compressor is Better in 2026?",
             description: "Detailed feature comparison between SammaPix and TinyPNG image compression tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-05",
             dateModified: "2026-03-08",
           }),
@@ -220,7 +221,7 @@ export default function VsTinyPngPage() {
             "@type": "WebPage",
             name: "SammaPix vs TinyPNG",
             description: "Feature-by-feature comparison between SammaPix and TinyPNG",
-            url: "https://sammapix.com/vs/tinypng",
+            url: `${APP_URL}/vs/tinypng`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

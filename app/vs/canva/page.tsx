@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Canva — Image Compression & Photo Tools Comparison 2026",
+  title: "SammaPix vs Canva — Image Tools Comparison 2026 | Free",
   description: "SammaPix vs Canva for image compression and photo tools. SammaPix is faster, fully browser-based, and built specifically for image optimization — not graphic design.",
   keywords: [
     "canva image compress",
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "canva image optimizer",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/canva",
+    canonical: `${APP_URL}/vs/canva`,
   },
   openGraph: {
-    title: "SammaPix vs Canva — Photo Tools Comparison 2026",
+    title: "SammaPix vs Canva — Image Tools Comparison 2026 | Free",
     description: "Canva is great for design. For image compression, WebP conversion, and AI rename, SammaPix is the dedicated tool that does it faster and for free.",
     type: "website",
-    url: "https://sammapix.com/vs/canva",
+    url: `${APP_URL}/vs/canva`,
     images: [
       {
         url: "/og-image.png",
@@ -236,7 +237,7 @@ export default function VsCanvaPage() {
             headline: "SammaPix vs Canva — Which Tool Should You Use for Image Optimization in 2026?",
             description: "Detailed comparison between SammaPix and Canva for image compression, WebP conversion, and photo optimization.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-12",
             dateModified: "2026-03-12",
           }),
@@ -252,7 +253,7 @@ export default function VsCanvaPage() {
             "@type": "WebPage",
             name: "SammaPix vs Canva",
             description: "Feature-by-feature comparison between SammaPix and Canva for image optimization",
-            url: "https://sammapix.com/vs/canva",
+            url: `${APP_URL}/vs/canva`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",

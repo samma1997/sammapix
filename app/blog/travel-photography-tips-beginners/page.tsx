@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Master travel photography with 10 proven tips covering composition, golden hour, gear essentials, and GPS tagging. A complete beginner's guide for 2026.",
   alternates: {
-    canonical: "https://sammapix.com/blog/travel-photography-tips-beginners",
+    canonical: `${APP_URL}/blog/travel-photography-tips-beginners`,
   },
   keywords: [
     "travel photography tips",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     title: "10 Best Travel Photography Tips for Beginners (2026 Guide)",
     description:
       "Composition, light, gear, and GPS tagging — 10 proven travel photography tips that will immediately improve your shots.",
-    url: "https://sammapix.com/blog/travel-photography-tips-beginners",
+    url: `${APP_URL}/blog/travel-photography-tips-beginners`,
     type: "article",
     publishedTime: "2026-03-03",
     authors: ["https://lucasammarco.com"],
@@ -44,7 +45,7 @@ const articleSchema = {
   headline: "10 Best Travel Photography Tips for Beginners (2026 Guide)",
   description:
     "Master travel photography with 10 proven tips covering composition, golden hour, gear essentials, and GPS tagging. A complete beginner's guide for 2026.",
-  url: "https://sammapix.com/blog/travel-photography-tips-beginners",
+  url: `${APP_URL}/blog/travel-photography-tips-beginners`,
   datePublished: "2026-03-03",
   dateModified: "2026-03-03",
   author: {
@@ -55,7 +56,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -63,7 +64,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://sammapix.com/blog/travel-photography-tips-beginners",
+    "@id": `${APP_URL}/blog/travel-photography-tips-beginners`,
   },
 };
 
@@ -75,19 +76,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://sammapix.com",
+      item: APP_URL,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Blog",
-      item: "https://sammapix.com/blog",
+      item: `${APP_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "10 Best Travel Photography Tips for Beginners (2026 Guide)",
-      item: "https://sammapix.com/blog/travel-photography-tips-beginners",
+      item: `${APP_URL}/blog/travel-photography-tips-beginners`,
     },
   ],
 };
@@ -95,7 +96,7 @@ const breadcrumbSchema = {
 const POST_DATE = "2026-03-03";
 const POST_DATE_FORMATTED = "March 3, 2026";
 const POST_URL =
-  "https://sammapix.com/blog/travel-photography-tips-beginners";
+  `${APP_URL}/blog/travel-photography-tips-beginners`;
 const POST_TITLE =
   "10 Best Travel Photography Tips for Beginners (2026 Guide)";
 

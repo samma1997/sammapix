@@ -7,9 +7,9 @@ import StampIt from "@/components/tools/StampIt";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Batch Watermark Tool Free Online | Text & Logo Watermarks | SammaPix",
+  title: "Watermark Photos Free Online — Batch & Logo | SammaPix",
   description:
-    "Add watermarks to multiple photos at once free online. Text or logo watermarks. Tiled anti-crop mode. No upload, browser-based.",
+    "Watermark photos instantly — text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
   keywords: [
     "watermark tool",
     "add watermark",
@@ -17,14 +17,17 @@ export const metadata: Metadata = {
     "watermark photos",
     "text watermark",
     "logo watermark",
+    "add watermark",
+    "batch watermark",
+    "watermark photos",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/stampit`,
   },
   openGraph: {
-    title: "Batch Watermark Tool Free Online | SammaPix",
+    title: "Watermark Photos Free Online — Batch & Logo | SammaPix",
     description:
-      "Add watermarks to multiple photos at once free online. Text or logo watermarks. Tiled anti-crop mode. No upload needed.",
+      "Watermark photos instantly — text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
     url: `${APP_URL}/tools/stampit`,
     siteName: "SammaPix",
     type: "website",

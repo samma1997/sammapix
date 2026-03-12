@@ -6,9 +6,9 @@ import CullClient from "@/components/tools/Cull";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Fast Photo Culling Tool Free Online | Keyboard Shortcuts | SammaPix",
+  title: "Photo Culling Tool Free — Keyboard Shortcuts | SammaPix",
   description:
-    "Fast photo culling tool with keyboard shortcuts. Rate and cull a shoot in minutes. K to keep, X to reject. Download best shots as ZIP.",
+    "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
   keywords: [
     "photo culling",
     "cull photos fast",
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
     "select best photos",
     "batch photo rating",
     "photo organizer",
+    "cull photos fast",
+    "photo review tool",
+    "select best photos",
   ],
   alternates: { canonical: `${APP_URL}/tools/cull` },
   openGraph: {
-    title: "Fast Photo Culling Tool Free Online | SammaPix",
+    title: "Photo Culling Tool Free — Keyboard Shortcuts | SammaPix",
     description:
-      "Fast photo culling with keyboard shortcuts. K to keep, X to reject. Cull a shoot in minutes. Download best shots as ZIP.",
+      "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
     url: `${APP_URL}/tools/cull`,
     siteName: "SammaPix",
     type: "website",

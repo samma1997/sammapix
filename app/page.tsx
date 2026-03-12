@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import HeroSection from "@/components/layout/HeroSection";
 import {
   ToolCard,
@@ -349,6 +350,94 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* Blog guides */}
+      <section className="py-14 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+              Learn Image Optimization
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
+              Guides and tips to master image compression, SEO, and photography workflows.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Link
+              href="/blog/ai-image-renaming-seo-guide"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
+                SEO
+              </span>
+              <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                How AI Image Renaming Boosts Your SEO
+              </h3>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                Transform generic filenames into keyword-rich names that rank in Google Image Search.
+              </p>
+            </Link>
+
+            <Link
+              href="/blog/compress-images-without-losing-quality"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
+                PERFORMANCE
+              </span>
+              <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Compress Images Without Losing Quality
+              </h3>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                The right formats, quality settings, and tools for fast web images.
+              </p>
+            </Link>
+
+            <Link
+              href="/blog/iphone-heic-to-jpg-guide"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
+                TOOLS
+              </span>
+              <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Convert iPhone HEIC Photos to JPG Free
+              </h3>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                Step-by-step guide without software or uploads needed.
+              </p>
+            </Link>
+
+            <Link
+              href="/blog/organize-travel-photos-by-country"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <span className="text-[10px] font-medium bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
+                TOOLS
+              </span>
+              <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Organize Travel Photos by Country Automatically
+              </h3>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                Use GPS EXIF data to sort photos without manual work.
+              </p>
+            </Link>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 px-4 py-2.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors"
+            >
+              Read all articles
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-60">
+                <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -16,131 +16,115 @@ interface Post {
 
 const POSTS: Post[] = [
   {
-    slug: "ai-image-renaming-seo",
-    title: "How to Rename Images for SEO with AI",
+    slug: "ai-image-renaming-seo-guide",
+    title: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
     description:
-      "Learn how to rename images for SEO using AI — automatically generate descriptive filenames and alt text that help Google rank your pages.",
-    date: "2026-03-05",
+      "Learn how AI image rename SEO techniques transform generic filenames like IMG_0001.jpg into keyword-rich names that rank in Google Image Search.",
+    date: "2026-03-10",
     tags: ["SEO"],
   },
   {
-    slug: "tinypng-alternative",
-    title: "TinyPNG vs SammaPix: Which Free Image Compressor is Better?",
+    slug: "batch-watermark-photos-free",
+    title: "How to Batch Watermark Photos for Free (No Photoshop Needed)",
     description:
-      "Comparing TinyPNG vs SammaPix on compression quality, privacy, WebP support, and AI features. Find the best free image compressor for 2026.",
-    date: "2026-03-05",
+      "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once.",
+    date: "2026-01-22",
     tags: ["Tools"],
   },
   {
-    slug: "remove-exif-data-photos",
-    title: "How to Remove EXIF Data from Photos Online for Free",
+    slug: "best-image-compression-tools-2026",
+    title: "Best Image Compression Tools 2026: Tested & Ranked",
     description:
-      "Learn how to remove EXIF data from photos online for free — strip GPS coordinates, timestamps, and camera metadata before sharing images anywhere.",
-    date: "2026-03-05",
-    tags: ["Privacy"],
+      "Comprehensive comparison of the best free image compression tools in 2026. We tested compression quality, speed, privacy, and features.",
+    date: "2026-01-15",
+    tags: ["Tools"],
   },
   {
-    slug: "compress-images-for-website",
-    title: "How to Compress Images for Web Without Losing Quality",
+    slug: "complete-guide-webp-format",
+    title: "Complete Guide to WebP Format: Why & How to Use It",
     description:
-      "A practical guide to compressing images for web — the right formats, tools, and settings to reduce file size while keeping images sharp.",
-    date: "2026-03-05",
+      "Everything you need to know about WebP: file size reduction, browser compatibility, when to use it, and how to convert images to WebP.",
+    date: "2026-01-28",
     tags: ["Performance"],
   },
   {
-    slug: "jpg-to-webp-converter",
-    title: "How to Convert JPG to WebP for Free (Without Losing Quality)",
+    slug: "compress-images-without-losing-quality",
+    title: "How to Compress Images Without Losing Quality (2026 Guide)",
     description:
-      "Convert JPG to WebP online for free — smaller files, faster pages, better SEO. No upload required, your images stay on your device.",
-    date: "2026-03-05",
-    tags: ["Tools"],
-  },
-  {
-    slug: "reduce-image-size-without-losing-quality",
-    title: "How to Reduce Image Size Without Quality Loss",
-    description:
-      "Reduce image file size without visible quality loss — the right format, quality settings, and tools that actually work for web images.",
-    date: "2026-03-05",
+      "A practical guide to compressing images while maintaining visual quality. Learn the formats, tools, and settings that actually work.",
+    date: "2026-03-07",
     tags: ["Performance"],
-  },
-  {
-    slug: "best-image-format-for-web",
-    title: "Best Web Image Format: JPEG vs PNG vs WebP vs AVIF",
-    description:
-      "Which image format should you use for your website in 2026? A clear comparison of JPEG, PNG, WebP, and AVIF — when to use each and why.",
-    date: "2026-03-05",
-    tags: ["SEO"],
-  },
-  {
-    slug: "image-seo-guide",
-    title: "Image SEO: Complete Guide to Google Image Rankings",
-    description:
-      "A complete image SEO guide — filenames, alt text, structured data, page speed, and Google Image Search. Everything you need to rank your images.",
-    date: "2026-03-05",
-    tags: ["SEO"],
-  },
-  {
-    slug: "compress-png-without-losing-quality",
-    title: "How to Compress PNG Without Losing Quality",
-    description:
-      "Reduce PNG file size without visible quality loss — the right tools, methods, and settings for lossless and near-lossless PNG compression.",
-    date: "2026-03-05",
-    tags: ["Performance"],
-  },
-  {
-    slug: "optimize-images-wordpress",
-    title: "How to Optimize Images for WordPress (Complete Guide 2026)",
-    description:
-      "Learn how to optimize images for WordPress step by step — compress, convert to WebP, rename for SEO, and automate with plugins. Faster site, better rankings.",
-    date: "2026-03-06",
-    tags: ["Performance"],
-  },
-  {
-    slug: "geosort-sort-photos-by-location",
-    title: "GeoSort: Sort Your Photos by Location Automatically",
-    description:
-      "GeoSort reads the GPS data in your photos and groups them by place — no manual sorting, no uploads, no cloud required. Works entirely in your browser.",
-    date: "2026-03-08",
-    tags: ["Tools"],
-  },
-  {
-    slug: "travel-map-gps-photos",
-    title: "Turn Your GPS Photos into a Travel Map (Free Tool)",
-    description:
-      "TravelMap plots your photos on an interactive map using GPS EXIF data — visualize every trip in seconds, no upload required.",
-    date: "2026-03-08",
-    tags: ["Tools"],
-  },
-  {
-    slug: "how-to-cull-photos-fast",
-    title: "How to Cull Photos Fast: A Practical Workflow for Photographers",
-    description:
-      "Culling photos does not have to take hours. This guide covers fast, practical culling workflows — from keyboard shortcuts to browser-based tools.",
-    date: "2026-03-08",
-    tags: ["Tools"],
-  },
-  {
-    slug: "find-duplicate-photos-free",
-    title: "Find and Remove Duplicate Photos Free (No Upload Required)",
-    description:
-      "TwinHunt finds duplicate and near-duplicate photos in your library — runs entirely in your browser, no cloud upload, no software to install.",
-    date: "2026-03-08",
-    tags: ["Tools"],
-  },
-  {
-    slug: "remove-gps-from-photos",
-    title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
-    description:
-      "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
-    date: "2026-02-24",
-    tags: ["Privacy"],
   },
   {
     slug: "create-travel-photo-map",
     title: "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
     description:
-      "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
+      "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. Visualize where every photo was taken — no uploads required.",
     date: "2026-02-18",
+    tags: ["Tools"],
+  },
+  {
+    slug: "crop-photos-perfect-ratios",
+    title: "How to Crop Photos to Perfect Ratios for Print and Social Media",
+    description:
+      "Learn every crop photo ratio you need: 1:1 for Instagram, 4:6 for print, 16:9 for widescreen. Includes composition tips and batch cropping.",
+    date: "2026-02-20",
+    tags: ["Tools"],
+  },
+  {
+    slug: "find-delete-duplicate-photos",
+    title: "Find and Delete Duplicate Photos Free (No Upload Required)",
+    description:
+      "TwinHunt finds duplicate and near-duplicate photos in your library automatically. Runs entirely in your browser with zero uploads.",
+    date: "2026-03-12",
+    tags: ["Tools"],
+  },
+  {
+    slug: "image-sizes-social-media-2026",
+    title: "Image Sizes for Social Media 2026: Instagram, Facebook, Twitter",
+    description:
+      "Complete guide to image dimensions and aspect ratios for every social media platform. No guessing, no cut-off images.",
+    date: "2026-03-01",
+    tags: ["Performance"],
+  },
+  {
+    slug: "iphone-heic-to-jpg-guide",
+    title: "How to Convert iPhone HEIC Photos to JPG (Free Online)",
+    description:
+      "Convert HEIC photos from your iPhone to JPG format — faster, compatible with everything. Free, online, no uploads needed.",
+    date: "2026-02-12",
+    tags: ["Tools"],
+  },
+  {
+    slug: "organize-travel-photos-by-country",
+    title: "Organize Travel Photos by Country & Location (Using GPS)",
+    description:
+      "Sort your travel photos by location automatically using GPS data from your images. No manual tagging, no uploads required.",
+    date: "2026-02-28",
+    tags: ["Tools"],
+  },
+  {
+    slug: "remove-exif-protect-privacy",
+    title: "How to Remove EXIF Data from Photos to Protect Your Privacy",
+    description:
+      "EXIF data contains GPS location, camera info, and timestamps. Learn how to strip it from photos before sharing online — free and fast.",
+    date: "2026-02-06",
+    tags: ["Privacy"],
+  },
+  {
+    slug: "remove-gps-from-photos",
+    title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
+    description:
+      "Every photo contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos for free.",
+    date: "2026-02-24",
+    tags: ["Privacy"],
+  },
+  {
+    slug: "travel-photography-tips-beginners",
+    title: "Travel Photography Tips for Beginners: Essential Guide",
+    description:
+      "Learn the fundamentals of travel photography: composition, lighting, gear, and workflow tips for capturing amazing photos on the road.",
+    date: "2026-03-03",
     tags: ["Tools"],
   },
 ];

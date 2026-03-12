@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "WebP delivers smaller file sizes than JPEG and PNG without visible quality loss. Learn how WebP works, when to use it, browser support in 2026, and how to convert your photos for free.",
   alternates: {
-    canonical: "https://sammapix.com/blog/complete-guide-webp-format",
+    canonical: `${APP_URL}/blog/complete-guide-webp-format`,
   },
   keywords: [
     "webp format",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     title: "The Complete Guide to WebP: Why Every Photographer Should Use It",
     description:
       "WebP images load faster, rank better, and look identical to JPEG. Here is everything you need to know about the format — and how to convert your entire library for free.",
-    url: "https://sammapix.com/blog/complete-guide-webp-format",
+    url: `${APP_URL}/blog/complete-guide-webp-format`,
     type: "article",
     publishedTime: "2026-01-28",
     authors: ["https://lucasammarco.com"],
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 
 const POST_DATE = "2026-01-28";
 const POST_DATE_FORMATTED = "January 28, 2026";
-const POST_URL = "https://sammapix.com/blog/complete-guide-webp-format";
+const POST_URL = `${APP_URL}/blog/complete-guide-webp-format`;
 const POST_TITLE = "The Complete Guide to WebP: Why Every Photographer Should Use It";
 
 const articleSchema = {
@@ -59,7 +60,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: "SammaPix",
-    url: "https://sammapix.com",
+    url: APP_URL,
     logo: {
       "@type": "ImageObject",
       url: "https://sammapix.com/og-image.png",
@@ -82,8 +83,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://sammapix.com" },
-    { "@type": "ListItem", position: 2, name: "Blog", item: "https://sammapix.com/blog" },
+    { "@type": "ListItem", position: 1, name: "Home", item: APP_URL },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${APP_URL}/blog` },
     { "@type": "ListItem", position: 3, name: POST_TITLE, item: POST_URL },
   ],
 };

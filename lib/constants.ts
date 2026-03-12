@@ -67,36 +67,22 @@ export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com"
 export const APP_DESCRIPTION =
   "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images — no signup needed.";
 
-// Blog post slugs
+// Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
-  "ai-image-renaming-seo",
-  "tinypng-alternative",
-  "remove-exif-data-photos",
-  "compress-images-for-website",
-  "jpg-to-webp-converter",
-  "reduce-image-size-without-losing-quality",
-  "best-image-format-for-web",
-  "image-seo-guide",
-  "compress-png-without-losing-quality",
-  "optimize-images-wordpress",
-  "geosort-sort-photos-by-location",
-  "travel-map-gps-photos",
-  "how-to-cull-photos-fast",
-  "find-duplicate-photos-free",
-  "remove-gps-from-photos",
-  "create-travel-photo-map",
-  "best-image-compression-tools-2026",
-  "remove-exif-protect-privacy",
-  "complete-guide-webp-format",
-  "travel-photography-tips-beginners",
-  "compress-images-without-losing-quality",
-  "find-delete-duplicate-photos",
-  "iphone-heic-to-jpg-guide",
-  "batch-watermark-photos-free",
-  "image-sizes-social-media-2026",
-  "organize-travel-photos-by-country",
-  "crop-photos-perfect-ratios",
   "ai-image-renaming-seo-guide",
+  "batch-watermark-photos-free",
+  "best-image-compression-tools-2026",
+  "complete-guide-webp-format",
+  "compress-images-without-losing-quality",
+  "create-travel-photo-map",
+  "crop-photos-perfect-ratios",
+  "find-delete-duplicate-photos",
+  "image-sizes-social-media-2026",
+  "iphone-heic-to-jpg-guide",
+  "organize-travel-photos-by-country",
+  "remove-exif-protect-privacy",
+  "remove-gps-from-photos",
+  "travel-photography-tips-beginners",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

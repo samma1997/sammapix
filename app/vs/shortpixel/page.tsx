@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { APP_URL } from "@/lib/constants";
 import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     "image compression without upload",
   ],
   alternates: {
-    canonical: "https://sammapix.com/vs/shortpixel",
+    canonical: `${APP_URL}/vs/shortpixel`,
   },
   openGraph: {
     title: "SammaPix vs ShortPixel — Honest Comparison 2026",
     description: "ShortPixel is a solid paid tool. SammaPix is free, browser-based, and adds AI rename — no API key or server upload required.",
     type: "website",
-    url: "https://sammapix.com/vs/shortpixel",
+    url: `${APP_URL}/vs/shortpixel`,
     images: [
       {
         url: "/og-image.png",
@@ -253,7 +254,7 @@ export default function VsShortPixelPage() {
             headline: "SammaPix vs ShortPixel — Which Image Compressor is Better in 2026?",
             description: "Detailed feature comparison between SammaPix and ShortPixel image compression tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
-            publisher: { "@type": "Organization", name: "SammaPix", url: "https://sammapix.com" },
+            publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
             datePublished: "2026-03-12",
             dateModified: "2026-03-12",
           }),
@@ -269,7 +270,7 @@ export default function VsShortPixelPage() {
             "@type": "WebPage",
             name: "SammaPix vs ShortPixel",
             description: "Feature-by-feature comparison between SammaPix and ShortPixel",
-            url: "https://sammapix.com/vs/shortpixel",
+            url: `${APP_URL}/vs/shortpixel`,
             mainEntity: {
               "@type": "ItemList",
               name: "Feature Comparison",
