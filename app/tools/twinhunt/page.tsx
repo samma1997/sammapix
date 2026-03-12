@@ -200,9 +200,9 @@ export default function TwinHuntPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
-              { name: "Compress Images", href: "/tools/compress" },
               { name: "Cull Photos Fast", href: "/tools/cull" },
-              { name: "All tools", href: "/tools" },
+              { name: "Sort by Location", href: "/tools/geosort" },
+              { name: "Compress Images", href: "/tools/compress" },
             ].map((tool) => (
               <Link
                 key={tool.href}

@@ -5,10 +5,16 @@ const TOOL_LINKS = [
   { href: "/tools/compress", label: "Compress" },
   { href: "/tools/webp", label: "WebP Convert" },
   { href: "/tools/heic", label: "HEIC Converter" },
+  { href: "/tools/ai-rename", label: "AI Rename" },
   { href: "/tools/exif", label: "EXIF Remover" },
+  { href: "/tools/filmlab", label: "FilmLab" },
+  { href: "/tools/stampit", label: "StampIt" },
+  { href: "/tools/croproatio", label: "CropRatio" },
+  { href: "/tools/twinhunt", label: "TwinHunt" },
   { href: "/tools/geosort", label: "GeoSort" },
   { href: "/tools/travelmap", label: "Travel Map" },
-  { href: "/tools/ai-rename", label: "AI Rename" },
+  { href: "/tools/resizepack", label: "ResizePack" },
+  { href: "/tools/cull", label: "Cull" },
 ];
 
 const COMPANY_LINKS = [

@@ -61,8 +61,8 @@ const features = [
 
 const relatedTools = [
   { name: "Compress Images", href: "/tools/compress" },
+  { name: "Convert HEIC", href: "/tools/heic" },
   { name: "Resize Images", href: "/tools/resizepack" },
-  { name: "AI Rename", href: "/tools/ai-rename" },
 ];
 
 export default function WebpPage() {

@@ -183,9 +183,9 @@ export default function ExifPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
-              { name: "Compress Images", href: "/tools/compress" },
               { name: "Sort Photos by Location", href: "/tools/geosort" },
-              { name: "All tools", href: "/tools" },
+              { name: "Create Travel Map", href: "/tools/travelmap" },
+              { name: "AI Rename", href: "/tools/ai-rename" },
             ].map((tool) => (
               <Link
                 key={tool.href}

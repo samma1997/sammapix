@@ -61,9 +61,11 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Resize Images", href: "/tools/resizepack" },
   { name: "Convert to WebP", href: "/tools/webp" },
+  { name: "Convert HEIC", href: "/tools/heic" },
+  { name: "Resize Images", href: "/tools/resizepack" },
   { name: "Remove EXIF", href: "/tools/exif" },
+  { name: "AI Rename", href: "/tools/ai-rename" },
 ];
 
 export default function CompressPage() {
@@ -190,40 +192,74 @@ export default function CompressPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            name: "SammaPix Image Compressor",
-            url: `${APP_URL}/tools/compress`,
-            description:
-              "Free online image compressor. Compress JPG, PNG, WebP and GIF in your browser without losing quality. No upload needed.",
-            applicationCategory: "PhotographyApplication",
-            operatingSystem: "Web Browser",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            author: {
-              "@type": "Person",
-              name: "Luca Sammarco",
-              url: "https://lucasammarco.com",
-            },
-            creator: {
-              "@type": "Organization",
-              name: "SammaPix",
-              url: `${APP_URL}`,
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.8",
-              ratingCount: "150",
-            },
-            featureList: [
-              "JPG/PNG/WebP/GIF compression",
-              "Quality slider",
-              "Batch processing",
-              "ZIP download",
-              "Browser-based",
-              "No server upload",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                name: "SammaPix Image Compressor",
+                url: `${APP_URL}/tools/compress`,
+                description:
+                  "Free browser-based image compressor. Reduce JPG, PNG, WebP and GIF files up to 80% smaller without quality loss. Zero server upload.",
+                applicationCategory: "PhotographyApplication",
+                operatingSystem: "Web Browser",
+                offers: {
+                  "@type": "Offer",
+                  price: "0",
+                  priceCurrency: "USD",
+                },
+                author: {
+                  "@type": "Person",
+                  name: "Luca Sammarco",
+                  url: "https://lucasammarco.com",
+                },
+                creator: {
+                  "@type": "Organization",
+                  name: "SammaPix",
+                  url: `${APP_URL}`,
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  ratingCount: "150",
+                },
+                featureList: [
+                  "Compress JPG, PNG, WebP, GIF",
+                  "Quality adjustment slider",
+                  "Batch file processing",
+                  "ZIP download archive",
+                  "Browser-based processing",
+                  "No server upload",
+                  "No quality loss",
+                ],
+              },
+              {
+                "@type": "HowTo",
+                name: "How to Compress Images for Website Without Losing Quality",
+                description:
+                  "Step-by-step guide to compress images for your website using SammaPix image compressor.",
+                step: [
+                  {
+                    "@type": "HowToStep",
+                    position: 1,
+                    name: "Upload your image to SammaPix",
+                    description:
+                      "Drag and drop your JPG, PNG, WebP or GIF file into the SammaPix compressor.",
+                  },
+                  {
+                    "@type": "HowToStep",
+                    position: 2,
+                    name: "Adjust quality slider",
+                    description:
+                      "Use the quality slider (0-100%) to control how much compression to apply. Higher values retain more quality.",
+                  },
+                  {
+                    "@type": "HowToStep",
+                    position: 3,
+                    name: "Download compressed image",
+                    description:
+                      "Click the download button to save your optimized image to your device.",
+                  },
+                ],
+              },
             ],
           }),
         }}

@@ -61,9 +61,9 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Compress Images", href: "/tools/compress" },
   { name: "Crop to Ratio", href: "/tools/croproatio" },
-  { name: "Cull Photos", href: "/tools/cull" },
+  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Convert to WebP", href: "/tools/webp" },
 ];
 
 export default function ResizePackPage() {

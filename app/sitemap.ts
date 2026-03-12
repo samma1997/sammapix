@@ -31,6 +31,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/vs/iloveimg",
     "/vs/vsco",
     "/vs/filterpixel",
+    "/vs/shortpixel",
+    "/vs/canva",
+    "/vs/photopea",
+    "/vs/birme",
+    "/vs/optimizilla",
   ];
 
   const blogRoutes = BLOG_SLUGS.map((slug) => `/blog/${slug}`);

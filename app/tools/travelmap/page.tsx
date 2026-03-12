@@ -237,9 +237,9 @@ export default function TravelMapPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
-              { name: "Sort Photos by Location", href: "/tools/geosort" },
+              { name: "Sort by Location", href: "/tools/geosort" },
               { name: "Remove EXIF", href: "/tools/exif" },
-              { name: "All tools", href: "/tools" },
+              { name: "Cull Photos", href: "/tools/cull" },
             ].map((tool) => (
               <Link
                 key={tool.href}

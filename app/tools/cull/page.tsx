@@ -176,9 +176,9 @@ export default function CullPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
-              { name: "Find Duplicate Photos", href: "/tools/twinhunt" },
-              { name: "Resize Images", href: "/tools/resizepack" },
-              { name: "All tools", href: "/tools" },
+              { name: "Find Duplicates", href: "/tools/twinhunt" },
+              { name: "Apply Film Effects", href: "/tools/filmlab" },
+              { name: "Sort by Location", href: "/tools/geosort" },
             ].map((tool) => (
               <Link
                 key={tool.href}

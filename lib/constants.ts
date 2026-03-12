@@ -88,6 +88,9 @@ export const BLOG_SLUGS = [
   "best-image-compression-tools-2026",
   "remove-exif-protect-privacy",
   "complete-guide-webp-format",
+  "travel-photography-tips-beginners",
+  "compress-images-without-losing-quality",
+  "find-delete-duplicate-photos",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

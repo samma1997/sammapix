@@ -197,7 +197,7 @@ export default function GeoSortPage() {
             {[
               { name: "Create Travel Map", href: "/tools/travelmap" },
               { name: "Remove EXIF", href: "/tools/exif" },
-              { name: "All tools", href: "/tools" },
+              { name: "Find Duplicates", href: "/tools/twinhunt" },
             ].map((tool) => (
               <Link
                 key={tool.href}

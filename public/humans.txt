@@ -1,0 +1,82 @@
+/* ==================================================
+   HUMANS.TXT — The people behind SammaPix
+   https://humanstxt.org
+   ================================================== */
+
+/* CREATOR */
+Name: Luca Sammarco
+Title: Founder, Full-Stack Developer, Travel Photographer
+Website: https://lucasammarco.com
+Twitter: https://twitter.com/lucasammarco
+GitHub: https://github.com/lucasammarco
+Email: luca@sammapix.com
+
+/* SITE INFORMATION */
+Project name: SammaPix — Free Image Tools for Photographers
+Website: https://sammapix.com
+Description: Browser-based image optimization suite. 13 free tools for photographers, developers, and content creators.
+Language: English
+Started: 2025
+Last updated: 2026-03-12
+
+/* TECHNOLOGIES */
+Framework: Next.js 14 (React 19)
+Hosting: Cloudflare Pages
+Database: Cloudflare D1 (SQLite)
+Cache: Cloudflare KV
+Authentication: NextAuth.js
+Payment: Stripe
+Email: Resend
+Styling: Tailwind CSS
+UI Components: shadcn/ui
+Icons: Lucide React
+Image Processing: Canvas API, browser-image-compression, piexifjs
+AI: Google Gemini 1.5 Flash API
+
+/* DESIGN PHILOSOPHY */
+Design System: Notion-inspired (minimal, clean, high contrast)
+Typography: Inter (Google Fonts)
+Color Palette: Neutral grays with minimal accent color (#6366F1)
+Approach: Privacy-first, browser-based processing, zero mandatory uploads
+
+/* PRINCIPLES */
+- All image processing happens in the user's browser
+- Images never leave the device without user consent
+- No tracking of processed images or user content
+- Free core tools forever
+- Optional Pro plan ($7/month) for unlimited features
+- Accessibility-first development
+- Privacy-respecting analytics (Cloudflare Web Analytics)
+
+/* CREDITS */
+Image Compression: browser-image-compression library
+EXIF Processing: piexifjs library
+Mapping: Mapbox and OpenStreetMap
+UI Components: Radix UI
+Icons: Lucide React
+Fonts: Inter by Rasmus Andersson
+
+/* SOCIAL CONNECTIONS */
+GitHub: https://github.com/lucasammarco
+Twitter: https://twitter.com/lucasammarco
+LinkedIn: https://linkedin.com/in/lucasammarco
+Portfolio: https://lucasammarco.com
+
+/* BLOG & CONTENT */
+Blog: https://sammapix.com/blog
+Articles on image optimization, photography workflow, web performance
+
+/* CONTACT & SUPPORT */
+Support Email: support@sammapix.com
+Feature Requests: GitHub Issues
+Bug Reports: GitHub Issues
+Privacy Questions: privacy@sammapix.com
+
+/* LEGAL */
+Privacy Policy: https://sammapix.com/privacy
+Terms of Service: https://sammapix.com/terms
+Cookie Policy: https://sammapix.com/cookies
+
+/* LAST UPDATE */
+Last modified: 2026-03-12
+Standardized by: humans.txt v1.0

@@ -64,8 +64,8 @@ const features = [
 
 const relatedTools = [
   { name: "Compress Images", href: "/tools/compress" },
+  { name: "Remove EXIF", href: "/tools/exif" },
   { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "Resize Images", href: "/tools/resizepack" },
 ];
 
 export default function AiRenamePage() {

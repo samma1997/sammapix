@@ -19,22 +19,27 @@ import {
 } from "@/components/ui/ToolCard";
 
 export const metadata: Metadata = {
-  title: "Free Image Tools for Photographers & Web Developers | SammaPix",
+  title: "13 Free Image Tools for Photographers & Developers | SammaPix",
   description:
-    "Browser-based image tools for photographers and developers. Compress, WebP, AI rename, EXIF removal, GeoSort, FilmLab, batch processing. No upload, no account.",
+    "Complete suite of 13 free browser-based image tools. Compress JPG/PNG, convert WebP, AI rename, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
+    "image compressor",
+    "webp converter",
     "photo editing tools",
-    "image optimizer",
+    "ai image rename",
     "batch image processing",
     "online photo tools",
-    "browser-based tools",
+    "browser-based image editor",
+    "exif remover",
+    "heic converter",
+    "image optimizer",
   ],
   alternates: { canonical: "https://sammapix.com/tools" },
   openGraph: {
-    title: "Free Image Tools for Photographers & Web Developers | SammaPix",
+    title: "13 Free Image Tools for Photographers & Developers",
     description:
-      "Browser-based image tools: compress, convert WebP, AI rename, remove EXIF, sort by GPS, apply film effects. No upload, no account needed.",
+      "Compress, convert, rename, resize, remove EXIF, apply film effects, batch process and more. All in browser. No uploads. No account needed.",
     url: "https://sammapix.com/tools",
     type: "website",
     images: [
@@ -42,7 +47,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix Free Image Tools",
+        alt: "SammaPix — 13 Free Image Tools",
       },
     ],
   },
@@ -169,8 +174,76 @@ const TRUST_ITEMS = [
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ToolsPage() {
+  const toolsSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: "Free Image Tools for Photographers",
+        url: "https://sammapix.com/tools",
+        description: "Suite of 13 browser-based image optimization tools",
+        publisher: {
+          "@type": "Organization",
+          name: "SammaPix",
+          url: "https://sammapix.com",
+        },
+      },
+      {
+        "@type": "ItemList",
+        name: "SammaPix Tools",
+        description: "13 free browser-based image optimization tools",
+        numberOfItems: 13,
+        itemListElement: [
+          {
+            "@type": "SoftwareApplication",
+            position: 1,
+            name: "Compress",
+            url: "https://sammapix.com/tools/compress",
+            description: "Compress JPG, PNG, WebP, GIF up to 80-90% smaller without quality loss",
+            applicationCategory: "PhotographyApplication",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          },
+          {
+            "@type": "SoftwareApplication",
+            position: 2,
+            name: "WebP Converter",
+            url: "https://sammapix.com/tools/webp",
+            description: "Convert images to WebP format, 25-34% smaller than JPEG",
+            applicationCategory: "PhotographyApplication",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          },
+          {
+            "@type": "SoftwareApplication",
+            position: 3,
+            name: "AI Rename",
+            url: "https://sammapix.com/tools/ai-rename",
+            description: "AI-generated SEO-optimized filenames and alt text using Gemini Flash",
+            applicationCategory: "PhotographyApplication",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#191919]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolsSchema) }}
+      />
 
       {/* Hero */}
       <section className="border-b border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919]">
@@ -195,9 +268,81 @@ export default function ToolsPage() {
         </div>
       </section>
 
+      {/* Quick Comparison Table */}
+      <section className="py-12 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
+            Tool Comparison at a Glance
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-gray-200 dark:border-[#2A2A2A]">
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Tool</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Function</th>
+                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Free</th>
+                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Batch</th>
+                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Browser</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">Compress</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Reduce file size JPG, PNG, WebP, GIF</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">WebP</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Convert to modern WebP format</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">AI Rename</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Generate SEO filenames + alt text</td>
+                  <td className="py-3 px-2 text-center text-green-600">Free tier</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-orange-600">⚙</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">EXIF Lens</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Remove GPS + metadata from photos</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">ResizePack</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Resize for Instagram, Twitter, LinkedIn</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">FilmLab</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">14 analog film presets for photos</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-500 dark:text-[#737373] mt-4">
+            ✓ = Yes · ⚙ = API-powered (hybrid) · Free tier = Limited quota, Pro unlimited
+          </p>
+        </div>
+      </section>
+
       {/* Tool grid */}
       <section className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
+            All Tools
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {TOOLS.map((tool) => (
               <ToolCard key={tool.name} tool={tool} />

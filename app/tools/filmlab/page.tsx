@@ -61,9 +61,9 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Compress Images", href: "/tools/compress" },
-  { name: "Resize Images", href: "/tools/resizepack" },
-  { name: "Find Duplicates", href: "/tools/twinhunt" },
+  { name: "Crop to Ratio", href: "/tools/croproatio" },
+  { name: "Add Watermark", href: "/tools/stampit" },
+  { name: "Cull Photos", href: "/tools/cull" },
 ];
 
 export default function FilmLabPage() {

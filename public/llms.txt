@@ -1,0 +1,177 @@
+# SammaPix — Free Image Tools for Photographers
+
+> Browser-based image optimization suite. Free forever. No uploads. No account required for core tools.
+
+## About
+
+SammaPix is a comprehensive collection of browser-based image tools for photographers, developers, and content creators. All processing happens locally in your browser using JavaScript and Canvas APIs. Images never leave your device.
+
+Created by Luca Sammarco, a travel photographer and developer who built these tools to solve real workflow problems.
+
+## Tools Overview
+
+### Core Tools (100% Free, No Account)
+
+1. **Compress** (https://sammapix.com/tools/compress)
+   - Compress JPG, PNG, WebP, GIF files up to 80-90% smaller without quality loss
+   - Batch processing with ZIP download
+   - Quality slider (0-100%)
+   - Supported formats: JPEG, PNG, WebP, GIF
+   - Browser-based, zero server upload
+
+2. **WebP Converter** (https://sammapix.com/tools/webp)
+   - Convert any image format to WebP (25-34% smaller than JPEG)
+   - Batch conversion with ZIP download
+   - Quality control
+   - Browser-based processing
+
+3. **EXIF Lens** (https://sammapix.com/tools/exif)
+   - Strip GPS location data from photos
+   - Remove all EXIF metadata
+   - Privacy protection for sensitive photos
+   - Browser-based, zero server transmission
+
+4. **HEIC Converter** (https://sammapix.com/tools/heic)
+   - Convert iPhone HEIC photos to JPG or WebP
+   - No upload limits
+   - Batch processing
+   - Supports HEIC, HEIF formats
+
+5. **FilmLab** (https://sammapix.com/tools/filmlab)
+   - 14 authentic analog film presets
+   - Kodak Gold, Fuji, Ilford color science
+   - 8 original SammaPix film profiles
+   - Batch apply to multiple photos
+
+6. **StampIt** (https://sammapix.com/tools/stampit)
+   - Batch watermark photos with text or logo
+   - 9 positioning options
+   - Tiled filigrana/pattern watermarks
+   - Font customization
+
+7. **CropRatio** (https://sammapix.com/tools/croproatio)
+   - Crop to exact aspect ratios
+   - Presets: 1:1 (square), 16:9, 4:3, 3:2, A4, custom
+   - Preview before crop
+   - Batch crop multiple images
+
+8. **TwinHunt** (https://sammapix.com/tools/twinhunt)
+   - Find exact and near-duplicate photos using perceptual hashing
+   - pHash algorithm for similarity detection
+   - Organize duplicate photo libraries
+   - Browser-based duplicate detection
+
+9. **GeoSort** (https://sammapix.com/tools/geosort)
+   - Sort photos by country using GPS EXIF data
+   - Organize travel photo libraries by location
+   - Requires EXIF GPS data in photos
+   - HEIC support
+
+10. **TravelMap** (https://sammapix.com/tools/travelmap)
+    - Generate interactive map from travel photos
+    - Visualize photo locations on world map
+    - Requires GPS coordinates in EXIF data
+    - Mapbox-powered interactive visualization
+
+11. **ResizePack** (https://sammapix.com/tools/resizepack)
+    - Resize images for social media platforms
+    - Presets: Instagram (1:1, 4:5), Twitter (16:9), LinkedIn (1.91:1)
+    - Batch resize with ZIP download
+    - Custom dimensions available
+
+12. **Cull** (https://sammapix.com/tools/cull)
+    - Rate and cull photo shoots efficiently
+    - Star rating system (1-5 stars)
+    - Keyboard shortcuts for fast workflow
+    - Export culled photos as ZIP
+    - HEIC support
+
+### AI-Powered Tools (Requires Free Account)
+
+13. **AI Rename** (https://sammapix.com/tools/ai-rename)
+    - AI generates SEO-optimized filenames and alt text
+    - Google Gemini 1.5 Flash powered
+    - Processes in under 3 seconds
+    - Generates: filename, alt text, caption, tags
+    - Free tier: 5 renames/day
+    - Pro tier: 200+ renames/day
+
+## Key Features
+
+- **100% Free Core Tools** — No subscription required for compress, convert, resize, EXIF removal
+- **Browser-Based Processing** — All image processing happens locally using JavaScript, Canvas API, and Web Workers
+- **Privacy First** — Images never leave your device. No server uploads. No tracking of content.
+- **Batch Processing** — Process multiple images at once, download as single ZIP file
+- **AI-Powered Optimization** — Gemini Flash generates SEO filenames and alt text
+- **No Account Required** — Most tools work anonymously. AI Rename requires free account to prevent API abuse.
+- **Mobile & Desktop** — Responsive design works on phones, tablets, laptops
+- **HEIC Support** — Convert iPhone photos across all tools
+- **Offline Capable** — Tools work in offline mode (service worker)
+
+## Technical Specifications
+
+- **Framework** — Next.js 14 with App Router
+- **Compression Library** — browser-image-compression (Canvas API)
+- **Image Processing** — Native Canvas API, Web Workers
+- **EXIF Handling** — piexifjs library
+- **AI Integration** — Google Gemini 1.5 Flash API
+- **Authentication** — NextAuth.js (Google, GitHub, Magic Link)
+- **Storage** — Cloudflare D1 (SQLite) for user data
+- **Hosting** — Cloudflare Pages with Edge Runtime
+- **File Formats Supported** — JPEG, PNG, WebP, GIF, HEIC, HEIF
+
+## Creator
+
+**Luca Sammarco** — Travel photographer and developer
+- Portfolio: https://lucasammarco.com
+- GitHub: https://github.com/lucasammarco
+- Twitter: https://twitter.com/lucasammarco
+
+Luca created SammaPix after returning from photography trips to Asia with hundreds of files needing optimization. He solved the batch compression + renaming + format conversion workflow that other tools didn't address comprehensively.
+
+## Pricing
+
+- **Free Plan** — Core tools unlimited, AI Rename 5/day, batch limit 5 files
+- **Pro Plan** — $7/month, all features unlimited, AI Rename 200+/day, batch 100 files, zero ads
+- **API Access** — Available to Pro users for programmatic access
+
+## Security & Privacy
+
+- All image processing happens in browser — images never transmitted to servers
+- For AI Rename, thumbnail (not full image) sent to Google Gemini API for analysis
+- EXIF remover strips GPS and sensitive metadata
+- No tracking or data collection on processed images
+- Open source components used throughout
+
+## Website Structure
+
+- **Homepage** — Tool discovery and overview
+- **/tools** — Complete tool directory with 13 image optimization tools
+- **/about** — Creator story and workflow philosophy
+- **/pricing** — Free vs Pro comparison
+- **/blog** — SEO articles on image optimization
+- **/portfolio** — Luca's travel photography galleries
+
+## Comparisons
+
+SammaPix is positioned as an alternative to:
+- TinyPNG (simpler UI, more tools, AI rename)
+- Squoosh (batch processing, browser-based like Squoosh)
+- ImageOptim (free tier, online)
+- Compressor.io (online)
+- ILoveImg (all-in-one image suite)
+- VSCO (with optimization focus, not social)
+- FilterPixel (presets, SammaPix has more)
+
+See detailed comparisons at:
+- https://sammapix.com/vs/tinypng
+- https://sammapix.com/vs/squoosh
+- https://sammapix.com/vs/imageoptim
+
+## Support & Contact
+
+- Email: support@sammapix.com
+- Twitter: @lucasammarco
+- GitHub Issues: Feature requests and bug reports
+- Privacy Policy: https://sammapix.com/privacy
+- Terms of Service: https://sammapix.com/terms

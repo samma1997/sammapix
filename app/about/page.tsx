@@ -3,29 +3,78 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About SammaPix — Built by Luca Sammarco, Travel Photographer",
+  title: "About SammaPix — Built by Luca Sammarco, Travel Photographer & Developer",
   description:
-    "Learn about Luca Sammarco, the travel photographer and developer who built SammaPix to solve real image optimization problems. Read his story.",
+    "SammaPix is built by Luca Sammarco, a travel photographer and full-stack developer who created these tools to solve real image optimization problems. Learn about his expertise and philosophy.",
   keywords: [
     "luca sammarco",
     "travel photographer",
-    "developer",
-    "sammapix",
-    "image optimization",
+    "full-stack developer",
+    "sammapix founder",
+    "image optimization expert",
+    "photography tools",
+    "web developer",
   ],
   alternates: { canonical: "https://sammapix.com/about" },
   openGraph: {
     title: "About SammaPix — Built by Luca Sammarco",
     description:
-      "Learn why Luca Sammarco built SammaPix and the philosophy behind it: no uploads, privacy first, open-source tools.",
+      "Discover how Luca Sammarco, a travel photographer and developer, built SammaPix with privacy first and browser-based processing.",
     url: "https://sammapix.com/about",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Luca Sammarco — SammaPix Creator",
+      },
+    ],
   },
 };
 
 export default function AboutPage() {
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Luca Sammarco",
+    url: "https://lucasammarco.com",
+    sameAs: [
+      "https://github.com/lucasammarco",
+      "https://twitter.com/lucasammarco",
+      "https://sammapix.com",
+    ],
+    jobTitle: "Full-Stack Developer & Travel Photographer",
+    knowsAbout: [
+      "Web Development",
+      "Full-Stack Development",
+      "Photography",
+      "Travel Photography",
+      "Image Optimization",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "SammaPix",
+      url: "https://sammapix.com",
+    },
+    creator: {
+      "@type": "CreativeWork",
+      name: "SammaPix",
+      description: "Free browser-based image optimization tools",
+      url: "https://sammapix.com",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#191919]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       <main className="max-w-2xl mx-auto px-4 sm:px-6 py-16">
 
         {/* Header */}
@@ -34,9 +83,43 @@ export default function AboutPage() {
           <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-4">
             Luca Sammarco
           </h1>
-          <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed">
-            Travel photographer. Developer. I build tools to solve problems I run into myself in the field.
+          <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed mb-4">
+            Travel photographer, full-stack developer, and creator of SammaPix.
+            Building privacy-first image optimization tools for photographers since 2025.
           </p>
+
+          {/* Credentials and Expertise */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 p-4 bg-[#FAFAFA] dark:bg-[#1E1E1E] rounded-md border border-gray-100 dark:border-[#2A2A2A] mb-6">
+            <div>
+              <p className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-wide mb-1">Expertise</p>
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Web Development</p>
+              <p className="text-xs text-gray-500 dark:text-[#A3A3A3]">Full-stack, TypeScript, React</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-wide mb-1">Expertise</p>
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Photography</p>
+              <p className="text-xs text-gray-500 dark:text-[#A3A3A3]">Travel, documentary work</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-wide mb-1">Creator Of</p>
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">SammaPix</p>
+              <p className="text-xs text-gray-500 dark:text-[#A3A3A3]">13 image tools</p>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            <a href="https://github.com/lucasammarco" className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors font-medium">
+              GitHub: @lucasammarco →
+            </a>
+            <a href="https://twitter.com/lucasammarco" className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors font-medium">
+              Twitter: @lucasammarco →
+            </a>
+            <a href="https://lucasammarco.com" className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors font-medium">
+              Personal website →
+            </a>
+          </div>
+
           <div className="mt-6 h-px bg-gray-100 dark:bg-[#2A2A2A]" />
         </header>
 

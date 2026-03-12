@@ -243,9 +243,9 @@ export default function CropRatioPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
-              { name: "Compress Images", href: "/tools/compress" },
               { name: "Resize Images", href: "/tools/resizepack" },
-              { name: "All tools", href: "/tools" },
+              { name: "Add Watermark", href: "/tools/stampit" },
+              { name: "Apply Film Effects", href: "/tools/filmlab" },
             ].map((tool) => (
               <Link
                 key={tool.href}

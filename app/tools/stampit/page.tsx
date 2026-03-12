@@ -61,9 +61,9 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Compress Images", href: "/tools/compress" },
+  { name: "Crop to Ratio", href: "/tools/croproatio" },
   { name: "Resize Images", href: "/tools/resizepack" },
-  { name: "Remove EXIF", href: "/tools/exif" },
+  { name: "Compress Images", href: "/tools/compress" },
 ];
 
 export default function StampItPage() {
