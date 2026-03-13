@@ -88,6 +88,22 @@ const POSTS: Post[] = [
     tags: ["Tools"],
   },
   {
+    slug: "make-images-load-faster-website",
+    title: "How to Make Images Load Faster on Your Website (7 Proven Methods)",
+    description:
+      "Speed up your website with 7 image optimization techniques: compress, convert to WebP, lazy load, responsive images, CDN, and more.",
+    date: "2026-01-18",
+    tags: ["Performance"],
+  },
+  {
+    slug: "reduce-image-size-for-email",
+    title: "How to Reduce Image Size for Email Attachments (Under 1MB Fast)",
+    description:
+      "Quickly reduce image file size for email attachments. Compress photos to under 1MB without visible quality loss — free, no signup.",
+    date: "2026-02-03",
+    tags: ["Tools"],
+  },
+  {
     slug: "cull-photos-faster-workflow",
     title: "How to Cull Photos 10x Faster: The Complete Workflow Guide",
     description:

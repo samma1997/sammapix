@@ -1,0 +1,13 @@
+{
+  "name": "SammaPix — Free Image Optimizer",
+  "short_name": "SammaPix",
+  "description": "Compress, convert, resize, and optimize images — 100% browser-based, no uploads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#171717",
+  "icons": [
+    { "src": "/og-image.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "categories": ["photography", "utilities", "productivity"]
+}

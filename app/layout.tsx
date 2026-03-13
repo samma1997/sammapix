@@ -71,6 +71,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: APP_URL,
   },
+  manifest: "/manifest.json",
   other: {
     "impact-site-verification": "ea5238e5-3e70-4cdb-b4d2-ebdd254df866",
   },
@@ -101,6 +102,53 @@ export default function RootLayout({
           />
         )}
         <Analytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://sammapix.com/#organization",
+                  "name": "SammaPix",
+                  "url": "https://sammapix.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://sammapix.com/og-image.png",
+                    "width": 1200,
+                    "height": 630,
+                  },
+                  "founder": {
+                    "@type": "Person",
+                    "name": "Luca Sammarco",
+                    "url": "https://lucasammarco.com",
+                  },
+                  "description":
+                    "Free browser-based image optimization tools. Compress, convert, resize, and enhance photos without uploading to any server.",
+                  "sameAs": [
+                    "https://github.com/samma1997",
+                    "https://twitter.com/lucasammarco",
+                  ],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://sammapix.com/#website",
+                  "url": "https://sammapix.com",
+                  "name": "SammaPix",
+                  "publisher": { "@id": "https://sammapix.com/#organization" },
+                  "description":
+                    "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images — no signup needed.",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://sammapix.com/tools?q={search_term_string}",
+                    "query-input": "required name=search_term_string",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </body>
     </html>
   );

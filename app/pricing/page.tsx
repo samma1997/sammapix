@@ -351,6 +351,41 @@ export default function PricingPage() {
           </div>
         </div>
 
+        {/* Product + Offer JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "SammaPix Pro",
+              "description":
+                "Unlimited image optimization with AI renaming, batch processing, and zero ads.",
+              "brand": { "@type": "Brand", "name": "SammaPix" },
+              "offers": [
+                {
+                  "@type": "Offer",
+                  "name": "Monthly",
+                  "price": "7",
+                  "priceCurrency": "USD",
+                  "priceValidUntil": "2027-12-31",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://sammapix.com/pricing",
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Yearly",
+                  "price": "59",
+                  "priceCurrency": "USD",
+                  "priceValidUntil": "2027-12-31",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://sammapix.com/pricing",
+                },
+              ],
+            }),
+          }}
+        />
+
         {/* FAQPage JSON-LD */}
         <script
           type="application/ld+json"
