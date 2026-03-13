@@ -9,6 +9,21 @@ const nextConfig = {
     return [
       { source: '/destinations', destination: '/portfolio', permanent: true },
       { source: '/destinations/:slug', destination: '/portfolio/:slug', permanent: true },
+      // Old blog slugs → new equivalents (301 permanent redirects)
+      { source: '/blog/ai-image-renaming-seo', destination: '/blog/ai-image-renaming-seo-guide', permanent: true },
+      { source: '/blog/tinypng-alternative', destination: '/vs/tinypng', permanent: true },
+      { source: '/blog/remove-exif-data-photos', destination: '/blog/remove-exif-protect-privacy', permanent: true },
+      { source: '/blog/compress-images-for-website', destination: '/blog/compress-images-without-losing-quality', permanent: true },
+      { source: '/blog/jpg-to-webp-converter', destination: '/blog/complete-guide-webp-format', permanent: true },
+      { source: '/blog/reduce-image-size-without-losing-quality', destination: '/blog/compress-images-without-losing-quality', permanent: true },
+      { source: '/blog/best-image-format-for-web', destination: '/blog/best-image-format-for-web-2026', permanent: true },
+      { source: '/blog/image-seo-guide', destination: '/blog/ai-image-renaming-seo-guide', permanent: true },
+      { source: '/blog/compress-png-without-losing-quality', destination: '/blog/compress-images-without-losing-quality', permanent: true },
+      { source: '/blog/optimize-images-wordpress', destination: '/blog/optimize-images-wordpress-guide', permanent: true },
+      { source: '/blog/geosort-sort-photos-by-location', destination: '/blog/organize-travel-photos-by-country', permanent: true },
+      { source: '/blog/travel-map-gps-photos', destination: '/blog/create-travel-photo-map', permanent: true },
+      { source: '/blog/how-to-cull-photos-fast', destination: '/blog/cull-photos-faster-workflow', permanent: true },
+      { source: '/blog/find-duplicate-photos-free', destination: '/blog/find-delete-duplicate-photos', permanent: true },
     ];
   },
   images: {
