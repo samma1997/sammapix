@@ -178,40 +178,81 @@ export default function WebpPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            name: "SammaPix WebP Converter",
-            description:
-              "Convert JPG, PNG and GIF images to WebP format directly in your browser. WebP files are 25-35% smaller than JPEG with same visual quality.",
-            url: `${APP_URL}/tools/webp`,
-            applicationCategory: "PhotographyApplication",
-            operatingSystem: "Web Browser",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            author: {
-              "@type": "Person",
-              name: "Luca Sammarco",
-              url: "https://lucasammarco.com",
-            },
-            creator: {
-              "@type": "Organization",
-              name: "SammaPix",
-              url: `${APP_URL}`,
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.7",
-              ratingCount: "120",
-            },
-            featureList: [
-              "JPG/PNG/GIF to WebP conversion",
-              "25-35% file size reduction",
-              "Batch processing",
-              "Quality control slider",
-              "ZIP download",
-              "Browser-based conversion",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                name: "SammaPix WebP Converter",
+                description:
+                  "Convert JPG, PNG and GIF images to WebP format directly in your browser. WebP files are 25-35% smaller than JPEG with same visual quality.",
+                url: `${APP_URL}/tools/webp`,
+                applicationCategory: "PhotographyApplication",
+                operatingSystem: "Web Browser",
+                offers: {
+                  "@type": "Offer",
+                  price: "0",
+                  priceCurrency: "USD",
+                },
+                author: {
+                  "@type": "Person",
+                  name: "Luca Sammarco",
+                  url: "https://lucasammarco.com",
+                },
+                creator: {
+                  "@type": "Organization",
+                  name: "SammaPix",
+                  url: `${APP_URL}`,
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.7",
+                  ratingCount: "120",
+                },
+                featureList: [
+                  "JPG/PNG/GIF to WebP conversion",
+                  "25-35% file size reduction",
+                  "Batch processing",
+                  "Quality control slider",
+                  "ZIP download",
+                  "Browser-based conversion",
+                ],
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Is WebP better than JPEG?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes, for web use. WebP consistently produces 25-35% smaller files than JPEG at equivalent visual quality. It also supports transparency like PNG and animation like GIF. The only reason not to use WebP is if you need to support very old browsers (pre-2020)."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Do all browsers support WebP in 2026?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes. WebP is supported by Chrome, Firefox, Safari (since version 14), Edge, and all modern mobile browsers. Since 2020, support has been essentially universal across all devices released in the last 5+ years."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Does converting to WebP lose quality?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "No. SammaPix converts images to WebP with 85% quality by default, which is visually indistinguishable from the original. You can adjust the quality slider from 0-100% to control the tradeoff between file size and visual fidelity."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How much smaller is WebP than JPEG?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "On average, a WebP file is 25-35% smaller than an equivalent JPEG at the same perceived quality. For example, a 1MB JPEG typically converts to 650-750KB in WebP. The exact savings depend on the image content, but WebP is consistently smaller."
+                    }
+                  }
+                ]
+              }
             ],
           }),
         }}

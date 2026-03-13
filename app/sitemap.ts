@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { BLOG_SLUGS, APP_URL } from "@/lib/constants";
+import { getAllPlatforms } from "@/lib/resize-platforms";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages with different priorities and change frequencies
@@ -109,11 +110,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Programmatic resize pages — driven from lib/resize-platforms.ts
+  const resizePages: MetadataRoute.Sitemap = getAllPlatforms().map((p) => ({
+    url: `${APP_URL}/resize/${p.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
+  // Convert sub-pages
+  const convertPages: MetadataRoute.Sitemap = [
+    "/convert/heic-to-jpg",
+    "/convert/heic-to-png",
+    "/convert/png-to-webp",
+    "/convert/jpg-to-webp",
+    "/convert/jpeg-to-webp",
+    "/convert/webp-to-jpg",
+    "/convert/png-to-jpg",
+  ].map((route) => ({
+    url: `${APP_URL}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
     ...toolPages,
     ...vsPages,
     ...blogPages,
     ...portfolioPages,
+    ...resizePages,
+    ...convertPages,
   ];
 }

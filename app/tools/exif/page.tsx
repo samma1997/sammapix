@@ -209,40 +209,81 @@ export default function ExifPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            name: "SammaPix EXIF Lens",
-            description:
-              "Remove GPS, EXIF data and all metadata from photos online free. Strip location, camera info, timestamps. Privacy-focused, browser-based tool.",
-            url: `${APP_URL}/tools/exif`,
-            applicationCategory: "PhotographyApplication",
-            operatingSystem: "Web Browser",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            author: {
-              "@type": "Person",
-              name: "Luca Sammarco",
-              url: "https://lucasammarco.com",
-            },
-            creator: {
-              "@type": "Organization",
-              name: "SammaPix",
-              url: `${APP_URL}`,
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.8",
-              ratingCount: "110",
-            },
-            featureList: [
-              "Remove GPS coordinates",
-              "Strip EXIF metadata",
-              "Remove camera info",
-              "Batch processing",
-              "ZIP download",
-              "Privacy-focused",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                name: "SammaPix EXIF Lens",
+                description:
+                  "Remove GPS, EXIF data and all metadata from photos online free. Strip location, camera info, timestamps. Privacy-focused, browser-based tool.",
+                url: `${APP_URL}/tools/exif`,
+                applicationCategory: "PhotographyApplication",
+                operatingSystem: "Web Browser",
+                offers: {
+                  "@type": "Offer",
+                  price: "0",
+                  priceCurrency: "USD",
+                },
+                author: {
+                  "@type": "Person",
+                  name: "Luca Sammarco",
+                  url: "https://lucasammarco.com",
+                },
+                creator: {
+                  "@type": "Organization",
+                  name: "SammaPix",
+                  url: `${APP_URL}`,
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  ratingCount: "110",
+                },
+                featureList: [
+                  "Remove GPS coordinates",
+                  "Strip EXIF metadata",
+                  "Remove camera info",
+                  "Batch processing",
+                  "ZIP download",
+                  "Privacy-focused",
+                ],
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "What is EXIF data in a photo?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "EXIF (Exchangeable Image File Format) is metadata automatically embedded in digital photos by cameras and smartphones. It includes: GPS coordinates (latitude, longitude, altitude), camera make and model, lens, ISO, aperture, shutter speed, focal length, date and time of capture, and software used. This data is invisible but can be read by image viewers and online tools."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can someone track my location from a photo?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes, if a photo contains GPS coordinates in its EXIF data. When you upload a geotagged photo to social media, blogs, or share it online, anyone can extract those precise coordinates and determine exactly where you were when the photo was taken. This is a significant privacy risk, especially for your home address or frequent locations."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Does removing EXIF data reduce image quality?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "No. EXIF data is metadata stored separately from the actual image pixels. Removing it does not affect image quality, visual appearance, or file size. The photo looks identical — only the hidden metadata is removed. SammaPix removes EXIF without re-encoding the image."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Do social media sites strip EXIF data?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Most major social media platforms (Facebook, Instagram, Twitter) automatically strip EXIF data from photos you upload for privacy reasons. However, less common platforms may not, and direct photo sharing via email or messaging apps often preserves EXIF. To be safe, remove EXIF yourself before sharing."
+                    }
+                  }
+                ]
+              }
             ],
           }),
         }}

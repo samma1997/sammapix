@@ -263,6 +263,43 @@ export default function CompressPage() {
                   },
                 ],
               },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Does compressing an image reduce quality?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "It depends on the compression level. SammaPix uses lossy compression by default (80% quality), which produces imperceptible quality loss while reducing file size by 50-80%. For sensitive images, you can increase the quality slider to 90-100% for lossless results."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What is the best image format for web?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "WebP is the modern standard for web images, offering 25-35% smaller files than JPEG at equivalent quality. If you need broader compatibility, JPEG remains excellent. For transparency, use PNG. SammaPix supports all formats and can convert between them."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How much can you compress a JPEG without losing quality?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "A JPEG at 75-85% quality is visually indistinguishable from the original for most uses, while reducing file size by 40-60%. At 90%+ quality, compression is nearly lossless but with smaller gains. SammaPix lets you adjust the quality slider to find the perfect balance for your needs."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Does SammaPix upload my images to a server?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "No. SammaPix is entirely browser-based. All image compression happens on your device using JavaScript. Your images never leave your computer — not uploaded, not stored, and not tracked. Your privacy is completely protected."
+                    }
+                  }
+                ]
+              }
             ],
           }),
         }}

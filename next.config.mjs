@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // ESLint 8 + next/core-web-vitals + next/typescript produces a circular JSON
+  // error during the build lint phase. TypeScript type-check still runs via tsc.
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   async redirects() {
     return [
       { source: '/destinations', destination: '/portfolio', permanent: true },

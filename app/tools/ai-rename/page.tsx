@@ -6,27 +6,27 @@ import ToolInterface from "@/components/tools/ToolInterface";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI Image Renaming Tool — Auto SEO Filenames Free | SammaPix",
+  title: "AI Image Filename Generator for SEO | Free Online | SammaPix",
   description:
-    "Rename images automatically with AI. Stop DSC_0042.jpg. Google Gemini generates SEO filenames + alt text in seconds. Free, 5/day.",
+    "Generate SEO-friendly image filenames automatically with AI. Turn IMG_0001.jpg into descriptive, keyword-rich names that rank in Google Images. Free, no signup.",
   keywords: [
-    "ai image renaming",
+    "image filename seo",
+    "rename images for seo",
+    "image file naming",
+    "seo image filename generator",
+    "ai rename photos",
     "seo friendly filenames",
     "image rename tool",
     "ai alt text generator",
     "batch image renaming",
-    "seofriendly image names",
-    "batch renaming",
-    "filename generator",
-    "seo optimization",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/ai-rename`,
   },
   openGraph: {
-    title: "AI Image Renaming Tool — Auto SEO Filenames Free | SammaPix",
+    title: "AI Image Filename Generator for SEO | Free Online | SammaPix",
     description:
-      "Rename images automatically with AI. Stop DSC_0042.jpg. Google Gemini generates SEO filenames + alt text in seconds. Free, 5/day.",
+      "Generate SEO-friendly image filenames automatically with AI. Turn IMG_0001.jpg into descriptive, keyword-rich names that rank in Google Images. Free, no signup.",
     url: `${APP_URL}/tools/ai-rename`,
     siteName: "SammaPix",
     type: "website",
@@ -76,9 +76,9 @@ export default function AiRenamePage() {
     <main>
       {/* Hero SEO */}
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
-        <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">AI Image Renaming</h1>
+        <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">AI Image Filename Generator for SEO</h1>
         <p className="text-sm text-[#737373]">
-          Auto-generate SEO-friendly filenames with AI. Upload your images and let Gemini describe them — nothing uploaded to any server except the thumbnail for AI analysis.
+          Turn generic image names into SEO-optimized filenames that rank in Google Images. Upload your photos and let AI generate descriptive, keyword-rich names in seconds — nothing uploaded to any server except the thumbnail for AI analysis.
         </p>
       </div>
 

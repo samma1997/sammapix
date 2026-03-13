@@ -215,40 +215,81 @@ export default function HeicPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            name: "SammaPix HEIC Converter",
-            url: `${APP_URL}/tools/heic`,
-            description:
-              "Free online HEIC to JPG and WebP converter. Batch convert iPhone photos, no signup required.",
-            applicationCategory: "PhotographyApplication",
-            operatingSystem: "Web Browser",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            author: {
-              "@type": "Person",
-              name: "Luca Sammarco",
-              url: "https://lucasammarco.com",
-            },
-            creator: {
-              "@type": "Organization",
-              name: "SammaPix",
-              url: `${APP_URL}`,
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.8",
-              ratingCount: "88",
-            },
-            featureList: [
-              "HEIC to JPG conversion",
-              "HEIC to WebP conversion",
-              "Batch conversion",
-              "Up to 100 files",
-              "Browser-based",
-              "No file upload",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                name: "SammaPix HEIC Converter",
+                url: `${APP_URL}/tools/heic`,
+                description:
+                  "Free online HEIC to JPG and WebP converter. Batch convert iPhone photos, no signup required.",
+                applicationCategory: "PhotographyApplication",
+                operatingSystem: "Web Browser",
+                offers: {
+                  "@type": "Offer",
+                  price: "0",
+                  priceCurrency: "USD",
+                },
+                author: {
+                  "@type": "Person",
+                  name: "Luca Sammarco",
+                  url: "https://lucasammarco.com",
+                },
+                creator: {
+                  "@type": "Organization",
+                  name: "SammaPix",
+                  url: `${APP_URL}`,
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  ratingCount: "88",
+                },
+                featureList: [
+                  "HEIC to JPG conversion",
+                  "HEIC to WebP conversion",
+                  "Batch conversion",
+                  "Up to 100 files",
+                  "Browser-based",
+                  "No file upload",
+                ],
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Why does iPhone save photos as HEIC?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Apple chose HEIC (High Efficiency Image Container) as the default format starting with iOS 11 because HEIC files are roughly half the size of equivalent JPEG files at the same visual quality. This saves significant storage space on iPhones, which often have limited storage."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Is HEIC better quality than JPG?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "At the same file size, HEIC offers better quality than JPG because it uses more modern compression technology. However, JPG has been the industry standard for decades and is universally compatible. For sharing and web use, JPG is still the safer choice."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How do I convert HEIC to JPG without losing quality?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "SammaPix converts HEIC to JPG with an adjustable quality slider (60-100%). At 85% quality (the default), the result is visually indistinguishable from the original while maintaining a smaller file size. For maximum quality preservation, use the 95-100% setting."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can Windows open HEIC files?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Windows 10 and 11 can open HEIC files natively through the Photos app, but many older versions and third-party software cannot. For maximum compatibility across all devices and software, converting HEIC to JPG or PNG is recommended."
+                    }
+                  }
+                ]
+              }
             ],
           }),
         }}
