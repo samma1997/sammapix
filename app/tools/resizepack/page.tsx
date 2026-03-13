@@ -179,7 +179,83 @@ export default function ResizePackPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "ResizePack",
+                item: `${APP_URL}/tools/resizepack`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Can I resize multiple images at once?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. ResizePack is built for batch processing. Drop multiple images at once, set your dimensions or choose a preset, and all images will be resized simultaneously. Download them individually or as a single ZIP archive.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does resizing reduce image quality?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Resizing itself does not reduce quality — it only changes dimensions. However, resizing to much smaller sizes may cause some quality loss due to interpolation. If you're downsizing by more than 50%, consider using ResizePack's moderate compression settings to maintain quality.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What social media presets are available?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "ResizePack includes optimized presets for Instagram Post (1080×1080), Instagram Story (1080×1920), Twitter/X (1024×512), LinkedIn (1200×627), YouTube Thumbnail (1280×720), and A4 print at 300 dpi.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Are my images uploaded to a server?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. All resizing happens entirely in your browser using the Canvas API. Your images never leave your device — nothing is uploaded to any server.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -141,6 +141,82 @@ export default function CropRatioPage() {
 
       <CropRatio />
 
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "CropRatio",
+                item: `${APP_URL}/tools/croproatio`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What aspect ratio is best for Instagram?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Instagram supports multiple aspect ratios: 1:1 for feed posts (square), 4:5 for portrait feed posts, and 9:16 for Stories and Reels. CropRatio includes all these as presets, plus 16:9 for widescreen content.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I crop to custom ratios?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. CropRatio comes with standard presets (1:1, 16:9, 4:5, 9:16, 2:3, 3:2), but you can type any custom ratio you need. The crop frame will lock to your specified ratio automatically.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I crop multiple photos at once?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. Drop multiple photos, position the crop frame on the preview, and export all cropped images at once. Each file is cropped independently, so you can adjust the framing per image if needed.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does CropRatio upload my photos?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. All cropping happens locally in your browser using the Canvas API. Your images never leave your device — completely private, zero uploads.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* How it works */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">

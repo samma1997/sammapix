@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { Shield, ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
 import {
   ToolCard,
@@ -353,6 +354,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Stats counter bar */}
+      <section className="py-8 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
+          {[
+            { value: "1.2M+", label: "Images optimized" },
+            { value: "13", label: "Free tools" },
+            { value: "100%", label: "Browser-based" },
+            { value: "0", label: "Files uploaded to servers" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">{stat.value}</p>
+              <p className="text-xs text-[#737373] mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Privacy badge */}
+      <section className="py-8 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5F5F5] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-full">
+            <Shield className="h-4 w-4 text-[#16A34A]" strokeWidth={1.5} />
+            <span className="text-xs text-[#525252] dark:text-[#A3A3A3]">Your files never leave your browser — all processing happens locally</span>
+          </div>
+        </div>
+      </section>
+
       {/* Blog guides */}
       <section className="py-14 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto">
@@ -437,6 +465,27 @@ export default function HomePage() {
                 <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick actions — programmatic pages */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">Quick actions</h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { name: "Resize for Instagram", href: "/resize/instagram" },
+              { name: "Resize for YouTube", href: "/resize/youtube-thumbnail" },
+              { name: "Convert HEIC to JPG", href: "/convert/heic-to-jpg" },
+              { name: "Convert PNG to WebP", href: "/convert/png-to-webp" },
+              { name: "Convert JPG to WebP", href: "/convert/jpg-to-webp" },
+              { name: "All conversions", href: "/convert" },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#A3A3A3] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+                {link.name} <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

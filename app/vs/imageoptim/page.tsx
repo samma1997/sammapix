@@ -232,6 +232,59 @@ export default function VsImageOptimPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs ImageOptim", item: `${APP_URL}/vs/imageoptim` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than ImageOptim?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Both SammaPix and ImageOptim are excellent image optimizers, but they serve different purposes. ImageOptim is a macOS desktop application with powerful lossless compression engines (MozJPEG, Zopfli). SammaPix is web-based, works on any device, and adds modern features like WebP conversion, batch processing, and AI-powered image renaming.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is ImageOptim free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, ImageOptim is completely free. It is a native macOS application available on the Mac App Store with no premium versions or subscription plans.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that ImageOptim can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers several unique features: WebP conversion for modern image formats, AI-powered image renaming and alt text generation, batch processing with ZIP download, works on any device and operating system (web-based), and includes a quality control slider for customized compression.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

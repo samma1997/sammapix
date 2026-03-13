@@ -209,7 +209,83 @@ export default function AiRenamePage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "AI Image Rename",
+                item: `${APP_URL}/tools/ai-rename`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Why do image filenames matter for SEO?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Google uses the image filename as one of the ranking signals to understand what an image is about. A filename like 'golden-gate-bridge-san-francisco-fog.jpg' sends a much stronger relevance signal to search engines than 'IMG_4521.jpg'. Good filenames help your images rank better in Google Images.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How does the AI generate filenames?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix sends a thumbnail of your image to Google Gemini Flash, which analyzes it visually and generates a descriptive, lowercase, hyphenated filename. The AI produces names that match how people search — exactly what Google recommends for image SEO.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How many renames can I do for free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Free accounts get 5 renames per day. Each rename takes under 3 seconds. Pro plans unlock 200 renames per day, plus other features like batch processing and zero ads.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is my image data safe with Google Gemini?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix sends only a thumbnail to Gemini for analysis — never your full-resolution image. The thumbnail is processed by Gemini to generate a filename description, then discarded. Your original images always stay on your device.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

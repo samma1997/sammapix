@@ -180,7 +180,83 @@ export default function StampItPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "StampIt",
+                item: `${APP_URL}/tools/stampit`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Can I use my own logo as a watermark?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. StampIt supports SVG logos and text watermarks. Upload your SVG file and position it on your image using one of 9 position options (top-left, center, bottom-right, etc.). You can also adjust opacity and size.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Where should I place a watermark?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Common placements are bottom-right (subtle), bottom-center (visible), or center (maximum visibility). For copyright protection, use tiled mode which repeats the watermark diagonally across the entire image — this makes it virtually impossible to crop out.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I watermark multiple photos at once?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. Drop multiple images, configure your watermark settings, and click 'Apply to all'. StampIt will watermark the entire batch and let you download all results in a single ZIP archive.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Are my images uploaded to a server?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. All watermarking happens locally in your browser using the Canvas API. Your images never leave your device — completely private, zero uploads.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

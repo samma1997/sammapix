@@ -17,6 +17,19 @@ const TOOL_LINKS = [
   { href: "/tools/cull", label: "Cull" },
 ];
 
+const QUICK_CONVERT_LINKS = [
+  { href: "/convert/heic-to-jpg", label: "HEIC to JPG" },
+  { href: "/convert/png-to-webp", label: "PNG to WebP" },
+  { href: "/convert/jpg-to-webp", label: "JPG to WebP" },
+];
+
+const RESIZE_SOCIAL_LINKS = [
+  { href: "/resize/instagram", label: "Instagram" },
+  { href: "/resize/facebook", label: "Facebook" },
+  { href: "/resize/youtube-thumbnail", label: "YouTube" },
+  { href: "/resize/twitter", label: "Twitter" },
+];
+
 const COMPANY_LINKS = [
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
@@ -55,7 +68,7 @@ export default function Footer() {
     <footer className="border-t border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {/* Top: Logo + link columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 sm:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-10 sm:gap-8">
           {/* Brand column */}
           <div className="col-span-2 sm:col-span-4 lg:col-span-1 mb-2 lg:mb-0">
             <Link
@@ -160,6 +173,44 @@ export default function Footer() {
             </p>
             <ul className="flex flex-col gap-2">
               {TOOL_LINKS.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick Convert column */}
+          <div>
+            <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
+              Quick Convert
+            </p>
+            <ul className="flex flex-col gap-2">
+              {QUICK_CONVERT_LINKS.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resize for Social column */}
+          <div>
+            <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
+              Resize For
+            </p>
+            <ul className="flex flex-col gap-2">
+              {RESIZE_SOCIAL_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
                     href={href}

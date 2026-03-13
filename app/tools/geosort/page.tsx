@@ -215,7 +215,83 @@ export default function GeoSortPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "GeoSort",
+                item: `${APP_URL}/tools/geosort`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "How does GeoSort read photo location?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "GeoSort reads GPS coordinates directly from your photo's EXIF data in your browser. Most smartphones and GPS-enabled cameras embed coordinates when the location setting is enabled. The tool extracts these coordinates locally — nothing leaves your device.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What if my photos don't have GPS data?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Photos without GPS coordinates are placed in an _unsorted/ folder. This happens when location was disabled on the camera or phone when the photo was taken, or if EXIF data was stripped by a social media platform before you downloaded the photo.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does GeoSort upload my photos to a server?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. Everything runs inside your browser. The GPS coordinates are sent to OpenStreetMap only to get the country name, but no photo data is ever uploaded. The ZIP is created locally on your device.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I handle large batches of RAW files?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. GeoSort reads only the EXIF header of each file (a few KB), not the full image data. For batches exceeding 150 MB, GeoSort generates a sorting guide (.csv) instead of a ZIP, so you don't need to re-download gigabytes you already have.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

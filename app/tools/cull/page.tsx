@@ -196,7 +196,83 @@ export default function CullPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "Cull",
+                item: `${APP_URL}/tools/cull`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is photo culling?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Photo culling is the process of reviewing a batch of photos and selecting only the best ones to keep, discarding the rest. This is essential after a photo shoot when you might have 200+ shots but only want to edit the sharpest, best-composed ones.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I quickly select the best photos?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Cull uses keyboard shortcuts: press K to keep a photo, X to reject it. Arrow keys let you navigate without touching the mouse. This workflow is 10x faster than clicking buttons — you can review 100 photos in just a few minutes.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does Cull work with iPhone HEIC photos?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. Cull fully supports HEIC format (iPhone photos). Preview and cull directly — no conversion step needed. Just drop your HEIC files and they will be displayed and processed like any JPG.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Are my photos uploaded anywhere?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. Everything happens in your browser. Your photos stay on your device — no upload, no server, completely private. Only the photos you marked as keep are packaged into the ZIP for download.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

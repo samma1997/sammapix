@@ -304,6 +304,59 @@ export default function VsFilterPixelPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs FilterPixel", item: `${APP_URL}/vs/filterpixel` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than FilterPixel?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix is the better choice for most users. It offers a free plan with core tools forever, processes images in your browser with no server uploads, includes AI-powered image renaming, and adds WebP conversion and EXIF removal. FilterPixel is better suited for enterprise CI/CD automation, but for manual workflows and privacy-conscious teams, SammaPix is superior and significantly cheaper.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is FilterPixel free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "FilterPixel does not offer a free plan. Pricing starts from $15 per month for image optimization and processing services.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that FilterPixel can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers unique capabilities that FilterPixel lacks: a permanent free tier for core tools, 100% in-browser processing with no server uploads, AI-powered image renaming and alt text generation, WebP conversion, and EXIF metadata removal for privacy protection.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

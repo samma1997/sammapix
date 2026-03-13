@@ -231,6 +231,59 @@ export default function VsILoveImgPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs iLoveIMG", item: `${APP_URL}/vs/iloveimg` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than iLoveIMG?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Both are powerful image tool suites, but SammaPix excels in privacy and AI features. SammaPix processes all images in your browser with no server uploads, includes AI-powered image renaming, and removes EXIF metadata for privacy. iLoveIMG uploads images to their servers and lacks AI features, but offers more image editing tools.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is iLoveIMG free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, iLoveIMG has a free tier with basic image tools including compression, conversion, and editing. Pro plans are available for users who need more features and higher processing speeds.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that iLoveIMG can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers unique privacy and AI features that iLoveIMG cannot match: 100% in-browser processing with no server uploads, AI-powered image renaming and alt text generation, EXIF metadata removal for privacy protection, and quality control sliders for customized compression.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

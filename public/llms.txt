@@ -152,6 +152,51 @@ Luca created SammaPix after returning from photography trips to Asia with hundre
 - **/blog** — SEO articles on image optimization
 - **/portfolio** — Luca's travel photography galleries
 
+## Programmatic Pages — Quick Convert
+
+Quick conversion utility pages for common format conversions:
+
+1. **/convert/heic-to-jpg** — Convert iPhone HEIC photos to JPG
+2. **/convert/heic-to-png** — Convert iPhone HEIC photos to PNG
+3. **/convert/png-to-webp** — Convert PNG to modern WebP format
+4. **/convert/png-to-jpg** — Convert PNG to JPG
+5. **/convert/jpg-to-webp** — Convert JPG to WebP
+6. **/convert/jpeg-to-webp** — Convert JPEG to WebP
+7. **/convert/webp-to-jpg** — Convert WebP back to JPG
+
+## Programmatic Pages — Resize for Social Media
+
+Quick resize utility pages for popular social platforms:
+
+1. **/resize/instagram** — Resize for Instagram posts (1:1, 4:5, 16:9)
+2. **/resize/facebook** — Resize for Facebook posts and covers
+3. **/resize/twitter** — Resize for Twitter/X posts (16:9)
+4. **/resize/tiktok** — Resize for TikTok videos (9:16)
+5. **/resize/youtube-thumbnail** — Resize for YouTube thumbnails (1280x720)
+6. **/resize/linkedin** — Resize for LinkedIn posts (1.91:1)
+7. **/resize/pinterest** — Resize for Pinterest pins (1000x1500)
+
+## Blog Articles
+
+16 SEO-focused articles on image optimization and photography:
+
+1. **Compress Images Without Quality Loss** — /blog/compress-images-without-losing-quality
+2. **AI Image Renaming for SEO** — /blog/ai-image-renaming-seo-guide
+3. **Convert HEIC to JPG Free** — /blog/iphone-heic-to-jpg-guide
+4. **Image Sizes for Social Media 2026** — /blog/image-sizes-social-media-2026
+5. **Complete Guide to WebP Format** — /blog/complete-guide-webp-format
+6. **Remove EXIF Data and Protect Privacy** — /blog/remove-exif-protect-privacy
+7. **Best Image Compression Tools 2026** — /blog/best-image-compression-tools-2026
+8. **Travel Photography Tips for Beginners** — /blog/travel-photography-tips-beginners
+9. **Find and Delete Duplicate Photos** — /blog/find-delete-duplicate-photos
+10. **Batch Watermark Photos Free** — /blog/batch-watermark-photos-free
+11. **Crop Photos to Perfect Ratios** — /blog/crop-photos-perfect-ratios
+12. **Remove GPS from Photos** — /blog/remove-gps-from-photos
+13. **Organize Travel Photos by Country** — /blog/organize-travel-photos-by-country
+14. **Create a Travel Photo Map** — /blog/create-travel-photo-map
+15. **Film Effects for Digital Photos (Free)** — /blog/film-effects-digital-photos-free
+16. **Cull Photos: Faster Workflow** — /blog/cull-photos-faster-workflow
+
 ## Comparisons
 
 SammaPix is positioned as an alternative to:

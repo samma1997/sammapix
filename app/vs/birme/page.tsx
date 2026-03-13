@@ -295,6 +295,59 @@ export default function VsBirmePage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs Birme", item: `${APP_URL}/vs/birme` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than Birme?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Both SammaPix and Birme are excellent free bulk image tools with browser-based processing and no uploads. Birme specializes in resizing. SammaPix is more comprehensive: it resizes, compresses, converts to WebP, removes EXIF metadata, and renames files with AI. SammaPix is also actively maintained with regular updates, while Birme's development status is less clear.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Birme free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Birme is completely free. It is a simple bulk image resizing tool with no premium plans or account required.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that Birme can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers several capabilities beyond what Birme provides: image compression with quality control, WebP conversion for modern web formats, AI-powered image renaming and alt text generation, EXIF metadata removal for privacy protection, and active ongoing development with regular feature updates.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

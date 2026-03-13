@@ -40,6 +40,22 @@ const POSTS: Post[] = [
     tags: ["Tools"],
   },
   {
+    slug: "best-image-format-for-web-2026",
+    title: "Best Image Format for Web 2026: WebP vs AVIF vs JPEG vs PNG",
+    description:
+      "The definitive guide to choosing the right image format. Compare file size, quality, browser support, and when to use each format.",
+    date: "2026-03-13",
+    tags: ["Performance"],
+  },
+  {
+    slug: "optimize-images-wordpress-guide",
+    title: "How to Optimize Images for WordPress (2026 Guide)",
+    description:
+      "Step-by-step guide to optimize images before uploading to WordPress. Compress, convert to WebP, resize, and strip EXIF for better Core Web Vitals.",
+    date: "2026-01-10",
+    tags: ["Performance"],
+  },
+  {
     slug: "complete-guide-webp-format",
     title: "Complete Guide to WebP Format: Why & How to Use It",
     description:

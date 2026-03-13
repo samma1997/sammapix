@@ -308,6 +308,59 @@ export default function VsVscoPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs VSCO", item: `${APP_URL}/vs/vsco` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than VSCO?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix and VSCO serve different purposes. VSCO is a mobile photo editing app with beautiful film presets for creative editing, while SammaPix is a web-based optimization tool for batch compression, WebP conversion, and SEO-optimized renaming. For travel photographers, using both tools together creates an ideal workflow: edit in VSCO for creative aesthetics, then optimize and publish with SammaPix.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is VSCO free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "VSCO offers a limited free tier with basic editing features. The full VSCO experience including the X-Series and A-Series film presets requires a paid subscription at $19.99 per year.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that VSCO can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers optimization and publishing features that VSCO cannot provide: batch processing of multiple files simultaneously, AI-powered image renaming and alt text generation, WebP conversion for modern formats, EXIF metadata removal for privacy, and 100% in-browser processing with no server uploads.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

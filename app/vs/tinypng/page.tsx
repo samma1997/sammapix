@@ -238,6 +238,59 @@ export default function VsTinyPngPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs TinyPNG", item: `${APP_URL}/vs/tinypng` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than TinyPNG?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix and TinyPNG are both excellent image compressors, but SammaPix offers more features. SammaPix includes WebP conversion, AI-powered image renaming, batch processing, and processes everything locally in your browser without uploading files to a server. TinyPNG is simpler and has a WordPress plugin, making it better for specific use cases.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is TinyPNG free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, TinyPNG has a free plan that allows 20 compressions per month with a maximum file size of 5 MB. TinyPNG Pro starts at $25/month for unlimited compressions.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that TinyPNG can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers unique features including: WebP conversion (free), AI-powered image renaming and alt text generation using Google Gemini, batch processing with ZIP download, quality control slider, EXIF data removal, and 100% in-browser processing with no file uploads to servers.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

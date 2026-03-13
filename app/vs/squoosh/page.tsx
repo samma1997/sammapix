@@ -304,6 +304,59 @@ export default function VsSquooshPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs Squoosh", item: `${APP_URL}/vs/squoosh` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than Squoosh?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix and Squoosh are both excellent free image optimizers that process images entirely in your browser. However, SammaPix offers more modern features including batch processing, AI-powered image renaming, and continuous updates. Squoosh was archived by Google in 2023, while SammaPix is actively maintained and regularly improved.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Squoosh free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Squoosh by Google is completely free and has no premium plans. However, it is no longer maintained — Google archived the project in 2023.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that Squoosh can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers unique features that Squoosh cannot provide: batch processing of multiple files at once with ZIP download, AI-powered image renaming and alt text generation, quality control sliders, EXIF data removal for privacy, and continuous active development with regular feature updates.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

@@ -205,7 +205,83 @@ export default function FilmLabPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "FilmLab",
+                item: `${APP_URL}/tools/filmlab`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What film effects are available in FilmLab?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "FilmLab includes 14 presets: 6 classic film stocks (Kodak Gold, Fuji Pro 400H, Ilford HP5, Cinematic Teal, Faded 70s, Cross Process) plus 8 exclusive Samma signature presets. Each adjusts grain, vignette, fade, temperature, contrast, saturation, and split toning.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does FilmLab reduce image quality?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. FilmLab applies visual filters (grain, color shifts, vignette) but does not compress or degrade the actual image resolution. All processing happens with the full image data in your browser using the Canvas API.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I batch apply the same effect to multiple photos?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. Choose a preset or adjust the sliders to get your desired look, then click 'Apply to all'. FilmLab will process your entire batch with the same settings and let you download all results as a ZIP.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Are my photos uploaded to a server?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. All image processing runs entirely in your browser using the Canvas API. Your photos never leave your device — 100% private, zero uploads.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -287,6 +287,59 @@ export default function VsShortPixelPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs ShortPixel", item: `${APP_URL}/vs/shortpixel` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than ShortPixel?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix and ShortPixel serve different audiences. ShortPixel is a WordPress plugin designed for automated server-side optimization. SammaPix is a browser-based tool for manual workflows with stronger privacy, no file uploads, AI renaming, and WebP conversion. For WordPress sites, ShortPixel is excellent. For non-WordPress workflows or privacy-sensitive work, SammaPix is better and entirely free.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is ShortPixel free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "ShortPixel offers a free tier with 100 image credits per month. Once you exceed this limit, you must switch to a paid plan. SammaPix offers unlimited compression in the free tier.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that ShortPixel can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers unique features that ShortPixel lacks: 100% in-browser processing with no file uploads, AI-powered image renaming and alt text generation, EXIF metadata removal, unlimited free compression with no credit system, and no account required for core tools.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

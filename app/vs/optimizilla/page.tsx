@@ -295,6 +295,59 @@ export default function VsOptimizillaPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs Optimizilla", item: `${APP_URL}/vs/optimizilla` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than Optimizilla?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, SammaPix is superior in almost every way. Both are free image compressors, but SammaPix offers privacy (no server uploads), WebP conversion, AI-powered image renaming, EXIF metadata removal, and batch processing without upload limits. Optimizilla uploads every image to their servers and lacks all of these modern features.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Optimizilla free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Optimizilla is completely free with no premium version or account required.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that Optimizilla can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers multiple capabilities that Optimizilla lacks: 100% in-browser processing with no server uploads, WebP conversion for modern image formats, AI-powered image renaming and alt text generation, EXIF metadata removal for privacy protection, and unlimited free batch processing without server file limits.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

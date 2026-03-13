@@ -230,6 +230,59 @@ export default function VsCompressorIoPage() {
           }),
         }}
       />
+
+      {/* Schema.org — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}` },
+              { "@type": "ListItem", position: 2, name: "Comparisons", item: `${APP_URL}/vs` },
+              { "@type": "ListItem", position: 3, name: "SammaPix vs Compressor.io", item: `${APP_URL}/vs/compressor-io` },
+            ],
+          }),
+        }}
+      />
+
+      {/* Schema.org — FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is SammaPix better than Compressor.io?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix and Compressor.io are both free image compressors, but SammaPix offers more powerful features. SammaPix supports batch processing of up to 20 files, AI-powered image renaming, WebP conversion, and 100% in-browser processing with no file uploads to servers. Compressor.io handles one file at a time and uploads images to their servers.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Compressor.io free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Compressor.io offers a free tier with basic image compression features. Pro plans are available for users who need higher file size limits and priority processing.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What can SammaPix do that Compressor.io can't?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SammaPix offers several unique capabilities: batch processing of multiple files simultaneously with ZIP download, AI-powered image renaming and alt text generation, WebP conversion for modern formats, EXIF metadata removal for privacy protection, and processes everything in your browser without uploading to servers.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

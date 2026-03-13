@@ -257,7 +257,83 @@ export default function TravelMapPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "TravelMap",
+                item: `${APP_URL}/tools/travelmap`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Does TravelMap upload my photos to a server?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. TravelMap is completely private. GPS coordinates are extracted from your photos entirely in the browser. Only the GPS coordinates are sent to OpenStreetMap for reverse geocoding to get location names — your actual photos never leave your device.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How accurate is the distance calculation?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "TravelMap uses the Haversine formula to calculate great-circle distance (straight-line as the crow flies) between consecutive GPS points. It does not account for roads or actual travel routes — think of it as a lower-bound estimate of the distance your journey covered.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What if my photos don't have GPS data?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Photos without GPS data are silently skipped. Only photos with valid coordinates are plotted on the map. To check if a photo has GPS, right-click it on macOS and choose 'Get Info' — the location appears under More Info section.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I export the map as an image?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "The simplest approach is to use your browser's screenshot tool (Cmd+Shift+4 on macOS, Win+Shift+S on Windows). You can also copy all GPS coordinates as JSON and paste them into tools like Google My Maps or Felt to generate a shareable map.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

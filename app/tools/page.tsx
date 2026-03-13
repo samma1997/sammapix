@@ -369,8 +369,157 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      {/* Blog guides section */}
+      {/* Quick Convert section */}
+      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E] py-12 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+              Quick Convert
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
+              One-click conversion utilities for popular image formats.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <Link
+              href="/convert/heic-to-jpg"
+              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                HEIC to JPG
+              </h3>
+            </Link>
+
+            <Link
+              href="/convert/heic-to-png"
+              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                HEIC to PNG
+              </h3>
+            </Link>
+
+            <Link
+              href="/convert/png-to-webp"
+              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                PNG to WebP
+              </h3>
+            </Link>
+
+            <Link
+              href="/convert/png-to-jpg"
+              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                PNG to JPG
+              </h3>
+            </Link>
+
+            <Link
+              href="/convert/jpg-to-webp"
+              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                JPG to WebP
+              </h3>
+            </Link>
+
+            <Link
+              href="/convert/webp-to-jpg"
+              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                WebP to JPG
+              </h3>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Resize for Social Media section */}
       <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] py-12 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+              Resize for Social Media
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
+              Quick resize utilities optimized for popular social platforms.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <Link
+              href="/resize/instagram"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Instagram
+              </h3>
+            </Link>
+
+            <Link
+              href="/resize/facebook"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Facebook
+              </h3>
+            </Link>
+
+            <Link
+              href="/resize/twitter"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Twitter
+              </h3>
+            </Link>
+
+            <Link
+              href="/resize/tiktok"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                TikTok
+              </h3>
+            </Link>
+
+            <Link
+              href="/resize/youtube-thumbnail"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                YouTube Thumbnail
+              </h3>
+            </Link>
+
+            <Link
+              href="/resize/linkedin"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                LinkedIn
+              </h3>
+            </Link>
+
+            <Link
+              href="/resize/pinterest"
+              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+            >
+              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                Pinterest
+              </h3>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog guides section */}
+      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919] py-12 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
@@ -384,7 +533,7 @@ export default function ToolsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
             <Link
               href="/blog/compress-images-without-losing-quality"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
             >
               <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
                 Compression
@@ -396,7 +545,7 @@ export default function ToolsPage() {
 
             <Link
               href="/blog/ai-image-renaming-seo-guide"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
             >
               <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
                 SEO
@@ -408,7 +557,7 @@ export default function ToolsPage() {
 
             <Link
               href="/blog/iphone-heic-to-jpg-guide"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
             >
               <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
                 FORMAT CONVERSION
@@ -420,7 +569,7 @@ export default function ToolsPage() {
 
             <Link
               href="/blog/image-sizes-social-media-2026"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
             >
               <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
                 SOCIAL MEDIA

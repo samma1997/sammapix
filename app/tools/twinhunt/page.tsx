@@ -220,7 +220,83 @@ export default function TwinHuntPage() {
         </div>
       </section>
 
-      {/* Schema.org */}
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "TwinHunt",
+                item: `${APP_URL}/tools/twinhunt`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "How does duplicate detection work?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "TwinHunt uses perceptual hashing (pHash) — a technique that generates a visual fingerprint for each image based on its content, not file bytes. Two images with similar visual content will have similar fingerprints (low Hamming distance), even if they were resized or re-saved.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can it find near-duplicates like cropped photos?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. TwinHunt has adjustable sensitivity: Strict mode catches exact duplicates (Hamming distance 0–5), Normal mode catches very similar images (6–10), and Loose mode catches broader matches (11–20). Small crops and re-saves are usually caught in Normal mode.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does TwinHunt upload my photos?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. TwinHunt processes everything entirely in your browser using the Canvas API and JavaScript. Every pixel is analyzed locally — no image data is ever transmitted to any server.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can TwinHunt delete my duplicate files?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. Browsers cannot delete files from your filesystem. TwinHunt only identifies duplicates and shows you which ones to delete. Actual deletion is done in your file manager or Finder — you stay in complete control.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* Software Application Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
