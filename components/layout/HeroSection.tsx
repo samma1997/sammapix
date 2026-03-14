@@ -1,68 +1,38 @@
-"use client";
-
-// HeroSection — strip fotografica a tutta altezza, ispirata a Ralph Gibson
-// Sfondo scuro, foto a colonne verticali, ogni foto → viaggio specifico
-
-import Image from "next/image";
 import Link from "next/link";
-
-// Una foto rappresentativa per ogni viaggio
-const HERO_PHOTOS = [
-  { slug: "sri-lanka-2025",  src: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_fill,f_auto,q_auto,w_600,h_900/v1/sammapix/portfolio/sri-lanka/01-gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka",  destination: "Sri Lanka",  year: "2025" },
-  { slug: "bali-2024",       src: "https://picsum.photos/seed/bali2/600/900",       destination: "Bali",       year: "2024" },
-  { slug: "japan-2023",      src: "https://picsum.photos/seed/japan2/600/900",      destination: "Japan",      year: "2023" },
-  { slug: "thailand-2024",   src: "https://picsum.photos/seed/thailand3/600/900",   destination: "Thailand",   year: "2024" },
-  { slug: "china-2023",      src: "https://picsum.photos/seed/china1/600/900",      destination: "China",      year: "2023" },
-];
+import { ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section
-      className="w-full bg-[#0a0a0a] overflow-x-auto"
-      style={{ height: "calc(100vh - 56px)" }}
-    >
-      {/* Strip orizzontale — 5 colonne uguali, scorrimento su mobile */}
-      <div
-        className="flex h-full min-w-max md:min-w-0 md:grid"
-        style={{
-          gridTemplateColumns: `repeat(${HERO_PHOTOS.length}, 1fr)`,
-        }}
-      >
-        {HERO_PHOTOS.map((photo, i) => (
+    <section className="w-full bg-white dark:bg-[#191919] border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
+        <h1 className="text-3xl sm:text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-4 leading-tight">
+          Free Image Tools
+          <br />
+          <span className="text-[#A3A3A3] dark:text-[#737373]">for Photographers</span>
+        </h1>
+        <p className="text-base sm:text-lg text-[#737373] dark:text-[#A3A3A3] max-w-lg mx-auto mb-8 leading-relaxed">
+          Compress, convert, rename with AI, remove EXIF, add watermarks and more.
+          <br className="hidden sm:block" />
+          100% browser-based. No uploads. No signup needed.
+        </p>
+        <div className="flex items-center justify-center gap-3">
           <Link
-            key={photo.slug}
-            href={`/portfolio/${photo.slug}`}
-            className="group relative block h-full overflow-hidden"
-            style={{ minWidth: "220px" }}
-            aria-label={`${photo.destination} ${photo.year}`}
+            href="/tools"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
           >
-            {/* Foto */}
-            <Image
-              src={photo.src}
-              alt={`${photo.destination} travel photography ${photo.year}`}
-              fill
-              className="object-cover transition-all duration-700 group-hover:scale-[1.04] brightness-90 group-hover:brightness-100"
-              sizes="(max-width: 768px) 220px, 20vw"
-              priority={i < 3}
-              unoptimized
-            />
-
-            {/* Separatore verticale sottile tra le foto */}
-            {i < HERO_PHOTOS.length - 1 && (
-              <div className="absolute top-0 right-0 w-px h-full bg-white/10 z-10" />
-            )}
-
-            {/* Label destinazione — bottom left, sempre visibile, minimal */}
-            <div className="absolute bottom-5 left-5 z-20">
-              <p className="text-white/40 text-[11px] font-medium tracking-widest uppercase transition-colors duration-300 group-hover:text-white/90">
-                {photo.destination}
-              </p>
-              <p className="text-white/20 text-[10px] tracking-widest group-hover:text-white/50 transition-colors duration-300">
-                {photo.year}
-              </p>
-            </div>
+            Explore 13 free tools
+            <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </Link>
-        ))}
+          <Link
+            href="/try-pro"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors"
+          >
+            Try Pro free
+          </Link>
+        </div>
+        <p className="mt-6 text-xs text-[#A3A3A3] dark:text-[#525252]">
+          13 tools &middot; All free &middot; Works on any device
+        </p>
       </div>
     </section>
   );
