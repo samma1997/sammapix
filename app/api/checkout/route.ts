@@ -6,6 +6,7 @@ import { stripe } from "@/lib/stripe";
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
+  "https://staging-sammapix.vercel.app",
   "http://localhost:3000",
 ];
 
@@ -38,6 +39,7 @@ export async function POST(req: NextRequest) {
       cancel_url: `${appUrl}/pricing?canceled=true`,
       metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       subscription_data: {
+        trial_period_days: 30,
         metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       },
     });

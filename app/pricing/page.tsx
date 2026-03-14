@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   IconCompress,
@@ -45,6 +45,15 @@ function PaymentBanners() {
   const searchParams = useSearchParams();
   const success = searchParams.get("success") === "true";
   const canceled = searchParams.get("canceled") === "true";
+
+  useEffect(() => {
+    if (!success) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
+    if (typeof w.fbq === "function") w.fbq("track", "Subscribe", { value: 7.00, currency: "USD" });
+    if (typeof w.gtag === "function") w.gtag("event", "conversion", { send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL, value: 7.00, currency: "USD" });
+  }, [success]);
+
   if (!success && !canceled) return null;
   return (
     <>

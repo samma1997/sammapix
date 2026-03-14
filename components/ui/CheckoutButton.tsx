@@ -21,6 +21,14 @@ export default function CheckoutButton({
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
+    // Fire conversion events for ad platforms
+    if (typeof window !== "undefined") {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const w = window as any;
+      if (typeof w.fbq === "function") w.fbq("track", "InitiateCheckout");
+      if (typeof w.gtag === "function") w.gtag("event", "begin_checkout");
+    }
+
     if (!session) {
       router.push("/auth/signin");
       return;
