@@ -93,37 +93,37 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
     tools: [
       {
         name: "Cull",
-        href: "/tools/cull",
+        href: "/dashboard/tools/cull",
         why: "Rate and select your best shots",
         icon: <Camera className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "Compress",
-        href: "/tools/compress",
+        href: "/dashboard/tools/compress",
         why: "Shrink files without quality loss",
         icon: <Image className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "AI Rename",
-        href: "/tools/ai-rename",
+        href: "/dashboard/tools/ai-rename",
         why: "SEO-ready filenames in seconds",
         icon: <Zap className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "FilmLab",
-        href: "/tools/filmlab",
+        href: "/dashboard/tools/filmlab",
         why: "Add analog film looks",
         icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "GeoSort",
-        href: "/tools/geosort",
+        href: "/dashboard/tools/geosort",
         why: "Organize by shooting location",
         icon: <MapPin className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "TravelMap",
-        href: "/tools/travelmap",
+        href: "/dashboard/tools/travelmap",
         why: "Map your photo journey",
         icon: <Map className="h-4 w-4" strokeWidth={1.5} />,
       },
@@ -135,31 +135,31 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
     tools: [
       {
         name: "Compress",
-        href: "/tools/compress",
+        href: "/dashboard/tools/compress",
         why: "Faster page loads",
         icon: <Image className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "AI Rename",
-        href: "/tools/ai-rename",
+        href: "/dashboard/tools/ai-rename",
         why: "Rank in Google Images",
         icon: <Zap className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "AI Alt Text",
-        href: "/tools/alt-text",
+        href: "/dashboard/tools/alt-text",
         why: "Accessibility + SEO",
         icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "WebP",
-        href: "/tools/webp",
+        href: "/dashboard/tools/webp",
         why: "25-34% smaller than JPEG",
         icon: <FileImage className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "ResizePack",
-        href: "/tools/resizepack",
+        href: "/dashboard/tools/resizepack",
         why: "Perfect sizes for your CMS",
         icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,
       },
@@ -171,31 +171,31 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
     tools: [
       {
         name: "Compress",
-        href: "/tools/compress",
+        href: "/dashboard/tools/compress",
         why: "Meet marketplace size limits",
         icon: <Image className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "AI Rename",
-        href: "/tools/ai-rename",
+        href: "/dashboard/tools/ai-rename",
         why: "Product-keyword filenames",
         icon: <Zap className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "ResizePack",
-        href: "/tools/resizepack",
+        href: "/dashboard/tools/resizepack",
         why: "Platform-specific sizes",
         icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "WebP",
-        href: "/tools/webp",
+        href: "/dashboard/tools/webp",
         why: "Faster product pages",
         icon: <FileImage className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "StampIt",
-        href: "/tools/stampit",
+        href: "/dashboard/tools/stampit",
         why: "Protect with watermarks",
         icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,
       },
@@ -207,31 +207,31 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
     tools: [
       {
         name: "Compress",
-        href: "/tools/compress",
+        href: "/dashboard/tools/compress",
         why: "Reduce payload size",
         icon: <Image className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "WebP",
-        href: "/tools/webp",
+        href: "/dashboard/tools/webp",
         why: "Modern format, smaller files",
         icon: <FileImage className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "EXIF Lens",
-        href: "/tools/exif",
+        href: "/dashboard/tools/exif",
         why: "Strip metadata, save bytes",
         icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "AI Alt Text",
-        href: "/tools/alt-text",
+        href: "/dashboard/tools/alt-text",
         why: "WCAG compliance",
         icon: <Globe className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "ResizePack",
-        href: "/tools/resizepack",
+        href: "/dashboard/tools/resizepack",
         why: "Responsive image sizes",
         icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,
       },
@@ -243,31 +243,31 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
     tools: [
       {
         name: "ResizePack",
-        href: "/tools/resizepack",
+        href: "/dashboard/tools/resizepack",
         why: "Instagram, Twitter, LinkedIn sizes",
         icon: <Scissors className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "CropRatio",
-        href: "/tools/croproatio",
+        href: "/dashboard/tools/croproatio",
         why: "Perfect aspect ratios",
         icon: <Copy className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "Compress",
-        href: "/tools/compress",
+        href: "/dashboard/tools/compress",
         why: "Fast uploads",
         icon: <Image className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "StampIt",
-        href: "/tools/stampit",
+        href: "/dashboard/tools/stampit",
         why: "Brand watermarks",
         icon: <Stamp className="h-4 w-4" strokeWidth={1.5} />,
       },
       {
         name: "FilmLab",
-        href: "/tools/filmlab",
+        href: "/dashboard/tools/filmlab",
         why: "Consistent visual style",
         icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} />,
       },
@@ -509,7 +509,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
               </h2>
             </div>
             <Link
-              href="/tools/workflow"
+              href="/dashboard/tools/workflow"
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 transition-colors shrink-0"
             >
               Run AI Workflow

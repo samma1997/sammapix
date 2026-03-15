@@ -38,21 +38,21 @@ interface Tool {
 }
 
 const ALL_TOOLS: Tool[] = [
-  { name: "Compress", href: "/tools/compress", icon: <Image className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "WebP", href: "/tools/webp", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "AI Rename", href: "/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "AI Alt Text", href: "/tools/alt-text", icon: <Globe className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "ResizePack", href: "/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Cull", href: "/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "FilmLab", href: "/tools/filmlab", icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "EXIF Lens", href: "/tools/exif", icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "GeoSort", href: "/tools/geosort", icon: <MapPin className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "TravelMap", href: "/tools/travelmap", icon: <Map className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "CropRatio", href: "/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "StampIt", href: "/tools/stampit", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "HEIC", href: "/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "TwinHunt", href: "/tools/twinhunt", icon: <Search className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Video Thumb", href: "/tools/video-thumb", icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Compress", href: "/dashboard/tools/compress", icon: <Image className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "WebP", href: "/dashboard/tools/webp", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "AI Rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "AI Alt Text", href: "/dashboard/tools/alt-text", icon: <Globe className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "ResizePack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Cull", href: "/dashboard/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "FilmLab", href: "/dashboard/tools/filmlab", icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "EXIF Lens", href: "/dashboard/tools/exif", icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "GeoSort", href: "/dashboard/tools/geosort", icon: <MapPin className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "TravelMap", href: "/dashboard/tools/travelmap", icon: <Map className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "CropRatio", href: "/dashboard/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "StampIt", href: "/dashboard/tools/stampit", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "HEIC", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "TwinHunt", href: "/dashboard/tools/twinhunt", icon: <Search className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Video Thumb", href: "/dashboard/tools/video-thumb", icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 const PERSONA_RECOMMENDED: Record<Persona, string[]> = {
@@ -163,11 +163,11 @@ export default function DashboardSidebar({
 
         {/* AI Workflow */}
         <Link
-          href="/tools/workflow"
+          href="/dashboard/tools/workflow"
           onClick={() => setMobileOpen(false)}
           className={[
             "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
-            pathname === "/tools/workflow"
+            pathname === "/dashboard/tools/workflow"
               ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
               : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
           ].join(" ")}
