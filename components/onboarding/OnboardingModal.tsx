@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Camera, PenLine, ShoppingBag, Code, Share2, X } from "lucide-react";
+import { Camera, PenLine, ShoppingBag, Code, Share2, X, Download } from "lucide-react";
 
 export type Persona =
   | "photographer"
@@ -191,7 +191,11 @@ export default function OnboardingModal({ onClose }: OnboardingModalProps) {
         </div>
 
         {/* Footer */}
-        <div className="px-6 pb-5 flex items-center justify-center">
+        <div className="px-6 pb-5 flex flex-col items-center gap-3">
+          <p className="flex items-center gap-1.5 text-[11px] text-[#A3A3A3] dark:text-[#737373]">
+            <Download className="h-3 w-3 shrink-0" strokeWidth={1.5} />
+            You can also install SammaPix as a desktop app from the browser menu.
+          </p>
           <button
             onClick={handleSkip}
             className="text-xs text-[#A3A3A3] dark:text-[#525252] hover:text-[#737373] dark:hover:text-[#A3A3A3] transition-colors underline-offset-2 hover:underline"

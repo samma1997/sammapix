@@ -11,6 +11,7 @@ import {
   Share2,
   Camera,
   ArrowRightIcon,
+  Download,
 } from "lucide-react";
 import {
   IconCompress,
@@ -404,20 +405,25 @@ export default function TryProPage() {
               </div>
             ))}
           </div>
+          <p className="flex items-center gap-1.5 mt-6 text-xs text-[#A3A3A3] dark:text-[#737373]">
+            <Download className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+            Once registered, install SammaPix as a desktop app — works offline, launches instantly.
+          </p>
         </div>
       </section>
 
       {/* ── Trust signals ─────────────────────────────────────────────────── */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "100% browser-based", desc: "Your images never leave your device. Zero server uploads." },
-              { title: "Cancel anytime", desc: "No contracts. Cancel in one click. Keep access until period ends." },
-              { title: "30-day money-back", desc: "Not happy? Full refund within 30 days, no questions asked." },
-            ].map(({ title, desc }) => (
+              { title: "100% browser-based", desc: "Your images never leave your device. Zero server uploads.", Icon: Check, color: "text-[#16A34A]" },
+              { title: "Cancel anytime", desc: "No contracts. Cancel in one click. Keep access until period ends.", Icon: Check, color: "text-[#16A34A]" },
+              { title: "30-day money-back", desc: "Not happy? Full refund within 30 days, no questions asked.", Icon: Check, color: "text-[#16A34A]" },
+              { title: "Desktop app", desc: "Install SammaPix on your desktop — works offline, launches instantly.", Icon: Download, color: "text-[#6366F1]" },
+            ].map(({ title, desc, Icon, color }) => (
               <div key={title} className="text-center">
-                <Check className="h-5 w-5 text-[#16A34A] mx-auto mb-2" strokeWidth={2} />
+                <Icon className={`h-5 w-5 ${color} mx-auto mb-2`} strokeWidth={2} />
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">{title}</h3>
                 <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">{desc}</p>
               </div>

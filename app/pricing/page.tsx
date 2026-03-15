@@ -20,6 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
+import { Download } from "lucide-react";
 
 // ─── Tool grid data ────────────────────────────────────────────────────────────
 
@@ -169,9 +170,14 @@ export default function PricingPage() {
                 "Up to 20 files per batch",
                 "5 AI renames / day",
                 "Use tools one by one",
+                "Install as desktop app",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  <span className="mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252] select-none">—</span>
+                  {item === "Install as desktop app" ? (
+                    <Download className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#A3A3A3] dark:text-[#525252]" strokeWidth={1.5} />
+                  ) : (
+                    <span className="mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252] select-none">—</span>
+                  )}
                   {item}
                 </li>
               ))}
@@ -223,15 +229,18 @@ export default function PricingPage() {
                 "50 MB max file size",
                 "AI Alt Text generator",
                 "No ads · Priority support",
+                "Install as desktop app",
                 "Coming soon: AI Smart Cull, AI Photo Scorer",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  <span className={cn(
-                    "mt-0.5 shrink-0 select-none",
-                    item === "Everything in Free, plus:"
-                      ? "text-[#6366F1]/60"
-                      : "text-[#6366F1]/60"
-                  )}>—</span>
+                  {item === "Install as desktop app" ? (
+                    <Download className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#6366F1]/60" strokeWidth={1.5} />
+                  ) : (
+                    <span className={cn(
+                      "mt-0.5 shrink-0 select-none",
+                      "text-[#6366F1]/60"
+                    )}>—</span>
+                  )}
                   {item === "Everything in Free, plus:" ? (
                     <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">{item}</span>
                   ) : (
@@ -249,6 +258,12 @@ export default function PricingPage() {
             </p>
           </div>
         </div>
+
+        {/* ── Desktop app note ───────────────────────────────────────────── */}
+        <p className="flex items-center justify-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] mb-16 -mt-10">
+          <Download className="h-3 w-3 shrink-0" strokeWidth={1.5} />
+          All registered users can install SammaPix as a desktop app for faster access.
+        </p>
 
         {/* ── All tools grid ─────────────────────────────────────────────── */}
         <div className="mb-16">

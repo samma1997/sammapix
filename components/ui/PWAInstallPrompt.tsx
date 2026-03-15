@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Download, X } from "lucide-react";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -13,6 +14,7 @@ export default function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [dismissed, setDismissed] = useState(true);
   const pathname = usePathname();
+  const { status } = useSession();
 
   useEffect(() => {
     // Register service worker
@@ -39,7 +41,8 @@ export default function PWAInstallPrompt() {
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
-  // Don't show in dashboard (sidebar already provides app-like feel)
+  // Only show to logged-in users (incentive to register)
+  if (status !== "authenticated") return null;
   if (pathname.startsWith("/dashboard")) return null;
   if (dismissed || !deferredPrompt) return null;
 

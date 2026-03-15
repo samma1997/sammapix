@@ -21,6 +21,8 @@ import {
   ShoppingBag,
   Code,
   Share2,
+  Download,
+  X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
@@ -347,6 +349,7 @@ function UsageBar({
 // ─── Main component ───────────────────────────────────────────────────────────
 
 const LS_PERSONA_KEY = "sammapix-persona";
+const LS_INSTALL_DISMISSED_KEY = "sammapix-install-banner-dismissed";
 
 interface DashboardHomeProps {
   userName: string | null;
@@ -362,6 +365,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const [usage, setUsage] = useState<DailyUsage>({ aiRename: 0, altText: 0, workflow: 0 });
   const [showPersonaSurvey, setShowPersonaSurvey] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showInstallBanner, setShowInstallBanner] = useState(false);
 
   const loadPersona = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -381,6 +385,8 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     setMounted(true);
     loadPersona();
     setUsage(readUsage());
+    const dismissed = localStorage.getItem(LS_INSTALL_DISMISSED_KEY);
+    if (!dismissed) setShowInstallBanner(true);
   }, [loadPersona]);
 
   function handlePersonaSelect(p: Persona) {
@@ -492,6 +498,31 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
             className="mt-3 text-xs text-[#A3A3A3] hover:text-[#737373] transition-colors underline-offset-2 hover:underline"
           >
             Skip for now
+          </button>
+        </div>
+      )}
+
+      {/* Install app banner */}
+      {showInstallBanner && (
+        <div className="mb-6 flex items-start gap-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg px-4 py-3 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+          <Download className="h-4 w-4 text-[#A3A3A3] dark:text-[#525252] shrink-0 mt-0.5" strokeWidth={1.5} />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] leading-snug">
+              Install SammaPix app
+            </p>
+            <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-0.5 leading-snug">
+              Add to your desktop for instant access. Click the install icon in your browser&apos;s address bar.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              localStorage.setItem(LS_INSTALL_DISMISSED_KEY, "1");
+              setShowInstallBanner(false);
+            }}
+            aria-label="Dismiss install banner"
+            className="shrink-0 p-1 rounded text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
+          >
+            <X className="h-3.5 w-3.5" strokeWidth={1.5} />
           </button>
         </div>
       )}

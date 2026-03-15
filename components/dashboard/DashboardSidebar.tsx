@@ -100,9 +100,9 @@ export default function DashboardSidebar({
       {/* Logo */}
       <div className="flex items-center justify-between px-4 h-14 border-b border-[#E5E5E5] dark:border-[#2A2A2A] shrink-0">
         <Link
-          href="/"
+          href="/dashboard"
           className="flex items-center gap-2 group select-none"
-          aria-label="SammaPix — home"
+          aria-label="SammaPix — dashboard"
           onClick={() => setMobileOpen(false)}
         >
           <svg
