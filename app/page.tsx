@@ -64,7 +64,7 @@ const TOOLS_OPTIMIZE: ToolCardData[] = [
     href: "/tools/compress",
     tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
     accent: "#6366F1",
-    badges: ["100% Free", "No Signup", "Browser-only"],
+    badges: ["100% Free", "Up to 90% smaller"],
     Icon: IconCompress,
   },
   {
@@ -72,7 +72,7 @@ const TOOLS_OPTIMIZE: ToolCardData[] = [
     href: "/tools/webp",
     tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
     accent: "#10B981",
-    badges: ["100% Free", "Browser-only"],
+    badges: ["100% Free", "25-34% smaller"],
     Icon: IconWebP,
   },
   {
@@ -88,7 +88,7 @@ const TOOLS_OPTIMIZE: ToolCardData[] = [
     href: "/tools/croproatio",
     tagline: "Crop to exact ratios — 1:1, 16:9, 4:3, A4 and more.",
     accent: "#EC4899",
-    badges: ["100% Free", "Browser-only"],
+    badges: ["100% Free", "9 ratios"],
     Icon: IconCropRatio,
   },
 ];
@@ -99,7 +99,7 @@ const TOOLS_AI: ToolCardData[] = [
     href: "/tools/ai-rename",
     tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
     accent: "#8B5CF6",
-    badges: ["Free", "AI-powered", "Gemini Flash"],
+    badges: ["AI-powered", "Gemini Flash"],
     Icon: IconAIRename,
   },
   {
@@ -107,7 +107,7 @@ const TOOLS_AI: ToolCardData[] = [
     href: "/tools/exif",
     tagline: "Strip GPS, camera data and all metadata from photos.",
     accent: "#EF4444",
-    badges: ["100% Free", "Privacy", "Browser-only"],
+    badges: ["100% Free", "Privacy"],
     Icon: IconEXIF,
   },
 ];
@@ -118,7 +118,7 @@ const TOOLS_ORGANIZE: ToolCardData[] = [
     href: "/tools/geosort",
     tagline: "Sort photos by country using GPS EXIF data.",
     accent: "#22C55E",
-    badges: ["100% Free", "HEIC", "GPS"],
+    badges: ["100% Free", "GPS"],
     Icon: IconGeoSort,
   },
   {
@@ -142,7 +142,7 @@ const TOOLS_ORGANIZE: ToolCardData[] = [
     href: "/tools/cull",
     tagline: "Rate and cull a shoot in minutes. Star rating system.",
     accent: "#F43F5E",
-    badges: ["100% Free", "HEIC"],
+    badges: ["100% Free", "Star rating"],
     Icon: IconCull,
   },
 ];
@@ -153,7 +153,7 @@ const TOOLS_EDIT: ToolCardData[] = [
     href: "/tools/filmlab",
     tagline: "14 analog film presets — Kodak Gold, Fuji, Ilford and 8 Samma originals.",
     accent: "#F59E0B",
-    badges: ["100% Free", "HEIC support"],
+    badges: ["100% Free", "14 presets"],
     Icon: IconFilmLab,
   },
   {

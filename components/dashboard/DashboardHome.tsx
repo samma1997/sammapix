@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Zap,
   Image,
@@ -360,6 +361,25 @@ interface DashboardHomeProps {
 export default function DashboardHome({ userName, userPlan }: DashboardHomeProps) {
   const isPro = userPlan === "pro";
   const firstName = userName?.split(" ")[0] ?? "there";
+  const router = useRouter();
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  async function handleUpgradeClick() {
+    setCheckoutLoading(true);
+    try {
+      const res = await fetch("/api/checkout", { method: "POST", credentials: "include" });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        router.push("/pricing");
+      }
+    } catch {
+      router.push("/pricing");
+    } finally {
+      setCheckoutLoading(false);
+    }
+  }
 
   const [persona, setPersona] = useState<Persona | null>(null);
   const [personaSkipped, setPersonaSkipped] = useState(false);
@@ -661,13 +681,14 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 {"You've hit some of your daily limits. Go Pro for unlimited AI Rename, Alt Text, and Workflows."}
               </p>
               <div className="flex items-center gap-3 flex-wrap">
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-md transition-colors"
+                <button
+                  onClick={handleUpgradeClick}
+                  disabled={checkoutLoading}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6366F1] hover:bg-[#4F46E5] disabled:opacity-60 text-white text-sm font-medium rounded-md transition-colors"
                 >
-                  Start 30-day free trial
-                  <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-                </Link>
+                  {checkoutLoading ? "Redirecting…" : "Start 30-day free trial"}
+                  {!checkoutLoading && <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />}
+                </button>
                 <Link
                   href="/dashboard/credits"
                   className="inline-flex items-center gap-1.5 px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] text-sm font-medium rounded-md hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
@@ -693,13 +714,14 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 Unlimited AI Rename, Alt Text, Workflows. No ads. $7/mo.
               </p>
             </div>
-            <Link
-              href="/pricing"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] rounded-md hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors shrink-0"
+            <button
+              onClick={handleUpgradeClick}
+              disabled={checkoutLoading}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 disabled:opacity-60 transition-colors shrink-0"
             >
-              View plans
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
+              {checkoutLoading ? "Redirecting…" : "Upgrade to Pro"}
+              {!checkoutLoading && <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />}
+            </button>
           </div>
         </div>
       )}

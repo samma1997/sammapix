@@ -179,7 +179,7 @@ export default function PricingPage() {
             </ul>
 
             <a
-              href="/tools"
+              href="/api/auth/signin?callbackUrl=/dashboard"
               className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
             >
               Start free →
