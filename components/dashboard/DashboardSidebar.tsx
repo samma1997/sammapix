@@ -240,9 +240,14 @@ export default function DashboardSidebar({
             Settings
           </Link>
           <Link
-            href="/account"
+            href="/dashboard/settings"
             onClick={() => setMobileOpen(false)}
-            className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+            className={[
+              "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
+              pathname === "/dashboard/settings"
+                ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
+                : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
+            ].join(" ")}
           >
             <User className="h-4 w-4 shrink-0" strokeWidth={1.5} />
             Account

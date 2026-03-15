@@ -54,11 +54,27 @@ export default function DashboardSettings({
     setTheme(storedTheme ?? "system");
   }, []);
 
+  const [showPersonaSelect, setShowPersonaSelect] = useState(false);
+
   const handleClearPersona = () => {
-    localStorage.removeItem(LS_PERSONA_KEY);
-    setPersona(null);
-    // Reload to trigger onboarding modal if it's set up on the dashboard
-    window.location.href = "/dashboard";
+    setShowPersonaSelect(true);
+  };
+
+  const handleSelectPersona = (p: Persona) => {
+    localStorage.setItem(LS_PERSONA_KEY, p);
+    setPersona(p);
+    setShowPersonaSelect(false);
+  };
+
+  const handleToggleTheme = () => {
+    const next = theme === "dark" ? "light" : theme === "light" ? "dark" : "dark";
+    localStorage.setItem(LS_THEME_KEY, next);
+    setTheme(next);
+    if (next === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   const handleOpenPortal = async () => {
@@ -227,21 +243,53 @@ export default function DashboardSettings({
           </div>
 
           <div className="px-5 py-4 space-y-4">
-            <div className="divide-y divide-[#F5F5F5] dark:divide-[#252525]">
-              <Row
-                label="Role"
-                value={personaLabel ?? "Not set"}
-              />
-              <Row label="Theme" value={themeLabel} />
+            {/* Role */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-[#737373]">Role</span>
+                <button
+                  onClick={handleClearPersona}
+                  className="text-xs text-[#6366F1] hover:underline"
+                >
+                  {showPersonaSelect ? "Cancel" : "Change"}
+                </button>
+              </div>
+              {showPersonaSelect ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {(Object.entries(PERSONA_LABELS) as [Persona, string][]).map(([key, label]) => (
+                    <button
+                      key={key}
+                      onClick={() => handleSelectPersona(key)}
+                      className={`px-3 py-2 text-xs font-medium rounded-md border transition-colors text-left ${
+                        persona === key
+                          ? "border-[#6366F1] bg-[#6366F1]/5 text-[#6366F1]"
+                          : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs text-[#171717] dark:text-[#E5E5E5]">
+                  {personaLabel ?? "Not set"}
+                </p>
+              )}
             </div>
 
-            <button
-              onClick={handleClearPersona}
-              className="inline-flex items-center gap-2 px-4 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-sm font-medium text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
-            >
-              <RefreshCw className="h-4 w-4" strokeWidth={1.5} />
-              Change role
-            </button>
+            {/* Theme toggle */}
+            <div className="pt-3 border-t border-[#F5F5F5] dark:border-[#252525]">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-[#737373]">Theme</span>
+                <button
+                  onClick={handleToggleTheme}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-xs font-medium text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
+                >
+                  {theme === "dark" ? "Dark" : theme === "light" ? "Light" : "System"}
+                  <RefreshCw className="h-3 w-3" strokeWidth={1.5} />
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 

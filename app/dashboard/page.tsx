@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth/options";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardHome from "@/components/dashboard/DashboardHome";
 
 export default async function DashboardPage() {
@@ -19,19 +18,9 @@ export default async function DashboardPage() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white dark:bg-[#191919]">
-      <DashboardSidebar
-        userName={user.name ?? null}
-        userEmail={user.email ?? null}
-        userImage={user.image ?? null}
-        userPlan={user.plan ?? "free"}
-      />
-      <main className="flex-1 overflow-y-auto">
-        <DashboardHome
-          userName={user.name ?? null}
-          userPlan={user.plan ?? "free"}
-        />
-      </main>
-    </div>
+    <DashboardHome
+      userName={user.name ?? null}
+      userPlan={user.plan ?? "free"}
+    />
   );
 }
