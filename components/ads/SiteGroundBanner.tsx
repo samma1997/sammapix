@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 type SiteGroundVariant = "web-hosting" | "wordpress" | "woocommerce";
 
 interface SiteGroundBannerProps {
@@ -32,6 +34,9 @@ export default function SiteGroundBanner({
   variant = "web-hosting",
   className = "",
 }: SiteGroundBannerProps) {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/dashboard")) return null;
+
   const banner = banners[variant];
 
   return (

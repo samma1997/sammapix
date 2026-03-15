@@ -18,6 +18,7 @@ import {
   Zap,
   CheckCircle2,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 
@@ -199,6 +200,10 @@ export default function NextStepSuggestions({
   currentTool,
   fileCount: fileCountProp,
 }: NextStepProps) {
+  const { data: session } = useSession();
+  const isPro =
+    (session?.user as { plan?: string } | undefined)?.plan === "pro";
+
   const items = useImageStore((s) => s.items);
 
   const doneCount = items.filter((i) => i.status === "done").length;
@@ -266,26 +271,28 @@ export default function NextStepSuggestions({
         })}
       </div>
 
-      {/* Pro workflow CTA — separator */}
-      <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-4">
-        <Link
-          href="/tools/workflow"
-          className={cn(
-            "inline-flex items-center gap-2",
-            "text-sm font-medium text-[#6366F1]",
-            "hover:text-[#4F46E5] transition-colors duration-150"
-          )}
-        >
-          <Zap className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
-          <span>
-            Or run all steps at once with{" "}
-            <span className="font-semibold">AI Workflow</span>
-            <span className="ml-1.5 inline-flex items-center text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded border border-[#6366F1]/30 bg-[#6366F1]/8 text-[#6366F1] dark:bg-[#6366F1]/15 dark:border-[#6366F1]/40">
-              Pro
+      {/* Pro workflow CTA — only shown to non-Pro users */}
+      {!isPro && (
+        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-4">
+          <Link
+            href="/tools/workflow"
+            className={cn(
+              "inline-flex items-center gap-2",
+              "text-sm font-medium text-[#6366F1]",
+              "hover:text-[#4F46E5] transition-colors duration-150"
+            )}
+          >
+            <Zap className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
+            <span>
+              Or run all steps at once with{" "}
+              <span className="font-semibold">AI Workflow</span>
+              <span className="ml-1.5 inline-flex items-center text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded border border-[#6366F1]/30 bg-[#6366F1]/8 text-[#6366F1] dark:bg-[#6366F1]/15 dark:border-[#6366F1]/40">
+                Pro
+              </span>
             </span>
-          </span>
-        </Link>
-      </div>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

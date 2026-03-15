@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 interface Step {
   title: string;
@@ -19,6 +22,15 @@ interface HowToUseProps {
 }
 
 export default function HowToUse({ steps, toolName, proTip }: HowToUseProps) {
+  const { data: session } = useSession();
+  const isPro =
+    (session?.user as { plan?: string } | undefined)?.plan === "pro";
+
+  // Hide pro-upgrade tips for Pro users (tips that link to /pricing)
+  const visibleProTip =
+    proTip && isPro && proTip.linkHref.includes("/pricing")
+      ? undefined
+      : proTip;
   return (
     <section className="py-10 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
       <div className="max-w-3xl mx-auto">
@@ -47,18 +59,18 @@ export default function HowToUse({ steps, toolName, proTip }: HowToUseProps) {
           ))}
         </div>
 
-        {proTip && (
+        {visibleProTip && (
           <div className="mt-4 flex items-start gap-3 px-4 py-3 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]">
             <span className="text-[11px] font-semibold text-[#A3A3A3] uppercase tracking-wide shrink-0 mt-0.5">
               Pro tip
             </span>
             <p className="text-xs text-[#737373] leading-relaxed">
-              {proTip.text}{" "}
+              {visibleProTip!.text}{" "}
               <Link
-                href={proTip.linkHref}
+                href={visibleProTip!.linkHref}
                 className="inline-flex items-center gap-0.5 text-[#6366F1] hover:underline font-medium"
               >
-                {proTip.linkLabel}
+                {visibleProTip!.linkLabel}
                 <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
               </Link>
             </p>

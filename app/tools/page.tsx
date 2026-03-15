@@ -354,6 +354,20 @@ export default function ToolsPage() {
         </div>
       </section>
 
+      {/* Tool grid */}
+      <section className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
+            All Tools
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {TOOLS.map((tool) => (
+              <ToolCard key={tool.name} tool={tool} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Quick Comparison Table */}
       <section className="py-12 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
@@ -434,20 +448,6 @@ export default function ToolsPage() {
           <p className="text-xs text-gray-500 dark:text-[#737373] mt-4">
             ✓ = Yes · ⚙ = API-powered (hybrid) · Free tier = Limited quota, Pro unlimited
           </p>
-        </div>
-      </section>
-
-      {/* Tool grid */}
-      <section className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
-            All Tools
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {TOOLS.map((tool) => (
-              <ToolCard key={tool.name} tool={tool} />
-            ))}
-          </div>
         </div>
       </section>
 

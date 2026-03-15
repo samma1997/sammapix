@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 interface AdUnitProps {
   adSlot: string;
@@ -19,6 +20,7 @@ export default function AdUnit({
   adFormat = "auto",
   className = "",
 }: AdUnitProps) {
+  const pathname = usePathname();
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -30,6 +32,9 @@ export default function AdUnit({
       // AdSense not loaded or blocked
     }
   }, []);
+
+  // Don't render in dashboard
+  if (pathname?.startsWith("/dashboard")) return null;
 
   // Don't render in development
   if (process.env.NODE_ENV !== "production") {

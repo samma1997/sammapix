@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +12,7 @@ import {
 } from "@/lib/adblock-detector";
 
 export default function AdBlockBanner() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function AdBlockBanner() {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!visible || pathname?.startsWith("/dashboard")) return null;
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-50 border-t border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] animate-slide-up">

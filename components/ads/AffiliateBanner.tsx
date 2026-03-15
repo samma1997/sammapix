@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { ExternalLink, Zap, Search, Palette, Image } from "lucide-react";
 
 type AffiliateVariant =
@@ -85,6 +86,9 @@ export default function AffiliateBanner({
   variant,
   className = "",
 }: AffiliateBannerProps) {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/dashboard")) return null;
+
   const ad = affiliates[variant];
 
   return (

@@ -254,60 +254,49 @@ export default function AboutPage() {
             The photos that inspired SammaPix — shot across Asia with the tools I built.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {allTrips.map((trip) => {
-              const hasRealImage = isCloudinaryUrl(trip.coverSrc);
-              const year = getTripYear(trip);
-
-              return (
-                <Link
-                  key={trip.slug}
-                  href={`/portfolio/${trip.slug}`}
-                  className="group block rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#D4D4D4] dark:hover:border-[#333] transition-colors"
+          {(() => {
+            const sriLanka = allTrips.find((t) => t.slug === "sri-lanka-2025");
+            if (!sriLanka) return null;
+            const year = getTripYear(sriLanka);
+            return (
+              <Link
+                href={`/portfolio/${sriLanka.slug}`}
+                className="group flex flex-col sm:flex-row rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#D4D4D4] dark:hover:border-[#333] transition-colors"
+              >
+                {/* Image — left column on sm+, full-width on mobile */}
+                <div
+                  className="relative w-full sm:w-64 shrink-0"
+                  style={{ aspectRatio: "4/3" }}
                 >
-                  {/* Image area — aspect ratio 3/2 */}
-                  <div className="relative w-full" style={{ aspectRatio: "3/2" }}>
-                    {hasRealImage ? (
-                      <Image
-                        src={trip.coverSrc}
-                        alt={`${trip.destination} travel photography by Luca Sammarco`}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                        className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                      />
-                    ) : (
-                      /* Gradient placeholder for picsum/non-Cloudinary covers */
-                      <div
-                        className="absolute inset-0 flex items-end"
-                        style={{
-                          background:
-                            trip.slug === "bali-2024"
-                              ? "linear-gradient(135deg, #7C9A6F 0%, #4A7A5A 50%, #2D5A3A 100%)"
-                              : trip.slug === "thailand-2024"
-                              ? "linear-gradient(135deg, #C4915A 0%, #A06B3A 50%, #7A4A1E 100%)"
-                              : trip.slug === "japan-2023"
-                              ? "linear-gradient(135deg, #C48A96 0%, #A05A6A 50%, #7A3A4A 100%)"
-                              : "linear-gradient(135deg, #7A8A9A 0%, #5A6A7A 50%, #3A4A5A 100%)",
-                        }}
-                      >
-                        <span className="sr-only">{trip.destination}</span>
-                      </div>
-                    )}
-                    {/* Overlay with destination name */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 flex items-end justify-between">
-                      <span className="text-sm font-semibold text-white leading-tight">
-                        {trip.destination}
-                      </span>
-                      <span className="text-xs text-white/70 font-medium">
-                        {year}
-                      </span>
-                    </div>
+                  <Image
+                    src={sriLanka.coverSrc}
+                    alt={`${sriLanka.destination} travel photography by Luca Sammarco`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 256px"
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </div>
+
+                {/* Text — right column */}
+                <div className="flex flex-col justify-center px-5 py-5 gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                      {sriLanka.destination}
+                    </span>
+                    <span className="text-xs text-[#A3A3A3] dark:text-[#737373] font-medium">
+                      {year}
+                    </span>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
+                  <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed line-clamp-3">
+                    {sriLanka.excerpt}
+                  </p>
+                  <span className="text-xs font-medium text-[#6366F1] group-hover:underline mt-1">
+                    View portfolio →
+                  </span>
+                </div>
+              </Link>
+            );
+          })()}
         </section>
 
       </main>

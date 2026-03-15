@@ -91,6 +91,7 @@ export default function DashboardSidebar({
 
   const recommendedNames = persona ? PERSONA_RECOMMENDED[persona] : [];
   const recommendedTools = ALL_TOOLS.filter((t) => recommendedNames.includes(t.name));
+  const otherTools = ALL_TOOLS.filter((t) => !recommendedNames.includes(t.name));
 
   const firstName = userName?.split(" ")[0] ?? "there";
 
@@ -201,12 +202,12 @@ export default function DashboardSidebar({
           </div>
         )}
 
-        {/* All tools */}
+        {/* Other tools */}
         <div className="pt-3">
           <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
-            All Tools
+            {recommendedTools.length > 0 ? "Other Tools" : "All Tools"}
           </p>
-          {ALL_TOOLS.map((tool) => (
+          {(recommendedTools.length > 0 ? otherTools : ALL_TOOLS).map((tool) => (
             <Link
               key={tool.name}
               href={tool.href}
@@ -226,19 +227,6 @@ export default function DashboardSidebar({
 
         {/* Divider */}
         <div className="pt-3 border-t border-[#E5E5E5] dark:border-[#2A2A2A] mt-3">
-          <Link
-            href="/dashboard/settings"
-            onClick={() => setMobileOpen(false)}
-            className={[
-              "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
-              pathname === "/dashboard/settings"
-                ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
-                : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
-            ].join(" ")}
-          >
-            <Settings className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-            Settings
-          </Link>
           <Link
             href="/dashboard/settings"
             onClick={() => setMobileOpen(false)}
@@ -269,8 +257,25 @@ export default function DashboardSidebar({
         )}
       </nav>
 
-      {/* User footer */}
-      <div className="shrink-0 px-3 py-3 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+      {/* Theme toggle + User footer */}
+      <div className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <button
+          onClick={() => {
+            const isDark = document.documentElement.classList.contains("dark");
+            if (isDark) {
+              document.documentElement.classList.remove("dark");
+              localStorage.setItem("theme", "light");
+            } else {
+              document.documentElement.classList.add("dark");
+              localStorage.setItem("theme", "dark");
+            }
+          }}
+          className="w-full flex items-center gap-2.5 px-5 py-2 text-xs text-[#737373] dark:text-[#525252] hover:text-[#525252] dark:hover:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          Toggle theme
+        </button>
+        <div className="px-3 py-3 border-t border-[#F5F5F5] dark:border-[#252525]">
         <div className="flex items-center gap-2.5">
           {userImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -300,6 +305,7 @@ export default function DashboardSidebar({
           >
             {isPro ? "PRO" : "Free"}
           </span>
+        </div>
         </div>
       </div>
     </div>
