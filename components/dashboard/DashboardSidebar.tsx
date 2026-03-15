@@ -26,6 +26,7 @@ import {
   Menu,
   X,
   ArrowRight,
+  Coins,
 } from "lucide-react";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
 
@@ -175,6 +176,21 @@ export default function DashboardSidebar({
         >
           <Zap className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           AI Workflow
+        </Link>
+
+        {/* Credits */}
+        <Link
+          href="/dashboard/credits"
+          onClick={() => setMobileOpen(false)}
+          className={[
+            "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
+            pathname === "/dashboard/credits"
+              ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
+              : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
+          ].join(" ")}
+        >
+          <Coins className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+          Credits
         </Link>
 
         {/* Recommended tools */}

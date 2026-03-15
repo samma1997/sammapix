@@ -78,7 +78,7 @@ const IconVideoThumb: React.FC<{ accent: string }> = ({ accent }) => (
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Category = "All" | "Optimize" | "AI" | "Organize" | "Edit" | "Pro";
+type Category = "All" | "Optimize" | "AI" | "Organize" | "Edit";
 
 interface ToolWithCategory extends ToolCardData {
   category: Category[];
@@ -227,7 +227,7 @@ const TOOLS: ToolWithCategory[] = [
 
 // ─── Category tabs config ─────────────────────────────────────────────────────
 
-const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Organize", "Edit", "Pro"];
+const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Organize", "Edit"];
 
 // ─── Use cases ────────────────────────────────────────────────────────────────
 

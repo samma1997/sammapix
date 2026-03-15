@@ -5,6 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GEMINI_MODEL, AI_ALT_TEXT_FREE_PER_DAY, AI_ALT_TEXT_PRO_PER_DAY } from "@/lib/constants";
 import { z } from "zod";
 import { incrWithTTL, getInt } from "@/lib/redis";
+import { getCreditBalance, deductCredit } from "@/lib/credits";
 
 // ── Request schema ────────────────────────────────────────────────────────────
 
@@ -125,25 +126,44 @@ export async function POST(req: NextRequest) {
 
   // 5. Rate limit check — BEFORE calling Gemini
   const rateCheck = await checkAndIncrement(email, dailyLimit);
+
+  // 5a. If daily limit exceeded, attempt credit deduction instead of blocking
+  let creditsUsed = 0;
+  let creditsRemaining = 0;
+
   if (!rateCheck.allowed) {
-    return NextResponse.json(
-      {
-        error: "Daily limit reached",
-        code: "DAILY_LIMIT_REACHED",
-        remaining: 0,
-        limit: dailyLimit,
-        resetAt: "midnight UTC",
-      },
-      {
-        status: 429,
-        headers: {
-          "X-RateLimit-Limit": String(dailyLimit),
-          "X-RateLimit-Remaining": "0",
-          "X-RateLimit-Reset": "daily-utc-midnight",
-          "Retry-After": "86400",
+    const creditResult = await deductCredit(email, 1);
+
+    if (!creditResult.success) {
+      // No daily quota left AND no credits — block the request
+      return NextResponse.json(
+        {
+          error: "Daily limit reached. Buy credits for more AI operations.",
+          code: "RATE_LIMITED",
+          remaining: 0,
+          limit: dailyLimit,
+          resetAt: "midnight UTC",
+          buyCreditsUrl: "/dashboard/credits",
+          creditsRemaining: 0,
         },
-      }
-    );
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": String(dailyLimit),
+            "X-RateLimit-Remaining": "0",
+            "X-RateLimit-Reset": "daily-utc-midnight",
+            "Retry-After": "86400",
+          },
+        }
+      );
+    }
+
+    // Credit deducted successfully — proceed with the AI operation
+    creditsUsed = 1;
+    creditsRemaining = creditResult.remaining;
+  } else {
+    // Within daily limit — fetch current credit balance to include in response
+    creditsRemaining = await getCreditBalance(email);
   }
 
   // 6. Resize to max 512px before sending to Gemini
@@ -179,14 +199,16 @@ export async function POST(req: NextRequest) {
         data: {
           altText: altText || "Image description not available",
         },
-        remaining: rateCheck.remaining,
+        remaining: rateCheck.allowed ? rateCheck.remaining : 0,
         limit: dailyLimit,
         plan: isPro ? "pro" : "free",
+        ...(creditsUsed > 0 && { creditsUsed }),
+        creditsRemaining,
       },
       {
         headers: {
           "X-RateLimit-Limit": String(dailyLimit),
-          "X-RateLimit-Remaining": String(rateCheck.remaining),
+          "X-RateLimit-Remaining": String(rateCheck.allowed ? rateCheck.remaining : 0),
           "X-RateLimit-Reset": "daily-utc-midnight",
         },
       }

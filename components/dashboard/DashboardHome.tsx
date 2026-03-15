@@ -23,6 +23,7 @@ import {
   Share2,
   Download,
   X,
+  Coins,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
@@ -363,6 +364,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const [persona, setPersona] = useState<Persona | null>(null);
   const [personaSkipped, setPersonaSkipped] = useState(false);
   const [usage, setUsage] = useState<DailyUsage>({ aiRename: 0, altText: 0, workflow: 0 });
+  const [creditBalance, setCreditBalance] = useState<number | null>(null);
   const [showPersonaSurvey, setShowPersonaSurvey] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
@@ -387,6 +389,14 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     setUsage(readUsage());
     const dismissed = localStorage.getItem(LS_INSTALL_DISMISSED_KEY);
     if (!dismissed) setShowInstallBanner(true);
+
+    // Fetch credit balance
+    fetch("/api/credits/balance")
+      .then((r) => r.json())
+      .then((data: { credits?: number }) => {
+        setCreditBalance(data.credits ?? 0);
+      })
+      .catch(() => setCreditBalance(0));
   }, [loadPersona]);
 
   function handlePersonaSelect(p: Persona) {
@@ -576,6 +586,33 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
           <UsageBar label="AI Rename" used={usage.aiRename} max={5} unlimited={isPro} />
           <UsageBar label="AI Alt Text" used={usage.altText} max={5} unlimited={isPro} />
           <UsageBar label="AI Workflows" used={usage.workflow} max={3} unlimited={isPro} />
+
+          {/* Credit balance row */}
+          <div className="pt-1 border-t border-[#F5F5F5] dark:border-[#252525]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Coins className="h-3.5 w-3.5 text-[#A3A3A3]" strokeWidth={1.5} />
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">Credits</span>
+              </div>
+              {creditBalance === null ? (
+                <span className="text-xs text-[#A3A3A3]">…</span>
+              ) : creditBalance === 0 ? (
+                <Link
+                  href="/dashboard/credits"
+                  className="text-xs text-[#6366F1] hover:underline underline-offset-2"
+                >
+                  Buy credits
+                </Link>
+              ) : (
+                <Link
+                  href="/dashboard/credits"
+                  className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] hover:text-[#6366F1] transition-colors"
+                >
+                  {creditBalance.toLocaleString()} remaining
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -631,9 +668,13 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                   Start 30-day free trial
                   <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
                 </Link>
-                <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">
-                  $7/mo — cancel anytime
-                </span>
+                <Link
+                  href="/dashboard/credits"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] text-sm font-medium rounded-md hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
+                >
+                  <Coins className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  Buy credits for more AI
+                </Link>
               </div>
             </div>
           </div>
