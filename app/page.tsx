@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
-import OnboardingController from "@/components/onboarding/OnboardingController";
 import {
   ToolCard,
   type ToolCardData,
@@ -290,9 +289,6 @@ export default function HomePage() {
 
       {/* Hero */}
       <HeroSection />
-
-      {/* ── Onboarding modal + personalized tools (client-only) ── */}
-      <OnboardingController />
 
       {/* ── 1. AI Workflow Pipeline ── */}
       <section className="py-14 px-4 sm:px-6 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
