@@ -1,90 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  ToolCard,
-  type ToolCardData,
-  IconCompress,
-  IconWebP,
-  IconAIRename,
-  IconEXIF,
-  IconFilmLab,
-  IconStampIt,
-  IconCropRatio,
-  IconTwinHunt,
-  IconGeoSort,
-  IconTravelMap,
-  IconResizePack,
-  IconCull,
-  IconHEIC,
-} from "@/components/ui/ToolCard";
+import { ToolsPageClient } from "@/components/tools/ToolsPageClient";
 
-// ─── Local icons for new tools (not modifying ToolCard.tsx) ──────────────────
-
-const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes alt-pulse {
-        0%, 100% { opacity: 0.5; transform: scale(0.95); }
-        50%       { opacity: 1; transform: scale(1); }
-      }
-      @keyframes alt-type {
-        0%, 30%  { width: 0px; }
-        70%, 100%{ width: 20px; }
-      }
-      .alt-img  { transform-origin: 13px 20px; animation: alt-pulse 2s ease-in-out infinite; }
-      .alt-cursor { animation: alt-pulse 0.9s step-end infinite; }
-    `}</style>
-    {/* Image icon */}
-    <g className="alt-img">
-      <rect x="2" y="8" width="22" height="18" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <circle cx="8" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
-      <path d="M2 22 L9 16 L14 20 L18 16 L24 22" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
-    </g>
-    {/* alt="" tag */}
-    <rect x="4" y="30" width="40" height="12" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <text x="9" y="39" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace">alt=</text>
-    <rect x="26" y="33" width="13" height="6" rx="1" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="0.75"/>
-    <rect className="alt-cursor" x="27" y="34.5" width="1.25" height="3" rx="0.5" fill={accent}/>
-  </svg>
-);
-
-const IconVideoThumb: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes vt-scan {
-        0%, 100% { transform: translateX(0px); }
-        50%       { transform: translateX(16px); }
-      }
-      @keyframes vt-play {
-        0%, 60%  { transform: scale(0.8); opacity: 0.5; }
-        80%, 100%{ transform: scale(1); opacity: 1; }
-      }
-      .vt-scan { animation: vt-scan 2.4s ease-in-out infinite; }
-      .vt-play { transform-origin: 14px 20px; animation: vt-play 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
-    `}</style>
-    {/* Film strip */}
-    <rect x="2" y="10" width="44" height="22" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    {[5, 13, 21, 29, 37].map((x) => (
-      <React.Fragment key={x}>
-        <rect x={x} y="12" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
-        <rect x={x} y="26" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
-      </React.Fragment>
-    ))}
-    {/* Current frame highlight */}
-    <rect x="6" y="17" width="12" height="8" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
-    {/* Play triangle */}
-    <g className="vt-play">
-      <path d="M11 18.5 L11 23.5 L16 21 Z" fill={accent}/>
-    </g>
-    {/* Scan line */}
-    <g className="vt-scan">
-      <line x1="19" y1="10" x2="19" y2="32" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeOpacity="0.7"/>
-    </g>
-    {/* Download arrow */}
-    <path d="M34 36 L34 44 M30 40 L34 44 L38 40" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
+// ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
   title: "15 Free Image & Video Tools for Photographers & Developers | SammaPix",
@@ -123,140 +41,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ─── Tool data ────────────────────────────────────────────────────────────────
-
-const TOOLS: ToolCardData[] = [
-  {
-    name: "Compress",
-    href: "/tools/compress",
-    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
-    accent: "#6366F1",
-    badges: ["100% Free", "No Signup", "Browser-only"],
-    Icon: IconCompress,
-  },
-  {
-    name: "WebP",
-    href: "/tools/webp",
-    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
-    accent: "#10B981",
-    badges: ["100% Free", "Browser-only"],
-    Icon: IconWebP,
-  },
-  {
-    name: "AI Rename",
-    href: "/tools/ai-rename",
-    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
-    accent: "#8B5CF6",
-    badges: ["Free", "AI-powered", "Gemini Flash"],
-    Icon: IconAIRename,
-  },
-  {
-    name: "HEIC Converter",
-    href: "/tools/heic",
-    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
-    accent: "#6366F1",
-    badges: ["100% Free", "iPhone", "Batch"],
-    Icon: IconHEIC,
-  },
-  {
-    name: "EXIF Lens",
-    href: "/tools/exif",
-    tagline: "Strip GPS, camera data and all metadata from photos.",
-    accent: "#EF4444",
-    badges: ["100% Free", "Privacy", "Browser-only"],
-    Icon: IconEXIF,
-  },
-  {
-    name: "FilmLab",
-    href: "/tools/filmlab",
-    tagline: "14 analog film presets — Kodak Gold, Fuji, Ilford and 8 Samma originals.",
-    accent: "#F59E0B",
-    badges: ["100% Free", "HEIC support"],
-    Icon: IconFilmLab,
-  },
-  {
-    name: "StampIt",
-    href: "/tools/stampit",
-    tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
-    accent: "#06B6D4",
-    badges: ["100% Free", "Batch"],
-    Icon: IconStampIt,
-  },
-  {
-    name: "CropRatio",
-    href: "/tools/croproatio",
-    tagline: "Crop to exact ratios — 1:1, 16:9, 4:3, A4 and more.",
-    accent: "#EC4899",
-    badges: ["100% Free", "Browser-only"],
-    Icon: IconCropRatio,
-  },
-  {
-    name: "TwinHunt",
-    href: "/tools/twinhunt",
-    tagline: "Perceptual hashing finds exact and near-duplicate photos.",
-    accent: "#F97316",
-    badges: ["100% Free", "pHash"],
-    Icon: IconTwinHunt,
-  },
-  {
-    name: "GeoSort",
-    href: "/tools/geosort",
-    tagline: "Sort photos by country using GPS EXIF data.",
-    accent: "#22C55E",
-    badges: ["100% Free", "HEIC", "GPS"],
-    Icon: IconGeoSort,
-  },
-  {
-    name: "TravelMap",
-    href: "/tools/travelmap",
-    tagline: "Generate an interactive map from your travel photos.",
-    accent: "#3B82F6",
-    badges: ["100% Free", "GPS"],
-    Icon: IconTravelMap,
-  },
-  {
-    name: "ResizePack",
-    href: "/tools/resizepack",
-    tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
-    accent: "#14B8A6",
-    badges: ["100% Free", "Social presets"],
-    Icon: IconResizePack,
-  },
-  {
-    name: "Cull",
-    href: "/tools/cull",
-    tagline: "Rate and cull a shoot in minutes. Star rating system.",
-    accent: "#F43F5E",
-    badges: ["100% Free", "HEIC"],
-    Icon: IconCull,
-  },
-  {
-    name: "AI Alt Text",
-    href: "/tools/alt-text",
-    tagline: "Generate accessibility-compliant alt text for images using Gemini AI.",
-    accent: "#8B5CF6",
-    badges: ["Free", "AI-powered", "Gemini Flash"],
-    Icon: IconAltText,
-  },
-  {
-    name: "Video Thumbnail",
-    href: "/tools/video-thumb",
-    tagline: "Extract the best frame from any video. Browse frames, AI picks the best.",
-    accent: "#0EA5E9",
-    badges: ["100% Free", "Browser-only", "MP4"],
-    Icon: IconVideoThumb,
-  },
-];
-
-// ─── Trust items ──────────────────────────────────────────────────────────────
-
-const TRUST_ITEMS = [
-  "Images never leave your browser",
-  "No account required for core tools",
-  "Works on mobile, tablet, desktop",
-  "HEIC supported everywhere",
-];
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ToolsPage() {
@@ -287,11 +71,7 @@ export default function ToolsPage() {
             url: "https://sammapix.com/tools/compress",
             description: "Compress JPG, PNG, WebP, GIF up to 80-90% smaller without quality loss",
             applicationCategory: "PhotographyApplication",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           },
           {
             "@type": "SoftwareApplication",
@@ -300,11 +80,7 @@ export default function ToolsPage() {
             url: "https://sammapix.com/tools/webp",
             description: "Convert images to WebP format, 25-34% smaller than JPEG",
             applicationCategory: "PhotographyApplication",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           },
           {
             "@type": "SoftwareApplication",
@@ -313,11 +89,7 @@ export default function ToolsPage() {
             url: "https://sammapix.com/tools/ai-rename",
             description: "AI-generated SEO-optimized filenames and alt text using Gemini Flash",
             applicationCategory: "PhotographyApplication",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           },
         ],
       },
@@ -333,42 +105,23 @@ export default function ToolsPage() {
 
       {/* Hero */}
       <section className="border-b border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
           <p className="text-xs font-medium text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-4">
             Image Tools
           </p>
           <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-tight mb-3 max-w-xl">
-            Every tool you need. All free. No account required.
+            Find the right tool
           </h1>
-          <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed mb-6">
-            15 browser-based image tools — nothing uploaded, nothing stored. Works on any device.
+          <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
+            15 free browser-based tools. No uploads, no signup needed.
           </p>
-          <div className="flex flex-wrap gap-x-5 gap-y-2">
-            {["15 tools", "100% free", "Works offline"].map((stat) => (
-              <span key={stat} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-[#737373]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1] inline-block" aria-hidden="true" />
-                {stat}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Tool grid */}
-      <section className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
-            All Tools
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {TOOLS.map((tool) => (
-              <ToolCard key={tool.name} tool={tool} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Client component: search, tabs, grid, use cases, trust */}
+      <ToolsPageClient />
 
-      {/* Quick Comparison Table */}
+      {/* Comparison table — at very bottom */}
       <section className="py-12 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
@@ -386,62 +139,31 @@ export default function ToolsPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">Compress</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Reduce file size JPG, PNG, WebP, GIF</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">WebP</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Convert to modern WebP format</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">AI Rename</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Generate SEO filenames + alt text</td>
-                  <td className="py-3 px-2 text-center text-green-600">Free tier</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-orange-600">⚙</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">EXIF Lens</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Remove GPS + metadata from photos</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">ResizePack</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Resize for Instagram, Twitter, LinkedIn</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">FilmLab</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">14 analog film presets for photos</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">AI Alt Text</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Generate accessibility alt text with AI</td>
-                  <td className="py-3 px-2 text-center text-green-600">Free tier</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-orange-600">⚙</td>
-                </tr>
-                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
-                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">Video Thumbnail</td>
-                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Extract best frame from video files</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                  <td className="py-3 px-2 text-center text-green-600">✓</td>
-                </tr>
+                {[
+                  { name: "Compress",        fn: "Reduce file size JPG, PNG, WebP, GIF",   free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "WebP",            fn: "Convert to modern WebP format",           free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "AI Rename",       fn: "Generate SEO filenames + alt text",       free: "Free tier", batch: "✓", browser: "⚙" },
+                  { name: "EXIF Lens",       fn: "Remove GPS + metadata from photos",       free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "ResizePack",      fn: "Resize for Instagram, Twitter, LinkedIn", free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "FilmLab",         fn: "14 analog film presets for photos",       free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "AI Alt Text",     fn: "Generate accessibility alt text with AI", free: "Free tier", batch: "✓", browser: "⚙" },
+                  { name: "Video Thumbnail", fn: "Extract best frame from video files",     free: "✓",         batch: "✓", browser: "✓" },
+                ].map((row) => (
+                  <tr
+                    key={row.name}
+                    className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors"
+                  >
+                    <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">{row.name}</td>
+                    <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">{row.fn}</td>
+                    <td className={`py-3 px-2 text-center ${row.free === "✓" ? "text-green-600" : "text-gray-500 dark:text-[#737373] text-xs"}`}>
+                      {row.free}
+                    </td>
+                    <td className="py-3 px-2 text-center text-green-600">{row.batch}</td>
+                    <td className={`py-3 px-2 text-center ${row.browser === "✓" ? "text-green-600" : "text-orange-500"}`}>
+                      {row.browser}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -450,247 +172,6 @@ export default function ToolsPage() {
           </p>
         </div>
       </section>
-
-      {/* Trust section */}
-      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919] py-10 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3" role="list">
-            {TRUST_ITEMS.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-[#A3A3A3]">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="flex-shrink-0">
-                  <circle cx="8" cy="8" r="7.5" fill="#D1FAE5" stroke="#6EE7B7" strokeWidth="0.5"/>
-                  <path d="M5 8 L7 10 L11 6" stroke="#059669" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Quick Convert section */}
-      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E] py-12 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-              Quick Convert
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
-              One-click conversion utilities for popular image formats.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <Link
-              href="/convert/heic-to-jpg"
-              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                HEIC to JPG
-              </h3>
-            </Link>
-
-            <Link
-              href="/convert/heic-to-png"
-              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                HEIC to PNG
-              </h3>
-            </Link>
-
-            <Link
-              href="/convert/png-to-webp"
-              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                PNG to WebP
-              </h3>
-            </Link>
-
-            <Link
-              href="/convert/png-to-jpg"
-              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                PNG to JPG
-              </h3>
-            </Link>
-
-            <Link
-              href="/convert/jpg-to-webp"
-              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                JPG to WebP
-              </h3>
-            </Link>
-
-            <Link
-              href="/convert/webp-to-jpg"
-              className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                WebP to JPG
-              </h3>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Resize for Social Media section */}
-      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] py-12 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-              Resize for Social Media
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
-              Quick resize utilities optimized for popular social platforms.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <Link
-              href="/resize/instagram"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Instagram
-              </h3>
-            </Link>
-
-            <Link
-              href="/resize/facebook"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Facebook
-              </h3>
-            </Link>
-
-            <Link
-              href="/resize/twitter"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Twitter
-              </h3>
-            </Link>
-
-            <Link
-              href="/resize/tiktok"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                TikTok
-              </h3>
-            </Link>
-
-            <Link
-              href="/resize/youtube-thumbnail"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                YouTube Thumbnail
-              </h3>
-            </Link>
-
-            <Link
-              href="/resize/linkedin"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                LinkedIn
-              </h3>
-            </Link>
-
-            <Link
-              href="/resize/pinterest"
-              className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Pinterest
-              </h3>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog guides section */}
-      <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919] py-12 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-              Learn & Master Image Optimization
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-[#A3A3A3]">
-              Read guides on image compression, SEO, format conversion, and photography workflows.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            <Link
-              href="/blog/compress-images-without-losing-quality"
-              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
-                Compression
-              </span>
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Compress Images Without Quality Loss
-              </h3>
-            </Link>
-
-            <Link
-              href="/blog/ai-image-renaming-seo-guide"
-              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
-                SEO
-              </span>
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                AI Image Renaming for SEO
-              </h3>
-            </Link>
-
-            <Link
-              href="/blog/iphone-heic-to-jpg-guide"
-              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
-                FORMAT CONVERSION
-              </span>
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Convert HEIC to JPG Free
-              </h3>
-            </Link>
-
-            <Link
-              href="/blog/image-sizes-social-media-2026"
-              className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
-            >
-              <span className="text-[10px] font-medium uppercase tracking-wide text-[#737373] dark:text-[#A3A3A3] mb-2 inline-block">
-                SOCIAL MEDIA
-              </span>
-              <h3 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                Image Sizes for Social Media 2026
-              </h3>
-            </Link>
-          </div>
-
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#6366F1] hover:text-[#6366F1] opacity-80 hover:opacity-100 transition-opacity"
-          >
-            View all articles
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
-        </div>
-      </section>
-
     </div>
   );
 }
