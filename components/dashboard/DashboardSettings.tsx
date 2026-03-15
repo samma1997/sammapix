@@ -12,11 +12,82 @@ import {
   Shield,
   Palette,
   RefreshCw,
+  BarChart2,
+  Coins,
 } from "lucide-react";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
 
 const LS_PERSONA_KEY = "sammapix-persona";
 const LS_THEME_KEY = "theme";
+
+// ─── Usage tracking ───────────────────────────────────────────────────────────
+
+interface DailyUsage {
+  aiRename: number;
+  altText: number;
+  workflow: number;
+}
+
+function getTodayKey() {
+  return `sammapix-usage-${new Date().toISOString().slice(0, 10)}`;
+}
+
+function readUsage(): DailyUsage {
+  if (typeof window === "undefined") return { aiRename: 0, altText: 0, workflow: 0 };
+  try {
+    const raw = localStorage.getItem(getTodayKey());
+    if (!raw) return { aiRename: 0, altText: 0, workflow: 0 };
+    return JSON.parse(raw) as DailyUsage;
+  } catch {
+    return { aiRename: 0, altText: 0, workflow: 0 };
+  }
+}
+
+// ─── UsageBar sub-component ───────────────────────────────────────────────────
+
+function UsageBar({
+  label,
+  used,
+  max,
+  unlimited,
+}: {
+  label: string;
+  used: number;
+  max: number;
+  unlimited: boolean;
+}) {
+  const pct = unlimited ? 0 : Math.min(100, (used / max) * 100);
+  const isAtLimit = !unlimited && used >= max;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">{label}</span>
+        {unlimited ? (
+          <span className="text-xs text-[#6366F1] font-medium">Unlimited</span>
+        ) : (
+          <span
+            className={`text-xs font-medium ${
+              isAtLimit ? "text-[#DC2626]" : "text-[#737373] dark:text-[#A3A3A3]"
+            }`}
+          >
+            {used}/{max}
+          </span>
+        )}
+      </div>
+      {!unlimited && (
+        <div className="h-1.5 bg-[#F5F5F5] dark:bg-[#2A2A2A] rounded-full overflow-hidden">
+          <div
+            className={`h-full rounded-full transition-all duration-300 ${
+              isAtLimit ? "bg-[#DC2626]" : "bg-[#171717] dark:bg-[#E5E5E5]"
+            }`}
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 const PERSONA_LABELS: Record<Persona, string> = {
   photographer: "Photographer",
@@ -45,6 +116,8 @@ export default function DashboardSettings({
   const [theme, setTheme] = useState<string | null>(null);
   const [portalLoading, setPortalLoading] = useState(false);
   const [portalError, setPortalError] = useState<string | null>(null);
+  const [usage, setUsage] = useState<DailyUsage>({ aiRename: 0, altText: 0, workflow: 0 });
+  const [creditBalance, setCreditBalance] = useState<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -52,6 +125,14 @@ export default function DashboardSettings({
     setPersona(storedPersona);
     const storedTheme = localStorage.getItem(LS_THEME_KEY);
     setTheme(storedTheme ?? "system");
+    setUsage(readUsage());
+
+    fetch("/api/credits/balance")
+      .then((r) => r.json())
+      .then((data: { credits?: number }) => {
+        setCreditBalance(data.credits ?? 0);
+      })
+      .catch(() => setCreditBalance(0));
   }, []);
 
   const [showPersonaSelect, setShowPersonaSelect] = useState(false);
@@ -233,7 +314,50 @@ export default function DashboardSettings({
           </div>
         </section>
 
-        {/* ── Section 3: Persona / Preferences ──────────────────── */}
+        {/* ── Section 3: Usage ───────────────────────────────────── */}
+        <section className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
+          <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <BarChart2 className="h-4 w-4 text-[#525252]" strokeWidth={1.5} />
+            <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+              Usage today
+            </h2>
+          </div>
+
+          <div className="px-5 py-4 space-y-4">
+            <UsageBar label="AI Rename" used={usage.aiRename} max={5} unlimited={isPro} />
+            <UsageBar label="AI Alt Text" used={usage.altText} max={5} unlimited={isPro} />
+            <UsageBar label="AI Workflows" used={usage.workflow} max={3} unlimited={isPro} />
+
+            {/* Credit balance row */}
+            <div className="pt-1 border-t border-[#F5F5F5] dark:border-[#252525]">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Coins className="h-3.5 w-3.5 text-[#A3A3A3]" strokeWidth={1.5} />
+                  <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">Credits</span>
+                </div>
+                {creditBalance === null ? (
+                  <span className="text-xs text-[#A3A3A3]">…</span>
+                ) : creditBalance === 0 ? (
+                  <Link
+                    href="/dashboard/credits"
+                    className="text-xs text-[#6366F1] hover:underline underline-offset-2"
+                  >
+                    Buy credits
+                  </Link>
+                ) : (
+                  <Link
+                    href="/dashboard/credits"
+                    className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] hover:text-[#6366F1] transition-colors"
+                  >
+                    {creditBalance.toLocaleString()} remaining
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Section 5: Persona / Preferences ──────────────────── */}
         <section className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
           <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
             <Palette className="h-4 w-4 text-[#525252]" strokeWidth={1.5} />
@@ -326,7 +450,7 @@ export default function DashboardSettings({
           </div>
         </section>
 
-        {/* ── Section 5: Sign Out ────────────────────────────────── */}
+        {/* ── Section 6: Sign Out ────────────────────────────────── */}
         <section className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
           <div className="px-5 py-4">
             <button
