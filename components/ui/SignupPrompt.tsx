@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { X } from "lucide-react";
 
@@ -11,9 +12,12 @@ const SHOW_DELAY_MS = 30_000; // 30 seconds
 
 export default function SignupPrompt() {
   const { status } = useSession();
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // Never show inside the dashboard (it has its own layout)
+    if (pathname.startsWith("/dashboard")) return;
     // Only run for unauthenticated users
     if (status === "loading" || status === "authenticated") return;
 
@@ -32,7 +36,7 @@ export default function SignupPrompt() {
 
     const timer = setTimeout(() => setVisible(true), SHOW_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [status]);
+  }, [status, pathname]);
 
   function dismiss() {
     setVisible(false);

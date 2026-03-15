@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
@@ -50,9 +51,12 @@ export function recordLimitHit(): void {
 
 export default function SmartTrialPrompt() {
   const { data: session, status } = useSession();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const checkShouldShow = useCallback(() => {
+    // Never show inside the dashboard
+    if (pathname.startsWith("/dashboard")) return;
     if (status !== "authenticated") return;
     const typedSession = session as UserSession | null;
     if (typedSession?.user?.plan !== "free") return;
@@ -60,7 +64,7 @@ export default function SmartTrialPrompt() {
     if (getLimitHits() >= HITS_THRESHOLD) {
       setOpen(true);
     }
-  }, [status, session]);
+  }, [status, session, pathname]);
 
   useEffect(() => {
     checkShouldShow();
