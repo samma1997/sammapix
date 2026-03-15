@@ -147,7 +147,7 @@ export default function AboutPage() {
                 Free forever
               </p>
               <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-                All 13 core tools are free and always will be. No bait and switch. No "free trial" that expires. Pro exists for photographers who need bigger batches and the AI pipeline — not because we&apos;re holding basic features hostage.
+                All 15 core tools are free and always will be. No bait and switch. No "free trial" that expires. Pro exists for photographers who need bigger batches and the AI pipeline — not because we&apos;re holding basic features hostage.
               </p>
             </div>
             <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">

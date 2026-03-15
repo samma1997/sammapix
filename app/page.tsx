@@ -26,7 +26,7 @@ import {
 export const metadata = {
   title: "SammaPix — AI Photo Workflow Platform for Content Creators",
   description:
-    "Compress, rename with AI, resize, convert — all in one pipeline. 13 free browser-based tools. No uploads. No account needed. HEIC support included.",
+    "Compress, rename with AI, resize, convert — all in one pipeline. 15 free browser-based tools. No uploads. No account needed. HEIC support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -42,7 +42,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix — AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert — all in one pipeline. 13 free tools. No uploads.",
+      "Compress, rename with AI, resize, convert — all in one pipeline. 15 free tools. No uploads.",
     url: "https://sammapix.com",
     type: "website",
     images: [
@@ -180,7 +180,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is SammaPix completely free?",
     answer:
-      "Yes. All 13 tools are free forever — compress, convert, resize, rename and more. Pro unlocks the AI Workflow pipeline and removes limits. No signup required for free tools.",
+      "Yes. All 15 tools are free forever — compress, convert, resize, rename and more. Pro unlocks the AI Workflow pipeline and removes limits. No signup required for free tools.",
   },
   {
     question: "Do my images get uploaded to a server?",
@@ -200,7 +200,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Do I need to create an account?",
     answer:
-      "No account needed for 12 of 13 tools. AI Rename requires a free account to prevent Gemini API abuse. Pro plan requires an account.",
+      "No account needed for 13 of 15 tools. AI Rename requires a free account to prevent Gemini API abuse. Pro plan requires an account.",
   },
 ];
 
@@ -216,7 +216,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo workflow platform for content creators. 13 free browser-based tools.",
+          "AI-powered photo workflow platform for content creators. 15 free browser-based tools.",
         sameAs: [
           "https://twitter.com/lucasammarco",
           "https://github.com/lucasammarco",
@@ -347,7 +347,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-              13 Free Tools
+              15 Free Tools
             </h2>
             <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
               Browser-based — no uploads, no account required for the basics.
@@ -498,7 +498,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
           {[
             { value: "1.2M+", label: "Images optimized" },
-            { value: "13+", label: "Free tools" },
+            { value: "15", label: "Free tools" },
             { value: "100%", label: "Browser-based" },
             { value: "0", label: "Files uploaded to servers" },
           ].map((stat) => (
