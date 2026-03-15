@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import { Providers } from "./providers";
 import SignupPrompt from "@/components/ui/SignupPrompt";
 import SmartTrialPrompt from "@/components/ui/SmartTrialPrompt";
+import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
 import { APP_NAME, APP_URL } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -96,6 +97,7 @@ export default function RootLayout({
           <Footer />
           <SignupPrompt />
           <SmartTrialPrompt />
+          <PWAInstallPrompt />
         </Providers>
         {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
           <Script
