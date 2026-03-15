@@ -34,6 +34,8 @@ export default function PWAInstallPrompt() {
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
+      // Store globally so sidebar install button can access it
+      (window as any).__sammapix_install_prompt = e;
       setDismissed(false);
     };
 

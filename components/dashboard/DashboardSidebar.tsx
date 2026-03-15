@@ -255,6 +255,24 @@ export default function DashboardSidebar({
             </Link>
           </div>
         )}
+        {/* Install app */}
+        <div className="pt-1 pb-1">
+          <button
+            onClick={() => {
+              // Trigger PWA install if available, otherwise show instructions
+              const w = window as any;
+              if (w.__sammapix_install_prompt) {
+                w.__sammapix_install_prompt.prompt();
+              } else {
+                alert("To install: click the install icon in your browser address bar, or use Menu → Install SammaPix");
+              }
+            }}
+            className="flex items-center gap-2.5 px-2.5 py-1.5 w-full rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Install app
+          </button>
+        </div>
       </nav>
 
       {/* Theme toggle + User footer */}

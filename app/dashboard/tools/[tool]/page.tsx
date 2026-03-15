@@ -2,7 +2,6 @@
 
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import HowToUse from "@/components/tools/HowToUse";
 
@@ -285,25 +284,8 @@ export default function DashboardToolPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#191919]">
-      {/* Breadcrumb header */}
-      <div className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919] px-4 sm:px-6 py-3">
-        <div className="max-w-5xl mx-auto flex items-center gap-3">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-1.5 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
-            Dashboard
-          </Link>
-          <span className="text-[#D4D4D4] dark:text-[#404040]">/</span>
-          <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
-            {data.label}
-          </span>
-        </div>
-      </div>
-
       {/* Tool header */}
-      <div className="px-4 sm:px-6 py-6 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+      <div className="px-4 sm:px-6 pt-8 pb-6">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
             {data.label}
