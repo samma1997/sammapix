@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
+import { sendMetaEvent } from "@/lib/meta-conversions";
 
 export const runtime = "nodejs";
 
@@ -43,6 +44,15 @@ export async function POST(req: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       console.log("[stripe/webhook] ✅ New Pro subscription for:", session.customer_email);
       // Plan is detected via Stripe API at next login — no DB needed.
+
+      // Fire Meta Conversions API — Subscribe event
+      const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
+      sendMetaEvent({
+        eventName: "Subscribe",
+        sourceUrl: `${appUrl}/pricing?success=true`,
+        email: session.customer_email ?? undefined,
+        customData: { currency: "USD", value: 7.00 },
+      }).catch(() => {}); // fire-and-forget
       break;
     }
     case "customer.subscription.deleted":

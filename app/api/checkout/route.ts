@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
+import { sendMetaEvent } from "@/lib/meta-conversions";
 
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
@@ -43,6 +44,16 @@ export async function POST(req: NextRequest) {
         metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       },
     });
+
+    // Fire Meta Conversions API event server-side
+    sendMetaEvent({
+      eventName: "InitiateCheckout",
+      sourceUrl: `${appUrl}/try-pro`,
+      email: session.user.email,
+      ipAddress: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? undefined,
+      userAgent: req.headers.get("user-agent") ?? undefined,
+      customData: { currency: "USD", value: 7.00 },
+    }).catch(() => {}); // fire-and-forget
 
     return NextResponse.json({ url: checkoutSession.url });
   } catch (err) {
