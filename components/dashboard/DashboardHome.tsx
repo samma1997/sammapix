@@ -437,6 +437,9 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   // Build tool lists
   const recommendedNames = persona ? PERSONA_RECOMMENDED[persona] : [];
   const recommendedTools = ALL_TOOLS.filter((t) => recommendedNames.includes(t.name));
+  const otherTools = persona
+    ? ALL_TOOLS.filter((t) => !recommendedNames.includes(t.name))
+    : ALL_TOOLS;
 
   if (!mounted) {
     return (
@@ -593,11 +596,10 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       {/* ── SECTION 3: All Tools ── */}
       <section>
         <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
-          {persona ? "All Tools" : "Tools"}
+          {persona ? "Other Tools" : "Tools"}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {ALL_TOOLS.map((tool) => {
-            const isRecommended = recommendedNames.includes(tool.name);
+          {otherTools.map((tool) => {
             return (
               <Link
                 key={tool.name}
@@ -605,20 +607,12 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200 ${
-                    persona && !isRecommended ? "opacity-70 group-hover:opacity-100" : ""
-                  }`}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
                   style={{ backgroundColor: `${tool.accent}14` }}
                 >
                   <tool.Icon accent={tool.accent} />
                 </div>
-                <span
-                  className={`text-xs font-medium text-center leading-snug transition-colors ${
-                    persona && !isRecommended
-                      ? "text-[#737373] dark:text-[#737373] group-hover:text-[#171717] dark:group-hover:text-[#E5E5E5]"
-                      : "text-[#171717] dark:text-[#E5E5E5]"
-                  }`}
-                >
+                <span className="text-xs font-medium text-center leading-snug text-[#171717] dark:text-[#E5E5E5]">
                   {tool.name}
                 </span>
               </Link>
