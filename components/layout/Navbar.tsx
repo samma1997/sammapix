@@ -153,21 +153,19 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
           {status === "authenticated" && session ? (
-            <>
-              <Link
-                href="/account"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors"
-              >
-                {(session.user as { plan?: string })?.plan === "pro" && (
-                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded">
-                    PRO
-                  </span>
-                )}
-                {session.user?.name?.split(" ")[0]}
-              </Link>
-            </>
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors"
+            >
+              {(session.user as { plan?: string })?.plan === "pro" && (
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded">
+                  PRO
+                </span>
+              )}
+              Dashboard
+            </Link>
           ) : (
-            <Link href="/api/auth/signin">
+            <Link href="/auth/signin">
               <Button variant="ghost" size="sm">Sign in</Button>
             </Link>
           )}
@@ -209,17 +207,19 @@ export default function Navbar() {
 
             <div className="pt-2 border-t border-gray-100 dark:border-[#2A2A2A] mt-1 flex gap-2">
               {status === "authenticated" ? (
-                <Button variant="ghost" size="sm" className="w-full" onClick={() => { signOut(); setMobileOpen(false); }}>
-                  Sign out
-                </Button>
+                <Link href="/dashboard" className="flex-1" onClick={() => setMobileOpen(false)}>
+                  <Button variant="secondary" size="sm" className="w-full">Dashboard</Button>
+                </Link>
               ) : (
-                <Link href="/api/auth/signin" className="flex-1" onClick={() => setMobileOpen(false)}>
+                <Link href="/auth/signin" className="flex-1" onClick={() => setMobileOpen(false)}>
                   <Button variant="secondary" size="sm" className="w-full">Sign in</Button>
                 </Link>
               )}
-              <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
-                <Button variant="primary" size="sm" className="w-full">Get Pro →</Button>
-              </Link>
+              {(session?.user as { plan?: string } | undefined)?.plan !== "pro" && (
+                <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
+                  <Button variant="primary" size="sm" className="w-full">Get Pro →</Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

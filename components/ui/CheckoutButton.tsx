@@ -30,7 +30,7 @@ export default function CheckoutButton({
     }
 
     if (!session) {
-      router.push("/auth/signin");
+      router.push("/auth/signin?callbackUrl=/pricing");
       return;
     }
     setLoading(true);

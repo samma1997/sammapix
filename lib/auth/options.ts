@@ -36,6 +36,22 @@ export const authOptions: AuthOptions = {
       }
       return session;
     },
+    async redirect({ url, baseUrl }) {
+      // If the URL is the base or root, always redirect to /dashboard after sign-in
+      if (url === baseUrl || url === `${baseUrl}/`) {
+        return `${baseUrl}/dashboard`;
+      }
+      // Allow relative URLs (e.g., callbackUrl=/tools)
+      if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      }
+      // Allow same-origin redirects
+      if (url.startsWith(baseUrl)) {
+        return url;
+      }
+      // Default fallback: go to dashboard
+      return `${baseUrl}/dashboard`;
+    },
   },
   events: {
     async signIn({ user }) {

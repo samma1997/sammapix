@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { APP_URL } from "@/lib/constants";
+import { getAllTrips, type Trip } from "@/lib/destinations";
 
 export const metadata: Metadata = {
   title: "About SammaPix — Built by a photographer, for photographers",
@@ -34,7 +36,17 @@ export const metadata: Metadata = {
   },
 };
 
+function isCloudinaryUrl(url: string): boolean {
+  return url.includes("cloudinary.com");
+}
+
+function getTripYear(trip: Trip): string {
+  return trip.startDate.slice(0, 4);
+}
+
 export default function AboutPage() {
+  const allTrips = getAllTrips();
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -229,6 +241,73 @@ export default function AboutPage() {
           >
             Go Pro →
           </Link>
+        </section>
+
+        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mt-14 mb-14" />
+
+        {/* ── My Work ────────────────────────────────────────────────────── */}
+        <section className="mb-14">
+          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-2">
+            My Work
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-8">
+            The photos that inspired SammaPix — shot across Asia with the tools I built.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {allTrips.map((trip) => {
+              const hasRealImage = isCloudinaryUrl(trip.coverSrc);
+              const year = getTripYear(trip);
+
+              return (
+                <Link
+                  key={trip.slug}
+                  href={`/portfolio/${trip.slug}`}
+                  className="group block rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#D4D4D4] dark:hover:border-[#333] transition-colors"
+                >
+                  {/* Image area — aspect ratio 3/2 */}
+                  <div className="relative w-full" style={{ aspectRatio: "3/2" }}>
+                    {hasRealImage ? (
+                      <Image
+                        src={trip.coverSrc}
+                        alt={`${trip.destination} travel photography by Luca Sammarco`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                      />
+                    ) : (
+                      /* Gradient placeholder for picsum/non-Cloudinary covers */
+                      <div
+                        className="absolute inset-0 flex items-end"
+                        style={{
+                          background:
+                            trip.slug === "bali-2024"
+                              ? "linear-gradient(135deg, #7C9A6F 0%, #4A7A5A 50%, #2D5A3A 100%)"
+                              : trip.slug === "thailand-2024"
+                              ? "linear-gradient(135deg, #C4915A 0%, #A06B3A 50%, #7A4A1E 100%)"
+                              : trip.slug === "japan-2023"
+                              ? "linear-gradient(135deg, #C48A96 0%, #A05A6A 50%, #7A3A4A 100%)"
+                              : "linear-gradient(135deg, #7A8A9A 0%, #5A6A7A 50%, #3A4A5A 100%)",
+                        }}
+                      >
+                        <span className="sr-only">{trip.destination}</span>
+                      </div>
+                    )}
+                    {/* Overlay with destination name */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 flex items-end justify-between">
+                      <span className="text-sm font-semibold text-white leading-tight">
+                        {trip.destination}
+                      </span>
+                      <span className="text-xs text-white/70 font-medium">
+                        {year}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </section>
 
       </main>

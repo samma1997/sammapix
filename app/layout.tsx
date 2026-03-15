@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Providers } from "./providers";
+import SignupPrompt from "@/components/ui/SignupPrompt";
+import SmartTrialPrompt from "@/components/ui/SmartTrialPrompt";
 import { APP_NAME, APP_URL } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -92,6 +94,8 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <SignupPrompt />
+          <SmartTrialPrompt />
         </Providers>
         {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
           <Script

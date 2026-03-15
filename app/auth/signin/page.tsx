@@ -42,7 +42,7 @@ export default function SignInPage() {
   const handleSignIn = async (providerId: string) => {
     setLoading(providerId);
     try {
-      await signIn(providerId, { callbackUrl: "/" });
+      await signIn(providerId, { callbackUrl: "/dashboard" });
     } catch {
       setLoading(null);
     }
