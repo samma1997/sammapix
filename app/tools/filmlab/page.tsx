@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Shield, Layers, Archive, Film } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
-import FilmLab from "@/components/tools/FilmLab";
+import FilmLabClient from "@/components/tools/FilmLabClient";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -79,7 +80,31 @@ export default function FilmLabPage() {
         accentColor="#F59E0B"
       />
 
-      <FilmLab />
+      {/* Tool + Next Step suggestions */}
+      <FilmLabClient />
+
+      <HowToUse
+        toolName="FilmLab"
+        steps={[
+          {
+            title: "Drop your photos",
+            desc: "Upload JPG, PNG, WebP or HEIC photos — drag and drop or click to browse. Mix any format.",
+          },
+          {
+            title: "Choose a film preset",
+            desc: "Pick from 14 presets: Kodak Gold, Fuji Pro 400H, Ilford HP5, Cinematic Teal, and more. Fine-tune grain, vignette, fade and color with sliders.",
+          },
+          {
+            title: "Download with analog look",
+            desc: "Click 'Apply to all' to process your full batch, then download individually or as a ZIP.",
+          },
+        ]}
+        proTip={{
+          text: "Use the AI Workflow to apply film effects, compress and rename all your photos at once.",
+          linkLabel: "Try AI Workflow",
+          linkHref: "/tools/workflow",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

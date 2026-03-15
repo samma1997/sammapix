@@ -2,7 +2,8 @@ import React from "react";
 import type { Metadata } from "next";
 import { ArrowRight, TrendingUp, Shield, FileImage } from "lucide-react";
 import Link from "next/link";
-import ToolInterface from "@/components/tools/ToolInterface";
+import WebpClient from "@/components/tools/WebpClient";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -79,8 +80,31 @@ export default function WebpPage() {
         </p>
       </div>
 
-      {/* Tool */}
-      <ToolInterface defaultMode="webp" />
+      {/* Tool + Next Step suggestions */}
+      <WebpClient />
+
+      <HowToUse
+        toolName="WebP Converter"
+        steps={[
+          {
+            title: "Drop your images",
+            desc: "Drag and drop JPG, PNG or GIF files onto the upload area — or click to select them.",
+          },
+          {
+            title: "Files convert automatically",
+            desc: "Each file is converted to WebP instantly in your browser using the Canvas API. No settings needed.",
+          },
+          {
+            title: "Download WebP files",
+            desc: "Download each converted file individually or get them all in a single ZIP archive.",
+          },
+        ]}
+        proTip={{
+          text: "Compress your WebP files further with the Image Compressor to get the smallest possible size.",
+          linkLabel: "Compress images",
+          linkHref: "/tools/compress",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

@@ -19,16 +19,85 @@ import {
   IconHEIC,
 } from "@/components/ui/ToolCard";
 
+// ─── Local icons for new tools (not modifying ToolCard.tsx) ──────────────────
+
+const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes alt-pulse {
+        0%, 100% { opacity: 0.5; transform: scale(0.95); }
+        50%       { opacity: 1; transform: scale(1); }
+      }
+      @keyframes alt-type {
+        0%, 30%  { width: 0px; }
+        70%, 100%{ width: 20px; }
+      }
+      .alt-img  { transform-origin: 13px 20px; animation: alt-pulse 2s ease-in-out infinite; }
+      .alt-cursor { animation: alt-pulse 0.9s step-end infinite; }
+    `}</style>
+    {/* Image icon */}
+    <g className="alt-img">
+      <rect x="2" y="8" width="22" height="18" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="8" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M2 22 L9 16 L14 20 L18 16 L24 22" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* alt="" tag */}
+    <rect x="4" y="30" width="40" height="12" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="9" y="39" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace">alt=</text>
+    <rect x="26" y="33" width="13" height="6" rx="1" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="0.75"/>
+    <rect className="alt-cursor" x="27" y="34.5" width="1.25" height="3" rx="0.5" fill={accent}/>
+  </svg>
+);
+
+const IconVideoThumb: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes vt-scan {
+        0%, 100% { transform: translateX(0px); }
+        50%       { transform: translateX(16px); }
+      }
+      @keyframes vt-play {
+        0%, 60%  { transform: scale(0.8); opacity: 0.5; }
+        80%, 100%{ transform: scale(1); opacity: 1; }
+      }
+      .vt-scan { animation: vt-scan 2.4s ease-in-out infinite; }
+      .vt-play { transform-origin: 14px 20px; animation: vt-play 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Film strip */}
+    <rect x="2" y="10" width="44" height="22" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    {[5, 13, 21, 29, 37].map((x) => (
+      <React.Fragment key={x}>
+        <rect x={x} y="12" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
+        <rect x={x} y="26" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
+      </React.Fragment>
+    ))}
+    {/* Current frame highlight */}
+    <rect x="6" y="17" width="12" height="8" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+    {/* Play triangle */}
+    <g className="vt-play">
+      <path d="M11 18.5 L11 23.5 L16 21 Z" fill={accent}/>
+    </g>
+    {/* Scan line */}
+    <g className="vt-scan">
+      <line x1="19" y1="10" x2="19" y2="32" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeOpacity="0.7"/>
+    </g>
+    {/* Download arrow */}
+    <path d="M34 36 L34 44 M30 40 L34 44 L38 40" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
 export const metadata: Metadata = {
-  title: "13 Free Image Tools for Photographers & Developers | SammaPix",
+  title: "15 Free Image & Video Tools for Photographers & Developers | SammaPix",
   description:
-    "Complete suite of 13 free browser-based image tools. Compress JPG/PNG, convert WebP, AI rename, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 15 free browser-based image tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, video thumbnail picker, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
     "webp converter",
     "photo editing tools",
     "ai image rename",
+    "ai alt text generator",
+    "video thumbnail picker",
     "batch image processing",
     "online photo tools",
     "browser-based image editor",
@@ -38,7 +107,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://sammapix.com/tools" },
   openGraph: {
-    title: "13 Free Image Tools for Photographers & Developers",
+    title: "15 Free Image & Video Tools for Photographers & Developers",
     description:
       "Compress, convert, rename, resize, remove EXIF, apply film effects, batch process and more. All in browser. No uploads. No account needed.",
     url: "https://sammapix.com/tools",
@@ -48,7 +117,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — 13 Free Image Tools",
+        alt: "SammaPix — 15 Free Image & Video Tools",
       },
     ],
   },
@@ -161,6 +230,22 @@ const TOOLS: ToolCardData[] = [
     badges: ["100% Free", "HEIC"],
     Icon: IconCull,
   },
+  {
+    name: "AI Alt Text",
+    href: "/tools/alt-text",
+    tagline: "Generate accessibility-compliant alt text for images using Gemini AI.",
+    accent: "#8B5CF6",
+    badges: ["Free", "AI-powered", "Gemini Flash"],
+    Icon: IconAltText,
+  },
+  {
+    name: "Video Thumbnail",
+    href: "/tools/video-thumb",
+    tagline: "Extract the best frame from any video. Browse frames, AI picks the best.",
+    accent: "#0EA5E9",
+    badges: ["100% Free", "Browser-only", "MP4"],
+    Icon: IconVideoThumb,
+  },
 ];
 
 // ─── Trust items ──────────────────────────────────────────────────────────────
@@ -182,7 +267,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 13 browser-based image optimization tools",
+        description: "Suite of 15 browser-based image optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -192,8 +277,8 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "13 free browser-based image optimization tools",
-        numberOfItems: 13,
+        description: "15 free browser-based image optimization tools",
+        numberOfItems: 15,
         itemListElement: [
           {
             "@type": "SoftwareApplication",
@@ -256,10 +341,10 @@ export default function ToolsPage() {
             Every tool you need. All free. No account required.
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed mb-6">
-            14 browser-based image tools — nothing uploaded, nothing stored. Works on any device.
+            15 browser-based image tools — nothing uploaded, nothing stored. Works on any device.
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            {["14 tools", "100% free", "Works offline"].map((stat) => (
+            {["15 tools", "100% free", "Works offline"].map((stat) => (
               <span key={stat} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-[#737373]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1] inline-block" aria-hidden="true" />
                 {stat}
@@ -325,6 +410,20 @@ export default function ToolsPage() {
                 <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
                   <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">FilmLab</td>
                   <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">14 analog film presets for photos</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">AI Alt Text</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Generate accessibility alt text with AI</td>
+                  <td className="py-3 px-2 text-center text-green-600">Free tier</td>
+                  <td className="py-3 px-2 text-center text-green-600">✓</td>
+                  <td className="py-3 px-2 text-center text-orange-600">⚙</td>
+                </tr>
+                <tr className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors">
+                  <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">Video Thumbnail</td>
+                  <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">Extract best frame from video files</td>
                   <td className="py-3 px-2 text-center text-green-600">✓</td>
                   <td className="py-3 px-2 text-center text-green-600">✓</td>
                   <td className="py-3 px-2 text-center text-green-600">✓</td>

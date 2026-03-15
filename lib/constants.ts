@@ -19,6 +19,10 @@ export const MAX_HEIC_PRO = 500;
 export const AI_RENAME_FREE_PER_DAY = 5;
 export const AI_RENAME_PRO_PER_DAY = 200;
 
+// AI Alt Text limits
+export const AI_ALT_TEXT_FREE_PER_DAY = 5;
+export const AI_ALT_TEXT_PRO_PER_DAY = 200;
+
 // Accepted formats
 export const ACCEPTED_FORMATS: ImageFormat[] = ["jpeg", "png", "webp", "gif", "avif"];
 

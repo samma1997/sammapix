@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { Copy, Search, Zap, HardDrive, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import TwinHunt from "@/components/tools/TwinHunt";
+import TwinHuntClient from "@/components/tools/TwinHuntClient";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -117,7 +118,31 @@ export default function TwinHuntPage() {
         accentColor="#F97316"
       />
 
-      <TwinHunt />
+      {/* Tool + Next Step suggestions */}
+      <TwinHuntClient />
+
+      <HowToUse
+        toolName="TwinHunt"
+        steps={[
+          {
+            title: "Drop your photos",
+            desc: "Upload JPG, PNG, WebP or HEIC files. Up to 50 on the free plan — or 500 with Pro.",
+          },
+          {
+            title: "Algorithm finds duplicates",
+            desc: "A perceptual hash is computed for every photo using DCT. All pairs are compared at ~50ms per image — entirely in your browser.",
+          },
+          {
+            title: "Review and delete copies",
+            desc: "Duplicates appear side-by-side with file names, sizes and similarity badges. Download a deletion report for your file manager.",
+          },
+        ]}
+        proTip={{
+          text: "After removing duplicates, use Cull to quickly pick the best photo from each set.",
+          linkLabel: "Cull photos",
+          linkHref: "/tools/cull",
+        }}
+      />
 
       {/* What is TwinHunt */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

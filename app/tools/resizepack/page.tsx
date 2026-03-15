@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Shield, Layout, Archive, Maximize2 } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
-import ResizePack from "@/components/tools/ResizePack";
+import ResizePackClient from "@/components/tools/ResizePackClient";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -79,7 +80,31 @@ export default function ResizePackPage() {
         accentColor="#14B8A6"
       />
 
-      <ResizePack />
+      {/* Tool + Next Step suggestions */}
+      <ResizePackClient />
+
+      <HowToUse
+        toolName="ResizePack"
+        steps={[
+          {
+            title: "Drop your photos",
+            desc: "Upload JPG, PNG or WebP images — drag and drop or click to browse. Batch upload is supported.",
+          },
+          {
+            title: "Select a platform preset",
+            desc: "Choose a social media preset (Instagram, Twitter/X, LinkedIn, YouTube) or enter custom pixel dimensions or a percentage.",
+          },
+          {
+            title: "Download resized batch",
+            desc: "Download all resized images individually or as a single ZIP archive. Files are renamed with their new dimensions.",
+          },
+        ]}
+        proTip={{
+          text: "Use AI Workflow to resize, compress and rename for SEO all in one step.",
+          linkLabel: "Try AI Workflow",
+          linkHref: "/tools/workflow",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

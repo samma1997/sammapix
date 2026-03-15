@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { MapPin, Globe, Navigation, Shield, Camera, Map, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import TravelMapClient from "@/components/tools/TravelMap";
+import TravelMapClientWrapper from "@/components/tools/TravelMapClientWrapper";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -125,7 +126,31 @@ export default function TravelMapPage() {
         accentColor="#3B82F6"
       />
 
-      <TravelMapClient />
+      {/* Tool + Next Step suggestions */}
+      <TravelMapClientWrapper />
+
+      <HowToUse
+        toolName="TravelMap"
+        steps={[
+          {
+            title: "Drop photos with GPS",
+            desc: "Upload JPG or HEIC files taken with a GPS-enabled camera or phone. Mix photos from multiple trips freely.",
+          },
+          {
+            title: "Interactive map generated",
+            desc: "GPS coordinates are read from EXIF locally in your browser. Each photo gets a numbered pin, color-coded by country.",
+          },
+          {
+            title: "See your travel route",
+            desc: "Pins are connected in chronological order. See total distance traveled, countries visited, and photos per country.",
+          },
+        ]}
+        proTip={{
+          text: "Use GeoSort to organize your travel photos into country folders before mapping them.",
+          linkLabel: "Sort by location",
+          linkHref: "/tools/geosort",
+        }}
+      />
 
       {/* What is TravelMap */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

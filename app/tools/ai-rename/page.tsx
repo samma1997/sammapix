@@ -2,7 +2,8 @@ import React from "react";
 import type { Metadata } from "next";
 import { ArrowRight, Sparkles, Search, Clock } from "lucide-react";
 import Link from "next/link";
-import ToolInterface from "@/components/tools/ToolInterface";
+import AiRenameClient from "@/components/tools/AiRenameClient";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -82,8 +83,31 @@ export default function AiRenamePage() {
         </p>
       </div>
 
-      {/* Tool */}
-      <ToolInterface defaultMode="ai-rename" />
+      {/* Tool + Next Step suggestions */}
+      <AiRenameClient />
+
+      <HowToUse
+        toolName="AI Rename"
+        steps={[
+          {
+            title: "Drop your images",
+            desc: "Upload any JPG, PNG or WebP photos. A thumbnail is sent to AI for analysis — your original files stay on your device.",
+          },
+          {
+            title: "AI analyzes content",
+            desc: "Google Gemini Flash reads each image visually and generates a descriptive, lowercase, hyphenated filename in under 3 seconds.",
+          },
+          {
+            title: "Get SEO-optimized filenames and alt text",
+            desc: "Download your images with new filenames like 'red-ceramic-coffee-cup-morning.jpg' — exactly what Google recommends for image SEO.",
+          },
+        ]}
+        proTip={{
+          text: "Combine AI Rename with Compress to optimize AND rename for SEO in one go.",
+          linkLabel: "Compress images",
+          linkHref: "/tools/compress",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

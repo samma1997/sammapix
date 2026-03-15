@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { Keyboard, FileImage, Shield, Star, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
-import CullClient from "@/components/tools/Cull";
+import CullClientWrapper from "@/components/tools/CullClientWrapper";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -88,7 +89,31 @@ export default function CullPage() {
         accentColor="#F43F5E"
       />
 
-      <CullClient />
+      {/* Tool + Next Step suggestions */}
+      <CullClientWrapper />
+
+      <HowToUse
+        toolName="Cull"
+        steps={[
+          {
+            title: "Drop your shoot photos",
+            desc: "Upload JPG or HEIC photos from your shoot — up to 20 files on the free plan. Photos load in full-screen review mode.",
+          },
+          {
+            title: "Rate with keyboard shortcuts",
+            desc: "Press K to keep, X to reject. Use arrow keys to navigate without touching the mouse. Review 100 photos in minutes.",
+          },
+          {
+            title: "Export keepers",
+            desc: "When done, click 'Download keepers as ZIP'. Only the photos you marked K are included in the archive.",
+          },
+        ]}
+        proTip={{
+          text: "After culling, use TwinHunt to find near-duplicate burst shots you may have missed.",
+          linkLabel: "Find duplicates",
+          linkHref: "/tools/twinhunt",
+        }}
+      />
 
       {/* What is Cull */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

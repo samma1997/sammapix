@@ -1,26 +1,26 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "About SammaPix — Built by Luca Sammarco, Travel Photographer & Developer",
+  title: "About SammaPix — Built by a photographer, for photographers",
   description:
-    "Meet Luca Sammarco — travel photographer & developer who built SammaPix to solve real image optimization challenges. Privacy-first, browser-based tools.",
+    "Luca Sammarco built SammaPix because existing tools were too expensive, required uploads, or couldn't handle a real travel photography workflow. Privacy-first, browser-based, free forever.",
   keywords: [
     "luca sammarco",
     "travel photographer",
     "full-stack developer",
     "sammapix founder",
-    "image optimization expert",
+    "image optimization",
     "photography tools",
-    "web developer",
+    "browser-based image processing",
+    "privacy first photography",
   ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
-    title: "About SammaPix — Built by Luca Sammarco",
+    title: "About SammaPix — Built by a photographer, for photographers",
     description:
-      "Discover how Luca Sammarco, a travel photographer and developer, built SammaPix with privacy first and browser-based processing.",
+      "Luca Sammarco built SammaPix because existing tools were too expensive, required uploads, or couldn't handle a real travel photography workflow.",
     url: `${APP_URL}/about`,
     type: "website",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Luca Sammarco — SammaPix Creator",
+        alt: "SammaPix — Built by Luca Sammarco",
       },
     ],
   },
@@ -65,7 +65,8 @@ export default function AboutPage() {
     creator: {
       "@type": "CreativeWork",
       name: "SammaPix",
-      description: "Free browser-based image optimization tools",
+      description:
+        "Free browser-based image optimization tools built for photographers",
       url: "https://sammapix.com",
     },
   };
@@ -78,208 +79,155 @@ export default function AboutPage() {
       />
       <main className="max-w-2xl mx-auto px-4 sm:px-6 py-16">
 
-        {/* Header */}
-        <header className="mb-12">
-          <p className="text-xs text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-3">About</p>
-          <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-4">
-            Luca Sammarco
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed mb-4">
-            Travel photographer, full-stack developer, and creator of SammaPix.
-            Building privacy-first image optimization tools for photographers since 2025.
+        {/* ── Hero ───────────────────────────────────────────────────────── */}
+        <header className="mb-14">
+          <p className="text-xs text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-4">
+            About
           </p>
-
-          {/* Credentials and Expertise */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 p-4 bg-[#FAFAFA] dark:bg-[#1E1E1E] rounded-md border border-gray-100 dark:border-[#2A2A2A] mb-6">
-            <div>
-              <p className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-wide mb-1">Expertise</p>
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Web Development</p>
-              <p className="text-xs text-gray-500 dark:text-[#A3A3A3]">Full-stack, TypeScript, React</p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-wide mb-1">Expertise</p>
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Photography</p>
-              <p className="text-xs text-gray-500 dark:text-[#A3A3A3]">Travel, documentary work</p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400 dark:text-[#737373] uppercase tracking-wide mb-1">Creator Of</p>
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">SammaPix</p>
-              <p className="text-xs text-gray-500 dark:text-[#A3A3A3]">13 image tools</p>
-            </div>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex flex-wrap gap-3 mb-6">
-            <a href="https://github.com/lucasammarco" className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors font-medium">
-              GitHub: @lucasammarco →
-            </a>
-            <a href="https://twitter.com/lucasammarco" className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors font-medium">
-              Twitter: @lucasammarco →
-            </a>
-            <a href="https://lucasammarco.com" className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors font-medium">
-              Personal website →
-            </a>
-          </div>
-
-          <div className="mt-6 h-px bg-gray-100 dark:bg-[#2A2A2A]" />
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-5">
+            Built by a photographer, for photographers
+          </h1>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
+            Luca Sammarco built SammaPix because every existing tool had a fatal flaw: too expensive, required uploading your photos to a server, or simply could not handle the scale of a travel photography workflow. So he built something better.
+          </p>
+          <div className="mt-8 h-px bg-[#E5E5E5] dark:bg-[#2A2A2A]" />
         </header>
 
-        {/* Story */}
-        <section className="mb-12 space-y-5 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-          <p>
-            I started taking photography seriously during my first trip to Asia — Sri Lanka, 2025.
-            I came home with hundreds of files: RAW files to convert, JPEGs to compress, random names
-            to fix before uploading to my site. A long, repetitive process that stole time
-            I would rather have spent shooting or editing.
-          </p>
-          <p>
-            I looked for a solution: no free tool did everything in one place.
-            TinyPNG compresses but doesn&apos;t rename. Squoosh is great for one file at a time but
-            doesn&apos;t handle batches. AI renaming tools either cost money or upload your photos to
-            third-party servers. For a photographer who wants to protect their work, that doesn&apos;t work.
-          </p>
-          <p>
-            So I built <strong className="text-[#171717] dark:text-[#E5E5E5] font-medium">SammaPix</strong>: batch compression,
-            WebP conversion, and AI rename — all directly in the browser.
-            No uploads, no mandatory account for the basic features, no photos leaving
-            your device without your consent.
-          </p>
-          <p>
-            The goal isn&apos;t to become another mass-market platform. It&apos;s to build the workflow
-            I wish I&apos;d had — and make it available to anyone who works with images:
-            travel photographers, wedding photographers, content creators, web developers.
-          </p>
-        </section>
-
-        {/* Divider */}
-        <div className="h-px bg-gray-100 dark:bg-[#2A2A2A] mb-12" />
-
-        {/* Workflow */}
-        <section className="mb-12">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4 lowercase tracking-wide">
-            my post-trip workflow
+        {/* ── Story ──────────────────────────────────────────────────────── */}
+        <section className="mb-14">
+          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-5">
+            The story
           </h2>
-          <ol className="space-y-4 text-sm text-gray-600 dark:text-[#A3A3A3]">
-            <li className="flex gap-3">
-              <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">01</span>
-              <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Select and edit in Lightroom</p>
-                <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  Export JPEG at quality 85 — the optimal quality/weight balance for the web.
-                </p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">02</span>
-              <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Batch compress + convert to WebP</p>
-                <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  I drag everything into SammaPix. Files go from 2–3 MB down to 400–600 KB in WebP format,
-                  with no perceptible quality loss. The browser doesn&apos;t have to load all that unnecessary weight.
-                </p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">03</span>
-              <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">AI rename with SEO filenames</p>
-                <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  The AI analyzes each image and generates descriptive names:
-                  <code className="text-[11px] bg-gray-100 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] px-1 rounded mx-1">DSC_4821.jpg</code>
-                  becomes
-                  <code className="text-[11px] bg-gray-100 dark:bg-[#2A2A2A] dark:text-[#A3A3A3] px-1 rounded mx-1">sigiriya-rock-fortress-sunrise-sri-lanka.webp</code>.
-                  Google understands what&apos;s in the image and indexes it better in Google Images.
-                </p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-xs text-gray-300 dark:text-[#525252] font-mono pt-0.5 select-none">04</span>
-              <div>
-                <p className="font-medium text-[#171717] dark:text-[#E5E5E5]">Upload to the site</p>
-                <p className="text-gray-500 dark:text-[#737373] mt-0.5">
-                  Files already optimized, already renamed. The site loads fast, and images
-                  appear in Google Images with the right context.
-                </p>
-              </div>
-            </li>
-          </ol>
-        </section>
-
-        <div className="h-px bg-gray-100 dark:bg-[#2A2A2A] mb-12" />
-
-        {/* Why photographers should optimize */}
-        <section className="mb-12">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3 lowercase tracking-wide">
-            why photographers should optimize their images
-          </h2>
-          <div className="space-y-4 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
+          <div className="space-y-5 text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed">
             <p>
-              Most photographers obsess over every detail of the shot and the edit,
-              then upload 4 MB files to WordPress without a second thought. The result: a slow site,
-              a low PageSpeed score, and Google penalizing your ranking.
+              I travel the world and shoot thousands of photos. After every trip — Sri Lanka, Bali, Japan, Thailand — I&apos;d come home with 800 RAW files to sort, compress, convert, and rename before publishing. Compressing, renaming, resizing: it took hours. So I built SammaPix.
             </p>
             <p>
-              WebP instead of JPEG reduces file size by 25–35% at the same visual quality.
-              Smart compression brings reductions of 60–70% compared to the original.
-              A portfolio site that loads in 1.5 seconds instead of 4 converts much better —
-              whether you&apos;re selling prints, looking for collaborations, or building an audience.
+              TinyPNG compresses but doesn&apos;t rename. Squoosh handles one file at a time. AI renaming tools either cost money or upload your photos to third-party servers. For a photographer who cares about their work — and their clients&apos; privacy — that doesn&apos;t work.
             </p>
             <p>
-              SEO filenames aren&apos;t as critical as link building or content,
-              but they contribute to the relevance signal for Google Images — a traffic source
-              often ignored by photographers, yet one that can bring in qualified clients.
+              Every tool in SammaPix runs entirely in your browser. Your photos never leave your device. That&apos;s not just a feature — it&apos;s a principle. The moment you drag a file into SammaPix, it stays on your machine. No uploads. No third-party storage. No exceptions for the core tools.
+            </p>
+            <p>
+              The goal isn&apos;t to become another mass-market platform. It&apos;s to build the workflow I wish I&apos;d had — and make it available to anyone who publishes images: travel photographers, wedding photographers, bloggers, e-commerce teams.
             </p>
           </div>
         </section>
 
-        <div className="h-px bg-gray-100 dark:bg-[#2A2A2A] mb-12" />
+        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
 
-        {/* Tools */}
-        <section className="mb-12">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4 lowercase tracking-wide">
-            tools I&apos;ve built
+        {/* ── Values ─────────────────────────────────────────────────────── */}
+        <section className="mb-14">
+          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-6">
+            What we believe
           </h2>
-          <div className="space-y-3">
-            <Link
-              href="/tools"
-              className="group flex items-center justify-between p-4 border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] hover:bg-gray-50 dark:hover:bg-[#242424] transition-colors"
+          <div className="space-y-6">
+            <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
+                Privacy first
+              </p>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
+                Your images never touch our servers. Compression, conversion, resizing, EXIF removal — all processed client-side in your browser using standard Web APIs. The only exception is AI Rename, which sends a small thumbnail to Google Gemini. We tell you clearly when that happens.
+              </p>
+            </div>
+            <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
+                Free forever
+              </p>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
+                All 13 core tools are free and always will be. No bait and switch. No "free trial" that expires. Pro exists for photographers who need bigger batches and the AI pipeline — not because we&apos;re holding basic features hostage.
+              </p>
+            </div>
+            <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
+                Built for real workflows
+              </p>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
+                Not another toy tool. Every feature in SammaPix exists because a real photographer needed it. 500-file batches, GPS sorting by country, AI-generated SEO filenames, perceptual hash deduplication — these come from a real post-trip workflow, not a product roadmap meeting.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
+
+        {/* ── Tech ───────────────────────────────────────────────────────── */}
+        <section className="mb-14">
+          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-5">
+            How it works
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-6">
+            100% browser-based processing using standard Web APIs — Canvas API for conversion and resizing, Web Workers for non-blocking compression, FileReader for EXIF extraction. No server round-trips means faster results and zero privacy exposure.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { label: "Framework",  value: "Next.js" },
+              { label: "Styling",    value: "Tailwind CSS" },
+              { label: "AI",         value: "Google Gemini" },
+              { label: "Payments",   value: "Stripe" },
+            ].map(({ label, value }) => (
+              <div
+                key={label}
+                className="p-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-[#FAFAFA] dark:bg-[#1E1E1E]"
+              >
+                <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-1">
+                  {label}
+                </p>
+                <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
+                  {value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
+
+        {/* ── About the creator ──────────────────────────────────────────── */}
+        <section className="mb-14">
+          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-5">
+            Luca Sammarco
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-5">
+            Travel photographer and full-stack developer. I&apos;ve photographed in Sri Lanka, Bali, Japan, Thailand, and China. I build software that solves the problems I have — SammaPix is the most honest version of that.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="https://github.com/lucasammarco"
+              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
             >
-              <div>
-                <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Crunch — Image Optimizer</p>
-                <p className="text-xs text-gray-400 dark:text-[#737373] mt-0.5">
-                  Compress, convert to WebP, and AI rename — all in one pass, in the browser.
-                </p>
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {["Compress", "WebP", "AI Rename", "Batch ZIP"].map((f) => (
-                    <span key={f} className="text-[10px] text-gray-400 dark:text-[#737373] bg-gray-100 dark:bg-[#2A2A2A] px-2 py-0.5 rounded-full">
-                      {f}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <ArrowRight className="h-3.5 w-3.5 text-gray-300 dark:text-[#525252] group-hover:text-gray-600 dark:group-hover:text-[#A3A3A3] transition-colors flex-shrink-0 ml-4" strokeWidth={1.5} />
-            </Link>
+              GitHub: @lucasammarco →
+            </a>
+            <a
+              href="https://twitter.com/lucasammarco"
+              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
+            >
+              Twitter: @lucasammarco →
+            </a>
+            <a
+              href="https://lucasammarco.com"
+              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
+            >
+              lucasammarco.com →
+            </a>
           </div>
         </section>
 
-        <div className="h-px bg-gray-100 dark:bg-[#2A2A2A] mb-12" />
+        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
 
-        {/* Portfolio */}
-        <section className="mb-4">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3 lowercase tracking-wide">
-            my travels
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed mb-4">
-            I&apos;ve photographed in Sri Lanka, Bali, Japan, Thailand, and China.
-            Each trip has its own gallery — each photo has a description of the context,
-            the place, the light. Documentary travel photography, not polished.
-          </p>
+        {/* ── CTA ────────────────────────────────────────────────────────── */}
+        <section className="flex flex-col sm:flex-row gap-3">
           <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-1.5 text-sm text-[#171717] dark:text-[#E5E5E5] hover:text-gray-500 dark:hover:text-[#A3A3A3] transition-colors font-medium"
+            href="/tools"
+            className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
           >
-            View portfolio
-            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            Try SammaPix free →
+          </Link>
+          <Link
+            href="/pricing"
+            className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-md bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
+          >
+            Go Pro →
           </Link>
         </section>
 

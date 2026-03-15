@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { ScanLine, Shield, MapPin, Download, ShieldOff, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import ExifLens from "@/components/tools/ExifLens";
+import ExifClient from "@/components/tools/ExifClient";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -113,7 +114,31 @@ export default function ExifPage() {
         accentColor="#EF4444"
       />
 
-      <ExifLens />
+      {/* Tool + Next Step suggestions */}
+      <ExifClient />
+
+      <HowToUse
+        toolName="EXIF Lens"
+        steps={[
+          {
+            title: "Drop your photos",
+            desc: "Upload JPG or HEIC photos. All EXIF metadata is read instantly in your browser — GPS, camera model, lens, ISO, shutter speed, date.",
+          },
+          {
+            title: "View all metadata",
+            desc: "See every EXIF field per photo. GPS coordinates are highlighted as a privacy risk with a clear warning.",
+          },
+          {
+            title: "Download clean files",
+            desc: "Strip GPS only or remove all EXIF with one click. Download individual files or the full batch as a ZIP.",
+          },
+        ]}
+        proTip={{
+          text: "After removing EXIF, use GeoSort to organize photos that still have GPS into country folders.",
+          linkLabel: "Try GeoSort",
+          linkHref: "/tools/geosort",
+        }}
+      />
 
       {/* How it works */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

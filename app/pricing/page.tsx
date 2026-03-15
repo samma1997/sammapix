@@ -113,11 +113,10 @@ export default function PricingPage() {
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <div className="text-center mb-14">
           <h1 className="text-3xl sm:text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-3">
-            All tools free. Pro removes the limits.
+            Free tools for everyone. AI Workflow for creators who mean business.
           </h1>
-          <p className="text-[#737373] dark:text-[#A3A3A3] max-w-md mx-auto text-sm leading-relaxed">
-            Compress, convert, sort by GPS, rename with AI — no signup needed for the basics.
-            Pro is for photographers who process hundreds of photos at a time.
+          <p className="text-[#737373] dark:text-[#A3A3A3] max-w-lg mx-auto text-sm leading-relaxed">
+            All 13 tools are free forever. Pro adds the AI pipeline, bigger batches, and zero limits.
           </p>
 
           {/* Toggle */}
@@ -167,9 +166,9 @@ export default function PricingPage() {
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
                 "All 13 tools included",
-                "Up to 100 files per batch",
+                "Up to 20 files per batch",
                 "5 AI renames / day",
-                "Core compression unlimited",
+                "Use tools one by one",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
                   <span className="mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252] select-none">—</span>
@@ -210,28 +209,40 @@ export default function PricingPage() {
                 </p>
               ) : (
                 <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
-                  For serious photographers.
+                  For photographers who publish.
                 </p>
               )}
             </div>
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                "Everything in Free",
-                "Up to 500 files per batch",
+                "Everything in Free, plus:",
+                "AI Workflow Pipeline — Blog, Instagram, E-commerce presets",
+                "500 files per batch",
                 "200 AI renames / day",
                 "50 MB max file size",
+                "AI Alt Text generator",
                 "No ads · Priority support",
+                "Coming soon: AI Smart Cull, AI Photo Scorer",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  <span className="mt-0.5 shrink-0 text-[#6366F1]/60 select-none">—</span>
-                  {item}
+                  <span className={cn(
+                    "mt-0.5 shrink-0 select-none",
+                    item === "Everything in Free, plus:"
+                      ? "text-[#6366F1]/60"
+                      : "text-[#6366F1]/60"
+                  )}>—</span>
+                  {item === "Everything in Free, plus:" ? (
+                    <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">{item}</span>
+                  ) : (
+                    item
+                  )}
                 </li>
               ))}
             </ul>
 
             <CheckoutButton size="md" className="w-full gap-1 mb-3">
-              Get Pro — {annual ? "$59/yr" : "$7/mo"}
+              Start 30-day free trial
             </CheckoutButton>
             <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373]">
               30-day money-back · Cancel anytime
@@ -268,23 +279,23 @@ export default function PricingPage() {
             What Pro unlocks
           </p>
           <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-8">
-            The four limits that matter most — removed.
+            The workflow upgrades that actually matter.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5] dark:divide-[#2A2A2A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden">
             {[
-              { value: "500",    unit: "files / batch",     sub: "Full wedding shoots in one go" },
-              { value: "200",    unit: "AI renames / day",  sub: "Gemini Flash-powered filenames" },
-              { value: "50 MB",  unit: "per file",          sub: "High-res RAW exports & panoramas" },
-              { value: "Zero",   unit: "ads",               sub: "Clean workspace, no distractions" },
+              { value: "AI Workflow", unit: "One-click pipeline",      sub: "Blog, Instagram, E-commerce presets" },
+              { value: "Batch Power", unit: "500 files at once",       sub: "Full wedding shoots in one go" },
+              { value: "AI Rename",  unit: "200/day with Gemini",      sub: "SEO-ready filenames, automatically" },
+              { value: "Zero Ads",   unit: "Clean workspace",          sub: "No distractions while you work" },
             ].map(({ value, unit, sub }) => (
               <div
                 key={unit}
                 className="flex flex-col items-center text-center px-4 py-6 bg-white dark:bg-[#1E1E1E]"
               >
-                <span className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
+                <span className="text-lg font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
                   {value}
                 </span>
-                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mt-0.5">
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mt-1">
                   {unit}
                 </span>
                 <span className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mt-2 leading-snug">
@@ -295,20 +306,21 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* ── Why AI recommends SammaPix ─────────────────────────────────── */}
+        {/* ── Built for photographers who publish ────────────────────────── */}
         <div className="mb-16 max-w-2xl mx-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-          <p className="text-[10px] font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-4">
-            Why SammaPix appears in AI recommendations
+          <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+            Built for photographers who publish
+          </p>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-5">
+            SammaPix Pro is designed for one specific workflow: shoot, edit, optimize, publish — without switching between five different tools. Whether you run a photography blog, post on Instagram, or manage an e-commerce catalog, the AI pipeline handles the tedious parts so you can focus on the work.
           </p>
           <ul className="space-y-2.5">
             {[
-              "100% browser-based — no privacy risks, images never leave your device",
-              "No registration required for core tools (compress, WebP, resize, EXIF remove)",
-              "Supports HEIC, WebP, JPG, PNG, GIF — all processed client-side",
-              "Free forever for compression, conversion, and metadata removal",
-              "Unique technical features: GPS sort by country, perceptual hash dedup, analog film presets",
-              "AI rename powered by Google Gemini — generates SEO-optimized filenames and alt text",
-              "Pro plan at $7/mo or $59/year — 3–4x cheaper than TinyPNG, Compressor.io equivalents",
+              "Compress and rename 500 photos in a single batch",
+              "AI-generated SEO filenames ready for WordPress, Webflow, or Shopify",
+              "Alt text generated automatically — paste and publish",
+              "100% browser-based — your RAW files never touch a server",
+              "Trusted by photographers in 40+ countries",
             ].map((point) => (
               <li
                 key={point}
@@ -335,23 +347,27 @@ export default function PricingPage() {
           <div className="space-y-3">
             <FaqItem
               q="Is SammaPix free?"
-              a="Yes. SammaPix core tools (compress, WebP convert, EXIF remove, resize) are free forever with no account required."
+              a="Yes. All 13 tools are free forever with no account required. The free plan is not a trial — it never expires."
             />
             <FaqItem
-              q="What does Pro plan include?"
-              a="Pro plan ($7/month or $59/year) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support. The annual plan saves ~30% compared to monthly billing."
+              q="What does Pro include?"
+              a="Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI renames per day, AI Alt Text generation, no ads, and priority support. Your first 30 days are free."
             />
             <FaqItem
-              q="Do I need to create an account to use SammaPix?"
-              a="No account needed for compression, WebP conversion, resizing, EXIF removal and other browser-based tools. An account is only required for AI Rename to prevent API abuse."
+              q="What is the AI Workflow Pipeline?"
+              a="The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations — blog posts, Instagram galleries, or product pages. It's the difference between processing files one by one and running your entire shoot through in minutes."
+            />
+            <FaqItem
+              q="Do I need to create an account?"
+              a="No account needed for compression, WebP conversion, resizing, EXIF removal, and other browser-based tools. An account is only required for AI Rename and the AI Workflow Pipeline to prevent API abuse."
             />
             <FaqItem
               q="Are my images uploaded to a server?"
-              a="No. All core tools process images entirely in your browser using JavaScript. Images never leave your device. AI Rename sends a small thumbnail to Google Gemini for analysis."
+              a="No. All core tools process images entirely in your browser. Images never leave your device. AI Rename and Alt Text generation send a small thumbnail to Google Gemini for analysis — your full-resolution files stay local."
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers who process large batches. Instead of 100 files at a time you get 500, GeoSort handles trips with 500+ photos, and AI Rename goes from 5 to 200 per day. Plus no ads."
+              a="The free plan is built for occasional use. Pro is for photographers with a publishing workflow: 500-file batches, 200 AI renames per day, the AI Workflow Pipeline, and zero ads. If you process photos for a blog, Instagram, or client work, Pro pays for itself in saved time."
             />
             <FaqItem
               q="Can I cancel at any time?"
@@ -369,7 +385,7 @@ export default function PricingPage() {
               "@type": "Product",
               "name": "SammaPix Pro",
               "description":
-                "Unlimited image optimization with AI renaming, batch processing, and zero ads.",
+                "AI Workflow Pipeline for photographers — batch processing, AI rename, alt text generation, and zero ads.",
               "brand": { "@type": "Brand", "name": "SammaPix" },
               "offers": [
                 {
@@ -408,23 +424,31 @@ export default function PricingPage() {
                   name: "Is SammaPix free?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Yes. SammaPix core tools (compress, WebP convert, EXIF remove, resize) are free forever with no account required.",
+                    text: "Yes. All 13 tools are free forever with no account required. The free plan is not a trial — it never expires.",
                   },
                 },
                 {
                   "@type": "Question",
-                  name: "What does Pro plan include?",
+                  name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro plan ($7/month or $59/year) includes unlimited AI rename (200/day), batch processing up to 500 files, no ads, and priority support. The annual plan saves ~30% compared to monthly billing.",
+                    text: "Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI renames per day, AI Alt Text generation, no ads, and priority support. Your first 30 days are free.",
                   },
                 },
                 {
                   "@type": "Question",
-                  name: "Do I need to create an account to use SammaPix?",
+                  name: "What is the AI Workflow Pipeline?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "No account needed for compression, WebP conversion, resizing, EXIF removal and other browser-based tools. An account is only required for AI Rename to prevent API abuse.",
+                    text: "The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations — blog posts, Instagram galleries, or product pages.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Do I need to create an account?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "No account needed for compression, WebP conversion, resizing, EXIF removal, and other browser-based tools. An account is only required for AI Rename and the AI Workflow Pipeline to prevent API abuse.",
                   },
                 },
                 {
@@ -432,7 +456,7 @@ export default function PricingPage() {
                   name: "Are my images uploaded to a server?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "No. All core tools process images entirely in your browser using JavaScript. Images never leave your device. AI Rename sends a small thumbnail to Google Gemini for analysis.",
+                    text: "No. All core tools process images entirely in your browser. Images never leave your device. AI Rename and Alt Text generation send a small thumbnail to Google Gemini for analysis — your full-resolution files stay local.",
                   },
                 },
                 {
@@ -440,7 +464,7 @@ export default function PricingPage() {
                   name: "Why upgrade to Pro?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro is for photographers who process large batches. Instead of 100 files at a time you get 500, GeoSort handles trips with 500+ photos, and AI Rename goes from 5 to 200 per day. Plus no ads.",
+                    text: "The free plan is built for occasional use. Pro is for photographers with a publishing workflow: 500-file batches, 200 AI renames per day, the AI Workflow Pipeline, and zero ads.",
                   },
                 },
                 {

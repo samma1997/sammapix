@@ -2,8 +2,9 @@ import React from "react";
 import type { Metadata } from "next";
 import { ArrowRight, Smartphone, Layers, FileImage } from "lucide-react";
 import Link from "next/link";
-import HeicConverter from "@/components/tools/HeicConverter";
+import HeicClient from "@/components/tools/HeicClient";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -79,8 +80,31 @@ export default function HeicPage() {
         accentColor="#6366F1"
       />
 
-      {/* Tool */}
-      <HeicConverter />
+      {/* Tool + Next Step suggestions */}
+      <HeicClient />
+
+      <HowToUse
+        toolName="HEIC Converter"
+        steps={[
+          {
+            title: "Drop your iPhone HEIC photos",
+            desc: "Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera — or click to browse.",
+          },
+          {
+            title: "Choose output format",
+            desc: "Select JPG for maximum compatibility or WebP for ~25% smaller files. Adjust the quality slider from 60% to 100%.",
+          },
+          {
+            title: "Download converted files",
+            desc: "Download each converted image individually or get the full batch as a single ZIP archive.",
+          },
+        ]}
+        proTip={{
+          text: "After converting, compress your JPG files further to optimize for web publishing.",
+          linkLabel: "Compress images",
+          linkHref: "/tools/compress",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Shield, Layers, Archive, Stamp } from "lucide-react";
 import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
-import StampIt from "@/components/tools/StampIt";
+import StampItClient from "@/components/tools/StampItClient";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -79,7 +80,31 @@ export default function StampItPage() {
         accentColor="#06B6D4"
       />
 
-      <StampIt />
+      {/* Tool + Next Step suggestions */}
+      <StampItClient />
+
+      <HowToUse
+        toolName="StampIt"
+        steps={[
+          {
+            title: "Drop your photos",
+            desc: "Upload JPG, PNG or WebP images — drag and drop or click to browse. Batch upload is supported.",
+          },
+          {
+            title: "Add text or logo watermark",
+            desc: "Type your watermark text or upload an SVG logo. Choose font size, opacity and style. Enable tiled mode for maximum protection.",
+          },
+          {
+            title: "Choose position and download",
+            desc: "Select from 9 positions (corners, edges, center) or use tiled mode. Download individually or as a ZIP.",
+          },
+        ]}
+        proTip={{
+          text: "Use AI Workflow to watermark, compress and rename all your photos in one step.",
+          linkLabel: "Try AI Workflow",
+          linkHref: "/tools/workflow",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

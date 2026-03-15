@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Crop, Hand, FolderArchive, Shield, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import CropRatio from "@/components/tools/CropRatio";
+import CropRatioClient from "@/components/tools/CropRatioClient";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -139,7 +140,31 @@ export default function CropRatioPage() {
         accentColor="#EC4899"
       />
 
-      <CropRatio />
+      {/* Tool + Next Step suggestions */}
+      <CropRatioClient />
+
+      <HowToUse
+        toolName="CropRatio"
+        steps={[
+          {
+            title: "Drop your image",
+            desc: "Upload one or multiple JPG, PNG or WebP photos — drag and drop or click to browse.",
+          },
+          {
+            title: "Select ratio",
+            desc: "Choose a preset like 1:1 (Instagram), 16:9 (YouTube), 4:5, 9:16 (Stories/Reels) — or type any custom ratio you need.",
+          },
+          {
+            title: "Adjust crop and download",
+            desc: "Drag the crop frame over your image to position it exactly, then download individually or as a ZIP.",
+          },
+        ]}
+        proTip={{
+          text: "After cropping, resize to exact pixel dimensions for social media platforms.",
+          linkLabel: "Resize images",
+          linkHref: "/tools/resizepack",
+        }}
+      />
 
       {/* Breadcrumb Schema */}
       <script

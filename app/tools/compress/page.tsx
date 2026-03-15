@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Archive, Zap, Minimize2 } from "lucide-react";
 import Link from "next/link";
 import CompressClient from "@/components/tools/CompressClient";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -83,6 +84,29 @@ export default function CompressPage() {
 
       {/* Tool + Next Step suggestions */}
       <CompressClient />
+
+      <HowToUse
+        toolName="Image Compressor"
+        steps={[
+          {
+            title: "Drop your images",
+            desc: "Drag and drop JPG, PNG, WebP or GIF files onto the upload area — or click to browse.",
+          },
+          {
+            title: "Adjust quality slider",
+            desc: "Use the quality slider to control compression. The default (80%) reduces file size by 50–80% with no visible quality loss.",
+          },
+          {
+            title: "Download compressed files",
+            desc: "Download each image individually or click 'Download all as ZIP' to get everything in one archive.",
+          },
+        ]}
+        proTip={{
+          text: "Use AI Workflow to compress, rename for SEO, and resize all in one step.",
+          linkLabel: "Try AI Workflow",
+          linkHref: "/tools/workflow",
+        }}
+      />
 
       {/* Features */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">

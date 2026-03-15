@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { MapPin, Shield, FolderOpen, Smartphone, FileText, Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import GeoSortClient from "@/components/tools/GeoSort";
+import GeoSortClientWrapper from "@/components/tools/GeoSortClientWrapper";
 import ToolHeader from "@/components/tools/ToolHeader";
+import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -95,7 +96,31 @@ export default function GeoSortPage() {
         accentColor="#22C55E"
       />
 
-      <GeoSortClient />
+      {/* Tool + Next Step suggestions */}
+      <GeoSortClientWrapper />
+
+      <HowToUse
+        toolName="GeoSort"
+        steps={[
+          {
+            title: "Drop photos with GPS data",
+            desc: "Upload JPG or HEIC files taken with a GPS-enabled camera or smartphone. Mix photos from different destinations.",
+          },
+          {
+            title: "Photos sorted by country",
+            desc: "GPS coordinates are read from EXIF locally in your browser, then reverse-geocoded to country names. Smart clustering uses only 2–3 API calls for a full trip.",
+          },
+          {
+            title: "Download organized folders",
+            desc: "Download a ZIP with subfolders per country: Japan/, Italy/, Thailand/. Photos without GPS go to _unsorted/.",
+          },
+        ]}
+        proTip={{
+          text: "After sorting, use TravelMap to visualize your entire journey on an interactive map.",
+          linkLabel: "Create travel map",
+          linkHref: "/tools/travelmap",
+        }}
+      />
 
       {/* What is GeoSort */}
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
