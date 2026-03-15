@@ -110,7 +110,7 @@ export default function TryProPage() {
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#6366F1]/10 dark:bg-[#6366F1]/20 text-[#6366F1] rounded-full text-xs font-medium mb-6">
             <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
-            Limited offer — 30 days free
+            Limited offer — up to 60 days free
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-5 leading-tight">
@@ -119,7 +119,7 @@ export default function TryProPage() {
 
           <p className="text-base sm:text-lg text-[#737373] dark:text-[#A3A3A3] max-w-xl mx-auto mb-8 leading-relaxed">
             Drop 100 photos. Get them compressed, renamed for SEO, resized for any
-            platform — in one click. Try free for 30 days.
+            platform — in one click. Try free — 7 days monthly, 60 days annual.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -391,9 +391,9 @@ export default function TryProPage() {
           <div className="space-y-6">
             {[
               { step: "1", title: "Sign up free", desc: "Create an account with Google or GitHub in one click." },
-              { step: "2", title: "Get 30 days of Pro", desc: "Full AI workflow unlocked instantly. No credit card required." },
+              { step: "2", title: "Start your free trial", desc: "Full AI workflow unlocked instantly. No credit card required." },
               { step: "3", title: "Drop your photos and run the workflow", desc: "Batch process 500 files, 200 AI renames/day, platform presets, zero ads." },
-              { step: "4", title: "Decide after 30 days", desc: "Love it? Stay on Pro for $7/month. Not for you? No charge, ever." },
+              { step: "4", title: "Decide after your trial", desc: "Love it? Stay on Pro for $7/month. Not for you? No charge, ever." },
             ].map(({ step, title, desc }) => (
               <div key={step} className="flex gap-4 items-start">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#171717] dark:bg-white flex items-center justify-center">
@@ -440,7 +440,7 @@ export default function TryProPage() {
             Start your AI photo workflow
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">
-            Free for 30 days. No credit card. Cancel anytime.
+            Free trial included. No credit card. Cancel anytime.
           </p>
 
           <CheckoutButton size="lg" className="gap-2 px-8 py-3 text-base">

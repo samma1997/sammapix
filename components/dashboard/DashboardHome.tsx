@@ -686,7 +686,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                   disabled={checkoutLoading}
                   className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6366F1] hover:bg-[#4F46E5] disabled:opacity-60 text-white text-sm font-medium rounded-md transition-colors"
                 >
-                  {checkoutLoading ? "Redirecting…" : "Start 30-day free trial"}
+                  {checkoutLoading ? "Redirecting…" : "Start free trial"}
                   {!checkoutLoading && <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />}
                 </button>
                 <Link

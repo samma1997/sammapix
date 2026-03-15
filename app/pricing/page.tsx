@@ -240,7 +240,7 @@ export default function PricingPage() {
             </ul>
 
             <CheckoutButton size="md" className="w-full gap-1 mb-3">
-              Start 30-day free trial
+              Start free trial
             </CheckoutButton>
             <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373]">
               30-day money-back · Cancel anytime
@@ -436,7 +436,7 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI operations per day, no ads, and priority support. Your first 30 days are free."
+              a="Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI operations per day, no ads, and priority support. Your first days are free — 7 days on monthly, 60 days on annual."
             />
             <FaqItem
               q="Why upgrade to Pro?"
@@ -555,7 +555,7 @@ export default function PricingPage() {
                   name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI operations per day, no ads, and priority support. Your first 30 days are free.",
+                    text: "Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI operations per day, no ads, and priority support. Your first days are free — 7 days on monthly, 60 days on annual.",
                   },
                 },
                 {
