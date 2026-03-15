@@ -2,27 +2,27 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { APP_URL } from "@/lib/constants";
-import { getAllTrips, type Trip } from "@/lib/destinations";
+import { getAllTrips } from "@/lib/destinations";
 
 export const metadata: Metadata = {
-  title: "About SammaPix — Built by a photographer, for photographers",
+  title: "About — Luca Sammarco, Travel Photographer",
   description:
-    "Luca Sammarco built SammaPix because existing tools were too expensive, required uploads, or couldn't handle a real travel photography workflow. Privacy-first, browser-based, free forever.",
+    "Travel photographer and full-stack developer. SammaPix is the tool I built because existing tools couldn't handle a real photography workflow.",
   keywords: [
     "luca sammarco",
     "travel photographer",
     "full-stack developer",
     "sammapix founder",
+    "sri lanka photography",
     "image optimization",
     "photography tools",
     "browser-based image processing",
-    "privacy first photography",
   ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
-    title: "About SammaPix — Built by a photographer, for photographers",
+    title: "About — Luca Sammarco, Travel Photographer",
     description:
-      "Luca Sammarco built SammaPix because existing tools were too expensive, required uploads, or couldn't handle a real travel photography workflow.",
+      "Travel photographer and full-stack developer. SammaPix is the tool I built because existing tools couldn't handle a real photography workflow.",
     url: `${APP_URL}/about`,
     type: "website",
     images: [
@@ -36,16 +36,11 @@ export const metadata: Metadata = {
   },
 };
 
-function isCloudinaryUrl(url: string): boolean {
-  return url.includes("cloudinary.com");
-}
-
-function getTripYear(trip: Trip): string {
-  return trip.startDate.slice(0, 4);
-}
-
 export default function AboutPage() {
   const allTrips = getAllTrips();
+  const sriLanka = allTrips.find((t) => t.slug === "sri-lanka-2025");
+  const heroPhotos = sriLanka ? sriLanka.photos.slice(0, 5) : [];
+  const galleryPhotos = sriLanka ? sriLanka.photos : [];
 
   const personSchema = {
     "@context": "https://schema.org",
@@ -74,13 +69,6 @@ export default function AboutPage() {
       name: "SammaPix",
       url: "https://sammapix.com",
     },
-    creator: {
-      "@type": "CreativeWork",
-      name: "SammaPix",
-      description:
-        "Free browser-based image optimization tools built for photographers",
-      url: "https://sammapix.com",
-    },
   };
 
   return (
@@ -89,216 +77,163 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-16">
 
-        {/* ── Hero ───────────────────────────────────────────────────────── */}
-        <header className="mb-14">
-          <p className="text-xs text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-4">
-            About
-          </p>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-5">
-            Built by a photographer, for photographers
-          </h1>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-            Luca Sammarco built SammaPix because every existing tool had a fatal flaw: too expensive, required uploading your photos to a server, or simply could not handle the scale of a travel photography workflow. So he built something better.
-          </p>
-          <div className="mt-8 h-px bg-[#E5E5E5] dark:bg-[#2A2A2A]" />
-        </header>
-
-        {/* ── Story ──────────────────────────────────────────────────────── */}
-        <section className="mb-14">
-          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-5">
-            The story
-          </h2>
-          <div className="space-y-5 text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed">
-            <p>
-              I travel the world and shoot thousands of photos. After every trip — Sri Lanka, Bali, Japan, Thailand — I&apos;d come home with 800 RAW files to sort, compress, convert, and rename before publishing. Compressing, renaming, resizing: it took hours. So I built SammaPix.
-            </p>
-            <p>
-              TinyPNG compresses but doesn&apos;t rename. Squoosh handles one file at a time. AI renaming tools either cost money or upload your photos to third-party servers. For a photographer who cares about their work — and their clients&apos; privacy — that doesn&apos;t work.
-            </p>
-            <p>
-              Every tool in SammaPix runs entirely in your browser. Your photos never leave your device. That&apos;s not just a feature — it&apos;s a principle. The moment you drag a file into SammaPix, it stays on your machine. No uploads. No third-party storage. No exceptions for the core tools.
-            </p>
-            <p>
-              The goal isn&apos;t to become another mass-market platform. It&apos;s to build the workflow I wish I&apos;d had — and make it available to anyone who publishes images: travel photographers, wedding photographers, bloggers, e-commerce teams.
-            </p>
-          </div>
-        </section>
-
-        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
-
-        {/* ── Values ─────────────────────────────────────────────────────── */}
-        <section className="mb-14">
-          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-6">
-            What we believe
-          </h2>
-          <div className="space-y-6">
-            <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
-                Privacy first
-              </p>
-              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-                Your images never touch our servers. Compression, conversion, resizing, EXIF removal — all processed client-side in your browser using standard Web APIs. The only exception is AI Rename, which sends a small thumbnail to Google Gemini. We tell you clearly when that happens.
-              </p>
+      {/* ── Photo Strip Hero ──────────────────────────────────────────────── */}
+      <section
+        className="relative w-full overflow-hidden bg-[#0a0a0a]"
+        style={{ height: "calc(70vh - 56px)" }}
+        aria-label="Photo strip hero"
+      >
+        {/* Five-column photo strip */}
+        <div className="flex h-full w-full gap-0.5">
+          {heroPhotos.map((photo, index) => (
+            <div
+              key={photo.id}
+              className="relative flex-1 overflow-hidden group"
+            >
+              <Image
+                src={photo.srcThumb}
+                alt={photo.alt}
+                fill
+                sizes="20vw"
+                className="object-cover brightness-75 group-hover:brightness-90 transition-all duration-500 ease-out"
+                unoptimized
+                priority={index < 3}
+              />
             </div>
-            <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
-                Free forever
-              </p>
-              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-                All 15 core tools are free and always will be. No bait and switch. No "free trial" that expires. Pro exists for photographers who need bigger batches and the AI pipeline — not because we&apos;re holding basic features hostage.
-              </p>
-            </div>
-            <div className="pl-4 border-l-2 border-[#E5E5E5] dark:border-[#2A2A2A]">
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">
-                Built for real workflows
-              </p>
-              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-                Not another toy tool. Every feature in SammaPix exists because a real photographer needed it. 500-file batches, GPS sorting by country, AI-generated SEO filenames, perceptual hash deduplication — these come from a real post-trip workflow, not a product roadmap meeting.
-              </p>
-            </div>
-          </div>
-        </section>
+          ))}
+        </div>
 
-        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
+        {/* Gradient overlay at bottom for text legibility */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.4) 60%, transparent 100%)",
+          }}
+        />
 
-        {/* ── Tech ───────────────────────────────────────────────────────── */}
-        <section className="mb-14">
-          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-5">
-            How it works
-          </h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-6">
-            100% browser-based processing using standard Web APIs — Canvas API for conversion and resizing, Web Workers for non-blocking compression, FileReader for EXIF extraction. No server round-trips means faster results and zero privacy exposure.
+        {/* Overlaid text */}
+        <div className="absolute bottom-0 left-0 right-0 px-6 pb-8 sm:px-10 sm:pb-10">
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-white/50 mb-1.5">
+            Travel Photography
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              { label: "Framework",  value: "Next.js" },
-              { label: "Styling",    value: "Tailwind CSS" },
-              { label: "AI",         value: "Google Gemini" },
-              { label: "Payments",   value: "Stripe" },
-            ].map(({ label, value }) => (
-              <div
-                key={label}
-                className="p-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-[#FAFAFA] dark:bg-[#1E1E1E]"
-              >
-                <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-1">
-                  {label}
-                </p>
-                <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
-                  {value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
-
-        {/* ── About the creator ──────────────────────────────────────────── */}
-        <section className="mb-14">
-          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-5">
+          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white/90">
             Luca Sammarco
-          </h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-5">
-            Travel photographer and full-stack developer. I&apos;ve photographed in Sri Lanka, Bali, Japan, Thailand, and China. I build software that solves the problems I have — SammaPix is the most honest version of that.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href="https://github.com/lucasammarco"
-              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
+          </h1>
+        </div>
+      </section>
+
+      <main>
+        {/* ── Sri Lanka Gallery ──────────────────────────────────────────────── */}
+        <section className="bg-white dark:bg-[#191919] px-4 sm:px-8 py-16 sm:py-20">
+          <div className="max-w-6xl mx-auto">
+            {/* Section header */}
+            <div className="mb-10">
+              <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-2">
+                Portfolio
+              </p>
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                Sri Lanka 2025
+              </h2>
+              <p className="mt-2 text-sm text-[#737373] dark:text-[#A3A3A3] max-w-xl">
+                Fifteen days across Colombo, the Cultural Triangle, the hill
+                country, and the southern coast — photographed in March 2025.
+              </p>
+            </div>
+
+            {/* Masonry-style grid — CSS columns approach */}
+            <div
+              className="columns-1 sm:columns-2 lg:columns-3 gap-3"
+              style={{ columnGap: "0.75rem" }}
             >
-              GitHub: @lucasammarco →
-            </a>
-            <a
-              href="https://twitter.com/lucasammarco"
-              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
-            >
-              Twitter: @lucasammarco →
-            </a>
-            <a
-              href="https://lucasammarco.com"
-              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
-            >
-              lucasammarco.com →
-            </a>
+              {galleryPhotos.map((photo) => {
+                const aspectRatio =
+                  photo.width && photo.height
+                    ? photo.width / photo.height
+                    : 3 / 4;
+
+                return (
+                  <div
+                    key={photo.id}
+                    className="break-inside-avoid mb-3 overflow-hidden rounded-lg group"
+                  >
+                    <div
+                      className="relative w-full overflow-hidden"
+                      style={{ aspectRatio: String(aspectRatio) }}
+                    >
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Other destinations — blurred, coming soon */}
+            <div className="mt-14 pt-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+              <h3 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
+                Coming Soon
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { name: "Bali", year: "2024", gradient: "from-emerald-900 to-emerald-700" },
+                  { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
+                  { name: "Thailand", year: "2024", gradient: "from-amber-900 to-amber-700" },
+                  { name: "China", year: "2023", gradient: "from-sky-900 to-sky-700" },
+                ].map((dest) => (
+                  <div
+                    key={dest.name}
+                    className="relative overflow-hidden rounded-lg"
+                    style={{ aspectRatio: "3/4" }}
+                  >
+                    {/* Gradient placeholder (simulates blurred photo) */}
+                    <div className={`absolute inset-0 bg-gradient-to-b ${dest.gradient} blur-[2px]`} />
+                    {/* Frosted overlay */}
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+                    {/* Content */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                      <p className="text-white/90 text-sm font-semibold tracking-wide">
+                        {dest.name}
+                      </p>
+                      <p className="text-white/40 text-xs mt-0.5">{dest.year}</p>
+                      <span className="mt-3 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/60 border border-white/20 rounded-full">
+                        Coming soon
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mb-14" />
-
-        {/* ── CTA ────────────────────────────────────────────────────────── */}
-        <section className="flex flex-col sm:flex-row gap-3">
-          <Link
-            href="/tools"
-            className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
-          >
-            Try SammaPix free →
-          </Link>
-          <Link
-            href="/pricing"
-            className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-md bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
-          >
-            Go Pro →
-          </Link>
+        {/* ── Brief bio ─────────────────────────────────────────────────────── */}
+        <section className="bg-[#FAFAFA] dark:bg-[#111111] border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 sm:px-8 py-12">
+          <div className="max-w-2xl mx-auto">
+            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-4">
+              About Luca
+            </p>
+            <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Travel photographer and full-stack developer. Built SammaPix
+              because existing tools couldn&apos;t handle a real photography
+              workflow — too slow, too expensive, or required uploading your
+              photos to someone else&apos;s server.
+            </p>
+            <Link
+              href="/tools"
+              className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-[#8B5CF6] transition-colors"
+            >
+              Try the tools I built →
+            </Link>
+          </div>
         </section>
-
-        <div className="h-px bg-[#E5E5E5] dark:bg-[#2A2A2A] mt-14 mb-14" />
-
-        {/* ── My Work ────────────────────────────────────────────────────── */}
-        <section className="mb-14">
-          <h2 className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-2">
-            My Work
-          </h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-8">
-            The photos that inspired SammaPix — shot across Asia with the tools I built.
-          </p>
-
-          {(() => {
-            const sriLanka = allTrips.find((t) => t.slug === "sri-lanka-2025");
-            if (!sriLanka) return null;
-            const year = getTripYear(sriLanka);
-            return (
-              <Link
-                href={`/portfolio/${sriLanka.slug}`}
-                className="group flex flex-col sm:flex-row rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#D4D4D4] dark:hover:border-[#333] transition-colors"
-              >
-                {/* Image — left column on sm+, full-width on mobile */}
-                <div
-                  className="relative w-full sm:w-64 shrink-0"
-                  style={{ aspectRatio: "4/3" }}
-                >
-                  <Image
-                    src={sriLanka.coverSrc}
-                    alt={`${sriLanka.destination} travel photography by Luca Sammarco`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 256px"
-                    className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                  />
-                </div>
-
-                {/* Text — right column */}
-                <div className="flex flex-col justify-center px-5 py-5 gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                      {sriLanka.destination}
-                    </span>
-                    <span className="text-xs text-[#A3A3A3] dark:text-[#737373] font-medium">
-                      {year}
-                    </span>
-                  </div>
-                  <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed line-clamp-3">
-                    {sriLanka.excerpt}
-                  </p>
-                  <span className="text-xs font-medium text-[#6366F1] group-hover:underline mt-1">
-                    View portfolio →
-                  </span>
-                </div>
-              </Link>
-            );
-          })()}
-        </section>
-
       </main>
     </div>
   );
