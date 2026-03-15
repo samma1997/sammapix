@@ -40,7 +40,6 @@ export default function AboutPage() {
   const allTrips = getAllTrips();
   const sriLanka = allTrips.find((t) => t.slug === "sri-lanka-2025");
   const heroPhotos = sriLanka ? sriLanka.photos.slice(0, 5) : [];
-  const galleryPhotos = sriLanka ? sriLanka.photos : [];
 
   const personSchema = {
     "@context": "https://schema.org",
@@ -125,91 +124,69 @@ export default function AboutPage() {
       </section>
 
       <main>
-        {/* ── Sri Lanka Gallery ──────────────────────────────────────────────── */}
+        {/* ── Portfolio ──────────────────────────────────────────────────────── */}
         <section className="bg-white dark:bg-[#191919] px-4 sm:px-8 py-16 sm:py-20">
           <div className="max-w-6xl mx-auto">
-            {/* Section header */}
             <div className="mb-10">
               <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-2">
                 Portfolio
               </p>
               <h2 className="text-xl sm:text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                Sri Lanka 2025
+                Travel Photography
               </h2>
               <p className="mt-2 text-sm text-[#737373] dark:text-[#A3A3A3] max-w-xl">
-                Fifteen days across Colombo, the Cultural Triangle, the hill
-                country, and the southern coast — photographed in March 2025.
+                Documenting the world through a travel lens. Click a destination to explore the full gallery.
               </p>
             </div>
 
-            {/* Masonry-style grid — CSS columns approach */}
-            <div
-              className="columns-1 sm:columns-2 lg:columns-3 gap-3"
-              style={{ columnGap: "0.75rem" }}
-            >
-              {galleryPhotos.map((photo) => {
-                const aspectRatio =
-                  photo.width && photo.height
-                    ? photo.width / photo.height
-                    : 3 / 4;
+            {/* Destination cards — vertical, like the old hero strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {/* Sri Lanka — real photos, clickable */}
+              <Link
+                href="/portfolio/sri-lanka-2025"
+                className="group relative overflow-hidden rounded-lg"
+                style={{ aspectRatio: "3/4" }}
+              >
+                <Image
+                  src={sriLanka?.photos[0]?.srcThumb ?? ""}
+                  alt="Sri Lanka travel photography 2025"
+                  fill
+                  className="object-cover brightness-80 group-hover:brightness-100 group-hover:scale-[1.03] transition-all duration-500"
+                  sizes="(max-width: 640px) 50vw, 20vw"
+                  unoptimized
+                />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <p className="text-white text-sm font-semibold">Sri Lanka</p>
+                  <p className="text-white/50 text-xs">2025 &middot; {sriLanka?.photos.length ?? 15} photos</p>
+                </div>
+              </Link>
 
-                return (
-                  <div
-                    key={photo.id}
-                    className="break-inside-avoid mb-3 overflow-hidden rounded-lg group"
-                  >
-                    <div
-                      className="relative w-full overflow-hidden"
-                      style={{ aspectRatio: String(aspectRatio) }}
-                    >
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-                        unoptimized
-                      />
-                    </div>
+              {/* Coming soon destinations — blurred */}
+              {[
+                { name: "Bali", year: "2024", gradient: "from-emerald-900 to-emerald-700" },
+                { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
+                { name: "Thailand", year: "2024", gradient: "from-amber-900 to-amber-700" },
+                { name: "China", year: "2023", gradient: "from-sky-900 to-sky-700" },
+              ].map((dest) => (
+                <div
+                  key={dest.name}
+                  className="relative overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "3/4" }}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-b ${dest.gradient} blur-[2px]`} />
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <p className="text-white/90 text-sm font-semibold tracking-wide">
+                      {dest.name}
+                    </p>
+                    <p className="text-white/40 text-xs mt-0.5">{dest.year}</p>
+                    <span className="mt-3 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/60 border border-white/20 rounded-full">
+                      Coming soon
+                    </span>
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Other destinations — blurred, coming soon */}
-            <div className="mt-14 pt-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-              <h3 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
-                Coming Soon
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { name: "Bali", year: "2024", gradient: "from-emerald-900 to-emerald-700" },
-                  { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
-                  { name: "Thailand", year: "2024", gradient: "from-amber-900 to-amber-700" },
-                  { name: "China", year: "2023", gradient: "from-sky-900 to-sky-700" },
-                ].map((dest) => (
-                  <div
-                    key={dest.name}
-                    className="relative overflow-hidden rounded-lg"
-                    style={{ aspectRatio: "3/4" }}
-                  >
-                    {/* Gradient placeholder (simulates blurred photo) */}
-                    <div className={`absolute inset-0 bg-gradient-to-b ${dest.gradient} blur-[2px]`} />
-                    {/* Frosted overlay */}
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-                    {/* Content */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <p className="text-white/90 text-sm font-semibold tracking-wide">
-                        {dest.name}
-                      </p>
-                      <p className="text-white/40 text-xs mt-0.5">{dest.year}</p>
-                      <span className="mt-3 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/60 border border-white/20 rounded-full">
-                        Coming soon
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
