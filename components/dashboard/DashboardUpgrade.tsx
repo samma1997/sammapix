@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Zap,
@@ -10,6 +9,7 @@ import {
   Sparkles,
   Check,
   Crown,
+  Coins,
 } from "lucide-react";
 
 interface DashboardUpgradeProps {
@@ -17,7 +17,6 @@ interface DashboardUpgradeProps {
 }
 
 export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [annual, setAnnual] = useState(false);
   const savePercent = Math.round((1 - 59 / (7 * 12)) * 100);
@@ -28,6 +27,8 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
       const res = await fetch("/api/checkout", {
         method: "POST",
         credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: annual ? "annual" : "monthly" }),
       });
       const data = await res.json();
       if (data.url) {
@@ -55,7 +56,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             Upgrade to Pro
           </h1>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] max-w-md mx-auto">
-            Unlock the full AI workflow. 30-day free trial — cancel anytime.
+            Unlock the full AI workflow. Cancel anytime, no questions asked.
           </p>
         </div>
 
@@ -88,63 +89,96 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           </div>
         </div>
 
-        {/* Price */}
-        <div className="text-center mb-8">
-          <div className="flex items-baseline justify-center gap-1.5">
-            <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-              ${annual ? "59" : "7"}
-            </span>
-            <span className="text-sm text-[#A3A3A3]">
-              / {annual ? "year" : "month"}
-            </span>
+        {/* Price card */}
+        <div className="border border-[#6366F1]/30 rounded-xl p-8 bg-white dark:bg-[#1E1E1E] ring-1 ring-[#6366F1]/10 mb-8">
+          <div className="text-center mb-6">
+            <div className="flex items-baseline justify-center gap-1.5">
+              <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
+                ${annual ? "59" : "7"}
+              </span>
+              <span className="text-sm text-[#A3A3A3]">
+                / {annual ? "year" : "month"}
+              </span>
+            </div>
+            <p className="mt-2 text-sm text-[#6366F1] font-medium">
+              {annual ? "60 days free trial" : "7 days free trial"}
+            </p>
+            {annual && (
+              <p className="mt-1 text-xs text-[#A3A3A3]">
+                Launch promo — 60 days free for early adopters
+              </p>
+            )}
           </div>
-          <p className="mt-2 text-xs text-[#A3A3A3]">
-            30-day free trial &middot; Cancel anytime
-          </p>
-        </div>
 
-        {/* CTA */}
-        <div className="flex justify-center mb-10">
+          {/* Features */}
+          <div className="space-y-3 mb-8">
+            {[
+              { icon: Zap, text: "AI Workflow Pipeline", sub: "Blog, Instagram, E-commerce presets — run everything in one click" },
+              { icon: Sparkles, text: "200 AI operations / day", sub: "AI Rename + AI Alt Text included daily" },
+              { icon: Image, text: "500 files per batch", sub: "Process full shoots at once" },
+              { icon: Coins, text: "Buy extra AI credits", sub: "When 200/day isn't enough — credits never expire" },
+              { icon: Shield, text: "No ads", sub: "Clean workspace, no distractions" },
+              { icon: Check, text: "Install as desktop app", sub: "Works offline, launches instantly" },
+              { icon: Crown, text: "Priority support", sub: "Get help when you need it" },
+            ].map(({ icon: Icon, text, sub }) => (
+              <div key={text} className="flex items-start gap-3">
+                <Icon className="h-4 w-4 text-[#6366F1] shrink-0 mt-0.5" strokeWidth={1.5} />
+                <div>
+                  <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">{text}</p>
+                  <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">{sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-md transition-colors disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-md transition-colors disabled:opacity-60"
           >
             {loading ? (
               <div className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
             ) : (
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
-            Start 30-day free trial
+            {annual
+              ? "Start 60-day free trial — $59/year"
+              : "Start 7-day free trial — $7/month"
+            }
           </button>
+
+          <p className="mt-3 text-center text-xs text-[#A3A3A3]">
+            Cancel anytime &middot; 30-day money-back guarantee &middot; No charge during trial
+          </p>
         </div>
 
-        {/* What's included */}
-        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E] mb-8">
+        {/* What you're missing */}
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E] mb-6">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-            Everything in Pro
+            Free vs Pro — what changes
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="space-y-2">
             {[
-              { icon: Zap, text: "AI Workflow Pipeline — Blog, Instagram, E-commerce presets" },
-              { icon: Image, text: "500 files per batch" },
-              { icon: Sparkles, text: "200 AI operations per day (rename + alt text)" },
-              { icon: Shield, text: "No ads — clean workspace" },
-              { icon: Crown, text: "Priority support" },
-              { icon: Check, text: "Install as desktop app" },
-            ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-start gap-2.5">
-                <Icon className="h-4 w-4 text-[#6366F1] shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">{text}</span>
+              { feature: "AI operations / day", free: "5", pro: "200" },
+              { feature: "Files per batch", free: "20", pro: "500" },
+              { feature: "AI Workflow Pipeline", free: "No", pro: "Yes" },
+              { feature: "Buy extra credits", free: "No", pro: "Yes" },
+              { feature: "Ads", free: "Yes", pro: "None" },
+            ].map(({ feature, free, pro }) => (
+              <div key={feature} className="grid grid-cols-3 text-xs py-1.5 border-b border-[#F5F5F5] dark:border-[#252525] last:border-0">
+                <span className="text-[#525252] dark:text-[#A3A3A3]">{feature}</span>
+                <span className="text-center text-[#A3A3A3]">{free}</span>
+                <span className="text-center font-medium text-[#171717] dark:text-[#E5E5E5]">{pro}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Credits note */}
+        {/* Credits teaser */}
         <div className="text-center">
-          <p className="text-xs text-[#A3A3A3] mb-2">
-            Need even more? Buy AI credits on top of your Pro plan.
+          <p className="text-xs text-[#A3A3A3]">
+            Pro users can also buy extra AI credits when needed.
           </p>
           <Link
             href="/dashboard/credits"

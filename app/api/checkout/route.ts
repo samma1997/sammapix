@@ -11,8 +11,11 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
 ];
 
+// Trial periods — change these when promo ends
+const TRIAL_DAYS_MONTHLY = 7;
+const TRIAL_DAYS_ANNUAL = 60; // Promo: first users get 60 days free
+
 export async function POST(req: NextRequest) {
-  // CSRF: verify request originates from our own frontend in production
   const origin = req.headers.get("origin");
   if (origin && process.env.NODE_ENV === "production") {
     if (!ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
@@ -28,32 +31,47 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Parse plan type from request body
+  let plan: "monthly" | "annual" = "monthly";
+  try {
+    const body = await req.json().catch(() => ({}));
+    if (body.plan === "annual") plan = "annual";
+  } catch {
+    // default to monthly
+  }
+
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
+  const priceId = plan === "annual"
+    ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID || process.env.STRIPE_PRO_PRICE_ID!)
+    : process.env.STRIPE_PRO_PRICE_ID!;
+  const trialDays = plan === "annual" ? TRIAL_DAYS_ANNUAL : TRIAL_DAYS_MONTHLY;
 
   try {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
-      line_items: [{ price: process.env.STRIPE_PRO_PRICE_ID!, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       customer_email: session.user.email,
-      success_url: `${appUrl}/pricing?success=true`,
-      cancel_url: `${appUrl}/pricing?canceled=true`,
-      metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
+      success_url: `${appUrl}/dashboard?upgraded=true`,
+      cancel_url: `${appUrl}/dashboard/upgrade?canceled=true`,
+      metadata: {
+        userId: (session.user as { id?: string }).id ?? session.user.email,
+        plan,
+      },
       subscription_data: {
-        trial_period_days: 30,
+        trial_period_days: trialDays,
         metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       },
     });
 
-    // Fire Meta Conversions API event server-side
     sendMetaEvent({
       eventName: "InitiateCheckout",
-      sourceUrl: `${appUrl}/try-pro`,
+      sourceUrl: `${appUrl}/dashboard/upgrade`,
       email: session.user.email,
       ipAddress: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? undefined,
       userAgent: req.headers.get("user-agent") ?? undefined,
-      customData: { currency: "USD", value: 7.00 },
-    }).catch(() => {}); // fire-and-forget
+      customData: { currency: "USD", value: plan === "annual" ? 59 : 7 },
+    }).catch(() => {});
 
     return NextResponse.json({ url: checkoutSession.url });
   } catch (err) {

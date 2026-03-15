@@ -9,12 +9,14 @@ interface CheckoutButtonProps {
   className?: string;
   size?: "sm" | "md" | "lg" | "xl";
   children?: React.ReactNode;
+  plan?: "monthly" | "annual";
 }
 
 export default function CheckoutButton({
   className,
   size = "lg",
   children,
+  plan = "monthly",
 }: CheckoutButtonProps) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -30,7 +32,8 @@ export default function CheckoutButton({
     }
 
     if (!session) {
-      router.push("/auth/signin?callbackUrl=/pricing");
+      // Not logged in → signin, then redirect to dashboard upgrade
+      router.push("/api/auth/signin?callbackUrl=/dashboard/upgrade");
       return;
     }
     setLoading(true);
@@ -38,6 +41,8 @@ export default function CheckoutButton({
       const res = await fetch("/api/checkout", {
         method: "POST",
         credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan }),
       });
       const data = (await res.json()) as { url?: string; error?: string; code?: string };
       if (data.url) {
