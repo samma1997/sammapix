@@ -169,10 +169,18 @@ export default function Navbar() {
               <Button variant="ghost" size="sm">Sign in</Button>
             </Link>
           )}
-          {(session?.user as { plan?: string })?.plan !== "pro" && (
-            <Link href="/pricing">
+          {status !== "authenticated" && (
+            <Link href="/api/auth/signin">
               <Button variant="primary" size="sm" className="gap-1">
-                Get Pro
+                Try free
+                <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
+              </Button>
+            </Link>
+          )}
+          {status === "authenticated" && (session?.user as { plan?: string })?.plan !== "pro" && (
+            <Link href="/try-pro">
+              <Button variant="primary" size="sm" className="gap-1">
+                Go Pro
                 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
               </Button>
             </Link>

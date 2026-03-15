@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Lock, Zap, FileImage, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import DropZone from "@/components/upload/DropZone";
 import SettingsToolbar from "@/components/upload/SettingsToolbar";
 import FileList from "@/components/files/FileList";
@@ -25,6 +26,8 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
   const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const pathname = usePathname();
+  const inDashboard = pathname.startsWith("/dashboard");
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -136,7 +139,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
       </div>
 
       {/* ── CTA ── */}
-      {!hasFiles && (
+      {!hasFiles && !isPro && !inDashboard && (
         <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3 tracking-tight">

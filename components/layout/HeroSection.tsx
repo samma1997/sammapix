@@ -27,17 +27,17 @@ export default function HeroSection() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="/tools"
+            href="/api/auth/signin"
             className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
           >
-            Start free — no signup
+            Create free account
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </Link>
           <Link
-            href="/try-pro"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[#6366F1] rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 transition-colors"
+            href="/tools"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors"
           >
-            Try Pro free for 30 days
+            Explore tools
           </Link>
         </div>
 
