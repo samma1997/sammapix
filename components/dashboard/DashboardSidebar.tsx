@@ -262,7 +262,7 @@ export default function DashboardSidebar({
         {!isPro && (
           <div className="pt-2">
             <Link
-              href="/pricing"
+              href="/dashboard/upgrade"
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 w-full px-3 py-2 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-md transition-colors"
             >

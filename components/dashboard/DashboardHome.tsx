@@ -372,10 +372,10 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       if (data.url) {
         window.location.href = data.url;
       } else {
-        router.push("/pricing");
+        router.push("/dashboard/upgrade");
       }
     } catch {
-      router.push("/pricing");
+      router.push("/dashboard/upgrade");
     } finally {
       setCheckoutLoading(false);
     }
