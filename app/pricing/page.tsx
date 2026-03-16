@@ -166,7 +166,7 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                "All 15 tools included",
+                "All 20 tools included",
                 "Up to 20 files per batch",
                 "5 AI operations / day",
                 "Community support",
@@ -334,7 +334,7 @@ export default function PricingPage() {
         {/* ── All tools grid ─────────────────────────────────────────────── */}
         <div className="mb-16">
           <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] text-center mb-1">
-            All 15 tools. Both plans.
+            All 20 tools. Both plans.
           </p>
           <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-8">
             Pro users get early access to new tools as they launch.
@@ -428,7 +428,7 @@ export default function PricingPage() {
           <div className="space-y-3">
             <FaqItem
               q="Is SammaPix free?"
-              a="Yes. All 15 tools are free forever with no account required. The free plan is not a trial — it never expires."
+              a="Yes. All 20 tools are free forever with no account required. The free plan is not a trial — it never expires."
             />
             <FaqItem
               q="What are credits?"
@@ -539,7 +539,7 @@ export default function PricingPage() {
                   name: "Is SammaPix free?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Yes. All 15 tools are free forever with no account required. The free plan is not a trial — it never expires.",
+                    text: "Yes. All 20 tools are free forever with no account required. The free plan is not a trial — it never expires.",
                   },
                 },
                 {

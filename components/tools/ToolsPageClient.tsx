@@ -76,9 +76,102 @@ const IconVideoThumb: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+const IconVideoCompress: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes vc2-squeeze { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
+      @keyframes vc2-al { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(4px); } }
+      @keyframes vc2-ar { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(-4px); } }
+      .vc2-body { transform-origin: 24px 22px; animation: vc2-squeeze 2s ease-in-out infinite; }
+      .vc2-al { animation: vc2-al 2s ease-in-out infinite; }
+      .vc2-ar { animation: vc2-ar 2s ease-in-out infinite; }
+    `}</style>
+    <g className="vc2-body">
+      <rect x="8" y="16" width="32" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="16" width="32" height="6" rx="2" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.25"/>
+      <line x1="16" y1="16" x2="14" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
+      <line x1="22" y1="16" x2="20" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
+      <line x1="28" y1="16" x2="26" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
+      <path d="M20 27 L20 33 L26 30 Z" fill={accent} fillOpacity="0.6"/>
+    </g>
+    <g className="vc2-al"><path d="M4 22 L8 19 M4 22 L8 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
+    <g className="vc2-ar"><path d="M44 22 L40 19 M44 22 L40 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
+  </svg>
+);
+
+const IconVideoGif: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes vg2-frame { 0%, 100% { opacity: 1; } 33% { opacity: 0.4; } 66% { opacity: 0.7; } }
+      @keyframes vg2-loop { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .vg2-f1 { animation: vg2-frame 1.8s ease-in-out 0s infinite; }
+      .vg2-f2 { animation: vg2-frame 1.8s ease-in-out 0.6s infinite; }
+      .vg2-f3 { animation: vg2-frame 1.8s ease-in-out 1.2s infinite; }
+      .vg2-loop { transform-origin: 34px 34px; animation: vg2-loop 2.4s linear infinite; }
+    `}</style>
+    <g className="vg2-f1"><rect x="4" y="8" width="20" height="15" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25" strokeOpacity="0.4"/></g>
+    <g className="vg2-f2"><rect x="7" y="11" width="20" height="15" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.25" strokeOpacity="0.6"/></g>
+    <g className="vg2-f3">
+      <rect x="10" y="14" width="20" height="15" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <path d="M17 18 L17 23 L23 20.5 Z" fill={accent} fillOpacity="0.7"/>
+    </g>
+    <text x="4" y="38" fontSize="7" fill={accent} fontWeight="800" fontFamily="monospace" letterSpacing="1">GIF</text>
+    <g className="vg2-loop">
+      <path d="M34 29 A5 5 0 1 1 29 34" stroke={accent} strokeWidth="1.75" strokeLinecap="round" fill="none"/>
+      <path d="M28 30 L29 34 L33 33" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </g>
+  </svg>
+);
+
+const IconTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes tr2-wave { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+      @keyframes tr2-line { 0%, 100% { opacity: 0.3; transform: scaleX(0.6); } 50% { opacity: 1; transform: scaleX(1); } }
+      .tr2-b1 { transform-origin: 8px 22px; animation: tr2-wave 1.2s ease-in-out 0s infinite; }
+      .tr2-b2 { transform-origin: 12px 22px; animation: tr2-wave 1.2s ease-in-out 0.15s infinite; }
+      .tr2-b3 { transform-origin: 16px 22px; animation: tr2-wave 1.2s ease-in-out 0.3s infinite; }
+      .tr2-b4 { transform-origin: 20px 22px; animation: tr2-wave 1.2s ease-in-out 0.45s infinite; }
+      .tr2-b5 { transform-origin: 24px 22px; animation: tr2-wave 1.2s ease-in-out 0.6s infinite; }
+      .tr2-l1 { transform-origin: 28px 31px; animation: tr2-line 1.8s ease-in-out 0s infinite; }
+      .tr2-l2 { transform-origin: 28px 36px; animation: tr2-line 1.8s ease-in-out 0.4s infinite; }
+      .tr2-l3 { transform-origin: 28px 41px; animation: tr2-line 1.8s ease-in-out 0.8s infinite; }
+    `}</style>
+    <g className="tr2-b1"><rect x="6" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
+    <g className="tr2-b2"><rect x="11" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
+    <g className="tr2-b3"><rect x="16" y="12" width="3" height="20" rx="1.5" fill={accent}/></g>
+    <g className="tr2-b4"><rect x="21" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
+    <g className="tr2-b5"><rect x="26" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
+    <path d="M33 22 L38 22 M35 19 L38 22 L35 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="tr2-l1"><rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+    <g className="tr2-l2"><rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+    <g className="tr2-l3"><rect x="28" y="39" width="14" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+  </svg>
+);
+
+const IconVideoResize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes vr2-wide { 0%, 40%, 100% { opacity: 1; transform: scale(1); } 60%, 80% { opacity: 0.2; transform: scale(0.9); } }
+      @keyframes vr2-tall { 0%, 40%, 100% { opacity: 0.2; transform: scale(0.9); } 60%, 80% { opacity: 1; transform: scale(1); } }
+      .vr2-wide { transform-origin: 13px 22px; animation: vr2-wide 2.4s ease-in-out infinite; }
+      .vr2-tall { transform-origin: 35px 24px; animation: vr2-tall 2.4s ease-in-out infinite; }
+    `}</style>
+    <g className="vr2-wide">
+      <rect x="2" y="16" width="22" height="12" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <text x="6" y="25" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">16:9</text>
+    </g>
+    <path d="M26 22 L30 22 M28 20 L30 22 L28 24" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="vr2-tall">
+      <rect x="28" y="10" width="18" height="28" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="31" y="27" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">9:16</text>
+    </g>
+  </svg>
+);
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Category = "All" | "Optimize" | "AI" | "Organize" | "Edit";
+type Category = "All" | "Optimize" | "AI" | "Organize" | "Edit" | "Video";
 
 interface ToolWithCategory extends ToolCardData {
   category: Category[];
@@ -212,7 +305,43 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["100% Free", "MP4/WebM"],
     Icon: IconVideoThumb,
-    category: ["Edit"],
+    category: ["Video"],
+  },
+  {
+    name: "Video Compress",
+    href: "/tools/video-compress",
+    tagline: "Compress MP4, WebM, MOV in your browser. No upload.",
+    accent: "#7C3AED",
+    badges: ["100% Free", "FFmpeg"],
+    Icon: IconVideoCompress,
+    category: ["Video"],
+  },
+  {
+    name: "Video to GIF",
+    href: "/tools/video-gif",
+    tagline: "Convert any video clip to animated GIF.",
+    accent: "#D946EF",
+    badges: ["100% Free", "Up to 15s"],
+    Icon: IconVideoGif,
+    category: ["Video"],
+  },
+  {
+    name: "Transcribe",
+    href: "/tools/transcribe",
+    tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
+    accent: "#0891B2",
+    badges: ["AI-powered", "Gemini Flash"],
+    Icon: IconTranscribe,
+    category: ["Video"],
+  },
+  {
+    name: "Video Resize",
+    href: "/tools/video-resize",
+    tagline: "Resize video for Instagram, TikTok, YouTube with one click.",
+    accent: "#059669",
+    badges: ["100% Free", "Social presets"],
+    Icon: IconVideoResize,
+    category: ["Video"],
   },
   {
     name: "EXIF Lens",
@@ -227,7 +356,7 @@ const TOOLS: ToolWithCategory[] = [
 
 // ─── Category tabs config ─────────────────────────────────────────────────────
 
-const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Organize", "Edit"];
+const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Organize", "Edit", "Video"];
 
 // ─── Use cases ────────────────────────────────────────────────────────────────
 

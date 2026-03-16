@@ -5,6 +5,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Transpile @ffmpeg packages so webpack can process their ESM source.
+  // Without this, "type":"module" in their package.json causes resolution
+  // failures when webpack tries to require() named exports.
+  transpilePackages: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
   async redirects() {
     return [
       { source: '/destinations', destination: '/portfolio', permanent: true },

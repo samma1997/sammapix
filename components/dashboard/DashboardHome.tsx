@@ -86,7 +86,7 @@ const PERSONAS: {
   },
 ];
 
-// ─── Animated icons for Alt Text and Video Thumb ──────────────────────────────
+// ─── Animated icons for Alt Text, Video Thumb, and new video tools ───────────
 
 const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -139,6 +139,99 @@ const IconVideoThumb: React.FC<{ accent: string }> = ({ accent }) => (
       <line x1="19" y1="10" x2="19" y2="32" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeOpacity="0.7"/>
     </g>
     <path d="M34 36 L34 44 M30 40 L34 44 L38 40" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const IconDhVideoCompress: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dhvc-squeeze { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
+      @keyframes dhvc-al { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(4px); } }
+      @keyframes dhvc-ar { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(-4px); } }
+      .dhvc-body { transform-origin: 24px 22px; animation: dhvc-squeeze 2s ease-in-out infinite; }
+      .dhvc-al { animation: dhvc-al 2s ease-in-out infinite; }
+      .dhvc-ar { animation: dhvc-ar 2s ease-in-out infinite; }
+    `}</style>
+    <g className="dhvc-body">
+      <rect x="8" y="16" width="32" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="16" width="32" height="6" rx="2" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.25"/>
+      <line x1="16" y1="16" x2="14" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
+      <line x1="22" y1="16" x2="20" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
+      <line x1="28" y1="16" x2="26" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
+      <path d="M20 27 L20 33 L26 30 Z" fill={accent} fillOpacity="0.6"/>
+    </g>
+    <g className="dhvc-al"><path d="M4 22 L8 19 M4 22 L8 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
+    <g className="dhvc-ar"><path d="M44 22 L40 19 M44 22 L40 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
+  </svg>
+);
+
+const IconDhVideoGif: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dhvg-frame { 0%, 100% { opacity: 1; } 33% { opacity: 0.4; } 66% { opacity: 0.7; } }
+      @keyframes dhvg-loop { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .dhvg-f1 { animation: dhvg-frame 1.8s ease-in-out 0s infinite; }
+      .dhvg-f2 { animation: dhvg-frame 1.8s ease-in-out 0.6s infinite; }
+      .dhvg-f3 { animation: dhvg-frame 1.8s ease-in-out 1.2s infinite; }
+      .dhvg-loop { transform-origin: 34px 34px; animation: dhvg-loop 2.4s linear infinite; }
+    `}</style>
+    <g className="dhvg-f1"><rect x="4" y="8" width="20" height="15" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25" strokeOpacity="0.4"/></g>
+    <g className="dhvg-f2"><rect x="7" y="11" width="20" height="15" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.25" strokeOpacity="0.6"/></g>
+    <g className="dhvg-f3">
+      <rect x="10" y="14" width="20" height="15" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <path d="M17 18 L17 23 L23 20.5 Z" fill={accent} fillOpacity="0.7"/>
+    </g>
+    <text x="4" y="38" fontSize="7" fill={accent} fontWeight="800" fontFamily="monospace" letterSpacing="1">GIF</text>
+    <g className="dhvg-loop">
+      <path d="M34 29 A5 5 0 1 1 29 34" stroke={accent} strokeWidth="1.75" strokeLinecap="round" fill="none"/>
+      <path d="M28 30 L29 34 L33 33" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </g>
+  </svg>
+);
+
+const IconDhTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dhtr-wave { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+      @keyframes dhtr-line { 0%, 100% { opacity: 0.3; transform: scaleX(0.6); } 50% { opacity: 1; transform: scaleX(1); } }
+      .dhtr-b1 { transform-origin: 8px 22px; animation: dhtr-wave 1.2s ease-in-out 0s infinite; }
+      .dhtr-b2 { transform-origin: 12px 22px; animation: dhtr-wave 1.2s ease-in-out 0.15s infinite; }
+      .dhtr-b3 { transform-origin: 16px 22px; animation: dhtr-wave 1.2s ease-in-out 0.3s infinite; }
+      .dhtr-b4 { transform-origin: 20px 22px; animation: dhtr-wave 1.2s ease-in-out 0.45s infinite; }
+      .dhtr-b5 { transform-origin: 24px 22px; animation: dhtr-wave 1.2s ease-in-out 0.6s infinite; }
+      .dhtr-l1 { transform-origin: 28px 31px; animation: dhtr-line 1.8s ease-in-out 0s infinite; }
+      .dhtr-l2 { transform-origin: 28px 36px; animation: dhtr-line 1.8s ease-in-out 0.4s infinite; }
+      .dhtr-l3 { transform-origin: 28px 41px; animation: dhtr-line 1.8s ease-in-out 0.8s infinite; }
+    `}</style>
+    <g className="dhtr-b1"><rect x="6" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
+    <g className="dhtr-b2"><rect x="11" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
+    <g className="dhtr-b3"><rect x="16" y="12" width="3" height="20" rx="1.5" fill={accent}/></g>
+    <g className="dhtr-b4"><rect x="21" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
+    <g className="dhtr-b5"><rect x="26" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
+    <path d="M33 22 L38 22 M35 19 L38 22 L35 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="dhtr-l1"><rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+    <g className="dhtr-l2"><rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+    <g className="dhtr-l3"><rect x="28" y="39" width="14" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+  </svg>
+);
+
+const IconDhVideoResize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dhvr-wide { 0%, 40%, 100% { opacity: 1; transform: scale(1); } 60%, 80% { opacity: 0.2; transform: scale(0.9); } }
+      @keyframes dhvr-tall { 0%, 40%, 100% { opacity: 0.2; transform: scale(0.9); } 60%, 80% { opacity: 1; transform: scale(1); } }
+      .dhvr-wide { transform-origin: 13px 22px; animation: dhvr-wide 2.4s ease-in-out infinite; }
+      .dhvr-tall { transform-origin: 35px 24px; animation: dhvr-tall 2.4s ease-in-out infinite; }
+    `}</style>
+    <g className="dhvr-wide">
+      <rect x="2" y="16" width="22" height="12" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <text x="6" y="25" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">16:9</text>
+    </g>
+    <path d="M26 22 L30 22 M28 20 L30 22 L28 24" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="dhvr-tall">
+      <rect x="28" y="10" width="18" height="28" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="31" y="27" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">9:16</text>
+    </g>
   </svg>
 );
 
@@ -300,7 +393,11 @@ const ALL_TOOLS: ToolEntry[] = [
   { name: "ResizePack",  slug: "resizepack",  accent: "#14B8A6", Icon: IconResizePack },
   { name: "Cull",        slug: "cull",        accent: "#F43F5E", Icon: IconCull },
   { name: "HEIC",        slug: "heic",        accent: "#6366F1", Icon: IconHEIC },
-  { name: "Video Thumb", slug: "video-thumb", accent: "#0EA5E9", Icon: IconVideoThumb },
+  { name: "Video Thumb",    slug: "video-thumb",    accent: "#0EA5E9", Icon: IconVideoThumb },
+  { name: "Video Compress", slug: "video-compress", accent: "#7C3AED", Icon: IconDhVideoCompress },
+  { name: "Video to GIF",   slug: "video-gif",      accent: "#D946EF", Icon: IconDhVideoGif },
+  { name: "Transcribe",     slug: "transcribe",     accent: "#0891B2", Icon: IconDhTranscribe },
+  { name: "Video Resize",   slug: "video-resize",   accent: "#059669", Icon: IconDhVideoResize },
 ];
 
 const PERSONA_RECOMMENDED: Record<Persona, string[]> = {
