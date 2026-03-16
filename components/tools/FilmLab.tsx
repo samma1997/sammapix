@@ -288,7 +288,7 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
 
       // 5. Grain
       if (grain > 0) {
-        const noiseAmount = (grain / 100) * 40;
+        const noiseAmount = (grain / 100) * 60;
         const offset = (Math.random() - 0.5) * noiseAmount;
         r = clamp(r + offset);
         g = clamp(g + offset);
@@ -298,15 +298,17 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
       // 6. Split toning (highlights & shadows)
       const lum = 0.299 * r + 0.587 * g + 0.114 * b;
 
-      if (lum > 180 && highlightSat > 0) {
+      if (lum > 150 && highlightSat > 0) {
         // Highlight toning — strength controlled by highlightSat
-        const blend = 0.15 * ((lum - 180) / 75) * highlightSat;
+        // Extended range (150–255) and raised blend coefficient for visible effect
+        const blend = 0.35 * ((lum - 150) / 105) * highlightSat;
         r = clamp(r * (1 - blend) + highlightRgb[0] * blend);
         g = clamp(g * (1 - blend) + highlightRgb[1] * blend);
         b = clamp(b * (1 - blend) + highlightRgb[2] * blend);
-      } else if (lum < 80 && shadowSat > 0) {
+      } else if (lum < 100 && shadowSat > 0) {
         // Shadow toning — strength controlled by shadowSat
-        const blend = 0.15 * (1 - lum / 80) * shadowSat;
+        // Extended range (0–100) and raised blend coefficient for visible effect
+        const blend = 0.35 * (1 - lum / 100) * shadowSat;
         r = clamp(r * (1 - blend) + shadowRgb[0] * blend);
         g = clamp(g * (1 - blend) + shadowRgb[1] * blend);
         b = clamp(b * (1 - blend) + shadowRgb[2] * blend);

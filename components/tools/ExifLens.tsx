@@ -648,7 +648,7 @@ export default function ExifLens() {
         </div>
       )}
 
-      {uiState === "downloading" && (
+      {uiState === "cleaning" && (
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
@@ -665,6 +665,23 @@ export default function ExifLens() {
             </div>
           </div>
           <p className="text-xs text-[#737373] truncate">{parseMessage || "Processing…"}</p>
+        </div>
+      )}
+
+      {uiState === "downloading" && (
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-white dark:bg-[#191919]">
+          <div className="mb-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
+                Building ZIP archive
+              </span>
+              <span className="text-xs text-[#A3A3A3]">…</span>
+            </div>
+            <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#333] rounded-full overflow-hidden">
+              <div className="h-full bg-[#171717] dark:bg-white rounded-full animate-pulse w-full" />
+            </div>
+          </div>
+          <p className="text-xs text-[#737373]">Preparing your files for download…</p>
         </div>
       )}
 
@@ -764,14 +781,40 @@ export default function ExifLens() {
                 </div>
               )}
 
-              {/* Clean & Download button */}
-              <button
-                onClick={handleCleanAndDownload}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
-              >
-                <ShieldOff className="h-4 w-4" strokeWidth={1.5} />
-                {cleanMode === "gps" ? "Remove GPS & Download ZIP" : "Remove all EXIF & Download ZIP"}
-              </button>
+              {/* Step 1: Remove button — shown before cleaning */}
+              {!isCleaned && (
+                <button
+                  onClick={handleClean}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                >
+                  <ShieldOff className="h-4 w-4" strokeWidth={1.5} />
+                  {cleanMode === "gps" ? "Remove GPS data" : "Remove all EXIF"}
+                </button>
+              )}
+
+              {/* Step 2: Success banner + Download button — shown after cleaning */}
+              {isCleaned && (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 px-4 py-3 bg-[#F0FDF4] dark:bg-[#0d2218] border border-[#BBF7D0] dark:border-[#166534] rounded-md">
+                    <svg className="h-4 w-4 text-[#16A34A] shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clipRule="evenodd" />
+                    </svg>
+                    <p className="text-sm font-medium text-[#16A34A]">
+                      {cleanMode === "gps" ? "GPS data removed from all files." : "All EXIF metadata removed."}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleDownload}
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                  >
+                    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M10.75 2.75a.75.75 0 0 0-1.5 0v8.614L6.295 8.235a.75.75 0 1 0-1.09 1.03l4.25 4.5a.75.75 0 0 0 1.09 0l4.25-4.5a.75.75 0 0 0-1.09-1.03l-2.955 3.129V2.75Z" />
+                      <path d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z" />
+                    </svg>
+                    Download cleaned files
+                  </button>
+                </div>
+              )}
             </>
           )}
 
