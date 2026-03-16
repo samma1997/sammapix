@@ -34,12 +34,13 @@ export async function compressImage(
     onProgress?.(80);
   } else {
     // Use browser-image-compression
+    // Target max size: scale relative to quality setting
+    // Quality 80 → maxSizeMB ~1, Quality 60 → ~0.5, Quality 100 → ~2
+    const targetMB = Math.max(0.3, (config.quality / 100) * 2);
     const options = {
-      // Target 4MB max — forces real compression even on large mobile photos
-      maxSizeMB: 4,
+      maxSizeMB: targetMB,
       useWebWorker: true,
       initialQuality: qualityToDecimal(config.quality),
-      // Limit dimensions to avoid processing unnecessarily large images
       maxWidthOrHeight: config.maxWidthOrHeight ?? 2560,
       exifOrientation: config.removeExif ? -1 : undefined,
       onProgress: (p: number) => {

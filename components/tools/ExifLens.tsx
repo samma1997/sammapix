@@ -96,7 +96,7 @@ interface ProcessedFile {
   downloadAsJpg?: boolean;
 }
 
-type UIState = "idle" | "parsing" | "results" | "downloading";
+type UIState = "idle" | "parsing" | "results" | "cleaning" | "downloading";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -457,16 +457,16 @@ export default function ExifLens() {
     [processFiles]
   );
 
-  // Clean all files and download ZIP in one step
-  const handleCleanAndDownload = useCallback(async () => {
-    setUiState("downloading");
+  // Step 1: Remove EXIF data from all files, update status, do NOT download
+  const handleClean = useCallback(async () => {
+    setUiState("cleaning");
     setParseProgress(0);
 
     const actionable = files.filter(
       (f) => f.fileType === "jpeg" || f.fileType === "heic"
     );
 
-    const cleaned: ProcessedFile[] = [...files];
+    const updated: ProcessedFile[] = [...files];
 
     for (let i = 0; i < actionable.length; i++) {
       const f = actionable[i];
@@ -487,10 +487,10 @@ export default function ExifLens() {
             : await removeAllExif(f.original);
         }
 
-        const idx = cleaned.findIndex((c) => c.id === f.id);
+        const idx = updated.findIndex((c) => c.id === f.id);
         if (idx !== -1) {
-          cleaned[idx] = {
-            ...cleaned[idx],
+          updated[idx] = {
+            ...updated[idx],
             currentBlob: blob,
             hasGps: false,
             status: cleanMode === "gps" ? "done-gps" : "done-exif",
@@ -498,21 +498,27 @@ export default function ExifLens() {
           };
         }
       } catch (err) {
-        const idx = cleaned.findIndex((c) => c.id === f.id);
+        const idx = updated.findIndex((c) => c.id === f.id);
         if (idx !== -1) {
           const msg =
             err instanceof Error ? err.message : "Failed to clean";
-          cleaned[idx] = { ...cleaned[idx], status: "error", errorMessage: msg };
+          updated[idx] = { ...updated[idx], status: "error", errorMessage: msg };
         }
       }
     }
 
-    setFiles(cleaned);
+    setFiles(updated);
+    setUiState("results");
+    setParseMessage("");
+    setParseProgress(0);
+  }, [files, cleanMode]);
 
-    // Build ZIP
+  // Step 2: Build ZIP from already-cleaned blobs and trigger download
+  const handleDownload = useCallback(async () => {
+    setUiState("downloading");
     try {
       const zip = new JSZip();
-      for (const f of cleaned) {
+      for (const f of files) {
         const source = f.currentBlob ?? f.original;
         const buffer = await source.arrayBuffer();
         zip.file(downloadName(f), buffer);
@@ -522,11 +528,8 @@ export default function ExifLens() {
     } catch {
       // silently continue
     }
-
     setUiState("results");
-    setParseMessage("");
-    setParseProgress(0);
-  }, [files, cleanMode]);
+  }, [files]);
 
   const handleReset = useCallback(() => {
     setFiles([]);
@@ -543,6 +546,12 @@ export default function ExifLens() {
     (f) => f.fileType === "jpeg" || f.fileType === "heic"
   ).length;
   const heicCount = files.filter((f) => f.fileType === "heic").length;
+  // True once every actionable file has been cleaned (or errored)
+  const isCleaned =
+    actionableCount > 0 &&
+    files
+      .filter((f) => f.fileType === "jpeg" || f.fileType === "heic")
+      .every((f) => f.status === "done-gps" || f.status === "done-exif" || f.status === "error");
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">

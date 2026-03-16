@@ -213,11 +213,13 @@ export const useImageStore = create<ImageStoreState>()(
       set((state) => {
         const item = state.items.find((i) => i.id === id);
         if (item) {
-          item.aiSuggestedName = name;
+          // Strip any extension from the AI-generated name to avoid double extensions
+          const cleanName = name.replace(/\.[^.]+$/, "");
+          item.aiSuggestedName = cleanName;
           item.aiAltText = altText;
           if (item.compressedName) {
             const ext = item.compressedName.split(".").pop() || "jpg";
-            item.compressedName = `${name}.${ext}`;
+            item.compressedName = `${cleanName}.${ext}`;
           }
         }
       });
