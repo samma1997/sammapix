@@ -33,12 +33,12 @@ export async function generateMetadata({
     title: `${trip.destination} ${year} — Travel Photography`,
     description: trip.description.slice(0, 155),
     alternates: {
-      canonical: `https://sammapix.com/portfolio/${trip.slug}`,
+      canonical: `https://sammapix.com/about/${trip.slug}`,
     },
     openGraph: {
       title: `${trip.destination} ${year} — Travel Photography`,
       description: trip.description.slice(0, 155),
-      url: `https://sammapix.com/portfolio/${trip.slug}`,
+      url: `https://sammapix.com/about/${trip.slug}`,
       type: "website",
       images: [{ url: trip.coverSrc, width: 1200, height: 630 }],
     },
@@ -93,7 +93,7 @@ export default async function TripPage({
     "@type": "ImageGallery",
     name: `${trip.destination} Photography — ${year}`,
     description: trip.description.slice(0, 200),
-    url: `https://sammapix.com/portfolio/${trip.slug}`,
+    url: `https://sammapix.com/about/${trip.slug}`,
     author: {
       "@type": "Person",
       name: "Luca Sammarco",
@@ -138,10 +138,10 @@ export default async function TripPage({
           className="flex items-center gap-2 text-xs text-gray-400 mb-6"
         >
           <Link
-            href="/portfolio"
+            href="/about"
             className="hover:text-gray-600 transition-colors"
           >
-            portfolio
+            about
           </Link>
           <span aria-hidden="true">/</span>
           <span className="text-gray-600">
@@ -175,10 +175,10 @@ export default async function TripPage({
       {/* ------------------------------------------------------------------ */}
       <div className="px-4 sm:px-6 pb-16 max-w-6xl mx-auto">
         <Link
-          href="/portfolio"
+          href="/about"
           className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
         >
-          &larr; back to portfolio
+          &larr; back to about
         </Link>
       </div>
     </>

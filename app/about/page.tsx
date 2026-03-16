@@ -143,7 +143,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {/* Sri Lanka — real photos, clickable */}
               <Link
-                href="/portfolio/sri-lanka-2025"
+                href="/about/sri-lanka-2025"
                 className="group relative overflow-hidden rounded-lg"
                 style={{ aspectRatio: "3/4" }}
               >

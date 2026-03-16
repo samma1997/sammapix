@@ -99,7 +99,7 @@ function TripCard({ trip }: TripCardProps) {
 
   return (
     <Link
-      href={`/portfolio/${trip.slug}`}
+      href={`/about/${trip.slug}`}
       aria-label={`${trip.destination} ${year}`}
       className="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
     >

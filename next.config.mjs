@@ -11,8 +11,9 @@ const nextConfig = {
   transpilePackages: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
   async redirects() {
     return [
-      { source: '/destinations', destination: '/portfolio', permanent: true },
-      { source: '/destinations/:slug', destination: '/portfolio/:slug', permanent: true },
+      { source: '/destinations', destination: '/about', permanent: true },
+      { source: '/destinations/:slug', destination: '/about/:slug', permanent: true },
+      { source: '/portfolio/:slug', destination: '/about/:slug', permanent: true },
       // Old blog slugs → new equivalents (301 permanent redirects)
       { source: '/blog/ai-image-renaming-seo', destination: '/blog/ai-image-renaming-seo-guide', permanent: true },
       { source: '/blog/tinypng-alternative', destination: '/vs/tinypng', permanent: true },
