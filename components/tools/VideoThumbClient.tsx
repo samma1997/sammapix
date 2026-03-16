@@ -49,24 +49,29 @@ async function extractFrame(video: HTMLVideoElement, time: number): Promise<stri
   });
 }
 
-function dataUrlToBlob(dataUrl: string, mimeType: ExportFormat, quality: number): Blob {
-  const img = new Image();
-  img.src = dataUrl;
+async function dataUrlToBlob(dataUrl: string, mimeType: ExportFormat, quality: number): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth || 1280;
+      canvas.height = img.naturalHeight || 720;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("Canvas unavailable"));
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  const canvas = document.createElement("canvas");
-  canvas.width = img.naturalWidth || 1280;
-  canvas.height = img.naturalHeight || 720;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Canvas unavailable");
-  ctx.drawImage(img, 0, 0);
-
-  // Convert canvas to blob synchronously via dataURL
-  const finalDataUrl = canvas.toDataURL(mimeType, quality / 100);
-  const byteString = atob(finalDataUrl.split(",")[1]);
-  const ab = new ArrayBuffer(byteString.length);
-  const ia = new Uint8Array(ab);
-  for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-  return new Blob([ab], { type: mimeType });
+      canvas.toBlob(
+        (blob) => {
+          if (blob) resolve(blob);
+          else reject(new Error("Failed to export frame"));
+        },
+        mimeType,
+        quality / 100
+      );
+    };
+    img.onerror = () => reject(new Error("Failed to load frame"));
+    img.src = dataUrl;
+  });
 }
 
 const FORMAT_EXT: Record<ExportFormat, string> = {
