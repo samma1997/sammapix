@@ -26,16 +26,23 @@ export async function compressImage(
   let resultBlob: Blob;
   let outputFormat: ImageFormat;
 
+  const hasAlphaChannel = /\/(png|webp|gif)$/i.test(file.type);
+
   if (config.convertToWebP) {
     // Resize to max 2560px before converting to WebP to avoid huge Canvas output
     const maxDim = config.maxWidthOrHeight ?? 2560;
     resultBlob = await convertToWebPCanvas(file, qualityToDecimal(config.quality), maxDim);
     outputFormat = "webp";
     onProgress?.(80);
+  } else if (hasAlphaChannel) {
+    // For PNG/WebP/GIF: use canvas-based compression to preserve transparency.
+    // browser-image-compression converts everything to JPEG internally, destroying alpha.
+    const maxDim = config.maxWidthOrHeight ?? 2560;
+    resultBlob = await compressWithCanvas(file, qualityToDecimal(config.quality), maxDim);
+    outputFormat = getMimeOutputFormat(file.type);
+    onProgress?.(80);
   } else {
-    // Use browser-image-compression
-    // Target max size: scale relative to quality setting
-    // Quality 80 → maxSizeMB ~1, Quality 60 → ~0.5, Quality 100 → ~2
+    // Use browser-image-compression for JPEG and other opaque formats
     const targetMB = Math.max(0.3, (config.quality / 100) * 2);
     const options = {
       maxSizeMB: targetMB,
@@ -132,6 +139,66 @@ export async function convertToWebPCanvas(
           }
         },
         "image/webp",
+        quality
+      );
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Failed to load image"));
+    };
+
+    img.src = url;
+  });
+}
+
+/**
+ * Canvas-based compression that preserves transparency for PNG/WebP/GIF.
+ * Redraws at the same format (no JPEG conversion), optionally downsizing.
+ */
+async function compressWithCanvas(
+  file: File,
+  quality: number,
+  maxDimension: number
+): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+      let { naturalWidth: w, naturalHeight: h } = img;
+      if (w > maxDimension || h > maxDimension) {
+        const ratio = Math.min(maxDimension / w, maxDimension / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        URL.revokeObjectURL(url);
+        reject(new Error("Canvas context not available"));
+        return;
+      }
+
+      // No white fill — preserve transparency
+      ctx.drawImage(img, 0, 0, w, h);
+
+      // Output in the same format as input to keep alpha channel
+      const outputMime = file.type || "image/png";
+      canvas.toBlob(
+        (blob) => {
+          URL.revokeObjectURL(url);
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error("Canvas compression failed"));
+          }
+        },
+        outputMime,
         quality
       );
     };
