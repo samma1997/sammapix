@@ -11,6 +11,7 @@ type QualityPreset = "high" | "medium" | "low" | "tiny";
 interface QualityOption {
   label: string;
   crf: number;
+  maxHeight: number;  // downscale to this max height (-2 keeps aspect ratio)
   desc: string;
 }
 
@@ -24,10 +25,10 @@ interface CompressionResult {
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const QUALITY_OPTIONS: Record<QualityPreset, QualityOption> = {
-  high:   { label: "High",   crf: 18, desc: "Near lossless, larger file" },
-  medium: { label: "Medium", crf: 23, desc: "Balanced quality & size" },
-  low:    { label: "Low",    crf: 28, desc: "Smaller file, noticeable loss" },
-  tiny:   { label: "Tiny",   crf: 32, desc: "Maximum compression" },
+  high:   { label: "High",   crf: 24, maxHeight: 1080, desc: "1080p, great quality" },
+  medium: { label: "Medium", crf: 28, maxHeight: 720,  desc: "720p, balanced" },
+  low:    { label: "Low",    crf: 32, maxHeight: 480,  desc: "480p, small file" },
+  tiny:   { label: "Tiny",   crf: 36, maxHeight: 360,  desc: "360p, maximum compression" },
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -129,15 +130,22 @@ export default function VideoCompressClient() {
 
       setProgress(10);
 
-      const { crf } = QUALITY_OPTIONS[quality];
+      const { crf, maxHeight } = QUALITY_OPTIONS[quality];
+
+      // Downscale to maxHeight if video is taller, keep aspect ratio (-2 = even width)
+      // "if(gt(ih,maxH))" only scales if input is larger than target
+      const scaleFilter = `scale=-2:'min(${maxHeight},ih)':flags=bilinear`;
 
       await ff.exec([
         "-i", inputName,
+        "-vf", scaleFilter,
         "-c:v", "libx264",
         "-crf", String(crf),
-        "-preset", "ultrafast",
+        "-preset", "veryfast",
+        "-pix_fmt", "yuv420p",
         "-c:a", "aac",
-        "-b:a", "128k",
+        "-b:a", "96k",
+        "-movflags", "+faststart",
         outputName,
       ]);
 
