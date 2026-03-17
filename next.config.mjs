@@ -70,7 +70,7 @@ const nextConfig = {
               // 'unsafe-inline' is required by Next.js for inline style tags and
               // React hydration scripts. 'unsafe-eval' has been REMOVED — Next.js
               // App Router does not require it.
-              "script-src 'self' 'unsafe-inline' https://js.stripe.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net",
+              "script-src 'self' 'unsafe-inline' blob: https://js.stripe.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               // blob: is required for client-side image preview URLs (createObjectURL)
@@ -79,7 +79,7 @@ const nextConfig = {
               // worker-src blob: is required for JSZip and browser-image-compression workers
               "worker-src 'self' blob:",
               // Nominatim geocoding is called server-side; client only hits /api/geocode
-              "connect-src 'self' https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net",
+              "connect-src 'self' https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net https://unpkg.com",
               "frame-src https://js.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",

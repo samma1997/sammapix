@@ -28,7 +28,7 @@ export async function getFFmpeg(): Promise<FFmpeg> {
     const instance = new FFmpeg();
 
     // Load single-thread core from CDN (avoids bundling 25MB)
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
     await instance.load({
       coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
       wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
