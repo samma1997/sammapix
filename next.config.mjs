@@ -42,6 +42,14 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // FFmpeg WASM files need permissive CORP for blob URL creation
+      {
+        source: "/ffmpeg/:path*",
+        headers: [
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
       {
         source: "/(.*)",
         headers: [

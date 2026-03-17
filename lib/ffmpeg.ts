@@ -3,7 +3,7 @@
 /**
  * FFmpeg.wasm singleton — lazy-loaded, single-thread build.
  * Single-thread avoids COOP/COEP conflicts with Stripe and OAuth.
- * The WASM binary (~32MB) is downloaded on first use and cached by the browser.
+ * WASM files are self-hosted in /public/ffmpeg/ to avoid CDN/CSP issues.
  */
 
 import { FFmpeg } from "@ffmpeg/ffmpeg";
@@ -11,15 +11,13 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 let ffmpeg: FFmpeg | null = null;
 let loadPromise: Promise<FFmpeg> | null = null;
 
-/**
- * Fetch a URL and convert it to a blob URL.
- * Falls back between CDNs if the primary fails.
- */
-async function fetchAsBlobURL(url: string, mimeType: string): Promise<string> {
+/** Fetch a local URL and return a blob URL */
+async function toBlobURL(url: string, mimeType: string): Promise<string> {
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`Failed to fetch ${url}: ${resp.status}`);
-  const blob = await resp.blob();
-  return URL.createObjectURL(new Blob([blob], { type: mimeType }));
+  const buf = await resp.arrayBuffer();
+  const blob = new Blob([buf], { type: mimeType });
+  return URL.createObjectURL(blob);
 }
 
 export async function getFFmpeg(): Promise<FFmpeg> {
@@ -27,34 +25,22 @@ export async function getFFmpeg(): Promise<FFmpeg> {
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
-    const instance = new FFmpeg();
+    try {
+      const instance = new FFmpeg();
 
-    // Try jsdelivr first (more reliable, better CORS), fallback to unpkg
-    const cdns = [
-      "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd",
-      "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd",
-    ];
+      // Self-hosted from /public/ffmpeg/ — no CDN, no CORS, no CSP issues
+      const coreURL = await toBlobURL("/ffmpeg/ffmpeg-core.js", "text/javascript");
+      const wasmURL = await toBlobURL("/ffmpeg/ffmpeg-core.wasm", "application/wasm");
 
-    let loaded = false;
-    for (const baseURL of cdns) {
-      try {
-        const coreURL = await fetchAsBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript");
-        const wasmURL = await fetchAsBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm");
-        await instance.load({ coreURL, wasmURL });
-        loaded = true;
-        break;
-      } catch (err) {
-        console.warn(`[FFmpeg] Failed to load from ${baseURL}:`, err);
-        // Try next CDN
-      }
+      await instance.load({ coreURL, wasmURL });
+
+      ffmpeg = instance;
+      return instance;
+    } catch (err) {
+      // Reset so next call retries instead of returning cached failed promise
+      loadPromise = null;
+      throw err;
     }
-
-    if (!loaded) {
-      throw new Error("Failed to load FFmpeg from all CDN sources. Check your network connection.");
-    }
-
-    ffmpeg = instance;
-    return instance;
   })();
 
   return loadPromise;
