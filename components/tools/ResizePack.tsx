@@ -133,9 +133,12 @@ async function resizeImage(
         const sy = maxSy * offsetY;
         ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
       } else {
-        // contain — fit inside, white background
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, targetW, targetH);
+        // contain — fit inside; transparent bg for PNG/WebP/GIF, white for JPEG
+        const hasAlpha = /\/(png|webp|gif)$/i.test(file.type);
+        if (!hasAlpha) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, targetW, targetH);
+        }
         const scale = Math.min(
           targetW / img.naturalWidth,
           targetH / img.naturalHeight

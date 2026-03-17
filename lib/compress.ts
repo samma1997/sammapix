@@ -113,9 +113,13 @@ export async function convertToWebPCanvas(
         return;
       }
 
-      // White background for transparent images
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Only add white background for formats without alpha (JPEG).
+      // PNG, WebP, GIF support transparency — preserve it.
+      const hasAlpha = /\/(png|webp|gif)$/i.test(file.type);
+      if (!hasAlpha) {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
       ctx.drawImage(img, 0, 0, w, h);
 
       canvas.toBlob(

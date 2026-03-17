@@ -264,8 +264,11 @@ async function resizeImageBlob(
         const offsetX = (targetW - scaledW) / 2;
         const offsetY = (targetH - scaledH) / 2;
 
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0, 0, targetW, targetH);
+        const hasAlpha1 = /\/(png|webp|gif)$/i.test(blob.type);
+        if (!hasAlpha1) {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(0, 0, targetW, targetH);
+        }
         ctx.drawImage(img, offsetX, offsetY, scaledW, scaledH);
 
         canvas.toBlob((b) => {
@@ -292,8 +295,11 @@ async function resizeImageBlob(
       const ctx = canvas.getContext("2d");
       if (!ctx) { URL.revokeObjectURL(url); reject(new Error("Canvas unavailable")); return; }
 
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillRect(0, 0, w, h);
+      const hasAlpha2 = /\/(png|webp|gif)$/i.test(blob.type);
+      if (!hasAlpha2) {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, w, h);
+      }
       ctx.drawImage(img, 0, 0, w, h);
 
       canvas.toBlob((b) => {

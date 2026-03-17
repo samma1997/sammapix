@@ -32,10 +32,13 @@ export async function convertToWebP(file: File, quality = 0.85): Promise<Blob> {
         return;
       }
 
-      // White background ensures PNGs with alpha look correct in formats
-      // and browsers that do not honour WebP transparency.
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Preserve transparency for PNG, WebP, GIF sources.
+      // Only add white background for opaque formats (JPEG).
+      const hasAlpha = /\/(png|webp|gif)$/i.test(file.type);
+      if (!hasAlpha) {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
       ctx.drawImage(img, 0, 0);
 
       canvas.toBlob(
