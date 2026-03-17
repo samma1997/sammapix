@@ -367,8 +367,10 @@ export default function VideoThumbClient() {
             ref={videoRef}
             src={videoUrl ?? ""}
             className="hidden"
-            preload="metadata"
-            crossOrigin="anonymous"
+            preload="auto"
+            onLoadedMetadata={() => {
+              // Video metadata ready for frame extraction
+            }}
           />
 
           {/* Extract button */}
