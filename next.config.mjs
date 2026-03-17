@@ -79,7 +79,7 @@ const nextConfig = {
               // worker-src blob: is required for JSZip and browser-image-compression workers
               "worker-src 'self' blob:",
               // Nominatim geocoding is called server-side; client only hits /api/geocode
-              "connect-src 'self' https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net https://unpkg.com",
+              "connect-src 'self' https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net https://unpkg.com https://cdn.jsdelivr.net",
               "frame-src https://js.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",
