@@ -21,13 +21,19 @@ interface ToolInterfaceProps {
   defaultMode?: ToolMode;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
-  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday } = useImageStore();
+  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday, setConvertToWebP } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const pathname = usePathname();
   const inDashboard = pathname.startsWith("/dashboard");
+
+  // When the WebP tool page mounts, force convertToWebP on
+  useEffect(() => {
+    if (defaultMode === "webp") {
+      setConvertToWebP(true);
+    }
+  }, [defaultMode, setConvertToWebP]);
 
   useEffect(() => {
     if (session?.user?.email) {
