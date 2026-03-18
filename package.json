@@ -31,6 +31,7 @@
     "file-saver": "^2.0.5",
     "framer-motion": "^12.35.0",
     "heic-convert": "^2.1.0",
+    "heic2any": "^0.0.4",
     "immer": "^11.1.4",
     "jszip": "^3.10.1",
     "leaflet": "^1.9.4",
