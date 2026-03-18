@@ -1,6 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Instagram,
+  ShoppingBag,
+  Users,
+  Lock,
+} from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
 import {
   ToolCard,
@@ -25,7 +32,7 @@ import {
 export const metadata = {
   title: "SammaPix — AI Photo Workflow Platform for Content Creators",
   description:
-    "Compress, rename with AI, resize, convert — all in one pipeline. 20 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert — all in one pipeline. 20+ free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -41,7 +48,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix — AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert — all in one pipeline. 20 free tools. No uploads.",
+      "Compress, rename with AI, resize, convert — all in one pipeline. 20+ free tools. No uploads.",
     url: "https://sammapix.com",
     type: "website",
     images: [
@@ -301,13 +308,61 @@ const TOOLS_VIDEO: ToolCardData[] = [
   },
 ];
 
+// ─── Workflow preset cards ─────────────────────────────────────────────────────
+
+const WORKFLOW_PRESETS = [
+  {
+    id: "blog",
+    label: "Blog Post",
+    icon: BookOpen,
+    steps: ["Compress 80%", "AI Rename", "Resize 1200px", "WebP"],
+    hasAI: true,
+    href: "/tools/workflow?preset=blog",
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    icon: Instagram,
+    steps: ["Compress 85%", "Resize 1080px"],
+    hasAI: false,
+    href: "/tools/workflow?preset=instagram",
+  },
+  {
+    id: "ecommerce",
+    label: "E-commerce",
+    icon: ShoppingBag,
+    steps: ["Compress 85%", "AI Rename (SKU)", "Resize 800px", "WebP"],
+    hasAI: true,
+    href: "/tools/workflow?preset=ecommerce",
+  },
+  {
+    id: "client",
+    label: "Client Delivery",
+    icon: Users,
+    steps: ["Light compress 90%", "Resize 2400px"],
+    hasAI: false,
+    href: "/tools/workflow?preset=client",
+  },
+] as const;
+
+// ─── Combo tools ──────────────────────────────────────────────────────────────
+
+const COMBO_TOOLS = [
+  { name: "WebLift",   href: "/tools/weblift",   accent: "#3B82F6" },
+  { name: "BlogDrop",  href: "/tools/blogdrop",  accent: "#8B5CF6" },
+  { name: "InstaPrep", href: "/tools/instaprep", accent: "#E1306C" },
+  { name: "ShopShot",  href: "/tools/shopshot",  accent: "#F59E0B" },
+  { name: "CleanDrop", href: "/tools/cleandrop", accent: "#16A34A" },
+  { name: "PixShip",   href: "/tools/pixship",   accent: "#0891B2" },
+] as const;
+
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is SammaPix completely free?",
     answer:
-      "Yes. All 20 tools are free forever — compress, convert, resize, rename, video tools and more. Pro unlocks the AI Workflow pipeline and removes limits. No signup required for free tools.",
+      "Yes. All tools are free forever -- compress, convert, resize, rename, video tools and more. Pro unlocks unlimited AI operations, ZIP download, and removes limits. No signup required for free tools.",
   },
   {
     question: "Do my images get uploaded to a server?",
@@ -343,7 +398,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 20 free browser-based tools.",
+          "AI-powered photo and video workflow platform for content creators. 20+ free browser-based tools.",
         sameAs: [
           "https://twitter.com/lucasammarco",
           "https://github.com/lucasammarco",
@@ -418,51 +473,90 @@ export default function HomePage() {
       {/* Hero */}
       <HeroSection />
 
-      {/* ── 1. AI Workflow Pipeline ── */}
+      {/* ── 1. Workflow Preset Cards ── */}
       <section className="py-14 px-4 sm:px-6 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="mb-6">
             <span className="text-[10px] font-medium uppercase tracking-widest text-[#6366F1] mb-2 inline-block">
-              Pro Feature
+              One-Click Workflows
             </span>
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
               AI Workflow Pipeline
             </h2>
             <p className="text-sm text-[#737373] dark:text-[#A3A3A3] max-w-lg">
-              Pro users run the full pipeline in one click. Free users can use each tool individually.
+              Choose a preset. Drop your images. Download results. Free users can toggle off AI steps.
             </p>
           </div>
 
-          {/* Pipeline visual */}
-          <div className="flex flex-wrap items-center gap-2 mb-6">
-            {[
-              "Drop photos",
-              "Compress",
-              "AI Rename",
-              "Resize",
-              "WebP",
-              "Download ZIP",
-            ].map((step, i, arr) => (
-              <React.Fragment key={step}>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md">
-                  <span className="text-xs text-[#737373] dark:text-[#A3A3A3] font-medium">
-                    {step}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+            {WORKFLOW_PRESETS.map((preset) => {
+              const Icon = preset.icon;
+              return (
+                <Link
+                  key={preset.id}
+                  href={preset.href}
+                  className="group relative block p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#1E1E1E] hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-all"
+                >
+                  {preset.hasAI && (
+                    <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] text-[#A3A3A3] dark:text-[#525252]">
+                      <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
+                      Login required
+                    </span>
+                  )}
+                  <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-3">
+                    <Icon className="h-4.5 w-4.5 text-[#525252] dark:text-[#A3A3A3]" strokeWidth={1.5} />
+                  </div>
+                  <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+                    {preset.label}
+                  </p>
+                  <ul className="space-y-1 mb-4">
+                    {preset.steps.map((s) => (
+                      <li key={s} className="text-xs text-[#737373] dark:text-[#A3A3A3] flex items-center gap-1.5">
+                        <span className="text-[#D4D4D4] dark:text-[#404040] select-none">--</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#6366F1] group-hover:gap-2.5 transition-all">
+                    Start
+                    <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
                   </span>
-                </div>
-                {i < arr.length - 1 && (
-                  <ArrowRight className="h-3.5 w-3.5 text-[#D4D4D4] dark:text-[#404040] flex-shrink-0" strokeWidth={1.5} />
-                )}
-              </React.Fragment>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 1b. Combo Tools ── */}
+      <section className="py-10 px-4 sm:px-6 border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-5">
+            <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+              Combo Tools
+            </h2>
+            <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+              Specialized multi-step tools for common workflows.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {COMBO_TOOLS.map((tool) => (
+              <Link
+                key={tool.name}
+                href={tool.href}
+                className="inline-flex items-center gap-2 px-3.5 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#191919] hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors"
+              >
+                <span
+                  className="h-2 w-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: tool.accent }}
+                />
+                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
+                  {tool.name}
+                </span>
+                <ArrowRight className="h-3 w-3 text-[#D4D4D4]" strokeWidth={1.5} />
+              </Link>
             ))}
           </div>
-
-          <Link
-            href="/tools/workflow"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 transition-colors"
-          >
-            Try AI Workflow
-            <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-          </Link>
         </div>
       </section>
 
@@ -471,7 +565,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-              20 Free Tools
+              20+ Free Tools
             </h2>
             <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
               Browser-based — no uploads, no account required for the basics.
@@ -634,7 +728,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
           {[
             { value: "1.2M+", label: "Images optimized" },
-            { value: "20", label: "Free tools" },
+            { value: "20+", label: "Free tools" },
             { value: "100%", label: "Browser-based" },
             { value: "0", label: "Files uploaded to servers" },
           ].map((stat) => (

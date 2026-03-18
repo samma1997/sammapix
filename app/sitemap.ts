@@ -55,11 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Tool pages (13 total)
+  // Tool pages
   const toolPages: MetadataRoute.Sitemap = [
     "/tools/compress",
     "/tools/webp",
     "/tools/ai-rename",
+    "/tools/alt-text",
     "/tools/exif",
     "/tools/filmlab",
     "/tools/stampit",
@@ -70,6 +71,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/resizepack",
     "/tools/cull",
     "/tools/heic",
+    "/tools/transcribe",
+    "/tools/workflow",
     "/tools/weblift",
     "/tools/blogdrop",
     "/tools/instaprep",

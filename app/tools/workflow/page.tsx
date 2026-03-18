@@ -86,21 +86,6 @@ export default function WorkflowPage() {
         accentColor="#6366F1"
       />
 
-      {/* PRO badge row */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-4">
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center px-2.5 py-1 rounded bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-[11px] font-semibold uppercase tracking-wider">
-            PRO
-          </span>
-          <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">
-            Available on the Pro plan —{" "}
-            <Link href="/pricing" className="text-[#6366F1] hover:underline underline-offset-2">
-              see pricing
-            </Link>
-          </span>
-        </div>
-      </div>
-
       {/* Tool */}
       <section className="px-4 sm:px-6 pb-8">
         <WorkflowPipeline />
@@ -302,7 +287,7 @@ export default function WorkflowPage() {
                     name: "Is the Workflow Pipeline free?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "The AI Workflow Pipeline is a Pro-only feature. SammaPix Pro costs $7/month and includes the pipeline, 200 AI renames per day, processing of up to 500 files, and zero ads.",
+                      text: "The AI Workflow Pipeline is available to all users. Free users can toggle off AI steps. Pro users ($7/month) get unlimited AI renames, 500-file batches, ZIP download, and zero ads.",
                     },
                   },
                 ],

@@ -102,7 +102,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
-  const savePercent = Math.round((1 - 59 / (7 * 12)) * 100);
+  const savePercent = Math.round((1 - 60 / (7 * 12)) * 100);
 
   return (
     <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
@@ -148,6 +148,17 @@ export default function PricingPage() {
           </div>
         </div>
 
+        {/* ── Founding Member banner ──────────────────────────────────── */}
+        <div className="mb-8 border border-[#6366F1]/20 dark:border-[#6366F1]/15 rounded-lg px-5 py-4 bg-[#EEF2FF]/40 dark:bg-[#6366F1]/5 text-center">
+          <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+            Founding Member Deal
+          </p>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
+            First 200 Pro subscribers lock in <span className="font-semibold text-[#6366F1]">$4/month forever</span>.
+            Early adopters get a permanent discount as a thank-you for believing early.
+          </p>
+        </div>
+
         {/* ── Pricing cards ──────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
 
@@ -166,9 +177,11 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                "All 20 tools included",
-                "Up to 20 files per batch",
-                "5 AI operations / day",
+                "All tools included",
+                "20 files per batch",
+                "10 AI renames / day",
+                "10 AI alt text / day",
+                "No ZIP download",
                 "Community support",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
@@ -198,7 +211,7 @@ export default function PricingPage() {
               </h2>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-                  ${annual ? "59" : "7"}
+                  ${annual ? "60" : "7"}
                 </span>
                 <span className="text-sm text-[#A3A3A3] dark:text-[#737373]">
                   {annual ? "/ year" : "/ month"}
@@ -218,9 +231,12 @@ export default function PricingPage() {
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
                 { text: "Everything in Free, plus:", bold: true },
-                { text: "AI Workflow Pipeline — Blog, Instagram, E-commerce presets", bold: false },
+                { text: "Unlimited AI renames", bold: false },
+                { text: "Unlimited AI alt text", bold: false },
                 { text: "500 files per batch", bold: false },
-                { text: "200 AI operations / day", bold: false },
+                { text: "50 MB per file", bold: false },
+                { text: "ZIP download", bold: false },
+                { text: "AI Workflow Pipeline presets", bold: false },
                 { text: "Install as desktop app", bold: false, icon: true },
                 { text: "No ads, priority support", bold: false },
               ].map(({ text, bold, icon }) => (
@@ -272,10 +288,10 @@ export default function PricingPage() {
                 Starter
               </p>
               <p className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-0.5">
-                $2
+                $4.99
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">100 credits</p>
-              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.02 / credit</p>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.05 / credit</p>
               <a
                 href="/dashboard/credits"
                 className="w-full inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
@@ -295,10 +311,10 @@ export default function PricingPage() {
                 Standard
               </p>
               <p className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-0.5">
-                $5
+                $9.99
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">500 credits</p>
-              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.01 / credit</p>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.02 / credit</p>
               <a
                 href="/dashboard/credits"
                 className="w-full inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-md bg-[#6366F1] text-white hover:bg-[#4F46E5] transition-colors"
@@ -313,10 +329,10 @@ export default function PricingPage() {
                 Mega
               </p>
               <p className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-0.5">
-                $15
+                $29.99
               </p>
-              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">2000 credits</p>
-              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.0075 / credit</p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">2,000 credits</p>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.015 / credit</p>
               <a
                 href="/dashboard/credits"
                 className="w-full inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
@@ -327,14 +343,14 @@ export default function PricingPage() {
           </div>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#737373]">
-            Credits work on any plan — Free or Pro. 1 credit = 1 AI operation (rename, alt text, or workflow step).
+            1 credit = 1 AI rename or 1 AI alt text. Credits never expire. Works on any plan.
           </p>
         </div>
 
         {/* ── All tools grid ─────────────────────────────────────────────── */}
         <div className="mb-16">
           <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] text-center mb-1">
-            All 20 tools. Both plans.
+            All tools included. Both plans.
           </p>
           <p className="text-xs text-[#A3A3A3] dark:text-[#737373] text-center mb-8">
             Pro users get early access to new tools as they launch.
@@ -366,7 +382,7 @@ export default function PricingPage() {
             {[
               { value: "AI Workflow", unit: "One-click pipeline",      sub: "Blog, Instagram, E-commerce presets" },
               { value: "Batch Power", unit: "500 files at once",       sub: "Full wedding shoots in one go" },
-              { value: "AI Ops",      unit: "200/day included",        sub: "SEO renames and alt text, daily" },
+              { value: "Unlimited AI", unit: "Renames + alt text",     sub: "No daily caps, process entire shoots" },
               { value: "Zero Ads",    unit: "Clean workspace",          sub: "No distractions while you work" },
             ].map(({ value, unit, sub }) => (
               <div
@@ -428,7 +444,7 @@ export default function PricingPage() {
           <div className="space-y-3">
             <FaqItem
               q="Is SammaPix free?"
-              a="Yes. All 20 tools are free forever with no account required. The free plan is not a trial — it never expires."
+              a="Yes. All tools are free forever with no account required. The free plan is not a trial — it never expires."
             />
             <FaqItem
               q="What are credits?"
@@ -436,11 +452,11 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI operations per day, no ads, and priority support. Your first days are free — 7 days on monthly, 60 days on annual."
+              a="Pro ($7/month or $60/year) unlocks unlimited AI renames, unlimited AI alt text, the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support."
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI operations per day included, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally — no subscription required."
+              a="Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally — no subscription required."
             />
             <FaqItem
               q="What is the AI Workflow Pipeline?"
@@ -485,7 +501,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Yearly",
-                  "price": "59",
+                  "price": "60",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -494,7 +510,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Credits Starter",
-                  "price": "2",
+                  "price": "4.99",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -504,7 +520,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Credits Standard",
-                  "price": "5",
+                  "price": "9.99",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -514,7 +530,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Credits Mega",
-                  "price": "15",
+                  "price": "29.99",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -539,7 +555,7 @@ export default function PricingPage() {
                   name: "Is SammaPix free?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Yes. All 20 tools are free forever with no account required. The free plan is not a trial — it never expires.",
+                    text: "Yes. All tools are free forever with no account required. The free plan is not a trial — it never expires.",
                   },
                 },
                 {
@@ -555,7 +571,7 @@ export default function PricingPage() {
                   name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro ($7/month or $59/year) unlocks the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, 200 AI operations per day, no ads, and priority support. Your first days are free — 7 days on monthly, 60 days on annual.",
+                    text: "Pro ($7/month or $60/year) unlocks unlimited AI renames, unlimited AI alt text, the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
                   },
                 },
                 {
@@ -563,7 +579,7 @@ export default function PricingPage() {
                   name: "Why upgrade to Pro?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI operations per day included, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
+                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
                   },
                 },
                 {

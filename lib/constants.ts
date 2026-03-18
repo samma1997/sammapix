@@ -4,7 +4,7 @@ import { ImageFormat } from "@/types/image";
 // File limits
 export const MAX_FILE_SIZE_FREE = 20 * 1024 * 1024; // 20MB
 export const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024; // 50MB
-export const MAX_FILES_FREE = 100;
+export const MAX_FILES_FREE = 20;
 export const MAX_FILES_PRO = 500;
 
 // GeoSort limits
@@ -16,12 +16,12 @@ export const MAX_HEIC_FREE = 100;
 export const MAX_HEIC_PRO = 500;
 
 // AI Rename limits
-export const AI_RENAME_FREE_PER_DAY = 5;
-export const AI_RENAME_PRO_PER_DAY = 200;
+export const AI_RENAME_FREE_PER_DAY = 10;
+export const AI_RENAME_PRO_PER_DAY = 99999; // unlimited
 
 // AI Alt Text limits
-export const AI_ALT_TEXT_FREE_PER_DAY = 5;
-export const AI_ALT_TEXT_PRO_PER_DAY = 200;
+export const AI_ALT_TEXT_FREE_PER_DAY = 10;
+export const AI_ALT_TEXT_PRO_PER_DAY = 99999; // unlimited
 
 // Accepted formats
 export const ACCEPTED_FORMATS: ImageFormat[] = ["jpeg", "png", "webp", "gif", "avif"];
@@ -44,7 +44,7 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
     maxFiles: MAX_FILES_FREE,
     aiRenamePerDay: AI_RENAME_FREE_PER_DAY,
     maxFileSizeBytes: MAX_FILE_SIZE_FREE,
-    zipDownload: true,
+    zipDownload: false,
     ads: true,
   },
   pro: {
@@ -63,7 +63,7 @@ export const DEFAULT_AI_RENAME = false;
 
 // Pricing
 export const PRICE_PRO_MONTHLY = 7;
-export const PRICE_PRO_YEARLY = 59;
+export const PRICE_PRO_YEARLY = 60;
 
 // App info
 export const APP_NAME = "SammaPix";

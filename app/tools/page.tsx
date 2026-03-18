@@ -5,9 +5,9 @@ import { ToolsPageClient } from "@/components/tools/ToolsPageClient";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "20 Free Image & Video Tools for Photographers & Developers | SammaPix",
+  title: "20+ Free Image & Video Tools for Photographers & Developers | SammaPix",
   description:
-    "Complete suite of 20 free browser-based image and video tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, video thumbnail picker, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 20+ free browser-based image and video tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -51,7 +51,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 20 browser-based image and video optimization tools",
+        description: "Suite of 20+ browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -61,7 +61,7 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "20 free browser-based image and video optimization tools",
+        description: "20+ free browser-based image and video optimization tools",
         numberOfItems: 20,
         itemListElement: [
           {
@@ -113,7 +113,7 @@ export default function ToolsPage() {
             Find the right tool
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            20 free browser-based tools. No uploads, no signup needed.
+            20+ free browser-based tools. No uploads, no signup needed.
           </p>
         </div>
       </section>
@@ -147,7 +147,13 @@ export default function ToolsPage() {
                   { name: "ResizePack",      fn: "Resize for Instagram, Twitter, LinkedIn", free: "✓",         batch: "✓", browser: "✓" },
                   { name: "FilmLab",         fn: "14 analog film presets for photos",       free: "✓",         batch: "✓", browser: "✓" },
                   { name: "AI Alt Text",     fn: "Generate accessibility alt text with AI", free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "Transcribe",      fn: "AI transcription from video/audio",      free: "Free tier", batch: "—", browser: "⚙" },
+                  { name: "Transcribe",      fn: "AI transcription from video/audio",      free: "Free tier", batch: "--", browser: "⚙" },
+                  { name: "WebLift",         fn: "Compress + WebP + AI Rename combo",      free: "Free tier", batch: "✓", browser: "⚙" },
+                  { name: "BlogDrop",        fn: "Blog-ready: compress, resize, WebP, SEO",free: "Free tier", batch: "✓", browser: "⚙" },
+                  { name: "InstaPrep",       fn: "Instagram-ready resize and compress",    free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "ShopShot",        fn: "E-commerce product image optimizer",     free: "Free tier", batch: "✓", browser: "⚙" },
+                  { name: "CleanDrop",       fn: "Strip metadata + compress + WebP",       free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "PixShip",         fn: "Light compress + resize for delivery",   free: "✓",         batch: "✓", browser: "✓" },
                 ].map((row) => (
                   <tr
                     key={row.name}

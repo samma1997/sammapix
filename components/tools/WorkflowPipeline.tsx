@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import {
   BookOpen,
   Instagram,
@@ -54,6 +55,9 @@ interface StepDefinition {
   label: string;
   icon: React.ReactNode;
   description: string;
+  required?: boolean;    // required steps cannot be toggled off
+  needsAuth?: boolean;   // true if step needs a logged-in user
+  isAI?: boolean;        // true for AI-powered steps
 }
 
 interface PipelineStep extends StepDefinition {
@@ -88,12 +92,15 @@ const PRESETS: WorkflowPreset[] = [
         label: "Compress (80%)",
         icon: <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />,
         description: "Reduce file size at 80% quality",
+        required: true,
       },
       {
         id: "ai-rename",
         label: "AI Rename (SEO)",
         icon: <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} />,
         description: "Generate SEO-friendly filenames with Gemini",
+        needsAuth: true,
+        isAI: true,
       },
       {
         id: "resize",
@@ -120,12 +127,13 @@ const PRESETS: WorkflowPreset[] = [
         label: "Compress (85%)",
         icon: <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />,
         description: "Reduce size while keeping Instagram quality",
+        required: true,
       },
       {
         id: "resize",
         label: "Resize to 1080px",
         icon: <Maximize2 className="h-3.5 w-3.5" strokeWidth={1.5} />,
-        description: "Square (1080×1080) or portrait (1080×1350)",
+        description: "Square (1080x1080) or portrait (1080x1350)",
       },
     ],
   },
@@ -140,12 +148,15 @@ const PRESETS: WorkflowPreset[] = [
         label: "Compress (85%)",
         icon: <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />,
         description: "Optimise product images for fast page loads",
+        required: true,
       },
       {
         id: "ai-rename",
         label: "AI Rename (SKU)",
         icon: <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} />,
         description: "Product-style descriptive filenames",
+        needsAuth: true,
+        isAI: true,
       },
       {
         id: "resize",
@@ -172,6 +183,7 @@ const PRESETS: WorkflowPreset[] = [
         label: "Light Compress (90%)",
         icon: <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />,
         description: "Gentle compression, preserve near-original quality",
+        required: true,
       },
       {
         id: "resize",
@@ -248,26 +260,68 @@ function fmtBytes(b: number): string {
 export default function WorkflowPipeline() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const searchParams = useSearchParams();
+  const urlPreset = searchParams.get("preset") as PresetId | null;
 
   const [step, setStep] = useState<WizardStep>("preset");
   const [selectedPreset, setSelectedPreset] = useState<PresetId | null>(null);
   const [instagramFormat, setInstagramFormat] = useState<InstagramFormat>("square");
   const [files, setFiles] = useState<FileEntry[]>([]);
   const [overallProgress, setOverallProgress] = useState(0);
+  const [stepToggles, setStepToggles] = useState<Record<string, boolean>>({});
 
   // Running ref to allow cancel (future use)
   const abortRef = useRef(false);
+  const urlPresetApplied = useRef(false);
 
-  // ── PRO gate ────────────────────────────────────────────────────────────────
+  // ── URL preset auto-select ─────────────────────────────────────────────────
 
-  if (!isPro) {
-    return <ProGate session={session} />;
-  }
+  useEffect(() => {
+    if (urlPreset && !urlPresetApplied.current) {
+      const validPresets: PresetId[] = ["blog", "instagram", "ecommerce", "client"];
+      if (validPresets.includes(urlPreset)) {
+        urlPresetApplied.current = true;
+        setSelectedPreset(urlPreset);
+        // Initialize toggles for this preset
+        const preset = PRESETS.find((p) => p.id === urlPreset);
+        if (preset) {
+          const toggles: Record<string, boolean> = {};
+          for (const s of preset.steps) {
+            // AI steps: only enabled if user is logged in
+            if (s.needsAuth && !session) {
+              toggles[s.id] = false;
+            } else {
+              toggles[s.id] = true;
+            }
+          }
+          setStepToggles(toggles);
+        }
+        setStep("upload");
+      }
+    }
+  }, [urlPreset, session]);
 
   // ── Handlers ────────────────────────────────────────────────────────────────
 
   const handlePresetSelect = (id: PresetId) => {
     setSelectedPreset(id);
+    // Initialize toggles
+    const preset = PRESETS.find((p) => p.id === id);
+    if (preset) {
+      const toggles: Record<string, boolean> = {};
+      for (const s of preset.steps) {
+        if (s.needsAuth && !session) {
+          toggles[s.id] = false;
+        } else {
+          toggles[s.id] = true;
+        }
+      }
+      setStepToggles(toggles);
+    }
+  };
+
+  const handleToggleStep = (stepId: string, enabled: boolean) => {
+    setStepToggles((prev) => ({ ...prev, [stepId]: enabled }));
   };
 
   const handleContinueToUpload = () => {
@@ -282,6 +336,7 @@ export default function WorkflowPipeline() {
     setFiles([]);
     setOverallProgress(0);
     setInstagramFormat("square");
+    setStepToggles({});
   };
 
   const handleRunPipeline = async () => {
@@ -323,10 +378,10 @@ export default function WorkflowPipeline() {
       setFiles([...updatedEntries]);
     };
 
-    // Build engine steps from the preset definition
+    // Build engine steps from the preset definition, respecting toggles
     const engineSteps: EnginePipelineStep[] = preset.steps.map((s) => ({
       id: s.id as PipelineStepId,
-      enabled: true,
+      enabled: stepToggles[s.id] !== false,
       settings: {
         quality: presetConfig.compressQuality,
         maxWidthOrHeight: 4096,
@@ -461,6 +516,10 @@ export default function WorkflowPipeline() {
           instagramFormat={instagramFormat}
           onInstagramFormatChange={setInstagramFormat}
           onContinue={handleContinueToUpload}
+          stepToggles={stepToggles}
+          onToggleStep={handleToggleStep}
+          session={session}
+          isPro={isPro}
         />
       )}
 
@@ -497,67 +556,6 @@ export default function WorkflowPipeline() {
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
-// ── PRO Gate ──────────────────────────────────────────────────────────────────
-
-function ProGate({ session }: { session: ReturnType<typeof useSession>["data"] }) {
-  return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-      <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-[#FAFAFA] dark:bg-[#1E1E1E] text-center">
-        <div className="w-12 h-12 rounded-full bg-[#171717]/8 dark:bg-white/8 flex items-center justify-center mx-auto mb-4">
-          <Lock className="h-5 w-5 text-[#171717] dark:text-[#E5E5E5]" strokeWidth={1.5} />
-        </div>
-
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#171717] text-white text-[11px] font-semibold uppercase tracking-wider mb-4">
-          PRO
-        </div>
-
-        <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-          AI Workflow Pipeline is a Pro feature
-        </h2>
-        <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6 max-w-md mx-auto leading-relaxed">
-          Combine compress, resize, AI rename and WebP conversion into a single
-          one-click pipeline. Drop your images and get a ready-to-use ZIP in seconds.
-        </p>
-
-        <ul className="text-left space-y-2 max-w-xs mx-auto mb-7">
-          {[
-            "Blog Post, Instagram, E-commerce & Client Delivery presets",
-            "AI-powered SEO renaming with Google Gemini",
-            "Compress + resize + convert in one pass",
-            "Bulk ZIP download of all processed images",
-          ].map((item) => (
-            <li key={item} className="flex items-start gap-2.5">
-              <span className="flex-shrink-0 h-4 w-4 mt-0.5 rounded-full bg-[#6366F1]/10 flex items-center justify-center">
-                <CheckCircle2 className="h-3 w-3 text-[#6366F1]" strokeWidth={2.5} />
-              </span>
-              <span className="text-xs text-[#525252] dark:text-[#A3A3A3]">{item}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link href="/pricing">
-            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors">
-              <Zap className="h-4 w-4" strokeWidth={1.5} />
-              Upgrade to Pro — $7/mo
-            </button>
-          </Link>
-          {!session && (
-            <Link href="/auth/signin">
-              <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] text-sm font-medium rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors">
-                Sign in first
-              </button>
-            </Link>
-          )}
-        </div>
-
-        <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-4">
-          30-day money-back guarantee
-        </p>
-      </div>
-    </div>
-  );
-}
 
 // ── Wizard Stepper ─────────────────────────────────────────────────────────────
 
@@ -626,6 +624,10 @@ interface PresetSelectorProps {
   instagramFormat: InstagramFormat;
   onInstagramFormatChange: (f: InstagramFormat) => void;
   onContinue: () => void;
+  stepToggles: Record<string, boolean>;
+  onToggleStep: (stepId: string, enabled: boolean) => void;
+  session: ReturnType<typeof useSession>["data"];
+  isPro: boolean;
 }
 
 function PresetSelector({
@@ -635,6 +637,10 @@ function PresetSelector({
   instagramFormat,
   onInstagramFormatChange,
   onContinue,
+  stepToggles,
+  onToggleStep,
+  session,
+  isPro,
 }: PresetSelectorProps) {
   return (
     <div>
@@ -685,20 +691,63 @@ function PresetSelector({
                 </div>
               </div>
 
-              {/* Step list */}
+              {/* Step list with toggles */}
               {isSelected && (
                 <div className="mt-3 pt-3 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-                  <div className="flex flex-wrap gap-2">
-                    {preset.steps.map((s, idx) => (
-                      <div key={s.id} className="flex items-center gap-1">
-                        <span className="text-[11px] text-[#525252] dark:text-[#A3A3A3] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded px-1.5 py-0.5">
-                          {s.label}
-                        </span>
-                        {idx < preset.steps.length - 1 && (
-                          <ChevronRight className="h-3 w-3 text-[#D4D4D4]" strokeWidth={1.5} />
-                        )}
-                      </div>
-                    ))}
+                  <div className="space-y-2">
+                    {preset.steps.map((s) => {
+                      const isEnabled = stepToggles[s.id] !== false;
+                      const isRequired = s.required === true;
+                      const needsLogin = s.needsAuth && !session;
+                      const isAIStep = s.isAI === true;
+                      return (
+                        <div key={s.id} className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className={cn(
+                              "text-[11px] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded px-1.5 py-0.5 flex items-center gap-1",
+                              isEnabled ? "text-[#525252] dark:text-[#A3A3A3]" : "text-[#A3A3A3] dark:text-[#525252] line-through"
+                            )}>
+                              {s.label}
+                              {needsLogin && (
+                                <Lock className="h-2.5 w-2.5 text-[#A3A3A3]" strokeWidth={1.5} />
+                              )}
+                            </span>
+                            {needsLogin && (
+                              <Link href="/api/auth/signin" className="text-[10px] text-[#6366F1] hover:underline underline-offset-2">
+                                Sign in to enable
+                              </Link>
+                            )}
+                            {isAIStep && session && !isPro && (
+                              <span className="text-[10px] text-[#A3A3A3]">10/day free</span>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            disabled={isRequired || needsLogin}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (!isRequired && !needsLogin) onToggleStep(s.id, !isEnabled);
+                            }}
+                            className={cn(
+                              "relative inline-flex h-5 w-9 items-center rounded-full transition-colors flex-shrink-0",
+                              isRequired && "cursor-not-allowed",
+                              needsLogin && "cursor-not-allowed opacity-50",
+                              isEnabled
+                                ? "bg-[#171717] dark:bg-white"
+                                : "bg-[#E5E5E5] dark:bg-[#3A3A3A]"
+                            )}
+                            aria-label={`Toggle ${s.label}`}
+                          >
+                            <span
+                              className={cn(
+                                "inline-block h-3.5 w-3.5 rounded-full bg-white dark:bg-[#171717] transition-transform",
+                                isEnabled ? "translate-x-[18px]" : "translate-x-[3px]"
+                              )}
+                            />
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
