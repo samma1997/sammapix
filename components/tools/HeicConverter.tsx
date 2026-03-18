@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   XCircle,
   Zap,
+  Loader2,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -29,7 +30,6 @@ interface ConvertedFile {
   outputBlob: Blob | null;
   outputFormat: OutputFormat;
   errorMessage?: string;
-  // Post-conversion compression
   compressedBlob: Blob | null;
   compressStatus: "idle" | "compressing" | "done" | "error";
 }
@@ -67,25 +67,26 @@ function isHeicFile(file: File): boolean {
   );
 }
 
-async function convertSingleFile(
+// Client-side HEIC conversion using heic2any (no server, no size limit)
+async function convertClientSide(
   file: File,
   format: OutputFormat,
   quality: number
 ): Promise<Blob> {
-  const fd = new FormData();
-  fd.append("file", file);
-  fd.append("format", format === "WebP" ? "WEBP" : "JPEG");
-  fd.append("quality", String(quality));
+  const heic2any = (await import("heic2any")).default;
+  const toType = format === "WebP" ? "image/webp" : "image/jpeg";
 
-  const res = await fetch("/api/heic-convert", { method: "POST", body: fd });
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error((body as { error?: string }).error ?? `HTTP ${res.status}`);
-  }
-  return res.blob();
+  const result = await heic2any({
+    blob: file,
+    toType,
+    quality: quality / 100,
+  });
+
+  // heic2any can return Blob | Blob[]
+  return Array.isArray(result) ? result[0] : result;
 }
 
-// ── Pro Upsell Banner (inline, since ProUpsellModal doesn't exist yet) ────────
+// ── Pro Upsell Banner ─────────────────────────────────────────────────────────
 
 const ProUpsellBanner = ({ onDismiss }: { onDismiss: () => void }) => (
   <div className="flex items-start justify-between gap-3 px-4 py-3 border border-[#FDE68A] bg-[#FFFBEB] dark:bg-[#1C1700] dark:border-[#854D0E] rounded-md">
@@ -173,9 +174,10 @@ const QualitySlider = ({ value, onChange, disabled }: QualitySliderProps) => (
 interface FileCardProps {
   file: ConvertedFile;
   onDownload: (file: ConvertedFile) => void;
+  onCompress: (file: ConvertedFile) => void;
 }
 
-const FileCard = ({ file, onDownload }: FileCardProps) => {
+const FileCard = ({ file, onDownload, onCompress }: FileCardProps) => {
   const isConverting = file.status === "converting";
   const isDone = file.status === "done";
   const isError = file.status === "error";
@@ -183,7 +185,6 @@ const FileCard = ({ file, onDownload }: FileCardProps) => {
   const isCompressing = file.compressStatus === "compressing";
   const isCompressed = file.compressStatus === "done";
 
-  // Final size is compressed blob if available, otherwise output blob
   const finalBlob = file.compressedBlob ?? file.outputBlob;
   const savings =
     isDone && finalBlob
@@ -204,7 +205,7 @@ const FileCard = ({ file, onDownload }: FileCardProps) => {
           <CheckCircle2 className="h-4 w-4 text-[#16A34A]" strokeWidth={1.5} />
         )}
         {isCompressing && (
-          <div className="h-4 w-4 rounded-full border-2 border-[#D97706] border-t-transparent animate-spin" />
+          <Loader2 className="h-4 w-4 text-[#D97706] animate-spin" strokeWidth={1.5} />
         )}
         {isError && (
           <XCircle className="h-4 w-4 text-[#DC2626]" strokeWidth={1.5} />
@@ -222,13 +223,13 @@ const FileCard = ({ file, onDownload }: FileCardProps) => {
           </span>
           {isDone && file.outputBlob && (
             <>
-              <span className="text-[11px] text-[#A3A3A3]">→</span>
+              <span className="text-[11px] text-[#A3A3A3]">&rarr;</span>
               {isCompressed && file.compressedBlob ? (
                 <>
                   <span className="text-[11px] text-[#A3A3A3] line-through">
                     {formatBytes(file.outputBlob.size)}
                   </span>
-                  <span className="text-[11px] text-[#A3A3A3]">→</span>
+                  <span className="text-[11px] text-[#A3A3A3]">&rarr;</span>
                   <span className="text-[11px] text-[#16A34A] font-medium">
                     {formatBytes(file.compressedBlob.size)}
                   </span>
@@ -259,16 +260,29 @@ const FileCard = ({ file, onDownload }: FileCardProps) => {
         </div>
       </div>
 
-      {/* Download single */}
+      {/* Action buttons */}
       {isDone && file.outputBlob && !isCompressing && (
-        <button
-          onClick={() => onDownload(file)}
-          className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#252525] transition-colors"
-          aria-label={`Download ${outputFileName(file.original, file.outputFormat)}`}
-        >
-          <Download className="h-3 w-3" strokeWidth={1.5} />
-          Save
-        </button>
+        <div className="flex items-center gap-1.5 shrink-0">
+          {/* Compress button - only if not yet compressed */}
+          {file.compressStatus === "idle" && (
+            <button
+              onClick={() => onCompress(file)}
+              className="inline-flex items-center gap-1 px-2 py-1.5 text-[11px] font-medium border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 hover:border-[#6366F1]/50 transition-colors"
+              title="Compress this file"
+            >
+              <Zap className="h-3 w-3" strokeWidth={1.5} />
+              Compress
+            </button>
+          )}
+          {/* Save button */}
+          <button
+            onClick={() => onDownload(file)}
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#252525] transition-colors"
+          >
+            <Download className="h-3 w-3" strokeWidth={1.5} />
+            Save
+          </button>
+        </div>
       )}
     </div>
   );
@@ -322,7 +336,6 @@ export default function HeicConverter() {
   const handleFiles = useCallback(
     (raw: File[]) => {
       const heicFiles = raw.filter(isHeicFile);
-
       if (heicFiles.length === 0) return;
 
       if (!isPro && heicFiles.length > MAX_FILES_FREE) {
@@ -334,7 +347,7 @@ export default function HeicConverter() {
       const converted: ConvertedFile[] = accepted.map((f) => ({
         id: generateId(),
         original: f,
-        status: "pending",
+        status: "pending" as const,
         outputBlob: null,
         outputFormat,
         compressedBlob: null,
@@ -363,6 +376,7 @@ export default function HeicConverter() {
     [handleFiles]
   );
 
+  // 100% client-side conversion via heic2any
   const handleConvertAll = useCallback(async () => {
     if (files.length === 0) return;
 
@@ -377,19 +391,13 @@ export default function HeicConverter() {
       setProgress(pct);
       setProgressMessage(`Converting ${f.original.name} (${i + 1}/${updated.length})`);
 
-      // Yield to allow repaint
       await new Promise((r) => setTimeout(r, 30));
 
-      // Mark as converting
       updated[i] = { ...updated[i], status: "converting" };
       setFiles([...updated]);
 
       try {
-        // Vercel has a 4.5MB request body limit
-        if (f.original.size > 4.5 * 1024 * 1024) {
-          throw new Error("File too large (max 4.5 MB)");
-        }
-        const blob = await convertSingleFile(f.original, outputFormat, quality);
+        const blob = await convertClientSide(f.original, outputFormat, quality);
         updated[i] = {
           ...updated[i],
           status: "done",
@@ -397,14 +405,10 @@ export default function HeicConverter() {
           outputFormat,
         };
       } catch (err) {
-        const rawMsg = err instanceof Error ? err.message : "Conversion failed";
-        const errorMessage = rawMsg.includes("413") || rawMsg.includes("too large")
-          ? "Too large (max 4.5 MB per file)"
-          : rawMsg;
         updated[i] = {
           ...updated[i],
           status: "error",
-          errorMessage,
+          errorMessage: err instanceof Error ? err.message : "Conversion failed",
         };
       }
 
@@ -417,51 +421,59 @@ export default function HeicConverter() {
     setUiState("results");
   }, [files, outputFormat, quality]);
 
-  const [compressing, setCompressing] = useState(false);
+  // Compress a single file
+  const handleCompressSingle = useCallback(async (target: ConvertedFile) => {
+    if (!target.outputBlob) return;
+
+    setFiles((prev) =>
+      prev.map((f) =>
+        f.id === target.id ? { ...f, compressStatus: "compressing" as const } : f
+      )
+    );
+
+    try {
+      const { default: imageCompression } = await import("browser-image-compression");
+      const name = outputFileName(target.original, target.outputFormat);
+      const file = new File([target.outputBlob], name, { type: target.outputBlob.type });
+
+      const compressed = await imageCompression(file, {
+        maxSizeMB: 10,
+        maxWidthOrHeight: 4096,
+        useWebWorker: true,
+        initialQuality: 0.8,
+      });
+
+      setFiles((prev) =>
+        prev.map((f) =>
+          f.id === target.id
+            ? { ...f, compressedBlob: compressed, compressStatus: "done" as const }
+            : f
+        )
+      );
+    } catch {
+      setFiles((prev) =>
+        prev.map((f) =>
+          f.id === target.id ? { ...f, compressStatus: "error" as const } : f
+        )
+      );
+    }
+  }, []);
+
+  // Compress all converted files
+  const [compressingAll, setCompressingAll] = useState(false);
 
   const handleCompressAll = useCallback(async () => {
-    const doneFiles = files.filter((f) => f.status === "done" && f.outputBlob);
+    const doneFiles = files.filter((f) => f.status === "done" && f.outputBlob && f.compressStatus === "idle");
     if (doneFiles.length === 0) return;
 
-    setCompressing(true);
+    setCompressingAll(true);
 
-    const { default: imageCompression } = await import("browser-image-compression");
-
-    const updated = [...files];
-
-    for (let i = 0; i < updated.length; i++) {
-      if (updated[i].status !== "done" || !updated[i].outputBlob) continue;
-
-      updated[i] = { ...updated[i], compressStatus: "compressing" };
-      setFiles([...updated]);
-
-      try {
-        // Convert Blob to File for browser-image-compression
-        const blob = updated[i].outputBlob!;
-        const name = outputFileName(updated[i].original, updated[i].outputFormat);
-        const file = new File([blob], name, { type: blob.type });
-
-        const compressed = await imageCompression(file, {
-          maxSizeMB: 10,
-          maxWidthOrHeight: 4096,
-          useWebWorker: true,
-          initialQuality: 0.8,
-        });
-
-        updated[i] = {
-          ...updated[i],
-          compressedBlob: compressed,
-          compressStatus: "done",
-        };
-      } catch {
-        updated[i] = { ...updated[i], compressStatus: "error" };
-      }
-
-      setFiles([...updated]);
+    for (const f of doneFiles) {
+      await handleCompressSingle(f);
     }
 
-    setCompressing(false);
-  }, [files]);
+    setCompressingAll(false);
+  }, [files, handleCompressSingle]);
 
   const handleDownloadSingle = useCallback((file: ConvertedFile) => {
     const blob = file.compressedBlob ?? file.outputBlob;
@@ -496,6 +508,7 @@ export default function HeicConverter() {
   const hasAnyDone = doneCount > 0;
   const allPending = files.every((f) => f.status === "pending");
   const isConverting = uiState === "converting";
+  const hasUncompressed = files.some((f) => f.status === "done" && f.compressStatus === "idle");
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
@@ -543,11 +556,11 @@ export default function HeicConverter() {
                 Drop HEIC photos or click to browse
               </p>
               <p className="text-xs text-[#737373]">
-                .heic, .heif- iPhone and modern camera files supported
+                .heic, .heif &mdash; iPhone and modern camera files supported
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              Files are sent to our server only for conversion- never stored
+              100% client-side &mdash; your photos never leave your browser
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
@@ -602,20 +615,19 @@ export default function HeicConverter() {
             </button>
           </div>
 
-          {/* "Ready" banner- shown before conversion starts */}
+          {/* "Ready" banner */}
           {uiState === "results" && allPending && (
             <div className="flex items-center gap-3 px-4 py-3 rounded-md bg-[#F0FDF4] dark:bg-[#052E16] border border-[#BBF7D0] dark:border-[#166534]">
               <div className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0" />
               <p className="text-xs font-medium text-[#166534] dark:text-[#4ADE80]">
-                {files.length} file{files.length !== 1 ? "s" : ""} ready- choose format and quality, then click Convert
+                {files.length} file{files.length !== 1 ? "s" : ""} ready &mdash; choose format and quality, then click Convert
               </p>
             </div>
           )}
 
-          {/* Settings- only show when all pending (before convert) */}
+          {/* Settings */}
           {uiState === "results" && allPending && (
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-white dark:bg-[#1E1E1E] space-y-5">
-              {/* Format toggle */}
               <div>
                 <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2">
                   Output format
@@ -638,17 +650,11 @@ export default function HeicConverter() {
                 </div>
                 {outputFormat === "WebP" && (
                   <p className="text-[11px] text-[#A3A3A3] mt-1.5">
-                    WebP is ~25% smaller than JPG- ideal for web use
+                    WebP is ~25% smaller than JPG &mdash; ideal for web use
                   </p>
                 )}
               </div>
-
-              {/* Quality slider */}
-              <QualitySlider
-                value={quality}
-                onChange={setQuality}
-                disabled={false}
-              />
+              <QualitySlider value={quality} onChange={setQuality} disabled={false} />
             </div>
           )}
 
@@ -659,7 +665,7 @@ export default function HeicConverter() {
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors shadow-sm"
             >
               <FileImage className="h-4 w-4" strokeWidth={1.5} />
-              Convert {files.length} file{files.length !== 1 ? "s" : ""} to {outputFormat} →
+              Convert {files.length} file{files.length !== 1 ? "s" : ""} to {outputFormat} &rarr;
             </button>
           )}
 
@@ -670,21 +676,22 @@ export default function HeicConverter() {
                 key={f.id}
                 file={f}
                 onDownload={handleDownloadSingle}
+                onCompress={handleCompressSingle}
               />
             ))}
           </div>
 
-          {/* Compress button - shown after conversion */}
-          {hasAnyDone && uiState === "results" && !files.some((f) => f.compressStatus === "done") && (
+          {/* Compress all button */}
+          {hasAnyDone && uiState === "results" && hasUncompressed && (
             <button
               onClick={handleCompressAll}
-              disabled={compressing}
+              disabled={compressingAll}
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border-2 border-dashed border-[#6366F1]/40 text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 hover:border-[#6366F1]/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {compressing ? (
+              {compressingAll ? (
                 <>
-                  <div className="h-4 w-4 rounded-full border-2 border-[#6366F1] border-t-transparent animate-spin" />
-                  Compressing...
+                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                  Compressing all...
                 </>
               ) : (
                 <>
@@ -693,16 +700,6 @@ export default function HeicConverter() {
                 </>
               )}
             </button>
-          )}
-
-          {/* Compression done summary */}
-          {files.some((f) => f.compressStatus === "done") && (
-            <div className="flex items-center gap-2 px-4 py-3 rounded-md bg-[#F0FDF4] dark:bg-[#052E16] border border-[#BBF7D0] dark:border-[#166534]">
-              <CheckCircle2 className="h-4 w-4 text-[#16A34A] shrink-0" strokeWidth={1.5} />
-              <p className="text-xs font-medium text-[#166534] dark:text-[#4ADE80]">
-                Compressed! Files are now smaller and ready to download.
-              </p>
-            </div>
           )}
 
           {/* Download all ZIP */}
