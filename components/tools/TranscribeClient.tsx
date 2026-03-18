@@ -169,6 +169,85 @@ export default function TranscribeClient() {
     setEditedText("");
   }, []);
 
+  // ── Audio extraction (client-side) ─────────────────────────────────────────
+
+  const extractAudio = useCallback(async (videoFile: File): Promise<File> => {
+    // If already an audio file, return as-is
+    if (videoFile.type.startsWith("audio/")) return videoFile;
+
+    // For video files, extract audio track using Web Audio API
+    // This reduces a 17MB video to ~1-2MB audio
+    return new Promise((resolve, reject) => {
+      const video = document.createElement("video");
+      video.muted = false;
+      video.preload = "auto";
+
+      const url = URL.createObjectURL(videoFile);
+      video.src = url;
+
+      video.onloadedmetadata = () => {
+        const audioCtx = new AudioContext();
+        const source = audioCtx.createMediaElementSource(video);
+        const dest = audioCtx.createMediaStreamDestination();
+        source.connect(dest);
+
+        // Also connect to speakers (muted) so the video plays
+        const gain = audioCtx.createGain();
+        gain.gain.value = 0;
+        source.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const recorder = new MediaRecorder(dest.stream, {
+          mimeType: MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+            ? "audio/webm;codecs=opus"
+            : "audio/webm",
+          audioBitsPerSecond: 64000, // 64kbps = small files, good for speech
+        });
+
+        const chunks: Blob[] = [];
+        recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+
+        recorder.onstop = () => {
+          URL.revokeObjectURL(url);
+          audioCtx.close();
+          const audioBlob = new Blob(chunks, { type: "audio/webm" });
+          const audioFile = new File([audioBlob], videoFile.name.replace(/\.[^.]+$/, ".webm"), {
+            type: "audio/webm",
+          });
+          resolve(audioFile);
+        };
+
+        recorder.onerror = () => {
+          URL.revokeObjectURL(url);
+          audioCtx.close();
+          // Fallback: send original file if extraction fails
+          resolve(videoFile);
+        };
+
+        // Start recording and playing
+        recorder.start(1000); // collect in 1s chunks
+        video.play().catch(() => {
+          // If autoplay blocked, fall back to original
+          URL.revokeObjectURL(url);
+          resolve(videoFile);
+        });
+
+        video.onended = () => recorder.stop();
+
+        // Safety timeout: if video is longer than expected, stop after duration + 2s
+        const maxDuration = (video.duration || 600) * 1000 + 2000;
+        setTimeout(() => {
+          if (recorder.state === "recording") recorder.stop();
+        }, maxDuration);
+      };
+
+      video.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve(videoFile); // fallback
+      };
+    });
+  }, []);
+
   // ── Transcription ──────────────────────────────────────────────────────────
 
   const transcribe = useCallback(async () => {
@@ -179,8 +258,13 @@ export default function TranscribeClient() {
     setTranscript(null);
 
     try {
+      // Extract audio from video (reduces 17MB video → ~1-2MB audio)
+      const audioFile = file.type.startsWith("video/")
+        ? await extractAudio(file)
+        : file;
+
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", audioFile);
 
       setStatus("processing");
 
@@ -256,7 +340,7 @@ export default function TranscribeClient() {
       }
       setStatus("error");
     }
-  }, [file]);
+  }, [file, extractAudio]);
 
   // ── Clipboard / download ───────────────────────────────────────────────────
 
@@ -409,11 +493,18 @@ export default function TranscribeClient() {
 
           {/* Processing state */}
           {isProcessing && (
-            <div className="flex items-center justify-center gap-2 py-6">
-              <Loader2 className="h-4 w-4 animate-spin text-[#6366F1]" strokeWidth={1.5} />
-              <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-                {status === "uploading" ? "Uploading..." : "Transcribing with AI — this may take a minute..."}
-              </span>
+            <div className="flex flex-col items-center gap-2 py-6">
+              <div className="flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin text-[#6366F1]" strokeWidth={1.5} />
+                <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
+                  {status === "uploading" ? "Extracting audio & uploading..." : "Transcribing with AI — this may take a minute..."}
+                </span>
+              </div>
+              {status === "uploading" && (
+                <p className="text-[10px] text-[#A3A3A3]">
+                  Audio is extracted from your video locally before sending — this keeps uploads small and fast.
+                </p>
+              )}
             </div>
           )}
 
