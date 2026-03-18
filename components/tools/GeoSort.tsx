@@ -43,17 +43,25 @@ function delay(ms: number): Promise<void> {
 
 async function reverseGeocode(lat: number, lon: number): Promise<string> {
   // Proxy through Next.js API route- browser cannot set User-Agent header
-  const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`);
-  if (!res.ok) throw new Error(`Geocode error: ${res.status}`);
-  const data = (await res.json()) as {
-    address?: { country?: string };
-    display_name?: string;
-  };
-  const country =
-    data.address?.country ||
-    data.display_name?.split(",").pop()?.trim() ||
-    "Unknown";
-  return country;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30000);
+  try {
+    const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`, {
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error(`Geocode error: ${res.status}`);
+    const data = (await res.json()) as {
+      address?: { country?: string };
+      display_name?: string;
+    };
+    const country =
+      data.address?.country ||
+      data.display_name?.split(",").pop()?.trim() ||
+      "Unknown";
+    return country;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 function gridKey(lat: number, lon: number): string {
