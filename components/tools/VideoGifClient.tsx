@@ -209,10 +209,11 @@ export default function VideoGifClient() {
       setProgress(10);
 
       await ff.exec([
-        "-i", inputName,
         "-ss", String(startTime),
         "-t", String(duration),
+        "-i", inputName,
         "-vf", `fps=${fps},scale=${resolution}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`,
+        "-f", "gif",
         outputName,
       ]);
 

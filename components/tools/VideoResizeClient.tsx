@@ -612,9 +612,8 @@ export default function VideoResizeClient() {
             ref={videoRef}
             src={videoUrl ?? ""}
             className="hidden"
-            preload="metadata"
+            preload="auto"
             onLoadedMetadata={handleVideoLoaded}
-            crossOrigin="anonymous"
           />
 
           {/* Preset grid */}

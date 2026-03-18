@@ -278,7 +278,7 @@ Rules:
       {
         inlineData: {
           data: fileBase64,
-          mimeType: mimeType as Parameters<typeof model.generateContent>[0] extends (infer T)[] ? T extends { inlineData: { mimeType: infer M } } ? M : never : never,
+          mimeType: mimeType,
         },
       },
     ]);
