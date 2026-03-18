@@ -24,6 +24,7 @@ const ALLOWED_ORIGINS = [
 ];
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   // CSRF: reject cross-origin requests in production

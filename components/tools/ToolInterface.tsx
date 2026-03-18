@@ -85,7 +85,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
           {/* Settings toolbar- appare dopo upload */}
           {hasFiles && (
             <div className="mt-3">
-              <SettingsToolbar onAiRenameClick={() => handleAiRenameClick()} />
+              <SettingsToolbar onAiRenameClick={() => handleAiRenameClick()} mode={defaultMode} />
             </div>
           )}
 
