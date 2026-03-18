@@ -22,16 +22,17 @@ interface ToolInterfaceProps {
 }
 
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
-  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday, setConvertToWebP, setAiRenameEnabled } = useImageStore();
+  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday, setConvertToWebP, setAiRenameEnabled, clearAll } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const pathname = usePathname();
   const inDashboard = pathname.startsWith("/dashboard");
 
-  // Force correct settings based on which single-purpose tool page we're on.
-  // This prevents stale toggle state from a previous tool visit from leaking
-  // (e.g. visiting WebP page then Compress page would leave convertToWebP=true).
+  // Clear files and force correct settings when switching between tool pages.
+  // Without this, files from compress would persist when navigating to webp.
   useEffect(() => {
+    clearAll();
+
     if (defaultMode === "compress") {
       setConvertToWebP(false);
       setAiRenameEnabled(false);
