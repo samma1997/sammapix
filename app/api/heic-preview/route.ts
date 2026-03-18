@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const convert = require("heic-convert");
 
-// 20 MB — conservative limit for a preview endpoint; no reason to accept 50 MB
+// 20 MB- conservative limit for a preview endpoint; no reason to accept 50 MB
 const MAX_SIZE = 20 * 1024 * 1024;
 
 // HEIC/HEIF magic bytes: ftyp box at offset 4 with brand starting with "heic", "heix", "hevc", "hevx", "mif1", "msf1"
@@ -54,12 +54,12 @@ export async function POST(req: NextRequest) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Validate actual magic bytes — do not trust the declared MIME type alone
+    // Validate actual magic bytes- do not trust the declared MIME type alone
     if (!isHeicBuffer(buffer)) {
       return Response.json({ error: "File content does not match HEIC/HEIF format" }, { status: 415 });
     }
 
-    // heic-convert: pure JS/WASM — works on Vercel without native libheif
+    // heic-convert: pure JS/WASM- works on Vercel without native libheif
     const outputBuffer: Buffer = await convert({
       buffer,
       format: "JPEG",
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       status: 200,
       headers: {
         "Content-Type": "image/jpeg",
-        // Do not cache publicly — this is user-uploaded private content
+        // Do not cache publicly- this is user-uploaded private content
         "Cache-Control": "private, no-store",
       },
     });

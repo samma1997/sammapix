@@ -30,13 +30,13 @@ export async function generateMetadata({
   const year = new Date(trip.startDate).getFullYear();
 
   return {
-    title: `${trip.destination} ${year} — Travel Photography`,
+    title: `${trip.destination} ${year}- Travel Photography`,
     description: trip.description.slice(0, 155),
     alternates: {
       canonical: `https://sammapix.com/about/${trip.slug}`,
     },
     openGraph: {
-      title: `${trip.destination} ${year} — Travel Photography`,
+      title: `${trip.destination} ${year}- Travel Photography`,
       description: trip.description.slice(0, 155),
       url: `https://sammapix.com/about/${trip.slug}`,
       type: "website",
@@ -91,7 +91,7 @@ export default async function TripPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    name: `${trip.destination} Photography — ${year}`,
+    name: `${trip.destination} Photography- ${year}`,
     description: trip.description.slice(0, 200),
     url: `https://sammapix.com/about/${trip.slug}`,
     author: {
@@ -161,7 +161,7 @@ export default async function TripPage({
       </div>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Gallery grid — 3 colonne desktop, 2 tablet, 1 mobile              */}
+      {/* Gallery grid- 3 colonne desktop, 2 tablet, 1 mobile              */}
       {/* ------------------------------------------------------------------ */}
       <section
         aria-label={`${trip.destination} travel photographs`}

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/filterpixel`,
   },
   openGraph: {
-    title: "SammaPix vs FilterPixel — Which Photo Optimizer is Better? (2026)",
+    title: "SammaPix vs FilterPixel - Which Photo Optimizer is Better? (2026)",
     description:
       "FilterPixel is paid and server-based. SammaPix is free, runs in-browser, strips EXIF, renames with AI, and exports WebP. Full comparison inside.",
     type: "website",
@@ -64,13 +64,13 @@ export default function VsFilterPixelPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs FilterPixel
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          FilterPixel uploads your images to their servers and charges a monthly fee. SammaPix processes everything in your browser for free — with EXIF strip, AI rename, and WebP export built in.
+          FilterPixel uploads your images to their servers and charges a monthly fee. SammaPix processes everything in your browser for free- with EXIF strip, AI rename, and WebP export built in.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/">
@@ -95,7 +95,7 @@ export default function VsFilterPixelPage() {
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want a completely free tier with no credit card</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need to strip EXIF / GPS metadata before publishing</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want AI-generated filenames and alt text for SEO</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Care about privacy — your files never leave the browser</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Care about privacy- your files never leave the browser</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need WebP export alongside JPG and PNG</li>
           </ul>
         </div>
@@ -140,55 +140,55 @@ export default function VsFilterPixelPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Shield className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Server-based vs browser-based — a fundamental difference
+              Server-based vs browser-based- a fundamental difference
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              FilterPixel processes images on their servers. This means your files are uploaded, stored temporarily (or permanently, depending on their policy), and processed by infrastructure you don&apos;t control. For photographers, agencies, or anyone working with confidential or proprietary images, this matters. SammaPix runs entirely in your browser using WebAssembly and the Canvas API. Your images never leave your device — not even for a second. This is not a minor technical detail; it is a structural privacy guarantee.
+              FilterPixel processes images on their servers. This means your files are uploaded, stored temporarily (or permanently, depending on their policy), and processed by infrastructure you don&apos;t control. For photographers, agencies, or anyone working with confidential or proprietary images, this matters. SammaPix runs entirely in your browser using WebAssembly and the Canvas API. Your images never leave your device- not even for a second. This is not a minor technical detail; it is a structural privacy guarantee.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              FilterPixel requires payment — SammaPix is free to start
+              FilterPixel requires payment - SammaPix is free to start
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              FilterPixel has no meaningful free tier. You need a paid plan to access batch optimization and full format support. SammaPix&apos;s core tools — compression, WebP conversion, EXIF removal, and resize — are completely free with no account required and no usage caps on the per-file tools. AI rename requires a free account (5 renames/day) or Pro ($59/year for 200/day). For freelancers, small agencies, and individual creators, SammaPix eliminates a recurring cost entirely.
+              FilterPixel has no meaningful free tier. You need a paid plan to access batch optimization and full format support. SammaPix&apos;s core tools- compression, WebP conversion, EXIF removal, and resize- are completely free with no account required and no usage caps on the per-file tools. AI rename requires a free account (5 renames/day) or Pro ($59/year for 200/day). For freelancers, small agencies, and individual creators, SammaPix eliminates a recurring cost entirely.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              EXIF strip — FilterPixel doesn&apos;t offer it
+              EXIF strip - FilterPixel doesn&apos;t offer it
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              EXIF metadata contains GPS coordinates, device information, timestamps, and sometimes even lens serial numbers. When you optimize an image with FilterPixel, that metadata is preserved in the output. SammaPix&apos;s EXIF Remover strips all metadata from JPGs and PNGs before download — entirely client-side, with zero server involvement. This is critical for photographers who publish location photos and do not want to expose where the shot was taken, or for agencies handling client images that contain sensitive device information.
+              EXIF metadata contains GPS coordinates, device information, timestamps, and sometimes even lens serial numbers. When you optimize an image with FilterPixel, that metadata is preserved in the output. SammaPix&apos;s EXIF Remover strips all metadata from JPGs and PNGs before download- entirely client-side, with zero server involvement. This is critical for photographers who publish location photos and do not want to expose where the shot was taken, or for agencies handling client images that contain sensitive device information.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Globe className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              WebP export — FilterPixel has limited format support
+              WebP export - FilterPixel has limited format support
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              FilterPixel focuses on optimizing existing formats — primarily JPG and PNG — but does not offer format conversion to WebP. WebP is now supported in all major browsers and delivers 25–34% smaller file sizes than JPEG at equivalent visual quality. For anyone building websites with Core Web Vitals in mind, WebP is the default output format of choice. SammaPix converts any image to WebP in one click, in the browser, for free — no additional tools needed.
+              FilterPixel focuses on optimizing existing formats- primarily JPG and PNG- but does not offer format conversion to WebP. WebP is now supported in all major browsers and delivers 25–34% smaller file sizes than JPEG at equivalent visual quality. For anyone building websites with Core Web Vitals in mind, WebP is the default output format of choice. SammaPix converts any image to WebP in one click, in the browser, for free- no additional tools needed.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — a feature FilterPixel has never offered
+              AI rename- a feature FilterPixel has never offered
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              FilterPixel is a pure optimization tool. It shrinks file sizes, but it does not help with SEO. SammaPix uses Google Gemini to analyze each image and generate a descriptive, SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">photo_001.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">wooden-cabin-snowy-mountain-colorado-winter.webp</code> with a full alt text description. For bloggers and content teams, this eliminates one of the most tedious parts of the publishing workflow — manually writing meaningful filenames for every image.
+              FilterPixel is a pure optimization tool. It shrinks file sizes, but it does not help with SEO. SammaPix uses Google Gemini to analyze each image and generate a descriptive, SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">photo_001.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">wooden-cabin-snowy-mountain-colorado-winter.webp</code> with a full alt text description. For bloggers and content teams, this eliminates one of the most tedious parts of the publishing workflow- manually writing meaningful filenames for every image.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where FilterPixel has an edge — server-side automation
+              Where FilterPixel has an edge- server-side automation
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              FilterPixel&apos;s server-based architecture can be an advantage for certain enterprise workflows — specifically, when you need to integrate image optimization into a CI/CD pipeline, a CMS upload hook, or an automated media processing system. Because it runs on their servers, it can process images without any user interaction. SammaPix requires a browser session, which makes it better suited for manual workflows. If you need to optimize thousands of images automatically via an API, FilterPixel&apos;s model fits that use case — though at a cost.
+              FilterPixel&apos;s server-based architecture can be an advantage for certain enterprise workflows- specifically, when you need to integrate image optimization into a CI/CD pipeline, a CMS upload hook, or an automated media processing system. Because it runs on their servers, it can process images without any user interaction. SammaPix requires a browser session, which makes it better suited for manual workflows. If you need to optimize thousands of images automatically via an API, FilterPixel&apos;s model fits that use case- though at a cost.
             </p>
           </div>
         </div>
@@ -211,7 +211,7 @@ export default function VsFilterPixelPage() {
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">SEO workflow:</strong> Needing to rename images with descriptive filenames and add alt text — neither of which FilterPixel provides.</span>
+            <span><strong className="text-gray-800">SEO workflow:</strong> Needing to rename images with descriptive filenames and add alt text- neither of which FilterPixel provides.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
@@ -234,7 +234,7 @@ export default function VsFilterPixelPage() {
           <Link href="/pricing" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Pricing</p>
-              <p className="text-xs text-gray-500 mt-0.5">Free forever — Pro at $59/year for power users</p>
+              <p className="text-xs text-gray-500 mt-0.5">Free forever - Pro at $59/year for power users</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -243,7 +243,7 @@ export default function VsFilterPixelPage() {
 
       {/* Bottom CTA */}
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">A better photo optimizer — and it&apos;s free</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">A better photo optimizer- and it&apos;s free</h2>
         <p className="text-sm text-gray-500 mb-6">
           No server uploads, no subscription, no account required for core tools. Start optimizing in 10 seconds.
         </p>
@@ -260,7 +260,7 @@ export default function VsFilterPixelPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -278,7 +278,7 @@ export default function VsFilterPixelPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -293,19 +293,19 @@ export default function VsFilterPixelPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free + Pro $59/yr | FilterPixel: Paid from $15/mo" },
-                { "@type": "ListItem", position: 2, name: "Browser-based", description: "SammaPix: Yes — files never leave device | FilterPixel: No — server-based" },
-                { "@type": "ListItem", position: 3, name: "EXIF metadata strip", description: "SammaPix: Yes — client-side | FilterPixel: No" },
+                { "@type": "ListItem", position: 2, name: "Browser-based", description: "SammaPix: Yes- files never leave device | FilterPixel: No- server-based" },
+                { "@type": "ListItem", position: 3, name: "EXIF metadata strip", description: "SammaPix: Yes- client-side | FilterPixel: No" },
                 { "@type": "ListItem", position: 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | FilterPixel: No" },
                 { "@type": "ListItem", position: 5, name: "WebP export", description: "SammaPix: Yes | FilterPixel: No" },
-                { "@type": "ListItem", position: 6, name: "Free plan", description: "SammaPix: Yes — core tools free forever | FilterPixel: No" },
-                { "@type": "ListItem", position: 7, name: "Batch processing", description: "SammaPix: Yes, up to 20 free | FilterPixel: Yes — paid" },
+                { "@type": "ListItem", position: 6, name: "Free plan", description: "SammaPix: Yes- core tools free forever | FilterPixel: No" },
+                { "@type": "ListItem", position: 7, name: "Batch processing", description: "SammaPix: Yes, up to 20 free | FilterPixel: Yes- paid" },
               ],
             },
           }),
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -321,7 +321,7 @@ export default function VsFilterPixelPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -16,7 +16,7 @@ function checkAuth(req: NextRequest): boolean {
   return key === ADMIN_SECRET;
 }
 
-// GET — fetch all portfolio photos with context
+// GET- fetch all portfolio photos with context
 export async function GET(req: NextRequest) {
   if (!checkAuth(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST — update context metadata
+// POST- update context metadata
 const UpdateSchema = z.object({
   publicId: z.string().min(1).max(500),
   caption: z.string().max(500),

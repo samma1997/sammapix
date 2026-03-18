@@ -22,13 +22,13 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user?.email) {
-        // First sign-in — always fetch plan immediately
+        // First sign-in- always fetch plan immediately
         const { getUserPlan } = await import("@/lib/user-plan");
         token.plan = await getUserPlan(user.email);
         token.planCheckedAt = Date.now();
         token.aiRenameUsedToday = 0;
       } else if (token.email) {
-        // Subsequent JWT refreshes — re-check plan every PLAN_REFRESH_INTERVAL_MS
+        // Subsequent JWT refreshes- re-check plan every PLAN_REFRESH_INTERVAL_MS
         const lastChecked = (token.planCheckedAt as number) ?? 0;
         if (Date.now() - lastChecked > PLAN_REFRESH_INTERVAL_MS) {
           try {
@@ -36,7 +36,7 @@ export const authOptions: AuthOptions = {
             token.plan = await getUserPlan(token.email as string);
             token.planCheckedAt = Date.now();
           } catch {
-            // Keep existing plan on error — will retry on next interval
+            // Keep existing plan on error- will retry on next interval
           }
         }
       }

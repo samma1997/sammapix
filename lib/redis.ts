@@ -1,6 +1,6 @@
 /**
  * Redis client via Upstash REST API.
- * Free tier: 10,000 commands/day — more than enough for rate limiting.
+ * Free tier: 10,000 commands/day- more than enough for rate limiting.
  *
  * Setup (one-time, free):
  *   1. Go to https://console.upstash.com → Create Database (free tier)
@@ -8,7 +8,7 @@
  *   3. Add to Vercel: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN
  *
  * If env vars are not set, all operations are no-ops and rate limiting
- * falls back to the in-memory Map (current behavior — not reliable across
+ * falls back to the in-memory Map (current behavior- not reliable across
  * cold starts but functional for small traffic).
  */
 
@@ -40,7 +40,7 @@ async function exec<T>(command: unknown[]): Promise<T | null> {
 export async function incrWithTTL(key: string, ttlSeconds: number): Promise<number | null> {
   const value = await exec<number>(["INCR", key]);
   if (value === 1) {
-    // First increment — set expiry (fire and forget)
+    // First increment- set expiry (fire and forget)
     exec(["EXPIRE", key, ttlSeconds]).catch(() => {});
   }
   return value;

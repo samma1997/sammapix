@@ -21,7 +21,7 @@ export const CREDIT_PACKAGES = [
 export type CreditPackageId = (typeof CREDIT_PACKAGES)[number]["id"];
 
 // ---------------------------------------------------------------------------
-// Redis helpers — thin wrappers around the raw exec transport in redis.ts.
+// Redis helpers- thin wrappers around the raw exec transport in redis.ts.
 // We need SET and INCRBY which are not exported from redis.ts, so we call
 // the Upstash REST API directly here (same pattern as the existing module).
 // ---------------------------------------------------------------------------
@@ -49,7 +49,7 @@ async function redisExec<T>(command: unknown[]): Promise<T | null> {
 }
 
 // ---------------------------------------------------------------------------
-// In-memory fallback (dev / test — not shared across cold starts)
+// In-memory fallback (dev / test- not shared across cold starts)
 // ---------------------------------------------------------------------------
 
 const memoryStore = new Map<string, number>();
@@ -87,7 +87,7 @@ export async function addCredits(email: string, amount: number): Promise<number>
       console.log(`[credits] +${amount} credits for ${email} → balance: ${newValue}`);
       return newValue;
     }
-    // Redis call failed — fall through to memory fallback
+    // Redis call failed- fall through to memory fallback
   }
 
   const current = memoryStore.get(key) ?? 0;
@@ -113,16 +113,16 @@ export async function deductCredit(
     const result = await redisExec<number>(["DECRBY", key, count]);
     if (result !== null) {
       if (result < 0) {
-        // Went negative — rollback atomically
+        // Went negative- rollback atomically
         await redisExec<number>(["INCRBY", key, count]);
         return { success: false, remaining: result + count };
       }
       return { success: true, remaining: result };
     }
-    // Redis call failed — fall through to memory
+    // Redis call failed- fall through to memory
   }
 
-  // In-memory fallback (dev/test only — not concurrent-safe across processes)
+  // In-memory fallback (dev/test only- not concurrent-safe across processes)
   const current = memoryStore.get(key) ?? 0;
   if (current < count) {
     return { success: false, remaining: current };

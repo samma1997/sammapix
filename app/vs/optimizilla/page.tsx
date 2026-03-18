@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Optimizilla — Free Image Compressor Comparison 2026",
+  title: "SammaPix vs Optimizilla - Free Image Compressor Comparison 2026",
   description: "SammaPix vs Optimizilla comparison. SammaPix is 100% browser-based with no upload, adds WebP conversion and AI rename, and has no 20-image session limit.",
   keywords: [
     "optimizilla alternative",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/optimizilla`,
   },
   openGraph: {
-    title: "SammaPix vs Optimizilla — Free Image Compressor Comparison 2026",
-    description: "Optimizilla uploads your files and limits you to 20 per session. SammaPix is browser-based, unlimited, and adds WebP + AI rename — for free.",
+    title: "SammaPix vs Optimizilla - Free Image Compressor Comparison 2026",
+    description: "Optimizilla uploads your files and limits you to 20 per session. SammaPix is browser-based, unlimited, and adds WebP + AI rename- for free.",
     type: "website",
     url: `${APP_URL}/vs/optimizilla`,
     images: [
@@ -71,13 +71,13 @@ export default function VsOptimizillaPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs Optimizilla
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          Optimizilla has been a reliable free image compressor for years. But it uploads your files to a server, caps you at 20 images per session, and offers no WebP conversion or AI features. SammaPix is the modern alternative — built entirely in-browser.
+          Optimizilla has been a reliable free image compressor for years. But it uploads your files to a server, caps you at 20 images per session, and offers no WebP conversion or AI features. SammaPix is the modern alternative- built entirely in-browser.
         </p>
         <div className="mt-8">
           <Link href="/">
@@ -141,7 +141,7 @@ export default function VsOptimizillaPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Privacy — Optimizilla uploads every image to its servers
+              Privacy - Optimizilla uploads every image to its servers
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               Optimizilla&apos;s compression algorithm runs server-side, which means every image you compress is transmitted to and temporarily stored on their servers. For personal photos, client work, or any sensitive image content, this is a meaningful privacy risk. SammaPix compresses everything using WebAssembly and the Canvas API directly inside your browser. Nothing leaves your device.
@@ -150,37 +150,37 @@ export default function VsOptimizillaPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <FileImage className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              WebP conversion — a format Optimizilla doesn&apos;t support
+              WebP conversion- a format Optimizilla doesn&apos;t support
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Optimizilla compresses JPEG and PNG — it does not convert to WebP. WebP is now supported by all modern browsers and produces files 25-34% smaller than JPEG at equivalent quality. SammaPix converts any image to WebP in-browser in a single click, making it the better choice for anyone focused on web performance or improving Core Web Vitals.
+              Optimizilla compresses JPEG and PNG- it does not convert to WebP. WebP is now supported by all modern browsers and produces files 25-34% smaller than JPEG at equivalent quality. SammaPix converts any image to WebP in-browser in a single click, making it the better choice for anyone focused on web performance or improving Core Web Vitals.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — the feature Optimizilla will never have
+              AI rename- the feature Optimizilla will never have
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              After compressing in Optimizilla, your files retain their original names — <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">DSC_0042-min.jpg</code> tells Google nothing about the image content. SammaPix&apos;s AI rename uses Google Gemini to analyze the image and suggest a descriptive, SEO-friendly filename like <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">mountain-lake-sunrise-reflection.webp</code>. This directly improves image search ranking and accessibility.
+              After compressing in Optimizilla, your files retain their original names- <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">DSC_0042-min.jpg</code> tells Google nothing about the image content. SammaPix&apos;s AI rename uses Google Gemini to analyze the image and suggest a descriptive, SEO-friendly filename like <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">mountain-lake-sunrise-reflection.webp</code>. This directly improves image search ranking and accessibility.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              20-image session limit — Optimizilla stops, SammaPix continues
+              20-image session limit - Optimizilla stops, SammaPix continues
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Optimizilla limits each session to 20 images. If you have 60 product photos to optimize, you need to reload the page and repeat the process three times. SammaPix&apos;s free plan also processes 20 files at once, but the Pro plan handles up to 100 files per batch. For high-volume workflows, SammaPix scales — Optimizilla does not.
+              Optimizilla limits each session to 20 images. If you have 60 product photos to optimize, you need to reload the page and repeat the process three times. SammaPix&apos;s free plan also processes 20 files at once, but the Pro plan handles up to 100 files per batch. For high-volume workflows, SammaPix scales - Optimizilla does not.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              EXIF removal — protect location data Optimizilla leaves intact
+              EXIF removal- protect location data Optimizilla leaves intact
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Optimizilla compresses images but does not strip EXIF metadata from the output. That metadata can include GPS coordinates precise to a few meters. SammaPix&apos;s EXIF Remover strips all sensitive metadata client-side before you download — GPS, device model, timestamps, and more. This is a feature Optimizilla has never offered.
+              Optimizilla compresses images but does not strip EXIF metadata from the output. That metadata can include GPS coordinates precise to a few meters. SammaPix&apos;s EXIF Remover strips all sensitive metadata client-side before you download - GPS, device model, timestamps, and more. This is a feature Optimizilla has never offered.
             </p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function VsOptimizillaPage() {
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You publish images to a website.</strong> WebP conversion, AI rename, and EXIF removal are all part of a complete web image workflow — and SammaPix offers all three.</span>
+            <span><strong className="text-gray-800">You publish images to a website.</strong> WebP conversion, AI rename, and EXIF removal are all part of a complete web image workflow- and SammaPix offers all three.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
@@ -219,14 +219,14 @@ export default function VsOptimizillaPage() {
           <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Image Compressor</p>
-              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP — 100% free, no upload</p>
+              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP- 100% free, no upload</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
           <Link href="/tools/webp" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Convert to WebP</p>
-              <p className="text-xs text-gray-500 mt-0.5">Convert any image to WebP — faster pages, smaller files</p>
+              <p className="text-xs text-gray-500 mt-0.5">Convert any image to WebP- faster pages, smaller files</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -237,7 +237,7 @@ export default function VsOptimizillaPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Looking for a better free image compressor?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          SammaPix is faster, private, and does far more than Optimizilla — completely free.
+          SammaPix is faster, private, and does far more than Optimizilla- completely free.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -252,14 +252,14 @@ export default function VsOptimizillaPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs Optimizilla — Which Free Image Compressor is Better in 2026?",
+            headline: "SammaPix vs Optimizilla - Which Free Image Compressor is Better in 2026?",
             description: "Detailed feature comparison between SammaPix and Optimizilla free image compression tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
@@ -269,7 +269,7 @@ export default function VsOptimizillaPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -284,7 +284,7 @@ export default function VsOptimizillaPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Optimizilla: Free" },
-                { "@type": "ListItem", position: 2, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | Optimizilla: No — uploads to server" },
+                { "@type": "ListItem", position: 2, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Optimizilla: No- uploads to server" },
                 { "@type": "ListItem", position: 3, name: "WebP conversion", description: "SammaPix: Yes | Optimizilla: No" },
                 { "@type": "ListItem", position: 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Optimizilla: No" },
                 { "@type": "ListItem", position: 5, name: "Session file limit", description: "SammaPix: 20 free / 100 Pro | Optimizilla: 20 per session" },
@@ -296,7 +296,7 @@ export default function VsOptimizillaPage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -312,7 +312,7 @@ export default function VsOptimizillaPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

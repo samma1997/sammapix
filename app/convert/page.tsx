@@ -4,9 +4,9 @@ import { ArrowRight } from "lucide-react";
 import { APP_URL, APP_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Free Image Format Converter — Convert Any Format | ${APP_NAME}`,
+  title: `Free Image Format Converter - Convert Any Format | ${APP_NAME}`,
   description:
-    "Convert HEIC to JPG, PNG to WebP, JPG to WebP, and more. All conversions are free, browser-based, and private — your images never leave your device.",
+    "Convert HEIC to JPG, PNG to WebP, JPG to WebP, and more. All conversions are free, browser-based, and private- your images never leave your device.",
   keywords: [
     "image converter online free",
     "heic to jpg",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Free Image Format Converter | ${APP_NAME}`,
     description:
-      "Convert HEIC to JPG, PNG to WebP, JPG to WebP and more. 100 % browser-based — no upload, no signup, no cost.",
+      "Convert HEIC to JPG, PNG to WebP, JPG to WebP and more. 100 % browser-based- no upload, no signup, no cost.",
     type: "website",
     url: `${APP_URL}/convert`,
     siteName: APP_NAME,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: `Image Format Converter — ${APP_NAME}`,
+        alt: `Image Format Converter- ${APP_NAME}`,
       },
     ],
   },
@@ -98,7 +98,7 @@ export default function ConvertIndexPage() {
         Free Image Format Converter
       </h1>
       <p className="text-sm text-[#737373] leading-relaxed mb-10">
-        Convert between image formats for free. All processing happens inside your browser — your images never leave your device.
+        Convert between image formats for free. All processing happens inside your browser- your images never leave your device.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

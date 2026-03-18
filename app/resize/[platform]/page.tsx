@@ -46,7 +46,7 @@ export async function generateMetadata({
           url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: `SammaPix — Resize Images for ${platform.displayName}`,
+          alt: `SammaPix - Resize Images for ${platform.displayName}`,
         },
       ],
     },
@@ -63,7 +63,7 @@ function buildJsonLd(slug: string) {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "@id": `${canonical}#app`,
-    name: `SammaPix — Resize for ${platform.displayName}`,
+    name: `SammaPix - Resize for ${platform.displayName}`,
     description: platform.metaDescription,
     url: canonical,
     applicationCategory: "PhotographyApplication",
@@ -256,7 +256,7 @@ export default async function ResizePlatformPage({
                       {getAspectRatio(size.width, size.height)}
                     </td>
                     <td className="hidden sm:table-cell px-4 py-3 text-[#737373] dark:text-[#737373] border-b border-[#E5E5E5] dark:border-[#2A2A2A] last:border-0">
-                      {size.note ?? "—"}
+                      {size.note ?? " - "}
                     </td>
                   </tr>
                 ))}
@@ -375,7 +375,7 @@ export default async function ResizePlatformPage({
                   </p>
                   <p className="text-xs text-[#A3A3A3]">
                     {related.sizes.length} size
-                    {related.sizes.length !== 1 ? "s" : ""} —{" "}
+                    {related.sizes.length !== 1 ? "s" : ""}- {" "}
                     {related.sizes.map((s) => s.type).join(", ")}
                   </p>
                 </Link>
@@ -393,7 +393,7 @@ export default async function ResizePlatformPage({
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             Need dimensions for every platform in one place? Read our complete
-            2026 cheat sheet — every network, every format, updated for this
+            2026 cheat sheet- every network, every format, updated for this
             year.
           </p>
           <Link

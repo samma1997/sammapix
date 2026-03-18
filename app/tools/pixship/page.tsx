@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { Send } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "PixShip — Light Compress & Resize for Client Delivery | SammaPix",
+  title: "PixShip - Light Compress & Resize for Client Delivery | SammaPix",
   description:
     "Light compress and resize for client delivery. Download as ZIP. Free, no login required.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/pixship`,
   },
   openGraph: {
-    title: "PixShip — Light Compress & Resize for Client Delivery | SammaPix",
+    title: "PixShip - Light Compress & Resize for Client Delivery | SammaPix",
     description:
       "Light compress and resize for client delivery. Download as ZIP.",
     url: `${APP_URL}/tools/pixship`,
@@ -46,7 +46,7 @@ const features = [
       "90% quality compression is virtually lossless. Your clients get sharp images at manageable file sizes.",
   },
   {
-    title: "2400px max — the delivery sweet spot",
+    title: "2400px max- the delivery sweet spot",
     description:
       "Large enough for prints and screens, small enough to email or share via cloud links.",
   },
@@ -140,6 +140,25 @@ export default function PixShipPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Frequently asked questions</h2>
+          <dl className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {[
+              { q: "Why 90% quality instead of 80%?", a: "PixShip is designed for client delivery where quality matters most. 90% compression is virtually lossless while still reducing file sizes enough for easy sharing via email or cloud links." },
+              { q: "Why 2400px max width?", a: "2400px is large enough for clients to make prints up to A3 size and view on high-resolution screens, while being small enough to email or share via cloud links without issues." },
+              { q: "Do I need an account?", a: "No. PixShip is completely free and requires no login. All processing happens in your browser -- nothing is uploaded to any server." },
+            ].map((faq) => (
+              <div key={faq.q} className="py-4">
+                <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>
+                <dd className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

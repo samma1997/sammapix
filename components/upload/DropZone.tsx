@@ -111,7 +111,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
               </span>
             </p>
             <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-              PNG, JPG, WebP, GIF — up to {Math.round(maxFileSize / (1024 * 1024))}MB each
+              PNG, JPG, WebP, GIF- up to {Math.round(maxFileSize / (1024 * 1024))}MB each
             </p>
           </>
         )}

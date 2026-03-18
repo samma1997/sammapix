@@ -7,7 +7,7 @@ import WorkflowPipeline from "@/components/tools/WorkflowPipeline";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI Workflow Pipeline — Compress, Rename & Convert in One Click | SammaPix Pro",
+  title: "AI Workflow Pipeline - Compress, Rename & Convert in One Click | SammaPix Pro",
   description:
     "Run an entire image optimization pipeline in one click. Compress, AI rename, resize and convert to WebP automatically. Blog, Instagram, E-commerce and Client Delivery presets included. Pro feature.",
   keywords: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/workflow`,
   },
   openGraph: {
-    title: "AI Workflow Pipeline — Compress, Rename & Convert in One Click | SammaPix Pro",
+    title: "AI Workflow Pipeline - Compress, Rename & Convert in One Click | SammaPix Pro",
     description:
       "Run an entire image optimization pipeline in one click. Blog, Instagram, E-commerce and Client Delivery presets.",
     url: `${APP_URL}/tools/workflow`,
@@ -81,7 +81,7 @@ export default function WorkflowPage() {
     <main>
       <ToolHeader
         title="AI Workflow Pipeline"
-        description="Run compress, AI rename, resize and WebP conversion as a single pipeline — one click, one ZIP download."
+        description="Run compress, AI rename, resize and WebP conversion as a single pipeline- one click, one ZIP download."
         icon={Zap}
         accentColor="#6366F1"
       />
@@ -127,8 +127,8 @@ export default function WorkflowPage() {
             What is the AI Workflow Pipeline?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            The AI Workflow Pipeline combines SammaPix&apos;s individual tools — image
-            compression, resize, AI-powered renaming and WebP conversion — into
+            The AI Workflow Pipeline combines SammaPix&apos;s individual tools- image
+            compression, resize, AI-powered renaming and WebP conversion- into
             a single automated sequence. Instead of running each tool separately,
             you choose a preset, drop your images, and download a ZIP with
             all images fully optimized in seconds.
@@ -136,7 +136,7 @@ export default function WorkflowPage() {
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
             Each preset is tuned for a specific use case. The Blog Post preset
             compresses at 80% quality, asks Google Gemini to generate an
-            SEO-friendly filename, caps width at 1200px and converts to WebP —
+            SEO-friendly filename, caps width at 1200px and converts to WebP- 
             exactly what Google recommends for fast-loading web pages. The
             E-commerce preset follows a similar chain but targets 800px and
             uses a product SKU naming style.
@@ -146,14 +146,14 @@ export default function WorkflowPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0 mb-6">
             {[
-              "Save 5–10 minutes per batch — no switching between tabs",
-              "Consistent output every time — same settings, same quality",
+              "Save 5–10 minutes per batch- no switching between tabs",
+              "Consistent output every time- same settings, same quality",
               "AI rename runs on the original image for best accuracy",
               "All output lands in a single ZIP, named and ready to upload",
-              "Processing is client-side for compress and resize — your images stay private",
+              "Processing is client-side for compress and resize- your images stay private",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="text-[#6366F1] mt-0.5">—</span>
+                <span className="text-[#6366F1] mt-0.5"> - </span>
                 {item}
               </li>
             ))}
@@ -167,7 +167,7 @@ export default function WorkflowPage() {
             sends a thumbnail of each original image to Google Gemini Flash.
             Gemini analyses the image and returns a descriptive,
             lowercase, hyphen-separated filename. The output file is then saved
-            under that name — so{" "}
+            under that name- so{" "}
             <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] px-1.5 py-0.5 rounded font-mono">
               IMG_3492.jpg
             </code>{" "}
@@ -233,10 +233,10 @@ export default function WorkflowPage() {
                   url: `${APP_URL}`,
                 },
                 featureList: [
-                  "Blog Post preset — compress, AI rename, 1200px, WebP",
-                  "Instagram preset — compress, 1080px square or portrait",
-                  "E-commerce preset — compress, AI rename SKU, 800px, WebP",
-                  "Client Delivery preset — light compress, 2400px",
+                  "Blog Post preset- compress, AI rename, 1200px, WebP",
+                  "Instagram preset- compress, 1080px square or portrait",
+                  "E-commerce preset- compress, AI rename SKU, 800px, WebP",
+                  "Client Delivery preset- light compress, 2400px",
                   "Batch ZIP download",
                   "Google Gemini AI renaming",
                   "Client-side compression and resize",
@@ -263,7 +263,7 @@ export default function WorkflowPage() {
                     name: "What is the AI Workflow Pipeline?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "The AI Workflow Pipeline is a Pro feature on SammaPix that chains multiple image operations — compression, resize, AI renaming and WebP conversion — into a single automated sequence. You choose a preset (Blog Post, Instagram, E-commerce or Client Delivery), drop your images, and download a ZIP with all files fully processed.",
+                      text: "The AI Workflow Pipeline is a Pro feature on SammaPix that chains multiple image operations- compression, resize, AI renaming and WebP conversion- into a single automated sequence. You choose a preset (Blog Post, Instagram, E-commerce or Client Delivery), drop your images, and download a ZIP with all files fully processed.",
                     },
                   },
                   {
@@ -271,7 +271,7 @@ export default function WorkflowPage() {
                     name: "Does image processing happen in my browser?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Compression and resize run entirely in your browser using the Canvas API — no server upload. AI renaming sends a thumbnail to Google Gemini for analysis. WebP conversion also runs locally via the Canvas API.",
+                      text: "Compression and resize run entirely in your browser using the Canvas API- no server upload. AI renaming sends a thumbnail to Google Gemini for analysis. WebP conversion also runs locally via the Canvas API.",
                     },
                   },
                   {

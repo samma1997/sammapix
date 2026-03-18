@@ -40,7 +40,7 @@ export default function FileList({ onAiRename }: FileListProps) {
           {items.length} {items.length === 1 ? "file" : "files"}
           {hasDoneFiles && (
             <span className="text-gray-400 dark:text-[#525252] font-normal ml-1">
-              — {doneFiles.length} done
+             - {doneFiles.length} done
             </span>
           )}
         </p>

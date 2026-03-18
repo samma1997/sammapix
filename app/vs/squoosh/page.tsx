@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Sparkles, Lock, Globe, Zap } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Squoosh — Image Optimizer Comparison 2026",
+  title: "SammaPix vs Squoosh - Image Optimizer Comparison 2026",
   description: "SammaPix vs Squoosh by Google. Both free, but SammaPix adds batch processing, AI rename, WebP conversion, and privacy (no uploads).",
   keywords: [
     "squoosh alternative",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/squoosh`,
   },
   openGraph: {
-    title: "SammaPix vs Squoosh — Image Optimizer Comparison 2026",
+    title: "SammaPix vs Squoosh - Image Optimizer Comparison 2026",
     description: "Squoosh is powerful but single-file only. SammaPix adds batch processing, AI rename, and no file upload to server.",
     type: "website",
     url: `${APP_URL}/vs/squoosh`,
@@ -70,7 +70,7 @@ export default function VsSquooshPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs Squoosh
@@ -144,22 +144,22 @@ export default function VsSquooshPage() {
               Squoosh was archived by Google in 2023
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Google&apos;s Chrome team archived the Squoosh repository in late 2023. The tool still works — browser APIs haven&apos;t changed — but it receives no new features, no security updates, and no bug fixes. SammaPix is actively developed and deployed on a modern Next.js stack.
+              Google&apos;s Chrome team archived the Squoosh repository in late 2023. The tool still works- browser APIs haven&apos;t changed- but it receives no new features, no security updates, and no bug fixes. SammaPix is actively developed and deployed on a modern Next.js stack.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Batch processing — Squoosh only does one file at a time
+              Batch processing - Squoosh only does one file at a time
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Squoosh is designed as a single-image editor with a detailed before/after view. SammaPix is designed for batch workflows — drop 20 images at once, compress and convert them all, download a ZIP. For content creators and developers, this is a significant practical difference.
+              Squoosh is designed as a single-image editor with a detailed before/after view. SammaPix is designed for batch workflows- drop 20 images at once, compress and convert them all, download a ZIP. For content creators and developers, this is a significant practical difference.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI features — Squoosh has none
+              AI features - Squoosh has none
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               SammaPix uses Google Gemini to analyze images and generate SEO-optimized filenames and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">DSC_1042.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">sunset-amalfi-coast-italy.webp</code> with a full alt text description. Squoosh has no AI features and no plans to add them.
@@ -168,7 +168,7 @@ export default function VsSquooshPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where Squoosh wins — codec control
+              Where Squoosh wins- codec control
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               Squoosh exposes low-level codec settings: MozJPEG chroma subsampling, OxiPNG filter strategies, AVIF encoder settings. If you&apos;re a developer who needs to squeeze every byte and tune codec-level parameters, Squoosh&apos;s advanced controls are unmatched. SammaPix focuses on the 95% use case: good quality, small size, fast workflow.
@@ -177,19 +177,19 @@ export default function VsSquooshPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              EXIF removal — a privacy feature Squoosh skips
+              EXIF removal- a privacy feature Squoosh skips
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Squoosh preserves EXIF metadata in your output files. That metadata contains GPS coordinates, device model, lens info, and timestamps. For photographers who publish images to the web, this can be a significant privacy leak — especially if you photograph from home or work locations. SammaPix&apos;s EXIF Remover strips all metadata client-side before you download the file. No server needed, no data sent anywhere.
+              Squoosh preserves EXIF metadata in your output files. That metadata contains GPS coordinates, device model, lens info, and timestamps. For photographers who publish images to the web, this can be a significant privacy leak- especially if you photograph from home or work locations. SammaPix&apos;s EXIF Remover strips all metadata client-side before you download the file. No server needed, no data sent anywhere.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Price — both free, but SammaPix has a Pro tier for power users
+              Price- both free, but SammaPix has a Pro tier for power users
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Squoosh is completely free with no plans or tiers — it&apos;s a Google open-source project. SammaPix is also free for core tools, with a Pro plan at $59/year that adds 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. For most users, both tools are free. The difference is that SammaPix is actively evolving its feature set, while Squoosh is archived and frozen.
+              Squoosh is completely free with no plans or tiers- it&apos;s a Google open-source project. SammaPix is also free for core tools, with a Pro plan at $59/year that adds 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. For most users, both tools are free. The difference is that SammaPix is actively evolving its feature set, while Squoosh is archived and frozen.
             </p>
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function VsSquooshPage() {
       <div className="mb-14 p-6 border border-gray-200 rounded-md bg-gray-50/40">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Who should switch from Squoosh to SammaPix?</h2>
         <p className="text-sm text-gray-600 leading-relaxed mb-4">
-          Squoosh is not going away — it still works. But it is no longer maintained, and it has never supported batch workflows or AI features. You should consider switching if:
+          Squoosh is not going away- it still works. But it is no longer maintained, and it has never supported batch workflows or AI features. You should consider switching if:
         </p>
         <ul className="space-y-3 text-sm text-gray-600">
           <li className="flex items-start gap-3">
@@ -235,7 +235,7 @@ export default function VsSquooshPage() {
           <Link href="/pricing" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Pricing</p>
-              <p className="text-xs text-gray-500 mt-0.5">Free forever — Pro at $59/year for power users</p>
+              <p className="text-xs text-gray-500 mt-0.5">Free forever - Pro at $59/year for power users</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -246,7 +246,7 @@ export default function VsSquooshPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Need batch processing + AI rename?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          SammaPix handles up to 20 files at once — free, no signup for compression.
+          SammaPix handles up to 20 files at once- free, no signup for compression.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -261,14 +261,14 @@ export default function VsSquooshPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs Squoosh — Which Image Optimizer Should You Use in 2026?",
+            headline: "SammaPix vs Squoosh - Which Image Optimizer Should You Use in 2026?",
             description: "Detailed feature comparison between SammaPix and Squoosh image optimization tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
@@ -278,7 +278,7 @@ export default function VsSquooshPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -293,10 +293,10 @@ export default function VsSquooshPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Squoosh: Free" },
-                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Squoosh: No — one file at a time" },
-                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | Squoosh: Yes — 100% browser-based" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Squoosh: No- one file at a time" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Squoosh: Yes- 100% browser-based" },
                 { "@type": "ListItem", "position": 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Squoosh: No" },
-                { "@type": "ListItem", "position": 5, name: "Actively maintained", description: "SammaPix: Yes | Squoosh: No — archived by Google in 2023" },
+                { "@type": "ListItem", "position": 5, name: "Actively maintained", description: "SammaPix: Yes | Squoosh: No- archived by Google in 2023" },
                 { "@type": "ListItem", "position": 6, name: "WebP conversion", description: "SammaPix: Yes | Squoosh: Yes" },
                 { "@type": "ListItem", "position": 7, name: "Mobile-friendly UX", description: "SammaPix: Yes | Squoosh: No" },
               ],
@@ -305,7 +305,7 @@ export default function VsSquooshPage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -321,7 +321,7 @@ export default function VsSquooshPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -342,7 +342,7 @@ export default function VsSquooshPage() {
                 name: "Is Squoosh free?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes, Squoosh by Google is completely free and has no premium plans. However, it is no longer maintained — Google archived the project in 2023.",
+                  text: "Yes, Squoosh by Google is completely free and has no premium plans. However, it is no longer maintained - Google archived the project in 2023.",
                 },
               },
               {

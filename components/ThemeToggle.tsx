@@ -25,7 +25,7 @@ export default function ThemeToggle() {
     }
   }
 
-  // Avoid hydration mismatch — render placeholder until mounted
+  // Avoid hydration mismatch- render placeholder until mounted
   if (!mounted) {
     return (
       <button

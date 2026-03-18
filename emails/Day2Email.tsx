@@ -117,7 +117,7 @@ export function Day2Email({ name }: Day2EmailProps) {
     <Html lang="en">
       <Head />
       <Preview>
-        Convert to WebP and make your images 30% lighter — instantly
+        Convert to WebP and make your images 30% lighter- instantly
       </Preview>
       <Body style={main}>
         <Container style={container}>
@@ -133,20 +133,20 @@ export function Day2Email({ name }: Day2EmailProps) {
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
             WebP images are 25–34% lighter than JPEG at equivalent visual
-            quality. Every modern browser supports WebP as of 2024 — Chrome,
+            quality. Every modern browser supports WebP as of 2024 - Chrome,
             Safari, Firefox, Edge. There&apos;s no reason to still serve JPEGs
             to your visitors.
           </Text>
           <Text style={body}>
             Google PageSpeed Insights flags JPEG and PNG as a core optimization
             opportunity. Switching to WebP is one of the fastest ways to improve
-            your Core Web Vitals score — which directly affects your search
+            your Core Web Vitals score- which directly affects your search
             ranking.
           </Text>
 
           <Section style={codeBlock}>
-            <Text style={codeLine}>Before: photo.jpg — 2.4 MB</Text>
-            <Text style={codeLineSuccess}>After:  photo.webp — 1.6 MB  (−33%)</Text>
+            <Text style={codeLine}>Before: photo.jpg- 2.4 MB</Text>
+            <Text style={codeLineSuccess}>After:  photo.webp- 1.6 MB  (−33%)</Text>
           </Section>
 
           <Section style={highlight}>

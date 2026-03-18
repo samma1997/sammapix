@@ -98,9 +98,9 @@ function ratioDiffers(
 }
 
 // fitMode:
-//   "stretch" — stira esattamente alle dimensioni target (distorce se ratio diverso)
-//   "cover"   — ritaglia mantenendo il ratio, offset customizzabile (0–1)
-//   "contain" — ridimensiona per stare dentro le dimensioni, aggiunge barre bianche
+//   "stretch"- stira esattamente alle dimensioni target (distorce se ratio diverso)
+//   "cover"  - ritaglia mantenendo il ratio, offset customizzabile (0–1)
+//   "contain"- ridimensiona per stare dentro le dimensioni, aggiunge barre bianche
 async function resizeImage(
   file: File,
   targetW: number,
@@ -133,7 +133,7 @@ async function resizeImage(
         const sy = maxSy * offsetY;
         ctx.drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
       } else {
-        // contain — fit inside; transparent bg for PNG/WebP/GIF, white for JPEG
+        // contain- fit inside; transparent bg for PNG/WebP/GIF, white for JPEG
         const hasAlpha = /\/(png|webp|gif)$/i.test(file.type);
         if (!hasAlpha) {
           ctx.fillStyle = "#ffffff";
@@ -366,7 +366,7 @@ const CropPreview = ({
           draggable={false}
         />
 
-        {/* Overlay scuro — zona esclusa dal crop */}
+        {/* Overlay scuro- zona esclusa dal crop */}
         {/* Top */}
         {frameTop > 0 && (
           <div
@@ -415,7 +415,7 @@ const CropPreview = ({
           />
         )}
 
-        {/* Frame del crop — draggabile */}
+        {/* Frame del crop- draggabile */}
         <div
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
@@ -442,7 +442,7 @@ const CropPreview = ({
             </span>
           </div>
 
-          {/* Handles agli angoli — 8×8px */}
+          {/* Handles agli angoli- 8×8px */}
           {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map((pos) => {
             const isTop = pos.startsWith("top");
             const isLeft = pos.endsWith("left");
@@ -828,7 +828,7 @@ export default function ResizePack() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag images to resize"
+          aria-label="Drop zone- click or drag images to resize"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
@@ -1090,7 +1090,7 @@ export default function ResizePack() {
               </div>
             )}
 
-            {/* Fit mode — solo in pixel mode con lock OFF */}
+            {/* Fit mode- solo in pixel mode con lock OFF */}
             {mode === "pixel" && !lockAspect && (
               <div>
                 <p className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide mb-3">
@@ -1102,17 +1102,17 @@ export default function ResizePack() {
                       {
                         value: "cover",
                         label: "Cover",
-                        desc: "Crop to fill — no distortion",
+                        desc: "Crop to fill- no distortion",
                       },
                       {
                         value: "contain",
                         label: "Contain",
-                        desc: "Fit inside — white bars",
+                        desc: "Fit inside- white bars",
                       },
                       {
                         value: "stretch",
                         label: "Stretch",
-                        desc: "Exact dimensions — may distort",
+                        desc: "Exact dimensions- may distort",
                       },
                     ] as { value: FitMode; label: string; desc: string }[]
                   ).map((opt) => (
@@ -1133,11 +1133,11 @@ export default function ResizePack() {
                 </div>
                 <p className="text-[11px] text-[#A3A3A3] mt-2">
                   {fitMode === "cover" &&
-                    "Crops from center to fill exactly — no distortion, some edges may be cut."}
+                    "Crops from center to fill exactly- no distortion, some edges may be cut."}
                   {fitMode === "contain" &&
-                    "Fits the entire image inside — adds white padding if ratio differs."}
+                    "Fits the entire image inside- adds white padding if ratio differs."}
                   {fitMode === "stretch" &&
-                    "Forces exact dimensions — image may look distorted."}
+                    "Forces exact dimensions- image may look distorted."}
                 </p>
               </div>
             )}
@@ -1151,7 +1151,7 @@ export default function ResizePack() {
               >
                 {shouldShowCrop && <Crop className="h-3.5 w-3.5" strokeWidth={1.5} />}
                 {shouldShowCrop
-                  ? `Position crop — ${pendingFiles.length} photo${pendingFiles.length !== 1 ? "s" : ""}`
+                  ? `Position crop- ${pendingFiles.length} photo${pendingFiles.length !== 1 ? "s" : ""}`
                   : `Resize ${pendingFiles.length} photo${pendingFiles.length !== 1 ? "s" : ""}`
                 }
               </button>
@@ -1208,7 +1208,7 @@ export default function ResizePack() {
                 disabled={pendingFiles.length === 0}
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Resize now — apply to all photos
+                Resize now- apply to all photos
               </button>
               <button
                 onClick={() => handleResize(false)}

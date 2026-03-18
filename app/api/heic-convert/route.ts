@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const convert = require("heic-convert");
 
-// 50 MB hard limit — generous for batch use
+// 50 MB hard limit- generous for batch use
 const MAX_SIZE = 50 * 1024 * 1024;
 
 // HEIC/HEIF magic bytes: ftyp box at offset 4 with brand starting with known brands

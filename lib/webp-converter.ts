@@ -12,7 +12,7 @@
  * A white background is applied so transparent PNGs are handled
  * gracefully in browsers that don't support WebP transparency well.
  *
- * @param file    - Source image File (JPEG, PNG, GIF, AVIF, WebP)
+ * @param file  - Source image File (JPEG, PNG, GIF, AVIF, WebP)
  * @param quality - Encoder quality in the range [0, 1]. Defaults to 0.85.
  */
 export async function convertToWebP(file: File, quality = 0.85): Promise<Blob> {
@@ -47,7 +47,7 @@ export async function convertToWebP(file: File, quality = 0.85): Promise<Blob> {
           if (blob) {
             resolve(blob);
           } else {
-            reject(new Error("WebP conversion failed — canvas returned null"));
+            reject(new Error("WebP conversion failed- canvas returned null"));
           }
         },
         "image/webp",

@@ -15,6 +15,7 @@ export interface ComboStep {
   label: string;
   enabled: boolean;
   isAi?: boolean;
+  settings?: Record<string, unknown>;
 }
 
 export interface ComboClientProps {
@@ -50,7 +51,7 @@ async function runComboFilePipeline(
     const engineSteps: EnginePipelineStep[] = enabledSteps.map((s) => ({
       id: s.id as PipelineStepId,
       enabled: true,
-      settings: {},
+      settings: (s.settings ?? {}) as EnginePipelineStep["settings"],
     }));
 
     let result: { blob: Blob; name: string } = { blob: file, name: file.name };

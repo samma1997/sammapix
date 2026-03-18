@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
-    "Best Free Image Compression Tools in 2026 — Compared | SammaPix Blog",
+    "Best Free Image Compression Tools in 2026 - Compared | SammaPix Blog",
   description:
     "Honest comparison of the best free image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Pros, cons, and our verdict.",
   alternates: {
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "online image compressor comparison",
   ],
   openGraph: {
-    title: "Best Free Image Compression Tools in 2026 — Compared",
+    title: "Best Free Image Compression Tools in 2026 - Compared",
     description:
-      "We tested every major free image compressor so you do not have to. Here is the honest breakdown — output quality, speed, privacy, and limits — for 2026.",
+      "We tested every major free image compressor so you do not have to. Here is the honest breakdown- output quality, speed, privacy, and limits- for 2026.",
     url: `${APP_URL}/blog/best-image-compression-tools-2026`,
     type: "article",
     publishedTime: "2026-01-15",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Free Image Compression Tools in 2026 — Compared",
+    title: "Best Free Image Compression Tools in 2026 - Compared",
     description:
       "Honest comparison of SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Which one is actually the best free image compressor in 2026?",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ const POST_DATE = "2026-01-15";
 const POST_DATE_FORMATTED = "January 15, 2026";
 const POST_URL =
   `${APP_URL}/blog/best-image-compression-tools-2026`;
-const POST_TITLE = "Best Free Image Compression Tools in 2026 — Compared";
+const POST_TITLE = "Best Free Image Compression Tools in 2026 - Compared";
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -110,7 +110,7 @@ const tools = [
     url: "/compress",
     tagline: "Client-side, no limits, no account",
     pros: [
-      "100% client-side — files never leave your browser",
+      "100% client-side- files never leave your browser",
       "Supports JPG, PNG, WebP, GIF, AVIF in one tool",
       "Batch processing with ZIP download",
       "Strips EXIF metadata automatically",
@@ -118,7 +118,7 @@ const tools = [
       "No file size cap on free tier",
     ],
     cons: [
-      "Newer tool — smaller community than TinyPNG",
+      "Newer tool- smaller community than TinyPNG",
       "AI Rename requires a free account",
     ],
     bestFor: "Privacy-conscious users, photographers, and web developers who need an all-in-one image workflow",
@@ -158,7 +158,7 @@ const tools = [
       "Open source (GitHub)",
     ],
     cons: [
-      "One image at a time — no batch processing",
+      "One image at a time- no batch processing",
       "UI can feel overwhelming for casual users",
       "Slower compression on large files (WASM-based)",
       "No bulk download or ZIP",
@@ -175,10 +175,10 @@ const tools = [
       "Lossless compression removes invisible bloat",
       "Strips metadata and hidden data",
       "Batch processes entire folders by drag-and-drop",
-      "Native Mac app — fast, no browser needed",
+      "Native Mac app- fast, no browser needed",
     ],
     cons: [
-      "Mac only — no Windows or Linux version",
+      "Mac only- no Windows or Linux version",
       "Not available in the browser",
       "Lossless mode offers smaller file size reductions than lossy tools",
       "No format conversion",
@@ -220,7 +220,7 @@ const tools = [
       "Free tier has processing limits",
       "Ads throughout the UI",
       "Compression quality is average compared to dedicated tools",
-      "No client-side processing — internet connection required",
+      "No client-side processing- internet connection required",
     ],
     bestFor: "Users who want image editing tools (resize, crop) alongside basic compression",
     rating: "Feature-Rich but Average",
@@ -262,7 +262,7 @@ export default function BestImageCompressionTools2026Page() {
               {POST_TITLE}
             </h1>
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
-              We tested six of the most popular free image compression tools side by side. The results are not what the rankings will tell you. Here is the honest breakdown — compression quality, privacy, batch limits, and when to use each one.
+              We tested six of the most popular free image compression tools side by side. The results are not what the rankings will tell you. Here is the honest breakdown- compression quality, privacy, batch limits, and when to use each one.
             </p>
           </header>
 
@@ -272,7 +272,7 @@ export default function BestImageCompressionTools2026Page() {
               Why image compression still matters in 2026
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              A DSLR or modern smartphone produces files between 5 MB and 30 MB per shot. A product photo or portfolio page loaded with uncompressed originals can hit 100 MB before the user clicks past the fold. That translates directly into slower load times, worse Core Web Vitals scores, and higher bounce rates — especially on mobile.
+              A DSLR or modern smartphone produces files between 5 MB and 30 MB per shot. A product photo or portfolio page loaded with uncompressed originals can hit 100 MB before the user clicks past the fold. That translates directly into slower load times, worse Core Web Vitals scores, and higher bounce rates- especially on mobile.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               According to{" "}
@@ -284,7 +284,7 @@ export default function BestImageCompressionTools2026Page() {
               >
                 Google Web Vitals guidance
               </a>
-              , images are consistently the single largest contributor to page weight on most websites. Compressing them correctly — without visible quality degradation — is one of the highest-ROI optimizations available, and it costs nothing when you use the right free tool.
+              , images are consistently the single largest contributor to page weight on most websites. Compressing them correctly- without visible quality degradation- is one of the highest-ROI optimizations available, and it costs nothing when you use the right free tool.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The challenge is that not every free compressor is created equal. File size limits, upload privacy concerns, batch caps, and output quality vary enormously. This comparison cuts through the noise. For a deeper dive into how browsers handle image formats, see the{" "}
@@ -299,7 +299,7 @@ export default function BestImageCompressionTools2026Page() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Page speed is directly tied to image optimization — Photo by Carlos Muza on Unsplash
+                Page speed is directly tied to image optimization - Photo by Carlos Muza on Unsplash
               </figcaption>
             </figure>
 
@@ -310,7 +310,7 @@ export default function BestImageCompressionTools2026Page() {
               Each tool was tested with the same set of reference images: a 12 MP JPEG landscape photo from a mirrorless camera, a high-DPI PNG logo with transparency, a GIF animation, and a WebP banner image. We measured output file size reduction, visual quality at default settings, and any privacy or usability friction encountered along the way.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              We also paid attention to what happens to your files. Tools that upload images to cloud servers are noted clearly — because for many photographers and designers, that is a dealbreaker. Google&apos;s{" "}
+              We also paid attention to what happens to your files. Tools that upload images to cloud servers are noted clearly- because for many photographers and designers, that is a dealbreaker. Google&apos;s{" "}
               <a href="https://web.dev/learn/performance" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">web.dev performance course</a>{" "}
               covers the fundamentals of why image optimization matters so much for page load times.
             </p>
@@ -323,7 +323,7 @@ export default function BestImageCompressionTools2026Page() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Choosing the right compression tool is part of every web development workflow — Photo by Ilya Pavlov on Unsplash
+                Choosing the right compression tool is part of every web development workflow - Photo by Ilya Pavlov on Unsplash
               </figcaption>
             </figure>
 
@@ -401,23 +401,23 @@ export default function BestImageCompressionTools2026Page() {
               Most image compressor comparisons focus entirely on output file size. They rarely mention where your files go during compression. This matters more than most people realize.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Tools like TinyPNG, Compressor.io, and iLoveIMG upload your images to their servers for processing. This is fine for many use cases — stock images, website graphics, public content. But if you are compressing client photos, product shots under NDA, family pictures, or anything with GPS metadata embedded, you are handing those files to a third party.
+              Tools like TinyPNG, Compressor.io, and iLoveIMG upload your images to their servers for processing. This is fine for many use cases- stock images, website graphics, public content. But if you are compressing client photos, product shots under NDA, family pictures, or anything with GPS metadata embedded, you are handing those files to a third party.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              SammaPix and Squoosh both process images entirely inside your browser using JavaScript and WebAssembly. The files never touch any server. For photographers dealing with client work, this is not a nice-to-have — it is a professional requirement.
+              SammaPix and Squoosh both process images entirely inside your browser using JavaScript and WebAssembly. The files never touch any server. For photographers dealing with client work, this is not a nice-to-have- it is a professional requirement.
             </p>
 
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Compression quality: what the numbers do not show
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Every tool in this comparison can achieve 60–80% file size reduction on a typical JPEG at default settings. The difference is in what you lose — or do not lose — along the way.
+              Every tool in this comparison can achieve 60–80% file size reduction on a typical JPEG at default settings. The difference is in what you lose- or do not lose- along the way.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              TinyPNG uses smart lossy compression for PNGs that most people cannot perceive visually at all — it is genuinely impressive for that format. Squoosh gives you the most codec control and lets you tune quality with a side-by-side comparison until you find the exact tradeoff you want. SammaPix targets a sensible default (80% quality) that produces excellent results without any configuration needed.
+              TinyPNG uses smart lossy compression for PNGs that most people cannot perceive visually at all- it is genuinely impressive for that format. Squoosh gives you the most codec control and lets you tune quality with a side-by-side comparison until you find the exact tradeoff you want. SammaPix targets a sensible default (80% quality) that produces excellent results without any configuration needed.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              ImageOptim stands apart because it is fully lossless for its default mode — it removes invisible bloat and metadata without touching the pixel data at all. The file size reductions are smaller (typically 10–30% versus 50–80% for lossy tools), but there is genuinely zero quality impact.
+              ImageOptim stands apart because it is fully lossless for its default mode- it removes invisible bloat and metadata without touching the pixel data at all. The file size reductions are smaller (typically 10–30% versus 50–80% for lossy tools), but there is genuinely zero quality impact.
             </p>
 
             <figure className="my-8">
@@ -428,7 +428,7 @@ export default function BestImageCompressionTools2026Page() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Compression ratios vary by tool — but the real differences go beyond the numbers — Photo by Luke Chesser on Unsplash
+                Compression ratios vary by tool- but the real differences go beyond the numbers - Photo by Luke Chesser on Unsplash
               </figcaption>
             </figure>
 
@@ -447,7 +447,7 @@ export default function BestImageCompressionTools2026Page() {
               >
                 SammaPix Compress
               </Link>
-              . It handles every format, batch processes with ZIP download, strips EXIF metadata for privacy, and runs entirely in your browser. It is the only tool in this list that covers compression, format conversion, metadata removal, and AI renaming in a single workflow — all free.
+              . It handles every format, batch processes with ZIP download, strips EXIF metadata for privacy, and runs entirely in your browser. It is the only tool in this list that covers compression, format conversion, metadata removal, and AI renaming in a single workflow- all free.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
@@ -532,10 +532,10 @@ export default function BestImageCompressionTools2026Page() {
             >
               <div>
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
-                  Free tool — no signup, no limits
+                  Free tool- no signup, no limits
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Compress your images now with SammaPix — client-side, EXIF-clean, batch-ready
+                  Compress your images now with SammaPix- client-side, EXIF-clean, batch-ready
                 </p>
               </div>
               <ArrowRight
@@ -553,11 +553,11 @@ export default function BestImageCompressionTools2026Page() {
                 {[
                   {
                     q: "Is TinyPNG still the best free image compressor in 2026?",
-                    a: "TinyPNG remains excellent for PNG compression specifically. But it is no longer the best overall option — it has a 20-image limit per session, a 5 MB per file cap, and uploads files to their servers. For privacy, batch processing, and a wider format range, SammaPix is now the stronger choice.",
+                    a: "TinyPNG remains excellent for PNG compression specifically. But it is no longer the best overall option- it has a 20-image limit per session, a 5 MB per file cap, and uploads files to their servers. For privacy, batch processing, and a wider format range, SammaPix is now the stronger choice.",
                   },
                   {
                     q: "What is the best image compression tool that does not upload my files?",
-                    a: "SammaPix and Squoosh both process images entirely inside your browser — nothing is uploaded to any server. For Mac users who prefer a native app, ImageOptim also works entirely locally.",
+                    a: "SammaPix and Squoosh both process images entirely inside your browser- nothing is uploaded to any server. For Mac users who prefer a native app, ImageOptim also works entirely locally.",
                   },
                   {
                     q: "Does compressing an image reduce its visual quality?",
@@ -617,7 +617,7 @@ export default function BestImageCompressionTools2026Page() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Try SammaPix Compress — free, no limits
+                Try SammaPix Compress- free, no limits
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Compress JPG, PNG, WebP, GIF, and AVIF in bulk. Files never leave your browser. No account, no watermarks, no file size caps.

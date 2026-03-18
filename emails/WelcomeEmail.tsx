@@ -110,7 +110,7 @@ export function WelcomeEmail({ name }: WelcomeEmailProps) {
 
           <Section>
             <Text style={listItem}>
-              ✓ Compress JPG, PNG, WebP — no quality loss
+              ✓ Compress JPG, PNG, WebP- no quality loss
             </Text>
             <Text style={listItem}>
               ✓ Convert any image to WebP (25–34% lighter than JPEG)
@@ -135,7 +135,7 @@ export function WelcomeEmail({ name }: WelcomeEmailProps) {
           <Section style={highlight}>
             <Text style={highlightText}>
               You have <strong>5 free AI renames today</strong>. Sign in is
-              already done — just open the tool and click AI Rename.
+              already done- just open the tool and click AI Rename.
             </Text>
           </Section>
 
@@ -155,7 +155,7 @@ export function WelcomeEmail({ name }: WelcomeEmailProps) {
             Over the next few days I&apos;ll share tips to get the most out of
             SammaPix.
           </Text>
-          <Text style={{ ...body, margin: "0" }}>— Luca, founder</Text>
+          <Text style={{ ...body, margin: "0" }}> - Luca, founder</Text>
 
           <Hr style={hr} />
           <Text style={footer}>

@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { Instagram } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "InstaPrep — Instagram-Ready Images in Seconds | SammaPix",
+  title: "InstaPrep - Instagram-Ready Images in Seconds | SammaPix",
   description:
     "Instagram-ready in seconds. Resize to 1080px square or 1080x1350 portrait and compress for feed or stories. Free, no login.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/instaprep`,
   },
   openGraph: {
-    title: "InstaPrep — Instagram-Ready Images in Seconds | SammaPix",
+    title: "InstaPrep - Instagram-Ready Images in Seconds | SammaPix",
     description:
       "Instagram-ready in seconds. Resize and compress for feed or stories.",
     url: `${APP_URL}/tools/instaprep`,
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { id: "resize", label: "Resize (1080px)", enabled: true, isAi: false },
-  { id: "compress", label: "Compress (85%)", enabled: true, isAi: false },
+  { id: "resize", label: "Resize (1080px)", enabled: true, isAi: false, settings: { maxPx: 1080, instagramFormat: "square" as const } },
+  { id: "compress", label: "Compress (85%)", enabled: true, isAi: false, settings: { quality: 85 } },
 ];
 
 const features = [
@@ -141,6 +141,25 @@ export default function InstaPrepPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Frequently asked questions</h2>
+          <dl className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {[
+              { q: "What size does InstaPrep resize to?", a: "InstaPrep resizes to 1080px, which is the optimal resolution for Instagram feed posts (1080x1080 square) and portrait posts (1080x1350). The exact crop depends on your original aspect ratio." },
+              { q: "Does InstaPrep reduce image quality?", a: "InstaPrep compresses at 85% quality, which is virtually indistinguishable from the original on mobile screens. Instagram itself recompresses uploads, so 85% is the optimal pre-upload setting." },
+              { q: "Do I need an account?", a: "No. InstaPrep is completely free and requires no login. All processing happens in your browser." },
+            ].map((faq) => (
+              <div key={faq.q} className="py-4">
+                <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>
+                <dd className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

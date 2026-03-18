@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
     description:
-      "Discover how AI-powered image renaming turns IMG_0001.jpg into golden-gate-bridge-sunset-san-francisco.jpg — and why that difference matters for your Google rankings.",
+      "Discover how AI-powered image renaming turns IMG_0001.jpg into golden-gate-bridge-sunset-san-francisco.jpg- and why that difference matters for your Google rankings.",
     url: `${APP_URL}/blog/ai-image-renaming-seo-guide`,
     type: "article",
     publishedTime: "2026-03-10",
@@ -124,7 +124,7 @@ const faqSchema = {
       name: "What is the difference between alt text and image filename for SEO?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The filename tells Google about the image before it crawls the page. The alt text gives context within the HTML document and is also shown to screen readers. Both are important SEO signals — filename for discoverability, alt text for contextual relevance.",
+        text: "The filename tells Google about the image before it crawls the page. The alt text gives context within the HTML document and is also shown to screen readers. Both are important SEO signals- filename for discoverability, alt text for contextual relevance.",
       },
     },
     {
@@ -197,7 +197,7 @@ export default function AiImageRenamingSeoGuidePage() {
               </code>{" "}
               takes seconds and can meaningfully improve your visibility in
               Google Image Search. AI image rename SEO tools now do this
-              automatically — at scale, across hundreds of images — without you
+              automatically- at scale, across hundreds of images- without you
               writing a single filename manually.
             </p>
           </header>
@@ -251,7 +251,7 @@ export default function AiImageRenamingSeoGuidePage() {
                 Moz
               </a>
               , Google Images represents approximately 22.6% of all web searches
-              — making it the second-largest search surface after Google&apos;s main
+             - making it the second-largest search surface after Google&apos;s main
               index. Optimizing for it is not optional if you are serious about
               organic visibility.
             </p>
@@ -275,28 +275,28 @@ export default function AiImageRenamingSeoGuidePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Every camera, smartphone, and screenshot tool generates filenames
               automatically. They are designed for the camera&apos;s internal file
-              management — not for search engines or human readers. The result is
+              management- not for search engines or human readers. The result is
               a collection of filenames that convey zero semantic information:
             </p>
 
             <ul className="mb-4">
               <li className="text-sm text-[#737373] ml-5 mb-2 list-disc">
                 <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">IMG_0001.jpg</code>,{" "}
-                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">IMG_0002.jpg</code> — iPhone sequential numbering
+                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">IMG_0002.jpg</code>- iPhone sequential numbering
               </li>
               <li className="text-sm text-[#737373] ml-5 mb-2 list-disc">
                 <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">DSC_1234.CR2</code>,{" "}
-                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">_MG_5678.NEF</code> — DSLR raw files
+                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">_MG_5678.NEF</code>- DSLR raw files
               </li>
               <li className="text-sm text-[#737373] ml-5 mb-2 list-disc">
-                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">Screenshot 2026-02-14 at 09.32.11.png</code> — macOS screenshots
+                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">Screenshot 2026-02-14 at 09.32.11.png</code>- macOS screenshots
               </li>
               <li className="text-sm text-[#737373] ml-5 mb-2 list-disc">
-                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">20260214_093211.jpg</code> — Android timestamp filenames
+                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">20260214_093211.jpg</code>- Android timestamp filenames
               </li>
               <li className="text-sm text-[#737373] ml-5 mb-2 list-disc">
                 <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">image (1).png</code>,{" "}
-                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">image (2).png</code> — browser download defaults
+                <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">image (2).png</code>- browser download defaults
               </li>
             </ul>
 
@@ -324,7 +324,7 @@ export default function AiImageRenamingSeoGuidePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Modern AI vision models can analyze an image and identify its
-              content with remarkable accuracy — subjects, scenes, objects,
+              content with remarkable accuracy- subjects, scenes, objects,
               colors, spatial relationships, and contextual details. This is the
               same category of technology that powers Google Lens, Apple&apos;s
               Visual Look Up, and Pinterest&apos;s visual search.
@@ -334,8 +334,8 @@ export default function AiImageRenamingSeoGuidePage() {
               When you drop an image into an AI rename tool, the process works
               as follows. First, a thumbnail of the image is generated
               client-side to reduce the data payload. This thumbnail is then
-              sent to a vision model — in SammaPix&apos;s case, Google Gemini
-              Flash — which analyzes the visual content. The model returns a
+              sent to a vision model- in SammaPix&apos;s case, Google Gemini
+              Flash- which analyzes the visual content. The model returns a
               structured description of what it sees. The tool then applies
               SEO naming rules to that description: lowercase only, words
               separated by hyphens, relevant primary subject first, location or
@@ -461,7 +461,7 @@ export default function AiImageRenamingSeoGuidePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The technical pipeline works in three steps. First, the tool
               generates a thumbnail of your image locally using the browser
-              Canvas API — typically at 512 pixels on the longest side, which
+              Canvas API- typically at 512 pixels on the longest side, which
               is more than sufficient for content recognition while keeping
               the API payload small. Second, the thumbnail is sent to Gemini
               Flash with a structured prompt that instructs the model to
@@ -476,7 +476,7 @@ export default function AiImageRenamingSeoGuidePage() {
               You can rename a single image or drop an entire batch of files.
               The tool processes them in parallel and presents a preview of
               each suggested filename before you download. You can edit any
-              suggestion manually if you want to adjust the output — the AI
+              suggestion manually if you want to adjust the output- the AI
               gives you a strong starting point, but you always have final
               control. Download your renamed images individually or as a ZIP
               archive.
@@ -516,7 +516,7 @@ export default function AiImageRenamingSeoGuidePage() {
                 red-ceramic-coffee-mug.jpg
               </code>{" "}
               is parsed as four separate words: red, ceramic, coffee, mug.
-              Underscores are treated as connectors — Google reads{" "}
+              Underscores are treated as connectors - Google reads{" "}
               <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">
                 red_ceramic_coffee_mug.jpg
               </code>{" "}
@@ -564,7 +564,7 @@ export default function AiImageRenamingSeoGuidePage() {
               provide no ranking benefit. Aim for 3 to 5 descriptive keywords
               that accurately reflect the image content. Include the primary
               subject, any relevant modifiers (color, material, style), and
-              location or context where meaningful. Avoid keyword stuffing —
+              location or context where meaningful. Avoid keyword stuffing- 
               a filename like{" "}
               <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">
                 buy-cheap-coffee-mug-online-store-sale.jpg
@@ -625,7 +625,7 @@ export default function AiImageRenamingSeoGuidePage() {
               Google before the page HTML is fully parsed. It signals topical
               relevance early in the crawl cycle. It cannot be changed without
               also updating every reference to the image URL on your site.
-              This is why getting filenames right before upload matters —
+              This is why getting filenames right before upload matters- 
               changing them after indexing requires redirects.
             </p>
 
@@ -646,7 +646,7 @@ export default function AiImageRenamingSeoGuidePage() {
               . It serves two critical functions: it describes the image to
               Google&apos;s crawler in the context of the page, and it provides
               text to screen readers for accessibility. Alt text should describe
-              the image as it relates to the page content — not as a generic
+              the image as it relates to the page content- not as a generic
               description and not as a keyword dump.
             </p>
 
@@ -660,7 +660,7 @@ export default function AiImageRenamingSeoGuidePage() {
                 title
               </code>{" "}
               attribute on an image appears as a tooltip when a user hovers
-              over it. It is the weakest of the three signals for SEO purposes —
+              over it. It is the weakest of the three signals for SEO purposes- 
               Google gives it minimal weight. Focus your optimization effort on
               filename and alt text first. The title attribute is useful for
               user experience (hover tooltips) but should not be treated as a
@@ -728,18 +728,18 @@ export default function AiImageRenamingSeoGuidePage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 1 — Sign in (free account required)
+              Step 1 - Sign in (free account required)
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               AI Rename requires a free account to prevent API abuse. Click
-              &ldquo;Sign in with Google&rdquo; or &ldquo;Sign in with GitHub&rdquo; — no forms,
+              &ldquo;Sign in with Google&rdquo; or &ldquo;Sign in with GitHub&rdquo;- no forms,
               no passwords, no email verification. The entire sign-in flow takes
               under 15 seconds.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 2 — Drop your images into the tool
+              Step 2 - Drop your images into the tool
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -750,12 +750,12 @@ export default function AiImageRenamingSeoGuidePage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 3 — Review AI-generated suggestions
+              Step 3 - Review AI-generated suggestions
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               For each image, the tool displays the original filename alongside
-              the AI-generated suggestion. Review each suggestion — in our
+              the AI-generated suggestion. Review each suggestion- in our
               testing, Gemini Flash is accurate on about 95% of images without
               any manual correction needed. For the edge cases (abstract art,
               macro photography with ambiguous subjects), you can click the
@@ -763,26 +763,26 @@ export default function AiImageRenamingSeoGuidePage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 4 — Download your renamed images
+              Step 4 - Download your renamed images
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Download individual images by clicking the download button on
               each card, or click &ldquo;Download All as ZIP&rdquo; to get the entire
-              batch in a single archive. The original files are unchanged —
+              batch in a single archive. The original files are unchanged- 
               the tool creates new copies with the new filenames. Your files
               never left your device except for the thumbnail sent to Gemini
               for analysis.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 5 — Upload and update alt text
+              Step 5 - Upload and update alt text
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Upload the renamed images to your CMS, e-commerce platform, or
               image hosting service. Take the opportunity to update the alt
-              text for each image to match the new descriptive filename — use
+              text for each image to match the new descriptive filename- use
               the filename as a starting point, then rephrase it as a natural
               sentence. For example,{" "}
               <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">
@@ -796,8 +796,8 @@ export default function AiImageRenamingSeoGuidePage() {
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              If you also need to reduce file sizes before uploading — which is
-              almost always a good idea for web performance — run your images
+              If you also need to reduce file sizes before uploading- which is
+              almost always a good idea for web performance- run your images
               through the{" "}
               <Link
                 href="/tools/compress"
@@ -839,7 +839,7 @@ export default function AiImageRenamingSeoGuidePage() {
               Yes. Google&apos;s own documentation confirms that image filenames
               are a relevance signal for Google Images. While filename alone
               is not a ranking factor for your main page results, it directly
-              affects discoverability in Google Image Search — which is
+              affects discoverability in Google Image Search- which is
               responsible for approximately one in five all web searches. For
               content-heavy sites, photography portfolios, food blogs, and
               e-commerce stores, optimizing image filenames is one of the
@@ -850,12 +850,12 @@ export default function AiImageRenamingSeoGuidePage() {
               Should I use hyphens or underscores in image filenames for SEO?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Always use hyphens. Google treats hyphens as word separators —{" "}
+              Always use hyphens. Google treats hyphens as word separators- {" "}
               <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">
                 golden-gate-bridge
               </code>{" "}
               is parsed as three separate keywords. Underscores are treated as
-              connectors —{" "}
+              connectors- {" "}
               <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-xs font-mono">
                 golden_gate_bridge
               </code>{" "}
@@ -870,7 +870,7 @@ export default function AiImageRenamingSeoGuidePage() {
               The filename is part of the image URL and gives Google an initial
               relevance signal before the full page is crawled. The alt text
               lives in the HTML and provides contextual relevance within the
-              page — it also serves as accessibility text for screen readers.
+              page- it also serves as accessibility text for screen readers.
               Both are important. A descriptive filename without good alt text
               leaves half the signal unused, and vice versa. The two work
               together to reinforce topical relevance.
@@ -896,7 +896,7 @@ export default function AiImageRenamingSeoGuidePage() {
               leaves relevant context out. More than five starts to look like
               keyword stuffing to Google&apos;s algorithms and produces unwieldy
               filenames. The sweet spot is a filename that reads naturally and
-              accurately describes the image — if it sounds like an honest
+              accurately describes the image- if it sounds like an honest
               description of what you see in the image, it is probably correct.
             </p>
           </div>
@@ -951,7 +951,7 @@ export default function AiImageRenamingSeoGuidePage() {
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your images into SammaPix AI Rename and get keyword-rich,
                 SEO-optimized filenames generated automatically by Gemini Flash.
-                Free account required — sign in with Google or GitHub in one
+                Free account required- sign in with Google or GitHub in one
                 click.
               </p>
               <Link

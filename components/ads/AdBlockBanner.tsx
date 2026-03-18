@@ -43,7 +43,7 @@ export default function AdBlockBanner() {
         <p className="flex-1 text-sm text-gray-600 dark:text-[#A3A3A3]">
           Looks like you&apos;re using an ad blocker. SammaPix is free because of ads.
           <span className="hidden sm:inline">
-            {" "}Consider whitelisting us — or go Pro to remove them entirely.
+            {" "}Consider whitelisting us- or go Pro to remove them entirely.
           </span>
         </p>
         <div className="flex items-center gap-2 shrink-0">

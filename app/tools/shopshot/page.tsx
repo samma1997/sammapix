@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { ShoppingBag } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "ShopShot — E-Commerce Product Image Optimizer | SammaPix",
+  title: "ShopShot - E-Commerce Product Image Optimizer | SammaPix",
   description:
     "E-commerce product images optimized in one click. Compress, resize to 800px, convert to WebP, and AI-rename with product names. Free combo tool.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/shopshot`,
   },
   openGraph: {
-    title: "ShopShot — E-Commerce Product Image Optimizer | SammaPix",
+    title: "ShopShot - E-Commerce Product Image Optimizer | SammaPix",
     description:
       "E-commerce product images optimized. Compress, resize, WebP, product names.",
     url: `${APP_URL}/tools/shopshot`,
@@ -89,7 +89,7 @@ export default function ShopShotPage() {
         steps={[
           {
             title: "Drop product photos",
-            desc: "Drag and drop your product images — raw photos straight from your camera or phone.",
+            desc: "Drag and drop your product images- raw photos straight from your camera or phone.",
           },
           {
             title: "Hit Process All",
@@ -142,6 +142,25 @@ export default function ShopShotPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Frequently asked questions</h2>
+          <dl className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {[
+              { q: "What e-commerce platforms does ShopShot work with?", a: "ShopShot outputs optimized images that work with Shopify, WooCommerce, Amazon, Etsy, eBay, and any platform that accepts image uploads. The 800px max width is ideal for product thumbnails and detail views." },
+              { q: "Why 800px max width?", a: "800px is the sweet spot for product images on most e-commerce platforms. It is large enough for zoom views but small enough for fast page loads, which directly impacts conversion rates." },
+              { q: "How does the AI product naming work?", a: "AI analyzes your product image and generates descriptive filenames with product type, color, and material -- much better than IMG_0001.jpg for SEO and catalog organization." },
+            ].map((faq) => (
+              <div key={faq.q} className="py-4">
+                <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>
+                <dd className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

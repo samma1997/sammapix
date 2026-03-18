@@ -51,7 +51,7 @@ async function checkAndIncrement(
     };
   }
 
-  // Redis unavailable — fallback to in-memory
+  // Redis unavailable- fallback to in-memory
   const memKey = key;
   const memUsed = memoryUsage.get(memKey) ?? 0;
   if (memUsed >= limit) {
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 5. Rate limit check — BEFORE calling Gemini
+  // 5. Rate limit check - BEFORE calling Gemini
   const rateCheck = await checkAndIncrement(email, dailyLimit);
 
   // 5a. If daily limit exceeded, attempt credit deduction instead of blocking
@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
     const creditResult = await deductCredit(email, 1);
 
     if (!creditResult.success) {
-      // No daily quota left AND no credits — block the request
+      // No daily quota left AND no credits- block the request
       return NextResponse.json(
         {
           error: "Daily limit reached. Buy credits for more AI operations.",
@@ -158,11 +158,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Credit deducted successfully — proceed with the AI operation
+    // Credit deducted successfully- proceed with the AI operation
     creditsUsed = 1;
     creditsRemaining = creditResult.remaining;
   } else {
-    // Within daily limit — fetch current credit balance to include in response
+    // Within daily limit- fetch current credit balance to include in response
     creditsRemaining = await getCreditBalance(email);
   }
 

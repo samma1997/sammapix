@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Social Media Image Sizes 2026: Complete Cheat Sheet | SammaPix",
   description:
-    "Every social media image size you need in 2026 — Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest. Exact dimensions, aspect ratios, and file size limits in one reference guide.",
+    "Every social media image size you need in 2026 - Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest. Exact dimensions, aspect ratios, and file size limits in one reference guide.",
   alternates: {
     canonical: `${APP_URL}/blog/image-sizes-social-media-2026`,
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Social Media Image Sizes 2026: Complete Cheat Sheet",
     description:
-      "Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest — every image dimension and aspect ratio you need in 2026.",
+      "Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest- every image dimension and aspect ratio you need in 2026.",
     creator: "@lucasammarco",
   },
 };
@@ -50,7 +50,7 @@ const articleSchema = {
   "@type": "Article",
   headline: POST_TITLE,
   description:
-    "Every social media image size you need in 2026 — Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest. Exact dimensions, aspect ratios, and file size limits in one reference guide.",
+    "Every social media image size you need in 2026 - Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest. Exact dimensions, aspect ratios, and file size limits in one reference guide.",
   url: POST_URL,
   datePublished: POST_DATE,
   dateModified: POST_DATE,
@@ -140,7 +140,7 @@ export default function ImageSizesSocialMedia2026Page() {
               {POST_TITLE}
             </h1>
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
-              Upload the wrong dimensions and every platform will crop, stretch, or compress your image into something unrecognizable. This guide covers every social media image size you need in 2026 — Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest — with exact pixel dimensions, aspect ratios, and file size limits, all in one place.
+              Upload the wrong dimensions and every platform will crop, stretch, or compress your image into something unrecognizable. This guide covers every social media image size you need in 2026 - Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest- with exact pixel dimensions, aspect ratios, and file size limits, all in one place.
             </p>
             <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-3">
               By <a href="https://lucasammarco.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-700 dark:hover:text-[#E5E5E5] transition-colors underline underline-offset-2">Luca Sammarco</a>
@@ -158,7 +158,7 @@ export default function ImageSizesSocialMedia2026Page() {
                 loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Each platform enforces its own image dimensions — getting them right is the difference between a sharp post and a blurry crop — Photo by Unsplash
+                Each platform enforces its own image dimensions- getting them right is the difference between a sharp post and a blurry crop - Photo by Unsplash
               </figcaption>
             </figure>
 
@@ -170,7 +170,7 @@ export default function ImageSizesSocialMedia2026Page() {
               Every major social platform applies automatic cropping, compression, and resizing to uploaded images. Upload a 4:3 landscape photo to an Instagram Story and the platform will crop it to 9:16, cutting your subject out of frame. Post a Facebook cover photo at the wrong dimensions and it will be compressed into a blurry mess across all device sizes.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              The stakes are higher in 2026 because the feeds are more competitive than ever. Blurry thumbnails, cropped headshots, and distorted banners are not just aesthetic problems — they signal a lack of attention to detail that drives users to scroll past. A correctly sized image, on the other hand, takes full advantage of the display space the algorithm gives you.
+              The stakes are higher in 2026 because the feeds are more competitive than ever. Blurry thumbnails, cropped headshots, and distorted banners are not just aesthetic problems- they signal a lack of attention to detail that drives users to scroll past. A correctly sized image, on the other hand, takes full advantage of the display space the algorithm gives you.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Platforms also penalize heavily compressed uploads differently depending on the image type. Profile photos processed at low quality lose detail on retina displays. YouTube thumbnails that exceed the 2 MB limit get re-encoded by YouTube at lower quality, softening text and faces. Knowing the exact constraints lets you deliver the best possible image within each platform&apos;s processing pipeline.
@@ -218,7 +218,7 @@ export default function ImageSizesSocialMedia2026Page() {
                     { type: "Portrait Post", dims: "1080 × 1350 px", ratio: "4:5", size: "30 MB" },
                     { type: "Landscape Post", dims: "1080 × 566 px", ratio: "1.91:1", size: "30 MB" },
                     { type: "Story / Reel", dims: "1080 × 1920 px", ratio: "9:16", size: "30 MB (photo) / 4 GB (video)" },
-                    { type: "Profile Photo", dims: "320 × 320 px", ratio: "1:1", size: "—" },
+                    { type: "Profile Photo", dims: "320 × 320 px", ratio: "1:1", size: " - " },
                     { type: "Carousel Slide", dims: "1080 × 1080 px", ratio: "1:1", size: "30 MB per slide" },
                   ].map((row, i) => (
                     <tr key={row.type} className={`border-b border-[#E5E5E5] dark:border-[#2A2A2A] ${i % 2 === 0 ? "" : "bg-[#FAFAFA] dark:bg-[#1A1A1A]"}`}>
@@ -239,7 +239,7 @@ export default function ImageSizesSocialMedia2026Page() {
               {[
                 "The 4:5 portrait format (1080 × 1350 px) takes up the most vertical space in the feed, giving you more real estate than a square post. It is the recommended format for still images designed to stop the scroll.",
                 "Instagram compresses images on upload. To minimize quality loss, upload JPEG files at 85–95% quality or higher. Avoid uploading already-compressed files a second time.",
-                "For Reels, the safe zone for text and UI elements is the central 1080 × 1420 px area — the top and bottom are partially obscured by the interface on most devices.",
+                "For Reels, the safe zone for text and UI elements is the central 1080 × 1420 px area- the top and bottom are partially obscured by the interface on most devices.",
                 "Profile photos are displayed as circles. Keep your subject centered and avoid important details near the edges.",
               ].map((item) => (
                 <li key={item.slice(0, 30)} className="flex items-start gap-2 text-sm text-[#737373] leading-relaxed">
@@ -281,7 +281,7 @@ export default function ImageSizesSocialMedia2026Page() {
                     { type: "Square Feed Post", dims: "1200 × 1200 px", ratio: "1:1", size: "30 MB" },
                     { type: "Page Cover Photo", dims: "851 × 315 px", ratio: "2.7:1", size: "100 KB (recommended)" },
                     { type: "Event Cover Photo", dims: "1920 × 1005 px", ratio: "1.91:1", size: "4 MB" },
-                    { type: "Profile Photo", dims: "170 × 170 px (desktop)", ratio: "1:1", size: "—" },
+                    { type: "Profile Photo", dims: "170 × 170 px (desktop)", ratio: "1:1", size: " - " },
                     { type: "Story", dims: "1080 × 1920 px", ratio: "9:16", size: "4 GB (video) / 30 MB (photo)" },
                     { type: "Marketplace Listing", dims: "1200 × 1200 px", ratio: "1:1", size: "4 MB" },
                   ].map((row, i) => (
@@ -302,7 +302,7 @@ export default function ImageSizesSocialMedia2026Page() {
             <ul className="space-y-2 mb-6 pl-4">
               {[
                 "Facebook applies heavy compression to cover photos. Upload at the minimum recommended file size (under 100 KB for cover photos) to prevent double-compression artifacts. PNG files with fewer than 100 colors avoid JPEG re-encoding entirely.",
-                "Shared link images should use the 1.91:1 ratio. Facebook pulls the og:image tag from the shared URL — always set this meta tag on your web pages to control how links appear in the feed.",
+                "Shared link images should use the 1.91:1 ratio. Facebook pulls the og:image tag from the shared URL- always set this meta tag on your web pages to control how links appear in the feed.",
                 "Profile photos are displayed at 170 × 170 px on desktop but 128 × 128 px on smartphones. Upload at least 320 × 320 px to ensure sharpness at all display densities.",
               ].map((item) => (
                 <li key={item.slice(0, 30)} className="flex items-start gap-2 text-sm text-[#737373] leading-relaxed">
@@ -352,7 +352,7 @@ export default function ImageSizesSocialMedia2026Page() {
             </h3>
             <ul className="space-y-2 mb-6 pl-4">
               {[
-                "The timeline crops images to a 16:9 preview. Designing images at exactly 1600 × 900 px ensures what you see in preview is exactly what the user sees without tapping — critical for text-heavy graphics.",
+                "The timeline crops images to a 16:9 preview. Designing images at exactly 1600 × 900 px ensures what you see in preview is exactly what the user sees without tapping- critical for text-heavy graphics.",
                 "X accepts JPEG, PNG, GIF, and WebP. For photographs, JPEG is the most efficient choice and avoids any re-encoding artifacts from format conversion on the platform's side.",
                 "X uses the twitter:image meta tag for link card images. Always set this on your web pages alongside og:image, since Twitter reads its own tags preferentially.",
               ].map((item) => (
@@ -411,7 +411,7 @@ export default function ImageSizesSocialMedia2026Page() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Consistent, correctly sized images across platforms build a professional content presence — Photo by Unsplash
+                Consistent, correctly sized images across platforms build a professional content presence - Photo by Unsplash
               </figcaption>
             </figure>
 
@@ -420,7 +420,7 @@ export default function ImageSizesSocialMedia2026Page() {
               TikTok image and video sizes 2026
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              TikTok is primarily a video platform, and its image standards are defined around vertical video. Photo posts and carousels are also supported as of 2023 and growing in popularity for editorial and product content. The platform&apos;s UI elements occupy significant space at the top and bottom of the frame — design your key content to sit in the central safe zone.
+              TikTok is primarily a video platform, and its image standards are defined around vertical video. Photo posts and carousels are also supported as of 2023 and growing in popularity for editorial and product content. The platform&apos;s UI elements occupy significant space at the top and bottom of the frame- design your key content to sit in the central safe zone.
             </p>
             <div className="overflow-x-auto -mx-4 sm:mx-0 mb-6">
               <table className="w-full text-sm mb-6 min-w-[520px]">
@@ -434,11 +434,11 @@ export default function ImageSizesSocialMedia2026Page() {
                 </thead>
                 <tbody>
                   {[
-                    { type: "Video (Vertical — Recommended)", dims: "1080 × 1920 px", ratio: "9:16", size: "287.6 MB" },
+                    { type: "Video (Vertical - Recommended)", dims: "1080 × 1920 px", ratio: "9:16", size: "287.6 MB" },
                     { type: "Video (Square)", dims: "1080 × 1080 px", ratio: "1:1", size: "287.6 MB" },
                     { type: "Video (Landscape)", dims: "1920 × 1080 px", ratio: "16:9", size: "287.6 MB" },
                     { type: "Photo Post / Carousel", dims: "1080 × 1920 px", ratio: "9:16", size: "20 MB per image" },
-                    { type: "Profile Photo", dims: "200 × 200 px", ratio: "1:1", size: "—" },
+                    { type: "Profile Photo", dims: "200 × 200 px", ratio: "1:1", size: " - " },
                   ].map((row, i) => (
                     <tr key={row.type} className={`border-b border-[#E5E5E5] dark:border-[#2A2A2A] ${i % 2 === 0 ? "" : "bg-[#FAFAFA] dark:bg-[#1A1A1A]"}`}>
                       <td className="py-2.5 px-3 font-medium text-[#171717] dark:text-[#E5E5E5] text-sm">{row.type}</td>
@@ -481,10 +481,10 @@ export default function ImageSizesSocialMedia2026Page() {
                   {[
                     { type: "Video Thumbnail", dims: "1280 × 720 px", ratio: "16:9", size: "2 MB" },
                     { type: "Channel Banner (TV)", dims: "2560 × 1440 px", ratio: "16:9", size: "6 MB" },
-                    { type: "Channel Banner (Desktop)", dims: "2560 × 423 px (safe zone)", ratio: "—", size: "6 MB" },
+                    { type: "Channel Banner (Desktop)", dims: "2560 × 423 px (safe zone)", ratio: " - ", size: "6 MB" },
                     { type: "Channel Profile Photo", dims: "800 × 800 px", ratio: "1:1", size: "4 MB" },
-                    { type: "Community Post Image", dims: "1280 × 720 px", ratio: "16:9", size: "—" },
-                    { type: "End Screen Element", dims: "1280 × 720 px", ratio: "16:9", size: "—" },
+                    { type: "Community Post Image", dims: "1280 × 720 px", ratio: "16:9", size: " - " },
+                    { type: "End Screen Element", dims: "1280 × 720 px", ratio: "16:9", size: " - " },
                   ].map((row, i) => (
                     <tr key={row.type} className={`border-b border-[#E5E5E5] dark:border-[#2A2A2A] ${i % 2 === 0 ? "" : "bg-[#FAFAFA] dark:bg-[#1A1A1A]"}`}>
                       <td className="py-2.5 px-3 font-medium text-[#171717] dark:text-[#E5E5E5] text-sm">{row.type}</td>
@@ -503,7 +503,7 @@ export default function ImageSizesSocialMedia2026Page() {
             <ul className="space-y-2 mb-6 pl-4">
               {[
                 "YouTube channel banners are the most complex image on this list. The full 2560 × 1440 px canvas is displayed on TVs; desktop shows only the central 1546 × 423 px band; mobile shows 1546 × 423 px; tablets show a wider band. Design text and logos in the center 1235 × 338 px safe zone to ensure visibility on all devices.",
-                "Thumbnails must be under 2 MB. YouTube re-encodes images that exceed this limit, causing visible quality degradation on titles and faces. Compress your thumbnail to under 2 MB before uploading — use SammaPix Compress to do this without visible quality loss.",
+                "Thumbnails must be under 2 MB. YouTube re-encodes images that exceed this limit, causing visible quality degradation on titles and faces. Compress your thumbnail to under 2 MB before uploading- use SammaPix Compress to do this without visible quality loss.",
                 "The minimum thumbnail size is 640 × 360 px, but 1280 × 720 px is the standard. Higher-resolution screens will show visible pixelation below this threshold.",
               ].map((item) => (
                 <li key={item.slice(0, 30)} className="flex items-start gap-2 text-sm text-[#737373] leading-relaxed">
@@ -536,8 +536,8 @@ export default function ImageSizesSocialMedia2026Page() {
                     { type: "Square Pin", dims: "1000 × 1000 px", ratio: "1:1", size: "20 MB" },
                     { type: "Long Pin (Infographic)", dims: "1000 × 2100 px", ratio: "1:2.1", size: "20 MB" },
                     { type: "Video Pin", dims: "1000 × 1500 px", ratio: "2:3", size: "2 GB" },
-                    { type: "Profile Photo", dims: "165 × 165 px", ratio: "1:1", size: "—" },
-                    { type: "Board Cover", dims: "222 × 150 px", ratio: "1.48:1", size: "—" },
+                    { type: "Profile Photo", dims: "165 × 165 px", ratio: "1:1", size: " - " },
+                    { type: "Board Cover", dims: "222 × 150 px", ratio: "1.48:1", size: " - " },
                   ].map((row, i) => (
                     <tr key={row.type} className={`border-b border-[#E5E5E5] dark:border-[#2A2A2A] ${i % 2 === 0 ? "" : "bg-[#FAFAFA] dark:bg-[#1A1A1A]"}`}>
                       <td className="py-2.5 px-3 font-medium text-[#171717] dark:text-[#E5E5E5] text-sm">{row.type}</td>
@@ -555,11 +555,11 @@ export default function ImageSizesSocialMedia2026Page() {
               How to resize images for social media with SammaPix
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Resizing each image to the correct dimensions for every platform manually — especially when managing multiple accounts — is time-consuming work. SammaPix provides two tools that handle this efficiently, entirely in your browser without uploading your files to any server.
+              Resizing each image to the correct dimensions for every platform manually- especially when managing multiple accounts- is time-consuming work. SammaPix provides two tools that handle this efficiently, entirely in your browser without uploading your files to any server.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              ResizePack — batch resize to exact dimensions
+              ResizePack- batch resize to exact dimensions
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               <Link
@@ -568,7 +568,7 @@ export default function ImageSizesSocialMedia2026Page() {
               >
                 ResizePack
               </Link>{" "}
-              lets you drop multiple images and output them at a set of target dimensions in one operation. You can define pixel dimensions — for example, 1080 × 1080 px for Instagram square posts — and process an entire folder of images in seconds. The output maintains maximum quality using canvas-based client-side processing. Useful for:
+              lets you drop multiple images and output them at a set of target dimensions in one operation. You can define pixel dimensions- for example, 1080 × 1080 px for Instagram square posts- and process an entire folder of images in seconds. The output maintains maximum quality using canvas-based client-side processing. Useful for:
             </p>
             <ul className="space-y-2 mb-6 pl-4">
               {[
@@ -584,10 +584,10 @@ export default function ImageSizesSocialMedia2026Page() {
             </ul>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              CropRatio — crop to exact aspect ratios
+              CropRatio- crop to exact aspect ratios
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              When you need to crop an existing image to a specific social media ratio —  4:5 for Instagram portrait, 9:16 for Stories, 16:9 for YouTube thumbnails —{" "}
+              When you need to crop an existing image to a specific social media ratio - 4:5 for Instagram portrait, 9:16 for Stories, 16:9 for YouTube thumbnails- {" "}
               <Link
                 href="/tools/croproatio"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -601,7 +601,7 @@ export default function ImageSizesSocialMedia2026Page() {
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md overflow-hidden mt-8 mb-8">
               <div className="px-5 py-4 bg-[#FAFAFA] dark:bg-[#1E1E1E] border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
                 <p className="text-xs font-semibold uppercase tracking-wide text-[#A3A3A3] dark:text-[#737373]">
-                  Free tools — no upload, no signup
+                  Free tools- no upload, no signup
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5] dark:divide-[#2A2A2A]">
@@ -633,17 +633,17 @@ export default function ImageSizesSocialMedia2026Page() {
               Image format recommendations for social media
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Choosing the right file format before uploading matters as much as choosing the right dimensions. Each platform applies its own encoding pipeline on upload — but the format you provide determines how much quality the platform has to work with before its compression kicks in.
+              Choosing the right file format before uploading matters as much as choosing the right dimensions. Each platform applies its own encoding pipeline on upload- but the format you provide determines how much quality the platform has to work with before its compression kicks in.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              JPEG — the universal choice for social media photos
+              JPEG- the universal choice for social media photos
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              JPEG remains the most reliable format for uploading photographs to social media. Every major platform is optimized to handle JPEG, supports its metadata conventions, and applies its own re-encoding on top of it. Upload at 85–95% quality — higher than this rarely improves visible quality but increases file size, and lower than 80% will show compression artifacts after the platform re-encodes the image again.
+              JPEG remains the most reliable format for uploading photographs to social media. Every major platform is optimized to handle JPEG, supports its metadata conventions, and applies its own re-encoding on top of it. Upload at 85–95% quality- higher than this rarely improves visible quality but increases file size, and lower than 80% will show compression artifacts after the platform re-encodes the image again.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              For most platforms — Instagram, Facebook, X, LinkedIn — JPEG is the format that gives platforms the cleanest source material to work from. Use{" "}
+              For most platforms - Instagram, Facebook, X, LinkedIn - JPEG is the format that gives platforms the cleanest source material to work from. Use{" "}
               <Link
                 href="/tools/compress"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -654,20 +654,20 @@ export default function ImageSizesSocialMedia2026Page() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              PNG — for graphics, logos, and screenshots
+              PNG- for graphics, logos, and screenshots
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              For any image that contains flat areas of color, text overlays, or a transparent background — such as a logo, infographic, or screenshot — PNG is the correct choice. JPEG compression introduces visible artifacts on hard edges and flat fills that PNG encoding avoids entirely through its lossless compression model.
+              For any image that contains flat areas of color, text overlays, or a transparent background- such as a logo, infographic, or screenshot - PNG is the correct choice. JPEG compression introduces visible artifacts on hard edges and flat fills that PNG encoding avoids entirely through its lossless compression model.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Some platforms, notably Facebook, also serve PNG files with less aggressive re-encoding than JPEG in certain contexts. For cover photos and page logos, PNG often yields sharper final output.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              WebP — for your own website, not direct social uploads
+              WebP- for your own website, not direct social uploads
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              WebP is the ideal format for images on your own website — blog posts, landing pages, and portfolio galleries. It delivers 25–35% smaller files than JPEG at equivalent quality and is supported by all modern browsers. Use{" "}
+              WebP is the ideal format for images on your own website- blog posts, landing pages, and portfolio galleries. It delivers 25–35% smaller files than JPEG at equivalent quality and is supported by all modern browsers. Use{" "}
               <Link
                 href="/tools/webp"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -727,7 +727,7 @@ export default function ImageSizesSocialMedia2026Page() {
               Double compression
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Every social platform re-encodes your uploaded image with its own compression algorithm. If you upload an image that has already been compressed aggressively — for example, a JPEG at 60% quality — the platform compounds the existing artifacts with its own pass, producing visibly degraded output. Always upload from a high-quality source file and let the platform apply its single compression pass.
+              Every social platform re-encodes your uploaded image with its own compression algorithm. If you upload an image that has already been compressed aggressively- for example, a JPEG at 60% quality- the platform compounds the existing artifacts with its own pass, producing visibly degraded output. Always upload from a high-quality source file and let the platform apply its single compression pass.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
@@ -741,7 +741,7 @@ export default function ImageSizesSocialMedia2026Page() {
               Wrong aspect ratio leading to forced cropping
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Platforms never leave letterbox bars around images — they crop to fill the container. If your image does not match the expected aspect ratio for the placement, the platform crops it, often removing the most important part of the frame. Use{" "}
+              Platforms never leave letterbox bars around images- they crop to fill the container. If your image does not match the expected aspect ratio for the placement, the platform crops it, often removing the most important part of the frame. Use{" "}
               <Link
                 href="/tools/croproatio"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -760,7 +760,7 @@ export default function ImageSizesSocialMedia2026Page() {
                 {[
                   {
                     q: "What is the universal best image size for social media in 2026?",
-                    a: "There is no single universal size — each platform and placement has its own specifications. However, 1080 × 1080 px at 1:1 is the most versatile single size: it works as an Instagram square post, a Facebook feed image, a LinkedIn post, and a Pinterest square pin without cropping. For anything else, resize to the exact dimensions listed for each platform in this guide.",
+                    a: "There is no single universal size- each platform and placement has its own specifications. However, 1080 × 1080 px at 1:1 is the most versatile single size: it works as an Instagram square post, a Facebook feed image, a LinkedIn post, and a Pinterest square pin without cropping. For anything else, resize to the exact dimensions listed for each platform in this guide.",
                   },
                   {
                     q: "What happens if I upload an image that is too small?",
@@ -768,7 +768,7 @@ export default function ImageSizesSocialMedia2026Page() {
                   },
                   {
                     q: "Should I compress my images before uploading to social media?",
-                    a: "You should reduce the file size enough to speed up the upload, but not so aggressively that you introduce visible artifacts. A good rule of thumb is to target 85–90% JPEG quality — below the platform's quality threshold so you are not paying a file size penalty, but above the threshold where artifacts become visible after the platform's own re-encoding pass.",
+                    a: "You should reduce the file size enough to speed up the upload, but not so aggressively that you introduce visible artifacts. A good rule of thumb is to target 85–90% JPEG quality- below the platform's quality threshold so you are not paying a file size penalty, but above the threshold where artifacts become visible after the platform's own re-encoding pass.",
                   },
                   {
                     q: "Why do my Instagram images look blurry after upload?",
@@ -776,11 +776,11 @@ export default function ImageSizesSocialMedia2026Page() {
                   },
                   {
                     q: "Do image sizes change frequently?",
-                    a: "Platform specifications change with feature updates — typically once or twice per year per platform. YouTube banner dimensions changed with the introduction of the channel page redesign. Instagram story safe zones shifted with the introduction of the Reels tab UI. Bookmark this guide and check back after major platform redesigns.",
+                    a: "Platform specifications change with feature updates- typically once or twice per year per platform. YouTube banner dimensions changed with the introduction of the channel page redesign. Instagram story safe zones shifted with the introduction of the Reels tab UI. Bookmark this guide and check back after major platform redesigns.",
                   },
                   {
                     q: "What is the best tool to resize images for social media for free?",
-                    a: "SammaPix ResizePack lets you batch-resize images to exact pixel dimensions entirely in your browser — no upload, no account required. CropRatio handles aspect-ratio cropping with a visual interface for when you need to select a specific region. Both tools are free and process your files locally without sending them to any server.",
+                    a: "SammaPix ResizePack lets you batch-resize images to exact pixel dimensions entirely in your browser- no upload, no account required. CropRatio handles aspect-ratio cropping with a visual interface for when you need to select a specific region. Both tools are free and process your files locally without sending them to any server.",
                   },
                 ].map(({ q, a }) => (
                   <div key={q}>
@@ -828,10 +828,10 @@ export default function ImageSizesSocialMedia2026Page() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Resize and crop images for every platform — free
+                Resize and crop images for every platform- free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Use SammaPix ResizePack to batch-resize images to exact social media dimensions, and CropRatio to crop to the correct aspect ratio before posting. No upload, no account required — everything runs in your browser.
+                Use SammaPix ResizePack to batch-resize images to exact social media dimensions, and CropRatio to crop to the correct aspect ratio before posting. No upload, no account required- everything runs in your browser.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -863,7 +863,7 @@ export default function ImageSizesSocialMedia2026Page() {
                   href: "/blog/best-image-compression-tools-2026",
                   tag: "Comparison",
                   tagColor: "text-orange-700",
-                  title: "Best Free Image Compression Tools in 2026 — Compared",
+                  title: "Best Free Image Compression Tools in 2026 - Compared",
                 },
                 {
                   href: "/blog/complete-guide-webp-format",

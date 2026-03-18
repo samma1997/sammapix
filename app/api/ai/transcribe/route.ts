@@ -12,7 +12,7 @@ import { getCreditBalance, deductCredit } from "@/lib/credits";
 const FREE_MINUTES_PER_DAY = 5;
 const PRO_MINUTES_PER_MONTH = 60;
 
-// 100 MB — Vercel Pro body limit
+// 100 MB - Vercel Pro body limit
 const MAX_FILE_SIZE_BYTES = 100 * 1024 * 1024;
 
 // Supported MIME types Gemini accepts for audio/video transcription
@@ -73,7 +73,7 @@ async function addMinutes(key: string, minutes: number, ttlSeconds: number): Pro
         const data = (await res.json()) as { result: number };
         const newVal = data.result;
         if (newVal === minutes) {
-          // First write — set expiry
+          // First write- set expiry
           fetch(url, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 7. Rate limiting — track minutes used
+  // 7. Rate limiting- track minutes used
   //    We estimate duration from file size / typical bitrate as a pre-check.
   //    After transcription, Gemini returns actual duration info but we'll use
   //    a conservative estimate (file_size_mb * 1 minute/MB max) for the limit check.
@@ -269,9 +269,9 @@ Rules:
 - Each segment should cover approximately 5-10 seconds of speech
 - Timestamps are in decimal seconds (e.g. 62.5 = 1 minute 2.5 seconds)
 - Preserve original punctuation, capitalization, and speaker pauses
-- If there are multiple speakers, do not add speaker labels — just transcribe the speech
+- If there are multiple speakers, do not add speaker labels- just transcribe the speech
 - If the audio contains no speech, return segments: [] and fullText: ""
-- Be precise and accurate — this will be used for subtitles`;
+- Be precise and accurate- this will be used for subtitles`;
 
     const result = await model.generateContent([
       prompt,

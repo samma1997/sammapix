@@ -88,7 +88,7 @@ export default function HeicPage() {
         steps={[
           {
             title: "Drop your iPhone HEIC photos",
-            desc: "Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera — or click to browse.",
+            desc: "Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera- or click to browse.",
           },
           {
             title: "Choose output format",
@@ -141,7 +141,7 @@ export default function HeicPage() {
             HEIC (High Efficiency Image Container) is Apple&apos;s default photo format since iOS 11.
             It uses the HEIF (High Efficiency Image Format) standard developed by the Moving Picture
             Experts Group (MPEG). HEIC files are roughly half the size of equivalent JPEG files at
-            the same visual quality, which is why Apple switched to it — iPhone storage is limited
+            the same visual quality, which is why Apple switched to it- iPhone storage is limited
             and HEIC saves significant space.
           </p>
 
@@ -150,23 +150,23 @@ export default function HeicPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0 mb-6">
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Windows and older software often cannot open HEIC files natively
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Most websites, CMSs, and social platforms require JPG or PNG
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Email clients and messaging apps may strip or fail to display HEIC
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Printing services and photo labs typically require JPG
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Stock photo sites and client deliverables expect universal formats
             </li>
           </ul>
@@ -176,7 +176,7 @@ export default function HeicPage() {
           </h3>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
             WebP is Google&apos;s modern image format supported by all major browsers since 2020. It
-            produces files 25–34% smaller than JPEG at equivalent quality — making it ideal for
+            produces files 25–34% smaller than JPEG at equivalent quality- making it ideal for
             websites, e-commerce product images, and any web publishing workflow. If you&apos;re
             optimizing iPhone photos for the web, converting HEIC directly to WebP skips an
             intermediate JPG step and preserves more quality.
@@ -195,7 +195,7 @@ export default function HeicPage() {
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             Your HEIC file is sent over an encrypted HTTPS connection, converted in memory, and the
-            JPG or WebP result is returned immediately. No files are stored on our servers — the
+            JPG or WebP result is returned immediately. No files are stored on our servers- the
             conversion is ephemeral. We validate the actual file magic bytes (not just the
             extension) to ensure only genuine HEIC/HEIF files are processed.
           </p>
@@ -206,7 +206,7 @@ export default function HeicPage() {
           <p className="text-sm text-[#737373] leading-relaxed">
             The quality slider controls the compression level of the output file. At 85% (the
             default), the result is visually indistinguishable from the original at a significantly
-            smaller file size. At 60%, you get the smallest possible file — useful for thumbnails or
+            smaller file size. At 60%, you get the smallest possible file- useful for thumbnails or
             email attachments. At 100%, virtually no lossy compression is applied.
           </p>
         </div>

@@ -109,7 +109,7 @@ export function Day7Email({ name }: Day7EmailProps) {
     <Html lang="en">
       <Head />
       <Preview>
-        Stop optimizing images one by one — here&apos;s a faster way
+        Stop optimizing images one by one- here&apos;s a faster way
       </Preview>
       <Body style={main}>
         <Container style={container}>
@@ -117,11 +117,11 @@ export function Day7Email({ name }: Day7EmailProps) {
             Samma<span style={logoAccent}>Pix</span>
           </Text>
 
-          <Heading style={heading}>Process 20 images at once — here&apos;s how</Heading>
+          <Heading style={heading}>Process 20 images at once- here&apos;s how</Heading>
 
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
-            If you&apos;ve been optimizing images one by one — there&apos;s a
+            If you&apos;ve been optimizing images one by one- there&apos;s a
             better way.
           </Text>
 

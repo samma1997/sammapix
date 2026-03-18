@@ -7,7 +7,7 @@ import { addCredits } from "@/lib/credits";
 export const runtime = "nodejs";
 
 // ---------------------------------------------------------------------------
-// Idempotency — prevent duplicate event processing via Redis
+// Idempotency- prevent duplicate event processing via Redis
 // ---------------------------------------------------------------------------
 const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -44,7 +44,7 @@ async function markEventProcessed(eventId: string): Promise<void> {
       body: JSON.stringify(["SET", `stripe_event:${eventId}`, "1", "EX", EVENT_TTL_SECONDS]),
     });
   } catch {
-    // Best-effort — if Redis fails, we still process the event
+    // Best-effort- if Redis fails, we still process the event
   }
 }
 
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
   if (isPlaceholder) {
     // In development without a configured secret, warn loudly but still reject.
     // Use `stripe listen --forward-to localhost:3000/api/webhook/stripe` locally.
-    console.error("[stripe/webhook] STRIPE_WEBHOOK_SECRET is not configured — request rejected");
+    console.error("[stripe/webhook] STRIPE_WEBHOOK_SECRET is not configured- request rejected");
     return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 });
   }
 
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  // Idempotency check — skip already-processed events
+  // Idempotency check- skip already-processed events
   if (await isEventProcessed(event.id)) {
     console.log("[stripe/webhook] Duplicate event skipped:", event.id);
     return NextResponse.json({ received: true });
@@ -118,9 +118,9 @@ export async function POST(req: NextRequest) {
         // Pro subscription checkout
         // ----------------------------------------------------------------
         console.log("[stripe/webhook] ✅ New Pro subscription for:", session.customer_email);
-        // Plan is detected via Stripe API at next login — no DB needed.
+        // Plan is detected via Stripe API at next login- no DB needed.
 
-        // Fire Meta Conversions API — Subscribe event
+        // Fire Meta Conversions API - Subscribe event
         const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
         sendMetaEvent({
           eventName: "Subscribe",

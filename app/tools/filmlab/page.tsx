@@ -8,7 +8,7 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Film Photo Filters Free Online — Vintage Effects | SammaPix",
+  title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
   description:
     "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/filmlab`,
   },
   openGraph: {
-    title: "Film Photo Filters Free Online — Vintage Effects | SammaPix",
+    title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
     description:
       "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
     url: `${APP_URL}/tools/filmlab`,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 const features = [
   {
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
-    title: "100% browser-based — nothing uploaded",
+    title: "100% browser-based- nothing uploaded",
     description:
       "All image processing runs on your device using the Canvas API. Your photos never leave your browser.",
   },
@@ -88,7 +88,7 @@ export default function FilmLabPage() {
         steps={[
           {
             title: "Drop your photos",
-            desc: "Upload JPG, PNG, WebP or HEIC photos — drag and drop or click to browse. Mix any format.",
+            desc: "Upload JPG, PNG, WebP or HEIC photos- drag and drop or click to browse. Mix any format.",
           },
           {
             title: "Choose a film preset",
@@ -143,7 +143,7 @@ export default function FilmLabPage() {
             FilmLab is a free browser-based photo editing tool that applies analog film looks to your photos. It includes 14 presets: 6 classic film stocks (Kodak Gold, Fuji Pro 400H, Ilford HP5, Cinematic Teal, Faded 70s, Cross Process) and 8 exclusive Samma signature presets. Each preset adjusts grain, vignette, fade, temperature, contrast, saturation, and split toning.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            FilmLab processes images fully in the browser using the Canvas API — your photos never leave your device. Live preview updates within 100ms as you adjust sliders. Apply the same look to a full batch and download all results as a ZIP.
+            FilmLab processes images fully in the browser using the Canvas API- your photos never leave your device. Live preview updates within 100ms as you adjust sliders. Apply the same look to a full batch and download all results as a ZIP.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             How FilmLab analog effects work
@@ -151,7 +151,7 @@ export default function FilmLabPage() {
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             FilmLab applies a multi-step processing pipeline directly in your browser using the Canvas API.
             Each photo goes through temperature shift, contrast adjustment, saturation control, fade (black lift),
-            random grain noise, radial vignette darkening and optional split toning for highlights and shadows — all in that order.
+            random grain noise, radial vignette darkening and optional split toning for highlights and shadows- all in that order.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             The live preview updates as you move sliders, with a 100ms debounce to keep the UI responsive.
@@ -164,24 +164,24 @@ export default function FilmLabPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0 mb-4">
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              <span><strong className="text-[#525252]">Kodak Gold</strong> — warm tones, moderate grain and a subtle light fade. The classic holiday roll.</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              <span><strong className="text-[#525252]">Kodak Gold</strong>- warm tones, moderate grain and a subtle light fade. The classic holiday roll.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              <span><strong className="text-[#525252]">Fuji Pro 400H</strong> — cooler, pastel palette with a slight green cast. Portrait photographers&apos; favourite.</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              <span><strong className="text-[#525252]">Fuji Pro 400H</strong>- cooler, pastel palette with a slight green cast. Portrait photographers&apos; favourite.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              <span><strong className="text-[#525252]">Ilford HP5</strong> — full desaturation, high contrast and visible grain. Classic black-and-white street photography.</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              <span><strong className="text-[#525252]">Ilford HP5</strong>- full desaturation, high contrast and visible grain. Classic black-and-white street photography.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              <span><strong className="text-[#525252]">Cinematic Teal</strong> — teal shadows and warm orange highlights. The Hollywood blockbuster look.</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              <span><strong className="text-[#525252]">Cinematic Teal</strong>- teal shadows and warm orange highlights. The Hollywood blockbuster look.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              <span><strong className="text-[#525252]">Faded 70s</strong> — heavily lifted blacks, warm cast and low contrast. Vintage magazine aesthetic.</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              <span><strong className="text-[#525252]">Faded 70s</strong>- heavily lifted blacks, warm cast and low contrast. Vintage magazine aesthetic.</span>
             </li>
           </ul>
 
@@ -190,20 +190,20 @@ export default function FilmLabPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Start from a preset, then reduce grain if the photo is already noisy
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              Vignette works best on portraits — keep it under 40 for landscapes
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              Vignette works best on portraits- keep it under 40 for landscapes
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              Fade lifts the blacks like old print film — pair it with a slight contrast boost
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              Fade lifts the blacks like old print film- pair it with a slight contrast boost
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              Split toning adds the most cinematic feel — try orange highlights + teal shadows
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              Split toning adds the most cinematic feel- try orange highlights + teal shadows
             </li>
           </ul>
         </div>
@@ -298,7 +298,7 @@ export default function FilmLabPage() {
                 name: "Are my photos uploaded to a server?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. All image processing runs entirely in your browser using the Canvas API. Your photos never leave your device — 100% private, zero uploads.",
+                  text: "No. All image processing runs entirely in your browser using the Canvas API. Your photos never leave your device- 100% private, zero uploads.",
                 },
               },
             ],

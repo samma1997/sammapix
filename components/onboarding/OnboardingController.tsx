@@ -5,8 +5,8 @@
  *
  * Manages localStorage state for the persona selection flow.
  * Renders:
- *   - OnboardingModal (when no persona is stored yet)
- *   - PersonalizedTools section (when a real persona is stored)
+ * - OnboardingModal (when no persona is stored yet)
+ * - PersonalizedTools section (when a real persona is stored)
  *
  * Must be a client component because it reads/writes localStorage and
  * conditionally renders based on that state.
@@ -42,7 +42,7 @@ export default function OnboardingController() {
     setHydrated(true);
 
     if (persisted === null) {
-      // First visit — show modal after a short delay
+      // First visit- show modal after a short delay
       const t = setTimeout(() => setShowModal(true), 1500);
       return () => clearTimeout(t);
     }
@@ -53,7 +53,7 @@ export default function OnboardingController() {
     if (persona) {
       setStored(persona);
     } else {
-      // Skip was chosen — already written to localStorage inside modal
+      // Skip was chosen- already written to localStorage inside modal
       setStored("skipped");
     }
   }
@@ -67,7 +67,7 @@ export default function OnboardingController() {
     setTimeout(() => setShowModal(true), 50);
   }
 
-  // During SSR / before hydration — render nothing to avoid mismatch
+  // During SSR / before hydration- render nothing to avoid mismatch
   if (!hydrated) return null;
 
   const activePersona =

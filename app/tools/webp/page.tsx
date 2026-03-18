@@ -7,9 +7,9 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "WebP Converter Free Online — Convert JPG to WebP | SammaPix",
+  title: "WebP Converter Free Online - Convert JPG to WebP | SammaPix",
   description:
-    "Convert JPG to WebP instantly — 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
+    "Convert JPG to WebP instantly- 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
   keywords: [
     "webp converter",
     "convert to webp",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "WebP Converter Free Online — Convert JPG to WebP | SammaPix",
+    title: "WebP Converter Free Online - Convert JPG to WebP | SammaPix",
     description:
-      "Convert JPG to WebP instantly — 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
+      "Convert JPG to WebP instantly- 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
     url: `${APP_URL}/tools/webp`,
     siteName: "SammaPix",
     type: "website",
@@ -47,13 +47,13 @@ const features = [
     icon: <TrendingUp className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
     title: "Up to 30% smaller files",
     description:
-      "WebP consistently produces smaller files than JPEG and PNG at equivalent visual quality — improving your Core Web Vitals score.",
+      "WebP consistently produces smaller files than JPEG and PNG at equivalent visual quality- improving your Core Web Vitals score.",
   },
   {
     icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
     title: "Fully browser-based",
     description:
-      "Conversion uses the Canvas API natively in your browser. No files are sent to any server — your images stay private.",
+      "Conversion uses the Canvas API natively in your browser. No files are sent to any server- your images stay private.",
   },
   {
     icon: <FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
@@ -76,7 +76,7 @@ export default function WebpPage() {
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
         <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">WebP Converter</h1>
         <p className="text-sm text-[#737373]">
-          Convert JPG, PNG and GIF to WebP format directly in your browser. WebP files are up to 30% smaller — nothing uploaded to any server.
+          Convert JPG, PNG and GIF to WebP format directly in your browser. WebP files are up to 30% smaller- nothing uploaded to any server.
         </p>
       </div>
 
@@ -88,7 +88,7 @@ export default function WebpPage() {
         steps={[
           {
             title: "Drop your images",
-            desc: "Drag and drop JPG, PNG or GIF files onto the upload area — or click to select them.",
+            desc: "Drag and drop JPG, PNG or GIF files onto the upload area- or click to select them.",
           },
           {
             title: "Files convert automatically",
@@ -143,7 +143,7 @@ export default function WebpPage() {
             WebP is a modern image format developed by Google that provides
             superior compression for web images. It supports both lossy and
             lossless compression, transparency (like PNG), and animation (like
-            GIF) — all in a single format that is 25–34% smaller than JPEG.
+            GIF)- all in a single format that is 25–34% smaller than JPEG.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             Google PageSpeed Insights and Lighthouse actively flag JPEG and PNG

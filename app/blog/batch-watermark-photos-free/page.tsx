@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
   description:
-    "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once — browser-based, no uploads required.",
+    "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once- browser-based, no uploads required.",
   alternates: {
     canonical: `${APP_URL}/blog/batch-watermark-photos-free`,
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
     description:
-      "Add watermarks to hundreds of photos in seconds — no Photoshop, no subscription. Step-by-step guide to batch watermarking with best practices for placement, opacity, and branding.",
+      "Add watermarks to hundreds of photos in seconds- no Photoshop, no subscription. Step-by-step guide to batch watermarking with best practices for placement, opacity, and branding.",
     url: `${APP_URL}/blog/batch-watermark-photos-free`,
     type: "article",
     publishedTime: "2026-01-22",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
     description:
-      "Protect your photography and reinforce your brand. Batch watermark photos for free — no Photoshop needed, runs entirely in your browser.",
+      "Protect your photography and reinforce your brand. Batch watermark photos for free- no Photoshop needed, runs entirely in your browser.",
     creator: "@lucasammarco",
   },
 };
@@ -44,7 +44,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "How to Batch Watermark Photos for Free (No Photoshop Needed)",
   description:
-    "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once — browser-based, no uploads required.",
+    "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once- browser-based, no uploads required.",
   url: `${APP_URL}/blog/batch-watermark-photos-free`,
   datePublished: "2026-01-22",
   dateModified: "2026-01-22",
@@ -150,7 +150,7 @@ export default function BatchWatermarkPhotosFreePage() {
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
               Every photographer publishing work online faces the same dilemma:
               share high-quality images and risk theft, or protect them and
-              compromise the presentation. Watermarking solves both problems —
+              compromise the presentation. Watermarking solves both problems- 
               but only if you can apply it efficiently. This guide shows you how
               to batch watermark photos for free, without Photoshop and without
               spending an afternoon clicking through images one at a time.
@@ -188,7 +188,7 @@ export default function BatchWatermarkPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Image theft is not a niche concern. Millions of photos are used
-              without permission every day — on blogs, social media, product
+              without permission every day- on blogs, social media, product
               listings, and commercial campaigns. Without a watermark, there is
               no visual evidence of ownership once an image is separated from
               its original context. A visible watermark makes it immediately
@@ -207,7 +207,7 @@ export default function BatchWatermarkPhotosFreePage() {
                 U.S. copyright law
               </a>
               , you own the copyright to your photographs the moment you take
-              them — no registration required. A watermark does not create
+              them- no registration required. A watermark does not create
               copyright, but it is strong evidence of your claim and a clear
               signal to anyone viewing the image that it is protected. It also
               qualifies as copyright management information (CMI), making
@@ -218,8 +218,8 @@ export default function BatchWatermarkPhotosFreePage() {
               Beyond legal protection, watermarks are a branding tool. Every
               image you share is a potential touchpoint. A clean, well-placed
               watermark with your name, website, or logo turns each photo into
-              a passive advertisement. When your images get shared — even
-              without your permission — the watermark travels with them and
+              a passive advertisement. When your images get shared- even
+              without your permission- the watermark travels with them and
               points viewers back to you.
             </p>
 
@@ -266,7 +266,7 @@ export default function BatchWatermarkPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Not all watermarks serve the same purpose. Choosing the right
-              type depends on your goals — whether you are primarily focused on
+              type depends on your goals- whether you are primarily focused on
               deterrence, branding, or driving traffic to a specific
               destination.
             </p>
@@ -306,8 +306,8 @@ export default function BatchWatermarkPhotosFreePage() {
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              A logo watermark uses your visual identity — a symbol, monogram,
-              or full logo — instead of or in addition to text. Logo watermarks
+              A logo watermark uses your visual identity- a symbol, monogram,
+              or full logo- instead of or in addition to text. Logo watermarks
               are more distinctive and harder to crop out when placed centrally.
               They reinforce brand recognition across a portfolio, especially
               when your images circulate on social media where viewers may not
@@ -328,8 +328,8 @@ export default function BatchWatermarkPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               QR code watermarks are a newer approach that turns every shared
               image into a direct link. Embed a QR code pointing to your
-              portfolio, website, or licensing page and anyone who scans it —
-              even from a screenshot or print — lands directly on your
+              portfolio, website, or licensing page and anyone who scans it- 
+              even from a screenshot or print- lands directly on your
               destination. This is particularly effective for photographers who
               sell prints or license images commercially, as it makes the path
               from &ldquo;I want to use this image&rdquo; to &ldquo;I have the license&rdquo; as
@@ -365,8 +365,8 @@ export default function BatchWatermarkPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Watermarking individual photos in a photo editor is fine for a
-              handful of images. For any volume beyond that — a client delivery,
-              a social media batch, or a stock photo export — you need a
+              handful of images. For any volume beyond that- a client delivery,
+              a social media batch, or a stock photo export- you need a
               workflow that processes multiple files at once without manual
               intervention on each one.
             </p>
@@ -388,7 +388,7 @@ export default function BatchWatermarkPhotosFreePage() {
                 400px wide for high-resolution output
               </li>
               <li>
-                For text: decide on font, weight, and capitalization — keep it
+                For text: decide on font, weight, and capitalization- keep it
                 consistent across your entire portfolio
               </li>
               <li>
@@ -400,7 +400,7 @@ export default function BatchWatermarkPhotosFreePage() {
                 on both light and dark areas of the photo
               </li>
               <li>
-                Keep the watermark proportionally small — between 8% and 15%
+                Keep the watermark proportionally small- between 8% and 15%
                 of the image width is the typical range
               </li>
             </ul>
@@ -417,13 +417,13 @@ export default function BatchWatermarkPhotosFreePage() {
                 SammaPix StampIt
               </Link>{" "}
               is a free, browser-based batch watermark tool. It runs entirely
-              in your browser — your images never leave your device, no account
+              in your browser- your images never leave your device, no account
               is required, and there is no file count limit. Here is how to use
               it from start to finish.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 1 — Open StampIt
+              Step 1 - Open StampIt
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -436,24 +436,24 @@ export default function BatchWatermarkPhotosFreePage() {
               </Link>
               . No installation, no signup, no subscription. The entire tool
               loads in your browser and processes images using the Canvas API
-              — the same technology used by professional image editing
+             - the same technology used by professional image editing
               applications.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 2 — Drop your photos into the upload zone
+              Step 2 - Drop your photos into the upload zone
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Drag and drop your photos directly onto the upload zone, or click
               to select files. StampIt accepts JPEG, PNG, and WebP files. You
-              can add as many images as needed in one batch — there is no
+              can add as many images as needed in one batch- there is no
               artificial limit. For very large batches (1,000+ files), process
               in groups of 200–300 to keep the browser session stable.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 3 — Choose your watermark type
+              Step 3 - Choose your watermark type
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -465,39 +465,39 @@ export default function BatchWatermarkPhotosFreePage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 4 — Configure placement and opacity
+              Step 4 - Configure placement and opacity
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Use the position grid to choose where the watermark appears on
               each photo: nine standard positions (corners, edges, center) plus
               a custom coordinate option for precise placement. Set the opacity
-              slider between 30% and 70% for most use cases — this range is
+              slider between 30% and 70% for most use cases- this range is
               visible enough to deter theft while keeping the image presentable.
               Set the size as a percentage of the image width so the watermark
               scales consistently across photos of different dimensions.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 5 — Preview before processing
+              Step 5 - Preview before processing
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               StampIt shows a live preview of the watermark applied to the
               first image in your batch. Adjust placement, size, and opacity
               until the result looks exactly right. Changes update in real time.
-              This preview step is critical — it is far faster to adjust here
+              This preview step is critical- it is far faster to adjust here
               than to re-process an entire batch after spotting an issue.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              Step 6 — Apply to all and download
+              Step 6 - Apply to all and download
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Click &ldquo;Watermark All&rdquo; to apply your settings to every image in
               the batch simultaneously. Processing happens locally in your
-              browser — all images are processed in parallel using Web Workers,
+              browser- all images are processed in parallel using Web Workers,
               so even large batches complete in under a minute on a modern
               device. Download individual files or the entire batch as a ZIP
               archive. Original files are never modified.
@@ -518,12 +518,12 @@ export default function BatchWatermarkPhotosFreePage() {
             {/* CTA box */}
             <div className="my-8 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Batch watermark your photos now — free, no signup
+                Batch watermark your photos now- free, no signup
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your images into StampIt and apply text, logo, or QR code
                 watermarks to your entire photo batch in seconds. Runs entirely
-                in your browser — your files never leave your device.
+                in your browser- your files never leave your device.
               </p>
               <Link
                 href="/tools/stampit"
@@ -570,7 +570,7 @@ export default function BatchWatermarkPhotosFreePage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">
                   Avoid pure white space
                 </strong>{" "}
-                in corners — a watermark placed over a white sky or blank
+                in corners- a watermark placed over a white sky or blank
                 background is trivially easy to remove with a content-aware
                 fill tool. Place it over areas with varied texture and tone.
               </li>
@@ -591,11 +591,11 @@ export default function BatchWatermarkPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The right opacity depends on the purpose of the watermark. For
               portfolio images that you want to look professional, 25–45%
-              opacity is the sweet spot — visible but not intrusive. For
+              opacity is the sweet spot- visible but not intrusive. For
               preview images where deterrence is the priority, 50–70% makes
               the watermark harder to remove while still allowing viewers to
               evaluate the image. Avoid going below 20% for anything intended
-              as a real deterrent — at that level the watermark is nearly
+              as a real deterrent- at that level the watermark is nearly
               invisible and serves little protective purpose.
             </p>
 
@@ -608,7 +608,7 @@ export default function BatchWatermarkPhotosFreePage() {
               than in absolute pixels. A watermark that is 12% of the image
               width will look consistent on a 600px thumbnail and a 4000px
               full-resolution export. In absolute terms, aim for a watermark
-              that is readable but does not dominate the frame — for a 1200px
+              that is readable but does not dominate the frame- for a 1200px
               wide image, that typically means the watermark should be no wider
               than 200–250px. You can easily resize batches beforehand using
               the{" "}
@@ -628,7 +628,7 @@ export default function BatchWatermarkPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Not everyone agrees that watermarks are worth it. A vocal
               segment of the photography community argues that watermarks are
-              ugly, outdated, and ineffective — that anyone determined to steal
+              ugly, outdated, and ineffective- that anyone determined to steal
               an image will remove the watermark, and casual viewers are put
               off by the visual noise. This is a reasonable position that
               deserves a fair examination.
@@ -650,8 +650,8 @@ export default function BatchWatermarkPhotosFreePage() {
                 cannot properly evaluate your work.
               </li>
               <li>
-                For photographers who rely on shareability — travel bloggers,
-                social media creators — watermarks can reduce engagement and
+                For photographers who rely on shareability- travel bloggers,
+                social media creators- watermarks can reduce engagement and
                 limit organic reach.
               </li>
               <li>
@@ -667,7 +667,7 @@ export default function BatchWatermarkPhotosFreePage() {
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
                 The majority of image theft is opportunistic, not deliberate.
-                A visible watermark stops the vast majority of casual copying —
+                A visible watermark stops the vast majority of casual copying- 
                 people who would otherwise simply right-click and save.
               </li>
               <li>
@@ -677,7 +677,7 @@ export default function BatchWatermarkPhotosFreePage() {
               </li>
               <li>
                 For stock photographers and commercial shooters, a watermarked
-                preview standard in the industry — clients expect to see
+                preview standard in the industry- clients expect to see
                 it on unlicensed previews.
               </li>
               <li>
@@ -687,8 +687,8 @@ export default function BatchWatermarkPhotosFreePage() {
                 violation of the DMCA.
               </li>
               <li>
-                When executed well — subtle, well-placed, matching your brand
-                — a watermark adds professional credibility rather than
+                When executed well- subtle, well-placed, matching your brand
+               - a watermark adds professional credibility rather than
                 detracting from the image.
               </li>
             </ul>
@@ -751,7 +751,7 @@ export default function BatchWatermarkPhotosFreePage() {
               Bottom-right corner is the industry standard for portfolio work.
               It is visible, professional, and does not interfere with the main
               subject of the photo. For a consistent look across a portfolio,
-              apply the same position and size to all images — StampIt&apos;s
+              apply the same position and size to all images - StampIt&apos;s
               batch processing ensures pixel-perfect consistency without any
               manual adjustment per image.
             </p>
@@ -761,7 +761,7 @@ export default function BatchWatermarkPhotosFreePage() {
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               No. StampIt processes all images entirely in your browser. Your
-              photos never leave your device — no upload, no server processing,
+              photos never leave your device- no upload, no server processing,
               no cloud storage. This is possible because modern browsers
               support the Canvas API and Web Workers, which provide the same
               image compositing capabilities as server-side processing, but
@@ -778,7 +778,7 @@ export default function BatchWatermarkPhotosFreePage() {
               your RAWs from Lightroom or your camera software first, then run
               the batch through StampIt. For photographers with large RAW
               batches, export a web-resolution JPEG version specifically for
-              online sharing, then watermark that copy — keeping your RAW
+              online sharing, then watermark that copy- keeping your RAW
               originals untouched.
             </p>
           </div>
@@ -828,12 +828,12 @@ export default function BatchWatermarkPhotosFreePage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Protect your photos with a watermark — free, no signup
+                Protect your photos with a watermark- free, no signup
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Add text, logo, or QR code watermarks to your entire photo
                 batch in seconds with SammaPix StampIt. Runs entirely in your
-                browser — your images never leave your device.
+                browser- your images never leave your device.
               </p>
               <Link
                 href="/tools/stampit"

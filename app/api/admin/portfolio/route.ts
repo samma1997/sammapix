@@ -36,7 +36,7 @@ async function requireAdmin(): Promise<{ email: string } | null> {
   return { email: session.user.email };
 }
 
-// ── GET — fetch all portfolio photos ────────────────────────────────────────
+// ── GET- fetch all portfolio photos ────────────────────────────────────────
 
 export async function GET() {
   const admin = await requireAdmin();
@@ -96,7 +96,7 @@ export async function GET() {
   }
 }
 
-// ── POST — update context metadata for one image ─────────────────────────────
+// ── POST- update context metadata for one image ─────────────────────────────
 
 const UpdateSchema = z.object({
   publicId: z.string().min(1).max(500),
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
 
   const { publicId, caption, description, alt, location } = parsed.data;
 
-  // Encode values — pipe separator used by Cloudinary context, escape pipes and = in values
+  // Encode values- pipe separator used by Cloudinary context, escape pipes and = in values
   function escapeCtx(v: string) {
     return v.replace(/\|/g, "\\|").replace(/=/g, "\\=");
   }

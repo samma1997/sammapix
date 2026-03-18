@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "How to Find and Delete Duplicate Photos (Free Tool)",
   description:
-    "Learn how to find and delete duplicate photos using perceptual hashing. Step-by-step guide to photo deduplication with TwinHunt — free, browser-based, no uploads.",
+    "Learn how to find and delete duplicate photos using perceptual hashing. Step-by-step guide to photo deduplication with TwinHunt- free, browser-based, no uploads.",
   alternates: {
     canonical: `${APP_URL}/blog/find-delete-duplicate-photos`,
   },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Find and Delete Duplicate Photos (Free Tool)",
     description:
-      "Stop wasting storage on duplicate photos. Learn how perceptual hashing works and clean your library with TwinHunt — free, no uploads.",
+      "Stop wasting storage on duplicate photos. Learn how perceptual hashing works and clean your library with TwinHunt- free, no uploads.",
     creator: "@lucasammarco",
   },
 };
@@ -42,7 +42,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "How to Find and Delete Duplicate Photos (Free Tool)",
   description:
-    "Learn how to find and delete duplicate photos using perceptual hashing. Step-by-step guide to photo deduplication with TwinHunt — free, browser-based, no uploads.",
+    "Learn how to find and delete duplicate photos using perceptual hashing. Step-by-step guide to photo deduplication with TwinHunt- free, browser-based, no uploads.",
   url: `${APP_URL}/blog/find-delete-duplicate-photos`,
   datePublished: "2026-03-12",
   dateModified: "2026-03-12",
@@ -136,7 +136,7 @@ export default function FindDeleteDuplicatePhotosPage() {
 
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
               The average photo library doubles in size every two years. A
-              significant portion of that growth is duplicates — exact copies
+              significant portion of that growth is duplicates- exact copies
               synced across devices, near-identical burst shots, and edited
               variants sitting alongside their originals. Finding and deleting
               them manually is impossible at scale. This guide explains how
@@ -155,7 +155,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                A cluttered photo library wastes storage and makes finding the right image harder — Photo by Fotis Fotopoulos on Unsplash
+                A cluttered photo library wastes storage and makes finding the right image harder - Photo by Fotis Fotopoulos on Unsplash
               </figcaption>
             </figure>
 
@@ -176,13 +176,13 @@ export default function FindDeleteDuplicatePhotosPage() {
               Professional photographers deal with a different but equally
               common problem: burst shots. Press the shutter in burst mode and
               you might have 15 nearly identical frames of the same moment.
-              Only one or two of those will be keepers — the rest are storage
+              Only one or two of those will be keepers- the rest are storage
               waste.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The result is photo libraries where 20–40% of the storage space
               is occupied by redundant images. For a 100GB library, that could
-              be 20–40GB of recoverable space — and dozens of hours of wasted
+              be 20–40GB of recoverable space- and dozens of hours of wasted
               time scrolling through near-identical photos.
             </p>
 
@@ -211,7 +211,7 @@ export default function FindDeleteDuplicatePhotosPage() {
               hash or digest. The same file always produces the same hash. Two
               different files with even a single changed byte produce entirely
               different hashes. If two files share the same hash, they are
-              byte-for-byte identical — guaranteed.
+              byte-for-byte identical- guaranteed.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               This approach is fast and certain, but it only catches true
@@ -229,7 +229,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Perceptual hashing analyzes image content rather than raw bytes to find visual duplicates — Photo by Luke Chesser on Unsplash
+                Perceptual hashing analyzes image content rather than raw bytes to find visual duplicates - Photo by Luke Chesser on Unsplash
               </figcaption>
             </figure>
 
@@ -242,7 +242,7 @@ export default function FindDeleteDuplicatePhotosPage() {
               computer vision. Instead of hashing the raw file bytes, it hashes
               the visual content of the image in a way that is tolerant of minor
               variations. Two images that look the same to the human eye will
-              produce very similar perceptual hashes — even if one has been
+              produce very similar perceptual hashes- even if one has been
               resized, lightly edited, or saved at a different compression level.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -263,7 +263,7 @@ export default function FindDeleteDuplicatePhotosPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The similarity between two perceptual hashes is measured by their
-              Hamming distance — the number of bit positions where the two
+              Hamming distance- the number of bit positions where the two
               hashes differ. A Hamming distance of 0 means identical images.
               A distance of 1–5 indicates very similar images (often the same
               scene with minor variations). A distance above 10 typically
@@ -278,7 +278,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 SammaPix TwinHunt
               </Link>{" "}
               finds both exact duplicates and near-duplicates in your photo
-              library. All processing happens in your browser — no image data
+              library. All processing happens in your browser- no image data
               is ever transmitted to any server.
             </p>
 
@@ -287,7 +287,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </h2>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 1 — Open TwinHunt
+              Step 1 - Open TwinHunt
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -304,7 +304,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 2 — Select your photo folder
+              Step 2 - Select your photo folder
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -316,12 +316,12 @@ export default function FindDeleteDuplicatePhotosPage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Alternatively, drag a folder directly onto the drop zone. Both
-              methods give TwinHunt read access to the files — no modifications
+              methods give TwinHunt read access to the files- no modifications
               are made during the scanning phase.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 3 — Choose your sensitivity level
+              Step 3 - Choose your sensitivity level
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -336,7 +336,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Similar (recommended):</strong> Finds exact duplicates plus near-duplicates with a Hamming distance of 5 or less. Catches re-compressed copies, lightly edited versions, and screenshots of photos.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Very similar:</strong> Hamming distance up to 10. Finds burst shots and photos taken within seconds of each other. Requires manual review — this mode can surface groups that are similar but not actually duplicates.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Very similar:</strong> Hamming distance up to 10. Finds burst shots and photos taken within seconds of each other. Requires manual review- this mode can surface groups that are similar but not actually duplicates.
               </li>
             </ul>
 
@@ -347,7 +347,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 4 — Review the duplicate groups
+              Step 4 - Review the duplicate groups
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -371,7 +371,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 5 — Delete selected duplicates
+              Step 5 - Delete selected duplicates
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -425,7 +425,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                A systematic approach to photo management keeps your library clean long-term — Photo by Clement Helardot on Unsplash
+                A systematic approach to photo management keeps your library clean long-term - Photo by Clement Helardot on Unsplash
               </figcaption>
             </figure>
 
@@ -442,7 +442,7 @@ export default function FindDeleteDuplicatePhotosPage() {
               Establish a single source of truth.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Decide where your canonical photo library lives — whether that is
+              Decide where your canonical photo library lives- whether that is
               Apple Photos, <a href="https://support.google.com/photos/answer/6220791" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Google Photos</a>, Lightroom, or a folder structure on
               an external drive. All other locations (phone camera roll, cloud
               syncs, backup folders) feed into this one library and are cleared
@@ -494,7 +494,7 @@ export default function FindDeleteDuplicatePhotosPage() {
               photo will produce very similar perceptual hashes and be grouped
               as near-duplicates. Cryptographic hash matching (for exact
               duplicates) requires byte-identical files, so it would not catch
-              cross-format copies — but perceptual hashing does.
+              cross-format copies- but perceptual hashing does.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
@@ -578,7 +578,7 @@ export default function FindDeleteDuplicatePhotosPage() {
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your photo library into TwinHunt and find exact and
-                near-duplicate photos in minutes. Runs entirely in your browser —
+                near-duplicate photos in minutes. Runs entirely in your browser- 
                 your photos never leave your device.
               </p>
               <Link

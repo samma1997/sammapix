@@ -227,9 +227,9 @@ export default function TranscribeClient() {
         { type: "audio/wav" }
       );
 
-      // If WAV is still over 4MB, it's too long — return original and let server handle error
+      // If WAV is still over 4MB, it's too long- return original and let server handle error
       if (wavFile.size > 4 * 1024 * 1024) {
-        console.warn(`[Transcribe] Extracted WAV is ${(wavFile.size / 1024 / 1024).toFixed(1)}MB — may exceed upload limit`);
+        console.warn(`[Transcribe] Extracted WAV is ${(wavFile.size / 1024 / 1024).toFixed(1)}MB- may exceed upload limit`);
       }
 
       return wavFile;
@@ -321,7 +321,7 @@ export default function TranscribeClient() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
-        setError("Connection failed. The file may be too large — try a smaller file (under 25 MB works best).");
+        setError("Connection failed. The file may be too large- try a smaller file (under 25 MB works best).");
       } else if (msg.includes("timeout") || msg.includes("aborted")) {
         setError("Request timed out. Try a shorter audio/video file.");
       } else {
@@ -376,7 +376,7 @@ export default function TranscribeClient() {
               onClick={() => signIn(undefined, { callbackUrl: "/tools/transcribe" })}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
             >
-              Sign in — it&apos;s free
+              Sign in- it&apos;s free
             </button>
           </div>
         </div>
@@ -392,7 +392,7 @@ export default function TranscribeClient() {
         </div>
       )}
 
-      {/* Drop zone — only shown when no file loaded */}
+      {/* Drop zone- only shown when no file loaded */}
       {!file && (
         <div
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
@@ -425,7 +425,7 @@ export default function TranscribeClient() {
                 Drop a video or audio file here
               </p>
               <p className="text-xs text-[#737373] mt-1">
-                MP4, WebM, MOV, MP3, WAV, M4A — up to 100 MB
+                MP4, WebM, MOV, MP3, WAV, M4A- up to 100 MB
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3]">
@@ -486,12 +486,12 @@ export default function TranscribeClient() {
               <div className="flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin text-[#6366F1]" strokeWidth={1.5} />
                 <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  {status === "uploading" ? "Extracting audio & uploading..." : "Transcribing with AI — this may take a minute..."}
+                  {status === "uploading" ? "Extracting audio & uploading..." : "Transcribing with AI- this may take a minute..."}
                 </span>
               </div>
               {status === "uploading" && (
                 <p className="text-[10px] text-[#A3A3A3]">
-                  Audio is extracted from your video locally before sending — this keeps uploads small and fast.
+                  Audio is extracted from your video locally before sending- this keeps uploads small and fast.
                 </p>
               )}
             </div>
@@ -518,7 +518,7 @@ export default function TranscribeClient() {
           {hasResult && (
             <div className="space-y-4">
 
-              {/* Meta bar — language + duration + action buttons */}
+              {/* Meta bar- language + duration + action buttons */}
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] rounded">
@@ -570,14 +570,14 @@ export default function TranscribeClient() {
               {/* Full transcript textarea (editable) */}
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-medium text-[#737373] uppercase tracking-wide">
-                  Full transcript — edit freely
+                  Full transcript- edit freely
                 </label>
                 <textarea
                   value={editedText}
                   onChange={(e) => setEditedText(e.target.value)}
                   rows={10}
                   className="w-full text-sm text-[#171717] dark:text-[#E5E5E5] bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-2.5 resize-y focus:outline-none focus:border-[#6366F1] transition-colors leading-relaxed"
-                  aria-label="Transcript text — editable"
+                  aria-label="Transcript text- editable"
                   spellCheck
                 />
                 <p className="text-[10px] text-[#A3A3A3] text-right">
@@ -658,7 +658,7 @@ export default function TranscribeClient() {
 
       {/* Privacy note */}
       <p className="text-xs text-[#A3A3A3] text-center">
-        Your file is sent to Google Gemini for transcription and immediately discarded — never stored.
+        Your file is sent to Google Gemini for transcription and immediately discarded- never stored.
       </p>
     </div>
   );

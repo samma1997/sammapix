@@ -125,7 +125,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Programmatic resize pages — driven from lib/resize-platforms.ts
+  // Programmatic resize pages- driven from lib/resize-platforms.ts
   const resizePages: MetadataRoute.Sitemap = getAllPlatforms().map((p) => ({
     url: `${APP_URL}/resize/${p.slug}`,
     lastModified: new Date(),

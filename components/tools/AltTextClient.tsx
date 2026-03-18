@@ -260,7 +260,7 @@ export default function AltTextClient() {
               onClick={() => signIn()}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
             >
-              Sign in — it&apos;s free
+              Sign in- it&apos;s free
             </button>
           </div>
         </div>
@@ -309,7 +309,7 @@ export default function AltTextClient() {
               Drop images here or click to upload
             </p>
             <p className="text-xs text-[#737373] mt-0.5">
-              JPG, PNG, WebP, GIF — multiple files supported
+              JPG, PNG, WebP, GIF- multiple files supported
             </p>
           </div>
         </div>

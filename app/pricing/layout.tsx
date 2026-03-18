@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing — SammaPix Free vs Pro Plans",
+  title: "Pricing - SammaPix Free vs Pro Plans",
   description:
     "SammaPix is free forever for core tools. Pro plan at $7/month: unlimited AI rename, 100 files at once, ZIP download, no ads.",
   keywords: [
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: "https://sammapix.com/pricing",
   },
   openGraph: {
-    title: "SammaPix Pricing — Free vs Pro Plans",
+    title: "SammaPix Pricing - Free vs Pro Plans",
     description:
       "Free forever for core tools. Pro plan at $7/month: unlimited AI rename, 100 files, ZIP download, no ads. Cancel anytime.",
     type: "website",

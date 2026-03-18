@@ -108,7 +108,7 @@ async function reverseGeocode(
   return { country, displayName };
 }
 
-// Country colors — one per country (deterministic hash)
+// Country colors- one per country (deterministic hash)
 const COUNTRY_COLORS = [
   "#6366F1",
   "#EC4899",
@@ -212,7 +212,7 @@ export default function TravelMapClient() {
   // ── Build Leaflet map once CSS is ready + entering "map" state ─────────────
   useEffect(() => {
     if (uiState !== "map" || points.length === 0) return;
-    // Leaflet CSS loaded statically via page import — always ready
+    // Leaflet CSS loaded statically via page import- always ready
     if (!mapContainerRef.current) return;
     if (leafletMapRef.current) return;
 
@@ -322,7 +322,7 @@ export default function TravelMapClient() {
         map.invalidateSize();
       });
 
-      // ResizeObserver — handles container size changes cleanly
+      // ResizeObserver- handles container size changes cleanly
       resizeObserver = new ResizeObserver(() => map.invalidateSize());
       resizeObserver.observe(container);
 
@@ -424,7 +424,7 @@ export default function TravelMapClient() {
           else if (exifData?.CreateDate) date = new Date(exifData.CreateDate);
           return { file, lat: gps.latitude, lon: gps.longitude, date };
         } catch {
-          errorMessages.push(`Could not read EXIF from ${file.name} — skipped.`);
+          errorMessages.push(`Could not read EXIF from ${file.name}- skipped.`);
           return null;
         }
       })
@@ -443,7 +443,7 @@ export default function TravelMapClient() {
     setProgressMessage("Almost ready…");
     setProgressPercent(80);
 
-    // ── Step 2: Fast thumbnails — exifr embedded or direct JPEG URL ─────────
+    // ── Step 2: Fast thumbnails- exifr embedded or direct JPEG URL ─────────
     // (HEIC API conversion runs in background AFTER map is shown)
     const rawWithThumb = await Promise.all(
       rawPoints.map(async (p) => {
@@ -455,7 +455,7 @@ export default function TravelMapClient() {
           }
         } catch { /* skip */ }
         if (!thumbnailUrl && !isHeicFile(p.file)) {
-          // Direct blob URL works for JPEG, PNG, WebP — anything the browser can display
+          // Direct blob URL works for JPEG, PNG, WebP- anything the browser can display
           thumbnailUrl = URL.createObjectURL(p.file);
         }
         return { ...p, thumbnailUrl };
@@ -516,7 +516,7 @@ export default function TravelMapClient() {
           } catch { /* skip */ }
         }
       };
-      // Fire and forget — map is already shown
+      // Fire and forget- map is already shown
       Promise.all(Array.from({ length: Math.min(CONCURRENCY, heicPoints.length) }, () => heicWorker()));
     }
 
@@ -724,7 +724,7 @@ export default function TravelMapClient() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag travel photos to upload"
+          aria-label="Drop zone- click or drag travel photos to upload"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
@@ -766,7 +766,7 @@ export default function TravelMapClient() {
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              All processing happens in your browser — photos never leave your device
+              All processing happens in your browser- photos never leave your device
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
@@ -806,7 +806,7 @@ export default function TravelMapClient() {
                 : progressPercent < 70
                 ? "Building your travel route..."
                 : progressPercent < 95
-                ? "Almost there — preparing your map..."
+                ? "Almost there- preparing your map..."
                 : "Your map is ready!"}
             </p>
             <p className="text-xs text-[#A3A3A3]">
@@ -853,7 +853,7 @@ export default function TravelMapClient() {
                   Fetching location names... {geocodingProgress.current}/{geocodingProgress.total}
                 </p>
                 <p className="text-xs text-[#A3A3A3]">
-                  1 request/sec (Nominatim limit) — map is already usable
+                  1 request/sec (Nominatim limit)- map is already usable
                 </p>
               </div>
               <div className="shrink-0 w-24 h-1.5 bg-[#E5E5E5] dark:bg-[#333] rounded-full overflow-hidden">
@@ -891,7 +891,7 @@ export default function TravelMapClient() {
             </div>
           )}
 
-          {/* Stats bar — above the map */}
+          {/* Stats bar- above the map */}
           <div className="grid grid-cols-3 gap-3">
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md p-3 bg-white dark:bg-[#1E1E1E] flex items-center gap-3">
               <Globe className="h-4 w-4 text-[#737373] shrink-0" strokeWidth={1.5} />
@@ -926,7 +926,7 @@ export default function TravelMapClient() {
             </div>
           </div>
 
-          {/* Map container — isolation:isolate traps all Leaflet z-indexes so the map never overlaps the navbar */}
+          {/* Map container- isolation:isolate traps all Leaflet z-indexes so the map never overlaps the navbar */}
           <div
             className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden"
             style={{ isolation: "isolate" }}
@@ -938,7 +938,7 @@ export default function TravelMapClient() {
             />
           </div>
 
-          {/* Photo strip — always shown for local uploads */}
+          {/* Photo strip- always shown for local uploads */}
           {!isSharedView && (
             <div>
               <p className="text-xs font-semibold text-[#525252] uppercase tracking-wide mb-2">
@@ -953,7 +953,7 @@ export default function TravelMapClient() {
                     <button
                       key={i}
                       onClick={() => handlePanToPoint(i)}
-                      title={`${p.name} — ${p.displayName || p.country || "Unknown"}`}
+                      title={`${p.name}- ${p.displayName || p.country || "Unknown"}`}
                       className="shrink-0 flex flex-col items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] rounded"
                       style={{ width: "72px" }}
                     >
@@ -1066,7 +1066,7 @@ export default function TravelMapClient() {
 
             {/* Actions */}
             <div className="space-y-2">
-              {/* Share map button — only in non-shared mode */}
+              {/* Share map button- only in non-shared mode */}
               {!isSharedView && (
                 <button
                   onClick={handleShareMap}

@@ -7,7 +7,7 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Travel Photo Map Maker — Visualize GPS Routes Free | SammaPix",
+  title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
   description:
     "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/travelmap` },
   openGraph: {
-    title: "Travel Photo Map Maker — Visualize GPS Routes Free | SammaPix",
+    title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
     description:
       "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
     url: `${APP_URL}/tools/travelmap`,
@@ -51,7 +51,7 @@ const features = [
     icon: <Globe className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Counts countries",
     description:
-      "TravelMap automatically groups your photos by country and shows a country breakdown with photo counts — see exactly which countries you covered.",
+      "TravelMap automatically groups your photos by country and shows a country breakdown with photo counts- see exactly which countries you covered.",
   },
   {
     icon: <Navigation className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
@@ -63,13 +63,13 @@ const features = [
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% private",
     description:
-      "GPS coordinates are extracted from EXIF data entirely inside your browser. Your photos never leave your device — only lat/lon values hit our API for location names.",
+      "GPS coordinates are extracted from EXIF data entirely inside your browser. Your photos never leave your device- only lat/lon values hit our API for location names.",
   },
   {
     icon: <Camera className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Works with any camera",
     description:
-      "iPhone HEIC, Android JPG, mirrorless cameras with GPS — if the file has GPS in its EXIF, TravelMap plots it. Sorted chronologically by capture date.",
+      "iPhone HEIC, Android JPG, mirrorless cameras with GPS- if the file has GPS in its EXIF, TravelMap plots it. Sorted chronologically by capture date.",
   },
   {
     icon: <MapPin className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
@@ -88,7 +88,7 @@ const steps = [
   {
     n: "2",
     title: "GPS is read locally",
-    desc: "TravelMap reads the GPS coordinates from each photo's EXIF data entirely in your browser — no upload needed.",
+    desc: "TravelMap reads the GPS coordinates from each photo's EXIF data entirely in your browser- no upload needed.",
   },
   {
     n: "3",
@@ -100,7 +100,7 @@ const steps = [
 const faqs = [
   {
     q: "What if my photos have no GPS?",
-    a: "Photos without GPS data are silently skipped. Only photos with valid coordinates are plotted. If none of your photos have GPS, you will see an error message. To check if a photo has GPS, right-click it on macOS and choose 'Get Info' — the location appears under the More Info section.",
+    a: "Photos without GPS data are silently skipped. Only photos with valid coordinates are plotted. If none of your photos have GPS, you will see an error message. To check if a photo has GPS, right-click it on macOS and choose 'Get Info'- the location appears under the More Info section.",
   },
   {
     q: "Can I export the map as a PNG?",
@@ -108,11 +108,11 @@ const faqs = [
   },
   {
     q: "Does this work with iPhone photos?",
-    a: "Yes. iPhone photos in HEIC format include GPS coordinates in EXIF data by default — as long as Location Services was enabled for the Camera app when the photo was taken. TravelMap reads HEIC and JPG equally well.",
+    a: "Yes. iPhone photos in HEIC format include GPS coordinates in EXIF data by default- as long as Location Services was enabled for the Camera app when the photo was taken. TravelMap reads HEIC and JPG equally well.",
   },
   {
     q: "How accurate is the distance calculation?",
-    a: "TravelMap uses the Haversine formula to calculate great-circle distance (straight-line as the crow flies) between consecutive GPS points. It does not account for roads or actual travel routes — think of it as a lower-bound estimate of the distance your journey covered.",
+    a: "TravelMap uses the Haversine formula to calculate great-circle distance (straight-line as the crow flies) between consecutive GPS points. It does not account for roads or actual travel routes- think of it as a lower-bound estimate of the distance your journey covered.",
   },
 ];
 
@@ -121,7 +121,7 @@ export default function TravelMapPage() {
     <main>
       <ToolHeader
         title="TravelMap"
-        description="Drop your travel photos — GPS coordinates are read locally and plotted on an interactive map. See your journey, count countries, measure distance."
+        description="Drop your travel photos - GPS coordinates are read locally and plotted on an interactive map. See your journey, count countries, measure distance."
         icon={Map}
         accentColor="#3B82F6"
       />
@@ -160,7 +160,7 @@ export default function TravelMapPage() {
             TravelMap is a free browser-based tool that reads GPS coordinates from your photo EXIF data and visualizes them on an interactive map powered by OpenStreetMap. Each photo appears as a numbered pin, color-coded by country, connected by a dashed line in chronological order of capture date.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed">
-            TravelMap calculates total distance traveled using the Haversine formula, counts countries visited, and shows a breakdown of photos per country. It supports JPG and HEIC files. No photo data is ever uploaded — only GPS coordinates are sent to the reverse geocoding API to resolve location names.
+            TravelMap calculates total distance traveled using the Haversine formula, counts countries visited, and shows a breakdown of photos per country. It supports JPG and HEIC files. No photo data is ever uploaded- only GPS coordinates are sent to the reverse geocoding API to resolve location names.
           </p>
         </div>
       </section>
@@ -326,7 +326,7 @@ export default function TravelMapPage() {
                 name: "Does TravelMap upload my photos to a server?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. TravelMap is completely private. GPS coordinates are extracted from your photos entirely in the browser. Only the GPS coordinates are sent to OpenStreetMap for reverse geocoding to get location names — your actual photos never leave your device.",
+                  text: "No. TravelMap is completely private. GPS coordinates are extracted from your photos entirely in the browser. Only the GPS coordinates are sent to OpenStreetMap for reverse geocoding to get location names- your actual photos never leave your device.",
                 },
               },
               {
@@ -334,7 +334,7 @@ export default function TravelMapPage() {
                 name: "How accurate is the distance calculation?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "TravelMap uses the Haversine formula to calculate great-circle distance (straight-line as the crow flies) between consecutive GPS points. It does not account for roads or actual travel routes — think of it as a lower-bound estimate of the distance your journey covered.",
+                  text: "TravelMap uses the Haversine formula to calculate great-circle distance (straight-line as the crow flies) between consecutive GPS points. It does not account for roads or actual travel routes- think of it as a lower-bound estimate of the distance your journey covered.",
                 },
               },
               {
@@ -342,7 +342,7 @@ export default function TravelMapPage() {
                 name: "What if my photos don't have GPS data?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Photos without GPS data are silently skipped. Only photos with valid coordinates are plotted on the map. To check if a photo has GPS, right-click it on macOS and choose 'Get Info' — the location appears under More Info section.",
+                  text: "Photos without GPS data are silently skipped. Only photos with valid coordinates are plotted on the map. To check if a photo has GPS, right-click it on macOS and choose 'Get Info'- the location appears under More Info section.",
                 },
               },
               {

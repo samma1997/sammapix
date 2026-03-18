@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "10 Best Travel Photography Tips for Beginners (2026 Guide)",
     description:
-      "Composition, light, gear, and GPS tagging — 10 proven travel photography tips that will immediately improve your shots.",
+      "Composition, light, gear, and GPS tagging- 10 proven travel photography tips that will immediately improve your shots.",
     url: `${APP_URL}/blog/travel-photography-tips-beginners`,
     type: "article",
     publishedTime: "2026-03-03",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "10 Best Travel Photography Tips for Beginners (2026 Guide)",
     description:
-      "Composition, light, gear, and GPS tagging — 10 proven travel photography tips that will immediately improve your shots.",
+      "Composition, light, gear, and GPS tagging- 10 proven travel photography tips that will immediately improve your shots.",
     creator: "@lucasammarco",
   },
 };
@@ -143,7 +143,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
               Travel photography is one of the most rewarding creative skills
               you can develop. The problem is most beginners come home with
               thousands of mediocre shots and a handful of good ones. These 10
-              tips will flip that ratio — giving you a systematic approach to
+              tips will flip that ratio- giving you a systematic approach to
               capturing better travel photos from day one.
             </p>
           </header>
@@ -159,7 +159,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Travel photography starts with showing up at the right place, at the right time — Photo by Annie Spratt on Unsplash
+                Travel photography starts with showing up at the right place, at the right time - Photo by Annie Spratt on Unsplash
               </figcaption>
             </figure>
 
@@ -172,23 +172,23 @@ export default function TravelPhotographyTipsBeginnersPage() {
               this: the photos looked great on the camera screen, but when
               viewed on a laptop they feel flat, cluttered, or just unremarkable.
               This gap between expectation and result usually comes down to a
-              small set of repeatable mistakes — not equipment.
+              small set of repeatable mistakes- not equipment.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               You do not need an expensive camera to take compelling travel
               photos. A modern smartphone with deliberate technique will
               outperform a DSLR used thoughtlessly. The tips below focus on
-              decisions you make before pressing the shutter — decisions that
+              decisions you make before pressing the shutter- decisions that
               cost nothing and make the biggest difference.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 1 — Learn the rule of thirds before anything else
+              Tip 1 - Learn the rule of thirds before anything else
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The rule of thirds is the single fastest way to improve composition.
-              Divide your frame into a 3x3 grid — most cameras and phones can
+              Divide your frame into a 3x3 grid- most cameras and phones can
               display this overlay. Place your subject at one of the four
               intersection points, not dead center.
             </p>
@@ -206,7 +206,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 2 — Shoot during golden hour, always
+              Tip 2 - Shoot during golden hour, always
             </h2>
 
             <figure className="my-8">
@@ -217,13 +217,13 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Golden hour light transforms any scene into something extraordinary — Photo by Kalen Emsley on Unsplash
+                Golden hour light transforms any scene into something extraordinary - Photo by Kalen Emsley on Unsplash
               </figcaption>
             </figure>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Golden hour — the 40 to 60 minutes after sunrise and before sunset
-              — produces warm, directional light that flatters nearly every
+              Golden hour- the 40 to 60 minutes after sunrise and before sunset
+             - produces warm, directional light that flatters nearly every
               subject. Harsh midday sun creates deep shadows on faces, blown-out
               skies, and flat colors. The same location shot during golden hour
               looks completely different.
@@ -244,56 +244,56 @@ export default function TravelPhotographyTipsBeginnersPage() {
               exploring, food, and rest.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Blue hour — the 20 minutes after sunset — is equally valuable for
+              Blue hour- the 20 minutes after sunset- is equally valuable for
               cityscapes and long exposures. The sky turns a deep, saturated
               blue that complements artificial light beautifully. <a href="https://photographylife.com/landscapes/golden-hour" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Photography Life</a> has an in-depth guide to shooting during golden and blue hour with practical examples.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 3 — Look for leading lines
+              Tip 3 - Look for leading lines
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Leading lines are roads, paths, fences, rivers, staircases, or any
               linear element that draws the viewer&apos;s eye deeper into the
-              image. They create depth and a sense of journey — both of which are
+              image. They create depth and a sense of journey- both of which are
               central to travel photography.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               When you arrive at a new location, scan the scene for natural
               lines before raising your camera. A cobblestone alley leading to a
               cathedral, a long bridge disappearing into fog, a mountain road
-              curving into the distance — these are ready-made compositions.
+              curving into the distance- these are ready-made compositions.
               Position yourself so the line enters from one of the lower corners
               and moves toward your subject.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 4 — Change your perspective
+              Tip 4 - Change your perspective
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The eye-level, standing-straight shot is the default for most
-              people — and it is why most travel photos look the same. Getting
+              people- and it is why most travel photos look the same. Getting
               low, climbing higher, or shooting through a foreground element
               transforms a familiar subject into something fresh.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Get down to ground level for street markets, children, animals,
-              or flowers. Find elevated viewpoints — a rooftop terrace, a hill,
-              a bridge — for cityscapes and landscapes. Use doorways, arches,
+              or flowers. Find elevated viewpoints- a rooftop terrace, a hill,
+              a bridge- for cityscapes and landscapes. Use doorways, arches,
               or foliage as natural frames around your main subject. Each
               perspective shift produces a fundamentally different photograph
               from the same scene.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 5 — Include people for scale and story
+              Tip 5 - Include people for scale and story
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Architecture and landscape photos gain immediate impact when a
-              human figure is included. People provide scale — a tiny figure
+              human figure is included. People provide scale- a tiny figure
               standing in front of an enormous temple communicates size far more
               effectively than the temple alone. They also add narrative: the
               viewer wonders who this person is and why they are there.
@@ -302,7 +302,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
               You do not need to ask strangers to pose. A distant figure walking
               away from camera, a local vendor at a market stall, or a travel
               companion looking into the distance all work. The person does not
-              need to be the subject — they are an element that makes the
+              need to be the subject- they are an element that makes the
               composition more alive.
             </p>
 
@@ -314,17 +314,17 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Changing your perspective transforms familiar scenes into striking compositions — Photo by Luke Ellis-Craven on Unsplash
+                Changing your perspective transforms familiar scenes into striking compositions - Photo by Luke Ellis-Craven on Unsplash
               </figcaption>
             </figure>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 6 — Pack only the gear you will actually carry
+              Tip 6 - Pack only the gear you will actually carry
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The best camera is the one you have with you. This is not just a
-              cliche — it is the central gear reality of travel photography.
+              cliche- it is the central gear reality of travel photography.
               Heavy camera bags stay in hotels. The photographer who brings a
               mirrorless with a single versatile lens will outshoot the one who
               leaves their DSLR and three primes at the room.
@@ -342,10 +342,10 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Lens:</strong> A 24-70mm equivalent covers most travel situations
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Extra batteries:</strong> At least two — charging infrastructure is unpredictable
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Extra batteries:</strong> At least two- charging infrastructure is unpredictable
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Storage:</strong> Multiple small cards over one large card — a failed card should not ruin the entire trip
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Storage:</strong> Multiple small cards over one large card- a failed card should not ruin the entire trip
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">ND filter:</strong> Useful for waterfalls and bright midday light
@@ -359,11 +359,11 @@ export default function TravelPhotographyTipsBeginnersPage() {
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 7 — Shoot RAW for editing flexibility
+              Tip 7 - Shoot RAW for editing flexibility
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              RAW files preserve all the data captured by the sensor — they are
+              RAW files preserve all the data captured by the sensor- they are
               unprocessed and uncompressed. JPEG files apply in-camera
               processing and discard the data that did not survive the
               compression. For travel photography, where you rarely control the
@@ -380,16 +380,16 @@ export default function TravelPhotographyTipsBeginnersPage() {
               iPhone users shooting in ProRAW (available on iPhone 12 Pro and
               later) gain the same editing headroom. Check your Camera settings
               to enable it. Note that RAW files are significantly larger than
-              JPEGs — budget for additional storage accordingly.
+              JPEGs- budget for additional storage accordingly.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 8 — Enable GPS tagging and use it deliberately
+              Tip 8 - Enable GPS tagging and use it deliberately
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Every photo your smartphone takes can embed GPS coordinates in the
-              EXIF metadata. This is not just a convenience feature — it is a
+              EXIF metadata. This is not just a convenience feature- it is a
               long-term asset that transforms your photo archive into a
               geographic record of everywhere you have been.
             </p>
@@ -447,8 +447,8 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 SammaPix EXIF Remover
               </Link>{" "}
               to strip location data from any image you share publicly. You can
-              also view the full EXIF data of any photo — including lens, shutter
-              speed, and aperture — with{" "}
+              also view the full EXIF data of any photo- including lens, shutter
+              speed, and aperture- with{" "}
               <Link
                 href="/tools/exif"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -459,12 +459,12 @@ export default function TravelPhotographyTipsBeginnersPage() {
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 9 — Edit with restraint, not aggression
+              Tip 9 - Edit with restraint, not aggression
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Heavy-handed editing — oversaturated colors, crushed blacks, HDR
-              halos — dates a photograph instantly and telegraphs inexperience.
+              Heavy-handed editing- oversaturated colors, crushed blacks, HDR
+              halos- dates a photograph instantly and telegraphs inexperience.
               The goal of post-processing travel photos should be to enhance
               what was already there, not to create something that did not exist.
             </p>
@@ -476,8 +476,8 @@ export default function TravelPhotographyTipsBeginnersPage() {
               that is stylistic choice, not correction.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              If you want a specific filmic look — the warm grain of Kodak Gold,
-              the faded tones of expired slide film — apply it consistently
+              If you want a specific filmic look- the warm grain of Kodak Gold,
+              the faded tones of expired slide film- apply it consistently
               across your series rather than varying the style image by image.
               Consistency is what makes a travel gallery feel cohesive. The{" "}
               <Link
@@ -487,15 +487,15 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 SammaPix FilmLab
               </Link>{" "}
               tool lets you apply film emulation looks directly in your browser
-              — no Lightroom required.
+             - no Lightroom required.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
-              Tip 10 — Cull ruthlessly and share selectively
+              Tip 10 - Cull ruthlessly and share selectively
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The hardest skill in photography is not taking a great shot — it is
+              The hardest skill in photography is not taking a great shot- it is
               selecting the best shots from a thousand. Showing 50 photos from a
               trip to a friend dilutes the impact. Showing 10 carefully chosen
               images makes every one of them stronger.
@@ -571,8 +571,8 @@ export default function TravelPhotographyTipsBeginnersPage() {
               Do I need an expensive camera for travel photography?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              No. Modern smartphones — particularly iPhone Pro models and
-              flagship Android devices — produce excellent travel photos. The
+              No. Modern smartphones- particularly iPhone Pro models and
+              flagship Android devices- produce excellent travel photos. The
               skills covered in this guide apply regardless of camera. Buy better
               glass before you buy a better body, and consider whether the
               additional weight of a dedicated camera is worth the benefit for
@@ -590,7 +590,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
               >
                 SammaPix EXIF Lens
               </Link>{" "}
-              tool. Drop any photo in and it will display all EXIF metadata —
+              tool. Drop any photo in and it will display all EXIF metadata- 
               including GPS coordinates, camera model, lens, aperture, shutter
               speed, and ISO. Everything runs in your browser with no uploads.
             </p>
@@ -602,7 +602,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
               There is no fixed number, but a useful practice is to shoot until
               you have what you came for, then stop. Bracketing exposures and
               trying multiple compositions is good practice. Shooting 50 nearly
-              identical frames of the same subject is not — it creates editing
+              identical frames of the same subject is not- it creates editing
               work without producing better results.
             </p>
           </div>
@@ -657,7 +657,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Map your GPS-tagged photos with TravelMap, sort them by
                 location with GeoSort, or explore your EXIF data with EXIF
-                Lens — all free, all in-browser.
+                Lens- all free, all in-browser.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link

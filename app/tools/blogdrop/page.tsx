@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { FileText } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BlogDrop — Blog-Ready Images in One Drop | SammaPix",
+  title: "BlogDrop - Blog-Ready Images in One Drop | SammaPix",
   description:
     "Blog-ready images in one drop. Compress, resize to 1200px, convert to WebP, and AI-rename with SEO blog names. Free combo tool.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/blogdrop`,
   },
   openGraph: {
-    title: "BlogDrop — Blog-Ready Images in One Drop | SammaPix",
+    title: "BlogDrop - Blog-Ready Images in One Drop | SammaPix",
     description:
       "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
     url: `${APP_URL}/tools/blogdrop`,
@@ -45,7 +45,7 @@ const features = [
   {
     title: "Blog-optimized sizing",
     description:
-      "Automatically resize to 1200px max width — the optimal size for most blog layouts and CMS platforms.",
+      "Automatically resize to 1200px max width- the optimal size for most blog layouts and CMS platforms.",
   },
   {
     title: "SEO-ready filenames",
@@ -55,7 +55,7 @@ const features = [
   {
     title: "4-step pipeline, zero effort",
     description:
-      "Compress, resize, convert, and rename all happen automatically. Upload and download — that's it.",
+      "Compress, resize, convert, and rename all happen automatically. Upload and download- that's it.",
   },
 ];
 
@@ -142,6 +142,25 @@ export default function BlogDropPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Frequently asked questions</h2>
+          <dl className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {[
+              { q: "What CMS platforms does BlogDrop work with?", a: "BlogDrop outputs optimized WebP images with SEO filenames that work with any CMS -- WordPress, Ghost, Webflow, Squarespace, or any platform that accepts image uploads." },
+              { q: "Why 1200px max width?", a: "1200px is the standard content width for most blog layouts. Images wider than 1200px add file size without any visual benefit on most screens." },
+              { q: "Do I need an account?", a: "Yes, because BlogDrop includes AI Rename for SEO filenames. A free account is required for AI steps. You get 10 free AI operations per day." },
+            ].map((faq) => (
+              <div key={faq.q} className="py-4">
+                <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>
+                <dd className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

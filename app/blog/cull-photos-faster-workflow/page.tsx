@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cull Photos 10x Faster: Complete Workflow Guide | SammaPix",
     description:
-      "Stop spending hours on photo selection. Learn the exact workflow professional photographers use to cull photos fast — rating systems, keyboard shortcuts, and keep rate benchmarks.",
+      "Stop spending hours on photo selection. Learn the exact workflow professional photographers use to cull photos fast- rating systems, keyboard shortcuts, and keep rate benchmarks.",
     url: "https://sammapix.com/blog/cull-photos-faster-workflow",
     type: "article",
     publishedTime: "2026-02-10",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cull Photos 10x Faster: Complete Workflow Guide",
     description:
-      "The exact workflow professionals use to cull photos fast — rating systems, keyboard shortcuts, and keep rate benchmarks.",
+      "The exact workflow professionals use to cull photos fast- rating systems, keyboard shortcuts, and keep rate benchmarks.",
     creator: "@lucasammarco",
   },
 };
@@ -140,7 +140,7 @@ export default function CullPhotosFasterWorkflowPage() {
               A professional wedding photographer returns from a shoot with
               1,400 raw files. Before a single edit happens, every one of those
               frames must be evaluated and the weakest 80% discarded. That
-              process — photo culling — is where most photographers silently lose
+              process- photo culling- is where most photographers silently lose
               hours every week. This guide lays out a complete, repeatable
               workflow to cull photos fast, cut that time dramatically, and
               deliver better results to your clients.
@@ -157,7 +157,7 @@ export default function CullPhotosFasterWorkflowPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Culling is the first and most time-consuming step in any post-production workflow — Photo by Unsplash
+                Culling is the first and most time-consuming step in any post-production workflow - Photo by Unsplash
               </figcaption>
             </figure>
 
@@ -167,7 +167,7 @@ export default function CullPhotosFasterWorkflowPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Photo culling is the process of reviewing every image from a shoot
-              and selecting which ones to keep, edit, and deliver — and which
+              and selecting which ones to keep, edit, and deliver- and which
               ones to reject. The word comes from the Old French &ldquo;coillir,&rdquo;
               meaning to gather or collect. In photography, it has come to mean
               the opposite: the discipline of eliminating rather than keeping.
@@ -175,7 +175,7 @@ export default function CullPhotosFasterWorkflowPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Culling matters because editing time scales directly with the
               number of images you process. If you deliver 400 photos from a
-              wedding, editing starts from the 400 best frames — not from all
+              wedding, editing starts from the 400 best frames- not from all
               1,400 you shot. Every frame you reject during culling is time
               saved in Lightroom or Capture One. It is also a quality
               decision: clients and audiences see sharper curation as a sign of
@@ -279,13 +279,13 @@ export default function CullPhotosFasterWorkflowPage() {
 
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">1 star:</strong> Technically acceptable — in focus, correctly exposed, subject present. Worth keeping in the library.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">1 star:</strong> Technically acceptable- in focus, correctly exposed, subject present. Worth keeping in the library.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">2 stars:</strong> Good shot — technically strong and compositionally interesting. Candidate for editing.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">2 stars:</strong> Good shot- technically strong and compositionally interesting. Candidate for editing.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">3 stars:</strong> Hero shot — the best frame of a moment. Goes to the client or portfolio.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">3 stars:</strong> Hero shot- the best frame of a moment. Goes to the client or portfolio.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">No rating:</strong> Reject. Blurry, closed eyes, duplicate, technically unusable.
@@ -326,7 +326,7 @@ export default function CullPhotosFasterWorkflowPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                The fastest cullers use keyboard shortcuts exclusively — no mouse, no hesitation — Photo by Unsplash
+                The fastest cullers use keyboard shortcuts exclusively- no mouse, no hesitation - Photo by Unsplash
               </figcaption>
             </figure>
 
@@ -337,7 +337,7 @@ export default function CullPhotosFasterWorkflowPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Keyboard-driven culling is the single highest-leverage speed
               improvement available. When your hands never leave the keyboard,
-              the rhythm of reviewing images becomes nearly unconscious — you
+              the rhythm of reviewing images becomes nearly unconscious- you
               are evaluating and deciding in parallel, not sequentially.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -410,7 +410,7 @@ export default function CullPhotosFasterWorkflowPage() {
               <kbd className="inline-block px-1.5 py-0.5 text-xs font-medium text-gray-700 dark:text-[#E5E5E5] bg-gray-100 dark:bg-[#252525] border border-gray-200 dark:border-[#333] rounded">X</kbd>{" "}
               /{" "}
               <kbd className="inline-block px-1.5 py-0.5 text-xs font-medium text-gray-700 dark:text-[#E5E5E5] bg-gray-100 dark:bg-[#252525] border border-gray-200 dark:border-[#333] rounded">→</kbd>{" "}
-              trio exclusively during the first pass. Pick, reject, or advance —
+              trio exclusively during the first pass. Pick, reject, or advance- 
               nothing else. Save star promotion for the second pass when
               you have eliminated the noise.
             </p>
@@ -436,7 +436,7 @@ export default function CullPhotosFasterWorkflowPage() {
               </Link>{" "}
               solves this with a side-by-side compare view that is controlled
               entirely with the keyboard. You load your folder, and CullPix
-              presents images in pairs — no clicking through menus, no dragging
+              presents images in pairs- no clicking through menus, no dragging
               thumbnails into a compare panel.
             </p>
 
@@ -446,10 +446,10 @@ export default function CullPhotosFasterWorkflowPage() {
 
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Side-by-side compare.</strong> Two images displayed at equal size, synchronized zoom and pan. Press a key to keep the left or the right — the winner stays, the loser is marked for rejection, and the next candidate slides in automatically.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Side-by-side compare.</strong> Two images displayed at equal size, synchronized zoom and pan. Press a key to keep the left or the right- the winner stays, the loser is marked for rejection, and the next candidate slides in automatically.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Keyboard-only interaction.</strong> No mouse required after the initial folder selection. Every action — advance, rate, reject, zoom, compare — has a keyboard shortcut. The culling rhythm becomes continuous.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Keyboard-only interaction.</strong> No mouse required after the initial folder selection. Every action- advance, rate, reject, zoom, compare- has a keyboard shortcut. The culling rhythm becomes continuous.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Browser-based, no upload.</strong> Your RAW files and JPEGs never leave your device. CullPix runs entirely in the browser using the File System Access API, so privacy is preserved and there is no waiting for uploads to complete.
@@ -477,7 +477,7 @@ export default function CullPhotosFasterWorkflowPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 1 — Import and do nothing else
+              Step 1 - Import and do nothing else
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -495,11 +495,11 @@ export default function CullPhotosFasterWorkflowPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 2 — The rapid first pass (reject obvious failures)
+              Step 2 - The rapid first pass (reject obvious failures)
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Move through every image at a steady pace — roughly 3–5 seconds
+              Move through every image at a steady pace- roughly 3–5 seconds
               per frame. At this speed, you are only looking for disqualifying
               problems: severe motion blur, missed focus, closed eyes on the
               primary subject, completely wrong exposure, accidental frames from
@@ -517,11 +517,11 @@ export default function CullPhotosFasterWorkflowPage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               A 1,400-image first pass at 4 seconds per frame takes under two
-              hours — and typically eliminates 40–50% of all frames.
+              hours- and typically eliminates 40–50% of all frames.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 3 — Filter to unrated and do the compare pass
+              Step 3 - Filter to unrated and do the compare pass
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -541,7 +541,7 @@ export default function CullPhotosFasterWorkflowPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 4 — Assign your final ratings
+              Step 4 - Assign your final ratings
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -557,7 +557,7 @@ export default function CullPhotosFasterWorkflowPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 5 — Delete rejects and move to editing
+              Step 5 - Delete rejects and move to editing
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -594,8 +594,8 @@ export default function CullPhotosFasterWorkflowPage() {
               Cull by scene, not by chronology.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Organize the import into named folders by scene — Getting Ready,
-              Ceremony, Cocktail Hour, Reception — before you start culling.
+              Organize the import into named folders by scene - Getting Ready,
+              Ceremony, Cocktail Hour, Reception- before you start culling.
               Culling within scenes keeps your comparison decisions contextual.
               You are always choosing between two ceremony shots, not between a
               ceremony shot and a reception shot taken at different light
@@ -620,7 +620,7 @@ export default function CullPhotosFasterWorkflowPage() {
               A slightly soft-focus frame where the emotion is perfect is often
               more valuable to a wedding client than a technically sharp frame
               where the subject looks distracted. During your compare pass,
-              weight expression and emotion heavily — especially for ceremony
+              weight expression and emotion heavily- especially for ceremony
               moments, first looks, and toasts. Technical criteria matter more
               for portraits and formals.
             </p>
@@ -642,8 +642,8 @@ export default function CullPhotosFasterWorkflowPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               One of the most common questions from photographers refining their
-              culling workflow is: how many should I be keeping? Keep rate — the
-              percentage of total frames you select as keepers — varies
+              culling workflow is: how many should I be keeping? Keep rate- the
+              percentage of total frames you select as keepers- varies
               significantly by genre and shooting style.
             </p>
 
@@ -696,8 +696,8 @@ export default function CullPhotosFasterWorkflowPage() {
               If your keep rate is consistently above these ranges, your first
               pass is not aggressive enough. You are holding onto too many
               technically acceptable but ultimately redundant frames. A higher
-              keep rate means more editing time per shoot — and more storage
-              consumed — without a proportional improvement in deliverables.
+              keep rate means more editing time per shoot- and more storage
+              consumed- without a proportional improvement in deliverables.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               If your keep rate is consistently below these ranges, check
@@ -715,7 +715,7 @@ export default function CullPhotosFasterWorkflowPage() {
               >
                 SammaPix TwinHunt tool
               </Link>{" "}
-              detects visually similar frames using perceptual hashing — useful
+              detects visually similar frames using perceptual hashing- useful
               for identifying burst clusters you missed during import. See our
               full guide on{" "}
               <Link
@@ -737,7 +737,7 @@ export default function CullPhotosFasterWorkflowPage() {
               What is the difference between culling and editing photos?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Culling is the selection process — deciding which images are worth
+              Culling is the selection process- deciding which images are worth
               keeping and which should be rejected. Editing is applying
               adjustments (exposure, color, retouching) to the selected images.
               Culling always comes first. Editing an image you would eventually
@@ -751,7 +751,7 @@ export default function CullPhotosFasterWorkflowPage() {
               Lightroom is capable but not optimized for fast culling. Its
               compare view requires extra steps to enter, and the full
               application is heavier than tools designed purely for selection.
-              Dedicated tools — including browser-based options like CullPix —
+              Dedicated tools- including browser-based options like CullPix- 
               are faster to navigate because culling is their only job. Many
               professionals do their culling in a lighter tool and import only
               the selected files into Lightroom.
@@ -774,7 +774,7 @@ export default function CullPhotosFasterWorkflowPage() {
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Use the keyboard exclusively and maximize your culling tool to
-              full screen. Avoid zooming out to filmstrip view — it creates
+              full screen. Avoid zooming out to filmstrip view- it creates
               visual noise and slows decisions. For compare view on small
               screens, prioritize checking sharpness at 100% zoom on the
               subject&apos;s eyes rather than evaluating composition (which is better
@@ -892,7 +892,7 @@ export default function CullPhotosFasterWorkflowPage() {
                   Tools
                 </span>
                 <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  TwinHunt — Find Near-Duplicate Photos in Your Browser
+                  TwinHunt - Find Near-Duplicate Photos in Your Browser
                 </span>
               </Link>
             </div>

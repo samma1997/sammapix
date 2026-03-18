@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Add Film Effects to Digital Photos Free (No Photoshop) | SammaPix",
   description:
-    "Learn how to add realistic film effects to digital photos for free — grain, color shifts, fading, vignette, and light leaks — without Photoshop. Includes Kodak Portra, Fuji Superia, and Ilford HP5 looks.",
+    "Learn how to add realistic film effects to digital photos for free- grain, color shifts, fading, vignette, and light leaks- without Photoshop. Includes Kodak Portra, Fuji Superia, and Ilford HP5 looks.",
   alternates: {
     canonical:
       "https://sammapix.com/blog/film-effects-digital-photos-free",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Add Film Effects to Digital Photos Free (No Photoshop)",
     description:
-      "Grain, color shifts, vignette, and light leaks — recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on any digital photo. Free, in-browser, no Photoshop.",
+      "Grain, color shifts, vignette, and light leaks- recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on any digital photo. Free, in-browser, no Photoshop.",
     url: "https://sammapix.com/blog/film-effects-digital-photos-free",
     type: "article",
     publishedTime: "2026-02-14",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Add Film Effects to Digital Photos Free (No Photoshop)",
     description:
-      "Grain, color shifts, vignette, and light leaks — recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on any digital photo. Free, in-browser.",
+      "Grain, color shifts, vignette, and light leaks- recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on any digital photo. Free, in-browser.",
     creator: "@lucasammarco",
   },
 };
@@ -46,7 +46,7 @@ const articleSchema = {
   headline:
     "How to Add Film Effects to Digital Photos for Free (No Photoshop)",
   description:
-    "Learn how to add realistic film effects to digital photos for free — grain, color shifts, fading, vignette, and light leaks — without Photoshop. Includes Kodak Portra, Fuji Superia, and Ilford HP5 looks.",
+    "Learn how to add realistic film effects to digital photos for free- grain, color shifts, fading, vignette, and light leaks- without Photoshop. Includes Kodak Portra, Fuji Superia, and Ilford HP5 looks.",
   url: "https://sammapix.com/blog/film-effects-digital-photos-free",
   datePublished: "2026-02-14",
   dateModified: "2026-02-14",
@@ -143,7 +143,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             </h1>
 
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
-              Film photography is having a genuine renaissance — but buying,
+              Film photography is having a genuine renaissance- but buying,
               loading, and developing actual film costs money and time most of
               us do not have. The good news: you can get film effect photos for
               free on any digital image, in a browser, without touching
@@ -175,13 +175,13 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <figure className="my-8">
               <img
                 src="https://images.unsplash.com/photo-1495745966610-2a67f2297e5e?w=800&q=80"
-                alt="Vintage film camera on a wooden surface — the analog aesthetic that film effects replicate"
+                alt="Vintage film camera on a wooden surface- the analog aesthetic that film effects replicate"
                 className="w-full rounded-lg"
                 loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
                 The analog camera aesthetic millions of photographers want to
-                recreate digitally — Photo via Unsplash
+                recreate digitally - Photo via Unsplash
               </figcaption>
             </figure>
 
@@ -203,8 +203,8 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               </a>
               . Kodak restarted several discontinued emulsions. Fujifilm
               raised prices on Superia and Velvia rather than discontinuing
-              them. New cameras using old film formats — from Lomography and
-              Reto — are selling out. The analog revival is not a niche
+              them. New cameras using old film formats- from Lomography and
+              Reto- are selling out. The analog revival is not a niche
               hipster moment. It is a broad cultural shift.
             </p>
 
@@ -214,7 +214,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               sterile. Every photo is sharp, noise-free, and correctly
               exposed. Film, by contrast, is imperfect in ways that feel
               human. The grain, the slight color casts, the unpredictable
-              exposures — these imperfections create warmth and personality
+              exposures- these imperfections create warmth and personality
               that a technically correct digital image often lacks.
             </p>
 
@@ -222,7 +222,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               But film photography has real barriers. A roll of Kodak Portra
               400 costs $18 to $22. Developing and scanning adds another $15
               to $30. You shoot 36 frames and wait days for results. Most
-              people want the look without the commitment — and that is
+              people want the look without the commitment- and that is
               exactly what film effect digital processing delivers.
             </p>
 
@@ -245,7 +245,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Grain is the most recognizable film characteristic. It comes
-              from the silver halide crystals in the film emulsion — the
+              from the silver halide crystals in the film emulsion- the
               particles that react to light to create the image. Faster films
               (higher ISO) use larger crystals to capture more light, which
               produces coarser, more visible grain. Ilford HP5 at ISO 400 has
@@ -256,7 +256,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Digital noise and film grain are fundamentally different. Digital
               noise appears as uniform colored pixel clusters, often with a
-              magenta or green cast. Film grain is organic — irregular,
+              magenta or green cast. Film grain is organic- irregular,
               luminance-based, and distributed unevenly across the frame.
               Good film grain simulation uses luminance variation rather than
               random color noise, and applies more grain to the midtones and
@@ -269,7 +269,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Every film stock renders color differently. This is not a
-              defect — it is part of what gives each stock its character.
+              defect- it is part of what gives each stock its character.
               Kodak Portra is famous for warm, flattering skin tones with a
               slight orange-amber bias. Fuji Superia pulls slightly toward
               green in the shadows and cyan in the highlights. Kodak Ektar
@@ -279,10 +279,10 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Digitally, color shift is achieved through curves adjustments
-              and color grading — pushing specific channels in specific tonal
+              and color grading- pushing specific channels in specific tonal
               regions. A Portra look lifts the red and yellow channels in
               the midtones. A Fuji Superia look adds a hint of green to the
-              shadows. These are precise, channel-specific adjustments —
+              shadows. These are precise, channel-specific adjustments- 
               not simply adding a warm or cool filter to the entire image.
             </p>
 
@@ -296,12 +296,12 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               giving shadows a faded, milky quality. This is especially
               pronounced in expired or overexposed film. Digitally, this
               effect is achieved by lifting the black point on the curves
-              — preventing the shadows from reaching pure black.
+             - preventing the shadows from reaching pure black.
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Combined with a subtle color cast in the lifted blacks — often
-              a cool cyan or warm amber depending on the stock — shadow
+              Combined with a subtle color cast in the lifted blacks- often
+              a cool cyan or warm amber depending on the stock- shadow
               fading is one of the most effective ways to give a digital
               photo an analog feel. It reads immediately as film even without
               grain.
@@ -312,7 +312,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Optical vignetting — the darkening of image corners — occurs
+              Optical vignetting- the darkening of image corners- occurs
               naturally in many film camera and lens combinations. Wide
               apertures on fast lenses produce the most visible vignetting.
               It draws the eye toward the center of the frame and creates a
@@ -322,7 +322,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Digital vignetting applied too aggressively looks fake and
               heavy-handed. The analog look uses a gentle, wide-radius
-              vignette that barely darkens the corners — you often feel it
+              vignette that barely darkens the corners- you often feel it
               more than you see it. The feathering should be gradual, not
               a sharp circle darkened around the edges.
             </p>
@@ -343,7 +343,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Used sparingly, a digital light leak overlay adds an authentic
               handmade quality. Used heavily, it looks like an Instagram
-              filter from 2013. The key is subtlety — a single soft streak
+              filter from 2013. The key is subtlety- a single soft streak
               of warm orange in one corner, with the blend mode set to
               Screen or Lighten so it only affects bright areas.
             </p>
@@ -356,13 +356,13 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <figure className="my-8">
               <img
                 src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-                alt="Film photography landscape — the warm tonal rendering characteristic of iconic film stocks"
+                alt="Film photography landscape- the warm tonal rendering characteristic of iconic film stocks"
                 className="w-full rounded-lg"
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                The distinct tonal quality of analog film — something every
-                digital shooter wants to recreate — Photo via Unsplash
+                The distinct tonal quality of analog film- something every
+                digital shooter wants to recreate - Photo via Unsplash
               </figcaption>
             </figure>
 
@@ -388,7 +388,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               is the most beloved color negative film ever made. It was
               designed for portrait photography, which means it renders
               human skin with extraordinary warmth and flattery. The color
-              signature is warm — golden-amber highlights, creamy midtones,
+              signature is warm- golden-amber highlights, creamy midtones,
               and shadows with a slight magenta-red push. Contrast is
               moderate. Grain is fine and almost invisible at box speed.
             </p>
@@ -420,7 +420,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               Superia looks excellent in urban environments, overcast light,
               and scenes with a lot of greenery. It is the film that many
               street photographers in Japan shot through the 1990s and early
-              2000s — and the association has given it a particular nostalgic
+              2000s- and the association has given it a particular nostalgic
               quality. To simulate Superia: push the shadow tones toward
               cool green, add a slight cyan cast to the highlights, and use
               medium-fine grain with a very slight blue channel bias.
@@ -433,7 +433,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Ilford HP5 is one of the most versatile black and white films
               ever made. Rated at ISO 400, it can be pushed to ISO 1600 or
-              3200 with results that remain usable — even desirable for
+              3200 with results that remain usable- even desirable for
               documentary and street work. The grain becomes substantial when
               pushed, with a bold, irregular structure that feels utterly
               different from digital noise. Tonal rendering is broad, with
@@ -457,7 +457,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Most online filters apply a single LUT (look-up table) to the
               entire image and call it done. The result looks like a filter
-              rather than actual film — flat, uniform, clearly artificial.
+              rather than actual film- flat, uniform, clearly artificial.
               SammaPix{" "}
               <Link
                 href="/tools/filmlab"
@@ -471,7 +471,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               FilmLab processes images entirely in your browser using the
-              Canvas API — no uploads, no server processing, no waiting for
+              Canvas API- no uploads, no server processing, no waiting for
               a file to come back from a cloud service. The entire operation
               happens locally and instantly. Privacy-first is a design
               principle, not a feature: your photos never leave your device.
@@ -483,7 +483,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               tonal zone. The color grading applies per-channel curve
               adjustments specific to each stock profile. Shadow fading lifts
               the true black point independently from the rest of the tone
-              curve. Every parameter is adjustable — you can push a Portra
+              curve. Every parameter is adjustable- you can push a Portra
               preset further or dial it back to near-neutral, depending
               on what your specific image needs.
             </p>
@@ -495,13 +495,13 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Here is the exact process for applying professional film effects
-              to any digital photo using SammaPix FilmLab — no Photoshop,
+              to any digital photo using SammaPix FilmLab- no Photoshop,
               no subscription, no account required.
             </p>
 
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 1 — Open FilmLab.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 1 - Open FilmLab.</strong>{" "}
                 Go to{" "}
                 <Link
                   href="/tools/filmlab"
@@ -513,37 +513,37 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                 browser.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 2 — Drop your photo.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 2 - Drop your photo.</strong>{" "}
                 Drag any JPEG or PNG onto the drop zone, or click to browse.
                 JPEGs from your phone camera work perfectly. RAW files should
                 be exported to JPEG first for best results.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 3 — Choose a film stock preset.</strong>{" "}
-                Select from the preset list — Kodak Portra 400, Fuji Superia,
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 3 - Choose a film stock preset.</strong>{" "}
+                Select from the preset list - Kodak Portra 400, Fuji Superia,
                 Ilford HP5, Kodak Gold 200, Agfa Vista, and more. Each preset
                 applies a complete set of parameters matched to that stock.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 4 — Adjust grain intensity.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 4 - Adjust grain intensity.</strong>{" "}
                 The default grain matches box speed. Drag the grain slider
                 up to simulate pushed film, or down for a cleaner look that
                 retains color grading without visible texture.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 5 — Fine-tune vignette and fading.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 5 - Fine-tune vignette and fading.</strong>{" "}
                 Both controls default to moderate values. Reduce them for a
                 subtle, barely-there film feel. Increase them for a more
                 dramatic, editorial look.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 6 — Add a light leak (optional).</strong>{" "}
-                Toggle the light leak overlay and select a position — corner,
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 6 - Add a light leak (optional).</strong>{" "}
+                Toggle the light leak overlay and select a position- corner,
                 edge, or diagonal. Keep the opacity below 30% for a result
                 that reads as authentic rather than applied.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 7 — Download.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 7 - Download.</strong>{" "}
                 Hit Download to save the processed JPEG. The file is
                 generated entirely in-browser at full resolution. No
                 watermarks on free downloads.
@@ -553,8 +553,8 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The whole process takes under two minutes per photo. For
               batches of images you want to process with consistent
-              settings — for a travel series, a portrait session, or a
-              social media set — FilmLab lets you apply the same preset
+              settings- for a travel series, a portrait session, or a
+              social media set - FilmLab lets you apply the same preset
               to multiple images in sequence, keeping your look coherent
               across the entire collection.
             </p>
@@ -577,7 +577,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               image, at a resolution optimized for display on a phone screen.
               They use heavy-handed adjustments tuned to look good on a 375px
               wide screen viewed at arm&apos;s length. The results degrade
-              significantly at larger display sizes and compress poorly —
+              significantly at larger display sizes and compress poorly- 
               which is why filter-heavy photos posted at full resolution often
               look strange or harsh on larger screens.
             </p>
@@ -657,7 +657,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                 <strong className="text-[#171717] dark:text-[#E5E5E5]">Reduce grain on clean subjects.</strong>{" "}
                 Heavy grain on a smooth sky or a clean background wall looks
                 applied. Real film grain reads most convincingly in textured
-                subjects — skin, fabric, stone, foliage. Dial grain back when
+                subjects- skin, fabric, stone, foliage. Dial grain back when
                 your backgrounds are minimal.
               </li>
               <li>
@@ -667,7 +667,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                 at the full image, it is too strong.
               </li>
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Use light leaks sparingly — or not at all.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Use light leaks sparingly- or not at all.</strong>{" "}
                 Light leaks are the most recognizable tell that a photo has
                 been processed. They work on some images and ruin others.
                 When in doubt, leave them out. The color grading and grain
@@ -678,7 +678,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                 Film tends to be shot with more intentional exposure than
                 digital. A source image that is 0.3 to 0.5 stops darker than
                 what an automatic meter would choose often responds better
-                to film emulation — the shadows have more character and the
+                to film emulation- the shadows have more character and the
                 highlights do not clip.
               </li>
               <li>
@@ -699,12 +699,12 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                 >
                   SammaPix Compress
                 </Link>{" "}
-                to optimize the file size for web or email — without losing
+                to optimize the file size for web or email- without losing
                 the grain quality that makes the look work.
               </li>
             </ul>
 
-            {/* Section 8 — Before sharing */}
+            {/* Section 8 - Before sharing */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Before you share: clean up your metadata
             </h2>
@@ -727,13 +727,13 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               >
                 SammaPix EXIF tool
               </Link>{" "}
-              lets you view and remove EXIF data in-browser — no upload
+              lets you view and remove EXIF data in-browser- no upload
               required. You can also use it to verify that the film effect
               processing preserved your original metadata or check the
               technical details embedded in any photo you receive.
             </p>
 
-            {/* Section 9 — FAQ */}
+            {/* Section 9 - FAQ */}
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
@@ -779,7 +779,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               VSCO and Lightroom presets can be high-quality film emulation
-              tools — VSCO in particular is well-regarded for its analog
+              tools - VSCO in particular is well-regarded for its analog
               presets. The difference is access and cost: VSCO requires a
               subscription and a smartphone, Lightroom requires a Creative
               Cloud subscription. Browser-based tools like FilmLab produce
@@ -790,7 +790,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               Do film effects work on photos taken with a smartphone?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Yes — and often better than you might expect. Modern smartphone
+              Yes- and often better than you might expect. Modern smartphone
               cameras produce images that are technically excellent but can
               feel overly clean and processed. Film emulation addresses
               exactly this: it adds the organic imperfection and warmth that
@@ -846,7 +846,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Try FilmLab — free, in your browser
+                Try FilmLab- free, in your browser
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Apply Kodak Portra, Fuji Superia, Ilford HP5, and more to
@@ -896,7 +896,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                   Tools
                 </span>
                 <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Compress Images Without Losing Quality — Free In-Browser Tool
+                  Compress Images Without Losing Quality - Free In-Browser Tool
                 </span>
               </Link>
               <Link
@@ -907,7 +907,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
                   Tools
                 </span>
                 <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  View and Remove EXIF Data from Photos — Free EXIF Tool
+                  View and Remove EXIF Data from Photos - Free EXIF Tool
                 </span>
               </Link>
             </div>

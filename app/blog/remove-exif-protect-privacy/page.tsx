@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How to Remove EXIF Data and Protect Your Privacy",
     description:
-      "Your photos reveal more than you think. Hidden EXIF metadata includes your GPS location, device serial number, and timestamp. Here is how to strip it — for free, in seconds.",
+      "Your photos reveal more than you think. Hidden EXIF metadata includes your GPS location, device serial number, and timestamp. Here is how to strip it- for free, in seconds.",
     url: `${APP_URL}/blog/remove-exif-protect-privacy`,
     type: "article",
     publishedTime: "2026-02-06",
@@ -84,7 +84,7 @@ const howToSchema = {
   "@type": "HowTo",
   name: "How to Remove EXIF Data from Photos Using SammaPix EXIF Lens",
   description:
-    "Step-by-step guide to stripping EXIF metadata — including GPS location — from your photos for free using SammaPix EXIF Lens.",
+    "Step-by-step guide to stripping EXIF metadata- including GPS location- from your photos for free using SammaPix EXIF Lens.",
   step: [
     {
       "@type": "HowToStep",
@@ -108,7 +108,7 @@ const howToSchema = {
       "@type": "HowToStep",
       position: 4,
       name: "Remove EXIF and download",
-      text: "Click Remove EXIF to strip all GPS fields and metadata. Download the clean file — the original on your device is untouched.",
+      text: "Click Remove EXIF to strip all GPS fields and metadata. Download the clean file- the original on your device is untouched.",
     },
     {
       "@type": "HowToStep",
@@ -163,7 +163,7 @@ export default function RemoveExifProtectPrivacyPage() {
               {POST_TITLE}
             </h1>
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
-              Every photo you share carries a hidden passenger — EXIF metadata that can reveal exactly where you were, what device you used, and when the shot was taken. Most people have no idea it exists. Here is everything you need to know, and how to remove it in seconds.
+              Every photo you share carries a hidden passenger - EXIF metadata that can reveal exactly where you were, what device you used, and when the shot was taken. Most people have no idea it exists. Here is everything you need to know, and how to remove it in seconds.
             </p>
           </header>
 
@@ -171,7 +171,7 @@ export default function RemoveExifProtectPrivacyPage() {
           <div className="flex items-start gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md px-4 py-4 mb-8">
             <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-500 mt-0.5 shrink-0" strokeWidth={1.5} />
             <p className="text-sm text-amber-800 dark:text-amber-300 leading-relaxed">
-              A photo taken at your home and shared online can reveal your precise home address to anyone who downloads it — even if it is posted on a private listing or a public social feed. GPS metadata embedded in the file does this automatically.
+              A photo taken at your home and shared online can reveal your precise home address to anyone who downloads it- even if it is posted on a private listing or a public social feed. GPS metadata embedded in the file does this automatically.
             </p>
           </div>
 
@@ -181,10 +181,10 @@ export default function RemoveExifProtectPrivacyPage() {
               What is EXIF data?
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              EXIF stands for Exchangeable Image File Format. It is a standard for embedding technical metadata directly inside digital image files — specifically JPEG, TIFF, and RAW formats. The standard was developed by the Japan Electronic Industries Development Association in 1995 and is now used by virtually every digital camera and smartphone camera app in the world.
+              EXIF stands for Exchangeable Image File Format. It is a standard for embedding technical metadata directly inside digital image files- specifically JPEG, TIFF, and RAW formats. The standard was developed by the Japan Electronic Industries Development Association in 1995 and is now used by virtually every digital camera and smartphone camera app in the world.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              When you press the shutter, the camera writes a block of data into the file alongside the image pixels. This block is invisible when you view the photo but can be read by any software that knows where to look — including free online tools, desktop apps, and command-line utilities. The full technical specification is documented on the{" "}
+              When you press the shutter, the camera writes a block of data into the file alongside the image pixels. This block is invisible when you view the photo but can be read by any software that knows where to look- including free online tools, desktop apps, and command-line utilities. The full technical specification is documented on the{" "}
               <a href="https://en.wikipedia.org/wiki/Exif" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">EXIF Wikipedia page</a>.
             </p>
 
@@ -196,7 +196,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Hidden metadata in photos is a real privacy risk most people overlook — Photo by FLY:D on Unsplash
+                Hidden metadata in photos is a real privacy risk most people overlook - Photo by FLY:D on Unsplash
               </figcaption>
             </figure>
 
@@ -206,7 +206,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 {
                   icon: MapPin,
                   title: "GPS Coordinates",
-                  detail: "Latitude, longitude, altitude — accurate to within a few meters on modern smartphones.",
+                  detail: "Latitude, longitude, altitude- accurate to within a few meters on modern smartphones.",
                 },
                 {
                   icon: Eye,
@@ -248,14 +248,14 @@ export default function RemoveExifProtectPrivacyPage() {
               Home address from a Marketplace listing
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Selling something on Craigslist, Facebook Marketplace, or Vinted? If you photograph the item at home and upload the original file, the GPS coordinates in the EXIF data reveal your home address to every buyer — and everyone else who downloads the image. Stalking cases have been traced back to exactly this scenario.
+              Selling something on Craigslist, Facebook Marketplace, or Vinted? If you photograph the item at home and upload the original file, the GPS coordinates in the EXIF data reveal your home address to every buyer- and everyone else who downloads the image. Stalking cases have been traced back to exactly this scenario.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
               The John McAfee case (2012)
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Vice Media published an exclusive interview with John McAfee while he was in hiding in Guatemala. The accompanying iPhone photos had GPS coordinates embedded in their EXIF data. The coordinates were publicly readable in the published images, revealing McAfee&apos;s exact location to authorities. He was found and detained shortly after. The error — leaving GPS metadata intact in published photos — was entirely avoidable.
+              Vice Media published an exclusive interview with John McAfee while he was in hiding in Guatemala. The accompanying iPhone photos had GPS coordinates embedded in their EXIF data. The coordinates were publicly readable in the published images, revealing McAfee&apos;s exact location to authorities. He was found and detained shortly after. The error- leaving GPS metadata intact in published photos- was entirely avoidable.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -269,7 +269,7 @@ export default function RemoveExifProtectPrivacyPage() {
               Routine and pattern exposure
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              A series of photos posted to a public social account over time can map an entire daily routine. GPS timestamps reveal where you work, where your children attend school, and what routes you travel regularly. This kind of pattern data is exactly what stalkers and abusive ex-partners look for — and it is sitting in plain sight for anyone who knows to look at EXIF metadata.
+              A series of photos posted to a public social account over time can map an entire daily routine. GPS timestamps reveal where you work, where your children attend school, and what routes you travel regularly. This kind of pattern data is exactly what stalkers and abusive ex-partners look for- and it is sitting in plain sight for anyone who knows to look at EXIF metadata.
             </p>
 
             <figure className="my-8">
@@ -280,7 +280,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Every smartphone photo can carry precise GPS coordinates in its metadata — Photo by Jonas Leupe on Unsplash
+                Every smartphone photo can carry precise GPS coordinates in its metadata - Photo by Jonas Leupe on Unsplash
               </figcaption>
             </figure>
 
@@ -288,7 +288,7 @@ export default function RemoveExifProtectPrivacyPage() {
               Do social platforms strip EXIF automatically?
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Instagram, Facebook, and X (Twitter) do strip most EXIF metadata when you upload a photo through their apps. This sounds reassuring — but it is not a reliable privacy strategy.
+              Instagram, Facebook, and X (Twitter) do strip most EXIF metadata when you upload a photo through their apps. This sounds reassuring- but it is not a reliable privacy strategy.
             </p>
             <ul className="space-y-2 mb-4 pl-4">
               {[
@@ -304,7 +304,7 @@ export default function RemoveExifProtectPrivacyPage() {
               ))}
             </ul>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The only reliable approach is to strip EXIF data from the source file before you share it anywhere — so the metadata never reaches any platform in the first place.
+              The only reliable approach is to strip EXIF data from the source file before you share it anywhere- so the metadata never reaches any platform in the first place.
             </p>
 
             {/* Step-by-step guide */}
@@ -318,7 +318,7 @@ export default function RemoveExifProtectPrivacyPage() {
               >
                 SammaPix EXIF Lens
               </Link>{" "}
-              processes your photos entirely in the browser — no upload, no server, no account required. Here is the complete process.
+              processes your photos entirely in the browser- no upload, no server, no account required. Here is the complete process.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -331,7 +331,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 {
                   step: "2",
                   title: "Drop your photos",
-                  body: "Drag one or more photos onto the drop zone, or click to select files. EXIF Lens supports JPG, JPEG, and TIFF — the formats that embed EXIF GPS data. PNG files generally do not embed GPS data.",
+                  body: "Drag one or more photos onto the drop zone, or click to select files. EXIF Lens supports JPG, JPEG, and TIFF- the formats that embed EXIF GPS data. PNG files generally do not embed GPS data.",
                 },
                 {
                   step: "3",
@@ -346,7 +346,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 {
                   step: "5",
                   title: "Download the clean file",
-                  body: "The downloaded file has the metadata removed. Your original file on your device is untouched — only the downloaded copy is clean. The image itself is pixel-identical to the original.",
+                  body: "The downloaded file has the metadata removed. Your original file on your device is untouched- only the downloaded copy is clean. The image itself is pixel-identical to the original.",
                 },
                 {
                   step: "6",
@@ -373,10 +373,10 @@ export default function RemoveExifProtectPrivacyPage() {
             >
               <div>
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
-                  Free tool — no upload, no signup
+                  Free tool- no upload, no signup
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Strip EXIF data from your photos now — SammaPix EXIF Lens
+                  Strip EXIF data from your photos now - SammaPix EXIF Lens
                 </p>
               </div>
               <ArrowRight
@@ -403,21 +403,21 @@ export default function RemoveExifProtectPrivacyPage() {
               Be careful with iMessage and email
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              WhatsApp strips EXIF before sending. iMessage does not — photos sent via iMessage retain all original metadata including GPS. Email attachments also preserve metadata. If you are sending photos that include sensitive GPS data (your home, a private event, a confidential location), strip them first.
+              WhatsApp strips EXIF before sending. iMessage does not- photos sent via iMessage retain all original metadata including GPS. Email attachments also preserve metadata. If you are sending photos that include sensitive GPS data (your home, a private event, a confidential location), strip them first.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
               Disable GPS for your camera app if you do not need it
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              On iPhone: Settings &rarr; Privacy &amp; Security &rarr; Location Services &rarr; Camera &rarr; Never. On Android: Camera settings &rarr; Location tag &rarr; Off. Photos taken without GPS enabled will never have coordinates to worry about. The downside is losing location data for travel photography — so it is a tradeoff worth considering per use case.
+              On iPhone: Settings &rarr; Privacy &amp; Security &rarr; Location Services &rarr; Camera &rarr; Never. On Android: Camera settings &rarr; Location tag &rarr; Off. Photos taken without GPS enabled will never have coordinates to worry about. The downside is losing location data for travel photography- so it is a tradeoff worth considering per use case.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
               Use a dedicated workflow for client photos
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              If you are a photographer delivering images to clients, EXIF data contains your camera serial number, lens details, and shooting settings. Some clients or agencies specify that delivered files should have metadata stripped — particularly in line with{" "}
+              If you are a photographer delivering images to clients, EXIF data contains your camera serial number, lens details, and shooting settings. Some clients or agencies specify that delivered files should have metadata stripped- particularly in line with{" "}
               <a href="https://iptc.org/standards/photo-metadata/" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">IPTC photo metadata standards</a>. Build EXIF removal into your export workflow rather than doing it manually per job.
             </p>
 
@@ -432,7 +432,7 @@ export default function RemoveExifProtectPrivacyPage() {
               >
                 SammaPix Compress
               </Link>{" "}
-              strips all EXIF metadata automatically as part of the compression process. You get a lighter file with no metadata in a single operation — no separate EXIF removal step needed.
+              strips all EXIF metadata automatically as part of the compression process. You get a lighter file with no metadata in a single operation- no separate EXIF removal step needed.
             </p>
 
             <figure className="my-8">
@@ -443,7 +443,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Building good metadata hygiene into your photo sharing workflow protects your privacy — Photo by John Schnobrich on Unsplash
+                Building good metadata hygiene into your photo sharing workflow protects your privacy - Photo by John Schnobrich on Unsplash
               </figcaption>
             </figure>
 
@@ -498,11 +498,11 @@ export default function RemoveExifProtectPrivacyPage() {
                 {[
                   {
                     q: "Does removing EXIF data affect image quality?",
-                    a: "No. EXIF metadata is stored in a separate block from the image pixel data. Removing it does not re-encode the image and causes no quality loss. The file will be slightly smaller — the metadata block is typically a few kilobytes — but the visual content is identical.",
+                    a: "No. EXIF metadata is stored in a separate block from the image pixel data. Removing it does not re-encode the image and causes no quality loss. The file will be slightly smaller- the metadata block is typically a few kilobytes- but the visual content is identical.",
                   },
                   {
                     q: "Does Instagram remove EXIF data from uploaded photos?",
-                    a: "Instagram strips most EXIF metadata including GPS when you upload through their app. However, this is not a guarantee — platform policies change, and many other contexts (email, iMessage, marketplaces) do not strip metadata. The safest approach is always to strip GPS from the source file before sharing.",
+                    a: "Instagram strips most EXIF metadata including GPS when you upload through their app. However, this is not a guarantee- platform policies change, and many other contexts (email, iMessage, marketplaces) do not strip metadata. The safest approach is always to strip GPS from the source file before sharing.",
                   },
                   {
                     q: "Can I remove EXIF from a RAW file?",
@@ -510,11 +510,11 @@ export default function RemoveExifProtectPrivacyPage() {
                   },
                   {
                     q: "What is the difference between GPS metadata and other EXIF data?",
-                    a: "GPS metadata (GPSLatitude, GPSLongitude, GPSAltitude, GPSTimeStamp) is the most privacy-sensitive EXIF data because it directly reveals your physical location. Other EXIF data (camera model, shutter speed, ISO) is less sensitive but can still reveal what equipment you own or software you use. You can strip GPS only, or strip all EXIF — the choice depends on your use case.",
+                    a: "GPS metadata (GPSLatitude, GPSLongitude, GPSAltitude, GPSTimeStamp) is the most privacy-sensitive EXIF data because it directly reveals your physical location. Other EXIF data (camera model, shutter speed, ISO) is less sensitive but can still reveal what equipment you own or software you use. You can strip GPS only, or strip all EXIF- the choice depends on your use case.",
                   },
                   {
                     q: "Does converting a JPEG to PNG or WebP remove EXIF data?",
-                    a: "Converting formats strips EXIF data in most cases — PNG and WebP formats do not use the EXIF standard, so converting from JPEG typically removes the metadata block. However, some tools re-embed EXIF data during conversion. If privacy is the goal, explicitly strip metadata rather than relying on format conversion to do it.",
+                    a: "Converting formats strips EXIF data in most cases - PNG and WebP formats do not use the EXIF standard, so converting from JPEG typically removes the metadata block. However, some tools re-embed EXIF data during conversion. If privacy is the goal, explicitly strip metadata rather than relying on format conversion to do it.",
                   },
                 ].map(({ q, a }) => (
                   <div key={q}>
@@ -562,7 +562,7 @@ export default function RemoveExifProtectPrivacyPage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Remove EXIF data from your photos — free
+                Remove EXIF data from your photos- free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 SammaPix EXIF Lens reads and strips metadata entirely in your browser. No upload, no signup, no file size limits. Your photos never leave your device.
@@ -594,7 +594,7 @@ export default function RemoveExifProtectPrivacyPage() {
                   href: "/blog/best-image-compression-tools-2026",
                   tag: "Comparison",
                   tagColor: "text-orange-700",
-                  title: "Best Free Image Compression Tools in 2026 — Compared",
+                  title: "Best Free Image Compression Tools in 2026 - Compared",
                 },
                 {
                   href: "/blog/create-travel-photo-map",

@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "How to Organize Travel Photos by Country Automatically (Free) | SammaPix",
   description:
-    "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically — free, in-browser, no software needed.",
+    "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically- free, in-browser, no software needed.",
   alternates: {
     canonical:
       `${APP_URL}/blog/organize-travel-photos-by-country`,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How to Organize Travel Photos by Country Automatically (Free)",
     description:
-      "GPS EXIF data makes automatic photo organization possible. Here is the complete guide to sorting your travel archive by country — no manual work required.",
+      "GPS EXIF data makes automatic photo organization possible. Here is the complete guide to sorting your travel archive by country- no manual work required.",
     url: `${APP_URL}/blog/organize-travel-photos-by-country`,
     type: "article",
     publishedTime: "2026-02-28",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Organize Travel Photos by Country Automatically (Free)",
     description:
-      "GPS EXIF data makes automatic photo organization possible. Here is the complete guide to sorting your travel archive by country — no manual work required.",
+      "GPS EXIF data makes automatic photo organization possible. Here is the complete guide to sorting your travel archive by country- no manual work required.",
     creator: "@lucasammarco",
   },
 };
@@ -47,7 +47,7 @@ const articleSchema = {
   headline:
     "How to Organize Travel Photos by Country Automatically (Free)",
   description:
-    "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically — free, in-browser, no software needed.",
+    "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically- free, in-browser, no software needed.",
   url: `${APP_URL}/blog/organize-travel-photos-by-country`,
   datePublished: "2026-02-28",
   dateModified: "2026-02-28",
@@ -110,7 +110,7 @@ const faqSchema = {
       name: "How do I organize travel photos by country automatically?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "If your photos have GPS data embedded in their EXIF metadata, a tool like SammaPix GeoSort can read those coordinates, reverse-geocode them to a country name, and group your files accordingly — all without manual sorting.",
+        text: "If your photos have GPS data embedded in their EXIF metadata, a tool like SammaPix GeoSort can read those coordinates, reverse-geocode them to a country name, and group your files accordingly- all without manual sorting.",
       },
     },
     {
@@ -190,7 +190,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               You come home from a two-week trip with 1,400 photos dumped into
               a single folder. Half are from Italy, a third from Croatia, the
               rest from Slovenia. Sorting them by hand would take hours. There
-              is a better way — and it starts with data that is already inside
+              is a better way- and it starts with data that is already inside
               every photo your phone has ever taken.
             </p>
 
@@ -198,7 +198,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <div className="rounded-md overflow-hidden border border-gray-100 dark:border-[#2A2A2A] mb-8">
               <img
                 src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop&q=80"
-                alt="Travel photos spread across a map — organizing travel photography by country"
+                alt="Travel photos spread across a map- organizing travel photography by country"
                 className="w-full h-56 sm:h-72 object-cover"
                 loading="eager"
                 width={800}
@@ -218,14 +218,14 @@ export default function OrganizeTravelPhotosByCountryPage() {
               The average smartphone user takes more than 2,000 photos per
               year. Frequent travelers can easily double that figure across a
               single trip season. The result is a photo library that grows
-              faster than any human can reasonably organize — files named
+              faster than any human can reasonably organize- files named
               IMG_4521.jpg sitting beside IMG_4522.jpg, with no indication of
               whether they were taken in Dubrovnik or Dolomites.
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Most people default to one of two coping strategies. The first is
-              to do nothing — letting the camera roll become an ever-expanding
+              to do nothing- letting the camera roll become an ever-expanding
               pile that is technically accessible but practically useless for
               revisiting specific trips. The second is to spend a dedicated
               afternoon manually moving files into folders like{" "}
@@ -238,7 +238,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Neither approach is sustainable. What you need is a system that
               reads the location data already embedded in your files and
-              organizes them for you — automatically, without any manual
+              organizes them for you- automatically, without any manual
               tagging or renaming.
             </p>
 
@@ -258,7 +258,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               the correct folder. For 100 photos from a short weekend trip,
               this might take 20 minutes. For 1,400 photos from a three-country
               European trip, you are looking at two to three hours of focused
-              work — and a high rate of errors, since similar landscapes can
+              work- and a high rate of errors, since similar landscapes can
               look nearly identical across borders.
             </p>
 
@@ -279,7 +279,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 <strong className="text-gray-700 dark:text-[#E5E5E5]">Automatic (GPS-based):</strong> Under 60 seconds, consistent, repeatable
               </li>
               <li>
-                <strong className="text-gray-700 dark:text-[#E5E5E5]">Requirement:</strong> Photos must have GPS EXIF data embedded — which most smartphone photos do by default
+                <strong className="text-gray-700 dark:text-[#E5E5E5]">Requirement:</strong> Photos must have GPS EXIF data embedded- which most smartphone photos do by default
               </li>
             </ul>
 
@@ -290,7 +290,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Every photo file contains a block of hidden metadata called EXIF
               data (Exchangeable Image File Format). This metadata records the
-              technical conditions of the shot — shutter speed, aperture, ISO,
+              technical conditions of the shot- shutter speed, aperture, ISO,
               lens focal length, and camera model. When location services are
               enabled on your phone, it also records the GPS coordinates of
               where the photo was taken: latitude and longitude, accurate to
@@ -304,7 +304,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 41.9028° N, 12.4964° E
               </code>
               . A reverse geocoding process converts those coordinates to a
-              place name — Italy, Rome, or even a specific neighborhood —
+              place name - Italy, Rome, or even a specific neighborhood- 
               without you touching anything. The photo is then automatically
               placed into the correct folder.
             </p>
@@ -323,7 +323,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 SammaPix EXIF Lens
               </Link>{" "}
               tool to inspect the full metadata of any photo directly in your
-              browser — no upload required.
+              browser- no upload required.
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -356,7 +356,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <div className="rounded-md overflow-hidden border border-gray-100 dark:border-[#2A2A2A] my-8">
               <img
                 src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&auto=format&fit=crop&q=80"
-                alt="Landscape travel photography — GPS tagged photo ready for automatic organization"
+                alt="Landscape travel photography - GPS tagged photo ready for automatic organization"
                 className="w-full h-48 sm:h-64 object-cover"
                 loading="lazy"
                 width={800}
@@ -379,7 +379,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               is a free, browser-based tool that reads the GPS coordinates
               embedded in your photo files, reverse-geocodes each one to a
               country and city, and groups your files accordingly. Everything
-              runs locally in your browser — no photos are ever sent to a
+              runs locally in your browser- no photos are ever sent to a
               server, and no account is required.
             </p>
 
@@ -401,7 +401,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               </li>
               <li>
                 <strong className="text-gray-700 dark:text-[#E5E5E5]">Drop your photos.</strong>{" "}
-                Drag your entire trip folder — or a selection of photos — into
+                Drag your entire trip folder- or a selection of photos- into
                 the drop zone. You can add hundreds of files at once. GeoSort
                 reads only the EXIF metadata from each file; it does not
                 process the full image data for sorting.
@@ -425,14 +425,14 @@ export default function OrganizeTravelPhotosByCountryPage() {
               <li>
                 <strong className="text-gray-700 dark:text-[#E5E5E5]">Download the sorted archive.</strong>{" "}
                 Click Download and GeoSort packages your photos into a ZIP
-                file with the folder structure you selected — ready to drop
+                file with the folder structure you selected- ready to drop
                 straight into your hard drive, iCloud, or Google Drive.
               </li>
             </ol>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              The entire process — from dropping 1,400 photos to downloading
-              the sorted ZIP — typically takes under two minutes on a modern
+              The entire process- from dropping 1,400 photos to downloading
+              the sorted ZIP- typically takes under two minutes on a modern
               laptop. The bottleneck is the download, not the sorting itself.
             </p>
 
@@ -456,7 +456,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               </Link>{" "}
               reads the same GPS EXIF data as GeoSort, but instead of grouping
               files into folders, it plots each photo as a pin on a world map.
-              You get a visual journey — a geographic record of everywhere you
+              You get a visual journey- a geographic record of everywhere you
               have been and everything you photographed there.
             </p>
 
@@ -468,11 +468,11 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
                 Use <strong className="text-gray-700 dark:text-[#E5E5E5]">GeoSort</strong> to sort your full photo archive into
-                country and city folders — this is your organized file storage.
+                country and city folders- this is your organized file storage.
               </li>
               <li>
                 Use <strong className="text-gray-700 dark:text-[#E5E5E5]">TravelMap</strong> with your best selects to create a
-                shareable visual story of the trip — this is your
+                shareable visual story of the trip- this is your
                 documentation and presentation layer.
               </li>
               <li>
@@ -490,7 +490,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               This combination replaces what would otherwise require dedicated
-              photo management software — and it runs entirely in your browser
+              photo management software- and it runs entirely in your browser
               at zero cost.
             </p>
 
@@ -513,20 +513,20 @@ export default function OrganizeTravelPhotosByCountryPage() {
 
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
-                <strong className="text-gray-700 dark:text-[#E5E5E5]">DSLR or mirrorless cameras</strong> — most major manufacturers
+                <strong className="text-gray-700 dark:text-[#E5E5E5]">DSLR or mirrorless cameras</strong>- most major manufacturers
                 (Canon, Nikon, Sony) offer Bluetooth companion apps that sync
                 GPS from your phone to the camera in real time. Canon Camera
                 Connect, Nikon SnapBridge, and Sony Imaging Edge all support
                 this. Enable it before your next trip.
               </li>
               <li>
-                <strong className="text-gray-700 dark:text-[#E5E5E5]">Older archives without GPS</strong> — sort by date first using
+                <strong className="text-gray-700 dark:text-[#E5E5E5]">Older archives without GPS</strong>- sort by date first using
                 your photo app&apos;s timeline view, then manually identify
                 trip boundaries and create date-named folders. This is still
                 significantly faster than inspecting photos individually.
               </li>
               <li>
-                <strong className="text-gray-700 dark:text-[#E5E5E5]">Photos in airplane mode</strong> — these will have a timestamp
+                <strong className="text-gray-700 dark:text-[#E5E5E5]">Photos in airplane mode</strong>- these will have a timestamp
                 but no GPS. On Apple Photos, you can edit location data
                 manually for individual images; on Google Photos you can do
                 the same through the Edit info panel.
@@ -535,7 +535,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Going forward, the simplest fix is to ensure location services
-              are enabled for your camera app before every trip — and to keep
+              are enabled for your camera app before every trip- and to keep
               your phone out of airplane mode, or to re-enable location briefly
               each morning so the GPS log stays current.
             </p>
@@ -547,7 +547,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The best photo organization system is the one you actually use
               consistently. Here is a post-trip workflow that takes under an
-              hour even after the longest trips — and produces a clean,
+              hour even after the longest trips- and produces a clean,
               navigable archive that will still make sense in five years.
             </p>
 
@@ -558,7 +558,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
                 Transfer photos from your phone and camera to a single folder
-                on your computer named with the trip date and destination —
+                on your computer named with the trip date and destination- 
                 for example,{" "}
                 <code className="text-xs bg-gray-100 dark:bg-[#252525] text-gray-700 dark:text-[#A3A3A3] px-1.5 py-0.5 rounded">
                   2025-09 Balkans
@@ -576,7 +576,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 <code className="text-xs bg-gray-100 dark:bg-[#252525] text-gray-700 dark:text-[#A3A3A3] px-1.5 py-0.5 rounded">
                   2025-09 Balkans / Croatia / Bosnia / Montenegro
                 </code>
-                — done automatically.
+               - done automatically.
               </li>
             </ul>
 
@@ -603,7 +603,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 </Link>{" "}
                 or a dedicated EXIF remover to strip GPS coordinates from the
                 exported files. The GPS data is invaluable for personal
-                organization — but you may not want to broadcast the precise
+                organization- but you may not want to broadcast the precise
                 location of every photo you post online.
               </li>
               <li>
@@ -614,7 +614,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             </ul>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              <strong className="text-gray-700 dark:text-[#E5E5E5]">Backup strategy:</strong> Always maintain at least two copies —
+              <strong className="text-gray-700 dark:text-[#E5E5E5]">Backup strategy:</strong> Always maintain at least two copies- 
               one on local storage and one in cloud (iCloud, Google Photos,
               or Backblaze). The GPS EXIF data survives cloud backup intact
               as long as you upload original-quality files rather than
@@ -626,7 +626,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              GPS EXIF data is extremely useful for personal organization —
+              GPS EXIF data is extremely useful for personal organization- 
               but it is also a privacy consideration worth understanding. When
               you share a photo file directly (as an attachment, a download
               link, or via some social platforms), the recipient can extract
@@ -641,8 +641,8 @@ export default function OrganizeTravelPhotosByCountryPage() {
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              For photos you share publicly — especially those taken at your
-              home, workplace, or frequently visited locations — removing GPS
+              For photos you share publicly- especially those taken at your
+              home, workplace, or frequently visited locations- removing GPS
               data before sharing is a simple and important habit. You can do
               this in bulk with the SammaPix EXIF tools before exporting your
               sharing-ready copies. Keep the originals with GPS intact in your
@@ -669,7 +669,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               If your photos have GPS data embedded in their EXIF metadata, a
               tool like SammaPix GeoSort can read those coordinates, reverse-
               geocode them to a country name, and group your files accordingly
-              — all without manual sorting. The process takes under two
+             - all without manual sorting. The process takes under two
               minutes for a typical trip library.
             </p>
 
@@ -680,7 +680,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               SammaPix GeoSort is a free, browser-based tool that reads GPS
               EXIF data from your photos and sorts them by country or city.
               No software installation is required and no photos are uploaded
-              to a server — everything runs locally in your browser.
+              to a server- everything runs locally in your browser.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
@@ -711,7 +711,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Yes, provided the tool runs entirely client-side. SammaPix
               GeoSort reads EXIF metadata and performs all processing locally
-              in your browser — your actual photo files never leave your
+              in your browser- your actual photo files never leave your
               device. You can verify this by disabling your internet connection
               after the page loads; the tool continues to work.
             </p>
@@ -762,7 +762,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Sort your travel photos by country — free
+                Sort your travel photos by country- free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your photos into GeoSort and get them organized by

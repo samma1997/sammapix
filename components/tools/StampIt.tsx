@@ -107,7 +107,7 @@ function getPositionXY(
 }
 
 /**
- * Filigrana tiling helpers — staggered diagonal grid, Shutterstock-style.
+ * Filigrana tiling helpers- staggered diagonal grid, Shutterstock-style.
  * Every odd row is offset by stepX/2 to prevent straight lines (anti-crop).
  * Coverage is based on the full diagonal so no corner is ever empty after rotation.
  */
@@ -562,7 +562,7 @@ export default function StampIt() {
           <div className="text-center">
             <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Drop images here</p>
             <p className="text-xs text-[#A3A3A3] mt-1">
-              JPG, PNG, WebP — up to {maxFiles} images
+              JPG, PNG, WebP- up to {maxFiles} images
               {!isPro && (
                 <span className="ml-1.5 inline-flex items-center gap-1 text-[10px] font-medium bg-[#F5F5F5] border border-[#E5E5E5] text-[#525252] px-1.5 py-0.5 rounded">
                   Free: {MAX_FREE} &bull; <Link href="/pricing" className="text-[#6366F1] hover:underline" onClick={(e) => e.stopPropagation()}>Pro: {MAX_PRO}</Link>
@@ -588,8 +588,8 @@ export default function StampIt() {
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
               {entries.length} image{entries.length !== 1 ? "s" : ""} selected
-              {uiState === "processing" && ` — processing ${processedCount}/${entries.length}`}
-              {uiState === "done" && ` — ${doneCount} watermarked`}
+              {uiState === "processing" && `- processing ${processedCount}/${entries.length}`}
+              {uiState === "done" && `- ${doneCount} watermarked`}
             </span>
             <div className="flex items-center gap-2">
               {uiState === "config" && (
@@ -823,7 +823,7 @@ export default function StampIt() {
                     Position
                   </p>
                   {tiled && (
-                    <span className="text-[10px] text-[#A3A3A3] italic">Filigrana mode — position ignored</span>
+                    <span className="text-[10px] text-[#A3A3A3] italic">Filigrana mode- position ignored</span>
                   )}
                 </div>
                 <div className="grid grid-cols-3 gap-1.5 w-32">
@@ -866,7 +866,7 @@ export default function StampIt() {
                       Filigrana mode
                     </span>
                     <p className="text-xs text-[#A3A3A3] mt-0.5">
-                      Staggered diagonal grid across the entire image — impossible to crop out. Like Shutterstock.
+                      Staggered diagonal grid across the entire image- impossible to crop out. Like Shutterstock.
                     </p>
                   </div>
                 </label>
@@ -927,7 +927,7 @@ export default function StampIt() {
               className="w-full py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors mb-8"
             >
               Apply watermark to {entries.length} image{entries.length !== 1 ? "s" : ""}
-              {wmType === "image" && !logoImg && " — upload a logo first"}
+              {wmType === "image" && !logoImg && "- upload a logo first"}
             </button>
           )}
 

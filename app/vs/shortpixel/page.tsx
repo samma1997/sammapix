@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs ShortPixel — Free Image Compression Comparison 2026",
+  title: "SammaPix vs ShortPixel - Free Image Compression Comparison 2026",
   description: "SammaPix vs ShortPixel comparison. SammaPix is 100% free, browser-based, and never uploads your files. ShortPixel requires an API key and server-side processing.",
   keywords: [
     "shortpixel alternative",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/shortpixel`,
   },
   openGraph: {
-    title: "SammaPix vs ShortPixel — Honest Comparison 2026",
-    description: "ShortPixel is a solid paid tool. SammaPix is free, browser-based, and adds AI rename — no API key or server upload required.",
+    title: "SammaPix vs ShortPixel - Honest Comparison 2026",
+    description: "ShortPixel is a solid paid tool. SammaPix is free, browser-based, and adds AI rename- no API key or server upload required.",
     type: "website",
     url: `${APP_URL}/vs/shortpixel`,
     images: [
@@ -71,13 +71,13 @@ export default function VsShortPixelPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs ShortPixel
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          ShortPixel is a well-known image compression service — but it sends your files to a server and runs on a credit system. SammaPix is completely free, processes everything in your browser, and adds AI-powered renaming.
+          ShortPixel is a well-known image compression service- but it sends your files to a server and runs on a credit system. SammaPix is completely free, processes everything in your browser, and adds AI-powered renaming.
         </p>
         <div className="mt-8">
           <Link href="/">
@@ -142,37 +142,37 @@ export default function VsShortPixelPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Privacy — ShortPixel uploads your images to its servers
+              Privacy - ShortPixel uploads your images to its servers
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ShortPixel&apos;s compression engine runs on their servers, which means every image you process is transmitted over the internet. SammaPix compresses and converts entirely in your browser using WebAssembly and the Canvas API. Your files stay on your device at all times — critical if you handle client photos, legal documents, or private images.
+              ShortPixel&apos;s compression engine runs on their servers, which means every image you process is transmitted over the internet. SammaPix compresses and converts entirely in your browser using WebAssembly and the Canvas API. Your files stay on your device at all times- critical if you handle client photos, legal documents, or private images.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <FileImage className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Credits vs. truly free — a real difference for casual users
+              Credits vs. truly free- a real difference for casual users
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ShortPixel&apos;s free tier gives you 100 credits per month — each compressed image uses one credit. If you exceed the limit you need to buy more. SammaPix&apos;s compression is unlimited and free forever, no credit system, no account required. You can compress 500 images in a day and pay nothing.
+              ShortPixel&apos;s free tier gives you 100 credits per month- each compressed image uses one credit. If you exceed the limit you need to buy more. SammaPix&apos;s compression is unlimited and free forever, no credit system, no account required. You can compress 500 images in a day and pay nothing.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — a feature ShortPixel doesn&apos;t offer
+              AI rename- a feature ShortPixel doesn&apos;t offer
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-friendly filename and alt text description. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_7732.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">fresh-basil-pasta-recipe-close-up.webp</code>. ShortPixel focuses purely on compression and delivery — it has no AI rename feature at any price point.
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-friendly filename and alt text description. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_7732.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">fresh-basil-pasta-recipe-close-up.webp</code>. ShortPixel focuses purely on compression and delivery- it has no AI rename feature at any price point.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where ShortPixel wins — WordPress and automation
+              Where ShortPixel wins - WordPress and automation
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ShortPixel&apos;s WordPress plugin is its strongest selling point. It automatically compresses every image you upload to WordPress, with no manual steps. If your entire workflow lives inside WordPress, ShortPixel is a natural fit. SammaPix is a browser-based tool designed for manual batch workflows — it has no WordPress plugin.
+              ShortPixel&apos;s WordPress plugin is its strongest selling point. It automatically compresses every image you upload to WordPress, with no manual steps. If your entire workflow lives inside WordPress, ShortPixel is a natural fit. SammaPix is a browser-based tool designed for manual batch workflows- it has no WordPress plugin.
             </p>
           </div>
         </div>
@@ -187,7 +187,7 @@ export default function VsShortPixelPage() {
         <ul className="space-y-3 text-sm text-gray-600">
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You&apos;re hitting ShortPixel&apos;s monthly credit limits.</strong> SammaPix compression has no limits — process as many files as you need, for free.</span>
+            <span><strong className="text-gray-800">You&apos;re hitting ShortPixel&apos;s monthly credit limits.</strong> SammaPix compression has no limits- process as many files as you need, for free.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
@@ -211,7 +211,7 @@ export default function VsShortPixelPage() {
           <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Image Compressor</p>
-              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP — 100% free, no upload</p>
+              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP- 100% free, no upload</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -244,14 +244,14 @@ export default function VsShortPixelPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs ShortPixel — Which Image Compressor is Better in 2026?",
+            headline: "SammaPix vs ShortPixel - Which Image Compressor is Better in 2026?",
             description: "Detailed feature comparison between SammaPix and ShortPixel image compression tools.",
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
@@ -261,7 +261,7 @@ export default function VsShortPixelPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -276,19 +276,19 @@ export default function VsShortPixelPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | ShortPixel: 100 free credits/mo, then paid" },
-                { "@type": "ListItem", position: 2, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | ShortPixel: No — uploads to server" },
+                { "@type": "ListItem", position: 2, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | ShortPixel: No- uploads to server" },
                 { "@type": "ListItem", position: 3, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | ShortPixel: No" },
                 { "@type": "ListItem", position: 4, name: "WebP conversion", description: "SammaPix: Yes | ShortPixel: Yes" },
                 { "@type": "ListItem", position: 5, name: "WordPress plugin", description: "SammaPix: No | ShortPixel: Yes" },
                 { "@type": "ListItem", position: 6, name: "EXIF metadata removal", description: "SammaPix: Yes | ShortPixel: No" },
-                { "@type": "ListItem", position: 7, name: "No account required", description: "SammaPix: Yes (for compression) | ShortPixel: No — account required" },
+                { "@type": "ListItem", position: 7, name: "No account required", description: "SammaPix: Yes (for compression) | ShortPixel: No- account required" },
               ],
             },
           }),
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -304,7 +304,7 @@ export default function VsShortPixelPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -30,7 +30,7 @@ const competitors = [
     name: "TinyPNG",
     tagline: "The most popular image compressor",
     highlight:
-      "SammaPix processes locally — TinyPNG uploads to their servers",
+      "SammaPix processes locally - TinyPNG uploads to their servers",
     category: "Compression",
   },
   {
@@ -38,7 +38,7 @@ const competitors = [
     name: "Squoosh",
     tagline: "Google's image optimizer",
     highlight:
-      "SammaPix handles batch processing — Squoosh is single-file only",
+      "SammaPix handles batch processing - Squoosh is single-file only",
     category: "Compression",
   },
   {
@@ -46,7 +46,7 @@ const competitors = [
     name: "Canva",
     tagline: "Design platform with compression",
     highlight:
-      "SammaPix is purpose-built for optimization — no account needed",
+      "SammaPix is purpose-built for optimization- no account needed",
     category: "Design",
   },
   {
@@ -54,7 +54,7 @@ const competitors = [
     name: "ShortPixel",
     tagline: "WordPress image optimizer",
     highlight:
-      "SammaPix is free with no monthly limits — ShortPixel charges per image",
+      "SammaPix is free with no monthly limits - ShortPixel charges per image",
     category: "Compression",
   },
   {
@@ -62,7 +62,7 @@ const competitors = [
     name: "Photopea",
     tagline: "Free Photoshop alternative",
     highlight:
-      "SammaPix focuses on batch optimization — Photopea is a full editor",
+      "SammaPix focuses on batch optimization - Photopea is a full editor",
     category: "Editor",
   },
   {
@@ -70,7 +70,7 @@ const competitors = [
     name: "Optimizilla",
     tagline: "Online image compressor",
     highlight:
-      "SammaPix supports 20 tools — Optimizilla only compresses",
+      "SammaPix supports 20 tools - Optimizilla only compresses",
     category: "Compression",
   },
   {
@@ -78,7 +78,7 @@ const competitors = [
     name: "BIRME",
     tagline: "Bulk image resizer",
     highlight:
-      "SammaPix adds AI rename, EXIF strip, and more — BIRME only resizes",
+      "SammaPix adds AI rename, EXIF strip, and more - BIRME only resizes",
     category: "Resize",
   },
   {
@@ -86,7 +86,7 @@ const competitors = [
     name: "Compressor.io",
     tagline: "Lossy and lossless compression",
     highlight:
-      "SammaPix never uploads your files — Compressor.io requires server upload",
+      "SammaPix never uploads your files - Compressor.io requires server upload",
     category: "Compression",
   },
   {
@@ -94,7 +94,7 @@ const competitors = [
     name: "iLoveIMG",
     tagline: "All-in-one image tool suite",
     highlight:
-      "SammaPix is 100% browser-based — iLoveIMG uploads to servers",
+      "SammaPix is 100% browser-based- iLoveIMG uploads to servers",
     category: "Suite",
   },
   {
@@ -102,7 +102,7 @@ const competitors = [
     name: "ImageOptim",
     tagline: "Mac-only image optimizer",
     highlight:
-      "SammaPix works on any device — ImageOptim is Mac-only",
+      "SammaPix works on any device - ImageOptim is Mac-only",
     category: "Desktop",
   },
   {
@@ -110,7 +110,7 @@ const competitors = [
     name: "FilterPixel",
     tagline: "AI photo culling tool",
     highlight:
-      "SammaPix culling is free and private — FilterPixel requires upload and payment",
+      "SammaPix culling is free and private - FilterPixel requires upload and payment",
     category: "AI / Culling",
   },
   {
@@ -118,12 +118,12 @@ const competitors = [
     name: "VSCO",
     tagline: "Photo editing and filters",
     highlight:
-      "SammaPix FilmLab is free — VSCO requires subscription for premium filters",
+      "SammaPix FilmLab is free - VSCO requires subscription for premium filters",
     category: "Filters",
   },
 ];
 
-// Summary table data — rows are features, columns are tools
+// Summary table data- rows are features, columns are tools
 type FeatureValue = boolean | string;
 
 interface SummaryRow {
@@ -205,14 +205,14 @@ export default function VsHubPage() {
       {/* Page header */}
       <div className="mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-xs text-gray-500 dark:text-gray-400 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight mb-4 leading-tight">
           SammaPix vs Competitors
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl leading-relaxed">
           We believe in transparency. Here&apos;s how SammaPix stacks up against 12
-          popular image tools — no marketing spin, just facts.
+          popular image tools- no marketing spin, just facts.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link href="/tools">
@@ -399,7 +399,7 @@ export default function VsHubPage() {
         </div>
       </section>
 
-      {/* JSON-LD — BreadcrumbList */}
+      {/* JSON-LD - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -424,14 +424,14 @@ export default function VsHubPage() {
         }}
       />
 
-      {/* JSON-LD — WebPage */}
+      {/* JSON-LD - WebPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            name: "SammaPix vs Competitors — Honest Image Tool Comparisons",
+            name: "SammaPix vs Competitors - Honest Image Tool Comparisons",
             description:
               "Feature-by-feature comparisons of SammaPix against 12 popular image tools including TinyPNG, Squoosh, Canva, iLoveIMG, ShortPixel, and more.",
             url: `${APP_URL}/vs`,

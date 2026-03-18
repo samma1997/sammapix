@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Photopea — Image Optimization Comparison 2026",
+  title: "SammaPix vs Photopea - Image Optimization Comparison 2026",
   description: "SammaPix vs Photopea. Photopea is a powerful free Photoshop alternative. SammaPix is the faster choice for compression, WebP conversion, and AI rename without the learning curve.",
   keywords: [
     "photopea alternative",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/photopea`,
   },
   openGraph: {
-    title: "SammaPix vs Photopea — Image Optimization Comparison 2026",
-    description: "Photopea is a full Photoshop clone. SammaPix is the dedicated tool for compression, WebP conversion, and AI rename — no learning curve, no upload.",
+    title: "SammaPix vs Photopea - Image Optimization Comparison 2026",
+    description: "Photopea is a full Photoshop clone. SammaPix is the dedicated tool for compression, WebP conversion, and AI rename- no learning curve, no upload.",
     type: "website",
     url: `${APP_URL}/vs/photopea`,
     images: [
@@ -71,13 +71,13 @@ export default function VsPhotopeaPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs Photopea
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          Photopea is an impressive free Photoshop alternative built into the browser. But if your goal is to compress a batch of images, convert them to WebP, and rename them with AI for SEO — SammaPix does that in seconds, without the learning curve.
+          Photopea is an impressive free Photoshop alternative built into the browser. But if your goal is to compress a batch of images, convert them to WebP, and rename them with AI for SEO - SammaPix does that in seconds, without the learning curve.
         </p>
         <div className="mt-8">
           <Link href="/">
@@ -151,16 +151,16 @@ export default function VsPhotopeaPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Both are browser-based — but only SammaPix removes EXIF
+              Both are browser-based- but only SammaPix removes EXIF
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Photopea runs entirely in the browser and does not upload your files, which is excellent for privacy. SammaPix shares this approach. The difference is that SammaPix includes a dedicated EXIF Remover that strips GPS coordinates, device model, timestamps, and other metadata from your output files before download — Photopea does not offer this feature.
+              Photopea runs entirely in the browser and does not upload your files, which is excellent for privacy. SammaPix shares this approach. The difference is that SammaPix includes a dedicated EXIF Remover that strips GPS coordinates, device model, timestamps, and other metadata from your output files before download - Photopea does not offer this feature.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — purpose-built for SEO workflows
+              AI rename- purpose-built for SEO workflows
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               After compressing an image in Photopea, you manually type a filename in the save dialog. SammaPix can analyze each image with Google Gemini and suggest a descriptive SEO filename automatically. For content creators, bloggers, and e-commerce teams who publish dozens of images per week, this saves significant time and improves search visibility.
@@ -169,19 +169,19 @@ export default function VsPhotopeaPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where Photopea wins — full image editing power
+              Where Photopea wins- full image editing power
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Photopea is technically remarkable — it supports PSD, XCF, and Sketch files in the browser, with full layer support, adjustment layers, blending modes, and advanced selection tools. No image optimizer, including SammaPix, comes close. If you need to edit, retouch, or composite images, Photopea is the right choice. SammaPix is for optimizing images that are already ready to publish.
+              Photopea is technically remarkable- it supports PSD, XCF, and Sketch files in the browser, with full layer support, adjustment layers, blending modes, and advanced selection tools. No image optimizer, including SammaPix, comes close. If you need to edit, retouch, or composite images, Photopea is the right choice. SammaPix is for optimizing images that are already ready to publish.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Mobile experience — SammaPix is built for it
+              Mobile experience - SammaPix is built for it
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Photopea&apos;s complex interface — panels, menus, toolbars — is not practical on a phone screen. SammaPix&apos;s simple drop-and-download interface works well on mobile, so you can quickly compress and convert images you&apos;ve shot on your phone without switching to a desktop.
+              Photopea&apos;s complex interface- panels, menus, toolbars- is not practical on a phone screen. SammaPix&apos;s simple drop-and-download interface works well on mobile, so you can quickly compress and convert images you&apos;ve shot on your phone without switching to a desktop.
             </p>
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function VsPhotopeaPage() {
         <ul className="space-y-3 text-sm text-gray-600">
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">Your images are already edited and ready to publish.</strong> SammaPix is the last step in your workflow — compress, convert, rename, download.</span>
+            <span><strong className="text-gray-800">Your images are already edited and ready to publish.</strong> SammaPix is the last step in your workflow- compress, convert, rename, download.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
@@ -208,7 +208,7 @@ export default function VsPhotopeaPage() {
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You want EXIF data removed before sharing.</strong> SammaPix strips all metadata client-side — Photopea does not.</span>
+            <span><strong className="text-gray-800">You want EXIF data removed before sharing.</strong> SammaPix strips all metadata client-side - Photopea does not.</span>
           </li>
         </ul>
       </div>
@@ -220,7 +220,7 @@ export default function VsPhotopeaPage() {
           <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Image Compressor</p>
-              <p className="text-xs text-gray-500 mt-0.5">Compress up to 20 images at once — free, in-browser</p>
+              <p className="text-xs text-gray-500 mt-0.5">Compress up to 20 images at once- free, in-browser</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -238,7 +238,7 @@ export default function VsPhotopeaPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Ready to optimize images in seconds?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          No Photoshop skills required. Drop, compress, convert, rename — done.
+          No Photoshop skills required. Drop, compress, convert, rename- done.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -253,14 +253,14 @@ export default function VsPhotopeaPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs Photopea — Which Free Tool Should You Use for Image Optimization in 2026?",
+            headline: "SammaPix vs Photopea - Which Free Tool Should You Use for Image Optimization in 2026?",
             description: "Detailed comparison between SammaPix and Photopea for image compression, WebP conversion, and batch optimization.",
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
@@ -270,7 +270,7 @@ export default function VsPhotopeaPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -284,7 +284,7 @@ export default function VsPhotopeaPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Batch processing", description: "SammaPix: Yes, up to 20 files | Photopea: No — one file at a time" },
+                { "@type": "ListItem", position: 1, name: "Batch processing", description: "SammaPix: Yes, up to 20 files | Photopea: No- one file at a time" },
                 { "@type": "ListItem", position: 2, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Photopea: No" },
                 { "@type": "ListItem", position: 3, name: "Browser-based (no upload)", description: "SammaPix: Yes | Photopea: Yes" },
                 { "@type": "ListItem", position: 4, name: "EXIF metadata removal", description: "SammaPix: Yes | Photopea: No" },
@@ -297,7 +297,7 @@ export default function VsPhotopeaPage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -313,7 +313,7 @@ export default function VsPhotopeaPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -326,7 +326,7 @@ export default function VsPhotopeaPage() {
                 name: "Is SammaPix better than Photopea?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "SammaPix and Photopea serve different purposes. Photopea is a full-featured image editor with layer support, PSD files, and advanced selection tools — perfect for editing and retouching. SammaPix is a specialized optimization tool designed for the final step: batch compression, WebP conversion, AI naming, and EXIF removal before publishing. Use both together: edit in Photopea, then optimize with SammaPix.",
+                  text: "SammaPix and Photopea serve different purposes. Photopea is a full-featured image editor with layer support, PSD files, and advanced selection tools- perfect for editing and retouching. SammaPix is a specialized optimization tool designed for the final step: batch compression, WebP conversion, AI naming, and EXIF removal before publishing. Use both together: edit in Photopea, then optimize with SammaPix.",
                 },
               },
               {

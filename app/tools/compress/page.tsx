@@ -8,9 +8,9 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Compress Images Free Online — JPG, PNG, WebP | SammaPix",
+  title: "Compress Images Free Online - JPG, PNG, WebP | SammaPix",
   description:
-    "Compress images 80% smaller instantly. JPG, PNG, WebP & GIF — free forever, browser-based, zero uploads. Optimize for web today.",
+    "Compress images 80% smaller instantly. JPG, PNG, WebP & GIF- free forever, browser-based, zero uploads. Optimize for web today.",
   keywords: [
     "image compressor",
     "compress images online",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Compress Images Free Online — JPG, PNG, WebP | SammaPix",
+    title: "Compress Images Free Online - JPG, PNG, WebP | SammaPix",
     description:
-      "Compress images 80% smaller instantly. JPG, PNG, WebP & GIF — free forever, browser-based, zero uploads. Optimize for web today.",
+      "Compress images 80% smaller instantly. JPG, PNG, WebP & GIF- free forever, browser-based, zero uploads. Optimize for web today.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 const features = [
   {
     icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
-    title: "Browser-based — 100% private",
+    title: "Browser-based- 100% private",
     description:
       "Compression happens entirely in your browser using JavaScript. Your images are never sent to any server.",
   },
@@ -77,7 +77,7 @@ export default function CompressPage() {
     <main>
       <ToolHeader
         title="Image Compressor"
-        description="Compress JPG, PNG, WebP and GIF files directly in your browser — nothing uploaded to any server."
+        description="Compress JPG, PNG, WebP and GIF files directly in your browser- nothing uploaded to any server."
         icon={Minimize2}
         accentColor="#6366F1"
       />
@@ -90,7 +90,7 @@ export default function CompressPage() {
         steps={[
           {
             title: "Drop your images",
-            desc: "Drag and drop JPG, PNG, WebP or GIF files onto the upload area — or click to browse.",
+            desc: "Drag and drop JPG, PNG, WebP or GIF files onto the upload area- or click to browse.",
           },
           {
             title: "Adjust quality slider",
@@ -161,19 +161,19 @@ export default function CompressPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Before uploading to your website or CMS to improve page speed
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Before attaching to emails to reduce attachment size
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Before sharing on social media for faster upload
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               For e-commerce product images to improve Core Web Vitals
             </li>
           </ul>
@@ -319,7 +319,7 @@ export default function CompressPage() {
                     "name": "Does SammaPix upload my images to a server?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "No. SammaPix is entirely browser-based. All image compression happens on your device using JavaScript. Your images never leave your computer — not uploaded, not stored, and not tracked. Your privacy is completely protected."
+                      "text": "No. SammaPix is entirely browser-based. All image compression happens on your device using JavaScript. Your images never leave your computer- not uploaded, not stored, and not tracked. Your privacy is completely protected."
                     }
                   }
                 ]

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Image Optimization Glossary — SammaPix",
+        alt: "Image Optimization Glossary - SammaPix",
       },
     ],
   },
@@ -51,7 +51,7 @@ const GLOSSARY_TERMS = [
     term: "Alpha Channel",
     letter: "A",
     definition:
-      "The alpha channel is a fourth data channel in an image that controls per-pixel transparency, alongside the three color channels (Red, Green, Blue). A pixel with an alpha value of 0 is fully transparent; a value of 255 (or 100%) is fully opaque. Formats that support alpha channels include PNG, WebP, and AVIF — JPEG does not.",
+      "The alpha channel is a fourth data channel in an image that controls per-pixel transparency, alongside the three color channels (Red, Green, Blue). A pixel with an alpha value of 0 is fully transparent; a value of 255 (or 100%) is fully opaque. Formats that support alpha channels include PNG, WebP, and AVIF - JPEG does not.",
     links: [],
   },
   {
@@ -59,7 +59,7 @@ const GLOSSARY_TERMS = [
     term: "Aspect Ratio",
     letter: "A",
     definition:
-      "Aspect ratio is the proportional relationship between an image's width and height, expressed as two numbers separated by a colon — for example, 16:9 or 4:3. Maintaining the correct aspect ratio when resizing prevents distortion and ensures images display correctly across platforms. Social media platforms and video formats each have their own required ratios.",
+      "Aspect ratio is the proportional relationship between an image's width and height, expressed as two numbers separated by a colon- for example, 16:9 or 4:3. Maintaining the correct aspect ratio when resizing prevents distortion and ensures images display correctly across platforms. Social media platforms and video formats each have their own required ratios.",
     links: [{ label: "CropRatio tool", href: "/tools/croproatio" }],
   },
   {
@@ -67,7 +67,7 @@ const GLOSSARY_TERMS = [
     term: "AVIF",
     letter: "A",
     definition:
-      "AVIF (AV1 Image File Format) is a modern image format derived from the AV1 video codec. It offers superior compression compared to both JPEG and WebP — typically 50% smaller file sizes at equivalent visual quality — and supports HDR, wide color gamut, and transparency. Browser support is strong as of 2026, though encoding can be slower than WebP.",
+      "AVIF (AV1 Image File Format) is a modern image format derived from the AV1 video codec. It offers superior compression compared to both JPEG and WebP- typically 50% smaller file sizes at equivalent visual quality- and supports HDR, wide color gamut, and transparency. Browser support is strong as of 2026, though encoding can be slower than WebP.",
     links: [{ label: "Convert to WebP or AVIF", href: "/tools/webp" }],
   },
   {
@@ -75,7 +75,7 @@ const GLOSSARY_TERMS = [
     term: "Batch Processing",
     letter: "B",
     definition:
-      "Batch processing applies the same operation — compression, format conversion, renaming, resizing — to a group of images simultaneously rather than one at a time. It is essential for photographers managing post-shoot workflows where hundreds of files need to be processed consistently. SammaPix performs all batch operations directly in the browser, so no files are uploaded to a server.",
+      "Batch processing applies the same operation- compression, format conversion, renaming, resizing- to a group of images simultaneously rather than one at a time. It is essential for photographers managing post-shoot workflows where hundreds of files need to be processed consistently. SammaPix performs all batch operations directly in the browser, so no files are uploaded to a server.",
     links: [{ label: "Batch compress images", href: "/tools/compress" }],
   },
   {
@@ -115,7 +115,7 @@ const GLOSSARY_TERMS = [
     term: "Crop Ratio",
     letter: "C",
     definition:
-      "A crop ratio describes the aspect ratio applied when cropping an image — the proportion of width to height retained after cutting. Common crop ratios include 1:1 (square, for Instagram), 16:9 (widescreen, for YouTube), and 4:3 (standard photo). Cropping to a preset ratio ensures consistency across a gallery or content series without manual calculation.",
+      "A crop ratio describes the aspect ratio applied when cropping an image- the proportion of width to height retained after cutting. Common crop ratios include 1:1 (square, for Instagram), 16:9 (widescreen, for YouTube), and 4:3 (standard photo). Cropping to a preset ratio ensures consistency across a gallery or content series without manual calculation.",
     links: [{ label: "CropRatio tool", href: "/tools/croproatio" }],
   },
   {
@@ -123,7 +123,7 @@ const GLOSSARY_TERMS = [
     term: "DPI / PPI",
     letter: "D",
     definition:
-      "DPI (dots per inch) describes print output resolution — how many ink dots a printer places per inch. PPI (pixels per inch) describes screen resolution — how many pixels exist within one inch of a display. For web images, PPI is largely irrelevant because browsers render images based on pixel dimensions, not PPI. A 72 PPI web image and a 300 PPI print image are identical on screen if they share the same pixel dimensions.",
+      "DPI (dots per inch) describes print output resolution- how many ink dots a printer places per inch. PPI (pixels per inch) describes screen resolution- how many pixels exist within one inch of a display. For web images, PPI is largely irrelevant because browsers render images based on pixel dimensions, not PPI. A 72 PPI web image and a 300 PPI print image are identical on screen if they share the same pixel dimensions.",
     links: [],
   },
   {
@@ -131,7 +131,7 @@ const GLOSSARY_TERMS = [
     term: "EXIF Data",
     letter: "E",
     definition:
-      "EXIF (Exchangeable Image File Format) data is metadata embedded in image files by cameras and smartphones. It records technical details like shutter speed, aperture, ISO, lens focal length, camera model, and — critically for privacy — GPS coordinates of where the photo was taken. Sharing images with GPS EXIF data intact can reveal your home address or travel patterns to anyone who views the file.",
+      "EXIF (Exchangeable Image File Format) data is metadata embedded in image files by cameras and smartphones. It records technical details like shutter speed, aperture, ISO, lens focal length, camera model, and- critically for privacy - GPS coordinates of where the photo was taken. Sharing images with GPS EXIF data intact can reveal your home address or travel patterns to anyone who views the file.",
     links: [
       { label: "Remove EXIF data", href: "/tools/exif" },
       { label: "Remove GPS from photos", href: "/blog/remove-gps-from-photos" },
@@ -142,7 +142,7 @@ const GLOSSARY_TERMS = [
     term: "File Size",
     letter: "F",
     definition:
-      "File size is the amount of storage space an image file occupies, measured in bytes, kilobytes (KB), or megabytes (MB). For web use, smaller file sizes directly reduce page load times and bandwidth consumption. The relationship between image dimensions and file size is not linear — doubling the pixel dimensions quadruples the number of pixels and roughly quadruples the file size before compression.",
+      "File size is the amount of storage space an image file occupies, measured in bytes, kilobytes (KB), or megabytes (MB). For web use, smaller file sizes directly reduce page load times and bandwidth consumption. The relationship between image dimensions and file size is not linear- doubling the pixel dimensions quadruples the number of pixels and roughly quadruples the file size before compression.",
     links: [{ label: "Reduce file size", href: "/tools/compress" }],
   },
   {
@@ -158,7 +158,7 @@ const GLOSSARY_TERMS = [
     term: "GPS Metadata",
     letter: "G",
     definition:
-      "GPS metadata is a subset of EXIF data that records the precise latitude and longitude coordinates where a photograph was captured. Most modern smartphones embed this information automatically. While useful for organizing travel photos, GPS metadata poses a significant privacy risk when sharing images publicly — anyone can extract the coordinates and locate your home, office, or exact shooting location.",
+      "GPS metadata is a subset of EXIF data that records the precise latitude and longitude coordinates where a photograph was captured. Most modern smartphones embed this information automatically. While useful for organizing travel photos, GPS metadata poses a significant privacy risk when sharing images publicly- anyone can extract the coordinates and locate your home, office, or exact shooting location.",
     links: [
       { label: "Remove GPS metadata", href: "/tools/exif" },
       { label: "GeoSort by location", href: "/tools/geosort" },
@@ -169,7 +169,7 @@ const GLOSSARY_TERMS = [
     term: "Haversine Formula",
     letter: "H",
     definition:
-      "The Haversine formula is a mathematical equation used to calculate the great-circle distance between two points on a sphere given their latitude and longitude coordinates. In image processing, it powers GPS-based photo sorting and clustering tools that group photographs by geographic proximity — for example, identifying all photos taken within a specific country or within a 10 km radius of a landmark.",
+      "The Haversine formula is a mathematical equation used to calculate the great-circle distance between two points on a sphere given their latitude and longitude coordinates. In image processing, it powers GPS-based photo sorting and clustering tools that group photographs by geographic proximity- for example, identifying all photos taken within a specific country or within a 10 km radius of a landmark.",
     links: [{ label: "GeoSort photos by country", href: "/tools/geosort" }],
   },
   {
@@ -177,7 +177,7 @@ const GLOSSARY_TERMS = [
     term: "HEIC / HEIF",
     letter: "H",
     definition:
-      "HEIC (High Efficiency Image Container) is Apple's implementation of the HEIF (High Efficiency Image Format) standard. iPhones have used HEIC as the default capture format since iOS 11. HEIC images are typically half the size of equivalent JPEGs with the same visual quality. The format supports 16-bit color and Live Photos, but compatibility is limited outside Apple ecosystems — most web platforms and Android devices require conversion to JPEG or WebP.",
+      "HEIC (High Efficiency Image Container) is Apple's implementation of the HEIF (High Efficiency Image Format) standard. iPhones have used HEIC as the default capture format since iOS 11. HEIC images are typically half the size of equivalent JPEGs with the same visual quality. The format supports 16-bit color and Live Photos, but compatibility is limited outside Apple ecosystems- most web platforms and Android devices require conversion to JPEG or WebP.",
     links: [
       { label: "Convert HEIC to JPG", href: "/tools/heic" },
       { label: "iPhone HEIC to JPG guide", href: "/blog/iphone-heic-to-jpg-guide" },
@@ -188,7 +188,7 @@ const GLOSSARY_TERMS = [
     term: "ICC Profile",
     letter: "I",
     definition:
-      "An ICC (International Color Consortium) profile is a standardized file embedded in an image that defines its color space — the gamut and tonal range it was captured or edited in. When you open an image in a color-managed application, the ICC profile tells the app how to interpret the raw color values. Stripping ICC profiles during compression can cause color shifts, particularly in images edited in Adobe RGB or Display P3.",
+      "An ICC (International Color Consortium) profile is a standardized file embedded in an image that defines its color space- the gamut and tonal range it was captured or edited in. When you open an image in a color-managed application, the ICC profile tells the app how to interpret the raw color values. Stripping ICC profiles during compression can cause color shifts, particularly in images edited in Adobe RGB or Display P3.",
     links: [],
   },
   {
@@ -207,7 +207,7 @@ const GLOSSARY_TERMS = [
     term: "Lossless Compression",
     letter: "L",
     definition:
-      "Lossless compression reduces file size without discarding any image data — the decompressed image is bit-for-bit identical to the original. Formats like PNG and WebP lossless use algorithms (Deflate, LZ77) that find and encode redundant patterns. Lossless compression is preferred for graphics with flat colors, text, logos, and screenshots where any quality degradation is visible, but results in larger files than lossy compression for photographs.",
+      "Lossless compression reduces file size without discarding any image data- the decompressed image is bit-for-bit identical to the original. Formats like PNG and WebP lossless use algorithms (Deflate, LZ77) that find and encode redundant patterns. Lossless compression is preferred for graphics with flat colors, text, logos, and screenshots where any quality degradation is visible, but results in larger files than lossy compression for photographs.",
     links: [{ label: "Compress images losslessly", href: "/tools/compress" }],
   },
   {
@@ -215,7 +215,7 @@ const GLOSSARY_TERMS = [
     term: "Lossy Compression",
     letter: "L",
     definition:
-      "Lossy compression permanently discards image data that is considered imperceptible to the human eye, achieving much higher compression ratios than lossless methods. JPEG, WebP (lossy), and AVIF all use lossy compression. Each subsequent save of a lossy image compounds the quality loss — a process sometimes called 'generation loss.' The key metric is finding the minimum quality setting where degradation is invisible to viewers.",
+      "Lossy compression permanently discards image data that is considered imperceptible to the human eye, achieving much higher compression ratios than lossless methods. JPEG, WebP (lossy), and AVIF all use lossy compression. Each subsequent save of a lossy image compounds the quality loss- a process sometimes called 'generation loss.' The key metric is finding the minimum quality setting where degradation is invisible to viewers.",
     links: [
       { label: "Compress images", href: "/tools/compress" },
       { label: "Compress images without losing quality", href: "/blog/compress-images-without-losing-quality" },
@@ -237,7 +237,7 @@ const GLOSSARY_TERMS = [
     term: "Perceptual Hashing",
     letter: "P",
     definition:
-      "Perceptual hashing (pHash) generates a compact fingerprint of an image based on its visual content rather than its raw bytes. Unlike cryptographic hashes (MD5, SHA1) that change entirely with any pixel difference, perceptual hashes of visually similar images produce similar or identical values. This makes them ideal for duplicate photo detection — two versions of the same image at different sizes or quality levels will share nearly identical pHash values.",
+      "Perceptual hashing (pHash) generates a compact fingerprint of an image based on its visual content rather than its raw bytes. Unlike cryptographic hashes (MD5, SHA1) that change entirely with any pixel difference, perceptual hashes of visually similar images produce similar or identical values. This makes them ideal for duplicate photo detection- two versions of the same image at different sizes or quality levels will share nearly identical pHash values.",
     links: [{ label: "Find duplicate photos", href: "/tools/twinhunt" }],
   },
   {
@@ -245,7 +245,7 @@ const GLOSSARY_TERMS = [
     term: "Pixel",
     letter: "P",
     definition:
-      "A pixel (picture element) is the smallest addressable unit of a raster image, representing a single color value. In an RGB image, each pixel stores three channel values (0–255 for 8-bit). A 3000 x 2000 pixel image contains exactly 6 million pixels — 6 megapixels. Pixel count does not directly determine file size, which also depends on the format, compression level, and content complexity of the image.",
+      "A pixel (picture element) is the smallest addressable unit of a raster image, representing a single color value. In an RGB image, each pixel stores three channel values (0–255 for 8-bit). A 3000 x 2000 pixel image contains exactly 6 million pixels- 6 megapixels. Pixel count does not directly determine file size, which also depends on the format, compression level, and content complexity of the image.",
     links: [],
   },
   {
@@ -269,7 +269,7 @@ const GLOSSARY_TERMS = [
     term: "Quality Factor",
     letter: "Q",
     definition:
-      "The quality factor (typically a scale of 0–100) controls the compression aggressiveness applied to lossy formats like JPEG and WebP. A quality of 100 preserves the most detail with the largest file; a quality of 0 creates the smallest file with heavy artifacting. For web use, quality 75–85 for JPEG and 75–80 for WebP typically achieves the optimal tradeoff — invisible quality loss with significant file size reduction.",
+      "The quality factor (typically a scale of 0–100) controls the compression aggressiveness applied to lossy formats like JPEG and WebP. A quality of 100 preserves the most detail with the largest file; a quality of 0 creates the smallest file with heavy artifacting. For web use, quality 75–85 for JPEG and 75–80 for WebP typically achieves the optimal tradeoff- invisible quality loss with significant file size reduction.",
     links: [{ label: "Set quality when compressing", href: "/tools/compress" }],
   },
   {
@@ -285,7 +285,7 @@ const GLOSSARY_TERMS = [
     term: "Resolution",
     letter: "R",
     definition:
-      "Image resolution describes the level of detail in an image, typically expressed as total pixel dimensions (e.g., 3000 x 2000 pixels) or megapixels (6 MP). Higher resolution means more pixels and greater detail, but also larger file sizes. For web use, resolution requirements depend on display size — a full-width desktop hero image needs around 1920 px wide; a thumbnail might only need 400 px. Serving images at exactly the required resolution (not larger) is a core web optimization technique.",
+      "Image resolution describes the level of detail in an image, typically expressed as total pixel dimensions (e.g., 3000 x 2000 pixels) or megapixels (6 MP). Higher resolution means more pixels and greater detail, but also larger file sizes. For web use, resolution requirements depend on display size- a full-width desktop hero image needs around 1920 px wide; a thumbnail might only need 400 px. Serving images at exactly the required resolution (not larger) is a core web optimization technique.",
     links: [{ label: "Resize images", href: "/tools/resizepack" }],
   },
   {
@@ -293,7 +293,7 @@ const GLOSSARY_TERMS = [
     term: "Resize",
     letter: "R",
     definition:
-      "Resizing an image changes its pixel dimensions — either upscaling (increasing size) or downscaling (reducing size). Downscaling always reduces file size and is lossless in information terms for the output use case. Upscaling beyond the original resolution introduces interpolation artifacts because pixel data must be invented. For web performance, serving images at the exact display dimensions rather than relying on CSS to scale them down is a significant optimization.",
+      "Resizing an image changes its pixel dimensions- either upscaling (increasing size) or downscaling (reducing size). Downscaling always reduces file size and is lossless in information terms for the output use case. Upscaling beyond the original resolution introduces interpolation artifacts because pixel data must be invented. For web performance, serving images at the exact display dimensions rather than relying on CSS to scale them down is a significant optimization.",
     links: [{ label: "Resize for social media", href: "/tools/resizepack" }],
   },
   {
@@ -317,7 +317,7 @@ const GLOSSARY_TERMS = [
     term: "Thumbnail",
     letter: "T",
     definition:
-      "A thumbnail is a small preview version of a larger image, typically used in galleries, search results, product listings, and social media cards. Thumbnails are generated by downscaling the original to a fixed or maximum dimension — common sizes include 150x150, 300x300, or 400x300 pixels. Serving thumbnails instead of scaled-down full images is a core web performance optimization that can reduce page weight by 80–95% for image-heavy pages.",
+      "A thumbnail is a small preview version of a larger image, typically used in galleries, search results, product listings, and social media cards. Thumbnails are generated by downscaling the original to a fixed or maximum dimension- common sizes include 150x150, 300x300, or 400x300 pixels. Serving thumbnails instead of scaled-down full images is a core web performance optimization that can reduce page weight by 80–95% for image-heavy pages.",
     links: [{ label: "Resize to thumbnail", href: "/tools/resizepack" }],
   },
   {
@@ -333,7 +333,7 @@ const GLOSSARY_TERMS = [
     term: "Watermark",
     letter: "W",
     definition:
-      "A watermark is a visible or invisible mark overlaid on an image to indicate ownership, copyright, or branding. Visible watermarks are typically text or logos embedded semi-transparently over the image content to deter unauthorized use. Invisible (steganographic) watermarks embed data imperceptibly in pixel values for forensic identification. Batch watermarking — applying a consistent mark to hundreds of images at once — is essential for photographers distributing work online.",
+      "A watermark is a visible or invisible mark overlaid on an image to indicate ownership, copyright, or branding. Visible watermarks are typically text or logos embedded semi-transparently over the image content to deter unauthorized use. Invisible (steganographic) watermarks embed data imperceptibly in pixel values for forensic identification. Batch watermarking- applying a consistent mark to hundreds of images at once- is essential for photographers distributing work online.",
     links: [{ label: "Batch watermark photos", href: "/tools/stampit" }],
   },
   {
@@ -528,7 +528,7 @@ export default function GlossaryPage() {
           </p>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
             Every term in this glossary maps to something you can do right now.
-            Compress, convert, strip EXIF data, or find duplicates — all free,
+            Compress, convert, strip EXIF data, or find duplicates- all free,
             all in the browser, no upload required.
           </p>
           <div className="flex flex-wrap gap-3">

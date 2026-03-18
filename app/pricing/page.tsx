@@ -20,7 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
-import { Download } from "lucide-react";
+import { Download, Infinity, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
 
 // ─── Tool grid data ────────────────────────────────────────────────────────────
 
@@ -177,16 +177,16 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                "All tools included",
-                "20 files per batch",
-                "10 AI renames / day",
-                "10 AI alt text / day",
-                "No ZIP download",
-                "Community support",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  <span className="mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252] select-none">—</span>
-                  {item}
+                { icon: Sparkles, text: "All 22 tools included" },
+                { icon: FileStack, text: "20 files per batch" },
+                { icon: Zap, text: "10 AI renames / day" },
+                { icon: Zap, text: "10 AI alt text / day" },
+                { icon: Package, text: "No ZIP download" },
+                { icon: Headphones, text: "Community support" },
+              ].map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
+                  <Icon className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252]" strokeWidth={1.5} />
+                  {text}
                 </li>
               ))}
             </ul>
@@ -219,7 +219,7 @@ export default function PricingPage() {
               </div>
               {annual ? (
                 <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
-                  Billed annually — save ~{savePercent}% vs monthly
+                  Billed annually- save ~{savePercent}% vs monthly
                 </p>
               ) : (
                 <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
@@ -230,22 +230,18 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                { text: "Everything in Free, plus:", bold: true },
-                { text: "Unlimited AI renames", bold: false },
-                { text: "Unlimited AI alt text", bold: false },
-                { text: "500 files per batch", bold: false },
-                { text: "50 MB per file", bold: false },
-                { text: "ZIP download", bold: false },
-                { text: "AI Workflow Pipeline presets", bold: false },
-                { text: "Install as desktop app", bold: false, icon: true },
-                { text: "No ads, priority support", bold: false },
-              ].map(({ text, bold, icon }) => (
+                { icon: Sparkles, text: "Everything in Free, plus:", bold: true },
+                { icon: Infinity, text: "Unlimited AI renames", bold: false },
+                { icon: Infinity, text: "Unlimited AI alt text", bold: false },
+                { icon: FileStack, text: "500 files per batch", bold: false },
+                { icon: FileStack, text: "50 MB per file", bold: false },
+                { icon: Package, text: "ZIP download", bold: false },
+                { icon: Zap, text: "AI Workflow Pipeline presets", bold: false },
+                { icon: MonitorDown, text: "Install as desktop app", bold: false },
+                { icon: Ban, text: "No ads, priority support", bold: false },
+              ].map(({ icon: Icon, text, bold }) => (
                 <li key={text} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  {icon ? (
-                    <Download className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#6366F1]/60" strokeWidth={1.5} />
-                  ) : (
-                    <span className="mt-0.5 shrink-0 select-none text-[#6366F1]/60">—</span>
-                  )}
+                  <Icon className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#6366F1]/60" strokeWidth={1.5} />
                   {bold ? (
                     <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">{text}</span>
                   ) : (
@@ -300,7 +296,7 @@ export default function PricingPage() {
               </a>
             </div>
 
-            {/* Standard — highlighted */}
+            {/* Standard- highlighted */}
             <div className="border-2 border-[#6366F1] rounded-lg p-4 bg-white dark:bg-[#191919] relative">
               <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
                 <span className="inline-block bg-[#6366F1] text-white text-[10px] font-semibold uppercase tracking-widest px-2.5 py-0.5 rounded-full">
@@ -368,6 +364,17 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
+          {/* Combo tools listed below */}
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {["AI Alt Text", "Transcribe", "WebLift", "BlogDrop", "ShopShot", "InstaPrep", "CleanDrop", "PixShip", "AI Workflow"].map((name) => (
+              <span
+                key={name}
+                className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] px-3 py-1.5 rounded-md border border-[#F5F5F5] dark:border-[#252525] bg-white dark:bg-[#191919]"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* ── Pro unlocks strip ──────────────────────────────────────────── */}
@@ -409,14 +416,14 @@ export default function PricingPage() {
             Built for photographers who publish
           </p>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-5">
-            SammaPix Pro is designed for one specific workflow: shoot, edit, optimize, publish — without switching between five different tools. Whether you run a photography blog, post on Instagram, or manage an e-commerce catalog, the AI pipeline handles the tedious parts so you can focus on the work.
+            SammaPix Pro is designed for one specific workflow: shoot, edit, optimize, publish- without switching between five different tools. Whether you run a photography blog, post on Instagram, or manage an e-commerce catalog, the AI pipeline handles the tedious parts so you can focus on the work.
           </p>
           <ul className="space-y-2.5">
             {[
               "Compress and rename 500 photos in a single batch",
               "AI-generated SEO filenames ready for WordPress, Webflow, or Shopify",
-              "Alt text generated automatically — paste and publish",
-              "100% browser-based — your RAW files never touch a server",
+              "Alt text generated automatically- paste and publish",
+              "100% browser-based- your RAW files never touch a server",
               "Trusted by photographers in 40+ countries",
             ].map((point) => (
               <li
@@ -444,11 +451,11 @@ export default function PricingPage() {
           <div className="space-y-3">
             <FaqItem
               q="Is SammaPix free?"
-              a="Yes. All tools are free forever with no account required. The free plan is not a trial — it never expires."
+              a="Yes. All tools are free forever with no account required. The free plan is not a trial- it never expires."
             />
             <FaqItem
               q="What are credits?"
-              a="Credits are one-time purchases for AI operations. 1 credit = 1 AI rename or alt text. They never expire and work on any plan — Free or Pro."
+              a="Credits are one-time purchases for AI operations. 1 credit = 1 AI rename or alt text. They never expire and work on any plan - Free or Pro."
             />
             <FaqItem
               q="What does Pro include?"
@@ -456,11 +463,11 @@ export default function PricingPage() {
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally — no subscription required."
+              a="Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally- no subscription required."
             />
             <FaqItem
               q="What is the AI Workflow Pipeline?"
-              a="The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations — blog posts, Instagram galleries, or product pages. It's the difference between processing files one by one and running your entire shoot through in minutes."
+              a="The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations- blog posts, Instagram galleries, or product pages. It's the difference between processing files one by one and running your entire shoot through in minutes."
             />
             <FaqItem
               q="Do I need to create an account?"
@@ -468,11 +475,11 @@ export default function PricingPage() {
             />
             <FaqItem
               q="Are my images uploaded to a server?"
-              a="No. All core tools process images entirely in your browser. Images never leave your device. AI Rename and Alt Text generation send a small thumbnail to Google Gemini for analysis — your full-resolution files stay local."
+              a="No. All core tools process images entirely in your browser. Images never leave your device. AI Rename and Alt Text generation send a small thumbnail to Google Gemini for analysis- your full-resolution files stay local."
             />
             <FaqItem
               q="Can I cancel at any time?"
-              a="Yes. Cancel anytime — you keep Pro access until the end of your billing period. No questions asked."
+              a="Yes. Cancel anytime- you keep Pro access until the end of your billing period. No questions asked."
             />
           </div>
         </div>
@@ -486,7 +493,7 @@ export default function PricingPage() {
               "@type": "Product",
               "name": "SammaPix Pro",
               "description":
-                "AI Workflow Pipeline for photographers — batch processing, AI rename, alt text generation, and zero ads.",
+                "AI Workflow Pipeline for photographers- batch processing, AI rename, alt text generation, and zero ads.",
               "brand": { "@type": "Brand", "name": "SammaPix" },
               "offers": [
                 {
@@ -555,7 +562,7 @@ export default function PricingPage() {
                   name: "Is SammaPix free?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Yes. All tools are free forever with no account required. The free plan is not a trial — it never expires.",
+                    text: "Yes. All tools are free forever with no account required. The free plan is not a trial- it never expires.",
                   },
                 },
                 {
@@ -563,7 +570,7 @@ export default function PricingPage() {
                   name: "What are credits?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Credits are one-time purchases for AI operations. 1 credit = 1 AI rename or alt text. They never expire and work on any plan — Free or Pro.",
+                    text: "Credits are one-time purchases for AI operations. 1 credit = 1 AI rename or alt text. They never expire and work on any plan - Free or Pro.",
                   },
                 },
                 {
@@ -587,7 +594,7 @@ export default function PricingPage() {
                   name: "What is the AI Workflow Pipeline?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations — blog posts, Instagram galleries, or product pages.",
+                    text: "The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations- blog posts, Instagram galleries, or product pages.",
                   },
                 },
                 {
@@ -603,7 +610,7 @@ export default function PricingPage() {
                   name: "Are my images uploaded to a server?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "No. All core tools process images entirely in your browser. Images never leave your device. AI Rename and Alt Text generation send a small thumbnail to Google Gemini for analysis — your full-resolution files stay local.",
+                    text: "No. All core tools process images entirely in your browser. Images never leave your device. AI Rename and Alt Text generation send a small thumbnail to Google Gemini for analysis- your full-resolution files stay local.",
                   },
                 },
                 {
@@ -611,7 +618,7 @@ export default function PricingPage() {
                   name: "Can I cancel at any time?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Yes. Cancel anytime — you keep Pro access until the end of your billing period. No questions asked.",
+                    text: "Yes. Cancel anytime- you keep Pro access until the end of your billing period. No questions asked.",
                   },
                 },
               ],

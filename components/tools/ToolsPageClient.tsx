@@ -427,19 +427,39 @@ const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Creative", "Organize"]
 
 const USE_CASES = [
   {
-    title: "I need to optimize images for my website",
+    title: "I'm a blogger and need SEO-ready images",
     tools: [
+      { name: "BlogDrop", href: "/tools/blogdrop" },
+      { name: "AI Rename", href: "/tools/ai-rename" },
+      { name: "AI Alt Text", href: "/tools/alt-text" },
       { name: "Compress", href: "/tools/compress" },
-      { name: "WebP Converter", href: "/tools/webp" },
-      { name: "WebLift", href: "/tools/weblift" },
     ],
   },
   {
-    title: "I need to rename photos for SEO",
+    title: "I'm a photographer delivering to clients",
     tools: [
-      { name: "AI Rename", href: "/tools/ai-rename" },
-      { name: "AI Alt Text", href: "/tools/alt-text" },
-      { name: "BlogDrop", href: "/tools/blogdrop" },
+      { name: "PixShip", href: "/tools/pixship" },
+      { name: "Cull", href: "/tools/cull" },
+      { name: "FilmLab", href: "/tools/filmlab" },
+      { name: "StampIt", href: "/tools/stampit" },
+    ],
+  },
+  {
+    title: "I sell products online (e-commerce)",
+    tools: [
+      { name: "ShopShot", href: "/tools/shopshot" },
+      { name: "Compress", href: "/tools/compress" },
+      { name: "WebP Converter", href: "/tools/webp" },
+      { name: "EXIF Lens", href: "/tools/exif" },
+    ],
+  },
+  {
+    title: "I'm a web developer optimizing for performance",
+    tools: [
+      { name: "WebLift", href: "/tools/weblift" },
+      { name: "Compress", href: "/tools/compress" },
+      { name: "WebP Converter", href: "/tools/webp" },
+      { name: "CleanDrop", href: "/tools/cleandrop" },
     ],
   },
   {
@@ -448,6 +468,7 @@ const USE_CASES = [
       { name: "InstaPrep", href: "/tools/instaprep" },
       { name: "ResizePack", href: "/tools/resizepack" },
       { name: "CropRatio", href: "/tools/croproatio" },
+      { name: "FilmLab", href: "/tools/filmlab" },
     ],
   },
   {
@@ -456,14 +477,7 @@ const USE_CASES = [
       { name: "GeoSort", href: "/tools/geosort" },
       { name: "TravelMap", href: "/tools/travelmap" },
       { name: "Cull", href: "/tools/cull" },
-    ],
-  },
-  {
-    title: "I sell products online",
-    tools: [
-      { name: "ShopShot", href: "/tools/shopshot" },
-      { name: "Compress", href: "/tools/compress" },
-      { name: "StampIt", href: "/tools/stampit" },
+      { name: "EXIF Lens", href: "/tools/exif" },
     ],
   },
 ];

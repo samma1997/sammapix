@@ -198,7 +198,7 @@ export default function CullClient() {
     [currentIndex, photos.length]
   );
 
-  // ── File ingestion — pre-convert all previews in parallel ─────────────────
+  // ── File ingestion- pre-convert all previews in parallel ─────────────────
 
   const actuallyProcessFiles = useCallback(async (accepted: File[]) => {
 
@@ -333,7 +333,7 @@ export default function CullClient() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag photos to start culling"
+          aria-label="Drop zone- click or drag photos to start culling"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
@@ -414,7 +414,7 @@ export default function CullClient() {
               <div className="h-14 w-14 rounded-xl border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] flex items-center justify-center">
                 <Camera className="h-7 w-7 text-[#525252] dark:text-[#A3A3A3]" strokeWidth={1.5} />
               </div>
-              {/* spinning ring — circle */}
+              {/* spinning ring- circle */}
               <div className="absolute inset-0 rounded-full border-2 border-[#F5F5F5] dark:border-[#333] border-t-[#171717] dark:border-t-white animate-spin" />
             </div>
 
@@ -444,7 +444,7 @@ export default function CullClient() {
             </div>
 
             <p className="text-[11px] text-[#C4C4C4] max-w-xs">
-              HEIC photos are being converted in the background — this only happens once
+              HEIC photos are being converted in the background- this only happens once
             </p>
           </div>
         </div>

@@ -21,7 +21,7 @@ const RequestSchema = z.object({
 });
 
 // ── In-memory fallback (when Redis not configured) ──────────────────────────
-// Not reliable across cold starts — just a best-effort guard.
+// Not reliable across cold starts- just a best-effort guard.
 
 const memoryUsage = new Map<string, number>();
 
@@ -38,7 +38,7 @@ async function checkAndIncrement(
   limit: number
 ): Promise<{ allowed: boolean; used: number; remaining: number }> {
   const key = getRateLimitKey(email);
-  const ttl = 60 * 60 * 26; // 26 hours — ensures daily reset even with timezone drift
+  const ttl = 60 * 60 * 26; // 26 hours- ensures daily reset even with timezone drift
 
   // Try Redis first
   const current = await getInt(key);
@@ -59,7 +59,7 @@ async function checkAndIncrement(
     };
   }
 
-  // Redis unavailable — fallback to in-memory
+  // Redis unavailable- fallback to in-memory
   const memKey = key;
   const memUsed = memoryUsage.get(memKey) ?? 0;
   if (memUsed >= limit) {
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "AI service unavailable", code: "SERVICE_UNAVAILABLE" }, { status: 503 });
   }
 
-  // 5. Rate limit check — BEFORE calling Gemini (saves cost on exceeded requests)
+  // 5. Rate limit check - BEFORE calling Gemini (saves cost on exceeded requests)
   const rateCheck = await checkAndIncrement(email, dailyLimit);
 
   // 5a. If daily limit exceeded, attempt credit deduction instead of blocking
@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
     const creditResult = await deductCredit(email, 1);
 
     if (!creditResult.success) {
-      // No daily quota left AND no credits — block the request
+      // No daily quota left AND no credits- block the request
       return NextResponse.json(
         {
           error: "Daily limit reached. Buy credits for more AI operations.",
@@ -163,15 +163,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Credit deducted successfully — proceed with the AI operation
+    // Credit deducted successfully- proceed with the AI operation
     creditsUsed = 1;
     creditsRemaining = creditResult.remaining;
   } else {
-    // Within daily limit — fetch current credit balance to include in response
+    // Within daily limit- fetch current credit balance to include in response
     creditsRemaining = await getCreditBalance(email);
   }
 
-  // 6. Resize image to max 512px before sending to Gemini — saves ~90% cost + latency
+  // 6. Resize image to max 512px before sending to Gemini- saves ~90% cost + latency
   let finalBase64 = imageBase64;
   try {
     const inputBuffer = Buffer.from(imageBase64, "base64");
@@ -182,7 +182,7 @@ export async function POST(req: NextRequest) {
       .toBuffer();
     finalBase64 = resized.toString("base64");
   } catch {
-    // If resize fails (e.g. format not supported), use original — still works
+    // If resize fails (e.g. format not supported), use original- still works
   }
 
   // 7. Call Gemini
@@ -204,7 +204,7 @@ Return ONLY valid JSON (no markdown, no code blocks, just raw JSON):
 Rules for filename:
 - Describe EXACTLY what you see (objects, people, scene, colors, actions)
 - Use lowercase ${filenameLang} words, numbers, and hyphens ONLY
-- No accented characters (è, à, ü, ö, etc.) — use plain equivalents (e, a, u, o)
+- No accented characters (è, à, ü, ö, etc.)- use plain equivalents (e, a, u, o)
 - 3-6 words ideal, max 8 words
 - Be specific: "golden-retriever-puppy-park" not "dog-photo"
 - No words like "image", "photo", "picture", "file"

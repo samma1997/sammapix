@@ -8,9 +8,9 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Watermark Photos Free Online — Batch & Logo | SammaPix",
+  title: "Watermark Photos Free Online - Batch & Logo | SammaPix",
   description:
-    "Watermark photos instantly — text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
+    "Watermark photos instantly- text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
   keywords: [
     "watermark tool",
     "add watermark",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/stampit`,
   },
   openGraph: {
-    title: "Watermark Photos Free Online — Batch & Logo | SammaPix",
+    title: "Watermark Photos Free Online - Batch & Logo | SammaPix",
     description:
-      "Watermark photos instantly — text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
+      "Watermark photos instantly- text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
     url: `${APP_URL}/tools/stampit`,
     siteName: "SammaPix",
     type: "website",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 const features = [
   {
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
-    title: "100% private — no upload",
+    title: "100% private- no upload",
     description:
       "All watermarking happens in your browser using the Canvas API. Your images never leave your device.",
   },
@@ -54,7 +54,7 @@ const features = [
     icon: <Layers className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Tiled anti-crop mode",
     description:
-      "Repeats the watermark across the entire image in a diagonal grid — making it impossible to crop out.",
+      "Repeats the watermark across the entire image in a diagonal grid- making it impossible to crop out.",
   },
   {
     icon: <Archive className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
@@ -88,7 +88,7 @@ export default function StampItPage() {
         steps={[
           {
             title: "Drop your photos",
-            desc: "Upload JPG, PNG or WebP images — drag and drop or click to browse. Batch upload is supported.",
+            desc: "Upload JPG, PNG or WebP images- drag and drop or click to browse. Batch upload is supported.",
           },
           {
             title: "Add text or logo watermark",
@@ -140,17 +140,17 @@ export default function StampItPage() {
             What is StampIt?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            StampIt is a free browser-based batch watermarking tool. Add text or logo watermarks to multiple images at once using 9 position options (top-left, center, bottom-right, and more), adjustable opacity, and font size. For maximum protection, tiled filigrana mode repeats your watermark in a diagonal grid across the entire image — making it impossible to crop out.
+            StampIt is a free browser-based batch watermarking tool. Add text or logo watermarks to multiple images at once using 9 position options (top-left, center, bottom-right, and more), adjustable opacity, and font size. For maximum protection, tiled filigrana mode repeats your watermark in a diagonal grid across the entire image- making it impossible to crop out.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            StampIt supports SVG logos and text watermarks. All processing runs in the browser using the Canvas API — your images are never uploaded to any server. Download all watermarked images in a single ZIP archive.
+            StampIt supports SVG logos and text watermarks. All processing runs in the browser using the Canvas API- your images are never uploaded to any server. Download all watermarked images in a single ZIP archive.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             How batch image watermarking works
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             StampIt uses the browser&apos;s native Canvas API to draw watermarks
-            directly onto your images — no server, no upload. Drop your images,
+            directly onto your images- no server, no upload. Drop your images,
             configure the watermark text or logo, choose a position and opacity,
             then hit apply. All images are processed concurrently.
           </p>
@@ -165,19 +165,19 @@ export default function StampItPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Before sharing photos on social media to protect your copyright
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
-              When sending proofs to clients — they can preview but not use the full image
+              <span className="text-[#6366F1] mt-0.5"> - </span>
+              When sending proofs to clients- they can preview but not use the full image
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               To brand a batch of product photos before publishing to a website or marketplace
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               To add a subtle logo or copyright to stock photos you sell online
             </li>
           </ul>
@@ -257,7 +257,7 @@ export default function StampItPage() {
                 name: "Where should I place a watermark?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Common placements are bottom-right (subtle), bottom-center (visible), or center (maximum visibility). For copyright protection, use tiled mode which repeats the watermark diagonally across the entire image — this makes it virtually impossible to crop out.",
+                  text: "Common placements are bottom-right (subtle), bottom-center (visible), or center (maximum visibility). For copyright protection, use tiled mode which repeats the watermark diagonally across the entire image- this makes it virtually impossible to crop out.",
                 },
               },
               {
@@ -273,7 +273,7 @@ export default function StampItPage() {
                 name: "Are my images uploaded to a server?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. All watermarking happens locally in your browser using the Canvas API. Your images never leave your device — completely private, zero uploads.",
+                  text: "No. All watermarking happens locally in your browser using the Canvas API. Your images never leave your device- completely private, zero uploads.",
                 },
               },
             ],

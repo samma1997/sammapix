@@ -73,7 +73,7 @@ const affiliates: Record<
   canva: {
     icon: <Palette className="h-4 w-4" strokeWidth={1.5} />,
     eyebrow: "Design",
-    headline: "Create the graphics too — Canva Pro free trial.",
+    headline: "Create the graphics too - Canva Pro free trial.",
     cta: "Try Canva Pro →",
     href: "https://www.canva.com/?utm_source=sammapix&utm_medium=blog&utm_campaign=design-tools",
     bg: "bg-purple-50",

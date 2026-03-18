@@ -128,7 +128,7 @@ export default function PersonalizedTools({
           </button>
         </div>
 
-        {/* Tool cards — horizontally scrollable on mobile, grid on sm+ */}
+        {/* Tool cards- horizontally scrollable on mobile, grid on sm+ */}
         <div className="flex gap-3 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-3 lg:grid-cols-6 -mx-4 px-4 sm:mx-0 sm:px-0 mb-6">
           {config.tools.map((tool) => (
             <Link

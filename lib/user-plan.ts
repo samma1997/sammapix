@@ -2,8 +2,8 @@
  * Single source of truth for user plan detection.
  *
  * Priority:
- *   1. PRO_EMAILS env var  — manual grants (owner, testers)
- *   2. Stripe API          — active subscription
+ *   1. PRO_EMAILS env var - manual grants (owner, testers)
+ *   2. Stripe API         - active subscription
  *   3. Default: "free"
  */
 import { stripe } from "@/lib/stripe";
@@ -18,7 +18,7 @@ export async function getUserPlan(email: string | null | undefined): Promise<"fr
     .filter(Boolean);
   if (manualPro.includes(email.toLowerCase())) return "pro";
 
-  // 2. Stripe — check for active subscription
+  // 2. Stripe- check for active subscription
   const stripeKey = process.env.STRIPE_SECRET_KEY ?? "";
   if (!stripeKey || stripeKey === "sk_test_..." || stripeKey.startsWith("sk_test_placeholder")) {
     return "free"; // Stripe not configured

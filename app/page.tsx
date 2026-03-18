@@ -9,7 +9,7 @@ import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
 export const metadata = {
   title: "SammaPix -- AI Photo Workflow Platform for Content Creators",
   description:
-    "Compress, rename with AI, resize, convert -- all in one pipeline. 20+ free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert -- all in one pipeline. 22 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -25,7 +25,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert -- all in one pipeline. 20+ free tools. No uploads.",
+      "Compress, rename with AI, resize, convert -- all in one pipeline. 22 free tools. No uploads.",
     url: "https://sammapix.com",
     type: "website",
     images: [
@@ -43,29 +43,66 @@ export const metadata = {
 
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
-    question: "Is SammaPix completely free?",
+    question: "What tools does SammaPix offer?",
     answer:
-      "Yes. All tools are free forever -- compress, convert, resize, rename, video tools and more. AI tools require a free login (10/day limit). Pro unlocks unlimited AI operations and removes limits. No signup required for free tools.",
+      "SammaPix includes 22 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, ResizePack, CropRatio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: FilmLab (14 film presets), StampIt (watermarks). Organize: EXIF Lens, TwinHunt (duplicate finder), GeoSort, TravelMap, Cull. Plus 6 combo tools that chain steps together: WebLift, BlogDrop, ShopShot, InstaPrep, CleanDrop, and PixShip.",
   },
   {
-    question: "Do my images get uploaded to a server?",
+    question: "Is SammaPix really free?",
     answer:
-      "No. All processing happens in your browser using JavaScript. Your images never leave your device -- not even for combo tools (except AI steps, which send a thumbnail to Google Gemini).",
-  },
-  {
-    question: "What are combo tools?",
-    answer:
-      "Combo tools chain multiple steps together. For example, WebLift compresses, converts to WebP, and AI-renames in one click. You can toggle individual steps on or off.",
-  },
-  {
-    question: "What image formats does SammaPix support?",
-    answer:
-      "JPG, PNG, WebP, GIF, and HEIC (iPhone) are supported across all tools. Some tools have additional format support noted on their page.",
+      "Yes. All 22 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI operations per day. Pro ($7/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
   },
   {
     question: "Do I need to create an account?",
     answer:
-      "No account needed for most tools. AI-powered tools (AI Rename, AI Alt Text, Transcribe) require a free account to prevent API abuse. Pro plan requires an account.",
+      "No account is needed for most tools -- Compress, WebP, HEIC, Resize, Crop, FilmLab, StampIt, EXIF Lens, and more work without any login. Only AI-powered tools (AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.",
+  },
+  {
+    question: "Is my data safe?",
+    answer:
+      "Yes. All core tools process images entirely in your browser using JavaScript. Your files never leave your device. For AI-powered tools, only a small thumbnail (max 512px) is sent to Google Gemini for analysis -- your full-resolution originals stay local and are never stored on any server.",
+  },
+  {
+    question: "What image formats are supported?",
+    answer:
+      "SammaPix supports JPG, PNG, WebP, GIF, HEIC (iPhone), and AVIF across all tools. The Transcribe tool also accepts video formats (MP4, WebM, MOV) and audio files (MP3, WAV, AAC). Output formats include WebP, JPG, and PNG depending on the tool.",
+  },
+];
+
+// ─── Blog guides data ─────────────────────────────────────────────────────────
+
+const BLOG_GUIDES = [
+  {
+    href: "/blog/ai-image-renaming-seo-guide",
+    tag: "SEO",
+    title: "How AI Image Renaming Boosts Your SEO",
+    summary: "Transform generic filenames into keyword-rich names that rank in Google Image Search.",
+    gradient: "from-violet-500/20 to-indigo-500/20 dark:from-violet-500/10 dark:to-indigo-500/10",
+    borderAccent: "group-hover:border-violet-300 dark:group-hover:border-violet-800",
+  },
+  {
+    href: "/blog/compress-images-without-losing-quality",
+    tag: "PERFORMANCE",
+    title: "Compress Images Without Losing Quality",
+    summary: "The right formats, quality settings, and tools for fast web images.",
+    gradient: "from-blue-500/20 to-cyan-500/20 dark:from-blue-500/10 dark:to-cyan-500/10",
+    borderAccent: "group-hover:border-blue-300 dark:group-hover:border-blue-800",
+  },
+  {
+    href: "/blog/iphone-heic-to-jpg-guide",
+    tag: "TOOLS",
+    title: "Convert iPhone HEIC Photos to JPG Free",
+    summary: "Step-by-step guide without software or uploads needed.",
+    gradient: "from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/10 dark:to-teal-500/10",
+    borderAccent: "group-hover:border-emerald-300 dark:group-hover:border-emerald-800",
+  },
+  {
+    href: "/blog/organize-travel-photos-by-country",
+    tag: "TOOLS",
+    title: "Organize Travel Photos by Country Automatically",
+    summary: "Use GPS EXIF data to sort photos without manual work.",
+    gradient: "from-amber-500/20 to-orange-500/20 dark:from-amber-500/10 dark:to-orange-500/10",
+    borderAccent: "group-hover:border-amber-300 dark:group-hover:border-amber-800",
   },
 ];
 
@@ -81,10 +118,9 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 20+ free browser-based tools.",
+          "AI-powered photo and video workflow platform for content creators. 22 free browser-based tools.",
         sameAs: [
-          "https://twitter.com/lucasammarco",
-          "https://github.com/lucasammarco",
+          "https://www.instagram.com/lucasammarco.web/",
           "https://lucasammarco.com",
         ],
         founder: {
@@ -284,7 +320,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* -- Blog guides -- */}
+      {/* -- Blog guides (card-based with gradients) -- */}
       <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
@@ -296,47 +332,32 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                href: "/blog/ai-image-renaming-seo-guide",
-                tag: "SEO",
-                title: "How AI Image Renaming Boosts Your SEO",
-                summary:
-                  "Transform generic filenames into keyword-rich names that rank in Google Image Search.",
-              },
-              {
-                href: "/blog/compress-images-without-losing-quality",
-                tag: "PERFORMANCE",
-                title: "Compress Images Without Losing Quality",
-                summary:
-                  "The right formats, quality settings, and tools for fast web images.",
-              },
-              {
-                href: "/blog/iphone-heic-to-jpg-guide",
-                tag: "TOOLS",
-                title: "Convert iPhone HEIC Photos to JPG Free",
-                summary: "Step-by-step guide without software or uploads needed.",
-              },
-              {
-                href: "/blog/organize-travel-photos-by-country",
-                tag: "TOOLS",
-                title: "Organize Travel Photos by Country Automatically",
-                summary: "Use GPS EXIF data to sort photos without manual work.",
-              },
-            ].map((article) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {BLOG_GUIDES.map((article) => (
               <Link
                 key={article.href}
                 href={article.href}
-                className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+                className={`group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden hover:shadow-sm ${article.borderAccent} transition-all`}
               >
-                <span className="text-[10px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
-                  {article.tag}
-                </span>
-                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                  {article.title}
-                </h3>
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">{article.summary}</p>
+                {/* Gradient header */}
+                <div className={`h-24 bg-gradient-to-br ${article.gradient} flex items-end p-4`}>
+                  <span className="text-[10px] font-semibold bg-white/80 dark:bg-[#191919]/80 backdrop-blur-sm text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5]/50 dark:border-[#333]/50 uppercase tracking-wide">
+                    {article.tag}
+                  </span>
+                </div>
+                {/* Content */}
+                <div className="p-4">
+                  <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5 leading-snug group-hover:text-[#404040] dark:group-hover:text-white transition-colors line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed line-clamp-2 mb-3">
+                    {article.summary}
+                  </p>
+                  <span className="text-xs font-medium text-[#6366F1] dark:text-indigo-400 inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
+                    Read more
+                    <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

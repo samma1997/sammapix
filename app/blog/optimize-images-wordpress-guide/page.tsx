@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "How to Optimize Images for WordPress (2026 Guide) | SammaPix",
   description:
-    "Step-by-step guide to optimize images for WordPress in 2026. Compress, convert to WebP, resize, and strip EXIF data before uploading — improve Core Web Vitals and LCP scores.",
+    "Step-by-step guide to optimize images for WordPress in 2026. Compress, convert to WebP, resize, and strip EXIF data before uploading- improve Core Web Vitals and LCP scores.",
   alternates: {
     canonical: `${APP_URL}/blog/optimize-images-wordpress-guide`,
   },
@@ -48,7 +48,7 @@ const articleSchema = {
   "@type": "Article",
   headline: POST_TITLE,
   description:
-    "Step-by-step guide to optimize images for WordPress in 2026. Compress, convert to WebP, resize, and strip EXIF data before uploading — improve Core Web Vitals and LCP scores.",
+    "Step-by-step guide to optimize images for WordPress in 2026. Compress, convert to WebP, resize, and strip EXIF data before uploading- improve Core Web Vitals and LCP scores.",
   url: POST_URL,
   datePublished: POST_DATE,
   dateModified: POST_DATE,
@@ -151,10 +151,10 @@ const steps = [
     description:
       "Camera JPEGs are often 4–15 MB. WordPress will accept them, but it will store the original alongside every thumbnail it generates, bloating your media library immediately. Compress the source file to under 200–500 KB before you ever open the media uploader.",
     details: [
-      "Drop your images into SammaPix Compress — no upload, no account required",
+      "Drop your images into SammaPix Compress- no upload, no account required",
       "Set quality to 80% for photos, 85–90% for product or portfolio shots",
       "Batch compress an entire folder and download as ZIP in one step",
-      "Files never leave your browser — safe for client work and private content",
+      "Files never leave your browser- safe for client work and private content",
     ],
   },
   {
@@ -165,10 +165,10 @@ const steps = [
     color: "text-blue-700 dark:text-blue-400",
     bg: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900",
     description:
-      "WordPress 5.8 added native WebP support. Every modern browser supports WebP. Uploading WebP instead of JPEG reduces file size by an additional 25–35% at equal visual quality — meaning faster page loads, better LCP scores, and lower storage costs.",
+      "WordPress 5.8 added native WebP support. Every modern browser supports WebP. Uploading WebP instead of JPEG reduces file size by an additional 25–35% at equal visual quality- meaning faster page loads, better LCP scores, and lower storage costs.",
     details: [
       "Convert JPEG, PNG, and GIF files to WebP before uploading",
-      "Use quality 80 for lossy (photos) — indistinguishable from the original",
+      "Use quality 80 for lossy (photos)- indistinguishable from the original",
       "WordPress will generate WebP thumbnails automatically from a WebP source",
       "No plugin needed for WebP delivery when you upload WebP directly",
     ],
@@ -183,7 +183,7 @@ const steps = [
     description:
       "A WordPress blog content area is typically 800–1200 px wide. Uploading a 6000 × 4000 px camera photo and relying on WordPress thumbnails still stores the 6000 px original on your server. Resize to the largest size you actually need before uploading.",
     details: [
-      "Resize to match your theme's content width — usually 1200 px or 1440 px maximum",
+      "Resize to match your theme's content width- usually 1200 px or 1440 px maximum",
       "For featured images: check your theme's featured image dimensions",
       "For product images (WooCommerce): match your theme's product image size setting",
       "Use 2x dimensions for retina if needed, but not camera-original 6000 px",
@@ -197,7 +197,7 @@ const steps = [
     color: "text-purple-700 dark:text-purple-400",
     bg: "bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900",
     description:
-      "Every photo taken with a smartphone or modern camera embeds EXIF metadata — including GPS coordinates, device model, and date/time. WordPress does not strip this by default. Anyone who downloads your images can see exactly where they were taken.",
+      "Every photo taken with a smartphone or modern camera embeds EXIF metadata- including GPS coordinates, device model, and date/time. WordPress does not strip this by default. Anyone who downloads your images can see exactly where they were taken.",
     details: [
       "Use EXIF Lens to inspect what metadata is embedded before uploading",
       "Strip GPS location data, device identifiers, and shooting conditions",
@@ -241,7 +241,7 @@ export default function OptimizeImagesWordPressGuidePage() {
               {POST_TITLE}
             </h1>
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
-              Images are the single largest cause of poor Core Web Vitals scores on WordPress sites. Most tutorials tell you to install a plugin and let it handle everything. This guide shows you a better approach — optimize images before they ever touch your media library — then explains how WordPress itself handles the rest.
+              Images are the single largest cause of poor Core Web Vitals scores on WordPress sites. Most tutorials tell you to install a plugin and let it handle everything. This guide shows you a better approach- optimize images before they ever touch your media library- then explains how WordPress itself handles the rest.
             </p>
           </header>
 
@@ -252,10 +252,10 @@ export default function OptimizeImagesWordPressGuidePage() {
               Why image optimization matters for WordPress
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              WordPress powers over 43% of all websites on the internet. It is the most common platform — and unoptimized images are the most common performance problem. When Google runs a Lighthouse audit on your site, images are almost always the first item flagged.
+              WordPress powers over 43% of all websites on the internet. It is the most common platform- and unoptimized images are the most common performance problem. When Google runs a Lighthouse audit on your site, images are almost always the first item flagged.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The reason is direct: most WordPress users upload photos straight from their camera or phone. A single iPhone 15 photo can be 8–15 MB. A post with five hero images at that size downloads 40–75 MB before the page renders. On a 4G connection, that is a 10–15 second load time — Google considers anything above 2.5 seconds a failing LCP score.
+              The reason is direct: most WordPress users upload photos straight from their camera or phone. A single iPhone 15 photo can be 8–15 MB. A post with five hero images at that size downloads 40–75 MB before the page renders. On a 4G connection, that is a 10–15 second load time - Google considers anything above 2.5 seconds a failing LCP score.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               According to{" "}
@@ -267,10 +267,10 @@ export default function OptimizeImagesWordPressGuidePage() {
               >
                 Google&apos;s Largest Contentful Paint guidance
               </a>
-              , a &ldquo;good&rdquo; LCP score is under 2.5 seconds. LCP is almost always driven by the largest image on screen — typically a hero image, featured image, or product photo. The fastest path to a better LCP score is a smaller, properly formatted image delivered quickly.
+              , a &ldquo;good&rdquo; LCP score is under 2.5 seconds. LCP is almost always driven by the largest image on screen- typically a hero image, featured image, or product photo. The fastest path to a better LCP score is a smaller, properly formatted image delivered quickly.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Core Web Vitals are a direct Google ranking signal since 2021. A poor LCP score does not just hurt user experience — it measurably suppresses your search rankings relative to competitors whose pages load faster.
+              Core Web Vitals are a direct Google ranking signal since 2021. A poor LCP score does not just hurt user experience- it measurably suppresses your search rankings relative to competitors whose pages load faster.
             </p>
 
             <figure className="my-8">
@@ -281,7 +281,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Core Web Vitals scores are directly tied to image weight — Photo by Carlos Muza on Unsplash
+                Core Web Vitals scores are directly tied to image weight - Photo by Carlos Muza on Unsplash
               </figcaption>
             </figure>
 
@@ -301,15 +301,15 @@ export default function OptimizeImagesWordPressGuidePage() {
                 },
                 {
                   mistake: "Relying entirely on plugins to fix bad uploads",
-                  impact: "Plugins like Smush or Imagify compress and convert images after upload, but the originals are still stored on your server. Every thumbnail generation on upload, every image edit in the media library, every backup — all operate on the oversized original.",
+                  impact: "Plugins like Smush or Imagify compress and convert images after upload, but the originals are still stored on your server. Every thumbnail generation on upload, every image edit in the media library, every backup- all operate on the oversized original.",
                 },
                 {
                   mistake: "Uploading JPEG when WebP is supported",
-                  impact: "WordPress has accepted WebP uploads since version 5.8. Uploading JPEG in 2026 means serving files 25–35% larger than necessary to every visitor whose browser supports WebP — which is 97%+ of all browsers globally.",
+                  impact: "WordPress has accepted WebP uploads since version 5.8. Uploading JPEG in 2026 means serving files 25–35% larger than necessary to every visitor whose browser supports WebP- which is 97%+ of all browsers globally.",
                 },
                 {
                   mistake: "Uploading images much wider than the content area",
-                  impact: "A 6000 px wide photo uploaded to a blog with a 900 px content column means WordPress serves a thumbnail from a 6000 px source. That source is stored on disk and used for every thumbnail crop — including retina sizes. Resize before uploading to match actual display dimensions.",
+                  impact: "A 6000 px wide photo uploaded to a blog with a 900 px content column means WordPress serves a thumbnail from a 6000 px source. That source is stored on disk and used for every thumbnail crop- including retina sizes. Resize before uploading to match actual display dimensions.",
                 },
                 {
                   mistake: "Ignoring EXIF metadata",
@@ -340,7 +340,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Camera originals should never go straight into the WordPress media library — Photo by ShareGrid on Unsplash
+                Camera originals should never go straight into the WordPress media library - Photo by ShareGrid on Unsplash
               </figcaption>
             </figure>
 
@@ -349,7 +349,7 @@ export default function OptimizeImagesWordPressGuidePage() {
               The correct workflow: optimize before you upload
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-6">
-              The most effective approach is a four-step pre-upload workflow. Run these steps on every image before it touches your WordPress media library. All four can be done entirely in your browser — no uploads to third-party servers, no plugins required at this stage.
+              The most effective approach is a four-step pre-upload workflow. Run these steps on every image before it touches your WordPress media library. All four can be done entirely in your browser- no uploads to third-party servers, no plugins required at this stage.
             </p>
 
             <div className="space-y-6 mb-4">
@@ -402,10 +402,10 @@ export default function OptimizeImagesWordPressGuidePage() {
             >
               <div>
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
-                  Free — no signup, no upload, no limits
+                  Free- no signup, no upload, no limits
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Start with SammaPix Compress — process all four steps before your next WordPress upload
+                  Start with SammaPix Compress- process all four steps before your next WordPress upload
                 </p>
               </div>
               <ArrowRight
@@ -419,7 +419,7 @@ export default function OptimizeImagesWordPressGuidePage() {
               WordPress image settings you should configure
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Once your images are pre-optimized, there are several WordPress settings worth reviewing. These control how WordPress handles images after upload — including thumbnail generation, maximum upload size, and srcset behavior.
+              Once your images are pre-optimized, there are several WordPress settings worth reviewing. These control how WordPress handles images after upload- including thumbnail generation, maximum upload size, and srcset behavior.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -445,10 +445,10 @@ export default function OptimizeImagesWordPressGuidePage() {
               Responsive images and srcset
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              WordPress automatically adds <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">srcset</code> attributes to images inserted via the block editor or <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">wp_get_attachment_image()</code>. This tells the browser to download only the size appropriate for the current viewport — a mobile visitor gets a 480 px image rather than a 1400 px one.
+              WordPress automatically adds <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">srcset</code> attributes to images inserted via the block editor or <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">wp_get_attachment_image()</code>. This tells the browser to download only the size appropriate for the current viewport- a mobile visitor gets a 480 px image rather than a 1400 px one.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              This system works best when you have uploaded images wider than the largest display size you need, so WordPress has something to downscale from. If you uploaded a 1200 px image and your theme requests a 1400 px thumbnail, WordPress will serve the 1200 px original with no downscaling — this is why correct pre-upload resizing matters.
+              This system works best when you have uploaded images wider than the largest display size you need, so WordPress has something to downscale from. If you uploaded a 1200 px image and your theme requests a 1400 px thumbnail, WordPress will serve the 1200 px original with no downscaling- this is why correct pre-upload resizing matters.
             </p>
 
             <figure className="my-8">
@@ -459,7 +459,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                WordPress generates multiple thumbnail sizes from every uploaded image — Photo by Stephen Phillips on Unsplash
+                WordPress generates multiple thumbnail sizes from every uploaded image - Photo by Stephen Phillips on Unsplash
               </figcaption>
             </figure>
 
@@ -468,10 +468,10 @@ export default function OptimizeImagesWordPressGuidePage() {
               Lazy loading in WordPress
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              WordPress has added the <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">loading=&quot;lazy&quot;</code> attribute to images automatically since version 5.5. This tells the browser to defer loading images that are below the fold — images not visible in the initial viewport are only downloaded when the user scrolls near them.
+              WordPress has added the <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">loading=&quot;lazy&quot;</code> attribute to images automatically since version 5.5. This tells the browser to defer loading images that are below the fold- images not visible in the initial viewport are only downloaded when the user scrolls near them.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The one important exception: your hero image or the Largest Contentful Paint image should never be lazy loaded. WordPress applies <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">loading=&quot;eager&quot;</code> to the first image in the content area since 6.3 — but if your theme controls the hero image independently, verify that it is not lazy loaded.
+              The one important exception: your hero image or the Largest Contentful Paint image should never be lazy loaded. WordPress applies <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">loading=&quot;eager&quot;</code> to the first image in the content area since 6.3- but if your theme controls the hero image independently, verify that it is not lazy loaded.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               You can read the full implementation details and browser compatibility notes in{" "}
@@ -491,13 +491,13 @@ export default function OptimizeImagesWordPressGuidePage() {
               CDN for WordPress images
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Even perfectly compressed images load slowly if they are served from a single origin server far from the visitor. A Content Delivery Network (CDN) distributes your static assets — including images — across servers globally, so each visitor downloads images from a location geographically close to them.
+              Even perfectly compressed images load slowly if they are served from a single origin server far from the visitor. A Content Delivery Network (CDN) distributes your static assets- including images- across servers globally, so each visitor downloads images from a location geographically close to them.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               For WordPress, the simplest CDN path is Cloudflare. The free tier proxies your entire site through their global network, caching images at edge nodes worldwide. This alone can reduce image delivery latency by 50–80% for visitors outside your origin server&apos;s region.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Alternatives include Bunny CDN (very affordable, excellent for WordPress), KeyCDN, and the Jetpack CDN feature (free for WordPress.com-connected sites). If your hosting plan includes a CDN — WP Engine, Kinsta, and Cloudways all do — make sure it is enabled for the <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">/wp-content/uploads/</code> path.
+              Alternatives include Bunny CDN (very affordable, excellent for WordPress), KeyCDN, and the Jetpack CDN feature (free for WordPress.com-connected sites). If your hosting plan includes a CDN - WP Engine, Kinsta, and Cloudways all do- make sure it is enabled for the <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">/wp-content/uploads/</code> path.
             </p>
 
             {/* WebP delivery: plugins vs pre-conversion */}
@@ -515,14 +515,14 @@ export default function OptimizeImagesWordPressGuidePage() {
               Plugins like ShortPixel, Imagify, and WebP Express generate WebP versions of your uploaded JPEGs and PNGs on the server. They then serve the WebP version to browsers that support it (detected via the <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">Accept: image/webp</code> request header) and fall back to the original for browsers that do not.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The advantage: it handles conversion automatically. The disadvantage: your server stores both the original and the WebP version of every image and every thumbnail — potentially doubling your storage footprint. It also uses server CPU or an external API quota on every new upload.
+              The advantage: it handles conversion automatically. The disadvantage: your server stores both the original and the WebP version of every image and every thumbnail- potentially doubling your storage footprint. It also uses server CPU or an external API quota on every new upload.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
               Pre-conversion before upload (recommended)
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              The cleaner approach is to convert images to WebP before uploading. WordPress 5.8+ accepts WebP uploads natively and generates WebP thumbnails from a WebP source. No plugin needed for WebP delivery — you are serving WebP directly, not converting on the fly.
+              The cleaner approach is to convert images to WebP before uploading. WordPress 5.8+ accepts WebP uploads natively and generates WebP thumbnails from a WebP source. No plugin needed for WebP delivery- you are serving WebP directly, not converting on the fly.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               This approach means your media library contains only WebP files. Smaller originals, smaller thumbnails, no duplicate storage, no server-side conversion overhead. The{" "}
@@ -543,7 +543,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Pre-converting to WebP before upload eliminates the need for server-side conversion plugins — Photo by Ilya Pavlov on Unsplash
+                Pre-converting to WebP before upload eliminates the need for server-side conversion plugins - Photo by Ilya Pavlov on Unsplash
               </figcaption>
             </figure>
 
@@ -611,7 +611,7 @@ export default function OptimizeImagesWordPressGuidePage() {
             </div>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              ShortPixel and Imagify are both excellent plugins for teams who need server-side automation — especially for large existing libraries with thousands of images already uploaded. The free quotas (100/month and 200/month respectively) are suitable for low-volume sites, but grow expensive at scale.
+              ShortPixel and Imagify are both excellent plugins for teams who need server-side automation- especially for large existing libraries with thousands of images already uploaded. The free quotas (100/month and 200/month respectively) are suitable for low-volume sites, but grow expensive at scale.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Smush from WPMU DEV is the most widely installed WordPress image optimization plugin with over one million active installs. Its free tier compresses and strips EXIF metadata, but WebP conversion requires the paid Smush Pro plan. For most new WordPress projects in 2026, the pre-upload workflow using SammaPix avoids both plugin complexity and recurring costs.
@@ -626,7 +626,7 @@ export default function OptimizeImagesWordPressGuidePage() {
               {[
                 { text: "Compress images to under 200–500 KB before uploading", done: true },
                 { text: "Convert to WebP format before uploading (WordPress 5.8+ accepts WebP natively)", done: true },
-                { text: "Resize to match your theme's maximum display width — typically 1200–1440 px", done: true },
+                { text: "Resize to match your theme's maximum display width- typically 1200–1440 px", done: true },
                 { text: "Strip EXIF metadata, especially GPS location data", done: true },
                 { text: "Review WordPress Media settings and remove unused thumbnail sizes", done: true },
                 { text: "Verify your hero / LCP image is not lazy loaded", done: true },
@@ -653,11 +653,11 @@ export default function OptimizeImagesWordPressGuidePage() {
                   },
                   {
                     q: "What image size should I upload to WordPress?",
-                    a: "Upload images no wider than the largest size your theme will display — typically 1200–1440 px for full-width images and 800–1200 px for content column images. Uploading camera originals at 6000+ px gives WordPress a source file it will never use at full size and stores needless data on disk.",
+                    a: "Upload images no wider than the largest size your theme will display- typically 1200–1440 px for full-width images and 800–1200 px for content column images. Uploading camera originals at 6000+ px gives WordPress a source file it will never use at full size and stores needless data on disk.",
                   },
                   {
                     q: "Should I use WebP or JPEG for WordPress in 2026?",
-                    a: "WebP. WordPress accepts WebP uploads natively since version 5.8, and over 97% of browsers support WebP globally. Uploading WebP instead of JPEG means your media library stores smaller originals and generates smaller thumbnails — no plugin needed for WebP delivery.",
+                    a: "WebP. WordPress accepts WebP uploads natively since version 5.8, and over 97% of browsers support WebP globally. Uploading WebP instead of JPEG means your media library stores smaller originals and generates smaller thumbnails- no plugin needed for WebP delivery.",
                   },
                   {
                     q: "Does WordPress strip EXIF metadata on upload?",
@@ -720,7 +720,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                 Optimize your WordPress images before the next upload
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Compress, convert to WebP, resize, and strip EXIF metadata in seconds — all in your browser, no upload required. Free with no limits.
+                Compress, convert to WebP, resize, and strip EXIF metadata in seconds- all in your browser, no upload required. Free with no limits.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -763,7 +763,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                   href: "/blog/best-image-compression-tools-2026",
                   tag: "Comparison",
                   tagColor: "text-orange-700",
-                  title: "Best Free Image Compression Tools in 2026 — Compared",
+                  title: "Best Free Image Compression Tools in 2026 - Compared",
                 },
                 {
                   href: "/blog/remove-exif-protect-privacy",

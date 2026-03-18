@@ -93,7 +93,7 @@ async function computePhash(file: File): Promise<Uint8Array> {
   const SIZE = 32;
   const HASH_SIZE = 8; // 8x8 = 64 bits
 
-  // Draw image onto 32x32 canvas — with OffscreenCanvas fallback
+  // Draw image onto 32x32 canvas- with OffscreenCanvas fallback
   let imageData: ImageData;
 
   // Try OffscreenCanvas first (not available in Safari < 16)
@@ -319,7 +319,7 @@ export default function TwinHunt() {
   }, []);
 
   // Re-compute groups when sensitivity changes (during results state)
-  // We need the pairs to recompute — store them on a ref
+  // We need the pairs to recompute- store them on a ref
   const pairsRef = useRef<Array<{ i: number; j: number; distance: number }>>([]);
   const photosLengthRef = useRef(0);
 
@@ -498,7 +498,7 @@ export default function TwinHunt() {
 
   const handleDownloadReport = useCallback(() => {
     const lines: string[] = [
-      "TwinHunt — Duplicate Photo Report",
+      "TwinHunt - Duplicate Photo Report",
       `Generated: ${new Date().toLocaleString()}`,
       `Sensitivity: ${sensitivity}`,
       "",
@@ -552,7 +552,7 @@ export default function TwinHunt() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag photos to find duplicates"
+          aria-label="Drop zone- click or drag photos to find duplicates"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver

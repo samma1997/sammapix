@@ -75,11 +75,17 @@ const TOOLS_ORGANIZE: SidebarTool[] = [
   { name: "Cull", href: "/dashboard/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
+const TOOLS_FOR_YOU: SidebarTool[] = [
+  { name: "Compress", href: "/dashboard/tools/compress", icon: <Image className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "WebP Converter", href: "/dashboard/tools/webp", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "ResizePack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "EXIF Lens", href: "/dashboard/tools/exif", icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} /> },
+];
+
 const TOOL_GROUPS: { label: string; tools: SidebarTool[] }[] = [
-  { label: "Optimize", tools: TOOLS_OPTIMIZE },
+  { label: "For You", tools: TOOLS_FOR_YOU },
   { label: "AI-Powered", tools: TOOLS_AI },
-  { label: "Creative", tools: TOOLS_CREATIVE },
-  { label: "Organize", tools: TOOLS_ORGANIZE },
+  { label: "All Tools", tools: [...TOOLS_OPTIMIZE, ...TOOLS_CREATIVE, ...TOOLS_ORGANIZE] },
 ];
 
 // ─── Props ───────────────────────────────────────────────────────────────────

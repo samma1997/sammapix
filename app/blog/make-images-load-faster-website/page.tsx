@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Make Images Load Faster: 7 Proven Methods (2026) | SammaPix",
   description:
-    "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more — improve Core Web Vitals and LCP scores.",
+    "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more- improve Core Web Vitals and LCP scores.",
   alternates: {
     canonical: `${APP_URL}/blog/make-images-load-faster-website`,
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Make Images Load Faster: 7 Proven Methods (2026)",
     description:
-      "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more — improve Core Web Vitals and LCP scores.",
+      "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more- improve Core Web Vitals and LCP scores.",
     url: `${APP_URL}/blog/make-images-load-faster-website`,
     type: "article",
     publishedTime: "2026-01-18",
@@ -43,7 +43,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Make Images Load Faster: 7 Proven Methods (2026)",
   description:
-    "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more — improve Core Web Vitals and LCP scores.",
+    "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more- improve Core Web Vitals and LCP scores.",
   url: `${APP_URL}/blog/make-images-load-faster-website`,
   datePublished: "2026-01-18",
   dateModified: "2026-01-18",
@@ -190,7 +190,7 @@ export default function MakeImagesLoadFasterPage() {
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
               Images are almost always the single largest contributor to slow
               page loads. A page with unoptimized images can take 5+ seconds to
-              show its main content — costing rankings, conversions, and users.
+              show its main content- costing rankings, conversions, and users.
               This guide covers 7 proven, practical methods to make images load
               faster on any website, with code examples you can use today.
             </p>
@@ -206,7 +206,7 @@ export default function MakeImagesLoadFasterPage() {
                 loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Image weight is the number one cause of poor LCP scores — optimizing it is the highest-leverage performance win available — Photo by Carlos Muza on Unsplash
+                Image weight is the number one cause of poor LCP scores- optimizing it is the highest-leverage performance win available - Photo by Carlos Muza on Unsplash
               </figcaption>
             </figure>
 
@@ -216,7 +216,7 @@ export default function MakeImagesLoadFasterPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Google ranks pages using Core Web Vitals, and the most important
-              metric — Largest Contentful Paint (LCP) — is dominated by images.
+              metric - Largest Contentful Paint (LCP)- is dominated by images.
               According to{" "}
               <a
                 href="https://web.dev/articles/lcp"
@@ -235,7 +235,7 @@ export default function MakeImagesLoadFasterPage() {
               Beyond rankings, the business case is equally strong. A 1-second
               improvement in page load time correlates with a 7% increase in
               conversions, according to studies from Akamai and Deloitte.
-              Mobile users on slower connections are even more sensitive — if
+              Mobile users on slower connections are even more sensitive- if
               your images are not optimized, you are actively losing customers.
             </p>
 
@@ -261,21 +261,21 @@ export default function MakeImagesLoadFasterPage() {
 
             {/* Method 1 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 1 — Compress your images before publishing
+              Method 1 - Compress your images before publishing
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Compression is the most immediate, highest-impact action you can
               take to make images load faster. A raw photograph from a modern
               smartphone often weighs 4–8 MB. The same image, correctly
-              compressed for web display, should be under 200 KB — a reduction
+              compressed for web display, should be under 200 KB- a reduction
               of 95% or more with no visible quality loss at normal screen sizes.
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               There are two types of compression. Lossless compression
               re-encodes the data more efficiently without discarding any pixels
-              — useful for logos, screenshots, and UI elements. Lossy
+             - useful for logos, screenshots, and UI elements. Lossy
               compression discards image data that the human eye is unlikely to
               notice, which is appropriate for photographs and any continuous-
               tone image. For web photos, a JPEG or WebP quality setting of
@@ -293,7 +293,7 @@ export default function MakeImagesLoadFasterPage() {
 
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-5 my-6">
               <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Compress your images in seconds — no upload required
+                Compress your images in seconds- no upload required
               </p>
               <p className="text-sm text-[#737373] mb-3">
                 The{" "}
@@ -304,7 +304,7 @@ export default function MakeImagesLoadFasterPage() {
                   SammaPix Compress tool
                 </Link>{" "}
                 runs entirely in your browser. Drag in a batch of images, adjust
-                the quality slider, and download — your files never leave your
+                the quality slider, and download- your files never leave your
                 device.
               </p>
               <Link
@@ -318,14 +318,14 @@ export default function MakeImagesLoadFasterPage() {
 
             {/* Method 2 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 2 — Convert to next-gen formats (WebP and AVIF)
+              Method 2 - Convert to next-gen formats (WebP and AVIF)
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               JPEG and PNG served most of the web for decades, but they are no
               longer the best options for file size. WebP, developed by Google,
               produces files that are 25–34% smaller than JPEG at equivalent
-              perceptual quality. AVIF — based on the AV1 video codec — can
+              perceptual quality. AVIF- based on the AV1 video codec- can
               compress even further, often 40–50% smaller than JPEG, though
               encoding is slower and browser support, while growing, is slightly
               behind WebP.
@@ -335,14 +335,14 @@ export default function MakeImagesLoadFasterPage() {
               Browser support for WebP now exceeds 97% globally. For the vast
               majority of websites, you can safely default to WebP for all
               photographic content with zero compatibility concerns. AVIF support
-              sits above 90% and continues to grow — it is appropriate if you
+              sits above 90% and continues to grow- it is appropriate if you
               want to push file sizes as low as possible for a modern audience.
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Converting existing JPEG or PNG assets to WebP is a one-time
               operation with permanent returns. Every user who downloads the
-              WebP version instead of the JPEG version transfers fewer bytes —
+              WebP version instead of the JPEG version transfers fewer bytes- 
               and arrives at a fully-loaded page faster. For a site with
               hundreds of images, this single step can cut total image payload
               by a third.
@@ -394,12 +394,12 @@ export default function MakeImagesLoadFasterPage() {
 
             {/* Method 3 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 3 — Resize images to the correct display dimensions
+              Method 3 - Resize images to the correct display dimensions
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Serving an oversized image is one of the most common — and most
-              wasteful — image performance mistakes. A photo from a modern
+              Serving an oversized image is one of the most common- and most
+              wasteful- image performance mistakes. A photo from a modern
               smartphone is 4000 pixels wide or more. If that image displays in
               a 800px blog column, the browser downloads roughly 25 times more
               pixels than it ever renders. Every extra pixel is wasted bandwidth,
@@ -436,7 +436,7 @@ export default function MakeImagesLoadFasterPage() {
                   SammaPix Resize Pack tool
                 </Link>{" "}
                 lets you set a target width and resize a whole folder of images
-                at once — then download them as a ZIP. No upload, no account.
+                at once- then download them as a ZIP. No upload, no account.
               </p>
               <Link
                 href="/tools/resizepack"
@@ -455,13 +455,13 @@ export default function MakeImagesLoadFasterPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Implementing these techniques in code takes minutes — the performance gains last permanently — Photo by Fotis Fotopoulos on Unsplash
+                Implementing these techniques in code takes minutes- the performance gains last permanently - Photo by Fotis Fotopoulos on Unsplash
               </figcaption>
             </figure>
 
             {/* Method 4 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 4 — Lazy load below-the-fold images
+              Method 4 - Lazy load below-the-fold images
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -470,7 +470,7 @@ export default function MakeImagesLoadFasterPage() {
               loading defers the download of off-screen images until the user
               scrolls near them. On a long article page with 10 images, lazy
               loading the 8 below-the-fold images can cut initial page weight
-              by 70% or more — dramatically improving LCP and Time to
+              by 70% or more- dramatically improving LCP and Time to
               Interactive.
             </p>
 
@@ -489,7 +489,7 @@ export default function MakeImagesLoadFasterPage() {
 
             <div className="bg-[#F5F5F5] dark:bg-[#1E1E1E] rounded-lg p-4 my-4 overflow-x-auto">
               <pre className="text-xs font-mono text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-{`<!-- Load immediately — use for hero/above-the-fold images -->
+{`<!-- Load immediately- use for hero/above-the-fold images -->
 <img
   src="hero.webp"
   alt="Hero image"
@@ -498,7 +498,7 @@ export default function MakeImagesLoadFasterPage() {
   height="600"
 />
 
-<!-- Defer loading — use for all below-the-fold images -->
+<!-- Defer loading- use for all below-the-fold images -->
 <img
   src="article-photo.webp"
   alt="Article photo"
@@ -519,7 +519,7 @@ export default function MakeImagesLoadFasterPage() {
               shifts (which hurt Cumulative Layout Shift scores). Second, never
               apply{" "}
               <code className="text-xs bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1.5 py-0.5 rounded font-mono text-gray-700 dark:text-[#E5E5E5]">loading=&quot;lazy&quot;</code>{" "}
-              to your hero or above-the-fold image — that would delay the LCP
+              to your hero or above-the-fold image- that would delay the LCP
               element and actively hurt your score.
             </p>
 
@@ -528,8 +528,8 @@ export default function MakeImagesLoadFasterPage() {
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              For more control over when lazy loading triggers — or for
-              frameworks that do not support the native attribute — the
+              For more control over when lazy loading triggers- or for
+              frameworks that do not support the native attribute- the
               Intersection Observer API provides a JavaScript-based alternative:
             </p>
 
@@ -566,12 +566,12 @@ lazyImages.forEach((img) => observer.observe(img));`}
 
             {/* Method 5 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 5 — Use responsive images with srcset and sizes
+              Method 5 - Use responsive images with srcset and sizes
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Serving one fixed-width image to all devices is inefficient. A
-              desktop user with a 1400px viewport gets a huge image — which is
+              desktop user with a 1400px viewport gets a huge image- which is
               appropriate. But a mobile user with a 390px viewport receives the
               same massive file, even though their browser will downsample it to
               fit. Responsive images solve this by letting the browser select
@@ -615,7 +615,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               In this example, a mobile user at 390px viewport width receives
               the 400px image (roughly 40 KB). A desktop user at 1400px receives
               the 1200px or 1600px version. The browser makes the decision
-              automatically, factoring in device pixel ratio as well — so
+              automatically, factoring in device pixel ratio as well- so
               retina users get the higher-resolution image without you needing
               to write any JavaScript.
             </p>
@@ -624,7 +624,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               When writing the{" "}
               <code className="text-xs bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1.5 py-0.5 rounded font-mono text-gray-700 dark:text-[#E5E5E5]">sizes</code>{" "}
               value, work from smallest viewport to largest and describe the
-              actual rendered width of the image — not the viewport. The final
+              actual rendered width of the image- not the viewport. The final
               value (with no media condition) is the fallback. Be specific: a
               vague{" "}
               <code className="text-xs bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1.5 py-0.5 rounded font-mono text-gray-700 dark:text-[#E5E5E5]">100vw</code>{" "}
@@ -635,7 +635,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
 
             {/* Method 6 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 6 — Serve images from a CDN
+              Method 6 - Serve images from a CDN
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -644,7 +644,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               is in Tokyo, that round trip adds 150–200ms of latency before the
               first byte of image data arrives. A Content Delivery Network (CDN)
               solves this by caching your assets on servers distributed globally
-              — so every user downloads from a data center near them, not from
+             - so every user downloads from a data center near them, not from
               your origin.
             </p>
 
@@ -672,7 +672,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               If your site has global traffic, adding a CDN is non-negotiable
               for image load speed. For domestic-only traffic, a CDN still
               improves performance by reducing load on your origin server and
-              enabling HTTP/2 multiplexing — but the impact is less dramatic.
+              enabling HTTP/2 multiplexing- but the impact is less dramatic.
               The good news is that Cloudflare&apos;s free tier covers most use
               cases and requires no code changes.
             </p>
@@ -685,13 +685,13 @@ lazyImages.forEach((img) => observer.observe(img));`}
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                A CDN distributes your images to servers near every user, eliminating the latency of cross-continental downloads — Photo by NASA on Unsplash
+                A CDN distributes your images to servers near every user, eliminating the latency of cross-continental downloads - Photo by NASA on Unsplash
               </figcaption>
             </figure>
 
             {/* Method 7 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Method 7 — Use the picture element for format fallbacks
+              Method 7 - Use the picture element for format fallbacks
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -846,7 +846,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               under the Performance tab). Your LCP score should drop
               significantly, and the Opportunities section will confirm which
               image-related improvements have been applied. Aim for a LCP under
-              2.5 seconds for a &ldquo;Good&rdquo; score — a target that is
+              2.5 seconds for a &ldquo;Good&rdquo; score- a target that is
               entirely achievable once images are properly optimized.
             </p>
 
@@ -864,7 +864,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               Resizing to the correct display dimensions combined with
               compression. Serving a 4000px photo in a 800px column wastes more
               bandwidth than almost any other optimization mistake. Resize first,
-              then compress — this combination typically reduces file size by
+              then compress- this combination typically reduces file size by
               90%+ compared to a raw camera file, with no visible difference on
               screen.
             </p>
@@ -873,7 +873,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               Does lazy loading hurt SEO?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              No — Google&apos;s crawler supports native lazy loading via the{" "}
+              No - Google&apos;s crawler supports native lazy loading via the{" "}
               <code className="text-xs bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1.5 py-0.5 rounded font-mono text-gray-700 dark:text-[#E5E5E5]">loading=&quot;lazy&quot;</code>{" "}
               attribute and will index lazily loaded images correctly. The one
               exception: do not lazy-load your hero or primary content image.
@@ -898,7 +898,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Run your URL through Google PageSpeed Insights (free, no account
-              required). Look at the Opportunities section — it will specifically
+              required). Look at the Opportunities section- it will specifically
               flag oversized images, next-gen format suggestions, and images
               that are not lazy loaded. The Diagnostics section shows exactly
               which images are contributing most to page weight and load time.
@@ -924,7 +924,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
               sites. Methods 5–7 (responsive images, CDN, and picture element)
               add meaningful additional gains and are worth implementing for any
               site with significant traffic or a global audience. Even applying
-              just the first two methods — compress and convert to WebP — will
+              just the first two methods- compress and convert to WebP- will
               measurably improve your LCP score.
             </p>
           </div>
@@ -977,7 +977,7 @@ lazyImages.forEach((img) => observer.observe(img));`}
                 Start optimizing your images right now
               </h3>
               <p className="text-sm text-[#737373] mb-5">
-                SammaPix tools run entirely in your browser — compress, convert
+                SammaPix tools run entirely in your browser- compress, convert
                 to WebP, and resize images without uploading a single file to
                 any server. Free, fast, and private.
               </p>

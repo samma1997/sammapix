@@ -121,7 +121,7 @@ function AdminPhotosContent() {
             </h1>
             <p className="text-xs text-[#525252] mt-0.5">
               {photos.length > 0
-                ? `${photos.length} photos — changes go live in ~60s`
+                ? `${photos.length} photos- changes go live in ~60s`
                 : ""}
             </p>
           </div>

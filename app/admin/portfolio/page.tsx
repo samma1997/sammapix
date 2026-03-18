@@ -201,7 +201,7 @@ const EditPanel = ({
             {status === "error" && (
               <span className="inline-flex items-center gap-1.5 text-sm text-[#DC2626]">
                 <XCircle className="h-4 w-4" />
-                {errorMsg || "Error — try again"}
+                {errorMsg || "Error- try again"}
               </span>
             )}
           </div>
@@ -248,7 +248,7 @@ export default function AdminPortfolioPage() {
     }
   }, [status, isAdmin, fetchPhotos]);
 
-  // Save handler — updates local state on success
+  // Save handler- updates local state on success
   const handleSave = async (publicId: string, ctx: PhotoContext) => {
     const res = await fetch("/api/admin/portfolio", {
       method: "POST",
@@ -360,7 +360,7 @@ export default function AdminPortfolioPage() {
                   }
                 />
 
-                {/* Edit panel — inserted after the selected card, full-width */}
+                {/* Edit panel- inserted after the selected card, full-width */}
                 {selectedId === photo.publicId && selectedPhoto && (
                   <EditPanel
                     photo={selectedPhoto}

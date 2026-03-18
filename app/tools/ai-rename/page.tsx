@@ -54,7 +54,7 @@ const features = [
     icon: <Search className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "SEO-optimized filenames",
     description:
-      "AI generates filenames that match how people search — descriptive, lowercase, with hyphens. Exactly what Google recommends for image SEO.",
+      "AI generates filenames that match how people search- descriptive, lowercase, with hyphens. Exactly what Google recommends for image SEO.",
     highlight: false,
   },
   {
@@ -79,7 +79,7 @@ export default function AiRenamePage() {
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
         <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">AI Image Filename Generator for SEO</h1>
         <p className="text-sm text-[#737373]">
-          Turn generic image names into SEO-optimized filenames that rank in Google Images. Upload your photos and let AI generate descriptive, keyword-rich names in seconds — nothing uploaded to any server except the thumbnail for AI analysis.
+          Turn generic image names into SEO-optimized filenames that rank in Google Images. Upload your photos and let AI generate descriptive, keyword-rich names in seconds- nothing uploaded to any server except the thumbnail for AI analysis.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ export default function AiRenamePage() {
         steps={[
           {
             title: "Drop your images",
-            desc: "Upload any JPG, PNG or WebP photos. A thumbnail is sent to AI for analysis — your original files stay on your device.",
+            desc: "Upload any JPG, PNG or WebP photos. A thumbnail is sent to AI for analysis- your original files stay on your device.",
           },
           {
             title: "AI analyzes content",
@@ -99,7 +99,7 @@ export default function AiRenamePage() {
           },
           {
             title: "Get SEO-optimized filenames and alt text",
-            desc: "Download your images with new filenames like 'red-ceramic-coffee-cup-morning.jpg' — exactly what Google recommends for image SEO.",
+            desc: "Download your images with new filenames like 'red-ceramic-coffee-cup-morning.jpg'- exactly what Google recommends for image SEO.",
           },
         ]}
         proTip={{
@@ -153,7 +153,7 @@ export default function AiRenamePage() {
             What is AI Image Rename?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename — the exact format Google recommends for image SEO. Free accounts get 5 renames per day. Each rename takes under 3 seconds.
+            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename- the exact format Google recommends for image SEO. Free accounts get 5 renames per day. Each rename takes under 3 seconds.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             Why image filenames matter for SEO
@@ -173,7 +173,7 @@ export default function AiRenamePage() {
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             Manually renaming hundreds of product photos or blog images is
             tedious and time-consuming. SammaPix AI Rename automates this
-            entirely — upload your images, click rename, and download files with
+            entirely- upload your images, click rename, and download files with
             descriptive SEO-optimized filenames.
           </p>
           <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
@@ -285,7 +285,7 @@ export default function AiRenamePage() {
                 name: "How does the AI generate filenames?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "SammaPix sends a thumbnail of your image to Google Gemini Flash, which analyzes it visually and generates a descriptive, lowercase, hyphenated filename. The AI produces names that match how people search — exactly what Google recommends for image SEO.",
+                  text: "SammaPix sends a thumbnail of your image to Google Gemini Flash, which analyzes it visually and generates a descriptive, lowercase, hyphenated filename. The AI produces names that match how people search- exactly what Google recommends for image SEO.",
                 },
               },
               {
@@ -301,7 +301,7 @@ export default function AiRenamePage() {
                 name: "Is my image data safe with Google Gemini?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "SammaPix sends only a thumbnail to Gemini for analysis — never your full-resolution image. The thumbnail is processed by Gemini to generate a filename description, then discarded. Your original images always stay on your device.",
+                  text: "SammaPix sends only a thumbnail to Gemini for analysis- never your full-resolution image. The thumbnail is processed by Gemini to generate a filename description, then discarded. Your original images always stay on your device.",
                 },
               },
             ],

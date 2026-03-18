@@ -414,7 +414,7 @@ export default function WorkflowPipeline() {
           // Step was skipped (non-fatal, e.g. AI rename failure)
           updateStep(fileIndex, stepId, "skipped", "Skipped (API error)");
         } else if (progress === 100) {
-          // Step completed — detail is set in onFileComplete for compress
+          // Step completed- detail is set in onFileComplete for compress
           const detail = getStepDetail(stepId, presetConfig);
           updateStep(fileIndex, stepId, "done", detail);
         }
@@ -892,7 +892,7 @@ function UploadStep({ files, onFilesChange, onBack, onRun, preset }: UploadStepP
                 Drop images here or{" "}
                 <span className="underline underline-offset-2">click to upload</span>
               </p>
-              <p className="text-xs text-[#A3A3A3] mt-1">PNG, JPG, WebP, GIF, AVIF — up to 50MB each</p>
+              <p className="text-xs text-[#A3A3A3] mt-1">PNG, JPG, WebP, GIF, AVIF- up to 50MB each</p>
             </>
           )}
         </div>
@@ -1083,7 +1083,7 @@ function DoneStep({ files, onDownloadAll, onReset }: DoneStepProps) {
       <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-5">
         {doneFiles.length} image{doneFiles.length !== 1 ? "s" : ""} processed
         {errorFiles.length > 0 && `, ${errorFiles.length} failed`}
-        {totalSavedPercent > 0 && ` — avg ${totalSavedPercent}% smaller`}
+        {totalSavedPercent > 0 && `- avg ${totalSavedPercent}% smaller`}
       </p>
 
       {/* Summary stats */}
@@ -1092,7 +1092,7 @@ function DoneStep({ files, onDownloadAll, onReset }: DoneStepProps) {
           { label: "Processed", value: `${doneFiles.length}`, sub: "files" },
           {
             label: "Avg size saved",
-            value: totalSavedPercent > 0 ? `${totalSavedPercent}%` : "—",
+            value: totalSavedPercent > 0 ? `${totalSavedPercent}%` : " - ",
             sub: "smaller",
           },
           {

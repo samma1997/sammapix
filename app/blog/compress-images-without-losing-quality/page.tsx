@@ -138,7 +138,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
               Image compression is one of the highest-leverage performance
               optimizations available to any website. A page that loads in 1.5
               seconds gets significantly more conversions than one that loads in
-              3.5 seconds — and oversized images are the single most common
+              3.5 seconds- and oversized images are the single most common
               reason for slow load times. This guide explains exactly how
               compression works and how to reduce image size without any visible
               quality loss.
@@ -155,7 +155,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Image compression is one of the highest-leverage performance wins for any website — Photo by Fotis Fotopoulos on Unsplash
+                Image compression is one of the highest-leverage performance wins for any website - Photo by Fotis Fotopoulos on Unsplash
               </figcaption>
             </figure>
 
@@ -166,8 +166,8 @@ export default function CompressImagesWithoutLosingQualityPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Google uses page loading speed as a direct ranking signal through
               its Core Web Vitals framework. The Largest Contentful Paint (LCP)
-              metric — which measures how quickly the main content of a page
-              loads — is almost always dominated by an image. According to{" "}
+              metric- which measures how quickly the main content of a page
+              loads- is almost always dominated by an image. According to{" "}
               <a
                 href="https://web.dev/articles/lcp"
                 target="_blank"
@@ -187,7 +187,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
               images. Mobile data plans are expensive in many markets. Large
               images increase bounce rates on slow connections. Cloud storage
               and CDN bandwidth costs scale directly with asset sizes.
-              Compressing your images is free performance improvement — with no
+              Compressing your images is free performance improvement- with no
               downside when done correctly.
             </p>
 
@@ -207,7 +207,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Lossless compression reduces file size by encoding data more
-              efficiently — but preserves every single pixel from the original.
+              efficiently- but preserves every single pixel from the original.
               When you decompress a losslessly compressed image, the result is
               bit-for-bit identical to the source. No information is discarded.
             </p>
@@ -215,14 +215,14 @@ export default function CompressImagesWithoutLosingQualityPage() {
               The tradeoff is that lossless compression has a ceiling. You
               typically achieve 10–30% file size reduction on photographs. For
               images with large uniform color regions (logos, screenshots,
-              diagrams), the reduction can be much higher — sometimes 60% or
+              diagrams), the reduction can be much higher- sometimes 60% or
               more.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               PNG is the dominant lossless format on the web. It is ideal for
               graphics, logos, and any image where pixel accuracy is required.
-              When you cannot afford to lose a single detail — medical imaging,
-              print production, product photography before editing — lossless is
+              When you cannot afford to lose a single detail- medical imaging,
+              print production, product photography before editing- lossless is
               the correct choice.
             </p>
 
@@ -339,10 +339,10 @@ export default function CompressImagesWithoutLosingQualityPage() {
             </p>
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Best for:</strong> all web images — photographs, graphics, icons, anything
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Best for:</strong> all web images- photographs, graphics, icons, anything
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Browser support:</strong> 97%+ as of 2026 — effectively universal
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Browser support:</strong> 97%+ as of 2026- effectively universal
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Supports:</strong> transparency, animation, both lossy and lossless modes
@@ -364,7 +364,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Faster page loads mean better user experience and higher search rankings — Photo by Carlos Muza on Unsplash
+                Faster page loads mean better user experience and higher search rankings - Photo by Carlos Muza on Unsplash
               </figcaption>
             </figure>
 
@@ -374,7 +374,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Most compression tools use a quality scale from 0 to 100. The
-              number does not represent a percentage of the original — it
+              number does not represent a percentage of the original- it
               controls how aggressively the compression algorithm discards
               data. The relationship between quality value and perceptual
               output is nonlinear.
@@ -386,7 +386,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
 
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 90–100:</strong> Maximum quality, near-lossless. For archival or print use. Unnecessary for web display — file sizes are disproportionately large.
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 90–100:</strong> Maximum quality, near-lossless. For archival or print use. Unnecessary for web display- file sizes are disproportionately large.
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 80–85:</strong> Excellent quality, imperceptible artifacts for most photos. The recommended range for high-quality web images such as hero images and product photography.
@@ -432,7 +432,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 1 — Resize before compressing
+              Step 1 - Resize before compressing
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -440,7 +440,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
               leaves you with a massive file if the display size is 1200×800
               pixels. Always resize to the display dimensions first. A 1200px
               wide image at quality 80 will be far smaller than a 6000px image
-              at quality 90 — and look identical on screen.
+              at quality 90- and look identical on screen.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               As a practical rule: never upload an image wider than 2000px for
@@ -449,7 +449,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 2 — Choose the right format for the image type
+              Step 2 - Choose the right format for the image type
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -460,7 +460,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 3 — Compress in the browser, no uploads required
+              Step 3 - Compress in the browser, no uploads required
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -472,7 +472,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
                 SammaPix Compress tool
               </Link>{" "}
               runs entirely in your browser. Your images never leave your
-              device — they are processed locally using the same compression
+              device- they are processed locally using the same compression
               libraries used by production web toolchains. You can adjust the
               quality slider in real time and see the file size change before
               downloading.
@@ -485,12 +485,12 @@ export default function CompressImagesWithoutLosingQualityPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 4 — Do a visual check before publishing
+              Step 4 - Do a visual check before publishing
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Open the compressed file at 100% zoom and compare it to the
-              original. Look specifically at fine details — hair, fabric
+              original. Look specifically at fine details- hair, fabric
               texture, text, sky gradients. If you see obvious blocking or
               color banding, increase quality by 5 points. For most photos at
               quality 80, the compressed version is indistinguishable from the
@@ -505,7 +505,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                The right quality settings can reduce file size by 70% with no visible difference — Photo by Markus Spiske on Unsplash
+                The right quality settings can reduce file size by 70% with no visible difference - Photo by Markus Spiske on Unsplash
               </figcaption>
             </figure>
 
@@ -538,7 +538,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               A photo from a modern smartphone is 4000+ pixels wide. If your
               blog column is 700px, you are serving 30x more pixels than
-              needed. Resize to the display dimensions before compressing —
+              needed. Resize to the display dimensions before compressing- 
               this single step is often worth more than any quality setting
               adjustment.
             </p>
@@ -549,7 +549,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The difference between quality 100 and quality 82 is invisible
               on screen. The file size difference can be 3x or more. Quality
-              100 is not &ldquo;better&rdquo; for web display — it is just larger.
+              100 is not &ldquo;better&rdquo; for web display- it is just larger.
               Save quality 95–100 for archival originals only.
             </p>
 
@@ -584,7 +584,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
                     <td className="px-4 py-2.5 text-gray-800 dark:text-[#E5E5E5] font-medium">WebP</td>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-[#A3A3A3]">Both</td>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-[#A3A3A3]">Yes</td>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-[#A3A3A3]">Everything — modern default</td>
+                    <td className="px-4 py-2.5 text-gray-600 dark:text-[#A3A3A3]">Everything- modern default</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-800 dark:text-[#E5E5E5] font-medium">AVIF</td>
@@ -706,12 +706,12 @@ export default function CompressImagesWithoutLosingQualityPage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Compress your images now — free, no upload
+                Compress your images now- free, no upload
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your images into SammaPix Compress and reduce file sizes
                 by up to 80% without visible quality loss. Runs entirely in your
-                browser — your files never leave your device.
+                browser- your files never leave your device.
               </p>
               <Link
                 href="/compress"

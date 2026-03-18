@@ -147,7 +147,7 @@ export function Day21Email({ name }: Day21EmailProps) {
           </Section>
 
           <Section style={planBoxPro}>
-            <Text style={planLabelPro}>Pro — $7/month</Text>
+            <Text style={planLabelPro}>Pro- $7/month</Text>
             <Text style={planItem}>✓ Everything in Free</Text>
             <Text style={planItem}>✓ 200 AI renames per day</Text>
             <Text style={planItem}>✓ Up to 100 files at once</Text>
@@ -158,7 +158,7 @@ export function Day21Email({ name }: Day21EmailProps) {
 
           <Text style={body}>
             For most users, free is enough forever. But if you&apos;re a content
-            creator, developer, or agency — Pro pays for itself after the first
+            creator, developer, or agency - Pro pays for itself after the first
             project.
           </Text>
 

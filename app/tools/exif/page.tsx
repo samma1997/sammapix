@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
   description:
-    "Remove GPS & EXIF instantly — protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
+    "Remove GPS & EXIF instantly- protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
   keywords: [
     "remove exif data",
     "remove gps from photos",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
     description:
-      "Remove GPS & EXIF instantly — protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
+      "Remove GPS & EXIF instantly- protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
     url: `${APP_URL}/tools/exif`,
     siteName: "SammaPix",
     type: "website",
@@ -51,13 +51,13 @@ const features = [
     icon: <MapPin className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Remove GPS for privacy",
     description:
-      "Photos taken with a smartphone contain precise GPS coordinates. One click removes location data only — keeping all other metadata intact.",
+      "Photos taken with a smartphone contain precise GPS coordinates. One click removes location data only- keeping all other metadata intact.",
   },
   {
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Strip all EXIF",
     description:
-      "Remove every piece of metadata from a photo in one step. Camera model, timestamps, software — all gone. Ideal before sharing images publicly.",
+      "Remove every piece of metadata from a photo in one step. Camera model, timestamps, software- all gone. Ideal before sharing images publicly.",
   },
   {
     icon: <Download className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
@@ -81,18 +81,18 @@ const steps = [
   {
     n: "3",
     title: "Remove & download",
-    desc: "Strip GPS only or all EXIF with one click per file — or use the action bar to process all at once. Download as ZIP.",
+    desc: "Strip GPS only or all EXIF with one click per file- or use the action bar to process all at once. Download as ZIP.",
   },
 ];
 
 const faqs = [
   {
     q: "Will this work on iPhone HEIC photos?",
-    a: "Yes — EXIF Lens reads full metadata from HEIC files, including GPS coordinates, camera model, and capture settings. However, EXIF removal is only supported for JPEG files. To strip metadata from a HEIC photo, convert it to JPG first (any standard photo app can do this), then run it through EXIF Lens.",
+    a: "Yes - EXIF Lens reads full metadata from HEIC files, including GPS coordinates, camera model, and capture settings. However, EXIF removal is only supported for JPEG files. To strip metadata from a HEIC photo, convert it to JPG first (any standard photo app can do this), then run it through EXIF Lens.",
   },
   {
     q: "Is my GPS actually removed?",
-    a: "Yes. When you click 'Remove GPS', the GPS IFD block is deleted from the EXIF structure using piexifjs, a well-tested library. The resulting file contains zero GPS fields. You can verify this by reloading the cleaned file — the GPS section will show 'No data'.",
+    a: "Yes. When you click 'Remove GPS', the GPS IFD block is deleted from the EXIF structure using piexifjs, a well-tested library. The resulting file contains zero GPS fields. You can verify this by reloading the cleaned file- the GPS section will show 'No data'.",
   },
   {
     q: "What metadata does EXIF contain?",
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: "Are my photos uploaded to a server?",
-    a: "No. Everything happens entirely in your browser. The files are never sent to any server. EXIF is read using the exifr library running locally, and metadata is removed using piexifjs — both run 100% client-side. Your photos stay on your device.",
+    a: "No. Everything happens entirely in your browser. The files are never sent to any server. EXIF is read using the exifr library running locally, and metadata is removed using piexifjs- both run 100% client-side. Your photos stay on your device.",
   },
 ];
 
@@ -109,7 +109,7 @@ export default function ExifPage() {
     <main>
       <ToolHeader
         title="EXIF Lens"
-        description="View all metadata in your photos — GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser."
+        description="View all metadata in your photos - GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser."
         icon={ShieldOff}
         accentColor="#EF4444"
       />
@@ -122,7 +122,7 @@ export default function ExifPage() {
         steps={[
           {
             title: "Drop your photos",
-            desc: "Upload JPG or HEIC photos. All EXIF metadata is read instantly in your browser — GPS, camera model, lens, ISO, shutter speed, date.",
+            desc: "Upload JPG or HEIC photos. All EXIF metadata is read instantly in your browser - GPS, camera model, lens, ISO, shutter speed, date.",
           },
           {
             title: "View all metadata",
@@ -296,7 +296,7 @@ export default function ExifPage() {
                     "name": "Does removing EXIF data reduce image quality?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "No. EXIF data is metadata stored separately from the actual image pixels. Removing it does not affect image quality, visual appearance, or file size. The photo looks identical — only the hidden metadata is removed. SammaPix removes EXIF without re-encoding the image."
+                      "text": "No. EXIF data is metadata stored separately from the actual image pixels. Removing it does not affect image quality, visual appearance, or file size. The photo looks identical- only the hidden metadata is removed. SammaPix removes EXIF without re-encoding the image."
                     }
                   },
                   {

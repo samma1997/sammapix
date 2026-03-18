@@ -6,9 +6,9 @@ import AltTextClient from "@/components/tools/AltTextClient";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI Alt Text Generator — Accessibility & SEO | Free | SammaPix",
+  title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
   description:
-    "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool — upload images and get 50-125 character alt tags instantly. No signup required to try.",
+    "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly. No signup required to try.",
   keywords: [
     "ai alt text generator",
     "image alt text",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/alt-text`,
   },
   openGraph: {
-    title: "AI Alt Text Generator — Accessibility & SEO | Free | SammaPix",
+    title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
     description:
-      "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool — upload images and get 50-125 character alt tags instantly.",
+      "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly.",
     url: `${APP_URL}/tools/alt-text`,
     siteName: "SammaPix",
     type: "website",
@@ -54,7 +54,7 @@ const features = [
     icon: <Eye className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "WCAG 2.1 compliant",
     description:
-      "Generated alt texts follow web accessibility guidelines — descriptive, meaningful, and appropriate length (50-125 characters) for screen readers.",
+      "Generated alt texts follow web accessibility guidelines- descriptive, meaningful, and appropriate length (50-125 characters) for screen readers.",
     highlight: false,
   },
   {
@@ -87,7 +87,7 @@ export default function AltTextPage() {
           </span>
         </div>
         <p className="text-sm text-[#737373]">
-          Upload images and generate accessibility-compliant alt text in seconds using Google Gemini AI. Edit results inline, then download as CSV or JSON for bulk import into your CMS. Only a thumbnail is sent to AI — your originals stay on your device.
+          Upload images and generate accessibility-compliant alt text in seconds using Google Gemini AI. Edit results inline, then download as CSV or JSON for bulk import into your CMS. Only a thumbnail is sent to AI- your originals stay on your device.
         </p>
       </div>
 
@@ -136,7 +136,7 @@ export default function AltTextPage() {
             What is alt text and why does it matter?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            Alt text (alternative text) is an HTML attribute added to image tags that describes the image for screen readers used by visually impaired users. It is also a key SEO signal — Google uses alt text to understand the content and context of images on your page.
+            Alt text (alternative text) is an HTML attribute added to image tags that describes the image for screen readers used by visually impaired users. It is also a key SEO signal - Google uses alt text to understand the content and context of images on your page.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             What makes good alt text?
@@ -240,7 +240,7 @@ export default function AltTextPage() {
                 name: "How long should alt text be?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "WCAG recommends keeping alt text concise — typically 50-125 characters. SammaPix AI generates alt texts within this range automatically. Decorative images that convey no information can use empty alt text (alt='').",
+                  text: "WCAG recommends keeping alt text concise- typically 50-125 characters. SammaPix AI generates alt texts within this range automatically. Decorative images that convey no information can use empty alt text (alt='').",
                 },
               },
               {
@@ -248,7 +248,7 @@ export default function AltTextPage() {
                 name: "How many alt texts can I generate for free?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Free accounts get 5 AI-generated alt texts per day after signing in. Pro accounts unlock 200 per day. Signing in is free — no credit card required.",
+                  text: "Free accounts get 5 AI-generated alt texts per day after signing in. Pro accounts unlock 200 per day. Signing in is free- no credit card required.",
                 },
               },
               {

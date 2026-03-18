@@ -5,8 +5,8 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Canva — Image Tools Comparison 2026 | Free",
-  description: "SammaPix vs Canva for image compression and photo tools. SammaPix is faster, fully browser-based, and built specifically for image optimization — not graphic design.",
+  title: "SammaPix vs Canva - Image Tools Comparison 2026 | Free",
+  description: "SammaPix vs Canva for image compression and photo tools. SammaPix is faster, fully browser-based, and built specifically for image optimization- not graphic design.",
   keywords: [
     "canva image compress",
     "canva alternative for photo tools",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/canva`,
   },
   openGraph: {
-    title: "SammaPix vs Canva — Image Tools Comparison 2026 | Free",
+    title: "SammaPix vs Canva - Image Tools Comparison 2026 | Free",
     description: "Canva is great for design. For image compression, WebP conversion, and AI rename, SammaPix is the dedicated tool that does it faster and for free.",
     type: "website",
     url: `${APP_URL}/vs/canva`,
@@ -71,13 +71,13 @@ export default function VsCanvaPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs Canva
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          Canva is an excellent design platform. But if you need to compress images, convert to WebP, or rename files with AI for SEO, SammaPix is the dedicated tool built specifically for that — faster, free, and with no upload required.
+          Canva is an excellent design platform. But if you need to compress images, convert to WebP, or rename files with AI for SEO, SammaPix is the dedicated tool built specifically for that- faster, free, and with no upload required.
         </p>
         <div className="mt-8">
           <Link href="/">
@@ -145,31 +145,31 @@ export default function VsCanvaPage() {
               Different tools for different jobs
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Canva is a graphic design platform built around templates, layouts, and visual creation. SammaPix is an image optimization tool built around compression, format conversion, and SEO metadata. Using Canva to compress images is like using Photoshop to send an email — technically possible, but awkward and slow. SammaPix does this one thing exceptionally well.
+              Canva is a graphic design platform built around templates, layouts, and visual creation. SammaPix is an image optimization tool built around compression, format conversion, and SEO metadata. Using Canva to compress images is like using Photoshop to send an email- technically possible, but awkward and slow. SammaPix does this one thing exceptionally well.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Privacy — Canva stores your uploads in the cloud
+              Privacy - Canva stores your uploads in the cloud
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              When you upload images to Canva, they are stored on Canva&apos;s servers as part of your media library. SammaPix compresses and converts entirely inside your browser — nothing is uploaded, nothing is stored remotely. For confidential photos, client work, or personally identifiable images, this is an important distinction.
+              When you upload images to Canva, they are stored on Canva&apos;s servers as part of your media library. SammaPix compresses and converts entirely inside your browser- nothing is uploaded, nothing is stored remotely. For confidential photos, client work, or personally identifiable images, this is an important distinction.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — zero clicks from upload to SEO-ready filename
+              AI rename- zero clicks from upload to SEO-ready filename
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to look at each image and generate a descriptive, SEO-optimized filename and alt text. Drop in a folder of product photos with names like <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">photo_001.jpg</code>, and get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">red-leather-handbag-womens-fashion.webp</code> with matching alt text. Canva has no equivalent feature — it preserves the original filename you uploaded.
+              SammaPix uses Google Gemini to look at each image and generate a descriptive, SEO-optimized filename and alt text. Drop in a folder of product photos with names like <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">photo_001.jpg</code>, and get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">red-leather-handbag-womens-fashion.webp</code> with matching alt text. Canva has no equivalent feature- it preserves the original filename you uploaded.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              WebP conversion — Canva doesn&apos;t export WebP on the free plan
+              WebP conversion - Canva doesn&apos;t export WebP on the free plan
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               WebP is 25-34% smaller than JPEG at comparable quality and is now supported by all modern browsers. Canva&apos;s free plan does not export WebP directly. SammaPix converts any image to WebP in-browser for free, with no account required. For anyone optimizing web performance or Core Web Vitals, this is a significant advantage.
@@ -178,10 +178,10 @@ export default function VsCanvaPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Price — SammaPix is free where it matters most
+              Price - SammaPix is free where it matters most
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Canva Pro is $15/month and unlocks premium templates, brand kits, and expanded export options. SammaPix Pro is $7/month and unlocks 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. The core compression and WebP tools on SammaPix are free forever with no account required — Canva requires an account for most workflows.
+              Canva Pro is $15/month and unlocks premium templates, brand kits, and expanded export options. SammaPix Pro is $7/month and unlocks 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. The core compression and WebP tools on SammaPix are free forever with no account required - Canva requires an account for most workflows.
             </p>
           </div>
         </div>
@@ -194,7 +194,7 @@ export default function VsCanvaPage() {
           <Link href="/tools/webp" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Convert to WebP</p>
-              <p className="text-xs text-gray-500 mt-0.5">Convert any image to WebP — free, in-browser, no upload</p>
+              <p className="text-xs text-gray-500 mt-0.5">Convert any image to WebP- free, in-browser, no upload</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -212,7 +212,7 @@ export default function VsCanvaPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Need image optimization, not graphic design?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          SammaPix compresses, converts, and renames images — free, private, no account required.
+          SammaPix compresses, converts, and renames images- free, private, no account required.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -227,14 +227,14 @@ export default function VsCanvaPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs Canva — Which Tool Should You Use for Image Optimization in 2026?",
+            headline: "SammaPix vs Canva - Which Tool Should You Use for Image Optimization in 2026?",
             description: "Detailed comparison between SammaPix and Canva for image compression, WebP conversion, and photo optimization.",
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
@@ -244,7 +244,7 @@ export default function VsCanvaPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -260,7 +260,7 @@ export default function VsCanvaPage() {
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Primary purpose", description: "SammaPix: Image optimization | Canva: Graphic design" },
                 { "@type": "ListItem", position: 2, name: "WebP conversion", description: "SammaPix: Yes, free | Canva: Not on free plan" },
-                { "@type": "ListItem", position: 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | Canva: No — cloud storage" },
+                { "@type": "ListItem", position: 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Canva: No- cloud storage" },
                 { "@type": "ListItem", position: 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Canva: No" },
                 { "@type": "ListItem", position: 5, name: "Batch compression", description: "SammaPix: Yes, free up to 20 files | Canva: No dedicated compression" },
                 { "@type": "ListItem", position: 6, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Canva: Free (Pro $15/mo)" },
@@ -271,7 +271,7 @@ export default function VsCanvaPage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -287,7 +287,7 @@ export default function VsCanvaPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

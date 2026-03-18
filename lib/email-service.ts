@@ -42,7 +42,7 @@ export async function sendDay7Email(to: string, name: string | null) {
   await resend.emails.send({
     from: FROM,
     to,
-    subject: "Process 20 images at once — here's how",
+    subject: "Process 20 images at once- here's how",
     html,
   });
 }
@@ -53,7 +53,7 @@ export async function sendDay14Email(to: string, name: string | null) {
   await resend.emails.send({
     from: FROM,
     to,
-    subject: "Two weeks in — quick question",
+    subject: "Two weeks in- quick question",
     html,
   });
 }
@@ -75,7 +75,7 @@ export async function sendDay30Email(to: string, name: string | null) {
   await resend.emails.send({
     from: FROM,
     to,
-    subject: "1 month with SammaPix — a thank you (+ something for you)",
+    subject: "1 month with SammaPix- a thank you (+ something for you)",
     html,
   });
 }

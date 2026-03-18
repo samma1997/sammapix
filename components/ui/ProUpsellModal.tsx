@@ -38,14 +38,14 @@ function getSubtext(
 ): string {
   switch (trigger) {
     case "ai_rename":
-      return "Free plan gets 5 AI renames per day. Pro gives you 200 — enough for an entire shoot.";
+      return "Free plan gets 5 AI renames per day. Pro gives you 200- enough for an entire shoot.";
     case "file_size":
       return "Free plan supports files up to 20 MB. Upgrade to Pro to handle files up to 50 MB.";
     case "batch":
       return `You've hit the batch processing limit. Upgrade to Pro to handle up to 500 files at once.`;
     default: {
       if (filesDropped && freeLimit) {
-        return `You dropped ${filesDropped} photos — free plan processes the first ${freeLimit}. Upgrade to handle 500 at once.`;
+        return `You dropped ${filesDropped} photos- free plan processes the first ${freeLimit}. Upgrade to handle 500 at once.`;
       }
       return `Free plan processes up to ${freeLimit ?? 100} files. Upgrade to handle 500 at once.`;
     }

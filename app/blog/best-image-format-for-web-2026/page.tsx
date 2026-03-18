@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title:
     "Best Image Format for Web in 2026: WebP vs AVIF vs JPEG vs PNG | SammaPix",
   description:
-    "The definitive guide to choosing the right image format for web. Compare WebP, AVIF, JPEG, PNG, and GIF — file size, quality, browser support, and when to use each.",
+    "The definitive guide to choosing the right image format for web. Compare WebP, AVIF, JPEG, PNG, and GIF- file size, quality, browser support, and when to use each.",
   alternates: {
     canonical: `${APP_URL}/blog/best-image-format-for-web-2026`,
   },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title:
       "Best Image Format for Web in 2026: WebP vs AVIF vs JPEG vs PNG (Complete Guide)",
     description:
-      "JPEG, PNG, WebP, AVIF, GIF, SVG — which image format should you actually use in 2026? This definitive guide compares file size, quality, browser support, and the right use case for each.",
+      "JPEG, PNG, WebP, AVIF, GIF, SVG- which image format should you actually use in 2026? This definitive guide compares file size, quality, browser support, and the right use case for each.",
     url: `${APP_URL}/blog/best-image-format-for-web-2026`,
     type: "article",
     publishedTime: "2026-03-13",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best Image Format for Web in 2026: WebP vs AVIF vs JPEG vs PNG",
     description:
-      "The definitive guide to image formats in 2026 — file sizes, browser support, compression benchmarks, and when to use WebP, AVIF, JPEG, or PNG.",
+      "The definitive guide to image formats in 2026- file sizes, browser support, compression benchmarks, and when to use WebP, AVIF, JPEG, or PNG.",
     creator: "@lucasammarco",
   },
 };
@@ -113,7 +113,7 @@ const faqSchema = {
       name: "What is the best image format for websites in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "WebP is the best all-around image format for websites in 2026. It delivers 25–35% smaller files than JPEG at equivalent quality, supports transparency and animation, and has over 98% browser support globally. For maximum compression where browser support allows, AVIF offers even better results — up to 50% smaller than JPEG.",
+        text: "WebP is the best all-around image format for websites in 2026. It delivers 25–35% smaller files than JPEG at equivalent quality, supports transparency and animation, and has over 98% browser support globally. For maximum compression where browser support allows, AVIF offers even better results- up to 50% smaller than JPEG.",
       },
     },
     {
@@ -121,7 +121,7 @@ const faqSchema = {
       name: "Is AVIF better than WebP?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "AVIF generally achieves better compression than WebP — typically 20–50% smaller file sizes at the same visual quality. However, AVIF has lower browser support (around 92–93% in 2026 versus WebP's 98%+) and slower encoding times. For most production workflows, WebP remains the pragmatic default, with AVIF as a progressive enhancement served via the HTML picture element.",
+        text: "AVIF generally achieves better compression than WebP- typically 20–50% smaller file sizes at the same visual quality. However, AVIF has lower browser support (around 92–93% in 2026 versus WebP's 98%+) and slower encoding times. For most production workflows, WebP remains the pragmatic default, with AVIF as a progressive enhancement served via the HTML picture element.",
       },
     },
     {
@@ -129,7 +129,7 @@ const faqSchema = {
       name: "Should I still use JPEG in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "JPEG is not obsolete, but it should no longer be your default web format. It remains appropriate for specific workflows — email, print, legacy CMS systems, or image pipelines where JPEG is required. For any new web publishing, WebP is the better choice in virtually every scenario where JPEG was previously used.",
+        text: "JPEG is not obsolete, but it should no longer be your default web format. It remains appropriate for specific workflows- email, print, legacy CMS systems, or image pipelines where JPEG is required. For any new web publishing, WebP is the better choice in virtually every scenario where JPEG was previously used.",
       },
     },
     {
@@ -137,7 +137,7 @@ const faqSchema = {
       name: "When should I use PNG instead of WebP?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Use PNG when you need lossless quality with perfect pixel accuracy and cannot use WebP — for example, in desktop applications, certain print workflows, or when working with images that will be edited further. For web use with transparency, lossless WebP almost always produces smaller files than PNG while maintaining identical quality.",
+        text: "Use PNG when you need lossless quality with perfect pixel accuracy and cannot use WebP- for example, in desktop applications, certain print workflows, or when working with images that will be edited further. For web use with transparency, lossless WebP almost always produces smaller files than PNG while maintaining identical quality.",
       },
     },
     {
@@ -145,7 +145,7 @@ const faqSchema = {
       name: "Is GIF still relevant in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "GIF is largely obsolete for new content. Animated WebP files are typically 64% smaller than GIF equivalents, and AVIF animated sequences compress even further. The only remaining reason to use GIF is platform compatibility — some older platforms and email clients still do not support animated WebP.",
+        text: "GIF is largely obsolete for new content. Animated WebP files are typically 64% smaller than GIF equivalents, and AVIF animated sequences compress even further. The only remaining reason to use GIF is platform compatibility- some older platforms and email clients still do not support animated WebP.",
       },
     },
     {
@@ -153,7 +153,7 @@ const faqSchema = {
       name: "How do I convert images to WebP or AVIF for free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can convert images to WebP for free using SammaPix's browser-based converter at sammapix.com/tools/webp. The conversion happens entirely in your browser — no files are uploaded to any server. For batch conversions, the compress tool at sammapix.com/tools/compress supports bulk processing with WebP output.",
+        text: "You can convert images to WebP for free using SammaPix's browser-based converter at sammapix.com/tools/webp. The conversion happens entirely in your browser- no files are uploaded to any server. For batch conversions, the compress tool at sammapix.com/tools/compress supports bulk processing with WebP output.",
       },
     },
   ],
@@ -208,8 +208,8 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-4">
               Six image formats. Wildly different file sizes, compression
               tradeoffs, and browser support levels. This guide covers every
-              format you will encounter in web development in 2026 — JPEG, PNG,
-              WebP, AVIF, GIF, and SVG — with real benchmark numbers, a
+              format you will encounter in web development in 2026 - JPEG, PNG,
+              WebP, AVIF, GIF, and SVG- with real benchmark numbers, a
               comparison table, and a plain-language decision framework for
               choosing the right format every time.
             </p>
@@ -238,7 +238,7 @@ export default function BestImageFormatForWeb2026Page() {
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
                 Image format choice directly affects Core Web Vitals and page
-                load speed — Photo by Carlos Muza on Unsplash
+                load speed - Photo by Carlos Muza on Unsplash
               </figcaption>
             </figure>
 
@@ -250,14 +250,14 @@ export default function BestImageFormatForWeb2026Page() {
               Images are the single largest contributor to page weight on most
               websites. According to HTTP Archive data from early 2026, images
               account for 45–65% of total page bytes on the median web page.
-              That means the format you choose — and how you compress it — has a
+              That means the format you choose- and how you compress it- has a
               more direct impact on page load time than nearly any other
               optimization decision you can make.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               This is not a theoretical concern. Google&apos;s Core Web Vitals
               program, which directly influences search rankings, measures
-              Largest Contentful Paint (LCP) — and the LCP element is almost
+              Largest Contentful Paint (LCP)- and the LCP element is almost
               always an image. Switching from JPEG to WebP, or from WebP to
               AVIF, can shave hundreds of kilobytes off a page and meaningfully
               improve LCP scores without any visible change in perceived quality.
@@ -265,8 +265,8 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               In 2026, you have more format choices than ever. JPEG and PNG have
               been the defaults for decades. WebP has achieved near-universal
-              browser support. AVIF — the next-generation format based on the AV1
-              codec — has crossed the threshold from experimental to production-ready.
+              browser support. AVIF- the next-generation format based on the AV1
+              codec- has crossed the threshold from experimental to production-ready.
               Each has a distinct set of tradeoffs. This guide gives you the
               complete picture.
             </p>
@@ -278,7 +278,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               JPEG (Joint Photographic Experts Group) was introduced in 1992 and
               remains one of the most widely used image formats in the world.
-              It uses Discrete Cosine Transform (DCT) compression — a lossy
+              It uses Discrete Cosine Transform (DCT) compression- a lossy
               algorithm that discards high-frequency detail that the human eye
               is least sensitive to. The result is substantial file size
               reduction with surprisingly good perceptual quality.
@@ -288,7 +288,7 @@ export default function BestImageFormatForWeb2026Page() {
               most photos are visually indistinguishable from the original at a
               fraction of the file size. At quality 60–70, files get even smaller
               with visible but often acceptable degradation. At quality 100,
-              JPEG is still lossy — you are just losing less information. There
+              JPEG is still lossy- you are just losing less information. There
               is no lossless JPEG mode in the traditional sense.
             </p>
 
@@ -297,9 +297,9 @@ export default function BestImageFormatForWeb2026Page() {
             </h3>
             <ul className="space-y-1.5 mb-4 pl-4">
               {[
-                "Universal compatibility — every device, browser, email client, and application on the planet reads JPEG.",
+                "Universal compatibility- every device, browser, email client, and application on the planet reads JPEG.",
                 "Excellent for complex photographic images with smooth color gradients.",
-                "Mature toolchain — every image editor, CMS, and CDN handles JPEG natively.",
+                "Mature toolchain- every image editor, CMS, and CDN handles JPEG natively.",
                 "Progressive JPEG allows images to load in passes, improving perceived performance.",
                 "Smaller file sizes than PNG for photographic content.",
               ].map((item) => (
@@ -318,8 +318,8 @@ export default function BestImageFormatForWeb2026Page() {
             </h3>
             <ul className="space-y-1.5 mb-4 pl-4">
               {[
-                "No transparency support — the alpha channel simply does not exist in JPEG.",
-                "Lossy-only — every save operation degrades the image. There is no way around this.",
+                "No transparency support- the alpha channel simply does not exist in JPEG.",
+                "Lossy-only- every save operation degrades the image. There is no way around this.",
                 "Compression artifacts (the classic blocky pattern) are visible at lower quality settings.",
                 "Performs poorly on images with sharp edges, flat color regions, or text.",
                 "Larger files than WebP and AVIF at equivalent quality.",
@@ -352,7 +352,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               PNG (Portable Network Graphics) was created in 1996 as an
               open-source, patent-free alternative to GIF. Its defining
-              characteristic is lossless compression — every pixel in a PNG is
+              characteristic is lossless compression- every pixel in a PNG is
               stored exactly as it appears, with no information discarded. This
               makes PNG the format of choice whenever pixel-perfect accuracy is
               non-negotiable.
@@ -362,7 +362,7 @@ export default function BestImageFormatForWeb2026Page() {
               coding) which is entirely reversible. The compression reduces file
               size through pattern recognition rather than data loss. This is why
               PNG files can be reopened, edited, and re-saved indefinitely
-              without degradation — unlike JPEG, which accumulates compression
+              without degradation- unlike JPEG, which accumulates compression
               artifacts on every resave.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -385,7 +385,7 @@ export default function BestImageFormatForWeb2026Page() {
                 {[
                   "Logos, icons, and UI elements that need a transparent background",
                   "Screenshots, diagrams, and images with flat colors or text",
-                  "Source files that will be edited further — never degrade intermediate assets",
+                  "Source files that will be edited further- never degrade intermediate assets",
                   "Images in desktop applications that do not support WebP",
                   "Any image where lossless accuracy is a hard requirement",
                 ].map((item) => (
@@ -405,7 +405,7 @@ export default function BestImageFormatForWeb2026Page() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The main limitation of PNG for web use is file size. A full-resolution
-              photograph saved as PNG-24 can easily be 10 megabytes or more — the
+              photograph saved as PNG-24 can easily be 10 megabytes or more- the
               same image as a quality-85 JPEG might be 300 kilobytes. For the web,
               lossless WebP delivers the same pixel-perfect accuracy as PNG while
               producing files that are on average 26% smaller.
@@ -418,7 +418,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               WebP was developed by Google and first released in 2010, built on
               the VP8 video codec. It was designed to replace JPEG, PNG, and GIF
-              simultaneously — one format that handles lossy compression, lossless
+              simultaneously- one format that handles lossy compression, lossless
               compression, transparency, and animation. After years of limited
               Safari support holding it back, WebP has now achieved mainstream
               adoption.
@@ -435,7 +435,7 @@ export default function BestImageFormatForWeb2026Page() {
               </a>
               , lossy WebP files are 25–34% smaller than JPEG at equivalent
               quality. Lossless WebP files are 26% smaller than PNG. These are
-              not edge cases — they hold across a wide range of photographic
+              not edge cases- they hold across a wide range of photographic
               content tested across thousands of images.
             </p>
 
@@ -448,7 +448,7 @@ export default function BestImageFormatForWeb2026Page() {
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
                 Modern web development workflows in 2026 default to WebP for all
-                image delivery — Photo by Domenico Loia on Unsplash
+                image delivery - Photo by Domenico Loia on Unsplash
               </figcaption>
             </figure>
 
@@ -516,7 +516,7 @@ export default function BestImageFormatForWeb2026Page() {
               >
                 SammaPix&apos;s free WebP converter
               </Link>{" "}
-              — no upload required, no watermark, no file size limit. You can
+             - no upload required, no watermark, no file size limit. You can
               also read the{" "}
               <Link
                 href="/blog/complete-guide-webp-format"
@@ -541,7 +541,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The compression gains over WebP are substantial. Independent
               benchmarks consistently show AVIF files are 20–50% smaller than
-              equivalent JPEG files at the same perceptual quality — and
+              equivalent JPEG files at the same perceptual quality- and
               typically 10–20% smaller than WebP. For a website serving millions
               of image views per month, that difference translates directly into
               bandwidth savings and faster LCP scores.
@@ -598,7 +598,7 @@ export default function BestImageFormatForWeb2026Page() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The main practical limitation of AVIF in 2026 is encoding speed.
-              AVIF compression is computationally intensive — encoding a single
+              AVIF compression is computationally intensive- encoding a single
               high-resolution image can take several seconds compared to
               milliseconds for JPEG or WebP. This is not an issue for pre-built
               websites or CDN pipelines that encode once, but it can be a
@@ -612,7 +612,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               GIF (Graphics Interchange Format) dates to 1987 and remains
               ubiquitous for animated images on social platforms, messaging apps,
-              and reaction content. Its technical limitations are significant —
+              and reaction content. Its technical limitations are significant- 
               GIF supports only 256 colors, has no semi-transparency
               (only full transparent or fully opaque pixels), and its LZW
               compression is inefficient by modern standards.
@@ -628,7 +628,7 @@ export default function BestImageFormatForWeb2026Page() {
               Discord, Slack, and many email clients still render animated GIFs
               reliably. If you are creating content for those platforms rather
               than your own website, GIF may remain the path of least resistance
-              — at least until those platforms universally support animated WebP.
+             - at least until those platforms universally support animated WebP.
             </p>
 
             {/* SVG */}
@@ -638,7 +638,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               SVG (Scalable Vector Graphics) is fundamentally different from
               every other format on this list. While JPEG, PNG, WebP, AVIF, and
-              GIF are all raster formats — grids of pixels — SVG is a vector
+              GIF are all raster formats- grids of pixels - SVG is a vector
               format that stores mathematical descriptions of shapes and paths.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -651,10 +651,10 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               SVG files are also extremely small for appropriate content. A
-              complex logo SVG might be 2–5 kilobytes — far smaller than any
+              complex logo SVG might be 2–5 kilobytes- far smaller than any
               raster equivalent. They can be styled with CSS and animated with
               JavaScript. The only limitation is that SVG does not work for
-              photographic content — those require raster formats.
+              photographic content- those require raster formats.
             </p>
 
             {/* Comparison Table */}
@@ -878,7 +878,7 @@ export default function BestImageFormatForWeb2026Page() {
                   format: "PNG-24",
                   size: "~3.2 MB",
                   savings: "+1043%",
-                  note: "Lossless — not comparable for photos",
+                  note: "Lossless- not comparable for photos",
                 },
                 {
                   format: "WebP (quality 80)",
@@ -929,7 +929,7 @@ export default function BestImageFormatForWeb2026Page() {
               On a page with 10 images, switching from JPEG to WebP saves
               approximately 900 KB on average. Switching to AVIF saves around
               1.5 MB. For a site serving 100,000 page views per month, that is
-              roughly 150 GB less bandwidth transferred monthly — which directly
+              roughly 150 GB less bandwidth transferred monthly- which directly
               reduces hosting costs and improves LCP scores across the board.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -941,7 +941,7 @@ export default function BestImageFormatForWeb2026Page() {
               >
                 SammaPix&apos;s image compression tool
               </Link>{" "}
-              — it supports batch processing with per-format quality controls.
+             - it supports batch processing with per-format quality controls.
               You can also check the{" "}
               <a
                 href="https://web.dev/learn/images"
@@ -961,7 +961,7 @@ export default function BestImageFormatForWeb2026Page() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Converting images between formats does not require software
               installation or cloud upload. SammaPix handles all conversions
-              directly in your browser using the Canvas API — your images never
+              directly in your browser using the Canvas API- your images never
               leave your device.
             </p>
 
@@ -1026,13 +1026,13 @@ export default function BestImageFormatForWeb2026Page() {
               </p>
               <ul className="space-y-2">
                 {[
-                  "WebP is the pragmatic default for all web images in 2026 — 98%+ browser support, 25–35% smaller than JPEG.",
+                  "WebP is the pragmatic default for all web images in 2026- 98%+ browser support, 25–35% smaller than JPEG.",
                   "AVIF offers the best compression (up to 50% smaller than JPEG) but use it with a WebP fallback for the remaining 7–8% of unsupported browsers.",
-                  "JPEG is not obsolete — it remains the right choice for email, print, and maximum compatibility requirements.",
+                  "JPEG is not obsolete- it remains the right choice for email, print, and maximum compatibility requirements.",
                   "PNG is for lossless accuracy: logos, UI elements, source files, and anything that needs a transparent background outside the web.",
-                  "SVG is not a photo format — it is the clear winner for logos, icons, and vector illustrations at any scale.",
+                  "SVG is not a photo format- it is the clear winner for logos, icons, and vector illustrations at any scale.",
                   "GIF should only be used when platform requirements demand it. Animated WebP is better in every technical dimension.",
-                  "The HTML picture element lets you serve AVIF to modern browsers and WebP/JPEG as fallbacks — use it.",
+                  "The HTML picture element lets you serve AVIF to modern browsers and WebP/JPEG as fallbacks- use it.",
                 ].map((item) => (
                   <li
                     key={item}
@@ -1057,27 +1057,27 @@ export default function BestImageFormatForWeb2026Page() {
               {[
                 {
                   q: "What is the best image format for websites in 2026?",
-                  a: "WebP is the best all-around image format for websites in 2026. It delivers 25–35% smaller files than JPEG at equivalent quality, supports transparency and animation, and has over 98% browser support globally. For maximum compression where browser support allows, AVIF offers even better results — up to 50% smaller than JPEG.",
+                  a: "WebP is the best all-around image format for websites in 2026. It delivers 25–35% smaller files than JPEG at equivalent quality, supports transparency and animation, and has over 98% browser support globally. For maximum compression where browser support allows, AVIF offers even better results- up to 50% smaller than JPEG.",
                 },
                 {
                   q: "Is AVIF better than WebP?",
-                  a: "AVIF generally achieves better compression than WebP — typically 20–50% smaller file sizes at the same visual quality. However, AVIF has lower browser support (around 92–93% in 2026 versus WebP's 98%+) and significantly slower encoding times. For most production workflows, WebP remains the pragmatic default, with AVIF as a progressive enhancement served via the HTML picture element.",
+                  a: "AVIF generally achieves better compression than WebP- typically 20–50% smaller file sizes at the same visual quality. However, AVIF has lower browser support (around 92–93% in 2026 versus WebP's 98%+) and significantly slower encoding times. For most production workflows, WebP remains the pragmatic default, with AVIF as a progressive enhancement served via the HTML picture element.",
                 },
                 {
                   q: "Should I still use JPEG in 2026?",
-                  a: "JPEG is not obsolete, but it should no longer be your default web format. It remains appropriate for specific workflows — email, print, legacy CMS systems, or image pipelines where JPEG is required. For any new web publishing, WebP is the better choice in virtually every scenario where JPEG was previously used.",
+                  a: "JPEG is not obsolete, but it should no longer be your default web format. It remains appropriate for specific workflows- email, print, legacy CMS systems, or image pipelines where JPEG is required. For any new web publishing, WebP is the better choice in virtually every scenario where JPEG was previously used.",
                 },
                 {
                   q: "When should I use PNG instead of WebP?",
-                  a: "Use PNG when you need lossless quality with perfect pixel accuracy and cannot use WebP — for example, in desktop applications, certain print workflows, or when working with images that will be edited further. For web use with transparency, lossless WebP almost always produces smaller files than PNG while maintaining identical quality.",
+                  a: "Use PNG when you need lossless quality with perfect pixel accuracy and cannot use WebP- for example, in desktop applications, certain print workflows, or when working with images that will be edited further. For web use with transparency, lossless WebP almost always produces smaller files than PNG while maintaining identical quality.",
                 },
                 {
                   q: "Is GIF still relevant in 2026?",
-                  a: "GIF is largely obsolete for new content. Animated WebP files are typically 64% smaller than GIF equivalents, and AVIF animated sequences compress even further. The only remaining reason to use GIF is platform compatibility — some older platforms and email clients still do not support animated WebP.",
+                  a: "GIF is largely obsolete for new content. Animated WebP files are typically 64% smaller than GIF equivalents, and AVIF animated sequences compress even further. The only remaining reason to use GIF is platform compatibility- some older platforms and email clients still do not support animated WebP.",
                 },
                 {
                   q: "How do I convert images to WebP or AVIF for free?",
-                  a: "You can convert images to WebP for free using SammaPix's browser-based converter at sammapix.com/tools/webp. The conversion happens entirely in your browser — no files are uploaded to any server. For batch conversions, the compress tool at sammapix.com/tools/compress supports bulk processing with WebP output.",
+                  a: "You can convert images to WebP for free using SammaPix's browser-based converter at sammapix.com/tools/webp. The conversion happens entirely in your browser- no files are uploaded to any server. For batch conversions, the compress tool at sammapix.com/tools/compress supports bulk processing with WebP output.",
                 },
               ].map(({ q, a }) => (
                 <div
@@ -1098,7 +1098,7 @@ export default function BestImageFormatForWeb2026Page() {
                 Ready to switch to WebP?
               </p>
               <p className="text-sm text-[#737373] leading-relaxed mb-5">
-                Convert your existing JPEG and PNG files to WebP instantly —
+                Convert your existing JPEG and PNG files to WebP instantly- 
                 directly in your browser, no upload, no account required.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -1106,7 +1106,7 @@ export default function BestImageFormatForWeb2026Page() {
                   href="/tools/webp"
                   className="inline-flex items-center gap-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium px-5 py-2.5 rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
                 >
-                  Convert to WebP — free
+                  Convert to WebP- free
                   <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
                 </Link>
                 <Link
@@ -1156,14 +1156,14 @@ export default function BestImageFormatForWeb2026Page() {
                 badge: "Formats",
                 title: "The Complete Guide to WebP",
                 description:
-                  "Everything you need to know about WebP — how it works, browser support, and when to use it.",
+                  "Everything you need to know about WebP- how it works, browser support, and when to use it.",
               },
               {
                 href: "/blog/best-image-compression-tools-2026",
                 badge: "Tools",
                 title: "Best Image Compression Tools in 2026",
                 description:
-                  "SammaPix, TinyPNG, Squoosh, ImageOptim — an honest comparison of the top free tools.",
+                  "SammaPix, TinyPNG, Squoosh, ImageOptim- an honest comparison of the top free tools.",
               },
             ].map(({ href, badge, title, description }) => (
               <Link

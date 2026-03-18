@@ -57,7 +57,7 @@ export interface PipelineConfig {
   ) => void;
   onFileComplete: (fileIndex: number, result: PipelineFileResult) => void;
   onFileError: (fileIndex: number, error: string) => void;
-  /** Optional abort signal — when set to true processing stops */
+  /** Optional abort signal- when set to true processing stops */
   abortRef?: { current: boolean };
   locale?: string;
 }
@@ -69,7 +69,7 @@ export interface PipelineConfig {
  *
  * Each file goes through every *enabled* step in order.
  * Steps that fail fatally (compress, resize, webp, exif-strip) abort that file.
- * AI rename failure is non-fatal — the original name is kept.
+ * AI rename failure is non-fatal- the original name is kept.
  */
 export async function runPipeline(config: PipelineConfig): Promise<void> {
   const { steps, files, onFileProgress, onFileComplete, onFileError, abortRef } =
@@ -148,7 +148,7 @@ export async function runPipeline(config: PipelineConfig): Promise<void> {
               altText = result.altText;
               onFileProgress(i, step.id, 100);
             } catch {
-              // AI rename failure is non-fatal — keep original name, mark skipped
+              // AI rename failure is non-fatal- keep original name, mark skipped
               onFileProgress(i, step.id, -1); // -1 signals "skipped"
             }
             break;

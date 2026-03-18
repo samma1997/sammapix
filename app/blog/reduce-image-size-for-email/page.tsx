@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Reduce Image Size for Email: Get Under 1MB Fast | SammaPix",
   description:
-    "Quickly reduce image file size for email attachments. Compress photos to under 1MB without visible quality loss — free, no signup, works in your browser.",
+    "Quickly reduce image file size for email attachments. Compress photos to under 1MB without visible quality loss- free, no signup, works in your browser.",
   alternates: {
     canonical: `${APP_URL}/blog/reduce-image-size-for-email`,
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reduce Image Size for Email: Get Under 1MB Fast | SammaPix",
     description:
-      "Compress photos to under 1MB for email attachments — no quality loss, free, runs entirely in your browser. Works for iPhone photos, DSLR shots, and everything in between.",
+      "Compress photos to under 1MB for email attachments- no quality loss, free, runs entirely in your browser. Works for iPhone photos, DSLR shots, and everything in between.",
     url: `${APP_URL}/blog/reduce-image-size-for-email`,
     type: "article",
     publishedTime: "2026-02-03",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reduce Image Size for Email: Get Under 1MB Fast",
     description:
-      "Compress photos to under 1MB for email — free, no upload required. Works for iPhone photos, DSLR shots, and everything in between.",
+      "Compress photos to under 1MB for email- free, no upload required. Works for iPhone photos, DSLR shots, and everything in between.",
     creator: "@lucasammarco",
   },
 };
@@ -135,7 +135,7 @@ export default function ReduceImageSizeForEmailPage() {
             </h1>
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
               You take a photo on your iPhone, try to send it by email, and the
-              upload stalls — or the recipient&apos;s inbox bounces it back.
+              upload stalls- or the recipient&apos;s inbox bounces it back.
               Modern smartphones produce photos between 3 MB and 8 MB each. Most
               email providers cap attachments well below that. This guide shows
               you exactly how to reduce image size for email in under two
@@ -153,7 +153,7 @@ export default function ReduceImageSizeForEmailPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Sending photos by email is something almost everyone does — and oversized attachments block it every time — Photo by Solen Feyissa on Unsplash
+                Sending photos by email is something almost everyone does- and oversized attachments block it every time - Photo by Solen Feyissa on Unsplash
               </figcaption>
             </figure>
 
@@ -164,7 +164,7 @@ export default function ReduceImageSizeForEmailPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Every email provider enforces a maximum attachment size. These
               limits apply to the total size of all attachments combined in a
-              single email — not per file. Sending multiple photos at once makes
+              single email- not per file. Sending multiple photos at once makes
               the problem worse fast.
             </p>
 
@@ -208,7 +208,7 @@ export default function ReduceImageSizeForEmailPage() {
                     {
                       provider: "Corporate / Business",
                       limit: "5–10 MB",
-                      note: "Often much lower — varies by IT policy",
+                      note: "Often much lower- varies by IT policy",
                     },
                   ].map((row, i) => (
                     <tr
@@ -240,7 +240,7 @@ export default function ReduceImageSizeForEmailPage() {
               >
                 Google&apos;s official Gmail attachment help page
               </a>
-              . The limits look generous on paper — but the reality of modern
+              . The limits look generous on paper- but the reality of modern
               smartphone photos closes that gap very quickly.
             </p>
 
@@ -250,7 +250,7 @@ export default function ReduceImageSizeForEmailPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The camera on a modern iPhone shoots at 12 megapixels or higher.
-              Each raw photo from that sensor is a 4032 x 3024 pixel image —
+              Each raw photo from that sensor is a 4032 x 3024 pixel image- 
               that is over 12 million individual pixels. At typical JPEG quality
               settings, each photo weighs between 3 MB and 6 MB off the camera.
               Shoot in Portrait mode, HDR, or high-efficiency format and the
@@ -259,14 +259,14 @@ export default function ReduceImageSizeForEmailPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Android flagships and modern DSLRs are even larger. A 24 MP Sony
               or Canon produces JPEGs between 8 MB and 15 MB per shot. Attach
-              three of those to an email and you are already at 30–45 MB —
+              three of those to an email and you are already at 30–45 MB- 
               well over every provider&apos;s limit.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The good news: you do not need all those pixels for email. At
               normal screen sizes, a 1920 x 1080 image is indistinguishable from
               a 4032 x 3024 image. Reducing the dimensions alone can cut file
-              size by 75% or more — before any compression even happens.
+              size by 75% or more- before any compression even happens.
             </p>
 
             <figure className="my-8">
@@ -277,7 +277,7 @@ export default function ReduceImageSizeForEmailPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                A single iPhone photo at full resolution can be 5 MB or more — far too large for most email attachments — Photo by Paul Hanaoka on Unsplash
+                A single iPhone photo at full resolution can be 5 MB or more- far too large for most email attachments - Photo by Paul Hanaoka on Unsplash
               </figcaption>
             </figure>
 
@@ -301,7 +301,7 @@ export default function ReduceImageSizeForEmailPage() {
               >
                 SammaPix Compress tool
               </Link>{" "}
-              handles this entirely in your browser — your photos never leave
+              handles this entirely in your browser- your photos never leave
               your device. Drag your photo onto the drop zone, adjust the
               quality slider if needed, and download the compressed version. The
               process takes under ten seconds per photo.
@@ -313,25 +313,25 @@ export default function ReduceImageSizeForEmailPage() {
               </p>
               <ul className="space-y-2">
                 <li className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed flex items-start gap-2">
-                  <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5">—</span>
+                  <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5"> - </span>
                   <span>
-                    <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 75–80%</strong> — the sweet spot for email.
+                    <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 75–80%</strong>- the sweet spot for email.
                     Visually indistinguishable from the original at screen size,
                     but 50–70% smaller.
                   </span>
                 </li>
                 <li className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed flex items-start gap-2">
-                  <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5">—</span>
+                  <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5"> - </span>
                   <span>
-                    <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 60–70%</strong> — use this if you still need
+                    <strong className="text-gray-800 dark:text-[#E5E5E5]">Quality 60–70%</strong>- use this if you still need
                     to get smaller. Some loss is visible only at 1:1 zoom on a
                     large monitor.
                   </span>
                 </li>
                 <li className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed flex items-start gap-2">
-                  <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5">—</span>
+                  <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5"> - </span>
                   <span>
-                    <strong className="text-gray-800 dark:text-[#E5E5E5]">Avoid quality below 50%</strong> — artifacts become
+                    <strong className="text-gray-800 dark:text-[#E5E5E5]">Avoid quality below 50%</strong>- artifacts become
                     clearly visible at this level. The file size savings are not
                     worth the degradation for anything you are sending to another
                     person.
@@ -345,17 +345,17 @@ export default function ReduceImageSizeForEmailPage() {
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Resizing reduces the number of pixels in your image — from a wide
+              Resizing reduces the number of pixels in your image- from a wide
               original like 4032 x 3024 down to something like 1920 x 1080 or
               1280 x 960. This is one of the most effective ways to reduce image
               size for email because file size scales roughly with the square of
               the pixel dimensions. Halving the width and height reduces the
-              pixel count — and thus the file size — by approximately 75%.
+              pixel count- and thus the file size- by approximately 75%.
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               A practical target for email photos is the long edge at 1920
-              pixels. That is full 1080p resolution — large enough to look crisp
+              pixels. That is full 1080p resolution- large enough to look crisp
               on any screen the recipient views it on, but a fraction of the
               original file weight. The{" "}
               <Link
@@ -365,7 +365,7 @@ export default function ReduceImageSizeForEmailPage() {
                 SammaPix ResizePack tool
               </Link>{" "}
               lets you batch-resize multiple photos to exact dimensions or a
-              target percentage — download them all as a ZIP and attach to your
+              target percentage- download them all as a ZIP and attach to your
               email in one go.
             </p>
 
@@ -377,11 +377,11 @@ export default function ReduceImageSizeForEmailPage() {
                 {[
                   {
                     label: "Email to friend or family",
-                    value: "1280px on the long edge — looks great, very small",
+                    value: "1280px on the long edge- looks great, very small",
                   },
                   {
                     label: "Email to client (professional)",
-                    value: "1920px on the long edge — sharp on any monitor",
+                    value: "1920px on the long edge- sharp on any monitor",
                   },
                   {
                     label: "Email for print review",
@@ -389,14 +389,14 @@ export default function ReduceImageSizeForEmailPage() {
                   },
                   {
                     label: "Multiple photos in one email",
-                    value: "1000–1280px — keeps total attachment under 5 MB",
+                    value: "1000–1280px- keeps total attachment under 5 MB",
                   },
                 ].map(({ label, value }) => (
                   <li
                     key={label}
                     className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed flex items-start gap-2"
                   >
-                    <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5">—</span>
+                    <span className="text-gray-400 dark:text-[#525252] shrink-0 mt-0.5"> - </span>
                     <span>
                       <strong className="text-gray-800 dark:text-[#E5E5E5]">{label}:</strong>{" "}
                       {value}
@@ -413,7 +413,7 @@ export default function ReduceImageSizeForEmailPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               WebP is a modern image format developed by Google. At equivalent
               visual quality, WebP files are typically 25–35% smaller than JPEG
-              files. That means a 3 MB JPEG photo can become a 2 MB WebP — just
+              files. That means a 3 MB JPEG photo can become a 2 MB WebP- just
               by changing the format, without changing the dimensions or lowering
               the quality setting.
             </p>
@@ -422,7 +422,7 @@ export default function ReduceImageSizeForEmailPage() {
               email clients on web (Gmail, Outlook.com, Yahoo Mail) and iOS/
               Android handle WebP without issues. Older desktop email clients
               like Outlook 2016 or Thunderbird on older systems may not display
-              WebP images inline — but they will still receive and allow
+              WebP images inline- but they will still receive and allow
               downloading the attachment. If you are unsure, stick to JPEG or
               use Method 4 below which combines everything.
             </p>
@@ -435,7 +435,7 @@ export default function ReduceImageSizeForEmailPage() {
                 SammaPix WebP converter
               </Link>
               . Drop in your JPEGs or PNGs and download them as WebP in seconds.
-              Everything runs in your browser — nothing is uploaded to any
+              Everything runs in your browser- nothing is uploaded to any
               server.
             </p>
 
@@ -447,7 +447,7 @@ export default function ReduceImageSizeForEmailPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Choosing the right format can shave megabytes off your attachments before you touch any quality settings — Photo by Jess Bailey on Unsplash
+                Choosing the right format can shave megabytes off your attachments before you touch any quality settings - Photo by Jess Bailey on Unsplash
               </figcaption>
             </figure>
 
@@ -457,7 +457,7 @@ export default function ReduceImageSizeForEmailPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               For the smallest possible file that still looks good in an email,
-              stack all three techniques in order. Resize first — dimensions are
+              stack all three techniques in order. Resize first- dimensions are
               the biggest single contributor to file weight. Then compress.
               Finally, if compatibility is not a concern, convert to WebP. Each
               step stacks on the previous one and the results are dramatic.
@@ -498,7 +498,7 @@ export default function ReduceImageSizeForEmailPage() {
                     <strong className="text-gray-800 dark:text-[#E5E5E5]">
                       {title}
                     </strong>{" "}
-                    — {desc}
+                   - {desc}
                   </span>
                 </li>
               ))}
@@ -511,8 +511,8 @@ export default function ReduceImageSizeForEmailPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The table below uses a representative starting point: a 5 MB JPEG
               photo from a 12 MP iPhone at 4032 x 3024 pixels. Your results will
-              vary by photo content — busy outdoor scenes compress less than
-              smooth sky backgrounds — but this gives a reliable reference range.
+              vary by photo content- busy outdoor scenes compress less than
+              smooth sky backgrounds- but this gives a reliable reference range.
             </p>
 
             <div className="overflow-x-auto -mx-4 sm:mx-0 mb-6">
@@ -535,7 +535,7 @@ export default function ReduceImageSizeForEmailPage() {
                     {
                       method: "Original (5 MB iPhone JPEG, 4032x3024)",
                       size: "5.0 MB",
-                      reduction: "—",
+                      reduction: " - ",
                       highlight: false,
                     },
                     {
@@ -616,7 +616,7 @@ export default function ReduceImageSizeForEmailPage() {
               A 5 MB photo that has been resized, compressed, and converted to
               WebP is around 300 KB on average. You can comfortably attach ten
               of them to a single email and stay well under any provider&apos;s
-              limit. Even keeping it to JPEG — resize and compress only — brings
+              limit. Even keeping it to JPEG- resize and compress only- brings
               you from 5 MB to under 600 KB per photo.
             </p>
 
@@ -627,10 +627,10 @@ export default function ReduceImageSizeForEmailPage() {
             >
               <div>
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
-                  Free tool — no signup, no upload
+                  Free tool- no signup, no upload
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Compress your photos for email now — reduce to under 1 MB in seconds
+                  Compress your photos for email now- reduce to under 1 MB in seconds
                 </p>
               </div>
               <ArrowRight
@@ -644,8 +644,8 @@ export default function ReduceImageSizeForEmailPage() {
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              When you need to email an entire album — a wedding set, a real
-              estate shoot, a holiday collection — compressing one photo at a
+              When you need to email an entire album- a wedding set, a real
+              estate shoot, a holiday collection- compressing one photo at a
               time is not practical. Here is how to handle batches efficiently.
             </p>
 
@@ -664,9 +664,9 @@ export default function ReduceImageSizeForEmailPage() {
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Even after compression, if you are sending 40 photos at 300 KB
-              each, that is 12 MB — right at the edge of many limits. Split
+              each, that is 12 MB- right at the edge of many limits. Split
               large sets into two or three emails of 10–15 photos each. Label
-              them clearly in the subject line: &ldquo;Event photos — Part 1 of
+              them clearly in the subject line: &ldquo;Event photos - Part 1 of
               3.&rdquo; This is safer and more reliable than trying to squeeze
               everything into one send.
             </p>
@@ -679,7 +679,7 @@ export default function ReduceImageSizeForEmailPage() {
               genuinely more practical than email attachments. Google Photos,
               iCloud shared albums, and Dropbox all let you create a link the
               recipient can use to browse and download at their own pace. Email
-              is fine for a handful of photos — for full event galleries, a link
+              is fine for a handful of photos- for full event galleries, a link
               is the better tool.
             </p>
 
@@ -703,7 +703,7 @@ export default function ReduceImageSizeForEmailPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Batch compressing a full event album takes under a minute with the right tool — Photo by imgix on Unsplash
+                Batch compressing a full event album takes under a minute with the right tool - Photo by imgix on Unsplash
               </figcaption>
             </figure>
 
@@ -738,11 +738,11 @@ export default function ReduceImageSizeForEmailPage() {
               {[
                 {
                   q: "What is the ideal file size for an email attachment photo?",
-                  a: "For most purposes, aim for 300–800 KB per photo. This is large enough to look good on any screen but small enough that ten photos stay under 10 MB total — comfortably within all major provider limits. For professional client work, 1–2 MB per photo is acceptable.",
+                  a: "For most purposes, aim for 300–800 KB per photo. This is large enough to look good on any screen but small enough that ten photos stay under 10 MB total- comfortably within all major provider limits. For professional client work, 1–2 MB per photo is acceptable.",
                 },
                 {
                   q: "Does compressing a photo for email reduce its quality permanently?",
-                  a: "Yes — lossy compression permanently discards some data. Always keep your original uncompressed file safe and compress a copy. The visual difference at 75–80% quality is not visible at normal email viewing sizes, but the data loss is permanent in the compressed file.",
+                  a: "Yes- lossy compression permanently discards some data. Always keep your original uncompressed file safe and compress a copy. The visual difference at 75–80% quality is not visible at normal email viewing sizes, but the data loss is permanent in the compressed file.",
                 },
                 {
                   q: "Why does my email say the attachment is too large even under the limit?",
@@ -750,11 +750,11 @@ export default function ReduceImageSizeForEmailPage() {
                 },
                 {
                   q: "Can I reduce image size for email on a phone without installing an app?",
-                  a: "Yes. SammaPix works in any mobile browser — Chrome, Safari, Firefox on iOS or Android. Open sammapix.com/tools/compress on your phone, drop in your photos, and download the compressed versions. No app installation required.",
+                  a: "Yes. SammaPix works in any mobile browser - Chrome, Safari, Firefox on iOS or Android. Open sammapix.com/tools/compress on your phone, drop in your photos, and download the compressed versions. No app installation required.",
                 },
                 {
                   q: "Should I send photos as JPEG or PNG in email?",
-                  a: "JPEG for photographs, always. PNG files of photographic content are enormous — a 3 MB JPEG can become 15–20 MB as a PNG. Use JPEG (or WebP for modern recipients) and never PNG for photos you are attaching to emails.",
+                  a: "JPEG for photographs, always. PNG files of photographic content are enormous- a 3 MB JPEG can become 15–20 MB as a PNG. Use JPEG (or WebP for modern recipients) and never PNG for photos you are attaching to emails.",
                 },
                 {
                   q: "How do I reduce image size for email on a Mac or Windows PC?",
@@ -818,12 +818,12 @@ export default function ReduceImageSizeForEmailPage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Reduce image size for email — free, no signup required
+                Reduce image size for email- free, no signup required
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-5">
                 Drag your photos into SammaPix and compress them to under 1 MB
                 in seconds. Batch processing, ZIP download, and everything runs
-                in your browser — your files never leave your device.
+                in your browser- your files never leave your device.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -877,7 +877,7 @@ export default function ReduceImageSizeForEmailPage() {
                   tag: "Comparison",
                   tagColor: "text-orange-700",
                   title:
-                    "Best Free Image Compression Tools in 2026 — Compared",
+                    "Best Free Image Compression Tools in 2026 - Compared",
                 },
               ].map(({ href, tag, tagColor, title }) => (
                 <Link key={href} href={href} className="flex items-start gap-3 group">

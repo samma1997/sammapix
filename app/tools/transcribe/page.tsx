@@ -6,9 +6,9 @@ import TranscribeClient from "@/components/tools/TranscribeClient";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI Video Transcription — Free Subtitle Generator | SammaPix",
+  title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
   description:
-    "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini. Free — no signup to try.",
+    "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini. Free- no signup to try.",
   keywords: [
     "video transcription free",
     "ai video transcription",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/transcribe`,
   },
   openGraph: {
-    title: "AI Video Transcription — Free Subtitle Generator | SammaPix",
+    title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
     description:
       "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini.",
     url: `${APP_URL}/tools/transcribe`,
@@ -63,7 +63,7 @@ const features = [
     ),
     title: "Powered by Google Gemini",
     description:
-      "Your video or audio is analysed by Gemini 2.5 Flash — one of the most accurate speech-recognition models available — returning a timestamped transcript within seconds.",
+      "Your video or audio is analysed by Gemini 2.5 Flash- one of the most accurate speech-recognition models available- returning a timestamped transcript within seconds.",
     highlight: true,
   },
   {
@@ -77,7 +77,7 @@ const features = [
     icon: <Globe className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Multi-language detection",
     description:
-      "Gemini automatically detects the spoken language — English, Italian, French, Spanish, German, Japanese and many more — without any configuration.",
+      "Gemini automatically detects the spoken language - English, Italian, French, Spanish, German, Japanese and many more- without any configuration.",
     highlight: false,
   },
 ];
@@ -102,7 +102,7 @@ export default function TranscribePage() {
           </span>
         </div>
         <p className="text-sm text-[#737373]">
-          Upload any video or audio file and get a full AI-generated transcript with timestamps. Download your subtitles as an .srt file for YouTube or any video platform. Edit the transcript inline before exporting. Powered by Google Gemini — one of the most accurate speech recognition models available.
+          Upload any video or audio file and get a full AI-generated transcript with timestamps. Download your subtitles as an .srt file for YouTube or any video platform. Edit the transcript inline before exporting. Powered by Google Gemini- one of the most accurate speech recognition models available.
         </p>
       </div>
 
@@ -151,7 +151,7 @@ export default function TranscribePage() {
             Why transcribe your videos?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            Video transcription unlocks content you have already produced. A transcript can be repurposed into a blog post, newsletter, social media captions, or a detailed show notes page — all without writing a single word from scratch. For SEO, Google cannot index the audio inside your video; a transcript gives search engines full access to your spoken content.
+            Video transcription unlocks content you have already produced. A transcript can be repurposed into a blog post, newsletter, social media captions, or a detailed show notes page- all without writing a single word from scratch. For SEO, Google cannot index the audio inside your video; a transcript gives search engines full access to your spoken content.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
             Subtitles dramatically increase accessibility. Studies show that 85% of Facebook videos are watched on mute. Adding subtitles keeps viewers engaged regardless of their environment or hearing ability.
@@ -162,13 +162,13 @@ export default function TranscribePage() {
           </h2>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0 mb-6">
             {[
-              "MP4, WebM, MOV — common video formats",
-              "MP3, WAV, AAC, M4A, OGG — audio files",
+              "MP4, WebM, MOV- common video formats",
+              "MP3, WAV, AAC, M4A, OGG- audio files",
               "Maximum file size: 100 MB",
               "All languages supported by Google Gemini",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="text-[#6366F1] mt-0.5">—</span>
+                <span className="text-[#6366F1] mt-0.5"> - </span>
                 {item}
               </li>
             ))}
@@ -298,7 +298,7 @@ Today we are going to cover video transcription.`}
             "@type": "SoftwareApplication",
             name: "SammaPix AI Video Transcription",
             description:
-              "Transcribe any video or audio file with AI using Google Gemini. Get a full timestamped transcript and download subtitles in SRT format. Free tier — 5 minutes per day.",
+              "Transcribe any video or audio file with AI using Google Gemini. Get a full timestamped transcript and download subtitles in SRT format. Free tier- 5 minutes per day.",
             url: `${APP_URL}/tools/transcribe`,
             applicationCategory: "MultimediaApplication",
             operatingSystem: "Web Browser",

@@ -30,7 +30,7 @@ interface ConversionData {
   toolLabel: string;
   /** One-line tagline shown under the H1 */
   tagline: string;
-  /** "Why convert X to Y?" body copy — 2–3 sentences */
+  /** "Why convert X to Y?" body copy- 2–3 sentences */
   whyCopy: string;
   /** Short note about quality loss (or lack thereof) */
   qualityNote: string;
@@ -56,9 +56,9 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "JPG",
     toolPath: "/tools/heic",
     toolLabel: "Open HEIC Converter",
-    tagline: "Convert iPhone HEIC photos to universally-compatible JPG — free, instant, no upload.",
+    tagline: "Convert iPhone HEIC photos to universally-compatible JPG- free, instant, no upload.",
     whyCopy:
-      "HEIC is Apple's default photo format since iOS 11. It offers excellent compression but most Windows PCs, websites, and apps cannot open it natively. Converting HEIC to JPG makes your photos work everywhere — from email attachments to social media uploads — without any software installs on the recipient's side.",
+      "HEIC is Apple's default photo format since iOS 11. It offers excellent compression but most Windows PCs, websites, and apps cannot open it natively. Converting HEIC to JPG makes your photos work everywhere- from email attachments to social media uploads- without any software installs on the recipient's side.",
     qualityNote:
       "Converting HEIC to JPG involves recompression. At quality 80–90 the visual difference is invisible to the human eye, and the resulting file is typically 40–60 % smaller than the original HEIC.",
     technicalNote:
@@ -100,7 +100,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Is it safe to convert my iPhone photos online?",
-        a: "With SammaPix, yes — conversion happens 100 % inside your browser. No image data is sent to any server. You can even disconnect from the internet after the page loads and the tool still works.",
+        a: "With SammaPix, yes- conversion happens 100 % inside your browser. No image data is sent to any server. You can even disconnect from the internet after the page loads and the tool still works.",
       },
       {
         q: "Can I convert multiple HEIC files at once?",
@@ -125,11 +125,11 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "PNG",
     toolPath: "/tools/heic",
     toolLabel: "Open HEIC Converter",
-    tagline: "Convert iPhone HEIC photos to lossless PNG — free, browser-based, no server upload.",
+    tagline: "Convert iPhone HEIC photos to lossless PNG- free, browser-based, no server upload.",
     whyCopy:
       "While JPG is the most common conversion target, PNG gives you a pixel-perfect lossless copy of your HEIC photo. This is the right choice when you need to edit the image further in Photoshop or Figma, use it as a design asset, or need to preserve exact colour data without any generation loss.",
     qualityNote:
-      "PNG is lossless: the output contains every pixel from the original HEIC image without compression artefacts. The file size will be larger than JPG but you gain zero quality loss — ideal for source files you will edit later.",
+      "PNG is lossless: the output contains every pixel from the original HEIC image without compression artefacts. The file size will be larger than JPG but you gain zero quality loss- ideal for source files you will edit later.",
     technicalNote:
       "The HEIC file is decoded in-browser via a WebAssembly HEIC decoder, then the raw pixel data is written to a Canvas element and exported as PNG via `canvas.toBlob('image/png')`. No server involved.",
     formatTable: [
@@ -169,7 +169,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Why is my HEIC to PNG output so much larger than the original?",
-        a: "HEIC uses the highly efficient HEVC codec. PNG stores pixels without lossy compression. A 2 MB HEIC file can become 8–20 MB as PNG — this is normal and expected.",
+        a: "HEIC uses the highly efficient HEVC codec. PNG stores pixels without lossy compression. A 2 MB HEIC file can become 8–20 MB as PNG- this is normal and expected.",
       },
       {
         q: "When should I convert HEIC to PNG instead of JPG?",
@@ -177,7 +177,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Can I convert HEIC to PNG in bulk?",
-        a: "Yes. SammaPix supports batch conversion — drop all your HEIC files at once and download the PNG results as a ZIP archive.",
+        a: "Yes. SammaPix supports batch conversion- drop all your HEIC files at once and download the PNG results as a ZIP archive.",
       },
     ],
     related: ["heic-to-jpg", "png-to-webp", "png-to-jpg"],
@@ -193,13 +193,13 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "WebP",
     toolPath: "/tools/webp",
     toolLabel: "Open WebP Converter",
-    tagline: "Shrink PNG files by up to 80 % — convert to WebP free, browser-based, no upload.",
+    tagline: "Shrink PNG files by up to 80 %- convert to WebP free, browser-based, no upload.",
     whyCopy:
       "WebP replaces PNG with dramatically smaller files at the same visual quality. For websites and web apps, serving WebP instead of PNG means faster page loads, lower bandwidth costs, and better Core Web Vitals scores. All major browsers have supported WebP since 2020, making the switch risk-free for most projects.",
     qualityNote:
       "WebP lossless mode produces files 26 % smaller than PNG on average. WebP lossy mode at quality 80 produces files that look identical to PNG but are up to 80 % smaller. SammaPix lets you choose the quality level.",
     technicalNote:
-      "Conversion uses the browser's native Canvas API: the PNG is drawn onto a canvas element and exported via `canvas.toBlob('image/webp', quality)`. No server required — it all runs in your browser's JavaScript engine.",
+      "Conversion uses the browser's native Canvas API: the PNG is drawn onto a canvas element and exported via `canvas.toBlob('image/webp', quality)`. No server required- it all runs in your browser's JavaScript engine.",
     formatTable: [
       {
         format: "PNG",
@@ -241,7 +241,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Should I convert my PNG logo to WebP?",
-        a: "If your logo contains transparency (alpha channel), WebP handles transparency just like PNG — so yes, converting is safe. Just use WebP lossless mode to preserve crisp edges.",
+        a: "If your logo contains transparency (alpha channel), WebP handles transparency just like PNG- so yes, converting is safe. Just use WebP lossless mode to preserve crisp edges.",
       },
       {
         q: "Can Next.js and WordPress serve WebP automatically?",
@@ -263,9 +263,9 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "WebP",
     toolPath: "/tools/webp",
     toolLabel: "Open WebP Converter",
-    tagline: "Convert JPG to WebP and cut file size by 25–35 % — free, instant, no upload.",
+    tagline: "Convert JPG to WebP and cut file size by 25–35 %- free, instant, no upload.",
     whyCopy:
-      "JPG is a great format but WebP goes further. Google's WebP codec delivers 25–35 % smaller files than JPG at equivalent visual quality. For e-commerce sites, blogs, and portfolios with large photo galleries, switching to WebP directly improves Largest Contentful Paint (LCP) — the Core Web Vitals metric tied to search rankings.",
+      "JPG is a great format but WebP goes further. Google's WebP codec delivers 25–35 % smaller files than JPG at equivalent visual quality. For e-commerce sites, blogs, and portfolios with large photo galleries, switching to WebP directly improves Largest Contentful Paint (LCP)- the Core Web Vitals metric tied to search rankings.",
     qualityNote:
       "At quality 75–80, WebP matches JPG quality at 25–35 % smaller file size. The difference is especially noticeable on photos with smooth gradients and detailed textures.",
     technicalNote:
@@ -307,7 +307,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "How much smaller will my WebP file be?",
-        a: "On average, WebP files are 25–35 % smaller than equivalent JPG files. The exact saving depends on image content — photos with fine detail and smooth skies benefit most.",
+        a: "On average, WebP files are 25–35 % smaller than equivalent JPG files. The exact saving depends on image content- photos with fine detail and smooth skies benefit most.",
       },
       {
         q: "Will Google rank my page higher if I use WebP?",
@@ -332,9 +332,9 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "WebP",
     toolPath: "/tools/webp",
     toolLabel: "Open WebP Converter",
-    tagline: "Convert JPEG to WebP and cut file size by 25–35 % — free, browser-based, no upload.",
+    tagline: "Convert JPEG to WebP and cut file size by 25–35 %- free, browser-based, no upload.",
     whyCopy:
-      "JPEG and JPG are the same format — JPEG is the original name, JPG became common on Windows where extensions were limited to 3 characters. Both convert to WebP identically. WebP delivers 25–35 % better compression than JPEG at equivalent quality, making it the recommended format for all web images as of 2024.",
+      "JPEG and JPG are the same format - JPEG is the original name, JPG became common on Windows where extensions were limited to 3 characters. Both convert to WebP identically. WebP delivers 25–35 % better compression than JPEG at equivalent quality, making it the recommended format for all web images as of 2024.",
     qualityNote:
       "At quality 80, WebP matches JPEG quality at 25–35 % smaller file size. SammaPix lets you dial quality from 1 to 100 so you can find the exact balance for your use case.",
     technicalNote:
@@ -380,7 +380,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Is WebP better than JPEG for email?",
-        a: "No — email clients like Outlook and older Gmail versions do not render WebP. Keep JPEG for email attachments. Use WebP for images served on the web through a browser.",
+        a: "No- email clients like Outlook and older Gmail versions do not render WebP. Keep JPEG for email attachments. Use WebP for images served on the web through a browser.",
       },
       {
         q: "How do I serve WebP on my website while keeping JPEG as a fallback?",
@@ -401,13 +401,13 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "JPG",
     toolPath: "/tools/compress",
     toolLabel: "Open Compress & Convert Tool",
-    tagline: "Convert WebP back to JPG for universal compatibility — free, browser-based, no upload.",
+    tagline: "Convert WebP back to JPG for universal compatibility- free, browser-based, no upload.",
     whyCopy:
       "WebP is ideal for web delivery, but some apps, email clients, and older software cannot open WebP files. Converting WebP to JPG restores maximum compatibility. Common scenarios include sharing photos with family via email, uploading to legacy CMS platforms, or exporting assets for print workflows that require JPEG.",
     qualityNote:
       "Converting WebP to JPG involves re-encoding from one lossy format to another. At quality 85 the output looks identical to the source. If the original WebP was created from a JPG, the round-trip loss is minimal at high quality settings.",
     technicalNote:
-      "SammaPix converts WebP to JPG entirely in the browser using the Canvas API: the WebP is drawn onto a canvas and exported via `canvas.toBlob('image/jpeg', quality)`. No server upload is needed — this is why the tool is listed under Compress & Convert rather than a dedicated server-side converter.",
+      "SammaPix converts WebP to JPG entirely in the browser using the Canvas API: the WebP is drawn onto a canvas and exported via `canvas.toBlob('image/jpeg', quality)`. No server upload is needed- this is why the tool is listed under Compress & Convert rather than a dedicated server-side converter.",
     formatTable: [
       {
         format: "WebP",
@@ -441,11 +441,11 @@ const CONVERSIONS: Record<string, ConversionData> = {
     faqs: [
       {
         q: "Why does WebP to JPG use the browser canvas instead of a server?",
-        a: "Modern browsers can decode WebP natively. SammaPix uses the browser's built-in image rendering to draw the WebP onto a Canvas element and re-encode it as JPEG. This means your image never leaves your device — maximum privacy.",
+        a: "Modern browsers can decode WebP natively. SammaPix uses the browser's built-in image rendering to draw the WebP onto a Canvas element and re-encode it as JPEG. This means your image never leaves your device- maximum privacy.",
       },
       {
         q: "Does converting WebP to JPG lose quality?",
-        a: "Yes, slightly — both formats are lossy. At quality 85–90 the difference is invisible. If the source WebP was high quality to begin with, the output JPG will look excellent.",
+        a: "Yes, slightly- both formats are lossy. At quality 85–90 the difference is invisible. If the source WebP was high quality to begin with, the output JPG will look excellent.",
       },
       {
         q: "Can I open WebP files in Photoshop?",
@@ -470,9 +470,9 @@ const CONVERSIONS: Record<string, ConversionData> = {
     toLabel: "JPG",
     toolPath: "/tools/compress",
     toolLabel: "Open Compress & Convert Tool",
-    tagline: "Convert PNG to JPG and reduce file size by 60–80 % — free, browser-based, no upload.",
+    tagline: "Convert PNG to JPG and reduce file size by 60–80 %- free, browser-based, no upload.",
     whyCopy:
-      "PNG files are lossless and often 3–5 times larger than the equivalent JPG. For photographs, blog images, and any image without transparency, JPG delivers excellent quality at a fraction of the file size. Converting PNG to JPG is one of the easiest wins for website performance — smaller images mean faster load times and better Google PageSpeed scores.",
+      "PNG files are lossless and often 3–5 times larger than the equivalent JPG. For photographs, blog images, and any image without transparency, JPG delivers excellent quality at a fraction of the file size. Converting PNG to JPG is one of the easiest wins for website performance- smaller images mean faster load times and better Google PageSpeed scores.",
     qualityNote:
       "A typical photo PNG of 4 MB often compresses to a 800 KB – 1 MB JPG at quality 85 with no visible difference. Images with transparency will have their transparent areas filled with white (the JPG format does not support alpha channels).",
     technicalNote:
@@ -510,7 +510,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
     faqs: [
       {
         q: "Does converting PNG to JPG lose quality?",
-        a: "Yes — JPG is a lossy format. At quality 85 the difference is invisible in photographs. However, for images with sharp edges, text, or flat colours (like logos), you may see compression artefacts. In those cases, keep the PNG.",
+        a: "Yes - JPG is a lossy format. At quality 85 the difference is invisible in photographs. However, for images with sharp edges, text, or flat colours (like logos), you may see compression artefacts. In those cases, keep the PNG.",
       },
       {
         q: "What happens to transparent areas when converting PNG to JPG?",
@@ -522,7 +522,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Is it better to convert PNG to JPG or PNG to WebP?",
-        a: "For maximum compatibility (email, older software) choose JPG. For web delivery where you want the smallest possible file size, choose WebP — it will be 25–35 % smaller than the JPG at the same quality.",
+        a: "For maximum compatibility (email, older software) choose JPG. For web delivery where you want the smallest possible file size, choose WebP- it will be 25–35 % smaller than the JPG at the same quality.",
       },
     ],
     related: ["png-to-webp", "jpg-to-webp", "webp-to-jpg"],
@@ -554,7 +554,7 @@ export async function generateMetadata({
   const data = CONVERSIONS[pair];
   if (!data) return {};
 
-  const title = `Convert ${data.fromLabel} to ${data.toLabel} Free Online — No Upload | ${APP_NAME}`;
+  const title = `Convert ${data.fromLabel} to ${data.toLabel} Free Online - No Upload | ${APP_NAME}`;
   const description = `${data.tagline} ${data.whyCopy.slice(0, 120)}...`;
   const keywords = [
     `${data.from.toLowerCase()} to ${data.to.toLowerCase()}`,
@@ -584,7 +584,7 @@ export async function generateMetadata({
           url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: `Convert ${data.fromLabel} to ${data.toLabel} — ${APP_NAME}`,
+          alt: `Convert ${data.fromLabel} to ${data.toLabel}- ${APP_NAME}`,
         },
       ],
     },
@@ -603,7 +603,7 @@ export async function generateMetadata({
 
 function buildJsonLd(pair: string, data: ConversionData) {
   const url = `${APP_URL}/convert/${pair}`;
-  const title = `Convert ${data.fromLabel} to ${data.toLabel} Free Online — No Upload | ${APP_NAME}`;
+  const title = `Convert ${data.fromLabel} to ${data.toLabel} Free Online - No Upload | ${APP_NAME}`;
 
   const softwareApp = {
     "@type": "SoftwareApplication",
@@ -703,7 +703,7 @@ export default async function ConvertPairPage({
 
         {/* H1 */}
         <h1 className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5] mb-3 leading-snug">
-          Convert {data.fromLabel} to {data.toLabel} Free Online — No Upload
+          Convert {data.fromLabel} to {data.toLabel} Free Online - No Upload
         </h1>
         <p className="text-sm text-[#737373] leading-relaxed mb-8">
           {data.tagline}
@@ -777,7 +777,7 @@ export default async function ConvertPairPage({
           </div>
         </section>
 
-        {/* How to convert — 3-step guide */}
+        {/* How to convert- 3-step guide */}
         <section aria-labelledby="howto-heading">
           <h2
             id="howto-heading"
@@ -790,7 +790,7 @@ export default async function ConvertPairPage({
               {
                 step: "1",
                 title: `Open the ${data.fromLabel} to ${data.toLabel} converter`,
-                body: `Click the button above or go directly to ${data.toolPath.replace("/tools/", "/tools/")}. No signup required — the tool is free and works instantly in your browser.`,
+                body: `Click the button above or go directly to ${data.toolPath.replace("/tools/", "/tools/")}. No signup required- the tool is free and works instantly in your browser.`,
               },
               {
                 step: "2",
@@ -800,7 +800,7 @@ export default async function ConvertPairPage({
               {
                 step: "3",
                 title: `Download your ${data.toLabel} files`,
-                body: `Click Download on each file or use Download All as ZIP to save everything at once. All processing happens in your browser — nothing is uploaded to a server.`,
+                body: `Click Download on each file or use Download All as ZIP to save everything at once. All processing happens in your browser- nothing is uploaded to a server.`,
               },
             ].map((item) => (
               <li key={item.step} className="flex gap-4">

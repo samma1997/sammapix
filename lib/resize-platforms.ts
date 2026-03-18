@@ -49,9 +49,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "Instagram",
     titleKeyword: "Instagram",
     metaDescription:
-      "Resize images for Instagram — square post 1080×1080, portrait 1080×1350, landscape 1080×566, Story 1080×1920. Free online, no upload.",
+      "Resize images for Instagram- square post 1080×1080, portrait 1080×1350, landscape 1080×566, Story 1080×1920. Free online, no upload.",
     ogDescription:
-      "Free online tool to resize photos for every Instagram format. Square, portrait, landscape, Story and Reels — exact pixel dimensions in seconds.",
+      "Free online tool to resize photos for every Instagram format. Square, portrait, landscape, Story and Reels- exact pixel dimensions in seconds.",
     keywords: [
       "resize image for instagram",
       "instagram image size",
@@ -70,7 +70,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     ],
     steps: [
       "Open ResizePack, drop your image and select the Instagram preset that matches your post type (Square, Portrait, Landscape or Story).",
-      "Review the preview — use CropRatio to crop to the exact ratio first if your photo has the wrong proportions.",
+      "Review the preview- use CropRatio to crop to the exact ratio first if your photo has the wrong proportions.",
       "Click Resize, then Download. Your image is ready to upload directly to Instagram without any quality loss from re-compression.",
     ],
     faqs: [
@@ -80,7 +80,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       },
       {
         q: "Will Instagram compress my photo if I resize it first?",
-        a: "Instagram always re-encodes uploads, but providing an image at exactly the right dimensions (1080 px wide) prevents Instagram from upscaling or downscaling before its own compression — resulting in the sharpest possible output.",
+        a: "Instagram always re-encodes uploads, but providing an image at exactly the right dimensions (1080 px wide) prevents Instagram from upscaling or downscaling before its own compression- resulting in the sharpest possible output.",
       },
       {
         q: "What file format should I use for Instagram?",
@@ -101,9 +101,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "Facebook",
     titleKeyword: "Facebook",
     metaDescription:
-      "Resize images for Facebook — post 1200×630, cover 820×312, profile 170×170, Story 1080×1920. Free online, no upload.",
+      "Resize images for Facebook- post 1200×630, cover 820×312, profile 170×170, Story 1080×1920. Free online, no upload.",
     ogDescription:
-      "Resize photos for every Facebook format instantly. Post, cover photo, profile picture, Story — exact pixel dimensions, free and private.",
+      "Resize photos for every Facebook format instantly. Post, cover photo, profile picture, Story- exact pixel dimensions, free and private.",
     keywords: [
       "resize image for facebook",
       "facebook image size",
@@ -121,9 +121,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       { type: "Story", width: 1080, height: 1920, note: "Full-screen vertical" },
     ],
     steps: [
-      "Drop your image into ResizePack and choose the Facebook preset — Post, Cover, Profile or Story.",
+      "Drop your image into ResizePack and choose the Facebook preset - Post, Cover, Profile or Story.",
       "If your cover or post image has important content near the edges, use CropRatio first to control exactly what gets included at 820×312 or 1200×630.",
-      "Download the resized file and upload directly to Facebook. No extra steps needed — the image will display at full sharpness on both desktop and mobile.",
+      "Download the resized file and upload directly to Facebook. No extra steps needed- the image will display at full sharpness on both desktop and mobile.",
     ],
     faqs: [
       {
@@ -136,7 +136,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       },
       {
         q: "What resolution should a Facebook profile picture be?",
-        a: "Upload at least 170×170 px. Facebook scales it down for display, but a higher-resolution source means sharper output when displayed at larger sizes — for example, when someone clicks your profile.",
+        a: "Upload at least 170×170 px. Facebook scales it down for display, but a higher-resolution source means sharper output when displayed at larger sizes- for example, when someone clicks your profile.",
       },
       {
         q: "Does Facebook compress uploaded images?",
@@ -153,9 +153,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "Twitter / X",
     titleKeyword: "Twitter and X",
     metaDescription:
-      "Resize images for Twitter / X — post 1600×900, header 1500×500, profile 400×400. Free online, no upload required.",
+      "Resize images for Twitter / X- post 1600×900, header 1500×500, profile 400×400. Free online, no upload required.",
     ogDescription:
-      "Resize photos for Twitter and X in seconds. Post image, header banner, profile picture — all correct dimensions, processed locally in your browser.",
+      "Resize photos for Twitter and X in seconds. Post image, header banner, profile picture- all correct dimensions, processed locally in your browser.",
     keywords: [
       "resize image for twitter",
       "twitter image size 2026",
@@ -172,7 +172,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       { type: "Profile Picture", width: 400, height: 400, note: "Displayed as circle" },
     ],
     steps: [
-      "Drop your image into ResizePack and select the Twitter / X preset — Post, Header or Profile.",
+      "Drop your image into ResizePack and select the Twitter / X preset - Post, Header or Profile.",
       "For the header banner, use CropRatio at 3:1 first to frame the composition, then resize to 1500×500 for a pixel-perfect result.",
       "Download and upload to X. Your image will appear sharp on both desktop and mobile without any black bars or unwanted cropping.",
     ],
@@ -204,7 +204,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "LinkedIn",
     titleKeyword: "LinkedIn",
     metaDescription:
-      "Resize images for LinkedIn — post 1200×627, cover 1584×396, profile 400×400. Free online, no upload required.",
+      "Resize images for LinkedIn- post 1200×627, cover 1584×396, profile 400×400. Free online, no upload required.",
     ogDescription:
       "Resize photos for LinkedIn posts, cover banners, and profile pictures. Correct dimensions for a professional appearance, processed locally in your browser.",
     keywords: [
@@ -223,9 +223,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       { type: "Profile Picture", width: 400, height: 400, note: "Recommended minimum" },
     ],
     steps: [
-      "Open ResizePack, drop your image and choose the LinkedIn preset — Post, Cover or Profile.",
+      "Open ResizePack, drop your image and choose the LinkedIn preset - Post, Cover or Profile.",
       "For the cover banner (1584×396, a 4:1 ratio), crop horizontally with CropRatio first so your subject is well-framed in the wide banner area.",
-      "Download the resized image and upload to LinkedIn. Professional appearances matter on this network — exact dimensions prevent any blurriness from LinkedIn's scaling.",
+      "Download the resized image and upload to LinkedIn. Professional appearances matter on this network- exact dimensions prevent any blurriness from LinkedIn's scaling.",
     ],
     faqs: [
       {
@@ -238,7 +238,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       },
       {
         q: "Does image quality matter on LinkedIn?",
-        a: "Yes — LinkedIn is a professional network where first impressions count. Blurry or oddly-cropped images signal a lack of attention to detail. Resizing to exact dimensions prevents LinkedIn from applying its own stretching or letterboxing.",
+        a: "Yes - LinkedIn is a professional network where first impressions count. Blurry or oddly-cropped images signal a lack of attention to detail. Resizing to exact dimensions prevents LinkedIn from applying its own stretching or letterboxing.",
       },
       {
         q: "What format should I use for LinkedIn images?",
@@ -255,7 +255,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "YouTube",
     titleKeyword: "YouTube Thumbnail",
     metaDescription:
-      "Resize images for YouTube — thumbnail 1280×720, channel banner 2560×1440, profile 800×800. Free online, no upload required.",
+      "Resize images for YouTube- thumbnail 1280×720, channel banner 2560×1440, profile 800×800. Free online, no upload required.",
     ogDescription:
       "Resize YouTube thumbnails, channel banners, and profile pictures to the exact dimensions YouTube requires. Free, fast, and processed locally in your browser.",
     keywords: [
@@ -269,19 +269,19 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       "youtube thumbnail template",
     ],
     sizes: [
-      { type: "Video Thumbnail", width: 1280, height: 720, note: "16:9 — max 2 MB" },
+      { type: "Video Thumbnail", width: 1280, height: 720, note: "16:9- max 2 MB" },
       { type: "Channel Banner", width: 2560, height: 1440, note: "Safe area: 1546×423 px" },
       { type: "Profile Picture", width: 800, height: 800, note: "Minimum 98×98 px" },
     ],
     steps: [
       "Drop your thumbnail into ResizePack and choose the YouTube Thumbnail preset (1280×720 px, 16:9).",
-      "Thumbnails need strong contrast and readable text at small sizes — crop tightly around the subject using CropRatio at 16:9, then resize.",
+      "Thumbnails need strong contrast and readable text at small sizes- crop tightly around the subject using CropRatio at 16:9, then resize.",
       "Keep the exported JPEG under 2 MB (YouTube's limit). Use the Compress tool to reduce file size if needed, then upload directly in YouTube Studio.",
     ],
     faqs: [
       {
         q: "What is the ideal YouTube thumbnail size?",
-        a: "1280×720 px in 16:9 ratio is the ideal YouTube thumbnail size. It is displayed at multiple sizes — from tiny grid previews to full-width suggestions. Maximum file size is 2 MB. YouTube accepts JPG, PNG, GIF, and WebP.",
+        a: "1280×720 px in 16:9 ratio is the ideal YouTube thumbnail size. It is displayed at multiple sizes- from tiny grid previews to full-width suggestions. Maximum file size is 2 MB. YouTube accepts JPG, PNG, GIF, and WebP.",
       },
       {
         q: "What size is the YouTube channel banner?",
@@ -293,7 +293,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       },
       {
         q: "How do I make a YouTube thumbnail stand out?",
-        a: "Use high contrast between the subject and background, a bold font for text overlays, and keep the most important element in the center-left third — that's where the eye naturally goes in thumbnail grids.",
+        a: "Use high contrast between the subject and background, a bold font for text overlays, and keep the most important element in the center-left third- that's where the eye naturally goes in thumbnail grids.",
       },
     ],
     related: ["instagram", "twitter", "linkedin"],
@@ -306,9 +306,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "Pinterest",
     titleKeyword: "Pinterest",
     metaDescription:
-      "Resize images for Pinterest — standard pin 1000×1500, square pin 1000×1000, long pin 1000×2100. Free online, no upload required.",
+      "Resize images for Pinterest- standard pin 1000×1500, square pin 1000×1000, long pin 1000×2100. Free online, no upload required.",
     ogDescription:
-      "Resize photos for Pinterest pins in the right vertical dimensions. Standard, square, and long pin formats — free and processed locally in your browser.",
+      "Resize photos for Pinterest pins in the right vertical dimensions. Standard, square, and long pin formats- free and processed locally in your browser.",
     keywords: [
       "resize image for pinterest",
       "pinterest pin size 2026",
@@ -320,19 +320,19 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       "pinterest long pin dimensions",
     ],
     sizes: [
-      { type: "Standard Pin", width: 1000, height: 1500, note: "2:3 ratio — most common" },
+      { type: "Standard Pin", width: 1000, height: 1500, note: "2:3 ratio- most common" },
       { type: "Square Pin", width: 1000, height: 1000, note: "1:1 ratio" },
       { type: "Long Pin", width: 1000, height: 2100, note: "Infographic / step-by-step" },
     ],
     steps: [
-      "Open ResizePack, drop your image and select the Pinterest preset — Standard Pin (2:3), Square Pin (1:1) or Long Pin.",
-      "Pinterest is a visual discovery platform — taller images take up more feed space. For Standard Pins, crop to 2:3 first with CropRatio to frame your subject perfectly.",
+      "Open ResizePack, drop your image and select the Pinterest preset - Standard Pin (2:3), Square Pin (1:1) or Long Pin.",
+      "Pinterest is a visual discovery platform- taller images take up more feed space. For Standard Pins, crop to 2:3 first with CropRatio to frame your subject perfectly.",
       "Download and upload directly to Pinterest. Include keyword-rich alt text and a description when pinning for maximum SEO visibility on the platform.",
     ],
     faqs: [
       {
         q: "What is the best Pinterest pin size in 2026?",
-        a: "The recommended Pinterest pin size is 1000×1500 px (2:3 ratio). Pinterest supports aspect ratios from 1:1 to 2:3 — taller images perform better because they take up more vertical space in users' feeds.",
+        a: "The recommended Pinterest pin size is 1000×1500 px (2:3 ratio). Pinterest supports aspect ratios from 1:1 to 2:3- taller images perform better because they take up more vertical space in users' feeds.",
       },
       {
         q: "Are long pins (1000×2100) still effective on Pinterest?",
@@ -357,9 +357,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     displayName: "TikTok",
     titleKeyword: "TikTok",
     metaDescription:
-      "Resize images for TikTok — video frame 1080×1920, square 1080×1080, profile 200×200. Free online, no upload required.",
+      "Resize images for TikTok- video frame 1080×1920, square 1080×1080, profile 200×200. Free online, no upload required.",
     ogDescription:
-      "Resize photos for TikTok to the correct vertical and square dimensions. Video cover, photo mode, profile picture — free and processed locally in your browser.",
+      "Resize photos for TikTok to the correct vertical and square dimensions. Video cover, photo mode, profile picture- free and processed locally in your browser.",
     keywords: [
       "resize image for tiktok",
       "tiktok image size 2026",
@@ -376,8 +376,8 @@ const ALL_PLATFORMS: ResizePlatform[] = [
       { type: "Profile Picture", width: 200, height: 200, note: "Minimum recommended" },
     ],
     steps: [
-      "Drop your image into ResizePack and select the TikTok preset — Video (9:16 vertical) or Square (1:1 photo mode).",
-      "TikTok crops the top and bottom of vertical videos slightly on some devices — keep faces and key text within the central 1080×1500 px safe area. Use CropRatio first to adjust framing.",
+      "Drop your image into ResizePack and select the TikTok preset - Video (9:16 vertical) or Square (1:1 photo mode).",
+      "TikTok crops the top and bottom of vertical videos slightly on some devices- keep faces and key text within the central 1080×1500 px safe area. Use CropRatio first to adjust framing.",
       "Download and use as a video cover image or in TikTok's photo slideshow mode. For video uploads the cover image must match the video resolution.",
     ],
     faqs: [

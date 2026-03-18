@@ -34,7 +34,7 @@ function isDismissed(): boolean {
   }
 }
 
-// ── Public API — call this wherever a limit is hit ────────────────────────────
+// ── Public API- call this wherever a limit is hit ────────────────────────────
 
 export function recordLimitHit(): void {
   try {

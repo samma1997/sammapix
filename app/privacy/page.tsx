@@ -3,14 +3,14 @@ import Link from "next/link";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — SammaPix",
+  title: "Privacy Policy - SammaPix",
   description:
     "SammaPix privacy policy. Image compression happens in your browser only. Files never leave your device unless you use AI Rename.",
   alternates: {
     canonical: `${APP_URL}/privacy`,
   },
   openGraph: {
-    title: "Privacy Policy — SammaPix",
+    title: "Privacy Policy - SammaPix",
     description:
       "Learn how SammaPix protects your privacy. All processing happens in your browser. No server uploads for compression.",
     type: "website",
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
           <p className="mt-3">
             <strong>AI Rename</strong> is the only exception. When you use AI Rename, a small compressed
             thumbnail (max 1024px) of your image is sent to Google&apos;s Gemini API for visual analysis.
-            This thumbnail is used solely to generate a descriptive filename and alt text — it is not
+            This thumbnail is used solely to generate a descriptive filename and alt text- it is not
             stored by SammaPix and is processed according to{" "}
             <a
               href="https://policies.google.com/privacy"
@@ -94,9 +94,9 @@ export default function PrivacyPage() {
             We use the following cookies:
           </p>
           <ul className="list-disc pl-5 mt-2 space-y-1">
-            <li><strong>Session cookie</strong> (next-auth.session-token) — required for login. Expires when you close your browser or after 30 days.</li>
-            <li><strong>Language preference</strong> (NEXT_LOCALE) — stores your detected language preference. No personal data.</li>
-            <li><strong>Analytics</strong> — we use Cloudflare Web Analytics, which is privacy-first and does not use cookies or fingerprinting.</li>
+            <li><strong>Session cookie</strong> (next-auth.session-token)- required for login. Expires when you close your browser or after 30 days.</li>
+            <li><strong>Language preference</strong> (NEXT_LOCALE)- stores your detected language preference. No personal data.</li>
+            <li><strong>Analytics</strong>- we use Cloudflare Web Analytics, which is privacy-first and does not use cookies or fingerprinting.</li>
           </ul>
           <p className="mt-3">
             If you use AdSense-served ads, Google may set cookies for ad personalization. You can
@@ -127,11 +127,11 @@ export default function PrivacyPage() {
             If you are located in the European Economic Area, you have the following rights:
           </p>
           <ul className="list-disc pl-5 mt-2 space-y-1">
-            <li><strong>Access</strong> — request a copy of the data we hold about you</li>
-            <li><strong>Rectification</strong> — request correction of inaccurate data</li>
-            <li><strong>Erasure</strong> — request deletion of your account and associated data</li>
-            <li><strong>Portability</strong> — receive your data in a machine-readable format</li>
-            <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
+            <li><strong>Access</strong>- request a copy of the data we hold about you</li>
+            <li><strong>Rectification</strong>- request correction of inaccurate data</li>
+            <li><strong>Erasure</strong>- request deletion of your account and associated data</li>
+            <li><strong>Portability</strong>- receive your data in a machine-readable format</li>
+            <li><strong>Objection</strong>- object to processing based on legitimate interests</li>
           </ul>
           <p className="mt-3">
             To exercise any of these rights, contact us at the email below.
@@ -141,11 +141,11 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Third-Party Services</h2>
           <ul className="list-disc pl-5 mt-2 space-y-1">
-            <li><strong>Google Gemini API</strong> — processes AI Rename thumbnails</li>
-            <li><strong>Google OAuth</strong> — optional sign-in provider</li>
-            <li><strong>GitHub OAuth</strong> — optional sign-in provider</li>
-            <li><strong>Stripe</strong> — payment processing for Pro subscriptions</li>
-            <li><strong>Vercel</strong> — hosting and edge infrastructure</li>
+            <li><strong>Google Gemini API</strong>- processes AI Rename thumbnails</li>
+            <li><strong>Google OAuth</strong>- optional sign-in provider</li>
+            <li><strong>GitHub OAuth</strong>- optional sign-in provider</li>
+            <li><strong>Stripe</strong>- payment processing for Pro subscriptions</li>
+            <li><strong>Vercel</strong>- hosting and edge infrastructure</li>
           </ul>
         </section>
 

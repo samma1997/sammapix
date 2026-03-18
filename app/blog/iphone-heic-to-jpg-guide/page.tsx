@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How to Convert iPhone HEIC Photos to JPG Free (No Software)",
     description:
-      "HEIC files not opening on your PC or Windows app? This guide shows every method to convert HEIC to JPG free — from iPhone settings to a browser tool that needs zero installs.",
+      "HEIC files not opening on your PC or Windows app? This guide shows every method to convert HEIC to JPG free- from iPhone settings to a browser tool that needs zero installs.",
     url: `${APP_URL}/blog/iphone-heic-to-jpg-guide`,
     type: "article",
     publishedTime: "2026-02-12",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Convert iPhone HEIC Photos to JPG Free (No Software)",
     description:
-      "HEIC files not opening? Learn the fastest way to convert iPhone HEIC photos to JPG — free, no software, works entirely in your browser.",
+      "HEIC files not opening? Learn the fastest way to convert iPhone HEIC photos to JPG- free, no software, works entirely in your browser.",
     creator: "@lucasammarco",
   },
 };
@@ -110,7 +110,7 @@ const faqSchema = {
       name: "Why can't I open HEIC files on my PC?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Windows does not natively support HEIC without an optional codec installed from the Microsoft Store. Most non-Apple software — including older versions of Photoshop, web browsers, and most social platforms — requires JPG. Converting HEIC to JPG solves the compatibility issue immediately.",
+        text: "Windows does not natively support HEIC without an optional codec installed from the Microsoft Store. Most non-Apple software- including older versions of Photoshop, web browsers, and most social platforms- requires JPG. Converting HEIC to JPG solves the compatibility issue immediately.",
       },
     },
     {
@@ -134,7 +134,7 @@ const faqSchema = {
       name: "Is there a free way to convert HEIC to JPG without software?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. SammaPix HEIC Converter runs entirely in your browser — no downloads, no account, no upload to any server. Drop your HEIC files and download JPGs instantly. It supports batch conversion and processes files locally on your device.",
+        text: "Yes. SammaPix HEIC Converter runs entirely in your browser- no downloads, no account, no upload to any server. Drop your HEIC files and download JPGs instantly. It supports batch conversion and processes files locally on your device.",
       },
     },
   ],
@@ -177,7 +177,7 @@ export default function IphoneHeicToJpgGuidePage() {
 
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
               You just transferred photos from your iPhone and now nothing will open them.
-              The .heic extension is Apple&apos;s default since iOS 11 — and while it saves
+              The .heic extension is Apple&apos;s default since iOS 11- and while it saves
               storage on your phone, it breaks compatibility with nearly everything else.
               This guide covers every method to convert HEIC to JPG free, including a
               browser-based option that requires zero software and zero uploads.
@@ -228,7 +228,7 @@ export default function IphoneHeicToJpgGuidePage() {
               >
                 HEVC (H.265) compression
               </a>
-              {" "}— the same video codec used for 4K video — to compress still images. The
+              {" "} - the same video codec used for 4K video- to compress still images. The
               result is a file that is typically 40–50% smaller than an equivalent JPEG while
               maintaining the same perceptual quality. A 3 MB JPEG photo taken on an iPhone
               might be stored as a 1.5 MB HEIC file with no visible difference.
@@ -368,7 +368,7 @@ export default function IphoneHeicToJpgGuidePage() {
               Method 2: Convert using Mac Preview (no extra software)
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              If you are on a Mac, Preview — the built-in image viewer — can convert HEIC to JPG
+              If you are on a Mac, Preview- the built-in image viewer- can convert HEIC to JPG
               directly. macOS has supported HEIC natively since macOS High Sierra (10.13).
             </p>
 
@@ -411,7 +411,7 @@ export default function IphoneHeicToJpgGuidePage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Preview batch conversion works well for occasional use, but it has limitations:
               you need to have the HEIC files on your Mac first, it does not give you a progress
-              indicator for large batches, and there is no ZIP download — you get individual
+              indicator for large batches, and there is no ZIP download- you get individual
               JPG files in the folder you specified.
             </p>
 
@@ -445,12 +445,12 @@ export default function IphoneHeicToJpgGuidePage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               For Windows users, non-Mac users, or anyone who wants to convert HEIC to JPG
               free without installing anything, a browser-based converter is the most practical
-              option. The key word is <em>browser-based</em> — not every online tool is equal.
+              option. The key word is <em>browser-based</em>- not every online tool is equal.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Most online HEIC converters upload your files to a remote server for processing.
-              That means your photos — which may contain personal content, location data, and
-              identifiable information — leave your device and are stored on a third-party server,
+              That means your photos- which may contain personal content, location data, and
+              identifiable information- leave your device and are stored on a third-party server,
               even if temporarily. For a family album or travel photos, this is a privacy concern
               worth taking seriously.
             </p>
@@ -467,7 +467,7 @@ export default function IphoneHeicToJpgGuidePage() {
               {" "}documentation and modern browser capabilities, client-side image processing
               is now fully practical in the browser without any server involvement. File decoding,
               pixel transformation, and re-encoding to JPEG can all happen locally using
-              JavaScript APIs — your files never leave your device.
+              JavaScript APIs- your files never leave your device.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               This is exactly how{" "}
@@ -496,12 +496,12 @@ export default function IphoneHeicToJpgGuidePage() {
                 {
                   step: "1",
                   title: "Open the HEIC Converter",
-                  body: "Go to sammapix.com/tools/heic in any modern browser (Chrome, Firefox, Safari, Edge). The converter loads instantly — there is no installation or plugin required.",
+                  body: "Go to sammapix.com/tools/heic in any modern browser (Chrome, Firefox, Safari, Edge). The converter loads instantly- there is no installation or plugin required.",
                 },
                 {
                   step: "2",
                   title: "Add your HEIC files",
-                  body: "Drag and drop your .heic files onto the drop zone, or click to browse and select files from your device. You can add a single file or an entire batch at once — there is no per-session file limit.",
+                  body: "Drag and drop your .heic files onto the drop zone, or click to browse and select files from your device. You can add a single file or an entire batch at once- there is no per-session file limit.",
                 },
                 {
                   step: "3",
@@ -516,7 +516,7 @@ export default function IphoneHeicToJpgGuidePage() {
                 {
                   step: "5",
                   title: "Download your JPG files",
-                  body: "Download converted files individually, or use the Download All as ZIP button to get everything in one archive. Files are named identically to your originals — just with the .jpg extension.",
+                  body: "Download converted files individually, or use the Download All as ZIP button to get everything in one archive. Files are named identically to your originals- just with the .jpg extension.",
                 },
               ].map(({ step, title, body }) => (
                 <div key={step} className="flex gap-4">
@@ -538,10 +538,10 @@ export default function IphoneHeicToJpgGuidePage() {
             >
               <div>
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
-                  Free — no upload, no account
+                  Free- no upload, no account
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Convert HEIC to JPG now — SammaPix HEIC Converter
+                  Convert HEIC to JPG now - SammaPix HEIC Converter
                 </p>
               </div>
               <ArrowRight
@@ -562,7 +562,7 @@ export default function IphoneHeicToJpgGuidePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 mt-4">
               {[
                 {
-                  title: "No upload — total privacy",
+                  title: "No upload- total privacy",
                   detail: "Your files never leave your device. Conversion happens locally in your browser tab using JavaScript APIs. SammaPix cannot see, store, or access your photos.",
                 },
                 {
@@ -579,7 +579,7 @@ export default function IphoneHeicToJpgGuidePage() {
                 },
                 {
                   title: "Quality control",
-                  detail: "Adjust output quality per batch. Get the exact balance of file size and visual quality you need — whether that is a compact 70 for social media or a crisp 90 for printing.",
+                  detail: "Adjust output quality per batch. Get the exact balance of file size and visual quality you need- whether that is a compact 70 for social media or a crisp 90 for printing.",
                 },
                 {
                   title: "Works everywhere",
@@ -610,7 +610,7 @@ export default function IphoneHeicToJpgGuidePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               A direct HEIC-to-JPG conversion preserves full resolution. A photo from an
-              iPhone 15 Pro is 48 megapixels — the JPG output will be several megabytes even
+              iPhone 15 Pro is 48 megapixels- the JPG output will be several megabytes even
               at quality 85. Before uploading to a blog, e-commerce site, or portfolio, run
               the files through{" "}
               <Link
@@ -628,7 +628,7 @@ export default function IphoneHeicToJpgGuidePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               If you are publishing photos to a website, consider converting from JPG to WebP
-              instead of — or after — HEIC conversion. WebP delivers 25–35% smaller files than
+              instead of- or after - HEIC conversion. WebP delivers 25–35% smaller files than
               JPEG at equivalent quality, and browser support is now above 97% globally. You can
               use{" "}
               <Link
@@ -653,8 +653,8 @@ export default function IphoneHeicToJpgGuidePage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               iPhone photos embed GPS coordinates, device model, and capture timestamp in their
               EXIF metadata. When you convert HEIC to JPG, this metadata typically transfers to
-              the output file. Before sharing photos publicly — on a website, social media, or
-              with people you do not know — consider stripping the EXIF data. This is a
+              the output file. Before sharing photos publicly- on a website, social media, or
+              with people you do not know- consider stripping the EXIF data. This is a
               meaningful privacy step that prevents recipients from knowing exactly where a
               photo was taken.
             </p>
@@ -672,7 +672,7 @@ export default function IphoneHeicToJpgGuidePage() {
                   },
                   {
                     q: "Why can't I open HEIC files on my PC?",
-                    a: "Windows does not natively support HEIC without an optional codec installed from the Microsoft Store. Most non-Apple software — including older versions of Photoshop, web browsers, and most social platforms — requires JPG. Converting HEIC to JPG solves the compatibility issue immediately without changing how photos look.",
+                    a: "Windows does not natively support HEIC without an optional codec installed from the Microsoft Store. Most non-Apple software- including older versions of Photoshop, web browsers, and most social platforms- requires JPG. Converting HEIC to JPG solves the compatibility issue immediately without changing how photos look.",
                   },
                   {
                     q: "Does converting HEIC to JPG reduce quality?",
@@ -684,7 +684,7 @@ export default function IphoneHeicToJpgGuidePage() {
                   },
                   {
                     q: "Is there a free way to convert HEIC to JPG without software?",
-                    a: "Yes. SammaPix HEIC Converter runs entirely in your browser — no downloads, no account, no upload to any server. Drop your HEIC files and download JPGs instantly. It supports batch conversion and processes files locally on your device.",
+                    a: "Yes. SammaPix HEIC Converter runs entirely in your browser- no downloads, no account, no upload to any server. Drop your HEIC files and download JPGs instantly. It supports batch conversion and processes files locally on your device.",
                   },
                   {
                     q: "Can I convert HEIC to JPG on Windows without downloading anything?",
@@ -736,7 +736,7 @@ export default function IphoneHeicToJpgGuidePage() {
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Convert HEIC to JPG free — right now
+                Convert HEIC to JPG free- right now
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your iPhone HEIC photos into SammaPix and get JPGs instantly.

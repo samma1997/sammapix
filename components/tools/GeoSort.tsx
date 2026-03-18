@@ -42,7 +42,7 @@ function delay(ms: number): Promise<void> {
 }
 
 async function reverseGeocode(lat: number, lon: number): Promise<string> {
-  // Proxy through Next.js API route — browser cannot set User-Agent header
+  // Proxy through Next.js API route- browser cannot set User-Agent header
   const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`);
   if (!res.ok) throw new Error(`Geocode error: ${res.status}`);
   const data = (await res.json()) as {
@@ -171,7 +171,7 @@ export default function GeoSortClient() {
     for (let i = 0; i < accepted.length; i++) {
       const file = accepted[i];
       setProgressMessage(
-        `Reading GPS from photo ${i + 1} of ${accepted.length} — ${file.name}`
+        `Reading GPS from photo ${i + 1} of ${accepted.length}- ${file.name}`
       );
       setProgressPercent(Math.round(((i + 1) / accepted.length) * 40));
 
@@ -179,7 +179,7 @@ export default function GeoSortClient() {
         const gps = await exifr.gps(file);
         gpsData.push(gps ? { lat: gps.latitude, lon: gps.longitude } : null);
       } catch {
-        errorMessages.push(`Could not read ${file.name} — skipped.`);
+        errorMessages.push(`Could not read ${file.name}- skipped.`);
         gpsData.push(null);
       }
     }
@@ -218,10 +218,10 @@ export default function GeoSortClient() {
         const country = await reverseGeocode(lat, lon);
         gridToCountry.set(key, country);
       } catch {
-        // Mark as failed — photos will go to _unsorted
+        // Mark as failed- photos will go to _unsorted
         gridToCountry.set(key, "");
         errorMessages.push(
-          `Could not fetch location for grid area ${key} — affected photos placed in _unsorted.`
+          `Could not fetch location for grid area ${key}- affected photos placed in _unsorted.`
         );
       }
 
@@ -362,7 +362,7 @@ export default function GeoSortClient() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag photos to upload"
+          aria-label="Drop zone- click or drag photos to upload"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
@@ -407,7 +407,7 @@ export default function GeoSortClient() {
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              GPS metadata is read locally — photos never leave your device
+              GPS metadata is read locally- photos never leave your device
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
@@ -445,7 +445,7 @@ export default function GeoSortClient() {
           </div>
           <p className="text-xs text-[#737373] truncate">{progressMessage}</p>
           <p className="text-xs text-[#A3A3A3] mt-2">
-            Nominatim requires 1 request/sec — please wait
+            Nominatim requires 1 request/sec- please wait
           </p>
         </div>
       )}
@@ -537,7 +537,7 @@ export default function GeoSortClient() {
                 </button>
 
                 <p className="text-center text-xs text-[#A3A3A3]">
-                  The CSV lists each filename and its destination folder — sort files manually without re-downloading.
+                  The CSV lists each filename and its destination folder- sort files manually without re-downloading.
                 </p>
               </>
             ) : (

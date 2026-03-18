@@ -31,7 +31,7 @@ export default function SignupPrompt() {
         }
       }
     } catch {
-      // localStorage not available — just show
+      // localStorage not available- just show
     }
 
     const timer = setTimeout(() => setVisible(true), SHOW_DELAY_MS);
@@ -59,7 +59,7 @@ export default function SignupPrompt() {
         {/* Message */}
         <p className="text-sm text-[#D4D4D4] leading-snug">
           <span className="font-semibold text-white">Sign up free</span>
-          {" "}— get your personal dashboard + AI tools (5 renames/day)
+          {" "} - get your personal dashboard + AI tools (5 renames/day)
         </p>
 
         {/* Actions */}

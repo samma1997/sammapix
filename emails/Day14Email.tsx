@@ -105,14 +105,14 @@ export function Day14Email({ name }: Day14EmailProps) {
   return (
     <Html lang="en">
       <Head />
-      <Preview>Quick question — what are you using SammaPix for?</Preview>
+      <Preview>Quick question- what are you using SammaPix for?</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={logo}>
             Samma<span style={logoAccent}>Pix</span>
           </Text>
 
-          <Heading style={heading}>Two weeks in — quick question</Heading>
+          <Heading style={heading}>Two weeks in- quick question</Heading>
 
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
@@ -134,7 +134,7 @@ export function Day14Email({ name }: Day14EmailProps) {
           </Section>
 
           <Text style={body}>
-            No wrong answer — I ask because I want to make sure I&apos;m
+            No wrong answer - I ask because I want to make sure I&apos;m
             building the right features for you.
           </Text>
 
@@ -143,12 +143,12 @@ export function Day14Email({ name }: Day14EmailProps) {
           <Section style={statsBox}>
             <Text style={statNumber}>12,000+</Text>
             <Text style={statLabel}>
-              images optimized by SammaPix users this week — processed
+              images optimized by SammaPix users this week- processed
               in-browser, files never uploaded.
             </Text>
           </Section>
 
-          <Text style={signature}>— Luca, founder of SammaPix</Text>
+          <Text style={signature}> - Luca, founder of SammaPix</Text>
 
           <Text style={ps}>
             P.S. If you&apos;ve hit the 5 AI renames/day limit, Pro is $7/month.{" "}

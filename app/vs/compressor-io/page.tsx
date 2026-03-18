@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Compressor.io — Free Image Compressor Comparison 2026",
+  title: "SammaPix vs Compressor.io - Free Image Compressor Comparison 2026",
   description:
     "SammaPix vs Compressor.io: compare batch processing, AI features, file limits, and privacy. Find out which free image compressor fits your workflow.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/compressor-io`,
   },
   openGraph: {
-    title: "SammaPix vs Compressor.io — Honest Comparison 2026",
+    title: "SammaPix vs Compressor.io - Honest Comparison 2026",
     description:
       "Compressor.io is limited to one file at a time and uploads to their servers. SammaPix does batch, stays private. See the full comparison.",
     type: "website",
@@ -60,7 +60,7 @@ export default function VsCompressorIoPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs Compressor.io
@@ -84,7 +84,7 @@ export default function VsCompressorIoPage() {
           <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">Choose SammaPix if you…</p>
           <ul className="space-y-1.5 text-sm text-gray-700">
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need to compress more than one file at a time</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Privacy matters — files never leave your browser</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Privacy matters- files never leave your browser</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need files larger than 10 MB</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want AI-generated SEO filenames</li>
           </ul>
@@ -131,16 +131,16 @@ export default function VsCompressorIoPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Files never leave your browser — Compressor.io uploads to their server
+              Files never leave your browser - Compressor.io uploads to their server
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Every image you compress with Compressor.io is uploaded to their servers for processing. SammaPix runs entirely client-side using WebAssembly and the Canvas API — your files are processed locally and never transmitted anywhere. This matters for client photos, confidential screenshots, or any image containing sensitive information.
+              Every image you compress with Compressor.io is uploaded to their servers for processing. SammaPix runs entirely client-side using WebAssembly and the Canvas API- your files are processed locally and never transmitted anywhere. This matters for client photos, confidential screenshots, or any image containing sensitive information.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Batch processing — Compressor.io only does one file
+              Batch processing - Compressor.io only does one file
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               Compressor.io processes a single image per session. If you have 15 product photos to optimize, you repeat the process 15 times. SammaPix processes up to 20 files at once on the free plan, with a single ZIP download at the end. This alone saves significant time for any real-world workflow.
@@ -149,19 +149,19 @@ export default function VsCompressorIoPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — Compressor.io has none
+              AI rename - Compressor.io has none
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">photo_2024.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">blue-denim-jacket-product-photo.webp</code> — automatically. Compressor.io has no AI features whatsoever; it only compresses.
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">photo_2024.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">blue-denim-jacket-product-photo.webp</code>- automatically. Compressor.io has no AI features whatsoever; it only compresses.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where Compressor.io wins — pure simplicity
+              Where Compressor.io wins- pure simplicity
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Compressor.io has an extremely minimal interface — drag one file, see the result. If you just need to quickly compress a single image and don&apos;t need batch, privacy, or AI features, its simplicity is a genuine advantage. It also offers lossy and lossless modes side by side for easy comparison.
+              Compressor.io has an extremely minimal interface- drag one file, see the result. If you just need to quickly compress a single image and don&apos;t need batch, privacy, or AI features, its simplicity is a genuine advantage. It also offers lossy and lossless modes side by side for easy comparison.
             </p>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function VsCompressorIoPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Need batch compression with full privacy?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          SammaPix processes up to 20 files at once — entirely in your browser. Zero uploads.
+          SammaPix processes up to 20 files at once- entirely in your browser. Zero uploads.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -186,14 +186,14 @@ export default function VsCompressorIoPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs Compressor.io — Free Image Compressor Comparison 2026",
+            headline: "SammaPix vs Compressor.io - Free Image Compressor Comparison 2026",
             description:
               "SammaPix vs Compressor.io: compare batch processing, AI features, file limits, and privacy.",
             author: { "@type": "Person", name: "Luca Sammarco" },
@@ -204,7 +204,7 @@ export default function VsCompressorIoPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -219,8 +219,8 @@ export default function VsCompressorIoPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Compressor.io: Free (Pro available)" },
-                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Compressor.io: No — one file at a time" },
-                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | Compressor.io: No — uploads to server" },
+                { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Compressor.io: No- one file at a time" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Compressor.io: No- uploads to server" },
                 { "@type": "ListItem", "position": 4, name: "Max file size", description: "SammaPix: 20 MB free, 50 MB Pro | Compressor.io: 10 MB" },
                 { "@type": "ListItem", "position": 5, name: "WebP conversion", description: "SammaPix: Yes | Compressor.io: Limited" },
                 { "@type": "ListItem", "position": 6, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Compressor.io: No" },
@@ -231,7 +231,7 @@ export default function VsCompressorIoPage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -247,7 +247,7 @@ export default function VsCompressorIoPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

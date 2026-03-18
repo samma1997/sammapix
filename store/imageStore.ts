@@ -250,7 +250,7 @@ export const useImageStore = create<ImageStoreState>()(
           const reader = new FileReader();
           reader.onloadend = () => {
             const result = reader.result as string;
-            // result = "data:image/webp;base64,XXXX..." — strip prefix
+            // result = "data:image/webp;base64,XXXX..."- strip prefix
             const b64 = result.split(",")[1];
             if (b64) resolve(b64);
             else reject(new Error("FileReader returned empty result"));
@@ -295,14 +295,14 @@ export const useImageStore = create<ImageStoreState>()(
         const remaining = json.remaining as number | undefined;
         const limit = (json as { limit?: number }).limit;
         if (remaining !== undefined && limit !== undefined) {
-          // Server returned authoritative values — use them directly
+          // Server returned authoritative values- use them directly
           get().setAiRenameUsedToday(limit - remaining);
         } else if (remaining !== undefined) {
           // Fallback: increment used count by 1
           get().setAiRenameUsedToday(get().aiRenameUsedToday + 1);
         }
 
-        // Persist to localStorage — resolve email from NextAuth client session
+        // Persist to localStorage- resolve email from NextAuth client session
         try {
           const { getSession } = await import("next-auth/react");
           const clientSession = await getSession();
@@ -310,7 +310,7 @@ export const useImageStore = create<ImageStoreState>()(
             setUsedToday(clientSession.user.email, get().aiRenameUsedToday);
           }
         } catch {
-          // Ignore — localStorage sync is best-effort; server enforces the real limit
+          // Ignore- localStorage sync is best-effort; server enforces the real limit
         }
 
         applyAiName(id, filename, altText);
@@ -319,7 +319,7 @@ export const useImageStore = create<ImageStoreState>()(
         const errMsg = err instanceof Error ? err.message : String(err);
         // Handle daily limit specifically
         if (errMsg.includes("DAILY_LIMIT_REACHED") || errMsg.includes("Daily limit")) {
-          updateItem(id, { aiRenameStatus: "error", aiRenameError: "Daily limit reached — upgrade to Pro for 200/day" });
+          updateItem(id, { aiRenameStatus: "error", aiRenameError: "Daily limit reached- upgrade to Pro for 200/day" });
           return;
         }
         updateItem(id, { aiRenameStatus: "error", aiRenameError: errMsg });

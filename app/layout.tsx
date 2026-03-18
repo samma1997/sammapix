@@ -20,11 +20,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: `${APP_NAME} — Free Image Optimizer, WebP Converter & AI Rename`,
+    default: `${APP_NAME}- Free Image Optimizer, WebP Converter & AI Rename`,
     template: `%s | ${APP_NAME}`,
   },
   description:
-    "Compress JPG, PNG, WebP images for free. Convert to WebP. AI-powered SEO filename generator. 100% client-side — images never leave your browser.",
+    "Compress JPG, PNG, WebP images for free. Convert to WebP. AI-powered SEO filename generator. 100% client-side- images never leave your browser.",
   keywords: [
     "image compressor",
     "webp converter",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: APP_URL,
     siteName: APP_NAME,
-    title: `${APP_NAME} — Free Image Optimizer & AI Rename`,
+    title: `${APP_NAME}- Free Image Optimizer & AI Rename`,
     description:
       "Compress, convert to WebP, and AI-rename images in seconds. Free forever.",
     images: [
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — Free Image Optimizer",
+        alt: "SammaPix - Free Image Optimizer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${APP_NAME} — Free Image Optimizer & AI Rename`,
+    title: `${APP_NAME}- Free Image Optimizer & AI Rename`,
     description:
       "Compress, convert to WebP, and AI-rename images in seconds. Free forever.",
     images: ["/og-image.png"],
@@ -174,7 +174,7 @@ export default function RootLayout({
                   "name": "SammaPix",
                   "publisher": { "@id": "https://sammapix.com/#organization" },
                   "description":
-                    "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images — no signup needed.",
+                    "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images- no signup needed.",
                   "potentialAction": {
                     "@type": "SearchAction",
                     "target": "https://sammapix.com/tools?q={search_term_string}",

@@ -66,7 +66,7 @@ export default function CheckoutButton({
       loading={loading}
       onClick={handleClick}
     >
-      {children ?? "Get Pro — $7/mo"}
+      {children ?? "Get Pro- $7/mo"}
     </Button>
   );
 }

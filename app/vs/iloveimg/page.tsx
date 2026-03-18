@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs iLoveIMG — Which Image Tool Suite is Better in 2026?",
+  title: "SammaPix vs iLoveIMG - Which Image Tool Suite is Better in 2026?",
   description:
     "SammaPix vs iLoveIMG: compare privacy, AI features, batch processing, and free plan limits. Find the best free image optimizer for your needs.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/iloveimg`,
   },
   openGraph: {
-    title: "SammaPix vs iLoveIMG — Honest Comparison 2026",
+    title: "SammaPix vs iLoveIMG - Honest Comparison 2026",
     description:
       "iLoveIMG uploads your files to remote servers and has no AI features. SammaPix keeps everything private. See the full comparison.",
     type: "website",
@@ -61,7 +61,7 @@ export default function VsILoveImgPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs iLoveIMG
@@ -84,7 +84,7 @@ export default function VsILoveImgPage() {
         <div className="p-5 border border-indigo-200 bg-indigo-50/40 rounded-md">
           <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">Choose SammaPix if you…</p>
           <ul className="space-y-1.5 text-sm text-gray-700">
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Privacy matters — you don&apos;t want files uploaded to a server</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Privacy matters- you don&apos;t want files uploaded to a server</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need AI-generated SEO filenames and alt text</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want EXIF/GPS metadata removal</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want faster processing (client-side is instant)</li>
@@ -132,37 +132,37 @@ export default function VsILoveImgPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              File privacy — iLoveIMG uploads your files to their servers
+              File privacy- iLoveIMG uploads your files to their servers
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              iLoveIMG transmits every image you process to their remote servers. While they state files are deleted after a few hours, your data still travels across the internet. SammaPix compresses and converts everything locally using WebAssembly and the Canvas API — your files never leave your device, making it the only truly private option.
+              iLoveIMG transmits every image you process to their remote servers. While they state files are deleted after a few hours, your data still travels across the internet. SammaPix compresses and converts everything locally using WebAssembly and the Canvas API- your files never leave your device, making it the only truly private option.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI features — iLoveIMG has zero AI capabilities
+              AI features- iLoveIMG has zero AI capabilities
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">DSC_0387.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">fresh-avocado-toast-sourdough-breakfast.webp</code> — automatically. iLoveIMG has no AI features at all; it is purely a manual tool.
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">DSC_0387.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">fresh-avocado-toast-sourdough-breakfast.webp</code>- automatically. iLoveIMG has no AI features at all; it is purely a manual tool.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              EXIF removal — iLoveIMG doesn&apos;t offer it
+              EXIF removal- iLoveIMG doesn&apos;t offer it
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Photos taken with smartphones embed GPS coordinates, device model, date, and other metadata directly in the file. SammaPix strips all EXIF data before download — protecting your privacy and reducing file size. iLoveIMG has no EXIF removal feature, so any metadata in your original file stays in the exported image.
+              Photos taken with smartphones embed GPS coordinates, device model, date, and other metadata directly in the file. SammaPix strips all EXIF data before download- protecting your privacy and reducing file size. iLoveIMG has no EXIF removal feature, so any metadata in your original file stays in the exported image.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where iLoveIMG wins — full editing suite
+              Where iLoveIMG wins- full editing suite
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              iLoveIMG is a comprehensive image toolbox offering resize, crop, rotate, watermark, add text, meme generator, and more. If you need to edit images in addition to compressing them — and you&apos;re not concerned about server-side processing — iLoveIMG provides a much broader range of tools than SammaPix currently offers.
+              iLoveIMG is a comprehensive image toolbox offering resize, crop, rotate, watermark, add text, meme generator, and more. If you need to edit images in addition to compressing them- and you&apos;re not concerned about server-side processing- iLoveIMG provides a much broader range of tools than SammaPix currently offers.
             </p>
           </div>
         </div>
@@ -187,14 +187,14 @@ export default function VsILoveImgPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs iLoveIMG — Which Image Tool Suite is Better in 2026?",
+            headline: "SammaPix vs iLoveIMG - Which Image Tool Suite is Better in 2026?",
             description:
               "SammaPix vs iLoveIMG: compare privacy, AI features, batch processing, and free plan limits.",
             author: { "@type": "Person", name: "Luca Sammarco" },
@@ -205,7 +205,7 @@ export default function VsILoveImgPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -221,18 +221,18 @@ export default function VsILoveImgPage() {
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | iLoveIMG: Free (Pro available)" },
                 { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | iLoveIMG: Yes" },
-                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — 100% browser-based | iLoveIMG: No — uploads to server" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | iLoveIMG: No- uploads to server" },
                 { "@type": "ListItem", "position": 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | iLoveIMG: No" },
                 { "@type": "ListItem", "position": 5, name: "EXIF metadata removal", description: "SammaPix: Yes | iLoveIMG: No" },
                 { "@type": "ListItem", "position": 6, name: "WebP conversion", description: "SammaPix: Yes | iLoveIMG: Yes" },
-                { "@type": "ListItem", "position": 7, name: "File privacy (client-side)", description: "SammaPix: Yes — files never leave device | iLoveIMG: No — server-side processing" },
+                { "@type": "ListItem", "position": 7, name: "File privacy (client-side)", description: "SammaPix: Yes- files never leave device | iLoveIMG: No- server-side processing" },
               ],
             },
           }),
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -248,7 +248,7 @@ export default function VsILoveImgPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

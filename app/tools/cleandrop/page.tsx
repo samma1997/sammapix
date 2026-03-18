@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "CleanDrop — Strip Metadata, Compress & Convert to WebP | SammaPix",
+  title: "CleanDrop - Strip Metadata, Compress & Convert to WebP | SammaPix",
   description:
     "Strip metadata, compress, and convert to WebP. Privacy-first image optimization. Free, no login required.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/cleandrop`,
   },
   openGraph: {
-    title: "CleanDrop — Strip Metadata, Compress & Convert to WebP | SammaPix",
+    title: "CleanDrop - Strip Metadata, Compress & Convert to WebP | SammaPix",
     description:
       "Strip metadata, compress, and convert to WebP. Privacy-first optimization.",
     url: `${APP_URL}/tools/cleandrop`,
@@ -49,7 +49,7 @@ const features = [
   {
     title: "No login required",
     description:
-      "Completely free and anonymous. Everything processes in your browser — nothing is uploaded to any server.",
+      "Completely free and anonymous. Everything processes in your browser- nothing is uploaded to any server.",
   },
   {
     title: "Web-ready output",
@@ -141,6 +141,25 @@ export default function CleanDropPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Frequently asked questions</h2>
+          <dl className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {[
+              { q: "What metadata does CleanDrop remove?", a: "CleanDrop strips all EXIF data including GPS coordinates, camera model, lens info, timestamps, and software tags. After processing, your images contain zero identifying metadata." },
+              { q: "Do I need an account?", a: "No. CleanDrop is completely free and requires no login. All processing happens in your browser -- nothing is uploaded to any server." },
+              { q: "Is CleanDrop safe for privacy?", a: "Yes. CleanDrop was designed specifically for privacy. Your images never leave your device. The metadata stripping, compression, and WebP conversion all happen locally in your browser." },
+            ].map((faq) => (
+              <div key={faq.q} className="py-4">
+                <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>
+                <dd className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

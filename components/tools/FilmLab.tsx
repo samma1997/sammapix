@@ -106,56 +106,56 @@ const PRESETS: Record<PresetName, FilmSettings> = {
 
   // ── Samma Presets ── (translated from original Lightroom XMP presets)
 
-  /** Adriatico — cool cyan highlights + warm orange shadows, moody split toning */
+  /** Adriatico- cool cyan highlights + warm orange shadows, moody split toning */
   Adriatico: {
     grain: 0, vignette: 0, fade: 6, temperature: 0,
     contrast: 8, saturation: -7,
     highlightHue: 198, shadowHue: 12,
     highlightSat: 0.70, shadowSat: 0.49,
   },
-  /** Dorado — warm golden soft, dreamy clarity, honey tones */
+  /** Dorado- warm golden soft, dreamy clarity, honey tones */
   Dorado: {
     grain: 0, vignette: 10, fade: 6, temperature: 0,
     contrast: 7, saturation: -18,
     highlightHue: 41, shadowHue: 129,
     highlightSat: 0.48, shadowSat: 0.14,
   },
-  /** Lagos — strong teal-orange split, cinematic city/travel look */
+  /** Lagos- strong teal-orange split, cinematic city/travel look */
   Lagos: {
     grain: 0, vignette: 6, fade: 1, temperature: 0,
     contrast: -3, saturation: -10,
     highlightHue: 42, shadowHue: 215,
     highlightSat: 0.66, shadowSat: 1.54,
   },
-  /** Alba — very lifted shadows, airy dawn feel, almost no grain */
+  /** Alba- very lifted shadows, airy dawn feel, almost no grain */
   Alba: {
     grain: 0, vignette: 10, fade: 15, temperature: 0,
     contrast: -2, saturation: -12,
     highlightHue: 139, shadowHue: 211,
     highlightSat: 0.00, shadowSat: 0.00,
   },
-  /** Etere — ethereal, lifted, minimal — gentle mood */
+  /** Etere- ethereal, lifted, minimal- gentle mood */
   Etere: {
     grain: 0, vignette: 16, fade: 10, temperature: 0,
     contrast: 7, saturation: -20,
     highlightHue: 139, shadowHue: 265,
     highlightSat: 0.00, shadowSat: 0.00,
   },
-  /** Foschia — warm haze, slightly desaturated blues, travel warmth */
+  /** Foschia- warm haze, slightly desaturated blues, travel warmth */
   Foschia: {
     grain: 0, vignette: 10, fade: 7, temperature: 0,
     contrast: 5, saturation: -20,
     highlightHue: 41, shadowHue: 213,
     highlightSat: 0.22, shadowSat: 0.06,
   },
-  /** Rame — copper-warm autumn, rich earthy tones */
+  /** Rame- copper-warm autumn, rich earthy tones */
   Rame: {
     grain: 0, vignette: 10, fade: 6, temperature: 0,
     contrast: 8, saturation: -15,
     highlightHue: 48, shadowHue: 37,
     highlightSat: 0.44, shadowSat: 0.23,
   },
-  /** Pietra — very muted/desaturated, stone-like, subtle green-gold cast */
+  /** Pietra- very muted/desaturated, stone-like, subtle green-gold cast */
   Pietra: {
     grain: 0, vignette: 8, fade: 9, temperature: 0,
     contrast: 4, saturation: -20,
@@ -269,7 +269,7 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
       g = clamp((g - 128) * contrastFactor + 128);
       b = clamp((b - 128) * contrastFactor + 128);
 
-      // 3. Saturation — convert to HSL, modify S, back to RGB
+      // 3. Saturation- convert to HSL, modify S, back to RGB
       if (saturation !== 0) {
         const [h, s, l] = rgbToHsl(r, g, b);
         const newS = Math.max(0, Math.min(1, s * satScale));
@@ -299,14 +299,14 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
       const lum = 0.299 * r + 0.587 * g + 0.114 * b;
 
       if (lum > 150 && highlightSat > 0) {
-        // Highlight toning — strength controlled by highlightSat
+        // Highlight toning- strength controlled by highlightSat
         // Extended range (150–255) and raised blend coefficient for visible effect
         const blend = 0.35 * ((lum - 150) / 105) * highlightSat;
         r = clamp(r * (1 - blend) + highlightRgb[0] * blend);
         g = clamp(g * (1 - blend) + highlightRgb[1] * blend);
         b = clamp(b * (1 - blend) + highlightRgb[2] * blend);
       } else if (lum < 100 && shadowSat > 0) {
-        // Shadow toning — strength controlled by shadowSat
+        // Shadow toning- strength controlled by shadowSat
         // Extended range (0–100) and raised blend coefficient for visible effect
         const blend = 0.35 * (1 - lum / 100) * shadowSat;
         r = clamp(r * (1 - blend) + shadowRgb[0] * blend);
@@ -314,7 +314,7 @@ function applyFilmEffect(imageData: ImageData, settings: FilmSettings): void {
         b = clamp(b * (1 - blend) + shadowRgb[2] * blend);
       }
 
-      // 7. Vignette — per-pixel radial darkening
+      // 7. Vignette- per-pixel radial darkening
       if (vignette > 0) {
         const dx = x - cx;
         const dy = y - cy;
@@ -470,7 +470,7 @@ function FilmSlider({ label, value, min, max, onChange }: SliderProps) {
         <div className="w-full h-1 bg-[#E5E5E5] dark:bg-[#333] rounded-full relative">
           {/* Filled track */}
           {min < 0 ? (
-            // Bipolar slider — fill from center
+            // Bipolar slider- fill from center
             <>
               {value >= 0 ? (
                 <div
@@ -631,7 +631,7 @@ function DropZone({ onFiles }: DropZoneProps) {
         <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
           Drop photos here or <span className="text-[#171717] dark:text-[#E5E5E5] font-medium">click to browse</span>
         </p>
-        <p className="text-xs text-[#A3A3A3] mt-1">JPG, PNG, WebP, HEIC — multiple files supported</p>
+        <p className="text-xs text-[#A3A3A3] mt-1">JPG, PNG, WebP, HEIC- multiple files supported</p>
       </div>
     </div>
   );
@@ -658,7 +658,7 @@ export default function FilmLab() {
   const firstFile = files[0]?.file ?? null;
   const batchDone = files.length > 0 && files.every((f) => f.resultBlob !== null || f.error !== null);
 
-  // Live preview — debounced 100ms
+  // Live preview- debounced 100ms
   useEffect(() => {
     if (!firstFile) {
       setPreviewUrl(null);
@@ -710,7 +710,7 @@ export default function FilmLab() {
           );
         })
         .catch(() => {
-          // Conversion failed — leave originalUrl as "" which shows a
+          // Conversion failed- leave originalUrl as "" which shows a
           // spinner indefinitely, already better than a broken image icon.
         });
     });
@@ -852,7 +852,7 @@ export default function FilmLab() {
         freeLimit={filmLimit}
       />
 
-      {/* Preset pills — two groups */}
+      {/* Preset pills- two groups */}
       <div className="mb-6 space-y-4">
         {PRESET_GROUP_NAMES.map((groupName) => (
           <div key={groupName}>
@@ -1015,7 +1015,7 @@ export default function FilmLab() {
                 {/* Thumbnail */}
                 <div className="relative aspect-video bg-[#FAFAFA] dark:bg-[#252525] overflow-hidden">
                   {entry.originalUrl === "" ? (
-                    /* HEIC conversion still in flight — show a spinner */
+                    /* HEIC conversion still in flight- show a spinner */
                     <div className="w-full h-full flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-[#D4D4D4] dark:border-[#555] border-t-[#171717] dark:border-t-white rounded-full animate-spin" />
                     </div>

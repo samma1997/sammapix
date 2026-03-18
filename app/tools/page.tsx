@@ -5,9 +5,9 @@ import { ToolsPageClient } from "@/components/tools/ToolsPageClient";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "20+ Free Image & Video Tools for Photographers & Developers | SammaPix",
+  title: "22 Free Image & Video Tools for Photographers & Developers | SammaPix",
   description:
-    "Complete suite of 20+ free browser-based image and video tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 22 free browser-based image and video tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://sammapix.com/tools" },
   openGraph: {
-    title: "15 Free Image & Video Tools for Photographers & Developers",
+    title: "22 Free Image & Video Tools for Photographers & Developers",
     description:
       "Compress, convert, rename, resize, remove EXIF, apply film effects, batch process and more. All in browser. No uploads. No account needed.",
     url: "https://sammapix.com/tools",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — 15 Free Image & Video Tools",
+        alt: "SammaPix -- 22 Free Image & Video Tools",
       },
     ],
   },
@@ -51,7 +51,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 20+ browser-based image and video optimization tools",
+        description: "Suite of 22 browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -61,8 +61,8 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "20+ free browser-based image and video optimization tools",
-        numberOfItems: 20,
+        description: "22 free browser-based image and video optimization tools",
+        numberOfItems: 22,
         itemListElement: [
           {
             "@type": "SoftwareApplication",
@@ -107,13 +107,13 @@ export default function ToolsPage() {
       <section className="border-b border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
           <p className="text-xs font-medium text-gray-400 dark:text-[#525252] uppercase tracking-widest mb-4">
-            Image Tools
+            All Tools
           </p>
           <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] leading-tight mb-3 max-w-xl">
-            Find the right tool
+            Everything you need to optimize, rename, resize and organize your images
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            20+ free browser-based tools. No uploads, no signup needed.
+            22 free browser-based tools. No uploads, no signup needed for most tools.
           </p>
         </div>
       </section>
@@ -121,7 +121,7 @@ export default function ToolsPage() {
       {/* Client component: search, tabs, grid, use cases, trust */}
       <ToolsPageClient />
 
-      {/* Comparison table — at very bottom */}
+      {/* Comparison table */}
       <section className="py-12 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
@@ -132,41 +132,57 @@ export default function ToolsPage() {
               <thead>
                 <tr className="border-b border-gray-200 dark:border-[#2A2A2A]">
                   <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Tool</th>
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Function</th>
-                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Free</th>
-                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Batch</th>
-                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Browser</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">What it does</th>
+                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Free?</th>
+                  <th className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] uppercase">Needs login?</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { name: "Compress",        fn: "Reduce file size JPG, PNG, WebP, GIF",   free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "WebP",            fn: "Convert to modern WebP format",           free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "AI Rename",       fn: "Generate SEO filenames + alt text",       free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "EXIF Lens",       fn: "Remove GPS + metadata from photos",       free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "ResizePack",      fn: "Resize for Instagram, Twitter, LinkedIn", free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "FilmLab",         fn: "14 analog film presets for photos",       free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "AI Alt Text",     fn: "Generate accessibility alt text with AI", free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "Transcribe",      fn: "AI transcription from video/audio",      free: "Free tier", batch: "--", browser: "⚙" },
-                  { name: "WebLift",         fn: "Compress + WebP + AI Rename combo",      free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "BlogDrop",        fn: "Blog-ready: compress, resize, WebP, SEO",free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "InstaPrep",       fn: "Instagram-ready resize and compress",    free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "ShopShot",        fn: "E-commerce product image optimizer",     free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "CleanDrop",       fn: "Strip metadata + compress + WebP",       free: "✓",         batch: "✓", browser: "✓" },
-                  { name: "PixShip",         fn: "Light compress + resize for delivery",   free: "✓",         batch: "✓", browser: "✓" },
+                  // ── Single tools ──
+                  { name: "Compress",        fn: "Reduce file size for JPG, PNG, WebP, GIF",           free: true, login: false },
+                  { name: "WebP Converter",  fn: "Convert any image to modern WebP format",            free: true, login: false },
+                  { name: "HEIC Converter",  fn: "Convert iPhone HEIC photos to JPG or WebP",          free: true, login: false },
+                  { name: "ResizePack",      fn: "Resize for Instagram, Twitter, LinkedIn presets",    free: true, login: false },
+                  { name: "CropRatio",       fn: "Crop to exact ratios -- 1:1, 16:9, 4:3, A4",        free: true, login: false },
+                  { name: "AI Rename",       fn: "AI-generated SEO filenames using Gemini",            free: true, login: true },
+                  { name: "AI Alt Text",     fn: "Generate accessibility-compliant alt text with AI",  free: true, login: true },
+                  { name: "Transcribe",      fn: "AI video/audio transcription with SRT subtitles",   free: true, login: true },
+                  { name: "FilmLab",         fn: "14 analog film presets -- Kodak, Fuji, Ilford",      free: true, login: false },
+                  { name: "StampIt",         fn: "Batch watermark with text or logo, 9 positions",    free: true, login: false },
+                  { name: "EXIF Lens",       fn: "Strip GPS, camera data, and all metadata",          free: true, login: false },
+                  { name: "TwinHunt",        fn: "Find exact and near-duplicate photos",              free: true, login: false },
+                  { name: "GeoSort",         fn: "Sort photos by country using GPS EXIF data",        free: true, login: false },
+                  { name: "TravelMap",       fn: "Generate interactive map from travel photos",       free: true, login: false },
+                  { name: "Cull",            fn: "Rate and cull a shoot with star ratings",           free: true, login: false },
+                  // ── Combo tools ──
+                  { name: "WebLift",         fn: "Compress + WebP + AI Rename in one click",          free: true, login: true },
+                  { name: "BlogDrop",        fn: "Compress + resize + WebP + SEO blog names",         free: true, login: true },
+                  { name: "ShopShot",        fn: "E-commerce: compress + resize + WebP + product names", free: true, login: true },
+                  { name: "InstaPrep",       fn: "Resize to 1080px + compress for Instagram",         free: true, login: false },
+                  { name: "CleanDrop",       fn: "Strip metadata + compress + convert to WebP",       free: true, login: false },
+                  { name: "PixShip",         fn: "Light compress + resize for client delivery",       free: true, login: false },
+                  { name: "AI Workflow",     fn: "Custom multi-step pipeline with presets",            free: false, login: true },
                 ].map((row) => (
                   <tr
                     key={row.name}
                     className="border-b border-gray-100 dark:border-[#2A2A2A] hover:bg-white dark:hover:bg-[#252525] transition-colors"
                   >
-                    <td className="py-3 px-2 font-medium text-[#171717] dark:text-[#E5E5E5]">{row.name}</td>
-                    <td className="py-3 px-2 text-gray-600 dark:text-[#A3A3A3]">{row.fn}</td>
-                    <td className={`py-3 px-2 text-center ${row.free === "✓" ? "text-green-600" : "text-gray-500 dark:text-[#737373] text-xs"}`}>
-                      {row.free}
+                    <td className="py-2.5 px-2 font-medium text-[#171717] dark:text-[#E5E5E5] text-sm">{row.name}</td>
+                    <td className="py-2.5 px-2 text-gray-600 dark:text-[#A3A3A3] text-sm">{row.fn}</td>
+                    <td className="py-2.5 px-2 text-center">
+                      {row.free ? (
+                        <span className="text-green-600 text-sm">Yes</span>
+                      ) : (
+                        <span className="text-xs text-[#737373]">Pro</span>
+                      )}
                     </td>
-                    <td className="py-3 px-2 text-center text-green-600">{row.batch}</td>
-                    <td className={`py-3 px-2 text-center ${row.browser === "✓" ? "text-green-600" : "text-orange-500"}`}>
-                      {row.browser}
+                    <td className="py-2.5 px-2 text-center">
+                      {row.login ? (
+                        <span className="text-xs text-[#737373]">Yes (free)</span>
+                      ) : (
+                        <span className="text-green-600 text-sm">No</span>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -174,7 +190,7 @@ export default function ToolsPage() {
             </table>
           </div>
           <p className="text-xs text-gray-500 dark:text-[#737373] mt-4">
-            ✓ = Yes · ⚙ = API-powered (hybrid) · Free tier = Limited quota, Pro unlimited
+            All tools process images in your browser. AI tools send only a thumbnail to Google Gemini. Free tier includes 10 AI operations/day.
           </p>
         </div>
       </section>

@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "How to Remove GPS Location from Photos Before Posting Online (Free)",
   description:
-    "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
+    "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free- no software needed.",
   alternates: {
     canonical: `${APP_URL}/blog/remove-gps-from-photos`,
   },
@@ -84,7 +84,7 @@ export default function RemoveGpsFromPhotosPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Your photos carry more data than you think — Photo by Scott Webb on Unsplash
+                Your photos carry more data than you think - Photo by Scott Webb on Unsplash
               </figcaption>
             </figure>
 
@@ -96,10 +96,10 @@ export default function RemoveGpsFromPhotosPage() {
               Every digital photo contains a hidden block of data called <a href="https://en.wikipedia.org/wiki/Exif" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">EXIF (Exchangeable Image File Format)</a>. This metadata is written by your camera or smartphone at the moment you take the shot, and it travels with the file everywhere you copy or upload it.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              EXIF data includes useful information like camera model, lens settings, shutter speed, and ISO. But when location services are enabled on your phone — which they are by default on most devices — it also records GPS coordinates: latitude, longitude, and often altitude, accurate to within a few meters.
+              EXIF data includes useful information like camera model, lens settings, shutter speed, and ISO. But when location services are enabled on your phone- which they are by default on most devices- it also records GPS coordinates: latitude, longitude, and often altitude, accurate to within a few meters.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              This data is invisible when you look at the photo normally. You cannot see it in the image itself. But it is embedded in the file, and any tool that reads EXIF metadata — including free online tools, desktop software, and command-line utilities — can extract it instantly.
+              This data is invisible when you look at the photo normally. You cannot see it in the image itself. But it is embedded in the file, and any tool that reads EXIF metadata- including free online tools, desktop software, and command-line utilities- can extract it instantly.
             </p>
 
             {/* Metadata fields list */}
@@ -127,7 +127,7 @@ export default function RemoveGpsFromPhotosPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Every smartphone photo embeds GPS coordinates by default — Photo by Rodion Kutsaiev on Unsplash
+                Every smartphone photo embeds GPS coordinates by default - Photo by Rodion Kutsaiev on Unsplash
               </figcaption>
             </figure>
 
@@ -143,7 +143,7 @@ export default function RemoveGpsFromPhotosPage() {
               Home address exposure
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              When you photograph something in your home — a product you are selling on Craigslist or Facebook Marketplace, a pet, a room — and upload it without removing metadata, the GPS coordinates in that file reveal your home address to anyone who downloads it. Stalking cases have been traced back to exactly this scenario.
+              When you photograph something in your home- a product you are selling on Craigslist or Facebook Marketplace, a pet, a room- and upload it without removing metadata, the GPS coordinates in that file reveal your home address to anyone who downloads it. Stalking cases have been traced back to exactly this scenario.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -172,14 +172,14 @@ export default function RemoveGpsFromPhotosPage() {
               Do social media platforms remove GPS metadata automatically?
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Some platforms do strip EXIF data when you upload — Instagram, Facebook, and Twitter/X all remove most metadata from uploaded photos on their servers. However, this is not a privacy guarantee for several reasons:
+              Some platforms do strip EXIF data when you upload - Instagram, Facebook, and Twitter/X all remove most metadata from uploaded photos on their servers. However, this is not a privacy guarantee for several reasons:
             </p>
             <ul className="space-y-2 mb-4 pl-4">
               {[
                 "Platform policies change. A platform that strips metadata today may stop doing so in a future update.",
                 "Many platforms do not strip metadata. Forums, marketplaces, classified ad sites, and personal blogs often serve files as-is.",
                 "The photo exists in its original form on your device and in your cloud backup, from where it can be shared directly.",
-                "You may share photos via email, messaging apps, or file transfer — bypassing any platform-level stripping entirely.",
+                "You may share photos via email, messaging apps, or file transfer- bypassing any platform-level stripping entirely.",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-300 dark:bg-[#525252] shrink-0" />
@@ -191,7 +191,7 @@ export default function RemoveGpsFromPhotosPage() {
               The safe approach is to remove GPS metadata from the source file before sharing it anywhere. That way it does not matter which platform you use or how they handle uploads.
             </p>
 
-            {/* Section 4 — Step by step */}
+            {/* Section 4 - Step by step */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               How to remove GPS data from photos using SammaPix EXIF Lens
             </h2>
@@ -199,7 +199,7 @@ export default function RemoveGpsFromPhotosPage() {
               <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors">
                 SammaPix EXIF Lens
               </Link>{" "}
-              is a free, browser-based tool that reads and strips EXIF metadata from your photos entirely on your device. Your files never leave your browser — no upload to any server, no cloud processing, no account required.
+              is a free, browser-based tool that reads and strips EXIF metadata from your photos entirely on your device. Your files never leave your browser- no upload to any server, no cloud processing, no account required.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
               Here is the complete process, step by step.
@@ -216,17 +216,17 @@ export default function RemoveGpsFromPhotosPage() {
                 {
                   step: "2",
                   title: "Drop your photos",
-                  body: "Drag and drop one or more photos onto the drop zone, or click to select files. JPG, JPEG, and TIFF files are supported — these are the formats that contain EXIF GPS data. PNG files typically do not embed GPS data.",
+                  body: "Drag and drop one or more photos onto the drop zone, or click to select files. JPG, JPEG, and TIFF files are supported- these are the formats that contain EXIF GPS data. PNG files typically do not embed GPS data.",
                 },
                 {
                   step: "3",
                   title: "Inspect the metadata",
-                  body: "EXIF Lens displays a full breakdown of all metadata fields in the file. Look for the GPS section — you will see GPSLatitude, GPSLongitude, and GPSAltitude if location data is present. This is the data you are about to remove.",
+                  body: "EXIF Lens displays a full breakdown of all metadata fields in the file. Look for the GPS section- you will see GPSLatitude, GPSLongitude, and GPSAltitude if location data is present. This is the data you are about to remove.",
                 },
                 {
                   step: "4",
                   title: "Strip GPS data and download",
-                  body: 'Click "Remove EXIF" to strip all GPS fields (and optionally all other metadata). Download the clean file. The original on your device is untouched — only the downloaded copy has the metadata removed.',
+                  body: 'Click "Remove EXIF" to strip all GPS fields (and optionally all other metadata). Download the clean file. The original on your device is untouched- only the downloaded copy has the metadata removed.',
                 },
                 {
                   step: "5",
@@ -253,10 +253,10 @@ export default function RemoveGpsFromPhotosPage() {
             >
               <div>
                 <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">
-                  Free tool — no signup
+                  Free tool- no signup
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Remove GPS from your photos now — SammaPix EXIF Lens
+                  Remove GPS from your photos now - SammaPix EXIF Lens
                 </p>
               </div>
               <ArrowRight
@@ -277,7 +277,7 @@ export default function RemoveGpsFromPhotosPage() {
               Windows: File Properties
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Right-click the image, select Properties, go to the Details tab, and click "Remove Properties and Personal Information" at the bottom. You can choose to remove all metadata or specific fields. This method works for single files and is built into Windows 10 and 11 — no software to install.
+              Right-click the image, select Properties, go to the Details tab, and click "Remove Properties and Personal Information" at the bottom. You can choose to remove all metadata or specific fields. This method works for single files and is built into Windows 10 and 11- no software to install.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -309,7 +309,7 @@ export default function RemoveGpsFromPhotosPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                GPS coordinates in your photos can pinpoint your exact location — Photo by Capturing the human heart on Unsplash
+                GPS coordinates in your photos can pinpoint your exact location - Photo by Capturing the human heart on Unsplash
               </figcaption>
             </figure>
 
@@ -325,14 +325,14 @@ export default function RemoveGpsFromPhotosPage() {
               <Link href="/tools/compress" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors">
                 The compress tool
               </Link>{" "}
-              strips EXIF metadata as part of the compression process — when you compress a photo, the output file contains no GPS data and no other metadata that could identify you or your location. You get a lighter file and a cleaner file in one download, entirely processed in your browser.
+              strips EXIF metadata as part of the compression process- when you compress a photo, the output file contains no GPS data and no other metadata that could identify you or your location. You get a lighter file and a cleaner file in one download, entirely processed in your browser.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Use{" "}
               <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors">
                 EXIF Lens
               </Link>{" "}
-              when you need to inspect metadata first, remove it without re-compressing, or verify that a file is clean before sharing. Use the compress tool when you want the full optimization pipeline — metadata removal, compression, and optional WebP conversion — in one pass.
+              when you need to inspect metadata first, remove it without re-compressing, or verify that a file is clean before sharing. Use the compress tool when you want the full optimization pipeline- metadata removal, compression, and optional WebP conversion- in one pass.
             </p>
 
             {/* FAQ */}
@@ -344,19 +344,19 @@ export default function RemoveGpsFromPhotosPage() {
                 {[
                   {
                     q: "Does removing GPS data change the photo quality?",
-                    a: "No. EXIF metadata is stored separately from the image pixels. Removing it does not alter the visual content of the photo in any way. The image will look identical — the file will simply be slightly smaller because the metadata block is gone.",
+                    a: "No. EXIF metadata is stored separately from the image pixels. Removing it does not alter the visual content of the photo in any way. The image will look identical- the file will simply be slightly smaller because the metadata block is gone.",
                   },
                   {
-                    q: "What about screenshots — do they contain GPS data?",
+                    q: "What about screenshots- do they contain GPS data?",
                     a: "Screenshots taken on desktop computers generally contain no GPS data. Screenshots taken on a smartphone may contain some device metadata but typically not GPS coordinates unless the OS explicitly writes them. The main risk is photos taken with a camera app (including the built-in camera on a phone) with location services enabled.",
                   },
                   {
                     q: "Can I remove GPS data from a JPEG without re-saving it?",
-                    a: "Yes. EXIF metadata can be stripped from a JPEG without re-encoding the image data. Tools like EXIF Lens and ExifTool do this correctly — they remove the metadata block without touching the compressed image payload, so there is no quality loss from re-compression.",
+                    a: "Yes. EXIF metadata can be stripped from a JPEG without re-encoding the image data. Tools like EXIF Lens and ExifTool do this correctly- they remove the metadata block without touching the compressed image payload, so there is no quality loss from re-compression.",
                   },
                   {
                     q: "Does WhatsApp or iMessage strip GPS when sending photos?",
-                    a: "WhatsApp strips EXIF data (including GPS) when sending photos through the app. iMessage does not strip metadata — a photo sent via iMessage retains all original EXIF data including GPS coordinates. This is why it matters to strip GPS before sending, not just before posting publicly.",
+                    a: "WhatsApp strips EXIF data (including GPS) when sending photos through the app. iMessage does not strip metadata- a photo sent via iMessage retains all original EXIF data including GPS coordinates. This is why it matters to strip GPS before sending, not just before posting publicly.",
                   },
                 ].map(({ q, a }) => (
                   <div key={q}>
@@ -380,7 +380,7 @@ export default function RemoveGpsFromPhotosPage() {
                   Free tool
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Try SammaPix EXIF Lens — remove GPS from photos in your browser
+                  Try SammaPix EXIF Lens- remove GPS from photos in your browser
                 </p>
               </div>
               <ArrowRight
@@ -428,7 +428,7 @@ export default function RemoveGpsFromPhotosPage() {
                 Try SammaPix free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Compress, convert to WebP, strip GPS and EXIF metadata — no signup needed. 100% client-side, your images never leave your browser.
+                Compress, convert to WebP, strip GPS and EXIF metadata- no signup needed. 100% client-side, your images never leave your browser.
               </p>
               <Link
                 href="/"
@@ -489,7 +489,7 @@ export default function RemoveGpsFromPhotosPage() {
               "@type": "Article",
               headline: "How to Remove GPS Location from Photos Before Posting Online (Free)",
               description:
-                "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free — no software needed.",
+                "Every photo you take contains hidden GPS coordinates. Learn why that is a privacy risk and how to remove GPS data from photos online for free- no software needed.",
               url: `${APP_URL}/blog/remove-gps-from-photos`,
               datePublished: "2026-02-24",
               dateModified: "2026-02-24",

@@ -89,7 +89,7 @@ const ProUpsellBanner = ({ onDismiss }: { onDismiss: () => void }) => (
       <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0 mt-0.5" strokeWidth={1.5} />
       <div>
         <p className="text-xs font-medium text-[#92400E] dark:text-[#FCD34D] mb-0.5">
-          Free plan limit reached — {MAX_FILES_FREE} files max
+          Free plan limit reached- {MAX_FILES_FREE} files max
         </p>
         <p className="text-xs text-[#B45309] dark:text-[#D97706]">
           Upgrade to Pro to convert up to {MAX_FILES_PRO} HEIC files at once.{" "}
@@ -158,8 +158,8 @@ const QualitySlider = ({ value, onChange, disabled }: QualitySliderProps) => (
       }}
     />
     <div className="flex justify-between text-[10px] text-[#A3A3A3]">
-      <span>60% — Smaller file</span>
-      <span>100% — Best quality</span>
+      <span>60%- Smaller file</span>
+      <span>100%- Best quality</span>
     </div>
   </div>
 );
@@ -421,7 +421,7 @@ export default function HeicConverter() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag HEIC photos to upload"
+          aria-label="Drop zone- click or drag HEIC photos to upload"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
@@ -459,11 +459,11 @@ export default function HeicConverter() {
                 Drop HEIC photos or click to browse
               </p>
               <p className="text-xs text-[#737373]">
-                .heic, .heif — iPhone and modern camera files supported
+                .heic, .heif- iPhone and modern camera files supported
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              Files are sent to our server only for conversion — never stored
+              Files are sent to our server only for conversion- never stored
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
@@ -518,17 +518,17 @@ export default function HeicConverter() {
             </button>
           </div>
 
-          {/* "Ready" banner — shown before conversion starts */}
+          {/* "Ready" banner- shown before conversion starts */}
           {uiState === "results" && allPending && (
             <div className="flex items-center gap-3 px-4 py-3 rounded-md bg-[#F0FDF4] dark:bg-[#052E16] border border-[#BBF7D0] dark:border-[#166534]">
               <div className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0" />
               <p className="text-xs font-medium text-[#166534] dark:text-[#4ADE80]">
-                {files.length} file{files.length !== 1 ? "s" : ""} ready — choose format and quality, then click Convert
+                {files.length} file{files.length !== 1 ? "s" : ""} ready- choose format and quality, then click Convert
               </p>
             </div>
           )}
 
-          {/* Settings — only show when all pending (before convert) */}
+          {/* Settings- only show when all pending (before convert) */}
           {uiState === "results" && allPending && (
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-white dark:bg-[#1E1E1E] space-y-5">
               {/* Format toggle */}
@@ -554,7 +554,7 @@ export default function HeicConverter() {
                 </div>
                 {outputFormat === "WebP" && (
                   <p className="text-[11px] text-[#A3A3A3] mt-1.5">
-                    WebP is ~25% smaller than JPG — ideal for web use
+                    WebP is ~25% smaller than JPG- ideal for web use
                   </p>
                 )}
               </div>
@@ -596,7 +596,7 @@ export default function HeicConverter() {
               <span className="text-base leading-none mt-0.5">💡</span>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium text-[#5B21B6] dark:text-[#A78BFA] mb-0.5">
-                  HEIC → JPG doesn&apos;t reduce file size much — HEIC is already compressed.
+                  HEIC → JPG doesn&apos;t reduce file size much - HEIC is already compressed.
                 </p>
                 <p className="text-xs text-[#7C3AED] dark:text-[#8B5CF6]">
                   To shrink your JPGs further, run them through{" "}

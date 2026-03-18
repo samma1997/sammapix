@@ -63,7 +63,7 @@ const features = [
     icon: <HardDrive className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Reclaim disk space",
     description:
-      "TwinHunt shows you which photos to delete and how much space you would free. Actual deletion is done in your file manager — we never touch your files.",
+      "TwinHunt shows you which photos to delete and how much space you would free. Actual deletion is done in your file manager- we never touch your files.",
   },
 ];
 
@@ -76,7 +76,7 @@ const steps = [
   {
     n: "2",
     title: "Analysis runs in browser",
-    desc: "A perceptual hash is computed for each photo using DCT. Then every pair is compared. Processing is fast — around 50ms per image.",
+    desc: "A perceptual hash is computed for each photo using DCT. Then every pair is compared. Processing is fast- around 50ms per image.",
   },
   {
     n: "3",
@@ -88,7 +88,7 @@ const steps = [
 const faqs = [
   {
     q: "What is perceptual hashing (pHash)?",
-    a: "pHash is an algorithm that generates a 64-bit fingerprint for an image based on its visual content, not its raw bytes. Two images with the same visual content — even if saved differently, resized, or lightly edited — will have fingerprints that are close together (low Hamming distance). TwinHunt uses a DCT-based pHash: the image is reduced to 32×32 grayscale, the Discrete Cosine Transform extracts frequency components, and the top-left 8×8 block encodes the visual signature.",
+    a: "pHash is an algorithm that generates a 64-bit fingerprint for an image based on its visual content, not its raw bytes. Two images with the same visual content- even if saved differently, resized, or lightly edited- will have fingerprints that are close together (low Hamming distance). TwinHunt uses a DCT-based pHash: the image is reduced to 32×32 grayscale, the Discrete Cosine Transform extracts frequency components, and the top-left 8×8 block encodes the visual signature.",
   },
   {
     q: "Will it find photos that are slightly cropped or colour-adjusted?",
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: "Does it work with HEIC files from iPhone?",
-    a: "Yes. For preview thumbnails, TwinHunt uses the embedded JPEG thumbnail inside the HEIC file (extracted via exifr) — this is fast and requires no conversion library. The pHash is computed from the full image data via a standard canvas draw, which browsers support for HEIC on macOS and iOS.",
+    a: "Yes. For preview thumbnails, TwinHunt uses the embedded JPEG thumbnail inside the HEIC file (extracted via exifr)- this is fast and requires no conversion library. The pHash is computed from the full image data via a standard canvas draw, which browsers support for HEIC on macOS and iOS.",
   },
   {
     q: "Can TwinHunt delete my files?",
@@ -113,7 +113,7 @@ export default function TwinHuntPage() {
     <main>
       <ToolHeader
         title="TwinHunt"
-        description="Find duplicate and near-duplicate photos in your browser. Perceptual hashing compares visual content — not file bytes. Nothing uploaded, nothing stored."
+        description="Find duplicate and near-duplicate photos in your browser. Perceptual hashing compares visual content- not file bytes. Nothing uploaded, nothing stored."
         icon={Copy}
         accentColor="#F97316"
       />
@@ -126,11 +126,11 @@ export default function TwinHuntPage() {
         steps={[
           {
             title: "Drop your photos",
-            desc: "Upload JPG, PNG, WebP or HEIC files. Up to 50 on the free plan — or 500 with Pro.",
+            desc: "Upload JPG, PNG, WebP or HEIC files. Up to 50 on the free plan- or 500 with Pro.",
           },
           {
             title: "Algorithm finds duplicates",
-            desc: "A perceptual hash is computed for every photo using DCT. All pairs are compared at ~50ms per image — entirely in your browser.",
+            desc: "A perceptual hash is computed for every photo using DCT. All pairs are compared at ~50ms per image- entirely in your browser.",
           },
           {
             title: "Review and delete copies",
@@ -149,7 +149,7 @@ export default function TwinHuntPage() {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">What is TwinHunt?</h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            TwinHunt is a free browser-based duplicate photo finder that uses perceptual hashing (pHash) technology to detect visually similar and identical images. Unlike byte-level comparison, pHash finds duplicates even when photos have been resized, re-saved, or lightly edited. Processing runs at approximately 50ms per image — entirely in your browser.
+            TwinHunt is a free browser-based duplicate photo finder that uses perceptual hashing (pHash) technology to detect visually similar and identical images. Unlike byte-level comparison, pHash finds duplicates even when photos have been resized, re-saved, or lightly edited. Processing runs at approximately 50ms per image- entirely in your browser.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed">
             Sensitivity is adjustable: strict mode catches exact duplicates (Hamming distance 0–5), normal mode catches very similar images (6–10), and loose mode catches broader matches (11–20). No photo data is ever uploaded to any server. TwinHunt works offline once the page is loaded.
@@ -289,7 +289,7 @@ export default function TwinHuntPage() {
                 name: "How does duplicate detection work?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "TwinHunt uses perceptual hashing (pHash) — a technique that generates a visual fingerprint for each image based on its content, not file bytes. Two images with similar visual content will have similar fingerprints (low Hamming distance), even if they were resized or re-saved.",
+                  text: "TwinHunt uses perceptual hashing (pHash)- a technique that generates a visual fingerprint for each image based on its content, not file bytes. Two images with similar visual content will have similar fingerprints (low Hamming distance), even if they were resized or re-saved.",
                 },
               },
               {
@@ -305,7 +305,7 @@ export default function TwinHuntPage() {
                 name: "Does TwinHunt upload my photos?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. TwinHunt processes everything entirely in your browser using the Canvas API and JavaScript. Every pixel is analyzed locally — no image data is ever transmitted to any server.",
+                  text: "No. TwinHunt processes everything entirely in your browser using the Canvas API and JavaScript. Every pixel is analyzed locally- no image data is ever transmitted to any server.",
                 },
               },
               {
@@ -313,7 +313,7 @@ export default function TwinHuntPage() {
                 name: "Can TwinHunt delete my duplicate files?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. Browsers cannot delete files from your filesystem. TwinHunt only identifies duplicates and shows you which ones to delete. Actual deletion is done in your file manager or Finder — you stay in complete control.",
+                  text: "No. Browsers cannot delete files from your filesystem. TwinHunt only identifies duplicates and shows you which ones to delete. Actual deletion is done in your file manager or Finder- you stay in complete control.",
                 },
               },
             ],

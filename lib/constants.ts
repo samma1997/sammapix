@@ -71,7 +71,7 @@ export const PRICE_PRO_YEARLY = 60;
 export const APP_NAME = "SammaPix";
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com";
 export const APP_DESCRIPTION =
-  "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images — no signup needed.";
+  "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images- no signup needed.";
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
@@ -109,5 +109,5 @@ export const ADBLOCK_DISMISS_DAYS = 7;
 // Gemini model
 export const GEMINI_MODEL = "gemini-2.5-flash";
 
-// Admin emails — allowed to access /admin/* routes
+// Admin emails- allowed to access /admin/* routes
 export const ADMIN_EMAILS = ["luca@sammapix.com", "samma1997@gmail.com", "lucasamm97@gmail.com"];

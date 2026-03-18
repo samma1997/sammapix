@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import { getAllTrips } from "@/lib/destinations";
 
 export const metadata: Metadata = {
-  title: "About — Luca Sammarco, Travel Photographer",
+  title: "About - Luca Sammarco, Travel Photographer",
   description:
     "Travel photographer and full-stack developer. SammaPix is the tool I built because existing tools couldn't handle a real photography workflow.",
   keywords: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
-    title: "About — Luca Sammarco, Travel Photographer",
+    title: "About - Luca Sammarco, Travel Photographer",
     description:
       "Travel photographer and full-stack developer. SammaPix is the tool I built because existing tools couldn't handle a real photography workflow.",
     url: `${APP_URL}/about`,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — Built by Luca Sammarco",
+        alt: "SammaPix - Built by Luca Sammarco",
       },
     ],
   },
@@ -139,9 +139,9 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* Destination cards — vertical, like the old hero strip */}
+            {/* Destination cards- vertical, like the old hero strip */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {/* Sri Lanka — real photos, clickable */}
+              {/* Sri Lanka- real photos, clickable */}
               <Link
                 href="/about/sri-lanka-2025"
                 className="group relative overflow-hidden rounded-lg"
@@ -162,7 +162,7 @@ export default function AboutPage() {
                 </div>
               </Link>
 
-              {/* Coming soon destinations — blurred */}
+              {/* Coming soon destinations- blurred */}
               {[
                 { name: "Bali", year: "2024", gradient: "from-emerald-900 to-emerald-700" },
                 { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
@@ -198,10 +198,21 @@ export default function AboutPage() {
               About Luca
             </p>
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Travel photographer and full-stack developer. Built SammaPix
-              because existing tools couldn&apos;t handle a real photography
-              workflow — too slow, too expensive, or required uploading your
-              photos to someone else&apos;s server.
+              Travel photographer and full-stack developer. Passionate about photography since 2015, I&apos;ve shot my way
+              through Sri Lanka, Bali, Japan, Thailand, and China -- always coming home with thousands of photos that needed
+              optimizing, renaming, and organizing before they could go anywhere useful.
+            </p>
+            <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              I built SammaPix because every tool I tried was either too slow, too expensive, or required uploading
+              my photos to someone else&apos;s server. The first version was just a personal script to compress and
+              rename my travel photos in the browser. Then I added WebP conversion, EXIF stripping, film effects --
+              and before I knew it, I had a full toolkit. I made it public because if I needed these tools, other
+              photographers probably did too.
+            </p>
+            <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Today, SammaPix has 22 free tools used by photographers, bloggers, and developers in 40+ countries.
+              Everything still runs in the browser. Your photos never leave your device. That was the promise from
+              day one, and it hasn&apos;t changed.
             </p>
             <Link
               href="/tools"

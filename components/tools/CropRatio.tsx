@@ -94,14 +94,14 @@ function cropImageToBlob(
     let sx: number, sy: number, sw: number, sh: number;
 
     if (imgRatio >= r) {
-      // Wider than target ratio — crop width, keep full height
+      // Wider than target ratio- crop width, keep full height
       sw = img.naturalHeight * r;
       sh = img.naturalHeight;
       const maxSx = img.naturalWidth - sw;
       sx = maxSx * offset.x;
       sy = 0;
     } else {
-      // Taller than target ratio — crop height, keep full width
+      // Taller than target ratio- crop height, keep full width
       sw = img.naturalWidth;
       sh = img.naturalWidth / r;
       sx = 0;
@@ -202,7 +202,7 @@ const CropPreview = ({
   const displayW = Math.round(originalW * scaleToFit);
   const displayH = Math.round(originalH * scaleToFit);
 
-  // Calculate the source crop area (sw, sh) — same logic as cropImageToBlob
+  // Calculate the source crop area (sw, sh)- same logic as cropImageToBlob
   const r = ratioW / ratioH;
   const imgRatio = originalW / originalH;
 
@@ -332,14 +332,14 @@ const CropPreview = ({
           draggable={false}
         />
 
-        {/* Dark overlay — top */}
+        {/* Dark overlay- top */}
         {frameTop > 0 && (
           <div
             className="absolute left-0 right-0 top-0 pointer-events-none"
             style={{ height: frameTop, background: "rgba(0,0,0,0.55)" }}
           />
         )}
-        {/* Dark overlay — bottom */}
+        {/* Dark overlay- bottom */}
         {frameTop + cropDisplayH < displayH && (
           <div
             className="absolute left-0 right-0 pointer-events-none"
@@ -350,7 +350,7 @@ const CropPreview = ({
             }}
           />
         )}
-        {/* Dark overlay — left */}
+        {/* Dark overlay- left */}
         {frameLeft > 0 && (
           <div
             className="absolute pointer-events-none"
@@ -363,7 +363,7 @@ const CropPreview = ({
             }}
           />
         )}
-        {/* Dark overlay — right */}
+        {/* Dark overlay- right */}
         {frameLeft + cropDisplayW < displayW && (
           <div
             className="absolute pointer-events-none"
@@ -402,7 +402,7 @@ const CropPreview = ({
             </span>
           </div>
 
-          {/* Corner handles — 8×8 white squares */}
+          {/* Corner handles- 8×8 white squares */}
           {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map(
             (pos) => {
               const isTop = pos.startsWith("top");
@@ -428,7 +428,7 @@ const CropPreview = ({
       </div>
 
       <p className="text-[11px] text-[#A3A3A3] text-center">
-        Drag the frame to choose which area to keep — same offset applies to all images
+        Drag the frame to choose which area to keep- same offset applies to all images
       </p>
     </div>
   );
@@ -452,7 +452,7 @@ export default function CropRatio() {
   // Max output dimension (optional)
   const [maxDim, setMaxDim] = useState<string>("");
 
-  // Crop offset — shared across all images
+  // Crop offset- shared across all images
   const [cropOffset, setCropOffset] = useState<CropOffset>({ x: 0.5, y: 0.5 });
 
   // Preview for first image
@@ -751,7 +751,7 @@ export default function CropRatio() {
               Drop images here or click to browse
             </p>
             <p className="text-xs text-[#A3A3A3] dark:text-[#737373]">
-              JPG, PNG, WebP — up to {limit} images
+              JPG, PNG, WebP- up to {limit} images
             </p>
             {!isPro && (
               <Link
@@ -856,7 +856,7 @@ export default function CropRatio() {
           <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider mb-3">
             Max Output Dimension{" "}
             <span className="text-[#A3A3A3] normal-case font-normal tracking-normal">
-              (optional — leave blank to keep original size)
+              (optional- leave blank to keep original size)
             </span>
           </label>
           <div className="flex items-center gap-2">
@@ -874,7 +874,7 @@ export default function CropRatio() {
           </div>
         </div>
 
-        {/* Interactive crop preview — always shown */}
+        {/* Interactive crop preview- always shown */}
         {cropPreviewUrl && firstPending && (
           <div>
             <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider mb-3">

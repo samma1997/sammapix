@@ -60,6 +60,24 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           </p>
         </div>
 
+        {/* Current plan indicator */}
+        <div className="mb-6 text-center">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] text-xs font-medium rounded-full border border-[#E5E5E5] dark:border-[#333]">
+            You are currently on the <span className="font-semibold text-[#171717] dark:text-[#E5E5E5] ml-0.5">Free</span> plan
+          </span>
+        </div>
+
+        {/* Founding Member banner */}
+        <div className="mb-8 border border-[#6366F1]/20 dark:border-[#6366F1]/15 rounded-lg px-5 py-4 bg-[#EEF2FF]/40 dark:bg-[#6366F1]/5 text-center">
+          <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+            Founding Member Deal
+          </p>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
+            First 200 Pro subscribers lock in <span className="font-semibold text-[#6366F1]">$4/month forever</span>.
+            Early adopters get a permanent discount as a thank-you for believing early.
+          </p>
+        </div>
+
         {/* Toggle */}
         <div className="flex justify-center mb-8">
           <div className="inline-flex items-center gap-2 p-1 bg-[#F5F5F5] dark:bg-[#252525] rounded-md border border-[#E5E5E5] dark:border-[#333]">
@@ -105,7 +123,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             </p>
             {annual && (
               <p className="mt-1 text-xs text-[#A3A3A3]">
-                Launch promo — 60 days free for early adopters
+                Launch promo- 60 days free for early adopters
               </p>
             )}
           </div>
@@ -113,10 +131,10 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           {/* Features */}
           <div className="space-y-3 mb-8">
             {[
-              { icon: Zap, text: "AI Workflow Pipeline", sub: "Blog, Instagram, E-commerce presets — run everything in one click" },
+              { icon: Zap, text: "AI Workflow Pipeline", sub: "Blog, Instagram, E-commerce presets- run everything in one click" },
               { icon: Sparkles, text: "200 AI operations / day", sub: "AI Rename + AI Alt Text included daily" },
               { icon: Image, text: "500 files per batch", sub: "Process full shoots at once" },
-              { icon: Coins, text: "Buy extra AI credits", sub: "When 200/day isn't enough — credits never expire" },
+              { icon: Coins, text: "Buy extra AI credits", sub: "When 200/day isn't enough- credits never expire" },
               { icon: Shield, text: "No ads", sub: "Clean workspace, no distractions" },
               { icon: Check, text: "Install as desktop app", sub: "Works offline, launches instantly" },
               { icon: Crown, text: "Priority support", sub: "Get help when you need it" },
@@ -143,8 +161,8 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
             {annual
-              ? "Start 60-day free trial — $59/year"
-              : "Start 7-day free trial — $7/month"
+              ? "Start 60-day free trial- $59/year"
+              : "Start 7-day free trial- $7/month"
             }
           </button>
 
@@ -156,15 +174,24 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
         {/* What you're missing */}
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E] mb-6">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-            Free vs Pro — what changes
+            Free vs Pro -- what changes
           </h2>
+          {/* Column headers */}
+          <div className="grid grid-cols-3 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] pb-2 mb-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+            <span>Feature</span>
+            <span className="text-center">Free (current)</span>
+            <span className="text-center">Pro</span>
+          </div>
           <div className="space-y-2">
             {[
-              { feature: "AI operations / day", free: "5", pro: "200" },
+              { feature: "AI operations / day", free: "10", pro: "200" },
               { feature: "Files per batch", free: "20", pro: "500" },
+              { feature: "Max file size", free: "10 MB", pro: "50 MB" },
+              { feature: "ZIP download", free: "No", pro: "Yes" },
               { feature: "AI Workflow Pipeline", free: "No", pro: "Yes" },
               { feature: "Buy extra credits", free: "No", pro: "Yes" },
               { feature: "Ads", free: "Yes", pro: "None" },
+              { feature: "Support", free: "Community", pro: "Priority" },
             ].map(({ feature, free, pro }) => (
               <div key={feature} className="grid grid-cols-3 text-xs py-1.5 border-b border-[#F5F5F5] dark:border-[#252525] last:border-0">
                 <span className="text-[#525252] dark:text-[#A3A3A3]">{feature}</span>

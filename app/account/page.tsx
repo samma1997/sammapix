@@ -100,8 +100,8 @@ export default function AccountPage() {
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate">{user?.name ?? "—"}</p>
-              <p className="text-xs text-[#737373] truncate">{user?.email ?? "—"}</p>
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate">{user?.name ?? " - "}</p>
+              <p className="text-xs text-[#737373] truncate">{user?.email ?? " - "}</p>
             </div>
             <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold ${
               isPro
@@ -128,7 +128,7 @@ export default function AccountPage() {
                   <Crown className="h-3.5 w-3.5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Pro plan — active</p>
+                  <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Pro plan- active</p>
                   <p className="text-xs text-[#737373]">All limits unlocked · No ads</p>
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function AccountPage() {
                 href="/pricing"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
               >
-                Upgrade to Pro — $7/mo
+                Upgrade to Pro- $7/mo
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Link>
             </>

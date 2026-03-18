@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title:
     "How to Create an Interactive Travel Photo Map from Your iPhone Photos | SammaPix",
   description:
-    "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
+    "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken- no uploads required.",
   alternates: {
     canonical: `${APP_URL}/blog/create-travel-photo-map`,
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title:
       "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
     description:
-      "Your iPhone quietly records GPS coordinates in every photo. Here is how to turn that hidden data into an interactive travel map — in minutes, with no uploads.",
+      "Your iPhone quietly records GPS coordinates in every photo. Here is how to turn that hidden data into an interactive travel map- in minutes, with no uploads.",
     url: `${APP_URL}/blog/create-travel-photo-map`,
     type: "article",
     publishedTime: "2026-02-18",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title:
       "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
     description:
-      "Your iPhone quietly records GPS coordinates in every photo. Turn that hidden data into an interactive travel map — no uploads required.",
+      "Your iPhone quietly records GPS coordinates in every photo. Turn that hidden data into an interactive travel map- no uploads required.",
     creator: "@lucasammarco",
   },
 };
@@ -46,7 +46,7 @@ const articleSchema = {
   headline:
     "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
   description:
-    "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken — no uploads required.",
+    "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken- no uploads required.",
   url: `${APP_URL}/blog/create-travel-photo-map`,
   datePublished: "2026-02-18",
   dateModified: "2026-02-18",
@@ -143,7 +143,7 @@ export default function CreateTravelPhotoMapPage() {
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
               Every photo you take on your iPhone contains hidden GPS coordinates
               recorded at the moment of capture. Here is how to unlock that data
-              and turn years of travel photos into an interactive map — without
+              and turn years of travel photos into an interactive map- without
               uploading a single file.
             </p>
           </header>
@@ -158,15 +158,15 @@ export default function CreateTravelPhotoMapPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Open any photo on your iPhone and tap the info icon (i). Scroll
               down and you will see a small map with a pin. That pin is the
-              exact GPS location where the photo was taken — latitude and
+              exact GPS location where the photo was taken- latitude and
               longitude, accurate to within a few meters.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               This data is stored in the EXIF metadata of the image file. EXIF
               (Exchangeable Image File Format) is a standard that embeds
               technical information directly inside the photo: camera settings,
-              timestamp, device model, and — when location services are enabled
-              — precise GPS coordinates. On an iPhone, this happens
+              timestamp, device model, and- when location services are enabled
+             - precise GPS coordinates. On an iPhone, this happens
               automatically for every shot taken with the default Camera app.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -184,7 +184,7 @@ export default function CreateTravelPhotoMapPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Every travel photo carries hidden GPS coordinates that can be turned into an interactive map — Photo by Annie Spratt on Unsplash
+                Every travel photo carries hidden GPS coordinates that can be turned into an interactive map - Photo by Annie Spratt on Unsplash
               </figcaption>
             </figure>
 
@@ -199,16 +199,16 @@ export default function CreateTravelPhotoMapPage() {
 
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSLatitude / GPSLongitude</strong> — the precise capture location as decimal degrees
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSLatitude / GPSLongitude</strong>- the precise capture location as decimal degrees
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSAltitude</strong> — elevation at the time of capture
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSAltitude</strong>- elevation at the time of capture
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSDateStamp / GPSTimeStamp</strong> — UTC date and time of the shot
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSDateStamp / GPSTimeStamp</strong>- UTC date and time of the shot
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSImgDirection</strong> — the compass direction the camera was pointed
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">GPSImgDirection</strong>- the compass direction the camera was pointed
               </li>
             </ul>
 
@@ -223,7 +223,7 @@ export default function CreateTravelPhotoMapPage() {
               One important note: if you share a photo from your iPhone using
               AirDrop or iCloud, the GPS data is preserved. If you share via
               some messaging apps (WhatsApp, for example), those apps strip EXIF
-              metadata before sending — a privacy feature that also removes the
+              metadata before sending- a privacy feature that also removes the
               location data.
             </p>
 
@@ -274,17 +274,17 @@ export default function CreateTravelPhotoMapPage() {
                 SammaPix TravelMap
               </Link>
               . It reads the GPS coordinates directly from your files in the
-              browser — nothing is uploaded, nothing leaves your device.
+              browser- nothing is uploaded, nothing leaves your device.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 1 — Export your photos from iPhone to your computer
+              Step 1 - Export your photos from iPhone to your computer
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Connect your iPhone to your Mac or PC and use Image Capture (Mac)
               or Windows Photos to copy the photos you want to map. Make sure
-              you export as JPEG or HEIC — both formats preserve EXIF GPS data.
+              you export as JPEG or HEIC- both formats preserve EXIF GPS data.
               Avoid exporting via apps that strip metadata.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -294,7 +294,7 @@ export default function CreateTravelPhotoMapPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 2 — Open SammaPix TravelMap
+              Step 2 - Open SammaPix TravelMap
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -310,7 +310,7 @@ export default function CreateTravelPhotoMapPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 3 — Drop your photos onto the map interface
+              Step 3 - Drop your photos onto the map interface
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -320,12 +320,12 @@ export default function CreateTravelPhotoMapPage() {
               stored in its EXIF data.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Photos without GPS data are noted in a counter at the top — useful
+              Photos without GPS data are noted in a counter at the top- useful
               for identifying which shots were taken with location disabled.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 4 — Explore your travel map
+              Step 4 - Explore your travel map
             </h3>
 
             <figure className="my-8">
@@ -336,19 +336,19 @@ export default function CreateTravelPhotoMapPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Your iPhone photos contain all the data needed to build a detailed travel map — Photo by Andrew Stutesman on Unsplash
+                Your iPhone photos contain all the data needed to build a detailed travel map - Photo by Andrew Stutesman on Unsplash
               </figcaption>
             </figure>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Zoom and pan to explore the map. Click any pin to see the photo
               thumbnail, the exact capture time, and the GPS coordinates. Pins
-              cluster automatically when zoomed out — zoom in to separate
+              cluster automatically when zoomed out- zoom in to separate
               nearby locations. The map uses{" "}
               <a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Leaflet.js</a>{" "}
               with tiles from{" "}
               <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">OpenStreetMap</a>{" "}
-              — both open-source and free.
+             - both open-source and free.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Use the date range filter to isolate a specific trip. If you have
@@ -357,7 +357,7 @@ export default function CreateTravelPhotoMapPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 5 — Export or share your map
+              Step 5 - Export or share your map
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -374,7 +374,7 @@ export default function CreateTravelPhotoMapPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Travel photos with GPS data enabled become pins on your personal world map — Photo by Luca Bravo on Unsplash
+                Travel photos with GPS data enabled become pins on your personal world map - Photo by Luca Bravo on Unsplash
               </figcaption>
             </figure>
 
@@ -447,14 +447,14 @@ export default function CreateTravelPhotoMapPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               SammaPix TravelMap processes all coordinates locally in your
               browser. No photo data is transmitted to any server. This lets you
-              explore your location history safely — and also makes it clear
+              explore your location history safely- and also makes it clear
               exactly how much GPS data your photos carry before you share them
               publicly.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               When you are ready to share photos online, use the SammaPix EXIF
               Remover to strip all GPS metadata from the files. The image itself
-              is unchanged — only the invisible metadata is removed.
+              is unchanged- only the invisible metadata is removed.
             </p>
 
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
@@ -495,7 +495,7 @@ export default function CreateTravelPhotoMapPage() {
               device. The only external requests are for map tiles (the visual
               map layer), which come from an open-source tile provider and
               contain only the area coordinates of the map view you are
-              looking at — not your photo data.
+              looking at- not your photo data.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
@@ -577,7 +577,7 @@ export default function CreateTravelPhotoMapPage() {
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your iPhone photos into SammaPix TravelMap and see exactly
-                where every shot was taken — no account needed, nothing
+                where every shot was taken- no account needed, nothing
                 uploaded.
               </p>
               <Link

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How to Crop Photos to Perfect Ratios for Print and Social Media",
     description:
-      "Every crop photo ratio explained: 1:1, 4:3, 3:2, 16:9, 9:16, and 5:4 — with use cases for Instagram, print, widescreen, and Stories. Includes DPI and composition guidance.",
+      "Every crop photo ratio explained: 1:1, 4:3, 3:2, 16:9, 9:16, and 5:4- with use cases for Instagram, print, widescreen, and Stories. Includes DPI and composition guidance.",
     url: `${APP_URL}/blog/crop-photos-perfect-ratios`,
     type: "article",
     publishedTime: "2026-02-20",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Crop Photos to Perfect Ratios for Print and Social Media",
     description:
-      "Every crop photo ratio explained — Instagram, print, widescreen, Stories. Includes DPI requirements and composition tips.",
+      "Every crop photo ratio explained - Instagram, print, widescreen, Stories. Includes DPI requirements and composition tips.",
     creator: "@lucasammarco",
   },
 };
@@ -141,7 +141,7 @@ export default function CropPhotoPerfectRatiosPage() {
             </h1>
 
             <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
-              Cropping a photo sounds simple — until your Instagram post gets
+              Cropping a photo sounds simple- until your Instagram post gets
               cut off, your 4x6 print has white bars on both sides, or your
               YouTube thumbnail is pillarboxed. Every platform and every
               print size expects a specific crop photo ratio, and getting it
@@ -195,7 +195,7 @@ export default function CropPhotoPerfectRatiosPage() {
                 aspect ratio
               </a>{" "}
               is the proportional relationship between an image&apos;s width
-              and height, expressed as two numbers separated by a colon — for
+              and height, expressed as two numbers separated by a colon- for
               example 16:9 or 4:3. It describes shape, not size. A 1920x1080
               pixel screen and a 3840x2160 pixel screen share the same 16:9
               aspect ratio even though their resolutions differ by a factor of
@@ -205,7 +205,7 @@ export default function CropPhotoPerfectRatiosPage() {
               When you crop a photo, you are trimming it to match a specific
               ratio. If the target ratio does not match your original image,
               you will lose part of the frame. The goal is to crop
-              intentionally — preserving your subject while satisfying the
+              intentionally- preserving your subject while satisfying the
               dimension requirements of your destination platform or print
               size.
             </p>
@@ -221,7 +221,7 @@ export default function CropPhotoPerfectRatiosPage() {
             </h2>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              1:1 — The square
+              1:1 - The square
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -235,13 +235,13 @@ export default function CropPhotoPerfectRatiosPage() {
               Square crops work best for portraits (face fills the frame
               symmetrically), product shots on white backgrounds, and detail
               shots where the subject is centered. They struggle with
-              landscapes and wide architectural shots — avoid forcing a
+              landscapes and wide architectural shots- avoid forcing a
               horizontal scene into a square unless you have a strong central
               subject to anchor it.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              4:3 — The classic camera ratio
+              4:3 - The classic camera ratio
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -261,14 +261,14 @@ export default function CropPhotoPerfectRatiosPage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              3:2 — The DSLR standard
+              3:2 - The DSLR standard
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The 3:2 ratio comes from 35mm film photography and is baked into
               virtually every full-frame and crop-sensor DSLR and mirrorless
-              camera. A standard 4x6 inch print — the most common consumer
-              print size globally — is exactly 3:2. So is a 6x4 inch, 12x8
+              camera. A standard 4x6 inch print- the most common consumer
+              print size globally- is exactly 3:2. So is a 6x4 inch, 12x8
               inch, or any other doubling of those dimensions.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -279,7 +279,7 @@ export default function CropPhotoPerfectRatiosPage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              16:9 — Widescreen
+              16:9 - Widescreen
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -290,7 +290,7 @@ export default function CropPhotoPerfectRatiosPage() {
               images, and LinkedIn article cover photos.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Cropping a portrait or square photo to 16:9 is aggressive — you
+              Cropping a portrait or square photo to 16:9 is aggressive- you
               lose a significant portion of the vertical dimension. Plan for
               this when shooting: if you know an image is destined for a
               widescreen crop, compose loosely and avoid placing critical
@@ -298,11 +298,11 @@ export default function CropPhotoPerfectRatiosPage() {
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              9:16 — Vertical / Stories
+              9:16 - Vertical / Stories
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              The portrait orientation of 16:9 — and the native format of
+              The portrait orientation of 16:9- and the native format of
               every short-form video platform. Instagram Stories, Instagram
               Reels, TikTok, YouTube Shorts, Facebook Stories, Pinterest Idea
               Pins, and Snapchat all use 9:16. At 1080x1920 pixels, it fills
@@ -313,16 +313,16 @@ export default function CropPhotoPerfectRatiosPage() {
               the width. The result only works if the primary subject is
               vertically centered in the original frame. A better approach is
               to shoot vertical from the start when you know the destination is
-              Stories — or use a tool that lets you place the crop manually
+              Stories- or use a tool that lets you place the crop manually
               rather than automatically centering it.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
-              5:4 — Portrait and print
+              5:4 - Portrait and print
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              The 5:4 ratio corresponds to the 8x10 inch print — one of the
+              The 5:4 ratio corresponds to the 8x10 inch print- one of the
               most popular portrait print sizes in photography studios. It is
               slightly more square than 4:3, which makes it flattering for
               portrait work and less claustrophobic than a strict square.
@@ -407,7 +407,7 @@ export default function CropPhotoPerfectRatiosPage() {
                       YouTube thumbnails, Twitter cards, desktop wallpapers, video
                     </td>
                     <td className="px-4 py-2.5 text-[#737373]">
-                      — (screen format)
+                     - (screen format)
                     </td>
                   </tr>
                   <tr className="border-b border-gray-100 dark:border-[#2A2A2A]">
@@ -421,7 +421,7 @@ export default function CropPhotoPerfectRatiosPage() {
                       Instagram Stories & Reels, TikTok, YouTube Shorts
                     </td>
                     <td className="px-4 py-2.5 text-[#737373]">
-                      — (screen format)
+                     - (screen format)
                     </td>
                   </tr>
                   <tr>
@@ -515,7 +515,7 @@ export default function CropPhotoPerfectRatiosPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               A 12-megapixel smartphone camera produces images around
-              4000×3000 pixels — enough for a sharp 13×10 inch print at
+              4000×3000 pixels- enough for a sharp 13×10 inch print at
               300 DPI. Modern cameras at 24–50 megapixels produce images
               that can be printed at 20×13 inches or larger without
               interpolation. The limitation is always the crop: the more you
@@ -542,7 +542,7 @@ export default function CropPhotoPerfectRatiosPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               The most technically correct crop can still produce a weak image
               if the composition is off. Cropping is not just a mechanical
-              operation — it is a creative one. The crop is your second chance
+              operation- it is a creative one. The crop is your second chance
               to nail the composition you intended when you pressed the
               shutter.
             </p>
@@ -563,7 +563,7 @@ export default function CropPhotoPerfectRatiosPage() {
               toward a 1:1 square from a wider shot, shift the crop box so
               the main subject lands on an intersection point. The result will
               feel intentional rather than mechanical. Most photo editing apps
-              display a thirds grid overlay when you are in crop mode — use it
+              display a thirds grid overlay when you are in crop mode- use it
               every time.
             </p>
 
@@ -575,7 +575,7 @@ export default function CropPhotoPerfectRatiosPage() {
               A common cropping mistake is cropping too tight. Subjects that
               are pressed against the edges of the frame feel claustrophobic.
               As a rule: leave at least 5–10% of empty space around the
-              subject on all sides. For portraits, never crop at the joints —
+              subject on all sides. For portraits, never crop at the joints- 
               not at the wrist, elbow, knee, or ankle. Crop between joints
               instead.
             </p>
@@ -587,7 +587,7 @@ export default function CropPhotoPerfectRatiosPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               A tilted horizon is one of the most jarring problems in
               photography. Always check your horizon line before finalizing a
-              crop. Most tools let you rotate and crop simultaneously — use
+              crop. Most tools let you rotate and crop simultaneously- use
               the rotate function first, then finalize the ratio. Straightening
               after the fact costs you pixels around the edges, so account
               for this in your composition.
@@ -599,8 +599,8 @@ export default function CropPhotoPerfectRatiosPage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Cropping one photo manually is straightforward. Cropping fifty
-              photos to the same ratio — all with correct compositions, without
-              the platform auto-cropping them incorrectly — is tedious and
+              photos to the same ratio- all with correct compositions, without
+              the platform auto-cropping them incorrectly- is tedious and
               error-prone if done one by one.
             </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -620,35 +620,35 @@ export default function CropPhotoPerfectRatiosPage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">
                   Drop your photos
                 </strong>{" "}
-                — drag a folder or individual files into the drop zone. The
+               - drag a folder or individual files into the drop zone. The
                 tool accepts JPG, PNG, and WebP with no upload limit.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">
                   Select your target ratio
                 </strong>{" "}
-                — choose from presets (1:1, 4:3, 3:2, 16:9, 9:16, 5:4) or
+               - choose from presets (1:1, 4:3, 3:2, 16:9, 9:16, 5:4) or
                 enter a custom ratio for unusual formats.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">
                   Choose crop positioning
                 </strong>{" "}
-                — center, smart-crop to the detected face or subject, or
+               - center, smart-crop to the detected face or subject, or
                 define a focal point manually per image.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">
                   Preview before export
                 </strong>{" "}
-                — review each crop in the thumbnail grid. Adjust any that look
+               - review each crop in the thumbnail grid. Adjust any that look
                 off before downloading.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">
                   Download individually or as a ZIP
                 </strong>{" "}
-                — all processing happens in your browser. No files are uploaded
+               - all processing happens in your browser. No files are uploaded
                 to any server.
               </li>
             </ul>
@@ -668,14 +668,14 @@ export default function CropPhotoPerfectRatiosPage() {
               >
                 SammaPix Compress
               </Link>{" "}
-              to reduce file sizes for web delivery — maintaining your exact
+              to reduce file sizes for web delivery- maintaining your exact
               crop dimensions at a fraction of the original file weight.
             </p>
 
             {/* CTA box */}
             <div className="my-8 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
               <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Batch crop your photos to any ratio — free, in-browser
+                Batch crop your photos to any ratio- free, in-browser
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Drop your photos into SammaPix CropRatio and export them at
@@ -705,7 +705,7 @@ export default function CropPhotoPerfectRatiosPage() {
               landscape (1.91:1, which is close to 16:9 but cropped to
               Instagram&apos;s container), and portrait (4:5). The 4:5 portrait
               ratio takes up the most vertical space in the feed and therefore
-              gets more visual attention — use it for single-subject photos
+              gets more visual attention- use it for single-subject photos
               where vertical framing works. Square 1:1 is the safest for
               carousel posts because all images display consistently.
             </p>
@@ -718,7 +718,7 @@ export default function CropPhotoPerfectRatiosPage() {
               YouTube thumbnails must be 16:9. The minimum dimensions are
               1280×720 pixels, but 1920×1080 is recommended for retina
               displays. Thumbnails that do not match 16:9 will have black bars
-              added automatically — always crop to the correct ratio before
+              added automatically- always crop to the correct ratio before
               uploading.
             </p>
 
@@ -730,7 +730,7 @@ export default function CropPhotoPerfectRatiosPage() {
               Pinterest favors vertical content. The optimal ratio for standard
               pins is 2:3 (1000×1500 pixels), and for Idea Pins (the
               full-screen format), 9:16. Images that are too wide get cropped
-              to a square in the feed, which can ruin compositions — always
+              to a square in the feed, which can ruin compositions- always
               crop vertically before uploading to Pinterest.
             </p>
 
@@ -741,7 +741,7 @@ export default function CropPhotoPerfectRatiosPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Most consumer photo labs in 2026 use automated cropping when the
               image ratio does not match the selected print size. The software
-              crops from the center by default — which means it will cut off
+              crops from the center by default- which means it will cut off
               people&apos;s heads, miss the key subject in a landscape, or
               produce awkward compositions consistently. Always pre-crop to
               the target print ratio before uploading to any online lab.
@@ -759,7 +759,7 @@ export default function CropPhotoPerfectRatiosPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               For feed posts: 4:5 (portrait) for maximum visual impact, or
               1:1 (square) for consistent carousel appearances. For Stories
-              and Reels: 9:16. Avoid 16:9 landscape in the feed — it renders
+              and Reels: 9:16. Avoid 16:9 landscape in the feed- it renders
               small relative to portrait and square posts.
             </p>
 
@@ -767,7 +767,7 @@ export default function CropPhotoPerfectRatiosPage() {
               What ratio is a standard 4x6 photo print?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              A 4x6 inch print is exactly 3:2 — the native ratio of virtually
+              A 4x6 inch print is exactly 3:2- the native ratio of virtually
               all DSLR and mirrorless cameras. If you shoot with one of these
               cameras and print 4x6, you can print the full frame with no
               cropping. Smartphone photos (typically 4:3) will require a small
@@ -782,7 +782,7 @@ export default function CropPhotoPerfectRatiosPage() {
               At 240 DPI (acceptable for photos viewed at arm&apos;s length),
               the minimum is 1920×2400 pixels. Any modern smartphone with
               12 megapixels or more produces images with sufficient resolution
-              for this size — provided you have not cropped heavily.
+              for this size- provided you have not cropped heavily.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
@@ -791,7 +791,7 @@ export default function CropPhotoPerfectRatiosPage() {
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Technically yes, but the result is rarely good. Cropping a
               landscape photo to a 9:16 vertical removes roughly 75% of the
-              horizontal width — most subjects will be cut off. A better
+              horizontal width- most subjects will be cut off. A better
               approach: place the photo as a background element in a 9:16
               canvas with blurred edges, or use an app that lets you position
               a small landscape image within a 9:16 frame with a colored or
@@ -861,7 +861,7 @@ export default function CropPhotoPerfectRatiosPage() {
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Use SammaPix CropRatio to batch-crop to any ratio, ResizePack
                 to hit exact pixel targets, and Compress to reduce file size
-                without visible quality loss — all free, all in your browser.
+                without visible quality loss- all free, all in your browser.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link

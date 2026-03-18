@@ -27,21 +27,21 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-        {/* Logo — always links to / */}
+        {/* Logo- always links to / */}
         <Link
           href="/"
           className="flex items-center gap-2 group select-none"
-          aria-label="SammaPix — home"
+          aria-label="SammaPix- home"
         >
           <style>{`
             /*
-             * Pixel compression animation — 4x4 grid collapses inward toward center.
+             * Pixel compression animation- 4x4 grid collapses inward toward center.
              * Each pixel ring (outer → inner) is staggered so the collapse reads
              * as a wave moving inward, then snapping back out.
              * steps() timing gives the authentic pixel/digital feel.
              */
 
-            /* Outer ring — 12 pixels along the perimeter */
+            /* Outer ring- 12 pixels along the perimeter */
             @keyframes sp-outer {
               0%        { transform: translate(0, 0);    opacity: 1; }
               30%       { transform: translate(0, 0);    opacity: 1; }
@@ -50,7 +50,7 @@ export default function Navbar() {
               100%      { transform: translate(0, 0);    opacity: 1; }
             }
 
-            /* Inner ring — 4 pixels (the 2x2 center block) */
+            /* Inner ring- 4 pixels (the 2x2 center block) */
             @keyframes sp-inner {
               0%        { transform: scale(1);    opacity: 1; }
               50%       { transform: scale(1);    opacity: 1; }
@@ -86,7 +86,7 @@ export default function Navbar() {
            * viewBox 0 0 20 20. Each pixel is a 3x3 rect with 1px gap.
            * Grid starts at x=2, y=2. Cell size = 4 (3px rect + 1px gap).
            *
-           * Layout (col, row) — 0-indexed:
+           * Layout (col, row)- 0-indexed:
            *   Outer ring: all cells where col=0|3 OR row=0|3  (12 cells)
            *   Inner 2x2:  (1,1) (2,1) (1,2) (2,2)            (4 cells)
            *
@@ -109,10 +109,10 @@ export default function Navbar() {
             <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="6"  y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
             <rect className="sp-pixel-outer" style={{"--sp-dx":"0px","--sp-dy":"3px"} as React.CSSProperties}  x="10" y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
             <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"3px"} as React.CSSProperties} x="14" y="2"  width="3" height="3" fill="var(--sp-fill,#171717)" />
-            {/* row 1 — sides only */}
+            {/* row 1- sides only */}
             <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="6"  width="3" height="3" fill="var(--sp-fill,#171717)" />
             <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="6"  width="3" height="3" fill="var(--sp-fill,#171717)" />
-            {/* row 2 — sides only */}
+            {/* row 2- sides only */}
             <rect className="sp-pixel-outer" style={{"--sp-dx":"3px","--sp-dy":"0px"} as React.CSSProperties}  x="2"  y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
             <rect className="sp-pixel-outer" style={{"--sp-dx":"-3px","--sp-dy":"0px"} as React.CSSProperties} x="14" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
             {/* row 3 */}

@@ -14,7 +14,7 @@ export default function ResizePackClient() {
     <>
       <ResizePack />
 
-      {/* Next-step suggestions — shown automatically when all files are done */}
+      {/* Next-step suggestions- shown automatically when all files are done */}
       <section className="px-4 sm:px-6 pb-2">
         <div className="max-w-3xl mx-auto">
           <NextStepSuggestions currentTool="resizepack" />

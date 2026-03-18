@@ -114,12 +114,12 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
           {file.aiRenameStatus === "error" && (
             <p className="text-xs text-warning mt-0.5">
               {file.aiRenameError?.includes("UNAUTHENTICATED") || file.aiRenameError?.includes("Authentication")
-                ? "AI rename requires login — sign in and retry"
+                ? "AI rename requires login- sign in and retry"
                 : file.aiRenameError?.includes("429") || file.aiRenameError?.includes("quota") || file.aiRenameError?.includes("RESOURCE_EXHAUSTED")
-                ? "AI rename quota exceeded — try again later"
+                ? "AI rename quota exceeded- try again later"
                 : file.aiRenameError?.includes("AI_ERROR") || file.aiRenameError?.includes("AI processing")
-                ? "AI rename failed — Gemini error, retry"
-                : `AI rename failed — ${file.aiRenameError ?? "unknown error"}`}
+                ? "AI rename failed - Gemini error, retry"
+                : `AI rename failed- ${file.aiRenameError ?? "unknown error"}`}
             </p>
           )}
         </div>

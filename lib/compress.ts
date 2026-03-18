@@ -58,7 +58,7 @@ export async function compressImage(
     const compressed = await imageCompression(file, options);
 
     // Guard: if compression made the file larger (e.g. already-optimized JPEGs),
-    // return the original file unchanged — never increase file size
+    // return the original file unchanged- never increase file size
     if (compressed.size >= originalSize) {
       resultBlob = file;
     } else {
@@ -121,7 +121,7 @@ export async function convertToWebPCanvas(
       }
 
       // Only add white background for formats without alpha (JPEG).
-      // PNG, WebP, GIF support transparency — preserve it.
+      // PNG, WebP, GIF support transparency- preserve it.
       const hasAlpha = /\/(png|webp|gif)$/i.test(file.type);
       if (!hasAlpha) {
         ctx.fillStyle = "#FFFFFF";
@@ -184,7 +184,7 @@ async function compressWithCanvas(
         return;
       }
 
-      // No white fill — preserve transparency
+      // No white fill- preserve transparency
       ctx.drawImage(img, 0, 0, w, h);
 
       // Output in the same format as input to keep alpha channel

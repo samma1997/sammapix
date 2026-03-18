@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { Globe } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "WebLift — Compress, Convert to WebP & AI Rename | SammaPix",
+  title: "WebLift - Compress, Convert to WebP & AI Rename | SammaPix",
   description:
     "Compress, convert to WebP, and AI-rename images for the web in one click. Free combo tool for web developers and content creators.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/weblift`,
   },
   openGraph: {
-    title: "WebLift — Compress, Convert to WebP & AI Rename | SammaPix",
+    title: "WebLift - Compress, Convert to WebP & AI Rename | SammaPix",
     description:
       "Compress, convert to WebP, and AI-rename images for the web in one click.",
     url: `${APP_URL}/tools/weblift`,
@@ -141,6 +141,25 @@ export default function WebLiftPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">Frequently asked questions</h2>
+          <dl className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {[
+              { q: "Do I need an account to use WebLift?", a: "Yes, because WebLift includes AI Rename which sends a thumbnail to Google Gemini. A free account is required to prevent API abuse. The compression and WebP conversion steps run entirely in your browser." },
+              { q: "Can I disable individual steps?", a: "Yes. Each step (Compress, Convert to WebP, AI Rename) can be toggled on or off before processing. If you disable AI Rename, no login is required." },
+              { q: "How much smaller will my images be?", a: "Typically 60-70% smaller. The compression step reduces file size by 50-80%, and WebP conversion adds another 25-34% reduction compared to JPEG." },
+            ].map((faq) => (
+              <div key={faq.q} className="py-4">
+                <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>
+                <dd className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

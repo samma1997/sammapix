@@ -75,7 +75,7 @@ const POSTS: Post[] = [
     slug: "create-travel-photo-map",
     title: "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
     description:
-      "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. Visualize where every photo was taken — no uploads required.",
+      "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. Visualize where every photo was taken- no uploads required.",
     date: "2026-02-18",
     tags: ["Tools"],
   },
@@ -99,7 +99,7 @@ const POSTS: Post[] = [
     slug: "reduce-image-size-for-email",
     title: "How to Reduce Image Size for Email Attachments (Under 1MB Fast)",
     description:
-      "Quickly reduce image file size for email attachments. Compress photos to under 1MB without visible quality loss — free, no signup.",
+      "Quickly reduce image file size for email attachments. Compress photos to under 1MB without visible quality loss- free, no signup.",
     date: "2026-02-03",
     tags: ["Tools"],
   },
@@ -139,7 +139,7 @@ const POSTS: Post[] = [
     slug: "iphone-heic-to-jpg-guide",
     title: "How to Convert iPhone HEIC Photos to JPG (Free Online)",
     description:
-      "Convert HEIC photos from your iPhone to JPG format — faster, compatible with everything. Free, online, no uploads needed.",
+      "Convert HEIC photos from your iPhone to JPG format- faster, compatible with everything. Free, online, no uploads needed.",
     date: "2026-02-12",
     tags: ["Tools"],
   },
@@ -155,7 +155,7 @@ const POSTS: Post[] = [
     slug: "remove-exif-protect-privacy",
     title: "How to Remove EXIF Data from Photos to Protect Your Privacy",
     description:
-      "EXIF data contains GPS location, camera info, and timestamps. Learn how to strip it from photos before sharing online — free and fast.",
+      "EXIF data contains GPS location, camera info, and timestamps. Learn how to strip it from photos before sharing online- free and fast.",
     date: "2026-02-06",
     tags: ["Privacy"],
   },
@@ -178,6 +178,15 @@ const POSTS: Post[] = [
 ];
 
 const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy", "Workflow", "Creative"];
+
+const TAG_GRADIENTS: Record<PostTag, string> = {
+  Tools: "from-emerald-500/15 to-teal-500/15 dark:from-emerald-500/8 dark:to-teal-500/8",
+  SEO: "from-violet-500/15 to-indigo-500/15 dark:from-violet-500/8 dark:to-indigo-500/8",
+  Performance: "from-blue-500/15 to-cyan-500/15 dark:from-blue-500/8 dark:to-cyan-500/8",
+  Privacy: "from-rose-500/15 to-pink-500/15 dark:from-rose-500/8 dark:to-pink-500/8",
+  Workflow: "from-amber-500/15 to-orange-500/15 dark:from-amber-500/8 dark:to-orange-500/8",
+  Creative: "from-fuchsia-500/15 to-purple-500/15 dark:from-fuchsia-500/8 dark:to-purple-500/8",
+};
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -263,7 +272,7 @@ export default function BlogClient() {
           ))}
         </div>
 
-        {/* Results count — only when filtering */}
+        {/* Results count- only when filtering */}
         {(query || activeCategory !== "All") && filtered.length > 0 && (
           <p className="text-xs text-[#A3A3A3] dark:text-[#737373] mb-6">
             {filtered.length} {filtered.length === 1 ? "article" : "articles"}
@@ -305,37 +314,39 @@ export default function BlogClient() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-sm transition-all"
+                className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-sm transition-all"
               >
-                {/* Tag */}
-                <div className="mb-3">
-                  <span className="text-[10px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333]">
+                {/* Gradient header */}
+                <div className={`h-16 bg-gradient-to-br ${TAG_GRADIENTS[post.tags[0]]} flex items-end px-4 pb-2`}>
+                  <span className="text-[10px] font-semibold bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-sm text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5]/50 dark:border-[#333]/50 uppercase tracking-wide">
                     {post.tags[0]}
                   </span>
                 </div>
 
-                {/* Title */}
-                <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-2 line-clamp-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
-                  {post.title}
-                </h2>
+                <div className="p-4">
+                  {/* Title */}
+                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug mb-2 line-clamp-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
+                    {post.title}
+                  </h2>
 
-                {/* Description */}
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4 line-clamp-2">
-                  {post.description}
-                </p>
+                  {/* Description */}
+                  <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4 line-clamp-2">
+                    {post.description}
+                  </p>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between">
-                  <time
-                    dateTime={post.date}
-                    className="text-[11px] text-[#A3A3A3] dark:text-[#737373]"
-                  >
-                    {formatDate(post.date)}
-                  </time>
-                  <ArrowRight
-                    className="h-3.5 w-3.5 text-[#D4D4D4] dark:text-[#525252] group-hover:text-[#737373] dark:group-hover:text-[#A3A3A3] group-hover:translate-x-0.5 transition-all"
-                    strokeWidth={1.5}
-                  />
+                  {/* Footer */}
+                  <div className="flex items-center justify-between">
+                    <time
+                      dateTime={post.date}
+                      className="text-[11px] text-[#A3A3A3] dark:text-[#737373]"
+                    >
+                      {formatDate(post.date)}
+                    </time>
+                    <ArrowRight
+                      className="h-3.5 w-3.5 text-[#D4D4D4] dark:text-[#525252] group-hover:text-[#737373] dark:group-hover:text-[#A3A3A3] group-hover:translate-x-0.5 transition-all"
+                      strokeWidth={1.5}
+                    />
+                  </div>
                 </div>
               </Link>
             ))}

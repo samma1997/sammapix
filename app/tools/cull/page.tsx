@@ -7,7 +7,7 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Photo Culling Tool Free — Keyboard Shortcuts | SammaPix",
+  title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
   description:
     "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/cull` },
   openGraph: {
-    title: "Photo Culling Tool Free — Keyboard Shortcuts | SammaPix",
+    title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
     description:
       "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
     url: `${APP_URL}/tools/cull`,
@@ -69,13 +69,13 @@ const features = [
     icon: <FileImage className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Works with HEIC",
     description:
-      "iPhone photos in HEIC format are fully supported. Preview and cull directly — no conversion step needed.",
+      "iPhone photos in HEIC format are fully supported. Preview and cull directly- no conversion step needed.",
   },
   {
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "100% private",
     description:
-      "Photos never leave your device. Everything happens in your browser — no upload, no server, no cloud.",
+      "Photos never leave your device. Everything happens in your browser- no upload, no server, no cloud.",
   },
 ];
 
@@ -97,7 +97,7 @@ export default function CullPage() {
         steps={[
           {
             title: "Drop your shoot photos",
-            desc: "Upload JPG or HEIC photos from your shoot — up to 20 files on the free plan. Photos load in full-screen review mode.",
+            desc: "Upload JPG or HEIC photos from your shoot- up to 20 files on the free plan. Photos load in full-screen review mode.",
           },
           {
             title: "Rate with keyboard shortcuts",
@@ -123,7 +123,7 @@ export default function CullPage() {
             Cull is a free browser-based photo culling tool that lets you review photos up to 10x faster than traditional methods using keyboard shortcuts. Press K to keep a photo, X to reject it, and arrow keys to navigate. When finished, download a ZIP containing only the photos you marked as keep.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed">
-            It supports JPG and HEIC (iPhone format). All processing happens locally in your browser — no photos are uploaded. Go through 100 photos in minutes without touching the mouse.
+            It supports JPG and HEIC (iPhone format). All processing happens locally in your browser- no photos are uploaded. Go through 100 photos in minutes without touching the mouse.
           </p>
         </div>
       </section>
@@ -273,7 +273,7 @@ export default function CullPage() {
                 name: "How do I quickly select the best photos?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Cull uses keyboard shortcuts: press K to keep a photo, X to reject it. Arrow keys let you navigate without touching the mouse. This workflow is 10x faster than clicking buttons — you can review 100 photos in just a few minutes.",
+                  text: "Cull uses keyboard shortcuts: press K to keep a photo, X to reject it. Arrow keys let you navigate without touching the mouse. This workflow is 10x faster than clicking buttons- you can review 100 photos in just a few minutes.",
                 },
               },
               {
@@ -281,7 +281,7 @@ export default function CullPage() {
                 name: "Does Cull work with iPhone HEIC photos?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes. Cull fully supports HEIC format (iPhone photos). Preview and cull directly — no conversion step needed. Just drop your HEIC files and they will be displayed and processed like any JPG.",
+                  text: "Yes. Cull fully supports HEIC format (iPhone photos). Preview and cull directly- no conversion step needed. Just drop your HEIC files and they will be displayed and processed like any JPG.",
                 },
               },
               {
@@ -289,7 +289,7 @@ export default function CullPage() {
                 name: "Are my photos uploaded anywhere?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. Everything happens in your browser. Your photos stay on your device — no upload, no server, completely private. Only the photos you marked as keep are packaged into the ZIP for download.",
+                  text: "No. Everything happens in your browser. Your photos stay on your device- no upload, no server, completely private. Only the photos you marked as keep are packaged into the ZIP for download.",
                 },
               },
             ],

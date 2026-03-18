@@ -7,7 +7,7 @@ import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 export const metadata: Metadata = {
   title: "SammaPix vs VSCO: Best Photo Editor for Travel Photographers (2026)",
   description:
-    "SammaPix vs VSCO: honest comparison for travel photographers. Free browser-based tool vs paid mobile app. Batch processing, EXIF removal, AI rename, WebP export — all compared.",
+    "SammaPix vs VSCO: honest comparison for travel photographers. Free browser-based tool vs paid mobile app. Batch processing, EXIF removal, AI rename, WebP export- all compared.",
   keywords: [
     "vsco alternative free",
     "sammapix vs vsco",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/vsco`,
   },
   openGraph: {
-    title: "SammaPix vs VSCO — Best Photo Editor for Travel Photographers (2026)",
+    title: "SammaPix vs VSCO - Best Photo Editor for Travel Photographers (2026)",
     description:
       "VSCO costs $19.99/year and is mobile-only. SammaPix is free, browser-based, and built for batch workflows. See the full comparison.",
     type: "website",
@@ -64,13 +64,13 @@ export default function VsVscoPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs VSCO
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          VSCO is a beautiful mobile photo editor. SammaPix is a free, browser-based workflow tool. For travel photographers who need to export, compress, rename, and publish photos fast — they solve very different problems.
+          VSCO is a beautiful mobile photo editor. SammaPix is a free, browser-based workflow tool. For travel photographers who need to export, compress, rename, and publish photos fast- they solve very different problems.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/">
@@ -141,52 +141,52 @@ export default function VsVscoPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Globe className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              VSCO is a mobile app — SammaPix is a browser tool
+              VSCO is a mobile app - SammaPix is a browser tool
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              VSCO lives on your phone. It&apos;s great for on-the-go editing and sharing directly to Instagram or the VSCO community feed. SammaPix runs in any desktop or mobile browser — no download, no install. When you get home from a trip with 80 RAW exports and need to optimize them for your travel blog, a browser-based batch tool is the right choice. These two tools genuinely serve different moments in a photographer&apos;s workflow.
+              VSCO lives on your phone. It&apos;s great for on-the-go editing and sharing directly to Instagram or the VSCO community feed. SammaPix runs in any desktop or mobile browser- no download, no install. When you get home from a trip with 80 RAW exports and need to optimize them for your travel blog, a browser-based batch tool is the right choice. These two tools genuinely serve different moments in a photographer&apos;s workflow.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Camera className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Batch processing — VSCO doesn&apos;t have it
+              Batch processing - VSCO doesn&apos;t have it
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              VSCO is designed for one photo at a time. You can copy and paste settings between photos, but there&apos;s no true batch processing or bulk export. SammaPix lets you drop up to 20 images at once (free plan) or 100 on Pro, compress them all, convert to WebP, rename with AI, and download a ZIP — in one session. For travel photographers publishing to WordPress or a static site, this difference alone saves hours per week.
+              VSCO is designed for one photo at a time. You can copy and paste settings between photos, but there&apos;s no true batch processing or bulk export. SammaPix lets you drop up to 20 images at once (free plan) or 100 on Pro, compress them all, convert to WebP, rename with AI, and download a ZIP- in one session. For travel photographers publishing to WordPress or a static site, this difference alone saves hours per week.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              EXIF removal — strip GPS before you publish
+              EXIF removal- strip GPS before you publish
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Every photo from your camera or phone embeds GPS coordinates, device model, and timestamp in the EXIF metadata. When you publish those photos to your travel blog, that data is public. VSCO does not offer EXIF stripping. SammaPix removes all metadata client-side — your files never leave your browser, and you get clean, private images ready to publish. This is especially valuable for travel photographers who photograph sensitive locations or want to protect their home coordinates.
+              Every photo from your camera or phone embeds GPS coordinates, device model, and timestamp in the EXIF metadata. When you publish those photos to your travel blog, that data is public. VSCO does not offer EXIF stripping. SammaPix removes all metadata client-side- your files never leave your browser, and you get clean, private images ready to publish. This is especially valuable for travel photographers who photograph sensitive locations or want to protect their home coordinates.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — from IMG_4829.jpg to lisbon-sunset-alfama-rooftop.webp
+              AI rename- from IMG_4829.jpg to lisbon-sunset-alfama-rooftop.webp
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Search engines cannot see images — they read filenames and alt text. A file named <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_4829.jpg</code> contributes nothing to your SEO. SammaPix uses Google Gemini to analyze each image and generate a descriptive, keyword-rich filename and alt text automatically. Upload your Lisbon trip photos, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">lisbon-sunset-alfama-rooftop-golden-hour.webp</code> with a full alt description. VSCO has no SEO features whatsoever — it&apos;s not built for web publishing.
+              Search engines cannot see images- they read filenames and alt text. A file named <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_4829.jpg</code> contributes nothing to your SEO. SammaPix uses Google Gemini to analyze each image and generate a descriptive, keyword-rich filename and alt text automatically. Upload your Lisbon trip photos, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">lisbon-sunset-alfama-rooftop-golden-hour.webp</code> with a full alt description. VSCO has no SEO features whatsoever- it&apos;s not built for web publishing.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Price — SammaPix free plan vs VSCO subscription
+              Price - SammaPix free plan vs VSCO subscription
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              VSCO requires a paid subscription ($19.99/year) to access its full preset library and features. There is a very limited free tier, but most of what makes VSCO appealing — the X-Series and A-Series film presets — requires payment. SammaPix&apos;s core tools (compress, convert to WebP, EXIF remover, resize) are completely free with no account required. AI rename and batch above 20 files require either a free account or Pro ($59/year). For travel bloggers on a budget, SammaPix is the obvious choice for the optimization workflow.
+              VSCO requires a paid subscription ($19.99/year) to access its full preset library and features. There is a very limited free tier, but most of what makes VSCO appealing- the X-Series and A-Series film presets- requires payment. SammaPix&apos;s core tools (compress, convert to WebP, EXIF remover, resize) are completely free with no account required. AI rename and batch above 20 files require either a free account or Pro ($59/year). For travel bloggers on a budget, SammaPix is the obvious choice for the optimization workflow.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where VSCO genuinely wins — mobile editing and film aesthetics
+              Where VSCO genuinely wins- mobile editing and film aesthetics
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               VSCO&apos;s film presets are exceptional. The A4, A6, HB1, and HB2 presets replicate analog film grain, color shifts, and fading in ways that are difficult to match elsewhere. If you want to give your travel photos a warm, film-inspired look and share them on Instagram, VSCO is one of the best tools available. The two tools actually complement each other: edit and style in VSCO on mobile, then bring your exports into SammaPix on desktop to optimize, rename, and publish.
@@ -238,7 +238,7 @@ export default function VsVscoPage() {
           <Link href="/pricing" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Pricing</p>
-              <p className="text-xs text-gray-500 mt-0.5">Free forever — Pro at $59/year for power users</p>
+              <p className="text-xs text-gray-500 mt-0.5">Free forever - Pro at $59/year for power users</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -249,7 +249,7 @@ export default function VsVscoPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Optimize your travel photos in minutes</h2>
         <p className="text-sm text-gray-500 mb-6">
-          Batch compress, convert to WebP, strip EXIF, and rename with AI — all in the browser, all free.
+          Batch compress, convert to WebP, strip EXIF, and rename with AI- all in the browser, all free.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -264,7 +264,7 @@ export default function VsVscoPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -282,7 +282,7 @@ export default function VsVscoPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -297,19 +297,19 @@ export default function VsVscoPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free + Pro $59/yr | VSCO: $19.99/year" },
-                { "@type": "ListItem", position: 2, name: "Browser-based", description: "SammaPix: Yes — no install required | VSCO: No — mobile app only" },
+                { "@type": "ListItem", position: 2, name: "Browser-based", description: "SammaPix: Yes- no install required | VSCO: No- mobile app only" },
                 { "@type": "ListItem", position: 3, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | VSCO: No" },
-                { "@type": "ListItem", position: 4, name: "EXIF metadata strip", description: "SammaPix: Yes — client-side | VSCO: No" },
+                { "@type": "ListItem", position: 4, name: "EXIF metadata strip", description: "SammaPix: Yes- client-side | VSCO: No" },
                 { "@type": "ListItem", position: 5, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | VSCO: No" },
                 { "@type": "ListItem", position: 6, name: "WebP export", description: "SammaPix: Yes | VSCO: No" },
-                { "@type": "ListItem", position: 7, name: "Film presets", description: "SammaPix: Yes | VSCO: Yes — core strength" },
+                { "@type": "ListItem", position: 7, name: "Film presets", description: "SammaPix: Yes | VSCO: Yes- core strength" },
               ],
             },
           }),
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -325,7 +325,7 @@ export default function VsVscoPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

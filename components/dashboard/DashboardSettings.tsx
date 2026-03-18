@@ -229,9 +229,9 @@ export default function DashboardSettings({
               )}
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
-                  {userName ?? "—"}
+                  {userName ?? " - "}
                 </p>
-                <p className="text-xs text-[#737373] truncate">{userEmail ?? "—"}</p>
+                <p className="text-xs text-[#737373] truncate">{userEmail ?? " - "}</p>
               </div>
               <div
                 className={[
@@ -249,7 +249,7 @@ export default function DashboardSettings({
             {/* Meta rows */}
             <div className="divide-y divide-[#F5F5F5] dark:divide-[#252525]">
               <Row label="Signed in with" value={providerLabel} />
-              <Row label="Email" value={userEmail ?? "—"} />
+              <Row label="Email" value={userEmail ?? " - "} />
             </div>
           </div>
         </section>
@@ -290,7 +290,7 @@ export default function DashboardSettings({
                 </button>
 
                 <p className="text-[11px] text-[#A3A3A3]">
-                  Cancel anytime — you keep Pro access until the end of the billing period.
+                  Cancel anytime- you keep Pro access until the end of the billing period.
                 </p>
               </>
             ) : (
@@ -306,7 +306,7 @@ export default function DashboardSettings({
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                 >
                   <Crown className="h-4 w-4" strokeWidth={1.5} />
-                  Upgrade to Pro — $7/mo
+                  Upgrade to Pro- $7/mo
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                 </Link>
               </>

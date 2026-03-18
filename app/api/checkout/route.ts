@@ -11,7 +11,7 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
 ];
 
-// Trial periods — change these when promo ends
+// Trial periods- change these when promo ends
 const TRIAL_DAYS_MONTHLY = 7;
 const TRIAL_DAYS_ANNUAL = 60; // Promo: first users get 60 days free
 

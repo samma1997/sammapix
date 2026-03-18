@@ -71,7 +71,7 @@ export async function GET(req: NextRequest) {
         "User-Agent": "SammaPix/1.0 (https://www.sammapix.com)",
         "Accept-Language": "en",
       },
-      next: { revalidate: 86400 }, // cache 24h — same location = same result
+      next: { revalidate: 86400 }, // cache 24h- same location = same result
     });
 
     if (!res.ok) {

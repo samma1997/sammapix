@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Crop Image to Aspect Ratio Online Free | SammaPix",
   description:
-    "Crop to any ratio — 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
+    "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
   keywords: [
     "crop image ratio",
     "aspect ratio crop",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Crop Image to Aspect Ratio Online Free | SammaPix",
     description:
-      "Crop to any ratio — 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
+      "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
     url: `${APP_URL}/tools/croproatio`,
     siteName: "SammaPix",
     type: "website",
@@ -80,7 +80,7 @@ const features = [
     icon: <Crop className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "Exact ratio",
     description:
-      "Crop to 1:1 square, 16:9 widescreen, 4:5 Instagram portrait, 9:16 Stories and Reels, 2:3, 3:2 — or type any custom ratio you need.",
+      "Crop to 1:1 square, 16:9 widescreen, 4:5 Instagram portrait, 9:16 Stories and Reels, 2:3, 3:2- or type any custom ratio you need.",
   },
   {
     icon: <Hand className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
@@ -98,7 +98,7 @@ const features = [
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
     title: "No upload",
     description:
-      "All cropping happens locally in your browser using the Canvas API. Your photos never leave your device — fully private.",
+      "All cropping happens locally in your browser using the Canvas API. Your photos never leave your device- fully private.",
   },
 ];
 
@@ -106,12 +106,12 @@ const steps = [
   {
     n: "1",
     title: "Drop your images",
-    desc: "Select one or multiple photos — JPG, PNG, WebP. Mix any format freely.",
+    desc: "Select one or multiple photos - JPG, PNG, WebP. Mix any format freely.",
   },
   {
     n: "2",
     title: "Pick a ratio",
-    desc: "Choose from presets like 1:1, 16:9, 4:5, 9:16 — or type your own custom ratio.",
+    desc: "Choose from presets like 1:1, 16:9, 4:5, 9:16- or type your own custom ratio.",
   },
   {
     n: "3",
@@ -135,7 +135,7 @@ export default function CropRatioPage() {
 
       <ToolHeader
         title="CropRatio"
-        description="Drop your images, pick a ratio — 1:1, 4:5, 9:16, 16:9 or custom. Drag the frame to position the crop, then download individually or as a ZIP. Everything runs in your browser."
+        description="Drop your images, pick a ratio- 1:1, 4:5, 9:16, 16:9 or custom. Drag the frame to position the crop, then download individually or as a ZIP. Everything runs in your browser."
         icon={Crop}
         accentColor="#EC4899"
       />
@@ -148,11 +148,11 @@ export default function CropRatioPage() {
         steps={[
           {
             title: "Drop your image",
-            desc: "Upload one or multiple JPG, PNG or WebP photos — drag and drop or click to browse.",
+            desc: "Upload one or multiple JPG, PNG or WebP photos- drag and drop or click to browse.",
           },
           {
             title: "Select ratio",
-            desc: "Choose a preset like 1:1 (Instagram), 16:9 (YouTube), 4:5, 9:16 (Stories/Reels) — or type any custom ratio you need.",
+            desc: "Choose a preset like 1:1 (Instagram), 16:9 (YouTube), 4:5, 9:16 (Stories/Reels)- or type any custom ratio you need.",
           },
           {
             title: "Adjust crop and download",
@@ -234,7 +234,7 @@ export default function CropRatioPage() {
                 name: "Does CropRatio upload my photos?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. All cropping happens locally in your browser using the Canvas API. Your images never leave your device — completely private, zero uploads.",
+                  text: "No. All cropping happens locally in your browser using the Canvas API. Your images never leave your device- completely private, zero uploads.",
                 },
               },
             ],
@@ -320,7 +320,7 @@ export default function CropRatioPage() {
               },
               {
                 q: "Does SammaPix upload my photos?",
-                a: "No. All cropping happens in your browser using the Canvas API. Your images never leave your device — no server, no upload, no data collection.",
+                a: "No. All cropping happens in your browser using the Canvas API. Your images never leave your device- no server, no upload, no data collection.",
               },
             ].map((faq) => (
               <div

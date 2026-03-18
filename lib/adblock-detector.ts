@@ -12,7 +12,7 @@ export async function detectAdBlock(): Promise<boolean> {
   if (cachedResult !== null) return cachedResult;
 
   try {
-    // Try fetching a known ad script URL — result is intentionally discarded
+    // Try fetching a known ad script URL- result is intentionally discarded
     // (opaque response from no-cors is sufficient to confirm no blocker)
     await fetch(
       "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Coins, ArrowRight, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
-// Package definitions — must match lib/credits.ts
+// Package definitions- must match lib/credits.ts
 // ---------------------------------------------------------------------------
 
 const PACKAGES = [
@@ -75,7 +75,7 @@ function BalanceDisplay({ balance, loading }: { balance: number | null; loading:
             </div>
           ) : balance === null || balance === 0 ? (
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-              No credits — buy some below.
+              No credits- buy some below.
             </p>
           ) : (
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">

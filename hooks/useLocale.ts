@@ -1,6 +1,6 @@
 "use client";
 
-// i18n system removed — site is English-only.
+// i18n system removed- site is English-only.
 // This hook is kept as a thin shim so legacy imports continue to compile.
 
 import { en, Dict } from "@/lib/i18n/translations";

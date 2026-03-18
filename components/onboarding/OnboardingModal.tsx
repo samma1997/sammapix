@@ -163,7 +163,7 @@ export default function OnboardingModal({ onClose }: OnboardingModalProps) {
                       : "text-[#737373] dark:text-[#A3A3A3]",
                   ].join(" ")}
                 >
-                  {/* Cast needed — lucide icons accept className/strokeWidth via SVGProps */}
+                  {/* Cast needed- lucide icons accept className/strokeWidth via SVGProps */}
                   <Icon
                     className="h-4 w-4"
                     strokeWidth={1.5}

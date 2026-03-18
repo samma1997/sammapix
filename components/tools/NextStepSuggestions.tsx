@@ -271,7 +271,7 @@ export default function NextStepSuggestions({
         })}
       </div>
 
-      {/* Pro workflow CTA — only shown to non-Pro users */}
+      {/* Pro workflow CTA- only shown to non-Pro users */}
       {!isPro && (
         <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-4">
           <Link

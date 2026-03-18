@@ -110,7 +110,7 @@ export default function TryProPage() {
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#6366F1]/10 dark:bg-[#6366F1]/20 text-[#6366F1] rounded-full text-xs font-medium mb-6">
             <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
-            Limited offer — up to 60 days free
+            Limited offer- up to 60 days free
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-5 leading-tight">
@@ -119,12 +119,12 @@ export default function TryProPage() {
 
           <p className="text-base sm:text-lg text-[#737373] dark:text-[#A3A3A3] max-w-xl mx-auto mb-8 leading-relaxed">
             Drop 100 photos. Get them compressed, renamed for SEO, resized for any
-            platform — in one click. Try free — 7 days monthly, 60 days annual.
+            platform- in one click. Try free- 7 days monthly, 60 days annual.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <CheckoutButton size="lg" className="w-full sm:w-auto gap-2 px-8 py-3 text-base">
-              Start free trial — $0 today
+              Start free trial- $0 today
             </CheckoutButton>
             <Link
               href="/tools"
@@ -315,7 +315,7 @@ export default function TryProPage() {
             20 tools. All included.
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-8">
-            Every tool works in your browser — no uploads, no installs.
+            Every tool works in your browser- no uploads, no installs.
           </p>
 
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1">
@@ -408,7 +408,7 @@ export default function TryProPage() {
           </div>
           <p className="flex items-center gap-1.5 mt-6 text-xs text-[#A3A3A3] dark:text-[#737373]">
             <Download className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-            Once registered, install SammaPix as a desktop app — works offline, launches instantly.
+            Once registered, install SammaPix as a desktop app- works offline, launches instantly.
           </p>
         </div>
       </section>
@@ -421,7 +421,7 @@ export default function TryProPage() {
               { title: "100% browser-based", desc: "Your images never leave your device. Zero server uploads.", Icon: Check, color: "text-[#16A34A]" },
               { title: "Cancel anytime", desc: "No contracts. Cancel in one click. Keep access until period ends.", Icon: Check, color: "text-[#16A34A]" },
               { title: "30-day money-back", desc: "Not happy? Full refund within 30 days, no questions asked.", Icon: Check, color: "text-[#16A34A]" },
-              { title: "Desktop app", desc: "Install SammaPix on your desktop — works offline, launches instantly.", Icon: Download, color: "text-[#6366F1]" },
+              { title: "Desktop app", desc: "Install SammaPix on your desktop- works offline, launches instantly.", Icon: Download, color: "text-[#6366F1]" },
             ].map(({ title, desc, Icon, color }) => (
               <div key={title} className="text-center">
                 <Icon className={`h-5 w-5 ${color} mx-auto mb-2`} strokeWidth={2} />
@@ -444,7 +444,7 @@ export default function TryProPage() {
           </p>
 
           <CheckoutButton size="lg" className="gap-2 px-8 py-3 text-base">
-            Start free trial — $0 today
+            Start free trial- $0 today
           </CheckoutButton>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#525252]">

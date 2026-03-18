@@ -34,7 +34,7 @@ Write ALL text in ${language}.
 
 Analyze this travel photo and provide:
 
-1. CAPTION: Short poetic caption in ${language} (max 8 words, no period). Format: "Place — poetic description". E.g. "Sigiriya — the lion rock at dawn"
+1. CAPTION: Short poetic caption in ${language} (max 8 words, no period). Format: "Place- poetic description". E.g. "Sigiriya- the lion rock at dawn"
 
 2. DESCRIPTION: Vivid, evocative 60-80 word description in ${language} for SEO. Present tense. Specific details about light, atmosphere, cultural/geographical context. No first-person.
 

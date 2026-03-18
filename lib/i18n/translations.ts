@@ -1,4 +1,4 @@
-// i18n system removed — site is English-only.
+// i18n system removed- site is English-only.
 // This file is kept as a thin shim in case any legacy import references it.
 
 export type Locale = "en";
@@ -71,7 +71,7 @@ export const en: Dict = {
   dropzone: {
     title: "Drop images here or",
     click: "click to upload",
-    subtitle: "PNG, JPG, WebP, GIF — up to 10MB each",
+    subtitle: "PNG, JPG, WebP, GIF- up to 10MB each",
   },
   toolbar: {
     quality: "Quality",
@@ -83,7 +83,7 @@ export const en: Dict = {
   },
   features: {
     compress_title: "Smart Compress",
-    compress_desc: "Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser — nothing uploaded.",
+    compress_desc: "Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser- nothing uploaded.",
     webp_title: "Convert to WebP",
     webp_desc: "Google's next-gen format. 30% smaller than JPEG with same quality.",
     ai_title: "AI Rename",
@@ -95,7 +95,7 @@ export const en: Dict = {
   },
   pro_banner: {
     title: "Need more? Go Pro.",
-    desc: "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads — all for $7/month.",
+    desc: "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $7/month.",
     cta: "View pricing",
   },
   nav: {

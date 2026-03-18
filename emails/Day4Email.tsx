@@ -153,7 +153,7 @@ export function Day4Email({ name }: Day4EmailProps) {
             >
               golden-retriever-puppy-park-sunset.webp
             </span>{" "}
-            gives Google a clear semantic signal — which affects both Google
+            gives Google a clear semantic signal- which affects both Google
             Image Search rankings and the overall topic relevance of your page.
           </Text>
 
@@ -173,7 +173,7 @@ export function Day4Email({ name }: Day4EmailProps) {
           <Section style={highlight}>
             <Text style={highlightText}>
               The alt text SammaPix generates is also ready to paste directly
-              into your CMS — no editing needed.
+              into your CMS- no editing needed.
             </Text>
           </Section>
 

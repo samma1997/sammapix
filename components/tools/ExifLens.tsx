@@ -566,7 +566,7 @@ export default function ExifLens() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Drop zone — click or drag photos to upload"
+          aria-label="Drop zone- click or drag photos to upload"
           className={[
             "border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors",
             isDragOver
@@ -604,11 +604,11 @@ export default function ExifLens() {
                 Drop photos or click to browse
               </p>
               <p className="text-xs text-[#737373]">
-                JPG, JPEG, HEIC, PNG — EXIF metadata read locally
+                JPG, JPEG, HEIC, PNG - EXIF metadata read locally
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              Your photos never leave your device — all processing happens in
+              Your photos never leave your device- all processing happens in
               your browser
             </p>
             {isPro ? (
@@ -752,19 +752,19 @@ export default function ExifLens() {
                       </div>
                       <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">All EXIF data</span>
                     </div>
-                    <p className="text-xs text-[#737373] pl-5.5">Complete clean — removes GPS, camera, date, everything.</p>
+                    <p className="text-xs text-[#737373] pl-5.5">Complete clean- removes GPS, camera, date, everything.</p>
                   </button>
                 </div>
               </div>
 
-              {/* HEIC warning banner — shown before first clean when HEIC files are present */}
+              {/* HEIC warning banner- shown before first clean when HEIC files are present */}
               {heicCount > 0 && !heicWarningDismissed && (
                 <div className="flex items-start justify-between gap-3 px-4 py-3 border border-[#FED7AA] bg-[#FFF7ED] rounded-md">
                   <div className="flex items-start gap-2">
                     <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0 mt-0.5" strokeWidth={1.5} />
                     <div>
                       <p className="text-xs font-medium text-[#92400E] mb-0.5">
-                        HEIC files take 15–30s each — please keep this tab open
+                        HEIC files take 15–30s each- please keep this tab open
                       </p>
                       <p className="text-xs text-[#B45309]">
                         {heicCount} HEIC file{heicCount !== 1 ? "s" : ""} detected. They will be converted to JPEG server-side before stripping EXIF. Output files will be saved as .jpg. Keep this tab open during processing.
@@ -781,7 +781,7 @@ export default function ExifLens() {
                 </div>
               )}
 
-              {/* Step 1: Remove button — shown before cleaning */}
+              {/* Step 1: Remove button- shown before cleaning */}
               {!isCleaned && (
                 <button
                   onClick={handleClean}
@@ -792,7 +792,7 @@ export default function ExifLens() {
                 </button>
               )}
 
-              {/* Step 2: Success banner + Download button — shown after cleaning */}
+              {/* Step 2: Success banner + Download button- shown after cleaning */}
               {isCleaned && (
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 px-4 py-3 bg-[#F0FDF4] dark:bg-[#0d2218] border border-[#BBF7D0] dark:border-[#166534] rounded-md">
@@ -818,7 +818,7 @@ export default function ExifLens() {
             </>
           )}
 
-          {/* File list — read-only, shows metadata */}
+          {/* File list- read-only, shows metadata */}
           <div className="space-y-3">
             {files.map((f) => (
               <ExifFileCard key={f.id} file={f} />

@@ -8,7 +8,7 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Batch Resize Images Free Online — Social Media Presets | SammaPix",
+  title: "Batch Resize Images Free Online - Social Media Presets | SammaPix",
   description:
     "Resize for Instagram, Twitter, LinkedIn, YouTube in seconds. Social presets, batch ZIP download, free online. Optimize now.",
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/resizepack`,
   },
   openGraph: {
-    title: "Batch Resize Images Free Online — Social Media Presets | SammaPix",
+    title: "Batch Resize Images Free Online - Social Media Presets | SammaPix",
     description:
       "Resize for Instagram, Twitter, LinkedIn, YouTube in seconds. Social presets, batch ZIP download, free online. Optimize now.",
     url: `${APP_URL}/tools/resizepack`,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 const features = [
   {
     icon: <Shield className="h-5 w-5 text-gray-700 dark:text-[#A3A3A3]" strokeWidth={1.5} />,
-    title: "Browser-based — 100% private",
+    title: "Browser-based- 100% private",
     description:
       "All resizing happens in your browser using the Canvas API. Your images are never uploaded to any server.",
   },
@@ -88,7 +88,7 @@ export default function ResizePackPage() {
         steps={[
           {
             title: "Drop your photos",
-            desc: "Upload JPG, PNG or WebP images — drag and drop or click to browse. Batch upload is supported.",
+            desc: "Upload JPG, PNG or WebP images- drag and drop or click to browse. Batch upload is supported.",
           },
           {
             title: "Select a platform preset",
@@ -140,16 +140,16 @@ export default function ResizePackPage() {
             What is ResizePack?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            ResizePack is a free browser-based batch image resizer. Resize multiple JPG, PNG, and WebP images at once — by exact pixel dimensions, percentage, or using built-in social media presets for Instagram, Twitter/X, LinkedIn, and YouTube. Download all resized images in a single ZIP archive.
+            ResizePack is a free browser-based batch image resizer. Resize multiple JPG, PNG, and WebP images at once- by exact pixel dimensions, percentage, or using built-in social media presets for Instagram, Twitter/X, LinkedIn, and YouTube. Download all resized images in a single ZIP archive.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            ResizePack includes 6 social media presets and supports cover and contain fit modes for precise cropping. All resizing runs in the browser using the Canvas API — no files are uploaded to any server.
+            ResizePack includes 6 social media presets and supports cover and contain fit modes for precise cropping. All resizing runs in the browser using the Canvas API- no files are uploaded to any server.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             How batch image resizing works
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            SammaPix resizes images using the browser&apos;s native Canvas API — no
+            SammaPix resizes images using the browser&apos;s native Canvas API- no
             server involved. Drop your images, choose pixel dimensions or a
             percentage scale, optionally lock the aspect ratio, and hit resize.
             All images are processed concurrently in your browser.
@@ -164,19 +164,19 @@ export default function ResizePackPage() {
           </h3>
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Before uploading to Instagram, Twitter/X or LinkedIn to meet platform requirements
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               Before adding to a website or CMS to improve page load speed
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               To generate thumbnails from high-resolution source images
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#6366F1] mt-0.5">—</span>
+              <span className="text-[#6366F1] mt-0.5"> - </span>
               To prepare photos for print at exact DPI targets (e.g. A4 at 300 dpi)
             </li>
           </ul>
@@ -256,7 +256,7 @@ export default function ResizePackPage() {
                 name: "Does resizing reduce image quality?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Resizing itself does not reduce quality — it only changes dimensions. However, resizing to much smaller sizes may cause some quality loss due to interpolation. If you're downsizing by more than 50%, consider using ResizePack's moderate compression settings to maintain quality.",
+                  text: "Resizing itself does not reduce quality- it only changes dimensions. However, resizing to much smaller sizes may cause some quality loss due to interpolation. If you're downsizing by more than 50%, consider using ResizePack's moderate compression settings to maintain quality.",
                 },
               },
               {
@@ -272,7 +272,7 @@ export default function ResizePackPage() {
                 name: "Are my images uploaded to a server?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. All resizing happens entirely in your browser using the Canvas API. Your images never leave your device — nothing is uploaded to any server.",
+                  text: "No. All resizing happens entirely in your browser using the Canvas API. Your images never leave your device- nothing is uploaded to any server.",
                 },
               },
             ],

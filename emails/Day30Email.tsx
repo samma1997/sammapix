@@ -123,7 +123,7 @@ export function Day30Email({ name }: Day30EmailProps) {
   return (
     <Html lang="en">
       <Head />
-      <Preview>1 month with SammaPix — a small thank you</Preview>
+      <Preview>1 month with SammaPix- a small thank you</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={logo}>
@@ -131,12 +131,12 @@ export function Day30Email({ name }: Day30EmailProps) {
           </Text>
 
           <Heading style={heading}>
-            1 month with SammaPix — a thank you (+ something for you)
+            1 month with SammaPix- a thank you (+ something for you)
           </Heading>
 
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
-            You signed up for SammaPix one month ago. I wanted to say —
+            You signed up for SammaPix one month ago. I wanted to say- 
             thank you.
           </Text>
           <Text style={body}>
@@ -163,13 +163,13 @@ export function Day30Email({ name }: Day30EmailProps) {
               <strong>What&apos;s coming next:</strong>
             </Text>
             <Text style={highlightItem}>
-              — Image resize (drag to set dimensions)
+             - Image resize (drag to set dimensions)
             </Text>
             <Text style={highlightItem}>
-              — Background remover (AI-powered)
+             - Background remover (AI-powered)
             </Text>
             <Text style={highlightItem}>
-              — SammaPix API for developers
+             - SammaPix API for developers
             </Text>
           </Section>
 
@@ -185,7 +185,7 @@ export function Day30Email({ name }: Day30EmailProps) {
             </Text>
             <Text style={promoCode}>EARLYBIRD</Text>
             <Text style={{ fontSize: "15px", fontWeight: "600" as const, color: "#171717", margin: "4px 0" }}>
-              20% off Pro — forever
+              20% off Pro- forever
             </Text>
             <Text style={promoLabel}>No expiry. Locked in for as long as you stay Pro.</Text>
           </Section>
@@ -196,7 +196,7 @@ export function Day30Email({ name }: Day30EmailProps) {
             </Button>
           </Section>
 
-          <Text style={signature}>Thanks again for being here. — Luca</Text>
+          <Text style={signature}>Thanks again for being here.- Luca</Text>
 
           <Text style={ps}>
             P.S. If you ever have feedback or ideas, just reply to this email.

@@ -72,14 +72,14 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
           {/* ── DropZone ── */}
           <DropZone />
 
-          {/* Settings toolbar — appare dopo upload */}
+          {/* Settings toolbar- appare dopo upload */}
           {hasFiles && (
             <div className="mt-3">
               <SettingsToolbar onAiRenameClick={() => handleAiRenameClick()} />
             </div>
           )}
 
-          {/* File list — appare dopo upload */}
+          {/* File list- appare dopo upload */}
           {hasFiles && (
             <div className="mt-3">
               <FileList onAiRename={handleAiRenameClick} />
@@ -92,23 +92,29 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
       {!hasFiles && (
         <section className="py-20 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <FeatureCard
-                icon={<Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                title="Smart Compress"
-                description="Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser — nothing uploaded."
-              />
-              <FeatureCard
-                icon={<FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                title="Convert to WebP"
-                description="Google's next-gen format. 30% smaller than JPEG with same quality."
-              />
-              <FeatureCard
-                icon={<Sparkles className="h-5 w-5 text-brand" strokeWidth={1.5} />}
-                title="AI Rename"
-                description="Gemini reads your image and generates an SEO-optimized filename + alt text."
-                highlight
-              />
+            <div className={cn("grid grid-cols-1 gap-6", defaultMode ? "sm:grid-cols-1 max-w-md mx-auto" : "sm:grid-cols-3")}>
+              {(!defaultMode || defaultMode === "compress") && (
+                <FeatureCard
+                  icon={<Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
+                  title="Smart Compress"
+                  description="Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser - nothing uploaded."
+                />
+              )}
+              {(!defaultMode || defaultMode === "webp") && (
+                <FeatureCard
+                  icon={<FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
+                  title="Convert to WebP"
+                  description="Google's next-gen format. 30% smaller than JPEG with same quality."
+                />
+              )}
+              {(!defaultMode || defaultMode === "ai-rename") && (
+                <FeatureCard
+                  icon={<Sparkles className="h-5 w-5 text-brand" strokeWidth={1.5} />}
+                  title="AI Rename"
+                  description="Gemini reads your image and generates an SEO-optimized filename + alt text."
+                  highlight
+                />
+              )}
             </div>
           </div>
         </section>
@@ -152,7 +158,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
               Need more? Go Pro.
             </h2>
             <p className="text-gray-500 dark:text-[#737373] mb-6 text-sm leading-relaxed">
-              Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads — all for $7/month.
+              Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $7/month.
             </p>
             <Link href="/pricing">
               <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#E5E5E5] transition-colors">
@@ -197,7 +203,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
         fileId={aiRenameFileId}
       />
 
-      {/* Pro Upsell Modal — AI rename daily limit */}
+      {/* Pro Upsell Modal - AI rename daily limit */}
       <ProUpsellModal
         open={aiUpsellOpen}
         onClose={() => setAiUpsellOpen(false)}

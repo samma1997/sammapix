@@ -5,8 +5,8 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Birme — Bulk Image Resize & Optimize Comparison 2026",
-  description: "SammaPix vs Birme for bulk image resizing and optimization. SammaPix adds WebP conversion, AI rename, EXIF removal, and compression — all browser-based and free.",
+  title: "SammaPix vs Birme - Bulk Image Resize & Optimize Comparison 2026",
+  description: "SammaPix vs Birme for bulk image resizing and optimization. SammaPix adds WebP conversion, AI rename, EXIF removal, and compression- all browser-based and free.",
   keywords: [
     "birme alternative",
     "bulk image resize free",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/birme`,
   },
   openGraph: {
-    title: "SammaPix vs Birme — Bulk Image Tools Comparison 2026",
-    description: "Birme is handy for bulk resizing. SammaPix does that and more — compression, WebP conversion, AI rename, EXIF removal — all free in-browser.",
+    title: "SammaPix vs Birme - Bulk Image Tools Comparison 2026",
+    description: "Birme is handy for bulk resizing. SammaPix does that and more- compression, WebP conversion, AI rename, EXIF removal- all free in-browser.",
     type: "website",
     url: `${APP_URL}/vs/birme`,
     images: [
@@ -71,13 +71,13 @@ export default function VsBirmePage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs Birme
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          Birme is a solid free tool for bulk image resizing. SammaPix covers everything Birme does — and adds compression, WebP conversion, AI-powered renaming, and EXIF removal in the same browser-based, no-upload workflow.
+          Birme is a solid free tool for bulk image resizing. SammaPix covers everything Birme does- and adds compression, WebP conversion, AI-powered renaming, and EXIF removal in the same browser-based, no-upload workflow.
         </p>
         <div className="mt-8">
           <Link href="/">
@@ -141,46 +141,46 @@ export default function VsBirmePage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <FileImage className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Birme resizes — SammaPix resizes AND optimizes
+              Birme resizes - SammaPix resizes AND optimizes
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Birme is purpose-built for resizing: set a target width, crop to aspect ratio, download. It does not compress the output or convert to WebP. SammaPix&apos;s ResizePack tool does everything Birme does, and the result can then be run through compression or WebP conversion in the same session. You leave with smaller, optimized files — not just resized ones.
+              Birme is purpose-built for resizing: set a target width, crop to aspect ratio, download. It does not compress the output or convert to WebP. SammaPix&apos;s ResizePack tool does everything Birme does, and the result can then be run through compression or WebP conversion in the same session. You leave with smaller, optimized files- not just resized ones.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Both are browser-based — but SammaPix is actively maintained
+              Both are browser-based- but SammaPix is actively maintained
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Both Birme and SammaPix process files in the browser without uploading them, which is excellent for privacy. The difference is development velocity — SammaPix ships new features regularly on a modern Next.js stack. Birme&apos;s development status is less clear, with infrequent updates. For a tool you rely on professionally, active maintenance matters.
+              Both Birme and SammaPix process files in the browser without uploading them, which is excellent for privacy. The difference is development velocity - SammaPix ships new features regularly on a modern Next.js stack. Birme&apos;s development status is less clear, with infrequent updates. For a tool you rely on professionally, active maintenance matters.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — turn bulk-resized files into SEO assets
+              AI rename- turn bulk-resized files into SEO assets
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              After resizing in Birme, your files still have names like <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">image_1_resized.jpg</code>. SammaPix&apos;s AI rename uses Google Gemini to analyze each image and generate a descriptive, keyword-rich filename automatically. For anyone publishing images to a website or e-commerce store, this is a direct SEO improvement — not just an optimization step.
+              After resizing in Birme, your files still have names like <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">image_1_resized.jpg</code>. SammaPix&apos;s AI rename uses Google Gemini to analyze each image and generate a descriptive, keyword-rich filename automatically. For anyone publishing images to a website or e-commerce store, this is a direct SEO improvement- not just an optimization step.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              WebP conversion — a format Birme doesn&apos;t output
+              WebP conversion- a format Birme doesn&apos;t output
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Birme outputs JPEG and PNG — it does not convert to WebP. WebP files are 25-34% smaller at comparable quality and improve Core Web Vitals scores. SammaPix converts any image to WebP in-browser for free, making it the better choice for anyone optimizing a website for speed.
+              Birme outputs JPEG and PNG- it does not convert to WebP. WebP files are 25-34% smaller at comparable quality and improve Core Web Vitals scores. SammaPix converts any image to WebP in-browser for free, making it the better choice for anyone optimizing a website for speed.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              EXIF removal — strip location data Birme leaves behind
+              EXIF removal- strip location data Birme leaves behind
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Birme preserves EXIF metadata in resized output files. That metadata can include GPS coordinates, camera model, and timestamps. SammaPix&apos;s EXIF Remover strips this data client-side before download. For photographers who publish location-sensitive images, this privacy feature is important — and Birme simply does not offer it.
+              Birme preserves EXIF metadata in resized output files. That metadata can include GPS coordinates, camera model, and timestamps. SammaPix&apos;s EXIF Remover strips this data client-side before download. For photographers who publish location-sensitive images, this privacy feature is important- and Birme simply does not offer it.
             </p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function VsBirmePage() {
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">Your image files still contain GPS or device metadata.</strong> SammaPix strips EXIF data before download — Birme does not.</span>
+            <span><strong className="text-gray-800">Your image files still contain GPS or device metadata.</strong> SammaPix strips EXIF data before download - Birme does not.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
@@ -219,14 +219,14 @@ export default function VsBirmePage() {
           <Link href="/tools/resizepack" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">ResizePack</p>
-              <p className="text-xs text-gray-500 mt-0.5">Bulk resize images by pixels or percentage — free</p>
+              <p className="text-xs text-gray-500 mt-0.5">Bulk resize images by pixels or percentage- free</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
           <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
               <p className="text-sm font-medium text-gray-900">Image Compressor</p>
-              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP — no upload required</p>
+              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP- no upload required</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
@@ -237,7 +237,7 @@ export default function VsBirmePage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Need more than just bulk resize?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          SammaPix resizes, compresses, converts, and renames — all free, all in-browser.
+          SammaPix resizes, compresses, converts, and renames- all free, all in-browser.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -252,14 +252,14 @@ export default function VsBirmePage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs Birme — Which Free Bulk Image Tool is Better in 2026?",
+            headline: "SammaPix vs Birme - Which Free Bulk Image Tool is Better in 2026?",
             description: "Detailed comparison between SammaPix and Birme for bulk image resizing, compression, and optimization.",
             author: { "@type": "Person", name: "Luca Sammarco" },
             publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL },
@@ -269,7 +269,7 @@ export default function VsBirmePage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -296,7 +296,7 @@ export default function VsBirmePage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -312,7 +312,7 @@ export default function VsBirmePage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

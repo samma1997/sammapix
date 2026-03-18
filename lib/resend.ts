@@ -7,7 +7,7 @@ export function getResend(): Resend {
   }
   return _resend;
 }
-// Keep named export for backwards compat — lazy proxy
+// Keep named export for backwards compat- lazy proxy
 export const resend = new Proxy({} as Resend, {
   get(_target, prop) {
     return (getResend() as unknown as Record<string | symbol, unknown>)[prop];

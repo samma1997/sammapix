@@ -6,14 +6,14 @@ import { getAllTrips } from "@/lib/destinations";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Portfolio — Luca Sammarco Photography",
+  title: "Portfolio - Luca Sammarco Photography",
   description:
     "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China. Curated travel photographs with stories from each journey.",
   alternates: {
     canonical: `${APP_URL}/portfolio`,
   },
   openGraph: {
-    title: "Portfolio — Luca Sammarco Photography",
+    title: "Portfolio - Luca Sammarco Photography",
     description:
       "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China.",
     url: `${APP_URL}/portfolio`,
@@ -28,7 +28,7 @@ export default function PortfolioPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    name: "Travel Photography Portfolio — Luca Sammarco",
+    name: "Travel Photography Portfolio - Luca Sammarco",
     description:
       "A curated collection of travel photographs organized by destination, covering Asia and beyond.",
     author: {
@@ -38,7 +38,7 @@ export default function PortfolioPage() {
     },
     hasPart: trips.map((t) => ({
       "@type": "ImageGallery",
-      name: `${t.destination} — ${new Date(t.startDate).getFullYear()}`,
+      name: `${t.destination}- ${new Date(t.startDate).getFullYear()}`,
       description: t.excerpt,
       url: `https://sammapix.com/portfolio/${t.slug}`,
       about: {
@@ -62,7 +62,7 @@ export default function PortfolioPage() {
       <div className="py-10 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
 
-          {/* Page header — minimal, stile Notion */}
+          {/* Page header- minimal, stile Notion */}
           <header className="mb-10">
             <h1 className="text-sm font-normal text-gray-400 lowercase tracking-wide">
               portfolio
@@ -70,7 +70,7 @@ export default function PortfolioPage() {
             <div className="mt-3 h-px bg-gray-100 w-full" />
           </header>
 
-          {/* Trip grid — fotografico, card con immagine e overlay testo */}
+          {/* Trip grid- fotografico, card con immagine e overlay testo */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {trips.map((trip) => (
               <TripCard key={trip.slug} trip={trip} />
@@ -83,7 +83,7 @@ export default function PortfolioPage() {
 }
 
 // -----------------------------------------------------------------------------
-// TripCard — solo foto di copertina con testo sovrapposto
+// TripCard- solo foto di copertina con testo sovrapposto
 // -----------------------------------------------------------------------------
 interface TripCardProps {
   trip: {

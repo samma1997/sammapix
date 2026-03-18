@@ -5,7 +5,7 @@ import { Check, X, ArrowRight, Zap, Sparkles, Globe } from "lucide-react";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs ImageOptim — Which Image Optimizer is Better in 2026?",
+  title: "SammaPix vs ImageOptim - Which Image Optimizer is Better in 2026?",
   description:
     "SammaPix vs ImageOptim: compare features, web vs desktop, AI capabilities, and batch processing. Find the best free image optimizer for your workflow.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/imageoptim`,
   },
   openGraph: {
-    title: "SammaPix vs ImageOptim — Honest Comparison 2026",
+    title: "SammaPix vs ImageOptim - Honest Comparison 2026",
     description:
       "ImageOptim is Mac-only. SammaPix works everywhere with WebP conversion and AI features. See the full comparison.",
     type: "website",
@@ -62,7 +62,7 @@ export default function VsImageOptimPage() {
       {/* Hero */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
-          Honest comparison — no sponsored ranking
+          Honest comparison- no sponsored ranking
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
           SammaPix vs ImageOptim
@@ -133,37 +133,37 @@ export default function VsImageOptimPage() {
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Globe className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              ImageOptim is Mac-only — SammaPix works everywhere
+              ImageOptim is Mac-only - SammaPix works everywhere
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ImageOptim is a native macOS application. If you&apos;re on Windows, Linux, ChromeOS, or a mobile device, it&apos;s simply not an option. SammaPix runs entirely in your browser — open the URL and it works instantly, on any operating system, with no download or installation required.
+              ImageOptim is a native macOS application. If you&apos;re on Windows, Linux, ChromeOS, or a mobile device, it&apos;s simply not an option. SammaPix runs entirely in your browser- open the URL and it works instantly, on any operating system, with no download or installation required.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              WebP conversion — ImageOptim doesn&apos;t support it
+              WebP conversion - ImageOptim doesn&apos;t support it
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ImageOptim compresses JPG, PNG, and GIF files but cannot convert them to WebP. WebP is 25-34% smaller than JPEG at equivalent quality and is now supported by all modern browsers. SammaPix converts any image to WebP in one click, entirely in-browser — no server upload required.
+              ImageOptim compresses JPG, PNG, and GIF files but cannot convert them to WebP. WebP is 25-34% smaller than JPEG at equivalent quality and is now supported by all modern browsers. SammaPix converts any image to WebP in one click, entirely in-browser- no server upload required.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
-              AI rename — ImageOptim has none
+              AI rename - ImageOptim has none
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_0042.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">red-ceramic-coffee-mug-wooden-table.webp</code> — automatically. ImageOptim has no equivalent feature; it only compresses, never renames.
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_0042.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">red-ceramic-coffee-mug-wooden-table.webp</code>- automatically. ImageOptim has no equivalent feature; it only compresses, never renames.
             </p>
           </div>
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
               <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
-              Where ImageOptim wins — lossless depth
+              Where ImageOptim wins- lossless depth
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ImageOptim chains multiple compression engines together — MozJPEG, Zopfli, SVGO, AdvPNG, Pngcrush — achieving some of the highest lossless compression ratios available. If you need the absolute maximum lossless optimization for a native Mac workflow and don&apos;t need WebP or AI, ImageOptim is hard to beat.
+              ImageOptim chains multiple compression engines together - MozJPEG, Zopfli, SVGO, AdvPNG, Pngcrush- achieving some of the highest lossless compression ratios available. If you need the absolute maximum lossless optimization for a native Mac workflow and don&apos;t need WebP or AI, ImageOptim is hard to beat.
             </p>
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function VsImageOptimPage() {
       <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
         <h2 className="text-xl font-semibold text-gray-900 mb-2">Need a web-based ImageOptim alternative?</h2>
         <p className="text-sm text-gray-500 mb-6">
-          SammaPix works on any device, converts to WebP, and renames your files with AI — free.
+          SammaPix works on any device, converts to WebP, and renames your files with AI- free.
         </p>
         <Link href="/">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
@@ -188,14 +188,14 @@ export default function VsImageOptimPage() {
         <SiteGroundBanner variant="web-hosting" />
       </div>
 
-      {/* Schema.org — Article */}
+      {/* Schema.org - Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: "SammaPix vs ImageOptim — Which Image Optimizer is Better in 2026?",
+            headline: "SammaPix vs ImageOptim - Which Image Optimizer is Better in 2026?",
             description:
               "SammaPix vs ImageOptim: compare features, web vs desktop, AI capabilities, and batch processing.",
             author: { "@type": "Person", name: "Luca Sammarco" },
@@ -206,7 +206,7 @@ export default function VsImageOptimPage() {
         }}
       />
 
-      {/* Schema.org — WebPage + ItemList comparison */}
+      {/* Schema.org - WebPage + ItemList comparison */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -222,7 +222,7 @@ export default function VsImageOptimPage() {
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | ImageOptim: Free" },
                 { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | ImageOptim: Yes" },
-                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes — browser-based | ImageOptim: Yes — desktop app" },
+                { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- browser-based | ImageOptim: Yes- desktop app" },
                 { "@type": "ListItem", "position": 4, name: "Platform availability", description: "SammaPix: Any OS, browser-based | ImageOptim: macOS only" },
                 { "@type": "ListItem", "position": 5, name: "WebP conversion", description: "SammaPix: Yes | ImageOptim: No" },
                 { "@type": "ListItem", "position": 6, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | ImageOptim: No" },
@@ -233,7 +233,7 @@ export default function VsImageOptimPage() {
         }}
       />
 
-      {/* Schema.org — BreadcrumbList */}
+      {/* Schema.org - BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -249,7 +249,7 @@ export default function VsImageOptimPage() {
         }}
       />
 
-      {/* Schema.org — FAQPage */}
+      {/* Schema.org - FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

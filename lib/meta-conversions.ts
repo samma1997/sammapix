@@ -1,5 +1,5 @@
 /**
- * Meta Conversions API — server-side event tracking.
+ * Meta Conversions API- server-side event tracking.
  * Sends events directly to Meta for better attribution (bypasses ad blockers).
  * Docs: https://developers.facebook.com/docs/marketing-api/conversions-api
  */
