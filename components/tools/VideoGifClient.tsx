@@ -145,10 +145,17 @@ export default function VideoGifClient() {
   const handleVideoLoaded = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
-    const dur = isFinite(video.duration) ? video.duration : 0;
-    setVideoDuration(dur);
-    setStartTime(0);
-    setEndTime(Math.min(dur, MAX_GIF_DURATION));
+    const dur = video.duration;
+    // Some videos (especially YouTube downloads) report Infinity or NaN
+    // at loadedmetadata. Wait for a valid finite duration.
+    if (!isFinite(dur) || dur <= 0) return;
+    setVideoDuration((prev) => {
+      // Only update if not already set (avoid resetting user's selection)
+      if (prev > 0) return prev;
+      setStartTime(0);
+      setEndTime(Math.min(dur, MAX_GIF_DURATION));
+      return dur;
+    });
   }, []);
 
   const togglePlay = useCallback(() => {
@@ -382,6 +389,8 @@ export default function VideoGifClient() {
                 preload="auto"
                 onLoadedMetadata={handleVideoLoaded}
                 onLoadedData={handleVideoLoaded}
+                onDurationChange={handleVideoLoaded}
+                onTimeUpdate={handleVideoLoaded}
                 onEnded={() => setIsPlaying(false)}
               />
               <button

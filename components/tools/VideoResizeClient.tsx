@@ -447,8 +447,11 @@ export default function VideoResizeClient() {
 
   const handleVideoLoaded = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
-    setVideoDimensions({ width: video.videoWidth, height: video.videoHeight });
+    if (!video || video.videoWidth === 0 || video.videoHeight === 0) return;
+    setVideoDimensions((prev) => {
+      if (prev) return prev; // already set
+      return { width: video.videoWidth, height: video.videoHeight };
+    });
   }, []);
 
   // ── FFmpeg processing ────────────────────────────────────────────────────────
@@ -614,6 +617,8 @@ export default function VideoResizeClient() {
             className="hidden"
             preload="auto"
             onLoadedMetadata={handleVideoLoaded}
+            onLoadedData={handleVideoLoaded}
+            onDurationChange={handleVideoLoaded}
           />
 
           {/* Preset grid */}
