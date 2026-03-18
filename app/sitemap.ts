@@ -70,6 +70,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/resizepack",
     "/tools/cull",
     "/tools/heic",
+    "/tools/weblift",
+    "/tools/blogdrop",
+    "/tools/instaprep",
+    "/tools/shopshot",
+    "/tools/cleandrop",
+    "/tools/pixship",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

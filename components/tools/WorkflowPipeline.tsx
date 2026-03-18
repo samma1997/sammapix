@@ -26,9 +26,13 @@ import {
 import Link from "next/link";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import { compressImage } from "@/lib/compress";
-import { convertToWebP } from "@/lib/webp-converter";
 import { cn } from "@/lib/utils";
+import {
+  runPipeline,
+  type PipelineStep as EnginePipelineStep,
+  type PipelineStepId,
+  type PipelineFileResult,
+} from "@/lib/pipeline-engine";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -231,111 +235,6 @@ function getPresetConfig(
   }
 }
 
-// ── Canvas resize helper ──────────────────────────────────────────────────────
-
-async function resizeImageBlob(
-  blob: Blob,
-  maxPx: number,
-  instagramFormat?: InstagramFormat
-): Promise<Blob> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const url = URL.createObjectURL(blob);
-
-    img.onload = () => {
-      let w = img.naturalWidth;
-      let h = img.naturalHeight;
-
-      if (instagramFormat === "portrait") {
-        // 1080x1350 — crop center
-        const targetW = 1080;
-        const targetH = 1350;
-        const canvas = document.createElement("canvas");
-        canvas.width = targetW;
-        canvas.height = targetH;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) { URL.revokeObjectURL(url); reject(new Error("Canvas unavailable")); return; }
-
-        const scaleX = targetW / w;
-        const scaleY = targetH / h;
-        const scale = Math.max(scaleX, scaleY);
-        const scaledW = w * scale;
-        const scaledH = h * scale;
-        const offsetX = (targetW - scaledW) / 2;
-        const offsetY = (targetH - scaledH) / 2;
-
-        const hasAlpha1 = /\/(png|webp|gif)$/i.test(blob.type);
-        if (!hasAlpha1) {
-          ctx.fillStyle = "#FFFFFF";
-          ctx.fillRect(0, 0, targetW, targetH);
-        }
-        ctx.drawImage(img, offsetX, offsetY, scaledW, scaledH);
-
-        canvas.toBlob((b) => {
-          URL.revokeObjectURL(url);
-          b ? resolve(b) : reject(new Error("Canvas toBlob returned null"));
-        }, blob.type || "image/jpeg", 0.92);
-        return;
-      }
-
-      // Standard max-side resize
-      if (w <= maxPx && h <= maxPx) {
-        URL.revokeObjectURL(url);
-        resolve(blob);
-        return;
-      }
-
-      const ratio = Math.min(maxPx / w, maxPx / h);
-      w = Math.round(w * ratio);
-      h = Math.round(h * ratio);
-
-      const canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) { URL.revokeObjectURL(url); reject(new Error("Canvas unavailable")); return; }
-
-      const hasAlpha2 = /\/(png|webp|gif)$/i.test(blob.type);
-      if (!hasAlpha2) {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0, 0, w, h);
-      }
-      ctx.drawImage(img, 0, 0, w, h);
-
-      canvas.toBlob((b) => {
-        URL.revokeObjectURL(url);
-        b ? resolve(b) : reject(new Error("Canvas toBlob returned null"));
-      }, blob.type || "image/jpeg", 0.92);
-    };
-
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Failed to load image")); };
-    img.src = url;
-  });
-}
-
-// ── AI Rename helper ──────────────────────────────────────────────────────────
-
-async function callAiRename(file: File): Promise<string> {
-  const formData = new FormData();
-  formData.append("file", file);
-
-  const res = await fetch("/api/ai/rename", {
-    method: "POST",
-    body: formData,
-    credentials: "include",
-  });
-
-  if (!res.ok) {
-    const json = (await res.json().catch(() => ({}))) as { error?: string };
-    throw new Error(json.error ?? `AI rename failed (${res.status})`);
-  }
-
-  const json = (await res.json()) as { name?: string; filename?: string };
-  const rawName = json.name ?? json.filename ?? file.name.replace(/\.[^.]+$/, "");
-  // Strip any extension the API may have returned
-  return rawName.replace(/\.[^.]+$/, "");
-}
-
 // ── Format bytes ──────────────────────────────────────────────────────────────
 
 function fmtBytes(b: number): string {
@@ -390,7 +289,7 @@ export default function WorkflowPipeline() {
     abortRef.current = false;
     setStep("processing");
 
-    const config = getPresetConfig(selectedPreset, instagramFormat);
+    const presetConfig = getPresetConfig(selectedPreset, instagramFormat);
     const preset = PRESETS.find((p) => p.id === selectedPreset)!;
 
     const buildSteps = (): PipelineStep[] =>
@@ -405,123 +304,128 @@ export default function WorkflowPipeline() {
     setFiles(initialEntries);
 
     let doneCount = 0;
-
-    // Process files sequentially to avoid memory spikes
     const updatedEntries = [...initialEntries];
 
-    for (let i = 0; i < updatedEntries.length; i++) {
-      if (abortRef.current) break;
+    // Helper to update step status in local state
+    const updateStep = (fileIndex: number, stepId: string, status: PipelineStepStatus, detail?: string) => {
+      const entry = { ...updatedEntries[fileIndex] };
+      entry.steps = entry.steps.map((s) =>
+        s.id === stepId ? { ...s, status, detail: detail ?? s.detail } : s
+      );
+      updatedEntries[fileIndex] = entry;
+      setFiles([...updatedEntries]);
+    };
 
-      const entry = { ...updatedEntries[i] };
+    const markFileRunning = (fileIndex: number) => {
+      const entry = { ...updatedEntries[fileIndex] };
       entry.overallStatus = "running";
-      updatedEntries[i] = entry;
+      updatedEntries[fileIndex] = entry;
       setFiles([...updatedEntries]);
+    };
 
-      let currentBlob: Blob = entry.file;
-      let currentName = entry.name.replace(/\.[^.]+$/, "");
-      let ext = entry.name.split(".").pop() ?? "jpg";
-      let stepError = false;
+    // Build engine steps from the preset definition
+    const engineSteps: EnginePipelineStep[] = preset.steps.map((s) => ({
+      id: s.id as PipelineStepId,
+      enabled: true,
+      settings: {
+        quality: presetConfig.compressQuality,
+        maxWidthOrHeight: 4096,
+        maxPx: presetConfig.resizeMaxPx,
+        instagramFormat: presetConfig.instagramFormat,
+        webpQuality: 0.85,
+        locale: "en",
+      },
+    }));
 
-      const updateStep = (stepId: string, status: PipelineStepStatus, detail?: string) => {
-        const updatedSteps = entry.steps.map((s) =>
-          s.id === stepId ? { ...s, status, detail: detail ?? s.detail } : s
-        );
-        entry.steps = updatedSteps;
-        updatedEntries[i] = { ...entry };
+    // Track which file is currently being processed so progress callbacks
+    // can mark it as "running" on first contact
+    const fileStarted = new Set<number>();
+
+    await runPipeline({
+      steps: engineSteps,
+      files: files.map((f) => f.file),
+      abortRef,
+
+      onFileProgress: (fileIndex, stepId, progress) => {
+        if (!fileStarted.has(fileIndex)) {
+          fileStarted.add(fileIndex);
+          markFileRunning(fileIndex);
+        }
+
+        if (progress === 0) {
+          // Step just started
+          updateStep(fileIndex, stepId, "running");
+        } else if (progress === -1) {
+          // Step was skipped (non-fatal, e.g. AI rename failure)
+          updateStep(fileIndex, stepId, "skipped", "Skipped (API error)");
+        } else if (progress === 100) {
+          // Step completed — detail is set in onFileComplete for compress
+          const detail = getStepDetail(stepId, presetConfig);
+          updateStep(fileIndex, stepId, "done", detail);
+        }
+      },
+
+      onFileComplete: (fileIndex, result: PipelineFileResult) => {
+        const entry = { ...updatedEntries[fileIndex] };
+        entry.outputBlob = result.blob;
+        entry.outputName = result.name;
+        entry.overallStatus = "done";
+        entry.savedPercent = result.savedPercent;
+
+        // Update compress step detail with actual saved percent
+        if (result.savedPercent !== undefined) {
+          entry.steps = entry.steps.map((s) =>
+            s.id === "compress" ? { ...s, detail: `−${result.savedPercent}%` } : s
+          );
+        }
+
+        // Update ai-rename step detail with the new filename
+        if (result.altText || result.name !== files[fileIndex].name) {
+          const aiName = result.name.replace(/\.[^.]+$/, "");
+          entry.steps = entry.steps.map((s) =>
+            s.id === "ai-rename" && s.status === "done"
+              ? { ...s, detail: aiName.length > 28 ? `${aiName.slice(0, 28)}…` : aiName }
+              : s
+          );
+        }
+
+        updatedEntries[fileIndex] = entry;
+        doneCount++;
+        setOverallProgress(Math.round((doneCount / updatedEntries.length) * 100));
         setFiles([...updatedEntries]);
-      };
+      },
 
-      // ── Step: compress ────────────────────────────────────────────────────
-      if (preset.steps.some((s) => s.id === "compress") && !stepError) {
-        updateStep("compress", "running");
-        try {
-          const result = await compressImage(
-            new File([currentBlob], `${currentName}.${ext}`, { type: currentBlob.type || entry.file.type }),
-            {
-              quality: config.compressQuality,
-              convertToWebP: false,
-              maxWidthOrHeight: 4096,
-            }
-          );
-          currentBlob = result.blob;
-          updateStep("compress", "done", `−${result.savedPercent}%`);
-          entry.savedPercent = result.savedPercent;
-        } catch (err) {
-          updateStep("compress", "error", (err as Error).message);
-          stepError = true;
-        }
-      }
+      onFileError: (fileIndex, error) => {
+        const entry = { ...updatedEntries[fileIndex] };
+        entry.overallStatus = "error";
+        entry.errorMessage = error;
 
-      // ── Step: resize ──────────────────────────────────────────────────────
-      if (preset.steps.some((s) => s.id === "resize") && !stepError) {
-        updateStep("resize", "running");
-        try {
-          currentBlob = await resizeImageBlob(
-            currentBlob,
-            config.resizeMaxPx,
-            config.instagramFormat
-          );
-          updateStep("resize", "done", `≤${config.resizeMaxPx}px`);
-        } catch (err) {
-          updateStep("resize", "error", (err as Error).message);
-          stepError = true;
-        }
-      }
+        // Mark the currently running step as errored
+        entry.steps = entry.steps.map((s) =>
+          s.status === "running" ? { ...s, status: "error" as PipelineStepStatus, detail: error } : s
+        );
 
-      // ── Step: ai-rename ───────────────────────────────────────────────────
-      if (preset.steps.some((s) => s.id === "ai-rename") && !stepError) {
-        updateStep("ai-rename", "running");
-        try {
-          // Create a File from current blob for the API
-          const tmpFile = new File(
-            [entry.file],
-            `${currentName}.${ext}`,
-            { type: entry.file.type }
-          );
-          const aiName = await callAiRename(tmpFile);
-          currentName = aiName;
-          updateStep("ai-rename", "done", aiName.length > 28 ? `${aiName.slice(0, 28)}…` : aiName);
-        } catch (err) {
-          // AI rename failure is non-fatal — keep original name and mark skipped
-          updateStep("ai-rename", "skipped", "Skipped (API error)");
-        }
-      }
-
-      // ── Step: webp ────────────────────────────────────────────────────────
-      if (preset.steps.some((s) => s.id === "webp") && !stepError) {
-        updateStep("webp", "running");
-        try {
-          const webpBlob = await convertToWebP(
-            new File([currentBlob], `${currentName}.jpg`, { type: "image/jpeg" }),
-            0.85
-          );
-          currentBlob = webpBlob;
-          ext = "webp";
-          updateStep("webp", "done", "WebP");
-        } catch (err) {
-          updateStep("webp", "error", (err as Error).message);
-          stepError = true;
-        }
-      }
-
-      // ── Finalise entry ────────────────────────────────────────────────────
-      entry.outputBlob = currentBlob;
-      entry.outputName = `${currentName}.${ext}`;
-      entry.overallStatus = stepError ? "error" : "done";
-
-      if (stepError) {
-        const failedStep = entry.steps.find((s) => s.status === "error");
-        entry.errorMessage = failedStep?.detail ?? "Pipeline error";
-      }
-
-      updatedEntries[i] = { ...entry };
-      doneCount++;
-      setOverallProgress(Math.round((doneCount / updatedEntries.length) * 100));
-      setFiles([...updatedEntries]);
-    }
+        updatedEntries[fileIndex] = entry;
+        doneCount++;
+        setOverallProgress(Math.round((doneCount / updatedEntries.length) * 100));
+        setFiles([...updatedEntries]);
+      },
+    });
 
     setStep("done");
   };
+
+  /** Map step IDs to human-readable detail strings for the UI */
+  function getStepDetail(stepId: PipelineStepId, cfg: PresetConfig): string | undefined {
+    switch (stepId) {
+      case "resize":
+        return `≤${cfg.resizeMaxPx}px`;
+      case "webp":
+        return "WebP";
+      default:
+        return undefined;
+    }
+  }
 
   const handleDownloadAll = async () => {
     const doneFiles = files.filter((f) => f.overallStatus === "done" && f.outputBlob);
