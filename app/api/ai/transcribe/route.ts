@@ -360,8 +360,17 @@ Rules:
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("[ai/transcribe] Error:", message);
+
+    // Gemini may reject large files or return non-JSON for unsupported content
+    if (message.includes("too large") || message.includes("payload") || message.includes("413")) {
+      return NextResponse.json(
+        { error: "File too large for AI processing. Try a file under 25 MB, or trim the video to under 5 minutes.", code: "FILE_TOO_LARGE" },
+        { status: 413 }
+      );
+    }
+
     return NextResponse.json(
-      { error: "AI transcription failed", code: "AI_ERROR" },
+      { error: "AI transcription failed. Try a shorter or smaller file.", code: "AI_ERROR" },
       { status: 500 }
     );
   }

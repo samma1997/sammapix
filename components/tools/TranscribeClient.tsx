@@ -197,7 +197,8 @@ export default function TranscribeClient() {
 
       clearTimeout(timeoutId);
 
-      const data = (await res.json()) as {
+      const text = await res.text();
+      let data: {
         data?: TranscriptResult;
         minutesRemaining?: number;
         minutesLimit?: number;
@@ -205,6 +206,19 @@ export default function TranscribeClient() {
         error?: string;
         code?: string;
       };
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        // Server returned non-JSON (e.g. Vercel 413 "Request Entity Too Large")
+        if (res.status === 413 || text.includes("Request Entity Too Large") || text.includes("Request En")) {
+          setError("File too large. Try a file under 25 MB or trim the video.");
+        } else {
+          setError(`Server error (${res.status}). Try a smaller file.`);
+        }
+        setStatus("error");
+        return;
+      }
 
       if (!res.ok) {
         const msg =
