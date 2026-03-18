@@ -16,7 +16,6 @@ import {
   Clock,
   RotateCcw,
 } from "lucide-react";
-import MiniGame from "@/components/ui/MiniGame";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -408,21 +407,13 @@ export default function TranscribeClient() {
             </button>
           )}
 
-          {/* Processing state with mini-game */}
+          {/* Processing state */}
           {isProcessing && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-center gap-2 py-3">
-                <Loader2 className="h-4 w-4 animate-spin text-[#6366F1]" strokeWidth={1.5} />
-                <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-                  {status === "uploading" ? "Uploading..." : "Transcribing with AI — this may take a minute..."}
-                </span>
-              </div>
-              <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] p-3">
-                <p className="text-[10px] text-[#A3A3A3] text-center mb-2 uppercase tracking-wide">
-                  Play while you wait
-                </p>
-                <MiniGame />
-              </div>
+            <div className="flex items-center justify-center gap-2 py-6">
+              <Loader2 className="h-4 w-4 animate-spin text-[#6366F1]" strokeWidth={1.5} />
+              <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
+                {status === "uploading" ? "Uploading..." : "Transcribing with AI — this may take a minute..."}
+              </span>
             </div>
           )}
 
