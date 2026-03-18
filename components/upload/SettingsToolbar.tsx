@@ -24,9 +24,10 @@ interface SettingsToolbarProps {
   onAiRenameClick?: () => void;
   showWebPToggle?: boolean;
   showAiToggle?: boolean;
+  mode?: "compress" | "webp" | "ai-rename";
 }
 
-export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = false, showAiToggle = false }: SettingsToolbarProps) {
+export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = false, showAiToggle = false, mode = "compress" }: SettingsToolbarProps) {
   const {
     settings,
     isProcessing,
@@ -60,18 +61,43 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
   return (
     <div className="animate-slide-down border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] p-4">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        {/* Quality slider */}
-        <div className="flex-1 min-w-[160px]">
-          <Slider
-            label="Quality"
-            showValue
-            min={1}
-            max={100}
-            step={1}
-            value={[settings.quality]}
-            onValueChange={(val) => setQuality(val[0])}
-          />
-        </div>
+        {/* Quality slider - hidden for AI Rename (no compression) */}
+        {mode !== "ai-rename" && (
+          <div className="flex-1 min-w-[160px]">
+            <Slider
+              label="Quality"
+              showValue
+              min={1}
+              max={100}
+              step={1}
+              value={[settings.quality]}
+              onValueChange={(val) => setQuality(val[0])}
+            />
+          </div>
+        )}
+
+        {/* Language selector - shown for AI Rename */}
+        {mode === "ai-rename" && (
+          <div className="flex items-center gap-1.5 flex-1">
+            <Globe className="h-3.5 w-3.5 text-[#737373]" strokeWidth={1.5} />
+            <select
+              value={settings.aiRenameLocale}
+              onChange={(e) => setAiRenameLocale(e.target.value)}
+              className="text-xs bg-transparent border border-gray-200 dark:border-[#2A2A2A] rounded px-2 py-1.5 text-gray-600 dark:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1] cursor-pointer"
+            >
+              {AI_RENAME_LANGUAGES.map((lang) => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.flag} {lang.label}
+                </option>
+              ))}
+            </select>
+            {session && (
+              <span className="text-xs text-[#A3A3A3] ml-2">
+                {remaining}/{AI_RENAME_FREE_PER_DAY} remaining
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Toggles */}
         <div className="flex items-center gap-3 flex-wrap">
@@ -170,16 +196,12 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
           loading={isProcessing}
           onClick={processAll}
         >
-          {isProcessing ? (
-            "..."
-          ) : allDone ? (
-            "Compress all"
-          ) : (
-            <>
-              <Zap className="h-4 w-4" strokeWidth={1.5} />
-              Compress all
-            </>
-          )}
+          {(() => {
+            const label = mode === "webp" ? "Convert all" : mode === "ai-rename" ? "Rename all" : "Compress all";
+            if (isProcessing) return "...";
+            if (allDone) return label;
+            return <><Zap className="h-4 w-4" strokeWidth={1.5} />{label}</>;
+          })()}
         </Button>
       </div>
     </div>

@@ -492,7 +492,18 @@ export default function ResizePack() {
   const [percentage, setPercentage] = useState<number>(50);
 
   // Crop state
-  const [cropOffset, setCropOffset] = useState<CropOffset>({ x: 0.5, y: 0.5 });
+  const [cropOffsets, setCropOffsets] = useState<CropOffset[]>([]);
+  const [cropIndex, setCropIndex] = useState(0);
+
+  // Convenience: current offset for active image
+  const cropOffset = cropOffsets[cropIndex] ?? { x: 0.5, y: 0.5 };
+  const setCropOffset = (offset: CropOffset) => {
+    setCropOffsets((prev) => {
+      const next = [...prev];
+      next[cropIndex] = offset;
+      return next;
+    });
+  };
   const cropPreviewUrlRef = useRef<string | null>(null);
   const [cropPreviewUrl, setCropPreviewUrl] = useState<string | null>(null);
 
@@ -644,14 +655,14 @@ export default function ResizePack() {
   // ── Enter crop step ───────────────────────────────────────────────────────
   const handleEnterCrop = useCallback(() => {
     if (pendingFiles.length === 0) return;
-    // Revoca eventuale URL precedente
-    if (cropPreviewUrlRef.current) {
-      URL.revokeObjectURL(cropPreviewUrlRef.current);
-    }
+    // Initialize per-image offsets
+    setCropOffsets(pendingFiles.map(() => ({ x: 0.5, y: 0.5 })));
+    setCropIndex(0);
+    // Show first image preview
+    if (cropPreviewUrlRef.current) URL.revokeObjectURL(cropPreviewUrlRef.current);
     const url = URL.createObjectURL(pendingFiles[0].file);
     cropPreviewUrlRef.current = url;
     setCropPreviewUrl(url);
-    setCropOffset({ x: 0.5, y: 0.5 });
     setUiState("crop");
   }, [pendingFiles]);
 
@@ -662,34 +673,21 @@ export default function ResizePack() {
       setProcessingDone(0);
       setUiState("processing");
 
-      const offsetX = useCustomOffset ? cropOffset.x : 0.5;
-      const offsetY = useCustomOffset ? cropOffset.y : 0.5;
-
       const tasks = pendingFiles.map(
-        ({ file, originalW, originalH }) =>
+        ({ file, originalW, originalH }, fileIndex) =>
           async (): Promise<ResizeEntry> => {
             try {
+              const perImageOffset = useCustomOffset ? (cropOffsets[fileIndex] ?? { x: 0.5, y: 0.5 }) : { x: 0.5, y: 0.5 };
               let targetW: number;
               let targetH: number;
 
-              if (mode === "percentage") {
-                targetW = Math.max(
-                  1,
-                  Math.round((originalW * percentage) / 100)
-                );
-                targetH = Math.max(
-                  1,
-                  Math.round((originalH * percentage) / 100)
-                );
+              if (lockAspect) {
+                const ratio = originalH / originalW;
+                targetW = widthVal;
+                targetH = Math.round(widthVal * ratio);
               } else {
-                if (lockAspect) {
-                  const ratio = originalH / originalW;
-                  targetW = widthVal;
-                  targetH = Math.round(widthVal * ratio);
-                } else {
-                  targetW = widthVal;
-                  targetH = heightVal;
-                }
+                targetW = widthVal;
+                targetH = heightVal;
               }
 
               const blob = await resizeImage(
@@ -697,8 +695,8 @@ export default function ResizePack() {
                 targetW,
                 targetH,
                 fitMode,
-                offsetX,
-                offsetY
+                perImageOffset.x,
+                perImageOffset.y
               );
               const previewUrl = URL.createObjectURL(blob);
               blobUrlsRef.current.add(previewUrl);
@@ -738,13 +736,11 @@ export default function ResizePack() {
     },
     [
       pendingFiles,
-      mode,
       fitMode,
-      percentage,
       lockAspect,
       widthVal,
       heightVal,
-      cropOffset,
+      cropOffsets,
     ]
   );
 
@@ -798,7 +794,8 @@ export default function ResizePack() {
       cropPreviewUrlRef.current = null;
     }
     setCropPreviewUrl(null);
-    setCropOffset({ x: 0.5, y: 0.5 });
+    setCropOffsets([]);
+    setCropIndex(0);
     setPendingFiles([]);
     setEntries([]);
     setProcessingDone(0);
@@ -913,36 +910,6 @@ export default function ResizePack() {
 
           <div className="p-6 space-y-6">
 
-            {/* Mode toggle */}
-            <div>
-              <p className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide mb-3">
-                Resize mode
-              </p>
-              <div className="inline-flex rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden">
-                <button
-                  onClick={() => setMode("pixel")}
-                  className={[
-                    "px-4 py-2 text-sm transition-colors",
-                    mode === "pixel"
-                      ? "bg-[#171717] text-white dark:bg-white dark:text-[#171717]"
-                      : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]",
-                  ].join(" ")}
-                >
-                  Pixel
-                </button>
-                <button
-                  onClick={() => setMode("percentage")}
-                  className={[
-                    "px-4 py-2 text-sm border-l border-[#E5E5E5] dark:border-[#2A2A2A] transition-colors",
-                    mode === "percentage"
-                      ? "bg-[#171717] text-white dark:bg-white dark:text-[#171717]"
-                      : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]",
-                  ].join(" ")}
-                >
-                  Percentage
-                </button>
-              </div>
-            </div>
 
             {/* Pixel mode */}
             {mode === "pixel" && (
@@ -1048,50 +1015,9 @@ export default function ResizePack() {
               </div>
             )}
 
-            {/* Percentage mode */}
-            {mode === "percentage" && (
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="range"
-                    min={1}
-                    max={200}
-                    value={percentage}
-                    onChange={(e) => setPercentage(Number(e.target.value))}
-                    className="flex-1 accent-[#171717]"
-                  />
-                  <div className="flex items-center gap-1">
-                    <input
-                      type="number"
-                      min={1}
-                      max={200}
-                      value={percentage}
-                      onChange={(e) =>
-                        setPercentage(
-                          Math.min(200, Math.max(1, Number(e.target.value)))
-                        )
-                      }
-                      className="w-16 px-2 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md focus:outline-none focus:border-[#6366F1] text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#252525] text-center"
-                    />
-                    <span className="text-sm text-[#737373]">%</span>
-                  </div>
-                </div>
-                {pendingFiles.length > 0 && (
-                  <p className="text-[11px] text-[#A3A3A3]">
-                    Each image will be resized to {percentage}% of its
-                    original dimensions.
-                    {percentage < 100
-                      ? " Images will shrink."
-                      : percentage > 100
-                      ? " Images will grow."
-                      : " No change in size."}
-                  </p>
-                )}
-              </div>
-            )}
 
             {/* Fit mode- solo in pixel mode con lock OFF */}
-            {mode === "pixel" && !lockAspect && (
+            {!lockAspect && (
               <div>
                 <p className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide mb-3">
                   Fit mode
@@ -1177,13 +1103,51 @@ export default function ResizePack() {
           </div>
 
           <div className="p-6 space-y-6">
-            {/* Info */}
-            <p className="text-[12px] text-[#737373]">
-              The target size ({widthVal}&times;{heightVal}) has a different
-              ratio than the original image. Drag the frame to choose which
-              area to keep. This offset will be applied to all{" "}
-              {pendingFiles.length} photo
-              {pendingFiles.length !== 1 ? "s" : ""}.
+            {/* Image navigation */}
+            <div className="flex items-center justify-between">
+              <p className="text-[12px] text-[#737373]">
+                Position crop for each image ({cropIndex + 1} of {pendingFiles.length})
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    if (cropIndex > 0) {
+                      const newIdx = cropIndex - 1;
+                      setCropIndex(newIdx);
+                      if (cropPreviewUrlRef.current) URL.revokeObjectURL(cropPreviewUrlRef.current);
+                      const url = URL.createObjectURL(pendingFiles[newIdx].file);
+                      cropPreviewUrlRef.current = url;
+                      setCropPreviewUrl(url);
+                    }
+                  }}
+                  disabled={cropIndex === 0}
+                  className="px-3 py-1.5 text-xs border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md disabled:opacity-30 hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
+                >
+                  Prev
+                </button>
+                <span className="text-xs font-mono text-[#737373]">{cropIndex + 1}/{pendingFiles.length}</span>
+                <button
+                  onClick={() => {
+                    if (cropIndex < pendingFiles.length - 1) {
+                      const newIdx = cropIndex + 1;
+                      setCropIndex(newIdx);
+                      if (cropPreviewUrlRef.current) URL.revokeObjectURL(cropPreviewUrlRef.current);
+                      const url = URL.createObjectURL(pendingFiles[newIdx].file);
+                      cropPreviewUrlRef.current = url;
+                      setCropPreviewUrl(url);
+                    }
+                  }}
+                  disabled={cropIndex >= pendingFiles.length - 1}
+                  className="px-3 py-1.5 text-xs border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md disabled:opacity-30 hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+
+            {/* File name */}
+            <p className="text-[11px] text-[#A3A3A3] truncate">
+              {pendingFiles[cropIndex]?.file.name}
             </p>
 
             {/* CropPreview */}
@@ -1191,8 +1155,8 @@ export default function ResizePack() {
               <div className="flex justify-center">
                 <CropPreview
                   previewUrl={cropPreviewUrl}
-                  originalW={pendingFiles[0].originalW}
-                  originalH={pendingFiles[0].originalH}
+                  originalW={pendingFiles[cropIndex]?.originalW ?? pendingFiles[0].originalW}
+                  originalH={pendingFiles[cropIndex]?.originalH ?? pendingFiles[0].originalH}
                   targetW={widthVal}
                   targetH={heightVal}
                   offset={cropOffset}
@@ -1208,13 +1172,13 @@ export default function ResizePack() {
                 disabled={pendingFiles.length === 0}
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Resize now- apply to all photos
+                Resize all with custom crops
               </button>
               <button
                 onClick={() => handleResize(false)}
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] text-sm rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
               >
-                Use center crop instead
+                Use center crop for all
               </button>
             </div>
           </div>
