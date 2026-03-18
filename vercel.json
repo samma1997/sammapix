@@ -1,5 +1,15 @@
 {
   "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" = \"develop\" ] && exit 1 || exit 0",
+  "functions": {
+    "app/api/heic-convert/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "app/api/heic-preview/route.ts": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/email-drip",

@@ -385,6 +385,10 @@ export default function HeicConverter() {
       setFiles([...updated]);
 
       try {
+        // Vercel has a 4.5MB request body limit
+        if (f.original.size > 4.5 * 1024 * 1024) {
+          throw new Error("File too large (max 4.5 MB)");
+        }
         const blob = await convertSingleFile(f.original, outputFormat, quality);
         updated[i] = {
           ...updated[i],
@@ -393,10 +397,14 @@ export default function HeicConverter() {
           outputFormat,
         };
       } catch (err) {
+        const rawMsg = err instanceof Error ? err.message : "Conversion failed";
+        const errorMessage = rawMsg.includes("413") || rawMsg.includes("too large")
+          ? "Too large (max 4.5 MB per file)"
+          : rawMsg;
         updated[i] = {
           ...updated[i],
           status: "error",
-          errorMessage: err instanceof Error ? err.message : "Conversion failed",
+          errorMessage,
         };
       }
 
