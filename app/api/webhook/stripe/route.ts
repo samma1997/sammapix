@@ -6,6 +6,48 @@ import { addCredits } from "@/lib/credits";
 
 export const runtime = "nodejs";
 
+// ---------------------------------------------------------------------------
+// Idempotency — prevent duplicate event processing via Redis
+// ---------------------------------------------------------------------------
+const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+const EVENT_TTL_SECONDS = 60 * 60 * 24; // 24 hours
+
+async function isEventProcessed(eventId: string): Promise<boolean> {
+  if (!REDIS_URL || !REDIS_TOKEN) return false; // No Redis → skip dedup
+  try {
+    const res = await fetch(REDIS_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${REDIS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(["GET", `stripe_event:${eventId}`]),
+    });
+    if (!res.ok) return false;
+    const data = (await res.json()) as { result: string | null };
+    return data.result !== null;
+  } catch {
+    return false;
+  }
+}
+
+async function markEventProcessed(eventId: string): Promise<void> {
+  if (!REDIS_URL || !REDIS_TOKEN) return;
+  try {
+    await fetch(REDIS_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${REDIS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(["SET", `stripe_event:${eventId}`, "1", "EX", EVENT_TTL_SECONDS]),
+    });
+  } catch {
+    // Best-effort — if Redis fails, we still process the event
+  }
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = req.headers.get("stripe-signature");
@@ -38,6 +80,12 @@ export async function POST(req: NextRequest) {
     const msg = err instanceof Error ? err.message : "Unknown error";
     console.error("[stripe/webhook] Signature verification failed:", msg);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+  }
+
+  // Idempotency check — skip already-processed events
+  if (await isEventProcessed(event.id)) {
+    console.log("[stripe/webhook] Duplicate event skipped:", event.id);
+    return NextResponse.json({ received: true });
   }
 
   switch (event.type) {
@@ -93,6 +141,9 @@ export async function POST(req: NextRequest) {
     default:
       break;
   }
+
+  // Mark event as processed for idempotency
+  await markEventProcessed(event.id);
 
   return NextResponse.json({ received: true });
 }

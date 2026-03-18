@@ -239,7 +239,7 @@ export default function PricingPage() {
               ))}
             </ul>
 
-            <CheckoutButton size="md" className="w-full gap-1 mb-3">
+            <CheckoutButton size="md" className="w-full gap-1 mb-3" plan={annual ? "annual" : "monthly"}>
               Start free trial
             </CheckoutButton>
             <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373]">

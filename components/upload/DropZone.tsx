@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { Upload, ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ACCEPTED_MIME_TYPES, MAX_FILE_SIZE_FREE, MAX_FILES_FREE } from "@/lib/constants";
+import { ACCEPTED_MIME_TYPES, PLAN_LIMITS } from "@/lib/constants";
 import { isValidImageFile } from "@/lib/utils";
 import { useImageStore } from "@/store/imageStore";
+import { useSession } from "next-auth/react";
 
 interface DropZoneProps {
   onFilesAdded?: (files: File[]) => void;
@@ -15,26 +16,32 @@ interface DropZoneProps {
 
 export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
   const { addFiles, items } = useImageStore();
+  const { data: session } = useSession();
+
+  const plan = (session?.user as { plan?: string } | undefined)?.plan ?? "free";
+  const limits = useMemo(() => PLAN_LIMITS[plan] ?? PLAN_LIMITS.free, [plan]);
+  const maxFiles = limits.maxFiles;
+  const maxFileSize = limits.maxFileSizeBytes;
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const valid = acceptedFiles.filter(isValidImageFile);
       if (valid.length > 0) {
-        addFiles(valid);
+        addFiles(valid, maxFiles);
         onFilesAdded?.(valid);
       }
     },
-    [addFiles, onFilesAdded]
+    [addFiles, onFilesAdded, maxFiles]
   );
 
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
     onDrop,
     accept: ACCEPTED_MIME_TYPES,
-    maxSize: MAX_FILE_SIZE_FREE,
+    maxSize: maxFileSize,
     multiple: true,
   });
 
-  const canAddMore = items.length < MAX_FILES_FREE;
+  const canAddMore = items.length < maxFiles;
 
   return (
     <div
@@ -87,11 +94,13 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
         ) : !canAddMore ? (
           <>
             <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5]">
-              Limit reached ({MAX_FILES_FREE} files max on free plan)
+              Limit reached ({maxFiles} files max{plan === "free" ? " on free plan" : ""})
             </p>
-            <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-              <a href="/pricing" className="text-brand hover:underline">Upgrade to Pro</a> to process up to 100 files
-            </p>
+            {plan === "free" && (
+              <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
+                <a href="/pricing" className="text-brand hover:underline">Upgrade to Pro</a> to process up to {PLAN_LIMITS.pro.maxFiles} files
+              </p>
+            )}
           </>
         ) : (
           <>
@@ -102,7 +111,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
               </span>
             </p>
             <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-              PNG, JPG, WebP, GIF — up to 10MB each
+              PNG, JPG, WebP, GIF — up to {Math.round(maxFileSize / (1024 * 1024))}MB each
             </p>
           </>
         )}
@@ -113,11 +122,11 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
         <div className="w-full max-w-xs">
           <div className="flex items-center justify-between mb-1">
             <span className="text-xs text-gray-400 dark:text-[#737373]">
-              {items.length} / {MAX_FILES_FREE} files
+              {items.length} / {maxFiles} files
             </span>
-            {items.length >= 3 && (
+            {plan === "free" && items.length >= 3 && (
               <a href="/pricing" className="text-xs text-indigo-500 hover:underline font-medium">
-                Upgrade for 100 →
+                Upgrade for {PLAN_LIMITS.pro.maxFiles} →
               </a>
             )}
           </div>
@@ -127,7 +136,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
                 "h-full rounded-full transition-all duration-300",
                 items.length >= 4 ? "bg-orange-400" : "bg-indigo-400"
               )}
-              style={{ width: `${(items.length / MAX_FILES_FREE) * 100}%` }}
+              style={{ width: `${(items.length / maxFiles) * 100}%` }}
             />
           </div>
         </div>

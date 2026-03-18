@@ -106,23 +106,28 @@ export async function deductCredit(
   count = 1
 ): Promise<{ success: boolean; remaining: number }> {
   const key = creditKey(email);
-  const current = await getCreditBalance(email);
 
+  if (redisConfigured) {
+    // Atomic pattern: DECRBY first, then check if we went negative.
+    // If negative, INCRBY to rollback and return failure.
+    const result = await redisExec<number>(["DECRBY", key, count]);
+    if (result !== null) {
+      if (result < 0) {
+        // Went negative — rollback atomically
+        await redisExec<number>(["INCRBY", key, count]);
+        return { success: false, remaining: result + count };
+      }
+      return { success: true, remaining: result };
+    }
+    // Redis call failed — fall through to memory
+  }
+
+  // In-memory fallback (dev/test only — not concurrent-safe across processes)
+  const current = memoryStore.get(key) ?? 0;
   if (current < count) {
     return { success: false, remaining: current };
   }
-
   const newBalance = current - count;
-
-  if (redisConfigured) {
-    // DECRBY is atomic — safe under concurrency
-    const result = await redisExec<number>(["DECRBY", key, count]);
-    if (result !== null) {
-      return { success: true, remaining: result };
-    }
-    // Redis failed — fall through to memory
-  }
-
   memoryStore.set(key, newBalance);
   return { success: true, remaining: newBalance };
 }

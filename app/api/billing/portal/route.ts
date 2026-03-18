@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://sammapix.com").trim();
     const portalSession = await (await import("@/lib/stripe")).stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${appUrl}/account`,
+      return_url: `${appUrl}/dashboard/settings`,
     });
     return NextResponse.json({ url: portalSession.url });
   } catch (err) {

@@ -6,7 +6,7 @@ import { ProcessedFile, CompressOptions, FileStatus } from "@/types/image";
 import { generateId, sanitizeFilename, calculateSavings, getFilenameWithoutExtension } from "@/lib/utils";
 import { compressImage } from "@/lib/compress";
 import { downloadSingleFile, downloadAllAsZip } from "@/lib/zip";
-import { DEFAULT_QUALITY, DEFAULT_CONVERT_WEBP, DEFAULT_AI_RENAME, MAX_FILES_FREE, AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { DEFAULT_QUALITY, DEFAULT_CONVERT_WEBP, DEFAULT_AI_RENAME, MAX_FILES_FREE } from "@/lib/constants";
 import { getUsedToday, setUsedToday } from "@/lib/aiRenameCounter";
 import imageCompression from "browser-image-compression";
 
@@ -24,7 +24,7 @@ interface ImageStoreState {
   isZipping: boolean;
 
   // Actions
-  addFiles: (files: File[]) => void;
+  addFiles: (files: File[], maxFiles?: number) => void;
   removeFile: (id: string) => void;
   clearAll: () => void;
   updateItem: (id: string, updates: Partial<ProcessedFile>) => void;
@@ -56,10 +56,10 @@ export const useImageStore = create<ImageStoreState>()(
     isZipping: false,
     aiRenameUsedToday: 0,
 
-    addFiles: (files: File[]) => {
+    addFiles: (files: File[], maxFiles: number = MAX_FILES_FREE) => {
       set((state) => {
         const existing = state.items.length;
-        const availableSlots = MAX_FILES_FREE - existing;
+        const availableSlots = maxFiles - existing;
         const filesToAdd = files.slice(0, availableSlots);
 
         filesToAdd.forEach((file) => {
@@ -292,16 +292,22 @@ export const useImageStore = create<ImageStoreState>()(
         if (!filename) throw new Error("No filename in response");
 
         // Update client-side counter from server's authoritative remaining value
-        const remaining = (json.remaining as number) ?? (AI_RENAME_FREE_PER_DAY - 1);
-        const usedNow = AI_RENAME_FREE_PER_DAY - remaining;
-        get().setAiRenameUsedToday(usedNow);
+        const remaining = json.remaining as number | undefined;
+        const limit = (json as { limit?: number }).limit;
+        if (remaining !== undefined && limit !== undefined) {
+          // Server returned authoritative values — use them directly
+          get().setAiRenameUsedToday(limit - remaining);
+        } else if (remaining !== undefined) {
+          // Fallback: increment used count by 1
+          get().setAiRenameUsedToday(get().aiRenameUsedToday + 1);
+        }
 
         // Persist to localStorage — resolve email from NextAuth client session
         try {
           const { getSession } = await import("next-auth/react");
           const clientSession = await getSession();
           if (clientSession?.user?.email) {
-            setUsedToday(clientSession.user.email, usedNow);
+            setUsedToday(clientSession.user.email, get().aiRenameUsedToday);
           }
         } catch {
           // Ignore — localStorage sync is best-effort; server enforces the real limit
@@ -314,7 +320,6 @@ export const useImageStore = create<ImageStoreState>()(
         // Handle daily limit specifically
         if (errMsg.includes("DAILY_LIMIT_REACHED") || errMsg.includes("Daily limit")) {
           updateItem(id, { aiRenameStatus: "error", aiRenameError: "Daily limit reached — upgrade to Pro for 200/day" });
-          get().setAiRenameUsedToday(AI_RENAME_FREE_PER_DAY); // show 0 remaining
           return;
         }
         updateItem(id, { aiRenameStatus: "error", aiRenameError: errMsg });
