@@ -67,7 +67,26 @@ function isHeicFile(file: File): boolean {
   );
 }
 
-// Client-side HEIC conversion using heic2any (no server, no size limit)
+// Server-side conversion (fast, for files under Vercel's 4MB body limit)
+async function convertServerSide(
+  file: File,
+  format: OutputFormat,
+  quality: number
+): Promise<Blob> {
+  const fd = new FormData();
+  fd.append("file", file);
+  fd.append("format", format === "WebP" ? "WEBP" : "JPEG");
+  fd.append("quality", String(quality));
+
+  const res = await fetch("/api/heic-convert", { method: "POST", body: fd });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error((body as { error?: string }).error ?? `HTTP ${res.status}`);
+  }
+  return res.blob();
+}
+
+// Client-side conversion using heic2any (no size limit, slower)
 async function convertClientSide(
   file: File,
   format: OutputFormat,
@@ -76,14 +95,38 @@ async function convertClientSide(
   const heic2any = (await import("heic2any")).default;
   const toType = format === "WebP" ? "image/webp" : "image/jpeg";
 
-  const result = await heic2any({
+  // Add timeout for large files (120s max)
+  const conversionPromise = heic2any({
     blob: file,
     toType,
     quality: quality / 100,
   });
 
-  // heic2any can return Blob | Blob[]
+  const timeoutPromise = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error("Conversion timed out (file too large for browser)")), 120000)
+  );
+
+  const result = await Promise.race([conversionPromise, timeoutPromise]);
   return Array.isArray(result) ? result[0] : result;
+}
+
+// Hybrid: server for small files (fast), client for large files (no limit)
+const SERVER_MAX_SIZE = 4 * 1024 * 1024; // 4MB
+
+async function convertFile(
+  file: File,
+  format: OutputFormat,
+  quality: number
+): Promise<Blob> {
+  if (file.size <= SERVER_MAX_SIZE) {
+    try {
+      return await convertServerSide(file, format, quality);
+    } catch {
+      // Fall back to client-side if server fails
+      return await convertClientSide(file, format, quality);
+    }
+  }
+  return await convertClientSide(file, format, quality);
 }
 
 // ── Pro Upsell Banner ─────────────────────────────────────────────────────────
@@ -397,7 +440,11 @@ export default function HeicConverter() {
       setFiles([...updated]);
 
       try {
-        const blob = await convertClientSide(f.original, outputFormat, quality);
+        // Show different message for large files
+        if (f.original.size > SERVER_MAX_SIZE) {
+          setProgressMessage(`Converting ${f.original.name} (${i + 1}/${updated.length}) — large file, may take up to 60s...`);
+        }
+        const blob = await convertFile(f.original, outputFormat, quality);
         updated[i] = {
           ...updated[i],
           status: "done",
@@ -560,7 +607,7 @@ export default function HeicConverter() {
               </p>
             </div>
             <p className="text-xs text-[#A3A3A3] max-w-xs leading-relaxed">
-              100% client-side &mdash; your photos never leave your browser
+              Small files convert instantly via server &mdash; large files process in your browser
             </p>
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
