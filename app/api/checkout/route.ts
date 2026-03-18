@@ -52,6 +52,7 @@ export async function POST(req: NextRequest) {
   let applyFoundingCoupon = false;
   try {
     const coupon = await stripe.coupons.retrieve(FOUNDING_COUPON_ID);
+    console.log("[checkout] Coupon retrieved:", FOUNDING_COUPON_ID, "redeemed:", coupon.times_redeemed, "/", coupon.max_redemptions, "deleted:", coupon.deleted);
     if (coupon && !coupon.deleted) {
       const timesRedeemed = coupon.times_redeemed ?? 0;
       const maxRedemptions = coupon.max_redemptions ?? FOUNDING_MAX;
@@ -59,9 +60,10 @@ export async function POST(req: NextRequest) {
         applyFoundingCoupon = true;
       }
     }
-  } catch {
-    // Coupon doesn't exist or error - skip
+  } catch (err) {
+    console.error("[checkout] Coupon error:", err instanceof Error ? err.message : err);
   }
+  console.log("[checkout] applyFoundingCoupon:", applyFoundingCoupon);
 
   try {
     const checkoutSession = await stripe.checkout.sessions.create({
