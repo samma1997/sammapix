@@ -89,23 +89,31 @@ async function reverseGeocode(
   lat: number,
   lon: number
 ): Promise<{ country: string | null; displayName: string | null }> {
-  const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`);
-  if (!res.ok) return { country: null, displayName: null };
-  const data = (await res.json()) as {
-    address?: { country?: string; city?: string; town?: string; village?: string };
-    display_name?: string;
-  };
-  const country = data.address?.country || null;
-  const city =
-    data.address?.city ||
-    data.address?.town ||
-    data.address?.village ||
-    null;
-  const displayName =
-    city && country
-      ? `${city}, ${country}`
-      : country || data.display_name?.split(",")[0] || null;
-  return { country, displayName };
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30000);
+  try {
+    const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`, {
+      signal: controller.signal,
+    });
+    if (!res.ok) return { country: null, displayName: null };
+    const data = (await res.json()) as {
+      address?: { country?: string; city?: string; town?: string; village?: string };
+      display_name?: string;
+    };
+    const country = data.address?.country || null;
+    const city =
+      data.address?.city ||
+      data.address?.town ||
+      data.address?.village ||
+      null;
+    const displayName =
+      city && country
+        ? `${city}, ${country}`
+        : country || data.display_name?.split(",")[0] || null;
+    return { country, displayName };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 // Country colors- one per country (deterministic hash)
