@@ -147,7 +147,7 @@ export default function ToolsPage() {
                   { name: "ResizePack",      fn: "Resize for Instagram, Twitter, LinkedIn", free: "✓",         batch: "✓", browser: "✓" },
                   { name: "FilmLab",         fn: "14 analog film presets for photos",       free: "✓",         batch: "✓", browser: "✓" },
                   { name: "AI Alt Text",     fn: "Generate accessibility alt text with AI", free: "Free tier", batch: "✓", browser: "⚙" },
-                  { name: "Video Thumbnail", fn: "Extract best frame from video files",     free: "✓",         batch: "✓", browser: "✓" },
+                  { name: "Transcribe",      fn: "AI transcription from video/audio",      free: "Free tier", batch: "—", browser: "⚙" },
                 ].map((row) => (
                   <tr
                     key={row.name}

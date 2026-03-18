@@ -57,11 +57,7 @@ const ALL_TOOLS: Tool[] = [
   { name: "StampIt", href: "/dashboard/tools/stampit", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "HEIC", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "TwinHunt", href: "/dashboard/tools/twinhunt", icon: <Search className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Video Thumb",     href: "/dashboard/tools/video-thumb",     icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Video Compress",  href: "/dashboard/tools/video-compress",  icon: <Clapperboard className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Video to GIF",    href: "/dashboard/tools/video-gif",       icon: <Film className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Transcribe",      href: "/dashboard/tools/transcribe",      icon: <Captions className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Video Resize",    href: "/dashboard/tools/video-resize",    icon: <Monitor className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 const PERSONA_RECOMMENDED: Record<Persona, string[]> = {

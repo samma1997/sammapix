@@ -83,7 +83,6 @@ const features = [
 ];
 
 const relatedTools = [
-  { name: "Video Thumbnail", href: "/tools/video-thumb" },
   { name: "AI Rename", href: "/tools/ai-rename" },
   { name: "AI Alt Text", href: "/tools/alt-text" },
   { name: "Compress Images", href: "/tools/compress" },

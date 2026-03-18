@@ -22,11 +22,7 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   resizepack:    dynamic(() => import("@/components/tools/ResizePackClient")),
   cull:          dynamic(() => import("@/components/tools/CullClientWrapper")),
   heic:          dynamic(() => import("@/components/tools/HeicClient")),
-  "video-thumb":    dynamic(() => import("@/components/tools/VideoThumbClient")),
-  "video-compress": dynamic(() => import("@/components/tools/VideoCompressClient")),
-  "video-gif":      dynamic(() => import("@/components/tools/VideoGifClient")),
   "transcribe":     dynamic(() => import("@/components/tools/TranscribeClient")),
-  "video-resize":   dynamic(() => import("@/components/tools/VideoResizeClient")),
   workflow:         dynamic(() => import("@/components/tools/WorkflowPipeline")),
 };
 
@@ -234,48 +230,6 @@ const TOOL_DATA: Record<string, ToolData> = {
       linkHref: "/dashboard/tools/webp",
     },
   },
-  "video-thumb": {
-    label: "Video Thumbnail",
-    tagline: "Extract the best frame from any video.",
-    steps: [
-      { title: "Drop video", desc: "Add MP4, WebM, or MOV file." },
-      { title: "Pick frame", desc: "Browse extracted frames." },
-      { title: "Download", desc: "Save as JPG, PNG, or WebP." },
-    ],
-    proTip: {
-      text: "AI can pick the best frame automatically on Pro.",
-      linkLabel: "Upgrade to Pro",
-      linkHref: "/pricing",
-    },
-  },
-  "video-compress": {
-    label: "Video Compress",
-    tagline: "Compress MP4, WebM, MOV in your browser. No upload.",
-    steps: [
-      { title: "Drop your video", desc: "Add an MP4, WebM, or MOV file." },
-      { title: "Adjust settings", desc: "Choose quality level and output format." },
-      { title: "Download", desc: "Get the compressed video ready to share." },
-    ],
-    proTip: {
-      text: "Combine with Video Thumbnail to extract a cover image.",
-      linkLabel: "Try Video Thumbnail",
-      linkHref: "/dashboard/tools/video-thumb",
-    },
-  },
-  "video-gif": {
-    label: "Video to GIF",
-    tagline: "Convert any video clip to animated GIF.",
-    steps: [
-      { title: "Drop your video", desc: "Add an MP4, WebM, or MOV file." },
-      { title: "Trim the clip", desc: "Select the start and end time (up to 15s)." },
-      { title: "Download GIF", desc: "Get your looping GIF ready to share." },
-    ],
-    proTip: {
-      text: "Keep clips under 5s for the smallest GIF file size.",
-      linkLabel: "Try Video Compress",
-      linkHref: "/dashboard/tools/video-compress",
-    },
-  },
   "transcribe": {
     label: "Transcribe",
     tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
@@ -288,20 +242,6 @@ const TOOL_DATA: Record<string, ToolData> = {
       text: "200 AI transcriptions per day on Pro. Free gets 5/day.",
       linkLabel: "Upgrade to Pro",
       linkHref: "/pricing",
-    },
-  },
-  "video-resize": {
-    label: "Video Resize",
-    tagline: "Resize video for Instagram, TikTok, YouTube with one click.",
-    steps: [
-      { title: "Drop your video", desc: "Add an MP4, WebM, or MOV file." },
-      { title: "Pick a preset", desc: "Choose Instagram Reels, TikTok, YouTube, or custom." },
-      { title: "Download", desc: "Get a perfectly sized video for your platform." },
-    ],
-    proTip: {
-      text: "Use 9:16 for TikTok and Instagram Reels, 1:1 for feed posts.",
-      linkLabel: "Try Video Compress",
-      linkHref: "/dashboard/tools/video-compress",
     },
   },
   workflow: {

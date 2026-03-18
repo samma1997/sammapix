@@ -5,10 +5,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Transpile @ffmpeg packages so webpack can process their ESM source.
-  // Without this, "type":"module" in their package.json causes resolution
-  // failures when webpack tries to require() named exports.
-  transpilePackages: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
   async redirects() {
     return [
       { source: '/destinations', destination: '/about', permanent: true },
@@ -42,15 +38,7 @@ const nextConfig = {
   },
   async headers() {
     return [
-      // FFmpeg WASM files need permissive CORP for blob URL creation
-      {
-        source: "/ffmpeg/:path*",
-        headers: [
-          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
-      },
-      {
+{
         source: "/(.*)",
         headers: [
           { key: "X-Frame-Options", value: "DENY" },
@@ -87,7 +75,7 @@ const nextConfig = {
               // worker-src blob: is required for JSZip and browser-image-compression workers
               "worker-src 'self' blob:",
               // Nominatim geocoding is called server-side; client only hits /api/geocode
-              "connect-src 'self' blob: https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net https://unpkg.com https://cdn.jsdelivr.net",
+              "connect-src 'self' blob: https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net",
               "frame-src https://js.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",

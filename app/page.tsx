@@ -292,44 +292,12 @@ const IconVideoResizeHome: React.FC<{ accent: string }> = ({ accent }) => (
 
 const TOOLS_VIDEO: ToolCardData[] = [
   {
-    name: "Video Compress",
-    href: "/tools/video-compress",
-    tagline: "Compress MP4, WebM, MOV in your browser. No upload.",
-    accent: "#7C3AED",
-    badges: ["100% Free", "FFmpeg"],
-    Icon: IconVideoCompressHome,
-  },
-  {
-    name: "Video to GIF",
-    href: "/tools/video-gif",
-    tagline: "Convert any video clip to animated GIF.",
-    accent: "#D946EF",
-    badges: ["100% Free", "Up to 15s"],
-    Icon: IconVideoGifHome,
-  },
-  {
     name: "Transcribe",
     href: "/tools/transcribe",
     tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
     accent: "#0891B2",
     badges: ["AI-powered", "Gemini Flash"],
     Icon: IconTranscribeHome,
-  },
-  {
-    name: "Video Resize",
-    href: "/tools/video-resize",
-    tagline: "Resize video for Instagram, TikTok, YouTube with one click.",
-    accent: "#059669",
-    badges: ["100% Free", "Social presets"],
-    Icon: IconVideoResizeHome,
-  },
-  {
-    name: "Video Thumbnail",
-    href: "/tools/video-thumb",
-    tagline: "Extract the best frame from any video. Browse frames, AI picks the best.",
-    accent: "#0EA5E9",
-    badges: ["100% Free", "MP4/WebM"],
-    Icon: IconVideoThumbHome,
   },
 ];
 

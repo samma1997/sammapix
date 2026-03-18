@@ -393,11 +393,7 @@ const ALL_TOOLS: ToolEntry[] = [
   { name: "ResizePack",  slug: "resizepack",  accent: "#14B8A6", Icon: IconResizePack },
   { name: "Cull",        slug: "cull",        accent: "#F43F5E", Icon: IconCull },
   { name: "HEIC",        slug: "heic",        accent: "#6366F1", Icon: IconHEIC },
-  { name: "Video Thumb",    slug: "video-thumb",    accent: "#0EA5E9", Icon: IconVideoThumb },
-  { name: "Video Compress", slug: "video-compress", accent: "#7C3AED", Icon: IconDhVideoCompress },
-  { name: "Video to GIF",   slug: "video-gif",      accent: "#D946EF", Icon: IconDhVideoGif },
   { name: "Transcribe",     slug: "transcribe",     accent: "#0891B2", Icon: IconDhTranscribe },
-  { name: "Video Resize",   slug: "video-resize",   accent: "#059669", Icon: IconDhVideoResize },
 ];
 
 const PERSONA_RECOMMENDED: Record<Persona, string[]> = {
