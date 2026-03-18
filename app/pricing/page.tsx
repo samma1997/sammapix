@@ -177,7 +177,7 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                { icon: Sparkles, text: "All 22 tools included" },
+                { icon: Sparkles, text: "All 20 tools included" },
                 { icon: FileStack, text: "20 files per batch" },
                 { icon: Zap, text: "10 AI renames / day" },
                 { icon: Zap, text: "10 AI alt text / day" },
@@ -366,7 +366,7 @@ export default function PricingPage() {
           </div>
           {/* Combo tools listed below */}
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            {["AI Alt Text", "Transcribe", "WebLift", "BlogDrop", "ShopShot", "InstaPrep", "CleanDrop", "PixShip", "AI Workflow"].map((name) => (
+            {["AI Alt Text", "Transcribe", "WebLift", "BlogDrop", "SmartSort", "BatchName", "AI Workflow"].map((name) => (
               <span
                 key={name}
                 className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] px-3 py-1.5 rounded-md border border-[#F5F5F5] dark:border-[#252525] bg-white dark:bg-[#191919]"

@@ -210,7 +210,7 @@ export default function AboutPage() {
               photographers probably did too.
             </p>
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Today, SammaPix has 22 free tools used by photographers, bloggers, and developers in 40+ countries.
+              Today, SammaPix has 20 free tools used by photographers, bloggers, and developers in 40+ countries.
               Everything still runs in the browser. Your photos never leave your device. That was the promise from
               day one, and it hasn&apos;t changed.
             </p>

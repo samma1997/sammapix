@@ -63,7 +63,7 @@ const relatedTools = [
   { name: "WebP Converter", href: "/tools/webp" },
   { name: "AI Rename", href: "/tools/ai-rename" },
   { name: "BlogDrop", href: "/tools/blogdrop" },
-  { name: "ShopShot", href: "/tools/shopshot" },
+  { name: "SmartSort", href: "/tools/smartsort" },
 ];
 
 export default function WebLiftPage() {

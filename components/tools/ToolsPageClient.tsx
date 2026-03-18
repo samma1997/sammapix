@@ -118,88 +118,50 @@ const IconBlogDrop: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
-const IconInstaPrep: React.FC<{ accent: string }> = ({ accent }) => (
+const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
-      @keyframes ip-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-      .ip-frame { transform-origin: 24px 24px; animation: ip-pulse 2s ease-in-out infinite; }
+      @keyframes bn-count { 0%, 33% { opacity: 1; } 34%, 66% { opacity: 0.4; } 67%, 100% { opacity: 1; } }
+      .bn-n1 { animation: bn-count 3s ease-in-out 0s infinite; }
+      .bn-n2 { animation: bn-count 3s ease-in-out 1s infinite; }
+      .bn-n3 { animation: bn-count 3s ease-in-out 2s infinite; }
     `}</style>
-    <g className="ip-frame">
-      <rect x="8" y="8" width="32" height="32" rx="6" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
-      <rect x="12" y="12" width="24" height="24" rx="3" fill={accent} fillOpacity="0.06" stroke={accent} strokeWidth="1" strokeDasharray="3 2"/>
-    </g>
-    <circle cx="20" cy="20" r="3" fill={accent} fillOpacity="0.4"/>
-    <path d="M12 32 L18 26 L24 30 L30 22 L36 28" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
-    <text x="24" y="44" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">1080</text>
+    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="bn-n1" x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
+    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="bn-n2" x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
+    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="bn-n3" x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
+    <path d="M38 14 L42 14 M38 24 L42 24 M38 34 L42 34" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4"/>
+    <path d="M40 10 L40 38" stroke={accent} strokeWidth="1" strokeLinecap="round" strokeOpacity="0.2"/>
   </svg>
 );
 
-const IconShopShot: React.FC<{ accent: string }> = ({ accent }) => (
+const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
-      @keyframes ss-tag { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-8deg); } }
-      @keyframes ss-flash { 0%, 70% { opacity: 0; } 80% { opacity: 1; } 100% { opacity: 0; } }
-      .ss-tag { transform-origin: 36px 10px; animation: ss-tag 2s ease-in-out infinite; }
-      .ss-flash { animation: ss-flash 2.4s ease-in-out infinite; }
+      @keyframes ss-shuffle { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(3px); } }
+      .ss-f1 { animation: ss-shuffle 2s ease-in-out 0s infinite; }
+      .ss-f2 { animation: ss-shuffle 2s ease-in-out 0.3s infinite; }
+      .ss-f3 { animation: ss-shuffle 2s ease-in-out 0.6s infinite; }
     `}</style>
-    <rect x="6" y="8" width="24" height="28" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
-    <rect x="10" y="12" width="16" height="12" rx="1.5" fill={accent} fillOpacity="0.15"/>
-    <path d="M10 22 L16 18 L22 21 L26 16" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
-    <line x1="10" y1="28" x2="26" y2="28" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
-    <line x1="10" y1="32" x2="20" y2="32" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
-    <g className="ss-tag">
-      <circle cx="36" cy="10" r="6" fill={accent}/>
-      <text x="36" y="13" fontSize="5" fill="white" textAnchor="middle" fontWeight="800">$</text>
+    <g className="ss-f1">
+      <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
     </g>
-    <g className="ss-flash">
-      <path d="M38 28 L40 24 L42 28 L40 32 Z" fill={accent} fillOpacity="0.6"/>
+    <g className="ss-f2">
+      <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <rect x="4" y="24" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
     </g>
-  </svg>
-);
-
-const IconCleanDrop: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes cd-wipe { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(6px); } }
-      @keyframes cd-check { 0%, 60% { transform: scale(0); opacity: 0; } 80%, 100% { transform: scale(1); opacity: 1; } }
-      .cd-wipe { animation: cd-wipe 2s ease-in-out infinite; }
-      .cd-check { transform-origin: 38px 38px; animation: cd-check 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
-    `}</style>
-    <rect x="4" y="6" width="26" height="32" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <g className="cd-wipe">
-      <line x1="9" y1="14" x2="24" y2="14" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-      <line x1="9" y1="18" x2="20" y2="18" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-      <line x1="9" y1="22" x2="22" y2="22" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-      <line x1="9" y1="26" x2="18" y2="26" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
+    <g className="ss-f3">
+      <rect x="2" y="38" width="14" height="6" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
     </g>
-    <line x1="4" y1="10" x2="30" y2="34" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeOpacity="0.3"/>
-    <g className="cd-check" style={{ opacity: 0 }}>
-      <circle cx="38" cy="38" r="8" fill={accent}/>
-      <path d="M34 38 L37 41 L43 35" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-    </g>
-  </svg>
-);
-
-const IconPixShip: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes ps-fly { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(3px, -3px); } }
-      @keyframes ps-trail { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
-      .ps-fly { animation: ps-fly 2s ease-in-out infinite; }
-      .ps-trail { animation: ps-trail 2s ease-in-out infinite; }
-    `}</style>
-    <g className="ps-fly">
-      <rect x="14" y="6" width="28" height="20" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <rect x="18" y="10" width="10" height="6" rx="1" fill={accent} fillOpacity="0.25"/>
-      <path d="M32 10 L32 22 M36 10 L36 22" stroke={accent} strokeWidth="1" strokeLinecap="round" strokeOpacity="0.4"/>
-    </g>
-    <g className="ps-trail">
-      <line x1="4" y1="20" x2="12" y2="14" stroke={accent} strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="4" y1="24" x2="12" y2="18" stroke={accent} strokeWidth="1.5" strokeLinecap="round"/>
-    </g>
-    <rect x="10" y="30" width="28" height="12" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-    <text x="24" y="39" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
-    <path d="M24 26 L24 30" stroke={accent} strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M20 12 L26 8 M20 28 L26 22 M20 41 L26 36" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
+    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
+    <rect x="28" y="40" width="18" height="6" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
   </svg>
 );
 
@@ -261,36 +223,6 @@ const TOOLS: ToolWithCategory[] = [
     Icon: IconCropRatio,
     category: ["Optimize"],
   },
-  {
-    name: "CleanDrop",
-    href: "/tools/cleandrop",
-    tagline: "Strip metadata, compress, and convert to WebP. Privacy-first optimization.",
-    accent: "#16A34A",
-    badges: ["Free", "Multi-step"],
-    Icon: IconCleanDrop,
-    category: ["Optimize"],
-    isCombo: true,
-  },
-  {
-    name: "InstaPrep",
-    href: "/tools/instaprep",
-    tagline: "Instagram-ready in seconds. Resize and compress for feed or stories.",
-    accent: "#E1306C",
-    badges: ["Free", "Multi-step"],
-    Icon: IconInstaPrep,
-    category: ["Optimize"],
-    isCombo: true,
-  },
-  {
-    name: "PixShip",
-    href: "/tools/pixship",
-    tagline: "Light compress and resize for client delivery. Download as ZIP.",
-    accent: "#0891B2",
-    badges: ["Free", "Multi-step"],
-    Icon: IconPixShip,
-    category: ["Optimize"],
-    isCombo: true,
-  },
 
   // ── AI ──
   {
@@ -341,14 +273,13 @@ const TOOLS: ToolWithCategory[] = [
     isCombo: true,
   },
   {
-    name: "ShopShot",
-    href: "/tools/shopshot",
-    tagline: "E-commerce product images optimized. Compress, resize, WebP, product names.",
-    accent: "#F59E0B",
-    badges: ["Login required", "Multi-step"],
-    Icon: IconShopShot,
+    name: "SmartSort",
+    href: "/tools/smartsort",
+    tagline: "AI analyzes images and sorts them into categories automatically.",
+    accent: "#22C55E",
+    badges: ["AI-powered", "Login required"],
+    Icon: IconSmartSort,
     category: ["AI"],
-    isCombo: true,
   },
 
   // ── Creative ──
@@ -417,6 +348,15 @@ const TOOLS: ToolWithCategory[] = [
     Icon: IconCull,
     category: ["Organize"],
   },
+  {
+    name: "BatchName",
+    href: "/tools/batchname",
+    tagline: "Rename files with a custom pattern. No AI, 100% client-side, unlimited.",
+    accent: "#F59E0B",
+    badges: ["Free", "Unlimited"],
+    Icon: IconBatchName,
+    category: ["Organize"],
+  },
 ];
 
 // ─── Category tabs config ─────────────────────────────────────────────────────
@@ -438,8 +378,8 @@ const USE_CASES = [
   {
     title: "I'm a photographer delivering to clients",
     tools: [
-      { name: "PixShip", href: "/tools/pixship" },
       { name: "Cull", href: "/tools/cull" },
+      { name: "SmartSort", href: "/tools/smartsort" },
       { name: "FilmLab", href: "/tools/filmlab" },
       { name: "StampIt", href: "/tools/stampit" },
     ],
@@ -447,9 +387,9 @@ const USE_CASES = [
   {
     title: "I sell products online (e-commerce)",
     tools: [
-      { name: "ShopShot", href: "/tools/shopshot" },
       { name: "Compress", href: "/tools/compress" },
       { name: "WebP Converter", href: "/tools/webp" },
+      { name: "AI Rename", href: "/tools/ai-rename" },
       { name: "EXIF Lens", href: "/tools/exif" },
     ],
   },
@@ -459,16 +399,16 @@ const USE_CASES = [
       { name: "WebLift", href: "/tools/weblift" },
       { name: "Compress", href: "/tools/compress" },
       { name: "WebP Converter", href: "/tools/webp" },
-      { name: "CleanDrop", href: "/tools/cleandrop" },
+      { name: "BatchName", href: "/tools/batchname" },
     ],
   },
   {
     title: "I need to prepare photos for social media",
     tools: [
-      { name: "InstaPrep", href: "/tools/instaprep" },
       { name: "ResizePack", href: "/tools/resizepack" },
       { name: "CropRatio", href: "/tools/croproatio" },
       { name: "FilmLab", href: "/tools/filmlab" },
+      { name: "BatchName", href: "/tools/batchname" },
     ],
   },
   {

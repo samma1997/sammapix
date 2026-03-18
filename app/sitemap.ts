@@ -75,10 +75,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/workflow",
     "/tools/weblift",
     "/tools/blogdrop",
-    "/tools/instaprep",
-    "/tools/shopshot",
-    "/tools/cleandrop",
-    "/tools/pixship",
+    "/tools/batchname",
+    "/tools/smartsort",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

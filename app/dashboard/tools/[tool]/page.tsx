@@ -24,6 +24,8 @@ const HeicClient = dynamic(() => import("@/components/tools/HeicClient"));
 const TranscribeClient = dynamic(() => import("@/components/tools/TranscribeClient"));
 const WorkflowPipeline = dynamic(() => import("@/components/tools/WorkflowPipeline"));
 const ComboClient = dynamic(() => import("@/components/tools/ComboClient"));
+const BatchNameClient = dynamic(() => import("@/components/tools/BatchNameClient"));
+const SmartSortClient = dynamic(() => import("@/components/tools/SmartSortClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -44,6 +46,8 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   heic:        HeicClient,
   transcribe:  TranscribeClient,
   workflow:    WorkflowPipeline,
+  batchname:   BatchNameClient,
+  smartsort:   SmartSortClient,
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -76,45 +80,6 @@ const COMBO_CONFIGS: Record<string, ComboConfig> = {
     ],
     requiresLogin: true,
     hasAiSteps: true,
-  },
-  shopshot: {
-    toolName: "ShopShot",
-    steps: [
-      { id: "compress", label: "Compress (85%)", enabled: true, isAi: false },
-      { id: "resize", label: "Resize (max 800px)", enabled: true, isAi: false },
-      { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
-      { id: "ai-rename", label: "AI Rename (product/SKU)", enabled: true, isAi: true },
-    ],
-    requiresLogin: true,
-    hasAiSteps: true,
-  },
-  instaprep: {
-    toolName: "InstaPrep",
-    steps: [
-      { id: "resize", label: "Resize (1080px)", enabled: true, isAi: false },
-      { id: "compress", label: "Compress (85%)", enabled: true, isAi: false },
-    ],
-    requiresLogin: false,
-    hasAiSteps: false,
-  },
-  cleandrop: {
-    toolName: "CleanDrop",
-    steps: [
-      { id: "exif-strip", label: "Strip EXIF/metadata", enabled: true, isAi: false },
-      { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
-      { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
-    ],
-    requiresLogin: false,
-    hasAiSteps: false,
-  },
-  pixship: {
-    toolName: "PixShip",
-    steps: [
-      { id: "compress", label: "Compress (90%, light)", enabled: true, isAi: false },
-      { id: "resize", label: "Resize (max 2400px)", enabled: true, isAi: false },
-    ],
-    requiresLogin: false,
-    hasAiSteps: false,
   },
 };
 
@@ -309,45 +274,25 @@ const TOOL_DATA: Record<string, ToolData> = {
     ],
     proTip: { text: "Disable AI Rename to use without login.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
   },
-  shopshot: {
-    label: "ShopShot",
-    tagline: "E-commerce product images optimized.",
+  batchname: {
+    label: "BatchName",
+    tagline: "Rename files with a custom pattern. No AI needed.",
     steps: [
-      { title: "Drop product photos", desc: "Add product images to optimize." },
-      { title: "Toggle steps", desc: "Enable or disable individual pipeline steps." },
-      { title: "Download optimized", desc: "Get images ready for your online store." },
+      { title: "Drop your files", desc: "Add any files you want to rename." },
+      { title: "Set your pattern", desc: "Use {001}, {date}, or {original} tokens." },
+      { title: "Download renamed", desc: "Get all files with new names." },
     ],
-    proTip: { text: "800px is the sweet spot for product thumbnails.", linkLabel: "Try ResizePack", linkHref: "/dashboard/tools/resizepack" },
+    proTip: { text: "Use {001} for auto-incrementing numbers.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
   },
-  instaprep: {
-    label: "InstaPrep",
-    tagline: "Instagram-ready in seconds.",
+  smartsort: {
+    label: "SmartSort",
+    tagline: "AI analyzes images and sorts them into categories.",
     steps: [
-      { title: "Drop your photos", desc: "Add photos to prepare for Instagram." },
-      { title: "Toggle steps", desc: "Enable or disable resize/compress." },
-      { title: "Download", desc: "Get Instagram-ready images." },
+      { title: "Drop your images", desc: "Add photos, screenshots, or documents." },
+      { title: "AI categorizes", desc: "Gemini AI assigns a category to each file." },
+      { title: "Download sorted", desc: "Get ZIP with folder structure by category." },
     ],
-    proTip: { text: "Use CropRatio for 4:5 portrait posts.", linkLabel: "Try CropRatio", linkHref: "/dashboard/tools/croproatio" },
-  },
-  cleandrop: {
-    label: "CleanDrop",
-    tagline: "Strip metadata, compress, and convert to WebP.",
-    steps: [
-      { title: "Drop photos", desc: "Add photos to clean before sharing." },
-      { title: "Toggle steps", desc: "Enable or disable individual pipeline steps." },
-      { title: "Download clean images", desc: "Get metadata-free images." },
-    ],
-    proTip: { text: "Always strip EXIF before sharing photos online.", linkLabel: "Try EXIF Lens", linkHref: "/dashboard/tools/exif" },
-  },
-  pixship: {
-    label: "PixShip",
-    tagline: "Light compress and resize for client delivery.",
-    steps: [
-      { title: "Drop photos", desc: "Add photos to prepare for delivery." },
-      { title: "Toggle steps", desc: "Enable or disable compress/resize." },
-      { title: "Download as ZIP", desc: "Get delivery-ready images." },
-    ],
-    proTip: { text: "90% quality is virtually lossless for clients.", linkLabel: "Try Compress", linkHref: "/dashboard/tools/compress" },
+    proTip: { text: "Perfect for organizing mixed photo collections.", linkLabel: "Try GeoSort", linkHref: "/dashboard/tools/geosort" },
   },
 };
 

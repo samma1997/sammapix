@@ -94,46 +94,27 @@ const IconBlogDrop: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
-const IconInstaPrep: React.FC<{ accent: string }> = ({ accent }) => (
+const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="8" y="8" width="32" height="32" rx="6" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
-    <rect x="12" y="12" width="24" height="24" rx="3" fill={accent} fillOpacity="0.06" stroke={accent} strokeWidth="1" strokeDasharray="3 2"/>
-    <circle cx="20" cy="20" r="3" fill={accent} fillOpacity="0.4"/>
-    <path d="M12 32 L18 26 L24 30 L30 22 L36 28" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
-    <text x="24" y="44" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">1080</text>
+    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
+    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
+    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
   </svg>
 );
 
-const IconShopShot: React.FC<{ accent: string }> = ({ accent }) => (
+const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="6" y="8" width="24" height="28" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
-    <rect x="10" y="12" width="16" height="12" rx="1.5" fill={accent} fillOpacity="0.15"/>
-    <line x1="10" y1="28" x2="26" y2="28" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
-    <line x1="10" y1="32" x2="20" y2="32" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
-    <circle cx="36" cy="10" r="6" fill={accent}/>
-    <text x="36" y="13" fontSize="5" fill="white" textAnchor="middle" fontWeight="800">$</text>
-  </svg>
-);
-
-const IconCleanDrop: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="4" y="6" width="26" height="32" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <line x1="9" y1="14" x2="24" y2="14" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-    <line x1="9" y1="18" x2="20" y2="18" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-    <line x1="9" y1="22" x2="22" y2="22" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-    <line x1="4" y1="10" x2="30" y2="34" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeOpacity="0.3"/>
-    <circle cx="38" cy="38" r="8" fill={accent}/>
-    <path d="M34 38 L37 41 L43 35" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const IconPixShip: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="14" y="6" width="28" height="20" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-    <rect x="18" y="10" width="10" height="6" rx="1" fill={accent} fillOpacity="0.25"/>
-    <rect x="10" y="30" width="28" height="12" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-    <text x="24" y="39" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
-    <path d="M24 26 L24 30" stroke={accent} strokeWidth="1.5" strokeLinecap="round"/>
+    <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
+    <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <path d="M20 12 L26 8 M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
+    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
   </svg>
 );
 
@@ -159,9 +140,6 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "HEIC Converter", href: "/tools/heic", tagline: "iPhone HEIC to JPG or WebP.", accent: "#6366F1", badge: "Free", Icon: IconHEIC, category: "Optimize" },
   { name: "ResizePack", href: "/tools/resizepack", tagline: "Resize for social media presets.", accent: "#14B8A6", badge: "Free", Icon: IconResizePack, category: "Optimize" },
   { name: "CropRatio", href: "/tools/croproatio", tagline: "Crop to exact ratios.", accent: "#EC4899", badge: "Free", Icon: IconCropRatio, category: "Optimize" },
-  { name: "CleanDrop", href: "/tools/cleandrop", tagline: "Strip EXIF + compress + WebP.", accent: "#16A34A", badge: "Free", Icon: IconCleanDrop, category: "Optimize", isCombo: true },
-  { name: "InstaPrep", href: "/tools/instaprep", tagline: "Resize + compress for Instagram.", accent: "#E1306C", badge: "Free", Icon: IconInstaPrep, category: "Optimize", isCombo: true },
-  { name: "PixShip", href: "/tools/pixship", tagline: "Light compress + resize for delivery.", accent: "#0891B2", badge: "Free", Icon: IconPixShip, category: "Optimize", isCombo: true },
 
   // AI-Powered
   { name: "AI Rename", href: "/tools/ai-rename", tagline: "SEO-optimized filenames with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAIRename, category: "AI-Powered" },
@@ -169,7 +147,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Transcribe", href: "/tools/transcribe", tagline: "AI transcription with timestamps.", accent: "#0891B2", badge: "Login required", Icon: IconTranscribe, category: "AI-Powered" },
   { name: "WebLift", href: "/tools/weblift", tagline: "Compress + WebP + AI rename.", accent: "#3B82F6", badge: "Login required", Icon: IconWebLift, category: "AI-Powered", isCombo: true },
   { name: "BlogDrop", href: "/tools/blogdrop", tagline: "Blog-ready images in one drop.", accent: "#8B5CF6", badge: "Login required", Icon: IconBlogDrop, category: "AI-Powered", isCombo: true },
-  { name: "ShopShot", href: "/tools/shopshot", tagline: "Product image optimizer.", accent: "#F59E0B", badge: "Login required", Icon: IconShopShot, category: "AI-Powered", isCombo: true },
+  { name: "SmartSort", href: "/tools/smartsort", tagline: "AI sorts images into categories.", accent: "#22C55E", badge: "Login required", Icon: IconSmartSort, category: "AI-Powered" },
 
   // Creative
   { name: "FilmLab", href: "/tools/filmlab", tagline: "14 analog film presets.", accent: "#F59E0B", badge: "Free", Icon: IconFilmLab, category: "Creative" },
@@ -181,6 +159,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "GeoSort", href: "/tools/geosort", tagline: "Sort photos by country.", accent: "#22C55E", badge: "Free", Icon: IconGeoSort, category: "Organize" },
   { name: "TravelMap", href: "/tools/travelmap", tagline: "Interactive map from photos.", accent: "#3B82F6", badge: "Free", Icon: IconTravelMap, category: "Organize" },
   { name: "Cull", href: "/tools/cull", tagline: "Rate and cull a shoot.", accent: "#F43F5E", badge: "Free", Icon: IconCull, category: "Organize" },
+  { name: "BatchName", href: "/tools/batchname", tagline: "Rename files with a pattern.", accent: "#F59E0B", badge: "Free", Icon: IconBatchName, category: "Organize" },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
@@ -197,7 +176,7 @@ export function HomepageToolGrid() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-            22 Free Tools
+            20 Free Tools
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
             Browser-based -- no uploads, no account required for the basics.

@@ -5,9 +5,9 @@ import { ToolsPageClient } from "@/components/tools/ToolsPageClient";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "22 Free Image & Video Tools for Photographers & Developers | SammaPix",
+  title: "20 Free Image & Video Tools for Photographers & Developers | SammaPix",
   description:
-    "Complete suite of 22 free browser-based image and video tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 20 free browser-based image and video tools. Compress JPG/PNG, convert WebP, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://sammapix.com/tools" },
   openGraph: {
-    title: "22 Free Image & Video Tools for Photographers & Developers",
+    title: "20 Free Image & Video Tools for Photographers & Developers",
     description:
       "Compress, convert, rename, resize, remove EXIF, apply film effects, batch process and more. All in browser. No uploads. No account needed.",
     url: "https://sammapix.com/tools",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix -- 22 Free Image & Video Tools",
+        alt: "SammaPix -- 20 Free Image & Video Tools",
       },
     ],
   },
@@ -51,7 +51,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 22 browser-based image and video optimization tools",
+        description: "Suite of 20 browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -61,8 +61,8 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "22 free browser-based image and video optimization tools",
-        numberOfItems: 22,
+        description: "20 free browser-based image and video optimization tools",
+        numberOfItems: 20,
         itemListElement: [
           {
             "@type": "SoftwareApplication",
@@ -113,7 +113,7 @@ export default function ToolsPage() {
             Everything you need to optimize, rename, resize and organize your images
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            22 free browser-based tools. No uploads, no signup needed for most tools.
+            20 free browser-based tools. No uploads, no signup needed for most tools.
           </p>
         </div>
       </section>
@@ -158,10 +158,8 @@ export default function ToolsPage() {
                   // ── Combo tools ──
                   { name: "WebLift",         fn: "Compress + WebP + AI Rename in one click",          free: true, login: true },
                   { name: "BlogDrop",        fn: "Compress + resize + WebP + SEO blog names",         free: true, login: true },
-                  { name: "ShopShot",        fn: "E-commerce: compress + resize + WebP + product names", free: true, login: true },
-                  { name: "InstaPrep",       fn: "Resize to 1080px + compress for Instagram",         free: true, login: false },
-                  { name: "CleanDrop",       fn: "Strip metadata + compress + convert to WebP",       free: true, login: false },
-                  { name: "PixShip",         fn: "Light compress + resize for client delivery",       free: true, login: false },
+                  { name: "SmartSort",       fn: "AI categorizes and sorts images into folders",        free: true, login: true },
+                  { name: "BatchName",       fn: "Rename files with custom pattern ({001}, {date})",  free: true, login: false },
                   { name: "AI Workflow",     fn: "Custom multi-step pipeline with presets",            free: false, login: true },
                 ].map((row) => (
                   <tr

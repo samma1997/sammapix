@@ -9,7 +9,7 @@ import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
 export const metadata = {
   title: "SammaPix -- AI Photo Workflow Platform for Content Creators",
   description:
-    "Compress, rename with AI, resize, convert -- all in one pipeline. 22 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert -- all in one pipeline. 20 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -25,7 +25,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert -- all in one pipeline. 22 free tools. No uploads.",
+      "Compress, rename with AI, resize, convert -- all in one pipeline. 20 free tools. No uploads.",
     url: "https://sammapix.com",
     type: "website",
     images: [
@@ -45,12 +45,12 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What tools does SammaPix offer?",
     answer:
-      "SammaPix includes 22 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, ResizePack, CropRatio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: FilmLab (14 film presets), StampIt (watermarks). Organize: EXIF Lens, TwinHunt (duplicate finder), GeoSort, TravelMap, Cull. Plus 6 combo tools that chain steps together: WebLift, BlogDrop, ShopShot, InstaPrep, CleanDrop, and PixShip.",
+      "SammaPix includes 20 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, ResizePack, CropRatio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: FilmLab (14 film presets), StampIt (watermarks). Organize: EXIF Lens, TwinHunt (duplicate finder), GeoSort, TravelMap, Cull. Plus combo tools: WebLift, BlogDrop, and SmartSort. BatchName for pattern-based renaming.",
   },
   {
     question: "Is SammaPix really free?",
     answer:
-      "Yes. All 22 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI operations per day. Pro ($7/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
+      "Yes. All 20 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI operations per day. Pro ($7/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
   },
   {
     question: "Do I need to create an account?",
@@ -118,7 +118,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 22 free browser-based tools.",
+          "AI-powered photo and video workflow platform for content creators. 20 free browser-based tools.",
         sameAs: [
           "https://www.instagram.com/lucasammarco.web/",
           "https://lucasammarco.com",
@@ -276,7 +276,7 @@ export default function HomePage() {
               },
               {
                 title: "E-commerce Sellers",
-                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Use ShopShot for the full pipeline.",
+                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Use BatchName for consistent naming.",
               },
               {
                 title: "Social Media Managers",
@@ -308,7 +308,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
           {[
             { value: "1.2M+", label: "Images optimized" },
-            { value: "22", label: "Free tools" },
+            { value: "20", label: "Free tools" },
             { value: "100%", label: "Browser-based" },
             { value: "0", label: "Files uploaded to servers" },
           ].map((stat) => (

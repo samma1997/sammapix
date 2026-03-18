@@ -26,10 +26,6 @@ import {
   X,
   Coins,
   FileText,
-  ShoppingBag,
-  ShieldCheck,
-  Instagram,
-  Send,
   Film,
   Layers,
   Zap,
@@ -45,11 +41,11 @@ const LS_PERSONA_KEY = "sammapix-persona";
 // ─── Persona -> tool mappings (same as DashboardHome) ────────────────────────
 
 const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
-  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift"],
-  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack"],
-  ecommerce: ["compress", "shopshot", "ai-rename", "resizepack", "stampit", "webp"],
-  developer: ["compress", "webp", "resizepack", "cleandrop", "exif", "croproatio"],
-  social: ["compress", "resizepack", "instaprep", "croproatio", "filmlab", "stampit"],
+  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname"],
+  ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname"],
+  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
 };
 
 // ─── Tool definitions ─────────────────────────────────────────────────────────
@@ -68,16 +64,13 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "HEIC Converter", slug: "heic", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "ResizePack", slug: "resizepack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "CropRatio", slug: "croproatio", href: "/dashboard/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "CleanDrop", slug: "cleandrop", href: "/dashboard/tools/cleandrop", icon: <ShieldCheck className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "InstaPrep", slug: "instaprep", href: "/dashboard/tools/instaprep", icon: <Instagram className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "PixShip", slug: "pixship", href: "/dashboard/tools/pixship", icon: <Send className="h-4 w-4" strokeWidth={1.5} /> },
   // AI-Powered
   { name: "AI Rename", slug: "ai-rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "AI Alt Text", slug: "alt-text", href: "/dashboard/tools/alt-text", icon: <Globe className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Transcribe", slug: "transcribe", href: "/dashboard/tools/transcribe", icon: <Captions className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "WebLift", slug: "weblift", href: "/dashboard/tools/weblift", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "BlogDrop", slug: "blogdrop", href: "/dashboard/tools/blogdrop", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "ShopShot", slug: "shopshot", href: "/dashboard/tools/shopshot", icon: <ShoppingBag className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "SmartSort", slug: "smartsort", href: "/dashboard/tools/smartsort", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
   // Creative
   { name: "FilmLab", slug: "filmlab", href: "/dashboard/tools/filmlab", icon: <Film className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "StampIt", slug: "stampit", href: "/dashboard/tools/stampit", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
@@ -87,14 +80,15 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "GeoSort", slug: "geosort", href: "/dashboard/tools/geosort", icon: <MapPin className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "TravelMap", slug: "travelmap", href: "/dashboard/tools/travelmap", icon: <Map className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Cull", slug: "cull", href: "/dashboard/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "BatchName", slug: "batchname", href: "/dashboard/tools/batchname", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio", "cleandrop", "instaprep", "pixship"] },
-  { label: "AI-Powered", slugs: ["ai-rename", "alt-text", "transcribe", "weblift", "blogdrop", "shopshot"] },
+  { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio"] },
+  { label: "AI-Powered", slugs: ["ai-rename", "alt-text", "transcribe", "weblift", "blogdrop", "smartsort"] },
   { label: "Creative", slugs: ["filmlab", "stampit"] },
-  { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull"] },
+  { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
 
 function getToolBySlug(slug: string): SidebarTool | undefined {

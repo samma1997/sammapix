@@ -64,11 +64,11 @@ const PERSONAS: {
 // ─── Persona -> Tool mappings ────────────────────────────────────────────────
 
 const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
-  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift"],
-  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack"],
-  ecommerce: ["compress", "shopshot", "ai-rename", "resizepack", "stampit", "webp"],
-  developer: ["compress", "webp", "resizepack", "cleandrop", "exif", "croproatio"],
-  social: ["compress", "resizepack", "instaprep", "croproatio", "filmlab", "stampit"],
+  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname"],
+  ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname"],
+  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
 };
 
 // ─── Animated icons for combo/AI tools ────────────────────────────────────────
@@ -122,40 +122,27 @@ const IconDhBlogDrop: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
-const IconDhInstaPrep: React.FC<{ accent: string }> = ({ accent }) => (
+const IconDhBatchName: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="8" y="8" width="32" height="32" rx="6" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
-    <circle cx="20" cy="20" r="3" fill={accent} fillOpacity="0.4"/>
-    <path d="M12 32 L18 26 L24 30 L30 22 L36 28" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
-    <text x="24" y="44" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">1080</text>
+    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
+    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
+    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
   </svg>
 );
 
-const IconDhShopShot: React.FC<{ accent: string }> = ({ accent }) => (
+const IconDhSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="6" y="8" width="24" height="28" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
-    <rect x="10" y="12" width="16" height="12" rx="1.5" fill={accent} fillOpacity="0.15"/>
-    <circle cx="36" cy="10" r="6" fill={accent}/>
-    <text x="36" y="13" fontSize="5" fill="white" textAnchor="middle" fontWeight="800">$</text>
-  </svg>
-);
-
-const IconDhCleanDrop: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="4" y="6" width="26" height="32" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <line x1="9" y1="14" x2="24" y2="14" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-    <line x1="9" y1="18" x2="20" y2="18" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.5"/>
-    <circle cx="38" cy="38" r="8" fill={accent}/>
-    <path d="M34 38 L37 41 L43 35" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const IconDhPixShip: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="14" y="6" width="28" height="20" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-    <rect x="18" y="10" width="10" height="6" rx="1" fill={accent} fillOpacity="0.25"/>
-    <rect x="10" y="30" width="28" height="12" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-    <text x="24" y="39" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
+    <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <path d="M20 12 L26 8 M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
+    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
   </svg>
 );
 
@@ -180,9 +167,6 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "HEIC Converter", slug: "heic", accent: "#6366F1", Icon: IconHEIC, badge: "Free", category: "Optimize" },
   { name: "ResizePack", slug: "resizepack", accent: "#14B8A6", Icon: IconResizePack, badge: "Free", category: "Optimize" },
   { name: "CropRatio", slug: "croproatio", accent: "#EC4899", Icon: IconCropRatio, badge: "Free", category: "Optimize" },
-  { name: "CleanDrop", slug: "cleandrop", accent: "#16A34A", Icon: IconDhCleanDrop, badge: "Free", category: "Optimize", isCombo: true },
-  { name: "InstaPrep", slug: "instaprep", accent: "#E1306C", Icon: IconDhInstaPrep, badge: "Free", category: "Optimize", isCombo: true },
-  { name: "PixShip", slug: "pixship", accent: "#0891B2", Icon: IconDhPixShip, badge: "Free", category: "Optimize", isCombo: true },
 
   // AI-Powered
   { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", category: "AI-Powered" },
@@ -190,7 +174,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", category: "AI-Powered" },
   { name: "WebLift", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "AI-Powered", isCombo: true },
   { name: "BlogDrop", slug: "blogdrop", accent: "#8B5CF6", Icon: IconDhBlogDrop, badge: "Login", category: "AI-Powered", isCombo: true },
-  { name: "ShopShot", slug: "shopshot", accent: "#F59E0B", Icon: IconDhShopShot, badge: "Login", category: "AI-Powered", isCombo: true },
+  { name: "SmartSort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", category: "AI-Powered" },
 
   // Creative
   { name: "FilmLab", slug: "filmlab", accent: "#F59E0B", Icon: IconFilmLab, badge: "Free", category: "Creative" },
@@ -202,6 +186,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "GeoSort", slug: "geosort", accent: "#22C55E", Icon: IconGeoSort, badge: "Free", category: "Organize" },
   { name: "TravelMap", slug: "travelmap", accent: "#3B82F6", Icon: IconTravelMap, badge: "Free", category: "Organize" },
   { name: "Cull", slug: "cull", accent: "#F43F5E", Icon: IconCull, badge: "Free", category: "Organize" },
+  { name: "BatchName", slug: "batchname", accent: "#F59E0B", Icon: IconDhBatchName, badge: "Free", category: "Organize" },
 ];
 
 // ─── Props ────────────────────────────────────────────────────────────────────
