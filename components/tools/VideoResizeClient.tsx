@@ -668,7 +668,7 @@ export default function VideoResizeClient() {
                 <video
                   src={videoUrl ?? ""}
                   className="w-full max-h-64 object-contain"
-                  preload="metadata"
+                  preload="auto"
                   muted
                   playsInline
                 />

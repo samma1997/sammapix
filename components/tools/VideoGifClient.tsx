@@ -379,8 +379,9 @@ export default function VideoGifClient() {
                 ref={videoRef}
                 src={videoUrl}
                 className="w-full max-h-64 object-contain"
-                preload="metadata"
+                preload="auto"
                 onLoadedMetadata={handleVideoLoaded}
+                onLoadedData={handleVideoLoaded}
                 onEnded={() => setIsPlaying(false)}
               />
               <button
