@@ -178,7 +178,7 @@ export default function Navbar() {
             </Link>
           )}
           {status === "authenticated" && (session?.user as { plan?: string })?.plan !== "pro" && (
-            <Link href="/try-pro">
+            <Link href="/pricing">
               <Button variant="primary" size="sm" className="gap-1">
                 Go Pro
                 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
