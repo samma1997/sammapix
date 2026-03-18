@@ -61,6 +61,16 @@ const PERSONAS: {
   { id: "social", label: "Social Media Manager", description: "Creates content for multiple platforms", Icon: Share2 },
 ];
 
+// ─── Persona -> Tool mappings ────────────────────────────────────────────────
+
+const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
+  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack"],
+  ecommerce: ["compress", "shopshot", "ai-rename", "resizepack", "stampit", "webp"],
+  developer: ["compress", "webp", "resizepack", "cleandrop", "exif", "croproatio"],
+  social: ["compress", "resizepack", "instaprep", "croproatio", "filmlab", "stampit"],
+};
+
 // ─── Animated icons for combo/AI tools ────────────────────────────────────────
 
 const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
@@ -194,8 +204,6 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "Cull", slug: "cull", accent: "#F43F5E", Icon: IconCull, badge: "Free", category: "Organize" },
 ];
 
-const DASH_CATEGORIES: DashCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
-
 // ─── Props ────────────────────────────────────────────────────────────────────
 
 interface DashboardHomeProps {
@@ -236,6 +244,12 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     const dismissed = localStorage.getItem(LS_INSTALL_DISMISSED_KEY);
     if (!dismissed) setShowInstallBanner(true);
   }, [loadPersona]);
+
+  // Dispatch custom event when persona changes so sidebar can react
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(new CustomEvent("sammapix-persona-change", { detail: persona }));
+  }, [persona]);
 
   function handlePersonaSelect(p: Persona) {
     if (typeof window !== "undefined") {
@@ -279,6 +293,15 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       setCheckoutLoading(false);
     }
   }
+
+  // Compute recommended and other tools based on persona
+  const recommendedSlugs = persona ? PERSONA_TOOL_MAP[persona] : [];
+  const recommendedTools = persona
+    ? ALL_DASH_TOOLS.filter((t) => recommendedSlugs.includes(t.slug))
+    : [];
+  const otherTools = persona
+    ? ALL_DASH_TOOLS.filter((t) => !recommendedSlugs.includes(t.slug))
+    : [];
 
   if (!mounted) {
     return (
@@ -406,16 +429,16 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
         )}
       </section>
 
-      {/* -- Tools by category -- */}
-      {DASH_CATEGORIES.map((category) => {
-        const tools = ALL_DASH_TOOLS.filter((t) => t.category === category);
-        return (
-          <section key={category}>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
-              {category}
+      {/* -- Persona-filtered tools view -- */}
+      {persona && !showPersonaSelector ? (
+        <>
+          {/* Recommended tools */}
+          <section>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6366F1] mb-3">
+              Recommended for you
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {tools.map((tool) => (
+              {recommendedTools.map((tool) => (
                 <Link
                   key={tool.slug}
                   href={`/dashboard/tools/${tool.slug}`}
@@ -441,8 +464,74 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
               ))}
             </div>
           </section>
-        );
-      })}
+
+          {/* Other tools (reduced opacity) */}
+          <section>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
+              All other tools
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2.5">
+              {otherTools.map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={`/dashboard/tools/${tool.slug}`}
+                  className="group flex flex-col items-center gap-2 p-3 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150 opacity-50 hover:opacity-100"
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: `${tool.accent}14` }}
+                  >
+                    <tool.Icon accent={tool.accent} />
+                  </div>
+                  <span className="text-[11px] font-medium text-[#171717] dark:text-[#E5E5E5] leading-snug text-center">
+                    {tool.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : (
+        /* -- Default: Tools by category (no persona selected) -- */
+        <>
+          {(["Optimize", "AI-Powered", "Creative", "Organize"] as DashCategory[]).map((category) => {
+            const tools = ALL_DASH_TOOLS.filter((t) => t.category === category);
+            return (
+              <section key={category}>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
+                  {category}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                  {tools.map((tool) => (
+                    <Link
+                      key={tool.slug}
+                      href={`/dashboard/tools/${tool.slug}`}
+                      className="group flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
+                    >
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
+                        style={{ backgroundColor: `${tool.accent}14` }}
+                      >
+                        <tool.Icon accent={tool.accent} />
+                      </div>
+                      <div className="text-center">
+                        <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug block">
+                          {tool.name}
+                        </span>
+                        {tool.isCombo && (
+                          <span className="text-[8px] font-bold uppercase tracking-widest text-[#737373] mt-0.5 block">
+                            MULTI-STEP
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </>
+      )}
 
       {/* -- AI Workflow -- */}
       <section>

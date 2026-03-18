@@ -10,6 +10,7 @@ import {
   Check,
   Crown,
   Coins,
+  X as XIcon,
 } from "lucide-react";
 
 interface DashboardUpgradeProps {
@@ -47,7 +48,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
     <div className="py-10 px-4 sm:px-8">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#6366F1]/10 dark:bg-[#6366F1]/20 text-[#6366F1] rounded-full text-xs font-medium mb-4">
             <Crown className="h-3.5 w-3.5" strokeWidth={2} />
             Pro Plan
@@ -61,42 +62,54 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
         </div>
 
         {/* Current plan indicator */}
-        <div className="mb-6 text-center">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] text-xs font-medium rounded-full border border-[#E5E5E5] dark:border-[#333]">
-            You are currently on the <span className="font-semibold text-[#171717] dark:text-[#E5E5E5] ml-0.5">Free</span> plan
-          </span>
+        <div className="mb-6 p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-[#FAFAFA] dark:bg-[#1E1E1E] text-center">
+          <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
+            You are on the{" "}
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded text-xs font-semibold text-[#171717] dark:text-[#E5E5E5]">
+              Free
+            </span>{" "}
+            plan
+          </p>
         </div>
 
         {/* Founding Member banner */}
-        <div className="mb-8 border border-[#6366F1]/20 dark:border-[#6366F1]/15 rounded-lg px-5 py-4 bg-[#EEF2FF]/40 dark:bg-[#6366F1]/5 text-center">
-          <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+        <div className="mb-8 border-2 border-[#6366F1]/30 dark:border-[#6366F1]/20 rounded-xl px-6 py-5 bg-[#EEF2FF]/50 dark:bg-[#6366F1]/5 text-center">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#6366F1] text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
+            Limited offer
+          </div>
+          <p className="text-lg font-bold text-[#171717] dark:text-[#E5E5E5] mb-1">
             Founding Member Deal
           </p>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
-            First 200 Pro subscribers lock in <span className="font-semibold text-[#6366F1]">$4/month forever</span>.
+            First 200 Pro subscribers lock in{" "}
+            <span className="font-bold text-[#6366F1] text-base">$4/month forever</span>.
+          </p>
+          <p className="text-xs text-[#A3A3A3] mt-2">
             Early adopters get a permanent discount as a thank-you for believing early.
           </p>
         </div>
 
         {/* Toggle */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex items-center gap-2 p-1 bg-[#F5F5F5] dark:bg-[#252525] rounded-md border border-[#E5E5E5] dark:border-[#333]">
+          <div className="inline-flex items-center gap-1 p-1 bg-[#F5F5F5] dark:bg-[#252525] rounded-lg border border-[#E5E5E5] dark:border-[#333]">
             <button
-              className={`px-3 py-1.5 text-sm rounded transition-colors ${
+              className={[
+                "px-4 py-2 text-sm font-medium rounded-md transition-all duration-150",
                 !annual
                   ? "bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] shadow-sm border border-[#E5E5E5] dark:border-[#444]"
-                  : "text-[#737373] hover:text-[#525252]"
-              }`}
+                  : "text-[#737373] hover:text-[#525252]",
+              ].join(" ")}
               onClick={() => setAnnual(false)}
             >
               Monthly
             </button>
             <button
-              className={`px-3 py-1.5 text-sm rounded transition-colors flex items-center gap-1.5 ${
+              className={[
+                "px-4 py-2 text-sm font-medium rounded-md transition-all duration-150 flex items-center gap-1.5",
                 annual
                   ? "bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] shadow-sm border border-[#E5E5E5] dark:border-[#444]"
-                  : "text-[#737373] hover:text-[#525252]"
-              }`}
+                  : "text-[#737373] hover:text-[#525252]",
+              ].join(" ")}
               onClick={() => setAnnual(true)}
             >
               Annual
@@ -108,8 +121,8 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
         </div>
 
         {/* Price card */}
-        <div className="border border-[#6366F1]/30 rounded-xl p-8 bg-white dark:bg-[#1E1E1E] ring-1 ring-[#6366F1]/10 mb-8">
-          <div className="text-center mb-6">
+        <div className="border-2 border-[#6366F1]/30 rounded-xl p-8 bg-white dark:bg-[#1E1E1E] ring-1 ring-[#6366F1]/10 mb-8">
+          <div className="text-center mb-8">
             <div className="flex items-baseline justify-center gap-1.5">
               <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
                 ${annual ? "59" : "7"}
@@ -123,7 +136,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             </p>
             {annual && (
               <p className="mt-1 text-xs text-[#A3A3A3]">
-                Launch promo- 60 days free for early adopters
+                Launch promo -- 60 days free for early adopters
               </p>
             )}
           </div>
@@ -131,10 +144,10 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           {/* Features */}
           <div className="space-y-3 mb-8">
             {[
-              { icon: Zap, text: "AI Workflow Pipeline", sub: "Blog, Instagram, E-commerce presets- run everything in one click" },
+              { icon: Zap, text: "AI Workflow Pipeline", sub: "Blog, Instagram, E-commerce presets -- run everything in one click" },
               { icon: Sparkles, text: "200 AI operations / day", sub: "AI Rename + AI Alt Text included daily" },
               { icon: Image, text: "500 files per batch", sub: "Process full shoots at once" },
-              { icon: Coins, text: "Buy extra AI credits", sub: "When 200/day isn't enough- credits never expire" },
+              { icon: Coins, text: "Buy extra AI credits", sub: "When 200/day isn't enough -- credits never expire" },
               { icon: Shield, text: "No ads", sub: "Clean workspace, no distractions" },
               { icon: Check, text: "Install as desktop app", sub: "Works offline, launches instantly" },
               { icon: Crown, text: "Priority support", sub: "Get help when you need it" },
@@ -153,7 +166,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-md transition-colors disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-base font-semibold rounded-lg transition-colors duration-150 disabled:opacity-60 shadow-sm"
           >
             {loading ? (
               <div className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
@@ -161,8 +174,8 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
             {annual
-              ? "Start 60-day free trial- $59/year"
-              : "Start 7-day free trial- $7/month"
+              ? "Start 60-day free trial -- $59/year"
+              : "Start 7-day free trial -- $7/month"
             }
           </button>
 
@@ -171,7 +184,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           </p>
         </div>
 
-        {/* What you're missing */}
+        {/* What you're missing -- comparison table */}
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E] mb-6">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             Free vs Pro -- what changes
@@ -182,21 +195,33 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             <span className="text-center">Free (current)</span>
             <span className="text-center">Pro</span>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-0">
             {[
               { feature: "AI operations / day", free: "10", pro: "200" },
               { feature: "Files per batch", free: "20", pro: "500" },
               { feature: "Max file size", free: "10 MB", pro: "50 MB" },
-              { feature: "ZIP download", free: "No", pro: "Yes" },
-              { feature: "AI Workflow Pipeline", free: "No", pro: "Yes" },
-              { feature: "Buy extra credits", free: "No", pro: "Yes" },
+              { feature: "ZIP download", free: null, pro: true },
+              { feature: "AI Workflow Pipeline", free: null, pro: true },
+              { feature: "Buy extra credits", free: null, pro: true },
               { feature: "Ads", free: "Yes", pro: "None" },
               { feature: "Support", free: "Community", pro: "Priority" },
             ].map(({ feature, free, pro }) => (
-              <div key={feature} className="grid grid-cols-3 text-xs py-1.5 border-b border-[#F5F5F5] dark:border-[#252525] last:border-0">
+              <div key={feature} className="grid grid-cols-3 text-xs py-2 border-b border-[#F5F5F5] dark:border-[#252525] last:border-0">
                 <span className="text-[#525252] dark:text-[#A3A3A3]">{feature}</span>
-                <span className="text-center text-[#A3A3A3]">{free}</span>
-                <span className="text-center font-medium text-[#171717] dark:text-[#E5E5E5]">{pro}</span>
+                <span className="text-center text-[#A3A3A3] flex items-center justify-center">
+                  {free === null ? (
+                    <XIcon className="h-3.5 w-3.5 text-[#D4D4D4]" strokeWidth={1.5} />
+                  ) : (
+                    free
+                  )}
+                </span>
+                <span className="text-center font-medium text-[#171717] dark:text-[#E5E5E5] flex items-center justify-center">
+                  {pro === true ? (
+                    <Check className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  ) : (
+                    pro
+                  )}
+                </span>
               </div>
             ))}
           </div>
@@ -211,7 +236,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             href="/dashboard/credits"
             className="text-xs text-[#6366F1] hover:underline"
           >
-            View credit packages →
+            View credit packages
           </Link>
         </div>
       </div>
