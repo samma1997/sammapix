@@ -376,5 +376,5 @@ Rules:
   }
 }
 
-// Increase body size limit for this route (Vercel Pro supports up to 100MB)
-export const maxDuration = 60; // seconds — App Router equivalent for long AI requests
+// maxDuration extends serverless function timeout (Hobby: 60s max)
+export const maxDuration = 60;

@@ -169,83 +169,74 @@ export default function TranscribeClient() {
     setEditedText("");
   }, []);
 
-  // ── Audio extraction (client-side) ─────────────────────────────────────────
+  // ── Audio extraction (client-side, instant) ─────────────────────────────────
 
   const extractAudio = useCallback(async (videoFile: File): Promise<File> => {
-    // If already an audio file, return as-is
-    if (videoFile.type.startsWith("audio/")) return videoFile;
+    // If already audio and small enough, return as-is
+    if (videoFile.type.startsWith("audio/") && videoFile.size < 4 * 1024 * 1024) return videoFile;
 
-    // For video files, extract audio track using Web Audio API
-    // This reduces a 17MB video to ~1-2MB audio
-    return new Promise((resolve, reject) => {
-      const video = document.createElement("video");
-      video.muted = false;
-      video.preload = "auto";
+    try {
+      // Decode the entire file's audio track instantly with Web Audio API
+      const arrayBuffer = await videoFile.arrayBuffer();
+      const audioCtx = new AudioContext({ sampleRate: 8000 }); // 8kHz mono = ~1MB/min, fits Vercel 4.5MB limit
+      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
-      const url = URL.createObjectURL(videoFile);
-      video.src = url;
+      // Convert to mono 16kHz 16-bit PCM WAV
+      const numSamples = audioBuffer.length;
+      const sampleRate = audioBuffer.sampleRate;
+      const mono = audioBuffer.getChannelData(0); // first channel
 
-      video.onloadedmetadata = () => {
-        const audioCtx = new AudioContext();
-        const source = audioCtx.createMediaElementSource(video);
-        const dest = audioCtx.createMediaStreamDestination();
-        source.connect(dest);
+      // Build WAV file
+      const wavHeaderSize = 44;
+      const dataSize = numSamples * 2; // 16-bit = 2 bytes per sample
+      const buffer = new ArrayBuffer(wavHeaderSize + dataSize);
+      const view = new DataView(buffer);
 
-        // Also connect to speakers (muted) so the video plays
-        const gain = audioCtx.createGain();
-        gain.gain.value = 0;
-        source.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        const recorder = new MediaRecorder(dest.stream, {
-          mimeType: MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-            ? "audio/webm;codecs=opus"
-            : "audio/webm",
-          audioBitsPerSecond: 64000, // 64kbps = small files, good for speech
-        });
-
-        const chunks: Blob[] = [];
-        recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
-
-        recorder.onstop = () => {
-          URL.revokeObjectURL(url);
-          audioCtx.close();
-          const audioBlob = new Blob(chunks, { type: "audio/webm" });
-          const audioFile = new File([audioBlob], videoFile.name.replace(/\.[^.]+$/, ".webm"), {
-            type: "audio/webm",
-          });
-          resolve(audioFile);
-        };
-
-        recorder.onerror = () => {
-          URL.revokeObjectURL(url);
-          audioCtx.close();
-          // Fallback: send original file if extraction fails
-          resolve(videoFile);
-        };
-
-        // Start recording and playing
-        recorder.start(1000); // collect in 1s chunks
-        video.play().catch(() => {
-          // If autoplay blocked, fall back to original
-          URL.revokeObjectURL(url);
-          resolve(videoFile);
-        });
-
-        video.onended = () => recorder.stop();
-
-        // Safety timeout: if video is longer than expected, stop after duration + 2s
-        const maxDuration = (video.duration || 600) * 1000 + 2000;
-        setTimeout(() => {
-          if (recorder.state === "recording") recorder.stop();
-        }, maxDuration);
+      // WAV header
+      const writeStr = (offset: number, str: string) => {
+        for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
       };
+      writeStr(0, "RIFF");
+      view.setUint32(4, 36 + dataSize, true);
+      writeStr(8, "WAVE");
+      writeStr(12, "fmt ");
+      view.setUint32(16, 16, true); // chunk size
+      view.setUint16(20, 1, true); // PCM
+      view.setUint16(22, 1, true); // mono
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * 2, true); // byte rate
+      view.setUint16(32, 2, true); // block align
+      view.setUint16(34, 16, true); // bits per sample
+      writeStr(36, "data");
+      view.setUint32(40, dataSize, true);
 
-      video.onerror = () => {
-        URL.revokeObjectURL(url);
-        resolve(videoFile); // fallback
-      };
-    });
+      // Write PCM samples (float32 → int16)
+      let offset = 44;
+      for (let i = 0; i < numSamples; i++) {
+        const s = Math.max(-1, Math.min(1, mono[i]));
+        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+        offset += 2;
+      }
+
+      await audioCtx.close();
+
+      const wavBlob = new Blob([buffer], { type: "audio/wav" });
+      const wavFile = new File(
+        [wavBlob],
+        videoFile.name.replace(/\.[^.]+$/, ".wav"),
+        { type: "audio/wav" }
+      );
+
+      // If WAV is still over 4MB, it's too long — return original and let server handle error
+      if (wavFile.size > 4 * 1024 * 1024) {
+        console.warn(`[Transcribe] Extracted WAV is ${(wavFile.size / 1024 / 1024).toFixed(1)}MB — may exceed upload limit`);
+      }
+
+      return wavFile;
+    } catch (err) {
+      console.warn("[Transcribe] Audio extraction failed, sending original:", err);
+      return videoFile; // fallback
+    }
   }, []);
 
   // ── Transcription ──────────────────────────────────────────────────────────
@@ -258,10 +249,8 @@ export default function TranscribeClient() {
     setTranscript(null);
 
     try {
-      // Extract audio from video (reduces 17MB video → ~1-2MB audio)
-      const audioFile = file.type.startsWith("video/")
-        ? await extractAudio(file)
-        : file;
+      // Extract audio from video (reduces 17MB video → ~2MB 16kHz mono WAV)
+      const audioFile = await extractAudio(file);
 
       const formData = new FormData();
       formData.append("file", audioFile);
@@ -384,7 +373,7 @@ export default function TranscribeClient() {
               Free accounts get 5 minutes/day. No credit card required.
             </p>
             <button
-              onClick={() => signIn()}
+              onClick={() => signIn(undefined, { callbackUrl: "/tools/transcribe" })}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
             >
               Sign in — it&apos;s free
