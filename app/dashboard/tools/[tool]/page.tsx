@@ -60,7 +60,7 @@ const COMBO_CONFIGS: Record<string, ComboConfig> = {
     toolName: "WebLift",
     steps: [
       { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
-      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
       { id: "ai-rename", label: "AI Rename (SEO)", enabled: true, isAi: true },
     ],
     requiresLogin: true,
@@ -71,7 +71,7 @@ const COMBO_CONFIGS: Record<string, ComboConfig> = {
     steps: [
       { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
       { id: "resize", label: "Resize (max 1200px)", enabled: true, isAi: false },
-      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
       { id: "ai-rename", label: "AI Rename (SEO blog)", enabled: true, isAi: true },
     ],
     requiresLogin: true,
@@ -82,7 +82,7 @@ const COMBO_CONFIGS: Record<string, ComboConfig> = {
     steps: [
       { id: "compress", label: "Compress (85%)", enabled: true, isAi: false },
       { id: "resize", label: "Resize (max 800px)", enabled: true, isAi: false },
-      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
       { id: "ai-rename", label: "AI Rename (product/SKU)", enabled: true, isAi: true },
     ],
     requiresLogin: true,
@@ -102,7 +102,7 @@ const COMBO_CONFIGS: Record<string, ComboConfig> = {
     steps: [
       { id: "exif-strip", label: "Strip EXIF/metadata", enabled: true, isAi: false },
       { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
-      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
     ],
     requiresLogin: false,
     hasAiSteps: false,

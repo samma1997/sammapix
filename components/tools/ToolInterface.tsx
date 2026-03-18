@@ -22,18 +22,27 @@ interface ToolInterfaceProps {
 }
 
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
-  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday, setConvertToWebP } = useImageStore();
+  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday, setConvertToWebP, setAiRenameEnabled } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const pathname = usePathname();
   const inDashboard = pathname.startsWith("/dashboard");
 
-  // When the WebP tool page mounts, force convertToWebP on
+  // Force correct settings based on which single-purpose tool page we're on.
+  // This prevents stale toggle state from a previous tool visit from leaking
+  // (e.g. visiting WebP page then Compress page would leave convertToWebP=true).
   useEffect(() => {
-    if (defaultMode === "webp") {
+    if (defaultMode === "compress") {
+      setConvertToWebP(false);
+      setAiRenameEnabled(false);
+    } else if (defaultMode === "webp") {
       setConvertToWebP(true);
+      setAiRenameEnabled(false);
+    } else if (defaultMode === "ai-rename") {
+      setConvertToWebP(false);
+      setAiRenameEnabled(true);
     }
-  }, [defaultMode, setConvertToWebP]);
+  }, [defaultMode, setConvertToWebP, setAiRenameEnabled]);
 
   useEffect(() => {
     if (session?.user?.email) {

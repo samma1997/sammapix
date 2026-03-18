@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const STEPS = [
   { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
   { id: "resize", label: "Resize (max 1200px)", enabled: true, isAi: false },
-  { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+  { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
   { id: "ai-rename", label: "AI Rename (SEO blog)", enabled: true, isAi: true },
 ];
 

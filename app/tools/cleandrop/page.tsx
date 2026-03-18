@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const STEPS = [
   { id: "exif-strip", label: "Strip EXIF/metadata", enabled: true, isAi: false },
   { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
-  { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+  { id: "webp", label: "Convert to WebP", enabled: true, isAi: false },
 ];
 
 const features = [
