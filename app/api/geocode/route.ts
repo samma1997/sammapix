@@ -26,9 +26,9 @@ function isValidCoordinate(value: string, min: number, max: number): boolean {
 
 export async function GET(req: NextRequest) {
   // CSRF: reject cross-origin requests in production
-  const origin = req.headers.get("origin");
-  if (origin && process.env.NODE_ENV === "production") {
-    if (!ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+  if (process.env.NODE_ENV === "production") {
+    const origin = req.headers.get("origin");
+    if (!origin || !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
   }

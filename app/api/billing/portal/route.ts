@@ -13,9 +13,9 @@ export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   // CSRF: verify request originates from our own frontend in production
-  const origin = req.headers.get("origin");
-  if (origin && process.env.NODE_ENV === "production") {
-    if (!ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+  if (process.env.NODE_ENV === "production") {
+    const origin = req.headers.get("origin");
+    if (!origin || !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
       return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
     }
   }
@@ -40,6 +40,6 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Stripe error";
     console.error("[billing/portal]", msg);
-    return NextResponse.json({ error: msg }, { status: 500 });
+    return NextResponse.json({ error: "Payment processing failed. Please try again." }, { status: 500 });
   }
 }

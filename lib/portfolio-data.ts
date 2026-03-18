@@ -6,11 +6,17 @@ import {
   type TripPhoto,
 } from "./destinations";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME ?? "do9hrcwn1",
-  api_key: process.env.CLOUDINARY_API_KEY ?? "REDACTED_CLOUDINARY",
-  api_secret: process.env.CLOUDINARY_API_SECRET ?? "",
-});
+function initCloudinary(): void {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  if (!cloudName) throw new Error("CLOUDINARY_CLOUD_NAME not configured");
+  if (!apiKey) throw new Error("CLOUDINARY_API_KEY not configured");
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: process.env.CLOUDINARY_API_SECRET ?? "",
+  });
+}
 
 /** Extract Cloudinary public_id from a full URL */
 function extractPublicId(url: string): string {
@@ -48,6 +54,8 @@ export async function getEnrichedTrip(
   }
 
   try {
+    initCloudinary();
+
     // Fetch context for all photos in parallel
     const contextResults = await Promise.all(
       trip.photos.map((photo) =>

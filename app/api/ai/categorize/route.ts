@@ -85,18 +85,16 @@ export async function POST(req: NextRequest) {
   const dailyLimit = isPro ? AI_RENAME_PRO_PER_DAY : AI_RENAME_FREE_PER_DAY;
 
   // 2. Origin check
-  const origin = req.headers.get("origin");
-  const allowedOrigins = [
-    "https://sammapix.com",
-    "https://www.sammapix.com",
-    "http://localhost:3000",
-  ];
-  if (
-    origin &&
-    process.env.NODE_ENV === "production" &&
-    !allowedOrigins.some((o) => origin.startsWith(o))
-  ) {
-    return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
+  if (process.env.NODE_ENV === "production") {
+    const origin = req.headers.get("origin");
+    const allowedOrigins = [
+      "https://sammapix.com",
+      "https://www.sammapix.com",
+      "http://localhost:3000",
+    ];
+    if (!origin || !allowedOrigins.some((o) => origin.startsWith(o))) {
+      return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
+    }
   }
 
   // 3. Parse body

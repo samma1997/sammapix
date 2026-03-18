@@ -3,22 +3,33 @@ import { revalidatePath } from "next/cache";
 import { v2 as cloudinary } from "cloudinary";
 import { z } from "zod";
 
-const ADMIN_SECRET = process.env.ADMIN_SECRET ?? "REDACTED";
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME ?? "do9hrcwn1",
-  api_key: process.env.CLOUDINARY_API_KEY ?? "REDACTED_CLOUDINARY",
-  api_secret: process.env.CLOUDINARY_API_SECRET ?? "",
-});
+function initCloudinary(): void {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  if (!cloudName) throw new Error("CLOUDINARY_CLOUD_NAME not configured");
+  if (!apiKey) throw new Error("CLOUDINARY_API_KEY not configured");
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: process.env.CLOUDINARY_API_SECRET ?? "",
+  });
+}
 
 function checkAuth(req: NextRequest): boolean {
+  const adminSecret = process.env.ADMIN_SECRET;
+  if (!adminSecret) throw new Error("ADMIN_SECRET not configured");
   const key = req.headers.get("x-admin-key") ?? "";
-  return key === ADMIN_SECRET;
+  return key === adminSecret;
 }
 
 // GET- fetch all portfolio photos with context
 export async function GET(req: NextRequest) {
-  if (!checkAuth(req)) {
+  try {
+    if (!checkAuth(req)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    initCloudinary();
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -78,7 +89,12 @@ const UpdateSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  if (!checkAuth(req)) {
+  try {
+    if (!checkAuth(req)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    initCloudinary();
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
