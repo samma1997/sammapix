@@ -69,10 +69,13 @@ export async function POST(req: NextRequest) {
       payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: session.user.email,
-      allow_promotion_codes: true, // Let users enter promo codes too
-      ...(applyFoundingCoupon ? {
-        discounts: [{ coupon: FOUNDING_COUPON_ID }],
-      } : {}),
+      // Stripe doesn't allow discounts + allow_promotion_codes together.
+      // If founding coupon is available, apply it automatically.
+      // Otherwise, let users enter promo codes manually.
+      ...(applyFoundingCoupon
+        ? { discounts: [{ coupon: FOUNDING_COUPON_ID }] }
+        : { allow_promotion_codes: true }
+      ),
       success_url: `${appUrl}/dashboard?upgraded=true`,
       cancel_url: `${appUrl}/dashboard/upgrade?canceled=true`,
       metadata: {
