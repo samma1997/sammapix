@@ -13,9 +13,9 @@ import { getInt, redisConfigured } from "@/lib/redis";
 // ---------------------------------------------------------------------------
 
 export const CREDIT_PACKAGES = [
-  { id: "credits_100", name: "Starter", credits: 100, price: 200 },   // $2.00
-  { id: "credits_500", name: "Standard", credits: 500, price: 500 },  // $5.00
-  { id: "credits_2000", name: "Mega", credits: 2000, price: 1500 },   // $15.00
+  { id: "credits_100", name: "Starter", credits: 100, price: 499 },   // $4.99
+  { id: "credits_500", name: "Standard", credits: 500, price: 999 },  // $9.99
+  { id: "credits_2000", name: "Mega", credits: 2000, price: 2999 },   // $29.99
 ] as const;
 
 export type CreditPackageId = (typeof CREDIT_PACKAGES)[number]["id"];

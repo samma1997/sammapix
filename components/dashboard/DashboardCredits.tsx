@@ -13,24 +13,24 @@ const PACKAGES = [
     id: "credits_100",
     name: "Starter",
     credits: 100,
-    priceUsd: 2,
-    perCredit: "$0.02",
+    priceUsd: 4.99,
+    perCredit: "$0.05",
     highlighted: false,
   },
   {
     id: "credits_500",
     name: "Standard",
     credits: 500,
-    priceUsd: 5,
-    perCredit: "$0.01",
+    priceUsd: 9.99,
+    perCredit: "$0.02",
     highlighted: true,
   },
   {
     id: "credits_2000",
     name: "Mega",
     credits: 2000,
-    priceUsd: 15,
-    perCredit: "$0.0075",
+    priceUsd: 29.99,
+    perCredit: "$0.015",
     highlighted: false,
   },
 ] as const;
@@ -307,7 +307,7 @@ export default function DashboardCredits({ purchased, canceled }: DashboardCredi
         </ul>
         <p className="text-xs text-[#737373] dark:text-[#A3A3A3] border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-3 leading-relaxed">
           Pro users get 200 free AI operations/day. Credits are for when you need more.{" "}
-          <Link href="/pricing" className="text-[#6366F1] hover:underline underline-offset-2">
+          <Link href="/dashboard/upgrade" className="text-[#6366F1] hover:underline underline-offset-2">
             View plans
           </Link>
         </p>

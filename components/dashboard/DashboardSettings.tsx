@@ -302,7 +302,7 @@ export default function DashboardSettings({
                 </div>
 
                 <Link
-                  href="/try-pro"
+                  href="/dashboard/upgrade"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                 >
                   <Crown className="h-4 w-4" strokeWidth={1.5} />

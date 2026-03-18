@@ -20,7 +20,7 @@ interface DashboardUpgradeProps {
 export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
   const [loading, setLoading] = useState(false);
   const [annual, setAnnual] = useState(false);
-  const savePercent = Math.round((1 - 59 / (7 * 12)) * 100);
+  const savePercent = Math.round((1 - 60 / (7 * 12)) * 100);
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -125,7 +125,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           <div className="text-center mb-8">
             <div className="flex items-baseline justify-center gap-1.5">
               <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-                ${annual ? "59" : "7"}
+                ${annual ? "60" : "7"}
               </span>
               <span className="text-sm text-[#A3A3A3]">
                 / {annual ? "year" : "month"}
@@ -174,7 +174,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
             {annual
-              ? "Start 60-day free trial -- $59/year"
+              ? "Start 60-day free trial -- $60/year"
               : "Start 7-day free trial -- $7/month"
             }
           </button>

@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       email: session.user.email,
       ipAddress: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? undefined,
       userAgent: req.headers.get("user-agent") ?? undefined,
-      customData: { currency: "USD", value: plan === "annual" ? 59 : 7 },
+      customData: { currency: "USD", value: plan === "annual" ? 60 : 7 },
     }).catch(() => {});
 
     return NextResponse.json({ url: checkoutSession.url });
