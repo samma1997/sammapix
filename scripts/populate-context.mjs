@@ -15,13 +15,23 @@
 import { v2 as cloudinary } from "cloudinary";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
+const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
+if (!CLOUDINARY_CLOUD_NAME) { console.error("Missing CLOUDINARY_CLOUD_NAME env var"); process.exit(1); }
+if (!CLOUDINARY_API_KEY) { console.error("Missing CLOUDINARY_API_KEY env var"); process.exit(1); }
+if (!CLOUDINARY_API_SECRET) { console.error("Missing CLOUDINARY_API_SECRET env var"); process.exit(1); }
+if (!GEMINI_API_KEY) { console.error("Missing GEMINI_API_KEY env var"); process.exit(1); }
+
 cloudinary.config({
-  cloud_name: "do9hrcwn1",
-  api_key: "REDACTED_CLOUDINARY",
-  api_secret: "WH8TlUm7Zuj1zUa2Zvrc8JF42hw",
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
 });
 
-const genAI = new GoogleGenerativeAI("REDACTED_GEMINI_KEY");
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 const [folder, destination, country, year] = process.argv.slice(2);

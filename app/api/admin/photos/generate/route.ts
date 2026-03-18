@@ -1,13 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const ADMIN_SECRET = process.env.ADMIN_SECRET ?? "REDACTED";
-const GEMINI_KEY = process.env.GEMINI_API_KEY ?? "REDACTED_GEMINI_KEY";
-
-const genAI = new GoogleGenerativeAI(GEMINI_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+// Only allow fetching images from the trusted Cloudinary domain (SSRF prevention)
+const ALLOWED_IMAGE_HOSTS = ["res.cloudinary.com"];
 
 export async function POST(req: NextRequest) {
+  const ADMIN_SECRET = process.env.ADMIN_SECRET;
+  if (!ADMIN_SECRET) {
+    return NextResponse.json({ error: "Service not configured" }, { status: 503 });
+  }
+
+  const GEMINI_KEY = process.env.GEMINI_API_KEY;
+  if (!GEMINI_KEY) {
+    return NextResponse.json({ error: "AI service not configured" }, { status: 503 });
+  }
+
   const key = req.headers.get("x-admin-key") ?? "";
   if (key !== ADMIN_SECRET) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -18,10 +25,24 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing imageUrl" }, { status: 400 });
   }
 
+  // SSRF prevention: validate that the URL belongs to an allowed host
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(imageUrl);
+  } catch {
+    return NextResponse.json({ error: "Invalid imageUrl" }, { status: 400 });
+  }
+  if (!ALLOWED_IMAGE_HOSTS.includes(parsedUrl.hostname)) {
+    return NextResponse.json({ error: "Image host not allowed" }, { status: 400 });
+  }
+
   const langMap: Record<string, string> = {
     it: "Italian", fr: "French", es: "Spanish", de: "German", pt: "Portuguese",
   };
   const language = langMap[locale] ?? "English";
+
+  const genAI = new GoogleGenerativeAI(GEMINI_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   try {
     const imageResp = await fetch(imageUrl);
@@ -60,6 +81,6 @@ Respond ONLY with valid JSON:
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Unknown error";
     console.error("[admin/photos/generate]", msg);
-    return NextResponse.json({ error: msg }, { status: 500 });
+    return NextResponse.json({ error: "AI processing failed" }, { status: 500 });
   }
 }

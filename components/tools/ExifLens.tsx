@@ -31,8 +31,8 @@ type PiexifType = {
 let _piexif: PiexifType | null = null;
 async function getPiexif(): Promise<PiexifType> {
   if (!_piexif) {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    _piexif = require("piexifjs") as PiexifType;
+    const mod = await import("piexifjs");
+    _piexif = (mod.default ?? mod) as PiexifType;
   }
   return _piexif;
 }

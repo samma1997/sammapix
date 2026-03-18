@@ -7,11 +7,17 @@ import { z } from "zod";
 
 // ── Cloudinary config ────────────────────────────────────────────────────────
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME ?? "do9hrcwn1",
-  api_key: process.env.CLOUDINARY_API_KEY ?? "REDACTED_CLOUDINARY",
-  api_secret: process.env.CLOUDINARY_API_SECRET ?? "",
-});
+function initCloudinary(): void {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  if (!cloudName) throw new Error("CLOUDINARY_CLOUD_NAME not configured");
+  if (!apiKey) throw new Error("CLOUDINARY_API_KEY not configured");
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: process.env.CLOUDINARY_API_SECRET ?? "",
+  });
+}
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -45,6 +51,7 @@ export async function GET() {
   }
 
   try {
+    initCloudinary();
     // Search all images inside sammapix/portfolio (recursive with **)
     const result = await cloudinary.search
       .expression("folder:sammapix/portfolio/*")
@@ -111,6 +118,7 @@ export async function POST(req: NextRequest) {
   if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  initCloudinary();
 
   let body: unknown;
   try {
