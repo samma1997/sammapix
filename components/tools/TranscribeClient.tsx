@@ -14,7 +14,9 @@ import {
   Mic,
   FileText,
   Clock,
+  RotateCcw,
 } from "lucide-react";
+import MiniGame from "@/components/ui/MiniGame";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -367,36 +369,49 @@ export default function TranscribeClient() {
           </div>
 
           {/* Transcribe button */}
-          {status !== "done" && (
+          {status !== "done" && !isProcessing && (
             <button
               onClick={transcribe}
-              disabled={isProcessing || !isLoggedIn}
+              disabled={!isLoggedIn}
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {status === "uploading" ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                  Uploading...
-                </>
-              ) : status === "processing" ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                  Transcribing with AI...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="h-4 w-4" strokeWidth={1.5} />
-                  Transcribe with AI
-                </>
-              )}
+              <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+              Transcribe with AI
             </button>
+          )}
+
+          {/* Processing state with mini-game */}
+          {isProcessing && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-center gap-2 py-3">
+                <Loader2 className="h-4 w-4 animate-spin text-[#6366F1]" strokeWidth={1.5} />
+                <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
+                  {status === "uploading" ? "Uploading..." : "Transcribing with AI — this may take a minute..."}
+                </span>
+              </div>
+              <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E] p-3">
+                <p className="text-[10px] text-[#A3A3A3] text-center mb-2 uppercase tracking-wide">
+                  Play while you wait
+                </p>
+                <MiniGame />
+              </div>
+            </div>
           )}
 
           {/* Error state */}
           {status === "error" && error && (
             <div className="flex items-start gap-2 p-3 border border-[#FCA5A5] bg-[#FEF2F2] dark:bg-[#2A1A1A] dark:border-[#7F1D1D] rounded-md">
               <AlertCircle className="h-4 w-4 text-[#DC2626] mt-0.5 shrink-0" strokeWidth={1.5} />
-              <p className="text-sm text-[#DC2626]">{error}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm text-[#DC2626]">{error}</p>
+                <button
+                  onClick={() => { setStatus("idle"); setError(null); }}
+                  className="inline-flex items-center gap-1 mt-2 text-xs text-[#6366F1] hover:underline"
+                >
+                  <RotateCcw className="h-3 w-3" strokeWidth={1.5} />
+                  Try again
+                </button>
+              </div>
             </div>
           )}
 
