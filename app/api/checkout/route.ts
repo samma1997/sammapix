@@ -11,9 +11,12 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
 ];
 
-// Trial periods- change these when promo ends
-const TRIAL_DAYS_MONTHLY = 7;
-const TRIAL_DAYS_ANNUAL = 60; // Promo: first users get 60 days free
+// 7-day free trial for all plans
+const TRIAL_DAYS = 7;
+
+// Founding member coupon - first 200 subscribers get 43% off forever
+const FOUNDING_COUPON_ID = "FOUNDING200";
+const FOUNDING_MAX = 200;
 
 export async function POST(req: NextRequest) {
   const origin = req.headers.get("origin");
@@ -42,9 +45,23 @@ export async function POST(req: NextRequest) {
 
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
   const priceId = plan === "annual"
-    ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID || process.env.STRIPE_PRO_PRICE_ID!)
+    ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID?.trim() || process.env.STRIPE_PRO_PRICE_ID!)
     : process.env.STRIPE_PRO_PRICE_ID!;
-  const trialDays = plan === "annual" ? TRIAL_DAYS_ANNUAL : TRIAL_DAYS_MONTHLY;
+
+  // Check if founding member coupon is still available
+  let applyFoundingCoupon = false;
+  try {
+    const coupon = await stripe.coupons.retrieve(FOUNDING_COUPON_ID);
+    if (coupon && !coupon.deleted) {
+      const timesRedeemed = coupon.times_redeemed ?? 0;
+      const maxRedemptions = coupon.max_redemptions ?? FOUNDING_MAX;
+      if (timesRedeemed < maxRedemptions) {
+        applyFoundingCoupon = true;
+      }
+    }
+  } catch {
+    // Coupon doesn't exist or error - skip
+  }
 
   try {
     const checkoutSession = await stripe.checkout.sessions.create({
@@ -52,14 +69,19 @@ export async function POST(req: NextRequest) {
       payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: session.user.email,
+      allow_promotion_codes: true, // Let users enter promo codes too
+      ...(applyFoundingCoupon ? {
+        discounts: [{ coupon: FOUNDING_COUPON_ID }],
+      } : {}),
       success_url: `${appUrl}/dashboard?upgraded=true`,
       cancel_url: `${appUrl}/dashboard/upgrade?canceled=true`,
       metadata: {
         userId: (session.user as { id?: string }).id ?? session.user.email,
         plan,
+        founding_member: applyFoundingCoupon ? "true" : "false",
       },
       subscription_data: {
-        trial_period_days: trialDays,
+        trial_period_days: TRIAL_DAYS,
         metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
       },
     });
