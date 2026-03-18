@@ -185,10 +185,17 @@ export default function TranscribeClient() {
 
       setStatus("processing");
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 120_000); // 2 min timeout
+
       const res = await fetch("/api/ai/transcribe", {
         method: "POST",
         body: formData,
+        credentials: "include",
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const data = (await res.json()) as {
         data?: TranscriptResult;
@@ -225,8 +232,15 @@ export default function TranscribeClient() {
         setError("No transcript returned.");
         setStatus("error");
       }
-    } catch {
-      setError("Network error. Please check your connection and try again.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
+        setError("Connection failed. The file may be too large — try a smaller file (under 25 MB works best).");
+      } else if (msg.includes("timeout") || msg.includes("aborted")) {
+        setError("Request timed out. Try a shorter audio/video file.");
+      } else {
+        setError(`Transcription failed: ${msg}`);
+      }
       setStatus("error");
     }
   }, [file]);
