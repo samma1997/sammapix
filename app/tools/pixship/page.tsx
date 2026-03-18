@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { id: "compress", label: "Compress (90%, light)", enabled: true },
-  { id: "resize", label: "Resize (max 2400px)", enabled: true },
+  { id: "compress", label: "Compress (90%, light)", enabled: true, isAi: false },
+  { id: "resize", label: "Resize (max 2400px)", enabled: true, isAi: false },
 ];
 
 const features = [

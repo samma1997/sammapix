@@ -1,38 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BookOpen,
-  Instagram,
-  ShoppingBag,
-  Users,
-  Lock,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/layout/HeroSection";
-import {
-  ToolCard,
-  type ToolCardData,
-  IconCompress,
-  IconWebP,
-  IconAIRename,
-  IconEXIF,
-  IconFilmLab,
-  IconStampIt,
-  IconCropRatio,
-  IconTwinHunt,
-  IconGeoSort,
-  IconTravelMap,
-  IconResizePack,
-  IconCull,
-  IconHEIC,
-} from "@/components/ui/ToolCard";
+import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata = {
-  title: "SammaPix — AI Photo Workflow Platform for Content Creators",
+  title: "SammaPix -- AI Photo Workflow Platform for Content Creators",
   description:
-    "Compress, rename with AI, resize, convert — all in one pipeline. 20+ free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert -- all in one pipeline. 20+ free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -46,9 +23,9 @@ export const metadata = {
   ],
   alternates: { canonical: "https://sammapix.com" },
   openGraph: {
-    title: "SammaPix — AI Photo Workflow for Content Creators",
+    title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert — all in one pipeline. 20+ free tools. No uploads.",
+      "Compress, rename with AI, resize, convert -- all in one pipeline. 20+ free tools. No uploads.",
     url: "https://sammapix.com",
     type: "website",
     images: [
@@ -56,305 +33,11 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — AI Photo Workflow Platform for Content Creators",
+        alt: "SammaPix -- AI Photo Workflow Platform for Content Creators",
       },
     ],
   },
 };
-
-// ─── Tool data ────────────────────────────────────────────────────────────────
-
-const TOOLS_OPTIMIZE: ToolCardData[] = [
-  {
-    name: "Compress",
-    href: "/tools/compress",
-    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
-    accent: "#6366F1",
-    badges: ["100% Free", "Up to 90% smaller"],
-    Icon: IconCompress,
-  },
-  {
-    name: "WebP",
-    href: "/tools/webp",
-    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
-    accent: "#10B981",
-    badges: ["100% Free", "25-34% smaller"],
-    Icon: IconWebP,
-  },
-  {
-    name: "ResizePack",
-    href: "/tools/resizepack",
-    tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
-    accent: "#14B8A6",
-    badges: ["100% Free", "Social presets"],
-    Icon: IconResizePack,
-  },
-  {
-    name: "CropRatio",
-    href: "/tools/croproatio",
-    tagline: "Crop to exact ratios — 1:1, 16:9, 4:3, A4 and more.",
-    accent: "#EC4899",
-    badges: ["100% Free", "9 ratios"],
-    Icon: IconCropRatio,
-  },
-];
-
-const TOOLS_AI: ToolCardData[] = [
-  {
-    name: "AI Rename",
-    href: "/tools/ai-rename",
-    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
-    accent: "#8B5CF6",
-    badges: ["AI-powered", "Gemini Flash"],
-    Icon: IconAIRename,
-  },
-  {
-    name: "EXIF Lens",
-    href: "/tools/exif",
-    tagline: "Strip GPS, camera data and all metadata from photos.",
-    accent: "#EF4444",
-    badges: ["100% Free", "Privacy"],
-    Icon: IconEXIF,
-  },
-];
-
-const TOOLS_ORGANIZE: ToolCardData[] = [
-  {
-    name: "GeoSort",
-    href: "/tools/geosort",
-    tagline: "Sort photos by country using GPS EXIF data.",
-    accent: "#22C55E",
-    badges: ["100% Free", "GPS"],
-    Icon: IconGeoSort,
-  },
-  {
-    name: "TravelMap",
-    href: "/tools/travelmap",
-    tagline: "Generate an interactive map from your travel photos.",
-    accent: "#3B82F6",
-    badges: ["100% Free", "GPS"],
-    Icon: IconTravelMap,
-  },
-  {
-    name: "TwinHunt",
-    href: "/tools/twinhunt",
-    tagline: "Perceptual hashing finds exact and near-duplicate photos.",
-    accent: "#F97316",
-    badges: ["100% Free", "pHash"],
-    Icon: IconTwinHunt,
-  },
-  {
-    name: "Cull",
-    href: "/tools/cull",
-    tagline: "Rate and cull a shoot in minutes. Star rating system.",
-    accent: "#F43F5E",
-    badges: ["100% Free", "Star rating"],
-    Icon: IconCull,
-  },
-];
-
-const TOOLS_EDIT: ToolCardData[] = [
-  {
-    name: "FilmLab",
-    href: "/tools/filmlab",
-    tagline: "14 analog film presets — Kodak Gold, Fuji, Ilford and 8 Samma originals.",
-    accent: "#F59E0B",
-    badges: ["100% Free", "14 presets"],
-    Icon: IconFilmLab,
-  },
-  {
-    name: "StampIt",
-    href: "/tools/stampit",
-    tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
-    accent: "#06B6D4",
-    badges: ["100% Free", "Batch"],
-    Icon: IconStampIt,
-  },
-  {
-    name: "HEIC Converter",
-    href: "/tools/heic",
-    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
-    accent: "#6366F1",
-    badges: ["100% Free", "iPhone", "Batch"],
-    Icon: IconHEIC,
-  },
-];
-
-// ─── Video tool icons & data ──────────────────────────────────────────────────
-
-const IconVideoThumbHome: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes hpvt-scan { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(16px); } }
-      @keyframes hpvt-play { 0%, 60% { transform: scale(0.8); opacity: 0.5; } 80%, 100% { transform: scale(1); opacity: 1; } }
-      .hpvt-scan { animation: hpvt-scan 2.4s ease-in-out infinite; }
-      .hpvt-play { transform-origin: 14px 20px; animation: hpvt-play 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
-    `}</style>
-    <rect x="2" y="10" width="44" height="22" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    {[5, 13, 21, 29, 37].map((x) => (
-      <React.Fragment key={x}>
-        <rect x={x} y="12" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
-        <rect x={x} y="26" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
-      </React.Fragment>
-    ))}
-    <rect x="6" y="17" width="12" height="8" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
-    <g className="hpvt-play"><path d="M11 18.5 L11 23.5 L16 21 Z" fill={accent}/></g>
-    <g className="hpvt-scan"><line x1="19" y1="10" x2="19" y2="32" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeOpacity="0.7"/></g>
-    <path d="M34 36 L34 44 M30 40 L34 44 L38 40" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const IconVideoCompressHome: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes hpvc-sq { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
-      @keyframes hpvc-al { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(4px); } }
-      @keyframes hpvc-ar { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(-4px); } }
-      .hpvc-body { transform-origin: 24px 22px; animation: hpvc-sq 2s ease-in-out infinite; }
-      .hpvc-al { animation: hpvc-al 2s ease-in-out infinite; }
-      .hpvc-ar { animation: hpvc-ar 2s ease-in-out infinite; }
-    `}</style>
-    <g className="hpvc-body">
-      <rect x="8" y="16" width="32" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <rect x="8" y="16" width="32" height="6" rx="2" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.25"/>
-      <line x1="16" y1="16" x2="14" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
-      <line x1="22" y1="16" x2="20" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
-      <line x1="28" y1="16" x2="26" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
-      <path d="M20 27 L20 33 L26 30 Z" fill={accent} fillOpacity="0.6"/>
-    </g>
-    <g className="hpvc-al"><path d="M4 22 L8 19 M4 22 L8 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
-    <g className="hpvc-ar"><path d="M44 22 L40 19 M44 22 L40 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
-  </svg>
-);
-
-const IconVideoGifHome: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes hpvg-fr { 0%, 100% { opacity: 1; } 33% { opacity: 0.4; } 66% { opacity: 0.7; } }
-      @keyframes hpvg-lp { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      .hpvg-f1 { animation: hpvg-fr 1.8s ease-in-out 0s infinite; }
-      .hpvg-f2 { animation: hpvg-fr 1.8s ease-in-out 0.6s infinite; }
-      .hpvg-f3 { animation: hpvg-fr 1.8s ease-in-out 1.2s infinite; }
-      .hpvg-loop { transform-origin: 34px 34px; animation: hpvg-lp 2.4s linear infinite; }
-    `}</style>
-    <g className="hpvg-f1"><rect x="4" y="8" width="20" height="15" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25" strokeOpacity="0.4"/></g>
-    <g className="hpvg-f2"><rect x="7" y="11" width="20" height="15" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.25" strokeOpacity="0.6"/></g>
-    <g className="hpvg-f3">
-      <rect x="10" y="14" width="20" height="15" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
-      <path d="M17 18 L17 23 L23 20.5 Z" fill={accent} fillOpacity="0.7"/>
-    </g>
-    <text x="4" y="38" fontSize="7" fill={accent} fontWeight="800" fontFamily="monospace" letterSpacing="1">GIF</text>
-    <g className="hpvg-loop">
-      <path d="M34 29 A5 5 0 1 1 29 34" stroke={accent} strokeWidth="1.75" strokeLinecap="round" fill="none"/>
-      <path d="M28 30 L29 34 L33 33" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-    </g>
-  </svg>
-);
-
-const IconTranscribeHome: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes hptr-wv { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
-      @keyframes hptr-ln { 0%, 100% { opacity: 0.3; transform: scaleX(0.6); } 50% { opacity: 1; transform: scaleX(1); } }
-      .hptr-b1 { transform-origin: 8px 22px; animation: hptr-wv 1.2s ease-in-out 0s infinite; }
-      .hptr-b2 { transform-origin: 12px 22px; animation: hptr-wv 1.2s ease-in-out 0.15s infinite; }
-      .hptr-b3 { transform-origin: 16px 22px; animation: hptr-wv 1.2s ease-in-out 0.3s infinite; }
-      .hptr-b4 { transform-origin: 20px 22px; animation: hptr-wv 1.2s ease-in-out 0.45s infinite; }
-      .hptr-b5 { transform-origin: 24px 22px; animation: hptr-wv 1.2s ease-in-out 0.6s infinite; }
-      .hptr-l1 { transform-origin: 28px 31px; animation: hptr-ln 1.8s ease-in-out 0s infinite; }
-      .hptr-l2 { transform-origin: 28px 36px; animation: hptr-ln 1.8s ease-in-out 0.4s infinite; }
-      .hptr-l3 { transform-origin: 28px 41px; animation: hptr-ln 1.8s ease-in-out 0.8s infinite; }
-    `}</style>
-    <g className="hptr-b1"><rect x="6" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
-    <g className="hptr-b2"><rect x="11" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
-    <g className="hptr-b3"><rect x="16" y="12" width="3" height="20" rx="1.5" fill={accent}/></g>
-    <g className="hptr-b4"><rect x="21" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
-    <g className="hptr-b5"><rect x="26" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
-    <path d="M33 22 L38 22 M35 19 L38 22 L35 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <g className="hptr-l1"><rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
-    <g className="hptr-l2"><rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
-    <g className="hptr-l3"><rect x="28" y="39" width="14" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
-  </svg>
-);
-
-const IconVideoResizeHome: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes hpvrs-w { 0%, 40%, 100% { opacity: 1; transform: scale(1); } 60%, 80% { opacity: 0.2; transform: scale(0.9); } }
-      @keyframes hpvrs-t { 0%, 40%, 100% { opacity: 0.2; transform: scale(0.9); } 60%, 80% { opacity: 1; transform: scale(1); } }
-      .hpvrs-wide { transform-origin: 13px 22px; animation: hpvrs-w 2.4s ease-in-out infinite; }
-      .hpvrs-tall { transform-origin: 35px 24px; animation: hpvrs-t 2.4s ease-in-out infinite; }
-    `}</style>
-    <g className="hpvrs-wide">
-      <rect x="2" y="16" width="22" height="12" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <text x="6" y="25" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">16:9</text>
-    </g>
-    <path d="M26 22 L30 22 M28 20 L30 22 L28 24" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <g className="hpvrs-tall">
-      <rect x="28" y="10" width="18" height="28" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
-      <text x="31" y="27" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">9:16</text>
-    </g>
-  </svg>
-);
-
-const TOOLS_VIDEO: ToolCardData[] = [
-  {
-    name: "Transcribe",
-    href: "/tools/transcribe",
-    tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
-    accent: "#0891B2",
-    badges: ["AI-powered", "Gemini Flash"],
-    Icon: IconTranscribeHome,
-  },
-];
-
-// ─── Workflow preset cards ─────────────────────────────────────────────────────
-
-const WORKFLOW_PRESETS = [
-  {
-    id: "blog",
-    label: "Blog Post",
-    icon: BookOpen,
-    steps: ["Compress 80%", "AI Rename", "Resize 1200px", "WebP"],
-    hasAI: true,
-    href: "/tools/workflow?preset=blog",
-  },
-  {
-    id: "instagram",
-    label: "Instagram",
-    icon: Instagram,
-    steps: ["Compress 85%", "Resize 1080px"],
-    hasAI: false,
-    href: "/tools/workflow?preset=instagram",
-  },
-  {
-    id: "ecommerce",
-    label: "E-commerce",
-    icon: ShoppingBag,
-    steps: ["Compress 85%", "AI Rename (SKU)", "Resize 800px", "WebP"],
-    hasAI: true,
-    href: "/tools/workflow?preset=ecommerce",
-  },
-  {
-    id: "client",
-    label: "Client Delivery",
-    icon: Users,
-    steps: ["Light compress 90%", "Resize 2400px"],
-    hasAI: false,
-    href: "/tools/workflow?preset=client",
-  },
-] as const;
-
-// ─── Combo tools ──────────────────────────────────────────────────────────────
-
-const COMBO_TOOLS = [
-  { name: "WebLift",   href: "/tools/weblift",   accent: "#3B82F6" },
-  { name: "BlogDrop",  href: "/tools/blogdrop",  accent: "#8B5CF6" },
-  { name: "InstaPrep", href: "/tools/instaprep", accent: "#E1306C" },
-  { name: "ShopShot",  href: "/tools/shopshot",  accent: "#F59E0B" },
-  { name: "CleanDrop", href: "/tools/cleandrop", accent: "#16A34A" },
-  { name: "PixShip",   href: "/tools/pixship",   accent: "#0891B2" },
-] as const;
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
@@ -362,17 +45,17 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is SammaPix completely free?",
     answer:
-      "Yes. All tools are free forever -- compress, convert, resize, rename, video tools and more. Pro unlocks unlimited AI operations, ZIP download, and removes limits. No signup required for free tools.",
+      "Yes. All tools are free forever -- compress, convert, resize, rename, video tools and more. AI tools require a free login (10/day limit). Pro unlocks unlimited AI operations and removes limits. No signup required for free tools.",
   },
   {
     question: "Do my images get uploaded to a server?",
     answer:
-      "No. All processing happens in your browser using JavaScript. Your images never leave your device — not even for the AI Workflow pipeline (except the AI Rename step, which sends a thumbnail to Google Gemini).",
+      "No. All processing happens in your browser using JavaScript. Your images never leave your device -- not even for combo tools (except AI steps, which send a thumbnail to Google Gemini).",
   },
   {
-    question: "What is the AI Workflow pipeline?",
+    question: "What are combo tools?",
     answer:
-      "The AI Workflow lets Pro users run the full sequence — Compress, AI Rename, Resize, WebP convert — in a single click and download all results as a ZIP. Free users can use each tool individually.",
+      "Combo tools chain multiple steps together. For example, WebLift compresses, converts to WebP, and AI-renames in one click. You can toggle individual steps on or off.",
   },
   {
     question: "What image formats does SammaPix support?",
@@ -382,7 +65,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Do I need to create an account?",
     answer:
-      "No account needed for most tools. AI Rename and Transcribe require a free account to prevent Gemini API abuse. Pro plan requires an account.",
+      "No account needed for most tools. AI-powered tools (AI Rename, AI Alt Text, Transcribe) require a free account to prevent API abuse. Pro plan requires an account.",
   },
 ];
 
@@ -473,169 +156,30 @@ export default function HomePage() {
       {/* Hero */}
       <HeroSection />
 
-      {/* ── 1. Workflow Preset Cards ── */}
-      <section className="py-14 px-4 sm:px-6 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-6">
-            <span className="text-[10px] font-medium uppercase tracking-widest text-[#6366F1] mb-2 inline-block">
-              One-Click Workflows
-            </span>
-            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-              AI Workflow Pipeline
-            </h2>
-            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] max-w-lg">
-              Choose a preset. Drop your images. Download results. Free users can toggle off AI steps.
-            </p>
-          </div>
+      {/* -- All Tools Grid (client component with tabs) -- */}
+      <HomepageToolGrid />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-            {WORKFLOW_PRESETS.map((preset) => {
-              const Icon = preset.icon;
-              return (
-                <Link
-                  key={preset.id}
-                  href={preset.href}
-                  className="group relative block p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#1E1E1E] hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-all"
-                >
-                  {preset.hasAI && (
-                    <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] text-[#A3A3A3] dark:text-[#525252]">
-                      <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
-                      Login required
-                    </span>
-                  )}
-                  <div className="h-9 w-9 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center mb-3">
-                    <Icon className="h-4.5 w-4.5 text-[#525252] dark:text-[#A3A3A3]" strokeWidth={1.5} />
-                  </div>
-                  <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-                    {preset.label}
-                  </p>
-                  <ul className="space-y-1 mb-4">
-                    {preset.steps.map((s) => (
-                      <li key={s} className="text-xs text-[#737373] dark:text-[#A3A3A3] flex items-center gap-1.5">
-                        <span className="text-[#D4D4D4] dark:text-[#404040] select-none">--</span>
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#6366F1] group-hover:gap-2.5 transition-all">
-                    Start
-                    <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+      {/* -- AI Workflow CTA -- */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+            AI Workflow Pipeline
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-5 max-w-md mx-auto">
+            Run your entire image pipeline in one step. Choose a preset or build your own workflow.
+          </p>
+          <Link
+            href="/tools/workflow"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
+          >
+            Try AI Workflow
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
 
-      {/* ── 1b. Combo Tools ── */}
-      <section className="py-10 px-4 sm:px-6 border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-5">
-            <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
-              Combo Tools
-            </h2>
-            <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
-              Specialized multi-step tools for common workflows.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {COMBO_TOOLS.map((tool) => (
-              <Link
-                key={tool.name}
-                href={tool.href}
-                className="inline-flex items-center gap-2 px-3.5 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#191919] hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors"
-              >
-                <span
-                  className="h-2 w-2 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: tool.accent }}
-                />
-                <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
-                  {tool.name}
-                </span>
-                <ArrowRight className="h-3 w-3 text-[#D4D4D4]" strokeWidth={1.5} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 2. Tool Grid ── */}
-      <section className="py-14 px-4 sm:px-6 bg-white dark:bg-[#191919]">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-              20+ Free Tools
-            </h2>
-            <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
-              Browser-based — no uploads, no account required for the basics.
-            </p>
-          </div>
-
-          {/* Optimize */}
-          <div className="mb-8">
-            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-3">
-              Optimize
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {TOOLS_OPTIMIZE.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
-              ))}
-            </div>
-          </div>
-
-          {/* AI-Powered */}
-          <div className="mb-8">
-            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-3">
-              AI-Powered
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {TOOLS_AI.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
-              ))}
-            </div>
-          </div>
-
-          {/* Organize */}
-          <div className="mb-8">
-            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-3">
-              Organize
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {TOOLS_ORGANIZE.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
-              ))}
-            </div>
-          </div>
-
-          {/* Edit & Convert */}
-          <div className="mb-8">
-            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-3">
-              Edit &amp; Convert
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {TOOLS_EDIT.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
-              ))}
-            </div>
-          </div>
-
-          {/* Video */}
-          <div>
-            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#525252] uppercase tracking-widest mb-3">
-              Video
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {TOOLS_VIDEO.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. How SammaPix Works ── */}
-      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+      {/* -- How SammaPix Works -- */}
+      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
@@ -647,12 +191,12 @@ export default function HomePage() {
               {
                 step: "1",
                 title: "Drop your photos",
-                body: "Drag & drop any image format. HEIC, WebP, JPG, PNG — all supported.",
+                body: "Drag & drop any image format. HEIC, WebP, JPG, PNG -- all supported.",
               },
               {
                 step: "2",
                 title: "Choose your tools",
-                body: "Use them one by one for free, or run the AI Workflow pipeline as a Pro user.",
+                body: "Use single tools for free, or try combo tools that chain multiple steps together.",
               },
               {
                 step: "3",
@@ -680,8 +224,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 4. Who uses SammaPix ── */}
-      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
+      {/* -- Who uses SammaPix -- */}
+      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
@@ -692,24 +236,24 @@ export default function HomePage() {
             {[
               {
                 title: "Travel Bloggers",
-                body: "Optimize entire photo sets for blog posts — compress, rename for SEO, and sort by country automatically.",
+                body: "Optimize entire photo sets for blog posts -- compress, rename for SEO, and sort by country automatically.",
               },
               {
                 title: "E-commerce Sellers",
-                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Batch resize and WebP convert at once.",
+                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Use ShopShot for the full pipeline.",
               },
               {
                 title: "Social Media Managers",
-                body: "Batch resize for every platform preset — Instagram, Twitter, LinkedIn — without leaving the browser.",
+                body: "Batch resize for every platform preset -- Instagram, Twitter, LinkedIn -- without leaving the browser.",
               },
               {
                 title: "Web Developers",
-                body: "Compress and convert to WebP for Core Web Vitals. Strip EXIF and reduce payload size in one workflow.",
+                body: "Compress and convert to WebP for Core Web Vitals. Use WebLift for the complete optimization pipeline.",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="p-5 bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg"
+                className="p-5 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg"
               >
                 <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
                   {item.title}
@@ -723,12 +267,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 5. Stats bar ── */}
-      <section className="py-8 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+      {/* -- Stats bar -- */}
+      <section className="py-8 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
           {[
             { value: "1.2M+", label: "Images optimized" },
-            { value: "20+", label: "Free tools" },
+            { value: "22", label: "Free tools" },
             { value: "100%", label: "Browser-based" },
             { value: "0", label: "Files uploaded to servers" },
           ].map((stat) => (
@@ -740,8 +284,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 6. Blog guides ── */}
-      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
+      {/* -- Blog guides -- */}
+      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
@@ -784,9 +328,9 @@ export default function HomePage() {
               <Link
                 key={article.href}
                 href={article.href}
-                className="group block bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
+                className="group block bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 hover:border-[#A3A3A3] dark:hover:border-[#444] transition-all"
               >
-                <span className="text-[10px] font-medium bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
+                <span className="text-[10px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] mb-3 inline-block">
                   {article.tag}
                 </span>
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2 group-hover:text-[#404040] dark:group-hover:text-white transition-colors">
@@ -825,8 +369,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 7. Quick actions ── */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+      {/* -- Quick actions -- */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             Quick actions
@@ -852,7 +396,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 8. FAQ ── */}
+      {/* -- FAQ -- */}
       <section className="py-16 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">

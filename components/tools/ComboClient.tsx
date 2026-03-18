@@ -14,6 +14,7 @@ export interface ComboStep {
   id: string;
   label: string;
   enabled: boolean;
+  isAi?: boolean;
 }
 
 export interface ComboClientProps {
@@ -44,9 +45,11 @@ async function runComboFilePipeline(
   try {
     const { runPipeline } = await import("@/lib/pipeline-engine");
 
-    const engineSteps: EnginePipelineStep[] = steps.map((s) => ({
+    const enabledSteps = steps.filter((s) => s.enabled);
+
+    const engineSteps: EnginePipelineStep[] = enabledSteps.map((s) => ({
       id: s.id as PipelineStepId,
-      enabled: s.enabled,
+      enabled: true,
       settings: {},
     }));
 
@@ -71,16 +74,73 @@ async function runComboFilePipeline(
   }
 }
 
+// ─── Toggle switch component ─────────────────────────────────────────────────
+
+function ToggleSwitch({
+  checked,
+  onChange,
+  disabled,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  disabled?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      disabled={disabled}
+      onClick={() => onChange(!checked)}
+      className={`
+        relative inline-flex h-5 w-9 flex-shrink-0 rounded-full transition-colors duration-200 ease-in-out
+        focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:ring-offset-2 dark:focus:ring-offset-[#191919]
+        ${disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}
+        ${checked
+          ? "bg-[#171717] dark:bg-[#E5E5E5]"
+          : "bg-[#E5E5E5] dark:bg-[#404040]"
+        }
+      `}
+    >
+      <span
+        className={`
+          pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white dark:bg-[#191919]
+          shadow-sm ring-0 transition duration-200 ease-in-out
+          ${checked ? "translate-x-4" : "translate-x-0.5"}
+          mt-0.5
+        `}
+      />
+    </button>
+  );
+}
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps, accept }: ComboClientProps) {
+export default function ComboClient({ toolName, steps: initialSteps, requiresLogin, hasAiSteps, accept }: ComboClientProps) {
   const { data: session, status: authStatus } = useSession();
   const [files, setFiles] = useState<ProcessedFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [stepToggles, setStepToggles] = useState<ComboStep[]>(initialSteps);
   const processingRef = useRef(false);
 
   const isAuthenticated = !!session?.user;
-  const needsAuth = requiresLogin && !isAuthenticated && authStatus !== "loading";
+
+  // Check if any AI step is enabled and user is not logged in
+  const enabledAiSteps = stepToggles.filter((s) => s.enabled && s.isAi);
+  const needsAuthForAi = enabledAiSteps.length > 0 && !isAuthenticated && authStatus !== "loading";
+
+  // At least 1 step must remain on
+  const enabledCount = stepToggles.filter((s) => s.enabled).length;
+
+  function handleToggleStep(stepId: string, value: boolean) {
+    setStepToggles((prev) => {
+      const updated = prev.map((s) => (s.id === stepId ? { ...s, enabled: value } : s));
+      // Prevent disabling ALL steps
+      const stillEnabled = updated.filter((s) => s.enabled).length;
+      if (stillEnabled === 0) return prev;
+      return updated;
+    });
+  }
 
   // Dropzone
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -101,7 +161,7 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
     accept: accept
       ? { "image/*": accept.split(",") }
       : { "image/*": [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".heic", ".heif"] },
-    disabled: needsAuth,
+    disabled: needsAuthForAi,
     multiple: true,
   });
 
@@ -112,6 +172,7 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
     setIsProcessing(true);
 
     const pendingFiles = files.filter((f) => f.status === "pending");
+    const activeSteps = stepToggles.filter((s) => s.enabled);
 
     for (const pf of pendingFiles) {
       // Mark as processing
@@ -121,7 +182,7 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
 
       try {
         // Simulate step progression
-        for (let i = 0; i < steps.length; i++) {
+        for (let i = 0; i < activeSteps.length; i++) {
           setFiles((prev) =>
             prev.map((f) => (f.id === pf.id ? { ...f, currentStep: i } : f))
           );
@@ -129,12 +190,12 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
           await new Promise((r) => setTimeout(r, 300));
         }
 
-        const result = await runComboFilePipeline(pf.originalFile, steps);
+        const result = await runComboFilePipeline(pf.originalFile, stepToggles);
 
         setFiles((prev) =>
           prev.map((f) =>
             f.id === pf.id
-              ? { ...f, status: "done" as const, resultBlob: result.blob, resultName: result.name, currentStep: steps.length }
+              ? { ...f, status: "done" as const, resultBlob: result.blob, resultName: result.name, currentStep: activeSteps.length }
               : f
           )
         );
@@ -151,7 +212,7 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
 
     setIsProcessing(false);
     processingRef.current = false;
-  }, [files, steps]);
+  }, [files, stepToggles]);
 
   // Download single
   const downloadFile = (pf: ProcessedFile) => {
@@ -175,88 +236,114 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
   const hasPending = files.some((f) => f.status === "pending");
   const hasDone = files.some((f) => f.status === "done");
   const doneCount = files.filter((f) => f.status === "done").length;
-
-  // ─── Auth gate ────────────────────────────────────────────────────────────
-
-  if (needsAuth) {
-    return (
-      <section className="px-4 sm:px-6 py-8">
-        <div className="max-w-3xl mx-auto">
-          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-8 bg-[#FAFAFA] dark:bg-[#1E1E1E] text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] mb-4">
-              <Lock className="h-5 w-5 text-[#737373]" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-              Sign in to use {toolName}
-            </h3>
-            <p className="text-sm text-[#737373] mb-5 max-w-sm mx-auto">
-              This combo tool uses AI features that require a free account. Sign in to get started.
-            </p>
-            <a
-              href="/api/auth/signin"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
-            >
-              Sign in — it&apos;s free
-            </a>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const activeSteps = stepToggles.filter((s) => s.enabled);
 
   return (
     <section className="px-4 sm:px-6 py-6">
       <div className="max-w-3xl mx-auto space-y-5">
 
+        {/* Pipeline steps with toggles */}
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-white dark:bg-[#1E1E1E]">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide">Pipeline Steps</p>
+            <p className="text-[11px] text-[#A3A3A3]">
+              {activeSteps.length} of {stepToggles.length} active
+            </p>
+          </div>
+          <div className="space-y-2">
+            {stepToggles.map((step) => {
+              const isLastEnabled = step.enabled && enabledCount === 1;
+              return (
+                <div
+                  key={step.id}
+                  className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-md border transition-colors ${
+                    step.enabled
+                      ? "border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]"
+                      : "border-transparent bg-transparent opacity-50"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className={`text-sm font-medium ${step.enabled ? "text-[#171717] dark:text-[#E5E5E5]" : "text-[#A3A3A3] line-through"}`}>
+                      {step.label}
+                    </span>
+                    {step.isAi && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
+                        {isAuthenticated ? (
+                          <>
+                            <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
+                            AI
+                          </>
+                        ) : (
+                          <>
+                            <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
+                            Login required
+                          </>
+                        )}
+                      </span>
+                    )}
+                  </div>
+                  <ToggleSwitch
+                    checked={step.enabled}
+                    onChange={(v) => handleToggleStep(step.id, v)}
+                    disabled={isLastEnabled && step.enabled}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* AI daily limit badge */}
-        {hasAiSteps && isAuthenticated && (
+        {hasAiSteps && isAuthenticated && enabledAiSteps.length > 0 && (
           <div className="flex items-center gap-2 text-xs text-[#737373]">
             <Sparkles className="h-3.5 w-3.5 text-[#8B5CF6]" strokeWidth={1.5} />
-            <span>AI features share your daily rename limit (5/day free, 200/day Pro)</span>
+            <span>AI features use your daily limit (10/day free, unlimited Pro)</span>
           </div>
         )}
 
-        {/* Pipeline steps overview */}
-        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-white dark:bg-[#1E1E1E]">
-          <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-3">Pipeline</p>
-          <div className="flex flex-wrap items-center gap-2">
-            {steps.map((step, i) => (
-              <React.Fragment key={step.id}>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A]">
-                  <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
-                    {step.label}
-                  </span>
-                </div>
-                {i < steps.length - 1 && (
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-[#D4D4D4] dark:text-[#525252] flex-shrink-0">
-                    <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </React.Fragment>
-            ))}
+        {/* Auth gate message for AI steps */}
+        {needsAuthForAi && (
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E] text-center">
+            <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] mb-3">
+              <Lock className="h-4 w-4 text-[#737373]" strokeWidth={1.5} />
+            </div>
+            <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+              Sign in to use AI steps
+            </h3>
+            <p className="text-xs text-[#737373] mb-4 max-w-sm mx-auto">
+              AI steps require a free account. You can disable AI steps above to use {toolName} without signing in.
+            </p>
+            <a
+              href="/api/auth/signin"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
+            >
+              Sign in -- it&apos;s free
+            </a>
           </div>
-        </div>
+        )}
 
         {/* DropZone */}
-        <div
-          {...getRootProps()}
-          className={`
-            border-[1.5px] border-dashed rounded-lg p-8 text-center cursor-pointer transition-all
-            ${isDragActive
-              ? "border-[#6366F1] bg-[#6366F1]/5"
-              : "border-[#D4D4D4] dark:border-[#404040] bg-[#FAFAFA] dark:bg-[#1A1A1A] hover:bg-[#F5F5F5] dark:hover:bg-[#1E1E1E] hover:border-[#A3A3A3]"
-            }
-          `}
-        >
-          <input {...getInputProps()} />
-          <Upload className="h-6 w-6 text-[#A3A3A3] mx-auto mb-3" strokeWidth={1.5} />
-          <p className="text-sm text-[#525252] dark:text-[#A3A3A3] mb-1">
-            {isDragActive ? "Drop images here" : "Drag and drop images here, or click to browse"}
-          </p>
-          <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
-            JPG, PNG, WebP, GIF, AVIF, HEIC
-          </p>
-        </div>
+        {!needsAuthForAi && (
+          <div
+            {...getRootProps()}
+            className={`
+              border-[1.5px] border-dashed rounded-lg p-8 text-center cursor-pointer transition-all
+              ${isDragActive
+                ? "border-[#6366F1] bg-[#6366F1]/5"
+                : "border-[#D4D4D4] dark:border-[#404040] bg-[#FAFAFA] dark:bg-[#1A1A1A] hover:bg-[#F5F5F5] dark:hover:bg-[#1E1E1E] hover:border-[#A3A3A3]"
+              }
+            `}
+          >
+            <input {...getInputProps()} />
+            <Upload className="h-6 w-6 text-[#A3A3A3] mx-auto mb-3" strokeWidth={1.5} />
+            <p className="text-sm text-[#525252] dark:text-[#A3A3A3] mb-1">
+              {isDragActive ? "Drop images here" : "Drag and drop images here, or click to browse"}
+            </p>
+            <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
+              JPG, PNG, WebP, GIF, AVIF, HEIC
+            </p>
+          </div>
+        )}
 
         {/* File list */}
         {files.length > 0 && (
@@ -268,10 +355,10 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
               >
                 {/* Status icon */}
                 <div className="flex-shrink-0">
-                  {pf.status === "done" && <CheckCircle2 className="h-4.5 w-4.5 text-[#16A34A]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
-                  {pf.status === "processing" && <Loader2 className="h-4.5 w-4.5 text-[#6366F1] animate-spin" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
-                  {pf.status === "pending" && <Circle className="h-4.5 w-4.5 text-[#D4D4D4]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
-                  {pf.status === "error" && <AlertCircle className="h-4.5 w-4.5 text-[#DC2626]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
+                  {pf.status === "done" && <CheckCircle2 className="text-[#16A34A]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
+                  {pf.status === "processing" && <Loader2 className="text-[#6366F1] animate-spin" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
+                  {pf.status === "pending" && <Circle className="text-[#D4D4D4]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
+                  {pf.status === "error" && <AlertCircle className="text-[#DC2626]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
                 </div>
 
                 {/* File name + step progress */}
@@ -279,7 +366,7 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
                   <p className="text-sm text-[#171717] dark:text-[#E5E5E5] truncate">{pf.originalName}</p>
                   {pf.status === "processing" && pf.currentStep >= 0 && (
                     <div className="flex items-center gap-1.5 mt-1">
-                      {steps.map((step, i) => (
+                      {activeSteps.map((step, i) => (
                         <div
                           key={step.id}
                           className={`h-1 flex-1 rounded-full transition-colors ${
@@ -289,8 +376,8 @@ export default function ComboClient({ toolName, steps, requiresLogin, hasAiSteps
                       ))}
                     </div>
                   )}
-                  {pf.status === "processing" && pf.currentStep >= 0 && pf.currentStep < steps.length && (
-                    <p className="text-[11px] text-[#737373] mt-0.5">{steps[pf.currentStep].label}...</p>
+                  {pf.status === "processing" && pf.currentStep >= 0 && pf.currentStep < activeSteps.length && (
+                    <p className="text-[11px] text-[#737373] mt-0.5">{activeSteps[pf.currentStep].label}...</p>
                   )}
                   {pf.status === "error" && (
                     <p className="text-[11px] text-[#DC2626] mt-0.5">{pf.error}</p>

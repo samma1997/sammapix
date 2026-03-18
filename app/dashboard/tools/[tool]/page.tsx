@@ -7,24 +7,118 @@ import HowToUse from "@/components/tools/HowToUse";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
 
+const CompressClient = dynamic(() => import("@/components/tools/CompressClient"));
+const WebpClient = dynamic(() => import("@/components/tools/WebpClient"));
+const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
+const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
+const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
+const FilmLabClient = dynamic(() => import("@/components/tools/FilmLabClient"));
+const StampItClient = dynamic(() => import("@/components/tools/StampItClient"));
+const CropRatioClient = dynamic(() => import("@/components/tools/CropRatioClient"));
+const TwinHuntClient = dynamic(() => import("@/components/tools/TwinHuntClient"));
+const GeoSortClient = dynamic(() => import("@/components/tools/GeoSortClientWrapper"));
+const TravelMapClient = dynamic(() => import("@/components/tools/TravelMapClientWrapper"));
+const ResizePackClient = dynamic(() => import("@/components/tools/ResizePackClient"));
+const CullClient = dynamic(() => import("@/components/tools/CullClientWrapper"));
+const HeicClient = dynamic(() => import("@/components/tools/HeicClient"));
+const TranscribeClient = dynamic(() => import("@/components/tools/TranscribeClient"));
+const WorkflowPipeline = dynamic(() => import("@/components/tools/WorkflowPipeline"));
+const ComboClient = dynamic(() => import("@/components/tools/ComboClient"));
+
+// ─── Tool component map ──────────────────────────────────────────────────────
+
 const TOOL_MAP: Record<string, React.ComponentType> = {
-  compress:      dynamic(() => import("@/components/tools/CompressClient")),
-  webp:          dynamic(() => import("@/components/tools/WebpClient")),
-  "ai-rename":   dynamic(() => import("@/components/tools/AiRenameClient")),
-  "alt-text":    dynamic(() => import("@/components/tools/AltTextClient")),
-  exif:          dynamic(() => import("@/components/tools/ExifClient")),
-  filmlab:       dynamic(() => import("@/components/tools/FilmLabClient")),
-  stampit:       dynamic(() => import("@/components/tools/StampItClient")),
-  croproatio:    dynamic(() => import("@/components/tools/CropRatioClient")),
-  twinhunt:      dynamic(() => import("@/components/tools/TwinHuntClient")),
-  geosort:       dynamic(() => import("@/components/tools/GeoSortClientWrapper")),
-  travelmap:     dynamic(() => import("@/components/tools/TravelMapClientWrapper")),
-  resizepack:    dynamic(() => import("@/components/tools/ResizePackClient")),
-  cull:          dynamic(() => import("@/components/tools/CullClientWrapper")),
-  heic:          dynamic(() => import("@/components/tools/HeicClient")),
-  "transcribe":     dynamic(() => import("@/components/tools/TranscribeClient")),
-  workflow:         dynamic(() => import("@/components/tools/WorkflowPipeline")),
+  compress:    CompressClient,
+  webp:        WebpClient,
+  "ai-rename": AiRenameClient,
+  "alt-text":  AltTextClient,
+  exif:        ExifClient,
+  filmlab:     FilmLabClient,
+  stampit:     StampItClient,
+  croproatio:  CropRatioClient,
+  twinhunt:    TwinHuntClient,
+  geosort:     GeoSortClient,
+  travelmap:   TravelMapClient,
+  resizepack:  ResizePackClient,
+  cull:        CullClient,
+  heic:        HeicClient,
+  transcribe:  TranscribeClient,
+  workflow:    WorkflowPipeline,
 };
+
+// ─── Combo tool configs ──────────────────────────────────────────────────────
+
+interface ComboConfig {
+  toolName: string;
+  steps: { id: string; label: string; enabled: boolean; isAi: boolean }[];
+  requiresLogin: boolean;
+  hasAiSteps: boolean;
+}
+
+const COMBO_CONFIGS: Record<string, ComboConfig> = {
+  weblift: {
+    toolName: "WebLift",
+    steps: [
+      { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
+      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "ai-rename", label: "AI Rename (SEO)", enabled: true, isAi: true },
+    ],
+    requiresLogin: true,
+    hasAiSteps: true,
+  },
+  blogdrop: {
+    toolName: "BlogDrop",
+    steps: [
+      { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
+      { id: "resize", label: "Resize (max 1200px)", enabled: true, isAi: false },
+      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "ai-rename", label: "AI Rename (SEO blog)", enabled: true, isAi: true },
+    ],
+    requiresLogin: true,
+    hasAiSteps: true,
+  },
+  shopshot: {
+    toolName: "ShopShot",
+    steps: [
+      { id: "compress", label: "Compress (85%)", enabled: true, isAi: false },
+      { id: "resize", label: "Resize (max 800px)", enabled: true, isAi: false },
+      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+      { id: "ai-rename", label: "AI Rename (product/SKU)", enabled: true, isAi: true },
+    ],
+    requiresLogin: true,
+    hasAiSteps: true,
+  },
+  instaprep: {
+    toolName: "InstaPrep",
+    steps: [
+      { id: "resize", label: "Resize (1080px)", enabled: true, isAi: false },
+      { id: "compress", label: "Compress (85%)", enabled: true, isAi: false },
+    ],
+    requiresLogin: false,
+    hasAiSteps: false,
+  },
+  cleandrop: {
+    toolName: "CleanDrop",
+    steps: [
+      { id: "exif-strip", label: "Strip EXIF/metadata", enabled: true, isAi: false },
+      { id: "compress", label: "Compress (80%)", enabled: true, isAi: false },
+      { id: "convert-webp", label: "Convert to WebP", enabled: true, isAi: false },
+    ],
+    requiresLogin: false,
+    hasAiSteps: false,
+  },
+  pixship: {
+    toolName: "PixShip",
+    steps: [
+      { id: "compress", label: "Compress (90%, light)", enabled: true, isAi: false },
+      { id: "resize", label: "Resize (max 2400px)", enabled: true, isAi: false },
+    ],
+    requiresLogin: false,
+    hasAiSteps: false,
+  },
+};
+
+// ─── Tool data ───────────────────────────────────────────────────────────────
 
 interface ToolData {
   label: string;
@@ -36,31 +130,23 @@ interface ToolData {
 const TOOL_DATA: Record<string, ToolData> = {
   compress: {
     label: "Compress",
-    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss.",
+    tagline: "Shrink JPG, PNG, WebP, GIF -- no quality loss.",
     steps: [
       { title: "Drop your images", desc: "Drag & drop JPG, PNG, WebP, or GIF files." },
       { title: "Adjust quality", desc: "Use the slider to set compression level." },
       { title: "Download", desc: "Get compressed files individually or as ZIP." },
     ],
-    proTip: {
-      text: "Use AI Workflow to compress + rename + resize in one step.",
-      linkLabel: "Try AI Workflow",
-      linkHref: "/dashboard/tools/workflow",
-    },
+    proTip: { text: "Use AI Workflow to compress + rename + resize in one step.", linkLabel: "Try AI Workflow", linkHref: "/dashboard/tools/workflow" },
   },
   webp: {
-    label: "WebP",
-    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
+    label: "WebP Converter",
+    tagline: "Convert any image to WebP. 25-34% smaller than JPEG.",
     steps: [
       { title: "Drop images", desc: "Add JPG, PNG, or GIF files." },
       { title: "Auto convert", desc: "Files convert to WebP automatically." },
       { title: "Download", desc: "Get WebP files ready for your site." },
     ],
-    proTip: {
-      text: "Combine with Compress for maximum file size reduction.",
-      linkLabel: "Go to Compress",
-      linkHref: "/dashboard/tools/compress",
-    },
+    proTip: { text: "Combine with Compress for maximum file size reduction.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
   },
   "ai-rename": {
     label: "AI Rename",
@@ -70,11 +156,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "AI analyzes", desc: "Gemini AI generates descriptive filenames." },
       { title: "Download renamed", desc: "Get SEO-ready filenames + alt text." },
     ],
-    proTip: {
-      text: "200 renames/day on Pro. Free gets 5/day.",
-      linkLabel: "Upgrade to Pro",
-      linkHref: "/pricing",
-    },
+    proTip: { text: "Unlimited renames on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
   },
   "alt-text": {
     label: "AI Alt Text",
@@ -84,11 +166,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "AI generates", desc: "Gemini creates descriptive alt text." },
       { title: "Copy or export", desc: "Copy all or download as CSV." },
     ],
-    proTip: {
-      text: "Perfect for WCAG compliance and SEO.",
-      linkLabel: "See Pro features",
-      linkHref: "/pricing",
-    },
+    proTip: { text: "Perfect for WCAG compliance and SEO.", linkLabel: "See Pro features", linkHref: "/pricing" },
   },
   exif: {
     label: "EXIF Lens",
@@ -98,25 +176,17 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "View metadata", desc: "See all GPS, camera, and date info." },
       { title: "Download clean", desc: "Get files with metadata removed." },
     ],
-    proTip: {
-      text: "Always strip EXIF before sharing photos online for privacy.",
-      linkLabel: "Learn more",
-      linkHref: "/blog",
-    },
+    proTip: { text: "Always strip EXIF before sharing photos online for privacy.", linkLabel: "Learn more", linkHref: "/blog" },
   },
   filmlab: {
     label: "FilmLab",
-    tagline: "14 analog film presets — Kodak, Fuji, Ilford.",
+    tagline: "14 analog film presets -- Kodak, Fuji, Ilford.",
     steps: [
       { title: "Drop photos", desc: "Add images to apply film looks." },
       { title: "Choose preset", desc: "Pick from 14 analog film styles." },
       { title: "Download", desc: "Get photos with the film look applied." },
     ],
-    proTip: {
-      text: "Try Kodak Gold for warm tones or Ilford HP5 for B&W.",
-      linkLabel: "See all presets",
-      linkHref: "/dashboard/tools/filmlab",
-    },
+    proTip: { text: "Try Kodak Gold for warm tones or Ilford HP5 for B&W.", linkLabel: "See all presets", linkHref: "/dashboard/tools/filmlab" },
   },
   stampit: {
     label: "StampIt",
@@ -126,25 +196,17 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Configure", desc: "Add text/logo, choose position." },
       { title: "Download", desc: "Get watermarked images." },
     ],
-    proTip: {
-      text: "Use tiled filigrana mode for maximum protection.",
-      linkLabel: "Upgrade to Pro",
-      linkHref: "/pricing",
-    },
+    proTip: { text: "Use tiled filigrana mode for maximum protection.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
   },
   croproatio: {
     label: "CropRatio",
-    tagline: "Crop to exact ratios — 1:1, 16:9, 4:3, A4.",
+    tagline: "Crop to exact ratios -- 1:1, 16:9, 4:3, A4.",
     steps: [
       { title: "Drop image", desc: "Add the photo to crop." },
       { title: "Select ratio", desc: "Choose 1:1, 16:9, 4:3, or custom." },
       { title: "Adjust & download", desc: "Position the crop and save." },
     ],
-    proTip: {
-      text: "Use 4:5 for Instagram portrait posts.",
-      linkLabel: "Try ResizePack",
-      linkHref: "/dashboard/tools/resizepack",
-    },
+    proTip: { text: "Use 4:5 for Instagram portrait posts.", linkLabel: "Try ResizePack", linkHref: "/dashboard/tools/resizepack" },
   },
   twinhunt: {
     label: "TwinHunt",
@@ -154,11 +216,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Scan duplicates", desc: "Perceptual hashing finds matches." },
       { title: "Review & delete", desc: "Keep the best, remove copies." },
     ],
-    proTip: {
-      text: "Run this before Compress to avoid compressing duplicates.",
-      linkLabel: "Go to Compress",
-      linkHref: "/dashboard/tools/compress",
-    },
+    proTip: { text: "Run this before Compress to avoid compressing duplicates.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
   },
   geosort: {
     label: "GeoSort",
@@ -168,11 +226,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Auto-sort", desc: "Photos organized by country." },
       { title: "Download sorted", desc: "Get organized folders." },
     ],
-    proTip: {
-      text: "Works great after a multi-country trip.",
-      linkLabel: "Try TravelMap",
-      linkHref: "/dashboard/tools/travelmap",
-    },
+    proTip: { text: "Works great after a multi-country trip.", linkLabel: "Try TravelMap", linkHref: "/dashboard/tools/travelmap" },
   },
   travelmap: {
     label: "TravelMap",
@@ -182,11 +236,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Map generates", desc: "See pins on an interactive map." },
       { title: "Explore", desc: "Click pins to see photos at each location." },
     ],
-    proTip: {
-      text: "Combine with GeoSort to organize and visualize your trips.",
-      linkLabel: "Try GeoSort",
-      linkHref: "/dashboard/tools/geosort",
-    },
+    proTip: { text: "Combine with GeoSort to organize and visualize your trips.", linkLabel: "Try GeoSort", linkHref: "/dashboard/tools/geosort" },
   },
   resizepack: {
     label: "ResizePack",
@@ -196,11 +246,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Select platform", desc: "Choose social media preset." },
       { title: "Download", desc: "Get perfectly sized images." },
     ],
-    proTip: {
-      text: "Use the Instagram preset for Stories (1080x1920).",
-      linkLabel: "See all presets",
-      linkHref: "/dashboard/tools/resizepack",
-    },
+    proTip: { text: "Use the Instagram preset for Stories (1080x1920).", linkLabel: "See all presets", linkHref: "/dashboard/tools/resizepack" },
   },
   cull: {
     label: "Cull",
@@ -210,11 +256,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Rate with stars", desc: "Use keyboard shortcuts to rate." },
       { title: "Export keepers", desc: "Download only the best shots." },
     ],
-    proTip: {
-      text: "Use keyboard shortcuts: 1-5 for stars, X to reject.",
-      linkLabel: "See Pro features",
-      linkHref: "/pricing",
-    },
+    proTip: { text: "Use keyboard shortcuts: 1-5 for stars, X to reject.", linkLabel: "See Pro features", linkHref: "/pricing" },
   },
   heic: {
     label: "HEIC Converter",
@@ -224,13 +266,9 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Choose format", desc: "Select JPG or WebP output." },
       { title: "Download", desc: "Get converted files." },
     ],
-    proTip: {
-      text: "Choose WebP for 25% smaller files than JPG.",
-      linkLabel: "Try WebP converter",
-      linkHref: "/dashboard/tools/webp",
-    },
+    proTip: { text: "Choose WebP for 25% smaller files than JPG.", linkLabel: "Try WebP converter", linkHref: "/dashboard/tools/webp" },
   },
-  "transcribe": {
+  transcribe: {
     label: "Transcribe",
     tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
     steps: [
@@ -238,11 +276,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "AI transcribes", desc: "Gemini Flash generates text with timestamps." },
       { title: "Export SRT or TXT", desc: "Download subtitles or plain transcription." },
     ],
-    proTip: {
-      text: "200 AI transcriptions per day on Pro. Free gets 5/day.",
-      linkLabel: "Upgrade to Pro",
-      linkHref: "/pricing",
-    },
+    proTip: { text: "Unlimited AI transcriptions on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
   },
   workflow: {
     label: "AI Workflow",
@@ -252,21 +286,96 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Drop photos", desc: "Add up to 500 files." },
       { title: "Run & download", desc: "Get everything processed as ZIP." },
     ],
-    proTip: {
-      text: "This is the Pro killer feature — saves hours per shoot.",
-      linkLabel: "Upgrade to Pro",
-      linkHref: "/pricing",
-    },
+    proTip: { text: "This is the Pro killer feature -- saves hours per shoot.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
+  },
+  // Combo tools
+  weblift: {
+    label: "WebLift",
+    tagline: "Compress, convert to WebP, and AI-rename in one click.",
+    steps: [
+      { title: "Drop your images", desc: "Drag and drop images onto the upload area." },
+      { title: "Toggle steps", desc: "Enable or disable individual pipeline steps." },
+      { title: "Download optimized", desc: "Download each file or grab everything as ZIP." },
+    ],
+    proTip: { text: "Disable AI Rename to use without login.", linkLabel: "Try Compress", linkHref: "/dashboard/tools/compress" },
+  },
+  blogdrop: {
+    label: "BlogDrop",
+    tagline: "Blog-ready images in one drop.",
+    steps: [
+      { title: "Drop blog images", desc: "Add photos destined for your blog posts." },
+      { title: "Toggle steps", desc: "Enable or disable individual pipeline steps." },
+      { title: "Download and publish", desc: "Upload directly to WordPress, Ghost, or any CMS." },
+    ],
+    proTip: { text: "Disable AI Rename to use without login.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
+  },
+  shopshot: {
+    label: "ShopShot",
+    tagline: "E-commerce product images optimized.",
+    steps: [
+      { title: "Drop product photos", desc: "Add product images to optimize." },
+      { title: "Toggle steps", desc: "Enable or disable individual pipeline steps." },
+      { title: "Download optimized", desc: "Get images ready for your online store." },
+    ],
+    proTip: { text: "800px is the sweet spot for product thumbnails.", linkLabel: "Try ResizePack", linkHref: "/dashboard/tools/resizepack" },
+  },
+  instaprep: {
+    label: "InstaPrep",
+    tagline: "Instagram-ready in seconds.",
+    steps: [
+      { title: "Drop your photos", desc: "Add photos to prepare for Instagram." },
+      { title: "Toggle steps", desc: "Enable or disable resize/compress." },
+      { title: "Download", desc: "Get Instagram-ready images." },
+    ],
+    proTip: { text: "Use CropRatio for 4:5 portrait posts.", linkLabel: "Try CropRatio", linkHref: "/dashboard/tools/croproatio" },
+  },
+  cleandrop: {
+    label: "CleanDrop",
+    tagline: "Strip metadata, compress, and convert to WebP.",
+    steps: [
+      { title: "Drop photos", desc: "Add photos to clean before sharing." },
+      { title: "Toggle steps", desc: "Enable or disable individual pipeline steps." },
+      { title: "Download clean images", desc: "Get metadata-free images." },
+    ],
+    proTip: { text: "Always strip EXIF before sharing photos online.", linkLabel: "Try EXIF Lens", linkHref: "/dashboard/tools/exif" },
+  },
+  pixship: {
+    label: "PixShip",
+    tagline: "Light compress and resize for client delivery.",
+    steps: [
+      { title: "Drop photos", desc: "Add photos to prepare for delivery." },
+      { title: "Toggle steps", desc: "Enable or disable compress/resize." },
+      { title: "Download as ZIP", desc: "Get delivery-ready images." },
+    ],
+    proTip: { text: "90% quality is virtually lossless for clients.", linkLabel: "Try Compress", linkHref: "/dashboard/tools/compress" },
   },
 };
+
+// ─── Combo wrapper component ─────────────────────────────────────────────────
+
+function ComboWrapper({ config }: { config: ComboConfig }) {
+  return (
+    <ComboClient
+      toolName={config.toolName}
+      steps={config.steps}
+      requiresLogin={config.requiresLogin}
+      hasAiSteps={config.hasAiSteps}
+    />
+  );
+}
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function DashboardToolPage() {
   const params = useParams();
   const slug = params.tool as string;
+
+  // Check if it's a combo tool
+  const comboConfig = COMBO_CONFIGS[slug];
   const ToolComponent = TOOL_MAP[slug];
   const data = TOOL_DATA[slug];
 
-  if (!ToolComponent || !data) {
+  if (!data || (!ToolComponent && !comboConfig)) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
         <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
@@ -297,7 +406,11 @@ export default function DashboardToolPage() {
       </div>
 
       {/* Tool component */}
-      <ToolComponent />
+      {comboConfig ? (
+        <ComboWrapper config={comboConfig} />
+      ) : ToolComponent ? (
+        <ToolComponent />
+      ) : null}
 
       {/* How to use */}
       <HowToUse toolName={data.label} steps={data.steps} proTip={data.proTip} />

@@ -17,56 +17,72 @@ import {
   Copy,
   Stamp,
   Tv,
-  FileVideo,
-  Film,
   Captions,
-  Monitor,
-  Clapperboard,
   Search,
-  Settings,
   User,
   Crown,
-  ChevronLeft,
   Menu,
   X,
-  ArrowRight,
   Coins,
+  Sparkles,
+  FileText,
+  ShoppingBag,
+  ShieldCheck,
+  Instagram,
+  Send,
+  Film,
+  Layers,
 } from "lucide-react";
-import type { Persona } from "@/components/onboarding/OnboardingModal";
 
-const LS_PERSONA_KEY = "sammapix-persona";
+// ─── Tool groups ─────────────────────────────────────────────────────────────
 
-interface Tool {
+interface SidebarTool {
   name: string;
   href: string;
   icon: React.ReactNode;
 }
 
-const ALL_TOOLS: Tool[] = [
+const TOOLS_OPTIMIZE: SidebarTool[] = [
   { name: "Compress", href: "/dashboard/tools/compress", icon: <Image className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "WebP", href: "/dashboard/tools/webp", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "AI Rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "AI Alt Text", href: "/dashboard/tools/alt-text", icon: <Globe className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "WebP Converter", href: "/dashboard/tools/webp", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "HEIC Converter", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "ResizePack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Cull", href: "/dashboard/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "FilmLab", href: "/dashboard/tools/filmlab", icon: <FileVideo className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "EXIF Lens", href: "/dashboard/tools/exif", icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "GeoSort", href: "/dashboard/tools/geosort", icon: <MapPin className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "TravelMap", href: "/dashboard/tools/travelmap", icon: <Map className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "CropRatio", href: "/dashboard/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "StampIt", href: "/dashboard/tools/stampit", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "HEIC", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "TwinHunt", href: "/dashboard/tools/twinhunt", icon: <Search className="h-4 w-4" strokeWidth={1.5} /> },
-  { name: "Transcribe",      href: "/dashboard/tools/transcribe",      icon: <Captions className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "CleanDrop", href: "/dashboard/tools/cleandrop", icon: <ShieldCheck className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "InstaPrep", href: "/dashboard/tools/instaprep", icon: <Instagram className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "PixShip", href: "/dashboard/tools/pixship", icon: <Send className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
-const PERSONA_RECOMMENDED: Record<Persona, string[]> = {
-  photographer: ["Cull", "Compress", "AI Rename", "FilmLab", "GeoSort"],
-  blogger: ["Compress", "AI Rename", "AI Alt Text", "WebP", "ResizePack"],
-  ecommerce: ["Compress", "AI Rename", "ResizePack", "WebP", "StampIt"],
-  developer: ["Compress", "WebP", "EXIF Lens", "AI Alt Text", "ResizePack"],
-  social: ["ResizePack", "CropRatio", "Compress", "StampIt", "FilmLab"],
-};
+const TOOLS_AI: SidebarTool[] = [
+  { name: "AI Rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "AI Alt Text", href: "/dashboard/tools/alt-text", icon: <Globe className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Transcribe", href: "/dashboard/tools/transcribe", icon: <Captions className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "WebLift", href: "/dashboard/tools/weblift", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "BlogDrop", href: "/dashboard/tools/blogdrop", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "ShopShot", href: "/dashboard/tools/shopshot", icon: <ShoppingBag className="h-4 w-4" strokeWidth={1.5} /> },
+];
+
+const TOOLS_CREATIVE: SidebarTool[] = [
+  { name: "FilmLab", href: "/dashboard/tools/filmlab", icon: <Film className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "StampIt", href: "/dashboard/tools/stampit", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
+];
+
+const TOOLS_ORGANIZE: SidebarTool[] = [
+  { name: "EXIF Lens", href: "/dashboard/tools/exif", icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "TwinHunt", href: "/dashboard/tools/twinhunt", icon: <Search className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "GeoSort", href: "/dashboard/tools/geosort", icon: <MapPin className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "TravelMap", href: "/dashboard/tools/travelmap", icon: <Map className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Cull", href: "/dashboard/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
+];
+
+const TOOL_GROUPS: { label: string; tools: SidebarTool[] }[] = [
+  { label: "Optimize", tools: TOOLS_OPTIMIZE },
+  { label: "AI-Powered", tools: TOOLS_AI },
+  { label: "Creative", tools: TOOLS_CREATIVE },
+  { label: "Organize", tools: TOOLS_ORGANIZE },
+];
+
+// ─── Props ───────────────────────────────────────────────────────────────────
 
 interface DashboardSidebarProps {
   userName: string | null;
@@ -83,22 +99,7 @@ export default function DashboardSidebar({
 }: DashboardSidebarProps) {
   const pathname = usePathname();
   const isPro = userPlan === "pro";
-  const [persona, setPersona] = useState<Persona | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const stored = localStorage.getItem(LS_PERSONA_KEY) as Persona | "skipped" | null;
-    if (stored && stored !== "skipped") {
-      setPersona(stored);
-    }
-  }, []);
-
-  const recommendedNames = persona ? PERSONA_RECOMMENDED[persona] : [];
-  const recommendedTools = ALL_TOOLS.filter((t) => recommendedNames.includes(t.name));
-  const otherTools = ALL_TOOLS.filter((t) => !recommendedNames.includes(t.name));
-
-  const firstName = userName?.split(" ")[0] ?? "there";
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
@@ -107,7 +108,7 @@ export default function DashboardSidebar({
         <Link
           href="/dashboard"
           className="flex items-center gap-2 group select-none"
-          aria-label="SammaPix — dashboard"
+          aria-label="SammaPix -- dashboard"
           onClick={() => setMobileOpen(false)}
         >
           <svg
@@ -140,7 +141,6 @@ export default function DashboardSidebar({
             SammaPix
           </span>
         </Link>
-        {/* Mobile close button */}
         <button
           className="md:hidden p-1 text-[#A3A3A3] hover:text-[#525252] rounded"
           onClick={() => setMobileOpen(false)}
@@ -178,11 +178,11 @@ export default function DashboardSidebar({
               : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
           ].join(" ")}
         >
-          <Zap className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+          <Sparkles className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           AI Workflow
         </Link>
 
-        {/* Credits — Pro only */}
+        {/* Credits */}
         {isPro && (
           <Link
             href="/dashboard/credits"
@@ -199,13 +199,13 @@ export default function DashboardSidebar({
           </Link>
         )}
 
-        {/* Recommended tools */}
-        {recommendedTools.length > 0 && (
-          <div className="pt-3">
+        {/* Tool groups by category */}
+        {TOOL_GROUPS.map((group) => (
+          <div key={group.label} className="pt-3">
             <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
-              Recommended
+              {group.label}
             </p>
-            {recommendedTools.map((tool) => (
+            {group.tools.map((tool) => (
               <Link
                 key={tool.name}
                 href={tool.href}
@@ -213,7 +213,7 @@ export default function DashboardSidebar({
                 className={[
                   "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
                   pathname === tool.href
-                    ? "bg-[#6366F1]/10 dark:bg-[#6366F1]/15 text-[#6366F1] font-medium"
+                    ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
                     : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
                 ].join(" ")}
               >
@@ -222,30 +222,7 @@ export default function DashboardSidebar({
               </Link>
             ))}
           </div>
-        )}
-
-        {/* Other tools */}
-        <div className="pt-3">
-          <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
-            {recommendedTools.length > 0 ? "Other Tools" : "All Tools"}
-          </p>
-          {(recommendedTools.length > 0 ? otherTools : ALL_TOOLS).map((tool) => (
-            <Link
-              key={tool.name}
-              href={tool.href}
-              onClick={() => setMobileOpen(false)}
-              className={[
-                "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
-                pathname === tool.href
-                  ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
-                  : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
-              ].join(" ")}
-            >
-              <span className="shrink-0">{tool.icon}</span>
-              {tool.name}
-            </Link>
-          ))}
-        </div>
+        ))}
 
         {/* Divider */}
         <div className="pt-3 border-t border-[#E5E5E5] dark:border-[#2A2A2A] mt-3">
@@ -277,16 +254,16 @@ export default function DashboardSidebar({
             </Link>
           </div>
         )}
+
         {/* Install app */}
         <div className="pt-1 pb-1">
           <button
             onClick={() => {
-              // Trigger PWA install if available, otherwise show instructions
-              const w = window as any;
+              const w = window as unknown as { __sammapix_install_prompt?: { prompt: () => void } };
               if (w.__sammapix_install_prompt) {
                 w.__sammapix_install_prompt.prompt();
               } else {
-                alert("To install: click the install icon in your browser address bar, or use Menu → Install SammaPix");
+                alert("To install: click the install icon in your browser address bar, or use Menu > Install SammaPix");
               }
             }}
             className="flex items-center gap-2.5 px-2.5 py-1.5 w-full rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
@@ -316,36 +293,36 @@ export default function DashboardSidebar({
           Toggle theme
         </button>
         <div className="px-3 py-3 border-t border-[#F5F5F5] dark:border-[#252525]">
-        <div className="flex items-center gap-2.5">
-          {userImage ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={userImage}
-              alt={userName ?? ""}
-              className="h-7 w-7 rounded-full border border-[#E5E5E5] dark:border-[#2A2A2A] shrink-0"
-            />
-          ) : (
-            <div className="h-7 w-7 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center justify-center shrink-0">
-              <User className="h-3.5 w-3.5 text-[#737373]" strokeWidth={1.5} />
+          <div className="flex items-center gap-2.5">
+            {userImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={userImage}
+                alt={userName ?? ""}
+                className="h-7 w-7 rounded-full border border-[#E5E5E5] dark:border-[#2A2A2A] shrink-0"
+              />
+            ) : (
+              <div className="h-7 w-7 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center justify-center shrink-0">
+                <User className="h-3.5 w-3.5 text-[#737373]" strokeWidth={1.5} />
+              </div>
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
+                {userName ?? userEmail ?? "User"}
+              </p>
+              <p className="text-[10px] text-[#A3A3A3] truncate">{userEmail ?? ""}</p>
             </div>
-          )}
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
-              {userName ?? userEmail ?? "User"}
-            </p>
-            <p className="text-[10px] text-[#A3A3A3] truncate">{userEmail ?? ""}</p>
+            <span
+              className={[
+                "flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded",
+                isPro
+                  ? "bg-[#171717] dark:bg-white text-white dark:text-[#171717]"
+                  : "bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] border border-[#E5E5E5] dark:border-[#2A2A2A]",
+              ].join(" ")}
+            >
+              {isPro ? "PRO" : "Free"}
+            </span>
           </div>
-          <span
-            className={[
-              "flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded",
-              isPro
-                ? "bg-[#171717] dark:bg-white text-white dark:text-[#171717]"
-                : "bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] border border-[#E5E5E5] dark:border-[#2A2A2A]",
-            ].join(" ")}
-          >
-            {isPro ? "PRO" : "Free"}
-          </span>
-        </div>
         </div>
       </div>
     </div>
@@ -353,7 +330,7 @@ export default function DashboardSidebar({
 
   return (
     <>
-      {/* Mobile hamburger button — shown when sidebar is closed */}
+      {/* Mobile hamburger button */}
       <button
         className="md:hidden fixed top-3 left-3 z-40 p-2 rounded-md bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] shadow-sm"
         onClick={() => setMobileOpen(true)}
@@ -370,7 +347,7 @@ export default function DashboardSidebar({
         />
       )}
 
-      {/* Sidebar — desktop: static, mobile: slide-in overlay */}
+      {/* Sidebar */}
       <aside
         className={[
           "fixed md:static inset-y-0 left-0 z-50",

@@ -15,13 +15,15 @@ export const MAX_GEOSORT_PRO = 500;
 export const MAX_HEIC_FREE = 100;
 export const MAX_HEIC_PRO = 500;
 
-// AI Rename limits
+// AI limits (shared across AI Rename, AI Alt Text, Transcribe)
 export const AI_RENAME_FREE_PER_DAY = 10;
 export const AI_RENAME_PRO_PER_DAY = 99999; // unlimited
 
-// AI Alt Text limits
 export const AI_ALT_TEXT_FREE_PER_DAY = 10;
 export const AI_ALT_TEXT_PRO_PER_DAY = 99999; // unlimited
+
+export const AI_TRANSCRIBE_FREE_PER_DAY = 10;
+export const AI_TRANSCRIBE_PRO_PER_DAY = 99999; // unlimited
 
 // Accepted formats
 export const ACCEPTED_FORMATS: ImageFormat[] = ["jpeg", "png", "webp", "gif", "avif"];

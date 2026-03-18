@@ -20,7 +20,7 @@ import {
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
-// ─── Local icons (cannot modify ToolCard.tsx) ─────────────────────────────────
+// ─── Local icons ─────────────────────────────────────────────────────────────
 
 const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -41,85 +41,6 @@ const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
     <text x="9" y="39" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace">alt=</text>
     <rect x="26" y="33" width="13" height="6" rx="1" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="0.75"/>
     <rect className="alt-cursor" x="27" y="34.5" width="1.25" height="3" rx="0.5" fill={accent}/>
-  </svg>
-);
-
-const IconVideoThumb: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes vt-scan {
-        0%, 100% { transform: translateX(0px); }
-        50%       { transform: translateX(16px); }
-      }
-      @keyframes vt-play {
-        0%, 60%  { transform: scale(0.8); opacity: 0.5; }
-        80%, 100%{ transform: scale(1); opacity: 1; }
-      }
-      .vt-scan { animation: vt-scan 2.4s ease-in-out infinite; }
-      .vt-play { transform-origin: 14px 20px; animation: vt-play 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
-    `}</style>
-    <rect x="2" y="10" width="44" height="22" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    {[5, 13, 21, 29, 37].map((x) => (
-      <React.Fragment key={x}>
-        <rect x={x} y="12" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
-        <rect x={x} y="26" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.25"/>
-      </React.Fragment>
-    ))}
-    <rect x="6" y="17" width="12" height="8" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
-    <g className="vt-play">
-      <path d="M11 18.5 L11 23.5 L16 21 Z" fill={accent}/>
-    </g>
-    <g className="vt-scan">
-      <line x1="19" y1="10" x2="19" y2="32" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeOpacity="0.7"/>
-    </g>
-    <path d="M34 36 L34 44 M30 40 L34 44 L38 40" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const IconVideoCompress: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes vc2-squeeze { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
-      @keyframes vc2-al { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(4px); } }
-      @keyframes vc2-ar { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(-4px); } }
-      .vc2-body { transform-origin: 24px 22px; animation: vc2-squeeze 2s ease-in-out infinite; }
-      .vc2-al { animation: vc2-al 2s ease-in-out infinite; }
-      .vc2-ar { animation: vc2-ar 2s ease-in-out infinite; }
-    `}</style>
-    <g className="vc2-body">
-      <rect x="8" y="16" width="32" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <rect x="8" y="16" width="32" height="6" rx="2" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.25"/>
-      <line x1="16" y1="16" x2="14" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
-      <line x1="22" y1="16" x2="20" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
-      <line x1="28" y1="16" x2="26" y2="22" stroke={accent} strokeWidth="1.5" strokeOpacity="0.6"/>
-      <path d="M20 27 L20 33 L26 30 Z" fill={accent} fillOpacity="0.6"/>
-    </g>
-    <g className="vc2-al"><path d="M4 22 L8 19 M4 22 L8 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
-    <g className="vc2-ar"><path d="M44 22 L40 19 M44 22 L40 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></g>
-  </svg>
-);
-
-const IconVideoGif: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes vg2-frame { 0%, 100% { opacity: 1; } 33% { opacity: 0.4; } 66% { opacity: 0.7; } }
-      @keyframes vg2-loop { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      .vg2-f1 { animation: vg2-frame 1.8s ease-in-out 0s infinite; }
-      .vg2-f2 { animation: vg2-frame 1.8s ease-in-out 0.6s infinite; }
-      .vg2-f3 { animation: vg2-frame 1.8s ease-in-out 1.2s infinite; }
-      .vg2-loop { transform-origin: 34px 34px; animation: vg2-loop 2.4s linear infinite; }
-    `}</style>
-    <g className="vg2-f1"><rect x="4" y="8" width="20" height="15" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25" strokeOpacity="0.4"/></g>
-    <g className="vg2-f2"><rect x="7" y="11" width="20" height="15" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.25" strokeOpacity="0.6"/></g>
-    <g className="vg2-f3">
-      <rect x="10" y="14" width="20" height="15" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
-      <path d="M17 18 L17 23 L23 20.5 Z" fill={accent} fillOpacity="0.7"/>
-    </g>
-    <text x="4" y="38" fontSize="7" fill={accent} fontWeight="800" fontFamily="monospace" letterSpacing="1">GIF</text>
-    <g className="vg2-loop">
-      <path d="M34 29 A5 5 0 1 1 29 34" stroke={accent} strokeWidth="1.75" strokeLinecap="round" fill="none"/>
-      <path d="M28 30 L29 34 L33 33" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-    </g>
   </svg>
 );
 
@@ -146,26 +67,6 @@ const IconTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
     <g className="tr2-l1"><rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
     <g className="tr2-l2"><rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
     <g className="tr2-l3"><rect x="28" y="39" width="14" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
-  </svg>
-);
-
-const IconVideoResize: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes vr2-wide { 0%, 40%, 100% { opacity: 1; transform: scale(1); } 60%, 80% { opacity: 0.2; transform: scale(0.9); } }
-      @keyframes vr2-tall { 0%, 40%, 100% { opacity: 0.2; transform: scale(0.9); } 60%, 80% { opacity: 1; transform: scale(1); } }
-      .vr2-wide { transform-origin: 13px 22px; animation: vr2-wide 2.4s ease-in-out infinite; }
-      .vr2-tall { transform-origin: 35px 24px; animation: vr2-tall 2.4s ease-in-out infinite; }
-    `}</style>
-    <g className="vr2-wide">
-      <rect x="2" y="16" width="22" height="12" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <text x="6" y="25" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">16:9</text>
-    </g>
-    <path d="M26 22 L30 22 M28 20 L30 22 L28 24" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <g className="vr2-tall">
-      <rect x="28" y="10" width="18" height="28" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
-      <text x="31" y="27" fontSize="5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">9:16</text>
-    </g>
   </svg>
 );
 
@@ -304,32 +205,42 @@ const IconPixShip: React.FC<{ accent: string }> = ({ accent }) => (
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Category = "All" | "Optimize" | "AI" | "Organize" | "Edit" | "Video" | "Combo";
+type Category = "All" | "Optimize" | "AI" | "Creative" | "Organize";
 
 interface ToolWithCategory extends ToolCardData {
   category: Category[];
-  isPro?: boolean;
+  isCombo?: boolean;
 }
 
-// ─── Tool data (lives here — icons are functions, cannot be serialized) ────────
+// ─── Tool data ────────────────────────────────────────────────────────────────
 
 const TOOLS: ToolWithCategory[] = [
+  // ── Optimize ──
   {
     name: "Compress",
     href: "/tools/compress",
-    tagline: "Shrink JPG, PNG, WebP, GIF — no quality loss. Up to 90% smaller.",
+    tagline: "Shrink JPG, PNG, WebP, GIF -- no quality loss. Up to 90% smaller.",
     accent: "#6366F1",
-    badges: ["100% Free", "Up to 90% smaller"],
+    badges: ["Free", "Up to 90% smaller"],
     Icon: IconCompress,
     category: ["Optimize"],
   },
   {
-    name: "WebP",
+    name: "WebP Converter",
     href: "/tools/webp",
-    tagline: "Convert any image to WebP. 25–34% smaller than JPEG.",
+    tagline: "Convert any image to WebP. 25-34% smaller than JPEG.",
     accent: "#10B981",
-    badges: ["100% Free", "25-34% smaller"],
+    badges: ["Free", "25-34% smaller"],
     Icon: IconWebP,
+    category: ["Optimize"],
+  },
+  {
+    name: "HEIC Converter",
+    href: "/tools/heic",
+    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
+    accent: "#6366F1",
+    badges: ["Free", "iPhone", "Batch"],
+    Icon: IconHEIC,
     category: ["Optimize"],
   },
   {
@@ -337,25 +248,57 @@ const TOOLS: ToolWithCategory[] = [
     href: "/tools/resizepack",
     tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
     accent: "#14B8A6",
-    badges: ["100% Free", "Social presets"],
+    badges: ["Free", "Social presets"],
     Icon: IconResizePack,
     category: ["Optimize"],
   },
   {
     name: "CropRatio",
     href: "/tools/croproatio",
-    tagline: "Crop to exact ratios — 1:1, 16:9, 4:3, A4 and more.",
+    tagline: "Crop to exact ratios -- 1:1, 16:9, 4:3, A4 and more.",
     accent: "#EC4899",
-    badges: ["100% Free", "9 ratios"],
+    badges: ["Free", "9 ratios"],
     Icon: IconCropRatio,
     category: ["Optimize"],
   },
+  {
+    name: "CleanDrop",
+    href: "/tools/cleandrop",
+    tagline: "Strip metadata, compress, and convert to WebP. Privacy-first optimization.",
+    accent: "#16A34A",
+    badges: ["Free", "Multi-step"],
+    Icon: IconCleanDrop,
+    category: ["Optimize"],
+    isCombo: true,
+  },
+  {
+    name: "InstaPrep",
+    href: "/tools/instaprep",
+    tagline: "Instagram-ready in seconds. Resize and compress for feed or stories.",
+    accent: "#E1306C",
+    badges: ["Free", "Multi-step"],
+    Icon: IconInstaPrep,
+    category: ["Optimize"],
+    isCombo: true,
+  },
+  {
+    name: "PixShip",
+    href: "/tools/pixship",
+    tagline: "Light compress and resize for client delivery. Download as ZIP.",
+    accent: "#0891B2",
+    badges: ["Free", "Multi-step"],
+    Icon: IconPixShip,
+    category: ["Optimize"],
+    isCombo: true,
+  },
+
+  // ── AI ──
   {
     name: "AI Rename",
     href: "/tools/ai-rename",
     tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
     accent: "#8B5CF6",
-    badges: ["AI-powered", "Gemini Flash"],
+    badges: ["Login required", "Gemini Flash"],
     Icon: IconAIRename,
     category: ["AI"],
   },
@@ -364,16 +307,95 @@ const TOOLS: ToolWithCategory[] = [
     href: "/tools/alt-text",
     tagline: "Generate accessibility-compliant alt text for images using Gemini AI.",
     accent: "#8B5CF6",
-    badges: ["AI-powered", "Gemini Flash"],
+    badges: ["Login required", "Gemini Flash"],
     Icon: IconAltText,
     category: ["AI"],
+  },
+  {
+    name: "Transcribe",
+    href: "/tools/transcribe",
+    tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
+    accent: "#0891B2",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconTranscribe,
+    category: ["AI"],
+  },
+  {
+    name: "WebLift",
+    href: "/tools/weblift",
+    tagline: "Compress, convert to WebP, and AI-rename in one click.",
+    accent: "#3B82F6",
+    badges: ["Login required", "Multi-step"],
+    Icon: IconWebLift,
+    category: ["AI"],
+    isCombo: true,
+  },
+  {
+    name: "BlogDrop",
+    href: "/tools/blogdrop",
+    tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
+    accent: "#8B5CF6",
+    badges: ["Login required", "Multi-step"],
+    Icon: IconBlogDrop,
+    category: ["AI"],
+    isCombo: true,
+  },
+  {
+    name: "ShopShot",
+    href: "/tools/shopshot",
+    tagline: "E-commerce product images optimized. Compress, resize, WebP, product names.",
+    accent: "#F59E0B",
+    badges: ["Login required", "Multi-step"],
+    Icon: IconShopShot,
+    category: ["AI"],
+    isCombo: true,
+  },
+
+  // ── Creative ──
+  {
+    name: "FilmLab",
+    href: "/tools/filmlab",
+    tagline: "14 analog film presets -- Kodak Gold, Fuji, Ilford and 8 Samma originals.",
+    accent: "#F59E0B",
+    badges: ["Free", "14 presets"],
+    Icon: IconFilmLab,
+    category: ["Creative"],
+  },
+  {
+    name: "StampIt",
+    href: "/tools/stampit",
+    tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
+    accent: "#06B6D4",
+    badges: ["Free", "Batch"],
+    Icon: IconStampIt,
+    category: ["Creative"],
+  },
+
+  // ── Organize ──
+  {
+    name: "EXIF Lens",
+    href: "/tools/exif",
+    tagline: "Strip GPS, camera data and all metadata from photos.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy"],
+    Icon: IconEXIF,
+    category: ["Organize"],
+  },
+  {
+    name: "TwinHunt",
+    href: "/tools/twinhunt",
+    tagline: "Perceptual hashing finds exact and near-duplicate photos.",
+    accent: "#F97316",
+    badges: ["Free", "pHash"],
+    Icon: IconTwinHunt,
+    category: ["Organize"],
   },
   {
     name: "GeoSort",
     href: "/tools/geosort",
     tagline: "Sort photos by country using GPS EXIF data.",
     accent: "#22C55E",
-    badges: ["100% Free", "GPS"],
+    badges: ["Free", "GPS"],
     Icon: IconGeoSort,
     category: ["Organize"],
   },
@@ -382,17 +404,8 @@ const TOOLS: ToolWithCategory[] = [
     href: "/tools/travelmap",
     tagline: "Generate an interactive map from your travel photos.",
     accent: "#3B82F6",
-    badges: ["100% Free", "GPS"],
+    badges: ["Free", "GPS"],
     Icon: IconTravelMap,
-    category: ["Organize"],
-  },
-  {
-    name: "TwinHunt",
-    href: "/tools/twinhunt",
-    tagline: "Perceptual hashing finds exact and near-duplicate photos.",
-    accent: "#F97316",
-    badges: ["100% Free", "pHash"],
-    Icon: IconTwinHunt,
     category: ["Organize"],
   },
   {
@@ -400,114 +413,15 @@ const TOOLS: ToolWithCategory[] = [
     href: "/tools/cull",
     tagline: "Rate and cull a shoot in minutes. Star rating system.",
     accent: "#F43F5E",
-    badges: ["100% Free", "Star rating"],
+    badges: ["Free", "Star rating"],
     Icon: IconCull,
     category: ["Organize"],
-  },
-  {
-    name: "FilmLab",
-    href: "/tools/filmlab",
-    tagline: "14 analog film presets — Kodak Gold, Fuji, Ilford and 8 Samma originals.",
-    accent: "#F59E0B",
-    badges: ["100% Free", "14 presets"],
-    Icon: IconFilmLab,
-    category: ["Edit"],
-  },
-  {
-    name: "StampIt",
-    href: "/tools/stampit",
-    tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
-    accent: "#06B6D4",
-    badges: ["100% Free", "Batch"],
-    Icon: IconStampIt,
-    category: ["Edit"],
-  },
-  {
-    name: "HEIC Converter",
-    href: "/tools/heic",
-    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
-    accent: "#6366F1",
-    badges: ["100% Free", "iPhone", "Batch"],
-    Icon: IconHEIC,
-    category: ["Edit"],
-  },
-  {
-    name: "Transcribe",
-    href: "/tools/transcribe",
-    tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
-    accent: "#0891B2",
-    badges: ["AI-powered", "Gemini Flash"],
-    Icon: IconTranscribe,
-    category: ["Video"],
-  },
-  {
-    name: "EXIF Lens",
-    href: "/tools/exif",
-    tagline: "Strip GPS, camera data and all metadata from photos.",
-    accent: "#EF4444",
-    badges: ["100% Free", "Privacy"],
-    Icon: IconEXIF,
-    category: ["Edit"],
-  },
-  {
-    name: "WebLift",
-    href: "/tools/weblift",
-    tagline: "Compress, convert to WebP, and AI-rename in one click.",
-    accent: "#3B82F6",
-    badges: ["Combo", "AI-powered"],
-    Icon: IconWebLift,
-    category: ["Combo"],
-  },
-  {
-    name: "BlogDrop",
-    href: "/tools/blogdrop",
-    tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
-    accent: "#8B5CF6",
-    badges: ["Combo", "AI-powered"],
-    Icon: IconBlogDrop,
-    category: ["Combo"],
-  },
-  {
-    name: "InstaPrep",
-    href: "/tools/instaprep",
-    tagline: "Instagram-ready in seconds. Resize and compress for feed or stories.",
-    accent: "#E1306C",
-    badges: ["Combo", "100% Free"],
-    Icon: IconInstaPrep,
-    category: ["Combo"],
-  },
-  {
-    name: "ShopShot",
-    href: "/tools/shopshot",
-    tagline: "E-commerce product images optimized. Compress, resize, WebP, product names.",
-    accent: "#F59E0B",
-    badges: ["Combo", "AI-powered"],
-    Icon: IconShopShot,
-    category: ["Combo"],
-  },
-  {
-    name: "CleanDrop",
-    href: "/tools/cleandrop",
-    tagline: "Strip metadata, compress, and convert to WebP. Privacy-first optimization.",
-    accent: "#16A34A",
-    badges: ["Combo", "100% Free"],
-    Icon: IconCleanDrop,
-    category: ["Combo"],
-  },
-  {
-    name: "PixShip",
-    href: "/tools/pixship",
-    tagline: "Light compress and resize for client delivery. Download as ZIP.",
-    accent: "#0891B2",
-    badges: ["Combo", "100% Free"],
-    Icon: IconPixShip,
-    category: ["Combo"],
   },
 ];
 
 // ─── Category tabs config ─────────────────────────────────────────────────────
 
-const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Organize", "Edit", "Video", "Combo"];
+const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Creative", "Organize"];
 
 // ─── Use cases ────────────────────────────────────────────────────────────────
 
@@ -516,8 +430,8 @@ const USE_CASES = [
     title: "I need to optimize images for my website",
     tools: [
       { name: "Compress", href: "/tools/compress" },
-      { name: "WebP", href: "/tools/webp" },
-      { name: "ResizePack", href: "/tools/resizepack" },
+      { name: "WebP Converter", href: "/tools/webp" },
+      { name: "WebLift", href: "/tools/weblift" },
     ],
   },
   {
@@ -525,14 +439,15 @@ const USE_CASES = [
     tools: [
       { name: "AI Rename", href: "/tools/ai-rename" },
       { name: "AI Alt Text", href: "/tools/alt-text" },
+      { name: "BlogDrop", href: "/tools/blogdrop" },
     ],
   },
   {
     title: "I need to prepare photos for social media",
     tools: [
+      { name: "InstaPrep", href: "/tools/instaprep" },
       { name: "ResizePack", href: "/tools/resizepack" },
       { name: "CropRatio", href: "/tools/croproatio" },
-      { name: "StampIt", href: "/tools/stampit" },
     ],
   },
   {
@@ -544,9 +459,11 @@ const USE_CASES = [
     ],
   },
   {
-    title: "I need to convert iPhone photos",
+    title: "I sell products online",
     tools: [
-      { name: "HEIC Converter", href: "/tools/heic" },
+      { name: "ShopShot", href: "/tools/shopshot" },
+      { name: "Compress", href: "/tools/compress" },
+      { name: "StampIt", href: "/tools/stampit" },
     ],
   },
 ];
@@ -627,7 +544,7 @@ export function ToolsPageClient() {
 
   return (
     <>
-      {/* ── Search + Category tabs ─────────────────────────────────────── */}
+      {/* -- Search + Category tabs -- */}
       <div className="sticky top-0 z-20 bg-white dark:bg-[#191919] border-b border-gray-100 dark:border-[#2A2A2A]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col gap-3">
 
@@ -681,7 +598,7 @@ export function ToolsPageClient() {
         </div>
       </div>
 
-      {/* ── Tool grid ──────────────────────────────────────────────────── */}
+      {/* -- Tool grid -- */}
       <section className="py-10 px-4 sm:px-6 bg-white dark:bg-[#191919]">
         <div className="max-w-5xl mx-auto">
 
@@ -698,12 +615,12 @@ export function ToolsPageClient() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {filteredTools.map((tool) => (
                 <div key={tool.name} className="relative h-full">
-                  {tool.isPro && (
+                  {tool.isCombo && (
                     <span
                       className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
-                                 bg-indigo-600 text-white px-2 py-0.5 rounded-full pointer-events-none"
+                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
                     >
-                      PRO
+                      MULTI-STEP
                     </span>
                   )}
                   <ToolCard tool={tool} />
@@ -726,7 +643,7 @@ export function ToolsPageClient() {
         </div>
       </section>
 
-      {/* ── Use case quick links ───────────────────────────────────────── */}
+      {/* -- Use case quick links -- */}
       {!isSearching && activeCategory === "All" && (
         <section className="py-12 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
           <div className="max-w-5xl mx-auto">
@@ -770,7 +687,7 @@ export function ToolsPageClient() {
         </section>
       )}
 
-      {/* ── Trust strip ────────────────────────────────────────────────── */}
+      {/* -- Trust strip -- */}
       <section className="border-t border-gray-100 dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#191919] py-10 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3" role="list">
