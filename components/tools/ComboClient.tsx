@@ -7,6 +7,24 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { Upload, Download, CheckCircle2, Loader2, Circle, AlertCircle, Lock, Sparkles, Play } from "lucide-react";
 import type { PipelineStep as EnginePipelineStep, PipelineStepId } from "@/lib/pipeline-engine";
+import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
+
+// ─── Language options for AI Rename ─────────────────────────────────────────
+
+const AI_RENAME_LANGUAGES = [
+  { code: "en", label: "English", flag: "\u{1F1EC}\u{1F1E7}" },
+  { code: "it", label: "Italiano", flag: "\u{1F1EE}\u{1F1F9}" },
+  { code: "es", label: "Espa\u00f1ol", flag: "\u{1F1EA}\u{1F1F8}" },
+  { code: "fr", label: "Fran\u00e7ais", flag: "\u{1F1EB}\u{1F1F7}" },
+  { code: "de", label: "Deutsch", flag: "\u{1F1E9}\u{1F1EA}" },
+  { code: "pt", label: "Portugu\u00eas", flag: "\u{1F1F5}\u{1F1F9}" },
+];
+
+// ─── Combo file limits ──────────────────────────────────────────────────────
+
+const COMBO_FILES_FREE = 5;
+const COMBO_FILES_PRO = 100;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -84,7 +102,8 @@ async function convertHeicToJpg(file: File): Promise<File> {
 
 async function runComboFilePipeline(
   file: File,
-  steps: ComboStep[]
+  steps: ComboStep[],
+  locale: string
 ): Promise<{ blob: Blob; name: string }> {
   try {
     // Pre-convert HEIC to JPG so the pipeline can process it
@@ -97,7 +116,10 @@ async function runComboFilePipeline(
     const engineSteps: EnginePipelineStep[] = enabledSteps.map((s) => ({
       id: s.id as PipelineStepId,
       enabled: true,
-      settings: (s.settings ?? {}) as EnginePipelineStep["settings"],
+      settings: {
+        ...(s.settings ?? {}),
+        ...(s.id === "ai-rename" ? { locale } : {}),
+      } as EnginePipelineStep["settings"],
     }));
 
     let result: { blob: Blob; name: string } = { blob: processableFile, name: processableFile.name };
@@ -168,9 +190,13 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
   const [files, setFiles] = useState<ProcessedFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [stepToggles, setStepToggles] = useState<ComboStep[]>(initialSteps);
+  const [locale, setLocale] = useState("en");
+  const [showProModal, setShowProModal] = useState(false);
   const processingRef = useRef(false);
 
   const isAuthenticated = !!session?.user;
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const fileLimit = isPro ? COMBO_FILES_PRO : COMBO_FILES_FREE;
 
   // Check if any AI step is enabled and user is not logged in
   const enabledAiSteps = stepToggles.filter((s) => s.enabled && s.isAi);
@@ -191,7 +217,14 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
 
   // Dropzone
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    const newFiles: ProcessedFile[] = acceptedFiles.map((f) => ({
+    // Enforce file limit based on plan
+    let filesToAdd = acceptedFiles;
+    if (acceptedFiles.length > fileLimit) {
+      filesToAdd = acceptedFiles.slice(0, fileLimit);
+      setShowProModal(true);
+    }
+
+    const newFiles: ProcessedFile[] = filesToAdd.map((f) => ({
       id: `${f.name}-${Date.now()}-${Math.random()}`,
       originalFile: f,
       originalName: f.name,
@@ -201,7 +234,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
       currentStep: -1,
     }));
     setFiles((prev) => [...prev, ...newFiles]);
-  }, []);
+  }, [fileLimit]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -237,7 +270,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
           await new Promise((r) => setTimeout(r, 300));
         }
 
-        const result = await runComboFilePipeline(pf.originalFile, stepToggles);
+        const result = await runComboFilePipeline(pf.originalFile, stepToggles, locale);
 
         setFiles((prev) =>
           prev.map((f) =>
@@ -259,7 +292,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
 
     setIsProcessing(false);
     processingRef.current = false;
-  }, [files, stepToggles]);
+  }, [files, stepToggles, locale]);
 
   // Download single
   const downloadFile = (pf: ProcessedFile) => {
@@ -296,30 +329,47 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
             <div className="flex items-center gap-4 flex-wrap flex-1">
               {stepToggles.map((step) => {
                 const isLastEnabled = step.enabled && enabledCount === 1;
+                const isAiRename = step.id === "ai-rename";
                 return (
-                  <label key={step.id} className="flex items-center gap-2 cursor-pointer select-none">
-                    <ToggleSwitch
-                      checked={step.enabled}
-                      onChange={(v) => handleToggleStep(step.id, v)}
-                      disabled={isLastEnabled && step.enabled}
-                    />
-                    <span className={`text-sm ${step.enabled ? "text-gray-600 dark:text-[#A3A3A3]" : "text-[#A3A3A3] dark:text-[#525252]"}`}>
-                      {step.label}
-                    </span>
-                    {step.isAi && (
-                      isAuthenticated ? (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
-                          <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
-                          AI
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#A3A3A3] bg-gray-100 dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded">
-                          <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
-                          Login
-                        </span>
-                      )
+                  <div key={step.id} className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer select-none">
+                      <ToggleSwitch
+                        checked={step.enabled}
+                        onChange={(v) => handleToggleStep(step.id, v)}
+                        disabled={isLastEnabled && step.enabled}
+                      />
+                      <span className={`text-sm ${step.enabled ? "text-gray-600 dark:text-[#A3A3A3]" : "text-[#A3A3A3] dark:text-[#525252]"}`}>
+                        {step.label}
+                      </span>
+                      {step.isAi && (
+                        isAuthenticated ? (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
+                            <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
+                            AI
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#A3A3A3] bg-gray-100 dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded">
+                            <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
+                            Login
+                          </span>
+                        )
+                      )}
+                    </label>
+                    {/* Language selector for AI Rename */}
+                    {isAiRename && step.enabled && (
+                      <select
+                        value={locale}
+                        onChange={(e) => setLocale(e.target.value)}
+                        className="text-xs bg-transparent border border-gray-200 dark:border-[#2A2A2A] rounded px-1.5 py-1 text-gray-600 dark:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1]"
+                      >
+                        {AI_RENAME_LANGUAGES.map((lang) => (
+                          <option key={lang.code} value={lang.code}>
+                            {lang.flag} {lang.label}
+                          </option>
+                        ))}
+                      </select>
                     )}
-                  </label>
+                  </div>
                 );
               })}
             </div>
@@ -399,7 +449,17 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
             <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
               JPG, PNG, WebP, GIF, AVIF, HEIC
             </p>
+            <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-2">
+              Free: {COMBO_FILES_FREE} files per batch &middot; Pro: {COMBO_FILES_PRO}
+            </p>
           </div>
+        )}
+
+        {/* AI rename daily limit note */}
+        {enabledAiSteps.length > 0 && isAuthenticated && (
+          <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] text-center">
+            AI features use your daily limit ({AI_RENAME_FREE_PER_DAY}/day free, unlimited Pro)
+          </p>
         )}
 
         {/* File list */}
@@ -480,6 +540,15 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
           </div>
         )}
       </div>
+
+      {/* Pro upsell modal for file limit */}
+      <ProUpsellModal
+        open={showProModal}
+        onClose={() => setShowProModal(false)}
+        trigger="batch"
+        filesDropped={files.length}
+        freeLimit={COMBO_FILES_FREE}
+      />
     </section>
   );
 }
