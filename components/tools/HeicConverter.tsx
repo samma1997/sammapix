@@ -54,6 +54,12 @@ function outputFileName(original: File, format: OutputFormat): string {
   return `${base}${ext}`;
 }
 
+function isSafari(): boolean {
+  if (typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent;
+  return /Safari/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua);
+}
+
 function isHeicFile(file: File): boolean {
   const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
   const mime = file.type.toLowerCase();
@@ -440,10 +446,16 @@ export default function HeicConverter() {
           outputFormat,
         };
       } catch (err) {
+        const isLargeFile = f.original.size > SERVER_MAX_SIZE;
+        const fallbackMsg = err instanceof Error ? err.message : "Conversion failed";
+        const errorMessage =
+          isLargeFile && !isSafari()
+            ? "File too large for Chrome. Open this page in Safari for instant conversion."
+            : fallbackMsg;
         updated[i] = {
           ...updated[i],
           status: "error",
-          errorMessage: err instanceof Error ? err.message : "Conversion failed",
+          errorMessage,
         };
       }
 
@@ -610,6 +622,11 @@ export default function HeicConverter() {
                 <Link href="/pricing" className="underline hover:text-[#737373]">
                   Pro: {MAX_FILES_PRO}
                 </Link>
+              </p>
+            )}
+            {!isSafari() && (
+              <p className="text-[10px] text-[#A3A3A3] mt-2">
+                💡 Tip: Safari converts HEIC instantly (Apple native). On Chrome, files over 4MB may be slower.
               </p>
             )}
           </div>
