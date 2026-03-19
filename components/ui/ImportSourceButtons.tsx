@@ -55,6 +55,10 @@ interface ImportSourceButtonsProps {
 
 type ImportSource = "zip" | "drive" | "dropbox";
 
+// Feature flags — flip to true when Google/Dropbox reviews are approved
+const ENABLE_GOOGLE_DRIVE = false;
+const ENABLE_DROPBOX = false;
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function ImportSourceButtons({
@@ -64,8 +68,8 @@ export default function ImportSourceButtons({
   const [loading, setLoading] = useState<ImportSource | null>(null);
   const zipInputRef = useRef<HTMLInputElement>(null);
 
-  const driveConfigured = isGoogleDriveConfigured();
-  const dropboxConfigured = isDropboxConfigured();
+  const driveConfigured = ENABLE_GOOGLE_DRIVE && isGoogleDriveConfigured();
+  const dropboxConfigured = ENABLE_DROPBOX && isDropboxConfigured();
 
   const handleZipSelect = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,8 +158,8 @@ export default function ImportSourceButtons({
         <span>Import ZIP</span>
       </button>
 
-      {/* Google Drive button */}
-      {driveConfigured ? (
+      {/* Google Drive button — hidden until review approved */}
+      {driveConfigured && (
         <button
           type="button"
           onClick={(e) => {
@@ -173,18 +177,10 @@ export default function ImportSourceButtons({
           )}
           <span>Google Drive</span>
         </button>
-      ) : (
-        <span
-          className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-1.5 text-xs text-[#A3A3A3] dark:text-[#525252] bg-[#FAFAFA] dark:bg-[#1A1A1A] cursor-default opacity-50"
-          title="Google Drive — coming soon"
-        >
-          <GoogleDriveIcon className="h-3.5 w-3.5" />
-          <span>Google Drive</span>
-        </span>
       )}
 
-      {/* Dropbox button */}
-      {dropboxConfigured ? (
+      {/* Dropbox button — hidden until review approved */}
+      {dropboxConfigured && (
         <button
           type="button"
           onClick={(e) => {
@@ -202,14 +198,6 @@ export default function ImportSourceButtons({
           )}
           <span>Dropbox</span>
         </button>
-      ) : (
-        <span
-          className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-1.5 text-xs text-[#A3A3A3] dark:text-[#525252] bg-[#FAFAFA] dark:bg-[#1A1A1A] cursor-default opacity-50"
-          title="Dropbox — coming soon"
-        >
-          <DropboxIcon className="h-3.5 w-3.5" />
-          <span>Dropbox</span>
-        </span>
       )}
     </div>
   );
