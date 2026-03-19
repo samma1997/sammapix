@@ -23,6 +23,12 @@ export async function runCompressStep(
     convertToWebP: false,
     maxWidthOrHeight: options.maxWidthOrHeight ?? 4096,
   });
+
+  // If compression made it bigger or equal, keep the original
+  if (result.blob.size >= blob.size) {
+    return { blob, savedPercent: 0 };
+  }
+
   return {
     blob: result.blob,
     savedPercent: result.savedPercent,

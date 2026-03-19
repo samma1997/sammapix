@@ -217,23 +217,30 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
 
   // Dropzone
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Enforce file limit based on plan
-    let filesToAdd = acceptedFiles;
-    if (acceptedFiles.length > fileLimit) {
-      filesToAdd = acceptedFiles.slice(0, fileLimit);
-      setShowProModal(true);
-    }
+    setFiles((prev) => {
+      const existingCount = prev.length;
+      const remaining = Math.max(0, fileLimit - existingCount);
 
-    const newFiles: ProcessedFile[] = filesToAdd.map((f) => ({
-      id: `${f.name}-${Date.now()}-${Math.random()}`,
-      originalFile: f,
-      originalName: f.name,
-      resultBlob: null,
-      resultName: f.name,
-      status: "pending" as const,
-      currentStep: -1,
-    }));
-    setFiles((prev) => [...prev, ...newFiles]);
+      let filesToAdd = acceptedFiles;
+      if (acceptedFiles.length > remaining) {
+        filesToAdd = acceptedFiles.slice(0, remaining);
+        setShowProModal(true);
+      }
+
+      if (filesToAdd.length === 0) return prev;
+
+      const newFiles: ProcessedFile[] = filesToAdd.map((f) => ({
+        id: `${f.name}-${Date.now()}-${Math.random()}`,
+        originalFile: f,
+        originalName: f.name,
+        resultBlob: null,
+        resultName: f.name,
+        status: "pending" as const,
+        currentStep: -1,
+      }));
+
+      return [...prev, ...newFiles];
+    });
   }, [fileLimit]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
