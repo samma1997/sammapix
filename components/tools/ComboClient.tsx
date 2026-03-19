@@ -6,6 +6,7 @@ import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { Upload, Download, CheckCircle2, Loader2, Circle, AlertCircle, Lock, Sparkles, Play } from "lucide-react";
+import ImportSourceButtons from "@/components/ui/ImportSourceButtons";
 import type { PipelineStep as EnginePipelineStep, PipelineStepId } from "@/lib/pipeline-engine";
 import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
@@ -437,6 +438,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
             <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
               JPG, PNG, WebP, GIF, AVIF, HEIC
             </p>
+            <ImportSourceButtons onFilesImported={onDrop} disabled={needsAuthForAi} />
             <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-2">
               Free: {COMBO_FILES_FREE} files per batch &middot; Pro: {COMBO_FILES_PRO}
               {dailyUsage !== null && (

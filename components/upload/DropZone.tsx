@@ -8,6 +8,7 @@ import { ACCEPTED_MIME_TYPES, PLAN_LIMITS } from "@/lib/constants";
 import { isValidImageFile } from "@/lib/utils";
 import { useImageStore } from "@/store/imageStore";
 import { useSession } from "next-auth/react";
+import ImportSourceButtons from "@/components/ui/ImportSourceButtons";
 
 interface DropZoneProps {
   onFilesAdded?: (files: File[]) => void;
@@ -113,6 +114,16 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
             <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
               PNG, JPG, WebP, GIF- up to {Math.round(maxFileSize / (1024 * 1024))}MB each
             </p>
+            <ImportSourceButtons
+              onFilesImported={(files) => {
+                const valid = files.filter(isValidImageFile);
+                if (valid.length > 0) {
+                  addFiles(valid, maxFiles);
+                  onFilesAdded?.(valid);
+                }
+              }}
+              disabled={!canAddMore}
+            />
           </>
         )}
       </div>
