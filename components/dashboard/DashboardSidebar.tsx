@@ -335,7 +335,7 @@ export default function DashboardSidebar({
       </div>
 
       {/* User profile section with hover menu */}
-      <div ref={profileRef} className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] relative pb-[max(env(safe-area-inset-bottom,0px),16px)] md:pb-0">
+      <div ref={profileRef} className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] relative pb-[max(env(safe-area-inset-bottom,0px),32px)] md:pb-2">
         <button
           onClick={() => setProfileMenuOpen((v) => !v)}
           className="w-full px-3 py-3 flex items-center gap-2.5 hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors duration-150"
