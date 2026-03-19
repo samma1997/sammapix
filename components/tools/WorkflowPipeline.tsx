@@ -5,10 +5,6 @@ import { useDropzone } from "react-dropzone";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import {
-  BookOpen,
-  Instagram,
-  ShoppingBag,
-  Users,
   Upload,
   CheckCircle2,
   AlertCircle,
@@ -34,6 +30,76 @@ import {
   type PipelineStepId,
   type PipelineFileResult,
 } from "@/lib/pipeline-engine";
+
+// ── Animated Workflow Preset Icons ────────────────────────────────────────────
+
+const IconBlogPreset = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes wf-blog-line { 0%, 100% { opacity: 0.4; transform: scaleX(0.7); } 50% { opacity: 1; transform: scaleX(1); } }
+      .wf-bl1 { transform-origin: 14px 10px; animation: wf-blog-line 2.2s ease-in-out 0s infinite; }
+      .wf-bl2 { transform-origin: 14px 13px; animation: wf-blog-line 2.2s ease-in-out 0.3s infinite; }
+      .wf-bl3 { transform-origin: 14px 16px; animation: wf-blog-line 2.2s ease-in-out 0.6s infinite; }
+    `}</style>
+    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <path d="M7 7h2v4H7z" fill="currentColor" opacity="0.3" rx="0.5"/>
+    <g className="wf-bl1"><line x1="11" y1="10" x2="17" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+    <g className="wf-bl2"><line x1="11" y1="13" x2="17" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+    <g className="wf-bl3"><line x1="7" y1="16" x2="17" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+  </svg>
+);
+
+const IconInstagramPreset = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes wf-ig-pulse { 0%, 100% { r: 3.5; opacity: 0.6; } 50% { r: 4.2; opacity: 1; } }
+      @keyframes wf-ig-dot { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+      .wf-ig-lens { animation: wf-ig-pulse 2s ease-in-out infinite; }
+      .wf-ig-dot { animation: wf-ig-dot 2s ease-in-out infinite; }
+    `}</style>
+    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <circle className="wf-ig-lens" cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <circle className="wf-ig-dot" cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+  </svg>
+);
+
+const IconEcommercePreset = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes wf-ec-tag { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
+      @keyframes wf-ec-sparkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1); } }
+      .wf-ec-bag { transform-origin: 12px 14px; animation: wf-ec-tag 2.4s ease-in-out infinite; }
+      .wf-ec-sparkle { transform-origin: 19px 5px; animation: wf-ec-sparkle 2.4s ease-in-out infinite; }
+    `}</style>
+    <g className="wf-ec-bag">
+      <path d="M6 7h12l-1.5 12H7.5L6 7z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
+      <path d="M9 7V5a3 3 0 016 0v2" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    </g>
+    <g className="wf-ec-sparkle">
+      <line x1="19" y1="3" x2="19" y2="7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="17" y1="5" x2="21" y2="5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </g>
+  </svg>
+);
+
+const IconClientPreset = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes wf-cl-send { 0%, 100% { transform: translateX(0px) translateY(0px); } 50% { transform: translateX(2px) translateY(-2px); } }
+      @keyframes wf-cl-trail { 0%, 100% { opacity: 0.2; transform: scaleX(0.6); } 50% { opacity: 0.6; transform: scaleX(1); } }
+      .wf-cl-pkg { animation: wf-cl-send 2.2s ease-in-out infinite; }
+      .wf-cl-t1 { transform-origin: 6px 17px; animation: wf-cl-trail 2.2s ease-in-out 0.1s infinite; }
+      .wf-cl-t2 { transform-origin: 6px 20px; animation: wf-cl-trail 2.2s ease-in-out 0.3s infinite; }
+    `}</style>
+    <g className="wf-cl-pkg">
+      <rect x="7" y="4" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+      <line x1="7" y1="9" x2="21" y2="9" stroke="currentColor" strokeWidth="1.5"/>
+      <line x1="14" y1="4" x2="14" y2="9" stroke="currentColor" strokeWidth="1.5"/>
+    </g>
+    <g className="wf-cl-t1"><line x1="3" y1="17" x2="10" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+    <g className="wf-cl-t2"><line x1="5" y1="20" x2="12" y2="20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+  </svg>
+);
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -85,7 +151,7 @@ const PRESETS: WorkflowPreset[] = [
     id: "blog",
     label: "Blog Post",
     tagline: "Compress · AI Rename · Resize 1200px · WebP · ZIP",
-    icon: <BookOpen className="h-5 w-5" strokeWidth={1.5} />,
+    icon: <IconBlogPreset />,
     steps: [
       {
         id: "compress",
@@ -120,7 +186,7 @@ const PRESETS: WorkflowPreset[] = [
     id: "instagram",
     label: "Instagram",
     tagline: "Compress · Resize 1080px · ZIP",
-    icon: <Instagram className="h-5 w-5" strokeWidth={1.5} />,
+    icon: <IconInstagramPreset />,
     steps: [
       {
         id: "compress",
@@ -141,7 +207,7 @@ const PRESETS: WorkflowPreset[] = [
     id: "ecommerce",
     label: "E-commerce",
     tagline: "Compress · AI Rename (SKU) · Multi-size · WebP · ZIP",
-    icon: <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />,
+    icon: <IconEcommercePreset />,
     steps: [
       {
         id: "compress",
@@ -176,7 +242,7 @@ const PRESETS: WorkflowPreset[] = [
     id: "client",
     label: "Client Delivery",
     tagline: "Light compress (90%) · Organize by date · ZIP",
-    icon: <Users className="h-5 w-5" strokeWidth={1.5} />,
+    icon: <IconClientPreset />,
     steps: [
       {
         id: "compress",
