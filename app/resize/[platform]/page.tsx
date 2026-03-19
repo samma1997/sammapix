@@ -192,7 +192,7 @@ export default async function ResizePlatformPage({
               href="/tools/resizepack"
               className="inline-flex items-center gap-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-md px-4 py-2 text-sm font-medium hover:bg-[#262626] dark:hover:bg-white transition-colors"
             >
-              Open ResizePack
+              Open Batch Resize
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
             <Link
@@ -303,14 +303,14 @@ export default async function ResizePlatformPage({
                 href="/tools/resizepack"
                 className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
               >
-                ResizePack
+                Batch Resize
               </Link>{" "}
               for batch resizing with social media presets, or{" "}
               <Link
                 href="/tools/croproatio"
                 className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
               >
-                CropRatio
+                Crop & Ratio
               </Link>{" "}
               to crop to the exact aspect ratio first.
             </p>
@@ -320,14 +320,14 @@ export default async function ResizePlatformPage({
               href="/tools/resizepack"
               className="inline-flex items-center gap-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-md px-4 py-2 text-sm font-medium hover:bg-[#262626] dark:hover:bg-white transition-colors"
             >
-              ResizePack
+              Batch Resize
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
             <Link
               href="/tools/croproatio"
               className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] rounded-md px-4 py-2 text-sm hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
             >
-              CropRatio
+              Crop & Ratio
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>

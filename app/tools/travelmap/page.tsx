@@ -120,7 +120,7 @@ export default function TravelMapPage() {
   return (
     <main>
       <ToolHeader
-        title="TravelMap"
+        title="Photo Map"
         description="Drop your travel photos - GPS coordinates are read locally and plotted on an interactive map. See your journey, count countries, measure distance."
         icon={Map}
         accentColor="#3B82F6"

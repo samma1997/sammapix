@@ -60,7 +60,7 @@ const GLOSSARY_TERMS = [
     letter: "A",
     definition:
       "Aspect ratio is the proportional relationship between an image's width and height, expressed as two numbers separated by a colon- for example, 16:9 or 4:3. Maintaining the correct aspect ratio when resizing prevents distortion and ensures images display correctly across platforms. Social media platforms and video formats each have their own required ratios.",
-    links: [{ label: "CropRatio tool", href: "/tools/croproatio" }],
+    links: [{ label: "Crop & Ratio tool", href: "/tools/croproatio" }],
   },
   {
     id: "avif",
@@ -116,7 +116,7 @@ const GLOSSARY_TERMS = [
     letter: "C",
     definition:
       "A crop ratio describes the aspect ratio applied when cropping an image- the proportion of width to height retained after cutting. Common crop ratios include 1:1 (square, for Instagram), 16:9 (widescreen, for YouTube), and 4:3 (standard photo). Cropping to a preset ratio ensures consistency across a gallery or content series without manual calculation.",
-    links: [{ label: "CropRatio tool", href: "/tools/croproatio" }],
+    links: [{ label: "Crop & Ratio tool", href: "/tools/croproatio" }],
   },
   {
     id: "dpi-ppi",
@@ -161,7 +161,7 @@ const GLOSSARY_TERMS = [
       "GPS metadata is a subset of EXIF data that records the precise latitude and longitude coordinates where a photograph was captured. Most modern smartphones embed this information automatically. While useful for organizing travel photos, GPS metadata poses a significant privacy risk when sharing images publicly- anyone can extract the coordinates and locate your home, office, or exact shooting location.",
     links: [
       { label: "Remove GPS metadata", href: "/tools/exif" },
-      { label: "GeoSort by location", href: "/tools/geosort" },
+      { label: "Sort by Location tool", href: "/tools/geosort" },
     ],
   },
   {
@@ -170,7 +170,7 @@ const GLOSSARY_TERMS = [
     letter: "H",
     definition:
       "The Haversine formula is a mathematical equation used to calculate the great-circle distance between two points on a sphere given their latitude and longitude coordinates. In image processing, it powers GPS-based photo sorting and clustering tools that group photographs by geographic proximity- for example, identifying all photos taken within a specific country or within a 10 km radius of a landmark.",
-    links: [{ label: "GeoSort photos by country", href: "/tools/geosort" }],
+    links: [{ label: "Sort photos by country", href: "/tools/geosort" }],
   },
   {
     id: "heic-heif",

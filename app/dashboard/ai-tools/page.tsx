@@ -178,7 +178,7 @@ const SINGLE_TOOLS: AiTool[] = [
     Icon: IconTranscribe,
   },
   {
-    name: "SmartSort",
+    name: "AI Photo Sort",
     slug: "smartsort",
     description: "AI sorts images into categories.",
     accent: "#22C55E",
@@ -188,14 +188,14 @@ const SINGLE_TOOLS: AiTool[] = [
 
 const MULTI_TOOLS: AiTool[] = [
   {
-    name: "WebLift",
+    name: "Web Optimize",
     slug: "weblift",
     description: "Compress + WebP + AI rename in one click.",
     accent: "#3B82F6",
     Icon: IconWebLift,
   },
   {
-    name: "BlogDrop",
+    name: "Blog Ready",
     slug: "blogdrop",
     description: "Blog-ready images in one drop.",
     accent: "#8B5CF6",

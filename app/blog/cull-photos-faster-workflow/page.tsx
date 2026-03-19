@@ -713,7 +713,7 @@ export default function CullPhotosFasterWorkflowPage() {
                 href="/tools/twinhunt"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix TwinHunt tool
+                SammaPix Find Duplicates tool
               </Link>{" "}
               detects visually similar frames using perceptual hashing- useful
               for identifying burst clusters you missed during import. See our
@@ -892,7 +892,7 @@ export default function CullPhotosFasterWorkflowPage() {
                   Tools
                 </span>
                 <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  TwinHunt - Find Near-Duplicate Photos in Your Browser
+                  Find Duplicates - Find Near-Duplicate Photos in Your Browser
                 </span>
               </Link>
             </div>

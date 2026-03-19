@@ -144,7 +144,7 @@ export default function VsBirmePage() {
               Birme resizes - SammaPix resizes AND optimizes
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Birme is purpose-built for resizing: set a target width, crop to aspect ratio, download. It does not compress the output or convert to WebP. SammaPix&apos;s ResizePack tool does everything Birme does, and the result can then be run through compression or WebP conversion in the same session. You leave with smaller, optimized files- not just resized ones.
+              Birme is purpose-built for resizing: set a target width, crop to aspect ratio, download. It does not compress the output or convert to WebP. SammaPix&apos;s Batch Resize tool does everything Birme does, and the result can then be run through compression or WebP conversion in the same session. You leave with smaller, optimized files- not just resized ones.
             </p>
           </div>
           <div>
@@ -218,7 +218,7 @@ export default function VsBirmePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Link href="/tools/resizepack" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
             <div>
-              <p className="text-sm font-medium text-gray-900">ResizePack</p>
+              <p className="text-sm font-medium text-gray-900">Batch Resize</p>
               <p className="text-xs text-gray-500 mt-0.5">Bulk resize images by pixels or percentage- free</p>
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />

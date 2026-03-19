@@ -74,7 +74,7 @@ export default function StampItPage() {
   return (
     <main>
       <ToolHeader
-        title="StampIt"
+        title="Watermark"
         description="Batch watermark images with text or your logo. 9 positions, opacity, tiled mode. Download all as ZIP."
         icon={Stamp}
         accentColor="#06B6D4"

@@ -451,7 +451,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             {/* Section 4 */}
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              How SammaPix FilmLab recreates these looks
+              How SammaPix Film Filters recreates these looks
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -470,7 +470,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
             </p>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              FilmLab processes images entirely in your browser using the
+              Film Filters processes images entirely in your browser using the
               Canvas API- no uploads, no server processing, no waiting for
               a file to come back from a cloud service. The entire operation
               happens locally and instantly. Privacy-first is a design
@@ -501,7 +501,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
 
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
-                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 1 - Open FilmLab.</strong>{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">Step 1 - Open Film Filters.</strong>{" "}
                 Go to{" "}
                 <Link
                   href="/tools/filmlab"
@@ -554,7 +554,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               The whole process takes under two minutes per photo. For
               batches of images you want to process with consistent
               settings- for a travel series, a portrait session, or a
-              social media set - FilmLab lets you apply the same preset
+              social media set - Film Filters lets you apply the same preset
               to multiple images in sequence, keeping your look coherent
               across the entire collection.
             </p>
@@ -691,7 +691,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               <li>
                 <strong className="text-[#171717] dark:text-[#E5E5E5]">Compress after applying effects.</strong>{" "}
                 Film grain adds file size because it increases image
-                complexity. After applying film effects with FilmLab, run
+                complexity. After applying film effects with Film Filters, run
                 the result through{" "}
                 <Link
                   href="/tools/compress"
@@ -744,7 +744,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               Can I get film effect photos for free without any app or software?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Yes. SammaPix FilmLab runs entirely in your browser with no
+              Yes. SammaPix Film Filters runs entirely in your browser with no
               download, no account, and no payment required. Open the tool,
               drop your photo, select a preset, and download. The entire
               process is free and runs locally on your device.
@@ -782,7 +782,7 @@ export default function FilmEffectsDigitalPhotosFreePage() {
               tools - VSCO in particular is well-regarded for its analog
               presets. The difference is access and cost: VSCO requires a
               subscription and a smartphone, Lightroom requires a Creative
-              Cloud subscription. Browser-based tools like FilmLab produce
+              Cloud subscription. Browser-based tools like Film Filters produce
               comparable results with no cost and no software dependency.
             </p>
 

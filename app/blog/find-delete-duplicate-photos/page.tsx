@@ -309,14 +309,14 @@ export default function FindDeleteDuplicatePhotosPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Click the &ldquo;Select Folder&rdquo; button and choose the directory
-              containing your photos. TwinHunt can process entire photo
+              containing your photos. Find Duplicates can process entire photo
               libraries, including nested subdirectories. For large libraries
               (10,000+ photos), the initial hash computation takes a few
               minutes. Progress is shown in real time.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Alternatively, drag a folder directly onto the drop zone. Both
-              methods give TwinHunt read access to the files- no modifications
+              methods give Find Duplicates read access to the files- no modifications
               are made during the scanning phase.
             </p>
 
@@ -325,7 +325,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              TwinHunt offers three detection modes:
+              Find Duplicates offers three detection modes:
             </p>
 
             <ul className="mb-4">
@@ -351,7 +351,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              TwinHunt presents results as groups of similar images, displayed
+              Find Duplicates presents results as groups of similar images, displayed
               side by side. Each group shows the file name, file size, creation
               date, and pixel dimensions for each image. The recommended
               &ldquo;keep&rdquo; candidate (typically the highest resolution or most
@@ -366,7 +366,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Use the &ldquo;Select all duplicates&rdquo; button to auto-select the
               recommended deletion candidates across all groups, or review and
-              adjust each group manually. TwinHunt never pre-selects files
+              adjust each group manually. Find Duplicates never pre-selects files
               for deletion without your explicit confirmation.
             </p>
 
@@ -382,7 +382,7 @@ export default function FindDeleteDuplicatePhotosPage() {
               operation.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              After deletion, TwinHunt shows a summary: total files deleted,
+              After deletion, Find Duplicates shows a summary: total files deleted,
               total storage recovered, and a breakdown by group.
             </p>
 
@@ -460,7 +460,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
-              Run TwinHunt quarterly.
+              Run Find Duplicates quarterly.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Even with good habits, duplicates accumulate. A quarterly
@@ -476,17 +476,17 @@ export default function FindDeleteDuplicatePhotosPage() {
             </h2>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Will TwinHunt find duplicate photos even if they have different filenames?
+              Will Find Duplicates find duplicate photos even if they have different filenames?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Yes. TwinHunt uses perceptual hashing which analyzes the visual
+              Yes. Find Duplicates uses perceptual hashing which analyzes the visual
               content of the image, not the filename. A photo named
               IMG_4721.jpg and its copy named vacation-photo.jpg will be
               detected as identical regardless of the name difference.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Can TwinHunt find duplicates across different formats (JPEG and PNG of the same image)?
+              Can Find Duplicates find duplicates across different formats (JPEG and PNG of the same image)?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Yes. Perceptual hashing operates on the decoded visual content of
@@ -501,17 +501,17 @@ export default function FindDeleteDuplicatePhotosPage() {
               Are my photos sent to any server?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              No. TwinHunt processes all images entirely within your browser
+              No. Find Duplicates processes all images entirely within your browser
               using JavaScript. No image data, no thumbnails, and no hash
               values are transmitted to any external server. Your photos never
               leave your device.
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              How large a photo library can TwinHunt handle?
+              How large a photo library can Find Duplicates handle?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              TwinHunt can process libraries of tens of thousands of images.
+              Find Duplicates can process libraries of tens of thousands of images.
               For very large libraries (50,000+ photos), processing time
               increases but the tool remains stable. Processing speed depends
               on your device&apos;s CPU and the image resolutions in the library.
@@ -577,7 +577,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 Find and delete your duplicate photos now
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your photo library into TwinHunt and find exact and
+                Drop your photo library into Find Duplicates and find exact and
                 near-duplicate photos in minutes. Runs entirely in your browser- 
                 your photos never leave your device.
               </p>

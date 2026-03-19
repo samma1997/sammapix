@@ -134,7 +134,7 @@ export default function CropRatioPage() {
       />
 
       <ToolHeader
-        title="CropRatio"
+        title="Crop & Ratio"
         description="Drop your images, pick a ratio- 1:1, 4:5, 9:16, 16:9 or custom. Drag the frame to position the crop, then download individually or as a ZIP. Everything runs in your browser."
         icon={Crop}
         accentColor="#EC4899"

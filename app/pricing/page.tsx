@@ -28,15 +28,15 @@ const toolGrid = [
   { Icon: IconCompress,  name: "Compress",   accent: "#6366F1" },
   { Icon: IconWebP,      name: "WebP",        accent: "#10B981" },
   { Icon: IconAIRename,  name: "AI Rename",   accent: "#8B5CF6" },
-  { Icon: IconEXIF,      name: "EXIF Lens",   accent: "#EF4444" },
-  { Icon: IconFilmLab,   name: "FilmLab",     accent: "#F59E0B" },
-  { Icon: IconStampIt,   name: "StampIt",     accent: "#06B6D4" },
-  { Icon: IconCropRatio, name: "CropRatio",   accent: "#EC4899" },
-  { Icon: IconTwinHunt,  name: "TwinHunt",    accent: "#F97316" },
-  { Icon: IconGeoSort,   name: "GeoSort",     accent: "#22C55E" },
-  { Icon: IconTravelMap, name: "TravelMap",   accent: "#3B82F6" },
-  { Icon: IconResizePack,name: "ResizePack",  accent: "#14B8A6" },
-  { Icon: IconCull,      name: "Cull",        accent: "#F43F5E" },
+  { Icon: IconEXIF,      name: "EXIF Viewer", accent: "#EF4444" },
+  { Icon: IconFilmLab,   name: "Film Filters",accent: "#F59E0B" },
+  { Icon: IconStampIt,   name: "Watermark",   accent: "#06B6D4" },
+  { Icon: IconCropRatio, name: "Crop & Ratio",accent: "#EC4899" },
+  { Icon: IconTwinHunt,  name: "Find Duplicates", accent: "#F97316" },
+  { Icon: IconGeoSort,   name: "Sort by Location", accent: "#22C55E" },
+  { Icon: IconTravelMap, name: "Photo Map",   accent: "#3B82F6" },
+  { Icon: IconResizePack,name: "Batch Resize",accent: "#14B8A6" },
+  { Icon: IconCull,      name: "Photo Cull",  accent: "#F43F5E" },
   { Icon: IconHEIC,      name: "HEIC",        accent: "#6366F1" },
 ] as const;
 
@@ -366,7 +366,7 @@ export default function PricingPage() {
           </div>
           {/* Combo tools listed below */}
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            {["AI Alt Text", "Transcribe", "WebLift", "BlogDrop", "SmartSort", "BatchName", "AI Workflow"].map((name) => (
+            {["AI Alt Text", "Transcribe", "Web Optimize", "Blog Ready", "AI Photo Sort", "Batch Rename", "AI Workflow"].map((name) => (
               <span
                 key={name}
                 className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] px-3 py-1.5 rounded-md border border-[#F5F5F5] dark:border-[#252525] bg-white dark:bg-[#191919]"

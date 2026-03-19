@@ -74,7 +74,7 @@ export default function ResizePackPage() {
   return (
     <main>
       <ToolHeader
-        title="ResizePack"
+        title="Batch Resize"
         description="Batch resize images by pixel dimensions or percentage. Social media presets included. Download all as ZIP."
         icon={Maximize2}
         accentColor="#14B8A6"

@@ -110,7 +110,7 @@ const faqSchema = {
       name: "How do I organize travel photos by country automatically?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "If your photos have GPS data embedded in their EXIF metadata, a tool like SammaPix GeoSort can read those coordinates, reverse-geocode them to a country name, and group your files accordingly- all without manual sorting.",
+        text: "If your photos have GPS data embedded in their EXIF metadata, a tool like SammaPix Sort by Location can read those coordinates, reverse-geocode them to a country name, and group your files accordingly- all without manual sorting.",
       },
     },
     {
@@ -118,7 +118,7 @@ const faqSchema = {
       name: "What is the best free tool to sort photos by location?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "SammaPix GeoSort is a free, browser-based tool that reads GPS EXIF data from your photos and sorts them by country or city. No software installation required and no photos are uploaded to a server.",
+        text: "SammaPix Sort by Location is a free, browser-based tool that reads GPS EXIF data from your photos and sorts them by country or city. No software installation required and no photos are uploaded to a server.",
       },
     },
     {
@@ -320,7 +320,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 href="/tools/exif"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix EXIF Lens
+                SammaPix EXIF Viewer
               </Link>{" "}
               tool to inspect the full metadata of any photo directly in your
               browser- no upload required.
@@ -416,7 +416,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               </li>
               <li>
                 <strong className="text-gray-700 dark:text-[#E5E5E5]">Preview the groups.</strong>{" "}
-                Before downloading anything, GeoSort shows you a preview of
+                Before downloading anything, Sort by Location shows you a preview of
                 how your photos will be grouped. You can see exactly which
                 files will go into each country folder, and you can manually
                 move any file that was misidentified (usually due to a GPS
@@ -424,7 +424,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               </li>
               <li>
                 <strong className="text-gray-700 dark:text-[#E5E5E5]">Download the sorted archive.</strong>{" "}
-                Click Download and GeoSort packages your photos into a ZIP
+                Click Download and Sort by Location packages your photos into a ZIP
                 file with the folder structure you selected- ready to drop
                 straight into your hard drive, iCloud, or Google Drive.
               </li>
@@ -437,7 +437,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             </p>
 
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
-              Combining GeoSort with TravelMap for visual trip documentation
+              Combining Sort by Location with Photo Map for visual trip documentation
             </h2>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -454,7 +454,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               >
                 SammaPix TravelMap
               </Link>{" "}
-              reads the same GPS EXIF data as GeoSort, but instead of grouping
+              reads the same GPS EXIF data as Sort by Location, but instead of grouping
               files into folders, it plots each photo as a pin on a world map.
               You get a visual journey- a geographic record of everywhere you
               have been and everything you photographed there.
@@ -467,11 +467,11 @@ export default function OrganizeTravelPhotosByCountryPage() {
 
             <ul className="text-sm text-[#737373] leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
-                Use <strong className="text-gray-700 dark:text-[#E5E5E5]">GeoSort</strong> to sort your full photo archive into
+                Use <strong className="text-gray-700 dark:text-[#E5E5E5]">Sort by Location</strong> to sort your full photo archive into
                 country and city folders- this is your organized file storage.
               </li>
               <li>
-                Use <strong className="text-gray-700 dark:text-[#E5E5E5]">TravelMap</strong> with your best selects to create a
+                Use <strong className="text-gray-700 dark:text-[#E5E5E5]">Photo Map</strong> with your best selects to create a
                 shareable visual story of the trip- this is your
                 documentation and presentation layer.
               </li>
@@ -481,7 +481,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                   href="/tools/exif"
                   className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
                 >
-                  EXIF Lens
+                  EXIF Viewer
                 </Link>{" "}
                 to inspect or verify the metadata of any individual photo
                 before sharing publicly.
@@ -571,7 +571,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 pass.
               </li>
               <li>
-                Run GeoSort on the remaining files to sort by country. Your
+                Run Sort by Location on the remaining files to sort by country. Your
                 folder becomes{" "}
                 <code className="text-xs bg-gray-100 dark:bg-[#252525] text-gray-700 dark:text-[#A3A3A3] px-1.5 py-0.5 rounded">
                   2025-09 Balkans / Croatia / Bosnia / Montenegro
@@ -599,7 +599,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                   href="/tools/exif"
                   className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
                 >
-                  EXIF Lens
+                  EXIF Viewer
                 </Link>{" "}
                 or a dedicated EXIF remover to strip GPS coordinates from the
                 exported files. The GPS data is invaluable for personal
@@ -607,7 +607,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 location of every photo you post online.
               </li>
               <li>
-                Optionally, build a TravelMap from your edited selects to
+                Optionally, build a Photo Map from your edited selects to
                 create a visual record of the trip to share with family or
                 keep as a personal journal.
               </li>
@@ -667,7 +667,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               If your photos have GPS data embedded in their EXIF metadata, a
-              tool like SammaPix GeoSort can read those coordinates, reverse-
+              tool like SammaPix Sort by Location can read those coordinates, reverse-
               geocode them to a country name, and group your files accordingly
              - all without manual sorting. The process takes under two
               minutes for a typical trip library.
@@ -677,7 +677,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
               What is the best free tool to sort photos by location?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              SammaPix GeoSort is a free, browser-based tool that reads GPS
+              SammaPix Sort by Location is a free, browser-based tool that reads GPS
               EXIF data from your photos and sorts them by country or city.
               No software installation is required and no photos are uploaded
               to a server- everything runs locally in your browser.
@@ -710,7 +710,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Yes, provided the tool runs entirely client-side. SammaPix
-              GeoSort reads EXIF metadata and performs all processing locally
+              Sort by Location reads EXIF metadata and performs all processing locally
               in your browser- your actual photo files never leave your
               device. You can verify this by disabling your internet connection
               after the page loads; the tool continues to work.
@@ -765,7 +765,7 @@ export default function OrganizeTravelPhotosByCountryPage() {
                 Sort your travel photos by country- free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your photos into GeoSort and get them organized by
+                Drop your photos into Sort by Location and get them organized by
                 country and city in under two minutes. No account, no upload,
                 no software needed. Everything runs locally in your browser.
               </p>

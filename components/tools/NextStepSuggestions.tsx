@@ -110,12 +110,12 @@ const SUGGESTIONS = {
     Icon: IconStampIt,
   },
   exif: {
-    label: "EXIF Lens",
+    label: "EXIF Viewer",
     href: "/tools/exif",
     Icon: IconExif,
   },
   filmlab: {
-    label: "FilmLab presets",
+    label: "Film Filters",
     href: "/tools/filmlab",
     Icon: IconFilmLab,
   },
@@ -135,12 +135,12 @@ const SUGGESTIONS = {
     Icon: IconTwinHunt,
   },
   geosort: {
-    label: "GeoSort",
+    label: "Sort by Location",
     href: "/tools/geosort",
     Icon: IconGeoSort,
   },
   travelmap: {
-    label: "TravelMap",
+    label: "Photo Map",
     href: "/tools/travelmap",
     Icon: IconTravelMap,
   },

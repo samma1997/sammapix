@@ -678,7 +678,7 @@ export default function CropPhotoPerfectRatiosPage() {
                 Batch crop your photos to any ratio- free, in-browser
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your photos into SammaPix CropRatio and export them at
+                Drop your photos into SammaPix Crop & Ratio and export them at
                 exactly the right dimensions for Instagram, print, YouTube, or
                 any custom ratio. No account required. Your files never leave
                 your device.
@@ -687,7 +687,7 @@ export default function CropPhotoPerfectRatiosPage() {
                 href="/tools/croproatio"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
-                Open CropRatio Tool
+                Open Crop & Ratio Tool
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>
@@ -859,7 +859,7 @@ export default function CropPhotoPerfectRatiosPage() {
                 Crop, resize, and compress your photos in one place
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Use SammaPix CropRatio to batch-crop to any ratio, ResizePack
+                Use SammaPix Crop & Ratio to batch-crop to any ratio, ResizePack
                 to hit exact pixel targets, and Compress to reduce file size
                 without visible quality loss- all free, all in your browser.
               </p>

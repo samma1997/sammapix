@@ -193,11 +193,11 @@ export default function RemoveGpsFromPhotosPage() {
 
             {/* Section 4 - Step by step */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
-              How to remove GPS data from photos using SammaPix EXIF Lens
+              How to remove GPS data from photos using SammaPix EXIF Viewer
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors">
-                SammaPix EXIF Lens
+                SammaPix EXIF Viewer
               </Link>{" "}
               is a free, browser-based tool that reads and strips EXIF metadata from your photos entirely on your device. Your files never leave your browser- no upload to any server, no cloud processing, no account required.
             </p>
@@ -210,7 +210,7 @@ export default function RemoveGpsFromPhotosPage() {
               {[
                 {
                   step: "1",
-                  title: "Open EXIF Lens",
+                  title: "Open EXIF Viewer",
                   body: "Go to sammapix.com/tools/exif. No account needed, no signup form. The tool loads entirely in your browser.",
                 },
                 {
@@ -221,7 +221,7 @@ export default function RemoveGpsFromPhotosPage() {
                 {
                   step: "3",
                   title: "Inspect the metadata",
-                  body: "EXIF Lens displays a full breakdown of all metadata fields in the file. Look for the GPS section- you will see GPSLatitude, GPSLongitude, and GPSAltitude if location data is present. This is the data you are about to remove.",
+                  body: "EXIF Viewer displays a full breakdown of all metadata fields in the file. Look for the GPS section- you will see GPSLatitude, GPSLongitude, and GPSAltitude if location data is present. This is the data you are about to remove.",
                 },
                 {
                   step: "4",
@@ -231,7 +231,7 @@ export default function RemoveGpsFromPhotosPage() {
                 {
                   step: "5",
                   title: "Verify the result",
-                  body: "Drop the downloaded file back into EXIF Lens to confirm. The GPS section should be gone. You can now share the file without worrying about location data exposure.",
+                  body: "Drop the downloaded file back into EXIF Viewer to confirm. The GPS section should be gone. You can now share the file without worrying about location data exposure.",
                 },
               ].map(({ step, title, body }) => (
                 <div key={step} className="flex gap-4">
@@ -256,7 +256,7 @@ export default function RemoveGpsFromPhotosPage() {
                   Free tool- no signup
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Remove GPS from your photos now - SammaPix EXIF Lens
+                  Remove GPS from your photos now - SammaPix EXIF Viewer
                 </p>
               </div>
               <ArrowRight
@@ -284,7 +284,7 @@ export default function RemoveGpsFromPhotosPage() {
               macOS: Preview
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              macOS Preview does not strip EXIF data when you export a photo. For reliable GPS removal on Mac, use a dedicated tool. Image Capture in macOS does not remove metadata either. The most reliable free option on Mac is to export via Photos app with the "Location" option disabled, or use a browser-based tool like SammaPix EXIF Lens.
+              macOS Preview does not strip EXIF data when you export a photo. For reliable GPS removal on Mac, use a dedicated tool. Image Capture in macOS does not remove metadata either. The most reliable free option on Mac is to export via Photos app with the "Location" option disabled, or use a browser-based tool like SammaPix EXIF Viewer.
             </p>
 
             <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -330,7 +330,7 @@ export default function RemoveGpsFromPhotosPage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Use{" "}
               <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors">
-                EXIF Lens
+                EXIF Viewer
               </Link>{" "}
               when you need to inspect metadata first, remove it without re-compressing, or verify that a file is clean before sharing. Use the compress tool when you want the full optimization pipeline- metadata removal, compression, and optional WebP conversion- in one pass.
             </p>
@@ -352,7 +352,7 @@ export default function RemoveGpsFromPhotosPage() {
                   },
                   {
                     q: "Can I remove GPS data from a JPEG without re-saving it?",
-                    a: "Yes. EXIF metadata can be stripped from a JPEG without re-encoding the image data. Tools like EXIF Lens and ExifTool do this correctly- they remove the metadata block without touching the compressed image payload, so there is no quality loss from re-compression.",
+                    a: "Yes. EXIF metadata can be stripped from a JPEG without re-encoding the image data. Tools like EXIF Viewer and ExifTool do this correctly- they remove the metadata block without touching the compressed image payload, so there is no quality loss from re-compression.",
                   },
                   {
                     q: "Does WhatsApp or iMessage strip GPS when sending photos?",
@@ -380,7 +380,7 @@ export default function RemoveGpsFromPhotosPage() {
                   Free tool
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Try SammaPix EXIF Lens- remove GPS from photos in your browser
+                  Try SammaPix EXIF Viewer- remove GPS from photos in your browser
                 </p>
               </div>
               <ArrowRight

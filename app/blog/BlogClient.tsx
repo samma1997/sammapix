@@ -115,7 +115,7 @@ const POSTS: Post[] = [
     slug: "film-effects-digital-photos-free",
     title: "How to Add Film Effects to Digital Photos for Free (No Photoshop)",
     description:
-      "Recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on your digital photos. Free browser-based film emulation with FilmLab.",
+      "Recreate the look of Kodak Portra, Fuji Superia, and Ilford HP5 on your digital photos. Free browser-based film emulation with Film Filters.",
     date: "2026-02-14",
     tags: ["Creative"],
   },
@@ -123,7 +123,7 @@ const POSTS: Post[] = [
     slug: "find-delete-duplicate-photos",
     title: "Find and Delete Duplicate Photos Free (No Upload Required)",
     description:
-      "TwinHunt finds duplicate and near-duplicate photos in your library automatically. Runs entirely in your browser with zero uploads.",
+      "Find Duplicates finds duplicate and near-duplicate photos in your library automatically. Runs entirely in your browser with zero uploads.",
     date: "2026-03-12",
     tags: ["Tools"],
   },

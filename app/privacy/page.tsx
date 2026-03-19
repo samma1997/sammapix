@@ -97,18 +97,18 @@ export default function PrivacyPage() {
           <ul className="mt-2 pl-5 list-disc space-y-1">
             <li>Compress (JPG, PNG, WebP, GIF, AVIF)</li>
             <li>Convert to WebP</li>
-            <li>ResizePack</li>
-            <li>EXIF Lens (metadata remover)</li>
-            <li>FilmLab (film effects)</li>
-            <li>StampIt (watermark)</li>
-            <li>CropRatio</li>
-            <li>TwinHunt (duplicate finder)</li>
-            <li>Cull (photo culling)</li>
+            <li>Batch Resize</li>
+            <li>EXIF Viewer (metadata remover)</li>
+            <li>Film Filters (film effects)</li>
+            <li>Watermark</li>
+            <li>Crop & Ratio</li>
+            <li>Find Duplicates</li>
+            <li>Photo Cull</li>
             <li>HEIC Converter</li>
             <li>PDF to Image</li>
-            <li>BatchName</li>
-            <li>WebLift</li>
-            <li>BlogDrop</li>
+            <li>Batch Rename</li>
+            <li>Web Optimize</li>
+            <li>Blog Ready</li>
           </ul>
           <p className="mt-4 font-medium text-[#404040] dark:text-[#D4D4D4]">
             AI tools: limited data transmission to Google Gemini
@@ -124,7 +124,7 @@ export default function PrivacyPage() {
               <strong className="text-[#404040] dark:text-[#D4D4D4]">AI Alt Text</strong> &mdash; generates an accessibility description from visual content
             </li>
             <li>
-              <strong className="text-[#404040] dark:text-[#D4D4D4]">SmartSort</strong> &mdash; categorises images by visual content for batch organisation
+              <strong className="text-[#404040] dark:text-[#D4D4D4]">AI Photo Sort</strong> &mdash; categorises images by visual content for batch organisation
             </li>
           </ul>
           <p className="mt-3">
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
             4. Account Data
           </h2>
           <p>
-            An account is required to use AI tools (AI Rename, AI Alt Text, SmartSort, Transcribe) and to access Pro plan features. When you create an account, we collect:
+            An account is required to use AI tools (AI Rename, AI Alt Text, AI Photo Sort, Transcribe) and to access Pro plan features. When you create an account, we collect:
           </p>
           <ul className="mt-2 pl-5 list-disc space-y-1">
             <li>Your email address</li>

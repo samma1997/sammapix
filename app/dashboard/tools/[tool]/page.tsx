@@ -198,7 +198,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Perfect for WCAG compliance and SEO.", linkLabel: "See Pro features", linkHref: "/dashboard/upgrade" },
   },
   exif: {
-    label: "EXIF Lens",
+    label: "EXIF Viewer",
     tagline: "Strip GPS, camera data and all metadata.",
     steps: [
       { title: "Drop photos", desc: "Add images with EXIF data." },
@@ -208,7 +208,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Always strip EXIF before sharing photos online for privacy.", linkLabel: "Learn more", linkHref: "/blog" },
   },
   filmlab: {
-    label: "FilmLab",
+    label: "Film Filters",
     tagline: "14 analog film presets -- Kodak, Fuji, Ilford.",
     steps: [
       { title: "Drop photos", desc: "Add images to apply film looks." },
@@ -218,7 +218,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Try Kodak Gold for warm tones or Ilford HP5 for B&W.", linkLabel: "See all presets", linkHref: "/dashboard/tools/filmlab" },
   },
   stampit: {
-    label: "StampIt",
+    label: "Watermark",
     tagline: "Batch watermark with text or logo.",
     steps: [
       { title: "Drop photos", desc: "Add images to watermark." },
@@ -228,7 +228,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Use tiled filigrana mode for maximum protection.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   croproatio: {
-    label: "CropRatio",
+    label: "Crop & Ratio",
     tagline: "Crop to exact ratios -- 1:1, 16:9, 4:3, A4.",
     steps: [
       { title: "Drop image", desc: "Add the photo to crop." },
@@ -238,7 +238,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Use 4:5 for Instagram portrait posts.", linkLabel: "Try ResizePack", linkHref: "/dashboard/tools/resizepack" },
   },
   twinhunt: {
-    label: "TwinHunt",
+    label: "Find Duplicates",
     tagline: "Find exact and near-duplicate photos.",
     steps: [
       { title: "Drop photos", desc: "Add a batch of similar photos." },
@@ -248,7 +248,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Run this before Compress to avoid compressing duplicates.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
   },
   geosort: {
-    label: "GeoSort",
+    label: "Sort by Location",
     tagline: "Sort photos by country using GPS data.",
     steps: [
       { title: "Drop photos", desc: "Add photos with GPS EXIF data." },
@@ -258,7 +258,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Works great after a multi-country trip.", linkLabel: "Try TravelMap", linkHref: "/dashboard/tools/travelmap" },
   },
   travelmap: {
-    label: "TravelMap",
+    label: "Photo Map",
     tagline: "Generate an interactive map from your photos.",
     steps: [
       { title: "Drop photos", desc: "Add travel photos with GPS." },
@@ -268,7 +268,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Combine with GeoSort to organize and visualize your trips.", linkLabel: "Try GeoSort", linkHref: "/dashboard/tools/geosort" },
   },
   resizepack: {
-    label: "ResizePack",
+    label: "Batch Resize",
     tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
     steps: [
       { title: "Drop photos", desc: "Add images to resize." },
@@ -278,7 +278,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Use the Instagram preset for Stories (1080x1920).", linkLabel: "See all presets", linkHref: "/dashboard/tools/resizepack" },
   },
   cull: {
-    label: "Cull",
+    label: "Photo Cull",
     tagline: "Rate and cull a shoot in minutes.",
     steps: [
       { title: "Drop shoot", desc: "Add all photos from a session." },
@@ -329,7 +329,7 @@ const TOOL_DATA: Record<string, ToolData> = {
   },
   // Combo tools
   weblift: {
-    label: "WebLift",
+    label: "Web Optimize",
     tagline: "Compress, convert to WebP, and AI-rename in one click.",
     steps: [
       { title: "Drop your images", desc: "Drag and drop images onto the upload area." },
@@ -339,7 +339,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Disable AI Rename to use without login.", linkLabel: "Try Compress", linkHref: "/dashboard/tools/compress" },
   },
   blogdrop: {
-    label: "BlogDrop",
+    label: "Blog Ready",
     tagline: "Blog-ready images in one drop.",
     steps: [
       { title: "Drop blog images", desc: "Add photos destined for your blog posts." },
@@ -349,7 +349,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Disable AI Rename to use without login.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
   },
   batchname: {
-    label: "BatchName",
+    label: "Batch Rename",
     tagline: "Rename files with a custom pattern. No AI needed.",
     steps: [
       { title: "Drop your files", desc: "Add any files you want to rename." },
@@ -359,7 +359,7 @@ const TOOL_DATA: Record<string, ToolData> = {
     proTip: { text: "Use {001} for auto-incrementing numbers.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
   },
   smartsort: {
-    label: "SmartSort",
+    label: "AI Photo Sort",
     tagline: "AI analyzes images and sorts them into categories.",
     steps: [
       { title: "Drop your images", desc: "Add photos, screenshots, or documents." },
@@ -415,6 +415,13 @@ export default function DashboardToolPage() {
       {/* Tool header */}
       <div className="px-4 sm:px-6 pt-8 pb-6">
         <div className="max-w-3xl mx-auto">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1 text-xs text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-4"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back to tools
+          </Link>
           {TOOL_ICONS[slug] && (
             <div
               className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"

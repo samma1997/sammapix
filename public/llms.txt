@@ -25,7 +25,7 @@ Created by Luca Sammarco, a travel photographer and developer who built these to
    - Quality control
    - Browser-based processing
 
-3. **EXIF Lens** (https://sammapix.com/tools/exif)
+3. **EXIF Viewer** (https://sammapix.com/tools/exif)
    - Strip GPS location data from photos
    - Remove all EXIF metadata
    - Privacy protection for sensitive photos
@@ -37,43 +37,43 @@ Created by Luca Sammarco, a travel photographer and developer who built these to
    - Batch processing
    - Supports HEIC, HEIF formats
 
-5. **FilmLab** (https://sammapix.com/tools/filmlab)
+5. **Film Filters** (https://sammapix.com/tools/filmlab)
    - 14 authentic analog film presets
    - Kodak Gold, Fuji, Ilford color science
    - 8 original SammaPix film profiles
    - Batch apply to multiple photos
 
-6. **StampIt** (https://sammapix.com/tools/stampit)
+6. **Watermark** (https://sammapix.com/tools/stampit)
    - Batch watermark photos with text or logo
    - 9 positioning options
    - Tiled filigrana/pattern watermarks
    - Font customization
 
-7. **CropRatio** (https://sammapix.com/tools/croproatio)
+7. **Crop & Ratio** (https://sammapix.com/tools/croproatio)
    - Crop to exact aspect ratios
    - Presets: 1:1 (square), 16:9, 4:3, 3:2, A4, custom
    - Preview before crop
    - Batch crop multiple images
 
-8. **TwinHunt** (https://sammapix.com/tools/twinhunt)
+8. **Find Duplicates** (https://sammapix.com/tools/twinhunt)
    - Find exact and near-duplicate photos using perceptual hashing
    - pHash algorithm for similarity detection
    - Organize duplicate photo libraries
    - Browser-based duplicate detection
 
-9. **GeoSort** (https://sammapix.com/tools/geosort)
+9. **Sort by Location** (https://sammapix.com/tools/geosort)
    - Sort photos by country using GPS EXIF data
    - Organize travel photo libraries by location
    - Requires EXIF GPS data in photos
    - HEIC support
 
-10. **TravelMap** (https://sammapix.com/tools/travelmap)
+10. **Photo Map** (https://sammapix.com/tools/travelmap)
     - Generate interactive map from travel photos
     - Visualize photo locations on world map
     - Requires GPS coordinates in EXIF data
     - Mapbox-powered interactive visualization
 
-11. **ResizePack** (https://sammapix.com/tools/resizepack)
+11. **Batch Resize** (https://sammapix.com/tools/resizepack)
     - Resize images for social media platforms
     - Presets: Instagram (1:1, 4:5), Twitter (16:9), LinkedIn (1.91:1)
     - Batch resize with ZIP download

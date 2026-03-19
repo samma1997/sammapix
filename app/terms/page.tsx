@@ -80,7 +80,7 @@ export default function TermsPage() {
           </p>
           <ul className="mt-2 pl-5 list-disc space-y-1">
             <li>The majority of tools process files entirely within your web browser. Image data for these tools is never transmitted to our servers.</li>
-            <li>AI-powered tools (AI Rename, AI Alt Text, SmartSort) send a reduced-resolution thumbnail to Google&apos;s Gemini API for analysis. A signed-in account is required to use these tools.</li>
+            <li>AI-powered tools (AI Rename, AI Alt Text, AI Photo Sort) send a reduced-resolution thumbnail to Google&apos;s Gemini API for analysis. A signed-in account is required to use these tools.</li>
             <li>The Transcribe tool sends audio files to Google Gemini for speech-to-text conversion.</li>
             <li>Optional integrations with Google Drive (read-only) and Dropbox allow you to import files from your cloud storage directly into the browser.</li>
           </ul>
