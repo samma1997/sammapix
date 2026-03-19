@@ -93,6 +93,9 @@ const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
   { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
 
+// Tools that use AI (show badge)
+const AI_TOOL_SLUGS = new Set(["ai-rename", "alt-text", "transcribe", "smartsort"]);
+
 function getToolBySlug(slug: string): SidebarTool | undefined {
   return ALL_SIDEBAR_TOOLS.find((t) => t.slug === slug);
 }
@@ -217,7 +220,7 @@ export default function DashboardSidebar({
 
       {/* Scrollable nav */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-        {/* Top section: Home + AI Tools */}
+        {/* Top section: Home */}
         <Link
           href="/dashboard"
           onClick={() => setMobileOpen(false)}
@@ -225,15 +228,6 @@ export default function DashboardSidebar({
         >
           <LayoutDashboard className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           Home
-        </Link>
-
-        <Link
-          href="/dashboard/ai-tools"
-          onClick={() => setMobileOpen(false)}
-          className={linkClasses("/dashboard/ai-tools")}
-        >
-          <Sparkles className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-          AI Tools
         </Link>
 
         {/* For You section (persona-based) */}
@@ -251,6 +245,9 @@ export default function DashboardSidebar({
               >
                 <span className="shrink-0">{tool.icon}</span>
                 {tool.name}
+                {AI_TOOL_SLUGS.has(tool.slug) && (
+                  <span className="ml-auto text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
+                )}
               </Link>
             ))}
           </div>
@@ -278,6 +275,9 @@ export default function DashboardSidebar({
                   >
                     <span className="shrink-0">{tool.icon}</span>
                     {tool.name}
+                    {AI_TOOL_SLUGS.has(tool.slug) && (
+                      <span className="ml-auto text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
+                    )}
                   </Link>
                 );
               })}
