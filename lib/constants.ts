@@ -1,11 +1,15 @@
 import { PlanLimits } from "@/types/user";
 import { ImageFormat } from "@/types/image";
 
-// File limits
+// File limits (per batch/session)
 export const MAX_FILE_SIZE_FREE = 20 * 1024 * 1024; // 20MB
 export const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024; // 50MB
 export const MAX_FILES_FREE = 20;
 export const MAX_FILES_PRO = 500;
+
+// Daily image processing limit (across ALL tools)
+export const DAILY_IMAGES_FREE = 50;
+export const DAILY_IMAGES_PRO = 999999; // unlimited
 
 // GeoSort limits
 export const MAX_GEOSORT_FREE = 100;
@@ -15,12 +19,16 @@ export const MAX_GEOSORT_PRO = 500;
 export const MAX_HEIC_FREE = 100;
 export const MAX_HEIC_PRO = 500;
 
-// AI limits (shared across AI Rename, AI Alt Text, Transcribe)
-export const AI_RENAME_FREE_PER_DAY = 10;
-export const AI_RENAME_PRO_PER_DAY = 99999; // unlimited
+// AI limits (shared pool: AI Rename + AI Alt Text + SmartSort)
+export const AI_OPS_FREE_PER_DAY = 10;
+export const AI_OPS_PRO_PER_DAY = 500;
 
-export const AI_ALT_TEXT_FREE_PER_DAY = 10;
-export const AI_ALT_TEXT_PRO_PER_DAY = 99999; // unlimited
+// Legacy aliases (keep for existing code compatibility)
+export const AI_RENAME_FREE_PER_DAY = AI_OPS_FREE_PER_DAY;
+export const AI_RENAME_PRO_PER_DAY = AI_OPS_PRO_PER_DAY;
+
+export const AI_ALT_TEXT_FREE_PER_DAY = AI_OPS_FREE_PER_DAY;
+export const AI_ALT_TEXT_PRO_PER_DAY = AI_OPS_PRO_PER_DAY;
 
 export const AI_TRANSCRIBE_FREE_PER_DAY = 10;
 export const AI_TRANSCRIBE_PRO_PER_DAY = 99999; // unlimited
@@ -45,6 +53,8 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
   free: {
     maxFiles: MAX_FILES_FREE,
     aiRenamePerDay: AI_RENAME_FREE_PER_DAY,
+    dailyImages: DAILY_IMAGES_FREE,
+    aiOpsPerDay: AI_OPS_FREE_PER_DAY,
     maxFileSizeBytes: MAX_FILE_SIZE_FREE,
     zipDownload: false,
     ads: true,
@@ -52,6 +62,8 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
   pro: {
     maxFiles: MAX_FILES_PRO,
     aiRenamePerDay: AI_RENAME_PRO_PER_DAY,
+    dailyImages: DAILY_IMAGES_PRO,
+    aiOpsPerDay: AI_OPS_PRO_PER_DAY,
     maxFileSizeBytes: MAX_FILE_SIZE_PRO,
     zipDownload: true,
     ads: false,

@@ -23,6 +23,11 @@ interface ImageStoreState {
   isProcessing: boolean;
   isZipping: boolean;
 
+  // Daily image usage
+  dailyImagesUsed: number;
+  dailyImagesLimit: number;
+  readonly dailyImagesRemaining: number;
+
   // Actions
   addFiles: (files: File[], maxFiles?: number) => void;
   removeFile: (id: string) => void;
@@ -41,6 +46,8 @@ interface ImageStoreState {
   aiRenameUsedToday: number;
   setAiRenameUsedToday: (n: number) => void;
   initAiRenameCounter: (email: string) => void;
+  initDailyImageCounter: () => Promise<void>;
+  trackImageProcessed: (count: number) => Promise<void>;
 }
 
 export const useImageStore = create<ImageStoreState>()(
@@ -55,6 +62,11 @@ export const useImageStore = create<ImageStoreState>()(
     isProcessing: false,
     isZipping: false,
     aiRenameUsedToday: 0,
+    dailyImagesUsed: 0,
+    dailyImagesLimit: 50,
+    get dailyImagesRemaining() {
+      return Math.max(0, (this as ImageStoreState).dailyImagesLimit - (this as ImageStoreState).dailyImagesUsed);
+    },
 
     addFiles: (files: File[], maxFiles: number = MAX_FILES_FREE) => {
       set((state) => {
@@ -116,6 +128,17 @@ export const useImageStore = create<ImageStoreState>()(
       const item = get().items.find((i) => i.id === id);
       if (!item || item.status === "processing" || item.status === "done") return;
 
+      // Enforce daily image processing limit before starting compression
+      const { dailyImagesUsed, dailyImagesLimit } = get();
+      if (dailyImagesUsed >= dailyImagesLimit) {
+        updateItem(id, {
+          status: "error",
+          errorMessage: "Daily limit reached — upgrade to Pro for unlimited",
+          progress: 0,
+        });
+        return;
+      }
+
       updateItem(id, { status: "processing", progress: 0 });
 
       try {
@@ -151,6 +174,9 @@ export const useImageStore = create<ImageStoreState>()(
           compressedPreviewUrl,
         });
 
+        // Record successful processing against the daily usage counter
+        await get().trackImageProcessed(1);
+
       } catch (err) {
         const message = err instanceof Error ? err.message : "Compression failed";
         updateItem(id, {
@@ -169,6 +195,8 @@ export const useImageStore = create<ImageStoreState>()(
 
     processAll: async () => {
       set((state) => { state.isProcessing = true; });
+      // Refresh authoritative usage count before processing the batch
+      await get().initDailyImageCounter();
       const { items, processFile } = get();
       const queued = items.filter((i) => i.status === "queued");
 
@@ -226,6 +254,39 @@ export const useImageStore = create<ImageStoreState>()(
     },
 
     setAiRenameUsedToday: (n: number) => set((state) => { state.aiRenameUsedToday = n; }),
+
+    initDailyImageCounter: async () => {
+      try {
+        const res = await fetch("/api/usage/images", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json() as { used: number; limit: number };
+          set((state) => {
+            state.dailyImagesUsed = data.used;
+            state.dailyImagesLimit = data.limit;
+          });
+        }
+      } catch {
+        // Server unavailable — keep current in-memory values
+      }
+    },
+
+    trackImageProcessed: async (count: number) => {
+      try {
+        const res = await fetch("/api/usage/images", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ count }),
+        });
+        if (res.ok) {
+          const data = await res.json() as { used: number };
+          set((state) => { state.dailyImagesUsed = data.used; });
+        }
+      } catch {
+        // Server unavailable — optimistically increment local counter
+        set((state) => { state.dailyImagesUsed = state.dailyImagesUsed + count; });
+      }
+    },
 
     initAiRenameCounter: async (email: string) => {
       // Start with localStorage cache (instant)
