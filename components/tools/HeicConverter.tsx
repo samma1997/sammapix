@@ -86,26 +86,39 @@ async function convertServerSide(
   return res.blob();
 }
 
-// Client-side conversion using heic-to (WASM-based, fast even for large files)
+// Client-side conversion: try heic-to (WASM, fast) then heic2any (JS, slower) as fallback
 async function convertClientSide(
   file: File,
   format: OutputFormat,
   quality: number
 ): Promise<Blob> {
-  const { heicTo } = await import("heic-to");
   const toType = format === "WebP" ? "image/webp" : "image/jpeg";
 
-  const blob = await heicTo({
+  // Try heic-to first (WASM, much faster)
+  try {
+    const { heicTo } = await import("heic-to");
+    const blob = await heicTo({
+      blob: file,
+      type: toType,
+      quality: quality / 100,
+    });
+    return blob;
+  } catch (e) {
+    console.warn("[HEIC] heic-to failed, falling back to heic2any:", e);
+  }
+
+  // Fallback: heic2any (JS-based, slower but more compatible)
+  const heic2any = (await import("heic2any")).default;
+  const result = await heic2any({
     blob: file,
-    type: toType,
+    toType,
     quality: quality / 100,
   });
-
-  return blob;
+  return Array.isArray(result) ? result[0] : result;
 }
 
 // Hybrid: server for small files (fast), client for large files (no limit)
-const SERVER_MAX_SIZE = 4 * 1024 * 1024; // 4MB
+const SERVER_MAX_SIZE = 4.4 * 1024 * 1024; // 4.4MB (Vercel limit ~4.5MB)
 
 async function convertFile(
   file: File,
