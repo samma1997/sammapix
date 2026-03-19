@@ -192,6 +192,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
   const [stepToggles, setStepToggles] = useState<ComboStep[]>(initialSteps);
   const [locale, setLocale] = useState("en");
   const [showProModal, setShowProModal] = useState(false);
+  const [proModalTrigger, setProModalTrigger] = useState<"batch" | "steps">("batch");
   const processingRef = useRef(false);
 
   const isAuthenticated = !!session?.user;
@@ -205,7 +206,17 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
   // At least 1 step must remain on
   const enabledCount = stepToggles.filter((s) => s.enabled).length;
 
+  // Free users: max 2 active steps
+  const FREE_MAX_STEPS = 2;
+
   function handleToggleStep(stepId: string, value: boolean) {
+    // If enabling a step and free user would exceed limit, show upsell
+    if (value && !isPro && enabledCount >= FREE_MAX_STEPS) {
+      setProModalTrigger("steps");
+      setShowProModal(true);
+      return;
+    }
+
     setStepToggles((prev) => {
       const updated = prev.map((s) => (s.id === stepId ? { ...s, enabled: value } : s));
       // Prevent disabling ALL steps
@@ -224,6 +235,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
       let filesToAdd = acceptedFiles;
       if (acceptedFiles.length > remaining) {
         filesToAdd = acceptedFiles.slice(0, remaining);
+        setProModalTrigger("batch");
         setShowProModal(true);
       }
 
@@ -427,6 +439,10 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
                 })}
               </div>
 
+              <span className="text-[10px] text-[#A3A3A3] dark:text-[#525252] whitespace-nowrap">
+                Free: max 2 steps &middot; Pro: unlimited
+              </span>
+
               {hasPending && (
                 <button
                   onClick={processAll}
@@ -550,7 +566,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
       <ProUpsellModal
         open={showProModal}
         onClose={() => setShowProModal(false)}
-        trigger="batch"
+        trigger={proModalTrigger}
         filesDropped={files.length}
         freeLimit={COMBO_FILES_FREE}
       />
