@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
@@ -15,6 +15,7 @@ import {
   ChevronDown,
   ChevronRight,
   Trash2,
+  AlertCircle,
 } from "lucide-react";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -28,6 +29,19 @@ interface FileEntry {
   confidence: number | null;
   status: "pending" | "processing" | "done" | "error";
   error?: string;
+}
+
+interface AiUsage {
+  used: number;
+  remaining: number;
+  limit: number;
+}
+
+interface ImageUsage {
+  used: number;
+  remaining: number;
+  limit: number;
+  plan: string;
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -84,9 +98,39 @@ export default function SmartSortClient() {
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [downloading, setDownloading] = useState(false);
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set());
+  const [limitError, setLimitError] = useState<string | null>(null);
+  const [aiUsage, setAiUsage] = useState<AiUsage | null>(null);
+  const [imageUsage, setImageUsage] = useState<ImageUsage | null>(null);
   const abortRef = useRef(false);
 
   const isAuthenticated = authStatus === "authenticated" && !!session?.user;
+  const isPro = (session?.user as { plan?: string } | undefined)?.plan === "pro";
+
+  // Fetch AI usage and image usage on mount once authenticated
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    async function fetchUsage() {
+      try {
+        const [aiRes, imgRes] = await Promise.all([
+          fetch("/api/ai/usage"),
+          fetch("/api/usage/images"),
+        ]);
+        if (aiRes.ok) {
+          const data = (await aiRes.json()) as AiUsage;
+          setAiUsage(data);
+        }
+        if (imgRes.ok) {
+          const data = (await imgRes.json()) as ImageUsage;
+          setImageUsage(data);
+        }
+      } catch {
+        // Silent — usage display is non-critical
+      }
+    }
+
+    void fetchUsage();
+  }, [isAuthenticated]);
 
   const onDrop = useCallback(async (accepted: File[]) => {
     const entries: FileEntry[] = await Promise.all(
@@ -101,6 +145,7 @@ export default function SmartSortClient() {
       }))
     );
     setFiles((prev) => [...prev, ...entries]);
+    setLimitError(null);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -109,18 +154,80 @@ export default function SmartSortClient() {
     multiple: true,
   });
 
-  // Categorize all files
+  // Categorize all files, capped by both AI ops and daily image limits
   async function handleSort() {
     if (files.length === 0) return;
+    setLimitError(null);
+
+    // Pre-check limits before starting
+    let currentAiRemaining = aiUsage?.remaining ?? Infinity;
+    let currentImgRemaining = imageUsage?.remaining ?? Infinity;
+
+    try {
+      const [aiRes, imgRes] = await Promise.all([
+        fetch("/api/ai/usage"),
+        fetch("/api/usage/images"),
+      ]);
+      if (aiRes.ok) {
+        const data = (await aiRes.json()) as AiUsage;
+        setAiUsage(data);
+        currentAiRemaining = data.remaining;
+      }
+      if (imgRes.ok) {
+        const data = (await imgRes.json()) as ImageUsage;
+        setImageUsage(data);
+        currentImgRemaining = data.remaining;
+      }
+    } catch {
+      // Continue with stale values if fetch fails
+    }
+
+    if (currentAiRemaining <= 0) {
+      setLimitError(
+        "You've used all your AI sorts for today (10/day on free plan). Upgrade to Pro for 500/day."
+      );
+      return;
+    }
+
+    if (currentImgRemaining <= 0) {
+      setLimitError(
+        "You've reached your daily image limit. Upgrade to Pro for unlimited processing."
+      );
+      return;
+    }
+
+    // Cap the number of files to process
+    const pendingFiles = files.filter((f) => f.status !== "done");
+    const processable = Math.min(
+      pendingFiles.length,
+      currentAiRemaining,
+      currentImgRemaining
+    );
+
+    if (processable <= 0) {
+      setLimitError("No files to process within your remaining daily limits.");
+      return;
+    }
+
+    const skipped = pendingFiles.length - processable;
+    const filesToProcess = new Set(pendingFiles.slice(0, processable).map((f) => f.id));
+
     setSorting(true);
     abortRef.current = false;
-    setProgress({ done: 0, total: files.length });
+    setProgress({ done: 0, total: processable });
+
+    let aiOpsUsedThisSession = 0;
 
     for (let i = 0; i < files.length; i++) {
       if (abortRef.current) break;
       const entry = files[i];
+
       if (entry.status === "done") {
-        setProgress((p) => ({ ...p, done: p.done + 1 }));
+        continue;
+      }
+
+      if (!filesToProcess.has(entry.id)) {
+        // Beyond limit — mark as skipped (leave as pending)
         continue;
       }
 
@@ -141,14 +248,41 @@ export default function SmartSortClient() {
 
         if (!res.ok) {
           const errorData = await res.json().catch(() => ({}));
-          throw new Error(
-            (errorData as { error?: string }).error || `HTTP ${res.status}`
-          );
+          const errObj = errorData as { error?: string; code?: string; remaining?: number };
+
+          // If rate-limited mid-run, stop processing further
+          if (res.status === 429) {
+            setFiles((prev) =>
+              prev.map((f) =>
+                f.id === entry.id
+                  ? { ...f, status: "error", error: "Daily AI limit reached" }
+                  : f
+              )
+            );
+            setLimitError(
+              errObj.error ??
+                "Daily AI limit reached. Upgrade to Pro for more operations."
+            );
+            abortRef.current = true;
+            break;
+          }
+
+          throw new Error(errObj.error ?? `HTTP ${res.status}`);
         }
 
         const data = (await res.json()) as {
           data: { category: string; confidence: number };
+          remaining?: number;
         };
+
+        // Update AI usage from the response header/body remaining
+        if (typeof data.remaining === "number") {
+          setAiUsage((prev) =>
+            prev
+              ? { ...prev, remaining: data.remaining!, used: prev.limit - data.remaining! }
+              : null
+          );
+        }
 
         setFiles((prev) =>
           prev.map((f) =>
@@ -162,6 +296,30 @@ export default function SmartSortClient() {
               : f
           )
         );
+
+        aiOpsUsedThisSession += 1;
+
+        // Track against daily image limit
+        try {
+          const imgTrackRes = await fetch("/api/usage/images", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ count: 1 }),
+          });
+          if (imgTrackRes.ok) {
+            const imgData = (await imgTrackRes.json()) as ImageUsage;
+            setImageUsage(imgData);
+          } else if (imgTrackRes.status === 429) {
+            // Daily image limit hit mid-run — stop gracefully
+            const imgErr = (await imgTrackRes.json().catch(() => ({}))) as { error?: string };
+            setLimitError(
+              imgErr.error ?? "Daily image limit reached. Upgrade to Pro for unlimited processing."
+            );
+            abortRef.current = true;
+          }
+        } catch {
+          // Image usage tracking failure is non-blocking
+        }
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Unknown error";
         setFiles((prev) =>
@@ -174,6 +332,12 @@ export default function SmartSortClient() {
       }
 
       setProgress((p) => ({ ...p, done: p.done + 1 }));
+    }
+
+    if (skipped > 0 && !limitError) {
+      setLimitError(
+        `${skipped} file${skipped !== 1 ? "s" : ""} skipped — daily limit reached. Upgrade to Pro for more.`
+      );
     }
 
     setSorting(false);
@@ -241,6 +405,7 @@ export default function SmartSortClient() {
   function clearAll() {
     setFiles([]);
     setProgress({ done: 0, total: 0 });
+    setLimitError(null);
   }
 
   // ─── Auth gate ────────────────────────────────────────────────────────────
@@ -304,7 +469,10 @@ export default function SmartSortClient() {
               {isDragActive ? "Drop images here" : "Drop images or click to browse"}
             </p>
             <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
-              JPG, PNG, WebP, GIF, AVIF. Up to 50 files (500 on Pro).
+              JPG, PNG, WebP, GIF, AVIF.{" "}
+              {isPro
+                ? "500 AI sorts/day (Pro)."
+                : "10 AI sorts/day (free) · 500/day (Pro)."}
             </p>
           </div>
         )}
@@ -335,30 +503,65 @@ export default function SmartSortClient() {
               </div>
             </div>
 
-            {/* Sort button + progress */}
+            {/* AI usage info + sort button */}
             {!hasResults && (
-              <button
-                onClick={handleSort}
-                disabled={sorting || files.length === 0}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3
-                           bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717]
-                           text-sm font-medium rounded-md
-                           hover:bg-[#262626] dark:hover:bg-[#D4D4D4]
-                           disabled:opacity-50 disabled:cursor-not-allowed
-                           transition-colors"
-              >
-                {sorting ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                    Analyzing {progress.done}/{progress.total}...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="h-4 w-4" strokeWidth={1.5} />
-                    Sort with AI
-                  </>
+              <div className="space-y-2">
+                {/* AI usage badge — shown for free users */}
+                {!isPro && aiUsage !== null && (
+                  <div className="flex items-center justify-between text-xs text-[#A3A3A3] dark:text-[#525252]">
+                    <span>
+                      AI:{" "}
+                      <span
+                        className={
+                          aiUsage.remaining === 0
+                            ? "text-[#DC2626] font-medium"
+                            : aiUsage.remaining <= 3
+                            ? "text-[#D97706] font-medium"
+                            : "text-[#525252] dark:text-[#A3A3A3]"
+                        }
+                      >
+                        {aiUsage.used}/{aiUsage.limit} used today
+                      </span>
+                      {aiUsage.remaining > 0 && (
+                        <span className="ml-1 text-[#A3A3A3]">
+                          ({aiUsage.remaining} remaining)
+                        </span>
+                      )}
+                    </span>
+                    {aiUsage.remaining === 0 && (
+                      <a
+                        href="/pricing"
+                        className="text-[#6366F1] hover:text-[#4F46E5] transition-colors"
+                      >
+                        Upgrade to Pro
+                      </a>
+                    )}
+                  </div>
                 )}
-              </button>
+
+                <button
+                  onClick={handleSort}
+                  disabled={sorting || files.length === 0 || (aiUsage?.remaining === 0 && !isPro)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3
+                             bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717]
+                             text-sm font-medium rounded-md
+                             hover:bg-[#262626] dark:hover:bg-[#D4D4D4]
+                             disabled:opacity-50 disabled:cursor-not-allowed
+                             transition-colors"
+                >
+                  {sorting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                      Analyzing {progress.done}/{progress.total}...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+                      Sort with AI
+                    </>
+                  )}
+                </button>
+              </div>
             )}
 
             {/* Progress bar */}
@@ -368,6 +571,24 @@ export default function SmartSortClient() {
                   className="bg-[#6366F1] h-1.5 rounded-full transition-all duration-300"
                   style={{ width: `${progress.total > 0 ? (progress.done / progress.total) * 100 : 0}%` }}
                 />
+              </div>
+            )}
+
+            {/* Limit error / upsell */}
+            {limitError && (
+              <div className="flex items-start gap-2 px-3 py-2.5 rounded-md bg-[#FEF2F2] dark:bg-[#2A1515] border border-[#FECACA] dark:border-[#7F1D1D]">
+                <AlertCircle className="h-4 w-4 text-[#DC2626] mt-0.5 shrink-0" strokeWidth={1.5} />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-[#DC2626] dark:text-[#FCA5A5]">{limitError}</p>
+                  {!isPro && (
+                    <a
+                      href="/pricing"
+                      className="text-xs text-[#6366F1] hover:text-[#4F46E5] transition-colors mt-0.5 inline-block"
+                    >
+                      Upgrade to Pro — $7/mo
+                    </a>
+                  )}
+                </div>
               </div>
             )}
 

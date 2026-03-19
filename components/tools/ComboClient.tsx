@@ -192,7 +192,8 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
   const [stepToggles, setStepToggles] = useState<ComboStep[]>(initialSteps);
   const [locale, setLocale] = useState("en");
   const [showProModal, setShowProModal] = useState(false);
-  const [proModalTrigger, setProModalTrigger] = useState<"batch" | "steps">("batch");
+  const [proModalTrigger, setProModalTrigger] = useState<"batch" | "steps" | "daily">("batch");
+  const [dailyUsage, setDailyUsage] = useState<{ used: number; limit: number; remaining: number } | null>(null);
   const processingRef = useRef(false);
 
   const isAuthenticated = !!session?.user;
@@ -221,6 +222,16 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
       });
     });
   }, [authStatus, isPro]);
+
+  // Fetch daily image usage on mount
+  useEffect(() => {
+    fetch("/api/usage/images")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { used: number; limit: number; remaining: number } | null) => {
+        if (data) setDailyUsage(data);
+      })
+      .catch(() => { /* non-critical — silently ignore */ });
+  }, []);
 
   // Check if any AI step is enabled and user is not logged in
   const enabledAiSteps = stepToggles.filter((s) => s.enabled && s.isAi);
@@ -295,7 +306,15 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
     const allEnabled = stepToggles.filter((s) => s.enabled);
     const activeSteps = isPro ? allEnabled : allEnabled.slice(0, FREE_MAX_STEPS);
 
-    for (const pf of pendingFiles) {
+    // Enforce daily image limit
+    let filesToProcess = pendingFiles;
+    if (dailyUsage !== null && dailyUsage.remaining < pendingFiles.length) {
+      filesToProcess = pendingFiles.slice(0, Math.max(0, dailyUsage.remaining));
+      setProModalTrigger("daily");
+      setShowProModal(true);
+    }
+
+    for (const pf of filesToProcess) {
       // Mark as processing
       setFiles((prev) =>
         prev.map((f) => (f.id === pf.id ? { ...f, status: "processing" as const, currentStep: 0 } : f))
@@ -322,6 +341,18 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
               : f
           )
         );
+
+        // Increment daily usage counter
+        fetch("/api/usage/images", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ count: 1 }),
+        })
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data: { used: number; limit: number; remaining: number } | null) => {
+            if (data) setDailyUsage(data);
+          })
+          .catch(() => { /* non-critical — silently ignore */ });
       } catch (err) {
         setFiles((prev) =>
           prev.map((f) =>
@@ -335,7 +366,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
 
     setIsProcessing(false);
     processingRef.current = false;
-  }, [files, stepToggles, locale]);
+  }, [files, stepToggles, locale, dailyUsage, isPro]);
 
   // Download single
   const downloadFile = (pf: ProcessedFile) => {
@@ -408,6 +439,11 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
             </p>
             <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-2">
               Free: {COMBO_FILES_FREE} files per batch &middot; Pro: {COMBO_FILES_PRO}
+              {dailyUsage !== null && (
+                <span className="ml-2 text-[#A3A3A3] dark:text-[#525252]">
+                  &middot; Today: {dailyUsage.used}/{dailyUsage.limit} images
+                </span>
+              )}
             </p>
           </div>
         )}

@@ -25,6 +25,8 @@ export interface UserSession {
 export interface PlanLimits {
   maxFiles: number;
   aiRenamePerDay: number;
+  dailyImages: number;
+  aiOpsPerDay: number;
   maxFileSizeBytes: number;
   zipDownload: boolean;
   ads: boolean;

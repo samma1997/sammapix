@@ -6,7 +6,7 @@ import Link from "next/link";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -28,6 +28,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "Batch limit reached";
     case "steps":
       return "Step limit reached";
+    case "daily":
+      return "Daily limit reached";
     default:
       return "You're processing like a pro";
   }
@@ -47,6 +49,8 @@ function getSubtext(
       return `You've hit the batch processing limit. Upgrade to Pro to handle up to 500 files at once.`;
     case "steps":
       return "Free plan allows up to 2 active steps per workflow. Upgrade to Pro for unlimited steps.";
+    case "daily":
+      return "Free plan allows 50 images per day. Upgrade to Pro for unlimited processing.";
     default: {
       if (filesDropped && freeLimit) {
         return `You dropped ${filesDropped} photos- free plan processes the first ${freeLimit}. Upgrade to handle 500 at once.`;
