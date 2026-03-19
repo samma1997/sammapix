@@ -3,6 +3,7 @@ import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 import { sendMetaEvent } from "@/lib/meta-conversions";
 import { addCredits } from "@/lib/credits";
+import { saveGiftCode, markPaid } from "@/lib/gift-codes";
 
 export const runtime = "nodejs";
 
@@ -93,7 +94,33 @@ export async function POST(req: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       const metadata = session.metadata ?? {};
 
-      if (metadata.type === "credits") {
+      if (metadata.type === "gift") {
+        // ----------------------------------------------------------------
+        // Gift subscription purchase
+        // ----------------------------------------------------------------
+        const giftCode = metadata.giftCode;
+        if (giftCode) {
+          // Ensure the gift code exists in our store (may have been lost on cold start)
+          saveGiftCode(giftCode, {
+            code: giftCode,
+            senderName: metadata.senderName ?? "Someone",
+            senderEmail: metadata.senderEmail ?? session.customer_email ?? "",
+            recipientName: metadata.recipientName ?? "",
+            recipientEmail: metadata.recipientEmail || undefined,
+            message: metadata.message || undefined,
+            color: metadata.color ?? "#6366F1",
+            months: parseInt(metadata.months ?? "1", 10),
+            plan: (metadata.plan as "monthly" | "annual") ?? "monthly",
+            stripeSessionId: session.id,
+            paid: true,
+            redeemed: false,
+            redeemerEmail: undefined,
+            createdAt: new Date(),
+          });
+          markPaid(giftCode);
+          console.log(`[stripe/webhook] Gift paid: ${giftCode} from ${metadata.senderEmail} to ${metadata.recipientName}`);
+        }
+      } else if (metadata.type === "credits") {
         // ----------------------------------------------------------------
         // Credit package purchase
         // ----------------------------------------------------------------
