@@ -123,6 +123,11 @@ export async function POST(req: NextRequest) {
     `location=${esc(location)}`,
   ].join("|");
 
+  // Scope publicId to expected folder to prevent cross-folder writes
+  if (!publicId.startsWith("sammapix/")) {
+    return NextResponse.json({ error: "Invalid publicId" }, { status: 400 });
+  }
+
   try {
     await cloudinary.uploader.explicit(publicId, {
       type: "upload",

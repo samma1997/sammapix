@@ -6,7 +6,6 @@ import { getStripeCustomerId } from "@/lib/user-plan";
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
-  "http://localhost:3000",
 ];
 
 export const runtime = "nodejs";

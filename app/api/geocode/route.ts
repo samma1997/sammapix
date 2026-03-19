@@ -5,7 +5,6 @@ const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
-  "http://localhost:3000",
 ];
 
 function addSecurityHeaders(res: NextResponse): NextResponse {

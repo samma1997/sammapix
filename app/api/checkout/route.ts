@@ -8,7 +8,6 @@ const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
   "https://staging-sammapix.vercel.app",
-  "http://localhost:3000",
 ];
 
 // 7-day free trial for all plans
@@ -43,7 +42,6 @@ export async function POST(req: NextRequest) {
     // default to monthly
   }
 
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
   const priceId = plan === "annual"
     ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID?.trim() || process.env.STRIPE_PRO_PRICE_ID!)
     : process.env.STRIPE_PRO_PRICE_ID!;
@@ -64,6 +62,8 @@ export async function POST(req: NextRequest) {
     console.error("[checkout] Coupon error:", err instanceof Error ? err.message : err);
   }
   console.log("[checkout] applyFoundingCoupon:", applyFoundingCoupon);
+
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
 
   try {
     const checkoutSession = await stripe.checkout.sessions.create({

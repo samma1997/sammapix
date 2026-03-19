@@ -12,7 +12,6 @@ const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
   "https://staging-sammapix.vercel.app",
-  "http://localhost:3000",
 ];
 
 const RedeemSchema = z.object({

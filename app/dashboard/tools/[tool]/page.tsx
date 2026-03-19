@@ -416,7 +416,7 @@ export default function DashboardToolPage() {
       <div className="px-4 sm:px-6 pt-8 pb-6">
         <div className="max-w-3xl mx-auto">
           <Link
-            href="/"
+            href="/dashboard"
             className="inline-flex items-center gap-1 text-xs text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-4"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>

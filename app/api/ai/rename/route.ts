@@ -96,7 +96,6 @@ export async function POST(req: NextRequest) {
     const allowedOrigins = [
       "https://sammapix.com",
       "https://www.sammapix.com",
-      "http://localhost:3000",
     ];
     if (origin && !allowedOrigins.some((o) => origin.startsWith(o))) {
       return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
