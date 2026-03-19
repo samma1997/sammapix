@@ -26,7 +26,6 @@ export const authOptions: AuthOptions = {
         const { getUserPlan } = await import("@/lib/user-plan");
         token.plan = await getUserPlan(user.email);
         token.planCheckedAt = Date.now();
-        token.aiRenameUsedToday = 0;
       } else if (token.email) {
         // Subsequent JWT refreshes- re-check plan every PLAN_REFRESH_INTERVAL_MS
         const lastChecked = (token.planCheckedAt as number) ?? 0;

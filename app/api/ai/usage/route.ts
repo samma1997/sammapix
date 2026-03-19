@@ -1,0 +1,26 @@
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth/options";
+import { getInt } from "@/lib/redis";
+import { AI_RENAME_FREE_PER_DAY, AI_RENAME_PRO_PER_DAY } from "@/lib/constants";
+
+function todayStr(): string {
+  return new Date().toISOString().split("T")[0];
+}
+
+export async function GET() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const email = session.user.email;
+  const isPro = (session.user as { plan?: string })?.plan === "pro";
+  const limit = isPro ? AI_RENAME_PRO_PER_DAY : AI_RENAME_FREE_PER_DAY;
+
+  const key = `ai_rename:${email}:${todayStr()}`;
+  const used = (await getInt(key)) ?? 0;
+  const remaining = Math.max(0, limit - used);
+
+  return NextResponse.json({ used, remaining, limit });
+}
