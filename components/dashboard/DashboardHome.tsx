@@ -251,7 +251,7 @@ const IconDhSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
 
 // ─── Tools by category ───────────────────────────────────────────────────────
 
-type DashCategory = "Optimize" | "AI-Powered" | "Creative" | "Organize";
+type DashCategory = "Optimize" | "AI Tools" | "Creative" | "Organize";
 
 interface DashToolEntry {
   name: string;
@@ -271,13 +271,13 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "ResizePack", slug: "resizepack", accent: "#14B8A6", Icon: IconResizePack, badge: "Free", category: "Optimize" },
   { name: "CropRatio", slug: "croproatio", accent: "#EC4899", Icon: IconCropRatio, badge: "Free", category: "Optimize" },
 
-  // AI-Powered
-  { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", category: "AI-Powered" },
-  { name: "AI Alt Text", slug: "alt-text", accent: "#8B5CF6", Icon: IconAltText, badge: "Login", category: "AI-Powered" },
-  { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", category: "AI-Powered" },
-  { name: "WebLift", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "AI-Powered", isCombo: true },
-  { name: "BlogDrop", slug: "blogdrop", accent: "#8B5CF6", Icon: IconDhBlogDrop, badge: "Login", category: "AI-Powered", isCombo: true },
-  { name: "SmartSort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", category: "AI-Powered" },
+  // AI Tools
+  { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", category: "AI Tools" },
+  { name: "AI Alt Text", slug: "alt-text", accent: "#8B5CF6", Icon: IconAltText, badge: "Login", category: "AI Tools" },
+  { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", category: "AI Tools" },
+  { name: "WebLift", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "AI Tools", isCombo: true },
+  { name: "BlogDrop", slug: "blogdrop", accent: "#8B5CF6", Icon: IconDhBlogDrop, badge: "Login", category: "AI Tools", isCombo: true },
+  { name: "SmartSort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", category: "AI Tools" },
 
   // Creative
   { name: "FilmLab", slug: "filmlab", accent: "#F59E0B", Icon: IconFilmLab, badge: "Free", category: "Creative" },
@@ -582,7 +582,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       ) : (
         /* -- Default: Tools by category (no persona selected) -- */
         <>
-          {(["Optimize", "AI-Powered", "Creative", "Organize"] as DashCategory[]).map((category) => {
+          {(["Optimize", "AI Tools", "Creative", "Organize"] as DashCategory[]).map((category) => {
             const tools = ALL_DASH_TOOLS.filter((t) => t.category === category);
             return (
               <section key={category}>
