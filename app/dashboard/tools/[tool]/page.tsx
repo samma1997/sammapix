@@ -68,6 +68,27 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   smartsort:   SmartSortClient,
 };
 
+// ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
+
+const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ss-sort { 0%, 100% { transform: translateX(0); opacity: 0.5; } 50% { transform: translateX(4px); opacity: 1; } }
+      .ss-a { animation: ss-sort 2s ease-in-out infinite; }
+      .ss-b { animation: ss-sort 2s ease-in-out 0.3s infinite; }
+    `}</style>
+    <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
+    <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <g className="ss-a"><path d="M20 12 L26 8" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/></g>
+    <g className="ss-b"><path d="M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/></g>
+    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
+    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
+  </svg>
+);
+
 // ─── Tool icon + accent color map ────────────────────────────────────────────
 
 const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: string }> = {
@@ -85,7 +106,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   resizepack:  { Icon: IconResizePack, accent: "#14B8A6" },
   cull:        { Icon: IconCull,       accent: "#F43F5E" },
   heic:        { Icon: IconHEIC,       accent: "#6366F1" },
-  smartsort:   { Icon: IconGeoSort,    accent: "#22C55E" },
+  smartsort:   { Icon: IconSmartSort,   accent: "#22C55E" },
   weblift:     { Icon: IconWebP,       accent: "#3B82F6" },
   blogdrop:    { Icon: IconCompress,   accent: "#8B5CF6" },
   transcribe:  { Icon: IconEXIF,       accent: "#0891B2" },
