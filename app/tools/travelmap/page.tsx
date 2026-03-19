@@ -305,7 +305,7 @@ export default function TravelMapPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "TravelMap",
+                name: "Photo Map",
                 item: `${APP_URL}/tools/travelmap`,
               },
             ],
@@ -365,7 +365,7 @@ export default function TravelMapPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix TravelMap",
+            name: "SammaPix Photo Map",
             description:
               "Visualize your travel photos on an interactive map using GPS metadata. See routes, distances traveled and countries visited. No upload required.",
             url: `${APP_URL}/tools/travelmap`,

@@ -228,7 +228,7 @@ export default function StampItPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "StampIt",
+                name: "Watermark",
                 item: `${APP_URL}/tools/stampit`,
               },
             ],
@@ -288,7 +288,7 @@ export default function StampItPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix StampIt",
+            name: "SammaPix Watermark",
             description:
               "Add text or logo watermarks to multiple images at once. True tiled filigrana mode with diagonal stagger for professional watermarking.",
             url: `${APP_URL}/tools/stampit`,

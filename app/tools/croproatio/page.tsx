@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "SammaPix CropRatio",
+  name: "SammaPix Crop & Ratio",
   description:
     "Free online image crop tool. Crop photos to exact aspect ratios with interactive drag-and-drop positioning.",
   url: `${APP_URL}/tools/croproatio`,
@@ -189,7 +189,7 @@ export default function CropRatioPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "CropRatio",
+                name: "Crop & Ratio",
                 item: `${APP_URL}/tools/croproatio`,
               },
             ],

@@ -263,7 +263,7 @@ export default function GeoSortPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "GeoSort",
+                name: "Sort by Location",
                 item: `${APP_URL}/tools/geosort`,
               },
             ],
@@ -323,7 +323,7 @@ export default function GeoSortPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix GeoSort",
+            name: "SammaPix Sort by Location",
             description:
               "Free tool that reads GPS EXIF data from photos and sorts them by location, creating folders per city or country. Works 100% in-browser, no uploads.",
             url: `${APP_URL}/tools/geosort`,

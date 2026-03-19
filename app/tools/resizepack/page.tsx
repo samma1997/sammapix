@@ -227,7 +227,7 @@ export default function ResizePackPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "ResizePack",
+                name: "Batch Resize",
                 item: `${APP_URL}/tools/resizepack`,
               },
             ],
@@ -287,7 +287,7 @@ export default function ResizePackPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix ResizePack",
+            name: "SammaPix Batch Resize",
             description:
               "Resize multiple images at once to exact pixels, percentage or social media presets (Instagram, Twitter, LinkedIn). Download all as ZIP.",
             url: `${APP_URL}/tools/resizepack`,

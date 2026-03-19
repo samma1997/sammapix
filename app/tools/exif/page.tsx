@@ -114,6 +114,37 @@ export default function ExifPage() {
         accentColor="#EF4444"
       />
 
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "EXIF Viewer",
+                item: `${APP_URL}/tools/exif`,
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* Tool + Next Step suggestions */}
       <ExifClient />
 

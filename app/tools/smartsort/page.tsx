@@ -82,12 +82,22 @@ export default function SmartSortPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "SmartSort",
+    name: "SammaPix AI Photo Sort",
     url: `${APP_URL}/tools/smartsort`,
     description: "AI-powered image categorizer. Sorts photos into folders by content.",
     applicationCategory: "PhotographyApplication",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    operatingSystem: "Any (browser-based)",
+    operatingSystem: "Web Browser",
+    author: {
+      "@type": "Person",
+      name: "Luca Sammarco",
+      url: "https://lucasammarco.com",
+    },
+    creator: {
+      "@type": "Organization",
+      name: "SammaPix",
+      url: `${APP_URL}`,
+    },
   };
 
   const howToSchema = {
@@ -111,6 +121,35 @@ export default function SmartSortPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "AI Photo Sort",
+                item: `${APP_URL}/tools/smartsort`,
+              },
+            ],
+          }),
+        }}
       />
 
       <ToolHeader

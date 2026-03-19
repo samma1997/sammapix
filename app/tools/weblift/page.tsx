@@ -163,6 +163,37 @@ export default function WebLiftPage() {
         </div>
       </section>
 
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "Web Optimize",
+                item: `${APP_URL}/tools/weblift`,
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* Schema.org */}
       <script
         type="application/ld+json"
@@ -170,7 +201,7 @@ export default function WebLiftPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix WebLift",
+            name: "SammaPix Web Optimize",
             url: `${APP_URL}/tools/weblift`,
             description:
               "Combo tool: compress images, convert to WebP, and AI-rename with SEO-friendly filenames in one click.",
@@ -178,6 +209,11 @@ export default function WebLiftPage() {
             operatingSystem: "Web Browser",
             offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
             author: { "@type": "Person", name: "Luca Sammarco", url: "https://lucasammarco.com" },
+            creator: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: `${APP_URL}`,
+            },
             featureList: [
               "Compress at 80% quality",
               "Convert to WebP format",
