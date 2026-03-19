@@ -1,9 +1,25 @@
 "use client";
 
+import React from "react";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import HowToUse from "@/components/tools/HowToUse";
+import {
+  IconCompress,
+  IconWebP,
+  IconAIRename,
+  IconEXIF,
+  IconFilmLab,
+  IconStampIt,
+  IconCropRatio,
+  IconTwinHunt,
+  IconGeoSort,
+  IconTravelMap,
+  IconResizePack,
+  IconCull,
+  IconHEIC,
+} from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
 
@@ -50,6 +66,31 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   workflow:    WorkflowPipeline,
   batchname:   BatchNameClient,
   smartsort:   SmartSortClient,
+};
+
+// ─── Tool icon + accent color map ────────────────────────────────────────────
+
+const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: string }> = {
+  compress:    { Icon: IconCompress,   accent: "#6366F1" },
+  webp:        { Icon: IconWebP,       accent: "#10B981" },
+  "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
+  "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
+  exif:        { Icon: IconEXIF,       accent: "#EF4444" },
+  filmlab:     { Icon: IconFilmLab,    accent: "#F59E0B" },
+  stampit:     { Icon: IconStampIt,    accent: "#06B6D4" },
+  croproatio:  { Icon: IconCropRatio,  accent: "#EC4899" },
+  twinhunt:    { Icon: IconTwinHunt,   accent: "#F97316" },
+  geosort:     { Icon: IconGeoSort,    accent: "#22C55E" },
+  travelmap:   { Icon: IconTravelMap,  accent: "#3B82F6" },
+  resizepack:  { Icon: IconResizePack, accent: "#14B8A6" },
+  cull:        { Icon: IconCull,       accent: "#F43F5E" },
+  heic:        { Icon: IconHEIC,       accent: "#6366F1" },
+  smartsort:   { Icon: IconGeoSort,    accent: "#22C55E" },
+  weblift:     { Icon: IconWebP,       accent: "#3B82F6" },
+  blogdrop:    { Icon: IconCompress,   accent: "#8B5CF6" },
+  transcribe:  { Icon: IconEXIF,       accent: "#0891B2" },
+  batchname:   { Icon: IconResizePack, accent: "#F59E0B" },
+  workflow:    { Icon: IconCompress,    accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -353,6 +394,14 @@ export default function DashboardToolPage() {
       {/* Tool header */}
       <div className="px-4 sm:px-6 pt-8 pb-6">
         <div className="max-w-3xl mx-auto">
+          {TOOL_ICONS[slug] && (
+            <div
+              className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+              style={{ backgroundColor: `${TOOL_ICONS[slug].accent}14` }}
+            >
+              {React.createElement(TOOL_ICONS[slug].Icon, { accent: TOOL_ICONS[slug].accent })}
+            </div>
+          )}
           <h1 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
             {data.label}
           </h1>
