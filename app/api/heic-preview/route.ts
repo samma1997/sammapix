@@ -20,7 +20,6 @@ function isHeicBuffer(buf: Buffer): boolean {
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
-  "http://localhost:3000",
 ];
 
 export const runtime = "nodejs";

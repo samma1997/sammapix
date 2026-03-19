@@ -438,7 +438,9 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
             <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
               JPG, PNG, WebP, GIF, AVIF, HEIC
             </p>
-            <ImportSourceButtons onFilesImported={onDrop} disabled={needsAuthForAi} />
+            <div onClick={(e) => e.stopPropagation()}>
+              <ImportSourceButtons onFilesImported={onDrop} disabled={needsAuthForAi} />
+            </div>
             <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-2">
               Free: {COMBO_FILES_FREE} files per batch &middot; Pro: {COMBO_FILES_PRO}
               {dailyUsage !== null && (

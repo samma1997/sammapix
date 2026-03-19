@@ -33,23 +33,20 @@ export async function GET() {
 
   const remaining = Math.max(0, limit - used);
 
-  return NextResponse.json({ used, remaining, limit, redis: redisConfigured });
+  return NextResponse.json({ used, remaining, limit });
 }
 
-// POST to manually sync the count (called by client after each rename)
+// POST to increment the in-memory counter (called by client after each rename)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  try {
-    const body = await req.json() as { used?: number };
-    if (typeof body.used === "number" && body.used >= 0) {
-      const key = `ai_rename:${session.user.email}:${todayStr()}`;
-      memoryUsage.set(key, body.used);
-    }
-  } catch { /* ignore */ }
+  // Only allow incrementing — never let the client set an arbitrary value
+  const key = `ai_rename:${session.user.email}:${todayStr()}`;
+  const current = memoryUsage.get(key) ?? 0;
+  memoryUsage.set(key, current + 1);
 
   return NextResponse.json({ ok: true });
 }

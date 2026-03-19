@@ -12,9 +12,10 @@ import {
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
-  // Protect cron endpoint
+  // Protect cron endpoint — reject when secret is not configured
+  const cronSecret = process.env.CRON_SECRET;
   const authHeader = request.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized", code: "UNAUTHORIZED" }, { status: 401 });
   }
 

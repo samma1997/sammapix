@@ -11,7 +11,6 @@ const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
   "https://staging-sammapix.vercel.app",
-  "http://localhost:3000",
 ];
 
 // Gift plans: monthly ($7 for 1 month) or annual ($60 for 12 months)
@@ -76,7 +75,7 @@ export async function POST(req: NextRequest) {
   const { months, amountCents } = giftPlan;
 
   const giftCode = generateGiftCode(12);
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").trim();
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://sammapix.com").trim();
 
   try {
     const checkoutSession = await stripe.checkout.sessions.create({

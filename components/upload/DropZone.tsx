@@ -114,6 +114,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
             <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
               PNG, JPG, WebP, GIF- up to {Math.round(maxFileSize / (1024 * 1024))}MB each
             </p>
+            <div onClick={(e) => e.stopPropagation()}>
             <ImportSourceButtons
               onFilesImported={(files) => {
                 const valid = files.filter(isValidImageFile);
@@ -124,6 +125,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
               }}
               disabled={!canAddMore}
             />
+            </div>
           </>
         )}
       </div>

@@ -8,7 +8,6 @@ const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
   "https://staging-sammapix.vercel.app",
-  "http://localhost:3000",
 ];
 
 export async function POST(req: NextRequest) {
@@ -44,7 +43,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
 
   try {
     const checkoutSession = await stripe.checkout.sessions.create({
