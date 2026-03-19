@@ -160,6 +160,7 @@ interface DashToolEntry {
   Icon: React.FC<{ accent: string }>;
   badge: string;
   isCombo?: boolean;
+  isAi?: boolean;
   category: DashCategory;
 }
 
@@ -172,10 +173,10 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "CropRatio", slug: "croproatio", accent: "#EC4899", Icon: IconCropRatio, badge: "Free", category: "Optimize" },
 
   // AI
-  { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", category: "AI" },
-  { name: "AI Alt Text", slug: "alt-text", accent: "#8B5CF6", Icon: IconAltText, badge: "Login", category: "AI" },
-  { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", category: "AI" },
-  { name: "SmartSort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", category: "AI" },
+  { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", isAi: true, category: "AI" },
+  { name: "AI Alt Text", slug: "alt-text", accent: "#8B5CF6", Icon: IconAltText, badge: "Login", isAi: true, category: "AI" },
+  { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", isAi: true, category: "AI" },
+  { name: "SmartSort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", isAi: true, category: "AI" },
 
   // Multi-step
   { name: "WebLift", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "Multi-step", isCombo: true },
@@ -432,8 +433,11 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 <Link
                   key={tool.slug}
                   href={`/dashboard/tools/${tool.slug}`}
-                  className="group flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
+                  className="group relative flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
                 >
+                  {tool.isAi && (
+                    <span className="absolute top-2 right-2 text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
+                  )}
                   <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
                     style={{ backgroundColor: `${tool.accent}14` }}
@@ -465,8 +469,11 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 <Link
                   key={tool.slug}
                   href={`/dashboard/tools/${tool.slug}`}
-                  className="group flex flex-col items-center gap-2 p-3 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150 opacity-50 hover:opacity-100"
+                  className="group relative flex flex-col items-center gap-2 p-3 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150 opacity-50 hover:opacity-100"
                 >
+                  {tool.isAi && (
+                    <span className="absolute top-1.5 right-1.5 text-[7px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1 py-0.5 rounded">AI</span>
+                  )}
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
                     style={{ backgroundColor: `${tool.accent}14` }}
@@ -496,8 +503,11 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                     <Link
                       key={tool.slug}
                       href={`/dashboard/tools/${tool.slug}`}
-                      className="group flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
+                      className="group relative flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
                     >
+                      {tool.isAi && (
+                        <span className="absolute top-2 right-2 text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
+                      )}
                       <div
                         className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
                         style={{ backgroundColor: `${tool.accent}14` }}
