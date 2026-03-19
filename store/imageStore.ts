@@ -316,13 +316,21 @@ export const useImageStore = create<ImageStoreState>()(
           get().setAiRenameUsedToday(get().aiRenameUsedToday + 1);
         }
 
-        // Persist to localStorage- resolve email from NextAuth client session
+        // Persist to localStorage + sync to server
         try {
           const { getSession } = await import("next-auth/react");
           const clientSession = await getSession();
+          const usedNow = get().aiRenameUsedToday;
           if (clientSession?.user?.email) {
-            setUsedToday(clientSession.user.email, get().aiRenameUsedToday);
+            setUsedToday(clientSession.user.email, usedNow);
           }
+          // Sync to server in-memory store (fire-and-forget)
+          fetch("/api/ai/usage", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ used: usedNow }),
+          }).catch(() => {});
         } catch {
           // Ignore- localStorage sync is best-effort; server enforces the real limit
         }
