@@ -86,7 +86,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
   { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio"] },
-  { label: "AI-Powered", slugs: ["ai-rename", "alt-text", "transcribe", "weblift", "blogdrop", "smartsort"] },
+  { label: "AI Tools", slugs: ["ai-rename", "alt-text", "transcribe", "weblift", "blogdrop", "smartsort"] },
   { label: "Creative", slugs: ["filmlab", "stampit"] },
   { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
