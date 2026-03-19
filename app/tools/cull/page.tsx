@@ -244,7 +244,7 @@ export default function CullPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "Cull",
+                name: "Photo Cull",
                 item: `${APP_URL}/tools/cull`,
               },
             ],
@@ -304,7 +304,7 @@ export default function CullPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix Cull",
+            name: "SammaPix Photo Cull",
             description:
               "Fast photo culling tool with keyboard shortcuts. Press K to keep, X to reject photos at up to 10x speed. Batch download kept photos as ZIP.",
             url: `${APP_URL}/tools/cull`,

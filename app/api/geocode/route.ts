@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
   // Note: same-origin fetch() does NOT send an Origin header, so we allow missing origin
   if (process.env.NODE_ENV === "production") {
     const origin = req.headers.get("origin");
-    if (origin && !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+    if (origin && !ALLOWED_ORIGINS.some((o) => origin === o)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
   }

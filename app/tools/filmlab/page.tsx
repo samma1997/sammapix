@@ -253,7 +253,7 @@ export default function FilmLabPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "FilmLab",
+                name: "Film Filters",
                 item: `${APP_URL}/tools/filmlab`,
               },
             ],
@@ -313,7 +313,7 @@ export default function FilmLabPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix FilmLab",
+            name: "SammaPix Film Filters",
             description:
               "Apply analog film looks to photos with 14 presets including Kodak Gold, Fuji Pro 400H, Ilford HP5 and 8 Samma signature presets. Grain, vignette, fade and color grading.",
             url: `${APP_URL}/tools/filmlab`,

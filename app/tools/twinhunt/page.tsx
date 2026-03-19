@@ -268,7 +268,7 @@ export default function TwinHuntPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "TwinHunt",
+                name: "Find Duplicates",
                 item: `${APP_URL}/tools/twinhunt`,
               },
             ],
@@ -328,7 +328,7 @@ export default function TwinHuntPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "SammaPix TwinHunt",
+            name: "SammaPix Find Duplicates",
             description:
               "Find visually similar and duplicate photos using perceptual hashing technology. Works entirely in-browser with no file uploads.",
             url: `${APP_URL}/tools/twinhunt`,

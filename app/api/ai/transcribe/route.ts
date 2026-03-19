@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
       "https://sammapix.com",
       "https://www.sammapix.com",
     ];
-    if (origin && !allowedOrigins.some((o) => origin.startsWith(o))) {
+    if (origin && !allowedOrigins.some((o) => origin === o)) {
       return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
     }
   }

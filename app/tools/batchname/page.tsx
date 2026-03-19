@@ -55,8 +55,8 @@ const proTip = {
 const relatedTools = [
   { name: "AI Rename", href: "/tools/ai-rename" },
   { name: "Compress", href: "/tools/compress" },
-  { name: "EXIF Lens", href: "/tools/exif" },
-  { name: "SmartSort", href: "/tools/smartsort" },
+  { name: "EXIF Viewer", href: "/tools/exif" },
+  { name: "AI Photo Sort", href: "/tools/smartsort" },
 ];
 
 const faqItems = [
@@ -82,12 +82,22 @@ export default function BatchNamePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "BatchName",
+    name: "SammaPix Batch Rename",
     url: `${APP_URL}/tools/batchname`,
     description: "Rename files with custom patterns. Auto-increment, dates, original names.",
     applicationCategory: "UtilitiesApplication",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    operatingSystem: "Any (browser-based)",
+    operatingSystem: "Web Browser",
+    author: {
+      "@type": "Person",
+      name: "Luca Sammarco",
+      url: "https://lucasammarco.com",
+    },
+    creator: {
+      "@type": "Organization",
+      name: "SammaPix",
+      url: `${APP_URL}`,
+    },
   };
 
   const howToSchema = {
@@ -111,6 +121,35 @@ export default function BatchNamePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Tools",
+                item: `${APP_URL}/tools`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "Batch Rename",
+                item: `${APP_URL}/tools/batchname`,
+              },
+            ],
+          }),
+        }}
       />
 
       <ToolHeader

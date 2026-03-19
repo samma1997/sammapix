@@ -20,7 +20,7 @@ const FOUNDING_MAX = 200;
 export async function POST(req: NextRequest) {
   if (process.env.NODE_ENV === "production") {
     const origin = req.headers.get("origin");
-    if (origin && !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+    if (origin && !ALLOWED_ORIGINS.some((o) => origin === o)) {
       return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
     }
   }

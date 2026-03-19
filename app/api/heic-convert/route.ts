@@ -1,9 +1,50 @@
 import { NextRequest } from "next/server";
+import { incrWithTTL } from "@/lib/redis";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const convert = require("heic-convert");
 
 // 50 MB hard limit- generous for batch use
 const MAX_SIZE = 50 * 1024 * 1024;
+
+// ---------------------------------------------------------------------------
+// Per-IP rate limiting: 15 requests per 60-second window
+// Primary store: Redis (Upstash). Fallback: in-process Map for when Redis is
+// unavailable (e.g. env vars not set). The Map is NOT shared across serverless
+// instances but is reliable enough as a best-effort safety net.
+// ---------------------------------------------------------------------------
+const RATE_LIMIT = 15;
+const RATE_WINDOW_SECONDS = 60;
+
+interface MemEntry { count: number; resetAt: number }
+const memStore = new Map<string, MemEntry>();
+
+// Purge stale entries once per minute to prevent unbounded Map growth.
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, entry] of memStore) {
+    if (entry.resetAt <= now) memStore.delete(key);
+  }
+}, 60_000).unref();
+
+async function isRateLimited(ip: string): Promise<boolean> {
+  const key = `rl:heic-convert:${ip}`;
+
+  // Try Redis first
+  const count = await incrWithTTL(key, RATE_WINDOW_SECONDS);
+  if (count !== null) {
+    return count > RATE_LIMIT;
+  }
+
+  // Fallback: in-memory Map
+  const now = Date.now();
+  const entry = memStore.get(key);
+  if (!entry || entry.resetAt <= now) {
+    memStore.set(key, { count: 1, resetAt: now + RATE_WINDOW_SECONDS * 1000 });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT;
+}
 
 // HEIC/HEIF magic bytes: ftyp box at offset 4 with brand starting with known brands
 const HEIC_BRANDS = ["heic", "heix", "hevc", "hevx", "mif1", "msf1"];
@@ -29,9 +70,19 @@ export async function POST(req: NextRequest) {
   // CSRF: reject cross-origin requests in production
   if (process.env.NODE_ENV === "production") {
     const origin = req.headers.get("origin");
-    if (origin && !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+    if (origin && !ALLOWED_ORIGINS.some((o) => origin === o)) {
       return Response.json({ error: "Forbidden" }, { status: 403 });
     }
+  }
+
+  // Rate limiting: 15 requests per minute per IP — checked before any file I/O
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+  if (await isRateLimited(ip)) {
+    return Response.json(
+      { error: "Too many requests. Please wait a moment and try again." },
+      { status: 429 }
+    );
   }
 
   try {
