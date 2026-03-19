@@ -1,0 +1,351 @@
+================================================================================
+                    SAMMAPIX EMAIL STRATEGY — QUICK REFERENCE
+                              One-Page Cheat Sheet
+================================================================================
+
+THE 4 EMAIL FLOWS YOU NEED:
+├─ ONBOARDING (Days 0-30)      → Activate signup
+├─ NURTURING (Days 35+)         → Keep engaged, nudge to Pro
+├─ WEEKLY NEWSLETTER (Tuesdays) → Regular touchpoint
+└─ RE-ENGAGEMENT (If inactive)  → Win back users
+
+================================================================================
+
+EMAIL VOLUME PER USER PER MONTH:
+├─ Free user: ~6-8 emails
+├─ Pro user: ~6-8 emails
+└─ Inactive user: ~1-2 emails (re-engagement only)
+
+MAX FREQUENCY: Never exceed 8 emails/month (stays under spam threshold)
+
+================================================================================
+
+THE 6 SEGMENTS (Auto-updated daily):
+├─ free_trial (Days 0-30)
+├─ free_active (logged in <7 days)
+├─ free_inactive (no login 7-60 days)
+├─ pro_active (Pro subscriber, active)
+├─ pro_churned (Pro ended <14 days ago)
+└─ dormant (no login 60+ days)
+
+PERSONALIZATIONS PER SEGMENT:
+├─ Photographers: Feature Upscaler, Watermark, Batch tools
+├─ Developers: Batch API, Automation, Integration focus
+└─ Casual users: Simple one-click tools, easy wins
+
+================================================================================
+
+PHASE-BY-PHASE TIMELINE:
+
+Week 1:     Transactional emails (2-3 dev hours)
+            → Payment success, payment failed, upgrade, downgrade, cancel
+            → GO-LIVE: End of week
+
+Week 2-3:   Segmentation (1-2 dev hours)
+            → Add segment, industry_tag, last_login fields
+            → Daily cron job updates segments
+            → GO-LIVE: Day 14
+
+Week 4-5:   Weekly newsletter (2-3 dev hours)
+            → 4-section template, admin form, cron job
+            → First send: Tuesday of Week 5
+            → Ongoing: 20 min/week from founder
+
+Week 6-8:   Nurturing sequence (2-3 dev hours)
+            → 6 emails, biweekly, days 35-105
+            → GO-LIVE: When first user hits Day 35
+
+Week 9-10:  Announcements + Milestones (1.5 dev hours)
+            → Feature announcement template (manual trigger)
+            → Milestone emails (100, 1000 images, 365 days, first Pro)
+
+Week 11+:   Optimization (ongoing)
+            → A/B test subject lines
+            → Monthly performance review
+            → ~1-2 hours/month
+
+TOTAL: 40-50 dev hours over 11 weeks = 4-5 hours/week
+
+================================================================================
+
+ONBOARDING DRIP (Days 0-30) — REVIEW & ENHANCE:
+
+Day 0:   Welcome              → "Welcome to SammaPix! 🎉"
+Day 2:   Tutorial             → "3 tools saving hours this week"
+Day 4:   Social Proof         → "1,400+ creators optimize daily"
+Day 7:   FOMO                 → "60% off founding price expires"
+Day 14:  Value Add            → "What you're missing with free"
+Day 21:  Objection            → "Is SammaPix worth it? (Numbers)"
+Day 30:  Last Call            → "24 hours left: Lock in $4/mo"
+
+Open rate target: >25%
+Conversion target: >1% → Pro
+
+================================================================================
+
+NURTURING SEQUENCE (Days 35+ Biweekly) — BUILD NEW:
+
+Email 1 (Day 35):  Feature Spotlight          "Did you know...?"
+Email 2 (Day 49):  Case Study                 "Here's how [user]..."
+Email 3 (Day 63):  Advanced Workflow          "Pro users save 10 hours..."
+Email 4 (Day 77):  Industry Trend             "Why [industry] uses..."
+Email 5 (Day 91):  Pain Point                 "Tired of [problem]?"
+Email 6 (Day 105): Testimonial Montage        "3 users went Pro..."
+
+Then cycle repeats every 6 weeks.
+
+Open rate target: >18%
+Conversion target: >2-5% → Pro
+
+Exit conditions:
+  - User upgrades → Stop nurturing
+  - User inactive 30 days → Switch to re-engagement
+  - User unsubscribed → Don't send
+
+================================================================================
+
+WEEKLY NEWSLETTER (Every Tuesday 11 AM UTC) — BUILD NEW:
+
+Structure: 4 sections
+├─ QUICK WIN (2 min): "Do this in 2 minutes" + ROI
+├─ FEATURE DEEP DIVE (4 min): One tool, story, ROI
+├─ WHAT'S NEW (2 min): Updates, trends, announcements
+└─ FOOTER: "Reply with your challenge", referral link, unsubscribe
+
+Time to create: 20 minutes/week (Tuesday morning)
+
+Pro users get: Same 4 sections + bonus Pro-exclusive section
+
+Open rate target: >20%
+Click rate target: >3-5%
+
+12-week content calendar pre-planned (see SAMMAPIX_EMAIL_STRATEGY.md Part 2)
+
+================================================================================
+
+RE-ENGAGEMENT FLOW (If no login for 30+ days) — BUILD NEW:
+
+Email 1 (Day 30):   "We miss you"                  (soft touch)
+Email 2 (Day 37):   "New tools since you left"    (education)
+Email 3 (Day 44):   "Free Pro for 7 days"         (offer)
+Email 4 (Day 58):   "Account cleanup warning"     (final notice)
+
+Exit conditions:
+  - User logs in → Back to regular segment
+  - User upgrades → Back to Pro Active
+  - Still inactive after Day 58 → Move to Dormant
+
+Open rate target: >15%
+Conversion target: >10% (return to activity)
+
+================================================================================
+
+TRANSACTIONAL EMAILS (Real-time triggers) — BUILD IMMEDIATELY:
+
+1. Signup Confirmation       → "Confirm your email"
+2. Payment Success           → "Receipt + Pro unlock"
+3. Payment Failed            → "Error + retry link"
+4. Subscription Upgraded     → "Welcome to Pro!"
+5. Subscription Downgraded   → "Downgrade confirmation"
+6. Subscription Canceled     → "Feedback survey + recovery window"
+7. Account Deletion          → "Data is deleted"
+
+Delivery: Must be <1 minute after trigger
+Critical: These build trust. Don't deprioritize.
+
+================================================================================
+
+FEATURE ANNOUNCEMENTS (As needed) — BUILD LATER:
+
+When: New tool launches (founder triggers manually)
+To: All users
+Pro special: 48-hour early access
+
+Template: Demo + use case + ROI + feedback link
+
+Open rate target: >25% (high-value news)
+
+================================================================================
+
+MILESTONE CELEBRATIONS (Automated) — BUILD LATER:
+
+Triggered when users hit:
+├─ 100 images processed    → "100 images! 🎯"
+├─ 1,000 images processed  → "1K images = 20 hours saved"
+├─ 365 days active         → "1 year with SammaPix 🎉"
+└─ First Pro payment       → "Thanks for upgrading! 🚀"
+
+Avoid spam: No 2 milestone emails within 7 days
+
+Open rate target: >30% (celebration, high engagement)
+
+================================================================================
+
+DATABASE CHANGES NEEDED:
+
+ALTER TABLE "user" ADD:
+├─ segment                  (free_trial, free_active, etc.)
+├─ industry_tag            (photographer, developer, etc.)
+├─ email_unsubscribed      (boolean)
+├─ email_bounce_count      (int)
+├─ last_login              (timestamp)
+├─ email_segment_updated_at (timestamp)
+├─ nurturing_email_index   (0-5, tracks which nurturing email)
+├─ reengagement_email_index (0-3, tracks re-engagement)
+├─ milestone_100_sent_at   (timestamp)
+├─ milestone_1000_sent_at  (timestamp)
+├─ milestone_365_days_sent_at (timestamp)
+└─ milestone_first_pro_sent_at (timestamp)
+
+CREATE TABLE Newsletter:
+├─ id, week, subject
+├─ quickWinTitle, quickWinContent
+├─ featureTitle, featureContent
+├─ whatsNewTitle, whatsNewContent
+├─ sentAt, sentCount
+└─ openCount, clickCount, unsubscribeCount
+
+CREATE TABLE EmailEvent:
+├─ id, userId, emailType, event (sent/opened/clicked/bounced)
+├─ timestamp
+└─ resendEventId (for webhooks)
+
+================================================================================
+
+COST PROJECTION:
+
+Users    Monthly Emails    Resend Cost    Cost per Email
+──────────────────────────────────────────────────────
+100      ~300              FREE           $0
+500      ~1,500            FREE           $0
+1,000    ~3,000            $20 (Starter)  $0.0004
+5,000    ~15,000           $20 (Starter)  $0.0004
+10,000   ~30,000           $100 (Pro)     $0.0002
+
+Break-even: ~3,000 emails/month (moves from free to paid)
+NOT UNTIL: You hit ~5,000 free users (~15,000 emails/month)
+
+Strategy is free for 18-24 months (until user base grows significantly)
+
+================================================================================
+
+SUBJECT LINE FORMULAS (Highest Open Rates):
+
+CURIOSITY (20-28% open rate):
+├─ "Did you know [platform] can [action]?"
+├─ "[Number] [users] are [action] right now"
+└─ "The one thing about [topic] nobody mentions"
+
+URGENCY (18-24% open rate):
+├─ "[Time] left: [offer]"
+├─ "[Action] ends [date]"
+└─ "Last chance for [benefit]"
+
+BENEFIT (16-20% open rate):
+├─ "Save [time/money] with [tool]"
+├─ "Get [benefit] in [time]"
+└─ "[Achievement] = [real benefit]"
+
+PERSONAL (15-20% open rate):
+├─ "Hey [name], you [achievement]"
+├─ "Here's what [user type] know"
+└─ "[Problem] is ruining [outcome]"
+
+BEST EMOJIS:
+├─ 🎯 (Achievement)
+├─ 🚀 (Launch/upgrade)
+├─ 🎉 (Celebration)
+├─ ✨ (New/premium)
+└─ 💡 (Insight)
+
+================================================================================
+
+CRITICAL SUCCESS METRICS:
+
+Track Weekly:
+├─ Open rate (target: >20%)
+├─ Click rate (target: >3-5%)
+└─ Unsubscribe rate (target: <0.5%)
+
+Track Monthly:
+├─ Free→Pro conversion rate (target: >1% per email)
+├─ Re-engagement rate (target: >10% return)
+├─ Newsletter feedback/replies (target: >5%)
+└─ Bounce rate (target: <1%)
+
+Track Quarterly:
+├─ Email-driven revenue
+├─ Cost per new Pro subscription via email
+├─ Lifetime value improvement from email
+└─ Churn reduction (Pro users staying longer)
+
+If open rate drops: Fix subject lines, change send time, check spam folder
+If clicks drop: CTAs too weak, make 1-click upgrade
+If unsubscribes up: Too many emails, reduce frequency
+
+================================================================================
+
+WHAT TO TELL YOUR DEVELOPER:
+
+"We need email marketing that drives conversions without burning me out.
+
+Phase 1 (this week):
+├─ Build 5 transactional emails
+├─ Hook up Stripe webhooks
+└─ Payment success/failed/upgrade/cancel all automated
+
+You'll have free rein on implementation, but here's the spec:
+├─ Use React Email (templates match existing design)
+├─ Deploy via Resend API
+└─ Database updates for segmentation tracking
+
+Reference documents:
+├─ EMAIL_IMPLEMENTATION_CHECKLIST.md (task list)
+├─ EMAIL_DATABASE_SCHEMA.md (schema changes)
+└─ EMAIL_SUBJECT_LINES_COPY_BANK.md (copy examples)
+
+Questions? Ask them. This strategy is flexible.
+Goal: Ship Phase 1 by end of week."
+
+================================================================================
+
+YOUR ONLY COMMITMENT:
+
+20 minutes/week writing the newsletter:
+└─ Every Tuesday morning, fill in 4 sections
+   ├─ Quick Win (1 actionable tip)
+   ├─ Feature Deep Dive (1 tool, why it matters)
+   ├─ What's New (updates, trends, announcements)
+   └─ Footer (reminder to reply with challenges)
+
+Total time: 15-20 minutes/week
+That's it. Everything else is automated.
+
+================================================================================
+
+EXPECTED OUTCOME (6 Months):
+
+With this strategy, you'll see:
+├─ Free→Pro conversion rate: 1-2% → 3-5% per month
+├─ Email-driven revenue: $0 → $500-2,000/month
+├─ Inactive user recovery: 0% → 10-15%
+├─ Newsletter open rate: Unknown → >20%
+├─ User lifetime value: ↑$20-50 per user
+└─ Monthly email cost: $0-20 (extremely cheap)
+
+Payback period: ~8 months
+Year 1 total email revenue: ~$5,000-10,000 (from one channel!)
+Year 2+ return: $20,000-50,000/year+ (if you keep growing users)
+
+Most cost-effective marketing channel you'll have.
+
+================================================================================
+
+PRINTABLE VERSION:
+Save this file. Reference it weekly. Share with team.
+
+START DATE: 2026-03-19
+STATUS: Ready to implement
+NEXT STEP: Phase 1 this week (transactional emails)
+
+================================================================================

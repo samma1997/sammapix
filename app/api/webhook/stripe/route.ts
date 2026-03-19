@@ -4,6 +4,11 @@ import Stripe from "stripe";
 import { sendMetaEvent } from "@/lib/meta-conversions";
 import { addCredits } from "@/lib/credits";
 import { saveGiftCode, markPaid } from "@/lib/gift-codes";
+import {
+  sendProUpgradeEmail,
+  sendProCancelEmail,
+  sendPaymentFailedEmail,
+} from "@/lib/email-service";
 
 export const runtime = "nodejs";
 
@@ -147,6 +152,16 @@ export async function POST(req: NextRequest) {
         console.log("[stripe/webhook] ✅ New Pro subscription for:", session.customer_email);
         // Plan is detected via Stripe API at next login- no DB needed.
 
+        // Send Pro upgrade email
+        if (session.customer_email) {
+          sendProUpgradeEmail(
+            session.customer_email,
+            session.customer_details?.name ?? null
+          ).catch((err) =>
+            console.error("[stripe/webhook] Failed to send Pro upgrade email:", err)
+          );
+        }
+
         // Fire Meta Conversions API - Subscribe event
         const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
         sendMetaEvent({
@@ -158,11 +173,57 @@ export async function POST(req: NextRequest) {
       }
       break;
     }
-    case "customer.subscription.deleted":
+    case "customer.subscription.deleted": {
+      const sub = event.data.object as Stripe.Subscription;
+      console.log("[stripe/webhook] Subscription cancelled:", sub.id);
+
+      // Send Pro cancellation email
+      const cancelCustomerId =
+        typeof sub.customer === "string" ? sub.customer : sub.customer.id;
+      try {
+        const cancelCustomer = await stripe.customers.retrieve(cancelCustomerId);
+        if (!cancelCustomer.deleted && cancelCustomer.email) {
+          sendProCancelEmail(
+            cancelCustomer.email,
+            cancelCustomer.name ?? null
+          ).catch((err) =>
+            console.error("[stripe/webhook] Failed to send Pro cancel email:", err)
+          );
+        }
+      } catch (err) {
+        console.error("[stripe/webhook] Failed to fetch customer for cancel email:", err);
+      }
+      break;
+    }
     case "customer.subscription.updated": {
       const sub = event.data.object as Stripe.Subscription;
       console.log("[stripe/webhook] Subscription changed:", sub.id, "status:", sub.status);
       // Plan will be re-checked from Stripe at next login.
+      break;
+    }
+    case "invoice.payment_failed": {
+      const invoice = event.data.object as Stripe.Invoice;
+      console.log("[stripe/webhook] Payment failed for invoice:", invoice.id);
+
+      const failedCustomerId =
+        typeof invoice.customer === "string"
+          ? invoice.customer
+          : invoice.customer?.id;
+      if (failedCustomerId) {
+        try {
+          const failedCustomer = await stripe.customers.retrieve(failedCustomerId);
+          if (!failedCustomer.deleted && failedCustomer.email) {
+            sendPaymentFailedEmail(
+              failedCustomer.email,
+              failedCustomer.name ?? null
+            ).catch((err) =>
+              console.error("[stripe/webhook] Failed to send payment failed email:", err)
+            );
+          }
+        } catch (err) {
+          console.error("[stripe/webhook] Failed to fetch customer for payment failed email:", err);
+        }
+      }
       break;
     }
     default:
