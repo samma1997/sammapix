@@ -95,7 +95,7 @@ export default function GiftSuccessPage() {
             View your gifts
           </Link>
           <Link
-            href="/gift"
+            href="/dashboard/gift"
             className="inline-flex items-center justify-center gap-1.5 rounded-md bg-[#171717] dark:bg-[#E5E5E5] px-4 py-2.5 text-sm font-medium text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
           >
             Gift another

@@ -97,8 +97,8 @@ export async function POST(req: NextRequest) {
         },
       ],
       customer_email: session.user.email,
-      success_url: `${appUrl}/gift/success?gift=success&code=${giftCode}`,
-      cancel_url: `${appUrl}/gift?canceled=true`,
+      success_url: `${appUrl}/dashboard/gift/success?gift=success&code=${giftCode}`,
+      cancel_url: `${appUrl}/dashboard/gift?canceled=true`,
       metadata: {
         type: "gift",
         giftCode,

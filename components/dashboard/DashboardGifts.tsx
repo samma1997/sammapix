@@ -255,7 +255,7 @@ export default function DashboardGifts() {
           </p>
         </div>
         <Link
-          href="/gift"
+          href="/dashboard/gift"
           className="inline-flex items-center gap-1.5 shrink-0 px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors duration-150"
         >
           Gift a subscription
