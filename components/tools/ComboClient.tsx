@@ -329,92 +329,6 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
     <section className="px-4 sm:px-6 py-6">
       <div className="max-w-3xl mx-auto space-y-5">
 
-        {/* Toolbar — horizontal compact bar with toggles */}
-        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] p-4">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-            {/* Toggle switches inline */}
-            <div className="flex items-center gap-4 flex-wrap flex-1">
-              {stepToggles.map((step) => {
-                const isLastEnabled = step.enabled && enabledCount === 1;
-                const isAiRename = step.id === "ai-rename";
-                return (
-                  <div key={step.id} className="flex items-center gap-2">
-                    <label className="flex items-center gap-2 cursor-pointer select-none">
-                      <ToggleSwitch
-                        checked={step.enabled}
-                        onChange={(v) => handleToggleStep(step.id, v)}
-                        disabled={isLastEnabled && step.enabled}
-                      />
-                      <span className={`text-sm ${step.enabled ? "text-gray-600 dark:text-[#A3A3A3]" : "text-[#A3A3A3] dark:text-[#525252]"}`}>
-                        {step.label}
-                      </span>
-                      {step.isAi && (
-                        isAuthenticated ? (
-                          <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
-                            <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
-                            AI
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#A3A3A3] bg-gray-100 dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded">
-                            <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
-                            Login
-                          </span>
-                        )
-                      )}
-                    </label>
-                    {/* Language selector for AI Rename */}
-                    {isAiRename && step.enabled && (
-                      <select
-                        value={locale}
-                        onChange={(e) => setLocale(e.target.value)}
-                        className="text-xs bg-transparent border border-gray-200 dark:border-[#2A2A2A] rounded px-1.5 py-1 text-gray-600 dark:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1]"
-                      >
-                        {AI_RENAME_LANGUAGES.map((lang) => (
-                          <option key={lang.code} value={lang.code}>
-                            {lang.flag} {lang.label}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Process button */}
-            {hasPending && (
-              <button
-                onClick={processAll}
-                disabled={isProcessing || needsAuthForAi}
-                className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isProcessing ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <Play className="h-4 w-4" strokeWidth={1.5} />
-                    Process all
-                  </>
-                )}
-              </button>
-            )}
-
-            {/* Download ZIP after processing */}
-            {hasDone && !hasPending && (
-              <button
-                onClick={downloadAllZip}
-                className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
-              >
-                <Download className="h-4 w-4" strokeWidth={1.5} />
-                Download ZIP ({doneCount})
-              </button>
-            )}
-          </div>
-        </div>
-
         {/* Auth gate message for AI steps */}
         {needsAuthForAi && (
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E] text-center">
@@ -459,6 +373,90 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
             <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-2">
               Free: {COMBO_FILES_FREE} files per batch &middot; Pro: {COMBO_FILES_PRO}
             </p>
+          </div>
+        )}
+
+        {/* Toolbar — horizontal compact bar with toggles (below dropzone) */}
+        {files.length > 0 && (
+          <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] p-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <div className="flex items-center gap-4 flex-wrap flex-1">
+                {stepToggles.map((step) => {
+                  const isLastEnabled = step.enabled && enabledCount === 1;
+                  const isAiRename = step.id === "ai-rename";
+                  return (
+                    <div key={step.id} className="flex items-center gap-2">
+                      <label className="flex items-center gap-2 cursor-pointer select-none">
+                        <ToggleSwitch
+                          checked={step.enabled}
+                          onChange={(v) => handleToggleStep(step.id, v)}
+                          disabled={isLastEnabled && step.enabled}
+                        />
+                        <span className={`text-sm ${step.enabled ? "text-gray-600 dark:text-[#A3A3A3]" : "text-[#A3A3A3] dark:text-[#525252]"}`}>
+                          {step.label}
+                        </span>
+                        {step.isAi && (
+                          isAuthenticated ? (
+                            <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
+                              <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
+                              AI
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#A3A3A3] bg-gray-100 dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded">
+                              <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
+                              Login
+                            </span>
+                          )
+                        )}
+                      </label>
+                      {isAiRename && step.enabled && (
+                        <select
+                          value={locale}
+                          onChange={(e) => setLocale(e.target.value)}
+                          className="text-xs bg-transparent border border-gray-200 dark:border-[#2A2A2A] rounded px-1.5 py-1 text-gray-600 dark:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1]"
+                        >
+                          {AI_RENAME_LANGUAGES.map((lang) => (
+                            <option key={lang.code} value={lang.code}>
+                              {lang.flag} {lang.label}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {hasPending && (
+                <button
+                  onClick={processAll}
+                  disabled={isProcessing || needsAuthForAi}
+                  className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-4 w-4" strokeWidth={1.5} />
+                      Process all
+                    </>
+                  )}
+                </button>
+              )}
+
+              {hasDone && !hasPending && (
+                <button
+                  onClick={downloadAllZip}
+                  className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                >
+                  <Download className="h-4 w-4" strokeWidth={1.5} />
+                  Download ZIP ({doneCount})
+                </button>
+              )}
+            </div>
           </div>
         )}
 
