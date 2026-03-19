@@ -86,7 +86,7 @@ async function convertServerSide(
   return res.blob();
 }
 
-// Client-side conversion: try heic-to (WASM, fast) then heic2any (JS, slower) as fallback
+// Client-side conversion: native browser decoding → heic-to (WASM) → heic2any (JS) fallback chain
 async function convertClientSide(
   file: File,
   format: OutputFormat,
@@ -94,26 +94,40 @@ async function convertClientSide(
 ): Promise<Blob> {
   const toType = format === "WebP" ? "image/webp" : "image/jpeg";
 
-  // Try heic-to first (WASM, much faster)
+  // Strategy 1: Native browser decoding (Safari, modern Chrome)
   try {
-    const { heicTo } = await import("heic-to");
-    const blob = await heicTo({
-      blob: file,
-      type: toType,
-      quality: quality / 100,
+    const bitmap = await createImageBitmap(file);
+    const canvas = document.createElement("canvas");
+    canvas.width = bitmap.width;
+    canvas.height = bitmap.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Canvas unavailable");
+    ctx.drawImage(bitmap, 0, 0);
+    bitmap.close();
+
+    const blob = await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob(
+        (b) => (b ? resolve(b) : reject(new Error("toBlob failed"))),
+        toType,
+        quality / 100
+      );
     });
     return blob;
   } catch (e) {
-    console.warn("[HEIC] heic-to failed, falling back to heic2any:", e);
+    console.warn("[HEIC] Native decode failed, trying heic-to:", e);
   }
 
-  // Fallback: heic2any (JS-based, slower but more compatible)
+  // Strategy 2: heic-to (WASM, fast)
+  try {
+    const { heicTo } = await import("heic-to");
+    return await heicTo({ blob: file, type: toType, quality: quality / 100 });
+  } catch (e) {
+    console.warn("[HEIC] heic-to failed, trying heic2any:", e);
+  }
+
+  // Strategy 3: heic2any (JS, slowest)
   const heic2any = (await import("heic2any")).default;
-  const result = await heic2any({
-    blob: file,
-    toType,
-    quality: quality / 100,
-  });
+  const result = await heic2any({ blob: file, toType, quality: quality / 100 });
   return Array.isArray(result) ? result[0] : result;
 }
 
@@ -449,7 +463,7 @@ export default function HeicConverter() {
       try {
         // Show different message for large files
         if (f.original.size > SERVER_MAX_SIZE) {
-          setProgressMessage(`Converting ${f.original.name} (${i + 1}/${updated.length}) — large file, may take up to 60s...`);
+          setProgressMessage(`Converting ${f.original.name} (${i + 1}/${updated.length}) — Converting... browser is decoding HEIC`);
         }
         const blob = await convertFile(f.original, outputFormat, quality);
         updated[i] = {
