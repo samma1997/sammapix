@@ -220,7 +220,7 @@ export default function DashboardSidebar({
 
       {/* Scrollable nav */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-        {/* Top section: Home */}
+        {/* Top section: Home + Multi-step */}
         <Link
           href="/dashboard"
           onClick={() => setMobileOpen(false)}
@@ -229,6 +229,27 @@ export default function DashboardSidebar({
           <LayoutDashboard className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           Home
         </Link>
+
+        <div className="pt-3">
+          <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
+            Multi-step
+          </p>
+          {(["weblift", "blogdrop"] as const).map((slug) => {
+            const tool = getToolBySlug(slug);
+            if (!tool) return null;
+            return (
+              <Link
+                key={tool.slug}
+                href={tool.href}
+                onClick={() => setMobileOpen(false)}
+                className={linkClasses(tool.href)}
+              >
+                <span className="shrink-0">{tool.icon}</span>
+                {tool.name}
+              </Link>
+            );
+          })}
+        </div>
 
         {/* For You section (persona-based) */}
         {forYouTools.length > 0 && (
@@ -314,7 +335,7 @@ export default function DashboardSidebar({
       </div>
 
       {/* User profile section with hover menu */}
-      <div ref={profileRef} className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] relative pb-[env(safe-area-inset-bottom,0px)]">
+      <div ref={profileRef} className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] relative pb-[max(env(safe-area-inset-bottom,0px),16px)] md:pb-0">
         <button
           onClick={() => setProfileMenuOpen((v) => !v)}
           className="w-full px-3 py-3 flex items-center gap-2.5 hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors duration-150"
