@@ -33,6 +33,109 @@ import {
   IconHEIC,
 } from "@/components/ui/ToolCard";
 
+// ─── Animated Workflow Preset Icons (dashboard-sized) ─────────────────────────
+
+const IconDhBlogPreset = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-wf-blog-line { 0%, 100% { opacity: 0.4; transform: scaleX(0.7); } 50% { opacity: 1; transform: scaleX(1); } }
+      .dh-wf-bl1 { transform-origin: 14px 10px; animation: dh-wf-blog-line 2.2s ease-in-out 0s infinite; }
+      .dh-wf-bl2 { transform-origin: 14px 13px; animation: dh-wf-blog-line 2.2s ease-in-out 0.3s infinite; }
+      .dh-wf-bl3 { transform-origin: 14px 16px; animation: dh-wf-blog-line 2.2s ease-in-out 0.6s infinite; }
+    `}</style>
+    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <path d="M7 7h2v4H7z" fill="currentColor" opacity="0.3" rx="0.5"/>
+    <g className="dh-wf-bl1"><line x1="11" y1="10" x2="17" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+    <g className="dh-wf-bl2"><line x1="11" y1="13" x2="17" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+    <g className="dh-wf-bl3"><line x1="7" y1="16" x2="17" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+  </svg>
+);
+
+const IconDhInstagramPreset = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-wf-ig-pulse { 0%, 100% { r: 3.5; opacity: 0.6; } 50% { r: 4.2; opacity: 1; } }
+      @keyframes dh-wf-ig-dot { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+      .dh-wf-ig-lens { animation: dh-wf-ig-pulse 2s ease-in-out infinite; }
+      .dh-wf-ig-dot { animation: dh-wf-ig-dot 2s ease-in-out infinite; }
+    `}</style>
+    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <circle className="dh-wf-ig-lens" cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <circle className="dh-wf-ig-dot" cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+  </svg>
+);
+
+const IconDhEcommercePreset = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-wf-ec-tag { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
+      @keyframes dh-wf-ec-sparkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1); } }
+      .dh-wf-ec-bag { transform-origin: 12px 14px; animation: dh-wf-ec-tag 2.4s ease-in-out infinite; }
+      .dh-wf-ec-sparkle { transform-origin: 19px 5px; animation: dh-wf-ec-sparkle 2.4s ease-in-out infinite; }
+    `}</style>
+    <g className="dh-wf-ec-bag">
+      <path d="M6 7h12l-1.5 12H7.5L6 7z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
+      <path d="M9 7V5a3 3 0 016 0v2" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    </g>
+    <g className="dh-wf-ec-sparkle">
+      <line x1="19" y1="3" x2="19" y2="7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="17" y1="5" x2="21" y2="5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </g>
+  </svg>
+);
+
+const IconDhClientPreset = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-wf-cl-send { 0%, 100% { transform: translateX(0px) translateY(0px); } 50% { transform: translateX(2px) translateY(-2px); } }
+      @keyframes dh-wf-cl-trail { 0%, 100% { opacity: 0.2; transform: scaleX(0.6); } 50% { opacity: 0.6; transform: scaleX(1); } }
+      .dh-wf-cl-pkg { animation: dh-wf-cl-send 2.2s ease-in-out infinite; }
+      .dh-wf-cl-t1 { transform-origin: 6px 17px; animation: dh-wf-cl-trail 2.2s ease-in-out 0.1s infinite; }
+      .dh-wf-cl-t2 { transform-origin: 6px 20px; animation: dh-wf-cl-trail 2.2s ease-in-out 0.3s infinite; }
+    `}</style>
+    <g className="dh-wf-cl-pkg">
+      <rect x="7" y="4" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+      <line x1="7" y1="9" x2="21" y2="9" stroke="currentColor" strokeWidth="1.5"/>
+      <line x1="14" y1="4" x2="14" y2="9" stroke="currentColor" strokeWidth="1.5"/>
+    </g>
+    <g className="dh-wf-cl-t1"><line x1="3" y1="17" x2="10" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+    <g className="dh-wf-cl-t2"><line x1="5" y1="20" x2="12" y2="20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></g>
+  </svg>
+);
+
+// ─── Workflow presets for dashboard cards ─────────────────────────────────────
+
+const WORKFLOW_PRESETS = [
+  {
+    id: "blog",
+    label: "Blog Optimizer",
+    description: "Compress, AI Rename, resize 1200px, WebP",
+    Icon: IconDhBlogPreset,
+    accent: "#8B5CF6",
+  },
+  {
+    id: "instagram",
+    label: "Instagram Ready",
+    description: "Compress and resize to 1080px, ready to post",
+    Icon: IconDhInstagramPreset,
+    accent: "#EC4899",
+  },
+  {
+    id: "ecommerce",
+    label: "E-commerce",
+    description: "AI Rename SKU, multi-size export, WebP",
+    Icon: IconDhEcommercePreset,
+    accent: "#F59E0B",
+  },
+  {
+    id: "client",
+    label: "Client Delivery",
+    description: "Light compress, organize by date, ZIP",
+    Icon: IconDhClientPreset,
+    accent: "#3B82F6",
+  },
+];
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const LS_PERSONA_KEY = "sammapix-persona";
@@ -518,18 +621,49 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
         </>
       )}
 
-      {/* -- AI Workflow -- */}
+      {/* -- AI Workflows -- */}
       <section>
-        <Link
-          href="/dashboard/tools/workflow"
-          className="group flex items-center justify-between p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-white dark:bg-[#191919] hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all"
-        >
-          <div>
-            <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">AI Workflow Pipeline</p>
-            <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Run your full image pipeline in one step with presets.</p>
-          </div>
-          <ArrowRight className="h-4 w-4 text-[#D4D4D4] group-hover:text-[#6366F1] transition-colors" strokeWidth={1.5} />
-        </Link>
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
+            Quick Workflows
+          </p>
+          <Link
+            href="/dashboard/tools/workflow"
+            className="flex items-center gap-1 text-[10px] font-medium text-[#A3A3A3] hover:text-[#6366F1] transition-colors"
+          >
+            View all
+            <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {WORKFLOW_PRESETS.map((preset) => (
+            <Link
+              key={preset.id}
+              href={`/dashboard/tools/workflow?preset=${preset.id}`}
+              className="group flex flex-col gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
+            >
+              <div className="flex items-center justify-between">
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
+                  style={{ backgroundColor: `${preset.accent}14`, color: preset.accent }}
+                >
+                  <preset.Icon />
+                </div>
+                <span className="text-[9px] font-semibold uppercase tracking-widest text-[#737373] bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded border border-[#E5E5E5] dark:border-[#2A2A2A]">
+                  Pro
+                </span>
+              </div>
+              <div>
+                <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug block">
+                  {preset.label}
+                </span>
+                <span className="text-[10px] text-[#737373] dark:text-[#A3A3A3] leading-snug mt-0.5 block">
+                  {preset.description}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* -- Upgrade pitch for free users -- */}
