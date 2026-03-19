@@ -14,24 +14,15 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
 ];
 
-// Gift pricing in cents (USD).
-// Monthly = $7/mo, Annual = $5/mo equivalent ($60/yr).
-const GIFT_PRICES_CENTS: Record<string, number> = {
-  "monthly-1":  700,
-  "monthly-3":  2100,
-  "monthly-6":  4200,
-  "monthly-12": 6000,
-  "annual-12":  6000, // same as 12 months monthly — $60
-};
+// Gift plans: monthly ($7 for 1 month) or annual ($60 for 12 months)
+const GIFT_PLANS = {
+  monthly: { months: 1, amountCents: 700, label: "1 month" },
+  annual: { months: 12, amountCents: 6000, label: "1 year" },
+} as const;
 
 const CreateGiftSchema = z.object({
   plan: z.enum(["monthly", "annual"]),
-  months: z.union([
-    z.literal(1),
-    z.literal(3),
-    z.literal(6),
-    z.literal(12),
-  ]),
+  months: z.number().optional(), // ignored, derived from plan
   recipientName: z.string().min(1).max(100).trim(),
   recipientEmail: z.string().email().optional().or(z.literal("").transform(() => undefined)),
   senderName: z.string().min(1).max(100).trim(),
@@ -79,24 +70,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { plan, months, recipientName, recipientEmail, senderName, message, color } = parsed.data;
+  const { plan, recipientName, recipientEmail, senderName, message, color } = parsed.data;
 
-  // Annual plan only makes sense for 12 months; reject other combinations
-  if (plan === "annual" && months !== 12) {
-    return NextResponse.json(
-      { error: "Annual plan gifts must be 12 months", code: "VALIDATION_ERROR" },
-      { status: 422 }
-    );
-  }
-
-  const priceKey = `${plan}-${months}`;
-  const amountCents = GIFT_PRICES_CENTS[priceKey];
-  if (!amountCents) {
-    return NextResponse.json(
-      { error: "Invalid plan/months combination", code: "VALIDATION_ERROR" },
-      { status: 422 }
-    );
-  }
+  const giftPlan = GIFT_PLANS[plan];
+  const { months, amountCents } = giftPlan;
 
   const giftCode = generateGiftCode(12);
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").trim();

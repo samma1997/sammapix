@@ -7,17 +7,9 @@ import { cn } from "@/lib/utils";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const PLAN = {
-  name: "Pro",
-  monthlyPrice: 7,
-  tagline: "For image enthusiasts",
-};
-
-const DURATIONS = [
-  { months: 1, label: "1 month", price: 7 },
-  { months: 3, label: "3 months", price: 21 },
-  { months: 6, label: "6 months", price: 42 },
-  { months: 12, label: "1 year", price: 60 },
+const PLANS = [
+  { id: "monthly" as const, name: "Pro Monthly", price: 7, period: "/month", months: 1, tagline: "Perfect for a quick gift" },
+  { id: "annual" as const, name: "Pro Annual", price: 60, period: "/year", months: 12, tagline: "Save $24 — best value", savings: "$24" },
 ] as const;
 
 const ACCENT_COLORS = [
@@ -119,7 +111,7 @@ export default function GiftClient() {
   const { data: session } = useSession();
 
   // Form state
-  const [selectedDuration, setSelectedDuration] = useState<number>(3);
+  const [selectedPlanId, setSelectedPlanId] = useState<"monthly" | "annual">("monthly");
   const [accentColor, setAccentColor] = useState<string>(ACCENT_COLORS[0].value);
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>("email");
   const [recipientName, setRecipientName] = useState("");
@@ -136,8 +128,9 @@ export default function GiftClient() {
   }, [session?.user?.name, senderName]);
 
   // Derived values
-  const selectedPlan = DURATIONS.find((d) => d.months === selectedDuration);
-  const totalPrice = selectedPlan?.price ?? 0;
+  const selectedPlan = PLANS.find((p) => p.id === selectedPlanId)!;
+  const totalPrice = selectedPlan.price;
+  const selectedDuration = selectedPlan.months;
 
   const canSubmit = useMemo(() => {
     if (deliveryMethod === "email") {
@@ -155,13 +148,13 @@ export default function GiftClient() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          plan: selectedPlanId,
           months: selectedDuration,
-          accentColor,
-          deliveryMethod,
+          color: accentColor,
           recipientName: recipientName.trim() || undefined,
           recipientEmail: deliveryMethod === "email" ? recipientEmail.trim() : undefined,
           senderName: senderName.trim() || undefined,
-          giftMessage: giftMessage.trim() || undefined,
+          message: giftMessage.trim() || undefined,
         }),
       });
 
@@ -205,57 +198,56 @@ export default function GiftClient() {
           {/* Plan Selection */}
           <section className="mb-8">
             <h2 className="mb-3 text-sm font-medium uppercase tracking-wider text-[#737373] dark:text-[#A3A3A3]">
-              Plan
+              Choose a plan
             </h2>
-            <button
-              type="button"
-              className="w-full rounded-lg border-2 border-[#171717] bg-white p-5 text-left transition dark:border-white dark:bg-[#191919]"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#171717] dark:border-white">
-                    <div className="h-2.5 w-2.5 rounded-full bg-[#171717] dark:bg-white" />
-                  </div>
-                  <div>
-                    <span className="text-base font-semibold text-[#171717] dark:text-white">
-                      {PLAN.name}
-                    </span>
-                    <span className="ml-2 text-sm text-[#737373] dark:text-[#A3A3A3]">
-                      ${PLAN.monthlyPrice}/month
-                    </span>
-                  </div>
-                </div>
-                <span className="text-sm text-[#A3A3A3] dark:text-[#525252]">
-                  {PLAN.tagline}
-                </span>
-              </div>
-            </button>
-          </section>
-
-          {/* Duration Selection */}
-          <section className="mb-8">
-            <h2 className="mb-3 text-sm font-medium uppercase tracking-wider text-[#737373] dark:text-[#A3A3A3]">
-              Duration
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {DURATIONS.map((d) => {
-                const isActive = selectedDuration === d.months;
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {PLANS.map((plan) => {
+                const isActive = selectedPlanId === plan.id;
                 return (
                   <button
-                    key={d.months}
+                    key={plan.id}
                     type="button"
-                    onClick={() => setSelectedDuration(d.months)}
+                    onClick={() => setSelectedPlanId(plan.id)}
                     className={cn(
-                      "rounded-lg border px-5 py-3 text-sm font-medium transition",
+                      "relative rounded-lg border-2 p-5 text-left transition",
                       isActive
-                        ? "border-[#171717] bg-[#171717] text-white dark:border-white dark:bg-white dark:text-[#171717]"
-                        : "border-[#E5E5E5] bg-white text-[#525252] hover:border-[#D4D4D4] hover:bg-[#FAFAFA] dark:border-[#2A2A2A] dark:bg-[#191919] dark:text-[#A3A3A3] dark:hover:border-[#404040] dark:hover:bg-[#262626]"
+                        ? "border-[#171717] bg-white dark:border-white dark:bg-[#191919]"
+                        : "border-[#E5E5E5] bg-white hover:border-[#D4D4D4] dark:border-[#2A2A2A] dark:bg-[#191919] dark:hover:border-[#404040]"
                     )}
                   >
-                    <span>{d.label}</span>
-                    <span className={cn("ml-2", isActive ? "text-white/70 dark:text-[#171717]/60" : "text-[#A3A3A3] dark:text-[#525252]")}>
-                      ${d.price}
-                    </span>
+                    {"savings" in plan && plan.savings && (
+                      <span className="absolute -top-2.5 right-3 rounded-full bg-[#10B981] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                        Save {plan.savings}
+                      </span>
+                    )}
+                    <div className="flex items-center gap-3">
+                      <div className={cn(
+                        "flex h-5 w-5 items-center justify-center rounded-full border-2",
+                        isActive
+                          ? "border-[#171717] dark:border-white"
+                          : "border-[#D4D4D4] dark:border-[#404040]"
+                      )}>
+                        {isActive && (
+                          <div className="h-2.5 w-2.5 rounded-full bg-[#171717] dark:bg-white" />
+                        )}
+                      </div>
+                      <div>
+                        <span className="text-base font-semibold text-[#171717] dark:text-white">
+                          {plan.name}
+                        </span>
+                        <div className="mt-0.5 flex items-baseline gap-1">
+                          <span className="text-lg font-semibold text-[#171717] dark:text-white">
+                            ${plan.price}
+                          </span>
+                          <span className="text-sm text-[#A3A3A3] dark:text-[#525252]">
+                            {plan.period}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-xs text-[#737373] dark:text-[#A3A3A3]">
+                      {plan.tagline}
+                    </p>
                   </button>
                 );
               })}
@@ -270,11 +262,12 @@ export default function GiftClient() {
                 ${totalPrice}.00
               </span>
             </div>
-            {selectedDuration === 12 && (
-              <p className="mt-1 text-right text-xs text-[#10B981]">
-                Save $24 compared to monthly
-              </p>
-            )}
+            <p className="mt-1 text-right text-xs text-[#A3A3A3] dark:text-[#525252]">
+              {selectedPlanId === "annual" ? "12 months of Pro" : "1 month of Pro"}
+              {selectedPlanId === "annual" && (
+                <span className="ml-1 text-[#10B981]"> — save $24 vs monthly</span>
+              )}
+            </p>
           </section>
 
           {/* Personalize */}
