@@ -8,9 +8,9 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "HEIC to JPG Converter Free Online | iPhone Photos | SammaPix",
+  title: "HEIC to JPG Converter Free - Batch iPhone Photos | SammaPix",
   description:
-    "Convert HEIC to JPG & WebP free. Batch convert 100 iPhone photos instantly. Zero signup, browser-based, zero uploads.",
+    "Convert iPhone HEIC photos to JPG or WebP instantly. Batch convert 100+ images, adjustable quality, no signup. Download as ZIP. Free online.",
   keywords: [
     "heic to jpg converter",
     "heic converter",
