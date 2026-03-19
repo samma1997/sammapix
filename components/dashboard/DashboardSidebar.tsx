@@ -24,6 +24,7 @@ import {
   Crown,
   Menu,
   X,
+  Gift,
   Coins,
   FileText,
   Film,
@@ -306,6 +307,16 @@ export default function DashboardSidebar({
         >
           <Coins className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           Credits
+        </Link>
+
+        {/* Gifts */}
+        <Link
+          href="/dashboard/gifts"
+          onClick={() => setMobileOpen(false)}
+          className={linkClasses("/dashboard/gifts")}
+        >
+          <Gift className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+          Gifts
         </Link>
 
         {/* Theme toggle */}
