@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { Providers } from "./providers";
-import SignupPrompt from "@/components/ui/SignupPrompt";
-import SmartTrialPrompt from "@/components/ui/SmartTrialPrompt";
-import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
+import LayoutShell from "@/components/layout/LayoutShell";
 import { APP_NAME, APP_URL } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -92,12 +88,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased bg-white dark:bg-[#191919] text-gray-900 dark:text-[#E5E5E5] min-h-screen flex flex-col transition-colors duration-150">
         <Providers>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <SignupPrompt />
-          <SmartTrialPrompt />
-          <PWAInstallPrompt />
+          <LayoutShell>{children}</LayoutShell>
         </Providers>
         {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
           <Script
