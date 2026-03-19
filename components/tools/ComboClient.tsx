@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
@@ -199,15 +199,35 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const fileLimit = isPro ? COMBO_FILES_PRO : COMBO_FILES_FREE;
 
+  // Free users: max 2 active steps
+  const FREE_MAX_STEPS = 2;
+
+  // Enforce step limit on initial load for free users
+  // When session loads and user is not Pro, cap enabled steps to FREE_MAX_STEPS
+  useEffect(() => {
+    if (authStatus === "loading") return; // wait for session
+    if (isPro) return; // Pro users have no limit
+
+    setStepToggles((prev) => {
+      const enabledSteps = prev.filter((s) => s.enabled);
+      if (enabledSteps.length <= FREE_MAX_STEPS) return prev; // already within limit
+
+      // Keep only the first FREE_MAX_STEPS enabled
+      let kept = 0;
+      return prev.map((s) => {
+        if (!s.enabled) return s;
+        kept++;
+        return kept <= FREE_MAX_STEPS ? s : { ...s, enabled: false };
+      });
+    });
+  }, [authStatus, isPro]);
+
   // Check if any AI step is enabled and user is not logged in
   const enabledAiSteps = stepToggles.filter((s) => s.enabled && s.isAi);
   const needsAuthForAi = enabledAiSteps.length > 0 && !isAuthenticated && authStatus !== "loading";
 
   // At least 1 step must remain on
   const enabledCount = stepToggles.filter((s) => s.enabled).length;
-
-  // Free users: max 2 active steps
-  const FREE_MAX_STEPS = 2;
 
   function handleToggleStep(stepId: string, value: boolean) {
     // If enabling a step and free user would exceed limit, show upsell
@@ -271,7 +291,9 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
     setIsProcessing(true);
 
     const pendingFiles = files.filter((f) => f.status === "pending");
-    const activeSteps = stepToggles.filter((s) => s.enabled);
+    // Defense in depth: cap enabled steps for free users even if UI state was bypassed
+    const allEnabled = stepToggles.filter((s) => s.enabled);
+    const activeSteps = isPro ? allEnabled : allEnabled.slice(0, FREE_MAX_STEPS);
 
     for (const pf of pendingFiles) {
       // Mark as processing
@@ -289,7 +311,9 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
           await new Promise((r) => setTimeout(r, 300));
         }
 
-        const result = await runComboFilePipeline(pf.originalFile, stepToggles, locale);
+        // Use the capped activeSteps (not raw stepToggles) so free users can't exceed limit
+        const stepsForPipeline = activeSteps.map((s) => ({ ...s, enabled: true }));
+        const result = await runComboFilePipeline(pf.originalFile, stepsForPipeline, locale);
 
         setFiles((prev) =>
           prev.map((f) =>
