@@ -215,7 +215,7 @@ export default function DashboardSidebar({
 
       {/* Scrollable nav */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-        {/* Top section: Home + AI Workflow */}
+        {/* Top section: Home + AI Tools */}
         <Link
           href="/dashboard"
           onClick={() => setMobileOpen(false)}
@@ -231,7 +231,7 @@ export default function DashboardSidebar({
           className={linkClasses("/dashboard/tools/workflow")}
         >
           <Sparkles className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-          AI Workflow
+          AI Tools
         </Link>
 
         {/* For You section (persona-based) */}
