@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   // CSRF: reject cross-origin requests in production
   if (process.env.NODE_ENV === "production") {
     const origin = req.headers.get("origin");
-    if (!origin || !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
+    if (origin && !ALLOWED_ORIGINS.some((o) => origin.startsWith(o))) {
       return Response.json({ error: "Forbidden" }, { status: 403 });
     }
   }
