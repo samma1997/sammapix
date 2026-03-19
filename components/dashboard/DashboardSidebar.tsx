@@ -310,32 +310,6 @@ export default function DashboardSidebar({
         </Link>
 
         {/* Gifts */}
-        <Link
-          href="/dashboard/gifts"
-          onClick={() => setMobileOpen(false)}
-          className={linkClasses("/dashboard/gifts")}
-        >
-          <Gift className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-          Gifts
-        </Link>
-
-        {/* Theme toggle */}
-        <button
-          onClick={() => {
-            const isDark = document.documentElement.classList.contains("dark");
-            if (isDark) {
-              document.documentElement.classList.remove("dark");
-              localStorage.setItem("theme", "light");
-            } else {
-              document.documentElement.classList.add("dark");
-              localStorage.setItem("theme", "dark");
-            }
-          }}
-          className="flex items-center gap-2.5 px-2.5 py-1.5 w-full rounded-md text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          Toggle theme
-        </button>
       </div>
 
       {/* User profile section with hover menu */}
@@ -391,6 +365,14 @@ export default function DashboardSidebar({
               Upgrade Plan
             </Link>
             <Link
+              href="/dashboard/gifts"
+              onClick={() => { setProfileMenuOpen(false); setMobileOpen(false); }}
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
+            >
+              <Gift className="h-4 w-4" strokeWidth={1.5} />
+              Gift a subscription
+            </Link>
+            <Link
               href="/glossary"
               onClick={() => { setProfileMenuOpen(false); setMobileOpen(false); }}
               className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
@@ -398,6 +380,23 @@ export default function DashboardSidebar({
               <HelpCircle className="h-4 w-4" strokeWidth={1.5} />
               Help
             </Link>
+            <button
+              onClick={() => {
+                const isDark = document.documentElement.classList.contains("dark");
+                if (isDark) {
+                  document.documentElement.classList.remove("dark");
+                  localStorage.setItem("theme", "light");
+                } else {
+                  document.documentElement.classList.add("dark");
+                  localStorage.setItem("theme", "dark");
+                }
+                setProfileMenuOpen(false);
+              }}
+              className="flex items-center gap-2.5 px-3 py-2 w-full text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              Toggle theme
+            </button>
             <div className="my-1 border-t border-[#E5E5E5] dark:border-[#2A2A2A]" />
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
