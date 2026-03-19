@@ -87,7 +87,8 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
   { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio"] },
-  { label: "AI Tools", slugs: ["ai-rename", "alt-text", "transcribe", "weblift", "blogdrop", "smartsort"] },
+  { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort"] },
+  { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit"] },
   { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
@@ -313,7 +314,7 @@ export default function DashboardSidebar({
       </div>
 
       {/* User profile section with hover menu */}
-      <div ref={profileRef} className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] relative">
+      <div ref={profileRef} className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] relative pb-[env(safe-area-inset-bottom,0px)]">
         <button
           onClick={() => setProfileMenuOpen((v) => !v)}
           className="w-full px-3 py-3 flex items-center gap-2.5 hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors duration-150"
