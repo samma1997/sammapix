@@ -9,9 +9,9 @@ import { APP_URL } from "@/lib/constants";
 import { FileText } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Blog Ready - Blog-Ready Images in One Drop | SammaPix",
+  title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO | SammaPix",
   description:
-    "Blog-ready images in one drop. Compress, resize to 1200px, convert to WebP, and AI-rename with SEO blog names. Free combo tool.",
+    "Optimize blog images instantly. Compress, resize to 1200px, convert to WebP, and AI-generate SEO filenames in one click. Free WordPress & CMS tool.",
   keywords: [
     "blog image optimizer",
     "blog image resize compress",

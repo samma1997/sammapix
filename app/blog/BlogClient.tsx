@@ -16,6 +16,14 @@ interface Post {
 
 const POSTS: Post[] = [
   {
+    slug: "best-tinypng-alternative-2026",
+    title: "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
+    description:
+      "TinyPNG is trusted and excellent at one thing. But if you need batch processing, browser-side privacy, format conversion, or AI renaming — SammaPix does more, free.",
+    date: "2026-03-19",
+    tags: ["Tools"],
+  },
+  {
     slug: "ai-image-renaming-seo-guide",
     title: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
     description:

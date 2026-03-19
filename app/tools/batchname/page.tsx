@@ -7,9 +7,9 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Batch Rename - Rename Files with Custom Patterns | SammaPix",
+  title: "Batch Rename Photos - Custom Patterns & Auto-Increment | SammaPix",
   description:
-    "Rename multiple files with a custom pattern. Use auto-increment numbers, dates, or keep original names. 100% free, no AI, no login required. Works entirely in your browser.",
+    "Batch rename photos with custom patterns. Auto-increment numbers, add dates, or keep original names. Free file renaming tool, 100% browser-based, zero login required.",
   keywords: [
     "batch rename files",
     "bulk file renamer",

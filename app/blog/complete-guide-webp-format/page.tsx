@@ -385,7 +385,7 @@ export default function CompleteGuideWebpFormatPage() {
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               <Link
-                href="/convert/to-webp"
+                href="/tools/webp"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
                 SammaPix WebP Converter
@@ -398,7 +398,7 @@ export default function CompleteGuideWebpFormatPage() {
                 {
                   step: "1",
                   title: "Open the WebP Converter",
-                  body: "Go to sammapix.com/convert/to-webp. The converter runs entirely client-side- your files are processed locally and never sent to any server.",
+                  body: "Go to sammapix.com/tools/webp. The converter runs entirely client-side- your files are processed locally and never sent to any server.",
                 },
                 {
                   step: "2",
@@ -430,7 +430,7 @@ export default function CompleteGuideWebpFormatPage() {
 
             {/* CTA inline */}
             <Link
-              href="/convert/to-webp"
+              href="/tools/webp"
               className="flex items-center justify-between gap-4 bg-[#171717] text-white rounded-md px-6 py-5 hover:bg-[#262626] transition-colors group mt-2 mb-8"
             >
               <div>
@@ -524,7 +524,14 @@ export default function CompleteGuideWebpFormatPage() {
               Pair WebP conversion with compression
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Converting to WebP already reduces file size, but combining format conversion with quality compression gives you the largest gains. SammaPix lets you do both in one step- compress and convert to WebP simultaneously, so a 10 MB camera JPEG becomes a sub-300 KB WebP ready for web delivery.
+              Converting to WebP already reduces file size, but combining format conversion with quality compression gives you the largest gains. Use{" "}
+              <Link
+                href="/tools/compress"
+                className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
+              >
+                SammaPix Compress
+              </Link>{" "}
+              alongside the WebP converter to do both in your workflow- so a 10 MB camera JPEG becomes a sub-300 KB WebP ready for web delivery.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
@@ -620,7 +627,7 @@ export default function CompleteGuideWebpFormatPage() {
                 Drop your JPEGs, PNGs, and GIFs into SammaPix and get WebP files instantly. Batch processing, ZIP download, no upload required. Files never leave your browser.
               </p>
               <Link
-                href="/convert/to-webp"
+                href="/tools/webp"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
                 Open WebP Converter
