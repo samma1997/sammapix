@@ -7,6 +7,17 @@ import {
   sendDay14Email,
   sendDay21Email,
   sendDay30Email,
+  sendDay35Email,
+  sendDay49Email,
+  sendDay63Email,
+  sendDay77Email,
+  // Re-engagement emails (sendReEngageDay14Email, sendReEngageDay30Email) are
+  // available in email-service.ts but NOT wired into this cron job.
+  // They require tracking `last_active` date per user (not signup date).
+  // Future enhancement: add a separate cron that queries users where
+  // NOW() - last_active >= 14 days (or 30 days) and sends the appropriate
+  // re-engagement email. This requires a `last_active` column in the users
+  // table, updated on each login/tool usage.
 } from "@/lib/email-service";
 
 export const runtime = "nodejs";
@@ -64,6 +75,18 @@ export async function GET(request: NextRequest) {
           sent++;
         } else if (daysSince === 30) {
           await sendDay30Email(contact.email, name);
+          sent++;
+        } else if (daysSince === 35) {
+          await sendDay35Email(contact.email, name);
+          sent++;
+        } else if (daysSince === 49) {
+          await sendDay49Email(contact.email, name);
+          sent++;
+        } else if (daysSince === 63) {
+          await sendDay63Email(contact.email, name);
+          sent++;
+        } else if (daysSince === 77) {
+          await sendDay77Email(contact.email, name);
           sent++;
         }
       } catch (err) {
