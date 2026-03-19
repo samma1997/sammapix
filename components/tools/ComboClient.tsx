@@ -37,6 +37,49 @@ interface ProcessedFile {
   error?: string;
 }
 
+// ─── HEIC pre-conversion (HEIC → JPG before pipeline) ──────────────────────
+
+function isHeicFile(file: File): boolean {
+  const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+  const mime = file.type.toLowerCase();
+  return ext === "heic" || ext === "heif" || mime === "image/heic" || mime === "image/heif";
+}
+
+async function convertHeicToJpg(file: File): Promise<File> {
+  // Try native browser decode first (Safari)
+  try {
+    const bitmap = await createImageBitmap(file);
+    const canvas = document.createElement("canvas");
+    canvas.width = bitmap.width;
+    canvas.height = bitmap.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("no ctx");
+    ctx.drawImage(bitmap, 0, 0);
+    bitmap.close();
+    const blob = await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob failed"))), "image/jpeg", 0.92);
+    });
+    const name = file.name.replace(/\.(heic|heif)$/i, ".jpg");
+    return new File([blob], name, { type: "image/jpeg" });
+  } catch {
+    // Not Safari — try server
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("format", "JPEG");
+      fd.append("quality", "92");
+      const res = await fetch("/api/heic-convert", { method: "POST", body: fd });
+      if (res.ok) {
+        const blob = await res.blob();
+        const name = file.name.replace(/\.(heic|heif)$/i, ".jpg");
+        return new File([blob], name, { type: "image/jpeg" });
+      }
+    } catch { /* fall through */ }
+  }
+  // Can't convert — return as-is and let pipeline try
+  return file;
+}
+
 // ─── Pipeline runner using the shared engine ─────────────────────────────────
 
 async function runComboFilePipeline(
@@ -44,6 +87,9 @@ async function runComboFilePipeline(
   steps: ComboStep[]
 ): Promise<{ blob: Blob; name: string }> {
   try {
+    // Pre-convert HEIC to JPG so the pipeline can process it
+    const processableFile = isHeicFile(file) ? await convertHeicToJpg(file) : file;
+
     const { runPipeline } = await import("@/lib/pipeline-engine");
 
     const enabledSteps = steps.filter((s) => s.enabled);
@@ -54,11 +100,11 @@ async function runComboFilePipeline(
       settings: (s.settings ?? {}) as EnginePipelineStep["settings"],
     }));
 
-    let result: { blob: Blob; name: string } = { blob: file, name: file.name };
+    let result: { blob: Blob; name: string } = { blob: processableFile, name: processableFile.name };
 
     await runPipeline({
       steps: engineSteps,
-      files: [file],
+      files: [processableFile],
       onFileProgress: () => {},
       onFileComplete: (_idx, r) => {
         result = { blob: r.blob, name: r.name };
@@ -69,9 +115,9 @@ async function runComboFilePipeline(
     });
 
     return result;
-  } catch {
-    // Fallback: return original file as-is
-    return { blob: file, name: file.name };
+  } catch (err) {
+    console.error("[ComboClient] Pipeline error:", err);
+    throw err;
   }
 }
 
