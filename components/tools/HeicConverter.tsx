@@ -86,7 +86,17 @@ async function convertServerSide(
   return res.blob();
 }
 
-// Client-side conversion: native browser decoding → heic-to (WASM) → heic2any (JS) fallback chain
+// Race a promise against a timeout
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error(`${label} timed out after ${ms / 1000}s`)), ms)
+    ),
+  ]);
+}
+
+// Client-side conversion: native browser → heic-to (WASM) → heic2any (JS), each with timeout
 async function convertClientSide(
   file: File,
   format: OutputFormat,
@@ -94,9 +104,9 @@ async function convertClientSide(
 ): Promise<Blob> {
   const toType = format === "WebP" ? "image/webp" : "image/jpeg";
 
-  // Strategy 1: Native browser decoding (Safari, modern Chrome)
+  // Strategy 1: Native browser decoding (Safari supports HEIC natively)
   try {
-    const bitmap = await createImageBitmap(file);
+    const bitmap = await withTimeout(createImageBitmap(file), 15000, "Native decode");
     const canvas = document.createElement("canvas");
     canvas.width = bitmap.width;
     canvas.height = bitmap.height;
@@ -114,21 +124,33 @@ async function convertClientSide(
     });
     return blob;
   } catch (e) {
-    console.warn("[HEIC] Native decode failed, trying heic-to:", e);
+    console.warn("[HEIC] Native decode failed:", e);
   }
 
-  // Strategy 2: heic-to (WASM, fast)
+  // Strategy 2: heic-to WASM (30s timeout)
   try {
     const { heicTo } = await import("heic-to");
-    return await heicTo({ blob: file, type: toType, quality: quality / 100 });
+    return await withTimeout(
+      heicTo({ blob: file, type: toType, quality: quality / 100 }),
+      30000, "heic-to"
+    );
   } catch (e) {
-    console.warn("[HEIC] heic-to failed, trying heic2any:", e);
+    console.warn("[HEIC] heic-to failed:", e);
   }
 
-  // Strategy 3: heic2any (JS, slowest)
-  const heic2any = (await import("heic2any")).default;
-  const result = await heic2any({ blob: file, toType, quality: quality / 100 });
-  return Array.isArray(result) ? result[0] : result;
+  // Strategy 3: heic2any JS (30s timeout)
+  try {
+    const heic2any = (await import("heic2any")).default;
+    const result = await withTimeout(
+      heic2any({ blob: file, toType, quality: quality / 100 }),
+      30000, "heic2any"
+    );
+    return Array.isArray(result) ? result[0] : result;
+  } catch (e) {
+    console.warn("[HEIC] heic2any failed:", e);
+  }
+
+  throw new Error("Could not convert this file. Try Safari or send the photo to yourself as JPG from iPhone.");
 }
 
 // Hybrid: server for small files (fast), client for large files (no limit)
@@ -175,61 +197,6 @@ const ProUpsellBanner = ({ onDismiss }: { onDismiss: () => void }) => (
     >
       ✕
     </button>
-  </div>
-);
-
-// ── Quality Slider ────────────────────────────────────────────────────────────
-
-interface QualitySliderProps {
-  value: number;
-  onChange: (v: number) => void;
-  disabled: boolean;
-}
-
-const QualitySlider = ({ value, onChange, disabled }: QualitySliderProps) => (
-  <div className="space-y-2">
-    <div className="flex justify-between items-center">
-      <label
-        htmlFor="heic-quality"
-        className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]"
-      >
-        Quality
-      </label>
-      <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] tabular-nums">
-        {value}%
-      </span>
-    </div>
-    <input
-      id="heic-quality"
-      type="range"
-      min={60}
-      max={100}
-      step={1}
-      value={value}
-      onChange={(e) => onChange(Number(e.target.value))}
-      disabled={disabled}
-      className="w-full h-1.5 rounded-full appearance-none cursor-pointer
-                 bg-[#E5E5E5] dark:bg-[#333]
-                 [&::-webkit-slider-thumb]:appearance-none
-                 [&::-webkit-slider-thumb]:w-4
-                 [&::-webkit-slider-thumb]:h-4
-                 [&::-webkit-slider-thumb]:rounded-full
-                 [&::-webkit-slider-thumb]:bg-white
-                 [&::-webkit-slider-thumb]:border
-                 [&::-webkit-slider-thumb]:border-[#D4D4D4]
-                 [&::-webkit-slider-thumb]:shadow-sm
-                 [&::-webkit-slider-thumb]:cursor-pointer
-                 disabled:opacity-40 disabled:cursor-not-allowed"
-      style={{
-        background: `linear-gradient(to right, #171717 0%, #171717 ${((value - 60) / 40) * 100}%, ${
-          "transparent"
-        } ${((value - 60) / 40) * 100}%)`,
-      }}
-    />
-    <div className="flex justify-between text-[10px] text-[#A3A3A3]">
-      <span>60%- Smaller file</span>
-      <span>100%- Best quality</span>
-    </div>
   </div>
 );
 
@@ -683,59 +650,110 @@ export default function HeicConverter() {
             </button>
           </div>
 
-          {/* "Ready" banner */}
-          {uiState === "results" && allPending && (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-md bg-[#F0FDF4] dark:bg-[#052E16] border border-[#BBF7D0] dark:border-[#166534]">
-              <div className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0" />
-              <p className="text-xs font-medium text-[#166534] dark:text-[#4ADE80]">
-                {files.length} file{files.length !== 1 ? "s" : ""} ready &mdash; choose format and quality, then click Convert
-              </p>
-            </div>
-          )}
+          {/* ── Unified toolbar ── */}
+          <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] p-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              {/* Pre-conversion: Format toggle + Quality + Convert button */}
+              {allPending && uiState === "results" && (
+                <>
+                  {/* Format toggle */}
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mr-1">Format</span>
+                    <div className="flex">
+                      {(["JPG", "WebP"] as OutputFormat[]).map((fmt) => (
+                        <button
+                          key={fmt}
+                          onClick={() => setOutputFormat(fmt)}
+                          className={[
+                            "px-2.5 py-1 text-xs font-medium border transition-colors",
+                            fmt === "JPG" ? "rounded-l-md" : "rounded-r-md border-l-0",
+                            outputFormat === fmt
+                              ? "bg-[#171717] dark:bg-white text-white dark:text-[#171717] border-[#171717] dark:border-white"
+                              : "bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] border-[#E5E5E5] dark:border-[#333] hover:border-[#A3A3A3]",
+                          ].join(" ")}
+                        >
+                          {fmt}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-          {/* Settings */}
-          {uiState === "results" && allPending && (
-            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-white dark:bg-[#1E1E1E] space-y-5">
-              <div>
-                <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2">
-                  Output format
-                </p>
-                <div className="flex gap-2">
-                  {(["JPG", "WebP"] as OutputFormat[]).map((fmt) => (
+                  {/* Quality slider (compact inline) */}
+                  <div className="flex items-center gap-2 flex-1 min-w-[160px]">
+                    <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] shrink-0">Quality</span>
+                    <input
+                      type="range"
+                      min={60}
+                      max={100}
+                      step={1}
+                      value={quality}
+                      onChange={(e) => setQuality(Number(e.target.value))}
+                      className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer
+                                 bg-[#E5E5E5] dark:bg-[#333]
+                                 [&::-webkit-slider-thumb]:appearance-none
+                                 [&::-webkit-slider-thumb]:w-4
+                                 [&::-webkit-slider-thumb]:h-4
+                                 [&::-webkit-slider-thumb]:rounded-full
+                                 [&::-webkit-slider-thumb]:bg-white
+                                 [&::-webkit-slider-thumb]:border
+                                 [&::-webkit-slider-thumb]:border-[#D4D4D4]
+                                 [&::-webkit-slider-thumb]:shadow-sm
+                                 [&::-webkit-slider-thumb]:cursor-pointer"
+                      style={{
+                        background: `linear-gradient(to right, #171717 0%, #171717 ${((quality - 60) / 40) * 100}%, transparent ${((quality - 60) / 40) * 100}%)`,
+                      }}
+                    />
+                    <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] tabular-nums w-8 text-right">{quality}</span>
+                  </div>
+
+                  {/* Convert button */}
+                  <button
+                    onClick={handleConvertAll}
+                    className="shrink-0 inline-flex items-center gap-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md px-4 py-2 text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                  >
+                    Convert all &rarr;
+                  </button>
+                </>
+              )}
+
+              {/* Post-conversion: Compress all + Download ZIP */}
+              {hasAnyDone && uiState === "results" && !allPending && (
+                <>
+                  {/* Compress all (if any uncompressed) */}
+                  {hasUncompressed && (
                     <button
-                      key={fmt}
-                      onClick={() => setOutputFormat(fmt)}
-                      className={[
-                        "px-4 py-2 text-sm font-medium rounded-md border transition-colors",
-                        outputFormat === fmt
-                          ? "border-[#171717] dark:border-white bg-[#171717] dark:bg-white text-white dark:text-[#171717]"
-                          : "border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3]",
-                      ].join(" ")}
+                      onClick={handleCompressAll}
+                      disabled={compressingAll}
+                      className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] bg-white dark:bg-[#252525] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {fmt}
+                      {compressingAll ? (
+                        <>
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                          Compressing...
+                        </>
+                      ) : (
+                        <>
+                          <Zap className="h-3.5 w-3.5" strokeWidth={1.5} />
+                          Compress all
+                        </>
+                      )}
                     </button>
-                  ))}
-                </div>
-                {outputFormat === "WebP" && (
-                  <p className="text-[11px] text-[#A3A3A3] mt-1.5">
-                    WebP is ~25% smaller than JPG &mdash; ideal for web use
-                  </p>
-                )}
-              </div>
-              <QualitySlider value={quality} onChange={setQuality} disabled={false} />
-            </div>
-          )}
+                  )}
 
-          {/* Convert button */}
-          {uiState === "results" && allPending && (
-            <button
-              onClick={handleConvertAll}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors shadow-sm"
-            >
-              <FileImage className="h-4 w-4" strokeWidth={1.5} />
-              Convert {files.length} file{files.length !== 1 ? "s" : ""} to {outputFormat} &rarr;
-            </button>
-          )}
+                  <div className="sm:ml-auto flex items-center gap-2">
+                    {/* Download ZIP */}
+                    <button
+                      onClick={handleDownloadAll}
+                      className="shrink-0 inline-flex items-center gap-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md px-4 py-2 text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                    >
+                      <Download className="h-4 w-4" strokeWidth={1.5} />
+                      Download ZIP ({doneCount})
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
 
           {/* File list */}
           <div className="space-y-2">
@@ -748,47 +766,6 @@ export default function HeicConverter() {
               />
             ))}
           </div>
-
-          {/* Compress all button */}
-          {hasAnyDone && uiState === "results" && hasUncompressed && (
-            <button
-              onClick={handleCompressAll}
-              disabled={compressingAll}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border-2 border-dashed border-[#6366F1]/40 text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 hover:border-[#6366F1]/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {compressingAll ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                  Compressing all...
-                </>
-              ) : (
-                <>
-                  <Zap className="h-4 w-4" strokeWidth={1.5} />
-                  Compress all converted files
-                </>
-              )}
-            </button>
-          )}
-
-          {/* Download all ZIP */}
-          {hasAnyDone && uiState === "results" && (
-            <div className="pt-2 flex flex-col sm:flex-row gap-2">
-              <button
-                onClick={handleDownloadAll}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
-              >
-                <Download className="h-4 w-4" strokeWidth={1.5} />
-                Download all as ZIP ({doneCount})
-              </button>
-              <button
-                onClick={handleReset}
-                className="sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3] bg-white dark:bg-[#1E1E1E] transition-colors"
-              >
-                <RotateCcw className="h-4 w-4" strokeWidth={1.5} />
-                New batch
-              </button>
-            </div>
-          )}
         </div>
       )}
     </div>
