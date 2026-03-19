@@ -149,6 +149,11 @@ const SUGGESTIONS = {
     href: "/tools/heic",
     Icon: IconHeic,
   },
+  "pdf-to-image": {
+    label: "PDF to Image",
+    href: "/tools/pdf-to-image",
+    Icon: IconHeic,
+  },
 } as const;
 
 type SuggestionKey = keyof typeof SUGGESTIONS;
@@ -169,6 +174,7 @@ const NEXT_STEPS_MAP: Record<string, SuggestionKey[]> = {
   geosort: ["ai-rename", "travelmap"],
   travelmap: ["geosort", "filmlab"],
   heic: ["compress", "ai-rename"],
+  "pdf-to-image": ["compress", "webp", "ai-rename"],
 };
 
 // ── Completion summary line ───────────────────────────────────────────────────
@@ -189,6 +195,7 @@ function completionLabel(tool: string, count: number): string {
     geosort: "sorted by location",
     travelmap: "mapped",
     heic: "converted",
+    "pdf-to-image": "converted to images",
   };
   const verb = verbs[tool] ?? "processed";
   return `${count} ${noun} ${verb}`;

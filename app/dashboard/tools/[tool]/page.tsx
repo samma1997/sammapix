@@ -21,6 +21,7 @@ const TravelMapClient = dynamic(() => import("@/components/tools/TravelMapClient
 const ResizePackClient = dynamic(() => import("@/components/tools/ResizePackClient"));
 const CullClient = dynamic(() => import("@/components/tools/CullClientWrapper"));
 const HeicClient = dynamic(() => import("@/components/tools/HeicClient"));
+const PdfToImageClient = dynamic(() => import("@/components/tools/PdfToImageClient"));
 const TranscribeClient = dynamic(() => import("@/components/tools/TranscribeClient"));
 const WorkflowPipeline = dynamic(() => import("@/components/tools/WorkflowPipeline"));
 const ComboClient = dynamic(() => import("@/components/tools/ComboClient"));
@@ -44,6 +45,7 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   resizepack:  ResizePackClient,
   cull:        CullClient,
   heic:        HeicClient,
+  "pdf-to-image": PdfToImageClient,
   transcribe:  TranscribeClient,
   workflow:    WorkflowPipeline,
   batchname:   BatchNameClient,
@@ -222,6 +224,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Export keepers", desc: "Download only the best shots." },
     ],
     proTip: { text: "Use keyboard shortcuts: 1-5 for stars, X to reject.", linkLabel: "See Pro features", linkHref: "/pricing" },
+  },
+  "pdf-to-image": {
+    label: "PDF to Image",
+    tagline: "Convert each PDF page to JPG, PNG, or WebP.",
+    steps: [
+      { title: "Drop a PDF", desc: "Add a PDF file to convert." },
+      { title: "Choose format and resolution", desc: "Select JPG, PNG, or WebP, and 1x/2x/3x scale." },
+      { title: "Download images", desc: "Save each page individually or download all as ZIP." },
+    ],
+    proTip: { text: "After converting, compress your JPG or PNG images for web use.", linkLabel: "Compress images", linkHref: "/dashboard/tools/compress" },
   },
   heic: {
     label: "HEIC Converter",
