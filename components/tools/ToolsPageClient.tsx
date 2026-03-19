@@ -137,6 +137,40 @@ const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+const IconPdfToImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdf-flip {
+        0%, 20%  { transform: translateX(0px); }
+        50%       { transform: translateX(5px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes pdf-img {
+        0%, 30%  { opacity: 0; transform: scale(0.8); }
+        55%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .pdf-doc  { animation: pdf-flip 2.6s ease-in-out infinite; }
+      .pdf-img  { transform-origin: 36px 30px; animation: pdf-img 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    <g className="pdf-doc">
+      <rect x="4" y="4" width="22" height="30" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="9" y="9" width="8" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="9" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="9" y="17" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="15" y="29" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    <path d="M28 18 L32 18 M30 16 L32 18 L30 20" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="pdf-img" style={{ opacity: 0 }}>
+      <rect x="32" y="20" width="14" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="36" cy="24" r="1.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M33 32 L36 28 L39 31 L41 28" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    <rect x="31" y="36" width="15" height="7" rx="1.5" fill={accent}/>
+    <text x="38.5" y="41.5" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+  </svg>
+);
+
 const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
@@ -203,6 +237,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "iPhone", "Batch"],
     Icon: IconHEIC,
+    category: ["Optimize"],
+  },
+  {
+    name: "PDF to Image",
+    href: "/tools/pdf-to-image",
+    tagline: "Convert each PDF page to JPG, PNG, or WebP. Adjustable resolution. ZIP download.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload"],
+    Icon: IconPdfToImage,
     category: ["Optimize"],
   },
   {

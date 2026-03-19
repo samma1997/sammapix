@@ -77,24 +77,29 @@
 
 ## ACTION PLAN
 
-### Tonight (automated)
+### Done (2026-03-18 night session)
 - [x] Fix HEIC converter (hybrid approach)
-- [x] Fix TwinHunt thumbnails
-- [ ] Remove all hardcoded credentials
-- [ ] Fix Origin check bypass
-- [ ] Fix Stripe error leaking
-- [ ] Fix ExifLens require()
+- [x] Fix TwinHunt thumbnails + Keep/Delete UX
+- [x] Remove all hardcoded credentials (Gemini key, admin secret, Cloudinary)
+- [x] Fix Origin check bypass on 10 API routes
+- [x] Fix Stripe error message leaking
+- [x] Fix ExifLens require() → dynamic import
+- [x] Add auth middleware for /dashboard and /admin
+- [x] Add API timeouts to GeoSort and TravelMap
+- [x] Blob URL leaks verified (already clean in checked tools)
+- [x] Canvas null checks verified (already safe)
+- [x] GitHub Actions weekly audit
+- [x] MAINTENANCE.md checklist
+- [x] ROADMAP-IDEAS.md with competitive analysis
+- [x] PDF to Image converter tool (building)
 
-### Tomorrow
-- [ ] ROTATE GEMINI API KEY (Google Cloud Console)
-- [ ] Set ADMIN_SECRET env var on Vercel
-- [ ] Review and merge security fixes
-- [ ] Fix blob URL memory leaks in 6 tools
-- [ ] Add timeouts to API calls
-- [ ] Fix canvas null checks
+### Manual action required (Luca)
+- [ ] ROTATE GEMINI API KEY (Google Cloud Console — old key is in git history!)
+- [ ] Set ADMIN_SECRET env var on Vercel (generate: openssl rand -base64 32)
+- [ ] Verify CLOUDINARY_* env vars are set on Vercel
 
-### This Week
-- [ ] Add middleware auth for /dashboard and /admin routes
+### Remaining (next session)
 - [ ] Migrate admin photos API to session-based auth
 - [ ] Add nonce-based CSP (replace unsafe-inline)
 - [ ] Set up Dependabot on GitHub
+- [ ] Fix TravelMap dark mode (Leaflet maps)
