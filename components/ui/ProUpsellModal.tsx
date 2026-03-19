@@ -6,7 +6,7 @@ import Link from "next/link";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -26,6 +26,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "File too large for free plan";
     case "batch":
       return "Batch limit reached";
+    case "steps":
+      return "Step limit reached";
     default:
       return "You're processing like a pro";
   }
@@ -43,6 +45,8 @@ function getSubtext(
       return "Free plan supports files up to 20 MB. Upgrade to Pro to handle files up to 50 MB.";
     case "batch":
       return `You've hit the batch processing limit. Upgrade to Pro to handle up to 500 files at once.`;
+    case "steps":
+      return "Free plan allows up to 2 active steps per workflow. Upgrade to Pro for unlimited steps.";
     default: {
       if (filesDropped && freeLimit) {
         return `You dropped ${filesDropped} photos- free plan processes the first ${freeLimit}. Upgrade to handle 500 at once.`;
