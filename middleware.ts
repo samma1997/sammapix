@@ -12,15 +12,21 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith(prefix)
   );
 
-  if (!isProtected) {
-    return NextResponse.next();
-  }
-
   // Verify JWT token exists (user is logged in)
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
+
+  // Logged-in users visiting public tool pages → redirect to dashboard version
+  if (token && pathname.startsWith("/tools/") && pathname !== "/tools") {
+    const toolSlug = pathname.replace("/tools/", "");
+    return NextResponse.redirect(new URL(`/dashboard/tools/${toolSlug}`, request.url));
+  }
+
+  if (!isProtected) {
+    return NextResponse.next();
+  }
 
   if (!token) {
     // Redirect unauthenticated users to sign-in
