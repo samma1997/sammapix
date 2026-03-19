@@ -755,7 +755,7 @@ export default function CropRatio() {
             </p>
             {!isPro && (
               <Link
-                href="/pricing"
+                href="/dashboard/upgrade"
                 className="text-[11px] text-[#6366F1] hover:underline mt-1"
                 onClick={(e) => e.stopPropagation()}
               >

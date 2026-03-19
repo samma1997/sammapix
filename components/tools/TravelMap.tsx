@@ -784,7 +784,7 @@ export default function TravelMapClient() {
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
                 Free: up to {MAX_TRAVELMAP_FREE} photos &middot;{" "}
-                <Link href="/pricing" className="underline hover:text-[#737373]">
+                <Link href="/dashboard/upgrade" className="underline hover:text-[#737373]">
                   Pro: 500
                 </Link>
               </p>

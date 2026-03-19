@@ -26,9 +26,9 @@ export default function HowToUse({ steps, toolName, proTip }: HowToUseProps) {
   const isPro =
     (session?.user as { plan?: string } | undefined)?.plan === "pro";
 
-  // Hide pro-upgrade tips for Pro users (tips that link to /pricing)
+  // Hide pro-upgrade tips for Pro users (tips that link to upgrade pages)
   const visibleProTip =
-    proTip && isPro && proTip.linkHref.includes("/pricing")
+    proTip && isPro && (proTip.linkHref.includes("/pricing") || proTip.linkHref.includes("/dashboard/upgrade"))
       ? undefined
       : proTip;
   return (

@@ -608,7 +608,7 @@ export default function TwinHunt() {
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
                 Free: up to {MAX_FREE} files &middot;{" "}
-                <Link href="/pricing" className="underline hover:text-[#737373]">
+                <Link href="/dashboard/upgrade" className="underline hover:text-[#737373]">
                   Pro: {MAX_PRO}
                 </Link>
               </p>

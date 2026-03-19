@@ -170,7 +170,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
             <p className="text-gray-500 dark:text-[#737373] mb-6 text-sm leading-relaxed">
               Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $7/month.
             </p>
-            <Link href="/pricing">
+            <Link href="/dashboard/upgrade">
               <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#E5E5E5] transition-colors">
                 View pricing
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />

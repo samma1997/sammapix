@@ -141,7 +141,7 @@ export default function ProUpsellModal({
           </ul>
 
           {/* Primary CTA */}
-          <Link href="/pricing" onClick={onClose}>
+          <Link href="/dashboard/upgrade" onClick={onClose}>
             <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-3">
               <Zap className="h-4 w-4" strokeWidth={1.5} />
               Upgrade to Pro &mdash; $7/mo
