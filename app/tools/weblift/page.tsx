@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { Globe } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "WebLift - Compress, Convert to WebP & AI Rename | SammaPix",
+  title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
   description:
     "Compress, convert to WebP, and AI-rename images for the web in one click. Free combo tool for web developers and content creators.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/weblift`,
   },
   openGraph: {
-    title: "WebLift - Compress, Convert to WebP & AI Rename | SammaPix",
+    title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
     description:
       "Compress, convert to WebP, and AI-rename images for the web in one click.",
     url: `${APP_URL}/tools/weblift`,
@@ -70,7 +70,7 @@ export default function WebLiftPage() {
   return (
     <main>
       <ToolHeader
-        title="WebLift"
+        title="Web Optimize"
         description="Compress, convert to WebP, and AI-rename in one click."
         icon={Globe}
         accentColor="#3B82F6"

@@ -536,7 +536,7 @@ export default function CompleteGuideWebpFormatPage() {
                 href="/tools/exif"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix EXIF Lens
+                SammaPix EXIF Viewer
               </Link>{" "}
               to check.
             </p>

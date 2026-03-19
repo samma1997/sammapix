@@ -118,7 +118,7 @@ const competitors = [
     name: "VSCO",
     tagline: "Photo editing and filters",
     highlight:
-      "SammaPix FilmLab is free - VSCO requires subscription for premium filters",
+      "SammaPix Film Filters is free - VSCO requires subscription for premium filters",
     category: "Filters",
   },
 ];

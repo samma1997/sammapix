@@ -74,7 +74,7 @@ export default function FilmLabPage() {
   return (
     <main>
       <ToolHeader
-        title="FilmLab"
+        title="Film Filters"
         description="Film grain, vignette, fade and analog color grading. 6 film stock presets. Live preview. Batch process all photos."
         icon={Film}
         accentColor="#F59E0B"

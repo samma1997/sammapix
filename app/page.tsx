@@ -45,7 +45,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What tools does SammaPix offer?",
     answer:
-      "SammaPix includes 20 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, ResizePack, CropRatio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: FilmLab (14 film presets), StampIt (watermarks). Organize: EXIF Lens, TwinHunt (duplicate finder), GeoSort, TravelMap, Cull. Plus combo tools: WebLift, BlogDrop, and SmartSort. BatchName for pattern-based renaming.",
+      "SammaPix includes 20 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, Batch Resize, Crop & Ratio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: Film Filters (14 film presets), Watermark (watermarks). Organize: EXIF Viewer, Find Duplicates (duplicate finder), Sort by Location, Photo Map, Cull. Plus combo tools: Web Optimize, Blog Ready, and AI Photo Sort. Batch Rename for pattern-based renaming.",
   },
   {
     question: "Is SammaPix really free?",
@@ -55,7 +55,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Do I need to create an account?",
     answer:
-      "No account is needed for most tools -- Compress, WebP, HEIC, Resize, Crop, FilmLab, StampIt, EXIF Lens, and more work without any login. Only AI-powered tools (AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.",
+      "No account is needed for most tools -- Compress, WebP, HEIC, Resize, Crop, Film Filters, Watermark, EXIF Viewer, and more work without any login. Only AI-powered tools (AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.",
   },
   {
     question: "Is my data safe?",
@@ -276,7 +276,7 @@ export default function HomePage() {
               },
               {
                 title: "E-commerce Sellers",
-                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Use BatchName for consistent naming.",
+                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Use Batch Rename for consistent naming.",
               },
               {
                 title: "Social Media Managers",
@@ -284,7 +284,7 @@ export default function HomePage() {
               },
               {
                 title: "Web Developers",
-                body: "Compress and convert to WebP for Core Web Vitals. Use WebLift for the complete optimization pipeline.",
+                body: "Compress and convert to WebP for Core Web Vitals. Use Web Optimize for the complete optimization pipeline.",
               },
             ].map((item) => (
               <div

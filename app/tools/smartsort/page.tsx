@@ -7,7 +7,7 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "SmartSort - AI Image Categorizer & Sorter | SammaPix",
+  title: "AI Photo Sort - AI Image Categorizer & Sorter | SammaPix",
   description:
     "AI analyzes your images and automatically sorts them into categories like landscapes, portraits, food, screenshots, and more. Download organized as ZIP with folder structure.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/smartsort`,
   },
   openGraph: {
-    title: "SmartSort - AI Image Categorizer & Sorter | SammaPix",
+    title: "AI Photo Sort - AI Image Categorizer & Sorter | SammaPix",
     description:
       "AI analyzes images and sorts them into categories. Download as ZIP with folder structure.",
     url: `${APP_URL}/tools/smartsort`,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SmartSort - AI Image Categorizer & Sorter",
+        alt: "AI Photo Sort - AI Image Categorizer & Sorter",
       },
     ],
   },
@@ -114,7 +114,7 @@ export default function SmartSortPage() {
       />
 
       <ToolHeader
-        title="SmartSort"
+        title="AI Photo Sort"
         description="AI analyzes images and sorts them into categories automatically."
       />
 

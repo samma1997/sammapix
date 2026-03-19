@@ -271,7 +271,7 @@ export default function CreateTravelPhotoMapPage() {
                 href="/tools/travelmap"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix TravelMap
+                SammaPix Photo Map
               </Link>
               . It reads the GPS coordinates directly from your files in the
               browser- nothing is uploaded, nothing leaves your device.
@@ -294,7 +294,7 @@ export default function CreateTravelPhotoMapPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 2 - Open SammaPix TravelMap
+              Step 2 - Open SammaPix Photo Map
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -307,6 +307,7 @@ export default function CreateTravelPhotoMapPage() {
               </Link>
               . No account required, no file size limits, no watermarks. The
               tool runs entirely in your browser.
+
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
@@ -315,7 +316,7 @@ export default function CreateTravelPhotoMapPage() {
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Drag your photo folder directly onto the drop zone, or click to
-              select files. TravelMap processes hundreds of photos at once. As
+              select files. Photo Map processes hundreds of photos at once. As
               each file is read, a pin appears on the map at the GPS coordinates
               stored in its EXIF data.
             </p>
@@ -403,7 +404,7 @@ export default function CreateTravelPhotoMapPage() {
               A map of 5,000 photos from 10 years of travel looks like noise. A
               map of 200 photos from a focused week in Japan tells a story. Use
               the date filter or pre-sort your photos before dropping them into
-              TravelMap.
+              Photo Map.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
@@ -416,10 +417,10 @@ export default function CreateTravelPhotoMapPage() {
                 href="/tools/geosort"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix GeoSort
+                SammaPix Sort by Location
               </Link>{" "}
               automatically groups photos into folders by GPS proximity. Run
-              GeoSort first, then map each folder individually for clean,
+              Sort by Location first, then map each folder individually for clean,
               focused results.
             </p>
 
@@ -445,7 +446,7 @@ export default function CreateTravelPhotoMapPage() {
               address. Most people do not think about this.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              SammaPix TravelMap processes all coordinates locally in your
+              SammaPix Photo Map processes all coordinates locally in your
               browser. No photo data is transmitted to any server. This lets you
               explore your location history safely- and also makes it clear
               exactly how much GPS data your photos carry before you share them
@@ -482,7 +483,7 @@ export default function CreateTravelPhotoMapPage() {
               phones with location enabled embed GPS data in the same EXIF
               fields. Modern mirrorless and DSLR cameras with built-in GPS or
               paired smartphone geotagging also embed compatible coordinates.
-              SammaPix TravelMap reads EXIF GPS data from any JPEG or HEIC file,
+              SammaPix Photo Map reads EXIF GPS data from any JPEG or HEIC file,
               regardless of which device took the photo.
             </p>
 
@@ -490,7 +491,7 @@ export default function CreateTravelPhotoMapPage() {
               Are my photos or GPS coordinates sent to any server?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              No. SammaPix TravelMap reads EXIF data entirely within your
+              No. SammaPix Photo Map reads EXIF data entirely within your
               browser using the FileReader API. Your photos never leave your
               device. The only external requests are for map tiles (the visual
               map layer), which come from an open-source tile provider and
@@ -502,7 +503,7 @@ export default function CreateTravelPhotoMapPage() {
               What if some photos are missing from the map?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Photos without GPS data will not appear as pins. TravelMap shows a
+              Photos without GPS data will not appear as pins. Photo Map shows a
               count of how many photos were loaded vs. how many had valid GPS
               coordinates. Common reasons for missing GPS: location was disabled
               at capture time, the photo was exported through an app that strips
@@ -514,7 +515,7 @@ export default function CreateTravelPhotoMapPage() {
               Can I use this to map a whole year of iPhone photos at once?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Yes. TravelMap handles large batches efficiently. For best results
+              Yes. Photo Map handles large batches efficiently. For best results
               with a large archive, use the date filter after loading to explore
               individual trips rather than viewing everything at once. You can
               also pre-organize photos using{" "}
@@ -522,7 +523,7 @@ export default function CreateTravelPhotoMapPage() {
                 href="/tools/geosort"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                GeoSort
+                Sort by Location
               </Link>{" "}
               to separate them by location before mapping.
             </p>
@@ -576,7 +577,7 @@ export default function CreateTravelPhotoMapPage() {
                 Create your travel photo map
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your iPhone photos into SammaPix TravelMap and see exactly
+                Drop your iPhone photos into SammaPix Photo Map and see exactly
                 where every shot was taken- no account needed, nothing
                 uploaded.
               </p>
@@ -584,7 +585,7 @@ export default function CreateTravelPhotoMapPage() {
                 href="/tools/travelmap"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
-                Open TravelMap
+                Open Photo Map
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>
@@ -615,7 +616,7 @@ export default function CreateTravelPhotoMapPage() {
                   Tools
                 </span>
                 <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  GeoSort: Automatically Sort Photos by GPS Location
+                  Sort by Location: Automatically Sort Photos by GPS Location
                 </span>
               </Link>
               <Link

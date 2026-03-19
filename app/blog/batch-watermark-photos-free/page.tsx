@@ -446,7 +446,7 @@ export default function BatchWatermarkPhotosFreePage() {
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Drag and drop your photos directly onto the upload zone, or click
-              to select files. StampIt accepts JPEG, PNG, and WebP files. You
+              to select files. Watermark accepts JPEG, PNG, and WebP files. You
               can add as many images as needed in one batch- there is no
               artificial limit. For very large batches (1,000+ files), process
               in groups of 200–300 to keep the browser session stable.
@@ -461,7 +461,7 @@ export default function BatchWatermarkPhotosFreePage() {
               Code. For text watermarks, type your desired text and choose your
               font, size, and color. For logo watermarks, upload your PNG file
               with transparency. For QR codes, enter the destination URL and
-              StampIt generates the code automatically.
+              Watermark generates the code automatically.
             </p>
 
             <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
@@ -483,7 +483,7 @@ export default function BatchWatermarkPhotosFreePage() {
             </h3>
 
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              StampIt shows a live preview of the watermark applied to the
+              Watermark shows a live preview of the watermark applied to the
               first image in your batch. Adjust placement, size, and opacity
               until the result looks exactly right. Changes update in real time.
               This preview step is critical- it is far faster to adjust here
@@ -521,7 +521,7 @@ export default function BatchWatermarkPhotosFreePage() {
                 Batch watermark your photos now- free, no signup
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your images into StampIt and apply text, logo, or QR code
+                Drop your images into Watermark and apply text, logo, or QR code
                 watermarks to your entire photo batch in seconds. Runs entirely
                 in your browser- your files never leave your device.
               </p>
@@ -713,7 +713,7 @@ export default function BatchWatermarkPhotosFreePage() {
               Can I batch watermark photos for free without Photoshop?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Yes. Browser-based tools like SammaPix StampIt process your
+              Yes. Browser-based tools like SammaPix Watermark process your
               entire photo batch locally in your browser without any software
               installation, subscription, or Photoshop license. The Canvas API
               built into every modern browser is capable of applying
@@ -760,7 +760,7 @@ export default function BatchWatermarkPhotosFreePage() {
               Are my photos uploaded to a server when I use StampIt?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              No. StampIt processes all images entirely in your browser. Your
+              No. Watermark processes all images entirely in your browser. Your
               photos never leave your device- no upload, no server processing,
               no cloud storage. This is possible because modern browsers
               support the Canvas API and Web Workers, which provide the same
@@ -772,11 +772,11 @@ export default function BatchWatermarkPhotosFreePage() {
               Can I add a watermark to RAW files?
             </h3>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
-              Browser-based tools including StampIt work with standard web
+              Browser-based tools including Watermark work with standard web
               image formats: JPEG, PNG, and WebP. RAW files (CR2, NEF, ARW,
               etc.) must be converted to JPEG or PNG before watermarking. Export
               your RAWs from Lightroom or your camera software first, then run
-              the batch through StampIt. For photographers with large RAW
+              the batch through Watermark. For photographers with large RAW
               batches, export a web-resolution JPEG version specifically for
               online sharing, then watermark that copy- keeping your RAW
               originals untouched.
@@ -832,7 +832,7 @@ export default function BatchWatermarkPhotosFreePage() {
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
                 Add text, logo, or QR code watermarks to your entire photo
-                batch in seconds with SammaPix StampIt. Runs entirely in your
+                batch in seconds with SammaPix Watermark. Runs entirely in your
                 browser- your images never leave your device.
               </p>
               <Link

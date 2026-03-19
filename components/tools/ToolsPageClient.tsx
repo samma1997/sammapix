@@ -277,7 +277,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Optimize"],
   },
   {
-    name: "ResizePack",
+    name: "Batch Resize",
     href: "/tools/resizepack",
     tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
     accent: "#14B8A6",
@@ -286,7 +286,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Optimize"],
   },
   {
-    name: "CropRatio",
+    name: "Crop & Ratio",
     href: "/tools/croproatio",
     tagline: "Crop to exact ratios -- 1:1, 16:9, 4:3, A4 and more.",
     accent: "#EC4899",
@@ -324,7 +324,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["AI"],
   },
   {
-    name: "WebLift",
+    name: "Web Optimize",
     href: "/tools/weblift",
     tagline: "Compress, convert to WebP, and AI-rename in one click.",
     accent: "#3B82F6",
@@ -334,7 +334,7 @@ const TOOLS: ToolWithCategory[] = [
     isCombo: true,
   },
   {
-    name: "BlogDrop",
+    name: "Blog Ready",
     href: "/tools/blogdrop",
     tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
     accent: "#8B5CF6",
@@ -354,7 +354,7 @@ const TOOLS: ToolWithCategory[] = [
     isCombo: true,
   },
   {
-    name: "SmartSort",
+    name: "AI Photo Sort",
     href: "/tools/smartsort",
     tagline: "AI analyzes images and sorts them into categories automatically.",
     accent: "#22C55E",
@@ -365,7 +365,7 @@ const TOOLS: ToolWithCategory[] = [
 
   // ── Creative ──
   {
-    name: "FilmLab",
+    name: "Film Filters",
     href: "/tools/filmlab",
     tagline: "14 analog film presets -- Kodak Gold, Fuji, Ilford and 8 Samma originals.",
     accent: "#F59E0B",
@@ -374,7 +374,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Creative"],
   },
   {
-    name: "StampIt",
+    name: "Watermark",
     href: "/tools/stampit",
     tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
     accent: "#06B6D4",
@@ -385,7 +385,7 @@ const TOOLS: ToolWithCategory[] = [
 
   // ── Organize ──
   {
-    name: "EXIF Lens",
+    name: "EXIF Viewer",
     href: "/tools/exif",
     tagline: "Strip GPS, camera data and all metadata from photos.",
     accent: "#EF4444",
@@ -394,7 +394,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Organize"],
   },
   {
-    name: "TwinHunt",
+    name: "Find Duplicates",
     href: "/tools/twinhunt",
     tagline: "Perceptual hashing finds exact and near-duplicate photos.",
     accent: "#F97316",
@@ -403,7 +403,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Organize"],
   },
   {
-    name: "GeoSort",
+    name: "Sort by Location",
     href: "/tools/geosort",
     tagline: "Sort photos by country using GPS EXIF data.",
     accent: "#22C55E",
@@ -412,7 +412,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Organize"],
   },
   {
-    name: "TravelMap",
+    name: "Photo Map",
     href: "/tools/travelmap",
     tagline: "Generate an interactive map from your travel photos.",
     accent: "#3B82F6",
@@ -430,7 +430,7 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Organize"],
   },
   {
-    name: "BatchName",
+    name: "Batch Rename",
     href: "/tools/batchname",
     tagline: "Rename files with a custom pattern. No AI, 100% client-side, unlimited.",
     accent: "#F59E0B",
@@ -450,7 +450,7 @@ const USE_CASES = [
   {
     title: "I'm a blogger and need SEO-ready images",
     tools: [
-      { name: "BlogDrop", href: "/tools/blogdrop" },
+      { name: "Blog Ready", href: "/tools/blogdrop" },
       { name: "AI Rename", href: "/tools/ai-rename" },
       { name: "AI Alt Text", href: "/tools/alt-text" },
       { name: "Compress", href: "/tools/compress" },
@@ -460,9 +460,9 @@ const USE_CASES = [
     title: "I'm a photographer delivering to clients",
     tools: [
       { name: "Cull", href: "/tools/cull" },
-      { name: "SmartSort", href: "/tools/smartsort" },
-      { name: "FilmLab", href: "/tools/filmlab" },
-      { name: "StampIt", href: "/tools/stampit" },
+      { name: "AI Photo Sort", href: "/tools/smartsort" },
+      { name: "Film Filters", href: "/tools/filmlab" },
+      { name: "Watermark", href: "/tools/stampit" },
     ],
   },
   {
@@ -471,34 +471,34 @@ const USE_CASES = [
       { name: "Compress", href: "/tools/compress" },
       { name: "WebP Converter", href: "/tools/webp" },
       { name: "AI Rename", href: "/tools/ai-rename" },
-      { name: "EXIF Lens", href: "/tools/exif" },
+      { name: "EXIF Viewer", href: "/tools/exif" },
     ],
   },
   {
     title: "I'm a web developer optimizing for performance",
     tools: [
-      { name: "WebLift", href: "/tools/weblift" },
+      { name: "Web Optimize", href: "/tools/weblift" },
       { name: "Compress", href: "/tools/compress" },
       { name: "WebP Converter", href: "/tools/webp" },
-      { name: "BatchName", href: "/tools/batchname" },
+      { name: "Batch Rename", href: "/tools/batchname" },
     ],
   },
   {
     title: "I need to prepare photos for social media",
     tools: [
-      { name: "ResizePack", href: "/tools/resizepack" },
-      { name: "CropRatio", href: "/tools/croproatio" },
-      { name: "FilmLab", href: "/tools/filmlab" },
-      { name: "BatchName", href: "/tools/batchname" },
+      { name: "Batch Resize", href: "/tools/resizepack" },
+      { name: "Crop & Ratio", href: "/tools/croproatio" },
+      { name: "Film Filters", href: "/tools/filmlab" },
+      { name: "Batch Rename", href: "/tools/batchname" },
     ],
   },
   {
     title: "I need to organize travel photos",
     tools: [
-      { name: "GeoSort", href: "/tools/geosort" },
-      { name: "TravelMap", href: "/tools/travelmap" },
+      { name: "Sort by Location", href: "/tools/geosort" },
+      { name: "Photo Map", href: "/tools/travelmap" },
       { name: "Cull", href: "/tools/cull" },
-      { name: "EXIF Lens", href: "/tools/exif" },
+      { name: "EXIF Viewer", href: "/tools/exif" },
     ],
   },
 ];

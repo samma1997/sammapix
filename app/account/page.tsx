@@ -21,11 +21,11 @@ import Link from "next/link";
 
 const PRO_TOOLS = [
   { icon: <Zap className="h-3.5 w-3.5" />, name: "Crunch", limit: "500 files" },
-  { icon: <MapPin className="h-3.5 w-3.5" />, name: "GeoSort", limit: "500 photos" },
-  { icon: <Globe className="h-3.5 w-3.5" />, name: "TravelMap", limit: "500 photos" },
-  { icon: <ScanEye className="h-3.5 w-3.5" />, name: "EXIF Lens", limit: "500 files" },
-  { icon: <Scissors className="h-3.5 w-3.5" />, name: "Cull", limit: "500 photos" },
-  { icon: <Search className="h-3.5 w-3.5" />, name: "TwinHunt", limit: "500 photos" },
+  { icon: <MapPin className="h-3.5 w-3.5" />, name: "Sort by Location", limit: "500 photos" },
+  { icon: <Globe className="h-3.5 w-3.5" />, name: "Photo Map", limit: "500 photos" },
+  { icon: <ScanEye className="h-3.5 w-3.5" />, name: "EXIF Viewer", limit: "500 files" },
+  { icon: <Scissors className="h-3.5 w-3.5" />, name: "Photo Cull", limit: "500 photos" },
+  { icon: <Search className="h-3.5 w-3.5" />, name: "Find Duplicates", limit: "500 photos" },
 ];
 
 export default function AccountPage() {

@@ -362,7 +362,7 @@ export default function ReduceImageSizeForEmailPage() {
                 href="/tools/resizepack"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix ResizePack tool
+                SammaPix Batch Resize tool
               </Link>{" "}
               lets you batch-resize multiple photos to exact dimensions or a
               target percentage- download them all as a ZIP and attach to your
@@ -474,7 +474,7 @@ export default function ReduceImageSizeForEmailPage() {
                 {
                   step: "1",
                   title: "Resize to 1920px",
-                  desc: "Use ResizePack to bring the long edge to 1920 pixels. This alone can reduce a 5 MB photo to around 1.5–2 MB.",
+                  desc: "Use Batch Resize to bring the long edge to 1920 pixels. This alone can reduce a 5 MB photo to around 1.5–2 MB.",
                 },
                 {
                   step: "2",

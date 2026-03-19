@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Remove EXIF Data and Protect Your Privacy",
     description:
-      "Your photos reveal more than you think. EXIF metadata includes GPS location, device, and timestamps. Learn how to strip it free with SammaPix EXIF Lens.",
+      "Your photos reveal more than you think. EXIF metadata includes GPS location, device, and timestamps. Learn how to strip it free with SammaPix EXIF Viewer.",
     creator: "@lucasammarco",
   },
 };
@@ -82,14 +82,14 @@ const articleSchema = {
 const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: "How to Remove EXIF Data from Photos Using SammaPix EXIF Lens",
+  name: "How to Remove EXIF Data from Photos Using SammaPix EXIF Viewer",
   description:
-    "Step-by-step guide to stripping EXIF metadata- including GPS location- from your photos for free using SammaPix EXIF Lens.",
+    "Step-by-step guide to stripping EXIF metadata- including GPS location- from your photos for free using SammaPix EXIF Viewer.",
   step: [
     {
       "@type": "HowToStep",
       position: 1,
-      name: "Open EXIF Lens",
+      name: "Open EXIF Viewer",
       text: "Go to sammapix.com/tools/exif in your browser. No account or signup is required.",
     },
     {
@@ -114,7 +114,7 @@ const howToSchema = {
       "@type": "HowToStep",
       position: 5,
       name: "Verify the result",
-      text: "Drop the downloaded file back into EXIF Lens to confirm the GPS section is gone before sharing.",
+      text: "Drop the downloaded file back into EXIF Viewer to confirm the GPS section is gone before sharing.",
     },
   ],
 };
@@ -309,14 +309,14 @@ export default function RemoveExifProtectPrivacyPage() {
 
             {/* Step-by-step guide */}
             <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
-              How to remove EXIF data using SammaPix EXIF Lens
+              How to remove EXIF data using SammaPix EXIF Viewer
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
               <Link
                 href="/tools/exif"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix EXIF Lens
+                SammaPix EXIF Viewer
               </Link>{" "}
               processes your photos entirely in the browser- no upload, no server, no account required. Here is the complete process.
             </p>
@@ -325,18 +325,18 @@ export default function RemoveExifProtectPrivacyPage() {
               {[
                 {
                   step: "1",
-                  title: "Open EXIF Lens",
+                  title: "Open EXIF Viewer",
                   body: "Go to sammapix.com/tools/exif. No account needed. The tool loads entirely in your browser using client-side JavaScript.",
                 },
                 {
                   step: "2",
                   title: "Drop your photos",
-                  body: "Drag one or more photos onto the drop zone, or click to select files. EXIF Lens supports JPG, JPEG, and TIFF- the formats that embed EXIF GPS data. PNG files generally do not embed GPS data.",
+                  body: "Drag one or more photos onto the drop zone, or click to select files. EXIF Viewer supports JPG, JPEG, and TIFF- the formats that embed EXIF GPS data. PNG files generally do not embed GPS data.",
                 },
                 {
                   step: "3",
                   title: "Inspect the metadata",
-                  body: "EXIF Lens shows a full breakdown of every metadata field in the file. Find the GPS section and note the GPSLatitude, GPSLongitude, and GPSAltitude values. This is the location data embedded in your photo.",
+                  body: "EXIF Viewer shows a full breakdown of every metadata field in the file. Find the GPS section and note the GPSLatitude, GPSLongitude, and GPSAltitude values. This is the location data embedded in your photo.",
                 },
                 {
                   step: "4",
@@ -351,7 +351,7 @@ export default function RemoveExifProtectPrivacyPage() {
                 {
                   step: "6",
                   title: "Verify before sharing",
-                  body: "Drop the downloaded file back into EXIF Lens to confirm the GPS section is gone. When the GPS fields are absent, the file is safe to share publicly.",
+                  body: "Drop the downloaded file back into EXIF Viewer to confirm the GPS section is gone. When the GPS fields are absent, the file is safe to share publicly.",
                 },
               ].map(({ step, title, body }) => (
                 <div key={step} className="flex gap-4">
@@ -376,7 +376,7 @@ export default function RemoveExifProtectPrivacyPage() {
                   Free tool- no upload, no signup
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Strip EXIF data from your photos now - SammaPix EXIF Lens
+                  Strip EXIF data from your photos now - SammaPix EXIF Viewer
                 </p>
               </div>
               <ArrowRight
@@ -506,7 +506,7 @@ export default function RemoveExifProtectPrivacyPage() {
                   },
                   {
                     q: "Can I remove EXIF from a RAW file?",
-                    a: "RAW files (CR2, NEF, ARW, etc.) contain EXIF data but the metadata is interleaved with proprietary camera data in ways that vary by manufacturer. Browser-based tools like EXIF Lens work best with JPEG and TIFF. For RAW files, ExifTool is the most reliable option for safe metadata removal without corrupting the file.",
+                    a: "RAW files (CR2, NEF, ARW, etc.) contain EXIF data but the metadata is interleaved with proprietary camera data in ways that vary by manufacturer. Browser-based tools like EXIF Viewer work best with JPEG and TIFF. For RAW files, ExifTool is the most reliable option for safe metadata removal without corrupting the file.",
                   },
                   {
                     q: "What is the difference between GPS metadata and other EXIF data?",
@@ -565,13 +565,13 @@ export default function RemoveExifProtectPrivacyPage() {
                 Remove EXIF data from your photos- free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                SammaPix EXIF Lens reads and strips metadata entirely in your browser. No upload, no signup, no file size limits. Your photos never leave your device.
+                SammaPix EXIF Viewer reads and strips metadata entirely in your browser. No upload, no signup, no file size limits. Your photos never leave your device.
               </p>
               <Link
                 href="/tools/exif"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
-                Open EXIF Lens
+                Open EXIF Viewer
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>

@@ -169,30 +169,30 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
   { name: "Compress", slug: "compress", accent: "#6366F1", Icon: IconCompress, badge: "Free", category: "Optimize" },
   { name: "WebP Converter", slug: "webp", accent: "#10B981", Icon: IconWebP, badge: "Free", category: "Optimize" },
   { name: "HEIC Converter", slug: "heic", accent: "#6366F1", Icon: IconHEIC, badge: "Free", category: "Optimize" },
-  { name: "ResizePack", slug: "resizepack", accent: "#14B8A6", Icon: IconResizePack, badge: "Free", category: "Optimize" },
-  { name: "CropRatio", slug: "croproatio", accent: "#EC4899", Icon: IconCropRatio, badge: "Free", category: "Optimize" },
+  { name: "Batch Resize", slug: "resizepack", accent: "#14B8A6", Icon: IconResizePack, badge: "Free", category: "Optimize" },
+  { name: "Crop & Ratio", slug: "croproatio", accent: "#EC4899", Icon: IconCropRatio, badge: "Free", category: "Optimize" },
 
   // AI
   { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", isAi: true, category: "AI" },
   { name: "AI Alt Text", slug: "alt-text", accent: "#8B5CF6", Icon: IconAltText, badge: "Login", isAi: true, category: "AI" },
   { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", isAi: true, category: "AI" },
-  { name: "SmartSort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", isAi: true, category: "AI" },
+  { name: "AI Photo Sort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", isAi: true, category: "AI" },
 
   // Multi-step
-  { name: "WebLift", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "Multi-step", isCombo: true },
-  { name: "BlogDrop", slug: "blogdrop", accent: "#8B5CF6", Icon: IconDhBlogDrop, badge: "Login", category: "Multi-step", isCombo: true },
+  { name: "Web Optimize", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "Multi-step", isCombo: true },
+  { name: "Blog Ready", slug: "blogdrop", accent: "#8B5CF6", Icon: IconDhBlogDrop, badge: "Login", category: "Multi-step", isCombo: true },
 
   // Creative
-  { name: "FilmLab", slug: "filmlab", accent: "#F59E0B", Icon: IconFilmLab, badge: "Free", category: "Creative" },
-  { name: "StampIt", slug: "stampit", accent: "#06B6D4", Icon: IconStampIt, badge: "Free", category: "Creative" },
+  { name: "Film Filters", slug: "filmlab", accent: "#F59E0B", Icon: IconFilmLab, badge: "Free", category: "Creative" },
+  { name: "Watermark", slug: "stampit", accent: "#06B6D4", Icon: IconStampIt, badge: "Free", category: "Creative" },
 
   // Organize
-  { name: "EXIF Lens", slug: "exif", accent: "#EF4444", Icon: IconEXIF, badge: "Free", category: "Organize" },
-  { name: "TwinHunt", slug: "twinhunt", accent: "#F97316", Icon: IconTwinHunt, badge: "Free", category: "Organize" },
-  { name: "GeoSort", slug: "geosort", accent: "#22C55E", Icon: IconGeoSort, badge: "Free", category: "Organize" },
-  { name: "TravelMap", slug: "travelmap", accent: "#3B82F6", Icon: IconTravelMap, badge: "Free", category: "Organize" },
-  { name: "Cull", slug: "cull", accent: "#F43F5E", Icon: IconCull, badge: "Free", category: "Organize" },
-  { name: "BatchName", slug: "batchname", accent: "#F59E0B", Icon: IconDhBatchName, badge: "Free", category: "Organize" },
+  { name: "EXIF Viewer", slug: "exif", accent: "#EF4444", Icon: IconEXIF, badge: "Free", category: "Organize" },
+  { name: "Find Duplicates", slug: "twinhunt", accent: "#F97316", Icon: IconTwinHunt, badge: "Free", category: "Organize" },
+  { name: "Sort by Location", slug: "geosort", accent: "#22C55E", Icon: IconGeoSort, badge: "Free", category: "Organize" },
+  { name: "Photo Map", slug: "travelmap", accent: "#3B82F6", Icon: IconTravelMap, badge: "Free", category: "Organize" },
+  { name: "Photo Cull", slug: "cull", accent: "#F43F5E", Icon: IconCull, badge: "Free", category: "Organize" },
+  { name: "Batch Rename", slug: "batchname", accent: "#F59E0B", Icon: IconDhBatchName, badge: "Free", category: "Organize" },
 ];
 
 // ─── Props ────────────────────────────────────────────────────────────────────

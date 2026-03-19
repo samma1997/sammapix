@@ -610,7 +610,7 @@ export default function ImageSizesSocialMedia2026Page() {
                   className="flex items-center justify-between gap-3 px-5 py-4 hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors group"
                 >
                   <div>
-                    <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">ResizePack</p>
+                    <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">Batch Resize</p>
                     <p className="text-xs text-[#737373]">Batch resize to exact pixel dimensions</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-[#A3A3A3] group-hover:text-[#171717] dark:group-hover:text-[#E5E5E5] group-hover:translate-x-0.5 transition-all shrink-0" strokeWidth={1.5} />
@@ -620,7 +620,7 @@ export default function ImageSizesSocialMedia2026Page() {
                   className="flex items-center justify-between gap-3 px-5 py-4 hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors group"
                 >
                   <div>
-                    <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">CropRatio</p>
+                    <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">Crop & Ratio</p>
                     <p className="text-xs text-[#737373]">Crop images to locked aspect ratios</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-[#A3A3A3] group-hover:text-[#171717] dark:group-hover:text-[#E5E5E5] group-hover:translate-x-0.5 transition-all shrink-0" strokeWidth={1.5} />
@@ -780,7 +780,7 @@ export default function ImageSizesSocialMedia2026Page() {
                   },
                   {
                     q: "What is the best tool to resize images for social media for free?",
-                    a: "SammaPix ResizePack lets you batch-resize images to exact pixel dimensions entirely in your browser- no upload, no account required. CropRatio handles aspect-ratio cropping with a visual interface for when you need to select a specific region. Both tools are free and process your files locally without sending them to any server.",
+                    a: "SammaPix Batch Resize lets you batch-resize images to exact pixel dimensions entirely in your browser- no upload, no account required. Crop & Ratio handles aspect-ratio cropping with a visual interface for when you need to select a specific region. Both tools are free and process your files locally without sending them to any server.",
                   },
                 ].map(({ q, a }) => (
                   <div key={q}>
@@ -831,7 +831,7 @@ export default function ImageSizesSocialMedia2026Page() {
                 Resize and crop images for every platform- free
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Use SammaPix ResizePack to batch-resize images to exact social media dimensions, and CropRatio to crop to the correct aspect ratio before posting. No upload, no account required- everything runs in your browser.
+                Use SammaPix Batch Resize to batch-resize images to exact social media dimensions, and Crop & Ratio to crop to the correct aspect ratio before posting. No upload, no account required- everything runs in your browser.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link

@@ -9,7 +9,7 @@ import { APP_URL } from "@/lib/constants";
 import { FileText } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BlogDrop - Blog-Ready Images in One Drop | SammaPix",
+  title: "Blog Ready - Blog-Ready Images in One Drop | SammaPix",
   description:
     "Blog-ready images in one drop. Compress, resize to 1200px, convert to WebP, and AI-rename with SEO blog names. Free combo tool.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/blogdrop`,
   },
   openGraph: {
-    title: "BlogDrop - Blog-Ready Images in One Drop | SammaPix",
+    title: "Blog Ready - Blog-Ready Images in One Drop | SammaPix",
     description:
       "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
     url: `${APP_URL}/tools/blogdrop`,
@@ -71,7 +71,7 @@ export default function BlogDropPage() {
   return (
     <main>
       <ToolHeader
-        title="BlogDrop"
+        title="Blog Ready"
         description="Blog-ready images in one drop. Compress, resize, WebP, SEO names."
         icon={FileText}
         accentColor="#8B5CF6"

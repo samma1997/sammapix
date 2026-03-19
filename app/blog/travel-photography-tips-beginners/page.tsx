@@ -453,7 +453,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 href="/tools/exif"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                EXIF Lens
+                EXIF Viewer
               </Link>
               .
             </p>
@@ -544,7 +544,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">End of day:</strong> Back up cards, do a rough cull on your laptop
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-2 list-decimal">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">After the trip:</strong> Final cull, edit selected photos, organize by location using GeoSort, build your travel map
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">After the trip:</strong> Final cull, edit selected photos, organize by location using Sort by Location, build your travel map
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-2 list-decimal">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Before sharing:</strong> Strip GPS from photos you share publicly using the EXIF Remover
@@ -588,7 +588,7 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 href="/tools/exif"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
               >
-                SammaPix EXIF Lens
+                SammaPix EXIF Viewer
               </Link>{" "}
               tool. Drop any photo in and it will display all EXIF metadata- 
               including GPS coordinates, camera model, lens, aperture, shutter
@@ -655,8 +655,8 @@ export default function TravelPhotographyTipsBeginnersPage() {
                 Put your travel photos to work
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Map your GPS-tagged photos with TravelMap, sort them by
-                location with GeoSort, or explore your EXIF data with EXIF
+                Map your GPS-tagged photos with Photo Map, sort them by
+                location with Sort by Location, or explore your EXIF data with EXIF
                 Lens- all free, all in-browser.
               </p>
               <div className="flex flex-wrap gap-3">

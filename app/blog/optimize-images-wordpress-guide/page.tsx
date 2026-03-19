@@ -192,14 +192,14 @@ const steps = [
   {
     number: "04",
     title: "Remove EXIF data for privacy",
-    tool: "SammaPix EXIF Lens",
+    tool: "SammaPix EXIF Viewer",
     href: "/tools/exif",
     color: "text-purple-700 dark:text-purple-400",
     bg: "bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900",
     description:
       "Every photo taken with a smartphone or modern camera embeds EXIF metadata- including GPS coordinates, device model, and date/time. WordPress does not strip this by default. Anyone who downloads your images can see exactly where they were taken.",
     details: [
-      "Use EXIF Lens to inspect what metadata is embedded before uploading",
+      "Use EXIF Viewer to inspect what metadata is embedded before uploading",
       "Strip GPS location data, device identifiers, and shooting conditions",
       "Especially important for home business owners, family bloggers, and client photographers",
       "EXIF removal also reduces file size by a small but measurable amount",
@@ -661,7 +661,7 @@ export default function OptimizeImagesWordPressGuidePage() {
                   },
                   {
                     q: "Does WordPress strip EXIF metadata on upload?",
-                    a: "No. WordPress does not strip EXIF data by default. GPS coordinates, device model, and timestamp remain embedded in uploaded images. Use SammaPix EXIF Lens to inspect and remove metadata before uploading, or configure a plugin like Imagify or ShortPixel to strip EXIF on upload.",
+                    a: "No. WordPress does not strip EXIF data by default. GPS coordinates, device model, and timestamp remain embedded in uploaded images. Use SammaPix EXIF Viewer to inspect and remove metadata before uploading, or configure a plugin like Imagify or ShortPixel to strip EXIF on upload.",
                   },
                   {
                     q: "Is Smush better than ShortPixel for WordPress?",

@@ -81,7 +81,7 @@ const features = [
 
 const steps = [
   { n: "1", title: "Drop your photos", desc: "Select or drag JPG / HEIC files from any trip- mix multiple destinations freely." },
-  { n: "2", title: "GeoSort reads GPS", desc: "Each photo's GPS coordinates are extracted from EXIF data directly in the browser." },
+  { n: "2", title: "Sort by Location reads GPS", desc: "Each photo's GPS coordinates are extracted from EXIF data directly in the browser." },
   { n: "3", title: "Grouped by country", desc: "Coordinates are reverse-geocoded to a country name. Photos without GPS go to _unsorted/." },
   { n: "4", title: "Download ZIP", desc: "One click downloads a ZIP with subfolders ready to use: Japan/, Thailand/, Italy/ …" },
 ];
@@ -90,7 +90,7 @@ export default function GeoSortPage() {
   return (
     <main>
       <ToolHeader
-        title="GeoSort"
+        title="Sort by Location"
         description="Drop your travel photos - GPS data is read locally and photos are organized into folders by country. Nothing leaves your device."
         icon={MapPin}
         accentColor="#22C55E"

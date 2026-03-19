@@ -83,7 +83,7 @@ export default function CullPage() {
   return (
     <main>
       <ToolHeader
-        title="Cull"
+        title="Photo Cull"
         description="Review your photos one at a time with keyboard shortcuts. K to keep, X to reject. Download only your best shots as a ZIP."
         icon={Star}
         accentColor="#F43F5E"

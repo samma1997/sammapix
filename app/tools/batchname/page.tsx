@@ -7,7 +7,7 @@ import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "BatchName - Rename Files with Custom Patterns | SammaPix",
+  title: "Batch Rename - Rename Files with Custom Patterns | SammaPix",
   description:
     "Rename multiple files with a custom pattern. Use auto-increment numbers, dates, or keep original names. 100% free, no AI, no login required. Works entirely in your browser.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/batchname`,
   },
   openGraph: {
-    title: "BatchName - Rename Files with Custom Patterns | SammaPix",
+    title: "Batch Rename - Rename Files with Custom Patterns | SammaPix",
     description:
       "Rename multiple files with a custom pattern. Auto-increment, dates, original names. Free and browser-based.",
     url: `${APP_URL}/tools/batchname`,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "BatchName - Rename Files with Custom Patterns",
+        alt: "Batch Rename - Rename Files with Custom Patterns",
       },
     ],
   },
@@ -114,7 +114,7 @@ export default function BatchNamePage() {
       />
 
       <ToolHeader
-        title="BatchName"
+        title="Batch Rename"
         description="Rename files with a custom pattern. No AI, no login, 100% free."
       />
 

@@ -108,7 +108,7 @@ export default function ExifPage() {
   return (
     <main>
       <ToolHeader
-        title="EXIF Lens"
+        title="EXIF Viewer"
         description="View all metadata in your photos - GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser."
         icon={ShieldOff}
         accentColor="#EF4444"
