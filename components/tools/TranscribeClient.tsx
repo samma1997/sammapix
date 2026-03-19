@@ -649,7 +649,7 @@ export default function TranscribeClient() {
       {isLoggedIn && (
         <p className="text-xs text-[#A3A3A3] text-center">
           Free: 5 min/day &middot;{" "}
-          <a href="/pricing" className="text-[#6366F1] hover:underline">
+          <a href="/dashboard/upgrade" className="text-[#6366F1] hover:underline">
             Pro
           </a>{" "}
           unlocks 60 min/month &middot; 1 credit per extra minute

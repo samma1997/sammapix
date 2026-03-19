@@ -533,7 +533,7 @@ export default function StampIt() {
             Free plan: up to {MAX_FREE} images. Upgrade to Pro for {MAX_PRO}.
           </p>
           <Link
-            href="/pricing"
+            href="/dashboard/upgrade"
             className="shrink-0 text-xs font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-3 py-1.5 rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
           >
             Get Pro
@@ -565,7 +565,7 @@ export default function StampIt() {
               JPG, PNG, WebP- up to {maxFiles} images
               {!isPro && (
                 <span className="ml-1.5 inline-flex items-center gap-1 text-[10px] font-medium bg-[#F5F5F5] border border-[#E5E5E5] text-[#525252] px-1.5 py-0.5 rounded">
-                  Free: {MAX_FREE} &bull; <Link href="/pricing" className="text-[#6366F1] hover:underline" onClick={(e) => e.stopPropagation()}>Pro: {MAX_PRO}</Link>
+                  Free: {MAX_FREE} &bull; <Link href="/dashboard/upgrade" className="text-[#6366F1] hover:underline" onClick={(e) => e.stopPropagation()}>Pro: {MAX_PRO}</Link>
                 </span>
               )}
             </p>

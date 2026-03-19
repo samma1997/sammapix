@@ -164,7 +164,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "AI analyzes", desc: "Gemini AI generates descriptive filenames." },
       { title: "Download renamed", desc: "Get SEO-ready filenames + alt text." },
     ],
-    proTip: { text: "Unlimited renames on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
+    proTip: { text: "Unlimited renames on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   "alt-text": {
     label: "AI Alt Text",
@@ -174,7 +174,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "AI generates", desc: "Gemini creates descriptive alt text." },
       { title: "Copy or export", desc: "Copy all or download as CSV." },
     ],
-    proTip: { text: "Perfect for WCAG compliance and SEO.", linkLabel: "See Pro features", linkHref: "/pricing" },
+    proTip: { text: "Perfect for WCAG compliance and SEO.", linkLabel: "See Pro features", linkHref: "/dashboard/upgrade" },
   },
   exif: {
     label: "EXIF Lens",
@@ -204,7 +204,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Configure", desc: "Add text/logo, choose position." },
       { title: "Download", desc: "Get watermarked images." },
     ],
-    proTip: { text: "Use tiled filigrana mode for maximum protection.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
+    proTip: { text: "Use tiled filigrana mode for maximum protection.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   croproatio: {
     label: "CropRatio",
@@ -264,7 +264,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Rate with stars", desc: "Use keyboard shortcuts to rate." },
       { title: "Export keepers", desc: "Download only the best shots." },
     ],
-    proTip: { text: "Use keyboard shortcuts: 1-5 for stars, X to reject.", linkLabel: "See Pro features", linkHref: "/pricing" },
+    proTip: { text: "Use keyboard shortcuts: 1-5 for stars, X to reject.", linkLabel: "See Pro features", linkHref: "/dashboard/upgrade" },
   },
   "pdf-to-image": {
     label: "PDF to Image",
@@ -294,7 +294,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "AI transcribes", desc: "Gemini Flash generates text with timestamps." },
       { title: "Export SRT or TXT", desc: "Download subtitles or plain transcription." },
     ],
-    proTip: { text: "Unlimited AI transcriptions on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
+    proTip: { text: "Unlimited AI transcriptions on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   workflow: {
     label: "AI Workflow",
@@ -304,7 +304,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Drop photos", desc: "Add up to 500 files." },
       { title: "Run & download", desc: "Get everything processed as ZIP." },
     ],
-    proTip: { text: "This is the Pro killer feature -- saves hours per shoot.", linkLabel: "Upgrade to Pro", linkHref: "/pricing" },
+    proTip: { text: "This is the Pro killer feature -- saves hours per shoot.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   // Combo tools
   weblift: {

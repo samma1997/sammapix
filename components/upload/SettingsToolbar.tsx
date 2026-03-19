@@ -182,7 +182,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
           {showAiToggle && remaining === 0 && session && (
             <span className="text-[10px] text-red-500">
               Limit reached &middot;{" "}
-              <a href="/pricing" className="underline">Go Pro</a>
+              <a href="/dashboard/upgrade" className="underline">Go Pro</a>
             </span>
           )}
         </div>

@@ -99,7 +99,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
             </p>
             {plan === "free" && (
               <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-                <a href="/pricing" className="text-brand hover:underline">Upgrade to Pro</a> to process up to {PLAN_LIMITS.pro.maxFiles} files
+                <a href="/dashboard/upgrade" className="text-brand hover:underline">Upgrade to Pro</a> to process up to {PLAN_LIMITS.pro.maxFiles} files
               </p>
             )}
           </>
@@ -136,7 +136,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
               {items.length} / {maxFiles} files
             </span>
             {plan === "free" && items.length >= 3 && (
-              <a href="/pricing" className="text-xs text-indigo-500 hover:underline font-medium">
+              <a href="/dashboard/upgrade" className="text-xs text-indigo-500 hover:underline font-medium">
                 Upgrade for {PLAN_LIMITS.pro.maxFiles} →
               </a>
             )}

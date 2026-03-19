@@ -73,7 +73,7 @@ const ProUpsellBanner = ({ onDismiss, limit }: { onDismiss: () => void; limit: n
         </p>
         <p className="text-xs text-[#B45309] dark:text-[#D97706]">
           Upgrade to Pro to convert up to {PDF_PAGES_PRO} pages at once.{" "}
-          <Link href="/pricing" className="underline font-medium hover:text-[#92400E]">
+          <Link href="/dashboard/upgrade" className="underline font-medium hover:text-[#92400E]">
             See Pro plans
           </Link>
         </p>
@@ -562,7 +562,7 @@ export default function PdfToImageClient() {
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
                 Free: up to {PDF_PAGES_FREE} pages &middot;{" "}
-                <Link href="/pricing" className="underline hover:text-[#737373]">
+                <Link href="/dashboard/upgrade" className="underline hover:text-[#737373]">
                   Pro: {PDF_PAGES_PRO} pages
                 </Link>
               </p>

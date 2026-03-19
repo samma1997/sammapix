@@ -880,7 +880,7 @@ export default function ResizePack() {
               <p className="text-[11px] text-[#C4C4C4]">
                 Free: up to {MAX_FREE} files &middot;{" "}
                 <Link
-                  href="/pricing"
+                  href="/dashboard/upgrade"
                   className="underline hover:text-[#737373]"
                 >
                   Pro: 500

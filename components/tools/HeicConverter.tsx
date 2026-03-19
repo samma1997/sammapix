@@ -190,7 +190,7 @@ const ProUpsellBanner = ({ onDismiss }: { onDismiss: () => void }) => (
         </p>
         <p className="text-xs text-[#B45309] dark:text-[#D97706]">
           Upgrade to Pro to convert up to {MAX_FILES_PRO} HEIC files at once.{" "}
-          <Link href="/pricing" className="underline font-medium hover:text-[#92400E]">
+          <Link href="/dashboard/upgrade" className="underline font-medium hover:text-[#92400E]">
             See Pro plans
           </Link>
         </p>
@@ -619,7 +619,7 @@ export default function HeicConverter() {
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
                 Free: up to {MAX_FILES_FREE} files &middot;{" "}
-                <Link href="/pricing" className="underline hover:text-[#737373]">
+                <Link href="/dashboard/upgrade" className="underline hover:text-[#737373]">
                   Pro: {MAX_FILES_PRO}
                 </Link>
               </p>

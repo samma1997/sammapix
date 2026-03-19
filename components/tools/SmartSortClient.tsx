@@ -530,7 +530,7 @@ export default function SmartSortClient() {
                     </span>
                     {aiUsage.remaining === 0 && (
                       <a
-                        href="/pricing"
+                        href="/dashboard/upgrade"
                         className="text-[#6366F1] hover:text-[#4F46E5] transition-colors"
                       >
                         Upgrade to Pro
@@ -582,7 +582,7 @@ export default function SmartSortClient() {
                   <p className="text-xs text-[#DC2626] dark:text-[#FCA5A5]">{limitError}</p>
                   {!isPro && (
                     <a
-                      href="/pricing"
+                      href="/dashboard/upgrade"
                       className="text-xs text-[#6366F1] hover:text-[#4F46E5] transition-colors mt-0.5 inline-block"
                     >
                       Upgrade to Pro — $7/mo
