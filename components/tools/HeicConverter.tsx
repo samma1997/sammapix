@@ -86,28 +86,22 @@ async function convertServerSide(
   return res.blob();
 }
 
-// Client-side conversion using heic2any (no size limit, slower)
+// Client-side conversion using heic-to (WASM-based, fast even for large files)
 async function convertClientSide(
   file: File,
   format: OutputFormat,
   quality: number
 ): Promise<Blob> {
-  const heic2any = (await import("heic2any")).default;
+  const { heicTo } = await import("heic-to");
   const toType = format === "WebP" ? "image/webp" : "image/jpeg";
 
-  // Add timeout for large files (120s max)
-  const conversionPromise = heic2any({
+  const blob = await heicTo({
     blob: file,
-    toType,
+    type: toType,
     quality: quality / 100,
   });
 
-  const timeoutPromise = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error("Conversion timed out (file too large for browser)")), 120000)
-  );
-
-  const result = await Promise.race([conversionPromise, timeoutPromise]);
-  return Array.isArray(result) ? result[0] : result;
+  return blob;
 }
 
 // Hybrid: server for small files (fast), client for large files (no limit)
@@ -484,10 +478,10 @@ export default function HeicConverter() {
       const file = new File([target.outputBlob], name, { type: target.outputBlob.type });
 
       const compressed = await imageCompression(file, {
-        maxSizeMB: 10,
+        maxSizeMB: 2,
         maxWidthOrHeight: 4096,
         useWebWorker: true,
-        initialQuality: 0.8,
+        initialQuality: 0.65,
       });
 
       setFiles((prev) =>
