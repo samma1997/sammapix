@@ -1,16 +1,8 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth/options";
-import { Providers } from "@/app/providers";
-import { Inter } from "next/font/google";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import type { Metadata } from "next";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Dashboard | SammaPix",
@@ -37,29 +29,16 @@ export default async function DashboardLayout({
   };
 
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}`,
-          }}
-        />
-      </head>
-      <body className="font-sans antialiased bg-white dark:bg-[#191919] text-[#171717] dark:text-[#E5E5E5] min-h-screen transition-colors duration-150">
-        <Providers>
-          <div className="flex h-screen overflow-hidden bg-white dark:bg-[#191919]">
-            <DashboardSidebar
-              userName={user.name ?? null}
-              userEmail={user.email ?? null}
-              userImage={user.image ?? null}
-              userPlan={user.plan ?? "free"}
-            />
-            <main className="flex-1 overflow-y-auto">
-              {children}
-            </main>
-          </div>
-        </Providers>
-      </body>
-    </html>
+    <div className="flex h-screen overflow-hidden bg-white dark:bg-[#191919]">
+      <DashboardSidebar
+        userName={user.name ?? null}
+        userEmail={user.email ?? null}
+        userImage={user.image ?? null}
+        userPlan={user.plan ?? "free"}
+      />
+      <main className="flex-1 overflow-y-auto">
+        {children}
+      </main>
+    </div>
   );
 }
