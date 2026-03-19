@@ -227,9 +227,23 @@ export const useImageStore = create<ImageStoreState>()(
 
     setAiRenameUsedToday: (n: number) => set((state) => { state.aiRenameUsedToday = n; }),
 
-    initAiRenameCounter: (email: string) => {
-      const used = getUsedToday(email);
-      set((state) => { state.aiRenameUsedToday = used; });
+    initAiRenameCounter: async (email: string) => {
+      // Start with localStorage cache (instant)
+      const cached = getUsedToday(email);
+      set((state) => { state.aiRenameUsedToday = cached; });
+
+      // Then fetch authoritative count from server
+      try {
+        const res = await fetch("/api/ai/usage", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json() as { used: number };
+          set((state) => { state.aiRenameUsedToday = data.used; });
+          // Sync localStorage
+          setUsedToday(email, data.used);
+        }
+      } catch {
+        // Server unavailable — keep localStorage value
+      }
     },
 
     aiRenameFile: async (id: string) => {
