@@ -226,9 +226,9 @@ export default function DashboardSidebar({
         </Link>
 
         <Link
-          href="/dashboard/tools/workflow"
+          href="/dashboard/ai-tools"
           onClick={() => setMobileOpen(false)}
-          className={linkClasses("/dashboard/tools/workflow")}
+          className={linkClasses("/dashboard/ai-tools")}
         >
           <Sparkles className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           AI Tools
