@@ -418,9 +418,21 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
                   {pf.status === "error" && <AlertCircle className="text-[#DC2626]" style={{ width: 18, height: 18 }} strokeWidth={1.5} />}
                 </div>
 
-                {/* File name + step progress */}
+                {/* File name + step progress + size info */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-[#171717] dark:text-[#E5E5E5] truncate">{pf.originalName}</p>
+                  <p className="text-sm text-[#171717] dark:text-[#E5E5E5] truncate">
+                    {pf.status === "done" ? pf.resultName : pf.originalName}
+                  </p>
+                  {pf.status === "done" && pf.resultBlob && (
+                    <p className="text-[11px] text-[#A3A3A3] mt-0.5">
+                      {(pf.originalFile.size / 1024).toFixed(0)} KB → {(pf.resultBlob.size / 1024).toFixed(0)} KB
+                      {pf.resultBlob.size < pf.originalFile.size && (
+                        <span className="text-[#16A34A] font-medium ml-1">
+                          -{Math.round((1 - pf.resultBlob.size / pf.originalFile.size) * 100)}%
+                        </span>
+                      )}
+                    </p>
+                  )}
                   {pf.status === "processing" && pf.currentStep >= 0 && (
                     <div className="flex items-center gap-1.5 mt-1">
                       {activeSteps.map((step, i) => (
