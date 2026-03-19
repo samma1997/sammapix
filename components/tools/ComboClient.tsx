@@ -243,64 +243,74 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
     <section className="px-4 sm:px-6 py-6">
       <div className="max-w-3xl mx-auto space-y-5">
 
-        {/* Pipeline steps with toggles */}
-        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-white dark:bg-[#1E1E1E]">
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide">Pipeline Steps</p>
-            <p className="text-[11px] text-[#A3A3A3]">
-              {activeSteps.length} of {stepToggles.length} active
-            </p>
-          </div>
-          <div className="space-y-2">
-            {stepToggles.map((step) => {
-              const isLastEnabled = step.enabled && enabledCount === 1;
-              return (
-                <div
-                  key={step.id}
-                  className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-md border transition-colors ${
-                    step.enabled
-                      ? "border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]"
-                      : "border-transparent bg-transparent opacity-50"
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span className={`text-sm font-medium ${step.enabled ? "text-[#171717] dark:text-[#E5E5E5]" : "text-[#A3A3A3] line-through"}`}>
+        {/* Toolbar — horizontal compact bar with toggles */}
+        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] p-4">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+            {/* Toggle switches inline */}
+            <div className="flex items-center gap-4 flex-wrap flex-1">
+              {stepToggles.map((step) => {
+                const isLastEnabled = step.enabled && enabledCount === 1;
+                return (
+                  <label key={step.id} className="flex items-center gap-2 cursor-pointer select-none">
+                    <ToggleSwitch
+                      checked={step.enabled}
+                      onChange={(v) => handleToggleStep(step.id, v)}
+                      disabled={isLastEnabled && step.enabled}
+                    />
+                    <span className={`text-sm ${step.enabled ? "text-gray-600 dark:text-[#A3A3A3]" : "text-[#A3A3A3] dark:text-[#525252]"}`}>
                       {step.label}
                     </span>
                     {step.isAi && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
-                        {isAuthenticated ? (
-                          <>
-                            <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
-                            AI
-                          </>
-                        ) : (
-                          <>
-                            <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
-                            Login required
-                          </>
-                        )}
-                      </span>
+                      isAuthenticated ? (
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#8B5CF6] bg-[#8B5CF6]/10 px-1.5 py-0.5 rounded">
+                          <Sparkles className="h-2.5 w-2.5" strokeWidth={1.5} />
+                          AI
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-[#A3A3A3] bg-gray-100 dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded">
+                          <Lock className="h-2.5 w-2.5" strokeWidth={1.5} />
+                          Login
+                        </span>
+                      )
                     )}
-                  </div>
-                  <ToggleSwitch
-                    checked={step.enabled}
-                    onChange={(v) => handleToggleStep(step.id, v)}
-                    disabled={isLastEnabled && step.enabled}
-                  />
-                </div>
-              );
-            })}
+                  </label>
+                );
+              })}
+            </div>
+
+            {/* Process button */}
+            {hasPending && (
+              <button
+                onClick={processAll}
+                disabled={isProcessing || needsAuthForAi}
+                className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4" strokeWidth={1.5} />
+                    Process all
+                  </>
+                )}
+              </button>
+            )}
+
+            {/* Download ZIP after processing */}
+            {hasDone && !hasPending && (
+              <button
+                onClick={downloadAllZip}
+                className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+              >
+                <Download className="h-4 w-4" strokeWidth={1.5} />
+                Download ZIP ({doneCount})
+              </button>
+            )}
           </div>
         </div>
-
-        {/* AI daily limit badge */}
-        {hasAiSteps && isAuthenticated && enabledAiSteps.length > 0 && (
-          <div className="flex items-center gap-2 text-xs text-[#737373]">
-            <Sparkles className="h-3.5 w-3.5 text-[#8B5CF6]" strokeWidth={1.5} />
-            <span>AI features use your daily limit (10/day free, unlimited Pro)</span>
-          </div>
-        )}
 
         {/* Auth gate message for AI steps */}
         {needsAuthForAi && (
@@ -400,39 +410,9 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
           </div>
         )}
 
-        {/* Action buttons */}
+        {/* Clear button */}
         {files.length > 0 && (
-          <div className="flex flex-wrap items-center gap-3">
-            {hasPending && (
-              <button
-                onClick={processAll}
-                disabled={isProcessing}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isProcessing ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <Play className="h-4 w-4" strokeWidth={1.5} />
-                    Process All
-                  </>
-                )}
-              </button>
-            )}
-
-            {hasDone && (
-              <button
-                onClick={downloadAllZip}
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] bg-white dark:bg-[#1E1E1E] transition-colors"
-              >
-                <Download className="h-4 w-4" strokeWidth={1.5} />
-                Download all as ZIP ({doneCount})
-              </button>
-            )}
-
+          <div className="flex justify-end">
             <button
               onClick={() => setFiles([])}
               className="text-xs text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#737373] transition-colors"
