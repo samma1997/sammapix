@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 import { sendMetaEvent } from "@/lib/meta-conversions";
+import { incrWithTTL } from "@/lib/redis";
 
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
@@ -30,6 +31,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { error: "Login required", code: "UNAUTHORIZED" },
       { status: 401 }
+    );
+  }
+
+  // Rate limit: 5 checkout attempts per minute per authenticated user
+  const rlCount = await incrWithTTL(`rl:checkout:${session.user.email}`, 60);
+  if (rlCount !== null && rlCount > 5) {
+    return NextResponse.json(
+      { error: "Too many requests", code: "RATE_LIMITED" },
+      { status: 429 }
     );
   }
 
@@ -95,7 +105,7 @@ export async function POST(req: NextRequest) {
       eventName: "InitiateCheckout",
       sourceUrl: `${appUrl}/dashboard/upgrade`,
       email: session.user.email,
-      ipAddress: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? undefined,
+      ipAddress: (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? undefined,
       userAgent: req.headers.get("user-agent") ?? undefined,
       customData: { currency: "USD", value: plan === "annual" ? 60 : 7 },
     }).catch(() => {});

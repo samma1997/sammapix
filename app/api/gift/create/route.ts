@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 import { generateGiftCode, saveGiftCode } from "@/lib/gift-codes";
+import { incrWithTTL } from "@/lib/redis";
 import { z } from "zod";
 
 export const runtime = "nodejs";
@@ -26,7 +27,7 @@ const CreateGiftSchema = z.object({
   recipientEmail: z.string().email().optional().or(z.literal("").transform(() => undefined)),
   senderName: z.string().min(1).max(100).trim(),
   message: z.string().max(500).trim().optional(),
-  color: z.string().min(3).max(30).trim(),
+  color: z.enum(["indigo", "rose", "emerald", "amber", "sky", "purple"]),
 });
 
 export async function POST(req: NextRequest) {
@@ -39,6 +40,16 @@ export async function POST(req: NextRequest) {
         { status: 403 }
       );
     }
+  }
+
+  // Rate limit: 5 gift creation requests per minute per IP
+  const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+  const rlCount = await incrWithTTL(`rl:gift-create:${ip}`, 60);
+  if (rlCount !== null && rlCount > 5) {
+    return NextResponse.json(
+      { error: "Too many requests", code: "RATE_LIMITED" },
+      { status: 429 }
+    );
   }
 
   // Require authentication — we need the sender's identity
@@ -114,7 +125,7 @@ export async function POST(req: NextRequest) {
 
     // Pre-populate the gift code store so the /check and /redeem endpoints can
     // locate it before the webhook fires (webhook may lag by a few seconds).
-    saveGiftCode(giftCode, {
+    await saveGiftCode(giftCode, {
       code: giftCode,
       senderName,
       senderEmail: session.user.email,

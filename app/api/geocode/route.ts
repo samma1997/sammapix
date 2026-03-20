@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { incrWithTTL } from "@/lib/redis";
 
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse";
 
@@ -13,6 +14,7 @@ function addSecurityHeaders(res: NextResponse): NextResponse {
 }
 
 // In-process cache (reduce Nominatim load within same Lambda instance)
+const MAX_CACHE_ENTRIES = 5_000;
 const cache = new Map<string, object>();
 
 // Validate that a string is a finite decimal number within geographic bounds
@@ -31,6 +33,13 @@ export async function GET(req: NextRequest) {
     if (origin && !ALLOWED_ORIGINS.some((o) => origin === o)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
+  }
+
+  // Rate limit: 30 requests per minute per IP
+  const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+  const rlCount = await incrWithTTL(`rl:geocode:${ip}`, 60);
+  if (rlCount !== null && rlCount > 30) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
   const { searchParams } = req.nextUrl;
@@ -80,7 +89,8 @@ export async function GET(req: NextRequest) {
 
     const data = await res.json();
 
-    // Save in in-process cache
+    // Save in in-process cache (bounded to prevent unbounded memory growth)
+    if (cache.size >= MAX_CACHE_ENTRIES) cache.clear();
     cache.set(cacheKey, data);
 
     return addSecurityHeaders(NextResponse.json(data));
