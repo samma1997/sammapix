@@ -54,8 +54,8 @@ const ALL_TOOLS = [
 const COMPARISON = [
   { feature: "All 20 tools",            free: "Yes",          pro: "Yes" },
   { feature: "AI Workflow Pipeline",    free: "No",           pro: "Yes" },
-  { feature: "Files per batch",         free: "100",          pro: "500" },
-  { feature: "AI Rename per day",       free: "5",            pro: "200" },
+  { feature: "Files per batch",         free: "20",           pro: "500" },
+  { feature: "AI Rename per day",       free: "10",           pro: "200" },
   { feature: "AI Credits",             free: "Buy anytime",  pro: "Buy anytime + 200 free/day" },
   { feature: "Max file size",           free: "20 MB",        pro: "50 MB" },
   { feature: "AI Smart Cull",           free: "No",           pro: "Coming soon" },

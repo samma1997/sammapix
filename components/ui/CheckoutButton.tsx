@@ -21,8 +21,11 @@ export default function CheckoutButton({
   const { data: session } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleClick = async () => {
+    setError(null);
+
     // Generate event ID for Meta deduplication (client pixel + server CAPI)
     const eventId = `ic_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 
@@ -60,10 +63,10 @@ export default function CheckoutButton({
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert(`Checkout error: ${data.error ?? "no URL returned"} [${data.code ?? res.status}]`);
+        setError(`Checkout error: ${data.error ?? "no URL returned"} [${data.code ?? res.status}]`);
       }
     } catch (err) {
-      alert(`Network error: ${err instanceof Error ? err.message : String(err)}`);
+      setError(`Network error: ${err instanceof Error ? err.message : String(err)}`);
       console.error("Checkout error:", err);
     } finally {
       setLoading(false);
@@ -71,14 +74,17 @@ export default function CheckoutButton({
   };
 
   return (
-    <Button
-      variant="primary"
-      size={size}
-      className={className}
-      loading={loading}
-      onClick={handleClick}
-    >
-      {children ?? "Get Pro- $7/mo"}
-    </Button>
+    <>
+      <Button
+        variant="primary"
+        size={size}
+        className={className}
+        loading={loading}
+        onClick={handleClick}
+      >
+        {children ?? "Get Pro- $7/mo"}
+      </Button>
+      {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
+    </>
   );
 }

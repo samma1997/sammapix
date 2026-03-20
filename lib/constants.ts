@@ -21,7 +21,7 @@ export const MAX_HEIC_PRO = 500;
 
 // AI limits (shared pool: AI Rename + AI Alt Text + SmartSort)
 export const AI_OPS_FREE_PER_DAY = 10;
-export const AI_OPS_PRO_PER_DAY = 500;
+export const AI_OPS_PRO_PER_DAY = 200;
 
 // Legacy aliases (keep for existing code compatibility)
 export const AI_RENAME_FREE_PER_DAY = AI_OPS_FREE_PER_DAY;
