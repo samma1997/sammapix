@@ -45,6 +45,11 @@ export default function OnboardingController() {
     if (persisted === null) {
       // First visit (new signup) — track and show modal after a short delay
       trackEvent("signup_completed");
+      // Fire Google Ads signup conversion
+      const signupLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_SIGNUP_LABEL;
+      if (signupLabel && typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", { send_to: signupLabel });
+      }
       const t = setTimeout(() => setShowModal(true), 1500);
       return () => clearTimeout(t);
     }
