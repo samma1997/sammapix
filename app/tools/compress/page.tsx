@@ -8,7 +8,6 @@ import {
   Image as ImageIcon,
   FileDown,
   Zap,
-  ArrowLeft,
   Minimize2,
   CheckCircle2,
 } from "lucide-react";
@@ -123,15 +122,6 @@ export default function CompressPage() {
       {/*  HERO — Conversion-focused, compact, above the tool          */}
       {/* ============================================================ */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
-        {/* Back link */}
-        <Link
-          href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          All tools
-        </Link>
-
         {/* Icon + H1 */}
         <div className="flex items-center gap-3 mb-2">
           <div
@@ -266,10 +256,10 @@ export default function CompressPage() {
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                0
+                Zero
               </p>
               <p className="text-xs text-[#737373] mt-1">
-                Files uploaded to servers
+                Server uploads
               </p>
             </div>
           </div>
@@ -411,22 +401,20 @@ export default function CompressPage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-            How image compression works
+            Why compress images online?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            SammaPix compresses images using the browser&apos;s native Canvas
-            API combined with the{" "}
-            <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded border border-[#E5E5E5] dark:border-[#2A2A2A] dark:text-[#E5E5E5]">
-              browser-image-compression
-            </code>{" "}
-            library. The process re-encodes the image at the quality level you
-            choose (default 80%) producing a smaller file with imperceptible
-            quality differences.
+            Smaller images load faster and rank better on Google. SammaPix
+            compresses your images directly in your browser using advanced
+            algorithms that analyze each image and remove unnecessary data. You
+            control the quality with a simple slider — most images at the
+            default 80% setting show zero visible difference from the original
+            while shrinking by 50–80%.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            Unlike server-based tools like TinyPNG or Squoosh, nothing leaves
-            your browser. This means no privacy risk, no file size limits
-            imposed by network bandwidth, and near-instant results.
+            Because everything stays on your device, there&apos;s zero privacy
+            risk — your photos never touch a server. You won&apos;t hit upload
+            limits, and you&apos;ll get results instantly.
           </p>
           <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             When should you compress images?
@@ -434,90 +422,26 @@ export default function CompressPage() {
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
               <span className="text-[#6366F1] mt-0.5">-</span>
-              Before uploading to your website or CMS to improve page speed and
-              Core Web Vitals
+              Before uploading to your website to improve Google page speed
+              rankings
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#6366F1] mt-0.5">-</span>
-              Before attaching to emails to reduce attachment size
+              Before attaching to emails to keep attachment sizes small
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#6366F1] mt-0.5">-</span>
-              Before sharing on social media for faster upload
+              Before sharing on social media to avoid quality loss during upload
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#6366F1] mt-0.5">-</span>
-              For e-commerce product images to boost SEO and conversion rates
+              For e-commerce product photos to improve search rankings and
+              reduce bounce rate
             </li>
           </ul>
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/*  ALL TOOLS — Show the full platform                          */}
-      {/* ============================================================ */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            SammaPix is more than a compressor
-          </h2>
-          <p className="text-xs text-[#A3A3A3] mb-6">
-            20 free browser-based tools for creators. Everything runs locally — your files never leave your device.
-          </p>
-
-          {/* AI Organize — Featured */}
-          <Link
-            href="/tools/ai-organize"
-            className="flex items-start gap-4 p-5 mb-4 border-2 border-[#8B5CF6]/30 rounded-xl bg-[#8B5CF6]/5 hover:bg-[#8B5CF6]/10 transition-colors group"
-          >
-            <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-[#8B5CF6]/15 shrink-0">
-              <Sparkles className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] flex items-center gap-2">
-                AI File Organizer
-                <span className="text-[9px] font-bold uppercase tracking-widest bg-[#8B5CF6] text-white px-2 py-0.5 rounded-full">NEW</span>
-              </p>
-              <p className="text-xs text-[#737373] mt-1 leading-relaxed">
-                Drop any files — photos, PDFs, documents, videos. AI sorts into smart folders, finds duplicates, and renames based on content. No competitor does this browser-based.
-              </p>
-            </div>
-            <ArrowRight className="h-4 w-4 text-[#8B5CF6] shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" strokeWidth={1.5} />
-          </Link>
-
-          {/* Tool grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[
-              { name: "WebP Convert", href: "/tools/webp" },
-              { name: "HEIC to JPG", href: "/tools/heic" },
-              { name: "AI Rename", href: "/tools/ai-rename" },
-              { name: "AI Alt Text", href: "/tools/alt-text" },
-              { name: "Batch Resize", href: "/tools/resizepack" },
-              { name: "Crop & Ratio", href: "/tools/croproatio" },
-              { name: "Film Filters", href: "/tools/filmlab" },
-              { name: "Watermark", href: "/tools/stampit" },
-              { name: "EXIF Remover", href: "/tools/exif" },
-              { name: "Find Duplicates", href: "/tools/twinhunt" },
-              { name: "Photo Map", href: "/tools/travelmap" },
-              { name: "Cull Photos", href: "/tools/cull" },
-            ].map((t) => (
-              <Link
-                key={t.href}
-                href={t.href}
-                className="px-3 py-2.5 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:bg-[#FAFAFA] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors text-center"
-              >
-                {t.name}
-              </Link>
-            ))}
-          </div>
-
-          <div className="mt-4 text-center">
-            <Link href="/tools" className="text-xs text-[#6366F1] hover:underline font-medium">
-              See all 20 tools →
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
