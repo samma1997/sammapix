@@ -5,6 +5,8 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Disable source maps in production to prevent code inspection
+  productionBrowserSourceMaps: false,
   async redirects() {
     return [
       { source: '/destinations', destination: '/about', permanent: true },
@@ -61,6 +63,8 @@ const nextConfig = {
 {
         source: "/(.*)",
         headers: [
+          // Anti-scraping: prevent Google/Bing from caching page copies
+          { key: "X-Robots-Tag", value: "noarchive" },
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           {

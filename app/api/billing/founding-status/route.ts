@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
+import { validateOrigin } from "@/lib/api-security";
 
 // Cache for 5 minutes to avoid hammering Stripe
 let cached: { spotsLeft: number; totalSpots: number; active: boolean; cachedAt: number } | null = null;
@@ -8,7 +9,10 @@ const CACHE_TTL = 5 * 60 * 1000;
 const FOUNDING_COUPON_ID = process.env.STRIPE_FOUNDING_COUPON_ID || "FOUNDING200";
 const FOUNDING_MAX = 200;
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
+
   const headers = { "Cache-Control": "public, max-age=300" };
 
   if (cached && Date.now() - cached.cachedAt < CACHE_TTL) {

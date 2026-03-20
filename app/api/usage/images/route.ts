@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { incrWithTTL, getInt } from "@/lib/redis";
 import { DAILY_IMAGES_FREE, DAILY_IMAGES_PRO } from "@/lib/constants";
+import { validateOrigin } from "@/lib/api-security";
 
 // In-memory fallback for when Redis is not configured
 const memoryStore = new Map<string, number>();
@@ -19,7 +20,10 @@ const TTL_SECONDS = 26 * 60 * 60;
  * GET /api/usage/images
  * Returns current daily image usage for the authenticated user.
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
+
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized", code: "UNAUTHORIZED" }, { status: 401 });
@@ -47,6 +51,9 @@ export async function GET() {
  * Returns updated usage. Returns 429 if limit would be exceeded.
  */
 export async function POST(req: NextRequest) {
+  const originError = validateOrigin(req);
+  if (originError) return originError;
+
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
 

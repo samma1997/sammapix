@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { getGiftCode } from "@/lib/gift-codes";
 import { incrWithTTL } from "@/lib/redis";
+import { validateOrigin } from "@/lib/api-security";
 
 export const runtime = "nodejs";
 
@@ -13,6 +14,9 @@ export const runtime = "nodejs";
  * gift card preview without exposing sender email or internal IDs.
  */
 export async function GET(req: NextRequest) {
+  const originError = validateOrigin(req);
+  if (originError) return originError;
+
   // Rate limit: 10 requests per minute per IP
   const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
   const rlCount = await incrWithTTL(`rl:gift-check:${ip}`, 60);

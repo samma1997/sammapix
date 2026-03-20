@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { getInt } from "@/lib/redis";
 import { AI_OPS_FREE_PER_DAY, AI_OPS_PRO_PER_DAY } from "@/lib/constants";
+import { validateOrigin } from "@/lib/api-security";
 
 function todayStr(): string {
   return new Date().toISOString().split("T")[0];
@@ -11,7 +12,9 @@ function todayStr(): string {
 // In-memory fallback when Redis is not available
 const memoryUsage = new Map<string, number>();
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

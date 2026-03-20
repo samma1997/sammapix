@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { resend } from "@/lib/resend";
+import { validateOrigin } from "@/lib/api-security";
 
 export async function POST(req: NextRequest) {
+  const originError = validateOrigin(req);
+  if (originError) return originError;
   try {
     const { email } = (await req.json()) as { email?: string };
     if (!email || typeof email !== "string") {
