@@ -827,7 +827,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       </section>
 
       {/* -- Sticky search bar + Category tabs -- */}
-      <section className="sticky top-0 z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 py-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
+      <section className="fixed top-12 left-0 right-0 md:sticky md:top-0 md:left-auto md:right-auto z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm px-4 sm:px-6 md:-mx-6 pt-2 pb-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
         <div className="flex flex-col gap-2.5">
           {/* Search input */}
           <div className="relative">
@@ -878,6 +878,9 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
           </div>
         </div>
       </section>
+
+      {/* Spacer for fixed search bar on mobile */}
+      <div className="h-20 md:h-0" aria-hidden="true" />
 
       {/* -- Tool grid -- */}
       {isFiltering ? (

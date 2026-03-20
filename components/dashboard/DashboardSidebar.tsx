@@ -378,38 +378,34 @@ export default function DashboardSidebar({
         {/* Profile popover menu */}
         {profileMenuOpen && (
           <div className="absolute bottom-full left-2 right-2 mb-1 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3)] py-1 z-50">
-            <Link
-              href="/dashboard/settings"
-              onClick={() => { setProfileMenuOpen(false); setMobileOpen(false); }}
-              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
+            <button
+              onClick={() => mobileNav("/dashboard/settings")}
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150 w-full text-left"
             >
               <Settings className="h-4 w-4" strokeWidth={1.5} />
               Settings
-            </Link>
-            <Link
-              href="/dashboard/upgrade"
-              onClick={() => { setProfileMenuOpen(false); setMobileOpen(false); }}
-              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
+            </button>
+            <button
+              onClick={() => mobileNav("/dashboard/upgrade")}
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150 w-full text-left"
             >
               <Crown className="h-4 w-4" strokeWidth={1.5} />
               Upgrade Plan
-            </Link>
-            <Link
-              href="/dashboard/gifts"
-              onClick={() => { setProfileMenuOpen(false); setMobileOpen(false); }}
-              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
+            </button>
+            <button
+              onClick={() => mobileNav("/dashboard/gifts")}
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150 w-full text-left"
             >
               <Gift className="h-4 w-4" strokeWidth={1.5} />
               Gift a subscription
-            </Link>
-            <Link
-              href="/glossary"
-              onClick={() => { setProfileMenuOpen(false); setMobileOpen(false); }}
-              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150"
+            </button>
+            <button
+              onClick={() => mobileNav("/glossary")}
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150 w-full text-left"
             >
               <HelpCircle className="h-4 w-4" strokeWidth={1.5} />
               Help
-            </Link>
+            </button>
             <button
               onClick={() => {
                 const isDark = document.documentElement.classList.contains("dark");
