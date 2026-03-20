@@ -243,7 +243,7 @@ export default function DashboardCredits({ purchased, canceled }: DashboardCredi
           AI Credits
         </h1>
         <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
-          Buy credits for AI operations. Credits never expire.
+          Buy AI credits. Credits never expire.
         </p>
       </div>
 
@@ -307,7 +307,7 @@ export default function DashboardCredits({ purchased, canceled }: DashboardCredi
           ))}
         </ul>
         <p className="text-xs text-[#737373] dark:text-[#A3A3A3] border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-3 leading-relaxed">
-          Pro users get 200 free AI operations/day. Credits are for when you need more.{" "}
+          Pro users get 200 free AI credits/day. Credits are for when you need more.{" "}
           <Link href="/dashboard/upgrade" className="text-[#6366F1] hover:underline underline-offset-2">
             View plans
           </Link>

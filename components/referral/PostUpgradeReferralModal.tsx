@@ -65,7 +65,7 @@ export default function PostUpgradeReferralModal({ userPlan }: PostUpgradeReferr
     try {
       await navigator.share({
         title: "SammaPix \u2014 Free Image Optimizer",
-        text: "Try SammaPix for free with 50 bonus AI ops.",
+        text: "Try SammaPix for free with 50 bonus AI credits.",
         url: referralLink,
       });
     } catch {
@@ -75,7 +75,7 @@ export default function PostUpgradeReferralModal({ userPlan }: PostUpgradeReferr
 
   function handleShareTwitter() {
     if (!referralLink) return;
-    const text = `If you edit photos for work, SammaPix is actually useful \u2014 AI rename, compress, HEIC convert, duplicate finder, all in the browser. Try it free (50 bonus AI ops): ${referralLink}`;
+    const text = `If you edit photos for work, SammaPix is actually useful \u2014 AI rename, compress, HEIC convert, duplicate finder, all in the browser. Try it free (50 bonus AI credits): ${referralLink}`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   }
 
@@ -117,7 +117,7 @@ export default function PostUpgradeReferralModal({ userPlan }: PostUpgradeReferr
             id="post-upgrade-referral-desc"
             className="text-center text-sm text-[#737373] dark:text-[#A3A3A3] mb-6 leading-relaxed"
           >
-            Share your link with friends. They get 50 free AI ops, and you earn 25 bonus ops for every signup.
+            Share your link with friends. They get 50 free AI credits, and you earn 25 bonus credits for every signup.
           </p>
 
           {/* Share buttons */}

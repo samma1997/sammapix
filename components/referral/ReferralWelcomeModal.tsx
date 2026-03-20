@@ -69,7 +69,7 @@ export default function ReferralWelcomeModal() {
           </div>
 
           <Dialog.Title className="text-center text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            You&apos;re in &mdash; and you&apos;ve got 50 bonus AI ops
+            You&apos;re in &mdash; and you&apos;ve got 50 bonus AI credits
           </Dialog.Title>
 
           <p

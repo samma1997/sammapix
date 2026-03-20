@@ -154,7 +154,7 @@ export default function TermsPage() {
           </h2>
           <p className="font-medium text-[#404040] dark:text-[#D4D4D4]">Free Plan</p>
           <p className="mt-2">
-            The Free plan is available to all users without charge. Free plan users may use the Service subject to the usage limits in effect at the time of use, including but not limited to daily limits on AI operations and batch file counts. Free plan users may see advertising served by Google AdSense. The specific limits applicable to the Free plan are described on the{" "}
+            The Free plan is available to all users without charge. Free plan users may use the Service subject to the usage limits in effect at the time of use, including but not limited to daily limits on AI credits and batch file counts. Free plan users may see advertising served by Google AdSense. The specific limits applicable to the Free plan are described on the{" "}
             <Link href="/pricing" className="text-[#6366F1] hover:underline">
               Pricing page
             </Link>

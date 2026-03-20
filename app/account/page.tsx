@@ -169,7 +169,7 @@ export default function AccountPage() {
               <div className="flex items-center gap-3 p-3 bg-[#FAFAFA] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md mb-4">
                 <div>
                   <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">Free plan</p>
-                  <p className="text-xs text-[#737373]">20 files per batch · 10 AI operations/day</p>
+                  <p className="text-xs text-[#737373]">20 files per batch · 10 AI credits/day</p>
                 </div>
               </div>
 

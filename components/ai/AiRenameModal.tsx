@@ -41,7 +41,7 @@ export default function AiRenameModal({ open, onClose }: AiRenameModalProps) {
           <DialogTitle>Sign in to use AI Rename</DialogTitle>
           <DialogDescription>
             AI Rename uses Gemini to generate SEO-friendly filenames and alt text.
-            It&apos;s free- 10 AI operations per day.
+            It&apos;s free- 10 AI credits per day.
           </DialogDescription>
         </DialogHeader>
 

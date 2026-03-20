@@ -156,7 +156,7 @@ export default function BlogDropPage() {
             {[
               { q: "What CMS platforms does BlogDrop work with?", a: "BlogDrop outputs optimized WebP images with SEO filenames that work with any CMS -- WordPress, Ghost, Webflow, Squarespace, or any platform that accepts image uploads." },
               { q: "Why 1200px max width?", a: "1200px is the standard content width for most blog layouts. Images wider than 1200px add file size without any visual benefit on most screens." },
-              { q: "Do I need an account?", a: "Yes, because BlogDrop includes AI Rename for SEO filenames. A free account is required for AI steps. You get 10 free AI operations per day." },
+              { q: "Do I need an account?", a: "Yes, because BlogDrop includes AI Rename for SEO filenames. A free account is required for AI steps. You get 10 free AI credits per day." },
             ].map((faq) => (
               <div key={faq.q} className="py-4">
                 <dt className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{faq.q}</dt>

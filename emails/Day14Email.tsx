@@ -151,7 +151,7 @@ export function Day14Email({ name }: Day14EmailProps) {
           <Text style={signature}> - Luca, founder of SammaPix</Text>
 
           <Text style={ps}>
-            P.S. If you&apos;ve hit the 10 AI ops/day limit, Pro is $9/month.{" "}
+            P.S. If you&apos;ve hit the 10 AI credits/day limit, Pro is $9/month.{" "}
             <Link
               href={`${BASE_URL}/pricing`}
               style={{ color: "#a3a3a3", textDecoration: "underline" }}

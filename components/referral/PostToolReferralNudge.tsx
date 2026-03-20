@@ -77,7 +77,7 @@ export default function PostToolReferralNudge({ toolUseCount }: PostToolReferral
             Enjoying SammaPix? Share it with a friend
           </p>
           <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-3">
-            They get 50 free AI ops, you earn 25 bonus ops.
+            They get 50 free AI credits, you earn 25 bonus credits.
           </p>
           <div className="flex items-center gap-2">
             <button

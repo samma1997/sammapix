@@ -201,7 +201,7 @@ export function GiftEmail({
 
           <Section>
             <Text style={listItem}>✓ Up to 500 files per batch</Text>
-            <Text style={listItem}>✓ 500 AI operations per day (rename, alt text, smart sort)</Text>
+            <Text style={listItem}>✓ 500 AI credits per day (rename, alt text, smart sort)</Text>
             <Text style={listItem}>✓ 50 MB max file size</Text>
             <Text style={listItem}>✓ ZIP downloads</Text>
             <Text style={listItem}>✓ Zero ads</Text>

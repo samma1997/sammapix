@@ -237,7 +237,7 @@ export default function PricingPage() {
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
                 { icon: Sparkles, text: "Everything in Free, plus:", bold: true },
-                { icon: Zap, text: "200 AI operations / day", bold: false },
+                { icon: Zap, text: "200 AI credits / day", bold: false },
                 { icon: FileStack, text: "500 files per batch", bold: false },
                 { icon: FileStack, text: "50 MB per file", bold: false },
                 { icon: Package, text: "ZIP download", bold: false },
@@ -275,7 +275,7 @@ export default function PricingPage() {
         <div className="mb-16 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-6 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
           <div className="mb-5">
             <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
-              Need more AI operations?
+              Need more AI credits?
             </p>
             <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
               Buy credits. Use anytime. Never expire.
@@ -394,7 +394,7 @@ export default function PricingPage() {
             {[
               { value: "Combo Tools", unit: "Multi-step pipelines",     sub: "WebLift, BlogDrop presets" },
               { value: "Batch Power", unit: "500 files at once",       sub: "Full wedding shoots in one go" },
-              { value: "200 AI/day", unit: "Renames + alt text",     sub: "200 AI operations daily, plus buy credits anytime" },
+              { value: "200 AI/day", unit: "Renames + alt text",     sub: "200 AI credits daily, plus buy more anytime" },
               { value: "Zero Ads",    unit: "Clean workspace",          sub: "No distractions while you work" },
             ].map(({ value, unit, sub }) => (
               <div
@@ -460,15 +460,15 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What are credits?"
-              a="Credits are one-time purchases for AI operations. 1 credit = 1 AI operation (rename, alt text, organize, categorize, or transcribe). They never expire and work on any plan - Free or Pro."
+              a="Credits are one-time purchases for AI tools. 1 credit = 1 AI action (rename, alt text, organize, categorize, or transcribe). They never expire and work on any plan - Free or Pro."
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($9/month or $79/year) unlocks 200 AI operations/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
+              a="Pro ($9/month or $79/year) unlocks 200 AI credits/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI operations/day (renames + alt text), ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally- no subscription required."
+              a="Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI credits/day (renames + alt text), ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI credits occasionally- no subscription required."
             />
             <FaqItem
               q="Do I need to create an account?"
@@ -571,7 +571,7 @@ export default function PricingPage() {
                   name: "What are credits?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Credits are one-time purchases for AI operations. 1 credit = 1 AI operation (rename, alt text, organize, categorize, or transcribe). They never expire and work on any plan - Free or Pro.",
+                    text: "Credits are one-time purchases for AI tools. 1 credit = 1 AI action (rename, alt text, organize, categorize, or transcribe). They never expire and work on any plan - Free or Pro.",
                   },
                 },
                 {
@@ -579,7 +579,7 @@ export default function PricingPage() {
                   name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro ($9/month or $79/year) unlocks 200 AI operations/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
+                    text: "Pro ($9/month or $79/year) unlocks 200 AI credits/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
                   },
                 },
                 {
@@ -587,7 +587,7 @@ export default function PricingPage() {
                   name: "Why upgrade to Pro?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI operations/day (renames + alt text), ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
+                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI credits/day (renames + alt text), ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI credits occasionally.",
                   },
                 },
                 {

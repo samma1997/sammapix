@@ -45,7 +45,7 @@ function getSubtext(
 ): string {
   switch (trigger) {
     case "ai_rename":
-      return "Free plan gets 10 AI operations per day. Pro gives you 500- enough for an entire shoot.";
+      return "Free plan gets 10 AI credits per day. Pro gives you 500- enough for an entire shoot.";
     case "file_size":
       return "Free plan supports files up to 20 MB. Upgrade to Pro to handle files up to 50 MB.";
     case "batch":
@@ -67,7 +67,7 @@ function getSubtext(
 
 const FEATURES = [
   "Up to 500 files per batch",
-  "500 AI operations per day",
+  "500 AI credits per day",
   "50 MB max file size · Zero ads",
 ];
 

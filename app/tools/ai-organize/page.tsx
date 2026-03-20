@@ -91,7 +91,7 @@ const faqItems = [
   },
   {
     q: "How many files can I process at once?",
-    a: "Free users can process up to 50 files per session with 10 AI operations per day. Pro users get up to 500 files per session with 500 AI operations per day.",
+    a: "Free users can process up to 50 files per session with 10 AI credits per day. Pro users get up to 500 files per session with 500 AI credits per day.",
   },
   {
     q: "How does duplicate detection work?",

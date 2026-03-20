@@ -59,7 +59,7 @@ export default function SignupPrompt() {
         {/* Message */}
         <p className="text-sm text-[#D4D4D4] leading-snug">
           <span className="font-semibold text-white">Sign up free</span>
-          {" "} - get your personal dashboard + AI tools (10 ops/day)
+          {" "} - get your personal dashboard + AI tools (10 credits/day)
         </p>
 
         {/* Actions */}

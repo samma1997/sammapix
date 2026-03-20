@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error:
-            "Daily limit reached. Buy credits for more AI operations.",
+            "Daily limit reached. Buy more AI credits.",
           code: "RATE_LIMITED",
           remaining: 0,
           limit: dailyLimit,
