@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "Feature-by-feature comparisons of SammaPix against 12 popular image tools.",
     url: `${APP_URL}/vs`,
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

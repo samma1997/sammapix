@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description:
       "FilterPixel is paid and server-based. SammaPix is free, runs in-browser, strips EXIF, renames with AI, and exports WebP. Full comparison inside.",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

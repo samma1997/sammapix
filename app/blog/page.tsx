@@ -13,6 +13,7 @@ export const metadata: Metadata = {
       "Practical guides on image compression, WebP conversion, EXIF privacy, AI renaming and photography workflows.",
     url: `${APP_URL}/blog`,
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

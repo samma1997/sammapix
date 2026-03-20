@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description:
       "ImageOptim is Mac-only. SammaPix works everywhere with WebP conversion and AI features. See the full comparison.",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

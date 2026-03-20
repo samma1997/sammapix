@@ -15,6 +15,7 @@ export const metadata: Metadata = {
       "SammaPix privacy policy. Most image processing happens entirely in your browser. Learn what data we collect, how we use it, and your rights under GDPR.",
     type: "website",
     url: `${APP_URL}/privacy`,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 
@@ -262,6 +263,12 @@ export default function PrivacyPage() {
               .
             </li>
           </ul>
+          <p className="mt-3 font-medium text-[#404040] dark:text-[#D4D4D4]">
+            Meta Conversions API
+          </p>
+          <p className="mt-2">
+            We also send conversion events (such as sign-up and checkout) to Meta via a server-side API (Conversions API) for advertising attribution. This includes hashed email addresses and IP addresses.
+          </p>
           <p className="mt-3">
             The legal basis for analytics processing is our legitimate interest in understanding usage patterns to improve the Service (Article 6(1)(f) GDPR), balanced against your privacy interests.
           </p>
@@ -324,7 +331,7 @@ export default function PrivacyPage() {
               <p className="font-medium text-[#404040] dark:text-[#D4D4D4] mb-1">Analytics and Advertising</p>
               <ul className="pl-5 list-disc space-y-1">
                 <li>Vercel Analytics uses no persistent cookies and does not fingerprint users.</li>
-                <li>Meta Pixel sets cookies to measure ad conversions (e.g. <code className="text-xs bg-[#F5F5F5] dark:bg-[#262626] px-1.5 py-0.5 rounded">_fbp</code>).</li>
+                <li>Meta Pixel sets cookies to measure ad conversions (e.g. <code className="text-xs bg-[#F5F5F5] dark:bg-[#262626] px-1.5 py-0.5 rounded">_fbp</code>, <code className="text-xs bg-[#F5F5F5] dark:bg-[#262626] px-1.5 py-0.5 rounded">_fbc</code>). The <code className="text-xs bg-[#F5F5F5] dark:bg-[#262626] px-1.5 py-0.5 rounded">_fbc</code> cookie stores the Meta click ID and is set when a user arrives via a Facebook ad.</li>
                 <li>Google Ads (gtag) sets cookies for conversion tracking (e.g. <code className="text-xs bg-[#F5F5F5] dark:bg-[#262626] px-1.5 py-0.5 rounded">_gcl_au</code>).</li>
                 <li>Google AdSense sets cookies for ad personalisation (e.g. <code className="text-xs bg-[#F5F5F5] dark:bg-[#262626] px-1.5 py-0.5 rounded">__gads</code>). Applicable to Free plan users only.</li>
               </ul>
@@ -414,6 +421,11 @@ export default function PrivacyPage() {
                 <tr>
                   <td className="py-2 pr-4">Google AdSense</td>
                   <td className="py-2 pr-4">Ad serving (Free plan)</td>
+                  <td className="py-2">USA</td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4">Resend</td>
+                  <td className="py-2 pr-4">Transactional email (processes email addresses and names)</td>
                   <td className="py-2">USA</td>
                 </tr>
               </tbody>

@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description:
       "VSCO costs $19.99/year and is mobile-only. SammaPix is free, browser-based, and built for batch workflows. See the full comparison.",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

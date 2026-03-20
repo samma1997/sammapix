@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description:
       "iLoveIMG uploads your files to remote servers and has no AI features. SammaPix keeps everything private. See the full comparison.",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 
