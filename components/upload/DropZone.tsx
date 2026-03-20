@@ -9,6 +9,7 @@ import { isValidImageFile } from "@/lib/utils";
 import { useImageStore } from "@/store/imageStore";
 import { useSession } from "next-auth/react";
 import ImportSourceButtons from "@/components/ui/ImportSourceButtons";
+import { trackEvent } from "@/lib/analytics";
 
 interface DropZoneProps {
   onFilesAdded?: (files: File[]) => void;
@@ -28,7 +29,13 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
     (acceptedFiles: File[]) => {
       const valid = acceptedFiles.filter(isValidImageFile);
       if (valid.length > 0) {
+        const currentCount = useImageStore.getState().items.length;
         addFiles(valid, maxFiles);
+        trackEvent("tool_used", { tool_name: "compress", files_count: valid.length });
+        // If user tried to add more files than remaining slots, they hit the limit
+        if (currentCount + valid.length > maxFiles) {
+          trackEvent("limit_hit", { limit_type: "files" });
+        }
         onFilesAdded?.(valid);
       }
     },

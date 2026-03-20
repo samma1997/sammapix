@@ -200,6 +200,36 @@ export async function sendMilestoneEmail(
   });
 }
 
+export async function sendGiftEmail(
+  to: string,
+  opts: {
+    recipientName: string;
+    senderName: string;
+    message?: string;
+    giftCode: string;
+    months: number;
+    plan: string;
+  }
+) {
+  const { GiftEmail } = await import("@/emails/GiftEmail");
+  const html = await render(
+    GiftEmail({
+      recipientName: opts.recipientName,
+      senderName: opts.senderName,
+      message: opts.message,
+      giftCode: opts.giftCode,
+      months: opts.months,
+      plan: opts.plan,
+    })
+  );
+  await resend.emails.send({
+    from: FROM,
+    to,
+    subject: "You've received a SammaPix Pro gift!",
+    html,
+  });
+}
+
 export async function sendWeeklyDigestEmail(
   to: string,
   name: string | null,

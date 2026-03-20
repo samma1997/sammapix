@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import {
   Minimize2,
@@ -17,6 +17,8 @@ import {
   Map,
   Zap,
   CheckCircle2,
+  Share2,
+  Check,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useImageStore } from "@/store/imageStore";
@@ -201,6 +203,53 @@ function completionLabel(tool: string, count: number): string {
   return `${count} ${noun} ${verb}`;
 }
 
+// ── Share button ──────────────────────────────────────────────────────────────
+
+function ShareButton() {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = useCallback(async () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: "SammaPix - Free Image Tools",
+          text: "I just optimized my images with SammaPix \u2014 20 free browser-based tools, no uploads needed!",
+          url: window.location.href,
+        });
+      } catch {
+        // User cancelled or share failed silently
+      }
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, []);
+
+  return (
+    <button
+      onClick={handleShare}
+      className={cn(
+        "inline-flex items-center gap-1.5 px-3 py-1.5",
+        "text-sm font-medium text-[#525252] dark:text-[#A3A3A3]",
+        "border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md",
+        "bg-white dark:bg-[#252525]",
+        "hover:border-[#A3A3A3] dark:hover:border-[#444]",
+        "hover:text-[#171717] dark:hover:text-[#E5E5E5]",
+        "hover:bg-[#F5F5F5] dark:hover:bg-[#2E2E2E]",
+        "transition-colors duration-150"
+      )}
+    >
+      {copied ? (
+        <Check className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={1.75} />
+      ) : (
+        <Share2 className="h-3.5 w-3.5" strokeWidth={1.5} />
+      )}
+      {copied ? "Link copied!" : "Share SammaPix"}
+    </button>
+  );
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function NextStepSuggestions({
@@ -277,6 +326,9 @@ export default function NextStepSuggestions({
           );
         })}
       </div>
+
+      {/* Share button */}
+      <ShareButton />
 
       {/* Pro workflow CTA- only shown to non-Pro users */}
       {!isPro && (

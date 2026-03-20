@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Zap, Check, X } from "lucide-react";
-import Link from "next/link";
+import { Zap, Check, X, Loader2 } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -42,11 +45,11 @@ function getSubtext(
 ): string {
   switch (trigger) {
     case "ai_rename":
-      return "Free plan gets 5 AI renames per day. Pro gives you 200- enough for an entire shoot.";
+      return "Free plan gets 10 AI operations per day. Pro gives you 500- enough for an entire shoot.";
     case "file_size":
       return "Free plan supports files up to 20 MB. Upgrade to Pro to handle files up to 50 MB.";
     case "batch":
-      return `You've hit the batch processing limit. Upgrade to Pro to handle up to 500 files at once.`;
+      return "You've hit the batch processing limit. Upgrade to Pro to handle up to 500 files at once.";
     case "steps":
       return "Free plan allows up to 2 active steps per workflow. Upgrade to Pro for unlimited steps.";
     case "daily":
@@ -64,7 +67,7 @@ function getSubtext(
 
 const FEATURES = [
   "Up to 500 files per batch",
-  "200 AI renames per day",
+  "500 AI operations per day",
   "50 MB max file size · Zero ads",
 ];
 
@@ -77,7 +80,48 @@ export default function ProUpsellModal({
   filesDropped,
   freeLimit,
 }: ProUpsellModalProps) {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
+
+  // Track upsell shown when modal opens
+  const [tracked, setTracked] = useState(false);
+  if (open && !tracked) {
+    trackEvent("upsell_shown", { trigger });
+    setTracked(true);
+  }
+  if (!open && tracked) {
+    setTracked(false);
+  }
+
+  const handleCheckout = async () => {
+    trackEvent("upsell_clicked", { trigger });
+    if (!session) {
+      router.push("/api/auth/signin?callbackUrl=/dashboard/upgrade");
+      onClose();
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: "monthly" }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(`Checkout error: ${data.error ?? "no URL returned"}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
@@ -141,12 +185,18 @@ export default function ProUpsellModal({
           </ul>
 
           {/* Primary CTA */}
-          <Link href="/dashboard/upgrade" onClick={onClose}>
-            <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-3">
+          <button
+            onClick={handleCheckout}
+            disabled={loading}
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-3 disabled:opacity-60"
+          >
+            {loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+            ) : (
               <Zap className="h-4 w-4" strokeWidth={1.5} />
-              Upgrade to Pro &mdash; $7/mo
-            </button>
-          </Link>
+            )}
+            {loading ? "Redirecting to checkout..." : "Upgrade to Pro \u2014 $7/mo"}
+          </button>
 
           {/* Secondary CTA */}
           {showContinue && freeLimit && (

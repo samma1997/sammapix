@@ -20,6 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
+import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
 import { Download, Infinity, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
 
 // ─── Tool grid data ────────────────────────────────────────────────────────────
@@ -157,6 +158,7 @@ export default function PricingPage() {
             First 200 Pro subscribers lock in <span className="font-semibold text-[#6366F1]">$4/month forever</span>.
             Early adopters get a permanent discount as a thank-you for believing early.
           </p>
+          <FoundingSpotsCounter />
         </div>
 
         {/* ── Pricing cards ──────────────────────────────────────────────── */}

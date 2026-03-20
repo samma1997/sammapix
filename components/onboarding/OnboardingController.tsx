@@ -15,6 +15,7 @@
 import React, { useEffect, useState } from "react";
 import OnboardingModal, { type Persona } from "./OnboardingModal";
 import PersonalizedTools from "./PersonalizedTools";
+import { trackEvent } from "@/lib/analytics";
 
 const LS_KEY = "sammapix-persona";
 
@@ -42,7 +43,8 @@ export default function OnboardingController() {
     setHydrated(true);
 
     if (persisted === null) {
-      // First visit- show modal after a short delay
+      // First visit (new signup) — track and show modal after a short delay
+      trackEvent("signup_completed");
       const t = setTimeout(() => setShowModal(true), 1500);
       return () => clearTimeout(t);
     }
