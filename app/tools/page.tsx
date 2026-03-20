@@ -161,7 +161,6 @@ export default function ToolsPage() {
                   { name: "BlogDrop",        fn: "Compress + resize + WebP + SEO blog names",         free: true, login: true },
                   { name: "SmartSort",       fn: "AI categorizes and sorts images into folders",        free: true, login: true },
                   { name: "BatchName",       fn: "Rename files with custom pattern ({001}, {date})",  free: true, login: false },
-                  { name: "AI Workflow",     fn: "Custom multi-step pipeline with presets",            free: false, login: true },
                 ].map((row) => (
                   <tr
                     key={row.name}

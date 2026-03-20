@@ -199,34 +199,6 @@ const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
-const IconWorkflow: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes wf-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-      .wf-s1 { animation: wf-pulse 2s ease-in-out 0s infinite; }
-      .wf-s2 { animation: wf-pulse 2s ease-in-out 0.5s infinite; }
-      .wf-s3 { animation: wf-pulse 2s ease-in-out 1s infinite; }
-    `}</style>
-    <g className="wf-s1">
-      <rect x="4" y="6" width="16" height="10" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-      <text x="12" y="13" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">1</text>
-    </g>
-    <path d="M20 11 L26 11 M26 11 L26 24 M26 24 L20 24" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
-    <g className="wf-s2">
-      <rect x="4" y="19" width="16" height="10" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-      <text x="12" y="26" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">2</text>
-    </g>
-    <path d="M20 24 L26 24 M26 24 L26 37 M26 37 L20 37" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
-    <g className="wf-s3">
-      <rect x="4" y="32" width="16" height="10" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-      <text x="12" y="39" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">3</text>
-    </g>
-    <path d="M30 18 L38 18 M35 15 L38 18 L35 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <rect x="32" y="30" width="14" height="10" rx="2.5" fill={accent} stroke={accent} strokeWidth="1.25"/>
-    <text x="39" y="37" fontSize="4" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">OUT</text>
-  </svg>
-);
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Category = "All" | "Optimize" | "AI" | "Creative" | "Organize" | "Workflows";
@@ -340,16 +312,6 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#8B5CF6",
     badges: ["Login required", "Multi-step"],
     Icon: IconBlogDrop,
-    category: ["Workflows"],
-    isCombo: true,
-  },
-  {
-    name: "AI Workflow",
-    href: "/tools/workflow",
-    tagline: "Build custom multi-step pipelines. Chain compress, resize, rename and more.",
-    accent: "#6366F1",
-    badges: ["Pro", "Multi-step"],
-    Icon: IconWorkflow,
     category: ["Workflows"],
     isCombo: true,
   },

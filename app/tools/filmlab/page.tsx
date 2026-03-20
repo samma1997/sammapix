@@ -103,9 +103,9 @@ export default function FilmLabPage() {
           },
         ]}
         proTip={{
-          text: "Use the AI Workflow to apply film effects, compress and rename all your photos at once.",
-          linkLabel: "Try AI Workflow",
-          linkHref: "/tools/workflow",
+          text: "Use WebLift to compress, convert and rename all your photos at once.",
+          linkLabel: "Try WebLift",
+          linkHref: "/tools/weblift",
         }}
       />
 

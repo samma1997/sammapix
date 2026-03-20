@@ -34,7 +34,7 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
       { name: "Photo Map", href: "/tools/travelmap", why: "Map your photo journey" },
     ],
     workflow: "Shoot → Cull → Compress → AI Rename → Deliver",
-    proCta: "Process full shoots in one click with AI Workflow",
+    proCta: "Process full shoots in one click with WebLift",
   },
   blogger: {
     title: "Your blogging workflow",
@@ -47,7 +47,7 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
       { name: "Batch Resize", href: "/tools/resizepack", why: "Perfect sizes for your CMS" },
     ],
     workflow: "Write → Drop photos → Compress → AI Rename → Alt Text → Publish",
-    proCta: "Run the Blog preset in AI Workflow",
+    proCta: "Run the Blog preset with BlogDrop",
   },
   ecommerce: {
     title: "Your product photo workflow",
@@ -60,7 +60,7 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
       { name: "Watermark", href: "/tools/stampit", why: "Protect with watermarks" },
     ],
     workflow: "Shoot product → Compress → Rename → Resize → List",
-    proCta: "Use the E-commerce preset in AI Workflow",
+    proCta: "Optimize product photos with WebLift",
   },
   developer: {
     title: "Your web optimization workflow",
@@ -73,7 +73,7 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
       { name: "Batch Resize", href: "/tools/resizepack", why: "Responsive image sizes" },
     ],
     workflow: "Asset → Compress → WebP → Strip EXIF → Deploy",
-    proCta: "Automate with AI Workflow pipeline",
+    proCta: "Automate with WebLift pipeline",
   },
   social: {
     title: "Your social media workflow",
@@ -86,7 +86,7 @@ const PERSONA_TOOLS: Record<Persona, PersonaConfig> = {
       { name: "Film Filters", href: "/tools/filmlab", why: "Consistent visual style" },
     ],
     workflow: "Create → Crop → Compress → Watermark → Post",
-    proCta: "Use the Instagram preset in AI Workflow",
+    proCta: "Optimize content with WebLift",
   },
 };
 
@@ -187,7 +187,7 @@ export default function PersonalizedTools({
 
         {/* Pro CTA */}
         <Link
-          href="/tools/workflow"
+          href="/tools/weblift"
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 transition-colors"
         >
           {config.proCta}

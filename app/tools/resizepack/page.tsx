@@ -103,9 +103,9 @@ export default function ResizePackPage() {
           },
         ]}
         proTip={{
-          text: "Use AI Workflow to resize, compress and rename for SEO all in one step.",
-          linkLabel: "Try AI Workflow",
-          linkHref: "/tools/workflow",
+          text: "Use WebLift to compress, convert and rename for SEO all in one step.",
+          linkLabel: "Try WebLift",
+          linkHref: "/tools/weblift",
         }}
       />
 
