@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
   LayoutDashboard,
@@ -117,8 +117,16 @@ export default function DashboardSidebar({
   userPlan,
 }: DashboardSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const isPro = userPlan === "pro";
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  /** Navigate and close mobile sidebar — ensures navigation completes on mobile */
+  const mobileNav = useCallback((href: string) => {
+    setMobileOpen(false);
+    setProfileMenuOpen(false);
+    router.push(href);
+  }, [router]);
   const [persona, setPersona] = useState<Persona | null>(null);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -312,14 +320,13 @@ export default function DashboardSidebar({
       <div className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-2 py-2 space-y-0.5">
         {/* Upgrade to Pro (if free) */}
         {!isPro && (
-          <Link
-            href="/dashboard/upgrade"
-            onClick={() => setMobileOpen(false)}
+          <button
+            onClick={() => mobileNav("/dashboard/upgrade")}
             className="flex items-center justify-center gap-2 w-full px-3 py-2 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-md transition-colors duration-150"
           >
             <Crown className="h-3.5 w-3.5" strokeWidth={1.5} />
             Upgrade to Pro
-          </Link>
+          </button>
         )}
 
         {/* Credits */}
