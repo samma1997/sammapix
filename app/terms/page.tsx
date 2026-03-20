@@ -163,7 +163,7 @@ export default function TermsPage() {
 
           <p className="mt-4 font-medium text-[#404040] dark:text-[#D4D4D4]">Pro Plan</p>
           <p className="mt-2">
-            The Pro plan is a paid subscription currently priced at USD 7 per month or USD 59 per year (where the annual plan is offered). Pro plan subscribers receive higher usage limits, removal of advertising, ZIP batch downloads, and additional benefits as described on the{" "}
+            The Pro plan is a paid subscription currently priced at USD 9 per month or USD 79 per year (where the annual plan is offered). Pro plan subscribers receive higher usage limits, removal of advertising, ZIP batch downloads, and additional benefits as described on the{" "}
             <Link href="/pricing" className="text-[#6366F1] hover:underline">
               Pricing page
             </Link>
