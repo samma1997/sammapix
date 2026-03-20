@@ -1,0 +1,246 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "SammaPix- home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: SammaPix
+      - navigation [ref=e23]:
+        - link "Tools" [ref=e24] [cursor=pointer]:
+          - /url: /tools
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e27] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e28]:
+        - button "Toggle dark mode" [ref=e29] [cursor=pointer]
+        - link "Sign in" [ref=e30] [cursor=pointer]:
+          - /url: /auth/signin
+          - button "Sign in" [ref=e31]
+        - link "Try free" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - button "Try free" [ref=e33]:
+            - text: Try free
+            - img [ref=e34]
+  - main [ref=e36]:
+    - main [ref=e37]:
+      - generic [ref=e38]:
+        - link "All tools" [ref=e39] [cursor=pointer]:
+          - /url: /tools
+          - img [ref=e40]
+          - text: All tools
+        - generic [ref=e42]:
+          - img [ref=e44]
+          - heading "HEIC Converter" [level=1] [ref=e49]
+        - paragraph [ref=e50]: Convert iPhone HEIC photos to JPG or WebP. Batch convert, adjustable quality, download as ZIP.
+      - button "Drop zone- click or drag HEIC photos to upload" [ref=e52] [cursor=pointer]:
+        - generic [ref=e53]:
+          - img [ref=e55]
+          - generic [ref=e60]:
+            - paragraph [ref=e61]: Drop HEIC photos or click to browse
+            - paragraph [ref=e62]: .heic, .heif — iPhone and modern camera files supported
+          - paragraph [ref=e63]: Small files convert instantly via server — large files process in your browser
+          - paragraph [ref=e64]:
+            - text: "Free: up to 20 files ·"
+            - 'link "Pro: 500" [ref=e65]':
+              - /url: /dashboard/upgrade
+          - paragraph [ref=e66]: "💡 Tip: Safari converts HEIC instantly (Apple native). On Chrome, files over 4MB may be slower."
+      - generic [ref=e69]:
+        - heading "How to use HEIC Converter" [level=2] [ref=e70]
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - generic [ref=e74]: "1"
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Drop your iPhone HEIC photos
+              - paragraph [ref=e77]: Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera- or click to browse.
+          - generic [ref=e78]:
+            - generic [ref=e80]: "2"
+            - generic [ref=e81]:
+              - paragraph [ref=e82]: Choose output format
+              - paragraph [ref=e83]: Select JPG for maximum compatibility or WebP for ~25% smaller files. Adjust the quality slider from 60% to 100%.
+          - generic [ref=e84]:
+            - generic [ref=e86]: "3"
+            - generic [ref=e87]:
+              - paragraph [ref=e88]: Download converted files
+              - paragraph [ref=e89]: Download each converted image individually or get the full batch as a single ZIP archive.
+        - generic [ref=e90]:
+          - generic [ref=e91]: Pro tip
+          - paragraph [ref=e92]:
+            - text: After converting, compress your JPG files further to optimize for web publishing.
+            - link "Compress images" [ref=e93] [cursor=pointer]:
+              - /url: /tools/compress
+              - text: Compress images
+              - img [ref=e94]
+      - generic [ref=e97]:
+        - heading "Why use SammaPix to convert HEIC?" [level=2] [ref=e98]
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - img [ref=e102]
+            - heading "Convert iPhone photos" [level=3] [ref=e104]
+            - paragraph [ref=e105]: Every iPhone photo taken since iOS 11 is HEIC. SammaPix converts them instantly to universally supported JPG or WebP.
+          - generic [ref=e106]:
+            - img [ref=e108]
+            - heading "Batch conversion" [level=3] [ref=e112]
+            - paragraph [ref=e113]: Convert up to 100 HEIC files at once on the free plan. Pro users can batch convert 500 files in a single session.
+          - generic [ref=e114]:
+            - img [ref=e116]
+            - heading "JPG or WebP output" [level=3] [ref=e121]
+            - paragraph [ref=e122]: Choose JPG for maximum compatibility or WebP for ~25% smaller files. Adjustable quality from 60% to 100%.
+      - generic [ref=e124]:
+        - heading "What is HEIC?" [level=2] [ref=e125]
+        - paragraph [ref=e126]: HEIC (High Efficiency Image Container) is Apple's default photo format since iOS 11. It uses the HEIF (High Efficiency Image Format) standard developed by the Moving Picture Experts Group (MPEG). HEIC files are roughly half the size of equivalent JPEG files at the same visual quality, which is why Apple switched to it- iPhone storage is limited and HEIC saves significant space.
+        - heading "Why convert HEIC to JPG?" [level=3] [ref=e127]
+        - list [ref=e128]:
+          - listitem [ref=e129]:
+            - generic [ref=e130]: "-"
+            - text: Windows and older software often cannot open HEIC files natively
+          - listitem [ref=e131]:
+            - generic [ref=e132]: "-"
+            - text: Most websites, CMSs, and social platforms require JPG or PNG
+          - listitem [ref=e133]:
+            - generic [ref=e134]: "-"
+            - text: Email clients and messaging apps may strip or fail to display HEIC
+          - listitem [ref=e135]:
+            - generic [ref=e136]: "-"
+            - text: Printing services and photo labs typically require JPG
+          - listitem [ref=e137]:
+            - generic [ref=e138]: "-"
+            - text: Stock photo sites and client deliverables expect universal formats
+        - heading "Why convert HEIC to WebP?" [level=3] [ref=e139]
+        - paragraph [ref=e140]: WebP is Google's modern image format supported by all major browsers since 2020. It produces files 25–34% smaller than JPEG at equivalent quality- making it ideal for websites, e-commerce product images, and any web publishing workflow. If you're optimizing iPhone photos for the web, converting HEIC directly to WebP skips an intermediate JPG step and preserves more quality.
+        - heading "How SammaPix converts HEIC" [level=3] [ref=e141]
+        - paragraph [ref=e142]:
+          - text: SammaPix uses a server-side conversion pipeline powered by
+          - code [ref=e143]: heic-convert
+          - text: ", a pure JavaScript/WebAssembly library that does not require native system libraries. This means it runs reliably on any server and produces consistent output."
+        - paragraph [ref=e144]: Your HEIC file is sent over an encrypted HTTPS connection, converted in memory, and the JPG or WebP result is returned immediately. No files are stored on our servers- the conversion is ephemeral. We validate the actual file magic bytes (not just the extension) to ensure only genuine HEIC/HEIF files are processed.
+        - heading "Quality settings explained" [level=3] [ref=e145]
+        - paragraph [ref=e146]: The quality slider controls the compression level of the output file. At 85% (the default), the result is visually indistinguishable from the original at a significantly smaller file size. At 60%, you get the smallest possible file- useful for thumbnails or email attachments. At 100%, virtually no lossy compression is applied.
+      - generic [ref=e148]:
+        - heading "More free image tools" [level=2] [ref=e149]
+        - generic [ref=e150]:
+          - link "Compress Images" [ref=e151] [cursor=pointer]:
+            - /url: /tools/compress
+            - text: Compress Images
+            - img [ref=e152]
+          - link "Convert to WebP" [ref=e154] [cursor=pointer]:
+            - /url: /tools/webp
+            - text: Convert to WebP
+            - img [ref=e155]
+          - link "Remove EXIF" [ref=e157] [cursor=pointer]:
+            - /url: /tools/exif
+            - text: Remove EXIF
+            - img [ref=e158]
+  - contentinfo [ref=e160]:
+    - generic [ref=e161]:
+      - generic [ref=e162]:
+        - generic [ref=e163]:
+          - link "SammaPix - home" [ref=e164] [cursor=pointer]:
+            - /url: /
+            - img [ref=e165]
+            - generic [ref=e182]: SammaPix
+          - paragraph [ref=e183]:
+            - text: Free image tools for everyone.
+            - text: No signup, no watermarks.
+          - link "Instagram" [ref=e185] [cursor=pointer]:
+            - /url: https://www.instagram.com/lucasammarco.web/
+            - img [ref=e186]
+        - generic [ref=e189]:
+          - paragraph [ref=e190]: Tools
+          - list [ref=e191]:
+            - listitem [ref=e192]:
+              - link "Compress" [ref=e193] [cursor=pointer]:
+                - /url: /tools/compress
+            - listitem [ref=e194]:
+              - link "WebP Convert" [ref=e195] [cursor=pointer]:
+                - /url: /tools/webp
+            - listitem [ref=e196]:
+              - link "HEIC Converter" [ref=e197] [cursor=pointer]:
+                - /url: /tools/heic
+            - listitem [ref=e198]:
+              - link "AI Rename" [ref=e199] [cursor=pointer]:
+                - /url: /tools/ai-rename
+            - listitem [ref=e200]:
+              - link "EXIF Remover" [ref=e201] [cursor=pointer]:
+                - /url: /tools/exif
+            - listitem [ref=e202]:
+              - link "Film Filters" [ref=e203] [cursor=pointer]:
+                - /url: /tools/filmlab
+            - listitem [ref=e204]:
+              - link "Watermark" [ref=e205] [cursor=pointer]:
+                - /url: /tools/stampit
+            - listitem [ref=e206]:
+              - link "Crop & Ratio" [ref=e207] [cursor=pointer]:
+                - /url: /tools/croproatio
+            - listitem [ref=e208]:
+              - link "Find Duplicates" [ref=e209] [cursor=pointer]:
+                - /url: /tools/twinhunt
+            - listitem [ref=e210]:
+              - link "Sort by Location" [ref=e211] [cursor=pointer]:
+                - /url: /tools/geosort
+            - listitem [ref=e212]:
+              - link "Photo Map" [ref=e213] [cursor=pointer]:
+                - /url: /tools/travelmap
+            - listitem [ref=e214]:
+              - link "Batch Resize" [ref=e215] [cursor=pointer]:
+                - /url: /tools/resizepack
+            - listitem [ref=e216]:
+              - link "Cull" [ref=e217] [cursor=pointer]:
+                - /url: /tools/cull
+        - generic [ref=e218]:
+          - paragraph [ref=e219]: Quick Convert
+          - list [ref=e220]:
+            - listitem [ref=e221]:
+              - link "HEIC to JPG" [ref=e222] [cursor=pointer]:
+                - /url: /convert/heic-to-jpg
+            - listitem [ref=e223]:
+              - link "PNG to WebP" [ref=e224] [cursor=pointer]:
+                - /url: /convert/png-to-webp
+            - listitem [ref=e225]:
+              - link "JPG to WebP" [ref=e226] [cursor=pointer]:
+                - /url: /convert/jpg-to-webp
+        - generic [ref=e227]:
+          - paragraph [ref=e228]: Resize For
+          - list [ref=e229]:
+            - listitem [ref=e230]:
+              - link "Instagram" [ref=e231] [cursor=pointer]:
+                - /url: /resize/instagram
+            - listitem [ref=e232]:
+              - link "Facebook" [ref=e233] [cursor=pointer]:
+                - /url: /resize/facebook
+            - listitem [ref=e234]:
+              - link "YouTube" [ref=e235] [cursor=pointer]:
+                - /url: /resize/youtube-thumbnail
+            - listitem [ref=e236]:
+              - link "Twitter" [ref=e237] [cursor=pointer]:
+                - /url: /resize/twitter
+        - generic [ref=e238]:
+          - paragraph [ref=e239]: Company
+          - list [ref=e240]:
+            - listitem [ref=e241]:
+              - link "Pricing" [ref=e242] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e243]:
+              - link "Blog" [ref=e244] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e245]:
+              - link "About" [ref=e246] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e247]:
+          - paragraph [ref=e248]: Legal
+          - list [ref=e249]:
+            - listitem [ref=e250]:
+              - link "Privacy Policy" [ref=e251] [cursor=pointer]:
+                - /url: /privacy
+      - generic [ref=e252]:
+        - paragraph [ref=e253]: © 2026 SammaPix
+        - paragraph [ref=e254]:
+          - text: by
+          - link "Luca Sammarco" [ref=e255] [cursor=pointer]:
+            - /url: https://lucasammarco.com
+```

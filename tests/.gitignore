@@ -1,0 +1,15 @@
+# Test artifacts
+test-results/
+playwright-report/
+screenshots/
+videos/
+
+# Coverage
+coverage/
+
+# Node
+node_modules/
+
+# Environment
+.env.local
+.env
