@@ -76,6 +76,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: APP_URL,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon-192.png",
+  },
   manifest: "/manifest.json",
   other: {
     "impact-site-verification": "ea5238e5-3e70-4cdb-b4d2-ebdd254df866",
