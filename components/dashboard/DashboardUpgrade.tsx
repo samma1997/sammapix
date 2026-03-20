@@ -20,10 +20,12 @@ interface DashboardUpgradeProps {
 export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
   const [loading, setLoading] = useState(false);
   const [annual, setAnnual] = useState(false);
-  const savePercent = Math.round((1 - 60 / (7 * 12)) * 100);
+  const [error, setError] = useState<string | null>(null);
+  const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
 
   const handleCheckout = async () => {
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -35,10 +37,10 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert(`Error: ${data.error ?? "Could not start checkout"}`);
+        setError(data.error ?? "Could not start checkout. Please try again.");
       }
     } catch {
-      alert("Network error. Please try again.");
+      setError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -125,20 +127,15 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           <div className="text-center mb-8">
             <div className="flex items-baseline justify-center gap-1.5">
               <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-                ${annual ? "60" : "7"}
+                ${annual ? "79" : "9"}
               </span>
               <span className="text-sm text-[#A3A3A3]">
                 / {annual ? "year" : "month"}
               </span>
             </div>
             <p className="mt-2 text-sm text-[#6366F1] font-medium">
-              {annual ? "60 days free trial" : "7 days free trial"}
+              7 days free trial
             </p>
-            {annual && (
-              <p className="mt-1 text-xs text-[#A3A3A3]">
-                Launch promo -- 60 days free for early adopters
-              </p>
-            )}
           </div>
 
           {/* Features */}
@@ -174,10 +171,14 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
             {annual
-              ? "Start 60-day free trial -- $79/year"
-              : "Start 7-day free trial -- $9/month"
+              ? "Start 7-day free trial — $79/year"
+              : "Start 7-day free trial — $9/month"
             }
           </button>
+
+          {error && (
+            <p className="mt-3 text-center text-sm text-red-600 dark:text-red-400">{error}</p>
+          )}
 
           <p className="mt-3 text-center text-xs text-[#A3A3A3]">
             Cancel anytime &middot; 30-day money-back guarantee &middot; No charge during trial
