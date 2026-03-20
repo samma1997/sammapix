@@ -55,8 +55,8 @@ function PaymentBanners() {
     const w = window as any;
     // Use session-based event ID for deduplication with server-side CAPI
     const subEventId = `sub_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-    if (typeof w.fbq === "function") w.fbq("track", "Subscribe", { value: 7.00, currency: "USD" }, { eventID: subEventId });
-    if (typeof w.gtag === "function") w.gtag("event", "conversion", { send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL, value: 7.00, currency: "USD" });
+    if (typeof w.fbq === "function") w.fbq("track", "Subscribe", { value: 9.00, currency: "USD" }, { eventID: subEventId });
+    if (typeof w.gtag === "function") w.gtag("event", "conversion", { send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL, value: 9.00, currency: "USD" });
   }, [success]);
 
   if (!success && !canceled) return null;
@@ -106,7 +106,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
-  const savePercent = Math.round((1 - 60 / (7 * 12)) * 100);
+  const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
 
   return (
     <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
@@ -159,7 +159,7 @@ export default function PricingPage() {
             Founding Member Deal
           </p>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
-            First 200 Pro subscribers lock in <span className="font-semibold text-[#6366F1]">$4/month forever</span>.
+            First 200 Pro subscribers lock in <span className="font-semibold text-[#6366F1]">~$5/month forever</span>.
             Early adopters get a permanent discount as a thank-you for believing early.
           </p>
           <FoundingSpotsCounter />
@@ -217,7 +217,7 @@ export default function PricingPage() {
               </h2>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-                  ${annual ? "60" : "7"}
+                  ${annual ? "79" : "9"}
                 </span>
                 <span className="text-sm text-[#A3A3A3] dark:text-[#737373]">
                   {annual ? "/ year" : "/ month"}
@@ -289,10 +289,10 @@ export default function PricingPage() {
                 Starter
               </p>
               <p className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-0.5">
-                $4.99
+                $5.99
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">100 credits</p>
-              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.05 / credit</p>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.06 / credit</p>
               <a
                 href="/dashboard/credits"
                 className="w-full inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
@@ -312,10 +312,10 @@ export default function PricingPage() {
                 Standard
               </p>
               <p className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-0.5">
-                $9.99
+                $11.99
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">500 credits</p>
-              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.02 / credit</p>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.024 / credit</p>
               <a
                 href="/dashboard/credits"
                 className="w-full inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-md bg-[#6366F1] text-white hover:bg-[#4F46E5] transition-colors"
@@ -330,10 +330,10 @@ export default function PricingPage() {
                 Mega
               </p>
               <p className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-0.5">
-                $29.99
+                $34.99
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-1">2,000 credits</p>
-              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.015 / credit</p>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#737373] mb-4">$0.017 / credit</p>
               <a
                 href="/dashboard/credits"
                 className="w-full inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium border border-[#E5E5E5] dark:border-[#333] rounded-md bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
@@ -344,7 +344,7 @@ export default function PricingPage() {
           </div>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#737373]">
-            1 credit = 1 AI rename or 1 AI alt text. Credits never expire. Works on any plan.
+            1 credit = 1 AI operation (rename, alt text, organize, categorize, or transcribe). Credits never expire. Works on any plan.
           </p>
         </div>
 
@@ -460,11 +460,11 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What are credits?"
-              a="Credits are one-time purchases for AI operations. 1 credit = 1 AI rename or alt text. They never expire and work on any plan - Free or Pro."
+              a="Credits are one-time purchases for AI operations. 1 credit = 1 AI operation (rename, alt text, organize, categorize, or transcribe). They never expire and work on any plan - Free or Pro."
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($7/month or $60/year) unlocks 200 AI operations/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
+              a="Pro ($9/month or $79/year) unlocks 200 AI operations/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
             />
             <FaqItem
               q="Why upgrade to Pro?"
@@ -500,7 +500,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Monthly",
-                  "price": "7",
+                  "price": "9",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -509,7 +509,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Yearly",
-                  "price": "60",
+                  "price": "79",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -518,7 +518,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Credits Starter",
-                  "price": "4.99",
+                  "price": "5.99",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -528,7 +528,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Credits Standard",
-                  "price": "9.99",
+                  "price": "11.99",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -538,7 +538,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Credits Mega",
-                  "price": "29.99",
+                  "price": "34.99",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",
@@ -571,7 +571,7 @@ export default function PricingPage() {
                   name: "What are credits?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Credits are one-time purchases for AI operations. 1 credit = 1 AI rename or alt text. They never expire and work on any plan - Free or Pro.",
+                    text: "Credits are one-time purchases for AI operations. 1 credit = 1 AI operation (rename, alt text, organize, categorize, or transcribe). They never expire and work on any plan - Free or Pro.",
                   },
                 },
                 {
@@ -579,7 +579,7 @@ export default function PricingPage() {
                   name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro ($7/month or $60/year) unlocks 200 AI operations/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
+                    text: "Pro ($9/month or $79/year) unlocks 200 AI operations/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
                   },
                 },
                 {

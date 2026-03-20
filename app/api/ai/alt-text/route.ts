@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINI_MODEL, AI_ALT_TEXT_FREE_PER_DAY, AI_ALT_TEXT_PRO_PER_DAY } from "@/lib/constants";
+import { GEMINI_MODEL, AI_OPS_FREE_PER_DAY, AI_OPS_PRO_PER_DAY } from "@/lib/constants";
 import { z } from "zod";
 import { incrWithTTL, getInt } from "@/lib/redis";
 import { getCreditBalance, deductCredit } from "@/lib/credits";
@@ -24,7 +24,7 @@ function todayStr(): string {
 }
 
 function getRateLimitKey(email: string): string {
-  return `ai_alt_text:${email}:${todayStr()}`;
+  return `ai_ops:${email}:${todayStr()}`;
 }
 
 async function checkAndIncrement(
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
 
   const email = session.user.email;
   const isPro = (session.user as { plan?: string }).plan === "pro";
-  const dailyLimit = isPro ? AI_ALT_TEXT_PRO_PER_DAY : AI_ALT_TEXT_FREE_PER_DAY;
+  const dailyLimit = isPro ? AI_OPS_PRO_PER_DAY : AI_OPS_FREE_PER_DAY;
 
   // 2. Origin check in production
   if (process.env.NODE_ENV === "production") {

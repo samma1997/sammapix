@@ -1,4 +1,4 @@
-// Tracks AI rename usage per email per day in localStorage
+// Tracks unified AI ops usage per email per day in localStorage
 // This is for UI display only- enforcement is server-side
 
 const STORAGE_KEY = "sp_ai_renames";

@@ -290,7 +290,7 @@ export default function DashboardSettings({
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                 >
                   <Crown className="h-4 w-4" strokeWidth={1.5} />
-                  Upgrade to Pro- $7/mo
+                  Upgrade to Pro- $9/mo
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                 </Link>
               </>

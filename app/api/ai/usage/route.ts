@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { getInt } from "@/lib/redis";
-import { AI_RENAME_FREE_PER_DAY, AI_RENAME_PRO_PER_DAY } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY, AI_OPS_PRO_PER_DAY } from "@/lib/constants";
 
 function todayStr(): string {
   return new Date().toISOString().split("T")[0];
@@ -19,9 +19,9 @@ export async function GET() {
 
   const email = session.user.email;
   const isPro = (session.user as { plan?: string })?.plan === "pro";
-  const limit = isPro ? AI_RENAME_PRO_PER_DAY : AI_RENAME_FREE_PER_DAY;
+  const limit = isPro ? AI_OPS_PRO_PER_DAY : AI_OPS_FREE_PER_DAY;
 
-  const key = `ai_rename:${email}:${todayStr()}`;
+  const key = `ai_ops:${email}:${todayStr()}`;
 
   // Try Redis first
   let used = await getInt(key);

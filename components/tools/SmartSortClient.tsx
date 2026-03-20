@@ -585,7 +585,7 @@ export default function SmartSortClient() {
                       href="/dashboard/upgrade"
                       className="text-xs text-[#6366F1] hover:text-[#4F46E5] transition-colors mt-0.5 inline-block"
                     >
-                      Upgrade to Pro — $7/mo
+                      Upgrade to Pro — $9/mo
                     </a>
                   )}
                 </div>

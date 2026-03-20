@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
-import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY } from "@/lib/constants";
 import { Globe } from "lucide-react";
 
 const AI_RENAME_LANGUAGES = [
@@ -43,7 +43,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
   const { data: session } = useSession();
   const hasQueuedItems = items.some((i) => i.status === "queued");
   const allDone = items.length > 0 && items.every((i) => i.status === "done" || i.status === "error");
-  const remaining = Math.max(0, AI_RENAME_FREE_PER_DAY - aiRenameUsedToday);
+  const remaining = Math.max(0, AI_OPS_FREE_PER_DAY - aiRenameUsedToday);
 
   const handleAiRenameToggle = () => {
     if (!session) {
@@ -93,7 +93,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
             </select>
             {session && (
               <span className="text-xs text-[#A3A3A3] ml-2">
-                {remaining}/{AI_RENAME_FREE_PER_DAY} remaining
+                {remaining}/{AI_OPS_FREE_PER_DAY} remaining
               </span>
             )}
           </div>
@@ -154,7 +154,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
                       : "bg-gray-100 text-gray-500 dark:bg-[#2A2A2A] dark:text-[#737373]"
                   )}
                 >
-                  {remaining}/{AI_RENAME_FREE_PER_DAY}
+                  {remaining}/{AI_OPS_FREE_PER_DAY}
                 </span>
               ) : (
                 <Badge variant="default">Login</Badge>

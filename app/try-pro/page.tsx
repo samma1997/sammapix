@@ -138,7 +138,7 @@ export default function TryProPage() {
           </div>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#525252]">
-            Then $7/month &middot; Cancel anytime &middot; 30-day money-back guarantee
+            Then $9/month &middot; Cancel anytime &middot; 30-day money-back guarantee
           </p>
         </div>
       </section>
@@ -390,7 +390,7 @@ export default function TryProPage() {
               { step: "1", title: "Sign up free", desc: "Create an account with Google or GitHub in one click." },
               { step: "2", title: "Start your free trial", desc: "Full AI workflow unlocked instantly. No credit card required." },
               { step: "3", title: "Drop your photos and run the workflow", desc: "Batch process 500 files, 200 AI renames/day, platform presets, zero ads." },
-              { step: "4", title: "Decide after your trial", desc: "Love it? Stay on Pro for $7/month. Not for you? No charge, ever." },
+              { step: "4", title: "Decide after your trial", desc: "Love it? Stay on Pro for $9/month. Not for you? No charge, ever." },
             ].map(({ step, title, desc }) => (
               <div key={step} className="flex gap-4 items-start">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#171717] dark:bg-white flex items-center justify-center">
@@ -445,7 +445,7 @@ export default function TryProPage() {
           </CheckoutButton>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#525252]">
-            Then $7/month or $60/year &middot; 30-day money-back guarantee
+            Then $9/month or $79/year &middot; 30-day money-back guarantee
           </p>
         </div>
       </section>

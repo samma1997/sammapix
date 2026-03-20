@@ -44,7 +44,7 @@ Approach: Privacy-first, browser-based processing, zero mandatory uploads
 - Images never leave the device without user consent
 - No tracking of processed images or user content
 - Free core tools forever
-- Optional Pro plan ($7/month) for unlimited features
+- Optional Pro plan ($9/month) for unlimited features
 - Accessibility-first development
 - Privacy-respecting analytics (Cloudflare Web Analytics)
 

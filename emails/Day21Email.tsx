@@ -147,7 +147,7 @@ export function Day21Email({ name }: Day21EmailProps) {
           </Section>
 
           <Section style={planBoxPro}>
-            <Text style={planLabelPro}>Pro- $7/month</Text>
+            <Text style={planLabelPro}>Pro- $9/month</Text>
             <Text style={planItem}>✓ Everything in Free</Text>
             <Text style={planItem}>✓ 200 AI renames per day</Text>
             <Text style={planItem}>✓ Up to 100 files at once</Text>

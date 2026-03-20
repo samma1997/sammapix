@@ -1,6 +1,6 @@
 /**
  * Credit system for SammaPix AI operations.
- * Each credit = 1 AI operation (rename, alt text, smart sort).
+ * Each credit = 1 AI operation (rename, alt text, organize, categorize, or transcribe).
  *
  * Storage: Vercel KV (Upstash Redis) via /lib/redis.ts.
  * Fallback: in-memory Map when Redis is not configured (dev mode).
@@ -13,9 +13,9 @@ import { getInt, redisConfigured } from "@/lib/redis";
 // ---------------------------------------------------------------------------
 
 export const CREDIT_PACKAGES = [
-  { id: "credits_100", name: "Starter", credits: 100, price: 499 },   // $4.99
-  { id: "credits_500", name: "Standard", credits: 500, price: 999 },  // $9.99
-  { id: "credits_2000", name: "Mega", credits: 2000, price: 2999 },   // $29.99
+  { id: "credits_100", name: "Starter", credits: 100, price: 599 },   // $5.99
+  { id: "credits_500", name: "Standard", credits: 500, price: 1199 },  // $11.99
+  { id: "credits_2000", name: "Mega", credits: 2000, price: 3499 },   // $34.99
 ] as const;
 
 export type CreditPackageId = (typeof CREDIT_PACKAGES)[number]["id"];

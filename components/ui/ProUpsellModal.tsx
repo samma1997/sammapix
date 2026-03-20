@@ -195,7 +195,7 @@ export default function ProUpsellModal({
             ) : (
               <Zap className="h-4 w-4" strokeWidth={1.5} />
             )}
-            {loading ? "Redirecting to checkout..." : "Upgrade to Pro \u2014 $7/mo"}
+            {loading ? "Redirecting to checkout..." : "Upgrade to Pro \u2014 $9/mo"}
           </button>
 
           {/* Secondary CTA */}

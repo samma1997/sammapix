@@ -95,7 +95,7 @@ export const en: Dict = {
   },
   pro_banner: {
     title: "Need more? Go Pro.",
-    desc: "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $7/month.",
+    desc: "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $9/month.",
     cta: "View pricing",
   },
   nav: {

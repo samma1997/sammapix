@@ -49,7 +49,7 @@ const tableRows = [
   { feature: "No account required", sammapix: true, birme: true },
   { feature: "Actively maintained", sammapix: true, birme: "Uncertain" },
   { feature: "Free to use", sammapix: true, birme: true },
-  { feature: "Price for paid plan", sammapix: "$7/mo", birme: "N/A" },
+  { feature: "Price for paid plan", sammapix: "$9/mo", birme: "N/A" },
 ];
 
 function Cell({ value }: { value: boolean | string }) {

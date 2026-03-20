@@ -995,7 +995,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Upgrade to Pro</h3>
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Unlimited AI, no ads, ZIP downloads. $7/mo.</p>
+                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Unlimited AI, no ads, ZIP downloads. $9/mo.</p>
               </div>
               <button
                 onClick={handleUpgradeClick}

@@ -49,7 +49,7 @@ const tableRows = [
   { feature: "WordPress plugin", sammapix: false, shortpixel: true },
   { feature: "CDN delivery", sammapix: false, shortpixel: "Paid" },
   { feature: "API access", sammapix: "Pro", shortpixel: "Paid" },
-  { feature: "Price for paid plan", sammapix: "$7/mo", shortpixel: "$4.99/mo (credits)" },
+  { feature: "Price for paid plan", sammapix: "$9/mo", shortpixel: "$4.99/mo (credits)" },
 ];
 
 function Cell({ value }: { value: boolean | string }) {
@@ -275,7 +275,7 @@ export default function VsShortPixelPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | ShortPixel: 100 free credits/mo, then paid" },
+                { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | ShortPixel: 100 free credits/mo, then paid" },
                 { "@type": "ListItem", position: 2, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | ShortPixel: No- uploads to server" },
                 { "@type": "ListItem", position: 3, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | ShortPixel: No" },
                 { "@type": "ListItem", position: 4, name: "WebP conversion", description: "SammaPix: Yes | ShortPixel: Yes" },

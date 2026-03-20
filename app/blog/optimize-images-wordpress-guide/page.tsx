@@ -111,7 +111,7 @@ const pluginComparison = [
     resize: true,
     privacy: false,
     serverLoad: "Medium",
-    cost: "Free / $7.08/mo",
+    cost: "Free / $9/mo",
     highlight: false,
   },
   {

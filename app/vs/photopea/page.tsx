@@ -49,7 +49,7 @@ const tableRows = [
   { feature: "Brush / selection tools", sammapix: false, photopea: true },
   { feature: "Mobile-friendly UX", sammapix: true, photopea: false },
   { feature: "Free to use", sammapix: true, photopea: "Ad-supported" },
-  { feature: "Price for ad-free", sammapix: "$7/mo", photopea: "$5/mo" },
+  { feature: "Price for ad-free", sammapix: "$9/mo", photopea: "$5/mo" },
 ];
 
 function Cell({ value }: { value: boolean | string }) {

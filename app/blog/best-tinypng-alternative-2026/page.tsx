@@ -413,7 +413,7 @@ export default function BestTinyPNGAlternative2026Page() {
                       feature: "Pro / paid plan",
                       sammapix: null,
                       tinypng: null,
-                      sammapixText: "$7 / month",
+                      sammapixText: "$9 / month",
                       tinypngText: "$39 / year (API only)",
                     },
                     {
@@ -484,7 +484,7 @@ export default function BestTinyPNGAlternative2026Page() {
               TinyPNG&apos;s paid product is developer-focused API access, starting at $39 per year. There is no mid-tier for the individual user who simply wants to remove the 20-image cap without integrating an API. You either stay on the free tier or pay for a developer product.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              SammaPix Pro is $7 per month — designed for the individual who uses the tool regularly. It removes all limits, unlocks 200 AI renames per day, enables bulk ZIP downloads for large batches, and removes ads. For a solo photographer or content creator processing hundreds of images a week, the cost is a rounding error against the time saved.
+              SammaPix Pro is $9 per month — designed for the individual who uses the tool regularly. It removes all limits, unlocks 200 AI renames per day, enables bulk ZIP downloads for large batches, and removes ads. For a solo photographer or content creator processing hundreds of images a week, the cost is a rounding error against the time saved.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Worth noting: SammaPix&apos;s free tier has no batch cap and no file size ceiling. The free experience is already more capable than TinyPNG&apos;s free tier for most use cases.

@@ -82,7 +82,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           </p>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
             First 200 Pro subscribers lock in{" "}
-            <span className="font-bold text-[#6366F1] text-base">$4/month forever</span>.
+            <span className="font-bold text-[#6366F1] text-base">~$5/month forever</span>.
           </p>
           <p className="text-xs text-[#A3A3A3] mt-2">
             Early adopters get a permanent discount as a thank-you for believing early.
@@ -174,8 +174,8 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
             {annual
-              ? "Start 60-day free trial -- $60/year"
-              : "Start 7-day free trial -- $7/month"
+              ? "Start 60-day free trial -- $79/year"
+              : "Start 7-day free trial -- $9/month"
             }
           </button>
 
