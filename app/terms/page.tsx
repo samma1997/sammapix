@@ -15,6 +15,7 @@ export const metadata: Metadata = {
       "SammaPix terms of service. Free and Pro plans, payment terms, intellectual property, and governing law (Italy).",
     type: "website",
     url: `${APP_URL}/terms`,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

@@ -9,9 +9,9 @@ export default function Error({
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
       <p className="text-6xl font-bold text-[#E5E5E5] dark:text-[#2A2A2A] mb-4">500</p>
-      <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+      <h1 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
         Something went wrong
-      </h2>
+      </h1>
       <p className="text-sm text-[#737373] mb-6">
         An unexpected error occurred. Please try again.
       </p>

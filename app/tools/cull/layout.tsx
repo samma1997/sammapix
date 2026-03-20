@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     url: `${APP_URL}/tools/cull`,
     siteName: "SammaPix",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

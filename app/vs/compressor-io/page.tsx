@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description:
       "Compressor.io is limited to one file at a time and uploads to their servers. SammaPix does batch, stays private. See the full comparison.",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

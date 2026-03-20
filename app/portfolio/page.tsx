@@ -18,6 +18,7 @@ export const metadata: Metadata = {
       "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China.",
     url: `${APP_URL}/portfolio`,
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 

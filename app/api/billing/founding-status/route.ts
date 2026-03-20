@@ -9,8 +9,10 @@ const FOUNDING_COUPON_ID = process.env.STRIPE_FOUNDING_COUPON_ID || "FOUNDING200
 const FOUNDING_MAX = 200;
 
 export async function GET() {
+  const headers = { "Cache-Control": "public, max-age=300" };
+
   if (cached && Date.now() - cached.cachedAt < CACHE_TTL) {
-    return NextResponse.json(cached);
+    return NextResponse.json(cached, { headers });
   }
 
   try {
@@ -21,9 +23,9 @@ export async function GET() {
     const spotsLeft = Math.max(0, maxRedemptions - redeemed);
 
     cached = { spotsLeft, totalSpots: maxRedemptions, active, cachedAt: Date.now() };
-    return NextResponse.json(cached);
+    return NextResponse.json(cached, { headers });
   } catch {
     // Coupon doesn't exist or error — founding deal not active
-    return NextResponse.json({ spotsLeft: 0, totalSpots: FOUNDING_MAX, active: false });
+    return NextResponse.json({ spotsLeft: 0, totalSpots: FOUNDING_MAX, active: false }, { headers });
   }
 }
