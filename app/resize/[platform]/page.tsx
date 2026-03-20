@@ -385,6 +385,75 @@ export default async function ResizePlatformPage({
         </section>
       )}
 
+      {/* ── Why use SammaPix ────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            Why SammaPix?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              {
+                title: "No uploads",
+                desc: "All resizing happens entirely in your browser. Your images never leave your device.",
+              },
+              {
+                title: "Batch process",
+                desc: "Resize 20+ images at once with the same settings. Download all as ZIP in seconds.",
+              },
+              {
+                title: "Free forever",
+                desc: "Core resize tools are completely free. No watermarks, no ads, no file limits.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]"
+              >
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+                  {item.title}
+                </p>
+                <p className="text-sm text-[#737373] leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── More resize tools ──────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More resize tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/tools/compress"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Compress images
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link
+              href="/tools/croproatio"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Crop to ratio
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link
+              href="/tools/webp"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Convert to WebP
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Blog reference ─────────────────────────────────────────────── */}
       <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">

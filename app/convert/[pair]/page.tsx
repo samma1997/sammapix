@@ -915,6 +915,27 @@ export default async function ConvertPairPage({
           </section>
         )}
 
+        {/* Sitemap internal links for SEO */}
+        <section aria-labelledby="tools-heading" className="mt-10">
+          <h2 id="tools-heading" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More conversion tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/convert" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              All conversions
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link href="/tools/compress" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              Compress images
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link href="/tools/webp" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              Convert to WebP
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </section>
+
         {/* Related conversions */}
         <section aria-labelledby="related-heading">
           <h2
