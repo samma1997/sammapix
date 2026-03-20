@@ -107,6 +107,8 @@ export const BLOG_SLUGS = [
   "remove-exif-protect-privacy",
   "remove-gps-from-photos",
   "travel-photography-tips-beginners",
+  "best-tinypng-alternative-2026",
+  "browser-based-image-tools-privacy-guide",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

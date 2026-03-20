@@ -8,7 +8,6 @@ import { compressImage } from "@/lib/compress";
 import { downloadSingleFile, downloadAllAsZip } from "@/lib/zip";
 import { DEFAULT_QUALITY, DEFAULT_CONVERT_WEBP, DEFAULT_AI_RENAME, MAX_FILES_FREE } from "@/lib/constants";
 import { getUsedToday, setUsedToday } from "@/lib/aiRenameCounter";
-import imageCompression from "browser-image-compression";
 
 interface ImageSettings {
   quality: number;

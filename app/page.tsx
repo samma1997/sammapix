@@ -476,10 +476,15 @@ export default function HomePage() {
             {[
               { name: "Resize for Instagram", href: "/resize/instagram" },
               { name: "Resize for YouTube", href: "/resize/youtube-thumbnail" },
+              { name: "Resize for TikTok", href: "/resize/tiktok" },
+              { name: "Resize for Pinterest", href: "/resize/pinterest" },
               { name: "Convert HEIC to JPG", href: "/convert/heic-to-jpg" },
               { name: "Convert PNG to WebP", href: "/convert/png-to-webp" },
               { name: "Convert JPG to WebP", href: "/convert/jpg-to-webp" },
+              { name: "SammaPix vs TinyPNG", href: "/vs/tinypng" },
+              { name: "SammaPix vs Squoosh", href: "/vs/squoosh" },
               { name: "All conversions", href: "/convert" },
+              { name: "All resize formats", href: "/tools/resizepack" },
             ].map((link) => (
               <Link
                 key={link.href}

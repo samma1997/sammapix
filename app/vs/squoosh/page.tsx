@@ -256,6 +256,34 @@ export default function VsSquooshPage() {
         </Link>
       </div>
 
+      {/* Related tools and pages */}
+      <div className="mb-14">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Try SammaPix tools</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Compress Images</p>
+              <p className="text-xs text-gray-500 mt-0.5">JPG, PNG, WebP with quality slider</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+          <Link href="/tools/ai-rename" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">AI Rename</p>
+              <p className="text-xs text-gray-500 mt-0.5">Squoosh feature exclusive: AI filenames</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+          <Link href="/tools/resizepack" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Batch Resize</p>
+              <p className="text-xs text-gray-500 mt-0.5">Resize multiple images at once</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+        </div>
+      </div>
+
       {/* Affiliate banners */}
       <div className="mt-8 space-y-3">
         <SiteGroundBanner variant="web-hosting" />

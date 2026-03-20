@@ -190,6 +190,34 @@ export default function VsTinyPngPage() {
         </Link>
       </div>
 
+      {/* Related tools and pages */}
+      <div className="mb-14">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Explore SammaPix further</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Compress Images</p>
+              <p className="text-xs text-gray-500 mt-0.5">JPG, PNG, WebP compression</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+          <Link href="/convert/png-to-webp" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Convert to WebP</p>
+              <p className="text-xs text-gray-500 mt-0.5">25-35% smaller files</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+          <Link href="/blog/best-image-compression-tools-2026" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Guide: Best Tools 2026</p>
+              <p className="text-xs text-gray-500 mt-0.5">Complete comparison</p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+          </Link>
+        </div>
+      </div>
+
       {/* Affiliate banners */}
       <div className="mt-8 space-y-3">
         <SiteGroundBanner variant="web-hosting" />

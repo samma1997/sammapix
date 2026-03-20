@@ -190,6 +190,9 @@ export default function ImageSizesSocialMedia2026Page() {
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Instagram image sizes 2026
             </h2>
+            <p className="text-xs bg-[#EEF2FF] dark:bg-[#1E1F3E] border border-[#C7D2FE] dark:border-[#2E3A5E] text-[#4F46E5] dark:text-[#818CF8] px-3 py-2 rounded mb-4">
+              Ready to resize? Use <Link href="/resize/instagram" className="font-semibold underline">Resize for Instagram</Link> to batch-resize photos to exact dimensions.
+            </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Instagram displays content at multiple aspect ratios depending on the format. The feed has historically enforced a fixed square crop but now allows portrait and landscape posts. Stories and Reels are strictly vertical. Instagram re-encodes all uploads, so starting with the correct dimensions minimizes quality loss. Official guidance is available via{" "}
               <a
@@ -419,6 +422,9 @@ export default function ImageSizesSocialMedia2026Page() {
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               TikTok image and video sizes 2026
             </h2>
+            <p className="text-xs bg-[#EEF2FF] dark:bg-[#1E1F3E] border border-[#C7D2FE] dark:border-[#2E3A5E] text-[#4F46E5] dark:text-[#818CF8] px-3 py-2 rounded mb-4">
+              Ready to resize? Use <Link href="/resize/tiktok" className="font-semibold underline">Resize for TikTok</Link> to batch-resize photos to vertical (9:16) dimensions.
+            </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               TikTok is primarily a video platform, and its image standards are defined around vertical video. Photo posts and carousels are also supported as of 2023 and growing in popularity for editorial and product content. The platform&apos;s UI elements occupy significant space at the top and bottom of the frame- design your key content to sit in the central safe zone.
             </p>
@@ -455,6 +461,9 @@ export default function ImageSizesSocialMedia2026Page() {
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               YouTube image sizes 2026
             </h2>
+            <p className="text-xs bg-[#EEF2FF] dark:bg-[#1E1F3E] border border-[#C7D2FE] dark:border-[#2E3A5E] text-[#4F46E5] dark:text-[#818CF8] px-3 py-2 rounded mb-4">
+              Ready to resize? Use <Link href="/resize/youtube-thumbnail" className="font-semibold underline">Resize for YouTube</Link> to batch-resize thumbnails to 1280×720px.
+            </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               YouTube thumbnail design is one of the highest-impact visual tasks for video creators. Research consistently shows that thumbnails directly influence click-through rate more than titles for most content categories. YouTube also has strict size requirements for channel art that must adapt across TV, desktop, tablet, and mobile simultaneously. Official specs are published at{" "}
               <a
@@ -517,6 +526,9 @@ export default function ImageSizesSocialMedia2026Page() {
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Pinterest image sizes 2026
             </h2>
+            <p className="text-xs bg-[#EEF2FF] dark:bg-[#1E1F3E] border border-[#C7D2FE] dark:border-[#2E3A5E] text-[#4F46E5] dark:text-[#818CF8] px-3 py-2 rounded mb-4">
+              Ready to resize? Use <Link href="/resize/pinterest" className="font-semibold underline">Resize for Pinterest</Link> to batch-resize pins to the recommended 1000×1500px (2:3 ratio).
+            </p>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Pinterest is a visual discovery engine, not a traditional social media platform, which means images compete entirely on visual impact. Tall, vertical pins take up significantly more feed space than horizontal ones and consistently outperform square or landscape formats. Pinterest recommends a strict 2:3 ratio for standard pins as the best performer in their feed algorithm.
             </p>
@@ -852,8 +864,35 @@ export default function ImageSizesSocialMedia2026Page() {
             </div>
           </div>
 
-          {/* Related articles */}
+          {/* Resize tools for all platforms */}
           <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
+              Batch resize to all platform sizes
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
+              {[
+                { name: "Instagram", href: "/resize/instagram" },
+                { name: "Facebook", href: "/resize/facebook" },
+                { name: "TikTok", href: "/resize/tiktok" },
+                { name: "Pinterest", href: "/resize/pinterest" },
+                { name: "YouTube", href: "/resize/youtube-thumbnail" },
+                { name: "Twitter", href: "/resize/twitter" },
+                { name: "LinkedIn", href: "/resize/linkedin" },
+              ].map((platform) => (
+                <Link
+                  key={platform.href}
+                  href={platform.href}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs border border-gray-200 dark:border-[#333] rounded text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] bg-white dark:bg-[#191919] transition-colors"
+                >
+                  {platform.name}
+                  <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Related articles */}
+          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
               Related articles
             </h3>
