@@ -186,11 +186,39 @@ function hasSuspiciousPatterns(request: NextRequest): boolean {
   return false;
 }
 
+// ── Referral cookie helper ────────────────────────────────────────────────────
+
+function attachRefCookie(response: NextResponse, code: string | null): NextResponse {
+  if (!code) return response;
+  response.cookies.set("sammapix_ref", code, {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    path: "/",
+    httpOnly: false, // Client JS needs to read this to call /api/referral/claim
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+  return response;
+}
+
 // ── Middleware ────────────────────────────────────────────────────────────────
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ua = request.headers.get("user-agent") || "";
+
+  // ── Referral cookie capture ──────────────────────────────────────────────
+  // Capture ?ref=SPIX-XXXX on ANY page, set 30-day cookie.
+  // Only set if user is not already logged in and code format is valid.
+  const refParam = request.nextUrl.searchParams.get("ref");
+  let referralCookieResponse: string | null = null; // Referral code to set as cookie
+
+  if (refParam && /^SPIX-[A-Z0-9]{4}$/.test(refParam)) {
+    // Only set if no existing referral cookie (first link wins)
+    const existingRef = request.cookies.get("sammapix_ref")?.value;
+    if (!existingRef) {
+      referralCookieResponse = refParam; // Store code to attach later
+    }
+  }
 
   // 0. Honeypot trap — only bots follow hidden links to /sp-trap
   if (pathname === "/sp-trap" || pathname === "/sp-admin") {
@@ -251,26 +279,29 @@ export async function middleware(request: NextRequest) {
   // 5. Logged-in users visiting public tool pages -> redirect to dashboard version
   if (token && pathname.startsWith("/tools/") && pathname !== "/tools") {
     const toolSlug = pathname.replace("/tools/", "");
-    return NextResponse.redirect(new URL(`/dashboard/tools/${toolSlug}`, request.url));
+    const redirect = NextResponse.redirect(new URL(`/dashboard/tools/${toolSlug}`, request.url));
+    return attachRefCookie(redirect, referralCookieResponse);
   }
 
   if (!isProtected) {
     const response = NextResponse.next();
     // Add anti-scraping headers to every response
     response.headers.set("X-Robots-Tag", "noarchive");
-    return response;
+    return attachRefCookie(response, referralCookieResponse);
   }
 
   if (!token) {
     // Redirect unauthenticated users to sign-in
     const signInUrl = new URL("/auth/signin", request.url);
     signInUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(signInUrl);
+    const redirect = NextResponse.redirect(signInUrl);
+    // Attach referral cookie even on redirect so it survives OAuth flow
+    return attachRefCookie(redirect, referralCookieResponse);
   }
 
   const response = NextResponse.next();
   response.headers.set("X-Robots-Tag", "noarchive");
-  return response;
+  return attachRefCookie(response, referralCookieResponse);
 }
 
 export const config = {

@@ -88,6 +88,14 @@ export const authOptions: AuthOptions = {
           customData: { status: "new_user" },
         }).catch(() => {});
       }
+
+      // Store user's email → userId mapping for the referral system.
+      // The referral claim itself happens client-side via POST /api/referral/claim
+      // because NextAuth v4 events don't have access to request cookies.
+      if (user.id) {
+        const { storeReferrerEmail } = await import("@/lib/referral");
+        storeReferrerEmail(user.id, user.email).catch(() => {});
+      }
     },
   },
   pages: {

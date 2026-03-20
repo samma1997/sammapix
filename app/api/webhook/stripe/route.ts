@@ -152,6 +152,23 @@ export async function POST(req: NextRequest) {
         console.log("[stripe/webhook] ✅ New Pro subscription for:", session.customer_email);
         // Plan is detected via Stripe API at next login- no DB needed.
 
+        // Track referral conversion — grant referrer a free Pro month
+        if (session.customer_email) {
+          try {
+            const { trackReferralConversion } = await import("@/lib/referral");
+            // Use the Stripe customer ID or metadata userId as the userId
+            const refUserId = metadata.userId || (typeof session.customer === "string" ? session.customer : "");
+            if (refUserId) {
+              const converted = await trackReferralConversion(refUserId);
+              if (converted) {
+                console.log("[stripe/webhook] Referral conversion tracked for:", refUserId);
+              }
+            }
+          } catch (err) {
+            console.error("[stripe/webhook] Referral conversion error:", err);
+          }
+        }
+
         // Send Pro upgrade email
         if (session.customer_email) {
           sendProUpgradeEmail(

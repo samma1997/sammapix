@@ -35,6 +35,7 @@ import {
   LogOut,
   ChevronUp,
 } from "lucide-react";
+import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
 
 const LS_PERSONA_KEY = "sammapix-persona";
@@ -318,6 +319,9 @@ export default function DashboardSidebar({
 
       {/* Bottom fixed section */}
       <div className="shrink-0 border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-2 py-2 space-y-0.5">
+        {/* Referral badge */}
+        <SidebarReferralBadge />
+
         {/* Upgrade to Pro (if free) */}
         {!isPro && (
           <button
