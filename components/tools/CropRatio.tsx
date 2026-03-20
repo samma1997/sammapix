@@ -16,11 +16,10 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
-const MAX_FREE = 100;
-const MAX_PRO = 500;
 const CONCURRENCY = 5;
 const CONTAINER_MAX_W = 500;
 const CONTAINER_MAX_H = 400;
@@ -439,7 +438,7 @@ const CropPreview = ({
 export default function CropRatio() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const limit = isPro ? MAX_PRO : MAX_FREE;
+  const limit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
   const [uiState, setUiState] = useState<UIState>("idle");
   const [isDragOver, setIsDragOver] = useState(false);
@@ -759,7 +758,7 @@ export default function CropRatio() {
                 className="text-[11px] text-[#6366F1] hover:underline mt-1"
                 onClick={(e) => e.stopPropagation()}
               >
-                Pro: up to {MAX_PRO} images per batch
+                Pro: up to {MAX_FILES_PRO} images per batch
               </Link>
             )}
           </div>

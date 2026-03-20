@@ -18,11 +18,10 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
-const MAX_FREE = 100;
-const MAX_PRO = 500;
 const CONCURRENCY = 5;
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -478,7 +477,7 @@ const CropPreview = ({
 export default function ResizePack() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const limit = isPro ? MAX_PRO : MAX_FREE;
+  const limit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
   const [uiState, setUiState] = useState<UIState>("idle");
   const [isDragOver, setIsDragOver] = useState(false);
@@ -874,16 +873,16 @@ export default function ResizePack() {
                 <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded mr-1">
                   PRO
                 </span>
-                Up to 500 photos
+                Up to {MAX_FILES_PRO} photos
               </span>
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
-                Free: up to {MAX_FREE} files &middot;{" "}
+                Free: up to {MAX_FILES_FREE} files &middot;{" "}
                 <Link
                   href="/dashboard/upgrade"
                   className="underline hover:text-[#737373]"
                 >
-                  Pro: 500
+                  Pro: {MAX_FILES_PRO}
                 </Link>
               </p>
             )}

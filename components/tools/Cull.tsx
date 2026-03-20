@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -31,7 +32,6 @@ interface PhotoEntry {
   previewUrl: string | null; // null = no preview available
 }
 
-const MAX_CULL_FREE = 100;
 const CONCURRENCY = 5; // parallel conversions
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -118,7 +118,7 @@ const PREP_MESSAGES = [
 export default function CullClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const cullLimit = isPro ? 500 : MAX_CULL_FREE;
+  const cullLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
   const [uiState, setUiState] = useState<UIState>("idle");
   const [photos, setPhotos] = useState<PhotoEntry[]>([]);
@@ -390,13 +390,13 @@ export default function CullClient() {
             {isPro ? (
               <span className="text-[11px] text-[#A3A3A3]">
                 <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-1.5 py-0.5 rounded mr-1">PRO</span>
-                Up to 500 photos
+                Up to {MAX_FILES_PRO} photos
               </span>
             ) : (
               <p className="text-[11px] text-[#C4C4C4]">
-                Free: up to {MAX_CULL_FREE} files &middot;{" "}
+                Free: up to {MAX_FILES_FREE} files &middot;{" "}
                 <Link href="/dashboard/upgrade" className="underline hover:text-[#737373]">
-                  Pro: 500
+                  Pro: {MAX_FILES_PRO}
                 </Link>
               </p>
             )}
