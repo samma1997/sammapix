@@ -3,7 +3,7 @@
  *
  * Priority:
  *   1. PRO_EMAILS env var - manual grants (owner, testers)
- *   2. Stripe API         - active subscription
+ *   2. Stripe API         - active or trialing subscription
  *   3. Default: "free"
  */
 import { stripe } from "@/lib/stripe";
@@ -28,13 +28,17 @@ export async function getUserPlan(email: string | null | undefined): Promise<"fr
     const customers = await stripe.customers.list({ email, limit: 1 });
     if (customers.data.length === 0) return "free";
 
+    // Check for active OR trialing subscriptions (trial users get Pro access)
     const subs = await stripe.subscriptions.list({
       customer: customers.data[0].id,
-      status: "active",
-      limit: 1,
+      limit: 5,
     });
 
-    return subs.data.length > 0 ? "pro" : "free";
+    const hasProSub = subs.data.some(
+      (s) => s.status === "active" || s.status === "trialing"
+    );
+
+    return hasProSub ? "pro" : "free";
   } catch (err) {
     console.error("[getUserPlan] Stripe check failed:", err);
     return "free";

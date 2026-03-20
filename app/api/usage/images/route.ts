@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
   // Allow anonymous users too (compress/webp/resize don't require login)
   // For anonymous, use IP-based tracking
-  const trackingId = email ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anonymous";
+  const trackingId = email ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "anonymous";
   const isPro = email ? (session?.user as { plan?: string }).plan === "pro" : false;
   const limit = isPro ? DAILY_IMAGES_PRO : DAILY_IMAGES_FREE;
 

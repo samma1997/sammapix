@@ -38,6 +38,26 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // Static assets — immutable cache for hashed files
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      // Public assets — 1 week cache
+      {
+        source: "/icon-:size.png",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=604800" },
+        ],
+      },
+      {
+        source: "/og-image.png",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=604800" },
+        ],
+      },
 {
         source: "/(.*)",
         headers: [
