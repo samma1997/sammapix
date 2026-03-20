@@ -221,7 +221,7 @@ export default function VsImageOptimPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | ImageOptim: Free" },
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | ImageOptim: Free" },
                 { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | ImageOptim: Yes" },
                 { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- browser-based | ImageOptim: Yes- desktop app" },
                 { "@type": "ListItem", "position": 4, name: "Platform availability", description: "SammaPix: Any OS, browser-based | ImageOptim: macOS only" },

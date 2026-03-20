@@ -8,7 +8,7 @@ import { saveAs } from "file-saver";
 import { Upload, Download, CheckCircle2, Loader2, Circle, AlertCircle, Lock, Sparkles, Play } from "lucide-react";
 import ImportSourceButtons from "@/components/ui/ImportSourceButtons";
 import type { PipelineStep as EnginePipelineStep, PipelineStepId } from "@/lib/pipeline-engine";
-import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ─── Language options for AI Rename ─────────────────────────────────────────
@@ -543,7 +543,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
         {/* AI rename daily limit note */}
         {enabledAiSteps.length > 0 && isAuthenticated && (
           <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] text-center">
-            AI features use your daily limit ({AI_RENAME_FREE_PER_DAY}/day free, unlimited Pro)
+            AI features use your daily limit ({AI_OPS_FREE_PER_DAY}/day free, unlimited Pro)
           </p>
         )}
 

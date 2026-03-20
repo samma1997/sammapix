@@ -49,7 +49,7 @@ const tableRows = [
   { feature: "Mobile-friendly UX", sammapix: true, optimizilla: false },
   { feature: "Actively maintained", sammapix: true, optimizilla: "Minimal updates" },
   { feature: "Free to use", sammapix: true, optimizilla: true },
-  { feature: "Price for Pro", sammapix: "$7/mo", optimizilla: "N/A" },
+  { feature: "Price for Pro", sammapix: "$9/mo", optimizilla: "N/A" },
 ];
 
 function Cell({ value }: { value: boolean | string }) {
@@ -283,7 +283,7 @@ export default function VsOptimizillaPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Optimizilla: Free" },
+                { "@type": "ListItem", position: 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | Optimizilla: Free" },
                 { "@type": "ListItem", position: 2, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Optimizilla: No- uploads to server" },
                 { "@type": "ListItem", position: 3, name: "WebP conversion", description: "SammaPix: Yes | Optimizilla: No" },
                 { "@type": "ListItem", position: 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Optimizilla: No" },

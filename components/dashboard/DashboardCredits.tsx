@@ -13,24 +13,24 @@ const PACKAGES = [
     id: "credits_100",
     name: "Starter",
     credits: 100,
-    priceUsd: 4.99,
-    perCredit: "$0.05",
+    priceUsd: 5.99,
+    perCredit: "$0.06",
     highlighted: false,
   },
   {
     id: "credits_500",
     name: "Standard",
     credits: 500,
-    priceUsd: 9.99,
-    perCredit: "$0.02",
+    priceUsd: 11.99,
+    perCredit: "$0.024",
     highlighted: true,
   },
   {
     id: "credits_2000",
     name: "Mega",
     credits: 2000,
-    priceUsd: 29.99,
-    perCredit: "$0.015",
+    priceUsd: 34.99,
+    perCredit: "$0.017",
     highlighted: false,
   },
 ] as const;
@@ -295,6 +295,7 @@ export default function DashboardCredits({ purchased, canceled }: DashboardCredi
           {[
             { label: "AI Rename", cost: "1 credit" },
             { label: "AI Alt Text", cost: "1 credit" },
+            { label: "AI Organize", cost: "1 credit" },
             { label: "Workflow step (AI)", cost: "2 credits" },
           ].map(({ label, cost }) => (
             <li key={label} className="flex items-center justify-between">

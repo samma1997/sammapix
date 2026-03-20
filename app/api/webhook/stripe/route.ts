@@ -179,7 +179,7 @@ export async function POST(req: NextRequest) {
             eventName: "StartTrial",
             sourceUrl: `${appUrl}/pricing?success=true`,
             email: session.customer_email ?? undefined,
-            customData: { currency: "USD", value: 7.00, predicted_ltv: 84.00 },
+            customData: { currency: "USD", value: 9.00, predicted_ltv: 108.00 },
           }).catch(() => {});
         }
 
@@ -188,7 +188,7 @@ export async function POST(req: NextRequest) {
           eventName: "Subscribe",
           sourceUrl: `${appUrl}/pricing?success=true`,
           email: session.customer_email ?? undefined,
-          customData: { currency: "USD", value: 7.00 },
+          customData: { currency: "USD", value: 9.00 },
         }).catch(() => {}); // fire-and-forget
       }
       break;

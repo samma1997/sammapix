@@ -186,7 +186,7 @@ export default function AccountPage() {
                 href="/pricing"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#171717] text-white text-sm font-medium rounded-md hover:bg-[#262626] transition-colors"
               >
-                Upgrade to Pro- $7/mo
+                Upgrade to Pro- $9/mo
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Link>
             </>

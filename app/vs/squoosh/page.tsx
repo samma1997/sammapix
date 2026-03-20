@@ -320,7 +320,7 @@ export default function VsSquooshPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Squoosh: Free" },
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | Squoosh: Free" },
                 { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Squoosh: No- one file at a time" },
                 { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Squoosh: Yes- 100% browser-based" },
                 { "@type": "ListItem", "position": 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Squoosh: No" },

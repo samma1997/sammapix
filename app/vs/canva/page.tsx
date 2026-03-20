@@ -49,7 +49,7 @@ const tableRows = [
   { feature: "Brand kits / team collaboration", sammapix: false, canva: true },
   { feature: "Video editing", sammapix: false, canva: true },
   { feature: "Free plan available", sammapix: true, canva: true },
-  { feature: "Price for paid plan", sammapix: "$7/mo", canva: "$15/mo" },
+  { feature: "Price for paid plan", sammapix: "$9/mo", canva: "$15/mo" },
 ];
 
 function Cell({ value }: { value: boolean | string }) {
@@ -181,7 +181,7 @@ export default function VsCanvaPage() {
               Price - SammaPix is free where it matters most
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Canva Pro is $15/month and unlocks premium templates, brand kits, and expanded export options. SammaPix Pro is $7/month and unlocks 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. The core compression and WebP tools on SammaPix are free forever with no account required - Canva requires an account for most workflows.
+              Canva Pro is $15/month and unlocks premium templates, brand kits, and expanded export options. SammaPix Pro is $9/month and unlocks 100-file batch processing, unlimited AI rename (200/day), ZIP download, and no ads. The core compression and WebP tools on SammaPix are free forever with no account required - Canva requires an account for most workflows.
             </p>
           </div>
         </div>
@@ -263,7 +263,7 @@ export default function VsCanvaPage() {
                 { "@type": "ListItem", position: 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Canva: No- cloud storage" },
                 { "@type": "ListItem", position: 4, name: "AI image renaming", description: "SammaPix: Yes (Google Gemini) | Canva: No" },
                 { "@type": "ListItem", position: 5, name: "Batch compression", description: "SammaPix: Yes, free up to 20 files | Canva: No dedicated compression" },
-                { "@type": "ListItem", position: 6, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Canva: Free (Pro $15/mo)" },
+                { "@type": "ListItem", position: 6, name: "Price", description: "SammaPix: Free (Pro $9/mo) | Canva: Free (Pro $15/mo)" },
                 { "@type": "ListItem", position: 7, name: "No account required", description: "SammaPix: Yes (for compression) | Canva: No" },
               ],
             },

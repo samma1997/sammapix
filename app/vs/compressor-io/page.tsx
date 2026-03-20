@@ -219,7 +219,7 @@ export default function VsCompressorIoPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | Compressor.io: Free (Pro available)" },
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | Compressor.io: Free (Pro available)" },
                 { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | Compressor.io: No- one file at a time" },
                 { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | Compressor.io: No- uploads to server" },
                 { "@type": "ListItem", "position": 4, name: "Max file size", description: "SammaPix: 20 MB free, 50 MB Pro | Compressor.io: 10 MB" },

@@ -48,7 +48,7 @@ const tableRows = [
   { feature: "No account required (compress)", sammapix: true, tinypng: true },
   { feature: "API access", sammapix: "Pro", tinypng: "Paid" },
   { feature: "WordPress plugin", sammapix: false, tinypng: true },
-  { feature: "Price for Pro", sammapix: "$7/mo", tinypng: "$25/mo" },
+  { feature: "Price for Pro", sammapix: "$9/mo", tinypng: "$25/mo" },
 ];
 
 function Cell({ value }: { value: boolean | string }) {
@@ -170,7 +170,7 @@ export default function VsTinyPngPage() {
               Price - SammaPix Pro is 3x cheaper
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              TinyPNG Pro starts at $25/month. SammaPix Pro is $7/month and includes unlimited AI rename (200/day), bulk processing up to 100 files, ZIP download, and no ads. For most users, the free plan is enough forever.
+              TinyPNG Pro starts at $25/month. SammaPix Pro is $9/month and includes unlimited AI rename (200/day), bulk processing up to 100 files, ZIP download, and no ads. For most users, the free plan is enough forever.
             </p>
           </div>
         </div>
@@ -254,7 +254,7 @@ export default function VsTinyPngPage() {
               "@type": "ItemList",
               name: "Feature Comparison",
               itemListElement: [
-                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $7/mo) | TinyPNG: Free (Pro $25/mo)" },
+                { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | TinyPNG: Free (Pro $25/mo)" },
                 { "@type": "ListItem", "position": 2, name: "Batch processing", description: "SammaPix: Yes, up to 20 files free | TinyPNG: Yes, 20 files/month free" },
                 { "@type": "ListItem", "position": 3, name: "No upload required", description: "SammaPix: Yes- 100% browser-based | TinyPNG: No- uploads to server" },
                 { "@type": "ListItem", "position": 4, name: "WebP conversion", description: "SammaPix: Yes | TinyPNG: No" },

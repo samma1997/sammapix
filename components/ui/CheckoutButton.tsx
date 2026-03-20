@@ -82,7 +82,7 @@ export default function CheckoutButton({
         loading={loading}
         onClick={handleClick}
       >
-        {children ?? "Get Pro- $7/mo"}
+        {children ?? "Get Pro- $9/mo"}
       </Button>
       {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
     </>
