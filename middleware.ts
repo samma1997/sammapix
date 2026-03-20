@@ -89,6 +89,7 @@ const ALLOWED_BOTS = [
   "chatgpt-user",
   "claude-web",
   "anthropic-ai",
+  "claude-code",
   "perplexitybot",
   "ccbot",
   "omgilibot",
