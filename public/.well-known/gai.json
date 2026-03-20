@@ -1,0 +1,267 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "name": "SammaPix",
+    "description": "Free browser-based image optimization tools. Compress, convert, resize, and enhance photos without uploading to any server.",
+    "url": "https://sammapix.com",
+    "contact": "support@sammapix.com",
+    "language": "en",
+    "creator": {
+      "name": "Luca Sammarco",
+      "url": "https://lucasammarco.com",
+      "expertise": ["Photography", "Travel Photography", "Image Optimization", "Web Development", "Full-Stack Development"]
+    }
+  },
+  "guides": [
+    {
+      "title": "Compress Images Without Losing Quality",
+      "url": "https://sammapix.com/blog/compress-images-without-losing-quality",
+      "type": "guide",
+      "topic": ["image compression", "web optimization", "file size reduction", "lossy compression", "lossless compression"],
+      "description": "Complete guide to lossy vs lossless compression, best quality settings per format, and practical workflow for optimizing images for web."
+    },
+    {
+      "title": "Complete Guide to WebP Format",
+      "url": "https://sammapix.com/blog/complete-guide-webp-format",
+      "type": "guide",
+      "topic": ["webp", "image format", "modern web", "image optimization", "format conversion"],
+      "description": "Everything about WebP: file size advantages, browser compatibility, when to use it, and how to convert images."
+    },
+    {
+      "title": "How to Rename Images for SEO with AI",
+      "url": "https://sammapix.com/blog/ai-image-renaming-seo-guide",
+      "type": "guide",
+      "topic": ["seo", "image metadata", "filenames", "ai", "search optimization"],
+      "description": "AI-powered image renaming transforms generic filenames (IMG_1234.jpg) into SEO-friendly names that rank in Google Image Search."
+    },
+    {
+      "title": "Convert iPhone HEIC Photos to JPG Free",
+      "url": "https://sammapix.com/blog/iphone-heic-to-jpg-guide",
+      "type": "guide",
+      "topic": ["heic", "iphone", "conversion", "formats", "photo compatibility"],
+      "description": "Step-by-step guide to converting HEIC photos from iPhone to JPG or PNG without software or uploads."
+    },
+    {
+      "title": "Remove EXIF Data to Protect Your Privacy",
+      "url": "https://sammapix.com/blog/remove-exif-protect-privacy",
+      "type": "guide",
+      "topic": ["privacy", "exif", "metadata", "gps", "photo security"],
+      "description": "Why EXIF data is a privacy risk, what information it contains (GPS, camera, timestamps), and how to remove it safely."
+    },
+    {
+      "title": "Image Sizes for Social Media Platforms (2026)",
+      "url": "https://sammapix.com/blog/image-sizes-social-media-2026",
+      "type": "guide",
+      "topic": ["social media", "image dimensions", "instagram", "twitter", "linkedin", "tiktok"],
+      "description": "Current image dimensions for every social platform: Instagram (1:1, 4:5), Twitter (16:9), LinkedIn, TikTok, YouTube, Pinterest."
+    },
+    {
+      "title": "Organize Travel Photos by Country with GPS",
+      "url": "https://sammapix.com/blog/organize-travel-photos-by-country",
+      "type": "guide",
+      "topic": ["travel photography", "organization", "gps", "exif", "photo workflow"],
+      "description": "Use GPS EXIF data to automatically sort and organize travel photos by country without manual work."
+    }
+  ],
+  "tools": [
+    {
+      "name": "Compress",
+      "url": "https://sammapix.com/tools/compress",
+      "description": "Compress JPG, PNG, WebP, GIF up to 80% smaller without quality loss. Batch processing with ZIP download.",
+      "topic": ["compression", "optimization", "image quality", "file size"],
+      "formats": ["JPEG", "PNG", "WebP", "GIF"],
+      "features": {
+        "batch_processing": true,
+        "quality_slider": true,
+        "zip_download": true,
+        "browser_based": true,
+        "no_uploads": true
+      }
+    },
+    {
+      "name": "WebP Converter",
+      "url": "https://sammapix.com/tools/webp",
+      "description": "Convert any image format to modern WebP format (25-34% smaller than JPEG). Batch conversion with ZIP download.",
+      "topic": ["conversion", "webp", "format", "optimization", "modern web"],
+      "formats": ["JPEG", "PNG", "GIF", "WebP output"],
+      "features": {
+        "batch_processing": true,
+        "quality_slider": true,
+        "zip_download": true,
+        "browser_based": true
+      }
+    },
+    {
+      "name": "HEIC Converter",
+      "url": "https://sammapix.com/tools/heic",
+      "description": "Convert iPhone HEIC photos to JPG or WebP. No upload limits, batch processing, browser-based.",
+      "topic": ["heic", "iphone", "conversion", "formats", "photo compatibility"],
+      "formats": ["HEIC", "HEIF", "JPG output", "WebP output", "PNG output"],
+      "features": {
+        "batch_processing": true,
+        "multiple_output_formats": true,
+        "no_file_limit": true,
+        "browser_based": true
+      }
+    },
+    {
+      "name": "AI Rename",
+      "url": "https://sammapix.com/tools/ai-rename",
+      "description": "AI generates SEO-optimized filenames and alt text using Google Gemini. Free tier: 10/day. Pro: 500+/day.",
+      "topic": ["seo", "ai", "metadata", "filenames", "alt text"],
+      "features": {
+        "ai_powered": true,
+        "gemini_integration": true,
+        "generates_filenames": true,
+        "generates_alt_text": true,
+        "generates_captions": true,
+        "requires_account": true
+      }
+    },
+    {
+      "name": "EXIF Remover",
+      "url": "https://sammapix.com/tools/exif",
+      "description": "Strip GPS location data and all EXIF metadata from photos. 100% browser-based, zero uploads.",
+      "topic": ["privacy", "exif", "metadata", "gps", "photo security"],
+      "formats": ["JPEG", "PNG", "WebP", "GIF"],
+      "features": {
+        "removes_gps": true,
+        "removes_metadata": true,
+        "browser_based": true,
+        "no_uploads": true
+      }
+    },
+    {
+      "name": "Resize Images",
+      "url": "https://sammapix.com/tools/resizepack",
+      "description": "Resize images for social media platforms (Instagram, Twitter, LinkedIn, YouTube, TikTok, Pinterest). Batch processing with presets.",
+      "topic": ["resize", "dimensions", "social media", "optimization"],
+      "features": {
+        "social_media_presets": true,
+        "batch_processing": true,
+        "custom_dimensions": true,
+        "aspect_ratio_control": true
+      }
+    },
+    {
+      "name": "Crop & Ratio",
+      "url": "https://sammapix.com/tools/croproatio",
+      "description": "Crop images to exact aspect ratios (1:1, 16:9, 4:3, 3:2, A4, custom). Preview before crop, batch processing.",
+      "topic": ["crop", "aspect ratio", "composition", "batch processing"],
+      "features": {
+        "preset_ratios": true,
+        "custom_ratios": true,
+        "preview": true,
+        "batch_crop": true
+      }
+    },
+    {
+      "name": "Film Filters",
+      "url": "https://sammapix.com/tools/filmlab",
+      "description": "14 authentic film presets (Kodak, Fuji, Ilford) plus 8 SammaPix originals. Apply to single or batch photos.",
+      "topic": ["filters", "presets", "creative", "film simulation"],
+      "features": {
+        "preset_filters": true,
+        "batch_apply": true,
+        "film_simulation": true,
+        "customizable": true
+      }
+    },
+    {
+      "name": "Watermark",
+      "url": "https://sammapix.com/tools/stampit",
+      "description": "Batch watermark photos with text or logo. 9 positioning options, tiled patterns, font customization.",
+      "topic": ["watermark", "branding", "protection", "batch processing"],
+      "features": {
+        "text_watermark": true,
+        "logo_watermark": true,
+        "positioning_options": true,
+        "batch_processing": true,
+        "font_customization": true
+      }
+    },
+    {
+      "name": "Find Duplicates",
+      "url": "https://sammapix.com/tools/twinhunt",
+      "description": "Find exact and near-duplicate photos using perceptual hashing (pHash). Organize large photo libraries.",
+      "topic": ["duplicates", "organization", "library management", "image comparison"],
+      "features": {
+        "perceptual_hashing": true,
+        "exact_duplicates": true,
+        "similar_image_detection": true,
+        "browser_based": true
+      }
+    },
+    {
+      "name": "Sort by Location",
+      "url": "https://sammapix.com/tools/geosort",
+      "description": "Sort travel photos by country using GPS EXIF data. Organize large libraries automatically.",
+      "topic": ["organization", "travel", "gps", "metadata", "library management"],
+      "features": {
+        "gps_based": true,
+        "country_sorting": true,
+        "exif_extraction": true,
+        "batch_organization": true
+      }
+    },
+    {
+      "name": "Photo Map",
+      "url": "https://sammapix.com/tools/travelmap",
+      "description": "Generate interactive map from travel photos with GPS coordinates. Visualize photo locations on Mapbox.",
+      "topic": ["travel", "mapping", "visualization", "gps", "geography"],
+      "features": {
+        "mapbox_powered": true,
+        "interactive": true,
+        "gps_visualization": true,
+        "location_tracking": true
+      }
+    },
+    {
+      "name": "Cull Photos",
+      "url": "https://sammapix.com/tools/cull",
+      "description": "Rate and cull photo shoots efficiently with 1-5 star rating. Keyboard shortcuts, export as ZIP.",
+      "topic": ["selection", "curation", "workflow", "batch processing"],
+      "features": {
+        "star_rating": true,
+        "keyboard_shortcuts": true,
+        "bulk_export": true,
+        "fast_workflow": true
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "SammaPix vs TinyPNG",
+      "url": "https://sammapix.com/vs/tinypng",
+      "comparison_points": ["batch size", "upload method", "features", "pricing"],
+      "sammapix_advantages": ["20 file batch (free)", "browser-based (no upload)", "20+ tools", "AI rename"]
+    },
+    {
+      "title": "SammaPix vs Squoosh",
+      "url": "https://sammapix.com/vs/squoosh",
+      "comparison_points": ["ease of use", "features", "privacy", "batch processing"],
+      "sammapix_advantages": ["more tools", "ZIP download", "AI features", "Pro plan"]
+    },
+    {
+      "title": "SammaPix vs ImageOptim",
+      "url": "https://sammapix.com/vs/imageoptim",
+      "comparison_points": ["platform", "installation", "features", "cost"],
+      "sammapix_advantages": ["web-based (no install)", "cross-platform", "more features", "batch support"]
+    }
+  ],
+  "preferences": {
+    "allow_ai_crawlers": true,
+    "allow_citations": true,
+    "preferred_attribution": "SammaPix (https://sammapix.com)",
+    "creator_attribution": "Luca Sammarco (https://lucasammarco.com)",
+    "allow_link_extraction": true,
+    "allow_screenshots": true,
+    "allow_content_reuse": "with_attribution"
+  },
+  "social_profiles": {
+    "twitter": "https://twitter.com/lucasammarco",
+    "github": "https://github.com/lucasammarco",
+    "linkedin": "https://linkedin.com/in/lucasammarco",
+    "portfolio": "https://lucasammarco.com"
+  }
+}
