@@ -192,6 +192,20 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ua = request.headers.get("user-agent") || "";
 
+  // 0. Honeypot trap — only bots follow hidden links to /sp-trap
+  if (pathname === "/sp-trap" || pathname === "/sp-admin") {
+    const ip = request.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+    console.warn(`[honeypot] Bot trapped: IP=${ip} UA=${ua.slice(0, 80)} path=${pathname}`);
+    // Ban this IP from rate limiter by filling up their bucket
+    const entry = rateLimitMap.get(ip);
+    if (entry) {
+      entry.count = RATE_LIMIT_MAX + 100;
+    } else {
+      rateLimitMap.set(ip, { count: RATE_LIMIT_MAX + 100, resetAt: Date.now() + 3600_000 });
+    }
+    return new NextResponse("Not found", { status: 404 });
+  }
+
   // 1. Block suspicious path patterns
   if (hasSuspiciousPatterns(request)) {
     return new NextResponse("Forbidden", { status: 403 });
