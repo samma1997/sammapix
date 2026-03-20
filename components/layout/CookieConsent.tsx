@@ -39,22 +39,26 @@ export default function CookieConsent() {
       document.head.appendChild(script);
     }
 
-    // Google Ads + GA4
-    if (googleAdsId && !(window as any).gtag) {
-      // Load gtag.js
+    // Google Ads + GA4 (load if either is configured)
+    const gtagId = googleAdsId || ga4Id;
+    if (gtagId && !(window as any).gtag) {
+      // Load gtag.js with the primary ID
       const gtagScript = document.createElement("script");
-      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`;
+      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`;
       gtagScript.async = true;
       document.head.appendChild(gtagScript);
 
-      // Configure gtag
+      // Configure gtag — register both Ads and GA4 if available
+      const configs: string[] = [];
+      if (googleAdsId) configs.push(`gtag('config', '${googleAdsId}');`);
+      if (ga4Id) configs.push(`gtag('config', '${ga4Id}');`);
+
       const configScript = document.createElement("script");
       configScript.innerHTML = `
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '${googleAdsId}');
-        ${ga4Id ? `gtag('config', '${ga4Id}');` : ""}
+        ${configs.join("\n        ")}
       `;
       document.head.appendChild(configScript);
     }
