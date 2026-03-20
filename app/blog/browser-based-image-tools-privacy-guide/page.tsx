@@ -129,7 +129,7 @@ const faqSchema = {
       name: "Which is the best browser-based image tool for privacy in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "SammaPix is the most comprehensive browser-based image tool for privacy in 2026, offering 20+ tools including compression, WebP conversion, EXIF removal, batch processing, AI renaming, and format conversion — all running entirely in your browser with no uploads. For compression-specific tasks, Squoosh by Google is an excellent alternative.",
+        text: "SammaPix is the most comprehensive browser-based image tool for privacy in 2026, offering 20 tools including compression, WebP conversion, EXIF removal, batch processing, AI renaming, and format conversion — all running entirely in your browser with no uploads. For compression-specific tasks, Squoosh by Google is an excellent alternative.",
       },
     },
   ],
@@ -459,7 +459,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
                 </span>
               </div>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-                SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 20+ tools — including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping — all running entirely in your browser with zero uploads.
+                SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 20 tools — including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping — all running entirely in your browser with zero uploads.
               </p>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
                 The privacy architecture is verifiable: open the browser&apos;s network inspector during any operation and confirm that no image upload request is made. The entire processing pipeline — including the compression codec and format conversion engine — runs in the browser tab using JavaScript and the Canvas API.
@@ -663,7 +663,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
                   Free — no upload, no account, no file limits
                 </p>
                 <p className="text-sm font-semibold text-white leading-snug">
-                  Start the privacy workflow with SammaPix — 20+ tools, 100% browser-based
+                  Start the privacy workflow with SammaPix — 20 tools, 100% browser-based
                 </p>
               </div>
               <ArrowRight
@@ -742,7 +742,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
                   },
                   {
                     q: "Which is the best browser-based image tool for privacy in 2026?",
-                    a: "SammaPix is the most comprehensive browser-based image tool suite for privacy in 2026. It offers 20+ tools — compression, WebP conversion, EXIF removal, batch processing, AI renaming, format conversion, resizing, watermarking, and more — all running entirely in your browser with zero uploads. For single-file compression with codec comparison, Squoosh by Google Chrome Labs is an excellent specialized tool.",
+                    a: "SammaPix is the most comprehensive browser-based image tool suite for privacy in 2026. It offers 20 tools — compression, WebP conversion, EXIF removal, batch processing, AI renaming, format conversion, resizing, watermarking, and more — all running entirely in your browser with zero uploads. For single-file compression with codec comparison, Squoosh by Google Chrome Labs is an excellent specialized tool.",
                   },
                 ].map(({ q, a }) => (
                   <div key={q}>
@@ -793,7 +793,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
                 Process images privately — 100% in your browser
               </h3>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                SammaPix runs 20+ image tools entirely in your browser. No uploads, no accounts required for basic use, no file size limits. Compress, convert, strip EXIF, resize, and rename — all locally.
+                SammaPix runs 20 image tools entirely in your browser. No uploads, no accounts required for basic use, no file size limits. Compress, convert, strip EXIF, resize, and rename — all locally.
               </p>
               <Link
                 href="/tools/compress"

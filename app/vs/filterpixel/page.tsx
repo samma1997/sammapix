@@ -153,7 +153,7 @@ export default function VsFilterPixelPage() {
               FilterPixel requires payment - SammaPix is free to start
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              FilterPixel has no meaningful free tier. You need a paid plan to access batch optimization and full format support. SammaPix&apos;s core tools- compression, WebP conversion, EXIF removal, and resize- are completely free with no account required and no usage caps on the per-file tools. AI rename requires a free account (5 renames/day) or Pro ($59/year for 200/day). For freelancers, small agencies, and individual creators, SammaPix eliminates a recurring cost entirely.
+              FilterPixel has no meaningful free tier. You need a paid plan to access batch optimization and full format support. SammaPix&apos;s core tools- compression, WebP conversion, EXIF removal, and resize- are completely free with no account required and no usage caps on the per-file tools. AI rename requires a free account (10 ops/day) or Pro ($59/year for 200/day). For freelancers, small agencies, and individual creators, SammaPix eliminates a recurring cost entirely.
             </p>
           </div>
           <div>

@@ -141,7 +141,7 @@ export function Day21Email({ name }: Day21EmailProps) {
             <Text style={planLabel}>Free plan</Text>
             <Text style={planItem}>✓ Compress images (unlimited)</Text>
             <Text style={planItem}>✓ WebP conversion (unlimited)</Text>
-            <Text style={planItem}>✓ 5 AI renames per day</Text>
+            <Text style={planItem}>✓ 10 AI operations per day</Text>
             <Text style={planItem}>✓ Up to 20 files at once</Text>
             <Text style={planItemCrossed}>✗ No ZIP download</Text>
           </Section>
@@ -150,7 +150,7 @@ export function Day21Email({ name }: Day21EmailProps) {
             <Text style={planLabelPro}>Pro- $9/month</Text>
             <Text style={planItem}>✓ Everything in Free</Text>
             <Text style={planItem}>✓ 200 AI renames per day</Text>
-            <Text style={planItem}>✓ Up to 100 files at once</Text>
+            <Text style={planItem}>✓ Up to 500 files at once</Text>
             <Text style={planItem}>✓ ZIP download</Text>
             <Text style={planItem}>✓ No ads</Text>
             <Text style={planItem}>✓ Priority support</Text>

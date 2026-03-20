@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowRight, Sparkles, Search, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Search, Clock } from "lucide-react";
 import Link from "next/link";
 import AiRenameClient from "@/components/tools/AiRenameClient";
 import HowToUse from "@/components/tools/HowToUse";
@@ -79,8 +79,25 @@ export default function AiRenamePage() {
     <main>
       <MetaViewContent contentName="AI Rename" contentId="ai-rename" />
       {/* Hero SEO */}
-      <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
-        <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">AI Image Filename Generator for SEO</h1>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="flex items-center gap-3 mb-3">
+          <div
+            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+            aria-hidden="true"
+          >
+            <Sparkles className="h-4.5 w-4.5" style={{ color: "#6366F1", width: 18, height: 18 }} strokeWidth={1.5} />
+          </div>
+          <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">AI Image Filename Generator for SEO</h1>
+        </div>
         <p className="text-sm text-[#737373]">
           Turn generic image names into SEO-optimized filenames that rank in Google Images. Upload your photos and let AI generate descriptive, keyword-rich names in seconds- nothing uploaded to any server except the thumbnail for AI analysis.
         </p>
@@ -156,7 +173,7 @@ export default function AiRenamePage() {
             What is AI Image Rename?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename- the exact format Google recommends for image SEO. Free accounts get 5 renames per day. Each rename takes under 3 seconds.
+            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename- the exact format Google recommends for image SEO. Free accounts get 10 AI operations per day. Each rename takes under 3 seconds.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             Why image filenames matter for SEO
@@ -296,7 +313,7 @@ export default function AiRenamePage() {
                 name: "How many renames can I do for free?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Free accounts get 5 renames per day. Each rename takes under 3 seconds. Pro plans unlock 200 renames per day, plus other features like batch processing and zero ads.",
+                  text: "Free accounts get 10 AI operations per day. Each rename takes under 3 seconds. Pro plans unlock 200 renames per day, plus other features like batch processing and zero ads.",
                 },
               },
               {

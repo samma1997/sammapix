@@ -281,8 +281,8 @@ export default function DashboardSettings({
               <>
                 <div className="divide-y divide-[#F5F5F5] dark:divide-[#252525]">
                   <Row label="Current plan" value="Free" />
-                  <Row label="AI Renames" value="5 / day" />
-                  <Row label="Batch limit" value="100 files" />
+                  <Row label="AI Renames" value="10 / day" />
+                  <Row label="Batch limit" value="20 files" />
                 </div>
 
                 <Link

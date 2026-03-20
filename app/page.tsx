@@ -45,7 +45,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What tools does SammaPix offer?",
     answer:
-      "SammaPix includes 20 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, Batch Resize, Crop & Ratio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: Film Filters (14 film presets), Watermark (watermarks). Organize: EXIF Viewer, Find Duplicates (duplicate finder), Sort by Location, Photo Map, Cull. Plus combo tools: Web Optimize, Blog Ready, and AI Photo Sort. Batch Rename for pattern-based renaming.",
+      "SammaPix includes 20 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
   },
   {
     question: "How does SammaPix protect my privacy?",
@@ -65,7 +65,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Do I need to create an account?",
     answer:
-      "No account is needed for most tools -- Compress, WebP, HEIC, Resize, Crop, Film Filters, Watermark, EXIF Viewer, and more work without any login. Only AI-powered tools (AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.",
+      "No account is needed for most tools -- Compress, WebP, HEIC, PDF to Image, Resize, Crop, Film Filters, Watermark, EXIF Viewer, and more work without any login. Only AI-powered tools (AI Organize, AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.",
   },
   {
     question: "How does AI Rename work?",

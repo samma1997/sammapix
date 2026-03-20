@@ -399,7 +399,7 @@ export default async function ResizePlatformPage({
               },
               {
                 title: "Batch process",
-                desc: "Resize 20+ images at once with the same settings. Download all as ZIP in seconds.",
+                desc: "Resize multiple images at once with the same settings. Download all as ZIP in seconds.",
               },
               {
                 title: "Free forever",

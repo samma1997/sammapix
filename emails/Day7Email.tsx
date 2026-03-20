@@ -159,7 +159,7 @@ export function Day7Email({ name }: Day7EmailProps) {
           </Section>
 
           <Text style={subtle}>
-            Need more than 20 at once? Pro handles up to 100.{" "}
+            Need more than 20 at once? Pro handles up to 500.{" "}
             <Link
               href={`${BASE_URL}/pricing`}
               style={{ color: "#a3a3a3", textDecoration: "underline" }}

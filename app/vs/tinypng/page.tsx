@@ -161,7 +161,7 @@ export default function VsTinyPngPage() {
               AI rename- a feature TinyPNG doesn&apos;t have at all
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_4829.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">golden-retriever-puppy-playing-grass.webp</code>- automatically. This feature is free with a login (5/day), or unlimited on Pro.
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_4829.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">golden-retriever-puppy-playing-grass.webp</code>- automatically. This feature is free with a login (10/day), or unlimited on Pro.
             </p>
           </div>
           <div>
@@ -170,7 +170,7 @@ export default function VsTinyPngPage() {
               Price - SammaPix Pro is 3x cheaper
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              TinyPNG Pro starts at $25/month. SammaPix Pro is $9/month and includes unlimited AI rename (200/day), bulk processing up to 100 files, ZIP download, and no ads. For most users, the free plan is enough forever.
+              TinyPNG Pro starts at $25/month. SammaPix Pro is $9/month and includes unlimited AI rename (200/day), bulk processing up to 500 files, ZIP download, and no ads. For most users, the free plan is enough forever.
             </p>
           </div>
         </div>

@@ -171,7 +171,7 @@ const summaryRows: SummaryRow[] = [
   },
   {
     feature: "Number of tools",
-    sammapix: "13",
+    sammapix: "20",
     tinypng: "1",
     squoosh: "1",
     iloveimg: "10+",
