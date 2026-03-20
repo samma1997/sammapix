@@ -1,6 +1,8 @@
 "use client";
 
-import JSZip from "jszip";
+// JSZip is imported dynamically inside createZipFromFiles to avoid adding
+// ~100 kB to every tool page bundle. It is only fetched when the user
+// clicks "Download all as ZIP" — an infrequent, intentional action.
 import { ProcessedFile } from "@/types/image";
 import { sanitizeFilename } from "./utils";
 
@@ -8,6 +10,7 @@ export async function createZipFromFiles(
   files: ProcessedFile[],
   onProgress?: (progress: number) => void
 ): Promise<Blob> {
+  const { default: JSZip } = await import("jszip");
   const zip = new JSZip();
   const doneFiles = files.filter((f) => f.status === "done" && f.compressedBlob);
 

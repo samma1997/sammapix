@@ -1,6 +1,8 @@
 "use client";
 
-import imageCompression from "browser-image-compression";
+// browser-image-compression is imported dynamically inside compressImage to
+// keep it out of the initial bundle. It is only fetched when the user actually
+// uploads a JPEG — the Canvas path (WebP / PNG / GIF) never needs it.
 import { CompressionResult, ImageFormat } from "@/types/image";
 import { calculateSavings } from "./utils";
 
@@ -42,7 +44,10 @@ export async function compressImage(
     outputFormat = getMimeOutputFormat(file.type);
     onProgress?.(80);
   } else {
-    // Use browser-image-compression for JPEG and other opaque formats
+    // Use browser-image-compression for JPEG and other opaque formats.
+    // Dynamic import so this ~30 kB library is code-split and only fetched
+    // when the user uploads their first JPEG — never on page load.
+    const { default: imageCompression } = await import("browser-image-compression");
     const targetMB = Math.max(0.3, (config.quality / 100) * 2);
     const options = {
       maxSizeMB: targetMB,

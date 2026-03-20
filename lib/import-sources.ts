@@ -1,4 +1,9 @@
-import JSZip from "jszip";
+// JSZip is imported dynamically inside extractImagesFromZip to avoid adding
+// ~100 kB to the initial bundle. It is only needed when the user clicks
+// "Import ZIP", which is an infrequent action.
+
+// Type-only import for JSZip — does NOT add JSZip to the runtime bundle.
+import type JSZip from "jszip";
 
 // ─── Image extensions allowed for import ─────────────────────────────────────
 
@@ -39,6 +44,7 @@ function isImageFilename(filename: string): boolean {
  * Returns an array of File objects ready for the dropzone.
  */
 export async function extractImagesFromZip(zipFile: File): Promise<File[]> {
+  const { default: JSZip } = await import("jszip");
   const zip = await JSZip.loadAsync(zipFile);
   const imageFiles: File[] = [];
 

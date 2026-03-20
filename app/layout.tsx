@@ -98,6 +98,15 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}` }} />
+        {/* Preconnect to external origins to reduce connection latency (LCP impact) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+        )}
+        {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
+          <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        )}
         {/* iOS PWA support */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
