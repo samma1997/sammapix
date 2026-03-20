@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -18,6 +18,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
 import {
+  ToolCard,
   IconCompress,
   IconWebP,
   IconAIRename,
@@ -31,10 +32,188 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  type ToolCardData,
 } from "@/components/ui/ToolCard";
 
-// ─── Animated Workflow Preset Icons (dashboard-sized) ─────────────────────────
+// ─── Local icons (same as ToolsPageClient) ──────────────────────────────────
 
+const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-alt-pulse { 0%, 100% { opacity: 0.5; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
+      @keyframes dh-alt-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+      .dh-alt-img { transform-origin: 13px 20px; animation: dh-alt-pulse 2s ease-in-out infinite; }
+      .dh-alt-cursor { animation: dh-alt-cursor 0.9s step-end infinite; }
+    `}</style>
+    <g className="dh-alt-img">
+      <rect x="2" y="8" width="22" height="18" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="8" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M2 22 L9 16 L14 20 L18 16 L24 22" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    <rect x="4" y="30" width="40" height="12" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text x="9" y="39" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace">alt=</text>
+    <rect x="26" y="33" width="13" height="6" rx="1" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="0.75"/>
+    <rect className="dh-alt-cursor" x="27" y="34.5" width="1.25" height="3" rx="0.5" fill={accent}/>
+  </svg>
+);
+
+const IconTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-tr-wave { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+      .dh-tr-b1 { transform-origin: 8px 22px; animation: dh-tr-wave 1.2s ease-in-out 0s infinite; }
+      .dh-tr-b2 { transform-origin: 12px 22px; animation: dh-tr-wave 1.2s ease-in-out 0.15s infinite; }
+      .dh-tr-b3 { transform-origin: 16px 22px; animation: dh-tr-wave 1.2s ease-in-out 0.3s infinite; }
+      .dh-tr-b4 { transform-origin: 20px 22px; animation: dh-tr-wave 1.2s ease-in-out 0.45s infinite; }
+      .dh-tr-b5 { transform-origin: 24px 22px; animation: dh-tr-wave 1.2s ease-in-out 0.6s infinite; }
+    `}</style>
+    <g className="dh-tr-b1"><rect x="6" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
+    <g className="dh-tr-b2"><rect x="11" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
+    <g className="dh-tr-b3"><rect x="16" y="12" width="3" height="20" rx="1.5" fill={accent}/></g>
+    <g className="dh-tr-b4"><rect x="21" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/></g>
+    <g className="dh-tr-b5"><rect x="26" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/></g>
+    <path d="M33 22 L38 22 M35 19 L38 22 L35 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/>
+    <rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/>
+  </svg>
+);
+
+const IconWebLift: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-wl-lift { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
+      @keyframes dh-wl-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+      .dh-wl-lift { animation: dh-wl-lift 2s ease-in-out infinite; }
+      .dh-wl-glow { animation: dh-wl-glow 2s ease-in-out infinite; }
+    `}</style>
+    <g className="dh-wl-lift">
+      <rect x="4" y="10" width="20" height="16" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="7" y="13" width="8" height="5" rx="1" fill={accent} fillOpacity="0.25"/>
+    </g>
+    <path d="M26 18 L30 18 M28 16 L30 18 L28 20" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="dh-wl-glow">
+      <rect x="32" y="12" width="14" height="12" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="39" y="20" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">.webp</text>
+    </g>
+    <path d="M24 30 L24 38 M20 34 L24 38 L28 34" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="14" y="39" width="20" height="6" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1"/>
+    <text x="24" y="44" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">SEO</text>
+  </svg>
+);
+
+const IconBlogDrop: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-bd-drop { 0%, 30% { transform: translateY(-6px); opacity: 0; } 60%, 100% { transform: translateY(0); opacity: 1; } }
+      .dh-bd-drop { animation: dh-bd-drop 2.2s ease-out infinite; }
+    `}</style>
+    <rect x="8" y="4" width="32" height="40" rx="3" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <g className="dh-bd-drop">
+      <rect x="12" y="8" width="24" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <path d="M14 18 L20 14 L26 17 L34 12" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    <line x1="12" y1="27" x2="36" y2="27" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
+    <line x1="12" y1="31" x2="30" y2="31" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
+    <rect x="30" y="36" width="12" height="8" rx="2" fill={accent}/>
+    <text x="36" y="42" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">BLOG</text>
+  </svg>
+);
+
+const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-bn-count { 0%, 33% { opacity: 1; } 34%, 66% { opacity: 0.4; } 67%, 100% { opacity: 1; } }
+      .dh-bn-n1 { animation: dh-bn-count 3s ease-in-out 0s infinite; }
+      .dh-bn-n2 { animation: dh-bn-count 3s ease-in-out 1s infinite; }
+      .dh-bn-n3 { animation: dh-bn-count 3s ease-in-out 2s infinite; }
+    `}</style>
+    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="dh-bn-n1" x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
+    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="dh-bn-n2" x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
+    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="dh-bn-n3" x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
+    <path d="M38 14 L42 14 M38 24 L42 24 M38 34 L42 34" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4"/>
+    <path d="M40 10 L40 38" stroke={accent} strokeWidth="1" strokeLinecap="round" strokeOpacity="0.2"/>
+  </svg>
+);
+
+const IconPdfToImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-pdf-flip { 0%, 20% { transform: translateX(0px); } 50% { transform: translateX(5px); } 80%, 100% { transform: translateX(0px); } }
+      @keyframes dh-pdf-img { 0%, 30% { opacity: 0; transform: scale(0.8); } 55%, 88% { opacity: 1; transform: scale(1); } 98%, 100% { opacity: 0; transform: scale(0.8); } }
+      .dh-pdf-doc { animation: dh-pdf-flip 2.6s ease-in-out infinite; }
+      .dh-pdf-img { transform-origin: 36px 30px; animation: dh-pdf-img 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    <g className="dh-pdf-doc">
+      <rect x="4" y="4" width="22" height="30" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="9" y="9" width="8" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="9" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="9" y="17" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="15" y="29" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    <path d="M28 18 L32 18 M30 16 L32 18 L30 20" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="dh-pdf-img" style={{ opacity: 0 }}>
+      <rect x="32" y="20" width="14" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="36" cy="24" r="1.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M33 32 L36 28 L39 31 L41 28" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    <rect x="31" y="36" width="15" height="7" rx="1.5" fill={accent}/>
+    <text x="38.5" y="41.5" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+  </svg>
+);
+
+const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-ss-shuffle { 0%, 100% { transform: translateX(0px); } 50% { transform: translateX(3px); } }
+      .dh-ss-f1 { animation: dh-ss-shuffle 2s ease-in-out 0s infinite; }
+      .dh-ss-f2 { animation: dh-ss-shuffle 2s ease-in-out 0.3s infinite; }
+    `}</style>
+    <g className="dh-ss-f1">
+      <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
+    </g>
+    <g className="dh-ss-f2">
+      <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <rect x="4" y="24" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
+    </g>
+    <path d="M20 12 L26 8 M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
+    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
+  </svg>
+);
+
+const IconWorkflow: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-wf-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+      .dh-wf-s1 { animation: dh-wf-pulse 2s ease-in-out 0s infinite; }
+      .dh-wf-s2 { animation: dh-wf-pulse 2s ease-in-out 0.5s infinite; }
+      .dh-wf-s3 { animation: dh-wf-pulse 2s ease-in-out 1s infinite; }
+    `}</style>
+    <g className="dh-wf-s1">
+      <rect x="4" y="6" width="16" height="10" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <text x="12" y="13" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">1</text>
+    </g>
+    <path d="M20 11 L26 11 M26 11 L26 24 M26 24 L20 24" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <g className="dh-wf-s2">
+      <rect x="4" y="19" width="16" height="10" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <text x="12" y="26" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">2</text>
+    </g>
+    <path d="M20 24 L26 24 M26 24 L26 37 M26 37 L20 37" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <g className="dh-wf-s3">
+      <rect x="4" y="32" width="16" height="10" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <text x="12" y="39" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">3</text>
+    </g>
+    <path d="M30 18 L38 18 M35 15 L38 18 L35 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="32" y="30" width="14" height="10" rx="2.5" fill={accent} stroke={accent} strokeWidth="1.25"/>
+    <text x="39" y="37" fontSize="4" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">OUT</text>
+  </svg>
+);
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -74,126 +253,263 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
 };
 
-// ─── Animated icons for combo/AI tools ────────────────────────────────────────
+// ─── Category types ──────────────────────────────────────────────────────────
 
-const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <style>{`
-      @keyframes dh2-alt-pulse { 0%, 100% { opacity: 0.5; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
-      .dh2-alt-img { transform-origin: 13px 20px; animation: dh2-alt-pulse 2s ease-in-out infinite; }
-    `}</style>
-    <g className="dh2-alt-img">
-      <rect x="2" y="8" width="22" height="18" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-      <circle cx="8" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
-      <path d="M2 22 L9 16 L14 20 L18 16 L24 22" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
-    </g>
-    <rect x="4" y="30" width="40" height="12" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <text x="9" y="39" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace">alt=</text>
-  </svg>
-);
+type Category = "All" | "Optimize" | "AI" | "Creative" | "Organize" | "Workflows";
 
-const IconDhTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="6" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/>
-    <rect x="11" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/>
-    <rect x="16" y="12" width="3" height="20" rx="1.5" fill={accent}/>
-    <rect x="21" y="15" width="3" height="14" rx="1.5" fill={accent} fillOpacity="0.8"/>
-    <rect x="26" y="18" width="3" height="8" rx="1.5" fill={accent} fillOpacity="0.6"/>
-    <path d="M33 22 L38 22 M35 19 L38 22 L35 25" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/>
-    <rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/>
-  </svg>
-);
+const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Creative", "Organize", "Workflows"];
 
-const IconDhWebLift: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="4" y="10" width="20" height="16" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
-    <path d="M26 18 L30 18 M28 16 L30 18 L28 20" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <rect x="32" y="12" width="14" height="12" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
-    <text x="39" y="20" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">.webp</text>
-  </svg>
-);
+// ─── Tool data (matching /tools page style with dashboard hrefs) ─────────────
 
-const IconDhBlogDrop: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="8" y="4" width="32" height="40" rx="3" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
-    <rect x="12" y="8" width="24" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
-    <line x1="12" y1="27" x2="36" y2="27" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
-    <line x1="12" y1="31" x2="30" y2="31" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
-    <rect x="30" y="36" width="12" height="8" rx="2" fill={accent}/>
-    <text x="36" y="42" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">BLOG</text>
-  </svg>
-);
-
-const IconDhBatchName: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <text x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
-    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <text x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
-    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
-    <text x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
-  </svg>
-);
-
-const IconDhSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-    <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
-    <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-    <path d="M20 12 L26 8 M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
-    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
-    <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
-    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
-    <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
-  </svg>
-);
-
-// ─── Tools by category ───────────────────────────────────────────────────────
-
-type DashCategory = "Optimize" | "AI" | "Multi-step" | "Creative" | "Organize";
-
-interface DashToolEntry {
-  name: string;
+interface DashToolEntry extends ToolCardData {
   slug: string;
-  accent: string;
-  Icon: React.FC<{ accent: string }>;
-  badge: string;
+  category: Category[];
   isCombo?: boolean;
-  isAi?: boolean;
-  category: DashCategory;
 }
 
 const ALL_DASH_TOOLS: DashToolEntry[] = [
   // Optimize
-  { name: "Compress", slug: "compress", accent: "#6366F1", Icon: IconCompress, badge: "Free", category: "Optimize" },
-  { name: "WebP Converter", slug: "webp", accent: "#10B981", Icon: IconWebP, badge: "Free", category: "Optimize" },
-  { name: "HEIC Converter", slug: "heic", accent: "#6366F1", Icon: IconHEIC, badge: "Free", category: "Optimize" },
-  { name: "Batch Resize", slug: "resizepack", accent: "#14B8A6", Icon: IconResizePack, badge: "Free", category: "Optimize" },
-  { name: "Crop & Ratio", slug: "croproatio", accent: "#EC4899", Icon: IconCropRatio, badge: "Free", category: "Optimize" },
+  {
+    name: "Compress",
+    slug: "compress",
+    href: "/dashboard/tools/compress",
+    tagline: "Shrink JPG, PNG, WebP, GIF -- no quality loss. Up to 90% smaller.",
+    accent: "#6366F1",
+    badges: ["Free", "Up to 90% smaller"],
+    Icon: IconCompress,
+    category: ["Optimize"],
+  },
+  {
+    name: "WebP Converter",
+    slug: "webp",
+    href: "/dashboard/tools/webp",
+    tagline: "Convert any image to WebP. 25-34% smaller than JPEG.",
+    accent: "#10B981",
+    badges: ["Free", "25-34% smaller"],
+    Icon: IconWebP,
+    category: ["Optimize"],
+  },
+  {
+    name: "HEIC Converter",
+    slug: "heic",
+    href: "/dashboard/tools/heic",
+    tagline: "Convert iPhone HEIC photos to JPG or WebP. Free, no upload limit.",
+    accent: "#6366F1",
+    badges: ["Free", "iPhone", "Batch"],
+    Icon: IconHEIC,
+    category: ["Optimize"],
+  },
+  {
+    name: "PDF to Image",
+    slug: "pdf-to-image",
+    href: "/dashboard/tools/pdf-to-image",
+    tagline: "Convert each PDF page to JPG, PNG, or WebP. Adjustable resolution. ZIP download.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload"],
+    Icon: IconPdfToImage,
+    category: ["Optimize"],
+  },
+  {
+    name: "Batch Resize",
+    slug: "resizepack",
+    href: "/dashboard/tools/resizepack",
+    tagline: "Resize for Instagram, Twitter, LinkedIn with one click.",
+    accent: "#14B8A6",
+    badges: ["Free", "Social presets"],
+    Icon: IconResizePack,
+    category: ["Optimize"],
+  },
+  {
+    name: "Crop & Ratio",
+    slug: "croproatio",
+    href: "/dashboard/tools/croproatio",
+    tagline: "Crop to exact ratios -- 1:1, 16:9, 4:3, A4 and more.",
+    accent: "#EC4899",
+    badges: ["Free", "9 ratios"],
+    Icon: IconCropRatio,
+    category: ["Optimize"],
+  },
 
   // AI
-  { name: "AI Rename", slug: "ai-rename", accent: "#8B5CF6", Icon: IconAIRename, badge: "Login", isAi: true, category: "AI" },
-  { name: "AI Alt Text", slug: "alt-text", accent: "#8B5CF6", Icon: IconAltText, badge: "Login", isAi: true, category: "AI" },
-  { name: "Transcribe", slug: "transcribe", accent: "#0891B2", Icon: IconDhTranscribe, badge: "Login", isAi: true, category: "AI" },
-  { name: "AI Photo Sort", slug: "smartsort", accent: "#22C55E", Icon: IconDhSmartSort, badge: "Login", isAi: true, category: "AI" },
+  {
+    name: "AI Rename",
+    slug: "ai-rename",
+    href: "/dashboard/tools/ai-rename",
+    tagline: "AI generates SEO-optimized filenames and alt text in under 3 seconds.",
+    accent: "#8B5CF6",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconAIRename,
+    category: ["AI"],
+  },
+  {
+    name: "AI Alt Text",
+    slug: "alt-text",
+    href: "/dashboard/tools/alt-text",
+    tagline: "Generate accessibility-compliant alt text for images using Gemini AI.",
+    accent: "#8B5CF6",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconAltText,
+    category: ["AI"],
+  },
+  {
+    name: "Transcribe",
+    slug: "transcribe",
+    href: "/dashboard/tools/transcribe",
+    tagline: "AI transcription with timestamps. SRT subtitles in seconds.",
+    accent: "#0891B2",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconTranscribe,
+    category: ["AI"],
+  },
+  {
+    name: "Web Optimize",
+    slug: "weblift",
+    href: "/dashboard/tools/weblift",
+    tagline: "Compress, convert to WebP, and AI-rename in one click.",
+    accent: "#3B82F6",
+    badges: ["Login required", "Multi-step"],
+    Icon: IconWebLift,
+    category: ["AI"],
+    isCombo: true,
+  },
+  {
+    name: "AI Photo Sort",
+    slug: "smartsort",
+    href: "/dashboard/tools/smartsort",
+    tagline: "AI analyzes images and sorts them into categories automatically.",
+    accent: "#22C55E",
+    badges: ["AI-powered", "Login required"],
+    Icon: IconSmartSort,
+    category: ["AI"],
+  },
 
-  // Multi-step
-  { name: "Web Optimize", slug: "weblift", accent: "#3B82F6", Icon: IconDhWebLift, badge: "Login", category: "Multi-step", isCombo: true },
-  { name: "Blog Ready", slug: "blogdrop", accent: "#8B5CF6", Icon: IconDhBlogDrop, badge: "Login", category: "Multi-step", isCombo: true },
+  // Workflows
+  {
+    name: "Blog Ready",
+    slug: "blogdrop",
+    href: "/dashboard/tools/blogdrop",
+    tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
+    accent: "#8B5CF6",
+    badges: ["Login required", "Multi-step"],
+    Icon: IconBlogDrop,
+    category: ["Workflows"],
+    isCombo: true,
+  },
+  {
+    name: "AI Workflow",
+    slug: "workflow",
+    href: "/dashboard/tools/workflow",
+    tagline: "Build custom multi-step pipelines. Chain compress, resize, rename and more.",
+    accent: "#6366F1",
+    badges: ["Pro", "Multi-step"],
+    Icon: IconWorkflow,
+    category: ["Workflows"],
+    isCombo: true,
+  },
 
   // Creative
-  { name: "Film Filters", slug: "filmlab", accent: "#F59E0B", Icon: IconFilmLab, badge: "Free", category: "Creative" },
-  { name: "Watermark", slug: "stampit", accent: "#06B6D4", Icon: IconStampIt, badge: "Free", category: "Creative" },
+  {
+    name: "Film Filters",
+    slug: "filmlab",
+    href: "/dashboard/tools/filmlab",
+    tagline: "14 analog film presets -- Kodak Gold, Fuji, Ilford and 8 Samma originals.",
+    accent: "#F59E0B",
+    badges: ["Free", "14 presets"],
+    Icon: IconFilmLab,
+    category: ["Creative"],
+  },
+  {
+    name: "Watermark",
+    slug: "stampit",
+    href: "/dashboard/tools/stampit",
+    tagline: "Batch watermark with text or logo. 9 positions + tiled filigrana.",
+    accent: "#06B6D4",
+    badges: ["Free", "Batch"],
+    Icon: IconStampIt,
+    category: ["Creative"],
+  },
 
   // Organize
-  { name: "EXIF Viewer", slug: "exif", accent: "#EF4444", Icon: IconEXIF, badge: "Free", category: "Organize" },
-  { name: "Find Duplicates", slug: "twinhunt", accent: "#F97316", Icon: IconTwinHunt, badge: "Free", category: "Organize" },
-  { name: "Sort by Location", slug: "geosort", accent: "#22C55E", Icon: IconGeoSort, badge: "Free", category: "Organize" },
-  { name: "Photo Map", slug: "travelmap", accent: "#3B82F6", Icon: IconTravelMap, badge: "Free", category: "Organize" },
-  { name: "Photo Cull", slug: "cull", accent: "#F43F5E", Icon: IconCull, badge: "Free", category: "Organize" },
-  { name: "Batch Rename", slug: "batchname", accent: "#F59E0B", Icon: IconDhBatchName, badge: "Free", category: "Organize" },
+  {
+    name: "EXIF Viewer",
+    slug: "exif",
+    href: "/dashboard/tools/exif",
+    tagline: "Strip GPS, camera data and all metadata from photos.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy"],
+    Icon: IconEXIF,
+    category: ["Organize"],
+  },
+  {
+    name: "Find Duplicates",
+    slug: "twinhunt",
+    href: "/dashboard/tools/twinhunt",
+    tagline: "Perceptual hashing finds exact and near-duplicate photos.",
+    accent: "#F97316",
+    badges: ["Free", "pHash"],
+    Icon: IconTwinHunt,
+    category: ["Organize"],
+  },
+  {
+    name: "Sort by Location",
+    slug: "geosort",
+    href: "/dashboard/tools/geosort",
+    tagline: "Sort photos by country using GPS EXIF data.",
+    accent: "#22C55E",
+    badges: ["Free", "GPS"],
+    Icon: IconGeoSort,
+    category: ["Organize"],
+  },
+  {
+    name: "Photo Map",
+    slug: "travelmap",
+    href: "/dashboard/tools/travelmap",
+    tagline: "Generate an interactive map from your travel photos.",
+    accent: "#3B82F6",
+    badges: ["Free", "GPS"],
+    Icon: IconTravelMap,
+    category: ["Organize"],
+  },
+  {
+    name: "Cull",
+    slug: "cull",
+    href: "/dashboard/tools/cull",
+    tagline: "Rate and cull a shoot in minutes. Star rating system.",
+    accent: "#F43F5E",
+    badges: ["Free", "Star rating"],
+    Icon: IconCull,
+    category: ["Organize"],
+  },
+  {
+    name: "Batch Rename",
+    slug: "batchname",
+    href: "/dashboard/tools/batchname",
+    tagline: "Rename files with a custom pattern. No AI, 100% client-side, unlimited.",
+    accent: "#F59E0B",
+    badges: ["Free", "Unlimited"],
+    Icon: IconBatchName,
+    category: ["Organize"],
+  },
 ];
+
+// ─── Search icon ─────────────────────────────────────────────────────────────
+
+function SearchIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="flex-shrink-0"
+    >
+      <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M10 10L13.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -214,6 +530,8 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const [showPersonaSelector, setShowPersonaSelector] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
+  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
 
   const loadPersona = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -285,7 +603,37 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     }
   }
 
-  // Compute recommended and other tools based on persona
+  // Filter tools based on search query and category
+  const filteredTools = useMemo(() => {
+    let result: DashToolEntry[] = ALL_DASH_TOOLS;
+
+    // If persona is active and not searching, show persona-filtered view
+    if (persona && !showPersonaSelector && !query.trim() && activeCategory === "All") {
+      return result; // handled separately below
+    }
+
+    // Filter by category
+    if (activeCategory !== "All") {
+      result = result.filter((t) => t.category.includes(activeCategory));
+    }
+
+    // Filter by search query
+    const q = query.trim().toLowerCase();
+    if (q) {
+      result = result.filter(
+        (t) =>
+          t.name.toLowerCase().includes(q) ||
+          t.tagline.toLowerCase().includes(q)
+      );
+    }
+
+    return result;
+  }, [query, activeCategory, persona, showPersonaSelector]);
+
+  const isSearching = query.trim().length > 0;
+  const isFiltering = activeCategory !== "All" || isSearching;
+
+  // Persona-based recommended/other split
   const recommendedSlugs = persona ? PERSONA_TOOL_MAP[persona] : [];
   const recommendedTools = persona
     ? ALL_DASH_TOOLS.filter((t) => recommendedSlugs.includes(t.slug))
@@ -303,7 +651,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 pb-16 space-y-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 pb-16 space-y-8">
 
       {/* -- Welcome + Plan status -- */}
       <section>
@@ -420,119 +768,167 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
         )}
       </section>
 
-      {/* -- Persona-filtered tools view -- */}
-      {persona && !showPersonaSelector ? (
+      {/* -- Search bar + Category tabs -- */}
+      <section>
+        <div className="flex flex-col gap-3">
+          {/* Search input */}
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#525252] pointer-events-none">
+              <SearchIcon />
+            </span>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search tools... (e.g. compress, resize, watermark)"
+              aria-label="Search tools"
+              className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-[#2A2A2A]
+                         bg-[#FAFAFA] dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5]
+                         placeholder-gray-400 dark:placeholder-[#525252]
+                         focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent
+                         transition-all"
+            />
+          </div>
+
+          {/* Category tabs */}
+          <div
+            className="flex gap-1.5 overflow-x-auto pb-0.5"
+            style={{ scrollbarWidth: "none" }}
+            role="tablist"
+            aria-label="Filter tools by category"
+          >
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                role="tab"
+                aria-selected={activeCategory === cat}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  setQuery("");
+                }}
+                className={`
+                  flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all
+                  ${activeCategory === cat
+                    ? "bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717]"
+                    : "bg-transparent text-gray-500 dark:text-[#737373] hover:bg-gray-100 dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+                  }
+                `}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* -- Tool grid -- */}
+      {isFiltering ? (
+        /* Filtered/searched view */
+        <section>
+          <p className="text-xs text-gray-400 dark:text-[#525252] mb-5">
+            {isSearching
+              ? `${filteredTools.length} result${filteredTools.length !== 1 ? "s" : ""} for "${query}"`
+              : `${filteredTools.length} tool${filteredTools.length !== 1 ? "s" : ""} in ${activeCategory}`}
+          </p>
+
+          {filteredTools.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {filteredTools.map((tool) => (
+                <div key={tool.slug} className="relative h-full">
+                  {tool.isCombo && (
+                    <span
+                      className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
+                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
+                    >
+                      MULTI-STEP
+                    </span>
+                  )}
+                  <ToolCard tool={tool} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="py-16 text-center">
+              <p className="text-sm text-gray-500 dark:text-[#737373]">
+                No tools found. Try a different search.
+              </p>
+              <button
+                onClick={() => { setQuery(""); setActiveCategory("All"); }}
+                className="mt-4 text-xs text-[#6366F1] hover:underline"
+              >
+                Clear search
+              </button>
+            </div>
+          )}
+        </section>
+      ) : persona && !showPersonaSelector ? (
+        /* Persona-filtered view with recommended + others */
         <>
-          {/* Recommended tools */}
           <section>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6366F1] mb-3">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6366F1] mb-4">
               Recommended for you
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {recommendedTools.map((tool) => (
-                <Link
-                  key={tool.slug}
-                  href={`/dashboard/tools/${tool.slug}`}
-                  className="group relative flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
-                >
-                  {tool.isAi && (
-                    <span className="absolute top-2 right-2 text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
-                  )}
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
-                    style={{ backgroundColor: `${tool.accent}14` }}
-                  >
-                    <tool.Icon accent={tool.accent} />
-                  </div>
-                  <div className="text-center">
-                    <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug block">
-                      {tool.name}
+                <div key={tool.slug} className="relative h-full">
+                  {tool.isCombo && (
+                    <span
+                      className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
+                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
+                    >
+                      MULTI-STEP
                     </span>
-                    {tool.isCombo && (
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-[#737373] mt-0.5 block">
-                        MULTI-STEP
-                      </span>
-                    )}
-                  </div>
-                </Link>
+                  )}
+                  <ToolCard tool={tool} />
+                </div>
               ))}
             </div>
           </section>
 
-          {/* Other tools (reduced opacity) */}
           <section>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-4">
               All other tools
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {otherTools.map((tool) => (
-                <Link
-                  key={tool.slug}
-                  href={`/dashboard/tools/${tool.slug}`}
-                  className="group relative flex flex-col items-center gap-2 p-3 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150 opacity-50 hover:opacity-100"
-                >
-                  {tool.isAi && (
-                    <span className="absolute top-1.5 right-1.5 text-[7px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1 py-0.5 rounded">AI</span>
+                <div key={tool.slug} className="relative h-full opacity-60 hover:opacity-100 transition-opacity">
+                  {tool.isCombo && (
+                    <span
+                      className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
+                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
+                    >
+                      MULTI-STEP
+                    </span>
                   )}
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
-                    style={{ backgroundColor: `${tool.accent}14` }}
-                  >
-                    <tool.Icon accent={tool.accent} />
-                  </div>
-                  <span className="text-[11px] font-medium text-[#171717] dark:text-[#E5E5E5] leading-snug text-center">
-                    {tool.name}
-                  </span>
-                </Link>
+                  <ToolCard tool={tool} />
+                </div>
               ))}
             </div>
           </section>
         </>
       ) : (
-        /* -- Default: Tools by category (no persona selected) -- */
-        <>
-          {(["Optimize", "AI", "Multi-step", "Creative", "Organize"] as DashCategory[]).map((category) => {
-            const tools = ALL_DASH_TOOLS.filter((t) => t.category === category);
-            return (
-              <section key={category}>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
-                  {category}
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                  {tools.map((tool) => (
-                    <Link
-                      key={tool.slug}
-                      href={`/dashboard/tools/${tool.slug}`}
-                      className="group relative flex flex-col items-center gap-2.5 p-4 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-150"
-                    >
-                      {tool.isAi && (
-                        <span className="absolute top-2 right-2 text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
-                      )}
-                      <div
-                        className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200"
-                        style={{ backgroundColor: `${tool.accent}14` }}
-                      >
-                        <tool.Icon accent={tool.accent} />
-                      </div>
-                      <div className="text-center">
-                        <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] leading-snug block">
-                          {tool.name}
-                        </span>
-                        {tool.isCombo && (
-                          <span className="text-[8px] font-bold uppercase tracking-widest text-[#737373] mt-0.5 block">
-                            MULTI-STEP
-                          </span>
-                        )}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </>
+        /* Default: all tools */
+        <section>
+          <p className="text-xs text-gray-400 dark:text-[#525252] mb-5">
+            {ALL_DASH_TOOLS.length} tools
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {ALL_DASH_TOOLS.map((tool) => (
+              <div key={tool.slug} className="relative h-full">
+                {tool.isCombo && (
+                  <span
+                    className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
+                               bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
+                  >
+                    MULTI-STEP
+                  </span>
+                )}
+                <ToolCard tool={tool} />
+              </div>
+            ))}
+          </div>
+        </section>
       )}
-
 
       {/* -- Upgrade pitch for free users -- */}
       {!isPro && (
