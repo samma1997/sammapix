@@ -5,6 +5,8 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import CullClientWrapper from "@/components/tools/CullClientWrapper";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
@@ -82,6 +84,7 @@ const features = [
 export default function CullPage() {
   return (
     <main>
+      <MetaViewContent contentName="Photo Cull" contentId="cull" />
       <ToolHeader
         title="Photo Cull"
         description="Review your photos one at a time with keyboard shortcuts. K to keep, X to reject. Download only your best shots as a ZIP."

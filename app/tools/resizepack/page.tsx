@@ -6,6 +6,8 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import ResizePackClient from "@/components/tools/ResizePackClient";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Batch Resize Images Free Online - Social Media Presets | SammaPix",
@@ -73,6 +75,7 @@ const relatedTools = [
 export default function ResizePackPage() {
   return (
     <main>
+      <MetaViewContent contentName="ResizePack" contentId="resizepack" />
       <ToolHeader
         title="Batch Resize"
         description="Batch resize images by pixel dimensions or percentage. Social media presets included. Download all as ZIP."

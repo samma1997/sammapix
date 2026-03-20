@@ -5,6 +5,8 @@ import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
 import WorkflowPipeline from "@/components/tools/WorkflowPipeline";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "AI Workflow Pipeline - Compress, Rename & Convert in One Click | SammaPix Pro",
@@ -79,6 +81,7 @@ const relatedTools = [
 export default function WorkflowPage() {
   return (
     <main>
+      <MetaViewContent contentName="AI Workflow" contentId="workflow" />
       <ToolHeader
         title="AI Workflow Pipeline"
         description="Run compress, AI rename, resize and WebP conversion as a single pipeline- one click, one ZIP download."

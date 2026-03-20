@@ -162,8 +162,28 @@ export async function POST(req: NextRequest) {
           );
         }
 
-        // Fire Meta Conversions API - Subscribe event
+        // Fire Meta Conversions API events
         const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
+        const subId = typeof session.subscription === "string" ? session.subscription : session.subscription?.toString();
+        let isTrial = false;
+        if (subId) {
+          try {
+            const sub = await stripe.subscriptions.retrieve(subId);
+            isTrial = sub.status === "trialing";
+          } catch { /* ignore */ }
+        }
+
+        if (isTrial) {
+          // StartTrial event for free trial signups
+          sendMetaEvent({
+            eventName: "StartTrial",
+            sourceUrl: `${appUrl}/pricing?success=true`,
+            email: session.customer_email ?? undefined,
+            customData: { currency: "USD", value: 7.00, predicted_ltv: 84.00 },
+          }).catch(() => {});
+        }
+
+        // Subscribe event (fires for both trial and paid)
         sendMetaEvent({
           eventName: "Subscribe",
           sourceUrl: `${appUrl}/pricing?success=true`,

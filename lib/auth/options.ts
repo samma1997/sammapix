@@ -77,6 +77,16 @@ export const authOptions: AuthOptions = {
       if (isNew) {
         const { sendWelcomeEmail } = await import("@/lib/email-service");
         await sendWelcomeEmail(user.email, user.name ?? null);
+
+        // Fire Meta Conversions API - CompleteRegistration for new users
+        const { sendMetaEvent } = await import("@/lib/meta-conversions");
+        const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://sammapix.com").trim();
+        sendMetaEvent({
+          eventName: "CompleteRegistration",
+          sourceUrl: `${appUrl}/auth/signin`,
+          email: user.email,
+          customData: { status: "new_user" },
+        }).catch(() => {});
       }
     },
   },

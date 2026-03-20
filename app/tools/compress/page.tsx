@@ -6,6 +6,8 @@ import CompressClient from "@/components/tools/CompressClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Compress Images Free Online - JPG, PNG, WebP | SammaPix",
@@ -75,6 +77,7 @@ const relatedTools = [
 export default function CompressPage() {
   return (
     <main>
+      <MetaViewContent contentName="Compress" contentId="compress" />
       <ToolHeader
         title="Image Compressor"
         description="Compress JPG, PNG, WebP and GIF files directly in your browser- nothing uploaded to any server."

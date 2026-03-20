@@ -5,6 +5,8 @@ import Link from "next/link";
 import WebpClient from "@/components/tools/WebpClient";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "WebP Converter Free Online - Convert JPG to WebP | SammaPix",
@@ -72,6 +74,7 @@ const relatedTools = [
 export default function WebpPage() {
   return (
     <main>
+      <MetaViewContent contentName="WebP Converter" contentId="webp" />
       {/* Hero SEO */}
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
         <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">WebP Converter</h1>

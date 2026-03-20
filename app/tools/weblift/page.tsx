@@ -7,6 +7,8 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 import { Globe } from "lucide-react";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
@@ -69,6 +71,7 @@ const relatedTools = [
 export default function WebLiftPage() {
   return (
     <main>
+      <MetaViewContent contentName="WebLift" contentId="weblift" />
       <ToolHeader
         title="Web Optimize"
         description="Compress, convert to WebP, and AI-rename in one click."

@@ -7,6 +7,8 @@ import HowToUse from "@/components/tools/HowToUse";
 import PdfToImageClient from "@/components/tools/PdfToImageClient";
 import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
@@ -82,6 +84,7 @@ const relatedTools = [
 export default function PdfToImagePage() {
   return (
     <main>
+      <MetaViewContent contentName="PDF to Image" contentId="pdf-to-image" />
       <ToolHeader
         title="PDF to Image"
         description="Convert every PDF page to JPG, PNG, or WebP. Adjustable resolution and quality. Download individually or as a ZIP."

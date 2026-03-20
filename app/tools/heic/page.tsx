@@ -6,6 +6,8 @@ import HeicClient from "@/components/tools/HeicClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "HEIC to JPG Converter Free - Batch iPhone Photos | SammaPix",
@@ -73,6 +75,7 @@ const relatedTools = [
 export default function HeicPage() {
   return (
     <main>
+      <MetaViewContent contentName="HEIC Converter" contentId="heic" />
       <ToolHeader
         title="HEIC Converter"
         description="Convert iPhone HEIC photos to JPG or WebP. Batch convert, adjustable quality, download as ZIP."

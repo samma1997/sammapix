@@ -6,6 +6,8 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import StampItClient from "@/components/tools/StampItClient";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Watermark Photos Free Online - Batch & Logo | SammaPix",
@@ -73,6 +75,7 @@ const relatedTools = [
 export default function StampItPage() {
   return (
     <main>
+      <MetaViewContent contentName="StampIt" contentId="stampit" />
       <ToolHeader
         title="Watermark"
         description="Batch watermark images with text or your logo. 9 positions, opacity, tiled mode. Download all as ZIP."

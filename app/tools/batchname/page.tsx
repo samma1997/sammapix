@@ -5,6 +5,8 @@ import BatchNameClient from "@/components/tools/BatchNameClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Batch Rename Photos - Custom Patterns & Auto-Increment | SammaPix",
@@ -114,6 +116,7 @@ export default function BatchNamePage() {
 
   return (
     <main>
+      <MetaViewContent contentName="Batch Rename" contentId="batchname" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

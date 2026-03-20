@@ -5,6 +5,8 @@ import TravelMapClientWrapper from "@/components/tools/TravelMapClientWrapper";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
@@ -119,6 +121,7 @@ const faqs = [
 export default function TravelMapPage() {
   return (
     <main>
+      <MetaViewContent contentName="TravelMap" contentId="travelmap" />
       <ToolHeader
         title="Photo Map"
         description="Drop your travel photos - GPS coordinates are read locally and plotted on an interactive map. See your journey, count countries, measure distance."

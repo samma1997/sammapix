@@ -20,6 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
+import MetaAddToWishlist from "@/components/tracking/MetaAddToWishlist";
 import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
 import { Download, Infinity, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
 
@@ -108,6 +109,7 @@ export default function PricingPage() {
   return (
     <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
       <div className="max-w-3xl mx-auto">
+        <MetaAddToWishlist />
         <Suspense fallback={null}>
           <PaymentBanners />
         </Suspense>

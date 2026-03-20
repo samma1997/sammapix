@@ -7,6 +7,8 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
 import { FileText } from "lucide-react";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO | SammaPix",
@@ -70,6 +72,7 @@ const relatedTools = [
 export default function BlogDropPage() {
   return (
     <main>
+      <MetaViewContent contentName="BlogDrop" contentId="blogdrop" />
       <ToolHeader
         title="Blog Ready"
         description="Blog-ready images in one drop. Compress, resize, WebP, SEO names."
