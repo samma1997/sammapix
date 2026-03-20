@@ -16,6 +16,14 @@ interface Post {
 
 const POSTS: Post[] = [
   {
+    slug: "browser-based-image-tools-privacy-guide",
+    title: "Browser-Based Image Tools: The Complete Privacy Guide (2026)",
+    description:
+      "Browser-based image tools process images 100% locally — no uploads, no servers, no data leaks. The definitive guide to privacy image editing and no-upload image editors in 2026.",
+    date: "2026-03-20",
+    tags: ["Privacy"],
+  },
+  {
     slug: "best-tinypng-alternative-2026",
     title: "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
     description:

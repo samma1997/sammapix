@@ -213,6 +213,48 @@ export default function CompressPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Compress Images Online",
+            description: "Learn how to compress JPG, PNG, WebP and GIF images using SammaPix. Reduce file size by 50-80% without losing visible quality. Perfect for web optimization and email attachments.",
+            totalTime: "PT2M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Image Compressor",
+              url: `${APP_URL}/tools/compress`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your images",
+                text: "Drag and drop JPG, PNG, WebP or GIF files onto the SammaPix upload area, or click to browse your computer. You can select multiple files at once for batch processing. All files are kept private and processed directly in your browser.",
+                url: `${APP_URL}/tools/compress`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Adjust quality slider",
+                text: "Use the quality slider to control how aggressively to compress. The default setting (80%) reduces file size by 50-80% with imperceptible quality loss. Move the slider left for smaller files (more compression) or right to preserve maximum quality.",
+                url: `${APP_URL}/tools/compress`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Download compressed files",
+                text: "Download each compressed image individually by clicking the download button, or click 'Download all as ZIP' to get all compressed files in a single archive. Your original files are never modified - only the compressed versions are downloaded.",
+                url: `${APP_URL}/tools/compress`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Schema.org */}
       <script
         type="application/ld+json"

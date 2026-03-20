@@ -114,6 +114,48 @@ export default function ExifPage() {
         accentColor="#EF4444"
       />
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Remove EXIF Data from Photos",
+            description: "Remove GPS location and EXIF metadata from your photos using SammaPix EXIF Lens. Strip sensitive data like camera model, timestamps and GPS coordinates to protect your privacy before sharing online.",
+            totalTime: "PT2M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix EXIF Lens",
+              url: `${APP_URL}/tools/exif`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your photos",
+                text: "Upload JPG or HEIC photos by dragging and dropping them onto SammaPix EXIF Lens, or click to browse your computer. You can upload multiple files at once for batch processing. All metadata is read instantly in your browser.",
+                url: `${APP_URL}/tools/exif`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "View all metadata",
+                text: "SammaPix displays every piece of EXIF data in your photo including GPS coordinates, camera make and model, lens, ISO, shutter speed, aperture, focal length, and capture date. GPS data is highlighted as a privacy risk so you can see exactly what location information is embedded.",
+                url: `${APP_URL}/tools/exif`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Download clean files",
+                text: "Choose to remove GPS coordinates only (keeping other metadata) or strip all EXIF data completely. You can process individual files or use the action bar to remove metadata from all files at once. Download the cleaned photos individually or as a single ZIP archive.",
+                url: `${APP_URL}/tools/exif`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"

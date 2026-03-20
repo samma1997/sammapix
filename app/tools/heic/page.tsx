@@ -233,6 +233,48 @@ export default function HeicPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Convert HEIC to JPG",
+            description: "Convert iPhone HEIC photos to JPG or WebP format using SammaPix. Batch convert up to 100 images with adjustable quality. Works with iPhone, iPad and any HEIF-compatible camera.",
+            totalTime: "PT3M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix HEIC Converter",
+              url: `${APP_URL}/tools/heic`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your iPhone HEIC photos",
+                text: "Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera onto the SammaPix converter, or click to browse your computer. You can upload multiple HEIC photos at once - up to 100 files on the free plan.",
+                url: `${APP_URL}/tools/heic`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Choose output format",
+                text: "Select whether you want to convert to JPG (for maximum compatibility with all devices and software) or WebP (for ~25% smaller files). Then adjust the quality slider from 60% to 100% depending on your needs - 85% is the default and produces imperceptible quality loss.",
+                url: `${APP_URL}/tools/heic`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Download converted files",
+                text: "Download each converted image individually, or click 'Download all as ZIP' to get all converted JPG or WebP files in a single archive. The converted images are ready to share, upload to websites, or send via email.",
+                url: `${APP_URL}/tools/heic`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Schema.org */}
       <script
         type="application/ld+json"

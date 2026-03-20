@@ -245,6 +245,48 @@ export default function TwinHuntPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Find Duplicate Photos",
+            description: "Find duplicate and near-duplicate photos using SammaPix TwinHunt. Uses perceptual hashing (pHash) technology to detect visually similar images even after resizing, re-saving, or minor edits. Reclaim disk space by identifying photos to delete.",
+            totalTime: "PT3M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Find Duplicates",
+              url: `${APP_URL}/tools/twinhunt`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your photos",
+                text: "Upload JPG, PNG, WebP or HEIC files to SammaPix TwinHunt by dragging and dropping them onto the upload area, or click to browse your computer. You can process up to 50 images on the free plan. The tool works entirely in your browser.",
+                url: `${APP_URL}/tools/twinhunt`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Algorithm finds duplicates",
+                text: "SammaPix computes a perceptual hash (pHash) for every photo based on visual content, not file bytes. All pairs are compared at approximately 50ms per image - entirely in your browser. This method finds duplicates even if photos were resized, re-saved, or slightly edited.",
+                url: `${APP_URL}/tools/twinhunt`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Review and delete copies",
+                text: "Duplicate photos appear side-by-side with file names, sizes and similarity badges. Review each group, mark which copies to delete, and download a plain-text deletion report. Then manually delete the marked files in your file manager - you stay in complete control.",
+                url: `${APP_URL}/tools/twinhunt`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"

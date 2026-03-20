@@ -221,6 +221,48 @@ export default function CullPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Cull Photos Fast",
+            description: "Review and cull photos 10x faster using SammaPix Photo Cull with keyboard shortcuts. Press K to keep, X to reject. Perfect for photographers who need to quickly select the best shots from large batches.",
+            totalTime: "PT5M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Photo Cull",
+              url: `${APP_URL}/tools/cull`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your shoot photos",
+                text: "Upload JPG or HEIC photos from your shoot to SammaPix Photo Cull by dragging them onto the upload area, or click to browse your computer. You can upload up to 20 files on the free plan. Photos load into full-screen review mode.",
+                url: `${APP_URL}/tools/cull`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Rate with keyboard shortcuts",
+                text: "Press K on your keyboard to mark a photo as keep, or X to reject it. Use arrow keys (left/right) to navigate between photos without touching the mouse. This workflow is 10x faster than clicking buttons - you can review 100 photos in just a few minutes.",
+                url: `${APP_URL}/tools/cull`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Export keepers",
+                text: "When finished culling, click 'Download keepers as ZIP'. Only the photos you marked with K will be included in the archive. Your rejected photos are discarded - SammaPix never stores anything on its servers.",
+                url: `${APP_URL}/tools/cull`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"
