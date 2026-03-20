@@ -4,13 +4,20 @@ import { APP_URL } from "@/lib/constants";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Default rule for all crawlers
+      // Googlebot — no crawl-delay (Google ignores it and it can hurt ranking)
       {
-        userAgent: "*",
+        userAgent: "Googlebot",
         allow: "/",
         disallow: ["/api/", "/auth/", "/dashboard/", "/karma.html"],
       },
-      // Explicitly allow AI search engine crawlers
+      // Bingbot — moderate crawl delay
+      {
+        userAgent: "Bingbot",
+        allow: "/",
+        disallow: ["/api/", "/auth/", "/dashboard/", "/karma.html"],
+        crawlDelay: 5,
+      },
+      // AI search engine crawlers — welcome them
       {
         userAgent: "GPTBot",
         allow: "/",
@@ -42,6 +49,42 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "anthropic-ai",
         allow: "/",
+      },
+      // Block known scraping / SEO crawlers that provide no value
+      {
+        userAgent: "SemrushBot",
+        disallow: "/",
+      },
+      {
+        userAgent: "AhrefsBot",
+        disallow: "/",
+      },
+      {
+        userAgent: "MJ12bot",
+        disallow: "/",
+      },
+      {
+        userAgent: "DotBot",
+        disallow: "/",
+      },
+      {
+        userAgent: "BLEXBot",
+        disallow: "/",
+      },
+      {
+        userAgent: "MegaIndex",
+        disallow: "/",
+      },
+      {
+        userAgent: "HTTrack",
+        disallow: "/",
+      },
+      // Default rule — all other crawlers get a crawl delay
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/", "/auth/", "/dashboard/", "/karma.html"],
+        crawlDelay: 10,
       },
     ],
     sitemap: `${APP_URL}/sitemap.xml`,

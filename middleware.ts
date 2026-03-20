@@ -4,10 +4,226 @@ import { getToken } from "next-auth/jwt";
 // Routes that require authentication
 const PROTECTED_PREFIXES = ["/dashboard", "/admin"];
 
-export async function middleware(request: NextRequest) {
+// ── Bot / Scraper Detection ──────────────────────────────────────────────────
+
+/** Known scraping / mirroring user-agent substrings (case-insensitive match). */
+const BLOCKED_UA_PATTERNS = [
+  // Mirroring tools
+  "httrack",
+  "website-scraper",
+  "websitescraper",
+  "webripper",
+  "webcopier",
+  "sitecopy",
+  "sitesucker",
+  "teleport",
+  "webcapture",
+  "offline explorer",
+  "blackwidow",
+  "webzip",
+  "pavuk",
+  // CLI downloaders used for mirroring
+  "wget",
+  "curl",
+  "httpie",
+  "aria2",
+  // Scripting libraries
+  "python-requests",
+  "python-urllib",
+  "python-httpx",
+  "aiohttp",
+  "scrapy",
+  "node-fetch",
+  "axios",
+  "go-http-client",
+  "java/",
+  "apache-httpclient",
+  "okhttp",
+  "libwww-perl",
+  "mechanize",
+  "lwp-trivial",
+  "lwp::simple",
+  // SEO / content scrapers (not search engines)
+  "semrushbot",
+  "dotbot",
+  "ahrefsbot",
+  "mj12bot",
+  "blexbot",
+  "megaindex",
+  "rogerbot",
+  "seznambot",
+  "linkdexbot",
+  // Headless browsers (non-standard UA patterns)
+  "headlesschrome",
+  "phantomjs",
+  "slimerjs",
+  // Generic
+  "bot/scrape",
+  "scraper",
+  "harvest",
+  "collector",
+  "extractor",
+];
+
+/** Legitimate bots we must NEVER block (search engines, ads, social, AI). */
+const ALLOWED_BOTS = [
+  "googlebot",
+  "google-extended",
+  "bingbot",
+  "slurp",          // Yahoo
+  "duckduckbot",
+  "baiduspider",
+  "yandexbot",
+  "applebot",
+  "facebookexternalhit",
+  "facebot",
+  "twitterbot",
+  "linkedinbot",
+  "pinterestbot",
+  "whatsapp",
+  "telegrambot",
+  "discordbot",
+  "slackbot",
+  // AI crawlers
+  "gptbot",
+  "chatgpt-user",
+  "claude-web",
+  "anthropic-ai",
+  "perplexitybot",
+  "ccbot",
+  "omgilibot",
+  // Monitoring / verification
+  "uptimerobot",
+  "pingdom",
+  "statuspage",
+  "stripe",
+  "vercel",
+  // Google services (Ads verification, PageSpeed, etc.)
+  "adsbot-google",
+  "mediapartners-google",
+  "google-inspectiontool",
+  "chrome-lighthouse",
+  "pagespeed",
+  "google-adwords",
+];
+
+function isBlockedBot(ua: string): boolean {
+  const lower = ua.toLowerCase();
+  // First check if it's a legitimate bot we must allow
+  if (ALLOWED_BOTS.some((allowed) => lower.includes(allowed))) {
+    return false;
+  }
+  return BLOCKED_UA_PATTERNS.some((pattern) => lower.includes(pattern));
+}
+
+// ── Rate Limiting (in-memory, per-instance) ──────────────────────────────────
+// This is a lightweight per-instance store. On Vercel each edge function instance
+// has its own memory, so this is not globally consistent — but it adds meaningful
+// friction for aggressive scrapers hitting the same PoP. Vercel Edge Config or
+// KV could be used for a stricter global rate limit if needed.
+
+interface RateBucket {
+  count: number;
+  resetAt: number;
+}
+
+const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
+const RATE_LIMIT_MAX = 60; // max requests per window for unauthenticated visitors
+
+const rateLimitMap = new Map<string, RateBucket>();
+
+// Periodically prune stale entries to avoid memory growth
+let lastPrune = Date.now();
+function pruneIfNeeded() {
+  const now = Date.now();
+  if (now - lastPrune < 120_000) return; // prune at most every 2 min
+  lastPrune = now;
+  for (const [key, bucket] of rateLimitMap) {
+    if (bucket.resetAt < now) rateLimitMap.delete(key);
+  }
+}
+
+function isRateLimited(ip: string): boolean {
+  pruneIfNeeded();
+  const now = Date.now();
+  const bucket = rateLimitMap.get(ip);
+
+  if (!bucket || bucket.resetAt < now) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  bucket.count++;
+  return bucket.count > RATE_LIMIT_MAX;
+}
+
+// ── Suspicious pattern detection ──────────────────────────────────────────────
+
+function hasSuspiciousPatterns(request: NextRequest): boolean {
   const { pathname } = request.nextUrl;
 
-  // Check if this is a protected route
+  // Block attempts to download common archive/export paths
+  if (/\.(sql|env|git|bak|backup|dump|tar|gz|zip)$/i.test(pathname)) {
+    return true;
+  }
+
+  // Block wp-admin, xmlrpc, and other WordPress probes
+  if (
+    pathname.includes("wp-admin") ||
+    pathname.includes("wp-login") ||
+    pathname.includes("xmlrpc") ||
+    pathname.includes("wp-content") ||
+    pathname.includes("wp-includes")
+  ) {
+    return true;
+  }
+
+  // Block path traversal attempts
+  if (pathname.includes("..") || pathname.includes("//")) {
+    return true;
+  }
+
+  return false;
+}
+
+// ── Middleware ────────────────────────────────────────────────────────────────
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const ua = request.headers.get("user-agent") || "";
+
+  // 1. Block suspicious path patterns
+  if (hasSuspiciousPatterns(request)) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
+
+  // 2. Block known scraping user agents
+  if (isBlockedBot(ua)) {
+    return new NextResponse(
+      "Access denied. If you believe this is a mistake, contact support@sammapix.com",
+      { status: 403, headers: { "Retry-After": "86400" } }
+    );
+  }
+
+  // 3. Rate limit unauthenticated requests (skip static assets & API — API has its own rate limiting)
+  if (!pathname.startsWith("/api/") && !pathname.startsWith("/_next/")) {
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
+
+    if (ip !== "unknown" && isRateLimited(ip)) {
+      return new NextResponse("Too Many Requests. Please slow down.", {
+        status: 429,
+        headers: {
+          "Retry-After": "60",
+          "X-RateLimit-Limit": String(RATE_LIMIT_MAX),
+        },
+      });
+    }
+  }
+
+  // 4. Check if this is a protected route
   const isProtected = PROTECTED_PREFIXES.some((prefix) =>
     pathname.startsWith(prefix)
   );
@@ -18,14 +234,17 @@ export async function middleware(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  // Logged-in users visiting public tool pages → redirect to dashboard version
+  // 5. Logged-in users visiting public tool pages -> redirect to dashboard version
   if (token && pathname.startsWith("/tools/") && pathname !== "/tools") {
     const toolSlug = pathname.replace("/tools/", "");
     return NextResponse.redirect(new URL(`/dashboard/tools/${toolSlug}`, request.url));
   }
 
   if (!isProtected) {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    // Add anti-scraping headers to every response
+    response.headers.set("X-Robots-Tag", "noarchive");
+    return response;
   }
 
   if (!token) {
@@ -35,7 +254,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(signInUrl);
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+  response.headers.set("X-Robots-Tag", "noarchive");
+  return response;
 }
 
 export const config = {

@@ -1,5 +1,5 @@
 {
-    "functions": {
+  "functions": {
     "app/api/heic-convert/route.ts": {
       "maxDuration": 60,
       "memory": 1024
@@ -13,6 +13,17 @@
     {
       "path": "/api/cron/email-drip",
       "schedule": "0 10 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noarchive"
+        }
+      ]
     }
   ]
 }

@@ -6,6 +6,7 @@ import LayoutShell from "@/components/layout/LayoutShell";
 import { APP_NAME, APP_URL } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/layout/CookieConsent";
+import AntiCopy from "@/components/layout/AntiCopy";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -118,6 +119,7 @@ export default function RootLayout({
           <LayoutShell>{children}</LayoutShell>
           {/* Tracking scripts are loaded by CookieConsent after user consent */}
           <CookieConsent />
+          <AntiCopy />
         </Providers>
         <Analytics />
         <script
