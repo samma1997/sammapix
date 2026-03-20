@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 import MetaAddToWishlist from "@/components/tracking/MetaAddToWishlist";
 import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
-import { Download, Infinity, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
+import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
 
 // ─── Tool grid data ────────────────────────────────────────────────────────────
 
@@ -237,8 +237,7 @@ export default function PricingPage() {
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
                 { icon: Sparkles, text: "Everything in Free, plus:", bold: true },
-                { icon: Infinity, text: "Unlimited AI renames", bold: false },
-                { icon: Infinity, text: "Unlimited AI alt text", bold: false },
+                { icon: Zap, text: "200 AI operations / day", bold: false },
                 { icon: FileStack, text: "500 files per batch", bold: false },
                 { icon: FileStack, text: "50 MB per file", bold: false },
                 { icon: Package, text: "ZIP download", bold: false },
@@ -395,7 +394,7 @@ export default function PricingPage() {
             {[
               { value: "Combo Tools", unit: "Multi-step pipelines",     sub: "WebLift, BlogDrop presets" },
               { value: "Batch Power", unit: "500 files at once",       sub: "Full wedding shoots in one go" },
-              { value: "Unlimited AI", unit: "Renames + alt text",     sub: "No daily caps, process entire shoots" },
+              { value: "200 AI/day", unit: "Renames + alt text",     sub: "200 AI operations daily, plus buy credits anytime" },
               { value: "Zero Ads",    unit: "Clean workspace",          sub: "No distractions while you work" },
             ].map(({ value, unit, sub }) => (
               <div
@@ -465,11 +464,11 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($7/month or $60/year) unlocks unlimited AI renames, unlimited AI alt text, combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
+              a="Pro ($7/month or $60/year) unlocks 200 AI operations/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally- no subscription required."
+              a="Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI operations/day (renames + alt text), ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally- no subscription required."
             />
             <FaqItem
               q="Do I need to create an account?"
@@ -580,7 +579,7 @@ export default function PricingPage() {
                   name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro ($7/month or $60/year) unlocks unlimited AI renames, unlimited AI alt text, the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
+                    text: "Pro ($7/month or $60/year) unlocks 200 AI operations/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
                   },
                 },
                 {
@@ -588,7 +587,7 @@ export default function PricingPage() {
                   name: "Why upgrade to Pro?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
+                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, 200 AI operations/day (renames + alt text), ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
                   },
                 },
                 {
