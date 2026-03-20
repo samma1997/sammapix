@@ -1,0 +1,430 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "SammaPix- home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: SammaPix
+      - navigation [ref=e23]:
+        - link "Tools" [ref=e24] [cursor=pointer]:
+          - /url: /tools
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e27] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e28]:
+        - button "Toggle dark mode" [ref=e29] [cursor=pointer]
+        - link "Sign in" [ref=e30] [cursor=pointer]:
+          - /url: /auth/signin
+          - button "Sign in" [ref=e31]
+        - link "Try free" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - button "Try free" [ref=e33]:
+            - text: Try free
+            - img [ref=e34]
+  - main [ref=e36]:
+    - generic [ref=e38]:
+      - paragraph [ref=e39]: AI-Powered Photo Workflow
+      - heading "The AI Photo Workflow for Content Creators" [level=1] [ref=e40]:
+        - text: The AI Photo Workflow
+        - text: for Content Creators
+      - paragraph [ref=e41]:
+        - text: Compress, rename with AI, resize, convert- all in one pipeline.
+        - text: 20+ free tools. 100% browser-based. No uploads.
+      - generic [ref=e42]:
+        - link "Create free account" [ref=e43] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - text: Create free account
+          - img [ref=e44]
+        - link "Explore tools" [ref=e46] [cursor=pointer]:
+          - /url: /tools
+      - paragraph [ref=e47]:
+        - generic [ref=e48]: 20+ tools
+        - generic [ref=e49]: ·
+        - generic [ref=e50]: 100% browser
+        - generic [ref=e51]: ·
+        - generic [ref=e52]: No uploads
+        - generic [ref=e53]: ·
+        - generic [ref=e54]: HEIC support
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - heading "20 Free Tools" [level=2] [ref=e58]
+        - paragraph [ref=e59]: Browser-based -- no uploads, no account required for the basics.
+      - tablist "Tool categories" [ref=e60]:
+        - tab "Optimize" [selected] [ref=e61] [cursor=pointer]
+        - tab "AI-Powered" [ref=e62] [cursor=pointer]
+        - tab "Creative" [ref=e63] [cursor=pointer]
+        - tab "Organize" [ref=e64] [cursor=pointer]
+      - generic [ref=e65]:
+        - link "Compress Shrink images up to 90% smaller. Free" [ref=e66] [cursor=pointer]:
+          - /url: /tools/compress
+          - generic [ref=e67]:
+            - img [ref=e69]
+            - generic [ref=e77]:
+              - paragraph [ref=e79]: Compress
+              - paragraph [ref=e80]: Shrink images up to 90% smaller.
+          - generic [ref=e81]: Free
+        - link "WebP Converter Convert any image to WebP. Free" [ref=e82] [cursor=pointer]:
+          - /url: /tools/webp
+          - generic [ref=e83]:
+            - img [ref=e85]:
+              - generic [ref=e87]: JPG
+              - generic [ref=e91]: WebP
+              - generic [ref=e94]: −30%
+            - generic [ref=e95]:
+              - paragraph [ref=e97]: WebP Converter
+              - paragraph [ref=e98]: Convert any image to WebP.
+          - generic [ref=e99]: Free
+        - link "HEIC Converter iPhone HEIC to JPG or WebP. Free" [ref=e100] [cursor=pointer]:
+          - /url: /tools/heic
+          - generic [ref=e101]:
+            - img [ref=e103]:
+              - generic [ref=e112]: JPG
+            - generic [ref=e115]:
+              - paragraph [ref=e117]: HEIC Converter
+              - paragraph [ref=e118]: iPhone HEIC to JPG or WebP.
+          - generic [ref=e119]: Free
+        - link "Batch Resize Resize for social media presets. Free" [ref=e120] [cursor=pointer]:
+          - /url: /tools/resizepack
+          - generic [ref=e121]:
+            - img [ref=e123]
+            - generic [ref=e132]:
+              - paragraph [ref=e134]: Batch Resize
+              - paragraph [ref=e135]: Resize for social media presets.
+          - generic [ref=e136]: Free
+        - link "Crop & Ratio Crop to exact ratios. Free" [ref=e137] [cursor=pointer]:
+          - /url: /tools/croproatio
+          - generic [ref=e138]:
+            - img [ref=e140]:
+              - generic [ref=e149]: 16:9
+            - generic [ref=e150]:
+              - paragraph [ref=e152]: Crop & Ratio
+              - paragraph [ref=e153]: Crop to exact ratios.
+          - generic [ref=e154]: Free
+      - link "View all tools" [ref=e156] [cursor=pointer]:
+        - /url: /tools
+        - text: View all tools
+        - img [ref=e157]
+    - generic [ref=e160]:
+      - heading "AI Workflow Pipeline" [level=2] [ref=e161]
+      - paragraph [ref=e162]: Run your entire image pipeline in one step. Choose a preset or build your own workflow.
+      - link "Try AI Workflow" [ref=e163] [cursor=pointer]:
+        - /url: /tools/workflow
+        - text: Try AI Workflow
+        - img [ref=e164]
+    - generic [ref=e167]:
+      - heading "How SammaPix works" [level=2] [ref=e169]
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - generic [ref=e173]: "1"
+          - generic [ref=e174]:
+            - paragraph [ref=e175]: Drop your photos
+            - paragraph [ref=e176]: Drag & drop any image format. HEIC, WebP, JPG, PNG -- all supported.
+        - generic [ref=e177]:
+          - generic [ref=e179]: "2"
+          - generic [ref=e180]:
+            - paragraph [ref=e181]: Choose your tools
+            - paragraph [ref=e182]: Use single tools for free, or try combo tools that chain multiple steps together.
+        - generic [ref=e183]:
+          - generic [ref=e185]: "3"
+          - generic [ref=e186]:
+            - paragraph [ref=e187]: Download results
+            - paragraph [ref=e188]: Get optimized images instantly. No watermarks. No accounts needed for free tools.
+    - generic [ref=e190]:
+      - heading "Who uses SammaPix" [level=2] [ref=e192]
+      - generic [ref=e193]:
+        - generic [ref=e194]:
+          - paragraph [ref=e195]: Travel Bloggers
+          - paragraph [ref=e196]: Optimize entire photo sets for blog posts -- compress, rename for SEO, and sort by country automatically.
+        - generic [ref=e197]:
+          - paragraph [ref=e198]: E-commerce Sellers
+          - paragraph [ref=e199]: Product photos ready for Shopify, Amazon, and Etsy in minutes. Use Batch Rename for consistent naming.
+        - generic [ref=e200]:
+          - paragraph [ref=e201]: Social Media Managers
+          - paragraph [ref=e202]: Batch resize for every platform preset -- Instagram, Twitter, LinkedIn -- without leaving the browser.
+        - generic [ref=e203]:
+          - paragraph [ref=e204]: Web Developers
+          - paragraph [ref=e205]: Compress and convert to WebP for Core Web Vitals. Use Web Optimize for the complete optimization pipeline.
+    - generic [ref=e207]:
+      - generic [ref=e208]:
+        - paragraph [ref=e209]: 1.2M+
+        - paragraph [ref=e210]: Images optimized
+      - generic [ref=e211]:
+        - paragraph [ref=e212]: "20"
+        - paragraph [ref=e213]: Free tools
+      - generic [ref=e214]:
+        - paragraph [ref=e215]: 100%
+        - paragraph [ref=e216]: Browser-based
+      - generic [ref=e217]:
+        - paragraph [ref=e218]: "0"
+        - paragraph [ref=e219]: Files uploaded to servers
+    - generic [ref=e221]:
+      - generic [ref=e222]:
+        - heading "Learn Image Optimization" [level=2] [ref=e223]
+        - paragraph [ref=e224]: Guides and tips to master image compression, SEO, and photography workflows.
+      - generic [ref=e225]:
+        - link "SEO How AI Image Renaming Boosts Your SEO Transform generic filenames into keyword-rich names that rank in Google Image Search. Read more" [ref=e226] [cursor=pointer]:
+          - /url: /blog/ai-image-renaming-seo-guide
+          - generic [ref=e228]: SEO
+          - generic [ref=e229]:
+            - heading "How AI Image Renaming Boosts Your SEO" [level=3] [ref=e230]
+            - paragraph [ref=e231]: Transform generic filenames into keyword-rich names that rank in Google Image Search.
+            - generic [ref=e232]:
+              - text: Read more
+              - img [ref=e233]
+        - link "PERFORMANCE Compress Images Without Losing Quality The right formats, quality settings, and tools for fast web images. Read more" [ref=e235] [cursor=pointer]:
+          - /url: /blog/compress-images-without-losing-quality
+          - generic [ref=e237]: PERFORMANCE
+          - generic [ref=e238]:
+            - heading "Compress Images Without Losing Quality" [level=3] [ref=e239]
+            - paragraph [ref=e240]: The right formats, quality settings, and tools for fast web images.
+            - generic [ref=e241]:
+              - text: Read more
+              - img [ref=e242]
+        - link "TOOLS Convert iPhone HEIC Photos to JPG Free Step-by-step guide without software or uploads needed. Read more" [ref=e244] [cursor=pointer]:
+          - /url: /blog/iphone-heic-to-jpg-guide
+          - generic [ref=e246]: TOOLS
+          - generic [ref=e247]:
+            - heading "Convert iPhone HEIC Photos to JPG Free" [level=3] [ref=e248]
+            - paragraph [ref=e249]: Step-by-step guide without software or uploads needed.
+            - generic [ref=e250]:
+              - text: Read more
+              - img [ref=e251]
+        - link "TOOLS Organize Travel Photos by Country Automatically Use GPS EXIF data to sort photos without manual work. Read more" [ref=e253] [cursor=pointer]:
+          - /url: /blog/organize-travel-photos-by-country
+          - generic [ref=e255]: TOOLS
+          - generic [ref=e256]:
+            - heading "Organize Travel Photos by Country Automatically" [level=3] [ref=e257]
+            - paragraph [ref=e258]: Use GPS EXIF data to sort photos without manual work.
+            - generic [ref=e259]:
+              - text: Read more
+              - img [ref=e260]
+      - link "Read all articles" [ref=e263] [cursor=pointer]:
+        - /url: /blog
+        - text: Read all articles
+        - img [ref=e264]
+    - generic [ref=e267]:
+      - heading "Quick actions" [level=2] [ref=e268]
+      - generic [ref=e269]:
+        - link "Resize for Instagram" [ref=e270] [cursor=pointer]:
+          - /url: /resize/instagram
+          - text: Resize for Instagram
+          - img [ref=e271]
+        - link "Resize for YouTube" [ref=e273] [cursor=pointer]:
+          - /url: /resize/youtube-thumbnail
+          - text: Resize for YouTube
+          - img [ref=e274]
+        - link "Resize for TikTok" [ref=e276] [cursor=pointer]:
+          - /url: /resize/tiktok
+          - text: Resize for TikTok
+          - img [ref=e277]
+        - link "Resize for Pinterest" [ref=e279] [cursor=pointer]:
+          - /url: /resize/pinterest
+          - text: Resize for Pinterest
+          - img [ref=e280]
+        - link "Convert HEIC to JPG" [ref=e282] [cursor=pointer]:
+          - /url: /convert/heic-to-jpg
+          - text: Convert HEIC to JPG
+          - img [ref=e283]
+        - link "Convert PNG to WebP" [ref=e285] [cursor=pointer]:
+          - /url: /convert/png-to-webp
+          - text: Convert PNG to WebP
+          - img [ref=e286]
+        - link "Convert JPG to WebP" [ref=e288] [cursor=pointer]:
+          - /url: /convert/jpg-to-webp
+          - text: Convert JPG to WebP
+          - img [ref=e289]
+        - link "SammaPix vs TinyPNG" [ref=e291] [cursor=pointer]:
+          - /url: /vs/tinypng
+          - text: SammaPix vs TinyPNG
+          - img [ref=e292]
+        - link "SammaPix vs Squoosh" [ref=e294] [cursor=pointer]:
+          - /url: /vs/squoosh
+          - text: SammaPix vs Squoosh
+          - img [ref=e295]
+        - link "All conversions" [ref=e297] [cursor=pointer]:
+          - /url: /convert
+          - text: All conversions
+          - img [ref=e298]
+        - link "All resize formats" [ref=e300] [cursor=pointer]:
+          - /url: /tools/resizepack
+          - text: All resize formats
+          - img [ref=e301]
+    - generic [ref=e304]:
+      - generic [ref=e305]:
+        - heading "FAQ" [level=2] [ref=e306]
+        - paragraph [ref=e307]: Common questions about SammaPix.
+      - generic [ref=e308]:
+        - generic [ref=e309]:
+          - term [ref=e310]: What tools does SammaPix offer?
+          - definition [ref=e311]: "SammaPix includes 20 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, Batch Resize, Crop & Ratio. AI-Powered: AI Rename, AI Alt Text, Transcribe. Creative: Film Filters (14 film presets), Watermark (watermarks). Organize: EXIF Viewer, Find Duplicates (duplicate finder), Sort by Location, Photo Map, Cull. Plus combo tools: Web Optimize, Blog Ready, and AI Photo Sort. Batch Rename for pattern-based renaming."
+        - generic [ref=e312]:
+          - term [ref=e313]: How does SammaPix protect my privacy?
+          - definition [ref=e314]: Your privacy is our top priority. All image processing tools (Compress, WebP Converter, Resize, HEIC Converter, Film Filters, Watermark, EXIF Viewer, Find Duplicates, Batch Rename) run 100% in your browser -- your images never leave your device. For AI tools, only a small thumbnail is sent to Google Gemini, while full-resolution originals remain completely local and are never stored on any server. Zero uploads means zero data tracking.
+        - generic [ref=e315]:
+          - term [ref=e316]: Is SammaPix really free?
+          - definition [ref=e317]: Yes. All 20 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI operations per day. Pro ($7/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.
+        - generic [ref=e318]:
+          - term [ref=e319]: What image formats are supported?
+          - definition [ref=e320]: SammaPix supports JPG, PNG, WebP, GIF, HEIC (iPhone), and AVIF across all tools. The Transcribe tool also accepts video formats (MP4, WebM, MOV) and audio files (MP3, WAV, AAC). Output formats include WebP, JPG, and PNG depending on the tool.
+        - generic [ref=e321]:
+          - term [ref=e322]: Do I need to create an account?
+          - definition [ref=e323]: No account is needed for most tools -- Compress, WebP, HEIC, Resize, Crop, Film Filters, Watermark, EXIF Viewer, and more work without any login. Only AI-powered tools (AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.
+        - generic [ref=e324]:
+          - term [ref=e325]: How does AI Rename work?
+          - definition [ref=e326]: AI Rename uses Google Gemini to analyze your photo and generate SEO-friendly filenames automatically. You can customize the naming pattern (date, keywords, numbers). For example, a photo of the Eiffel Tower becomes 'eiffel-tower-paris-travel-photo.jpg' instead of 'IMG_1234.jpg'. Free tier allows 10 AI renames per day; Pro unlocks unlimited.
+        - generic [ref=e327]:
+          - term [ref=e328]: Can I use SammaPix on mobile?
+          - definition [ref=e329]: Yes. SammaPix is fully responsive and works on iPhone, iPad, Android, and all mobile devices. All tools run directly in your mobile browser with no app download needed. Just open sammapix.com and start processing images on the go.
+        - generic [ref=e330]:
+          - term [ref=e331]: What's the difference between Free and Pro?
+          - definition [ref=e332]: "Free tier includes all 20 tools with limits: 20 files per batch, 10 AI operations daily, no ZIP downloads, and ads visible. Pro ($7/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing."
+        - generic [ref=e333]:
+          - term [ref=e334]: How does image compression work without losing quality?
+          - definition [ref=e335]: SammaPix uses advanced lossy and lossless compression algorithms in your browser. You control the quality slider (1-100) -- higher values preserve more detail but increase file size. For most photos, 75-85 quality is imperceptible to the eye while cutting file size by 60-80%. Test with your own images to find the sweet spot.
+        - generic [ref=e336]:
+          - term [ref=e337]: Is there a file size limit?
+          - definition [ref=e338]: Individual files up to 100MB are supported. For batch processing, the total size of all files in one batch can reach 1GB on Free tier (20 files) and 2GB on Pro tier (500 files). Processing happens in your browser's memory, so very large batches may slow down older devices.
+        - generic [ref=e339]:
+          - term [ref=e340]: Does SammaPix work offline?
+          - definition [ref=e341]: Core tools (Compress, WebP, Resize, HEIC, Film Filters, Watermark, EXIF Viewer, Find Duplicates, Batch Rename) work offline once the page loads. AI-powered tools (AI Rename, AI Alt Text, Transcribe) require internet since they connect to Google Gemini. You'll get a clear error if offline on AI tools.
+        - generic [ref=e342]:
+          - term [ref=e343]: How do I convert HEIC to JPG?
+          - definition [ref=e344]: Open sammapix.com, click HEIC Converter, drag your HEIC files (iPhone photos) into the dropzone, and set output quality. Download instantly as JPG, PNG, or WebP. No account needed, no file uploads to servers -- all conversion happens in your browser.
+        - generic [ref=e345]:
+          - term [ref=e346]: Can I batch process multiple images?
+          - definition [ref=e347]: Yes. Drop up to 20 images per batch on Free tier or 500 on Pro. Apply the same settings (quality, dimensions, filters) to all files at once, then download individually or as a ZIP. Use Batch Resize for preset dimensions (Instagram, YouTube, etc.) or Batch Rename for pattern-based renaming.
+        - generic [ref=e348]:
+          - term [ref=e349]: Is my data stored on your servers?
+          - definition [ref=e350]: No. Your images are never uploaded to any server. All processing happens in your browser using your computer's processing power. For AI-powered tools, only a small thumbnail (max 512px) is temporarily sent to Google Gemini for analysis -- your original high-res files stay completely local. No storage, no tracking, no backups.
+        - generic [ref=e351]:
+          - term [ref=e352]: What is WebP and why should I use it?
+          - definition [ref=e353]: WebP is a modern image format from Google that's 25-35% smaller than JPG while maintaining quality. It's supported by all modern browsers and recommended by Google for Core Web Vitals. Use SammaPix's WebP Converter or Web Optimize combo tool to convert your images -- you'll get faster page loads and better SEO rankings.
+        - generic [ref=e354]:
+          - term [ref=e355]: How does the Find Duplicates tool work?
+          - definition [ref=e356]: Upload multiple photos and Find Duplicates analyzes them for visual similarity, identical copies, or near-duplicates. It identifies duplicate EXIF data, resolution, and visual fingerprints. Great for cleaning up your photo library after syncing from multiple devices or cameras.
+        - generic [ref=e357]:
+          - term [ref=e358]: Can I remove EXIF and GPS data from my photos?
+          - definition [ref=e359]: Yes. Use the EXIF Viewer tool to see all embedded metadata, then use EXIF Remover to strip GPS coordinates, timestamps, camera model, and other privacy data. All processing happens in your browser -- cleaned photos are never stored or transmitted. Essential for protecting your location privacy before sharing photos online.
+        - generic [ref=e360]:
+          - term [ref=e361]: What is AI Photo Sort and how do I use it?
+          - definition [ref=e362]: "AI Photo Sort is a combo tool that analyzes your photo collection and organizes by detected content: faces, landscapes, food, pets, documents, text, etc. Upload 50+ photos and it suggests folders or tags. Great for travel photographers and content creators managing large libraries."
+        - generic [ref=e363]:
+          - term [ref=e364]: How do Film Filters work and can I customize them?
+          - definition [ref=e365]: Film Filters applies 14 cinematic presets inspired by classic film stock (Kodachrome, Tri-X, Portra, etc.). Each filter adjusts contrast, saturation, and color grading. Apply to single photos or batch process entire galleries. Filters run in your browser with no quality loss.
+        - generic [ref=e366]:
+          - term [ref=e367]: What is Web Optimize and when should I use it?
+          - definition [ref=e368]: "Web Optimize is a combo tool that prepares images for websites: compresses for speed, converts to WebP, resizes for responsive layouts, and generates thumbnails. Perfect for developers and content creators needing Core Web Vitals-optimized assets without manual work."
+  - contentinfo [ref=e369]:
+    - generic [ref=e370]:
+      - generic [ref=e371]:
+        - generic [ref=e372]:
+          - link "SammaPix - home" [ref=e373] [cursor=pointer]:
+            - /url: /
+            - img [ref=e374]
+            - generic [ref=e391]: SammaPix
+          - paragraph [ref=e392]:
+            - text: Free image tools for everyone.
+            - text: No signup, no watermarks.
+          - link "Instagram" [ref=e394] [cursor=pointer]:
+            - /url: https://www.instagram.com/lucasammarco.web/
+            - img [ref=e395]
+        - generic [ref=e398]:
+          - paragraph [ref=e399]: Tools
+          - list [ref=e400]:
+            - listitem [ref=e401]:
+              - link "Compress" [ref=e402] [cursor=pointer]:
+                - /url: /tools/compress
+            - listitem [ref=e403]:
+              - link "WebP Convert" [ref=e404] [cursor=pointer]:
+                - /url: /tools/webp
+            - listitem [ref=e405]:
+              - link "HEIC Converter" [ref=e406] [cursor=pointer]:
+                - /url: /tools/heic
+            - listitem [ref=e407]:
+              - link "AI Rename" [ref=e408] [cursor=pointer]:
+                - /url: /tools/ai-rename
+            - listitem [ref=e409]:
+              - link "EXIF Remover" [ref=e410] [cursor=pointer]:
+                - /url: /tools/exif
+            - listitem [ref=e411]:
+              - link "Film Filters" [ref=e412] [cursor=pointer]:
+                - /url: /tools/filmlab
+            - listitem [ref=e413]:
+              - link "Watermark" [ref=e414] [cursor=pointer]:
+                - /url: /tools/stampit
+            - listitem [ref=e415]:
+              - link "Crop & Ratio" [ref=e416] [cursor=pointer]:
+                - /url: /tools/croproatio
+            - listitem [ref=e417]:
+              - link "Find Duplicates" [ref=e418] [cursor=pointer]:
+                - /url: /tools/twinhunt
+            - listitem [ref=e419]:
+              - link "Sort by Location" [ref=e420] [cursor=pointer]:
+                - /url: /tools/geosort
+            - listitem [ref=e421]:
+              - link "Photo Map" [ref=e422] [cursor=pointer]:
+                - /url: /tools/travelmap
+            - listitem [ref=e423]:
+              - link "Batch Resize" [ref=e424] [cursor=pointer]:
+                - /url: /tools/resizepack
+            - listitem [ref=e425]:
+              - link "Cull" [ref=e426] [cursor=pointer]:
+                - /url: /tools/cull
+        - generic [ref=e427]:
+          - paragraph [ref=e428]: Quick Convert
+          - list [ref=e429]:
+            - listitem [ref=e430]:
+              - link "HEIC to JPG" [ref=e431] [cursor=pointer]:
+                - /url: /convert/heic-to-jpg
+            - listitem [ref=e432]:
+              - link "PNG to WebP" [ref=e433] [cursor=pointer]:
+                - /url: /convert/png-to-webp
+            - listitem [ref=e434]:
+              - link "JPG to WebP" [ref=e435] [cursor=pointer]:
+                - /url: /convert/jpg-to-webp
+        - generic [ref=e436]:
+          - paragraph [ref=e437]: Resize For
+          - list [ref=e438]:
+            - listitem [ref=e439]:
+              - link "Instagram" [ref=e440] [cursor=pointer]:
+                - /url: /resize/instagram
+            - listitem [ref=e441]:
+              - link "Facebook" [ref=e442] [cursor=pointer]:
+                - /url: /resize/facebook
+            - listitem [ref=e443]:
+              - link "YouTube" [ref=e444] [cursor=pointer]:
+                - /url: /resize/youtube-thumbnail
+            - listitem [ref=e445]:
+              - link "Twitter" [ref=e446] [cursor=pointer]:
+                - /url: /resize/twitter
+        - generic [ref=e447]:
+          - paragraph [ref=e448]: Company
+          - list [ref=e449]:
+            - listitem [ref=e450]:
+              - link "Pricing" [ref=e451] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e452]:
+              - link "Blog" [ref=e453] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e454]:
+              - link "About" [ref=e455] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e456]:
+          - paragraph [ref=e457]: Legal
+          - list [ref=e458]:
+            - listitem [ref=e459]:
+              - link "Privacy Policy" [ref=e460] [cursor=pointer]:
+                - /url: /privacy
+      - generic [ref=e461]:
+        - paragraph [ref=e462]: © 2026 SammaPix
+        - paragraph [ref=e463]:
+          - text: by
+          - link "Luca Sammarco" [ref=e464] [cursor=pointer]:
+            - /url: https://lucasammarco.com
+```

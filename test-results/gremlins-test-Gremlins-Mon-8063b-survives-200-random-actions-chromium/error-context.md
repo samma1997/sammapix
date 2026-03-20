@@ -1,0 +1,253 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "SammaPix- home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: SammaPix
+      - navigation [ref=e23]:
+        - link "Tools" [ref=e24] [cursor=pointer]:
+          - /url: /tools
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e27] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e28]:
+        - button "Toggle dark mode" [ref=e29] [cursor=pointer]
+        - link "Sign in" [ref=e30] [cursor=pointer]:
+          - /url: /auth/signin
+          - button "Sign in" [ref=e31]
+        - link "Try free" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - button "Try free" [ref=e33]:
+            - text: Try free
+            - img [ref=e34]
+  - main [ref=e36]:
+    - main [ref=e37]:
+      - generic [ref=e38]:
+        - link "All tools" [ref=e39] [cursor=pointer]:
+          - /url: /tools
+          - img [ref=e40]
+          - text: All tools
+        - generic [ref=e42]:
+          - img [ref=e44]
+          - heading "EXIF Viewer" [level=1] [ref=e48]
+        - paragraph [ref=e49]: View all metadata in your photos - GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser.
+      - button "Drop zone- click or drag photos to upload" [ref=e51] [cursor=pointer]:
+        - generic [ref=e52]:
+          - img [ref=e54]
+          - generic [ref=e56]:
+            - paragraph [ref=e57]: Drop photos or click to browse
+            - paragraph [ref=e58]: JPG, JPEG, HEIC, PNG - EXIF metadata read locally
+          - paragraph [ref=e59]: Your photos never leave your device- all processing happens in your browser
+          - paragraph [ref=e60]:
+            - text: "Free: up to 20 files ·"
+            - 'link "Pro: 500" [ref=e61]':
+              - /url: /dashboard/upgrade
+      - generic [ref=e64]:
+        - heading "How to use EXIF Lens" [level=2] [ref=e65]
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e69]: "1"
+            - generic [ref=e70]:
+              - paragraph [ref=e71]: Drop your photos
+              - paragraph [ref=e72]: Upload JPG or HEIC photos. All EXIF metadata is read instantly in your browser - GPS, camera model, lens, ISO, shutter speed, date.
+          - generic [ref=e73]:
+            - generic [ref=e75]: "2"
+            - generic [ref=e76]:
+              - paragraph [ref=e77]: View all metadata
+              - paragraph [ref=e78]: See every EXIF field per photo. GPS coordinates are highlighted as a privacy risk with a clear warning.
+          - generic [ref=e79]:
+            - generic [ref=e81]: "3"
+            - generic [ref=e82]:
+              - paragraph [ref=e83]: Download clean files
+              - paragraph [ref=e84]: Strip GPS only or remove all EXIF with one click. Download individual files or the full batch as a ZIP.
+        - generic [ref=e85]:
+          - generic [ref=e86]: Pro tip
+          - paragraph [ref=e87]:
+            - text: After removing EXIF, use GeoSort to organize photos that still have GPS into country folders.
+            - link "Try GeoSort" [ref=e88] [cursor=pointer]:
+              - /url: /tools/geosort
+              - text: Try GeoSort
+              - img [ref=e89]
+      - generic [ref=e92]:
+        - heading "How it works" [level=2] [ref=e93]
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - generic [ref=e97]: "1"
+            - heading "Drop your photos" [level=3] [ref=e98]
+            - paragraph [ref=e99]: Select or drag JPG, HEIC, or PNG files. All metadata is read instantly in your browser.
+          - generic [ref=e100]:
+            - generic [ref=e102]: "2"
+            - heading "See all metadata" [level=3] [ref=e103]
+            - paragraph [ref=e104]: Location, camera, settings, and date are displayed for each file. GPS is highlighted as a privacy risk.
+          - generic [ref=e105]:
+            - generic [ref=e107]: "3"
+            - heading "Remove & download" [level=3] [ref=e108]
+            - paragraph [ref=e109]: Strip GPS only or all EXIF with one click per file- or use the action bar to process all at once. Download as ZIP.
+      - generic [ref=e111]:
+        - heading "What EXIF Lens does" [level=2] [ref=e112]
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - img [ref=e116]
+            - heading "View all metadata" [level=3] [ref=e121]
+            - paragraph [ref=e122]: "See every EXIF field in your photo: GPS coordinates, camera make and model, lens, ISO, shutter speed, aperture, focal length, date, and software."
+          - generic [ref=e123]:
+            - img [ref=e125]
+            - heading "Remove GPS for privacy" [level=3] [ref=e128]
+            - paragraph [ref=e129]: Photos taken with a smartphone contain precise GPS coordinates. One click removes location data only- keeping all other metadata intact.
+          - generic [ref=e130]:
+            - img [ref=e132]
+            - heading "Strip all EXIF" [level=3] [ref=e134]
+            - paragraph [ref=e135]: Remove every piece of metadata from a photo in one step. Camera model, timestamps, software- all gone. Ideal before sharing images publicly.
+          - generic [ref=e136]:
+            - img [ref=e138]
+            - heading "Batch processing" [level=3] [ref=e141]
+            - paragraph [ref=e142]: Upload multiple photos at once. Remove GPS or strip EXIF from all files simultaneously, then download everything as a single ZIP.
+      - generic [ref=e144]:
+        - heading "Common questions" [level=2] [ref=e145]
+        - generic [ref=e146]:
+          - generic [ref=e147]:
+            - heading "Will this work on iPhone HEIC photos?" [level=3] [ref=e148]
+            - paragraph [ref=e149]: Yes - EXIF Lens reads full metadata from HEIC files, including GPS coordinates, camera model, and capture settings. However, EXIF removal is only supported for JPEG files. To strip metadata from a HEIC photo, convert it to JPG first (any standard photo app can do this), then run it through EXIF Lens.
+          - generic [ref=e150]:
+            - heading "Is my GPS actually removed?" [level=3] [ref=e151]
+            - paragraph [ref=e152]: Yes. When you click 'Remove GPS', the GPS IFD block is deleted from the EXIF structure using piexifjs, a well-tested library. The resulting file contains zero GPS fields. You can verify this by reloading the cleaned file- the GPS section will show 'No data'.
+          - generic [ref=e153]:
+            - heading "What metadata does EXIF contain?" [level=3] [ref=e154]
+            - paragraph [ref=e155]: "EXIF (Exchangeable Image File Format) is a standard embedded in photo files. It can contain: GPS coordinates (latitude, longitude, altitude), camera make and model, lens model, ISO sensitivity, aperture (f-number), shutter speed, focal length, date and time of capture, software used to edit the photo, and more. This data is added automatically by cameras and smartphones."
+          - generic [ref=e156]:
+            - heading "Are my photos uploaded to a server?" [level=3] [ref=e157]
+            - paragraph [ref=e158]: No. Everything happens entirely in your browser. The files are never sent to any server. EXIF is read using the exifr library running locally, and metadata is removed using piexifjs- both run 100% client-side. Your photos stay on your device.
+      - generic [ref=e161]:
+        - paragraph [ref=e162]: 📖 Related guide
+        - link "How to Remove EXIF Data from Photos (Protect Your Privacy) →" [ref=e163] [cursor=pointer]:
+          - /url: /blog/remove-exif-data-photos
+      - generic [ref=e165]:
+        - heading "More free image tools" [level=2] [ref=e166]
+        - generic [ref=e167]:
+          - link "Sort Photos by Location" [ref=e168] [cursor=pointer]:
+            - /url: /tools/geosort
+            - text: Sort Photos by Location
+            - img [ref=e169]
+          - link "Create Travel Map" [ref=e171] [cursor=pointer]:
+            - /url: /tools/travelmap
+            - text: Create Travel Map
+            - img [ref=e172]
+          - link "AI Rename" [ref=e174] [cursor=pointer]:
+            - /url: /tools/ai-rename
+            - text: AI Rename
+            - img [ref=e175]
+  - contentinfo [ref=e177]:
+    - generic [ref=e178]:
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - link "SammaPix - home" [ref=e181] [cursor=pointer]:
+            - /url: /
+            - img [ref=e182]
+            - generic [ref=e199]: SammaPix
+          - paragraph [ref=e200]:
+            - text: Free image tools for everyone.
+            - text: No signup, no watermarks.
+          - link "Instagram" [ref=e202] [cursor=pointer]:
+            - /url: https://www.instagram.com/lucasammarco.web/
+            - img [ref=e203]
+        - generic [ref=e206]:
+          - paragraph [ref=e207]: Tools
+          - list [ref=e208]:
+            - listitem [ref=e209]:
+              - link "Compress" [ref=e210] [cursor=pointer]:
+                - /url: /tools/compress
+            - listitem [ref=e211]:
+              - link "WebP Convert" [ref=e212] [cursor=pointer]:
+                - /url: /tools/webp
+            - listitem [ref=e213]:
+              - link "HEIC Converter" [ref=e214] [cursor=pointer]:
+                - /url: /tools/heic
+            - listitem [ref=e215]:
+              - link "AI Rename" [ref=e216] [cursor=pointer]:
+                - /url: /tools/ai-rename
+            - listitem [ref=e217]:
+              - link "EXIF Remover" [ref=e218] [cursor=pointer]:
+                - /url: /tools/exif
+            - listitem [ref=e219]:
+              - link "Film Filters" [ref=e220] [cursor=pointer]:
+                - /url: /tools/filmlab
+            - listitem [ref=e221]:
+              - link "Watermark" [ref=e222] [cursor=pointer]:
+                - /url: /tools/stampit
+            - listitem [ref=e223]:
+              - link "Crop & Ratio" [ref=e224] [cursor=pointer]:
+                - /url: /tools/croproatio
+            - listitem [ref=e225]:
+              - link "Find Duplicates" [ref=e226] [cursor=pointer]:
+                - /url: /tools/twinhunt
+            - listitem [ref=e227]:
+              - link "Sort by Location" [ref=e228] [cursor=pointer]:
+                - /url: /tools/geosort
+            - listitem [ref=e229]:
+              - link "Photo Map" [ref=e230] [cursor=pointer]:
+                - /url: /tools/travelmap
+            - listitem [ref=e231]:
+              - link "Batch Resize" [ref=e232] [cursor=pointer]:
+                - /url: /tools/resizepack
+            - listitem [ref=e233]:
+              - link "Cull" [ref=e234] [cursor=pointer]:
+                - /url: /tools/cull
+        - generic [ref=e235]:
+          - paragraph [ref=e236]: Quick Convert
+          - list [ref=e237]:
+            - listitem [ref=e238]:
+              - link "HEIC to JPG" [ref=e239] [cursor=pointer]:
+                - /url: /convert/heic-to-jpg
+            - listitem [ref=e240]:
+              - link "PNG to WebP" [ref=e241] [cursor=pointer]:
+                - /url: /convert/png-to-webp
+            - listitem [ref=e242]:
+              - link "JPG to WebP" [ref=e243] [cursor=pointer]:
+                - /url: /convert/jpg-to-webp
+        - generic [ref=e244]:
+          - paragraph [ref=e245]: Resize For
+          - list [ref=e246]:
+            - listitem [ref=e247]:
+              - link "Instagram" [ref=e248] [cursor=pointer]:
+                - /url: /resize/instagram
+            - listitem [ref=e249]:
+              - link "Facebook" [ref=e250] [cursor=pointer]:
+                - /url: /resize/facebook
+            - listitem [ref=e251]:
+              - link "YouTube" [ref=e252] [cursor=pointer]:
+                - /url: /resize/youtube-thumbnail
+            - listitem [ref=e253]:
+              - link "Twitter" [ref=e254] [cursor=pointer]:
+                - /url: /resize/twitter
+        - generic [ref=e255]:
+          - paragraph [ref=e256]: Company
+          - list [ref=e257]:
+            - listitem [ref=e258]:
+              - link "Pricing" [ref=e259] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e260]:
+              - link "Blog" [ref=e261] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e262]:
+              - link "About" [ref=e263] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e264]:
+          - paragraph [ref=e265]: Legal
+          - list [ref=e266]:
+            - listitem [ref=e267]:
+              - link "Privacy Policy" [ref=e268] [cursor=pointer]:
+                - /url: /privacy
+      - generic [ref=e269]:
+        - paragraph [ref=e270]: © 2026 SammaPix
+        - paragraph [ref=e271]:
+          - text: by
+          - link "Luca Sammarco" [ref=e272] [cursor=pointer]:
+            - /url: https://lucasammarco.com
+```

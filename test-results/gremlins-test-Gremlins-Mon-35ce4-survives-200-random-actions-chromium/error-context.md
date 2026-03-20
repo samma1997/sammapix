@@ -1,0 +1,185 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "SammaPix- home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: SammaPix
+      - navigation [ref=e23]:
+        - link "Tools" [ref=e24] [cursor=pointer]:
+          - /url: /tools
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e27] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e28]:
+        - button "Toggle dark mode" [ref=e29] [cursor=pointer]
+        - link "Sign in" [ref=e30] [cursor=pointer]:
+          - /url: /auth/signin
+          - button "Sign in" [ref=e31]
+        - link "Try free" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - button "Try free" [ref=e33]:
+            - text: Try free
+            - img [ref=e34]
+  - main [ref=e36]:
+    - generic [ref=e37]:
+      - region "Photo strip hero" [ref=e38]:
+        - generic [ref=e39]:
+          - img "Tiered Buddha statues at Seema Malaka, Gangaramaya Temple, Colombo, Sri Lanka" [ref=e41]
+          - img "Bronze and golden Buddha statues inside Gangaramaya Temple, Colombo, Sri Lanka" [ref=e43]
+          - img "Fierce Sri Lankan Dvarapala guardian statue in Colombo, Sri Lanka" [ref=e45]
+          - img "Golden Buddha statue in Gangaramaya Temple shrine, Colombo, Sri Lanka" [ref=e47]
+          - img "Gangaramaya Temple interior with golden Buddha statues and murals, Colombo, Sri Lanka" [ref=e49]
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Travel Photography
+          - heading "Luca Sammarco" [level=1] [ref=e52]
+      - main [ref=e53]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - paragraph [ref=e57]: Portfolio
+            - heading "Travel Photography" [level=2] [ref=e58]
+            - paragraph [ref=e59]: Documenting the world through a travel lens. Click a destination to explore the full gallery.
+          - generic [ref=e60]:
+            - link "Sri Lanka travel photography 2025 Sri Lanka 2025 · 15 photos" [ref=e61] [cursor=pointer]:
+              - /url: /about/sri-lanka-2025
+              - img "Sri Lanka travel photography 2025" [ref=e62]
+              - generic [ref=e64]:
+                - paragraph [ref=e65]: Sri Lanka
+                - paragraph [ref=e66]: 2025 · 15 photos
+            - generic [ref=e70]:
+              - paragraph [ref=e71]: Bali
+              - paragraph [ref=e72]: "2024"
+              - generic [ref=e73]: Coming soon
+            - generic [ref=e77]:
+              - paragraph [ref=e78]: Japan
+              - paragraph [ref=e79]: "2023"
+              - generic [ref=e80]: Coming soon
+            - generic [ref=e84]:
+              - paragraph [ref=e85]: Thailand
+              - paragraph [ref=e86]: "2024"
+              - generic [ref=e87]: Coming soon
+            - generic [ref=e91]:
+              - paragraph [ref=e92]: China
+              - paragraph [ref=e93]: "2023"
+              - generic [ref=e94]: Coming soon
+        - generic [ref=e96]:
+          - paragraph [ref=e97]: About Luca
+          - paragraph [ref=e98]: Travel photographer and full-stack developer. Passionate about photography since 2015, I've shot my way through Sri Lanka, Bali, Japan, Thailand, and China -- always coming home with thousands of photos that needed optimizing, renaming, and organizing before they could go anywhere useful.
+          - paragraph [ref=e99]: I built SammaPix because every tool I tried was either too slow, too expensive, or required uploading my photos to someone else's server. The first version was just a personal script to compress and rename my travel photos in the browser. Then I added WebP conversion, EXIF stripping, film effects -- and before I knew it, I had a full toolkit. I made it public because if I needed these tools, other photographers probably did too.
+          - paragraph [ref=e100]: Today, SammaPix has 20 free tools used by photographers, bloggers, and developers in 40+ countries. Everything still runs in the browser. Your photos never leave your device. That was the promise from day one, and it hasn't changed.
+          - link "Try the tools I built →" [ref=e101] [cursor=pointer]:
+            - /url: /tools
+  - contentinfo [ref=e102]:
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - generic [ref=e105]:
+          - link "SammaPix - home" [ref=e106] [cursor=pointer]:
+            - /url: /
+            - img [ref=e107]
+            - generic [ref=e124]: SammaPix
+          - paragraph [ref=e125]:
+            - text: Free image tools for everyone.
+            - text: No signup, no watermarks.
+          - link "Instagram" [ref=e127] [cursor=pointer]:
+            - /url: https://www.instagram.com/lucasammarco.web/
+            - img [ref=e128]
+        - generic [ref=e131]:
+          - paragraph [ref=e132]: Tools
+          - list [ref=e133]:
+            - listitem [ref=e134]:
+              - link "Compress" [ref=e135] [cursor=pointer]:
+                - /url: /tools/compress
+            - listitem [ref=e136]:
+              - link "WebP Convert" [ref=e137] [cursor=pointer]:
+                - /url: /tools/webp
+            - listitem [ref=e138]:
+              - link "HEIC Converter" [ref=e139] [cursor=pointer]:
+                - /url: /tools/heic
+            - listitem [ref=e140]:
+              - link "AI Rename" [ref=e141] [cursor=pointer]:
+                - /url: /tools/ai-rename
+            - listitem [ref=e142]:
+              - link "EXIF Remover" [ref=e143] [cursor=pointer]:
+                - /url: /tools/exif
+            - listitem [ref=e144]:
+              - link "Film Filters" [ref=e145] [cursor=pointer]:
+                - /url: /tools/filmlab
+            - listitem [ref=e146]:
+              - link "Watermark" [ref=e147] [cursor=pointer]:
+                - /url: /tools/stampit
+            - listitem [ref=e148]:
+              - link "Crop & Ratio" [ref=e149] [cursor=pointer]:
+                - /url: /tools/croproatio
+            - listitem [ref=e150]:
+              - link "Find Duplicates" [ref=e151] [cursor=pointer]:
+                - /url: /tools/twinhunt
+            - listitem [ref=e152]:
+              - link "Sort by Location" [ref=e153] [cursor=pointer]:
+                - /url: /tools/geosort
+            - listitem [ref=e154]:
+              - link "Photo Map" [ref=e155] [cursor=pointer]:
+                - /url: /tools/travelmap
+            - listitem [ref=e156]:
+              - link "Batch Resize" [ref=e157] [cursor=pointer]:
+                - /url: /tools/resizepack
+            - listitem [ref=e158]:
+              - link "Cull" [ref=e159] [cursor=pointer]:
+                - /url: /tools/cull
+        - generic [ref=e160]:
+          - paragraph [ref=e161]: Quick Convert
+          - list [ref=e162]:
+            - listitem [ref=e163]:
+              - link "HEIC to JPG" [ref=e164] [cursor=pointer]:
+                - /url: /convert/heic-to-jpg
+            - listitem [ref=e165]:
+              - link "PNG to WebP" [ref=e166] [cursor=pointer]:
+                - /url: /convert/png-to-webp
+            - listitem [ref=e167]:
+              - link "JPG to WebP" [ref=e168] [cursor=pointer]:
+                - /url: /convert/jpg-to-webp
+        - generic [ref=e169]:
+          - paragraph [ref=e170]: Resize For
+          - list [ref=e171]:
+            - listitem [ref=e172]:
+              - link "Instagram" [ref=e173] [cursor=pointer]:
+                - /url: /resize/instagram
+            - listitem [ref=e174]:
+              - link "Facebook" [ref=e175] [cursor=pointer]:
+                - /url: /resize/facebook
+            - listitem [ref=e176]:
+              - link "YouTube" [ref=e177] [cursor=pointer]:
+                - /url: /resize/youtube-thumbnail
+            - listitem [ref=e178]:
+              - link "Twitter" [ref=e179] [cursor=pointer]:
+                - /url: /resize/twitter
+        - generic [ref=e180]:
+          - paragraph [ref=e181]: Company
+          - list [ref=e182]:
+            - listitem [ref=e183]:
+              - link "Pricing" [ref=e184] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e185]:
+              - link "Blog" [ref=e186] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e187]:
+              - link "About" [ref=e188] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e189]:
+          - paragraph [ref=e190]: Legal
+          - list [ref=e191]:
+            - listitem [ref=e192]:
+              - link "Privacy Policy" [ref=e193] [cursor=pointer]:
+                - /url: /privacy
+      - generic [ref=e194]:
+        - paragraph [ref=e195]: © 2026 SammaPix
+        - paragraph [ref=e196]:
+          - text: by
+          - link "Luca Sammarco" [ref=e197] [cursor=pointer]:
+            - /url: https://lucasammarco.com
+```

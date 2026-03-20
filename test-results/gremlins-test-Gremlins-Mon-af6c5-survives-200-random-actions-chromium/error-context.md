@@ -1,0 +1,289 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "SammaPix- home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: SammaPix
+      - navigation [ref=e23]:
+        - link "Tools" [ref=e24] [cursor=pointer]:
+          - /url: /tools
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e27] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e28]:
+        - button "Toggle dark mode" [ref=e29] [cursor=pointer]
+        - link "Sign in" [ref=e30] [cursor=pointer]:
+          - /url: /auth/signin
+          - button "Sign in" [ref=e31]
+        - link "Try free" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - button "Try free" [ref=e33]:
+            - text: Try free
+            - img [ref=e34]
+  - main [ref=e36]:
+    - main [ref=e37]:
+      - navigation "Breadcrumb" [ref=e38]:
+        - list [ref=e40]:
+          - listitem [ref=e41]:
+            - link "Home" [ref=e42] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e43]: /
+          - listitem [ref=e44]:
+            - link "Resize" [ref=e45] [cursor=pointer]:
+              - /url: /tools/resizepack
+          - listitem [ref=e46]: /
+          - listitem [ref=e47]: Instagram
+      - generic [ref=e49]:
+        - heading "Resize Images for Instagram Free Online" [level=1] [ref=e50]
+        - paragraph [ref=e51]: Resize images for Instagram- square post 1080×1080, portrait 1080×1350, landscape 1080×566, Story 1080×1920. Free online, no upload.
+        - generic [ref=e52]:
+          - link "Open Batch Resize" [ref=e53] [cursor=pointer]:
+            - /url: /tools/resizepack
+            - text: Open Batch Resize
+            - img [ref=e54]
+          - link "Crop to Ratio first" [ref=e56] [cursor=pointer]:
+            - /url: /tools/croproatio
+            - text: Crop to Ratio first
+            - img [ref=e57]
+      - generic [ref=e60]:
+        - heading "Instagram Image Sizes" [level=2] [ref=e61]
+        - paragraph [ref=e62]: All recommended Instagram image dimensions for 2026. Upload at these exact sizes to avoid any quality loss from platform-side scaling.
+        - table [ref=e64]:
+          - rowgroup [ref=e65]:
+            - row "Type Width × Height Aspect Ratio Notes" [ref=e66]:
+              - columnheader "Type" [ref=e67]
+              - columnheader "Width × Height" [ref=e68]
+              - columnheader "Aspect Ratio" [ref=e69]
+              - columnheader "Notes" [ref=e70]
+          - rowgroup [ref=e71]:
+            - row "Square Post 1080 × 1080 px 1:1 Recommended for feed posts" [ref=e72]:
+              - cell "Square Post" [ref=e73]
+              - cell "1080 × 1080 px" [ref=e74]
+              - cell "1:1" [ref=e75]
+              - cell "Recommended for feed posts" [ref=e76]
+            - row "Portrait Post 1080 × 1350 px 4:5 Most space in feed" [ref=e77]:
+              - cell "Portrait Post" [ref=e78]
+              - cell "1080 × 1350 px" [ref=e79]
+              - cell "4:5" [ref=e80]
+              - cell "Most space in feed" [ref=e81]
+            - row "Landscape Post 1080 × 566 px 540:283 16:9 crop equivalent" [ref=e82]:
+              - cell "Landscape Post" [ref=e83]
+              - cell "1080 × 566 px" [ref=e84]
+              - cell "540:283" [ref=e85]
+              - cell "16:9 crop equivalent" [ref=e86]
+            - row "Story / Reels 1080 × 1920 px 9:16 Full-screen vertical" [ref=e87]:
+              - cell "Story / Reels" [ref=e88]
+              - cell "1080 × 1920 px" [ref=e89]
+              - cell "9:16" [ref=e90]
+              - cell "Full-screen vertical" [ref=e91]
+      - generic [ref=e93]:
+        - heading "How to Resize Images for Instagram" [level=2] [ref=e94]
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic [ref=e98]: "1"
+            - paragraph [ref=e99]: Open ResizePack, drop your image and select the Instagram preset that matches your post type (Square, Portrait, Landscape or Story).
+          - generic [ref=e100]:
+            - generic [ref=e102]: "2"
+            - paragraph [ref=e103]: Review the preview- use CropRatio to crop to the exact ratio first if your photo has the wrong proportions.
+          - generic [ref=e104]:
+            - generic [ref=e106]: "3"
+            - paragraph [ref=e107]: Click Resize, then Download. Your image is ready to upload directly to Instagram without any quality loss from re-compression.
+      - generic [ref=e109]:
+        - generic [ref=e110]:
+          - paragraph [ref=e111]: Ready to resize?
+          - paragraph [ref=e112]:
+            - text: Use
+            - link "Batch Resize" [ref=e113] [cursor=pointer]:
+              - /url: /tools/resizepack
+            - text: for batch resizing with social media presets, or
+            - link "Crop & Ratio" [ref=e114] [cursor=pointer]:
+              - /url: /tools/croproatio
+            - text: to crop to the exact aspect ratio first.
+        - generic [ref=e115]:
+          - link "Batch Resize" [ref=e116] [cursor=pointer]:
+            - /url: /tools/resizepack
+            - text: Batch Resize
+            - img [ref=e117]
+          - link "Crop & Ratio" [ref=e119] [cursor=pointer]:
+            - /url: /tools/croproatio
+            - text: Crop & Ratio
+            - img [ref=e120]
+      - generic [ref=e123]:
+        - heading "Frequently Asked Questions" [level=2] [ref=e124]
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - heading "What is the best Instagram image size in 2026?" [level=3] [ref=e127]
+            - paragraph [ref=e128]: For feed posts, 1080×1350 px (4:5 portrait ratio) gives you the most vertical space in users' feeds. For Stories and Reels use 1080×1920 px (9:16). Square posts are 1080×1080 px.
+          - generic [ref=e129]:
+            - heading "Will Instagram compress my photo if I resize it first?" [level=3] [ref=e130]
+            - paragraph [ref=e131]: Instagram always re-encodes uploads, but providing an image at exactly the right dimensions (1080 px wide) prevents Instagram from upscaling or downscaling before its own compression- resulting in the sharpest possible output.
+          - generic [ref=e132]:
+            - heading "What file format should I use for Instagram?" [level=3] [ref=e133]
+            - paragraph [ref=e134]: JPEG for photos (Instagram re-encodes everything anyway) and PNG for graphics with transparency. Keep file size under 30 MB. Use our Compress tool to reduce file size without visible quality loss.
+          - generic [ref=e135]:
+            - heading "Can I use the same image for a post and a Story?" [level=3] [ref=e136]
+            - paragraph [ref=e137]: You can, but you should resize separately. A 1080×1080 square will have black bars on a 9:16 Story canvas. Use ResizePack to export both sizes at once.
+      - generic [ref=e139]:
+        - heading "Resize for Other Platforms" [level=2] [ref=e140]
+        - generic [ref=e141]:
+          - link "Resize for Facebook 4 sizes- Post / Shared Image, Cover Photo, Profile Picture, Story" [ref=e142] [cursor=pointer]:
+            - /url: /resize/facebook
+            - paragraph [ref=e143]: Resize for Facebook
+            - paragraph [ref=e144]: 4 sizes- Post / Shared Image, Cover Photo, Profile Picture, Story
+          - link "Resize for TikTok 3 sizes- Video / Photo Mode, Square Format, Profile Picture" [ref=e145] [cursor=pointer]:
+            - /url: /resize/tiktok
+            - paragraph [ref=e146]: Resize for TikTok
+            - paragraph [ref=e147]: 3 sizes- Video / Photo Mode, Square Format, Profile Picture
+          - link "Resize for Pinterest 3 sizes- Standard Pin, Square Pin, Long Pin" [ref=e148] [cursor=pointer]:
+            - /url: /resize/pinterest
+            - paragraph [ref=e149]: Resize for Pinterest
+            - paragraph [ref=e150]: 3 sizes- Standard Pin, Square Pin, Long Pin
+      - generic [ref=e152]:
+        - heading "Why SammaPix?" [level=2] [ref=e153]
+        - generic [ref=e154]:
+          - generic [ref=e155]:
+            - paragraph [ref=e156]: No uploads
+            - paragraph [ref=e157]: All resizing happens entirely in your browser. Your images never leave your device.
+          - generic [ref=e158]:
+            - paragraph [ref=e159]: Batch process
+            - paragraph [ref=e160]: Resize 20+ images at once with the same settings. Download all as ZIP in seconds.
+          - generic [ref=e161]:
+            - paragraph [ref=e162]: Free forever
+            - paragraph [ref=e163]: Core resize tools are completely free. No watermarks, no ads, no file limits.
+      - generic [ref=e165]:
+        - heading "More resize tools" [level=2] [ref=e166]
+        - generic [ref=e167]:
+          - link "Compress images" [ref=e168] [cursor=pointer]:
+            - /url: /tools/compress
+            - text: Compress images
+            - img [ref=e169]
+          - link "Crop to ratio" [ref=e171] [cursor=pointer]:
+            - /url: /tools/croproatio
+            - text: Crop to ratio
+            - img [ref=e172]
+          - link "Convert to WebP" [ref=e174] [cursor=pointer]:
+            - /url: /tools/webp
+            - text: Convert to WebP
+            - img [ref=e175]
+      - generic [ref=e178]:
+        - heading "Complete Social Media Size Guide" [level=2] [ref=e179]
+        - paragraph [ref=e180]: Need dimensions for every platform in one place? Read our complete 2026 cheat sheet- every network, every format, updated for this year.
+        - link "Social Media Image Sizes 2026" [ref=e181] [cursor=pointer]:
+          - /url: /blog/image-sizes-social-media-2026
+          - text: Social Media Image Sizes 2026
+          - img [ref=e182]
+  - contentinfo [ref=e184]:
+    - generic [ref=e185]:
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - link "SammaPix - home" [ref=e188] [cursor=pointer]:
+            - /url: /
+            - img [ref=e189]
+            - generic [ref=e206]: SammaPix
+          - paragraph [ref=e207]:
+            - text: Free image tools for everyone.
+            - text: No signup, no watermarks.
+          - link "Instagram" [ref=e209] [cursor=pointer]:
+            - /url: https://www.instagram.com/lucasammarco.web/
+            - img [ref=e210]
+        - generic [ref=e213]:
+          - paragraph [ref=e214]: Tools
+          - list [ref=e215]:
+            - listitem [ref=e216]:
+              - link "Compress" [ref=e217] [cursor=pointer]:
+                - /url: /tools/compress
+            - listitem [ref=e218]:
+              - link "WebP Convert" [ref=e219] [cursor=pointer]:
+                - /url: /tools/webp
+            - listitem [ref=e220]:
+              - link "HEIC Converter" [ref=e221] [cursor=pointer]:
+                - /url: /tools/heic
+            - listitem [ref=e222]:
+              - link "AI Rename" [ref=e223] [cursor=pointer]:
+                - /url: /tools/ai-rename
+            - listitem [ref=e224]:
+              - link "EXIF Remover" [ref=e225] [cursor=pointer]:
+                - /url: /tools/exif
+            - listitem [ref=e226]:
+              - link "Film Filters" [ref=e227] [cursor=pointer]:
+                - /url: /tools/filmlab
+            - listitem [ref=e228]:
+              - link "Watermark" [ref=e229] [cursor=pointer]:
+                - /url: /tools/stampit
+            - listitem [ref=e230]:
+              - link "Crop & Ratio" [ref=e231] [cursor=pointer]:
+                - /url: /tools/croproatio
+            - listitem [ref=e232]:
+              - link "Find Duplicates" [ref=e233] [cursor=pointer]:
+                - /url: /tools/twinhunt
+            - listitem [ref=e234]:
+              - link "Sort by Location" [ref=e235] [cursor=pointer]:
+                - /url: /tools/geosort
+            - listitem [ref=e236]:
+              - link "Photo Map" [ref=e237] [cursor=pointer]:
+                - /url: /tools/travelmap
+            - listitem [ref=e238]:
+              - link "Batch Resize" [ref=e239] [cursor=pointer]:
+                - /url: /tools/resizepack
+            - listitem [ref=e240]:
+              - link "Cull" [ref=e241] [cursor=pointer]:
+                - /url: /tools/cull
+        - generic [ref=e242]:
+          - paragraph [ref=e243]: Quick Convert
+          - list [ref=e244]:
+            - listitem [ref=e245]:
+              - link "HEIC to JPG" [ref=e246] [cursor=pointer]:
+                - /url: /convert/heic-to-jpg
+            - listitem [ref=e247]:
+              - link "PNG to WebP" [ref=e248] [cursor=pointer]:
+                - /url: /convert/png-to-webp
+            - listitem [ref=e249]:
+              - link "JPG to WebP" [ref=e250] [cursor=pointer]:
+                - /url: /convert/jpg-to-webp
+        - generic [ref=e251]:
+          - paragraph [ref=e252]: Resize For
+          - list [ref=e253]:
+            - listitem [ref=e254]:
+              - link "Instagram" [ref=e255] [cursor=pointer]:
+                - /url: /resize/instagram
+            - listitem [ref=e256]:
+              - link "Facebook" [ref=e257] [cursor=pointer]:
+                - /url: /resize/facebook
+            - listitem [ref=e258]:
+              - link "YouTube" [ref=e259] [cursor=pointer]:
+                - /url: /resize/youtube-thumbnail
+            - listitem [ref=e260]:
+              - link "Twitter" [ref=e261] [cursor=pointer]:
+                - /url: /resize/twitter
+        - generic [ref=e262]:
+          - paragraph [ref=e263]: Company
+          - list [ref=e264]:
+            - listitem [ref=e265]:
+              - link "Pricing" [ref=e266] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e267]:
+              - link "Blog" [ref=e268] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e269]:
+              - link "About" [ref=e270] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e271]:
+          - paragraph [ref=e272]: Legal
+          - list [ref=e273]:
+            - listitem [ref=e274]:
+              - link "Privacy Policy" [ref=e275] [cursor=pointer]:
+                - /url: /privacy
+      - generic [ref=e276]:
+        - paragraph [ref=e277]: © 2026 SammaPix
+        - paragraph [ref=e278]:
+          - text: by
+          - link "Luca Sammarco" [ref=e279] [cursor=pointer]:
+            - /url: https://lucasammarco.com
+```

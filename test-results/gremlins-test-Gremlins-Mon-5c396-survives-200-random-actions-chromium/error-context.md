@@ -1,0 +1,363 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "SammaPix- home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: SammaPix
+      - navigation [ref=e23]:
+        - link "Tools" [ref=e24] [cursor=pointer]:
+          - /url: /tools
+        - link "Pricing" [ref=e25] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e27] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e28]:
+        - button "Toggle dark mode" [ref=e29] [cursor=pointer]
+        - link "Sign in" [ref=e30] [cursor=pointer]:
+          - /url: /auth/signin
+          - button "Sign in" [ref=e31]
+        - link "Try free" [ref=e32] [cursor=pointer]:
+          - /url: /api/auth/signin
+          - button "Try free" [ref=e33]:
+            - text: Try free
+            - img [ref=e34]
+  - main [ref=e36]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - heading "Simple pricing. No surprises." [level=1] [ref=e40]
+        - paragraph [ref=e41]: Free tools forever. Pro for daily workflows. Credits when you need more.
+        - generic [ref=e42]:
+          - button "Monthly" [ref=e43] [cursor=pointer]
+          - button "Annual Save 29%" [ref=e44] [cursor=pointer]:
+            - text: Annual
+            - generic [ref=e45]: Save 29%
+      - generic [ref=e46]:
+        - paragraph [ref=e47]: Founding Member Deal
+        - paragraph [ref=e48]: First 200 Pro subscribers lock in $4/month forever. Early adopters get a permanent discount as a thank-you for believing early.
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - heading "Free" [level=2] [ref=e52]
+            - generic [ref=e53]:
+              - generic [ref=e54]: $0
+              - generic [ref=e55]: / forever
+            - paragraph [ref=e56]: No credit card. No signup.
+          - list [ref=e57]:
+            - listitem [ref=e58]:
+              - img [ref=e59]
+              - text: All 20 tools included
+            - listitem [ref=e62]:
+              - img [ref=e63]
+              - text: 20 files per batch
+            - listitem [ref=e67]:
+              - img [ref=e68]
+              - text: 10 AI renames / day
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - text: 10 AI alt text / day
+            - listitem [ref=e73]:
+              - img [ref=e74]
+              - text: No ZIP download
+            - listitem [ref=e78]:
+              - img [ref=e79]
+              - text: Community support
+          - link "Start free →" [ref=e81] [cursor=pointer]:
+            - /url: /api/auth/signin?callbackUrl=/pricing
+        - generic [ref=e82]:
+          - generic [ref=e84]: Most popular
+          - generic [ref=e85]:
+            - heading "Pro" [level=2] [ref=e86]
+            - generic [ref=e87]:
+              - generic [ref=e88]: $7
+              - generic [ref=e89]: / month
+            - paragraph [ref=e90]: For photographers who publish.
+          - list [ref=e91]:
+            - listitem [ref=e92]:
+              - img [ref=e93]
+              - generic [ref=e96]: "Everything in Free, plus:"
+            - listitem [ref=e97]:
+              - img [ref=e98]
+              - text: Unlimited AI renames
+            - listitem [ref=e100]:
+              - img [ref=e101]
+              - text: Unlimited AI alt text
+            - listitem [ref=e103]:
+              - img [ref=e104]
+              - text: 500 files per batch
+            - listitem [ref=e108]:
+              - img [ref=e109]
+              - text: 50 MB per file
+            - listitem [ref=e113]:
+              - img [ref=e114]
+              - text: ZIP download
+            - listitem [ref=e118]:
+              - img [ref=e119]
+              - text: AI Workflow Pipeline presets
+            - listitem [ref=e121]:
+              - img [ref=e122]
+              - text: Install as desktop app
+            - listitem [ref=e125]:
+              - img [ref=e126]
+              - text: No ads, priority support
+          - button "Start free trial" [ref=e129] [cursor=pointer]
+          - paragraph [ref=e130]: 30-day money-back · Cancel anytime
+      - paragraph [ref=e131]:
+        - img [ref=e132]
+        - text: All registered users can install SammaPix as a desktop app for faster access.
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - paragraph [ref=e137]: Need more AI operations?
+          - paragraph [ref=e138]: Buy credits. Use anytime. Never expire.
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - paragraph [ref=e141]: Starter
+            - paragraph [ref=e142]: $4.99
+            - paragraph [ref=e143]: 100 credits
+            - paragraph [ref=e144]: $0.05 / credit
+            - link "Buy" [ref=e145] [cursor=pointer]:
+              - /url: /dashboard/credits
+          - generic [ref=e146]:
+            - generic [ref=e148]: Best value
+            - paragraph [ref=e149]: Standard
+            - paragraph [ref=e150]: $9.99
+            - paragraph [ref=e151]: 500 credits
+            - paragraph [ref=e152]: $0.02 / credit
+            - link "Buy" [ref=e153] [cursor=pointer]:
+              - /url: /dashboard/credits
+          - generic [ref=e154]:
+            - paragraph [ref=e155]: Mega
+            - paragraph [ref=e156]: $29.99
+            - paragraph [ref=e157]: 2,000 credits
+            - paragraph [ref=e158]: $0.015 / credit
+            - link "Buy" [ref=e159] [cursor=pointer]:
+              - /url: /dashboard/credits
+        - paragraph [ref=e160]: 1 credit = 1 AI rename or 1 AI alt text. Credits never expire. Works on any plan.
+      - generic [ref=e161]:
+        - paragraph [ref=e162]: All tools included. Both plans.
+        - paragraph [ref=e163]: Pro users get early access to new tools as they launch.
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - img [ref=e166]
+            - generic [ref=e174]: Compress
+          - generic [ref=e175]:
+            - img [ref=e176]:
+              - generic [ref=e178]: JPG
+              - generic [ref=e182]: WebP
+              - generic [ref=e185]: −30%
+            - generic [ref=e186]: WebP
+          - generic [ref=e187]:
+            - img [ref=e188]
+            - generic [ref=e191]: AI Rename
+          - generic [ref=e192]:
+            - img [ref=e193]
+            - generic [ref=e201]: EXIF Viewer
+          - generic [ref=e202]:
+            - img [ref=e203]
+            - generic [ref=e221]: Film Filters
+          - generic [ref=e222]:
+            - img [ref=e223]:
+              - generic [ref=e231]: © 2025
+            - generic [ref=e232]: Watermark
+          - generic [ref=e233]:
+            - img [ref=e234]:
+              - generic [ref=e243]: 16:9
+            - generic [ref=e244]: Crop & Ratio
+          - generic [ref=e245]:
+            - img [ref=e246]:
+              - generic [ref=e255]: =
+            - generic [ref=e256]: Find Duplicates
+          - generic [ref=e257]:
+            - img [ref=e258]
+            - generic [ref=e270]: Sort by Location
+          - generic [ref=e271]:
+            - img [ref=e272]
+            - generic [ref=e282]: Photo Map
+          - generic [ref=e283]:
+            - img [ref=e284]
+            - generic [ref=e293]: Batch Resize
+          - generic [ref=e294]:
+            - img [ref=e295]
+            - generic [ref=e306]: Photo Cull
+          - generic [ref=e307]:
+            - img [ref=e308]:
+              - generic [ref=e317]: JPG
+            - generic [ref=e320]: HEIC
+        - generic [ref=e321]:
+          - generic [ref=e322]: AI Alt Text
+          - generic [ref=e323]: Transcribe
+          - generic [ref=e324]: Web Optimize
+          - generic [ref=e325]: Blog Ready
+          - generic [ref=e326]: AI Photo Sort
+          - generic [ref=e327]: Batch Rename
+          - generic [ref=e328]: AI Workflow
+      - generic [ref=e329]:
+        - paragraph [ref=e330]: What Pro unlocks
+        - paragraph [ref=e331]: The workflow upgrades that actually matter.
+        - generic [ref=e332]:
+          - generic [ref=e333]:
+            - generic [ref=e334]: AI Workflow
+            - generic [ref=e335]: One-click pipeline
+            - generic [ref=e336]: Blog, Instagram, E-commerce presets
+          - generic [ref=e337]:
+            - generic [ref=e338]: Batch Power
+            - generic [ref=e339]: 500 files at once
+            - generic [ref=e340]: Full wedding shoots in one go
+          - generic [ref=e341]:
+            - generic [ref=e342]: Unlimited AI
+            - generic [ref=e343]: Renames + alt text
+            - generic [ref=e344]: No daily caps, process entire shoots
+          - generic [ref=e345]:
+            - generic [ref=e346]: Zero Ads
+            - generic [ref=e347]: Clean workspace
+            - generic [ref=e348]: No distractions while you work
+      - generic [ref=e349]:
+        - paragraph [ref=e350]: Built for photographers who publish
+        - paragraph [ref=e351]: "SammaPix Pro is designed for one specific workflow: shoot, edit, optimize, publish- without switching between five different tools. Whether you run a photography blog, post on Instagram, or manage an e-commerce catalog, the AI pipeline handles the tedious parts so you can focus on the work."
+        - list [ref=e352]:
+          - listitem [ref=e353]: Compress and rename 500 photos in a single batch
+          - listitem [ref=e354]: AI-generated SEO filenames ready for WordPress, Webflow, or Shopify
+          - listitem [ref=e355]: Alt text generated automatically- paste and publish
+          - listitem [ref=e356]: 100% browser-based- your RAW files never touch a server
+          - listitem [ref=e357]: Trusted by photographers in 40+ countries
+      - paragraph [ref=e359]: Trusted by photographers in 40+ countries · 100% browser-based · No data shared
+      - generic [ref=e360]:
+        - heading "Common questions" [level=2] [ref=e361]
+        - generic [ref=e362]:
+          - button "Is SammaPix free? +" [ref=e364] [cursor=pointer]:
+            - text: Is SammaPix free?
+            - generic [ref=e365]: +
+          - button "What are credits? +" [ref=e367] [cursor=pointer]:
+            - text: What are credits?
+            - generic [ref=e368]: +
+          - button "What does Pro include? +" [ref=e370] [cursor=pointer]:
+            - text: What does Pro include?
+            - generic [ref=e371]: +
+          - button "Why upgrade to Pro? +" [ref=e373] [cursor=pointer]:
+            - text: Why upgrade to Pro?
+            - generic [ref=e374]: +
+          - button "What is the AI Workflow Pipeline? +" [ref=e376] [cursor=pointer]:
+            - text: What is the AI Workflow Pipeline?
+            - generic [ref=e377]: +
+          - button "Do I need to create an account? +" [ref=e379] [cursor=pointer]:
+            - text: Do I need to create an account?
+            - generic [ref=e380]: +
+          - button "Are my images uploaded to a server? +" [ref=e382] [cursor=pointer]:
+            - text: Are my images uploaded to a server?
+            - generic [ref=e383]: +
+          - button "Can I cancel at any time? +" [ref=e385] [cursor=pointer]:
+            - text: Can I cancel at any time?
+            - generic [ref=e386]: +
+  - contentinfo [ref=e387]:
+    - generic [ref=e388]:
+      - generic [ref=e389]:
+        - generic [ref=e390]:
+          - link "SammaPix - home" [ref=e391] [cursor=pointer]:
+            - /url: /
+            - img [ref=e392]
+            - generic [ref=e409]: SammaPix
+          - paragraph [ref=e410]:
+            - text: Free image tools for everyone.
+            - text: No signup, no watermarks.
+          - link "Instagram" [ref=e412] [cursor=pointer]:
+            - /url: https://www.instagram.com/lucasammarco.web/
+            - img [ref=e413]
+        - generic [ref=e416]:
+          - paragraph [ref=e417]: Tools
+          - list [ref=e418]:
+            - listitem [ref=e419]:
+              - link "Compress" [ref=e420] [cursor=pointer]:
+                - /url: /tools/compress
+            - listitem [ref=e421]:
+              - link "WebP Convert" [ref=e422] [cursor=pointer]:
+                - /url: /tools/webp
+            - listitem [ref=e423]:
+              - link "HEIC Converter" [ref=e424] [cursor=pointer]:
+                - /url: /tools/heic
+            - listitem [ref=e425]:
+              - link "AI Rename" [ref=e426] [cursor=pointer]:
+                - /url: /tools/ai-rename
+            - listitem [ref=e427]:
+              - link "EXIF Remover" [ref=e428] [cursor=pointer]:
+                - /url: /tools/exif
+            - listitem [ref=e429]:
+              - link "Film Filters" [ref=e430] [cursor=pointer]:
+                - /url: /tools/filmlab
+            - listitem [ref=e431]:
+              - link "Watermark" [ref=e432] [cursor=pointer]:
+                - /url: /tools/stampit
+            - listitem [ref=e433]:
+              - link "Crop & Ratio" [ref=e434] [cursor=pointer]:
+                - /url: /tools/croproatio
+            - listitem [ref=e435]:
+              - link "Find Duplicates" [ref=e436] [cursor=pointer]:
+                - /url: /tools/twinhunt
+            - listitem [ref=e437]:
+              - link "Sort by Location" [ref=e438] [cursor=pointer]:
+                - /url: /tools/geosort
+            - listitem [ref=e439]:
+              - link "Photo Map" [ref=e440] [cursor=pointer]:
+                - /url: /tools/travelmap
+            - listitem [ref=e441]:
+              - link "Batch Resize" [ref=e442] [cursor=pointer]:
+                - /url: /tools/resizepack
+            - listitem [ref=e443]:
+              - link "Cull" [ref=e444] [cursor=pointer]:
+                - /url: /tools/cull
+        - generic [ref=e445]:
+          - paragraph [ref=e446]: Quick Convert
+          - list [ref=e447]:
+            - listitem [ref=e448]:
+              - link "HEIC to JPG" [ref=e449] [cursor=pointer]:
+                - /url: /convert/heic-to-jpg
+            - listitem [ref=e450]:
+              - link "PNG to WebP" [ref=e451] [cursor=pointer]:
+                - /url: /convert/png-to-webp
+            - listitem [ref=e452]:
+              - link "JPG to WebP" [ref=e453] [cursor=pointer]:
+                - /url: /convert/jpg-to-webp
+        - generic [ref=e454]:
+          - paragraph [ref=e455]: Resize For
+          - list [ref=e456]:
+            - listitem [ref=e457]:
+              - link "Instagram" [ref=e458] [cursor=pointer]:
+                - /url: /resize/instagram
+            - listitem [ref=e459]:
+              - link "Facebook" [ref=e460] [cursor=pointer]:
+                - /url: /resize/facebook
+            - listitem [ref=e461]:
+              - link "YouTube" [ref=e462] [cursor=pointer]:
+                - /url: /resize/youtube-thumbnail
+            - listitem [ref=e463]:
+              - link "Twitter" [ref=e464] [cursor=pointer]:
+                - /url: /resize/twitter
+        - generic [ref=e465]:
+          - paragraph [ref=e466]: Company
+          - list [ref=e467]:
+            - listitem [ref=e468]:
+              - link "Pricing" [ref=e469] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e470]:
+              - link "Blog" [ref=e471] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e472]:
+              - link "About" [ref=e473] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e474]:
+          - paragraph [ref=e475]: Legal
+          - list [ref=e476]:
+            - listitem [ref=e477]:
+              - link "Privacy Policy" [ref=e478] [cursor=pointer]:
+                - /url: /privacy
+      - generic [ref=e479]:
+        - paragraph [ref=e480]: © 2026 SammaPix
+        - paragraph [ref=e481]:
+          - text: by
+          - link "Luca Sammarco" [ref=e482] [cursor=pointer]:
+            - /url: https://lucasammarco.com
+```

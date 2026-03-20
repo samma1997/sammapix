@@ -1,0 +1,277 @@
+SammaPix Playwright E2E Tests — File Manifest
+Created: March 20, 2026
+
+CONFIGURATION FILES
+==================
+/Users/mac/sammapix/playwright.config.ts
+  - Playwright configuration
+  - Browser: Chromium
+  - Base URL: http://localhost:3000
+  - Timeout: 30 seconds
+  - Screenshots & video on failure
+  - Size: 713 bytes
+
+/Users/mac/sammapix/package.json
+  - Updated with test scripts
+  - test:e2e (run all tests)
+  - test:e2e:ui (interactive mode)
+  - test:e2e:debug (debug mode)
+  - test:e2e:headed (visible browser)
+
+TEST FILES
+==========
+/Users/mac/sammapix/tests/utils.ts
+  - Shared test utilities
+  - Image creation functions
+  - Tools list (21 tools)
+  - Tool name mappings
+  - Size: 2.7 KB
+
+/Users/mac/sammapix/tests/fixtures.ts
+  - Test fixtures and helpers
+  - Console error tracking
+  - Screenshot helper
+  - Reusable test functions
+  - Size: 4.5 KB
+
+/Users/mac/sammapix/tests/navigation.spec.ts
+  - 9 tests for site navigation
+  - Homepage, tools page, navbar, footer
+  - Mobile responsive (375px)
+  - Dark mode toggle
+  - 404 page handling
+  - Size: 5.9 KB
+
+/Users/mac/sammapix/tests/tool-pages.spec.ts
+  - 21 tests (one per tool)
+  - Tests all tools: compress, webp, heic, exif, etc.
+  - Verifies page loads, title, dropzone
+  - Checks for console errors
+  - Size: 2.2 KB
+
+/Users/mac/sammapix/tests/compress-flow.spec.ts
+  - 4 tests for compress workflow
+  - Upload PNG → compress → download
+  - Multiple file handling
+  - Invalid file type handling
+  - Page layout verification
+  - Size: 5.3 KB
+
+/Users/mac/sammapix/tests/convert-flow.spec.ts
+  - 4 tests for conversion workflows
+  - WebP conversion (JPG → WebP)
+  - HEIC conversion
+  - Format information
+  - No console errors check
+  - Size: 3.2 KB
+
+/Users/mac/sammapix/tests/blog.spec.ts
+  - 6 tests for blog & content
+  - Blog index with posts
+  - Blog post metadata (H1, description)
+  - Internal links verification
+  - FAQ sections
+  - Size: 4.8 KB
+
+/Users/mac/sammapix/tests/pricing.spec.ts
+  - 6 tests for pricing page
+  - Plans visible
+  - Free and Pro tiers
+  - CTA buttons work
+  - Page structure
+  - Size: 5.0 KB
+
+/Users/mac/sammapix/tests/seo-checks.spec.ts
+  - 13 tests for SEO validation
+  - Meta tags, titles, descriptions
+  - Sitemap and robots.txt
+  - Structured data (JSON-LD)
+  - OG tags for sharing
+  - Size: 6.1 KB
+
+/Users/mac/sammapix/tests/security.spec.ts
+  - 10 tests for security
+  - Authentication required on APIs
+  - Security headers present
+  - No sensitive data in console
+  - CORS configuration
+  - XSS prevention
+  - Size: 5.8 KB
+
+/Users/mac/sammapix/tests/accessibility.spec.ts
+  - 10 tests for accessibility
+  - Heading hierarchy (H1 first)
+  - Alt text on images
+  - Button labels
+  - Color contrast
+  - Keyboard navigation
+  - Size: 7.5 KB
+
+/Users/mac/sammapix/tests/performance.spec.ts
+  - 9 tests for performance
+  - Load times < 3 seconds
+  - No JavaScript errors
+  - No broken images
+  - Network request success
+  - Bundle size checks
+  - Size: 5.6 KB
+
+DOCUMENTATION FILES
+===================
+/Users/mac/sammapix/INDEX-E2E-TESTS.md
+  - Master index and entry point
+  - Overview of all modules
+  - Quick start guide
+  - File structure
+  - Next steps
+  - Size: 11+ KB
+
+/Users/mac/sammapix/TESTS-COMPLETE.md
+  - Complete setup summary
+  - Files created and overview
+  - Test statistics
+  - Key features
+  - Performance baseline
+  - Size: 8.9 KB
+
+/Users/mac/sammapix/E2E-TESTS-SUMMARY.md
+  - Detailed overview document
+  - Test file descriptions
+  - Setup instructions
+  - Debugging guide
+  - CI/CD integration
+  - Size: 10 KB
+
+/Users/mac/sammapix/PLAYWRIGHT-QUICK-REFERENCE.md
+  - Quick reference guide
+  - Command cheat sheet
+  - Common code patterns
+  - Selector guides
+  - Debugging tips
+  - Troubleshooting table
+  - Size: 8.6 KB
+
+/Users/mac/sammapix/tests/README.md
+  - Comprehensive test guide
+  - Setup and running tests
+  - Detailed test descriptions
+  - Debugging workflows
+  - Common issues & solutions
+  - CI/CD integration
+  - Best practices
+  - Extending tests
+  - Size: 9.3 KB
+
+/Users/mac/sammapix/tests/.gitignore
+  - Test artifacts to ignore
+  - Screenshots/, test-results/
+  - playwright-report/
+
+/Users/mac/sammapix/FILE-MANIFEST.txt
+  - This file
+  - Lists all created files
+  - File descriptions
+  - Size information
+
+OTHER FILES
+===========
+/Users/mac/sammapix/verify-tests.sh
+  - Verification script
+  - Checks all files exist
+  - Counts test cases
+  - Verifies setup
+  - Status: Executable
+
+TOTAL STATISTICS
+================
+Total Files: 22
+Test Files: 10 (.spec.ts files)
+Utility Files: 2 (utils.ts, fixtures.ts)
+Documentation: 6 files
+Config: 1 file (playwright.config.ts)
+Scripts: 1 file (verify-tests.sh)
+
+Test Cases: 92
+Test Modules: 10
+Tools Tested: 21
+
+Total Documentation: 50+ KB
+Total Test Code: 60+ KB
+Total Project Size: 120+ KB
+
+QUICK FILE REFERENCE
+====================
+
+Start reading:
+  1. INDEX-E2E-TESTS.md (overview)
+  2. PLAYWRIGHT-QUICK-REFERENCE.md (commands)
+  3. tests/README.md (full guide)
+
+Run tests:
+  npm run test:e2e:ui
+
+Check scripts:
+  grep "test:" /Users/mac/sammapix/package.json
+
+List test files:
+  ls -la /Users/mac/sammapix/tests/*.spec.ts
+
+View documentation:
+  /Users/mac/sammapix/[DOCUMENT].md
+
+FILE PATHS
+==========
+All files relative to: /Users/mac/sammapix/
+
+Configuration:
+  playwright.config.ts
+  package.json
+
+Tests:
+  tests/utils.ts
+  tests/fixtures.ts
+  tests/navigation.spec.ts
+  tests/tool-pages.spec.ts
+  tests/compress-flow.spec.ts
+  tests/convert-flow.spec.ts
+  tests/blog.spec.ts
+  tests/pricing.spec.ts
+  tests/seo-checks.spec.ts
+  tests/security.spec.ts
+  tests/accessibility.spec.ts
+  tests/performance.spec.ts
+
+Documentation:
+  INDEX-E2E-TESTS.md
+  TESTS-COMPLETE.md
+  E2E-TESTS-SUMMARY.md
+  PLAYWRIGHT-QUICK-REFERENCE.md
+  tests/README.md
+
+Gitignore:
+  tests/.gitignore
+
+Scripts:
+  verify-tests.sh
+
+Manifest:
+  FILE-MANIFEST.txt (this file)
+
+NEXT STEPS
+==========
+1. Read: INDEX-E2E-TESTS.md
+2. Run: npm run dev
+3. Run: npm run test:e2e:ui
+4. Watch tests execute
+5. Check results in HTML report
+
+SUPPORT
+=======
+Questions? Check:
+  - PLAYWRIGHT-QUICK-REFERENCE.md (for commands)
+  - tests/README.md (for guidance)
+  - E2E-TESTS-SUMMARY.md (for setup)
+
+Created: March 20, 2026
+Status: Ready to run
+Framework: Playwright 1.58.2
