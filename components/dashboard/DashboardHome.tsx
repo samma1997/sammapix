@@ -784,7 +784,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       </section>
 
       {/* -- Sticky search bar + Category tabs -- */}
-      <section className="sticky top-0 z-30 bg-white/95 dark:bg-[#191919]/95 backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 -mt-2">
+      <section className="sticky top-14 md:top-0 z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 -mt-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
         <div className="flex flex-col gap-2.5">
           {/* Search input */}
           <div className="relative">

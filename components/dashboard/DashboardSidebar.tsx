@@ -435,14 +435,52 @@ export default function DashboardSidebar({
 
   return (
     <>
-      {/* Mobile hamburger button */}
-      <button
-        className="md:hidden fixed top-3 left-3 z-40 p-2 rounded-md bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] shadow-sm"
-        onClick={() => setMobileOpen(true)}
-        aria-label="Open sidebar"
-      >
-        <Menu className="h-4 w-4" strokeWidth={1.5} />
-      </button>
+      {/* Mobile top bar — solid background, hamburger left, logo right */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 flex items-center justify-between px-3 bg-white dark:bg-[#191919] border-b border-[#E5E5E5] dark:border-[#333]">
+        <button
+          className="p-2 rounded-md text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
+          onClick={() => setMobileOpen(true)}
+          aria-label="Open sidebar"
+        >
+          <Menu className="h-4 w-4" strokeWidth={1.5} />
+        </button>
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-2 select-none"
+          aria-label="SammaPix -- dashboard"
+          onClick={() => setMobileOpen(false)}
+        >
+          <span className="font-semibold text-[#171717] dark:text-[#E5E5E5] text-sm tracking-tight">
+            SammaPix
+          </span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            className="[--sp-fill:#171717] dark:[--sp-fill:#E5E5E5]"
+          >
+            <rect x="2" y="2" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="6" y="2" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="10" y="2" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="14" y="2" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="2" y="6" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="14" y="6" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="2" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="14" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="2" y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="6" y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="10" y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="14" y="14" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="6" y="6" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="10" y="6" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="6" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
+            <rect x="10" y="10" width="3" height="3" fill="var(--sp-fill,#171717)" />
+          </svg>
+        </Link>
+      </div>
 
       {/* Mobile overlay backdrop */}
       {mobileOpen && (
