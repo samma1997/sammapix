@@ -43,11 +43,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Parse plan type from request body
+  // Parse plan type and Meta cookies from request body
   let plan: "monthly" | "annual" = "monthly";
+  let fbp: string | undefined;
+  let fbc: string | undefined;
   try {
     const body = await req.json().catch(() => ({}));
     if (body.plan === "annual") plan = "annual";
+    if (body.fbp) fbp = String(body.fbp);
+    if (body.fbc) fbc = String(body.fbc);
   } catch {
     // default to monthly
   }
@@ -107,6 +111,8 @@ export async function POST(req: NextRequest) {
       email: session.user.email,
       ipAddress: (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? undefined,
       userAgent: req.headers.get("user-agent") ?? undefined,
+      fbp,
+      fbc,
       customData: { currency: "USD", value: plan === "annual" ? 60 : 7 },
     }).catch(() => {});
 

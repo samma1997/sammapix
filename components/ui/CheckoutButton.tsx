@@ -38,11 +38,19 @@ export default function CheckoutButton({
     }
     setLoading(true);
     try {
+      // Read Meta cookies for Conversions API attribution
+      const getCookie = (name: string) =>
+        document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))?.[1] ?? "";
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify({
+          plan,
+          fbp: getCookie("_fbp"),
+          fbc: getCookie("_fbc"),
+        }),
       });
       const data = (await res.json()) as { url?: string; error?: string; code?: string };
       if (data.url) {
