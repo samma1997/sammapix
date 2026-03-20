@@ -92,24 +92,27 @@ export default function CookieConsent() {
   if (!mounted || consent !== "pending") return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#1E1E1E] px-4 py-4 shadow-[0_-2px_8px_rgba(0,0,0,0.06)]">
-      <div className="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed">
-          We use cookies for analytics and advertising. Essential cookies (authentication) are always active.{" "}
-          <a href="/privacy#cookies" className="underline hover:text-[#171717] dark:hover:text-[#E5E5E5]">
-            Learn more
-          </a>
-        </p>
-        <div className="flex shrink-0 gap-2">
+    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-sm z-50 rounded-xl border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#1E1E1E] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+      <div className="flex flex-col gap-4">
+        <div>
+          <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">Cookie preferences</p>
+          <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
+            We use cookies for analytics and advertising to improve your experience.{" "}
+            <a href="/privacy#cookies" className="underline hover:text-[#6366F1]">
+              Learn more
+            </a>
+          </p>
+        </div>
+        <div className="flex gap-2">
           <button
             onClick={handleReject}
-            className="rounded-md border border-[#E5E5E5] dark:border-[#444] bg-white dark:bg-[#252525] px-4 py-2 text-sm font-medium text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#333] transition-colors"
+            className="flex-1 rounded-lg border border-[#E5E5E5] dark:border-[#444] bg-white dark:bg-[#252525] px-4 py-2.5 text-sm font-medium text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#333] transition-colors"
           >
             Reject
           </button>
           <button
             onClick={handleAccept}
-            className="rounded-md bg-[#171717] dark:bg-[#E5E5E5] px-4 py-2 text-sm font-medium text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
+            className="flex-1 rounded-lg bg-[#6366F1] px-4 py-2.5 text-sm font-medium text-white hover:bg-[#5558E6] transition-colors"
           >
             Accept
           </button>
