@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       // Clear the referral cookie after successful claim
       const response = NextResponse.json({
         success: true,
-        message: "Referral bonus applied! You received 50 bonus AI operations.",
+        message: "Referral bonus applied! You received 50 bonus AI credits.",
       });
       response.cookies.set("sammapix_ref", "", {
         maxAge: 0,

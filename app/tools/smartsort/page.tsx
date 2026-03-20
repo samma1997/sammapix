@@ -72,7 +72,7 @@ const faqItems = [
   },
   {
     q: "Do I need an account?",
-    a: "Yes. SmartSort uses AI and requires a free account. Free plan includes 10 AI operations per day. Pro is unlimited.",
+    a: "Yes. SmartSort uses AI and requires a free account. Free plan includes 10 AI credits per day. Pro is unlimited.",
   },
   {
     q: "Is my data safe?",

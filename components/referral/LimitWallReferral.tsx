@@ -15,7 +15,7 @@ interface LimitWallReferralProps {
 /**
  * Small section to embed inside existing limit/upsell modals.
  * Shows a referral CTA for Free plan users as an alternative to upgrading.
- * "Or earn free AI ops by inviting a friend"
+ * "Or earn free AI credits by inviting a friend"
  */
 export default function LimitWallReferral({ userPlan, className }: LimitWallReferralProps) {
   const [referralLink, setReferralLink] = useState<string | null>(null);
@@ -56,10 +56,10 @@ export default function LimitWallReferral({ userPlan, className }: LimitWallRefe
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-0.5">
-            Or earn free AI ops by inviting a friend
+            Or earn free AI credits by inviting a friend
           </p>
           <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-2.5">
-            They get 50 ops, you get 25. No upgrade needed.
+            They get 50 credits, you get 25. No upgrade needed.
           </p>
           <button
             onClick={handleCopy}

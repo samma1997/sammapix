@@ -255,7 +255,7 @@ export default function AltTextClient() {
               Sign in to use AI Alt Text Generator
             </p>
             <p className="text-xs text-[#737373] mb-3">
-              Free accounts get {AI_OPS_FREE_PER_DAY} AI ops per day. No credit card required.
+              Free accounts get {AI_OPS_FREE_PER_DAY} AI credits per day. No credit card required.
             </p>
             <button
               onClick={() => signIn()}
@@ -475,7 +475,7 @@ export default function AltTextClient() {
       {/* PRO badge note */}
       {isLoggedIn && (
         <p className="text-xs text-[#A3A3A3] text-center">
-          Free: {AI_OPS_FREE_PER_DAY} AI ops/day &middot;{" "}
+          Free: {AI_OPS_FREE_PER_DAY} AI credits/day &middot;{" "}
           <a href="/dashboard/upgrade" className="text-[#6366F1] hover:underline">
             Pro
           </a>{" "}

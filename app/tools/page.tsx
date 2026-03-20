@@ -188,7 +188,7 @@ export default function ToolsPage() {
             </table>
           </div>
           <p className="text-xs text-gray-500 dark:text-[#737373] mt-4">
-            All tools process images in your browser. AI tools send only a thumbnail to Google Gemini. Free tier includes 10 AI operations/day.
+            All tools process images in your browser. AI tools send only a thumbnail to Google Gemini. Free tier includes 10 AI credits/day.
           </p>
         </div>
       </section>

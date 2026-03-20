@@ -32,7 +32,7 @@ export default function SidebarReferralBadge({ className }: SidebarReferralBadge
 
   return (
     <Link
-      href="/referral"
+      href="/dashboard/referral"
       className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors duration-150 text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5] ${className ?? ""}`}
     >
       {referralCount > 0 ? (

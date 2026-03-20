@@ -141,7 +141,7 @@ export function Day21Email({ name }: Day21EmailProps) {
             <Text style={planLabel}>Free plan</Text>
             <Text style={planItem}>✓ Compress images (unlimited)</Text>
             <Text style={planItem}>✓ WebP conversion (unlimited)</Text>
-            <Text style={planItem}>✓ 10 AI operations per day</Text>
+            <Text style={planItem}>✓ 10 AI credits per day</Text>
             <Text style={planItem}>✓ Up to 20 files at once</Text>
             <Text style={planItemCrossed}>✗ No ZIP download</Text>
           </Section>

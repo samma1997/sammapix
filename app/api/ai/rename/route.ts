@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
       // No daily quota left AND no credits- block the request
       return NextResponse.json(
         {
-          error: "Daily limit reached. Buy credits for more AI operations.",
+          error: "Daily limit reached. Buy more AI credits.",
           code: "RATE_LIMITED",
           remaining: 0,
           limit: dailyLimit,

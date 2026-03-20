@@ -85,7 +85,7 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
   if (totalReferrals >= 5) {
     return (
       <Link
-        href="/referral"
+        href="/dashboard/referral"
         className="flex items-center gap-3 px-4 py-3 border border-[#8B5CF6]/20 bg-[#8B5CF6]/5 dark:bg-[#8B5CF6]/10 rounded-xl hover:bg-[#8B5CF6]/10 dark:hover:bg-[#8B5CF6]/15 transition-colors"
       >
         <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#8B5CF6] text-white shrink-0">
@@ -95,7 +95,7 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
           <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
             {totalReferrals} referrals
           </p>
-          <p className="text-xs text-[#8B5CF6]">{stats.opsEarned} ops earned</p>
+          <p className="text-xs text-[#8B5CF6]">{stats.opsEarned} credits earned</p>
         </div>
         <ArrowRight className="h-4 w-4 text-[#8B5CF6] shrink-0" strokeWidth={1.5} />
       </Link>
@@ -117,7 +117,7 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
             </p>
           </div>
           <Link
-            href="/referral"
+            href="/dashboard/referral"
             className="text-xs text-[#8B5CF6] hover:text-[#7C3AED] transition-colors"
           >
             View all
@@ -128,7 +128,7 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
         <div className="mb-3">
           <div className="flex items-center justify-between text-xs text-[#A3A3A3] mb-1.5">
             <span>{totalReferrals}/{nextMilestone} for free Pro month</span>
-            <span>{stats.opsEarned} ops earned</span>
+            <span>{stats.opsEarned} credits earned</span>
           </div>
           <div className="w-full h-1.5 bg-[#F5F5F5] dark:bg-[#252525] rounded-full overflow-hidden">
             <div
@@ -164,10 +164,10 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
         </div>
         <div>
           <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">
-            Invite friends, earn AI ops
+            Invite friends, earn AI credits
           </h3>
           <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-            Share your link. They get 50 free AI ops, you earn 25 for each signup.
+            Share your link. They get 50 free AI credits, you earn 25 for each signup.
           </p>
         </div>
       </div>
@@ -187,7 +187,7 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
               {copied ? "Copied!" : "Copy link"}
             </button>
             <Link
-              href="/referral"
+              href="/dashboard/referral"
               className="px-3 py-2 border border-[#E5E5E5] dark:border-[#333] rounded-lg text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
             >
               Details
@@ -195,7 +195,7 @@ export default function DashboardReferralCard({ userPlan }: DashboardReferralCar
           </>
         ) : (
           <Link
-            href="/referral"
+            href="/dashboard/referral"
             className="flex items-center justify-center gap-2 flex-1 px-3 py-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-medium rounded-lg transition-colors"
           >
             <Gift className="h-4 w-4" strokeWidth={1.5} />

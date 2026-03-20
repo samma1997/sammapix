@@ -173,7 +173,7 @@ export default function AiRenamePage() {
             What is AI Image Rename?
           </h2>
           <p className="text-sm text-[#737373] leading-relaxed mb-6">
-            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename- the exact format Google recommends for image SEO. Free accounts get 10 AI operations per day. Each rename takes under 3 seconds.
+            AI Image Rename is a free tool that uses Google Gemini AI to automatically generate SEO-friendly filenames for your photos. Upload an image, and Gemini analyzes it visually and produces a descriptive, lowercase, hyphenated filename- the exact format Google recommends for image SEO. Free accounts get 10 AI credits per day. Each rename takes under 3 seconds.
           </p>
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
             Why image filenames matter for SEO
@@ -313,7 +313,7 @@ export default function AiRenamePage() {
                 name: "How many renames can I do for free?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Free accounts get 10 AI operations per day. Each rename takes under 3 seconds. Pro plans unlock 200 renames per day, plus other features like batch processing and zero ads.",
+                  text: "Free accounts get 10 AI credits per day. Each rename takes under 3 seconds. Pro plans unlock 200 renames per day, plus other features like batch processing and zero ads.",
                 },
               },
               {

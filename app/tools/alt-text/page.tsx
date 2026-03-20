@@ -266,7 +266,7 @@ export default function AltTextPage() {
                 name: "How many alt texts can I generate for free?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Free accounts get 10 AI operations per day after signing in. Pro accounts unlock 200 per day. Signing in is free- no credit card required.",
+                  text: "Free accounts get 10 AI credits per day after signing in. Pro accounts unlock 200 per day. Signing in is free- no credit card required.",
                 },
               },
               {

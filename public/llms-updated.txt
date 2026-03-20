@@ -129,7 +129,7 @@
     - What: Google Gemini AI generates SEO-friendly filenames and alt text
     - Example: Photo of Eiffel Tower → "eiffel-tower-paris-travel-photography.jpg"
     - Generates: Filename, alt text, caption, search tags
-    - Free tier: 10 AI operations per day
+    - Free tier: 10 AI credits per day
     - Pro tier: 500+ per day (unlimited)
     - Speed: Processes in 2-5 seconds per image
     - Use case: Photographers + content creators improving SEO and accessibility
@@ -218,7 +218,7 @@
 ### Free Plan
 - All 20 tools fully functional
 - 20 files per batch
-- 10 AI operations per day (across AI Rename + AI Alt Text + Smart Sort)
+- 10 AI credits per day (across AI Rename + AI Alt Text + Smart Sort)
 - Ads visible
 - No account required for most tools
 - **Cost:** Free forever
@@ -226,7 +226,7 @@
 ### Pro Plan ($9/month or $79/year)
 - Everything in Free plan, plus:
 - 500 files per batch
-- 500+ AI operations per day (unlimited)
+- 500+ AI credits per day (unlimited)
 - ZIP download for batch operations
 - No ads
 - Dashboard with usage history

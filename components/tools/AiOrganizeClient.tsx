@@ -302,7 +302,7 @@ export default function AiOrganizeClient() {
     }
 
     if (currentAiRemaining <= 0) {
-      setLimitError("You've used all your AI operations for today. Upgrade to Pro for 500/day.");
+      setLimitError("You've used all your AI credits for today. Upgrade to Pro for 500/day.");
       setPhase("upload");
       return;
     }

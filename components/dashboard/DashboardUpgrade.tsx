@@ -142,7 +142,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           <div className="space-y-3 mb-8">
             {[
               { icon: Zap, text: "AI Workflow Pipeline", sub: "Blog, Instagram, E-commerce presets -- run everything in one click" },
-              { icon: Sparkles, text: "200 AI operations / day", sub: "AI Rename + AI Alt Text included daily" },
+              { icon: Sparkles, text: "200 AI credits / day", sub: "AI Rename + AI Alt Text included daily" },
               { icon: Image, text: "500 files per batch", sub: "Process full shoots at once" },
               { icon: Coins, text: "Buy extra AI credits", sub: "When 200/day isn't enough -- credits never expire" },
               { icon: Shield, text: "No ads", sub: "Clean workspace, no distractions" },
@@ -198,7 +198,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           </div>
           <div className="space-y-0">
             {[
-              { feature: "AI operations / day", free: "10", pro: "200" },
+              { feature: "AI credits / day", free: "10", pro: "200" },
               { feature: "Files per batch", free: "20", pro: "500" },
               { feature: "Max file size", free: "10 MB", pro: "50 MB" },
               { feature: "ZIP download", free: null, pro: true },
