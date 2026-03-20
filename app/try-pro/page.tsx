@@ -156,11 +156,6 @@ export default function TryProPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
               {
-                title: "AI Workflow",
-                value: "1-click",
-                desc: "Blog, Instagram, E-commerce presets. One click, done.",
-              },
-              {
                 title: "AI Smart Rename",
                 value: "200/day",
                 desc: "SEO-optimized filenames per day with Gemini AI",

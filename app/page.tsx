@@ -271,24 +271,6 @@ export default function HomePage() {
       {/* -- All Tools Grid (client component with tabs) -- */}
       <HomepageToolGrid />
 
-      {/* -- AI Workflow CTA -- */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            AI Workflow Pipeline
-          </h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-5 max-w-md mx-auto">
-            Run your entire image pipeline in one step. Choose a preset or build your own workflow.
-          </p>
-          <Link
-            href="/tools/workflow"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#D4D4D4] transition-colors"
-          >
-            Try AI Workflow
-            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-          </Link>
-        </div>
-      </section>
 
       {/* -- How SammaPix Works -- */}
       <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">

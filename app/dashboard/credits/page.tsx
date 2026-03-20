@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "AI Credits | SammaPix",
-  description: "Buy AI credits for rename, alt text, and workflow operations.",
+  description: "Buy AI credits for rename, alt text, and smart sort operations.",
   robots: { index: false, follow: false },
 };
 

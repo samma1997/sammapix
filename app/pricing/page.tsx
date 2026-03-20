@@ -372,7 +372,7 @@ export default function PricingPage() {
           </div>
           {/* Combo tools listed below */}
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            {["AI Alt Text", "Transcribe", "Web Optimize", "Blog Ready", "AI Photo Sort", "Batch Rename", "AI Workflow"].map((name) => (
+            {["AI Alt Text", "Transcribe", "Web Optimize", "Blog Ready", "AI Photo Sort", "Batch Rename"].map((name) => (
               <span
                 key={name}
                 className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] px-3 py-1.5 rounded-md border border-[#F5F5F5] dark:border-[#252525] bg-white dark:bg-[#191919]"
@@ -393,7 +393,7 @@ export default function PricingPage() {
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E5E5] dark:divide-[#2A2A2A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden">
             {[
-              { value: "AI Workflow", unit: "One-click pipeline",      sub: "Blog, Instagram, E-commerce presets" },
+              { value: "Combo Tools", unit: "Multi-step pipelines",     sub: "WebLift, BlogDrop presets" },
               { value: "Batch Power", unit: "500 files at once",       sub: "Full wedding shoots in one go" },
               { value: "Unlimited AI", unit: "Renames + alt text",     sub: "No daily caps, process entire shoots" },
               { value: "Zero Ads",    unit: "Clean workspace",          sub: "No distractions while you work" },
@@ -465,15 +465,11 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($7/month or $60/year) unlocks unlimited AI renames, unlimited AI alt text, the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support."
+              a="Pro ($7/month or $60/year) unlocks unlimited AI renames, unlimited AI alt text, combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
             />
             <FaqItem
               q="Why upgrade to Pro?"
-              a="Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally- no subscription required."
-            />
-            <FaqItem
-              q="What is the AI Workflow Pipeline?"
-              a="The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations- blog posts, Instagram galleries, or product pages. It's the difference between processing files one by one and running your entire shoot through in minutes."
+              a="Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally- no subscription required."
             />
             <FaqItem
               q="Do I need to create an account?"
@@ -592,15 +588,7 @@ export default function PricingPage() {
                   name: "Why upgrade to Pro?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, the AI Workflow Pipeline, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "What is the AI Workflow Pipeline?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "The AI Workflow Pipeline lets you compress, rename, and generate alt text for a batch of photos in one click, using presets optimized for different publishing destinations- blog posts, Instagram galleries, or product pages.",
+                    text: "Pro is for photographers with a daily publishing workflow: 500-file batches, unlimited AI renames and alt text, ZIP download, combo tools like WebLift and BlogDrop, and zero ads. Credits are a great option if you only need extra AI operations occasionally.",
                   },
                 },
                 {
@@ -608,7 +596,7 @@ export default function PricingPage() {
                   name: "Do I need to create an account?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "No account needed for compression, WebP conversion, resizing, EXIF removal, and other browser-based tools. An account is only required for AI Rename and the AI Workflow Pipeline to prevent API abuse.",
+                    text: "No account needed for compression, WebP conversion, resizing, EXIF removal, and other browser-based tools. An account is only required for AI-powered tools like AI Rename and AI Alt Text to prevent API abuse.",
                   },
                 },
                 {

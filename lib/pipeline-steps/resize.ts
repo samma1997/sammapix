@@ -21,7 +21,7 @@ export async function runResizeStep(
 
 /**
  * Canvas-based image resize.
- * Extracted from WorkflowPipeline.tsx- identical logic.
+ * Extracted from pipeline components- identical logic.
  */
 function resizeImageBlob(
   blob: Blob,

@@ -103,9 +103,9 @@ export default function StampItPage() {
           },
         ]}
         proTip={{
-          text: "Use AI Workflow to watermark, compress and rename all your photos in one step.",
-          linkLabel: "Try AI Workflow",
-          linkHref: "/tools/workflow",
+          text: "Use WebLift to compress, convert and rename all your photos in one step.",
+          linkLabel: "Try WebLift",
+          linkHref: "/tools/weblift",
         }}
       />
 

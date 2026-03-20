@@ -72,7 +72,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/cull",
     "/tools/heic",
     "/tools/transcribe",
-    "/tools/workflow",
     "/tools/weblift",
     "/tools/blogdrop",
     "/tools/batchname",

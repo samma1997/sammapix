@@ -39,7 +39,6 @@ const CullClient = dynamic(() => import("@/components/tools/CullClientWrapper"))
 const HeicClient = dynamic(() => import("@/components/tools/HeicClient"));
 const PdfToImageClient = dynamic(() => import("@/components/tools/PdfToImageClient"));
 const TranscribeClient = dynamic(() => import("@/components/tools/TranscribeClient"));
-const WorkflowPipeline = dynamic(() => import("@/components/tools/WorkflowPipeline"));
 const ComboClient = dynamic(() => import("@/components/tools/ComboClient"));
 const BatchNameClient = dynamic(() => import("@/components/tools/BatchNameClient"));
 const SmartSortClient = dynamic(() => import("@/components/tools/SmartSortClient"));
@@ -63,7 +62,6 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   heic:        HeicClient,
   "pdf-to-image": PdfToImageClient,
   transcribe:  TranscribeClient,
-  workflow:    WorkflowPipeline,
   batchname:   BatchNameClient,
   smartsort:   SmartSortClient,
 };
@@ -111,7 +109,6 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   blogdrop:    { Icon: IconCompress,   accent: "#8B5CF6" },
   transcribe:  { Icon: IconEXIF,       accent: "#0891B2" },
   batchname:   { Icon: IconResizePack, accent: "#F59E0B" },
-  workflow:    { Icon: IconCompress,    accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -165,7 +162,7 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Adjust quality", desc: "Use the slider to set compression level." },
       { title: "Download", desc: "Get compressed files individually or as ZIP." },
     ],
-    proTip: { text: "Use AI Workflow to compress + rename + resize in one step.", linkLabel: "Try AI Workflow", linkHref: "/dashboard/tools/workflow" },
+    proTip: { text: "Try WebLift to compress + rename + convert in one step.", linkLabel: "Try WebLift", linkHref: "/dashboard/tools/weblift" },
   },
   webp: {
     label: "WebP Converter",
@@ -316,16 +313,6 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Export SRT or TXT", desc: "Download subtitles or plain transcription." },
     ],
     proTip: { text: "Unlimited AI transcriptions on Pro. Free gets 10/day.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
-  },
-  workflow: {
-    label: "AI Workflow",
-    tagline: "Run the full pipeline in one click.",
-    steps: [
-      { title: "Choose preset", desc: "Blog, Instagram, E-commerce, or Client." },
-      { title: "Drop photos", desc: "Add up to 500 files." },
-      { title: "Run & download", desc: "Get everything processed as ZIP." },
-    ],
-    proTip: { text: "This is the Pro killer feature -- saves hours per shoot.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   // Combo tools
   weblift: {

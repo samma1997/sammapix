@@ -1,6 +1,6 @@
 /**
  * Credit system for SammaPix AI operations.
- * Each credit = 1 AI operation (rename, alt text, workflow).
+ * Each credit = 1 AI operation (rename, alt text, smart sort).
  *
  * Storage: Vercel KV (Upstash Redis) via /lib/redis.ts.
  * Fallback: in-memory Map when Redis is not configured (dev mode).

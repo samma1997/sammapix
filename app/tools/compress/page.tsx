@@ -105,9 +105,9 @@ export default function CompressPage() {
           },
         ]}
         proTip={{
-          text: "Use AI Workflow to compress, rename for SEO, and resize all in one step.",
-          linkLabel: "Try AI Workflow",
-          linkHref: "/tools/workflow",
+          text: "Use WebLift to compress, rename for SEO, and convert to WebP all in one step.",
+          linkLabel: "Try WebLift",
+          linkHref: "/tools/weblift",
         }}
       />
 
