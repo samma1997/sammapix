@@ -188,6 +188,38 @@ const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
 );
 
 
+const IconAiOrganize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-ao-drop { 0% { transform: translateY(-8px); opacity: 0; } 40%, 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(4px); opacity: 0; } }
+      @keyframes dh-ao-sparkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1); } }
+      .dh-ao-d1 { animation: dh-ao-drop 2.4s ease-in-out 0s infinite; }
+      .dh-ao-d2 { animation: dh-ao-drop 2.4s ease-in-out 0.4s infinite; }
+      .dh-ao-d3 { animation: dh-ao-drop 2.4s ease-in-out 0.8s infinite; }
+      .dh-ao-s1 { transform-origin: 40px 8px; animation: dh-ao-sparkle 2s ease-in-out 0.2s infinite; }
+      .dh-ao-s2 { transform-origin: 44px 14px; animation: dh-ao-sparkle 2s ease-in-out 0.8s infinite; }
+    `}</style>
+    {/* Folder body */}
+    <path d="M4 16 L4 40 Q4 42 6 42 L38 42 Q40 42 40 40 L40 20 Q40 18 38 18 L22 18 L18 12 L6 12 Q4 12 4 14 Z" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <path d="M4 14 Q4 12 6 12 L18 12 L22 18 L38 18 Q40 18 40 20" stroke={accent} strokeWidth="1.25" fill={accent} fillOpacity="0.06"/>
+    {/* Dropping items */}
+    <g className="dh-ao-d1"><rect x="10" y="6" width="6" height="5" rx="1" fill={accent} fillOpacity="0.5" stroke={accent} strokeWidth="0.75"/></g>
+    <g className="dh-ao-d2"><rect x="19" y="4" width="6" height="5" rx="1" fill={accent} fillOpacity="0.4" stroke={accent} strokeWidth="0.75"/></g>
+    <g className="dh-ao-d3"><rect x="28" y="7" width="6" height="5" rx="1" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="0.75"/></g>
+    {/* Folder labels */}
+    <rect x="8" y="26" width="10" height="4" rx="1" fill={accent} fillOpacity="0.2"/>
+    <rect x="21" y="26" width="10" height="4" rx="1" fill={accent} fillOpacity="0.2"/>
+    <rect x="12" y="33" width="12" height="4" rx="1" fill={accent} fillOpacity="0.15"/>
+    {/* AI sparkles */}
+    <g className="dh-ao-s1">
+      <path d="M40 8 L41 5 L42 8 L45 9 L42 10 L41 13 L40 10 L37 9 Z" fill={accent} fillOpacity="0.7"/>
+    </g>
+    <g className="dh-ao-s2">
+      <path d="M44 14 L44.5 12.5 L45 14 L46.5 14.5 L45 15 L44.5 16.5 L44 15 L42.5 14.5 Z" fill={accent} fillOpacity="0.5"/>
+    </g>
+  </svg>
+);
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const LS_PERSONA_KEY = "sammapix-persona";
@@ -381,6 +413,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconSmartSort,
     category: ["AI"],
     keywords: ["organize photos", "sort images", "categorize", "classify", "auto folder", "group photos", "smart folders"],
+  },
+  {
+    name: "AI Organize",
+    slug: "ai-organize",
+    href: "/dashboard/tools/ai-organize",
+    tagline: "Drop 100+ photos. AI sorts into folders, finds duplicates, renames for SEO.",
+    accent: "#8B5CF6",
+    badges: ["Login required", "Gemini Flash", "NEW"],
+    Icon: IconAiOrganize,
+    category: ["AI"],
+    keywords: ["organize photos", "sort folders", "categorize", "auto folders", "bulk organize", "clean up photos", "sort by category", "ai folders", "group images", "mass organize"],
   },
 
   // Workflows
@@ -784,7 +827,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       </section>
 
       {/* -- Sticky search bar + Category tabs -- */}
-      <section className="sticky top-14 md:top-0 z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 -mt-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
+      <section className="sticky top-12 md:top-0 z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 py-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
         <div className="flex flex-col gap-2.5">
           {/* Search input */}
           <div className="relative">
