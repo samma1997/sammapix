@@ -265,7 +265,23 @@ interface DashToolEntry extends ToolCardData {
   slug: string;
   category: Category[];
   isCombo?: boolean;
+  /** Extra keywords for smart search — matches user intent, not just tool name */
+  keywords: string[];
 }
+
+/** Suggested search phrases shown as placeholder rotation */
+const SEARCH_SUGGESTIONS = [
+  "make my photos smaller",
+  "rename files for SEO",
+  "convert HEIC from iPhone",
+  "resize for Instagram",
+  "remove metadata from photos",
+  "add watermark to images",
+  "find duplicate photos",
+  "sort photos by location",
+  "create subtitles from video",
+  "convert images to WebP",
+];
 
 const ALL_DASH_TOOLS: DashToolEntry[] = [
   // Optimize
@@ -278,6 +294,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "Up to 90% smaller"],
     Icon: IconCompress,
     category: ["Optimize"],
+    keywords: ["make photos smaller", "reduce file size", "optimize images", "shrink", "lighter", "weight", "kb", "mb", "slow website", "page speed", "too big", "too heavy"],
   },
   {
     name: "WebP Converter",
@@ -288,6 +305,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "25-34% smaller"],
     Icon: IconWebP,
     category: ["Optimize"],
+    keywords: ["convert format", "change format", "webp", "modern format", "next gen", "jpg to webp", "png to webp", "save as webp"],
   },
   {
     name: "HEIC Converter",
@@ -298,6 +316,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "iPhone", "Batch"],
     Icon: IconHEIC,
     category: ["Optimize"],
+    keywords: ["iphone photos", "heic to jpg", "apple photos", "cant open photos", "heif", "ios", "convert iphone"],
   },
   {
     name: "PDF to Image",
@@ -308,6 +327,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "No upload"],
     Icon: IconPdfToImage,
     category: ["Optimize"],
+    keywords: ["pdf to jpg", "pdf to png", "extract pages", "document to image", "screenshot pdf", "convert pdf"],
   },
   {
     name: "Batch Resize",
@@ -318,6 +338,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "Social presets"],
     Icon: IconResizePack,
     category: ["Optimize"],
+    keywords: ["resize", "dimensions", "pixels", "instagram size", "facebook size", "twitter size", "thumbnail", "social media", "make bigger", "make smaller", "scale"],
   },
   {
     name: "Crop & Ratio",
@@ -328,6 +349,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "9 ratios"],
     Icon: IconCropRatio,
     category: ["Optimize"],
+    keywords: ["crop", "cut", "aspect ratio", "square", "portrait", "landscape", "16:9", "4:3", "1:1", "trim", "a4", "print"],
   },
 
   // AI
@@ -340,6 +362,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Login required", "Gemini Flash"],
     Icon: IconAIRename,
     category: ["AI"],
+    keywords: ["rename files", "seo filename", "seo name", "image name", "file name", "optimize name", "google images", "search engine"],
   },
   {
     name: "AI Alt Text",
@@ -350,6 +373,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Login required", "Gemini Flash"],
     Icon: IconAltText,
     category: ["AI"],
+    keywords: ["alt text", "alt tag", "accessibility", "screen reader", "a11y", "description", "wcag", "seo alt"],
   },
   {
     name: "Transcribe",
@@ -360,6 +384,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Login required", "Gemini Flash"],
     Icon: IconTranscribe,
     category: ["AI"],
+    keywords: ["subtitles", "captions", "srt", "speech to text", "video to text", "audio to text", "transcript", "closed captions"],
   },
   {
     name: "Web Optimize",
@@ -371,6 +396,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconWebLift,
     category: ["AI"],
     isCombo: true,
+    keywords: ["web ready", "website images", "optimize for web", "page speed", "lighthouse", "core web vitals", "fast website"],
   },
   {
     name: "AI Photo Sort",
@@ -381,6 +407,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["AI-powered", "Login required"],
     Icon: IconSmartSort,
     category: ["AI"],
+    keywords: ["organize photos", "sort images", "categorize", "classify", "auto folder", "group photos", "smart folders"],
   },
 
   // Workflows
@@ -394,6 +421,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconBlogDrop,
     category: ["Workflows"],
     isCombo: true,
+    keywords: ["blog images", "wordpress", "article photos", "blog post", "content images", "publish"],
   },
   {
     name: "AI Workflow",
@@ -405,6 +433,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconWorkflow,
     category: ["Workflows"],
     isCombo: true,
+    keywords: ["pipeline", "automation", "batch process", "chain tools", "multi step", "workflow", "all in one"],
   },
 
   // Creative
@@ -417,6 +446,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "14 presets"],
     Icon: IconFilmLab,
     category: ["Creative"],
+    keywords: ["filter", "preset", "vintage", "analog", "film look", "kodak", "fuji", "retro", "color grade", "mood"],
   },
   {
     name: "Watermark",
@@ -427,6 +457,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "Batch"],
     Icon: IconStampIt,
     category: ["Creative"],
+    keywords: ["watermark", "logo", "copyright", "stamp", "protect photos", "brand", "overlay text", "signature"],
   },
 
   // Organize
@@ -439,6 +470,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "Privacy"],
     Icon: IconEXIF,
     category: ["Organize"],
+    keywords: ["metadata", "gps", "location data", "privacy", "remove data", "camera info", "exif data", "strip metadata", "where was photo taken"],
   },
   {
     name: "Find Duplicates",
@@ -449,6 +481,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "pHash"],
     Icon: IconTwinHunt,
     category: ["Organize"],
+    keywords: ["duplicates", "duplicate photos", "same photo", "similar images", "clean up", "free space", "delete copies"],
   },
   {
     name: "Sort by Location",
@@ -459,6 +492,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "GPS"],
     Icon: IconGeoSort,
     category: ["Organize"],
+    keywords: ["sort by country", "organize by place", "travel photos", "gps sort", "location sort", "where taken", "group by city"],
   },
   {
     name: "Photo Map",
@@ -469,6 +503,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "GPS"],
     Icon: IconTravelMap,
     category: ["Organize"],
+    keywords: ["map", "travel map", "photo map", "where i traveled", "trip map", "gps map", "pin photos on map"],
   },
   {
     name: "Cull",
@@ -479,6 +514,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "Star rating"],
     Icon: IconCull,
     category: ["Organize"],
+    keywords: ["cull photos", "rate photos", "star rating", "select best", "pick photos", "review shoot", "delete bad photos", "lightroom cull"],
   },
   {
     name: "Batch Rename",
@@ -489,6 +525,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     badges: ["Free", "Unlimited"],
     Icon: IconBatchName,
     category: ["Organize"],
+    keywords: ["rename many files", "bulk rename", "pattern rename", "sequential", "number files", "prefix", "suffix"],
   },
 ];
 
@@ -531,6 +568,18 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const [mounted, setMounted] = useState(false);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
   const [query, setQuery] = useState("");
+  const [searchPlaceholder, setSearchPlaceholder] = useState("What do you want to do? (e.g. make photos smaller)");
+
+  // Rotate search placeholder suggestions
+  useEffect(() => {
+    if (query) return; // Don't rotate while user is typing
+    let idx = 0;
+    const interval = setInterval(() => {
+      idx = (idx + 1) % SEARCH_SUGGESTIONS.length;
+      setSearchPlaceholder(`Try: "${SEARCH_SUGGESTIONS[idx]}"`);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [query]);
   const [activeCategory, setActiveCategory] = useState<Category>("All");
 
   const loadPersona = useCallback(() => {
@@ -617,13 +666,18 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       result = result.filter((t) => t.category.includes(activeCategory));
     }
 
-    // Filter by search query
+    // Filter by search query (matches name, tagline, AND smart keywords)
     const q = query.trim().toLowerCase();
     if (q) {
       result = result.filter(
         (t) =>
           t.name.toLowerCase().includes(q) ||
-          t.tagline.toLowerCase().includes(q)
+          t.tagline.toLowerCase().includes(q) ||
+          t.keywords.some((kw) => kw.toLowerCase().includes(q)) ||
+          // Also match if any word in query matches any keyword
+          q.split(/\s+/).some((word) =>
+            word.length >= 3 && t.keywords.some((kw) => kw.toLowerCase().includes(word))
+          )
       );
     }
 
@@ -768,25 +822,25 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
         )}
       </section>
 
-      {/* -- Search bar + Category tabs -- */}
-      <section>
-        <div className="flex flex-col gap-3">
+      {/* -- Sticky search bar + Category tabs -- */}
+      <section className="sticky top-0 z-30 bg-white/95 dark:bg-[#191919]/95 backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 -mt-2">
+        <div className="flex flex-col gap-2.5">
           {/* Search input */}
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#525252] pointer-events-none">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A3A3A3] dark:text-[#525252] pointer-events-none">
               <SearchIcon />
             </span>
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search tools... (e.g. compress, resize, watermark)"
-              aria-label="Search tools"
-              className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-[#2A2A2A]
+              placeholder={searchPlaceholder}
+              aria-label="Search tools — describe what you want to do"
+              className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-[#2A2A2A]
                          bg-[#FAFAFA] dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5]
-                         placeholder-gray-400 dark:placeholder-[#525252]
+                         placeholder-[#A3A3A3] dark:placeholder-[#525252]
                          focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent
-                         transition-all"
+                         shadow-sm transition-all"
             />
           </div>
 
