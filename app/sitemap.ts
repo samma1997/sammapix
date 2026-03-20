@@ -76,6 +76,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/blogdrop",
     "/tools/batchname",
     "/tools/smartsort",
+    "/tools/ai-organize",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

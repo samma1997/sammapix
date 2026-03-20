@@ -42,6 +42,7 @@ const TranscribeClient = dynamic(() => import("@/components/tools/TranscribeClie
 const ComboClient = dynamic(() => import("@/components/tools/ComboClient"));
 const BatchNameClient = dynamic(() => import("@/components/tools/BatchNameClient"));
 const SmartSortClient = dynamic(() => import("@/components/tools/SmartSortClient"));
+const AiOrganizeClient = dynamic(() => import("@/components/tools/AiOrganizeClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -64,6 +65,7 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   transcribe:  TranscribeClient,
   batchname:   BatchNameClient,
   smartsort:   SmartSortClient,
+  "ai-organize": AiOrganizeClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -109,6 +111,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   blogdrop:    { Icon: IconCompress,   accent: "#8B5CF6" },
   transcribe:  { Icon: IconEXIF,       accent: "#0891B2" },
   batchname:   { Icon: IconResizePack, accent: "#F59E0B" },
+  "ai-organize": { Icon: IconAIRename, accent: "#8B5CF6" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -354,6 +357,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download sorted", desc: "Get ZIP with folder structure by category." },
     ],
     proTip: { text: "Perfect for organizing mixed photo collections.", linkLabel: "Try GeoSort", linkHref: "/dashboard/tools/geosort" },
+  },
+  "ai-organize": {
+    label: "AI Organize",
+    tagline: "Sort, dedupe & rename hundreds of photos in one click.",
+    steps: [
+      { title: "Drop your photos", desc: "Drag & drop up to 500 photos at once." },
+      { title: "AI analyzes everything", desc: "Photos are categorized, duplicates found, SEO names generated." },
+      { title: "Review & download", desc: "Browse by category, remove dupes, download organized ZIP." },
+    ],
+    proTip: { text: "Works best with 50+ photos. The more you add, the smarter the sorting.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
 };
 
