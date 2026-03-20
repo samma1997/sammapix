@@ -47,11 +47,13 @@ export async function POST(req: NextRequest) {
   let plan: "monthly" | "annual" = "monthly";
   let fbp: string | undefined;
   let fbc: string | undefined;
+  let eventId: string | undefined;
   try {
     const body = await req.json().catch(() => ({}));
     if (body.plan === "annual") plan = "annual";
     if (body.fbp) fbp = String(body.fbp);
     if (body.fbc) fbc = String(body.fbc);
+    if (body.eventId) eventId = String(body.eventId);
   } catch {
     // default to monthly
   }
@@ -113,6 +115,7 @@ export async function POST(req: NextRequest) {
       userAgent: req.headers.get("user-agent") ?? undefined,
       fbp,
       fbc,
+      eventId,
       customData: { currency: "USD", value: plan === "annual" ? 60 : 7 },
     }).catch(() => {});
 

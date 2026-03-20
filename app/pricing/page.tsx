@@ -53,7 +53,9 @@ function PaymentBanners() {
     if (!success) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const w = window as any;
-    if (typeof w.fbq === "function") w.fbq("track", "Subscribe", { value: 7.00, currency: "USD" });
+    // Use session-based event ID for deduplication with server-side CAPI
+    const subEventId = `sub_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+    if (typeof w.fbq === "function") w.fbq("track", "Subscribe", { value: 7.00, currency: "USD" }, { eventID: subEventId });
     if (typeof w.gtag === "function") w.gtag("event", "conversion", { send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL, value: 7.00, currency: "USD" });
   }, [success]);
 

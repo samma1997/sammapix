@@ -23,11 +23,14 @@ export default function CheckoutButton({
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
+    // Generate event ID for Meta deduplication (client pixel + server CAPI)
+    const eventId = `ic_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+
     // Fire conversion events for ad platforms
     if (typeof window !== "undefined") {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const w = window as any;
-      if (typeof w.fbq === "function") w.fbq("track", "InitiateCheckout");
+      if (typeof w.fbq === "function") w.fbq("track", "InitiateCheckout", {}, { eventID: eventId });
       if (typeof w.gtag === "function") w.gtag("event", "begin_checkout");
     }
 
@@ -50,6 +53,7 @@ export default function CheckoutButton({
           plan,
           fbp: getCookie("_fbp"),
           fbc: getCookie("_fbc"),
+          eventId,
         }),
       });
       const data = (await res.json()) as { url?: string; error?: string; code?: string };

@@ -38,6 +38,7 @@ const COMPANY_LINKS = [
 
 const LEGAL_LINKS = [
   { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
 ];
 
 const SOCIAL_LINKS = [
