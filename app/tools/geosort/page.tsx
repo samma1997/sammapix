@@ -240,6 +240,48 @@ export default function GeoSortPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Sort Photos by Location",
+            description: "Organize travel photos by country using SammaPix GeoSort. The tool reads GPS coordinates from photo EXIF data and automatically groups images into folders by location. Perfect for photographers returning from trips with mixed photos.",
+            totalTime: "PT3M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Sort by Location",
+              url: `${APP_URL}/tools/geosort`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop photos with GPS data",
+                text: "Upload JPG or HEIC files taken with a GPS-enabled camera or smartphone by dragging them onto SammaPix GeoSort. You can mix photos from different destinations - all will be sorted together. Only files with GPS coordinates in the EXIF data will be organized.",
+                url: `${APP_URL}/tools/geosort`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Photos sorted by country",
+                text: "GPS coordinates are extracted from EXIF data locally in your browser, then reverse-geocoded to country names using smart clustering. The tool makes only 2-3 API calls for a full trip (even 200 photos) instead of one per image, finishing in seconds. Photos without GPS go to _unsorted/.",
+                url: `${APP_URL}/tools/geosort`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Download organized folders",
+                text: "Download a ZIP file with subfolders for each country (Japan/, Italy/, Thailand/, etc.) containing your sorted photos. For large batches exceeding 150 MB, download a CSV sorting guide instead to avoid re-downloading your files. Open the guide in a spreadsheet to see which file goes in which folder.",
+                url: `${APP_URL}/tools/geosort`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"

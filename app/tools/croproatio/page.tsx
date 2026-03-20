@@ -133,6 +133,48 @@ export default function CropRatioPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Crop Images to Exact Ratios",
+            description: "Crop photos to exact aspect ratios using SammaPix Crop & Ratio. Supports Instagram, TikTok, YouTube and custom ratios. Interactive drag positioning, batch processing, and ZIP download.",
+            totalTime: "PT2M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Crop & Ratio",
+              url: `${APP_URL}/tools/croproatio`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your image",
+                text: "Upload one or multiple JPG, PNG or WebP photos to SammaPix Crop & Ratio by dragging them onto the upload area or clicking to browse. You can process multiple images at once for batch cropping. All cropping happens locally in your browser.",
+                url: `${APP_URL}/tools/croproatio`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Select ratio",
+                text: "Choose a preset aspect ratio like 1:1 (Instagram square), 16:9 (YouTube/widescreen), 4:5 (Instagram portrait), or 9:16 (Stories and Reels). You can also type any custom ratio you need. The crop frame automatically locks to your selected ratio.",
+                url: `${APP_URL}/tools/croproatio`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Adjust crop and download",
+                text: "Drag the crop frame directly over your image preview to position it exactly and choose which area to keep. Download the cropped image individually, or batch-download all cropped images as a single ZIP file. Each image is cropped independently.",
+                url: `${APP_URL}/tools/croproatio`
+              }
+            ]
+          }),
+        }}
+      />
+
       <ToolHeader
         title="Crop & Ratio"
         description="Drop your images, pick a ratio- 1:1, 4:5, 9:16, 16:9 or custom. Drag the frame to position the crop, then download individually or as a ZIP. Everything runs in your browser."

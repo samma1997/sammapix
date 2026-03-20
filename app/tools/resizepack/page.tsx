@@ -204,6 +204,48 @@ export default function ResizePackPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Batch Resize Images",
+            description: "Resize multiple images at once using SammaPix Batch Resize. Choose pixel dimensions, percentage scaling, or use built-in presets for Instagram, Twitter, LinkedIn and YouTube. Download all resized images as a ZIP file.",
+            totalTime: "PT3M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Batch Resize",
+              url: `${APP_URL}/tools/resizepack`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your photos",
+                text: "Upload JPG, PNG or WebP images to SammaPix Batch Resize by dragging and dropping them, or click to browse your computer. You can select multiple files at once for batch processing. All resizing happens locally in your browser.",
+                url: `${APP_URL}/tools/resizepack`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Select a platform preset",
+                text: "Choose one of the built-in social media presets (Instagram 1080x1080, Instagram Story 1080x1920, Twitter/X 1024x512, LinkedIn 1200x627, YouTube Thumbnail 1280x720) or enter custom pixel dimensions or a percentage value. Optionally lock the aspect ratio to maintain proportions.",
+                url: `${APP_URL}/tools/resizepack`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Download resized batch",
+                text: "All images are resized using the browser's Canvas API. Download each resized image individually or click 'Download all as ZIP' to get all resized images in one archive. Files are automatically renamed with their new dimensions for easy identification.",
+                url: `${APP_URL}/tools/resizepack`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"

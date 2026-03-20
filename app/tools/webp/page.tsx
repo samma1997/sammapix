@@ -196,6 +196,48 @@ export default function WebpPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Convert Images to WebP",
+            description: "Convert JPG, PNG and GIF images to WebP format using SammaPix. WebP files are 25-35% smaller than JPEG at the same quality, improving page load speed and Core Web Vitals.",
+            totalTime: "PT2M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix WebP Converter",
+              url: `${APP_URL}/tools/webp`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your images",
+                text: "Drag and drop JPG, PNG or GIF files onto the SammaPix converter, or click to browse your computer. You can upload multiple files at once for batch conversion. The tool processes everything locally in your browser.",
+                url: `${APP_URL}/tools/webp`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Files convert automatically",
+                text: "Each file is instantly converted to WebP format using the browser's Canvas API. No additional settings are needed - the tool automatically uses the optimal compression level (85% quality by default). Conversion typically takes just 1-2 seconds per image.",
+                url: `${APP_URL}/tools/webp`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Download WebP files",
+                text: "Download each converted WebP file individually, or click 'Download all as ZIP' to get all converted images in a single archive. The files are ready to use immediately on your website or in your projects.",
+                url: `${APP_URL}/tools/webp`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Schema.org */}
       <script
         type="application/ld+json"

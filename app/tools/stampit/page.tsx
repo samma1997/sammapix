@@ -205,6 +205,48 @@ export default function StampItPage() {
         </div>
       </section>
 
+      {/* HowTo Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Add Watermark to Photos",
+            description: "Watermark photos with text or your logo using SammaPix Watermark. Choose from 9 position options, enable tiled filigrana mode for copyright protection, and batch process multiple images. Download watermarked photos as ZIP.",
+            totalTime: "PT3M",
+            tool: {
+              "@type": "SoftwareApplication",
+              name: "SammaPix Watermark",
+              url: `${APP_URL}/tools/stampit`
+            },
+            step: [
+              {
+                "@type": "HowToStep",
+                position: 1,
+                name: "Drop your photos",
+                text: "Upload JPG, PNG or WebP images to SammaPix Watermark by dragging and dropping them onto the upload area, or click to browse your computer. You can select multiple files at once for batch watermarking. All watermarking happens locally in your browser.",
+                url: `${APP_URL}/tools/stampit`
+              },
+              {
+                "@type": "HowToStep",
+                position: 2,
+                name: "Add text or logo watermark",
+                text: "Type your watermark text or upload an SVG logo file. Adjust the font size, opacity (transparency), and style. For maximum copyright protection, enable tiled mode which repeats your watermark in a diagonal grid across the entire image - this makes it virtually impossible to crop or remove.",
+                url: `${APP_URL}/tools/stampit`
+              },
+              {
+                "@type": "HowToStep",
+                position: 3,
+                name: "Choose position and download",
+                text: "Select from 9 watermark positions (top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right) or use tiled mode for maximum coverage. Download individually or as a ZIP containing all watermarked images ready for sharing.",
+                url: `${APP_URL}/tools/stampit`
+              }
+            ]
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"
