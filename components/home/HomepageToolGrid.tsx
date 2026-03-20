@@ -81,16 +81,65 @@ const IconWebLift: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
-const IconBlogDrop: React.FC<{ accent: string }> = ({ accent }) => (
+const IconPdfToImage: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="8" y="4" width="32" height="40" rx="3" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
-    <rect x="12" y="8" width="24" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
-    <path d="M14 18 L20 14 L26 17 L34 12" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
-    <line x1="12" y1="27" x2="36" y2="27" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
-    <line x1="12" y1="31" x2="30" y2="31" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
-    <line x1="12" y1="35" x2="33" y2="35" stroke={accent} strokeWidth="1.25" strokeLinecap="round"/>
-    <rect x="30" y="36" width="12" height="8" rx="2" fill={accent}/>
-    <text x="36" y="42" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">BLOG</text>
+    <style>{`
+      @keyframes hp-pdf-flip {
+        0%, 20%  { transform: translateX(0px); }
+        50%       { transform: translateX(5px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes hp-pdf-img {
+        0%, 30%  { opacity: 0; transform: scale(0.8); }
+        55%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .hp-pdf-doc  { animation: hp-pdf-flip 2.6s ease-in-out infinite; }
+      .hp-pdf-img  { transform-origin: 36px 30px; animation: hp-pdf-img 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    <g className="hp-pdf-doc">
+      <rect x="4" y="4" width="22" height="30" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="9" y="9" width="8" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="9" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="9" y="17" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="15" y="29" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    <path d="M28 18 L32 18 M30 16 L32 18 L30 20" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="hp-pdf-img" style={{ opacity: 0 }}>
+      <rect x="32" y="20" width="14" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="36" cy="24" r="1.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M33 32 L36 28 L39 31 L41 28" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    <rect x="31" y="36" width="15" height="7" rx="1.5" fill={accent}/>
+    <text x="38.5" y="41.5" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+  </svg>
+);
+
+const IconAiOrganize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes hp-ao-drop { 0% { transform: translateY(-8px); opacity: 0; } 40%, 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(4px); opacity: 0; } }
+      @keyframes hp-ao-sparkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1); } }
+      .hp-ao-d1 { animation: hp-ao-drop 2.4s ease-in-out 0s infinite; }
+      .hp-ao-d2 { animation: hp-ao-drop 2.4s ease-in-out 0.4s infinite; }
+      .hp-ao-d3 { animation: hp-ao-drop 2.4s ease-in-out 0.8s infinite; }
+      .hp-ao-s1 { transform-origin: 40px 8px; animation: hp-ao-sparkle 2s ease-in-out 0.2s infinite; }
+      .hp-ao-s2 { transform-origin: 44px 14px; animation: hp-ao-sparkle 2s ease-in-out 0.8s infinite; }
+    `}</style>
+    <path d="M4 16 L4 40 Q4 42 6 42 L38 42 Q40 42 40 40 L40 20 Q40 18 38 18 L22 18 L18 12 L6 12 Q4 12 4 14 Z" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <path d="M4 14 Q4 12 6 12 L18 12 L22 18 L38 18 Q40 18 40 20" stroke={accent} strokeWidth="1.25" fill={accent} fillOpacity="0.06"/>
+    <g className="hp-ao-d1"><rect x="10" y="6" width="6" height="5" rx="1" fill={accent} fillOpacity="0.5" stroke={accent} strokeWidth="0.75"/></g>
+    <g className="hp-ao-d2"><rect x="19" y="4" width="6" height="5" rx="1" fill={accent} fillOpacity="0.4" stroke={accent} strokeWidth="0.75"/></g>
+    <g className="hp-ao-d3"><rect x="28" y="7" width="6" height="5" rx="1" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="0.75"/></g>
+    <rect x="8" y="26" width="10" height="4" rx="1" fill={accent} fillOpacity="0.2"/>
+    <rect x="21" y="26" width="10" height="4" rx="1" fill={accent} fillOpacity="0.2"/>
+    <rect x="12" y="33" width="12" height="4" rx="1" fill={accent} fillOpacity="0.15"/>
+    <g className="hp-ao-s1">
+      <path d="M40 8 L41 5 L42 8 L45 9 L42 10 L41 13 L40 10 L37 9 Z" fill={accent} fillOpacity="0.7"/>
+    </g>
+    <g className="hp-ao-s2">
+      <path d="M44 14 L44.5 12.5 L45 14 L46.5 14.5 L45 15 L44.5 16.5 L44 15 L42.5 14.5 Z" fill={accent} fillOpacity="0.5"/>
+    </g>
   </svg>
 );
 
@@ -130,6 +179,7 @@ interface HomepageTool {
   badge: string;
   Icon: React.FC<{ accent: string }>;
   isCombo?: boolean;
+  isNew?: boolean;
   category: TabCategory;
 }
 
@@ -138,16 +188,17 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Compress", href: "/tools/compress", tagline: "Shrink images up to 90% smaller.", accent: "#6366F1", badge: "Free", Icon: IconCompress, category: "Optimize" },
   { name: "WebP Converter", href: "/tools/webp", tagline: "Convert any image to WebP.", accent: "#10B981", badge: "Free", Icon: IconWebP, category: "Optimize" },
   { name: "HEIC Converter", href: "/tools/heic", tagline: "iPhone HEIC to JPG or WebP.", accent: "#6366F1", badge: "Free", Icon: IconHEIC, category: "Optimize" },
+  { name: "PDF to Image", href: "/tools/pdf-to-image", tagline: "Convert PDF pages to JPG or PNG.", accent: "#DC2626", badge: "Free", Icon: IconPdfToImage, category: "Optimize" },
   { name: "Batch Resize", href: "/tools/resizepack", tagline: "Resize for social media presets.", accent: "#14B8A6", badge: "Free", Icon: IconResizePack, category: "Optimize" },
   { name: "Crop & Ratio", href: "/tools/croproatio", tagline: "Crop to exact ratios.", accent: "#EC4899", badge: "Free", Icon: IconCropRatio, category: "Optimize" },
 
   // AI-Powered
+  { name: "AI Organize", href: "/tools/ai-organize", tagline: "Drop 100+ photos. AI sorts into folders, finds duplicates, renames for SEO.", accent: "#8B5CF6", badge: "Login required", Icon: IconAiOrganize, category: "AI-Powered", isNew: true },
   { name: "AI Rename", href: "/tools/ai-rename", tagline: "SEO-optimized filenames with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAIRename, category: "AI-Powered" },
   { name: "AI Alt Text", href: "/tools/alt-text", tagline: "Accessibility alt text with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAltText, category: "AI-Powered" },
+  { name: "AI Photo Sort", href: "/tools/smartsort", tagline: "AI sorts images into categories.", accent: "#22C55E", badge: "Login required", Icon: IconSmartSort, category: "AI-Powered" },
   { name: "Transcribe", href: "/tools/transcribe", tagline: "AI transcription with timestamps.", accent: "#0891B2", badge: "Login required", Icon: IconTranscribe, category: "AI-Powered" },
   { name: "Web Optimize", href: "/tools/weblift", tagline: "Compress + WebP + AI rename.", accent: "#3B82F6", badge: "Login required", Icon: IconWebLift, category: "AI-Powered", isCombo: true },
-  { name: "Blog Ready", href: "/tools/blogdrop", tagline: "Blog-ready images in one drop.", accent: "#8B5CF6", badge: "Login required", Icon: IconBlogDrop, category: "AI-Powered", isCombo: true },
-  { name: "AI Photo Sort", href: "/tools/smartsort", tagline: "AI sorts images into categories.", accent: "#22C55E", badge: "Login required", Icon: IconSmartSort, category: "AI-Powered" },
 
   // Creative
   { name: "Film Filters", href: "/tools/filmlab", tagline: "14 analog film presets.", accent: "#F59E0B", badge: "Free", Icon: IconFilmLab, category: "Creative" },
@@ -229,6 +280,11 @@ export function HomepageToolGrid() {
                     <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] truncate">
                       {tool.name}
                     </p>
+                    {tool.isNew && (
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-[#8B5CF6] px-1.5 py-0.5 rounded flex-shrink-0">
+                        NEW
+                      </span>
+                    )}
                     {tool.isCombo && (
                       <span className="text-[9px] font-bold uppercase tracking-widest text-[#737373] bg-[#F5F5F5] dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded flex-shrink-0">
                         MULTI

@@ -6,7 +6,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
   description:
-    "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser — no uploads, no file limits, 20+ tools free. See the full comparison.",
+    "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser — no uploads, no file limits, 20 tools free. See the full comparison.",
   alternates: {
     canonical: `${APP_URL}/blog/best-tinypng-alternative-2026`,
   },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
     description:
-      "Honest comparison of TinyPNG vs SammaPix — privacy, batch limits, pricing, formats, and 20+ tools vs 1. Which free image compressor is actually better in 2026?",
+      "Honest comparison of TinyPNG vs SammaPix — privacy, batch limits, pricing, formats, and 20 tools vs 1. Which free image compressor is actually better in 2026?",
     creator: "@lucasammarco",
   },
 };
@@ -48,7 +48,7 @@ const articleSchema = {
   "@type": "Article",
   headline: POST_TITLE,
   description:
-    "Looking for a TinyPNG alternative? SammaPix compresses images in your browser with no uploads, no file limits, and 20+ tools — all free. Honest 2026 comparison.",
+    "Looking for a TinyPNG alternative? SammaPix compresses images in your browser with no uploads, no file limits, and 20 tools — all free. Honest 2026 comparison.",
   url: POST_URL,
   datePublished: POST_DATE,
   dateModified: POST_DATE,
@@ -420,7 +420,7 @@ export default function BestTinyPNGAlternative2026Page() {
                       feature: "Number of tools",
                       sammapix: null,
                       tinypng: null,
-                      sammapixText: "20+",
+                      sammapixText: "20",
                       tinypngText: "1",
                     },
                   ].map((row, i) => (

@@ -5,9 +5,9 @@ import { ToolsPageClient } from "@/components/tools/ToolsPageClient";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "21 Free Image & Video Tools for Photographers & Developers | SammaPix",
+  title: "20 Free Image & Video Tools for Photographers & Developers | SammaPix",
   description:
-    "Complete suite of 21 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 20 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -51,7 +51,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 21 browser-based image and video optimization tools",
+        description: "Suite of 20 browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -62,7 +62,7 @@ export default function ToolsPage() {
         "@type": "ItemList",
         name: "SammaPix Tools",
         description: "20 free browser-based image and video optimization tools",
-        numberOfItems: 21,
+        numberOfItems: 20,
         itemListElement: [
           {
             "@type": "SoftwareApplication",
@@ -113,7 +113,7 @@ export default function ToolsPage() {
             Everything you need to optimize, rename, resize and organize your images
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            21 free browser-based tools. No uploads, no signup needed for most tools.
+            20 free browser-based tools. No uploads, no signup needed for most tools.
           </p>
         </div>
       </section>

@@ -171,7 +171,7 @@ export default function VsOptimizillaPage() {
               20-image session limit - Optimizilla stops, SammaPix continues
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Optimizilla limits each session to 20 images. If you have 60 product photos to optimize, you need to reload the page and repeat the process three times. SammaPix&apos;s free plan also processes 20 files at once, but the Pro plan handles up to 100 files per batch. For high-volume workflows, SammaPix scales - Optimizilla does not.
+              Optimizilla limits each session to 20 images. If you have 60 product photos to optimize, you need to reload the page and repeat the process three times. SammaPix&apos;s free plan also processes 20 files at once, but the Pro plan handles up to 500 files per batch. For high-volume workflows, SammaPix scales - Optimizilla does not.
             </p>
           </div>
           <div>
@@ -195,7 +195,7 @@ export default function VsOptimizillaPage() {
         <ul className="space-y-3 text-sm text-gray-600">
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You regularly compress more than 20 images.</strong> SammaPix Pro handles 100 files per batch, and even the free plan resets with each session without friction.</span>
+            <span><strong className="text-gray-800">You regularly compress more than 20 images.</strong> SammaPix Pro handles 500 files per batch, and even the free plan resets with each session without friction.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />

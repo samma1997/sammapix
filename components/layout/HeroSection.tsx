@@ -22,7 +22,7 @@ export default function HeroSection() {
         <p className="text-base sm:text-lg text-[#737373] dark:text-[#A3A3A3] max-w-xl mx-auto mb-8 leading-relaxed">
           Compress, rename with AI, resize, convert- all in one pipeline.
           <br className="hidden sm:block" />
-          20+ free tools. 100% browser-based. No uploads.
+          20 free tools. 100% browser-based. No uploads.
         </p>
 
         {/* CTAs */}
@@ -47,7 +47,7 @@ export default function HeroSection() {
 
         {/* Trust badges */}
         <p className="mt-6 text-xs text-[#A3A3A3] dark:text-[#525252] flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <span>20+ tools</span>
+          <span>20 tools</span>
           <span className="text-[#D4D4D4] dark:text-[#404040]">&middot;</span>
           <span>100% browser</span>
           <span className="text-[#D4D4D4] dark:text-[#404040]">&middot;</span>

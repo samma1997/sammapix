@@ -56,7 +56,7 @@ const features = [
     icon: <Layers className="h-5 w-5 text-gray-700 dark:text-gray-400" strokeWidth={1.5} />,
     title: "Batch conversion",
     description:
-      "Convert up to 100 HEIC files at once on the free plan. Pro users can batch convert 500 files in a single session.",
+      "Convert up to 20 HEIC files at once on the free plan. Pro users can batch convert 500 files in a single session.",
   },
   {
     icon: <FileImage className="h-5 w-5 text-gray-700 dark:text-gray-400" strokeWidth={1.5} />,
@@ -244,7 +244,7 @@ export default function HeicPage() {
             "@context": "https://schema.org",
             "@type": "HowTo",
             name: "How to Convert HEIC to JPG",
-            description: "Convert iPhone HEIC photos to JPG or WebP format using SammaPix. Batch convert up to 100 images with adjustable quality. Works with iPhone, iPad and any HEIF-compatible camera.",
+            description: "Convert iPhone HEIC photos to JPG or WebP format using SammaPix. Batch convert up to 20 images (free) or 500 (Pro) with adjustable quality. Works with iPhone, iPad and any HEIF-compatible camera.",
             totalTime: "PT3M",
             tool: {
               "@type": "SoftwareApplication",
@@ -256,7 +256,7 @@ export default function HeicPage() {
                 "@type": "HowToStep",
                 position: 1,
                 name: "Drop your iPhone HEIC photos",
-                text: "Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera onto the SammaPix converter, or click to browse your computer. You can upload multiple HEIC photos at once - up to 100 files on the free plan.",
+                text: "Drag and drop your HEIC files from iPhone, iPad or any HEIF-compatible camera onto the SammaPix converter, or click to browse your computer. You can upload multiple HEIC photos at once - up to 20 files on the free plan.",
                 url: `${APP_URL}/tools/heic`
               },
               {
@@ -317,7 +317,7 @@ export default function HeicPage() {
                   "HEIC to JPG conversion",
                   "HEIC to WebP conversion",
                   "Batch conversion",
-                  "Up to 100 files",
+                  "Up to 20 files (free)",
                   "Browser-based",
                   "No file upload",
                 ],

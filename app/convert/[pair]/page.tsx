@@ -104,7 +104,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Can I convert multiple HEIC files at once?",
-        a: "Yes. SammaPix supports batch conversion. Drop up to 100 files at once and download all results as a ZIP.",
+        a: "Yes. SammaPix supports batch conversion. Drop up to 20 files at once (free plan) and download all results as a ZIP.",
       },
       {
         q: "Why does my iPhone shoot in HEIC instead of JPG?",
@@ -315,7 +315,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Can I batch convert hundreds of JPGs to WebP?",
-        a: "Yes. SammaPix processes all your files in the browser in parallel. Drop up to 100 JPGs at once and download all WebP files as a ZIP.",
+        a: "Yes. SammaPix processes all your files in the browser in parallel. Drop up to 20 JPGs at once on the free plan (500 on Pro) and download all WebP files as a ZIP.",
       },
     ],
     related: ["jpeg-to-webp", "png-to-webp", "webp-to-jpg"],
@@ -453,7 +453,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
       },
       {
         q: "Can I convert WebP files in bulk?",
-        a: "Yes. Drop up to 100 WebP files at once and SammaPix converts them all in parallel in your browser. Download all results as a ZIP.",
+        a: "Yes. Drop up to 20 WebP files at once on the free plan (500 on Pro) and SammaPix converts them all in parallel in your browser. Download all results as a ZIP.",
       },
     ],
     related: ["jpg-to-webp", "jpeg-to-webp", "png-to-webp"],
@@ -795,7 +795,7 @@ export default async function ConvertPairPage({
               {
                 step: "2",
                 title: "Drop your files",
-                body: `Drag and drop your ${data.fromLabel} files onto the upload area, or click to browse. You can convert up to 100 files at once in a single batch.`,
+                body: `Drag and drop your ${data.fromLabel} files onto the upload area, or click to browse. You can convert up to 20 files at once on the free plan (500 on Pro).`,
               },
               {
                 step: "3",
@@ -849,7 +849,7 @@ export default async function ConvertPairPage({
               {
                 icon: Layers,
                 title: "True batch processing",
-                body: "Convert up to 100 files at once and download them all as a ZIP. Free, no limits, no signup.",
+                body: "Convert up to 20 files at once on free (500 on Pro) and download them all as a ZIP. No signup required.",
               },
               {
                 icon: CheckCircle2,
