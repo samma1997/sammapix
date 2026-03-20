@@ -8,7 +8,7 @@ import { saveAs } from "file-saver";
 import { Upload, Download, CheckCircle2, Loader2, Circle, AlertCircle, Lock, Sparkles, Play } from "lucide-react";
 import ImportSourceButtons from "@/components/ui/ImportSourceButtons";
 import type { PipelineStep as EnginePipelineStep, PipelineStepId } from "@/lib/pipeline-engine";
-import { AI_OPS_FREE_PER_DAY } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ─── Language options for AI Rename ─────────────────────────────────────────
@@ -21,11 +21,6 @@ const AI_RENAME_LANGUAGES = [
   { code: "de", label: "Deutsch", flag: "\u{1F1E9}\u{1F1EA}" },
   { code: "pt", label: "Portugu\u00eas", flag: "\u{1F1F5}\u{1F1F9}" },
 ];
-
-// ─── Combo file limits ──────────────────────────────────────────────────────
-
-const COMBO_FILES_FREE = 5;
-const COMBO_FILES_PRO = 100;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -199,7 +194,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
 
   const isAuthenticated = !!session?.user;
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const fileLimit = isPro ? COMBO_FILES_PRO : COMBO_FILES_FREE;
+  const fileLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
   // Free users: max 2 active steps
   const FREE_MAX_STEPS = 2;
@@ -442,7 +437,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
               <ImportSourceButtons onFilesImported={onDrop} disabled={needsAuthForAi} />
             </div>
             <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-2">
-              Free: {COMBO_FILES_FREE} files per batch &middot; Pro: {COMBO_FILES_PRO}
+              Free: {MAX_FILES_FREE} files per batch &middot; Pro: {MAX_FILES_PRO}
               {dailyUsage !== null && (
                 <span className="ml-2 text-[#A3A3A3] dark:text-[#525252]">
                   &middot; Today: {dailyUsage.used}/{dailyUsage.limit} images
@@ -632,7 +627,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
         onClose={() => setShowProModal(false)}
         trigger={proModalTrigger}
         filesDropped={files.length}
-        freeLimit={COMBO_FILES_FREE}
+        freeLimit={MAX_FILES_FREE}
       />
     </section>
   );

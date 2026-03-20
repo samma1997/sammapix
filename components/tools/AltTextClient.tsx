@@ -3,6 +3,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Copy, Download, Sparkles, AlertCircle, CheckCircle2, Loader2, Upload, X } from "lucide-react";
+import { AI_OPS_FREE_PER_DAY, AI_OPS_PRO_PER_DAY } from "@/lib/constants";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -254,7 +255,7 @@ export default function AltTextClient() {
               Sign in to use AI Alt Text Generator
             </p>
             <p className="text-xs text-[#737373] mb-3">
-              Free accounts get 5 alt texts per day. No credit card required.
+              Free accounts get {AI_OPS_FREE_PER_DAY} AI ops per day. No credit card required.
             </p>
             <button
               onClick={() => signIn()}
@@ -474,11 +475,11 @@ export default function AltTextClient() {
       {/* PRO badge note */}
       {isLoggedIn && (
         <p className="text-xs text-[#A3A3A3] text-center">
-          Free: 5 alt texts/day &middot;{" "}
+          Free: {AI_OPS_FREE_PER_DAY} AI ops/day &middot;{" "}
           <a href="/dashboard/upgrade" className="text-[#6366F1] hover:underline">
             Pro
           </a>{" "}
-          unlocks 200/day
+          unlocks {AI_OPS_PRO_PER_DAY}/day
         </p>
       )}
     </div>

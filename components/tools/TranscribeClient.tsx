@@ -370,7 +370,7 @@ export default function TranscribeClient() {
               Sign in to use AI Transcription
             </p>
             <p className="text-xs text-[#737373] mb-3">
-              Free accounts get 5 minutes/day. No credit card required.
+              Free accounts get 10 minutes/day. No credit card required.
             </p>
             <button
               onClick={() => signIn(undefined, { callbackUrl: "/tools/transcribe" })}
@@ -648,7 +648,7 @@ export default function TranscribeClient() {
       {/* Limit info */}
       {isLoggedIn && (
         <p className="text-xs text-[#A3A3A3] text-center">
-          Free: 5 min/day &middot;{" "}
+          Free: 10 min/day &middot;{" "}
           <a href="/dashboard/upgrade" className="text-[#6366F1] hover:underline">
             Pro
           </a>{" "}

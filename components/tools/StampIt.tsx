@@ -19,11 +19,10 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
-const MAX_FREE = 100;
-const MAX_PRO = 500;
 const CONCURRENCY = 4;
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -297,7 +296,7 @@ const StampSlider = ({ min, max, value, onChange, label, unit = "" }: SliderProp
 export default function StampIt() {
   const { data: session } = useSession();
   const isPro = (session?.user as { isPro?: boolean } | undefined)?.isPro === true;
-  const maxFiles = isPro ? MAX_PRO : MAX_FREE;
+  const maxFiles = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
   // UI state
   const [uiState, setUiState] = useState<UIState>("idle");
@@ -527,10 +526,10 @@ export default function StampIt() {
       />
 
       {/* Pro badge banner */}
-      {!isPro && entries.length >= MAX_FREE && (
+      {!isPro && entries.length >= MAX_FILES_FREE && (
         <div className="mb-4 flex items-center justify-between gap-4 px-4 py-3 bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md">
           <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-            Free plan: up to {MAX_FREE} images. Upgrade to Pro for {MAX_PRO}.
+            Free plan: up to {MAX_FILES_FREE} images. Upgrade to Pro for {MAX_FILES_PRO}.
           </p>
           <Link
             href="/dashboard/upgrade"
@@ -565,7 +564,7 @@ export default function StampIt() {
               JPG, PNG, WebP- up to {maxFiles} images
               {!isPro && (
                 <span className="ml-1.5 inline-flex items-center gap-1 text-[10px] font-medium bg-[#F5F5F5] border border-[#E5E5E5] text-[#525252] px-1.5 py-0.5 rounded">
-                  Free: {MAX_FREE} &bull; <Link href="/dashboard/upgrade" className="text-[#6366F1] hover:underline" onClick={(e) => e.stopPropagation()}>Pro: {MAX_PRO}</Link>
+                  Free: {MAX_FILES_FREE} &bull; <Link href="/dashboard/upgrade" className="text-[#6366F1] hover:underline" onClick={(e) => e.stopPropagation()}>Pro: {MAX_FILES_PRO}</Link>
                 </span>
               )}
             </p>
