@@ -199,6 +199,34 @@ const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+const IconAiOrganize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes tp-ao-drop { 0% { transform: translateY(-8px); opacity: 0; } 40%, 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(4px); opacity: 0; } }
+      @keyframes tp-ao-sparkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1); } }
+      .tp-ao-d1 { animation: tp-ao-drop 2.4s ease-in-out 0s infinite; }
+      .tp-ao-d2 { animation: tp-ao-drop 2.4s ease-in-out 0.4s infinite; }
+      .tp-ao-d3 { animation: tp-ao-drop 2.4s ease-in-out 0.8s infinite; }
+      .tp-ao-s1 { transform-origin: 40px 8px; animation: tp-ao-sparkle 2s ease-in-out 0.2s infinite; }
+      .tp-ao-s2 { transform-origin: 44px 14px; animation: tp-ao-sparkle 2s ease-in-out 0.8s infinite; }
+    `}</style>
+    <path d="M4 16 L4 40 Q4 42 6 42 L38 42 Q40 42 40 40 L40 20 Q40 18 38 18 L22 18 L18 12 L6 12 Q4 12 4 14 Z" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <path d="M4 14 Q4 12 6 12 L18 12 L22 18 L38 18 Q40 18 40 20" stroke={accent} strokeWidth="1.25" fill={accent} fillOpacity="0.06"/>
+    <g className="tp-ao-d1"><rect x="10" y="6" width="6" height="5" rx="1" fill={accent} fillOpacity="0.5" stroke={accent} strokeWidth="0.75"/></g>
+    <g className="tp-ao-d2"><rect x="19" y="4" width="6" height="5" rx="1" fill={accent} fillOpacity="0.4" stroke={accent} strokeWidth="0.75"/></g>
+    <g className="tp-ao-d3"><rect x="28" y="7" width="6" height="5" rx="1" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="0.75"/></g>
+    <rect x="8" y="26" width="10" height="4" rx="1" fill={accent} fillOpacity="0.2"/>
+    <rect x="21" y="26" width="10" height="4" rx="1" fill={accent} fillOpacity="0.2"/>
+    <rect x="12" y="33" width="12" height="4" rx="1" fill={accent} fillOpacity="0.15"/>
+    <g className="tp-ao-s1">
+      <path d="M40 8 L41 5 L42 8 L45 9 L42 10 L41 13 L40 10 L37 9 Z" fill={accent} fillOpacity="0.7"/>
+    </g>
+    <g className="tp-ao-s2">
+      <path d="M44 14 L44.5 12.5 L45 14 L46.5 14.5 L45 15 L44.5 16.5 L44 15 L42.5 14.5 Z" fill={accent} fillOpacity="0.5"/>
+    </g>
+  </svg>
+);
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Category = "All" | "Optimize" | "AI" | "Creative" | "Organize" | "Workflows";
@@ -322,6 +350,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#22C55E",
     badges: ["AI-powered", "Login required"],
     Icon: IconSmartSort,
+    category: ["AI"],
+  },
+  {
+    name: "AI Organize",
+    href: "/tools/ai-organize",
+    tagline: "Drop 100+ photos. AI sorts into folders, finds duplicates, renames for SEO.",
+    accent: "#8B5CF6",
+    badges: ["Login required", "Gemini Flash", "NEW"],
+    Icon: IconAiOrganize,
     category: ["AI"],
   },
 
@@ -524,13 +561,20 @@ export function ToolsPageClient() {
       result = result.filter((t) => t.category.includes(activeCategory));
     }
 
-    // Filter by search query
+    // Filter by search query (matches name, tagline, and individual words)
     const q = query.trim().toLowerCase();
     if (q) {
       result = result.filter(
         (t) =>
           t.name.toLowerCase().includes(q) ||
-          t.tagline.toLowerCase().includes(q)
+          t.tagline.toLowerCase().includes(q) ||
+          // Also match if individual words (3+ chars) appear in name or tagline
+          q.split(/\s+/).some(
+            (word) =>
+              word.length >= 3 &&
+              (t.name.toLowerCase().includes(word) ||
+               t.tagline.toLowerCase().includes(word))
+          )
       );
     }
 
