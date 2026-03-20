@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 import { getGiftCode, markRedeemed } from "@/lib/gift-codes";
+import { incrWithTTL } from "@/lib/redis";
 import { z } from "zod";
 import Stripe from "stripe";
 
@@ -19,10 +20,7 @@ const RedeemSchema = z.object({
 });
 
 /**
- * Resolve a gift code: first check the in-memory store, then fall back to
- * scanning recent Stripe checkout sessions by metadata. The fallback handles
- * the case where the webhook pre-populated the store on a different serverless
- * instance (cold-start scenario).
+ * Resolve a gift code from Redis, then re-verify payment status from Stripe.
  */
 async function resolveGiftFromStripe(code: string): Promise<{
   stripeSessionId: string;
@@ -31,11 +29,7 @@ async function resolveGiftFromStripe(code: string): Promise<{
   paid: boolean;
   redeemed: boolean;
 } | null> {
-  // Stripe does not support filtering by arbitrary metadata directly.
-  // We retrieve the session by ID stored in the in-memory record — if the
-  // record exists, use it. If not, we cannot reliably search by metadata at
-  // scale without a DB. Return null so the caller surfaces the right error.
-  const record = getGiftCode(code);
+  const record = await getGiftCode(code);
   if (!record) return null;
 
   // Re-verify payment status from Stripe (source of truth)
@@ -99,106 +93,158 @@ export async function POST(req: NextRequest) {
   const { code } = parsed.data;
   const redeemerEmail = session.user.email;
 
-  // Resolve gift — check store + Stripe
-  const gift = await resolveGiftFromStripe(code);
-
-  if (!gift) {
+  // Rate limit: 5 redemption attempts per minute per authenticated user
+  const rlCount = await incrWithTTL(`rl:gift-redeem:${redeemerEmail}`, 60);
+  if (rlCount !== null && rlCount > 5) {
     return NextResponse.json(
-      { error: "Gift code not found", code: "GIFT_NOT_FOUND" },
-      { status: 404 }
+      { error: "Too many requests", code: "RATE_LIMITED" },
+      { status: 429 }
     );
   }
 
-  if (!gift.paid) {
-    return NextResponse.json(
-      { error: "This gift has not been paid for yet", code: "GIFT_NOT_PAID" },
-      { status: 402 }
-    );
-  }
+  // Acquire a Redis lock to prevent concurrent double-redemption across
+  // serverless instances. The lock is scoped to the code, not the user,
+  // so two different users racing on the same code are also protected.
+  const lockKey = `gift_redeeming:${code}`;
+  const { exec: redisExec } = await import("@/lib/gift-codes").then(() => {
+    // We need raw Redis exec — reuse the same Upstash REST helper inline
+    const _url = process.env.UPSTASH_REDIS_REST_URL;
+    const _token = process.env.UPSTASH_REDIS_REST_TOKEN;
+    const _configured = Boolean(_url && _token);
+    return {
+      exec: async <T>(command: unknown[]): Promise<T | null> => {
+        if (!_configured) return null;
+        try {
+          const res = await fetch(`${_url}`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${_token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(command),
+          });
+          if (!res.ok) return null;
+          const data = (await res.json()) as { result: T };
+          return data.result;
+        } catch {
+          return null;
+        }
+      },
+    };
+  });
 
-  if (gift.redeemed) {
+  const lockAcquired = await redisExec<string>(["SET", lockKey, "1", "NX", "EX", 60]);
+  // lockAcquired === "OK" means we got the lock; null means Redis unavailable (allow through);
+  // any other value means another instance already holds the lock.
+  if (lockAcquired !== null && lockAcquired !== "OK") {
     return NextResponse.json(
-      { error: "This gift code has already been redeemed", code: "GIFT_ALREADY_REDEEMED" },
+      { error: "This gift code is currently being redeemed. Please try again shortly.", code: "CONFLICT" },
       { status: 409 }
     );
   }
 
-  // Find or create a Stripe customer for the recipient
-  let customerId: string;
   try {
-    const existing = await stripe.customers.list({ email: redeemerEmail, limit: 1 });
-    if (existing.data.length > 0) {
-      customerId = existing.data[0].id;
-    } else {
-      const created = await stripe.customers.create({
-        email: redeemerEmail,
-        name: session.user.name ?? undefined,
-        metadata: { source: "gift_redeem" },
-      });
-      customerId = created.id;
+    // Resolve gift — check Redis + Stripe
+    const gift = await resolveGiftFromStripe(code);
+
+    if (!gift) {
+      return NextResponse.json(
+        { error: "Gift code not found", code: "GIFT_NOT_FOUND" },
+        { status: 404 }
+      );
     }
-  } catch (err) {
-    console.error("[gift/redeem] Customer lookup/create failed:", err instanceof Error ? err.message : err);
-    return NextResponse.json(
-      { error: "Failed to set up your account. Please try again.", code: "STRIPE_ERROR" },
-      { status: 500 }
-    );
-  }
 
-  // Determine trial end: X months from today
-  const trialEnd = new Date();
-  trialEnd.setMonth(trialEnd.getMonth() + gift.months);
-  const trialEndUnix = Math.floor(trialEnd.getTime() / 1000);
+    if (!gift.paid) {
+      return NextResponse.json(
+        { error: "This gift has not been paid for yet", code: "GIFT_NOT_PAID" },
+        { status: 402 }
+      );
+    }
 
-  // Choose the correct price ID
-  const priceId =
-    gift.plan === "annual"
-      ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID?.trim() ?? process.env.STRIPE_PRO_PRICE_ID!)
-      : process.env.STRIPE_PRO_PRICE_ID!;
+    if (gift.redeemed) {
+      return NextResponse.json(
+        { error: "This gift code has already been redeemed", code: "GIFT_ALREADY_REDEEMED" },
+        { status: 409 }
+      );
+    }
 
-  if (!priceId) {
-    console.error("[gift/redeem] Missing STRIPE_PRO_PRICE_ID env var");
-    return NextResponse.json(
-      { error: "Server configuration error", code: "CONFIG_ERROR" },
-      { status: 500 }
-    );
-  }
+    // Find or create a Stripe customer for the recipient
+    let customerId: string;
+    try {
+      const existing = await stripe.customers.list({ email: redeemerEmail, limit: 1 });
+      if (existing.data.length > 0) {
+        customerId = existing.data[0].id;
+      } else {
+        const created = await stripe.customers.create({
+          email: redeemerEmail,
+          name: session.user.name ?? undefined,
+          metadata: { source: "gift_redeem" },
+        });
+        customerId = created.id;
+      }
+    } catch (err) {
+      console.error("[gift/redeem] Customer lookup/create failed:", err instanceof Error ? err.message : err);
+      return NextResponse.json(
+        { error: "Failed to set up your account. Please try again.", code: "STRIPE_ERROR" },
+        { status: 500 }
+      );
+    }
 
-  try {
-    // Create a subscription with a trial that covers the gifted period.
-    // The subscriber's card will only be charged once the trial expires.
-    // For a pure "no card required" gift, use `payment_behavior: "default_incomplete"`
-    // and `trial_end` — Stripe will not require a payment method during the trial.
-    await stripe.subscriptions.create({
-      customer: customerId,
-      items: [{ price: priceId }],
-      trial_end: trialEndUnix,
-      payment_behavior: "default_incomplete",
-      metadata: {
-        source: "gift",
-        giftCode: code,
-        giftMonths: String(gift.months),
-        giftPlan: gift.plan,
+    // Determine trial end: X months from today
+    const trialEnd = new Date();
+    trialEnd.setMonth(trialEnd.getMonth() + gift.months);
+    const trialEndUnix = Math.floor(trialEnd.getTime() / 1000);
+
+    // Choose the correct price ID
+    const priceId =
+      gift.plan === "annual"
+        ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID?.trim() ?? process.env.STRIPE_PRO_PRICE_ID!)
+        : process.env.STRIPE_PRO_PRICE_ID!;
+
+    if (!priceId) {
+      console.error("[gift/redeem] Missing STRIPE_PRO_PRICE_ID env var");
+      return NextResponse.json(
+        { error: "Server configuration error", code: "CONFIG_ERROR" },
+        { status: 500 }
+      );
+    }
+
+    try {
+      // Create a subscription with a trial that covers the gifted period.
+      await stripe.subscriptions.create({
+        customer: customerId,
+        items: [{ price: priceId }],
+        trial_end: trialEndUnix,
+        payment_behavior: "default_incomplete",
+        metadata: {
+          source: "gift",
+          giftCode: code,
+          giftMonths: String(gift.months),
+          giftPlan: gift.plan,
+        },
+      });
+    } catch (err) {
+      console.error("[gift/redeem] Subscription create failed:", err instanceof Error ? err.message : err);
+      return NextResponse.json(
+        { error: "Failed to activate your subscription. Please try again.", code: "STRIPE_ERROR" },
+        { status: 500 }
+      );
+    }
+
+    // Mark the code as redeemed in Redis (markRedeemed also holds its own lock)
+    await markRedeemed(code, redeemerEmail);
+
+    console.log(`[gift/redeem] Code ${code} redeemed by ${redeemerEmail} — ${gift.months} months of ${gift.plan}`);
+
+    return NextResponse.json({
+      data: {
+        success: true,
+        months: gift.months,
+        plan: gift.plan,
       },
     });
-  } catch (err) {
-    console.error("[gift/redeem] Subscription create failed:", err instanceof Error ? err.message : err);
-    return NextResponse.json(
-      { error: "Failed to activate your subscription. Please try again.", code: "STRIPE_ERROR" },
-      { status: 500 }
-    );
+  } finally {
+    // Always release the outer redemption lock
+    redisExec(["DEL", lockKey]).catch(() => {});
   }
-
-  // Mark the code as redeemed in our store
-  markRedeemed(code, redeemerEmail);
-
-  console.log(`[gift/redeem] Code ${code} redeemed by ${redeemerEmail} — ${gift.months} months of ${gift.plan}`);
-
-  return NextResponse.json({
-    data: {
-      success: true,
-      months: gift.months,
-      plan: gift.plan,
-    },
-  });
 }

@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
 
   // Rate limiting: 15 requests per minute per IP — checked before any file I/O
   const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+    (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
   if (await isRateLimited(ip)) {
     return Response.json(
       { error: "Too many requests. Please wait a moment and try again." },

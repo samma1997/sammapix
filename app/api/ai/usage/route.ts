@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
-import { getInt, redisConfigured } from "@/lib/redis";
+import { getInt } from "@/lib/redis";
 import { AI_RENAME_FREE_PER_DAY, AI_RENAME_PRO_PER_DAY } from "@/lib/constants";
 
 function todayStr(): string {
@@ -36,17 +36,3 @@ export async function GET() {
   return NextResponse.json({ used, remaining, limit });
 }
 
-// POST to increment the in-memory counter (called by client after each rename)
-export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  // Only allow incrementing — never let the client set an arbitrary value
-  const key = `ai_rename:${session.user.email}:${todayStr()}`;
-  const current = memoryUsage.get(key) ?? 0;
-  memoryUsage.set(key, current + 1);
-
-  return NextResponse.json({ ok: true });
-}

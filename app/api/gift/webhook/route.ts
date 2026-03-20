@@ -138,15 +138,15 @@ export async function POST(req: NextRequest) {
     }
 
     // Mark paid in the gift-codes store
-    const updated = markPaid(giftCode);
+    const updated = await markPaid(giftCode);
     if (!updated) {
-      // The in-memory store may be empty on a new instance (e.g. serverless cold start).
-      // Reconstruct the record from Stripe session metadata.
+      // Redis may not have the record yet (e.g. created on a different instance before
+      // Redis was configured). Reconstruct from Stripe metadata and persist.
       const months = parseInt(metadata.months ?? "1", 10);
       const plan = metadata.plan === "annual" ? "annual" : "monthly";
 
       const { saveGiftCode } = await import("@/lib/gift-codes");
-      saveGiftCode(giftCode, {
+      await saveGiftCode(giftCode, {
         code: giftCode,
         senderName: metadata.senderName ?? "",
         senderEmail: metadata.senderEmail ?? (checkoutSession.customer_email ?? ""),
@@ -169,7 +169,7 @@ export async function POST(req: NextRequest) {
     // Notify recipient if email was provided
     const recipientEmail = metadata.recipientEmail;
     if (recipientEmail) {
-      const record = getGiftCode(giftCode);
+      const record = await getGiftCode(giftCode);
       await notifyRecipient({
         recipientEmail,
         recipientName: metadata.recipientName ?? "there",

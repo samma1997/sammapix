@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { getGiftCode } from "@/lib/gift-codes";
+import { incrWithTTL } from "@/lib/redis";
 
 export const runtime = "nodejs";
 
@@ -12,6 +13,16 @@ export const runtime = "nodejs";
  * gift card preview without exposing sender email or internal IDs.
  */
 export async function GET(req: NextRequest) {
+  // Rate limit: 10 requests per minute per IP
+  const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+  const rlCount = await incrWithTTL(`rl:gift-check:${ip}`, 60);
+  if (rlCount !== null && rlCount > 10) {
+    return NextResponse.json(
+      { error: "Too many requests", code: "RATE_LIMITED" },
+      { status: 429 }
+    );
+  }
+
   const { searchParams } = new URL(req.url);
   const raw = searchParams.get("code");
 
@@ -32,7 +43,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const record = getGiftCode(code);
+  const record = await getGiftCode(code);
   if (!record) {
     return NextResponse.json(
       { data: { valid: false } },

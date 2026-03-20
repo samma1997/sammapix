@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 import { CREDIT_PACKAGES, CreditPackageId } from "@/lib/credits";
+import { incrWithTTL } from "@/lib/redis";
 
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
@@ -24,6 +25,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { error: "Login required", code: "UNAUTHORIZED" },
       { status: 401 }
+    );
+  }
+
+  // Rate limit: 5 purchase attempts per minute per authenticated user
+  const rlCount = await incrWithTTL(`rl:credits-purchase:${session.user.email}`, 60);
+  if (rlCount !== null && rlCount > 5) {
+    return NextResponse.json(
+      { error: "Too many requests", code: "RATE_LIMITED" },
+      { status: 429 }
     );
   }
 

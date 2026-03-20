@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { incrWithTTL } from "@/lib/redis";
 
 // Only allow fetching images from the trusted Cloudinary domain (SSRF prevention)
 const ALLOWED_IMAGE_HOSTS = ["res.cloudinary.com"];
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 10 requests per 5 minutes per IP
+  const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+  const rlCount = await incrWithTTL(`rl:admin-photos-generate:${ip}`, 300);
+  if (rlCount !== null && rlCount > 10) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const ADMIN_SECRET = process.env.ADMIN_SECRET;
   if (!ADMIN_SECRET) {
     return NextResponse.json({ error: "Service not configured" }, { status: 503 });

@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
         const giftCode = metadata.giftCode;
         if (giftCode) {
           // Ensure the gift code exists in our store (may have been lost on cold start)
-          saveGiftCode(giftCode, {
+          await saveGiftCode(giftCode, {
             code: giftCode,
             senderName: metadata.senderName ?? "Someone",
             senderEmail: metadata.senderEmail ?? session.customer_email ?? "",
@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
             redeemerEmail: undefined,
             createdAt: new Date(),
           });
-          markPaid(giftCode);
+          await markPaid(giftCode);
           console.log(`[stripe/webhook] Gift paid: ${giftCode} from ${metadata.senderEmail} to ${metadata.recipientName}`);
         }
       } else if (metadata.type === "credits") {

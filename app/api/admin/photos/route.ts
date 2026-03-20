@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { v2 as cloudinary } from "cloudinary";
 import { z } from "zod";
+import { incrWithTTL } from "@/lib/redis";
 
 function initCloudinary(): void {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
@@ -24,6 +25,13 @@ function checkAuth(req: NextRequest): boolean {
 
 // GET- fetch all portfolio photos with context
 export async function GET(req: NextRequest) {
+  // Rate limit: 20 requests per 5 minutes per IP
+  const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+  const rlCount = await incrWithTTL(`rl:admin-photos:${ip}`, 300);
+  if (rlCount !== null && rlCount > 20) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   try {
     if (!checkAuth(req)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -89,6 +97,13 @@ const UpdateSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 20 requests per 5 minutes per IP (shared window with GET)
+  const ip = (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? "unknown";
+  const rlCount = await incrWithTTL(`rl:admin-photos:${ip}`, 300);
+  if (rlCount !== null && rlCount > 20) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   try {
     if (!checkAuth(req)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
