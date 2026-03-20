@@ -10,29 +10,34 @@ import { FolderOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title:
-    "AI Photo Organizer — Sort, Dedupe & Rename in One Click | SammaPix",
+    "AI File Organizer — Sort Any File Type with AI | SammaPix",
   description:
-    "Drop hundreds of photos. AI sorts them into folders, finds duplicates, and renames for SEO. Free browser-based tool powered by Gemini.",
+    "Drop hundreds of files — photos, PDFs, documents, videos. AI sorts into smart folders, finds duplicates, and renames based on content. Free browser-based tool.",
   keywords: [
+    "ai file organizer",
+    "ai file sorter",
+    "organize documents",
+    "sort pdf files",
+    "rename documents ai",
     "ai photo organizer",
     "organize photos automatically",
-    "ai sort photos into folders",
-    "photo duplicate finder",
-    "seo image rename",
-    "bulk photo organizer",
-    "ai categorize images",
-    "photo folder organizer",
-    "remove duplicate photos",
-    "batch rename photos seo",
+    "ai sort files into folders",
+    "file duplicate finder",
+    "bulk file organizer",
+    "ai categorize files",
+    "document organizer",
+    "sort videos photos documents",
+    "batch rename files ai",
+    "smart file sorter",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/ai-organize`,
   },
   openGraph: {
     title:
-      "AI Photo Organizer — Sort, Dedupe & Rename in One Click | SammaPix",
+      "AI File Organizer — Sort Any File Type with AI | SammaPix",
     description:
-      "Drop hundreds of photos. AI sorts them into folders, finds duplicates, and renames for SEO. Free browser-based tool.",
+      "Drop hundreds of files — photos, PDFs, documents, videos. AI sorts into smart folders, finds duplicates, and renames based on content. Free browser-based tool.",
     url: `${APP_URL}/tools/ai-organize`,
     siteName: "SammaPix",
     type: "website",
@@ -41,7 +46,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "AI Photo Organizer - Sort, Dedupe & Rename",
+        alt: "AI File Organizer - Sort Any File Type with AI",
       },
     ],
   },
@@ -49,21 +54,21 @@ export const metadata: Metadata = {
 
 const howToSteps = [
   {
-    title: "Drop your photos",
-    desc: "Drag & drop up to 500 photos at once. JPG, PNG, WebP, HEIC all supported.",
+    title: "Drop any files",
+    desc: "Drag & drop up to 500 files at once. Photos, PDFs, Word, Excel, PowerPoint, videos, audio, code — all supported.",
   },
   {
     title: "AI analyzes everything",
-    desc: "Each photo is categorized, duplicates are found via perceptual hashing, and SEO names are generated.",
+    desc: "Each file is categorized into smart folders (Contracts, Invoices, Travel Photos, etc.), duplicates are found, and descriptive names are generated.",
   },
   {
     title: "Review & download",
-    desc: "Browse by category, remove dupes, approve or edit AI names, then download as organized ZIP.",
+    desc: "Browse by category, remove dupes, approve or edit AI names, then download as organized ZIP with folder structure.",
   },
 ];
 
 const proTip = {
-  text: "Works best with 50+ photos. The more you add, the smarter the sorting.",
+  text: "Works best with 50+ files. Mix photos, documents, and videos — the AI handles all types.",
   linkLabel: "Upgrade to Pro",
   linkHref: "/pricing",
 };
@@ -77,16 +82,20 @@ const relatedTools = [
 
 const faqItems = [
   {
-    q: "What does AI Organize do?",
-    a: "AI Organize combines three tools into one: it categorizes your photos into folders (Nature, People, Food, etc.), finds duplicates using perceptual hashing, and generates SEO-friendly filenames — all in a single workflow.",
+    q: "What file types does AI Organize support?",
+    a: "AI Organize supports virtually all common file types: images (JPG, PNG, WebP, GIF, HEIC, SVG), documents (PDF, DOCX, XLSX, PPTX), text and code files (TXT, MD, CSV, JSON, HTML, CSS, JS, PY, TS), videos (MP4, MOV, WebM, AVI), and audio (MP3, WAV, M4A, OGG).",
   },
   {
-    q: "How many photos can I process at once?",
-    a: "Free users can process up to 50 photos per session with 10 AI operations per day. Pro users get up to 500 photos per session with 500 AI operations per day.",
+    q: "How does AI categorization work for different file types?",
+    a: "For images and videos, AI analyzes the visual content (thumbnails and first frames). For documents, spreadsheets, and presentations, it reads extracted text content. The AI creates smart categories like 'Contracts', 'Invoices', 'Travel Photos', 'Product Shots', 'Receipts', 'Code', and more — adapting to your actual content.",
+  },
+  {
+    q: "How many files can I process at once?",
+    a: "Free users can process up to 50 files per session with 10 AI operations per day. Pro users get up to 500 files per session with 500 AI operations per day.",
   },
   {
     q: "How does duplicate detection work?",
-    a: "Duplicates are found using perceptual hashing (pHash) — the same technology behind TwinHunt. It compares visual content, not file bytes, so it catches resized and re-saved copies too.",
+    a: "For images and videos, duplicates are found using perceptual hashing that compares visual content. For text-based files (documents, code, spreadsheets), duplicates are detected by comparing content similarity, catching files with the same content but different filenames.",
   },
   {
     q: "Do I need an account?",
@@ -94,7 +103,11 @@ const faqItems = [
   },
   {
     q: "Is my data safe?",
-    a: "Only small thumbnails are sent to Gemini for analysis. Your full-resolution images stay in your browser. Duplicate detection runs entirely client-side.",
+    a: "Yes. File previews are extracted client-side in your browser. Only small thumbnails (for images/videos) or short text excerpts (for documents) are sent to the AI for analysis. Your full files never leave your browser. Duplicate detection runs entirely client-side.",
+  },
+  {
+    q: "Can I organize a mix of different file types?",
+    a: "Absolutely — that's the power of AI Organize. Drop photos, PDFs, spreadsheets, and code files all at once. The AI will sort them into contextual categories and suggest descriptive filenames for each.",
   },
 ];
 
@@ -102,11 +115,11 @@ export default function AiOrganizePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "SammaPix AI Photo Organizer",
+    name: "SammaPix AI File Organizer",
     url: `${APP_URL}/tools/ai-organize`,
     description:
-      "AI-powered photo organizer. Sorts photos into folders, finds duplicates, and generates SEO filenames.",
-    applicationCategory: "PhotographyApplication",
+      "AI-powered universal file organizer. Sorts photos, documents, videos, and code into smart folders, finds duplicates, and generates descriptive filenames.",
+    applicationCategory: "UtilitiesApplication",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     operatingSystem: "Web Browser",
     author: {
@@ -120,23 +133,24 @@ export default function AiOrganizePage() {
       url: `${APP_URL}`,
     },
     featureList: [
-      "AI photo categorization",
-      "Perceptual duplicate detection",
-      "SEO filename generation",
+      "AI file categorization for all file types",
+      "Smart duplicate detection (visual + content)",
+      "Descriptive filename generation",
       "ZIP download with folder structure",
+      "Support for images, PDFs, documents, videos, audio, code",
     ],
   };
 
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: "How to organize photos with AI using AI Organize",
+    name: "How to organize any files with AI using AI Organize",
     description:
-      "Sort, deduplicate, and rename hundreds of photos in one click with SammaPix AI Organize.",
+      "Sort, deduplicate, and rename hundreds of files — photos, PDFs, documents, videos — in one click with SammaPix AI Organize.",
     totalTime: "PT5M",
     tool: {
       "@type": "SoftwareApplication",
-      name: "SammaPix AI Photo Organizer",
+      name: "SammaPix AI File Organizer",
       url: `${APP_URL}/tools/ai-organize`,
     },
     step: howToSteps.map((s, i) => ({
@@ -208,7 +222,7 @@ export default function AiOrganizePage() {
 
       <ToolHeader
         title="AI Organize"
-        description="Drop hundreds of photos. AI sorts them into folders, finds duplicates, and renames for SEO — all in one step."
+        description="Drop any files — photos, PDFs, documents, videos. AI sorts them into smart folders, finds duplicates, and renames based on content."
         icon={FolderOpen}
         accentColor="#8B5CF6"
       />
