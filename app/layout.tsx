@@ -116,9 +116,9 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-white dark:bg-[#191919] text-gray-900 dark:text-[#E5E5E5] min-h-screen flex flex-col transition-colors duration-150">
         <Providers>
           <LayoutShell>{children}</LayoutShell>
+          {/* Tracking scripts are loaded by CookieConsent after user consent */}
+          <CookieConsent />
         </Providers>
-        {/* Tracking scripts are loaded by CookieConsent after user consent */}
-        <CookieConsent />
         <Analytics />
         <script
           type="application/ld+json"
