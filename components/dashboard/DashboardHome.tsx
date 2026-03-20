@@ -709,7 +709,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 pb-16 space-y-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 md:py-8 pb-16 space-y-4 md:space-y-8">
 
       {/* -- Welcome + Plan status -- */}
       <section>
