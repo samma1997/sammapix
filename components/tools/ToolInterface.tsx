@@ -14,6 +14,7 @@ import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 import { AI_RENAME_FREE_PER_DAY } from "@/lib/constants";
+import { trackEvent } from "@/lib/analytics";
 
 export type ToolMode = "compress" | "webp" | "ai-rename";
 
@@ -65,6 +66,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
     }
     // Check daily limit for free users
     if (!isPro && aiRenameUsedToday >= AI_RENAME_FREE_PER_DAY) {
+      trackEvent("limit_hit", { limit_type: "ai_renames" });
       setAiUpsellOpen(true);
       return;
     }

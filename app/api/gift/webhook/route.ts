@@ -66,12 +66,17 @@ async function notifyRecipient(opts: {
   months: number;
   plan: string;
 }): Promise<void> {
-  // TODO: Replace with real email via Resend once GiftEmail template is built.
-  // Example:
-  //   const { sendGiftEmail } = await import("@/lib/email-service");
-  //   await sendGiftEmail(opts.recipientEmail, opts);
+  const { sendGiftEmail } = await import("@/lib/email-service");
+  await sendGiftEmail(opts.recipientEmail, {
+    recipientName: opts.recipientName,
+    senderName: opts.senderName,
+    message: opts.message,
+    giftCode: opts.giftCode,
+    months: opts.months,
+    plan: opts.plan,
+  });
   console.log(
-    `[gift/webhook] NOTIFY RECIPIENT — To: ${opts.recipientEmail} | From: ${opts.senderName} | Code: ${opts.giftCode} | ${opts.months}mo ${opts.plan}`
+    `[gift/webhook] Gift email sent — To: ${opts.recipientEmail} | From: ${opts.senderName} | Code: ${opts.giftCode} | ${opts.months}mo ${opts.plan}`
   );
 }
 
