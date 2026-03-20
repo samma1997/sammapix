@@ -453,6 +453,72 @@ export default function CompressPage() {
         </div>
       </section>
 
+      {/* ============================================================ */}
+      {/*  ALL TOOLS — Show the full platform                          */}
+      {/* ============================================================ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+            SammaPix is more than a compressor
+          </h2>
+          <p className="text-xs text-[#A3A3A3] mb-6">
+            20 free browser-based tools for creators. Everything runs locally — your files never leave your device.
+          </p>
+
+          {/* AI Organize — Featured */}
+          <Link
+            href="/tools/ai-organize"
+            className="flex items-start gap-4 p-5 mb-4 border-2 border-[#8B5CF6]/30 rounded-xl bg-[#8B5CF6]/5 hover:bg-[#8B5CF6]/10 transition-colors group"
+          >
+            <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-[#8B5CF6]/15 shrink-0">
+              <Sparkles className="h-5 w-5 text-[#8B5CF6]" strokeWidth={1.5} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] flex items-center gap-2">
+                AI File Organizer
+                <span className="text-[9px] font-bold uppercase tracking-widest bg-[#8B5CF6] text-white px-2 py-0.5 rounded-full">NEW</span>
+              </p>
+              <p className="text-xs text-[#737373] mt-1 leading-relaxed">
+                Drop any files — photos, PDFs, documents, videos. AI sorts into smart folders, finds duplicates, and renames based on content. No competitor does this browser-based.
+              </p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-[#8B5CF6] shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" strokeWidth={1.5} />
+          </Link>
+
+          {/* Tool grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {[
+              { name: "WebP Convert", href: "/tools/webp" },
+              { name: "HEIC to JPG", href: "/tools/heic" },
+              { name: "AI Rename", href: "/tools/ai-rename" },
+              { name: "AI Alt Text", href: "/tools/alt-text" },
+              { name: "Batch Resize", href: "/tools/resizepack" },
+              { name: "Crop & Ratio", href: "/tools/croproatio" },
+              { name: "Film Filters", href: "/tools/filmlab" },
+              { name: "Watermark", href: "/tools/stampit" },
+              { name: "EXIF Remover", href: "/tools/exif" },
+              { name: "Find Duplicates", href: "/tools/twinhunt" },
+              { name: "Photo Map", href: "/tools/travelmap" },
+              { name: "Cull Photos", href: "/tools/cull" },
+            ].map((t) => (
+              <Link
+                key={t.href}
+                href={t.href}
+                className="px-3 py-2.5 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:bg-[#FAFAFA] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors text-center"
+              >
+                {t.name}
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-4 text-center">
+            <Link href="/tools" className="text-xs text-[#6366F1] hover:underline font-medium">
+              See all 20 tools →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Related guide */}
       <section className="py-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
