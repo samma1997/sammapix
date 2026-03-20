@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RedeemPage({ params }: { params: { code: string } }) {
-  return <RedeemClient code={params.code} />;
+export default async function RedeemPage({ params }: { params: Promise<{ code: string }> }) {
+  const { code } = await params;
+  return <RedeemClient code={code} />;
 }
