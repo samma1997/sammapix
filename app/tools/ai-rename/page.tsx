@@ -5,6 +5,8 @@ import Link from "next/link";
 import AiRenameClient from "@/components/tools/AiRenameClient";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "AI Image Filename Generator for SEO | Free Online | SammaPix",
@@ -75,6 +77,7 @@ const relatedTools = [
 export default function AiRenamePage() {
   return (
     <main>
+      <MetaViewContent contentName="AI Rename" contentId="ai-rename" />
       {/* Hero SEO */}
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
         <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">AI Image Filename Generator for SEO</h1>

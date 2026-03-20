@@ -4,6 +4,8 @@ import { ArrowRight, Sparkles, Globe, Eye } from "lucide-react";
 import Link from "next/link";
 import AltTextClient from "@/components/tools/AltTextClient";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
@@ -76,6 +78,7 @@ const relatedTools = [
 export default function AltTextPage() {
   return (
     <main>
+      <MetaViewContent contentName="AI Alt Text" contentId="alt-text" />
       {/* Hero SEO */}
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
         <div className="flex items-center gap-2 mb-2">

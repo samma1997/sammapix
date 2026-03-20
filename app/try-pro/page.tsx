@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import MetaAddToWishlist from "@/components/tracking/MetaAddToWishlist";
 import Link from "next/link";
 import {
   Check,
@@ -103,6 +104,7 @@ const AUDIENCES = [
 export default function TryProPage() {
   return (
     <div className="bg-white dark:bg-[#191919] min-h-screen">
+      <MetaAddToWishlist />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">

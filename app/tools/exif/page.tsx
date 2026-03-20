@@ -5,6 +5,8 @@ import ExifClient from "@/components/tools/ExifClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
@@ -107,6 +109,7 @@ const faqs = [
 export default function ExifPage() {
   return (
     <main>
+      <MetaViewContent contentName="EXIF Viewer" contentId="exif" />
       <ToolHeader
         title="EXIF Viewer"
         description="View all metadata in your photos - GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser."

@@ -5,6 +5,8 @@ import SmartSortClient from "@/components/tools/SmartSortClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "AI Photo Sort - AI Image Categorizer & Sorter | SammaPix",
@@ -114,6 +116,7 @@ export default function SmartSortPage() {
 
   return (
     <main>
+      <MetaViewContent contentName="SmartSort" contentId="smartsort" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

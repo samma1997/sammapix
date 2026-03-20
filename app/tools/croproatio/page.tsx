@@ -5,6 +5,8 @@ import CropRatioClient from "@/components/tools/CropRatioClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Crop Image to Aspect Ratio Online Free | SammaPix",
@@ -128,6 +130,7 @@ const steps = [
 export default function CropRatioPage() {
   return (
     <main>
+      <MetaViewContent contentName="Crop & Ratio" contentId="croproatio" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

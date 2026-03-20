@@ -6,6 +6,8 @@ import ToolHeader from "@/components/tools/ToolHeader";
 import FilmLabClient from "@/components/tools/FilmLabClient";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
@@ -73,6 +75,7 @@ const relatedTools = [
 export default function FilmLabPage() {
   return (
     <main>
+      <MetaViewContent contentName="FilmLab" contentId="filmlab" />
       <ToolHeader
         title="Film Filters"
         description="Film grain, vignette, fade and analog color grading. 6 film stock presets. Live preview. Batch process all photos."

@@ -5,6 +5,8 @@ import GeoSortClientWrapper from "@/components/tools/GeoSortClientWrapper";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Sort Photos by Location Free - GPS Organizer | SammaPix",
@@ -89,6 +91,7 @@ const steps = [
 export default function GeoSortPage() {
   return (
     <main>
+      <MetaViewContent contentName="GeoSort" contentId="geosort" />
       <ToolHeader
         title="Sort by Location"
         description="Drop your travel photos - GPS data is read locally and photos are organized into folders by country. Nothing leaves your device."

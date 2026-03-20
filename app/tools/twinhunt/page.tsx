@@ -5,6 +5,8 @@ import TwinHuntClient from "@/components/tools/TwinHuntClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "Find Duplicate Photos Free Online | Perceptual Hashing | SammaPix",
@@ -111,6 +113,7 @@ const faqs = [
 export default function TwinHuntPage() {
   return (
     <main>
+      <MetaViewContent contentName="TwinHunt" contentId="twinhunt" />
       <ToolHeader
         title="Find Duplicates"
         description="Find duplicate and near-duplicate photos in your browser. Perceptual hashing compares visual content- not file bytes. Nothing uploaded, nothing stored."

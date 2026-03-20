@@ -4,6 +4,8 @@ import { ArrowRight, Mic, FileText, Globe } from "lucide-react";
 import Link from "next/link";
 import TranscribeClient from "@/components/tools/TranscribeClient";
 import { APP_URL } from "@/lib/constants";
+import MetaViewContent from "@/components/tracking/MetaViewContent";
+
 
 export const metadata: Metadata = {
   title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
@@ -91,6 +93,7 @@ const relatedTools = [
 export default function TranscribePage() {
   return (
     <main>
+      <MetaViewContent contentName="Transcribe" contentId="transcribe" />
       {/* Hero SEO */}
       <div className="max-w-3xl mx-auto px-4 pt-10 pb-2">
         <div className="flex items-center gap-2 mb-2">
