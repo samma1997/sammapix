@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Disable source maps in production to prevent code inspection
+  productionBrowserSourceMaps: false,
+  // Disable x-powered-by header (don't reveal Next.js)
+  poweredByHeader: false,
   // ESLint 8 + next/core-web-vitals + next/typescript produces a circular JSON
   // error during the build lint phase. TypeScript type-check still runs via tsc.
   eslint: {

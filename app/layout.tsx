@@ -114,7 +114,15 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="SammaPix" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
-      <body className="font-sans antialiased bg-white dark:bg-[#191919] text-gray-900 dark:text-[#E5E5E5] min-h-screen flex flex-col transition-colors duration-150">
+      <body className="font-sans antialiased bg-white dark:bg-[#191919] text-gray-900 dark:text-[#E5E5E5] min-h-screen flex flex-col transition-colors duration-150" data-sp-v="2" data-sp-o="LS">{/*
+        ═══════════════════════════════════════════════════════════════
+        SammaPix — Copyright 2026 Luca Sammarco. All rights reserved.
+        Unauthorized reproduction, scraping, mirroring, or derivative
+        work is strictly prohibited. This source code, design, layout,
+        and all associated assets are proprietary intellectual property.
+        Fingerprint: SP-2026-LS-9F3A7B2E — Automated monitoring active.
+        ═══════════════════════════════════════════════════════════════
+      */}
         <Providers>
           <LayoutShell>{children}</LayoutShell>
           {/* Tracking scripts are loaded by CookieConsent after user consent */}
