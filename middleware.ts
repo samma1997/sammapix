@@ -44,9 +44,7 @@ const BLOCKED_UA_PATTERNS = [
   "lwp-trivial",
   "lwp::simple",
   // SEO / content scrapers (not search engines)
-  "semrushbot",
   "dotbot",
-  "ahrefsbot",
   "mj12bot",
   "blexbot",
   "megaindex",
@@ -90,6 +88,8 @@ const ALLOWED_BOTS = [
   "claude-web",
   "anthropic-ai",
   "claude-code",
+  "semrushbot",
+  "ahrefsbot",
   "perplexitybot",
   "ccbot",
   "omgilibot",
