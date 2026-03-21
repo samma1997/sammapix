@@ -248,8 +248,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // ── Main domain: /dashboard/growth accessible but admin-only ──────────
-  // (Growth subdomain is an alias — both work for now)
+  // ── Main domain: block /dashboard/growth completely ──────────
+  if (pathname.startsWith("/dashboard/growth")) {
+    return new NextResponse("Not found", { status: 404 });
+  }
 
   // ── Referral cookie capture ──────────────────────────────────────────────
   // Capture ?ref=SPIX-XXXX on ANY page, set 30-day cookie.
