@@ -1,0 +1,125 @@
+import {
+  pgTable,
+  serial,
+  text,
+  integer,
+  boolean,
+  timestamp,
+  real,
+} from "drizzle-orm/pg-core";
+
+export const growthRedditPosts = pgTable("growth_reddit_posts", {
+  id: serial("id").primaryKey(),
+  redditId: text("reddit_id").unique(),
+  title: text("title").notNull(),
+  subreddit: text("subreddit").notNull(),
+  url: text("url").notNull(),
+  author: text("author"),
+  commentsCount: integer("comments_count").default(0),
+  relevanceScore: integer("relevance_score").default(0),
+  status: text("status").default("to_comment"), // 'to_comment', 'commented', 'skipped'
+  draftComment: text("draft_comment"),
+  actualComment: text("actual_comment"),
+  commentUrl: text("comment_url"),
+  scrapedAt: timestamp("scraped_at").defaultNow(),
+  commentedAt: timestamp("commented_at"),
+});
+
+export const growthOutreachTargets = pgTable("growth_outreach_targets", {
+  id: serial("id").primaryKey(),
+  siteName: text("site_name").notNull(),
+  articleTitle: text("article_title"),
+  articleUrl: text("article_url"),
+  contactName: text("contact_name"),
+  contactEmail: text("contact_email"),
+  contactLinkedin: text("contact_linkedin"),
+  status: text("status").default("to_send"), // 'to_send', 'sent', 'replied', 'linked', 'rejected'
+  sentAt: timestamp("sent_at"),
+  followUpAt: timestamp("follow_up_at"),
+  backlinkVerified: boolean("backlink_verified").default(false),
+  notes: text("notes"),
+  replyText: text("reply_text"),
+  repliedAt: timestamp("replied_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const growthYoutubeInsights = pgTable("growth_youtube_insights", {
+  id: serial("id").primaryKey(),
+  videoId: text("video_id").unique().notNull(),
+  videoUrl: text("video_url").notNull(),
+  videoTitle: text("video_title").notNull(),
+  channelName: text("channel_name").notNull(),
+  transcriptSummary: text("transcript_summary"),
+  tags: text("tags"), // JSON string array
+  insightType: text("insight_type").default("seo_tactic"), // 'seo_tactic', 'tool_idea', 'content_idea', 'trend'
+  scrapedAt: timestamp("scraped_at").defaultNow(),
+});
+
+export const growthContentCalendar = pgTable("growth_content_calendar", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  targetKeyword: text("target_keyword"),
+  status: text("status").default("idea"), // 'idea', 'writing', 'published', 'needs_update'
+  publishedUrl: text("published_url"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const growthDirectorySubmissions = pgTable(
+  "growth_directory_submissions",
+  {
+    id: serial("id").primaryKey(),
+    directoryName: text("directory_name").notNull(),
+    directoryUrl: text("directory_url").notNull(),
+    status: text("status").default("submitted"), // 'submitted', 'listed', 'rejected', 'to_submit'
+    submittedAt: timestamp("submitted_at").defaultNow(),
+    listedAt: timestamp("listed_at"),
+    backlinkUrl: text("backlink_url"),
+    notes: text("notes"),
+  }
+);
+
+export type RedditPost = typeof growthRedditPosts.$inferSelect;
+export type NewRedditPost = typeof growthRedditPosts.$inferInsert;
+export type OutreachTarget = typeof growthOutreachTargets.$inferSelect;
+export type NewOutreachTarget = typeof growthOutreachTargets.$inferInsert;
+export type YoutubeInsight = typeof growthYoutubeInsights.$inferSelect;
+export type NewYoutubeInsight = typeof growthYoutubeInsights.$inferInsert;
+export type ContentItem = typeof growthContentCalendar.$inferSelect;
+export type NewContentItem = typeof growthContentCalendar.$inferInsert;
+export type DirectorySubmission =
+  typeof growthDirectorySubmissions.$inferSelect;
+export type NewDirectorySubmission =
+  typeof growthDirectorySubmissions.$inferInsert;
+
+export const growthGscDaily = pgTable("growth_gsc_daily", {
+  id: serial("id").primaryKey(),
+  date: text("date").notNull(), // "2026-03-21"
+  page: text("page").notNull(), // "/tools/compress"
+  query: text("query"), // nullable — "image compressor free"
+  impressions: integer("impressions").default(0),
+  clicks: integer("clicks").default(0),
+  ctr: real("ctr").default(0), // 0.05 = 5%
+  position: real("position").default(0), // 4.2
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type GscDaily = typeof growthGscDaily.$inferSelect;
+export type NewGscDaily = typeof growthGscDaily.$inferInsert;
+
+export const growthStrategyReviews = pgTable("growth_strategy_reviews", {
+  id: serial("id").primaryKey(),
+  reviewDate: text("review_date").notNull(), // "2026-03-21"
+  periodStart: text("period_start").notNull(),
+  periodEnd: text("period_end").notNull(),
+  analysisText: text("analysis_text").notNull(),
+  suggestions: text("suggestions"), // JSON string
+  backlinksGained: integer("backlinks_gained").default(0),
+  redditComments: integer("reddit_comments").default(0),
+  outreachSent: integer("outreach_sent").default(0),
+  outreachLinked: integer("outreach_linked").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type StrategyReview = typeof growthStrategyReviews.$inferSelect;
+export type NewStrategyReview = typeof growthStrategyReviews.$inferInsert;

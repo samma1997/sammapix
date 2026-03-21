@@ -34,7 +34,9 @@ import {
   HelpCircle,
   LogOut,
   ChevronUp,
+  TrendingUp,
 } from "lucide-react";
+import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
 import type { Persona } from "@/components/onboarding/OnboardingModal";
 
@@ -172,9 +174,9 @@ export default function DashboardSidebar({
     ? (PERSONA_TOOL_MAP[persona] ?? []).slice(0, 6).map((slug) => getToolBySlug(slug)).filter(Boolean) as SidebarTool[]
     : [];
 
-  const linkClasses = (href: string) => [
+  const linkClasses = (href: string, prefix?: boolean) => [
     "flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors duration-150",
-    pathname === href
+    (prefix ? pathname.startsWith(href) : pathname === href)
       ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
       : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
   ].join(" ");
@@ -239,6 +241,18 @@ export default function DashboardSidebar({
           <LayoutDashboard className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           Home
         </Link>
+
+        {/* Growth Dashboard — admin only */}
+        {userEmail && ADMIN_EMAILS.includes(userEmail) && (
+          <Link
+            href="/dashboard/growth"
+            onClick={() => setMobileOpen(false)}
+            className={linkClasses("/dashboard/growth", true)}
+          >
+            <TrendingUp className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+            Growth
+          </Link>
+        )}
 
         <div className="pt-3">
           <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
