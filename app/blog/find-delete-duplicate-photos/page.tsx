@@ -598,7 +598,7 @@ export default function FindDeleteDuplicatePhotosPage() {
             </h3>
             <div className="space-y-3">
               <Link
-                href="/blog/how-to-cull-photos-fast"
+                href="/blog/cull-photos-faster-workflow"
                 className="flex items-start gap-3 group"
               >
                 <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-blue-700">
@@ -620,7 +620,7 @@ export default function FindDeleteDuplicatePhotosPage() {
                 </span>
               </Link>
               <Link
-                href="/blog/remove-exif-data-photos"
+                href="/blog/remove-exif-protect-privacy"
                 className="flex items-start gap-3 group"
               >
                 <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-purple-700">

@@ -451,7 +451,7 @@ export default function CompressPage() {
               Related guide
             </p>
             <a
-              href="/blog/compress-images-for-website"
+              href="/blog/compress-images-without-losing-quality"
               className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1"
             >
               How to Compress Images for Websites Without Losing Quality
