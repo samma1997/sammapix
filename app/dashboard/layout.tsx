@@ -29,20 +29,15 @@ export default async function DashboardLayout({
     plan?: string;
   };
 
-  // Check if we're on the growth subdomain — hide sidebar for clean layout
+  // Check if we're on the growth subdomain — completely different layout
   const headersList = await headers();
   const hostname = headersList.get("host") || "";
   const isGrowthSubdomain = hostname.startsWith("growth.");
 
-  // On growth subdomain: full-screen layout without sidebar
+  // On growth subdomain: standalone app, no SammaPix chrome at all
   if (isGrowthSubdomain) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-[#191919]">
-        <main className="overflow-y-auto">
-          {children}
-        </main>
-      </div>
-    );
+    // Skip NextAuth check — growth has its own cookie auth via middleware
+    return <>{children}</>;
   }
 
   return (

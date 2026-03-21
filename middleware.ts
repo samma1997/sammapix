@@ -214,37 +214,35 @@ export async function middleware(request: NextRequest) {
   const isGrowthSubdomain = hostname.startsWith("growth.");
 
   if (isGrowthSubdomain) {
-    // On growth subdomain: only allow /dashboard/growth/*, /auth/*, /api/*, /_next/*
+    // On growth subdomain: allow API, static, login page
+    if (
+      pathname.startsWith("/api/growth") ||
+      pathname.startsWith("/_next/") ||
+      pathname === "/favicon.ico" ||
+      pathname === "/growth-login"
+    ) {
+      return NextResponse.next();
+    }
+
+    // Check for growth session cookie
+    const growthSession = request.cookies.get("growth_session")?.value;
+    if (growthSession !== process.env.GROWTH_SESSION_SECRET) {
+      // Not authenticated — show login page
+      if (!pathname.startsWith("/growth-login")) {
+        return NextResponse.rewrite(new URL("/growth-login", request.url));
+      }
+      return NextResponse.next();
+    }
+
+    // Authenticated — redirect any non-growth path to dashboard
     if (
       !pathname.startsWith("/dashboard/growth") &&
-      !pathname.startsWith("/auth") &&
       !pathname.startsWith("/api/") &&
-      !pathname.startsWith("/_next/") &&
-      pathname !== "/favicon.ico"
+      !pathname.startsWith("/_next/")
     ) {
-      // Redirect everything else to the growth dashboard
       return NextResponse.redirect(new URL("/dashboard/growth", request.url));
     }
 
-    // On growth subdomain: restrict to admin email only
-    const growthToken = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
-
-    if (pathname.startsWith("/dashboard/growth")) {
-      if (!growthToken) {
-        const signInUrl = new URL("/auth/signin", request.url);
-        signInUrl.searchParams.set("callbackUrl", "/dashboard/growth");
-        return NextResponse.redirect(signInUrl);
-      }
-      // Only allow lucasamm97@gmail.com
-      if (growthToken.email !== "lucasamm97@gmail.com") {
-        return new NextResponse("Access denied", { status: 403 });
-      }
-    }
-
-    // No SEO headers, no bot blocking on growth subdomain
     return NextResponse.next();
   }
 
