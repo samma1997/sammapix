@@ -108,12 +108,14 @@ const ALLOWED_BOTS = [
   "google-adwords",
 ];
 
+function isAllowedBot(ua: string): boolean {
+  const lower = ua.toLowerCase();
+  return ALLOWED_BOTS.some((allowed) => lower.includes(allowed));
+}
+
 function isBlockedBot(ua: string): boolean {
   const lower = ua.toLowerCase();
-  // First check if it's a legitimate bot we must allow
-  if (ALLOWED_BOTS.some((allowed) => lower.includes(allowed))) {
-    return false;
-  }
+  if (isAllowedBot(lower)) return false;
   return BLOCKED_UA_PATTERNS.some((pattern) => lower.includes(pattern));
 }
 
@@ -248,8 +250,8 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // 3. Rate limit unauthenticated requests (skip static assets & API — API has its own rate limiting)
-  if (!pathname.startsWith("/api/") && !pathname.startsWith("/_next/")) {
+  // 3. Rate limit unauthenticated requests (skip static assets, API, and allowed bots like Googlebot/SemrushBot)
+  if (!pathname.startsWith("/api/") && !pathname.startsWith("/_next/") && !isAllowedBot(ua)) {
     const ip =
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       request.headers.get("x-real-ip") ||

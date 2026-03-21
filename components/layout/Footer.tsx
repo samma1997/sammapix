@@ -273,7 +273,7 @@ export default function Footer() {
         </div>
       </div>
       {/* Honeypot link — invisible to humans, followed by bots/scrapers */}
-      <a href="/sp-trap" tabIndex={-1} aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>Site administration</a>
+      <a href="/sp-trap" rel="nofollow noindex" tabIndex={-1} aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>Site administration</a>
     </footer>
   );
 }
