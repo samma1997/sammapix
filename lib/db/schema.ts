@@ -5,6 +5,7 @@ import {
   integer,
   boolean,
   timestamp,
+  real,
 } from "drizzle-orm/pg-core";
 
 export const growthRedditPosts = pgTable("growth_reddit_posts", {
@@ -37,6 +38,8 @@ export const growthOutreachTargets = pgTable("growth_outreach_targets", {
   followUpAt: timestamp("follow_up_at"),
   backlinkVerified: boolean("backlink_verified").default(false),
   notes: text("notes"),
+  replyText: text("reply_text"),
+  repliedAt: timestamp("replied_at"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -88,3 +91,35 @@ export type DirectorySubmission =
   typeof growthDirectorySubmissions.$inferSelect;
 export type NewDirectorySubmission =
   typeof growthDirectorySubmissions.$inferInsert;
+
+export const growthGscDaily = pgTable("growth_gsc_daily", {
+  id: serial("id").primaryKey(),
+  date: text("date").notNull(), // "2026-03-21"
+  page: text("page").notNull(), // "/tools/compress"
+  query: text("query"), // nullable — "image compressor free"
+  impressions: integer("impressions").default(0),
+  clicks: integer("clicks").default(0),
+  ctr: real("ctr").default(0), // 0.05 = 5%
+  position: real("position").default(0), // 4.2
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type GscDaily = typeof growthGscDaily.$inferSelect;
+export type NewGscDaily = typeof growthGscDaily.$inferInsert;
+
+export const growthStrategyReviews = pgTable("growth_strategy_reviews", {
+  id: serial("id").primaryKey(),
+  reviewDate: text("review_date").notNull(), // "2026-03-21"
+  periodStart: text("period_start").notNull(),
+  periodEnd: text("period_end").notNull(),
+  analysisText: text("analysis_text").notNull(),
+  suggestions: text("suggestions"), // JSON string
+  backlinksGained: integer("backlinks_gained").default(0),
+  redditComments: integer("reddit_comments").default(0),
+  outreachSent: integer("outreach_sent").default(0),
+  outreachLinked: integer("outreach_linked").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type StrategyReview = typeof growthStrategyReviews.$inferSelect;
+export type NewStrategyReview = typeof growthStrategyReviews.$inferInsert;

@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { ExternalLink, Plus, Check, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  ExternalLink,
+  Plus,
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Copy,
+  MessageSquare,
+} from "lucide-react";
 import type { OutreachTarget, DirectorySubmission } from "@/lib/db/schema";
 
 type OutreachStatus = "to_send" | "sent" | "replied" | "linked" | "rejected";
@@ -52,6 +60,23 @@ function isOverdue(followUpAt: Date | string | null): boolean {
   return new Date(followUpAt) < new Date();
 }
 
+function buildEmailTemplate(target: OutreachTarget): string {
+  const articleTitle = target.articleTitle ?? "[article title]";
+  const contactName = target.contactName ?? "there";
+  return `Subject: Quick addition for your "${articleTitle}" list
+
+Hi ${contactName},
+
+I came across your article "${articleTitle}" — great roundup.
+
+Wanted to flag SammaPix (sammapix.com), a free browser-based tool that handles image compression, HEIC conversion, AI-powered file renaming, and EXIF removal — no signup, no upload limits, privacy-first.
+
+Would it fit in your list?
+
+Luca
+sammapix.com`;
+}
+
 interface AddTargetModalProps {
   onClose: () => void;
   onAdd: (target: OutreachTarget) => void;
@@ -79,7 +104,7 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
+      const data = await res.json() as { target?: OutreachTarget };
       if (data.target) {
         onAdd(data.target);
         onClose();
@@ -155,8 +180,12 @@ function OutreachRow({
   target: OutreachTarget;
   onUpdate: (id: number, data: Partial<OutreachTarget>) => void;
 }) {
+  const [expanded, setExpanded] = useState(false);
   const [notesExpanded, setNotesExpanded] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [replyDraft, setReplyDraft] = useState(target.replyText ?? "");
+  const [savingReply, setSavingReply] = useState(false);
 
   async function patchTarget(data: Record<string, unknown>) {
     setSaving(true);
@@ -169,7 +198,7 @@ function OutreachRow({
           body: JSON.stringify(data),
         }
       );
-      const json = await res.json();
+      const json = await res.json() as { target?: OutreachTarget };
       if (json.target) onUpdate(target.id, json.target);
     } catch (e) {
       console.error(e);
@@ -178,129 +207,234 @@ function OutreachRow({
     }
   }
 
-  const overdue =
-    target.status === "sent" && isOverdue(target.followUpAt);
+  async function saveReply() {
+    setSavingReply(true);
+    try {
+      const res = await fetch(`/api/growth/outreach/targets/${target.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ replyText: replyDraft }),
+      });
+      const json = await res.json() as { target?: OutreachTarget };
+      if (json.target) onUpdate(target.id, json.target);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setSavingReply(false);
+    }
+  }
+
+  function copyEmail() {
+    const text = buildEmailTemplate(target);
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  const overdue = target.status === "sent" && isOverdue(target.followUpAt);
 
   return (
-    <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors">
-      <td className="py-2.5 px-3 text-sm text-[#171717] dark:text-[#E5E5E5] font-medium whitespace-nowrap">
-        {target.siteName}
-      </td>
-      <td className="py-2.5 px-3 max-w-[200px]">
-        {target.articleUrl ? (
-          <a
-            href={target.articleUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] group truncate"
-          >
-            <span className="truncate">{target.articleTitle ?? target.articleUrl}</span>
-            <ExternalLink
-              className="h-3 w-3 shrink-0 opacity-0 group-hover:opacity-100"
-              strokeWidth={1.5}
-            />
-          </a>
-        ) : (
-          <span className="text-xs text-[#A3A3A3]">{target.articleTitle ?? "—"}</span>
-        )}
-      </td>
-      <td className="py-2.5 px-3">
-        <div className="text-xs text-[#525252] dark:text-[#A3A3A3]">
-          <div>{target.contactName ?? "—"}</div>
-          {target.contactEmail && (
-            <div className="text-[10px] text-[#A3A3A3]">{target.contactEmail}</div>
-          )}
-          {target.contactLinkedin && (
+    <>
+      <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors">
+        <td className="py-2.5 px-3 text-sm text-[#171717] dark:text-[#E5E5E5] font-medium whitespace-nowrap">
+          {target.siteName}
+        </td>
+        <td className="py-2.5 px-3 max-w-[200px]">
+          {target.articleUrl ? (
             <a
-              href={target.contactLinkedin}
+              href={target.articleUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] text-[#6366F1] hover:underline"
+              className="flex items-center gap-1 text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] group truncate"
             >
-              LinkedIn
+              <span className="truncate">{target.articleTitle ?? target.articleUrl}</span>
+              <ExternalLink
+                className="h-3 w-3 shrink-0 opacity-0 group-hover:opacity-100"
+                strokeWidth={1.5}
+              />
             </a>
+          ) : (
+            <span className="text-xs text-[#A3A3A3]">{target.articleTitle ?? "—"}</span>
           )}
-        </div>
-      </td>
-      <td className="py-2.5 px-3">
-        <select
-          value={target.status ?? "to_send"}
-          onChange={(e) => patchTarget({ status: e.target.value })}
-          disabled={saving}
-          className="text-[11px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] border-0 cursor-pointer focus:outline-none bg-transparent disabled:opacity-50"
-          style={{ appearance: "none" }}
-        >
-          {STATUS_OPTIONS.map((s) => (
-            <option key={s} value={s}>
-              {s.replace("_", " ")}
-            </option>
-          ))}
-        </select>
-        <div className="mt-0.5">
-          <StatusBadge status={(target.status ?? "to_send") as OutreachStatus} />
-        </div>
-      </td>
-      <td className="py-2.5 px-3 text-xs text-[#A3A3A3] whitespace-nowrap">
-        {target.sentAt ? new Date(target.sentAt).toLocaleDateString() : "—"}
-      </td>
-      <td className="py-2.5 px-3 whitespace-nowrap">
-        {target.followUpAt ? (
-          <span
-            className={`text-xs ${
-              overdue
-                ? "text-red-600 font-medium"
-                : "text-[#A3A3A3]"
+        </td>
+        <td className="py-2.5 px-3">
+          <div className="text-xs text-[#525252] dark:text-[#A3A3A3]">
+            <div>{target.contactName ?? "—"}</div>
+            {target.contactEmail && (
+              <div className="text-[10px] text-[#A3A3A3]">{target.contactEmail}</div>
+            )}
+            {target.contactLinkedin && (
+              <a
+                href={target.contactLinkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] text-[#6366F1] hover:underline"
+              >
+                LinkedIn
+              </a>
+            )}
+          </div>
+        </td>
+        <td className="py-2.5 px-3">
+          <select
+            value={target.status ?? "to_send"}
+            onChange={(e) => patchTarget({ status: e.target.value })}
+            disabled={saving}
+            className="text-[11px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] border-0 cursor-pointer focus:outline-none bg-transparent disabled:opacity-50"
+            style={{ appearance: "none" }}
+          >
+            {STATUS_OPTIONS.map((s) => (
+              <option key={s} value={s}>
+                {s.replace("_", " ")}
+              </option>
+            ))}
+          </select>
+          <div className="mt-0.5">
+            <StatusBadge status={(target.status ?? "to_send") as OutreachStatus} />
+          </div>
+        </td>
+        <td className="py-2.5 px-3 text-xs text-[#A3A3A3] whitespace-nowrap">
+          {target.sentAt ? new Date(target.sentAt).toLocaleDateString() : "—"}
+        </td>
+        <td className="py-2.5 px-3 whitespace-nowrap">
+          {target.followUpAt ? (
+            <span
+              className={`text-xs ${
+                overdue
+                  ? "text-red-600 font-medium"
+                  : "text-[#A3A3A3]"
+              }`}
+            >
+              {new Date(target.followUpAt).toLocaleDateString()}
+              {overdue && " (overdue)"}
+            </span>
+          ) : (
+            <span className="text-xs text-[#A3A3A3]">—</span>
+          )}
+        </td>
+        <td className="py-2.5 px-3 text-center">
+          <button
+            onClick={() =>
+              patchTarget({ backlinkVerified: !target.backlinkVerified })
+            }
+            disabled={saving}
+            className={`w-5 h-5 rounded-[4px] border flex items-center justify-center transition-colors ${
+              target.backlinkVerified
+                ? "bg-green-500 border-green-500 text-white"
+                : "border-[#D4D4D4] dark:border-[#404040] hover:border-green-400"
             }`}
           >
-            {new Date(target.followUpAt).toLocaleDateString()}
-            {overdue && " (overdue)"}
-          </span>
-        ) : (
-          <span className="text-xs text-[#A3A3A3]">—</span>
-        )}
-      </td>
-      <td className="py-2.5 px-3 text-center">
-        <button
-          onClick={() =>
-            patchTarget({ backlinkVerified: !target.backlinkVerified })
-          }
-          disabled={saving}
-          className={`w-5 h-5 rounded-[4px] border flex items-center justify-center transition-colors ${
-            target.backlinkVerified
-              ? "bg-green-500 border-green-500 text-white"
-              : "border-[#D4D4D4] dark:border-[#404040] hover:border-green-400"
-          }`}
-        >
-          {target.backlinkVerified && (
-            <Check className="h-3 w-3" strokeWidth={2} />
+            {target.backlinkVerified && (
+              <Check className="h-3 w-3" strokeWidth={2} />
+            )}
+          </button>
+        </td>
+        <td className="py-2.5 px-3 max-w-[160px]">
+          {target.notes ? (
+            <div>
+              <button
+                onClick={() => setNotesExpanded((v) => !v)}
+                className="flex items-center gap-1 text-[11px] text-[#737373]"
+              >
+                Notes
+                {notesExpanded ? (
+                  <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
+                ) : (
+                  <ChevronDown className="h-3 w-3" strokeWidth={1.5} />
+                )}
+              </button>
+              {notesExpanded && (
+                <p className="text-xs text-[#525252] dark:text-[#A3A3A3] mt-1 whitespace-pre-wrap">
+                  {target.notes}
+                </p>
+              )}
+            </div>
+          ) : (
+            <span className="text-xs text-[#A3A3A3]">—</span>
           )}
-        </button>
-      </td>
-      <td className="py-2.5 px-3 max-w-[160px]">
-        {target.notes ? (
-          <div>
+        </td>
+        {/* Actions column */}
+        <td className="py-2.5 px-3 whitespace-nowrap">
+          <div className="flex items-center gap-1.5">
+            {/* Copy email button */}
             <button
-              onClick={() => setNotesExpanded((v) => !v)}
-              className="flex items-center gap-1 text-[11px] text-[#737373]"
+              onClick={copyEmail}
+              title="Copy outreach email"
+              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                copied
+                  ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
+                  : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
+              }`}
             >
-              Notes
-              {notesExpanded ? (
+              {copied ? (
+                <Check className="h-3 w-3" strokeWidth={2} />
+              ) : (
+                <Copy className="h-3 w-3" strokeWidth={1.5} />
+              )}
+              {copied ? "Copied!" : "Email"}
+            </button>
+            {/* Reply expand button */}
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              title="Add reply"
+              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                target.replyText
+                  ? "border-blue-300 text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800"
+                  : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
+              }`}
+            >
+              <MessageSquare className="h-3 w-3" strokeWidth={1.5} />
+              {target.replyText ? "Reply" : "Reply"}
+              {expanded ? (
                 <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
               ) : (
                 <ChevronDown className="h-3 w-3" strokeWidth={1.5} />
               )}
             </button>
-            {notesExpanded && (
-              <p className="text-xs text-[#525252] dark:text-[#A3A3A3] mt-1 whitespace-pre-wrap">
-                {target.notes}
-              </p>
-            )}
           </div>
-        ) : (
-          <span className="text-xs text-[#A3A3A3]">—</span>
-        )}
-      </td>
-    </tr>
+        </td>
+      </tr>
+
+      {/* Expandable reply row */}
+      {expanded && (
+        <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
+          <td colSpan={9} className="px-4 py-3">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3]">
+                  Reply received
+                </label>
+                {target.repliedAt && (
+                  <span className="text-[10px] text-[#A3A3A3]">
+                    Saved {new Date(target.repliedAt).toLocaleDateString()}
+                  </span>
+                )}
+              </div>
+              <textarea
+                value={replyDraft}
+                onChange={(e) => setReplyDraft(e.target.value)}
+                rows={4}
+                placeholder="Paste the reply you received here..."
+                className="w-full text-sm px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] focus:outline-none focus:border-[#6366F1] resize-y"
+              />
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={saveReply}
+                  disabled={savingReply}
+                  className="text-sm px-3 py-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
+                >
+                  {savingReply ? "Saving..." : "Save Reply"}
+                </button>
+                {replyDraft && replyDraft !== target.replyText && (
+                  <span className="text-[10px] text-[#A3A3A3]">Unsaved changes</span>
+                )}
+              </div>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
   );
 }
 
@@ -317,7 +451,10 @@ export default function OutreachPage() {
         fetch("/api/growth/outreach/targets"),
         fetch("/api/growth/directories"),
       ]);
-      const [tData, dData] = await Promise.all([tRes.json(), dRes.json()]);
+      const [tData, dData] = await Promise.all([
+        tRes.json() as Promise<{ targets?: OutreachTarget[] }>,
+        dRes.json() as Promise<{ directories?: DirectorySubmission[] }>,
+      ]);
       if (tData.targets) setTargets(tData.targets);
       if (dData.directories) setDirectories(dData.directories);
     } catch (e) {
@@ -344,10 +481,10 @@ export default function OutreachPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
-      const data = await res.json();
+      const data = await res.json() as { directory?: DirectorySubmission };
       if (data.directory) {
         setDirectories((prev) =>
-          prev.map((d) => (d.id === id ? { ...d, ...data.directory } : d))
+          prev.map((d) => (d.id === id ? { ...d, ...data.directory! } : d))
         );
       }
     } catch (e) {
@@ -385,7 +522,7 @@ export default function OutreachPage() {
         </div>
 
         <div className="overflow-x-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px]">
-          <table className="w-full min-w-[900px]">
+          <table className="w-full min-w-[1000px]">
             <thead>
               <tr className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
                 {[
@@ -397,6 +534,7 @@ export default function OutreachPage() {
                   "Follow-up",
                   "Backlink",
                   "Notes",
+                  "Actions",
                 ].map((h) => (
                   <th
                     key={h}
@@ -418,7 +556,7 @@ export default function OutreachPage() {
               {targets.length === 0 && (
                 <tr>
                   <td
-                    colSpan={8}
+                    colSpan={9}
                     className="py-8 text-center text-sm text-[#A3A3A3]"
                   >
                     No outreach targets yet

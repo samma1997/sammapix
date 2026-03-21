@@ -47,6 +47,7 @@ export async function PATCH(
     contactEmail,
     contactLinkedin,
     articleUrl,
+    replyText,
   } = body as {
     status?: string;
     sentAt?: string;
@@ -56,6 +57,7 @@ export async function PATCH(
     contactEmail?: string;
     contactLinkedin?: string;
     articleUrl?: string;
+    replyText?: string | null;
   };
 
   const updateData: Record<string, unknown> = {};
@@ -67,6 +69,13 @@ export async function PATCH(
   if (articleUrl !== undefined) updateData.articleUrl = articleUrl;
   if (sentAt !== undefined) updateData.sentAt = new Date(sentAt);
   if (followUpAt !== undefined) updateData.followUpAt = new Date(followUpAt);
+  if (replyText !== undefined) {
+    updateData.replyText = replyText;
+    // Auto-set repliedAt when reply is saved for the first time
+    if (replyText && replyText.trim().length > 0) {
+      updateData.repliedAt = new Date();
+    }
+  }
 
   // Auto-set sentAt when status changes to 'sent'
   if (status === "sent" && !sentAt) {

@@ -5,11 +5,14 @@ import { usePathname } from "next/navigation";
 
 const TABS = [
   { label: "Overview", href: "/dashboard/growth" },
+  { label: "SEO", href: "/dashboard/growth/seo" },
   { label: "Reddit", href: "/dashboard/growth/reddit" },
   { label: "Outreach", href: "/dashboard/growth/outreach" },
   { label: "Content", href: "/dashboard/growth/content" },
   { label: "YouTube", href: "/dashboard/growth/youtube" },
   { label: "Directories", href: "/dashboard/growth/directories" },
+  { label: "Analytics", href: "/dashboard/growth/analytics" },
+  { label: "Strategy", href: "/dashboard/growth/strategy" },
 ];
 
 export default function GrowthLayout({
