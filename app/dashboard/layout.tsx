@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { authOptions } from "@/lib/auth/options";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import type { Metadata } from "next";
@@ -27,6 +28,22 @@ export default async function DashboardLayout({
     image?: string | null;
     plan?: string;
   };
+
+  // Check if we're on the growth subdomain — hide sidebar for clean layout
+  const headersList = await headers();
+  const hostname = headersList.get("host") || "";
+  const isGrowthSubdomain = hostname.startsWith("growth.");
+
+  // On growth subdomain: full-screen layout without sidebar
+  if (isGrowthSubdomain) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-[#191919]">
+        <main className="overflow-y-auto">
+          {children}
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-white dark:bg-[#191919]">

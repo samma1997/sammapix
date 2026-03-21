@@ -248,10 +248,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // ── Main domain: block /dashboard/growth (use subdomain instead) ──────────
-  if (pathname.startsWith("/dashboard/growth")) {
-    return NextResponse.redirect(new URL("https://growth.sammapix.com/dashboard/growth", request.url));
-  }
+  // ── Main domain: /dashboard/growth accessible but admin-only ──────────
+  // (Growth subdomain is an alias — both work for now)
 
   // ── Referral cookie capture ──────────────────────────────────────────────
   // Capture ?ref=SPIX-XXXX on ANY page, set 30-day cookie.
