@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Watermark Photos Free Online - Batch & Logo | SammaPix",
+  title: "Add Watermark to Photos Online Free — Batch | SammaPix",
   description:
-    "Watermark photos instantly- text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
+    "Add watermark to photos online for free. Text or image watermark, batch processing, custom positioning. No upload — runs in your browser.",
   keywords: [
     "watermark tool",
     "add watermark",

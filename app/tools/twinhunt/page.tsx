@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Find Duplicate Photos Free Online | Perceptual Hashing | SammaPix",
+  title: "Find Duplicate Photos Online Free — AI Detection | SammaPix",
   description:
-    "Find duplicate photos instantly with AI hashing. Reclaim disk space, identify near-duplicates. Free online, zero uploads, no sorting.",
+    "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based — your photos stay private.",
   keywords: [
     "find duplicate photos",
     "duplicate photo finder",

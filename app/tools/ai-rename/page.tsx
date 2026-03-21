@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Image Filename Generator for SEO | Free Online | SammaPix",
+  title: "AI Image Renamer — SEO-Friendly Filenames Free | SammaPix",
   description:
-    "Generate SEO-friendly image filenames automatically with AI. Turn IMG_0001.jpg into descriptive, keyword-rich names that rank in Google Images. Free, no signup.",
+    "Rename images automatically with AI. Generates SEO-friendly filenames from image content. Free, browser-based — powered by Google Gemini.",
   keywords: [
     "image filename seo",
     "rename images for seo",
