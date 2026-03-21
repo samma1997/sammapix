@@ -13,6 +13,10 @@ import {
   RefreshCw,
   Sparkles,
   ExternalLink,
+  DollarSign,
+  TrendingUp,
+  Monitor,
+  Radar,
 } from "lucide-react";
 
 interface GrowthStats {
@@ -37,6 +41,17 @@ interface GrowthStats {
   youtube: { total: number };
   directories: { listed: number; total: number };
   daysActive: number;
+}
+
+interface RevenueSnapshot {
+  mrr: number;
+  activeSubscriptions: number;
+}
+
+interface BrandSnapshot {
+  visibilityScore: number;
+  foundCount: number;
+  totalCount: number;
 }
 
 interface WeekStats {
@@ -119,6 +134,8 @@ function QuickActionButton({ icon, label, onClick, loading, result, href }: Quic
 export default function GrowthOverviewPage() {
   const [stats, setStats] = useState<GrowthStats | null>(null);
   const [gscWeek, setGscWeek] = useState<WeekStats | null>(null);
+  const [revenue, setRevenue] = useState<RevenueSnapshot | null>(null);
+  const [brand, setBrand] = useState<BrandSnapshot | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [redditLoading, setRedditLoading] = useState(false);
@@ -129,17 +146,52 @@ export default function GrowthOverviewPage() {
   const [strategyResult, setStrategyResult] = useState<string | null>(null);
 
   useEffect(() => {
+    const QUERIES_COUNT = 7;
     Promise.all([
       fetch("/api/growth/stats").then((r) => r.json()),
       fetch("/api/growth/gsc/data").then((r) => r.json()),
+      fetch("/api/growth/revenue").then((r) => r.json()).catch(() => ({ error: "no stripe" })),
+      fetch("/api/growth/brand").then((r) => r.json()).catch(() => ({ mentions: [] })),
     ])
-      .then(([statsData, gscData]: [GrowthStats & { error?: string }, { weekStats?: WeekStats; error?: string }]) => {
+      .then(([
+        statsData,
+        gscData,
+        revenueData,
+        brandData,
+      ]: [
+        GrowthStats & { error?: string },
+        { weekStats?: WeekStats; error?: string },
+        { stats?: { mrr: number; activeSubscriptions: number }; error?: string },
+        { mentions?: Array<{ query: string; sammapixFound: boolean; checkedAt: string }> },
+      ]) => {
         if (!statsData.error) setStats(statsData);
         if (!gscData.error && gscData.weekStats) {
           const ws = gscData.weekStats;
           if (Number(ws.impressions) > 0 || Number(ws.clicks) > 0) {
             setGscWeek(ws);
           }
+        }
+        if (!revenueData.error && revenueData.stats) {
+          setRevenue({
+            mrr: revenueData.stats.mrr,
+            activeSubscriptions: revenueData.stats.activeSubscriptions,
+          });
+        }
+        if (brandData.mentions && brandData.mentions.length > 0) {
+          // Get latest check per query
+          const mentions = brandData.mentions;
+          const latestPerQuery = new Map<string, boolean>();
+          for (const m of mentions) {
+            if (!latestPerQuery.has(m.query)) {
+              latestPerQuery.set(m.query, m.sammapixFound ?? false);
+            }
+          }
+          const foundCount = Array.from(latestPerQuery.values()).filter(Boolean).length;
+          setBrand({
+            visibilityScore: Math.round((foundCount / QUERIES_COUNT) * 100),
+            foundCount,
+            totalCount: QUERIES_COUNT,
+          });
         }
       })
       .catch(console.error)
@@ -261,6 +313,36 @@ export default function GrowthOverviewPage() {
           value={stats.daysActive}
           sub="since first outreach entry"
         />
+        {revenue !== null ? (
+          <StatCard
+            icon={<DollarSign className="h-4 w-4" strokeWidth={1.5} />}
+            label="MRR"
+            value={`€${(revenue.mrr / 100).toFixed(0)}`}
+            sub={`${revenue.activeSubscriptions} active Pro subscribers`}
+          />
+        ) : (
+          <StatCard
+            icon={<DollarSign className="h-4 w-4" strokeWidth={1.5} />}
+            label="MRR"
+            value="€0"
+            sub="No Pro subscribers yet"
+          />
+        )}
+        {brand !== null ? (
+          <StatCard
+            icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
+            label="Brand Visibility"
+            value={`${brand.visibilityScore}%`}
+            sub={`${brand.foundCount}/${brand.totalCount} target queries`}
+          />
+        ) : (
+          <StatCard
+            icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
+            label="Brand Visibility"
+            value="—"
+            sub="Run a brand check to see data"
+          />
+        )}
       </div>
 
       {/* GSC Stats (only if data is available) */}
@@ -326,6 +408,27 @@ export default function GrowthOverviewPage() {
             label="Check PageSpeed"
             onClick={() => {}}
             href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fwww.sammapix.com&form_factor=mobile"
+          />
+          <QuickActionButton
+            icon={<Monitor className="h-4 w-4" strokeWidth={1.5} />}
+            label="Scrape Competitors"
+            onClick={async () => {
+              await fetch("/api/growth/competitors/scrape", { method: "POST" });
+            }}
+          />
+          <QuickActionButton
+            icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
+            label="Check Brand Visibility"
+            onClick={async () => {
+              await fetch("/api/growth/brand/check", { method: "POST" });
+            }}
+          />
+          <QuickActionButton
+            icon={<Radar className="h-4 w-4" strokeWidth={1.5} />}
+            label="Scan Tool Radar"
+            onClick={async () => {
+              await fetch("/api/growth/radar/scrape", { method: "POST" });
+            }}
           />
         </div>
       </div>

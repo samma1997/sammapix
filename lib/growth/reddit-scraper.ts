@@ -89,6 +89,217 @@ Write only the comment text, no preamble.`;
   }
 }
 
+async function draftHNComment(
+  postTitle: string,
+  postText: string
+): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return "";
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+  const prompt = `You are a knowledgeable developer on Hacker News. Write a short, technical reply to this post. HN style: concise, no fluff, no self-promotion, genuinely insightful. 2-4 sentences max. Do NOT mention SammaPix. Do NOT use marketing language.
+
+Post title: "${postTitle}"
+Post text: "${postText.slice(0, 500)}"
+
+Write only the comment text.`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    return result.response.text().trim();
+  } catch {
+    return "";
+  }
+}
+
+async function draftDevToComment(
+  articleTitle: string,
+  description: string
+): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return "";
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+  const prompt = `You are a friendly developer on Dev.to. Write a genuine, helpful comment on this article. Be friendly and tutorial-style. 2-3 sentences. Do NOT mention SammaPix. Focus on adding value to the discussion.
+
+Article title: "${articleTitle}"
+Description: "${description.slice(0, 300)}"
+
+Write only the comment text.`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    return result.response.text().trim();
+  } catch {
+    return "";
+  }
+}
+
+export async function scrapeHackerNewsOpportunities(): Promise<{
+  scraped: number;
+  skipped: number;
+  errors: number;
+}> {
+  let scraped = 0;
+  let skipped = 0;
+  let errors = 0;
+
+  const queries = [
+    "image tools",
+    "image compression",
+    "web performance",
+    "photo optimization",
+  ];
+
+  const sevenDaysAgo = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60;
+
+  for (const query of queries) {
+    try {
+      await new Promise((r) => setTimeout(r, 1000));
+
+      const url = `https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(query)}&tags=story&numericFilters=created_at_i>${sevenDaysAgo}&hitsPerPage=10`;
+      const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+      if (!res.ok) {
+        errors++;
+        continue;
+      }
+
+      const data = await res.json();
+      const hits = data.hits ?? [];
+
+      for (const hit of hits) {
+        if (!hit.title || !hit.objectID) continue;
+
+        const storyUrl =
+          hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`;
+        const hitId = `hn_${hit.objectID}`;
+
+        const existing = await db
+          .select({ id: growthRedditPosts.id })
+          .from(growthRedditPosts)
+          .where(eq(growthRedditPosts.redditId, hitId));
+
+        if (existing.length > 0) {
+          skipped++;
+          continue;
+        }
+
+        const titleLower = hit.title.toLowerCase();
+        const imageKeywords = ["image", "photo", "compress", "webp", "jpeg", "png", "optimize", "resize"];
+        const relevance = imageKeywords.filter((kw) => titleLower.includes(kw)).length * 20;
+
+        if (relevance < 20) {
+          skipped++;
+          continue;
+        }
+
+        const draftCommentText = await draftHNComment(
+          hit.title,
+          hit.story_text ?? ""
+        );
+
+        await db.insert(growthRedditPosts).values({
+          redditId: hitId,
+          title: hit.title,
+          subreddit: "hackernews",
+          url: storyUrl,
+          author: hit.author ?? "unknown",
+          commentsCount: hit.num_comments ?? 0,
+          relevanceScore: Math.min(100, relevance + 20),
+          status: "to_comment",
+          draftComment: draftCommentText || null,
+        });
+
+        scraped++;
+      }
+    } catch (err) {
+      console.error(`[reddit-scraper] HN error for "${query}":`, err);
+      errors++;
+    }
+  }
+
+  return { scraped, skipped, errors };
+}
+
+export async function scrapeDevToOpportunities(): Promise<{
+  scraped: number;
+  skipped: number;
+  errors: number;
+}> {
+  let scraped = 0;
+  let skipped = 0;
+  let errors = 0;
+
+  const tags = ["image", "webperf", "webdev", "javascript"];
+
+  for (const tag of tags) {
+    try {
+      await new Promise((r) => setTimeout(r, 1000));
+
+      const url = `https://dev.to/api/articles?tag=${tag}&top=7&per_page=10`;
+      const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+      if (!res.ok) {
+        errors++;
+        continue;
+      }
+
+      const articles = await res.json();
+      for (const article of articles) {
+        if (!article.title || !article.url) continue;
+
+        const articleId = `devto_${article.id}`;
+
+        const existing = await db
+          .select({ id: growthRedditPosts.id })
+          .from(growthRedditPosts)
+          .where(eq(growthRedditPosts.redditId, articleId));
+
+        if (existing.length > 0) {
+          skipped++;
+          continue;
+        }
+
+        const titleLower = article.title.toLowerCase();
+        const imageKeywords = ["image", "photo", "compress", "webp", "jpeg", "png", "optimize", "resize", "performance"];
+        const relevance = imageKeywords.filter((kw) => titleLower.includes(kw)).length * 15;
+
+        if (relevance < 15) {
+          skipped++;
+          continue;
+        }
+
+        const draftCommentText = await draftDevToComment(
+          article.title,
+          article.description ?? ""
+        );
+
+        await db.insert(growthRedditPosts).values({
+          redditId: articleId,
+          title: article.title,
+          subreddit: "devto",
+          url: article.url,
+          author: article.user?.username ?? "unknown",
+          commentsCount: article.comments_count ?? 0,
+          relevanceScore: Math.min(100, relevance + 20),
+          status: "to_comment",
+          draftComment: draftCommentText || null,
+        });
+
+        scraped++;
+      }
+    } catch (err) {
+      console.error(`[reddit-scraper] Dev.to error for tag "${tag}":`, err);
+      errors++;
+    }
+  }
+
+  return { scraped, skipped, errors };
+}
+
 export async function scrapeRedditPosts(): Promise<{
   scraped: number;
   skipped: number;
@@ -181,5 +392,13 @@ export async function scrapeRedditPosts(): Promise<{
     }
   }
 
-  return { scraped, skipped, errors };
+  // Also scrape HN and Dev.to
+  const hnResult = await scrapeHackerNewsOpportunities();
+  const devtoResult = await scrapeDevToOpportunities();
+
+  return {
+    scraped: scraped + hnResult.scraped + devtoResult.scraped,
+    skipped: skipped + hnResult.skipped + devtoResult.skipped,
+    errors: errors + hnResult.errors + devtoResult.errors,
+  };
 }

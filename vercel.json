@@ -21,6 +21,18 @@
     {
       "path": "/api/cron/growth-youtube",
       "schedule": "0 7 * * 1"
+    },
+    {
+      "path": "/api/cron/growth-competitors",
+      "schedule": "0 6 * * 0"
+    },
+    {
+      "path": "/api/cron/growth-brand",
+      "schedule": "0 10 * * *"
+    },
+    {
+      "path": "/api/cron/growth-radar",
+      "schedule": "0 9 * * 1"
     }
   ],
   "headers": [
