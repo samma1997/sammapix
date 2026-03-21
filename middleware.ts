@@ -208,6 +208,50 @@ function attachRefCookie(response: NextResponse, code: string | null): NextRespo
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ua = request.headers.get("user-agent") || "";
+  const hostname = request.headers.get("host") || "";
+
+  // ── Subdomain routing: growth.sammapix.com ────────────────────────────────
+  const isGrowthSubdomain = hostname.startsWith("growth.");
+
+  if (isGrowthSubdomain) {
+    // On growth subdomain: only allow /dashboard/growth/*, /auth/*, /api/*, /_next/*
+    if (
+      !pathname.startsWith("/dashboard/growth") &&
+      !pathname.startsWith("/auth") &&
+      !pathname.startsWith("/api/") &&
+      !pathname.startsWith("/_next/") &&
+      pathname !== "/favicon.ico"
+    ) {
+      // Redirect everything else to the growth dashboard
+      return NextResponse.redirect(new URL("/dashboard/growth", request.url));
+    }
+
+    // On growth subdomain: restrict to admin email only
+    const growthToken = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+
+    if (pathname.startsWith("/dashboard/growth")) {
+      if (!growthToken) {
+        const signInUrl = new URL("/auth/signin", request.url);
+        signInUrl.searchParams.set("callbackUrl", "/dashboard/growth");
+        return NextResponse.redirect(signInUrl);
+      }
+      // Only allow lucasamm97@gmail.com
+      if (growthToken.email !== "lucasamm97@gmail.com") {
+        return new NextResponse("Access denied", { status: 403 });
+      }
+    }
+
+    // No SEO headers, no bot blocking on growth subdomain
+    return NextResponse.next();
+  }
+
+  // ── Main domain: block /dashboard/growth (use subdomain instead) ──────────
+  if (pathname.startsWith("/dashboard/growth")) {
+    return NextResponse.redirect(new URL("https://growth.sammapix.com/dashboard/growth", request.url));
+  }
 
   // ── Referral cookie capture ──────────────────────────────────────────────
   // Capture ?ref=SPIX-XXXX on ANY page, set 30-day cookie.
