@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Remove EXIF Data Online Free — Strip GPS & Metadata | SammaPix",
+  title: "EXIF Viewer & Remover Online — Protect Photo Privacy | SammaPix",
   description:
-    "Remove EXIF data, GPS location, and metadata from photos online for free. Protect your privacy — all processing in your browser, no uploads.",
+    "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
   keywords: [
     "remove exif data",
     "remove gps from photos",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/exif` },
   openGraph: {
-    title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
+    title: "EXIF Viewer & Remover Online — Protect Photo Privacy | SammaPix",
     description:
-      "Remove GPS & EXIF instantly- protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
+      "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
     url: `${APP_URL}/tools/exif`,
     siteName: "SammaPix",
     type: "website",
@@ -287,9 +287,9 @@ export default function ExifPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
-              { name: "Sort Photos by Location", href: "/tools/geosort" },
-              { name: "Create Travel Map", href: "/tools/travelmap" },
               { name: "AI Rename", href: "/tools/ai-rename" },
+              { name: "Compress Images", href: "/tools/compress" },
+              { name: "Watermark Photos", href: "/tools/stampit" },
             ].map((tool) => (
               <Link
                 key={tool.href}

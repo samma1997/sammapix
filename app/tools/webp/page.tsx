@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Convert to WebP Online Free — PNG, JPG, GIF | SammaPix",
+  title: "Image Format Converter Online — JPG, PNG, WebP, HEIC | SammaPix",
   description:
-    "Convert images to WebP format online for free. PNG, JPG, GIF to WebP — 25-35% smaller files. No upload, instant browser conversion.",
+    "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
   keywords: [
     "webp converter",
     "convert to webp",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "WebP Converter Free Online - Convert JPG to WebP | SammaPix",
+    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC | SammaPix",
     description:
-      "Convert JPG to WebP instantly- 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
+      "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
     url: `${APP_URL}/tools/webp`,
     siteName: "SammaPix",
     type: "website",
@@ -338,7 +338,30 @@ export default function WebpPage() {
                     }
                   }
                 ]
-              }
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${APP_URL}`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: `${APP_URL}/tools`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "WebP Converter",
+                    item: `${APP_URL}/tools/webp`,
+                  },
+                ],
+              },
             ],
           }),
         }}

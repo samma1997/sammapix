@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "HEIC to JPG Converter Online Free — No Upload | SammaPix",
+  title: "HEIC to JPG Converter Online — Free Batch Conversion | SammaPix",
   description:
-    "Convert iPhone HEIC photos to JPG or WebP online for free. No upload needed — works in your browser. Batch convert unlimited HEIC files instantly.",
+    "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
   keywords: [
     "heic to jpg converter",
     "heic converter",
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     "heic to webp",
     "heic converter online",
     "batch heic converter",
-    "heic converter",
     "convert iphone photos",
     "batch heic converter",
   ],
@@ -28,9 +27,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/heic`,
   },
   openGraph: {
-    title: "HEIC to JPG Converter Free Online | iPhone Photos | SammaPix",
+    title: "HEIC to JPG Converter Online — Free Batch Conversion | SammaPix",
     description:
-      "Convert HEIC to JPG & WebP free. Batch convert 100 iPhone photos instantly. Zero signup, browser-based, zero uploads.",
+      "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
     url: `${APP_URL}/tools/heic`,
     siteName: "SammaPix",
     type: "website",
@@ -69,7 +68,7 @@ const features = [
 const relatedTools = [
   { name: "Compress Images", href: "/tools/compress" },
   { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "Remove EXIF", href: "/tools/exif" },
+  { name: "Batch Rename", href: "/tools/batchname" },
 ];
 
 export default function HeicPage() {
@@ -358,7 +357,30 @@ export default function HeicPage() {
                     }
                   }
                 ]
-              }
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${APP_URL}`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: `${APP_URL}/tools`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "HEIC Converter",
+                    item: `${APP_URL}/tools/heic`,
+                  },
+                ],
+              },
             ],
           }),
         }}
