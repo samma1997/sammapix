@@ -9,7 +9,7 @@ import { trackEvent } from "@/lib/analytics";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -33,6 +33,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "Step limit reached";
     case "daily":
       return "Daily limit reached";
+    case "zip":
+      return "ZIP download is a Pro feature";
     default:
       return "You're processing like a pro";
   }
@@ -54,6 +56,8 @@ function getSubtext(
       return "Free plan allows up to 2 active steps per workflow. Upgrade to Pro for unlimited steps.";
     case "daily":
       return "Free plan allows 50 images per day. Upgrade to Pro for unlimited processing.";
+    case "zip":
+      return "ZIP batch download is available on Pro. Upgrade to download all your files in one click.";
     default: {
       if (filesDropped && freeLimit) {
         return `You dropped ${filesDropped} photos- free plan processes the first ${freeLimit}. Upgrade to handle 500 at once.`;

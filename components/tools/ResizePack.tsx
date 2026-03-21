@@ -514,6 +514,7 @@ export default function ResizePack() {
   // Upsell modal state
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   // Processing state
   const [processingTotal, setProcessingTotal] = useState(0);
@@ -758,6 +759,10 @@ export default function ResizePack() {
 
   // ── ZIP download ──────────────────────────────────────────────────────────
   const handleDownloadZip = useCallback(async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     const successful = entries.filter((e) => e.resultBlob !== null);
     if (successful.length === 0) return;
 
@@ -817,6 +822,11 @@ export default function ResizePack() {
         trigger="files"
         filesDropped={upsellFiles.length}
         freeLimit={limit}
+      />
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
       />
 
       {/* ── Idle: Dropzone ─────────────────────────────────────────────────── */}
@@ -1256,7 +1266,11 @@ export default function ResizePack() {
                   onClick={handleDownloadZip}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                 >
-                  <Download className="h-4 w-4" strokeWidth={1.5} />
+                  {isPro ? (
+                    <Download className="h-4 w-4" strokeWidth={1.5} />
+                  ) : (
+                    <Lock className="h-4 w-4" strokeWidth={1.5} />
+                  )}
                   Download all as ZIP
                 </button>
               )}

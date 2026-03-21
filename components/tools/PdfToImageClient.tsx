@@ -10,11 +10,13 @@ import {
   XCircle,
   Loader2,
   File,
+  Lock,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -287,6 +289,7 @@ export default function PdfToImageClient() {
   const [pdfName, setPdfName] = useState("");
   const [totalPageCount, setTotalPageCount] = useState(0);
   const [isZipping, setIsZipping] = useState(false);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -464,6 +467,10 @@ export default function PdfToImageClient() {
   }, [outputFormat]);
 
   const handleDownloadAll = useCallback(async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     const done = pages.filter((p) => p.status === "done" && p.blob);
     if (done.length === 0) return;
 
@@ -505,6 +512,11 @@ export default function PdfToImageClient() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
+      />
 
       {/* ── Idle dropzone ── */}
       {uiState === "idle" && (
@@ -746,9 +758,14 @@ export default function PdfToImageClient() {
                     <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
                     Creating ZIP...
                   </>
-                ) : (
+                ) : isPro ? (
                   <>
                     <Download className="h-4 w-4" strokeWidth={1.5} />
+                    Download all as ZIP ({doneCount})
+                  </>
+                ) : (
+                  <>
+                    <Lock className="h-4 w-4" strokeWidth={1.5} />
                     Download all as ZIP ({doneCount})
                   </>
                 )}

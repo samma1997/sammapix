@@ -16,6 +16,7 @@ import {
   Image as ImageIcon,
   Flag,
   Camera,
+  Lock,
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -135,6 +136,7 @@ export default function CullClient() {
   const previewUrlsRef = useRef<Set<string>>(new Set());
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   // ── Cleanup blob URLs on unmount ──────────────────────────────────────────
   useEffect(() => {
@@ -284,6 +286,10 @@ export default function CullClient() {
   // ── ZIP download ──────────────────────────────────────────────────────────
 
   const handleDownloadZip = useCallback(async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     const keptPhotos = photos.filter((_, i) => decisions[i] === "keep");
     if (keptPhotos.length === 0) return;
 
@@ -326,6 +332,11 @@ export default function CullClient() {
         trigger="files"
         filesDropped={pendingFiles.length}
         freeLimit={cullLimit}
+      />
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
       />
 
       {/* ── Idle: DropZone ─────────────────────────────────────────────────── */}
@@ -626,7 +637,11 @@ export default function CullClient() {
                 onClick={handleDownloadZip}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
               >
-                <Download className="h-4 w-4" strokeWidth={1.5} />
+                {isPro ? (
+                  <Download className="h-4 w-4" strokeWidth={1.5} />
+                ) : (
+                  <Lock className="h-4 w-4" strokeWidth={1.5} />
+                )}
                 Download {keptCount} kept photo{keptCount !== 1 ? "s" : ""} as ZIP
               </button>
             ) : (

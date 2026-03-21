@@ -12,6 +12,7 @@ import {
   RotateCcw,
   ArrowDownToLine,
   Crop,
+  Lock,
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -470,6 +471,7 @@ export default function CropRatio() {
   // Upsell modal state
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   // Derived ratio
   const getRatio = useCallback((): { w: number; h: number; label: string } => {
@@ -686,6 +688,11 @@ export default function CropRatio() {
 
     if (valid.length === 1) {
       handleDownload(valid[0]);
+      return;
+    }
+
+    if (!isPro) {
+      setZipUpsellOpen(true);
       return;
     }
 
@@ -939,6 +946,11 @@ export default function CropRatio() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
+      />
 
       {/* Toolbar */}
       <div className="flex items-center justify-between flex-wrap gap-3">
@@ -958,7 +970,11 @@ export default function CropRatio() {
               onClick={handleDownloadAll}
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-[#171717] text-white rounded-md hover:bg-[#262626] transition-colors"
             >
-              <ArrowDownToLine className="h-4 w-4" strokeWidth={1.5} />
+              {isPro ? (
+                <ArrowDownToLine className="h-4 w-4" strokeWidth={1.5} />
+              ) : (
+                <Lock className="h-4 w-4" strokeWidth={1.5} />
+              )}
               Download ZIP
             </button>
           )}

@@ -144,6 +144,7 @@ export default function GeoSortClient() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const isAccepted = useCallback((file: File): boolean => {
     const ext = "." + file.name.split(".").pop()?.toLowerCase();
@@ -300,6 +301,10 @@ export default function GeoSortClient() {
   );
 
   const handleDownloadZip = useCallback(async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     setUiState("downloading");
     try {
       const zip = new JSZip();
@@ -364,6 +369,11 @@ export default function GeoSortClient() {
         trigger="files"
         filesDropped={pendingFiles.length}
         freeLimit={limit}
+      />
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
       />
       {/* ── Idle: DropZone ── */}
       {uiState === "idle" && (

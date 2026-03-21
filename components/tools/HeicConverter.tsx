@@ -10,12 +10,14 @@ import {
   XCircle,
   Zap,
   Loader2,
+  Lock,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -367,6 +369,7 @@ export default function HeicConverter() {
   const [progress, setProgress] = useState(0);
   const [progressMessage, setProgressMessage] = useState("");
   const [showProBanner, setShowProBanner] = useState(false);
+  const [showZipUpsell, setShowZipUpsell] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -529,6 +532,10 @@ export default function HeicConverter() {
   }, []);
 
   const handleDownloadAll = useCallback(async () => {
+    if (!isPro) {
+      setShowZipUpsell(true);
+      return;
+    }
     const done = files.filter((f) => f.status === "done" && f.outputBlob);
     if (done.length === 0) return;
 
@@ -559,6 +566,11 @@ export default function HeicConverter() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+      <ProUpsellModal
+        open={showZipUpsell}
+        onClose={() => setShowZipUpsell(false)}
+        trigger="zip"
+      />
 
       {/* ── Idle dropzone ── */}
       {uiState === "idle" && (
@@ -758,12 +770,16 @@ export default function HeicConverter() {
                   )}
 
                   <div className="sm:ml-auto flex items-center gap-2">
-                    {/* Download ZIP */}
+                    {/* Download ZIP — Pro only */}
                     <button
                       onClick={handleDownloadAll}
                       className="shrink-0 inline-flex items-center gap-2 bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md px-4 py-2 text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
                     >
-                      <Download className="h-4 w-4" strokeWidth={1.5} />
+                      {isPro ? (
+                        <Download className="h-4 w-4" strokeWidth={1.5} />
+                      ) : (
+                        <Lock className="h-4 w-4" strokeWidth={1.5} />
+                      )}
                       Download ZIP ({doneCount})
                     </button>
                   </div>
