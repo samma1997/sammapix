@@ -68,7 +68,7 @@ const features = [
 const relatedTools = [
   { name: "Compress Images", href: "/tools/compress" },
   { name: "Convert to WebP", href: "/tools/webp" },
-  { name: "Remove EXIF", href: "/tools/exif" },
+  { name: "Batch Rename", href: "/tools/batchname" },
 ];
 
 export default function HeicPage() {
@@ -357,7 +357,30 @@ export default function HeicPage() {
                     }
                   }
                 ]
-              }
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${APP_URL}`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: `${APP_URL}/tools`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "HEIC Converter",
+                    item: `${APP_URL}/tools/heic`,
+                  },
+                ],
+              },
             ],
           }),
         }}

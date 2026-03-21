@@ -50,6 +50,14 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "anthropic-ai",
         allow: "/",
       },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Applebot-Extended",
+        allow: "/",
+      },
       // Block known scraping / SEO crawlers that provide no value
       {
         userAgent: "SemrushBot",

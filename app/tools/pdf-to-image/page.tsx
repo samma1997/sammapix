@@ -332,6 +332,29 @@ export default function PdfToImagePage() {
                   },
                 ],
               },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${APP_URL}`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: `${APP_URL}/tools`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "PDF to Image",
+                    item: `${APP_URL}/tools/pdf-to-image`,
+                  },
+                ],
+              },
             ],
           }),
         }}

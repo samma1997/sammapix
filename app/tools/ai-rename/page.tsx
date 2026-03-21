@@ -69,9 +69,9 @@ const features = [
 ];
 
 const relatedTools = [
+  { name: "EXIF Viewer", href: "/tools/exif" },
   { name: "Compress Images", href: "/tools/compress" },
-  { name: "Remove EXIF", href: "/tools/exif" },
-  { name: "Convert to WebP", href: "/tools/webp" },
+  { name: "Sort by Location", href: "/tools/geosort" },
 ];
 
 export default function AiRenamePage() {

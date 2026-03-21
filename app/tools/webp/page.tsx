@@ -338,7 +338,30 @@ export default function WebpPage() {
                     }
                   }
                 ]
-              }
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${APP_URL}`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: `${APP_URL}/tools`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "WebP Converter",
+                    item: `${APP_URL}/tools/webp`,
+                  },
+                ],
+              },
             ],
           }),
         }}

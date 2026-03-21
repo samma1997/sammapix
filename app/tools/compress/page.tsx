@@ -97,16 +97,16 @@ const crossSellTools = [
     icon: FileDown,
   },
   {
-    name: "AI Rename",
-    desc: "SEO-friendly filenames with AI",
-    href: "/tools/ai-rename",
-    icon: Sparkles,
-  },
-  {
     name: "Batch Resize",
     desc: "Perfect sizes for social media",
     href: "/tools/resizepack",
     icon: Layers,
+  },
+  {
+    name: "EXIF Viewer",
+    desc: "Strip metadata before sharing",
+    href: "/tools/exif",
+    icon: Shield,
   },
 ];
 
