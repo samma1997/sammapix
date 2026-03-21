@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Remove EXIF Data & GPS from Photos Free Online | SammaPix",
+  title: "Remove EXIF Data Online Free — Strip GPS & Metadata | SammaPix",
   description:
-    "Remove GPS & EXIF instantly- protect your privacy. Strip location, metadata, camera info. Free online, zero uploads, zero tracking.",
+    "Remove EXIF data, GPS location, and metadata from photos online for free. Protect your privacy — all processing in your browser, no uploads.",
   keywords: [
     "remove exif data",
     "remove gps from photos",

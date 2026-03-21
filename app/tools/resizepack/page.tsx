@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Batch Resize Images Free Online - Social Media Presets | SammaPix",
+  title: "Batch Resize Images Online Free — Social Media Sizes | SammaPix",
   description:
-    "Resize for Instagram, Twitter, LinkedIn, YouTube in seconds. Social presets, batch ZIP download, free online. Optimize now.",
+    "Resize multiple images at once for Instagram, Facebook, Twitter, LinkedIn. Free online batch resizer — no upload needed.",
   keywords: [
     "resize images",
     "batch resize",

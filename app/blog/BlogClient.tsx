@@ -16,6 +16,14 @@ interface Post {
 
 const POSTS: Post[] = [
   {
+    slug: "batch-rename-photos-ai",
+    title: "Batch Rename Photos with AI: SEO-Friendly Filenames (2026)",
+    description:
+      "Learn how to batch rename photos with AI automatically. Transform generic image filenames like IMG_0001.jpg into SEO-friendly, descriptive names in seconds.",
+    date: "2026-03-21",
+    tags: ["SEO"],
+  },
+  {
     slug: "browser-based-image-tools-privacy-guide",
     title: "Browser-Based Image Tools: The Complete Privacy Guide (2026)",
     description:

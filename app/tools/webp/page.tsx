@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "WebP Converter Free Online - Convert JPG to WebP | SammaPix",
+  title: "Convert to WebP Online Free — PNG, JPG, GIF | SammaPix",
   description:
-    "Convert JPG to WebP instantly- 25-35% smaller files, zero uploads. Batch convert, browser-based, free forever. Boost Core Web Vitals now.",
+    "Convert images to WebP format online for free. PNG, JPG, GIF to WebP — 25-35% smaller files. No upload, instant browser conversion.",
   keywords: [
     "webp converter",
     "convert to webp",

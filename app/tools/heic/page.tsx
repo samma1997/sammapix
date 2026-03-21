@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "HEIC to JPG Converter Free - Batch iPhone Photos | SammaPix",
+  title: "HEIC to JPG Converter Online Free — No Upload | SammaPix",
   description:
-    "Convert iPhone HEIC photos to JPG or WebP instantly. Batch convert 100+ images, adjustable quality, no signup. Download as ZIP. Free online.",
+    "Convert iPhone HEIC photos to JPG or WebP online for free. No upload needed — works in your browser. Batch convert unlimited HEIC files instantly.",
   keywords: [
     "heic to jpg converter",
     "heic converter",
