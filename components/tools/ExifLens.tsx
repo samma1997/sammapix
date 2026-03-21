@@ -362,6 +362,7 @@ export default function ExifLens() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const isAccepted = useCallback((file: File): boolean => {
     const ext = "." + (file.name.split(".").pop()?.toLowerCase() ?? "");
@@ -515,6 +516,10 @@ export default function ExifLens() {
 
   // Step 2: Build ZIP from already-cleaned blobs and trigger download
   const handleDownload = useCallback(async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     setUiState("downloading");
     try {
       const zip = new JSZip();
@@ -561,6 +566,11 @@ export default function ExifLens() {
         trigger="files"
         filesDropped={pendingFiles.length}
         freeLimit={exifLimit}
+      />
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
       />
       {uiState === "idle" && (
         <div

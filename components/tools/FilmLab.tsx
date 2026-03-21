@@ -15,6 +15,7 @@ import {
   X,
   ChevronDown,
   ChevronUp,
+  Lock,
 } from "lucide-react";
 import JSZip from "jszip";
 import { useSession } from "next-auth/react";
@@ -654,6 +655,7 @@ export default function FilmLab() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [upsellIncoming, setUpsellIncoming] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const firstFile = files[0]?.file ?? null;
   const batchDone = files.length > 0 && files.every((f) => f.resultBlob !== null || f.error !== null);
@@ -802,6 +804,10 @@ export default function FilmLab() {
   };
 
   const downloadZip = async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     const zip = new JSZip();
     for (const entry of files) {
       if (entry.resultBlob) {
@@ -850,6 +856,11 @@ export default function FilmLab() {
         trigger="files"
         filesDropped={files.length + upsellIncoming.length}
         freeLimit={filmLimit}
+      />
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
       />
 
       {/* Preset pills- two groups */}
@@ -1104,7 +1115,11 @@ export default function FilmLab() {
               onClick={downloadZip}
               className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#333] rounded-md hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:border-[#A3A3A3] transition-colors"
             >
-              <Archive className="h-4 w-4" strokeWidth={1.5} />
+              {isPro ? (
+                <Archive className="h-4 w-4" strokeWidth={1.5} />
+              ) : (
+                <Lock className="h-4 w-4" strokeWidth={1.5} />
+              )}
               Download ZIP
             </button>
           )}

@@ -17,6 +17,7 @@ import {
   Trash2,
   AlertCircle,
 } from "lucide-react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -101,6 +102,7 @@ export default function SmartSortClient() {
   const [limitError, setLimitError] = useState<string | null>(null);
   const [aiUsage, setAiUsage] = useState<AiUsage | null>(null);
   const [imageUsage, setImageUsage] = useState<ImageUsage | null>(null);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
   const abortRef = useRef(false);
 
   const isAuthenticated = authStatus === "authenticated" && !!session?.user;
@@ -378,6 +380,11 @@ export default function SmartSortClient() {
       return;
     }
 
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
+
     const zip = new JSZip();
     for (const f of catFiles) {
       zip.file(f.name, f.file);
@@ -388,6 +395,10 @@ export default function SmartSortClient() {
 
   async function downloadAll() {
     if (!hasResults) return;
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     setDownloading(true);
     try {
       const zip = new JSZip();
@@ -448,6 +459,11 @@ export default function SmartSortClient() {
 
   return (
     <section className="py-6 px-4 sm:px-6 bg-white dark:bg-[#191919]">
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
+      />
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* DropZone */}
@@ -670,8 +686,10 @@ export default function SmartSortClient() {
                 >
                   {downloading ? (
                     <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                  ) : (
+                  ) : isPro ? (
                     <Download className="h-4 w-4" strokeWidth={1.5} />
+                  ) : (
+                    <Lock className="h-4 w-4" strokeWidth={1.5} />
                   )}
                   {downloading ? "Preparing ZIP..." : "Download All as ZIP"}
                 </button>

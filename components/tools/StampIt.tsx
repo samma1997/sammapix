@@ -15,6 +15,7 @@ import {
   Image as ImageIcon,
   Grid3x3,
   Layers,
+  Lock,
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -295,7 +296,7 @@ const StampSlider = ({ min, max, value, onChange, label, unit = "" }: SliderProp
 
 export default function StampIt() {
   const { data: session } = useSession();
-  const isPro = (session?.user as { isPro?: boolean } | undefined)?.isPro === true;
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const maxFiles = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
   // UI state
@@ -328,6 +329,7 @@ export default function StampIt() {
   const logoInputRef = useRef<HTMLInputElement>(null);
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [upsellIncoming, setUpsellIncoming] = useState<File[]>([]);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   // Cleanup blob URLs on unmount
   useEffect(() => {
@@ -481,6 +483,10 @@ export default function StampIt() {
   };
 
   const handleDownloadAll = async () => {
+    if (!isPro) {
+      setZipUpsellOpen(true);
+      return;
+    }
     const { default: JSZip } = await import("jszip");
     const zip = new JSZip();
     entries.forEach((entry) => {
@@ -523,6 +529,11 @@ export default function StampIt() {
         trigger="files"
         filesDropped={entries.length + upsellIncoming.length}
         freeLimit={maxFiles}
+      />
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
       />
 
       {/* Pro badge banner */}
@@ -952,7 +963,11 @@ export default function StampIt() {
               onClick={handleDownloadAll}
               className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-6"
             >
-              <ArrowDownToLine className="h-4 w-4" strokeWidth={1.5} />
+              {isPro ? (
+                <ArrowDownToLine className="h-4 w-4" strokeWidth={1.5} />
+              ) : (
+                <Lock className="h-4 w-4" strokeWidth={1.5} />
+              )}
               Download all as ZIP ({doneCount} image{doneCount !== 1 ? "s" : ""})
             </button>
           )}

@@ -6,7 +6,8 @@ import { useImageStore } from "@/store/imageStore";
 import { Button } from "@/components/ui/button";
 import FileCard from "./FileCard";
 import { cn } from "@/lib/utils";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 interface FileListProps {
   onAiRename?: (fileId: string) => void;
@@ -15,7 +16,8 @@ interface FileListProps {
 export default function FileList({ onAiRename }: FileListProps) {
   const { items, clearAll, downloadAll, isZipping } = useImageStore();
   const { data: session } = useSession();
-  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const [showUpsell, setShowUpsell] = useState(false);
   const doneFiles = items.filter((i) => i.status === "done");
   const hasDoneFiles = doneFiles.length > 0;
 
@@ -32,11 +34,10 @@ export default function FileList({ onAiRename }: FileListProps) {
   }
 
   const handleDownloadAll = async () => {
-    if (!session) {
-      setShowLoginPrompt(true);
+    if (!isPro) {
+      setShowUpsell(true);
       return;
     }
-    setShowLoginPrompt(false);
     await downloadAll();
   };
 
@@ -89,27 +90,20 @@ export default function FileList({ onAiRename }: FileListProps) {
               loading={isZipping}
               className="gap-1.5"
             >
-              {!isZipping && !session && <Lock className="h-3 w-3" strokeWidth={1.5} />}
-              {!isZipping && session && <Download className="h-3.5 w-3.5" strokeWidth={1.5} />}
+              {!isZipping && !isPro && <Lock className="h-3 w-3" strokeWidth={1.5} />}
+              {!isZipping && isPro && <Download className="h-3.5 w-3.5" strokeWidth={1.5} />}
               {isZipping ? "Zipping..." : "Download all ZIP"}
             </Button>
           </div>
-          {/* Login prompt shown when unauthenticated user clicks ZIP */}
-          {showLoginPrompt && (
-            <div className="flex items-center justify-between gap-3 px-3 py-2.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-              <p className="text-xs text-[#525252] dark:text-[#A3A3A3]">
-                Sign in to download all files as ZIP — it&apos;s free.
-              </p>
-              <button
-                onClick={() => signIn()}
-                className="shrink-0 text-xs font-medium text-white bg-[#171717] dark:bg-white dark:text-[#171717] px-3 py-1.5 rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
-              >
-                Sign in
-              </button>
-            </div>
-          )}
         </div>
       )}
+
+      {/* Pro upsell modal for ZIP download */}
+      <ProUpsellModal
+        open={showUpsell}
+        onClose={() => setShowUpsell(false)}
+        trigger="zip"
+      />
     </div>
   );
 }
