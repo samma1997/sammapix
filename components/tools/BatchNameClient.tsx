@@ -4,7 +4,8 @@ import React, { useState, useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import { Upload, Download, Trash2, RotateCcw } from "lucide-react";
+import { Upload, Download, Trash2, RotateCcw, Lock } from "lucide-react";
+import { useSession, signIn } from "next-auth/react";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -79,11 +80,13 @@ function applyPattern(
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export default function BatchNameClient() {
+  const { data: session } = useSession();
   const [files, setFiles] = useState<FileEntry[]>([]);
   const [pattern, setPattern] = useState("photo-{001}");
   const [startNum, setStartNum] = useState(1);
   const [separator, setSeparator] = useState<"-" | "_" | " ">("-");
   const [downloading, setDownloading] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   const onDrop = useCallback((accepted: File[]) => {
     const entries: FileEntry[] = accepted.map((f) => ({
@@ -125,11 +128,19 @@ export default function BatchNameClient() {
 
   async function handleDownload() {
     if (previews.length === 0) return;
+
+    // ZIP download requires sign-in; single file download is always allowed
+    if (previews.length > 1 && !session) {
+      setShowLoginPrompt(true);
+      return;
+    }
+
+    setShowLoginPrompt(false);
     setDownloading(true);
 
     try {
       if (previews.length === 1) {
-        // Single file: direct download
+        // Single file: direct download (no auth required)
         const entry = previews[0];
         const url = URL.createObjectURL(entry.file);
         const a = document.createElement("a");
@@ -138,7 +149,7 @@ export default function BatchNameClient() {
         a.click();
         URL.revokeObjectURL(url);
       } else {
-        // Multiple files: ZIP
+        // Multiple files: ZIP (requires auth — already checked above)
         const zip = new JSZip();
         for (const entry of previews) {
           zip.file(entry.newName, entry.file);
@@ -314,11 +325,28 @@ export default function BatchNameClient() {
             >
               {downloading ? (
                 <RotateCcw className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+              ) : previews.length > 1 && !session ? (
+                <Lock className="h-4 w-4" strokeWidth={1.5} />
               ) : (
                 <Download className="h-4 w-4" strokeWidth={1.5} />
               )}
               {downloading ? "Preparing..." : previews.length > 1 ? "Rename & Download ZIP" : "Rename & Download"}
             </button>
+
+            {/* Login prompt for ZIP download */}
+            {showLoginPrompt && (
+              <div className="flex items-center justify-between gap-3 px-3 py-2.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+                <p className="text-xs text-[#525252] dark:text-[#A3A3A3]">
+                  Sign in to download renamed files as ZIP — it&apos;s free.
+                </p>
+                <button
+                  onClick={() => signIn()}
+                  className="shrink-0 text-xs font-medium text-white bg-[#171717] dark:bg-white dark:text-[#171717] px-3 py-1.5 rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                >
+                  Sign in
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>

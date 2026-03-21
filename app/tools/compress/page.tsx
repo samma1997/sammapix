@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import {
+  ArrowLeft,
   ArrowRight,
   Shield,
   Sparkles,
@@ -122,6 +123,15 @@ export default function CompressPage() {
       {/*  HERO — Conversion-focused, compact, above the tool          */}
       {/* ============================================================ */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+        {/* Back link */}
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
         {/* Icon + H1 */}
         <div className="flex items-center gap-3 mb-2">
           <div
