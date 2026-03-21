@@ -17,9 +17,9 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Compress Images Online — Free, No Upload | SammaPix",
+  title: "Free Image Compressor Online — No Signup, Unlimited | SammaPix",
   description:
-    "Reduce image file size up to 90% without losing quality. Free online image compressor — works in your browser, images never leave your device. JPG, PNG, WebP, GIF.",
+    "Compress JPG, PNG, WebP images instantly in your browser. Reduce file size up to 90% without quality loss. Free, unlimited, no signup required.",
   keywords: [
     "compress image online",
     "image compressor",
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Compress Images Online — Free, No Upload | SammaPix",
+    title: "Free Image Compressor Online — No Signup, Unlimited | SammaPix",
     description:
-      "Reduce image file size up to 90% without losing quality. Free online image compressor — works in your browser, images never leave your device.",
+      "Compress JPG, PNG, WebP images instantly in your browser. Reduce file size up to 90% without quality loss. Free, unlimited, no signup required.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",
@@ -554,6 +554,29 @@ export default function CompressPage() {
                     text: faq.answer,
                   },
                 })),
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${APP_URL}`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Tools",
+                    item: `${APP_URL}/tools`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "Image Compressor",
+                    item: `${APP_URL}/tools/compress`,
+                  },
+                ],
               },
             ],
           }),

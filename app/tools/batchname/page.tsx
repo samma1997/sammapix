@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Batch Rename Photos - Custom Patterns & Auto-Increment | SammaPix",
+  title: "AI Image Renamer — Batch Rename Photos Automatically | SammaPix",
   description:
-    "Batch rename photos with custom patterns. Auto-increment numbers, add dates, or keep original names. Free file renaming tool, 100% browser-based, zero login required.",
+    "Rename thousands of photos with AI in seconds. Get SEO-friendly, descriptive filenames automatically. Free with account.",
   keywords: [
     "batch rename files",
     "bulk file renamer",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/batchname`,
   },
   openGraph: {
-    title: "Batch Rename - Rename Files with Custom Patterns | SammaPix",
+    title: "AI Image Renamer — Batch Rename Photos Automatically | SammaPix",
     description:
-      "Rename multiple files with a custom pattern. Auto-increment, dates, original names. Free and browser-based.",
+      "Rename thousands of photos with AI in seconds. Get SEO-friendly, descriptive filenames automatically. Free with account.",
     url: `${APP_URL}/tools/batchname`,
     type: "website",
     images: [
@@ -114,6 +114,19 @@ export default function BatchNamePage() {
     })),
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <main>
       <MetaViewContent contentName="Batch Rename" contentId="batchname" />
@@ -124,6 +137,10 @@ export default function BatchNamePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <script
         type="application/ld+json"
