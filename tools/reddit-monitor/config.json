@@ -1,0 +1,59 @@
+{
+  "reddit_api": {
+    "client_id": "YOUR_CLIENT_ID",
+    "client_secret": "YOUR_CLIENT_SECRET",
+    "user_agent": "SammaPix Monitor v2.0 by /u/yourusername",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD"
+  },
+  "subreddits": [
+    "photography",
+    "AskPhotography",
+    "webdev",
+    "ecommerce",
+    "SideProject",
+    "freelance",
+    "PhotoshopRequest",
+    "photocritique",
+    "entrepreneur",
+    "startups"
+  ],
+  "keywords": [
+    "image compression",
+    "compress photos",
+    "organize photos",
+    "batch rename",
+    "HEIC converter",
+    "WebP converter",
+    "photo organizer",
+    "duplicate photos",
+    "remove EXIF",
+    "alt text generator",
+    "image optimization",
+    "photo management",
+    "bulk photo editing",
+    "photo metadata",
+    "image resizing",
+    "photo backup",
+    "image format conversion",
+    "photo workflow",
+    "digital asset management",
+    "photo storage",
+    "image SEO",
+    "photo accessibility",
+    "picture organization",
+    "image tools",
+    "photo automation"
+  ],
+  "gemini_model": "gemini-2.0-flash",
+  "discord_webhook_url": "",
+  "check_interval_minutes": 5,
+  "posts_per_check": 25,
+  "comments_per_check": 50,
+  "monitor_comments": true,
+  "notifications": {
+    "enabled": true
+  },
+  "min_score_threshold": 1,
+  "blacklisted_authors": []
+}

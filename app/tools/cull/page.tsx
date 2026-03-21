@@ -192,7 +192,7 @@ export default function CullPage() {
         <div className="max-w-2xl mx-auto">
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA]">
             <p className="text-xs text-[#A3A3A3] uppercase tracking-wide mb-1">📖 Related guide</p>
-            <a href="/blog/how-to-cull-photos-fast" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
+            <a href="/blog/cull-photos-faster-workflow" className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] flex items-center gap-1">
               How to Cull Photos Fast: A Practical Workflow →
             </a>
           </div>
