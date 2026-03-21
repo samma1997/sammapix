@@ -31,6 +31,9 @@ const nextConfig = {
       { source: '/blog/travel-map-gps-photos', destination: '/blog/create-travel-photo-map', permanent: true },
       { source: '/blog/how-to-cull-photos-fast', destination: '/blog/cull-photos-faster-workflow', permanent: true },
       { source: '/blog/find-duplicate-photos-free', destination: '/blog/find-delete-duplicate-photos', permanent: true },
+      // Tool shortcut redirects (fix 404s from Semrush audit)
+      { source: '/compress', destination: '/tools/compress', permanent: true },
+      { source: '/tools/resize', destination: '/tools/resizepack', permanent: true },
     ];
   },
   images: {
