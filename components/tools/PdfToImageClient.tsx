@@ -300,9 +300,11 @@ export default function PdfToImageClient() {
       setProgress(0);
 
       try {
-        // Dynamic import to avoid SSR issues
+        // Dynamic import to avoid SSR issues.
+        // Worker is served from /public/pdf.worker.min.mjs to avoid CORS
+        // issues with module workers required by pdfjs-dist v5.
         const pdfjsLib = await import("pdfjs-dist");
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
         const arrayBuffer = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
@@ -383,7 +385,7 @@ export default function PdfToImageClient() {
 
     try {
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const arrayBuffer = await file.arrayBuffer();
       const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -538,8 +540,14 @@ export default function PdfToImageClient() {
             onChange={handleFileInput}
           />
           <div className="flex flex-col items-center gap-4">
-            <div className="h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
-              <File className="h-6 w-6 text-[#737373]" strokeWidth={1.5} />
+            <div className="relative h-12 w-12 rounded-lg border border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] flex items-center justify-center">
+              <File
+                className={[
+                  "h-6 w-6 transition-colors",
+                  isDragOver ? "text-[#6366F1]" : "text-[#737373] animate-pulse",
+                ].join(" ")}
+                strokeWidth={1.5}
+              />
             </div>
             <div>
               <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">

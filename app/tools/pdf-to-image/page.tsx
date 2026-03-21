@@ -1,8 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowRight, FileImage, Layers, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, FileImage, Layers, Zap, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
 import PdfToImageClient from "@/components/tools/PdfToImageClient";
 import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
@@ -85,12 +84,58 @@ export default function PdfToImagePage() {
   return (
     <main>
       <MetaViewContent contentName="PDF to Image" contentId="pdf-to-image" />
-      <ToolHeader
-        title="PDF to Image"
-        description="Convert every PDF page to JPG, PNG, or WebP. Adjustable resolution and quality. Download individually or as a ZIP."
-        icon={FileImage}
-        accentColor="#6366F1"
-      />
+
+      {/* ── Hero header ── */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="flex items-center gap-3 mb-2">
+          <div
+            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+            aria-hidden="true"
+          >
+            <FileImage
+              className="h-[18px] w-[18px]"
+              style={{ color: "#6366F1" }}
+              strokeWidth={1.5}
+            />
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
+            PDF to Image Converter
+          </h1>
+        </div>
+
+        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
+          Convert every PDF page to JPG, PNG, or WebP. Adjustable resolution and quality.
+          Download individually or as a ZIP.
+        </p>
+
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+          <span className="inline-flex items-center gap-1">
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+            100% free
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+            No upload
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+            JPG · PNG · WebP
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+            ZIP download
+          </span>
+        </div>
+      </section>
 
       {/* Tool */}
       <PdfToImageClient />
