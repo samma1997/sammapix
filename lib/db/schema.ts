@@ -123,3 +123,44 @@ export const growthStrategyReviews = pgTable("growth_strategy_reviews", {
 
 export type StrategyReview = typeof growthStrategyReviews.$inferSelect;
 export type NewStrategyReview = typeof growthStrategyReviews.$inferInsert;
+
+export const growthCompetitors = pgTable("growth_competitors", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  url: text("url").notNull(),
+  lastScrapedAt: timestamp("last_scraped_at"),
+  currentSnapshot: text("current_snapshot"), // JSON string
+  changesDetected: text("changes_detected"), // JSON string
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type Competitor = typeof growthCompetitors.$inferSelect;
+export type NewCompetitor = typeof growthCompetitors.$inferInsert;
+
+export const growthBrandMentions = pgTable("growth_brand_mentions", {
+  id: serial("id").primaryKey(),
+  source: text("source").notNull(), // "google", "perplexity", "reddit", "hackernews"
+  query: text("query").notNull(), // "best image compressor"
+  sammapixFound: boolean("sammapix_found").default(false),
+  position: integer("position"), // position in results where found
+  snippet: text("snippet"), // what was said about SammaPix
+  competitorsFound: text("competitors_found"), // JSON array of competitor names
+  checkedAt: timestamp("checked_at").defaultNow(),
+});
+
+export type BrandMention = typeof growthBrandMentions.$inferSelect;
+export type NewBrandMention = typeof growthBrandMentions.$inferInsert;
+
+export const growthToolRadar = pgTable("growth_tool_radar", {
+  id: serial("id").primaryKey(),
+  source: text("source").notNull(), // "producthunt", "github", "hackernews", "devto"
+  title: text("title").notNull(),
+  url: text("url").notNull(),
+  description: text("description"),
+  relevanceScore: integer("relevance_score").default(0),
+  aiAnalysis: text("ai_analysis"),
+  scrapedAt: timestamp("scraped_at").defaultNow(),
+});
+
+export type ToolRadarItem = typeof growthToolRadar.$inferSelect;
+export type NewToolRadarItem = typeof growthToolRadar.$inferInsert;

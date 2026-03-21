@@ -12,17 +12,25 @@ const SUBREDDIT_COLORS: Record<string, string> = {
   SEO: "bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400",
   Wordpress: "bg-sky-50 text-sky-600 dark:bg-sky-900/20 dark:text-sky-400",
   graphic_design: "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
+  hackernews: "bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400",
+  devto: "bg-violet-50 text-violet-700 dark:bg-violet-900/20 dark:text-violet-400",
 };
 
 function SubredditBadge({ sub }: { sub: string }) {
   const cls =
     SUBREDDIT_COLORS[sub] ??
     "bg-[#F5F5F5] text-[#525252] dark:bg-[#2A2A2A] dark:text-[#A3A3A3]";
+  const label =
+    sub === "hackernews"
+      ? "HN"
+      : sub === "devto"
+      ? "Dev.to"
+      : `r/${sub}`;
   return (
     <span
       className={`inline-block text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] ${cls}`}
     >
-      r/{sub}
+      {label}
     </span>
   );
 }
