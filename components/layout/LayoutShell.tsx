@@ -13,7 +13,10 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
 
-  if (isDashboard) {
+  // Growth subdomain: never show SammaPix header/footer
+  const isGrowthSubdomain = typeof window !== "undefined" && window.location.hostname.startsWith("growth.");
+
+  if (isDashboard || isGrowthSubdomain) {
     return <>{children}</>;
   }
 

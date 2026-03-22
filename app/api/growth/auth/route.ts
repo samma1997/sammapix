@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const GROWTH_USER = process.env.GROWTH_USERNAME || "samma";
-const GROWTH_PASS = process.env.GROWTH_PASSWORD || "REDACTED!";
-const GROWTH_SECRET = process.env.GROWTH_SESSION_SECRET || "gx_" + Buffer.from(GROWTH_PASS).toString("base64");
+const GROWTH_USER = process.env.GROWTH_USERNAME ?? "samma";
+const GROWTH_PASS = process.env.GROWTH_PASSWORD ?? "REDACTED";
+const GROWTH_SECRET = process.env.GROWTH_SESSION_SECRET ?? "REDACTED";
 
 export async function POST(request: NextRequest) {
   try {
