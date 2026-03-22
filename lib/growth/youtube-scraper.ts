@@ -322,10 +322,21 @@ export async function scrapeYouTubeInsights(): Promise<{
         duration: "",
       };
 
-      // If description is too short, the AI will still do its best —
-      // it still has the title and channel context which is better than a
-      // failed transcript fetch.
-      const { summary, tags, insightType } = await summarizeWithGemini(details);
+      // Try AI summarization, but save even if Gemini fails
+      let summary: string | null = null;
+      let tags: string[] = [];
+      let insightType = "seo_tactic";
+
+      try {
+        const result = await summarizeWithGemini(details);
+        summary = result.summary;
+        tags = result.tags;
+        insightType = result.insightType;
+      } catch (geminiErr) {
+        console.warn(`[youtube-scraper] Gemini failed for ${video.id}, saving without summary:`, geminiErr instanceof Error ? geminiErr.message : geminiErr);
+        // Save with description as fallback summary
+        summary = details.description ? details.description.slice(0, 500) : null;
+      }
 
       await db.insert(growthYoutubeInsights).values({
         videoId: video.id,

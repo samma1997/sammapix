@@ -3,18 +3,19 @@ import { growthRedditPosts } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq } from "drizzle-orm";
 
-// Reddit-wide search queries targeting posts where someone is asking for tool recommendations.
-// These are action-intent queries — the user is looking for help, so a genuine reply
-// mentioning SammaPix is appropriate and not spam.
+// Highly specific queries — every result MUST be about image tools/optimization.
+// Generic terms like "how to compress" alone match too many unrelated posts.
 const REDDIT_QUERIES = [
-  "recommend image compressor",
-  "best tool compress images",
-  "looking for image optimizer",
-  "alternative to tinypng",
-  "how to compress images",
-  "need bulk image resize",
-  "free heic converter",
-  "remove exif metadata tool",
+  "compress images online free",
+  "best image compression tool",
+  "tinypng alternative",
+  "convert heic to jpg",
+  "bulk image resizer",
+  "remove exif data from photos",
+  "webp converter online",
+  "optimize images for website",
+  "reduce image file size",
+  "batch rename photos SEO",
 ];
 
 interface RedditPost {
@@ -41,66 +42,49 @@ function buildRedditUrl(permalink: string): string {
 }
 
 function calculateRelevanceScore(post: RedditPost): number {
-  let score = 0;
-  const titleLower = post.title.toLowerCase();
+  // ONLY check the TITLE — selftext contains too many false positives
+  const title = post.title.toLowerCase();
 
-  // Question / recommendation intent words — high value, these are posts we can genuinely help with
-  const intentWords = [
-    "how",
-    "what",
-    "best",
-    "recommend",
-    "recommendation",
-    "looking for",
-    "alternative",
-    "need",
-    "suggest",
-    "which",
-    "anyone know",
-  ];
-  for (const word of intentWords) {
-    if (titleLower.includes(word)) {
-      score += 20;
-      break; // only count once
-    }
-  }
-
-  // Image / tool domain relevance — these posts are topically relevant to SammaPix
+  // MUST contain at least one image/photo domain keyword IN THE TITLE
   const domainKeywords = [
-    "image",
-    "photo",
-    "compress",
-    "compressor",
-    "convert",
-    "resize",
-    "webp",
-    "heic",
-    "jpeg",
-    "png",
-    "exif",
-    "metadata",
-    "optimizer",
-    "optimization",
-    "tinypng",
-    "squoosh",
-    "bulk",
+    "image", "images", "photo", "photos", "picture",
+    "compress", "compressor", "compression",
+    "convert", "converter",
+    "resize", "resizer",
+    "webp", "heic", "jpeg", "jpg", "png", "avif", "svg",
+    "exif", "metadata",
+    "optimizer", "optimization", "optimize",
+    "tinypng", "squoosh", "iloveimg", "shortpixel",
+    "rename photo", "rename image",
+    "file size", "reduce size",
+    "bulk image", "batch image",
   ];
-  for (const kw of domainKeywords) {
-    if (titleLower.includes(kw)) {
-      score += 15;
-      break; // only count once — the post is either relevant or it isn't
-    }
+  const hasDomainMatch = domainKeywords.some((kw) => title.includes(kw));
+  if (!hasDomainMatch) return 0; // HARD FILTER — title must be about images
+
+  let score = 40; // base score for title containing image keyword
+
+  // Intent words in title = someone asking for help = perfect opportunity
+  const intentWords = [
+    "how", "what", "best", "recommend", "looking for",
+    "alternative", "need", "suggest", "which", "anyone",
+    "help", "tool", "free", "online", "?",
+  ];
+  if (intentWords.some((w) => title.includes(w))) {
+    score += 20;
   }
 
-  // Recency bonus — fresher posts have more engagement opportunity
-  const ageDays = (Date.now() / 1000 - post.created_utc) / 86400;
-  if (ageDays < 1) score += 25;
-  else if (ageDays < 3) score += 15;
-  else if (ageDays < 7) score += 5;
+  // Multiple domain keyword matches in title = very relevant
+  const matchCount = domainKeywords.filter((kw) => title.includes(kw)).length;
+  if (matchCount >= 2) score += 15;
 
-  // Low comment count bonus — easier to be visible in a thread with few replies
-  if (post.num_comments < 5) score += 15;
-  else if (post.num_comments < 10) score += 10;
+  // Recency bonus
+  const ageDays = (Date.now() / 1000 - post.created_utc) / 86400;
+  if (ageDays < 1) score += 10;
+  else if (ageDays < 3) score += 5;
+
+  // Low comment count = easier to be visible
+  if (post.num_comments < 5) score += 10;
 
   return Math.min(100, score);
 }
