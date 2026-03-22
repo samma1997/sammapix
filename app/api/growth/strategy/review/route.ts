@@ -9,6 +9,11 @@ import {
   growthRedditPosts,
   growthOutreachTargets,
   growthGscDaily,
+  growthYoutubeInsights,
+  growthBrandMentions,
+  growthCompetitors,
+  growthContentCalendar,
+  growthDirectorySubmissions,
 } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { and, gte, eq, sql, isNull } from "drizzle-orm";
@@ -78,21 +83,85 @@ export async function POST() {
     const clicks = Number(gscStats?.clicks ?? 0);
     const avgPosition = Number(gscStats?.avgPosition ?? 0);
 
-    const dataContext = `
-Period: ${periodStart} to ${periodEnd} (last 14 days)
+    // YouTube insights (recent tactics learned)
+    const youtubeInsights = await db
+      .select({ title: growthYoutubeInsights.videoTitle, summary: growthYoutubeInsights.transcriptSummary })
+      .from(growthYoutubeInsights)
+      .where(gte(growthYoutubeInsights.scrapedAt, twoWeeksAgo))
+      .limit(10);
 
-REDDIT:
-- Comments posted: ${redditComments}
+    const youtubeSummaries = youtubeInsights
+      .filter(v => v.summary)
+      .map(v => `- "${v.title}": ${v.summary?.slice(0, 150)}`)
+      .join("\n");
+
+    // Brand visibility
+    const brandMentions = await db
+      .select({ query: growthBrandMentions.query, found: growthBrandMentions.sammapixFound, position: growthBrandMentions.position })
+      .from(growthBrandMentions)
+      .where(gte(growthBrandMentions.checkedAt, twoWeeksAgo));
+
+    const brandFound = brandMentions.filter(b => b.found).length;
+    const brandTotal = brandMentions.length;
+
+    // Competitors
+    const competitors = await db
+      .select({ name: growthCompetitors.name, changes: growthCompetitors.changesDetected })
+      .from(growthCompetitors);
+
+    const competitorChanges = competitors
+      .filter(c => c.changes && !c.changes.toLowerCase().includes("first scan") && !c.changes.toLowerCase().includes("no significant"))
+      .map(c => `- ${c.name}: ${c.changes?.slice(0, 100)}`)
+      .join("\n");
+
+    // Content calendar
+    const [contentStats] = await db
+      .select({
+        ideas: sql<number>`count(*) filter (where ${growthContentCalendar.status} = 'idea')`,
+        writing: sql<number>`count(*) filter (where ${growthContentCalendar.status} = 'writing')`,
+        published: sql<number>`count(*) filter (where ${growthContentCalendar.status} = 'published')`,
+      })
+      .from(growthContentCalendar);
+
+    // Directories
+    const [dirStats] = await db
+      .select({
+        listed: sql<number>`count(*) filter (where ${growthDirectorySubmissions.status} = 'listed')`,
+        total: sql<number>`count(*)`,
+      })
+      .from(growthDirectorySubmissions);
+
+    const dataContext = `
+Periodo: ${periodStart} → ${periodEnd} (ultimi 14 giorni)
+SammaPix.com — tool gratuito per ottimizzare immagini (compress, convert, resize, HEIC, EXIF, AI rename)
+
+GOOGLE SEARCH CONSOLE:
+- Impressioni: ${impressions > 0 ? impressions.toLocaleString() : "Nessun dato GSC"}
+- Click: ${clicks > 0 ? clicks.toLocaleString() : "Nessun dato GSC"}
+- Posizione media: ${avgPosition > 0 ? avgPosition.toFixed(1) : "Nessun dato GSC"}
+
+REDDIT & COMMUNITY:
+- Commenti pubblicati: ${redditComments}
 
 OUTREACH (link building):
-- Emails sent: ${outreachSent}
-- Replies received: ${outreachReplied}
-- Backlinks gained: ${outreachLinked}
+- Email inviate: ${outreachSent}
+- Risposte ricevute: ${outreachReplied}
+- Backlink ottenuti: ${outreachLinked}
 
-GOOGLE SEARCH CONSOLE (if data available):
-- Total impressions: ${impressions > 0 ? impressions.toLocaleString() : "No GSC data yet"}
-- Total clicks: ${clicks > 0 ? clicks.toLocaleString() : "No GSC data yet"}
-- Avg position: ${avgPosition > 0 ? avgPosition.toFixed(1) : "No GSC data yet"}
+BRAND VISIBILITY:
+- SammaPix trovato in ${brandFound}/${brandTotal > 0 ? brandTotal : 7} query monitorate
+
+COMPETITOR (cambiamenti recenti):
+${competitorChanges || "- Nessun cambiamento significativo rilevato"}
+
+CONTENUTI:
+- Idee: ${Number(contentStats?.ideas ?? 0)}, In scrittura: ${Number(contentStats?.writing ?? 0)}, Pubblicati: ${Number(contentStats?.published ?? 0)}
+
+DIRECTORY:
+- Listati: ${Number(dirStats?.listed ?? 0)} su ${Number(dirStats?.total ?? 0)} directory
+
+TATTICHE DA YOUTUBE (insight recenti dai migliori canali SEO):
+${youtubeSummaries || "- Nessun insight YouTube ancora"}
     `.trim();
 
     const apiKey = process.env.GEMINI_API_KEY;
@@ -106,25 +175,29 @@ GOOGLE SEARCH CONSOLE (if data available):
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    const prompt = `You are an SEO growth analyst for SammaPix.com, a free image tools SaaS. Analyze this 2-week data and provide:
-1) What's working
-2) What's not working
-3) 5 specific actions for next 2 weeks
+    const prompt = `Sei il growth strategist di SammaPix.com (tool gratuito per ottimizzare immagini, modello freemium $7/mese).
 
-Be direct and actionable. Use bullet points. Keep each section concise.
+Analizza TUTTI questi dati delle ultime 2 settimane e scrivi un report strategico IN ITALIANO:
 
-Data:
+1) COSA STA FUNZIONANDO — basato sui dati reali
+2) COSA NON FUNZIONA — problemi e gap
+3) INSIGHT DA YOUTUBE — se ci sono tattiche dai video SEO, spiega come applicarle a SammaPix
+4) 5 AZIONI CONCRETE per le prossime 2 settimane — ogni azione deve essere specifica e fattibile (es. "Scrivi un articolo blog su X", "Contatta Y per backlink", non generico)
+
+Sii diretto, pratico, senza fuffa. Usa markdown per formattare.
+
+Dati:
 ${dataContext}
 
-Respond in this JSON format:
+Rispondi in questo formato JSON:
 {
-  "analysis": "Full markdown analysis here",
+  "analysis": "Report completo in markdown qui",
   "suggestions": [
-    "Specific action 1",
-    "Specific action 2",
-    "Specific action 3",
-    "Specific action 4",
-    "Specific action 5"
+    "Azione specifica 1",
+    "Azione specifica 2",
+    "Azione specifica 3",
+    "Azione specifica 4",
+    "Azione specifica 5"
   ]
 }`;
 

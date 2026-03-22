@@ -101,26 +101,32 @@ export async function generateRedditDraftComment(
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-  const prompt = `Write a Reddit comment reply to this post. You're a regular person who happens to know about image optimization.
+  const prompt = `You must write a Reddit comment that is INDISTINGUISHABLE from a real human.
 
-RULES FOR SOUNDING HUMAN:
-- Write like a real Reddit user, not a corporate bot
-- Use lowercase casually, occasional typos-style shortcuts are ok (e.g. "tbh", "imo", "fwiw")
-- Start with something casual, NEVER "Great question!" or "Absolutely!" or "I'd recommend"
-- Vary sentence length. Some short. Some longer with actual detail.
-- Include a personal touch like "I ran into this same issue" or "been using X for a while now"
-- Be specific with numbers/details (e.g. "saved about 40% on a batch of 200 product photos")
-- It's OK to be slightly opinionated ("honestly X is overkill for most people")
-- Don't use bullet points or numbered lists — write like a normal comment
-- 2-4 sentences max, keep it natural
-- Do NOT mention SammaPix at all
-- Do NOT use emojis
-- Do NOT start with "Hey" or any greeting
+Here are 3 examples of the tone/style I want:
 
-Post title: "${postTitle}"
-Post text: "${postText.slice(0, 500)}"
+EXAMPLE 1 (for a "best compressor" post):
+"tbh I've been using squoosh for quick one-offs but for anything over like 20 images it's painful. switched to sharp in a node script and the difference is night and day, got 800 product shots down from ~4MB to under 300kb each without any visible quality loss"
 
-Write ONLY the comment, nothing else.`;
+EXAMPLE 2 (for a "how to optimize images" post):
+"honestly just converting to webp will get you most of the way there. I was overthinking this for months and then realized webp alone cut my page load by like 60%. the format support is basically universal now"
+
+EXAMPLE 3 (for a "tool recommendation" post):
+"ran into this exact problem last month with a shopify store. ended up going with imagemagick's mogrify for the batch processing part, works great if you're comfortable with cli. processed about 2k images in under a minute"
+
+NOW write a comment for THIS post using the same style:
+- Sound like those examples above — casual, specific, from experience
+- NEVER use phrases like "I'd recommend", "You might want to", "Consider using"
+- NO bullet points, NO numbered lists, NO markdown formatting
+- NO emojis, NO greetings, NO "Great question"
+- 2-4 sentences, all lowercase is fine
+- Include at least one specific number or measurement
+- Do NOT mention SammaPix
+
+Post: "${postTitle}"
+${postText ? `Context: "${postText.slice(0, 300)}"` : ""}
+
+Write ONLY the raw comment text:`;
 
   try {
     const result = await model.generateContent(prompt);
