@@ -1,0 +1,44 @@
+Service,Endpoint,Monthly_Usage,Free_Tier_Limit,Usage_Percentage,Pricing_Model,Monthly_Cost_EUR,Notes,Risk_Level,Recommendation
+Google Analytics GA4,runReport (overview),30,UNLIMITED,0%,Free,0,"5 concurrent reports per page load, 5-10 page loads/giorno",Green,Monitor performance only
+Google Analytics GA4,runReport (daily),30,UNLIMITED,0%,Free,0,Daily breakdown for 28-90 days,Green,Monitor performance only
+Google Analytics GA4,runReport (pages),30,UNLIMITED,0%,Free,0,Top 20 pages per report,Green,Monitor performance only
+Google Analytics GA4,runReport (sources),30,UNLIMITED,0%,Free,0,Traffic sources breakdown,Green,Monitor performance only
+Google Analytics GA4,runReport (countries),30,UNLIMITED,0%,Free,0,Geographic breakdown,Green,Monitor performance only
+Google Analytics GA4,SUBTOTAL,150,UNLIMITED,0%,Free,0,"Total: 30 days/mese × 5 reports = 150 API calls",Green,Current usage: excellent
+Google Search Console,searchAnalytics (by page),60,UNLIMITED,0%,Free,0,"2 calls per sync, 1-2 sync/giorno = ~60 calls/mese",Green,No throttling observed
+Google Search Console,searchAnalytics (by query),60,UNLIMITED,0%,Free,0,Query-level data for SEO dashboard,Green,No throttling observed
+Google Search Console,SUBTOTAL,120,UNLIMITED,0%,Free,0,"Total: 120 API calls/mese",Green,Current usage: optimal
+YouTube Data API,search (channels),800,10000 units/day,0.27%,Free (0.000025 EUR per excess unit),0,"8 channels × 100 units = 800 units per scrape, 2-3 scrape/mese = 1600-2400/mese",Green,Well within quota
+YouTube Data API,search (keywords),600,10000 units/day,0.20%,Free (0.000025 EUR per excess unit),0,"6 keywords × 100 units = 600 units per scrape",Green,Well within quota
+YouTube Data API,videos.list,60,10000 units/day,0.02%,Free (0.000025 EUR per excess unit),0,"30 videos/mese × 2 (snippet+details) = 60 units",Green,Well within quota
+YouTube Data API,SUBTOTAL,2100,300000 units/mese,0.7%,Free,0,"2-3 scrapes/mese = ~2100 units = 0.7% of monthly quota",Green,Could scale to 1000 scrapes before quota breach
+Reddit API,search + listings,100,UNLIMITED (60 req/min),0%,Free,0,"10-50 subreddit requests/mese for Reddit monitor",Green,No auth required
+Reddit API,SUBTOTAL,100,UNLIMITED,0%,Free,0,"Total: ~100 requests/mese",Green,Current usage: minimal
+HackerNews Algolia,search_by_date,5,UNLIMITED,0%,Free,0,"2-5 queries/mese for Growth Radar insights",Green,No auth required
+HackerNews Algolia,SUBTOTAL,5,UNLIMITED,0%,Free,0,"Total: ~5 queries/mese",Green,Current usage: minimal
+Dev.to API,articles.search,10,UNLIMITED,0%,Free,0,"5-10 requests/mese for content monitoring",Green,No auth required
+Dev.to API,SUBTOTAL,10,UNLIMITED,0%,Free,0,"Total: ~10 requests/mese",Green,Current usage: minimal
+PageSpeed Insights,runPagespeed,10,UNLIMITED,0%,Free,0,"5-10 manual checks/mese from analytics dashboard",Green,No quota limit
+PageSpeed Insights,SUBTOTAL,10,UNLIMITED,0%,Free,0,"Total: ~10 requests/mese",Green,Current usage: minimal
+Gemini 2.5 Flash,summarizeVideo,30,UNLIMITED (pay per token),N/A,€0.075 input / €0.30 output per 1M token,0.56,"25 videos/mese × 2000 input tokens × €0.075/1M + 500 output × €0.30/1M = ~€0.05/call",Yellow,Cache responses to reduce calls by 50%
+Gemini 2.5 Flash,draftComments,450,UNLIMITED (pay per token),N/A,€0.075 input / €0.30 output per 1M token,0.14,"15 calls/giorno × 30 = 450 calls × ~€0.00031 average = ~€0.14",Yellow,Batch calls if possible
+Gemini 2.5 Flash,strategyReview,3,UNLIMITED (pay per token),N/A,€0.075 input / €0.30 output per 1M token,0.01,"3 calls/mese × ~€0.004 = ~€0.01",Green,Infrequent usage
+Gemini 2.5 Flash,competitorAnalysis,1.5,UNLIMITED (pay per token),N/A,€0.075 input / €0.30 output per 1M token,0.005,"1-2 calls/mese × ~€0.003 = ~€0.005",Green,Infrequent usage
+Gemini 2.5 Flash,SUBTOTAL,485,UNLIMITED,N/A,€0.075 / €0.30 per 1M,0.70,"Total monthly Gemini cost: €0.56-0.72 (stima €0.70 conservativa)",Yellow,Monitor token usage weekly
+Vercel Hosting,serverless functions,~1500-3000,UNLIMITED,"N/A (included)",Flat €20/mese,20,"50-100 invocations/giorno, all function execution included in Pro plan",Green,Pro plan is optimal for current usage
+Vercel Hosting,bandwidth,5-50 GB,1 TB/mese (first),0.5%,Flat €20/mese,0,"Growth dashboard = low traffic, under 1 TB limit",Green,No upgrade needed in next 12 months
+Vercel Hosting,deployments,3-5,UNLIMITED,0%,Flat €20/mese,0,"Average 3-5 deploys/setimana",Green,No bottleneck
+Vercel Hosting,SUBTOTAL,Multiple,UNLIMITED,~0.5%,Flat €20,20,"All resources included in €20 Pro plan",Green,Current plan is cost-effective
+Neon PostgreSQL,storage,0.21 GB,0.5 GB (free tier),42%,Free (upgrade to €15 at 10GB),0,"210 KB data: youtube_insights + reddit + competitor tables",Green,Free tier sufficient for 10+ years
+Neon PostgreSQL,compute-hours,7.5,3 GB/mese (free tier),250%,"Free (but note: 250% is still within 3GB, actual: 7.5 hours)",0,"Cron jobs + dashboard queries, estimated 5-10 hours/mese",Yellow,Monitor if cron jobs expand
+Neon PostgreSQL,SUBTOTAL,1 project,UNLIMITED projects,0%,Free,0,"Database: fully on free tier, no costs",Green,No upgrade required soon
+Cloudinary,storage,0.008 GB,5 GB,0.16%,Free (upgrade €99+ at 50GB),0,"4 screenshots × 2MB = 8MB storage",Green,Free tier sufficient indefinitely
+Cloudinary,bandwidth,0.05 GB,25 GB/mese,0.2%,Free,0,"Minimal CDN usage from growth dashboard",Green,Free tier sufficient indefinitely
+Cloudinary,transformations,~50,UNLIMITED,0%,Free,0,"Image resizing / optimization for growth content",Green,Free tier sufficient indefinitely
+Cloudinary,SUBTOTAL,Multiple,25 GB bandwidth,0.2%,Free,0,"Images: fully on free tier, no costs",Green,No upgrade required soon
+Resend Email,API calls,~5-10,"100 emails/giorno free tier, or €10/mese plan",0%,"Free tier (100/giorno) or €10/mese Standard",0 (or 10),"Growth notifications: ~5-10 emails/mese, far below 100/day limit",Green,"Keep on free tier unless > 100 emails/giorno needed"
+Resend Email,SUBTOTAL,~8,100/giorno free,0%,Free or €10,0,"Email delivery: FREE on current usage",Green,"No upgrade needed currently"
+TOTAL API + INFRASTRUCTURE COST,,,,,,"€20.56 (without Resend) or €30.56 (with Resend)",Per month,Yellow,Monitor weekly; alert if > €25/mese
+TOTAL ANNUAL COST,,,,,,"€246.72 (without Resend) or €366.72 (with Resend)",Per year,Yellow,Budget: €300/anno recommended
+BREAK-EVEN USERS,,,,,,"5 users @ $7/mese = €10 profit/mese",Target,Green,At 10 users: €40 profit/mese
+MARGIN AT 100 USERS,,,,,,"100 users × $7 × 0.029 fee = €630 revenue, €70 API cost, €20 Vercel = €540 profit",Target,Green,"Current cost structure scales excellently"

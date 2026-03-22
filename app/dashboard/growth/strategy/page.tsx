@@ -11,6 +11,7 @@ import {
   Link,
 } from "lucide-react";
 import type { StrategyReview } from "@/lib/db/schema";
+import ReactMarkdown from "react-markdown";
 
 export default function StrategyPage() {
   const [reviews, setReviews] = useState<StrategyReview[]>([]);
@@ -65,6 +66,29 @@ export default function StrategyPage() {
     } catch {
       return [];
     }
+  }
+
+  /** Extract clean markdown from analysisText — handles raw JSON wrapper */
+  function cleanAnalysis(text: string): string {
+    // If text looks like raw JSON, try to extract the analysis field
+    const trimmed = text.trim();
+    if (trimmed.startsWith("{") || trimmed.startsWith("```json")) {
+      const jsonStr = trimmed.replace(/^```json\s*/, "").replace(/\s*```$/, "");
+      try {
+        const parsed = JSON.parse(jsonStr) as { analysis?: string };
+        if (parsed.analysis) return parsed.analysis;
+      } catch {
+        // Try to find JSON inside
+        const match = trimmed.match(/\{[\s\S]*\}/);
+        if (match) {
+          try {
+            const parsed = JSON.parse(match[0]) as { analysis?: string };
+            if (parsed.analysis) return parsed.analysis;
+          } catch { /* use raw */ }
+        }
+      }
+    }
+    return text;
   }
 
   return (
@@ -199,8 +223,8 @@ export default function StrategyPage() {
                       <h4 className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] mb-2">
                         Analisi
                       </h4>
-                      <div className="text-sm text-[#525252] dark:text-[#A3A3A3] whitespace-pre-wrap leading-relaxed">
-                        {review.analysisText}
+                      <div className="prose prose-sm dark:prose-invert max-w-none text-[#525252] dark:text-[#A3A3A3] leading-relaxed [&_h2]:text-base [&_h2]:font-semibold [&_h2]:text-[#171717] dark:[&_h2]:text-[#E5E5E5] [&_h2]:mt-4 [&_h2]:mb-2 [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:text-[#171717] dark:[&_h3]:text-[#E5E5E5] [&_h3]:mt-3 [&_h3]:mb-1.5 [&_ul]:space-y-1 [&_li]:text-sm [&_strong]:text-[#171717] dark:[&_strong]:text-[#E5E5E5] [&_p]:text-sm">
+                        <ReactMarkdown>{cleanAnalysis(review.analysisText)}</ReactMarkdown>
                       </div>
                     </div>
 
