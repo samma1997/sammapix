@@ -15,11 +15,10 @@ export async function POST() {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  try {
-    const result = await scrapeCompetitors();
-    return NextResponse.json({ success: true, ...result });
-  } catch (err) {
-    console.error("[growth/competitors/scrape POST]", err);
-    return NextResponse.json({ error: "Scrape failed" }, { status: 500 });
-  }
+  // Fire and forget — scraping continues even if the user navigates away
+  scrapeCompetitors().catch((err) => {
+    console.error("[growth/competitors/scrape] Background error:", err);
+  });
+
+  return NextResponse.json({ success: true, message: "Scraping started in background" });
 }

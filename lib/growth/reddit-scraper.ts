@@ -3,31 +3,27 @@ import { growthRedditPosts } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq } from "drizzle-orm";
 
-const SUBREDDITS = [
-  "photography",
-  "webdev",
-  "web_design",
-  "blogging",
-  "SEO",
-  "Wordpress",
-  "graphic_design",
-];
-
-const QUERIES = [
-  "image compress",
-  "image optimization",
-  "heic converter",
-  "rename photos",
-  "remove exif",
-  "tinypng alternative",
-  "webp convert",
-  "pagespeed images",
+// Reddit-wide search queries targeting posts where someone is asking for tool recommendations.
+// These are action-intent queries — the user is looking for help, so a genuine reply
+// mentioning SammaPix is appropriate and not spam.
+const REDDIT_QUERIES = [
+  "recommend image compressor",
+  "best tool compress images",
+  "looking for image optimizer",
+  "alternative to tinypng",
+  "how to compress images",
+  "need bulk image resize",
+  "free heic converter",
+  "remove exif metadata tool",
 ];
 
 interface RedditPost {
   id: string;
   title: string;
   subreddit: string;
+  // permalink is the canonical path Reddit returns — e.g. /r/webdev/comments/abc123/title/
+  permalink: string;
+  // url can point to an external link; permalink always points to the Reddit thread
   url: string;
   author: string;
   num_comments: number;
@@ -36,35 +32,85 @@ interface RedditPost {
   selftext: string;
 }
 
-function calculateRelevanceScore(post: RedditPost, query: string): number {
+// Build a guaranteed-valid Reddit thread URL from the permalink field.
+// Reddit's JSON API returns permalink as "/r/sub/comments/id/title/" (always starts with /).
+// We use www.reddit.com as the base — no trailing slash issues.
+function buildRedditUrl(permalink: string): string {
+  const path = permalink.startsWith("/") ? permalink : `/${permalink}`;
+  return `https://www.reddit.com${path}`;
+}
+
+function calculateRelevanceScore(post: RedditPost): number {
   let score = 0;
   const titleLower = post.title.toLowerCase();
-  const queryLower = query.toLowerCase();
 
-  // Keyword match in title
-  if (titleLower.includes(queryLower)) score += 40;
-
-  // Partial keyword matches
-  const queryWords = queryLower.split(" ");
-  for (const word of queryWords) {
-    if (word.length > 3 && titleLower.includes(word)) score += 10;
+  // Question / recommendation intent words — high value, these are posts we can genuinely help with
+  const intentWords = [
+    "how",
+    "what",
+    "best",
+    "recommend",
+    "recommendation",
+    "looking for",
+    "alternative",
+    "need",
+    "suggest",
+    "which",
+    "anyone know",
+  ];
+  for (const word of intentWords) {
+    if (titleLower.includes(word)) {
+      score += 20;
+      break; // only count once
+    }
   }
 
-  // Recency bonus (posts within last 3 days)
-  const ageDays = (Date.now() / 1000 - post.created_utc) / 86400;
-  if (ageDays < 1) score += 30;
-  else if (ageDays < 3) score += 20;
-  else if (ageDays < 7) score += 10;
+  // Image / tool domain relevance — these posts are topically relevant to SammaPix
+  const domainKeywords = [
+    "image",
+    "photo",
+    "compress",
+    "compressor",
+    "convert",
+    "resize",
+    "webp",
+    "heic",
+    "jpeg",
+    "png",
+    "exif",
+    "metadata",
+    "optimizer",
+    "optimization",
+    "tinypng",
+    "squoosh",
+    "bulk",
+  ];
+  for (const kw of domainKeywords) {
+    if (titleLower.includes(kw)) {
+      score += 15;
+      break; // only count once — the post is either relevant or it isn't
+    }
+  }
 
-  // Engagement
-  if (post.num_comments > 10) score += 10;
-  if (post.num_comments > 50) score += 10;
-  if (post.score > 50) score += 5;
+  // Recency bonus — fresher posts have more engagement opportunity
+  const ageDays = (Date.now() / 1000 - post.created_utc) / 86400;
+  if (ageDays < 1) score += 25;
+  else if (ageDays < 3) score += 15;
+  else if (ageDays < 7) score += 5;
+
+  // Low comment count bonus — easier to be visible in a thread with few replies
+  if (post.num_comments < 5) score += 15;
+  else if (post.num_comments < 10) score += 10;
 
   return Math.min(100, score);
 }
 
-async function draftComment(
+// ---------------------------------------------------------------------------
+// Draft comment generation — NOT called during scraping.
+// Call this separately per-post after reviewing the scraped results.
+// ---------------------------------------------------------------------------
+
+export async function generateRedditDraftComment(
   postTitle: string,
   postText: string
 ): Promise<string> {
@@ -89,7 +135,7 @@ Write only the comment text, no preamble.`;
   }
 }
 
-async function draftHNComment(
+export async function generateHNDraftComment(
   postTitle: string,
   postText: string
 ): Promise<string> {
@@ -114,7 +160,7 @@ Write only the comment text.`;
   }
 }
 
-async function draftDevToComment(
+export async function generateDevToDraftComment(
   articleTitle: string,
   description: string
 ): Promise<string> {
@@ -138,6 +184,10 @@ Write only the comment text.`;
     return "";
   }
 }
+
+// ---------------------------------------------------------------------------
+// Hacker News scraper — call independently, not from scrapeRedditPosts()
+// ---------------------------------------------------------------------------
 
 export async function scrapeHackerNewsOpportunities(): Promise<{
   scraped: number;
@@ -189,19 +239,25 @@ export async function scrapeHackerNewsOpportunities(): Promise<{
         }
 
         const titleLower = hit.title.toLowerCase();
-        const imageKeywords = ["image", "photo", "compress", "webp", "jpeg", "png", "optimize", "resize"];
-        const relevance = imageKeywords.filter((kw) => titleLower.includes(kw)).length * 20;
+        const imageKeywords = [
+          "image",
+          "photo",
+          "compress",
+          "webp",
+          "jpeg",
+          "png",
+          "optimize",
+          "resize",
+        ];
+        const relevance =
+          imageKeywords.filter((kw) => titleLower.includes(kw)).length * 20;
 
         if (relevance < 20) {
           skipped++;
           continue;
         }
 
-        const draftCommentText = await draftHNComment(
-          hit.title,
-          hit.story_text ?? ""
-        );
-
+        // Draft comment is NOT generated here — trigger it per-post from the UI
         await db.insert(growthRedditPosts).values({
           redditId: hitId,
           title: hit.title,
@@ -211,7 +267,7 @@ export async function scrapeHackerNewsOpportunities(): Promise<{
           commentsCount: hit.num_comments ?? 0,
           relevanceScore: Math.min(100, relevance + 20),
           status: "to_comment",
-          draftComment: draftCommentText || null,
+          draftComment: null,
         });
 
         scraped++;
@@ -224,6 +280,10 @@ export async function scrapeHackerNewsOpportunities(): Promise<{
 
   return { scraped, skipped, errors };
 }
+
+// ---------------------------------------------------------------------------
+// Dev.to scraper — call independently, not from scrapeRedditPosts()
+// ---------------------------------------------------------------------------
 
 export async function scrapeDevToOpportunities(): Promise<{
   scraped: number;
@@ -264,19 +324,26 @@ export async function scrapeDevToOpportunities(): Promise<{
         }
 
         const titleLower = article.title.toLowerCase();
-        const imageKeywords = ["image", "photo", "compress", "webp", "jpeg", "png", "optimize", "resize", "performance"];
-        const relevance = imageKeywords.filter((kw) => titleLower.includes(kw)).length * 15;
+        const imageKeywords = [
+          "image",
+          "photo",
+          "compress",
+          "webp",
+          "jpeg",
+          "png",
+          "optimize",
+          "resize",
+          "performance",
+        ];
+        const relevance =
+          imageKeywords.filter((kw) => titleLower.includes(kw)).length * 15;
 
         if (relevance < 15) {
           skipped++;
           continue;
         }
 
-        const draftCommentText = await draftDevToComment(
-          article.title,
-          article.description ?? ""
-        );
-
+        // Draft comment is NOT generated here — trigger it per-post from the UI
         await db.insert(growthRedditPosts).values({
           redditId: articleId,
           title: article.title,
@@ -286,7 +353,7 @@ export async function scrapeDevToOpportunities(): Promise<{
           commentsCount: article.comments_count ?? 0,
           relevanceScore: Math.min(100, relevance + 20),
           status: "to_comment",
-          draftComment: draftCommentText || null,
+          draftComment: null,
         });
 
         scraped++;
@@ -299,6 +366,16 @@ export async function scrapeDevToOpportunities(): Promise<{
 
   return { scraped, skipped, errors };
 }
+
+// ---------------------------------------------------------------------------
+// Reddit scraper — fast, focused, under 30 seconds
+//
+// Strategy:
+//   - Search Reddit-wide (no subreddit filter) so one call covers all communities
+//   - 8 targeted queries × 2s delay = ~16s total network time
+//   - 25 results per query gives good coverage without hammering the API
+//   - No Gemini calls during scraping — draft comments are on-demand per post
+// ---------------------------------------------------------------------------
 
 export async function scrapeRedditPosts(): Promise<{
   scraped: number;
@@ -313,92 +390,87 @@ export async function scrapeRedditPosts(): Promise<{
     "User-Agent": "SammaPix-GrowthBot/1.0 (by SammaPix team)",
   };
 
-  for (const subreddit of SUBREDDITS) {
-    for (const query of QUERIES) {
-      try {
-        // Rate limiting: ~10 req/min
-        await new Promise((r) => setTimeout(r, 6000));
+  for (const query of REDDIT_QUERIES) {
+    try {
+      // 2 seconds is sufficient for Reddit's unauthenticated JSON API
+      await new Promise((r) => setTimeout(r, 2000));
 
-        const url = `https://www.reddit.com/r/${subreddit}/search.json?q=${encodeURIComponent(
-          query
-        )}&sort=new&restrict_sr=1&t=week&limit=10`;
+      // Search Reddit-wide (no r/subreddit prefix, no restrict_sr)
+      const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(
+        query
+      )}&sort=new&t=week&limit=25`;
 
-        const res = await fetch(url, { headers });
-        if (!res.ok) {
-          console.error(
-            `[reddit-scraper] ${subreddit}/${query} failed: ${res.status}`
-          );
-          errors++;
-          continue;
-        }
+      const res = await fetch(url, {
+        headers,
+        signal: AbortSignal.timeout(10000),
+      });
 
-        const data = await res.json();
-        const posts: RedditPost[] =
-          data?.data?.children?.map(
-            (c: { data: RedditPost }) => c.data
-          ) ?? [];
-
-        for (const post of posts) {
-          try {
-            // Skip if already exists
-            const existing = await db
-              .select({ id: growthRedditPosts.id })
-              .from(growthRedditPosts)
-              .where(eq(growthRedditPosts.redditId, post.id));
-
-            if (existing.length > 0) {
-              skipped++;
-              continue;
-            }
-
-            const relevanceScore = calculateRelevanceScore(post, query);
-
-            // Only save posts with relevance > 30
-            if (relevanceScore < 30) {
-              skipped++;
-              continue;
-            }
-
-            const draftCommentText = await draftComment(
-              post.title,
-              post.selftext
-            );
-
-            await db.insert(growthRedditPosts).values({
-              redditId: post.id,
-              title: post.title,
-              subreddit: post.subreddit,
-              url: `https://reddit.com${post.url.startsWith("/") ? post.url : "/" + post.url}`,
-              author: post.author,
-              commentsCount: post.num_comments,
-              relevanceScore,
-              status: "to_comment",
-              draftComment: draftCommentText || null,
-            });
-
-            scraped++;
-          } catch (err) {
-            console.error(`[reddit-scraper] Error saving post ${post.id}:`, err);
-            errors++;
-          }
-        }
-      } catch (err) {
+      if (!res.ok) {
         console.error(
-          `[reddit-scraper] Error fetching r/${subreddit} q="${query}":`,
-          err
+          `[reddit-scraper] search failed for "${query}": HTTP ${res.status}`
         );
         errors++;
+        continue;
       }
+
+      const data = await res.json();
+      const posts: RedditPost[] =
+        data?.data?.children?.map((c: { data: RedditPost }) => c.data) ?? [];
+
+      for (const post of posts) {
+        try {
+          const existing = await db
+            .select({ id: growthRedditPosts.id })
+            .from(growthRedditPosts)
+            .where(eq(growthRedditPosts.redditId, post.id));
+
+          if (existing.length > 0) {
+            skipped++;
+            continue;
+          }
+
+          const relevanceScore = calculateRelevanceScore(post);
+
+          // Minimum threshold of 40 — we only want genuinely relevant posts
+          if (relevanceScore < 40) {
+            skipped++;
+            continue;
+          }
+
+          // Always build the URL from permalink — it always points to the Reddit thread,
+          // whereas post.url can point to an external site for link posts.
+          const threadUrl = buildRedditUrl(post.permalink);
+
+          await db.insert(growthRedditPosts).values({
+            redditId: post.id,
+            title: post.title,
+            subreddit: post.subreddit,
+            url: threadUrl,
+            author: post.author,
+            commentsCount: post.num_comments,
+            relevanceScore,
+            status: "to_comment",
+            draftComment: null, // generated on-demand via generateRedditDraftComment()
+          });
+
+          scraped++;
+        } catch (err) {
+          console.error(
+            `[reddit-scraper] Error saving post ${post.id}:`,
+            err
+          );
+          errors++;
+        }
+      }
+    } catch (err) {
+      console.error(
+        `[reddit-scraper] Error fetching query "${query}":`,
+        err
+      );
+      errors++;
     }
   }
 
-  // Also scrape HN and Dev.to
-  const hnResult = await scrapeHackerNewsOpportunities();
-  const devtoResult = await scrapeDevToOpportunities();
-
-  return {
-    scraped: scraped + hnResult.scraped + devtoResult.scraped,
-    skipped: skipped + hnResult.skipped + devtoResult.skipped,
-    errors: errors + hnResult.errors + devtoResult.errors,
-  };
+  // HN and Dev.to are NOT called here — invoke them separately when needed
+  return { scraped, skipped, errors };
 }

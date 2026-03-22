@@ -15,11 +15,10 @@ export async function POST() {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  try {
-    const result = await checkBrandVisibility();
-    return NextResponse.json({ success: true, ...result });
-  } catch (err) {
-    console.error("[growth/brand/check POST]", err);
-    return NextResponse.json({ error: "Check failed" }, { status: 500 });
-  }
+  // Fire and forget — check continues even if the user navigates away
+  checkBrandVisibility().catch((err) => {
+    console.error("[growth/brand/check] Background error:", err);
+  });
+
+  return NextResponse.json({ success: true, message: "Brand check started in background" });
 }

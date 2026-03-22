@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { ExternalLink, ChevronDown, ChevronUp, Plus, RefreshCw } from "lucide-react";
+import { ExternalLink, ChevronDown, ChevronUp, Plus, RefreshCw, Sparkles } from "lucide-react";
 import type { RedditPost } from "@/lib/db/schema";
 
 const SUBREDDIT_COLORS: Record<string, string> = {
@@ -66,6 +66,7 @@ function PostCard({
   const [commentingUrl, setCommentingUrl] = useState(false);
   const [commentUrl, setCommentUrl] = useState(post.commentUrl ?? "");
   const [saving, setSaving] = useState(false);
+  const [generatingDraft, setGeneratingDraft] = useState(false);
 
   async function handleAction(
     status: string,
@@ -90,6 +91,24 @@ function PostCard({
   async function saveCommentUrl() {
     await handleAction("commented", { commentUrl });
     setCommentingUrl(false);
+  }
+
+  async function handleGenerateDraft() {
+    setGeneratingDraft(true);
+    try {
+      const res = await fetch(`/api/growth/reddit/posts/${post.id}/draft`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.post) {
+        onStatusChange(post.id, data.post);
+        setExpanded(true);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setGeneratingDraft(false);
+    }
   }
 
   return (
@@ -121,8 +140,8 @@ function PostCard({
       {/* Relevance */}
       <RelevanceBar score={post.relevanceScore ?? 0} />
 
-      {/* Draft comment toggle */}
-      {post.draftComment && (
+      {/* Draft comment — toggle if present, or offer generation */}
+      {post.draftComment ? (
         <div>
           <button
             onClick={() => setExpanded((v) => !v)}
@@ -141,6 +160,15 @@ function PostCard({
             </p>
           )}
         </div>
+      ) : (
+        <button
+          onClick={handleGenerateDraft}
+          disabled={generatingDraft}
+          className="flex items-center gap-1 text-[11px] text-[#737373] hover:text-[#525252] dark:hover:text-[#A3A3A3] disabled:opacity-50 transition-colors"
+        >
+          <Sparkles className="h-3 w-3" strokeWidth={1.5} />
+          {generatingDraft ? "Generating..." : "Generate draft"}
+        </button>
       )}
 
       {/* Commented URL display */}
