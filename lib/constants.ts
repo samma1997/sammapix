@@ -101,6 +101,11 @@ export const BLOG_SLUGS = [
   "travel-photography-tips-beginners",
   "best-tinypng-alternative-2026",
   "browser-based-image-tools-privacy-guide",
+  "batch-rename-photos-ai",
+  "free-image-optimization-tools-online",
+  "webp-vs-avif-vs-jpeg-comparison",
+  "how-to-speed-up-website-with-image-optimization",
+  "sammapix-vs-tinypng-benchmark-2026",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

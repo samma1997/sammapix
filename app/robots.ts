@@ -58,14 +58,17 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Applebot-Extended",
         allow: "/",
       },
-      // Block known scraping / SEO crawlers that provide no value
+      // Allow SEO crawlers — they index us in their databases so people
+      // researching "best image tools" on Ahrefs/Semrush can find SammaPix
       {
         userAgent: "SemrushBot",
-        disallow: "/",
+        allow: "/",
+        disallow: ["/api/", "/auth/", "/dashboard/"],
       },
       {
         userAgent: "AhrefsBot",
-        disallow: "/",
+        allow: "/",
+        disallow: ["/api/", "/auth/", "/dashboard/"],
       },
       {
         userAgent: "MJ12bot",
