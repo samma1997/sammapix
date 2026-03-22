@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { growthGscDaily } from "@/lib/db/schema";
 import { fetchGSCData } from "@/lib/growth/gsc-client";
-import { and, eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 
 export const runtime = "nodejs";
 
@@ -36,21 +36,22 @@ export async function POST() {
       });
     }
 
+    // Clear existing data for this date range first, then insert fresh
+    // This prevents duplicates completely
+    await db
+      .delete(growthGscDaily)
+      .where(
+        and(
+          eq(growthGscDaily.date, startDate),
+        )
+      );
+    // Also clear any dates in between
+    for (let d = 3; d >= 0; d--) {
+      await db.delete(growthGscDaily).where(eq(growthGscDaily.date, dateStr(d)));
+    }
+
     let synced = 0;
     for (const row of rows) {
-      // Upsert: delete existing then insert
-      await db
-        .delete(growthGscDaily)
-        .where(
-          and(
-            eq(growthGscDaily.date, row.date),
-            eq(growthGscDaily.page, row.page),
-            row.query
-              ? eq(growthGscDaily.query, row.query)
-              : eq(growthGscDaily.query, "")
-          )
-        );
-
       await db.insert(growthGscDaily).values({
         date: row.date,
         page: row.page,
@@ -60,7 +61,6 @@ export async function POST() {
         ctr: row.ctr,
         position: row.position,
       });
-
       synced++;
     }
 
