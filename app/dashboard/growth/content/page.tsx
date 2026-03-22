@@ -4,7 +4,25 @@ import { useEffect, useState, useCallback } from "react";
 import { Plus, ExternalLink } from "lucide-react";
 import type { ContentItem } from "@/lib/db/schema";
 
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
 type ContentStatus = "idea" | "writing" | "published" | "needs_update";
+
+interface BlogArticle {
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  publishedDate: string;
+  url: string;
+  modifiedAt: string;
+}
+
+// ---------------------------------------------------------------------------
+// Calendar helpers
+// ---------------------------------------------------------------------------
 
 const STATUS_BADGE: Record<ContentStatus, string> = {
   idea: "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#737373]",
@@ -15,16 +33,27 @@ const STATUS_BADGE: Record<ContentStatus, string> = {
 
 const STATUS_OPTIONS: ContentStatus[] = ["idea", "writing", "published", "needs_update"];
 
+const STATUS_LABELS: Record<ContentStatus, string> = {
+  idea: "Idea",
+  writing: "In scrittura",
+  published: "Pubblicato",
+  needs_update: "Da aggiornare",
+};
+
 function StatusBadge({ status }: { status: ContentStatus }) {
   const cls = STATUS_BADGE[status] ?? STATUS_BADGE.idea;
   return (
     <span
       className={`inline-block text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] ${cls}`}
     >
-      {status.replace("_", " ")}
+      {STATUS_LABELS[status] ?? status.replace("_", " ")}
     </span>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Add content modal
+// ---------------------------------------------------------------------------
 
 interface AddContentModalProps {
   onClose: () => void;
@@ -66,7 +95,7 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] w-full max-w-md p-6">
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-          Aggiungi contenuto
+          Aggiungi articolo in calendario
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
@@ -128,6 +157,10 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// Calendar row
+// ---------------------------------------------------------------------------
+
 function ContentRow({
   item,
   onUpdate,
@@ -178,7 +211,7 @@ function ContentRow({
         >
           {STATUS_OPTIONS.map((s) => (
             <option key={s} value={s}>
-              {s.replace("_", " ")}
+              {STATUS_LABELS[s]}
             </option>
           ))}
         </select>
@@ -208,13 +241,121 @@ function ContentRow({
   );
 }
 
+// ---------------------------------------------------------------------------
+// Published articles section
+// ---------------------------------------------------------------------------
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("it-IT", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function PublishedArticles() {
+  const [articles, setArticles] = useState<BlogArticle[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/growth/blog/list")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.articles) setArticles(data.articles);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="space-y-2">
+        {[...Array(4)].map((_, i) => (
+          <div
+            key={i}
+            className="h-[72px] bg-[#F5F5F5] dark:bg-[#252525] rounded-[6px] animate-pulse"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      {articles.map((article) => (
+        <div
+          key={article.slug}
+          className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] px-4 py-3 hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <a
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 group"
+              >
+                <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate group-hover:text-[#6366F1] transition-colors">
+                  {article.title}
+                </span>
+                <ExternalLink
+                  className="h-3 w-3 shrink-0 text-[#A3A3A3] group-hover:text-[#6366F1] transition-colors"
+                  strokeWidth={1.5}
+                />
+              </a>
+              {article.description && (
+                <p className="text-xs text-[#737373] mt-0.5 truncate">
+                  {article.description}
+                </p>
+              )}
+              {article.keywords.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-1.5">
+                  {article.keywords.map((kw) => (
+                    <span
+                      key={kw}
+                      className="bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] text-[10px] px-1.5 py-0.5 rounded-[4px]"
+                    >
+                      {kw}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <span className="text-[11px] text-[#A3A3A3] shrink-0 mt-0.5">
+              {formatDate(article.publishedDate)}
+            </span>
+          </div>
+        </div>
+      ))}
+
+      {articles.length === 0 && (
+        <div className="py-8 text-center text-sm text-[#A3A3A3]">
+          Nessun articolo trovato nella cartella blog
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Main page
+// ---------------------------------------------------------------------------
+
 export default function ContentPage() {
   const [items, setItems] = useState<ContentItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [calendarLoading, setCalendarLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [articleCount, setArticleCount] = useState<number | null>(null);
+
+  // Fetch article count for the header label
+  useEffect(() => {
+    fetch("/api/growth/blog/list")
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.total === "number") setArticleCount(data.total);
+      })
+      .catch(console.error);
+  }, []);
 
   const fetchItems = useCallback(async () => {
-    setLoading(true);
+    setCalendarLoading(true);
     try {
       const res = await fetch("/api/growth/content");
       const data = await res.json();
@@ -222,7 +363,7 @@ export default function ContentPage() {
     } catch (e) {
       console.error(e);
     } finally {
-      setLoading(false);
+      setCalendarLoading(false);
     }
   }, []);
 
@@ -243,68 +384,94 @@ export default function ContentPage() {
     needs_update: items.filter((i) => i.status === "needs_update").length,
   };
 
-  if (loading) {
-    return (
-      <div className="h-64 bg-[#F5F5F5] dark:bg-[#252525] rounded-[6px] animate-pulse" />
-    );
-  }
-
   return (
-    <div>
-      {/* Stats + action */}
-      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-        <div className="flex gap-4 text-sm text-[#737373]">
-          {Object.entries(byStatus).map(([status, count]) => (
-            <span key={status}>
-              <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
-                {count}
-              </span>{" "}
-              {status.replace("_", " ")}
-            </span>
-          ))}
-        </div>
-        <button
-          onClick={() => setShowModal(true)}
-          className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
-        >
-          <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Aggiungi contenuto
-        </button>
-      </div>
-
-      <div className="overflow-x-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px]">
-        <table className="w-full min-w-[600px]">
-          <thead>
-            <tr className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
-              {["Titolo", "Keyword", "Stato", "URL pubblicato", "Note"].map(
-                (h) => (
-                  <th
-                    key={h}
-                    className="text-left py-2 px-3 text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3]"
-                  >
-                    {h}
-                  </th>
-                )
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <ContentRow key={item.id} item={item} onUpdate={handleUpdate} />
-            ))}
-            {items.length === 0 && (
-              <tr>
-                <td
-                  colSpan={5}
-                  className="py-8 text-center text-sm text-[#A3A3A3]"
-                >
-                  Nessun contenuto ancora
-                </td>
-              </tr>
+    <div className="space-y-8">
+      {/* ------------------------------------------------------------------ */}
+      {/* Section 1: Articoli pubblicati                                      */}
+      {/* ------------------------------------------------------------------ */}
+      <section>
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+              Articoli pubblicati
+            </h2>
+            {articleCount !== null && (
+              <p className="text-xs text-[#737373] mt-0.5">
+                {articleCount} {articleCount === 1 ? "articolo pubblicato" : "articoli pubblicati"} nel filesystem
+              </p>
             )}
-          </tbody>
-        </table>
-      </div>
+          </div>
+        </div>
+        <PublishedArticles />
+      </section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Section 2: Calendario editoriale                                    */}
+      {/* ------------------------------------------------------------------ */}
+      <section>
+        <div className="flex items-center justify-between mb-3 flex-wrap gap-3">
+          <div>
+            <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+              Prossimi articoli
+            </h2>
+            <p className="text-xs text-[#737373] mt-0.5">
+              Calendario editoriale — idee, articoli in lavorazione e aggiornamenti
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-4 text-xs text-[#737373]">
+              {Object.entries(byStatus).map(([status, count]) => (
+                <span key={status}>
+                  <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
+                    {count}
+                  </span>{" "}
+                  {STATUS_LABELS[status as ContentStatus]}
+                </span>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
+            >
+              <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
+              Aggiungi articolo
+            </button>
+          </div>
+        </div>
+
+        {calendarLoading ? (
+          <div className="h-48 bg-[#F5F5F5] dark:bg-[#252525] rounded-[6px] animate-pulse" />
+        ) : (
+          <div className="overflow-x-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px]">
+            <table className="w-full min-w-[600px]">
+              <thead>
+                <tr className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
+                  {["Titolo", "Keyword", "Stato", "URL pubblicato", "Note"].map((h) => (
+                    <th
+                      key={h}
+                      className="text-left py-2 px-3 text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3]"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {items.map((item) => (
+                  <ContentRow key={item.id} item={item} onUpdate={handleUpdate} />
+                ))}
+                {items.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="py-8 text-center text-sm text-[#A3A3A3]">
+                      Nessun articolo in calendario — aggiungine uno
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
 
       {showModal && (
         <AddContentModal
