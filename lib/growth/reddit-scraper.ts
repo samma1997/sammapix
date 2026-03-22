@@ -42,48 +42,45 @@ function buildRedditUrl(permalink: string): string {
 }
 
 function calculateRelevanceScore(post: RedditPost): number {
-  // ONLY check the TITLE — selftext contains too many false positives
   const title = post.title.toLowerCase();
 
-  // MUST contain at least one image/photo domain keyword IN THE TITLE
-  const domainKeywords = [
-    "image", "images", "photo", "photos", "picture",
-    "compress", "compressor", "compression",
-    "convert", "converter",
-    "resize", "resizer",
-    "webp", "heic", "jpeg", "jpg", "png", "avif", "svg",
-    "exif", "metadata",
-    "optimizer", "optimization", "optimize",
-    "tinypng", "squoosh", "iloveimg", "shortpixel",
-    "rename photo", "rename image",
-    "file size", "reduce size",
+  // Exact compound phrases that are ALWAYS relevant (no false positives)
+  const exactPhrases = [
+    "image compress", "compress image", "compress photo",
+    "image optim", "photo optim", "optimize image",
+    "image resize", "resize image", "resize photo", "bulk resize",
+    "convert to webp", "convert to png", "convert to jpg", "convert to jpeg",
+    "heic to jpg", "heic to png", "heic convert", "convert heic",
+    "webp convert", "png to", "jpg to", "jpeg to",
+    "image converter", "photo converter", "image compressor", "photo compressor",
+    "remove exif", "exif remov", "strip metadata", "remove metadata from photo",
+    "tinypng", "squoosh", "iloveimg", "shortpixel", "imageoptim",
+    "rename photo", "rename image", "batch rename",
+    "reduce image size", "reduce file size image", "reduce photo size",
     "bulk image", "batch image",
+    "image tool", "photo tool", "image editor online",
+    "lossless compress", "lossy compress",
   ];
-  const hasDomainMatch = domainKeywords.some((kw) => title.includes(kw));
-  if (!hasDomainMatch) return 0; // HARD FILTER — title must be about images
 
-  let score = 40; // base score for title containing image keyword
+  const hasExactMatch = exactPhrases.some((p) => title.includes(p));
+  if (!hasExactMatch) return 0; // HARD FILTER — must match a specific image-related phrase
 
-  // Intent words in title = someone asking for help = perfect opportunity
-  const intentWords = [
-    "how", "what", "best", "recommend", "looking for",
-    "alternative", "need", "suggest", "which", "anyone",
-    "help", "tool", "free", "online", "?",
-  ];
-  if (intentWords.some((w) => title.includes(w))) {
-    score += 20;
-  }
+  let score = 50; // strong base for exact phrase match
 
-  // Multiple domain keyword matches in title = very relevant
-  const matchCount = domainKeywords.filter((kw) => title.includes(kw)).length;
+  // Intent words = someone asking for help
+  const intentWords = ["how", "best", "recommend", "looking for", "alternative", "need", "suggest", "anyone", "help", "tool", "free", "?"];
+  if (intentWords.some((w) => title.includes(w))) score += 20;
+
+  // Multiple phrase matches = very relevant
+  const matchCount = exactPhrases.filter((p) => title.includes(p)).length;
   if (matchCount >= 2) score += 15;
 
-  // Recency bonus
+  // Recency
   const ageDays = (Date.now() / 1000 - post.created_utc) / 86400;
   if (ageDays < 1) score += 10;
   else if (ageDays < 3) score += 5;
 
-  // Low comment count = easier to be visible
+  // Low comments = easier to be visible
   if (post.num_comments < 5) score += 10;
 
   return Math.min(100, score);
