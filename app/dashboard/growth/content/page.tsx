@@ -287,7 +287,7 @@ function PublishedArticles() {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
               <a
-                href={article.url}
+                href={`https://www.sammapix.com${article.url}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 group"
