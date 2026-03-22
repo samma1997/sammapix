@@ -9,6 +9,9 @@ import {
   ChevronUp,
   Copy,
   MessageSquare,
+  Mail,
+  Search,
+  Loader2,
 } from "lucide-react";
 import type { OutreachTarget, DirectorySubmission } from "@/lib/db/schema";
 
@@ -176,9 +179,11 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
 function OutreachRow({
   target,
   onUpdate,
+  onSendEmail,
 }: {
   target: OutreachTarget;
   onUpdate: (id: number, data: Partial<OutreachTarget>) => void;
+  onSendEmail: (targetId: number) => Promise<{ ok: boolean; error?: string }>;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [notesExpanded, setNotesExpanded] = useState(false);
@@ -186,6 +191,8 @@ function OutreachRow({
   const [copied, setCopied] = useState(false);
   const [replyDraft, setReplyDraft] = useState(target.replyText ?? "");
   const [savingReply, setSavingReply] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendResult, setSendResult] = useState<{ ok: boolean; error?: string } | null>(null);
 
   async function patchTarget(data: Record<string, unknown>) {
     setSaving(true);
@@ -306,8 +313,9 @@ function OutreachRow({
                   : "text-[#A3A3A3]"
               }`}
             >
-              {new Date(target.followUpAt).toLocaleDateString()}
-              {overdue && " (scaduto)"}
+              {target.status === "sent" ? "Follow-up: " : ""}
+              {new Date(target.followUpAt).toLocaleDateString("it-IT", { day: "numeric", month: "short" })}
+              {overdue && " — Follow-up scaduto!"}
             </span>
           ) : (
             <span className="text-xs text-[#A3A3A3]">—</span>
@@ -357,6 +365,48 @@ function OutreachRow({
         {/* Actions column */}
         <td className="py-2.5 px-3 whitespace-nowrap">
           <div className="flex items-center gap-1.5">
+            {/* Send email button */}
+            {target.status === "to_send" && (
+              target.contactEmail ? (
+                <button
+                  onClick={async () => {
+                    setSending(true);
+                    setSendResult(null);
+                    const result = await onSendEmail(target.id);
+                    setSendResult(result);
+                    setSending(false);
+                    if (result.ok) {
+                      setTimeout(() => setSendResult(null), 3000);
+                    }
+                  }}
+                  disabled={sending}
+                  className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                    sendResult?.ok
+                      ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
+                      : sendResult && !sendResult.ok
+                      ? "border-red-400 text-red-600 bg-red-50 dark:bg-red-900/20"
+                      : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
+                  }`}
+                >
+                  {sending ? (
+                    <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
+                  ) : sendResult?.ok ? (
+                    <Check className="h-3 w-3" strokeWidth={2} />
+                  ) : (
+                    <Mail className="h-3 w-3" strokeWidth={1.5} />
+                  )}
+                  {sending
+                    ? "Invio..."
+                    : sendResult?.ok
+                    ? "Inviata!"
+                    : sendResult?.error
+                    ? sendResult.error
+                    : "Invia"}
+                </button>
+              ) : (
+                <span className="text-[10px] text-[#A3A3A3] italic">email mancante</span>
+              )
+            )}
             {/* Copy email button */}
             <button
               onClick={copyEmail}
@@ -443,6 +493,7 @@ export default function OutreachPage() {
   const [directories, setDirectories] = useState<DirectorySubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [finding, setFinding] = useState(false);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -492,6 +543,52 @@ export default function OutreachPage() {
     }
   }
 
+  // ── Send email ──────────────────────────────────────────────────────────
+  async function handleSendEmail(targetId: number): Promise<{ ok: boolean; error?: string }> {
+    try {
+      const res = await fetch("/api/growth/outreach/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ targetId }),
+      });
+      const data = await res.json() as { ok?: boolean; error?: string; target?: OutreachTarget };
+      if (!res.ok || !data.ok) {
+        return { ok: false, error: data.error ?? "Errore invio" };
+      }
+      if (data.target) {
+        setTargets((prev) =>
+          prev.map((t) => (t.id === targetId ? { ...t, ...data.target! } : t))
+        );
+      }
+      return { ok: true };
+    } catch {
+      return { ok: false, error: "Errore di rete" };
+    }
+  }
+
+  // ── Find new targets ──────────────────────────────────────────────────
+  async function handleFindTargets() {
+    setFinding(true);
+    try {
+      await fetch("/api/growth/outreach/find", { method: "POST" });
+      await fetchData();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setFinding(false);
+    }
+  }
+
+  // ── Daily send counter ────────────────────────────────────────────────
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sentToday = targets.filter((t) => {
+    if (!t.sentAt) return false;
+    const sentDate = new Date(t.sentAt);
+    sentDate.setHours(0, 0, 0, 0);
+    return sentDate.getTime() === today.getTime();
+  }).length;
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -526,6 +623,12 @@ export default function OutreachPage() {
 
         {/* Mini funnel summary */}
         <div className="flex flex-wrap items-center gap-2 text-[11px] py-2 px-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-[#FAFAFA] dark:bg-[#252525]">
+          {/* Daily send counter */}
+          <span className={`font-semibold tabular-nums ${sentToday >= 5 ? "text-red-600" : "text-[#6366F1]"}`}>
+            {sentToday}/5
+          </span>
+          <span className="text-[#A3A3A3]">email inviate oggi</span>
+          <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
           <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
             {funnelSent}
           </span>
@@ -557,13 +660,27 @@ export default function OutreachPage() {
               {targets.length} totali
             </span>
           </h2>
-          <button
-            onClick={() => setShowModal(true)}
-            className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
-          >
-            <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
-            Aggiungi target
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleFindTargets}
+              disabled={finding}
+              className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] disabled:opacity-50 transition-colors"
+            >
+              {finding ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+              ) : (
+                <Search className="h-3.5 w-3.5" strokeWidth={1.5} />
+              )}
+              {finding ? "Cercando..." : "Cerca nuovi target"}
+            </button>
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
+            >
+              <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
+              Aggiungi target
+            </button>
+          </div>
         </div>
 
         <div className="overflow-x-auto border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px]">
@@ -596,6 +713,7 @@ export default function OutreachPage() {
                   key={target.id}
                   target={target}
                   onUpdate={handleTargetUpdate}
+                  onSendEmail={handleSendEmail}
                 />
               ))}
               {targets.length === 0 && (
