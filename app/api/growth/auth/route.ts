@@ -1,34 +1,53 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const GROWTH_USER = process.env.GROWTH_USERNAME ?? "samma";
-const GROWTH_PASS = process.env.GROWTH_PASSWORD ?? "REDACTED";
-const GROWTH_SECRET = process.env.GROWTH_SESSION_SECRET ?? "REDACTED";
+export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, password } = await request.json();
+    const body = await request.text();
+    let username = "";
+    let password = "";
 
-    if (username === GROWTH_USER && password === GROWTH_PASS) {
+    try {
+      const parsed = JSON.parse(body);
+      username = parsed.username || "";
+      password = parsed.password || "";
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    }
+
+    const expectedUser = process.env.GROWTH_USERNAME || "samma";
+    const expectedPass = process.env.GROWTH_PASSWORD || "REDACTED";
+    const sessionSecret = process.env.GROWTH_SESSION_SECRET || "REDACTED";
+
+    if (username === expectedUser && password === expectedPass) {
       const response = NextResponse.json({ success: true });
-      response.cookies.set("growth_session", GROWTH_SECRET, {
+      response.cookies.set("growth_session", sessionSecret, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
         sameSite: "lax",
         path: "/",
-        maxAge: 60 * 60 * 24 * 30, // 30 days
+        maxAge: 60 * 60 * 24 * 30,
+        domain: ".sammapix.com",
       });
       return response;
     }
 
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-  } catch {
-    return NextResponse.json({ error: "Bad request" }, { status: 400 });
+  } catch (e) {
+    return NextResponse.json({ error: "Server error: " + String(e) }, { status: 500 });
   }
 }
 
-// Logout
 export async function DELETE() {
   const response = NextResponse.json({ success: true });
-  response.cookies.delete("growth_session");
+  response.cookies.set("growth_session", "", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+    domain: ".sammapix.com",
+  });
   return response;
 }

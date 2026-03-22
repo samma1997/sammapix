@@ -251,6 +251,11 @@ export async function middleware(request: NextRequest) {
     return new NextResponse("Not found", { status: 404 });
   }
 
+  // ── Main domain: skip middleware for API routes (they have their own auth) ──
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
+
   // ── Referral cookie capture ──────────────────────────────────────────────
   // Capture ?ref=SPIX-XXXX on ANY page, set 30-day cookie.
   // Only set if user is not already logged in and code format is valid.
@@ -351,7 +356,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Run on all routes except Next.js internals, static files, and API
-    "/((?!_next/static|_next/image|favicon.ico|api/).*)",
+    // Run on all routes except Next.js internals and static files
+    // API routes included so growth subdomain middleware works
+    "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
