@@ -16,6 +16,7 @@ import {
   FolderOpen,
   Activity,
   Brain,
+  Target,
   LogOut,
   Menu,
   X,
@@ -24,6 +25,7 @@ import { useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Panoramica", href: "/dashboard/growth", icon: LayoutDashboard },
+  { label: "Piano", href: "/dashboard/growth/plan", icon: Target, accent: true },
   { label: "SEO", href: "/dashboard/growth/seo", icon: Search },
   { label: "Reddit", href: "/dashboard/growth/reddit", icon: MessageSquare },
   { label: "Outreach", href: "/dashboard/growth/outreach", icon: Mail },
@@ -96,6 +98,7 @@ export default function GrowthLayout({
                 ? pathname === "/dashboard/growth"
                 : pathname.startsWith(item.href);
             const Icon = item.icon;
+            const isAccent = "accent" in item && item.accent;
             return (
               <Link
                 key={item.href}
@@ -103,13 +106,21 @@ export default function GrowthLayout({
                 onClick={() => setSidebarOpen(false)}
                 className={[
                   "flex items-center gap-2.5 px-3 py-2 rounded-[6px] text-sm transition-colors duration-100 mb-0.5",
+                  isAccent && "border-l-2 border-[#6366F1] ml-0 pl-2.5",
                   isActive
-                    ? "bg-[#F5F5F5] dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] font-medium"
-                    : "text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#525252] dark:hover:text-[#A3A3A3]",
-                ].join(" ")}
+                    ? isAccent
+                      ? "bg-[#EEF2FF] dark:bg-[#6366F1]/10 text-[#6366F1] dark:text-[#818CF8] font-medium"
+                      : "bg-[#F5F5F5] dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] font-medium"
+                    : isAccent
+                      ? "text-[#6366F1]/70 dark:text-[#818CF8]/60 hover:bg-[#EEF2FF] dark:hover:bg-[#6366F1]/10 hover:text-[#6366F1] dark:hover:text-[#818CF8]"
+                      : "text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#525252] dark:hover:text-[#A3A3A3]",
+                ].filter(Boolean).join(" ")}
               >
-                <Icon className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                <Icon className={["h-4 w-4 shrink-0", isAccent && "text-[#6366F1] dark:text-[#818CF8]"].filter(Boolean).join(" ")} strokeWidth={1.5} />
                 {item.label}
+                {isAccent && (
+                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#6366F1]" />
+                )}
               </Link>
             );
           })}
