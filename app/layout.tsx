@@ -7,6 +7,7 @@ import { APP_NAME, APP_URL } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/layout/CookieConsent";
 import AntiCopy from "@/components/layout/AntiCopy";
+import { headers } from "next/headers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -90,11 +91,36 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Detect growth subdomain on the server side using request headers.
+  // On growth.sammapix.com we render a completely bare shell with zero
+  // SammaPix chrome — no Providers, no LayoutShell, no CookieConsent,
+  // no AntiCopy, no Analytics. The growth app is fully self-contained.
+  const headersList = await headers();
+  const hostname = headersList.get("host") || "";
+  const isGrowthSubdomain = hostname.startsWith("growth.");
+
+  if (isGrowthSubdomain) {
+    return (
+      <html lang="en" className={inter.variable} suppressHydrationWarning>
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}`,
+            }}
+          />
+        </head>
+        <body className="font-sans antialiased bg-white dark:bg-[#191919] text-gray-900 dark:text-[#E5E5E5] min-h-screen">
+          {children}
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>

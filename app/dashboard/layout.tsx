@@ -1,6 +1,6 @@
+import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 import { authOptions } from "@/lib/auth/options";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import type { Metadata } from "next";
@@ -16,6 +16,20 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // CRITICAL: Check hostname FIRST before any NextAuth call.
+  // On growth.sammapix.com the growth layout handles its own cookie-based
+  // auth via middleware. NextAuth must not be invoked here at all.
+  const headersList = await headers();
+  const hostname = headersList.get("host") || "";
+  const isGrowthSubdomain = hostname.startsWith("growth.");
+
+  if (isGrowthSubdomain) {
+    // Middleware already enforced growth_session cookie before this runs.
+    // Just pass children through — the growth layout wraps them correctly.
+    return <>{children}</>;
+  }
+
+  // Main domain: require NextAuth session
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -28,17 +42,6 @@ export default async function DashboardLayout({
     image?: string | null;
     plan?: string;
   };
-
-  // Check if we're on the growth subdomain — completely different layout
-  const headersList = await headers();
-  const hostname = headersList.get("host") || "";
-  const isGrowthSubdomain = hostname.startsWith("growth.");
-
-  // On growth subdomain: standalone app, no SammaPix chrome at all
-  if (isGrowthSubdomain) {
-    // Skip NextAuth check — growth has its own cookie auth via middleware
-    return <>{children}</>;
-  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-white dark:bg-[#191919]">

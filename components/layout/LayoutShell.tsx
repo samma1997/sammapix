@@ -12,11 +12,12 @@ import ReferralWelcomeModal from "@/components/referral/ReferralWelcomeModal";
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
+  const isGrowthLogin = pathname.startsWith("/growth-login");
 
-  // Growth subdomain: never show SammaPix header/footer
-  const isGrowthSubdomain = typeof window !== "undefined" && window.location.hostname.startsWith("growth.");
-
-  if (isDashboard || isGrowthSubdomain) {
+  // On the growth subdomain, the root layout renders bare <html><body>{children}</body></html>
+  // without mounting LayoutShell at all. The checks below are a safety net for edge cases
+  // where the path starts with /dashboard or /growth-login on the main domain.
+  if (isDashboard || isGrowthLogin) {
     return <>{children}</>;
   }
 
