@@ -23,19 +23,19 @@ import {
 import { useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Overview", href: "/dashboard/growth", icon: LayoutDashboard },
+  { label: "Panoramica", href: "/dashboard/growth", icon: LayoutDashboard },
   { label: "SEO", href: "/dashboard/growth/seo", icon: Search },
   { label: "Reddit", href: "/dashboard/growth/reddit", icon: MessageSquare },
   { label: "Outreach", href: "/dashboard/growth/outreach", icon: Mail },
-  { label: "Content", href: "/dashboard/growth/content", icon: FileText },
+  { label: "Contenuti", href: "/dashboard/growth/content", icon: FileText },
   { label: "YouTube", href: "/dashboard/growth/youtube", icon: Youtube },
-  { label: "Competitors", href: "/dashboard/growth/competitors", icon: Swords },
+  { label: "Competitor", href: "/dashboard/growth/competitors", icon: Swords },
   { label: "Brand", href: "/dashboard/growth/brand", icon: Eye },
-  { label: "Revenue", href: "/dashboard/growth/revenue", icon: DollarSign },
+  { label: "Ricavi", href: "/dashboard/growth/revenue", icon: DollarSign },
   { label: "Radar", href: "/dashboard/growth/radar", icon: Radar },
-  { label: "Directories", href: "/dashboard/growth/directories", icon: FolderOpen },
-  { label: "Analytics", href: "/dashboard/growth/analytics", icon: Activity },
-  { label: "Strategy", href: "/dashboard/growth/strategy", icon: Brain },
+  { label: "Directory", href: "/dashboard/growth/directories", icon: FolderOpen },
+  { label: "Analisi", href: "/dashboard/growth/analytics", icon: Activity },
+  { label: "Strategia", href: "/dashboard/growth/strategy", icon: Brain },
 ];
 
 export default function GrowthLayout({
@@ -77,7 +77,7 @@ export default function GrowthLayout({
               <h1 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
                 Growth HQ
               </h1>
-              <p className="text-[10px] text-[#A3A3A3] mt-0.5">SammaPix Command Center</p>
+              <p className="text-[10px] text-[#A3A3A3] mt-0.5">Centro di comando SammaPix</p>
             </div>
             <button
               onClick={() => setSidebarOpen(false)}
@@ -122,7 +122,7 @@ export default function GrowthLayout({
             className="flex items-center gap-2.5 px-3 py-2 rounded-[6px] text-sm text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#525252] dark:hover:text-[#A3A3A3] transition-colors w-full"
           >
             <LogOut className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-            Logout
+            Esci
           </button>
         </div>
       </aside>

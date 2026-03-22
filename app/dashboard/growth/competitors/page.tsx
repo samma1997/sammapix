@@ -13,7 +13,7 @@ import {
 import type { Competitor } from "@/lib/db/schema";
 
 function formatDate(date: Date | string | null): string {
-  if (!date) return "Never";
+  if (!date) return "Mai";
   const d = new Date(date);
   return d.toLocaleDateString("en-US", {
     month: "short",
@@ -33,7 +33,7 @@ function ChangeBadge({ changesDetected }: { changesDetected: string | null }) {
   return (
     <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-[4px] bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
       <AlertTriangle className="h-2.5 w-2.5" strokeWidth={2} />
-      Changes detected
+      Modifiche rilevate
     </span>
   );
 }
@@ -102,7 +102,7 @@ function CompetitorCard({
             ) : (
               <ChevronDown className="h-3 w-3" strokeWidth={1.5} />
             )}
-            Full snapshot
+            Snapshot completo
           </button>
 
           {expanded && (
@@ -133,7 +133,7 @@ function CompetitorCard({
               )}
               {typeof snapshot.scrapedAt === "string" && snapshot.scrapedAt && (
                 <div className="text-[#A3A3A3] pt-1">
-                  Scraped: {new Date(snapshot.scrapedAt).toLocaleString()}
+                  Scansionato: {new Date(snapshot.scrapedAt).toLocaleString()}
                 </div>
               )}
             </div>
@@ -179,11 +179,11 @@ function AddCompetitorModal({ onClose, onAdd }: AddCompetitorModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] w-full max-w-md p-6">
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-          Add Competitor
+          Aggiungi competitor
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Name</label>
+            <label className="block text-xs text-[#525252] mb-1">Nome</label>
             <input
               type="text"
               value={form.name}
@@ -210,14 +210,14 @@ function AddCompetitorModal({ onClose, onAdd }: AddCompetitorModalProps) {
               disabled={saving}
               className="flex-1 text-sm px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] dark:hover:bg-[#D4D4D4] disabled:opacity-50 transition-colors"
             >
-              {saving ? "Adding..." : "Add Competitor"}
+              {saving ? "Aggiunta..." : "Aggiungi competitor"}
             </button>
             <button
               type="button"
               onClick={onClose}
               className="text-sm px-4 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
             >
-              Cancel
+              Annulla
             </button>
           </div>
         </form>
@@ -255,7 +255,7 @@ export default function CompetitorsPage() {
     setScrapeResult(null);
     try {
       await fetch("/api/growth/competitors/scrape", { method: "POST" });
-      setScrapeResult("Scraping in background...");
+      setScrapeResult("Scansione in corso...");
       let attempts = 0;
       const poll = setInterval(async () => {
         attempts++;
@@ -263,14 +263,14 @@ export default function CompetitorsPage() {
         if (attempts >= 12) {
           clearInterval(poll);
           setScraping(false);
-          setScrapeResult("Scrape complete");
+          setScrapeResult("Scansione completata");
         }
       }, 10000);
       setTimeout(() => fetchCompetitors(), 5000);
-      setTimeout(() => { clearInterval(poll); setScraping(false); setScrapeResult("Scrape complete"); }, 120000);
+      setTimeout(() => { clearInterval(poll); setScraping(false); setScrapeResult("Scansione completata"); }, 120000);
     } catch (e) {
       console.error(e);
-      setScrapeResult("Error occurred");
+      setScrapeResult("Errore");
       setScraping(false);
     }
   }
@@ -290,11 +290,11 @@ export default function CompetitorsPage() {
             <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
               {competitors.length}
             </span>{" "}
-            competitors tracked
+            competitor monitorati
           </span>
           {changesCount > 0 && (
             <span className="text-amber-600 dark:text-amber-400 font-medium">
-              {changesCount} with changes
+              {changesCount} con modifiche
             </span>
           )}
         </div>
@@ -307,7 +307,7 @@ export default function CompetitorsPage() {
             className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
           >
             <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
-            Add Competitor
+            Aggiungi competitor
           </button>
           <button
             onClick={handleScrapeAll}
@@ -318,7 +318,7 @@ export default function CompetitorsPage() {
               className={`h-3.5 w-3.5 ${scraping ? "animate-spin" : ""}`}
               strokeWidth={1.5}
             />
-            {scraping ? "Scraping..." : "Scrape All"}
+            {scraping ? "Scansione..." : "Scansiona tutti"}
           </button>
         </div>
       </div>
@@ -335,12 +335,12 @@ export default function CompetitorsPage() {
         </div>
       ) : competitors.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-sm text-[#737373] mb-3">No competitors tracked yet.</p>
+          <p className="text-sm text-[#737373] mb-3">Nessun competitor monitorato.</p>
           <button
             onClick={() => setShowModal(true)}
             className="text-sm px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] transition-colors"
           >
-            Add your first competitor
+            Aggiungi il primo competitor
           </button>
         </div>
       ) : (

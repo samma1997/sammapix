@@ -234,10 +234,10 @@ export default function AnalyticsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
-            Analytics & Site Health
+            Analisi & Salute sito
           </h2>
           <p className="text-xs text-[#A3A3A3]">
-            Real-time GA4 data + performance checks for sammapix.com
+            Dati GA4 in tempo reale + controlli performance per sammapix.com
           </p>
         </div>
         <div className="flex gap-1">
@@ -267,7 +267,7 @@ export default function AnalyticsPage() {
       {ga4Loading && !ga4 && (
         <div className="flex items-center gap-2 text-xs text-[#737373] py-8 justify-center">
           <RefreshCw className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-          Loading GA4 data...
+          Caricamento dati GA4...
         </div>
       )}
 
@@ -275,11 +275,11 @@ export default function AnalyticsPage() {
         <>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             {[
-              { label: "Users", value: formatNumber(ga4.totalUsers), icon: Users, color: "#6366F1" },
-              { label: "Sessions", value: formatNumber(ga4.totalSessions), icon: MousePointerClick, color: "#171717" },
-              { label: "Pageviews", value: formatNumber(ga4.totalPageviews), icon: Eye, color: "#0EA5E9" },
-              { label: "Avg Duration", value: formatDuration(ga4.avgSessionDuration), icon: Timer, color: "#16A34A" },
-              { label: "Bounce Rate", value: `${(ga4.bounceRate * 100).toFixed(1)}%`, icon: ArrowUpRight, color: "#D97706" },
+              { label: "Utenti", value: formatNumber(ga4.totalUsers), icon: Users, color: "#6366F1" },
+              { label: "Sessioni", value: formatNumber(ga4.totalSessions), icon: MousePointerClick, color: "#171717" },
+              { label: "Visualizzazioni", value: formatNumber(ga4.totalPageviews), icon: Eye, color: "#0EA5E9" },
+              { label: "Durata media", value: formatDuration(ga4.avgSessionDuration), icon: Timer, color: "#16A34A" },
+              { label: "Rimbalzo", value: `${(ga4.bounceRate * 100).toFixed(1)}%`, icon: ArrowUpRight, color: "#D97706" },
             ].map(({ label, value, icon: Icon, color }) => (
               <div
                 key={label}
@@ -303,21 +303,21 @@ export default function AnalyticsPage() {
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
               <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                Daily Traffic
+                Traffico giornaliero
               </h3>
               {ga4Loading && <RefreshCw className="h-3 w-3 animate-spin text-[#A3A3A3]" strokeWidth={1.5} />}
             </div>
             <div className="grid grid-cols-3 gap-4 mb-3">
               <div>
-                <div className="text-[10px] font-semibold text-[#6366F1] uppercase tracking-wider mb-1">Users</div>
+                <div className="text-[10px] font-semibold text-[#6366F1] uppercase tracking-wider mb-1">Utenti</div>
                 <Sparkline data={ga4.daily.map((d) => d.users)} color="#6366F1" />
               </div>
               <div>
-                <div className="text-[10px] font-semibold text-[#171717] dark:text-[#E5E5E5] uppercase tracking-wider mb-1">Sessions</div>
+                <div className="text-[10px] font-semibold text-[#171717] dark:text-[#E5E5E5] uppercase tracking-wider mb-1">Sessioni</div>
                 <Sparkline data={ga4.daily.map((d) => d.sessions)} color="#171717" />
               </div>
               <div>
-                <div className="text-[10px] font-semibold text-[#0EA5E9] uppercase tracking-wider mb-1">Pageviews</div>
+                <div className="text-[10px] font-semibold text-[#0EA5E9] uppercase tracking-wider mb-1">Visualizzazioni</div>
                 <Sparkline data={ga4.daily.map((d) => d.pageviews)} color="#0EA5E9" />
               </div>
             </div>
@@ -334,7 +334,7 @@ export default function AnalyticsPage() {
               <div className="flex items-center gap-2 mb-3">
                 <BarChart3 className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                  Top Pages
+                  Pagine top
                 </h3>
               </div>
               <div className="space-y-2.5">
@@ -359,7 +359,7 @@ export default function AnalyticsPage() {
               <div className="flex items-center gap-2 mb-3">
                 <Globe className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                  Traffic Sources
+                  Sorgenti traffico
                 </h3>
               </div>
               <div className="space-y-2.5">
@@ -384,7 +384,7 @@ export default function AnalyticsPage() {
               <div className="flex items-center gap-2 mb-3">
                 <MapPin className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                  Countries
+                  Paesi
                 </h3>
               </div>
               <div className="space-y-2.5">
@@ -413,7 +413,7 @@ export default function AnalyticsPage() {
           <div className="flex items-center gap-2">
             <Zap className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
             <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-              PageSpeed Score
+              Punteggio PageSpeed
             </h3>
             <span className="text-[10px] bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] px-1.5 py-0.5 rounded-[4px] uppercase tracking-wider font-semibold">
               Mobile
@@ -426,7 +426,7 @@ export default function AnalyticsPage() {
               className="flex items-center gap-1.5 text-xs px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors disabled:opacity-50"
             >
               <RefreshCw className={`h-3 w-3 ${pagespeed.loading ? "animate-spin" : ""}`} strokeWidth={1.5} />
-              {pagespeed.loading ? "Checking..." : "Run Check"}
+              {pagespeed.loading ? "Controllo..." : "Controlla"}
             </button>
             <a
               href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fwww.sammapix.com&form_factor=mobile"
@@ -434,7 +434,7 @@ export default function AnalyticsPage() {
               className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] transition-colors"
             >
               <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
-              Open PageSpeed
+              Apri PageSpeed
             </a>
           </div>
         </div>
@@ -443,7 +443,7 @@ export default function AnalyticsPage() {
           <div className="flex items-center gap-8">
             <div className="flex flex-col items-center">
               <ScoreRing score={pagespeed.performance} />
-              <span className="text-[10px] text-[#737373] mt-1">Performance</span>
+              <span className="text-[10px] text-[#737373] mt-1">Prestazioni</span>
             </div>
             <div className="grid grid-cols-3 gap-6">
               {[
@@ -461,7 +461,7 @@ export default function AnalyticsPage() {
           </div>
         ) : !pagespeed.loading ? (
           <p className="text-xs text-[#737373]">
-            Click &quot;Run Check&quot; to fetch PageSpeed data from Google.
+            Clicca &quot;Controlla&quot; per ottenere i dati PageSpeed da Google.
           </p>
         ) : null}
       </div>
@@ -471,7 +471,7 @@ export default function AnalyticsPage() {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2">
             <Globe className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
-            <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">Uptime Check</h3>
+            <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">Controllo uptime</h3>
           </div>
           <button
             onClick={checkUptime}
@@ -483,7 +483,7 @@ export default function AnalyticsPage() {
           </button>
         </div>
         {uptime.loading ? (
-          <p className="text-xs text-[#737373]">Pinging sammapix.com...</p>
+          <p className="text-xs text-[#737373]">Ping a sammapix.com...</p>
         ) : uptime.error ? (
           <div className="flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
@@ -497,7 +497,7 @@ export default function AnalyticsPage() {
             </div>
             <div className="flex items-center gap-1.5 text-sm text-[#737373]">
               <Clock className="h-3.5 w-3.5" strokeWidth={1.5} />
-              {uptime.responseMs}ms response
+              {uptime.responseMs}ms risposta
             </div>
           </div>
         ) : null}
@@ -507,15 +507,15 @@ export default function AnalyticsPage() {
       <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5">
         <div className="flex items-center gap-2 mb-3">
           <AlertTriangle className="h-4 w-4 text-[#A3A3A3]" strokeWidth={1.5} />
-          <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">Recent Errors</h3>
+          <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">Errori recenti</h3>
           <span className="text-[10px] bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] px-1.5 py-0.5 rounded-[4px] uppercase tracking-wider font-semibold">
-            Coming Soon
+            Prossimamente
           </span>
         </div>
         <p className="text-xs text-[#737373]">
-          Add <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1 rounded text-[10px]">SENTRY_DSN</code> to see real-time errors.{" "}
+          Aggiungi <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1 rounded text-[10px]">SENTRY_DSN</code> per vedere gli errori in tempo reale.{" "}
           <a href="https://sentry.io" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">
-            Set up Sentry (free)
+            Configura Sentry (gratis)
           </a>
         </p>
       </div>

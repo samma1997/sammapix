@@ -120,16 +120,16 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-          Add Outreach Target
+          Aggiungi target outreach
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           {[
-            { key: "siteName", label: "Site Name", required: true },
-            { key: "articleTitle", label: "Article Title" },
-            { key: "articleUrl", label: "Article URL" },
-            { key: "contactName", label: "Contact Name" },
-            { key: "contactEmail", label: "Contact Email" },
-            { key: "contactLinkedin", label: "Contact LinkedIn" },
+            { key: "siteName", label: "Nome sito", required: true },
+            { key: "articleTitle", label: "Titolo articolo" },
+            { key: "articleUrl", label: "URL articolo" },
+            { key: "contactName", label: "Nome contatto" },
+            { key: "contactEmail", label: "Email contatto" },
+            { key: "contactLinkedin", label: "LinkedIn contatto" },
           ].map(({ key, label, required }) => (
             <div key={key}>
               <label className="block text-xs text-[#525252] mb-1">{label}</label>
@@ -143,7 +143,7 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
             </div>
           ))}
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Notes</label>
+            <label className="block text-xs text-[#525252] mb-1">Note</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -157,14 +157,14 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
               disabled={saving}
               className="flex-1 text-sm px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
             >
-              {saving ? "Adding..." : "Add Target"}
+              {saving ? "Aggiunta..." : "Aggiungi target"}
             </button>
             <button
               type="button"
               onClick={onClose}
               className="text-sm px-4 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
             >
-              Cancel
+              Annulla
             </button>
           </div>
         </form>
@@ -307,7 +307,7 @@ function OutreachRow({
               }`}
             >
               {new Date(target.followUpAt).toLocaleDateString()}
-              {overdue && " (overdue)"}
+              {overdue && " (scaduto)"}
             </span>
           ) : (
             <span className="text-xs text-[#A3A3A3]">—</span>
@@ -337,7 +337,7 @@ function OutreachRow({
                 onClick={() => setNotesExpanded((v) => !v)}
                 className="flex items-center gap-1 text-[11px] text-[#737373]"
               >
-                Notes
+                Note
                 {notesExpanded ? (
                   <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
                 ) : (
@@ -372,7 +372,7 @@ function OutreachRow({
               ) : (
                 <Copy className="h-3 w-3" strokeWidth={1.5} />
               )}
-              {copied ? "Copied!" : "Email"}
+              {copied ? "Copiato!" : "Email"}
             </button>
             {/* Reply expand button */}
             <button
@@ -385,7 +385,7 @@ function OutreachRow({
               }`}
             >
               <MessageSquare className="h-3 w-3" strokeWidth={1.5} />
-              {target.replyText ? "Reply" : "Reply"}
+              {target.replyText ? "Risposta" : "Risposta"}
               {expanded ? (
                 <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
               ) : (
@@ -403,11 +403,11 @@ function OutreachRow({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3]">
-                  Reply received
+                  Risposta ricevuta
                 </label>
                 {target.repliedAt && (
                   <span className="text-[10px] text-[#A3A3A3]">
-                    Saved {new Date(target.repliedAt).toLocaleDateString()}
+                    Salvato {new Date(target.repliedAt).toLocaleDateString()}
                   </span>
                 )}
               </div>
@@ -415,7 +415,7 @@ function OutreachRow({
                 value={replyDraft}
                 onChange={(e) => setReplyDraft(e.target.value)}
                 rows={4}
-                placeholder="Paste the reply you received here..."
+                placeholder="Incolla qui la risposta ricevuta..."
                 className="w-full text-sm px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] focus:outline-none focus:border-[#6366F1] resize-y"
               />
               <div className="flex items-center gap-2">
@@ -424,10 +424,10 @@ function OutreachRow({
                   disabled={savingReply}
                   className="text-sm px-3 py-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
                 >
-                  {savingReply ? "Saving..." : "Save Reply"}
+                  {savingReply ? "Salvataggio..." : "Salva risposta"}
                 </button>
                 {replyDraft && replyDraft !== target.replyText && (
-                  <span className="text-[10px] text-[#A3A3A3]">Unsaved changes</span>
+                  <span className="text-[10px] text-[#A3A3A3]">Modifiche non salvate</span>
                 )}
               </div>
             </div>
@@ -507,9 +507,9 @@ export default function OutreachPage() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-            Outreach Targets
+            Target outreach
             <span className="ml-2 text-xs font-normal text-[#A3A3A3]">
-              {targets.length} total
+              {targets.length} totali
             </span>
           </h2>
           <button
@@ -517,7 +517,7 @@ export default function OutreachPage() {
             className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
           >
             <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
-            Add Target
+            Aggiungi target
           </button>
         </div>
 
@@ -526,15 +526,15 @@ export default function OutreachPage() {
             <thead>
               <tr className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
                 {[
-                  "Site",
-                  "Article",
-                  "Contact",
-                  "Status",
-                  "Sent",
+                  "Sito",
+                  "Articolo",
+                  "Contatto",
+                  "Stato",
+                  "Inviato",
                   "Follow-up",
                   "Backlink",
-                  "Notes",
-                  "Actions",
+                  "Note",
+                  "Azioni",
                 ].map((h) => (
                   <th
                     key={h}
@@ -559,7 +559,7 @@ export default function OutreachPage() {
                     colSpan={9}
                     className="py-8 text-center text-sm text-[#A3A3A3]"
                   >
-                    No outreach targets yet
+                    Nessun target outreach ancora
                   </td>
                 </tr>
               )}
@@ -571,10 +571,10 @@ export default function OutreachPage() {
       {/* Directory Submissions */}
       <div>
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-          Directory Submissions
+          Invii directory
           <span className="ml-2 text-xs font-normal text-[#A3A3A3]">
-            {directories.filter((d) => d.status === "listed").length} listed /{" "}
-            {directories.length} total
+            {directories.filter((d) => d.status === "listed").length} listati /{" "}
+            {directories.length} totali
           </span>
         </h2>
 
@@ -582,7 +582,7 @@ export default function OutreachPage() {
           <table className="w-full min-w-[500px]">
             <thead>
               <tr className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
-                {["Directory", "URL", "Status", "Submitted", "Listed"].map(
+                {["Directory", "URL", "Stato", "Inviato", "Listato"].map(
                   (h) => (
                     <th
                       key={h}
@@ -652,7 +652,7 @@ export default function OutreachPage() {
                     colSpan={5}
                     className="py-8 text-center text-sm text-[#A3A3A3]"
                   >
-                    No directories yet
+                    Nessuna directory ancora
                   </td>
                 </tr>
               )}

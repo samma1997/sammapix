@@ -50,7 +50,7 @@ function RevenueBarChart({
   return (
     <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
       <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-4">
-        Revenue History (6 months)
+        Storico ricavi (6 mesi)
       </h3>
       <div className="flex items-end gap-2 h-28">
         {history.map((month) => {
@@ -111,8 +111,8 @@ export default function RevenuePage() {
     return (
       <div className="text-center py-16 space-y-3">
         <p className="text-sm text-[#737373]">
-          No Pro subscribers yet. Revenue data will appear here as users
-          upgrade.
+          Nessun abbonato Pro ancora. I dati sui ricavi appariranno qui quando gli utenti
+          faranno l&apos;upgrade.
         </p>
         {error && error !== "Stripe not configured" && (
           <p className="text-xs text-[#A3A3A3]">{error}</p>
@@ -133,23 +133,22 @@ export default function RevenuePage() {
             icon={<DollarSign className="h-4 w-4" strokeWidth={1.5} />}
             label="MRR"
             value="€0"
-            sub="No active subscriptions yet"
+            sub="Nessun abbonamento attivo ancora"
           />
           <StatCard
             icon={<Users className="h-4 w-4" strokeWidth={1.5} />}
-            label="Active Subscribers"
+            label="Abbonati attivi"
             value="0"
           />
           <StatCard
             icon={<UserPlus className="h-4 w-4" strokeWidth={1.5} />}
-            label="New This Month"
+            label="Nuovi questo mese"
             value="0"
           />
         </div>
         <div className="text-center py-8 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px]">
           <p className="text-sm text-[#737373]">
-            No Pro subscribers yet. Revenue data will appear here as users
-            upgrade.
+            Nessun abbonato Pro ancora. I dati sui ricavi appariranno qui con l&apos;upgrade degli utenti.
           </p>
         </div>
       </div>
@@ -164,31 +163,31 @@ export default function RevenuePage() {
           icon={<DollarSign className="h-4 w-4" strokeWidth={1.5} />}
           label="MRR"
           value={formatCents(stats.mrr)}
-          sub="Monthly Recurring Revenue"
+          sub="Ricavi ricorrenti mensili"
         />
         <StatCard
           icon={<Users className="h-4 w-4" strokeWidth={1.5} />}
           label="Active Subscribers"
           value={String(stats.activeSubscriptions)}
-          sub="Pro plan subscribers"
+          sub="Abbonati piano Pro"
         />
         <StatCard
           icon={<UserPlus className="h-4 w-4" strokeWidth={1.5} />}
           label="New This Month"
           value={String(stats.newThisMonth)}
-          sub="new Pro upgrades"
+          sub="nuovi upgrade Pro"
         />
         <StatCard
           icon={<TrendingDown className="h-4 w-4" strokeWidth={1.5} />}
-          label="Churn Rate"
+          label="Tasso abbandono"
           value={`${stats.churnRate}%`}
-          sub="cancellations / total this month"
+          sub="cancellazioni / totale questo mese"
         />
         <StatCard
           icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
-          label="Revenue This Month"
+          label="Ricavi questo mese"
           value={formatCents(stats.revenueThisMonth)}
-          sub="total charges collected"
+          sub="totale incassato"
         />
       </div>
 
@@ -200,7 +199,7 @@ export default function RevenuePage() {
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] overflow-hidden">
           <div className="px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3]">
-              Latest Pro Subscribers
+              Ultimi abbonati Pro
             </h3>
           </div>
           <div className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">

@@ -73,10 +73,10 @@ export default function StrategyPage() {
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-            Strategy Reviews
+            Analisi strategiche
           </h2>
           <p className="text-xs text-[#A3A3A3] mt-0.5">
-            AI-powered analysis of your last 14 days of growth activity.
+            Analisi AI delle ultime 2 settimane di attività di crescita.
           </p>
         </div>
         <button
@@ -85,7 +85,7 @@ export default function StrategyPage() {
           className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
         >
           <Sparkles className={`h-3.5 w-3.5 ${generating ? "animate-pulse" : ""}`} strokeWidth={1.5} />
-          {generating ? "Generating..." : "Generate Review"}
+          {generating ? "Generazione..." : "Genera analisi"}
         </button>
       </div>
 
@@ -99,7 +99,7 @@ export default function StrategyPage() {
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-6 flex items-center gap-3">
           <div className="h-4 w-4 border-2 border-[#6366F1] border-t-transparent rounded-full animate-spin" />
           <span className="text-sm text-[#737373]">
-            Analyzing 14 days of data with Gemini AI...
+            Analisi di 14 giorni di dati con Gemini AI...
           </span>
         </div>
       )}
@@ -118,10 +118,10 @@ export default function StrategyPage() {
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <Sparkles className="h-10 w-10 text-[#D4D4D4] mb-4" strokeWidth={1} />
           <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            No reviews yet
+            Nessuna analisi ancora
           </h3>
           <p className="text-sm text-[#737373] max-w-sm">
-            Generate your first AI strategy review to get actionable insights on your growth activities.
+            Genera la tua prima analisi strategica AI per ottenere insight azionabili sulle tue attività di crescita.
           </p>
         </div>
       ) : (
@@ -147,7 +147,7 @@ export default function StrategyPage() {
                         {review.periodStart} → {review.periodEnd}
                       </div>
                       <div className="text-xs text-[#A3A3A3] mt-0.5">
-                        Generated {new Date(review.createdAt!).toLocaleDateString()}
+                        Generato il {new Date(review.createdAt!).toLocaleDateString()}
                       </div>
                     </div>
                     {/* Metrics pills */}
@@ -156,17 +156,17 @@ export default function StrategyPage() {
                         {
                           icon: <MessageSquare className="h-3 w-3" strokeWidth={1.5} />,
                           value: review.redditComments,
-                          label: "comments",
+                          label: "commenti",
                         },
                         {
                           icon: <Mail className="h-3 w-3" strokeWidth={1.5} />,
                           value: review.outreachSent,
-                          label: "sent",
+                          label: "inviate",
                         },
                         {
                           icon: <Link className="h-3 w-3" strokeWidth={1.5} />,
                           value: review.outreachLinked,
-                          label: "links",
+                          label: "link",
                         },
                         {
                           icon: <BarChart2 className="h-3 w-3" strokeWidth={1.5} />,
@@ -197,7 +197,7 @@ export default function StrategyPage() {
                     {/* Analysis */}
                     <div>
                       <h4 className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] mb-2">
-                        Analysis
+                        Analisi
                       </h4>
                       <div className="text-sm text-[#525252] dark:text-[#A3A3A3] whitespace-pre-wrap leading-relaxed">
                         {review.analysisText}
@@ -208,7 +208,7 @@ export default function StrategyPage() {
                     {suggestions.length > 0 && (
                       <div>
                         <h4 className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] mb-2">
-                          Next 2 Weeks — Action Items
+                          Prossime 2 settimane — Azioni
                         </h4>
                         <ul className="space-y-2">
                           {suggestions.map((s, i) => (

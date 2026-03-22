@@ -66,11 +66,11 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] w-full max-w-md p-6">
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-          Add Content Item
+          Aggiungi contenuto
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Title</label>
+            <label className="block text-xs text-[#525252] mb-1">Titolo</label>
             <input
               type="text"
               value={form.title}
@@ -80,7 +80,7 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
             />
           </div>
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Target Keyword</label>
+            <label className="block text-xs text-[#525252] mb-1">Keyword target</label>
             <input
               type="text"
               value={form.targetKeyword}
@@ -89,7 +89,7 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
             />
           </div>
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Published URL</label>
+            <label className="block text-xs text-[#525252] mb-1">URL pubblicato</label>
             <input
               type="url"
               value={form.publishedUrl}
@@ -98,7 +98,7 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
             />
           </div>
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Notes</label>
+            <label className="block text-xs text-[#525252] mb-1">Note</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -112,14 +112,14 @@ function AddContentModal({ onClose, onAdd }: AddContentModalProps) {
               disabled={saving}
               className="flex-1 text-sm px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
             >
-              {saving ? "Adding..." : "Add Item"}
+              {saving ? "Aggiunta..." : "Aggiungi"}
             </button>
             <button
               type="button"
               onClick={onClose}
               className="text-sm px-4 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
             >
-              Cancel
+              Annulla
             </button>
           </div>
         </form>
@@ -268,7 +268,7 @@ export default function ContentPage() {
           className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
         >
           <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Add Content
+          Aggiungi contenuto
         </button>
       </div>
 
@@ -276,7 +276,7 @@ export default function ContentPage() {
         <table className="w-full min-w-[600px]">
           <thead>
             <tr className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
-              {["Title", "Keyword", "Status", "Published URL", "Notes"].map(
+              {["Titolo", "Keyword", "Stato", "URL pubblicato", "Note"].map(
                 (h) => (
                   <th
                     key={h}
@@ -298,7 +298,7 @@ export default function ContentPage() {
                   colSpan={5}
                   className="py-8 text-center text-sm text-[#A3A3A3]"
                 >
-                  No content items yet
+                  Nessun contenuto ancora
                 </td>
               </tr>
             )}

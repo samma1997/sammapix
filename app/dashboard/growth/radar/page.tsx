@@ -86,7 +86,7 @@ function RadarCard({ item }: { item: ToolRadarItem }) {
 
       {/* Relevance bar */}
       <div>
-        <div className="text-[10px] text-[#A3A3A3] mb-1">Relevance</div>
+        <div className="text-[10px] text-[#A3A3A3] mb-1">Rilevanza</div>
         <RelevanceBar score={item.relevanceScore ?? 0} />
       </div>
 
@@ -143,7 +143,7 @@ export default function RadarPage() {
     setScrapeResult(null);
     try {
       await fetch("/api/growth/radar/scrape", { method: "POST" });
-      setScrapeResult("Scanning in background...");
+      setScrapeResult("Scansione in corso...");
       let attempts = 0;
       const poll = setInterval(async () => {
         attempts++;
@@ -151,14 +151,14 @@ export default function RadarPage() {
         if (attempts >= 12) {
           clearInterval(poll);
           setScraping(false);
-          setScrapeResult("Scan complete");
+          setScrapeResult("Scansione completata");
         }
       }, 10000);
       setTimeout(() => fetchItems(), 5000);
-      setTimeout(() => { clearInterval(poll); setScraping(false); setScrapeResult("Scan complete"); }, 120000);
+      setTimeout(() => { clearInterval(poll); setScraping(false); setScrapeResult("Scansione completata"); }, 120000);
     } catch (e) {
       console.error(e);
-      setScrapeResult("Error occurred");
+      setScrapeResult("Errore");
       setScraping(false);
     }
   }
@@ -204,7 +204,7 @@ export default function RadarPage() {
               ].join(" ")}
             >
               {src === "all"
-                ? "All"
+                ? "Tutti"
                 : SOURCE_LABELS[src] ?? src}
             </button>
           ))}
@@ -215,7 +215,7 @@ export default function RadarPage() {
             }
             className="text-xs px-2.5 py-1 rounded-[4px] border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
           >
-            Sort: {sortMode === "relevance" ? "Relevance" : "Date"}
+            Ordina: {sortMode === "relevance" ? "Rilevanza" : "Data"}
           </button>
         </div>
         <div className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export default function RadarPage() {
               className={`h-3.5 w-3.5 ${scraping ? "animate-spin" : ""}`}
               strokeWidth={1.5}
             />
-            {scraping ? "Scanning..." : "Scan Now"}
+            {scraping ? "Scansione..." : "Scansiona ora"}
           </button>
         </div>
       </div>
@@ -250,8 +250,8 @@ export default function RadarPage() {
         <div className="text-center py-16">
           <p className="text-sm text-[#737373] mb-3">
             {items.length === 0
-              ? "No tools discovered yet. Run a scan to find new tools and articles."
-              : "No items match the current filter."}
+              ? "Nessun tool scoperto ancora. Avvia una scansione per trovare nuovi tool e articoli."
+              : "Nessun elemento corrisponde al filtro attuale."}
           </p>
           {items.length === 0 && (
             <button
@@ -259,7 +259,7 @@ export default function RadarPage() {
               disabled={scraping}
               className="text-sm px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] transition-colors disabled:opacity-50"
             >
-              {scraping ? "Scanning..." : "Scan Now"}
+              {scraping ? "Scansione..." : "Scansiona ora"}
             </button>
           )}
         </div>

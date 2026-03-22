@@ -105,7 +105,7 @@ function BarChart({ data }: { data: DailyRow[] }) {
         <span className="flex items-center gap-3">
           <span className="flex items-center gap-1">
             <span className="inline-block w-2 h-2 rounded-[1px] bg-[#E5E5E5] dark:bg-[#2A2A2A]" />
-            Impressions
+            Impressioni
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block w-2 h-2 rounded-[1px] bg-[#6366F1]" />
@@ -184,12 +184,12 @@ export default function SeoPage() {
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <Search className="h-10 w-10 text-[#D4D4D4] mb-4" strokeWidth={1} />
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-          Connect Google Search Console
+          Connetti Google Search Console
         </h2>
         <p className="text-sm text-[#737373] max-w-md">
-          Add <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1 rounded text-xs">GOOGLE_SERVICE_ACCOUNT_KEY</code> to
-          your environment variables to see your SEO data. The key should be the JSON content of a Google Service Account
-          with Search Console read access.
+          Aggiungi <code className="bg-[#F5F5F5] dark:bg-[#252525] px-1 rounded text-xs">GOOGLE_SERVICE_ACCOUNT_KEY</code> alle
+          variabili d&apos;ambiente per vedere i dati SEO. La chiave deve essere il contenuto JSON di un Service Account Google
+          con accesso in lettura a Search Console.
         </p>
         <div className="mt-6 flex gap-3">
           <button
@@ -198,7 +198,7 @@ export default function SeoPage() {
             className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors disabled:opacity-50"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${syncing ? "animate-spin" : ""}`} strokeWidth={1.5} />
-            Try Sync
+            Prova sincronizzazione
           </button>
           <a
             href="https://search.google.com/search-console"
@@ -206,7 +206,7 @@ export default function SeoPage() {
             rel="noopener noreferrer"
             className="text-sm px-3 py-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] transition-colors"
           >
-            Open Search Console
+            Apri Search Console
           </a>
         </div>
       </div>
@@ -224,9 +224,9 @@ export default function SeoPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-            SEO Performance
+            Performance SEO
           </h2>
-          <p className="text-xs text-[#A3A3A3] mt-0.5">Last 7 days from Google Search Console</p>
+          <p className="text-xs text-[#A3A3A3] mt-0.5">Ultimi 7 giorni da Google Search Console</p>
         </div>
         <button
           onClick={handleSync}
@@ -234,7 +234,7 @@ export default function SeoPage() {
           className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`h-3.5 w-3.5 ${syncing ? "animate-spin" : ""}`} strokeWidth={1.5} />
-          Sync GSC
+          Sincronizza GSC
         </button>
       </div>
 
@@ -242,24 +242,24 @@ export default function SeoPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           icon={<BarChart2 className="h-4 w-4" strokeWidth={1.5} />}
-          label="Impressions (7d)"
+          label="Impressioni (7g)"
           value={Number(ws.impressions).toLocaleString()}
         />
         <StatCard
           icon={<MousePointerClick className="h-4 w-4" strokeWidth={1.5} />}
-          label="Clicks (7d)"
+          label="Click (7g)"
           value={Number(ws.clicks).toLocaleString()}
         />
         <StatCard
           icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
-          label="Avg CTR (7d)"
+          label="CTR medio (7g)"
           value={`${(Number(ws.ctr) * 100).toFixed(1)}%`}
         />
         <StatCard
           icon={<Search className="h-4 w-4" strokeWidth={1.5} />}
-          label="Avg Position (7d)"
+          label="Posizione media (7g)"
           value={Number(ws.position).toFixed(1)}
-          sub="lower is better"
+          sub="più basso è meglio"
         />
       </div>
 
@@ -267,7 +267,7 @@ export default function SeoPage() {
       {data.daily.length > 0 && (
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-4">
-            Clicks / Impressions — Last 30 Days
+            Click / Impressioni — Ultimi 30 giorni
           </h3>
           <BarChart data={data.daily} />
         </div>
@@ -277,16 +277,16 @@ export default function SeoPage() {
       {doorstepKeywords.length > 0 && (
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-1">
-            Doorstep Keywords
+            Keyword in soglia
           </h3>
           <p className="text-xs text-[#737373] mb-4">
-            Position 5–15 — close to page 1 top. Target these for quick wins.
+            Posizione 5–15 — vicine alla top di pagina 1. Puntaci per vittorie rapide.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[500px]">
               <thead>
                 <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A]">
-                  {["Keyword", "Position", "Impressions", "Clicks", "CTR"].map((h) => (
+                  {["Keyword", "Posizione", "Impressioni", "Click", "CTR"].map((h) => (
                     <th
                       key={h}
                       className="text-left py-2 text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] pr-4"
@@ -328,13 +328,13 @@ export default function SeoPage() {
       {data.keywords.length > 0 && (
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-4">
-            Top Keywords — by Impressions
+            Top keyword — per impressioni
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[500px]">
               <thead>
                 <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A]">
-                  {["Query", "Impressions", "Clicks", "CTR", "Avg Position"].map((h) => (
+                  {["Query", "Impressioni", "Click", "CTR", "Posizione media"].map((h) => (
                     <th
                       key={h}
                       className="text-left py-2 text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] pr-4"
@@ -377,13 +377,13 @@ export default function SeoPage() {
       {data.pages.length > 0 && (
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-4">
-            Top Pages — by Clicks
+            Pagine top — per click
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[500px]">
               <thead>
                 <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A]">
-                  {["Page", "Clicks", "Impressions", "CTR", "Avg Position"].map((h) => (
+                  {["Pagina", "Click", "Impressioni", "CTR", "Posizione media"].map((h) => (
                     <th
                       key={h}
                       className="text-left py-2 text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] pr-4"

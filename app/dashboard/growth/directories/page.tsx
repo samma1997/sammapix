@@ -65,11 +65,11 @@ function AddDirModal({ onClose, onAdd }: AddDirModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] w-full max-w-md p-6">
         <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-          Add Directory
+          Aggiungi directory
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Directory Name</label>
+            <label className="block text-xs text-[#525252] mb-1">Nome directory</label>
             <input
               type="text"
               value={form.directoryName}
@@ -89,7 +89,7 @@ function AddDirModal({ onClose, onAdd }: AddDirModalProps) {
             />
           </div>
           <div>
-            <label className="block text-xs text-[#525252] mb-1">Notes</label>
+            <label className="block text-xs text-[#525252] mb-1">Note</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -103,14 +103,14 @@ function AddDirModal({ onClose, onAdd }: AddDirModalProps) {
               disabled={saving}
               className="flex-1 text-sm px-4 py-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
             >
-              {saving ? "Adding..." : "Add Directory"}
+              {saving ? "Aggiunta..." : "Aggiungi directory"}
             </button>
             <button
               type="button"
               onClick={onClose}
               className="text-sm px-4 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
             >
-              Cancel
+              Annulla
             </button>
           </div>
         </form>
@@ -176,19 +176,19 @@ export default function DirectoriesPage() {
             <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
               {listed}
             </span>{" "}
-            listed
+            listati
           </span>
           <span>
             <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
               {total - listed}
             </span>{" "}
-            pending
+            in attesa
           </span>
           <span>
             <span className="font-medium text-[#171717] dark:text-[#E5E5E5]">
               {total}
             </span>{" "}
-            total
+            totali
           </span>
         </div>
         <button
@@ -196,7 +196,7 @@ export default function DirectoriesPage() {
           className="flex items-center gap-1.5 text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
         >
           <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Add Directory
+          Aggiungi directory
         </button>
       </div>
 
@@ -207,11 +207,11 @@ export default function DirectoriesPage() {
               {[
                 "Directory",
                 "URL",
-                "Status",
-                "Submitted",
-                "Listed",
+                "Stato",
+                "Inviato",
+                "Listato",
                 "Backlink",
-                "Notes",
+                "Note",
               ].map((h) => (
                 <th
                   key={h}
@@ -298,7 +298,7 @@ export default function DirectoriesPage() {
                   colSpan={7}
                   className="py-8 text-center text-sm text-[#A3A3A3]"
                 >
-                  No directories yet
+                  Nessuna directory ancora
                 </td>
               </tr>
             )}

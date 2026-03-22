@@ -122,7 +122,7 @@ function QuickActionButton({ icon, label, onClick, loading, result, href }: Quic
         )}
       </div>
       <div className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
-        {loading ? "Running..." : label}
+        {loading ? "In corso..." : label}
       </div>
       {result && (
         <div className="text-[10px] text-[#737373]">{result}</div>
@@ -204,9 +204,9 @@ export default function GrowthOverviewPage() {
     try {
       const res = await fetch("/api/growth/reddit/scrape", { method: "POST" });
       const data = await res.json() as { scraped?: number; errors?: number };
-      setRedditResult(`${data.scraped ?? 0} new posts scraped`);
+      setRedditResult(`${data.scraped ?? 0} nuovi post trovati`);
     } catch {
-      setRedditResult("Error");
+      setRedditResult("Errore");
     } finally {
       setRedditLoading(false);
     }
@@ -218,9 +218,9 @@ export default function GrowthOverviewPage() {
     try {
       const res = await fetch("/api/growth/youtube/scrape", { method: "POST" });
       const data = await res.json() as { scraped?: number; errors?: number };
-      setYoutubeResult(`${data.scraped ?? 0} new insights`);
+      setYoutubeResult(`${data.scraped ?? 0} nuovi insight`);
     } catch {
-      setYoutubeResult("Error");
+      setYoutubeResult("Errore");
     } finally {
       setYoutubeLoading(false);
     }
@@ -235,10 +235,10 @@ export default function GrowthOverviewPage() {
       if (data.error) {
         setStrategyResult(`Error: ${data.error}`);
       } else {
-        setStrategyResult("Review generated — check Strategy tab");
+        setStrategyResult("Analisi generata — vedi tab Strategia");
       }
     } catch {
-      setStrategyResult("Error");
+      setStrategyResult("Errore");
     } finally {
       setStrategyLoading(false);
     }
@@ -261,86 +261,86 @@ export default function GrowthOverviewPage() {
 
   if (!stats) {
     return (
-      <p className="text-sm text-[#737373]">Failed to load stats.</p>
+      <p className="text-sm text-[#737373]">Impossibile caricare le statistiche.</p>
     );
   }
 
-  const outreachPipeline = `${stats.outreach.sent} sent · ${stats.outreach.replied} replied · ${stats.outreach.linked} linked`;
-  const contentSummary = `${stats.content.idea} ideas · ${stats.content.writing} writing · ${stats.content.published} published`;
-  const dirSummary = `${stats.directories.listed} listed of ${stats.directories.total} total`;
+  const outreachPipeline = `${stats.outreach.sent} inviate · ${stats.outreach.replied} risposte · ${stats.outreach.linked} backlink`;
+  const contentSummary = `${stats.content.idea} idee · ${stats.content.writing} in scrittura · ${stats.content.published} pubblicati`;
+  const dirSummary = `${stats.directories.listed} listati su ${stats.directories.total} totali`;
 
   return (
     <div className="space-y-8">
       <p className="text-sm text-[#737373]">
-        Your SEO growth pipeline at a glance.
+        La tua pipeline di crescita SEO in sintesi.
       </p>
 
       {/* Main stats grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <StatCard
           icon={<MessageSquare className="h-4 w-4" strokeWidth={1.5} />}
-          label="Reddit Posts Today"
+          label="Post Reddit oggi"
           value={stats.reddit.today}
-          sub={`${stats.reddit.toComment} to comment · ${stats.reddit.commented} done`}
+          sub={`${stats.reddit.toComment} da commentare · ${stats.reddit.commented} fatti`}
         />
         <StatCard
           icon={<Mail className="h-4 w-4" strokeWidth={1.5} />}
-          label="Outreach Pipeline"
+          label="Pipeline Outreach"
           value={stats.outreach.toSend}
-          sub={`to send · ${outreachPipeline}`}
+          sub={`da inviare · ${outreachPipeline}`}
         />
         <StatCard
           icon={<FileText className="h-4 w-4" strokeWidth={1.5} />}
-          label="Content Items"
+          label="Contenuti"
           value={stats.content.idea + stats.content.writing + stats.content.published + stats.content.needsUpdate}
           sub={contentSummary}
         />
         <StatCard
           icon={<Youtube className="h-4 w-4" strokeWidth={1.5} />}
-          label="YouTube Insights"
+          label="Insight YouTube"
           value={stats.youtube.total}
-          sub="total insights collected"
+          sub="insight totali raccolti"
         />
         <StatCard
           icon={<FolderOpen className="h-4 w-4" strokeWidth={1.5} />}
-          label="Directories"
+          label="Directory"
           value={dirSummary}
-          sub="directory submissions"
+          sub="invii alle directory"
         />
         <StatCard
           icon={<Calendar className="h-4 w-4" strokeWidth={1.5} />}
-          label="Days Active"
+          label="Giorni attivi"
           value={stats.daysActive}
-          sub="since first outreach entry"
+          sub="dal primo invio outreach"
         />
         {revenue !== null ? (
           <StatCard
             icon={<DollarSign className="h-4 w-4" strokeWidth={1.5} />}
             label="MRR"
             value={`€${(revenue.mrr / 100).toFixed(0)}`}
-            sub={`${revenue.activeSubscriptions} active Pro subscribers`}
+            sub={`${revenue.activeSubscriptions} abbonati Pro attivi`}
           />
         ) : (
           <StatCard
             icon={<DollarSign className="h-4 w-4" strokeWidth={1.5} />}
             label="MRR"
             value="€0"
-            sub="No Pro subscribers yet"
+            sub="Nessun abbonato Pro ancora"
           />
         )}
         {brand !== null ? (
           <StatCard
             icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
-            label="Brand Visibility"
+            label="Visibilità brand"
             value={`${brand.visibilityScore}%`}
-            sub={`${brand.foundCount}/${brand.totalCount} target queries`}
+            sub={`${brand.foundCount}/${brand.totalCount} query target`}
           />
         ) : (
           <StatCard
             icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
-            label="Brand Visibility"
+            label="Visibilità brand"
             value="—"
-            sub="Run a brand check to see data"
+            sub="Esegui un controllo brand per vedere i dati"
           />
         )}
       </div>
@@ -349,27 +349,27 @@ export default function GrowthOverviewPage() {
       {gscWeek && (
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-3">
-            SEO — This Week
+            SEO — Questa settimana
           </h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard
               icon={<Search className="h-4 w-4" strokeWidth={1.5} />}
-              label="Impressions (7d)"
+              label="Impressioni (7g)"
               value={Number(gscWeek.impressions).toLocaleString()}
             />
             <StatCard
               icon={<MousePointerClick className="h-4 w-4" strokeWidth={1.5} />}
-              label="Clicks (7d)"
+              label="Click (7g)"
               value={Number(gscWeek.clicks).toLocaleString()}
             />
             <StatCard
               icon={<Search className="h-4 w-4" strokeWidth={1.5} />}
-              label="Avg CTR (7d)"
+              label="CTR medio (7g)"
               value={`${(Number(gscWeek.ctr) * 100).toFixed(1)}%`}
             />
             <StatCard
               icon={<Search className="h-4 w-4" strokeWidth={1.5} />}
-              label="Avg Position (7d)"
+              label="Posizione media (7g)"
               value={Number(gscWeek.position).toFixed(1)}
             />
           </div>
@@ -379,53 +379,53 @@ export default function GrowthOverviewPage() {
       {/* Quick Actions */}
       <div>
         <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A3A3A3] mb-3">
-          Quick Actions
+          Azioni rapide
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <QuickActionButton
             icon={<MessageSquare className="h-4 w-4" strokeWidth={1.5} />}
-            label="Scrape Reddit Now"
+            label="Cerca nuovi Reddit"
             onClick={scrapeReddit}
             loading={redditLoading}
             result={redditResult}
           />
           <QuickActionButton
             icon={<Youtube className="h-4 w-4" strokeWidth={1.5} />}
-            label="Scrape YouTube Now"
+            label="Cerca nuovi YouTube"
             onClick={scrapeYoutube}
             loading={youtubeLoading}
             result={youtubeResult}
           />
           <QuickActionButton
             icon={<Sparkles className="h-4 w-4" strokeWidth={1.5} />}
-            label="Generate Strategy Review"
+            label="Genera analisi strategica"
             onClick={generateStrategy}
             loading={strategyLoading}
             result={strategyResult}
           />
           <QuickActionButton
             icon={<ExternalLink className="h-4 w-4" strokeWidth={1.5} />}
-            label="Check PageSpeed"
+            label="Controlla PageSpeed"
             onClick={() => {}}
             href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fwww.sammapix.com&form_factor=mobile"
           />
           <QuickActionButton
             icon={<Monitor className="h-4 w-4" strokeWidth={1.5} />}
-            label="Scrape Competitors"
+            label="Scansiona competitor"
             onClick={async () => {
               await fetch("/api/growth/competitors/scrape", { method: "POST" });
             }}
           />
           <QuickActionButton
             icon={<TrendingUp className="h-4 w-4" strokeWidth={1.5} />}
-            label="Check Brand Visibility"
+            label="Controlla visibilità brand"
             onClick={async () => {
               await fetch("/api/growth/brand/check", { method: "POST" });
             }}
           />
           <QuickActionButton
             icon={<Radar className="h-4 w-4" strokeWidth={1.5} />}
-            label="Scan Tool Radar"
+            label="Scansiona Radar"
             onClick={async () => {
               await fetch("/api/growth/radar/scrape", { method: "POST" });
             }}

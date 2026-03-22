@@ -82,12 +82,12 @@ function InsightCard({ insight }: { insight: YoutubeInsight }) {
               {expanded ? (
                 <>
                   <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
-                  Show less
+                  Mostra meno
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-3 w-3" strokeWidth={1.5} />
-                  Read more
+                  Leggi tutto
                 </>
               )}
             </button>
@@ -96,7 +96,7 @@ function InsightCard({ insight }: { insight: YoutubeInsight }) {
       )}
 
       {!insight.transcriptSummary && (
-        <p className="text-xs text-[#A3A3A3] italic">No summary available</p>
+        <p className="text-xs text-[#A3A3A3] italic">Nessun riassunto disponibile</p>
       )}
 
       {/* Tags */}
@@ -115,7 +115,7 @@ function InsightCard({ insight }: { insight: YoutubeInsight }) {
 
       {/* Date */}
       <div className="text-[10px] text-[#A3A3A3]">
-        Scraped{" "}
+        Raccolto il{" "}
         {insight.scrapedAt
           ? new Date(insight.scrapedAt).toLocaleDateString()
           : "—"}
@@ -187,11 +187,11 @@ export default function YouTubePage() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search insights..."
+          placeholder="Cerca insight..."
           className="flex-1 min-w-[200px] max-w-xs text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] focus:outline-none focus:border-[#6366F1]"
         />
         <span className="text-sm text-[#A3A3A3]">
-          {filtered.length} of {insights.length} insights
+          {filtered.length} di {insights.length} insight
         </span>
         <button
           onClick={handleScrape}
@@ -202,7 +202,7 @@ export default function YouTubePage() {
             className={`h-3.5 w-3.5 ${scraping ? "animate-spin" : ""}`}
             strokeWidth={1.5}
           />
-          {scraping ? "Scraping..." : "Scrape New Videos"}
+          {scraping ? "Cercando..." : "Cerca nuovi video"}
         </button>
       </div>
 
@@ -218,8 +218,8 @@ export default function YouTubePage() {
       ) : filtered.length === 0 ? (
         <div className="text-center py-16 text-sm text-[#A3A3A3]">
           {search
-            ? "No insights match your search"
-            : "No YouTube insights yet. Click Scrape New Videos to start."}
+            ? "Nessun insight corrisponde alla ricerca"
+            : "Nessun insight YouTube ancora. Clicca Cerca nuovi video per iniziare."}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

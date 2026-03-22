@@ -71,7 +71,7 @@ export default function BrandPage() {
     setCheckResult(null);
     try {
       await fetch("/api/growth/brand/check", { method: "POST" });
-      setCheckResult("Checking in background...");
+      setCheckResult("Controllo in corso...");
       let attempts = 0;
       const poll = setInterval(async () => {
         attempts++;
@@ -79,14 +79,14 @@ export default function BrandPage() {
         if (attempts >= 12) {
           clearInterval(poll);
           setChecking(false);
-          setCheckResult("Check complete");
+          setCheckResult("Controllo completato");
         }
       }, 10000);
       setTimeout(() => fetchMentions(), 5000);
-      setTimeout(() => { clearInterval(poll); setChecking(false); setCheckResult("Check complete"); }, 120000);
+      setTimeout(() => { clearInterval(poll); setChecking(false); setCheckResult("Controllo completato"); }, 120000);
     } catch (e) {
       console.error(e);
-      setCheckResult("Error occurred");
+      setCheckResult("Errore");
       setChecking(false);
     }
   }
@@ -115,17 +115,17 @@ export default function BrandPage() {
     previousCheck.length === 0
       ? null
       : foundCount > prevFoundCount
-      ? `Up from ${prevFoundCount}/${totalCount} to ${foundCount}/${totalCount} queries`
+      ? `Salito da ${prevFoundCount}/${totalCount} a ${foundCount}/${totalCount} query`
       : foundCount < prevFoundCount
-      ? `Down from ${prevFoundCount}/${totalCount} to ${foundCount}/${totalCount} queries`
-      : `Stable at ${foundCount}/${totalCount} queries`;
+      ? `Sceso da ${prevFoundCount}/${totalCount} a ${foundCount}/${totalCount} query`
+      : `Stabile a ${foundCount}/${totalCount} query`;
 
   return (
     <div className="space-y-6">
       {/* Header bar */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <p className="text-sm text-[#737373]">
-          Track SammaPix visibility across key Google searches.
+          Monitora la visibilità di SammaPix nelle ricerche Google chiave.
         </p>
         <div className="flex items-center gap-2 flex-wrap">
           {checkResult && (
@@ -140,7 +140,7 @@ export default function BrandPage() {
               className={`h-3.5 w-3.5 ${checking ? "animate-spin" : ""}`}
               strokeWidth={1.5}
             />
-            {checking ? "Checking..." : "Check Now"}
+            {checking ? "Controllo..." : "Controlla ora"}
           </button>
         </div>
       </div>
@@ -154,11 +154,11 @@ export default function BrandPage() {
           <div className="text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">
             {mentions.length === 0 ? "—" : `${visibilityScore}%`}
           </div>
-          <div className="text-sm text-[#737373]">Brand Visibility Score</div>
+          <div className="text-sm text-[#737373]">Punteggio visibilità brand</div>
           <div className="text-xs text-[#A3A3A3] mt-1">
             {mentions.length === 0
-              ? "No data yet — click Check Now"
-              : `${foundCount} of ${totalCount} target queries`}
+              ? "Nessun dato — clicca Controlla ora"
+              : `${foundCount} di ${totalCount} query target`}
           </div>
           {trendText && (
             <div className="text-xs text-[#6366F1] mt-2">{trendText}</div>
@@ -172,8 +172,8 @@ export default function BrandPage() {
           <div className="text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">
             {foundCount}
           </div>
-          <div className="text-sm text-[#737373]">Queries Where Found</div>
-          <div className="text-xs text-[#A3A3A3] mt-1">out of {totalCount} tracked</div>
+          <div className="text-sm text-[#737373]">Query dove presente</div>
+          <div className="text-xs text-[#A3A3A3] mt-1">su {totalCount} monitorate</div>
         </div>
 
         <div className="bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
@@ -183,8 +183,8 @@ export default function BrandPage() {
           <div className="text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">
             {totalCount - foundCount}
           </div>
-          <div className="text-sm text-[#737373]">Queries Not Ranking</div>
-          <div className="text-xs text-[#A3A3A3] mt-1">opportunities to target</div>
+          <div className="text-sm text-[#737373]">Query non posizionate</div>
+          <div className="text-xs text-[#A3A3A3] mt-1">opportunità da sfruttare</div>
         </div>
       </div>
 
@@ -208,16 +208,16 @@ export default function BrandPage() {
                     Query
                   </th>
                   <th className="text-left text-xs font-semibold text-[#737373] uppercase tracking-wider px-4 py-3">
-                    Found?
+                    Trovato?
                   </th>
                   <th className="text-left text-xs font-semibold text-[#737373] uppercase tracking-wider px-4 py-3">
-                    Position
+                    Posizione
                   </th>
                   <th className="text-left text-xs font-semibold text-[#737373] uppercase tracking-wider px-4 py-3 hidden md:table-cell">
-                    Competitors Found
+                    Competitor trovati
                   </th>
                   <th className="text-left text-xs font-semibold text-[#737373] uppercase tracking-wider px-4 py-3 hidden lg:table-cell">
-                    Last Checked
+                    Ultimo controllo
                   </th>
                 </tr>
               </thead>
@@ -246,7 +246,7 @@ export default function BrandPage() {
                         ) : mention.sammapixFound ? (
                           <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-400">
                             <CheckCircle className="h-3.5 w-3.5" strokeWidth={2} />
-                            <span className="text-xs font-medium">Yes</span>
+                            <span className="text-xs font-medium">Sì</span>
                           </span>
                         ) : (
                           <span className="inline-flex items-center gap-1 text-[#A3A3A3]">
