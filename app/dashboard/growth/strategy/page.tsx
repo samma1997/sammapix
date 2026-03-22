@@ -17,28 +17,15 @@ import type { StrategyReview } from "@/lib/db/schema";
 import ReactMarkdown from "react-markdown";
 
 function SuggestionItem({ index, text }: { index: number; text: string }) {
-  const [status, setStatus] = useState<"idle" | "resolving" | "done" | "error">("idle");
-  const [result, setResult] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
-  async function handleResolve() {
-    setStatus("resolving");
+  async function handleCopy() {
     try {
-      const res = await fetch("/api/growth/strategy/resolve", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ suggestion: text }),
-      });
-      const data = await res.json() as { success?: boolean; created?: string[]; count?: number; error?: string };
-      if (data.success) {
-        setStatus("done");
-        setResult(`${data.count} elementi creati: ${data.created?.join(", ")}`);
-      } else {
-        setStatus("error");
-        setResult(data.error || "Errore");
-      }
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      setStatus("error");
-      setResult("Errore di rete");
+      // fallback
     }
   }
 
@@ -48,47 +35,23 @@ function SuggestionItem({ index, text }: { index: number; text: string }) {
         <span className="text-[10px] font-semibold text-[#6366F1] bg-[#EEF2FF] dark:bg-[#6366F1]/10 w-5 h-5 rounded-[4px] flex items-center justify-center shrink-0 mt-0.5">
           {index + 1}
         </span>
-        <div className="flex-1 min-w-0">
-          <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed">
-            {text}
-          </p>
-          {result && (
-            <p className={`text-xs mt-2 ${status === "done" ? "text-green-600" : "text-red-500"}`}>
-              {result}
-            </p>
+        <p className="flex-1 text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed min-w-0">
+          {text}
+        </p>
+        <button
+          onClick={handleCopy}
+          className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-[4px] transition-colors whitespace-nowrap shrink-0 ${
+            copied
+              ? "bg-green-500 text-white"
+              : "border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]"
+          }`}
+        >
+          {copied ? (
+            <><Check className="h-3 w-3" strokeWidth={2} /> Copiato</>
+          ) : (
+            <><Wand2 className="h-3 w-3" strokeWidth={1.5} /> Copia</>
           )}
-        </div>
-        <div className="shrink-0">
-          {status === "idle" && (
-            <button
-              onClick={handleResolve}
-              className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#6366F1] text-white rounded-[4px] hover:bg-[#5558E6] transition-colors whitespace-nowrap"
-            >
-              <Wand2 className="h-3 w-3" strokeWidth={1.5} />
-              Risolvi
-            </button>
-          )}
-          {status === "resolving" && (
-            <span className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#6366F1]/70 text-white rounded-[4px]">
-              <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
-              Esecuzione...
-            </span>
-          )}
-          {status === "done" && (
-            <span className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-green-500 text-white rounded-[4px]">
-              <Check className="h-3 w-3" strokeWidth={2} />
-              Fatto
-            </span>
-          )}
-          {status === "error" && (
-            <button
-              onClick={handleResolve}
-              className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-red-500 text-white rounded-[4px] hover:bg-red-600 transition-colors"
-            >
-              Riprova
-            </button>
-          )}
-        </div>
+        </button>
       </div>
     </li>
   );
