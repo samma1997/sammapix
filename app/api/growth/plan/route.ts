@@ -347,6 +347,32 @@ export async function GET() {
       },
     };
 
+    // ── Weekly blog posts: also count blog slug dirs modified this week ─────
+    let weeklyBlogPosts = Number(blogThisWeekResult[0]?.count ?? 0);
+    try {
+      const blogDir = path.join(process.cwd(), "app", "blog");
+      const entries = fs.readdirSync(blogDir, { withFileTypes: true });
+      let blogThisWeekDisk = 0;
+      for (const entry of entries) {
+        if (
+          !entry.isDirectory() ||
+          entry.name.startsWith("_") ||
+          entry.name.startsWith(".")
+        )
+          continue;
+        const pagePath = path.join(blogDir, entry.name, "page.tsx");
+        try {
+          const stat = fs.statSync(pagePath);
+          if (stat.mtime >= weekMonday) blogThisWeekDisk++;
+        } catch {
+          /* skip missing page.tsx */
+        }
+      }
+      weeklyBlogPosts = Math.max(weeklyBlogPosts, blogThisWeekDisk);
+    } catch {
+      /* fs unavailable — keep DB count */
+    }
+
     // ── Weekly checklist ────────────────────────────────────────────────────
     const weeklyChecklist = {
       redditComments: {
@@ -354,7 +380,7 @@ export async function GET() {
         target: 25,
       },
       blogPosts: {
-        done: Number(blogThisWeekResult[0]?.count ?? 0),
+        done: weeklyBlogPosts,
         target: 2,
       },
       outreachEmails: {

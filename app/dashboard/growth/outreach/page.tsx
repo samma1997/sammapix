@@ -501,8 +501,53 @@ export default function OutreachPage() {
     );
   }
 
+  // ── Funnel stats ─────────────────────────────────────────────────────────
+  const funnelSent = targets.filter((t) => t.sentAt != null).length;
+  const funnelReplied = targets.filter(
+    (t) => t.status === "replied" || t.status === "linked"
+  ).length;
+  const funnelLinked = targets.filter((t) => t.status === "linked").length;
+  const funnelDirectories = directories.filter(
+    (d) => d.status === "listed"
+  ).length;
+
   return (
     <div className="space-y-8">
+      {/* Page header */}
+      <div className="space-y-3">
+        <div>
+          <h1 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">
+            Link Building
+          </h1>
+          <p className="mt-1 text-xs text-[#737373] dark:text-[#A3A3A3] max-w-2xl">
+            Gestisci il tuo funnel di link building: trova siti target &rarr; invia email &rarr; ottieni backlink. Le directory sono un altro canale per ottenere link.
+          </p>
+        </div>
+
+        {/* Mini funnel summary */}
+        <div className="flex flex-wrap items-center gap-2 text-[11px] py-2 px-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-[#FAFAFA] dark:bg-[#252525]">
+          <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
+            {funnelSent}
+          </span>
+          <span className="text-[#A3A3A3]">email inviate</span>
+          <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
+          <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
+            {funnelReplied}
+          </span>
+          <span className="text-[#A3A3A3]">risposte</span>
+          <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
+          <span className="text-green-600 dark:text-green-400 font-semibold tabular-nums">
+            {funnelLinked}
+          </span>
+          <span className="text-[#A3A3A3]">backlink ottenuti</span>
+          <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
+          <span className="text-[#6366F1] font-semibold tabular-nums">
+            {funnelDirectories}
+          </span>
+          <span className="text-[#A3A3A3]">directory listate</span>
+        </div>
+      </div>
+
       {/* Outreach Targets */}
       <div>
         <div className="flex items-center justify-between mb-4">

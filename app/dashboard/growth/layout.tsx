@@ -3,19 +3,11 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  LayoutDashboard,
   Search,
   MessageSquare,
-  Mail,
+  Link as LinkIcon,
   FileText,
-  Youtube,
-  Swords,
-  Eye,
-  DollarSign,
-  Radar,
-  FolderOpen,
-  Activity,
-  Brain,
+  Sparkles,
   Target,
   LogOut,
   Menu,
@@ -24,20 +16,12 @@ import {
 import { useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Panoramica", href: "/dashboard/growth", icon: LayoutDashboard },
   { label: "Piano", href: "/dashboard/growth/plan", icon: Target, accent: true },
   { label: "SEO", href: "/dashboard/growth/seo", icon: Search },
   { label: "Reddit", href: "/dashboard/growth/reddit", icon: MessageSquare },
-  { label: "Outreach", href: "/dashboard/growth/outreach", icon: Mail },
+  { label: "Link Building", href: "/dashboard/growth/outreach", icon: LinkIcon },
   { label: "Contenuti", href: "/dashboard/growth/content", icon: FileText },
-  { label: "YouTube", href: "/dashboard/growth/youtube", icon: Youtube },
-  { label: "Competitor", href: "/dashboard/growth/competitors", icon: Swords },
-  { label: "Brand", href: "/dashboard/growth/brand", icon: Eye },
-  { label: "Ricavi", href: "/dashboard/growth/revenue", icon: DollarSign },
-  { label: "Radar", href: "/dashboard/growth/radar", icon: Radar },
-  { label: "Directory", href: "/dashboard/growth/directories", icon: FolderOpen },
-  { label: "Analisi", href: "/dashboard/growth/analytics", icon: Activity },
-  { label: "Strategia", href: "/dashboard/growth/strategy", icon: Brain },
+  { label: "Strategia", href: "/dashboard/growth/strategy", icon: Sparkles },
 ];
 
 export default function GrowthLayout({
@@ -93,10 +77,7 @@ export default function GrowthLayout({
         {/* Nav items */}
         <nav className="flex-1 overflow-y-auto py-2 px-2">
           {NAV_ITEMS.map((item) => {
-            const isActive =
-              item.href === "/dashboard/growth"
-                ? pathname === "/dashboard/growth"
-                : pathname.startsWith(item.href);
+            const isActive = pathname.startsWith(item.href);
             const Icon = item.icon;
             const isAccent = "accent" in item && item.accent;
             return (
