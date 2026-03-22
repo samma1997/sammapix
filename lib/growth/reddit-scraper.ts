@@ -101,12 +101,26 @@ export async function generateRedditDraftComment(
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-  const prompt = `You are a helpful web developer on Reddit. Write a 3-5 sentence technical answer to this post. Be genuinely helpful, include specific numbers and technical details. Do NOT mention SammaPix. Do NOT sound corporate or use AI phrases like "Great question!" or "Absolutely!".
+  const prompt = `Write a Reddit comment reply to this post. You're a regular person who happens to know about image optimization.
+
+RULES FOR SOUNDING HUMAN:
+- Write like a real Reddit user, not a corporate bot
+- Use lowercase casually, occasional typos-style shortcuts are ok (e.g. "tbh", "imo", "fwiw")
+- Start with something casual, NEVER "Great question!" or "Absolutely!" or "I'd recommend"
+- Vary sentence length. Some short. Some longer with actual detail.
+- Include a personal touch like "I ran into this same issue" or "been using X for a while now"
+- Be specific with numbers/details (e.g. "saved about 40% on a batch of 200 product photos")
+- It's OK to be slightly opinionated ("honestly X is overkill for most people")
+- Don't use bullet points or numbered lists — write like a normal comment
+- 2-4 sentences max, keep it natural
+- Do NOT mention SammaPix at all
+- Do NOT use emojis
+- Do NOT start with "Hey" or any greeting
 
 Post title: "${postTitle}"
 Post text: "${postText.slice(0, 500)}"
 
-Write only the comment text, no preamble.`;
+Write ONLY the comment, nothing else.`;
 
   try {
     const result = await model.generateContent(prompt);
@@ -126,12 +140,21 @@ export async function generateHNDraftComment(
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-  const prompt = `You are a knowledgeable developer on Hacker News. Write a short, technical reply to this post. HN style: concise, no fluff, no self-promotion, genuinely insightful. 2-4 sentences max. Do NOT mention SammaPix. Do NOT use marketing language.
+  const prompt = `Write a Hacker News comment. You're a developer who's dealt with this topic before.
+
+RULES:
+- HN style: dry, technical, no fluff, slightly opinionated
+- No greetings, no "Great post", no marketing speak
+- Reference specific tools, benchmarks, or personal experience
+- 2-3 sentences, dense with info
+- Lowercase is fine, be terse
+- Do NOT mention SammaPix
+- Do NOT use emojis or bullet points
 
 Post title: "${postTitle}"
 Post text: "${postText.slice(0, 500)}"
 
-Write only the comment text.`;
+Write ONLY the comment.`;
 
   try {
     const result = await model.generateContent(prompt);
@@ -151,12 +174,21 @@ export async function generateDevToDraftComment(
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-  const prompt = `You are a friendly developer on Dev.to. Write a genuine, helpful comment on this article. Be friendly and tutorial-style. 2-3 sentences. Do NOT mention SammaPix. Focus on adding value to the discussion.
+  const prompt = `Write a Dev.to comment on this article. You're a developer who found the article useful.
+
+RULES:
+- Friendly but not fake, like a real dev community member
+- Reference something specific from the article, add your own take
+- Maybe share a quick personal experience or a related tip
+- 2-3 sentences, conversational tone
+- No "Great article!" openers, no corporate speak
+- Do NOT mention SammaPix
+- Do NOT use emojis
 
 Article title: "${articleTitle}"
 Description: "${description.slice(0, 300)}"
 
-Write only the comment text.`;
+Write ONLY the comment.`;
 
   try {
     const result = await model.generateContent(prompt);
