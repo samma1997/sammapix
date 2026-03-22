@@ -9,25 +9,51 @@ import {
   MessageSquare,
   Mail,
   Link,
-  Wand2,
   Check,
-  Loader2,
+  Copy,
 } from "lucide-react";
 import type { StrategyReview } from "@/lib/db/schema";
 import ReactMarkdown from "react-markdown";
 
-function SuggestionItem({ index, text }: { index: number; text: string }) {
+function CopyAllBanner({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // fallback
-    }
+      setTimeout(() => setCopied(false), 2500);
+    } catch { /* */ }
   }
+
+  return (
+    <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 py-2 bg-[#FAFAFA] dark:bg-[#252525] flex items-center justify-between">
+      <span className="text-[11px] text-[#A3A3A3]">
+        Copia l&apos;analisi e incollala in Claude Code per eseguire le azioni
+      </span>
+      <button
+        onClick={handleCopy}
+        className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-[4px] transition-colors ${
+          copied
+            ? "bg-green-500 text-white"
+            : "bg-[#6366F1] text-white hover:bg-[#5558E6]"
+        }`}
+      >
+        {copied ? (
+          <><Check className="h-3 w-3" strokeWidth={2} /> Copiato!</>
+        ) : (
+          <><Copy className="h-3 w-3" strokeWidth={1.5} /> Copia tutto</>
+        )}
+      </button>
+    </div>
+  );
+}
+
+function SuggestionItem({ index, text }: { index: number; text: string }) {
+  // Strip markdown bold markers for display, keep clean text
+  const cleanText = text.replace(/\*\*/g, "");
+  // Extract bold title if present (e.g. "**Titolo:** descrizione")
+  const boldMatch = text.match(/^\*\*(.+?)\*\*:?\s*(.*)/);
 
   return (
     <li className="bg-[#FAFAFA] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-3">
@@ -35,23 +61,16 @@ function SuggestionItem({ index, text }: { index: number; text: string }) {
         <span className="text-[10px] font-semibold text-[#6366F1] bg-[#EEF2FF] dark:bg-[#6366F1]/10 w-5 h-5 rounded-[4px] flex items-center justify-center shrink-0 mt-0.5">
           {index + 1}
         </span>
-        <p className="flex-1 text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed min-w-0">
-          {text}
-        </p>
-        <button
-          onClick={handleCopy}
-          className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-[4px] transition-colors whitespace-nowrap shrink-0 ${
-            copied
-              ? "bg-green-500 text-white"
-              : "border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]"
-          }`}
-        >
-          {copied ? (
-            <><Check className="h-3 w-3" strokeWidth={2} /> Copiato</>
+        <div className="flex-1 text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed min-w-0">
+          {boldMatch ? (
+            <>
+              <span className="font-semibold text-[#171717] dark:text-[#E5E5E5]">{boldMatch[1]}</span>
+              {boldMatch[2] && <>{boldMatch[2].startsWith(":") ? "" : ": "}{boldMatch[2].replace(/^:\s*/, "")}</>}
+            </>
           ) : (
-            <><Wand2 className="h-3 w-3" strokeWidth={1.5} /> Copia</>
+            cleanText
           )}
-        </button>
+        </div>
       </div>
     </li>
   );
@@ -260,6 +279,9 @@ export default function StrategyPage() {
                 </button>
 
                 {/* Expanded content */}
+                {isExpanded && (
+                  <CopyAllBanner text={cleanAnalysis(review.analysisText)} />
+                )}
                 {isExpanded && (
                   <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] p-4 space-y-4">
                     {/* Analysis */}
