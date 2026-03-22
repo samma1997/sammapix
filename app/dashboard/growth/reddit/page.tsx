@@ -380,12 +380,29 @@ export default function RedditPage() {
   async function handleScrape() {
     setScraping(true);
     try {
-      const res = await fetch("/api/growth/reddit/scrape", { method: "POST" });
-      const data = await res.json();
-      if (data.success) await fetchPosts();
+      await fetch("/api/growth/reddit/scrape", { method: "POST" });
+      // Poll for new data every 10s for up to 2 min
+      const startCount = posts.length;
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
+        await fetchPosts();
+        if (attempts >= 12) {
+          clearInterval(poll);
+          setScraping(false);
+        }
+      }, 10000);
+      // Also refresh after 5s for quick results
+      setTimeout(async () => {
+        await fetchPosts();
+      }, 5000);
+      // Stop spinner after max time
+      setTimeout(() => {
+        clearInterval(poll);
+        setScraping(false);
+      }, 120000);
     } catch (e) {
       console.error(e);
-    } finally {
       setScraping(false);
     }
   }

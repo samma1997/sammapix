@@ -254,18 +254,23 @@ export default function CompetitorsPage() {
     setScraping(true);
     setScrapeResult(null);
     try {
-      const res = await fetch("/api/growth/competitors/scrape", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (data.success) {
-        setScrapeResult(`Scraped ${data.scraped} · ${data.unchanged} unchanged · ${data.errors} errors`);
+      await fetch("/api/growth/competitors/scrape", { method: "POST" });
+      setScrapeResult("Scraping in background...");
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
         await fetchCompetitors();
-      }
+        if (attempts >= 12) {
+          clearInterval(poll);
+          setScraping(false);
+          setScrapeResult("Scrape complete");
+        }
+      }, 10000);
+      setTimeout(() => fetchCompetitors(), 5000);
+      setTimeout(() => { clearInterval(poll); setScraping(false); setScrapeResult("Scrape complete"); }, 120000);
     } catch (e) {
       console.error(e);
       setScrapeResult("Error occurred");
-    } finally {
       setScraping(false);
     }
   }

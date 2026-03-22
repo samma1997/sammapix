@@ -150,12 +150,20 @@ export default function YouTubePage() {
   async function handleScrape() {
     setScraping(true);
     try {
-      const res = await fetch("/api/growth/youtube/scrape", { method: "POST" });
-      const data = await res.json();
-      if (data.success) await fetchInsights();
+      await fetch("/api/growth/youtube/scrape", { method: "POST" });
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
+        await fetchInsights();
+        if (attempts >= 12) {
+          clearInterval(poll);
+          setScraping(false);
+        }
+      }, 10000);
+      setTimeout(() => fetchInsights(), 5000);
+      setTimeout(() => { clearInterval(poll); setScraping(false); }, 120000);
     } catch (e) {
       console.error(e);
-    } finally {
       setScraping(false);
     }
   }

@@ -142,18 +142,23 @@ export default function RadarPage() {
     setScraping(true);
     setScrapeResult(null);
     try {
-      const res = await fetch("/api/growth/radar/scrape", { method: "POST" });
-      const data = await res.json();
-      if (data.success) {
-        setScrapeResult(
-          `${data.scraped} new · ${data.skipped} skipped · ${data.errors} errors`
-        );
+      await fetch("/api/growth/radar/scrape", { method: "POST" });
+      setScrapeResult("Scanning in background...");
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
         await fetchItems();
-      }
+        if (attempts >= 12) {
+          clearInterval(poll);
+          setScraping(false);
+          setScrapeResult("Scan complete");
+        }
+      }, 10000);
+      setTimeout(() => fetchItems(), 5000);
+      setTimeout(() => { clearInterval(poll); setScraping(false); setScrapeResult("Scan complete"); }, 120000);
     } catch (e) {
       console.error(e);
       setScrapeResult("Error occurred");
-    } finally {
       setScraping(false);
     }
   }

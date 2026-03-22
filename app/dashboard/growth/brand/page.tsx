@@ -70,16 +70,23 @@ export default function BrandPage() {
     setChecking(true);
     setCheckResult(null);
     try {
-      const res = await fetch("/api/growth/brand/check", { method: "POST" });
-      const data = await res.json();
-      if (data.success) {
-        setCheckResult(`Checked ${data.checked} queries · Found in ${data.found}`);
+      await fetch("/api/growth/brand/check", { method: "POST" });
+      setCheckResult("Checking in background...");
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
         await fetchMentions();
-      }
+        if (attempts >= 12) {
+          clearInterval(poll);
+          setChecking(false);
+          setCheckResult("Check complete");
+        }
+      }, 10000);
+      setTimeout(() => fetchMentions(), 5000);
+      setTimeout(() => { clearInterval(poll); setChecking(false); setCheckResult("Check complete"); }, 120000);
     } catch (e) {
       console.error(e);
       setCheckResult("Error occurred");
-    } finally {
       setChecking(false);
     }
   }
