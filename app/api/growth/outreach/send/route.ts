@@ -53,7 +53,7 @@ Choose one of these formats:
 - "Re: [article title]"
 Keep it under 70 characters. Return ONLY the subject line, nothing else.`;
 
-  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   const [bodyRes, subjectRes] = await Promise.all([
     fetch(geminiUrl, {
@@ -75,14 +75,23 @@ Keep it under 70 characters. Return ONLY the subject line, nothing else.`;
   ]);
 
   if (!bodyRes.ok || !subjectRes.ok) {
-    const errText = await (bodyRes.ok ? subjectRes : bodyRes).text();
-    throw new Error(`Gemini API error: ${errText}`);
+    const failedRes = bodyRes.ok ? subjectRes : bodyRes;
+    const errText = await failedRes.text();
+    console.error(
+      `[generateEmailWithGemini] Gemini HTTP ${failedRes.status} — body: ${errText}`
+    );
+    throw new Error(`Gemini API error ${failedRes.status}: ${errText}`);
   }
 
   const [bodyData, subjectData] = await Promise.all([
-    bodyRes.json() as Promise<{ candidates?: { content?: { parts?: { text?: string }[] } }[] }>,
-    subjectRes.json() as Promise<{ candidates?: { content?: { parts?: { text?: string }[] } }[] }>,
+    bodyRes.json() as Promise<{ candidates?: { content?: { parts?: { text?: string }[] } }[]; promptFeedback?: unknown }>,
+    subjectRes.json() as Promise<{ candidates?: { content?: { parts?: { text?: string }[] } }[]; promptFeedback?: unknown }>,
   ]);
+
+  console.log(
+    "[generateEmailWithGemini] bodyData:",
+    JSON.stringify(bodyData, null, 2)
+  );
 
   const emailBody =
     bodyData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
@@ -91,6 +100,10 @@ Keep it under 70 characters. Return ONLY the subject line, nothing else.`;
     `Quick suggestion for your ${articleLabel} article`;
 
   if (!emailBody) {
+    console.error(
+      "[generateEmailWithGemini] Empty body — full response:",
+      JSON.stringify(bodyData)
+    );
     throw new Error("Gemini returned an empty email body");
   }
 
@@ -193,11 +206,24 @@ export async function POST(req: NextRequest) {
         target.contactName
       ));
     } catch (err) {
-      console.error("[growth/outreach/send] Gemini error:", err);
-      return NextResponse.json(
-        { error: "Failed to generate email content", code: "AI_ERROR" },
-        { status: 502 }
+      console.error(
+        "[growth/outreach/send] Gemini failed, falling back to static template. Error:",
+        err instanceof Error ? err.message : String(err)
       );
+      const contactLabel = target.contactName ?? "there";
+      const articleLabel = target.articleTitle ?? "your article";
+      subject = "SammaPix \u2014 free browser-based image optimizer";
+      body = `Hi ${contactLabel},
+
+I came across your article \u201c${articleLabel}\u201d and thought SammaPix might be a useful addition.
+
+SammaPix is a free image optimization tool that works 100% in the browser \u2014 no file uploads, no accounts needed. It supports JPEG, PNG, WebP, HEIC, and AVIF with bulk processing.
+
+Would you consider adding it to your list?
+
+Best,
+Luca
+sammapix.com`;
     }
   }
 

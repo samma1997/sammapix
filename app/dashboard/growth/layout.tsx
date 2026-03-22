@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
   X,
+  BookOpen,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -22,6 +23,7 @@ const NAV_ITEMS = [
   { label: "Link Building", href: "/dashboard/growth/outreach", icon: LinkIcon },
   { label: "Contenuti", href: "/dashboard/growth/content", icon: FileText },
   { label: "Strategia", href: "/dashboard/growth/strategy", icon: Sparkles },
+  { label: "Guida", href: "/dashboard/growth/guida", icon: BookOpen },
 ];
 
 export default function GrowthLayout({
