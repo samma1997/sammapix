@@ -61,7 +61,7 @@ Keep it under 70 characters. Return ONLY the subject line, nothing else.`;
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: bodyPrompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 300 },
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
       }),
     }),
     fetch(geminiUrl, {
@@ -69,7 +69,7 @@ Keep it under 70 characters. Return ONLY the subject line, nothing else.`;
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: subjectPrompt }] }],
-        generationConfig: { temperature: 0.5, maxOutputTokens: 60 },
+        generationConfig: { temperature: 0.5, maxOutputTokens: 256 },
       }),
     }),
   ]);
