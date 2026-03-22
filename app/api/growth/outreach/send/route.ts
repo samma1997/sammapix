@@ -248,12 +248,15 @@ sammapix.com`;
   const followUpAt = new Date(now);
   followUpAt.setDate(followUpAt.getDate() + 7);
 
+  const emailLog = `📧 Email inviata il ${now.toLocaleDateString("it-IT")}\nA: ${target.contactEmail}\nOggetto: ${subject}\n\n${body}`;
+
   const [updated] = await db
     .update(growthOutreachTargets)
     .set({
       status: "sent",
       sentAt: now,
       followUpAt,
+      notes: target.notes ? `${target.notes}\n\n${emailLog}` : emailLog,
     })
     .where(eq(growthOutreachTargets.id, targetId))
     .returning();
