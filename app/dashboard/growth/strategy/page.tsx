@@ -9,9 +9,90 @@ import {
   MessageSquare,
   Mail,
   Link,
+  Wand2,
+  Check,
+  Loader2,
 } from "lucide-react";
 import type { StrategyReview } from "@/lib/db/schema";
 import ReactMarkdown from "react-markdown";
+
+function SuggestionItem({ index, text }: { index: number; text: string }) {
+  const [status, setStatus] = useState<"idle" | "resolving" | "done" | "error">("idle");
+  const [result, setResult] = useState<string | null>(null);
+
+  async function handleResolve() {
+    setStatus("resolving");
+    try {
+      const res = await fetch("/api/growth/strategy/resolve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ suggestion: text }),
+      });
+      const data = await res.json() as { success?: boolean; created?: string[]; count?: number; error?: string };
+      if (data.success) {
+        setStatus("done");
+        setResult(`${data.count} elementi creati: ${data.created?.join(", ")}`);
+      } else {
+        setStatus("error");
+        setResult(data.error || "Errore");
+      }
+    } catch {
+      setStatus("error");
+      setResult("Errore di rete");
+    }
+  }
+
+  return (
+    <li className="bg-[#FAFAFA] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-3">
+      <div className="flex items-start gap-2">
+        <span className="text-[10px] font-semibold text-[#6366F1] bg-[#EEF2FF] dark:bg-[#6366F1]/10 w-5 h-5 rounded-[4px] flex items-center justify-center shrink-0 mt-0.5">
+          {index + 1}
+        </span>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed">
+            {text}
+          </p>
+          {result && (
+            <p className={`text-xs mt-2 ${status === "done" ? "text-green-600" : "text-red-500"}`}>
+              {result}
+            </p>
+          )}
+        </div>
+        <div className="shrink-0">
+          {status === "idle" && (
+            <button
+              onClick={handleResolve}
+              className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#6366F1] text-white rounded-[4px] hover:bg-[#5558E6] transition-colors whitespace-nowrap"
+            >
+              <Wand2 className="h-3 w-3" strokeWidth={1.5} />
+              Risolvi
+            </button>
+          )}
+          {status === "resolving" && (
+            <span className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#6366F1]/70 text-white rounded-[4px]">
+              <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
+              Esecuzione...
+            </span>
+          )}
+          {status === "done" && (
+            <span className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-green-500 text-white rounded-[4px]">
+              <Check className="h-3 w-3" strokeWidth={2} />
+              Fatto
+            </span>
+          )}
+          {status === "error" && (
+            <button
+              onClick={handleResolve}
+              className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-red-500 text-white rounded-[4px] hover:bg-red-600 transition-colors"
+            >
+              Riprova
+            </button>
+          )}
+        </div>
+      </div>
+    </li>
+  );
+}
 
 export default function StrategyPage() {
   const [reviews, setReviews] = useState<StrategyReview[]>([]);
@@ -228,22 +309,15 @@ export default function StrategyPage() {
                       </div>
                     </div>
 
-                    {/* Suggestions */}
+                    {/* Suggestions with Resolve buttons */}
                     {suggestions.length > 0 && (
                       <div>
                         <h4 className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] mb-2">
                           Prossime 2 settimane — Azioni
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                           {suggestions.map((s, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <span className="text-[10px] font-semibold text-[#6366F1] bg-[#EEF2FF] dark:bg-[#6366F1]/10 w-4 h-4 rounded-[3px] flex items-center justify-center shrink-0 mt-0.5">
-                                {i + 1}
-                              </span>
-                              <span className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-                                {s}
-                              </span>
-                            </li>
+                            <SuggestionItem key={i} index={i} text={s} />
                           ))}
                         </ul>
                       </div>
