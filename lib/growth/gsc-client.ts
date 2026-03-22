@@ -24,7 +24,7 @@ interface SearchConsoleResponse {
   }>;
 }
 
-const SITE_URL = "https://www.sammapix.com";
+const SITE_URL = "sc-domain:sammapix.com";
 
 async function getAccessToken(): Promise<string | null> {
   const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
