@@ -177,51 +177,44 @@ ${youtubeSummaries || "- Nessun insight YouTube ancora"}
 
     const prompt = `Sei il growth strategist di SammaPix.com (tool gratuito per ottimizzare immagini, modello freemium $7/mese).
 
-Analizza TUTTI questi dati delle ultime 2 settimane e scrivi un report strategico IN ITALIANO:
+Analizza TUTTI questi dati delle ultime 2 settimane e scrivi un report strategico IN ITALIANO.
 
-1) COSA STA FUNZIONANDO — basato sui dati reali
-2) COSA NON FUNZIONA — problemi e gap
-3) INSIGHT DA YOUTUBE — se ci sono tattiche dai video SEO, spiega come applicarle a SammaPix
-4) 5 AZIONI CONCRETE per le prossime 2 settimane — ogni azione deve essere specifica e fattibile (es. "Scrivi un articolo blog su X", "Contatta Y per backlink", non generico)
+Il report deve avere queste sezioni in MARKDOWN:
 
-Sii diretto, pratico, senza fuffa. Usa markdown per formattare.
+## 1. Cosa sta funzionando
+(basato sui dati reali)
+
+## 2. Cosa non funziona
+(problemi e gap critici)
+
+## 3. Insight da YouTube
+(tattiche dai video SEO e come applicarle a SammaPix)
+
+## 4. Azioni concrete per le prossime 2 settimane
+1. Prima azione specifica
+2. Seconda azione specifica
+3. Terza azione specifica
+4. Quarta azione specifica
+5. Quinta azione specifica
+
+Sii diretto, pratico, senza fuffa. Ogni azione deve essere specifica e fattibile (es. "Scrivi un articolo blog su X", non generico).
+
+NON rispondere in JSON. Scrivi SOLO in markdown.
 
 Dati:
-${dataContext}
-
-Rispondi in questo formato JSON:
-{
-  "analysis": "Report completo in markdown qui",
-  "suggestions": [
-    "Azione specifica 1",
-    "Azione specifica 2",
-    "Azione specifica 3",
-    "Azione specifica 4",
-    "Azione specifica 5"
-  ]
-}`;
+${dataContext}`;
 
     const result = await model.generateContent(prompt);
-    const text = result.response.text();
+    const text = result.response.text().trim();
 
-    let analysisText = text;
-    let suggestions: string[] = [];
-
-    const match = text.match(/\{[\s\S]*\}/);
-    if (match) {
-      try {
-        const parsed = JSON.parse(match[0]) as {
-          analysis: string;
-          suggestions: string[];
-        };
-        analysisText = parsed.analysis ?? text;
-        suggestions = Array.isArray(parsed.suggestions)
-          ? parsed.suggestions
-          : [];
-      } catch {
-        // Use raw text
-      }
+    // Extract action items from the numbered list in section 4
+    const suggestions: string[] = [];
+    const actionLines = text.match(/^\d+\.\s+\*\*.*?\*\*.*$/gm) || text.match(/^\d+\.\s+.+$/gm) || [];
+    for (const line of actionLines.slice(0, 5)) {
+      suggestions.push(line.replace(/^\d+\.\s+/, "").trim());
     }
+
+    const analysisText = text;
 
     const [review] = await db
       .insert(growthStrategyReviews)
