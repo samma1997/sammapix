@@ -1,7 +1,8 @@
+import { checkGrowthAuth } from "@/lib/growth/auth";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth/options";
-import { ADMIN_EMAILS } from "@/lib/constants";
+
+
+
 import { db } from "@/lib/db";
 import { growthGscDaily } from "@/lib/db/schema";
 import { fetchGSCData } from "@/lib/growth/gsc-client";
@@ -9,13 +10,6 @@ import { and, eq } from "drizzle-orm";
 
 export const runtime = "nodejs";
 
-async function checkAdmin() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email || !ADMIN_EMAILS.includes(session.user.email)) {
-    return null;
-  }
-  return session;
-}
 
 function dateStr(daysAgo: number): string {
   const d = new Date();
@@ -24,8 +18,8 @@ function dateStr(daysAgo: number): string {
 }
 
 export async function POST() {
-  const session = await checkAdmin();
-  if (!session) {
+  const authorized = await checkGrowthAuth();
+  if (!authorized) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

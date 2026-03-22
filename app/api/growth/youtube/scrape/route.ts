@@ -1,23 +1,17 @@
+import { checkGrowthAuth } from "@/lib/growth/auth";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth/options";
-import { ADMIN_EMAILS } from "@/lib/constants";
+
+
+
 import { scrapeYouTubeInsights } from "@/lib/growth/youtube-scraper";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
-async function checkAdmin() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email || !ADMIN_EMAILS.includes(session.user.email)) {
-    return null;
-  }
-  return session;
-}
 
 export async function POST() {
-  const session = await checkAdmin();
-  if (!session) {
+  const authorized = await checkGrowthAuth();
+  if (!authorized) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
