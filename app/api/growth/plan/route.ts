@@ -187,13 +187,14 @@ export async function GET() {
         .from(growthYoutubeInsights)
         .where(gte(growthYoutubeInsights.scrapedAt, weekMonday)),
 
-      // GSC sync: any page-level (query IS NULL) records for this week
+      // GSC sync: any records imported (createdAt) this week
+      // Note: GSC data dates are always 2-3 days behind, so we check createdAt not date
       db
         .select({ count: sql<number>`count(*)` })
         .from(growthGscDaily)
         .where(
           and(
-            gte(growthGscDaily.date, weekMondayStr),
+            gte(growthGscDaily.createdAt, weekMonday),
             isNull(growthGscDaily.query)
           )
         ),
