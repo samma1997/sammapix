@@ -1,22 +1,26 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Headphones, Play, Pause } from "lucide-react";
 
 type TTSState = "idle" | "playing" | "paused" | "error";
 
 interface TextToSpeechProps {
   slug: string;
-  articleRef?: React.RefObject<HTMLElement | null>;
+  articleRef: React.RefObject<HTMLElement | null>;
 }
 
-export default function TextToSpeech({ slug }: TextToSpeechProps) {
+export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
   const [state, setState] = useState<TTSState>("idle");
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [exists, setExists] = useState<boolean | null>(null);
+  const elementsRef = useRef<Element[]>([]);
+  const charOffsetsRef = useRef<number[]>([]);
+  const totalCharsRef = useRef(0);
+  const prevHighlightRef = useRef<Element | null>(null);
 
   const audioUrl = `/blog/audio/${slug}.mp3`;
 
@@ -26,6 +30,66 @@ export default function TextToSpeech({ slug }: TextToSpeechProps) {
       .then((res) => setExists(res.ok))
       .catch(() => setExists(false));
   }, [audioUrl]);
+
+  // Build element-to-time mapping when audio starts
+  const buildElementMap = useCallback(() => {
+    if (!articleRef.current) return;
+    const els = Array.from(
+      articleRef.current.querySelectorAll("p, li, h2, h3"),
+    );
+    elementsRef.current = els;
+
+    // Build cumulative char offsets — each element's "start" position
+    let total = 0;
+    const offsets: number[] = [];
+    for (const el of els) {
+      offsets.push(total);
+      total += (el.textContent?.trim().length ?? 0) + 1; // +1 for period separator
+    }
+    charOffsetsRef.current = offsets;
+    totalCharsRef.current = total;
+  }, [articleRef]);
+
+  // Highlight current element based on audio time
+  const updateHighlight = useCallback(
+    (time: number, dur: number) => {
+      if (dur <= 0 || totalCharsRef.current === 0) return;
+
+      const pct = time / dur;
+      const charPosition = pct * totalCharsRef.current;
+      const offsets = charOffsetsRef.current;
+      const els = elementsRef.current;
+
+      // Find which element we're in
+      let idx = 0;
+      for (let i = offsets.length - 1; i >= 0; i--) {
+        if (charPosition >= offsets[i]) {
+          idx = i;
+          break;
+        }
+      }
+
+      const el = els[idx];
+      if (el && el !== prevHighlightRef.current) {
+        // Remove previous highlight
+        if (prevHighlightRef.current) {
+          prevHighlightRef.current.classList.remove("tts-active");
+        }
+        // Add new highlight and scroll into view
+        el.classList.add("tts-active");
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        prevHighlightRef.current = el;
+      }
+    },
+    [],
+  );
+
+  const clearHighlight = useCallback(() => {
+    if (prevHighlightRef.current) {
+      prevHighlightRef.current.classList.remove("tts-active");
+      prevHighlightRef.current = null;
+    }
+  }, []);
 
   // Setup audio element
   useEffect(() => {
@@ -42,6 +106,7 @@ export default function TextToSpeech({ slug }: TextToSpeechProps) {
       setCurrentTime(audio.currentTime);
       if (audio.duration > 0) {
         setProgress((audio.currentTime / audio.duration) * 100);
+        updateHighlight(audio.currentTime, audio.duration);
       }
     });
 
@@ -49,23 +114,27 @@ export default function TextToSpeech({ slug }: TextToSpeechProps) {
       setState("idle");
       setProgress(0);
       setCurrentTime(0);
+      clearHighlight();
     });
 
     audio.addEventListener("error", () => {
       setState("error");
+      clearHighlight();
     });
 
     return () => {
       audio.pause();
       audio.src = "";
+      clearHighlight();
     };
-  }, [exists, audioUrl]);
+  }, [exists, audioUrl, updateHighlight, clearHighlight]);
 
   function handlePlayPause() {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (state === "idle" || state === "error") {
+      buildElementMap();
       audio.play().then(() => setState("playing")).catch(() => setState("error"));
     } else if (state === "playing") {
       audio.pause();
@@ -73,6 +142,18 @@ export default function TextToSpeech({ slug }: TextToSpeechProps) {
     } else if (state === "paused") {
       audio.play().then(() => setState("playing")).catch(() => setState("error"));
     }
+  }
+
+  function handleStop() {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+    setState("idle");
+    setProgress(0);
+    setCurrentTime(0);
+    clearHighlight();
   }
 
   function handleSeek(e: React.MouseEvent<HTMLDivElement>) {
@@ -130,6 +211,12 @@ export default function TextToSpeech({ slug }: TextToSpeechProps) {
             <span className="text-[11px] text-[#A3A3A3] tabular-nums w-8">
               {formatTime(duration)}
             </span>
+            <button
+              onClick={handleStop}
+              className="text-[11px] text-[#A3A3A3] hover:text-[#525252] transition-colors ml-1"
+            >
+              Stop
+            </button>
           </div>
         )}
 
