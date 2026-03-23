@@ -32,6 +32,8 @@ jobs:
           NEXTAUTH_URL: http://localhost:3000
           NEXTAUTH_SECRET: audit-build-check-secret
           NEXT_PUBLIC_APP_URL: http://localhost:3000
+          STRIPE_SECRET_KEY: sk_test_placeholder_for_build_check
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
 
       - name: Bundle size report
         run: |
