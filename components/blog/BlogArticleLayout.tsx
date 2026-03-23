@@ -25,6 +25,7 @@ interface BlogArticleLayoutProps {
   readingTime: number;
   headings: TOCHeading[];
   summary?: string[];
+  heroImage?: React.ReactNode;
   ctaBlock?: React.ReactNode;
   children: React.ReactNode;
 }
@@ -39,6 +40,7 @@ export default function BlogArticleLayout({
   readingTime,
   headings,
   summary,
+  heroImage,
   ctaBlock,
   children,
 }: BlogArticleLayoutProps) {
@@ -87,6 +89,9 @@ export default function BlogArticleLayout({
                   {description}
                 </p>
               </header>
+
+              {/* Hero image (rendered above controls for visual impact) */}
+              {heroImage && <div className="my-8">{heroImage}</div>}
 
               {/* Text-to-Speech bar */}
               <TextToSpeech slug={slug} articleRef={articleRef} />

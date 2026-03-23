@@ -168,6 +168,19 @@ export default function CompressImagesWithoutLosingQualityPage() {
           "Browser-based compression (like SammaPix) processes files locally on your device, meaning your images never leave your machine.",
           "Never re-compress an already compressed JPEG - always work from the original source file and compress once to avoid generation loss.",
         ]}
+        heroImage={
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
+              alt="Developer working on image optimization code on a laptop"
+              className="w-full rounded-lg"
+              loading="eager"
+            />
+            <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+              Image compression is one of the highest-leverage performance wins for any website
+            </figcaption>
+          </figure>
+        }
         ctaBlock={
           <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
@@ -190,18 +203,6 @@ export default function CompressImagesWithoutLosingQualityPage() {
         }
       >
         {/* Article body content */}
-
-        <figure className="my-8">
-          <img
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
-            alt="Developer working on image optimization code on a laptop"
-            className="w-full rounded-lg"
-            loading="lazy"
-          />
-          <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-            Image compression is one of the highest-leverage performance wins for any website - Photo by Fotis Fotopoulos on Unsplash
-          </figcaption>
-        </figure>
 
         <h2 id="why-image-compression-matters" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why image compression matters more than ever in 2026
