@@ -258,6 +258,41 @@ Respond ONLY with valid JSON:
   }
 }
 
+// ── Auto-resize if file exceeds Cloudinary 10MB limit ─────────────────────
+
+import { execSync } from "child_process";
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB Cloudinary limit
+
+async function ensureUnderSizeLimit(filePath) {
+  const stat = fs.statSync(filePath);
+  if (stat.size <= MAX_FILE_SIZE) return filePath;
+
+  const sizeMB = (stat.size / 1024 / 1024).toFixed(1);
+  process.stdout.write(`\n  ⚠️  File troppo grande (${sizeMB}MB > 10MB) — ridimensiono...`);
+
+  // Create a temp resized copy using sips (macOS built-in)
+  const ext = path.extname(filePath);
+  const tempPath = filePath.replace(ext, `_resized${ext}`);
+
+  // First try quality reduction
+  execSync(`sips -s formatOptions 70 "${filePath}" --out "${tempPath}"`, { stdio: "pipe" });
+
+  let tempStat = fs.statSync(tempPath);
+  if (tempStat.size <= MAX_FILE_SIZE) {
+    const newMB = (tempStat.size / 1024 / 1024).toFixed(1);
+    process.stdout.write(` ✅ (${newMB}MB)\n`);
+    return tempPath;
+  }
+
+  // If still too big, also resize dimensions to max 3000px
+  execSync(`sips -Z 3000 -s formatOptions 65 "${filePath}" --out "${tempPath}"`, { stdio: "pipe" });
+  tempStat = fs.statSync(tempPath);
+  const newMB = (tempStat.size / 1024 / 1024).toFixed(1);
+  process.stdout.write(` ✅ (${newMB}MB)\n`);
+  return tempPath;
+}
+
 // ── Cloudinary Upload ──────────────────────────────────────────────────────
 
 async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif) {
@@ -273,7 +308,10 @@ async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif)
     `date=${escapeCtx(formatDate(exif?.date))}`,
   ].join("|");
 
-  const result = await cloudinary.uploader.upload(filePath, {
+  // Auto-resize if over 10MB
+  const uploadPath = await ensureUnderSizeLimit(filePath);
+
+  const result = await cloudinary.uploader.upload(uploadPath, {
     public_id: publicId,
     folder: `sammapix/portfolio/${slugify(destination)}`,
     overwrite: false,
@@ -292,6 +330,11 @@ async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif)
     fetch_format: "auto", quality: "auto",
     width: 600, crop: "limit", secure: true,
   });
+
+  // Clean up temp resized file if created
+  if (uploadPath !== filePath && fs.existsSync(uploadPath)) {
+    fs.unlinkSync(uploadPath);
+  }
 
   return { srcFull, srcThumb, width: result.width, height: result.height };
 }
