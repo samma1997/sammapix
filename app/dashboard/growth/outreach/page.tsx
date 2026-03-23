@@ -63,23 +63,6 @@ function isOverdue(followUpAt: Date | string | null): boolean {
   return new Date(followUpAt) < new Date();
 }
 
-function buildEmailTemplate(target: OutreachTarget): string {
-  const articleTitle = target.articleTitle ?? "[article title]";
-  const contactName = target.contactName ?? "there";
-  return `Subject: Quick addition for your "${articleTitle}" list
-
-Hi ${contactName},
-
-I came across your article "${articleTitle}" — great roundup.
-
-Wanted to flag SammaPix (sammapix.com), a free browser-based tool that handles image compression, HEIC conversion, AI-powered file renaming, and EXIF removal — no signup, no upload limits, privacy-first.
-
-Would it fit in your list?
-
-Luca
-sammapix.com`;
-}
-
 interface AddTargetModalProps {
   onClose: () => void;
   onAdd: (target: OutreachTarget) => void;
@@ -179,20 +162,25 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
 function OutreachRow({
   target,
   onUpdate,
-  onSendEmail,
 }: {
   target: OutreachTarget;
   onUpdate: (id: number, data: Partial<OutreachTarget>) => void;
-  onSendEmail: (targetId: number) => Promise<{ ok: boolean; error?: string }>;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [notesExpanded, setNotesExpanded] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedSubject, setCopiedSubject] = useState(false);
+  const [copiedBody, setCopiedBody] = useState(false);
+  const [generatingSubject, setGeneratingSubject] = useState(false);
+  const [generatingBody, setGeneratingBody] = useState(false);
   const [replyDraft, setReplyDraft] = useState(target.replyText ?? "");
   const [savingReply, setSavingReply] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [sendResult, setSendResult] = useState<{ ok: boolean; error?: string } | null>(null);
+  const [customMessage, setCustomMessage] = useState("");
+  const [showCustomInput, setShowCustomInput] = useState(false);
+
+  // Cache generated email so we don't call API twice
+  const [generatedCache, setGeneratedCache] = useState<{ subject: string; body: string } | null>(null);
 
   async function patchTarget(data: Record<string, unknown>) {
     setSaving(true);
@@ -231,12 +219,63 @@ function OutreachRow({
     }
   }
 
-  function copyEmail() {
-    const text = buildEmailTemplate(target);
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+  function copyEmailAddress() {
+    if (!target.contactEmail) return;
+    navigator.clipboard.writeText(target.contactEmail).then(() => {
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
     });
+  }
+
+  async function generateEmail(): Promise<{ subject: string; body: string } | null> {
+    if (generatedCache) return generatedCache;
+    try {
+      const res = await fetch("/api/growth/outreach/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          targetId: target.id,
+          ...(customMessage ? { customMessage } : {}),
+        }),
+      });
+      const data = await res.json() as { success?: boolean; subject?: string; body?: string };
+      if (data.success && data.subject && data.body) {
+        const result = { subject: data.subject, body: data.body };
+        setGeneratedCache(result);
+        return result;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  async function copySubject() {
+    setGeneratingSubject(true);
+    const result = await generateEmail();
+    if (result) {
+      await navigator.clipboard.writeText(result.subject);
+      setCopiedSubject(true);
+      setTimeout(() => setCopiedSubject(false), 2000);
+    }
+    setGeneratingSubject(false);
+  }
+
+  async function copyBody() {
+    setGeneratingBody(true);
+    const result = await generateEmail();
+    if (result) {
+      await navigator.clipboard.writeText(result.body);
+      setCopiedBody(true);
+      setTimeout(() => setCopiedBody(false), 2000);
+    }
+    setGeneratingBody(false);
+  }
+
+  // Invalidate cache when customMessage changes
+  function handleCustomMessageChange(val: string) {
+    setCustomMessage(val);
+    setGeneratedCache(null);
   }
 
   const overdue = target.status === "sent" && isOverdue(target.followUpAt);
@@ -364,65 +403,79 @@ function OutreachRow({
         </td>
         {/* Actions column */}
         <td className="py-2.5 px-3 whitespace-nowrap">
-          <div className="flex items-center gap-1.5">
-            {/* Send email button */}
-            {target.status === "to_send" && (
-              target.contactEmail ? (
-                <button
-                  onClick={async () => {
-                    setSending(true);
-                    setSendResult(null);
-                    const result = await onSendEmail(target.id);
-                    setSendResult(result);
-                    setSending(false);
-                    if (result.ok) {
-                      setTimeout(() => setSendResult(null), 3000);
-                    }
-                  }}
-                  disabled={sending}
-                  className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                    sendResult?.ok
-                      ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
-                      : sendResult && !sendResult.ok
-                      ? "border-red-400 text-red-600 bg-red-50 dark:bg-red-900/20"
-                      : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
-                  }`}
-                >
-                  {sending ? (
-                    <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
-                  ) : sendResult?.ok ? (
-                    <Check className="h-3 w-3" strokeWidth={2} />
-                  ) : (
-                    <Mail className="h-3 w-3" strokeWidth={1.5} />
-                  )}
-                  {sending
-                    ? "Invio..."
-                    : sendResult?.ok
-                    ? "Inviata!"
-                    : sendResult?.error
-                    ? sendResult.error
-                    : "Invia"}
-                </button>
-              ) : (
-                <span className="text-[10px] text-[#A3A3A3] italic">email mancante</span>
-              )
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {/* Copy email address */}
+            {target.contactEmail ? (
+              <button
+                onClick={copyEmailAddress}
+                title="Copia indirizzo email"
+                className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                  copiedEmail
+                    ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
+                    : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
+                }`}
+              >
+                {copiedEmail ? (
+                  <Check className="h-3 w-3" strokeWidth={2} />
+                ) : (
+                  <Mail className="h-3 w-3" strokeWidth={1.5} />
+                )}
+                {copiedEmail ? "Copiato!" : "Email"}
+              </button>
+            ) : (
+              <span className="text-[10px] text-[#A3A3A3] italic">email mancante</span>
             )}
-            {/* Copy email button */}
+            {/* Copy subject */}
             <button
-              onClick={copyEmail}
-              title="Copy outreach email"
+              onClick={copySubject}
+              disabled={generatingSubject}
+              title="Genera e copia oggetto email"
               className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                copied
+                copiedSubject
                   ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
-                  : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
-              }`}
+                  : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
+              } disabled:opacity-50`}
             >
-              {copied ? (
+              {generatingSubject ? (
+                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
+              ) : copiedSubject ? (
                 <Check className="h-3 w-3" strokeWidth={2} />
               ) : (
                 <Copy className="h-3 w-3" strokeWidth={1.5} />
               )}
-              {copied ? "Copiato!" : "Email"}
+              {copiedSubject ? "Copiato!" : "Titolo"}
+            </button>
+            {/* Copy body */}
+            <button
+              onClick={copyBody}
+              disabled={generatingBody}
+              title="Genera e copia testo email"
+              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                copiedBody
+                  ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
+                  : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
+              } disabled:opacity-50`}
+            >
+              {generatingBody ? (
+                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
+              ) : copiedBody ? (
+                <Check className="h-3 w-3" strokeWidth={2} />
+              ) : (
+                <Copy className="h-3 w-3" strokeWidth={1.5} />
+              )}
+              {copiedBody ? "Copiato!" : "Testo"}
+            </button>
+            {/* Custom message toggle */}
+            <button
+              onClick={() => setShowCustomInput((v) => !v)}
+              title="Messaggio personalizzato"
+              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                showCustomInput
+                  ? "border-[#6366F1] text-[#6366F1] bg-[#6366F1]/5"
+                  : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
+              }`}
+            >
+              <MessageSquare className="h-3 w-3" strokeWidth={1.5} />
             </button>
             {/* Reply expand button */}
             <button
@@ -445,6 +498,29 @@ function OutreachRow({
           </div>
         </td>
       </tr>
+
+      {/* Custom message input row */}
+      {showCustomInput && (
+        <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
+          <td colSpan={9} className="px-4 py-3">
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3]">
+                Messaggio personalizzato (opzionale)
+              </label>
+              <textarea
+                value={customMessage}
+                onChange={(e) => handleCustomMessageChange(e.target.value)}
+                rows={3}
+                placeholder="Scrivi un messaggio personalizzato... Se lasciato vuoto, Gemini genera il testo automaticamente."
+                className="w-full text-sm px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] focus:outline-none focus:border-[#6366F1] resize-y"
+              />
+              <p className="text-[10px] text-[#A3A3A3]">
+                Se compili questo campo, i pulsanti &quot;Titolo&quot; e &quot;Testo&quot; copieranno il tuo messaggio invece di generarlo con AI.
+              </p>
+            </div>
+          </td>
+        </tr>
+      )}
 
       {/* Expandable reply row */}
       {expanded && (
@@ -540,29 +616,6 @@ export default function OutreachPage() {
       }
     } catch (e) {
       console.error(e);
-    }
-  }
-
-  // ── Send email ──────────────────────────────────────────────────────────
-  async function handleSendEmail(targetId: number): Promise<{ ok: boolean; error?: string }> {
-    try {
-      const res = await fetch("/api/growth/outreach/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ targetId }),
-      });
-      const data = await res.json() as { ok?: boolean; error?: string; target?: OutreachTarget };
-      if (!res.ok || !data.ok) {
-        return { ok: false, error: data.error ?? "Errore invio" };
-      }
-      if (data.target) {
-        setTargets((prev) =>
-          prev.map((t) => (t.id === targetId ? { ...t, ...data.target! } : t))
-        );
-      }
-      return { ok: true };
-    } catch {
-      return { ok: false, error: "Errore di rete" };
     }
   }
 
@@ -713,7 +766,6 @@ export default function OutreachPage() {
                   key={target.id}
                   target={target}
                   onUpdate={handleTargetUpdate}
-                  onSendEmail={handleSendEmail}
                 />
               ))}
               {targets.length === 0 && (
