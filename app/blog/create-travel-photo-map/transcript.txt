@@ -1,0 +1,229 @@
+## Your iPhone is quietly mapping every photo you take
+
+Open any photo on your iPhone and tap the info icon (i). Scroll
+down and you will see a small map with a pin. That pin is the
+exact GPS location where the photo was taken- latitude and
+longitude, accurate to within a few meters.
+
+This data is stored in the EXIF metadata of the image file. EXIF
+(Exchangeable Image File Format) is a standard that embeds
+technical information directly inside the photo: camera settings,
+timestamp, device model, and- when location services are enabled
+- precise GPS coordinates. On an iPhone, this happens
+automatically for every shot taken with the default Camera app.
+
+Most people never look at this data. But if you have been taking
+photos for years, you are sitting on a detailed geographic record
+of everywhere you have been. The right tool can turn that invisible
+metadata into a visual travel map in seconds.
+
+## How GPS EXIF data works in iPhone photos
+
+When you press the shutter on your iPhone, the Camera app records
+several GPS-related EXIF fields alongside the image data:
+
+- GPSLatitude / GPSLongitude- the precise capture location as decimal degrees
+
+- GPSAltitude- elevation at the time of capture
+
+- GPSDateStamp / GPSTimeStamp- UTC date and time of the shot
+
+- GPSImgDirection- the compass direction the camera was pointed
+
+This data is embedded at the binary level in the JPEG or HEIC file
+and travels with the photo when you copy, export, or share it
+(unless an app explicitly strips it). The coordinates are stored in
+DMS (degrees, minutes, seconds) format internally but can be
+converted to decimal degrees, which is what mapping libraries use.
+
+One important note: if you share a photo from your iPhone using
+AirDrop or iCloud, the GPS data is preserved. If you share via
+some messaging apps (WhatsApp, for example), those apps strip EXIF
+metadata before sending- a privacy feature that also removes the
+location data.
+
+### Make sure GPS is enabled for your iPhone camera
+
+Before any of this works, location services must be enabled for
+the Camera app. This is often turned off after a privacy review or
+iOS update. Here is how to check and enable it:
+
+- Open Settings on your iPhone
+
+- Scroll down and tap Privacy & Security
+
+- Tap Location Services
+
+- Scroll down to Camera and tap it
+
+- Set it to While Using the App (not Never)
+
+Once enabled, every new photo taken with the Camera app will
+include GPS coordinates. Photos taken with location disabled will
+have no GPS data and will not appear as pins on any map.
+
+## How to create a travel photo map from your iPhone photos
+
+The fastest way to create a travel photo map from iPhone photos is
+
+SammaPix Photo Map
+
+. It reads the GPS coordinates directly from your files in the
+browser- nothing is uploaded, nothing leaves your device.
+
+### Step 1 - Export your photos from iPhone to your computer
+
+Connect your iPhone to your Mac or PC and use Image Capture (Mac)
+or Windows Photos to copy the photos you want to map. Make sure
+you export as JPEG or HEIC- both formats preserve EXIF GPS data.
+Avoid exporting via apps that strip metadata.
+
+Alternatively, if your photos are already in iCloud and synced to
+your Mac, just navigate to them in Finder. iCloud Photos preserves
+EXIF data when syncing.
+
+### Step 2 - Open SammaPix Photo Map
+
+Go to
+
+sammapix.com/tools/travelmap
+
+. No account required, no file size limits, no watermarks. The
+tool runs entirely in your browser.
+
+### Step 3 - Drop your photos onto the map interface
+
+Drag your photo folder directly onto the drop zone, or click to
+select files. Photo Map processes hundreds of photos at once. As
+each file is read, a pin appears on the map at the GPS coordinates
+stored in its EXIF data.
+
+Photos without GPS data are noted in a counter at the top- useful
+for identifying which shots were taken with location disabled.
+
+### Step 4 - Explore your travel map
+
+Your iPhone photos contain all the data needed to build a detailed travel map - Photo by Andrew Stutesman on Unsplash
+
+Zoom and pan to explore the map. Click any pin to see the photo
+thumbnail, the exact capture time, and the GPS coordinates. Pins
+cluster automatically when zoomed out- zoom in to separate
+nearby locations. The map uses
+Leaflet.js
+with tiles from
+OpenStreetMap
+- both open-source and free.
+
+Use the date range filter to isolate a specific trip. If you have
+loaded photos from multiple journeys, filtering by date turns the
+full archive into focused per-trip maps.
+
+### Step 5 - Export or share your map
+
+Export the current map view as a static PNG or JPEG at your chosen
+zoom level. SammaPix Pro users can generate a shareable link that
+lets anyone view the interactive map in their browser.
+
+Travel photos with GPS data enabled become pins on your personal world map - Photo by Luca Bravo on Unsplash
+
+## Tips for better travel photo maps
+
+The quality of your map depends on the quality of the input data.
+A few habits make a significant difference.
+
+Always shoot with GPS enabled.
+
+The single most important habit. Check your iPhone location
+settings before every trip. A photo without GPS data is a blank on
+your map that cannot be recovered after the fact.
+
+Map one trip at a time.
+
+A map of 5,000 photos from 10 years of travel looks like noise. A
+map of 200 photos from a focused week in Japan tells a story. Use
+the date filter or pre-sort your photos before dropping them into
+Photo Map.
+
+Sort by location before mapping.
+
+If you want to separate photos by city or region before
+visualizing them,
+
+SammaPix Sort by Location
+
+automatically groups photos into folders by GPS proximity. Run
+Sort by Location first, then map each folder individually for clean,
+focused results.
+
+Check GPS accuracy near buildings and tunnels.
+
+GPS accuracy on iPhones is excellent outdoors but degrades in
+dense urban canyons, underground, or indoors. Photos taken
+underground (metro stations, tunnels) may have inaccurate
+coordinates, or none at all. This is a hardware limitation of GPS
+technology, not a tool issue.
+
+## The privacy angle: who can see your GPS data
+
+GPS metadata embedded in photos is invisible to the eye but
+readable by anyone with the file. If you share a photo taken at
+your home and it retains GPS data, you have shared your home
+address. Most people do not think about this.
+
+SammaPix Photo Map processes all coordinates locally in your
+browser. No photo data is transmitted to any server. This lets you
+explore your location history safely- and also makes it clear
+exactly how much GPS data your photos carry before you share them
+publicly.
+
+When you are ready to share photos online, use the SammaPix EXIF
+Remover to strip all GPS metadata from the files. The image itself
+is unchanged- only the invisible metadata is removed.
+
+## FAQ
+
+### Do iPhone photos always include GPS data?
+
+Only if location services are enabled for the Camera app. If you
+or a previous iOS update disabled location access for Camera, your
+photos will not have GPS EXIF data. Check Settings → Privacy
+& Security → Location Services → Camera and set it
+to While Using the App.
+
+### Does this work with photos from Android phones or digital cameras?
+
+Yes. The EXIF GPS standard is the same across devices. Android
+phones with location enabled embed GPS data in the same EXIF
+fields. Modern mirrorless and DSLR cameras with built-in GPS or
+paired smartphone geotagging also embed compatible coordinates.
+SammaPix Photo Map reads EXIF GPS data from any JPEG or HEIC file,
+regardless of which device took the photo.
+
+### Are my photos or GPS coordinates sent to any server?
+
+No. SammaPix Photo Map reads EXIF data entirely within your
+browser using the FileReader API. Your photos never leave your
+device. The only external requests are for map tiles (the visual
+map layer), which come from an open-source tile provider and
+contain only the area coordinates of the map view you are
+looking at- not your photo data.
+
+### What if some photos are missing from the map?
+
+Photos without GPS data will not appear as pins. Photo Map shows a
+count of how many photos were loaded vs. how many had valid GPS
+coordinates. Common reasons for missing GPS: location was disabled
+at capture time, the photo was exported through an app that strips
+EXIF (some messengers do this), or the photo is a screenshot (which
+never has GPS data).
+
+### Can I use this to map a whole year of iPhone photos at once?
+
+Yes. Photo Map handles large batches efficiently. For best results
+with a large archive, use the date filter after loading to explore
+individual trips rather than viewing everything at once. You can
+also pre-organize photos using
+
+Sort by Location
+
+to separate them by location before mapping.

@@ -1,0 +1,110 @@
+
+What is GPS metadata and where does it come from?
+
+
+Every digital photo contains a hidden block of data called EXIF (Exchangeable Image File Format). This metadata is written by your camera or smartphone at the moment you take the shot, and it travels with the file everywhere you copy or upload it.
+
+EXIF data includes useful information like camera model, lens settings, shutter speed, and ISO. But when location services are enabled on your phone- which they are by default on most devices- it also records GPS coordinates: latitude, longitude, and often altitude, accurate to within a few meters.
+
+This data is invisible when you look at the photo normally. You cannot see it in the image itself. But it is embedded in the file, and any tool that reads EXIF metadata- including free online tools, desktop software, and command-line utilities- can extract it instantly.
+
+Every smartphone photo embeds GPS coordinates by default - Photo by Rodion Kutsaiev on Unsplash
+
+
+Real-world privacy risks from GPS photo metadata
+
+
+The risks are not theoretical. There are documented cases where GPS metadata in photos led to serious privacy breaches.
+
+
+Home address exposure
+
+When you photograph something in your home- a product you are selling on Craigslist or Facebook Marketplace, a pet, a room- and upload it without removing metadata, the GPS coordinates in that file reveal your home address to anyone who downloads it. Stalking cases have been traced back to exactly this scenario.
+
+
+Celebrity and journalist location tracking
+
+In 2012, Vice Media published photos of John McAfee while he was in hiding in Central America. The iPhone photos embedded GPS coordinates in the EXIF data, revealing his exact location to authorities. More recently, journalists reporting in conflict zones have been exposed because their published photos contained GPS data showing where they were operating.
+
+
+Workplace and routine mapping
+
+A series of photos posted over time can map your entire daily routine. GPS timestamps in photo series reveal where you work, where your children go to school, and the routes you travel regularly. This is the kind of data that stalkers, abusive ex-partners, and bad actors actively look for.
+
+
+Military and operational security
+
+In 2007, US Army soldiers photographed newly delivered Apache helicopters in Iraq and posted the photos online. The GPS metadata revealed the exact coordinates of the military base. The Army had to update its digital photography policy after the incident.
+
+
+Do social media platforms remove GPS metadata automatically?
+
+
+Some platforms do strip EXIF data when you upload - Instagram, Facebook, and Twitter/X all remove most metadata from uploaded photos on their servers. However, this is not a privacy guarantee for several reasons:
+
+- {item}
+
+The safe approach is to remove GPS metadata from the source file before sharing it anywhere. That way it does not matter which platform you use or how they handle uploads.
+
+
+How to remove GPS data from photos using SammaPix EXIF Viewer
+
+
+SammaPix EXIF Viewer is a free, browser-based tool that reads and strips EXIF metadata from your photos entirely on your device. Your files never leave your browser- no upload to any server, no cloud processing, no account required.
+
+Here is the complete process, step by step.
+
+{title}
+
+{body}
+
+Free tool- no signup
+
+Remove GPS from your photos now - SammaPix EXIF Viewer
+
+
+Other methods to remove GPS from photos
+
+
+If you prefer to work with your files locally or need to process large batches, there are alternatives.
+
+
+Windows: File Properties
+
+Right-click the image, select Properties, go to the Details tab, and click "Remove Properties and Personal Information" at the bottom. You can choose to remove all metadata or specific fields. This method works for single files and is built into Windows 10 and 11- no software to install.
+
+
+macOS: Preview
+
+macOS Preview does not strip EXIF data when you export a photo. For reliable GPS removal on Mac, use a dedicated tool. Image Capture in macOS does not remove metadata either. The most reliable free option on Mac is to export via Photos app with the "Location" option disabled, or use a browser-based tool like SammaPix EXIF Viewer.
+
+
+iPhone: Settings
+
+You can prevent GPS data from being written in the first place. Go to Settings -> Privacy & Security -> Location Services -> Camera, and set it to "Never." This stops your camera app from embedding GPS coordinates in new photos. To strip GPS from existing photos before sharing, use the Share sheet and enable "Strip location data" in iOS 17+.
+
+
+Command line: ExifTool
+
+For technical users and batch processing, ExifTool is the standard: exiftool -gps:all= -overwrite_original photo.jpg removes all GPS tags from a file. Use -r flag for recursive directory processing. Powerful but requires installation and command-line comfort.
+
+GPS coordinates in your photos can pinpoint your exact location - Photo by Capturing the human heart on Unsplash
+
+
+Compress and clean in one step
+
+
+If you are preparing photos for a website or social post, you likely want to both strip GPS metadata and reduce file size before uploading. Doing both separately doubles the work.
+
+SammaPix handles both in a single workflow. The compress tool strips EXIF metadata as part of the compression process- when you compress a photo, the output file contains no GPS data and no other metadata that could identify you or your location. You get a lighter file and a cleaner file in one download, entirely processed in your browser.
+
+Use EXIF Viewer when you need to inspect metadata first, remove it without re-compressing, or verify that a file is clean before sharing. Use the compress tool when you want the full optimization pipeline- metadata removal, compression, and optional WebP conversion- in one pass.
+
+
+FAQ
+
+
+
+{q}
+
+{a}

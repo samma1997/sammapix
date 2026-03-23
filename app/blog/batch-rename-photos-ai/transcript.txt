@@ -1,0 +1,240 @@
+## Why image filenames matter for SEO (and why you are probably getting it wrong)
+
+        Google Image Search is one of the highest-traffic sources for photographers, e-commerce sites, and content creators. Unlike web pages, search engines cannot read image content directly. They use multiple signals to understand what is in a photo:
+
+        
+          - Filename: "woman-jogging-park-morning.jpg" is more informative than "IMG_4521.jpg"
+
+          - Alt text: the HTML alt attribute describing the image
+
+          - Page context: surrounding text and headings
+
+          - Image metadata: EXIF data, dimensions, file size
+
+        
+
+        Filenames are one of the few signals you completely control. According to Google's own documentation , descriptive filenames improve image discoverability. A photo of coffee equipment titled "espresso-machine-gaggia-classic.jpg" is more likely to appear when someone searches "gaggia espresso machine" than the same image named "photo.jpg".
+
+        The problem: most photographers and content creators use camera defaults or generic names. A typical DSLR produces 5000+ photos per project. Renaming them manually would take days. That is where AI comes in.
+
+        
+## How AI batch renaming works
+
+        Modern AI models like Google Gemini can "see" images and describe them accurately. AI batch renaming takes advantage of this capability to generate descriptive names automatically.
+
+        
+### The process
+
+        You select a batch of photos and send them to the AI renamer. For each image, the AI:
+
+        
+          - Analyzes the visual content (objects, people, scenery, activities)
+
+          - Identifies dominant subjects and contextual details
+
+          - Generates a concise, descriptive filename
+
+          - Applies keyword-rich naming conventions for SEO
+
+          - Proposes the new filename for your approval
+
+        
+
+        The entire batch processes in seconds to minutes, depending on quantity and internet speed. You can accept all suggestions, edit individual names, or reject and try again.
+
+        
+### What makes a good AI-generated filename?
+
+        Not all AI-generated names are equal. The best filenames are:
+
+        
+          - Concise: 3-6 words max. Long filenames are harder to read and don't add SEO value after 50 characters.
+
+          - Keyword-rich: include searchable terms that describe the photo (e.g., "red-fox-snow-forest" instead of "animal-in-white-stuff").
+
+          - Hyphenated: use hyphens between words. Dashes help search engines parse word boundaries. Never use underscores for SEO filenames.
+
+          - Lowercase: all lowercase. Uppercase doesn't hurt, but lowercase is convention and cleaner.
+
+          - Accurate: no misleading or keyword-stuffed names. "seagull-flying-beach" is better than "sexy-birdwatching-vacation-photos-beach-free-download".
+
+        
+
+        
+          
+          
+            Keyword-rich filenames improve search visibility for your images - Photo by Merakist on Unsplash
+          
+        
+
+        
+## Real-world examples: before and after
+
+        Here is what AI batch renaming looks like in practice:
+
+        
+          
+            Original filename | 
+                AI-generated name | 
+                SEO improvement | 
+              
+            
+            
+              
+
+                IMG_5381.jpg | 
+                woman-hiking-mountain-trail.jpg | 
+                Searchable for hiking, woman, mountain | 
+              
+              
+
+                DSC_2847.JPG | 
+                golden-retriever-playing-beach-sunset.jpg | 
+                Strong for dog breed + location + time | 
+              
+              
+
+                PHOTO_20260315.jpg | 
+                fresh-salad-with-tomato-cucumber-feta.jpg | 
+                Ranks for food photography queries | 
+              
+              
+
+                pic1.jpg | 
+                espresso-machine-gaggia-classic-counter.jpg | 
+                Targets specific product + context | 
+              
+              
+
+                vacation_photo_8.jpg | 
+                piazza-san-marco-venice-italy-crowded.jpg | 
+                Local SEO + landmark name | 
+              
+            
+          
+        
+
+        
+## How to batch rename photos with SammaPix AI Rename
+
+        The SammaPix AI Rename tool makes batch renaming simple. No plugins, no desktop software, no complex setup. Here is the workflow:
+
+        
+### Step 1 - Select your photos
+
+        Open AI Rename and drag a folder of photos onto the upload area. You can select 5–200+ images at once depending on your plan. The tool accepts JPG, PNG, WebP, GIF, and HEIC formats. Mixed formats in a single batch work perfectly.
+
+        
+### Step 2 - Configure naming style (optional)
+
+        Choose how descriptive you want the names:
+
+        
+          - Short (3 words): "woman-jogging-park.jpg"
+
+          - Medium (5 words): "woman-jogging-in-park-morning-light.jpg"
+
+          - Detailed (7+ words): "athletic-woman-jogging-on-forest-trail-at-sunrise.jpg"
+
+        
+
+        
+### Step 3 - AI generates suggestions
+
+        The AI analyzes each photo and proposes SEO-friendly names. The process takes 1–5 seconds per image depending on file size and internet speed. You see a preview of the new names side-by-side with your originals.
+
+        
+### Step 4 - Review and edit
+
+        Accept names as-is, edit individual suggestions, or reject and regenerate. You have full control. If the AI suggests something inaccurate, change it in place. This takes seconds per image.
+
+        
+### Step 5 - Download renamed files
+
+        Once you approve all names, download the renamed photos as individual files or as a ZIP archive. The original files stay in their original location. You get a new set with the SEO-friendly names applied.
+
+        
+## Use cases where batch renaming with AI saves hours
+
+        
+### Photographers and content creators
+
+        After a shoot, a photographer might have 500+ photos. Renaming them manually would take 8+ hours. AI Rename does it in 5–10 minutes, with SEO-optimized names ready to upload to stock photo sites (Unsplash, Pexels, Shutterstock) immediately.
+
+        
+### E-commerce teams
+
+        Product photos with generic names like "IMG_0001" hurt your image search visibility. Rename to "red-leather-handbag-large-capacity" and you rank for product-specific searches. Batch process entire product catalogs in minutes.
+
+        
+### Blog and content websites
+
+        Each blog post uses 5–20 images. Descriptive filenames improve image search traffic and on-page SEO. Instead of uploading "screenshot1.png", use "wordpress-woocommerce-product-page-setup.png".
+
+        
+### Travel and lifestyle blogs
+
+        Geographic data in filenames helps local SEO. "eiffel-tower-sunset-paris" ranks better than "vacation_pic_2.jpg". Batch rename 100+ travel photos with location and activity keywords instantly.
+
+        
+          
+          
+            AI batch renaming scales from single photos to thousands - Photo by Unsplash on Unsplash
+          
+        
+
+        
+## Complementary tools: combine renaming with other optimizations
+
+        AI Rename is powerful on its own, but it works best as part of a complete image optimization workflow. After renaming, consider:
+
+        
+### Compress images for web
+
+        SEO-friendly filenames are worthless if your images take 10 seconds to load. After renaming, use SammaPix Compress to reduce file sizes by 50–80% without visible quality loss. Smaller files = faster loading = better SEO rankings and user experience.
+
+        
+### Convert to WebP for modern browsers
+
+        After renaming and compressing, convert images to WebP format for an additional 25–35% file size reduction. The SammaPix WebP converter maintains all your new filenames while converting the format.
+
+        
+### Remove EXIF data for privacy
+
+        Before uploading renamed photos, consider removing EXIF metadata (GPS coordinates, camera model, timestamps). Good filenames improve SEO, but hidden location data is a privacy risk. Strip EXIF, keep filenames, publish with confidence.
+
+        
+---
+
+        
+## FAQ
+
+        
+### What is batch renaming photos with AI?
+
+        Batch renaming with AI automatically renames hundreds of photos at once using artificial intelligence. Instead of naming each file manually, AI analyzes the image content and generates descriptive, keyword-rich filenames that describe what is in each photo. This works for any image type- portraits, landscapes, products, food, animals, etc.
+
+        
+### Why does image filename matter for SEO?
+
+        Image filenames are a direct ranking signal for Google Image Search. A descriptive filename like "woman-running-forest.jpg" ranks better than "IMG_0001.jpg". Google uses filenames to understand image content, and keyword-rich filenames increase the chances your images appear in relevant search results. This is one of the easiest, highest-leverage SEO improvements available.
+
+        
+### How does SammaPix AI Rename work?
+
+        SammaPix AI Rename uses Google Gemini 1.5 Flash to analyze each image and generate a descriptive filename. The AI examines the visual content, identifies objects, people, scenes, and activities, then creates a concise, SEO-friendly name. Batch mode processes hundreds of photos at once. All processing happens in your browser- your images never leave your device or are stored on any server.
+
+        
+### Can I batch rename photos without uploading them?
+
+        Your full-resolution images never leave your device or are stored on a server. AI Rename sends only a small thumbnail to Google Gemini for analysis. The analysis happens in seconds, and the thumbnail is discarded immediately. Your original image files are never uploaded, stored, or retained.
+
+        
+### Is batch renaming with AI free?
+
+        SammaPix AI Rename is free for up to 5 renames per day on the free plan. For unlimited batch renaming and larger batches, upgrade to SammaPix Pro for $7/month. Pro gives you 200 AI renames per day, batch processing for up to 100 images at once, and ZIP download support.
+
+        
+### What file formats does AI Rename support?
+
+        SammaPix AI Rename supports JPG, PNG, WebP, GIF, and HEIC formats. You can rename photos from iPhones (HEIC), DSLRs (after RAW conversion to JPG), smartphones, and web images all in the same batch. Mixed formats work perfectly.

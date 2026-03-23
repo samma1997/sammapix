@@ -1,0 +1,148 @@
+
+How we ran the benchmark
+
+
+We selected 10 images representative of common real-world use cases: product photography, blog headers, UI screenshots, and WebP assets. Each file was processed through both tools using their default settings — no manual quality adjustment was applied, to reflect what most users actually experience.
+
+TinyPNG was used via the browser interface at tinypng.com. SammaPix was used via the SammaPix Compress tool at its default quality setting. Results are reproducible — you can run the same files through both tools and expect to see comparable numbers.
+
+
+Compression benchmark results
+
+
+The table below shows results across all 10 test images. Both tools received the exact same original file for each test.
+
+
+Benchmark verdict
+
+Across 10 images, TinyPNG won 4 rounds (all PNG files), SammaPix won 3 (JPEG and WebP), and 3 were statistical ties. The average difference across all tests was under 1.5% in favor of TinyPNG on PNG files, and under 1% in favor of SammaPix on WebP. For JPEG, both tools are essentially equivalent.
+
+In practical terms: if you only compress PNG files at high volume and every kilobyte matters, TinyPNG's PNG engine is marginally better. For everything else — especially mixed workloads — the difference is imperceptible to end users and invisible to Core Web Vitals scores.
+
+
+Feature comparison: SammaPix vs TinyPNG
+
+
+Where your images are processed matters as much as how well they are compressed — Photo by Towfiqu barbhuiya on Unsplash
+
+
+The privacy difference — and why it matters
+
+
+This is the most important part of the comparison, and it is often skipped in superficial tool reviews. TinyPNG works by uploading your images to their servers for processing. The servers are located in the Netherlands, and TinyPNG states that files are deleted automatically after processing. Their track record is good and there is no evidence of misuse.
+
+But upload-based compression has inherent limitations regardless of the provider's policies. Your files transit a network. They touch a third-party server. They exist on infrastructure you do not control, even if briefly. For the majority of generic web images — product photos, blog illustrations, marketing assets — this is a completely acceptable tradeoff.
+
+For a specific category of images, it is not acceptable at all.
+
+
+Images that should never leave your device
+
+- Medical images: X-rays, scans, clinical photos subject to HIPAA or GDPR restrictions
+
+- Legal documents: Scanned contracts, ID documents, sensitive correspondence
+
+- Personal photos: Family photos, anything containing private moments or unaware individuals
+
+- Proprietary assets: Unreleased product designs, brand materials under NDA, confidential presentations
+
+- Any image with embedded GPS data: EXIF location data can be extracted from files in transit
+
+SammaPix runs entirely in your browser using WebAssembly. When you drop a file onto the SammaPix Compress tool , nothing is sent anywhere. The compression happens on your CPU using the same libraries used by professional image processing pipelines, but executed locally. No server receives your file. No upload occurs. No account is required.
+
+This is not just a marketing claim — it is verifiable. Open your browser's network inspector while using SammaPix. You will see zero outbound requests containing your image data.
+
+
+Speed comparison: no-upload vs server-side
+
+
+TinyPNG's processing speed depends on three factors: your upload bandwidth, server load at the time of request, and the download bandwidth for the compressed file. On a fast fiber connection, a 4MB JPEG processes in roughly 3–6 seconds. On a shared office WiFi or mobile connection, the same file can take 15–30 seconds.
+
+SammaPix has no network dependency. Compression starts immediately after you drop the file. The processing time for a 4MB JPEG on a modern laptop is under 2 seconds, regardless of your internet connection. On files under 1MB, the result appears nearly instantly.
+
+For batch workflows — compressing 20, 50, or 100 files at once — the speed advantage of local processing compounds significantly. You also do not face TinyPNG's free tier limit of 20 images per day when using SammaPix.
+
+
+Format support: where SammaPix has a clear advantage
+
+
+TinyPNG supports JPEG, PNG, and WebP. That covers the majority of web image workflows. But modern devices increasingly produce formats that TinyPNG cannot handle.
+
+- HEIC: The default format from iPhone cameras since iOS 11. TinyPNG cannot process HEIC files. SammaPix converts and compresses them directly in the browser.
+
+- AVIF: The next-generation image format with superior compression to WebP. TinyPNG has no AVIF support. SammaPix handles AVIF natively.
+
+- GIF: TinyPNG dropped GIF support. SammaPix compresses GIF files, important for teams managing animated content.
+
+If your workflow involves images from iPhones (HEIC), modern cameras, or next-generation web formats, TinyPNG requires you to convert files before uploading. SammaPix handles the full pipeline in one place.
+
+
+When to use TinyPNG vs SammaPix
+
+
+
+TinyPNG is the better choice if:
+
+- You only compress JPEG and PNG files (no HEIC, AVIF, or GIF)
+
+- You compress fewer than 20 images per day
+
+- Your images contain no sensitive or private content
+
+- You prefer a tool with years of brand recognition and a large user base
+
+- Maximum PNG compression is the only metric you care about
+
+
+SammaPix is the better choice if:
+
+- You process images containing private, sensitive, or proprietary content
+
+- You need to compress HEIC, AVIF, or GIF files
+
+- You compress more than 20 images per day without paying for a Pro plan
+
+- You want processing speed that does not depend on internet connection quality
+
+- You need additional tools alongside compression — resize, EXIF removal, format conversion, or AI-powered file renaming
+
+- You work on a slow or metered internet connection
+
+
+Overall verdict: SammaPix vs TinyPNG
+
+
+TinyPNG remains a competent tool with a genuine edge in PNG compression. If PNG-only, low-volume compression is all you need and you are not handling sensitive content, it is a reasonable choice. The brand is established and the tool is reliable.
+
+But TinyPNG has not fundamentally changed in years. It does not support HEIC or AVIF, it enforces a 20-image daily limit on the free tier, and it requires a server upload for every file you process. These limitations are structural — they cannot be fixed with a UI update.
+
+SammaPix wins on privacy, format coverage, batch volume, and speed. The compression quality is equivalent on JPEG and WebP, and within 1–2% on PNG — a difference that has zero visible impact in real-world use. For users who compress more than 20 images per day, work with modern formats, or handle any sensitive content at all, SammaPix is the better tool in 2026.
+
+
+FAQ
+
+
+
+Is SammaPix as good as TinyPNG?
+
+Yes. In our benchmark, both tools achieved 50–80% file size reduction across 10 test images. TinyPNG has a marginal advantage on PNG files (about 1–2%). SammaPix matches TinyPNG on JPEG and outperforms it on WebP. For most real-world workloads, both tools deliver compression quality that is indistinguishable in practice.
+
+
+Is TinyPNG safe to use? Does it keep my images?
+
+TinyPNG uploads your images to servers in the Netherlands for processing. Their privacy policy states files are automatically deleted after processing, and their track record is good. However, files do leave your device during the process. For sensitive content — medical images, legal documents, private photos — a browser-only tool like SammaPix is safer because nothing is ever transmitted to any server.
+
+
+What is the best free alternative to TinyPNG?
+
+SammaPix is the strongest free TinyPNG alternative in 2026. It matches TinyPNG's compression on JPEG and comes within 1% on PNG, while supporting HEIC, AVIF, and GIF — formats TinyPNG does not handle. It also offers unlimited free batch compression, instant processing with no upload, and additional tools including resize, EXIF removal, and AI-powered file naming.
+
+
+Can SammaPix compress PNG files?
+
+Yes. SammaPix compresses PNG files using lossless recompression, typically reducing file sizes by 10–30% without changing a single pixel. For larger reductions, you can also convert any PNG to lossless WebP in the same tool — an additional 20–26% reduction with no visible quality difference.
+
+
+Which image compressor is best for privacy?
+
+SammaPix is the best image compressor for privacy. It runs entirely in your browser — images are never uploaded anywhere. You can verify this by opening your browser's network inspector while compressing: no outbound requests containing your image data will appear. This makes it the correct choice for any images containing personal, medical, legal, or proprietary content.

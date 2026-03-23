@@ -1,0 +1,241 @@
+## Why image filenames matter for SEO
+
+        Google uses image filenames as one of several signals to understand what an image depicts. This is documented directly in Google's official image guidelines : "The filename can give Google clues about the subject matter of the image. For example, my-new-black-kitten.jpg is better than IMG00023.JPG." That is a direct quote from the documentation.
+
+        Google Image Search drives a significant volume of traffic for content publishers, e-commerce sites, travel bloggers, food websites, and product marketers. According to research aggregated by Moz , Google Images represents approximately 22.6% of all web searches - making it the second-largest search surface after Google's main index. Optimizing for it is not optional if you are serious about organic visibility.
+
+        The filename is processed before the page is fully crawled. When Googlebot discovers an image URL such as /images/golden-gate-bridge-sunset.jpg , it extracts the filename tokens immediately. This gives descriptive filenames an early relevance advantage before alt text, captions, or surrounding content are even evaluated.
+
+        
+## The problem: camera-generated filenames tell Google nothing
+
+        Every camera, smartphone, and screenshot tool generates filenames automatically. They are designed for the camera's internal file management- not for search engines or human readers. The result is a collection of filenames that convey zero semantic information:
+
+        
+          - IMG_0001.jpg, IMG_0002.jpg- iPhone sequential numbering
+
+          - DSC_1234.CR2, _MG_5678.NEF- DSLR raw files
+
+          - Screenshot 2026-02-14 at 09.32.11.png- macOS screenshots
+
+          - 20260214_093211.jpg- Android timestamp filenames
+
+          - image (1).png, image (2).png- browser download defaults
+
+        
+
+        When Google encounters these filenames, it receives no useful signal. The image is essentially anonymous to the search engine until it cross-references alt text, surrounding text, and its own computer vision analysis. You are leaving ranking potential on the table with every unnamed image.
+
+        The traditional solution is to rename each image manually before uploading. For a photographer or blogger with a library of hundreds or thousands of images, that is an enormous time investment. Manually generating SEO-appropriate filenames for 300 product photos is realistically a full workday. This is the exact problem AI image rename tools are built to solve.
+
+        
+## How AI understands image content and generates descriptive filenames
+
+        Modern AI vision models can analyze an image and identify its content with remarkable accuracy- subjects, scenes, objects, colors, spatial relationships, and contextual details. This is the same category of technology that powers Google Lens, Apple's Visual Look Up, and Pinterest's visual search.
+
+        When you drop an image into an AI rename tool, the process works as follows. First, a thumbnail of the image is generated client-side to reduce the data payload. This thumbnail is then sent to a vision model- in SammaPix's case, Google Gemini Flash- which analyzes the visual content. The model returns a structured description of what it sees. The tool then applies SEO naming rules to that description: lowercase only, words separated by hyphens, relevant primary subject first, location or color modifiers second, no stop words or filler.
+
+        The result is a filename that would take a human several seconds to write per image, generated in under two seconds per image at scale. For a batch of 50 product photos, an AI rename tool completes in roughly a minute what would otherwise require 30–45 minutes of manual effort.
+
+        
+## Before and after: what AI image renaming actually produces
+
+        The transformation is straightforward to illustrate. Here are real-world examples across different image categories:
+
+        
+          
+            Before (camera default) | 
+                After (AI rename) | 
+              
+            
+            
+              
+
+                IMG_0023.jpg | 
+                golden-gate-bridge-sunset-san-francisco.jpg | 
+              
+              
+
+                DSC_4891.jpg | 
+                espresso-coffee-latte-art-white-ceramic-cup.jpg | 
+              
+              
+
+                image (14).png | 
+                minimal-dark-mode-dashboard-ui-analytics.png | 
+              
+              
+
+                20260201_174302.jpg | 
+                woman-hiking-mountain-trail-snow-winter-alps.jpg | 
+              
+              
+
+                _MG_0112.CR2 (converted) | 
+                red-maple-leaf-autumn-forest-ground-macro.jpg | 
+              
+            
+          
+        
+
+        Notice the pattern in the AI-generated filenames. The primary subject appears first (golden-gate-bridge, espresso-coffee, woman-hiking). Descriptive modifiers follow (sunset, latte-art, mountain-trail). Location or context comes last where relevant (san-francisco, alps). Every word is a potential keyword match.
+
+        
+## How SammaPix AI Rename works
+
+        SammaPix AI Rename is built on Google Gemini Flash, a multimodal vision model optimized for speed without sacrificing accuracy on visual understanding tasks. The workflow is entirely private by design: your original images never leave your browser. Only a compressed thumbnail is sent to the API for analysis.
+
+        The technical pipeline works in three steps. First, the tool generates a thumbnail of your image locally using the browser Canvas API- typically at 512 pixels on the longest side, which is more than sufficient for content recognition while keeping the API payload small. Second, the thumbnail is sent to Gemini Flash with a structured prompt that instructs the model to identify the subject, scene, dominant colors, and any distinguishing details, then format the output as a valid SEO filename. Third, the generated filename is validated against SEO rules (lowercase, hyphens only, no special characters, capped at a reasonable length) before being presented to you.
+
+        You can rename a single image or drop an entire batch of files. The tool processes them in parallel and presents a preview of each suggested filename before you download. You can edit any suggestion manually if you want to adjust the output- the AI gives you a strong starting point, but you always have final control. Download your renamed images individually or as a ZIP archive.
+
+        
+          
+        
+
+        
+## SEO best practices for image filenames
+
+        Whether you rename manually or use an AI tool, the rules for SEO-optimized image filenames are consistent and well-established. Following them ensures your images have the best possible chance of appearing in Google Image Search results.
+
+        
+### Use hyphens, not underscores or spaces
+
+        Google treats hyphens as word separators. A filename of red-ceramic-coffee-mug.jpg is parsed as four separate words: red, ceramic, coffee, mug. Underscores are treated as connectors - Google reads red_ceramic_coffee_mug.jpg as a single compound token. Spaces in filenames are encoded as %20 in URLs, which creates messy links and can cause crawl issues. Always use hyphens.
+
+        
+### Keep filenames lowercase
+
+        URLs are case-sensitive on most server configurations. A file named Golden-Gate-Bridge.jpg and golden-gate-bridge.jpg can be treated as two different resources by the server, creating duplicate content issues. Lowercase filenames also look cleaner in image URLs and match the convention used by all major web platforms.
+
+        
+### Be descriptive and specific
+
+        Generic filenames like photo.jpg or image1.jpg provide no ranking benefit. Aim for 3 to 5 descriptive keywords that accurately reflect the image content. Include the primary subject, any relevant modifiers (color, material, style), and location or context where meaningful. Avoid keyword stuffing- a filename like buy-cheap-coffee-mug-online-store-sale.jpg reads as spam and provides no additional ranking benefit over a clean, accurate descriptive name.
+
+        
+### Drop stop words and filler
+
+        Words like "a", "the", "of", "and", "with" add length to the filename without contributing to keyword relevance. Keep filenames tight. Prefer wooden-dining-table-modern-interior.jpg over a-photo-of-a-wooden-dining-table-in-a-modern-interior.jpg .
+
+        
+### Match the filename to the page topic
+
+        A travel blog post about Tokyo should feature images with filenames that include relevant location keywords. An e-commerce product page for running shoes should have filenames reflecting the specific product model, color, and use case. Contextual alignment between the filename, alt text, page title, and surrounding content reinforces your topical relevance signal to Google.
+
+        
+## Alt text vs filename vs title attribute: understanding the difference
+
+        These three image attributes serve different purposes and carry different weight as SEO signals. Confusing them leads to missed optimization opportunities. Here is how each one functions:
+
+        
+### Image filename (the URL path)
+
+        The filename is part of the image's URL. It is processed by Google before the page HTML is fully parsed. It signals topical relevance early in the crawl cycle. It cannot be changed without also updating every reference to the image URL on your site. This is why getting filenames right before upload matters- changing them after indexing requires redirects.
+
+        
+### Alt text (the alt attribute)
+
+        Alt text is the most important on-page image SEO signal. It lives in the HTML as . It serves two critical functions: it describes the image to Google's crawler in the context of the page, and it provides text to screen readers for accessibility. Alt text should describe the image as it relates to the page content- not as a generic description and not as a keyword dump.
+
+        
+### Title attribute
+
+        The title attribute on an image appears as a tooltip when a user hovers over it. It is the weakest of the three signals for SEO purposes- Google gives it minimal weight. Focus your optimization effort on filename and alt text first. The title attribute is useful for user experience (hover tooltips) but should not be treated as a primary SEO lever. According to web.dev's performance guidelines , investing time in meaningful alt text and optimized filenames returns far more value than filling in title attributes.
+
+        
+          
+            Signal | 
+                SEO weight | 
+                Purpose | 
+                Required? | 
+              
+            
+            
+              
+
+                Filename | 
+                High | 
+                Early relevance signal at crawl time | 
+                Yes (always present) | 
+              
+              
+
+                Alt text | 
+                Very high | 
+                Contextual relevance + accessibility | 
+                Yes (required for accessibility) | 
+              
+              
+
+                Title attribute | 
+                Low | 
+                Tooltip on hover, minimal SEO value | 
+                Optional | 
+              
+            
+          
+        
+
+        
+## Step-by-step: rename images for SEO with SammaPix AI Rename
+
+        Using the SammaPix AI Rename tool takes under five minutes for a batch of 30 to 50 images. Here is the complete workflow:
+
+        
+### Step 1 - Sign in (free account required)
+
+        AI Rename requires a free account to prevent API abuse. Click "Sign in with Google" or "Sign in with GitHub"- no forms, no passwords, no email verification. The entire sign-in flow takes under 15 seconds.
+
+        
+### Step 2 - Drop your images into the tool
+
+        Drag and drop a batch of images onto the drop zone, or click to open a file picker. You can mix JPEG, PNG, WebP, and HEIC files in the same batch. The tool accepts up to 5 images per session on the free plan and up to 200 on Pro.
+
+        
+### Step 3 - Review AI-generated suggestions
+
+        For each image, the tool displays the original filename alongside the AI-generated suggestion. Review each suggestion- in our testing, Gemini Flash is accurate on about 95% of images without any manual correction needed. For the edge cases (abstract art, macro photography with ambiguous subjects), you can click the filename field and edit it directly.
+
+        
+### Step 4 - Download your renamed images
+
+        Download individual images by clicking the download button on each card, or click "Download All as ZIP" to get the entire batch in a single archive. The original files are unchanged- the tool creates new copies with the new filenames. Your files never left your device except for the thumbnail sent to Gemini for analysis.
+
+        
+### Step 5 - Upload and update alt text
+
+        Upload the renamed images to your CMS, e-commerce platform, or image hosting service. Take the opportunity to update the alt text for each image to match the new descriptive filename- use the filename as a starting point, then rephrase it as a natural sentence. For example, golden-gate-bridge-sunset-san-francisco.jpg becomes alt="Golden Gate Bridge at sunset viewed from San Francisco" .
+
+        If you also need to reduce file sizes before uploading- which is almost always a good idea for web performance- run your images through the SammaPix Compress tool or Convert to WebP first, then rename. The order does not affect the SEO benefit, but compressing before renaming means you only keep one optimized copy of each file. For more on compression best practices, see our guide on compressing images without losing quality .
+
+        
+---
+
+        
+## Frequently asked questions
+
+        
+### Does image filename actually affect SEO rankings?
+
+        Yes. Google's own documentation confirms that image filenames are a relevance signal for Google Images. While filename alone is not a ranking factor for your main page results, it directly affects discoverability in Google Image Search- which is responsible for approximately one in five all web searches. For content-heavy sites, photography portfolios, food blogs, and e-commerce stores, optimizing image filenames is one of the highest-return technical SEO tasks available.
+
+        
+### Should I use hyphens or underscores in image filenames for SEO?
+
+        Always use hyphens. Google treats hyphens as word separators- golden-gate-bridge is parsed as three separate keywords. Underscores are treated as connectors- golden_gate_bridge is treated as one compound token. Hyphens give you better keyword matching across all three words.
+
+        
+### What is the difference between alt text and image filename for SEO?
+
+        The filename is part of the image URL and gives Google an initial relevance signal before the full page is crawled. The alt text lives in the HTML and provides contextual relevance within the page- it also serves as accessibility text for screen readers. Both are important. A descriptive filename without good alt text leaves half the signal unused, and vice versa. The two work together to reinforce topical relevance.
+
+        
+### Is it worth renaming old images already indexed by Google?
+
+        Yes, but you must set up proper 301 redirects from the old image URL to the new one. If you rename and upload without redirects, any existing backlinks or indexed image URLs will return 404 errors, causing you to lose existing ranking equity. If your images are not yet indexed or do not have inbound links, you can rename and re-upload without redirects.
+
+        
+### How many keywords should I include in an image filename?
+
+        Aim for three to five descriptive keywords. Fewer than three often leaves relevant context out. More than five starts to look like keyword stuffing to Google's algorithms and produces unwieldy filenames. The sweet spot is a filename that reads naturally and accurately describes the image- if it sounds like an honest description of what you see in the image, it is probably correct.

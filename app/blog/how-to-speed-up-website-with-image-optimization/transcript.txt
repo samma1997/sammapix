@@ -1,0 +1,172 @@
+
+Why images kill your page speed
+
+
+The average webpage in 2026 weighs approximately 2.5MB. HTTP Archive data consistently shows that images account for roughly 1.5MB of that total- more than all JavaScript, CSS, and HTML combined. When a page takes four seconds to load, images are the culprit in nearly every case.
+
+The business impact is direct and measurable. Google's own research found that every 100ms of additional load time reduces conversions by approximately 1%. For an e-commerce store doing $50,000 per month, a two-second improvement in load time is worth roughly $12,000 in additional annual revenue- with zero additional traffic required.
+
+The good news: image optimization is largely a solved problem. A systematic workflow applied once to your existing image library can cut your total page weight by 60-80%. This guide walks through that workflow step by step.
+
+
+The 5-step image optimization workflow
+
+
+These five steps, applied in order, produce the maximum page speed improvement with the least effort. Skip any step and you leave significant performance on the table.
+
+
+Step 1 — Resize to display dimensions
+
+This is the single highest-impact step and the most commonly skipped. A modern smartphone camera produces images at 4000-6000 pixels wide. If your blog content column is 800px wide, you are serving 25-56 times more pixels than the browser will ever display.
+
+The rule is simple: never upload an image wider than the maximum display size, multiplied by 2 for retina screens. For a standard blog post with an 800px column, the correct image width is 1600px. For a 1200px hero image, upload at 2400px. A photo resized from 5000px to 1600px loses around 90% of its pixel count- and therefore 80-90% of its uncompressed file size- before any compression is even applied.
+
+
+Step 2 — Choose the right format
+
+Use WebP as your default for everything. WebP is 25-34% smaller than JPEG at equivalent visual quality, supports transparency like PNG, and works in 97%+ of browsers as of 2026. There is no meaningful reason to serve JPEG on a new website.
+
+The format decision tree is straightforward: photographs and editorial images go to WebP (lossy). Logos, screenshots, and UI elements with transparency also go to WebP (lossless mode), or PNG if you need maximum compatibility. Animated images use WebP animation or short MP4 video, which is dramatically more efficient than GIF.
+
+You can convert any JPG or PNG to WebP in seconds using the SammaPix WebP converter . No upload required- conversion happens entirely in your browser.
+
+
+Step 3 — Compress with optimal quality settings
+
+After resizing and converting to WebP, compression is the final file size lever. Quality 78-82 is the proven sweet spot for web images. At quality 80, the output is visually indistinguishable from the original at normal viewing distances and screen sizes. At quality 95, the file is typically 2-3x larger with no visible improvement on screen.
+
+- Hero images and banners: quality 82, max 300KB target
+
+- Blog post body images: quality 80, 80-150KB target
+
+- Thumbnails and previews: quality 75, under 50KB target
+
+- Product photos (e-commerce): quality 82, under 200KB target
+
+
+Step 4 — Use responsive images with srcset
+
+Even after resizing to a reasonable maximum width, you are still serving a 1600px image to users on a 375px mobile screen. The srcset and sizes attributes tell the browser which image size to download based on the actual display width.
+
+With this markup, a mobile user on a 375px screen downloads the 400px image instead of the 1600px version- a 94% reduction in pixel count before compression is even counted.
+
+
+Step 5 — Lazy load below-the-fold images
+
+Images below the visible viewport on page load do not need to download immediately. The native loading="lazy" attribute defers loading until the user scrolls toward the image. This is now supported in all major browsers with zero JavaScript required.
+
+One critical rule: never apply lazy loading to your hero image or the first visible image on the page. The LCP element must load eagerly. Apply loading="eager" and fetchpriority="high" to your hero image, and loading="lazy" to every other image on the page.
+
+A systematic image optimization workflow eliminates the most common source of slow page loads — Photo by Fotis Fotopoulos on Unsplash
+
+
+Core Web Vitals and images: what actually matters
+
+
+Google's Core Web Vitals framework measures three user experience metrics that directly affect search rankings. Two of the three are directly controlled by how you handle images.
+
+
+LCP (Largest Contentful Paint): compress your hero image first
+
+LCP measures how long it takes for the largest visible content element to render. According to web.dev, the LCP element is an image in approximately 70% of all web pages. A good LCP score is under 2.5 seconds. Anything above 4 seconds is classified as "Poor" and directly suppresses your search rankings.
+
+Your hero image is almost certainly your LCP element. Compress it aggressively- target under 150KB if possible. Add fetchpriority="high" to tell the browser to prioritize it above other resources. If your hero is set as a CSS background image, move it to an <img> tag so the browser can discover and preload it earlier.
+
+
+CLS (Cumulative Layout Shift): always set width and height
+
+CLS measures visual stability- how much the page jumps around as content loads. Images without explicit width and height attributes cause the browser to reserve no space for them during initial layout. When the image finally loads, the entire page reflows- buttons move, text jumps, users accidentally click the wrong thing.
+
+The fix is mechanical: always add width and height attributes to every image tag. Modern browsers use these values to calculate the correct aspect ratio and reserve space before the image loads, eliminating layout shift entirely.
+
+
+How to check your scores
+
+Use PageSpeed Insights to measure your current Core Web Vitals scores. Enter any URL and it runs a real-device test from Google's servers, showing both field data (from real users in Chrome) and lab data (simulated). The Opportunities section will specifically flag oversized images, images missing width and height, and images not served in next-gen formats.
+
+
+WordPress image optimization
+
+
+WordPress is the most common CMS in the world, and image handling is one of its most commonly misconfigured aspects. These WordPress-specific steps address the most impactful issues.
+
+Convert images to WebP before uploading.
+
+The cleanest approach is to convert and compress images before they ever enter the WordPress media library. This gives you full control over the output quality and avoids reliance on plugin behavior. Batch-convert your images to WebP using a tool like SammaPix and upload the optimized files directly.
+
+Disable WordPress's big image scaling if using pre-optimized images.
+
+WordPress 5.3 introduced automatic downscaling of images larger than 2560px. If you are uploading pre-optimized images at correct display sizes, this feature is irrelevant and can be disabled by adding add_filter('big_image_size_threshold', '__return_false'); to your theme's functions.php.
+
+Use a CDN for image delivery.
+
+Even perfectly optimized images load faster when served from a CDN edge node close to your visitors. Cloudflare's free tier is sufficient for most WordPress sites. Enable Cloudflare Polish (available on paid plans) to automatically convert images to WebP at the CDN level if you cannot pre-convert them.
+
+
+E-commerce image optimization
+
+
+E-commerce sites have a unique challenge: large product catalogs with dozens to thousands of images, all of which need to be high-quality enough to convert buyers while being small enough not to kill page speed. The stakes are higher because slow product pages directly reduce sales.
+
+
+Product photo standards
+
+- Main product images: WebP, quality 82, max 1200px wide, target under 200KB
+
+- Product thumbnails (gallery, listing pages): WebP, quality 75, max 400px wide, target under 40KB
+
+- Zoom views (if supported): WebP, quality 85, max 2400px, loaded only on user interaction
+
+- Background and lifestyle images: WebP, quality 80, max 1400px wide
+
+
+Bulk processing for large catalogs
+
+For catalogs with hundreds of product images, manual optimization is not practical. A batch workflow is essential. Organize your source images into folders by type (main images, thumbnails, lifestyle shots), then process each folder with a consistent preset: WebP conversion at the appropriate quality and maximum dimension for that image type.
+
+The SammaPix Compress tool handles batch processing directly in the browser- drag in an entire folder, set your quality target, and download a ZIP of all compressed images. No upload to a server, no API key, no monthly limits. For catalogs above 50 images at a time, the Pro plan removes the batch size limit entirely.
+
+E-commerce product pages with heavy image catalogs benefit most from a consistent optimization workflow — Photo by Markus Spiske on Unsplash
+
+
+Free tools to optimize images for page speed
+
+
+Several reliable tools are available for image optimization. The right choice depends on your workflow and volume requirements.
+
+- SammaPix : Browser-based, no upload required, batch processing, WebP conversion, quality slider with live file size preview. Your images never leave your device. Free for up to 20 files per batch.
+
+- Squoosh : Google's browser-based tool with side-by-side quality comparison. Excellent for single images where you want to fine-tune compression settings visually. No batch support.
+
+- TinyPNG : Server-based compression for PNG and JPEG. Simple interface, good compression ratios. Images are uploaded to their servers. Free tier limited to 20 images per month.
+
+- ImageOptim : macOS desktop app that applies multiple optimizers in sequence. Excellent for local batch processing. Mac-only, no WebP output.
+
+
+FAQ
+
+
+
+How much can image optimization speed up my website?
+
+Image optimization typically reduces page load time by 40-70%. The average webpage weighs 2.5MB, with images accounting for roughly 1.5MB. Compressing and resizing to appropriate dimensions can reduce that image payload to under 400KB, cutting load times by multiple seconds on average connections. Every 100ms improvement in load time correlates with approximately 1% more conversions, according to Google's research.
+
+
+What is a good image file size for web?
+
+For most web images, aim for under 200KB per image. Hero images and full-width banners should stay under 300KB. Blog post body images typically work well at 80-150KB. Product thumbnails should be under 50KB. These targets are achievable with WebP format at quality 80-82 and proper resizing to display dimensions. Any image above 500KB is almost always unnecessarily large for web display.
+
+
+Does image compression affect SEO?
+
+Image compression improves SEO. Smaller images mean faster page loads, which directly improves Core Web Vitals scores. Google uses page speed as a ranking signal, and LCP is an image in approximately 70% of web pages. Compressing your hero image is one of the fastest ways to improve your LCP score and search rankings. Compression does not affect alt text, filenames, or any other image SEO metadata.
+
+
+Should I use WebP or JPEG for my website?
+
+Use WebP as your primary format. WebP files are 25-34% smaller than equivalent JPEGs at the same perceptual quality, and browser support reached 97% in 2026, making it effectively universal. The only reason to keep JPEG is compatibility with legacy systems or email clients that do not support WebP. For any modern website, converting images to WebP before upload is the single fastest format change to reduce page weight.
+
+
+How do I optimize images for mobile?
+
+Optimize images for mobile by implementing responsive images using the srcset attribute to serve different sizes based on screen width. A mobile screen rarely exceeds 428px wide, so serving a 1600px image on mobile wastes significant bandwidth. Combine this with WebP format at quality 78-82 for maximum efficiency. Lazy loading images below the fold with loading="lazy" also prevents unnecessary downloads on initial page load.

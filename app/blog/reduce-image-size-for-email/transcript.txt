@@ -1,0 +1,266 @@
+## Email attachment size limits you need to know
+
+Every email provider enforces a maximum attachment size. These
+limits apply to the total size of all attachments combined in a
+single email- not per file. Sending multiple photos at once makes
+the problem worse fast.
+
+Email Provider
+
+Max Attachment Size
+
+Note
+
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+For the complete, official breakdown of Gmail attachment rules, see
+
+Google's official Gmail attachment help page
+
+. The limits look generous on paper- but the reality of modern
+smartphone photos closes that gap very quickly.
+
+## Why photos from your phone are always too big
+
+The camera on a modern iPhone shoots at 12 megapixels or higher.
+Each raw photo from that sensor is a 4032 x 3024 pixel image-
+that is over 12 million individual pixels. At typical JPEG quality
+settings, each photo weighs between 3 MB and 6 MB off the camera.
+Shoot in Portrait mode, HDR, or high-efficiency format and the
+sizes climb further.
+
+Android flagships and modern DSLRs are even larger. A 24 MP Sony
+or Canon produces JPEGs between 8 MB and 15 MB per shot. Attach
+three of those to an email and you are already at 30–45 MB-
+well over every provider's limit.
+
+The good news: you do not need all those pixels for email. At
+normal screen sizes, a 1920 x 1080 image is indistinguishable from
+a 4032 x 3024 image. Reducing the dimensions alone can cut file
+size by 75% or more- before any compression even happens.
+
+A single iPhone photo at full resolution can be 5 MB or more- far too large for most email attachments - Photo by Paul Hanaoka on Unsplash
+
+## Method 1: Compress the image (fastest, best for single photos)
+
+Compression reduces the amount of data used to encode your image
+without changing its pixel dimensions. A 5 MB iPhone photo at full
+4032 x 3024 resolution can typically be brought down to 500 KB–1
+MB through compression alone, with no visible quality difference at
+normal screen sizes.
+
+The
+
+SammaPix Compress tool
+
+handles this entirely in your browser- your photos never leave
+your device. Drag your photo onto the drop zone, adjust the
+quality slider if needed, and download the compressed version. The
+process takes under ten seconds per photo.
+
+Recommended compression settings for email
+
+- -
+
+Quality 75–80%- the sweet spot for email.
+Visually indistinguishable from the original at screen size,
+but 50–70% smaller.
+
+- -
+
+Quality 60–70%- use this if you still need
+to get smaller. Some loss is visible only at 1:1 zoom on a
+large monitor.
+
+- -
+
+Avoid quality below 50%- artifacts become
+clearly visible at this level. The file size savings are not
+worth the degradation for anything you are sending to another
+person.
+
+## Method 2: Resize the image dimensions
+
+Resizing reduces the number of pixels in your image- from a wide
+original like 4032 x 3024 down to something like 1920 x 1080 or
+1280 x 960. This is one of the most effective ways to reduce image
+size for email because file size scales roughly with the square of
+the pixel dimensions. Halving the width and height reduces the
+pixel count- and thus the file size- by approximately 75%.
+
+A practical target for email photos is the long edge at 1920
+pixels. That is full 1080p resolution- large enough to look crisp
+on any screen the recipient views it on, but a fraction of the
+original file weight. The
+
+SammaPix Batch Resize tool
+
+lets you batch-resize multiple photos to exact dimensions or a
+target percentage- download them all as a ZIP and attach to your
+email in one go.
+
+Resize targets by use case
+
+,
+,
+,
+,
+].map(() => (
+- -
+
+:
+
+))}
+
+## Method 3: Convert to WebP (30% smaller than JPEG)
+
+WebP is a modern image format developed by Google. At equivalent
+visual quality, WebP files are typically 25–35% smaller than JPEG
+files. That means a 3 MB JPEG photo can become a 2 MB WebP- just
+by changing the format, without changing the dimensions or lowering
+the quality setting.
+
+The one consideration with WebP for email is compatibility. Modern
+email clients on web (Gmail, Outlook.com, Yahoo Mail) and iOS/
+Android handle WebP without issues. Older desktop email clients
+like Outlook 2016 or Thunderbird on older systems may not display
+WebP images inline- but they will still receive and allow
+downloading the attachment. If you are unsure, stick to JPEG or
+use Method 4 below which combines everything.
+
+To convert your photos to WebP, use the
+
+SammaPix WebP converter
+
+. Drop in your JPEGs or PNGs and download them as WebP in seconds.
+Everything runs in your browser- nothing is uploaded to any
+server.
+
+Choosing the right format can shave megabytes off your attachments before you touch any quality settings - Photo by Jess Bailey on Unsplash
+
+## Method 4: Combine all three for maximum reduction
+
+For the smallest possible file that still looks good in an email,
+stack all three techniques in order. Resize first- dimensions are
+the biggest single contributor to file weight. Then compress.
+Finally, if compatibility is not a concern, convert to WebP. Each
+step stacks on the previous one and the results are dramatic.
+
+The workflow takes under two minutes for a batch of photos using
+browser-based tools. No software to install, no account to create,
+no files sent to any server.
+
+,
+,
+,
+].map(() => (
+Step
+
+))}
+
+## Quick reference: how much each method reduces your photo
+
+The table below uses a representative starting point: a 5 MB JPEG
+photo from a 12 MP iPhone at 4032 x 3024 pixels. Your results will
+vary by photo content- busy outdoor scenes compress less than
+smooth sky backgrounds- but this gives a reliable reference range.
+
+Method applied
+
+Approx. file size
+
+Reduction from original
+
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+A 5 MB photo that has been resized, compressed, and converted to
+WebP is around 300 KB on average. You can comfortably attach ten
+of them to a single email and stay well under any provider's
+limit. Even keeping it to JPEG- resize and compress only- brings
+you from 5 MB to under 600 KB per photo.
+
+## Tips for batch compressing multiple photos for email
+
+When you need to email an entire album- a wedding set, a real
+estate shoot, a holiday collection- compressing one photo at a
+time is not practical. Here is how to handle batches efficiently.
+
+Use batch tools that produce a ZIP download.
+
+SammaPix processes up to dozens of photos at once and lets you
+download them all as a single ZIP archive. Drag your entire photo
+set onto the drop zone, set the quality, and click download. The
+full batch is ready in under a minute for most photo sets.
+
+Split large batches across multiple emails.
+
+Even after compression, if you are sending 40 photos at 300 KB
+each, that is 12 MB- right at the edge of many limits. Split
+large sets into two or three emails of 10–15 photos each. Label
+them clearly in the subject line: "Event photos - Part 1 of
+3." This is safer and more reliable than trying to squeeze
+everything into one send.
+
+Consider a sharing link for very large sets.
+
+If you are sending more than 20–30 photos, a cloud share link is
+genuinely more practical than email attachments. Google Photos,
+iCloud shared albums, and Dropbox all let you create a link the
+recipient can use to browse and download at their own pace. Email
+is fine for a handful of photos- for full event galleries, a link
+is the better tool.
+
+Set a consistent target size before you start.
+
+Before batch-processing, decide on your target. For most personal
+email use, aim for 300–500 KB per photo with a resize to 1920px
+and quality at 78%. For professional client delivery where
+recipients may print or crop, keep quality at 85% and resize to no
+smaller than 2400px. Having a clear target before you start a
+batch means you do not need to re-process.
+
+Batch compressing a full event album takes under a minute with the right tool - Photo by imgix on Unsplash
+
+## What about using your phone to compress photos for email?
+
+Both iOS and Android offer built-in options to reduce image size
+when sharing. On iPhone, when you tap "Share" and
+choose Mail, iOS may prompt you to pick a size: Small, Medium,
+Large, or Actual Size. "Medium" typically targets
+around 300 KB and "Large" around 750 KB. These are
+decent options for casual sends.
+
+The limitation is control. The built-in share sheet does not tell
+you the exact output size before you send. For important emails
+where you need to stay under a specific limit, browser-based tools
+give you a precise file size readout before downloading, so there
+are no surprises.
+
+## Frequently asked questions
+
+,
+,
+,
+,
+,
+,
+].map(() => (
+
+###
+
+))}

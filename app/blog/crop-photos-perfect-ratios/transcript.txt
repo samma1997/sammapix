@@ -1,0 +1,391 @@
+## What is an aspect ratio and why does it matter for cropping?
+
+An
+
+aspect ratio
+
+is the proportional relationship between an image's width
+and height, expressed as two numbers separated by a colon- for
+example 16:9 or 4:3. It describes shape, not size. A 1920x1080
+pixel screen and a 3840x2160 pixel screen share the same 16:9
+aspect ratio even though their resolutions differ by a factor of
+four.
+
+When you crop a photo, you are trimming it to match a specific
+ratio. If the target ratio does not match your original image,
+you will lose part of the frame. The goal is to crop
+intentionally- preserving your subject while satisfying the
+dimension requirements of your destination platform or print
+size.
+
+Getting the crop photo ratio right before you share or send to
+print saves you from platform auto-cropping (which never picks
+the right area of your image), print shop rejections, and the
+visual awkwardness of letterboxed or pillarboxed outputs.
+
+## The six most common aspect ratios explained
+
+### 1:1 - The square
+
+Equal width and height. Instagram popularized the square format
+when it launched, and while the platform now supports other
+ratios, 1:1 remains the safest choice for feed posts because it
+occupies the maximum grid real estate without being cropped in
+thumbnails.
+
+Square crops work best for portraits (face fills the frame
+symmetrically), product shots on white backgrounds, and detail
+shots where the subject is centered. They struggle with
+landscapes and wide architectural shots- avoid forcing a
+horizontal scene into a square unless you have a strong central
+subject to anchor it.
+
+### 4:3 - The classic camera ratio
+
+Historically the standard for 35mm slide film and early digital
+cameras, 4:3 is slightly wider than square and feels natural for
+most subjects. Modern smartphones often default to 4:3 in Photo
+mode because it matches the sensor's native shape. Standard
+print sizes like 4x3 inches and 8x6 inches use this ratio
+directly.
+
+Use 4:3 for general photography, travel snapshots, food shots,
+and any print destined for a standard photo album. It is
+forgiving on composition because the modest horizontal extension
+beyond square accommodates most scenes without forcing you to
+sacrifice too much of the frame on either side.
+
+### 3:2 - The DSLR standard
+
+The 3:2 ratio comes from 35mm film photography and is baked into
+virtually every full-frame and crop-sensor DSLR and mirrorless
+camera. A standard 4x6 inch print- the most common consumer
+print size globally- is exactly 3:2. So is a 6x4 inch, 12x8
+inch, or any other doubling of those dimensions.
+
+If you shoot with a DSLR or mirrorless camera and plan to print
+4x6 copies, you are already in the right ratio and can print
+with no cropping at all. The ratio is also used for LinkedIn
+post images and some blog header formats.
+
+### 16:9 - Widescreen
+
+The dominant ratio for video and screens. Every modern television,
+laptop screen, desktop monitor, and YouTube video uses 16:9.
+It is also the required ratio for YouTube thumbnails (1280x720
+minimum), Twitter/X link preview cards, Facebook shared link
+images, and LinkedIn article cover photos.
+
+Cropping a portrait or square photo to 16:9 is aggressive- you
+lose a significant portion of the vertical dimension. Plan for
+this when shooting: if you know an image is destined for a
+widescreen crop, compose loosely and avoid placing critical
+elements near the top or bottom of the frame.
+
+### 9:16 - Vertical / Stories
+
+The portrait orientation of 16:9- and the native format of
+every short-form video platform. Instagram Stories, Instagram
+Reels, TikTok, YouTube Shorts, Facebook Stories, Pinterest Idea
+Pins, and Snapchat all use 9:16. At 1080x1920 pixels, it fills
+a smartphone screen edge to edge.
+
+When cropping a horizontal photo to 9:16, you will lose most of
+the width. The result only works if the primary subject is
+vertically centered in the original frame. A better approach is
+to shoot vertical from the start when you know the destination is
+Stories- or use a tool that lets you place the crop manually
+rather than automatically centering it.
+
+### 5:4 - Portrait and print
+
+The 5:4 ratio corresponds to the 8x10 inch print- one of the
+most popular portrait print sizes in photography studios. It is
+slightly more square than 4:3, which makes it flattering for
+portrait work and less claustrophobic than a strict square.
+Instagram also supports portrait posts at 4:5 (the inverse of
+5:4), which is the tallest ratio the platform allows in feed
+posts and occupies more screen space than a square.
+
+## Aspect ratio reference table: which ratio for which purpose
+
+Ratio
+
+Pixels (common)
+
+Primary use cases
+
+Print size
+
+1:1
+
+1080×1080
+
+Instagram grid, Facebook post, profile avatars
+
+4×4″, 5×5″
+
+4:3
+
+1200×900
+
+Standard camera output, blog images, presentation slides
+
+4×3″, 8×6″
+
+3:2
+
+1500×1000
+
+DSLR native, LinkedIn posts, 4×6 print
+
+4×6″, 6×9″, 8×12″
+
+16:9
+
+1920×1080
+
+YouTube thumbnails, Twitter cards, desktop wallpapers, video
+
+- (screen format)
+
+9:16
+
+1080×1920
+
+Instagram Stories & Reels, TikTok, YouTube Shorts
+
+- (screen format)
+
+5:4
+
+1250×1000
+
+Instagram portrait posts (4:5), studio portrait prints
+
+5×4″, 10×8″, 20×16″
+
+## Print sizes and DPI requirements: what you need to know
+
+Aspect ratio determines shape. DPI (dots per inch) determines
+print quality. You need both to be correct for a sharp physical
+print. According to
+
+Photography Life
+
+, the minimum resolution for a print that looks sharp when
+viewed at normal distances (30–40 cm) is 240 DPI. Professional
+labs typically require 300 DPI at the final print dimensions.
+
+To calculate the minimum pixel dimensions for a given print size
+at 300 DPI, multiply each dimension in inches by 300:
+
+4×6 inch print (3:2 ratio):
+
+1200×1800 px minimum at 300 DPI
+
+5×7 inch print (approx 5:7 ratio):
+
+1500×2100 px minimum at 300 DPI
+
+8×10 inch print (5:4 ratio):
+
+2400×3000 px minimum at 300 DPI
+
+11×14 inch print (approx 11:14 ratio):
+
+3300×4200 px minimum at 300 DPI
+
+12×18 inch print (2:3 ratio):
+
+3600×5400 px minimum at 300 DPI
+
+A 12-megapixel smartphone camera produces images around
+4000×3000 pixels- enough for a sharp 13×10 inch print at
+300 DPI. Modern cameras at 24–50 megapixels produce images
+that can be printed at 20×13 inches or larger without
+interpolation. The limitation is always the crop: the more you
+crop, the fewer pixels remain, and the smaller the maximum
+print you can make at full quality.
+
+This is why cropping and resizing are connected decisions.
+
+SammaPix ResizePack
+
+lets you resize images to exact pixel dimensions after cropping,
+so you can verify the final pixel count before sending to a
+print lab.
+
+## Rule of thirds and composition when cropping
+
+The most technically correct crop can still produce a weak image
+if the composition is off. Cropping is not just a mechanical
+operation- it is a creative one. The crop is your second chance
+to nail the composition you intended when you pressed the
+shutter.
+
+### Apply the rule of thirds
+
+Divide your crop frame into a 3×3 grid. Place your primary
+subject at one of the four intersection points of those grid
+lines rather than dead center. Eyes in portraits should fall on
+the upper horizontal third. A horizon line in a landscape
+should sit on the top or bottom third, not in the middle.
+
+When cropping, use this grid as your anchor. If you are moving
+toward a 1:1 square from a wider shot, shift the crop box so
+the main subject lands on an intersection point. The result will
+feel intentional rather than mechanical. Most photo editing apps
+display a thirds grid overlay when you are in crop mode- use it
+every time.
+
+### Leave breathing room
+
+A common cropping mistake is cropping too tight. Subjects that
+are pressed against the edges of the frame feel claustrophobic.
+As a rule: leave at least 5–10% of empty space around the
+subject on all sides. For portraits, never crop at the joints-
+not at the wrist, elbow, knee, or ankle. Crop between joints
+instead.
+
+### Straighten before you crop
+
+A tilted horizon is one of the most jarring problems in
+photography. Always check your horizon line before finalizing a
+crop. Most tools let you rotate and crop simultaneously- use
+the rotate function first, then finalize the ratio. Straightening
+after the fact costs you pixels around the edges, so account
+for this in your composition.
+
+## How to batch crop photos to a specific ratio with SammaPix CropRatio
+
+Cropping one photo manually is straightforward. Cropping fifty
+photos to the same ratio- all with correct compositions, without
+the platform auto-cropping them incorrectly- is tedious and
+error-prone if done one by one.
+
+SammaPix
+
+CropRatio
+
+is a browser-based batch cropping tool designed for exactly this
+workflow. Here is how it works:
+
+Drop your photos
+
+- drag a folder or individual files into the drop zone. The
+tool accepts JPG, PNG, and WebP with no upload limit.
+
+Select your target ratio
+
+- choose from presets (1:1, 4:3, 3:2, 16:9, 9:16, 5:4) or
+enter a custom ratio for unusual formats.
+
+Choose crop positioning
+
+- center, smart-crop to the detected face or subject, or
+define a focal point manually per image.
+
+Preview before export
+
+- review each crop in the thumbnail grid. Adjust any that look
+off before downloading.
+
+Download individually or as a ZIP
+
+- all processing happens in your browser. No files are uploaded
+to any server.
+
+The smart crop option is particularly useful for portrait
+batches where you want faces to remain centered in the frame
+regardless of how the original photo was composed. It detects
+face regions and positions the crop box so the face stays within
+the upper third of the output.
+
+After cropping, you can optionally pass your files through
+
+SammaPix Compress
+
+to reduce file sizes for web delivery- maintaining your exact
+crop dimensions at a fraction of the original file weight.
+
+## Platform-specific cropping requirements in 2026
+
+### Instagram
+
+Instagram supports three ratios in the feed: square (1:1),
+landscape (1.91:1, which is close to 16:9 but cropped to
+Instagram's container), and portrait (4:5). The 4:5 portrait
+ratio takes up the most vertical space in the feed and therefore
+gets more visual attention- use it for single-subject photos
+where vertical framing works. Square 1:1 is the safest for
+carousel posts because all images display consistently.
+
+### YouTube and video platforms
+
+YouTube thumbnails must be 16:9. The minimum dimensions are
+1280×720 pixels, but 1920×1080 is recommended for retina
+displays. Thumbnails that do not match 16:9 will have black bars
+added automatically- always crop to the correct ratio before
+uploading.
+
+### Pinterest
+
+Pinterest favors vertical content. The optimal ratio for standard
+pins is 2:3 (1000×1500 pixels), and for Idea Pins (the
+full-screen format), 9:16. Images that are too wide get cropped
+to a square in the feed, which can ruin compositions- always
+crop vertically before uploading to Pinterest.
+
+### Print: photo labs
+
+Most consumer photo labs in 2026 use automated cropping when the
+image ratio does not match the selected print size. The software
+crops from the center by default- which means it will cut off
+people's heads, miss the key subject in a landscape, or
+produce awkward compositions consistently. Always pre-crop to
+the target print ratio before uploading to any online lab.
+
+## FAQ
+
+### What is the best crop photo ratio for Instagram?
+
+For feed posts: 4:5 (portrait) for maximum visual impact, or
+1:1 (square) for consistent carousel appearances. For Stories
+and Reels: 9:16. Avoid 16:9 landscape in the feed- it renders
+small relative to portrait and square posts.
+
+### What ratio is a standard 4x6 photo print?
+
+A 4x6 inch print is exactly 3:2- the native ratio of virtually
+all DSLR and mirrorless cameras. If you shoot with one of these
+cameras and print 4x6, you can print the full frame with no
+cropping. Smartphone photos (typically 4:3) will require a small
+crop on the long edges to fit a 4x6 print.
+
+### How many pixels do I need for a sharp 8x10 print?
+
+At 300 DPI, an 8x10 inch print requires 2400×3000 pixels minimum.
+At 240 DPI (acceptable for photos viewed at arm's length),
+the minimum is 1920×2400 pixels. Any modern smartphone with
+12 megapixels or more produces images with sufficient resolution
+for this size- provided you have not cropped heavily.
+
+### Can I crop a horizontal photo to 9:16 for Stories?
+
+Technically yes, but the result is rarely good. Cropping a
+landscape photo to a 9:16 vertical removes roughly 75% of the
+horizontal width- most subjects will be cut off. A better
+approach: place the photo as a background element in a 9:16
+canvas with blurred edges, or use an app that lets you position
+a small landscape image within a 9:16 frame with a colored or
+blurred background.
+
+### What is the difference between aspect ratio and resolution?
+
+Aspect ratio describes the shape of an image (width-to-height
+proportion). Resolution describes the number of pixels. A
+1080×1080 image and a 3000×3000 image have the same 1:1 aspect
+ratio but very different resolutions. For web use, aspect ratio
+matters most. For print, both ratio and resolution must match
+the target size.

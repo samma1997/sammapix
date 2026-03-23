@@ -1,0 +1,214 @@
+## Why image optimization matters for WordPress
+
+            WordPress powers over 43% of all websites on the internet. It is the most common platform- and unoptimized images are the most common performance problem. When Google runs a Lighthouse audit on your site, images are almost always the first item flagged.
+
+            The reason is direct: most WordPress users upload photos straight from their camera or phone. A single iPhone 15 photo can be 8–15 MB. A post with five hero images at that size downloads 40–75 MB before the page renders. On a 4G connection, that is a 10–15 second load time - Google considers anything above 2.5 seconds a failing LCP score.
+
+            According to Google's Largest Contentful Paint guidance , a "good" LCP score is under 2.5 seconds. LCP is almost always driven by the largest image on screen- typically a hero image, featured image, or product photo. The fastest path to a better LCP score is a smaller, properly formatted image delivered quickly.
+
+            Core Web Vitals are a direct Google ranking signal since 2021. A poor LCP score does not just hurt user experience- it measurably suppresses your search rankings relative to competitors whose pages load faster.
+
+            
+
+            
+            
+## The most common WordPress image mistakes
+
+            Before walking through the correct workflow, it helps to name what most people get wrong. These are the patterns that cause the most damage to WordPress performance:
+
+            
+              ,
+                ,
+                ,
+                ,
+                ,
+              ].map(() => (
+                
+                  
+
+                  ))} Camera originals should never go straight into the WordPress media library - Photo by ShareGrid on Unsplash ## The correct workflow: optimize before you upload The most effective approach is a four-step pre-upload workflow. Run these steps on every image before it touches your WordPress media library. All four can be done entirely in your browser- no uploads to third-party servers, no plugins required at this stage.
+
+            
+              ) => (
+                
+                  
+                    
+                      
+                        
+                          
+                            STEP 
+                          
+                        
+                        
+### 
+
+                        
+                           →
+                        
+                      
+                    
+                  
+                  
+                    
+
+                    
+                      
+                    
+                  
+                
+              ))}
+            
+
+            
+            
+              
+                Free- no signup, no upload, no limits
+
+                Start with SammaPix Compress- process all four steps before your next WordPress upload
+
+              
+              
+            
+
+            
+            
+## WordPress image settings you should configure
+
+            Once your images are pre-optimized, there are several WordPress settings worth reviewing. These control how WordPress handles images after upload- including thumbnail generation, maximum upload size, and srcset behavior.
+
+            
+### Media settings (Settings → Media)
+
+            WordPress generates three default thumbnail sizes on every upload: thumbnail (150×150), medium (300×300), and large (1024×1024). It also keeps the full original. This means a single upload creates four files on disk.
+
+            Review these sizes and align them with what your theme actually uses. There is no benefit to generating sizes your theme never requests. You can disable unused sizes or adjust dimensions under Settings → Media in the WordPress admin. The official WordPress developer documentation covers media handling in detail.
+
+            
+### Responsive images and srcset
+
+            WordPress automatically adds srcset attributes to images inserted via the block editor or wp_get_attachment_image(). This tells the browser to download only the size appropriate for the current viewport- a mobile visitor gets a 480 px image rather than a 1400 px one.
+
+            This system works best when you have uploaded images wider than the largest display size you need, so WordPress has something to downscale from. If you uploaded a 1200 px image and your theme requests a 1400 px thumbnail, WordPress will serve the 1200 px original with no downscaling- this is why correct pre-upload resizing matters.
+
+            
+              
+              
+                WordPress generates multiple thumbnail sizes from every uploaded image - Photo by Stephen Phillips on Unsplash
+              
+            
+
+            
+            
+## Lazy loading in WordPress
+
+            WordPress has added the loading="lazy" attribute to images automatically since version 5.5. This tells the browser to defer loading images that are below the fold- images not visible in the initial viewport are only downloaded when the user scrolls near them.
+
+            The one important exception: your hero image or the Largest Contentful Paint image should never be lazy loaded. WordPress applies loading="eager" to the first image in the content area since 6.3- but if your theme controls the hero image independently, verify that it is not lazy loaded.
+
+            You can read the full implementation details and browser compatibility notes in Google's guide to browser-level lazy loading .
+
+            
+            
+## CDN for WordPress images
+
+            Even perfectly compressed images load slowly if they are served from a single origin server far from the visitor. A Content Delivery Network (CDN) distributes your static assets- including images- across servers globally, so each visitor downloads images from a location geographically close to them.
+
+            For WordPress, the simplest CDN path is Cloudflare. The free tier proxies your entire site through their global network, caching images at edge nodes worldwide. This alone can reduce image delivery latency by 50–80% for visitors outside your origin server's region.
+
+            Alternatives include Bunny CDN (very affordable, excellent for WordPress), KeyCDN, and the Jetpack CDN feature (free for WordPress.com-connected sites). If your hosting plan includes a CDN - WP Engine, Kinsta, and Cloudways all do- make sure it is enabled for the /wp-content/uploads/ path.
+
+            
+            
+## WebP delivery: plugins vs pre-conversion
+
+            There are two approaches to serving WebP on WordPress. Understanding the difference helps you choose the one that fits your workflow.
+
+            
+### Plugin-based server-side conversion
+
+            Plugins like ShortPixel, Imagify, and WebP Express generate WebP versions of your uploaded JPEGs and PNGs on the server. They then serve the WebP version to browsers that support it (detected via the Accept: image/webp request header) and fall back to the original for browsers that do not.
+
+            The advantage: it handles conversion automatically. The disadvantage: your server stores both the original and the WebP version of every image and every thumbnail- potentially doubling your storage footprint. It also uses server CPU or an external API quota on every new upload.
+
+            
+### Pre-conversion before upload (recommended)
+
+            The cleaner approach is to convert images to WebP before uploading. WordPress 5.8+ accepts WebP uploads natively and generates WebP thumbnails from a WebP source. No plugin needed for WebP delivery- you are serving WebP directly, not converting on the fly.
+
+            This approach means your media library contains only WebP files. Smaller originals, smaller thumbnails, no duplicate storage, no server-side conversion overhead. The SammaPix WebP Converter handles the conversion in your browser before anything reaches WordPress.
+
+            
+              
+              
+                Pre-converting to WebP before upload eliminates the need for server-side conversion plugins - Photo by Ilya Pavlov on Unsplash
+              
+            
+
+            
+            
+## Comparison: SammaPix workflow vs Smush vs ShortPixel vs Imagify
+
+            All four approaches can produce well-optimized WordPress images. The differences come down to where optimization happens, what you store on disk, and what it costs.
+
+            
+              
+                Tool | 
+                    Approach | 
+                    WebP | 
+                    EXIF Strip | 
+                    Privacy | 
+                    Cost | 
+                  
+                
+                
+                  
+                
+              
+            
+
+            ShortPixel and Imagify are both excellent plugins for teams who need server-side automation- especially for large existing libraries with thousands of images already uploaded. The free quotas (100/month and 200/month respectively) are suitable for low-volume sites, but grow expensive at scale.
+
+            Smush from WPMU DEV is the most widely installed WordPress image optimization plugin with over one million active installs. Its free tier compresses and strips EXIF metadata, but WebP conversion requires the paid Smush Pro plan. For most new WordPress projects in 2026, the pre-upload workflow using SammaPix avoids both plugin complexity and recurring costs.
+
+            
+            
+## Complete WordPress image optimization checklist for 2026
+
+            
+              ,
+                ,
+                ,
+                ,
+                ,
+                ,
+                ,
+                ,
+              ].map(() => (
+                
+                  
+                  
+                
+              ))}
+            
+
+            
+            
+              
+## Frequently asked questions
+
+              
+                ,
+                  ,
+                  ,
+                  ,
+                  ,
+                  ,
+                ].map(() => (
+                  
+                    
+### 
+
+                    
+
+                  
+                ))}

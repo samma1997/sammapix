@@ -1,0 +1,296 @@
+## Why correct image sizes matter more than ever in 2026
+
+Every major social platform applies automatic cropping, compression, and resizing to uploaded images. Upload a 4:3 landscape photo to an Instagram Story and the platform will crop it to 9:16, cutting your subject out of frame. Post a Facebook cover photo at the wrong dimensions and it will be compressed into a blurry mess across all device sizes.
+
+The stakes are higher in 2026 because the feeds are more competitive than ever. Blurry thumbnails, cropped headshots, and distorted banners are not just aesthetic problems- they signal a lack of attention to detail that drives users to scroll past. A correctly sized image, on the other hand, takes full advantage of the display space the algorithm gives you.
+
+Platforms also penalize heavily compressed uploads differently depending on the image type. Profile photos processed at low quality lose detail on retina displays. YouTube thumbnails that exceed the 2 MB limit get re-encoded by YouTube at lower quality, softening text and faces. Knowing the exact constraints lets you deliver the best possible image within each platform's processing pipeline.
+
+This guide is structured as a platform-by-platform reference. Use the section for the platform you are working with, check the table, then resize your image before uploading. If you need to resize or crop images to exact social media dimensions in bulk,
+
+SammaPix ResizePack
+
+lets you process multiple images to exact target dimensions in one pass, entirely in your browser.
+
+## Instagram image sizes 2026
+
+Ready to resize? Use Resize for Instagram to batch-resize photos to exact dimensions.
+
+Instagram displays content at multiple aspect ratios depending on the format. The feed has historically enforced a fixed square crop but now allows portrait and landscape posts. Stories and Reels are strictly vertical. Instagram re-encodes all uploads, so starting with the correct dimensions minimizes quality loss. Official guidance is available via
+
+Instagram Help Center
+
+.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+### Instagram tips
+
+))}
+
+## Facebook image sizes 2026
+
+Facebook serves images across web, iOS, and Android at different sizes, making its compression behavior one of the most variable of any major platform. Cover photos are particularly prone to showing quality differences between desktop and mobile. Full technical specifications are documented at
+
+Facebook for Developers
+
+.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+### Facebook tips
+
+))}
+
+## X (Twitter) image sizes 2026
+
+X displays in-feed images in a 16:9 preview crop by default, with a tap to view the full image. The platform accepts a wide range of aspect ratios but applies automatic cropping in the timeline. Understanding where the crop falls is critical for images with centered subjects or important text.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+### X / Twitter tips
+
+))}
+
+## LinkedIn image sizes 2026
+
+LinkedIn is used by professionals who will judge your content against a high standard of production quality. Blurry banners and pixelated logos signal carelessness in a context where first impressions carry real professional weight. LinkedIn displays images differently between desktop and mobile, so design with both in mind.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+Consistent, correctly sized images across platforms build a professional content presence - Photo by Unsplash
+
+## TikTok image and video sizes 2026
+
+Ready to resize? Use Resize for TikTok to batch-resize photos to vertical (9:16) dimensions.
+
+TikTok is primarily a video platform, and its image standards are defined around vertical video. Photo posts and carousels are also supported as of 2023 and growing in popularity for editorial and product content. The platform's UI elements occupy significant space at the top and bottom of the frame- design your key content to sit in the central safe zone.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+## YouTube image sizes 2026
+
+Ready to resize? Use Resize for YouTube to batch-resize thumbnails to 1280×720px.
+
+YouTube thumbnail design is one of the highest-impact visual tasks for video creators. Research consistently shows that thumbnails directly influence click-through rate more than titles for most content categories. YouTube also has strict size requirements for channel art that must adapt across TV, desktop, tablet, and mobile simultaneously. Official specs are published at
+
+YouTube Help Center
+
+.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+### YouTube tips
+
+))}
+
+## Pinterest image sizes 2026
+
+Ready to resize? Use Resize for Pinterest to batch-resize pins to the recommended 1000×1500px (2:3 ratio).
+
+Pinterest is a visual discovery engine, not a traditional social media platform, which means images compete entirely on visual impact. Tall, vertical pins take up significantly more feed space than horizontal ones and consistently outperform square or landscape formats. Pinterest recommends a strict 2:3 ratio for standard pins as the best performer in their feed algorithm.
+
+Type
+Width × Height
+Aspect Ratio
+Max File Size
+
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+## How to resize images for social media with SammaPix
+
+Resizing each image to the correct dimensions for every platform manually- especially when managing multiple accounts- is time-consuming work. SammaPix provides two tools that handle this efficiently, entirely in your browser without uploading your files to any server.
+
+### ResizePack- batch resize to exact dimensions
+
+ResizePack
+
+lets you drop multiple images and output them at a set of target dimensions in one operation. You can define pixel dimensions- for example, 1080 × 1080 px for Instagram square posts- and process an entire folder of images in seconds. The output maintains maximum quality using canvas-based client-side processing. Useful for:
+
+))}
+
+### CropRatio- crop to exact aspect ratios
+
+When you need to crop an existing image to a specific social media ratio - 4:5 for Instagram portrait, 9:16 for Stories, 16:9 for YouTube thumbnails-
+
+CropRatio
+
+gives you a visual crop tool with locked aspect ratios. Select the target platform ratio, position the crop frame over your subject, and export at full resolution. No guessing whether you are hitting the exact ratio manually.
+
+Free tools- no upload, no signup
+
+Batch Resize
+
+Batch resize to exact pixel dimensions
+
+Crop & Ratio
+
+Crop images to locked aspect ratios
+
+## Image format recommendations for social media
+
+Choosing the right file format before uploading matters as much as choosing the right dimensions. Each platform applies its own encoding pipeline on upload- but the format you provide determines how much quality the platform has to work with before its compression kicks in.
+
+### JPEG- the universal choice for social media photos
+
+JPEG remains the most reliable format for uploading photographs to social media. Every major platform is optimized to handle JPEG, supports its metadata conventions, and applies its own re-encoding on top of it. Upload at 85–95% quality- higher than this rarely improves visible quality but increases file size, and lower than 80% will show compression artifacts after the platform re-encodes the image again.
+
+For most platforms - Instagram, Facebook, X, LinkedIn - JPEG is the format that gives platforms the cleanest source material to work from. Use
+
+SammaPix Compress
+
+to reduce JPEG file sizes before upload without degrading the quality the platform will use as its source.
+
+### PNG- for graphics, logos, and screenshots
+
+For any image that contains flat areas of color, text overlays, or a transparent background- such as a logo, infographic, or screenshot - PNG is the correct choice. JPEG compression introduces visible artifacts on hard edges and flat fills that PNG encoding avoids entirely through its lossless compression model.
+
+Some platforms, notably Facebook, also serve PNG files with less aggressive re-encoding than JPEG in certain contexts. For cover photos and page logos, PNG often yields sharper final output.
+
+### WebP- for your own website, not direct social uploads
+
+WebP is the ideal format for images on your own website- blog posts, landing pages, and portfolio galleries. It delivers 25–35% smaller files than JPEG at equivalent quality and is supported by all modern browsers. Use
+
+SammaPix WebP Converter
+
+to batch-convert photos before publishing to your site.
+
+For direct social media uploads, WebP is accepted by some platforms (X/Twitter, Facebook) but is not the recommended format for maximum quality preservation. Stick to JPEG for social uploads and reserve WebP for your own web properties.
+
+## Quick reference: format by platform
+
+Platform
+Best Format (Photos)
+Best Format (Graphics)
+WebP Accepted
+
+,
+,
+,
+,
+,
+,
+,
+].map((row, i) => (
+
+))}
+
+## Common mistakes that degrade social media image quality
+
+Even with the correct dimensions, certain upload practices degrade final image quality in ways that are preventable.
+
+### Double compression
+
+Every social platform re-encodes your uploaded image with its own compression algorithm. If you upload an image that has already been compressed aggressively- for example, a JPEG at 60% quality- the platform compounds the existing artifacts with its own pass, producing visibly degraded output. Always upload from a high-quality source file and let the platform apply its single compression pass.
+
+### Uploading screenshots of other social posts
+
+Reposting content by screenshotting it and re-uploading introduces multiple quality degradation passes. Screen resolution adds DPI scaling artifacts, and the platform applies its own compression on top. If you want to reshare existing content, use the platform's native share or repost feature rather than screenshotting.
+
+### Wrong aspect ratio leading to forced cropping
+
+Platforms never leave letterbox bars around images- they crop to fill the container. If your image does not match the expected aspect ratio for the placement, the platform crops it, often removing the most important part of the frame. Use
+
+CropRatio
+
+to crop to the correct ratio before uploading and control exactly which part of the image is preserved.
+
+## FAQ
+
+,
+,
+,
+,
+,
+,
+].map(() => (
+
+###
+
+))}

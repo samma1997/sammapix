@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, X, ChevronRight } from "lucide-react";
+import { ArrowRight, Check, X, ChevronRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
@@ -159,91 +160,60 @@ const faqSchema = {
   ],
 };
 
+
 export default function BestImageFormatForWeb2026Page() {
-  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(POST_TITLE)}&url=${encodeURIComponent(POST_URL)}&via=lucasammarco`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(POST_URL)}`;
-
   return (
-    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <div className="max-w-2xl mx-auto">
-
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Back to Blog
-        </Link>
-
-        <article>
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-[10px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] uppercase tracking-wide">
-                Reference
-              </span>
-              <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                {POST_DATE_FORMATTED}
-              </span>
-              <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                &middot; 14 min read
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-[#E5E5E5] leading-snug tracking-tight mb-4">
-              {POST_TITLE}
-            </h1>
-            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Six image formats. Wildly different file sizes, compression
-              tradeoffs, and browser support levels. This guide covers every
-              format you will encounter in web development in 2026 - JPEG, PNG,
-              WebP, AVIF, GIF, and SVG- with real benchmark numbers, a
-              comparison table, and a plain-language decision framework for
-              choosing the right format every time.
-            </p>
-            <p className="text-xs text-[#A3A3A3] dark:text-[#737373]">
-              By{" "}
-              <a
-                href="https://lucasammarco.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:text-[#525252] dark:hover:text-[#A3A3A3] transition-colors"
-              >
-                Luca Sammarco
-              </a>
-            </p>
-          </header>
-
-          <div className="prose-custom space-y-0">
-
+    <>
+      <BlogArticleLayout
+        title={POST_TITLE}
+        slug="best-image-format-for-web-2026"
+        description="The definitive guide to choosing the right image format for web. Compare WebP, AVIF, JPEG, PNG, and GIF- file size, quality, browser support, and when to use each."
+        date={POST_DATE}
+        dateFormatted={POST_DATE_FORMATTED}
+        tags={["Performance"]}
+        readingTime={12}
+        headings={[
+          { id: "why-format-matters", title: "Why your image format choice matters more than you think" },
+          { id: "jpeg", title: "JPEG: the veteran format that still works" },
+          { id: "png", title: "PNG: lossless quality with transparency" },
+          { id: "webp", title: "WebP: the pragmatic default for web in 2026" },
+          { id: "avif", title: "AVIF: the next-generation format gaining ground fast" },
+          { id: "gif", title: "GIF: still relevant, but barely" },
+          { id: "svg", title: "SVG: the right answer for a specific class of images" },
+          { id: "comparison-table", title: "Complete format comparison table" },
+          { id: "decision-framework", title: "How to choose the right format: a decision framework" },
+          { id: "performance-impact", title: "Performance impact: real numbers" },
+          { id: "convert-with-sammapix", title: "How to convert between formats with SammaPix" },
+          { id: "faq", title: "Frequently asked questions" },
+        ]}
+        summary={[
+          "WebP is the best all-around format for web images in 2026 - 25-35% smaller than JPEG at equivalent quality with 98%+ browser support.",
+          "AVIF delivers 20-50% smaller files than WebP but has lower browser support (92-93%) and slower encoding - use it as a progressive enhancement.",
+          "JPEG is not obsolete but should no longer be your default - reserve it for email, print, or legacy systems that require it.",
+          "GIF is largely obsolete for new content - animated WebP files are typically 64% smaller than equivalent GIFs.",
+          "SVG is the only correct format for logos, icons, and illustrations that need to scale to any resolution without quality loss.",
+        ]}
+        heroImage={
+          <figure className="my-8">
+                        <img
+                          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                          alt="Website performance dashboard showing page speed metrics and image optimization scores"
+                          className="w-full rounded-lg"
+                          loading="eager"
+                        />
+                        <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                          Image format choice directly affects Core Web Vitals and page
+                          load speed - Photo by Carlos Muza on Unsplash
+                        </figcaption>
+                      </figure>
+        }
+      >
+        {/* Article body content */}
             {/* Hero image */}
-            <figure className="my-8">
-              <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-                alt="Website performance dashboard showing page speed metrics and image optimization scores"
-                className="w-full rounded-lg"
-                loading="eager"
-              />
-              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Image format choice directly affects Core Web Vitals and page
-                load speed - Photo by Carlos Muza on Unsplash
-              </figcaption>
-            </figure>
+            
 
             {/* Introduction */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="why-format-matters" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Why your image format choice matters more than you think
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -272,7 +242,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* JPEG */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="jpeg" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               JPEG: the veteran format that still works
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -346,7 +316,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* PNG */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="png" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               PNG: lossless quality with transparency
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -412,7 +382,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* WebP */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="webp" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               WebP: the pragmatic default for web in 2026
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -528,7 +498,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* AVIF */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="avif" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               AVIF: the next-generation format gaining ground fast
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -606,7 +576,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* GIF */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="gif" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               GIF: still relevant, but barely
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -632,7 +602,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* SVG */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="svg" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               SVG: the right answer for a specific class of images
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -658,7 +628,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* Comparison Table */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="comparison-table" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Complete format comparison table
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -797,7 +767,7 @@ export default function BestImageFormatForWeb2026Page() {
             </div>
 
             {/* Decision flowchart */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="decision-framework" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               How to choose the right format: a decision framework
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -856,7 +826,7 @@ export default function BestImageFormatForWeb2026Page() {
             </div>
 
             {/* Performance Impact */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="performance-impact" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Performance impact: real numbers
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -955,7 +925,7 @@ export default function BestImageFormatForWeb2026Page() {
             </p>
 
             {/* How to convert */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="convert-with-sammapix" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               How to convert between formats with SammaPix
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -1049,7 +1019,7 @@ export default function BestImageFormatForWeb2026Page() {
             </div>
 
             {/* FAQ */}
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="faq" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Frequently asked questions
             </h2>
 
@@ -1115,77 +1085,16 @@ export default function BestImageFormatForWeb2026Page() {
                 >
                   Compress images
                 </Link>
+
+
               </div>
             </div>
 
-            {/* Share */}
-            <div className="flex items-center gap-3 mb-10">
-              <span className="text-xs text-[#A3A3A3] dark:text-[#737373]">
-                Share:
-              </span>
-              <a
-                href={twitterShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] underline underline-offset-2 transition-colors"
-              >
-                Twitter
-              </a>
-              <a
-                href={linkedinShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] underline underline-offset-2 transition-colors"
-              >
-                LinkedIn
-              </a>
-            </div>
+      </BlogArticleLayout>
 
-          </div>
-        </article>
-
-        {/* Related posts */}
-        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A] pt-10">
-          <p className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] uppercase tracking-wide mb-5">
-            Related articles
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                href: "/blog/complete-guide-webp-format",
-                badge: "Formats",
-                title: "The Complete Guide to WebP",
-                description:
-                  "Everything you need to know about WebP- how it works, browser support, and when to use it.",
-              },
-              {
-                href: "/blog/best-image-compression-tools-2026",
-                badge: "Tools",
-                title: "Best Image Compression Tools in 2026",
-                description:
-                  "SammaPix, TinyPNG, Squoosh, ImageOptim- an honest comparison of the top free tools.",
-              },
-            ].map(({ href, badge, title, description }) => (
-              <Link
-                key={href}
-                href={href}
-                className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-4 py-4 hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors block"
-              >
-                <span className="text-[10px] font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wide bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] px-1.5 py-0.5 rounded mb-2 inline-block">
-                  {badge}
-                </span>
-                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-                  {title}
-                </p>
-                <p className="text-xs text-[#737373] leading-relaxed">
-                  {description}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+    </>
   );
 }

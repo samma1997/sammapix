@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
@@ -89,47 +90,69 @@ const breadcrumbSchema = {
   ],
 };
 
+
 export default function CompleteGuideWebpFormatPage() {
-  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(POST_TITLE)}&url=${encodeURIComponent(POST_URL)}&via=lucasammarco`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(POST_URL)}`;
-
   return (
-    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <div className="max-w-2xl mx-auto">
-
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Back to Blog
-        </Link>
-
-        <article>
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-[10px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] uppercase tracking-wide">
-                Formats
-              </span>
-              <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                {POST_DATE_FORMATTED}
-              </span>
-              <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                &middot; 9 min read
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-[#E5E5E5] leading-snug tracking-tight mb-4">
-              {POST_TITLE}
-            </h1>
-            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
-              WebP is now supported by every major browser, delivers 25–35% smaller files than JPEG at equivalent quality, and handles both lossy and lossless compression with transparency. If you are still defaulting to JPEG for every web image in 2026, this guide explains what you are leaving on the table- and how to make the switch.
-            </p>
-          </header>
-
-          <div className="prose-custom space-y-0">
-
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+    <>
+      <BlogArticleLayout
+        title={POST_TITLE}
+        slug="complete-guide-webp-format"
+        description="WebP delivers smaller file sizes than JPEG and PNG without visible quality loss. Learn how WebP works, when to use it, browser support in 2026, and how to convert your photos for free."
+        date={POST_DATE}
+        dateFormatted={POST_DATE_FORMATTED}
+        tags={["Performance"]}
+        readingTime={9}
+        headings={[
+          { id: "what-is-webp", title: "What is WebP?" },
+          { id: "capabilities", title: "WebP capabilities: what makes it versatile" },
+          { id: "browser-support", title: "WebP browser support in 2026" },
+          { id: "webp-vs-jpeg-png", title: "WebP vs JPEG vs PNG: when to use which" },
+          { id: "format-comparison", title: "Format comparison at a glance" },
+          { id: "avif-comparison", title: "What about AVIF? Is it better than WebP?" },
+          { id: "convert-with-sammapix", title: "How to convert photos to WebP using SammaPix" },
+          { id: "serving-webp", title: "Serving WebP on your website" },
+          { id: "photography-tips", title: "WebP and photography workflows: practical tips" },
+          { id: "faq", title: "FAQ" },
+        ]}
+        summary={[
+          "WebP delivers 25-35% smaller files than JPEG at equivalent visual quality, with support for both lossy and lossless compression plus transparency.",
+          "Browser support for WebP exceeds 98% globally in 2026, making it a safe default for virtually all web publishing workflows.",
+          "WebP uses VP8 predictive coding which is fundamentally more efficient than JPEG DCT-based compression for photographic content.",
+          "Convert your entire image library to WebP for free using SammaPix - processing happens 100% in your browser with no uploads.",
+        ]}
+        heroImage={
+          <figure className="my-8">
+                        <img
+                          src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80"
+                          alt="Web developer working on responsive design at a modern desk setup"
+                          className="w-full rounded-lg"
+                          loading="eager"
+                        />
+                        <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                          Modern web development workflows increasingly default to WebP for image delivery - Photo by Domenico Loia on Unsplash
+                        </figcaption>
+                      </figure>
+        }
+        ctaBlock={
+          <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
+                        <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
+                          Convert your photos to WebP- free
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
+                          Drop your JPEGs, PNGs, and GIFs into SammaPix and get WebP files instantly. Batch processing, ZIP download, no upload required. Files never leave your browser.
+                        </p>
+                        <Link
+                          href="/tools/webp"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+                        >
+                          Open WebP Converter
+                          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        </Link>
+                      </div>
+        }
+      >
+        {/* Article body content */}
+            <h2 id="what-is-webp" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               What is WebP?
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -152,19 +175,9 @@ export default function CompleteGuideWebpFormatPage() {
               <a href="https://developers.google.com/speed/webp" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">Google WebP developer page</a>.
             </p>
 
-            <figure className="my-8">
-              <img
-                src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80"
-                alt="Web developer working on responsive design at a modern desk setup"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
-              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Modern web development workflows increasingly default to WebP for image delivery - Photo by Domenico Loia on Unsplash
-              </figcaption>
-            </figure>
+            
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="capabilities" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               WebP capabilities: what makes it versatile
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -200,7 +213,7 @@ export default function CompleteGuideWebpFormatPage() {
               ))}
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="browser-support" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               WebP browser support in 2026
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -254,7 +267,7 @@ export default function CompleteGuideWebpFormatPage() {
               ))}
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="webp-vs-jpeg-png" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               WebP vs JPEG vs PNG: when to use which
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -313,7 +326,7 @@ export default function CompleteGuideWebpFormatPage() {
             </ul>
 
             {/* Format comparison table */}
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="format-comparison" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-4">
               Format comparison at a glance
             </h2>
             <div className="overflow-x-auto -mx-4 sm:mx-0 mb-6">
@@ -366,7 +379,7 @@ export default function CompleteGuideWebpFormatPage() {
               </table>
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="avif-comparison" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               What about AVIF? Is it better than WebP?
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -380,7 +393,7 @@ export default function CompleteGuideWebpFormatPage() {
               <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">&lt;picture&gt;</code> element. SammaPix currently focuses on WebP conversion as the production-ready default; AVIF support is on the roadmap.
             </p>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="convert-with-sammapix" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               How to convert photos to WebP using SammaPix
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -447,7 +460,7 @@ export default function CompleteGuideWebpFormatPage() {
               />
             </Link>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="serving-webp" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Serving WebP on your website
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -502,7 +515,7 @@ export default function CompleteGuideWebpFormatPage() {
               </figcaption>
             </figure>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="photography-tips" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               WebP and photography workflows: practical tips
             </h2>
 
@@ -550,7 +563,7 @@ export default function CompleteGuideWebpFormatPage() {
 
             {/* FAQ */}
             <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">
+              <h2 id="faq" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">
                 FAQ
               </h2>
               <div className="space-y-6">
@@ -581,111 +594,15 @@ export default function CompleteGuideWebpFormatPage() {
                     <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed">{a}</p>
                   </div>
                 ))}
+
+
               </div>
             </div>
 
-          </div>
+      </BlogArticleLayout>
 
-          {/* Share section */}
-          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5] mb-3">
-              Share this article
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href={twitterShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg role="img" viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-label="Share on X (Twitter)">
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                </svg>
-                Share on X
-              </a>
-              <a
-                href={linkedinShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg role="img" viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-label="Share on LinkedIn">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                Share on LinkedIn
-              </a>
-            </div>
-          </div>
-
-          {/* End CTA */}
-          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Convert your photos to WebP- free
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your JPEGs, PNGs, and GIFs into SammaPix and get WebP files instantly. Batch processing, ZIP download, no upload required. Files never leave your browser.
-              </p>
-              <Link
-                href="/tools/webp"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-              >
-                Open WebP Converter
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Related articles */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
-              Related articles
-            </h3>
-            <div className="space-y-3">
-              {[
-                {
-                  href: "/blog/best-image-compression-tools-2026",
-                  tag: "Comparison",
-                  tagColor: "text-orange-700",
-                  title: "Best Free Image Compression Tools in 2026 - Compared",
-                },
-                {
-                  href: "/blog/jpg-to-webp-converter",
-                  tag: "Formats",
-                  tagColor: "text-blue-700",
-                  title: "The Fastest Way to Convert JPG to WebP Online (Free)",
-                },
-                {
-                  href: "/blog/best-image-format-for-web",
-                  tag: "Formats",
-                  tagColor: "text-blue-700",
-                  title: "JPEG vs PNG vs WebP vs AVIF: Which Format Should You Use?",
-                },
-              ].map(({ href, tag, tagColor, title }) => (
-                <Link key={href} href={href} className="flex items-start gap-3 group">
-                  <span className={`text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 ${tagColor}`}>
-                    {tag}
-                  </span>
-                  <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                    {title}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-        </article>
-
-        {/* Structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-      </div>
-    </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+    </>
   );
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title: "7 Best Free Image Optimization Tools Online (2026 Comparison)",
@@ -145,74 +146,69 @@ const POST_URL = `${APP_URL}/blog/free-image-optimization-tools-online`;
 const POST_TITLE = "7 Best Free Image Optimization Tools Online (2026 Comparison)";
 
 export default function FreeImageOptimizationToolsOnlinePage() {
-  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(POST_TITLE)}&url=${encodeURIComponent(POST_URL)}&via=lucasammarco`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(POST_URL)}`;
-
   return (
-    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <div className="max-w-2xl mx-auto">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Back to Blog
-        </Link>
-
-        <article>
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs font-medium uppercase tracking-wide text-orange-700">
-                Comparison
-              </span>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <time
-                className="text-xs text-gray-400 dark:text-[#737373]"
-                dateTime={POST_DATE}
-              >
-                {POST_DATE_FORMATTED}
-              </time>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <span className="text-xs text-gray-400 dark:text-[#737373]">
-                11 min read
-              </span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight leading-tight mb-4">
-              {POST_TITLE}
-            </h1>
-
-            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
-              The best free image optimization tool online in 2026 is{" "}
-              <Link
-                href="/"
-                className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
-              >
-                SammaPix
-              </Link>
-              , which processes images entirely in your browser without
-              uploading files to any server, supports JPEG, PNG, WebP, HEIC,
-              and AVIF, and handles bulk batches at no cost. But the right tool
-              depends on your exact workflow. This comparison covers 7 tools
-              with real benchmark data and honest pros and cons for each.
-            </p>
-          </header>
-
-          <div className="prose-content">
-
-            <figure className="my-8">
+    <>
+      <BlogArticleLayout
+        title="7 Best Free Image Optimization Tools Online (2026 Comparison)" 
+        slug="free-image-optimization-tools-online"
+        description="The best free image optimization tool online in 2026 is SammaPix, which processes images entirely in your browser without uploading files to any server, supports JPEG, PNG, WebP, HEIC, and AVIF, and handles bulk batches at no cost. But the right tool depends on your exact workflow. This comparison covers 7 tools with real benchmark data and honest pros and cons for each."
+        date="2026-03-22"
+        dateFormatted="March 22, 2026"
+        tags={["Tools"]}
+        readingTime={11}
+        headings={[
+          { id: "why-optimization-matters", title: "Why image optimization matters in 2026" },
+          { id: "how-we-evaluated", title: "How we evaluated these tools" },
+          { id: "sammapix", title: "1. SammaPix — Best overall free image optimizer" },
+          { id: "tinypng", title: "2. TinyPNG — Best for PNG and JPEG compression quality" },
+          { id: "squoosh", title: "3. Squoosh — Best for single-image quality control" },
+          { id: "iloveimg", title: "4. iLoveIMG — Best for multiple image tasks in one place" },
+          { id: "shortpixel", title: "5. ShortPixel — Best for WordPress integration" },
+          { id: "compressor-io", title: "6. Compressor.io — Best for clean single-image UX" },
+          { id: "optimizilla", title: "7. Optimizilla — Straightforward but showing its age" },
+          { id: "faq", title: "FAQ" }
+        ]}
+        summary={[
+          "SammaPix is the best overall free image optimization tool in 2026 - 100% browser-based, no upload, supports JPEG/PNG/WebP/HEIC/AVIF with unlimited batch processing.",
+          "TinyPNG has a marginal edge on PNG compression (1-2%) but limits free users to 20 images/day and uploads files to remote servers.",
+          "Squoosh offers the best single-image compression quality with MozJPEG encoder, but has zero batch processing capability.",
+          "Browser-based tools (SammaPix, Squoosh) are inherently safer for sensitive images since files never leave your device.",
+          "For most workflows combining privacy, format support, and batch volume, SammaPix delivers the strongest free package in 2026."
+        ]}
+        heroImage={
+          <figure className="my-8">
               <img
                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
                 alt="Developer comparing image optimization tools on a laptop screen"
                 className="w-full rounded-lg"
-                loading="lazy"
+                loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
                 Choosing the right image optimization tool can save hours of manual work — Photo by Luke Chesser on Unsplash
               </figcaption>
             </figure>
+        }
+        ctaBlock={
+          <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
+              Optimize your images now — free, no upload required
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
+              Drop your images into SammaPix and reduce file sizes by up to 80% without visible quality loss. Runs entirely in your browser — your files never leave your device. Supports JPEG, PNG, WebP, HEIC, and AVIF with bulk processing and no daily limits.
+            </p>
+            <Link
+              href="/tools/compress"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            >
+              Try SammaPix — Free
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
+        }
+      >
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+
+            <h2 id="why-optimization-matters" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Why image optimization matters in 2026
             </h2>
 
@@ -241,7 +237,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               not, browser-based or server-based processing.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="how-we-evaluated" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               How we evaluated these tools
             </h2>
 
@@ -262,7 +258,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 1 - SammaPix */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-1 tracking-tight">
+            <h2 id="sammapix" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-1 tracking-tight" >
               1. SammaPix — Best overall free image optimizer
             </h2>
             <p className="text-xs font-medium uppercase tracking-wide text-green-700 mb-4">
@@ -339,7 +335,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 2 - TinyPNG */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="tinypng" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               2. TinyPNG — Best for PNG and JPEG compression quality
             </h2>
 
@@ -397,7 +393,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 3 - Squoosh */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="squoosh" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               3. Squoosh — Best for single-image quality control
             </h2>
 
@@ -456,7 +452,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 4 - iLoveIMG */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="iloveimg" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               4. iLoveIMG — Best for multiple image tasks in one place
             </h2>
 
@@ -513,7 +509,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 5 - ShortPixel */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="shortpixel" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               5. ShortPixel — Best for WordPress integration
             </h2>
 
@@ -572,7 +568,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 6 - Compressor.io */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="compressor-io" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               6. Compressor.io — Best for clean single-image UX
             </h2>
 
@@ -629,7 +625,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
             {/* Tool 7 - Optimizilla */}
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="optimizilla" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               7. Optimizilla — Straightforward but showing its age
             </h2>
 
@@ -698,7 +694,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               </figcaption>
             </figure>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="faq" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Side-by-side comparison
             </h2>
 
@@ -772,7 +768,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               </table>
             </div>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="which-tool" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               Which tool should you choose
             </h2>
 
@@ -816,7 +812,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="faq-section" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
               FAQ
             </h2>
 
@@ -879,145 +875,20 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               time. For high-volume, privacy-conscious bulk optimization,
               SammaPix is the strongest free option.
             </p>
-          </div>
+      </BlogArticleLayout>
 
-          {/* Share section */}
-          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5] mb-3">
-              Share this article
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href={twitterShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4 fill-current"
-                  aria-label="Share on X (Twitter)"
-                >
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                </svg>
-                Share on X
-              </a>
-              <a
-                href={linkedinShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4 fill-current"
-                  aria-label="Share on LinkedIn"
-                >
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                Share on LinkedIn
-              </a>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Optimize your images now — free, no upload required
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Drop your images into SammaPix and reduce file sizes by up to
-                80% without visible quality loss. Runs entirely in your browser
-                — your files never leave your device. Supports JPEG, PNG, WebP,
-                HEIC, and AVIF with bulk processing and no daily limits.
-              </p>
-              <Link
-                href="/tools/compress"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-              >
-                Try SammaPix — Free
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Prev / Next navigation */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A] flex items-center justify-between gap-4">
-            <Link
-              href="/blog/best-image-compression-tools-2026"
-              className="group flex items-center gap-2 text-sm text-gray-500 dark:text-[#737373] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors min-w-0"
-            >
-              <ArrowLeft className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-              <span className="truncate">Best Image Compression Tools 2026</span>
-            </Link>
-            <Link
-              href="/blog/webp-vs-avif-vs-jpeg-comparison"
-              className="group flex items-center gap-2 text-sm text-gray-500 dark:text-[#737373] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors min-w-0 text-right"
-            >
-              <span className="truncate">WebP vs AVIF vs JPEG — Full Comparison</span>
-              <ArrowRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-            </Link>
-          </div>
-
-          {/* Related articles */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
-              Related articles
-            </h3>
-            <div className="space-y-3">
-              <Link
-                href="/blog/compress-images-without-losing-quality"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-green-700">
-                  Optimization
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Compress Images Without Losing Quality (2026)
-                </span>
-              </Link>
-              <Link
-                href="/blog/best-image-format-for-web-2026"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-green-700">
-                  Optimization
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Best Image Format for Web in 2026: JPEG, PNG, WebP or AVIF?
-                </span>
-              </Link>
-              <Link
-                href="/blog/best-tinypng-alternative-2026"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-orange-700">
-                  Comparison
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Best TinyPNG Alternative in 2026 — Compared
-                </span>
-              </Link>
-            </div>
-          </div>
-        </article>
-
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-      </div>
-    </div>
+    </>
   );
 }

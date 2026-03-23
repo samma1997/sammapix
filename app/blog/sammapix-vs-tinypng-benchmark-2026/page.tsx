@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title: "SammaPix vs TinyPNG: Compression Benchmark & Privacy Comparison (2026)",
@@ -147,66 +148,66 @@ const POST_TITLE =
   "SammaPix vs TinyPNG: Compression Benchmark & Privacy Comparison (2026)";
 
 export default function SammaPixVsTinyPNGPage() {
-  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(POST_TITLE)}&url=${encodeURIComponent(POST_URL)}&via=lucasammarco`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(POST_URL)}`;
-
   return (
-    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <div className="max-w-2xl mx-auto">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Back to Blog
-        </Link>
-
-        <article>
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs font-medium uppercase tracking-wide text-orange-700">
-                Comparison
-              </span>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <time
-                className="text-xs text-gray-400 dark:text-[#737373]"
-                dateTime={POST_DATE}
-              >
-                {POST_DATE_FORMATTED}
-              </time>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <span className="text-xs text-gray-400 dark:text-[#737373]">
-                10 min read
-              </span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight leading-tight mb-4">
-              {POST_TITLE}
-            </h1>
-
-            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
-              TinyPNG is the most recognized image compressor on the web, with
-              hundreds of millions of files processed. SammaPix is a newer
-              challenger built on a fundamentally different architecture. We ran
-              both tools through the same set of 10 real-world images to see
-              how compression ratios compare — and uncovered a privacy
-              difference that matters far more than a few kilobytes.
-            </p>
-          </header>
-
-          <div className="prose-content">
-
-            <figure className="my-8">
+    <>
+      <BlogArticleLayout
+        title="SammaPix vs TinyPNG: Compression Benchmark & Privacy Comparison (2026)" 
+        slug="sammapix-vs-tinypng-benchmark-2026"
+        description="TinyPNG is the most recognized image compressor on the web, with hundreds of millions of files processed. SammaPix is a newer challenger built on a fundamentally different architecture. We ran both tools through the same set of 10 real-world images to see how compression ratios compare — and uncovered a privacy difference that matters far more than a few kilobytes."
+        date="2026-03-22"
+        dateFormatted="March 22, 2026"
+        tags={["Tools"]}
+        readingTime={10}
+        headings={[
+          { id: "how-we-ran-benchmark", title: "How we ran the benchmark" },
+          { id: "compression-results", title: "Compression benchmark results" },
+          { id: "feature-comparison", title: "Feature comparison: SammaPix vs TinyPNG" },
+          { id: "privacy-difference", title: "The privacy difference — and why it matters" },
+          { id: "speed-comparison", title: "Speed comparison: no-upload vs server-side" },
+          { id: "format-support", title: "Format support: where SammaPix has a clear advantage" },
+          { id: "when-to-use", title: "When to use TinyPNG vs SammaPix" },
+          { id: "verdict", title: "Overall verdict: SammaPix vs TinyPNG" },
+          { id: "faq", title: "FAQ" }
+        ]}
+        summary={[
+          "SammaPix and TinyPNG achieve nearly identical compression ratios - within 1-2% of each other across 10 test images for JPEG and PNG.",
+          "The fundamental difference is architecture: SammaPix processes entirely in your browser, TinyPNG uploads files to remote servers.",
+          "SammaPix supports HEIC, AVIF, and GIF formats that TinyPNG cannot handle - critical for modern iPhone workflows.",
+          "For sensitive content (medical images, legal documents, personal photos), SammaPix is the clear choice since nothing is ever transmitted.",
+          "TinyPNG has a marginal edge on PNG-only workloads; SammaPix wins on privacy, format coverage, batch volume, and speed."
+        ]}
+        heroImage={
+          <figure className="my-8">
               <img
                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
                 alt="Side-by-side comparison of two image compression tools on a computer screen"
                 className="w-full rounded-lg"
-                loading="lazy"
+                loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
                 Choosing the right image compressor affects both performance and privacy — Photo by Luke Chesser on Unsplash
               </figcaption>
             </figure>
+        }
+        ctaBlock={
+          <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
+              Try SammaPix — no upload, no limits
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
+              Compress JPEG, PNG, WebP, HEIC, AVIF, and GIF files directly in your browser. Your images never leave your device. Unlimited batch processing, instant results, and no account required.
+            </p>
+            <Link
+              href="/tools/compress"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            >
+              Compress images free
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
+        }
+      >
+
 
             {/* Direct answer block for AI citation */}
             <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5 mb-8">
@@ -224,7 +225,7 @@ export default function SammaPixVsTinyPNGPage() {
               </p>
             </div>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="how-we-ran-benchmark" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               How we ran the benchmark
             </h2>
 
@@ -249,7 +250,7 @@ export default function SammaPixVsTinyPNGPage() {
               comparable numbers.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="compression-results" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Compression benchmark results
             </h2>
 
@@ -363,7 +364,7 @@ export default function SammaPixVsTinyPNGPage() {
               Web Vitals scores.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="feature-comparison" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Feature comparison: SammaPix vs TinyPNG
             </h2>
 
@@ -433,7 +434,7 @@ export default function SammaPixVsTinyPNGPage() {
               </figcaption>
             </figure>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="privacy-difference" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               The privacy difference — and why it matters
             </h2>
 
@@ -499,7 +500,7 @@ export default function SammaPixVsTinyPNGPage() {
               see zero outbound requests containing your image data.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="speed-comparison" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Speed comparison: no-upload vs server-side
             </h2>
 
@@ -525,7 +526,7 @@ export default function SammaPixVsTinyPNGPage() {
               day when using SammaPix.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="format-support" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Format support: where SammaPix has a clear advantage
             </h2>
 
@@ -554,7 +555,7 @@ export default function SammaPixVsTinyPNGPage() {
               pipeline in one place.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="when-to-use" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               When to use TinyPNG vs SammaPix
             </h2>
 
@@ -605,7 +606,7 @@ export default function SammaPixVsTinyPNGPage() {
               </li>
             </ul>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="verdict" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               Overall verdict: SammaPix vs TinyPNG
             </h2>
 
@@ -633,7 +634,7 @@ export default function SammaPixVsTinyPNGPage() {
 
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+            <h2 id="faq" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
               FAQ
             </h2>
 
@@ -695,148 +696,20 @@ export default function SammaPixVsTinyPNGPage() {
               data will appear. This makes it the correct choice for any images
               containing personal, medical, legal, or proprietary content.
             </p>
-          </div>
+      </BlogArticleLayout>
 
-          {/* Share section */}
-          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5] mb-3">
-              Share this article
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href={twitterShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4 fill-current"
-                  aria-label="Share on X (Twitter)"
-                >
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                </svg>
-                Share on X
-              </a>
-              <a
-                href={linkedinShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4 fill-current"
-                  aria-label="Share on LinkedIn"
-                >
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                Share on LinkedIn
-              </a>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Try SammaPix — no upload, no limits
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Compress JPEG, PNG, WebP, HEIC, AVIF, and GIF files directly
-                in your browser. Your images never leave your device. Unlimited
-                batch processing, instant results, and no account required.
-              </p>
-              <Link
-                href="/tools/compress"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-              >
-                Compress images free
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Prev / Next navigation */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A] flex items-center justify-between gap-4">
-            <Link
-              href="/blog/best-tinypng-alternative-2026"
-              className="group flex items-center gap-2 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] transition-colors"
-            >
-              <ArrowLeft className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-              <span className="group-hover:underline underline-offset-2">
-                Best TinyPNG Alternatives (2026)
-              </span>
-            </Link>
-            <Link
-              href="/blog/free-image-optimization-tools-online"
-              className="group flex items-center gap-2 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] transition-colors text-right"
-            >
-              <span className="group-hover:underline underline-offset-2">
-                Free Image Optimization Tools Online
-              </span>
-              <ArrowRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-            </Link>
-          </div>
-
-          {/* Related articles */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
-              Related articles
-            </h3>
-            <div className="space-y-3">
-              <Link
-                href="/blog/best-tinypng-alternative-2026"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-orange-700">
-                  Comparison
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Best Free TinyPNG Alternatives in 2026 — Compared
-                </span>
-              </Link>
-              <Link
-                href="/blog/compress-images-without-losing-quality"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-green-700">
-                  Optimization
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Compress Images Without Losing Quality (2026)
-                </span>
-              </Link>
-              <Link
-                href="/blog/best-image-format-for-web-2026"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-green-700">
-                  Optimization
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Best Image Format for Web in 2026: JPEG, PNG, WebP or AVIF?
-                </span>
-              </Link>
-            </div>
-          </div>
-        </article>
-
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-      </div>
-    </div>
+    </>
   );
 }

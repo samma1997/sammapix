@@ -1,0 +1,373 @@
+## Why image load speed matters more than ever
+
+Google ranks pages using Core Web Vitals, and the most important
+metric - Largest Contentful Paint (LCP)- is dominated by images.
+According to
+
+web.dev's LCP documentation
+
+, the LCP element is an image in approximately 70% of all web
+pages. To score "Good" on LCP, that image must finish
+loading within 2.5 seconds of navigation start.
+
+Beyond rankings, the business case is equally strong. A 1-second
+improvement in page load time correlates with a 7% increase in
+conversions, according to studies from Akamai and Deloitte.
+Mobile users on slower connections are even more sensitive- if
+your images are not optimized, you are actively losing customers.
+
+The good news: image optimization does not require a complete site
+rebuild. Each of the 7 methods below can be implemented
+independently, and even applying two or three of them will produce
+measurable improvements in load time, LCP score, and user
+experience. The
+
+web.dev image learning path
+
+is an excellent companion resource for going deeper on any of
+these techniques.
+
+## Method 1 - Compress your images before publishing
+
+Compression is the most immediate, highest-impact action you can
+take to make images load faster. A raw photograph from a modern
+smartphone often weighs 4–8 MB. The same image, correctly
+compressed for web display, should be under 200 KB- a reduction
+of 95% or more with no visible quality loss at normal screen sizes.
+
+There are two types of compression. Lossless compression
+re-encodes the data more efficiently without discarding any pixels
+- useful for logos, screenshots, and UI elements. Lossy
+compression discards image data that the human eye is unlikely to
+notice, which is appropriate for photographs and any continuous-
+tone image. For web photos, a JPEG or WebP quality setting of
+78–82 is indistinguishable from quality 100 at normal display
+sizes, while producing files that are 60–80% smaller.
+
+The key rule: always compress from the original source file, not
+from a previously compressed version. Re-compressing already-
+lossy images stacks artifacts and degrades quality without
+recovering file size. Work from originals, compress once, store
+both versions.
+
+Compress your images in seconds- no upload required
+
+The
+
+SammaPix Compress tool
+
+runs entirely in your browser. Drag in a batch of images, adjust
+the quality slider, and download- your files never leave your
+device.
+
+Open Compress Tool
+
+## Method 2 - Convert to next-gen formats (WebP and AVIF)
+
+JPEG and PNG served most of the web for decades, but they are no
+longer the best options for file size. WebP, developed by Google,
+produces files that are 25–34% smaller than JPEG at equivalent
+perceptual quality. AVIF- based on the AV1 video codec- can
+compress even further, often 40–50% smaller than JPEG, though
+encoding is slower and browser support, while growing, is slightly
+behind WebP.
+
+Browser support for WebP now exceeds 97% globally. For the vast
+majority of websites, you can safely default to WebP for all
+photographic content with zero compatibility concerns. AVIF support
+sits above 90% and continues to grow- it is appropriate if you
+want to push file sizes as low as possible for a modern audience.
+
+Converting existing JPEG or PNG assets to WebP is a one-time
+operation with permanent returns. Every user who downloads the
+WebP version instead of the JPEG version transfers fewer bytes-
+and arrives at a fully-loaded page faster. For a site with
+hundreds of images, this single step can cut total image payload
+by a third.
+
+Real-world savings at equivalent quality
+
+Original JPEG (quality 90)
+420 KB
+
+WebP (quality 82)
+290 KB — 31% smaller
+
+AVIF (quality 70)
+240 KB — 43% smaller
+
+Convert JPEG and PNG to WebP instantly
+
+Use the
+
+SammaPix WebP converter
+
+to batch-convert your existing image library. Client-side,
+private, and free.
+
+Convert to WebP
+
+## Method 3 - Resize images to the correct display dimensions
+
+Serving an oversized image is one of the most common- and most
+wasteful- image performance mistakes. A photo from a modern
+smartphone is 4000 pixels wide or more. If that image displays in
+a 800px blog column, the browser downloads roughly 25 times more
+pixels than it ever renders. Every extra pixel is wasted bandwidth,
+wasted memory, and wasted milliseconds.
+
+The rule is simple: resize every image to the maximum width at
+which it will be displayed before publishing it. For a standard
+blog article column of 800px, a 1600px wide image (2x for retina
+displays) is the absolute maximum you should ever serve. For
+thumbnails at 200px, serve a 400px image. Going beyond this
+produces zero visual improvement on any real device.
+
+Resizing before compression also multiplies the effect of the
+compression step. A 6000px photo compressed to quality 80 is still
+a large file because it carries an enormous number of pixels. The
+same image resized to 1200px first, then compressed, can be 90% or
+more smaller than the unresized, uncompressed original.
+
+Resize a batch of images to exact dimensions
+
+The
+
+SammaPix Resize Pack tool
+
+lets you set a target width and resize a whole folder of images
+at once- then download them as a ZIP. No upload, no account.
+
+Open Resize Pack
+
+Implementing these techniques in code takes minutes- the performance gains last permanently - Photo by Fotis Fotopoulos on Unsplash
+
+## Method 4 - Lazy load below-the-fold images
+
+By default, browsers download every image on a page immediately,
+including images the user may never scroll down to see. Lazy
+loading defers the download of off-screen images until the user
+scrolls near them. On a long article page with 10 images, lazy
+loading the 8 below-the-fold images can cut initial page weight
+by 70% or more- dramatically improving LCP and Time to
+Interactive.
+
+### Native lazy loading (recommended)
+
+Since 2019, all major browsers support the native
+loading
+attribute on
+img
+elements. It requires a single attribute change and zero
+JavaScript:
+
+Two important rules when using native lazy loading. First, always
+include
+width
+and
+height
+attributes so the browser can reserve space and avoid layout
+shifts (which hurt Cumulative Layout Shift scores). Second, never
+apply
+loading="lazy"
+to your hero or above-the-fold image- that would delay the LCP
+element and actively hurt your score.
+
+### Intersection Observer for advanced control
+
+For more control over when lazy loading triggers- or for
+frameworks that do not support the native attribute- the
+Intersection Observer API provides a JavaScript-based alternative:
+
+});
+}, );
+
+lazyImages.forEach((img) => observer.observe(img));`}
+
+The
+rootMargin: '200px'
+setting starts loading the image 200 pixels before it enters
+the viewport, eliminating any visible pop-in for users who
+scroll at normal speed. Adjust this value based on your image
+sizes and typical scroll speed.
+
+## Method 5 - Use responsive images with srcset and sizes
+
+Serving one fixed-width image to all devices is inefficient. A
+desktop user with a 1400px viewport gets a huge image- which is
+appropriate. But a mobile user with a 390px viewport receives the
+same massive file, even though their browser will downsample it to
+fit. Responsive images solve this by letting the browser select
+the best image size for the current display context.
+
+The
+srcset
+attribute provides multiple image sources at different widths. The
+sizes
+attribute tells the browser how wide the image will actually be
+displayed at each viewport breakpoint. Together, they allow the
+browser to download exactly the right image:
+
+In this example, a mobile user at 390px viewport width receives
+the 400px image (roughly 40 KB). A desktop user at 1400px receives
+the 1200px or 1600px version. The browser makes the decision
+automatically, factoring in device pixel ratio as well- so
+retina users get the higher-resolution image without you needing
+to write any JavaScript.
+
+When writing the
+sizes
+value, work from smallest viewport to largest and describe the
+actual rendered width of the image- not the viewport. The final
+value (with no media condition) is the fallback. Be specific: a
+vague
+100vw
+fallback tells the browser to download the full-width image on
+all screens, defeating the purpose of
+srcset.
+
+## Method 6 - Serve images from a CDN
+
+Even a perfectly optimized image takes time to travel from your
+server to your user. If your server is in New York and your user
+is in Tokyo, that round trip adds 150–200ms of latency before the
+first byte of image data arrives. A Content Delivery Network (CDN)
+solves this by caching your assets on servers distributed globally
+- so every user downloads from a data center near them, not from
+your origin.
+
+For images in particular, CDN benefits are compounded: CDNs serve
+assets over HTTP/2 or HTTP/3 (which efficiently multiplexes
+multiple image downloads over a single connection), apply gzip or
+Brotli compression to headers, and often include image
+transformation features built in.
+
+- Cloudflare CDN (free tier): Automatic caching on 300+ global PoPs with zero configuration changes to your site. Works by proxying your domain through Cloudflare's network. Includes image optimization via Polish (converts to WebP automatically on the edge).
+
+- Amazon CloudFront: AWS's CDN, tightly integrated with S3 for static asset hosting. Strong choice if your infrastructure is already on AWS. Pricing is usage-based with a generous free tier.
+
+- Bunny CDN: Performance-focused CDN with transparent pricing and excellent support. Particularly cost-effective for media-heavy sites. Includes Bunny Optimizer for on-the-fly image resizing and format conversion.
+
+If your site has global traffic, adding a CDN is non-negotiable
+for image load speed. For domestic-only traffic, a CDN still
+improves performance by reducing load on your origin server and
+enabling HTTP/2 multiplexing- but the impact is less dramatic.
+The good news is that Cloudflare's free tier covers most use
+cases and requires no code changes.
+
+A CDN distributes your images to servers near every user, eliminating the latency of cross-continental downloads - Photo by NASA on Unsplash
+
+## Method 7 - Use the picture element for format fallbacks
+
+Even though WebP support exceeds 97% globally, the right approach
+for production websites is to serve WebP (or AVIF) to supported
+browsers while providing a JPEG or PNG fallback for the rare cases
+where support is absent. The
+&lt;picture&gt;
+element makes this possible with no JavaScript required.
+
+The
+&lt;picture&gt;
+element contains one or more
+&lt;source&gt;
+elements listing alternative formats, followed by a standard
+&lt;img&gt;
+element as the fallback. The browser walks through the
+&lt;source&gt;
+elements in order and uses the first one it supports:
+
+A browser that supports AVIF downloads the AVIF source. A browser
+that supports WebP but not AVIF downloads the WebP source. Any
+browser that supports neither (a vanishingly small fraction of
+users today) downloads the JPEG fallback. Every user gets the
+most compressed format their browser can handle, automatically.
+
+Note the
+decoding="async"
+attribute on the fallback
+img.
+This tells the browser to decode the image off the main thread,
+keeping the page responsive during heavy image loads. Use this on
+all large images alongside
+loading="lazy"
+for maximum performance benefit.
+
+## Putting it all together: the practical optimization checklist
+
+You do not need to implement all 7 methods at once. Start with
+the highest-impact items and work down the list. Here is the
+priority order based on typical impact across most websites:
+
+,
+,
+,
+,
+,
+,
+,
+].map((item) => (
+
+))}
+
+After implementing these changes, test your pages with Google
+PageSpeed Insights or Lighthouse (available in Chrome DevTools
+under the Performance tab). Your LCP score should drop
+significantly, and the Opportunities section will confirm which
+image-related improvements have been applied. Aim for a LCP under
+2.5 seconds for a "Good" score- a target that is
+entirely achievable once images are properly optimized.
+
+## FAQ
+
+### What is the single most effective way to make images load faster?
+
+Resizing to the correct display dimensions combined with
+compression. Serving a 4000px photo in a 800px column wastes more
+bandwidth than almost any other optimization mistake. Resize first,
+then compress- this combination typically reduces file size by
+90%+ compared to a raw camera file, with no visible difference on
+screen.
+
+### Does lazy loading hurt SEO?
+
+No - Google's crawler supports native lazy loading via the
+loading="lazy"
+attribute and will index lazily loaded images correctly. The one
+exception: do not lazy-load your hero or primary content image.
+Deferring the LCP element delays Google's measurement of your
+LCP score and can actively hurt rankings.
+
+### Should I use WebP or AVIF in 2026?
+
+Use both with a fallback chain via the
+&lt;picture&gt;
+element: AVIF as the first source (best compression), WebP as
+the second (excellent compression, near-universal support), and
+JPEG as the fallback. If you can only generate one format, WebP
+is the safe, high-value default.
+
+### How do I know if my images are slowing down my site?
+
+Run your URL through Google PageSpeed Insights (free, no account
+required). Look at the Opportunities section- it will specifically
+flag oversized images, next-gen format suggestions, and images
+that are not lazy loaded. The Diagnostics section shows exactly
+which images are contributing most to page weight and load time.
+
+### What is a good target image file size for the web?
+
+For full-width hero images: under 200 KB. For article body images
+at 800px display width: under 100 KB. For thumbnails at 300px or
+less: under 30 KB. These are practical targets that balance visual
+quality with performance. At quality 80 WebP, most photographs
+easily hit these targets after proper resizing.
+
+### Do I need to use all 7 methods?
+
+Not necessarily. Methods 1–4 (compress, convert to WebP, resize,
+and lazy load) alone will produce dramatic improvements for most
+sites. Methods 5–7 (responsive images, CDN, and picture element)
+add meaningful additional gains and are worth implementing for any
+site with significant traffic or a global audience. Even applying
+just the first two methods- compress and convert to WebP- will
+measurably improve your LCP score.

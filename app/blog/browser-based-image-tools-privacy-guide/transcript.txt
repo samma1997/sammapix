@@ -1,0 +1,293 @@
+Key Takeaway
+
+            Browser-based image tools are the only category of online image editors where your files provably never leave your device. This is not a privacy policy — it is an architectural guarantee enforced by how browsers work.
+
+          
+        
+
+        
+## What are browser-based image tools?
+
+        Browser-based image tools are web applications that run image processing algorithms entirely inside your browser, using JavaScript and WebAssembly — without sending your files to any external server. The processing happens locally in your browser's memory (RAM), using your device's CPU, with results written back to a downloadable file on your machine.
+
+        The distinction matters because most image editors that look like browser tools are actually cloud-based tools with a browser interface. You open them in a browser tab, but when you click "compress" or "convert," your file is uploaded to the company's servers, processed remotely, and sent back. The browser is just the interface — the work happens elsewhere.
+
+        True browser-based tools use the browser as the execution environment itself. The WebAssembly runtime, the compression codec, the image manipulation algorithms — all of it runs in your browser tab, on your hardware, isolated from any network request related to your file.
+
+        
+          ,
+            ,
+            ,
+            ,
+          ].map(() => (
+            
+              
+              
+                
+
+                
+
+              
+            
+          ))}
+        
+
+        
+## Why privacy image editing matters more in 2026
+
+        Privacy concerns around image uploads have grown significantly as people become more aware of what their photos contain. A 2024 survey by the International Association of Privacy Professionals found that 68% of users are concerned about uploading personal photos to third-party online services. The concern is not abstract — it is rooted in what digital images actually carry.
+
+        Every JPEG or TIFF file contains EXIF metadata embedded directly in the file: GPS coordinates accurate to within a few meters, device serial numbers, timestamps, and camera settings. When you upload a photo to a cloud-based image tool, you are not just sharing the visual content — you are sharing all of this metadata with the service provider, their CDN partners, and potentially their analytics integrations.
+
+        
+### Who needs privacy image editing most
+
+        Several professional and personal use cases make private, no-upload image editing essential rather than merely preferable.
+
+        
+          
+        
+
+        
+          Key Fact
+
+          Browser-based image tools process files 100% locally — the image data exists only in your browser's memory during processing and is never transmitted over a network connection. This is verifiable by opening your browser's network inspector (F12 → Network) and confirming that no image upload request is made when you process a file.
+
+        
+
+        
+## Browser-based vs cloud-based image tools: full comparison
+
+        The best way to understand the privacy difference is to compare how each architecture handles your files across every dimension that matters.
+
+        
+          
+            
+              
+                Dimension
+                Browser-Based
+                Cloud-Based
+              
+            
+            
+              ,
+                ,
+                ,
+                ,
+                ,
+                ,
+                ,
+                ,
+                ,
+                ,
+              ].map((row, i) => (
+                
+                  
+                  
+                    ) : row.browser === true ? () : ()}
+                  
+                  
+                    ) : row.cloud === true ? () : ()}
+                  
+                
+              ))}
+            
+          
+        
+
+        
+## The best browser-based image tools in 2026
+
+        The following tools are all verified to process images locally in the browser. Each has been evaluated for scope of features, privacy architecture, and practical usability.
+
+        
+          
+            
+              
+### 1. SammaPix
+
+              sammapix.com — Free, no account required
+
+            
+            Best Overall
+          
+          SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 20 tools — including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping — all running entirely in your browser with zero uploads.
+
+          The privacy architecture is verifiable: open the browser's network inspector during any operation and confirm that no image upload request is made. The entire processing pipeline — including the compression codec and format conversion engine — runs in the browser tab using JavaScript and the Canvas API.
+
+          
+            ,
+              ,
+              ,
+              ,
+              ,
+            ].map(() => (
+              
+            ))}
+          
+        
+
+        
+          
+            
+              
+### 2. Squoosh
+
+              squoosh.app — Free, by Google Chrome Labs
+
+            
+            Best for Compression
+          
+          Squoosh is a single-file compression tool built by Google Chrome Labs that runs its codecs (MozJPEG, WebP, AVIF, OxiPNG, and more) entirely in the browser via WebAssembly. It is the gold standard for evaluating compression quality settings — the side-by-side view and live quality slider make it excellent for understanding the quality-size tradeoff. Limitation: one file at a time, no batch processing.
+
+        
+
+        
+          
+            
+              
+### 3. Photopea
+
+              photopea.com — Free (ad-supported)
+
+            
+            Best for Editing
+          
+          Photopea is a full-featured image editor that runs entirely in the browser and is compatible with Photoshop PSD files, GIMP XCF, and all standard web formats. Files are processed locally. It is the most capable browser-based alternative to Photoshop for complex editing tasks — layers, masks, blending modes, and filters. Not optimized for batch operations or privacy workflows, but genuinely impressive for single-file editing.
+
+        
+
+        
+          
+            
+              
+### 4. SVGOMG
+
+              jakearchibald.github.io/svgomg — Free
+
+            
+            Best for SVG
+          
+          SVGOMG is a browser-based interface for SVGO (SVG Optimizer) built by Jake Archibald. It strips unnecessary metadata, comments, and redundant attributes from SVG files, reducing file sizes by 30–70% with no visual change. All processing runs locally. The definitive browser-based SVG optimization tool.
+
+        
+
+        
+## How browser-based image processing works technically
+
+        Understanding the technical mechanism reinforces why the privacy guarantee is architectural rather than trust-based. Browser-based image processing uses three primary technologies.
+
+        
+### 1. JavaScript File API
+
+        The browser's File API allows a web page to read files from your device's disk into browser memory. When you drag an image onto a browser-based tool, the file is read into a JavaScript ArrayBuffer — a raw binary representation in RAM. This read operation is local: no network request is made.
+
+        
+### 2. Canvas API and WebAssembly
+
+        The raw image data is decoded and rendered to an in-memory HTML5 Canvas element. Pixel manipulation — compression, format conversion, resizing, color adjustments — is applied directly to this canvas using JavaScript or compiled WebAssembly modules. WebAssembly allows near-native performance for computationally intensive operations like codec encoding. The Squoosh tool, for example, runs the full MozJPEG and AVIF encoders as WebAssembly modules entirely in the browser.
+
+        
+### 3. Blob URL and download
+
+        After processing, the output image data is serialized from canvas back into a binary Blob — a file-like object in memory. A temporary URL is created pointing to this Blob using URL.createObjectURL(). Clicking "Download" triggers a standard browser file download from this local URL — no server involved. The Blob is revoked from memory after download.
+
+        
+          How to verify a tool is truly browser-based
+
+          Open Developer Tools (F12), go to the Network tab, filter by "Fetch/XHR", and process an image. If no outbound request containing your image data appears, the tool is genuinely browser-based. If you see a POST request to an external domain during processing, the tool is cloud-based despite its browser interface.
+
+        
+
+        
+## When cloud-based tools are still the right choice
+
+        Browser-based tools are the right default for privacy image editing, but cloud tools have genuine advantages for specific tasks. Understanding the tradeoff helps you make informed decisions rather than dogmatic ones.
+
+        
+          
+        
+        The practical workflow for most photographers and web professionals is a combination: use browser-based tools for the compression, conversion, EXIF removal, and renaming steps where privacy matters, and use cloud tools selectively for AI-heavy tasks where the quality difference justifies the upload.
+
+        
+## A complete no-upload image workflow with SammaPix
+
+        The best way to understand the practical value of browser-based tools is to walk through a complete image processing workflow — from raw camera files to web-ready, privacy-clean output — without a single upload.
+
+        
+          ,
+            ,
+            ,
+            ,
+            ,
+            ,
+          ].map(() => (
+            
+              
+                
+              
+              
+                
+
+                
+
+              
+            
+          ))}
+        
+
+        
+          
+            Free — no upload, no account, no file limits
+
+            Start the privacy workflow with SammaPix — 20 tools, 100% browser-based
+
+          
+          
+        
+
+        
+          
+          Verifying browser-based processing is as simple as opening the Network inspector — Photo by Unsplash
+        
+
+        
+## Browser-based tools and regulatory compliance
+
+        Privacy regulations increasingly affect how image data can be processed. Browser-based tools simplify compliance significantly because the data controller question — who processes personal data and under what legal basis — collapses to a single answer: only the user's own device.
+
+        
+### GDPR (Europe)
+
+        Under GDPR, uploading a photo of a person to a cloud service for processing constitutes sharing personal data with a third-party data processor. This requires a Data Processing Agreement (DPA) with the service provider, a lawful basis for processing, and potentially documentation of international data transfers if the server is outside the EU. Browser-based tools eliminate this requirement entirely — no third party touches the data, so no DPA is needed.
+
+        
+### HIPAA (United States healthcare)
+
+        Healthcare organizations subject to HIPAA cannot use general-purpose cloud image tools to process patient photos without a Business Associate Agreement (BAA). Consumer tools like TinyPNG or Canva do not offer BAAs. Browser-based processing avoids this entirely — the Protected Health Information (PHI) in patient images never reaches a third-party system.
+
+        
+### CCPA and state privacy laws (United States)
+
+        California's CCPA and similar state-level laws create disclosure and data deletion rights when personal data (including photos) is processed by third parties. Browser-based tools remove this complexity at the architectural level — no personal data is ever shared with a service provider to begin with.
+
+        
+          
+## Frequently asked questions
+
+          
+            ,
+              ,
+              ,
+              ,
+              ,
+              ,
+            ].map(() => (
+              
+                
+### 
+
+                
+
+              
+            ))}

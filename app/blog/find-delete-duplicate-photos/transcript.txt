@@ -1,0 +1,234 @@
+## Why duplicate photos accumulate faster than you think
+
+Duplicates do not just come from consciously copying files. They
+accumulate through a dozen invisible channels. Every time a photo
+syncs from your phone to iCloud and then to your Mac, you may end
+up with two or three copies in different directories. Backup
+software creates archives that overlap with live libraries.
+Messaging apps save received photos to your camera roll, creating
+copies of images you already have from other sources.
+
+Professional photographers deal with a different but equally
+common problem: burst shots. Press the shutter in burst mode and
+you might have 15 nearly identical frames of the same moment.
+Only one or two of those will be keepers- the rest are storage
+waste.
+
+The result is photo libraries where 20–40% of the storage space
+is occupied by redundant images. For a 100GB library, that could
+be 20–40GB of recoverable space- and dozens of hours of wasted
+time scrolling through near-identical photos.
+
+## How duplicate photo detection works: exact vs near duplicates
+
+There are two fundamentally different types of duplicates, and
+they require different detection techniques.
+
+### Exact duplicates: cryptographic hashing
+
+Exact duplicates are files where every byte is identical. Even if
+the filenames are different (photo.jpg vs photo-copy.jpg vs
+IMG_4721.jpg), the underlying image data is the same. Detecting
+these is straightforward with cryptographic hashing.
+
+A cryptographic hash function (like MD5 or SHA-256) takes any
+file as input and produces a short fixed-length output called a
+hash or digest. The same file always produces the same hash. Two
+different files with even a single changed byte produce entirely
+different hashes. If two files share the same hash, they are
+byte-for-byte identical- guaranteed.
+
+This approach is fast and certain, but it only catches true
+exact duplicates. A photo that has been re-compressed, resized,
+cropped, or had its EXIF metadata modified will not match even
+though it looks visually identical. That is where perceptual
+hashing comes in.
+
+Perceptual hashing analyzes image content rather than raw bytes to find visual duplicates - Photo by Luke Chesser on Unsplash
+
+### Near duplicates: perceptual hashing
+
+Perceptual hashing is one of the most elegant algorithms in
+computer vision. Instead of hashing the raw file bytes, it hashes
+the visual content of the image in a way that is tolerant of minor
+variations. Two images that look the same to the human eye will
+produce very similar perceptual hashes- even if one has been
+resized, lightly edited, or saved at a different compression level.
+
+The most widely used algorithms are:
+
+- dHash (Difference Hash): Detects differences in adjacent pixel brightness. Very fast, excellent for finding near-duplicates in large libraries.
+
+- pHash (Perceptual Hash): Uses a Discrete Cosine Transform (DCT) to analyze frequency components of the image. More accurate but slightly slower than dHash.
+
+- aHash (Average Hash): Compares each pixel to the average brightness of the image. Fastest but least accurate.
+
+The similarity between two perceptual hashes is measured by their
+Hamming distance- the number of bit positions where the two
+hashes differ. A Hamming distance of 0 means identical images.
+A distance of 1–5 indicates very similar images (often the same
+scene with minor variations). A distance above 10 typically
+indicates different images.
+
+This is exactly how
+
+SammaPix TwinHunt
+
+finds both exact duplicates and near-duplicates in your photo
+library. All processing happens in your browser- no image data
+is ever transmitted to any server.
+
+## Step-by-step: finding and deleting duplicate photos with TwinHunt
+
+### Step 1 - Open TwinHunt
+
+Go to
+
+sammapix.com/tools/twinhunt
+
+. No account required, no file size limits, no watermarks. The
+tool runs entirely in your browser using the File System Access
+API.
+
+### Step 2 - Select your photo folder
+
+Click the "Select Folder" button and choose the directory
+containing your photos. Find Duplicates can process entire photo
+libraries, including nested subdirectories. For large libraries
+(10,000+ photos), the initial hash computation takes a few
+minutes. Progress is shown in real time.
+
+Alternatively, drag a folder directly onto the drop zone. Both
+methods give Find Duplicates read access to the files- no modifications
+are made during the scanning phase.
+
+### Step 3 - Choose your sensitivity level
+
+Find Duplicates offers three detection modes:
+
+- Exact only: Finds byte-for-byte identical files using cryptographic hashing. Zero false positives. Safe for automated deletion.
+
+- Similar (recommended): Finds exact duplicates plus near-duplicates with a Hamming distance of 5 or less. Catches re-compressed copies, lightly edited versions, and screenshots of photos.
+
+- Very similar: Hamming distance up to 10. Finds burst shots and photos taken within seconds of each other. Requires manual review- this mode can surface groups that are similar but not actually duplicates.
+
+For most users, the "Similar" mode is the right starting
+point. It catches the vast majority of real duplicates while
+keeping false positives manageable.
+
+### Step 4 - Review the duplicate groups
+
+Find Duplicates presents results as groups of similar images, displayed
+side by side. Each group shows the file name, file size, creation
+date, and pixel dimensions for each image. The recommended
+"keep" candidate (typically the highest resolution or most
+recently modified version) is highlighted automatically.
+
+You can click any image to view it at full size before making a
+decision. This is especially important for near-duplicates in
+the "Very similar" mode, where you want to confirm that the
+images are genuinely equivalent before deleting.
+
+Use the "Select all duplicates" button to auto-select the
+recommended deletion candidates across all groups, or review and
+adjust each group manually. Find Duplicates never pre-selects files
+for deletion without your explicit confirmation.
+
+### Step 5 - Delete selected duplicates
+
+Once you have reviewed and confirmed your selections, click
+"Delete Selected". Deletions move files to the Trash (on macOS
+and Windows) rather than permanently deleting them immediately.
+This gives you a safety net if you change your mind after the
+operation.
+
+After deletion, Find Duplicates shows a summary: total files deleted,
+total storage recovered, and a breakdown by group.
+
+## Exact vs near duplicates: how to decide what to keep
+
+For exact duplicates, the decision is easy: keep one copy,
+delete the rest. All copies are identical so there is no quality
+consideration. Keep the one in your primary, organized library
+location and delete copies in backup folders, downloads, or
+synced directories.
+
+For near-duplicates, use these criteria to decide which version
+to keep:
+
+- Higher resolution wins. If two images show the same scene and one is 4000×3000 pixels while the other is 1200×900, keep the higher resolution version.
+
+- Larger file size often means better quality. Between two otherwise equal images, the larger file typically has less compression, meaning less quality loss.
+
+- Prefer originals over edited copies. Keep the RAW or unedited original. Edited JPEGs can always be regenerated from the original; the reverse is not true.
+
+- Check EXIF metadata. The original photo preserves EXIF data (camera settings, GPS, timestamp) that an edited copy may have stripped.
+
+A systematic approach to photo management keeps your library clean long-term - Photo by Clement Helardot on Unsplash
+
+## Preventing duplicate accumulation going forward
+
+Cleaning your library once is satisfying. Keeping it clean over
+time requires a few systematic habits.
+
+Establish a single source of truth.
+
+Decide where your canonical photo library lives- whether that is
+Apple Photos, Google Photos, Lightroom, or a folder structure on
+an external drive. All other locations (phone camera roll, cloud
+syncs, backup folders) feed into this one library and are cleared
+regularly.
+
+Cull on import.
+
+The best time to remove near-duplicate burst shots is immediately
+after an import session, while you still remember which frame was
+best. Letting these accumulate means doing the decision-making
+work later when context is lost.
+
+Run Find Duplicates quarterly.
+
+Even with good habits, duplicates accumulate. A quarterly
+deduplication scan catches what slips through. With TwinHunt
+running entirely in the browser, it takes less than five minutes
+for a library under 5,000 photos.
+
+## FAQ
+
+### Will Find Duplicates find duplicate photos even if they have different filenames?
+
+Yes. Find Duplicates uses perceptual hashing which analyzes the visual
+content of the image, not the filename. A photo named
+IMG_4721.jpg and its copy named vacation-photo.jpg will be
+detected as identical regardless of the name difference.
+
+### Can Find Duplicates find duplicates across different formats (JPEG and PNG of the same image)?
+
+Yes. Perceptual hashing operates on the decoded visual content of
+the image, not the encoded bytes. A JPEG and a PNG of the same
+photo will produce very similar perceptual hashes and be grouped
+as near-duplicates. Cryptographic hash matching (for exact
+duplicates) requires byte-identical files, so it would not catch
+cross-format copies- but perceptual hashing does.
+
+### Are my photos sent to any server?
+
+No. Find Duplicates processes all images entirely within your browser
+using JavaScript. No image data, no thumbnails, and no hash
+values are transmitted to any external server. Your photos never
+leave your device.
+
+### How large a photo library can Find Duplicates handle?
+
+Find Duplicates can process libraries of tens of thousands of images.
+For very large libraries (50,000+ photos), processing time
+increases but the tool remains stable. Processing speed depends
+on your device's CPU and the image resolutions in the library.
+Most libraries under 10,000 photos complete in under two minutes.
+
+### What happens to deleted files?
+
+Deleted files are moved to your operating system's Trash (Recycle
+Bin on Windows, Trash on macOS). They are not permanently deleted
+immediately. You have a recovery window to restore anything that
+was deleted by mistake before emptying the Trash.

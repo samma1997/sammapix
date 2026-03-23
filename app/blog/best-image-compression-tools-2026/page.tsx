@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
@@ -228,47 +229,67 @@ const tools = [
   },
 ];
 
+
 export default function BestImageCompressionTools2026Page() {
-  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(POST_TITLE)}&url=${encodeURIComponent(POST_URL)}&via=lucasammarco`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(POST_URL)}`;
-
   return (
-    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <div className="max-w-2xl mx-auto">
-
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Back to Blog
-        </Link>
-
-        <article>
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-[10px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-orange-700 dark:text-orange-400 px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] uppercase tracking-wide">
-                Comparison
-              </span>
-              <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                {POST_DATE_FORMATTED}
-              </span>
-              <span className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                &middot; 9 min read
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-[#E5E5E5] leading-snug tracking-tight mb-4">
-              {POST_TITLE}
-            </h1>
-            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed">
-              We tested six of the most popular free image compression tools side by side. The results are not what the rankings will tell you. Here is the honest breakdown- compression quality, privacy, batch limits, and when to use each one.
-            </p>
-          </header>
-
-          <div className="prose-custom space-y-0">
-
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+    <>
+      <BlogArticleLayout
+        title={POST_TITLE}
+        slug="best-image-compression-tools-2026"
+        description="Honest comparison of the best free image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Pros, cons, and our verdict."
+        date={POST_DATE}
+        dateFormatted={POST_DATE_FORMATTED}
+        tags={["Tools"]}
+        readingTime={9}
+        headings={[
+          { id: "why-compression-matters", title: "Why image compression still matters in 2026" },
+          { id: "testing-methodology", title: "What we tested and how" },
+          { id: "the-tools", title: "The tools" },
+          { id: "privacy-question", title: "The privacy question most comparisons ignore" },
+          { id: "compression-quality", title: "Compression quality: what the numbers do not show" },
+          { id: "which-tool", title: "Which tool should you use in 2026?" },
+          { id: "feature-comparison", title: "Quick reference: feature comparison" },
+          { id: "faq", title: "FAQ" },
+        ]}
+        summary={[
+          "SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG all produce good compression quality - the real differences are in privacy, batch limits, and workflow breadth.",
+          "SammaPix is the only tool that processes entirely in-browser with no file uploads, no batch limits, and 20 tools beyond just compression.",
+          "TinyPNG excels at PNG compression but limits free users to 20 files per session and uploads every image to its servers.",
+          "Squoosh by Google is excellent for single-file compression with side-by-side quality comparison, but has no batch processing.",
+        ]}
+        heroImage={
+          <figure className="my-8">
+                        <img
+                          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                          alt="Website performance metrics dashboard showing page load speed improvements"
+                          className="w-full rounded-lg"
+                          loading="eager"
+                        />
+                        <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
+                          Page speed is directly tied to image optimization - Photo by Carlos Muza on Unsplash
+                        </figcaption>
+                      </figure>
+        }
+        ctaBlock={
+          <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
+                        <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
+                          Try SammaPix Compress- free, no limits
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
+                          Compress JPG, PNG, WebP, GIF, and AVIF in bulk. Files never leave your browser. No account, no watermarks, no file size caps.
+                        </p>
+                        <Link
+                          href="/compress"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+                        >
+                          Open Compress tool
+                          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        </Link>
+                      </div>
+        }
+      >
+        {/* Article body content */}
+            <h2 id="why-compression-matters" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Why image compression still matters in 2026
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -291,19 +312,9 @@ export default function BestImageCompressionTools2026Page() {
               <a href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types" target="_blank" rel="noopener noreferrer" className="text-[#6366F1] hover:underline">MDN guide to image file types</a>.
             </p>
 
-            <figure className="my-8">
-              <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-                alt="Website performance metrics dashboard showing page load speed improvements"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
-              <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Page speed is directly tied to image optimization - Photo by Carlos Muza on Unsplash
-              </figcaption>
-            </figure>
+            
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="testing-methodology" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               What we tested and how
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -328,7 +339,7 @@ export default function BestImageCompressionTools2026Page() {
             </figure>
 
             {/* Tools comparison */}
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-6">
+            <h2 id="the-tools" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-6">
               The tools
             </h2>
 
@@ -394,7 +405,7 @@ export default function BestImageCompressionTools2026Page() {
               ))}
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-12 mb-3">
+            <h2 id="privacy-question" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-12 mb-3">
               The privacy question most comparisons ignore
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -407,7 +418,7 @@ export default function BestImageCompressionTools2026Page() {
               SammaPix and Squoosh both process images entirely inside your browser using JavaScript and WebAssembly. The files never touch any server. For photographers dealing with client work, this is not a nice-to-have- it is a professional requirement.
             </p>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="compression-quality" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Compression quality: what the numbers do not show
             </h2>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -432,7 +443,7 @@ export default function BestImageCompressionTools2026Page() {
               </figcaption>
             </figure>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
+            <h2 id="which-tool" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
               Which tool should you use in 2026?
             </h2>
 
@@ -472,7 +483,7 @@ export default function BestImageCompressionTools2026Page() {
             </p>
 
             {/* Quick reference table */}
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="feature-comparison" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-4">
               Quick reference: feature comparison
             </h2>
             <div className="overflow-x-auto -mx-4 sm:mx-0 mb-6">
@@ -546,7 +557,7 @@ export default function BestImageCompressionTools2026Page() {
 
             {/* FAQ */}
             <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">
+              <h2 id="faq" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">
                 FAQ
               </h2>
               <div className="space-y-6">
@@ -577,111 +588,15 @@ export default function BestImageCompressionTools2026Page() {
                     <p className="text-sm text-gray-500 dark:text-[#737373] leading-relaxed">{a}</p>
                   </div>
                 ))}
+
+
               </div>
             </div>
 
-          </div>
+      </BlogArticleLayout>
 
-          {/* Share section */}
-          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5] mb-3">
-              Share this article
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href={twitterShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg role="img" viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-label="Share on X (Twitter)">
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                </svg>
-                Share on X
-              </a>
-              <a
-                href={linkedinShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg role="img" viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-label="Share on LinkedIn">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                Share on LinkedIn
-              </a>
-            </div>
-          </div>
-
-          {/* End CTA */}
-          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Try SammaPix Compress- free, no limits
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Compress JPG, PNG, WebP, GIF, and AVIF in bulk. Files never leave your browser. No account, no watermarks, no file size caps.
-              </p>
-              <Link
-                href="/compress"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-              >
-                Open Compress tool
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Related articles */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
-              Related articles
-            </h3>
-            <div className="space-y-3">
-              {[
-                {
-                  href: "/blog/complete-guide-webp-format",
-                  tag: "Formats",
-                  tagColor: "text-blue-700",
-                  title: "The Complete Guide to WebP: Why Every Photographer Should Use It",
-                },
-                {
-                  href: "/blog/remove-exif-protect-privacy",
-                  tag: "Privacy",
-                  tagColor: "text-purple-700",
-                  title: "How to Remove EXIF Data and Protect Your Privacy",
-                },
-                {
-                  href: "/blog/compress-images-for-website",
-                  tag: "Performance",
-                  tagColor: "text-orange-700",
-                  title: "How to Compress Images for Web Without Losing Quality",
-                },
-              ].map(({ href, tag, tagColor, title }) => (
-                <Link key={href} href={href} className="flex items-start gap-3 group">
-                  <span className={`text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 ${tagColor}`}>
-                    {tag}
-                  </span>
-                  <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                    {title}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-        </article>
-
-        {/* Structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-      </div>
-    </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+    </>
   );
 }

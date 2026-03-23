@@ -1,0 +1,124 @@
+
+What is EXIF data?
+
+
+EXIF stands for Exchangeable Image File Format. It is a standard for embedding technical metadata directly inside digital image files- specifically JPEG, TIFF, and RAW formats. The standard was developed by the Japan Electronic Industries Development Association in 1995 and is now used by virtually every digital camera and smartphone camera app in the world.
+
+When you press the shutter, the camera writes a block of data into the file alongside the image pixels. This block is invisible when you view the photo but can be read by any software that knows where to look- including free online tools, desktop apps, and command-line utilities. The full technical specification is documented on the EXIF Wikipedia page.
+
+{title}
+
+{detail}
+
+
+Why EXIF data is a real privacy risk
+
+
+The risks are not hypothetical. There are documented, high-profile cases where EXIF metadata led directly to serious privacy breaches.
+
+
+Home address from a Marketplace listing
+
+Selling something on Craigslist, Facebook Marketplace, or Vinted? If you photograph the item at home and upload the original file, the GPS coordinates in the EXIF data reveal your home address to every buyer- and everyone else who downloads the image. Stalking cases have been traced back to exactly this scenario.
+
+
+The John McAfee case (2012)
+
+Vice Media published an exclusive interview with John McAfee while he was in hiding in Guatemala. The accompanying iPhone photos had GPS coordinates embedded in their EXIF data. The coordinates were publicly readable in the published images, revealing McAfee's exact location to authorities. He was found and detained shortly after. The error- leaving GPS metadata intact in published photos- was entirely avoidable.
+
+
+Military operational security
+
+In 2007, US Army soldiers photographed newly delivered Apache helicopters at a base in Iraq and posted the images to the internet. The GPS metadata embedded in the photos revealed the exact coordinates of the military base. The incident prompted the US Army to update its digital photography and social media policy. The same risk applies to anyone working in a sensitive location.
+
+
+Routine and pattern exposure
+
+A series of photos posted to a public social account over time can map an entire daily routine. GPS timestamps reveal where you work, where your children attend school, and what routes you travel regularly. This kind of pattern data is exactly what stalkers and abusive ex-partners look for- and it is sitting in plain sight for anyone who knows to look at EXIF metadata.
+
+Every smartphone photo can carry precise GPS coordinates in its metadata - Photo by Jonas Leupe on Unsplash
+
+
+Do social platforms strip EXIF automatically?
+
+
+Instagram, Facebook, and X (Twitter) do strip most EXIF metadata when you upload a photo through their apps. This sounds reassuring- but it is not a reliable privacy strategy.
+
+- {item}
+
+The only reliable approach is to strip EXIF data from the source file before you share it anywhere- so the metadata never reaches any platform in the first place.
+
+
+How to remove EXIF data using SammaPix EXIF Viewer
+
+
+SammaPix EXIF Viewer processes your photos entirely in the browser- no upload, no server, no account required. Here is the complete process.
+
+{title}
+
+{body}
+
+Free tool- no upload, no signup
+
+Strip EXIF data from your photos now - SammaPix EXIF Viewer
+
+
+EXIF privacy tips for social media sharing
+
+
+Even if you trust the platforms you share to, building good habits around EXIF data reduces your overall digital footprint. Here are the most important practices.
+
+Always strip GPS before listing anything for sale
+
+Marketplace listings (Facebook, Craigslist, Depop, eBay) are the highest-risk context. The images are often downloadable by anyone, and sellers typically photograph items in their home. Remove GPS data before every listing photo you upload.
+
+Be careful with iMessage and email
+
+WhatsApp strips EXIF before sending. iMessage does not- photos sent via iMessage retain all original metadata including GPS. Email attachments also preserve metadata. If you are sending photos that include sensitive GPS data (your home, a private event, a confidential location), strip them first.
+
+Disable GPS for your camera app if you do not need it
+
+On iPhone: Settings -> Privacy & Security -> Location Services -> Camera -> Never. On Android: Camera settings -> Location tag -> Off. Photos taken without GPS enabled will never have coordinates to worry about. The downside is losing location data for travel photography- so it is a tradeoff worth considering per use case.
+
+Use a dedicated workflow for client photos
+
+If you are a photographer delivering images to clients, EXIF data contains your camera serial number, lens details, and shooting settings. Some clients or agencies specify that delivered files should have metadata stripped- particularly in line with IPTC photo metadata standards. Build EXIF removal into your export workflow rather than doing it manually per job.
+
+Compress and strip in one step
+
+If you are also optimizing images for web use, SammaPix Compress strips all EXIF metadata automatically as part of the compression process. You get a lighter file with no metadata in a single operation- no separate EXIF removal step needed.
+
+Building good metadata hygiene into your photo sharing workflow protects your privacy - Photo by John Schnobrich on Unsplash
+
+
+Alternative methods for removing EXIF data
+
+
+
+Windows: built-in File Properties
+
+Right-click any image file -> Properties -> Details tab -> "Remove Properties and Personal Information." You can strip all metadata or specific fields. Works on Windows 10 and 11 with no software to install. Limitation: one file at a time, no batch processing.
+
+
+macOS: Photos app export
+
+In the macOS Photos app, select your images, go to File -> Export -> Export Photos, and uncheck "Location Information." This exports copies without GPS data. Note: macOS Preview does not strip EXIF on export, so the Photos app method is the native approach for GPS removal on Mac.
+
+
+iOS 17+: Share sheet
+
+In iOS 17 and later, when you share a photo via the Share sheet, tap "Options" at the top and you will find a "Location" toggle. Disabling it strips GPS coordinates from the shared copy. This is the fastest mobile method but only works on iOS 17+ and only during the share action.
+
+
+Command line: ExifTool
+
+ExifTool by Phil Harvey is the authoritative open-source tool for batch EXIF processing. To remove all GPS fields: exiftool -gps:all= -overwrite_original photo.jpg. Use the -r flag for recursive directory processing. Powerful for automation but requires terminal comfort and installation.
+
+
+FAQ
+
+
+
+{q}
+
+{a}

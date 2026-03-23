@@ -1,0 +1,422 @@
+## What is photo culling and why does it matter
+
+Photo culling is the process of reviewing every image from a shoot
+and selecting which ones to keep, edit, and deliver- and which
+ones to reject. The word comes from the Old French "coillir,"
+meaning to gather or collect. In photography, it has come to mean
+the opposite: the discipline of eliminating rather than keeping.
+
+Culling matters because editing time scales directly with the
+number of images you process. If you deliver 400 photos from a
+wedding, editing starts from the 400 best frames- not from all
+1,400 you shot. Every frame you reject during culling is time
+saved in Lightroom or Capture One. It is also a quality
+decision: clients and audiences see sharper curation as a sign of
+professional confidence.
+
+According to a workflow survey published by
+
+Fstoppers
+
+, professional photographers spend an average of 30–45% of their
+total post-production time on culling alone. Cutting that in half
+is worth more than almost any other workflow improvement.
+
+## The culling bottleneck: why most photographers are slow
+
+The core problem is decision fatigue combined with a slow
+interface. Most photographers open Lightroom, click through images
+with the mouse, hesitate on borderline shots, and repeat that
+cycle for hundreds of frames. Every click-and-pause adds up.
+
+Three habits drive slow culling:
+
+- Making decisions with a mouse. Reaching for a mouse or trackpad to click a rating star breaks the visual flow. Keyboard-driven culling is fundamentally faster.
+
+- Over-evaluating borderline shots. Spending 10 seconds on a frame that is clearly out of focus is wasted time. A quick-pass system eliminates obvious rejects in a single, fast sweep.
+
+- Working without a reference for comparison. Judging a frame in isolation makes it hard to decide between two similar shots. Side-by-side comparison cuts ambiguity immediately.
+
+A fast culling workflow solves all three of these bottlenecks
+systematically. The rest of this guide explains exactly how.
+
+## Rating systems: stars, flags, and colors
+
+Before you start culling, decide which rating system you will use.
+Most professional software supports three approaches: star ratings,
+flags (pick / reject), and color labels. Each has trade-offs.
+
+### The flag system (fastest)
+
+The flag system is binary: a photo is either a pick (flagged) or a
+reject (flagged as rejected), with everything else unmarked. This
+is the fastest system for culling because it forces a single
+decision: keep or discard. In Lightroom, pressing
+[P]
+flags a pick and
+[X]
+flags a reject. No stopping to decide between three and four
+stars.
+
+The limitation is granularity. If you want to distinguish between
+"definitely deliver" and "maybe deliver if the client wants
+more," a binary system does not support that natively.
+
+### The two-pass star system (most flexible)
+
+Many photographers use a simplified star system with just two or
+three tiers rather than the full five-star range. A common
+professional approach as described by
+
+Shotkit
+
+is:
+
+- 1 star: Technically acceptable- in focus, correctly exposed, subject present. Worth keeping in the library.
+
+- 2 stars: Good shot- technically strong and compositionally interesting. Candidate for editing.
+
+- 3 stars: Hero shot- the best frame of a moment. Goes to the client or portfolio.
+
+- No rating: Reject. Blurry, closed eyes, duplicate, technically unusable.
+
+This approach lets you do a fast first pass (assigning 1s and
+rejecting obvious failures), then a refined second pass (promoting
+your best 1-star shots to 2 or 3 stars) without ever leaving your
+culling tool.
+
+### Color labels (best for complex shoots)
+
+Color labels are most useful when a single shoot has multiple
+deliverable categories. A wedding photographer might use red for
+ceremony photos, yellow for cocktail hour, green for reception.
+Color labels can be combined with star ratings, giving you a
+two-dimensional classification system that works well for large,
+multi-segment shoots.
+
+The downside is speed: reaching for a number key plus a color
+assignment is slower than a simple flag. Reserve color labels for
+the second pass when the objective is organizing, not initial
+selecting.
+
+The fastest cullers use keyboard shortcuts exclusively- no mouse, no hesitation - Photo by Unsplash
+
+## Keyboard shortcuts that make you cull photos fast
+
+Keyboard-driven culling is the single highest-leverage speed
+improvement available. When your hands never leave the keyboard,
+the rhythm of reviewing images becomes nearly unconscious- you
+are evaluating and deciding in parallel, not sequentially.
+
+The core shortcuts in Lightroom Classic:
+
+Action
+Lightroom
+Capture One
+
+Flag as pick
+P
+P
+
+Flag as reject
+X
+X
+
+Next image
+→ / Space
+→
+
+Previous image
+←
+←
+
+Rate 1 star
+1
+1
+
+Rate 2 stars
+2
+2
+
+Rate 3 stars
+3
+3
+
+Compare view
+C
+C
+
+Zoom to 100%
+Z
+Z
+
+The most powerful habit is to use the
+[P]
+/
+[X]
+/
+[→]
+trio exclusively during the first pass. Pick, reject, or advance-
+nothing else. Save star promotion for the second pass when
+you have eliminated the noise.
+
+## The SammaPix CullPix approach: side-by-side compare, keyboard-driven
+
+Choosing between two similar shots is where most photographers
+slow down the most. You look at frame 47, think it is good, advance
+to frame 48, think that one might be better, go back to 47, then
+back to 48. That back-and-forth adds minutes to every burst
+sequence.
+
+The
+
+SammaPix CullPix tool
+
+solves this with a side-by-side compare view that is controlled
+entirely with the keyboard. You load your folder, and CullPix
+presents images in pairs- no clicking through menus, no dragging
+thumbnails into a compare panel.
+
+Key features that make CullPix fast:
+
+- Side-by-side compare. Two images displayed at equal size, synchronized zoom and pan. Press a key to keep the left or the right- the winner stays, the loser is marked for rejection, and the next candidate slides in automatically.
+
+- Keyboard-only interaction. No mouse required after the initial folder selection. Every action- advance, rate, reject, zoom, compare- has a keyboard shortcut. The culling rhythm becomes continuous.
+
+- Browser-based, no upload. Your RAW files and JPEGs never leave your device. CullPix runs entirely in the browser using the File System Access API, so privacy is preserved and there is no waiting for uploads to complete.
+
+- Export a rejection list. CullPix generates a list of rejected filenames you can use to delete files in bulk from your filesystem or import into Lightroom as a rejection filter.
+
+The compare-driven approach is especially powerful for burst
+sequences and similar shots. Instead of evaluating each frame
+individually, you run a tournament: the best frame from each pair
+advances until only the single strongest image remains.
+
+## The step-by-step culling workflow
+
+The following workflow applies whether you are using Lightroom,
+Capture One, or CullPix. The principles are the same; the
+keyboard shortcuts differ slightly.
+
+### Step 1 - Import and do nothing else
+
+Import all files from the shoot without applying any presets,
+keywords, or adjustments. The goal at this stage is a clean,
+unmodified set of files ready for fast review. Applying presets
+during import slows down the ingestion phase and is irrelevant
+until after culling.
+
+If your software renders previews during import (Lightroom does),
+use "Minimal" previews during this step. Rendering full-size
+standard previews is slow. You can render them after culling is
+complete for the images you actually intend to edit.
+
+### Step 2 - The rapid first pass (reject obvious failures)
+
+Move through every image at a steady pace- roughly 3–5 seconds
+per frame. At this speed, you are only looking for disqualifying
+problems: severe motion blur, missed focus, closed eyes on the
+primary subject, completely wrong exposure, accidental frames from
+moving between shots.
+
+Press
+[X]
+for any obvious reject and advance with
+[→]
+. Do not stop to compare. Do not deliberate on borderline cases.
+If you cannot immediately identify a disqualifying problem, press
+[→]
+and move on. Deliberation belongs in pass two.
+
+A 1,400-image first pass at 4 seconds per frame takes under two
+hours- and typically eliminates 40–50% of all frames.
+
+### Step 3 - Filter to unrated and do the compare pass
+
+After the first pass, filter your library to show only unrated
+images (the ones that survived the reject sweep). This is now a
+smaller, cleaner pool. Enter compare view and work through burst
+sequences and similar shots, keeping only the strongest frame
+from each group.
+
+This is where CullPix's side-by-side view delivers the biggest
+speed gain. When evaluating two nearly identical frames, seeing
+them at the same size simultaneously makes focus accuracy and
+expression quality immediately apparent. The decision that takes
+10 seconds of back-and-forth in single-image view takes 2 seconds
+in compare view.
+
+### Step 4 - Assign your final ratings
+
+Once the compare pass is done, you have a pool of images that are
+all technically acceptable. Now assign final ratings. Mark your
+hero shots (the very best of each scene or moment) with your
+highest rating. Everything else that is technically good but not
+exceptional gets a lower rating or remains at pick/flag status.
+
+At this stage you can also apply color labels if your workflow
+requires categorizing by scene or delivery batch.
+
+### Step 5 - Delete rejects and move to editing
+
+Delete rejected files (or move them to a "Rejects" folder if
+you prefer to keep them temporarily). Then filter to your highest
+rating and begin editing. Your editing queue now contains only
+the images worth your full attention.
+
+If you need to reduce file sizes before archiving, the
+
+SammaPix Compress tool
+
+can batch-process your exported JPEGs directly in the browser with
+no upload required.
+
+## Wedding and event photography culling tips
+
+Wedding and event photography creates unique culling challenges:
+large volumes, non-linear narrative structure, multiple subjects
+with changing expressions, and a client expectation that every
+major moment is represented. These tips address the specific
+pressures of high-volume event culling.
+
+Cull by scene, not by chronology.
+
+Organize the import into named folders by scene - Getting Ready,
+Ceremony, Cocktail Hour, Reception- before you start culling.
+Culling within scenes keeps your comparison decisions contextual.
+You are always choosing between two ceremony shots, not between a
+ceremony shot and a reception shot taken at different light
+conditions with different objectives.
+
+Use a minimum coverage rule for each scene.
+
+Define the minimum number of picks you need from each scene before
+you start: for example, at least 15 from Getting Ready, at least
+40 from the Ceremony, at least 60 from the Reception. This
+prevents you from over-culling a scene and then realizing the
+client has no coverage of a key moment.
+
+Prioritize expressions, not technical perfection.
+
+A slightly soft-focus frame where the emotion is perfect is often
+more valuable to a wedding client than a technically sharp frame
+where the subject looks distracted. During your compare pass,
+weight expression and emotion heavily- especially for ceremony
+moments, first looks, and toasts. Technical criteria matter more
+for portraits and formals.
+
+Flag complete story arcs.
+
+Wedding clients want to see the moment unfold, not just its peak.
+For moments like the first kiss, cake cutting, or first dance,
+ensure you have a sequence of 3–5 picks that show the arc:
+before, during, and after. Do not cull so aggressively that the
+narrative disappears.
+
+## How many photos to keep: keep rate benchmarks by genre
+
+One of the most common questions from photographers refining their
+culling workflow is: how many should I be keeping? Keep rate- the
+percentage of total frames you select as keepers- varies
+significantly by genre and shooting style.
+
+Genre
+Typical shoot volume
+Target keep rate
+Final delivery
+
+Wedding
+1,000–2,500
+20–35%
+300–600 edited
+
+Portrait / headshot
+100–300
+15–25%
+20–50 edited
+
+Sports / action
+500–2,000
+5–15%
+50–200 edited
+
+Corporate / event
+300–800
+25–40%
+100–250 edited
+
+Travel / landscape
+200–600
+10–20%
+30–80 edited
+
+If your keep rate is consistently above these ranges, your first
+pass is not aggressive enough. You are holding onto too many
+technically acceptable but ultimately redundant frames. A higher
+keep rate means more editing time per shoot- and more storage
+consumed- without a proportional improvement in deliverables.
+
+If your keep rate is consistently below these ranges, check
+whether you are being too aggressive in your first pass and
+accidentally rejecting good frames. Zoom in on sharpness before
+rejecting any frame you are uncertain about.
+
+Finding and removing near-duplicate frames before culling can also
+help reduce decision fatigue. The
+
+SammaPix Find Duplicates tool
+
+detects visually similar frames using perceptual hashing- useful
+for identifying burst clusters you missed during import. See our
+full guide on
+
+how to find and delete duplicate photos
+
+for the full workflow.
+
+## FAQ
+
+### What is the difference between culling and editing photos?
+
+Culling is the selection process- deciding which images are worth
+keeping and which should be rejected. Editing is applying
+adjustments (exposure, color, retouching) to the selected images.
+Culling always comes first. Editing an image you would eventually
+reject wastes time; good culling prevents that from happening.
+
+### Should I cull in Lightroom or use a dedicated culling tool?
+
+Lightroom is capable but not optimized for fast culling. Its
+compare view requires extra steps to enter, and the full
+application is heavier than tools designed purely for selection.
+Dedicated tools- including browser-based options like CullPix-
+are faster to navigate because culling is their only job. Many
+professionals do their culling in a lighter tool and import only
+the selected files into Lightroom.
+
+### How many passes should a culling workflow have?
+
+Two passes is the professional standard. The first pass is fast
+and eliminates obvious rejects. The second pass is comparative
+and selects the best frame from each similar group. Adding a third
+pass is sometimes useful for very large shoots (full-day weddings,
+multi-day events), but beyond three passes, diminishing returns
+set in and you risk second-guessing decisions you have already made.
+
+### How do I cull photos faster on a laptop with a small screen?
+
+Use the keyboard exclusively and maximize your culling tool to
+full screen. Avoid zooming out to filmstrip view- it creates
+visual noise and slows decisions. For compare view on small
+screens, prioritize checking sharpness at 100% zoom on the
+subject's eyes rather than evaluating composition (which is better
+judged at a larger scale on a secondary display).
+
+### Can I cull RAW files without converting them first?
+
+Yes. Lightroom, Capture One, and CullPix all support native RAW
+file viewing without prior conversion. Browser-based culling tools
+use the browser's image decoding pipeline, which supports most
+common RAW formats through the JPEG preview embedded in the RAW
+file. For full-resolution RAW evaluation, desktop software with
+native codec support remains the most accurate option.

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
@@ -105,84 +106,55 @@ const POST_URL = `${APP_URL}/blog/batch-watermark-photos-free`;
 const POST_TITLE =
   "How to Batch Watermark Photos for Free (No Photoshop Needed)";
 
+
 export default function BatchWatermarkPhotosFreePage() {
-  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(POST_TITLE)}&url=${encodeURIComponent(POST_URL)}&via=lucasammarco`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(POST_URL)}`;
-
   return (
-    <div className="py-12 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
-      <div className="max-w-2xl mx-auto">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-400 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#E5E5E5] mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
-          Back to Blog
-        </Link>
-
-        <article>
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs font-medium uppercase tracking-wide text-orange-700">
-                Guide
-              </span>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <time
-                className="text-xs text-gray-400 dark:text-[#737373]"
-                dateTime={POST_DATE}
-              >
-                {POST_DATE_FORMATTED}
-              </time>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <span className="text-xs text-gray-400 dark:text-[#737373]">
-                By Luca Sammarco
-              </span>
-              <span className="text-gray-200 dark:text-[#333]">·</span>
-              <span className="text-xs text-gray-400 dark:text-[#737373]">
-                10 min read
-              </span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight leading-tight mb-4">
-              {POST_TITLE}
-            </h1>
-
-            <p className="text-base text-gray-500 dark:text-[#A3A3A3] leading-relaxed mb-5">
-              Every photographer publishing work online faces the same dilemma:
-              share high-quality images and risk theft, or protect them and
-              compromise the presentation. Watermarking solves both problems- 
-              but only if you can apply it efficiently. This guide shows you how
-              to batch watermark photos for free, without Photoshop and without
-              spending an afternoon clicking through images one at a time.
-            </p>
-          </header>
-
-          {/* Hero image */}
-          <div className="mb-10 rounded-md overflow-hidden border border-gray-100 dark:border-[#2A2A2A]">
-            <img
-              src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=80"
-              alt="Photographer reviewing images on a camera screen"
-              className="w-full object-cover"
-              width={800}
-              height={533}
-              loading="eager"
-            />
-            <p className="text-xs text-gray-400 dark:text-[#737373] px-3 py-2 bg-gray-50 dark:bg-[#212121]">
-              Photo by{" "}
-              <a
-                href="https://unsplash.com/photos/photo-1542038784456-1ea8e935640e"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2"
-              >
-                Unsplash
-              </a>
-            </p>
-          </div>
-
-          <div className="prose-content">
-
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+    <>
+      <BlogArticleLayout
+        title={POST_TITLE}
+        slug="batch-watermark-photos-free"
+        description="Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once- browser-based, no uploads required."
+        date={POST_DATE}
+        dateFormatted={POST_DATE_FORMATTED}
+        tags={["Creative"]}
+        readingTime={10}
+        headings={[
+          { id: "why-watermark", title: "Why watermark your photos" },
+          { id: "types-of-watermarks", title: "Types of watermarks: text, logo, and QR code" },
+          { id: "batch-workflow", title: "The batch watermarking workflow" },
+          { id: "step-by-step", title: "Step-by-step: batch watermark photos with SammaPix StampIt" },
+          { id: "best-practices", title: "Best practices for watermark placement, opacity, and size" },
+          { id: "watermark-debate", title: "The watermark vs no watermark debate" },
+          { id: "faq", title: "FAQ" },
+        ]}
+        summary={[
+          "Watermarks protect your photos from unauthorized use and reinforce brand recognition across every platform your images appear on.",
+          "SammaPix StampIt processes watermarks 100% in your browser - your photos never leave your device, with no file size limits.",
+          "Best placement is bottom-right or center with 30-50% opacity for text watermarks, ensuring visibility without distracting from the image.",
+          "Batch processing lets you watermark hundreds of photos in seconds with consistent placement, size, and opacity across every image.",
+        ]}
+        ctaBlock={
+          <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
+                        <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
+                          Protect your photos with a watermark- free, no signup
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
+                          Add text, logo, or QR code watermarks to your entire photo
+                          batch in seconds with SammaPix Watermark. Runs entirely in your
+                          browser- your images never leave your device.
+                        </p>
+                        <Link
+                          href="/tools/stampit"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+                        >
+                          Open StampIt
+                          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        </Link>
+                      </div>
+        }
+      >
+        {/* Article body content */}
+            <h2 id="why-watermark" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Why watermark your photos
             </h2>
 
@@ -260,7 +232,7 @@ export default function BatchWatermarkPhotosFreePage() {
               </li>
             </ul>
 
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="types-of-watermarks" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Types of watermarks: text, logo, and QR code
             </h2>
 
@@ -359,7 +331,7 @@ export default function BatchWatermarkPhotosFreePage() {
               </p>
             </div>
 
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="batch-workflow" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               The batch watermarking workflow
             </h2>
 
@@ -405,7 +377,7 @@ export default function BatchWatermarkPhotosFreePage() {
               </li>
             </ul>
 
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="step-by-step" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Step-by-step: batch watermark photos with SammaPix StampIt
             </h2>
 
@@ -534,7 +506,7 @@ export default function BatchWatermarkPhotosFreePage() {
               </Link>
             </div>
 
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="best-practices" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               Best practices for watermark placement, opacity, and size
             </h2>
 
@@ -621,7 +593,7 @@ export default function BatchWatermarkPhotosFreePage() {
               to standardize dimensions before watermarking.
             </p>
 
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="watermark-debate" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               The watermark vs no watermark debate
             </h2>
 
@@ -705,7 +677,7 @@ export default function BatchWatermarkPhotosFreePage() {
 
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
+            <h2 id="faq" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
               FAQ
             </h2>
 
@@ -781,123 +753,11 @@ export default function BatchWatermarkPhotosFreePage() {
               online sharing, then watermark that copy- keeping your RAW
               originals untouched.
             </p>
-          </div>
 
-          {/* Share section */}
-          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5] mb-3">
-              Share this article
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href={twitterShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4 fill-current"
-                  aria-label="Share on X (Twitter)"
-                >
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                </svg>
-                Share on X
-              </a>
-              <a
-                href={linkedinShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-[#2A2A2A] rounded-md text-sm text-gray-600 dark:text-[#A3A3A3] hover:bg-gray-50 dark:hover:bg-[#252525] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4 fill-current"
-                  aria-label="Share on LinkedIn"
-                >
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                Share on LinkedIn
-              </a>
-            </div>
-          </div>
+      </BlogArticleLayout>
 
-          {/* CTA */}
-          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-                Protect your photos with a watermark- free, no signup
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                Add text, logo, or QR code watermarks to your entire photo
-                batch in seconds with SammaPix Watermark. Runs entirely in your
-                browser- your images never leave your device.
-              </p>
-              <Link
-                href="/tools/stampit"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-              >
-                Open StampIt
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Related articles */}
-          <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">
-              Related articles
-            </h3>
-            <div className="space-y-3">
-              <Link
-                href="/blog/compress-images-without-losing-quality"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-green-700">
-                  Optimization
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Compress Images Without Losing Quality (2026)
-                </span>
-              </Link>
-              <Link
-                href="/blog/remove-exif-protect-privacy"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-purple-700">
-                  Privacy
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  How to Remove EXIF Data from Photos to Protect Your Privacy
-                </span>
-              </Link>
-              <Link
-                href="/blog/travel-photography-tips-beginners"
-                className="flex items-start gap-3 group"
-              >
-                <span className="text-xs font-medium uppercase tracking-wide shrink-0 mt-0.5 text-orange-700">
-                  Guide
-                </span>
-                <span className="text-sm text-gray-600 dark:text-[#A3A3A3] group-hover:text-gray-900 dark:group-hover:text-[#E5E5E5] transition-colors">
-                  Travel Photography Tips for Beginners: Build Your Workflow
-                  from Day One
-                </span>
-              </Link>
-            </div>
-          </div>
-        </article>
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-      </div>
-    </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+    </>
   );
 }

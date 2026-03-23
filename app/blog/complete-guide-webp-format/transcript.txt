@@ -1,0 +1,235 @@
+## What is WebP?
+
+            WebP is an image format developed by Google and first released in 2010. It was designed as a direct replacement for JPEG, PNG, and GIF- combining the strengths of all three into a single modern format optimized for the web.
+
+            The format is based on the VP8 video codec (for lossy compression) and uses a dedicated lossless mode derived from VP8L. Both modes use predictive coding- the encoder analyzes nearby pixel values and only stores the difference from the prediction, rather than raw pixel data. This is fundamentally more efficient than the DCT-based compression JPEG uses.
+
+            The result: at the same perceptual quality, WebP files are consistently smaller than JPEG. In Google's own benchmarks- published in the WebP compression study - lossy WebP files were 25–34% smaller than JPEG at equivalent quality. Lossless WebP files were 26% smaller than PNG. You can read more about the format on the official Google WebP developer page.
+
+            
+
+            
+## WebP capabilities: what makes it versatile
+
+            Unlike JPEG (lossy only, no transparency) and PNG (lossless only, transparency), WebP covers every use case in a single format.
+
+            
+              ,
+                ,
+                ,
+                ,
+              ].map(() => (
+                
+                  
+
+                  
+
+                
+              ))}
+            
+
+            
+## WebP browser support in 2026
+
+            WebP support is now universal. As of early 2026, global browser support is above 97% according to Can I Use . The last major holdout was Safari on iOS and macOS - Apple added full WebP support in Safari 14 (released September 2020). Every iPhone running iOS 14 or later supports WebP natively.
+
+            The era of needing fallback JPEG alternatives for Safari is over. If you are still serving JPEG to all users out of caution, you are leaving significant performance gains on the table for no practical reason. Check the latest compatibility data on Can I Use: WebP.
+
+            
+              
+              
+                WebP is now supported by every major browser- no fallbacks needed in 2026 - Photo by Christopher Gower on Unsplash
+              
+            
+
+            
+              ,
+                ,
+                ,
+                ,
+                ,
+                ,
+              ].map(() => (
+                
+                  
+                    
+                    
+                  
+                  
+                
+              ))}
+            
+
+            
+## WebP vs JPEG vs PNG: when to use which
+
+            The choice between formats is not about which is objectively better- it is about matching the format to the content and use case. Here is the practical breakdown.
+
+            
+### Use WebP when
+
+            
+              
+            
+
+            
+### Stick with JPEG when
+
+            
+              
+            
+
+            
+### Stick with PNG when
+
+            
+              
+            
+
+            
+            
+## Format comparison at a glance
+
+            
+              
+                Feature | 
+                    JPEG | 
+                    PNG | 
+                    WebP | 
+                  
+                
+                
+                  ,
+                    ,
+                    ,
+                    ,
+                    ,
+                    ,
+                    ,
+                    ,
+                  ].map((row, i) => (
+                    
+
+                       | 
+                       | 
+                       | 
+                       | 
+                    
+                  ))}
+                
+              
+            
+
+            
+## What about AVIF? Is it better than WebP?
+
+            AVIF (AV1 Image File Format) is a newer format that achieves even better compression than WebP- often 30–50% smaller than WebP at equivalent quality. Browser support reached approximately 90%+ globally in 2024, with the main gap being Safari on older iOS versions.
+
+            The trade-off is encoding time. AVIF is significantly slower to encode than WebP, which matters for server-side on-the-fly conversion. For static assets and photographers converting files manually, this is less of a concern.
+
+            The practical recommendation for 2026: WebP is the safe, universal default. Use it for everything. If you want to push further, serve AVIF with a WebP fallback using the HTML <picture> element. SammaPix currently focuses on WebP conversion as the production-ready default; AVIF support is on the roadmap.
+
+            
+## How to convert photos to WebP using SammaPix
+
+            SammaPix WebP Converter converts JPEG, PNG, GIF, and AVIF files to WebP entirely in your browser. No upload, no server processing, no account required.
+
+            
+              ,
+                ,
+                ,
+                ,
+              ].map(() => (
+                
+                  
+                    
+                  
+                  
+                    
+
+                    
+
+                  
+                
+              ))}
+            
+
+            
+            
+              
+                Free tool- no upload, no signup
+
+                Convert your images to WebP now - SammaPix WebP Converter
+
+              
+              
+            
+
+            
+## Serving WebP on your website
+
+            Converting your images is only the first step. Here is how to deliver them correctly on different platforms.
+
+            
+### HTML: the <picture> element
+
+            The safest approach for any HTML page- serves WebP to browsers that support it, falls back to JPEG automatically:
+
+            ### WordPress WordPress 5.8+ natively accepts WebP uploads. You can upload .webp files directly via the Media Library. Plugins like ShortPixel, Imagify, or WebP Converter for Media can automate on-the-fly WebP conversion and serving with Accept: image/webp header detection.
+
+            
+### Next.js
+
+            Next.js automatically serves WebP when you use the built-in next/image component. It detects browser support via the Accept header and converts images at request time, caching the result. No manual conversion needed if you use <Image />.
+
+            
+### Squarespace and Webflow
+
+            Squarespace automatically converts uploaded images to WebP since 2022. Webflow serves WebP via its CDN for all images uploaded after mid-2023. If you are on either platform, your images may already be served as WebP- check your network tab in browser DevTools to confirm.
+
+            
+              
+              
+                Implementing WebP in your site is straightforward with modern frameworks - Photo by Clement Helardot on Unsplash
+              
+            
+
+            
+## WebP and photography workflows: practical tips
+
+            Never use WebP as your master archive format
+
+            Keep original RAW or high-quality JPEG masters for archiving. Convert to WebP only for the specific web deliverables that will be published. The smaller file size comes at the cost of some discarded data- fine for web delivery, not appropriate for long-term photo archiving where you want every pixel preserved.
+
+            Convert during your export step, not at source
+
+            A clean workflow: edit in Lightroom, Capture One, or your preferred software → export full-quality JPEG or TIFF → batch-convert to WebP in SammaPix before uploading to your website. This keeps your editing workflow using well-supported formats and adds the WebP conversion as a final, fast step.
+
+            Pair WebP conversion with compression
+
+            Converting to WebP already reduces file size, but combining format conversion with quality compression gives you the largest gains. Use SammaPix Compress alongside the WebP converter to do both in your workflow- so a 10 MB camera JPEG becomes a sub-300 KB WebP ready for web delivery.
+
+            Check your EXIF metadata after conversion
+
+            WebP does not use the EXIF standard in the same way JPEG does. Most conversion tools strip EXIF metadata during the WebP conversion, which is usually the desired behavior for web images. If you need to verify what metadata (if any) survives the conversion, drop the output file into SammaPix EXIF Viewer to check.
+
+            
+            
+              
+## FAQ
+
+              
+                ,
+                  ,
+                  ,
+                  ,
+                  ,
+                ].map(() => (
+                  
+                    
+### 
+
+                    
+
+                  
+                ))}
