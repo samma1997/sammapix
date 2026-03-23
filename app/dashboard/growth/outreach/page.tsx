@@ -160,6 +160,28 @@ function AddTargetModal({ onClose, onAdd }: AddTargetModalProps) {
   );
 }
 
+// Inline copy button for email fields
+function FieldCopyButton({ text, label }: { text: string; label?: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      onClick={() => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+      className={`shrink-0 flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+        copied
+          ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
+          : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] hover:border-[#6366F1] hover:text-[#6366F1]"
+      }`}
+    >
+      {copied ? <Check className="h-3 w-3" strokeWidth={2} /> : <Copy className="h-3 w-3" strokeWidth={1.5} />}
+      {label && <span>{copied ? "Copiato!" : label}</span>}
+    </button>
+  );
+}
+
 function OutreachRow({
   target,
   onUpdate,
@@ -167,20 +189,16 @@ function OutreachRow({
   target: OutreachTarget;
   onUpdate: (id: number, data: Partial<OutreachTarget>) => void;
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [replyOpen, setReplyOpen] = useState(false);
   const [notesExpanded, setNotesExpanded] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedSubject, setCopiedSubject] = useState(false);
-  const [copiedBody, setCopiedBody] = useState(false);
-  const [generatingSubject, setGeneratingSubject] = useState(false);
-  const [generatingBody, setGeneratingBody] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [replyDraft, setReplyDraft] = useState(target.replyText ?? "");
   const [savingReply, setSavingReply] = useState(false);
   const [markingSent, setMarkingSent] = useState(false);
 
-  // Cache generated email so we don't call API twice
-  const [generatedCache, setGeneratedCache] = useState<{ subject: string; body: string } | null>(null);
+  const [generatedEmail, setGeneratedEmail] = useState<{ subject: string; body: string } | null>(null);
 
   async function patchTarget(data: Record<string, unknown>) {
     setSaving(true);
@@ -219,16 +237,17 @@ function OutreachRow({
     }
   }
 
-  function copyEmailAddress() {
-    if (!target.contactEmail) return;
-    navigator.clipboard.writeText(target.contactEmail).then(() => {
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000);
-    });
-  }
-
-  async function generateEmail(): Promise<{ subject: string; body: string } | null> {
-    if (generatedCache) return generatedCache;
+  async function handleGenerateEmail() {
+    if (emailOpen) {
+      setEmailOpen(false);
+      return;
+    }
+    if (generatedEmail) {
+      setEmailOpen(true);
+      return;
+    }
+    setGenerating(true);
+    setEmailOpen(true);
     try {
       const res = await fetch("/api/growth/outreach/generate", {
         method: "POST",
@@ -237,36 +256,13 @@ function OutreachRow({
       });
       const data = await res.json() as { success?: boolean; subject?: string; body?: string };
       if (data.success && data.subject && data.body) {
-        const result = { subject: data.subject, body: data.body };
-        setGeneratedCache(result);
-        return result;
+        setGeneratedEmail({ subject: data.subject, body: data.body });
       }
-      return null;
     } catch {
-      return null;
+      // silent fail
+    } finally {
+      setGenerating(false);
     }
-  }
-
-  async function copySubject() {
-    setGeneratingSubject(true);
-    const result = await generateEmail();
-    if (result) {
-      await navigator.clipboard.writeText(result.subject);
-      setCopiedSubject(true);
-      setTimeout(() => setCopiedSubject(false), 2000);
-    }
-    setGeneratingSubject(false);
-  }
-
-  async function copyBody() {
-    setGeneratingBody(true);
-    const result = await generateEmail();
-    if (result) {
-      await navigator.clipboard.writeText(result.body);
-      setCopiedBody(true);
-      setTimeout(() => setCopiedBody(false), 2000);
-    }
-    setGeneratingBody(false);
   }
 
   async function markAsSent() {
@@ -275,6 +271,7 @@ function OutreachRow({
     const followUp = new Date(now);
     followUp.setDate(followUp.getDate() + 7);
     await patchTarget({ status: "sent", sentAt: now.toISOString(), followUpAt: followUp.toISOString() });
+    setEmailOpen(false);
     setMarkingSent(false);
   }
 
@@ -403,91 +400,36 @@ function OutreachRow({
         </td>
         {/* Actions column */}
         <td className="py-2.5 px-3 whitespace-nowrap">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            {/* Copy email address */}
-            {target.contactEmail ? (
+          <div className="flex items-center gap-1.5">
+            {/* Generate email button */}
+            {target.status === "to_send" && (
               <button
-                onClick={copyEmailAddress}
-                title="Copia indirizzo email"
-                className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                  copiedEmail
-                    ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
+                onClick={handleGenerateEmail}
+                disabled={generating}
+                className={`flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-[4px] border transition-colors ${
+                  emailOpen
+                    ? "border-[#6366F1] text-[#6366F1] bg-[#6366F1]/5"
                     : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
-                }`}
+                } disabled:opacity-50`}
               >
-                {copiedEmail ? (
-                  <Check className="h-3 w-3" strokeWidth={2} />
+                {generating ? (
+                  <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
                 ) : (
                   <Mail className="h-3 w-3" strokeWidth={1.5} />
                 )}
-                {copiedEmail ? "Copiato!" : "Email"}
+                {generating ? "Generando..." : emailOpen ? "Chiudi" : "Genera email"}
               </button>
-            ) : (
-              <span className="text-[10px] text-[#A3A3A3] italic">email mancante</span>
             )}
-            {/* Copy subject */}
-            <button
-              onClick={copySubject}
-              disabled={generatingSubject}
-              title="Genera e copia oggetto email"
-              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                copiedSubject
-                  ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
-                  : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
-              } disabled:opacity-50`}
-            >
-              {generatingSubject ? (
-                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
-              ) : copiedSubject ? (
+            {/* Sent badge for already sent */}
+            {target.status !== "to_send" && (
+              <span className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20">
                 <Check className="h-3 w-3" strokeWidth={2} />
-              ) : (
-                <Copy className="h-3 w-3" strokeWidth={1.5} />
-              )}
-              {copiedSubject ? "Copiato!" : "Titolo"}
-            </button>
-            {/* Copy body */}
+                Inviata
+              </span>
+            )}
+            {/* Reply button */}
             <button
-              onClick={copyBody}
-              disabled={generatingBody}
-              title="Genera e copia testo email"
-              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                copiedBody
-                  ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20"
-                  : "border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1]/5"
-              } disabled:opacity-50`}
-            >
-              {generatingBody ? (
-                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
-              ) : copiedBody ? (
-                <Check className="h-3 w-3" strokeWidth={2} />
-              ) : (
-                <Copy className="h-3 w-3" strokeWidth={1.5} />
-              )}
-              {copiedBody ? "Copiato!" : "Testo"}
-            </button>
-            {/* Mark as sent / already sent toggle */}
-            <button
-              onClick={target.status === "to_send" ? markAsSent : undefined}
-              disabled={markingSent || target.status !== "to_send"}
-              title={target.status === "to_send" ? "Clicca per segnare come inviata" : "Email già inviata"}
-              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                target.status !== "to_send"
-                  ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20 cursor-default"
-                  : "border-[#D4D4D4] dark:border-[#404040] text-[#A3A3A3] hover:border-green-400 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
-              } disabled:opacity-50`}
-            >
-              {markingSent ? (
-                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
-              ) : target.status !== "to_send" ? (
-                <Check className="h-3 w-3" strokeWidth={2} />
-              ) : (
-                <Mail className="h-3 w-3" strokeWidth={1.5} />
-              )}
-              {target.status !== "to_send" ? "Inviata" : "Non inviata"}
-            </button>
-            {/* Reply expand button */}
-            <button
-              onClick={() => setExpanded((v) => !v)}
+              onClick={() => setReplyOpen((v) => !v)}
               title="Gestisci risposta"
               className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
                 target.replyText
@@ -497,21 +439,74 @@ function OutreachRow({
             >
               <MessageSquare className="h-3 w-3" strokeWidth={1.5} />
               Risposta
-              {expanded ? (
-                <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
-              ) : (
-                <ChevronDown className="h-3 w-3" strokeWidth={1.5} />
-              )}
             </button>
           </div>
         </td>
       </tr>
 
-      {/* Expandable reply row */}
-      {expanded && (
+      {/* Generated email panel */}
+      {emailOpen && (
+        <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
+          <td colSpan={9} className="px-4 py-4">
+            {generating ? (
+              <div className="flex items-center gap-2 text-sm text-[#737373]">
+                <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                Generando email con AI...
+              </div>
+            ) : generatedEmail ? (
+              <div className="space-y-3 max-w-2xl">
+                {/* To */}
+                <div className="flex items-start gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] w-16 pt-1 shrink-0">A:</span>
+                  <span className="text-sm text-[#171717] dark:text-[#E5E5E5] flex-1 break-all">{target.contactEmail}</span>
+                  {target.contactEmail && <FieldCopyButton text={target.contactEmail} label="Copia" />}
+                </div>
+                {/* Subject */}
+                <div className="flex items-start gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] w-16 pt-1 shrink-0">Oggetto:</span>
+                  <span className="text-sm text-[#171717] dark:text-[#E5E5E5] flex-1">{generatedEmail.subject}</span>
+                  <FieldCopyButton text={generatedEmail.subject} label="Copia" />
+                </div>
+                {/* Body */}
+                <div className="flex items-start gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3] w-16 pt-1 shrink-0">Testo:</span>
+                  <p className="text-sm text-[#525252] dark:text-[#A3A3A3] flex-1 whitespace-pre-wrap leading-relaxed">{generatedEmail.body}</p>
+                  <FieldCopyButton text={generatedEmail.body} label="Copia" />
+                </div>
+                {/* Actions */}
+                <div className="flex items-center gap-2 pt-2 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+                  <button
+                    onClick={markAsSent}
+                    disabled={markingSent}
+                    className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[6px] hover:bg-[#262626] disabled:opacity-50 transition-colors"
+                  >
+                    {markingSent ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Check className="h-3.5 w-3.5" strokeWidth={2} />
+                    )}
+                    Segna come inviata
+                  </button>
+                  <button
+                    onClick={() => setEmailOpen(false)}
+                    className="text-sm px-3 py-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors"
+                  >
+                    Chiudi
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-red-500">Errore nella generazione. Riprova.</p>
+            )}
+          </td>
+        </tr>
+      )}
+
+      {/* Reply row */}
+      {replyOpen && (
         <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
           <td colSpan={9} className="px-4 py-3">
-            <div className="space-y-2">
+            <div className="space-y-2 max-w-2xl">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3]">
                   Risposta ricevuta
