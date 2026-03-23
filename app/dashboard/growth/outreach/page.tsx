@@ -549,16 +549,9 @@ function OutreachRow({
   );
 }
 
-interface RedditPost {
-  id: number;
-  status: string;
-  commentedAt?: string | null;
-}
-
 export default function OutreachPage() {
   const [targets, setTargets] = useState<OutreachTarget[]>([]);
   const [directories, setDirectories] = useState<DirectorySubmission[]>([]);
-  const [redditPosts, setRedditPosts] = useState<RedditPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [finding, setFinding] = useState(false);
@@ -566,19 +559,16 @@ export default function OutreachPage() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const [tRes, dRes, rRes] = await Promise.all([
+      const [tRes, dRes] = await Promise.all([
         fetch("/api/growth/outreach/targets"),
         fetch("/api/growth/directories"),
-        fetch("/api/growth/reddit/posts"),
       ]);
-      const [tData, dData, rData] = await Promise.all([
+      const [tData, dData] = await Promise.all([
         tRes.json() as Promise<{ targets?: OutreachTarget[] }>,
         dRes.json() as Promise<{ directories?: DirectorySubmission[] }>,
-        rRes.json() as Promise<{ posts?: RedditPost[] }>,
       ]);
       if (tData.targets) setTargets(tData.targets);
       if (dData.directories) setDirectories(dData.directories);
-      if (rData.posts) setRedditPosts(rData.posts);
     } catch (e) {
       console.error(e);
     } finally {
@@ -636,14 +626,7 @@ export default function OutreachPage() {
     sentDate.setHours(0, 0, 0, 0);
     return sentDate.getTime() === today.getTime();
   }).length;
-  const redditCommentedToday = redditPosts.filter((p) => {
-    if (p.status !== "commented" || !p.commentedAt) return false;
-    const d = new Date(p.commentedAt);
-    d.setHours(0, 0, 0, 0);
-    return d.getTime() === today.getTime();
-  }).length;
   const DAILY_EMAIL_GOAL = 5;
-  const DAILY_REDDIT_GOAL = 5;
 
   if (loading) {
     return (
@@ -677,54 +660,30 @@ export default function OutreachPage() {
           </p>
         </div>
 
-        {/* Daily goals + funnel summary */}
-        <div className="space-y-2">
-          {/* Daily goals bar */}
-          <div className="flex flex-wrap items-center gap-4 text-[12px] py-2.5 px-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E]">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3]">Oggi</span>
-            <div className="flex items-center gap-1.5">
-              <Mail className="h-3.5 w-3.5 text-[#6366F1]" strokeWidth={1.5} />
-              <span className={`font-bold tabular-nums ${emailsSentToday >= DAILY_EMAIL_GOAL ? "text-green-600" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
-                {emailsSentToday}/{DAILY_EMAIL_GOAL}
-              </span>
-              <span className="text-[#737373]">email</span>
-              {emailsSentToday >= DAILY_EMAIL_GOAL && <Check className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />}
-            </div>
-            <div className="flex items-center gap-1.5">
-              <MessageSquare className="h-3.5 w-3.5 text-orange-500" strokeWidth={1.5} />
-              <span className={`font-bold tabular-nums ${redditCommentedToday >= DAILY_REDDIT_GOAL ? "text-green-600" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
-                {redditCommentedToday}/{DAILY_REDDIT_GOAL}
-              </span>
-              <span className="text-[#737373]">Reddit</span>
-              {redditCommentedToday >= DAILY_REDDIT_GOAL && <Check className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />}
-            </div>
+        {/* Daily goal — email only */}
+        <div className="flex items-center gap-4 text-[12px] py-2.5 px-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E]">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3]">Oggi</span>
+          <div className="flex items-center gap-1.5">
+            <Mail className="h-3.5 w-3.5 text-[#6366F1]" strokeWidth={1.5} />
+            <span className={`font-bold tabular-nums ${emailsSentToday >= DAILY_EMAIL_GOAL ? "text-green-600" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
+              {emailsSentToday}/{DAILY_EMAIL_GOAL}
+            </span>
+            <span className="text-[#737373]">email inviate</span>
+            {emailsSentToday >= DAILY_EMAIL_GOAL && <Check className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />}
           </div>
-          {/* Funnel summary */}
-          <div className="flex flex-wrap items-center gap-2 text-[11px] py-2 px-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-[#FAFAFA] dark:bg-[#252525]">
-            <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
-              {funnelSent}
-            </span>
-            <span className="text-[#A3A3A3]">email inviate</span>
-            <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
-            <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
-              {funnelReplied}
-            </span>
+          <span className="text-[#D4D4D4] dark:text-[#404040]">|</span>
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">{funnelSent}</span>
+            <span className="text-[#A3A3A3]">totali</span>
+            <span className="text-[#D4D4D4]">&rarr;</span>
+            <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">{funnelReplied}</span>
             <span className="text-[#A3A3A3]">risposte</span>
-            <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
-            <span className="text-green-600 dark:text-green-400 font-semibold tabular-nums">
-              {funnelLinked}
-            </span>
+            <span className="text-[#D4D4D4]">&rarr;</span>
+            <span className="text-green-600 font-semibold tabular-nums">{funnelLinked}</span>
             <span className="text-[#A3A3A3]">backlink</span>
-            <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
-            <span className="text-[#6366F1] font-semibold tabular-nums">
-              {funnelDirectories}
-            </span>
+            <span className="text-[#D4D4D4]">|</span>
+            <span className="text-[#6366F1] font-semibold tabular-nums">{funnelDirectories}</span>
             <span className="text-[#A3A3A3]">directory</span>
-            <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
-            <span className="text-orange-500 font-semibold tabular-nums">
-              {redditPosts.filter((p) => p.status === "commented").length}
-            </span>
-            <span className="text-[#A3A3A3]">commenti Reddit</span>
           </div>
         </div>
       </div>
