@@ -13,6 +13,7 @@ import {
   Search,
   Loader2,
 } from "lucide-react";
+// MessageSquare used for Reddit counter + reply button
 import type { OutreachTarget, DirectorySubmission } from "@/lib/db/schema";
 
 type OutreachStatus = "to_send" | "sent" | "replied" | "linked" | "rejected";
@@ -176,8 +177,7 @@ function OutreachRow({
   const [generatingBody, setGeneratingBody] = useState(false);
   const [replyDraft, setReplyDraft] = useState(target.replyText ?? "");
   const [savingReply, setSavingReply] = useState(false);
-  const [customMessage, setCustomMessage] = useState("");
-  const [showCustomInput, setShowCustomInput] = useState(false);
+  const [markingSent, setMarkingSent] = useState(false);
 
   // Cache generated email so we don't call API twice
   const [generatedCache, setGeneratedCache] = useState<{ subject: string; body: string } | null>(null);
@@ -233,10 +233,7 @@ function OutreachRow({
       const res = await fetch("/api/growth/outreach/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          targetId: target.id,
-          ...(customMessage ? { customMessage } : {}),
-        }),
+        body: JSON.stringify({ targetId: target.id }),
       });
       const data = await res.json() as { success?: boolean; subject?: string; body?: string };
       if (data.success && data.subject && data.body) {
@@ -272,10 +269,13 @@ function OutreachRow({
     setGeneratingBody(false);
   }
 
-  // Invalidate cache when customMessage changes
-  function handleCustomMessageChange(val: string) {
-    setCustomMessage(val);
-    setGeneratedCache(null);
+  async function markAsSent() {
+    setMarkingSent(true);
+    const now = new Date();
+    const followUp = new Date(now);
+    followUp.setDate(followUp.getDate() + 7);
+    await patchTarget({ status: "sent", sentAt: now.toISOString(), followUpAt: followUp.toISOString() });
+    setMarkingSent(false);
   }
 
   const overdue = target.status === "sent" && isOverdue(target.followUpAt);
@@ -465,22 +465,26 @@ function OutreachRow({
               )}
               {copiedBody ? "Copiato!" : "Testo"}
             </button>
-            {/* Custom message toggle */}
-            <button
-              onClick={() => setShowCustomInput((v) => !v)}
-              title="Messaggio personalizzato"
-              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
-                showCustomInput
-                  ? "border-[#6366F1] text-[#6366F1] bg-[#6366F1]/5"
-                  : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
-              }`}
-            >
-              <MessageSquare className="h-3 w-3" strokeWidth={1.5} />
-            </button>
+            {/* Mark as sent button */}
+            {target.status === "to_send" && (
+              <button
+                onClick={markAsSent}
+                disabled={markingSent}
+                title="Segna come inviata"
+                className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border border-green-400 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors disabled:opacity-50"
+              >
+                {markingSent ? (
+                  <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Check className="h-3 w-3" strokeWidth={2} />
+                )}
+                Inviata
+              </button>
+            )}
             {/* Reply expand button */}
             <button
               onClick={() => setExpanded((v) => !v)}
-              title="Add reply"
+              title="Gestisci risposta"
               className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
                 target.replyText
                   ? "border-blue-300 text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800"
@@ -488,7 +492,7 @@ function OutreachRow({
               }`}
             >
               <MessageSquare className="h-3 w-3" strokeWidth={1.5} />
-              {target.replyText ? "Risposta" : "Risposta"}
+              Risposta
               {expanded ? (
                 <ChevronUp className="h-3 w-3" strokeWidth={1.5} />
               ) : (
@@ -498,29 +502,6 @@ function OutreachRow({
           </div>
         </td>
       </tr>
-
-      {/* Custom message input row */}
-      {showCustomInput && (
-        <tr className="border-b border-[#F5F5F5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525]">
-          <td colSpan={9} className="px-4 py-3">
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-[#525252] dark:text-[#A3A3A3]">
-                Messaggio personalizzato (opzionale)
-              </label>
-              <textarea
-                value={customMessage}
-                onChange={(e) => handleCustomMessageChange(e.target.value)}
-                rows={3}
-                placeholder="Scrivi un messaggio personalizzato... Se lasciato vuoto, Gemini genera il testo automaticamente."
-                className="w-full text-sm px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] focus:outline-none focus:border-[#6366F1] resize-y"
-              />
-              <p className="text-[10px] text-[#A3A3A3]">
-                Se compili questo campo, i pulsanti &quot;Titolo&quot; e &quot;Testo&quot; copieranno il tuo messaggio invece di generarlo con AI.
-              </p>
-            </div>
-          </td>
-        </tr>
-      )}
 
       {/* Expandable reply row */}
       {expanded && (
@@ -564,9 +545,16 @@ function OutreachRow({
   );
 }
 
+interface RedditPost {
+  id: number;
+  status: string;
+  commentedAt?: string | null;
+}
+
 export default function OutreachPage() {
   const [targets, setTargets] = useState<OutreachTarget[]>([]);
   const [directories, setDirectories] = useState<DirectorySubmission[]>([]);
+  const [redditPosts, setRedditPosts] = useState<RedditPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [finding, setFinding] = useState(false);
@@ -574,16 +562,19 @@ export default function OutreachPage() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const [tRes, dRes] = await Promise.all([
+      const [tRes, dRes, rRes] = await Promise.all([
         fetch("/api/growth/outreach/targets"),
         fetch("/api/growth/directories"),
+        fetch("/api/growth/reddit/posts"),
       ]);
-      const [tData, dData] = await Promise.all([
+      const [tData, dData, rData] = await Promise.all([
         tRes.json() as Promise<{ targets?: OutreachTarget[] }>,
         dRes.json() as Promise<{ directories?: DirectorySubmission[] }>,
+        rRes.json() as Promise<{ posts?: RedditPost[] }>,
       ]);
       if (tData.targets) setTargets(tData.targets);
       if (dData.directories) setDirectories(dData.directories);
+      if (rData.posts) setRedditPosts(rData.posts);
     } catch (e) {
       console.error(e);
     } finally {
@@ -632,15 +623,23 @@ export default function OutreachPage() {
     }
   }
 
-  // ── Daily send counter ────────────────────────────────────────────────
+  // ── Daily counters ────────────────────────────────────────────────
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const sentToday = targets.filter((t) => {
+  const emailsSentToday = targets.filter((t) => {
     if (!t.sentAt) return false;
     const sentDate = new Date(t.sentAt);
     sentDate.setHours(0, 0, 0, 0);
     return sentDate.getTime() === today.getTime();
   }).length;
+  const redditCommentedToday = redditPosts.filter((p) => {
+    if (p.status !== "commented" || !p.commentedAt) return false;
+    const d = new Date(p.commentedAt);
+    d.setHours(0, 0, 0, 0);
+    return d.getTime() === today.getTime();
+  }).length;
+  const DAILY_EMAIL_GOAL = 5;
+  const DAILY_REDDIT_GOAL = 5;
 
   if (loading) {
     return (
@@ -674,33 +673,55 @@ export default function OutreachPage() {
           </p>
         </div>
 
-        {/* Mini funnel summary */}
-        <div className="flex flex-wrap items-center gap-2 text-[11px] py-2 px-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-[#FAFAFA] dark:bg-[#252525]">
-          {/* Daily send counter */}
-          <span className={`font-semibold tabular-nums ${sentToday >= 5 ? "text-red-600" : "text-[#6366F1]"}`}>
-            {sentToday}/5
-          </span>
-          <span className="text-[#A3A3A3]">email inviate oggi</span>
-          <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
-          <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
-            {funnelSent}
-          </span>
-          <span className="text-[#A3A3A3]">email inviate</span>
-          <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
-          <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
-            {funnelReplied}
-          </span>
-          <span className="text-[#A3A3A3]">risposte</span>
-          <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
-          <span className="text-green-600 dark:text-green-400 font-semibold tabular-nums">
-            {funnelLinked}
-          </span>
-          <span className="text-[#A3A3A3]">backlink ottenuti</span>
-          <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
-          <span className="text-[#6366F1] font-semibold tabular-nums">
-            {funnelDirectories}
-          </span>
-          <span className="text-[#A3A3A3]">directory listate</span>
+        {/* Daily goals + funnel summary */}
+        <div className="space-y-2">
+          {/* Daily goals bar */}
+          <div className="flex flex-wrap items-center gap-4 text-[12px] py-2.5 px-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E]">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3]">Oggi</span>
+            <div className="flex items-center gap-1.5">
+              <Mail className="h-3.5 w-3.5 text-[#6366F1]" strokeWidth={1.5} />
+              <span className={`font-bold tabular-nums ${emailsSentToday >= DAILY_EMAIL_GOAL ? "text-green-600" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
+                {emailsSentToday}/{DAILY_EMAIL_GOAL}
+              </span>
+              <span className="text-[#737373]">email</span>
+              {emailsSentToday >= DAILY_EMAIL_GOAL && <Check className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <MessageSquare className="h-3.5 w-3.5 text-orange-500" strokeWidth={1.5} />
+              <span className={`font-bold tabular-nums ${redditCommentedToday >= DAILY_REDDIT_GOAL ? "text-green-600" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
+                {redditCommentedToday}/{DAILY_REDDIT_GOAL}
+              </span>
+              <span className="text-[#737373]">Reddit</span>
+              {redditCommentedToday >= DAILY_REDDIT_GOAL && <Check className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />}
+            </div>
+          </div>
+          {/* Funnel summary */}
+          <div className="flex flex-wrap items-center gap-2 text-[11px] py-2 px-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-[#FAFAFA] dark:bg-[#252525]">
+            <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
+              {funnelSent}
+            </span>
+            <span className="text-[#A3A3A3]">email inviate</span>
+            <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
+            <span className="text-[#171717] dark:text-[#E5E5E5] font-semibold tabular-nums">
+              {funnelReplied}
+            </span>
+            <span className="text-[#A3A3A3]">risposte</span>
+            <span className="text-[#D4D4D4] dark:text-[#404040]">&rarr;</span>
+            <span className="text-green-600 dark:text-green-400 font-semibold tabular-nums">
+              {funnelLinked}
+            </span>
+            <span className="text-[#A3A3A3]">backlink</span>
+            <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
+            <span className="text-[#6366F1] font-semibold tabular-nums">
+              {funnelDirectories}
+            </span>
+            <span className="text-[#A3A3A3]">directory</span>
+            <span className="text-[#D4D4D4] dark:text-[#404040] mx-1">|</span>
+            <span className="text-orange-500 font-semibold tabular-nums">
+              {redditPosts.filter((p) => p.status === "commented").length}
+            </span>
+            <span className="text-[#A3A3A3]">commenti Reddit</span>
+          </div>
         </div>
       </div>
 
