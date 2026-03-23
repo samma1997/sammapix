@@ -1,0 +1,147 @@
+[
+  {
+    "start": 0,
+    "end": 4.42,
+    "text": "Why image compression matters more than ever in 2026."
+  },
+  {
+    "start": 4.42,
+    "end": 25.27,
+    "text": "Google uses page loading speed as a direct ranking signal through its Core Web V"
+  },
+  {
+    "start": 25.27,
+    "end": 47.81,
+    "text": "Beyond rankings, there are hard business reasons to compress images. Mobile data"
+  },
+  {
+    "start": 47.81,
+    "end": 52.3,
+    "text": "Lossy vs lossless compression: what is the actual difference."
+  },
+  {
+    "start": 52.3,
+    "end": 61.22,
+    "text": "Every image compression method falls into one of two categories. Understanding t"
+  },
+  {
+    "start": 61.22,
+    "end": 95.42,
+    "text": "Lossless compression reduces file size by encoding data more efficiently, but pr"
+  },
+  {
+    "start": 95.42,
+    "end": 104.86,
+    "text": "PNG is the dominant lossless format on the web. It is ideal for graphics, logos,"
+  },
+  {
+    "start": 104.86,
+    "end": 122.93,
+    "text": "Lossy compression achieves dramatically smaller file sizes by permanently discar"
+  },
+  {
+    "start": 122.93,
+    "end": 146.28,
+    "text": "The key insight is that human vision is more sensitive to some types of visual i"
+  },
+  {
+    "start": 146.28,
+    "end": 150.98,
+    "text": "PNG vs JPEG vs WebP: which format should you use."
+  },
+  {
+    "start": 150.98,
+    "end": 160.66,
+    "text": "Format choice is as important as compression settings. Using the wrong format fo"
+  },
+  {
+    "start": 160.66,
+    "end": 187.61,
+    "text": "JPEG has been the dominant web photo format since the mid-1990s for good reason."
+  },
+  {
+    "start": 187.61,
+    "end": 207.89,
+    "text": "PNG uses lossless compression with optional transparency support. It excels at i"
+  },
+  {
+    "start": 207.89,
+    "end": 221.28,
+    "text": "A common mistake is saving a photograph as PNG. A 3 megabyte JPEG photo might ba"
+  },
+  {
+    "start": 221.28,
+    "end": 251.38,
+    "text": "WebP was developed by Google and supports both lossy and lossless compression, p"
+  },
+  {
+    "start": 251.38,
+    "end": 255.19,
+    "text": "Quality settings: what the numbers actually mean."
+  },
+  {
+    "start": 255.19,
+    "end": 273.74,
+    "text": "Most image compression tools use a quality scale from 0 to 100. The number does "
+  },
+  {
+    "start": 273.74,
+    "end": 311.74,
+    "text": "Quality 90 to 100 is maximum quality, near-lossless. For archival or print use. "
+  },
+  {
+    "start": 311.74,
+    "end": 328.8,
+    "text": "The practical sweet spot for most web images is quality 78 to 82. In real-world "
+  },
+  {
+    "start": 328.8,
+    "end": 334.01,
+    "text": "How to compress images without visible quality loss: a practical workflow."
+  },
+  {
+    "start": 334.01,
+    "end": 356.98,
+    "text": "Step 1. Resize before compressing. Compressing a 6000 by 4000 pixel photo down t"
+  },
+  {
+    "start": 356.98,
+    "end": 369.36,
+    "text": "Step 2. Choose the right format. Photographs go to WebP or JPEG. Graphics and lo"
+  },
+  {
+    "start": 369.36,
+    "end": 384.91,
+    "text": "Step 3. Compress in the browser. The SammaPix Compress tool runs entirely on you"
+  },
+  {
+    "start": 384.91,
+    "end": 405.62,
+    "text": "Step 4. Do a visual check before publishing. Open the compressed file at 100% zo"
+  },
+  {
+    "start": 405.62,
+    "end": 409.1,
+    "text": "Common compression mistakes and how to avoid them."
+  },
+  {
+    "start": 409.1,
+    "end": 425.04,
+    "text": "Re-compressing already compressed images. Every time you save a JPEG, you lose d"
+  },
+  {
+    "start": 425.04,
+    "end": 441.31,
+    "text": "Saving photographs as PNG. This is the single most common oversizing mistake. A "
+  },
+  {
+    "start": 441.31,
+    "end": 454.7,
+    "text": "Compressing without resizing first. A photo from a modern smartphone is 4000 or "
+  },
+  {
+    "start": 454.7,
+    "end": 471.19,
+    "text": "Using quality 100 to be safe. The difference between quality 100 and quality 82 "
+  }
+]

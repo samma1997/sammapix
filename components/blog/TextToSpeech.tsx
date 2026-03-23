@@ -5,6 +5,12 @@ import { Headphones, Play, Pause } from "lucide-react";
 
 type TTSState = "idle" | "playing" | "paused" | "error";
 
+interface TimingSegment {
+  start: number;
+  end: number;
+  text: string;
+}
+
 interface TextToSpeechProps {
   slug: string;
   articleRef: React.RefObject<HTMLElement | null>;
@@ -17,72 +23,25 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [exists, setExists] = useState<boolean | null>(null);
+  const timingRef = useRef<TimingSegment[]>([]);
   const elementsRef = useRef<Element[]>([]);
-  const charOffsetsRef = useRef<number[]>([]);
-  const totalCharsRef = useRef(0);
   const prevHighlightRef = useRef<Element | null>(null);
 
   const audioUrl = `/blog/audio/${slug}.mp3`;
+  const timingUrl = `/blog/audio/${slug}.json`;
 
-  // Check if audio file exists
+  // Check if audio + timing files exist, load timing
   useEffect(() => {
-    fetch(audioUrl, { method: "HEAD" })
-      .then((res) => setExists(res.ok))
+    Promise.all([
+      fetch(audioUrl, { method: "HEAD" }),
+      fetch(timingUrl).then((r) => (r.ok ? r.json() : null)),
+    ])
+      .then(([audioRes, timingData]) => {
+        setExists(audioRes.ok && timingData !== null);
+        if (timingData) timingRef.current = timingData;
+      })
       .catch(() => setExists(false));
-  }, [audioUrl]);
-
-  // Build element-to-time mapping when audio starts
-  const buildElementMap = useCallback(() => {
-    if (!articleRef.current) return;
-    const els = Array.from(
-      articleRef.current.querySelectorAll("p, li, h2, h3"),
-    );
-    elementsRef.current = els;
-
-    // Build cumulative char offsets — each element's "start" position
-    let total = 0;
-    const offsets: number[] = [];
-    for (const el of els) {
-      offsets.push(total);
-      total += (el.textContent?.trim().length ?? 0) + 1; // +1 for period separator
-    }
-    charOffsetsRef.current = offsets;
-    totalCharsRef.current = total;
-  }, [articleRef]);
-
-  // Highlight current element based on audio time
-  const updateHighlight = useCallback(
-    (time: number, dur: number) => {
-      if (dur <= 0 || totalCharsRef.current === 0) return;
-
-      const pct = time / dur;
-      const charPosition = pct * totalCharsRef.current;
-      const offsets = charOffsetsRef.current;
-      const els = elementsRef.current;
-
-      // Find which element we're in
-      let idx = 0;
-      for (let i = offsets.length - 1; i >= 0; i--) {
-        if (charPosition >= offsets[i]) {
-          idx = i;
-          break;
-        }
-      }
-
-      const el = els[idx];
-      if (el && el !== prevHighlightRef.current) {
-        // Remove previous highlight
-        if (prevHighlightRef.current) {
-          prevHighlightRef.current.classList.remove("tts-active");
-        }
-        // Add new highlight and scroll into view
-        el.classList.add("tts-active");
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        prevHighlightRef.current = el;
-      }
-    },
-    [],
-  );
+  }, [audioUrl, timingUrl]);
 
   const clearHighlight = useCallback(() => {
     if (prevHighlightRef.current) {
@@ -91,6 +50,34 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
     }
   }, []);
 
+  const updateHighlight = useCallback(
+    (time: number) => {
+      const timing = timingRef.current;
+      const els = elementsRef.current;
+      if (timing.length === 0 || els.length === 0) return;
+
+      // Find which segment we're in based on actual timestamps
+      let segIdx = -1;
+      for (let i = timing.length - 1; i >= 0; i--) {
+        if (time >= timing[i].start) {
+          segIdx = i;
+          break;
+        }
+      }
+
+      if (segIdx < 0 || segIdx >= els.length) return;
+
+      const el = els[segIdx];
+      if (el && el !== prevHighlightRef.current) {
+        clearHighlight();
+        el.classList.add("tts-active");
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        prevHighlightRef.current = el;
+      }
+    },
+    [clearHighlight],
+  );
+
   // Setup audio element
   useEffect(() => {
     if (!exists) return;
@@ -98,15 +85,13 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
     const audio = new Audio(audioUrl);
     audioRef.current = audio;
 
-    audio.addEventListener("loadedmetadata", () => {
-      setDuration(audio.duration);
-    });
+    audio.addEventListener("loadedmetadata", () => setDuration(audio.duration));
 
     audio.addEventListener("timeupdate", () => {
       setCurrentTime(audio.currentTime);
       if (audio.duration > 0) {
         setProgress((audio.currentTime / audio.duration) * 100);
-        updateHighlight(audio.currentTime, audio.duration);
+        updateHighlight(audio.currentTime);
       }
     });
 
@@ -128,6 +113,14 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
       clearHighlight();
     };
   }, [exists, audioUrl, updateHighlight, clearHighlight]);
+
+  // Build element list on play
+  const buildElementMap = useCallback(() => {
+    if (!articleRef.current) return;
+    elementsRef.current = Array.from(
+      articleRef.current.querySelectorAll("h2, h3, p, li"),
+    );
+  }, [articleRef]);
 
   function handlePlayPause() {
     const audio = audioRef.current;
@@ -170,7 +163,6 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
     return `${m}:${s.toString().padStart(2, "0")}`;
   }
 
-  // Don't render if audio file doesn't exist
   if (exists === null || exists === false) return null;
 
   return (
