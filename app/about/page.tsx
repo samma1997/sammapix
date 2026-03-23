@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const allTrips = getAllTrips();
-  const sriLanka = allTrips.find((t) => t.slug === "sri-lanka-2025");
+  const sriLanka = allTrips.find((t) => t.slug === "sri-lanka");
   const heroPhotos = sriLanka ? sriLanka.photos.slice(0, 5) : [];
 
   const personSchema = {
@@ -143,7 +143,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {/* Sri Lanka- real photos, clickable */}
               <Link
-                href="/about/sri-lanka-2025"
+                href="/about/sri-lanka"
                 className="group relative overflow-hidden rounded-lg"
                 style={{ aspectRatio: "3/4" }}
               >
