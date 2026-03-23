@@ -1,155 +1,152 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
-import { Headphones, Play, Pause, Square } from "lucide-react";
+import { useState, useRef, useCallback } from "react";
+import { Headphones, Play, Pause, Loader2 } from "lucide-react";
 
-type TTSState = "idle" | "playing" | "paused";
+type TTSState = "idle" | "loading" | "playing" | "paused";
 
 interface TextToSpeechProps {
   articleRef: React.RefObject<HTMLElement | null>;
 }
 
 export default function TextToSpeech({ articleRef }: TextToSpeechProps) {
-  const [supported, setSupported] = useState(false);
   const [state, setState] = useState<TTSState>("idle");
-  const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
-  const currentElementRef = useRef<Element | null>(null);
-  const elementsRef = useRef<Element[]>([]);
-  const indexRef = useRef(0);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const blobUrlRef = useRef<string | null>(null);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      setSupported(true);
+  const extractText = useCallback((): string => {
+    if (!articleRef.current) return "";
+    const els = articleRef.current.querySelectorAll("p, li, h2, h3");
+    return Array.from(els)
+      .map((el) => el.textContent?.trim())
+      .filter(Boolean)
+      .join(". ");
+  }, [articleRef]);
 
-      const pickVoice = () => {
-        const voices = window.speechSynthesis.getVoices();
-        const english = voices.find((v) => v.lang.startsWith("en"));
-        if (english) setVoice(english);
-      };
-
-      pickVoice();
-      window.speechSynthesis.addEventListener("voiceschanged", pickVoice);
-
-      return () => {
-        window.speechSynthesis.removeEventListener("voiceschanged", pickVoice);
-        window.speechSynthesis.cancel();
-      };
-    }
-  }, []);
-
-  const clearHighlight = useCallback(() => {
-    if (currentElementRef.current) {
-      currentElementRef.current.classList.remove("tts-active");
-      currentElementRef.current = null;
-    }
-  }, []);
-
-  const speakNext = useCallback(() => {
-    const elements = elementsRef.current;
-    const idx = indexRef.current;
-
-    if (idx >= elements.length) {
-      clearHighlight();
-      setState("idle");
-      indexRef.current = 0;
+  const generateAndPlay = useCallback(async () => {
+    // If we already have audio, just play it
+    if (audioRef.current && blobUrlRef.current) {
+      audioRef.current.play();
+      setState("playing");
       return;
     }
 
-    const el = elements[idx];
-    const text = el.textContent?.trim();
+    setState("loading");
 
-    if (!text) {
-      indexRef.current = idx + 1;
-      speakNext();
-      return;
-    }
+    try {
+      const text = extractText();
+      if (!text) {
+        setState("idle");
+        return;
+      }
 
-    clearHighlight();
-    el.classList.add("tts-active");
-    currentElementRef.current = el;
+      const res = await fetch("/api/blog/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    if (voice) utterance.voice = voice;
-    utterance.rate = 1;
+      if (!res.ok) {
+        setState("idle");
+        return;
+      }
 
-    utterance.onend = () => {
-      indexRef.current = idx + 1;
-      speakNext();
-    };
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      blobUrlRef.current = url;
 
-    utterance.onerror = () => {
-      clearHighlight();
+      const audio = new Audio(url);
+      audioRef.current = audio;
+
+      audio.addEventListener("timeupdate", () => {
+        if (audio.duration > 0) {
+          setProgress((audio.currentTime / audio.duration) * 100);
+        }
+      });
+
+      audio.addEventListener("loadedmetadata", () => {
+        setDuration(audio.duration);
+      });
+
+      audio.addEventListener("ended", () => {
+        setState("idle");
+        setProgress(0);
+      });
+
+      await audio.play();
+      setState("playing");
+    } catch {
       setState("idle");
-      indexRef.current = 0;
-    };
+    }
+  }, [extractText]);
 
-    window.speechSynthesis.speak(utterance);
-  }, [voice, clearHighlight]);
-
-  const handlePlay = useCallback(() => {
+  const handlePlayPause = useCallback(() => {
     if (state === "idle") {
-      if (!articleRef.current) return;
-      const els = articleRef.current.querySelectorAll("p, li, h2, h3");
-      elementsRef.current = Array.from(els);
-      indexRef.current = 0;
-      setState("playing");
-      speakNext();
-    } else if (state === "paused") {
-      window.speechSynthesis.resume();
-      setState("playing");
-    } else if (state === "playing") {
-      window.speechSynthesis.pause();
+      generateAndPlay();
+    } else if (state === "playing" && audioRef.current) {
+      audioRef.current.pause();
       setState("paused");
+    } else if (state === "paused") {
+      audioRef.current?.play();
+      setState("playing");
     }
-  }, [state, articleRef, speakNext]);
+  }, [state, generateAndPlay]);
 
-  const handleStop = useCallback(() => {
-    window.speechSynthesis.cancel();
-    clearHighlight();
-    setState("idle");
-    indexRef.current = 0;
-  }, [clearHighlight]);
+  function formatTime(sec: number): string {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  }
 
-  if (!supported) return null;
+  const currentTime = audioRef.current?.currentTime ?? 0;
 
   return (
-    <div className="inline-flex items-center gap-2 border border-[#E5E5E5] dark:border-[#404040] rounded-full px-4 py-2">
-      {state === "idle" && (
-        <>
-          <Headphones size={16} strokeWidth={1.5} className="text-[#737373]" />
-          <span className="text-[13px] text-[#737373]">Listen to article</span>
-        </>
-      )}
+    <div className="my-6">
+      <div className="inline-flex items-center gap-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] px-4 py-2.5 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <Headphones size={16} strokeWidth={1.5} className="text-[#737373] shrink-0" />
 
-      {state === "playing" && (
-        <span className="text-[13px] text-[#6366F1] font-medium">Listening...</span>
-      )}
-
-      {state === "paused" && (
-        <span className="text-[13px] text-[#737373]">Paused</span>
-      )}
-
-      <button
-        onClick={handlePlay}
-        className="p-1 rounded-full hover:bg-[#F5F5F5] dark:hover:bg-[#262626] transition-colors"
-        aria-label={state === "playing" ? "Pause" : "Play"}
-      >
-        {state === "playing" ? (
-          <Pause size={16} strokeWidth={1.5} className="text-[#171717] dark:text-white" />
-        ) : (
-          <Play size={16} strokeWidth={1.5} className="text-[#171717] dark:text-white" />
-        )}
-      </button>
-
-      {(state === "playing" || state === "paused") && (
         <button
-          onClick={handleStop}
-          className="p-1 rounded-full hover:bg-[#F5F5F5] dark:hover:bg-[#262626] transition-colors"
-          aria-label="Stop"
+          onClick={handlePlayPause}
+          disabled={state === "loading"}
+          className="p-1.5 rounded-full bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] disabled:opacity-50 transition-colors"
+          aria-label={state === "playing" ? "Pause" : "Play"}
         >
-          <Square size={14} strokeWidth={1.5} className="text-[#171717] dark:text-white" />
+          {state === "loading" ? (
+            <Loader2 size={14} strokeWidth={2} className="animate-spin" />
+          ) : state === "playing" ? (
+            <Pause size={14} strokeWidth={2} />
+          ) : (
+            <Play size={14} strokeWidth={2} className="ml-0.5" />
+          )}
         </button>
-      )}
+
+        {state === "idle" && (
+          <span className="text-[13px] text-[#737373]">Listen to article</span>
+        )}
+
+        {state === "loading" && (
+          <span className="text-[13px] text-[#6366F1]">Generating audio...</span>
+        )}
+
+        {(state === "playing" || state === "paused") && (
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] text-[#A3A3A3] tabular-nums w-8">
+              {formatTime(currentTime)}
+            </span>
+            <div className="w-24 sm:w-36 h-1 bg-[#E5E5E5] dark:bg-[#2A2A2A] rounded-full overflow-hidden">
+              <div
+                className="h-full bg-[#6366F1] rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <span className="text-[11px] text-[#A3A3A3] tabular-nums w-8">
+              {formatTime(duration)}
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
