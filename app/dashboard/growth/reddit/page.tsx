@@ -463,8 +463,32 @@ export default function RedditPage() {
   const commented = posts.filter((p) => p.status === "commented");
   const skipped = posts.filter((p) => p.status === "skipped");
 
+  // Daily counter
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const commentedToday = posts.filter((p) => {
+    if (p.status !== "commented" || !p.commentedAt) return false;
+    const d = new Date(p.commentedAt);
+    d.setHours(0, 0, 0, 0);
+    return d.getTime() === today.getTime();
+  }).length;
+  const DAILY_GOAL = 5;
+
   return (
     <div>
+      {/* Daily goal bar */}
+      <div className="flex items-center gap-4 text-[12px] py-2.5 px-4 mb-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] bg-white dark:bg-[#1E1E1E]">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#A3A3A3]">Oggi</span>
+        <div className="flex items-center gap-1.5">
+          <MessageSquare className="h-3.5 w-3.5 text-orange-500" strokeWidth={1.5} />
+          <span className={`font-bold tabular-nums ${commentedToday >= DAILY_GOAL ? "text-green-600" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
+            {commentedToday}/{DAILY_GOAL}
+          </span>
+          <span className="text-[#737373]">commenti Reddit</span>
+          {commentedToday >= DAILY_GOAL && <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />}
+        </div>
+      </div>
+
       {/* Stats bar */}
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
         <div className="flex gap-3 text-sm text-[#737373]">
