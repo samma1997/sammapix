@@ -15,6 +15,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { useState } from "react";
+import { NotificationBell } from "@/components/growth/NotificationBell";
 
 const NAV_ITEMS = [
   { label: "Piano", href: "/dashboard/growth/plan", icon: Target, accent: true },
@@ -67,12 +68,17 @@ export default function GrowthLayout({
               </h1>
               <p className="text-[10px] text-[#A3A3A3] mt-0.5">Centro di comando SammaPix</p>
             </div>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="md:hidden text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
-            >
-              <X className="h-4 w-4" strokeWidth={1.5} />
-            </button>
+            <div className="flex items-center gap-1">
+              <div className="hidden md:block">
+                <NotificationBell />
+              </div>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="md:hidden text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+              >
+                <X className="h-4 w-4" strokeWidth={1.5} />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -134,7 +140,7 @@ export default function GrowthLayout({
           <h1 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
             Growth HQ
           </h1>
-          <div className="w-5" /> {/* spacer */}
+          <NotificationBell />
         </header>
 
         {/* Page content */}
