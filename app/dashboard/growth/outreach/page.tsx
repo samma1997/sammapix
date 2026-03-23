@@ -465,22 +465,26 @@ function OutreachRow({
               )}
               {copiedBody ? "Copiato!" : "Testo"}
             </button>
-            {/* Mark as sent button */}
-            {target.status === "to_send" && (
-              <button
-                onClick={markAsSent}
-                disabled={markingSent}
-                title="Segna come inviata"
-                className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border border-green-400 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors disabled:opacity-50"
-              >
-                {markingSent ? (
-                  <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
-                ) : (
-                  <Check className="h-3 w-3" strokeWidth={2} />
-                )}
-                Inviata
-              </button>
-            )}
+            {/* Mark as sent / already sent toggle */}
+            <button
+              onClick={target.status === "to_send" ? markAsSent : undefined}
+              disabled={markingSent || target.status !== "to_send"}
+              title={target.status === "to_send" ? "Clicca per segnare come inviata" : "Email già inviata"}
+              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-[4px] border transition-colors ${
+                target.status !== "to_send"
+                  ? "border-green-400 text-green-600 bg-green-50 dark:bg-green-900/20 cursor-default"
+                  : "border-[#D4D4D4] dark:border-[#404040] text-[#A3A3A3] hover:border-green-400 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+              } disabled:opacity-50`}
+            >
+              {markingSent ? (
+                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={1.5} />
+              ) : target.status !== "to_send" ? (
+                <Check className="h-3 w-3" strokeWidth={2} />
+              ) : (
+                <Mail className="h-3 w-3" strokeWidth={1.5} />
+              )}
+              {target.status !== "to_send" ? "Inviata" : "Non inviata"}
+            </button>
             {/* Reply expand button */}
             <button
               onClick={() => setExpanded((v) => !v)}
