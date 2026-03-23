@@ -1,0 +1,262 @@
+[
+  {
+    "start": 0,
+    "end": 4.63,
+    "text": "## Why image optimization matters for WordPress"
+  },
+  {
+    "start": 4.63,
+    "end": 20.95,
+    "text": "WordPress powers over 43% of all websites on the internet. It is the most common"
+  },
+  {
+    "start": 20.95,
+    "end": 45.84,
+    "text": "The reason is direct: most WordPress users upload photos straight from their cam"
+  },
+  {
+    "start": 45.84,
+    "end": 66.43,
+    "text": "According to Google's Largest Contentful Paint guidance , a \"good\" LCP score is "
+  },
+  {
+    "start": 66.43,
+    "end": 79.92,
+    "text": "Core Web Vitals are a direct Google ranking signal since 2021. A poor LCP score "
+  },
+  {
+    "start": 79.92,
+    "end": 84.14,
+    "text": "## The most common WordPress image mistakes"
+  },
+  {
+    "start": 84.14,
+    "end": 93.79,
+    "text": "Before walking through the correct workflow, it helps to name what most people g"
+  },
+  {
+    "start": 93.79,
+    "end": 96.07,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 96.07,
+    "end": 120.5,
+    "text": "))} Camera originals should never go straight into the WordPress media library -"
+  },
+  {
+    "start": 120.5,
+    "end": 122.16,
+    "text": ") => ("
+  },
+  {
+    "start": 122.16,
+    "end": 125.76,
+    "text": "Free- no signup, no upload, no limits"
+  },
+  {
+    "start": 125.76,
+    "end": 131.45,
+    "text": "Start with SammaPix Compress- process all four steps before your next WordPress "
+  },
+  {
+    "start": 131.45,
+    "end": 135.67,
+    "text": "## WordPress image settings you should configure"
+  },
+  {
+    "start": 135.67,
+    "end": 149.14,
+    "text": "Once your images are pre-optimized, there are several WordPress settings worth r"
+  },
+  {
+    "start": 149.14,
+    "end": 153.43,
+    "text": "### Media settings (Settings → Media)"
+  },
+  {
+    "start": 153.43,
+    "end": 171.14,
+    "text": "WordPress generates three default thumbnail sizes on every upload: thumbnail (15"
+  },
+  {
+    "start": 171.14,
+    "end": 191.59,
+    "text": "Review these sizes and align them with what your theme actually uses. There is n"
+  },
+  {
+    "start": 191.59,
+    "end": 195.77,
+    "text": "### Responsive images and srcset"
+  },
+  {
+    "start": 195.77,
+    "end": 214.39,
+    "text": "WordPress automatically adds srcset attributes to images inserted via the block "
+  },
+  {
+    "start": 214.39,
+    "end": 234.12,
+    "text": "This system works best when you have uploaded images wider than the largest disp"
+  },
+  {
+    "start": 234.12,
+    "end": 241.08,
+    "text": "WordPress generates multiple thumbnail sizes from every uploaded image - Photo b"
+  },
+  {
+    "start": 241.08,
+    "end": 244.66,
+    "text": "## Lazy loading in WordPress"
+  },
+  {
+    "start": 244.66,
+    "end": 260.16,
+    "text": "WordPress has added the loading=\"lazy\" attribute to images automatically since v"
+  },
+  {
+    "start": 260.16,
+    "end": 277.25,
+    "text": "The one important exception: your hero image or the Largest Contentful Paint ima"
+  },
+  {
+    "start": 277.25,
+    "end": 284.54,
+    "text": "You can read the full implementation details and browser compatibility notes in "
+  },
+  {
+    "start": 284.54,
+    "end": 288.46,
+    "text": "## CDN for WordPress images"
+  },
+  {
+    "start": 288.46,
+    "end": 306.36,
+    "text": "Even perfectly compressed images load slowly if they are served from a single or"
+  },
+  {
+    "start": 306.36,
+    "end": 324.19,
+    "text": "For WordPress, the simplest CDN path is Cloudflare. The free tier proxies your e"
+  },
+  {
+    "start": 324.19,
+    "end": 344.14,
+    "text": "Alternatives include Bunny CDN (very affordable, excellent for WordPress), KeyCD"
+  },
+  {
+    "start": 344.14,
+    "end": 348.82,
+    "text": "## WebP delivery: plugins vs pre-conversion"
+  },
+  {
+    "start": 348.82,
+    "end": 357.07,
+    "text": "There are two approaches to serving WebP on WordPress. Understanding the differe"
+  },
+  {
+    "start": 357.07,
+    "end": 361.51,
+    "text": "### Plugin-based server-side conversion"
+  },
+  {
+    "start": 361.51,
+    "end": 379.32,
+    "text": "Plugins like ShortPixel, Imagify, and WebP Express generate WebP versions of you"
+  },
+  {
+    "start": 379.32,
+    "end": 396.82,
+    "text": "The advantage: it handles conversion automatically. The disadvantage: your serve"
+  },
+  {
+    "start": 396.82,
+    "end": 401.69,
+    "text": "### Pre-conversion before upload (recommended)"
+  },
+  {
+    "start": 401.69,
+    "end": 419.14,
+    "text": "The cleaner approach is to convert images to WebP before uploading. WordPress 5."
+  },
+  {
+    "start": 419.14,
+    "end": 436.27,
+    "text": "This approach means your media library contains only WebP files. Smaller origina"
+  },
+  {
+    "start": 436.27,
+    "end": 443.93,
+    "text": "Pre-converting to WebP before upload eliminates the need for server-side convers"
+  },
+  {
+    "start": 443.93,
+    "end": 450.41,
+    "text": "## Comparison: SammaPix workflow vs Smush vs ShortPixel vs Imagify"
+  },
+  {
+    "start": 450.41,
+    "end": 460.7,
+    "text": "All four approaches can produce well-optimized WordPress images. The differences"
+  },
+  {
+    "start": 460.7,
+    "end": 462.19,
+    "text": "Tool |"
+  },
+  {
+    "start": 462.19,
+    "end": 463.9,
+    "text": "Approach |"
+  },
+  {
+    "start": 463.9,
+    "end": 465.72,
+    "text": "WebP |"
+  },
+  {
+    "start": 465.72,
+    "end": 467.71,
+    "text": "EXIF Strip |"
+  },
+  {
+    "start": 467.71,
+    "end": 469.46,
+    "text": "Privacy |"
+  },
+  {
+    "start": 469.46,
+    "end": 471.02,
+    "text": "Cost |"
+  },
+  {
+    "start": 471.02,
+    "end": 489.19,
+    "text": "ShortPixel and Imagify are both excellent plugins for teams who need server-side"
+  },
+  {
+    "start": 489.19,
+    "end": 513.19,
+    "text": "Smush from WPMU DEV is the most widely installed WordPress image optimization pl"
+  },
+  {
+    "start": 513.19,
+    "end": 518.93,
+    "text": "## Complete WordPress image optimization checklist for 2026"
+  },
+  {
+    "start": 518.93,
+    "end": 521.21,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 521.21,
+    "end": 524.74,
+    "text": "## Frequently asked questions"
+  },
+  {
+    "start": 524.74,
+    "end": 527.02,
+    "text": "].map(() => ("
+  }
+]

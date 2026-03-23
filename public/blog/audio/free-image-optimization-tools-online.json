@@ -1,0 +1,532 @@
+[
+  {
+    "start": 0,
+    "end": 4.08,
+    "text": "Why image optimization matters in 2026"
+  },
+  {
+    "start": 4.08,
+    "end": 29.9,
+    "text": "Images account for roughly 50% of the total bytes transferred on the average web"
+  },
+  {
+    "start": 29.9,
+    "end": 47.76,
+    "text": "The good news is that the best free image optimization tools online can reduce i"
+  },
+  {
+    "start": 47.76,
+    "end": 50.57,
+    "text": "How we evaluated these tools"
+  },
+  {
+    "start": 50.57,
+    "end": 72.6,
+    "text": "Each tool was tested with the same set of source images: a 4.2MB JPEG landscape "
+  },
+  {
+    "start": 72.6,
+    "end": 86.69,
+    "text": "Tools are ranked by overall value for free users, accounting for compression qua"
+  },
+  {
+    "start": 86.69,
+    "end": 90.89,
+    "text": "1. SammaPix — Best overall free image optimizer"
+  },
+  {
+    "start": 90.89,
+    "end": 92.83,
+    "text": "Editor's Pick"
+  },
+  {
+    "start": 92.83,
+    "end": 114.29,
+    "text": "SammaPix is a browser-based image optimization tool that runs entirely on your d"
+  },
+  {
+    "start": 114.29,
+    "end": 116.5,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 116.5,
+    "end": 142.1,
+    "text": "A 4.2MB JPEG compressed to quality 80 came out at 890KB — a 79% reduction with n"
+  },
+  {
+    "start": 142.1,
+    "end": 148.99,
+    "text": "- 100% browser-based: files never leave your device — strongest privacy guarante"
+  },
+  {
+    "start": 148.99,
+    "end": 157.03,
+    "text": "- Widest format support: JPEG, PNG, WebP, HEIC, AVIF — the only free tool handli"
+  },
+  {
+    "start": 157.03,
+    "end": 164.04,
+    "text": "- Bulk processing with no daily cap: process 20+ images at once on the free plan"
+  },
+  {
+    "start": 164.04,
+    "end": 171.53,
+    "text": "- AI rename included: automatically generates SEO-friendly filenames from image "
+  },
+  {
+    "start": 171.53,
+    "end": 176.5,
+    "text": "- Free plan ZIP download not available — individual file downloads only"
+  },
+  {
+    "start": 176.5,
+    "end": 180.96,
+    "text": "- AI rename requires a free account (to prevent API abuse)"
+  },
+  {
+    "start": 180.96,
+    "end": 185.16,
+    "text": "- No WordPress plugin — best suited to direct browser use"
+  },
+  {
+    "start": 185.16,
+    "end": 198.62,
+    "text": "Best for: anyone who values privacy, needs HEIC or AVIF support, or wants bulk o"
+  },
+  {
+    "start": 198.62,
+    "end": 203.64,
+    "text": "2. TinyPNG — Best for PNG and JPEG compression quality"
+  },
+  {
+    "start": 203.64,
+    "end": 220.82,
+    "text": "TinyPNG uses a proprietary lossy compression technique that selectively decrease"
+  },
+  {
+    "start": 220.82,
+    "end": 223.03,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 223.03,
+    "end": 244.27,
+    "text": "The 4.2MB JPEG compressed to 1.1MB at TinyPNG's default settings (approximately "
+  },
+  {
+    "start": 244.27,
+    "end": 251.33,
+    "text": "- Excellent PNG compression: proprietary algorithm often beats generic tools on "
+  },
+  {
+    "start": 251.33,
+    "end": 255.91,
+    "text": "- Dead-simple interface: zero learning curve, works instantly"
+  },
+  {
+    "start": 255.91,
+    "end": 261.41,
+    "text": "- WordPress plugin available: integrates directly with the WordPress media libra"
+  },
+  {
+    "start": 261.41,
+    "end": 266.26,
+    "text": "- Free tier limited to 20 images per day and 5MB per file"
+  },
+  {
+    "start": 266.26,
+    "end": 271.87,
+    "text": "- Files are uploaded to TinyPNG's servers — privacy concern for sensitive images"
+  },
+  {
+    "start": 271.87,
+    "end": 276.24,
+    "text": "- No quality slider — you accept their compression level or nothing"
+  },
+  {
+    "start": 276.24,
+    "end": 287.38,
+    "text": "Best for: WordPress site owners who need occasional PNG or JPEG optimization and"
+  },
+  {
+    "start": 287.38,
+    "end": 291.53,
+    "text": "3. Squoosh — Best for single-image quality control"
+  },
+  {
+    "start": 291.53,
+    "end": 311.28,
+    "text": "Squoosh is Google's open-source browser-based image compression tool. It runs en"
+  },
+  {
+    "start": 311.28,
+    "end": 313.49,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 313.49,
+    "end": 332.5,
+    "text": "The 4.2MB JPEG compressed to 810KB at quality 80 (81% reduction) — the best JPEG"
+  },
+  {
+    "start": 332.5,
+    "end": 339.6,
+    "text": "- Best compression quality: MozJPEG and AVIF encoders produce the smallest files"
+  },
+  {
+    "start": 339.6,
+    "end": 345.7,
+    "text": "- Real-time before/after preview: split-screen view with zoom lets you see exact"
+  },
+  {
+    "start": 345.7,
+    "end": 351.36,
+    "text": "- 100% browser-based: fully private, no server upload, open source"
+  },
+  {
+    "start": 351.36,
+    "end": 355.3,
+    "text": "- Single image only — no batch processing whatsoever"
+  },
+  {
+    "start": 355.3,
+    "end": 360.12,
+    "text": "- No HEIC input support — iPhone photos must be converted first"
+  },
+  {
+    "start": 360.12,
+    "end": 365.3,
+    "text": "- Interface is complex — more tools than most users need for simple compression"
+  },
+  {
+    "start": 365.3,
+    "end": 376.13,
+    "text": "Best for: developers and designers who need precise control over a single critic"
+  },
+  {
+    "start": 376.13,
+    "end": 380.86,
+    "text": "4. iLoveIMG — Best for multiple image tasks in one place"
+  },
+  {
+    "start": 380.86,
+    "end": 400.49,
+    "text": "iLoveIMG is a multi-tool platform offering compression, resizing, cropping, form"
+  },
+  {
+    "start": 400.49,
+    "end": 402.7,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 402.7,
+    "end": 421.1,
+    "text": "The 4.2MB JPEG compressed to 1.4MB at default settings (67% reduction) — accepta"
+  },
+  {
+    "start": 421.1,
+    "end": 427.32,
+    "text": "- Multi-tool suite: compress, resize, crop, convert, and watermark from one plat"
+  },
+  {
+    "start": 427.32,
+    "end": 432.07,
+    "text": "- Batch processing: handles multiple files in one go on the free plan"
+  },
+  {
+    "start": 432.07,
+    "end": 436.13,
+    "text": "- No account required: most tools work without signing in"
+  },
+  {
+    "start": 436.13,
+    "end": 440.76,
+    "text": "- Heavy advertising — multiple full-page ads interrupt the workflow"
+  },
+  {
+    "start": 440.76,
+    "end": 446.26,
+    "text": "- Server-based — your images are uploaded to iLoveIMG's servers for processing"
+  },
+  {
+    "start": 446.26,
+    "end": 450.91,
+    "text": "- Slower than browser-based tools due to upload/download round trip"
+  },
+  {
+    "start": 450.91,
+    "end": 459.62,
+    "text": "Best for: occasional users who need a mix of image tasks (not just compression) "
+  },
+  {
+    "start": 459.62,
+    "end": 463.63,
+    "text": "5. ShortPixel — Best for WordPress integration"
+  },
+  {
+    "start": 463.63,
+    "end": 484.82,
+    "text": "ShortPixel is primarily a WordPress plugin that automatically optimizes images a"
+  },
+  {
+    "start": 484.82,
+    "end": 487.03,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 487.03,
+    "end": 507.7,
+    "text": "The 4.2MB JPEG compressed to 960KB using ShortPixel's \"Lossy\" mode (77% reductio"
+  },
+  {
+    "start": 507.7,
+    "end": 514.9,
+    "text": "- Best WordPress integration: automatic optimization on upload, bulk optimizatio"
+  },
+  {
+    "start": 514.9,
+    "end": 520.73,
+    "text": "- Three compression modes: Lossy, Glossy, and Lossless to match your quality req"
+  },
+  {
+    "start": 520.73,
+    "end": 526.2,
+    "text": "- Strong compression quality: competitive output sizes with good visual fidelity"
+  },
+  {
+    "start": 526.2,
+    "end": 531.46,
+    "text": "- Free tier capped at 100 images per month — insufficient for active websites"
+  },
+  {
+    "start": 531.46,
+    "end": 536.18,
+    "text": "- Server-based — images are sent to ShortPixel's servers for processing"
+  },
+  {
+    "start": 536.18,
+    "end": 541.2,
+    "text": "- Not useful for non-WordPress workflows — web tool is a secondary feature"
+  },
+  {
+    "start": 541.2,
+    "end": 552.7,
+    "text": "Best for: WordPress site owners who want automatic, hands-off image optimization"
+  },
+  {
+    "start": 552.7,
+    "end": 557.28,
+    "text": "6. Compressor.io — Best for clean single-image UX"
+  },
+  {
+    "start": 557.28,
+    "end": 576.19,
+    "text": "Compressor.io is a well-designed, minimalist tool for compressing a single image"
+  },
+  {
+    "start": 576.19,
+    "end": 578.4,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 578.4,
+    "end": 594.29,
+    "text": "The 4.2MB JPEG compressed to 1.2MB at default lossy settings (71% reduction) — r"
+  },
+  {
+    "start": 594.29,
+    "end": 599.47,
+    "text": "- SVG support: the only tool in this list that optimizes SVG files"
+  },
+  {
+    "start": 599.47,
+    "end": 604.58,
+    "text": "- Clean interface: minimal, distraction-free UI with clear output metrics"
+  },
+  {
+    "start": 604.58,
+    "end": 608.71,
+    "text": "- No account required: works immediately with no signup"
+  },
+  {
+    "start": 608.71,
+    "end": 612.72,
+    "text": "- Single image only — no batch processing on the free plan"
+  },
+  {
+    "start": 612.72,
+    "end": 616.49,
+    "text": "- No WebP, HEIC, or AVIF support"
+  },
+  {
+    "start": 616.49,
+    "end": 621.74,
+    "text": "- Server-based processing — images are uploaded to Compressor.io's servers"
+  },
+  {
+    "start": 621.74,
+    "end": 630.77,
+    "text": "Best for: developers who occasionally need to optimize a single JPEG, PNG, or SV"
+  },
+  {
+    "start": 630.77,
+    "end": 634.99,
+    "text": "7. Optimizilla — Straightforward but showing its age"
+  },
+  {
+    "start": 634.99,
+    "end": 654.41,
+    "text": "Optimizilla is one of the older free image compression tools online, and it show"
+  },
+  {
+    "start": 654.41,
+    "end": 656.62,
+    "text": "Benchmark result"
+  },
+  {
+    "start": 656.62,
+    "end": 674.66,
+    "text": "The 4.2MB JPEG compressed to 1.5MB at the default quality setting (64% reduction"
+  },
+  {
+    "start": 674.66,
+    "end": 679.18,
+    "text": "- Batch processing: up to 20 images at a time on the free plan"
+  },
+  {
+    "start": 679.18,
+    "end": 683.95,
+    "text": "- Quality slider: per-image quality adjustment with a side-by-side preview"
+  },
+  {
+    "start": 683.95,
+    "end": 687.43,
+    "text": "- No signup required: works immediately"
+  },
+  {
+    "start": 687.43,
+    "end": 691.03,
+    "text": "- Weakest compression results in this comparison"
+  },
+  {
+    "start": 691.03,
+    "end": 694.42,
+    "text": "- Outdated interface — not mobile-friendly"
+  },
+  {
+    "start": 694.42,
+    "end": 699.62,
+    "text": "- JPEG and PNG only — no WebP, AVIF, or HEIC support"
+  },
+  {
+    "start": 699.62,
+    "end": 711.36,
+    "text": "Best for: users who specifically need a quality slider with per-image preview an"
+  },
+  {
+    "start": 711.36,
+    "end": 718.49,
+    "text": "Real benchmark data is the only reliable way to compare image optimization tools"
+  },
+  {
+    "start": 718.49,
+    "end": 721.01,
+    "text": "Side-by-side comparison"
+  },
+  {
+    "start": 721.01,
+    "end": 730.85,
+    "text": "All results use the same 4.2MB JPEG source image. Compression ratios reflect def"
+  },
+  {
+    "start": 730.85,
+    "end": 733.34,
+    "text": "Which tool should you choose"
+  },
+  {
+    "start": 733.34,
+    "end": 743.33,
+    "text": "The answer depends on three variables: how many images you process at once, how "
+  },
+  {
+    "start": 743.33,
+    "end": 752.93,
+    "text": "- For most users: SammaPix is the best free image optimization tool online becau"
+  },
+  {
+    "start": 752.93,
+    "end": 761.47,
+    "text": "- For maximum compression quality on a single image: Squoosh's MozJPEG encoder p"
+  },
+  {
+    "start": 761.47,
+    "end": 767.35,
+    "text": "- For WordPress sites: ShortPixel's plugin integration is the most seamless hand"
+  },
+  {
+    "start": 767.35,
+    "end": 773.81,
+    "text": "- For SVG optimization: Compressor.io is the only tool in this list that handles"
+  },
+  {
+    "start": 773.81,
+    "end": 781.56,
+    "text": "- For iPhone HEIC photos: SammaPix is the only browser-based tool here that conv"
+  },
+  {
+    "start": 781.56,
+    "end": 798.24,
+    "text": "For teams doing regular image optimization at scale — content creators, e-commer"
+  },
+  {
+    "start": 798.24,
+    "end": 803.26,
+    "text": "What is the best free image optimization tool online in 2026?"
+  },
+  {
+    "start": 803.26,
+    "end": 828.98,
+    "text": "SammaPix is the best free image optimization tool online in 2026. It processes i"
+  },
+  {
+    "start": 828.98,
+    "end": 832.9,
+    "text": "Are online image optimization tools safe to use?"
+  },
+  {
+    "start": 832.9,
+    "end": 857.54,
+    "text": "It depends on the tool. Browser-based tools like SammaPix and Squoosh process im"
+  },
+  {
+    "start": 857.54,
+    "end": 861.94,
+    "text": "How much can I reduce an image file size without losing quality?"
+  },
+  {
+    "start": 861.94,
+    "end": 885.62,
+    "text": "For JPEG photos, you can typically achieve 50–70% file size reduction at quality"
+  },
+  {
+    "start": 885.62,
+    "end": 890.18,
+    "text": "What is the difference between image compression and image optimization?"
+  },
+  {
+    "start": 890.18,
+    "end": 913.37,
+    "text": "Image compression reduces the data used to encode pixels — either losslessly or "
+  },
+  {
+    "start": 913.37,
+    "end": 916.63,
+    "text": "Can I optimize images in bulk for free?"
+  },
+  {
+    "start": 916.63,
+    "end": 941.71,
+    "text": "Yes. SammaPix supports bulk image optimization entirely in the browser at no cos"
+  }
+]

@@ -1,0 +1,462 @@
+[
+  {
+    "start": 0,
+    "end": 6.1,
+    "text": "## Why image filenames matter for SEO (and why you are probably getting it wrong"
+  },
+  {
+    "start": 6.1,
+    "end": 21.79,
+    "text": "Google Image Search is one of the highest-traffic sources for photographers, e-c"
+  },
+  {
+    "start": 21.79,
+    "end": 29.98,
+    "text": "- Filename: \"woman-jogging-park-morning.jpg\" is more informative than \"IMG_4521."
+  },
+  {
+    "start": 29.98,
+    "end": 34.63,
+    "text": "- Alt text: the HTML alt attribute describing the image"
+  },
+  {
+    "start": 34.63,
+    "end": 38.28,
+    "text": "- Page context: surrounding text and headings"
+  },
+  {
+    "start": 38.28,
+    "end": 42.72,
+    "text": "- Image metadata: EXIF data, dimensions, file size"
+  },
+  {
+    "start": 42.72,
+    "end": 63.98,
+    "text": "Filenames are one of the few signals you completely control. According to Google"
+  },
+  {
+    "start": 63.98,
+    "end": 80.11,
+    "text": "The problem: most photographers and content creators use camera defaults or gene"
+  },
+  {
+    "start": 80.11,
+    "end": 83.88,
+    "text": "## How AI batch renaming works"
+  },
+  {
+    "start": 83.88,
+    "end": 95.4,
+    "text": "Modern AI models like Google Gemini can \"see\" images and describe them accuratel"
+  },
+  {
+    "start": 95.4,
+    "end": 98.71,
+    "text": "### The process"
+  },
+  {
+    "start": 98.71,
+    "end": 105.41,
+    "text": "You select a batch of photos and send them to the AI renamer. For each image, th"
+  },
+  {
+    "start": 105.41,
+    "end": 110.81,
+    "text": "- Analyzes the visual content (objects, people, scenery, activities)"
+  },
+  {
+    "start": 110.81,
+    "end": 115.03,
+    "text": "- Identifies dominant subjects and contextual details"
+  },
+  {
+    "start": 115.03,
+    "end": 118.54,
+    "text": "- Generates a concise, descriptive filename"
+  },
+  {
+    "start": 118.54,
+    "end": 122.47,
+    "text": "- Applies keyword-rich naming conventions for SEO"
+  },
+  {
+    "start": 122.47,
+    "end": 125.93,
+    "text": "- Proposes the new filename for your approval"
+  },
+  {
+    "start": 125.93,
+    "end": 137.3,
+    "text": "The entire batch processes in seconds to minutes, depending on quantity and inte"
+  },
+  {
+    "start": 137.3,
+    "end": 141.96,
+    "text": "### What makes a good AI-generated filename?"
+  },
+  {
+    "start": 141.96,
+    "end": 147.55,
+    "text": "Not all AI-generated names are equal. The best filenames are:"
+  },
+  {
+    "start": 147.55,
+    "end": 154.66,
+    "text": "- Concise: 3-6 words max. Long filenames are harder to read and don't add SEO va"
+  },
+  {
+    "start": 154.66,
+    "end": 162,
+    "text": "- Keyword-rich: include searchable terms that describe the photo (e.g., \"red-fox"
+  },
+  {
+    "start": 162,
+    "end": 172.32,
+    "text": "- Hyphenated: use hyphens between words. Dashes help search engines parse word b"
+  },
+  {
+    "start": 172.32,
+    "end": 179.47,
+    "text": "- Lowercase: all lowercase. Uppercase doesn't hurt, but lowercase is convention "
+  },
+  {
+    "start": 179.47,
+    "end": 188.38,
+    "text": "- Accurate: no misleading or keyword-stuffed names. \"seagull-flying-beach\" is be"
+  },
+  {
+    "start": 188.38,
+    "end": 194.57,
+    "text": "Keyword-rich filenames improve search visibility for your images - Photo by Mera"
+  },
+  {
+    "start": 194.57,
+    "end": 198.89,
+    "text": "## Real-world examples: before and after"
+  },
+  {
+    "start": 198.89,
+    "end": 202.73,
+    "text": "Here is what AI batch renaming looks like in practice:"
+  },
+  {
+    "start": 202.73,
+    "end": 205.08,
+    "text": "Original filename |"
+  },
+  {
+    "start": 205.08,
+    "end": 207.48,
+    "text": "AI-generated name |"
+  },
+  {
+    "start": 207.48,
+    "end": 209.78,
+    "text": "SEO improvement |"
+  },
+  {
+    "start": 209.78,
+    "end": 214.13,
+    "text": "IMG_5381.jpg |"
+  },
+  {
+    "start": 214.13,
+    "end": 217.51,
+    "text": "woman-hiking-mountain-trail.jpg |"
+  },
+  {
+    "start": 217.51,
+    "end": 220.87,
+    "text": "Searchable for hiking, woman, mountain |"
+  },
+  {
+    "start": 220.87,
+    "end": 225.24,
+    "text": "DSC_2847.JPG |"
+  },
+  {
+    "start": 225.24,
+    "end": 229.27,
+    "text": "golden-retriever-playing-beach-sunset.jpg |"
+  },
+  {
+    "start": 229.27,
+    "end": 232.92,
+    "text": "Strong for dog breed + location + time |"
+  },
+  {
+    "start": 232.92,
+    "end": 238.03,
+    "text": "PHOTO_20260315.jpg |"
+  },
+  {
+    "start": 238.03,
+    "end": 242.18,
+    "text": "fresh-salad-with-tomato-cucumber-feta.jpg |"
+  },
+  {
+    "start": 242.18,
+    "end": 245.21,
+    "text": "Ranks for food photography queries |"
+  },
+  {
+    "start": 245.21,
+    "end": 247.9,
+    "text": "pic1.jpg |"
+  },
+  {
+    "start": 247.9,
+    "end": 252.02,
+    "text": "espresso-machine-gaggia-classic-counter.jpg |"
+  },
+  {
+    "start": 252.02,
+    "end": 255.46,
+    "text": "Targets specific product + context |"
+  },
+  {
+    "start": 255.46,
+    "end": 259.68,
+    "text": "vacation_photo_8.jpg |"
+  },
+  {
+    "start": 259.68,
+    "end": 263.81,
+    "text": "piazza-san-marco-venice-italy-crowded.jpg |"
+  },
+  {
+    "start": 263.81,
+    "end": 266.93,
+    "text": "Local SEO + landmark name |"
+  },
+  {
+    "start": 266.93,
+    "end": 271.75,
+    "text": "## How to batch rename photos with SammaPix AI Rename"
+  },
+  {
+    "start": 271.75,
+    "end": 282.19,
+    "text": "The SammaPix AI Rename tool makes batch renaming simple. No plugins, no desktop "
+  },
+  {
+    "start": 282.19,
+    "end": 286.3,
+    "text": "### Step 1 - Select your photos"
+  },
+  {
+    "start": 286.3,
+    "end": 305.04,
+    "text": "Open AI Rename and drag a folder of photos onto the upload area. You can select "
+  },
+  {
+    "start": 305.04,
+    "end": 310.06,
+    "text": "### Step 2 - Configure naming style (optional)"
+  },
+  {
+    "start": 310.06,
+    "end": 313.1,
+    "text": "Choose how descriptive you want the names:"
+  },
+  {
+    "start": 313.1,
+    "end": 317.28,
+    "text": "- Short (3 words): \"woman-jogging-park.jpg\""
+  },
+  {
+    "start": 317.28,
+    "end": 322.2,
+    "text": "- Medium (5 words): \"woman-jogging-in-park-morning-light.jpg\""
+  },
+  {
+    "start": 322.2,
+    "end": 328.03,
+    "text": "- Detailed (7+ words): \"athletic-woman-jogging-on-forest-trail-at-sunrise.jpg\""
+  },
+  {
+    "start": 328.03,
+    "end": 332.66,
+    "text": "### Step 3 - AI generates suggestions"
+  },
+  {
+    "start": 332.66,
+    "end": 346.9,
+    "text": "The AI analyzes each photo and proposes SEO-friendly names. The process takes 1–"
+  },
+  {
+    "start": 346.9,
+    "end": 350.95,
+    "text": "### Step 4 - Review and edit"
+  },
+  {
+    "start": 350.95,
+    "end": 365.64,
+    "text": "Accept names as-is, edit individual suggestions, or reject and regenerate. You h"
+  },
+  {
+    "start": 365.64,
+    "end": 370.1,
+    "text": "### Step 5 - Download renamed files"
+  },
+  {
+    "start": 370.1,
+    "end": 383.64,
+    "text": "Once you approve all names, download the renamed photos as individual files or a"
+  },
+  {
+    "start": 383.64,
+    "end": 388.42,
+    "text": "## Use cases where batch renaming with AI saves hours"
+  },
+  {
+    "start": 388.42,
+    "end": 392.81,
+    "text": "### Photographers and content creators"
+  },
+  {
+    "start": 392.81,
+    "end": 410.14,
+    "text": "After a shoot, a photographer might have 500+ photos. Renaming them manually wou"
+  },
+  {
+    "start": 410.14,
+    "end": 413.62,
+    "text": "### E-commerce teams"
+  },
+  {
+    "start": 413.62,
+    "end": 430.06,
+    "text": "Product photos with generic names like \"IMG_0001\" hurt your image search visibil"
+  },
+  {
+    "start": 430.06,
+    "end": 434.11,
+    "text": "### Blog and content websites"
+  },
+  {
+    "start": 434.11,
+    "end": 449.33,
+    "text": "Each blog post uses 5–20 images. Descriptive filenames improve image search traf"
+  },
+  {
+    "start": 449.33,
+    "end": 453.31,
+    "text": "### Travel and lifestyle blogs"
+  },
+  {
+    "start": 453.31,
+    "end": 468.82,
+    "text": "Geographic data in filenames helps local SEO. \"eiffel-tower-sunset-paris\" ranks "
+  },
+  {
+    "start": 468.82,
+    "end": 474.82,
+    "text": "AI batch renaming scales from single photos to thousands - Photo by Unsplash on "
+  },
+  {
+    "start": 474.82,
+    "end": 480.34,
+    "text": "## Complementary tools: combine renaming with other optimizations"
+  },
+  {
+    "start": 480.34,
+    "end": 489.58,
+    "text": "AI Rename is powerful on its own, but it works best as part of a complete image "
+  },
+  {
+    "start": 489.58,
+    "end": 493.51,
+    "text": "### Compress images for web"
+  },
+  {
+    "start": 493.51,
+    "end": 511.32,
+    "text": "SEO-friendly filenames are worthless if your images take 10 seconds to load. Aft"
+  },
+  {
+    "start": 511.32,
+    "end": 515.95,
+    "text": "### Convert to WebP for modern browsers"
+  },
+  {
+    "start": 515.95,
+    "end": 529.39,
+    "text": "After renaming and compressing, convert images to WebP format for an additional "
+  },
+  {
+    "start": 529.39,
+    "end": 533.93,
+    "text": "### Remove EXIF data for privacy"
+  },
+  {
+    "start": 533.93,
+    "end": 551.16,
+    "text": "Before uploading renamed photos, consider removing EXIF metadata (GPS coordinate"
+  },
+  {
+    "start": 551.16,
+    "end": 553.85,
+    "text": "## FAQ"
+  },
+  {
+    "start": 553.85,
+    "end": 558.53,
+    "text": "### What is batch renaming photos with AI?"
+  },
+  {
+    "start": 558.53,
+    "end": 579.82,
+    "text": "Batch renaming with AI automatically renames hundreds of photos at once using ar"
+  },
+  {
+    "start": 579.82,
+    "end": 584.42,
+    "text": "### Why does image filename matter for SEO?"
+  },
+  {
+    "start": 584.42,
+    "end": 610.42,
+    "text": "Image filenames are a direct ranking signal for Google Image Search. A descripti"
+  },
+  {
+    "start": 610.42,
+    "end": 614.81,
+    "text": "### How does SammaPix AI Rename work?"
+  },
+  {
+    "start": 614.81,
+    "end": 640.51,
+    "text": "SammaPix AI Rename uses Google Gemini 1.5 Flash to analyze each image and genera"
+  },
+  {
+    "start": 640.51,
+    "end": 645.34,
+    "text": "### Can I batch rename photos without uploading them?"
+  },
+  {
+    "start": 645.34,
+    "end": 664.78,
+    "text": "Your full-resolution images never leave your device or are stored on a server. A"
+  },
+  {
+    "start": 664.78,
+    "end": 669.02,
+    "text": "### Is batch renaming with AI free?"
+  },
+  {
+    "start": 669.02,
+    "end": 688.1,
+    "text": "SammaPix AI Rename is free for up to 5 renames per day on the free plan. For unl"
+  },
+  {
+    "start": 688.1,
+    "end": 693.05,
+    "text": "### What file formats does AI Rename support?"
+  },
+  {
+    "start": 693.05,
+    "end": 710.93,
+    "text": "SammaPix AI Rename supports JPG, PNG, WebP, GIF, and HEIC formats. You can renam"
+  }
+]

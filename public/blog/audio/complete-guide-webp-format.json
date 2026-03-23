@@ -1,0 +1,262 @@
+[
+  {
+    "start": 0,
+    "end": 2.95,
+    "text": "## What is WebP?"
+  },
+  {
+    "start": 2.95,
+    "end": 17.14,
+    "text": "WebP is an image format developed by Google and first released in 2010. It was d"
+  },
+  {
+    "start": 17.14,
+    "end": 39.48,
+    "text": "The format is based on the VP8 video codec (for lossy compression) and uses a de"
+  },
+  {
+    "start": 39.48,
+    "end": 64.61,
+    "text": "The result: at the same perceptual quality, WebP files are consistently smaller "
+  },
+  {
+    "start": 64.61,
+    "end": 69.14,
+    "text": "## WebP capabilities: what makes it versatile"
+  },
+  {
+    "start": 69.14,
+    "end": 78.6,
+    "text": "Unlike JPEG (lossy only, no transparency) and PNG (lossless only, transparency),"
+  },
+  {
+    "start": 78.6,
+    "end": 80.88,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 80.88,
+    "end": 85.34,
+    "text": "## WebP browser support in 2026"
+  },
+  {
+    "start": 85.34,
+    "end": 108.48,
+    "text": "WebP support is now universal. As of early 2026, global browser support is above"
+  },
+  {
+    "start": 108.48,
+    "end": 125.81,
+    "text": "The era of needing fallback JPEG alternatives for Safari is over. If you are sti"
+  },
+  {
+    "start": 125.81,
+    "end": 133.61,
+    "text": "WebP is now supported by every major browser- no fallbacks needed in 2026 - Phot"
+  },
+  {
+    "start": 133.61,
+    "end": 135.89,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 135.89,
+    "end": 140.95,
+    "text": "## WebP vs JPEG vs PNG: when to use which"
+  },
+  {
+    "start": 140.95,
+    "end": 150.7,
+    "text": "The choice between formats is not about which is objectively better- it is about"
+  },
+  {
+    "start": 150.7,
+    "end": 154.22,
+    "text": "### Use WebP when"
+  },
+  {
+    "start": 154.22,
+    "end": 158.02,
+    "text": "### Stick with JPEG when"
+  },
+  {
+    "start": 158.02,
+    "end": 161.88,
+    "text": "### Stick with PNG when"
+  },
+  {
+    "start": 161.88,
+    "end": 165.74,
+    "text": "## Format comparison at a glance"
+  },
+  {
+    "start": 165.74,
+    "end": 167.47,
+    "text": "Feature |"
+  },
+  {
+    "start": 167.47,
+    "end": 169.2,
+    "text": "JPEG |"
+  },
+  {
+    "start": 169.2,
+    "end": 171.02,
+    "text": "WebP |"
+  },
+  {
+    "start": 171.02,
+    "end": 174.1,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 174.1,
+    "end": 179.66,
+    "text": "## What about AVIF? Is it better than WebP?"
+  },
+  {
+    "start": 179.66,
+    "end": 198.14,
+    "text": "AVIF (AV1 Image File Format) is a newer format that achieves even better compres"
+  },
+  {
+    "start": 198.14,
+    "end": 212.71,
+    "text": "The trade-off is encoding time. AVIF is significantly slower to encode than WebP"
+  },
+  {
+    "start": 212.71,
+    "end": 234.38,
+    "text": "The practical recommendation for 2026: WebP is the safe, universal default. Use "
+  },
+  {
+    "start": 234.38,
+    "end": 239.06,
+    "text": "## How to convert photos to WebP using SammaPix"
+  },
+  {
+    "start": 239.06,
+    "end": 250.8,
+    "text": "SammaPix WebP Converter converts JPEG, PNG, GIF, and AVIF files to WebP entirely"
+  },
+  {
+    "start": 250.8,
+    "end": 253.08,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 253.08,
+    "end": 256.08,
+    "text": "Free tool- no upload, no signup"
+  },
+  {
+    "start": 256.08,
+    "end": 260.62,
+    "text": "Convert your images to WebP now - SammaPix WebP Converter"
+  },
+  {
+    "start": 260.62,
+    "end": 264.34,
+    "text": "## Serving WebP on your website"
+  },
+  {
+    "start": 264.34,
+    "end": 271.68,
+    "text": "Converting your images is only the first step. Here is how to deliver them corre"
+  },
+  {
+    "start": 271.68,
+    "end": 276.05,
+    "text": "### HTML: the <picture> element"
+  },
+  {
+    "start": 276.05,
+    "end": 283.37,
+    "text": "The safest approach for any HTML page- serves WebP to browsers that support it, "
+  },
+  {
+    "start": 283.37,
+    "end": 303.74,
+    "text": "### WordPress WordPress 5.8+ natively accepts WebP uploads. You can upload .webp"
+  },
+  {
+    "start": 303.74,
+    "end": 307.3,
+    "text": "### Next.js"
+  },
+  {
+    "start": 307.3,
+    "end": 323.62,
+    "text": "Next.js automatically serves WebP when you use the built-in next/image component"
+  },
+  {
+    "start": 323.62,
+    "end": 327.41,
+    "text": "### Squarespace and Webflow"
+  },
+  {
+    "start": 327.41,
+    "end": 346.2,
+    "text": "Squarespace automatically converts uploaded images to WebP since 2022. Webflow s"
+  },
+  {
+    "start": 346.2,
+    "end": 353.14,
+    "text": "Implementing WebP in your site is straightforward with modern frameworks - Photo"
+  },
+  {
+    "start": 353.14,
+    "end": 358.03,
+    "text": "## WebP and photography workflows: practical tips"
+  },
+  {
+    "start": 358.03,
+    "end": 361.73,
+    "text": "Never use WebP as your master archive format"
+  },
+  {
+    "start": 361.73,
+    "end": 380.62,
+    "text": "Keep original RAW or high-quality JPEG masters for archiving. Convert to WebP on"
+  },
+  {
+    "start": 380.62,
+    "end": 384.24,
+    "text": "Convert during your export step, not at source"
+  },
+  {
+    "start": 384.24,
+    "end": 401.23,
+    "text": "A clean workflow: edit in Lightroom, Capture One, or your preferred software → e"
+  },
+  {
+    "start": 401.23,
+    "end": 404.42,
+    "text": "Pair WebP conversion with compression"
+  },
+  {
+    "start": 404.42,
+    "end": 422.42,
+    "text": "Converting to WebP already reduces file size, but combining format conversion wi"
+  },
+  {
+    "start": 422.42,
+    "end": 426.12,
+    "text": "Check your EXIF metadata after conversion"
+  },
+  {
+    "start": 426.12,
+    "end": 446.66,
+    "text": "WebP does not use the EXIF standard in the same way JPEG does. Most conversion t"
+  },
+  {
+    "start": 446.66,
+    "end": 449.35,
+    "text": "## FAQ"
+  },
+  {
+    "start": 449.35,
+    "end": 451.63,
+    "text": "].map(() => ("
+  }
+]

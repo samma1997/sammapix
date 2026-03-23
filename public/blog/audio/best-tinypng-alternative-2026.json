@@ -1,0 +1,212 @@
+[
+  {
+    "start": 0,
+    "end": 4.3,
+    "text": "## What TinyPNG genuinely does well"
+  },
+  {
+    "start": 4.3,
+    "end": 27.79,
+    "text": "TinyPNG deserves its reputation. It has been compressing PNG and JPEG files sinc"
+  },
+  {
+    "start": 27.79,
+    "end": 47.81,
+    "text": "The interface is about as simple as a tool can get. Drag your files onto the pan"
+  },
+  {
+    "start": 47.81,
+    "end": 63.53,
+    "text": "Its API and Photoshop plugin also have genuine utility. Teams with automated pip"
+  },
+  {
+    "start": 63.53,
+    "end": 68.33,
+    "text": "## Where TinyPNG falls short in 2026"
+  },
+  {
+    "start": 68.33,
+    "end": 76.94,
+    "text": "The limitations of TinyPNG's free tier are well documented — but they have not c"
+  },
+  {
+    "start": 76.94,
+    "end": 79.22,
+    "text": "The 20-image cap."
+  },
+  {
+    "start": 79.22,
+    "end": 97.66,
+    "text": "TinyPNG's free tier limits you to 20 images per session, each under 5 MB. For a "
+  },
+  {
+    "start": 97.66,
+    "end": 100.13,
+    "text": "Files leave your device."
+  },
+  {
+    "start": 100.13,
+    "end": 122.95,
+    "text": "Every image you compress with TinyPNG is uploaded to their servers. TinyPNG stat"
+  },
+  {
+    "start": 122.95,
+    "end": 125.3,
+    "text": "It only does one thing."
+  },
+  {
+    "start": 125.3,
+    "end": 142.08,
+    "text": "TinyPNG compresses images. That is it. There is no format conversion to WebP, no"
+  },
+  {
+    "start": 142.08,
+    "end": 144.94,
+    "text": "No AVIF or GIF support."
+  },
+  {
+    "start": 144.94,
+    "end": 159.5,
+    "text": "TinyPNG handles PNG, JPEG, and WebP. AVIF — the format delivering 20–30% better "
+  },
+  {
+    "start": 159.5,
+    "end": 162.6,
+    "text": "Paid plan is steep for individuals."
+  },
+  {
+    "start": 162.6,
+    "end": 178.13,
+    "text": "Removing TinyPNG's limits requires purchasing API access at $39 per year. That p"
+  },
+  {
+    "start": 178.13,
+    "end": 181.85,
+    "text": "## What SammaPix does differently"
+  },
+  {
+    "start": 181.85,
+    "end": 204.36,
+    "text": "SammaPix was built to solve exactly these gaps. The compression engine runs enti"
+  },
+  {
+    "start": 204.36,
+    "end": 224.09,
+    "text": "Beyond compression, SammaPix is a full image workflow suite. After compressing, "
+  },
+  {
+    "start": 224.09,
+    "end": 231.14,
+    "text": "A full image workflow in one place saves more time than raw compression speed al"
+  },
+  {
+    "start": 231.14,
+    "end": 258.72,
+    "text": "The privacy angle is not a marketing claim — it is an architectural fact. Becaus"
+  },
+  {
+    "start": 258.72,
+    "end": 263.4,
+    "text": "## Head-to-head: SammaPix vs TinyPNG"
+  },
+  {
+    "start": 263.4,
+    "end": 276.02,
+    "text": "Here is how the two tools compare across every dimension that matters to photogr"
+  },
+  {
+    "start": 276.02,
+    "end": 277.75,
+    "text": "Feature |"
+  },
+  {
+    "start": 277.75,
+    "end": 279.65,
+    "text": "SammaPix |"
+  },
+  {
+    "start": 279.65,
+    "end": 281.88,
+    "text": "TinyPNG |"
+  },
+  {
+    "start": 281.88,
+    "end": 284.95,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 284.95,
+    "end": 288.5,
+    "text": ") : row.sammapix === true ? ( ) : ( )} |"
+  },
+  {
+    "start": 288.5,
+    "end": 291.91,
+    "text": ") : row.tinypng === true ? ( ) : ( )} |"
+  },
+  {
+    "start": 291.91,
+    "end": 295.58,
+    "text": "## Pricing: the honest breakdown"
+  },
+  {
+    "start": 295.58,
+    "end": 302.47,
+    "text": "Both tools are free for casual use. The gap opens when you need to go beyond the"
+  },
+  {
+    "start": 302.47,
+    "end": 320.57,
+    "text": "TinyPNG's paid product is developer-focused API access, starting at $39 per year"
+  },
+  {
+    "start": 320.57,
+    "end": 342.5,
+    "text": "SammaPix Pro is $9 per month — designed for the individual who uses the tool reg"
+  },
+  {
+    "start": 342.5,
+    "end": 353.54,
+    "text": "Worth noting: SammaPix's free tier has no batch cap and no file size ceiling. Th"
+  },
+  {
+    "start": 353.54,
+    "end": 357.53,
+    "text": "## Verdict: which tool should you use?"
+  },
+  {
+    "start": 357.53,
+    "end": 360.31,
+    "text": "Stay with TinyPNG if..."
+  },
+  {
+    "start": 360.31,
+    "end": 362.83,
+    "text": "Switch to SammaPix if..."
+  },
+  {
+    "start": 362.83,
+    "end": 384.91,
+    "text": "The underlying compression quality of both tools is excellent. The difference is"
+  },
+  {
+    "start": 384.91,
+    "end": 388.15,
+    "text": "Free — no signup, no file limits"
+  },
+  {
+    "start": 388.15,
+    "end": 393.07,
+    "text": "Try SammaPix Compress — batch compress in your browser, zero uploads"
+  },
+  {
+    "start": 393.07,
+    "end": 395.76,
+    "text": "## FAQ"
+  },
+  {
+    "start": 395.76,
+    "end": 398.04,
+    "text": "].map(() => ("
+  }
+]

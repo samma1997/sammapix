@@ -1,0 +1,1677 @@
+[
+  {
+    "start": 0,
+    "end": 4.08,
+    "text": "## Why film photography is trending again"
+  },
+  {
+    "start": 4.08,
+    "end": 9.72,
+    "text": "Sales of 35mm film have increased every year since 2020 according"
+  },
+  {
+    "start": 9.72,
+    "end": 12.6,
+    "text": "to industry reports covered by"
+  },
+  {
+    "start": 12.6,
+    "end": 14.62,
+    "text": "PetaPixel"
+  },
+  {
+    "start": 14.62,
+    "end": 20.28,
+    "text": ". Kodak restarted several discontinued emulsions. Fujifilm"
+  },
+  {
+    "start": 20.28,
+    "end": 24.82,
+    "text": "raised prices on Superia and Velvia rather than discontinuing"
+  },
+  {
+    "start": 24.82,
+    "end": 30.48,
+    "text": "them. New cameras using old film formats- from Lomography and"
+  },
+  {
+    "start": 30.48,
+    "end": 35.74,
+    "text": "Reto- are selling out. The analog revival is not a niche"
+  },
+  {
+    "start": 35.74,
+    "end": 40.44,
+    "text": "hipster moment. It is a broad cultural shift."
+  },
+  {
+    "start": 40.44,
+    "end": 45.94,
+    "text": "The reasons are not hard to understand. Digital cameras are now"
+  },
+  {
+    "start": 45.94,
+    "end": 50.11,
+    "text": "so technically perfect that the images they produce can feel"
+  },
+  {
+    "start": 50.11,
+    "end": 55.49,
+    "text": "sterile. Every photo is sharp, noise-free, and correctly"
+  },
+  {
+    "start": 55.49,
+    "end": 61.44,
+    "text": "exposed. Film, by contrast, is imperfect in ways that feel"
+  },
+  {
+    "start": 61.44,
+    "end": 67.06,
+    "text": "human. The grain, the slight color casts, the unpredictable"
+  },
+  {
+    "start": 67.06,
+    "end": 71.42,
+    "text": "exposures- these imperfections create warmth and personality"
+  },
+  {
+    "start": 71.42,
+    "end": 75.22,
+    "text": "that a technically correct digital image often lacks."
+  },
+  {
+    "start": 75.22,
+    "end": 80.95,
+    "text": "But film photography has real barriers. A roll of Kodak Portra"
+  },
+  {
+    "start": 80.95,
+    "end": 88.63,
+    "text": "400 costs $18 to $22. Developing and scanning adds another $15"
+  },
+  {
+    "start": 88.63,
+    "end": 95.78,
+    "text": "to $30. You shoot 36 frames and wait days for results. Most"
+  },
+  {
+    "start": 95.78,
+    "end": 99.46,
+    "text": "people want the look without the commitment- and that is"
+  },
+  {
+    "start": 99.46,
+    "end": 103.49,
+    "text": "exactly what film effect digital processing delivers."
+  },
+  {
+    "start": 103.49,
+    "end": 108,
+    "text": "## The anatomy of a film look: five core elements"
+  },
+  {
+    "start": 108,
+    "end": 111.91,
+    "text": "Film photographs look the way they do because of the physical"
+  },
+  {
+    "start": 111.91,
+    "end": 117.31,
+    "text": "and chemical properties of the medium. When you add film effects"
+  },
+  {
+    "start": 117.31,
+    "end": 121.99,
+    "text": "to digital photos, you are simulating those physical properties."
+  },
+  {
+    "start": 121.99,
+    "end": 126.02,
+    "text": "Understanding what each element does helps you use them with"
+  },
+  {
+    "start": 126.02,
+    "end": 129.65,
+    "text": "intention rather than just slapping on a preset."
+  },
+  {
+    "start": 129.65,
+    "end": 134.26,
+    "text": "### 1. Film grain"
+  },
+  {
+    "start": 134.26,
+    "end": 139.92,
+    "text": "Grain is the most recognizable film characteristic. It comes"
+  },
+  {
+    "start": 139.92,
+    "end": 143.83,
+    "text": "from the silver halide crystals in the film emulsion- the"
+  },
+  {
+    "start": 143.83,
+    "end": 149.4,
+    "text": "particles that react to light to create the image. Faster films"
+  },
+  {
+    "start": 149.4,
+    "end": 154.15,
+    "text": "(higher ISO) use larger crystals to capture more light, which"
+  },
+  {
+    "start": 154.15,
+    "end": 160.97,
+    "text": "produces coarser, more visible grain. Ilford HP5 at ISO 400 has"
+  },
+  {
+    "start": 160.97,
+    "end": 167.09,
+    "text": "visible grain. Pushed to ISO 3200 in a darkroom, the grain"
+  },
+  {
+    "start": 167.09,
+    "end": 169.87,
+    "text": "becomes enormous and painterly."
+  },
+  {
+    "start": 169.87,
+    "end": 175.46,
+    "text": "Digital noise and film grain are fundamentally different. Digital"
+  },
+  {
+    "start": 175.46,
+    "end": 180,
+    "text": "noise appears as uniform colored pixel clusters, often with a"
+  },
+  {
+    "start": 180,
+    "end": 185.5,
+    "text": "magenta or green cast. Film grain is organic- irregular,"
+  },
+  {
+    "start": 185.5,
+    "end": 189.94,
+    "text": "luminance-based, and distributed unevenly across the frame."
+  },
+  {
+    "start": 189.94,
+    "end": 194.54,
+    "text": "Good film grain simulation uses luminance variation rather than"
+  },
+  {
+    "start": 194.54,
+    "end": 198.84,
+    "text": "random color noise, and applies more grain to the midtones and"
+  },
+  {
+    "start": 198.84,
+    "end": 201.36,
+    "text": "shadows than to the highlights."
+  },
+  {
+    "start": 201.36,
+    "end": 207.05,
+    "text": "### 2. Color shift and tonal rendering"
+  },
+  {
+    "start": 207.05,
+    "end": 212.38,
+    "text": "Every film stock renders color differently. This is not a"
+  },
+  {
+    "start": 212.38,
+    "end": 216.26,
+    "text": "defect- it is part of what gives each stock its character."
+  },
+  {
+    "start": 216.26,
+    "end": 220.78,
+    "text": "Kodak Portra is famous for warm, flattering skin tones with a"
+  },
+  {
+    "start": 220.78,
+    "end": 226.44,
+    "text": "slight orange-amber bias. Fuji Superia pulls slightly toward"
+  },
+  {
+    "start": 226.44,
+    "end": 231.72,
+    "text": "green in the shadows and cyan in the highlights. Kodak Ektar"
+  },
+  {
+    "start": 231.72,
+    "end": 237.29,
+    "text": "is saturated and punchy. Agfa Vista gives a cross-processed"
+  },
+  {
+    "start": 237.29,
+    "end": 240.67,
+    "text": "look with lifted shadows and shifted hues."
+  },
+  {
+    "start": 240.67,
+    "end": 244.85,
+    "text": "Digitally, color shift is achieved through curves adjustments"
+  },
+  {
+    "start": 244.85,
+    "end": 249.31,
+    "text": "and color grading- pushing specific channels in specific tonal"
+  },
+  {
+    "start": 249.31,
+    "end": 254.64,
+    "text": "regions. A Portra look lifts the red and yellow channels in"
+  },
+  {
+    "start": 254.64,
+    "end": 260.14,
+    "text": "the midtones. A Fuji Superia look adds a hint of green to the"
+  },
+  {
+    "start": 260.14,
+    "end": 265.46,
+    "text": "shadows. These are precise, channel-specific adjustments-"
+  },
+  {
+    "start": 265.46,
+    "end": 269.62,
+    "text": "not simply adding a warm or cool filter to the entire image."
+  },
+  {
+    "start": 269.62,
+    "end": 275.42,
+    "text": "### 3. Shadow fading and lifted blacks"
+  },
+  {
+    "start": 275.42,
+    "end": 280.75,
+    "text": "Film negatives rarely produce true black. The base of the film"
+  },
+  {
+    "start": 280.75,
+    "end": 284.81,
+    "text": "stock has a slight density that lifts the minimum black point,"
+  },
+  {
+    "start": 284.81,
+    "end": 290.28,
+    "text": "giving shadows a faded, milky quality. This is especially"
+  },
+  {
+    "start": 290.28,
+    "end": 296.06,
+    "text": "pronounced in expired or overexposed film. Digitally, this"
+  },
+  {
+    "start": 296.06,
+    "end": 300.07,
+    "text": "effect is achieved by lifting the black point on the curves"
+  },
+  {
+    "start": 300.07,
+    "end": 303.48,
+    "text": "- preventing the shadows from reaching pure black."
+  },
+  {
+    "start": 303.48,
+    "end": 307.66,
+    "text": "Combined with a subtle color cast in the lifted blacks- often"
+  },
+  {
+    "start": 307.66,
+    "end": 311.86,
+    "text": "a cool cyan or warm amber depending on the stock- shadow"
+  },
+  {
+    "start": 311.86,
+    "end": 315.77,
+    "text": "fading is one of the most effective ways to give a digital"
+  },
+  {
+    "start": 315.77,
+    "end": 321.5,
+    "text": "photo an analog feel. It reads immediately as film even without"
+  },
+  {
+    "start": 321.5,
+    "end": 323.02,
+    "text": "grain."
+  },
+  {
+    "start": 323.02,
+    "end": 327.7,
+    "text": "### 4. Vignette"
+  },
+  {
+    "start": 327.7,
+    "end": 331.75,
+    "text": "Optical vignetting- the darkening of image corners- occurs"
+  },
+  {
+    "start": 331.75,
+    "end": 337.2,
+    "text": "naturally in many film camera and lens combinations. Wide"
+  },
+  {
+    "start": 337.2,
+    "end": 341.64,
+    "text": "apertures on fast lenses produce the most visible vignetting."
+  },
+  {
+    "start": 341.64,
+    "end": 345.65,
+    "text": "It draws the eye toward the center of the frame and creates a"
+  },
+  {
+    "start": 345.65,
+    "end": 348.43,
+    "text": "sense of depth and intimacy."
+  },
+  {
+    "start": 348.43,
+    "end": 352.3,
+    "text": "Digital vignetting applied too aggressively looks fake and"
+  },
+  {
+    "start": 352.3,
+    "end": 357.74,
+    "text": "heavy-handed. The analog look uses a gentle, wide-radius"
+  },
+  {
+    "start": 357.74,
+    "end": 361.66,
+    "text": "vignette that barely darkens the corners- you often feel it"
+  },
+  {
+    "start": 361.66,
+    "end": 366.77,
+    "text": "more than you see it. The feathering should be gradual, not"
+  },
+  {
+    "start": 366.77,
+    "end": 370.01,
+    "text": "a sharp circle darkened around the edges."
+  },
+  {
+    "start": 370.01,
+    "end": 374.81,
+    "text": "### 5. Light leaks"
+  },
+  {
+    "start": 374.81,
+    "end": 378.7,
+    "text": "Light leaks happen when light enters the film camera body"
+  },
+  {
+    "start": 378.7,
+    "end": 383.09,
+    "text": "through a worn seal or a momentary opening of the film door."
+  },
+  {
+    "start": 383.09,
+    "end": 387.43,
+    "text": "The light exposes part of the film emulsion, creating streaks"
+  },
+  {
+    "start": 387.43,
+    "end": 392.18,
+    "text": "or washes of warm orange, red, or magenta across the image."
+  },
+  {
+    "start": 392.18,
+    "end": 396.26,
+    "text": "In the film photography community, light leaks are prized"
+  },
+  {
+    "start": 396.26,
+    "end": 399.1,
+    "text": "rather than treated as defects."
+  },
+  {
+    "start": 399.1,
+    "end": 403.58,
+    "text": "Used sparingly, a digital light leak overlay adds an authentic"
+  },
+  {
+    "start": 403.58,
+    "end": 409.08,
+    "text": "handmade quality. Used heavily, it looks like an Instagram"
+  },
+  {
+    "start": 409.08,
+    "end": 415.13,
+    "text": "filter from 2013. The key is subtlety- a single soft streak"
+  },
+  {
+    "start": 415.13,
+    "end": 419.33,
+    "text": "of warm orange in one corner, with the blend mode set to"
+  },
+  {
+    "start": 419.33,
+    "end": 423.07,
+    "text": "Screen or Lighten so it only affects bright areas."
+  },
+  {
+    "start": 423.07,
+    "end": 427.1,
+    "text": "## Famous film stocks and what they look like"
+  },
+  {
+    "start": 427.1,
+    "end": 431.23,
+    "text": "The distinct tonal quality of analog film- something every"
+  },
+  {
+    "start": 431.23,
+    "end": 435.38,
+    "text": "digital shooter wants to recreate - Photo via Unsplash"
+  },
+  {
+    "start": 435.38,
+    "end": 439.66,
+    "text": "Knowing the look of specific film stocks helps you understand"
+  },
+  {
+    "start": 439.66,
+    "end": 444.7,
+    "text": "what you are trying to achieve digitally. These are the three"
+  },
+  {
+    "start": 444.7,
+    "end": 448.63,
+    "text": "most-emulated stocks in digital film simulation:"
+  },
+  {
+    "start": 448.63,
+    "end": 452.66,
+    "text": "### Kodak Portra 400"
+  },
+  {
+    "start": 452.66,
+    "end": 454.73,
+    "text": "Kodak Portra"
+  },
+  {
+    "start": 454.73,
+    "end": 460.1,
+    "text": "is the most beloved color negative film ever made. It was"
+  },
+  {
+    "start": 460.1,
+    "end": 464.21,
+    "text": "designed for portrait photography, which means it renders"
+  },
+  {
+    "start": 464.21,
+    "end": 469.73,
+    "text": "human skin with extraordinary warmth and flattery. The color"
+  },
+  {
+    "start": 469.73,
+    "end": 474.12,
+    "text": "signature is warm- golden-amber highlights, creamy midtones,"
+  },
+  {
+    "start": 474.12,
+    "end": 479.45,
+    "text": "and shadows with a slight magenta-red push. Contrast is"
+  },
+  {
+    "start": 479.45,
+    "end": 484.99,
+    "text": "moderate. Grain is fine and almost invisible at box speed."
+  },
+  {
+    "start": 484.99,
+    "end": 489.77,
+    "text": "Portra looks best on portraits, street photography, and travel"
+  },
+  {
+    "start": 489.77,
+    "end": 495.22,
+    "text": "images with warm ambient light. It is the default choice for"
+  },
+  {
+    "start": 495.22,
+    "end": 499.37,
+    "text": "photographers who want a film look that feels professional and"
+  },
+  {
+    "start": 499.37,
+    "end": 505.1,
+    "text": "timeless rather than experimental. To simulate Portra digitally:"
+  },
+  {
+    "start": 505.1,
+    "end": 509.47,
+    "text": "lift the shadows to a warm amber, add a subtle orange push to"
+  },
+  {
+    "start": 509.47,
+    "end": 513.84,
+    "text": "the midtones, reduce contrast slightly, and apply very fine"
+  },
+  {
+    "start": 513.84,
+    "end": 515.93,
+    "text": "luminance grain."
+  },
+  {
+    "start": 515.93,
+    "end": 520.06,
+    "text": "### Fuji Superia 400"
+  },
+  {
+    "start": 520.06,
+    "end": 524.69,
+    "text": "Fuji Superia is Kodak Portra's cooler, greener counterpart."
+  },
+  {
+    "start": 524.69,
+    "end": 529.18,
+    "text": "Where Portra goes warm and amber, Superia leans toward a subtle"
+  },
+  {
+    "start": 529.18,
+    "end": 533.54,
+    "text": "green-teal in the shadows and a cooler, slightly desaturated"
+  },
+  {
+    "start": 533.54,
+    "end": 539.04,
+    "text": "look overall. Skin tones are accurate but slightly cooler than"
+  },
+  {
+    "start": 539.04,
+    "end": 544.34,
+    "text": "Portra. Grain is slightly more visible and has a distinctive"
+  },
+  {
+    "start": 544.34,
+    "end": 548.23,
+    "text": "blue-green channel characteristic at higher ISOs."
+  },
+  {
+    "start": 548.23,
+    "end": 552.89,
+    "text": "Superia looks excellent in urban environments, overcast light,"
+  },
+  {
+    "start": 552.89,
+    "end": 558,
+    "text": "and scenes with a lot of greenery. It is the film that many"
+  },
+  {
+    "start": 558,
+    "end": 562.73,
+    "text": "street photographers in Japan shot through the 1990s and early"
+  },
+  {
+    "start": 562.73,
+    "end": 567.7,
+    "text": "2000s- and the association has given it a particular nostalgic"
+  },
+  {
+    "start": 567.7,
+    "end": 573.29,
+    "text": "quality. To simulate Superia: push the shadow tones toward"
+  },
+  {
+    "start": 573.29,
+    "end": 577.58,
+    "text": "cool green, add a slight cyan cast to the highlights, and use"
+  },
+  {
+    "start": 577.58,
+    "end": 581.59,
+    "text": "medium-fine grain with a very slight blue channel bias."
+  },
+  {
+    "start": 581.59,
+    "end": 586.34,
+    "text": "### Ilford HP5 Plus (Black and White)"
+  },
+  {
+    "start": 586.34,
+    "end": 590.86,
+    "text": "Ilford HP5 is one of the most versatile black and white films"
+  },
+  {
+    "start": 590.86,
+    "end": 597.58,
+    "text": "ever made. Rated at ISO 400, it can be pushed to ISO 1600 or"
+  },
+  {
+    "start": 597.58,
+    "end": 602.98,
+    "text": "3200 with results that remain usable- even desirable for"
+  },
+  {
+    "start": 602.98,
+    "end": 608.5,
+    "text": "documentary and street work. The grain becomes substantial when"
+  },
+  {
+    "start": 608.5,
+    "end": 612.98,
+    "text": "pushed, with a bold, irregular structure that feels utterly"
+  },
+  {
+    "start": 612.98,
+    "end": 618.36,
+    "text": "different from digital noise. Tonal rendering is broad, with"
+  },
+  {
+    "start": 618.36,
+    "end": 622.18,
+    "text": "excellent shadow detail and well-controlled highlights."
+  },
+  {
+    "start": 622.18,
+    "end": 626.98,
+    "text": "To simulate HP5 digitally: convert to grayscale using a"
+  },
+  {
+    "start": 626.98,
+    "end": 631.68,
+    "text": "weighted luminance conversion (not desaturation, which produces"
+  },
+  {
+    "start": 631.68,
+    "end": 636.29,
+    "text": "flat results), apply an S-curve for mild contrast enhancement,"
+  },
+  {
+    "start": 636.29,
+    "end": 640.7,
+    "text": "add coarse luminance grain particularly in the midtones, and"
+  },
+  {
+    "start": 640.7,
+    "end": 646.03,
+    "text": "slightly lift the black point. For a pushed look, increase the"
+  },
+  {
+    "start": 646.03,
+    "end": 649.68,
+    "text": "contrast significantly and add very coarse grain."
+  },
+  {
+    "start": 649.68,
+    "end": 654.34,
+    "text": "## How SammaPix Film Filters recreates these looks"
+  },
+  {
+    "start": 654.34,
+    "end": 659.42,
+    "text": "Most online filters apply a single LUT (look-up table) to the"
+  },
+  {
+    "start": 659.42,
+    "end": 664.75,
+    "text": "entire image and call it done. The result looks like a filter"
+  },
+  {
+    "start": 664.75,
+    "end": 669.34,
+    "text": "rather than actual film- flat, uniform, clearly artificial."
+  },
+  {
+    "start": 669.34,
+    "end": 671.23,
+    "text": "SammaPix"
+  },
+  {
+    "start": 671.23,
+    "end": 673.03,
+    "text": "FilmLab"
+  },
+  {
+    "start": 673.03,
+    "end": 677.04,
+    "text": "takes a different approach, applying each element of the film"
+  },
+  {
+    "start": 677.04,
+    "end": 680.5,
+    "text": "look independently and in the correct order."
+  },
+  {
+    "start": 680.5,
+    "end": 685.18,
+    "text": "Film Filters processes images entirely in your browser using the"
+  },
+  {
+    "start": 685.18,
+    "end": 690.1,
+    "text": "Canvas API- no uploads, no server processing, no waiting for"
+  },
+  {
+    "start": 690.1,
+    "end": 695.59,
+    "text": "a file to come back from a cloud service. The entire operation"
+  },
+  {
+    "start": 695.59,
+    "end": 701.09,
+    "text": "happens locally and instantly. Privacy-first is a design"
+  },
+  {
+    "start": 701.09,
+    "end": 705.53,
+    "text": "principle, not a feature: your photos never leave your device."
+  },
+  {
+    "start": 705.53,
+    "end": 709.66,
+    "text": "The grain algorithm generates luminance-based grain rather"
+  },
+  {
+    "start": 709.66,
+    "end": 714,
+    "text": "than color noise, with organic distribution that varies by"
+  },
+  {
+    "start": 714,
+    "end": 718.99,
+    "text": "tonal zone. The color grading applies per-channel curve"
+  },
+  {
+    "start": 718.99,
+    "end": 724.73,
+    "text": "adjustments specific to each stock profile. Shadow fading lifts"
+  },
+  {
+    "start": 724.73,
+    "end": 728.74,
+    "text": "the true black point independently from the rest of the tone"
+  },
+  {
+    "start": 728.74,
+    "end": 734.14,
+    "text": "curve. Every parameter is adjustable- you can push a Portra"
+  },
+  {
+    "start": 734.14,
+    "end": 738.41,
+    "text": "preset further or dial it back to near-neutral, depending"
+  },
+  {
+    "start": 738.41,
+    "end": 741.41,
+    "text": "on what your specific image needs."
+  },
+  {
+    "start": 741.41,
+    "end": 746.59,
+    "text": "## Step-by-step: adding film effects to your photos for free"
+  },
+  {
+    "start": 746.59,
+    "end": 751.01,
+    "text": "Here is the exact process for applying professional film effects"
+  },
+  {
+    "start": 751.01,
+    "end": 755.45,
+    "text": "to any digital photo using SammaPix FilmLab- no Photoshop,"
+  },
+  {
+    "start": 755.45,
+    "end": 758.76,
+    "text": "no subscription, no account required."
+  },
+  {
+    "start": 758.76,
+    "end": 761.62,
+    "text": "- Step 1 - Open Film Filters."
+  },
+  {
+    "start": 761.62,
+    "end": 765.43,
+    "text": "sammapix.com/tools/filmlab"
+  },
+  {
+    "start": 765.43,
+    "end": 770.88,
+    "text": ". No login, no install. The tool loads entirely in your"
+  },
+  {
+    "start": 770.88,
+    "end": 772.54,
+    "text": "browser."
+  },
+  {
+    "start": 772.54,
+    "end": 775.18,
+    "text": "- Step 2 - Drop your photo."
+  },
+  {
+    "start": 775.18,
+    "end": 780,
+    "text": "Drag any JPEG or PNG onto the drop zone, or click to browse."
+  },
+  {
+    "start": 780,
+    "end": 785.83,
+    "text": "JPEGs from your phone camera work perfectly. RAW files should"
+  },
+  {
+    "start": 785.83,
+    "end": 789.46,
+    "text": "be exported to JPEG first for best results."
+  },
+  {
+    "start": 789.46,
+    "end": 792.79,
+    "text": "- Step 3 - Choose a film stock preset."
+  },
+  {
+    "start": 792.79,
+    "end": 797.83,
+    "text": "Select from the preset list - Kodak Portra 400, Fuji Superia,"
+  },
+  {
+    "start": 797.83,
+    "end": 804.86,
+    "text": "Ilford HP5, Kodak Gold 200, Agfa Vista, and more. Each preset"
+  },
+  {
+    "start": 804.86,
+    "end": 808.87,
+    "text": "applies a complete set of parameters matched to that stock."
+  },
+  {
+    "start": 808.87,
+    "end": 812.04,
+    "text": "- Step 4 - Adjust grain intensity."
+  },
+  {
+    "start": 812.04,
+    "end": 817.37,
+    "text": "The default grain matches box speed. Drag the grain slider"
+  },
+  {
+    "start": 817.37,
+    "end": 821.62,
+    "text": "up to simulate pushed film, or down for a cleaner look that"
+  },
+  {
+    "start": 821.62,
+    "end": 825.26,
+    "text": "retains color grading without visible texture."
+  },
+  {
+    "start": 825.26,
+    "end": 828.48,
+    "text": "- Step 5 - Fine-tune vignette and fading."
+  },
+  {
+    "start": 828.48,
+    "end": 834.02,
+    "text": "Both controls default to moderate values. Reduce them for a"
+  },
+  {
+    "start": 834.02,
+    "end": 839.28,
+    "text": "subtle, barely-there film feel. Increase them for a more"
+  },
+  {
+    "start": 839.28,
+    "end": 842.02,
+    "text": "dramatic, editorial look."
+  },
+  {
+    "start": 842.02,
+    "end": 845.16,
+    "text": "- Step 6 - Add a light leak (optional)."
+  },
+  {
+    "start": 845.16,
+    "end": 849.22,
+    "text": "Toggle the light leak overlay and select a position- corner,"
+  },
+  {
+    "start": 849.22,
+    "end": 855.43,
+    "text": "edge, or diagonal. Keep the opacity below 30% for a result"
+  },
+  {
+    "start": 855.43,
+    "end": 858.67,
+    "text": "that reads as authentic rather than applied."
+  },
+  {
+    "start": 858.67,
+    "end": 861.12,
+    "text": "- Step 7 - Download."
+  },
+  {
+    "start": 861.12,
+    "end": 866.23,
+    "text": "Hit Download to save the processed JPEG. The file is"
+  },
+  {
+    "start": 866.23,
+    "end": 871.78,
+    "text": "generated entirely in-browser at full resolution. No"
+  },
+  {
+    "start": 871.78,
+    "end": 874.51,
+    "text": "watermarks on free downloads."
+  },
+  {
+    "start": 874.51,
+    "end": 879.62,
+    "text": "The whole process takes under two minutes per photo. For"
+  },
+  {
+    "start": 879.62,
+    "end": 883.46,
+    "text": "batches of images you want to process with consistent"
+  },
+  {
+    "start": 883.46,
+    "end": 887.71,
+    "text": "settings- for a travel series, a portrait session, or a"
+  },
+  {
+    "start": 887.71,
+    "end": 892.22,
+    "text": "social media set - Film Filters lets you apply the same preset"
+  },
+  {
+    "start": 892.22,
+    "end": 896.45,
+    "text": "to multiple images in sequence, keeping your look coherent"
+  },
+  {
+    "start": 896.45,
+    "end": 899.18,
+    "text": "across the entire collection."
+  },
+  {
+    "start": 899.18,
+    "end": 904.99,
+    "text": "## Film effects vs. Instagram filters: why the quality difference matters"
+  },
+  {
+    "start": 904.99,
+    "end": 909.5,
+    "text": "Instagram filters and film emulation tools both try to change"
+  },
+  {
+    "start": 909.5,
+    "end": 913.92,
+    "text": "the look of a photo, but they operate at fundamentally different"
+  },
+  {
+    "start": 913.92,
+    "end": 919.51,
+    "text": "levels of sophistication. Understanding the difference explains"
+  },
+  {
+    "start": 919.51,
+    "end": 923.83,
+    "text": "why professional photographers spend time on film emulation"
+  },
+  {
+    "start": 923.83,
+    "end": 926.64,
+    "text": "rather than just tapping a filter."
+  },
+  {
+    "start": 926.64,
+    "end": 931.75,
+    "text": "Instagram filters apply a fixed LUT uniformly across the entire"
+  },
+  {
+    "start": 931.75,
+    "end": 936.14,
+    "text": "image, at a resolution optimized for display on a phone screen."
+  },
+  {
+    "start": 936.14,
+    "end": 941.33,
+    "text": "They use heavy-handed adjustments tuned to look good on a 375px"
+  },
+  {
+    "start": 941.33,
+    "end": 946.42,
+    "text": "wide screen viewed at arm's length. The results degrade"
+  },
+  {
+    "start": 946.42,
+    "end": 950.76,
+    "text": "significantly at larger display sizes and compress poorly-"
+  },
+  {
+    "start": 950.76,
+    "end": 955.34,
+    "text": "which is why filter-heavy photos posted at full resolution often"
+  },
+  {
+    "start": 955.34,
+    "end": 958.58,
+    "text": "look strange or harsh on larger screens."
+  },
+  {
+    "start": 958.58,
+    "end": 962.98,
+    "text": "Film emulation tools work at the full resolution of the source"
+  },
+  {
+    "start": 962.98,
+    "end": 966.89,
+    "text": "image and apply adjustments that are designed to survive"
+  },
+  {
+    "start": 966.89,
+    "end": 972.41,
+    "text": "printing, large-format display, and editorial use. The"
+  },
+  {
+    "start": 972.41,
+    "end": 974.59,
+    "text": "differences include:"
+  },
+  {
+    "start": 974.59,
+    "end": 976.56,
+    "text": "- Grain quality."
+  },
+  {
+    "start": 976.56,
+    "end": 981,
+    "text": "Film emulation uses organic, luminance-based grain with"
+  },
+  {
+    "start": 981,
+    "end": 986.62,
+    "text": "irregular distribution. Instagram uses simplified noise"
+  },
+  {
+    "start": 986.62,
+    "end": 990.22,
+    "text": "overlays that read as digital, not analog."
+  },
+  {
+    "start": 990.22,
+    "end": 992.26,
+    "text": "- Color precision."
+  },
+  {
+    "start": 992.26,
+    "end": 996.17,
+    "text": "Film emulation applies per-channel, per-zone color"
+  },
+  {
+    "start": 996.17,
+    "end": 1001.54,
+    "text": "adjustments. Filters apply a single color transformation"
+  },
+  {
+    "start": 1001.54,
+    "end": 1003.51,
+    "text": "uniformly."
+  },
+  {
+    "start": 1003.51,
+    "end": 1005.53,
+    "text": "- Shadow handling."
+  },
+  {
+    "start": 1005.53,
+    "end": 1009.61,
+    "text": "Film emulation lifts the black point with a tinted cast."
+  },
+  {
+    "start": 1009.61,
+    "end": 1013.98,
+    "text": "Filters typically crush blacks or push shadows a single color."
+  },
+  {
+    "start": 1013.98,
+    "end": 1016.57,
+    "text": "- Resolution preservation."
+  },
+  {
+    "start": 1016.57,
+    "end": 1020.74,
+    "text": "Good emulation tools preserve sharpness and detail at full"
+  },
+  {
+    "start": 1020.74,
+    "end": 1026.12,
+    "text": "resolution. In-app filters often apply processing at a"
+  },
+  {
+    "start": 1026.12,
+    "end": 1030.42,
+    "text": "reduced resolution then upscale, introducing compression"
+  },
+  {
+    "start": 1030.42,
+    "end": 1032.26,
+    "text": "artifacts."
+  },
+  {
+    "start": 1032.26,
+    "end": 1034.42,
+    "text": "- Intentionality."
+  },
+  {
+    "start": 1034.42,
+    "end": 1038.7,
+    "text": "Film emulation gives you adjustable parameters you control."
+  },
+  {
+    "start": 1038.7,
+    "end": 1043.06,
+    "text": "Filters give you a binary on/off choice with no ability to"
+  },
+  {
+    "start": 1043.06,
+    "end": 1046.09,
+    "text": "adapt the look to the specific image."
+  },
+  {
+    "start": 1046.09,
+    "end": 1050.19,
+    "text": "The visual gap between a well-applied film emulation and an"
+  },
+  {
+    "start": 1050.19,
+    "end": 1054.78,
+    "text": "Instagram filter is immediately obvious to anyone who has spent"
+  },
+  {
+    "start": 1054.78,
+    "end": 1060.42,
+    "text": "time looking at actual film photographs. One reads as genuine."
+  },
+  {
+    "start": 1060.42,
+    "end": 1065.84,
+    "text": "The other reads as processed. If the goal is to get film effect"
+  },
+  {
+    "start": 1065.84,
+    "end": 1070.04,
+    "text": "photos that look real rather than filtered, emulation tools"
+  },
+  {
+    "start": 1070.04,
+    "end": 1072.22,
+    "text": "are the only path."
+  },
+  {
+    "start": 1072.22,
+    "end": 1076.54,
+    "text": "## 7 tips for natural-looking film effects"
+  },
+  {
+    "start": 1076.54,
+    "end": 1080.53,
+    "text": "The most common mistake when applying film effects is using"
+  },
+  {
+    "start": 1080.53,
+    "end": 1085.3,
+    "text": "too much of everything. The goal is to make the viewer think"
+  },
+  {
+    "start": 1085.3,
+    "end": 1089.43,
+    "text": "the photo was shot on film, not to make the photo look like"
+  },
+  {
+    "start": 1089.43,
+    "end": 1094.11,
+    "text": "it was edited on an app. Here are the techniques that"
+  },
+  {
+    "start": 1094.11,
+    "end": 1098.12,
+    "text": "professional photographers use to keep film effects looking"
+  },
+  {
+    "start": 1098.12,
+    "end": 1099.92,
+    "text": "authentic."
+  },
+  {
+    "start": 1099.92,
+    "end": 1102.63,
+    "text": "- Match the stock to the subject."
+  },
+  {
+    "start": 1102.63,
+    "end": 1107.89,
+    "text": "Portra on portraits, HP5 for moody street work, Superia for"
+  },
+  {
+    "start": 1107.89,
+    "end": 1112.4,
+    "text": "urban-green environments, Ektar for saturated landscape color."
+  },
+  {
+    "start": 1112.4,
+    "end": 1116.55,
+    "text": "Using the wrong stock for the subject reads as random rather"
+  },
+  {
+    "start": 1116.55,
+    "end": 1118.59,
+    "text": "than intentional."
+  },
+  {
+    "start": 1118.59,
+    "end": 1121.42,
+    "text": "- Reduce grain on clean subjects."
+  },
+  {
+    "start": 1121.42,
+    "end": 1125.6,
+    "text": "Heavy grain on a smooth sky or a clean background wall looks"
+  },
+  {
+    "start": 1125.6,
+    "end": 1130.98,
+    "text": "applied. Real film grain reads most convincingly in textured"
+  },
+  {
+    "start": 1130.98,
+    "end": 1137.1,
+    "text": "subjects- skin, fabric, stone, foliage. Dial grain back when"
+  },
+  {
+    "start": 1137.1,
+    "end": 1139.59,
+    "text": "your backgrounds are minimal."
+  },
+  {
+    "start": 1139.59,
+    "end": 1141.73,
+    "text": "- Keep vignette subtle."
+  },
+  {
+    "start": 1141.73,
+    "end": 1145.59,
+    "text": "Set the vignette so you can just barely perceive it at the"
+  },
+  {
+    "start": 1145.59,
+    "end": 1150.7,
+    "text": "corners. If you can clearly see the dark corners when looking"
+  },
+  {
+    "start": 1150.7,
+    "end": 1153.73,
+    "text": "at the full image, it is too strong."
+  },
+  {
+    "start": 1153.73,
+    "end": 1156.9,
+    "text": "- Use light leaks sparingly- or not at all."
+  },
+  {
+    "start": 1156.9,
+    "end": 1161.02,
+    "text": "Light leaks are the most recognizable tell that a photo has"
+  },
+  {
+    "start": 1161.02,
+    "end": 1166.09,
+    "text": "been processed. They work on some images and ruin others."
+  },
+  {
+    "start": 1166.09,
+    "end": 1171.1,
+    "text": "When in doubt, leave them out. The color grading and grain"
+  },
+  {
+    "start": 1171.1,
+    "end": 1174.66,
+    "text": "alone create a convincing film look without them."
+  },
+  {
+    "start": 1174.66,
+    "end": 1177.87,
+    "text": "- Slightly underexpose your source image."
+  },
+  {
+    "start": 1177.87,
+    "end": 1181.95,
+    "text": "Film tends to be shot with more intentional exposure than"
+  },
+  {
+    "start": 1181.95,
+    "end": 1188.41,
+    "text": "digital. A source image that is 0.3 to 0.5 stops darker than"
+  },
+  {
+    "start": 1188.41,
+    "end": 1192.46,
+    "text": "what an automatic meter would choose often responds better"
+  },
+  {
+    "start": 1192.46,
+    "end": 1196.33,
+    "text": "to film emulation- the shadows have more character and the"
+  },
+  {
+    "start": 1196.33,
+    "end": 1198.58,
+    "text": "highlights do not clip."
+  },
+  {
+    "start": 1198.58,
+    "end": 1201.75,
+    "text": "- Apply the same preset consistently."
+  },
+  {
+    "start": 1201.75,
+    "end": 1205.59,
+    "text": "A series of portraits processed with three different film"
+  },
+  {
+    "start": 1205.59,
+    "end": 1210.7,
+    "text": "looks reads as indecisive editing. Pick one stock per"
+  },
+  {
+    "start": 1210.7,
+    "end": 1216.1,
+    "text": "session or series and apply it consistently. Consistency"
+  },
+  {
+    "start": 1216.1,
+    "end": 1219.58,
+    "text": "is the hallmark of intentional creative work."
+  },
+  {
+    "start": 1219.58,
+    "end": 1222.44,
+    "text": "- Compress after applying effects."
+  },
+  {
+    "start": 1222.44,
+    "end": 1226.28,
+    "text": "Film grain adds file size because it increases image"
+  },
+  {
+    "start": 1226.28,
+    "end": 1232.11,
+    "text": "complexity. After applying film effects with Film Filters, run"
+  },
+  {
+    "start": 1232.11,
+    "end": 1234.2,
+    "text": "the result through"
+  },
+  {
+    "start": 1234.2,
+    "end": 1236.65,
+    "text": "SammaPix Compress"
+  },
+  {
+    "start": 1236.65,
+    "end": 1240.75,
+    "text": "to optimize the file size for web or email- without losing"
+  },
+  {
+    "start": 1240.75,
+    "end": 1243.85,
+    "text": "the grain quality that makes the look work."
+  },
+  {
+    "start": 1243.85,
+    "end": 1248,
+    "text": "## Before you share: clean up your metadata"
+  },
+  {
+    "start": 1248,
+    "end": 1252.32,
+    "text": "One thing most photographers overlook: when you share a photo"
+  },
+  {
+    "start": 1252.32,
+    "end": 1258.8,
+    "text": "publicly, the EXIF metadata travels with it. This includes GPS"
+  },
+  {
+    "start": 1258.8,
+    "end": 1263.46,
+    "text": "coordinates, the exact timestamp the photo was taken, your camera"
+  },
+  {
+    "start": 1263.46,
+    "end": 1269.07,
+    "text": "model, and sometimes lens and aperture data. For casual sharing"
+  },
+  {
+    "start": 1269.07,
+    "end": 1273.49,
+    "text": "this is usually fine, but for photos taken at your home or in"
+  },
+  {
+    "start": 1273.49,
+    "end": 1277.98,
+    "text": "sensitive locations, stripping the location data before posting"
+  },
+  {
+    "start": 1277.98,
+    "end": 1279.97,
+    "text": "is a good habit."
+  },
+  {
+    "start": 1279.97,
+    "end": 1282.51,
+    "text": "SammaPix EXIF tool"
+  },
+  {
+    "start": 1282.51,
+    "end": 1286.74,
+    "text": "lets you view and remove EXIF data in-browser- no upload"
+  },
+  {
+    "start": 1286.74,
+    "end": 1292.14,
+    "text": "required. You can also use it to verify that the film effect"
+  },
+  {
+    "start": 1292.14,
+    "end": 1296.22,
+    "text": "processing preserved your original metadata or check the"
+  },
+  {
+    "start": 1296.22,
+    "end": 1300.2,
+    "text": "technical details embedded in any photo you receive."
+  },
+  {
+    "start": 1300.2,
+    "end": 1302.89,
+    "text": "## FAQ"
+  },
+  {
+    "start": 1302.89,
+    "end": 1308.62,
+    "text": "### Can I get film effect photos for free without any app or software?"
+  },
+  {
+    "start": 1308.62,
+    "end": 1314.53,
+    "text": "Yes. SammaPix Film Filters runs entirely in your browser with no"
+  },
+  {
+    "start": 1314.53,
+    "end": 1320.22,
+    "text": "download, no account, and no payment required. Open the tool,"
+  },
+  {
+    "start": 1320.22,
+    "end": 1325.83,
+    "text": "drop your photo, select a preset, and download. The entire"
+  },
+  {
+    "start": 1325.83,
+    "end": 1329.53,
+    "text": "process is free and runs locally on your device."
+  },
+  {
+    "start": 1329.53,
+    "end": 1334.66,
+    "text": "### What is the best film stock to emulate for portraits?"
+  },
+  {
+    "start": 1334.66,
+    "end": 1339.06,
+    "text": "Kodak Portra 400 is the gold standard for portrait film"
+  },
+  {
+    "start": 1339.06,
+    "end": 1344.62,
+    "text": "emulation. Its warm, flattering skin tone rendering and fine"
+  },
+  {
+    "start": 1344.62,
+    "end": 1348.82,
+    "text": "grain make it the first choice for portrait photographers both"
+  },
+  {
+    "start": 1348.82,
+    "end": 1354.78,
+    "text": "in analog and digital emulation. For a cooler, more editorial"
+  },
+  {
+    "start": 1354.78,
+    "end": 1360.18,
+    "text": "portrait look, Fuji Superia 400 or Fuji 400H are excellent"
+  },
+  {
+    "start": 1360.18,
+    "end": 1362.12,
+    "text": "alternatives."
+  },
+  {
+    "start": 1362.12,
+    "end": 1366.8,
+    "text": "### Does adding film grain increase file size?"
+  },
+  {
+    "start": 1366.8,
+    "end": 1372.39,
+    "text": "Yes. JPEG compression works by reducing redundant pixel"
+  },
+  {
+    "start": 1372.39,
+    "end": 1378.13,
+    "text": "information. Grain adds complex texture across the entire image,"
+  },
+  {
+    "start": 1378.13,
+    "end": 1382.45,
+    "text": "which increases file size because more pixel variation means"
+  },
+  {
+    "start": 1382.45,
+    "end": 1388.04,
+    "text": "less compression is possible. For web use, run your film-effect"
+  },
+  {
+    "start": 1388.04,
+    "end": 1392.1,
+    "text": "photo through a compression tool after applying the effect to"
+  },
+  {
+    "start": 1392.1,
+    "end": 1396.2,
+    "text": "recover file size without losing visible grain quality."
+  },
+  {
+    "start": 1396.2,
+    "end": 1401.72,
+    "text": "### Is film emulation different from a VSCO or Lightroom preset?"
+  },
+  {
+    "start": 1401.72,
+    "end": 1406.16,
+    "text": "VSCO and Lightroom presets can be high-quality film emulation"
+  },
+  {
+    "start": 1406.16,
+    "end": 1410.53,
+    "text": "tools - VSCO in particular is well-regarded for its analog"
+  },
+  {
+    "start": 1410.53,
+    "end": 1416.24,
+    "text": "presets. The difference is access and cost: VSCO requires a"
+  },
+  {
+    "start": 1416.24,
+    "end": 1420.63,
+    "text": "subscription and a smartphone, Lightroom requires a Creative"
+  },
+  {
+    "start": 1420.63,
+    "end": 1426.27,
+    "text": "Cloud subscription. Browser-based tools like Film Filters produce"
+  },
+  {
+    "start": 1426.27,
+    "end": 1430.74,
+    "text": "comparable results with no cost and no software dependency."
+  },
+  {
+    "start": 1430.74,
+    "end": 1435.99,
+    "text": "### Do film effects work on photos taken with a smartphone?"
+  },
+  {
+    "start": 1435.99,
+    "end": 1441.25,
+    "text": "Yes- and often better than you might expect. Modern smartphone"
+  },
+  {
+    "start": 1441.25,
+    "end": 1445.5,
+    "text": "cameras produce images that are technically excellent but can"
+  },
+  {
+    "start": 1445.5,
+    "end": 1450.9,
+    "text": "feel overly clean and processed. Film emulation addresses"
+  },
+  {
+    "start": 1450.9,
+    "end": 1455.43,
+    "text": "exactly this: it adds the organic imperfection and warmth that"
+  },
+  {
+    "start": 1455.43,
+    "end": 1461.12,
+    "text": "computational photography removes. Portrait mode photos from an"
+  },
+  {
+    "start": 1461.12,
+    "end": 1465.68,
+    "text": "iPhone often respond particularly well to Portra emulation"
+  },
+  {
+    "start": 1465.68,
+    "end": 1469.93,
+    "text": "because the subject separation and skin tone rendering are"
+  },
+  {
+    "start": 1469.93,
+    "end": 1471.97,
+    "text": "already strong."
+  }
+]

@@ -1,0 +1,797 @@
+[
+  {
+    "start": 0,
+    "end": 4.54,
+    "text": "## Your iPhone is quietly mapping every photo you take"
+  },
+  {
+    "start": 4.54,
+    "end": 10.44,
+    "text": "Open any photo on your iPhone and tap the info icon (i). Scroll"
+  },
+  {
+    "start": 10.44,
+    "end": 15.77,
+    "text": "down and you will see a small map with a pin. That pin is the"
+  },
+  {
+    "start": 15.77,
+    "end": 20.21,
+    "text": "exact GPS location where the photo was taken- latitude and"
+  },
+  {
+    "start": 20.21,
+    "end": 23.81,
+    "text": "longitude, accurate to within a few meters."
+  },
+  {
+    "start": 23.81,
+    "end": 29.95,
+    "text": "This data is stored in the EXIF metadata of the image file. EXIF"
+  },
+  {
+    "start": 29.95,
+    "end": 34.27,
+    "text": "(Exchangeable Image File Format) is a standard that embeds"
+  },
+  {
+    "start": 34.27,
+    "end": 38.74,
+    "text": "technical information directly inside the photo: camera settings,"
+  },
+  {
+    "start": 38.74,
+    "end": 43.42,
+    "text": "timestamp, device model, and- when location services are enabled"
+  },
+  {
+    "start": 43.42,
+    "end": 48.86,
+    "text": "- precise GPS coordinates. On an iPhone, this happens"
+  },
+  {
+    "start": 48.86,
+    "end": 53.23,
+    "text": "automatically for every shot taken with the default Camera app."
+  },
+  {
+    "start": 53.23,
+    "end": 58.54,
+    "text": "Most people never look at this data. But if you have been taking"
+  },
+  {
+    "start": 58.54,
+    "end": 63.17,
+    "text": "photos for years, you are sitting on a detailed geographic record"
+  },
+  {
+    "start": 63.17,
+    "end": 68.54,
+    "text": "of everywhere you have been. The right tool can turn that invisible"
+  },
+  {
+    "start": 68.54,
+    "end": 72.38,
+    "text": "metadata into a visual travel map in seconds."
+  },
+  {
+    "start": 72.38,
+    "end": 77.04,
+    "text": "## How GPS EXIF data works in iPhone photos"
+  },
+  {
+    "start": 77.04,
+    "end": 81.34,
+    "text": "When you press the shutter on your iPhone, the Camera app records"
+  },
+  {
+    "start": 81.34,
+    "end": 86.04,
+    "text": "several GPS-related EXIF fields alongside the image data:"
+  },
+  {
+    "start": 86.04,
+    "end": 92.06,
+    "text": "- GPSLatitude / GPSLongitude- the precise capture location as decimal degrees"
+  },
+  {
+    "start": 92.06,
+    "end": 95.98,
+    "text": "- GPSAltitude- elevation at the time of capture"
+  },
+  {
+    "start": 95.98,
+    "end": 101.09,
+    "text": "- GPSDateStamp / GPSTimeStamp- UTC date and time of the shot"
+  },
+  {
+    "start": 101.09,
+    "end": 105.89,
+    "text": "- GPSImgDirection- the compass direction the camera was pointed"
+  },
+  {
+    "start": 105.89,
+    "end": 110.93,
+    "text": "This data is embedded at the binary level in the JPEG or HEIC file"
+  },
+  {
+    "start": 110.93,
+    "end": 115.42,
+    "text": "and travels with the photo when you copy, export, or share it"
+  },
+  {
+    "start": 115.42,
+    "end": 121.01,
+    "text": "(unless an app explicitly strips it). The coordinates are stored in"
+  },
+  {
+    "start": 121.01,
+    "end": 126.12,
+    "text": "DMS (degrees, minutes, seconds) format internally but can be"
+  },
+  {
+    "start": 126.12,
+    "end": 130.85,
+    "text": "converted to decimal degrees, which is what mapping libraries use."
+  },
+  {
+    "start": 130.85,
+    "end": 135.19,
+    "text": "One important note: if you share a photo from your iPhone using"
+  },
+  {
+    "start": 135.19,
+    "end": 141.31,
+    "text": "AirDrop or iCloud, the GPS data is preserved. If you share via"
+  },
+  {
+    "start": 141.31,
+    "end": 146.16,
+    "text": "some messaging apps (WhatsApp, for example), those apps strip EXIF"
+  },
+  {
+    "start": 146.16,
+    "end": 150.58,
+    "text": "metadata before sending- a privacy feature that also removes the"
+  },
+  {
+    "start": 150.58,
+    "end": 152.64,
+    "text": "location data."
+  },
+  {
+    "start": 152.64,
+    "end": 157.87,
+    "text": "### Make sure GPS is enabled for your iPhone camera"
+  },
+  {
+    "start": 157.87,
+    "end": 162.6,
+    "text": "Before any of this works, location services must be enabled for"
+  },
+  {
+    "start": 162.6,
+    "end": 168.29,
+    "text": "the Camera app. This is often turned off after a privacy review or"
+  },
+  {
+    "start": 168.29,
+    "end": 173.28,
+    "text": "iOS update. Here is how to check and enable it:"
+  },
+  {
+    "start": 173.28,
+    "end": 175.9,
+    "text": "- Open Settings on your iPhone"
+  },
+  {
+    "start": 175.9,
+    "end": 179.4,
+    "text": "- Scroll down and tap Privacy & Security"
+  },
+  {
+    "start": 179.4,
+    "end": 181.92,
+    "text": "- Tap Location Services"
+  },
+  {
+    "start": 181.92,
+    "end": 184.82,
+    "text": "- Scroll down to Camera and tap it"
+  },
+  {
+    "start": 184.82,
+    "end": 188.26,
+    "text": "- Set it to While Using the App (not Never)"
+  },
+  {
+    "start": 188.26,
+    "end": 192.55,
+    "text": "Once enabled, every new photo taken with the Camera app will"
+  },
+  {
+    "start": 192.55,
+    "end": 198.74,
+    "text": "include GPS coordinates. Photos taken with location disabled will"
+  },
+  {
+    "start": 198.74,
+    "end": 203.02,
+    "text": "have no GPS data and will not appear as pins on any map."
+  },
+  {
+    "start": 203.02,
+    "end": 207.79,
+    "text": "## How to create a travel photo map from your iPhone photos"
+  },
+  {
+    "start": 207.79,
+    "end": 212.42,
+    "text": "The fastest way to create a travel photo map from iPhone photos is"
+  },
+  {
+    "start": 212.42,
+    "end": 214.78,
+    "text": "SammaPix Photo Map"
+  },
+  {
+    "start": 214.78,
+    "end": 219.14,
+    "text": ". It reads the GPS coordinates directly from your files in the"
+  },
+  {
+    "start": 219.14,
+    "end": 223.13,
+    "text": "browser- nothing is uploaded, nothing leaves your device."
+  },
+  {
+    "start": 223.13,
+    "end": 228.62,
+    "text": "### Step 1 - Export your photos from iPhone to your computer"
+  },
+  {
+    "start": 228.62,
+    "end": 233.28,
+    "text": "Connect your iPhone to your Mac or PC and use Image Capture (Mac)"
+  },
+  {
+    "start": 233.28,
+    "end": 238.7,
+    "text": "or Windows Photos to copy the photos you want to map. Make sure"
+  },
+  {
+    "start": 238.7,
+    "end": 244.06,
+    "text": "you export as JPEG or HEIC- both formats preserve EXIF GPS data."
+  },
+  {
+    "start": 244.06,
+    "end": 247.8,
+    "text": "Avoid exporting via apps that strip metadata."
+  },
+  {
+    "start": 247.8,
+    "end": 252.26,
+    "text": "Alternatively, if your photos are already in iCloud and synced to"
+  },
+  {
+    "start": 252.26,
+    "end": 258.29,
+    "text": "your Mac, just navigate to them in Finder. iCloud Photos preserves"
+  },
+  {
+    "start": 258.29,
+    "end": 260.83,
+    "text": "EXIF data when syncing."
+  },
+  {
+    "start": 260.83,
+    "end": 265.34,
+    "text": "### Step 2 - Open SammaPix Photo Map"
+  },
+  {
+    "start": 265.34,
+    "end": 269.28,
+    "text": "sammapix.com/tools/travelmap"
+  },
+  {
+    "start": 269.28,
+    "end": 275.23,
+    "text": ". No account required, no file size limits, no watermarks. The"
+  },
+  {
+    "start": 275.23,
+    "end": 278.23,
+    "text": "tool runs entirely in your browser."
+  },
+  {
+    "start": 278.23,
+    "end": 283.34,
+    "text": "### Step 3 - Drop your photos onto the map interface"
+  },
+  {
+    "start": 283.34,
+    "end": 287.78,
+    "text": "Drag your photo folder directly onto the drop zone, or click to"
+  },
+  {
+    "start": 287.78,
+    "end": 294.94,
+    "text": "select files. Photo Map processes hundreds of photos at once. As"
+  },
+  {
+    "start": 294.94,
+    "end": 299.83,
+    "text": "each file is read, a pin appears on the map at the GPS coordinates"
+  },
+  {
+    "start": 299.83,
+    "end": 302.76,
+    "text": "stored in its EXIF data."
+  },
+  {
+    "start": 302.76,
+    "end": 307.49,
+    "text": "Photos without GPS data are noted in a counter at the top- useful"
+  },
+  {
+    "start": 307.49,
+    "end": 311.86,
+    "text": "for identifying which shots were taken with location disabled."
+  },
+  {
+    "start": 311.86,
+    "end": 316.13,
+    "text": "### Step 4 - Explore your travel map"
+  },
+  {
+    "start": 316.13,
+    "end": 323.04,
+    "text": "Your iPhone photos contain all the data needed to build a detailed travel map - "
+  },
+  {
+    "start": 323.04,
+    "end": 328.63,
+    "text": "Zoom and pan to explore the map. Click any pin to see the photo"
+  },
+  {
+    "start": 328.63,
+    "end": 334.87,
+    "text": "thumbnail, the exact capture time, and the GPS coordinates. Pins"
+  },
+  {
+    "start": 334.87,
+    "end": 338.98,
+    "text": "cluster automatically when zoomed out- zoom in to separate"
+  },
+  {
+    "start": 338.98,
+    "end": 343.18,
+    "text": "nearby locations. The map uses"
+  },
+  {
+    "start": 343.18,
+    "end": 345.6,
+    "text": "Leaflet.js"
+  },
+  {
+    "start": 345.6,
+    "end": 347.57,
+    "text": "with tiles from"
+  },
+  {
+    "start": 347.57,
+    "end": 349.66,
+    "text": "OpenStreetMap"
+  },
+  {
+    "start": 349.66,
+    "end": 352.27,
+    "text": "- both open-source and free."
+  },
+  {
+    "start": 352.27,
+    "end": 357.91,
+    "text": "Use the date range filter to isolate a specific trip. If you have"
+  },
+  {
+    "start": 357.91,
+    "end": 362.59,
+    "text": "loaded photos from multiple journeys, filtering by date turns the"
+  },
+  {
+    "start": 362.59,
+    "end": 365.93,
+    "text": "full archive into focused per-trip maps."
+  },
+  {
+    "start": 365.93,
+    "end": 370.27,
+    "text": "### Step 5 - Export or share your map"
+  },
+  {
+    "start": 370.27,
+    "end": 375.36,
+    "text": "Export the current map view as a static PNG or JPEG at your chosen"
+  },
+  {
+    "start": 375.36,
+    "end": 381.34,
+    "text": "zoom level. SammaPix Pro users can generate a shareable link that"
+  },
+  {
+    "start": 381.34,
+    "end": 385.06,
+    "text": "lets anyone view the interactive map in their browser."
+  },
+  {
+    "start": 385.06,
+    "end": 392.26,
+    "text": "Travel photos with GPS data enabled become pins on your personal world map - Pho"
+  },
+  {
+    "start": 392.26,
+    "end": 396.17,
+    "text": "## Tips for better travel photo maps"
+  },
+  {
+    "start": 396.17,
+    "end": 400.42,
+    "text": "The quality of your map depends on the quality of the input data."
+  },
+  {
+    "start": 400.42,
+    "end": 403.7,
+    "text": "A few habits make a significant difference."
+  },
+  {
+    "start": 403.7,
+    "end": 406.73,
+    "text": "Always shoot with GPS enabled."
+  },
+  {
+    "start": 406.73,
+    "end": 411.96,
+    "text": "The single most important habit. Check your iPhone location"
+  },
+  {
+    "start": 411.96,
+    "end": 417.94,
+    "text": "settings before every trip. A photo without GPS data is a blank on"
+  },
+  {
+    "start": 417.94,
+    "end": 421.49,
+    "text": "your map that cannot be recovered after the fact."
+  },
+  {
+    "start": 421.49,
+    "end": 424.01,
+    "text": "Map one trip at a time."
+  },
+  {
+    "start": 424.01,
+    "end": 430.03,
+    "text": "A map of 5,000 photos from 10 years of travel looks like noise. A"
+  },
+  {
+    "start": 430.03,
+    "end": 436.32,
+    "text": "map of 200 photos from a focused week in Japan tells a story. Use"
+  },
+  {
+    "start": 436.32,
+    "end": 440.62,
+    "text": "the date filter or pre-sort your photos before dropping them into"
+  },
+  {
+    "start": 440.62,
+    "end": 442.46,
+    "text": "Photo Map."
+  },
+  {
+    "start": 442.46,
+    "end": 445.37,
+    "text": "Sort by location before mapping."
+  },
+  {
+    "start": 445.37,
+    "end": 449.54,
+    "text": "If you want to separate photos by city or region before"
+  },
+  {
+    "start": 449.54,
+    "end": 451.73,
+    "text": "visualizing them,"
+  },
+  {
+    "start": 451.73,
+    "end": 454.54,
+    "text": "SammaPix Sort by Location"
+  },
+  {
+    "start": 454.54,
+    "end": 460.7,
+    "text": "automatically groups photos into folders by GPS proximity. Run"
+  },
+  {
+    "start": 460.7,
+    "end": 465.74,
+    "text": "Sort by Location first, then map each folder individually for clean,"
+  },
+  {
+    "start": 465.74,
+    "end": 467.95,
+    "text": "focused results."
+  },
+  {
+    "start": 467.95,
+    "end": 471.67,
+    "text": "Check GPS accuracy near buildings and tunnels."
+  },
+  {
+    "start": 471.67,
+    "end": 476.59,
+    "text": "GPS accuracy on iPhones is excellent outdoors but degrades in"
+  },
+  {
+    "start": 476.59,
+    "end": 482.47,
+    "text": "dense urban canyons, underground, or indoors. Photos taken"
+  },
+  {
+    "start": 482.47,
+    "end": 487.18,
+    "text": "underground (metro stations, tunnels) may have inaccurate"
+  },
+  {
+    "start": 487.18,
+    "end": 493.39,
+    "text": "coordinates, or none at all. This is a hardware limitation of GPS"
+  },
+  {
+    "start": 493.39,
+    "end": 496.34,
+    "text": "technology, not a tool issue."
+  },
+  {
+    "start": 496.34,
+    "end": 501.07,
+    "text": "## The privacy angle: who can see your GPS data"
+  },
+  {
+    "start": 501.07,
+    "end": 505.82,
+    "text": "GPS metadata embedded in photos is invisible to the eye but"
+  },
+  {
+    "start": 505.82,
+    "end": 511.46,
+    "text": "readable by anyone with the file. If you share a photo taken at"
+  },
+  {
+    "start": 511.46,
+    "end": 515.76,
+    "text": "your home and it retains GPS data, you have shared your home"
+  },
+  {
+    "start": 515.76,
+    "end": 520.46,
+    "text": "address. Most people do not think about this."
+  },
+  {
+    "start": 520.46,
+    "end": 525.02,
+    "text": "SammaPix Photo Map processes all coordinates locally in your"
+  },
+  {
+    "start": 525.02,
+    "end": 532.03,
+    "text": "browser. No photo data is transmitted to any server. This lets you"
+  },
+  {
+    "start": 532.03,
+    "end": 536.35,
+    "text": "explore your location history safely- and also makes it clear"
+  },
+  {
+    "start": 536.35,
+    "end": 540.94,
+    "text": "exactly how much GPS data your photos carry before you share them"
+  },
+  {
+    "start": 540.94,
+    "end": 542.64,
+    "text": "publicly."
+  },
+  {
+    "start": 542.64,
+    "end": 547.18,
+    "text": "When you are ready to share photos online, use the SammaPix EXIF"
+  },
+  {
+    "start": 547.18,
+    "end": 553.3,
+    "text": "Remover to strip all GPS metadata from the files. The image itself"
+  },
+  {
+    "start": 553.3,
+    "end": 557.42,
+    "text": "is unchanged- only the invisible metadata is removed."
+  },
+  {
+    "start": 557.42,
+    "end": 560.11,
+    "text": "## FAQ"
+  },
+  {
+    "start": 560.11,
+    "end": 565.1,
+    "text": "### Do iPhone photos always include GPS data?"
+  },
+  {
+    "start": 565.1,
+    "end": 570.72,
+    "text": "Only if location services are enabled for the Camera app. If you"
+  },
+  {
+    "start": 570.72,
+    "end": 575.9,
+    "text": "or a previous iOS update disabled location access for Camera, your"
+  },
+  {
+    "start": 575.9,
+    "end": 581.69,
+    "text": "photos will not have GPS EXIF data. Check Settings → Privacy"
+  },
+  {
+    "start": 581.69,
+    "end": 585.74,
+    "text": "& Security → Location Services → Camera and set it"
+  },
+  {
+    "start": 585.74,
+    "end": 588.05,
+    "text": "to While Using the App."
+  },
+  {
+    "start": 588.05,
+    "end": 593.83,
+    "text": "### Does this work with photos from Android phones or digital cameras?"
+  },
+  {
+    "start": 593.83,
+    "end": 601.08,
+    "text": "Yes. The EXIF GPS standard is the same across devices. Android"
+  },
+  {
+    "start": 601.08,
+    "end": 605.66,
+    "text": "phones with location enabled embed GPS data in the same EXIF"
+  },
+  {
+    "start": 605.66,
+    "end": 611.93,
+    "text": "fields. Modern mirrorless and DSLR cameras with built-in GPS or"
+  },
+  {
+    "start": 611.93,
+    "end": 616.51,
+    "text": "paired smartphone geotagging also embed compatible coordinates."
+  },
+  {
+    "start": 616.51,
+    "end": 622.25,
+    "text": "SammaPix Photo Map reads EXIF GPS data from any JPEG or HEIC file,"
+  },
+  {
+    "start": 622.25,
+    "end": 625.54,
+    "text": "regardless of which device took the photo."
+  },
+  {
+    "start": 625.54,
+    "end": 630.89,
+    "text": "### Are my photos or GPS coordinates sent to any server?"
+  },
+  {
+    "start": 630.89,
+    "end": 637.03,
+    "text": "No. SammaPix Photo Map reads EXIF data entirely within your"
+  },
+  {
+    "start": 637.03,
+    "end": 642.74,
+    "text": "browser using the FileReader API. Your photos never leave your"
+  },
+  {
+    "start": 642.74,
+    "end": 648.62,
+    "text": "device. The only external requests are for map tiles (the visual"
+  },
+  {
+    "start": 648.62,
+    "end": 652.97,
+    "text": "map layer), which come from an open-source tile provider and"
+  },
+  {
+    "start": 652.97,
+    "end": 657.02,
+    "text": "contain only the area coordinates of the map view you are"
+  },
+  {
+    "start": 657.02,
+    "end": 659.81,
+    "text": "looking at- not your photo data."
+  },
+  {
+    "start": 659.81,
+    "end": 664.32,
+    "text": "### What if some photos are missing from the map?"
+  },
+  {
+    "start": 664.32,
+    "end": 670.51,
+    "text": "Photos without GPS data will not appear as pins. Photo Map shows a"
+  },
+  {
+    "start": 670.51,
+    "end": 675.26,
+    "text": "count of how many photos were loaded vs. how many had valid GPS"
+  },
+  {
+    "start": 675.26,
+    "end": 681.46,
+    "text": "coordinates. Common reasons for missing GPS: location was disabled"
+  },
+  {
+    "start": 681.46,
+    "end": 685.92,
+    "text": "at capture time, the photo was exported through an app that strips"
+  },
+  {
+    "start": 685.92,
+    "end": 690.74,
+    "text": "EXIF (some messengers do this), or the photo is a screenshot (which"
+  },
+  {
+    "start": 690.74,
+    "end": 693.38,
+    "text": "never has GPS data)."
+  },
+  {
+    "start": 693.38,
+    "end": 698.81,
+    "text": "### Can I use this to map a whole year of iPhone photos at once?"
+  },
+  {
+    "start": 698.81,
+    "end": 705.89,
+    "text": "Yes. Photo Map handles large batches efficiently. For best results"
+  },
+  {
+    "start": 705.89,
+    "end": 710.59,
+    "text": "with a large archive, use the date filter after loading to explore"
+  },
+  {
+    "start": 710.59,
+    "end": 716.21,
+    "text": "individual trips rather than viewing everything at once. You can"
+  },
+  {
+    "start": 716.21,
+    "end": 719.14,
+    "text": "also pre-organize photos using"
+  },
+  {
+    "start": 719.14,
+    "end": 721.42,
+    "text": "Sort by Location"
+  },
+  {
+    "start": 721.42,
+    "end": 724.85,
+    "text": "to separate them by location before mapping."
+  }
+]

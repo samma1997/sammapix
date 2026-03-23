@@ -1,0 +1,317 @@
+[
+  {
+    "start": 0,
+    "end": 4.44,
+    "text": "## Why your image format choice matters more than you think"
+  },
+  {
+    "start": 4.44,
+    "end": 27.31,
+    "text": "Images are the single largest contributor to page weight on most websites. Accor"
+  },
+  {
+    "start": 27.31,
+    "end": 51.12,
+    "text": "This is not a theoretical concern. Google's Core Web Vitals program, which direc"
+  },
+  {
+    "start": 51.12,
+    "end": 76.37,
+    "text": "In 2026, you have more format choices than ever. JPEG and PNG have been the defa"
+  },
+  {
+    "start": 76.37,
+    "end": 80.9,
+    "text": "## JPEG: the veteran format that still works"
+  },
+  {
+    "start": 80.9,
+    "end": 104.02,
+    "text": "JPEG (Joint Photographic Experts Group) was introduced in 1992 and remains one o"
+  },
+  {
+    "start": 104.02,
+    "end": 130.46,
+    "text": "JPEG's quality setting is the primary lever. At quality 85, most photos are visu"
+  },
+  {
+    "start": 130.46,
+    "end": 134.06,
+    "text": "### JPEG strengths"
+  },
+  {
+    "start": 134.06,
+    "end": 137.93,
+    "text": "### JPEG limitations"
+  },
+  {
+    "start": 137.93,
+    "end": 157.78,
+    "text": "Best use cases for JPEG in 2026: email attachments, print workflows, legacy CMS "
+  },
+  {
+    "start": 157.78,
+    "end": 162.5,
+    "text": "## PNG: lossless quality with transparency"
+  },
+  {
+    "start": 162.5,
+    "end": 184.66,
+    "text": "PNG (Portable Network Graphics) was created in 1996 as an open-source, patent-fr"
+  },
+  {
+    "start": 184.66,
+    "end": 207.89,
+    "text": "PNG uses DEFLATE compression (a combination of LZ77 and Huffman coding) which is"
+  },
+  {
+    "start": 207.89,
+    "end": 236.57,
+    "text": "PNG-8 vs PNG-24: PNG-8 stores images with a palette of up to 256 colors (like GI"
+  },
+  {
+    "start": 236.57,
+    "end": 239.42,
+    "text": "When PNG is the right choice"
+  },
+  {
+    "start": 239.42,
+    "end": 262.15,
+    "text": "The main limitation of PNG for web use is file size. A full-resolution photograp"
+  },
+  {
+    "start": 262.15,
+    "end": 267.48,
+    "text": "## WebP: the pragmatic default for web in 2026"
+  },
+  {
+    "start": 267.48,
+    "end": 290.28,
+    "text": "WebP was developed by Google and first released in 2010, built on the VP8 video "
+  },
+  {
+    "start": 290.28,
+    "end": 313.61,
+    "text": "The compression advantage is consistent and significant. In Google's published W"
+  },
+  {
+    "start": 313.61,
+    "end": 318.89,
+    "text": "Modern web development workflows in 2026 default to WebP for all"
+  },
+  {
+    "start": 318.89,
+    "end": 323.18,
+    "text": "image delivery - Photo by Domenico Loia on Unsplash"
+  },
+  {
+    "start": 323.18,
+    "end": 328.06,
+    "text": "### WebP browser support in 2026"
+  },
+  {
+    "start": 328.06,
+    "end": 347.21,
+    "text": "WebP now has over 98% global browser support according to Can I Use . Safari add"
+  },
+  {
+    "start": 347.21,
+    "end": 349.49,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 349.49,
+    "end": 364.66,
+    "text": "You can convert any JPEG or PNG to WebP directly in your browser using SammaPix'"
+  },
+  {
+    "start": 364.66,
+    "end": 369.89,
+    "text": "## AVIF: the next-generation format gaining ground fast"
+  },
+  {
+    "start": 369.89,
+    "end": 390.12,
+    "text": "AVIF (AV1 Image File Format) is the still-image format derived from the AV1 vide"
+  },
+  {
+    "start": 390.12,
+    "end": 413.16,
+    "text": "The compression gains over WebP are substantial. Independent benchmarks consiste"
+  },
+  {
+    "start": 413.16,
+    "end": 433.8,
+    "text": "AVIF also introduces capabilities no previous web format offered. It supports HD"
+  },
+  {
+    "start": 433.8,
+    "end": 438.6,
+    "text": "### AVIF browser support in 2026"
+  },
+  {
+    "start": 438.6,
+    "end": 462.89,
+    "text": "AVIF browser support has reached approximately 92–93% globally in 2026, accordin"
+  },
+  {
+    "start": 462.89,
+    "end": 466.87,
+    "text": "Recommended AVIF + WebP serving pattern"
+  },
+  {
+    "start": 466.87,
+    "end": 477.43,
+    "text": "Browsers pick the first format they support. AVIF-capable browsers get the small"
+  },
+  {
+    "start": 477.43,
+    "end": 499.99,
+    "text": "The main practical limitation of AVIF in 2026 is encoding speed. AVIF compressio"
+  },
+  {
+    "start": 499.99,
+    "end": 503.98,
+    "text": "## GIF: still relevant, but barely"
+  },
+  {
+    "start": 503.98,
+    "end": 527.45,
+    "text": "GIF (Graphics Interchange Format) dates to 1987 and remains ubiquitous for anima"
+  },
+  {
+    "start": 527.45,
+    "end": 545.26,
+    "text": "For new content in 2026, animated WebP is the superior choice in almost every wa"
+  },
+  {
+    "start": 545.26,
+    "end": 565.99,
+    "text": "The one case where GIF survives is platform compatibility. Twitter, Discord, Sla"
+  },
+  {
+    "start": 565.99,
+    "end": 571.13,
+    "text": "## SVG: the right answer for a specific class of images"
+  },
+  {
+    "start": 571.13,
+    "end": 588.07,
+    "text": "SVG (Scalable Vector Graphics) is fundamentally different from every other forma"
+  },
+  {
+    "start": 588.07,
+    "end": 614.59,
+    "text": "The practical implication: SVG files scale to any size with zero quality loss. A"
+  },
+  {
+    "start": 614.59,
+    "end": 635.93,
+    "text": "SVG files are also extremely small for appropriate content. A complex logo SVG m"
+  },
+  {
+    "start": 635.93,
+    "end": 639.84,
+    "text": "## Complete format comparison table"
+  },
+  {
+    "start": 639.84,
+    "end": 646.32,
+    "text": "Here is the full side-by-side comparison of all six formats across the metrics t"
+  },
+  {
+    "start": 646.32,
+    "end": 649.39,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 649.39,
+    "end": 654.07,
+    "text": "## How to choose the right format: a decision framework"
+  },
+  {
+    "start": 654.07,
+    "end": 662.81,
+    "text": "Ignore the technical details for a moment. Here is a plain-language flowchart fo"
+  },
+  {
+    "start": 662.81,
+    "end": 665.09,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 665.09,
+    "end": 669,
+    "text": "## Performance impact: real numbers"
+  },
+  {
+    "start": 669,
+    "end": 685.08,
+    "text": "Abstract percentages are useful, but what does a format switch actually mean for"
+  },
+  {
+    "start": 685.08,
+    "end": 687.36,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 687.36,
+    "end": 710.11,
+    "text": "On a page with 10 images, switching from JPEG to WebP saves approximately 900 KB"
+  },
+  {
+    "start": 710.11,
+    "end": 727.61,
+    "text": "For a practical deep dive on compression techniques that work across all formats"
+  },
+  {
+    "start": 727.61,
+    "end": 732.12,
+    "text": "## How to convert between formats with SammaPix"
+  },
+  {
+    "start": 732.12,
+    "end": 744.82,
+    "text": "Converting images between formats does not require software installation or clou"
+  },
+  {
+    "start": 744.82,
+    "end": 747.1,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 747.1,
+    "end": 749.09,
+    "text": "Key takeaways"
+  },
+  {
+    "start": 749.09,
+    "end": 752.62,
+    "text": "## Frequently asked questions"
+  },
+  {
+    "start": 752.62,
+    "end": 754.9,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 754.9,
+    "end": 757.46,
+    "text": "Ready to switch to WebP?"
+  },
+  {
+    "start": 757.46,
+    "end": 765,
+    "text": "Convert your existing JPEG and PNG files to WebP instantly- directly in your bro"
+  },
+  {
+    "start": 765,
+    "end": 767.57,
+    "text": "Convert to WebP- free"
+  },
+  {
+    "start": 767.57,
+    "end": 769.7,
+    "text": "Compress images"
+  }
+]

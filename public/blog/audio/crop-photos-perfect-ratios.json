@@ -1,0 +1,1307 @@
+[
+  {
+    "start": 0,
+    "end": 4.92,
+    "text": "## What is an aspect ratio and why does it matter for cropping?"
+  },
+  {
+    "start": 4.92,
+    "end": 7.15,
+    "text": "aspect ratio"
+  },
+  {
+    "start": 7.15,
+    "end": 11.26,
+    "text": "is the proportional relationship between an image's width"
+  },
+  {
+    "start": 11.26,
+    "end": 15.94,
+    "text": "and height, expressed as two numbers separated by a colon- for"
+  },
+  {
+    "start": 15.94,
+    "end": 25.39,
+    "text": "example 16:9 or 4:3. It describes shape, not size. A 1920x1080"
+  },
+  {
+    "start": 25.39,
+    "end": 31.8,
+    "text": "pixel screen and a 3840x2160 pixel screen share the same 16:9"
+  },
+  {
+    "start": 31.8,
+    "end": 36.46,
+    "text": "aspect ratio even though their resolutions differ by a factor of"
+  },
+  {
+    "start": 36.46,
+    "end": 40.56,
+    "text": "When you crop a photo, you are trimming it to match a specific"
+  },
+  {
+    "start": 40.56,
+    "end": 46.15,
+    "text": "ratio. If the target ratio does not match your original image,"
+  },
+  {
+    "start": 46.15,
+    "end": 50.88,
+    "text": "you will lose part of the frame. The goal is to crop"
+  },
+  {
+    "start": 50.88,
+    "end": 55.08,
+    "text": "intentionally- preserving your subject while satisfying the"
+  },
+  {
+    "start": 55.08,
+    "end": 59.28,
+    "text": "dimension requirements of your destination platform or print"
+  },
+  {
+    "start": 59.28,
+    "end": 63.48,
+    "text": "Getting the crop photo ratio right before you share or send to"
+  },
+  {
+    "start": 63.48,
+    "end": 67.8,
+    "text": "print saves you from platform auto-cropping (which never picks"
+  },
+  {
+    "start": 67.8,
+    "end": 72.1,
+    "text": "the right area of your image), print shop rejections, and the"
+  },
+  {
+    "start": 72.1,
+    "end": 76.42,
+    "text": "visual awkwardness of letterboxed or pillarboxed outputs."
+  },
+  {
+    "start": 76.42,
+    "end": 81.02,
+    "text": "## The six most common aspect ratios explained"
+  },
+  {
+    "start": 81.02,
+    "end": 85.13,
+    "text": "### 1:1 - The square"
+  },
+  {
+    "start": 85.13,
+    "end": 90.77,
+    "text": "Equal width and height. Instagram popularized the square format"
+  },
+  {
+    "start": 90.77,
+    "end": 94.58,
+    "text": "when it launched, and while the platform now supports other"
+  },
+  {
+    "start": 94.58,
+    "end": 99.48,
+    "text": "ratios, 1:1 remains the safest choice for feed posts because it"
+  },
+  {
+    "start": 99.48,
+    "end": 103.75,
+    "text": "occupies the maximum grid real estate without being cropped in"
+  },
+  {
+    "start": 103.75,
+    "end": 105.58,
+    "text": "thumbnails."
+  },
+  {
+    "start": 105.58,
+    "end": 109.9,
+    "text": "Square crops work best for portraits (face fills the frame"
+  },
+  {
+    "start": 109.9,
+    "end": 114.36,
+    "text": "symmetrically), product shots on white backgrounds, and detail"
+  },
+  {
+    "start": 114.36,
+    "end": 119.09,
+    "text": "shots where the subject is centered. They struggle with"
+  },
+  {
+    "start": 119.09,
+    "end": 123.14,
+    "text": "landscapes and wide architectural shots- avoid forcing a"
+  },
+  {
+    "start": 123.14,
+    "end": 127.46,
+    "text": "horizontal scene into a square unless you have a strong central"
+  },
+  {
+    "start": 127.46,
+    "end": 129.79,
+    "text": "subject to anchor it."
+  },
+  {
+    "start": 129.79,
+    "end": 134.42,
+    "text": "### 4:3 - The classic camera ratio"
+  },
+  {
+    "start": 134.42,
+    "end": 139.63,
+    "text": "Historically the standard for 35mm slide film and early digital"
+  },
+  {
+    "start": 139.63,
+    "end": 144.77,
+    "text": "cameras, 4:3 is slightly wider than square and feels natural for"
+  },
+  {
+    "start": 144.77,
+    "end": 151.2,
+    "text": "most subjects. Modern smartphones often default to 4:3 in Photo"
+  },
+  {
+    "start": 151.2,
+    "end": 156.41,
+    "text": "mode because it matches the sensor's native shape. Standard"
+  },
+  {
+    "start": 156.41,
+    "end": 161.42,
+    "text": "print sizes like 4x3 inches and 8x6 inches use this ratio"
+  },
+  {
+    "start": 161.42,
+    "end": 163.15,
+    "text": "directly."
+  },
+  {
+    "start": 163.15,
+    "end": 168.53,
+    "text": "Use 4:3 for general photography, travel snapshots, food shots,"
+  },
+  {
+    "start": 168.53,
+    "end": 173.83,
+    "text": "and any print destined for a standard photo album. It is"
+  },
+  {
+    "start": 173.83,
+    "end": 178.44,
+    "text": "forgiving on composition because the modest horizontal extension"
+  },
+  {
+    "start": 178.44,
+    "end": 182.57,
+    "text": "beyond square accommodates most scenes without forcing you to"
+  },
+  {
+    "start": 182.57,
+    "end": 186.05,
+    "text": "sacrifice too much of the frame on either side."
+  },
+  {
+    "start": 186.05,
+    "end": 190.78,
+    "text": "### 3:2 - The DSLR standard"
+  },
+  {
+    "start": 190.78,
+    "end": 196.56,
+    "text": "The 3:2 ratio comes from 35mm film photography and is baked into"
+  },
+  {
+    "start": 196.56,
+    "end": 201.24,
+    "text": "virtually every full-frame and crop-sensor DSLR and mirrorless"
+  },
+  {
+    "start": 201.24,
+    "end": 207,
+    "text": "camera. A standard 4x6 inch print- the most common consumer"
+  },
+  {
+    "start": 207,
+    "end": 214.13,
+    "text": "print size globally- is exactly 3:2. So is a 6x4 inch, 12x8"
+  },
+  {
+    "start": 214.13,
+    "end": 217.82,
+    "text": "inch, or any other doubling of those dimensions."
+  },
+  {
+    "start": 217.82,
+    "end": 222.5,
+    "text": "If you shoot with a DSLR or mirrorless camera and plan to print"
+  },
+  {
+    "start": 222.5,
+    "end": 227.3,
+    "text": "4x6 copies, you are already in the right ratio and can print"
+  },
+  {
+    "start": 227.3,
+    "end": 232.73,
+    "text": "with no cropping at all. The ratio is also used for LinkedIn"
+  },
+  {
+    "start": 232.73,
+    "end": 236.09,
+    "text": "post images and some blog header formats."
+  },
+  {
+    "start": 236.09,
+    "end": 240.38,
+    "text": "### 16:9 - Widescreen"
+  },
+  {
+    "start": 240.38,
+    "end": 246.22,
+    "text": "The dominant ratio for video and screens. Every modern television,"
+  },
+  {
+    "start": 246.22,
+    "end": 251.86,
+    "text": "laptop screen, desktop monitor, and YouTube video uses 16:9."
+  },
+  {
+    "start": 251.86,
+    "end": 257.3,
+    "text": "It is also the required ratio for YouTube thumbnails (1280x720"
+  },
+  {
+    "start": 257.3,
+    "end": 262.18,
+    "text": "minimum), Twitter/X link preview cards, Facebook shared link"
+  },
+  {
+    "start": 262.18,
+    "end": 265.8,
+    "text": "images, and LinkedIn article cover photos."
+  },
+  {
+    "start": 265.8,
+    "end": 270.55,
+    "text": "Cropping a portrait or square photo to 16:9 is aggressive- you"
+  },
+  {
+    "start": 270.55,
+    "end": 276.14,
+    "text": "lose a significant portion of the vertical dimension. Plan for"
+  },
+  {
+    "start": 276.14,
+    "end": 280.06,
+    "text": "this when shooting: if you know an image is destined for a"
+  },
+  {
+    "start": 280.06,
+    "end": 284.5,
+    "text": "widescreen crop, compose loosely and avoid placing critical"
+  },
+  {
+    "start": 284.5,
+    "end": 287.98,
+    "text": "elements near the top or bottom of the frame."
+  },
+  {
+    "start": 287.98,
+    "end": 292.63,
+    "text": "### 9:16 - Vertical / Stories"
+  },
+  {
+    "start": 292.63,
+    "end": 297.53,
+    "text": "The portrait orientation of 16:9- and the native format of"
+  },
+  {
+    "start": 297.53,
+    "end": 303.34,
+    "text": "every short-form video platform. Instagram Stories, Instagram"
+  },
+  {
+    "start": 303.34,
+    "end": 308.47,
+    "text": "Reels, TikTok, YouTube Shorts, Facebook Stories, Pinterest Idea"
+  },
+  {
+    "start": 308.47,
+    "end": 316.03,
+    "text": "Pins, and Snapchat all use 9:16. At 1080x1920 pixels, it fills"
+  },
+  {
+    "start": 316.03,
+    "end": 318.89,
+    "text": "a smartphone screen edge to edge."
+  },
+  {
+    "start": 318.89,
+    "end": 323.64,
+    "text": "When cropping a horizontal photo to 9:16, you will lose most of"
+  },
+  {
+    "start": 323.64,
+    "end": 329.02,
+    "text": "the width. The result only works if the primary subject is"
+  },
+  {
+    "start": 329.02,
+    "end": 334.34,
+    "text": "vertically centered in the original frame. A better approach is"
+  },
+  {
+    "start": 334.34,
+    "end": 338.54,
+    "text": "to shoot vertical from the start when you know the destination is"
+  },
+  {
+    "start": 338.54,
+    "end": 342.58,
+    "text": "Stories- or use a tool that lets you place the crop manually"
+  },
+  {
+    "start": 342.58,
+    "end": 345.74,
+    "text": "rather than automatically centering it."
+  },
+  {
+    "start": 345.74,
+    "end": 350.16,
+    "text": "### 5:4 - Portrait and print"
+  },
+  {
+    "start": 350.16,
+    "end": 355.01,
+    "text": "The 5:4 ratio corresponds to the 8x10 inch print- one of the"
+  },
+  {
+    "start": 355.01,
+    "end": 361.08,
+    "text": "most popular portrait print sizes in photography studios. It is"
+  },
+  {
+    "start": 361.08,
+    "end": 365.88,
+    "text": "slightly more square than 4:3, which makes it flattering for"
+  },
+  {
+    "start": 365.88,
+    "end": 369.89,
+    "text": "portrait work and less claustrophobic than a strict square."
+  },
+  {
+    "start": 369.89,
+    "end": 375.14,
+    "text": "Instagram also supports portrait posts at 4:5 (the inverse of"
+  },
+  {
+    "start": 375.14,
+    "end": 379.99,
+    "text": "5:4), which is the tallest ratio the platform allows in feed"
+  },
+  {
+    "start": 379.99,
+    "end": 383.71,
+    "text": "posts and occupies more screen space than a square."
+  },
+  {
+    "start": 383.71,
+    "end": 389.09,
+    "text": "## Aspect ratio reference table: which ratio for which purpose"
+  },
+  {
+    "start": 389.09,
+    "end": 391.37,
+    "text": "Pixels (common)"
+  },
+  {
+    "start": 391.37,
+    "end": 393.79,
+    "text": "Primary use cases"
+  },
+  {
+    "start": 393.79,
+    "end": 395.64,
+    "text": "Print size"
+  },
+  {
+    "start": 395.64,
+    "end": 398.11,
+    "text": "1080×1080"
+  },
+  {
+    "start": 398.11,
+    "end": 402.26,
+    "text": "Instagram grid, Facebook post, profile avatars"
+  },
+  {
+    "start": 402.26,
+    "end": 405.29,
+    "text": "4×4″, 5×5″"
+  },
+  {
+    "start": 405.29,
+    "end": 407.95,
+    "text": "1200×900"
+  },
+  {
+    "start": 407.95,
+    "end": 412.61,
+    "text": "Standard camera output, blog images, presentation slides"
+  },
+  {
+    "start": 412.61,
+    "end": 415.51,
+    "text": "4×3″, 8×6″"
+  },
+  {
+    "start": 415.51,
+    "end": 418.37,
+    "text": "1500×1000"
+  },
+  {
+    "start": 418.37,
+    "end": 422.74,
+    "text": "DSLR native, LinkedIn posts, 4×6 print"
+  },
+  {
+    "start": 422.74,
+    "end": 426.55,
+    "text": "4×6″, 6×9″, 8×12″"
+  },
+  {
+    "start": 426.55,
+    "end": 429.38,
+    "text": "1920×1080"
+  },
+  {
+    "start": 429.38,
+    "end": 434.28,
+    "text": "YouTube thumbnails, Twitter cards, desktop wallpapers, video"
+  },
+  {
+    "start": 434.28,
+    "end": 436.34,
+    "text": "- (screen format)"
+  },
+  {
+    "start": 436.34,
+    "end": 439.1,
+    "text": "1080×1920"
+  },
+  {
+    "start": 439.1,
+    "end": 443.28,
+    "text": "Instagram Stories & Reels, TikTok, YouTube Shorts"
+  },
+  {
+    "start": 443.78,
+    "end": 446.47,
+    "text": "1250×1000"
+  },
+  {
+    "start": 446.47,
+    "end": 451.58,
+    "text": "Instagram portrait posts (4:5), studio portrait prints"
+  },
+  {
+    "start": 451.58,
+    "end": 455.52,
+    "text": "5×4″, 10×8″, 20×16″"
+  },
+  {
+    "start": 455.52,
+    "end": 460.48,
+    "text": "## Print sizes and DPI requirements: what you need to know"
+  },
+  {
+    "start": 460.48,
+    "end": 466.87,
+    "text": "Aspect ratio determines shape. DPI (dots per inch) determines"
+  },
+  {
+    "start": 466.87,
+    "end": 472.15,
+    "text": "print quality. You need both to be correct for a sharp physical"
+  },
+  {
+    "start": 472.15,
+    "end": 475.51,
+    "text": "print. According to"
+  },
+  {
+    "start": 475.51,
+    "end": 477.74,
+    "text": "Photography Life"
+  },
+  {
+    "start": 477.74,
+    "end": 481.58,
+    "text": ", the minimum resolution for a print that looks sharp when"
+  },
+  {
+    "start": 481.58,
+    "end": 489.09,
+    "text": "viewed at normal distances (30–40 cm) is 240 DPI. Professional"
+  },
+  {
+    "start": 489.09,
+    "end": 494.01,
+    "text": "labs typically require 300 DPI at the final print dimensions."
+  },
+  {
+    "start": 494.01,
+    "end": 498.72,
+    "text": "To calculate the minimum pixel dimensions for a given print size"
+  },
+  {
+    "start": 498.72,
+    "end": 504,
+    "text": "at 300 DPI, multiply each dimension in inches by 300:"
+  },
+  {
+    "start": 504,
+    "end": 507.62,
+    "text": "4×6 inch print (3:2 ratio):"
+  },
+  {
+    "start": 507.62,
+    "end": 512.4,
+    "text": "1200×1800 px minimum at 300 DPI"
+  },
+  {
+    "start": 512.4,
+    "end": 517.08,
+    "text": "5×7 inch print (approx 5:7 ratio):"
+  },
+  {
+    "start": 517.08,
+    "end": 522.07,
+    "text": "1500×2100 px minimum at 300 DPI"
+  },
+  {
+    "start": 522.07,
+    "end": 525.69,
+    "text": "8×10 inch print (5:4 ratio):"
+  },
+  {
+    "start": 525.69,
+    "end": 530.64,
+    "text": "2400×3000 px minimum at 300 DPI"
+  },
+  {
+    "start": 530.64,
+    "end": 535.44,
+    "text": "11×14 inch print (approx 11:14 ratio):"
+  },
+  {
+    "start": 535.44,
+    "end": 540.57,
+    "text": "3300×4200 px minimum at 300 DPI"
+  },
+  {
+    "start": 540.57,
+    "end": 544.34,
+    "text": "12×18 inch print (2:3 ratio):"
+  },
+  {
+    "start": 544.34,
+    "end": 549.45,
+    "text": "3600×5400 px minimum at 300 DPI"
+  },
+  {
+    "start": 549.45,
+    "end": 553.96,
+    "text": "A 12-megapixel smartphone camera produces images around"
+  },
+  {
+    "start": 553.96,
+    "end": 559.27,
+    "text": "4000×3000 pixels- enough for a sharp 13×10 inch print at"
+  },
+  {
+    "start": 559.27,
+    "end": 566.4,
+    "text": "300 DPI. Modern cameras at 24–50 megapixels produce images"
+  },
+  {
+    "start": 566.4,
+    "end": 570.88,
+    "text": "that can be printed at 20×13 inches or larger without"
+  },
+  {
+    "start": 570.88,
+    "end": 576.45,
+    "text": "interpolation. The limitation is always the crop: the more you"
+  },
+  {
+    "start": 576.45,
+    "end": 580.89,
+    "text": "crop, the fewer pixels remain, and the smaller the maximum"
+  },
+  {
+    "start": 580.89,
+    "end": 583.84,
+    "text": "print you can make at full quality."
+  },
+  {
+    "start": 583.84,
+    "end": 587.66,
+    "text": "This is why cropping and resizing are connected decisions."
+  },
+  {
+    "start": 587.66,
+    "end": 590.23,
+    "text": "SammaPix ResizePack"
+  },
+  {
+    "start": 590.23,
+    "end": 594.81,
+    "text": "lets you resize images to exact pixel dimensions after cropping,"
+  },
+  {
+    "start": 594.81,
+    "end": 599.06,
+    "text": "so you can verify the final pixel count before sending to a"
+  },
+  {
+    "start": 599.06,
+    "end": 600.88,
+    "text": "print lab."
+  },
+  {
+    "start": 600.88,
+    "end": 605.01,
+    "text": "## Rule of thirds and composition when cropping"
+  },
+  {
+    "start": 605.01,
+    "end": 609.21,
+    "text": "The most technically correct crop can still produce a weak image"
+  },
+  {
+    "start": 609.21,
+    "end": 614.56,
+    "text": "if the composition is off. Cropping is not just a mechanical"
+  },
+  {
+    "start": 614.56,
+    "end": 620.08,
+    "text": "operation- it is a creative one. The crop is your second chance"
+  },
+  {
+    "start": 620.08,
+    "end": 623.88,
+    "text": "to nail the composition you intended when you pressed the"
+  },
+  {
+    "start": 623.88,
+    "end": 625.53,
+    "text": "shutter."
+  },
+  {
+    "start": 625.53,
+    "end": 629.4,
+    "text": "### Apply the rule of thirds"
+  },
+  {
+    "start": 629.4,
+    "end": 634.92,
+    "text": "Divide your crop frame into a 3×3 grid. Place your primary"
+  },
+  {
+    "start": 634.92,
+    "end": 639,
+    "text": "subject at one of the four intersection points of those grid"
+  },
+  {
+    "start": 639,
+    "end": 644.2,
+    "text": "lines rather than dead center. Eyes in portraits should fall on"
+  },
+  {
+    "start": 644.2,
+    "end": 649.46,
+    "text": "the upper horizontal third. A horizon line in a landscape"
+  },
+  {
+    "start": 649.46,
+    "end": 653.32,
+    "text": "should sit on the top or bottom third, not in the middle."
+  },
+  {
+    "start": 653.32,
+    "end": 658.68,
+    "text": "When cropping, use this grid as your anchor. If you are moving"
+  },
+  {
+    "start": 658.68,
+    "end": 663.4,
+    "text": "toward a 1:1 square from a wider shot, shift the crop box so"
+  },
+  {
+    "start": 663.4,
+    "end": 668.92,
+    "text": "the main subject lands on an intersection point. The result will"
+  },
+  {
+    "start": 668.92,
+    "end": 674.56,
+    "text": "feel intentional rather than mechanical. Most photo editing apps"
+  },
+  {
+    "start": 674.56,
+    "end": 678.67,
+    "text": "display a thirds grid overlay when you are in crop mode- use it"
+  },
+  {
+    "start": 678.67,
+    "end": 680.47,
+    "text": "every time."
+  },
+  {
+    "start": 680.47,
+    "end": 683.83,
+    "text": "### Leave breathing room"
+  },
+  {
+    "start": 683.83,
+    "end": 689.25,
+    "text": "A common cropping mistake is cropping too tight. Subjects that"
+  },
+  {
+    "start": 689.25,
+    "end": 693.5,
+    "text": "are pressed against the edges of the frame feel claustrophobic."
+  },
+  {
+    "start": 693.5,
+    "end": 698.16,
+    "text": "As a rule: leave at least 5–10% of empty space around the"
+  },
+  {
+    "start": 698.16,
+    "end": 703.89,
+    "text": "subject on all sides. For portraits, never crop at the joints-"
+  },
+  {
+    "start": 703.89,
+    "end": 709.8,
+    "text": "not at the wrist, elbow, knee, or ankle. Crop between joints"
+  },
+  {
+    "start": 709.8,
+    "end": 711.52,
+    "text": "instead."
+  },
+  {
+    "start": 711.52,
+    "end": 715.27,
+    "text": "### Straighten before you crop"
+  },
+  {
+    "start": 715.27,
+    "end": 719.23,
+    "text": "A tilted horizon is one of the most jarring problems in"
+  },
+  {
+    "start": 719.23,
+    "end": 724.77,
+    "text": "photography. Always check your horizon line before finalizing a"
+  },
+  {
+    "start": 724.77,
+    "end": 730.29,
+    "text": "crop. Most tools let you rotate and crop simultaneously- use"
+  },
+  {
+    "start": 730.29,
+    "end": 735.93,
+    "text": "the rotate function first, then finalize the ratio. Straightening"
+  },
+  {
+    "start": 735.93,
+    "end": 740.35,
+    "text": "after the fact costs you pixels around the edges, so account"
+  },
+  {
+    "start": 740.35,
+    "end": 742.96,
+    "text": "for this in your composition."
+  },
+  {
+    "start": 742.96,
+    "end": 748.77,
+    "text": "## How to batch crop photos to a specific ratio with SammaPix CropRatio"
+  },
+  {
+    "start": 748.77,
+    "end": 754.22,
+    "text": "Cropping one photo manually is straightforward. Cropping fifty"
+  },
+  {
+    "start": 754.22,
+    "end": 758.8,
+    "text": "photos to the same ratio- all with correct compositions, without"
+  },
+  {
+    "start": 758.8,
+    "end": 762.93,
+    "text": "the platform auto-cropping them incorrectly- is tedious and"
+  },
+  {
+    "start": 762.93,
+    "end": 765.76,
+    "text": "error-prone if done one by one."
+  },
+  {
+    "start": 765.76,
+    "end": 767.66,
+    "text": "SammaPix"
+  },
+  {
+    "start": 767.66,
+    "end": 769.6,
+    "text": "CropRatio"
+  },
+  {
+    "start": 769.6,
+    "end": 773.97,
+    "text": "is a browser-based batch cropping tool designed for exactly this"
+  },
+  {
+    "start": 773.97,
+    "end": 777.81,
+    "text": "workflow. Here is how it works:"
+  },
+  {
+    "start": 777.81,
+    "end": 779.92,
+    "text": "Drop your photos"
+  },
+  {
+    "start": 779.92,
+    "end": 785.44,
+    "text": "- drag a folder or individual files into the drop zone. The"
+  },
+  {
+    "start": 785.44,
+    "end": 790.53,
+    "text": "tool accepts JPG, PNG, and WebP with no upload limit."
+  },
+  {
+    "start": 790.53,
+    "end": 793.2,
+    "text": "Select your target ratio"
+  },
+  {
+    "start": 793.2,
+    "end": 802.15,
+    "text": "- choose from presets (1:1, 4:3, 3:2, 16:9, 9:16, 5:4) or"
+  },
+  {
+    "start": 802.15,
+    "end": 805.8,
+    "text": "enter a custom ratio for unusual formats."
+  },
+  {
+    "start": 805.8,
+    "end": 808.08,
+    "text": "Choose crop positioning"
+  },
+  {
+    "start": 808.08,
+    "end": 812.56,
+    "text": "- center, smart-crop to the detected face or subject, or"
+  },
+  {
+    "start": 812.56,
+    "end": 815.85,
+    "text": "define a focal point manually per image."
+  },
+  {
+    "start": 815.85,
+    "end": 818.28,
+    "text": "Preview before export"
+  },
+  {
+    "start": 818.28,
+    "end": 823.46,
+    "text": "- review each crop in the thumbnail grid. Adjust any that look"
+  },
+  {
+    "start": 823.46,
+    "end": 825.81,
+    "text": "off before downloading."
+  },
+  {
+    "start": 825.81,
+    "end": 828.91,
+    "text": "Download individually or as a ZIP"
+  },
+  {
+    "start": 828.91,
+    "end": 834.33,
+    "text": "- all processing happens in your browser. No files are uploaded"
+  },
+  {
+    "start": 834.33,
+    "end": 836.44,
+    "text": "to any server."
+  },
+  {
+    "start": 836.44,
+    "end": 840.6,
+    "text": "The smart crop option is particularly useful for portrait"
+  },
+  {
+    "start": 840.6,
+    "end": 844.53,
+    "text": "batches where you want faces to remain centered in the frame"
+  },
+  {
+    "start": 844.53,
+    "end": 850.08,
+    "text": "regardless of how the original photo was composed. It detects"
+  },
+  {
+    "start": 850.08,
+    "end": 854.56,
+    "text": "face regions and positions the crop box so the face stays within"
+  },
+  {
+    "start": 854.56,
+    "end": 857.11,
+    "text": "the upper third of the output."
+  },
+  {
+    "start": 857.11,
+    "end": 861.14,
+    "text": "After cropping, you can optionally pass your files through"
+  },
+  {
+    "start": 861.14,
+    "end": 863.59,
+    "text": "SammaPix Compress"
+  },
+  {
+    "start": 863.59,
+    "end": 867.98,
+    "text": "to reduce file sizes for web delivery- maintaining your exact"
+  },
+  {
+    "start": 867.98,
+    "end": 871.99,
+    "text": "crop dimensions at a fraction of the original file weight."
+  },
+  {
+    "start": 871.99,
+    "end": 877.36,
+    "text": "## Platform-specific cropping requirements in 2026"
+  },
+  {
+    "start": 877.36,
+    "end": 880.53,
+    "text": "### Instagram"
+  },
+  {
+    "start": 880.53,
+    "end": 885.38,
+    "text": "Instagram supports three ratios in the feed: square (1:1),"
+  },
+  {
+    "start": 885.38,
+    "end": 891.31,
+    "text": "landscape (1.91:1, which is close to 16:9 but cropped to"
+  },
+  {
+    "start": 891.31,
+    "end": 898.05,
+    "text": "Instagram's container), and portrait (4:5). The 4:5 portrait"
+  },
+  {
+    "start": 898.05,
+    "end": 902.44,
+    "text": "ratio takes up the most vertical space in the feed and therefore"
+  },
+  {
+    "start": 902.44,
+    "end": 906.69,
+    "text": "gets more visual attention- use it for single-subject photos"
+  },
+  {
+    "start": 906.69,
+    "end": 912.72,
+    "text": "where vertical framing works. Square 1:1 is the safest for"
+  },
+  {
+    "start": 912.72,
+    "end": 916.87,
+    "text": "carousel posts because all images display consistently."
+  },
+  {
+    "start": 916.87,
+    "end": 920.97,
+    "text": "### YouTube and video platforms"
+  },
+  {
+    "start": 920.97,
+    "end": 927.02,
+    "text": "YouTube thumbnails must be 16:9. The minimum dimensions are"
+  },
+  {
+    "start": 927.02,
+    "end": 934.6,
+    "text": "1280×720 pixels, but 1920×1080 is recommended for retina"
+  },
+  {
+    "start": 934.6,
+    "end": 940.84,
+    "text": "displays. Thumbnails that do not match 16:9 will have black bars"
+  },
+  {
+    "start": 940.84,
+    "end": 945.43,
+    "text": "added automatically- always crop to the correct ratio before"
+  },
+  {
+    "start": 945.43,
+    "end": 947.2,
+    "text": "uploading."
+  },
+  {
+    "start": 947.2,
+    "end": 950.42,
+    "text": "### Pinterest"
+  },
+  {
+    "start": 950.42,
+    "end": 956.28,
+    "text": "Pinterest favors vertical content. The optimal ratio for standard"
+  },
+  {
+    "start": 956.28,
+    "end": 962.3,
+    "text": "pins is 2:3 (1000×1500 pixels), and for Idea Pins (the"
+  },
+  {
+    "start": 962.3,
+    "end": 968.23,
+    "text": "full-screen format), 9:16. Images that are too wide get cropped"
+  },
+  {
+    "start": 968.23,
+    "end": 972.52,
+    "text": "to a square in the feed, which can ruin compositions- always"
+  },
+  {
+    "start": 972.52,
+    "end": 975.98,
+    "text": "crop vertically before uploading to Pinterest."
+  },
+  {
+    "start": 975.98,
+    "end": 979.72,
+    "text": "### Print: photo labs"
+  },
+  {
+    "start": 979.72,
+    "end": 984.84,
+    "text": "Most consumer photo labs in 2026 use automated cropping when the"
+  },
+  {
+    "start": 984.84,
+    "end": 990.48,
+    "text": "image ratio does not match the selected print size. The software"
+  },
+  {
+    "start": 990.48,
+    "end": 994.63,
+    "text": "crops from the center by default- which means it will cut off"
+  },
+  {
+    "start": 994.63,
+    "end": 998.97,
+    "text": "people's heads, miss the key subject in a landscape, or"
+  },
+  {
+    "start": 998.97,
+    "end": 1004.56,
+    "text": "produce awkward compositions consistently. Always pre-crop to"
+  },
+  {
+    "start": 1004.56,
+    "end": 1008.84,
+    "text": "the target print ratio before uploading to any online lab."
+  },
+  {
+    "start": 1008.84,
+    "end": 1011.52,
+    "text": "## FAQ"
+  },
+  {
+    "start": 1011.52,
+    "end": 1016.54,
+    "text": "### What is the best crop photo ratio for Instagram?"
+  },
+  {
+    "start": 1016.54,
+    "end": 1022.54,
+    "text": "For feed posts: 4:5 (portrait) for maximum visual impact, or"
+  },
+  {
+    "start": 1022.54,
+    "end": 1029.14,
+    "text": "1:1 (square) for consistent carousel appearances. For Stories"
+  },
+  {
+    "start": 1029.14,
+    "end": 1035.84,
+    "text": "and Reels: 9:16. Avoid 16:9 landscape in the feed- it renders"
+  },
+  {
+    "start": 1035.84,
+    "end": 1039.36,
+    "text": "small relative to portrait and square posts."
+  },
+  {
+    "start": 1039.36,
+    "end": 1044.52,
+    "text": "### What ratio is a standard 4x6 photo print?"
+  },
+  {
+    "start": 1044.52,
+    "end": 1049.88,
+    "text": "A 4x6 inch print is exactly 3:2- the native ratio of virtually"
+  },
+  {
+    "start": 1049.88,
+    "end": 1055.68,
+    "text": "all DSLR and mirrorless cameras. If you shoot with one of these"
+  },
+  {
+    "start": 1055.68,
+    "end": 1060.32,
+    "text": "cameras and print 4x6, you can print the full frame with no"
+  },
+  {
+    "start": 1060.32,
+    "end": 1066.96,
+    "text": "cropping. Smartphone photos (typically 4:3) will require a small"
+  },
+  {
+    "start": 1066.96,
+    "end": 1070.68,
+    "text": "crop on the long edges to fit a 4x6 print."
+  },
+  {
+    "start": 1070.68,
+    "end": 1075.92,
+    "text": "### How many pixels do I need for a sharp 8x10 print?"
+  },
+  {
+    "start": 1075.92,
+    "end": 1082.78,
+    "text": "At 300 DPI, an 8x10 inch print requires 2400×3000 pixels minimum."
+  },
+  {
+    "start": 1082.78,
+    "end": 1087.82,
+    "text": "At 240 DPI (acceptable for photos viewed at arm's length),"
+  },
+  {
+    "start": 1087.82,
+    "end": 1095.64,
+    "text": "the minimum is 1920×2400 pixels. Any modern smartphone with"
+  },
+  {
+    "start": 1095.64,
+    "end": 1100.47,
+    "text": "12 megapixels or more produces images with sufficient resolution"
+  },
+  {
+    "start": 1100.47,
+    "end": 1104.14,
+    "text": "for this size- provided you have not cropped heavily."
+  },
+  {
+    "start": 1104.14,
+    "end": 1109.68,
+    "text": "### Can I crop a horizontal photo to 9:16 for Stories?"
+  },
+  {
+    "start": 1109.68,
+    "end": 1115.13,
+    "text": "Technically yes, but the result is rarely good. Cropping a"
+  },
+  {
+    "start": 1115.13,
+    "end": 1120.63,
+    "text": "landscape photo to a 9:16 vertical removes roughly 75% of the"
+  },
+  {
+    "start": 1120.63,
+    "end": 1125.84,
+    "text": "horizontal width- most subjects will be cut off. A better"
+  },
+  {
+    "start": 1125.84,
+    "end": 1130.61,
+    "text": "approach: place the photo as a background element in a 9:16"
+  },
+  {
+    "start": 1130.61,
+    "end": 1134.88,
+    "text": "canvas with blurred edges, or use an app that lets you position"
+  },
+  {
+    "start": 1134.88,
+    "end": 1139.44,
+    "text": "a small landscape image within a 9:16 frame with a colored or"
+  },
+  {
+    "start": 1139.44,
+    "end": 1141.51,
+    "text": "blurred background."
+  },
+  {
+    "start": 1141.51,
+    "end": 1147.03,
+    "text": "### What is the difference between aspect ratio and resolution?"
+  },
+  {
+    "start": 1147.03,
+    "end": 1151.37,
+    "text": "Aspect ratio describes the shape of an image (width-to-height"
+  },
+  {
+    "start": 1151.37,
+    "end": 1157.8,
+    "text": "proportion). Resolution describes the number of pixels. A"
+  },
+  {
+    "start": 1157.8,
+    "end": 1164.26,
+    "text": "1080×1080 image and a 3000×3000 image have the same 1:1 aspect"
+  },
+  {
+    "start": 1164.26,
+    "end": 1170.57,
+    "text": "ratio but very different resolutions. For web use, aspect ratio"
+  },
+  {
+    "start": 1170.57,
+    "end": 1176.69,
+    "text": "matters most. For print, both ratio and resolution must match"
+  },
+  {
+    "start": 1176.69,
+    "end": 1178.76,
+    "text": "the target size."
+  }
+]

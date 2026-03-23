@@ -1,0 +1,337 @@
+[
+  {
+    "start": 0,
+    "end": 4.1,
+    "text": "The problem: thousands of travel photos in one folder"
+  },
+  {
+    "start": 4.1,
+    "end": 29.57,
+    "text": "The average smartphone user takes more than 2,000 photos per year. Frequent trav"
+  },
+  {
+    "start": 29.57,
+    "end": 52.63,
+    "text": "Most people default to one of two coping strategies. The first is to do nothing-"
+  },
+  {
+    "start": 52.63,
+    "end": 64.54,
+    "text": "Neither approach is sustainable. What you need is a system that reads the locati"
+  },
+  {
+    "start": 64.54,
+    "end": 69.86,
+    "text": "Manual organization vs. automatic: what the difference looks like in practice"
+  },
+  {
+    "start": 69.86,
+    "end": 76.8,
+    "text": "To understand why automatic organization is worth pursuing, it helps to compare "
+  },
+  {
+    "start": 76.8,
+    "end": 101.86,
+    "text": "Manual organization requires you to open each photo, recognize the location visu"
+  },
+  {
+    "start": 101.86,
+    "end": 122.11,
+    "text": "Automatic organization, by contrast, reads the GPS coordinates embedded in each "
+  },
+  {
+    "start": 122.11,
+    "end": 127.39,
+    "text": "- Manual: 2–3 hours for a typical trip, error-prone, does not scale"
+  },
+  {
+    "start": 127.39,
+    "end": 132.91,
+    "text": "- Automatic (GPS-based): Under 60 seconds, consistent, repeatable"
+  },
+  {
+    "start": 132.91,
+    "end": 139.25,
+    "text": "- Requirement: Photos must have GPS EXIF data embedded- which most smartphone ph"
+  },
+  {
+    "start": 139.25,
+    "end": 143.57,
+    "text": "How GPS EXIF data enables automatic photo sorting"
+  },
+  {
+    "start": 143.57,
+    "end": 167.93,
+    "text": "Every photo file contains a block of hidden metadata called EXIF data (Exchangea"
+  },
+  {
+    "start": 167.93,
+    "end": 192.5,
+    "text": "Those coordinates are what makes automatic sorting possible. A photo taken in Ro"
+  },
+  {
+    "start": 192.5,
+    "end": 221.23,
+    "text": "You can verify whether your photos carry GPS data at any time. On iPhone, go to "
+  },
+  {
+    "start": 221.23,
+    "end": 246.65,
+    "text": "For most smartphones, GPS tagging is enabled by default. On iPhone, confirm it u"
+  },
+  {
+    "start": 246.65,
+    "end": 251.86,
+    "text": "Step-by-step: organize travel photos by country with SammaPix GeoSort"
+  },
+  {
+    "start": 251.86,
+    "end": 268.82,
+    "text": "SammaPix GeoSort is a free, browser-based tool that reads the GPS coordinates em"
+  },
+  {
+    "start": 268.82,
+    "end": 271.99,
+    "text": "Here is exactly how the process works:"
+  },
+  {
+    "start": 271.99,
+    "end": 281.95,
+    "text": "- Open GeoSort. Navigate to sammapix.com/tools/geosort . No installation, no sig"
+  },
+  {
+    "start": 281.95,
+    "end": 298.51,
+    "text": "- Drop your photos. Drag your entire trip folder- or a selection of photos- into"
+  },
+  {
+    "start": 298.51,
+    "end": 316.06,
+    "text": "- Choose your sorting depth. Select whether you want to sort by country only (e."
+  },
+  {
+    "start": 316.06,
+    "end": 334.44,
+    "text": "- Preview the groups. Before downloading anything, Sort by Location shows you a "
+  },
+  {
+    "start": 334.44,
+    "end": 347.02,
+    "text": "- Download the sorted archive. Click Download and Sort by Location packages your"
+  },
+  {
+    "start": 347.02,
+    "end": 359.16,
+    "text": "The entire process- from dropping 1,400 photos to downloading the sorted ZIP- ty"
+  },
+  {
+    "start": 359.16,
+    "end": 364.13,
+    "text": "Combining Sort by Location with Photo Map for visual trip documentation"
+  },
+  {
+    "start": 364.13,
+    "end": 378.26,
+    "text": "Sorting your photos by country gives you a clean file structure. But the same GP"
+  },
+  {
+    "start": 378.26,
+    "end": 394.15,
+    "text": "SammaPix TravelMap reads the same GPS EXIF data as Sort by Location, but instead"
+  },
+  {
+    "start": 394.15,
+    "end": 398.78,
+    "text": "The two tools work naturally together as part of a post-trip workflow:"
+  },
+  {
+    "start": 398.78,
+    "end": 405.79,
+    "text": "- Use Sort by Location to sort your full photo archive into country and city fol"
+  },
+  {
+    "start": 405.79,
+    "end": 413.33,
+    "text": "- Use Photo Map with your best selects to create a shareable visual story of the"
+  },
+  {
+    "start": 413.33,
+    "end": 420.31,
+    "text": "- Use the EXIF Viewer to inspect or verify the metadata of any individual photo "
+  },
+  {
+    "start": 420.31,
+    "end": 428.71,
+    "text": "This combination replaces what would otherwise require dedicated photo managemen"
+  },
+  {
+    "start": 428.71,
+    "end": 432.31,
+    "text": "What to do when photos do not have GPS data"
+  },
+  {
+    "start": 432.31,
+    "end": 449.02,
+    "text": "Automatic GPS-based sorting works perfectly when location tagging was active on "
+  },
+  {
+    "start": 449.02,
+    "end": 453.82,
+    "text": "For these cases, a hybrid approach is the most practical path forward:"
+  },
+  {
+    "start": 453.82,
+    "end": 472.06,
+    "text": "- DSLR or mirrorless cameras- most major manufacturers (Canon, Nikon, Sony) offe"
+  },
+  {
+    "start": 472.06,
+    "end": 485.66,
+    "text": "- Older archives without GPS- sort by date first using your photo app's timeline"
+  },
+  {
+    "start": 485.66,
+    "end": 498.29,
+    "text": "- Photos in airplane mode- these will have a timestamp but no GPS. On Apple Phot"
+  },
+  {
+    "start": 498.29,
+    "end": 510.91,
+    "text": "Going forward, the simplest fix is to ensure location services are enabled for y"
+  },
+  {
+    "start": 510.91,
+    "end": 514.44,
+    "text": "Tips for organizing photos after every trip"
+  },
+  {
+    "start": 514.44,
+    "end": 528.22,
+    "text": "The best photo organization system is the one you actually use consistently. Her"
+  },
+  {
+    "start": 528.22,
+    "end": 531.17,
+    "text": "Within 48 hours of returning:"
+  },
+  {
+    "start": 531.17,
+    "end": 540.84,
+    "text": "- Transfer photos from your phone and camera to a single folder on your computer"
+  },
+  {
+    "start": 540.84,
+    "end": 551.09,
+    "text": "- Run a first cull: delete obvious failures (blurry, duplicate, accidental shots"
+  },
+  {
+    "start": 551.09,
+    "end": 563.38,
+    "text": "- Run Sort by Location on the remaining files to sort by country. Your folder be"
+  },
+  {
+    "start": 563.38,
+    "end": 565.61,
+    "text": "Within the same week:"
+  },
+  {
+    "start": 565.61,
+    "end": 572.86,
+    "text": "- Do a second, deeper cull inside each country folder. From similar shots, keep "
+  },
+  {
+    "start": 572.86,
+    "end": 579.91,
+    "text": "- Edit your top 20–50 selects. These are the images you will actually share and "
+  },
+  {
+    "start": 579.91,
+    "end": 597.24,
+    "text": "- Before sharing any photo publicly, use the EXIF Viewer or a dedicated EXIF rem"
+  },
+  {
+    "start": 597.24,
+    "end": 605.16,
+    "text": "- Optionally, build a Photo Map from your edited selects to create a visual reco"
+  },
+  {
+    "start": 605.16,
+    "end": 621.14,
+    "text": "Backup strategy: Always maintain at least two copies- one on local storage and o"
+  },
+  {
+    "start": 621.14,
+    "end": 625.56,
+    "text": "A note on privacy: GPS data travels with your photos"
+  },
+  {
+    "start": 625.56,
+    "end": 644.33,
+    "text": "GPS EXIF data is extremely useful for personal organization- but it is also a pr"
+  },
+  {
+    "start": 644.33,
+    "end": 659.45,
+    "text": "Most social media platforms (Instagram, X, Facebook) strip EXIF data automatical"
+  },
+  {
+    "start": 659.45,
+    "end": 687.26,
+    "text": "For photos you share publicly- especially those taken at your home, workplace, o"
+  },
+  {
+    "start": 687.26,
+    "end": 689.83,
+    "text": "Frequently asked questions"
+  },
+  {
+    "start": 689.83,
+    "end": 694.06,
+    "text": "How do I organize travel photos by country automatically?"
+  },
+  {
+    "start": 694.06,
+    "end": 711.36,
+    "text": "If your photos have GPS data embedded in their EXIF metadata, a tool like SammaP"
+  },
+  {
+    "start": 711.36,
+    "end": 715.27,
+    "text": "What is the best free tool to sort photos by location?"
+  },
+  {
+    "start": 715.27,
+    "end": 730.01,
+    "text": "SammaPix Sort by Location is a free, browser-based tool that reads GPS EXIF data"
+  },
+  {
+    "start": 730.01,
+    "end": 733.54,
+    "text": "Can Apple Photos organize photos by country?"
+  },
+  {
+    "start": 733.54,
+    "end": 746.52,
+    "text": "Apple Photos groups GPS-tagged photos under a Places view, but it does not let y"
+  },
+  {
+    "start": 746.52,
+    "end": 749.9,
+    "text": "What if my photos do not have GPS data?"
+  },
+  {
+    "start": 749.9,
+    "end": 768.82,
+    "text": "Photos taken with GPS disabled, standalone cameras without location sync, or fil"
+  },
+  {
+    "start": 768.82,
+    "end": 772.87,
+    "text": "Is it safe to use a browser tool to organize my photos?"
+  },
+  {
+    "start": 772.87,
+    "end": 792.07,
+    "text": "Yes, provided the tool runs entirely client-side. SammaPix Sort by Location read"
+  }
+]

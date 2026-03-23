@@ -1,0 +1,362 @@
+[
+  {
+    "start": 0,
+    "end": 4.27,
+    "text": "Why the image format decision matters in 2026"
+  },
+  {
+    "start": 4.27,
+    "end": 22.42,
+    "text": "Images account for more than 50% of the average webpage's total byte weight, acc"
+  },
+  {
+    "start": 22.42,
+    "end": 45.62,
+    "text": "The format landscape has shifted significantly over the past three years. JPEG d"
+  },
+  {
+    "start": 45.62,
+    "end": 49.61,
+    "text": "JPEG: the legacy standard that still has a place"
+  },
+  {
+    "start": 49.61,
+    "end": 68.64,
+    "text": "JPEG (Joint Photographic Experts Group) has been the web's default photo format "
+  },
+  {
+    "start": 68.64,
+    "end": 70.82,
+    "text": "JPEG strengths"
+  },
+  {
+    "start": 70.82,
+    "end": 78.14,
+    "text": "- Universal support: every browser, OS, device, email client, and CMS handles JP"
+  },
+  {
+    "start": 78.14,
+    "end": 82.9,
+    "text": "- Fast encoding: near-instant compression even on low-power devices"
+  },
+  {
+    "start": 82.9,
+    "end": 88.27,
+    "text": "- Excellent for photos: handles complex gradients and natural textures very well"
+  },
+  {
+    "start": 88.27,
+    "end": 93.72,
+    "text": "- Mature tooling: every image editor, CMS, and pipeline supports it natively"
+  },
+  {
+    "start": 93.72,
+    "end": 95.98,
+    "text": "JPEG weaknesses"
+  },
+  {
+    "start": 95.98,
+    "end": 101.71,
+    "text": "- No transparency: no alpha channel support — transparent areas become white or "
+  },
+  {
+    "start": 101.71,
+    "end": 105.1,
+    "text": "- No animation: static images only"
+  },
+  {
+    "start": 105.1,
+    "end": 111.6,
+    "text": "- Larger files: 25-35% heavier than WebP at equivalent visual quality"
+  },
+  {
+    "start": 111.6,
+    "end": 116.71,
+    "text": "- Block artifacts: visible ringing around sharp edges at lower quality settings"
+  },
+  {
+    "start": 116.71,
+    "end": 136.61,
+    "text": "A 1200px wide photograph at quality 80 typically weighs around 100KB as a JPEG. "
+  },
+  {
+    "start": 136.61,
+    "end": 140.5,
+    "text": "WebP: the practical choice for modern websites"
+  },
+  {
+    "start": 140.5,
+    "end": 158.52,
+    "text": "Developed by Google and released in 2010, WebP has spent fifteen years earning i"
+  },
+  {
+    "start": 158.52,
+    "end": 181.66,
+    "text": "According to Google's own compression studies , lossy WebP files are 25-34% smal"
+  },
+  {
+    "start": 181.66,
+    "end": 183.79,
+    "text": "WebP strengths"
+  },
+  {
+    "start": 183.79,
+    "end": 191.64,
+    "text": "- 25-35% smaller than JPEG: significant bandwidth and LCP improvement with no vi"
+  },
+  {
+    "start": 191.64,
+    "end": 196.73,
+    "text": "- Transparency support: alpha channel works in both lossy and lossless modes"
+  },
+  {
+    "start": 196.73,
+    "end": 201.91,
+    "text": "- Animation support: replaces animated GIF with far smaller file sizes"
+  },
+  {
+    "start": 201.91,
+    "end": 211.58,
+    "text": "- 97%+ browser support: effectively universal in 2026 — Chrome, Firefox, Safari,"
+  },
+  {
+    "start": 211.58,
+    "end": 213.89,
+    "text": "WebP weaknesses"
+  },
+  {
+    "start": 213.89,
+    "end": 220.15,
+    "text": "- Email client support: most email clients do not render WebP — use JPEG for ema"
+  },
+  {
+    "start": 220.15,
+    "end": 226.92,
+    "text": "- Slower encoding than JPEG: noticeably slower to compress, though acceptable fo"
+  },
+  {
+    "start": 226.92,
+    "end": 232.82,
+    "text": "- Not lossless-by-default: requires explicit lossless mode selection — easy to o"
+  },
+  {
+    "start": 232.82,
+    "end": 251.66,
+    "text": "WebP is the right format for virtually every web image in 2026: e-commerce produ"
+  },
+  {
+    "start": 251.66,
+    "end": 259.3,
+    "text": "Switching from JPEG to WebP is one of the fastest Core Web Vitals improvements a"
+  },
+  {
+    "start": 259.3,
+    "end": 262.54,
+    "text": "AVIF: the future, available now"
+  },
+  {
+    "start": 262.54,
+    "end": 290.09,
+    "text": "AVIF (AV1 Image File Format) is derived from the AV1 video codec and represents "
+  },
+  {
+    "start": 290.09,
+    "end": 292.15,
+    "text": "AVIF strengths"
+  },
+  {
+    "start": 292.15,
+    "end": 298.56,
+    "text": "- 30-50% smaller than WebP: the best compression ratio of any widely available f"
+  },
+  {
+    "start": 298.56,
+    "end": 305.16,
+    "text": "- Excellent low-bitrate quality: holds detail far better than JPEG or WebP at ag"
+  },
+  {
+    "start": 305.16,
+    "end": 310.87,
+    "text": "- HDR support: handles wide color gamut and high dynamic range content natively"
+  },
+  {
+    "start": 310.87,
+    "end": 316.34,
+    "text": "- Transparency and animation: full alpha channel support and animated sequences"
+  },
+  {
+    "start": 316.34,
+    "end": 318.55,
+    "text": "AVIF weaknesses"
+  },
+  {
+    "start": 318.55,
+    "end": 326.95,
+    "text": "- Slow encoding: AVIF can take 10x longer to encode than JPEG or WebP — a real c"
+  },
+  {
+    "start": 326.95,
+    "end": 335.81,
+    "text": "- 93% browser support: Safari versions below 16, older Android browsers, and som"
+  },
+  {
+    "start": 335.81,
+    "end": 342.19,
+    "text": "- Tooling still maturing: not all CMSs and image pipelines support AVIF generati"
+  },
+  {
+    "start": 342.19,
+    "end": 348.6,
+    "text": "- Requires fallback: must always be paired with WebP or JPEG for browsers that c"
+  },
+  {
+    "start": 348.6,
+    "end": 368.74,
+    "text": "AVIF is the right choice for image-heavy sites where performance is critical and"
+  },
+  {
+    "start": 368.74,
+    "end": 371.95,
+    "text": "PNG: when you actually need it"
+  },
+  {
+    "start": 371.95,
+    "end": 391.44,
+    "text": "PNG is a lossless format with full transparency support. It is the right choice "
+  },
+  {
+    "start": 391.44,
+    "end": 417.17,
+    "text": "In 2026, lossless WebP is a direct substitute for PNG in most web contexts. Loss"
+  },
+  {
+    "start": 417.17,
+    "end": 421.15,
+    "text": "Format comparison: file sizes and key properties"
+  },
+  {
+    "start": 421.15,
+    "end": 434.18,
+    "text": "The following table compares all four formats using a reference 1200px wide phot"
+  },
+  {
+    "start": 434.18,
+    "end": 438.77,
+    "text": "Practical recommendation: how to use all three formats together"
+  },
+  {
+    "start": 438.77,
+    "end": 453.86,
+    "text": "The practical approach for 2026 is to use WebP as your default, with AVIF served"
+  },
+  {
+    "start": 453.86,
+    "end": 456.41,
+    "text": "The picture element pattern"
+  },
+  {
+    "start": 456.41,
+    "end": 478.87,
+    "text": "The browser evaluates source elements from top to bottom and uses the first form"
+  },
+  {
+    "start": 478.87,
+    "end": 482.26,
+    "text": "Simplified recommendation by use case"
+  },
+  {
+    "start": 482.26,
+    "end": 490.34,
+    "text": "- Blog and marketing sites: convert all images to WebP and serve directly — 97% "
+  },
+  {
+    "start": 490.34,
+    "end": 500.21,
+    "text": "- E-commerce with many product images: generate both AVIF and WebP, serve with t"
+  },
+  {
+    "start": 500.21,
+    "end": 507.24,
+    "text": "- Email campaigns: JPEG only — WebP and AVIF are not reliably rendered in Gmail,"
+  },
+  {
+    "start": 507.24,
+    "end": 515.23,
+    "text": "- Logos and icons with transparency: lossless WebP in place of PNG; fall back to"
+  },
+  {
+    "start": 515.23,
+    "end": 522.17,
+    "text": "- User-uploaded content: accept any format, re-encode to WebP on the server or i"
+  },
+  {
+    "start": 522.17,
+    "end": 525.02,
+    "text": "How to convert between formats"
+  },
+  {
+    "start": 525.02,
+    "end": 548.26,
+    "text": "Converting existing JPEG or PNG images to WebP does not require installing softw"
+  },
+  {
+    "start": 548.26,
+    "end": 568.94,
+    "text": "For most content workflows — blog posts, landing pages, portfolio sites — conver"
+  },
+  {
+    "start": 568.94,
+    "end": 576.7,
+    "text": "Format conversion is one of the fastest ways to reduce page weight and improve C"
+  },
+  {
+    "start": 576.7,
+    "end": 579.41,
+    "text": "Is WebP better than JPEG?"
+  },
+  {
+    "start": 579.41,
+    "end": 602.28,
+    "text": "Yes, for web use. WebP produces files that are 25-35% smaller than JPEG at equiv"
+  },
+  {
+    "start": 602.28,
+    "end": 605.28,
+    "text": "Does AVIF work in all browsers?"
+  },
+  {
+    "start": 605.28,
+    "end": 629.54,
+    "text": "Not quite all. AVIF has approximately 93% browser support as of 2026. Chrome, Fi"
+  },
+  {
+    "start": 629.54,
+    "end": 632.81,
+    "text": "Should I convert all my images to WebP?"
+  },
+  {
+    "start": 632.81,
+    "end": 654.53,
+    "text": "For website images, yes. Converting JPEG and PNG images to WebP reduces file siz"
+  },
+  {
+    "start": 654.53,
+    "end": 658.68,
+    "text": "What is the quality difference between WebP and AVIF?"
+  },
+  {
+    "start": 658.68,
+    "end": 685.85,
+    "text": "At equivalent file sizes, AVIF and WebP produce similar visual quality for most "
+  },
+  {
+    "start": 685.85,
+    "end": 689.88,
+    "text": "How do I serve different image formats to different browsers?"
+  },
+  {
+    "start": 689.88,
+    "end": 705.96,
+    "text": "Use the HTML <picture> element with multiple source elements. List AVIF first, t"
+  }
+]

@@ -1,0 +1,587 @@
+[
+  {
+    "start": 0,
+    "end": 4.08,
+    "text": "## What is HEIC and why does Apple use it?"
+  },
+  {
+    "start": 4.08,
+    "end": 10.7,
+    "text": "HEIC stands for High Efficiency Image Container. It is Apple's implementation"
+  },
+  {
+    "start": 10.7,
+    "end": 16.37,
+    "text": "of the HEIF (High Efficiency Image File Format) standard, which was developed"
+  },
+  {
+    "start": 16.37,
+    "end": 23.09,
+    "text": "by the Moving Picture Experts Group (MPEG) and adopted by Apple in iOS 11 in 201"
+  },
+  {
+    "start": 23.09,
+    "end": 26.09,
+    "text": "At its core, HEIC uses"
+  },
+  {
+    "start": 26.09,
+    "end": 30.1,
+    "text": "HEVC (H.265) compression"
+  },
+  {
+    "start": 30.1,
+    "end": 36.46,
+    "text": "- the same video codec used for 4K video- to compress still images. The"
+  },
+  {
+    "start": 36.46,
+    "end": 42.46,
+    "text": "result is a file that is typically 40–50% smaller than an equivalent JPEG while"
+  },
+  {
+    "start": 42.46,
+    "end": 49.66,
+    "text": "maintaining the same perceptual quality. A 3 MB JPEG photo taken on an iPhone"
+  },
+  {
+    "start": 49.66,
+    "end": 55.08,
+    "text": "might be stored as a 1.5 MB HEIC file with no visible difference."
+  },
+  {
+    "start": 55.08,
+    "end": 62.09,
+    "text": "Apple uses HEIC for three practical reasons. First, it saves storage on devices"
+  },
+  {
+    "start": 62.09,
+    "end": 69.38,
+    "text": "where 64 GB can fill quickly with 12-megapixel photos. Second, it supports"
+  },
+  {
+    "start": 69.38,
+    "end": 75.84,
+    "text": "advanced features like 16-bit color depth (versus JPEG's 8-bit), HDR image data,"
+  },
+  {
+    "start": 75.84,
+    "end": 81.38,
+    "text": "depth maps from Portrait Mode, and multiple images in a single file (used for"
+  },
+  {
+    "start": 81.38,
+    "end": 87.77,
+    "text": "Live Photos and burst sequences). Third, it is the container used for Apple's"
+  },
+  {
+    "start": 87.77,
+    "end": 90.48,
+    "text": "ProRAW and ProRes workflows."
+  },
+  {
+    "start": 90.48,
+    "end": 97.44,
+    "text": "The problem is compatibility. Despite being a technically superior format, HEIC"
+  },
+  {
+    "start": 97.44,
+    "end": 103.87,
+    "text": "has limited support outside the Apple ecosystem. Windows requires a paid or"
+  },
+  {
+    "start": 103.87,
+    "end": 111.29,
+    "text": "separately installed codec. Android does not support it natively. Most web"
+  },
+  {
+    "start": 111.29,
+    "end": 116.93,
+    "text": "platforms, social networks, and professional photo editing workflows still expec"
+  },
+  {
+    "start": 116.93,
+    "end": 123.58,
+    "text": "JPEG as the universal standard. That gap is the entire reason you need to conver"
+  },
+  {
+    "start": 123.58,
+    "end": 128.33,
+    "text": "## HEIC vs JPG: an honest comparison"
+  },
+  {
+    "start": 128.33,
+    "end": 133.22,
+    "text": "Understanding the difference between these two formats helps you decide when"
+  },
+  {
+    "start": 133.22,
+    "end": 138.14,
+    "text": "converting is worth it and when you might want to shoot in JPG from the start."
+  },
+  {
+    "start": 138.14,
+    "end": 139.85,
+    "text": "Feature"
+  },
+  {
+    "start": 139.85,
+    "end": 142.92,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 142.92,
+    "end": 148.44,
+    "text": "The verdict is clear: HEIC wins on technical quality and storage efficiency."
+  },
+  {
+    "start": 148.44,
+    "end": 155.62,
+    "text": "JPG wins on compatibility. For any use case involving sharing, uploading, or"
+  },
+  {
+    "start": 155.62,
+    "end": 161.14,
+    "text": "working in cross-platform environments, JPG remains the practical standard."
+  },
+  {
+    "start": 161.14,
+    "end": 167.18,
+    "text": "## Method 1: Change your iPhone camera settings (prevent HEIC at source)"
+  },
+  {
+    "start": 167.18,
+    "end": 172.99,
+    "text": "If you regularly transfer photos to Windows PCs or non-Apple devices, the simple"
+  },
+  {
+    "start": 172.99,
+    "end": 179.52,
+    "text": "long-term solution is to stop your iPhone from saving in HEIC. This does not hel"
+  },
+  {
+    "start": 179.52,
+    "end": 185.21,
+    "text": "existing HEIC photos already on your device, but it means all future shots are"
+  },
+  {
+    "start": 185.21,
+    "end": 187.75,
+    "text": "saved as JPG."
+  },
+  {
+    "start": 187.75,
+    "end": 190.03,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 190.03,
+    "end": 195.65,
+    "text": "The trade-off is storage. HEIC's efficiency means that switching to Most"
+  },
+  {
+    "start": 195.65,
+    "end": 202.51,
+    "text": "Compatible will roughly double the space used per photo. On a 64 GB iPhone"
+  },
+  {
+    "start": 202.51,
+    "end": 208.32,
+    "text": "that fills up quickly, this may not be practical. The better approach for"
+  },
+  {
+    "start": 208.32,
+    "end": 213.41,
+    "text": "most people is to keep shooting in HEIC (best quality for the storage cost)"
+  },
+  {
+    "start": 213.41,
+    "end": 217.66,
+    "text": "and convert to JPG at the point of sharing or transferring."
+  },
+  {
+    "start": 217.66,
+    "end": 221.26,
+    "text": "Bonus: automatic conversion on transfer"
+  },
+  {
+    "start": 221.26,
+    "end": 227.26,
+    "text": "iOS has a built-in option to automatically convert HEIC to JPG when transferring"
+  },
+  {
+    "start": 227.26,
+    "end": 234.79,
+    "text": "to a Mac or PC. Go to Settings &gt; Photos and under Transfer to Mac or PC, sele"
+  },
+  {
+    "start": 234.79,
+    "end": 241.34,
+    "text": "Automatic. This converts files during AirDrop or USB transfer without changing"
+  },
+  {
+    "start": 241.34,
+    "end": 244.18,
+    "text": "how photos are stored on your iPhone."
+  },
+  {
+    "start": 244.18,
+    "end": 249.7,
+    "text": "## Method 2: Convert using Mac Preview (no extra software)"
+  },
+  {
+    "start": 249.7,
+    "end": 255.55,
+    "text": "If you are on a Mac, Preview- the built-in image viewer- can convert HEIC to JPG"
+  },
+  {
+    "start": 255.55,
+    "end": 263.23,
+    "text": "directly. macOS has supported HEIC natively since macOS High Sierra (10.13)."
+  },
+  {
+    "start": 263.23,
+    "end": 267,
+    "text": "### Convert a single file"
+  },
+  {
+    "start": 267,
+    "end": 269.28,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 269.28,
+    "end": 274.37,
+    "text": "### Batch convert multiple HEIC files in Preview"
+  },
+  {
+    "start": 274.37,
+    "end": 276.65,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 276.65,
+    "end": 282.05,
+    "text": "Preview batch conversion works well for occasional use, but it has limitations:"
+  },
+  {
+    "start": 282.05,
+    "end": 287.35,
+    "text": "you need to have the HEIC files on your Mac first, it does not give you a progre"
+  },
+  {
+    "start": 287.35,
+    "end": 292.46,
+    "text": "indicator for large batches, and there is no ZIP download- you get individual"
+  },
+  {
+    "start": 292.46,
+    "end": 296.09,
+    "text": "JPG files in the folder you specified."
+  },
+  {
+    "start": 296.09,
+    "end": 301.37,
+    "text": "Modern iPhones store thousands of HEIC photos that need converting before sharin"
+  },
+  {
+    "start": 301.37,
+    "end": 306.31,
+    "text": "or transferring to non-Apple devices. Photo by"
+  },
+  {
+    "start": 306.31,
+    "end": 308.26,
+    "text": "Unsplash"
+  },
+  {
+    "start": 308.26,
+    "end": 315.02,
+    "text": "## Method 3: Convert HEIC to JPG free in your browser (no software, no upload)"
+  },
+  {
+    "start": 315.02,
+    "end": 321.1,
+    "text": "For Windows users, non-Mac users, or anyone who wants to convert HEIC to JPG"
+  },
+  {
+    "start": 321.1,
+    "end": 326.38,
+    "text": "free without installing anything, a browser-based converter is the most practica"
+  },
+  {
+    "start": 326.38,
+    "end": 332.16,
+    "text": "option. The key word is browser-based- not every online tool is equal."
+  },
+  {
+    "start": 332.16,
+    "end": 337.8,
+    "text": "Most online HEIC converters upload your files to a remote server for processing."
+  },
+  {
+    "start": 337.8,
+    "end": 343.08,
+    "text": "That means your photos- which may contain personal content, location data, and"
+  },
+  {
+    "start": 343.08,
+    "end": 348.19,
+    "text": "identifiable information- leave your device and are stored on a third-party serv"
+  },
+  {
+    "start": 348.19,
+    "end": 355.13,
+    "text": "even if temporarily. For a family album or travel photos, this is a privacy conc"
+  },
+  {
+    "start": 355.13,
+    "end": 357.72,
+    "text": "worth taking seriously."
+  },
+  {
+    "start": 357.72,
+    "end": 359.69,
+    "text": "According to the"
+  },
+  {
+    "start": 359.69,
+    "end": 362.83,
+    "text": "Web File System Access API"
+  },
+  {
+    "start": 362.83,
+    "end": 368.18,
+    "text": "documentation and modern browser capabilities, client-side image processing"
+  },
+  {
+    "start": 368.18,
+    "end": 374.69,
+    "text": "is now fully practical in the browser without any server involvement. File decod"
+  },
+  {
+    "start": 374.69,
+    "end": 379.94,
+    "text": "pixel transformation, and re-encoding to JPEG can all happen locally using"
+  },
+  {
+    "start": 379.94,
+    "end": 383.95,
+    "text": "JavaScript APIs- your files never leave your device."
+  },
+  {
+    "start": 383.95,
+    "end": 386.45,
+    "text": "This is exactly how"
+  },
+  {
+    "start": 386.45,
+    "end": 389.59,
+    "text": "SammaPix HEIC Converter"
+  },
+  {
+    "start": 389.59,
+    "end": 395.62,
+    "text": "works. Processing is done entirely on your device inside the browser tab."
+  },
+  {
+    "start": 395.62,
+    "end": 403.37,
+    "text": "No account required. No file size limit imposed by server bandwidth. No waiting"
+  },
+  {
+    "start": 403.37,
+    "end": 406.08,
+    "text": "for upload progress bars."
+  },
+  {
+    "start": 406.08,
+    "end": 411.58,
+    "text": "## Step-by-step: convert HEIC to JPG with SammaPix"
+  },
+  {
+    "start": 411.58,
+    "end": 417.26,
+    "text": "This method works on Windows, Mac, Linux, Android, and any device with a modern"
+  },
+  {
+    "start": 417.26,
+    "end": 422.66,
+    "text": "browser. No installation, no account, no file upload."
+  },
+  {
+    "start": 422.66,
+    "end": 424.94,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 424.94,
+    "end": 427.8,
+    "text": "Free- no upload, no account"
+  },
+  {
+    "start": 427.8,
+    "end": 432.65,
+    "text": "Convert HEIC to JPG now - SammaPix HEIC Converter"
+  },
+  {
+    "start": 432.65,
+    "end": 437.76,
+    "text": "## Why use SammaPix to convert HEIC to JPG free?"
+  },
+  {
+    "start": 437.76,
+    "end": 444.1,
+    "text": "There are dozens of online HEIC converters. Here is what makes the SammaPix"
+  },
+  {
+    "start": 444.1,
+    "end": 446.71,
+    "text": "approach meaningfully different."
+  },
+  {
+    "start": 446.71,
+    "end": 448.99,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 448.99,
+    "end": 453.58,
+    "text": "## What to do with your JPG files after converting"
+  },
+  {
+    "start": 453.58,
+    "end": 459.6,
+    "text": "Once you have converted your HEIC photos to JPG, a few additional optimisation"
+  },
+  {
+    "start": 459.6,
+    "end": 464.04,
+    "text": "steps can make a significant difference depending on your use case."
+  },
+  {
+    "start": 464.04,
+    "end": 468.17,
+    "text": "Compress before uploading to a website or social media"
+  },
+  {
+    "start": 468.17,
+    "end": 474.98,
+    "text": "A direct HEIC-to-JPG conversion preserves full resolution. A photo from an"
+  },
+  {
+    "start": 474.98,
+    "end": 481.15,
+    "text": "iPhone 15 Pro is 48 megapixels- the JPG output will be several megabytes even"
+  },
+  {
+    "start": 481.15,
+    "end": 488.42,
+    "text": "at quality 85. Before uploading to a blog, e-commerce site, or portfolio, run"
+  },
+  {
+    "start": 488.42,
+    "end": 490.44,
+    "text": "the files through"
+  },
+  {
+    "start": 490.44,
+    "end": 492.89,
+    "text": "SammaPix Compress"
+  },
+  {
+    "start": 492.89,
+    "end": 500.02,
+    "text": "to reduce file size by up to 70% without visible quality loss. Smaller images"
+  },
+  {
+    "start": 500.02,
+    "end": 503.95,
+    "text": "load faster, rank better, and cost less to host."
+  },
+  {
+    "start": 503.95,
+    "end": 507.26,
+    "text": "Convert to WebP for web delivery"
+  },
+  {
+    "start": 507.26,
+    "end": 513.17,
+    "text": "If you are publishing photos to a website, consider converting from JPG to WebP"
+  },
+  {
+    "start": 513.17,
+    "end": 521.23,
+    "text": "instead of- or after - HEIC conversion. WebP delivers 25–35% smaller files than"
+  },
+  {
+    "start": 521.23,
+    "end": 529.15,
+    "text": "JPEG at equivalent quality, and browser support is now above 97% globally. You c"
+  },
+  {
+    "start": 529.15,
+    "end": 532.01,
+    "text": "SammaPix WebP Converter"
+  },
+  {
+    "start": 532.01,
+    "end": 536.76,
+    "text": "to convert your JPGs to WebP in a second step, or read the"
+  },
+  {
+    "start": 536.76,
+    "end": 539.3,
+    "text": "Complete Guide to WebP"
+  },
+  {
+    "start": 539.3,
+    "end": 542.45,
+    "text": "to understand when it is the right choice."
+  },
+  {
+    "start": 542.45,
+    "end": 545.83,
+    "text": "Remove location and privacy metadata"
+  },
+  {
+    "start": 545.83,
+    "end": 551.54,
+    "text": "iPhone photos embed GPS coordinates, device model, and capture timestamp in thei"
+  },
+  {
+    "start": 551.54,
+    "end": 558.91,
+    "text": "EXIF metadata. When you convert HEIC to JPG, this metadata typically transfers t"
+  },
+  {
+    "start": 558.91,
+    "end": 565.7,
+    "text": "the output file. Before sharing photos publicly- on a website, social media, or"
+  },
+  {
+    "start": 565.7,
+    "end": 571.9,
+    "text": "with people you do not know- consider stripping the EXIF data. This is a"
+  },
+  {
+    "start": 571.9,
+    "end": 577.06,
+    "text": "meaningful privacy step that prevents recipients from knowing exactly where a"
+  },
+  {
+    "start": 577.06,
+    "end": 579.19,
+    "text": "photo was taken."
+  },
+  {
+    "start": 579.19,
+    "end": 582.72,
+    "text": "## Frequently asked questions"
+  },
+  {
+    "start": 582.72,
+    "end": 585,
+    "text": "].map(() => ("
+  }
+]

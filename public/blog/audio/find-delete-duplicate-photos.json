@@ -1,0 +1,822 @@
+[
+  {
+    "start": 0,
+    "end": 4.9,
+    "text": "## Why duplicate photos accumulate faster than you think"
+  },
+  {
+    "start": 4.9,
+    "end": 10.58,
+    "text": "Duplicates do not just come from consciously copying files. They"
+  },
+  {
+    "start": 10.58,
+    "end": 16.15,
+    "text": "accumulate through a dozen invisible channels. Every time a photo"
+  },
+  {
+    "start": 16.15,
+    "end": 20.4,
+    "text": "syncs from your phone to iCloud and then to your Mac, you may end"
+  },
+  {
+    "start": 20.4,
+    "end": 25.61,
+    "text": "up with two or three copies in different directories. Backup"
+  },
+  {
+    "start": 25.61,
+    "end": 29.78,
+    "text": "software creates archives that overlap with live libraries."
+  },
+  {
+    "start": 29.78,
+    "end": 34.18,
+    "text": "Messaging apps save received photos to your camera roll, creating"
+  },
+  {
+    "start": 34.18,
+    "end": 38.09,
+    "text": "copies of images you already have from other sources."
+  },
+  {
+    "start": 38.09,
+    "end": 42.19,
+    "text": "Professional photographers deal with a different but equally"
+  },
+  {
+    "start": 42.19,
+    "end": 48,
+    "text": "common problem: burst shots. Press the shutter in burst mode and"
+  },
+  {
+    "start": 48,
+    "end": 52.37,
+    "text": "you might have 15 nearly identical frames of the same moment."
+  },
+  {
+    "start": 52.37,
+    "end": 56.52,
+    "text": "Only one or two of those will be keepers- the rest are storage"
+  },
+  {
+    "start": 56.52,
+    "end": 58.18,
+    "text": "waste."
+  },
+  {
+    "start": 58.18,
+    "end": 63.36,
+    "text": "The result is photo libraries where 20–40% of the storage space"
+  },
+  {
+    "start": 63.36,
+    "end": 70.1,
+    "text": "is occupied by redundant images. For a 100GB library, that could"
+  },
+  {
+    "start": 70.1,
+    "end": 75.38,
+    "text": "be 20–40GB of recoverable space- and dozens of hours of wasted"
+  },
+  {
+    "start": 75.38,
+    "end": 78.84,
+    "text": "time scrolling through near-identical photos."
+  },
+  {
+    "start": 78.84,
+    "end": 84.58,
+    "text": "## How duplicate photo detection works: exact vs near duplicates"
+  },
+  {
+    "start": 84.58,
+    "end": 88.8,
+    "text": "There are two fundamentally different types of duplicates, and"
+  },
+  {
+    "start": 88.8,
+    "end": 92.06,
+    "text": "they require different detection techniques."
+  },
+  {
+    "start": 92.06,
+    "end": 96.82,
+    "text": "### Exact duplicates: cryptographic hashing"
+  },
+  {
+    "start": 96.82,
+    "end": 102.7,
+    "text": "Exact duplicates are files where every byte is identical. Even if"
+  },
+  {
+    "start": 102.7,
+    "end": 108.41,
+    "text": "the filenames are different (photo.jpg vs photo-copy.jpg vs"
+  },
+  {
+    "start": 108.41,
+    "end": 116.38,
+    "text": "IMG_4721.jpg), the underlying image data is the same. Detecting"
+  },
+  {
+    "start": 116.38,
+    "end": 120.05,
+    "text": "these is straightforward with cryptographic hashing."
+  },
+  {
+    "start": 120.05,
+    "end": 125.74,
+    "text": "A cryptographic hash function (like MD5 or SHA-256) takes any"
+  },
+  {
+    "start": 125.74,
+    "end": 130.1,
+    "text": "file as input and produces a short fixed-length output called a"
+  },
+  {
+    "start": 130.1,
+    "end": 137.11,
+    "text": "hash or digest. The same file always produces the same hash. Two"
+  },
+  {
+    "start": 137.11,
+    "end": 141.6,
+    "text": "different files with even a single changed byte produce entirely"
+  },
+  {
+    "start": 141.6,
+    "end": 146.9,
+    "text": "different hashes. If two files share the same hash, they are"
+  },
+  {
+    "start": 146.9,
+    "end": 149.93,
+    "text": "byte-for-byte identical- guaranteed."
+  },
+  {
+    "start": 149.93,
+    "end": 154.08,
+    "text": "This approach is fast and certain, but it only catches true"
+  },
+  {
+    "start": 154.08,
+    "end": 159.94,
+    "text": "exact duplicates. A photo that has been re-compressed, resized,"
+  },
+  {
+    "start": 159.94,
+    "end": 164.74,
+    "text": "cropped, or had its EXIF metadata modified will not match even"
+  },
+  {
+    "start": 164.74,
+    "end": 170.04,
+    "text": "though it looks visually identical. That is where perceptual"
+  },
+  {
+    "start": 170.04,
+    "end": 172.03,
+    "text": "hashing comes in."
+  },
+  {
+    "start": 172.03,
+    "end": 179.76,
+    "text": "Perceptual hashing analyzes image content rather than raw bytes to find visual d"
+  },
+  {
+    "start": 179.76,
+    "end": 184.2,
+    "text": "### Near duplicates: perceptual hashing"
+  },
+  {
+    "start": 184.2,
+    "end": 188.38,
+    "text": "Perceptual hashing is one of the most elegant algorithms in"
+  },
+  {
+    "start": 188.38,
+    "end": 193.9,
+    "text": "computer vision. Instead of hashing the raw file bytes, it hashes"
+  },
+  {
+    "start": 193.9,
+    "end": 198.36,
+    "text": "the visual content of the image in a way that is tolerant of minor"
+  },
+  {
+    "start": 198.36,
+    "end": 203.93,
+    "text": "variations. Two images that look the same to the human eye will"
+  },
+  {
+    "start": 203.93,
+    "end": 208.32,
+    "text": "produce very similar perceptual hashes- even if one has been"
+  },
+  {
+    "start": 208.32,
+    "end": 213.14,
+    "text": "resized, lightly edited, or saved at a different compression level."
+  },
+  {
+    "start": 213.14,
+    "end": 216.38,
+    "text": "The most widely used algorithms are:"
+  },
+  {
+    "start": 216.38,
+    "end": 226.01,
+    "text": "- dHash (Difference Hash): Detects differences in adjacent pixel brightness. Ver"
+  },
+  {
+    "start": 226.01,
+    "end": 237.22,
+    "text": "- pHash (Perceptual Hash): Uses a Discrete Cosine Transform (DCT) to analyze fre"
+  },
+  {
+    "start": 237.22,
+    "end": 244.75,
+    "text": "- aHash (Average Hash): Compares each pixel to the average brightness of the ima"
+  },
+  {
+    "start": 244.75,
+    "end": 249.29,
+    "text": "The similarity between two perceptual hashes is measured by their"
+  },
+  {
+    "start": 249.29,
+    "end": 253.18,
+    "text": "Hamming distance- the number of bit positions where the two"
+  },
+  {
+    "start": 253.18,
+    "end": 258.84,
+    "text": "hashes differ. A Hamming distance of 0 means identical images."
+  },
+  {
+    "start": 258.84,
+    "end": 263.98,
+    "text": "A distance of 1–5 indicates very similar images (often the same"
+  },
+  {
+    "start": 263.98,
+    "end": 269.5,
+    "text": "scene with minor variations). A distance above 10 typically"
+  },
+  {
+    "start": 269.5,
+    "end": 272.02,
+    "text": "indicates different images."
+  },
+  {
+    "start": 272.02,
+    "end": 274.51,
+    "text": "This is exactly how"
+  },
+  {
+    "start": 274.51,
+    "end": 276.89,
+    "text": "SammaPix TwinHunt"
+  },
+  {
+    "start": 276.89,
+    "end": 281.26,
+    "text": "finds both exact duplicates and near-duplicates in your photo"
+  },
+  {
+    "start": 281.26,
+    "end": 286.68,
+    "text": "library. All processing happens in your browser- no image data"
+  },
+  {
+    "start": 286.68,
+    "end": 289.7,
+    "text": "is ever transmitted to any server."
+  },
+  {
+    "start": 289.7,
+    "end": 295.22,
+    "text": "## Step-by-step: finding and deleting duplicate photos with TwinHunt"
+  },
+  {
+    "start": 295.22,
+    "end": 299.18,
+    "text": "### Step 1 - Open TwinHunt"
+  },
+  {
+    "start": 299.18,
+    "end": 303.07,
+    "text": "sammapix.com/tools/twinhunt"
+  },
+  {
+    "start": 303.07,
+    "end": 309.02,
+    "text": ". No account required, no file size limits, no watermarks. The"
+  },
+  {
+    "start": 309.02,
+    "end": 313.63,
+    "text": "tool runs entirely in your browser using the File System Access"
+  },
+  {
+    "start": 313.63,
+    "end": 318,
+    "text": "### Step 2 - Select your photo folder"
+  },
+  {
+    "start": 318,
+    "end": 321.84,
+    "text": "Click the \"Select Folder\" button and choose the directory"
+  },
+  {
+    "start": 321.84,
+    "end": 327.62,
+    "text": "containing your photos. Find Duplicates can process entire photo"
+  },
+  {
+    "start": 327.62,
+    "end": 333.55,
+    "text": "libraries, including nested subdirectories. For large libraries"
+  },
+  {
+    "start": 333.55,
+    "end": 338.88,
+    "text": "(10,000+ photos), the initial hash computation takes a few"
+  },
+  {
+    "start": 338.88,
+    "end": 343.08,
+    "text": "minutes. Progress is shown in real time."
+  },
+  {
+    "start": 343.08,
+    "end": 348.67,
+    "text": "Alternatively, drag a folder directly onto the drop zone. Both"
+  },
+  {
+    "start": 348.67,
+    "end": 353.59,
+    "text": "methods give Find Duplicates read access to the files- no modifications"
+  },
+  {
+    "start": 353.59,
+    "end": 356.4,
+    "text": "are made during the scanning phase."
+  },
+  {
+    "start": 356.4,
+    "end": 361.08,
+    "text": "### Step 3 - Choose your sensitivity level"
+  },
+  {
+    "start": 361.08,
+    "end": 364.58,
+    "text": "Find Duplicates offers three detection modes:"
+  },
+  {
+    "start": 364.58,
+    "end": 374.9,
+    "text": "- Exact only: Finds byte-for-byte identical files using cryptographic hashing. Z"
+  },
+  {
+    "start": 374.9,
+    "end": 386.81,
+    "text": "- Similar (recommended): Finds exact duplicates plus near-duplicates with a Hamm"
+  },
+  {
+    "start": 386.81,
+    "end": 400.7,
+    "text": "- Very similar: Hamming distance up to 10. Finds burst shots and photos taken wi"
+  },
+  {
+    "start": 400.7,
+    "end": 404.66,
+    "text": "For most users, the \"Similar\" mode is the right starting"
+  },
+  {
+    "start": 404.66,
+    "end": 409.99,
+    "text": "point. It catches the vast majority of real duplicates while"
+  },
+  {
+    "start": 409.99,
+    "end": 413.11,
+    "text": "keeping false positives manageable."
+  },
+  {
+    "start": 413.11,
+    "end": 417.65,
+    "text": "### Step 4 - Review the duplicate groups"
+  },
+  {
+    "start": 417.65,
+    "end": 422.83,
+    "text": "Find Duplicates presents results as groups of similar images, displayed"
+  },
+  {
+    "start": 422.83,
+    "end": 428.76,
+    "text": "side by side. Each group shows the file name, file size, creation"
+  },
+  {
+    "start": 428.76,
+    "end": 434.11,
+    "text": "date, and pixel dimensions for each image. The recommended"
+  },
+  {
+    "start": 434.11,
+    "end": 438.26,
+    "text": "\"keep\" candidate (typically the highest resolution or most"
+  },
+  {
+    "start": 438.26,
+    "end": 442.42,
+    "text": "recently modified version) is highlighted automatically."
+  },
+  {
+    "start": 442.42,
+    "end": 446.76,
+    "text": "You can click any image to view it at full size before making a"
+  },
+  {
+    "start": 446.76,
+    "end": 452.11,
+    "text": "decision. This is especially important for near-duplicates in"
+  },
+  {
+    "start": 452.11,
+    "end": 456.14,
+    "text": "the \"Very similar\" mode, where you want to confirm that the"
+  },
+  {
+    "start": 456.14,
+    "end": 459.82,
+    "text": "images are genuinely equivalent before deleting."
+  },
+  {
+    "start": 459.82,
+    "end": 463.99,
+    "text": "Use the \"Select all duplicates\" button to auto-select the"
+  },
+  {
+    "start": 463.99,
+    "end": 468.7,
+    "text": "recommended deletion candidates across all groups, or review and"
+  },
+  {
+    "start": 468.7,
+    "end": 474.6,
+    "text": "adjust each group manually. Find Duplicates never pre-selects files"
+  },
+  {
+    "start": 474.6,
+    "end": 478.34,
+    "text": "for deletion without your explicit confirmation."
+  },
+  {
+    "start": 478.34,
+    "end": 482.93,
+    "text": "### Step 5 - Delete selected duplicates"
+  },
+  {
+    "start": 482.93,
+    "end": 487.01,
+    "text": "Once you have reviewed and confirmed your selections, click"
+  },
+  {
+    "start": 487.01,
+    "end": 492.86,
+    "text": "\"Delete Selected\". Deletions move files to the Trash (on macOS"
+  },
+  {
+    "start": 492.86,
+    "end": 497.3,
+    "text": "and Windows) rather than permanently deleting them immediately."
+  },
+  {
+    "start": 497.3,
+    "end": 501.17,
+    "text": "This gives you a safety net if you change your mind after the"
+  },
+  {
+    "start": 501.17,
+    "end": 503.09,
+    "text": "operation."
+  },
+  {
+    "start": 503.09,
+    "end": 508.18,
+    "text": "After deletion, Find Duplicates shows a summary: total files deleted,"
+  },
+  {
+    "start": 508.18,
+    "end": 511.92,
+    "text": "total storage recovered, and a breakdown by group."
+  },
+  {
+    "start": 511.92,
+    "end": 516.96,
+    "text": "## Exact vs near duplicates: how to decide what to keep"
+  },
+  {
+    "start": 516.96,
+    "end": 521.54,
+    "text": "For exact duplicates, the decision is easy: keep one copy,"
+  },
+  {
+    "start": 521.54,
+    "end": 527.18,
+    "text": "delete the rest. All copies are identical so there is no quality"
+  },
+  {
+    "start": 527.18,
+    "end": 532.8,
+    "text": "consideration. Keep the one in your primary, organized library"
+  },
+  {
+    "start": 532.8,
+    "end": 537.29,
+    "text": "location and delete copies in backup folders, downloads, or"
+  },
+  {
+    "start": 537.29,
+    "end": 539.54,
+    "text": "synced directories."
+  },
+  {
+    "start": 539.54,
+    "end": 544.01,
+    "text": "For near-duplicates, use these criteria to decide which version"
+  },
+  {
+    "start": 544.01,
+    "end": 545.66,
+    "text": "to keep:"
+  },
+  {
+    "start": 545.66,
+    "end": 557.59,
+    "text": "- Higher resolution wins. If two images show the same scene and one is 4000×3000"
+  },
+  {
+    "start": 557.59,
+    "end": 567.94,
+    "text": "- Larger file size often means better quality. Between two otherwise equal image"
+  },
+  {
+    "start": 567.94,
+    "end": 580.03,
+    "text": "- Prefer originals over edited copies. Keep the RAW or unedited original. Edited"
+  },
+  {
+    "start": 580.03,
+    "end": 590.21,
+    "text": "- Check EXIF metadata. The original photo preserves EXIF data (camera settings, "
+  },
+  {
+    "start": 590.21,
+    "end": 597.26,
+    "text": "A systematic approach to photo management keeps your library clean long-term - P"
+  },
+  {
+    "start": 597.26,
+    "end": 601.92,
+    "text": "## Preventing duplicate accumulation going forward"
+  },
+  {
+    "start": 601.92,
+    "end": 607.42,
+    "text": "Cleaning your library once is satisfying. Keeping it clean over"
+  },
+  {
+    "start": 607.42,
+    "end": 610.82,
+    "text": "time requires a few systematic habits."
+  },
+  {
+    "start": 610.82,
+    "end": 613.92,
+    "text": "Establish a single source of truth."
+  },
+  {
+    "start": 613.92,
+    "end": 618.24,
+    "text": "Decide where your canonical photo library lives- whether that is"
+  },
+  {
+    "start": 618.24,
+    "end": 623.14,
+    "text": "Apple Photos, Google Photos, Lightroom, or a folder structure on"
+  },
+  {
+    "start": 623.14,
+    "end": 628.97,
+    "text": "an external drive. All other locations (phone camera roll, cloud"
+  },
+  {
+    "start": 628.97,
+    "end": 633.58,
+    "text": "syncs, backup folders) feed into this one library and are cleared"
+  },
+  {
+    "start": 633.58,
+    "end": 635.5,
+    "text": "regularly."
+  },
+  {
+    "start": 635.5,
+    "end": 637.51,
+    "text": "Cull on import."
+  },
+  {
+    "start": 637.51,
+    "end": 642.02,
+    "text": "The best time to remove near-duplicate burst shots is immediately"
+  },
+  {
+    "start": 642.02,
+    "end": 646.34,
+    "text": "after an import session, while you still remember which frame was"
+  },
+  {
+    "start": 646.34,
+    "end": 651.62,
+    "text": "best. Letting these accumulate means doing the decision-making"
+  },
+  {
+    "start": 651.62,
+    "end": 654.77,
+    "text": "work later when context is lost."
+  },
+  {
+    "start": 654.77,
+    "end": 657.67,
+    "text": "Run Find Duplicates quarterly."
+  },
+  {
+    "start": 657.67,
+    "end": 663.17,
+    "text": "Even with good habits, duplicates accumulate. A quarterly"
+  },
+  {
+    "start": 663.17,
+    "end": 668.66,
+    "text": "deduplication scan catches what slips through. With TwinHunt"
+  },
+  {
+    "start": 668.66,
+    "end": 672.91,
+    "text": "running entirely in the browser, it takes less than five minutes"
+  },
+  {
+    "start": 672.91,
+    "end": 676.37,
+    "text": "for a library under 5,000 photos."
+  },
+  {
+    "start": 676.37,
+    "end": 679.06,
+    "text": "## FAQ"
+  },
+  {
+    "start": 679.06,
+    "end": 685.49,
+    "text": "### Will Find Duplicates find duplicate photos even if they have different filen"
+  },
+  {
+    "start": 685.49,
+    "end": 691.66,
+    "text": "Yes. Find Duplicates uses perceptual hashing which analyzes the visual"
+  },
+  {
+    "start": 691.66,
+    "end": 696.86,
+    "text": "content of the image, not the filename. A photo named"
+  },
+  {
+    "start": 696.86,
+    "end": 704.11,
+    "text": "IMG_4721.jpg and its copy named vacation-photo.jpg will be"
+  },
+  {
+    "start": 704.11,
+    "end": 708.07,
+    "text": "detected as identical regardless of the name difference."
+  },
+  {
+    "start": 708.07,
+    "end": 715.92,
+    "text": "### Can Find Duplicates find duplicates across different formats (JPEG and PNG o"
+  },
+  {
+    "start": 715.92,
+    "end": 721.87,
+    "text": "Yes. Perceptual hashing operates on the decoded visual content of"
+  },
+  {
+    "start": 721.87,
+    "end": 727.99,
+    "text": "the image, not the encoded bytes. A JPEG and a PNG of the same"
+  },
+  {
+    "start": 727.99,
+    "end": 732.46,
+    "text": "photo will produce very similar perceptual hashes and be grouped"
+  },
+  {
+    "start": 732.46,
+    "end": 738.02,
+    "text": "as near-duplicates. Cryptographic hash matching (for exact"
+  },
+  {
+    "start": 738.02,
+    "end": 742.78,
+    "text": "duplicates) requires byte-identical files, so it would not catch"
+  },
+  {
+    "start": 742.78,
+    "end": 746.54,
+    "text": "cross-format copies- but perceptual hashing does."
+  },
+  {
+    "start": 746.54,
+    "end": 750.72,
+    "text": "### Are my photos sent to any server?"
+  },
+  {
+    "start": 750.72,
+    "end": 756.96,
+    "text": "No. Find Duplicates processes all images entirely within your browser"
+  },
+  {
+    "start": 756.96,
+    "end": 762.89,
+    "text": "using JavaScript. No image data, no thumbnails, and no hash"
+  },
+  {
+    "start": 762.89,
+    "end": 768.58,
+    "text": "values are transmitted to any external server. Your photos never"
+  },
+  {
+    "start": 768.58,
+    "end": 770.71,
+    "text": "leave your device."
+  },
+  {
+    "start": 770.71,
+    "end": 775.94,
+    "text": "### How large a photo library can Find Duplicates handle?"
+  },
+  {
+    "start": 775.94,
+    "end": 780.84,
+    "text": "Find Duplicates can process libraries of tens of thousands of images."
+  },
+  {
+    "start": 780.84,
+    "end": 786.48,
+    "text": "For very large libraries (50,000+ photos), processing time"
+  },
+  {
+    "start": 786.48,
+    "end": 792.14,
+    "text": "increases but the tool remains stable. Processing speed depends"
+  },
+  {
+    "start": 792.14,
+    "end": 796.85,
+    "text": "on your device's CPU and the image resolutions in the library."
+  },
+  {
+    "start": 796.85,
+    "end": 801.53,
+    "text": "Most libraries under 10,000 photos complete in under two minutes."
+  },
+  {
+    "start": 801.53,
+    "end": 805.68,
+    "text": "### What happens to deleted files?"
+  },
+  {
+    "start": 805.68,
+    "end": 810.46,
+    "text": "Deleted files are moved to your operating system's Trash (Recycle"
+  },
+  {
+    "start": 810.46,
+    "end": 816.41,
+    "text": "Bin on Windows, Trash on macOS). They are not permanently deleted"
+  },
+  {
+    "start": 816.41,
+    "end": 821.86,
+    "text": "immediately. You have a recovery window to restore anything that"
+  },
+  {
+    "start": 821.86,
+    "end": 825.7,
+    "text": "was deleted by mistake before emptying the Trash."
+  }
+]

@@ -1,0 +1,207 @@
+[
+  {
+    "start": 0,
+    "end": 3.74,
+    "text": "What is GPS metadata and where does it come from?"
+  },
+  {
+    "start": 3.74,
+    "end": 17.98,
+    "text": "Every digital photo contains a hidden block of data called EXIF (Exchangeable Im"
+  },
+  {
+    "start": 17.98,
+    "end": 36.31,
+    "text": "EXIF data includes useful information like camera model, lens settings, shutter "
+  },
+  {
+    "start": 36.31,
+    "end": 53.54,
+    "text": "This data is invisible when you look at the photo normally. You cannot see it in"
+  },
+  {
+    "start": 53.54,
+    "end": 60.1,
+    "text": "Every smartphone photo embeds GPS coordinates by default - Photo by Rodion Kutsa"
+  },
+  {
+    "start": 60.1,
+    "end": 64.32,
+    "text": "Real-world privacy risks from GPS photo metadata"
+  },
+  {
+    "start": 64.32,
+    "end": 73.15,
+    "text": "The risks are not theoretical. There are documented cases where GPS metadata in "
+  },
+  {
+    "start": 73.15,
+    "end": 75.58,
+    "text": "Home address exposure"
+  },
+  {
+    "start": 75.58,
+    "end": 92.86,
+    "text": "When you photograph something in your home- a product you are selling on Craigsl"
+  },
+  {
+    "start": 92.86,
+    "end": 96.24,
+    "text": "Celebrity and journalist location tracking"
+  },
+  {
+    "start": 96.24,
+    "end": 118.44,
+    "text": "In 2012, Vice Media published photos of John McAfee while he was in hiding in Ce"
+  },
+  {
+    "start": 118.44,
+    "end": 121.1,
+    "text": "Workplace and routine mapping"
+  },
+  {
+    "start": 121.1,
+    "end": 139.13,
+    "text": "A series of photos posted over time can map your entire daily routine. GPS times"
+  },
+  {
+    "start": 139.13,
+    "end": 142.37,
+    "text": "Military and operational security"
+  },
+  {
+    "start": 142.37,
+    "end": 159.89,
+    "text": "In 2007, US Army soldiers photographed newly delivered Apache helicopters in Ira"
+  },
+  {
+    "start": 159.89,
+    "end": 164.9,
+    "text": "Do social media platforms remove GPS metadata automatically?"
+  },
+  {
+    "start": 164.9,
+    "end": 178.85,
+    "text": "Some platforms do strip EXIF data when you upload - Instagram, Facebook, and Twi"
+  },
+  {
+    "start": 178.85,
+    "end": 180.43,
+    "text": "- {item}"
+  },
+  {
+    "start": 180.43,
+    "end": 190.92,
+    "text": "The safe approach is to remove GPS metadata from the source file before sharing "
+  },
+  {
+    "start": 190.92,
+    "end": 196.06,
+    "text": "How to remove GPS data from photos using SammaPix EXIF Viewer"
+  },
+  {
+    "start": 196.06,
+    "end": 210.43,
+    "text": "SammaPix EXIF Viewer is a free, browser-based tool that reads and strips EXIF me"
+  },
+  {
+    "start": 210.43,
+    "end": 213.94,
+    "text": "Here is the complete process, step by step."
+  },
+  {
+    "start": 213.94,
+    "end": 215.52,
+    "text": "{title}"
+  },
+  {
+    "start": 215.52,
+    "end": 217.13,
+    "text": "{body}"
+  },
+  {
+    "start": 217.13,
+    "end": 219.43,
+    "text": "Free tool- no signup"
+  },
+  {
+    "start": 219.43,
+    "end": 224.02,
+    "text": "Remove GPS from your photos now - SammaPix EXIF Viewer"
+  },
+  {
+    "start": 224.02,
+    "end": 227.62,
+    "text": "Other methods to remove GPS from photos"
+  },
+  {
+    "start": 227.62,
+    "end": 233.62,
+    "text": "If you prefer to work with your files locally or need to process large batches, "
+  },
+  {
+    "start": 233.62,
+    "end": 236.3,
+    "text": "Windows: File Properties"
+  },
+  {
+    "start": 236.3,
+    "end": 254.38,
+    "text": "Right-click the image, select Properties, go to the Details tab, and click \"Remo"
+  },
+  {
+    "start": 254.38,
+    "end": 256.82,
+    "text": "macOS: Preview"
+  },
+  {
+    "start": 256.82,
+    "end": 279.6,
+    "text": "macOS Preview does not strip EXIF data when you export a photo. For reliable GPS"
+  },
+  {
+    "start": 279.6,
+    "end": 281.83,
+    "text": "iPhone: Settings"
+  },
+  {
+    "start": 281.83,
+    "end": 305.23,
+    "text": "You can prevent GPS data from being written in the first place. Go to Settings -"
+  },
+  {
+    "start": 305.23,
+    "end": 307.87,
+    "text": "Command line: ExifTool"
+  },
+  {
+    "start": 307.87,
+    "end": 326.66,
+    "text": "For technical users and batch processing, ExifTool is the standard: exiftool -gp"
+  },
+  {
+    "start": 326.66,
+    "end": 333.79,
+    "text": "GPS coordinates in your photos can pinpoint your exact location - Photo by Captu"
+  },
+  {
+    "start": 333.79,
+    "end": 336.6,
+    "text": "Compress and clean in one step"
+  },
+  {
+    "start": 336.6,
+    "end": 348.1,
+    "text": "If you are preparing photos for a website or social post, you likely want to bot"
+  },
+  {
+    "start": 348.1,
+    "end": 368.69,
+    "text": "SammaPix handles both in a single workflow. The compress tool strips EXIF metada"
+  },
+  {
+    "start": 368.69,
+    "end": 385.03,
+    "text": "Use EXIF Viewer when you need to inspect metadata first, remove it without re-co"
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "start": 0,
+    "end": 2.4,
+    "text": "How we ran the benchmark"
+  },
+  {
+    "start": 2.4,
+    "end": 20.69,
+    "text": "We selected 10 images representative of common real-world use cases: product pho"
+  },
+  {
+    "start": 20.69,
+    "end": 37.78,
+    "text": "TinyPNG was used via the browser interface at tinypng.com. SammaPix was used via"
+  },
+  {
+    "start": 37.78,
+    "end": 40.58,
+    "text": "Compression benchmark results"
+  },
+  {
+    "start": 40.58,
+    "end": 49.27,
+    "text": "The table below shows results across all 10 test images. Both tools received the"
+  },
+  {
+    "start": 49.27,
+    "end": 51.38,
+    "text": "Benchmark verdict"
+  },
+  {
+    "start": 51.38,
+    "end": 74.06,
+    "text": "Across 10 images, TinyPNG won 4 rounds (all PNG files), SammaPix won 3 (JPEG and"
+  },
+  {
+    "start": 74.06,
+    "end": 90.72,
+    "text": "In practical terms: if you only compress PNG files at high volume and every kilo"
+  },
+  {
+    "start": 90.72,
+    "end": 95.02,
+    "text": "Feature comparison: SammaPix vs TinyPNG"
+  },
+  {
+    "start": 95.02,
+    "end": 101.86,
+    "text": "Where your images are processed matters as much as how well they are compressed "
+  },
+  {
+    "start": 101.86,
+    "end": 105.12,
+    "text": "The privacy difference — and why it matters"
+  },
+  {
+    "start": 105.12,
+    "end": 127.97,
+    "text": "This is the most important part of the comparison, and it is often skipped in su"
+  },
+  {
+    "start": 127.97,
+    "end": 151.97,
+    "text": "But upload-based compression has inherent limitations regardless of the provider"
+  },
+  {
+    "start": 151.97,
+    "end": 156.7,
+    "text": "For a specific category of images, it is not acceptable at all."
+  },
+  {
+    "start": 156.7,
+    "end": 159.94,
+    "text": "Images that should never leave your device"
+  },
+  {
+    "start": 159.94,
+    "end": 166.68,
+    "text": "- Medical images: X-rays, scans, clinical photos subject to HIPAA or GDPR restri"
+  },
+  {
+    "start": 166.68,
+    "end": 172.37,
+    "text": "- Legal documents: Scanned contracts, ID documents, sensitive correspondence"
+  },
+  {
+    "start": 172.37,
+    "end": 178.49,
+    "text": "- Personal photos: Family photos, anything containing private moments or unaware"
+  },
+  {
+    "start": 178.49,
+    "end": 185.98,
+    "text": "- Proprietary assets: Unreleased product designs, brand materials under NDA, con"
+  },
+  {
+    "start": 185.98,
+    "end": 192.46,
+    "text": "- Any image with embedded GPS data: EXIF location data can be extracted from fil"
+  },
+  {
+    "start": 192.46,
+    "end": 217.27,
+    "text": "SammaPix runs entirely in your browser using WebAssembly. When you drop a file o"
+  },
+  {
+    "start": 217.27,
+    "end": 229.75,
+    "text": "This is not just a marketing claim — it is verifiable. Open your browser's netwo"
+  },
+  {
+    "start": 229.75,
+    "end": 233.54,
+    "text": "Speed comparison: no-upload vs server-side"
+  },
+  {
+    "start": 233.54,
+    "end": 254.81,
+    "text": "TinyPNG's processing speed depends on three factors: your upload bandwidth, serv"
+  },
+  {
+    "start": 254.81,
+    "end": 274.03,
+    "text": "SammaPix has no network dependency. Compression starts immediately after you dro"
+  },
+  {
+    "start": 274.03,
+    "end": 288.65,
+    "text": "For batch workflows — compressing 20, 50, or 100 files at once — the speed advan"
+  },
+  {
+    "start": 288.65,
+    "end": 292.94,
+    "text": "Format support: where SammaPix has a clear advantage"
+  },
+  {
+    "start": 292.94,
+    "end": 306.36,
+    "text": "TinyPNG supports JPEG, PNG, and WebP. That covers the majority of web image work"
+  },
+  {
+    "start": 306.36,
+    "end": 319.44,
+    "text": "- HEIC: The default format from iPhone cameras since iOS 11. TinyPNG cannot proc"
+  },
+  {
+    "start": 319.44,
+    "end": 331.34,
+    "text": "- AVIF: The next-generation image format with superior compression to WebP. Tiny"
+  },
+  {
+    "start": 331.34,
+    "end": 340.39,
+    "text": "- GIF: TinyPNG dropped GIF support. SammaPix compresses GIF files, important for"
+  },
+  {
+    "start": 340.39,
+    "end": 354.12,
+    "text": "If your workflow involves images from iPhones (HEIC), modern cameras, or next-ge"
+  },
+  {
+    "start": 354.12,
+    "end": 357.74,
+    "text": "When to use TinyPNG vs SammaPix"
+  },
+  {
+    "start": 357.74,
+    "end": 360.91,
+    "text": "TinyPNG is the better choice if:"
+  },
+  {
+    "start": 360.91,
+    "end": 366.29,
+    "text": "- You only compress JPEG and PNG files (no HEIC, AVIF, or GIF)"
+  },
+  {
+    "start": 366.29,
+    "end": 369.79,
+    "text": "- You compress fewer than 20 images per day"
+  },
+  {
+    "start": 369.79,
+    "end": 373.7,
+    "text": "- Your images contain no sensitive or private content"
+  },
+  {
+    "start": 373.7,
+    "end": 378.48,
+    "text": "- You prefer a tool with years of brand recognition and a large user base"
+  },
+  {
+    "start": 378.48,
+    "end": 382.94,
+    "text": "- Maximum PNG compression is the only metric you care about"
+  },
+  {
+    "start": 382.94,
+    "end": 385.94,
+    "text": "SammaPix is the better choice if:"
+  },
+  {
+    "start": 385.94,
+    "end": 391.3,
+    "text": "- You process images containing private, sensitive, or proprietary content"
+  },
+  {
+    "start": 391.3,
+    "end": 395.3,
+    "text": "- You need to compress HEIC, AVIF, or GIF files"
+  },
+  {
+    "start": 395.3,
+    "end": 400.03,
+    "text": "- You compress more than 20 images per day without paying for a Pro plan"
+  },
+  {
+    "start": 400.03,
+    "end": 404.93,
+    "text": "- You want processing speed that does not depend on internet connection quality"
+  },
+  {
+    "start": 404.93,
+    "end": 412.56,
+    "text": "- You need additional tools alongside compression — resize, EXIF removal, format"
+  },
+  {
+    "start": 412.56,
+    "end": 416.18,
+    "text": "- You work on a slow or metered internet connection"
+  },
+  {
+    "start": 416.18,
+    "end": 420.36,
+    "text": "Overall verdict: SammaPix vs TinyPNG"
+  },
+  {
+    "start": 420.36,
+    "end": 436.85,
+    "text": "TinyPNG remains a competent tool with a genuine edge in PNG compression. If PNG-"
+  },
+  {
+    "start": 436.85,
+    "end": 454.9,
+    "text": "But TinyPNG has not fundamentally changed in years. It does not support HEIC or "
+  },
+  {
+    "start": 454.9,
+    "end": 479.71,
+    "text": "SammaPix wins on privacy, format coverage, batch volume, and speed. The compress"
+  },
+  {
+    "start": 479.71,
+    "end": 483.14,
+    "text": "Is SammaPix as good as TinyPNG?"
+  },
+  {
+    "start": 483.14,
+    "end": 508.78,
+    "text": "Yes. In our benchmark, both tools achieved 50–80% file size reduction across 10 "
+  },
+  {
+    "start": 508.78,
+    "end": 514.22,
+    "text": "Is TinyPNG safe to use? Does it keep my images?"
+  },
+  {
+    "start": 514.22,
+    "end": 539.83,
+    "text": "TinyPNG uploads your images to servers in the Netherlands for processing. Their "
+  },
+  {
+    "start": 539.83,
+    "end": 543.7,
+    "text": "What is the best free alternative to TinyPNG?"
+  },
+  {
+    "start": 543.7,
+    "end": 568.25,
+    "text": "SammaPix is the strongest free TinyPNG alternative in 2026. It matches TinyPNG's"
+  },
+  {
+    "start": 568.25,
+    "end": 571.58,
+    "text": "Can SammaPix compress PNG files?"
+  },
+  {
+    "start": 571.58,
+    "end": 592.3,
+    "text": "Yes. SammaPix compresses PNG files using lossless recompression, typically reduc"
+  },
+  {
+    "start": 592.3,
+    "end": 595.73,
+    "text": "Which image compressor is best for privacy?"
+  },
+  {
+    "start": 595.73,
+    "end": 619.25,
+    "text": "SammaPix is the best image compressor for privacy. It runs entirely in your brow"
+  }
+]

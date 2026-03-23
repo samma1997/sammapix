@@ -1,0 +1,477 @@
+[
+  {
+    "start": 0,
+    "end": 4.13,
+    "text": "## Why image filenames matter for SEO"
+  },
+  {
+    "start": 4.13,
+    "end": 28.13,
+    "text": "Google uses image filenames as one of several signals to understand what an imag"
+  },
+  {
+    "start": 28.13,
+    "end": 53.42,
+    "text": "Google Image Search drives a significant volume of traffic for content publisher"
+  },
+  {
+    "start": 53.42,
+    "end": 74.23,
+    "text": "The filename is processed before the page is fully crawled. When Googlebot disco"
+  },
+  {
+    "start": 74.23,
+    "end": 79.51,
+    "text": "## The problem: camera-generated filenames tell Google nothing"
+  },
+  {
+    "start": 79.51,
+    "end": 95.86,
+    "text": "Every camera, smartphone, and screenshot tool generates filenames automatically."
+  },
+  {
+    "start": 95.86,
+    "end": 104.74,
+    "text": "- IMG_0001.jpg, IMG_0002.jpg- iPhone sequential numbering"
+  },
+  {
+    "start": 104.74,
+    "end": 113.02,
+    "text": "- DSC_1234.CR2, _MG_5678.NEF- DSLR raw files"
+  },
+  {
+    "start": 113.02,
+    "end": 120.65,
+    "text": "- Screenshot 2026-02-14 at 09.32.11.png- macOS screenshots"
+  },
+  {
+    "start": 120.65,
+    "end": 128.04,
+    "text": "- 20260214_093211.jpg- Android timestamp filenames"
+  },
+  {
+    "start": 128.04,
+    "end": 134.23,
+    "text": "- image (1).png, image (2).png- browser download defaults"
+  },
+  {
+    "start": 134.23,
+    "end": 152.02,
+    "text": "When Google encounters these filenames, it receives no useful signal. The image "
+  },
+  {
+    "start": 152.02,
+    "end": 175.25,
+    "text": "The traditional solution is to rename each image manually before uploading. For "
+  },
+  {
+    "start": 175.25,
+    "end": 180.96,
+    "text": "## How AI understands image content and generates descriptive filenames"
+  },
+  {
+    "start": 180.96,
+    "end": 199.34,
+    "text": "Modern AI vision models can analyze an image and identify its content with remar"
+  },
+  {
+    "start": 199.34,
+    "end": 232.75,
+    "text": "When you drop an image into an AI rename tool, the process works as follows. Fir"
+  },
+  {
+    "start": 232.75,
+    "end": 249.62,
+    "text": "The result is a filename that would take a human several seconds to write per im"
+  },
+  {
+    "start": 249.62,
+    "end": 254.95,
+    "text": "## Before and after: what AI image renaming actually produces"
+  },
+  {
+    "start": 254.95,
+    "end": 262.9,
+    "text": "The transformation is straightforward to illustrate. Here are real-world example"
+  },
+  {
+    "start": 262.9,
+    "end": 265.58,
+    "text": "Before (camera default) |"
+  },
+  {
+    "start": 265.58,
+    "end": 268.15,
+    "text": "After (AI rename) |"
+  },
+  {
+    "start": 268.15,
+    "end": 272.59,
+    "text": "IMG_0023.jpg |"
+  },
+  {
+    "start": 272.59,
+    "end": 276.74,
+    "text": "golden-gate-bridge-sunset-san-francisco.jpg |"
+  },
+  {
+    "start": 276.74,
+    "end": 280.97,
+    "text": "DSC_4891.jpg |"
+  },
+  {
+    "start": 280.97,
+    "end": 285.29,
+    "text": "espresso-coffee-latte-art-white-ceramic-cup.jpg |"
+  },
+  {
+    "start": 285.29,
+    "end": 288.55,
+    "text": "image (14).png |"
+  },
+  {
+    "start": 288.55,
+    "end": 292.68,
+    "text": "minimal-dark-mode-dashboard-ui-analytics.png |"
+  },
+  {
+    "start": 292.68,
+    "end": 298.99,
+    "text": "20260201_174302.jpg |"
+  },
+  {
+    "start": 298.99,
+    "end": 303.12,
+    "text": "woman-hiking-mountain-trail-snow-winter-alps.jpg |"
+  },
+  {
+    "start": 303.12,
+    "end": 308.35,
+    "text": "_MG_0112.CR2 (converted) |"
+  },
+  {
+    "start": 308.35,
+    "end": 312.43,
+    "text": "red-maple-leaf-autumn-forest-ground-macro.jpg |"
+  },
+  {
+    "start": 312.43,
+    "end": 335.04,
+    "text": "Notice the pattern in the AI-generated filenames. The primary subject appears fi"
+  },
+  {
+    "start": 335.04,
+    "end": 338.95,
+    "text": "## How SammaPix AI Rename works"
+  },
+  {
+    "start": 338.95,
+    "end": 358.61,
+    "text": "SammaPix AI Rename is built on Google Gemini Flash, a multimodal vision model op"
+  },
+  {
+    "start": 358.61,
+    "end": 397.66,
+    "text": "The technical pipeline works in three steps. First, the tool generates a thumbna"
+  },
+  {
+    "start": 397.66,
+    "end": 420.53,
+    "text": "You can rename a single image or drop an entire batch of files. The tool process"
+  },
+  {
+    "start": 420.53,
+    "end": 424.85,
+    "text": "## SEO best practices for image filenames"
+  },
+  {
+    "start": 424.85,
+    "end": 438.38,
+    "text": "Whether you rename manually or use an AI tool, the rules for SEO-optimized image"
+  },
+  {
+    "start": 438.38,
+    "end": 443.16,
+    "text": "### Use hyphens, not underscores or spaces"
+  },
+  {
+    "start": 443.16,
+    "end": 472.15,
+    "text": "Google treats hyphens as word separators. A filename of red-ceramic-coffee-mug.j"
+  },
+  {
+    "start": 472.15,
+    "end": 476.14,
+    "text": "### Keep filenames lowercase"
+  },
+  {
+    "start": 476.14,
+    "end": 497.04,
+    "text": "URLs are case-sensitive on most server configurations. A file named Golden-Gate-"
+  },
+  {
+    "start": 497.04,
+    "end": 501.17,
+    "text": "### Be descriptive and specific"
+  },
+  {
+    "start": 501.17,
+    "end": 531,
+    "text": "Generic filenames like photo.jpg or image1.jpg provide no ranking benefit. Aim f"
+  },
+  {
+    "start": 531,
+    "end": 534.91,
+    "text": "### Drop stop words and filler"
+  },
+  {
+    "start": 534.91,
+    "end": 551.57,
+    "text": "Words like \"a\", \"the\", \"of\", \"and\", \"with\" add length to the filename without co"
+  },
+  {
+    "start": 551.57,
+    "end": 555.94,
+    "text": "### Match the filename to the page topic"
+  },
+  {
+    "start": 555.94,
+    "end": 578.33,
+    "text": "A travel blog post about Tokyo should feature images with filenames that include"
+  },
+  {
+    "start": 578.33,
+    "end": 584.38,
+    "text": "## Alt text vs filename vs title attribute: understanding the difference"
+  },
+  {
+    "start": 584.38,
+    "end": 596.54,
+    "text": "These three image attributes serve different purposes and carry different weight"
+  },
+  {
+    "start": 596.54,
+    "end": 601.01,
+    "text": "### Image filename (the URL path)"
+  },
+  {
+    "start": 601.01,
+    "end": 624.77,
+    "text": "The filename is part of the image's URL. It is processed by Google before the pa"
+  },
+  {
+    "start": 624.77,
+    "end": 628.94,
+    "text": "### Alt text (the alt attribute)"
+  },
+  {
+    "start": 628.94,
+    "end": 651.96,
+    "text": "Alt text is the most important on-page image SEO signal. It lives in the HTML as"
+  },
+  {
+    "start": 651.96,
+    "end": 655.44,
+    "text": "### Title attribute"
+  },
+  {
+    "start": 655.44,
+    "end": 687.26,
+    "text": "The title attribute on an image appears as a tooltip when a user hovers over it."
+  },
+  {
+    "start": 687.26,
+    "end": 689.02,
+    "text": "Signal |"
+  },
+  {
+    "start": 689.02,
+    "end": 690.96,
+    "text": "SEO weight |"
+  },
+  {
+    "start": 690.96,
+    "end": 692.66,
+    "text": "Purpose |"
+  },
+  {
+    "start": 692.66,
+    "end": 694.37,
+    "text": "Required? |"
+  },
+  {
+    "start": 694.37,
+    "end": 696.19,
+    "text": "Filename |"
+  },
+  {
+    "start": 696.19,
+    "end": 697.63,
+    "text": "High |"
+  },
+  {
+    "start": 697.63,
+    "end": 700.68,
+    "text": "Early relevance signal at crawl time |"
+  },
+  {
+    "start": 700.68,
+    "end": 703.18,
+    "text": "Yes (always present) |"
+  },
+  {
+    "start": 703.18,
+    "end": 704.98,
+    "text": "Alt text |"
+  },
+  {
+    "start": 704.98,
+    "end": 706.87,
+    "text": "Very high |"
+  },
+  {
+    "start": 706.87,
+    "end": 710.42,
+    "text": "Contextual relevance + accessibility |"
+  },
+  {
+    "start": 710.42,
+    "end": 713.62,
+    "text": "Yes (required for accessibility) |"
+  },
+  {
+    "start": 713.62,
+    "end": 715.85,
+    "text": "Title attribute |"
+  },
+  {
+    "start": 715.85,
+    "end": 719.38,
+    "text": "Tooltip on hover, minimal SEO value |"
+  },
+  {
+    "start": 719.38,
+    "end": 721.18,
+    "text": "Optional |"
+  },
+  {
+    "start": 721.18,
+    "end": 726.98,
+    "text": "## Step-by-step: rename images for SEO with SammaPix AI Rename"
+  },
+  {
+    "start": 726.98,
+    "end": 735.55,
+    "text": "Using the SammaPix AI Rename tool takes under five minutes for a batch of 30 to "
+  },
+  {
+    "start": 735.55,
+    "end": 740.28,
+    "text": "### Step 1 - Sign in (free account required)"
+  },
+  {
+    "start": 740.28,
+    "end": 754.82,
+    "text": "AI Rename requires a free account to prevent API abuse. Click \"Sign in with Goog"
+  },
+  {
+    "start": 754.82,
+    "end": 759.46,
+    "text": "### Step 2 - Drop your images into the tool"
+  },
+  {
+    "start": 759.46,
+    "end": 775.51,
+    "text": "Drag and drop a batch of images onto the drop zone, or click to open a file pick"
+  },
+  {
+    "start": 775.51,
+    "end": 780.72,
+    "text": "### Step 3 - Review AI-generated suggestions"
+  },
+  {
+    "start": 780.72,
+    "end": 802.99,
+    "text": "For each image, the tool displays the original filename alongside the AI-generat"
+  },
+  {
+    "start": 802.99,
+    "end": 807.6,
+    "text": "### Step 4 - Download your renamed images"
+  },
+  {
+    "start": 807.6,
+    "end": 826.49,
+    "text": "Download individual images by clicking the download button on each card, or clic"
+  },
+  {
+    "start": 826.49,
+    "end": 831.07,
+    "text": "### Step 5 - Upload and update alt text"
+  },
+  {
+    "start": 831.07,
+    "end": 854.47,
+    "text": "Upload the renamed images to your CMS, e-commerce platform, or image hosting ser"
+  },
+  {
+    "start": 854.47,
+    "end": 878.76,
+    "text": "If you also need to reduce file sizes before uploading- which is almost always a"
+  },
+  {
+    "start": 878.76,
+    "end": 882.29,
+    "text": "## Frequently asked questions"
+  },
+  {
+    "start": 882.29,
+    "end": 887.52,
+    "text": "### Does image filename actually affect SEO rankings?"
+  },
+  {
+    "start": 887.52,
+    "end": 916.22,
+    "text": "Yes. Google's own documentation confirms that image filenames are a relevance si"
+  },
+  {
+    "start": 916.22,
+    "end": 921.89,
+    "text": "### Should I use hyphens or underscores in image filenames for SEO?"
+  },
+  {
+    "start": 921.89,
+    "end": 940.78,
+    "text": "Always use hyphens. Google treats hyphens as word separators- golden-gate-bridge"
+  },
+  {
+    "start": 940.78,
+    "end": 946.51,
+    "text": "### What is the difference between alt text and image filename for SEO?"
+  },
+  {
+    "start": 946.51,
+    "end": 972.94,
+    "text": "The filename is part of the image URL and gives Google an initial relevance sign"
+  },
+  {
+    "start": 972.94,
+    "end": 978.53,
+    "text": "### Is it worth renaming old images already indexed by Google?"
+  },
+  {
+    "start": 978.53,
+    "end": 1001.3,
+    "text": "Yes, but you must set up proper 301 redirects from the old image URL to the new "
+  },
+  {
+    "start": 1001.3,
+    "end": 1006.34,
+    "text": "### How many keywords should I include in an image filename?"
+  },
+  {
+    "start": 1006.34,
+    "end": 1028.86,
+    "text": "Aim for three to five descriptive keywords. Fewer than three often leaves releva"
+  }
+]

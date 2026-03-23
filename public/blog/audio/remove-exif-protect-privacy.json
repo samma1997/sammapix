@@ -1,0 +1,242 @@
+[
+  {
+    "start": 0,
+    "end": 2.54,
+    "text": "What is EXIF data?"
+  },
+  {
+    "start": 2.54,
+    "end": 24.91,
+    "text": "EXIF stands for Exchangeable Image File Format. It is a standard for embedding t"
+  },
+  {
+    "start": 24.91,
+    "end": 45.72,
+    "text": "When you press the shutter, the camera writes a block of data into the file alon"
+  },
+  {
+    "start": 45.72,
+    "end": 47.3,
+    "text": "{title}"
+  },
+  {
+    "start": 47.3,
+    "end": 49.03,
+    "text": "{detail}"
+  },
+  {
+    "start": 49.03,
+    "end": 52.73,
+    "text": "Why EXIF data is a real privacy risk"
+  },
+  {
+    "start": 52.73,
+    "end": 62.4,
+    "text": "The risks are not hypothetical. There are documented, high-profile cases where E"
+  },
+  {
+    "start": 62.4,
+    "end": 65.54,
+    "text": "Home address from a Marketplace listing"
+  },
+  {
+    "start": 65.54,
+    "end": 84.72,
+    "text": "Selling something on Craigslist, Facebook Marketplace, or Vinted? If you photogr"
+  },
+  {
+    "start": 84.72,
+    "end": 88.2,
+    "text": "The John McAfee case (2012)"
+  },
+  {
+    "start": 88.2,
+    "end": 115.1,
+    "text": "Vice Media published an exclusive interview with John McAfee while he was in hid"
+  },
+  {
+    "start": 115.1,
+    "end": 118.22,
+    "text": "Military operational security"
+  },
+  {
+    "start": 118.22,
+    "end": 143.04,
+    "text": "In 2007, US Army soldiers photographed newly delivered Apache helicopters at a b"
+  },
+  {
+    "start": 143.04,
+    "end": 145.82,
+    "text": "Routine and pattern exposure"
+  },
+  {
+    "start": 145.82,
+    "end": 167.59,
+    "text": "A series of photos posted to a public social account over time can map an entire"
+  },
+  {
+    "start": 167.59,
+    "end": 174.6,
+    "text": "Every smartphone photo can carry precise GPS coordinates in its metadata - Photo"
+  },
+  {
+    "start": 174.6,
+    "end": 178.7,
+    "text": "Do social platforms strip EXIF automatically?"
+  },
+  {
+    "start": 178.7,
+    "end": 190.42,
+    "text": "Instagram, Facebook, and X (Twitter) do strip most EXIF metadata when you upload"
+  },
+  {
+    "start": 190.42,
+    "end": 192,
+    "text": "- {item}"
+  },
+  {
+    "start": 192,
+    "end": 200.93,
+    "text": "The only reliable approach is to strip EXIF data from the source file before you"
+  },
+  {
+    "start": 200.93,
+    "end": 205.54,
+    "text": "How to remove EXIF data using SammaPix EXIF Viewer"
+  },
+  {
+    "start": 205.54,
+    "end": 215.42,
+    "text": "SammaPix EXIF Viewer processes your photos entirely in the browser- no upload, n"
+  },
+  {
+    "start": 215.42,
+    "end": 217.01,
+    "text": "{title}"
+  },
+  {
+    "start": 217.01,
+    "end": 218.62,
+    "text": "{body}"
+  },
+  {
+    "start": 218.62,
+    "end": 221.62,
+    "text": "Free tool- no upload, no signup"
+  },
+  {
+    "start": 221.62,
+    "end": 226.54,
+    "text": "Strip EXIF data from your photos now - SammaPix EXIF Viewer"
+  },
+  {
+    "start": 226.54,
+    "end": 230.14,
+    "text": "EXIF privacy tips for social media sharing"
+  },
+  {
+    "start": 230.14,
+    "end": 240.65,
+    "text": "Even if you trust the platforms you share to, building good habits around EXIF d"
+  },
+  {
+    "start": 240.65,
+    "end": 244.66,
+    "text": "Always strip GPS before listing anything for sale"
+  },
+  {
+    "start": 244.66,
+    "end": 261.22,
+    "text": "Marketplace listings (Facebook, Craigslist, Depop, eBay) are the highest-risk co"
+  },
+  {
+    "start": 261.22,
+    "end": 264.17,
+    "text": "Be careful with iMessage and email"
+  },
+  {
+    "start": 264.17,
+    "end": 283.78,
+    "text": "WhatsApp strips EXIF before sending. iMessage does not- photos sent via iMessage"
+  },
+  {
+    "start": 283.78,
+    "end": 287.88,
+    "text": "Disable GPS for your camera app if you do not need it"
+  },
+  {
+    "start": 287.88,
+    "end": 309.89,
+    "text": "On iPhone: Settings -> Privacy & Security -> Location Services -> Camera -> Neve"
+  },
+  {
+    "start": 309.89,
+    "end": 313.49,
+    "text": "Use a dedicated workflow for client photos"
+  },
+  {
+    "start": 313.49,
+    "end": 335.66,
+    "text": "If you are a photographer delivering images to clients, EXIF data contains your "
+  },
+  {
+    "start": 335.66,
+    "end": 338.5,
+    "text": "Compress and strip in one step"
+  },
+  {
+    "start": 338.5,
+    "end": 353.64,
+    "text": "If you are also optimizing images for web use, SammaPix Compress strips all EXIF"
+  },
+  {
+    "start": 353.64,
+    "end": 361.08,
+    "text": "Building good metadata hygiene into your photo sharing workflow protects your pr"
+  },
+  {
+    "start": 361.08,
+    "end": 364.85,
+    "text": "Alternative methods for removing EXIF data"
+  },
+  {
+    "start": 364.85,
+    "end": 367.97,
+    "text": "Windows: built-in File Properties"
+  },
+  {
+    "start": 367.97,
+    "end": 386.76,
+    "text": "Right-click any image file -> Properties -> Details tab -> \"Remove Properties an"
+  },
+  {
+    "start": 386.76,
+    "end": 389.98,
+    "text": "macOS: Photos app export"
+  },
+  {
+    "start": 389.98,
+    "end": 409.73,
+    "text": "In the macOS Photos app, select your images, go to File -> Export -> Export Phot"
+  },
+  {
+    "start": 409.73,
+    "end": 413.02,
+    "text": "iOS 17+: Share sheet"
+  },
+  {
+    "start": 413.02,
+    "end": 430.87,
+    "text": "In iOS 17 and later, when you share a photo via the Share sheet, tap \"Options\" a"
+  },
+  {
+    "start": 430.87,
+    "end": 433.51,
+    "text": "Command line: ExifTool"
+  },
+  {
+    "start": 433.51,
+    "end": 455.04,
+    "text": "ExifTool by Phil Harvey is the authoritative open-source tool for batch EXIF pro"
+  }
+]

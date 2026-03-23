@@ -1,0 +1,1397 @@
+[
+  {
+    "start": 0,
+    "end": 4.1,
+    "text": "## What is photo culling and why does it matter"
+  },
+  {
+    "start": 4.1,
+    "end": 8.42,
+    "text": "Photo culling is the process of reviewing every image from a shoot"
+  },
+  {
+    "start": 8.42,
+    "end": 12.62,
+    "text": "and selecting which ones to keep, edit, and deliver- and which"
+  },
+  {
+    "start": 12.62,
+    "end": 17.86,
+    "text": "ones to reject. The word comes from the Old French \"coillir,\""
+  },
+  {
+    "start": 17.86,
+    "end": 23.5,
+    "text": "meaning to gather or collect. In photography, it has come to mean"
+  },
+  {
+    "start": 23.5,
+    "end": 27.77,
+    "text": "the opposite: the discipline of eliminating rather than keeping."
+  },
+  {
+    "start": 27.77,
+    "end": 31.94,
+    "text": "Culling matters because editing time scales directly with the"
+  },
+  {
+    "start": 31.94,
+    "end": 37.99,
+    "text": "number of images you process. If you deliver 400 photos from a"
+  },
+  {
+    "start": 37.99,
+    "end": 42.62,
+    "text": "wedding, editing starts from the 400 best frames- not from all"
+  },
+  {
+    "start": 42.62,
+    "end": 48.84,
+    "text": "1,400 you shot. Every frame you reject during culling is time"
+  },
+  {
+    "start": 48.84,
+    "end": 54,
+    "text": "saved in Lightroom or Capture One. It is also a quality"
+  },
+  {
+    "start": 54,
+    "end": 58.87,
+    "text": "decision: clients and audiences see sharper curation as a sign of"
+  },
+  {
+    "start": 58.87,
+    "end": 61.32,
+    "text": "professional confidence."
+  },
+  {
+    "start": 61.32,
+    "end": 64.9,
+    "text": "According to a workflow survey published by"
+  },
+  {
+    "start": 64.9,
+    "end": 66.86,
+    "text": "Fstoppers"
+  },
+  {
+    "start": 66.86,
+    "end": 71.98,
+    "text": ", professional photographers spend an average of 30–45% of their"
+  },
+  {
+    "start": 71.98,
+    "end": 77.64,
+    "text": "total post-production time on culling alone. Cutting that in half"
+  },
+  {
+    "start": 77.64,
+    "end": 81.53,
+    "text": "is worth more than almost any other workflow improvement."
+  },
+  {
+    "start": 81.53,
+    "end": 86.38,
+    "text": "## The culling bottleneck: why most photographers are slow"
+  },
+  {
+    "start": 86.38,
+    "end": 90.36,
+    "text": "The core problem is decision fatigue combined with a slow"
+  },
+  {
+    "start": 90.36,
+    "end": 96.17,
+    "text": "interface. Most photographers open Lightroom, click through images"
+  },
+  {
+    "start": 96.17,
+    "end": 100.49,
+    "text": "with the mouse, hesitate on borderline shots, and repeat that"
+  },
+  {
+    "start": 100.49,
+    "end": 105.77,
+    "text": "cycle for hundreds of frames. Every click-and-pause adds up."
+  },
+  {
+    "start": 105.77,
+    "end": 108.48,
+    "text": "Three habits drive slow culling:"
+  },
+  {
+    "start": 108.48,
+    "end": 119.57,
+    "text": "- Making decisions with a mouse. Reaching for a mouse or trackpad to click a rat"
+  },
+  {
+    "start": 119.57,
+    "end": 132.5,
+    "text": "- Over-evaluating borderline shots. Spending 10 seconds on a frame that is clear"
+  },
+  {
+    "start": 132.5,
+    "end": 144.77,
+    "text": "- Working without a reference for comparison. Judging a frame in isolation makes"
+  },
+  {
+    "start": 144.77,
+    "end": 148.87,
+    "text": "A fast culling workflow solves all three of these bottlenecks"
+  },
+  {
+    "start": 148.87,
+    "end": 154.37,
+    "text": "systematically. The rest of this guide explains exactly how."
+  },
+  {
+    "start": 154.37,
+    "end": 159.12,
+    "text": "## Rating systems: stars, flags, and colors"
+  },
+  {
+    "start": 159.12,
+    "end": 163.46,
+    "text": "Before you start culling, decide which rating system you will use."
+  },
+  {
+    "start": 163.46,
+    "end": 168.12,
+    "text": "Most professional software supports three approaches: star ratings,"
+  },
+  {
+    "start": 168.12,
+    "end": 174,
+    "text": "flags (pick / reject), and color labels. Each has trade-offs."
+  },
+  {
+    "start": 174,
+    "end": 178.13,
+    "text": "### The flag system (fastest)"
+  },
+  {
+    "start": 178.13,
+    "end": 183.22,
+    "text": "The flag system is binary: a photo is either a pick (flagged) or a"
+  },
+  {
+    "start": 183.22,
+    "end": 189.02,
+    "text": "reject (flagged as rejected), with everything else unmarked. This"
+  },
+  {
+    "start": 189.02,
+    "end": 193.2,
+    "text": "is the fastest system for culling because it forces a single"
+  },
+  {
+    "start": 193.2,
+    "end": 198.22,
+    "text": "decision: keep or discard. In Lightroom, pressing"
+  },
+  {
+    "start": 198.22,
+    "end": 200.38,
+    "text": "flags a pick and"
+  },
+  {
+    "start": 200.38,
+    "end": 205.87,
+    "text": "flags a reject. No stopping to decide between three and four"
+  },
+  {
+    "start": 205.87,
+    "end": 207.58,
+    "text": "stars."
+  },
+  {
+    "start": 207.58,
+    "end": 213.29,
+    "text": "The limitation is granularity. If you want to distinguish between"
+  },
+  {
+    "start": 213.29,
+    "end": 217.46,
+    "text": "\"definitely deliver\" and \"maybe deliver if the client wants"
+  },
+  {
+    "start": 217.46,
+    "end": 221.57,
+    "text": "more,\" a binary system does not support that natively."
+  },
+  {
+    "start": 221.57,
+    "end": 226.34,
+    "text": "### The two-pass star system (most flexible)"
+  },
+  {
+    "start": 226.34,
+    "end": 231.02,
+    "text": "Many photographers use a simplified star system with just two or"
+  },
+  {
+    "start": 231.02,
+    "end": 236.11,
+    "text": "three tiers rather than the full five-star range. A common"
+  },
+  {
+    "start": 236.11,
+    "end": 239.23,
+    "text": "professional approach as described by"
+  },
+  {
+    "start": 239.23,
+    "end": 241.03,
+    "text": "Shotkit"
+  },
+  {
+    "start": 241.03,
+    "end": 249.36,
+    "text": "- 1 star: Technically acceptable- in focus, correctly exposed, subject present. "
+  },
+  {
+    "start": 249.36,
+    "end": 256.34,
+    "text": "- 2 stars: Good shot- technically strong and compositionally interesting. Candid"
+  },
+  {
+    "start": 256.34,
+    "end": 263.02,
+    "text": "- 3 stars: Hero shot- the best frame of a moment. Goes to the client or portfoli"
+  },
+  {
+    "start": 263.02,
+    "end": 269.83,
+    "text": "- No rating: Reject. Blurry, closed eyes, duplicate, technically unusable."
+  },
+  {
+    "start": 269.83,
+    "end": 274.2,
+    "text": "This approach lets you do a fast first pass (assigning 1s and"
+  },
+  {
+    "start": 274.2,
+    "end": 279.1,
+    "text": "rejecting obvious failures), then a refined second pass (promoting"
+  },
+  {
+    "start": 279.1,
+    "end": 283.87,
+    "text": "your best 1-star shots to 2 or 3 stars) without ever leaving your"
+  },
+  {
+    "start": 283.87,
+    "end": 285.72,
+    "text": "culling tool."
+  },
+  {
+    "start": 285.72,
+    "end": 290.4,
+    "text": "### Color labels (best for complex shoots)"
+  },
+  {
+    "start": 290.4,
+    "end": 294.7,
+    "text": "Color labels are most useful when a single shoot has multiple"
+  },
+  {
+    "start": 294.7,
+    "end": 300.43,
+    "text": "deliverable categories. A wedding photographer might use red for"
+  },
+  {
+    "start": 300.43,
+    "end": 305.09,
+    "text": "ceremony photos, yellow for cocktail hour, green for reception."
+  },
+  {
+    "start": 305.09,
+    "end": 309.41,
+    "text": "Color labels can be combined with star ratings, giving you a"
+  },
+  {
+    "start": 309.41,
+    "end": 313.9,
+    "text": "two-dimensional classification system that works well for large,"
+  },
+  {
+    "start": 313.9,
+    "end": 316.3,
+    "text": "multi-segment shoots."
+  },
+  {
+    "start": 316.3,
+    "end": 320.64,
+    "text": "The downside is speed: reaching for a number key plus a color"
+  },
+  {
+    "start": 320.64,
+    "end": 326.33,
+    "text": "assignment is slower than a simple flag. Reserve color labels for"
+  },
+  {
+    "start": 326.33,
+    "end": 330.65,
+    "text": "the second pass when the objective is organizing, not initial"
+  },
+  {
+    "start": 330.65,
+    "end": 332.47,
+    "text": "selecting."
+  },
+  {
+    "start": 332.47,
+    "end": 339.1,
+    "text": "The fastest cullers use keyboard shortcuts exclusively- no mouse, no hesitation "
+  },
+  {
+    "start": 339.1,
+    "end": 343.68,
+    "text": "## Keyboard shortcuts that make you cull photos fast"
+  },
+  {
+    "start": 343.68,
+    "end": 347.76,
+    "text": "Keyboard-driven culling is the single highest-leverage speed"
+  },
+  {
+    "start": 347.76,
+    "end": 353.06,
+    "text": "improvement available. When your hands never leave the keyboard,"
+  },
+  {
+    "start": 353.06,
+    "end": 357.31,
+    "text": "the rhythm of reviewing images becomes nearly unconscious- you"
+  },
+  {
+    "start": 357.31,
+    "end": 361.66,
+    "text": "are evaluating and deciding in parallel, not sequentially."
+  },
+  {
+    "start": 361.66,
+    "end": 364.7,
+    "text": "The core shortcuts in Lightroom Classic:"
+  },
+  {
+    "start": 364.7,
+    "end": 366.29,
+    "text": "Action"
+  },
+  {
+    "start": 366.29,
+    "end": 367.94,
+    "text": "Lightroom"
+  },
+  {
+    "start": 367.94,
+    "end": 369.84,
+    "text": "Capture One"
+  },
+  {
+    "start": 369.84,
+    "end": 371.83,
+    "text": "Flag as pick"
+  },
+  {
+    "start": 371.83,
+    "end": 374.04,
+    "text": "Flag as reject"
+  },
+  {
+    "start": 374.04,
+    "end": 375.96,
+    "text": "Next image"
+  },
+  {
+    "start": 375.96,
+    "end": 377.98,
+    "text": "→ / Space"
+  },
+  {
+    "start": 377.98,
+    "end": 379.99,
+    "text": "Previous image"
+  },
+  {
+    "start": 379.99,
+    "end": 382.13,
+    "text": "Rate 1 star"
+  },
+  {
+    "start": 382.13,
+    "end": 384.29,
+    "text": "Rate 2 stars"
+  },
+  {
+    "start": 384.29,
+    "end": 386.5,
+    "text": "Rate 3 stars"
+  },
+  {
+    "start": 386.5,
+    "end": 388.46,
+    "text": "Compare view"
+  },
+  {
+    "start": 388.46,
+    "end": 391.15,
+    "text": "Zoom to 100%"
+  },
+  {
+    "start": 391.15,
+    "end": 394.25,
+    "text": "The most powerful habit is to use the"
+  },
+  {
+    "start": 394.25,
+    "end": 400.49,
+    "text": "trio exclusively during the first pass. Pick, reject, or advance-"
+  },
+  {
+    "start": 400.49,
+    "end": 405.84,
+    "text": "nothing else. Save star promotion for the second pass when"
+  },
+  {
+    "start": 405.84,
+    "end": 408.55,
+    "text": "you have eliminated the noise."
+  },
+  {
+    "start": 408.55,
+    "end": 414.29,
+    "text": "## The SammaPix CullPix approach: side-by-side compare, keyboard-driven"
+  },
+  {
+    "start": 414.29,
+    "end": 418.61,
+    "text": "Choosing between two similar shots is where most photographers"
+  },
+  {
+    "start": 418.61,
+    "end": 424.9,
+    "text": "slow down the most. You look at frame 47, think it is good, advance"
+  },
+  {
+    "start": 424.9,
+    "end": 430.2,
+    "text": "to frame 48, think that one might be better, go back to 47, then"
+  },
+  {
+    "start": 430.2,
+    "end": 435.74,
+    "text": "back to 48. That back-and-forth adds minutes to every burst"
+  },
+  {
+    "start": 435.74,
+    "end": 437.57,
+    "text": "sequence."
+  },
+  {
+    "start": 437.57,
+    "end": 440.21,
+    "text": "SammaPix CullPix tool"
+  },
+  {
+    "start": 440.21,
+    "end": 444.34,
+    "text": "solves this with a side-by-side compare view that is controlled"
+  },
+  {
+    "start": 444.34,
+    "end": 449.78,
+    "text": "entirely with the keyboard. You load your folder, and CullPix"
+  },
+  {
+    "start": 449.78,
+    "end": 454.22,
+    "text": "presents images in pairs- no clicking through menus, no dragging"
+  },
+  {
+    "start": 454.22,
+    "end": 457.08,
+    "text": "thumbnails into a compare panel."
+  },
+  {
+    "start": 457.08,
+    "end": 460.1,
+    "text": "Key features that make CullPix fast:"
+  },
+  {
+    "start": 460.1,
+    "end": 474.55,
+    "text": "- Side-by-side compare. Two images displayed at equal size, synchronized zoom an"
+  },
+  {
+    "start": 474.55,
+    "end": 489.36,
+    "text": "- Keyboard-only interaction. No mouse required after the initial folder selectio"
+  },
+  {
+    "start": 489.36,
+    "end": 504.65,
+    "text": "- Browser-based, no upload. Your RAW files and JPEGs never leave your device. Cu"
+  },
+  {
+    "start": 504.65,
+    "end": 515.71,
+    "text": "- Export a rejection list. CullPix generates a list of rejected filenames you ca"
+  },
+  {
+    "start": 515.71,
+    "end": 519.84,
+    "text": "The compare-driven approach is especially powerful for burst"
+  },
+  {
+    "start": 519.84,
+    "end": 525.67,
+    "text": "sequences and similar shots. Instead of evaluating each frame"
+  },
+  {
+    "start": 525.67,
+    "end": 530.28,
+    "text": "individually, you run a tournament: the best frame from each pair"
+  },
+  {
+    "start": 530.28,
+    "end": 534.5,
+    "text": "advances until only the single strongest image remains."
+  },
+  {
+    "start": 534.5,
+    "end": 538.2,
+    "text": "## The step-by-step culling workflow"
+  },
+  {
+    "start": 538.2,
+    "end": 542.14,
+    "text": "The following workflow applies whether you are using Lightroom,"
+  },
+  {
+    "start": 542.14,
+    "end": 547.66,
+    "text": "Capture One, or CullPix. The principles are the same; the"
+  },
+  {
+    "start": 547.66,
+    "end": 550.58,
+    "text": "keyboard shortcuts differ slightly."
+  },
+  {
+    "start": 550.58,
+    "end": 555,
+    "text": "### Step 1 - Import and do nothing else"
+  },
+  {
+    "start": 555,
+    "end": 559.22,
+    "text": "Import all files from the shoot without applying any presets,"
+  },
+  {
+    "start": 559.22,
+    "end": 564.58,
+    "text": "keywords, or adjustments. The goal at this stage is a clean,"
+  },
+  {
+    "start": 564.58,
+    "end": 570.5,
+    "text": "unmodified set of files ready for fast review. Applying presets"
+  },
+  {
+    "start": 570.5,
+    "end": 574.82,
+    "text": "during import slows down the ingestion phase and is irrelevant"
+  },
+  {
+    "start": 574.82,
+    "end": 577.06,
+    "text": "until after culling."
+  },
+  {
+    "start": 577.06,
+    "end": 581.5,
+    "text": "If your software renders previews during import (Lightroom does),"
+  },
+  {
+    "start": 581.5,
+    "end": 586.87,
+    "text": "use \"Minimal\" previews during this step. Rendering full-size"
+  },
+  {
+    "start": 586.87,
+    "end": 592.39,
+    "text": "standard previews is slow. You can render them after culling is"
+  },
+  {
+    "start": 592.39,
+    "end": 596.09,
+    "text": "complete for the images you actually intend to edit."
+  },
+  {
+    "start": 596.09,
+    "end": 601.82,
+    "text": "### Step 2 - The rapid first pass (reject obvious failures)"
+  },
+  {
+    "start": 601.82,
+    "end": 606.36,
+    "text": "Move through every image at a steady pace- roughly 3–5 seconds"
+  },
+  {
+    "start": 606.36,
+    "end": 612.1,
+    "text": "per frame. At this speed, you are only looking for disqualifying"
+  },
+  {
+    "start": 612.1,
+    "end": 616.82,
+    "text": "problems: severe motion blur, missed focus, closed eyes on the"
+  },
+  {
+    "start": 616.82,
+    "end": 621.86,
+    "text": "primary subject, completely wrong exposure, accidental frames from"
+  },
+  {
+    "start": 621.86,
+    "end": 624.22,
+    "text": "moving between shots."
+  },
+  {
+    "start": 624.22,
+    "end": 627.53,
+    "text": "for any obvious reject and advance with"
+  },
+  {
+    "start": 627.53,
+    "end": 633.12,
+    "text": ". Do not stop to compare. Do not deliberate on borderline cases."
+  },
+  {
+    "start": 633.12,
+    "end": 637.9,
+    "text": "If you cannot immediately identify a disqualifying problem, press"
+  },
+  {
+    "start": 637.9,
+    "end": 642.6,
+    "text": "and move on. Deliberation belongs in pass two."
+  },
+  {
+    "start": 642.6,
+    "end": 648.1,
+    "text": "A 1,400-image first pass at 4 seconds per frame takes under two"
+  },
+  {
+    "start": 648.1,
+    "end": 652.82,
+    "text": "hours- and typically eliminates 40–50% of all frames."
+  },
+  {
+    "start": 652.82,
+    "end": 658.18,
+    "text": "### Step 3 - Filter to unrated and do the compare pass"
+  },
+  {
+    "start": 658.18,
+    "end": 662.81,
+    "text": "After the first pass, filter your library to show only unrated"
+  },
+  {
+    "start": 662.81,
+    "end": 668.28,
+    "text": "images (the ones that survived the reject sweep). This is now a"
+  },
+  {
+    "start": 668.28,
+    "end": 673.82,
+    "text": "smaller, cleaner pool. Enter compare view and work through burst"
+  },
+  {
+    "start": 673.82,
+    "end": 678.48,
+    "text": "sequences and similar shots, keeping only the strongest frame"
+  },
+  {
+    "start": 678.48,
+    "end": 680.38,
+    "text": "from each group."
+  },
+  {
+    "start": 680.38,
+    "end": 684.6,
+    "text": "This is where CullPix's side-by-side view delivers the biggest"
+  },
+  {
+    "start": 684.6,
+    "end": 690.34,
+    "text": "speed gain. When evaluating two nearly identical frames, seeing"
+  },
+  {
+    "start": 690.34,
+    "end": 694.9,
+    "text": "them at the same size simultaneously makes focus accuracy and"
+  },
+  {
+    "start": 694.9,
+    "end": 700.63,
+    "text": "expression quality immediately apparent. The decision that takes"
+  },
+  {
+    "start": 700.63,
+    "end": 705.29,
+    "text": "10 seconds of back-and-forth in single-image view takes 2 seconds"
+  },
+  {
+    "start": 705.29,
+    "end": 707.38,
+    "text": "in compare view."
+  },
+  {
+    "start": 707.38,
+    "end": 711.82,
+    "text": "### Step 4 - Assign your final ratings"
+  },
+  {
+    "start": 711.82,
+    "end": 716.26,
+    "text": "Once the compare pass is done, you have a pool of images that are"
+  },
+  {
+    "start": 716.26,
+    "end": 723.05,
+    "text": "all technically acceptable. Now assign final ratings. Mark your"
+  },
+  {
+    "start": 723.05,
+    "end": 727.44,
+    "text": "hero shots (the very best of each scene or moment) with your"
+  },
+  {
+    "start": 727.44,
+    "end": 732.67,
+    "text": "highest rating. Everything else that is technically good but not"
+  },
+  {
+    "start": 732.67,
+    "end": 737.45,
+    "text": "exceptional gets a lower rating or remains at pick/flag status."
+  },
+  {
+    "start": 737.45,
+    "end": 741.77,
+    "text": "At this stage you can also apply color labels if your workflow"
+  },
+  {
+    "start": 741.77,
+    "end": 745.66,
+    "text": "requires categorizing by scene or delivery batch."
+  },
+  {
+    "start": 745.66,
+    "end": 750.58,
+    "text": "### Step 5 - Delete rejects and move to editing"
+  },
+  {
+    "start": 750.58,
+    "end": 755.02,
+    "text": "Delete rejected files (or move them to a \"Rejects\" folder if"
+  },
+  {
+    "start": 755.02,
+    "end": 760.58,
+    "text": "you prefer to keep them temporarily). Then filter to your highest"
+  },
+  {
+    "start": 760.58,
+    "end": 765.96,
+    "text": "rating and begin editing. Your editing queue now contains only"
+  },
+  {
+    "start": 765.96,
+    "end": 768.98,
+    "text": "the images worth your full attention."
+  },
+  {
+    "start": 768.98,
+    "end": 773.14,
+    "text": "If you need to reduce file sizes before archiving, the"
+  },
+  {
+    "start": 773.14,
+    "end": 775.78,
+    "text": "SammaPix Compress tool"
+  },
+  {
+    "start": 775.78,
+    "end": 780.6,
+    "text": "can batch-process your exported JPEGs directly in the browser with"
+  },
+  {
+    "start": 780.6,
+    "end": 782.95,
+    "text": "no upload required."
+  },
+  {
+    "start": 782.95,
+    "end": 787.2,
+    "text": "## Wedding and event photography culling tips"
+  },
+  {
+    "start": 787.2,
+    "end": 791.52,
+    "text": "Wedding and event photography creates unique culling challenges:"
+  },
+  {
+    "start": 791.52,
+    "end": 796.34,
+    "text": "large volumes, non-linear narrative structure, multiple subjects"
+  },
+  {
+    "start": 796.34,
+    "end": 800.76,
+    "text": "with changing expressions, and a client expectation that every"
+  },
+  {
+    "start": 800.76,
+    "end": 806.28,
+    "text": "major moment is represented. These tips address the specific"
+  },
+  {
+    "start": 806.28,
+    "end": 809.23,
+    "text": "pressures of high-volume event culling."
+  },
+  {
+    "start": 809.23,
+    "end": 812.42,
+    "text": "Cull by scene, not by chronology."
+  },
+  {
+    "start": 812.42,
+    "end": 816.82,
+    "text": "Organize the import into named folders by scene - Getting Ready,"
+  },
+  {
+    "start": 816.82,
+    "end": 821.33,
+    "text": "Ceremony, Cocktail Hour, Reception- before you start culling."
+  },
+  {
+    "start": 821.33,
+    "end": 825.82,
+    "text": "Culling within scenes keeps your comparison decisions contextual."
+  },
+  {
+    "start": 825.82,
+    "end": 830.5,
+    "text": "You are always choosing between two ceremony shots, not between a"
+  },
+  {
+    "start": 830.5,
+    "end": 834.74,
+    "text": "ceremony shot and a reception shot taken at different light"
+  },
+  {
+    "start": 834.74,
+    "end": 837.58,
+    "text": "conditions with different objectives."
+  },
+  {
+    "start": 837.58,
+    "end": 840.94,
+    "text": "Use a minimum coverage rule for each scene."
+  },
+  {
+    "start": 840.94,
+    "end": 845.28,
+    "text": "Define the minimum number of picks you need from each scene before"
+  },
+  {
+    "start": 845.28,
+    "end": 850.18,
+    "text": "you start: for example, at least 15 from Getting Ready, at least"
+  },
+  {
+    "start": 850.18,
+    "end": 855.82,
+    "text": "40 from the Ceremony, at least 60 from the Reception. This"
+  },
+  {
+    "start": 855.82,
+    "end": 859.92,
+    "text": "prevents you from over-culling a scene and then realizing the"
+  },
+  {
+    "start": 859.92,
+    "end": 863.14,
+    "text": "client has no coverage of a key moment."
+  },
+  {
+    "start": 863.14,
+    "end": 867.05,
+    "text": "Prioritize expressions, not technical perfection."
+  },
+  {
+    "start": 867.05,
+    "end": 871.44,
+    "text": "A slightly soft-focus frame where the emotion is perfect is often"
+  },
+  {
+    "start": 871.44,
+    "end": 875.78,
+    "text": "more valuable to a wedding client than a technically sharp frame"
+  },
+  {
+    "start": 875.78,
+    "end": 880.97,
+    "text": "where the subject looks distracted. During your compare pass,"
+  },
+  {
+    "start": 880.97,
+    "end": 885.31,
+    "text": "weight expression and emotion heavily- especially for ceremony"
+  },
+  {
+    "start": 885.31,
+    "end": 891.29,
+    "text": "moments, first looks, and toasts. Technical criteria matter more"
+  },
+  {
+    "start": 891.29,
+    "end": 893.93,
+    "text": "for portraits and formals."
+  },
+  {
+    "start": 893.93,
+    "end": 896.57,
+    "text": "Flag complete story arcs."
+  },
+  {
+    "start": 896.57,
+    "end": 901.08,
+    "text": "Wedding clients want to see the moment unfold, not just its peak."
+  },
+  {
+    "start": 901.08,
+    "end": 905.5,
+    "text": "For moments like the first kiss, cake cutting, or first dance,"
+  },
+  {
+    "start": 905.5,
+    "end": 909.7,
+    "text": "ensure you have a sequence of 3–5 picks that show the arc:"
+  },
+  {
+    "start": 909.7,
+    "end": 915.48,
+    "text": "before, during, and after. Do not cull so aggressively that the"
+  },
+  {
+    "start": 915.48,
+    "end": 917.9,
+    "text": "narrative disappears."
+  },
+  {
+    "start": 917.9,
+    "end": 922.99,
+    "text": "## How many photos to keep: keep rate benchmarks by genre"
+  },
+  {
+    "start": 922.99,
+    "end": 927.46,
+    "text": "One of the most common questions from photographers refining their"
+  },
+  {
+    "start": 927.46,
+    "end": 932.78,
+    "text": "culling workflow is: how many should I be keeping? Keep rate- the"
+  },
+  {
+    "start": 932.78,
+    "end": 936.82,
+    "text": "percentage of total frames you select as keepers- varies"
+  },
+  {
+    "start": 936.82,
+    "end": 940.34,
+    "text": "significantly by genre and shooting style."
+  },
+  {
+    "start": 940.34,
+    "end": 942.67,
+    "text": "Typical shoot volume"
+  },
+  {
+    "start": 942.67,
+    "end": 944.88,
+    "text": "Target keep rate"
+  },
+  {
+    "start": 944.88,
+    "end": 947.04,
+    "text": "Final delivery"
+  },
+  {
+    "start": 947.04,
+    "end": 948.62,
+    "text": "Wedding"
+  },
+  {
+    "start": 948.62,
+    "end": 951.77,
+    "text": "1,000–2,500"
+  },
+  {
+    "start": 951.77,
+    "end": 954.58,
+    "text": "20–35%"
+  },
+  {
+    "start": 954.58,
+    "end": 957.58,
+    "text": "300–600 edited"
+  },
+  {
+    "start": 957.58,
+    "end": 959.93,
+    "text": "Portrait / headshot"
+  },
+  {
+    "start": 959.93,
+    "end": 962.52,
+    "text": "100–300"
+  },
+  {
+    "start": 962.52,
+    "end": 965.42,
+    "text": "15–25%"
+  },
+  {
+    "start": 965.42,
+    "end": 967.99,
+    "text": "20–50 edited"
+  },
+  {
+    "start": 967.99,
+    "end": 970.27,
+    "text": "Sports / action"
+  },
+  {
+    "start": 970.27,
+    "end": 972.84,
+    "text": "500–2,000"
+  },
+  {
+    "start": 972.84,
+    "end": 975.65,
+    "text": "50–200 edited"
+  },
+  {
+    "start": 975.65,
+    "end": 977.93,
+    "text": "Corporate / event"
+  },
+  {
+    "start": 977.93,
+    "end": 980.5,
+    "text": "300–800"
+  },
+  {
+    "start": 980.5,
+    "end": 983.3,
+    "text": "25–40%"
+  },
+  {
+    "start": 983.3,
+    "end": 986.59,
+    "text": "100–250 edited"
+  },
+  {
+    "start": 986.59,
+    "end": 988.99,
+    "text": "Travel / landscape"
+  },
+  {
+    "start": 988.99,
+    "end": 991.51,
+    "text": "200–600"
+  },
+  {
+    "start": 991.51,
+    "end": 993.91,
+    "text": "10–20%"
+  },
+  {
+    "start": 993.91,
+    "end": 996.43,
+    "text": "30–80 edited"
+  },
+  {
+    "start": 996.43,
+    "end": 1000.9,
+    "text": "If your keep rate is consistently above these ranges, your first"
+  },
+  {
+    "start": 1000.9,
+    "end": 1006.13,
+    "text": "pass is not aggressive enough. You are holding onto too many"
+  },
+  {
+    "start": 1006.13,
+    "end": 1011.82,
+    "text": "technically acceptable but ultimately redundant frames. A higher"
+  },
+  {
+    "start": 1011.82,
+    "end": 1015.92,
+    "text": "keep rate means more editing time per shoot- and more storage"
+  },
+  {
+    "start": 1015.92,
+    "end": 1020.07,
+    "text": "consumed- without a proportional improvement in deliverables."
+  },
+  {
+    "start": 1020.07,
+    "end": 1024.13,
+    "text": "If your keep rate is consistently below these ranges, check"
+  },
+  {
+    "start": 1024.13,
+    "end": 1027.9,
+    "text": "whether you are being too aggressive in your first pass and"
+  },
+  {
+    "start": 1027.9,
+    "end": 1033.78,
+    "text": "accidentally rejecting good frames. Zoom in on sharpness before"
+  },
+  {
+    "start": 1033.78,
+    "end": 1037.23,
+    "text": "rejecting any frame you are uncertain about."
+  },
+  {
+    "start": 1037.23,
+    "end": 1041.72,
+    "text": "Finding and removing near-duplicate frames before culling can also"
+  },
+  {
+    "start": 1041.72,
+    "end": 1045.92,
+    "text": "help reduce decision fatigue. The"
+  },
+  {
+    "start": 1045.92,
+    "end": 1049.02,
+    "text": "SammaPix Find Duplicates tool"
+  },
+  {
+    "start": 1049.02,
+    "end": 1053.55,
+    "text": "detects visually similar frames using perceptual hashing- useful"
+  },
+  {
+    "start": 1053.55,
+    "end": 1059.29,
+    "text": "for identifying burst clusters you missed during import. See our"
+  },
+  {
+    "start": 1059.29,
+    "end": 1061.26,
+    "text": "full guide on"
+  },
+  {
+    "start": 1061.26,
+    "end": 1064.5,
+    "text": "how to find and delete duplicate photos"
+  },
+  {
+    "start": 1064.5,
+    "end": 1066.85,
+    "text": "for the full workflow."
+  },
+  {
+    "start": 1066.85,
+    "end": 1069.54,
+    "text": "## FAQ"
+  },
+  {
+    "start": 1069.54,
+    "end": 1074.79,
+    "text": "### What is the difference between culling and editing photos?"
+  },
+  {
+    "start": 1074.79,
+    "end": 1079.18,
+    "text": "Culling is the selection process- deciding which images are worth"
+  },
+  {
+    "start": 1079.18,
+    "end": 1084.18,
+    "text": "keeping and which should be rejected. Editing is applying"
+  },
+  {
+    "start": 1084.18,
+    "end": 1089.31,
+    "text": "adjustments (exposure, color, retouching) to the selected images."
+  },
+  {
+    "start": 1089.31,
+    "end": 1094.69,
+    "text": "Culling always comes first. Editing an image you would eventually"
+  },
+  {
+    "start": 1094.69,
+    "end": 1099.1,
+    "text": "reject wastes time; good culling prevents that from happening."
+  },
+  {
+    "start": 1099.1,
+    "end": 1104.31,
+    "text": "### Should I cull in Lightroom or use a dedicated culling tool?"
+  },
+  {
+    "start": 1104.31,
+    "end": 1109.71,
+    "text": "Lightroom is capable but not optimized for fast culling. Its"
+  },
+  {
+    "start": 1109.71,
+    "end": 1113.84,
+    "text": "compare view requires extra steps to enter, and the full"
+  },
+  {
+    "start": 1113.84,
+    "end": 1118.3,
+    "text": "application is heavier than tools designed purely for selection."
+  },
+  {
+    "start": 1118.3,
+    "end": 1122.6,
+    "text": "Dedicated tools- including browser-based options like CullPix-"
+  },
+  {
+    "start": 1122.6,
+    "end": 1127.95,
+    "text": "are faster to navigate because culling is their only job. Many"
+  },
+  {
+    "start": 1127.95,
+    "end": 1132.13,
+    "text": "professionals do their culling in a lighter tool and import only"
+  },
+  {
+    "start": 1132.13,
+    "end": 1134.96,
+    "text": "the selected files into Lightroom."
+  },
+  {
+    "start": 1134.96,
+    "end": 1139.62,
+    "text": "### How many passes should a culling workflow have?"
+  },
+  {
+    "start": 1139.62,
+    "end": 1145.16,
+    "text": "Two passes is the professional standard. The first pass is fast"
+  },
+  {
+    "start": 1145.16,
+    "end": 1150.78,
+    "text": "and eliminates obvious rejects. The second pass is comparative"
+  },
+  {
+    "start": 1150.78,
+    "end": 1156.2,
+    "text": "and selects the best frame from each similar group. Adding a third"
+  },
+  {
+    "start": 1156.2,
+    "end": 1160.66,
+    "text": "pass is sometimes useful for very large shoots (full-day weddings,"
+  },
+  {
+    "start": 1160.66,
+    "end": 1165.51,
+    "text": "multi-day events), but beyond three passes, diminishing returns"
+  },
+  {
+    "start": 1165.51,
+    "end": 1169.93,
+    "text": "set in and you risk second-guessing decisions you have already made."
+  },
+  {
+    "start": 1169.93,
+    "end": 1175.42,
+    "text": "### How do I cull photos faster on a laptop with a small screen?"
+  },
+  {
+    "start": 1175.42,
+    "end": 1179.89,
+    "text": "Use the keyboard exclusively and maximize your culling tool to"
+  },
+  {
+    "start": 1179.89,
+    "end": 1185.24,
+    "text": "full screen. Avoid zooming out to filmstrip view- it creates"
+  },
+  {
+    "start": 1185.24,
+    "end": 1190.78,
+    "text": "visual noise and slows decisions. For compare view on small"
+  },
+  {
+    "start": 1190.78,
+    "end": 1195.61,
+    "text": "screens, prioritize checking sharpness at 100% zoom on the"
+  },
+  {
+    "start": 1195.61,
+    "end": 1200.1,
+    "text": "subject's eyes rather than evaluating composition (which is better"
+  },
+  {
+    "start": 1200.1,
+    "end": 1203.86,
+    "text": "judged at a larger scale on a secondary display)."
+  },
+  {
+    "start": 1203.86,
+    "end": 1208.9,
+    "text": "### Can I cull RAW files without converting them first?"
+  },
+  {
+    "start": 1208.9,
+    "end": 1214.78,
+    "text": "Yes. Lightroom, Capture One, and CullPix all support native RAW"
+  },
+  {
+    "start": 1214.78,
+    "end": 1220.33,
+    "text": "file viewing without prior conversion. Browser-based culling tools"
+  },
+  {
+    "start": 1220.33,
+    "end": 1224.84,
+    "text": "use the browser's image decoding pipeline, which supports most"
+  },
+  {
+    "start": 1224.84,
+    "end": 1229.23,
+    "text": "common RAW formats through the JPEG preview embedded in the RAW"
+  },
+  {
+    "start": 1229.23,
+    "end": 1235.16,
+    "text": "file. For full-resolution RAW evaluation, desktop software with"
+  },
+  {
+    "start": 1235.16,
+    "end": 1239.14,
+    "text": "native codec support remains the most accurate option."
+  }
+]

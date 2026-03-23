@@ -1,0 +1,357 @@
+[
+  {
+    "start": 0,
+    "end": 2.88,
+    "text": "Why images kill your page speed"
+  },
+  {
+    "start": 2.88,
+    "end": 22.3,
+    "text": "The average webpage in 2026 weighs approximately 2.5MB. HTTP Archive data consis"
+  },
+  {
+    "start": 22.3,
+    "end": 44.21,
+    "text": "The business impact is direct and measurable. Google's own research found that e"
+  },
+  {
+    "start": 44.21,
+    "end": 59.26,
+    "text": "The good news: image optimization is largely a solved problem. A systematic work"
+  },
+  {
+    "start": 59.26,
+    "end": 62.66,
+    "text": "The 5-step image optimization workflow"
+  },
+  {
+    "start": 62.66,
+    "end": 73.25,
+    "text": "These five steps, applied in order, produce the maximum page speed improvement w"
+  },
+  {
+    "start": 73.25,
+    "end": 76.61,
+    "text": "Step 1 — Resize to display dimensions"
+  },
+  {
+    "start": 76.61,
+    "end": 94.94,
+    "text": "This is the single highest-impact step and the most commonly skipped. A modern s"
+  },
+  {
+    "start": 94.94,
+    "end": 125.69,
+    "text": "The rule is simple: never upload an image wider than the maximum display size, m"
+  },
+  {
+    "start": 125.69,
+    "end": 128.64,
+    "text": "Step 2 — Choose the right format"
+  },
+  {
+    "start": 128.64,
+    "end": 147.96,
+    "text": "Use WebP as your default for everything. WebP is 25-34% smaller than JPEG at equ"
+  },
+  {
+    "start": 147.96,
+    "end": 169.97,
+    "text": "The format decision tree is straightforward: photographs and editorial images go"
+  },
+  {
+    "start": 169.97,
+    "end": 180.74,
+    "text": "You can convert any JPG or PNG to WebP in seconds using the SammaPix WebP conver"
+  },
+  {
+    "start": 180.74,
+    "end": 184.58,
+    "text": "Step 3 — Compress with optimal quality settings"
+  },
+  {
+    "start": 184.58,
+    "end": 208.63,
+    "text": "After resizing and converting to WebP, compression is the final file size lever."
+  },
+  {
+    "start": 208.63,
+    "end": 214.25,
+    "text": "- Hero images and banners: quality 82, max 300KB target"
+  },
+  {
+    "start": 214.25,
+    "end": 220.1,
+    "text": "- Blog post body images: quality 80, 80-150KB target"
+  },
+  {
+    "start": 220.1,
+    "end": 225.62,
+    "text": "- Thumbnails and previews: quality 75, under 50KB target"
+  },
+  {
+    "start": 225.62,
+    "end": 231.19,
+    "text": "- Product photos (e-commerce): quality 82, under 200KB target"
+  },
+  {
+    "start": 231.19,
+    "end": 234.91,
+    "text": "Step 4 — Use responsive images with srcset"
+  },
+  {
+    "start": 234.91,
+    "end": 250.75,
+    "text": "Even after resizing to a reasonable maximum width, you are still serving a 1600p"
+  },
+  {
+    "start": 250.75,
+    "end": 263.26,
+    "text": "With this markup, a mobile user on a 375px screen downloads the 400px image inst"
+  },
+  {
+    "start": 263.26,
+    "end": 266.78,
+    "text": "Step 5 — Lazy load below-the-fold images"
+  },
+  {
+    "start": 266.78,
+    "end": 282.53,
+    "text": "Images below the visible viewport on page load do not need to download immediate"
+  },
+  {
+    "start": 282.53,
+    "end": 299.95,
+    "text": "One critical rule: never apply lazy loading to your hero image or the first visi"
+  },
+  {
+    "start": 299.95,
+    "end": 308.02,
+    "text": "A systematic image optimization workflow eliminates the most common source of sl"
+  },
+  {
+    "start": 308.02,
+    "end": 311.88,
+    "text": "Core Web Vitals and images: what actually matters"
+  },
+  {
+    "start": 311.88,
+    "end": 322.73,
+    "text": "Google's Core Web Vitals framework measures three user experience metrics that d"
+  },
+  {
+    "start": 322.73,
+    "end": 327.62,
+    "text": "LCP (Largest Contentful Paint): compress your hero image first"
+  },
+  {
+    "start": 327.62,
+    "end": 349.13,
+    "text": "LCP measures how long it takes for the largest visible content element to render"
+  },
+  {
+    "start": 349.13,
+    "end": 371.38,
+    "text": "Your hero image is almost certainly your LCP element. Compress it aggressively- "
+  },
+  {
+    "start": 371.38,
+    "end": 376.01,
+    "text": "CLS (Cumulative Layout Shift): always set width and height"
+  },
+  {
+    "start": 376.01,
+    "end": 395.69,
+    "text": "CLS measures visual stability- how much the page jumps around as content loads. "
+  },
+  {
+    "start": 395.69,
+    "end": 409.68,
+    "text": "The fix is mechanical: always add width and height attributes to every image tag"
+  },
+  {
+    "start": 409.68,
+    "end": 412.03,
+    "text": "How to check your scores"
+  },
+  {
+    "start": 412.03,
+    "end": 433.63,
+    "text": "Use PageSpeed Insights to measure your current Core Web Vitals scores. Enter any"
+  },
+  {
+    "start": 433.63,
+    "end": 436.42,
+    "text": "WordPress image optimization"
+  },
+  {
+    "start": 436.42,
+    "end": 447.96,
+    "text": "WordPress is the most common CMS in the world, and image handling is one of its "
+  },
+  {
+    "start": 447.96,
+    "end": 451.42,
+    "text": "Convert images to WebP before uploading."
+  },
+  {
+    "start": 451.42,
+    "end": 469.66,
+    "text": "The cleanest approach is to convert and compress images before they ever enter t"
+  },
+  {
+    "start": 469.66,
+    "end": 474.62,
+    "text": "Disable WordPress's big image scaling if using pre-optimized images."
+  },
+  {
+    "start": 474.62,
+    "end": 497.21,
+    "text": "WordPress 5.3 introduced automatic downscaling of images larger than 2560px. If "
+  },
+  {
+    "start": 497.21,
+    "end": 500.47,
+    "text": "Use a CDN for image delivery."
+  },
+  {
+    "start": 500.47,
+    "end": 519.77,
+    "text": "Even perfectly optimized images load faster when served from a CDN edge node clo"
+  },
+  {
+    "start": 519.77,
+    "end": 522.6,
+    "text": "E-commerce image optimization"
+  },
+  {
+    "start": 522.6,
+    "end": 537.91,
+    "text": "E-commerce sites have a unique challenge: large product catalogs with dozens to "
+  },
+  {
+    "start": 537.91,
+    "end": 540.36,
+    "text": "Product photo standards"
+  },
+  {
+    "start": 540.36,
+    "end": 548.02,
+    "text": "- Main product images: WebP, quality 82, max 1200px wide, target under 200KB"
+  },
+  {
+    "start": 548.02,
+    "end": 556.75,
+    "text": "- Product thumbnails (gallery, listing pages): WebP, quality 75, max 400px wide,"
+  },
+  {
+    "start": 556.75,
+    "end": 564.36,
+    "text": "- Zoom views (if supported): WebP, quality 85, max 2400px, loaded only on user i"
+  },
+  {
+    "start": 564.36,
+    "end": 570.34,
+    "text": "- Background and lifestyle images: WebP, quality 80, max 1400px wide"
+  },
+  {
+    "start": 570.34,
+    "end": 573.46,
+    "text": "Bulk processing for large catalogs"
+  },
+  {
+    "start": 573.46,
+    "end": 594.82,
+    "text": "For catalogs with hundreds of product images, manual optimization is not practic"
+  },
+  {
+    "start": 594.82,
+    "end": 615.02,
+    "text": "The SammaPix Compress tool handles batch processing directly in the browser- dra"
+  },
+  {
+    "start": 615.02,
+    "end": 623.52,
+    "text": "E-commerce product pages with heavy image catalogs benefit most from a consisten"
+  },
+  {
+    "start": 623.52,
+    "end": 627.1,
+    "text": "Free tools to optimize images for page speed"
+  },
+  {
+    "start": 627.1,
+    "end": 635.69,
+    "text": "Several reliable tools are available for image optimization. The right choice de"
+  },
+  {
+    "start": 635.69,
+    "end": 649.78,
+    "text": "- SammaPix : Browser-based, no upload required, batch processing, WebP conversio"
+  },
+  {
+    "start": 649.78,
+    "end": 662.02,
+    "text": "- Squoosh : Google's browser-based tool with side-by-side quality comparison. Ex"
+  },
+  {
+    "start": 662.02,
+    "end": 676.87,
+    "text": "- TinyPNG : Server-based compression for PNG and JPEG. Simple interface, good co"
+  },
+  {
+    "start": 676.87,
+    "end": 688.25,
+    "text": "- ImageOptim : macOS desktop app that applies multiple optimizers in sequence. E"
+  },
+  {
+    "start": 688.25,
+    "end": 692.11,
+    "text": "How much can image optimization speed up my website?"
+  },
+  {
+    "start": 692.11,
+    "end": 720.6,
+    "text": "Image optimization typically reduces page load time by 40-70%. The average webpa"
+  },
+  {
+    "start": 720.6,
+    "end": 723.74,
+    "text": "What is a good image file size for web?"
+  },
+  {
+    "start": 723.74,
+    "end": 755.04,
+    "text": "For most web images, aim for under 200KB per image. Hero images and full-width b"
+  },
+  {
+    "start": 755.04,
+    "end": 758.06,
+    "text": "Does image compression affect SEO?"
+  },
+  {
+    "start": 758.06,
+    "end": 785.69,
+    "text": "Image compression improves SEO. Smaller images mean faster page loads, which dir"
+  },
+  {
+    "start": 785.69,
+    "end": 789.31,
+    "text": "Should I use WebP or JPEG for my website?"
+  },
+  {
+    "start": 789.31,
+    "end": 818.86,
+    "text": "Use WebP as your primary format. WebP files are 25-34% smaller than equivalent J"
+  },
+  {
+    "start": 818.86,
+    "end": 821.98,
+    "text": "How do I optimize images for mobile?"
+  },
+  {
+    "start": 821.98,
+    "end": 850.94,
+    "text": "Optimize images for mobile by implementing responsive images using the srcset at"
+  }
+]

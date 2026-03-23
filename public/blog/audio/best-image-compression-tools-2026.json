@@ -1,0 +1,202 @@
+[
+  {
+    "start": 0,
+    "end": 5.02,
+    "text": "## Why image compression still matters in 2026"
+  },
+  {
+    "start": 5.02,
+    "end": 26.57,
+    "text": "A DSLR or modern smartphone produces files between 5 MB and 30 MB per shot. A pr"
+  },
+  {
+    "start": 26.57,
+    "end": 43.34,
+    "text": "According to Google Web Vitals guidance , images are consistently the single lar"
+  },
+  {
+    "start": 43.34,
+    "end": 63.07,
+    "text": "The challenge is that not every free compressor is created equal. File size limi"
+  },
+  {
+    "start": 63.07,
+    "end": 66.46,
+    "text": "## What we tested and how"
+  },
+  {
+    "start": 66.46,
+    "end": 87.31,
+    "text": "Each tool was tested with the same set of reference images: a 12 MP JPEG landsca"
+  },
+  {
+    "start": 87.31,
+    "end": 105.79,
+    "text": "We also paid attention to what happens to your files. Tools that upload images t"
+  },
+  {
+    "start": 105.79,
+    "end": 112.37,
+    "text": "Choosing the right compression tool is part of every web development workflow - "
+  },
+  {
+    "start": 112.37,
+    "end": 115.08,
+    "text": "## The tools"
+  },
+  {
+    "start": 115.08,
+    "end": 116.93,
+    "text": "Best for:"
+  },
+  {
+    "start": 116.93,
+    "end": 121.49,
+    "text": "## The privacy question most comparisons ignore"
+  },
+  {
+    "start": 121.49,
+    "end": 133.49,
+    "text": "Most image compressor comparisons focus entirely on output file size. They rarel"
+  },
+  {
+    "start": 133.49,
+    "end": 156.24,
+    "text": "Tools like TinyPNG, Compressor.io, and iLoveIMG upload your images to their serv"
+  },
+  {
+    "start": 156.24,
+    "end": 171.96,
+    "text": "SammaPix and Squoosh both process images entirely inside your browser using Java"
+  },
+  {
+    "start": 171.96,
+    "end": 176.62,
+    "text": "## Compression quality: what the numbers do not show"
+  },
+  {
+    "start": 176.62,
+    "end": 187.97,
+    "text": "Every tool in this comparison can achieve 60–80% file size reduction on a typica"
+  },
+  {
+    "start": 187.97,
+    "end": 211.85,
+    "text": "TinyPNG uses smart lossy compression for PNGs that most people cannot perceive v"
+  },
+  {
+    "start": 211.85,
+    "end": 229.46,
+    "text": "ImageOptim stands apart because it is fully lossless for its default mode- it re"
+  },
+  {
+    "start": 229.46,
+    "end": 236.47,
+    "text": "Compression ratios vary by tool- but the real differences go beyond the numbers "
+  },
+  {
+    "start": 236.47,
+    "end": 240.89,
+    "text": "## Which tool should you use in 2026?"
+  },
+  {
+    "start": 240.89,
+    "end": 244.42,
+    "text": "For most photographers and web professionals"
+  },
+  {
+    "start": 244.42,
+    "end": 263.71,
+    "text": "Use SammaPix Compress . It handles every format, batch processes with ZIP downlo"
+  },
+  {
+    "start": 263.71,
+    "end": 267.58,
+    "text": "For quick single PNG compression with no setup"
+  },
+  {
+    "start": 267.58,
+    "end": 282.84,
+    "text": "TinyPNG is still excellent for a fast single-file PNG or JPEG. It has earned its"
+  },
+  {
+    "start": 282.84,
+    "end": 286.66,
+    "text": "For codec experimentation and format research"
+  },
+  {
+    "start": 286.66,
+    "end": 302.42,
+    "text": "Squoosh is unmatched. If you want to compare MozJPEG versus AVIF versus WebP on "
+  },
+  {
+    "start": 302.42,
+    "end": 306.53,
+    "text": "For Mac users optimizing a local folder losslessly"
+  },
+  {
+    "start": 306.53,
+    "end": 317.47,
+    "text": "ImageOptim is the best Mac tool for lossless optimization. It is particularly us"
+  },
+  {
+    "start": 317.47,
+    "end": 321.46,
+    "text": "## Quick reference: feature comparison"
+  },
+  {
+    "start": 321.46,
+    "end": 322.94,
+    "text": "Tool |"
+  },
+  {
+    "start": 322.94,
+    "end": 324.89,
+    "text": "Client-side |"
+  },
+  {
+    "start": 324.89,
+    "end": 326.4,
+    "text": "Batch |"
+  },
+  {
+    "start": 326.4,
+    "end": 328.39,
+    "text": "EXIF strip |"
+  },
+  {
+    "start": 328.39,
+    "end": 330.62,
+    "text": "WebP output |"
+  },
+  {
+    "start": 330.62,
+    "end": 332.57,
+    "text": "Free limit |"
+  },
+  {
+    "start": 332.57,
+    "end": 335.64,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 335.64,
+    "end": 338.74,
+    "text": "Free tool- no signup, no limits"
+  },
+  {
+    "start": 338.74,
+    "end": 344.06,
+    "text": "Compress your images now with SammaPix- client-side, EXIF-clean, batch-ready"
+  },
+  {
+    "start": 344.06,
+    "end": 346.75,
+    "text": "## FAQ"
+  },
+  {
+    "start": 346.75,
+    "end": 349.03,
+    "text": "].map(() => ("
+  }
+]

@@ -1,0 +1,432 @@
+[
+  {
+    "start": 0,
+    "end": 3.48,
+    "text": "## Why watermark your photos"
+  },
+  {
+    "start": 3.48,
+    "end": 29.4,
+    "text": "Image theft is not a niche concern. Millions of photos are used without permissi"
+  },
+  {
+    "start": 29.4,
+    "end": 52.94,
+    "text": "Under U.S. copyright law , you own the copyright to your photographs the moment "
+  },
+  {
+    "start": 52.94,
+    "end": 73.75,
+    "text": "Beyond legal protection, watermarks are a branding tool. Every image you share i"
+  },
+  {
+    "start": 73.75,
+    "end": 77.71,
+    "text": "### Who needs watermarks most"
+  },
+  {
+    "start": 77.71,
+    "end": 83.28,
+    "text": "- Professional photographers sharing portfolio images online before client deliv"
+  },
+  {
+    "start": 83.28,
+    "end": 88.2,
+    "text": "- Stock photographers who need to display preview versions of images for sale"
+  },
+  {
+    "start": 88.2,
+    "end": 93.17,
+    "text": "- Content creators and bloggers who publish original photography with their work"
+  },
+  {
+    "start": 93.17,
+    "end": 98.98,
+    "text": "- Businesses and agencies protecting proprietary product images or marketing mat"
+  },
+  {
+    "start": 98.98,
+    "end": 103.63,
+    "text": "- Social media creators building a visual brand across platforms"
+  },
+  {
+    "start": 103.63,
+    "end": 108.94,
+    "text": "## Types of watermarks: text, logo, and QR code"
+  },
+  {
+    "start": 108.94,
+    "end": 120.72,
+    "text": "Not all watermarks serve the same purpose. Choosing the right type depends on yo"
+  },
+  {
+    "start": 120.72,
+    "end": 124.34,
+    "text": "### Text watermarks"
+  },
+  {
+    "start": 124.34,
+    "end": 147.58,
+    "text": "A text watermark is the simplest and most common form. It typically includes you"
+  },
+  {
+    "start": 147.58,
+    "end": 166.32,
+    "text": "According to Photography Life , the most effective text watermarks are semi-tran"
+  },
+  {
+    "start": 166.32,
+    "end": 169.99,
+    "text": "### Logo watermarks"
+  },
+  {
+    "start": 169.99,
+    "end": 191.06,
+    "text": "A logo watermark uses your visual identity- a symbol, monogram, or full logo- in"
+  },
+  {
+    "start": 191.06,
+    "end": 208.25,
+    "text": "For logo watermarks to work well, the logo needs to be a PNG with a transparent "
+  },
+  {
+    "start": 208.25,
+    "end": 212.14,
+    "text": "### QR code watermarks"
+  },
+  {
+    "start": 212.14,
+    "end": 238.01,
+    "text": "QR code watermarks are a newer approach that turns every shared image into a dir"
+  },
+  {
+    "start": 238.01,
+    "end": 240.43,
+    "text": "Photo by Unsplash"
+  },
+  {
+    "start": 240.43,
+    "end": 244.08,
+    "text": "## The batch watermarking workflow"
+  },
+  {
+    "start": 244.08,
+    "end": 260.35,
+    "text": "Watermarking individual photos in a photo editor is fine for a handful of images"
+  },
+  {
+    "start": 260.35,
+    "end": 275.86,
+    "text": "The standard batch watermarking workflow has four steps: prepare your watermark "
+  },
+  {
+    "start": 275.86,
+    "end": 280.2,
+    "text": "### What makes a good watermark asset"
+  },
+  {
+    "start": 280.2,
+    "end": 287.42,
+    "text": "- For logos: a PNG file with transparent background, at least 400px wide for hig"
+  },
+  {
+    "start": 287.42,
+    "end": 294.34,
+    "text": "- For text: decide on font, weight, and capitalization- keep it consistent acros"
+  },
+  {
+    "start": 294.34,
+    "end": 302.14,
+    "text": "- For QR codes: generate at a minimum of 300x300px so it remains scannable when "
+  },
+  {
+    "start": 302.14,
+    "end": 308.3,
+    "text": "- Use white or light-colored elements so the watermark is visible on both light "
+  },
+  {
+    "start": 308.3,
+    "end": 315.17,
+    "text": "- Keep the watermark proportionally small- between 8% and 15% of the image width"
+  },
+  {
+    "start": 315.17,
+    "end": 320.52,
+    "text": "## Step-by-step: batch watermark photos with SammaPix StampIt"
+  },
+  {
+    "start": 320.52,
+    "end": 335.86,
+    "text": "SammaPix StampIt is a free, browser-based batch watermark tool. It runs entirely"
+  },
+  {
+    "start": 335.86,
+    "end": 339.79,
+    "text": "### Step 1 - Open StampIt"
+  },
+  {
+    "start": 339.79,
+    "end": 356.23,
+    "text": "Go to sammapix.com/tools/stampit . No installation, no signup, no subscription. "
+  },
+  {
+    "start": 356.23,
+    "end": 361.08,
+    "text": "### Step 2 - Drop your photos into the upload zone"
+  },
+  {
+    "start": 361.08,
+    "end": 384.1,
+    "text": "Drag and drop your photos directly onto the upload zone, or click to select file"
+  },
+  {
+    "start": 384.1,
+    "end": 388.56,
+    "text": "### Step 3 - Choose your watermark type"
+  },
+  {
+    "start": 388.56,
+    "end": 410.5,
+    "text": "Select from three watermark modes: Text, Logo (image), or QR Code. For text wate"
+  },
+  {
+    "start": 410.5,
+    "end": 415.34,
+    "text": "### Step 4 - Configure placement and opacity"
+  },
+  {
+    "start": 415.34,
+    "end": 441.84,
+    "text": "Use the position grid to choose where the watermark appears on each photo: nine "
+  },
+  {
+    "start": 441.84,
+    "end": 446.33,
+    "text": "### Step 5 - Preview before processing"
+  },
+  {
+    "start": 446.33,
+    "end": 466.25,
+    "text": "Watermark shows a live preview of the watermark applied to the first image in yo"
+  },
+  {
+    "start": 466.25,
+    "end": 470.69,
+    "text": "### Step 6 - Apply to all and download"
+  },
+  {
+    "start": 470.69,
+    "end": 493.18,
+    "text": "Click \"Watermark All\" to apply your settings to every image in the batch simulta"
+  },
+  {
+    "start": 493.18,
+    "end": 503.28,
+    "text": "If you need to reduce file sizes before delivery, run your watermarked images th"
+  },
+  {
+    "start": 503.28,
+    "end": 508.42,
+    "text": "### Batch watermark your photos now- free, no signup"
+  },
+  {
+    "start": 508.42,
+    "end": 520.32,
+    "text": "Drop your images into Watermark and apply text, logo, or QR code watermarks to y"
+  },
+  {
+    "start": 520.32,
+    "end": 522.38,
+    "text": "Open StampIt"
+  },
+  {
+    "start": 522.38,
+    "end": 528.12,
+    "text": "## Best practices for watermark placement, opacity, and size"
+  },
+  {
+    "start": 528.12,
+    "end": 545.76,
+    "text": "A poorly designed watermark is almost as bad as no watermark. Too aggressive and"
+  },
+  {
+    "start": 545.76,
+    "end": 548.9,
+    "text": "### Placement"
+  },
+  {
+    "start": 548.9,
+    "end": 557.71,
+    "text": "- Bottom-right corner is the industry standard for non-intrusive watermarks. It "
+  },
+  {
+    "start": 557.71,
+    "end": 569.93,
+    "text": "- Center placement at 30–40% opacity is harder to crop out and more effective as"
+  },
+  {
+    "start": 569.93,
+    "end": 581.81,
+    "text": "- Avoid pure white space in corners- a watermark placed over a white sky or blan"
+  },
+  {
+    "start": 581.81,
+    "end": 594.36,
+    "text": "- Tiled watermarks (the watermark repeated across the entire image as a diagonal"
+  },
+  {
+    "start": 594.36,
+    "end": 597.6,
+    "text": "### Opacity"
+  },
+  {
+    "start": 597.6,
+    "end": 627.74,
+    "text": "The right opacity depends on the purpose of the watermark. For portfolio images "
+  },
+  {
+    "start": 627.74,
+    "end": 630.74,
+    "text": "### Size"
+  },
+  {
+    "start": 630.74,
+    "end": 663.94,
+    "text": "Size your watermark as a percentage of the image width rather than in absolute p"
+  },
+  {
+    "start": 663.94,
+    "end": 668.28,
+    "text": "## The watermark vs no watermark debate"
+  },
+  {
+    "start": 668.28,
+    "end": 688.42,
+    "text": "Not everyone agrees that watermarks are worth it. A vocal segment of the photogr"
+  },
+  {
+    "start": 688.42,
+    "end": 692.47,
+    "text": "### The case against watermarks"
+  },
+  {
+    "start": 692.47,
+    "end": 704.35,
+    "text": "- AI-powered inpainting tools (Photoshop Generative Fill, Adobe Firefly) can rem"
+  },
+  {
+    "start": 704.35,
+    "end": 713.28,
+    "text": "- Heavy watermarks reduce the perceived quality of your portfolio and may cost y"
+  },
+  {
+    "start": 713.28,
+    "end": 721.94,
+    "text": "- For photographers who rely on shareability- travel bloggers, social media crea"
+  },
+  {
+    "start": 721.94,
+    "end": 729.14,
+    "text": "- If someone really wants your image, a watermark will not stop them. It is a de"
+  },
+  {
+    "start": 729.14,
+    "end": 733.03,
+    "text": "### The case for watermarks"
+  },
+  {
+    "start": 733.03,
+    "end": 744.46,
+    "text": "- The majority of image theft is opportunistic, not deliberate. A visible waterm"
+  },
+  {
+    "start": 744.46,
+    "end": 752.76,
+    "text": "- A watermark provides clear evidence of authorship in any dispute or DMCA taked"
+  },
+  {
+    "start": 752.76,
+    "end": 760.97,
+    "text": "- For stock photographers and commercial shooters, a watermarked preview standar"
+  },
+  {
+    "start": 760.97,
+    "end": 773.62,
+    "text": "- Even a removed watermark leaves visible evidence of tampering in some tools, w"
+  },
+  {
+    "start": 773.62,
+    "end": 781.75,
+    "text": "- When executed well- subtle, well-placed, matching your brand - a watermark add"
+  },
+  {
+    "start": 781.75,
+    "end": 806.88,
+    "text": "The practical recommendation is nuanced. For high-traffic public sharing, a subt"
+  },
+  {
+    "start": 806.88,
+    "end": 809.57,
+    "text": "## FAQ"
+  },
+  {
+    "start": 809.57,
+    "end": 814.82,
+    "text": "### Can I batch watermark photos for free without Photoshop?"
+  },
+  {
+    "start": 814.82,
+    "end": 833.69,
+    "text": "Yes. Browser-based tools like SammaPix Watermark process your entire photo batch"
+  },
+  {
+    "start": 833.69,
+    "end": 838.34,
+    "text": "### Does watermarking reduce image quality?"
+  },
+  {
+    "start": 838.34,
+    "end": 859.94,
+    "text": "The watermark is composited onto the image as a new layer before export. The und"
+  },
+  {
+    "start": 859.94,
+    "end": 865.22,
+    "text": "### How do I make a watermark that cannot be easily removed?"
+  },
+  {
+    "start": 865.22,
+    "end": 891.29,
+    "text": "No watermark is completely removal-proof, but tiled or diagonal repeat watermark"
+  },
+  {
+    "start": 891.29,
+    "end": 897.19,
+    "text": "### What is the best watermark position for photography portfolios?"
+  },
+  {
+    "start": 897.19,
+    "end": 917.98,
+    "text": "Bottom-right corner is the industry standard for portfolio work. It is visible, "
+  },
+  {
+    "start": 917.98,
+    "end": 923.21,
+    "text": "### Are my photos uploaded to a server when I use StampIt?"
+  },
+  {
+    "start": 923.21,
+    "end": 946.27,
+    "text": "No. Watermark processes all images entirely in your browser. Your photos never l"
+  },
+  {
+    "start": 946.27,
+    "end": 950.62,
+    "text": "### Can I add a watermark to RAW files?"
+  },
+  {
+    "start": 950.62,
+    "end": 981.43,
+    "text": "Browser-based tools including Watermark work with standard web image formats: JP"
+  }
+]

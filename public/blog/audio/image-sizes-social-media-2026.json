@@ -1,0 +1,537 @@
+[
+  {
+    "start": 0,
+    "end": 5.4,
+    "text": "## Why correct image sizes matter more than ever in 2026"
+  },
+  {
+    "start": 5.4,
+    "end": 26.98,
+    "text": "Every major social platform applies automatic cropping, compression, and resizin"
+  },
+  {
+    "start": 26.98,
+    "end": 47.71,
+    "text": "The stakes are higher in 2026 because the feeds are more competitive than ever. "
+  },
+  {
+    "start": 47.71,
+    "end": 72.36,
+    "text": "Platforms also penalize heavily compressed uploads differently depending on the "
+  },
+  {
+    "start": 72.36,
+    "end": 88.18,
+    "text": "This guide is structured as a platform-by-platform reference. Use the section fo"
+  },
+  {
+    "start": 88.18,
+    "end": 90.74,
+    "text": "SammaPix ResizePack"
+  },
+  {
+    "start": 90.74,
+    "end": 97.22,
+    "text": "lets you process multiple images to exact target dimensions in one pass, entirel"
+  },
+  {
+    "start": 97.22,
+    "end": 101.59,
+    "text": "## Instagram image sizes 2026"
+  },
+  {
+    "start": 101.59,
+    "end": 108.65,
+    "text": "Ready to resize? Use Resize for Instagram to batch-resize photos to exact dimens"
+  },
+  {
+    "start": 108.65,
+    "end": 131.93,
+    "text": "Instagram displays content at multiple aspect ratios depending on the format. Th"
+  },
+  {
+    "start": 131.93,
+    "end": 134.4,
+    "text": "Instagram Help Center"
+  },
+  {
+    "start": 134.4,
+    "end": 136.54,
+    "text": "Width × Height"
+  },
+  {
+    "start": 136.54,
+    "end": 138.77,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 138.77,
+    "end": 140.98,
+    "text": "Max File Size"
+  },
+  {
+    "start": 140.98,
+    "end": 144.05,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 144.05,
+    "end": 147.55,
+    "text": "### Instagram tips"
+  },
+  {
+    "start": 147.55,
+    "end": 151.85,
+    "text": "## Facebook image sizes 2026"
+  },
+  {
+    "start": 151.85,
+    "end": 170.69,
+    "text": "Facebook serves images across web, iOS, and Android at different sizes, making i"
+  },
+  {
+    "start": 170.69,
+    "end": 173.21,
+    "text": "Facebook for Developers"
+  },
+  {
+    "start": 173.21,
+    "end": 175.34,
+    "text": "Width × Height"
+  },
+  {
+    "start": 175.34,
+    "end": 177.58,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 177.58,
+    "end": 179.78,
+    "text": "Max File Size"
+  },
+  {
+    "start": 179.78,
+    "end": 182.86,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 182.86,
+    "end": 186.24,
+    "text": "### Facebook tips"
+  },
+  {
+    "start": 186.24,
+    "end": 190.99,
+    "text": "## X (Twitter) image sizes 2026"
+  },
+  {
+    "start": 191.49,
+    "end": 193.63,
+    "text": "Width × Height"
+  },
+  {
+    "start": 193.63,
+    "end": 195.86,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 195.86,
+    "end": 198.07,
+    "text": "Max File Size"
+  },
+  {
+    "start": 198.07,
+    "end": 201.14,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 201.14,
+    "end": 204.98,
+    "text": "### X / Twitter tips"
+  },
+  {
+    "start": 204.98,
+    "end": 209.2,
+    "text": "## LinkedIn image sizes 2026"
+  },
+  {
+    "start": 209.2,
+    "end": 228.28,
+    "text": "LinkedIn is used by professionals who will judge your content against a high sta"
+  },
+  {
+    "start": 228.28,
+    "end": 230.42,
+    "text": "Width × Height"
+  },
+  {
+    "start": 230.42,
+    "end": 232.65,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 232.65,
+    "end": 234.86,
+    "text": "Max File Size"
+  },
+  {
+    "start": 234.86,
+    "end": 237.93,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 237.93,
+    "end": 245.13,
+    "text": "Consistent, correctly sized images across platforms build a professional content"
+  },
+  {
+    "start": 245.13,
+    "end": 249.91,
+    "text": "## TikTok image and video sizes 2026"
+  },
+  {
+    "start": 249.91,
+    "end": 257.83,
+    "text": "Ready to resize? Use Resize for TikTok to batch-resize photos to vertical (9:16)"
+  },
+  {
+    "start": 257.83,
+    "end": 279.81,
+    "text": "TikTok is primarily a video platform, and its image standards are defined around"
+  },
+  {
+    "start": 279.81,
+    "end": 281.95,
+    "text": "Width × Height"
+  },
+  {
+    "start": 281.95,
+    "end": 284.18,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 284.18,
+    "end": 286.39,
+    "text": "Max File Size"
+  },
+  {
+    "start": 286.39,
+    "end": 289.46,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 289.46,
+    "end": 293.68,
+    "text": "## YouTube image sizes 2026"
+  },
+  {
+    "start": 293.68,
+    "end": 301.58,
+    "text": "Ready to resize? Use Resize for YouTube to batch-resize thumbnails to 1280×720px"
+  },
+  {
+    "start": 301.58,
+    "end": 325.03,
+    "text": "YouTube thumbnail design is one of the highest-impact visual tasks for video cre"
+  },
+  {
+    "start": 325.03,
+    "end": 327.33,
+    "text": "YouTube Help Center"
+  },
+  {
+    "start": 327.33,
+    "end": 329.47,
+    "text": "Width × Height"
+  },
+  {
+    "start": 329.47,
+    "end": 331.7,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 331.7,
+    "end": 333.91,
+    "text": "Max File Size"
+  },
+  {
+    "start": 333.91,
+    "end": 336.98,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 336.98,
+    "end": 340.39,
+    "text": "### YouTube tips"
+  },
+  {
+    "start": 340.39,
+    "end": 344.73,
+    "text": "## Pinterest image sizes 2026"
+  },
+  {
+    "start": 344.73,
+    "end": 354.55,
+    "text": "Ready to resize? Use Resize for Pinterest to batch-resize pins to the recommende"
+  },
+  {
+    "start": 354.55,
+    "end": 377.92,
+    "text": "Pinterest is a visual discovery engine, not a traditional social media platform,"
+  },
+  {
+    "start": 377.92,
+    "end": 380.06,
+    "text": "Width × Height"
+  },
+  {
+    "start": 380.06,
+    "end": 382.29,
+    "text": "Aspect Ratio"
+  },
+  {
+    "start": 382.29,
+    "end": 384.5,
+    "text": "Max File Size"
+  },
+  {
+    "start": 384.5,
+    "end": 387.57,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 387.57,
+    "end": 392.49,
+    "text": "## How to resize images for social media with SammaPix"
+  },
+  {
+    "start": 392.49,
+    "end": 407.95,
+    "text": "Resizing each image to the correct dimensions for every platform manually- espec"
+  },
+  {
+    "start": 407.95,
+    "end": 413.04,
+    "text": "### ResizePack- batch resize to exact dimensions"
+  },
+  {
+    "start": 413.04,
+    "end": 415.03,
+    "text": "ResizePack"
+  },
+  {
+    "start": 415.03,
+    "end": 437.18,
+    "text": "lets you drop multiple images and output them at a set of target dimensions in o"
+  },
+  {
+    "start": 437.18,
+    "end": 442.15,
+    "text": "### CropRatio- crop to exact aspect ratios"
+  },
+  {
+    "start": 442.15,
+    "end": 452.11,
+    "text": "When you need to crop an existing image to a specific social media ratio - 4:5 f"
+  },
+  {
+    "start": 452.11,
+    "end": 454.05,
+    "text": "CropRatio"
+  },
+  {
+    "start": 454.05,
+    "end": 469.03,
+    "text": "gives you a visual crop tool with locked aspect ratios. Select the target platfo"
+  },
+  {
+    "start": 469.03,
+    "end": 472.12,
+    "text": "Free tools- no upload, no signup"
+  },
+  {
+    "start": 472.12,
+    "end": 474.19,
+    "text": "Batch Resize"
+  },
+  {
+    "start": 474.19,
+    "end": 477.62,
+    "text": "Batch resize to exact pixel dimensions"
+  },
+  {
+    "start": 477.62,
+    "end": 479.78,
+    "text": "Crop & Ratio"
+  },
+  {
+    "start": 479.78,
+    "end": 483.09,
+    "text": "Crop images to locked aspect ratios"
+  },
+  {
+    "start": 483.09,
+    "end": 487.75,
+    "text": "## Image format recommendations for social media"
+  },
+  {
+    "start": 487.75,
+    "end": 502.48,
+    "text": "Choosing the right file format before uploading matters as much as choosing the "
+  },
+  {
+    "start": 502.48,
+    "end": 507.88,
+    "text": "### JPEG- the universal choice for social media photos"
+  },
+  {
+    "start": 507.88,
+    "end": 533.78,
+    "text": "JPEG remains the most reliable format for uploading photographs to social media."
+  },
+  {
+    "start": 533.78,
+    "end": 543.6,
+    "text": "For most platforms - Instagram, Facebook, X, LinkedIn - JPEG is the format that "
+  },
+  {
+    "start": 543.6,
+    "end": 546.04,
+    "text": "SammaPix Compress"
+  },
+  {
+    "start": 546.04,
+    "end": 552.52,
+    "text": "to reduce JPEG file sizes before upload without degrading the quality the platfo"
+  },
+  {
+    "start": 552.52,
+    "end": 557.76,
+    "text": "### PNG- for graphics, logos, and screenshots"
+  },
+  {
+    "start": 557.76,
+    "end": 576.76,
+    "text": "For any image that contains flat areas of color, text overlays, or a transparent"
+  },
+  {
+    "start": 576.76,
+    "end": 589.96,
+    "text": "Some platforms, notably Facebook, also serve PNG files with less aggressive re-e"
+  },
+  {
+    "start": 589.96,
+    "end": 595.36,
+    "text": "### WebP- for your own website, not direct social uploads"
+  },
+  {
+    "start": 595.36,
+    "end": 611.83,
+    "text": "WebP is the ideal format for images on your own website- blog posts, landing pag"
+  },
+  {
+    "start": 611.83,
+    "end": 614.68,
+    "text": "SammaPix WebP Converter"
+  },
+  {
+    "start": 614.68,
+    "end": 618.52,
+    "text": "to batch-convert photos before publishing to your site."
+  },
+  {
+    "start": 618.52,
+    "end": 633.96,
+    "text": "For direct social media uploads, WebP is accepted by some platforms (X/Twitter, "
+  },
+  {
+    "start": 633.96,
+    "end": 638.11,
+    "text": "## Quick reference: format by platform"
+  },
+  {
+    "start": 638.11,
+    "end": 639.84,
+    "text": "Platform"
+  },
+  {
+    "start": 639.84,
+    "end": 642.36,
+    "text": "Best Format (Photos)"
+  },
+  {
+    "start": 642.36,
+    "end": 644.97,
+    "text": "Best Format (Graphics)"
+  },
+  {
+    "start": 644.97,
+    "end": 647.32,
+    "text": "WebP Accepted"
+  },
+  {
+    "start": 647.32,
+    "end": 650.4,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 650.4,
+    "end": 655.34,
+    "text": "## Common mistakes that degrade social media image quality"
+  },
+  {
+    "start": 655.34,
+    "end": 662.25,
+    "text": "Even with the correct dimensions, certain upload practices degrade final image q"
+  },
+  {
+    "start": 662.25,
+    "end": 665.78,
+    "text": "### Double compression"
+  },
+  {
+    "start": 665.78,
+    "end": 689.49,
+    "text": "Every social platform re-encodes your uploaded image with its own compression al"
+  },
+  {
+    "start": 689.49,
+    "end": 694.39,
+    "text": "### Uploading screenshots of other social posts"
+  },
+  {
+    "start": 694.39,
+    "end": 714.64,
+    "text": "Reposting content by screenshotting it and re-uploading introduces multiple qual"
+  },
+  {
+    "start": 714.64,
+    "end": 719.4,
+    "text": "### Wrong aspect ratio leading to forced cropping"
+  },
+  {
+    "start": 719.4,
+    "end": 734.59,
+    "text": "Platforms never leave letterbox bars around images- they crop to fill the contai"
+  },
+  {
+    "start": 734.59,
+    "end": 736.53,
+    "text": "CropRatio"
+  },
+  {
+    "start": 736.53,
+    "end": 742.77,
+    "text": "to crop to the correct ratio before uploading and control exactly which part of "
+  },
+  {
+    "start": 742.77,
+    "end": 745.46,
+    "text": "## FAQ"
+  },
+  {
+    "start": 745.46,
+    "end": 747.74,
+    "text": "].map(() => ("
+  }
+]

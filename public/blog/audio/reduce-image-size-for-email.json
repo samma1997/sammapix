@@ -1,0 +1,777 @@
+[
+  {
+    "start": 0,
+    "end": 4.2,
+    "text": "## Email attachment size limits you need to know"
+  },
+  {
+    "start": 4.2,
+    "end": 10.1,
+    "text": "Every email provider enforces a maximum attachment size. These"
+  },
+  {
+    "start": 10.1,
+    "end": 14.64,
+    "text": "limits apply to the total size of all attachments combined in a"
+  },
+  {
+    "start": 14.64,
+    "end": 20.54,
+    "text": "single email- not per file. Sending multiple photos at once makes"
+  },
+  {
+    "start": 20.54,
+    "end": 22.94,
+    "text": "the problem worse fast."
+  },
+  {
+    "start": 22.94,
+    "end": 25.08,
+    "text": "Email Provider"
+  },
+  {
+    "start": 25.08,
+    "end": 27.46,
+    "text": "Max Attachment Size"
+  },
+  {
+    "start": 27.46,
+    "end": 30.53,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 30.53,
+    "end": 35.21,
+    "text": "For the complete, official breakdown of Gmail attachment rules, see"
+  },
+  {
+    "start": 35.21,
+    "end": 38.78,
+    "text": "Google's official Gmail attachment help page"
+  },
+  {
+    "start": 38.78,
+    "end": 42.98,
+    "text": ". The limits look generous on paper- but the reality of modern"
+  },
+  {
+    "start": 42.98,
+    "end": 46.63,
+    "text": "smartphone photos closes that gap very quickly."
+  },
+  {
+    "start": 46.63,
+    "end": 50.81,
+    "text": "## Why photos from your phone are always too big"
+  },
+  {
+    "start": 50.81,
+    "end": 55.46,
+    "text": "The camera on a modern iPhone shoots at 12 megapixels or higher."
+  },
+  {
+    "start": 55.46,
+    "end": 61.06,
+    "text": "Each raw photo from that sensor is a 4032 x 3024 pixel image-"
+  },
+  {
+    "start": 61.06,
+    "end": 67.49,
+    "text": "that is over 12 million individual pixels. At typical JPEG quality"
+  },
+  {
+    "start": 67.49,
+    "end": 72.79,
+    "text": "settings, each photo weighs between 3 MB and 6 MB off the camera."
+  },
+  {
+    "start": 72.79,
+    "end": 77.64,
+    "text": "Shoot in Portrait mode, HDR, or high-efficiency format and the"
+  },
+  {
+    "start": 77.64,
+    "end": 79.92,
+    "text": "sizes climb further."
+  },
+  {
+    "start": 79.92,
+    "end": 86.74,
+    "text": "Android flagships and modern DSLRs are even larger. A 24 MP Sony"
+  },
+  {
+    "start": 86.74,
+    "end": 93.91,
+    "text": "or Canon produces JPEGs between 8 MB and 15 MB per shot. Attach"
+  },
+  {
+    "start": 93.91,
+    "end": 98.74,
+    "text": "three of those to an email and you are already at 30–45 MB-"
+  },
+  {
+    "start": 98.74,
+    "end": 101.71,
+    "text": "well over every provider's limit."
+  },
+  {
+    "start": 101.71,
+    "end": 107.3,
+    "text": "The good news: you do not need all those pixels for email. At"
+  },
+  {
+    "start": 107.3,
+    "end": 112.94,
+    "text": "normal screen sizes, a 1920 x 1080 image is indistinguishable from"
+  },
+  {
+    "start": 112.94,
+    "end": 119.93,
+    "text": "a 4032 x 3024 image. Reducing the dimensions alone can cut file"
+  },
+  {
+    "start": 119.93,
+    "end": 124.73,
+    "text": "size by 75% or more- before any compression even happens."
+  },
+  {
+    "start": 124.73,
+    "end": 133.46,
+    "text": "A single iPhone photo at full resolution can be 5 MB or more- far too large for "
+  },
+  {
+    "start": 133.46,
+    "end": 139.2,
+    "text": "## Method 1: Compress the image (fastest, best for single photos)"
+  },
+  {
+    "start": 139.2,
+    "end": 143.62,
+    "text": "Compression reduces the amount of data used to encode your image"
+  },
+  {
+    "start": 143.62,
+    "end": 149.93,
+    "text": "without changing its pixel dimensions. A 5 MB iPhone photo at full"
+  },
+  {
+    "start": 149.93,
+    "end": 156.17,
+    "text": "4032 x 3024 resolution can typically be brought down to 500 KB–1"
+  },
+  {
+    "start": 156.17,
+    "end": 161.06,
+    "text": "MB through compression alone, with no visible quality difference at"
+  },
+  {
+    "start": 161.06,
+    "end": 163.42,
+    "text": "normal screen sizes."
+  },
+  {
+    "start": 163.42,
+    "end": 166.06,
+    "text": "SammaPix Compress tool"
+  },
+  {
+    "start": 166.06,
+    "end": 170.35,
+    "text": "handles this entirely in your browser- your photos never leave"
+  },
+  {
+    "start": 170.35,
+    "end": 175.7,
+    "text": "your device. Drag your photo onto the drop zone, adjust the"
+  },
+  {
+    "start": 175.7,
+    "end": 181.3,
+    "text": "quality slider if needed, and download the compressed version. The"
+  },
+  {
+    "start": 181.3,
+    "end": 184.73,
+    "text": "process takes under ten seconds per photo."
+  },
+  {
+    "start": 184.73,
+    "end": 188.14,
+    "text": "Recommended compression settings for email"
+  },
+  {
+    "start": 188.14,
+    "end": 192.34,
+    "text": "Quality 75–80%- the sweet spot for email."
+  },
+  {
+    "start": 192.34,
+    "end": 196.66,
+    "text": "Visually indistinguishable from the original at screen size,"
+  },
+  {
+    "start": 196.66,
+    "end": 199.82,
+    "text": "but 50–70% smaller."
+  },
+  {
+    "start": 199.82,
+    "end": 203.95,
+    "text": "Quality 60–70%- use this if you still need"
+  },
+  {
+    "start": 203.95,
+    "end": 210.02,
+    "text": "to get smaller. Some loss is visible only at 1:1 zoom on a"
+  },
+  {
+    "start": 210.02,
+    "end": 212.16,
+    "text": "large monitor."
+  },
+  {
+    "start": 212.16,
+    "end": 216.19,
+    "text": "Avoid quality below 50%- artifacts become"
+  },
+  {
+    "start": 216.19,
+    "end": 221.4,
+    "text": "clearly visible at this level. The file size savings are not"
+  },
+  {
+    "start": 221.4,
+    "end": 225.46,
+    "text": "worth the degradation for anything you are sending to another"
+  },
+  {
+    "start": 225.46,
+    "end": 226.99,
+    "text": "person."
+  },
+  {
+    "start": 226.99,
+    "end": 231.48,
+    "text": "## Method 2: Resize the image dimensions"
+  },
+  {
+    "start": 231.48,
+    "end": 235.94,
+    "text": "Resizing reduces the number of pixels in your image- from a wide"
+  },
+  {
+    "start": 235.94,
+    "end": 242.35,
+    "text": "original like 4032 x 3024 down to something like 1920 x 1080 or"
+  },
+  {
+    "start": 242.35,
+    "end": 248.69,
+    "text": "1280 x 960. This is one of the most effective ways to reduce image"
+  },
+  {
+    "start": 248.69,
+    "end": 253.06,
+    "text": "size for email because file size scales roughly with the square of"
+  },
+  {
+    "start": 253.06,
+    "end": 258.29,
+    "text": "the pixel dimensions. Halving the width and height reduces the"
+  },
+  {
+    "start": 258.29,
+    "end": 263.3,
+    "text": "pixel count- and thus the file size- by approximately 75%."
+  },
+  {
+    "start": 263.3,
+    "end": 268.22,
+    "text": "A practical target for email photos is the long edge at 1920"
+  },
+  {
+    "start": 268.22,
+    "end": 274.06,
+    "text": "pixels. That is full 1080p resolution- large enough to look crisp"
+  },
+  {
+    "start": 274.06,
+    "end": 278.35,
+    "text": "on any screen the recipient views it on, but a fraction of the"
+  },
+  {
+    "start": 278.35,
+    "end": 282.14,
+    "text": "original file weight. The"
+  },
+  {
+    "start": 282.14,
+    "end": 285.07,
+    "text": "SammaPix Batch Resize tool"
+  },
+  {
+    "start": 285.07,
+    "end": 289.58,
+    "text": "lets you batch-resize multiple photos to exact dimensions or a"
+  },
+  {
+    "start": 289.58,
+    "end": 293.98,
+    "text": "target percentage- download them all as a ZIP and attach to your"
+  },
+  {
+    "start": 293.98,
+    "end": 296.21,
+    "text": "email in one go."
+  },
+  {
+    "start": 296.21,
+    "end": 299.11,
+    "text": "Resize targets by use case"
+  },
+  {
+    "start": 299.11,
+    "end": 301.39,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 301.39,
+    "end": 306.94,
+    "text": "## Method 3: Convert to WebP (30% smaller than JPEG)"
+  },
+  {
+    "start": 306.94,
+    "end": 312.77,
+    "text": "WebP is a modern image format developed by Google. At equivalent"
+  },
+  {
+    "start": 312.77,
+    "end": 318.91,
+    "text": "visual quality, WebP files are typically 25–35% smaller than JPEG"
+  },
+  {
+    "start": 318.91,
+    "end": 325.73,
+    "text": "files. That means a 3 MB JPEG photo can become a 2 MB WebP- just"
+  },
+  {
+    "start": 325.73,
+    "end": 330.19,
+    "text": "by changing the format, without changing the dimensions or lowering"
+  },
+  {
+    "start": 330.19,
+    "end": 332.3,
+    "text": "the quality setting."
+  },
+  {
+    "start": 332.3,
+    "end": 338.35,
+    "text": "The one consideration with WebP for email is compatibility. Modern"
+  },
+  {
+    "start": 338.35,
+    "end": 344.45,
+    "text": "email clients on web (Gmail, Outlook.com, Yahoo Mail) and iOS/"
+  },
+  {
+    "start": 344.45,
+    "end": 350.35,
+    "text": "Android handle WebP without issues. Older desktop email clients"
+  },
+  {
+    "start": 350.35,
+    "end": 355.56,
+    "text": "like Outlook 2016 or Thunderbird on older systems may not display"
+  },
+  {
+    "start": 355.56,
+    "end": 359.69,
+    "text": "WebP images inline- but they will still receive and allow"
+  },
+  {
+    "start": 359.69,
+    "end": 365.42,
+    "text": "downloading the attachment. If you are unsure, stick to JPEG or"
+  },
+  {
+    "start": 365.42,
+    "end": 368.88,
+    "text": "use Method 4 below which combines everything."
+  },
+  {
+    "start": 368.88,
+    "end": 372.36,
+    "text": "To convert your photos to WebP, use the"
+  },
+  {
+    "start": 372.36,
+    "end": 375.22,
+    "text": "SammaPix WebP converter"
+  },
+  {
+    "start": 375.22,
+    "end": 380.3,
+    "text": ". Drop in your JPEGs or PNGs and download them as WebP in seconds."
+  },
+  {
+    "start": 380.3,
+    "end": 384.19,
+    "text": "Everything runs in your browser- nothing is uploaded to any"
+  },
+  {
+    "start": 384.19,
+    "end": 385.9,
+    "text": "server."
+  },
+  {
+    "start": 385.9,
+    "end": 393.65,
+    "text": "Choosing the right format can shave megabytes off your attachments before you to"
+  },
+  {
+    "start": 393.65,
+    "end": 398.57,
+    "text": "## Method 4: Combine all three for maximum reduction"
+  },
+  {
+    "start": 398.57,
+    "end": 402.72,
+    "text": "For the smallest possible file that still looks good in an email,"
+  },
+  {
+    "start": 402.72,
+    "end": 408.36,
+    "text": "stack all three techniques in order. Resize first- dimensions are"
+  },
+  {
+    "start": 408.36,
+    "end": 413.78,
+    "text": "the biggest single contributor to file weight. Then compress."
+  },
+  {
+    "start": 413.78,
+    "end": 419.78,
+    "text": "Finally, if compatibility is not a concern, convert to WebP. Each"
+  },
+  {
+    "start": 419.78,
+    "end": 424.06,
+    "text": "step stacks on the previous one and the results are dramatic."
+  },
+  {
+    "start": 424.06,
+    "end": 428.26,
+    "text": "The workflow takes under two minutes for a batch of photos using"
+  },
+  {
+    "start": 428.26,
+    "end": 434.11,
+    "text": "browser-based tools. No software to install, no account to create,"
+  },
+  {
+    "start": 434.11,
+    "end": 436.92,
+    "text": "no files sent to any server."
+  },
+  {
+    "start": 436.92,
+    "end": 439.2,
+    "text": "].map(() => ("
+  },
+  {
+    "start": 439.2,
+    "end": 444.17,
+    "text": "## Quick reference: how much each method reduces your photo"
+  },
+  {
+    "start": 444.17,
+    "end": 449.71,
+    "text": "The table below uses a representative starting point: a 5 MB JPEG"
+  },
+  {
+    "start": 449.71,
+    "end": 457.15,
+    "text": "photo from a 12 MP iPhone at 4032 x 3024 pixels. Your results will"
+  },
+  {
+    "start": 457.15,
+    "end": 461.59,
+    "text": "vary by photo content- busy outdoor scenes compress less than"
+  },
+  {
+    "start": 461.59,
+    "end": 466.03,
+    "text": "smooth sky backgrounds- but this gives a reliable reference range."
+  },
+  {
+    "start": 466.03,
+    "end": 468,
+    "text": "Method applied"
+  },
+  {
+    "start": 468,
+    "end": 470.62,
+    "text": "Approx. file size"
+  },
+  {
+    "start": 470.62,
+    "end": 473.11,
+    "text": "Reduction from original"
+  },
+  {
+    "start": 473.11,
+    "end": 476.18,
+    "text": "].map((row, i) => ("
+  },
+  {
+    "start": 476.18,
+    "end": 481.18,
+    "text": "A 5 MB photo that has been resized, compressed, and converted to"
+  },
+  {
+    "start": 481.18,
+    "end": 487.73,
+    "text": "WebP is around 300 KB on average. You can comfortably attach ten"
+  },
+  {
+    "start": 487.73,
+    "end": 492.02,
+    "text": "of them to a single email and stay well under any provider's"
+  },
+  {
+    "start": 492.02,
+    "end": 497.98,
+    "text": "limit. Even keeping it to JPEG- resize and compress only- brings"
+  },
+  {
+    "start": 497.98,
+    "end": 502.54,
+    "text": "you from 5 MB to under 600 KB per photo."
+  },
+  {
+    "start": 502.54,
+    "end": 507.48,
+    "text": "## Tips for batch compressing multiple photos for email"
+  },
+  {
+    "start": 507.48,
+    "end": 511.73,
+    "text": "When you need to email an entire album- a wedding set, a real"
+  },
+  {
+    "start": 511.73,
+    "end": 516.26,
+    "text": "estate shoot, a holiday collection- compressing one photo at a"
+  },
+  {
+    "start": 516.26,
+    "end": 521.83,
+    "text": "time is not practical. Here is how to handle batches efficiently."
+  },
+  {
+    "start": 521.83,
+    "end": 525.22,
+    "text": "Use batch tools that produce a ZIP download."
+  },
+  {
+    "start": 525.22,
+    "end": 529.66,
+    "text": "SammaPix processes up to dozens of photos at once and lets you"
+  },
+  {
+    "start": 529.66,
+    "end": 535.44,
+    "text": "download them all as a single ZIP archive. Drag your entire photo"
+  },
+  {
+    "start": 535.44,
+    "end": 541.3,
+    "text": "set onto the drop zone, set the quality, and click download. The"
+  },
+  {
+    "start": 541.3,
+    "end": 545.28,
+    "text": "full batch is ready in under a minute for most photo sets."
+  },
+  {
+    "start": 545.28,
+    "end": 548.88,
+    "text": "Split large batches across multiple emails."
+  },
+  {
+    "start": 548.88,
+    "end": 554.09,
+    "text": "Even after compression, if you are sending 40 photos at 300 KB"
+  },
+  {
+    "start": 554.09,
+    "end": 559.66,
+    "text": "each, that is 12 MB- right at the edge of many limits. Split"
+  },
+  {
+    "start": 559.66,
+    "end": 565.66,
+    "text": "large sets into two or three emails of 10–15 photos each. Label"
+  },
+  {
+    "start": 565.66,
+    "end": 569.95,
+    "text": "them clearly in the subject line: \"Event photos - Part 1 of"
+  },
+  {
+    "start": 569.95,
+    "end": 574.06,
+    "text": "3.\" This is safer and more reliable than trying to squeeze"
+  },
+  {
+    "start": 574.06,
+    "end": 576.6,
+    "text": "everything into one send."
+  },
+  {
+    "start": 576.6,
+    "end": 580.06,
+    "text": "Consider a sharing link for very large sets."
+  },
+  {
+    "start": 580.06,
+    "end": 584.81,
+    "text": "If you are sending more than 20–30 photos, a cloud share link is"
+  },
+  {
+    "start": 584.81,
+    "end": 590.35,
+    "text": "genuinely more practical than email attachments. Google Photos,"
+  },
+  {
+    "start": 590.35,
+    "end": 594.86,
+    "text": "iCloud shared albums, and Dropbox all let you create a link the"
+  },
+  {
+    "start": 594.86,
+    "end": 600.41,
+    "text": "recipient can use to browse and download at their own pace. Email"
+  },
+  {
+    "start": 600.41,
+    "end": 605.04,
+    "text": "is fine for a handful of photos- for full event galleries, a link"
+  },
+  {
+    "start": 605.04,
+    "end": 607.15,
+    "text": "is the better tool."
+  },
+  {
+    "start": 607.15,
+    "end": 610.78,
+    "text": "Set a consistent target size before you start."
+  },
+  {
+    "start": 610.78,
+    "end": 616.49,
+    "text": "Before batch-processing, decide on your target. For most personal"
+  },
+  {
+    "start": 616.49,
+    "end": 623.14,
+    "text": "email use, aim for 300–500 KB per photo with a resize to 1920px"
+  },
+  {
+    "start": 623.14,
+    "end": 629.38,
+    "text": "and quality at 78%. For professional client delivery where"
+  },
+  {
+    "start": 629.38,
+    "end": 634.7,
+    "text": "recipients may print or crop, keep quality at 85% and resize to no"
+  },
+  {
+    "start": 634.7,
+    "end": 640.97,
+    "text": "smaller than 2400px. Having a clear target before you start a"
+  },
+  {
+    "start": 640.97,
+    "end": 644.26,
+    "text": "batch means you do not need to re-process."
+  },
+  {
+    "start": 644.26,
+    "end": 650.69,
+    "text": "Batch compressing a full event album takes under a minute with the right tool - "
+  },
+  {
+    "start": 650.69,
+    "end": 655.46,
+    "text": "## What about using your phone to compress photos for email?"
+  },
+  {
+    "start": 655.46,
+    "end": 660.14,
+    "text": "Both iOS and Android offer built-in options to reduce image size"
+  },
+  {
+    "start": 660.14,
+    "end": 664.9,
+    "text": "when sharing. On iPhone, when you tap \"Share\" and"
+  },
+  {
+    "start": 664.9,
+    "end": 669.72,
+    "text": "choose Mail, iOS may prompt you to pick a size: Small, Medium,"
+  },
+  {
+    "start": 669.72,
+    "end": 675.12,
+    "text": "Large, or Actual Size. \"Medium\" typically targets"
+  },
+  {
+    "start": 675.12,
+    "end": 681.72,
+    "text": "around 300 KB and \"Large\" around 750 KB. These are"
+  },
+  {
+    "start": 681.72,
+    "end": 684.65,
+    "text": "decent options for casual sends."
+  },
+  {
+    "start": 684.65,
+    "end": 690.24,
+    "text": "The limitation is control. The built-in share sheet does not tell"
+  },
+  {
+    "start": 690.24,
+    "end": 695.93,
+    "text": "you the exact output size before you send. For important emails"
+  },
+  {
+    "start": 695.93,
+    "end": 700.27,
+    "text": "where you need to stay under a specific limit, browser-based tools"
+  },
+  {
+    "start": 700.27,
+    "end": 704.74,
+    "text": "give you a precise file size readout before downloading, so there"
+  },
+  {
+    "start": 704.74,
+    "end": 706.9,
+    "text": "are no surprises."
+  },
+  {
+    "start": 706.9,
+    "end": 710.42,
+    "text": "## Frequently asked questions"
+  },
+  {
+    "start": 710.42,
+    "end": 712.7,
+    "text": "].map(() => ("
+  }
+]

@@ -1,0 +1,1322 @@
+[
+  {
+    "start": 0,
+    "end": 4.22,
+    "text": "## Why image load speed matters more than ever"
+  },
+  {
+    "start": 4.22,
+    "end": 8.93,
+    "text": "Google ranks pages using Core Web Vitals, and the most important"
+  },
+  {
+    "start": 8.93,
+    "end": 14.3,
+    "text": "metric - Largest Contentful Paint (LCP)- is dominated by images."
+  },
+  {
+    "start": 14.3,
+    "end": 16.22,
+    "text": "According to"
+  },
+  {
+    "start": 16.22,
+    "end": 19.8,
+    "text": "web.dev's LCP documentation"
+  },
+  {
+    "start": 19.8,
+    "end": 24.86,
+    "text": ", the LCP element is an image in approximately 70% of all web"
+  },
+  {
+    "start": 24.86,
+    "end": 30.22,
+    "text": "pages. To score \"Good\" on LCP, that image must finish"
+  },
+  {
+    "start": 30.22,
+    "end": 34.34,
+    "text": "loading within 2.5 seconds of navigation start."
+  },
+  {
+    "start": 34.34,
+    "end": 40.2,
+    "text": "Beyond rankings, the business case is equally strong. A 1-second"
+  },
+  {
+    "start": 40.2,
+    "end": 45,
+    "text": "improvement in page load time correlates with a 7% increase in"
+  },
+  {
+    "start": 45,
+    "end": 49.1,
+    "text": "conversions, according to studies from Akamai and Deloitte."
+  },
+  {
+    "start": 49.1,
+    "end": 53.57,
+    "text": "Mobile users on slower connections are even more sensitive- if"
+  },
+  {
+    "start": 53.57,
+    "end": 58.27,
+    "text": "your images are not optimized, you are actively losing customers."
+  },
+  {
+    "start": 58.27,
+    "end": 62.9,
+    "text": "The good news: image optimization does not require a complete site"
+  },
+  {
+    "start": 62.9,
+    "end": 68.11,
+    "text": "rebuild. Each of the 7 methods below can be implemented"
+  },
+  {
+    "start": 68.11,
+    "end": 72.65,
+    "text": "independently, and even applying two or three of them will produce"
+  },
+  {
+    "start": 72.65,
+    "end": 77.3,
+    "text": "measurable improvements in load time, LCP score, and user"
+  },
+  {
+    "start": 77.3,
+    "end": 80.76,
+    "text": "experience. The"
+  },
+  {
+    "start": 80.76,
+    "end": 83.71,
+    "text": "web.dev image learning path"
+  },
+  {
+    "start": 83.71,
+    "end": 88.03,
+    "text": "is an excellent companion resource for going deeper on any of"
+  },
+  {
+    "start": 88.03,
+    "end": 90.1,
+    "text": "these techniques."
+  },
+  {
+    "start": 90.1,
+    "end": 94.66,
+    "text": "## Method 1 - Compress your images before publishing"
+  },
+  {
+    "start": 94.66,
+    "end": 99.12,
+    "text": "Compression is the most immediate, highest-impact action you can"
+  },
+  {
+    "start": 99.12,
+    "end": 104.52,
+    "text": "take to make images load faster. A raw photograph from a modern"
+  },
+  {
+    "start": 104.52,
+    "end": 110.47,
+    "text": "smartphone often weighs 4–8 MB. The same image, correctly"
+  },
+  {
+    "start": 110.47,
+    "end": 115.39,
+    "text": "compressed for web display, should be under 200 KB- a reduction"
+  },
+  {
+    "start": 115.39,
+    "end": 120.72,
+    "text": "of 95% or more with no visible quality loss at normal screen sizes."
+  },
+  {
+    "start": 120.72,
+    "end": 125.62,
+    "text": "There are two types of compression. Lossless compression"
+  },
+  {
+    "start": 125.62,
+    "end": 130.25,
+    "text": "re-encodes the data more efficiently without discarding any pixels"
+  },
+  {
+    "start": 130.25,
+    "end": 136.01,
+    "text": "- useful for logos, screenshots, and UI elements. Lossy"
+  },
+  {
+    "start": 136.01,
+    "end": 140.5,
+    "text": "compression discards image data that the human eye is unlikely to"
+  },
+  {
+    "start": 140.5,
+    "end": 145.1,
+    "text": "notice, which is appropriate for photographs and any continuous-"
+  },
+  {
+    "start": 145.1,
+    "end": 151.15,
+    "text": "tone image. For web photos, a JPEG or WebP quality setting of"
+  },
+  {
+    "start": 151.15,
+    "end": 156.82,
+    "text": "78–82 is indistinguishable from quality 100 at normal display"
+  },
+  {
+    "start": 156.82,
+    "end": 161.54,
+    "text": "sizes, while producing files that are 60–80% smaller."
+  },
+  {
+    "start": 161.54,
+    "end": 166.01,
+    "text": "The key rule: always compress from the original source file, not"
+  },
+  {
+    "start": 166.01,
+    "end": 171.26,
+    "text": "from a previously compressed version. Re-compressing already-"
+  },
+  {
+    "start": 171.26,
+    "end": 175.58,
+    "text": "lossy images stacks artifacts and degrades quality without"
+  },
+  {
+    "start": 175.58,
+    "end": 181.58,
+    "text": "recovering file size. Work from originals, compress once, store"
+  },
+  {
+    "start": 181.58,
+    "end": 183.5,
+    "text": "both versions."
+  },
+  {
+    "start": 183.5,
+    "end": 187.42,
+    "text": "Compress your images in seconds- no upload required"
+  },
+  {
+    "start": 187.42,
+    "end": 190.06,
+    "text": "SammaPix Compress tool"
+  },
+  {
+    "start": 190.06,
+    "end": 195.91,
+    "text": "runs entirely in your browser. Drag in a batch of images, adjust"
+  },
+  {
+    "start": 195.91,
+    "end": 199.99,
+    "text": "the quality slider, and download- your files never leave your"
+  },
+  {
+    "start": 199.99,
+    "end": 201.67,
+    "text": "device."
+  },
+  {
+    "start": 201.67,
+    "end": 204,
+    "text": "Open Compress Tool"
+  },
+  {
+    "start": 204,
+    "end": 209.28,
+    "text": "## Method 2 - Convert to next-gen formats (WebP and AVIF)"
+  },
+  {
+    "start": 209.28,
+    "end": 214.2,
+    "text": "JPEG and PNG served most of the web for decades, but they are no"
+  },
+  {
+    "start": 214.2,
+    "end": 220.2,
+    "text": "longer the best options for file size. WebP, developed by Google,"
+  },
+  {
+    "start": 220.2,
+    "end": 225.98,
+    "text": "produces files that are 25–34% smaller than JPEG at equivalent"
+  },
+  {
+    "start": 225.98,
+    "end": 232.03,
+    "text": "perceptual quality. AVIF- based on the AV1 video codec- can"
+  },
+  {
+    "start": 232.03,
+    "end": 237.34,
+    "text": "compress even further, often 40–50% smaller than JPEG, though"
+  },
+  {
+    "start": 237.34,
+    "end": 241.92,
+    "text": "encoding is slower and browser support, while growing, is slightly"
+  },
+  {
+    "start": 241.92,
+    "end": 244.03,
+    "text": "behind WebP."
+  },
+  {
+    "start": 244.03,
+    "end": 250.73,
+    "text": "Browser support for WebP now exceeds 97% globally. For the vast"
+  },
+  {
+    "start": 250.73,
+    "end": 255.36,
+    "text": "majority of websites, you can safely default to WebP for all"
+  },
+  {
+    "start": 255.36,
+    "end": 261.53,
+    "text": "photographic content with zero compatibility concerns. AVIF support"
+  },
+  {
+    "start": 261.53,
+    "end": 266.33,
+    "text": "sits above 90% and continues to grow- it is appropriate if you"
+  },
+  {
+    "start": 266.33,
+    "end": 270.82,
+    "text": "want to push file sizes as low as possible for a modern audience."
+  },
+  {
+    "start": 270.82,
+    "end": 275.81,
+    "text": "Converting existing JPEG or PNG assets to WebP is a one-time"
+  },
+  {
+    "start": 275.81,
+    "end": 281.54,
+    "text": "operation with permanent returns. Every user who downloads the"
+  },
+  {
+    "start": 281.54,
+    "end": 286.22,
+    "text": "WebP version instead of the JPEG version transfers fewer bytes-"
+  },
+  {
+    "start": 286.22,
+    "end": 291.46,
+    "text": "and arrives at a fully-loaded page faster. For a site with"
+  },
+  {
+    "start": 291.46,
+    "end": 296.11,
+    "text": "hundreds of images, this single step can cut total image payload"
+  },
+  {
+    "start": 296.11,
+    "end": 297.94,
+    "text": "by a third."
+  },
+  {
+    "start": 297.94,
+    "end": 301.39,
+    "text": "Real-world savings at equivalent quality"
+  },
+  {
+    "start": 301.39,
+    "end": 304.63,
+    "text": "Original JPEG (quality 90)"
+  },
+  {
+    "start": 304.63,
+    "end": 307.42,
+    "text": "420 KB"
+  },
+  {
+    "start": 307.42,
+    "end": 310.15,
+    "text": "WebP (quality 82)"
+  },
+  {
+    "start": 310.15,
+    "end": 314.23,
+    "text": "290 KB — 31% smaller"
+  },
+  {
+    "start": 314.23,
+    "end": 316.9,
+    "text": "AVIF (quality 70)"
+  },
+  {
+    "start": 316.9,
+    "end": 321.07,
+    "text": "240 KB — 43% smaller"
+  },
+  {
+    "start": 321.07,
+    "end": 325.01,
+    "text": "Convert JPEG and PNG to WebP instantly"
+  },
+  {
+    "start": 325.01,
+    "end": 326.81,
+    "text": "Use the"
+  },
+  {
+    "start": 326.81,
+    "end": 329.66,
+    "text": "SammaPix WebP converter"
+  },
+  {
+    "start": 329.66,
+    "end": 335.02,
+    "text": "to batch-convert your existing image library. Client-side,"
+  },
+  {
+    "start": 335.02,
+    "end": 337.32,
+    "text": "private, and free."
+  },
+  {
+    "start": 337.32,
+    "end": 339.62,
+    "text": "Convert to WebP"
+  },
+  {
+    "start": 339.62,
+    "end": 344.76,
+    "text": "## Method 3 - Resize images to the correct display dimensions"
+  },
+  {
+    "start": 344.76,
+    "end": 348.98,
+    "text": "Serving an oversized image is one of the most common- and most"
+  },
+  {
+    "start": 348.98,
+    "end": 354.31,
+    "text": "wasteful- image performance mistakes. A photo from a modern"
+  },
+  {
+    "start": 354.31,
+    "end": 360.43,
+    "text": "smartphone is 4000 pixels wide or more. If that image displays in"
+  },
+  {
+    "start": 360.43,
+    "end": 366,
+    "text": "a 800px blog column, the browser downloads roughly 25 times more"
+  },
+  {
+    "start": 366,
+    "end": 371.98,
+    "text": "pixels than it ever renders. Every extra pixel is wasted bandwidth,"
+  },
+  {
+    "start": 371.98,
+    "end": 375.41,
+    "text": "wasted memory, and wasted milliseconds."
+  },
+  {
+    "start": 375.41,
+    "end": 379.97,
+    "text": "The rule is simple: resize every image to the maximum width at"
+  },
+  {
+    "start": 379.97,
+    "end": 385.18,
+    "text": "which it will be displayed before publishing it. For a standard"
+  },
+  {
+    "start": 385.18,
+    "end": 391.66,
+    "text": "blog article column of 800px, a 1600px wide image (2x for retina"
+  },
+  {
+    "start": 391.66,
+    "end": 397.34,
+    "text": "displays) is the absolute maximum you should ever serve. For"
+  },
+  {
+    "start": 397.34,
+    "end": 404.02,
+    "text": "thumbnails at 200px, serve a 400px image. Going beyond this"
+  },
+  {
+    "start": 404.02,
+    "end": 408.1,
+    "text": "produces zero visual improvement on any real device."
+  },
+  {
+    "start": 408.1,
+    "end": 412.42,
+    "text": "Resizing before compression also multiplies the effect of the"
+  },
+  {
+    "start": 412.42,
+    "end": 418.68,
+    "text": "compression step. A 6000px photo compressed to quality 80 is still"
+  },
+  {
+    "start": 418.68,
+    "end": 424.32,
+    "text": "a large file because it carries an enormous number of pixels. The"
+  },
+  {
+    "start": 424.32,
+    "end": 430.58,
+    "text": "same image resized to 1200px first, then compressed, can be 90% or"
+  },
+  {
+    "start": 430.58,
+    "end": 434.64,
+    "text": "more smaller than the unresized, uncompressed original."
+  },
+  {
+    "start": 434.64,
+    "end": 438.31,
+    "text": "Resize a batch of images to exact dimensions"
+  },
+  {
+    "start": 438.31,
+    "end": 441.17,
+    "text": "SammaPix Resize Pack tool"
+  },
+  {
+    "start": 441.17,
+    "end": 445.49,
+    "text": "lets you set a target width and resize a whole folder of images"
+  },
+  {
+    "start": 445.49,
+    "end": 450.94,
+    "text": "at once- then download them as a ZIP. No upload, no account."
+  },
+  {
+    "start": 450.94,
+    "end": 453.19,
+    "text": "Open Resize Pack"
+  },
+  {
+    "start": 453.19,
+    "end": 460.85,
+    "text": "Implementing these techniques in code takes minutes- the performance gains last "
+  },
+  {
+    "start": 460.85,
+    "end": 465.24,
+    "text": "## Method 4 - Lazy load below-the-fold images"
+  },
+  {
+    "start": 465.24,
+    "end": 469.8,
+    "text": "By default, browsers download every image on a page immediately,"
+  },
+  {
+    "start": 469.8,
+    "end": 475.27,
+    "text": "including images the user may never scroll down to see. Lazy"
+  },
+  {
+    "start": 475.27,
+    "end": 479.59,
+    "text": "loading defers the download of off-screen images until the user"
+  },
+  {
+    "start": 479.59,
+    "end": 485.42,
+    "text": "scrolls near them. On a long article page with 10 images, lazy"
+  },
+  {
+    "start": 485.42,
+    "end": 489.72,
+    "text": "loading the 8 below-the-fold images can cut initial page weight"
+  },
+  {
+    "start": 489.72,
+    "end": 494.54,
+    "text": "by 70% or more- dramatically improving LCP and Time to"
+  },
+  {
+    "start": 494.54,
+    "end": 496.54,
+    "text": "Interactive."
+  },
+  {
+    "start": 496.54,
+    "end": 501.02,
+    "text": "### Native lazy loading (recommended)"
+  },
+  {
+    "start": 501.02,
+    "end": 505.56,
+    "text": "Since 2019, all major browsers support the native"
+  },
+  {
+    "start": 505.56,
+    "end": 507.24,
+    "text": "loading"
+  },
+  {
+    "start": 507.24,
+    "end": 509.21,
+    "text": "attribute on"
+  },
+  {
+    "start": 509.21,
+    "end": 514.61,
+    "text": "elements. It requires a single attribute change and zero"
+  },
+  {
+    "start": 514.61,
+    "end": 516.48,
+    "text": "JavaScript:"
+  },
+  {
+    "start": 516.48,
+    "end": 522.46,
+    "text": "Two important rules when using native lazy loading. First, always"
+  },
+  {
+    "start": 522.46,
+    "end": 524.18,
+    "text": "include"
+  },
+  {
+    "start": 524.18,
+    "end": 525.7,
+    "text": "height"
+  },
+  {
+    "start": 525.7,
+    "end": 530.02,
+    "text": "attributes so the browser can reserve space and avoid layout"
+  },
+  {
+    "start": 530.02,
+    "end": 536.11,
+    "text": "shifts (which hurt Cumulative Layout Shift scores). Second, never"
+  },
+  {
+    "start": 536.11,
+    "end": 538.42,
+    "text": "loading=\"lazy\""
+  },
+  {
+    "start": 538.42,
+    "end": 542.88,
+    "text": "to your hero or above-the-fold image- that would delay the LCP"
+  },
+  {
+    "start": 542.88,
+    "end": 546,
+    "text": "element and actively hurt your score."
+  },
+  {
+    "start": 546,
+    "end": 550.73,
+    "text": "### Intersection Observer for advanced control"
+  },
+  {
+    "start": 550.73,
+    "end": 554.83,
+    "text": "For more control over when lazy loading triggers- or for"
+  },
+  {
+    "start": 554.83,
+    "end": 558.74,
+    "text": "frameworks that do not support the native attribute- the"
+  },
+  {
+    "start": 558.74,
+    "end": 563.59,
+    "text": "Intersection Observer API provides a JavaScript-based alternative:"
+  },
+  {
+    "start": 563.59,
+    "end": 569.33,
+    "text": "lazyImages.forEach((img) => observer.observe(img));`}"
+  },
+  {
+    "start": 569.33,
+    "end": 572.4,
+    "text": "rootMargin: '200px'"
+  },
+  {
+    "start": 572.4,
+    "end": 576.89,
+    "text": "setting starts loading the image 200 pixels before it enters"
+  },
+  {
+    "start": 576.89,
+    "end": 581.52,
+    "text": "the viewport, eliminating any visible pop-in for users who"
+  },
+  {
+    "start": 581.52,
+    "end": 586.97,
+    "text": "scroll at normal speed. Adjust this value based on your image"
+  },
+  {
+    "start": 586.97,
+    "end": 589.87,
+    "text": "sizes and typical scroll speed."
+  },
+  {
+    "start": 589.87,
+    "end": 595.22,
+    "text": "## Method 5 - Use responsive images with srcset and sizes"
+  },
+  {
+    "start": 595.22,
+    "end": 600.86,
+    "text": "Serving one fixed-width image to all devices is inefficient. A"
+  },
+  {
+    "start": 600.86,
+    "end": 606.1,
+    "text": "desktop user with a 1400px viewport gets a huge image- which is"
+  },
+  {
+    "start": 606.1,
+    "end": 612.36,
+    "text": "appropriate. But a mobile user with a 390px viewport receives the"
+  },
+  {
+    "start": 612.36,
+    "end": 616.78,
+    "text": "same massive file, even though their browser will downsample it to"
+  },
+  {
+    "start": 616.78,
+    "end": 622.27,
+    "text": "fit. Responsive images solve this by letting the browser select"
+  },
+  {
+    "start": 622.27,
+    "end": 626.04,
+    "text": "the best image size for the current display context."
+  },
+  {
+    "start": 626.04,
+    "end": 627.86,
+    "text": "srcset"
+  },
+  {
+    "start": 627.86,
+    "end": 633.55,
+    "text": "attribute provides multiple image sources at different widths. The"
+  },
+  {
+    "start": 633.55,
+    "end": 637.97,
+    "text": "attribute tells the browser how wide the image will actually be"
+  },
+  {
+    "start": 637.97,
+    "end": 643.27,
+    "text": "displayed at each viewport breakpoint. Together, they allow the"
+  },
+  {
+    "start": 643.27,
+    "end": 646.75,
+    "text": "browser to download exactly the right image:"
+  },
+  {
+    "start": 646.75,
+    "end": 652.15,
+    "text": "In this example, a mobile user at 390px viewport width receives"
+  },
+  {
+    "start": 652.15,
+    "end": 660.24,
+    "text": "the 400px image (roughly 40 KB). A desktop user at 1400px receives"
+  },
+  {
+    "start": 660.24,
+    "end": 666.96,
+    "text": "the 1200px or 1600px version. The browser makes the decision"
+  },
+  {
+    "start": 666.96,
+    "end": 671.5,
+    "text": "automatically, factoring in device pixel ratio as well- so"
+  },
+  {
+    "start": 671.5,
+    "end": 675.84,
+    "text": "retina users get the higher-resolution image without you needing"
+  },
+  {
+    "start": 675.84,
+    "end": 678.38,
+    "text": "to write any JavaScript."
+  },
+  {
+    "start": 678.38,
+    "end": 680.45,
+    "text": "When writing the"
+  },
+  {
+    "start": 680.45,
+    "end": 684.89,
+    "text": "value, work from smallest viewport to largest and describe the"
+  },
+  {
+    "start": 684.89,
+    "end": 690.29,
+    "text": "actual rendered width of the image- not the viewport. The final"
+  },
+  {
+    "start": 690.29,
+    "end": 696.5,
+    "text": "value (with no media condition) is the fallback. Be specific: a"
+  },
+  {
+    "start": 696.5,
+    "end": 700.7,
+    "text": "fallback tells the browser to download the full-width image on"
+  },
+  {
+    "start": 700.7,
+    "end": 704.06,
+    "text": "all screens, defeating the purpose of"
+  },
+  {
+    "start": 704.06,
+    "end": 705.89,
+    "text": "srcset."
+  },
+  {
+    "start": 705.89,
+    "end": 710.3,
+    "text": "## Method 6 - Serve images from a CDN"
+  },
+  {
+    "start": 710.3,
+    "end": 714.86,
+    "text": "Even a perfectly optimized image takes time to travel from your"
+  },
+  {
+    "start": 714.86,
+    "end": 720.55,
+    "text": "server to your user. If your server is in New York and your user"
+  },
+  {
+    "start": 720.55,
+    "end": 726.84,
+    "text": "is in Tokyo, that round trip adds 150–200ms of latency before the"
+  },
+  {
+    "start": 726.84,
+    "end": 733.06,
+    "text": "first byte of image data arrives. A Content Delivery Network (CDN)"
+  },
+  {
+    "start": 733.06,
+    "end": 737.66,
+    "text": "solves this by caching your assets on servers distributed globally"
+  },
+  {
+    "start": 737.66,
+    "end": 742.06,
+    "text": "- so every user downloads from a data center near them, not from"
+  },
+  {
+    "start": 742.06,
+    "end": 743.9,
+    "text": "your origin."
+  },
+  {
+    "start": 743.9,
+    "end": 749.69,
+    "text": "For images in particular, CDN benefits are compounded: CDNs serve"
+  },
+  {
+    "start": 749.69,
+    "end": 756.19,
+    "text": "assets over HTTP/2 or HTTP/3 (which efficiently multiplexes"
+  },
+  {
+    "start": 756.19,
+    "end": 761.04,
+    "text": "multiple image downloads over a single connection), apply gzip or"
+  },
+  {
+    "start": 761.04,
+    "end": 764.98,
+    "text": "Brotli compression to headers, and often include image"
+  },
+  {
+    "start": 764.98,
+    "end": 767.9,
+    "text": "transformation features built in."
+  },
+  {
+    "start": 767.9,
+    "end": 785.35,
+    "text": "- Cloudflare CDN (free tier): Automatic caching on 300+ global PoPs with zero co"
+  },
+  {
+    "start": 785.35,
+    "end": 800.02,
+    "text": "- Amazon CloudFront: AWS's CDN, tightly integrated with S3 for static asset host"
+  },
+  {
+    "start": 800.02,
+    "end": 814.78,
+    "text": "- Bunny CDN: Performance-focused CDN with transparent pricing and excellent supp"
+  },
+  {
+    "start": 814.78,
+    "end": 819.67,
+    "text": "If your site has global traffic, adding a CDN is non-negotiable"
+  },
+  {
+    "start": 819.67,
+    "end": 825.74,
+    "text": "for image load speed. For domestic-only traffic, a CDN still"
+  },
+  {
+    "start": 825.74,
+    "end": 830.21,
+    "text": "improves performance by reducing load on your origin server and"
+  },
+  {
+    "start": 830.21,
+    "end": 835.56,
+    "text": "enabling HTTP/2 multiplexing- but the impact is less dramatic."
+  },
+  {
+    "start": 835.56,
+    "end": 839.71,
+    "text": "The good news is that Cloudflare's free tier covers most use"
+  },
+  {
+    "start": 839.71,
+    "end": 842.88,
+    "text": "cases and requires no code changes."
+  },
+  {
+    "start": 842.88,
+    "end": 851.83,
+    "text": "A CDN distributes your images to servers near every user, eliminating the latenc"
+  },
+  {
+    "start": 851.83,
+    "end": 857.04,
+    "text": "## Method 7 - Use the picture element for format fallbacks"
+  },
+  {
+    "start": 857.04,
+    "end": 862.39,
+    "text": "Even though WebP support exceeds 97% globally, the right approach"
+  },
+  {
+    "start": 862.39,
+    "end": 867.34,
+    "text": "for production websites is to serve WebP (or AVIF) to supported"
+  },
+  {
+    "start": 867.34,
+    "end": 872.23,
+    "text": "browsers while providing a JPEG or PNG fallback for the rare cases"
+  },
+  {
+    "start": 872.23,
+    "end": 876,
+    "text": "where support is absent. The"
+  },
+  {
+    "start": 876,
+    "end": 879.1,
+    "text": "&lt;picture&gt;"
+  },
+  {
+    "start": 879.1,
+    "end": 883.22,
+    "text": "element makes this possible with no JavaScript required."
+  },
+  {
+    "start": 883.22,
+    "end": 886.32,
+    "text": "&lt;picture&gt;"
+  },
+  {
+    "start": 886.32,
+    "end": 889.2,
+    "text": "element contains one or more"
+  },
+  {
+    "start": 889.2,
+    "end": 892.18,
+    "text": "&lt;source&gt;"
+  },
+  {
+    "start": 892.18,
+    "end": 896.54,
+    "text": "elements listing alternative formats, followed by a standard"
+  },
+  {
+    "start": 896.54,
+    "end": 899.93,
+    "text": "&lt;img&gt;"
+  },
+  {
+    "start": 899.93,
+    "end": 904.75,
+    "text": "element as the fallback. The browser walks through the"
+  },
+  {
+    "start": 904.75,
+    "end": 907.73,
+    "text": "&lt;source&gt;"
+  },
+  {
+    "start": 907.73,
+    "end": 911.66,
+    "text": "elements in order and uses the first one it supports:"
+  },
+  {
+    "start": 911.66,
+    "end": 917.59,
+    "text": "A browser that supports AVIF downloads the AVIF source. A browser"
+  },
+  {
+    "start": 917.59,
+    "end": 923.4,
+    "text": "that supports WebP but not AVIF downloads the WebP source. Any"
+  },
+  {
+    "start": 923.4,
+    "end": 927.82,
+    "text": "browser that supports neither (a vanishingly small fraction of"
+  },
+  {
+    "start": 927.82,
+    "end": 933.77,
+    "text": "users today) downloads the JPEG fallback. Every user gets the"
+  },
+  {
+    "start": 933.77,
+    "end": 938.18,
+    "text": "most compressed format their browser can handle, automatically."
+  },
+  {
+    "start": 938.18,
+    "end": 939.96,
+    "text": "Note the"
+  },
+  {
+    "start": 939.96,
+    "end": 942.53,
+    "text": "decoding=\"async\""
+  },
+  {
+    "start": 942.53,
+    "end": 945.02,
+    "text": "attribute on the fallback"
+  },
+  {
+    "start": 945.02,
+    "end": 949.1,
+    "text": "This tells the browser to decode the image off the main thread,"
+  },
+  {
+    "start": 949.1,
+    "end": 954.7,
+    "text": "keeping the page responsive during heavy image loads. Use this on"
+  },
+  {
+    "start": 954.7,
+    "end": 957.38,
+    "text": "all large images alongside"
+  },
+  {
+    "start": 957.38,
+    "end": 959.69,
+    "text": "loading=\"lazy\""
+  },
+  {
+    "start": 959.69,
+    "end": 962.74,
+    "text": "for maximum performance benefit."
+  },
+  {
+    "start": 962.74,
+    "end": 967.85,
+    "text": "## Putting it all together: the practical optimization checklist"
+  },
+  {
+    "start": 967.85,
+    "end": 973.51,
+    "text": "You do not need to implement all 7 methods at once. Start with"
+  },
+  {
+    "start": 973.51,
+    "end": 978.62,
+    "text": "the highest-impact items and work down the list. Here is the"
+  },
+  {
+    "start": 978.62,
+    "end": 983.16,
+    "text": "priority order based on typical impact across most websites:"
+  },
+  {
+    "start": 983.16,
+    "end": 985.97,
+    "text": "].map((item) => ("
+  },
+  {
+    "start": 985.97,
+    "end": 990.29,
+    "text": "After implementing these changes, test your pages with Google"
+  },
+  {
+    "start": 990.29,
+    "end": 994.66,
+    "text": "PageSpeed Insights or Lighthouse (available in Chrome DevTools"
+  },
+  {
+    "start": 994.66,
+    "end": 999.84,
+    "text": "under the Performance tab). Your LCP score should drop"
+  },
+  {
+    "start": 999.84,
+    "end": 1004.38,
+    "text": "significantly, and the Opportunities section will confirm which"
+  },
+  {
+    "start": 1004.38,
+    "end": 1010.23,
+    "text": "image-related improvements have been applied. Aim for a LCP under"
+  },
+  {
+    "start": 1010.23,
+    "end": 1014.14,
+    "text": "2.5 seconds for a \"Good\" score- a target that is"
+  },
+  {
+    "start": 1014.14,
+    "end": 1018.51,
+    "text": "entirely achievable once images are properly optimized."
+  },
+  {
+    "start": 1018.51,
+    "end": 1021.2,
+    "text": "## FAQ"
+  },
+  {
+    "start": 1021.2,
+    "end": 1026.84,
+    "text": "### What is the single most effective way to make images load faster?"
+  },
+  {
+    "start": 1026.84,
+    "end": 1030.78,
+    "text": "Resizing to the correct display dimensions combined with"
+  },
+  {
+    "start": 1030.78,
+    "end": 1037.59,
+    "text": "compression. Serving a 4000px photo in a 800px column wastes more"
+  },
+  {
+    "start": 1037.59,
+    "end": 1043.47,
+    "text": "bandwidth than almost any other optimization mistake. Resize first,"
+  },
+  {
+    "start": 1043.47,
+    "end": 1048.1,
+    "text": "then compress- this combination typically reduces file size by"
+  },
+  {
+    "start": 1048.1,
+    "end": 1053.5,
+    "text": "90%+ compared to a raw camera file, with no visible difference on"
+  },
+  {
+    "start": 1053.5,
+    "end": 1055.21,
+    "text": "screen."
+  },
+  {
+    "start": 1055.21,
+    "end": 1059.26,
+    "text": "### Does lazy loading hurt SEO?"
+  },
+  {
+    "start": 1059.26,
+    "end": 1063.49,
+    "text": "No - Google's crawler supports native lazy loading via the"
+  },
+  {
+    "start": 1063.49,
+    "end": 1065.79,
+    "text": "loading=\"lazy\""
+  },
+  {
+    "start": 1065.79,
+    "end": 1071.58,
+    "text": "attribute and will index lazily loaded images correctly. The one"
+  },
+  {
+    "start": 1071.58,
+    "end": 1076.18,
+    "text": "exception: do not lazy-load your hero or primary content image."
+  },
+  {
+    "start": 1076.18,
+    "end": 1080.65,
+    "text": "Deferring the LCP element delays Google's measurement of your"
+  },
+  {
+    "start": 1080.65,
+    "end": 1084.27,
+    "text": "LCP score and can actively hurt rankings."
+  },
+  {
+    "start": 1084.27,
+    "end": 1089.53,
+    "text": "### Should I use WebP or AVIF in 2026?"
+  },
+  {
+    "start": 1089.53,
+    "end": 1092.72,
+    "text": "Use both with a fallback chain via the"
+  },
+  {
+    "start": 1092.72,
+    "end": 1095.82,
+    "text": "&lt;picture&gt;"
+  },
+  {
+    "start": 1095.82,
+    "end": 1100.69,
+    "text": "element: AVIF as the first source (best compression), WebP as"
+  },
+  {
+    "start": 1100.69,
+    "end": 1105.42,
+    "text": "the second (excellent compression, near-universal support), and"
+  },
+  {
+    "start": 1105.42,
+    "end": 1111.51,
+    "text": "JPEG as the fallback. If you can only generate one format, WebP"
+  },
+  {
+    "start": 1111.51,
+    "end": 1114.68,
+    "text": "is the safe, high-value default."
+  },
+  {
+    "start": 1114.68,
+    "end": 1119.58,
+    "text": "### How do I know if my images are slowing down my site?"
+  },
+  {
+    "start": 1119.58,
+    "end": 1124.38,
+    "text": "Run your URL through Google PageSpeed Insights (free, no account"
+  },
+  {
+    "start": 1124.38,
+    "end": 1129.9,
+    "text": "required). Look at the Opportunities section- it will specifically"
+  },
+  {
+    "start": 1129.9,
+    "end": 1134.84,
+    "text": "flag oversized images, next-gen format suggestions, and images"
+  },
+  {
+    "start": 1134.84,
+    "end": 1140.53,
+    "text": "that are not lazy loaded. The Diagnostics section shows exactly"
+  },
+  {
+    "start": 1140.53,
+    "end": 1144.66,
+    "text": "which images are contributing most to page weight and load time."
+  },
+  {
+    "start": 1144.66,
+    "end": 1149.62,
+    "text": "### What is a good target image file size for the web?"
+  },
+  {
+    "start": 1149.62,
+    "end": 1156.49,
+    "text": "For full-width hero images: under 200 KB. For article body images"
+  },
+  {
+    "start": 1156.49,
+    "end": 1164.36,
+    "text": "at 800px display width: under 100 KB. For thumbnails at 300px or"
+  },
+  {
+    "start": 1164.36,
+    "end": 1170.77,
+    "text": "less: under 30 KB. These are practical targets that balance visual"
+  },
+  {
+    "start": 1170.77,
+    "end": 1176.67,
+    "text": "quality with performance. At quality 80 WebP, most photographs"
+  },
+  {
+    "start": 1176.67,
+    "end": 1180.37,
+    "text": "easily hit these targets after proper resizing."
+  },
+  {
+    "start": 1180.37,
+    "end": 1184.66,
+    "text": "### Do I need to use all 7 methods?"
+  },
+  {
+    "start": 1184.66,
+    "end": 1191.41,
+    "text": "Not necessarily. Methods 1–4 (compress, convert to WebP, resize,"
+  },
+  {
+    "start": 1191.41,
+    "end": 1195.99,
+    "text": "and lazy load) alone will produce dramatic improvements for most"
+  },
+  {
+    "start": 1195.99,
+    "end": 1202.83,
+    "text": "sites. Methods 5–7 (responsive images, CDN, and picture element)"
+  },
+  {
+    "start": 1202.83,
+    "end": 1207.18,
+    "text": "add meaningful additional gains and are worth implementing for any"
+  },
+  {
+    "start": 1207.18,
+    "end": 1212.84,
+    "text": "site with significant traffic or a global audience. Even applying"
+  },
+  {
+    "start": 1212.84,
+    "end": 1217.06,
+    "text": "just the first two methods- compress and convert to WebP- will"
+  },
+  {
+    "start": 1217.06,
+    "end": 1220.35,
+    "text": "measurably improve your LCP score."
+  }
+]
