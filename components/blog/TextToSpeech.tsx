@@ -1,98 +1,87 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
-import { Headphones, Play, Pause, Loader2 } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Headphones, Play, Pause } from "lucide-react";
 
-type TTSState = "idle" | "loading" | "playing" | "paused";
+type TTSState = "idle" | "playing" | "paused" | "error";
 
 interface TextToSpeechProps {
-  articleRef: React.RefObject<HTMLElement | null>;
+  slug: string;
+  articleRef?: React.RefObject<HTMLElement | null>;
 }
 
-export default function TextToSpeech({ articleRef }: TextToSpeechProps) {
+export default function TextToSpeech({ slug }: TextToSpeechProps) {
   const [state, setState] = useState<TTSState>("idle");
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const blobUrlRef = useRef<string | null>(null);
+  const [exists, setExists] = useState<boolean | null>(null);
 
-  const extractText = useCallback((): string => {
-    if (!articleRef.current) return "";
-    const els = articleRef.current.querySelectorAll("p, li, h2, h3");
-    return Array.from(els)
-      .map((el) => el.textContent?.trim())
-      .filter(Boolean)
-      .join(". ");
-  }, [articleRef]);
+  const audioUrl = `/blog/audio/${slug}.mp3`;
 
-  const generateAndPlay = useCallback(async () => {
-    // If we already have audio, just play it
-    if (audioRef.current && blobUrlRef.current) {
-      audioRef.current.play();
-      setState("playing");
-      return;
-    }
+  // Check if audio file exists
+  useEffect(() => {
+    fetch(audioUrl, { method: "HEAD" })
+      .then((res) => setExists(res.ok))
+      .catch(() => setExists(false));
+  }, [audioUrl]);
 
-    setState("loading");
+  // Setup audio element
+  useEffect(() => {
+    if (!exists) return;
 
-    try {
-      const text = extractText();
-      if (!text) {
-        setState("idle");
-        return;
+    const audio = new Audio(audioUrl);
+    audioRef.current = audio;
+
+    audio.addEventListener("loadedmetadata", () => {
+      setDuration(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      setCurrentTime(audio.currentTime);
+      if (audio.duration > 0) {
+        setProgress((audio.currentTime / audio.duration) * 100);
       }
+    });
 
-      const res = await fetch("/api/blog/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
-
-      if (!res.ok) {
-        setState("idle");
-        return;
-      }
-
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      blobUrlRef.current = url;
-
-      const audio = new Audio(url);
-      audioRef.current = audio;
-
-      audio.addEventListener("timeupdate", () => {
-        if (audio.duration > 0) {
-          setProgress((audio.currentTime / audio.duration) * 100);
-        }
-      });
-
-      audio.addEventListener("loadedmetadata", () => {
-        setDuration(audio.duration);
-      });
-
-      audio.addEventListener("ended", () => {
-        setState("idle");
-        setProgress(0);
-      });
-
-      await audio.play();
-      setState("playing");
-    } catch {
+    audio.addEventListener("ended", () => {
       setState("idle");
-    }
-  }, [extractText]);
+      setProgress(0);
+      setCurrentTime(0);
+    });
 
-  const handlePlayPause = useCallback(() => {
-    if (state === "idle") {
-      generateAndPlay();
-    } else if (state === "playing" && audioRef.current) {
-      audioRef.current.pause();
+    audio.addEventListener("error", () => {
+      setState("error");
+    });
+
+    return () => {
+      audio.pause();
+      audio.src = "";
+    };
+  }, [exists, audioUrl]);
+
+  function handlePlayPause() {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (state === "idle" || state === "error") {
+      audio.play().then(() => setState("playing")).catch(() => setState("error"));
+    } else if (state === "playing") {
+      audio.pause();
       setState("paused");
     } else if (state === "paused") {
-      audioRef.current?.play();
-      setState("playing");
+      audio.play().then(() => setState("playing")).catch(() => setState("error"));
     }
-  }, [state, generateAndPlay]);
+  }
+
+  function handleSeek(e: React.MouseEvent<HTMLDivElement>) {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = pct * duration;
+  }
 
   function formatTime(sec: number): string {
     const m = Math.floor(sec / 60);
@@ -100,7 +89,8 @@ export default function TextToSpeech({ articleRef }: TextToSpeechProps) {
     return `${m}:${s.toString().padStart(2, "0")}`;
   }
 
-  const currentTime = audioRef.current?.currentTime ?? 0;
+  // Don't render if audio file doesn't exist
+  if (exists === null || exists === false) return null;
 
   return (
     <div className="my-6">
@@ -109,13 +99,10 @@ export default function TextToSpeech({ articleRef }: TextToSpeechProps) {
 
         <button
           onClick={handlePlayPause}
-          disabled={state === "loading"}
-          className="p-1.5 rounded-full bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] disabled:opacity-50 transition-colors"
+          className="p-1.5 rounded-full bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
           aria-label={state === "playing" ? "Pause" : "Play"}
         >
-          {state === "loading" ? (
-            <Loader2 size={14} strokeWidth={2} className="animate-spin" />
-          ) : state === "playing" ? (
+          {state === "playing" ? (
             <Pause size={14} strokeWidth={2} />
           ) : (
             <Play size={14} strokeWidth={2} className="ml-0.5" />
@@ -126,18 +113,17 @@ export default function TextToSpeech({ articleRef }: TextToSpeechProps) {
           <span className="text-[13px] text-[#737373]">Listen to article</span>
         )}
 
-        {state === "loading" && (
-          <span className="text-[13px] text-[#6366F1]">Generating audio...</span>
-        )}
-
         {(state === "playing" || state === "paused") && (
           <div className="flex items-center gap-2">
             <span className="text-[11px] text-[#A3A3A3] tabular-nums w-8">
               {formatTime(currentTime)}
             </span>
-            <div className="w-24 sm:w-36 h-1 bg-[#E5E5E5] dark:bg-[#2A2A2A] rounded-full overflow-hidden">
+            <div
+              onClick={handleSeek}
+              className="w-24 sm:w-36 h-1.5 bg-[#E5E5E5] dark:bg-[#2A2A2A] rounded-full overflow-hidden cursor-pointer"
+            >
               <div
-                className="h-full bg-[#6366F1] rounded-full transition-all duration-300"
+                className="h-full bg-[#6366F1] rounded-full transition-[width] duration-200"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -145,6 +131,10 @@ export default function TextToSpeech({ articleRef }: TextToSpeechProps) {
               {formatTime(duration)}
             </span>
           </div>
+        )}
+
+        {state === "error" && (
+          <span className="text-[13px] text-[#A3A3A3]">Audio unavailable</span>
         )}
       </div>
     </div>

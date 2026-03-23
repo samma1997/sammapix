@@ -193,7 +193,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
 
         <figure className="my-8">
           <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85f1d7?w=800&q=80"
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
             alt="Developer working on image optimization code on a laptop"
             className="w-full rounded-lg"
             loading="lazy"

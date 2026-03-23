@@ -89,7 +89,7 @@ export default function BlogArticleLayout({
               </header>
 
               {/* Text-to-Speech bar */}
-              <TextToSpeech articleRef={articleRef} />
+              <TextToSpeech slug={slug} />
 
               {/* TOC - mobile only */}
               <div className="xl:hidden mb-8">
