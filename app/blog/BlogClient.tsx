@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, ArrowRight, X } from "lucide-react";
 import { POSTS, ALL_CATEGORIES, TAG_GRADIENTS, formatDate } from "@/lib/blog-posts";
 import type { PostTag } from "@/lib/blog-posts";
@@ -125,9 +126,18 @@ export default function BlogClient() {
                 href={`/blog/${post.slug}`}
                 className="group block bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden hover:border-[#A3A3A3] dark:hover:border-[#444] hover:shadow-sm transition-all"
               >
-                {/* Gradient header */}
-                <div className={`h-16 bg-gradient-to-br ${TAG_GRADIENTS[post.tags[0]]} flex items-end px-4 pb-2`}>
-                  <span className="text-[10px] font-semibold bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-sm text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5]/50 dark:border-[#333]/50 uppercase tracking-wide">
+                {/* Cover image or gradient fallback */}
+                <div className={`relative h-28 sm:h-32 bg-gradient-to-br ${TAG_GRADIENTS[post.tags[0]]} flex items-end px-4 pb-2 overflow-hidden`}>
+                  {post.coverImage && (
+                    <Image
+                      src={post.coverImage}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  )}
+                  <span className="relative z-10 text-[10px] font-semibold bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-sm text-[#525252] dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5]/50 dark:border-[#333]/50 uppercase tracking-wide">
                     {post.tags[0]}
                   </span>
                 </div>

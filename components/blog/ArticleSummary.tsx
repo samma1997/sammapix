@@ -33,7 +33,7 @@ export default function ArticleSummary({ summaryPoints, children }: ArticleSumma
               : "border border-[#E5E5E5] text-[#737373] hover:text-[#525252] dark:border-[#404040]"
           }`}
         >
-          TL;DR
+          Summary
         </button>
       </div>
 
