@@ -38,8 +38,20 @@ function getBlogSlugs() {
     .map((e) => e.name);
 }
 
-// Extract readable text from a blog article page.tsx
+// Extract readable text — prefer transcript.txt (hand-curated, perfect)
+// Falls back to regex extraction from page.tsx (imprecise)
 function extractTextFromArticle(slug) {
+  // Check for hand-written transcript first
+  const transcriptPath = path.join(BLOG_DIR, slug, "transcript.txt");
+  if (fs.existsSync(transcriptPath)) {
+    const text = fs.readFileSync(transcriptPath, "utf-8").trim();
+    if (text.length > 50) {
+      console.log(`  📝 Using transcript.txt (${text.length} chars)`);
+      return text;
+    }
+  }
+
+  console.log(`  ⚠️  No transcript.txt — falling back to regex extraction`);
   const filePath = path.join(BLOG_DIR, slug, "page.tsx");
   const content = fs.readFileSync(filePath, "utf-8");
 
