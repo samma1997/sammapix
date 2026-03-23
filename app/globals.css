@@ -370,3 +370,12 @@
   from { width: 0%; }
   to { width: var(--bar-width, 100%); }
 }
+
+/* Text-to-Speech active paragraph highlight */
+.tts-active {
+  background-color: rgba(99, 102, 241, 0.05);
+  border-left: 2px solid #6366F1;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+  transition: background-color 0.2s ease;
+}
