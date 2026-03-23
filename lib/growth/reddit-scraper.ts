@@ -3,9 +3,33 @@ import { growthRedditPosts } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq } from "drizzle-orm";
 
-// Highly specific queries — every result MUST be about image tools/optimization.
-// Generic terms like "how to compress" alone match too many unrelated posts.
-const REDDIT_QUERIES = [
+// ---------------------------------------------------------------------------
+// Google-based Reddit discovery queries
+// These find high-traffic Reddit threads that rank on Google for image-related terms.
+// ---------------------------------------------------------------------------
+const GOOGLE_REDDIT_QUERIES = [
+  "site:reddit.com best image compression tool",
+  "site:reddit.com tinypng alternative free",
+  "site:reddit.com optimize images for website speed",
+  "site:reddit.com heic to jpg converter",
+  "site:reddit.com bulk resize images online",
+  "site:reddit.com remove exif metadata photos",
+  "site:reddit.com webp converter online free",
+  "site:reddit.com compress photos without losing quality",
+  "site:reddit.com rename files automatically",
+  "site:reddit.com photography workflow tools",
+  "site:reddit.com website speed optimization images",
+  "site:reddit.com image optimizer recommendation",
+  "site:reddit.com best free image compressor 2025",
+  "site:reddit.com reduce image file size batch",
+  "site:reddit.com squoosh alternative",
+  "site:reddit.com lossless image compression",
+  "site:reddit.com convert png to webp bulk",
+  "site:reddit.com seo image rename tool",
+];
+
+// Fallback queries for Reddit's own search API (kept as secondary method)
+const REDDIT_FALLBACK_QUERIES = [
   "compress images online free",
   "best image compression tool",
   "tinypng alternative",
@@ -18,13 +42,56 @@ const REDDIT_QUERIES = [
   "batch rename photos SEO",
 ];
 
+// High-relevance subreddits where image optimization discussion is on-topic
+const HIGH_RELEVANCE_SUBREDDITS = new Set([
+  "webdev",
+  "web_design",
+  "photography",
+  "graphic_design",
+  "wordpress",
+  "seo",
+  "web_development",
+  "frontend",
+  "webdesign",
+  "photoshop",
+  "lightroom",
+  "imageprocessing",
+  "selfhosted",
+  "webhosting",
+  "blogger",
+  "blogging",
+  "smallbusiness",
+  "ecommerce",
+  "shopify",
+  "squarespace",
+  "wix",
+  "techsupport",
+  "software",
+  "freeware",
+  "opensource",
+  "mac",
+  "windows",
+  "linux",
+  "buildawebsite",
+  "learnprogramming",
+]);
+
+const MEDIUM_RELEVANCE_SUBREDDITS = new Set([
+  "technology",
+  "programming",
+  "askprogramming",
+  "nostupidquestions",
+  "howto",
+  "internetisbeautiful",
+  "coolguides",
+  "datahoarder",
+]);
+
 interface RedditPost {
   id: string;
   title: string;
   subreddit: string;
-  // permalink is the canonical path Reddit returns — e.g. /r/webdev/comments/abc123/title/
   permalink: string;
-  // url can point to an external link; permalink always points to the Reddit thread
   url: string;
   author: string;
   num_comments: number;
@@ -34,18 +101,22 @@ interface RedditPost {
 }
 
 // Build a guaranteed-valid Reddit thread URL from the permalink field.
-// Reddit's JSON API returns permalink as "/r/sub/comments/id/title/" (always starts with /).
-// We use www.reddit.com as the base — no trailing slash issues.
 function buildRedditUrl(permalink: string): string {
   const path = permalink.startsWith("/") ? permalink : `/${permalink}`;
   return `https://www.reddit.com${path}`;
 }
 
+// ---------------------------------------------------------------------------
+// Improved relevance scoring — uses keywords, subreddit, and selftext
+// ---------------------------------------------------------------------------
 function calculateRelevanceScore(post: RedditPost): number {
   const title = post.title.toLowerCase();
+  const selftext = (post.selftext ?? "").toLowerCase();
+  const combined = `${title} ${selftext}`;
+  const sub = post.subreddit.toLowerCase();
 
-  // Exact compound phrases that are ALWAYS relevant (no false positives)
-  const exactPhrases = [
+  // Core keywords that indicate the post is about image processing/optimization
+  const coreKeywords = [
     "image compress", "compress image", "compress photo",
     "image optim", "photo optim", "optimize image",
     "image resize", "resize image", "resize photo", "bulk resize",
@@ -60,30 +131,175 @@ function calculateRelevanceScore(post: RedditPost): number {
     "bulk image", "batch image",
     "image tool", "photo tool", "image editor online",
     "lossless compress", "lossy compress",
+    "image quality", "photo quality",
+    "file size", "page speed", "pagespeed",
+    "web performance image",
   ];
 
-  const hasExactMatch = exactPhrases.some((p) => title.includes(p));
-  if (!hasExactMatch) return 0; // HARD FILTER — must match a specific image-related phrase
+  // Broader keywords (present in title or selftext)
+  const broaderKeywords = [
+    "compress", "optimize", "resize", "convert", "webp", "heic",
+    "jpeg", "png", "exif", "metadata", "thumbnail", "image",
+    "photo", "picture", "batch", "bulk", "rename",
+    "file size", "quality", "lossless", "lossy",
+  ];
 
-  let score = 50; // strong base for exact phrase match
+  // Check for core keyword match in title
+  const titleCoreMatches = coreKeywords.filter((p) => title.includes(p)).length;
+  // Check for core keyword match in combined text (title + selftext)
+  const combinedCoreMatches = coreKeywords.filter((p) => combined.includes(p)).length;
+  // Broader keyword matches in title
+  const titleBroadMatches = broaderKeywords.filter((kw) => title.includes(kw)).length;
 
-  // Intent words = someone asking for help
-  const intentWords = ["how", "best", "recommend", "looking for", "alternative", "need", "suggest", "anyone", "help", "tool", "free", "?"];
-  if (intentWords.some((w) => title.includes(w))) score += 20;
+  // If no relevant keywords at all, skip
+  if (titleCoreMatches === 0 && titleBroadMatches === 0 && combinedCoreMatches === 0) {
+    return 0;
+  }
 
-  // Multiple phrase matches = very relevant
-  const matchCount = exactPhrases.filter((p) => title.includes(p)).length;
-  if (matchCount >= 2) score += 15;
+  let score = 0;
 
-  // Recency
+  // Core phrase match in title = strong signal
+  if (titleCoreMatches >= 1) score += 40;
+  if (titleCoreMatches >= 2) score += 15;
+
+  // Core phrase only in selftext (not title) = moderate signal
+  if (titleCoreMatches === 0 && combinedCoreMatches >= 1) score += 25;
+
+  // Broader keyword matches in title
+  if (titleBroadMatches >= 2) score += 15;
+  else if (titleBroadMatches >= 1) score += 8;
+
+  // Subreddit relevance bonus
+  if (HIGH_RELEVANCE_SUBREDDITS.has(sub)) score += 15;
+  else if (MEDIUM_RELEVANCE_SUBREDDITS.has(sub)) score += 8;
+
+  // Intent words = someone asking for help (high value for commenting)
+  const intentWords = [
+    "how", "best", "recommend", "looking for", "alternative",
+    "need", "suggest", "anyone", "help", "tool", "free", "?",
+    "which", "what", "should i", "better than",
+  ];
+  if (intentWords.some((w) => title.includes(w))) score += 15;
+
+  // Recency bonus
   const ageDays = (Date.now() / 1000 - post.created_utc) / 86400;
   if (ageDays < 1) score += 10;
-  else if (ageDays < 3) score += 5;
+  else if (ageDays < 3) score += 7;
+  else if (ageDays < 7) score += 4;
 
-  // Low comments = easier to be visible
-  if (post.num_comments < 5) score += 10;
+  // Low comments = easier to be visible and add value
+  if (post.num_comments < 3) score += 10;
+  else if (post.num_comments < 10) score += 5;
+
+  // Minimum threshold: must have at least some keyword relevance
+  if (score < 20) return 0;
 
   return Math.min(100, score);
+}
+
+// ---------------------------------------------------------------------------
+// Google scraping — fetch Google search results for site:reddit.com queries
+// ---------------------------------------------------------------------------
+
+interface GoogleRedditResult {
+  url: string;
+  postId: string;
+  subreddit: string;
+}
+
+async function scrapeGoogleForRedditPosts(
+  query: string,
+): Promise<GoogleRedditResult[]> {
+  const results: GoogleRedditResult[] = [];
+
+  try {
+    const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&num=15&hl=en`;
+    const res = await fetch(googleUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+      },
+      signal: AbortSignal.timeout(15000),
+    });
+
+    if (!res.ok) {
+      console.warn(`[reddit-scraper] Google returned HTTP ${res.status} for "${query}"`);
+      return results;
+    }
+
+    const html = await res.text();
+
+    // Extract Reddit URLs from Google results HTML
+    // Reddit URLs look like: https://www.reddit.com/r/subreddit/comments/postid/title/
+    const redditUrlPattern =
+      /https?:\/\/(?:www\.)?reddit\.com\/r\/([a-zA-Z0-9_]+)\/comments\/([a-zA-Z0-9]+)/g;
+
+    const seen = new Set<string>();
+    let match: RegExpExecArray | null;
+
+    while ((match = redditUrlPattern.exec(html)) !== null) {
+      const subreddit = match[1];
+      const postId = match[2];
+      const fullUrl = match[0];
+
+      if (!seen.has(postId)) {
+        seen.add(postId);
+        results.push({
+          url: fullUrl,
+          postId,
+          subreddit,
+        });
+      }
+    }
+  } catch (err) {
+    console.error(`[reddit-scraper] Google scrape error for "${query}":`, err);
+  }
+
+  return results;
+}
+
+// ---------------------------------------------------------------------------
+// Fetch a Reddit post's JSON data from its URL
+// ---------------------------------------------------------------------------
+async function fetchRedditPostJson(
+  postId: string,
+  subreddit: string,
+): Promise<RedditPost | null> {
+  try {
+    // Use Reddit's JSON API — append .json to any post URL
+    const url = `https://www.reddit.com/r/${subreddit}/comments/${postId}.json`;
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent": "SammaPix-GrowthBot/2.0 (by SammaPix team)",
+      },
+      signal: AbortSignal.timeout(10000),
+    });
+
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    // Reddit returns an array: [post listing, comments listing]
+    const postData = data?.[0]?.data?.children?.[0]?.data;
+    if (!postData) return null;
+
+    return {
+      id: postData.id ?? postId,
+      title: postData.title ?? "",
+      subreddit: postData.subreddit ?? subreddit,
+      permalink: postData.permalink ?? `/r/${subreddit}/comments/${postId}/`,
+      url: postData.url ?? "",
+      author: postData.author ?? "unknown",
+      num_comments: postData.num_comments ?? 0,
+      score: postData.score ?? 0,
+      created_utc: postData.created_utc ?? 0,
+      selftext: postData.selftext ?? "",
+    };
+  } catch (err) {
+    console.error(`[reddit-scraper] Error fetching post ${postId}:`, err);
+    return null;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -387,16 +603,109 @@ export async function scrapeDevToOpportunities(): Promise<{
 }
 
 // ---------------------------------------------------------------------------
-// Reddit scraper — fast, focused, under 30 seconds
-//
-// Strategy:
-//   - Search Reddit-wide (no subreddit filter) so one call covers all communities
-//   - 8 targeted queries × 2s delay = ~16s total network time
-//   - 25 results per query gives good coverage without hammering the API
-//   - No Gemini calls during scraping — draft comments are on-demand per post
+// PRIMARY: Google-based Reddit scraper
+// Searches Google for "site:reddit.com" queries, then fetches each post's
+// JSON from Reddit to get full metadata (title, score, comments, selftext).
 // ---------------------------------------------------------------------------
 
-export async function scrapeRedditPosts(): Promise<{
+async function scrapeRedditViaGoogle(): Promise<{
+  scraped: number;
+  skipped: number;
+  errors: number;
+}> {
+  let scraped = 0;
+  let skipped = 0;
+  let errors = 0;
+
+  // Collect all unique Reddit post IDs from Google across all queries
+  const allResults = new Map<string, GoogleRedditResult>();
+
+  for (const query of GOOGLE_REDDIT_QUERIES) {
+    try {
+      // 3 second delay between Google requests to avoid rate limiting
+      await new Promise((r) => setTimeout(r, 3000));
+
+      const results = await scrapeGoogleForRedditPosts(query);
+      for (const result of results) {
+        if (!allResults.has(result.postId)) {
+          allResults.set(result.postId, result);
+        }
+      }
+    } catch (err) {
+      console.error(`[reddit-scraper] Google query error for "${query}":`, err);
+      errors++;
+    }
+  }
+
+  console.log(
+    `[reddit-scraper] Google found ${allResults.size} unique Reddit posts across ${GOOGLE_REDDIT_QUERIES.length} queries`
+  );
+
+  // Now fetch each post's full JSON from Reddit
+  for (const [postId, result] of allResults) {
+    try {
+      // Check if already in database
+      const existing = await db
+        .select({ id: growthRedditPosts.id })
+        .from(growthRedditPosts)
+        .where(eq(growthRedditPosts.redditId, postId));
+
+      if (existing.length > 0) {
+        skipped++;
+        continue;
+      }
+
+      // Rate limit Reddit API calls
+      await new Promise((r) => setTimeout(r, 2000));
+
+      const post = await fetchRedditPostJson(postId, result.subreddit);
+      if (!post) {
+        errors++;
+        continue;
+      }
+
+      const relevanceScore = calculateRelevanceScore(post);
+
+      // Lower threshold than before (was 40) — Google pre-filters for relevance
+      if (relevanceScore < 15) {
+        skipped++;
+        continue;
+      }
+
+      const threadUrl = buildRedditUrl(post.permalink);
+
+      // Check if post is commentable (< 6 months old, not archived)
+      const ageMonths = (Date.now() / 1000 - post.created_utc) / (86400 * 30);
+      const isCommentable = ageMonths < 6;
+
+      await db.insert(growthRedditPosts).values({
+        redditId: post.id,
+        title: post.title,
+        subreddit: post.subreddit,
+        url: threadUrl,
+        author: post.author,
+        commentsCount: post.num_comments,
+        relevanceScore,
+        // If post is too old to comment on, auto-skip it
+        status: isCommentable ? "to_comment" : "skipped",
+        draftComment: null,
+      });
+
+      scraped++;
+    } catch (err) {
+      console.error(`[reddit-scraper] Error processing Google result ${postId}:`, err);
+      errors++;
+    }
+  }
+
+  return { scraped, skipped, errors };
+}
+
+// ---------------------------------------------------------------------------
+// FALLBACK: Reddit's own search API (original method, less effective)
+// ---------------------------------------------------------------------------
+
+async function scrapeRedditViaApi(): Promise<{
   scraped: number;
   skipped: number;
   errors: number;
@@ -406,15 +715,13 @@ export async function scrapeRedditPosts(): Promise<{
   let errors = 0;
 
   const headers = {
-    "User-Agent": "SammaPix-GrowthBot/1.0 (by SammaPix team)",
+    "User-Agent": "SammaPix-GrowthBot/2.0 (by SammaPix team)",
   };
 
-  for (const query of REDDIT_QUERIES) {
+  for (const query of REDDIT_FALLBACK_QUERIES) {
     try {
-      // 2 seconds is sufficient for Reddit's unauthenticated JSON API
       await new Promise((r) => setTimeout(r, 2000));
 
-      // Search Reddit-wide (no r/subreddit prefix, no restrict_sr)
       const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(
         query
       )}&sort=new&t=week&limit=25`;
@@ -426,7 +733,7 @@ export async function scrapeRedditPosts(): Promise<{
 
       if (!res.ok) {
         console.error(
-          `[reddit-scraper] search failed for "${query}": HTTP ${res.status}`
+          `[reddit-scraper] Reddit API search failed for "${query}": HTTP ${res.status}`
         );
         errors++;
         continue;
@@ -450,15 +757,15 @@ export async function scrapeRedditPosts(): Promise<{
 
           const relevanceScore = calculateRelevanceScore(post);
 
-          // Minimum threshold of 40 — we only want genuinely relevant posts
-          if (relevanceScore < 40) {
+          if (relevanceScore < 20) {
             skipped++;
             continue;
           }
 
-          // Always build the URL from permalink — it always points to the Reddit thread,
-          // whereas post.url can point to an external site for link posts.
           const threadUrl = buildRedditUrl(post.permalink);
+
+          const ageMonths = (Date.now() / 1000 - post.created_utc) / (86400 * 30);
+          const isCommentable = ageMonths < 6;
 
           await db.insert(growthRedditPosts).values({
             redditId: post.id,
@@ -468,8 +775,8 @@ export async function scrapeRedditPosts(): Promise<{
             author: post.author,
             commentsCount: post.num_comments,
             relevanceScore,
-            status: "to_comment",
-            draftComment: null, // generated on-demand via generateRedditDraftComment()
+            status: isCommentable ? "to_comment" : "skipped",
+            draftComment: null,
           });
 
           scraped++;
@@ -490,6 +797,59 @@ export async function scrapeRedditPosts(): Promise<{
     }
   }
 
-  // HN and Dev.to are NOT called here — invoke them separately when needed
   return { scraped, skipped, errors };
+}
+
+// ---------------------------------------------------------------------------
+// Main entry point — uses Google scraping as primary, Reddit API as fallback
+// ---------------------------------------------------------------------------
+
+export async function scrapeRedditPosts(): Promise<{
+  scraped: number;
+  skipped: number;
+  errors: number;
+}> {
+  let totalScraped = 0;
+  let totalSkipped = 0;
+  let totalErrors = 0;
+
+  // PRIMARY: Google-based scraping (finds high-traffic Reddit threads)
+  console.log("[reddit-scraper] Starting Google-based Reddit scraping...");
+  try {
+    const googleResults = await scrapeRedditViaGoogle();
+    totalScraped += googleResults.scraped;
+    totalSkipped += googleResults.skipped;
+    totalErrors += googleResults.errors;
+    console.log(
+      `[reddit-scraper] Google scraping done: ${googleResults.scraped} new, ${googleResults.skipped} skipped, ${googleResults.errors} errors`
+    );
+  } catch (err) {
+    console.error("[reddit-scraper] Google scraping failed entirely:", err);
+    totalErrors++;
+  }
+
+  // FALLBACK: Reddit's own search API (finds recent posts)
+  console.log("[reddit-scraper] Starting Reddit API fallback scraping...");
+  try {
+    const redditResults = await scrapeRedditViaApi();
+    totalScraped += redditResults.scraped;
+    totalSkipped += redditResults.skipped;
+    totalErrors += redditResults.errors;
+    console.log(
+      `[reddit-scraper] Reddit API scraping done: ${redditResults.scraped} new, ${redditResults.skipped} skipped, ${redditResults.errors} errors`
+    );
+  } catch (err) {
+    console.error("[reddit-scraper] Reddit API scraping failed entirely:", err);
+    totalErrors++;
+  }
+
+  console.log(
+    `[reddit-scraper] TOTAL: ${totalScraped} new posts, ${totalSkipped} skipped, ${totalErrors} errors`
+  );
+
+  return {
+    scraped: totalScraped,
+    skipped: totalSkipped,
+    errors: totalErrors,
+  };
 }
