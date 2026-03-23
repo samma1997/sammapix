@@ -181,24 +181,24 @@ export default function GuidaPage() {
       <SectionCard
         icon={Calendar}
         title="Ogni giorno"
-        subtitle="5 minuti"
+        subtitle="10 minuti — obiettivo: 5 email + 5 commenti Reddit"
         accentColor="#16A34A"
       >
         <div className="space-y-4">
           <Step
             number={1}
-            title="Apri il Piano"
-            description="Controlla la checklist settimanale e vedi cosa resta da fare."
+            title="Controlla il contatore giornaliero"
+            description="In alto nella pagina Link Building vedi: Email 0/5 e Reddit 0/5. L'obiettivo è completare entrambi."
           />
           <Step
             number={2}
-            title="Reddit"
-            description='Scegli 3-5 post pertinenti, clicca "Genera commento" per ognuno, poi "Copia" e postalo su Reddit. Segna come "Commentato" una volta fatto.'
+            title="Reddit — 5 commenti"
+            description='Vai alla pagina Reddit, scegli 5 post pertinenti, clicca "Genera commento", copia e incolla su Reddit. Segna come "Commentato". MAI menzionare SammaPix nei commenti (Fase 1: solo valore genuino).'
           />
           <Step
             number={3}
-            title="Link Building"
-            description='Se hai target pronti nella lista outreach, clicca "Invia" su 1-2 email.'
+            title="Email — 5 outreach"
+            description='Per ogni target: clicca "Email" (copia indirizzo), "Titolo" (copia oggetto), "Testo" (copia corpo generato da AI). Apri info@lucasammarco.com, incolla e invia. Poi clicca "Inviata" per segnare.'
           />
         </div>
       </SectionCard>
@@ -221,7 +221,7 @@ export default function GuidaPage() {
           <Step
             number={2}
             title="Link Building — Controlla risposte"
-            description="Vai nella tua inbox email e controlla se qualcuno ha risposto alle outreach. Aggiorna gli stati nella dashboard."
+            description='Vai nella inbox di info@lucasammarco.com e controlla se qualcuno ha risposto. Nella dashboard, clicca "Risposta" sul target e incolla la risposta ricevuta. Aggiorna lo stato.'
           />
           <Step
             number={3}
@@ -269,7 +269,7 @@ export default function GuidaPage() {
           <Step
             number={4}
             title="Strategia — Review mensile"
-            description='Genera la review mensile dalla pagina Strategia e clicca "Risolvi" sulle azioni suggerite.'
+            description='Genera la review mensile dalla pagina Strategia. Copia le azioni suggerite e implementale una per una.'
           />
         </div>
       </SectionCard>
@@ -302,7 +302,7 @@ export default function GuidaPage() {
           />
           <AutoItem
             icon={Mail}
-            text="Follow-up email — ri-manda automaticamente dopo 7 giorni"
+            text="Follow-up reminder — dopo 7 giorni senza risposta, il target viene segnalato come scaduto"
           />
           <AutoItem
             icon={Globe}
@@ -327,10 +327,11 @@ export default function GuidaPage() {
         <FlowDiagram
           steps={[
             'Tu trovi un sito che ha scritto "Best Image Tools"',
-            'Clicchi "Invia" — email personalizzata parte automaticamente',
-            "Dopo 7 giorni senza risposta — follow-up automatico",
-            'Se rispondono — aggiorni lo stato a "Risposta"',
-            'Se aggiungono il link — aggiorni a "Backlink"',
+            'Clicca "Email" + "Titolo" + "Testo" per copiare tutto',
+            "Apri info@lucasammarco.com, incolla e invia. Clicca \"Inviata\"",
+            "Dopo 7 giorni senza risposta — il target viene segnalato in rosso",
+            'Se rispondono — clicca "Risposta" e incolla il testo',
+            'Se aggiungono il link — spunta il checkbox "Backlink"',
             "Google vede il backlink — SammaPix sale nelle ricerche",
           ]}
         />
