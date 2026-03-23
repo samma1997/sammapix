@@ -37,11 +37,28 @@ export async function compressImage(
     outputFormat = "webp";
     onProgress?.(80);
   } else if (hasAlphaChannel) {
-    // For PNG/WebP/GIF: use canvas-based compression to preserve transparency.
-    // browser-image-compression converts everything to JPEG internally, destroying alpha.
+    // For PNG/WebP/GIF with transparency: try WebP first (supports alpha + quality slider),
+    // then fall back to canvas PNG re-encode, then fall back to original if nothing helps.
     const maxDim = config.maxWidthOrHeight ?? 2560;
-    resultBlob = await compressWithCanvas(file, qualityToDecimal(config.quality), maxDim);
-    outputFormat = getMimeOutputFormat(file.type);
+    const qualityDec = qualityToDecimal(config.quality);
+
+    // Try WebP (supports alpha channel AND quality-based lossy compression)
+    const webpBlob = await convertToWebPCanvas(file, qualityDec, maxDim);
+    if (webpBlob.size < originalSize) {
+      resultBlob = webpBlob;
+      outputFormat = "webp";
+    } else {
+      // WebP didn't help, try canvas re-encode in original format
+      const canvasBlob = await compressWithCanvas(file, qualityDec, maxDim);
+      if (canvasBlob.size < originalSize) {
+        resultBlob = canvasBlob;
+        outputFormat = getMimeOutputFormat(file.type);
+      } else {
+        // Nothing helped — keep original, never increase file size
+        resultBlob = file;
+        outputFormat = getMimeOutputFormat(file.type);
+      }
+    }
     onProgress?.(80);
   } else {
     // Use browser-image-compression for JPEG and other opaque formats.
