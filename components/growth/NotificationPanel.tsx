@@ -75,7 +75,7 @@ export function NotificationPanel({
     .filter((g) => g.items.length > 0);
 
   return (
-    <div className="absolute right-0 top-full mt-2 w-80 max-h-[28rem] overflow-y-auto bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] z-50">
+    <div className="absolute left-0 md:left-auto md:right-0 top-full mt-2 w-80 max-h-[28rem] overflow-y-auto bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] shadow-[0_1px_3px_rgba(0,0,0,0.08)] z-50">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
         <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
