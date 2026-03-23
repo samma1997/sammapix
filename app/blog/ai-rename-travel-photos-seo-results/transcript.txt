@@ -1,0 +1,111 @@
+The problem: 71 photos named IMG_something.
+
+I spent 16 days traveling across Sri Lanka in March 2025. Colombo, Kandy, Nuwara Eliya, the hill country train to Ella, the southern coast, and back to Negombo. I came home with 71 photos shot on an iPhone 13 Pro: temples, wildlife, tea plantations, street scenes, portraits, landscapes across 11 different locations.
+
+Every single photo was named by the camera: IMG_3570.JPG, IMG_3571.JPG, IMG_3572.JPG, all the way through IMG_5018.JPG. Seventy-one files where the filename tells you absolutely nothing about what the image actually shows.
+
+If you are a photographer, blogger, or website owner, this is a problem you have probably ignored. I certainly had for years. But image filenames are one of the most overlooked and easiest SEO wins available, and I wanted to see exactly how much of a difference proper naming makes.
+
+Why image filenames matter for SEO.
+
+Google has been explicit about this. Their image SEO best practices documentation states: "The filename can give Google clues about the subject matter of the image. For example, my-new-black-kitten.jpg is better than IMG00023.JPG."
+
+Here is why image filenames carry weight in search:
+
+Google Image Search ranking signal: The filename is one of the first signals Google uses to understand what an image depicts. A descriptive filename helps Google match your image to relevant search queries.
+
+URL structure: Image filenames become part of the image URL. Search engines parse URLs for keyword relevance, just as they do for page URLs.
+
+Alt text correlation: When a filename is descriptive, the alt text tends to be more descriptive too. This creates a compounding SEO effect where multiple signals reinforce each other.
+
+Accessibility fallback: Screen readers sometimes reference filenames. A descriptive filename provides a baseline of context even if alt text is missing.
+
+The bottom line: every image named IMG_3570.JPG is a missed opportunity. And when you have 71 of them, that is 71 missed opportunities on a single page or portfolio.
+
+The experiment: AI rename on 71 real photos.
+
+I loaded all 71 Sri Lanka photos into SammaPix AI Rename. The tool works by sending a small thumbnail of each image to an AI vision model (Google Gemini), which analyzes the visual content and generates a descriptive filename. The original full-resolution file never leaves your browser, only the thumbnail goes to the AI.
+
+The photos covered an extremely diverse range of subjects: Buddhist temples and statues, urban street markets, elephant encounters, cave temple interiors, mountain landscapes, tea factory interiors, train journeys, fishing harbors, coastal scenes, and intimate portraits. A real stress test for any AI vision system.
+
+Processing all 71 images took about 90 seconds. Here is what came out.
+
+The real results: 71 before/after filenames.
+
+Temples and religious sites:
+
+IMG_3570.JPG became gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka.
+IMG_3575.JPG became gangaramaya-temple-buddha-statues-interior-colombo-sri-lanka.
+IMG_3580.JPG became golden-buddha-statue-serene-face-colombo-sri-lanka.
+IMG_3700.JPG became dambulla-cave-temple-reclining-buddha-sri-lanka-murals.
+IMG_4055.JPG became kandy-sri-lanka-temple-sacred-tooth-relic-daylight.
+
+Landscapes and nature:
+
+IMG_3812.JPG became sigiriya-rock-fortress-panoramic-golden-hour-sri-lanka.
+IMG_3815.JPG became pidurangala-rock-panoramic-jungle-view-sri-lanka.
+IMG_4105.JPG became nuwara-eliya-tea-plantation-drone-sunset-sri-lanka.
+IMG_4390.JPG became coconut-tree-hill-mirissa-sri-lanka-tropical-bay-view.
+
+People, culture, and street life:
+
+IMG_4060.JPG became kandy-sri-lanka-traditional-drummer-temple-ceremony.
+IMG_4065.JPG became kandy-sri-lanka-elderly-man-portrait-local-cafe-life.
+IMG_5001.JPG became negombo-sri-lanka-fisherman-holding-dried-fish-portrait.
+IMG_4500.JPG became matara-sri-lanka-coastline-palm-trees-indian-ocean-view.
+
+Wildlife and trains:
+
+IMG_3640.JPG became maharagama-sri-lanka-elephant-mahout-tropical-bond.
+IMG_3750.JPG became sri-lanka-toque-macaque-temple-spirit-wildlife.
+IMG_4200.JPG became sri-lanka-ella-train-journey-jungle-hill-country.
+IMG_4210.JPG became badulla-sri-lanka-smiling-train-conductor-rainy-day.
+
+What the AI got right (and what I learned).
+
+After reviewing all 71 renamed files, several patterns stood out.
+
+It identified specific landmarks. The AI recognized Gangaramaya Temple, Sigiriya Rock Fortress, Dambulla Cave Temple, the Temple of the Sacred Tooth Relic in Kandy, and Coconut Tree Hill in Mirissa. These are not generic "temple" or "mountain" labels. They are the actual place names, which carry significantly more SEO weight.
+
+It included geographic context. Nearly every filename includes "sri-lanka" and the specific city or region (Colombo, Kandy, Nuwara Eliya, Matara, Negombo). This is critical for travel photography SEO because people search for images by location: "Sigiriya rock fortress photos," "Kandy temple Sri Lanka," "Negombo fisherman."
+
+It captured mood and time of day. Filenames like "sigiriya-rock-fortress-panoramic-golden-hour" and "nuwara-eliya-tea-plantation-drone-sunset" include lighting and mood descriptors. These match how people actually search for photography: "Sigiriya golden hour photo" or "Sri Lanka sunset tea plantation."
+
+The naming pattern is consistent. Every filename follows the same structure: subject-descriptor-location-country, with hyphens separating words, all lowercase, no special characters. This consistency is something you would struggle to maintain if renaming 71 files manually. Your naming convention would drift by file 20.
+
+The filename-to-alt-text pipeline.
+
+Here is something I did not expect: once your filenames are descriptive, writing alt text becomes trivial. The filename essentially is the alt text, just with hyphens instead of spaces.
+
+For example: negombo-sri-lanka-fisherman-holding-dried-fish-portrait becomes "Negombo Sri Lanka fisherman holding dried fish portrait." sigiriya-rock-fortress-monkeys-sunset-sri-lanka-jungle becomes "Sigiriya Rock Fortress with monkeys at sunset, Sri Lanka jungle."
+
+This creates a compounding SEO effect. The filename, the alt text, and the surrounding content all reinforce the same keywords. Google sees three consistent signals about what the image shows, rather than an opaque IMG_3570 filename with manually written alt text that may or may not match.
+
+How to rename your own photos with AI.
+
+If you want to replicate this workflow with your own photos, the process is straightforward:
+
+1. Open SammaPix AI Rename and sign in (the tool requires a free account to prevent API abuse).
+2. Drag your photos onto the drop zone. You can do up to 20 at a time on the free plan.
+3. Review the suggested names. The AI generates a preview so you can adjust before committing.
+4. Download the renamed files individually or as a ZIP archive.
+
+For best results, pair AI Rename with SammaPix Compress and WebP Convert. The full workflow (compress, rename, convert) takes under 5 minutes for 71 photos and gives you web-ready, SEO-optimized images with no manual effort.
+
+Frequently asked questions.
+
+Do image filenames actually affect SEO rankings?
+
+Yes. Google has confirmed that image filenames are used as a ranking signal for Google Image Search. A file named "gangaramaya-temple-buddha-statues-colombo-sri-lanka.webp" tells Google exactly what the image shows, while "IMG_3570.JPG" provides zero context. Descriptive filenames also correlate with better alt text and surrounding content, which further strengthens image SEO signals.
+
+What makes a good SEO image filename?
+
+A good SEO image filename is descriptive, uses hyphens to separate words, includes relevant keywords naturally, and identifies the subject and location. For example: "nuwara-eliya-tea-plantation-sunset-sri-lanka.webp". Keep filenames under 60 characters, avoid special characters, underscores, or spaces, and use lowercase only. The filename should read like a natural description of what the image shows.
+
+Can AI accurately rename photos based on their content?
+
+Modern AI vision models can identify subjects, locations, objects, activities, and even cultural contexts in photographs with high accuracy. In a test of 71 diverse travel photos from Sri Lanka, AI correctly identified temples, wildlife, landscapes, portraits, and cultural scenes in every case, generating filenames that accurately described the image content and included relevant SEO keywords.
+
+How many photos can I rename with AI at once?
+
+With SammaPix AI Rename, free users can rename up to 10 images per day, and Pro users get 200 per day. The tool processes images in batch, so you drag your files onto the drop zone and get all the renamed files back at once. For 71 photos, a Pro account handles the entire batch in a single session.

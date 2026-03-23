@@ -1,0 +1,92 @@
+The trip: 16 days across Sri Lanka.
+
+In March 2025 I took a 16-day trip across Sri Lanka. The route went from Colombo south through Maharagama and Gampaha, then north to Kurunegala and the Cultural Triangle (Dambulla, Sigiriya), down through the hill country (Kandy, Nuwara Eliya), east to Badulla and the Ella train route, south to Matara and the coast, and back up to Negombo before flying home.
+
+I shot everything on an iPhone 13 Pro. No tripod, no external lenses, no Lightroom presets. Just the default camera app, tapping the shutter whenever something caught my eye. Temples, street markets, tea plantations, train rides, wildlife, coastlines, portraits of people I met along the way.
+
+By the time I landed back home, I had 71 keepers across 11 locations.
+
+The problem: 350MB of unsorted photos.
+
+Here is what I was looking at when I sat down to process them:
+
+71 files named IMG_3570.JPG through IMG_5018.JPG. Total size: 358MB, average 5MB per photo. Resolution: 3024x4032px each, 12MP iPhone sensor. Filenames: meaningless, no human could tell IMG_4201 from IMG_4202. Format: JPEG straight from camera, unoptimized.
+
+If I uploaded these directly to a blog or portfolio, each page would load megabytes of images that browsers would struggle to render quickly. Google would penalize the page speed, visitors on mobile would bounce, and the filenames would contribute zero SEO value. Not a great starting point.
+
+In the past I would have opened Photoshop, batch-resized, exported one by one, then manually renamed each file. That process takes 30 to 45 minutes for 71 files, and it is mind-numbingly boring. This time I tried a different approach.
+
+The 3-step workflow that fixed everything.
+
+I used three SammaPix tools in sequence, all running in the browser with zero uploads to any external server:
+
+1. Compress: reduce file size by 75% with quality 80.
+2. AI Rename: generate descriptive, SEO-friendly filenames.
+3. WebP Convert: switch format for another 25% savings.
+
+Total time: under 5 minutes. Let me walk through each step.
+
+Step 1: Compress, 350MB down to 87MB.
+
+I opened SammaPix Compress, dragged all 71 JPEGs onto the drop zone, and set quality to 80. The tool processed every file in parallel, right in the browser tab. No upload bar, no waiting for a server response.
+
+The results were immediate. Average file size dropped from 5MB to about 1.2MB per image. Total folder size went from 358MB to roughly 87MB, a 75.7% reduction. And when I opened the compressed files side by side with the originals at 100% zoom, I genuinely could not tell which was which.
+
+That is the thing about quality 80 on modern JPEG encoders: the data being thrown away is data the human eye cannot perceive at normal viewing distances.
+
+Step 2: AI Rename, from IMG_3570 to SEO gold.
+
+This was the step that surprised me most. I loaded the same 71 files into SammaPix AI Rename. The tool analyzed each image using AI vision and generated a descriptive, keyword-rich filename.
+
+Here are some real before/after examples from my batch:
+
+IMG_3570.JPG became gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka.jpg.
+IMG_3812.JPG became sigiriya-rock-fortress-panoramic-golden-hour-sri-lanka.jpg.
+IMG_4105.JPG became nuwara-eliya-tea-plantation-drone-sunset-sri-lanka.jpg.
+IMG_4390.JPG became coconut-tree-hill-mirissa-sri-lanka-tropical-bay-view.jpg.
+IMG_5001.JPG became negombo-sri-lanka-fisherman-holding-dried-fish-portrait.jpg.
+
+Every filename now contains the subject, location, and relevant keywords. When search engines crawl these images, the filenames alone tell Google exactly what each photo shows. That is free SEO that most photographers completely ignore.
+
+Step 3: WebP Convert, another 25% off.
+
+The final step was converting from JPEG to WebP using the SammaPix WebP converter. WebP is Google's modern image format, and it produces files 25 to 34% smaller than JPEG at equivalent perceptual quality. Browser support is above 97% in 2026, so there is no practical reason to stick with JPEG for web delivery.
+
+I dragged the 71 compressed and renamed JPEGs into the converter. A few seconds later, every file was WebP. The total folder size dropped from 87MB to about 65MB, another 25% reduction on top of the compression savings.
+
+The results: 350MB to 65MB in 5 minutes.
+
+Here is the complete breakdown of what happened to my 71 Sri Lanka photos:
+
+Original iPhone JPEGs: 358 MB.
+After Compress at quality 80: 87 MB, a 75.7% reduction.
+After AI Rename: 87 MB, metadata only, no size change.
+After WebP Convert: 65 MB, an 81.8% total reduction.
+
+From 358MB down to 65MB. That is an 81.8% reduction in total file size, with no visible quality loss and every file now carrying a descriptive, SEO-optimized filename. The entire process took less time than it takes to make a cup of tea.
+
+Why browser-based matters for travel photographers.
+
+Most image optimization tools require you to upload your photos to a server. For personal travel photos, that is a privacy problem I am not comfortable with. My Sri Lanka photos include portraits of people I met, GPS-tagged locations, and personal moments. I do not want those sitting on someone else's server.
+
+With browser-based processing, every step happened locally on my laptop. The files never left my machine. The compression runs in a Web Worker using the Canvas API, the WebP conversion uses the browser's native encoder, and the AI rename sends only a tiny thumbnail to the AI model, never the full-resolution original.
+
+There is also a speed advantage. Uploading 358MB of photos to a server and waiting for them to be processed and downloaded would take considerably longer than 5 minutes, even on a fast connection. Local processing eliminates that entire round trip.
+
+Frequently asked questions.
+
+How do I optimize travel photos for a blog without losing quality?
+
+Use a three-step workflow: first compress your images at quality 78 to 82 (which reduces file size by 60 to 75% with no visible difference), then convert to WebP format for an additional 25 to 30% savings, and finally rename files with descriptive, keyword-rich names for SEO. Browser-based tools like SammaPix handle all three steps without uploading your photos to any server.
+
+How long does it take to optimize a large batch of travel photos?
+
+With a browser-based batch workflow, 71 photos can be compressed, renamed, and converted in under 5 minutes. The key is using tools that process files in parallel on your device rather than uploading them one by one to a server. Drag all files at once, apply settings, and download the results as a ZIP.
+
+Should I convert travel photos to WebP before uploading to my blog?
+
+Yes. WebP produces files 25 to 34% smaller than JPEG at equivalent visual quality, and browser support is now above 97%. Converting your travel photos to WebP before uploading means faster page loads, better Core Web Vitals scores, and lower bandwidth costs. The only exception is if you need to support very old email clients or legacy CMS systems that do not accept WebP.
+
+Is it safe to compress photos in the browser instead of using desktop software?
+
+Yes, and it is actually more private. Browser-based compression processes your images entirely on your device using JavaScript APIs. Your files never leave your computer, no data is uploaded to any server, and the results are identical to what desktop software produces. It is also faster for batch operations since there is zero upload latency.

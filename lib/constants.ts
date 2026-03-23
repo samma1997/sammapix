@@ -79,6 +79,8 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "optimize-travel-photos-sri-lanka",
+  "ai-rename-travel-photos-seo-results",
   "ai-image-renaming-seo-guide",
   "batch-watermark-photos-free",
   "best-image-compression-tools-2026",
