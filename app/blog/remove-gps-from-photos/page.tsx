@@ -58,7 +58,7 @@ export default function RemoveGpsFromPhotosPage() {
         heroImage={
           <figure>
             <img
-              src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80"
+              src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80"
               alt="Digital privacy and security concept representing hidden data in photos"
               className="w-full rounded-lg"
               loading="eager"

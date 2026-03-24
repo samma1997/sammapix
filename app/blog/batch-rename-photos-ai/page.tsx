@@ -178,7 +178,7 @@ export default function BatchRenamePhotosAIPage() {
         heroImage={
           <figure>
             <img
-              src="https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=800&q=80"
+              src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
               alt="AI technology analyzing and organizing digital photos on a computer screen"
               className="w-full rounded-lg"
               loading="eager"
@@ -331,7 +331,7 @@ export default function BatchRenamePhotosAIPage() {
 
         <figure className="my-8">
           <img
-            src="https://images.unsplash.com/photo-1516321318423-f06d6e504b00?w=800&q=80"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
             alt="Hand typing keywords on a laptop keyboard for SEO optimization"
             className="w-full rounded-lg"
             loading="lazy"

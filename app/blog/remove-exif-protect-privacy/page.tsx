@@ -160,7 +160,7 @@ export default function RemoveExifProtectPrivacyPage() {
         heroImage={
           <figure>
             <img
-              src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80"
+              src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80"
               alt="Digital security concept with lock icon and data protection visualization"
               className="w-full rounded-lg"
               loading="eager"

@@ -394,7 +394,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
 
             <figure className="my-8">
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85f1d7?w=800&q=80"
+                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80"
                 alt="Developer reviewing website performance code on a laptop screen"
                 className="w-full rounded-lg"
                 loading="lazy"
