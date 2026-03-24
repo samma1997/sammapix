@@ -1,0 +1,322 @@
+[
+  {
+    "start": 0,
+    "end": 4.61,
+    "text": "The problem: 71 photos named IMG_something."
+  },
+  {
+    "start": 4.61,
+    "end": 26.5,
+    "text": "I spent 16 days traveling across Sri Lanka in March 2025. Colombo, Kandy, Nuwara"
+  },
+  {
+    "start": 26.5,
+    "end": 48.14,
+    "text": "Every single photo was named by the camera: IMG_3570.JPG, IMG_3571.JPG, IMG_3572"
+  },
+  {
+    "start": 48.14,
+    "end": 65.23,
+    "text": "If you are a photographer, blogger, or website owner, this is a problem you have"
+  },
+  {
+    "start": 65.23,
+    "end": 68.5,
+    "text": "Why image filenames matter for SEO."
+  },
+  {
+    "start": 68.5,
+    "end": 86.14,
+    "text": "Google has been explicit about this. Their image SEO best practices documentatio"
+  },
+  {
+    "start": 86.14,
+    "end": 89.76,
+    "text": "Here is why image filenames carry weight in search:"
+  },
+  {
+    "start": 89.76,
+    "end": 102.02,
+    "text": "Google Image Search ranking signal: The filename is one of the first signals Goo"
+  },
+  {
+    "start": 102.02,
+    "end": 112.49,
+    "text": "URL structure: Image filenames become part of the image URL. Search engines pars"
+  },
+  {
+    "start": 112.49,
+    "end": 124.2,
+    "text": "Alt text correlation: When a filename is descriptive, the alt text tends to be m"
+  },
+  {
+    "start": 124.2,
+    "end": 134.35,
+    "text": "Accessibility fallback: Screen readers sometimes reference filenames. A descript"
+  },
+  {
+    "start": 134.35,
+    "end": 147.74,
+    "text": "The bottom line: every image named IMG_3570.JPG is a missed opportunity. And whe"
+  },
+  {
+    "start": 147.74,
+    "end": 152.04,
+    "text": "The experiment: AI rename on 71 real photos."
+  },
+  {
+    "start": 152.04,
+    "end": 172.27,
+    "text": "I loaded all 71 Sri Lanka photos into SammaPix AI Rename. The tool works by send"
+  },
+  {
+    "start": 172.27,
+    "end": 191.09,
+    "text": "The photos covered an extremely diverse range of subjects: Buddhist temples and "
+  },
+  {
+    "start": 191.09,
+    "end": 197.42,
+    "text": "Processing all 71 images took about 90 seconds. Here is what came out."
+  },
+  {
+    "start": 197.42,
+    "end": 201.82,
+    "text": "The real results: 71 before/after filenames."
+  },
+  {
+    "start": 201.82,
+    "end": 204.34,
+    "text": "Temples and religious sites:"
+  },
+  {
+    "start": 204.34,
+    "end": 211.8,
+    "text": "IMG_3570.JPG became gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka."
+  },
+  {
+    "start": 211.8,
+    "end": 219.72,
+    "text": "IMG_3575.JPG became gangaramaya-temple-buddha-statues-interior-colombo-sri-lanka"
+  },
+  {
+    "start": 219.72,
+    "end": 226.51,
+    "text": "IMG_3580.JPG became golden-buddha-statue-serene-face-colombo-sri-lanka."
+  },
+  {
+    "start": 226.51,
+    "end": 233.64,
+    "text": "IMG_3700.JPG became dambulla-cave-temple-reclining-buddha-sri-lanka-murals."
+  },
+  {
+    "start": 233.64,
+    "end": 240.53,
+    "text": "IMG_4055.JPG became kandy-sri-lanka-temple-sacred-tooth-relic-daylight."
+  },
+  {
+    "start": 240.53,
+    "end": 242.83,
+    "text": "Landscapes and nature:"
+  },
+  {
+    "start": 242.83,
+    "end": 249.86,
+    "text": "IMG_3812.JPG became sigiriya-rock-fortress-panoramic-golden-hour-sri-lanka."
+  },
+  {
+    "start": 249.86,
+    "end": 256.75,
+    "text": "IMG_3815.JPG became pidurangala-rock-panoramic-jungle-view-sri-lanka."
+  },
+  {
+    "start": 256.75,
+    "end": 263.78,
+    "text": "IMG_4105.JPG became nuwara-eliya-tea-plantation-drone-sunset-sri-lanka."
+  },
+  {
+    "start": 263.78,
+    "end": 270.72,
+    "text": "IMG_4390.JPG became coconut-tree-hill-mirissa-sri-lanka-tropical-bay-view."
+  },
+  {
+    "start": 270.72,
+    "end": 273.82,
+    "text": "People, culture, and street life:"
+  },
+  {
+    "start": 273.82,
+    "end": 280.7,
+    "text": "IMG_4060.JPG became kandy-sri-lanka-traditional-drummer-temple-ceremony."
+  },
+  {
+    "start": 280.7,
+    "end": 287.83,
+    "text": "IMG_4065.JPG became kandy-sri-lanka-elderly-man-portrait-local-cafe-life."
+  },
+  {
+    "start": 287.83,
+    "end": 294.94,
+    "text": "IMG_5001.JPG became negombo-sri-lanka-fisherman-holding-dried-fish-portrait."
+  },
+  {
+    "start": 294.94,
+    "end": 301.92,
+    "text": "IMG_4500.JPG became matara-sri-lanka-coastline-palm-trees-indian-ocean-view."
+  },
+  {
+    "start": 301.92,
+    "end": 304.27,
+    "text": "Wildlife and trains:"
+  },
+  {
+    "start": 304.27,
+    "end": 311.35,
+    "text": "IMG_3640.JPG became maharagama-sri-lanka-elephant-mahout-tropical-bond."
+  },
+  {
+    "start": 311.35,
+    "end": 318.12,
+    "text": "IMG_3750.JPG became sri-lanka-toque-macaque-temple-spirit-wildlife."
+  },
+  {
+    "start": 318.12,
+    "end": 324.7,
+    "text": "IMG_4200.JPG became sri-lanka-ella-train-journey-jungle-hill-country."
+  },
+  {
+    "start": 324.7,
+    "end": 331.42,
+    "text": "IMG_4210.JPG became badulla-sri-lanka-smiling-train-conductor-rainy-day."
+  },
+  {
+    "start": 331.42,
+    "end": 334.61,
+    "text": "What the AI got right (and what I learned)."
+  },
+  {
+    "start": 334.61,
+    "end": 339.58,
+    "text": "After reviewing all 71 renamed files, several patterns stood out."
+  },
+  {
+    "start": 339.58,
+    "end": 360.84,
+    "text": "It identified specific landmarks. The AI recognized Gangaramaya Temple, Sigiriya"
+  },
+  {
+    "start": 360.84,
+    "end": 381.84,
+    "text": "It included geographic context. Nearly every filename includes \"sri-lanka\" and t"
+  },
+  {
+    "start": 381.84,
+    "end": 400.27,
+    "text": "It captured mood and time of day. Filenames like \"sigiriya-rock-fortress-panoram"
+  },
+  {
+    "start": 400.27,
+    "end": 421.18,
+    "text": "The naming pattern is consistent. Every filename follows the same structure: sub"
+  },
+  {
+    "start": 421.18,
+    "end": 424.08,
+    "text": "The filename-to-alt-text pipeline."
+  },
+  {
+    "start": 424.08,
+    "end": 435.58,
+    "text": "Here is something I did not expect: once your filenames are descriptive, writing"
+  },
+  {
+    "start": 435.58,
+    "end": 450.38,
+    "text": "For example: negombo-sri-lanka-fisherman-holding-dried-fish-portrait becomes \"Ne"
+  },
+  {
+    "start": 450.38,
+    "end": 469.56,
+    "text": "This creates a compounding SEO effect. The filename, the alt text, and the surro"
+  },
+  {
+    "start": 469.56,
+    "end": 472.78,
+    "text": "How to rename your own photos with AI."
+  },
+  {
+    "start": 472.78,
+    "end": 478.37,
+    "text": "If you want to replicate this workflow with your own photos, the process is stra"
+  },
+  {
+    "start": 478.37,
+    "end": 484.94,
+    "text": "1. Open SammaPix AI Rename and sign in (the tool requires a free account to prev"
+  },
+  {
+    "start": 484.94,
+    "end": 491.83,
+    "text": "2. Drag your photos onto the drop zone. You can do up to 20 at a time on the fre"
+  },
+  {
+    "start": 491.83,
+    "end": 499.01,
+    "text": "3. Review the suggested names. The AI generates a preview so you can adjust befo"
+  },
+  {
+    "start": 499.01,
+    "end": 503.76,
+    "text": "4. Download the renamed files individually or as a ZIP archive."
+  },
+  {
+    "start": 503.76,
+    "end": 518.69,
+    "text": "For best results, pair AI Rename with SammaPix Compress and WebP Convert. The fu"
+  },
+  {
+    "start": 518.69,
+    "end": 521.26,
+    "text": "Frequently asked questions."
+  },
+  {
+    "start": 521.26,
+    "end": 525.1,
+    "text": "Do image filenames actually affect SEO rankings?"
+  },
+  {
+    "start": 525.1,
+    "end": 551.09,
+    "text": "Yes. Google has confirmed that image filenames are used as a ranking signal for "
+  },
+  {
+    "start": 551.09,
+    "end": 554.16,
+    "text": "What makes a good SEO image filename?"
+  },
+  {
+    "start": 554.16,
+    "end": 580.25,
+    "text": "A good SEO image filename is descriptive, uses hyphens to separate words, includ"
+  },
+  {
+    "start": 580.25,
+    "end": 584.45,
+    "text": "Can AI accurately rename photos based on their content?"
+  },
+  {
+    "start": 584.45,
+    "end": 608.45,
+    "text": "Modern AI vision models can identify subjects, locations, objects, activities, a"
+  },
+  {
+    "start": 608.45,
+    "end": 612,
+    "text": "How many photos can I rename with AI at once?"
+  },
+  {
+    "start": 612,
+    "end": 631.51,
+    "text": "With SammaPix AI Rename, free users can rename up to 10 images per day, and Pro "
+  }
+]

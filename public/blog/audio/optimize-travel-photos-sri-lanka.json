@@ -1,0 +1,257 @@
+[
+  {
+    "start": 0,
+    "end": 3.53,
+    "text": "The trip: 16 days across Sri Lanka."
+  },
+  {
+    "start": 3.53,
+    "end": 25.01,
+    "text": "In March 2025 I took a 16-day trip across Sri Lanka. The route went from Colombo"
+  },
+  {
+    "start": 25.01,
+    "end": 44.98,
+    "text": "I shot everything on an iPhone 13 Pro. No tripod, no external lenses, no Lightro"
+  },
+  {
+    "start": 44.98,
+    "end": 50.45,
+    "text": "By the time I landed back home, I had 71 keepers across 11 locations."
+  },
+  {
+    "start": 50.45,
+    "end": 54.89,
+    "text": "The problem: 350MB of unsorted photos."
+  },
+  {
+    "start": 54.89,
+    "end": 58.82,
+    "text": "Here is what I was looking at when I sat down to process them:"
+  },
+  {
+    "start": 58.82,
+    "end": 89.86,
+    "text": "71 files named IMG_3570.JPG through IMG_5018.JPG. Total size: 358MB, average 5MB"
+  },
+  {
+    "start": 89.86,
+    "end": 107.66,
+    "text": "If I uploaded these directly to a blog or portfolio, each page would load megaby"
+  },
+  {
+    "start": 107.66,
+    "end": 123.31,
+    "text": "In the past I would have opened Photoshop, batch-resized, exported one by one, t"
+  },
+  {
+    "start": 123.31,
+    "end": 126.6,
+    "text": "The 3-step workflow that fixed everything."
+  },
+  {
+    "start": 126.6,
+    "end": 133.44,
+    "text": "I used three SammaPix tools in sequence, all running in the browser with zero up"
+  },
+  {
+    "start": 133.44,
+    "end": 138.86,
+    "text": "1. Compress: reduce file size by 75% with quality 80."
+  },
+  {
+    "start": 138.86,
+    "end": 143.86,
+    "text": "2. AI Rename: generate descriptive, SEO-friendly filenames."
+  },
+  {
+    "start": 143.86,
+    "end": 149.18,
+    "text": "3. WebP Convert: switch format for another 25% savings."
+  },
+  {
+    "start": 149.18,
+    "end": 154.56,
+    "text": "Total time: under 5 minutes. Let me walk through each step."
+  },
+  {
+    "start": 154.56,
+    "end": 160.06,
+    "text": "Step 1: Compress, 350MB down to 87MB."
+  },
+  {
+    "start": 160.06,
+    "end": 175.32,
+    "text": "I opened SammaPix Compress, dragged all 71 JPEGs onto the drop zone, and set qua"
+  },
+  {
+    "start": 175.32,
+    "end": 199.06,
+    "text": "The results were immediate. Average file size dropped from 5MB to about 1.2MB pe"
+  },
+  {
+    "start": 199.06,
+    "end": 207.62,
+    "text": "That is the thing about quality 80 on modern JPEG encoders: the data being throw"
+  },
+  {
+    "start": 207.62,
+    "end": 213.5,
+    "text": "Step 2: AI Rename, from IMG_3570 to SEO gold."
+  },
+  {
+    "start": 213.5,
+    "end": 227.04,
+    "text": "This was the step that surprised me most. I loaded the same 71 files into SammaP"
+  },
+  {
+    "start": 227.04,
+    "end": 231,
+    "text": "Here are some real before/after examples from my batch:"
+  },
+  {
+    "start": 231,
+    "end": 239.21,
+    "text": "IMG_3570.JPG became gangaramaya-temple-buddha-statues-stupa-colombo-sri-lanka.jp"
+  },
+  {
+    "start": 239.21,
+    "end": 247.1,
+    "text": "IMG_3812.JPG became sigiriya-rock-fortress-panoramic-golden-hour-sri-lanka.jpg."
+  },
+  {
+    "start": 247.1,
+    "end": 254.93,
+    "text": "IMG_4105.JPG became nuwara-eliya-tea-plantation-drone-sunset-sri-lanka.jpg."
+  },
+  {
+    "start": 254.93,
+    "end": 262.75,
+    "text": "IMG_4390.JPG became coconut-tree-hill-mirissa-sri-lanka-tropical-bay-view.jpg."
+  },
+  {
+    "start": 262.75,
+    "end": 270.7,
+    "text": "IMG_5001.JPG became negombo-sri-lanka-fisherman-holding-dried-fish-portrait.jpg."
+  },
+  {
+    "start": 270.7,
+    "end": 286.08,
+    "text": "Every filename now contains the subject, location, and relevant keywords. When s"
+  },
+  {
+    "start": 286.08,
+    "end": 290.62,
+    "text": "Step 3: WebP Convert, another 25% off."
+  },
+  {
+    "start": 290.62,
+    "end": 313.22,
+    "text": "The final step was converting from JPEG to WebP using the SammaPix WebP converte"
+  },
+  {
+    "start": 313.22,
+    "end": 330.77,
+    "text": "I dragged the 71 compressed and renamed JPEGs into the converter. A few seconds "
+  },
+  {
+    "start": 330.77,
+    "end": 336.22,
+    "text": "The results: 350MB to 65MB in 5 minutes."
+  },
+  {
+    "start": 336.22,
+    "end": 341.26,
+    "text": "Here is the complete breakdown of what happened to my 71 Sri Lanka photos:"
+  },
+  {
+    "start": 341.26,
+    "end": 346.03,
+    "text": "Original iPhone JPEGs: 358 MB."
+  },
+  {
+    "start": 346.03,
+    "end": 352.51,
+    "text": "After Compress at quality 80: 87 MB, a 75.7% reduction."
+  },
+  {
+    "start": 352.51,
+    "end": 357.96,
+    "text": "After AI Rename: 87 MB, metadata only, no size change."
+  },
+  {
+    "start": 357.96,
+    "end": 364.06,
+    "text": "After WebP Convert: 65 MB, an 81.8% total reduction."
+  },
+  {
+    "start": 364.06,
+    "end": 382.2,
+    "text": "From 358MB down to 65MB. That is an 81.8% reduction in total file size, with no "
+  },
+  {
+    "start": 382.2,
+    "end": 386.09,
+    "text": "Why browser-based matters for travel photographers."
+  },
+  {
+    "start": 386.09,
+    "end": 406.54,
+    "text": "Most image optimization tools require you to upload your photos to a server. For"
+  },
+  {
+    "start": 406.54,
+    "end": 426.38,
+    "text": "With browser-based processing, every step happened locally on my laptop. The fil"
+  },
+  {
+    "start": 426.38,
+    "end": 442.85,
+    "text": "There is also a speed advantage. Uploading 358MB of photos to a server and waiti"
+  },
+  {
+    "start": 442.85,
+    "end": 445.42,
+    "text": "Frequently asked questions."
+  },
+  {
+    "start": 445.42,
+    "end": 449.95,
+    "text": "How do I optimize travel photos for a blog without losing quality?"
+  },
+  {
+    "start": 449.95,
+    "end": 473.76,
+    "text": "Use a three-step workflow: first compress your images at quality 78 to 82 (which"
+  },
+  {
+    "start": 473.76,
+    "end": 478.1,
+    "text": "How long does it take to optimize a large batch of travel photos?"
+  },
+  {
+    "start": 478.1,
+    "end": 497.14,
+    "text": "With a browser-based batch workflow, 71 photos can be compressed, renamed, and c"
+  },
+  {
+    "start": 497.14,
+    "end": 501.77,
+    "text": "Should I convert travel photos to WebP before uploading to my blog?"
+  },
+  {
+    "start": 501.77,
+    "end": 528.02,
+    "text": "Yes. WebP produces files 25 to 34% smaller than JPEG at equivalent visual qualit"
+  },
+  {
+    "start": 528.02,
+    "end": 533.14,
+    "text": "Is it safe to compress photos in the browser instead of using desktop software?"
+  },
+  {
+    "start": 533.14,
+    "end": 555.72,
+    "text": "Yes, and it is actually more private. Browser-based compression processes your i"
+  }
+]
