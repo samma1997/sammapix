@@ -30,60 +30,56 @@ const REDDIT_SEARCH_QUERIES = [
 
 // Subreddit-specific searches (targeted at our key subreddits)
 const SUBREDDIT_SEARCHES = [
+  // Dev / Web
   { sub: "webdev", queries: ["image optimization", "compress images", "webp", "page speed images", "image tools"] },
   { sub: "web_design", queries: ["image compression", "optimize images", "webp format", "image tools"] },
+  { sub: "frontend", queries: ["image optimization", "lazy loading images", "webp", "compress images"] },
+  { sub: "Wordpress", queries: ["image optimization", "compress images", "page speed", "webp plugin"] },
+  { sub: "webhosting", queries: ["image optimization", "page speed", "compress images"] },
+  // Photography / Design
   { sub: "photography", queries: ["batch rename", "organize photos", "compress photos", "heic converter", "remove exif"] },
   { sub: "graphic_design", queries: ["compress images", "image format", "batch resize", "webp"] },
-  { sub: "Wordpress", queries: ["image optimization", "compress images", "page speed", "webp plugin"] },
-  { sub: "SEO", queries: ["image optimization", "page speed", "image alt text", "image seo"] },
-  { sub: "SideProject", queries: ["image tool", "photo tool", "compression", "free tool"] },
-  { sub: "selfhosted", queries: ["image compression", "image optimizer", "photo management"] },
-  { sub: "webhosting", queries: ["image optimization", "page speed", "compress images"] },
+  // SEO
+  { sub: "SEO", queries: ["image optimization", "page speed", "image alt text", "image seo", "core web vitals images"] },
+  // SaaS / Indie / Startup
+  { sub: "SideProject", queries: ["image tool", "photo tool", "compression", "free tool", "built a tool"] },
+  { sub: "micro_saas", queries: ["image tool", "saas tool", "free tool", "built", "launched"] },
+  { sub: "microsaas", queries: ["image tool", "saas tool", "free tool", "launched"] },
+  { sub: "SaaS", queries: ["image optimization", "free tool", "browser tool", "launched"] },
+  { sub: "indiehackers", queries: ["image tool", "side project", "launched", "free tool"] },
+  { sub: "buildinpublic", queries: ["image tool", "saas", "launched", "free tool"] },
+  { sub: "Entrepreneur", queries: ["image optimization", "free tool", "website speed"] },
+  { sub: "startups", queries: ["image tool", "free tool", "launched"] },
+  // Self-hosted / Privacy
+  { sub: "selfhosted", queries: ["image compression", "image optimizer", "photo management", "privacy"] },
+  { sub: "degoogle", queries: ["image tool", "privacy", "browser based", "no upload"] },
 ];
 
 // High-relevance subreddits where image optimization discussion is on-topic
 const HIGH_RELEVANCE_SUBREDDITS = new Set([
-  "webdev",
-  "web_design",
-  "photography",
-  "graphic_design",
-  "wordpress",
+  // Dev / Web
+  "webdev", "web_design", "web_development", "frontend", "webdesign",
+  "wordpress", "webhosting", "buildawebsite", "nextjs",
+  // Photography / Design
+  "photography", "graphic_design", "photoshop", "lightroom", "imageprocessing",
+  // SEO
   "seo",
-  "web_development",
-  "frontend",
-  "webdesign",
-  "photoshop",
-  "lightroom",
-  "imageprocessing",
-  "selfhosted",
-  "webhosting",
-  "blogger",
-  "blogging",
-  "smallbusiness",
-  "ecommerce",
-  "shopify",
-  "squarespace",
-  "wix",
-  "techsupport",
-  "software",
-  "freeware",
-  "opensource",
-  "mac",
-  "windows",
-  "linux",
-  "buildawebsite",
-  "learnprogramming",
+  // SaaS / Indie / Startup
+  "sideproject", "micro_saas", "microsaas", "saas", "indiehackers",
+  "buildinpublic", "entrepreneur", "startups",
+  // Self-hosted / Privacy
+  "selfhosted", "degoogle", "opensource", "freeware", "software",
+  // E-commerce
+  "ecommerce", "shopify", "squarespace", "wix",
+  // Other relevant
+  "blogger", "blogging", "smallbusiness",
 ]);
 
 const MEDIUM_RELEVANCE_SUBREDDITS = new Set([
-  "technology",
-  "programming",
-  "askprogramming",
-  "nostupidquestions",
-  "howto",
-  "internetisbeautiful",
-  "coolguides",
-  "datahoarder",
+  "technology", "programming", "askprogramming", "learnprogramming",
+  "nostupidquestions", "howto", "internetisbeautiful", "coolguides",
+  "datahoarder", "techsupport", "mac", "windows", "linux",
+  "webapps", "apps", "producthunters",
 ]);
 
 interface RedditPost {
