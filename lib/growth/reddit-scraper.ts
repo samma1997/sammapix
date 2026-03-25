@@ -53,6 +53,25 @@ const SUBREDDIT_SEARCHES = [
   // Self-hosted / Privacy
   { sub: "selfhosted", queries: ["image compression", "image optimizer", "photo management", "privacy"] },
   { sub: "degoogle", queries: ["image tool", "privacy", "browser based", "no upload"] },
+  // Photography workflow
+  { sub: "AskPhotography", queries: ["compress photos", "batch rename", "heic to jpg", "photo workflow", "organize photos"] },
+  { sub: "postprocessing", queries: ["batch processing", "image compression", "export settings", "webp"] },
+  { sub: "GIMP", queries: ["batch resize", "compress", "convert format", "webp"] },
+  // Content creators / Bloggers
+  { sub: "NewTubers", queries: ["thumbnail optimization", "image compression", "reduce file size"] },
+  { sub: "Productivity", queries: ["image tool", "batch processing", "compress images", "free tool"] },
+  { sub: "DigitalNomad", queries: ["image tool", "browser tool", "compress photos", "no upload"] },
+  { sub: "freelance", queries: ["image optimization", "batch resize", "client images"] },
+  // Marketing / Business
+  { sub: "marketing", queries: ["image optimization", "page speed", "compress images", "website performance"] },
+  { sub: "juststart", queries: ["image optimization", "page speed", "compress images", "core web vitals"] },
+  { sub: "EntrepreneurRideAlong", queries: ["free tool", "image tool", "launched", "built"] },
+  { sub: "growthhacking", queries: ["free tool", "page speed", "image optimization"] },
+  // E-commerce
+  { sub: "Etsy", queries: ["product photos", "compress images", "image size", "photo editing"] },
+  // Tool discovery
+  { sub: "InternetIsBeautiful", queries: ["image", "compress", "photo", "tool"] },
+  { sub: "coolgithubprojects", queries: ["image", "compress", "tool"] },
 ];
 
 // High-relevance subreddits where image optimization discussion is on-topic
@@ -62,24 +81,31 @@ const HIGH_RELEVANCE_SUBREDDITS = new Set([
   "wordpress", "webhosting", "buildawebsite", "nextjs",
   // Photography / Design
   "photography", "graphic_design", "photoshop", "lightroom", "imageprocessing",
+  "askphotography", "postprocessing", "gimp", "darktable", "affinity",
   // SEO
-  "seo",
+  "seo", "juststart",
   // SaaS / Indie / Startup
   "sideproject", "micro_saas", "microsaas", "saas", "indiehackers",
-  "buildinpublic", "entrepreneur", "startups",
+  "buildinpublic", "entrepreneur", "startups", "entrepreneurridealong",
   // Self-hosted / Privacy
   "selfhosted", "degoogle", "opensource", "freeware", "software",
   // E-commerce
-  "ecommerce", "shopify", "squarespace", "wix",
-  // Other relevant
-  "blogger", "blogging", "smallbusiness",
+  "ecommerce", "shopify", "squarespace", "wix", "etsy",
+  // Content creators / Marketing
+  "blogger", "blogging", "smallbusiness", "newtubers",
+  "freelance", "marketing", "growthhacking",
+  // Tool discovery
+  "internetisbeautiful", "coolgithubprojects",
 ]);
 
 const MEDIUM_RELEVANCE_SUBREDDITS = new Set([
   "technology", "programming", "askprogramming", "learnprogramming",
-  "nostupidquestions", "howto", "internetisbeautiful", "coolguides",
+  "nostupidquestions", "howto", "coolguides",
   "datahoarder", "techsupport", "mac", "windows", "linux",
-  "webapps", "apps", "producthunters",
+  "webapps", "apps", "producthunters", "productivity",
+  "digitalnomad", "contentcreators", "digital_marketing",
+  "content_marketing", "emailmarketing", "nocode", "vibecoding",
+  "fulfillmentbyamazon",
 ]);
 
 interface RedditPost {
