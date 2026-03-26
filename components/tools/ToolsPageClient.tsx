@@ -586,7 +586,7 @@ export function ToolsPageClient() {
   return (
     <>
       {/* -- Search + Category tabs -- */}
-      <div className="sticky top-0 z-20 bg-white dark:bg-[#191919] border-b border-gray-100 dark:border-[#2A2A2A]">
+      <div className="sticky top-14 z-20 bg-white dark:bg-[#191919] border-b border-gray-100 dark:border-[#2A2A2A]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col gap-3">
 
           {/* Search input */}
