@@ -108,6 +108,9 @@ const ACTIVITY_ICONS: Record<string, React.ReactNode> = {
   backlink: <Link className="h-3.5 w-3.5" strokeWidth={1.5} />,
   revenue: <DollarSign className="h-3.5 w-3.5" strokeWidth={1.5} />,
   youtube: <Youtube className="h-3.5 w-3.5" strokeWidth={1.5} />,
+  indexing: <Search className="h-3.5 w-3.5" strokeWidth={1.5} />,
+  launch: <DollarSign className="h-3.5 w-3.5" strokeWidth={1.5} />,
+  other: <FileText className="h-3.5 w-3.5" strokeWidth={1.5} />,
 };
 
 /* ── Helpers ── */

@@ -137,6 +137,19 @@ export const growthCompetitors = pgTable("growth_competitors", {
 export type Competitor = typeof growthCompetitors.$inferSelect;
 export type NewCompetitor = typeof growthCompetitors.$inferInsert;
 
+// Activity log — manual entries for tracking what was done and when
+export const growthActivityLog = pgTable("growth_activity_log", {
+  id: serial("id").primaryKey(),
+  type: text("type").notNull(), // 'seo', 'backlink', 'content', 'reddit', 'outreach', 'indexing', 'launch', 'other'
+  title: text("title").notNull(),
+  description: text("description"),
+  url: text("url"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type ActivityLog = typeof growthActivityLog.$inferSelect;
+export type NewActivityLog = typeof growthActivityLog.$inferInsert;
+
 export const growthBrandMentions = pgTable("growth_brand_mentions", {
   id: serial("id").primaryKey(),
   source: text("source").notNull(), // "google", "perplexity", "reddit", "hackernews"

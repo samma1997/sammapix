@@ -8,6 +8,7 @@ import {
   growthDirectorySubmissions,
   growthGscDaily,
   growthYoutubeInsights,
+  growthActivityLog,
 } from "@/lib/db/schema";
 import { sql, eq, and, gte, isNotNull, isNull } from "drizzle-orm";
 import fs from "fs";
@@ -31,7 +32,7 @@ const TARGETS = {
   directories:     { target30: 10,   target60: 15,   target90: 20   },
 } as const;
 
-type ActivityType = "reddit" | "outreach" | "content" | "directory" | "backlink";
+type ActivityType = "reddit" | "outreach" | "content" | "directory" | "backlink" | "seo" | "indexing" | "launch" | "other";
 
 interface ActivityEntry {
   type: ActivityType;
@@ -449,9 +450,26 @@ export async function GET() {
       }
     }
 
+    // Manual activity log entries
+    const manualActivities = await db
+      .select()
+      .from(growthActivityLog)
+      .orderBy(sql`${growthActivityLog.createdAt} desc`)
+      .limit(20);
+
+    for (const row of manualActivities) {
+      if (row.createdAt) {
+        activities.push({
+          type: row.type as ActivityEntry["type"],
+          description: `${row.title}${row.description ? ` — ${truncate(row.description, 80)}` : ""}`,
+          date: new Date(row.createdAt).toISOString(),
+        });
+      }
+    }
+
     const recentActivity = activities
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 10);
+      .slice(0, 20);
 
     return NextResponse.json({
       data: {
