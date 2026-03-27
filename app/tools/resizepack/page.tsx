@@ -5,6 +5,7 @@ import Link from "next/link";
 import ToolHeader from "@/components/tools/ToolHeader";
 import ResizePackClient from "@/components/tools/ResizePackClient";
 import HowToUse from "@/components/tools/HowToUse";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
@@ -42,6 +43,12 @@ export const metadata: Metadata = {
         alt: "SammaPix Batch Image Resizer",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Batch Resize Images Online Free — Social Media Sizes | SammaPix",
+    description:
+      "Resize multiple images at once for Instagram, Facebook, Twitter, LinkedIn. Free online batch resizer — no upload needed.",
   },
 };
 

@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sort Photos by Location Free - GPS Organizer | SammaPix",
+    description:
+      "Organize travel photos by country instantly. GPS sorting, auto-grouping, ZIP download. Free, zero uploads. Perfect for photographers.",
+  },
 };
 
 const features = [

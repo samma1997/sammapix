@@ -34,6 +34,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix BlogDrop" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO | SammaPix",
+    description:
+      "Optimize blog images instantly. Compress, resize to 1200px, convert to WebP, and AI-generate SEO filenames in one click. Free WordPress & CMS tool.",
+  },
 };
 
 const STEPS = [

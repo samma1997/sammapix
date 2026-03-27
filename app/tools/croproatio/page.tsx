@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Crop Image to Aspect Ratio Online Free | SammaPix",
+    description:
+      "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
+  },
 };
 
 const jsonLd = {

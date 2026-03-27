@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
+    description:
+      "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
+  },
 };
 
 const features = [

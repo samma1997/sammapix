@@ -46,6 +46,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "PDF to Image Converter Free Online | JPG PNG WebP | SammaPix",
+    description:
+      "Convert PDF pages to JPG, PNG, or WebP images. 100% free, browser-based, no upload. Each PDF page becomes a separate high-quality image file.",
+  },
 };
 
 // ── Features ──────────────────────────────────────────────────────────────────

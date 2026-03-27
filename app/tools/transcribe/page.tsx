@@ -42,6 +42,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
+    description:
+      "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini. Free- no signup to try.",
+  },
 };
 
 const features = [

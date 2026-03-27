@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import CompressClient from "@/components/tools/CompressClient";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
@@ -54,6 +55,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Image Compressor Online — No Signup, Unlimited | SammaPix",
+    description:
+      "Compress JPG, PNG, WebP images instantly in your browser. Reduce file size up to 90% without quality loss. Free, unlimited, no signup required.",
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -87,29 +94,6 @@ const faqs = [
   },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Cross-sell tools                                                  */
-/* ------------------------------------------------------------------ */
-const crossSellTools = [
-  {
-    name: "Convert to WebP",
-    desc: "Even smaller files with modern format",
-    href: "/tools/webp",
-    icon: FileDown,
-  },
-  {
-    name: "Batch Resize",
-    desc: "Perfect sizes for social media",
-    href: "/tools/resizepack",
-    icon: Layers,
-  },
-  {
-    name: "EXIF Viewer",
-    desc: "Strip metadata before sharing",
-    href: "/tools/exif",
-    icon: Shield,
-  },
-];
 
 /* ------------------------------------------------------------------ */
 /*  Page component                                                    */

@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "EXIF Viewer & Remover Online — Protect Photo Privacy | SammaPix",
+    description:
+      "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
+  },
 };
 
 const features = [

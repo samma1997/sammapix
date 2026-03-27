@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Find Duplicate Photos Online Free — AI Detection | SammaPix",
+    description:
+      "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based — your photos stay private.",
+  },
 };
 
 const features = [

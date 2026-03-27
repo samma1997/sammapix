@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, TrendingUp, Shield, FileImage, FileImage as Webp
 import Link from "next/link";
 import WebpClient from "@/components/tools/WebpClient";
 import HowToUse from "@/components/tools/HowToUse";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
@@ -41,6 +42,12 @@ export const metadata: Metadata = {
         alt: "SammaPix WebP Converter",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC | SammaPix",
+    description:
+      "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
   },
 };
 

@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
+    description:
+      "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
+  },
 };
 
 const steps = [

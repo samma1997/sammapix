@@ -34,6 +34,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix WebLift" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
+    description:
+      "Compress, convert to WebP, and AI-rename images for the web in one click. Free combo tool for web developers and content creators.",
+  },
 };
 
 const STEPS = [

@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Sparkles, Search, Clock } from "lucide-react";
 import Link from "next/link";
 import AiRenameClient from "@/components/tools/AiRenameClient";
 import HowToUse from "@/components/tools/HowToUse";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
@@ -41,6 +42,12 @@ export const metadata: Metadata = {
         alt: "SammaPix AI Image Renaming Tool",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Image Renamer — SEO-Friendly Filenames Free | SammaPix",
+    description:
+      "Rename images automatically with AI. Generates SEO-friendly filenames from image content. Free, browser-based — powered by Google Gemini.",
   },
 };
 

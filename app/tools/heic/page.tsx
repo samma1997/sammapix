@@ -42,6 +42,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "HEIC to JPG Converter Online — Free Batch Conversion | SammaPix",
+    description:
+      "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
+  },
 };
 
 const features = [

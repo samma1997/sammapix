@@ -43,6 +43,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
+    description:
+      "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
+  },
 };
 
 const features = [

@@ -42,6 +42,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
+    description:
+      "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly. No signup required to try.",
+  },
 };
 
 const features = [

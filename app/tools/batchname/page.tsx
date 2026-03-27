@@ -40,6 +40,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Image Renamer — Batch Rename Photos Automatically | SammaPix",
+    description:
+      "Rename thousands of photos with AI in seconds. Get SEO-friendly, descriptive filenames automatically. Free with account.",
+  },
 };
 
 const howToSteps = [

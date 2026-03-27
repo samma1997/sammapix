@@ -43,6 +43,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Add Watermark to Photos Online Free — Batch | SammaPix",
+    description:
+      "Add watermark to photos online for free. Text or image watermark, batch processing, custom positioning. No upload — runs in your browser.",
+  },
 };
 
 const features = [
