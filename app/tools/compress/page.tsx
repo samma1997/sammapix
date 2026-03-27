@@ -7,7 +7,6 @@ import {
   Sparkles,
   Layers,
   Image as ImageIcon,
-  FileDown,
   Zap,
   Minimize2,
   CheckCircle2,
@@ -321,47 +320,7 @@ export default function CompressPage() {
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/*  CROSS-SELL — You might also need                            */}
-      {/* ============================================================ */}
-      <section className="py-10 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-            You might also need
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {crossSellTools.map((tool) => {
-              const Icon = tool.icon;
-              return (
-                <Link
-                  key={tool.href}
-                  href={tool.href}
-                  className="flex items-start gap-3 p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors group"
-                >
-                  <div className="flex-shrink-0 h-8 w-8 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525] flex items-center justify-center">
-                    <Icon
-                      className="h-4 w-4 text-[#737373] group-hover:text-[#171717] dark:group-hover:text-[#E5E5E5] transition-colors"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] flex items-center gap-1">
-                      {tool.name}
-                      <ArrowRight
-                        className="h-3 w-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
-                        strokeWidth={1.5}
-                      />
-                    </p>
-                    <p className="text-xs text-[#A3A3A3] mt-0.5">
-                      {tool.desc}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <RelatedTools toolId="compress" />
 
       {/* ============================================================ */}
       {/*  FAQ — Visible + Schema                                      */}
