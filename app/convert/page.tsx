@@ -86,6 +86,42 @@ const CONVERSIONS = [
     to: "JPG",
     description: "Reduce PNG file size by 60–80 % by converting to JPG.",
   },
+  {
+    pair: "gif-to-webp",
+    from: "GIF",
+    to: "WebP",
+    description: "Convert animated or static GIFs to smaller WebP files.",
+  },
+  {
+    pair: "webp-to-png",
+    from: "WebP",
+    to: "PNG",
+    description: "Convert WebP images to lossless PNG for editing or print.",
+  },
+  {
+    pair: "avif-to-jpg",
+    from: "AVIF",
+    to: "JPG",
+    description: "Convert next-gen AVIF images to universally-supported JPG.",
+  },
+  {
+    pair: "tiff-to-jpg",
+    from: "TIFF",
+    to: "JPG",
+    description: "Convert large TIFF files to lightweight JPG for sharing.",
+  },
+  {
+    pair: "svg-to-png",
+    from: "SVG",
+    to: "PNG",
+    description: "Rasterize SVG vector graphics into pixel-based PNG images.",
+  },
+  {
+    pair: "bmp-to-jpg",
+    from: "BMP",
+    to: "JPG",
+    description: "Convert legacy BMP bitmaps to compressed JPG format.",
+  },
 ];
 
 export default function ConvertIndexPage() {
@@ -106,6 +142,63 @@ export default function ConvertIndexPage() {
       <p className="text-sm text-[#737373] leading-relaxed mb-10">
         Convert between image formats for free. All processing happens inside your browser- your images never leave your device.
       </p>
+
+      {/* JSON-LD BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Convert",
+                item: `${APP_URL}/convert`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* JSON-LD CollectionPage + ItemList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Free Image Format Converter",
+            description:
+              "Convert HEIC to JPG, PNG to WebP, JPG to WebP, and more. All conversions are free, browser-based, and private.",
+            url: `${APP_URL}/convert`,
+            publisher: {
+              "@type": "Organization",
+              name: APP_NAME,
+              url: APP_URL,
+            },
+            mainEntity: {
+              "@type": "ItemList",
+              name: "Image Format Conversions",
+              numberOfItems: CONVERSIONS.length,
+              itemListElement: CONVERSIONS.map((c, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: `${c.from} to ${c.to}`,
+                url: `${APP_URL}/convert/${c.pair}`,
+                description: c.description,
+              })),
+            },
+          }),
+        }}
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {CONVERSIONS.map(({ pair, from, to, description }) => (

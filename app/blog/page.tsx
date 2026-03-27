@@ -18,5 +18,54 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  return <BlogClient />;
+  return (
+    <>
+      <BlogClient />
+
+      {/* JSON-LD BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${APP_URL}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Blog",
+                item: `${APP_URL}/blog`,
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* JSON-LD CollectionPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "SammaPix Blog - Image Optimization Tips & Photography Guides",
+            description:
+              "Learn how to compress images, optimize for SEO, remove EXIF data, sort photos by GPS, and more. Free guides for photographers and web developers.",
+            url: `${APP_URL}/blog`,
+            publisher: {
+              "@type": "Organization",
+              name: "SammaPix",
+              url: APP_URL,
+            },
+          }),
+        }}
+      />
+    </>
+  );
 }
