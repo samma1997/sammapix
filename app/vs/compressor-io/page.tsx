@@ -25,6 +25,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs Compressor.io - Free Image Compressor Comparison 2026",
+    description:
+      "SammaPix vs Compressor.io: compare batch processing, AI features, file limits, and privacy. Find out which free image compressor fits your workflow.",
+  },
 };
 
 const tableRows: { feature: string; sammapix: boolean | string; compressorio: boolean | string }[] = [

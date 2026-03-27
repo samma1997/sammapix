@@ -31,6 +31,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs Birme - Bulk Image Resize & Optimize Comparison 2026",
+    description: "SammaPix vs Birme for bulk image resizing and optimization. SammaPix adds WebP conversion, AI rename, EXIF removal, and compression- all browser-based and free.",
+  },
 };
 
 const tableRows = [

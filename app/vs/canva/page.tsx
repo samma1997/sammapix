@@ -31,6 +31,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs Canva - Image Tools Comparison 2026 | Free",
+    description: "SammaPix vs Canva for image compression and photo tools. SammaPix is faster, fully browser-based, and built specifically for image optimization- not graphic design.",
+  },
 };
 
 const tableRows = [

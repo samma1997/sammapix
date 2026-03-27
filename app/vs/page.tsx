@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs Competitors: Honest Free Image Tool Comparisons | SammaPix",
+    description:
+      "See how SammaPix compares to TinyPNG, Squoosh, Canva, iLoveIMG, and 8 other image tools. Unbiased feature-by-feature comparisons with privacy, speed, and quality analysis.",
+  },
 };
 
 const competitors = [

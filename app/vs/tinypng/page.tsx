@@ -31,6 +31,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs TinyPNG - Comparison 2026 | Free Image Compressor",
+    description: "SammaPix vs TinyPNG comparison. Both free, but SammaPix adds WebP conversion, AI rename, and no file limits. Feature-by-feature breakdown.",
+  },
 };
 
 const tableRows = [

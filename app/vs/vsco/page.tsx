@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs VSCO: Best Photo Editor for Travel Photographers (2026)",
+    description:
+      "SammaPix vs VSCO: honest comparison for travel photographers. Free browser-based tool vs paid mobile app. Batch processing, EXIF removal, AI rename, WebP export- all compared.",
+  },
 };
 
 const tableRows = [

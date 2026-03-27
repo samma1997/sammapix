@@ -31,6 +31,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs Photopea - Image Optimization Comparison 2026",
+    description: "SammaPix vs Photopea. Photopea is a powerful free Photoshop alternative. SammaPix is the faster choice for compression, WebP conversion, and AI rename without the learning curve.",
+  },
 };
 
 const tableRows = [

@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs FilterPixel: Which Photo Optimizer is Better? (2026)",
+    description:
+      "SammaPix vs FilterPixel: free browser-based tool vs paid server-based optimizer. Compare EXIF handling, format support, AI features, and pricing. Find the right tool for your workflow.",
+  },
 };
 
 const tableRows = [

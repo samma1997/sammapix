@@ -31,6 +31,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs Optimizilla - Free Image Compressor Comparison 2026",
+    description: "SammaPix vs Optimizilla comparison. SammaPix is 100% browser-based with no upload, adds WebP conversion and AI rename, and has no 20-image session limit.",
+  },
 };
 
 const tableRows = [

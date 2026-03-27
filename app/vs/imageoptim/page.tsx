@@ -25,6 +25,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs ImageOptim - Which Image Optimizer is Better in 2026?",
+    description:
+      "SammaPix vs ImageOptim: compare features, web vs desktop, AI capabilities, and batch processing. Find the best free image optimizer for your workflow.",
+  },
 };
 
 const tableRows = [

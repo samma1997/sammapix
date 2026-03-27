@@ -25,6 +25,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs iLoveIMG - Which Image Tool Suite is Better in 2026?",
+    description:
+      "SammaPix vs iLoveIMG: compare privacy, AI features, batch processing, and free plan limits. Find the best free image optimizer for your needs.",
+  },
 };
 
 const tableRows: { feature: string; sammapix: boolean | string; iloveimg: boolean | string }[] = [

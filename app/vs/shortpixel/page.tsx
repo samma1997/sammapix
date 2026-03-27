@@ -31,6 +31,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SammaPix vs ShortPixel - Free Image Compression Comparison 2026",
+    description: "SammaPix vs ShortPixel comparison. SammaPix is 100% free, browser-based, and never uploads your files. ShortPixel requires an API key and server-side processing.",
+  },
 };
 
 const tableRows = [

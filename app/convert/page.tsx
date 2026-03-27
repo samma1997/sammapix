@@ -35,6 +35,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `Free Image Format Converter - Convert Any Format | ${APP_NAME}`,
+    description:
+      "Convert HEIC to JPG, PNG to WebP, JPG to WebP, and more. All conversions are free, browser-based, and private- your images never leave your device.",
+  },
 };
 
 const CONVERSIONS = [
