@@ -3,14 +3,14 @@ import Link from "next/link";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Terms of Service - SammaPix",
+  title: "Terms of Service",
   description:
     "SammaPix terms of service. Free and Pro plans, payment terms, file processing disclaimers, AI tool usage, and governing law (Italy / EU).",
   alternates: {
     canonical: `${APP_URL}/terms`,
   },
   openGraph: {
-    title: "Terms of Service - SammaPix",
+    title: "Terms of Service",
     description:
       "SammaPix terms of service. Free and Pro plans, payment terms, file processing disclaimers, AI tool usage, and governing law (Italy / EU).",
     type: "website",

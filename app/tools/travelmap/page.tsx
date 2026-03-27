@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
+  title: "Travel Photo Map Maker - Visualize GPS Routes Free",
   description:
     "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/travelmap` },
   openGraph: {
-    title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
+    title: "Travel Photo Map Maker - Visualize GPS Routes Free",
     description:
       "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
     url: `${APP_URL}/tools/travelmap`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Travel Photo Map Maker - Visualize GPS Routes Free | SammaPix",
+    title: "Travel Photo Map Maker - Visualize GPS Routes Free",
     description:
       "Visualize your journey on an interactive map. Count countries, measure distance, download JSON. Free GPS photo mapper, zero uploads.",
   },

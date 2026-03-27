@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Organize Travel Photos by Country Automatically (Free) | SammaPix",
+  title: "How to Organize Travel Photos by Country Automatically (Free)",
   description:
     "Stop sorting travel photos by hand. Learn how GPS EXIF data lets you organize travel photos by country automatically- free, in-browser, no software needed.",
   alternates: {

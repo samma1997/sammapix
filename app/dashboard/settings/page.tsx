@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth/options";
 import DashboardSettings from "@/components/dashboard/DashboardSettings";
 
 export const metadata = {
-  title: "Settings | SammaPix",
+  title: "Settings",
   description: "Manage your profile, subscription and preferences.",
   robots: { index: false, follow: false },
 };

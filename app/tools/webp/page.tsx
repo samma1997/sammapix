@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Image Format Converter Online — JPG, PNG, WebP, HEIC | SammaPix",
+  title: "Image Format Converter Online — JPG, PNG, WebP, HEIC",
   description:
     "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC | SammaPix",
+    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC",
     description:
       "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
     url: `${APP_URL}/tools/webp`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC | SammaPix",
+    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC",
     description:
       "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
   },

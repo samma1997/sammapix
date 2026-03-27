@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
+  title: "AI Video Transcription - Free Subtitle Generator",
   description:
     "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini. Free- no signup to try.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/transcribe`,
   },
   openGraph: {
-    title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
+    title: "AI Video Transcription - Free Subtitle Generator",
     description:
       "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini.",
     url: `${APP_URL}/tools/transcribe`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Video Transcription - Free Subtitle Generator | SammaPix",
+    title: "AI Video Transcription - Free Subtitle Generator",
     description:
       "Transcribe any video or audio with AI. Get subtitles in SRT format and a full text transcript instantly. Powered by Google Gemini. Free- no signup to try.",
   },

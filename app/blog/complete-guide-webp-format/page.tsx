@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "The Complete Guide to WebP: Why Every Photographer Should Use It | SammaPix Blog",
+    "The Complete Guide to WebP: Why Every Photographer Should Use It",
   description:
     "WebP delivers smaller file sizes than JPEG and PNG without visible quality loss. Learn how WebP works, when to use it, browser support in 2026, and how to convert your photos for free.",
   alternates: {

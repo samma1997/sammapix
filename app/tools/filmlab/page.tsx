@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
+  title: "Film Photo Filters Free Online - Vintage Effects",
   description:
     "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/filmlab`,
   },
   openGraph: {
-    title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
+    title: "Film Photo Filters Free Online - Vintage Effects",
     description:
       "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
     url: `${APP_URL}/tools/filmlab`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Film Photo Filters Free Online - Vintage Effects | SammaPix",
+    title: "Film Photo Filters Free Online - Vintage Effects",
     description:
       "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
   },

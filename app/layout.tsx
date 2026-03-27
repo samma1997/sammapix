@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: `${APP_NAME}- Free Image Optimizer, WebP Converter & AI Rename`,
+    default: `${APP_NAME} — Free Image Optimizer, WebP Converter & AI Rename`,
     template: `%s | ${APP_NAME}`,
   },
   description:

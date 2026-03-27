@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Crop Image to Aspect Ratio Online Free | SammaPix",
+  title: "Crop Image to Aspect Ratio Online Free",
   description:
     "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/croproatio` },
   openGraph: {
-    title: "Crop Image to Aspect Ratio Online Free | SammaPix",
+    title: "Crop Image to Aspect Ratio Online Free",
     description:
       "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
     url: `${APP_URL}/tools/croproatio`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Crop Image to Aspect Ratio Online Free | SammaPix",
+    title: "Crop Image to Aspect Ratio Online Free",
     description:
       "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
   },

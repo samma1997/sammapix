@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth/options";
 import DashboardUpgrade from "@/components/dashboard/DashboardUpgrade";
 
 export const metadata = {
-  title: "Upgrade to Pro | SammaPix",
+  title: "Upgrade to Pro",
   description: "Unlock the full AI photo workflow with SammaPix Pro.",
   robots: { index: false, follow: false },
 };

@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
+  title: "Web Optimize - Compress, Convert to WebP & AI Rename",
   description:
     "Compress, convert to WebP, and AI-rename images for the web in one click. Free combo tool for web developers and content creators.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/weblift`,
   },
   openGraph: {
-    title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
+    title: "Web Optimize - Compress, Convert to WebP & AI Rename",
     description:
       "Compress, convert to WebP, and AI-rename images for the web in one click.",
     url: `${APP_URL}/tools/weblift`,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Optimize - Compress, Convert to WebP & AI Rename | SammaPix",
+    title: "Web Optimize - Compress, Convert to WebP & AI Rename",
     description:
       "Compress, convert to WebP, and AI-rename images for the web in one click. Free combo tool for web developers and content creators.",
   },

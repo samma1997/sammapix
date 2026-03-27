@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Optimize Images for WordPress (2026 Guide) | SammaPix",
+  title: "How to Optimize Images for WordPress (2026 Guide)",
   description:
     "Step-by-step guide to optimize images for WordPress in 2026. Compress, convert to WebP, resize, and strip EXIF data before uploading- improve Core Web Vitals and LCP scores.",
   alternates: {

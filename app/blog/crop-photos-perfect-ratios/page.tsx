@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Crop Photos to Perfect Ratios for Print & Social | SammaPix",
+  title: "Crop Photos to Perfect Ratios for Print & Social",
   description:
     "Learn every crop photo ratio you need: 1:1 for Instagram, 4:6 for print, 16:9 for widescreen, 9:16 for Stories. Includes DPI requirements, composition tips, and batch cropping guide.",
   alternates: {

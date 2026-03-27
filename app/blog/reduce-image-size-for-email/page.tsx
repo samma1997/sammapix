@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Reduce Image Size for Email: Get Under 1MB Fast | SammaPix",
+  title: "Reduce Image Size for Email: Get Under 1MB Fast",
   description:
     "Quickly reduce image file size for email attachments. Compress photos to under 1MB without visible quality loss- free, no signup, works in your browser.",
   alternates: {

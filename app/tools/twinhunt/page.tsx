@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Find Duplicate Photos Online Free — AI Detection | SammaPix",
+  title: "Find Duplicate Photos Online Free — AI Detection",
   description:
     "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based — your photos stay private.",
   keywords: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Find Duplicate Photos Online Free — AI Detection | SammaPix",
+    title: "Find Duplicate Photos Online Free — AI Detection",
     description:
       "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based — your photos stay private.",
   },

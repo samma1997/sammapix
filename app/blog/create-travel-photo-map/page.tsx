@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "How to Create an Interactive Travel Photo Map from Your iPhone Photos | SammaPix",
+    "How to Create an Interactive Travel Photo Map from Your iPhone Photos",
   description:
     "Learn how to create a travel photo map from iPhone photos using GPS EXIF data. A step-by-step guide to visualizing where every photo was taken- no uploads required.",
   alternates: {

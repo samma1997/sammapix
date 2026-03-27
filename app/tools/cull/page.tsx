@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
+  title: "Photo Culling Tool Free - Keyboard Shortcuts",
   description:
     "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/cull` },
   openGraph: {
-    title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
+    title: "Photo Culling Tool Free - Keyboard Shortcuts",
     description:
       "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
     url: `${APP_URL}/tools/cull`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Photo Culling Tool Free - Keyboard Shortcuts | SammaPix",
+    title: "Photo Culling Tool Free - Keyboard Shortcuts",
     description:
       "Cull 100 photos in minutes. Keyboard shortcuts (K/X), zero mouse needed. 10x faster workflow. Free, zero uploads, HEIC support.",
   },

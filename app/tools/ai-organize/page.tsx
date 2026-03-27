@@ -10,7 +10,7 @@ import { FolderOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title:
-    "AI File Organizer — Sort Any File Type with AI | SammaPix",
+    "AI File Organizer — Sort Any File Type with AI",
   description:
     "Drop hundreds of files — photos, PDFs, documents, videos. AI sorts into smart folders, finds duplicates, and renames based on content. Free browser-based tool.",
   keywords: [

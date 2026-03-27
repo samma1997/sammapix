@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Best Free Image Compression Tools in 2026 - Compared | SammaPix Blog",
+    "Best Free Image Compression Tools in 2026 - Compared",
   description:
     "Honest comparison of the best free image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Pros, cons, and our verdict.",
   alternates: {

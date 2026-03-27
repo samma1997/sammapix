@@ -5,7 +5,7 @@ import DashboardCredits from "@/components/dashboard/DashboardCredits";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Credits | SammaPix",
+  title: "AI Credits",
   description: "Buy AI credits for rename, alt text, organize, categorize, and transcribe operations.",
   robots: { index: false, follow: false },
 };

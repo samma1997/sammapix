@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Make Images Load Faster: 7 Proven Methods (2026) | SammaPix",
+  title: "Make Images Load Faster: 7 Proven Methods (2026)",
   description:
     "Speed up your website with 7 image optimization techniques. Compress, convert to WebP, lazy load, use CDN, and more- improve Core Web Vitals and LCP scores.",
   alternates: {

@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Social Media Image Sizes 2026: Complete Cheat Sheet | SammaPix",
+  title: "Social Media Image Sizes 2026: Complete Cheat Sheet",
   description:
     "Every social media image size you need in 2026 - Instagram, Facebook, X, LinkedIn, TikTok, YouTube, and Pinterest. Exact dimensions, aspect ratios, and file size limits in one reference guide.",
   alternates: {

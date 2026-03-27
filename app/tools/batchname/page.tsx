@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Image Renamer — Batch Rename Photos Automatically | SammaPix",
+  title: "AI Image Renamer — Batch Rename Photos Automatically",
   description:
     "Rename thousands of photos with AI in seconds. Get SEO-friendly, descriptive filenames automatically. Free with account.",
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/batchname`,
   },
   openGraph: {
-    title: "AI Image Renamer — Batch Rename Photos Automatically | SammaPix",
+    title: "AI Image Renamer — Batch Rename Photos Automatically",
     description:
       "Rename thousands of photos with AI in seconds. Get SEO-friendly, descriptive filenames automatically. Free with account.",
     url: `${APP_URL}/tools/batchname`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Image Renamer — Batch Rename Photos Automatically | SammaPix",
+    title: "AI Image Renamer — Batch Rename Photos Automatically",
     description:
       "Rename thousands of photos with AI in seconds. Get SEO-friendly, descriptive filenames automatically. Free with account.",
   },

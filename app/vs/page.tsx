@@ -4,7 +4,7 @@ import { ArrowRight, Check, X, ExternalLink } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Competitors: Honest Free Image Tool Comparisons | SammaPix",
+  title: "SammaPix vs Competitors: Honest Free Image Tool Comparisons",
   description:
     "See how SammaPix compares to TinyPNG, Squoosh, Canva, iLoveIMG, and 8 other image tools. Unbiased feature-by-feature comparisons with privacy, speed, and quality analysis.",
   alternates: { canonical: `${APP_URL}/vs` },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SammaPix vs Competitors: Honest Free Image Tool Comparisons | SammaPix",
+    title: "SammaPix vs Competitors: Honest Free Image Tool Comparisons",
     description:
       "See how SammaPix compares to TinyPNG, Squoosh, Canva, iLoveIMG, and 8 other image tools. Unbiased feature-by-feature comparisons with privacy, speed, and quality analysis.",
   },

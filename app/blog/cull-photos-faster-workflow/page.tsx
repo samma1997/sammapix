@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Cull Photos 10x Faster: Complete Workflow Guide | SammaPix",
+  title: "Cull Photos 10x Faster: Complete Workflow Guide",
   description:
     "Learn how to cull photos fast with a proven workflow: rating systems, keyboard shortcuts, side-by-side compare, keep rate benchmarks, and tips for weddings and events.",
   alternates: {

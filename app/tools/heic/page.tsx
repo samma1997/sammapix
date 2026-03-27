@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "HEIC to JPG Converter Online — Free Batch Conversion | SammaPix",
+  title: "HEIC to JPG Converter Online — Free Batch Conversion",
   description:
     "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
   keywords: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/heic`,
   },
   openGraph: {
-    title: "HEIC to JPG Converter Online — Free Batch Conversion | SammaPix",
+    title: "HEIC to JPG Converter Online — Free Batch Conversion",
     description:
       "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
     url: `${APP_URL}/tools/heic`,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HEIC to JPG Converter Online — Free Batch Conversion | SammaPix",
+    title: "HEIC to JPG Converter Online — Free Batch Conversion",
     description:
       "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
   },

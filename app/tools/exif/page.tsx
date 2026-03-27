@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "EXIF Viewer & Remover Online — Protect Photo Privacy | SammaPix",
+  title: "EXIF Viewer & Remover Online — Protect Photo Privacy",
   description:
     "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/exif` },
   openGraph: {
-    title: "EXIF Viewer & Remover Online — Protect Photo Privacy | SammaPix",
+    title: "EXIF Viewer & Remover Online — Protect Photo Privacy",
     description:
       "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
     url: `${APP_URL}/tools/exif`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EXIF Viewer & Remover Online — Protect Photo Privacy | SammaPix",
+    title: "EXIF Viewer & Remover Online — Protect Photo Privacy",
     description:
       "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
   },

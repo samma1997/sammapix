@@ -3,7 +3,7 @@ import Link from "next/link";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Image Optimization Glossary: 30+ Terms Explained | SammaPix",
+  title: "Image Optimization Glossary: 30+ Terms Explained",
   description:
     "Complete glossary of image optimization terms: lossy compression, EXIF data, WebP, AVIF, DPI, aspect ratio, and more. Plain-English definitions with examples.",
   alternates: { canonical: `${APP_URL}/glossary` },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "what is AVIF format",
   ],
   openGraph: {
-    title: "Image Optimization Glossary: 30+ Terms Explained | SammaPix",
+    title: "Image Optimization Glossary: 30+ Terms Explained",
     description:
       "Plain-English definitions for every image optimization term you will ever encounter: lossy, lossless, EXIF, WebP, AVIF, DPI, color space, and 25 more.",
     url: `${APP_URL}/glossary`,

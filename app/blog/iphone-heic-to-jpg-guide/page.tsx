@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Convert iPhone HEIC Photos to JPG Free (No Software) | SammaPix Blog",
+  title: "How to Convert iPhone HEIC Photos to JPG Free (No Software)",
   description:
     "Learn how to convert HEIC to JPG free without installing any software. Step-by-step guide covering iPhone camera settings, Mac Preview, and the fastest browser-based method.",
   alternates: {

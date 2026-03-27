@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Browser-Based Image Tools: The Complete Privacy Guide (2026) | SammaPix",
+    "Browser-Based Image Tools: The Complete Privacy Guide (2026)",
   description:
     "Browser-based image tools process images 100% locally — no uploads, no servers, no data leaks. The definitive 2026 guide to privacy image editing and no-upload image editors.",
   alternates: {

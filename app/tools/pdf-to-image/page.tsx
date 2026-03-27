@@ -13,7 +13,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "PDF to Image Converter Free Online | JPG PNG WebP | SammaPix",
+  title: "PDF to Image Converter Free Online | JPG PNG WebP",
   description:
     "Convert PDF pages to JPG, PNG, or WebP images. 100% free, browser-based, no upload. Each PDF page becomes a separate high-quality image file.",
   keywords: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/pdf-to-image`,
   },
   openGraph: {
-    title: "PDF to Image Converter Free Online | JPG PNG WebP | SammaPix",
+    title: "PDF to Image Converter Free Online | JPG PNG WebP",
     description:
       "Convert PDF pages to JPG, PNG, or WebP images. 100% free, browser-based, no upload. Each PDF page becomes a separate high-quality image file.",
     url: `${APP_URL}/tools/pdf-to-image`,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF to Image Converter Free Online | JPG PNG WebP | SammaPix",
+    title: "PDF to Image Converter Free Online | JPG PNG WebP",
     description:
       "Convert PDF pages to JPG, PNG, or WebP images. 100% free, browser-based, no upload. Each PDF page becomes a separate high-quality image file.",
   },

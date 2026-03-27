@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Best Image Format for Web in 2026: WebP vs AVIF vs JPEG vs PNG | SammaPix",
+    "Best Image Format for Web in 2026: WebP vs AVIF vs JPEG vs PNG",
   description:
     "The definitive guide to choosing the right image format for web. Compare WebP, AVIF, JPEG, PNG, and GIF- file size, quality, browser support, and when to use each.",
   alternates: {

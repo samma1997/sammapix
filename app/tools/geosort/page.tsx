@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Sort Photos by Location Free - GPS Organizer | SammaPix",
+  title: "Sort Photos by Location Free - GPS Organizer",
   description:
     "Organize travel photos by country instantly. GPS sorting, auto-grouping, ZIP download. Free, zero uploads. Perfect for photographers.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/geosort` },
   openGraph: {
-    title: "Sort Photos by Location Free - GPS Organizer | SammaPix",
+    title: "Sort Photos by Location Free - GPS Organizer",
     description:
       "Organize travel photos by country instantly. GPS sorting, auto-grouping, ZIP download. Free, zero uploads. Perfect for photographers.",
     url: `${APP_URL}/tools/geosort`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sort Photos by Location Free - GPS Organizer | SammaPix",
+    title: "Sort Photos by Location Free - GPS Organizer",
     description:
       "Organize travel photos by country instantly. GPS sorting, auto-grouping, ZIP download. Free, zero uploads. Perfect for photographers.",
   },

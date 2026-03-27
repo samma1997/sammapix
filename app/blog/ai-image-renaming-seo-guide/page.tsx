@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How AI Image Renaming Boosts Your SEO (2026 Guide) | SammaPix",
+  title: "How AI Image Renaming Boosts Your SEO (2026 Guide)",
   description:
     "Transform generic camera filenames into keyword-rich image names that rank in Google Image Search. AI-powered SEO guide for photographers.",
   alternates: {

@@ -6,7 +6,7 @@ import { TOOLS } from "@/lib/tools-metadata";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "20 Free Image & Video Tools for Photographers & Developers | SammaPix",
+  title: "20 Free Image & Video Tools for Photographers & Developers",
   description:
     "Complete suite of 20 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [

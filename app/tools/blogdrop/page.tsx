@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO | SammaPix",
+  title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO",
   description:
     "Optimize blog images instantly. Compress, resize to 1200px, convert to WebP, and AI-generate SEO filenames in one click. Free WordPress & CMS tool.",
   keywords: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO | SammaPix",
+    title: "BlogDrop - Blog Image Optimizer: Compress, Resize & SEO",
     description:
       "Optimize blog images instantly. Compress, resize to 1200px, convert to WebP, and AI-generate SEO filenames in one click. Free WordPress & CMS tool.",
   },

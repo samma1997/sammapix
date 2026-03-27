@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Add Film Effects to Digital Photos Free (No Photoshop) | SammaPix",
+  title: "Add Film Effects to Digital Photos Free (No Photoshop)",
   description:
     "Learn how to add realistic film effects to digital photos for free- grain, color shifts, fading, vignette, and light leaks- without Photoshop. Includes Kodak Portra, Fuji Superia, and Ilford HP5 looks.",
   alternates: {

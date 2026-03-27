@@ -3,14 +3,14 @@ import Link from "next/link";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - SammaPix",
+  title: "Privacy Policy",
   description:
     "SammaPix privacy policy. Most image processing happens entirely in your browser. Learn what data we collect, how we use it, and your GDPR rights.",
   alternates: {
     canonical: `${APP_URL}/privacy`,
   },
   openGraph: {
-    title: "Privacy Policy - SammaPix",
+    title: "Privacy Policy",
     description:
       "SammaPix privacy policy. Most image processing happens entirely in your browser. Learn what data we collect, how we use it, and your GDPR rights.",
     type: "website",

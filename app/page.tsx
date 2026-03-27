@@ -7,7 +7,7 @@ import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata = {
-  title: "SammaPix -- AI Photo Workflow Platform for Content Creators",
+  title: "AI Photo Workflow Platform for Content Creators",
   description:
     "Compress, rename with AI, resize, convert -- all in one pipeline. 20 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [

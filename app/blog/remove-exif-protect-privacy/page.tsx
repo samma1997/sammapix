@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "How to Remove EXIF Data and Protect Your Privacy | SammaPix Blog",
+    "How to Remove EXIF Data and Protect Your Privacy",
   description:
     "Every photo you share contains hidden metadata that can reveal your location, device, and identity. Learn what EXIF data is, why it is a privacy risk, and how to strip it for free.",
   alternates: {

@@ -9,7 +9,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
+  title: "AI Alt Text Generator - Accessibility & SEO | Free",
   description:
     "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly. No signup required to try.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/alt-text`,
   },
   openGraph: {
-    title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
+    title: "AI Alt Text Generator - Accessibility & SEO | Free",
     description:
       "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly.",
     url: `${APP_URL}/tools/alt-text`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Alt Text Generator - Accessibility & SEO | Free | SammaPix",
+    title: "AI Alt Text Generator - Accessibility & SEO | Free",
     description:
       "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly. No signup required to try.",
   },

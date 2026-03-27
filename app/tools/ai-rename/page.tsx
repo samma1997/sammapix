@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Image Renamer — SEO-Friendly Filenames Free | SammaPix",
+  title: "AI Image Renamer — SEO-Friendly Filenames Free",
   description:
     "Rename images automatically with AI. Generates SEO-friendly filenames from image content. Free, browser-based — powered by Google Gemini.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Image Renamer — SEO-Friendly Filenames Free | SammaPix",
+    title: "AI Image Renamer — SEO-Friendly Filenames Free",
     description:
       "Rename images automatically with AI. Generates SEO-friendly filenames from image content. Free, browser-based — powered by Google Gemini.",
   },

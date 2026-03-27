@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "10 Best Travel Photography Tips for Beginners (2026 Guide) | SammaPix",
+    "10 Best Travel Photography Tips for Beginners (2026 Guide)",
   description:
     "Master travel photography with 10 proven tips covering composition, golden hour, gear essentials, and GPS tagging. A complete beginner's guide for 2026.",
   alternates: {

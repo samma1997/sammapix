@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Add Watermark to Photos Online Free — Batch | SammaPix",
+  title: "Add Watermark to Photos Online Free — Batch",
   description:
     "Add watermark to photos online for free. Text or image watermark, batch processing, custom positioning. No upload — runs in your browser.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Add Watermark to Photos Online Free — Batch | SammaPix",
+    title: "Add Watermark to Photos Online Free — Batch",
     description:
       "Add watermark to photos online for free. Text or image watermark, batch processing, custom positioning. No upload — runs in your browser.",
   },

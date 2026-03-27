@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
+  title: "How to Batch Watermark Photos for Free (No Photoshop)",
   description:
     "Learn how to batch watermark photos for free without Photoshop. Add text, logo, or QR code watermarks to hundreds of images at once- browser-based, no uploads required.",
   alternates: {
