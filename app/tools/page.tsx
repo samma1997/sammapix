@@ -131,6 +131,7 @@ export default function ToolsPage() {
                   { name: "AI Rename",       fn: "AI-generated SEO filenames using Gemini",            free: true, login: true },
                   { name: "AI Alt Text",     fn: "Generate accessibility-compliant alt text with AI",  free: true, login: true },
                   { name: "Transcribe",      fn: "AI video/audio transcription with SRT subtitles",   free: true, login: true },
+                  { name: "Image to Text (OCR)", fn: "Extract text from photos and screenshots",       free: true, login: true },
                   { name: "FilmLab",         fn: "14 analog film presets -- Kodak, Fuji, Ilford",      free: true, login: false },
                   { name: "StampIt",         fn: "Batch watermark with text or logo, 9 positions",    free: true, login: false },
                   { name: "EXIF Lens",       fn: "Strip GPS, camera data, and all metadata",          free: true, login: false },

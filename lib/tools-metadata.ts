@@ -169,7 +169,16 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Extract text from images with OCR",
     slug: "/tools/transcribe",
     category: "ai",
-    relatedTools: ["blogdrop", "ai-rename", "alt-text", "compress"],
+    relatedTools: ["image-to-text", "blogdrop", "ai-rename", "alt-text"],
+    relatedBlogSlugs: [],
+  },
+  "image-to-text": {
+    id: "image-to-text",
+    name: "Image to Text",
+    shortDesc: "Extract text from images with AI OCR",
+    slug: "/tools/image-to-text",
+    category: "ai",
+    relatedTools: ["transcribe", "ai-rename", "alt-text", "exif"],
     relatedBlogSlugs: [],
   },
   weblift: {
