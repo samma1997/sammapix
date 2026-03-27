@@ -735,6 +735,130 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     ],
     related: ["twitter", "discord", "generic"],
   },
+
+  // ─── PASSPORT ─────────────────────────────────────────────────────────────
+  {
+    slug: "passport",
+    name: "Passport Photo",
+    displayName: "Passport Photo",
+    titleKeyword: "passport photo size",
+    metaDescription:
+      "Resize photos to passport size for any country. US 2x2\", EU 35x45mm, UK, India, China — free, instant, browser-based.",
+    ogDescription:
+      "Resize your photo to the exact passport dimensions for any country — US, EU, UK, India, China, Canada. Free and instant.",
+    keywords: [
+      "passport photo size",
+      "passport photo dimensions",
+      "resize photo for passport",
+      "2x2 passport photo",
+      "passport photo maker online",
+      "passport photo resize free",
+      "us passport photo size in pixels",
+      "passport size photo",
+      "35x45mm photo",
+      "passport photo creator",
+    ],
+    sizes: [
+      { type: "US Passport", width: 600, height: 600, note: "Required for US passport and visa applications" },
+      { type: "EU/Schengen", width: 413, height: 531, note: "Standard for EU passports and ID cards" },
+      { type: "UK Passport", width: 420, height: 540, note: "UK passport and driving licence" },
+      { type: "India Passport", width: 413, height: 531, note: "Indian passport and visa applications" },
+      { type: "China Visa", width: 390, height: 567, note: "Required for Chinese visa applications" },
+      { type: "Canada Passport", width: 591, height: 827, note: "Canadian passport standard" },
+      { type: "Australia Passport", width: 413, height: 531, note: "Australian passport applications" },
+      { type: "Japan Visa", width: 413, height: 531, note: "Japanese visa applications" },
+    ],
+    steps: [
+      "Upload your photo — drag it onto the tool or click to browse. Portraits with a plain background work best.",
+      "Select your country — pick the passport standard you need. The tool automatically sets the correct pixel dimensions.",
+      "Download your resized photo — save the perfectly-sized image. Ready to print or upload to your passport application.",
+    ],
+    faqs: [
+      {
+        q: "What size is a US passport photo in pixels?",
+        a: "A US passport photo must be exactly 2x2 inches (51x51mm). At the standard 300 DPI print resolution, this translates to 600x600 pixels. SammaPix automatically resizes your photo to these exact dimensions.",
+      },
+      {
+        q: "Can I use a phone photo for my passport?",
+        a: "Yes, as long as the photo meets the requirements: plain white or light background, facing forward, neutral expression, and no glasses. SammaPix helps you resize it to the exact dimensions required.",
+      },
+      {
+        q: "What's the difference between passport and visa photo sizes?",
+        a: "Most countries use 35x45mm for passports, but some visa applications have different requirements. For example, US passport photos are 2x2 inches (51x51mm), while Chinese visa photos are 33x48mm. Always check the specific requirements for your application.",
+      },
+      {
+        q: "Do I need to crop my photo before resizing?",
+        a: "Not necessarily. SammaPix can resize and crop your photo to the exact aspect ratio required. For best results, start with a well-centered headshot where your face takes up about 70-80% of the frame.",
+      },
+      {
+        q: "Is this free to use?",
+        a: "Yes, SammaPix's passport photo resizer is completely free. No account required, no watermark, and your photos are processed entirely in your browser — they never leave your device.",
+      },
+    ],
+    related: ["visa", "generic", "linkedin"],
+  },
+
+  // ─── VISA ───────────────────────────────────────────────────────────────────
+  {
+    slug: "visa",
+    name: "Visa Photo",
+    displayName: "Visa Photo",
+    titleKeyword: "visa photo size",
+    metaDescription:
+      "Resize photos to visa application size for any country. US, Schengen, UK, India, China, Japan — free, instant, browser-based.",
+    ogDescription:
+      "Get the exact visa photo dimensions for any country. Resize instantly in your browser — free, no upload.",
+    keywords: [
+      "visa photo size",
+      "visa photo dimensions",
+      "resize photo for visa",
+      "visa photo requirements",
+      "schengen visa photo size",
+      "us visa photo size",
+      "uk visa photo size",
+      "india visa photo size pixels",
+      "visa application photo size",
+      "visa photo maker free",
+    ],
+    sizes: [
+      { type: "US Visa (B1/B2)", width: 600, height: 600, note: "Same as US passport. Required for DS-160 application" },
+      { type: "Schengen Visa", width: 413, height: 531, note: "Standard for all Schengen area visa applications" },
+      { type: "UK Visa", width: 420, height: 540, note: "UK visa and BRP card applications" },
+      { type: "India E-Visa", width: 413, height: 531, note: "Required for Indian e-Visa online application" },
+      { type: "China Visa", width: 390, height: 567, note: "Specific size for Chinese visa — different from standard 35x45mm" },
+      { type: "Japan Visa", width: 413, height: 531, note: "Japanese visa and residence permit" },
+      { type: "Canada Visa", width: 420, height: 540, note: "Canadian visa applications" },
+      { type: "Australia Visa", width: 413, height: 531, note: "Australian visa (subclass 600, 500, etc.)" },
+    ],
+    steps: [
+      "Upload your photo — use a recent portrait with a white or light background. Make sure your face is clearly visible.",
+      "Choose your visa type — select the country and visa category. Each has specific size requirements that we handle automatically.",
+      "Download and submit — your photo is resized to the exact specifications. Ready to upload to the visa application portal or print.",
+    ],
+    faqs: [
+      {
+        q: "What photo size do I need for a Schengen visa?",
+        a: "Schengen visa photos must be 35x45mm (413x531 pixels at 300 DPI). The face should occupy 70-80% of the photo. This size applies to all 27 Schengen area countries.",
+      },
+      {
+        q: "Are visa photo and passport photo the same size?",
+        a: "Often yes, but not always. Most countries use 35x45mm for both. However, the US uses 2x2 inches (51x51mm) for both, and China uses 33x48mm for visas specifically. Always check the specific requirements for your visa type.",
+      },
+      {
+        q: "Can I take a visa photo with my phone?",
+        a: "Yes. Use good lighting, stand against a white wall, and hold the camera at eye level. Then use SammaPix to resize to the exact dimensions required by your visa application.",
+      },
+      {
+        q: "What background color is required for visa photos?",
+        a: "Most visa applications require a white or off-white background. Some countries (like India for OCI cards) may accept a light blue background. Check your specific visa requirements.",
+      },
+      {
+        q: "How many pixels should my visa photo be?",
+        a: "This depends on the country. US visa: 600x600px, Schengen: 413x531px, China: 390x567px, UK: 420x540px. SammaPix automatically sets the correct dimensions when you select your visa type.",
+      },
+    ],
+    related: ["passport", "generic", "linkedin"],
+  },
 ];
 
 /** Map from slug to platform data */
