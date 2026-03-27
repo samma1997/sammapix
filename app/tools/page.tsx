@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { ToolsPageClient } from "@/components/tools/ToolsPageClient";
+import { TOOLS } from "@/lib/tools-metadata";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ToolsPage() {
+  const toolsList = Object.values(TOOLS);
   const toolsSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -51,7 +53,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 20 browser-based image and video optimization tools",
+        description: "Suite of 20+ browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -61,37 +63,17 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "20 free browser-based image and video optimization tools",
-        numberOfItems: 20,
-        itemListElement: [
-          {
-            "@type": "SoftwareApplication",
-            position: 1,
-            name: "Compress",
-            url: "https://sammapix.com/tools/compress",
-            description: "Compress JPG, PNG, WebP, GIF up to 80-90% smaller without quality loss",
-            applicationCategory: "PhotographyApplication",
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-          },
-          {
-            "@type": "SoftwareApplication",
-            position: 2,
-            name: "WebP Converter",
-            url: "https://sammapix.com/tools/webp",
-            description: "Convert images to WebP format, 25-34% smaller than JPEG",
-            applicationCategory: "PhotographyApplication",
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-          },
-          {
-            "@type": "SoftwareApplication",
-            position: 3,
-            name: "AI Rename",
-            url: "https://sammapix.com/tools/ai-rename",
-            description: "AI-generated SEO-optimized filenames and alt text using Gemini Flash",
-            applicationCategory: "PhotographyApplication",
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-          },
-        ],
+        description: "20+ free browser-based image and video optimization tools",
+        numberOfItems: toolsList.length,
+        itemListElement: toolsList.map((tool, index) => ({
+          "@type": "SoftwareApplication",
+          position: index + 1,
+          name: tool.name,
+          url: `https://sammapix.com${tool.slug}`,
+          description: tool.shortDesc,
+          applicationCategory: "PhotographyApplication",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        })),
       },
     ],
   };

@@ -172,6 +172,59 @@ export default function WebLiftPage() {
         </div>
       </section>
 
+      {/* FAQPage Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is WebLift?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "WebLift is a free combo tool by SammaPix that optimizes images for the web in one click. It compresses, converts to WebP, and AI-generates SEO-friendly filenames automatically.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How does WebLift improve web performance?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "WebLift reduces image file sizes by up to 70% through compression at 80% quality and WebP conversion. Smaller images mean faster page loads and better Core Web Vitals scores.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is WebLift free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, WebLift is free. Since it includes AI Rename, a free account is required. Free users get 10 AI credits per day. You can disable AI Rename to use it without an account.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What metrics does WebLift analyze?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "WebLift shows before/after file sizes, compression ratio percentage, and format conversion details. It processes JPG, PNG, WebP, and GIF images into optimized WebP output.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I disable individual steps?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. Each step (Compress, Convert to WebP, AI Rename) can be toggled on or off before processing. If you disable AI Rename, no login is required.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"

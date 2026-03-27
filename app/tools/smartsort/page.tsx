@@ -136,6 +136,57 @@ export default function SmartSortPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is SmartSort?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SmartSort is a free AI-powered image categorizer by SammaPix. It analyzes your photos using Google Gemini AI and automatically sorts them into categories like Landscape, Portrait, Food, Architecture, and more.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How does AI sorting work?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SmartSort sends a small thumbnail of each image to Google Gemini AI for analysis. The AI identifies the content and assigns a category. Your full-resolution images never leave your browser.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is SmartSort free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, SmartSort is free. A free account is required since it uses AI. Free users get 10 AI credits per day. Pro users get unlimited categorization.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What file types does SmartSort support?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SmartSort supports JPG, PNG, WebP, GIF, and HEIC image files. It categorizes any image format your browser can display and downloads organized results as a ZIP with folder structure.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What categories does SmartSort use?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "SmartSort categorizes images into: Landscape, Portrait, Food, Architecture, Screenshot, Document, Product, Animal, Art, and Other. Each result includes a confidence score.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
               {

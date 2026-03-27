@@ -173,6 +173,59 @@ export default function BlogDropPage() {
         </div>
       </section>
 
+      {/* FAQPage Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is BlogDrop?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "BlogDrop is a free combo tool by SammaPix that optimizes images for blog posts. It compresses, resizes to 1200px, converts to WebP, and AI-generates SEO-friendly filenames -- all in one click.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How does BlogDrop work?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Drop your images and BlogDrop runs a 4-step pipeline: compress at 80% quality, resize to max 1200px width, convert to WebP format, and AI-rename with SEO blog keywords. Download individually or as ZIP.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is BlogDrop free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, BlogDrop is free. Since it includes AI Rename, a free account is required. Free users get 10 AI credits per day. Pro users get unlimited credits.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What formats does BlogDrop support?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "BlogDrop accepts JPG, PNG, WebP, and GIF images. Output is always optimized WebP with SEO-friendly filenames, ready for WordPress, Ghost, Webflow, or any CMS.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What CMS platforms does BlogDrop work with?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "BlogDrop outputs optimized WebP images with SEO filenames that work with any CMS -- WordPress, Ghost, Webflow, Squarespace, or any platform that accepts image uploads.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"
