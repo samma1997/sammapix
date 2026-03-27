@@ -400,6 +400,341 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     ],
     related: ["instagram", "pinterest", "youtube-thumbnail"],
   },
+
+  // ─── DISCORD ──────────────────────────────────────────────────────────────
+  {
+    slug: "discord",
+    name: "Discord",
+    displayName: "Discord",
+    titleKeyword: "Discord image sizes",
+    metaDescription:
+      "Resize images for Discord- server icon 512×512, banner 960×540, emoji 128×128, sticker 320×320. Free online, no upload required.",
+    ogDescription:
+      "Resize photos for Discord servers and profiles. Server icon, banner, avatar, emoji, sticker- exact pixel dimensions, free and processed locally.",
+    keywords: [
+      "discord image size",
+      "discord server icon size",
+      "discord banner size",
+      "discord emoji size",
+      "resize image for discord",
+      "discord profile picture size",
+      "discord sticker dimensions",
+      "discord server splash size",
+      "resize for discord free",
+      "discord image dimensions 2026",
+    ],
+    sizes: [
+      { type: "Server Icon", width: 512, height: 512, note: "Square, displayed as circle" },
+      { type: "Banner", width: 960, height: 540, note: "Server or profile banner" },
+      { type: "Profile Avatar", width: 128, height: 128, note: "Minimum recommended" },
+      { type: "Emoji", width: 128, height: 128, note: "Custom server emoji" },
+      { type: "Sticker", width: 320, height: 320, note: "Custom server sticker" },
+      { type: "Server Splash", width: 1920, height: 1080, note: "Server invite background" },
+    ],
+    steps: [
+      "Drop your image into ResizePack and select the Discord preset that matches your need - Server Icon, Banner, Emoji, Sticker or Splash.",
+      "Discord crops server icons into circles, so center your subject. For emojis and stickers, make sure the design reads clearly at small sizes- use CropRatio first if needed.",
+      "Download the resized file and upload directly to your Discord server settings. The image will display crisp on both desktop and mobile clients.",
+    ],
+    faqs: [
+      {
+        q: "What size should a Discord server icon be?",
+        a: "The recommended Discord server icon size is 512×512 px. Discord displays it as a circle, so keep important content centered and avoid placing anything in the corners. Supported formats are JPG, PNG, and GIF (animated icons require Nitro Boost level 1+).",
+      },
+      {
+        q: "What are the Discord emoji size limits?",
+        a: "Discord custom emojis must be 128×128 px or smaller, with a maximum file size of 256 KB. For the sharpest result, design at exactly 128×128 px. Both static (PNG/JPG) and animated (GIF) formats are supported.",
+      },
+      {
+        q: "What is the correct Discord banner size?",
+        a: "Discord server banners and profile banners should be 960×540 px (16:9 ratio). Animated banners (GIF) are available for Nitro users. Keep key content centered since Discord may crop edges on smaller screens.",
+      },
+      {
+        q: "What size are Discord stickers?",
+        a: "Discord stickers should be 320×320 px with a maximum file size of 512 KB. They support PNG and APNG (animated) formats. Lottie stickers follow a different spec and require JSON files.",
+      },
+      {
+        q: "What resolution is the Discord server splash?",
+        a: "The server invite splash background should be 1920×1080 px (16:9 ratio). This image appears when someone receives an invite to your server. Only servers with Boost level 1 or higher can set a custom splash.",
+      },
+    ],
+    related: ["slack", "twitch", "generic"],
+  },
+
+  // ─── SLACK ────────────────────────────────────────────────────────────────
+  {
+    slug: "slack",
+    name: "Slack",
+    displayName: "Slack",
+    titleKeyword: "Slack image sizes",
+    metaDescription:
+      "Resize images for Slack- workspace icon 132×132, profile photo 512×512, shared image 2000×2000, emoji 128×128. Free online tool.",
+    ogDescription:
+      "Resize photos for Slack workspaces and profiles. Workspace icon, profile picture, shared images, custom emoji- exact dimensions, free and private.",
+    keywords: [
+      "slack image size",
+      "slack workspace icon size",
+      "slack profile photo size",
+      "slack custom emoji size",
+      "resize image for slack",
+      "slack shared image dimensions",
+      "resize for slack free",
+      "slack image dimensions 2026",
+      "slack profile picture dimensions",
+      "slack emoji upload size",
+    ],
+    sizes: [
+      { type: "Workspace Icon", width: 132, height: 132, note: "Square, displayed in sidebar" },
+      { type: "Profile Photo", width: 512, height: 512, note: "Recommended resolution" },
+      { type: "Shared Image", width: 2000, height: 2000, note: "Max dimensions for uploads" },
+      { type: "Custom Emoji", width: 128, height: 128, note: "Square, max 128 KB" },
+    ],
+    steps: [
+      "Open ResizePack, drop your image and choose the Slack preset - Workspace Icon, Profile Photo, Shared Image or Custom Emoji.",
+      "For workspace icons, center your logo within the safe area since Slack rounds the corners. For emojis, ensure the design is legible at very small display sizes.",
+      "Download and upload directly to Slack via workspace settings or your profile. Slack accepts JPG, PNG, and GIF formats for most image types.",
+    ],
+    faqs: [
+      {
+        q: "What size should a Slack workspace icon be?",
+        a: "The recommended Slack workspace icon size is 132×132 px. Slack displays it with rounded corners in the sidebar. Upload a square image at 132×132 or larger for the crispest result across desktop and mobile apps.",
+      },
+      {
+        q: "What is the ideal Slack profile photo size?",
+        a: "Upload your Slack profile photo at 512×512 px for the best quality. Slack displays profile pictures at various sizes throughout the interface, from tiny avatars in threads to larger previews in profiles. A 512 px source ensures sharpness everywhere.",
+      },
+      {
+        q: "What are Slack custom emoji requirements?",
+        a: "Slack custom emojis should be 128×128 px or smaller, with a maximum file size of 128 KB. Square images work best. Slack supports JPG, PNG, and GIF formats for custom emojis. Non-square images will be stretched to fit.",
+      },
+      {
+        q: "What is the maximum image size I can share in Slack?",
+        a: "Slack supports shared images up to 2000×2000 px. Files can be up to 1 GB on paid plans (free plan limit is lower). For the best inline preview quality, keep images under 2000 px on the longest side. Slack generates thumbnails automatically.",
+      },
+    ],
+    related: ["discord", "email", "generic"],
+  },
+
+  // ─── TWITCH ───────────────────────────────────────────────────────────────
+  {
+    slug: "twitch",
+    name: "Twitch",
+    displayName: "Twitch",
+    titleKeyword: "Twitch image sizes",
+    metaDescription:
+      "Resize images for Twitch- profile 256×256, offline banner 1920×1080, panel 320×160, emote 112×112. Free online, no upload.",
+    ogDescription:
+      "Resize photos for your Twitch channel. Profile picture, offline banner, panels, emotes, overlays and thumbnails- exact pixel dimensions, free and private.",
+    keywords: [
+      "twitch image size",
+      "twitch profile picture size",
+      "twitch offline banner size",
+      "twitch panel size",
+      "twitch emote size",
+      "resize image for twitch",
+      "twitch overlay dimensions",
+      "twitch thumbnail size",
+      "resize for twitch free",
+      "twitch image dimensions 2026",
+    ],
+    sizes: [
+      { type: "Profile Picture", width: 256, height: 256, note: "Square, displayed as circle" },
+      { type: "Offline Banner", width: 1920, height: 1080, note: "Shown when stream is offline" },
+      { type: "Panel Image", width: 320, height: 160, note: "Below-stream info panels" },
+      { type: "Emote", width: 112, height: 112, note: "Largest emote size (also 56×56, 28×28)" },
+      { type: "Stream Overlay", width: 1920, height: 1080, note: "Full HD overlay frame" },
+      { type: "Video Thumbnail", width: 1280, height: 720, note: "VOD and clip thumbnails" },
+    ],
+    steps: [
+      "Drop your image into ResizePack and select the Twitch preset - Profile, Offline Banner, Panel, Emote, Overlay or Thumbnail.",
+      "For emotes, design at 112×112 px but test readability at 28×28 px (the smallest display size). Use CropRatio first to frame the subject tightly for maximum impact at small sizes.",
+      "Download and upload to your Twitch dashboard. Emotes require Affiliate or Partner status. Panels and banners can be updated by any streamer from the channel settings page.",
+    ],
+    faqs: [
+      {
+        q: "What size should a Twitch profile picture be?",
+        a: "The recommended Twitch profile picture size is 256×256 px. Twitch displays it as a circle on your channel page and as a small square in chat. Upload at exactly 256×256 for the sharpest result. Supported formats are JPG, PNG, and GIF.",
+      },
+      {
+        q: "What is the correct Twitch offline banner size?",
+        a: "The recommended Twitch offline banner (offline screen) size is 1920×1080 px (16:9 ratio). This image is displayed when your stream is not live. Use it to show your schedule, social links, or branding. Keep file size under 10 MB.",
+      },
+      {
+        q: "What are the Twitch emote size requirements?",
+        a: "Twitch emotes must be uploaded in three sizes: 28×28, 56×56, and 112×112 px. The largest size (112×112) is the source- Twitch scales down from it. Maximum file size is 25 KB per emote. PNG with transparent background is recommended.",
+      },
+      {
+        q: "What size are Twitch panels?",
+        a: "Twitch info panels below the stream should be 320 px wide. Height is flexible but 160 px (2:1 ratio) is the most common. Keep text large and readable since panels are viewed on various screen sizes. PNG and JPG are both supported.",
+      },
+      {
+        q: "What resolution should a Twitch stream overlay be?",
+        a: "Stream overlays should match your broadcast resolution, typically 1920×1080 px (Full HD). Use PNG with transparency so the overlay frames your gameplay or camera feed. Keep the overlay lightweight to avoid impacting stream performance.",
+      },
+    ],
+    related: ["youtube-thumbnail", "discord", "generic"],
+  },
+
+  // ─── TELEGRAM ─────────────────────────────────────────────────────────────
+  {
+    slug: "telegram",
+    name: "Telegram",
+    displayName: "Telegram",
+    titleKeyword: "Telegram image sizes",
+    metaDescription:
+      "Resize images for Telegram- profile photo 512×512, channel photo 512×512, sticker 512×512, inline result 300×200. Free online tool.",
+    ogDescription:
+      "Resize photos for Telegram profiles, channels, and stickers. Exact pixel dimensions for every Telegram image type- free, fast, and processed locally.",
+    keywords: [
+      "telegram image size",
+      "telegram profile photo size",
+      "telegram sticker size",
+      "telegram channel photo size",
+      "resize image for telegram",
+      "telegram sticker dimensions",
+      "telegram inline bot image size",
+      "resize for telegram free",
+      "telegram image dimensions 2026",
+      "telegram photo upload size",
+    ],
+    sizes: [
+      { type: "Profile Photo", width: 512, height: 512, note: "Displayed as circle" },
+      { type: "Channel Photo", width: 512, height: 512, note: "Group or channel avatar" },
+      { type: "Sticker", width: 512, height: 512, note: "One side must be 512 px" },
+      { type: "Inline Bot Result", width: 300, height: 200, note: "Thumbnail for inline results" },
+    ],
+    steps: [
+      "Open ResizePack, drop your image and select the Telegram preset - Profile Photo, Channel Photo, Sticker or Inline Bot Result.",
+      "Telegram displays profile photos as circles, so center your subject. For stickers, one side must be exactly 512 px- the other can be shorter. Use CropRatio to frame it first.",
+      "Download and upload to Telegram. For stickers, use the @Stickers bot to create your sticker pack. Profile and channel photos are set directly in the app settings.",
+    ],
+    faqs: [
+      {
+        q: "What size should a Telegram profile photo be?",
+        a: "The recommended Telegram profile photo size is 512×512 px. Telegram displays profile photos as circles in chats and as squares in the profile view. A 512 px source provides crisp quality at all display sizes across desktop and mobile.",
+      },
+      {
+        q: "What are the Telegram sticker size requirements?",
+        a: "Telegram stickers must have one side exactly 512 px, with the other side being 512 px or less. Static stickers use WebP format, animated stickers use TGS (Lottie), and video stickers use WebM. Maximum file size is 512 KB for static stickers.",
+      },
+      {
+        q: "What size is a Telegram channel photo?",
+        a: "Telegram channel and group photos should be 512×512 px. Like profile photos, they are displayed as circles in chat lists. Upload a square image centered on your logo or key visual for the best appearance across all Telegram clients.",
+      },
+      {
+        q: "Does Telegram compress uploaded images?",
+        a: "Yes, Telegram compresses images sent in chat. To send full-resolution images, use the 'Send as file' option instead of 'Send as photo'. Photos sent normally are compressed to approximately 1280 px on the longest side and converted to JPEG.",
+      },
+    ],
+    related: ["whatsapp", "discord", "generic"],
+  },
+
+  // ─── THREADS ──────────────────────────────────────────────────────────────
+  {
+    slug: "threads",
+    name: "Threads",
+    displayName: "Threads",
+    titleKeyword: "Threads image sizes",
+    metaDescription:
+      "Resize images for Threads- profile photo 320×320, image post 1080×1350, carousel 1080×1080. Free online, no upload required.",
+    ogDescription:
+      "Resize photos for Threads by Meta. Profile picture, image posts, and carousel images at the exact dimensions- free and processed locally in your browser.",
+    keywords: [
+      "threads image size",
+      "threads profile photo size",
+      "threads post dimensions",
+      "threads carousel size",
+      "resize image for threads",
+      "threads image post size 2026",
+      "threads photo dimensions",
+      "resize for threads free",
+      "threads by meta image size",
+      "threads portrait post size",
+    ],
+    sizes: [
+      { type: "Profile Photo", width: 320, height: 320, note: "Synced from Instagram by default" },
+      { type: "Image Post", width: 1080, height: 1350, note: "Portrait optimal (4:5 ratio)" },
+      { type: "Carousel Image", width: 1080, height: 1080, note: "Square format for carousels" },
+    ],
+    steps: [
+      "Drop your image into ResizePack and choose the Threads preset - Profile Photo, Image Post (portrait) or Carousel Image (square).",
+      "For image posts, 1080×1350 (4:5 portrait) takes up the most vertical space in the feed. Use CropRatio at 4:5 first, then resize for the perfect frame.",
+      "Download and upload directly to Threads. Your image will display sharp on all devices. Threads shares the same image infrastructure as Instagram.",
+    ],
+    faqs: [
+      {
+        q: "What is the best image size for a Threads post?",
+        a: "The optimal Threads image post size is 1080×1350 px (4:5 portrait ratio). This format takes up the most vertical screen space in users' feeds, maximizing engagement. Threads also supports square (1:1) and landscape formats.",
+      },
+      {
+        q: "What size is the Threads profile photo?",
+        a: "Threads profile photos are 320×320 px. By default, Threads syncs your profile picture from Instagram. If you want a different photo on Threads, you can update it separately in the app settings. The photo is displayed as a circle.",
+      },
+      {
+        q: "What size should Threads carousel images be?",
+        a: "Threads carousel images work best at 1080×1080 px (1:1 square). You can include up to 10 images in a carousel. All images in a carousel should use the same aspect ratio for a consistent look as users swipe through them.",
+      },
+      {
+        q: "Does Threads compress uploaded images?",
+        a: "Yes, Threads compresses images on upload, similar to Instagram. Uploading at exactly 1080 px wide with high-quality JPEG compression (90%+) gives the best result after Threads' own encoding. Avoid uploading images much larger than 1080 px wide.",
+      },
+    ],
+    related: ["instagram", "twitter", "generic"],
+  },
+
+  // ─── MASTODON ─────────────────────────────────────────────────────────────
+  {
+    slug: "mastodon",
+    name: "Mastodon",
+    displayName: "Mastodon",
+    titleKeyword: "Mastodon image sizes",
+    metaDescription:
+      "Resize images for Mastodon- avatar 400×400, header 1500×500, media attachment 1920×1080, custom emoji 50×50+. Free online tool.",
+    ogDescription:
+      "Resize photos for Mastodon profiles and posts. Avatar, header image, media attachments, custom emoji- exact dimensions, free and processed locally.",
+    keywords: [
+      "mastodon image size",
+      "mastodon avatar size",
+      "mastodon header image size",
+      "mastodon media attachment size",
+      "resize image for mastodon",
+      "mastodon custom emoji size",
+      "mastodon profile picture dimensions",
+      "resize for mastodon free",
+      "mastodon image dimensions 2026",
+      "fediverse image size",
+    ],
+    sizes: [
+      { type: "Profile Avatar", width: 400, height: 400, note: "Displayed as circle or rounded square" },
+      { type: "Header Image", width: 1500, height: 500, note: "Profile banner (3:1 ratio)" },
+      { type: "Media Attachment", width: 1920, height: 1080, note: "Max dimensions, 16 MB limit" },
+      { type: "Custom Emoji", width: 50, height: 50, note: "Minimum 50×50, max 50 KB" },
+    ],
+    steps: [
+      "Open ResizePack, drop your image and select the Mastodon preset - Avatar, Header, Media Attachment or Custom Emoji.",
+      "For header images, use CropRatio at 3:1 first to frame your composition, then resize to 1500×500. For avatars, center your subject since some instances display them as circles.",
+      "Download and upload to your Mastodon instance via Preferences > Profile. Media attachments are uploaded directly in the compose window when creating a new post.",
+    ],
+    faqs: [
+      {
+        q: "What size should a Mastodon profile avatar be?",
+        a: "The recommended Mastodon avatar size is 400×400 px. Different Mastodon instances may display avatars as circles or rounded squares depending on their theme. Upload a square image with the subject centered to look good in both display styles.",
+      },
+      {
+        q: "What is the correct Mastodon header image size?",
+        a: "The recommended Mastodon header (banner) size is 1500×500 px (3:1 ratio). This is the same ratio as Twitter headers. Keep important content centered since mobile apps may crop the edges. Maximum file size is typically 2 MB.",
+      },
+      {
+        q: "What are Mastodon media attachment limits?",
+        a: "Mastodon supports media attachments up to 1920×1080 px with a maximum file size of 16 MB for images. Supported formats include JPG, PNG, GIF, and WebP. Images larger than the limit are automatically downscaled by the server.",
+      },
+      {
+        q: "What size are Mastodon custom emojis?",
+        a: "Mastodon custom emojis must be at least 50×50 px. The maximum file size is 50 KB. PNG format with transparency is recommended. Custom emojis are added by instance administrators and can be used by all members of that instance.",
+      },
+    ],
+    related: ["twitter", "discord", "generic"],
+  },
 ];
 
 /** Map from slug to platform data */
