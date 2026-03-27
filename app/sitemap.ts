@@ -140,6 +140,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/convert/jpeg-to-webp",
     "/convert/webp-to-jpg",
     "/convert/png-to-jpg",
+    "/convert/gif-to-webp",
+    "/convert/webp-to-png",
+    "/convert/avif-to-jpg",
+    "/convert/tiff-to-jpg",
+    "/convert/svg-to-png",
+    "/convert/bmp-to-jpg",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

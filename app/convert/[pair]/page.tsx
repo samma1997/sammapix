@@ -531,6 +531,419 @@ const CONVERSIONS: Record<string, ConversionData> = {
       { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
     ],
   },
+
+  "gif-to-webp": {
+    from: "GIF",
+    to: "WebP",
+    fromLabel: "GIF",
+    toLabel: "WebP",
+    toolPath: "/tools/webp",
+    toolLabel: "Open WebP Converter",
+    tagline: "Convert animated GIFs to WebP — up to 50% smaller files with same animation quality.",
+    whyCopy:
+      "GIF is the legacy animation format of the web, but it is severely limited: only 256 colours per frame, no alpha transparency blending, and bloated file sizes. Animated WebP supports 24-bit colour with full alpha, delivers files up to 50 % smaller than equivalent GIFs, and is supported by every major browser since 2020. Switching from GIF to WebP means faster page loads, smoother animations, and lower bandwidth costs.",
+    qualityNote:
+      "WebP supports animation. Most modern browsers display animated WebP natively. The output quality is equal to or better than the original GIF because WebP can use millions of colours instead of GIF's 256-colour palette.",
+    technicalNote:
+      "Each frame of the GIF is decoded in the browser, drawn onto a Canvas element, and re-encoded as a WebP frame using the browser's native encoding engine. For static GIFs, the process is a simple single-frame conversion. The entire pipeline runs client-side with no server upload.",
+    formatTable: [
+      {
+        format: "GIF",
+        fileSize: "Large",
+        quality: "Low (256 colours max)",
+        compatibility: "Universal",
+        useCase: "Simple animations, memes, legacy web",
+      },
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (24-bit + alpha, lossy or lossless)",
+        compatibility: "All modern browsers",
+        useCase: "Animated web content, stickers, performance",
+      },
+      {
+        format: "MP4",
+        fileSize: "Smallest",
+        quality: "Excellent (video codec)",
+        compatibility: "Universal",
+        useCase: "Long animations, video content",
+      },
+      {
+        format: "APNG",
+        fileSize: "Large",
+        quality: "High (lossless)",
+        compatibility: "Most browsers",
+        useCase: "Lossless animations with transparency",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting GIF to WebP preserve the animation?",
+        a: "Yes. WebP supports animated frames just like GIF. All frames, timings, and loop settings are preserved during conversion. The result is a fully animated WebP file that plays in any modern browser.",
+      },
+      {
+        q: "How much smaller is an animated WebP compared to a GIF?",
+        a: "On average, animated WebP files are 40–50 % smaller than equivalent GIFs. The savings come from WebP's superior compression algorithm and its ability to use 24-bit colour instead of GIF's 256-colour palette, which eliminates dithering overhead.",
+      },
+      {
+        q: "Can I use animated WebP on social media?",
+        a: "Most social platforms now support WebP images, but animated WebP support varies. Twitter, Discord, and Telegram support animated WebP. Facebook and Instagram may convert it to video. For maximum compatibility on social, GIF is still the safest choice.",
+      },
+      {
+        q: "Will my animated WebP work in email?",
+        a: "Most email clients do not support animated WebP. For email, stick with GIF or use a static image with a link to the animated version. WebP animations are best suited for web pages and messaging apps.",
+      },
+    ],
+    related: ["png-to-webp", "jpg-to-webp"],
+    blogSlugs: [
+      { slug: "complete-guide-webp-format", title: "The Complete Guide to the WebP Format" },
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "webp-to-png": {
+    from: "WebP",
+    to: "PNG",
+    fromLabel: "WebP",
+    toLabel: "PNG",
+    toolPath: "/tools/webp",
+    toolLabel: "Open WebP Converter",
+    tagline: "Convert WebP images to PNG for maximum compatibility — lossless, instant, free.",
+    whyCopy:
+      "WebP is great for web delivery, but PNG remains the universal choice when you need to edit images in Photoshop, Illustrator, or Figma, send assets to a print shop, or upload to platforms that do not yet accept WebP. Converting WebP to PNG gives you a lossless file that works everywhere — from design tools to legacy CMS platforms.",
+    qualityNote:
+      "PNG is lossless, so the output preserves every pixel from the decoded WebP image. If the original WebP was lossy, the PNG will faithfully reproduce that quality level without adding further degradation. File size will be larger than the WebP source.",
+    technicalNote:
+      "The WebP file is decoded natively by the browser, drawn onto a Canvas element, and exported as PNG via `canvas.toBlob('image/png')`. Since PNG is lossless, this process introduces zero additional quality loss. The entire conversion happens client-side.",
+    formatTable: [
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web delivery, performance optimization",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Editing, design, print, legacy apps",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small–Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, email, social media",
+      },
+      {
+        format: "TIFF",
+        fileSize: "Very Large",
+        quality: "Lossless",
+        compatibility: "Professional apps",
+        useCase: "Print, archival, scanning",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting WebP to PNG lose quality?",
+        a: "No. PNG is a lossless format, so no additional quality is lost during conversion. The output faithfully represents every pixel from the decoded WebP image. If the source WebP was lossy, that quality level is preserved as-is.",
+      },
+      {
+        q: "Why is the PNG file so much larger than the WebP?",
+        a: "PNG uses lossless compression, which preserves every pixel but results in larger files. WebP uses more advanced compression algorithms. A 200 KB WebP can easily become 1–3 MB as PNG — this is expected and normal.",
+      },
+      {
+        q: "When should I convert WebP to PNG instead of JPG?",
+        a: "Choose PNG when you need transparency support, plan to edit the image further in design tools, or need a lossless master copy. Choose JPG when you just need a smaller, universally compatible photo file.",
+      },
+      {
+        q: "Can I batch convert WebP to PNG?",
+        a: "Yes. SammaPix supports batch conversion — drop up to 20 WebP files at once on the free plan (500 on Pro) and download all PNG results as a ZIP archive.",
+      },
+    ],
+    related: ["webp-to-jpg", "png-to-webp"],
+    blogSlugs: [
+      { slug: "complete-guide-webp-format", title: "The Complete Guide to the WebP Format" },
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "avif-to-jpg": {
+    from: "AVIF",
+    to: "JPG",
+    fromLabel: "AVIF",
+    toLabel: "JPG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Compressor",
+    tagline: "Convert AVIF images to widely-compatible JPG format — instant, browser-based, free.",
+    whyCopy:
+      "AVIF is the newest image format on the web, offering exceptional compression. However, many desktop applications, email clients, and older browsers still cannot open AVIF files. Photoshop only added AVIF support in version 24.7, and most print workflows do not recognise it at all. Converting AVIF to JPG gives you a file that works literally everywhere — from Windows Paint to professional print RIPs.",
+    qualityNote:
+      "Converting AVIF to JPG is a lossy-to-lossy conversion. At quality 85–90, the output JPG is visually indistinguishable from the source AVIF. The file size will be larger because JPG's compression is less efficient than AVIF's AV1-based codec.",
+    technicalNote:
+      "The AVIF file is decoded by the browser's native image decoder (supported in Chrome 85+, Firefox 93+, Safari 16.1+), drawn onto a Canvas element, and exported as JPEG via `canvas.toBlob('image/jpeg', quality)`. No server-side processing is required.",
+    formatTable: [
+      {
+        format: "AVIF",
+        fileSize: "Smallest",
+        quality: "Excellent (AV1 codec)",
+        compatibility: "Modern browsers only",
+        useCase: "Next-gen web images, cutting-edge sites",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small–Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, email, print, social media",
+      },
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance, Core Web Vitals",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Graphics, editing, lossless archival",
+      },
+    ],
+    faqs: [
+      {
+        q: "Why can't I open AVIF files on my computer?",
+        a: "AVIF is relatively new (standardised in 2019) and many applications have not yet added support. Windows 10/11 requires the AV1 Video Extension from the Microsoft Store. macOS added support in Ventura. Converting to JPG is the quickest way to make the file universally accessible.",
+      },
+      {
+        q: "Does converting AVIF to JPG lose quality?",
+        a: "Both AVIF and JPG are lossy formats, so re-encoding introduces a small quality loss. At quality 85–90 the difference is invisible in photographs. For critical work, increase quality to 95.",
+      },
+      {
+        q: "Is AVIF better than JPG for websites?",
+        a: "Yes — AVIF files are typically 50 % smaller than equivalent JPGs at the same visual quality. However, if you need to share images outside the browser (email, documents, legacy software), JPG is the safer choice due to its universal support.",
+      },
+      {
+        q: "Can I convert AVIF to JPG in bulk?",
+        a: "Yes. SammaPix processes all files in your browser in parallel. Drop up to 20 AVIF files at once on the free plan (500 on Pro) and download all JPG results as a ZIP.",
+      },
+    ],
+    related: ["heic-to-jpg", "webp-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+      { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
+    ],
+  },
+
+  "tiff-to-jpg": {
+    from: "TIFF",
+    to: "JPG",
+    fromLabel: "TIFF",
+    toLabel: "JPG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Compressor",
+    tagline: "Convert large TIFF files to compact JPG — perfect for sharing scanned documents and photos.",
+    whyCopy:
+      "TIFF is the gold standard for scanning, professional photography, and print production — but TIFF files are enormous (often 20–100 MB per image) and most web platforms, email clients, and social media sites reject them. Converting TIFF to JPG shrinks file size by 90 %+ while preserving excellent visual quality, making it easy to share scanned documents, archive photos, or upload to any platform.",
+    qualityNote:
+      "TIFF is lossless while JPG is lossy, so there is a theoretical quality reduction. In practice, at quality 85–90, the output JPG is visually indistinguishable from the TIFF original for photographs and scanned documents. For images with text or sharp edges, consider quality 92–95.",
+    technicalNote:
+      "The TIFF file is decoded by the browser's native image decoder, rendered onto a Canvas element with a white background fill, and exported as JPEG via `canvas.toBlob('image/jpeg', quality)`. Multi-page TIFFs are converted frame-by-frame. No upload to any server is required.",
+    formatTable: [
+      {
+        format: "TIFF",
+        fileSize: "Very Large (20–100 MB)",
+        quality: "Lossless",
+        compatibility: "Professional apps only",
+        useCase: "Scanning, print production, archival",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small–Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Web, email, social media, sharing",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Editing, screenshots, graphics",
+      },
+      {
+        format: "PDF",
+        fileSize: "Medium",
+        quality: "Variable",
+        compatibility: "Universal",
+        useCase: "Documents, multi-page scans",
+      },
+    ],
+    faqs: [
+      {
+        q: "How much smaller is a JPG compared to a TIFF?",
+        a: "A typical 30 MB TIFF scan converts to a 1–3 MB JPG at quality 85 — a reduction of over 90 %. The exact ratio depends on image content, but photographs and scanned documents compress extremely well to JPG.",
+      },
+      {
+        q: "Does converting TIFF to JPG lose quality?",
+        a: "Yes, because JPG is lossy. However, at quality 85–90 the visual difference is invisible for photographs and scanned documents. For archival purposes, keep your original TIFF and use the JPG for sharing and web use.",
+      },
+      {
+        q: "Can I convert multi-page TIFF files?",
+        a: "SammaPix converts each page of a multi-page TIFF into a separate JPG file. You can then download all pages individually or as a ZIP archive.",
+      },
+      {
+        q: "Why do scanners save as TIFF instead of JPG?",
+        a: "Scanners default to TIFF because it is lossless — no quality is lost during the scan. This is important for archival and OCR. Once you have the lossless master, you can convert to JPG for everyday sharing and web use.",
+      },
+    ],
+    related: ["heic-to-jpg", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+      { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
+    ],
+  },
+
+  "svg-to-png": {
+    from: "SVG",
+    to: "PNG",
+    fromLabel: "SVG",
+    toLabel: "PNG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Compressor",
+    tagline: "Rasterize SVG vector graphics to PNG — choose your resolution, free and instant.",
+    whyCopy:
+      "SVG is perfect for scalable graphics on the web, but many platforms do not accept it. Email clients (Gmail, Outlook) strip SVG attachments for security reasons. Social media sites (Facebook, Instagram, LinkedIn) require raster images for uploads. Design handoff tools may need PNG previews. Converting SVG to PNG gives you a universally accepted raster image at the resolution you choose.",
+    qualityNote:
+      "SVG to PNG is a rasterization process, not a lossy compression. The output PNG captures every detail of the SVG at the chosen resolution. Since PNG is lossless, there are no compression artefacts. The quality depends entirely on the resolution you select — higher resolution means more detail.",
+    technicalNote:
+      "The SVG is loaded into the browser, rendered at the specified resolution onto a Canvas element (or via the native SVG renderer), and exported as PNG using `canvas.toBlob('image/png')`. All rendering uses the browser's built-in SVG engine, ensuring accurate font and path rendering. No server upload required.",
+    formatTable: [
+      {
+        format: "SVG",
+        fileSize: "Tiny (vector, resolution-independent)",
+        quality: "Perfect at any scale",
+        compatibility: "Browsers only (blocked in email)",
+        useCase: "Logos, icons, illustrations, web graphics",
+      },
+      {
+        format: "PNG",
+        fileSize: "Medium–Large (depends on resolution)",
+        quality: "Lossless (fixed resolution)",
+        compatibility: "Universal",
+        useCase: "Social media, email, design previews, print",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small–Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, web images",
+      },
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "What resolution should I use when converting SVG to PNG?",
+        a: "For social media, 1080px or 1200px wide is ideal. For email headers, 600px works well. For print, use at least 300 DPI at the target size (e.g., 3000px for a 10-inch print). SammaPix lets you specify the exact output dimensions.",
+      },
+      {
+        q: "Does converting SVG to PNG lose quality?",
+        a: "No — as long as you choose a sufficient resolution. SVG is vector (infinitely scalable), while PNG is raster (fixed pixels). The PNG will look perfect at the resolution you choose, but it cannot be scaled up further without becoming blurry.",
+      },
+      {
+        q: "Why do email clients block SVG?",
+        a: "SVG files can contain embedded JavaScript, which poses a security risk. Email clients like Gmail and Outlook strip SVG attachments and inline SVGs to prevent potential XSS attacks. Converting to PNG solves this problem.",
+      },
+      {
+        q: "Can I convert SVG with custom fonts to PNG?",
+        a: "Yes, if the fonts are embedded in the SVG or available in the browser. If the SVG references external fonts that are not loaded, the browser will substitute a default font. For best results, use SVGs with embedded or web-safe fonts.",
+      },
+    ],
+    related: ["png-to-webp", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "bmp-to-jpg": {
+    from: "BMP",
+    to: "JPG",
+    fromLabel: "BMP",
+    toLabel: "JPG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Compressor",
+    tagline: "Convert uncompressed BMP files to optimized JPG — reduce file size by 90%+.",
+    whyCopy:
+      "BMP (Bitmap) is one of the oldest image formats — it stores pixel data with zero compression, resulting in massive file sizes. A single 12-megapixel photo as BMP is over 36 MB. BMP has no place on the modern web or in email. Converting BMP to JPG reduces file size by 90–95 % while maintaining excellent visual quality, making your images practical to share, upload, and store.",
+    qualityNote:
+      "BMP is uncompressed and JPG is lossy, but at quality 85–90 the visual difference is invisible for photographs. Since BMP stores raw pixel data, the conversion to JPG at high quality produces an excellent result with no visible artefacts. The file size reduction is dramatic.",
+    technicalNote:
+      "The BMP file is decoded natively by the browser (all browsers support BMP), drawn onto a Canvas element, and exported as JPEG via `canvas.toBlob('image/jpeg', quality)`. Since BMP is uncompressed, the input quality is perfect — making this an ideal conversion with no generation loss from a previous compression step.",
+    formatTable: [
+      {
+        format: "BMP",
+        fileSize: "Enormous (uncompressed)",
+        quality: "Perfect (no compression)",
+        compatibility: "Universal (legacy)",
+        useCase: "Legacy Windows apps, raw pixel data",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small–Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, web, email, social media",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Graphics, screenshots, editing",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "Why are BMP files so large?",
+        a: "BMP stores every pixel's colour data without any compression. A 4000x3000 image at 24-bit colour requires 36 MB of raw data. Modern formats like JPG and WebP use compression algorithms that reduce this by 90 % or more with minimal visual quality loss.",
+      },
+      {
+        q: "Does converting BMP to JPG lose quality?",
+        a: "Technically yes, because JPG is lossy. However, since BMP is uncompressed, the source quality is perfect — meaning the first JPG compression at quality 85–90 produces an excellent result with no visible artefacts in photographs.",
+      },
+      {
+        q: "Is BMP still used anywhere?",
+        a: "BMP is still used in some legacy Windows applications, embedded systems, and industrial imaging equipment. For everyday use (web, email, social media), BMP has been completely replaced by JPG, PNG, and WebP.",
+      },
+      {
+        q: "Should I convert BMP to JPG or PNG?",
+        a: "For photographs, choose JPG — it produces much smaller files. For images with text, sharp edges, or transparency needs, choose PNG. For web delivery, WebP is the best option for both types.",
+      },
+    ],
+    related: ["tiff-to-jpg", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+      { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------------------
