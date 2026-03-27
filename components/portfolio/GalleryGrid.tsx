@@ -114,11 +114,12 @@ function PhotoTile({
     >
       <Image
         src={photo.srcThumb}
-        alt={photo.alt || "Travel photograph"}
+        alt={photo.alt || photo.caption || photo.description || "Photo from SammaPix portfolio"}
         fill
         sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
         loading={eager ? "eager" : "lazy"}
+        {...(index === 0 ? { priority: true } : {})}
       />
     </button>
   );

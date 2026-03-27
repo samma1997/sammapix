@@ -154,6 +154,7 @@ export default function AboutPage() {
                   className="object-cover brightness-80 group-hover:brightness-100 group-hover:scale-[1.03] transition-all duration-500"
                   sizes="(max-width: 640px) 50vw, 20vw"
                   unoptimized
+                  priority
                 />
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-4 left-4">
