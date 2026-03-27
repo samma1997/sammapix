@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { BLOG_SLUGS, APP_URL } from "@/lib/constants";
 import { getAllPlatforms } from "@/lib/resize-platforms";
+import { getAllTargets } from "@/lib/compress-targets";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages with different priorities and change frequencies
@@ -153,6 +154,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Programmatic compress-to pages — driven from lib/compress-targets.ts
+  const compressToPages: MetadataRoute.Sitemap = getAllTargets().map((t) => ({
+    url: `${APP_URL}/compress-to/${t.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   return [
     ...staticPages,
     ...toolPages,
@@ -161,5 +170,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...portfolioPages,
     ...resizePages,
     ...convertPages,
+    ...compressToPages,
   ];
 }

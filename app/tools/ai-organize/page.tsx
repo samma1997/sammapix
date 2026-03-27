@@ -1,9 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import AiOrganizeClient from "@/components/tools/AiOrganizeClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 import { FolderOpen } from "lucide-react";
@@ -80,12 +80,6 @@ const proTip = {
   linkHref: "/pricing",
 };
 
-const relatedTools = [
-  { name: "SmartSort", href: "/tools/smartsort" },
-  { name: "TwinHunt", href: "/tools/twinhunt" },
-  { name: "AI Rename", href: "/tools/ai-rename" },
-  { name: "BatchName", href: "/tools/batchname" },
-];
 
 const faqItems = [
   {
@@ -238,25 +232,7 @@ export default function AiOrganizePage() {
 
       <HowToUse toolName="AI Organize" steps={howToSteps} proTip={proTip} />
 
-      {/* Related tools */}
-      <section className="py-8 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-widest mb-3">
-            Related tools
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {relatedTools.map((t) => (
-              <Link
-                key={t.name}
-                href={t.href}
-                className="text-sm font-medium text-[#6366F1] hover:text-[#4F46E5] transition-colors"
-              >
-                {t.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RelatedTools toolId="ai-organize" />
 
       {/* FAQ */}
       <section className="py-10 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">

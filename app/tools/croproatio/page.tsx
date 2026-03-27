@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Crop, Hand, FolderArchive, Shield, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Crop, Hand, FolderArchive, Shield } from "lucide-react";
 import CropRatioClient from "@/components/tools/CropRatioClient";
 import ToolHeader from "@/components/tools/ToolHeader";
 import HowToUse from "@/components/tools/HowToUse";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
@@ -390,30 +390,7 @@ export default function CropRatioPage() {
         </div>
       </section>
 
-      {/* Related tools */}
-      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-            More free image tools
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { name: "Resize Images", href: "/tools/resizepack" },
-              { name: "Add Watermark", href: "/tools/stampit" },
-              { name: "Apply Film Effects", href: "/tools/filmlab" },
-            ].map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
-              >
-                {tool.name}
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RelatedTools toolId="croproatio" />
     </main>
   );
 }
