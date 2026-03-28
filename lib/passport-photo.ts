@@ -217,11 +217,17 @@ export async function generatePassportPhoto(
     cropX = Math.max(0, subjectCenterX - cropW / 2);
     cropY = Math.max(0, subjectCenterY - cropH * 0.55);
 
-    // Clamp to image boundaries
-    if (cropX + cropW > srcW) cropX = Math.max(0, srcW - cropW);
-    if (cropY + cropH > srcH) cropY = Math.max(0, srcH - cropH);
-    cropW = Math.min(cropW, srcW - cropX);
-    cropH = Math.min(cropH, srcH - cropY);
+    // Clamp to image boundaries while PRESERVING aspect ratio
+    if (cropW > srcW) {
+      cropW = srcW;
+      cropH = cropW / targetRatio;
+    }
+    if (cropH > srcH) {
+      cropH = srcH;
+      cropW = cropH * targetRatio;
+    }
+    cropX = Math.max(0, Math.min(cropX, srcW - cropW));
+    cropY = Math.max(0, Math.min(cropY, srcH - cropH));
   } else {
     // Without bg removal: centre-crop heuristic
     // Assume face is in the upper-centre region
@@ -250,16 +256,23 @@ export async function generatePassportPhoto(
 
   onProgress?.(80, "Generating final image\u2026");
 
-  /* ---- Step 3: Draw final passport photo ---- */
+  /* ---- Step 3: Draw final passport photo (no stretch!) ---- */
+  // First: crop to an intermediate canvas at the correct aspect ratio
+  // This avoids stretching — we scale uniformly
+  const cropCanvas = new OffscreenCanvas(Math.round(cropW), Math.round(cropH));
+  const cropCtx = cropCanvas.getContext("2d")!;
+  // White background in case crop extends beyond image
+  cropCtx.fillStyle = "#FFFFFF";
+  cropCtx.fillRect(0, 0, cropCanvas.width, cropCanvas.height);
+  cropCtx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, cropCanvas.width, cropCanvas.height);
+
+  // Now resize the correctly-cropped image to the target dimensions
+  // Since cropW/cropH already have the correct aspect ratio, this is a uniform scale
   const outCanvas = new OffscreenCanvas(widthPx, heightPx);
   const outCtx = outCanvas.getContext("2d")!;
-
-  // White background
   outCtx.fillStyle = "#FFFFFF";
   outCtx.fillRect(0, 0, widthPx, heightPx);
-
-  // Draw cropped region
-  outCtx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, widthPx, heightPx);
+  outCtx.drawImage(cropCanvas, 0, 0, widthPx, heightPx);
 
   /* ---- Step 4: Export as JPEG 95% ---- */
   const resultBlob = await outCanvas.convertToBlob({
