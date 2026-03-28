@@ -17,6 +17,9 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconRemoveBg,
+  IconUpscale,
+  IconPassportPhoto,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -67,6 +70,20 @@ const IconTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
     <g className="tr2-l1"><rect x="28" y="29" width="16" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
     <g className="tr2-l2"><rect x="28" y="34" width="12" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
     <g className="tr2-l3"><rect x="28" y="39" width="14" height="2.5" rx="1.25" fill={accent} fillOpacity="0.5"/></g>
+  </svg>
+);
+
+const IconImageToText: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes itt-scan { 0%, 100% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(16px); opacity: 1; } }
+      .itt-scan { animation: itt-scan 2s ease-in-out infinite; }
+    `}</style>
+    <rect x="4" y="4" width="22" height="28" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
+    <circle cx="10" cy="12" r="3" fill={accent} fillOpacity="0.4"/>
+    <path d="M4 24 L10 18 L16 22 L22 16 L26 20" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    <path d="M30 8 L42 8 M30 14 L42 14 M30 20 L38 20 M30 26 L40 26" stroke={accent} strokeWidth="1.5" strokeLinecap="round" fillOpacity="0"/>
+    <rect className="itt-scan" x="3" y="6" width="24" height="2" rx="1" fill={accent} fillOpacity="0.6"/>
   </svg>
 );
 
@@ -436,6 +453,44 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Unlimited"],
     Icon: IconBatchName,
     category: ["Organize"],
+  },
+
+  // ── New tools (Phase 2) ──
+  {
+    name: "Clean Background",
+    href: "/tools/remove-bg",
+    tagline: "Remove image backgrounds instantly with AI. 100% browser-based.",
+    accent: "#EC4899",
+    badges: ["Free", "AI-powered"],
+    Icon: IconRemoveBg,
+    category: ["Optimize"],
+  },
+  {
+    name: "Enhance Resolution",
+    href: "/tools/upscale",
+    tagline: "AI upscale images 2x or 4x without losing quality.",
+    accent: "#8B5CF6",
+    badges: ["Free", "AI-powered"],
+    Icon: IconUpscale,
+    category: ["Optimize"],
+  },
+  {
+    name: "Passport Photo",
+    href: "/tools/passport-photo",
+    tagline: "Auto crop + white background for passport and visa photos. 6 country presets.",
+    accent: "#3B82F6",
+    badges: ["Free", "6 countries"],
+    Icon: IconPassportPhoto,
+    category: ["AI"],
+  },
+  {
+    name: "Image to Text",
+    href: "/tools/image-to-text",
+    tagline: "Extract text from images with AI-powered OCR. 50+ languages.",
+    accent: "#F59E0B",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconImageToText,
+    category: ["AI"],
   },
 ];
 
