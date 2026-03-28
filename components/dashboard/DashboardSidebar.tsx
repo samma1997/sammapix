@@ -20,6 +20,10 @@ import {
   Tv,
   Captions,
   Search,
+  Eraser,
+  Maximize2,
+  UserCheck,
+  ScanText,
   User,
   Crown,
   Menu,
@@ -86,19 +90,24 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Photo Map", slug: "travelmap", href: "/dashboard/tools/travelmap", icon: <Map className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Cull", slug: "cull", href: "/dashboard/tools/cull", icon: <Camera className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Batch Rename", slug: "batchname", href: "/dashboard/tools/batchname", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
+  // New tools
+  { name: "Clean Background", slug: "remove-bg", href: "/dashboard/tools/remove-bg", icon: <Eraser className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Enhance Resolution", slug: "upscale", href: "/dashboard/tools/upscale", icon: <Maximize2 className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Passport Photo", slug: "passport-photo", href: "/dashboard/tools/passport-photo", icon: <UserCheck className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Image to Text", slug: "image-to-text", href: "/dashboard/tools/image-to-text", icon: <ScanText className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio"] },
-  { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize"] },
+  { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio", "remove-bg", "upscale"] },
+  { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit"] },
   { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
 
 // Tools that use AI (show badge)
-const AI_TOOL_SLUGS = new Set(["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize"]);
+const AI_TOOL_SLUGS = new Set(["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "image-to-text", "passport-photo"]);
 
 function getToolBySlug(slug: string): SidebarTool | undefined {
   return ALL_SIDEBAR_TOOLS.find((t) => t.slug === slug);

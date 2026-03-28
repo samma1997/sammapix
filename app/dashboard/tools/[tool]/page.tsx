@@ -19,6 +19,9 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconRemoveBg,
+  IconUpscale,
+  IconPassportPhoto,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -43,6 +46,10 @@ const ComboClient = dynamic(() => import("@/components/tools/ComboClient"));
 const BatchNameClient = dynamic(() => import("@/components/tools/BatchNameClient"));
 const SmartSortClient = dynamic(() => import("@/components/tools/SmartSortClient"));
 const AiOrganizeClient = dynamic(() => import("@/components/tools/AiOrganizeClient"));
+const RemoveBgClient = dynamic(() => import("@/components/tools/RemoveBgClient"));
+const UpscaleClient = dynamic(() => import("@/components/tools/UpscaleClient"));
+const PassportPhotoClient = dynamic(() => import("@/components/tools/PassportPhotoClient"));
+const ImageToTextClient = dynamic(() => import("@/components/tools/ImageToTextClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -66,6 +73,10 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   batchname:   BatchNameClient,
   smartsort:   SmartSortClient,
   "ai-organize": AiOrganizeClient,
+  "remove-bg":   RemoveBgClient,
+  upscale:       UpscaleClient,
+  "passport-photo": PassportPhotoClient,
+  "image-to-text": ImageToTextClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -112,6 +123,10 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   transcribe:  { Icon: IconEXIF,       accent: "#0891B2" },
   batchname:   { Icon: IconResizePack, accent: "#F59E0B" },
   "ai-organize": { Icon: IconAIRename, accent: "#8B5CF6" },
+  "remove-bg":   { Icon: IconRemoveBg, accent: "#EC4899" },
+  upscale:       { Icon: IconUpscale,  accent: "#8B5CF6" },
+  "passport-photo": { Icon: IconPassportPhoto, accent: "#3B82F6" },
+  "image-to-text": { Icon: IconAIRename, accent: "#F59E0B" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
