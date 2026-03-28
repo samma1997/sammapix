@@ -383,6 +383,46 @@ const TOOL_DATA: Record<string, ToolData> = {
     ],
     proTip: { text: "Works best with 50+ photos. The more you add, the smarter the sorting.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
+  "remove-bg": {
+    label: "Clean Background",
+    tagline: "Remove image backgrounds instantly with AI in your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG, or WebP photos." },
+      { title: "AI removes background", desc: "The ONNX model runs in your browser — nothing uploaded." },
+      { title: "Download transparent PNG", desc: "Get PNG files with transparent background." },
+    ],
+    proTip: { text: "Works best with clear subjects. Try Passport Photo for ID photos.", linkLabel: "Try Passport Photo", linkHref: "/dashboard/tools/passport-photo" },
+  },
+  upscale: {
+    label: "Enhance Resolution",
+    tagline: "AI upscale images 2x or 4x without losing quality.",
+    steps: [
+      { title: "Drop an image", desc: "Add a photo you want to enlarge." },
+      { title: "Choose 2x or 4x", desc: "Select the upscale factor." },
+      { title: "Download enhanced", desc: "Get a larger, sharper PNG." },
+    ],
+    proTip: { text: "Free: 5 upscales/day (max 1500px). Pro: 100/day, no size limit.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
+  },
+  "passport-photo": {
+    label: "Passport Photo",
+    tagline: "Auto crop + white background for passport and visa photos.",
+    steps: [
+      { title: "Upload a portrait", desc: "Add a photo with your face clearly visible." },
+      { title: "Select country", desc: "Choose US, EU, UK, India, China, or Canada preset." },
+      { title: "Download ready photo", desc: "Get a JPG sized to official requirements." },
+    ],
+    proTip: { text: "Enable 'Remove background' for best results with non-white backgrounds.", linkLabel: "Try Clean Background", linkHref: "/dashboard/tools/remove-bg" },
+  },
+  "image-to-text": {
+    label: "Image to Text",
+    tagline: "Extract text from images with AI-powered OCR.",
+    steps: [
+      { title: "Upload an image", desc: "Add a photo, screenshot, or scanned document." },
+      { title: "AI extracts text", desc: "Google Gemini reads all visible text." },
+      { title: "Copy or download", desc: "Copy to clipboard or save as .txt file." },
+    ],
+    proTip: { text: "Works with 50+ languages. Best with printed text and clear photos.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
+  },
 };
 
 // ─── Combo wrapper component ─────────────────────────────────────────────────
