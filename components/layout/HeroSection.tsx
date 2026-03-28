@@ -47,7 +47,7 @@ export default function HeroSection() {
 
         {/* Trust badges */}
         <p className="mt-6 text-xs text-[#A3A3A3] dark:text-[#525252] flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <span>20 tools</span>
+          <span>25 tools</span>
           <span className="text-[#D4D4D4] dark:text-[#404040]">&middot;</span>
           <span>100% browser</span>
           <span className="text-[#D4D4D4] dark:text-[#404040]">&middot;</span>

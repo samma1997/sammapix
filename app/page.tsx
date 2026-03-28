@@ -55,7 +55,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is SammaPix really free?",
     answer:
-      "Yes. All 20 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
+      "Yes. All 25 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
   },
   {
     question: "What image formats are supported?",
@@ -80,7 +80,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What's the difference between Free and Pro?",
     answer:
-      "Free tier includes all 20 tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.",
+      "Free tier includes all 25 tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.",
   },
   {
     question: "How does image compression work without losing quality?",
@@ -366,7 +366,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
           {[
             { value: "1.2M+", label: "Images optimized" },
-            { value: "23", label: "Free tools" },
+            { value: "25", label: "Free tools" },
             { value: "100%", label: "Browser-based" },
             { value: "0", label: "Files uploaded to servers" },
           ].map((stat) => (

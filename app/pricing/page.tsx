@@ -46,6 +46,7 @@ const toolGrid = [
   { Icon: IconRemoveBg,  name: "Clean BG",    accent: "#EC4899" },
   { Icon: IconUpscale,   name: "Upscale",     accent: "#8B5CF6" },
   { Icon: IconPassportPhoto, name: "Passport", accent: "#3B82F6" },
+  { Icon: IconAIRename,     name: "OCR",       accent: "#F59E0B" },
 ] as const;
 
 // ─── Payment banners ───────────────────────────────────────────────────────────

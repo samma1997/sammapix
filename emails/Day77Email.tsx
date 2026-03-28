@@ -148,7 +148,7 @@ export function Day77Email({ name }: Day77EmailProps) {
               <Text style={updateLabel}>New</Text>
               <Text style={updateTitle}>Dark mode everywhere</Text>
               <Text style={updateDesc}>
-                Full dark mode support across all 20 tools. Follows your system
+                Full dark mode support across all 25 tools. Follows your system
                 preference or toggle it manually.
               </Text>
             </Section>
