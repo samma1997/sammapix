@@ -6,9 +6,9 @@ import { TOOLS } from "@/lib/tools-metadata";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "23 Free Image & Video Tools for Photographers & Developers",
+  title: "25 Free Image & Video Tools for Photographers & Developers",
   description:
-    "Complete suite of 23 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 25 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://sammapix.com/tools" },
   openGraph: {
-    title: "23 Free Image & Video Tools for Photographers & Developers",
+    title: "25 Free Image & Video Tools for Photographers & Developers",
     description:
       "Compress, convert, rename, resize, remove EXIF, apply film effects, batch process and more. All in browser. No uploads. No account needed.",
     url: "https://sammapix.com/tools",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix -- 23 Free Image & Video Tools",
+        alt: "SammaPix -- 25 Free Image & Video Tools",
       },
     ],
   },
@@ -95,7 +95,7 @@ export default function ToolsPage() {
             Everything you need to optimize, rename, resize and organize your images
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            23 free browser-based tools. No uploads, no signup needed for most tools.
+            25 free browser-based tools. No uploads, no signup needed for most tools.
           </p>
         </div>
       </section>
@@ -145,6 +145,8 @@ export default function ToolsPage() {
                   { name: "SmartSort",       fn: "AI categorizes and sorts images into folders",        free: true, login: true },
                   { name: "BatchName",       fn: "Rename files with custom pattern ({001}, {date})",  free: true, login: false },
                   { name: "Clean Background",fn: "Remove image background instantly with AI",          free: true, login: false },
+                  { name: "Enhance Resolution", fn: "AI upscale images 2x or 4x without losing quality",  free: true, login: false },
+                  { name: "Passport Photo",     fn: "Auto crop + white background for passport/visa photos", free: true, login: false },
                 ].map((row) => (
                   <tr
                     key={row.name}

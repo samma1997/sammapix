@@ -456,6 +456,69 @@ export const IconRemoveBg: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconUpscale: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ups-grow {
+        0%, 20%  { transform: scale(0.6); opacity: 0.4; }
+        50%, 70% { transform: scale(1); opacity: 1; }
+        90%, 100%{ transform: scale(0.6); opacity: 0.4; }
+      }
+      @keyframes ups-sparkle {
+        0%, 40%  { opacity: 0; transform: scale(0); }
+        60%, 80% { opacity: 1; transform: scale(1); }
+        95%, 100%{ opacity: 0; transform: scale(0); }
+      }
+      .ups-img { transform-origin: 20px 24px; animation: ups-grow 2.8s ease-in-out infinite; }
+      .ups-sp1 { transform-origin: 38px 10px; animation: ups-sparkle 2.8s ease-in-out infinite; }
+      .ups-sp2 { transform-origin: 42px 20px; animation: ups-sparkle 2.8s ease-in-out 0.2s infinite; }
+    `}</style>
+    {/* Small image frame */}
+    <g className="ups-img">
+      <rect x="8" y="12" width="24" height="24" rx="3" stroke={accent} strokeWidth="2" fill={accent} fillOpacity="0.08"/>
+      <path d="M12 30 L18 22 L22 26 L26 20 L28 24" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fillOpacity="0"/>
+      <circle cx="15" cy="18" r="2" fill={accent} fillOpacity="0.5"/>
+    </g>
+    {/* Arrow indicating enlargement */}
+    <path d="M34 28 L40 22 M40 22 L40 28 M40 22 L34 22" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Sparkles */}
+    <g className="ups-sp1"><circle cx="38" cy="10" r="2" fill={accent}/></g>
+    <g className="ups-sp2"><circle cx="42" cy="20" r="1.5" fill={accent} fillOpacity="0.6"/></g>
+  </svg>
+);
+
+export const IconPassportPhoto: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pp-crop {
+        0%, 25%  { stroke-dashoffset: 40; }
+        50%, 75% { stroke-dashoffset: 0; }
+        90%, 100%{ stroke-dashoffset: 40; }
+      }
+      @keyframes pp-check {
+        0%, 55%  { transform: scale(0); opacity: 0; }
+        70%, 85% { transform: scale(1); opacity: 1; }
+        95%, 100%{ transform: scale(0); opacity: 0; }
+      }
+      .pp-crop { stroke-dasharray: 40; animation: pp-crop 3s ease-in-out infinite; }
+      .pp-check { transform-origin: 38px 36px; animation: pp-check 3s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Photo frame */}
+    <rect x="10" y="6" width="22" height="30" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.5"/>
+    {/* Person head */}
+    <circle cx="21" cy="18" r="6" fill={accent} fillOpacity="0.4"/>
+    {/* Person shoulders */}
+    <path d="M12 36 C12 30 16 27 21 27 C26 27 30 30 30 36" fill={accent} fillOpacity="0.3"/>
+    {/* Crop lines animating */}
+    <rect className="pp-crop" x="8" y="4" width="26" height="34" rx="3" stroke={accent} strokeWidth="2" fill="none"/>
+    {/* Check badge */}
+    <g className="pp-check" style={{ opacity: 0 }}>
+      <circle cx="38" cy="36" r="7" fill="#16A34A"/>
+      <path d="M35 36 L37 38.5 L42 33.5" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

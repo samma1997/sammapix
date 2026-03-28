@@ -22,7 +22,7 @@ export default function HeroSection() {
         <p className="text-base sm:text-lg text-[#737373] dark:text-[#A3A3A3] max-w-xl mx-auto mb-8 leading-relaxed">
           Compress, rename with AI, resize, convert- all in one pipeline.
           <br className="hidden sm:block" />
-          23 free tools. 100% browser-based. No uploads.
+          25 free tools. 100% browser-based. No uploads.
         </p>
 
         {/* CTAs */}

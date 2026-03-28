@@ -240,6 +240,24 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["compress", "croproatio", "stampit", "webp"],
     relatedBlogSlugs: [],
   },
+  upscale: {
+    id: "upscale",
+    name: "Enhance Resolution",
+    shortDesc: "AI upscale images 2x or 4x",
+    slug: "/tools/upscale",
+    category: "optimize",
+    relatedTools: ["compress", "remove-bg", "croproatio", "webp"],
+    relatedBlogSlugs: [],
+  },
+  "passport-photo": {
+    id: "passport-photo",
+    name: "Passport Photo",
+    shortDesc: "AI passport & visa photo maker",
+    slug: "/tools/passport-photo",
+    category: "ai",
+    relatedTools: ["remove-bg", "croproatio", "resizepack", "compress"],
+    relatedBlogSlugs: [],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

@@ -3,7 +3,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogClient from "./BlogClient";
 
 export const metadata: Metadata = {
-  title: "Blog - Image Optimization Tips & Photography Guides | SammaPix",
+  title: "Blog - Image Optimization Tips & Photography Guides",
   description:
     "Learn how to compress images, optimize for SEO, remove EXIF data, sort photos by GPS, and more. Free guides for photographers and web developers.",
   alternates: { canonical: `${APP_URL}/blog` },

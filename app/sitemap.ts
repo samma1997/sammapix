@@ -93,6 +93,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/image-to-text",
     "/tools/pdf-to-image",
     "/tools/remove-bg",
+    "/tools/upscale",
+    "/tools/passport-photo",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

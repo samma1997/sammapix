@@ -9,7 +9,7 @@ import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
 export const metadata = {
   title: "AI Photo Workflow Platform for Content Creators",
   description:
-    "Compress, rename with AI, resize, convert -- all in one pipeline. 23 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert -- all in one pipeline. 25 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -25,7 +25,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert -- all in one pipeline. 23 free tools. No uploads.",
+      "Compress, rename with AI, resize, convert -- all in one pipeline. 25 free tools. No uploads.",
     url: "https://sammapix.com",
     type: "website",
     images: [
@@ -45,7 +45,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What tools does SammaPix offer?",
     answer:
-      "SammaPix includes 23 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
+      "SammaPix includes 25 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
   },
   {
     question: "How does SammaPix protect my privacy?",
@@ -194,7 +194,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 23 free browser-based tools.",
+          "AI-powered photo and video workflow platform for content creators. 25 free browser-based tools.",
         sameAs: [
           "https://www.instagram.com/lucasammarco.web/",
           "https://lucasammarco.com",
