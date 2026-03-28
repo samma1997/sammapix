@@ -255,11 +255,11 @@ const PERSONAS: {
 // ─── Persona -> Tool mappings ────────────────────────────────────────────────
 
 const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
-  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort"],
-  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname"],
-  ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname"],
-  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
+  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale"],
+  ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
+  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname", "remove-bg", "upscale"],
 };
 
 // ─── Category types ──────────────────────────────────────────────────────────

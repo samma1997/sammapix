@@ -97,7 +97,7 @@ const nextConfig = {
               // 'unsafe-inline' is required by Next.js for inline style tags and
               // React hydration scripts. 'unsafe-eval' has been REMOVED — Next.js
               // App Router does not require it.
-              "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://js.stripe.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://accounts.google.com https://apis.google.com https://www.dropbox.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://js.stripe.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net https://accounts.google.com https://apis.google.com https://www.dropbox.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               // blob: is required for client-side image preview URLs (createObjectURL)
