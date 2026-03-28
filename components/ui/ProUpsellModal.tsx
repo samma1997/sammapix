@@ -9,7 +9,7 @@ import { trackEvent } from "@/lib/analytics";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip" | "upscale_daily";
 
 interface ProUpsellModalProps {
   open: boolean;

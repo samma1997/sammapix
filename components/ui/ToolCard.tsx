@@ -415,6 +415,47 @@ export const IconCull: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconRemoveBg: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes rbg-fade {
+        0%, 20%  { opacity: 1; }
+        50%, 70% { opacity: 0; }
+        90%, 100%{ opacity: 1; }
+      }
+      @keyframes rbg-check {
+        0%, 45%  { transform: scale(0); opacity: 0; }
+        65%, 85% { transform: scale(1); opacity: 1; }
+        95%, 100%{ transform: scale(0); opacity: 0; }
+      }
+      .rbg-bg    { animation: rbg-fade 3s ease-in-out infinite; }
+      .rbg-check { transform-origin: 38px 12px; animation: rbg-check 3s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Checkerboard transparency pattern */}
+    <rect x="4" y="8" width="32" height="32" rx="3" fill="#E5E5E5" fillOpacity="0.3"/>
+    <rect x="4" y="8" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="20" y="8" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="12" y="16" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="28" y="16" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="4" y="24" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="20" y="24" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="12" y="32" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    <rect x="28" y="32" width="8" height="8" fill="#D4D4D4" fillOpacity="0.4"/>
+    {/* Background that fades out */}
+    <g className="rbg-bg">
+      <rect x="4" y="8" width="32" height="32" rx="3" fill={accent} fillOpacity="0.15"/>
+    </g>
+    {/* Person silhouette (stays solid) */}
+    <path d="M20 14 C16 14 14 18 14 22 C14 26 16 28 20 28 L20 36 L16 36 L16 40 L24 40 L24 36 L24 40 L32 40 L32 36 L28 36 L28 28 C32 28 34 26 34 22 C34 18 32 14 28 14 Z" fill={accent} fillOpacity="0.6"/>
+    <circle cx="24" cy="14" r="5" fill={accent} fillOpacity="0.6"/>
+    {/* Checkmark badge */}
+    <g className="rbg-check" style={{ opacity: 0 }}>
+      <circle cx="38" cy="12" r="7" fill="#16A34A"/>
+      <path d="M35 12 L37 14.5 L42 9.5" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

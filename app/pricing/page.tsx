@@ -16,6 +16,7 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconRemoveBg,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -40,6 +41,7 @@ const toolGrid = [
   { Icon: IconResizePack,name: "Batch Resize",accent: "#14B8A6" },
   { Icon: IconCull,      name: "Photo Cull",  accent: "#F43F5E" },
   { Icon: IconHEIC,      name: "HEIC",        accent: "#6366F1" },
+  { Icon: IconRemoveBg,  name: "Clean BG",    accent: "#EC4899" },
 ] as const;
 
 // ─── Payment banners ───────────────────────────────────────────────────────────
@@ -183,7 +185,7 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                { icon: Sparkles, text: "All 20 tools included" },
+                { icon: Sparkles, text: "All 23 tools included" },
                 { icon: FileStack, text: "20 files per batch" },
                 { icon: Zap, text: "10 AI renames / day" },
                 { icon: Zap, text: "10 AI alt text / day" },

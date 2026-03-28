@@ -231,6 +231,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["compress", "webp", "resizepack", "blogdrop"],
     relatedBlogSlugs: [],
   },
+  "remove-bg": {
+    id: "remove-bg",
+    name: "Clean Background",
+    shortDesc: "Remove image background instantly",
+    slug: "/tools/remove-bg",
+    category: "edit",
+    relatedTools: ["compress", "croproatio", "stampit", "webp"],
+    relatedBlogSlugs: [],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

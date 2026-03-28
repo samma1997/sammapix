@@ -227,7 +227,7 @@ export function HomepageToolGrid() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-            20 Free Tools
+            23 Free Tools
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
             Browser-based -- no uploads, no account required for the basics.
