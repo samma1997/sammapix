@@ -33,6 +33,9 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconRemoveBg,
+  IconUpscale,
+  IconPassportPhoto,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -531,6 +534,52 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconBatchName,
     category: ["Organize"],
     keywords: ["rename many files", "bulk rename", "pattern rename", "sequential", "number files", "prefix", "suffix"],
+  },
+
+  // New tools
+  {
+    name: "Clean Background",
+    slug: "remove-bg",
+    href: "/dashboard/tools/remove-bg",
+    tagline: "Remove image backgrounds instantly with AI. 100% browser-based.",
+    accent: "#EC4899",
+    badges: ["Free", "AI-powered"],
+    Icon: IconRemoveBg,
+    category: ["Optimize", "AI"],
+    keywords: ["remove background", "transparent", "cut out", "background remover", "erase background", "png transparent", "product photo", "white background"],
+  },
+  {
+    name: "Enhance Resolution",
+    slug: "upscale",
+    href: "/dashboard/tools/upscale",
+    tagline: "AI upscale images 2x or 4x without losing quality.",
+    accent: "#8B5CF6",
+    badges: ["Free", "AI-powered"],
+    Icon: IconUpscale,
+    category: ["Optimize"],
+    keywords: ["upscale", "enlarge", "enhance", "increase resolution", "make bigger", "4k", "higher quality", "sharpen", "unblur"],
+  },
+  {
+    name: "Passport Photo",
+    slug: "passport-photo",
+    href: "/dashboard/tools/passport-photo",
+    tagline: "Auto crop + white background for passport and visa photos. 6 country presets.",
+    accent: "#3B82F6",
+    badges: ["Free", "6 countries"],
+    Icon: IconPassportPhoto,
+    category: ["AI"],
+    keywords: ["passport photo", "visa photo", "id photo", "2x2", "35x45mm", "passport size", "biometric photo", "document photo"],
+  },
+  {
+    name: "Image to Text",
+    slug: "image-to-text",
+    href: "/dashboard/tools/image-to-text",
+    tagline: "Extract text from images with AI-powered OCR. 50+ languages.",
+    accent: "#F59E0B",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconAIRename,
+    category: ["AI"],
+    keywords: ["ocr", "extract text", "image to text", "scan text", "copy text from photo", "screenshot to text", "read image"],
   },
 ];
 
