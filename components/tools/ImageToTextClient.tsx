@@ -537,7 +537,8 @@ export default function ImageToTextClient() {
 
       {/* Privacy note */}
       <p className="text-xs text-[#A3A3A3] text-center">
-        Your image is sent to Google Gemini for text extraction and immediately discarded — never stored.
+        Your image is sent to Google Gemini for text extraction and immediately discarded — never stored. See our{" "}
+        <a href="/privacy" className="text-[#6366F1] hover:underline">privacy policy</a>.
       </p>
     </div>
   );

@@ -90,6 +90,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/batchname",
     "/tools/smartsort",
     "/tools/ai-organize",
+    "/tools/image-to-text",
+    "/tools/pdf-to-image",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
