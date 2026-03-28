@@ -18,6 +18,9 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconRemoveBg,
+  IconUpscale,
+  IconPassportPhoto,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -211,6 +214,11 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Photo Map", href: "/tools/travelmap", tagline: "Interactive map from photos.", accent: "#3B82F6", badge: "Free", Icon: IconTravelMap, category: "Organize" },
   { name: "Cull", href: "/tools/cull", tagline: "Rate and cull a shoot.", accent: "#F43F5E", badge: "Free", Icon: IconCull, category: "Organize" },
   { name: "Batch Rename", href: "/tools/batchname", tagline: "Rename files with a pattern.", accent: "#F59E0B", badge: "Free", Icon: IconBatchName, category: "Organize" },
+  // New tools
+  { name: "Clean Background", href: "/tools/remove-bg", tagline: "Remove backgrounds with AI.", accent: "#EC4899", badge: "Free", Icon: IconRemoveBg, category: "Optimize" },
+  { name: "Enhance Resolution", href: "/tools/upscale", tagline: "AI upscale 2x or 4x.", accent: "#8B5CF6", badge: "Free", Icon: IconUpscale, category: "Optimize" },
+  { name: "Passport Photo", href: "/tools/passport-photo", tagline: "Auto crop for passport & visa.", accent: "#3B82F6", badge: "Free", Icon: IconPassportPhoto, category: "AI-Powered" },
+  { name: "Image to Text", href: "/tools/image-to-text", tagline: "Extract text from images.", accent: "#F59E0B", badge: "AI", Icon: IconAIRename, category: "AI-Powered" },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

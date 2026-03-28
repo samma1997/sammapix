@@ -13,7 +13,11 @@
  * Cost: $0 — everything runs in the browser.
  */
 
-import { removeBackground } from "@/lib/remove-bg";
+// Dynamic import to avoid bundling @imgly/background-removal at page load
+async function getRemoveBackground() {
+  const { removeBackground } = await import("@/lib/remove-bg");
+  return removeBackground;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Country presets                                                    */
@@ -149,10 +153,16 @@ export async function generatePassportPhoto(
 
   if (removeBg) {
     onProgress?.(0, "Removing background\u2026");
-    const bgResult = await removeBackground(file, (p) => {
-      onProgress?.(Math.round(p * 0.6), "Removing background\u2026");
-    });
-    sourceBlob = bgResult.blob;
+    try {
+      const removeBackgroundFn = await getRemoveBackground();
+      const bgResult = await removeBackgroundFn(file, (p: number) => {
+        onProgress?.(Math.round(p * 0.6), "Removing background\u2026");
+      });
+      sourceBlob = bgResult.blob;
+    } catch (err) {
+      console.warn("Background removal failed, using original:", err);
+      sourceBlob = file;
+    }
   } else {
     sourceBlob = file;
   }

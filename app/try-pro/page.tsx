@@ -28,6 +28,9 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconRemoveBg,
+  IconUpscale,
+  IconPassportPhoto,
 } from "@/components/ui/ToolCard";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 
@@ -47,6 +50,10 @@ const ALL_TOOLS = [
   { Icon: IconResizePack, name: "Batch Resize",   accent: "#14B8A6" },
   { Icon: IconCull,       name: "Cull",          accent: "#F43F5E" },
   { Icon: IconHEIC,       name: "HEIC Convert",  accent: "#6366F1" },
+  { Icon: IconRemoveBg,   name: "Clean BG",       accent: "#EC4899" },
+  { Icon: IconUpscale,    name: "Upscale",        accent: "#8B5CF6" },
+  { Icon: IconPassportPhoto, name: "Passport",    accent: "#3B82F6" },
+  { Icon: IconAIRename,   name: "OCR",            accent: "#F59E0B" },
 ] as const;
 
 // ─── Free vs Pro comparison ────────────────────────────────────────────────────
