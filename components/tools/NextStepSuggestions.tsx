@@ -155,6 +155,11 @@ const SUGGESTIONS = {
     href: "/tools/pdf-to-image",
     Icon: IconHeic,
   },
+  upscale: {
+    label: "Upscale image",
+    href: "/tools/upscale",
+    Icon: IconResize,
+  },
 } as const;
 
 type SuggestionKey = keyof typeof SUGGESTIONS;
@@ -176,6 +181,7 @@ const NEXT_STEPS_MAP: Record<string, SuggestionKey[]> = {
   travelmap: ["geosort", "filmlab"],
   heic: ["compress", "ai-rename"],
   "pdf-to-image": ["compress", "webp", "ai-rename"],
+  upscale: ["compress", "ai-rename", "resize"],
 };
 
 // ── Completion summary line ───────────────────────────────────────────────────
@@ -197,6 +203,7 @@ function completionLabel(tool: string, count: number): string {
     travelmap: "mapped",
     heic: "converted",
     "pdf-to-image": "converted to images",
+    upscale: "upscaled",
   };
   const verb = verbs[tool] ?? "processed";
   return `${count} ${noun} ${verb}`;
