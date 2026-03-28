@@ -795,7 +795,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
         a: "Yes, SammaPix's passport photo resizer is completely free. No account required, no watermark, and your photos are processed entirely in your browser — they never leave your device.",
       },
     ],
-    related: ["visa", "generic", "linkedin"],
+    related: ["visa", "instagram", "linkedin"],
   },
 
   // ─── VISA ───────────────────────────────────────────────────────────────────
@@ -857,7 +857,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
         a: "This depends on the country. US visa: 600x600px, Schengen: 413x531px, China: 390x567px, UK: 420x540px. SammaPix automatically sets the correct dimensions when you select your visa type.",
       },
     ],
-    related: ["passport", "generic", "linkedin"],
+    related: ["passport", "instagram", "linkedin"],
   },
 ];
 

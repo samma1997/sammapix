@@ -15,7 +15,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import Link from "next/link";
-import TranscribeClient from "@/components/tools/TranscribeClient";
+import ImageToTextClient from "@/components/tools/ImageToTextClient";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
@@ -183,7 +183,7 @@ export default function ImageToTextPage() {
       {/* ============================================================ */}
       {/*  TOOL — TranscribeClient                                     */}
       {/* ============================================================ */}
-      <TranscribeClient />
+      <ImageToTextClient />
 
       {/* ============================================================ */}
       {/*  HOW IT WORKS — 3 steps                                      */}
