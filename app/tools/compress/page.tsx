@@ -136,10 +136,12 @@ export default function CompressPage() {
           </h1>
         </div>
 
-        {/* Subtext */}
+        {/* GEO answer box */}
         <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
-          Reduce file size up to 90% without losing quality. Works in your
-          browser — images never leave your device.
+          SammaPix Compress is a free browser-based tool that reduces image file
+          size by up to 90% without visible quality loss. No upload required —
+          your files never leave your device. Supports JPG, PNG, WebP, GIF, AVIF,
+          and HEIC with batch processing for up to 500 images at once.
         </p>
 
         {/* Trust badges */}

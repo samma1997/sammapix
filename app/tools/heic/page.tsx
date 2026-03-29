@@ -77,8 +77,8 @@ export default function HeicPage() {
     <main>
       <MetaViewContent contentName="HEIC Converter" contentId="heic" />
       <ToolHeader
-        title="HEIC Converter"
-        description="Convert iPhone HEIC photos to JPG or WebP. Batch convert, adjustable quality, download as ZIP."
+        title="HEIC to JPG Converter — Free, No Signup"
+        description="SammaPix HEIC Converter is a free online tool that converts iPhone HEIC photos to JPG or WebP in seconds. HEIC files are 50% smaller than JPEG but most platforms can't open them — this tool batch-converts up to 20 files at once with adjustable quality (60–100%), no signup required."
         icon={FileImage}
         accentColor="#6366F1"
       />

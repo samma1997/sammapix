@@ -100,8 +100,12 @@ export default function AiRenamePage() {
           </div>
           <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">AI Image Filename Generator for SEO</h1>
         </div>
-        <p className="text-sm text-[#737373]">
-          Turn generic image names into SEO-optimized filenames that rank in Google Images. Upload your photos and let AI generate descriptive, keyword-rich names in seconds- nothing uploaded to any server except the thumbnail for AI analysis.
+        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed max-w-xl">
+          SammaPix AI Rename is a free tool that uses Google Gemini to
+          automatically generate SEO-friendly image filenames in under 3 seconds.
+          Turn generic names like IMG_4521.jpg into descriptive, keyword-rich
+          filenames that rank in Google Images — 10 free renames per day, no
+          credit card required.
         </p>
       </div>
 
