@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { BLOG_SLUGS, APP_URL } from "@/lib/constants";
 import { getAllPlatforms } from "@/lib/resize-platforms";
 import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
+import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -200,6 +201,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // Programmatic image-size pages — driven from lib/image-size-platforms.ts
+  const imageSizePages: MetadataRoute.Sitemap = getAllImageSizePlatforms().map(
+    (p) => ({
+      url: `${APP_URL}/image-size/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })
+  );
+
   return [
     ...staticPages,
     ...toolPages,
@@ -210,5 +221,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...convertPages,
     ...compressToPages,
     ...optimizeForPages,
+    ...imageSizePages,
   ];
 }
