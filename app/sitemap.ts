@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { BLOG_SLUGS, APP_URL } from "@/lib/constants";
 import { getAllPlatforms } from "@/lib/resize-platforms";
+import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -179,6 +180,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  // Programmatic optimize-for pages — driven from lib/optimize-platforms.ts
+  const optimizeForPages: MetadataRoute.Sitemap = getAllOptimizePlatforms().map(
+    (p) => ({
+      url: `${APP_URL}/optimize-for/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })
+  );
+
   return [
     ...staticPages,
     ...toolPages,
@@ -188,5 +199,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...resizePages,
     ...convertPages,
     ...compressToPages,
+    ...optimizeForPages,
   ];
 }
