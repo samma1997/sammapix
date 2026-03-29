@@ -244,7 +244,7 @@ export default function PricingPage() {
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
                 { icon: Sparkles, text: "Everything in Free, plus:", bold: true },
-                { icon: Zap, text: "200 AI credits / day", bold: false },
+                { icon: Zap, text: "200 AI credits / day (1 credit = 1 rename, 1 alt text, or 1 AI action)", bold: false },
                 { icon: FileStack, text: "500 files per batch", bold: false },
                 { icon: FileStack, text: "50 MB per file", bold: false },
                 { icon: Package, text: "ZIP download", bold: false },
