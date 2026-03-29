@@ -15,6 +15,150 @@ export interface CompressTarget {
 }
 
 const ALL_TARGETS: CompressTarget[] = [
+  // ─── 5 KB ────────────────────────────────────────────────────────────────
+  {
+    slug: "5kb",
+    sizeLabel: "5 KB",
+    sizeBytes: 5120,
+    metaDescription:
+      "Compress any image to 5 KB online for free. Perfect for thumbnails, favicons, email signatures, and ultra-lightweight web assets. No upload required — works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 5 KB instantly. Ideal for tiny thumbnails, favicons, and email signature logos.",
+    titleKeyword: "Compress Image to 5KB",
+    keywords: [
+      "compress image to 5kb",
+      "reduce image size to 5kb",
+      "compress photo to 5kb",
+      "5kb image compressor",
+      "tiny image compressor",
+      "compress image for email signature",
+      "compress favicon",
+    ],
+    useCase:
+      "Perfect for favicons, email signature logos, tiny thumbnails, and any context where you need the absolute smallest possible image file.",
+    tips: [
+      "At 5 KB, resize your image to 100×100 px or smaller first — large images cannot reach 5 KB at usable quality.",
+      "Use WebP format — it delivers 2-3x better quality than JPEG at the same file size.",
+      "Remove all metadata (EXIF data) to save extra bytes — use our EXIF Remover tool first.",
+      "For logos and icons, convert to PNG with limited colors (palette mode) before compressing.",
+    ],
+    faqs: [
+      {
+        q: "How do I compress an image to exactly 5 KB?",
+        a: "First resize your image to a very small dimension (under 150×150 px) using our Resize tool. Then open the Compress tool, set quality to 20-40%, and download. For icons and logos, PNG with reduced colors often works better than JPEG.",
+      },
+      {
+        q: "What can I use a 5 KB image for?",
+        a: "5 KB images are ideal for favicons (16×16 to 48×48 px), email signature logos, tiny social media avatars, placeholder thumbnails, and ultra-lightweight web page decorations that need to load instantly.",
+      },
+      {
+        q: "Will a 5 KB image look good?",
+        a: "At very small display sizes (under 150×150 px), yes. A favicon at 32×32 px looks crisp at 5 KB. But a full-size photo compressed to 5 KB will be extremely blurry — this size is meant for tiny graphics only.",
+      },
+      {
+        q: "What format is best for 5 KB compression?",
+        a: "For photos: WebP delivers the best quality-to-size ratio. For logos/icons with flat colors: PNG with palette mode. For compatibility with old systems: JPEG at very low quality.",
+      },
+    ],
+    related: ["10kb", "15kb", "20kb"],
+  },
+
+  // ─── 10 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "10kb",
+    sizeLabel: "10 KB",
+    sizeBytes: 10240,
+    metaDescription:
+      "Compress any image to 10 KB online for free. Perfect for web thumbnails, form uploads, mobile app assets, and low-bandwidth optimization. No upload required — works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 10 KB instantly. Ideal for web thumbnails, lightweight mobile assets, and form uploads.",
+    titleKeyword: "Compress Image to 10KB",
+    keywords: [
+      "compress image to 10kb",
+      "reduce image size to 10kb",
+      "compress photo to 10kb",
+      "10kb image compressor",
+      "compress image for form upload",
+      "lightweight image compressor",
+      "compress image for mobile app",
+    ],
+    useCase:
+      "Perfect for web thumbnails, mobile app preview images, form upload requirements, and any use case where images must load instantly on slow connections.",
+    tips: [
+      "Resize to 200-400 px on the longest side before compressing — this is the sweet spot for 10 KB quality.",
+      "Convert to WebP format first — a 10 KB WebP looks as good as a 25 KB JPEG.",
+      "For product thumbnails, crop tightly around the product to eliminate background pixels.",
+      "Use progressive JPEG encoding if the target system doesn't support WebP — it renders faster at small sizes.",
+    ],
+    faqs: [
+      {
+        q: "How do I compress an image to exactly 10 KB?",
+        a: "Upload your image to SammaPix Compress and lower the quality slider until the output shows 10 KB or less. If the image is too large, resize it to under 400 px first using our Resize tool, then compress again.",
+      },
+      {
+        q: "Is 10 KB enough for a web thumbnail?",
+        a: "Yes, absolutely. At 200-300 px wide, a 10 KB image looks sharp on screens. Most e-commerce product grids, blog post thumbnails, and directory listings use images around this size for fast page loads.",
+      },
+      {
+        q: "Can I compress a high-resolution photo to 10 KB?",
+        a: "Technically yes, but it will be very blurry at full resolution. For best results, resize to 200-400 px first, then compress. This gives you a sharp, lightweight image instead of a blurry full-size one.",
+      },
+      {
+        q: "10 KB vs 20 KB — what's the quality difference?",
+        a: "At 200 px wide, barely noticeable. At 400 px wide, 20 KB will look slightly sharper in detailed areas (hair, text, edges). If your use case allows 20 KB, go with that for better quality.",
+      },
+    ],
+    related: ["5kb", "15kb", "20kb"],
+  },
+
+  // ─── 15 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "15kb",
+    sizeLabel: "15 KB",
+    sizeBytes: 15360,
+    metaDescription:
+      "Compress any image to 15 KB online for free. Perfect for profile pictures, small product images, and government portal uploads. No upload required — works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 15 KB instantly. Ideal for profile pictures, small product thumbnails, and portal uploads.",
+    titleKeyword: "Compress Image to 15KB",
+    keywords: [
+      "compress image to 15kb",
+      "reduce image size to 15kb",
+      "compress photo to 15kb",
+      "15kb image compressor",
+      "compress profile picture",
+      "compress image for government portal",
+      "small image compressor online",
+    ],
+    useCase:
+      "Perfect for profile pictures, small product images, government portal uploads with strict size limits, and card-sized web images.",
+    tips: [
+      "For profile pictures, crop to a square (1:1 ratio) first, then resize to 300×300 px — this reaches 15 KB easily at 70-80% quality.",
+      "WebP at 15 KB looks equivalent to JPEG at 30 KB — always prefer WebP when the platform supports it.",
+      "If compressing for a government portal, check if they require a specific format (usually JPEG) before converting to WebP.",
+      "Batch-compress multiple images at once using SammaPix — drop up to 20 files and download them all compressed.",
+    ],
+    faqs: [
+      {
+        q: "How do I compress a photo to exactly 15 KB?",
+        a: "Open SammaPix Compress, drop your image, and adjust the quality slider downward. For a typical 2-5 MB phone photo, quality 35-55% will usually land around 15 KB. If not, resize the image to under 500 px first.",
+      },
+      {
+        q: "Is 15 KB good enough for a profile picture?",
+        a: "Yes. At 200-400 px (the typical display size for avatars and profile pictures), a 15 KB image looks clean and loads instantly. LinkedIn, forums, and most apps display profile photos at these dimensions.",
+      },
+      {
+        q: "Can I upload a 15 KB image to Instagram?",
+        a: "Instagram accepts images from a few KB to 30 MB, so yes. However, Instagram will re-compress your image anyway. For best Instagram quality, use our resize-for-Instagram tool to get the exact dimensions Instagram expects.",
+      },
+      {
+        q: "15 KB vs 20 KB — which should I choose?",
+        a: "If your upload form has a 15 KB limit, target 15 KB. Otherwise, 20 KB gives you slightly better quality for almost no extra file size. Both are excellent for web use.",
+      },
+    ],
+    related: ["10kb", "20kb", "25kb"],
+  },
+
   // ─── 20 KB ───────────────────────────────────────────────────────────────
   {
     slug: "20kb",
