@@ -13,7 +13,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const HOST = "https://www.sammapix.com";
-const KEY = "1c07f378f57d4d16abd3919c6f158acd";
+const KEY = "sammapix2026indexnow";
 
 const URLS = [
   // Homepage + core
