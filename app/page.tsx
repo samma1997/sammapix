@@ -295,7 +295,7 @@ export default function HomePage() {
                   { name: "Compress", href: "/tools/compress" },
                   { name: "AI Rename", href: "/tools/ai-rename" },
                   { name: "GeoSort", href: "/tools/geosort" },
-                  { name: "TravelMap", href: "/tools/travel-map" },
+                  { name: "TravelMap", href: "/tools/travelmap" },
                 ].map((tool) => (
                   <Link
                     key={tool.name}
@@ -307,10 +307,10 @@ export default function HomePage() {
                 ))}
               </div>
               <Link
-                href="/tools/compress"
+                href="/tools/weblift"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
               >
-                Start workflow <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                Start with WebLift <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>
 
@@ -326,9 +326,9 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {[
                   { name: "Remove BG", href: "/tools/remove-bg" },
-                  { name: "Resize", href: "/tools/resize" },
+                  { name: "Resize", href: "/tools/resizepack" },
                   { name: "Compress", href: "/tools/compress" },
-                  { name: "BatchName", href: "/tools/batch-rename" },
+                  { name: "BatchName", href: "/tools/batchname" },
                 ].map((tool) => (
                   <Link
                     key={tool.name}
@@ -340,10 +340,10 @@ export default function HomePage() {
                 ))}
               </div>
               <Link
-                href="/tools/remove-bg"
+                href="/tools/weblift"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
               >
-                Start workflow <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                Start with WebLift <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>
 
@@ -360,8 +360,8 @@ export default function HomePage() {
                 {[
                   { name: "Compress", href: "/tools/compress" },
                   { name: "WebP", href: "/tools/webp" },
-                  { name: "AI Alt Text", href: "/tools/ai-alt-text" },
-                  { name: "Resize", href: "/tools/resize" },
+                  { name: "AI Alt Text", href: "/tools/alt-text" },
+                  { name: "Resize", href: "/tools/resizepack" },
                 ].map((tool) => (
                   <Link
                     key={tool.name}
@@ -373,10 +373,10 @@ export default function HomePage() {
                 ))}
               </div>
               <Link
-                href="/tools/compress"
+                href="/tools/blogdrop"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
               >
-                Start workflow <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                Start with BlogDrop <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>
           </div>
