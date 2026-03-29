@@ -272,8 +272,170 @@ export default function HomePage() {
       <HomepageToolGrid />
 
 
-      {/* -- How SammaPix Works -- */}
+      {/* -- Start here — pick your workflow -- */}
+      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+              Start here — pick your workflow
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Photographers & Travel Bloggers */}
+            <div className="p-5 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors">
+              <p className="text-lg mb-1">📸</p>
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+                Photographers & Travel Bloggers
+              </p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+                Compress 500 photos, rename for SEO, sort by location — in minutes
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {[
+                  { name: "Compress", href: "/tools/compress" },
+                  { name: "AI Rename", href: "/tools/ai-rename" },
+                  { name: "GeoSort", href: "/tools/geosort" },
+                  { name: "TravelMap", href: "/tools/travel-map" },
+                ].map((tool) => (
+                  <Link
+                    key={tool.name}
+                    href={tool.href}
+                    className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#525252] dark:text-[#A3A3A3] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors"
+                  >
+                    {tool.name}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/tools/compress"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
+              >
+                Start workflow <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            </div>
+
+            {/* E-commerce & Product Sellers */}
+            <div className="p-5 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors">
+              <p className="text-lg mb-1">🛒</p>
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+                E-commerce & Product Sellers
+              </p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+                Product photos ready for Shopify, Amazon, Etsy — batch optimized
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {[
+                  { name: "Remove BG", href: "/tools/remove-bg" },
+                  { name: "Resize", href: "/tools/resize" },
+                  { name: "Compress", href: "/tools/compress" },
+                  { name: "BatchName", href: "/tools/batch-rename" },
+                ].map((tool) => (
+                  <Link
+                    key={tool.name}
+                    href={tool.href}
+                    className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#525252] dark:text-[#A3A3A3] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors"
+                  >
+                    {tool.name}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/tools/remove-bg"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
+              >
+                Start workflow <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            </div>
+
+            {/* Web Developers & Bloggers */}
+            <div className="p-5 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors">
+              <p className="text-lg mb-1">💻</p>
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+                Web Developers & Bloggers
+              </p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+                Optimize images for Core Web Vitals — WebP, compress, alt text
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {[
+                  { name: "Compress", href: "/tools/compress" },
+                  { name: "WebP", href: "/tools/webp" },
+                  { name: "AI Alt Text", href: "/tools/ai-alt-text" },
+                  { name: "Resize", href: "/tools/resize" },
+                ].map((tool) => (
+                  <Link
+                    key={tool.name}
+                    href={tool.href}
+                    className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#525252] dark:text-[#A3A3A3] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] rounded hover:border-[#A3A3A3] dark:hover:border-[#525252] transition-colors"
+                  >
+                    {tool.name}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/tools/compress"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
+              >
+                Start workflow <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* -- Real results from real users -- */}
       <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
+              Real results from real users
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            {/* Case study 1 */}
+            <div className="p-5 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg border-l-[3px] border-l-indigo-400 dark:border-l-indigo-500">
+              <p className="text-sm text-[#171717] dark:text-[#E5E5E5] leading-relaxed mb-2">
+                📷 &quot;71 travel photos from Sri Lanka — compressed from <strong>358 MB</strong> to <strong>65 MB</strong> in under <strong>5 minutes</strong>&quot;
+              </p>
+              <Link
+                href="/blog/optimize-travel-photos-sri-lanka"
+                className="text-xs font-medium text-[#6366F1] dark:text-indigo-400 hover:underline inline-flex items-center gap-1"
+              >
+                → Read the full story
+              </Link>
+            </div>
+
+            {/* Case study 2 */}
+            <div className="p-5 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg border-l-[3px] border-l-emerald-400 dark:border-l-emerald-500">
+              <p className="text-sm text-[#171717] dark:text-[#E5E5E5] leading-relaxed mb-2">
+                🏷️ &quot;IMG_3570.jpg → <strong>gangaramaya-temple-buddha-statues-colombo-sri-lanka.jpg</strong> — AI renamed <strong>71 photos</strong> in <strong>90 seconds</strong>&quot;
+              </p>
+              <Link
+                href="/blog/ai-rename-travel-photos-seo-results"
+                className="text-xs font-medium text-[#6366F1] dark:text-indigo-400 hover:underline inline-flex items-center gap-1"
+              >
+                → Read the full story
+              </Link>
+            </div>
+
+            {/* Case study 3 */}
+            <div className="p-5 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg border-l-[3px] border-l-amber-400 dark:border-l-amber-500">
+              <p className="text-sm text-[#171717] dark:text-[#E5E5E5] leading-relaxed mb-2">
+                📊 &quot;WebP files are <strong>30% smaller</strong> than JPEG at identical visual quality — tested on <strong>500 photos</strong>&quot;
+              </p>
+              <Link
+                href="/blog/image-compression-benchmark-2026"
+                className="text-xs font-medium text-[#6366F1] dark:text-indigo-400 hover:underline inline-flex items-center gap-1"
+              >
+                → Read the benchmark
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* -- How SammaPix Works -- */}
+      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
@@ -318,57 +480,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* -- Who uses SammaPix -- */}
-      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-              Who uses SammaPix
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                title: "Travel Bloggers",
-                body: "Optimize entire photo sets for blog posts -- compress, rename for SEO, and sort by country automatically.",
-              },
-              {
-                title: "E-commerce Sellers",
-                body: "Product photos ready for Shopify, Amazon, and Etsy in minutes. Use Batch Rename for consistent naming.",
-              },
-              {
-                title: "Social Media Managers",
-                body: "Batch resize for every platform preset -- Instagram, Twitter, LinkedIn -- without leaving the browser.",
-              },
-              {
-                title: "Web Developers",
-                body: "Compress and convert to WebP for Core Web Vitals. Use Web Optimize for the complete optimization pipeline.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="p-5 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg"
-              >
-                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-                  {item.title}
-                </p>
-                <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-                  {item.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* -- Stats bar -- */}
-      <section className="py-8 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
+      <section className="py-8 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 sm:gap-16">
           {[
-            { value: "1.2M+", label: "Images optimized" },
             { value: "25", label: "Free tools" },
             { value: "100%", label: "Browser-based" },
             { value: "0", label: "Files uploaded to servers" },
+            { value: "30%", label: "Smaller with WebP vs JPEG" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">{stat.value}</p>
@@ -476,6 +595,43 @@ export default function HomePage() {
                 {link.name} <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* -- Built by a photographer -- */}
+      <section className="py-14 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex items-start gap-5">
+            {/* Avatar placeholder */}
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#171717] dark:bg-[#E5E5E5] flex items-center justify-center">
+              <span className="text-sm font-bold text-white dark:text-[#171717]">LS</span>
+            </div>
+            <div>
+              <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+                Built by a photographer who needed this
+              </h2>
+              <blockquote className="text-sm italic text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-3">
+                &quot;I built SammaPix because every tool I tried was either too slow, too expensive, or required uploading my photos to someone else&apos;s server. As a travel photographer, I needed something that works offline, handles HEIC, and lets me batch-process hundreds of images without leaving the browser.&quot;
+              </blockquote>
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+                — Luca Sammarco, Full-Stack Developer & Travel Photographer
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/portfolio"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] dark:hover:text-indigo-400 transition-colors"
+                >
+                  See my portfolio <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+                >
+                  About SammaPix <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
