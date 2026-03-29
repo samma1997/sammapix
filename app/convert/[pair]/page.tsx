@@ -944,6 +944,689 @@ const CONVERSIONS: Record<string, ConversionData> = {
       { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
     ],
   },
+
+  "jpg-to-png": {
+    from: "JPG",
+    to: "PNG",
+    fromLabel: "JPG",
+    toLabel: "PNG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert JPG photos to lossless PNG- free, browser-based, no upload required.",
+    whyCopy:
+      "JPG is perfect for photographs but its lossy compression introduces artefacts around text, sharp edges, and flat-colour areas. Converting JPG to PNG gives you a lossless file that preserves the current quality without further degradation- ideal for screenshots with text, design assets, logos extracted from photos, or any image you plan to edit further in Photoshop or Figma.",
+    qualityNote:
+      "The output PNG will be a lossless copy of the decoded JPG pixels. Since the JPG was already lossy, you cannot recover lost detail, but converting to PNG ensures no further quality loss occurs during subsequent edits or saves. File size will increase significantly because PNG uses lossless compression.",
+    technicalNote:
+      "The JPG is decoded by the browser's native image decoder, drawn onto a Canvas element, and exported as PNG via `canvas.toBlob('image/png')`. PNG is lossless, so this process introduces zero additional quality loss. The entire conversion runs client-side in your browser.",
+    formatTable: [
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, web, email, social media",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Design assets, screenshots, editing source",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+      {
+        format: "TIFF",
+        fileSize: "Very Large",
+        quality: "Lossless",
+        compatibility: "Professional apps",
+        useCase: "Print, archival",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting JPG to PNG improve image quality?",
+        a: "No. JPG is lossy- once pixels are discarded during JPG compression, they cannot be recovered. Converting to PNG preserves the current quality and prevents further degradation, but it does not restore lost detail.",
+      },
+      {
+        q: "Why is the PNG file so much larger than the JPG?",
+        a: "JPG uses lossy compression that discards data to shrink files. PNG uses lossless compression that keeps every pixel. A 500 KB JPG can become 2-5 MB as PNG. This is the cost of zero quality loss.",
+      },
+      {
+        q: "When should I convert JPG to PNG?",
+        a: "Convert to PNG when you need to edit the image in design tools without further quality loss, when you need transparency (add it in your editor after conversion), or when your platform requires PNG format specifically.",
+      },
+      {
+        q: "Can I add transparency after converting JPG to PNG?",
+        a: "The converted PNG will have a solid white background (JPG does not support transparency). You can then open the PNG in Photoshop, Figma, or any editor and remove the background to add transparency.",
+      },
+    ],
+    related: ["png-to-jpg", "jpg-to-webp", "png-to-webp"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "png-to-ico": {
+    from: "PNG",
+    to: "ICO",
+    fromLabel: "PNG",
+    toLabel: "ICO",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert PNG images to ICO favicon format- perfect for websites, free and instant.",
+    whyCopy:
+      "Every website needs a favicon, and the ICO format remains the most universally supported favicon format across all browsers, including older versions of Internet Explorer. While modern browsers accept PNG favicons, ICO files can contain multiple resolutions (16x16, 32x32, 48x48) in a single file, ensuring your icon looks crisp everywhere- from browser tabs to bookmark bars to desktop shortcuts.",
+    qualityNote:
+      "ICO files store pixel data at multiple resolutions. The conversion from PNG is lossless at each resolution- SammaPix generates crisp, perfectly scaled icons from your source PNG. For best results, start with a square PNG of at least 256x256 pixels.",
+    technicalNote:
+      "The PNG is loaded in the browser, resized to standard favicon dimensions (16x16, 32x32, 48x48) using high-quality bicubic interpolation on a Canvas element, and then encoded into the ICO container format. The entire process happens client-side with no server upload.",
+    formatTable: [
+      {
+        format: "PNG",
+        fileSize: "Medium",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Modern favicons, web graphics, design assets",
+      },
+      {
+        format: "ICO",
+        fileSize: "Small (multi-resolution)",
+        quality: "Lossless per resolution",
+        compatibility: "Universal (all browsers)",
+        useCase: "Website favicons, Windows desktop icons",
+      },
+      {
+        format: "SVG",
+        fileSize: "Tiny (vector)",
+        quality: "Perfect at any scale",
+        compatibility: "Modern browsers only",
+        useCase: "Scalable favicons (latest browsers)",
+      },
+      {
+        format: "WEBP",
+        fileSize: "Small",
+        quality: "High",
+        compatibility: "Modern browsers",
+        useCase: "Next-gen web images",
+      },
+    ],
+    faqs: [
+      {
+        q: "What size should my PNG be for a good favicon?",
+        a: "Start with a square PNG of at least 256x256 pixels. SammaPix will automatically generate the standard favicon sizes (16x16, 32x32, 48x48) from your source image. The higher the source resolution, the better the downscaled icons will look.",
+      },
+      {
+        q: "Do I still need ICO favicons in 2026?",
+        a: "For maximum compatibility, yes. While modern browsers support PNG and even SVG favicons, ICO remains the only format guaranteed to work in all browsers, including legacy ones. Many SEO and testing tools also check specifically for favicon.ico.",
+      },
+      {
+        q: "Can an ICO file contain multiple sizes?",
+        a: "Yes- that is the main advantage of ICO over PNG for favicons. A single ICO file can contain 16x16 (browser tab), 32x32 (bookmark bar), and 48x48 (Windows taskbar) versions, and the browser picks the right size automatically.",
+      },
+      {
+        q: "How do I add the ICO favicon to my website?",
+        a: "Place the favicon.ico file in your site's root directory. Most browsers will find it automatically. You can also add `<link rel=\"icon\" href=\"/favicon.ico\">` to your HTML head for explicit declaration.",
+      },
+    ],
+    related: ["svg-to-png", "png-to-jpg", "png-to-webp"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "webp-to-gif": {
+    from: "WebP",
+    to: "GIF",
+    fromLabel: "WebP",
+    toLabel: "GIF",
+    toolPath: "/tools/webp",
+    toolLabel: "Open WebP Converter",
+    tagline: "Convert WebP images to GIF for maximum compatibility- free, instant, browser-based.",
+    whyCopy:
+      "WebP is great for the modern web, but GIF remains the universal format for animations shared on social media, messaging apps, and platforms that do not yet support animated WebP. If you need to share an animation on platforms like older email clients, forums, or Slack channels that do not render WebP, converting to GIF ensures your animation plays everywhere.",
+    qualityNote:
+      "GIF is limited to 256 colours per frame, so complex photographic content may show visible colour banding after conversion. For simple animations, icons, and graphics with limited colours, the quality difference is minimal. File size will typically increase because GIF compression is less efficient than WebP.",
+    technicalNote:
+      "The WebP image is decoded by the browser's native decoder, each frame is drawn onto a Canvas element and quantized to a 256-colour palette, then encoded into the GIF89a format. For static WebP images, a single-frame GIF is produced. The entire process runs client-side.",
+    formatTable: [
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (24-bit colour, alpha)",
+        compatibility: "Modern browsers",
+        useCase: "Web delivery, animated web content",
+      },
+      {
+        format: "GIF",
+        fileSize: "Large",
+        quality: "Low (256 colours max)",
+        compatibility: "Universal",
+        useCase: "Animations, memes, social media, messaging",
+      },
+      {
+        format: "APNG",
+        fileSize: "Medium-Large",
+        quality: "High (lossless, full colour)",
+        compatibility: "Most modern browsers",
+        useCase: "High-quality animations with transparency",
+      },
+      {
+        format: "MP4",
+        fileSize: "Smallest",
+        quality: "Excellent",
+        compatibility: "Universal",
+        useCase: "Long animations, video content",
+      },
+    ],
+    faqs: [
+      {
+        q: "Will the animation be preserved when converting WebP to GIF?",
+        a: "Yes, if the source is an animated WebP, all frames, timings, and loop settings are preserved in the output GIF. The animation plays identically, just in GIF format.",
+      },
+      {
+        q: "Why does the GIF look worse than the WebP?",
+        a: "GIF supports only 256 colours per frame, while WebP supports millions. This colour limitation causes visible banding in photographic or gradient-heavy content. For simple graphics and illustrations, the difference is usually minimal.",
+      },
+      {
+        q: "Why is the GIF file larger than the original WebP?",
+        a: "WebP uses far more efficient compression than GIF. A 500 KB animated WebP can easily become 1-2 MB as GIF. This is expected because GIF's LZW compression is much less advanced than WebP's VP8 codec.",
+      },
+      {
+        q: "When should I keep WebP instead of converting to GIF?",
+        a: "Keep WebP whenever your target platform supports it- the quality is better and the file is smaller. Convert to GIF only when you need universal compatibility, such as sharing on platforms that cannot display WebP.",
+      },
+    ],
+    related: ["gif-to-webp", "webp-to-jpg", "webp-to-png"],
+    blogSlugs: [
+      { slug: "complete-guide-webp-format", title: "The Complete Guide to the WebP Format" },
+    ],
+  },
+
+  "raw-to-jpg": {
+    from: "RAW",
+    to: "JPG",
+    fromLabel: "RAW",
+    toLabel: "JPG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert RAW camera files (CR2, NEF, ARW) to JPG- free, browser-based, no upload.",
+    whyCopy:
+      "RAW files from cameras like Canon (CR2), Nikon (NEF), and Sony (ARW) contain unprocessed sensor data with maximum dynamic range and colour depth. However, RAW files are huge (20-60 MB each), cannot be viewed in most apps, and cannot be shared on social media or email. Converting RAW to JPG makes your photos instantly shareable at a fraction of the file size while preserving excellent visual quality.",
+    qualityNote:
+      "RAW files contain 12-14 bit colour depth and wide dynamic range that cannot be fully represented in 8-bit JPG. The conversion applies automatic exposure, white balance, and tone curve adjustments to produce a well-balanced JPG. At quality 90-95, the output looks excellent for viewing and sharing purposes.",
+    technicalNote:
+      "RAW files (CR2, NEF, ARW, DNG, ORF, RW2) are decoded in-browser using a WebAssembly-based RAW decoder. The decoded pixel data is processed with automatic white balance and tone mapping, drawn onto a Canvas element, and exported as JPEG. Your camera files never leave your device.",
+    formatTable: [
+      {
+        format: "RAW (CR2/NEF/ARW)",
+        fileSize: "Very Large (20-60 MB)",
+        quality: "Maximum (unprocessed sensor data)",
+        compatibility: "Camera software only",
+        useCase: "Professional photography, post-processing",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy, 8-bit)",
+        compatibility: "Universal",
+        useCase: "Sharing, web, email, social media, print",
+      },
+      {
+        format: "TIFF",
+        fileSize: "Very Large",
+        quality: "Lossless (can be 16-bit)",
+        compatibility: "Professional apps",
+        useCase: "Professional editing, print production",
+      },
+      {
+        format: "DNG",
+        fileSize: "Large",
+        quality: "Maximum (Adobe universal RAW)",
+        compatibility: "Most RAW editors",
+        useCase: "Archival, cross-software compatibility",
+      },
+    ],
+    faqs: [
+      {
+        q: "Which RAW formats are supported?",
+        a: "SammaPix supports the most common RAW formats: Canon CR2 and CR3, Nikon NEF, Sony ARW, Adobe DNG, Olympus ORF, Panasonic RW2, and Fujifilm RAF. Drop any of these files and they will be converted to JPG.",
+      },
+      {
+        q: "Does converting RAW to JPG lose quality?",
+        a: "RAW files contain far more data than JPG can represent (12-14 bit vs 8-bit, wider dynamic range). The conversion applies tone mapping to fit this data into JPG's range. At quality 90-95, the output looks excellent for all practical purposes, but professional photographers may prefer to develop RAW files in Lightroom for maximum control.",
+      },
+      {
+        q: "Is it safe to delete my RAW files after converting to JPG?",
+        a: "We recommend keeping your original RAW files as a master archive. RAW files contain all the sensor data, allowing you to re-develop the image with different settings (exposure, white balance, colour grading) at any time. JPGs are for sharing; RAWs are for archiving.",
+      },
+      {
+        q: "Can I convert RAW files in bulk?",
+        a: "Yes. Drop up to 20 RAW files at once on the free plan (500 on Pro) and SammaPix converts them all in parallel in your browser. Download all JPG results as a ZIP archive.",
+      },
+    ],
+    related: ["heic-to-jpg", "tiff-to-jpg", "jpg-to-webp"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+      { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
+    ],
+  },
+
+  "tiff-to-png": {
+    from: "TIFF",
+    to: "PNG",
+    fromLabel: "TIFF",
+    toLabel: "PNG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert TIFF to PNG for lossless web-friendly images- free, browser-based, no upload.",
+    whyCopy:
+      "TIFF is the standard for professional scanning and print production, but TIFF files are enormous and most web platforms reject them. Converting TIFF to PNG gives you a lossless, web-compatible format that preserves every pixel from your original scan or photograph. PNG is supported everywhere- from browsers to design tools to social media- making it the ideal lossless alternative to TIFF for everyday use.",
+    qualityNote:
+      "Both TIFF and PNG are lossless formats, so the conversion preserves every pixel without any quality loss. The output PNG will be smaller than the TIFF because PNG uses more efficient lossless compression algorithms (Deflate vs LZW). File sizes are still larger than lossy formats like JPG.",
+    technicalNote:
+      "The TIFF file is decoded by the browser's image decoder, drawn onto a Canvas element, and exported as PNG via `canvas.toBlob('image/png')`. Since both formats are lossless, this is a perfect pixel-for-pixel conversion. The entire process runs client-side with no server upload.",
+    formatTable: [
+      {
+        format: "TIFF",
+        fileSize: "Very Large (20-100 MB)",
+        quality: "Lossless",
+        compatibility: "Professional apps only",
+        useCase: "Scanning, print production, archival",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Web, design, editing, screenshots",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, email, social media",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting TIFF to PNG lose quality?",
+        a: "No. Both TIFF and PNG are lossless formats. Every pixel from the original TIFF is preserved exactly in the output PNG. This is a perfect, zero-loss conversion.",
+      },
+      {
+        q: "Why is the PNG smaller than the TIFF?",
+        a: "PNG uses Deflate compression, which is generally more efficient than TIFF's LZW compression for photographic content. A 30 MB TIFF might become 15-20 MB as PNG. For even smaller files, consider converting to JPG or WebP (with some quality loss).",
+      },
+      {
+        q: "When should I convert TIFF to PNG instead of JPG?",
+        a: "Choose PNG when you need to preserve lossless quality- for example, scanned documents with text, medical images, or design assets you plan to edit further. Choose JPG when you need the smallest file size and slight quality loss is acceptable.",
+      },
+      {
+        q: "Can I convert multi-page TIFF files to PNG?",
+        a: "Yes. SammaPix converts each page of a multi-page TIFF into a separate PNG file. Download all pages individually or as a ZIP archive.",
+      },
+    ],
+    related: ["tiff-to-jpg", "png-to-webp", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "bmp-to-png": {
+    from: "BMP",
+    to: "PNG",
+    fromLabel: "BMP",
+    toLabel: "PNG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert BMP bitmaps to PNG- lossless, smaller, and universally compatible.",
+    whyCopy:
+      "BMP files store uncompressed pixel data, making them unnecessarily large for modern use. Converting BMP to PNG gives you a lossless file that is significantly smaller thanks to PNG's Deflate compression, while preserving every pixel and supporting transparency. PNG is the modern replacement for BMP in virtually every scenario- from web graphics to design assets to document embedding.",
+    qualityNote:
+      "Both BMP and PNG can store lossless pixel data, so the conversion is zero-loss. The output PNG is a perfect pixel-for-pixel copy of the BMP, but typically 50-80% smaller thanks to PNG's efficient compression. If the BMP contains 24-bit colour, the PNG will be identical in quality.",
+    technicalNote:
+      "The BMP file is decoded natively by the browser (all browsers support BMP), drawn onto a Canvas element, and exported as PNG via `canvas.toBlob('image/png')`. Since both formats are lossless, no quality is lost. The entire process runs client-side.",
+    formatTable: [
+      {
+        format: "BMP",
+        fileSize: "Enormous (uncompressed)",
+        quality: "Perfect (no compression)",
+        compatibility: "Universal (legacy)",
+        useCase: "Legacy Windows apps, raw pixel data",
+      },
+      {
+        format: "PNG",
+        fileSize: "Medium-Large (lossless compression)",
+        quality: "Perfect (lossless)",
+        compatibility: "Universal",
+        useCase: "Web, design, editing, screenshots, transparency",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, email, social media",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting BMP to PNG lose quality?",
+        a: "No. Both BMP and PNG store lossless pixel data. The conversion is a perfect, zero-loss copy. The PNG will look identical to the BMP at every zoom level.",
+      },
+      {
+        q: "How much smaller is PNG compared to BMP?",
+        a: "PNG is typically 50-80% smaller than the equivalent BMP, depending on image content. A 36 MB BMP photograph might become 8-15 MB as PNG. Images with large flat-colour areas compress even better.",
+      },
+      {
+        q: "Should I convert BMP to PNG or JPG?",
+        a: "Choose PNG if you need lossless quality, transparency support, or plan to edit the image further. Choose JPG if you want the smallest possible file size and can accept slight quality loss (best for photographs).",
+      },
+      {
+        q: "Why do some old programs still use BMP?",
+        a: "BMP is one of the oldest image formats (introduced with Windows 1.0 in 1985) and some legacy applications, embedded systems, and industrial equipment still produce BMP output. Converting to PNG modernises these files for everyday use.",
+      },
+    ],
+    related: ["bmp-to-jpg", "png-to-webp", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "gif-to-jpg": {
+    from: "GIF",
+    to: "JPG",
+    fromLabel: "GIF",
+    toLabel: "JPG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert GIF images to JPG for smaller files and universal compatibility- free and instant.",
+    whyCopy:
+      "Static GIF files are often used for simple graphics, but they are limited to 256 colours and use inefficient compression. Converting static GIFs to JPG typically results in smaller files with much better colour reproduction. This is especially useful for GIF screenshots, memes with photographic backgrounds, or any non-animated GIF where the 256-colour palette creates visible banding.",
+    qualityNote:
+      "JPG supports millions of colours vs GIF's 256, so photographic GIFs actually look better as JPG. For animated GIFs, only the first frame is captured since JPG does not support animation. At quality 85, the output is excellent for all practical purposes.",
+    technicalNote:
+      "The GIF is decoded by the browser's native decoder (first frame for animated GIFs), drawn onto a Canvas element with a white background fill to handle any transparency, and exported as JPEG via `canvas.toBlob('image/jpeg', quality)`. No server upload required.",
+    formatTable: [
+      {
+        format: "GIF",
+        fileSize: "Variable",
+        quality: "Low (256 colours max)",
+        compatibility: "Universal",
+        useCase: "Simple animations, legacy graphics",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (millions of colours, lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, web images, email, social media",
+      },
+      {
+        format: "PNG",
+        fileSize: "Medium-Large",
+        quality: "Lossless (millions of colours)",
+        compatibility: "Universal",
+        useCase: "Graphics with transparency, editing",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless, animated)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance, animated content",
+      },
+    ],
+    faqs: [
+      {
+        q: "What happens to GIF animation when converting to JPG?",
+        a: "JPG does not support animation. SammaPix captures the first frame of an animated GIF and converts it to a static JPG image. If you need to preserve animation, convert to WebP instead.",
+      },
+      {
+        q: "Does converting GIF to JPG improve quality?",
+        a: "For photographic content, yes- JPG supports millions of colours while GIF is limited to 256. This means smoother gradients, more accurate skin tones, and no colour banding. For simple line art or text, GIF may actually look sharper.",
+      },
+      {
+        q: "What happens to GIF transparency when converting to JPG?",
+        a: "JPG does not support transparency. Transparent areas in the GIF are filled with white in the output JPG. If you need to preserve transparency, convert to PNG or WebP instead.",
+      },
+      {
+        q: "Is GIF to JPG useful for memes and social media?",
+        a: "Yes- many meme images are saved as static GIFs with poor colour quality. Converting to JPG typically reduces file size while dramatically improving colour reproduction, making the image look better on social media.",
+      },
+    ],
+    related: ["gif-to-webp", "jpg-to-webp", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
+
+  "avif-to-png": {
+    from: "AVIF",
+    to: "PNG",
+    fromLabel: "AVIF",
+    toLabel: "PNG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Convert AVIF images to lossless PNG- full compatibility, free, no upload.",
+    whyCopy:
+      "AVIF offers cutting-edge compression but many desktop applications, design tools, and older browsers cannot open AVIF files. Converting AVIF to PNG gives you a lossless, universally-compatible file that works in every image editor, design tool, and operating system. This is the right choice when you need to edit AVIF images in software that does not yet support the format.",
+    qualityNote:
+      "PNG is lossless, so the output preserves every pixel from the decoded AVIF image without adding further compression artefacts. If the source AVIF was lossy, the PNG faithfully captures that quality level. File size will be significantly larger because PNG uses lossless compression while AVIF uses highly efficient lossy encoding.",
+    technicalNote:
+      "The AVIF file is decoded by the browser's native image decoder (supported in Chrome 85+, Firefox 93+, Safari 16.1+), drawn onto a Canvas element, and exported as PNG via `canvas.toBlob('image/png')`. Since PNG is lossless, zero additional quality loss occurs. The entire process runs client-side.",
+    formatTable: [
+      {
+        format: "AVIF",
+        fileSize: "Smallest (AV1 codec)",
+        quality: "Excellent",
+        compatibility: "Modern browsers only",
+        useCase: "Next-gen web images",
+      },
+      {
+        format: "PNG",
+        fileSize: "Large",
+        quality: "Lossless",
+        compatibility: "Universal",
+        useCase: "Editing, design, print, screenshots",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Photos, email, social media",
+      },
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting AVIF to PNG lose quality?",
+        a: "No additional quality is lost. PNG is lossless, so it preserves every pixel from the decoded AVIF image. If the source AVIF was lossy, that quality level is faithfully maintained in the PNG output.",
+      },
+      {
+        q: "Why is the PNG file so much larger than the AVIF?",
+        a: "AVIF uses the highly efficient AV1 codec that delivers exceptional compression. PNG uses lossless compression that preserves every pixel but produces much larger files. A 100 KB AVIF can easily become 1-3 MB as PNG.",
+      },
+      {
+        q: "When should I convert AVIF to PNG instead of JPG?",
+        a: "Choose PNG when you need lossless quality for editing, need transparency support, or are working with design assets. Choose JPG when you want a smaller file for sharing and can accept slight quality loss from re-encoding.",
+      },
+      {
+        q: "Can I open AVIF in Photoshop?",
+        a: "Photoshop CC 2023 (version 24.7) and later support AVIF natively. For older versions, converting to PNG with SammaPix is the fastest way to get your AVIF images into Photoshop.",
+      },
+    ],
+    related: ["avif-to-jpg", "png-to-webp", "webp-to-png"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+      { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
+    ],
+  },
+
+  "heic-to-webp": {
+    from: "HEIC",
+    to: "WebP",
+    fromLabel: "HEIC",
+    toLabel: "WebP",
+    toolPath: "/tools/heic",
+    toolLabel: "Open HEIC Converter",
+    tagline: "Convert iPhone HEIC photos to WebP- maximum compression with excellent quality, free.",
+    whyCopy:
+      "HEIC is Apple's efficient photo format, but it is not supported outside the Apple ecosystem. WebP is the ideal web format, offering even better compression than HEIC with universal browser support. Converting HEIC directly to WebP gives you the smallest possible file for web delivery- perfect for uploading photos to your website, blog, or e-commerce store with optimal Core Web Vitals scores.",
+    qualityNote:
+      "Both HEIC and WebP are modern high-efficiency formats. At quality 80, WebP produces files roughly the same size as HEIC with indistinguishable visual quality. The output is ideal for web use- dramatically smaller than JPG while looking identical.",
+    technicalNote:
+      "The HEIC file is decoded in-browser via a WebAssembly-based HEIC decoder (libheif), the raw pixel data is drawn onto a Canvas element, and exported as WebP via `canvas.toBlob('image/webp', quality)`. Your photos never leave your device.",
+    formatTable: [
+      {
+        format: "HEIC",
+        fileSize: "Small (HEVC codec)",
+        quality: "High",
+        compatibility: "Apple only",
+        useCase: "iPhone/iPad native storage",
+      },
+      {
+        format: "WebP",
+        fileSize: "Small (VP8/VP8L codec)",
+        quality: "High (lossy or lossless)",
+        compatibility: "All modern browsers",
+        useCase: "Web delivery, performance optimization",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy)",
+        compatibility: "Universal",
+        useCase: "Email, print, legacy apps",
+      },
+      {
+        format: "AVIF",
+        fileSize: "Smallest (AV1 codec)",
+        quality: "Excellent",
+        compatibility: "Modern browsers only",
+        useCase: "Next-gen web images",
+      },
+    ],
+    faqs: [
+      {
+        q: "Why convert HEIC to WebP instead of JPG?",
+        a: "WebP produces files 25-35% smaller than JPG at the same visual quality. If your photos are destined for a website or web app, WebP is the optimal choice for performance. Choose JPG only when you need maximum compatibility (email, print, legacy software).",
+      },
+      {
+        q: "Does converting HEIC to WebP lose quality?",
+        a: "Both HEIC and WebP are efficient lossy formats. At quality 80-85, the WebP output is visually indistinguishable from the HEIC original. SammaPix lets you adjust quality from 1 to 100 for full control.",
+      },
+      {
+        q: "Can I use HEIC-to-WebP converted photos on WordPress?",
+        a: "Yes. WordPress has supported WebP since version 5.8. Upload the converted WebP files directly to your media library. Pair with a caching plugin for optimal delivery speed.",
+      },
+      {
+        q: "Can I batch convert my iPhone photos from HEIC to WebP?",
+        a: "Yes. Drop up to 20 HEIC files at once on the free plan (500 on Pro) and SammaPix converts them all to WebP in parallel. Download all results as a ZIP archive.",
+      },
+    ],
+    related: ["heic-to-jpg", "heic-to-png", "jpg-to-webp"],
+    blogSlugs: [
+      { slug: "iphone-heic-to-jpg-guide", title: "The Complete Guide to Converting iPhone HEIC Photos" },
+      { slug: "complete-guide-webp-format", title: "The Complete Guide to the WebP Format" },
+    ],
+  },
+
+  "svg-to-jpg": {
+    from: "SVG",
+    to: "JPG",
+    fromLabel: "SVG",
+    toLabel: "JPG",
+    toolPath: "/tools/compress",
+    toolLabel: "Open Image Converter",
+    tagline: "Rasterize SVG vector graphics to JPG- choose your resolution, free and instant.",
+    whyCopy:
+      "SVG is ideal for scalable web graphics, but many platforms require raster formats. Email clients block SVG for security reasons, social media sites require JPG or PNG uploads, and some CMS platforms cannot handle SVG files. Converting SVG to JPG gives you a compact raster image that works everywhere. JPG is the better choice over PNG when file size matters and the image does not need transparency.",
+    qualityNote:
+      "SVG to JPG involves rasterization (converting vectors to pixels) followed by JPEG compression. The output quality depends on two factors: the resolution you choose and the JPG quality level. At 1200px wide and quality 90, the result is excellent for most uses. Transparent areas in the SVG are filled with white since JPG does not support transparency.",
+    technicalNote:
+      "The SVG is loaded into the browser's native SVG renderer, rasterized at the specified resolution onto a Canvas element with a white background fill, and exported as JPEG via `canvas.toBlob('image/jpeg', quality)`. All rendering uses the browser's built-in SVG engine for accurate path and font rendering. No server upload required.",
+    formatTable: [
+      {
+        format: "SVG",
+        fileSize: "Tiny (vector, resolution-independent)",
+        quality: "Perfect at any scale",
+        compatibility: "Browsers only (blocked in email)",
+        useCase: "Logos, icons, illustrations, web graphics",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small-Medium",
+        quality: "High (lossy, fixed resolution)",
+        compatibility: "Universal",
+        useCase: "Social media, email, print, web images",
+      },
+      {
+        format: "PNG",
+        fileSize: "Medium-Large",
+        quality: "Lossless (fixed resolution)",
+        compatibility: "Universal",
+        useCase: "Design assets, transparency-needed images",
+      },
+      {
+        format: "WebP",
+        fileSize: "Small",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "What resolution should I use when converting SVG to JPG?",
+        a: "For social media posts, 1080-1200px wide is ideal. For email headers, 600px works well. For print at 300 DPI, multiply your target size in inches by 300 (e.g., 3000px for a 10-inch print). SammaPix lets you specify exact dimensions.",
+      },
+      {
+        q: "What happens to SVG transparency when converting to JPG?",
+        a: "JPG does not support transparency. SammaPix fills all transparent areas with white before encoding. If you need to preserve transparency, convert to PNG instead.",
+      },
+      {
+        q: "Is SVG to JPG or SVG to PNG better?",
+        a: "Choose JPG when file size matters and you do not need transparency (social media uploads, email headers, web photos). Choose PNG when you need transparency, lossless quality, or plan to edit the rasterized image further.",
+      },
+      {
+        q: "Can I convert SVG with embedded fonts to JPG?",
+        a: "Yes, if the fonts are embedded in the SVG or available as web fonts. If the SVG references external fonts that are not loaded, the browser substitutes a default font. For best results, use SVGs with embedded or standard web-safe fonts.",
+      },
+    ],
+    related: ["svg-to-png", "jpg-to-webp", "png-to-jpg"],
+    blogSlugs: [
+      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------------------

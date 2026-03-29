@@ -8,14 +8,14 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Portfolio - Luca Sammarco Photography",
   description:
-    "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China. Curated travel photographs with stories from each journey.",
+    "Photography portfolio organized by travel destination. 71 curated travel photographs from Sri Lanka with stories from each journey.",
   alternates: {
     canonical: `${APP_URL}/portfolio`,
   },
   openGraph: {
     title: "Portfolio - Luca Sammarco Photography",
     description:
-      "Photography portfolio organized by travel destination: Sri Lanka, Bali, Thailand, Japan, China.",
+      "Photography portfolio organized by travel destination. 71 curated travel photographs from Sri Lanka.",
     url: `${APP_URL}/portfolio`,
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],

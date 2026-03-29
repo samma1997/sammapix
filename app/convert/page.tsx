@@ -122,6 +122,66 @@ const CONVERSIONS = [
     to: "JPG",
     description: "Convert legacy BMP bitmaps to compressed JPG format.",
   },
+  {
+    pair: "jpg-to-png",
+    from: "JPG",
+    to: "PNG",
+    description: "Convert JPG photos to lossless PNG for editing and design.",
+  },
+  {
+    pair: "png-to-ico",
+    from: "PNG",
+    to: "ICO",
+    description: "Convert PNG images to ICO favicon format for websites.",
+  },
+  {
+    pair: "webp-to-gif",
+    from: "WebP",
+    to: "GIF",
+    description: "Convert WebP images to universally-compatible GIF format.",
+  },
+  {
+    pair: "raw-to-jpg",
+    from: "RAW",
+    to: "JPG",
+    description: "Convert RAW camera files (CR2, NEF, ARW) to shareable JPG.",
+  },
+  {
+    pair: "tiff-to-png",
+    from: "TIFF",
+    to: "PNG",
+    description: "Convert TIFF files to lossless, web-friendly PNG format.",
+  },
+  {
+    pair: "bmp-to-png",
+    from: "BMP",
+    to: "PNG",
+    description: "Convert uncompressed BMP bitmaps to lossless PNG.",
+  },
+  {
+    pair: "gif-to-jpg",
+    from: "GIF",
+    to: "JPG",
+    description: "Convert static GIF images to JPG with better colour support.",
+  },
+  {
+    pair: "avif-to-png",
+    from: "AVIF",
+    to: "PNG",
+    description: "Convert next-gen AVIF images to lossless, editable PNG.",
+  },
+  {
+    pair: "heic-to-webp",
+    from: "HEIC",
+    to: "WebP",
+    description: "Convert iPhone HEIC photos to optimized WebP for the web.",
+  },
+  {
+    pair: "svg-to-jpg",
+    from: "SVG",
+    to: "JPG",
+    description: "Rasterize SVG vector graphics to compact JPG images.",
+  },
 ];
 
 export default function ConvertIndexPage() {

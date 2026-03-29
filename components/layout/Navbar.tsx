@@ -144,6 +144,9 @@ export default function Navbar() {
           <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             Blog
           </Link>
+          <Link href="/portfolio" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
+            Portfolio
+          </Link>
           <Link href="/about" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             About
           </Link>
@@ -211,6 +214,7 @@ export default function Navbar() {
             <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Tools</Link>
             <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Pricing</Link>
             <Link href="/blog" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Blog</Link>
+            <Link href="/portfolio" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Portfolio</Link>
             <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>About</Link>
 
             <div className="pt-2 border-t border-gray-100 dark:border-[#2A2A2A] mt-1 flex gap-2">
