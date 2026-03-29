@@ -132,10 +132,12 @@ export default function RemoveBgPage() {
           </h1>
         </div>
 
-        {/* Subtext */}
+        {/* GEO answer box */}
         <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
-          AI-powered background removal that runs in your browser. Get
-          transparent PNGs in seconds — your images never leave your device.
+          SammaPix Remove Background is a free AI-powered tool that removes image
+          backgrounds in under 5 seconds and outputs a transparent PNG. The AI
+          model runs entirely in your browser via WebAssembly — no upload to any
+          server, no signup required, and no daily limits.
         </p>
 
         {/* Trust badges */}

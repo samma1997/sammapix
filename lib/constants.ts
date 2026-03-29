@@ -108,6 +108,7 @@ export const BLOG_SLUGS = [
   "webp-vs-avif-vs-jpeg-comparison",
   "how-to-speed-up-website-with-image-optimization",
   "sammapix-vs-tinypng-benchmark-2026",
+  "image-compression-benchmark-2026",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

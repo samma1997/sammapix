@@ -97,8 +97,11 @@ export default function WebpPage() {
           </div>
           <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">WebP Converter</h1>
         </div>
-        <p className="text-sm text-[#737373]">
-          Convert JPG, PNG and GIF to WebP format directly in your browser. WebP files are up to 30% smaller- nothing uploaded to any server.
+        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed max-w-xl">
+          SammaPix WebP Converter is a free online tool that converts JPG, PNG,
+          and GIF images to WebP format instantly in your browser. WebP files are
+          25–34% smaller than JPEG at the same visual quality — no upload to any
+          server, no signup, and no file limits.
         </p>
       </div>
 
