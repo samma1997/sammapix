@@ -859,6 +859,447 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     ],
     related: ["passport", "instagram", "linkedin"],
   },
+
+  // ─── SNAPCHAT ─────────────────────────────────────────────────────────────
+  {
+    slug: "snapchat",
+    name: "Snapchat",
+    displayName: "Snapchat",
+    titleKeyword: "Snapchat",
+    metaDescription:
+      "Resize images for Snapchat — Story 1080×1920, Spotlight 1080×1920, Profile 320×320, Geofilter 1080×2340. Free online, no upload required.",
+    ogDescription:
+      "Resize photos for every Snapchat format instantly. Story, Spotlight, Profile picture, and Geofilter — exact pixel dimensions, free and private.",
+    keywords: [
+      "resize image for snapchat",
+      "snapchat image size",
+      "snapchat story dimensions",
+      "snapchat spotlight size",
+      "snapchat geofilter dimensions",
+      "snapchat profile picture size",
+      "resize for snapchat free",
+      "1080x1920 snapchat",
+    ],
+    sizes: [
+      { type: "Story", width: 1080, height: 1920, note: "Full-screen vertical snap" },
+      { type: "Spotlight", width: 1080, height: 1920, note: "Vertical video/image for Spotlight feed" },
+      { type: "Profile Picture", width: 320, height: 320, note: "Bitmoji circle overlay" },
+      { type: "Geofilter", width: 1080, height: 2340, note: "Custom location-based overlay" },
+    ],
+    steps: [
+      "Open ResizePack, drop your image and select the Snapchat preset — Story, Spotlight, Profile or Geofilter.",
+      "For Geofilters (1080×2340), design with transparent areas where the camera feed shows through. Use CropRatio to frame your artwork at the tall 9:19.5 ratio before resizing.",
+      "Download the resized image. Stories and Spotlights upload directly from your camera roll. Geofilters must be submitted through the Snapchat Creative Portal for approval.",
+    ],
+    faqs: [
+      {
+        q: "What size should a Snapchat Story image be?",
+        a: "1080×1920 px (9:16 ratio) is the standard Snapchat Story size. This fills the entire screen on most smartphones without any cropping or black bars.",
+      },
+      {
+        q: "What dimensions does Snapchat Spotlight require?",
+        a: "Spotlight uses the same 1080×1920 px (9:16) format as Stories. Content can be photos or videos. For best results, fill the entire frame — Spotlight penalizes content with visible black bars in its recommendation algorithm.",
+      },
+      {
+        q: "How big should a Snapchat Geofilter be?",
+        a: "Snapchat Geofilters must be 1080×2340 px in PNG format with transparency. The file must be under 300 KB. Design your overlay elements around the edges, leaving the center transparent so the camera image shows through.",
+      },
+      {
+        q: "What is the Snapchat profile picture size?",
+        a: "Snapchat displays profile pictures at 320×320 px, rendered as a circle with the Bitmoji overlay. Upload at 320×320 or larger at a 1:1 ratio for the sharpest result.",
+      },
+      {
+        q: "Does Snapchat compress uploaded images?",
+        a: "Yes, Snapchat applies heavy compression to Stories and Snaps. Uploading at exactly 1080×1920 minimizes the quality loss because Snapchat does not need to rescale your image before its own compression.",
+      },
+    ],
+    related: ["instagram", "tiktok", "whatsapp"],
+  },
+
+  // ─── WHATSAPP ─────────────────────────────────────────────────────────────
+  {
+    slug: "whatsapp",
+    name: "WhatsApp",
+    displayName: "WhatsApp",
+    titleKeyword: "WhatsApp",
+    metaDescription:
+      "Resize images for WhatsApp — Profile 500×500, Status 1080×1920, Group Icon 192×192. Free online, no upload required.",
+    ogDescription:
+      "Resize photos for WhatsApp profile pictures, Status stories, and group icons. Exact dimensions, processed privately in your browser.",
+    keywords: [
+      "resize image for whatsapp",
+      "whatsapp profile picture size",
+      "whatsapp status image dimensions",
+      "whatsapp group icon size",
+      "whatsapp dp size",
+      "resize for whatsapp free",
+      "whatsapp image dimensions 2026",
+      "500x500 whatsapp",
+    ],
+    sizes: [
+      { type: "Profile Picture", width: 500, height: 500, note: "Displayed as circle at ~150 px" },
+      { type: "Status", width: 1080, height: 1920, note: "Full-screen vertical story" },
+      { type: "Group Icon", width: 192, height: 192, note: "Small circular group avatar" },
+    ],
+    steps: [
+      "Drop your image into ResizePack and choose the WhatsApp preset — Profile Picture, Status, or Group Icon.",
+      "For profile pictures, crop to a square (1:1) first using CropRatio — WhatsApp displays these as circles, so center your subject and leave margin around the edges.",
+      "Download and set your profile picture directly in WhatsApp Settings, or upload a Status from your camera roll. Group icons are set in the group info screen.",
+    ],
+    faqs: [
+      {
+        q: "What size is a WhatsApp profile picture?",
+        a: "WhatsApp profile pictures are stored at 500×500 px and displayed at approximately 150×150 px in chat lists. Upload at 500×500 for the best quality when someone taps to view your full profile photo.",
+      },
+      {
+        q: "What dimensions should a WhatsApp Status image be?",
+        a: "WhatsApp Status uses the same 1080×1920 px (9:16) format as most vertical story formats. Images that are not 9:16 will be zoomed and cropped to fill the screen.",
+      },
+      {
+        q: "How do I make a WhatsApp group icon?",
+        a: "Create or resize a square image to 192×192 px. WhatsApp displays group icons as small circles in chat lists, so keep the main content centered. Simple graphics and logos work better than detailed photos at this tiny display size.",
+      },
+      {
+        q: "Does WhatsApp compress images I send in chat?",
+        a: "Yes, WhatsApp heavily compresses images sent as regular messages (down to ~100 KB). To send full-quality images, use the Document attachment option instead. Profile pictures and Status images are also compressed but less aggressively.",
+      },
+      {
+        q: "Why does my WhatsApp profile picture look blurry?",
+        a: "WhatsApp crops and compresses profile photos. Upload a square image at exactly 500×500 px with the subject centered — this gives WhatsApp the least work to do and results in the sharpest profile picture.",
+      },
+    ],
+    related: ["snapchat", "instagram", "facebook"],
+  },
+
+  // ─── EMAIL HEADER ─────────────────────────────────────────────────────────
+  {
+    slug: "email-header",
+    name: "Email Header",
+    displayName: "Email Header",
+    titleKeyword: "Email Headers and Newsletters",
+    metaDescription:
+      "Resize images for email headers — Newsletter Banner 600×200, Email Banner 600×300, Signature Image 300×100. Free online, no upload required.",
+    ogDescription:
+      "Resize images for email newsletters, banners, and signatures. Exact dimensions for Mailchimp, ConvertKit, Gmail, and all major email clients.",
+    keywords: [
+      "resize image for email header",
+      "email banner size",
+      "newsletter image dimensions",
+      "email signature image size",
+      "mailchimp header image size",
+      "email header dimensions 2026",
+      "resize for email newsletter free",
+      "600px email image",
+    ],
+    sizes: [
+      { type: "Newsletter Header", width: 600, height: 200, note: "Standard email header banner" },
+      { type: "Email Banner", width: 600, height: 300, note: "Wider banner for promotional emails" },
+      { type: "Signature Image", width: 300, height: 100, note: "Logo or headshot for email signature" },
+    ],
+    steps: [
+      "Open ResizePack, drop your image and select the Email Header preset — Newsletter Header, Email Banner, or Signature Image.",
+      "For email signatures, keep the image under 50 KB after resizing — use our Compress tool to optimize further. Large signature images trigger spam filters and slow email loading.",
+      "Download and insert into your email template. For Mailchimp, ConvertKit, or Brevo, upload the resized image to their media library. For Gmail signatures, paste or insert the image in Settings > Signature.",
+    ],
+    faqs: [
+      {
+        q: "What is the standard email header image size?",
+        a: "600 px wide is the email standard because most email clients render at 600 px max width. Height varies — 200 px for compact headers, 300 px for promotional banners. Some modern templates use 640 or 700 px widths, but 600 px guarantees compatibility.",
+      },
+      {
+        q: "What size should an email signature image be?",
+        a: "300×100 px is the practical maximum for email signature logos. Larger images push content below the fold and can trigger spam filters. Keep file size under 30-50 KB — use JPEG for photos or PNG for logos with transparency.",
+      },
+      {
+        q: "Do email clients support WebP images?",
+        a: "No — many email clients (Outlook, older Gmail) do not support WebP. Always use JPEG for photographic email images and PNG for logos or graphics. This ensures your images render correctly across Gmail, Outlook, Apple Mail, and all other clients.",
+      },
+      {
+        q: "Why does my email header look blurry in Outlook?",
+        a: "Outlook on Windows renders images at 96 DPI regardless of the image resolution. To compensate, export at 2x size (1200×400 px) and set the HTML width to 600 px. SammaPix can resize to either standard or retina dimensions.",
+      },
+      {
+        q: "How large should email images be in file size?",
+        a: "Keep individual email images under 200 KB, and total email size under 100 KB of HTML plus 500 KB of images. Gmail clips emails over 102 KB of HTML. Use SammaPix Compress after resizing to hit optimal file sizes.",
+      },
+    ],
+    related: ["linkedin", "blog-header", "facebook"],
+  },
+
+  // ─── EBAY ─────────────────────────────────────────────────────────────────
+  {
+    slug: "ebay",
+    name: "eBay",
+    displayName: "eBay",
+    titleKeyword: "eBay Listings",
+    metaDescription:
+      "Resize images for eBay — Listing 1600×1600, Gallery 500×500, Zoom 1600×1600. Free online tool, no upload required.",
+    ogDescription:
+      "Resize product photos for eBay listings instantly. Listing images, gallery thumbnails, and zoom views — exact dimensions, free and private.",
+    keywords: [
+      "resize image for ebay",
+      "ebay listing image size",
+      "ebay photo dimensions",
+      "ebay product image requirements",
+      "1600x1600 ebay",
+      "ebay gallery image size",
+      "resize for ebay listing free",
+      "ebay image guidelines 2026",
+    ],
+    sizes: [
+      { type: "Listing Image", width: 1600, height: 1600, note: "Primary listing photo — enables zoom" },
+      { type: "Gallery Thumbnail", width: 500, height: 500, note: "Search results grid" },
+      { type: "Zoom Image", width: 1600, height: 1600, note: "Hover-to-zoom detail view" },
+    ],
+    steps: [
+      "Drop your product photo into ResizePack and select the eBay preset — Listing, Gallery, or Zoom.",
+      "eBay requires a white or neutral background for best results. If your photo has a busy background, use our Remove Background tool first, then resize.",
+      "Download and upload to your eBay listing. eBay recommends at least 1600 px on the longest side to enable the zoom feature that increases buyer confidence and conversion rates.",
+    ],
+    faqs: [
+      {
+        q: "What size should eBay listing photos be?",
+        a: "eBay recommends 1600×1600 px minimum for the primary listing image. This enables the hover-to-zoom feature in search results. The maximum is 12000×12000 px, but 1600-2000 px is the practical sweet spot for file size and quality.",
+      },
+      {
+        q: "Does eBay require a white background?",
+        a: "eBay does not strictly require white backgrounds for most categories, but listings with white or light neutral backgrounds consistently rank higher in search and convert better. The first image especially benefits from a clean background.",
+      },
+      {
+        q: "How many images can I add to an eBay listing?",
+        a: "eBay allows up to 24 free images per listing. Use SammaPix to batch-resize all product photos to 1600×1600 px at once. Show different angles, close-ups of details, packaging, and scale references.",
+      },
+      {
+        q: "What file format does eBay accept?",
+        a: "eBay accepts JPEG, PNG, TIFF, BMP, and GIF. JPEG is recommended for product photos — it produces the smallest file size while maintaining excellent quality. Keep individual images under 12 MB.",
+      },
+      {
+        q: "Why is the zoom feature not working on my eBay listing?",
+        a: "The zoom-on-hover feature requires images at least 800 px on the longest side, and works best at 1600 px or larger. If your images are under 800 px, eBay disables zoom. Resize to 1600×1600 with SammaPix to ensure zoom is always enabled.",
+      },
+    ],
+    related: ["amazon", "shopify-product", "etsy-listing"],
+  },
+
+  // ─── AMAZON ───────────────────────────────────────────────────────────────
+  {
+    slug: "amazon",
+    name: "Amazon",
+    displayName: "Amazon",
+    titleKeyword: "Amazon Product Listings",
+    metaDescription:
+      "Resize images for Amazon — Main Image 2000×2000, Swatch 250×250, Zoom 2000×2000. Free online tool, no upload required.",
+    ogDescription:
+      "Resize product photos for Amazon listings. Main image, swatch thumbnail, and zoom view — exact dimensions for maximum conversions.",
+    keywords: [
+      "resize image for amazon",
+      "amazon product image size",
+      "amazon listing photo dimensions",
+      "amazon main image requirements",
+      "2000x2000 amazon",
+      "amazon swatch image size",
+      "resize for amazon listing free",
+      "amazon image guidelines 2026",
+    ],
+    sizes: [
+      { type: "Main Image", width: 2000, height: 2000, note: "Pure white background required" },
+      { type: "Swatch Image", width: 250, height: 250, note: "Color/variant selector thumbnail" },
+      { type: "Zoom Image", width: 2000, height: 2000, note: "Hover-to-zoom on product detail page" },
+    ],
+    steps: [
+      "Drop your product photo into ResizePack and select the Amazon preset — Main Image, Swatch, or Zoom.",
+      "Amazon requires a pure white background (RGB 255,255,255) for the main image. Use our Remove Background tool first, then place the product on white before resizing.",
+      "Download and upload through Amazon Seller Central. The main image must be at least 1000 px on the longest side for zoom, but 2000 px produces the sharpest zoom experience.",
+    ],
+    faqs: [
+      {
+        q: "What are Amazon's image requirements for product listings?",
+        a: "The main image must have a pure white background (RGB 255,255,255), be at least 1000 px on the longest side (2000 px recommended), and show only the product without text, logos, or watermarks. Supplementary images have more flexibility.",
+      },
+      {
+        q: "Why does Amazon require 2000×2000 px images?",
+        a: "Images at 2000 px enable Amazon's zoom feature, which lets shoppers see fine product details. Listings with zoom-enabled images have significantly higher conversion rates because buyers feel more confident about product quality.",
+      },
+      {
+        q: "What is an Amazon swatch image?",
+        a: "Swatch images appear as tiny color or variant selectors on the product page (e.g., different colors of a t-shirt). They display at 250×250 px. Each should clearly show the variant difference — usually just the color or pattern.",
+      },
+      {
+        q: "Can I use lifestyle images on Amazon?",
+        a: "Yes, but only for supplementary images (positions 2-9). The main image (position 1) must show the product on a pure white background. Supplementary images can show the product in use, infographics, size charts, and packaging.",
+      },
+      {
+        q: "What file format does Amazon accept?",
+        a: "Amazon accepts JPEG (preferred), TIFF, PNG, and GIF. Use JPEG for photos at quality 90%+ to keep file size reasonable while maintaining the detail Amazon's zoom feature needs. Maximum file size is 10 MB per image.",
+      },
+    ],
+    related: ["ebay", "shopify-product", "etsy-listing"],
+  },
+
+  // ─── SHOPIFY PRODUCT ──────────────────────────────────────────────────────
+  {
+    slug: "shopify-product",
+    name: "Shopify Product",
+    displayName: "Shopify Product",
+    titleKeyword: "Shopify Product Images",
+    metaDescription:
+      "Resize images for Shopify — Product 2048×2048, Collection 1024×1024, Slideshow 1920×1080. Free online tool, no upload required.",
+    ogDescription:
+      "Resize product photos for Shopify stores. Product images, collection thumbnails, and slideshow banners — perfect dimensions for your theme.",
+    keywords: [
+      "resize image for shopify",
+      "shopify product image size",
+      "shopify collection image dimensions",
+      "shopify slideshow banner size",
+      "2048x2048 shopify",
+      "shopify image requirements",
+      "resize for shopify free",
+      "shopify product photo dimensions 2026",
+    ],
+    sizes: [
+      { type: "Product Image", width: 2048, height: 2048, note: "Square product photo for consistent grid" },
+      { type: "Collection Image", width: 1024, height: 1024, note: "Category page featured image" },
+      { type: "Slideshow Banner", width: 1920, height: 1080, note: "Homepage hero carousel" },
+    ],
+    steps: [
+      "Open ResizePack, drop your product photo and select the Shopify preset — Product Image, Collection Image, or Slideshow Banner.",
+      "Shopify displays products in grids, so consistent square images (1:1 ratio) create the cleanest layout. Use CropRatio to square-crop your photo before resizing to 2048×2048.",
+      "Download and upload to Shopify via Products > Media. Shopify automatically generates responsive sizes from your uploaded image, so starting with the largest recommended size ensures sharp results at every breakpoint.",
+    ],
+    faqs: [
+      {
+        q: "What is the best product image size for Shopify?",
+        a: "2048×2048 px square is the recommended size. Shopify's image CDN automatically generates smaller responsive versions from your upload. Starting at 2048 px ensures crisp display on retina devices and enables smooth pinch-to-zoom on mobile.",
+      },
+      {
+        q: "Does Shopify compress my images?",
+        a: "Yes, Shopify automatically processes and serves images via its CDN in optimized formats (including WebP and AVIF). Upload the highest quality source image — Shopify handles the optimization. Do not pre-compress to low quality.",
+      },
+      {
+        q: "Should Shopify product images be square?",
+        a: "Square (1:1) images are strongly recommended because they create consistent, professional-looking product grids regardless of your theme. Non-square images result in uneven rows with white space or cropping.",
+      },
+      {
+        q: "What size should Shopify collection images be?",
+        a: "1024×1024 px is ideal for collection (category) featured images. These appear on the Collections page and in navigation menus. Keep them visually distinct and representative of the products in each collection.",
+      },
+      {
+        q: "How do I optimize Shopify slideshow banner images?",
+        a: "Use 1920×1080 px (16:9) for slideshow banners. Keep text overlays in the center 60% of the image — different themes crop edges differently on mobile. Compress to under 500 KB with SammaPix for fast homepage loading.",
+      },
+    ],
+    related: ["amazon", "ebay", "etsy-listing"],
+  },
+
+  // ─── ETSY LISTING ─────────────────────────────────────────────────────────
+  {
+    slug: "etsy-listing",
+    name: "Etsy Listing",
+    displayName: "Etsy Listing",
+    titleKeyword: "Etsy Listings",
+    metaDescription:
+      "Resize images for Etsy — Listing 2000×2000, Thumbnail 570×456, Shop Banner 1200×300. Free online tool, no upload required.",
+    ogDescription:
+      "Resize photos for Etsy listings, thumbnails, and shop banners. Exact dimensions for maximum visibility in Etsy search results.",
+    keywords: [
+      "resize image for etsy",
+      "etsy listing image size",
+      "etsy thumbnail dimensions",
+      "etsy shop banner size",
+      "etsy product photo requirements",
+      "2000x2000 etsy",
+      "resize for etsy listing free",
+      "etsy image guidelines 2026",
+    ],
+    sizes: [
+      { type: "Listing Image", width: 2000, height: 2000, note: "Square product photo for listing gallery" },
+      { type: "Thumbnail", width: 570, height: 456, note: "Search results and category pages" },
+      { type: "Shop Banner", width: 1200, height: 300, note: "Storefront header image" },
+    ],
+    steps: [
+      "Drop your product photo into ResizePack and select the Etsy preset — Listing Image, Thumbnail, or Shop Banner.",
+      "For Etsy thumbnails, the first listing image is auto-cropped to 570×456 (5:4 ratio) in search results. Use CropRatio at 5:4 first to control exactly what appears in search — this is critical because the thumbnail drives click-through rates.",
+      "Download and upload to your Etsy listing. Add all 10 allowed images — listings with more photos rank higher in Etsy search and convert better.",
+    ],
+    faqs: [
+      {
+        q: "What size should Etsy listing photos be?",
+        a: "Etsy recommends at least 2000 px on the shortest side. For maximum quality, use 2000×2000 px square images. Etsy allows up to 10 images per listing — use all 10 slots for better search ranking and buyer confidence.",
+      },
+      {
+        q: "How does Etsy crop thumbnails in search?",
+        a: "Etsy crops listing thumbnails to a 5:4 ratio (570×456 px) in search results. The crop is center-aligned. If your product is not centered, it may be partially cut off in search. Pre-crop to 5:4 with SammaPix to control the composition.",
+      },
+      {
+        q: "What size is the Etsy shop banner?",
+        a: "The Etsy shop banner (big banner layout) is 1200×300 px. On mobile it may be cropped to a narrower height, so keep key content vertically centered. The mini banner layout is 1200×160 px.",
+      },
+      {
+        q: "Does image quality affect Etsy search ranking?",
+        a: "While Etsy does not directly rank by image quality, listings with high-quality, well-lit photos get more clicks and favorites, which are signals Etsy uses for ranking. Investing in good product photography pays off in search visibility.",
+      },
+      {
+        q: "What file format should I use for Etsy?",
+        a: "JPEG or PNG, under 20 MB per image. JPEG is best for product photos. PNG is useful for items with transparency needs (like digital downloads previews). Etsy does not support WebP uploads directly.",
+      },
+    ],
+    related: ["shopify-product", "amazon", "ebay"],
+  },
+
+  // ─── BLOG HEADER ──────────────────────────────────────────────────────────
+  {
+    slug: "blog-header",
+    name: "Blog Header",
+    displayName: "Blog Header",
+    titleKeyword: "Blog Header Images",
+    metaDescription:
+      "Resize images for blog headers — WordPress 1200×628, Medium 800×418, Ghost 1200×630. Free online tool, no upload required.",
+    ogDescription:
+      "Resize hero images for WordPress, Medium, Ghost, and any blog platform. Exact dimensions for beautiful featured images and Open Graph previews.",
+    keywords: [
+      "resize image for blog header",
+      "wordpress featured image size",
+      "medium blog image dimensions",
+      "ghost blog header size",
+      "blog hero image dimensions",
+      "1200x628 blog image",
+      "resize for blog post free",
+      "blog featured image size 2026",
+    ],
+    sizes: [
+      { type: "WordPress Featured", width: 1200, height: 628, note: "Standard featured image and OG preview" },
+      { type: "Medium Header", width: 800, height: 418, note: "Medium.com article header" },
+      { type: "Ghost Featured", width: 1200, height: 630, note: "Ghost CMS featured image" },
+    ],
+    steps: [
+      "Open ResizePack, drop your image and select the Blog Header preset — WordPress, Medium, or Ghost.",
+      "Blog headers also serve as Open Graph images when shared on social media. Make sure the key visual content is centered — Facebook and Twitter crop the edges slightly on different devices.",
+      "Download and upload to your CMS. For WordPress, set as Featured Image in the post editor. For Medium, add as the first image in your draft. For Ghost, use the Feature Image field in post settings.",
+    ],
+    faqs: [
+      {
+        q: "What is the best WordPress featured image size?",
+        a: "1200×628 px is the standard for WordPress featured images. This size works well as both the blog header and the Open Graph image when shared on Facebook (which uses 1.91:1 ratio). Many themes also display this size on archive and category pages.",
+      },
+      {
+        q: "What size should a Medium article header be?",
+        a: "Medium displays header images at 800 px wide with a height around 418 px (roughly 1.91:1). However, Medium crops differently on mobile vs desktop. Keep important content centered and avoid text in the image that might get cut off.",
+      },
+      {
+        q: "Does the blog header image affect SEO?",
+        a: "Indirectly, yes. A well-sized featured image becomes your Open Graph preview on social media, driving click-through rates. It also appears in Google Discover and image search. Add descriptive alt text and compress to under 200 KB for fast loading.",
+      },
+      {
+        q: "Should I use the same image for blog header and social sharing?",
+        a: "Yes — most CMS platforms use the featured image as the Open Graph image by default. Size it at 1200×628 px (WordPress) or 1200×630 px (Ghost) and it works perfectly for both the blog post and social media previews.",
+      },
+      {
+        q: "How do I optimize blog header images for page speed?",
+        a: "Resize to the exact dimensions your theme displays (usually 1200 px wide), compress to 100-200 KB with SammaPix, and use WebP format if your CMS supports it. This combination keeps your blog's Largest Contentful Paint (LCP) score fast.",
+      },
+    ],
+    related: ["email-header", "linkedin", "facebook"],
+  },
 ];
 
 /** Map from slug to platform data */
