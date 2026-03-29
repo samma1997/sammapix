@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { BLOG_SLUGS, APP_URL } from "@/lib/constants";
 import { getAllPlatforms } from "@/lib/resize-platforms";
 import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
+import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -165,6 +166,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/convert/tiff-to-jpg",
     "/convert/svg-to-png",
     "/convert/bmp-to-jpg",
+    "/convert/jpg-to-png",
+    "/convert/png-to-ico",
+    "/convert/webp-to-gif",
+    "/convert/raw-to-jpg",
+    "/convert/tiff-to-png",
+    "/convert/bmp-to-png",
+    "/convert/gif-to-jpg",
+    "/convert/avif-to-png",
+    "/convert/heic-to-webp",
+    "/convert/svg-to-jpg",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
@@ -190,6 +201,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // Programmatic image-size pages — driven from lib/image-size-platforms.ts
+  const imageSizePages: MetadataRoute.Sitemap = getAllImageSizePlatforms().map(
+    (p) => ({
+      url: `${APP_URL}/image-size/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })
+  );
+
   return [
     ...staticPages,
     ...toolPages,
@@ -200,5 +221,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...convertPages,
     ...compressToPages,
     ...optimizeForPages,
+    ...imageSizePages,
   ];
 }

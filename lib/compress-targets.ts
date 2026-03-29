@@ -15,6 +15,102 @@ export interface CompressTarget {
 }
 
 const ALL_TARGETS: CompressTarget[] = [
+  // ─── 3 KB ────────────────────────────────────────────────────────────────
+  {
+    slug: "3kb",
+    sizeLabel: "3 KB",
+    sizeBytes: 3072,
+    metaDescription:
+      "Compress any image to 3 KB online for free. Ideal for micro-thumbnails, favicons, email pixel trackers, and ultra-minimal web assets. No sign-up, works entirely in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 3 KB instantly. Perfect for favicons, micro-thumbnails, and email tracking pixels.",
+    titleKeyword: "Compress Image to 3KB",
+    keywords: [
+      "compress image to 3kb",
+      "reduce image size to 3kb",
+      "3kb image compressor",
+      "micro thumbnail compressor",
+      "compress favicon to 3kb",
+      "email pixel tracker image size",
+      "ultra small image compressor",
+    ],
+    useCase:
+      "Designed for micro-thumbnails, favicons at 16×16 or 32×32 px, email open-tracking pixels, and minimal decorative web elements that must weigh virtually nothing.",
+    tips: [
+      "At 3 KB, your image must be tiny — resize to 64×64 px or smaller before compressing for any recognizable result.",
+      "Use indexed-color PNG (palette mode with 8-16 colors) for icons — it often beats JPEG at this extreme file size.",
+      "Strip absolutely all metadata using our EXIF Remover — at 3 KB, even a few hundred bytes of EXIF data is a significant percentage of the file.",
+      "For email tracking pixels, a 1×1 px transparent PNG is already under 1 KB — you only need compression if you are embedding a visible micro-image in the email body.",
+    ],
+    faqs: [
+      {
+        q: "Can I really get a usable image at 3 KB?",
+        a: "Yes, but only at very small dimensions. A 32×32 favicon or a 48×48 avatar looks clean at 3 KB. Anything above 100×100 px will show heavy compression artifacts at this size.",
+      },
+      {
+        q: "What is a 3 KB image used for?",
+        a: "Common uses include browser favicons (16×16 to 48×48 px), email open-tracking pixels (1×1 px), tiny placeholder thumbnails for lazy-loaded galleries, and micro-icons in notification badges.",
+      },
+      {
+        q: "Which format produces the best quality at 3 KB?",
+        a: "For icons and graphics with flat colors, PNG with a reduced palette wins. For photographic content at this extreme size, WebP delivers the least blurriness. JPEG struggles below 5 KB due to its header overhead.",
+      },
+      {
+        q: "How do I compress a favicon to 3 KB?",
+        a: "Export your icon at 32×32 px in PNG format with 16 or fewer colors. This alone is usually under 3 KB. If not, open it in SammaPix Compress, lower quality to 30-40%, and save. The .ico format can embed multiple PNG sizes — keep only 16×16 and 32×32 to stay under 3 KB total.",
+      },
+    ],
+    related: ["5kb", "8kb", "10kb"],
+  },
+
+  // ─── 8 KB ────────────────────────────────────────────────────────────────
+  {
+    slug: "8kb",
+    sizeLabel: "8 KB",
+    sizeBytes: 8192,
+    metaDescription:
+      "Compress any image to 8 KB online for free. Perfect for web icons, small avatars, placeholder images, and low-bandwidth mobile assets. No upload required — works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 8 KB instantly. Ideal for web icons, small avatars, and placeholder images.",
+    titleKeyword: "Compress Image to 8KB",
+    keywords: [
+      "compress image to 8kb",
+      "reduce image size to 8kb",
+      "8kb image compressor",
+      "small avatar compressor",
+      "web icon compression",
+      "placeholder image 8kb",
+      "compress image for low bandwidth",
+    ],
+    useCase:
+      "Ideal for web icons, small avatars on forums and chat apps, placeholder images for lazy loading, and any asset served to users on extremely slow mobile connections.",
+    tips: [
+      "Resize to 100-200 px on the longest side before compressing — this is the sweet spot where 8 KB still delivers sharp, recognizable results.",
+      "WebP at 8 KB outperforms JPEG by roughly 40% in visual quality — always prefer WebP for modern web projects.",
+      "For placeholder images used during lazy loading, intentional blur at 8 KB actually improves perceived performance — users see a soft preview before the full image loads.",
+      "Combine 8 KB placeholders with CSS aspect-ratio to prevent layout shift (CLS) — a key Core Web Vitals metric.",
+    ],
+    faqs: [
+      {
+        q: "What can I display with an 8 KB image?",
+        a: "At 150×150 px, an 8 KB image is sharp enough for small avatars, chat profile pictures, icon grids, and thumbnail previews. At 200×200 px, expect slight softness in detailed areas but still very usable.",
+      },
+      {
+        q: "How does 8 KB compare to 5 KB and 10 KB?",
+        a: "8 KB is the practical middle ground: 5 KB only works for micro-icons, while 10 KB allows slightly larger dimensions. Choose 8 KB when you need small avatars or icons that look crisp at 100-180 px without the extra bytes of 10 KB.",
+      },
+      {
+        q: "Is 8 KB enough for a lazy-load placeholder?",
+        a: "Yes — an 8 KB blurred placeholder at 200 px wide is a widely used pattern (often called LQIP — Low Quality Image Placeholder). It loads in under 10 ms on 3G connections and provides a smooth visual transition when the full image arrives.",
+      },
+      {
+        q: "Which image format is best at 8 KB?",
+        a: "WebP provides the best quality at 8 KB for photographic content. For icons with flat colors, PNG with reduced palette is competitive. Avoid JPEG below 10 KB — its file header alone consumes a significant portion of the budget.",
+      },
+    ],
+    related: ["3kb", "5kb", "10kb"],
+  },
+
   // ─── 5 KB ────────────────────────────────────────────────────────────────
   {
     slug: "5kb",
@@ -157,6 +253,102 @@ const ALL_TARGETS: CompressTarget[] = [
       },
     ],
     related: ["10kb", "20kb", "25kb"],
+  },
+
+  // ─── 30 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "30kb",
+    sizeLabel: "30 KB",
+    sizeBytes: 30720,
+    metaDescription:
+      "Compress any image to 30 KB online for free. Perfect for social media profile pictures, medium thumbnails, and directory headshots. No sign-up, works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 30 KB. Ideal for social media profile pictures, medium-size thumbnails, and online directory photos.",
+    titleKeyword: "Compress Image to 30KB",
+    keywords: [
+      "compress image to 30kb",
+      "reduce image size to 30kb",
+      "compress photo to 30kb",
+      "30kb image compressor",
+      "social media profile picture size",
+      "medium thumbnail compressor",
+      "directory headshot compression",
+    ],
+    useCase:
+      "Perfect for social media profile pictures, medium-resolution thumbnails for directory listings, event badge photos, and team page headshots that need to load fast.",
+    tips: [
+      "At 30 KB you can maintain a 400×400 px profile photo at quality 65-75% — sharp enough for social media and team pages.",
+      "Crop to a 1:1 square before compressing — most platforms display profile pictures as circles or squares, and cropping first maximizes the useful pixels.",
+      "For directory headshots, export at 350×350 px and 70% quality — this reliably hits 30 KB with a professional look.",
+      "Use WebP format to get roughly 25% better detail at 30 KB compared to the same file in JPEG — especially noticeable in facial details like eyes and hair.",
+    ],
+    faqs: [
+      {
+        q: "Is 30 KB enough for a social media profile picture?",
+        a: "Yes. Most social platforms display profile photos at 150-400 px. A 30 KB image at 350×350 px looks clean and professional. Platforms like Twitter, LinkedIn, and Slack all display profile pictures at this range.",
+      },
+      {
+        q: "How do I compress a headshot to 30 KB for a company directory?",
+        a: "Crop tightly around the face and shoulders, resize to 300-400 px wide, then compress at 65-75% quality in SammaPix. This workflow consistently produces 25-32 KB files that look sharp in directory grids.",
+      },
+      {
+        q: "30 KB vs 50 KB — when should I use which?",
+        a: "Use 30 KB when page speed is critical (directories with dozens of headshots, mobile-first sites) or when a strict upload limit exists. Use 50 KB when slightly more detail matters, like individual staff bio pages.",
+      },
+      {
+        q: "What dimensions work best at 30 KB?",
+        a: "For square profile photos: 300-400 px. For rectangular thumbnails: 400×300 px or 350×250 px. Going above 500 px wide at 30 KB will introduce visible blurriness in photographic content.",
+      },
+    ],
+    related: ["15kb", "20kb", "40kb", "50kb"],
+  },
+
+  // ─── 40 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "40kb",
+    sizeLabel: "40 KB",
+    sizeBytes: 40960,
+    metaDescription:
+      "Compress any image to 40 KB online for free. Ideal for product listing thumbnails, directory photos, and card-layout images. No software needed — works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 40 KB. Great for product listing thumbnails, directory photos, and card-based web layouts.",
+    titleKeyword: "Compress Image to 40KB",
+    keywords: [
+      "compress image to 40kb",
+      "reduce image size to 40kb",
+      "compress photo to 40kb",
+      "40kb image compressor",
+      "product listing thumbnail size",
+      "directory photo compression",
+      "card image compression online",
+    ],
+    useCase:
+      "Ideal for product listing thumbnails on e-commerce grids, directory profile photos, real estate listing cards, and any card-based web layout where dozens of images load simultaneously.",
+    tips: [
+      "Product grids often show 20-50 images at once — at 40 KB each, the entire grid loads in under 1 second on 4G, giving you excellent Core Web Vitals scores.",
+      "For product thumbnails, resize to 400×400 px and compress at 72-80% quality — the white product background compresses extremely well.",
+      "Real estate listing cards look sharp at 500×350 px and 40 KB — the key is to use WebP format which handles architectural details better than JPEG at this size.",
+      "Always serve 40 KB thumbnails with lazy loading — only the first visible row loads immediately, saving bandwidth for images below the fold.",
+    ],
+    faqs: [
+      {
+        q: "Is 40 KB good enough for product listing thumbnails?",
+        a: "Yes. Amazon, eBay, and Shopify all use thumbnails in the 30-60 KB range for product grids. At 400×400 px and 40 KB, product images look sharp in grid view. Full-size images load only when the user clicks to view details.",
+      },
+      {
+        q: "How many 40 KB images can load on one page?",
+        a: "A page with 50 images at 40 KB each totals only 2 MB — well within Google's recommendation for total page weight. Combined with lazy loading, this provides a fast, smooth browsing experience even on mobile.",
+      },
+      {
+        q: "What is the best format for 40 KB thumbnails?",
+        a: "WebP gives you the best detail at 40 KB, especially for product photos with fine textures. Use JPEG as a fallback for browsers that do not support WebP (rare in 2026). Avoid PNG for photographic content at this size.",
+      },
+      {
+        q: "40 KB vs 50 KB — is there a visible difference?",
+        a: "At 400 px display size, the difference is minimal. At 600 px, 50 KB provides noticeably sharper edges on text overlays and fine product details. If your grid shows images at 400 px or smaller, 40 KB saves bandwidth with no visible trade-off.",
+      },
+    ],
+    related: ["30kb", "50kb", "100kb"],
   },
 
   // ─── 20 KB ───────────────────────────────────────────────────────────────
@@ -397,6 +589,54 @@ const ALL_TARGETS: CompressTarget[] = [
       },
     ],
     related: ["100kb", "500kb", "1mb"],
+  },
+
+  // ─── 300 KB ──────────────────────────────────────────────────────────────
+  {
+    slug: "300kb",
+    sizeLabel: "300 KB",
+    sizeBytes: 307200,
+    metaDescription:
+      "Compress any image to 300 KB online for free. Perfect for high-quality blog images, newsletter headers, and editorial photography. No watermarks, no sign-up required.",
+    ogDescription:
+      "Free online tool to compress images to 300 KB. Ideal for blog hero images, newsletter headers, and editorial-quality web photography.",
+    titleKeyword: "Compress Image to 300KB",
+    keywords: [
+      "compress image to 300kb",
+      "reduce image size to 300kb",
+      "compress photo to 300kb",
+      "300kb image compressor",
+      "blog image compression",
+      "newsletter header image size",
+      "editorial photo compression online",
+    ],
+    useCase:
+      "Perfect for high-quality blog hero images, email newsletter headers, editorial photography on magazine-style websites, and any image where visual fidelity matters but you need to stay under a third of a megabyte.",
+    tips: [
+      "At 300 KB you can maintain 1400-1800 px wide images at quality 82-88% — the sweet spot for blog headers that look stunning on retina displays.",
+      "Newsletter email clients like Gmail clip messages over 102 KB of HTML — keep each newsletter image at or below 300 KB to avoid triggering the clip threshold when combined with your email markup.",
+      "For editorial photography, use WebP at 300 KB to preserve color gradients and skin tones that JPEG sometimes banding at lower file sizes.",
+      "Pair 300 KB hero images with srcset to serve smaller versions on mobile — a 300 KB desktop hero can be a 100 KB mobile version at 800 px wide.",
+    ],
+    faqs: [
+      {
+        q: "Is 300 KB good enough for a blog hero image?",
+        a: "Yes — a 1400×800 px image at 300 KB in WebP or JPEG looks near-lossless on screens. Most professional blogs use hero images in the 200-400 KB range. At 300 KB, the image loads in under 150 ms on a typical broadband connection.",
+      },
+      {
+        q: "How do I optimize newsletter header images to 300 KB?",
+        a: "Design your header at 600×300 px (standard email width), export at quality 85%, and compress with SammaPix. At these dimensions, 300 KB is generous — you will likely end up around 150-250 KB with excellent quality. This leaves headroom for the email HTML itself.",
+      },
+      {
+        q: "300 KB vs 200 KB — when should I pick 300 KB?",
+        a: "Choose 300 KB when the image has fine details that matter — editorial portraits, food photography, product close-ups. For generic blog thumbnails or social media cards, 200 KB is sufficient and loads slightly faster.",
+      },
+      {
+        q: "What resolution works best at 300 KB?",
+        a: "For landscape images: 1400-1800 px wide at quality 82-88%. For square images: 1200-1400 px. For portrait images: 1000-1200 px wide. These ranges produce files that hover around 300 KB with sharp, detailed results.",
+      },
+    ],
+    related: ["200kb", "500kb", "1mb"],
   },
 
   // ─── 500 KB ──────────────────────────────────────────────────────────────
