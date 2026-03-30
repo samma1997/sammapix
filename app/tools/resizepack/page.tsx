@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Batch Resize Images Online Free — Social Media Sizes",
+  title: "Batch Resize Images Online Free | SammaPix",
   description:
-    "Resize multiple images at once for Instagram, Facebook, Twitter, LinkedIn. Free online batch resizer — no upload needed.",
+    "Resize 50+ images at once for Instagram, Facebook, Twitter & LinkedIn. 10+ social media presets built in. Browser-based, free, no signup needed.",
   keywords: [
     "resize images",
     "batch resize",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/resizepack`,
   },
   openGraph: {
-    title: "Batch Resize Images Free Online - Social Media Presets | SammaPix",
+    title: "Batch Resize Images Online Free | SammaPix",
     description:
-      "Resize for Instagram, Twitter, LinkedIn, YouTube in seconds. Social presets, batch ZIP download, free online. Optimize now.",
+      "Resize 50+ images at once for Instagram, Facebook, Twitter & LinkedIn. 10+ social media presets built in. Browser-based, free, no signup needed.",
     url: `${APP_URL}/tools/resizepack`,
     siteName: "SammaPix",
     type: "website",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Batch Resize Images Online Free — Social Media Sizes",
+    title: "Batch Resize Images Online Free | SammaPix",
     description:
-      "Resize multiple images at once for Instagram, Facebook, Twitter, LinkedIn. Free online batch resizer — no upload needed.",
+      "Resize 50+ images at once for Instagram, Facebook, Twitter & LinkedIn. 10+ social media presets built in. Browser-based, free, no signup needed.",
   },
 };
 

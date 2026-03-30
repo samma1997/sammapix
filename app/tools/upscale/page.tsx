@@ -19,9 +19,9 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "AI Image Upscaler Free — Enhance Resolution 2x & 4x Online",
+  title: "Upscale Image 2x & 4x Online Free | SammaPix",
   description:
-    "Upscale images 2x or 4x instantly in your browser. Enhance photo resolution with AI-powered upscaling. Free, no signup, no upload required.",
+    "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
   keywords: [
     "ai image upscaler",
     "upscale image",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/upscale`,
   },
   openGraph: {
-    title: "AI Image Upscaler Free — Enhance Resolution 2x & 4x Online",
+    title: "Upscale Image 2x & 4x Online Free | SammaPix",
     description:
-      "Upscale images 2x or 4x instantly in your browser. Enhance photo resolution with AI-powered upscaling. Free, no signup, no upload required.",
+      "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
     url: `${APP_URL}/tools/upscale`,
     siteName: "SammaPix",
     type: "website",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Image Upscaler Free — Enhance Resolution 2x & 4x Online",
+    title: "Upscale Image 2x & 4x Online Free | SammaPix",
     description:
-      "Upscale images 2x or 4x instantly in your browser. Enhance photo resolution with AI-powered upscaling. Free, no signup, no upload required.",
+      "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
   },
 };
 

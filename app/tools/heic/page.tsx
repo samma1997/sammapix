@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "HEIC to JPG Converter Online — Free Batch Conversion",
+  title: "Convert HEIC to JPG Online Free | SammaPix",
   description:
-    "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
+    "Convert iPhone HEIC photos to JPG, PNG or WebP instantly. Batch process 50+ files at once. 100% browser-based — no upload needed. Try it free.",
   keywords: [
     "heic to jpg converter",
     "heic converter",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/heic`,
   },
   openGraph: {
-    title: "HEIC to JPG Converter Online — Free Batch Conversion",
+    title: "Convert HEIC to JPG Online Free | SammaPix",
     description:
-      "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
+      "Convert iPhone HEIC photos to JPG, PNG or WebP instantly. Batch process 50+ files at once. 100% browser-based — no upload needed. Try it free.",
     url: `${APP_URL}/tools/heic`,
     siteName: "SammaPix",
     type: "website",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HEIC to JPG Converter Online — Free Batch Conversion",
+    title: "Convert HEIC to JPG Online Free | SammaPix",
     description:
-      "Convert HEIC to JPG, PNG, or WebP online for free. Batch convert iPhone photos instantly. No upload to server — 100% browser-based.",
+      "Convert iPhone HEIC photos to JPG, PNG or WebP instantly. Batch process 50+ files at once. 100% browser-based — no upload needed. Try it free.",
   },
 };
 

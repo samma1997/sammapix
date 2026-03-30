@@ -18,9 +18,9 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Free Image Compressor Online — No Signup, Unlimited",
+  title: "Compress Images Online Free | SammaPix",
   description:
-    "Compress JPG, PNG, WebP images instantly in your browser. Reduce file size up to 90% without quality loss. Free, unlimited, no signup required.",
+    "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
   keywords: [
     "compress image online",
     "image compressor",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Free Image Compressor Online — No Signup, Unlimited",
+    title: "Compress Images Online Free | SammaPix",
     description:
-      "Compress JPG, PNG, WebP images instantly in your browser. Reduce file size up to 90% without quality loss. Free, unlimited, no signup required.",
+      "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Image Compressor Online — No Signup, Unlimited",
+    title: "Compress Images Online Free | SammaPix",
     description:
-      "Compress JPG, PNG, WebP images instantly in your browser. Reduce file size up to 90% without quality loss. Free, unlimited, no signup required.",
+      "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
   },
 };
 
