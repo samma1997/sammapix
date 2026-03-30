@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Alt Text Generator - Accessibility & SEO | Free",
+  title: "AI Alt Text Generator Online Free | SammaPix",
   description:
-    "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly. No signup required to try.",
+    "Generate WCAG-compliant alt text for images in 2 seconds with AI. Batch process 20+ images at once. Browser-based, free, no signup needed.",
   keywords: [
     "ai alt text generator",
     "image alt text",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/alt-text`,
   },
   openGraph: {
-    title: "AI Alt Text Generator - Accessibility & SEO | Free",
+    title: "AI Alt Text Generator Online Free | SammaPix",
     description:
-      "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly.",
+      "Generate WCAG-compliant alt text for images in 2 seconds with AI. Batch process 20+ images at once. Browser-based, free, no signup needed.",
     url: `${APP_URL}/tools/alt-text`,
     siteName: "SammaPix",
     type: "website",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Alt Text Generator - Accessibility & SEO | Free",
+    title: "AI Alt Text Generator Online Free | SammaPix",
     description:
-      "Generate descriptive, accessibility-compliant alt text for images using AI. Free online tool- upload images and get 50-125 character alt tags instantly. No signup required to try.",
+      "Generate WCAG-compliant alt text for images in 2 seconds with AI. Batch process 20+ images at once. Browser-based, free, no signup needed.",
   },
 };
 

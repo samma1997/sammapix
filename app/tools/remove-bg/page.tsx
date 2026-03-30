@@ -17,9 +17,9 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Remove Background from Image Free — AI Background Remover Online",
+  title: "Remove Image Background Free Online | SammaPix",
   description:
-    "Remove image backgrounds instantly with AI, right in your browser. Get transparent PNG files in seconds. Free, no signup, no upload to servers. Works with photos, products, portraits.",
+    "Get transparent PNGs in 3 seconds with AI background removal. Works with photos, products & portraits. Browser-based, free, no signup needed.",
   keywords: [
     "remove background",
     "background remover",
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/remove-bg`,
   },
   openGraph: {
-    title: "Remove Background from Image Free — AI Background Remover Online",
+    title: "Remove Image Background Free Online | SammaPix",
     description:
-      "Remove image backgrounds instantly with AI, right in your browser. Get transparent PNG files in seconds. Free, no signup, no upload to servers.",
+      "Get transparent PNGs in 3 seconds with AI background removal. Works with photos, products & portraits. Browser-based, free, no signup needed.",
     url: `${APP_URL}/tools/remove-bg`,
     siteName: "SammaPix",
     type: "website",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Remove Background from Image Free — AI Background Remover Online",
+    title: "Remove Image Background Free Online | SammaPix",
     description:
-      "Remove image backgrounds instantly with AI, right in your browser. Get transparent PNG files in seconds. Free, no signup, no upload to servers.",
+      "Get transparent PNGs in 3 seconds with AI background removal. Works with photos, products & portraits. Browser-based, free, no signup needed.",
   },
 };
 

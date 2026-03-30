@@ -9,9 +9,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "EXIF Viewer & Remover Online — Protect Photo Privacy",
+  title: "Remove EXIF Data Online Free | SammaPix",
   description:
-    "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
+    "Strip GPS location, camera info & timestamps from photos instantly. Protect your privacy with batch EXIF removal. 100% browser-based, free.",
   keywords: [
     "remove exif data",
     "remove gps from photos",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/exif` },
   openGraph: {
-    title: "EXIF Viewer & Remover Online — Protect Photo Privacy",
+    title: "Remove EXIF Data Online Free | SammaPix",
     description:
-      "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
+      "Strip GPS location, camera info & timestamps from photos instantly. Protect your privacy with batch EXIF removal. 100% browser-based, free.",
     url: `${APP_URL}/tools/exif`,
     siteName: "SammaPix",
     type: "website",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EXIF Viewer & Remover Online — Protect Photo Privacy",
+    title: "Remove EXIF Data Online Free | SammaPix",
     description:
-      "View, edit, or remove EXIF metadata from photos. Strip GPS location, camera info, and timestamps. Free, browser-based, batch processing.",
+      "Strip GPS location, camera info & timestamps from photos instantly. Protect your privacy with batch EXIF removal. 100% browser-based, free.",
   },
 };
 

@@ -10,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Image Format Converter Online — JPG, PNG, WebP, HEIC",
+  title: "Convert to WebP Online Free | SammaPix",
   description:
-    "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
+    "Convert JPG, PNG & HEIC to WebP in seconds. Cut file size by 50% with 15+ format options. Browser-based, free, no signup needed.",
   keywords: [
     "webp converter",
     "convert to webp",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC",
+    title: "Convert to WebP Online Free | SammaPix",
     description:
-      "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
+      "Convert JPG, PNG & HEIC to WebP in seconds. Cut file size by 50% with 15+ format options. Browser-based, free, no signup needed.",
     url: `${APP_URL}/tools/webp`,
     siteName: "SammaPix",
     type: "website",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Format Converter Online — JPG, PNG, WebP, HEIC",
+    title: "Convert to WebP Online Free | SammaPix",
     description:
-      "Convert images between 15+ formats online. JPG to WebP, PNG to JPG, HEIC to PNG and more. Free, batch, no signup.",
+      "Convert JPG, PNG & HEIC to WebP in seconds. Cut file size by 50% with 15+ format options. Browser-based, free, no signup needed.",
   },
 };
 

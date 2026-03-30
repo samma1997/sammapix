@@ -20,9 +20,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 /* ------------------------------------------------------------------ */
 
 export const metadata: Metadata = {
-  title: "AI Passport Photo Maker — Free, Instant, No Upload",
+  title: "Passport Photo Maker Online Free | SammaPix",
   description:
-    "Create passport photos online for free. Auto background removal, smart crop, white background. US, EU, UK, India, China, Canada presets. 100% browser-based — your photos never leave your device.",
+    "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
   keywords: [
     "passport photo maker",
     "passport photo online",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/passport-photo`,
   },
   openGraph: {
-    title: "AI Passport Photo Maker — Free, Instant, No Upload",
+    title: "Passport Photo Maker Online Free | SammaPix",
     description:
-      "Create compliant passport photos in seconds. AI removes the background, auto-crops to the correct size, and exports a print-ready JPG. Supports US, EU, UK, India, China, Canada.",
+      "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
     url: `${APP_URL}/tools/passport-photo`,
     siteName: "SammaPix",
     type: "website",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Passport Photo Maker — Free, Instant, No Upload",
+    title: "Passport Photo Maker Online Free | SammaPix",
     description:
-      "Create compliant passport photos in seconds. AI removes the background, auto-crops to the correct size, and exports a print-ready JPG.",
+      "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
   },
 };
 
