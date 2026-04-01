@@ -558,59 +558,84 @@ export default function RedditPage() {
 
         return (
           <div className="space-y-8">
-            {/* ═══ SEZIONE 1: POST DA CREARE ═══ */}
-            {postsToCreate.length > 0 && (
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
-                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                    Post da creare
-                  </h2>
-                  <span className="text-[10px] bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded-[4px] font-medium">
-                    {postsToCreate.length}
-                  </span>
+            {/* ═══ SEZIONE 1: POST DA CREARE OGGI ═══ */}
+            {postsToCreate.length > 0 && (() => {
+              const todayPosts = postsToCreate.slice(0, 2);
+              const laterPosts = postsToCreate.slice(2);
+              return (
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
+                    <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                      Post da creare oggi
+                    </h2>
+                    <span className="text-[10px] bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded-[4px] font-medium">
+                      {todayPosts.length}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-[#A3A3A3] mb-3">
+                    Clicca il link, copia il testo e pubblicalo come nuovo post. Max 2-3 post al giorno per non sembrare spam.
+                  </p>
+                  <div className="space-y-2.5">
+                    {todayPosts.map((post) => (
+                      <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
+                    ))}
+                  </div>
+                  {laterPosts.length > 0 && (
+                    <details className="mt-3">
+                      <summary className="text-[11px] text-[#A3A3A3] cursor-pointer hover:text-[#737373] transition-colors">
+                        Prossimi giorni ({laterPosts.length} post in coda)
+                      </summary>
+                      <div className="space-y-2.5 mt-2.5 opacity-50">
+                        {laterPosts.map((post) => (
+                          <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
+                        ))}
+                      </div>
+                    </details>
+                  )}
                 </div>
-                <p className="text-[11px] text-[#A3A3A3] mb-3">
-                  Clicca il link, copia il testo e pubblicalo come nuovo post su Reddit. Questi ti fanno guadagnare karma.
-                </p>
-                <div className="space-y-2.5">
-                  {postsToCreate.map((post) => (
-                    <PostCard
-                      key={post.id}
-                      post={post}
-                      onStatusChange={handleStatusChange}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+              );
+            })()}
 
-            {/* ═══ SEZIONE 2: COMMENTI DA LASCIARE ═══ */}
-            {(postsToCommentOn.length > 0 || otherToComment.length > 0) && (
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
-                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                    Commenti da lasciare
-                  </h2>
-                  <span className="text-[10px] bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-1.5 py-0.5 rounded-[4px] font-medium">
-                    {postsToCommentOn.length + otherToComment.length}
-                  </span>
+            {/* ═══ SEZIONE 2: COMMENTI DA LASCIARE OGGI ═══ */}
+            {(postsToCommentOn.length > 0 || otherToComment.length > 0) && (() => {
+              const allComments = [...postsToCommentOn, ...otherToComment];
+              const todayComments = allComments.slice(0, 5);
+              const laterComments = allComments.slice(5);
+              return (
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
+                    <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                      Commenti da lasciare oggi
+                    </h2>
+                    <span className="text-[10px] bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-1.5 py-0.5 rounded-[4px] font-medium">
+                      {todayComments.length}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-[#A3A3A3] mb-3">
+                    Vai sul post, copia il commento e incollalo. Obiettivo: 5 commenti al giorno.
+                  </p>
+                  <div className="space-y-2.5">
+                    {todayComments.map((post) => (
+                      <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
+                    ))}
+                  </div>
+                  {laterComments.length > 0 && (
+                    <details className="mt-3">
+                      <summary className="text-[11px] text-[#A3A3A3] cursor-pointer hover:text-[#737373] transition-colors">
+                        Prossimi giorni ({laterComments.length} commenti in coda)
+                      </summary>
+                      <div className="space-y-2.5 mt-2.5 opacity-50">
+                        {laterComments.map((post) => (
+                          <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
+                        ))}
+                      </div>
+                    </details>
+                  )}
                 </div>
-                <p className="text-[11px] text-[#A3A3A3] mb-3">
-                  Vai sul post, copia il commento e incollalo. Ogni commento upvotato ti d&agrave; karma.
-                </p>
-                <div className="space-y-2.5">
-                  {[...postsToCommentOn, ...otherToComment].map((post) => (
-                    <PostCard
-                      key={post.id}
-                      post={post}
-                      onStatusChange={handleStatusChange}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* Empty state */}
             {toComment.length === 0 && (
