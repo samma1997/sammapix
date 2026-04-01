@@ -11,6 +11,9 @@ const nextConfig = {
   },
   // Disable source maps in production to prevent code inspection
   productionBrowserSourceMaps: false,
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
   async redirects() {
     return [
       { source: '/destinations', destination: '/about', permanent: true },

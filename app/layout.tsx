@@ -125,9 +125,7 @@ export default async function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}` }} />
-        {/* Preconnect to external origins to reduce connection latency (LCP impact) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Font is self-hosted via next/font/google — no external preconnect needed */}
         {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
           <link rel="preconnect" href="https://www.googletagmanager.com" />
         )}

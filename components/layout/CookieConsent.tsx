@@ -9,17 +9,33 @@ const GOOGLE_ADS_ID = (process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "").trim();
 const GA4_ID = (process.env.NEXT_PUBLIC_GA4_ID ?? "").trim();
 const ADSENSE_PUB_ID = (process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim();
 
+/**
+ * Defer script injection to idle time so tracking scripts never compete
+ * with LCP resources on the main thread.
+ */
+function deferToIdle(fn: () => void): void {
+  if (typeof requestIdleCallback !== "undefined") {
+    requestIdleCallback(fn, { timeout: 3000 });
+  } else {
+    setTimeout(fn, 2000);
+  }
+}
+
 function loadScript(src: string): void {
-  const el = document.createElement("script");
-  el.src = src;
-  el.async = true;
-  document.head.appendChild(el);
+  deferToIdle(() => {
+    const el = document.createElement("script");
+    el.src = src;
+    el.async = true;
+    document.head.appendChild(el);
+  });
 }
 
 function loadInlineScript(code: string): void {
-  const el = document.createElement("script");
-  el.textContent = code;
-  document.head.appendChild(el);
+  deferToIdle(() => {
+    const el = document.createElement("script");
+    el.textContent = code;
+    document.head.appendChild(el);
+  });
 }
 
 function initMetaPixel(pixelId: string): void {
@@ -53,11 +69,13 @@ function initGtag(adsId: string, ga4Id: string): void {
 
 function initAdSense(pubId: string): void {
   if (document.querySelector("script[src*='adsbygoogle']")) return;
-  const el = document.createElement("script");
-  el.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + pubId;
-  el.async = true;
-  el.crossOrigin = "anonymous";
-  document.head.appendChild(el);
+  deferToIdle(() => {
+    const el = document.createElement("script");
+    el.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + pubId;
+    el.async = true;
+    el.crossOrigin = "anonymous";
+    document.head.appendChild(el);
+  });
 }
 
 export default function CookieConsent() {
