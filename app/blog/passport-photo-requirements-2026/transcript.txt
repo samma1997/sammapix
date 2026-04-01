@@ -1,0 +1,133 @@
+Passport Photo Size Requirements by Country 2026: Complete Guide + Free Maker
+
+Getting your passport photo rejected is one of the most frustrating experiences in travel. Every country has slightly different requirements — dimensions, file size, background color, head size ratio — and getting even one detail wrong means starting over.
+
+I've had visa photos rejected twice — once for the UK and once for India — before I figured out the exact specifications. The UK rejection was because my background was off-white instead of pure white. The India rejection was because my file was 350 kilobytes, over their 300 kilobyte limit. Both times, I had to retake the photo, resubmit, and wait again.
+
+This guide covers the exact requirements for over 20 countries in 2026, with downloadable quick-reference tables and a free browser-based tool to create your own passport photos.
+
+Quick Reference Table — 20 Countries
+
+Here are the official passport photo requirements for the 20 most-requested countries, sourced from official government immigration websites as of March 2026.
+
+United States: 2 by 2 inches, which is 51 by 51 millimeters. File size must be under 240 kilobytes. White background. Head height between 25 and 35 millimeters.
+
+United Kingdom: 35 by 45 millimeters. File size under 10 megabytes. Light grey or white background. Head height 29 to 34 millimeters.
+
+India: 2 by 2 inches, 51 by 51 millimeters. File size between 10 and 300 kilobytes. White background. Head height 25 to 35 millimeters.
+
+Canada: 50 by 70 millimeters. File size under 5 megabytes. White or light grey background. Head height 31 to 36 millimeters.
+
+Australia: 35 by 45 millimeters. File size under 5 megabytes. Light, uniform background. Head height 32 to 36 millimeters.
+
+Germany: 35 by 45 millimeters. Light grey background. Head height 32 to 36 millimeters.
+
+France: 35 by 45 millimeters. Light grey or blue background. Head height 32 to 36 millimeters.
+
+Japan: 35 by 45 millimeters. White or light background. Head height 34 to 38 millimeters.
+
+China: 33 by 48 millimeters. File size between 40 and 120 kilobytes. White background. Head height 28 to 33 millimeters.
+
+Brazil: 50 by 70 millimeters. White background.
+
+South Korea: 35 by 45 millimeters. File size under 700 kilobytes. White background.
+
+Italy: 35 by 45 millimeters. White background.
+
+Spain: 32 by 26 millimeters. White background.
+
+Mexico: 35 by 45 millimeters. White background.
+
+UAE: 35 by 45 millimeters. File size under 200 kilobytes. White background.
+
+Singapore: 35 by 45 millimeters. File size under 60 kilobytes. White background.
+
+Thailand: 35 by 45 millimeters. White background.
+
+Indonesia: 40 by 60 millimeters. Red background for the last three pages, blue for earlier pages.
+
+Russia: 35 by 45 millimeters. White background.
+
+Turkey: 50 by 60 millimeters. White background.
+
+Key patterns: the most common photo size worldwide is 35 by 45 millimeters, used by 14 of these 20 countries. The US and India use the 2 by 2 inch format. Canada, Brazil, and Turkey use larger formats.
+
+Most Common Rejection Reasons
+
+Based on data from passport processing agencies and my own experience, these are the five most frequent reasons photos get rejected.
+
+Number one: Wrong dimensions or aspect ratio. This is the number one rejection reason. A 2 by 2 inch photo is not the same as a 35 by 45 millimeter photo. Many people crop their photo to roughly the right shape but miss the exact pixel dimensions. For the US, you need exactly 600 by 600 pixels at 300 DPI. For a 35 by 45 millimeter photo, you need 413 by 531 pixels at 300 DPI.
+
+Number two: Shadows on face or background. Even subtle shadows behind your head or under your chin will get flagged. This happens when you stand too close to the wall or use a single overhead light source. The fix: stand about 50 centimeters away from the wall and face a large window for even, diffused lighting.
+
+Number three: Eyes not fully visible. Glasses glare, hair covering one eye, or half-closed eyes. Since 2021, most countries recommend removing glasses entirely for passport photos. If you must wear glasses for medical reasons, ensure there is zero glare on the lenses.
+
+Number four: Incorrect background color. Off-white, cream, or yellowish backgrounds get rejected. Your wall might look white to your eyes, but your camera's white balance can introduce a warm tint. Check your photo on a calibrated screen — the background should be pure white.
+
+Number five: File size exceeds maximum. Digital submissions through government portals often have strict file size limits. Singapore requires under 60 kilobytes. The US requires under 240 kilobytes. India requires between 10 and 300 kilobytes. A typical smartphone photo is 3 to 8 megabytes — you need to compress it by over 90 percent to meet these limits.
+
+How to Take a Perfect Passport Photo at Home
+
+You don't need a professional photographer or a photo booth. Here's the step-by-step process I use to take passport photos at home that pass on the first try.
+
+Step 1: Find a plain white wall. A flat, matte-finish white wall works best. Avoid textured walls, wallpaper, or doors with panels. If your walls are off-white, tape a large sheet of white poster board behind you.
+
+Step 2: Use natural light. Face a large window. The best time is mid-morning or late afternoon when sunlight is diffused. Avoid direct sunlight — it creates harsh shadows.
+
+Step 3: Position yourself correctly. Stand about 50 centimeters in front of the wall to avoid casting a shadow on it. Have someone hold the camera at eye level, about 1.5 meters away. If using a selfie setup, use the rear camera with a timer for better quality.
+
+Step 4: Get the expression right. Neutral expression, mouth closed, both eyes open, looking directly at the camera. Most countries do not accept smiling photos. Remove glasses, headphones, and any head coverings unless for religious purposes.
+
+Step 5: Take multiple shots. Take at least 10 photos. Review them on a larger screen — check for shadows, closed eyes, and off-center positioning. Pick the best one.
+
+Step 6: Crop and resize to exact specifications. Use a crop tool to crop your photo to the correct aspect ratio, then resize it to the exact pixel dimensions required by your country.
+
+Step 7: Compress to required file size. Most government portals have strict file size limits. Use a compression tool to bring your photo down to the required size — whether that's 240 kilobytes for the US, 60 kilobytes for Singapore, or 100 kilobytes for a visa application.
+
+Digital vs Physical: File Size Requirements
+
+There's a big difference between photos for printed passport applications and photos for online digital submissions.
+
+For physical printed photos: print at 300 DPI on photo paper. File size doesn't matter — only print quality. Use the highest quality JPEG at 90 to 100 percent.
+
+For digital online submissions: there are strict file size limits ranging from 60 kilobytes to 10 megabytes. Specific pixel dimensions are required. JPEG format is almost always required. You must compress to meet the size limit while keeping clarity. Some portals reject if the file is too small — India has a minimum of 10 kilobytes.
+
+The smart approach to meeting digital requirements is: crop first to remove everything outside the required frame, resize to the exact required pixel dimensions, and compress last to hit the file size target. This order matters because cropping and resizing first removes most of the excess data, so the final compression step only needs to reduce the file by 20 to 40 percent instead of 95 percent.
+
+Free Tool: SammaPix Passport Photo Maker
+
+After dealing with rejected passport photos myself, I built a tool that handles the entire process. The SammaPix passport photo maker lets you select your country to automatically set the correct dimensions, crop with visual guidelines showing where your head and shoulders should be, auto-compress to hit the exact file size requirement, and download instantly.
+
+Everything runs 100 percent in your browser. Your photo never leaves your device — no upload to any server, no data collection, no account required. This is especially important for identity documents where privacy matters.
+
+Tips by Region
+
+Asia has the strictest file size limits. Singapore requires under 60 kilobytes, China requires 40 to 120 kilobytes, and South Korea caps at 700 kilobytes. India has both a minimum and maximum, which means you can't just over-compress.
+
+Europe is more relaxed on file sizes but strict about backgrounds. Germany requires specifically light grey, France accepts light grey or light blue, and the UK accepts both white and light grey.
+
+In the Americas, the US uses a unique 2 by 2 inch square format, while Canada uses 50 by 70 millimeters. Mexico follows the European 35 by 45 millimeter standard.
+
+The Middle East follows the 35 by 45 millimeter standard with white backgrounds. The UAE has a 200 kilobyte file size limit.
+
+Southeast Asia has unique requirements. Indonesia stands out with colored backgrounds — red for the last three passport pages, blue for earlier pages. Singapore's 60 kilobyte limit is the strictest in the world.
+
+Frequently Asked Questions
+
+What is the standard US passport photo size? The standard US passport photo size is 2 by 2 inches, or 51 by 51 millimeters. For digital submissions, this is 600 by 600 pixels at 300 DPI. The head height must be between 25 and 35 millimeters. Background must be plain white, and file size must be under 240 kilobytes.
+
+What background color is required for passport photos? Most countries require white or light-colored backgrounds. The US, India, China, and most Asian countries require plain white. The UK accepts light grey or white. France accepts light grey or light blue. Indonesia requires red and blue backgrounds depending on the passport page.
+
+How do I compress my passport photo to the required file size? First crop and resize your photo to the exact required dimensions. Then use a target-size compression tool to compress to the exact limit. Cropping first means less aggressive compression is needed, resulting in better image quality.
+
+Can I take my own passport photo at home? Yes. Use a plain white wall, stand about 1.5 meters from the camera, face a window for natural light, keep a neutral expression with both eyes open, and take at least 10 shots to choose from. Then crop, resize, and compress.
+
+What is the most common reason for passport photo rejection? Wrong dimensions or aspect ratio is the most common reason. Other frequent causes include shadows, eyes not visible, incorrect background color, and exceeding the file size limit.
+
+Are passport photo requirements the same for visas? No. Visa photo requirements often differ from passport requirements. The US uses 2 by 2 inches for both, but Schengen visa photos use 35 by 45 millimeters regardless of which European country you're applying to.
+
+What file format should passport photos be in? JPEG is the universally accepted format. Some portals also accept PNG. Avoid WebP, HEIC, or AVIF — government systems typically don't support modern formats.
+
+How do I get a plain white background? Take the photo against a plain white wall with good, even lighting. Stand about 50 centimeters away from the wall to avoid shadows. Use natural daylight from a window facing you. If your wall isn't perfectly white, tape a large sheet of white poster board behind you.
+
+Bottom line: Passport photo requirements look complex, but they boil down to three things — correct dimensions for your country, a plain background that's usually white, and proper file size for digital submissions. Get those three right and your photo will pass.
