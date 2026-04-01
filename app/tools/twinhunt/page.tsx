@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/tools/twinhunt` },
   openGraph: {
-    title: "Find Duplicate Photos Free Online | Perceptual Hashing | SammaPix",
+    title: "Find Duplicate Photos Free Online | Perceptual Hashing",
     description:
       "Find duplicate photos instantly with AI hashing. Reclaim disk space, identify near-duplicates. Free online, zero uploads, no sorting.",
     url: `${APP_URL}/tools/twinhunt`,

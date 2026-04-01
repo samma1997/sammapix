@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "protect photos with watermark",
   ],
   openGraph: {
-    title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
+    title: "How to Batch Watermark Photos for Free (No Photoshop)",
     description:
       "Add watermarks to hundreds of photos in seconds- no Photoshop, no subscription. Step-by-step guide to batch watermarking with best practices for placement, opacity, and branding.",
     url: `${APP_URL}/blog/batch-watermark-photos-free`,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Batch Watermark Photos for Free (No Photoshop) | SammaPix",
+    title: "How to Batch Watermark Photos for Free (No Photoshop)",
     description:
       "Protect your photography and reinforce your brand. Batch watermark photos for free- no Photoshop needed, runs entirely in your browser.",
     creator: "@lucasammarco",

@@ -19,7 +19,7 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Upscale Image 2x & 4x Online Free | SammaPix",
+  title: "Upscale Image 2x & 4x Online Free",
   description:
     "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
   keywords: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/upscale`,
   },
   openGraph: {
-    title: "Upscale Image 2x & 4x Online Free | SammaPix",
+    title: "Upscale Image 2x & 4x Online Free",
     description:
       "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
     url: `${APP_URL}/tools/upscale`,
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Upscale Image 2x & 4x Online Free | SammaPix",
+    title: "Upscale Image 2x & 4x Online Free",
     description:
       "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
   },

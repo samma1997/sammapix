@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Convert to WebP Online Free | SammaPix",
+  title: "Convert to WebP Online Free",
   description:
     "Convert JPG, PNG & HEIC to WebP in seconds. Cut file size by 50% with 15+ format options. Browser-based, free, no signup needed.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/webp`,
   },
   openGraph: {
-    title: "Convert to WebP Online Free | SammaPix",
+    title: "Convert to WebP Online Free",
     description:
       "Convert JPG, PNG & HEIC to WebP in seconds. Cut file size by 50% with 15+ format options. Browser-based, free, no signup needed.",
     url: `${APP_URL}/tools/webp`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convert to WebP Online Free | SammaPix",
+    title: "Convert to WebP Online Free",
     description:
       "Convert JPG, PNG & HEIC to WebP in seconds. Cut file size by 50% with 15+ format options. Browser-based, free, no signup needed.",
   },

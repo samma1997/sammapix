@@ -10,7 +10,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Image Rename Tool Online Free | SammaPix",
+  title: "AI Image Rename Tool Online Free",
   description:
     "Turn IMG_0001.jpg into SEO-friendly filenames with AI. Batch rename 20+ images in seconds. Browser-based, powered by Gemini. No signup to try.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/ai-rename`,
   },
   openGraph: {
-    title: "AI Image Rename Tool Online Free | SammaPix",
+    title: "AI Image Rename Tool Online Free",
     description:
       "Turn IMG_0001.jpg into SEO-friendly filenames with AI. Batch rename 20+ images in seconds. Browser-based, powered by Gemini. No signup to try.",
     url: `${APP_URL}/tools/ai-rename`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Image Rename Tool Online Free | SammaPix",
+    title: "AI Image Rename Tool Online Free",
     description:
       "Turn IMG_0001.jpg into SEO-friendly filenames with AI. Batch rename 20+ images in seconds. Browser-based, powered by Gemini. No signup to try.",
   },

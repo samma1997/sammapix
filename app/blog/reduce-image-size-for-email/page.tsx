@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "make image smaller for email",
   ],
   openGraph: {
-    title: "Reduce Image Size for Email: Get Under 1MB Fast | SammaPix",
+    title: "Reduce Image Size for Email: Get Under 1MB Fast",
     description:
       "Compress photos to under 1MB for email attachments- no quality loss, free, runs entirely in your browser. Works for iPhone photos, DSLR shots, and everything in between.",
     url: `${APP_URL}/blog/reduce-image-size-for-email`,
