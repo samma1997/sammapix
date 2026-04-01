@@ -126,12 +126,7 @@ export default async function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}` }} />
         {/* Font is self-hosted via next/font/google — no external preconnect needed */}
-        {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
-          <link rel="preconnect" href="https://www.googletagmanager.com" />
-        )}
-        {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
-          <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        )}
+        {/* Tracker preconnects removed: scripts are deferred via requestIdleCallback so preconnect is wasteful (Lighthouse: unused preconnect) */}
         {/* iOS PWA support */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -175,6 +170,14 @@ export default async function RootLayout({
                     "@type": "Person",
                     "name": "Luca Sammarco",
                     "url": "https://lucasammarco.com",
+                    "image": "https://www.sammapix.com/luca-sammarco.jpg",
+                    "jobTitle": "Digital Product Builder & Travel Photographer",
+                    "sameAs": [
+                      "https://lucasammarco.com",
+                      "https://github.com/samma1997",
+                      "https://www.linkedin.com/in/luca-sammarco-a88b8a148/",
+                      "https://dev.to/samma1997"
+                    ],
                   },
                   "description":
                     "Free browser-based image optimization tools. Compress, convert, resize, and enhance photos without uploading to any server.",

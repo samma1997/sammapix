@@ -14,6 +14,7 @@ import TextToSpeech from "./TextToSpeech";
 import ArticleSummary from "./ArticleSummary";
 import ShareBar from "./ShareBar";
 import RelatedArticles from "./RelatedArticles";
+import AuthorBox from "./AuthorBox";
 
 interface BlogArticleLayoutProps {
   title: string;
@@ -117,6 +118,9 @@ export default function BlogArticleLayout({
             <div className="hidden sm:block">
               <ShareBar url={articleUrl} title={title} />
             </div>
+
+            {/* Author box */}
+            <AuthorBox />
 
             {/* CTA */}
             {ctaBlock && <div className="mt-12">{ctaBlock}</div>}

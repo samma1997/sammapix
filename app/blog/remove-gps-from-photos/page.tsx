@@ -388,10 +388,12 @@ export default function RemoveGpsFromPhotosPage() {
             datePublished: "2026-02-24",
             dateModified: "2026-02-24",
             author: {
-              "@type": "Person",
-              name: "Luca Sammarco",
-              url: "https://lucasammarco.com",
-            },
+    "@type": "Person",
+    name: "Luca Sammarco",
+    url: "https://www.sammapix.com/about",
+    image: "https://www.sammapix.com/luca-sammarco.jpg",
+    sameAs: ["https://lucasammarco.com", "https://github.com/samma1997"],
+  },
             publisher: {
               "@type": "Organization",
               name: "SammaPix",
