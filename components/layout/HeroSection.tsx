@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
+import dynamic from "next/dynamic";
+
+const FoundingSpotsCounter = dynamic(
+  () => import("@/components/ui/FoundingSpotsCounter"),
+  {
+    loading: () => <div className="h-12" />,
+  }
+);
 
 export default function HeroSection() {
   return (
-    <section className="w-full bg-white dark:bg-[#191919] border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+    <section className="w-full bg-white dark:bg-[#191919] border-b border-[#E5E5E5] dark:border-[#2A2A2A]" style={{ minHeight: '400px' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
         {/* Eyebrow */}
         <p className="text-xs font-medium text-[#6366F1] uppercase tracking-widest mb-5">

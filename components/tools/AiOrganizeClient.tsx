@@ -5,7 +5,9 @@ import { useSession, signIn } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 import {
   Download,
   Lock,

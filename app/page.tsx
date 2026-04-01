@@ -1,8 +1,26 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/layout/HeroSection";
-import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
+
+const HomepageToolGrid = dynamic(
+  () => import("@/components/home/HomepageToolGrid").then((mod) => ({ default: mod.HomepageToolGrid })),
+  {
+    loading: () => (
+      <div className="py-14 px-4 sm:px-6 bg-white dark:bg-[#191919]">
+        <div className="max-w-5xl mx-auto">
+          <div className="h-8 w-32 bg-[#F5F5F5] dark:bg-[#2A2A2A] rounded mb-6 animate-pulse" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-24 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg bg-[#FAFAFA] dark:bg-[#1E1E1E] animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+  }
+);
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 

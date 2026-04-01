@@ -7,7 +7,9 @@
  */
 
 import StampIt from "@/components/tools/StampIt";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 
 export default function StampItClient() {
   return (

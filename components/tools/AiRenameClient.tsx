@@ -7,7 +7,9 @@
  */
 
 import ToolInterface from "@/components/tools/ToolInterface";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 
 export default function AiRenameClient() {
   return (

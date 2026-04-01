@@ -7,7 +7,9 @@
  */
 
 import TravelMapComponent from "@/components/tools/TravelMap";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 
 export default function TravelMapClientWrapper() {
   return (

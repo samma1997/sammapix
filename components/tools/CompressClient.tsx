@@ -6,8 +6,10 @@
  * so the parent compress page can remain a Server Component.
  */
 
+import dynamic from "next/dynamic";
 import ToolInterface from "@/components/tools/ToolInterface";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 
 export default function CompressClient() {
   return (

@@ -8,9 +8,11 @@ import { usePathname } from "next/navigation";
 import DropZone from "@/components/upload/DropZone";
 import SettingsToolbar from "@/components/upload/SettingsToolbar";
 import FileList from "@/components/files/FileList";
-import AiRenameModal from "@/components/ai/AiRenameModal";
+import dynamic from "next/dynamic";
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
-import ProUpsellModal from "@/components/ui/ProUpsellModal";
+
+const AiRenameModal = dynamic(() => import("@/components/ai/AiRenameModal"), { ssr: false });
+const ProUpsellModal = dynamic(() => import("@/components/ui/ProUpsellModal"), { ssr: false });
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 import { AI_OPS_FREE_PER_DAY } from "@/lib/constants";
