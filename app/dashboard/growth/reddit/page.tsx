@@ -541,78 +541,115 @@ export default function RedditPage() {
         </div>
       </div>
 
-      {/* Two-column layout */}
+      {/* Main layout — 3 sections stacked */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {[...Array(2)].map((_, i) => (
+        <div className="space-y-4">
+          {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="h-64 bg-[#F5F5F5] dark:bg-[#252525] rounded-[6px] animate-pulse"
+              className="h-32 bg-[#F5F5F5] dark:bg-[#252525] rounded-[6px] animate-pulse"
             />
           ))}
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-          {/* DA COMMENTARE */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-                Da commentare
-              </h2>
-              <span className="text-[10px] bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] px-1.5 py-0.5 rounded-[4px] font-medium">
-                {toComment.length}
-              </span>
-            </div>
-            <div className="space-y-2.5">
-              {toComment.map((post) => (
-                <PostCard
-                  key={post.id}
-                  post={post}
-                  onStatusChange={handleStatusChange}
-                />
-              ))}
-              {toComment.length === 0 && (
-                <div className="text-center py-8">
-                  <p className="text-xs text-[#A3A3A3]">
-                    Nessun post da commentare
-                  </p>
-                  <p className="text-[10px] text-[#D4D4D4] dark:text-[#404040] mt-1">
-                    Usa &quot;Cerca nuovi post&quot; per trovare opportunit&agrave;
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
+      ) : (() => {
+        const postsToCreate = toComment.filter(p => p.title.startsWith("🟢"));
+        const postsToCommentOn = toComment.filter(p => p.title.startsWith("💬"));
+        const otherToComment = toComment.filter(p => !p.title.startsWith("🟢") && !p.title.startsWith("💬"));
 
-          {/* COMMENTATI */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-                Commentati
-              </h2>
-              <span className="text-[10px] bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] px-1.5 py-0.5 rounded-[4px] font-medium">
-                {commented.length}
-              </span>
-            </div>
-            <div className="space-y-2.5">
-              {commented.map((post) => (
-                <PostCard
-                  key={post.id}
-                  post={post}
-                  onStatusChange={handleStatusChange}
-                />
-              ))}
-              {commented.length === 0 && (
-                <div className="text-center py-8">
-                  <p className="text-xs text-[#A3A3A3]">
-                    Nessun post commentato
-                  </p>
+        return (
+          <div className="space-y-8">
+            {/* ═══ SEZIONE 1: POST DA CREARE ═══ */}
+            {postsToCreate.length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
+                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                    Post da creare
+                  </h2>
+                  <span className="text-[10px] bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded-[4px] font-medium">
+                    {postsToCreate.length}
+                  </span>
                 </div>
-              )}
-            </div>
+                <p className="text-[11px] text-[#A3A3A3] mb-3">
+                  Clicca il link, copia il testo e pubblicalo come nuovo post su Reddit. Questi ti fanno guadagnare karma.
+                </p>
+                <div className="space-y-2.5">
+                  {postsToCreate.map((post) => (
+                    <PostCard
+                      key={post.id}
+                      post={post}
+                      onStatusChange={handleStatusChange}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* ═══ SEZIONE 2: COMMENTI DA LASCIARE ═══ */}
+            {(postsToCommentOn.length > 0 || otherToComment.length > 0) && (
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
+                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                    Commenti da lasciare
+                  </h2>
+                  <span className="text-[10px] bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-1.5 py-0.5 rounded-[4px] font-medium">
+                    {postsToCommentOn.length + otherToComment.length}
+                  </span>
+                </div>
+                <p className="text-[11px] text-[#A3A3A3] mb-3">
+                  Vai sul post, copia il commento e incollalo. Ogni commento upvotato ti d&agrave; karma.
+                </p>
+                <div className="space-y-2.5">
+                  {[...postsToCommentOn, ...otherToComment].map((post) => (
+                    <PostCard
+                      key={post.id}
+                      post={post}
+                      onStatusChange={handleStatusChange}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Empty state */}
+            {toComment.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-sm text-[#A3A3A3]">
+                  Nessun post da commentare
+                </p>
+                <p className="text-xs text-[#D4D4D4] dark:text-[#404040] mt-1">
+                  Usa &quot;Cerca nuovi post&quot; per trovare opportunit&agrave;
+                </p>
+              </div>
+            )}
+
+            {/* ═══ SEZIONE 3: COMPLETATI ═══ */}
+            {(commented.length > 0 || skipped.length > 0) && (
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="h-2.5 w-2.5 rounded-full bg-[#A3A3A3]" />
+                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                    Completati
+                  </h2>
+                  <span className="text-[10px] bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] px-1.5 py-0.5 rounded-[4px] font-medium">
+                    {commented.length + skipped.length}
+                  </span>
+                </div>
+                <div className="space-y-2.5">
+                  {[...commented, ...skipped].map((post) => (
+                    <PostCard
+                      key={post.id}
+                      post={post}
+                      onStatusChange={handleStatusChange}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {showModal && (
         <AddPostModal
