@@ -7,7 +7,9 @@
  */
 
 import CullTool from "@/components/tools/Cull";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 
 export default function CullClientWrapper() {
   return (

@@ -24,7 +24,9 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 import MetaAddToWishlist from "@/components/tracking/MetaAddToWishlist";
-import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
+import dynamic from "next/dynamic";
+
+const FoundingSpotsCounter = dynamic(() => import("@/components/ui/FoundingSpotsCounter"), { ssr: false });
 import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
 
 // ─── Tool grid data ────────────────────────────────────────────────────────────

@@ -7,7 +7,9 @@
  */
 
 import ResizePack from "@/components/tools/ResizePack";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
 
 export default function ResizePackClient() {
   return (

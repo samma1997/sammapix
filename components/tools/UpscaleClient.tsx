@@ -23,8 +23,10 @@ import { useSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import { upscaleImage, getUpscaleOutputFilename, type UpscaleScale } from "@/lib/upscale";
 import { ACCEPTED_MIME_TYPES } from "@/lib/constants";
-import NextStepSuggestions from "@/components/tools/NextStepSuggestions";
-import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import dynamic from "next/dynamic";
+
+const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
+const ProUpsellModal = dynamic(() => import("@/components/ui/ProUpsellModal"), { ssr: false });
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 
