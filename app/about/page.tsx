@@ -202,19 +202,24 @@ export default function AboutPage() {
         {/* ── Brief bio ─────────────────────────────────────────────────────── */}
         <section className="bg-[#FAFAFA] dark:bg-[#111111] border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 sm:px-8 py-12">
           <div className="max-w-2xl mx-auto">
-            <div className="flex flex-col items-center mb-6">
+            <div className="flex items-center gap-4 mb-6">
               <Image
                 src="/luca-sammarco.jpg"
                 alt="Luca Sammarco — Digital Product Builder & Travel Photographer"
-                width={200}
-                height={200}
-                className="rounded-full object-cover"
+                width={56}
+                height={56}
+                className="rounded-md object-cover flex-shrink-0"
                 priority
               />
+              <div>
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                  Luca Sammarco
+                </p>
+                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                  Digital Product Builder &middot; Travel Photographer
+                </p>
+              </div>
             </div>
-            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-4">
-              About Luca
-            </p>
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
               Travel photographer and full-stack developer. Passionate about photography since 2015, I&apos;ve shot my way
               through Sri Lanka, Bali, Japan, Thailand, and China -- always coming home with thousands of photos that needed
