@@ -112,7 +112,7 @@ const faqSchema = {
       name: "Are online image optimization tools safe to use?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "It depends on the tool. Browser-based tools like SammaPix and Squoosh process your images entirely on your device — your files never leave your computer, which is completely safe. Server-based tools like TinyPNG, iLoveIMG, and Optimizilla upload your images to their servers for processing. While these services have privacy policies, your images do pass through a third-party server. For sensitive images (personal photos, client work, confidential documents), choose a browser-based tool.",
+        text: "It depends on the tool. Browser-based tools like SammaPix and Squoosh process your images entirely on your device . Your files never leave your computer, which is completely safe. Server-based tools like TinyPNG, iLoveIMG, and Optimizilla upload your images to their servers for processing. While these services have privacy policies, your images do pass through a third-party server. For sensitive images (personal photos, client work, confidential documents), choose a browser-based tool.",
       },
     },
     {
@@ -120,7 +120,7 @@ const faqSchema = {
       name: "How much can I reduce an image file size without losing quality?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "For JPEG photos, you can typically achieve 50–70% file size reduction at quality 80 with no visible difference at normal screen sizes. Converting to WebP adds another 25–35% reduction on top of that. A 4.2MB original JPEG can realistically become 890KB at quality 80 — a 79% reduction — with no perceptible quality loss when viewed on a screen. For PNG files with transparency, lossless recompression typically saves 10–30%, while converting to lossy WebP can save 60–80%.",
+        text: "For JPEG photos, you can typically achieve 50–70% file size reduction at quality 80 with no visible difference at normal screen sizes. Converting to WebP adds another 25–35% reduction on top of that. A 4.2MB original JPEG can realistically become 890KB at quality 80 , a 79% reduction , with no perceptible quality loss when viewed on a screen. For PNG files with transparency, lossless recompression typically saves 10–30%, while converting to lossy WebP can save 60–80%.",
       },
     },
     {
@@ -128,7 +128,7 @@ const faqSchema = {
       name: "What is the difference between image compression and image optimization?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Image compression refers specifically to reducing the data used to encode an image's pixels — either losslessly (no data removed) or lossily (some data discarded). Image optimization is a broader term that includes compression but also format conversion (e.g., JPEG to WebP), resizing to appropriate dimensions, stripping unnecessary metadata, and renaming files with descriptive names for SEO. The best image optimization tools handle all of these steps, not just compression alone.",
+        text: "Image compression refers specifically to reducing the data used to encode an image's pixels, either losslessly (no data removed) or lossily (some data discarded). Image optimization is a broader term that includes compression but also format conversion (e.g., JPEG to WebP), resizing to appropriate dimensions, stripping unnecessary metadata, and renaming files with descriptive names for SEO. The best image optimization tools handle all of these steps, not just compression alone.",
       },
     },
     {
@@ -161,13 +161,13 @@ export default function FreeImageOptimizationToolsOnlinePage() {
         headings={[
           { id: "why-optimization-matters", title: "Why image optimization matters in 2026" },
           { id: "how-we-evaluated", title: "How we evaluated these tools" },
-          { id: "sammapix", title: "1. SammaPix — Best overall free image optimizer" },
-          { id: "tinypng", title: "2. TinyPNG — Best for PNG and JPEG compression quality" },
-          { id: "squoosh", title: "3. Squoosh — Best for single-image quality control" },
-          { id: "iloveimg", title: "4. iLoveIMG — Best for multiple image tasks in one place" },
-          { id: "shortpixel", title: "5. ShortPixel — Best for WordPress integration" },
-          { id: "compressor-io", title: "6. Compressor.io — Best for clean single-image UX" },
-          { id: "optimizilla", title: "7. Optimizilla — Straightforward but showing its age" },
+          { id: "sammapix", title: "1. SammaPix: Best overall free image optimizer" },
+          { id: "tinypng", title: "2. TinyPNG: Best for PNG and JPEG compression quality" },
+          { id: "squoosh", title: "3. Squoosh: Best for single-image quality control" },
+          { id: "iloveimg", title: "4. iLoveIMG: Best for multiple image tasks in one place" },
+          { id: "shortpixel", title: "5. ShortPixel: Best for WordPress integration" },
+          { id: "compressor-io", title: "6. Compressor.io: Best for clean single-image UX" },
+          { id: "optimizilla", title: "7. Optimizilla: Straightforward but showing its age" },
           { id: "faq", title: "FAQ" }
         ]}
         summary={[
@@ -186,23 +186,23 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Choosing the right image optimization tool can save hours of manual work — Photo by Luke Chesser on Unsplash
+                Choosing the right image optimization tool can save hours of manual work. Photo by Luke Chesser on Unsplash
               </figcaption>
             </figure>
         }
         ctaBlock={
           <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-              Optimize your images now — free, no upload required
+              Optimize your images now , free, no upload required
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              Drop your images into SammaPix and reduce file sizes by up to 80% without visible quality loss. Runs entirely in your browser — your files never leave your device. Supports JPEG, PNG, WebP, HEIC, and AVIF with bulk processing and no daily limits.
+              Drop your images into SammaPix and reduce file sizes by up to 80% without visible quality loss. Runs entirely in your browser . Your files never leave your device. Supports JPEG, PNG, WebP, HEIC, and AVIF with bulk processing and no daily limits.
             </p>
             <Link
               href="/tools/compress"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
-              Try SammaPix — Free
+              Try SammaPix, Free
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
@@ -228,7 +228,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               . Unoptimized images slow down page loads, damage Core Web Vitals
               scores, increase CDN costs, and reduce conversion rates. A one-second
               delay in load time can reduce conversions by 7%, according to
-              Akamai&apos;s research — and images are almost always the largest
+              Akamai&apos;s research , and images are almost always the largest
               single contributor to that delay.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -261,7 +261,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 1 - SammaPix */}
             <h2 id="sammapix" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-1 tracking-tight" >
-              1. SammaPix — Best overall free image optimizer
+              1. SammaPix: Best overall free image optimizer
             </h2>
             <p className="text-xs font-medium uppercase tracking-wide text-green-700 mb-4">
               Editor&apos;s Pick
@@ -270,7 +270,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               SammaPix is a browser-based image optimization tool that runs
               entirely on your device. No files are ever uploaded to a server
-              — all compression, conversion, and renaming happens locally using
+              , all compression, conversion, and renaming happens locally using
               modern browser APIs. It supports JPEG, PNG, WebP, HEIC, and AVIF,
               and handles bulk batches with no daily file limit on the free
               plan.
@@ -280,7 +280,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               Benchmark result
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              A 4.2MB JPEG compressed to quality 80 came out at 890KB — a 79%
+              A 4.2MB JPEG compressed to quality 80 came out at 890KB , a 79%
               reduction with no visible quality difference at normal screen
               sizes. The 1.8MB PNG was losslessly recompressed to 1.3MB (28%
               reduction). HEIC files are converted to JPEG or WebP directly in
@@ -293,7 +293,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">100% browser-based:</strong> files never leave your device — strongest privacy guarantee in this comparison
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Widest format support:</strong> JPEG, PNG, WebP, HEIC, AVIF — the only free tool handling HEIC without server upload
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Widest format support:</strong> JPEG, PNG, WebP, HEIC, AVIF . The only free tool handling HEIC without server upload
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Bulk processing with no daily cap:</strong> process 20+ images at once on the free plan, unlimited on Pro
@@ -308,13 +308,13 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Free plan ZIP download not available — individual file downloads only
+                Free plan ZIP download not available, individual file downloads only
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 AI rename requires a free account (to prevent API abuse)
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                No WordPress plugin — best suited to direct browser use
+                No WordPress plugin, best suited to direct browser use
               </li>
             </ul>
 
@@ -329,7 +329,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 href="/tools/compress"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
-                Try SammaPix — Free, No Upload
+                Try SammaPix, Free, No Upload
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
             </div>
@@ -338,7 +338,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 2 - TinyPNG */}
             <h2 id="tinypng" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
-              2. TinyPNG — Best for PNG and JPEG compression quality
+              2. TinyPNG: Best for PNG and JPEG compression quality
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -355,7 +355,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The 4.2MB JPEG compressed to 1.1MB at TinyPNG&apos;s default settings
               (approximately 73% reduction). The 1.8MB PNG compressed to 890KB
-              (51% reduction) — competitive with SammaPix on PNG specifically.
+              (51% reduction), competitive with SammaPix on PNG specifically.
               HEIC files are not supported.
             </p>
 
@@ -379,10 +379,10 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 Free tier limited to 20 images per day and 5MB per file
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Files are uploaded to TinyPNG&apos;s servers — privacy concern for sensitive images
+                Files are uploaded to TinyPNG&apos;s servers, privacy concern for sensitive images
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                No quality slider — you accept their compression level or nothing
+                No quality slider . You accept their compression level or nothing
               </li>
             </ul>
 
@@ -396,7 +396,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 3 - Squoosh */}
             <h2 id="squoosh" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
-              3. Squoosh — Best for single-image quality control
+              3. Squoosh: Best for single-image quality control
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -413,7 +413,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The 4.2MB JPEG compressed to 810KB at quality 80 (81% reduction)
-              — the best JPEG compression result in this comparison. Squoosh&apos;s
+              . The best JPEG compression result in this comparison. Squoosh&apos;s
               MozJPEG encoder is genuinely superior at quality/size tradeoffs.
               HEIC is not supported as an input format.
             </p>
@@ -435,19 +435,19 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Single image only — no batch processing whatsoever
+                Single image only . No batch processing whatsoever
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                No HEIC input support — iPhone photos must be converted first
+                No HEIC input support. iPhone photos must be converted first
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Interface is complex — more tools than most users need for simple compression
+                Interface is complex, more tools than most users need for simple compression
               </li>
             </ul>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               <strong className="text-gray-800 dark:text-[#E5E5E5]">Best for:</strong> developers and designers who need precise control over a single critical
-              image — a hero shot, a product photo, or a high-stakes asset
+              image , a hero shot, a product photo, or a high-stakes asset
               where squeezing out every extra KB matters.
             </p>
 
@@ -455,7 +455,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 4 - iLoveIMG */}
             <h2 id="iloveimg" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
-              4. iLoveIMG — Best for multiple image tasks in one place
+              4. iLoveIMG: Best for multiple image tasks in one place
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -471,7 +471,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The 4.2MB JPEG compressed to 1.4MB at default settings (67%
-              reduction) — acceptable but not exceptional. Processing time
+              reduction), acceptable but not exceptional. Processing time
               included upload latency, which added 8–15 seconds per batch
               depending on connection speed. HEIC is not supported.
             </p>
@@ -493,10 +493,10 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Heavy advertising — multiple full-page ads interrupt the workflow
+                Heavy advertising. Multiple full-page ads interrupt the workflow
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Server-based — your images are uploaded to iLoveIMG&apos;s servers for processing
+                Server-based . Your images are uploaded to iLoveIMG&apos;s servers for processing
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 Slower than browser-based tools due to upload/download round trip
@@ -512,7 +512,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 5 - ShortPixel */}
             <h2 id="shortpixel" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
-              5. ShortPixel — Best for WordPress integration
+              5. ShortPixel: Best for WordPress integration
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -528,7 +528,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The 4.2MB JPEG compressed to 960KB using ShortPixel&apos;s
-              &ldquo;Lossy&rdquo; mode (77% reduction) — solid result, comparable to
+              &ldquo;Lossy&rdquo; mode (77% reduction), solid result, comparable to
               SammaPix. The service also offers Glossy (slightly less
               compression, higher quality) and Lossless modes. WebP conversion
               is available as an additional option.
@@ -551,13 +551,13 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Free tier capped at 100 images per month — insufficient for active websites
+                Free tier capped at 100 images per month, insufficient for active websites
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Server-based — images are sent to ShortPixel&apos;s servers for processing
+                Server-based. Images are sent to ShortPixel&apos;s servers for processing
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Not useful for non-WordPress workflows — web tool is a secondary feature
+                Not useful for non-WordPress workflows. Web tool is a secondary feature
               </li>
             </ul>
 
@@ -571,13 +571,13 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 6 - Compressor.io */}
             <h2 id="compressor-io" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
-              6. Compressor.io — Best for clean single-image UX
+              6. Compressor.io: Best for clean single-image UX
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               Compressor.io is a well-designed, minimalist tool for compressing
               a single image at a time. It supports JPEG, PNG, GIF, and SVG
-              — the inclusion of SVG is unusual and useful for developers.
+              . The inclusion of SVG is unusual and useful for developers.
               The interface is clean, fast, and shows clear before/after size
               comparisons.
             </p>
@@ -587,7 +587,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The 4.2MB JPEG compressed to 1.2MB at default lossy settings
-              (71% reduction) — reasonable but behind Squoosh and SammaPix.
+              (71% reduction), reasonable but behind Squoosh and SammaPix.
               The free tier limits uploads to 10MB per file, which covers most
               web images comfortably.
             </p>
@@ -609,13 +609,13 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Single image only — no batch processing on the free plan
+                Single image only . No batch processing on the free plan
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 No WebP, HEIC, or AVIF support
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Server-based processing — images are uploaded to Compressor.io&apos;s servers
+                Server-based processing. Images are uploaded to Compressor.io&apos;s servers
               </li>
             </ul>
 
@@ -628,7 +628,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
 
             {/* Tool 7 - Optimizilla */}
             <h2 id="optimizilla" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight" >
-              7. Optimizilla — Straightforward but showing its age
+              7. Optimizilla: Straightforward but showing its age
             </h2>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -636,7 +636,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               online, and it shows. The interface has not changed meaningfully
               in several years. It supports JPEG and PNG, allows up to 20 files
               per batch, and lets you adjust quality with a slider while seeing
-              a preview — a useful feature that some newer tools lack.
+              a preview , a useful feature that some newer tools lack.
             </p>
 
             <p className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mt-4 mb-1">
@@ -644,7 +644,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               The 4.2MB JPEG compressed to 1.5MB at the default quality setting
-              (64% reduction) — the lowest compression ratio in this comparison.
+              (64% reduction) . The lowest compression ratio in this comparison.
               At quality 60 the result improved to 980KB but visual artifacts
               became noticeable at 1:1 zoom.
             </p>
@@ -669,10 +669,10 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 Weakest compression results in this comparison
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                Outdated interface — not mobile-friendly
+                Outdated interface , not mobile-friendly
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                JPEG and PNG only — no WebP, AVIF, or HEIC support
+                JPEG and PNG only . No WebP, AVIF, or HEIC support
               </li>
             </ul>
 
@@ -692,7 +692,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Real benchmark data is the only reliable way to compare image optimization tools — Photo by Luke Chesser on Unsplash
+                Real benchmark data is the only reliable way to compare image optimization tools. Photo by Luke Chesser on Unsplash
               </figcaption>
             </figure>
 
@@ -799,8 +799,8 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </ul>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              For teams doing regular image optimization at scale — content
-              creators, e-commerce managers, web agencies — the{" "}
+              For teams doing regular image optimization at scale, content
+              creators, e-commerce managers, web agencies, the{" "}
               <Link
                 href="/pricing"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -808,7 +808,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
                 SammaPix Pro plan at $7/month
               </Link>{" "}
               unlocks ZIP downloads, unlimited AI renaming, and batch limits
-              up to 500 files per session — still less than most competing paid
+              up to 500 files per session, still less than most competing paid
               plans.
             </p>
 
@@ -836,7 +836,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
               It depends on the tool. Browser-based tools like SammaPix and
-              Squoosh process images entirely on your device — your files never
+              Squoosh process images entirely on your device . Your files never
               leave your computer, which is completely safe. Server-based tools
               like TinyPNG, iLoveIMG, and Optimizilla upload your images to
               their servers. For sensitive images (personal photos, client work,
@@ -850,7 +850,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               For JPEG photos, you can typically achieve 50–70% file size
               reduction at quality 80 with no visible difference at normal
               screen sizes. Converting to WebP adds another 25–35% on top.
-              A 4.2MB JPEG can realistically become 890KB — a 79% reduction —
+              A 4.2MB JPEG can realistically become 890KB , a 79% reduction,
               with no perceptible quality loss when viewed on a screen.
             </p>
 
@@ -858,7 +858,7 @@ export default function FreeImageOptimizationToolsOnlinePage() {
               What is the difference between image compression and image optimization?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              Image compression reduces the data used to encode pixels — either
+              Image compression reduces the data used to encode pixels, either
               losslessly or lossily. Image optimization is broader: it includes
               compression, format conversion (e.g., JPEG to WebP), resizing to
               appropriate dimensions, stripping unnecessary metadata, and

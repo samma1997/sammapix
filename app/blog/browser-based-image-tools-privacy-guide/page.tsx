@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title:
     "Browser-Based Image Tools: The Complete Privacy Guide (2026)",
   description:
-    "Browser-based image tools process images 100% locally — no uploads, no servers, no data leaks. The definitive 2026 guide to privacy image editing and no-upload image editors.",
+    "Browser-based image tools process images 100% locally . No uploads, no servers, no data leaks. The definitive 2026 guide to privacy image editing and no-upload image editors.",
   alternates: {
     canonical: `${APP_URL}/blog/browser-based-image-tools-privacy-guide`,
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Browser-Based Image Tools: The Complete Privacy Guide (2026)",
     description:
-      "Browser-based image tools process images 100% locally in your browser — no uploads, no servers, no data leaks. The definitive guide to private image editing in 2026.",
+      "Browser-based image tools process images 100% locally in your browser . No uploads, no servers, no data leaks. The definitive guide to private image editing in 2026.",
     url: `${APP_URL}/blog/browser-based-image-tools-privacy-guide`,
     type: "article",
     publishedTime: "2026-03-20",
@@ -50,7 +50,7 @@ const articleSchema = {
   "@type": "Article",
   headline: POST_TITLE,
   description:
-    "Browser-based image tools process images 100% locally in your browser — no uploads, no servers, no data leaks. The definitive guide to privacy image editing and no-upload image editors in 2026.",
+    "Browser-based image tools process images 100% locally in your browser . No uploads, no servers, no data leaks. The definitive guide to privacy image editing and no-upload image editors in 2026.",
   url: POST_URL,
   datePublished: POST_DATE,
   dateModified: POST_DATE,
@@ -92,7 +92,7 @@ const faqSchema = {
       name: "What are browser-based image tools?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Browser-based image tools are web applications that process images entirely inside your browser using JavaScript and WebAssembly — without uploading files to any external server. The image data stays on your device throughout the entire editing process. Examples include SammaPix, Squoosh, and Photopea.",
+        text: "Browser-based image tools are web applications that process images entirely inside your browser using JavaScript and WebAssembly, without uploading files to any external server. The image data stays on your device throughout the entire editing process. Examples include SammaPix, Squoosh, and Photopea.",
       },
     },
     {
@@ -132,7 +132,7 @@ const faqSchema = {
       name: "Which is the best browser-based image tool for privacy in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "SammaPix is the most comprehensive browser-based image tool for privacy in 2026, offering 25 tools including compression, WebP conversion, EXIF removal, batch processing, AI renaming, and format conversion — all running entirely in your browser with no uploads. For compression-specific tasks, Squoosh by Google is an excellent alternative.",
+        text: "SammaPix is the most comprehensive browser-based image tool for privacy in 2026, offering 25 tools including compression, WebP conversion, EXIF removal, batch processing, AI renaming, and format conversion , all running entirely in your browser with no uploads. For compression-specific tasks, Squoosh by Google is an excellent alternative.",
       },
     },
   ],
@@ -154,7 +154,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
       <BlogArticleLayout
         title={POST_TITLE}
         slug="browser-based-image-tools-privacy-guide"
-        description="Browser-based image tools process images 100% locally inside your browser — no upload to any server, no third party ever touching your files. This guide explains exactly how they work, why the privacy difference is architectural and not just marketing, and which tools are worth using in 2026."
+        description="Browser-based image tools process images 100% locally inside your browser . No upload to any server, no third party ever touching your files. This guide explains exactly how they work, why the privacy difference is architectural and not just marketing, and which tools are worth using in 2026."
         date={POST_DATE}
         dateFormatted={POST_DATE_FORMATTED}
         tags={["Privacy"]}
@@ -186,17 +186,17 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
               loading="eager"
             />
             <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-              Browser-based image editing means your photos never leave your device — Photo by Unsplash
+              Browser-based image editing means your photos never leave your device. Photo by Unsplash
             </figcaption>
           </figure>
         }
         ctaBlock={
           <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-              Process images privately — 100% in your browser
+              Process images privately, 100% in your browser
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              SammaPix runs 25 image tools entirely in your browser. No uploads, no accounts required for basic use, no file size limits. Compress, convert, strip EXIF, resize, and rename — all locally.
+              SammaPix runs 25 image tools entirely in your browser. No uploads, no accounts required for basic use, no file size limits. Compress, convert, strip EXIF, resize, and rename , all locally.
             </p>
             <Link
               href="/tools/compress"
@@ -217,7 +217,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
               Key Takeaway
             </p>
             <p className="text-sm text-indigo-800 dark:text-indigo-300 leading-relaxed">
-              Browser-based image tools are the only category of online image editors where your files provably never leave your device. This is not a privacy policy — it is an architectural guarantee enforced by how browsers work.
+              Browser-based image tools are the only category of online image editors where your files provably never leave your device. This is not a privacy policy . It is an architectural guarantee enforced by how browsers work.
             </p>
           </div>
         </div>
@@ -226,13 +226,13 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
           What are browser-based image tools?
         </h2>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Browser-based image tools are web applications that run image processing algorithms entirely inside your browser, using JavaScript and WebAssembly — without sending your files to any external server. The processing happens locally in your browser&apos;s memory (RAM), using your device&apos;s CPU, with results written back to a downloadable file on your machine.
+          Browser-based image tools are web applications that run image processing algorithms entirely inside your browser, using JavaScript and WebAssembly, without sending your files to any external server. The processing happens locally in your browser&apos;s memory (RAM), using your device&apos;s CPU, with results written back to a downloadable file on your machine.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          The distinction matters because most image editors that look like browser tools are actually cloud-based tools with a browser interface. You open them in a browser tab, but when you click &ldquo;compress&rdquo; or &ldquo;convert,&rdquo; your file is uploaded to the company&apos;s servers, processed remotely, and sent back. The browser is just the interface — the work happens elsewhere.
+          The distinction matters because most image editors that look like browser tools are actually cloud-based tools with a browser interface. You open them in a browser tab, but when you click &ldquo;compress&rdquo; or &ldquo;convert,&rdquo; your file is uploaded to the company&apos;s servers, processed remotely, and sent back. The browser is just the interface . The work happens elsewhere.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          True browser-based tools use the browser as the execution environment itself. The WebAssembly runtime, the compression codec, the image manipulation algorithms — all of it runs in your browser tab, on your hardware, isolated from any network request related to your file.
+          True browser-based tools use the browser as the execution environment itself. The WebAssembly runtime, the compression codec, the image manipulation algorithms , all of it runs in your browser tab, on your hardware, isolated from any network request related to your file.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 mt-6">
@@ -250,7 +250,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
             {
               icon: Wifi,
               title: "Offline Capable",
-              detail: "Once the page has loaded and the processing engine is cached, many browser-based tools work without an internet connection — ideal for travel or secure environments.",
+              detail: "Once the page has loaded and the processing engine is cached, many browser-based tools work without an internet connection, ideal for travel or secure environments.",
             },
             {
               icon: Shield,
@@ -275,10 +275,10 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
           Why privacy image editing matters more in 2026
         </h2>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Privacy concerns around image uploads have grown significantly as people become more aware of what their photos contain. A 2024 survey by the International Association of Privacy Professionals found that 68% of users are concerned about uploading personal photos to third-party online services. The concern is not abstract — it is rooted in what digital images actually carry.
+          Privacy concerns around image uploads have grown significantly as people become more aware of what their photos contain. A 2024 survey by the International Association of Privacy Professionals found that 68% of users are concerned about uploading personal photos to third-party online services. The concern is not abstract . It is rooted in what digital images actually carry.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Every JPEG or TIFF file contains EXIF metadata embedded directly in the file: GPS coordinates accurate to within a few meters, device serial numbers, timestamps, and camera settings. When you upload a photo to a cloud-based image tool, you are not just sharing the visual content — you are sharing all of this metadata with the service provider, their CDN partners, and potentially their analytics integrations.
+          Every JPEG or TIFF file contains EXIF metadata embedded directly in the file: GPS coordinates accurate to within a few meters, device serial numbers, timestamps, and camera settings. When you upload a photo to a cloud-based image tool, you are not just sharing the visual content. You are sharing all of this metadata with the service provider, their CDN partners, and potentially their analytics integrations.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">
@@ -289,11 +289,11 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
         </p>
         <ul className="space-y-2 mb-4 pl-4">
           {[
-            "Photographers handling client work under NDA — images of product launches, legal proceedings, medical imaging, or private events should never touch a third-party server.",
-            "Real estate agents and property managers — listing photos taken at a property contain GPS coordinates that reveal the exact address before a listing goes live.",
-            "Journalists working with sensitive source materials — source identities and locations can be embedded in photo metadata.",
-            "Healthcare workers — patient photos for clinical documentation must not be processed by consumer cloud services under HIPAA guidelines.",
-            "Anyone selling items online — marketplace listing photos taken at home embed your home\u0027s GPS coordinates in the file.",
+            "Photographers handling client work under NDA. Images of product launches, legal proceedings, medical imaging, or private events should never touch a third-party server.",
+            "Real estate agents and property managers. Listing photos taken at a property contain GPS coordinates that reveal the exact address before a listing goes live.",
+            "Journalists working with sensitive source materials. Source identities and locations can be embedded in photo metadata.",
+            "Healthcare workers. Patient photos for clinical documentation must not be processed by consumer cloud services under HIPAA guidelines.",
+            "Anyone selling items online. Marketplace listing photos taken at home embed your home\u0027s GPS coordinates in the file.",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-300 dark:bg-[#525252] shrink-0" />
@@ -307,7 +307,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
             Key Fact
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            Browser-based image tools process files 100% locally — the image data exists only in your browser&apos;s memory during processing and is never transmitted over a network connection. This is verifiable by opening your browser&apos;s network inspector (F12 &rarr; Network) and confirming that no image upload request is made when you process a file.
+            Browser-based image tools process files 100% locally . The image data exists only in your browser&apos;s memory during processing and is never transmitted over a network connection. This is verifiable by opening your browser&apos;s network inspector (F12 &rarr; Network) and confirming that no image upload request is made when you process a file.
           </p>
         </div>
 
@@ -370,10 +370,10 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
             <span className="text-[10px] font-semibold bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-900 uppercase tracking-wide shrink-0">Best Overall</span>
           </div>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-            SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 25 tools — including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping — all running entirely in your browser with zero uploads.
+            SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 25 tools including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping , all running entirely in your browser with zero uploads.
           </p>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-            The privacy architecture is verifiable: open the browser&apos;s network inspector during any operation and confirm that no image upload request is made. The entire processing pipeline — including the compression codec and format conversion engine — runs in the browser tab using JavaScript and the Canvas API.
+            The privacy architecture is verifiable: open the browser&apos;s network inspector during any operation and confirm that no image upload request is made. The entire processing pipeline, including the compression codec and format conversion engine, runs in the browser tab using JavaScript and the Canvas API.
           </p>
           <div className="flex flex-wrap gap-2 mt-3">
             {[
@@ -397,7 +397,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
             <span className="text-[10px] font-semibold bg-[#F5F5F5] dark:bg-[#252525] text-gray-600 dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] uppercase tracking-wide shrink-0">Best for Compression</span>
           </div>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-            Squoosh is a single-file compression tool built by Google Chrome Labs that runs its codecs (MozJPEG, WebP, AVIF, OxiPNG, and more) entirely in the browser via WebAssembly. It is the gold standard for evaluating compression quality settings — the side-by-side view and live quality slider make it excellent for understanding the quality-size tradeoff. Limitation: one file at a time, no batch processing.
+            Squoosh is a single-file compression tool built by Google Chrome Labs that runs its codecs (MozJPEG, WebP, AVIF, OxiPNG, and more) entirely in the browser via WebAssembly. It is the gold standard for evaluating compression quality settings . The side-by-side view and live quality slider make it excellent for understanding the quality-size tradeoff. Limitation: one file at a time, no batch processing.
           </p>
         </div>
 
@@ -410,7 +410,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
             <span className="text-[10px] font-semibold bg-[#F5F5F5] dark:bg-[#252525] text-gray-600 dark:text-[#A3A3A3] px-2 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] uppercase tracking-wide shrink-0">Best for Editing</span>
           </div>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-            Photopea is a full-featured image editor that runs entirely in the browser and is compatible with Photoshop PSD files, GIMP XCF, and all standard web formats. Files are processed locally. It is the most capable browser-based alternative to Photoshop for complex editing tasks — layers, masks, blending modes, and filters. Not optimized for batch operations or privacy workflows, but genuinely impressive for single-file editing.
+            Photopea is a full-featured image editor that runs entirely in the browser and is compatible with Photoshop PSD files, GIMP XCF, and all standard web formats. Files are processed locally. It is the most capable browser-based alternative to Photoshop for complex editing tasks: layers, masks, blending modes, and filters. Not optimized for batch operations or privacy workflows, but genuinely impressive for single-file editing.
           </p>
         </div>
 
@@ -436,17 +436,17 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">1. JavaScript File API</h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          The browser&apos;s File API allows a web page to read files from your device&apos;s disk into browser memory. When you drag an image onto a browser-based tool, the file is read into a JavaScript <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">ArrayBuffer</code> — a raw binary representation in RAM. This read operation is local: no network request is made.
+          The browser&apos;s File API allows a web page to read files from your device&apos;s disk into browser memory. When you drag an image onto a browser-based tool, the file is read into a JavaScript <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">ArrayBuffer</code> , a raw binary representation in RAM. This read operation is local: no network request is made.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">2. Canvas API and WebAssembly</h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          The raw image data is decoded and rendered to an in-memory HTML5 Canvas element. Pixel manipulation — compression, format conversion, resizing, color adjustments — is applied directly to this canvas using JavaScript or compiled WebAssembly modules. WebAssembly allows near-native performance for computationally intensive operations like codec encoding. The Squoosh tool, for example, runs the full MozJPEG and AVIF encoders as WebAssembly modules entirely in the browser.
+          The raw image data is decoded and rendered to an in-memory HTML5 Canvas element. Pixel manipulation (compression, format conversion, resizing, color adjustments) is applied directly to this canvas using JavaScript or compiled WebAssembly modules. WebAssembly allows near-native performance for computationally intensive operations like codec encoding. The Squoosh tool, for example, runs the full MozJPEG and AVIF encoders as WebAssembly modules entirely in the browser.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">3. Blob URL and download</h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          After processing, the output image data is serialized from canvas back into a binary Blob — a file-like object in memory. A temporary URL is created pointing to this Blob using <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">URL.createObjectURL()</code>. Clicking &ldquo;Download&rdquo; triggers a standard browser file download from this local URL — no server involved. The Blob is revoked from memory after download.
+          After processing, the output image data is serialized from canvas back into a binary Blob , a file-like object in memory. A temporary URL is created pointing to this Blob using <code className="text-xs bg-[#F5F5F5] dark:bg-[#252525] px-1.5 py-0.5 rounded text-gray-700 dark:text-[#D4D4D4]">URL.createObjectURL()</code>. Clicking &ldquo;Download&rdquo; triggers a standard browser file download from this local URL . No server involved. The Blob is revoked from memory after download.
         </p>
 
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-4 py-4 mb-6 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
@@ -464,10 +464,10 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
         </p>
         <ul className="space-y-2 mb-4 pl-4">
           {[
-            "AI background removal requires GPU inference at scale — current browser-based background removal is noticeably lower quality than cloud tools like remove.bg that use server-side deep learning models.",
-            "Very large files (50 MB+ RAW files) may exceed browser memory on older devices — cloud processing offloads this computational burden.",
+            "AI background removal requires GPU inference at scale. Current browser-based background removal is noticeably lower quality than cloud tools like remove.bg that use server-side deep learning models.",
+            "Very large files (50 MB+ RAW files) may exceed browser memory on older devices. Cloud processing offloads this computational burden.",
             "Automated pipelines and CI/CD integration are better served by cloud APIs with programmatic access than by browser-based tools designed for human interaction.",
-            "Team collaboration features — shared asset libraries, comment threads, approval workflows — require a server-side storage layer that browser-only tools cannot provide.",
+            "Team collaboration features (shared asset libraries, comment threads, approval workflows) require a server-side storage layer that browser-only tools cannot provide.",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-300 dark:bg-[#525252] shrink-0" />
@@ -483,17 +483,17 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
           A complete no-upload image workflow with SammaPix
         </h2>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
-          The best way to understand the practical value of browser-based tools is to walk through a complete image processing workflow — from raw camera files to web-ready, privacy-clean output — without a single upload.
+          The best way to understand the practical value of browser-based tools is to walk through a complete image processing workflow : from raw camera files to web-ready, privacy-clean output, without a single upload.
         </p>
 
         <div className="space-y-4 mb-8">
           {[
             { step: "1", title: "Strip EXIF metadata", body: "Start with the SammaPix EXIF Viewer. Drop your original files and remove all GPS data and device information before any other processing. This ensures metadata is never inadvertently carried into the output files." },
-            { step: "2", title: "Compress for web delivery", body: "Use SammaPix Compress to reduce file sizes. The tool supports JPG, PNG, WebP, GIF, and AVIF with adjustable quality settings. Batch compress an entire shoot in one operation — no file count limit, no size cap." },
-            { step: "3", title: "Convert to modern formats", body: "Convert compressed JPGs to WebP using SammaPix WebP Converter for web publishing. WebP typically achieves 25–35% smaller file sizes than equivalent JPEG at the same visual quality — a meaningful Core Web Vitals improvement." },
+            { step: "2", title: "Compress for web delivery", body: "Use SammaPix Compress to reduce file sizes. The tool supports JPG, PNG, WebP, GIF, and AVIF with adjustable quality settings. Batch compress an entire shoot in one operation . No file count limit, no size cap." },
+            { step: "3", title: "Convert to modern formats", body: "Convert compressed JPGs to WebP using SammaPix WebP Converter for web publishing. WebP typically achieves 25–35% smaller file sizes than equivalent JPEG at the same visual quality , a meaningful Core Web Vitals improvement." },
             { step: "4", title: "Resize for platform requirements", body: "Use the Resize tool to output multiple dimensions: 1200px wide for blog headers, 1080x1080 for Instagram, 1200x628 for Open Graph previews. Define target dimensions once and batch-apply across all files." },
-            { step: "5", title: "Rename for SEO", body: "Use SammaPix AI Rename to generate descriptive, keyword-rich filenames. The AI analyzes the visual content of each image and proposes SEO-friendly names — turning IMG_7823.jpg into golden-hour-portrait-milan-2026.jpg automatically." },
-            { step: "6", title: "Download as ZIP", body: "Download the full processed batch as a ZIP archive in a single click. Every step of this workflow processed locally — not one byte of your original files left your browser." },
+            { step: "5", title: "Rename for SEO", body: "Use SammaPix AI Rename to generate descriptive, keyword-rich filenames. The AI analyzes the visual content of each image and proposes SEO-friendly names, turning IMG_7823.jpg into golden-hour-portrait-milan-2026.jpg automatically." },
+            { step: "6", title: "Download as ZIP", body: "Download the full processed batch as a ZIP archive in a single click. Every step of this workflow processed locally , not one byte of your original files left your browser." },
           ].map(({ step, title, body }) => (
             <div key={step} className="flex gap-4">
               <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333] flex items-center justify-center mt-0.5">
@@ -512,7 +512,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
           className="flex items-center justify-between gap-4 bg-[#171717] text-white rounded-md px-6 py-5 hover:bg-[#262626] transition-colors group mt-2 mb-8"
         >
           <div>
-            <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">Free — no upload, no account, no file limits</p>
+            <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">Free . No upload, no account, no file limits</p>
             <p className="text-sm font-semibold text-white leading-snug">Start the privacy workflow with SammaPix — 25 tools, 100% browser-based</p>
           </div>
           <ArrowRight className="h-4 w-4 text-[#737373] group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" strokeWidth={1.5} />
@@ -527,22 +527,22 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
           Browser-based tools and regulatory compliance
         </h2>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Privacy regulations increasingly affect how image data can be processed. Browser-based tools simplify compliance significantly because the data controller question — who processes personal data and under what legal basis — collapses to a single answer: only the user&apos;s own device.
+          Privacy regulations increasingly affect how image data can be processed. Browser-based tools simplify compliance significantly because the data controller question (who processes personal data and under what legal basis) collapses to a single answer: only the user&apos;s own device.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">GDPR (Europe)</h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Under GDPR, uploading a photo of a person to a cloud service for processing constitutes sharing personal data with a third-party data processor. This requires a Data Processing Agreement (DPA) with the service provider, a lawful basis for processing, and potentially documentation of international data transfers if the server is outside the EU. Browser-based tools eliminate this requirement entirely — no third party touches the data, so no DPA is needed.
+          Under GDPR, uploading a photo of a person to a cloud service for processing constitutes sharing personal data with a third-party data processor. This requires a Data Processing Agreement (DPA) with the service provider, a lawful basis for processing, and potentially documentation of international data transfers if the server is outside the EU. Browser-based tools eliminate this requirement entirely . No third party touches the data, so no DPA is needed.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">HIPAA (United States healthcare)</h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Healthcare organizations subject to HIPAA cannot use general-purpose cloud image tools to process patient photos without a Business Associate Agreement (BAA). Consumer tools like TinyPNG or Canva do not offer BAAs. Browser-based processing avoids this entirely — the Protected Health Information (PHI) in patient images never reaches a third-party system.
+          Healthcare organizations subject to HIPAA cannot use general-purpose cloud image tools to process patient photos without a Business Associate Agreement (BAA). Consumer tools like TinyPNG or Canva do not offer BAAs. Browser-based processing avoids this entirely . The Protected Health Information (PHI) in patient images never reaches a third-party system.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-800 dark:text-[#D4D4D4] mt-6 mb-2">CCPA and state privacy laws (United States)</h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          California&apos;s CCPA and similar state-level laws create disclosure and data deletion rights when personal data (including photos) is processed by third parties. Browser-based tools remove this complexity at the architectural level — no personal data is ever shared with a service provider to begin with.
+          California&apos;s CCPA and similar state-level laws create disclosure and data deletion rights when personal data (including photos) is processed by third parties. Browser-based tools remove this complexity at the architectural level . No personal data is ever shared with a service provider to begin with.
         </p>
 
         <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
@@ -551,12 +551,12 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
           </h2>
           <div className="space-y-6">
             {[
-              { q: "What are browser-based image tools?", a: "Browser-based image tools are web applications that process images entirely inside your browser using JavaScript and WebAssembly — without uploading files to any external server. The image data stays on your device throughout the entire editing process. Examples include SammaPix, Squoosh by Google Chrome Labs, and Photopea." },
-              { q: "Are browser-based image tools safe for private photos?", a: "Yes — browser-based image tools are the safest option for private photos because files never leave your device. Unlike cloud-based tools that upload images to external servers, browser-based tools process everything locally in browser memory. No third party ever receives or stores your images. You can verify this yourself using the browser\u0027s built-in network inspector." },
+              { q: "What are browser-based image tools?", a: "Browser-based image tools are web applications that process images entirely inside your browser using JavaScript and WebAssembly, without uploading files to any external server. The image data stays on your device throughout the entire editing process. Examples include SammaPix, Squoosh by Google Chrome Labs, and Photopea." },
+              { q: "Are browser-based image tools safe for private photos?", a: "Yes. Browser-based image tools are the safest option for private photos because files never leave your device. Unlike cloud-based tools that upload images to external servers, browser-based tools process everything locally in browser memory. No third party ever receives or stores your images. You can verify this yourself using the browser\u0027s built-in network inspector." },
               { q: "What is the difference between browser-based and cloud-based image editing?", a: "Browser-based image editing processes files locally in your browser with no server uploads. Cloud-based image editing uploads your files to external servers for processing. Browser-based tools offer better privacy, offline capability, and freedom from server-imposed file size restrictions. Cloud-based tools offer more processing power for complex AI tasks like background removal that require server-side GPU inference." },
               { q: "Can browser-based image tools work offline?", a: "Yes. Browser-based image tools that use client-side processing can work offline once the page has loaded and the processing engine is cached by the browser. Tools like SammaPix and Squoosh use Progressive Web App caching to continue functioning without an internet connection. This makes them ideal for travel, remote work, or secure environments where internet access is restricted." },
-              { q: "Do browser-based image tools have file size limits?", a: "Browser-based image tools are limited by your device\u0027s available RAM rather than artificial server-side quotas. Modern browsers on standard laptops handle image files up to several hundred megabytes comfortably. Cloud tools that impose 5–10 MB upload limits do so to manage server infrastructure costs — a constraint that does not exist when processing is local." },
-              { q: "Which is the best browser-based image tool for privacy in 2026?", a: "SammaPix is the most comprehensive browser-based image tool suite for privacy in 2026. It offers 25 tools — compression, WebP conversion, EXIF removal, batch processing, AI renaming, format conversion, resizing, watermarking, and more — all running entirely in your browser with zero uploads. For single-file compression with codec comparison, Squoosh by Google Chrome Labs is an excellent specialized tool." },
+              { q: "Do browser-based image tools have file size limits?", a: "Browser-based image tools are limited by your device\u0027s available RAM rather than artificial server-side quotas. Modern browsers on standard laptops handle image files up to several hundred megabytes comfortably. Cloud tools that impose 5–10 MB upload limits do so to manage server infrastructure costs , a constraint that does not exist when processing is local." },
+              { q: "Which is the best browser-based image tool for privacy in 2026?", a: "SammaPix is the most comprehensive browser-based image tool suite for privacy in 2026. It offers 25 tools: compression, WebP conversion, EXIF removal, batch processing, AI renaming, format conversion, resizing, watermarking, and more , all running entirely in your browser with zero uploads. For single-file compression with codec comparison, Squoosh by Google Chrome Labs is an excellent specialized tool." },
             ].map(({ q, a }) => (
               <div key={q}>
                 <h3 className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mb-1.5">{q}</h3>

@@ -194,16 +194,16 @@ export default function WebpVsAvifVsJpegPage() {
         ctaBlock={
           <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-              Convert your images to WebP — free, no upload
+              Convert your images to WebP, free, no upload
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              Drop any JPEG or PNG into SammaPix and convert it to WebP in seconds. Runs entirely in your browser — your files never leave your device. Batch convert up to 20 images at once and download as a ZIP.
+              Drop any JPEG or PNG into SammaPix and convert it to WebP in seconds. Runs entirely in your browser . Your files never leave your device. Batch convert up to 20 images at once and download as a ZIP.
             </p>
             <Link
               href="/tools/webp"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
-              Convert to WebP — Free
+              Convert to WebP, Free
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
@@ -371,7 +371,7 @@ export default function WebpVsAvifVsJpegPage() {
               >
                 SammaPix WebP converter
               </Link>
-              — no upload, no account required.
+              . No upload, no account required.
             </p>
 
             <figure className="my-8">
@@ -424,7 +424,7 @@ export default function WebpVsAvifVsJpegPage() {
 
             <ul className="mb-4">
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">Slow encoding:</strong> AVIF can take 10x longer to encode than JPEG or WebP — a real constraint for dynamic image generation and large batches
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">Slow encoding:</strong> AVIF can take 10x longer to encode than JPEG or WebP , a real constraint for dynamic image generation and large batches
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">93% browser support:</strong> Safari versions below 16, older Android browsers, and some enterprise environments do not support AVIF
@@ -562,7 +562,7 @@ export default function WebpVsAvifVsJpegPage() {
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Blog and marketing sites:</strong> convert all images to WebP and serve directly — 97% support is sufficient and the workflow is simple
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-                <strong className="text-gray-800 dark:text-[#E5E5E5]">E-commerce with many product images:</strong> generate both AVIF and WebP, serve with the picture element — the bandwidth savings compound significantly across large catalogs
+                <strong className="text-gray-800 dark:text-[#E5E5E5]">E-commerce with many product images:</strong> generate both AVIF and WebP, serve with the picture element . The bandwidth savings compound significantly across large catalogs
               </li>
               <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
                 <strong className="text-gray-800 dark:text-[#E5E5E5]">Email campaigns:</strong> JPEG only — WebP and AVIF are not reliably rendered in Gmail, Outlook, or Apple Mail
@@ -594,8 +594,8 @@ export default function WebpVsAvifVsJpegPage() {
               ZIP archive.
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-              For most content workflows — blog posts, landing pages, portfolio
-              sites — converting images to WebP before uploading is a one-time
+              For most content workflows (blog posts, landing pages, portfolio
+              sites), converting images to WebP before uploading is a one-time
               habit change that permanently improves every page&apos;s performance.
               A 30% reduction in image weight translates directly to faster LCP
               scores and better Core Web Vitals results without changing anything

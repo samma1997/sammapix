@@ -191,7 +191,7 @@ export default function OptimizeTravelPhotosSriLankaPage() {
               href="/tools/compress"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
-              Try SammaPix Compress — Free
+              Try SammaPix Compress, Free
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>

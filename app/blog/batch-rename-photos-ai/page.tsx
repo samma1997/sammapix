@@ -120,7 +120,7 @@ const faqSchema = {
       name: "How does SammaPix AI Rename work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "SammaPix AI Rename uses Google Gemini 1.5 Flash to analyze each image and generate a descriptive filename. The AI examines the visual content, identifies objects, people, scenes, and actions, then creates a concise, SEO-friendly name. Batch mode processes hundreds of photos at once. All processing happens in your browser — your images never leave your device.",
+        text: "SammaPix AI Rename uses Google Gemini 1.5 Flash to analyze each image and generate a descriptive filename. The AI examines the visual content, identifies objects, people, scenes, and actions, then creates a concise, SEO-friendly name. Batch mode processes hundreds of photos at once. All processing happens in your browser. Your images never leave your device.",
       },
     },
     {
@@ -128,7 +128,7 @@ const faqSchema = {
       name: "Can I batch rename photos without internet?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "AI Rename requires an internet connection because it uses Google Gemini API to analyze images. However, you are not uploading your actual images to the internet — only a small thumbnail is sent to Google for analysis. The full-resolution image stays on your device. Your files are never stored on any server.",
+        text: "AI Rename requires an internet connection because it uses Google Gemini API to analyze images. However, you are not uploading your actual images to the internet. Only a small thumbnail is sent to Google for analysis. The full-resolution image stays on your device. Your files are never stored on any server.",
       },
     },
     {
@@ -204,7 +204,7 @@ export default function BatchRenamePhotosAIPage() {
               href="/tools/ai-rename"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
-              Try AI Rename — Free
+              Try AI Rename, Free
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
