@@ -7,7 +7,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 const SLUG = "image-compression-benchmark-2026";
 const POST_TITLE = "Image Compression Benchmark 2026: We Tested 500 Photos Across 5 Formats";
 const POST_DESCRIPTION =
-  "Real-world compression results comparing JPEG, WebP, AVIF, PNG, and GIF across 500 photos in 5 categories — with data from SammaPix's browser-based engine.";
+  "Real-world compression results comparing JPEG, WebP, AVIF, PNG, and GIF across 500 photos in 5 categories , with data from SammaPix's browser-based engine.";
 const POST_DATE = "2026-03-28";
 const POST_DATE_FORMATTED = "March 28, 2026";
 const POST_URL = `${APP_URL}/blog/${SLUG}`;
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: POST_TITLE,
     description:
-      "500 photos, 5 formats, 5 categories. WebP delivers 85% reduction vs AVIF's 89% — but encoding speed matters. Full benchmark data inside.",
+      "500 photos, 5 formats, 5 categories. WebP delivers 85% reduction vs AVIF's 89% , but encoding speed matters. Full benchmark data inside.",
     creator: "@lucasammarco",
   },
 };
@@ -112,7 +112,7 @@ const faqSchema = {
       name: "What is the best image format for the web in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "WebP is the best default image format for the web in 2026. In our benchmark of 500 photos, WebP delivered an average 85% file size reduction at quality 80 — 30% smaller than JPEG at identical visual quality. With 98% global browser support, WebP is the safest high-performance choice. AVIF achieves even better compression (89% reduction) but encoding is 3x slower and browser support is narrower.",
+        text: "WebP is the best default image format for the web in 2026. In our benchmark of 500 photos, WebP delivered an average 85% file size reduction at quality 80, 30% smaller than JPEG at identical visual quality. With 98% global browser support, WebP is the safest high-performance choice. AVIF achieves even better compression (89% reduction) but encoding is 3x slower and browser support is narrower.",
       },
     },
     {
@@ -120,7 +120,7 @@ const faqSchema = {
       name: "How much smaller is WebP compared to JPEG?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In our 500-photo benchmark at quality 80, WebP files averaged 620 KB compared to JPEG's 890 KB — making WebP approximately 30% smaller than JPEG at equivalent visual quality. The difference was most pronounced for graphics and illustrations (WebP 90% smaller than original vs JPEG 79%) and least for screenshots.",
+        text: "In our 500-photo benchmark at quality 80, WebP files averaged 620 KB compared to JPEG's 890 KB , making WebP approximately 30% smaller than JPEG at equivalent visual quality. The difference was most pronounced for graphics and illustrations (WebP 90% smaller than original vs JPEG 79%) and least for screenshots.",
       },
     },
     {
@@ -128,7 +128,7 @@ const faqSchema = {
       name: "Is AVIF better than WebP for image compression?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "AVIF achieves better compression ratios than WebP — 89% average reduction vs 85% in our benchmark — but with tradeoffs. AVIF encoding is approximately 3x slower than WebP, and browser support is limited to Chrome and Firefox (no Safari on older devices). For most websites in 2026, WebP offers the best balance of compression, speed, and compatibility.",
+        text: "AVIF achieves better compression ratios than WebP (89% average reduction vs 85% in our benchmark), but with tradeoffs. AVIF encoding is approximately 3x slower than WebP, and browser support is limited to Chrome and Firefox (no Safari on older devices). For most websites in 2026, WebP offers the best balance of compression, speed, and compatibility.",
       },
     },
     {
@@ -144,7 +144,7 @@ const faqSchema = {
       name: "Is browser-based image compression as good as server-side?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Modern browser-based compression using WebAssembly and Canvas API achieves identical compression ratios to server-side tools. The advantage of browser-based compression is speed — eliminating the upload/download roundtrip makes it 2-3x faster for most users, especially on slower connections. All 500 photos in this benchmark were compressed using SammaPix's browser-based engine with no server upload required.",
+        text: "Yes. Modern browser-based compression using WebAssembly and Canvas API achieves identical compression ratios to server-side tools. The advantage of browser-based compression is speed. Eliminating the upload/download roundtrip makes it 2-3x faster for most users, especially on slower connections. All 500 photos in this benchmark were compressed using SammaPix's browser-based engine with no server upload required.",
       },
     },
   ],
@@ -169,7 +169,7 @@ export default function ImageCompressionBenchmark2026Page() {
       <BlogArticleLayout
         title={POST_TITLE}
         slug={SLUG}
-        description="We compressed 500 real-world photos — 100 each across portraits, landscapes, product shots, screenshots, and graphics — through five image formats at quality 80. Here are the results, with raw data and recommendations for every use case."
+        description="We compressed 500 real-world photos, 100 each across portraits, landscapes, product shots, screenshots, and graphics, through five image formats at quality 80. Here are the results, with raw data and recommendations for every use case."
         date={POST_DATE}
         dateFormatted={POST_DATE_FORMATTED}
         tags={["Performance", "Tools"]}
@@ -184,9 +184,9 @@ export default function ImageCompressionBenchmark2026Page() {
           { id: "faq", title: "FAQ" },
         ]}
         summary={[
-          "WebP delivers 85% average file size reduction at quality 80 — 30% smaller files than JPEG at identical visual quality.",
+          "WebP delivers 85% average file size reduction at quality 80, 30% smaller files than JPEG at identical visual quality.",
           "AVIF achieves the highest compression (89% reduction) but encoding is 3x slower and browser support is narrower than WebP.",
-          "PNG should only be used for screenshots and graphics with text — for everything else, WebP or AVIF wins decisively.",
+          "PNG should only be used for screenshots and graphics with text. For everything else, WebP or AVIF wins decisively.",
           "Browser-based compression is 2-3x faster than server upload/download roundtrip, with identical output quality.",
           "For web use in 2026, WebP at quality 80 is the best default format with 98% browser support.",
         ]}
@@ -199,7 +199,7 @@ export default function ImageCompressionBenchmark2026Page() {
               loading="eager"
             />
             <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-              Real data from 500 photos compressed across 5 formats — Photo by Carlos Muza on Unsplash
+              Real data from 500 photos compressed across 5 formats . Photo by Carlos Muza on Unsplash
             </figcaption>
           </figure>
         }
@@ -253,7 +253,7 @@ export default function ImageCompressionBenchmark2026Page() {
           </Link>. PNG was tested in lossless mode (its only mode). GIF was reduced to 256 colors as per the format specification.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Each image was processed three times and averaged to account for variance. All tests ran on a 2024 MacBook Pro (M3, 18 GB RAM) using Chrome 134. Results are reproducible — you can run the same test set through SammaPix and verify the numbers.
+          Each image was processed three times and averaged to account for variance. All tests ran on a 2024 MacBook Pro (M3, 18 GB RAM) using Chrome 134. Results are reproducible . You can run the same test set through SammaPix and verify the numbers.
         </p>
 
         {/* Overall Results */}
@@ -358,7 +358,7 @@ export default function ImageCompressionBenchmark2026Page() {
           Product photos (100 images)
         </h3>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Product photos on white or solid backgrounds compress exceptionally well. WebP achieved <strong className="text-gray-900 dark:text-[#E5E5E5]">86% reduction</strong> — the large uniform background areas are trivially compressible, so the savings come almost entirely from the product region. This makes WebP ideal for e-commerce where hundreds or thousands of product images directly impact page load time and conversion rate.
+          Product photos on white or solid backgrounds compress exceptionally well. WebP achieved <strong className="text-gray-900 dark:text-[#E5E5E5]">86% reduction</strong> . The large uniform background areas are trivially compressible, so the savings come almost entirely from the product region. This makes WebP ideal for e-commerce where hundreds or thousands of product images directly impact page load time and conversion rate.
         </p>
 
         {/* Screenshots */}
@@ -453,7 +453,7 @@ export default function ImageCompressionBenchmark2026Page() {
               1. WebP delivers 30% smaller files than JPEG at identical visual quality
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Across all 500 images, WebP files at quality 80 averaged 620 KB compared to JPEG&apos;s 890 KB. The visual difference at this quality level is imperceptible to the human eye in A/B comparisons. This is not marginal — switching from JPEG to WebP on a 50-image product page saves approximately 13.5 MB of page weight.
+              Across all 500 images, WebP files at quality 80 averaged 620 KB compared to JPEG&apos;s 890 KB. The visual difference at this quality level is imperceptible to the human eye in A/B comparisons. This is not marginal. Switching from JPEG to WebP on a 50-image product page saves approximately 13.5 MB of page weight.
             </p>
           </div>
 
@@ -462,7 +462,7 @@ export default function ImageCompressionBenchmark2026Page() {
               2. AVIF delivers 45% smaller files than JPEG but encoding is 3x slower
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              AVIF&apos;s AV1-derived codec produces remarkable compression ratios — 480 KB average output vs JPEG&apos;s 890 KB. The tradeoff is encoding speed: compressing a single 4.2 MB image took an average of 2.8 seconds for AVIF vs 0.9 seconds for WebP in our browser-based tests. For batch workflows with hundreds of images, this difference compounds significantly.
+              AVIF&apos;s AV1-derived codec produces remarkable compression ratios: 480 KB average output vs JPEG&apos;s 890 KB. The tradeoff is encoding speed: compressing a single 4.2 MB image took an average of 2.8 seconds for AVIF vs 0.9 seconds for WebP in our browser-based tests. For batch workflows with hundreds of images, this difference compounds significantly.
             </p>
           </div>
 
@@ -489,7 +489,7 @@ export default function ImageCompressionBenchmark2026Page() {
               5. Browser-based compression is 2-3x faster than server upload/download
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              The total time from selecting a file to downloading the compressed result averaged 1.2 seconds in-browser vs 3.5 seconds for a server-based roundtrip (on a 50 Mbps connection). On slower connections, the gap widens further. Browser-based tools like SammaPix eliminate upload latency entirely — the compression happens on your device using WebAssembly and Canvas API.
+              The total time from selecting a file to downloading the compressed result averaged 1.2 seconds in-browser vs 3.5 seconds for a server-based roundtrip (on a 50 Mbps connection). On slower connections, the gap widens further. Browser-based tools like SammaPix eliminate upload latency entirely . The compression happens on your device using WebAssembly and Canvas API.
             </p>
           </div>
         </div>
@@ -542,7 +542,7 @@ export default function ImageCompressionBenchmark2026Page() {
                 <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">0.94</td>
                 <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">0.96</td>
                 <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">0.97</td>
-                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Barely — only in zoomed 200% inspection</td>
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Barely . Only in zoomed 200% inspection</td>
               </tr>
               <tr className="border-b border-gray-100 dark:border-[#252525]">
                 <td className="px-4 py-3 font-medium text-gray-900 dark:text-[#E5E5E5]">Quality 60</td>
@@ -563,10 +563,10 @@ export default function ImageCompressionBenchmark2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          The key takeaway: at quality 80, WebP and AVIF both maintain SSIM scores above 0.96, meaning the compressed image is structurally near-identical to the original. JPEG drops to 0.94 at the same quality level — still acceptable, but the difference is measurable in gradient-heavy images like portraits and sky photographs.
+          The key takeaway: at quality 80, WebP and AVIF both maintain SSIM scores above 0.96, meaning the compressed image is structurally near-identical to the original. JPEG drops to 0.94 at the same quality level, still acceptable, but the difference is measurable in gradient-heavy images like portraits and sky photographs.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Below quality 60, JPEG artifacts become clearly visible to the naked eye — blocky gradients, ringing around text, and color banding. WebP and AVIF maintain visual integrity down to approximately quality 50 before artifacts become noticeable. This gives modern formats a wider &quot;safe zone&quot; for aggressive compression.
+          Below quality 60, JPEG artifacts become clearly visible to the naked eye: blocky gradients, ringing around text, and color banding. WebP and AVIF maintain visual integrity down to approximately quality 50 before artifacts become noticeable. This gives modern formats a wider &quot;safe zone&quot; for aggressive compression.
         </p>
 
         {/* Recommendations */}
@@ -588,7 +588,7 @@ export default function ImageCompressionBenchmark2026Page() {
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               <strong className="text-gray-900 dark:text-[#E5E5E5]">WebP at quality 82.</strong>{" "}
-              Best size-to-quality ratio for product images. White backgrounds compress extremely well in WebP. On a typical product page with 20 images, switching from JPEG 80 to WebP 82 saves approximately 5.4 MB — directly improving Core Web Vitals LCP scores.
+              Best size-to-quality ratio for product images. White backgrounds compress extremely well in WebP. On a typical product page with 20 images, switching from JPEG 80 to WebP 82 saves approximately 5.4 MB, directly improving Core Web Vitals LCP scores.
             </p>
           </div>
 
@@ -647,7 +647,7 @@ export default function ImageCompressionBenchmark2026Page() {
               What is the best image format for the web in 2026?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              WebP is the best default image format for the web in 2026. In our benchmark of 500 photos, WebP delivered an average 85% file size reduction at quality 80 — 30% smaller than JPEG at identical visual quality. With 98% global browser support, WebP is the safest high-performance choice. AVIF achieves even better compression (89% reduction) but encoding is 3x slower and browser support is narrower.
+              WebP is the best default image format for the web in 2026. In our benchmark of 500 photos, WebP delivered an average 85% file size reduction at quality 80, 30% smaller than JPEG at identical visual quality. With 98% global browser support, WebP is the safest high-performance choice. AVIF achieves even better compression (89% reduction) but encoding is 3x slower and browser support is narrower.
             </p>
           </div>
 
@@ -656,7 +656,7 @@ export default function ImageCompressionBenchmark2026Page() {
               How much smaller is WebP compared to JPEG?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              In our 500-photo benchmark at quality 80, WebP files averaged 620 KB compared to JPEG&apos;s 890 KB — making WebP approximately 30% smaller than JPEG at equivalent visual quality. The difference was most pronounced for graphics and illustrations (WebP 90% smaller than original vs JPEG 79%) and least for screenshots.
+              In our 500-photo benchmark at quality 80, WebP files averaged 620 KB compared to JPEG&apos;s 890 KB , making WebP approximately 30% smaller than JPEG at equivalent visual quality. The difference was most pronounced for graphics and illustrations (WebP 90% smaller than original vs JPEG 79%) and least for screenshots.
             </p>
           </div>
 
@@ -665,7 +665,7 @@ export default function ImageCompressionBenchmark2026Page() {
               Is AVIF better than WebP for image compression?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              AVIF achieves better compression ratios than WebP — 89% average reduction vs 85% in our benchmark — but with tradeoffs. AVIF encoding is approximately 3x slower than WebP, and browser support is limited to Chrome and Firefox (no Safari on older devices). For most websites in 2026, WebP offers the best balance of compression, speed, and compatibility.
+              AVIF achieves better compression ratios than WebP (89% average reduction vs 85% in our benchmark), but with tradeoffs. AVIF encoding is approximately 3x slower than WebP, and browser support is limited to Chrome and Firefox (no Safari on older devices). For most websites in 2026, WebP offers the best balance of compression, speed, and compatibility.
             </p>
           </div>
 
@@ -683,7 +683,7 @@ export default function ImageCompressionBenchmark2026Page() {
               Is browser-based image compression as good as server-side?
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Yes. Modern browser-based compression using WebAssembly and Canvas API achieves identical compression ratios to server-side tools. The advantage of browser-based compression is speed — eliminating the upload/download roundtrip makes it 2-3x faster for most users, especially on slower connections. All 500 photos in this benchmark were compressed using{" "}
+              Yes. Modern browser-based compression using WebAssembly and Canvas API achieves identical compression ratios to server-side tools. The advantage of browser-based compression is speed. Eliminating the upload/download roundtrip makes it 2-3x faster for most users, especially on slower connections. All 500 photos in this benchmark were compressed using{" "}
               <Link
                 href="/tools/compress"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"

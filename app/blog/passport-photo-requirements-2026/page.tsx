@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: POST_TITLE,
     description:
-      "Exact passport photo requirements for 20+ countries — dimensions, file size, background color, head height. Plus a free browser-based passport photo maker.",
+      "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo maker.",
     url: POST_URL,
     type: "article",
     publishedTime: POST_DATE,
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: POST_TITLE,
     description:
-      "Passport photo requirements for 20+ countries in 2026. Dimensions, file size limits, background colors, head height — all in one table. Free maker tool included.",
+      "Passport photo requirements for 20+ countries in 2026. Dimensions, file size limits, background colors, head height, all in one table. Free maker tool included.",
     creator: "@lucasammarco",
   },
 };
@@ -120,7 +120,7 @@ const faqSchema = {
       name: "What background color is required for passport photos?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Most countries require a white or light-colored background for passport photos. The United States, India, China, and most Asian countries require plain white. The United Kingdom accepts light grey or white. France accepts light grey or light blue. Indonesia is unique — it requires a red background for the last three pages and blue for earlier pages. Always check your specific country's requirements as they vary.",
+        text: "Most countries require a white or light-colored background for passport photos. The United States, India, China, and most Asian countries require plain white. The United Kingdom accepts light grey or white. France accepts light grey or light blue. Indonesia is unique: it requires a red background for the last three pages and blue for earlier pages. Always check your specific country's requirements as they vary.",
       },
     },
     {
@@ -128,7 +128,7 @@ const faqSchema = {
       name: "How do I compress my passport photo to the required file size?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Many government visa portals require photos under specific file sizes — for example, 240KB for US passports, 60KB for Singapore, or 100-300KB for India. You can use a free browser-based tool like SammaPix to compress your photo to the exact size needed. Go to the compress-to-target page, select your target (e.g., 100KB or 200KB), and the tool will optimize your image while maintaining quality. No upload to any server required.",
+        text: "Many government visa portals require photos under specific file sizes. For example, 240KB for US passports, 60KB for Singapore, or 100-300KB for India. You can use a free browser-based tool like SammaPix to compress your photo to the exact size needed. Go to the compress-to-target page, select your target (e.g., 100KB or 200KB), and the tool will optimize your image while maintaining quality. No upload to any server required.",
       },
     },
     {
@@ -160,7 +160,7 @@ const faqSchema = {
       name: "What file format should passport photos be in?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Most government portals accept JPEG (JPG) format for digital passport photo submissions. Some also accept PNG. JPEG is the safest choice as it's universally accepted and allows you to control file size through compression quality. Avoid submitting WebP, HEIC, or other modern formats — they're typically not accepted by government systems.",
+        text: "Most government portals accept JPEG (JPG) format for digital passport photo submissions. Some also accept PNG. JPEG is the safest choice as it's universally accepted and allows you to control file size through compression quality. Avoid submitting WebP, HEIC, or other modern formats because they're typically not accepted by government systems.",
       },
     },
     {
@@ -199,7 +199,7 @@ export default function PassportPhotoRequirements2026Page() {
         tags={["Tools"]}
         readingTime={14}
         headings={[
-          { id: "quick-reference", title: "Quick reference table — 20 countries" },
+          { id: "quick-reference", title: "Quick reference table: 20 countries" },
           { id: "rejection-reasons", title: "Most common rejection reasons" },
           { id: "take-photo-at-home", title: "How to take a perfect passport photo at home" },
           { id: "digital-vs-physical", title: "Digital vs physical: file size requirements" },
@@ -208,11 +208,11 @@ export default function PassportPhotoRequirements2026Page() {
           { id: "faq", title: "FAQ" },
         ]}
         summary={[
-          "Every country has different passport photo requirements — dimensions range from 2x2 inches (US/India) to 50x70mm (Canada/Brazil), and file sizes from 60KB (Singapore) to 10MB (UK).",
+          "Every country has different passport photo requirements. Dimensions range from 2x2 inches (US/India) to 50x70mm (Canada/Brazil), and file sizes from 60KB (Singapore) to 10MB (UK).",
           "The top 5 rejection reasons are: wrong dimensions, shadows on face or background, eyes not visible, incorrect background color, and file size too large.",
-          "You can take a valid passport photo at home with a smartphone, a white wall, and natural light — then crop and compress it to exact specs for free.",
+          "You can take a valid passport photo at home with a smartphone, a white wall, and natural light. Then crop and compress it to exact specs for free.",
           "Asian countries (Singapore, China, South Korea) enforce strict file size limits that require compression tools. European countries are more relaxed on file size.",
-          "SammaPix can crop, resize, and compress your passport photo to exact country specifications — 100% in-browser, no upload required.",
+          "SammaPix can crop, resize, and compress your passport photo to exact country specifications, 100% in-browser, no upload required.",
         ]}
         heroImage={
           <figure className="my-8">
@@ -223,7 +223,7 @@ export default function PassportPhotoRequirements2026Page() {
               loading="eager"
             />
             <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-              Every country has different passport photo specs — getting them wrong means rejection and delays — Photo by ConvertKit on Unsplash
+              Every country has different passport photo specs. Getting them wrong means rejection and delays. Photo by ConvertKit on Unsplash
             </figcaption>
           </figure>
         }
@@ -233,7 +233,7 @@ export default function PassportPhotoRequirements2026Page() {
               Create your passport photo for free
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              SammaPix crops, resizes, and compresses your passport photo to exact country specifications — directly in your browser. No upload, no account, no watermark.
+              SammaPix crops, resizes, and compresses your passport photo to exact country specifications, directly in your browser. No upload, no account, no watermark.
             </p>
             <Link
               href="/tools/passport-photo"
@@ -252,16 +252,16 @@ export default function PassportPhotoRequirements2026Page() {
             Key takeaway
           </p>
           <p className="text-sm text-gray-700 dark:text-[#E5E5E5] leading-relaxed">
-            Passport photo requirements vary significantly by country. The most common size is 35x45mm (used by the UK, EU, Australia, Japan, and most of Asia), while the US and India use 2x2 inches (51x51mm) and Canada uses 50x70mm. File size limits range from 60KB (Singapore) to 10MB (UK). Background is almost always white, with France (light grey/blue) and Indonesia (red/blue) being notable exceptions. Getting even one detail wrong — dimensions, head height ratio, background color, or file size — will result in rejection.
+            Passport photo requirements vary significantly by country. The most common size is 35x45mm (used by the UK, EU, Australia, Japan, and most of Asia), while the US and India use 2x2 inches (51x51mm) and Canada uses 50x70mm. File size limits range from 60KB (Singapore) to 10MB (UK). Background is almost always white, with France (light grey/blue) and Indonesia (red/blue) being notable exceptions. Getting even one detail wrong, whether dimensions, head height ratio, background color, or file size, will result in rejection.
           </p>
         </div>
 
         {/* Introduction */}
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Getting your passport photo rejected is one of the most frustrating experiences in travel. Every country has slightly different requirements — dimensions, file size, background color, head size ratio — and getting even one detail wrong means starting over.
+          Getting your passport photo rejected is one of the most frustrating experiences in travel. I know because it happened to me twice. Every country has slightly different requirements: dimensions, file size, background color, head size ratio. Get even one detail wrong and you are starting over.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          I&apos;ve had visa photos rejected twice (UK and India) before I figured out the exact specifications. The UK rejection was because my background was off-white instead of pure white. The India rejection was because my file was 350KB — over their 300KB limit. Both times, I had to retake the photo, resubmit, and wait again.
+          I had visa photos rejected twice, UK and India, before I figured out the exact specifications. The UK rejection was because my background was off-white instead of pure white. The India rejection? My file was 350KB, over their 300KB limit. Both times, I had to retake the photo, resubmit, and wait again. Incredibly frustrating.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-6">
           This guide covers the exact requirements for 20+ countries in 2026, with downloadable quick-reference tables and a{" "}
@@ -276,7 +276,7 @@ export default function PassportPhotoRequirements2026Page() {
           id="quick-reference"
           className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight"
         >
-          Quick reference table — 20 countries
+          Quick reference table: 20 countries
         </h2>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
@@ -448,7 +448,7 @@ export default function PassportPhotoRequirements2026Page() {
           <Link href="/tools/resize" className="text-indigo-600 dark:text-indigo-400 hover:underline">
             SammaPix resize tool
           </Link>{" "}
-          — it&apos;s free and runs entirely in your browser.
+          . It&apos;s free and runs entirely in your browser.
         </p>
 
         {/* Most Common Rejection Reasons */}
@@ -467,7 +467,7 @@ export default function PassportPhotoRequirements2026Page() {
           <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">1. Wrong dimensions or aspect ratio</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              This is the number one rejection reason. A 2x2 inch photo is not the same as a 35x45mm photo — submitting the wrong size is an instant rejection. Many people crop their photo to roughly the right shape but miss the exact pixel dimensions. For the US, you need exactly 600x600 pixels at 300 DPI. For a 35x45mm photo, you need 413x531 pixels at 300 DPI.
+              This is the number one rejection reason. A 2x2 inch photo is not the same as a 35x45mm photo, and submitting the wrong size is an instant rejection. Many people crop their photo to roughly the right shape but miss the exact pixel dimensions. For the US, you need exactly 600x600 pixels at 300 DPI. For a 35x45mm photo, you need 413x531 pixels at 300 DPI.
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-4">
@@ -479,19 +479,19 @@ export default function PassportPhotoRequirements2026Page() {
           <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">3. Eyes not fully visible</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Glasses glare, hair covering one eye, or half-closed eyes. Since 2021, most countries recommend removing glasses entirely for passport photos. If you must wear glasses for medical reasons, ensure there is zero glare on the lenses — tilt your head slightly down and move the light source to the side.
+              Glasses glare, hair covering one eye, or half-closed eyes. Since 2021, most countries recommend removing glasses entirely for passport photos. If you must wear glasses for medical reasons, ensure there is zero glare on the lenses. Tilt your head slightly down and move the light source to the side.
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">4. Incorrect background color</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Off-white, cream, or yellowish backgrounds get rejected. Your wall might look white to your eyes, but your camera&apos;s white balance can introduce a warm tint. Check your photo on a calibrated screen — the background should be pure white (#FFFFFF or close to it). Some countries like France accept light grey or light blue, but when in doubt, go with pure white.
+              Off-white, cream, or yellowish backgrounds get rejected. Your wall might look white to your eyes, but your camera&apos;s white balance can introduce a warm tint. Check your photo on a calibrated screen. The background should be pure white (#FFFFFF or close to it). Some countries like France accept light grey or light blue, but when in doubt, go with pure white.
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">5. File size exceeds maximum</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Digital submissions through government portals often have strict file size limits. Singapore requires under 60KB. The US requires under 240KB. India requires between 10KB and 300KB. A typical smartphone photo is 3–8 MB — you need to compress it by 90%+ to meet these limits. Use a{" "}
+              Digital submissions through government portals often have strict file size limits. Singapore requires under 60KB. The US requires under 240KB. India requires between 10KB and 300KB. A typical smartphone photo is 3-8 MB, so you need to compress it by 90%+ to meet these limits. Use a{" "}
               <Link href="/compress-to/100kb" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                 target-size compression tool
               </Link>{" "}
@@ -527,7 +527,7 @@ export default function PassportPhotoRequirements2026Page() {
             <div>
               <p className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5]">Use natural light</p>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-                Face a large window. The best time is mid-morning or late afternoon when sunlight is diffused. Avoid direct sunlight — it creates harsh shadows. If the light is too strong, close sheer curtains to soften it.
+                Face a large window. The best time is mid-morning or late afternoon when sunlight is diffused. Avoid direct sunlight because it creates harsh shadows. If the light is too strong, close sheer curtains to soften it.
               </p>
             </div>
           </div>
@@ -545,7 +545,7 @@ export default function PassportPhotoRequirements2026Page() {
             <div>
               <p className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5]">Get the expression right</p>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-                Neutral expression, mouth closed, both eyes open, looking directly at the camera. Most countries do not accept smiling photos — even a slight smile can trigger rejection in automated systems. Remove glasses, headphones, and any head coverings (unless for religious purposes).
+                Neutral expression, mouth closed, both eyes open, looking directly at the camera. Most countries do not accept smiling photos. Even a slight smile can trigger rejection in automated systems. Remove glasses, headphones, and any head coverings (unless for religious purposes).
               </p>
             </div>
           </div>
@@ -554,7 +554,7 @@ export default function PassportPhotoRequirements2026Page() {
             <div>
               <p className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5]">Take multiple shots</p>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-                Take at least 10 photos. Review them on a larger screen — check for shadows, closed eyes, and off-center positioning. Pick the best one and move to the next step.
+                Take at least 10 photos. Review them on a larger screen and check for shadows, closed eyes, and off-center positioning. Pick the best one and move to the next step.
               </p>
             </div>
           </div>
@@ -580,7 +580,7 @@ export default function PassportPhotoRequirements2026Page() {
                 <Link href="/tools/compress" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                   SammaPix compress
                 </Link>{" "}
-                to bring your photo down to the required size — whether that&apos;s 240KB for the US, 60KB for Singapore, or 100KB for a visa application. The compression runs entirely in your browser, so your photo never leaves your device.
+                to bring your photo down to the required size, whether that&apos;s 240KB for the US, 60KB for Singapore, or 100KB for a visa application. The compression runs entirely in your browser, so your photo never leaves your device.
               </p>
             </div>
           </div>
@@ -603,7 +603,7 @@ export default function PassportPhotoRequirements2026Page() {
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">Physical (printed)</h3>
             <ul className="space-y-1.5 text-sm text-gray-600 dark:text-[#A3A3A3]">
               <li>Print at 300 DPI on matte or glossy photo paper</li>
-              <li>File size doesn&apos;t matter — only print quality</li>
+              <li>File size doesn&apos;t matter, only print quality</li>
               <li>Higher resolution = better print quality</li>
               <li>Use the highest quality JPEG (90–100%)</li>
               <li>Standard sizes: 4x6 or 5x7 sheet with multiple photos</li>
@@ -632,7 +632,7 @@ export default function PassportPhotoRequirements2026Page() {
         </ol>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-6">
-          This order matters. Cropping and resizing first removes most of the excess data, so the final compression step only needs to reduce the file by 20–40% instead of 95% — resulting in much better image quality. SammaPix has dedicated pages for common targets:{" "}
+          This order matters. Cropping and resizing first removes most of the excess data, so the final compression step only needs to reduce the file by 20-40% instead of 95%. The result is much better image quality. SammaPix has dedicated pages for common targets:{" "}
           <Link href="/compress-to/100kb" className="text-indigo-600 dark:text-indigo-400 hover:underline">
             compress to 100KB
           </Link>
@@ -692,7 +692,7 @@ export default function PassportPhotoRequirements2026Page() {
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Asia — strict file size limits</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Asian countries are the strictest about digital file sizes. Singapore requires under 60KB, China requires 40–120KB, and South Korea caps at 700KB. India has both a minimum (10KB) and maximum (300KB), which means you can&apos;t just over-compress — you need to hit a specific range. For these countries, use a{" "}
+              Asian countries are the strictest about digital file sizes. Singapore requires under 60KB, China requires 40-120KB, and South Korea caps at 700KB. India has both a minimum (10KB) and maximum (300KB), which means you can&apos;t just over-compress. You need to hit a specific range. For these countries, use a{" "}
               <Link href="/compress-to/100kb" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                 target-size compression tool
               </Link>{" "}
@@ -702,13 +702,13 @@ export default function PassportPhotoRequirements2026Page() {
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Europe — more relaxed, but backgrounds matter</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              European countries generally follow the ICAO 35x45mm standard and are more lenient on file sizes. However, they&apos;re strict about background colors. Germany requires specifically light grey (not white), France accepts light grey or light blue, and the UK accepts both white and light grey. The EU also has strict rules about head position — your face must be perfectly centered with specific head-to-chin ratios.
+              European countries generally follow the ICAO 35x45mm standard and are more lenient on file sizes. However, they&apos;re strict about background colors. Germany requires specifically light grey (not white), France accepts light grey or light blue, and the UK accepts both white and light grey. The EU also has strict rules about head position: your face must be perfectly centered with specific head-to-chin ratios.
             </p>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Americas — US/Canada differ significantly</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              The US uses a unique 2x2 inch (51x51mm) square format, while Canada uses 50x70mm — a taller format that includes more of your shoulders. Brazil also uses 50x70mm. Mexico follows the European 35x45mm standard. For the US specifically, the 240KB file size limit combined with 600x600px minimum resolution means you need smart compression — not just quality reduction.
+              The US uses a unique 2x2 inch (51x51mm) square format, while Canada uses 50x70mm, a taller format that includes more of your shoulders. Brazil also uses 50x70mm. Mexico follows the European 35x45mm standard. For the US specifically, the 240KB file size limit combined with 600x600px minimum resolution means you need smart compression, not just quality reduction.
             </p>
           </div>
           <div>
@@ -720,7 +720,7 @@ export default function PassportPhotoRequirements2026Page() {
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Southeast Asia — unique requirements</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Indonesia stands out with its colored background requirement — red for the last three passport pages, blue for earlier pages. The size is also larger at 40x60mm. Thailand and Singapore follow the 35x45mm standard but Singapore&apos;s 60KB limit is the strictest in the world — you&apos;ll almost certainly need compression. For all these countries,{" "}
+              Indonesia stands out with its colored background requirement: red for the last three passport pages, blue for earlier pages. The size is also larger at 40x60mm. Thailand and Singapore follow the 35x45mm standard but Singapore&apos;s 60KB limit is the strictest in the world. You will almost certainly need compression. For all these countries,{" "}
               <Link href="/blog/compress-images-without-losing-quality" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                 learning to compress without losing quality
               </Link>{" "}
@@ -753,7 +753,7 @@ export default function PassportPhotoRequirements2026Page() {
           <div className="border-b border-gray-200 dark:border-[#2A2A2A] pb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">How do I compress my passport photo to the required file size?</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              First crop and resize your photo to the exact required dimensions — this removes most of the excess data. Then use a{" "}
+              First crop and resize your photo to the exact required dimensions. This removes most of the excess data. Then use a{" "}
               <Link href="/compress-to/100kb" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                 target-size compression tool
               </Link>{" "}
@@ -781,7 +781,7 @@ export default function PassportPhotoRequirements2026Page() {
           <div className="border-b border-gray-200 dark:border-[#2A2A2A] pb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">What file format should passport photos be in?</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              JPEG (JPG) is the universally accepted format for passport photo submissions. Some portals also accept PNG. Avoid WebP, HEIC, or AVIF — government systems typically don&apos;t support modern formats. If your phone saves in HEIC, you can{" "}
+              JPEG (JPG) is the universally accepted format for passport photo submissions. Some portals also accept PNG. Avoid WebP, HEIC, or AVIF because government systems typically don&apos;t support modern formats. If your phone saves in HEIC, you can{" "}
               <Link href="/blog/iphone-heic-to-jpg-guide" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                 convert HEIC to JPG
               </Link>{" "}

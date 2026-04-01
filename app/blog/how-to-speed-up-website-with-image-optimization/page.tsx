@@ -185,23 +185,23 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
                 loading="eager"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                Page speed is a direct ranking signal — and images are almost always the biggest bottleneck — Photo by Carlos Muza on Unsplash
+                Page speed is a direct ranking signal , and images are almost always the biggest bottleneck . Photo by Carlos Muza on Unsplash
               </figcaption>
             </figure>
         }
         ctaBlock={
           <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 rounded-md p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">
-              Optimize your images now — free, no upload
+              Optimize your images now, free, no upload
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              Drop your images into SammaPix and reduce file sizes by up to 80% in seconds. Compress, convert to WebP, and batch process entire folders — all in your browser, with no server upload and no account required.
+              Drop your images into SammaPix and reduce file sizes by up to 80% in seconds. Compress, convert to WebP, and batch process entire folders , all in your browser, with no server upload and no account required.
             </p>
             <Link
               href="/tools/compress"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
-              Try SammaPix — Free
+              Try SammaPix, Free
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
@@ -254,7 +254,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 1 — Resize to display dimensions
+              Step 1: Resize to display dimensions
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -275,7 +275,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 2 — Choose the right format
+              Step 2: Choose the right format
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -304,7 +304,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 3 — Compress with optimal quality settings
+              Step 3: Compress with optimal quality settings
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -331,7 +331,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
             </ul>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 4 — Use responsive images with srcset
+              Step 4: Use responsive images with srcset
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -371,7 +371,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
             </p>
 
             <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">
-              Step 5 — Lazy load below-the-fold images
+              Step 5: Lazy load below-the-fold images
             </h3>
 
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -402,7 +402,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                A systematic image optimization workflow eliminates the most common source of slow page loads — Photo by Fotis Fotopoulos on Unsplash
+                A systematic image optimization workflow eliminates the most common source of slow page loads . Photo by Fotis Fotopoulos on Unsplash
               </figcaption>
             </figure>
 
@@ -612,7 +612,7 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
                 loading="lazy"
               />
               <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-                E-commerce product pages with heavy image catalogs benefit most from a consistent optimization workflow — Photo by Markus Spiske on Unsplash
+                E-commerce product pages with heavy image catalogs benefit most from a consistent optimization workflow . Photo by Markus Spiske on Unsplash
               </figcaption>
             </figure>
 

@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "I Used AI to Rename 71 Photos for SEO — Here's What Happened",
+  title: "I Used AI to Rename 71 Photos for SEO: Here's What Happened",
   description:
     "I renamed 71 travel photos from generic IMG_3570.JPG filenames to descriptive, keyword-rich names using AI. Here are the real results and why image filenames matter for SEO.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "image seo filenames",
   ],
   openGraph: {
-    title: "I Used AI to Rename 71 Photos for SEO — Here's What Happened",
+    title: "I Used AI to Rename 71 Photos for SEO: Here's What Happened",
     description:
       "71 travel photos renamed from IMG_3570.JPG to descriptive, SEO-optimized filenames using AI vision. Real before/after examples and the impact on Google Image Search.",
     url: `${APP_URL}/blog/ai-rename-travel-photos-seo-results`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "I Used AI to Rename 71 Photos for SEO — Here's What Happened",
+    title: "I Used AI to Rename 71 Photos for SEO: Here's What Happened",
     description:
       "From IMG_3570.JPG to gangaramaya-temple-buddha-statues-colombo-sri-lanka.webp. How AI-powered renaming transformed 71 travel photos into SEO assets.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "I Used AI to Rename 71 Photos for SEO — Here's What Happened",
+  headline: "I Used AI to Rename 71 Photos for SEO: Here's What Happened",
   description:
     "A real-world experiment: using AI to rename 71 Sri Lanka travel photos from generic camera filenames to descriptive, SEO-optimized names. Before/after examples and results.",
   url: `${APP_URL}/blog/ai-rename-travel-photos-seo-results`,
@@ -138,7 +138,7 @@ export default function AiRenameTravelPhotosSeoResultsPage() {
   return (
     <>
       <BlogArticleLayout
-        title="I Used AI to Rename 71 Photos for SEO — Here's What Happened"
+        title="I Used AI to Rename 71 Photos for SEO: Here's What Happened"
         slug="ai-rename-travel-photos-seo-results"
         description="Every photo I took in Sri Lanka was named IMG_something.JPG. That means 71 images with zero SEO value in their filenames. I ran them all through an AI renaming tool and the results changed how I think about image optimization. Here's the full experiment with real before/after examples."
         date="2026-03-24"
@@ -190,7 +190,7 @@ export default function AiRenameTravelPhotosSeoResultsPage() {
               href="/tools/ai-rename"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
-              Try SammaPix AI Rename — Free
+              Try SammaPix AI Rename, Free
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
