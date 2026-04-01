@@ -39,6 +39,7 @@ export const POSTS: Post[] = [
   { slug: "how-to-speed-up-website-with-image-optimization", title: "How to Speed Up Your Website with Image Optimization", description: "Image optimization is the fastest way to improve your Core Web Vitals.", date: "2026-03-18", tags: ["Performance"], coverImage: "/blog/covers/how-to-speed-up-website-with-image-optimization.webp" },
   { slug: "sammapix-vs-tinypng-benchmark-2026", title: "SammaPix vs TinyPNG: Benchmark Comparison 2026", description: "We tested SammaPix against TinyPNG across 50 real-world images.", date: "2026-03-16", tags: ["Tools"], coverImage: "/blog/covers/sammapix-vs-tinypng-benchmark-2026.webp" },
   { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG: Which Format Should You Use?", description: "A practical comparison of modern image formats for the web.", date: "2026-03-15", tags: ["Performance"], coverImage: "/blog/covers/webp-vs-avif-vs-jpeg-comparison.webp" },
+  { slug: "passport-photo-requirements-2026", title: "Passport Photo Size Requirements by Country 2026: Complete Guide + Free Maker", description: "Complete passport photo requirements for 20+ countries in 2026. Exact dimensions, file size limits, background color, and head height. Free browser-based passport photo maker included.", date: "2026-03-28", tags: ["Tools"], coverImage: "/blog/covers/passport-photo-requirements-2026.webp" },
 ];
 
 export const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy", "Workflow", "Creative"];
