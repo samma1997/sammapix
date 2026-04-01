@@ -63,7 +63,9 @@ const articleSchema = {
   author: {
     "@type": "Person",
     name: "Luca Sammarco",
-    url: "https://lucasammarco.com",
+    url: "https://www.sammapix.com/about",
+    image: "https://www.sammapix.com/luca-sammarco.jpg",
+    sameAs: ["https://lucasammarco.com", "https://github.com/samma1997"],
   },
   publisher: {
     "@type": "Organization",

@@ -313,13 +313,11 @@
 ---
 
 ## Creator
-
-**Luca Sammarco** — Full-Stack Developer & Travel Photographer
-- **Portfolio:** https://lucasammarco.com
-- **GitHub:** https://github.com/lucasammarco
-- **Twitter:** @lucasammarco
-- **LinkedIn:** https://linkedin.com/in/lucasammarco
-- **Expertise:** Photography, travel photography, image optimization, web development, full-stack development
+- **Name:** Luca Sammarco
+- **Role:** Digital Product Builder & Travel Photographer
+- **Website:** https://lucasammarco.com
+- **LinkedIn:** https://www.linkedin.com/in/luca-sammarco-a88b8a148/
+- **GitHub:** https://github.com/samma1997
 
 **Why Luca built SammaPix:**
 After returning from photography trips to Asia with hundreds of files needing optimization, Luca solved the batch compression + conversion + renaming workflow that other tools didn't address comprehensively.

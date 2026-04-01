@@ -5,13 +5,13 @@ import { APP_URL } from "@/lib/constants";
 import { getAllTrips } from "@/lib/destinations";
 
 export const metadata: Metadata = {
-  title: "About - Luca Sammarco, Travel Photographer",
+  title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
   description:
-    "Travel photographer and full-stack developer. SammaPix is the tool I built because existing tools couldn't handle a real photography workflow.",
+    "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 25 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
   keywords: [
     "luca sammarco",
+    "digital product builder",
     "travel photographer",
-    "full-stack developer",
     "sammapix founder",
     "sri lanka photography",
     "image optimization",
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
-    title: "About - Luca Sammarco, Travel Photographer",
+    title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
     description:
-      "Travel photographer and full-stack developer. SammaPix is the tool I built because existing tools couldn't handle a real photography workflow.",
+      "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 25 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
     url: `${APP_URL}/about`,
     type: "website",
     images: [
@@ -45,29 +45,36 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Luca Sammarco",
+    givenName: "Luca",
+    familyName: "Sammarco",
     url: "https://lucasammarco.com",
+    image: "https://www.sammapix.com/luca-sammarco.jpg",
+    description:
+      "Digital Product Builder and travel photographer. Founder of SammaPix.",
+    jobTitle: "Digital Product Builder & Travel Photographer",
     sameAs: [
-      "https://github.com/lucasammarco",
-      "https://twitter.com/lucasammarco",
-      "https://sammapix.com",
-    ],
-    jobTitle: "Full-Stack Developer & Travel Photographer",
-    knowsAbout: [
-      "Web Development",
-      "Full-Stack Development",
-      "Photography",
-      "Travel Photography",
-      "Image Optimization",
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "Next.js",
+      "https://lucasammarco.com",
+      "https://github.com/samma1997",
+      "https://www.linkedin.com/in/luca-sammarco-a88b8a148/",
+      "https://dev.to/samma1997",
     ],
     worksFor: {
       "@type": "Organization",
       name: "SammaPix",
-      url: "https://sammapix.com",
+      url: "https://www.sammapix.com",
     },
+    knowsAbout: [
+      "Digital Product Development",
+      "SaaS",
+      "Web Development",
+      "Image Optimization",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Travel Photography",
+      "SEO",
+      "AI Tools",
+    ],
   };
 
   return (
@@ -195,6 +202,16 @@ export default function AboutPage() {
         {/* ── Brief bio ─────────────────────────────────────────────────────── */}
         <section className="bg-[#FAFAFA] dark:bg-[#111111] border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 sm:px-8 py-12">
           <div className="max-w-2xl mx-auto">
+            <div className="flex flex-col items-center mb-6">
+              <Image
+                src="/luca-sammarco.jpg"
+                alt="Luca Sammarco — Digital Product Builder & Travel Photographer"
+                width={200}
+                height={200}
+                className="rounded-full object-cover"
+                priority
+              />
+            </div>
             <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-4">
               About Luca
             </p>
@@ -221,6 +238,50 @@ export default function AboutPage() {
             >
               Try the tools I built →
             </Link>
+          </div>
+        </section>
+
+        {/* ── What I do ────────────────────────────────────────────────────── */}
+        <section className="bg-white dark:bg-[#191919] border-t border-[#E5E5E5] dark:border-[#2A2A2A] px-4 sm:px-8 py-16">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs font-semibold text-[#A3A3A3] dark:text-[#737373] uppercase tracking-widest mb-2">
+              What I do
+            </p>
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-8">
+              Build, shoot, optimize
+            </h2>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                {
+                  title: "Build Digital Products",
+                  description:
+                    "I design and develop SaaS tools, websites, and platforms. SammaPix is my latest product — 25 browser-based image tools used in 40+ countries.",
+                },
+                {
+                  title: "Travel Photography",
+                  description:
+                    "I document my travels through photography. 71 photos from Sri Lanka, shot and optimized using the tools I built.",
+                },
+                {
+                  title: "Web Performance",
+                  description:
+                    "I obsess over Core Web Vitals, image optimization, and making the web faster. SammaPix scores 97-99 on Lighthouse.",
+                },
+              ].map((card) => (
+                <div
+                  key={card.title}
+                  className="p-5 bg-[#FAFAFA] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg"
+                >
+                  <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
