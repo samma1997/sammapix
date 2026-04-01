@@ -7,7 +7,7 @@ import { HomepageToolGrid } from "@/components/home/HomepageToolGrid";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata = {
-  title: "AI Photo Workflow Platform for Content Creators",
+  title: "SammaPix — Free AI Photo Tools, Image Compressor & Optimizer",
   description:
     "Compress, rename with AI, resize, convert -- all in one pipeline. 25 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
@@ -21,12 +21,12 @@ export const metadata = {
     "photo tools for content creators",
     "browser image processing",
   ],
-  alternates: { canonical: "https://sammapix.com" },
+  alternates: { canonical: "https://www.sammapix.com" },
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
       "Compress, rename with AI, resize, convert -- all in one pipeline. 25 free tools. No uploads.",
-    url: "https://sammapix.com",
+    url: "https://www.sammapix.com",
     type: "website",
     images: [
       {

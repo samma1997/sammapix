@@ -26,7 +26,7 @@ export async function generateMetadata({
   const target = getTarget(slug);
   if (!target) return {};
 
-  const title = `${target.titleKeyword} — Free, Instant, No Upload | SammaPix`;
+  const title = `${target.titleKeyword} — Free, Instant, No Upload`;
   const canonical = getTargetCanonical(slug);
 
   return {

@@ -20,7 +20,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 /* ------------------------------------------------------------------ */
 
 export const metadata: Metadata = {
-  title: "Passport Photo Maker Online Free | SammaPix",
+  title: "Passport Photo Maker Online Free",
   description:
     "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
   keywords: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/passport-photo`,
   },
   openGraph: {
-    title: "Passport Photo Maker Online Free | SammaPix",
+    title: "Passport Photo Maker Online Free",
     description:
       "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
     url: `${APP_URL}/tools/passport-photo`,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Passport Photo Maker Online Free | SammaPix",
+    title: "Passport Photo Maker Online Free",
     description:
       "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
   },

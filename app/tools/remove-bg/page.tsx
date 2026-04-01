@@ -17,7 +17,7 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Remove Image Background Free Online | SammaPix",
+  title: "Remove Image Background Free Online",
   description:
     "Get transparent PNGs in 3 seconds with AI background removal. Works with photos, products & portraits. Browser-based, free, no signup needed.",
   keywords: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/remove-bg`,
   },
   openGraph: {
-    title: "Remove Image Background Free Online | SammaPix",
+    title: "Remove Image Background Free Online",
     description:
       "Get transparent PNGs in 3 seconds with AI background removal. Works with photos, products & portraits. Browser-based, free, no signup needed.",
     url: `${APP_URL}/tools/remove-bg`,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Remove Image Background Free Online | SammaPix",
+    title: "Remove Image Background Free Online",
     description:
       "Get transparent PNGs in 3 seconds with AI background removal. Works with photos, products & portraits. Browser-based, free, no signup needed.",
   },

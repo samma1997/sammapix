@@ -18,7 +18,7 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Compress Images Online Free | SammaPix",
+  title: "Compress Images Online Free",
   description:
     "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
   keywords: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/compress`,
   },
   openGraph: {
-    title: "Compress Images Online Free | SammaPix",
+    title: "Compress Images Online Free",
     description:
       "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
     url: `${APP_URL}/tools/compress`,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress Images Online Free | SammaPix",
+    title: "Compress Images Online Free",
     description:
       "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
   },

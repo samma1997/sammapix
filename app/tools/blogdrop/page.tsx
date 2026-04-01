@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/blogdrop`,
   },
   openGraph: {
-    title: "Blog Ready - Blog-Ready Images in One Drop | SammaPix",
+    title: "Blog Ready - Blog-Ready Images in One Drop",
     description:
       "Blog-ready images in one drop. Compress, resize, WebP, SEO names.",
     url: `${APP_URL}/tools/blogdrop`,

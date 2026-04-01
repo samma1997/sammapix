@@ -27,7 +27,7 @@ export async function generateMetadata({
   const platform = getOptimizePlatform(slug);
   if (!platform) return {};
 
-  const title = `Optimize Images for ${platform.displayName} Free Online | SammaPix`;
+  const title = `Optimize Images for ${platform.displayName} Free Online`;
   const canonical = getOptimizePlatformCanonical(slug);
 
   return {

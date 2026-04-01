@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "photo editing workflow",
   ],
   openGraph: {
-    title: "Cull Photos 10x Faster: Complete Workflow Guide | SammaPix",
+    title: "Cull Photos 10x Faster: Complete Workflow Guide",
     description:
       "Stop spending hours on photo selection. Learn the exact workflow professional photographers use to cull photos fast- rating systems, keyboard shortcuts, and keep rate benchmarks.",
     url: "https://sammapix.com/blog/cull-photos-faster-workflow",

@@ -26,7 +26,7 @@ export async function generateMetadata({
   const platform = getImageSizePlatform(slug);
   if (!platform) return {};
 
-  const title = `Image Size for ${platform.displayName} in 2026 — Complete Guide | SammaPix`;
+  const title = `Image Size for ${platform.displayName} in 2026 — Complete Guide`;
   const canonical = getImageSizePlatformCanonical(slug);
 
   return {

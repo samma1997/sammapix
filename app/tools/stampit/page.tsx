@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/stampit`,
   },
   openGraph: {
-    title: "Watermark Photos Free Online - Batch & Logo | SammaPix",
+    title: "Watermark Photos Free Online - Batch & Logo",
     description:
       "Watermark photos instantly- text or logo. Tiled anti-crop mode, 9 positions, batch ZIP. Free, browser-based, zero uploads.",
     url: `${APP_URL}/tools/stampit`,
