@@ -8,8 +8,8 @@ const SLUG = "passport-photo-requirements-2026";
 const POST_TITLE = "Passport Photo Size Requirements by Country 2026: Complete Guide + Free Maker";
 const POST_DESCRIPTION =
   "Complete passport photo requirements for 20+ countries in 2026. Exact dimensions, file size limits, background color, and head height. Free browser-based passport photo maker included.";
-const POST_DATE = "2026-03-28";
-const POST_DATE_FORMATTED = "March 28, 2026";
+const POST_DATE = "2026-04-02";
+const POST_DATE_FORMATTED = "April 2, 2026";
 const POST_URL = `${APP_URL}/blog/${SLUG}`;
 
 export const metadata: Metadata = {
@@ -217,7 +217,7 @@ export default function PassportPhotoRequirements2026Page() {
         heroImage={
           <figure className="my-8">
             <img
-              src="https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80"
+              src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80"
               alt="Open passport with visa stamps representing international travel document photo requirements"
               className="w-full rounded-lg"
               loading="eager"

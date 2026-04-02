@@ -6,137 +6,137 @@
   },
   {
     "start": 55.03,
-    "end": 57.94,
-    "text": "## Methodology"
+    "end": 57.07,
+    "text": "Methodology"
   },
   {
-    "start": 57.94,
-    "end": 79.39,
+    "start": 57.07,
+    "end": 78.53,
     "text": "I selected 200 photographs split evenly across five categories: portraits (40), "
   },
   {
-    "start": 79.39,
-    "end": 103.2,
+    "start": 78.53,
+    "end": 102.34,
     "text": "Each image was processed through all three models using their respective APIs: G"
   },
   {
-    "start": 103.2,
-    "end": 127.92,
+    "start": 102.34,
+    "end": 127.06,
     "text": "I scored every output on four criteria, each rated 1 to 10. Factual Accuracy: Do"
   },
   {
-    "start": 127.92,
-    "end": 142.87,
+    "start": 127.06,
+    "end": 142.01,
     "text": "The overall score is the unweighted average of all four criteria. I scored every"
   },
   {
-    "start": 142.87,
-    "end": 146.14,
-    "text": "## Overall results"
+    "start": 142.01,
+    "end": 144.22,
+    "text": "Overall results"
   },
   {
-    "start": 146.14,
-    "end": 183,
+    "start": 144.22,
+    "end": 181.08,
     "text": "Here are the aggregate scores across all 200 images. Gemini 2.5 Flash scored 8.2"
   },
   {
-    "start": 183,
-    "end": 210.58,
+    "start": 181.08,
+    "end": 208.66,
     "text": "I was surprised by how close the overall scores are. Just 0.2 points separate fi"
   },
   {
-    "start": 210.58,
-    "end": 214.01,
-    "text": "## Results by category"
+    "start": 208.66,
+    "end": 211.15,
+    "text": "Results by category"
   },
   {
-    "start": 214.01,
-    "end": 237.86,
+    "start": 211.15,
+    "end": 235.01,
     "text": "The aggregate scores hide significant differences across image types. For portra"
   },
   {
-    "start": 237.86,
-    "end": 258.19,
+    "start": 235.01,
+    "end": 255.34,
     "text": "For landscapes, Gemini wins with the highest overall category score of 8.2. What"
   },
   {
-    "start": 258.19,
-    "end": 275.09,
+    "start": 255.34,
+    "end": 272.23,
     "text": "For e-commerce products, Gemini dominates with an SEO score of 8.4, the highest "
   },
   {
-    "start": 275.09,
-    "end": 290.78,
+    "start": 272.23,
+    "end": 287.93,
     "text": "For screenshots and UI images, GPT-4o dominates with a category-best accuracy of"
   },
   {
-    "start": 290.78,
-    "end": 302.45,
+    "start": 287.93,
+    "end": 299.59,
     "text": "For food, it is a virtual tie between GPT-4o and Gemini at 8.0 versus 7.9 overal"
   },
   {
-    "start": 302.45,
-    "end": 305.59,
-    "text": "## 5 key findings"
+    "start": 299.59,
+    "end": 301.82,
+    "text": "5 key findings"
   },
   {
-    "start": 305.59,
-    "end": 323.38,
+    "start": 301.82,
+    "end": 319.61,
     "text": "Finding one: Gemini generates the most SEO-friendly descriptions. Gemini 2.5 Fla"
   },
   {
-    "start": 323.38,
-    "end": 340.27,
+    "start": 319.61,
+    "end": 336.5,
     "text": "Finding two: Claude is the most accurate but often too verbose. Claude 3.5 Sonne"
   },
   {
-    "start": 340.27,
-    "end": 360.7,
+    "start": 336.5,
+    "end": 356.93,
     "text": "Finding three: All three models fail on culturally-specific content. When I test"
   },
   {
-    "start": 360.7,
-    "end": 379.99,
+    "start": 356.93,
+    "end": 376.22,
     "text": "Finding four: GPT-4o is the best model for screenshots and UI images. GPT-4o sco"
   },
   {
-    "start": 379.99,
-    "end": 406.63,
+    "start": 376.22,
+    "end": 402.86,
     "text": "Finding five: For e-commerce, AI alt text outperforms human-written alt text 73%"
   },
   {
-    "start": 406.63,
-    "end": 410.04,
-    "text": "## Which model should you use?"
+    "start": 402.86,
+    "end": 405.36,
+    "text": "Which model should you use?"
   },
   {
-    "start": 410.04,
-    "end": 419.9,
+    "start": 405.36,
+    "end": 415.22,
     "text": "For e-commerce product images, use Gemini 2.5 Flash. Highest SEO value, optimal "
   },
   {
-    "start": 419.9,
-    "end": 430.37,
+    "start": 415.22,
+    "end": 425.69,
     "text": "For blog and editorial content, use GPT-4o. Best balance of accuracy, SEO value,"
   },
   {
-    "start": 430.37,
-    "end": 441.94,
+    "start": 425.69,
+    "end": 437.26,
     "text": "For accessibility compliance, use Claude 3.5 Sonnet. Highest accessibility score"
   },
   {
-    "start": 441.94,
-    "end": 454.9,
+    "start": 437.26,
+    "end": 450.22,
     "text": "For batch processing at scale, use Gemini 2.5 Flash. Fastest response time at 0."
   },
   {
-    "start": 454.9,
-    "end": 459.05,
-    "text": "## How SammaPix uses AI alt text"
+    "start": 450.22,
+    "end": 453.58,
+    "text": "How SammaPix uses AI alt text"
   },
   {
-    "start": 459.05,
-    "end": 483.34,
+    "start": 453.58,
+    "end": 477.86,
     "text": "SammaPix uses Gemini 2.5 Flash for its AI Alt Text generator, based on the resul"
   }
 ]
