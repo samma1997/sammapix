@@ -12,7 +12,7 @@ import Link from "next/link";
 import PassportPhotoClient from "@/components/tools/PassportPhotoClient";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
-import { PASSPORT_PRESETS } from "@/lib/passport-photo";
+import { PASSPORT_PRESETS } from "@/lib/passport-presets";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 /* ------------------------------------------------------------------ */
