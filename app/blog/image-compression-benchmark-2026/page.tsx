@@ -222,8 +222,8 @@ export default function ImageCompressionBenchmark2026Page() {
         }
       >
 
-        {/* Direct answer block for AI citation */}
-        <div className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5 mb-8">
+        {/* Direct answer block for AI citation — skipped by TTS */}
+        <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5 mb-8">
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-[#737373] mb-2">
             Key result
           </p>
