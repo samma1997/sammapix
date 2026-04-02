@@ -391,6 +391,46 @@ const TOOL_DATA: Record<string, ToolData> = {
     ],
     proTip: { text: "Works best with 50+ photos. The more you add, the smarter the sorting.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
+  "remove-bg": {
+    label: "Clean Background",
+    tagline: "Remove image background instantly with AI.",
+    steps: [
+      { title: "Drop your image", desc: "Add a photo with any background." },
+      { title: "AI removes background", desc: "Background is removed automatically in your browser." },
+      { title: "Download", desc: "Get a transparent PNG or white-background image." },
+    ],
+    proTip: { text: "Works great for product photos and profile pictures.", linkLabel: "Try Passport Photo", linkHref: "/dashboard/tools/passport-photo" },
+  },
+  upscale: {
+    label: "Enhance Resolution",
+    tagline: "AI upscale images 2x or 4x without losing quality.",
+    steps: [
+      { title: "Drop your image", desc: "Add a low-resolution photo." },
+      { title: "Choose scale", desc: "Select 2x or 4x upscaling." },
+      { title: "Download enhanced", desc: "Get a higher-resolution image." },
+    ],
+    proTip: { text: "Best results with photos under 1500px. Pro allows larger images.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
+  },
+  "passport-photo": {
+    label: "Passport Photo",
+    tagline: "AI passport & visa photo maker for 140+ countries.",
+    steps: [
+      { title: "Drop your photo", desc: "Upload any photo of yourself." },
+      { title: "Select country", desc: "Choose from 140+ country presets." },
+      { title: "Download", desc: "Get a print-ready passport photo with white background." },
+    ],
+    proTip: { text: "Take the photo against any background — AI removes it automatically.", linkLabel: "View all countries", linkHref: "/passport-photo/us" },
+  },
+  "image-to-text": {
+    label: "Image to Text",
+    tagline: "Extract text from images with AI-powered OCR.",
+    steps: [
+      { title: "Drop your image", desc: "Add a photo, screenshot, or document scan." },
+      { title: "AI extracts text", desc: "Gemini AI reads and extracts all text." },
+      { title: "Copy or download", desc: "Copy text to clipboard or download as TXT." },
+    ],
+    proTip: { text: "Works with 50+ languages including handwritten text.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
+  },
   "jpg-to-pdf": {
     label: "JPG to PDF",
     tagline: "Merge multiple images into a single PDF document.",
