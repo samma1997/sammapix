@@ -8,8 +8,8 @@ const SLUG = "ai-alt-text-accuracy-test-2026";
 const POST_TITLE = "AI Alt Text Accuracy Test 2026: Gemini vs GPT-4o vs Claude";
 const POST_DESCRIPTION =
   "We tested 3 AI models on 200 real images across 5 categories. See which generates the most accurate, SEO-friendly, and accessible alt text, with real data and examples.";
-const POST_DATE = "2026-03-28";
-const POST_DATE_FORMATTED = "March 28, 2026";
+const POST_DATE = "2026-04-02";
+const POST_DATE_FORMATTED = "April 2, 2026";
 const POST_URL = `${APP_URL}/blog/${SLUG}`;
 
 export const metadata: Metadata = {
