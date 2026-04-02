@@ -114,12 +114,12 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
     };
   }, [exists, audioUrl, updateHighlight, clearHighlight]);
 
-  // Build element list on play
+  // Build element list on play — skip elements inside [data-tts-skip]
   const buildElementMap = useCallback(() => {
     if (!articleRef.current) return;
     elementsRef.current = Array.from(
       articleRef.current.querySelectorAll("h2, h3, p, li"),
-    );
+    ).filter((el) => !el.closest("[data-tts-skip]"));
   }, [articleRef]);
 
   function handlePlayPause() {
