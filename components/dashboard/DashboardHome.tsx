@@ -33,6 +33,8 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconJpgToPdf,
+  IconJxl,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -539,7 +541,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     tagline: "Merge multiple images into a single PDF. Reorder pages, choose page size.",
     accent: "#DC2626",
     badges: ["Free", "No upload"],
-    Icon: IconCompress,
+    Icon: IconJpgToPdf,
     category: ["Optimize"],
     keywords: ["jpg to pdf", "images to pdf", "merge pdf", "combine images", "photo to pdf", "pictures to document", "create pdf", "make pdf"],
   },
@@ -550,7 +552,7 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa. Next-gen format.",
     accent: "#F59E0B",
     badges: ["Free", "Next-Gen"],
-    Icon: IconWebP,
+    Icon: IconJxl,
     category: ["Optimize"],
     keywords: ["jxl", "jpeg xl", "jxl to jpg", "jxl to png", "convert jxl", "next gen format", "jxl converter", "open jxl"],
   },

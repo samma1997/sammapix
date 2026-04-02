@@ -20,6 +20,8 @@ import {
   IconRemoveBg,
   IconUpscale,
   IconPassportPhoto,
+  IconJpgToPdf,
+  IconJxl,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -498,7 +500,7 @@ const TOOLS: ToolWithCategory[] = [
     tagline: "Merge multiple JPG, PNG, or WebP images into a single PDF document.",
     accent: "#DC2626",
     badges: ["Free", "Client-side"],
-    Icon: IconPdfToImage,
+    Icon: IconJpgToPdf,
     category: ["Optimize"],
   },
   {
@@ -507,7 +509,7 @@ const TOOLS: ToolWithCategory[] = [
     tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa. Next-gen format, 30-60% smaller.",
     accent: "#F59E0B",
     badges: ["Free", "Next-Gen"],
-    Icon: IconWebP,
+    Icon: IconJxl,
     category: ["Optimize"],
   },
 ];

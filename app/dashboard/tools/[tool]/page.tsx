@@ -22,6 +22,8 @@ import {
   IconRemoveBg,
   IconUpscale,
   IconPassportPhoto,
+  IconJpgToPdf,
+  IconJxl,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -131,8 +133,8 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   upscale:       { Icon: IconUpscale,  accent: "#8B5CF6" },
   "passport-photo": { Icon: IconPassportPhoto, accent: "#3B82F6" },
   "image-to-text": { Icon: IconAIRename, accent: "#F59E0B" },
-  "jpg-to-pdf": { Icon: IconCompress, accent: "#DC2626" },
-  jxl: { Icon: IconWebP, accent: "#F59E0B" },
+  "jpg-to-pdf": { Icon: IconJpgToPdf, accent: "#DC2626" },
+  jxl: { Icon: IconJxl, accent: "#F59E0B" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────

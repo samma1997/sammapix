@@ -18,6 +18,8 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
+  IconJpgToPdf,
+  IconJxl,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -213,8 +215,8 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Batch Rename", href: "/tools/batchname", tagline: "Rename files with a pattern.", accent: "#F59E0B", badge: "Free", Icon: IconBatchName, category: "Organize" },
 
   // New tools
-  { name: "JPG to PDF", href: "/tools/jpg-to-pdf", tagline: "Merge images into a single PDF.", accent: "#DC2626", badge: "Free", Icon: IconPdfToImage, category: "Optimize", isNew: true },
-  { name: "JXL Converter", href: "/tools/jxl", tagline: "JPEG XL to/from JPG, PNG, WebP.", accent: "#F59E0B", badge: "Free", Icon: IconWebP, category: "Optimize", isNew: true },
+  { name: "JPG to PDF", href: "/tools/jpg-to-pdf", tagline: "Merge images into a single PDF.", accent: "#DC2626", badge: "Free", Icon: IconJpgToPdf, category: "Optimize", isNew: true },
+  { name: "JXL Converter", href: "/tools/jxl", tagline: "JPEG XL to/from JPG, PNG, WebP.", accent: "#F59E0B", badge: "Free", Icon: IconJxl, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
