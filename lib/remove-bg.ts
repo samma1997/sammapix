@@ -28,6 +28,7 @@ export async function removeBackground(
   onProgress?.(5);
 
   const resultBlob: Blob = await imglyRemoveBg(file, {
+    model: "isnet_quint8",
     progress: (key: string, current: number, total: number) => {
       // The library reports progress per phase (fetch model, inference, etc.)
       // We normalise to 5-95 range, leaving 0-5 for setup and 95-100 for finalization.
