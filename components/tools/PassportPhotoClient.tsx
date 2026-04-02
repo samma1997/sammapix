@@ -11,7 +11,7 @@
  *  5. Download JPG
  */
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useMemo } from "react";
 import {
   Upload,
   Download,
@@ -43,6 +43,20 @@ export default function PassportPhotoClient() {
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const filteredPresets = useMemo(() => {
+    if (!countrySearch.trim()) return PASSPORT_PRESETS.slice(0, 12); // Show top 12 by default
+    const q = countrySearch.toLowerCase();
+    return PASSPORT_PRESETS.filter(
+      (p) =>
+        p.label.toLowerCase().includes(q) ||
+        p.country.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+    );
+  }, [countrySearch]);
 
   /* ---- File selection ---- */
   const handleFile = useCallback((f: File) => {
@@ -192,33 +206,91 @@ export default function PassportPhotoClient() {
             </div>
           </div>
 
-          {/* Country preset grid */}
-          <div>
+          {/* Country selector with search */}
+          <div ref={dropdownRef}>
             <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2 uppercase tracking-wide">
-              Select country
+              Select country or visa type
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {PASSPORT_PRESETS.map((preset) => (
-                <button
-                  key={preset.country}
-                  onClick={() => setSelectedPreset(preset)}
-                  disabled={stage === "processing"}
-                  className={`text-left p-3 rounded-md border transition-colors ${
-                    selectedPreset.country === preset.country
-                      ? "border-[#6366F1] bg-[#6366F1]/[0.04] dark:bg-[#6366F1]/[0.08]"
-                      : "border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] hover:bg-[#FAFAFA] dark:hover:bg-[#252525]"
-                  }`}
-                >
-                  <span className="text-base mr-1.5">{preset.flag}</span>
-                  <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
-                    {preset.label}
-                  </span>
-                  <p className="text-xs text-[#A3A3A3] mt-0.5">
-                    {preset.widthPx} x {preset.heightPx} px
+
+            {/* Selected country display */}
+            <button
+              onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
+              disabled={stage === "processing"}
+              className="w-full flex items-center justify-between p-3 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors text-left"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-lg">{selectedPreset.flag}</span>
+                <div>
+                  <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
+                    {selectedPreset.label}
                   </p>
-                </button>
-              ))}
-            </div>
+                  <p className="text-[11px] text-[#A3A3A3]">
+                    {selectedPreset.widthPx} &times; {selectedPreset.heightPx} px
+                  </p>
+                </div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`text-[#A3A3A3] transition-transform ${countryDropdownOpen ? "rotate-180" : ""}`}>
+                <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+
+            {/* Dropdown with search */}
+            {countryDropdownOpen && (
+              <div className="mt-1 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] shadow-lg overflow-hidden z-20 relative">
+                {/* Search input */}
+                <div className="p-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+                  <input
+                    type="text"
+                    value={countrySearch}
+                    onChange={(e) => setCountrySearch(e.target.value)}
+                    placeholder="Search country or visa type..."
+                    autoFocus
+                    className="w-full px-3 py-2 text-sm rounded-md border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5] placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1]"
+                  />
+                </div>
+                {/* Results */}
+                <div className="max-h-64 overflow-y-auto">
+                  {filteredPresets.length === 0 ? (
+                    <p className="px-4 py-3 text-xs text-[#A3A3A3]">No countries found</p>
+                  ) : (
+                    filteredPresets.map((preset) => (
+                      <button
+                        key={preset.country}
+                        onClick={() => {
+                          setSelectedPreset(preset);
+                          setCountryDropdownOpen(false);
+                          setCountrySearch("");
+                        }}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-left transition-colors ${
+                          selectedPreset.country === preset.country
+                            ? "bg-[#6366F1]/[0.06] dark:bg-[#6366F1]/[0.12]"
+                            : "hover:bg-[#F5F5F5] dark:hover:bg-[#252525]"
+                        }`}
+                      >
+                        <span className="text-base shrink-0">{preset.flag}</span>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
+                            {preset.label}
+                          </p>
+                          <p className="text-[11px] text-[#A3A3A3]">{preset.description}</p>
+                        </div>
+                        <span className="text-[11px] text-[#A3A3A3] shrink-0 tabular-nums">
+                          {preset.widthPx}&times;{preset.heightPx}
+                        </span>
+                        {selectedPreset.country === preset.country && (
+                          <CheckCircle2 className="h-3.5 w-3.5 text-[#6366F1] shrink-0" strokeWidth={2} />
+                        )}
+                      </button>
+                    ))
+                  )}
+                </div>
+                {!countrySearch && (
+                  <p className="px-3 py-2 text-[10px] text-[#A3A3A3] border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+                    Showing top 12 &mdash; type to search all {PASSPORT_PRESETS.length} countries
+                  </p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Background removal toggle */}
