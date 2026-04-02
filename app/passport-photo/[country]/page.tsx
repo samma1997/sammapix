@@ -203,7 +203,7 @@ export default async function PassportPhotoCountryPage({
         </div>
 
         {/* Tool */}
-        <PassportPhotoClient />
+        <PassportPhotoClient defaultCountry={country} />
 
         {/* Requirements section */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12">

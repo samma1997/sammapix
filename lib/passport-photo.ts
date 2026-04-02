@@ -104,8 +104,10 @@ export async function generatePassportPhoto(
       });
       sourceBlob = bgResult.blob;
     } catch (err) {
-      console.warn("Background removal failed, using original:", err);
-      sourceBlob = file;
+      console.error("Background removal failed:", err);
+      throw new Error(
+        "Background removal failed. This may happen with very large images or if the AI model could not load. Try a smaller image or disable background removal."
+      );
     }
   } else {
     sourceBlob = file;

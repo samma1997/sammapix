@@ -29,11 +29,11 @@ import {
 
 type Stage = "upload" | "processing" | "done";
 
-export default function PassportPhotoClient() {
+export default function PassportPhotoClient({ defaultCountry }: { defaultCountry?: string } = {}) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [selectedPreset, setSelectedPreset] = useState<PassportPreset>(
-    PASSPORT_PRESETS[0]
+    (defaultCountry && PASSPORT_PRESETS.find((p) => p.country === defaultCountry)) || PASSPORT_PRESETS[0]
   );
   const [removeBg, setRemoveBg] = useState(true);
   const [stage, setStage] = useState<Stage>("upload");

@@ -57,7 +57,8 @@ const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverter
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
-const TOOL_MAP: Record<string, React.ComponentType> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   compress:    CompressClient,
   webp:        WebpClient,
   "ai-rename": AiRenameClient,
