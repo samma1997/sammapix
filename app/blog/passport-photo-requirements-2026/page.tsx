@@ -626,9 +626,9 @@ export default function PassportPhotoRequirements2026Page() {
         </p>
 
         <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 dark:text-[#A3A3A3] mb-3">
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Crop first</strong> — remove everything outside the required frame</li>
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Resize</strong> — scale down to the exact required pixel dimensions</li>
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Compress last</strong> — use smart compression to hit the file size target</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Crop first</strong>. remove everything outside the required frame</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Resize</strong>. scale down to the exact required pixel dimensions</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Compress last</strong>. use smart compression to hit the file size target</li>
         </ol>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-6">
@@ -660,14 +660,14 @@ export default function PassportPhotoRequirements2026Page() {
         </p>
 
         <ul className="space-y-1.5 text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Select your country</strong> — automatically sets the correct dimensions, aspect ratio, and file size target</li>
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Crop with guidelines</strong> — visual overlay showing where your head, chin, and shoulders should be</li>
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Auto-compress</strong> — hits the exact file size requirement while maintaining maximum quality</li>
-          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Download instantly</strong> — your photo is ready to upload to any government portal</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Select your country</strong>. automatically sets the correct dimensions, aspect ratio, and file size target</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Crop with guidelines</strong>. visual overlay showing where your head, chin, and shoulders should be</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Auto-compress</strong>. hits the exact file size requirement while maintaining maximum quality</li>
+          <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Download instantly</strong>. your photo is ready to upload to any government portal</li>
         </ul>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Everything runs 100% in your browser. Your photo never leaves your device — no upload to any server, no data collection, no account required. This is especially important for identity documents where{" "}
+          Everything runs 100% in your browser. Your photo never leaves your device. no upload to any server, no data collection, no account required. This is especially important for identity documents where{" "}
           <Link href="/blog/browser-based-image-tools-privacy-guide" className="text-indigo-600 dark:text-indigo-400 hover:underline">
             privacy matters
           </Link>
@@ -690,7 +690,7 @@ export default function PassportPhotoRequirements2026Page() {
 
         <div className="space-y-4 mb-6">
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Asia — strict file size limits</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Asia. strict file size limits</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               Asian countries are the strictest about digital file sizes. Singapore requires under 60KB, China requires 40-120KB, and South Korea caps at 700KB. India has both a minimum (10KB) and maximum (300KB), which means you can&apos;t just over-compress. You need to hit a specific range. For these countries, use a{" "}
               <Link href="/compress-to/100kb" className="text-indigo-600 dark:text-indigo-400 hover:underline">
@@ -700,25 +700,25 @@ export default function PassportPhotoRequirements2026Page() {
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Europe — more relaxed, but backgrounds matter</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Europe. more relaxed, but backgrounds matter</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               European countries generally follow the ICAO 35x45mm standard and are more lenient on file sizes. However, they&apos;re strict about background colors. Germany requires specifically light grey (not white), France accepts light grey or light blue, and the UK accepts both white and light grey. The EU also has strict rules about head position: your face must be perfectly centered with specific head-to-chin ratios.
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Americas — US/Canada differ significantly</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Americas. US/Canada differ significantly</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               The US uses a unique 2x2 inch (51x51mm) square format, while Canada uses 50x70mm, a taller format that includes more of your shoulders. Brazil also uses 50x70mm. Mexico follows the European 35x45mm standard. For the US specifically, the 240KB file size limit combined with 600x600px minimum resolution means you need smart compression, not just quality reduction.
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Middle East — white background, strict digital portals</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Middle East. white background, strict digital portals</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               UAE and other Gulf states follow the 35x45mm standard with white backgrounds. The UAE has a 200KB file size limit for online applications. Saudi Arabia requires 200x200 pixels minimum for online submissions. These countries also tend to have automated facial recognition checks in their portals, making proper centering and expression even more critical.
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Southeast Asia — unique requirements</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">Southeast Asia. unique requirements</h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               Indonesia stands out with its colored background requirement: red for the last three passport pages, blue for earlier pages. The size is also larger at 40x60mm. Thailand and Singapore follow the 35x45mm standard but Singapore&apos;s 60KB limit is the strictest in the world. You will almost certainly need compression. For all these countries,{" "}
               <Link href="/blog/compress-images-without-losing-quality" className="text-indigo-600 dark:text-indigo-400 hover:underline">

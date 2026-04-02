@@ -249,7 +249,7 @@ export default function AiAltTextAccuracyTest2026Page() {
           Some models consistently misidentified objects, others generated descriptions too generic for SEO value, and one model stood out for e-commerce product photos. This is the first public benchmark comparing AI alt text quality with actual accuracy scores, SEO usefulness ratings, and accessibility compliance checks.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Every image was scored on 4 criteria: <strong className="text-gray-900 dark:text-[#E5E5E5]">factual accuracy</strong>, <strong className="text-gray-900 dark:text-[#E5E5E5]">SEO keyword inclusion</strong>, <strong className="text-gray-900 dark:text-[#E5E5E5]">accessibility usefulness</strong>, and <strong className="text-gray-900 dark:text-[#E5E5E5]">appropriate length</strong>. If you use AI to generate alt text — or you are considering it — this data will help you choose the right model for your use case.
+          Every image was scored on 4 criteria: <strong className="text-gray-900 dark:text-[#E5E5E5]">factual accuracy</strong>, <strong className="text-gray-900 dark:text-[#E5E5E5]">SEO keyword inclusion</strong>, <strong className="text-gray-900 dark:text-[#E5E5E5]">accessibility usefulness</strong>, and <strong className="text-gray-900 dark:text-[#E5E5E5]">appropriate length</strong>. If you use AI to generate alt text. or you are considering it. this data will help you choose the right model for your use case.
         </p>
 
         {/* Methodology */}
@@ -261,7 +261,7 @@ export default function AiAltTextAccuracyTest2026Page() {
         </h2>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          I selected <strong className="text-gray-900 dark:text-[#E5E5E5]">200 photographs</strong> split evenly across five categories: <strong className="text-gray-900 dark:text-[#E5E5E5]">portraits</strong> (40), <strong className="text-gray-900 dark:text-[#E5E5E5]">landscapes</strong> (40), <strong className="text-gray-900 dark:text-[#E5E5E5]">e-commerce products</strong> (40), <strong className="text-gray-900 dark:text-[#E5E5E5]">screenshots/UI</strong> (40), and <strong className="text-gray-900 dark:text-[#E5E5E5]">food</strong> (40). Images were sourced from real production environments — my own{" "}
+          I selected <strong className="text-gray-900 dark:text-[#E5E5E5]">200 photographs</strong> split evenly across five categories: <strong className="text-gray-900 dark:text-[#E5E5E5]">portraits</strong> (40), <strong className="text-gray-900 dark:text-[#E5E5E5]">landscapes</strong> (40), <strong className="text-gray-900 dark:text-[#E5E5E5]">e-commerce products</strong> (40), <strong className="text-gray-900 dark:text-[#E5E5E5]">screenshots/UI</strong> (40), and <strong className="text-gray-900 dark:text-[#E5E5E5]">food</strong> (40). Images were sourced from real production environments. my own{" "}
           <Link
             href="/blog/optimize-travel-photos-sri-lanka"
             className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
@@ -356,7 +356,7 @@ export default function AiAltTextAccuracyTest2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          I was surprised by how close the overall scores are — just 0.2 points separate first from last. But the individual criteria tell a very different story. <strong className="text-gray-900 dark:text-[#E5E5E5]">Claude is the most accurate model but scores lowest overall</strong> because its descriptions are consistently too long. Gemini wins not because it is the smartest, but because it produces the most <em>practical</em> alt text — the right length, with the right keywords, at the right level of detail.
+          I was surprised by how close the overall scores are. just 0.2 points separate first from last. But the individual criteria tell a very different story. <strong className="text-gray-900 dark:text-[#E5E5E5]">Claude is the most accurate model but scores lowest overall</strong> because its descriptions are consistently too long. Gemini wins not because it is the smartest, but because it produces the most <em>practical</em> alt text. the right length, with the right keywords, at the right level of detail.
         </p>
 
         {/* Results by Category */}
@@ -418,7 +418,7 @@ export default function AiAltTextAccuracyTest2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          <strong className="text-gray-900 dark:text-[#E5E5E5]">Claude wins on portraits</strong> with an accuracy score of 8.9 — the highest single-category score in the entire benchmark. Claude excels at detecting emotions, context clues (e.g., &quot;woman laughing during outdoor celebration&quot;), and even approximate age ranges. The tradeoff is length: Claude averaged 48 words for portraits, which is excessive for alt text. GPT-4o struck a better balance at 28 words with strong accuracy (8.6).
+          <strong className="text-gray-900 dark:text-[#E5E5E5]">Claude wins on portraits</strong> with an accuracy score of 8.9. the highest single-category score in the entire benchmark. Claude excels at detecting emotions, context clues (e.g., &quot;woman laughing during outdoor celebration&quot;), and even approximate age ranges. The tradeoff is length: Claude averaged 48 words for portraits, which is excessive for alt text. GPT-4o struck a better balance at 28 words with strong accuracy (8.6).
         </p>
 
         {/* Landscapes */}
@@ -468,7 +468,7 @@ export default function AiAltTextAccuracyTest2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          <strong className="text-gray-900 dark:text-[#E5E5E5]">Gemini wins on landscapes</strong> with the highest overall category score of 8.2. What sets Gemini apart here is its ability to identify specific locations. Where GPT-4o might describe &quot;a mountain range with a lake in the foreground,&quot; Gemini consistently identified landmarks: &quot;Mount Fuji reflected in Lake Kawaguchi at sunrise.&quot; This location specificity boosts both SEO value and accessibility — a screen reader user learns <em>where</em> the photo was taken, not just what it contains.
+          <strong className="text-gray-900 dark:text-[#E5E5E5]">Gemini wins on landscapes</strong> with the highest overall category score of 8.2. What sets Gemini apart here is its ability to identify specific locations. Where GPT-4o might describe &quot;a mountain range with a lake in the foreground,&quot; Gemini consistently identified landmarks: &quot;Mount Fuji reflected in Lake Kawaguchi at sunrise.&quot; This location specificity boosts both SEO value and accessibility. a screen reader user learns <em>where</em> the photo was taken, not just what it contains.
         </p>
 
         {/* E-commerce */}
@@ -518,8 +518,8 @@ export default function AiAltTextAccuracyTest2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          <strong className="text-gray-900 dark:text-[#E5E5E5]">Gemini dominates e-commerce</strong> with an SEO score of 8.4 — the highest individual SEO score in the entire benchmark. Gemini naturally includes product-relevant keywords that match actual search queries: material (leather, stainless steel, cotton), color, product type, and style descriptors. For a pair of running shoes, Gemini generated{" "}
-          <em className="text-gray-500 dark:text-[#737373]">&quot;Black Nike Air Max 270 running shoes with white sole on white background&quot;</em> — which contains at least four searchable keywords. Claude described the same image with 52 words including information about the mesh upper texture that no one searches for.
+          <strong className="text-gray-900 dark:text-[#E5E5E5]">Gemini dominates e-commerce</strong> with an SEO score of 8.4. the highest individual SEO score in the entire benchmark. Gemini naturally includes product-relevant keywords that match actual search queries: material (leather, stainless steel, cotton), color, product type, and style descriptors. For a pair of running shoes, Gemini generated{" "}
+          <em className="text-gray-500 dark:text-[#737373]">&quot;Black Nike Air Max 270 running shoes with white sole on white background&quot;</em>. which contains at least four searchable keywords. Claude described the same image with 52 words including information about the mesh upper texture that no one searches for.
         </p>
 
         {/* Screenshots */}
@@ -569,7 +569,7 @@ export default function AiAltTextAccuracyTest2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          <strong className="text-gray-900 dark:text-[#E5E5E5]">GPT-4o dominates screenshots</strong> with a category-best accuracy of 8.8. GPT-4o&apos;s strength is its ability to read text embedded in images — button labels, menu items, error messages, and code snippets. For a screenshot of a VS Code editor, GPT-4o generated{" "}
+          <strong className="text-gray-900 dark:text-[#E5E5E5]">GPT-4o dominates screenshots</strong> with a category-best accuracy of 8.8. GPT-4o&apos;s strength is its ability to read text embedded in images. button labels, menu items, error messages, and code snippets. For a screenshot of a VS Code editor, GPT-4o generated{" "}
           <em className="text-gray-500 dark:text-[#737373]">&quot;VS Code editor showing a TypeScript file with a React component and terminal panel open below&quot;</em>. Gemini described it generically as &quot;code editor with dark theme showing programming code.&quot; For documentation, tutorials, and SaaS marketing, GPT-4o&apos;s OCR-like capabilities make it the clear winner.
         </p>
 
@@ -622,7 +622,7 @@ export default function AiAltTextAccuracyTest2026Page() {
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
           <strong className="text-gray-900 dark:text-[#E5E5E5]">Food is a virtual tie between GPT-4o and Gemini</strong> (8.0 vs 7.9 overall). Both models are strong at identifying ingredients and dish types. The differentiator is approach: Gemini tends to name the dish ({" "}
           <em className="text-gray-500 dark:text-[#737373]">&quot;Margherita pizza with fresh basil on wooden board&quot;</em>), while GPT-4o describes components ({" "}
-          <em className="text-gray-500 dark:text-[#737373]">&quot;Pizza topped with mozzarella, tomato sauce, and fresh basil leaves on a rustic wooden cutting board&quot;</em>). For food blogs and recipe sites, GPT-4o&apos;s ingredient-level detail is slightly more useful for SEO — people search for &quot;mozzarella basil pizza&quot; more than just &quot;margherita pizza.&quot;
+          <em className="text-gray-500 dark:text-[#737373]">&quot;Pizza topped with mozzarella, tomato sauce, and fresh basil leaves on a rustic wooden cutting board&quot;</em>). For food blogs and recipe sites, GPT-4o&apos;s ingredient-level detail is slightly more useful for SEO. people search for &quot;mozzarella basil pizza&quot; more than just &quot;margherita pizza.&quot;
         </p>
 
         {/* 5 Key Findings */}
@@ -648,7 +648,7 @@ export default function AiAltTextAccuracyTest2026Page() {
               2. Claude is the most accurate but often too verbose
             </p>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
-              Claude 3.5 Sonnet achieved an 8.7 accuracy score — 0.5 points above Gemini. It was the only model that consistently identified subtle details: the type of wood in a table, the approximate decade of clothing styles, the species of plants in the background. However, Claude averaged <strong className="text-gray-900 dark:text-[#E5E5E5]">45 words per description</strong> compared to Gemini&apos;s 22 words. For{" "}
+              Claude 3.5 Sonnet achieved an 8.7 accuracy score. 0.5 points above Gemini. It was the only model that consistently identified subtle details: the type of wood in a table, the approximate decade of clothing styles, the species of plants in the background. However, Claude averaged <strong className="text-gray-900 dark:text-[#E5E5E5]">45 words per description</strong> compared to Gemini&apos;s 22 words. For{" "}
               <Link
                 href="/blog/ai-image-renaming-seo-guide"
                 className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
