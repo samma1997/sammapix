@@ -92,7 +92,7 @@ const nextConfig = {
           },
           // Cross-Origin policies — prevent data leakage via Spectre-class attacks
           { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
-          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
           {
             key: "Content-Security-Policy",
             value: [
