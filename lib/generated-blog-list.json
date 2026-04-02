@@ -14,6 +14,34 @@
     "url": "/blog/ai-alt-text-accuracy-test-2026"
   },
   {
+    "slug": "image-compression-benchmark-2026",
+    "title": "Methodology",
+    "description": "100 images, 10 tools, 4 quality levels. We measured file size reduction, SSIMULACRA 2 visual quality, processing speed, and privacy for every major co",
+    "keywords": [
+      "image compression benchmark 2026",
+      "tinypng vs squoosh",
+      "best image compression tool",
+      "image compression comparison test",
+      "tinypng alternative benchmark"
+    ],
+    "publishedDate": "2026-04-02",
+    "url": "/blog/image-compression-benchmark-2026"
+  },
+  {
+    "slug": "image-compression-statistics-2026",
+    "title": "Web performance & page weight",
+    "description": "67 cited statistics on image compression, format adoption, Core Web Vitals impact, and e-commerce conversion rates. The definitive reference for 2026.",
+    "keywords": [
+      "image compression statistics",
+      "image optimization stats 2026",
+      "web performance image data",
+      "webp adoption rate",
+      "avif adoption statistics"
+    ],
+    "publishedDate": "2026-04-02",
+    "url": "/blog/image-compression-statistics-2026"
+  },
+  {
     "slug": "passport-photo-requirements-2026",
     "title": "Quick reference table: 20 countries",
     "description": "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo ma",
@@ -26,20 +54,6 @@
     ],
     "publishedDate": "2026-04-02",
     "url": "/blog/passport-photo-requirements-2026"
-  },
-  {
-    "slug": "image-compression-benchmark-2026",
-    "title": "Methodology",
-    "description": "We compressed 500 real photos across JPEG, WebP, AVIF, PNG, and GIF at quality 80. Full data tables, category breakdowns, and recommendations inside.",
-    "keywords": [
-      "image compression benchmark 2026",
-      "webp vs jpeg vs avif",
-      "best image format 2026",
-      "image compression comparison",
-      "webp compression ratio"
-    ],
-    "publishedDate": "2026-04-01",
-    "url": "/blog/image-compression-benchmark-2026"
   },
   {
     "slug": "ai-rename-travel-photos-seo-results",
@@ -156,7 +170,7 @@
   {
     "slug": "best-tinypng-alternative-2026",
     "title": "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
-    "description": "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser, no uploads, no file limits, 25 tools free. See th",
+    "description": "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser, no uploads, no file limits, 27 tools free. See th",
     "keywords": [
       "tinypng alternative",
       "tinypng vs sammapix",

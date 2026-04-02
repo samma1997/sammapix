@@ -50,6 +50,8 @@ const RemoveBgClient = dynamic(() => import("@/components/tools/RemoveBgClient")
 const UpscaleClient = dynamic(() => import("@/components/tools/UpscaleClient"));
 const PassportPhotoClient = dynamic(() => import("@/components/tools/PassportPhotoClient"));
 const ImageToTextClient = dynamic(() => import("@/components/tools/ImageToTextClient"));
+const JpgToPdfClient = dynamic(() => import("@/components/tools/JpgToPdfClient"));
+const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverterClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -77,6 +79,8 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   upscale:       UpscaleClient,
   "passport-photo": PassportPhotoClient,
   "image-to-text": ImageToTextClient,
+  "jpg-to-pdf": JpgToPdfClient,
+  jxl: JxlConverterClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -127,6 +131,8 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   upscale:       { Icon: IconUpscale,  accent: "#8B5CF6" },
   "passport-photo": { Icon: IconPassportPhoto, accent: "#3B82F6" },
   "image-to-text": { Icon: IconAIRename, accent: "#F59E0B" },
+  "jpg-to-pdf": { Icon: IconCompress, accent: "#DC2626" },
+  jxl: { Icon: IconWebP, accent: "#F59E0B" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -382,6 +388,26 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Review & download", desc: "Browse by category, remove dupes, download organized ZIP." },
     ],
     proTip: { text: "Works best with 50+ photos. The more you add, the smarter the sorting.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
+  },
+  "jpg-to-pdf": {
+    label: "JPG to PDF",
+    tagline: "Merge multiple images into a single PDF document.",
+    steps: [
+      { title: "Drop images", desc: "Add JPG, PNG, or WebP files." },
+      { title: "Reorder & configure", desc: "Drag to reorder. Pick page size." },
+      { title: "Download PDF", desc: "Get a single merged PDF file." },
+    ],
+    proTip: { text: "Use Compress first to reduce image sizes before creating the PDF.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
+  },
+  jxl: {
+    label: "JXL Converter",
+    tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa.",
+    steps: [
+      { title: "Choose direction", desc: "JXL to Image or Image to JXL." },
+      { title: "Drop files", desc: "Add .jxl files or standard images." },
+      { title: "Convert & download", desc: "Get converted files individually or as ZIP." },
+    ],
+    proTip: { text: "JPEG XL offers 30-60% better compression than JPEG.", linkLabel: "Try WebP Converter", linkHref: "/dashboard/tools/webp" },
   },
 };
 

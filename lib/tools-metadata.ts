@@ -258,6 +258,27 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["remove-bg", "croproatio", "resizepack", "compress"],
     relatedBlogSlugs: [],
   },
+  "jpg-to-pdf": {
+    id: "jpg-to-pdf",
+    name: "JPG to PDF",
+    shortDesc: "Merge images into a single PDF",
+    slug: "/tools/jpg-to-pdf",
+    category: "optimize",
+    relatedTools: ["pdf-to-image", "compress", "resizepack", "croproatio"],
+    relatedBlogSlugs: [],
+  },
+  jxl: {
+    id: "jxl",
+    name: "JXL Converter",
+    shortDesc: "Convert JPEG XL to/from JPG, PNG, WebP",
+    slug: "/tools/jxl",
+    category: "optimize",
+    relatedTools: ["webp", "heic", "compress", "pdf-to-image"],
+    relatedBlogSlugs: [
+      "best-image-format-for-web-2026",
+      "webp-vs-avif-vs-jpeg-comparison",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

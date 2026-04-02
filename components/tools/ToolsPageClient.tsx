@@ -492,6 +492,24 @@ const TOOLS: ToolWithCategory[] = [
     Icon: IconImageToText,
     category: ["AI"],
   },
+  {
+    name: "JPG to PDF",
+    href: "/tools/jpg-to-pdf",
+    tagline: "Merge multiple JPG, PNG, or WebP images into a single PDF document.",
+    accent: "#DC2626",
+    badges: ["Free", "Client-side"],
+    Icon: IconPdfToImage,
+    category: ["Optimize"],
+  },
+  {
+    name: "JXL Converter",
+    href: "/tools/jxl",
+    tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa. Next-gen format, 30-60% smaller.",
+    accent: "#F59E0B",
+    badges: ["Free", "Next-Gen"],
+    Icon: IconWebP,
+    category: ["Optimize"],
+  },
 ];
 
 // ─── Category tabs config ─────────────────────────────────────────────────────

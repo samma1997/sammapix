@@ -219,7 +219,7 @@ function ShareButton() {
       try {
         await navigator.share({
           title: "SammaPix - Free Image Tools",
-          text: "I just optimized my images with SammaPix \u2014 25 free browser-based tools, no uploads needed!",
+          text: "I just optimized my images with SammaPix \u2014 27 free browser-based tools, no uploads needed!",
           url: window.location.href,
         });
       } catch {

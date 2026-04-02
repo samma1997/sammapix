@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 const tableRows = [
   { feature: "Price", sammapix: "Free (Pro $9/mo)", squoosh: "Free (no Pro plan)" },
-  { feature: "Tools available", sammapix: "25+", squoosh: "1 (compress/convert)" },
+  { feature: "Tools available", sammapix: "27+", squoosh: "1 (compress/convert)" },
   { feature: "Browser-based (no upload)", sammapix: true, squoosh: true },
   { feature: "AI features (rename, alt text, sort)", sammapix: true, squoosh: false },
   { feature: "Batch processing", sammapix: "20 free / 500 Pro", squoosh: "1 file at a time" },
@@ -195,7 +195,7 @@ export default function VsSquooshPage() {
       <div className="mb-14 p-6 border border-indigo-200 bg-indigo-50/30 rounded-md">
         <h2 className="text-lg font-semibold text-gray-900 mb-3">Verdict: SammaPix vs Squoosh</h2>
         <p className="text-sm text-gray-700 leading-relaxed mb-3">
-          <strong>SammaPix is better for</strong> batch workflows (process 20+ images at once), AI-powered renaming and alt text, EXIF removal, mobile use, and anyone who needs an actively maintained tool with 25+ features. Compression quality is comparable.
+          <strong>SammaPix is better for</strong> batch workflows (process 20+ images at once), AI-powered renaming and alt text, EXIF removal, mobile use, and anyone who needs an actively maintained tool with 27+ features. Compression quality is comparable.
         </p>
         <p className="text-sm text-gray-700 leading-relaxed">
           <strong>Squoosh is better for</strong> developers who need fine-grained codec control (MozJPEG, OxiPNG, AVIF encoder settings) and a side-by-side before/after preview on a single image. However, Squoosh was archived by Google in 2023 and receives no updates.
@@ -389,7 +389,7 @@ export default function VsSquooshPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | Squoosh: Free (no Pro plan)" },
-                { "@type": "ListItem", "position": 2, name: "Tools available", description: "SammaPix: 25+ tools | Squoosh: 1 (compress/convert)" },
+                { "@type": "ListItem", "position": 2, name: "Tools available", description: "SammaPix: 27+ tools | Squoosh: 1 (compress/convert)" },
                 { "@type": "ListItem", "position": 3, name: "Browser-based (no upload)", description: "SammaPix: Yes | Squoosh: Yes — both process in-browser" },
                 { "@type": "ListItem", "position": 4, name: "AI features", description: "SammaPix: Yes (AI rename, alt text, smart sort via Google Gemini) | Squoosh: No AI features" },
                 { "@type": "ListItem", "position": 5, name: "Batch processing", description: "SammaPix: 20 free / 500 Pro | Squoosh: 1 file at a time only" },
@@ -448,7 +448,7 @@ export default function VsSquooshPage() {
                 name: "What can SammaPix do that Squoosh can't?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "SammaPix offers 25+ tools vs Squoosh's single compress/convert tool. Key features Squoosh lacks: batch processing of 20+ files at once with ZIP download, AI-powered image renaming and alt text generation via Google Gemini, EXIF metadata removal for privacy, HEIC and GIF support, mobile-friendly interface, and active maintenance (Squoosh was archived in 2023).",
+                  text: "SammaPix offers 27+ tools vs Squoosh's single compress/convert tool. Key features Squoosh lacks: batch processing of 20+ files at once with ZIP download, AI-powered image renaming and alt text generation via Google Gemini, EXIF metadata removal for privacy, HEIC and GIF support, mobile-friendly interface, and active maintenance (Squoosh was archived in 2023).",
                 },
               },
               {

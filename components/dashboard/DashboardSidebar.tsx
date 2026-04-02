@@ -95,11 +95,13 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Enhance Resolution", slug: "upscale", href: "/dashboard/tools/upscale", icon: <Maximize2 className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Passport Photo", slug: "passport-photo", href: "/dashboard/tools/passport-photo", icon: <UserCheck className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Image to Text", slug: "image-to-text", href: "/dashboard/tools/image-to-text", icon: <ScanText className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "JPG to PDF", slug: "jpg-to-pdf", href: "/dashboard/tools/jpg-to-pdf", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "JXL Converter", slug: "jxl", href: "/dashboard/tools/jxl", icon: <Sparkles className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "heic", "resizepack", "croproatio", "remove-bg", "upscale"] },
+  { label: "Optimize", slugs: ["compress", "webp", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit"] },

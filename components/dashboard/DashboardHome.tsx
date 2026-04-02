@@ -532,6 +532,28 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     category: ["Organize"],
     keywords: ["rename many files", "bulk rename", "pattern rename", "sequential", "number files", "prefix", "suffix"],
   },
+  {
+    name: "JPG to PDF",
+    slug: "jpg-to-pdf",
+    href: "/dashboard/tools/jpg-to-pdf",
+    tagline: "Merge multiple images into a single PDF. Reorder pages, choose page size.",
+    accent: "#DC2626",
+    badges: ["Free", "No upload"],
+    Icon: IconCompress,
+    category: ["Optimize"],
+    keywords: ["jpg to pdf", "images to pdf", "merge pdf", "combine images", "photo to pdf", "pictures to document", "create pdf", "make pdf"],
+  },
+  {
+    name: "JXL Converter",
+    slug: "jxl",
+    href: "/dashboard/tools/jxl",
+    tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa. Next-gen format.",
+    accent: "#F59E0B",
+    badges: ["Free", "Next-Gen"],
+    Icon: IconWebP,
+    category: ["Optimize"],
+    keywords: ["jxl", "jpeg xl", "jxl to jpg", "jxl to png", "convert jxl", "next gen format", "jxl converter", "open jxl"],
+  },
 ];
 
 // ─── Search icon ─────────────────────────────────────────────────────────────

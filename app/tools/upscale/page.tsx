@@ -90,7 +90,7 @@ const faqs = [
   {
     question: "Is this free?",
     answer:
-      "Yes! Free users get 5 upscales per day with images up to 1500px. Pro users ($9/month) get 100 upscales per day with no size limits, plus access to all 25 SammaPix tools with higher limits.",
+      "Yes! Free users get 5 upscales per day with images up to 1500px. Pro users ($9/month) get 100 upscales per day with no size limits, plus access to all 27 SammaPix tools with higher limits.",
   },
 ];
 

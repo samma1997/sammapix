@@ -211,6 +211,10 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Photo Map", href: "/tools/travelmap", tagline: "Interactive map from photos.", accent: "#3B82F6", badge: "Free", Icon: IconTravelMap, category: "Organize" },
   { name: "Cull", href: "/tools/cull", tagline: "Rate and cull a shoot.", accent: "#F43F5E", badge: "Free", Icon: IconCull, category: "Organize" },
   { name: "Batch Rename", href: "/tools/batchname", tagline: "Rename files with a pattern.", accent: "#F59E0B", badge: "Free", Icon: IconBatchName, category: "Organize" },
+
+  // New tools
+  { name: "JPG to PDF", href: "/tools/jpg-to-pdf", tagline: "Merge images into a single PDF.", accent: "#DC2626", badge: "Free", Icon: IconPdfToImage, category: "Optimize", isNew: true },
+  { name: "JXL Converter", href: "/tools/jxl", tagline: "JPEG XL to/from JPG, PNG, WebP.", accent: "#F59E0B", badge: "Free", Icon: IconWebP, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
