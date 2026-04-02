@@ -22,6 +22,8 @@ import {
   IconRemoveBg,
   IconUpscale,
   IconPassportPhoto,
+  IconJpgToPdf,
+  IconJxl,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -50,6 +52,8 @@ const RemoveBgClient = dynamic(() => import("@/components/tools/RemoveBgClient")
 const UpscaleClient = dynamic(() => import("@/components/tools/UpscaleClient"));
 const PassportPhotoClient = dynamic(() => import("@/components/tools/PassportPhotoClient"));
 const ImageToTextClient = dynamic(() => import("@/components/tools/ImageToTextClient"));
+const JpgToPdfClient = dynamic(() => import("@/components/tools/JpgToPdfClient"));
+const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverterClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -77,6 +81,8 @@ const TOOL_MAP: Record<string, React.ComponentType> = {
   upscale:       UpscaleClient,
   "passport-photo": PassportPhotoClient,
   "image-to-text": ImageToTextClient,
+  "jpg-to-pdf": JpgToPdfClient,
+  jxl: JxlConverterClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -127,6 +133,8 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   upscale:       { Icon: IconUpscale,  accent: "#8B5CF6" },
   "passport-photo": { Icon: IconPassportPhoto, accent: "#3B82F6" },
   "image-to-text": { Icon: IconAIRename, accent: "#F59E0B" },
+  "jpg-to-pdf": { Icon: IconJpgToPdf, accent: "#DC2626" },
+  jxl: { Icon: IconJxl, accent: "#F59E0B" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -383,45 +391,25 @@ const TOOL_DATA: Record<string, ToolData> = {
     ],
     proTip: { text: "Works best with 50+ photos. The more you add, the smarter the sorting.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
-  "remove-bg": {
-    label: "Clean Background",
-    tagline: "Remove image backgrounds instantly with AI in your browser.",
+  "jpg-to-pdf": {
+    label: "JPG to PDF",
+    tagline: "Merge multiple images into a single PDF document.",
     steps: [
-      { title: "Drop your images", desc: "Add JPG, PNG, or WebP photos." },
-      { title: "AI removes background", desc: "The ONNX model runs in your browser — nothing uploaded." },
-      { title: "Download transparent PNG", desc: "Get PNG files with transparent background." },
+      { title: "Drop images", desc: "Add JPG, PNG, or WebP files." },
+      { title: "Reorder & configure", desc: "Drag to reorder. Pick page size." },
+      { title: "Download PDF", desc: "Get a single merged PDF file." },
     ],
-    proTip: { text: "Works best with clear subjects. Try Passport Photo for ID photos.", linkLabel: "Try Passport Photo", linkHref: "/dashboard/tools/passport-photo" },
+    proTip: { text: "Use Compress first to reduce image sizes before creating the PDF.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
   },
-  upscale: {
-    label: "Enhance Resolution",
-    tagline: "AI upscale images 2x or 4x without losing quality.",
+  jxl: {
+    label: "JXL Converter",
+    tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa.",
     steps: [
-      { title: "Drop an image", desc: "Add a photo you want to enlarge." },
-      { title: "Choose 2x or 4x", desc: "Select the upscale factor." },
-      { title: "Download enhanced", desc: "Get a larger, sharper PNG." },
+      { title: "Choose direction", desc: "JXL to Image or Image to JXL." },
+      { title: "Drop files", desc: "Add .jxl files or standard images." },
+      { title: "Convert & download", desc: "Get converted files individually or as ZIP." },
     ],
-    proTip: { text: "Free: 5 upscales/day (max 1500px). Pro: 100/day, no size limit.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
-  },
-  "passport-photo": {
-    label: "Passport Photo",
-    tagline: "Auto crop + white background for passport and visa photos.",
-    steps: [
-      { title: "Upload a portrait", desc: "Add a photo with your face clearly visible." },
-      { title: "Select country", desc: "Choose US, EU, UK, India, China, or Canada preset." },
-      { title: "Download ready photo", desc: "Get a JPG sized to official requirements." },
-    ],
-    proTip: { text: "Enable 'Remove background' for best results with non-white backgrounds.", linkLabel: "Try Clean Background", linkHref: "/dashboard/tools/remove-bg" },
-  },
-  "image-to-text": {
-    label: "Image to Text",
-    tagline: "Extract text from images with AI-powered OCR.",
-    steps: [
-      { title: "Upload an image", desc: "Add a photo, screenshot, or scanned document." },
-      { title: "AI extracts text", desc: "Google Gemini reads all visible text." },
-      { title: "Copy or download", desc: "Copy to clipboard or save as .txt file." },
-    ],
-    proTip: { text: "Works with 50+ languages. Best with printed text and clear photos.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
+    proTip: { text: "JPEG XL offers 30-60% better compression than JPEG.", linkLabel: "Try WebP Converter", linkHref: "/dashboard/tools/webp" },
   },
 };
 

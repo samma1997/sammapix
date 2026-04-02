@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 const tableRows = [
   { feature: "Price", sammapix: "Free (Pro $9/mo)", tinypng: "Free (Pro $25/mo)" },
-  { feature: "Tools available", sammapix: "25+", tinypng: "3 (compress, resize, WebP input)" },
+  { feature: "Tools available", sammapix: "27+", tinypng: "3 (compress, resize, WebP input)" },
   { feature: "Browser-based (no upload)", sammapix: true, tinypng: false },
   { feature: "AI features (rename, alt text, sort)", sammapix: true, tinypng: false },
   { feature: "Batch processing", sammapix: "20 free / 500 Pro", tinypng: "20 free / unlimited Pro" },
@@ -191,7 +191,7 @@ export default function VsTinyPngPage() {
       <div className="mb-14 p-6 border border-indigo-200 bg-indigo-50/30 rounded-md">
         <h2 className="text-lg font-semibold text-gray-900 mb-3">Verdict: SammaPix vs TinyPNG</h2>
         <p className="text-sm text-gray-700 leading-relaxed mb-3">
-          <strong>SammaPix is better for</strong> users who want WebP conversion, AI-powered renaming, privacy (no server uploads), quality control, and a cheaper Pro plan ($9/mo vs $25/mo). It supports 25+ tools and 6 image formats including HEIC and AVIF.
+          <strong>SammaPix is better for</strong> users who want WebP conversion, AI-powered renaming, privacy (no server uploads), quality control, and a cheaper Pro plan ($9/mo vs $25/mo). It supports 27+ tools and 6 image formats including HEIC and AVIF.
         </p>
         <p className="text-sm text-gray-700 leading-relaxed">
           <strong>TinyPNG is better for</strong> WordPress users who need a plugin, teams that rely on TinyPNG&apos;s API for automated pipelines, and users who prefer a simpler single-purpose compressor.
@@ -320,7 +320,7 @@ export default function VsTinyPngPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | TinyPNG: Free (Pro $25/mo)" },
-                { "@type": "ListItem", "position": 2, name: "Tools available", description: "SammaPix: 25+ tools | TinyPNG: 3 (compress, resize, WebP input)" },
+                { "@type": "ListItem", "position": 2, name: "Tools available", description: "SammaPix: 27+ tools | TinyPNG: 3 (compress, resize, WebP input)" },
                 { "@type": "ListItem", "position": 3, name: "Browser-based (no upload)", description: "SammaPix: Yes- 100% browser-based, files never leave device | TinyPNG: No- uploads to server" },
                 { "@type": "ListItem", "position": 4, name: "AI features", description: "SammaPix: Yes (AI rename, alt text, smart sort via Google Gemini) | TinyPNG: No AI features" },
                 { "@type": "ListItem", "position": 5, name: "Batch processing", description: "SammaPix: 20 free / 500 Pro | TinyPNG: 20 free / unlimited Pro" },
@@ -378,7 +378,7 @@ export default function VsTinyPngPage() {
                 name: "What can SammaPix do that TinyPNG can't?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "SammaPix offers 25+ image tools compared to TinyPNG's 3. Unique features include: WebP/HEIC/AVIF conversion, AI-powered image renaming and alt text generation using Google Gemini, batch processing with ZIP download, quality control slider, EXIF data removal, and 100% in-browser processing with no file uploads to servers. SammaPix also supports files up to 20 MB on the free plan vs TinyPNG's 5 MB limit.",
+                  text: "SammaPix offers 27+ image tools compared to TinyPNG's 3. Unique features include: WebP/HEIC/AVIF conversion, AI-powered image renaming and alt text generation using Google Gemini, batch processing with ZIP download, quality control slider, EXIF data removal, and 100% in-browser processing with no file uploads to servers. SammaPix also supports files up to 20 MB on the free plan vs TinyPNG's 5 MB limit.",
                 },
               },
               {
@@ -386,7 +386,7 @@ export default function VsTinyPngPage() {
                 name: "How much does SammaPix cost compared to TinyPNG?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "SammaPix is free for core tools with a Pro plan at $9/month. TinyPNG is free for basic compression with a Pro plan at $25/month. SammaPix Pro is 64% cheaper and includes 25+ tools, AI rename, 500-file batch processing, and 50 MB file size limit.",
+                  text: "SammaPix is free for core tools with a Pro plan at $9/month. TinyPNG is free for basic compression with a Pro plan at $25/month. SammaPix Pro is 64% cheaper and includes 27+ tools, AI rename, 500-file batch processing, and 50 MB file size limit.",
                 },
               },
               {

@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 const tableRows: { feature: string; sammapix: boolean | string; iloveimg: boolean | string }[] = [
   { feature: "Price", sammapix: "Free (Pro $9/mo)", iloveimg: "Free (Premium $4/mo)" },
-  { feature: "Tools available", sammapix: "25+", iloveimg: "30+ (image + PDF)" },
+  { feature: "Tools available", sammapix: "27+", iloveimg: "30+ (image + PDF)" },
   { feature: "Browser-based (no upload)", sammapix: true, iloveimg: false },
   { feature: "AI features (rename, alt text, sort)", sammapix: true, iloveimg: false },
   { feature: "Batch processing", sammapix: "20 free / 500 Pro", iloveimg: "200 MB free / 4 GB Premium" },
@@ -295,7 +295,7 @@ export default function VsILoveImgPage() {
               name: "Feature Comparison",
               itemListElement: [
                 { "@type": "ListItem", "position": 1, name: "Price", description: "SammaPix: Free (Pro $9/mo) | iLoveIMG: Free (Premium $4/mo)" },
-                { "@type": "ListItem", "position": 2, name: "Tools available", description: "SammaPix: 25+ image tools | iLoveIMG: 30+ image and PDF tools" },
+                { "@type": "ListItem", "position": 2, name: "Tools available", description: "SammaPix: 27+ image tools | iLoveIMG: 30+ image and PDF tools" },
                 { "@type": "ListItem", "position": 3, name: "Browser-based (no upload)", description: "SammaPix: Yes- 100% browser-based, files never leave device | iLoveIMG: No- uploads to server" },
                 { "@type": "ListItem", "position": 4, name: "AI features", description: "SammaPix: Yes (AI rename, alt text, smart sort via Google Gemini) | iLoveIMG: No AI features" },
                 { "@type": "ListItem", "position": 5, name: "Batch processing", description: "SammaPix: 20 free / 500 Pro | iLoveIMG: 200 MB free / 4 GB Premium" },

@@ -26,6 +26,16 @@ const SUBREDDIT_COLORS: Record<string, string> = {
   graphic_design: "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
   hackernews: "bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400",
   devto: "bg-violet-50 text-violet-700 dark:bg-violet-900/20 dark:text-violet-400",
+  AskReddit: "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400",
+  DoesAnybodyElse: "bg-pink-50 text-pink-600 dark:bg-pink-900/20 dark:text-pink-400",
+  NoStupidQuestions: "bg-teal-50 text-teal-600 dark:bg-teal-900/20 dark:text-teal-400",
+  CasualConversation: "bg-cyan-50 text-cyan-600 dark:bg-cyan-900/20 dark:text-cyan-400",
+  LifeProTips: "bg-lime-50 text-lime-600 dark:bg-lime-900/20 dark:text-lime-400",
+  TrueOffMyChest: "bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-900/20 dark:text-fuchsia-400",
+  unpopularopinion: "bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400",
+  Showerthoughts: "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400",
+  SideProject: "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400",
+  Entrepreneur: "bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400",
 };
 
 /* ─── SubredditBadge ─── */
@@ -541,7 +551,7 @@ export default function RedditPage() {
         </div>
       </div>
 
-      {/* Main layout — 3 sections stacked */}
+      {/* Main layout — grouped by day */}
       {loading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
@@ -552,116 +562,104 @@ export default function RedditPage() {
           ))}
         </div>
       ) : (() => {
-        const postsToCreate = toComment.filter(p => p.title.startsWith("🟢"));
-        const postsToCommentOn = toComment.filter(p => p.title.startsWith("💬"));
-        const otherToComment = toComment.filter(p => !p.title.startsWith("🟢") && !p.title.startsWith("💬"));
+        // Group by day label from title prefix
+        const today = toComment.filter(p => p.title.includes("OGGI"));
+        const tomorrow = toComment.filter(p => p.title.includes("DOMANI") && !p.title.includes("DOPO"));
+        const dayAfter = toComment.filter(p => p.title.includes("DOPODOMANI"));
+        const weekend = toComment.filter(p => p.title.includes("WEEKEND"));
+        const strategic = toComment.filter(p => p.title.includes("DOPO") && p.title.includes("KARMA"));
+        const other = toComment.filter(p =>
+          !p.title.includes("OGGI") &&
+          !p.title.includes("DOMANI") &&
+          !p.title.includes("DOPODOMANI") &&
+          !p.title.includes("WEEKEND") &&
+          !(p.title.includes("DOPO") && p.title.includes("KARMA"))
+        );
+
+        const dayGroups = [
+          { label: "Oggi", posts: today, color: "green", dot: "bg-green-500", badge: "bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400", open: true },
+          { label: "Domani", posts: tomorrow, color: "amber", dot: "bg-amber-400", badge: "bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400", open: false },
+          { label: "Dopodomani", posts: dayAfter, color: "amber", dot: "bg-amber-300", badge: "bg-amber-50 dark:bg-amber-900/20 text-amber-500 dark:text-amber-400", open: false },
+          { label: "Weekend", posts: weekend, color: "blue", dot: "bg-blue-400", badge: "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400", open: false },
+          { label: "Strategici (200+ karma)", posts: strategic, color: "purple", dot: "bg-purple-500", badge: "bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400", open: false },
+        ].filter(g => g.posts.length > 0);
+
+        if (other.length > 0) {
+          dayGroups.push({ label: "Altri", posts: other, color: "gray", dot: "bg-[#A3A3A3]", badge: "bg-[#F5F5F5] dark:bg-[#252525] text-[#737373]", open: false });
+        }
 
         return (
-          <div className="space-y-8">
-            {/* ═══ SEZIONE 1: POST DA CREARE OGGI ═══ */}
-            {postsToCreate.length > 0 && (() => {
-              const todayPosts = postsToCreate.slice(0, 2);
-              const laterPosts = postsToCreate.slice(2);
-              return (
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
-                    <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                      Post da creare oggi
-                    </h2>
-                    <span className="text-[10px] bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded-[4px] font-medium">
-                      {todayPosts.length}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-[#A3A3A3] mb-3">
-                    Clicca il link, copia il testo e pubblicalo come nuovo post. Max 2-3 post al giorno per non sembrare spam.
-                  </p>
-                  <div className="space-y-2.5">
-                    {todayPosts.map((post) => (
-                      <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
-                    ))}
-                  </div>
-                  {laterPosts.length > 0 && (
-                    <details className="mt-3">
-                      <summary className="text-[11px] text-[#A3A3A3] cursor-pointer hover:text-[#737373] transition-colors">
-                        Prossimi giorni ({laterPosts.length} post in coda)
-                      </summary>
-                      <div className="space-y-2.5 mt-2.5 opacity-50">
-                        {laterPosts.map((post) => (
-                          <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
-                        ))}
-                      </div>
-                    </details>
-                  )}
-                </div>
-              );
-            })()}
-
-            {/* ═══ SEZIONE 2: COMMENTI DA LASCIARE OGGI ═══ */}
-            {(postsToCommentOn.length > 0 || otherToComment.length > 0) && (() => {
-              const allComments = [...postsToCommentOn, ...otherToComment];
-              const todayComments = allComments.slice(0, 5);
-              const laterComments = allComments.slice(5);
-              return (
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
-                    <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                      Commenti da lasciare oggi
-                    </h2>
-                    <span className="text-[10px] bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-1.5 py-0.5 rounded-[4px] font-medium">
-                      {todayComments.length}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-[#A3A3A3] mb-3">
-                    Vai sul post, copia il commento e incollalo. Obiettivo: 5 commenti al giorno.
-                  </p>
-                  <div className="space-y-2.5">
-                    {todayComments.map((post) => (
-                      <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
-                    ))}
-                  </div>
-                  {laterComments.length > 0 && (
-                    <details className="mt-3">
-                      <summary className="text-[11px] text-[#A3A3A3] cursor-pointer hover:text-[#737373] transition-colors">
-                        Prossimi giorni ({laterComments.length} commenti in coda)
-                      </summary>
-                      <div className="space-y-2.5 mt-2.5 opacity-50">
-                        {laterComments.map((post) => (
-                          <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
-                        ))}
-                      </div>
-                    </details>
-                  )}
-                </div>
-              );
-            })()}
+          <div className="space-y-6">
+            {dayGroups.map((group) => (
+              <div key={group.label}>
+                {group.open ? (
+                  /* Today section — always open */
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className={`h-2.5 w-2.5 rounded-full ${group.dot}`} />
+                      <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                        {group.label}
+                      </h2>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-[4px] font-medium ${group.badge}`}>
+                        {group.posts.length}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#A3A3A3] mb-3">
+                      Copia il testo e pubblicalo. Segna come fatto quando hai postato.
+                    </p>
+                    <div className="space-y-2.5">
+                      {group.posts.map((post) => (
+                        <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  /* Other sections — collapsed */
+                  <details>
+                    <summary className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity select-none">
+                      <div className={`h-2.5 w-2.5 rounded-full ${group.dot} opacity-50`} />
+                      <span className="text-sm font-medium text-[#737373] dark:text-[#A3A3A3]">
+                        {group.label}
+                      </span>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-[4px] font-medium opacity-60 ${group.badge}`}>
+                        {group.posts.length}
+                      </span>
+                    </summary>
+                    <div className="space-y-2.5 mt-3 opacity-60">
+                      {group.posts.map((post) => (
+                        <PostCard key={post.id} post={post} onStatusChange={handleStatusChange} />
+                      ))}
+                    </div>
+                  </details>
+                )}
+              </div>
+            ))}
 
             {/* Empty state */}
             {toComment.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-sm text-[#A3A3A3]">
-                  Nessun post da commentare
+                  Nessun post in coda
                 </p>
                 <p className="text-xs text-[#D4D4D4] dark:text-[#404040] mt-1">
-                  Usa &quot;Cerca nuovi post&quot; per trovare opportunit&agrave;
+                  Chiedi a Claude di generare nuovi post Reddit per oggi
                 </p>
               </div>
             )}
 
-            {/* ═══ SEZIONE 3: COMPLETATI ═══ */}
+            {/* ═══ COMPLETATI ═══ */}
             {(commented.length > 0 || skipped.length > 0) && (
-              <div>
-                <div className="flex items-center gap-2 mb-3">
+              <details>
+                <summary className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity select-none">
                   <div className="h-2.5 w-2.5 rounded-full bg-[#A3A3A3]" />
-                  <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                  <span className="text-sm font-medium text-[#737373] dark:text-[#A3A3A3]">
                     Completati
-                  </h2>
+                  </span>
                   <span className="text-[10px] bg-[#F5F5F5] dark:bg-[#252525] text-[#737373] px-1.5 py-0.5 rounded-[4px] font-medium">
                     {commented.length + skipped.length}
                   </span>
-                </div>
-                <div className="space-y-2.5">
+                </summary>
+                <div className="space-y-2.5 mt-3 opacity-40">
                   {[...commented, ...skipped].map((post) => (
                     <PostCard
                       key={post.id}
@@ -670,7 +668,7 @@ export default function RedditPage() {
                     />
                   ))}
                 </div>
-              </div>
+              </details>
             )}
           </div>
         );

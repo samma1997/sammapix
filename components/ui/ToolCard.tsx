@@ -519,6 +519,84 @@ export const IconPassportPhoto: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconJpgToPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes jtpdf-stack {
+        0%, 20%  { transform: translateY(0); opacity: 1; }
+        40%      { transform: translateY(-3px); opacity: 0.7; }
+        60%, 100%{ transform: translateY(0); opacity: 1; }
+      }
+      @keyframes jtpdf-merge {
+        0%, 50%  { opacity: 0; transform: scale(0.8); }
+        70%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.8); }
+      }
+      .jtpdf-s1 { animation: jtpdf-stack 2.5s ease-in-out 0s infinite; }
+      .jtpdf-s2 { animation: jtpdf-stack 2.5s ease-in-out 0.15s infinite; }
+      .jtpdf-s3 { animation: jtpdf-stack 2.5s ease-in-out 0.3s infinite; }
+      .jtpdf-pdf { transform-origin: 38px 34px; animation: jtpdf-merge 2.5s ease-in-out infinite; }
+    `}</style>
+    <g className="jtpdf-s1">
+      <rect x="3" y="4" width="16" height="12" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="8" r="2" fill={accent} fillOpacity="0.4"/>
+      <path d="M3 14 L8 10 L14 13 L19 9" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    <g className="jtpdf-s2">
+      <rect x="3" y="19" width="16" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="23" r="2" fill={accent} fillOpacity="0.3"/>
+      <path d="M3 29 L8 25 L14 28 L19 24" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    <g className="jtpdf-s3">
+      <rect x="3" y="34" width="16" height="12" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="38" r="2" fill={accent} fillOpacity="0.2"/>
+    </g>
+    <path d="M22 24 L26 24 M24 22 L26 24 L24 26" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <g className="jtpdf-pdf" style={{ opacity: 0 }}>
+      <rect x="28" y="18" width="18" height="24" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <text x="37" y="34" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+  </svg>
+);
+
+export const IconJxl: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes jxl-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50%      { transform: scale(1.05); opacity: 1; }
+      }
+      @keyframes jxl-arrow {
+        0%, 30%  { transform: translateX(0); opacity: 0.4; }
+        60%, 80% { transform: translateX(3px); opacity: 1; }
+        100%     { transform: translateX(0); opacity: 0.4; }
+      }
+      @keyframes jxl-shrink {
+        0%, 30%  { transform: scale(1); }
+        60%      { transform: scale(0.75); }
+        80%, 100%{ transform: scale(1); }
+      }
+      .jxl-src { transform-origin: 12px 24px; animation: jxl-pulse 2.8s ease-in-out infinite; }
+      .jxl-arr { animation: jxl-arrow 2.8s ease-in-out infinite; }
+      .jxl-dst { transform-origin: 38px 24px; animation: jxl-shrink 2.8s ease-in-out infinite; }
+    `}</style>
+    <g className="jxl-src">
+      <rect x="2" y="10" width="20" height="16" rx="2.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="8" cy="16" r="2.5" fill={accent} fillOpacity="0.4"/>
+      <path d="M2 22 L8 17 L14 20 L22 14" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    <g className="jxl-arr">
+      <path d="M24 18 L28 18 M26 16 L28 18 L26 20" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    <g className="jxl-dst">
+      <rect x="28" y="12" width="18" height="14" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="37" y="21.5" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">JXL</text>
+    </g>
+    <rect x="6" y="32" width="36" height="10" rx="3" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1"/>
+    <text x="24" y="39.5" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">30-60% smaller</text>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

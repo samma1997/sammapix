@@ -4,6 +4,7 @@ import { getAllPlatforms } from "@/lib/resize-platforms";
 import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
 import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
+import { getAllPassportPresets } from "@/lib/passport-presets";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages with different priorities and change frequencies
@@ -97,6 +98,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/remove-bg",
     "/tools/upscale",
     "/tools/passport-photo",
+    "/tools/jpg-to-pdf",
+    "/tools/jxl",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
@@ -176,6 +179,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/convert/avif-to-png",
     "/convert/heic-to-webp",
     "/convert/svg-to-jpg",
+    "/convert/jxl-to-jpg",
+    "/convert/jxl-to-png",
+    "/convert/jxl-to-webp",
+    "/convert/jpg-to-jxl",
+    "/convert/png-to-jxl",
+    "/convert/webp-to-jxl",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
@@ -211,6 +220,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // Programmatic passport-photo pages — driven from lib/passport-photo.ts
+  const passportPhotoPages: MetadataRoute.Sitemap = getAllPassportPresets().map(
+    (p) => ({
+      url: `${APP_URL}/passport-photo/${p.country}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })
+  );
+
   return [
     ...staticPages,
     ...toolPages,
@@ -222,5 +241,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...compressToPages,
     ...optimizeForPages,
     ...imageSizePages,
+    ...passportPhotoPages,
   ];
 }

@@ -33,9 +33,8 @@ import {
   IconResizePack,
   IconCull,
   IconHEIC,
-  IconRemoveBg,
-  IconUpscale,
-  IconPassportPhoto,
+  IconJpgToPdf,
+  IconJxl,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -255,11 +254,11 @@ const PERSONAS: {
 // ─── Persona -> Tool mappings ────────────────────────────────────────────────
 
 const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
-  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
-  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale"],
-  ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname", "remove-bg", "upscale"],
+  photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname"],
+  ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname"],
+  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
 };
 
 // ─── Category types ──────────────────────────────────────────────────────────
@@ -535,51 +534,27 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     category: ["Organize"],
     keywords: ["rename many files", "bulk rename", "pattern rename", "sequential", "number files", "prefix", "suffix"],
   },
-
-  // New tools
   {
-    name: "Clean Background",
-    slug: "remove-bg",
-    href: "/dashboard/tools/remove-bg",
-    tagline: "Remove image backgrounds instantly with AI. 100% browser-based.",
-    accent: "#EC4899",
-    badges: ["Free", "AI-powered"],
-    Icon: IconRemoveBg,
-    category: ["Optimize", "AI"],
-    keywords: ["remove background", "transparent", "cut out", "background remover", "erase background", "png transparent", "product photo", "white background"],
-  },
-  {
-    name: "Enhance Resolution",
-    slug: "upscale",
-    href: "/dashboard/tools/upscale",
-    tagline: "AI upscale images 2x or 4x without losing quality.",
-    accent: "#8B5CF6",
-    badges: ["Free", "AI-powered"],
-    Icon: IconUpscale,
+    name: "JPG to PDF",
+    slug: "jpg-to-pdf",
+    href: "/dashboard/tools/jpg-to-pdf",
+    tagline: "Merge multiple images into a single PDF. Reorder pages, choose page size.",
+    accent: "#DC2626",
+    badges: ["Free", "No upload"],
+    Icon: IconJpgToPdf,
     category: ["Optimize"],
-    keywords: ["upscale", "enlarge", "enhance", "increase resolution", "make bigger", "4k", "higher quality", "sharpen", "unblur"],
+    keywords: ["jpg to pdf", "images to pdf", "merge pdf", "combine images", "photo to pdf", "pictures to document", "create pdf", "make pdf"],
   },
   {
-    name: "Passport Photo",
-    slug: "passport-photo",
-    href: "/dashboard/tools/passport-photo",
-    tagline: "Auto crop + white background for passport and visa photos. 6 country presets.",
-    accent: "#3B82F6",
-    badges: ["Free", "6 countries"],
-    Icon: IconPassportPhoto,
-    category: ["AI"],
-    keywords: ["passport photo", "visa photo", "id photo", "2x2", "35x45mm", "passport size", "biometric photo", "document photo"],
-  },
-  {
-    name: "Image to Text",
-    slug: "image-to-text",
-    href: "/dashboard/tools/image-to-text",
-    tagline: "Extract text from images with AI-powered OCR. 50+ languages.",
+    name: "JXL Converter",
+    slug: "jxl",
+    href: "/dashboard/tools/jxl",
+    tagline: "Convert JPEG XL to JPG/PNG/WebP or vice versa. Next-gen format.",
     accent: "#F59E0B",
-    badges: ["Login required", "Gemini Flash"],
-    Icon: IconAIRename,
-    category: ["AI"],
-    keywords: ["ocr", "extract text", "image to text", "scan text", "copy text from photo", "screenshot to text", "read image"],
+    badges: ["Free", "Next-Gen"],
+    Icon: IconJxl,
+    category: ["Optimize"],
+    keywords: ["jxl", "jpeg xl", "jxl to jpg", "jxl to png", "convert jxl", "next gen format", "jxl converter", "open jxl"],
   },
 ];
 

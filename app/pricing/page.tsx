@@ -19,6 +19,8 @@ import {
   IconRemoveBg,
   IconUpscale,
   IconPassportPhoto,
+  IconJpgToPdf,
+  IconJxl,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -49,6 +51,8 @@ const toolGrid = [
   { Icon: IconUpscale,   name: "Upscale",     accent: "#8B5CF6" },
   { Icon: IconPassportPhoto, name: "Passport", accent: "#3B82F6" },
   { Icon: IconAIRename,     name: "OCR",       accent: "#F59E0B" },
+  { Icon: IconJpgToPdf,     name: "JPG to PDF", accent: "#DC2626" },
+  { Icon: IconJxl,          name: "JXL",        accent: "#F59E0B" },
 ] as const;
 
 // ─── Payment banners ───────────────────────────────────────────────────────────
@@ -192,7 +196,7 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                { icon: Sparkles, text: "All 25 tools included" },
+                { icon: Sparkles, text: "All 27 tools included" },
                 { icon: FileStack, text: "20 files per batch" },
                 { icon: Zap, text: "10 AI renames / day" },
                 { icon: Zap, text: "10 AI alt text / day" },

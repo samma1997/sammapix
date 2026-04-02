@@ -1627,6 +1627,190 @@ const CONVERSIONS: Record<string, ConversionData> = {
       { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
     ],
   },
+
+  // ─── JPEG XL (JXL) conversions ───────────────────────────────────────────
+
+  "jxl-to-jpg": {
+    from: "JXL",
+    to: "JPG",
+    fromLabel: "JPEG XL",
+    toLabel: "JPG",
+    toolPath: "/tools/jxl",
+    toolLabel: "Open JXL Converter",
+    tagline: "Convert JPEG XL files to universally-compatible JPG- free, browser-based, no upload.",
+    whyCopy:
+      "JPEG XL (JXL) is a next-generation image format that offers 30-60% better compression than JPEG. However, most applications, email clients, and social media platforms cannot open JXL files yet. Converting JXL to JPG ensures your images work everywhere- from WordPress uploads to email attachments.",
+    qualityNote:
+      "Converting JXL to JPG involves re-encoding. At quality 85-90 the output is visually identical to the JXL source. File size will increase somewhat since JPG compression is less efficient than JXL.",
+    technicalNote:
+      "SammaPix decodes the JXL file entirely inside your browser using a WebAssembly build of libjxl, then exports the pixel data as JPEG via the Canvas API. Your images never leave your device.",
+    formatTable: [
+      { format: "JXL", fileSize: "Smallest", quality: "Excellent (lossy or lossless)", compatibility: "Safari 17+, limited", useCase: "Next-gen web delivery, archival" },
+      { format: "JPG", fileSize: "Small-Medium", quality: "High (lossy)", compatibility: "Universal", useCase: "Web, email, social media, print" },
+      { format: "WebP", fileSize: "Small", quality: "High (lossy or lossless)", compatibility: "Modern browsers", useCase: "Web performance" },
+      { format: "PNG", fileSize: "Large", quality: "Lossless", compatibility: "Universal", useCase: "Graphics, logos, screenshots" },
+    ],
+    faqs: [
+      { q: "What is a JXL file?", a: "JXL is the file extension for JPEG XL, a next-generation image format standardized as ISO 18181 in 2022. It offers superior compression, HDR support, and both lossy and lossless modes. Safari 17+ supports it natively, and Chrome is re-adding support." },
+      { q: "Does converting JXL to JPG lose quality?", a: "There is a small quality tradeoff since you are re-encoding from one format to another. At quality 85-90 the difference is invisible to the human eye." },
+      { q: "Can I open JXL files on Windows?", a: "Windows 11 has native JXL support in File Explorer and Photos app. For older Windows versions, or to share JXL images with others, convert to JPG using SammaPix." },
+      { q: "Is the conversion private?", a: "Yes. SammaPix uses WebAssembly to decode JXL entirely in your browser. No image data is sent to any server. You can even disconnect from the internet after the page loads." },
+    ],
+    related: ["jxl-to-png", "jxl-to-webp", "avif-to-jpg"],
+    blogSlugs: [
+      { slug: "best-image-format-for-web-2026", title: "Best Image Format for Web in 2026" },
+      { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG Comparison" },
+    ],
+  },
+
+  "jxl-to-png": {
+    from: "JXL",
+    to: "PNG",
+    fromLabel: "JPEG XL",
+    toLabel: "PNG",
+    toolPath: "/tools/jxl",
+    toolLabel: "Open JXL Converter",
+    tagline: "Convert JPEG XL files to lossless PNG- free, browser-based, no upload.",
+    whyCopy:
+      "PNG gives you a pixel-perfect lossless copy of your JXL image. This is the right choice when you need to edit the image further in Photoshop or Figma, use it as a design asset, or need transparency support that JXL had in the original file.",
+    qualityNote:
+      "PNG is lossless: the output preserves every pixel from the JXL image. File size will be significantly larger than the JXL source, but you gain zero quality loss.",
+    technicalNote:
+      "The JXL file is decoded in-browser via WebAssembly (libjxl), then the raw pixel data is drawn on a Canvas and exported as PNG via canvas.convertToBlob('image/png'). No server involved.",
+    formatTable: [
+      { format: "JXL", fileSize: "Smallest", quality: "Excellent", compatibility: "Safari 17+, limited", useCase: "Next-gen delivery, archival" },
+      { format: "PNG", fileSize: "Large", quality: "Lossless", compatibility: "Universal", useCase: "Editing, logos, graphics, transparency" },
+      { format: "JPG", fileSize: "Small-Medium", quality: "High (lossy)", compatibility: "Universal", useCase: "Photos, web, email" },
+    ],
+    faqs: [
+      { q: "Why convert JXL to PNG instead of JPG?", a: "Choose PNG when you need lossless quality, transparency support, or plan to edit the image further. Choose JPG when file size matters more than perfect fidelity." },
+      { q: "Does JXL to PNG conversion lose quality?", a: "No. PNG is lossless. The conversion preserves every pixel from the JXL source without any compression artifacts." },
+      { q: "Can I convert multiple JXL files at once?", a: "Yes. SammaPix supports batch conversion. Drop up to 20 files at once (free plan) or 200 on Pro." },
+    ],
+    related: ["jxl-to-jpg", "jxl-to-webp", "avif-to-png"],
+    blogSlugs: [
+      { slug: "best-image-format-for-web-2026", title: "Best Image Format for Web in 2026" },
+    ],
+  },
+
+  "jxl-to-webp": {
+    from: "JXL",
+    to: "WebP",
+    fromLabel: "JPEG XL",
+    toLabel: "WebP",
+    toolPath: "/tools/jxl",
+    toolLabel: "Open JXL Converter",
+    tagline: "Convert JPEG XL to WebP for broad browser compatibility- free, browser-based.",
+    whyCopy:
+      "While JXL offers better compression than WebP, WebP has much wider browser support (97%+ globally). Converting JXL to WebP gives you a good balance of compression efficiency and compatibility for web delivery.",
+    qualityNote:
+      "WebP at quality 80-85 produces files slightly larger than the JXL source but with near-identical visual quality. WebP is universally supported in modern browsers.",
+    technicalNote:
+      "JXL is decoded via WebAssembly in-browser, drawn to a Canvas, then exported as WebP via canvas.convertToBlob('image/webp', quality). No server involved.",
+    formatTable: [
+      { format: "JXL", fileSize: "Smallest", quality: "Excellent", compatibility: "Safari 17+, limited", useCase: "Next-gen delivery" },
+      { format: "WebP", fileSize: "Small", quality: "High (lossy or lossless)", compatibility: "97%+ browsers", useCase: "Web performance" },
+      { format: "JPG", fileSize: "Medium", quality: "High (lossy)", compatibility: "Universal", useCase: "Legacy compatibility" },
+    ],
+    faqs: [
+      { q: "Is WebP or JXL better for websites?", a: "JXL offers better compression, but WebP has 97%+ browser support vs JXL's limited support. For now, WebP is the safer choice for production websites. Use JXL for Safari-specific delivery or when Chrome re-enables support." },
+      { q: "How much larger is WebP compared to JXL?", a: "At equivalent visual quality, WebP files are typically 10-30% larger than JXL. Both are significantly smaller than JPEG." },
+    ],
+    related: ["jxl-to-jpg", "jxl-to-png", "jpg-to-webp"],
+    blogSlugs: [
+      { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG Comparison" },
+    ],
+  },
+
+  "jpg-to-jxl": {
+    from: "JPG",
+    to: "JXL",
+    fromLabel: "JPG",
+    toLabel: "JPEG XL",
+    toolPath: "/tools/jxl",
+    toolLabel: "Open JXL Converter",
+    tagline: "Convert JPG to JPEG XL for 30-60% smaller files- free, browser-based.",
+    whyCopy:
+      "JPEG XL compresses photographic images 30-60% better than JPEG at equivalent visual quality. Converting your JPG files to JXL saves storage space and bandwidth. As browser support grows (Safari 17+, Chrome returning), JXL is becoming a viable delivery format.",
+    qualityNote:
+      "At quality 75-85, JXL produces files 30-60% smaller than the source JPG with equivalent or better visual quality. At quality 100, JXL operates in lossless mode.",
+    technicalNote:
+      "SammaPix loads the JPG in-browser, extracts pixel data via Canvas, then encodes to JXL using a WebAssembly build of libjxl. No server upload required.",
+    formatTable: [
+      { format: "JPG", fileSize: "Medium", quality: "High (lossy)", compatibility: "Universal", useCase: "Legacy web, email, print" },
+      { format: "JXL", fileSize: "Smallest", quality: "Excellent (lossy or lossless)", compatibility: "Safari 17+, growing", useCase: "Next-gen web, archival, HDR" },
+      { format: "WebP", fileSize: "Small", quality: "High", compatibility: "97%+ browsers", useCase: "Current web standard" },
+    ],
+    faqs: [
+      { q: "Why convert JPG to JXL?", a: "JXL produces 30-60% smaller files than JPG at the same visual quality. This saves storage, reduces bandwidth costs, and speeds up page load times for visitors using browsers that support JXL." },
+      { q: "Can I serve JXL with a JPG fallback?", a: "Yes. Use the <picture> element with <source type=\"image/jxl\"> for JXL and <img> as JPG fallback. Browsers that support JXL will use the smaller file." },
+      { q: "Is JXL better than WebP?", a: "For photographic content, JXL typically offers 10-30% better compression than WebP. JXL also supports lossless JPEG recompression, HDR, and wider color gamuts. The main disadvantage is limited browser support (for now)." },
+    ],
+    related: ["png-to-jxl", "jxl-to-jpg", "jpg-to-webp"],
+    blogSlugs: [
+      { slug: "best-image-format-for-web-2026", title: "Best Image Format for Web in 2026" },
+      { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG Comparison" },
+    ],
+  },
+
+  "png-to-jxl": {
+    from: "PNG",
+    to: "JXL",
+    fromLabel: "PNG",
+    toLabel: "JPEG XL",
+    toolPath: "/tools/jxl",
+    toolLabel: "Open JXL Converter",
+    tagline: "Convert PNG to JPEG XL for dramatically smaller lossless files- free, browser-based.",
+    whyCopy:
+      "JPEG XL lossless compression produces files approximately 35% smaller than PNG while maintaining identical quality. For large PNG files (screenshots, design assets, medical images), converting to JXL can save significant storage space.",
+    qualityNote:
+      "At quality 100, JXL operates in lossless mode- every pixel is preserved exactly. At lower quality settings, JXL uses lossy compression for even smaller files with minimal visual impact.",
+    technicalNote:
+      "PNG is drawn to a Canvas, pixel data extracted via getImageData(), then encoded to JXL using the WebAssembly encoder. All processing happens in your browser.",
+    formatTable: [
+      { format: "PNG", fileSize: "Large", quality: "Lossless", compatibility: "Universal", useCase: "Graphics, logos, screenshots" },
+      { format: "JXL", fileSize: "Smaller (35% less)", quality: "Lossless or lossy", compatibility: "Safari 17+, growing", useCase: "Efficient storage, next-gen web" },
+      { format: "WebP", fileSize: "Medium", quality: "Lossless or lossy", compatibility: "97%+ browsers", useCase: "Web delivery" },
+    ],
+    faqs: [
+      { q: "Is JXL lossless like PNG?", a: "Yes, JXL supports lossless compression. At quality 100, every pixel is preserved identically. The resulting file is about 35% smaller than the equivalent PNG." },
+      { q: "Does JXL support transparency?", a: "Yes. JPEG XL fully supports alpha channels (transparency), unlike JPEG. Converting transparent PNGs to lossless JXL preserves the alpha channel." },
+      { q: "Should I convert my PNG assets to JXL?", a: "If your target audience uses Safari 17+ or you can serve JXL with fallbacks, yes. JXL saves ~35% over PNG losslessly. For universal compatibility today, WebP lossless is a safer bet." },
+    ],
+    related: ["jpg-to-jxl", "jxl-to-png", "png-to-webp"],
+    blogSlugs: [
+      { slug: "best-image-format-for-web-2026", title: "Best Image Format for Web in 2026" },
+    ],
+  },
+
+  "webp-to-jxl": {
+    from: "WebP",
+    to: "JXL",
+    fromLabel: "WebP",
+    toLabel: "JPEG XL",
+    toolPath: "/tools/jxl",
+    toolLabel: "Open JXL Converter",
+    tagline: "Upgrade WebP images to JPEG XL for even smaller files- free, browser-based.",
+    whyCopy:
+      "JPEG XL offers 10-30% better compression than WebP for photographic content. If you already have a WebP workflow and want to future-proof your assets, converting to JXL gives you an additional size reduction while maintaining equivalent quality.",
+    qualityNote:
+      "Since both WebP and JXL are modern compressed formats, the additional size savings from WebP to JXL are typically 10-30% for photographic images. The visual quality remains equivalent.",
+    technicalNote:
+      "WebP is decoded natively by the browser, drawn to a Canvas, then encoded to JXL via WebAssembly. No server required.",
+    formatTable: [
+      { format: "WebP", fileSize: "Small", quality: "High", compatibility: "97%+ browsers", useCase: "Current web standard" },
+      { format: "JXL", fileSize: "Smallest", quality: "Excellent", compatibility: "Safari 17+, growing", useCase: "Next-gen web delivery" },
+      { format: "AVIF", fileSize: "Small", quality: "High", compatibility: "92%+ browsers", useCase: "Alternative next-gen format" },
+    ],
+    faqs: [
+      { q: "Is it worth converting WebP to JXL?", a: "If you serve a high volume of images and your audience includes Safari users, yes. The 10-30% additional savings add up at scale. For smaller sites, the bandwidth savings may not justify the reduced compatibility." },
+      { q: "Which is better: JXL or WebP?", a: "JXL offers better compression, HDR support, and lossless JPEG recompression. WebP has wider browser support today. JXL is the long-term winner as browser support grows." },
+    ],
+    related: ["jpg-to-jxl", "png-to-jxl", "webp-to-jpg"],
+    blogSlugs: [
+      { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG Comparison" },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------------------

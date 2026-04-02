@@ -20,69 +20,13 @@ async function getRemoveBackground() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Country presets                                                    */
+/*  Country presets — re-exported from server-safe module              */
 /* ------------------------------------------------------------------ */
 
-export interface PassportPreset {
-  country: string;
-  label: string;
-  widthPx: number;
-  heightPx: number;
-  description: string;
-  /** ISO 3166-1 alpha-2 code for flag display */
-  flag: string;
-}
+export type { PassportPreset } from "@/lib/passport-presets";
+export { PASSPORT_PRESETS, getAllPassportPresets, getPassportPresetByCountry } from "@/lib/passport-presets";
 
-export const PASSPORT_PRESETS: PassportPreset[] = [
-  {
-    country: "us",
-    label: "US Passport (2\u00d72\u2033)",
-    widthPx: 600,
-    heightPx: 600,
-    description: "United States passport and visa",
-    flag: "\ud83c\uddfa\ud83c\uddf8",
-  },
-  {
-    country: "eu",
-    label: "EU / Schengen (35\u00d745 mm)",
-    widthPx: 413,
-    heightPx: 531,
-    description: "European Union passport and ID",
-    flag: "\ud83c\uddea\ud83c\uddfa",
-  },
-  {
-    country: "uk",
-    label: "UK Passport (35\u00d745 mm)",
-    widthPx: 420,
-    heightPx: 540,
-    description: "United Kingdom passport",
-    flag: "\ud83c\uddec\ud83c\udde7",
-  },
-  {
-    country: "india",
-    label: "India (35\u00d745 mm)",
-    widthPx: 413,
-    heightPx: 531,
-    description: "Indian passport and visa",
-    flag: "\ud83c\uddee\ud83c\uddf3",
-  },
-  {
-    country: "china",
-    label: "China Visa (33\u00d748 mm)",
-    widthPx: 390,
-    heightPx: 567,
-    description: "Chinese visa application",
-    flag: "\ud83c\udde8\ud83c\uddf3",
-  },
-  {
-    country: "canada",
-    label: "Canada (50\u00d770 mm)",
-    widthPx: 591,
-    heightPx: 827,
-    description: "Canadian passport",
-    flag: "\ud83c\udde8\ud83c\udde6",
-  },
-];
+import type { PassportPreset } from "@/lib/passport-presets";
 
 /* ------------------------------------------------------------------ */
 /*  Result interface                                                   */

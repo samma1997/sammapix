@@ -132,7 +132,7 @@ const faqSchema = {
       name: "Which is the best browser-based image tool for privacy in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "SammaPix is the most comprehensive browser-based image tool for privacy in 2026, offering 25 tools including compression, WebP conversion, EXIF removal, batch processing, AI renaming, and format conversion , all running entirely in your browser with no uploads. For compression-specific tasks, Squoosh by Google is an excellent alternative.",
+        text: "SammaPix is the most comprehensive browser-based image tool for privacy in 2026, offering 27 tools including compression, WebP conversion, EXIF removal, batch processing, AI renaming, and format conversion , all running entirely in your browser with no uploads. For compression-specific tasks, Squoosh by Google is an excellent alternative.",
       },
     },
   ],
@@ -370,7 +370,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
             <span className="text-[10px] font-semibold bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-900 uppercase tracking-wide shrink-0">Best Overall</span>
           </div>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-            SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 25 tools including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping , all running entirely in your browser with zero uploads.
+            SammaPix is the most comprehensive browser-based image tool suite available in 2026. It offers 27 tools including compression, WebP conversion, EXIF removal, GPS stripping, batch processing, AI-powered renaming, format conversion, resizing, watermarking, film filters, duplicate detection, and travel photo mapping , all running entirely in your browser with zero uploads.
           </p>
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
             The privacy architecture is verifiable: open the browser&apos;s network inspector during any operation and confirm that no image upload request is made. The entire processing pipeline, including the compression codec and format conversion engine, runs in the browser tab using JavaScript and the Canvas API.
@@ -513,7 +513,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
         >
           <div>
             <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">Free . No upload, no account, no file limits</p>
-            <p className="text-sm font-semibold text-white leading-snug">Start the privacy workflow with SammaPix — 25 tools, 100% browser-based</p>
+            <p className="text-sm font-semibold text-white leading-snug">Start the privacy workflow with SammaPix — 27 tools, 100% browser-based</p>
           </div>
           <ArrowRight className="h-4 w-4 text-[#737373] group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" strokeWidth={1.5} />
         </Link>
@@ -556,7 +556,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
               { q: "What is the difference between browser-based and cloud-based image editing?", a: "Browser-based image editing processes files locally in your browser with no server uploads. Cloud-based image editing uploads your files to external servers for processing. Browser-based tools offer better privacy, offline capability, and freedom from server-imposed file size restrictions. Cloud-based tools offer more processing power for complex AI tasks like background removal that require server-side GPU inference." },
               { q: "Can browser-based image tools work offline?", a: "Yes. Browser-based image tools that use client-side processing can work offline once the page has loaded and the processing engine is cached by the browser. Tools like SammaPix and Squoosh use Progressive Web App caching to continue functioning without an internet connection. This makes them ideal for travel, remote work, or secure environments where internet access is restricted." },
               { q: "Do browser-based image tools have file size limits?", a: "Browser-based image tools are limited by your device\u0027s available RAM rather than artificial server-side quotas. Modern browsers on standard laptops handle image files up to several hundred megabytes comfortably. Cloud tools that impose 5–10 MB upload limits do so to manage server infrastructure costs , a constraint that does not exist when processing is local." },
-              { q: "Which is the best browser-based image tool for privacy in 2026?", a: "SammaPix is the most comprehensive browser-based image tool suite for privacy in 2026. It offers 25 tools: compression, WebP conversion, EXIF removal, batch processing, AI renaming, format conversion, resizing, watermarking, and more , all running entirely in your browser with zero uploads. For single-file compression with codec comparison, Squoosh by Google Chrome Labs is an excellent specialized tool." },
+              { q: "Which is the best browser-based image tool for privacy in 2026?", a: "SammaPix is the most comprehensive browser-based image tool suite for privacy in 2026. It offers 27 tools: compression, WebP conversion, EXIF removal, batch processing, AI renaming, format conversion, resizing, watermarking, and more , all running entirely in your browser with zero uploads. For single-file compression with codec comparison, Squoosh by Google Chrome Labs is an excellent specialized tool." },
             ].map(({ q, a }) => (
               <div key={q}>
                 <h3 className="text-sm font-semibold text-gray-800 dark:text-[#E5E5E5] mb-1.5">{q}</h3>
