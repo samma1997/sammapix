@@ -166,8 +166,8 @@ export function Day63Email({
 
           <Text style={body}>
             {toolsUsed < 8
-              ? `You've used ${toolsUsed} out of 25 tools so far. There are ${20 - toolsUsed} more waiting for you- from Photo Map to Film Filters to AI Photo Sort.`
-              : "You're a power user! You've explored a solid chunk of SammaPix's 25 tools. Keep going."}
+              ? `You've used ${toolsUsed} out of 27 tools so far. There are ${22 - toolsUsed} more waiting for you- from Photo Map to Film Filters to AI Photo Sort.`
+              : "You're a power user! You've explored a solid chunk of SammaPix's 27 tools. Keep going."}
           </Text>
 
           <Section style={{ margin: "24px 0" }}>

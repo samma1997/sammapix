@@ -196,7 +196,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
               Process images privately, 100% in your browser
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              SammaPix runs 25 image tools entirely in your browser. No uploads, no accounts required for basic use, no file size limits. Compress, convert, strip EXIF, resize, and rename , all locally.
+              SammaPix runs 27 image tools entirely in your browser. No uploads, no accounts required for basic use, no file size limits. Compress, convert, strip EXIF, resize, and rename , all locally.
             </p>
             <Link
               href="/tools/compress"

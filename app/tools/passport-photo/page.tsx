@@ -22,7 +22,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 export const metadata: Metadata = {
   title: "Passport Photo Maker Online Free",
   description:
-    "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
+    "Create passport photos for 140+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
   keywords: [
     "passport photo maker",
     "passport photo online",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Passport Photo Maker Online Free",
     description:
-      "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
+      "Create passport photos for 140+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
     url: `${APP_URL}/tools/passport-photo`,
     siteName: "SammaPix",
     type: "website",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Passport Photo Maker Online Free",
     description:
-      "Create passport photos for 6+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
+      "Create passport photos for 140+ countries in seconds. Auto background removal & smart crop included. 100% browser-based — your photos stay private.",
   },
 };
 
@@ -90,7 +90,7 @@ const faqs = [
   {
     question: "Which countries are supported?",
     answer:
-      "SammaPix currently supports passport photo standards for the United States (2\u00d72\u2033), European Union / Schengen (35\u00d745 mm), United Kingdom (35\u00d745 mm), India (35\u00d745 mm), China (33\u00d748 mm), and Canada (50\u00d770 mm). We\u2019re adding more countries regularly.",
+      "SammaPix supports passport photo standards for 140+ countries and visa types, including the United States, all EU/Schengen countries, United Kingdom, India, China, Japan, Australia, Brazil, and many more. Each preset has the exact official dimensions. Select your country from the dropdown to get started.",
   },
 ];
 
@@ -171,7 +171,7 @@ export default function PassportPhotoPage() {
               className="h-3.5 w-3.5 text-[#16A34A]"
               strokeWidth={2}
             />
-            6 country presets
+            140+ country presets
           </span>
         </div>
       </section>
@@ -191,9 +191,10 @@ export default function PassportPhotoPage() {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {PASSPORT_PRESETS.map((preset) => (
-              <div
+              <Link
                 key={preset.country}
-                className="p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] text-center"
+                href={`/passport-photo/${preset.country}`}
+                className="p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] text-center hover:border-[#A3A3A3] hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors"
               >
                 <span className="text-2xl block mb-2">{preset.flag}</span>
                 <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
@@ -205,7 +206,7 @@ export default function PassportPhotoPage() {
                 <p className="text-xs text-[#737373] mt-0.5">
                   {preset.description}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -232,7 +233,7 @@ export default function PassportPhotoPage() {
                 Standard-compliant
               </h3>
               <p className="text-sm text-[#737373] leading-relaxed">
-                Exact pixel dimensions for US, EU, UK, India, China and Canada.
+                Exact pixel dimensions for 140+ countries and visa types.
                 White background, correct aspect ratio, print-ready.
               </p>
             </div>
