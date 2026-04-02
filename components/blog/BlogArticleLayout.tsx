@@ -103,13 +103,13 @@ export default function BlogArticleLayout({
               </div>
 
               {/* Article body */}
-              <div ref={articleRef} className="prose-content">
+              <div className="prose-content">
                 {summary && summary.length > 0 ? (
                   <ArticleSummary summaryPoints={summary}>
-                    {children}
+                    <div ref={articleRef}>{children}</div>
                   </ArticleSummary>
                 ) : (
-                  children
+                  <div ref={articleRef}>{children}</div>
                 )}
               </div>
             </article>
