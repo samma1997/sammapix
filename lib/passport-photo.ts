@@ -113,80 +113,35 @@ export async function generatePassportPhoto(
     sourceBlob = file;
   }
 
-  onProgress?.(60, "Detecting face & cropping\u2026");
+  onProgress?.(60, "Cropping & resizing\u2026");
 
-  /* ---- Step 2: Load image + detect face ---- */
+  /* ---- Step 2: Load image + calculate crop ---- */
   const img = await createImageBitmap(sourceBlob);
   const { width: srcW, height: srcH } = img;
 
-  // Try to detect face using browser FaceDetector API (Chrome 70+)
-  // Falls back to center-of-image if not supported or no face found
-  let faceCenterX = srcW / 2;
-  let faceCenterY = srcH * 0.35; // Default: assume face is in upper third
-
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const g = globalThis as any;
-    if (typeof g.FaceDetector !== "undefined") {
-      const detector = new g.FaceDetector({ maxDetectedFaces: 1 });
-      const faces = await detector.detect(img);
-      if (faces.length > 0) {
-        const box = faces[0].boundingBox;
-        faceCenterX = box.x + box.width / 2;
-        faceCenterY = box.y + box.height / 2;
-      }
-    }
-  } catch {
-    // FaceDetector not available or failed — use defaults
-  }
-
-  // If bg was removed, also use subject bounds as additional signal
-  if (removeBg) {
-    const tempCanvas = new OffscreenCanvas(srcW, srcH);
-    const tempCtx = tempCanvas.getContext("2d")!;
-    tempCtx.drawImage(img, 0, 0);
-    const imageData = tempCtx.getImageData(0, 0, srcW, srcH);
-    const bounds = findSubjectBounds(imageData.data, srcW, srcH);
-    const subjectCenterX = bounds.left + (bounds.right - bounds.left) / 2;
-    // Use face detection if available, otherwise fall back to subject center
-    if (faceCenterX === srcW / 2 && faceCenterY === srcH * 0.35) {
-      // No face detected — use subject bounds
-      faceCenterX = subjectCenterX;
-      faceCenterY = bounds.top + (bounds.bottom - bounds.top) * 0.35;
-    }
-  }
-
-  // Calculate crop area centred on face with correct aspect ratio
+  // Calculate crop area with the correct aspect ratio
   let cropX: number;
   let cropY: number;
   let cropW: number;
   let cropH: number;
 
-  // Start with the full image, then crop to target ratio
   if (srcW / srcH > targetRatio) {
     // Image is wider than target — crop sides, keep full height
     cropH = srcH;
     cropW = cropH * targetRatio;
+    cropX = (srcW - cropW) / 2; // Center horizontally
+    cropY = 0; // Keep top — never cut the head
   } else {
-    // Image is taller than target — crop top/bottom, keep full width
+    // Image is taller than target — crop bottom, keep top
     cropW = srcW;
     cropH = cropW / targetRatio;
+    cropX = 0;
+    cropY = 0; // Start from top — head is always at top of photo
   }
 
-  // Centre crop on the detected face
-  cropX = faceCenterX - cropW / 2;
-  // For passport: position face in upper 40% of frame (not dead center)
-  cropY = faceCenterY - cropH * 0.38;
-
-  // Clamp to image boundaries while PRESERVING aspect ratio
-  if (cropW > srcW) {
-    cropW = srcW;
-    cropH = cropW / targetRatio;
-  }
-  if (cropH > srcH) {
-    cropH = srcH;
-    cropW = cropH * targetRatio;
-  }
+  // Clamp to image boundaries
+  cropW = Math.min(cropW, srcW);
+  cropH = Math.min(cropH, srcH);
   cropX = Math.max(0, Math.min(cropX, srcW - cropW));
   cropY = Math.max(0, Math.min(cropY, srcH - cropH));
 
