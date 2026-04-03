@@ -1,12 +1,11 @@
 "use client";
 
 /**
- * Browser-based background removal using Transformers.js background-removal pipeline.
+ * Browser-based background removal using Transformers.js + briaai/RMBG-1.4.
  *
- * Model: briaai/RMBG-1.4 (quantized, ~44MB)
- * Uses the official "background-removal" pipeline added in Transformers.js v3.4.0.
- * The pipeline handles all internals: model loading, segmentation, mask application.
- * Returns RGBA image with transparent background.
+ * Uses AutoModel + AutoProcessor directly (NOT the pipeline API) because
+ * RMBG-1.4 uses SegformerForSemanticSegmentation which is not compatible
+ * with the "background-removal" pipeline in Transformers.js v4.
  */
 
 export interface RemoveBgResult {
@@ -15,21 +14,25 @@ export interface RemoveBgResult {
   outputSize: number;
 }
 
-// Cache the pipeline so the model is only downloaded once per session
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let segmenter: any = null;
+let cachedModel: any = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let cachedProcessor: any = null;
 
-async function getSegmenter() {
-  if (segmenter) return segmenter;
+async function loadModel() {
+  if (cachedModel && cachedProcessor) return { model: cachedModel, processor: cachedProcessor };
 
-  const { pipeline, env } = await import("@huggingface/transformers");
+  const { AutoModel, AutoProcessor, env } = await import("@huggingface/transformers");
   env.allowLocalModels = false;
 
-  segmenter = await pipeline("background-removal", "Xenova/modnet", {
-    dtype: "q8",
-  });
+  const [model, processor] = await Promise.all([
+    AutoModel.from_pretrained("briaai/RMBG-1.4", { dtype: "q8" }),
+    AutoProcessor.from_pretrained("briaai/RMBG-1.4"),
+  ]);
 
-  return segmenter;
+  cachedModel = model;
+  cachedProcessor = processor;
+  return { model, processor };
 }
 
 export async function removeBackground(
@@ -39,32 +42,49 @@ export async function removeBackground(
   const originalSize = file.size;
   onProgress?.(5);
 
-  const seg = await getSegmenter();
+  const { RawImage } = await import("@huggingface/transformers");
+
+  // Load model (cached after first load — ~44MB download first time)
+  const { model, processor } = await loadModel();
+  onProgress?.(45);
+
+  // Load image
+  const imageUrl = URL.createObjectURL(file);
+  const image = await RawImage.fromURL(imageUrl);
+  URL.revokeObjectURL(imageUrl);
   onProgress?.(50);
 
-  const imageUrl = URL.createObjectURL(file);
+  // Process through model
+  const { pixel_values } = await processor(image);
+  onProgress?.(60);
 
-  try {
-    // The pipeline returns a RawImage with 4 channels (RGBA),
-    // background already transparent
-    const output = await seg(imageUrl);
-    onProgress?.(85);
+  const { output } = await model({ input: pixel_values });
+  onProgress?.(80);
 
-    // Convert RawImage to Blob via OffscreenCanvas
-    const canvas = new OffscreenCanvas(output.width, output.height);
-    const ctx = canvas.getContext("2d")!;
-    const imageData = new ImageData(
-      new Uint8ClampedArray(output.data),
-      output.width,
-      output.height
-    );
-    ctx.putImageData(imageData, 0, 0);
+  // Post-process: convert model output to alpha mask
+  // output[0] is the raw prediction, apply sigmoid-like scaling and resize to original
+  const maskTensor = output[0].mul(255).to("uint8");
+  const maskImage = await RawImage.fromTensor(maskTensor).resize(image.width, image.height);
+  onProgress?.(88);
 
-    const blob = await canvas.convertToBlob({ type: "image/png" });
-    onProgress?.(100);
+  // Apply mask to original image
+  const canvas = new OffscreenCanvas(image.width, image.height);
+  const ctx = canvas.getContext("2d")!;
 
-    return { blob, originalSize, outputSize: blob.size };
-  } finally {
-    URL.revokeObjectURL(imageUrl);
+  const imgBitmap = await createImageBitmap(file);
+  ctx.drawImage(imgBitmap, 0, 0);
+  imgBitmap.close();
+
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const mask = maskImage.data;
+  for (let i = 0; i < mask.length; i++) {
+    imageData.data[i * 4 + 3] = mask[i];
   }
+  ctx.putImageData(imageData, 0, 0);
+  onProgress?.(95);
+
+  const blob = await canvas.convertToBlob({ type: "image/png" });
+  onProgress?.(100);
+
+  return { blob, originalSize, outputSize: blob.size };
 }
