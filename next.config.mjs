@@ -14,6 +14,17 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  // Exclude onnxruntime-node from serverless functions — it's 355MB and only
+  // needed client-side by @huggingface/transformers (which uses onnxruntime-web)
+  serverExternalPackages: ["onnxruntime-node"],
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Prevent onnxruntime-node from being bundled into server functions
+      config.externals = config.externals || [];
+      config.externals.push("onnxruntime-node");
+    }
+    return config;
+  },
   async redirects() {
     return [
       { source: '/destinations', destination: '/about', permanent: true },
