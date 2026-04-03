@@ -25,7 +25,7 @@ async function getSegmenter() {
   const { pipeline, env } = await import("@huggingface/transformers");
   env.allowLocalModels = false;
 
-  segmenter = await pipeline("background-removal", "briaai/RMBG-1.4", {
+  segmenter = await pipeline("background-removal", "Xenova/modnet", {
     dtype: "q8",
   });
 
