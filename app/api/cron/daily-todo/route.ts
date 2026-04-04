@@ -173,6 +173,16 @@ SOLO il commento:`);
     });
 
     // ═══════════════════════════════════════════
+    // 6. GSC INDEXING — reminder giornaliero
+    // ═══════════════════════════════════════════
+    todos.push({
+      date: today, type: "directory", priority: 6,
+      title: "Indicizza 10-15 pagine su GSC",
+      description: "Apri Google Search Console → Request Indexing. Chiedi a Claude Code la lista del batch di oggi.",
+      actionUrl: "https://search.google.com/search-console",
+    });
+
+    // ═══════════════════════════════════════════
     // SALVA (ordinati per priorità)
     // ═══════════════════════════════════════════
     todos.sort((a, b) => b.priority - a.priority);
