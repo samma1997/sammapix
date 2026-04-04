@@ -1,13 +1,8 @@
 // Run with: node scripts/seed-reddit-intelligence.mjs
 // Seeds the reddit intelligence table with known data from our experience
 
-import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
-import { config } from "dotenv";
-config({ path: ".env.local" });
-
 const sql = neon(process.env.DATABASE_URL);
-const db = drizzle(sql);
 
 const SEED_DATA = [
   // TIER: proven (tested and working)
@@ -39,9 +34,20 @@ async function seed() {
 
   for (const data of SEED_DATA) {
     try {
-      await db.execute(`
+      const s = data.subreddit;
+      const t = data.tier;
+      const mk = data.min_karma ?? null;
+      const la = data.links_allowed ?? null;
+      const sp = data.self_promo_allowed ?? null;
+      const bf = data.best_post_format ?? null;
+      const au = data.avg_upvotes ?? 0;
+      const tp = data.total_posts ?? 0;
+      const tb = data.total_blocked ?? 0;
+      const bt = data.best_time_utc ?? null;
+      const n = data.notes ?? null;
+      await sql`
         INSERT INTO growth_reddit_intelligence (subreddit, tier, min_karma, links_allowed, self_promo_allowed, best_post_format, avg_upvotes, total_posts, total_blocked, best_time_utc, notes)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        VALUES (${s}, ${t}, ${mk}, ${la}, ${sp}, ${bf}, ${au}, ${tp}, ${tb}, ${bt}, ${n})
         ON CONFLICT (subreddit) DO UPDATE SET
           tier = EXCLUDED.tier,
           min_karma = EXCLUDED.min_karma,
@@ -54,19 +60,7 @@ async function seed() {
           best_time_utc = EXCLUDED.best_time_utc,
           notes = EXCLUDED.notes,
           updated_at = NOW()
-      `, [
-        data.subreddit,
-        data.tier,
-        data.min_karma ?? null,
-        data.links_allowed ?? null,
-        data.self_promo_allowed ?? null,
-        data.best_post_format ?? null,
-        data.avg_upvotes ?? 0,
-        data.total_posts ?? 0,
-        data.total_blocked ?? 0,
-        data.best_time_utc ?? null,
-        data.notes ?? null,
-      ]);
+      `;
       console.log(`  ✓ ${data.subreddit} (${data.tier})`);
     } catch (err) {
       console.error(`  ✗ ${data.subreddit}:`, err.message);

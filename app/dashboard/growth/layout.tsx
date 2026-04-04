@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
+  LayoutDashboard,
   Radar,
   Database,
   FileText,
@@ -14,7 +15,8 @@ import { useState } from "react";
 import { NotificationBell } from "@/components/growth/NotificationBell";
 
 const NAV_ITEMS = [
-  { label: "Radar", href: "/dashboard/growth/radar", icon: Radar, accent: true },
+  { label: "Overview", href: "/dashboard/growth/overview", icon: LayoutDashboard, accent: true },
+  { label: "Radar", href: "/dashboard/growth/radar", icon: Radar },
   { label: "Problemi", href: "/dashboard/growth/problems", icon: Database },
   { label: "Blog", href: "/dashboard/growth/blog", icon: FileText },
 ];
