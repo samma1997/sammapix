@@ -1,3 +1,5 @@
+What is EXIF data and why should you care?
+
 Every time you take a photo with your phone, the camera app writes a hidden block of data into the image file. This is called EXIF data, and it includes far more than you might expect: camera settings like aperture and shutter speed, the exact timestamp, your device model and software version, and most critically, your precise GPS coordinates.
 
 Most smartphones embed location data accurate to approximately 3 meters. That means a photo taken in your living room contains coordinates that point directly to your house. A photo taken at your workplace reveals where you work. A photo at your kid's school reveals where they go to school. All of this data is invisible when you look at the photo, but trivially easy to extract for anyone who downloads the original file.
