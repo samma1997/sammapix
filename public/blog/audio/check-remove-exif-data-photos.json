@@ -1,0 +1,172 @@
+[
+  {
+    "start": 0,
+    "end": 19.39,
+    "text": "Every time you take a photo with your phone, the camera app writes a hidden bloc"
+  },
+  {
+    "start": 19.39,
+    "end": 45.29,
+    "text": "Most smartphones embed location data accurate to approximately 3 meters. That me"
+  },
+  {
+    "start": 45.29,
+    "end": 61.25,
+    "text": "As one Reddit user put it: \"my running app was posting my exact route including "
+  },
+  {
+    "start": 61.25,
+    "end": 81.77,
+    "text": "And it's not just GPS. Your camera model, timestamps, and software version can a"
+  },
+  {
+    "start": 81.77,
+    "end": 85.32,
+    "text": "How to check if your photos contain location data."
+  },
+  {
+    "start": 85.32,
+    "end": 93.46,
+    "text": "The first step is knowing whether your photos actually carry GPS metadata. Here'"
+  },
+  {
+    "start": 93.46,
+    "end": 110.21,
+    "text": "On iPhone. Open any photo in the Photos app, then tap the info button at the bot"
+  },
+  {
+    "start": 110.21,
+    "end": 128.38,
+    "text": "On Android. Open the photo in Google Photos or your default gallery app. Swipe u"
+  },
+  {
+    "start": 128.38,
+    "end": 147.89,
+    "text": "On Windows. Right-click the image file, then Properties, then Details tab. Scrol"
+  },
+  {
+    "start": 147.89,
+    "end": 163.13,
+    "text": "On Mac. Open the image in Preview, then Tools, then Show Inspector, then click t"
+  },
+  {
+    "start": 163.13,
+    "end": 183.07,
+    "text": "Online. Drop the photo into SammaPix EXIF Viewer. It shows every metadata field "
+  },
+  {
+    "start": 183.07,
+    "end": 193.82,
+    "text": "Quick note: if you don't see any location section using any of these methods, yo"
+  },
+  {
+    "start": 193.82,
+    "end": 198.22,
+    "text": "Which apps and platforms strip EXIF data automatically?"
+  },
+  {
+    "start": 198.22,
+    "end": 216.02,
+    "text": "This is where things get confusing, and where most people get a false sense of s"
+  },
+  {
+    "start": 216.02,
+    "end": 257.16,
+    "text": "Here's the breakdown. Instagram strips EXIF publicly but keeps data internally. "
+  },
+  {
+    "start": 257.16,
+    "end": 274.87,
+    "text": "The key takeaway: platforms that strip EXIF are doing it for the public-facing c"
+  },
+  {
+    "start": 274.87,
+    "end": 294.86,
+    "text": "And notice the gaps: Telegram, email, and iMessage don't strip anything. If you "
+  },
+  {
+    "start": 294.86,
+    "end": 298.75,
+    "text": "The screenshot trick, and why it's not the best solution."
+  },
+  {
+    "start": 298.75,
+    "end": 313.75,
+    "text": "A popular suggestion on Reddit with 44 upvotes: just take a screenshot of the ph"
+  },
+  {
+    "start": 313.75,
+    "end": 352.94,
+    "text": "You lose significant resolution. A 12 megapixel photo screenshotted on a 1080p s"
+  },
+  {
+    "start": 352.94,
+    "end": 363.72,
+    "text": "The better approach: use a tool that strips EXIF metadata while keeping the orig"
+  },
+  {
+    "start": 363.72,
+    "end": 369.05,
+    "text": "How to remove EXIF data from photos. Three methods."
+  },
+  {
+    "start": 369.05,
+    "end": 397.63,
+    "text": "Method 1: Browser-based tool. This is the recommended approach. SammaPix EXIF Vi"
+  },
+  {
+    "start": 397.63,
+    "end": 408.82,
+    "text": "This is the fastest method because it works on any device with a browser, requir"
+  },
+  {
+    "start": 408.82,
+    "end": 431.16,
+    "text": "Method 2: Built-in phone settings for prevention. You can prevent GPS data from "
+  },
+  {
+    "start": 431.16,
+    "end": 443.42,
+    "text": "Important: this only affects new photos. Every photo you've already taken still "
+  },
+  {
+    "start": 443.42,
+    "end": 463.06,
+    "text": "Method 3: Desktop built-in tools. On Windows: Right-click the image, Properties,"
+  },
+  {
+    "start": 463.06,
+    "end": 486.12,
+    "text": "On Mac: Open the image in Preview, Tools, Show Inspector, GPS tab. You can view "
+  },
+  {
+    "start": 486.12,
+    "end": 490.25,
+    "text": "Can AI find your location even without EXIF data?"
+  },
+  {
+    "start": 490.25,
+    "end": 501.02,
+    "text": "This was one of the most discussed points in the Reddit thread with 157 upvotes,"
+  },
+  {
+    "start": 501.02,
+    "end": 520.82,
+    "text": "AI tools like GeoSpy, Google Gemini, and PimEyes can analyze the visual content "
+  },
+  {
+    "start": 520.82,
+    "end": 538.94,
+    "text": "As one commenter noted, even without EXIF, if your photo shows a specific type o"
+  },
+  {
+    "start": 538.94,
+    "end": 571.3,
+    "text": "This means EXIF removal is necessary but not sufficient for complete location pr"
+  },
+  {
+    "start": 571.3,
+    "end": 590.21,
+    "text": "That said, for the vast majority of people, stripping EXIF data is the single mo"
+  }
+]

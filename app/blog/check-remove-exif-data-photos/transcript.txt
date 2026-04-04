@@ -1,0 +1,67 @@
+Every time you take a photo with your phone, the camera app writes a hidden block of data into the image file. This is called EXIF data, and it includes far more than you might expect: camera settings like aperture and shutter speed, the exact timestamp, your device model and software version, and most critically, your precise GPS coordinates.
+
+Most smartphones embed location data accurate to approximately 3 meters. That means a photo taken in your living room contains coordinates that point directly to your house. A photo taken at your workplace reveals where you work. A photo at your kid's school reveals where they go to school. All of this data is invisible when you look at the photo, but trivially easy to extract for anyone who downloads the original file.
+
+As one Reddit user put it: "my running app was posting my exact route including where i start aka my front door." That's not a hypothetical. It's the reality for millions of people sharing photos and fitness data without realizing what's embedded in those files.
+
+And it's not just GPS. Your camera model, timestamps, and software version can all be used to profile you. If someone can see you always shoot with a specific iPhone model, always at certain times of day, always processed through the same editing app, that's a behavioral fingerprint that links your photos together even across different platforms.
+
+How to check if your photos contain location data.
+
+The first step is knowing whether your photos actually carry GPS metadata. Here's how to check on every major platform.
+
+On iPhone. Open any photo in the Photos app, then tap the info button at the bottom. If the photo has GPS data, you'll see a small map showing exactly where it was taken. If there's no map section, the photo has no location metadata.
+
+On Android. Open the photo in Google Photos or your default gallery app. Swipe up on the image or tap the three-dot menu and select Details. Look for a location section with a map preview. If it's there, the photo has GPS coordinates embedded.
+
+On Windows. Right-click the image file, then Properties, then Details tab. Scroll down to the GPS section. If you see Latitude and Longitude values, the photo contains location data. This is the method most people on Reddit recommend because it requires zero software.
+
+On Mac. Open the image in Preview, then Tools, then Show Inspector, then click the GPS tab. If coordinates are listed, the photo has location data. If the GPS tab shows nothing, the photo is clean.
+
+Online. Drop the photo into SammaPix EXIF Viewer. It shows every metadata field at once: GPS coordinates, camera model, timestamp, software, everything. And since it runs entirely in your browser, the photo never leaves your device. No upload, no account needed.
+
+Quick note: if you don't see any location section using any of these methods, your photo is clean. No GPS data means there's nothing to worry about for that specific file.
+
+Which apps and platforms strip EXIF data automatically?
+
+This is where things get confusing, and where most people get a false sense of security. In that Reddit thread, one of the most upvoted comments with 236 upvotes nailed it: just because a platform strips metadata for viewers doesn't mean the platform hasn't already saved your location data on their servers.
+
+Here's the breakdown. Instagram strips EXIF publicly but keeps data internally. Facebook strips EXIF publicly but keeps data internally. Twitter strips EXIF publicly but keeps data internally. WhatsApp partially strips on send but not on original, and it's unknown what they keep. Telegram does not strip by default and does not keep data. Email does not strip anything. iMessage does not strip anything. Discord strips EXIF publicly. Reddit strips EXIF publicly but keeps data internally. Signal strips everything and keeps nothing.
+
+The key takeaway: platforms that strip EXIF are doing it for the public-facing copy. The platform itself has already ingested your full metadata, including GPS coordinates, the moment you uploaded. They use this data for advertising, geotagging, and analytics.
+
+And notice the gaps: Telegram, email, and iMessage don't strip anything. If you send a photo via email to someone you don't fully trust, they get your exact GPS coordinates. Same with iMessage. Most people assume private messaging is safe but it's actually the highest-risk context for metadata exposure.
+
+The screenshot trick, and why it's not the best solution.
+
+A popular suggestion on Reddit with 44 upvotes: just take a screenshot of the photo before sharing it. The screenshot won't carry the original EXIF data, so no GPS leak. Technically true, but there are real downsides.
+
+You lose significant resolution. A 12 megapixel photo screenshotted on a 1080p screen drops to about 2 megapixels. That is a massive quality loss. Screenshot resolution depends entirely on your screen size, not the original photo. A 48 megapixel photo becomes whatever your phone screen can display. Screenshots add their own metadata, the timestamp, your device model, and potentially new GPS data from the moment you took the screenshot. If you are sharing photos for any professional or quality-conscious purpose like selling products, portfolio, or prints, screenshots are not acceptable.
+
+The better approach: use a tool that strips EXIF metadata while keeping the original image at full resolution. That way you get privacy and quality, no compromise.
+
+How to remove EXIF data from photos. Three methods.
+
+Method 1: Browser-based tool. This is the recommended approach. SammaPix EXIF Viewer lets you drop a photo, see every metadata field including GPS, camera model, timestamps, and software, then strip GPS only or remove all EXIF with one click. The cleaned file downloads at full original quality. Nothing gets uploaded to any server. The entire process runs in your browser using client-side JavaScript.
+
+This is the fastest method because it works on any device with a browser, requires no installation, no account, and handles the two most common use cases: checking what data exists and removing it.
+
+Method 2: Built-in phone settings for prevention. You can prevent GPS data from being embedded in the first place by turning off location access for your camera app. On iPhone: Settings, Privacy and Security, Location Services, Camera, then set to Never. On Android: Open Camera app, Settings, Location tag, then turn it Off.
+
+Important: this only affects new photos. Every photo you've already taken still has whatever GPS data was embedded at capture time. You need to strip those files separately.
+
+Method 3: Desktop built-in tools. On Windows: Right-click the image, Properties, Details tab, then click Remove Properties and Personal Information at the bottom. You can choose to remove all metadata or select specific fields. Works on Windows 10 and 11 with no extra software.
+
+On Mac: Open the image in Preview, Tools, Show Inspector, GPS tab. You can view the coordinates but Preview doesn't offer a built-in removal tool. The macOS Photos app is better: select your images, go to File, Export, Export Photos, and uncheck Location Information. For batch processing, the command-line tool ExifTool is the gold standard.
+
+Can AI find your location even without EXIF data?
+
+This was one of the most discussed points in the Reddit thread with 157 upvotes, and it's a legitimate concern. The short answer: yes, and it's getting better fast.
+
+AI tools like GeoSpy, Google Gemini, and PimEyes can analyze the visual content of a photo including street signs, architecture style, vegetation type, sun angle, road markings, license plates, and power line configurations, and estimate where it was taken. Some of these tools are disturbingly accurate even with no metadata at all.
+
+As one commenter noted, even without EXIF, if your photo shows a specific type of street lamp, a certain chain store in the background, or a particular style of architecture, AI can narrow down the location. Another pointed out that Gemini was able to identify neighborhoods from photos that had zero metadata.
+
+This means EXIF removal is necessary but not sufficient for complete location privacy. If you need maximum protection: Strip all EXIF data before sharing. That's the bare minimum. Avoid including street signs, building numbers, or unique landmarks in the background of photos you share publicly. Be aware that distinctive vegetation, weather patterns, and architecture all give location clues to AI systems. For truly sensitive situations, consider blurring or cropping backgrounds before sharing.
+
+That said, for the vast majority of people, stripping EXIF data is the single most impactful thing you can do. AI-based geolocation requires effort and intent from whoever is trying to find you. EXIF data, on the other hand, hands over your exact coordinates to anyone who right-clicks and checks file properties.
