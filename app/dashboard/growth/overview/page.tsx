@@ -312,6 +312,7 @@ export default function OverviewPage() {
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [activeUsers, setActiveUsers] = useState<number | null>(null);
   const [revenueHistory, setRevenueHistory] = useState<{ month: string; revenue: number }[]>([]);
+  const [todos, setTodos] = useState<{ id: number; type: string; title: string; description: string; actionUrl?: string; draftText?: string; status: string; priority: number }[]>([]);
 
   const fmt = (n: number): string => {
     if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
@@ -479,6 +480,12 @@ export default function OverviewPage() {
       .then((d) => { if (d) setActiveUsers(d.activeUsers ?? 0); })
       .catch(() => {});
 
+    // Fetch daily todos
+    fetch("/api/growth/todos")
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => { if (d?.todos) setTodos(d.todos); })
+      .catch(() => {});
+
     // Fetch revenue history
     fetch("/api/growth/stripe")
       .then((r) => r.ok ? r.json() : null)
@@ -601,6 +608,108 @@ export default function OverviewPage() {
           loading={loading}
         />
       </div>
+
+      {/* ─── Daily TODOs ─── */}
+      {todos.length > 0 && (
+        <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
+              Da fare oggi
+            </h2>
+            <span className="text-[10px] text-[#A3A3A3]">
+              {todos.filter(t => t.status === "done").length}/{todos.length} completati
+            </span>
+          </div>
+          <div className="space-y-2">
+            {todos.map((todo) => {
+              const typeIcons: Record<string, string> = {
+                reddit_post: "📝", reddit_comment: "💬", directory: "📂",
+                backlink: "🔗", blog: "✍️", gsc_alert: "📊", linkedin: "💼",
+              };
+              const isDone = todo.status === "done";
+              const isSkipped = todo.status === "skipped";
+              return (
+                <div
+                  key={todo.id}
+                  className={`flex items-start gap-3 p-3 rounded-[6px] border transition-colors ${
+                    isDone
+                      ? "bg-green-50/50 dark:bg-green-950/10 border-green-200 dark:border-green-900/30"
+                      : isSkipped
+                        ? "bg-[#FAFAFA] dark:bg-[#1A1A1A] border-[#E5E5E5] dark:border-[#2A2A2A] opacity-50"
+                        : "bg-white dark:bg-[#191919] border-[#E5E5E5] dark:border-[#2A2A2A] hover:border-[#D4D4D4]"
+                  }`}
+                >
+                  {/* Checkbox */}
+                  <button
+                    onClick={async () => {
+                      const newStatus = isDone ? "pending" : "done";
+                      await fetch(`/api/growth/todos/${todo.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ status: newStatus }),
+                      });
+                      setTodos(prev => prev.map(t => t.id === todo.id ? { ...t, status: newStatus } : t));
+                    }}
+                    className={`mt-0.5 h-4 w-4 rounded border shrink-0 flex items-center justify-center transition-colors ${
+                      isDone
+                        ? "bg-green-500 border-green-500 text-white"
+                        : "border-[#D4D4D4] dark:border-[#404040] hover:border-[#6366F1]"
+                    }`}
+                  >
+                    {isDone && <span className="text-[10px]">✓</span>}
+                  </button>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-xs">{typeIcons[todo.type] || "📌"}</span>
+                      <span className={`text-sm font-medium ${isDone ? "line-through text-[#A3A3A3]" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
+                        {todo.title}
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#737373] leading-relaxed">{todo.description}</p>
+                    {todo.draftText && !isDone && (
+                      <details className="mt-2">
+                        <summary className="text-[10px] text-[#6366F1] cursor-pointer hover:underline">Mostra testo pronto</summary>
+                        <pre className="mt-1 text-xs text-[#525252] dark:text-[#A3A3A3] bg-[#FAFAFA] dark:bg-[#252525] p-2 rounded-[4px] whitespace-pre-wrap font-mono">{todo.draftText}</pre>
+                      </details>
+                    )}
+                  </div>
+
+                  {/* Action + Skip */}
+                  <div className="flex items-center gap-1 shrink-0">
+                    {todo.actionUrl && !isDone && (
+                      <a
+                        href={todo.actionUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] px-2 py-1 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[4px] hover:opacity-80 transition-opacity"
+                      >
+                        Vai
+                      </a>
+                    )}
+                    {!isDone && !isSkipped && (
+                      <button
+                        onClick={async () => {
+                          await fetch(`/api/growth/todos/${todo.id}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ status: "skipped" }),
+                          });
+                          setTodos(prev => prev.map(t => t.id === todo.id ? { ...t, status: "skipped" } : t));
+                        }}
+                        className="text-[10px] px-2 py-1 text-[#A3A3A3] hover:text-[#737373] transition-colors"
+                      >
+                        Salta
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ─── Chart: Impressions + Clicks 30d ─── */}
       <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5 mb-6">

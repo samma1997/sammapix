@@ -218,3 +218,19 @@ export const growthRedditIntelligence = pgTable("growth_reddit_intelligence", {
 
 export type RedditIntelligence = typeof growthRedditIntelligence.$inferSelect;
 export type NewRedditIntelligence = typeof growthRedditIntelligence.$inferInsert;
+
+export const growthDailyTodos = pgTable("growth_daily_todos", {
+  id: serial("id").primaryKey(),
+  date: text("date").notNull(), // "2026-04-04"
+  type: text("type").notNull(), // 'reddit_post', 'reddit_comment', 'directory', 'backlink', 'blog', 'gsc_alert', 'linkedin'
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  actionUrl: text("action_url"),
+  draftText: text("draft_text"), // pre-written text (Reddit post, comment, etc.)
+  status: text("status").default("pending"), // 'pending', 'done', 'skipped'
+  priority: integer("priority").default(0), // higher = more important
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type DailyTodo = typeof growthDailyTodos.$inferSelect;
+export type NewDailyTodo = typeof growthDailyTodos.$inferInsert;
