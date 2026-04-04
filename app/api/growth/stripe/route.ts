@@ -14,6 +14,7 @@ export async function GET() {
       activeSubscriptions: 0,
       mrr: 0,
       newThisMonth: 0,
+      monthlyHistory: [],
     });
   }
 
@@ -21,5 +22,9 @@ export async function GET() {
     activeSubscriptions: stats.activeSubscriptions,
     mrr: Math.round(stats.mrr / 100), // cents → dollars
     newThisMonth: stats.newThisMonth,
+    monthlyHistory: stats.monthlyHistory.map(m => ({
+      month: m.month,
+      revenue: Math.round(m.revenue / 100), // cents → dollars
+    })),
   });
 }
