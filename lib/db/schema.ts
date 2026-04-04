@@ -177,3 +177,22 @@ export const growthToolRadar = pgTable("growth_tool_radar", {
 
 export type ToolRadarItem = typeof growthToolRadar.$inferSelect;
 export type NewToolRadarItem = typeof growthToolRadar.$inferInsert;
+
+export const growthProblems = pgTable("growth_problems", {
+  id: serial("id").primaryKey(),
+  problem: text("problem").notNull(),
+  userLanguage: text("user_language").notNull(), // exact words users use
+  source: text("source").notNull(), // "reddit/r/LifeProTips/1sb7ssk" or "gsc"
+  sourceUrl: text("source_url"),
+  frequency: integer("frequency").default(1),
+  keywordTarget: text("keyword_target"),
+  sammaPixTool: text("sammapix_tool"), // which tool solves this
+  status: text("status").default("new"), // 'new', 'idea', 'writing', 'published'
+  blogPostUrl: text("blog_post_url"),
+  outline: text("outline"), // AI-generated blog outline
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export type Problem = typeof growthProblems.$inferSelect;
+export type NewProblem = typeof growthProblems.$inferInsert;

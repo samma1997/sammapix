@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/dashboard/growth/outreach");
+  redirect("/dashboard/growth/radar");
 }
