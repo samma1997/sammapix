@@ -3,28 +3,20 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  Search,
-  MessageSquare,
-  Link as LinkIcon,
+  Radar,
+  Database,
   FileText,
-  Sparkles,
-  Target,
   LogOut,
   Menu,
   X,
-  BookOpen,
 } from "lucide-react";
 import { useState } from "react";
 import { NotificationBell } from "@/components/growth/NotificationBell";
 
 const NAV_ITEMS = [
-  { label: "Piano", href: "/dashboard/growth/plan", icon: Target, accent: true },
-  { label: "SEO", href: "/dashboard/growth/seo", icon: Search },
-  { label: "Reddit", href: "/dashboard/growth/reddit", icon: MessageSquare },
-  { label: "Link Building", href: "/dashboard/growth/outreach", icon: LinkIcon },
-  { label: "Contenuti", href: "/dashboard/growth/content", icon: FileText },
-  { label: "Strategia", href: "/dashboard/growth/strategy", icon: Sparkles },
-  { label: "Guida", href: "/dashboard/growth/guida", icon: BookOpen },
+  { label: "Radar", href: "/dashboard/growth/radar", icon: Radar, accent: true },
+  { label: "Problemi", href: "/dashboard/growth/problems", icon: Database },
+  { label: "Blog", href: "/dashboard/growth/blog", icon: FileText },
 ];
 
 export default function GrowthLayout({
