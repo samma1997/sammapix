@@ -310,6 +310,8 @@ export default function OverviewPage() {
   const [data, setData] = useState<OverviewData | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
+  const [activeUsers, setActiveUsers] = useState<number | null>(null);
+  const [revenueHistory, setRevenueHistory] = useState<{ month: string; revenue: number }[]>([]);
 
   const fmt = (n: number): string => {
     if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
@@ -470,6 +472,27 @@ export default function OverviewPage() {
 
   useEffect(() => {
     fetchAll();
+
+    // Fetch real-time visitors
+    fetch("/api/growth/analytics/realtime")
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => { if (d) setActiveUsers(d.activeUsers ?? 0); })
+      .catch(() => {});
+
+    // Fetch revenue history
+    fetch("/api/growth/stripe")
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => { if (d?.monthlyHistory) setRevenueHistory(d.monthlyHistory); })
+      .catch(() => {});
+
+    // Poll real-time every 30s
+    const interval = setInterval(() => {
+      fetch("/api/growth/analytics/realtime")
+        .then((r) => r.ok ? r.json() : null)
+        .then((d) => { if (d) setActiveUsers(d.activeUsers ?? 0); })
+        .catch(() => {});
+    }, 30000);
+    return () => clearInterval(interval);
   }, [fetchAll]);
 
   return (
@@ -489,6 +512,12 @@ export default function OverviewPage() {
           {lastUpdate && (
             <span className="text-[11px] text-[#A3A3A3]">
               Aggiornato alle {lastUpdate}
+            </span>
+          )}
+          {activeUsers !== null && (
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/30 px-2 py-0.5 rounded-full">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+              {activeUsers} {activeUsers === 1 ? "utente" : "utenti"} online
             </span>
           )}
         </div>
@@ -651,6 +680,33 @@ export default function OverviewPage() {
           )}
         </div>
       ) : null}
+
+      {/* ─── Revenue History ─── */}
+      {revenueHistory.length > 0 && (
+        <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4 mb-6">
+          <h3 className="text-xs font-medium uppercase tracking-[0.08em] text-[#A3A3A3] mb-3">Revenue ultimi 6 mesi</h3>
+          <div className="flex items-end gap-2 h-[80px]">
+            {revenueHistory.map((m) => {
+              const maxRev = Math.max(...revenueHistory.map((r) => r.revenue), 1);
+              const pct = (m.revenue / maxRev) * 100;
+              return (
+                <div key={m.month} className="flex-1 flex flex-col items-center gap-1 group relative">
+                  <div
+                    className="w-full bg-[#171717] dark:bg-[#E5E5E5] rounded-t-[3px] transition-colors group-hover:bg-[#6366F1] min-h-[2px]"
+                    style={{ height: `${Math.max(pct, 3)}%` }}
+                  />
+                  <span className="text-[9px] text-[#A3A3A3]">{m.month.slice(5)}</span>
+                  <div className="absolute bottom-full mb-1 hidden group-hover:block z-10">
+                    <div className="bg-[#171717] text-white text-[10px] px-2 py-1 rounded whitespace-nowrap">
+                      ${m.revenue}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ─── AI Insights ─── */}
       <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5 mb-6">

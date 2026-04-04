@@ -168,3 +168,20 @@ export async function fetchGA4Summary(
     countries,
   };
 }
+
+export async function fetchGA4Realtime(propertyId: string): Promise<{ activeUsers: number }> {
+  const client = getClient();
+
+  try {
+    const [response] = await client.runRealtimeReport({
+      property: `properties/${propertyId}`,
+      metrics: [{ name: "activeUsers" }],
+    });
+
+    const activeUsers = parseInt(response?.rows?.[0]?.metricValues?.[0]?.value ?? "0");
+    return { activeUsers };
+  } catch (err) {
+    console.error("[GA4 Realtime] Error:", err);
+    return { activeUsers: 0 };
+  }
+}
