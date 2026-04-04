@@ -658,25 +658,25 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
         <KpiCard
           icon={<Eye size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtNum(gsc.weekly.impressions) : "—"}
+          value={gsc ? fmtNum(gsc.weekly?.impressions ?? 0) : "—"}
           label="Impressioni 7gg"
           loading={gscLoading}
         />
         <KpiCard
           icon={<MousePointerClick size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtNum(gsc.weekly.clicks) : "—"}
+          value={gsc ? fmtNum(gsc.weekly?.clicks ?? 0) : "—"}
           label="Click 7gg"
           loading={gscLoading}
         />
         <KpiCard
           icon={<TrendingUp size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtPct(gsc.weekly.ctr) : "—"}
+          value={gsc ? fmtPct(gsc.weekly?.ctr ?? 0) : "—"}
           label="CTR"
           loading={gscLoading}
         />
         <KpiCard
           icon={<Globe size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtPosition(gsc.weekly.position) : "—"}
+          value={gsc ? fmtPosition(gsc.weekly?.position ?? 0) : "—"}
           label="Posizione media"
           loading={gscLoading}
         />
