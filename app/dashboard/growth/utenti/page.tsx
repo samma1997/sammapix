@@ -259,7 +259,7 @@ export default function UtentiPage() {
                       className="border-b border-[#E5E5E5] dark:border-[#2A2A2A] last:border-b-0 hover:bg-[#FAFAFA] dark:hover:bg-[#1E1E1E] transition-colors"
                     >
                       <td className="px-4 py-3 text-[#171717] dark:text-[#E5E5E5] font-mono text-xs">
-                        {maskEmail(c.email)}
+                        <a href={`mailto:${c.email}`} className="hover:text-[#6366F1] transition-colors">{c.email}</a>
                       </td>
                       <td className="px-4 py-3 text-[#171717] dark:text-[#E5E5E5]">
                         {name}
