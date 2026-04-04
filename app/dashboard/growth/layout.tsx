@@ -6,9 +6,7 @@ import {
   LayoutDashboard,
   BarChart3,
   Bot,
-  Radar,
-  Database,
-  FileText,
+  Users,
   LogOut,
   Menu,
   X,
@@ -18,10 +16,8 @@ import { useState } from "react";
 const NAV_ITEMS = [
   { label: "Overview", href: "/dashboard/growth/overview", icon: LayoutDashboard, accent: true },
   { label: "Analitiche", href: "/dashboard/growth/analytics", icon: BarChart3 },
+  { label: "Utenti", href: "/dashboard/growth/utenti", icon: Users },
   { label: "Assistente", href: "/dashboard/growth/assistente", icon: Bot },
-  { label: "Radar", href: "/dashboard/growth/radar", icon: Radar },
-  { label: "Problemi", href: "/dashboard/growth/problems", icon: Database },
-  { label: "Blog", href: "/dashboard/growth/blog", icon: FileText },
 ];
 
 export default function GrowthLayout({
@@ -61,9 +57,9 @@ export default function GrowthLayout({
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                Growth HQ
+                SammaPix
               </h1>
-              <p className="text-[10px] text-[#A3A3A3] mt-0.5">Centro di comando SammaPix</p>
+              <p className="text-[10px] text-[#A3A3A3] mt-0.5">Dashboard</p>
             </div>
             <button
               onClick={() => setSidebarOpen(false)}
@@ -130,7 +126,7 @@ export default function GrowthLayout({
             <Menu className="h-5 w-5" strokeWidth={1.5} />
           </button>
           <h1 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-            Growth HQ
+            SammaPix
           </h1>
           <div className="w-5" />
         </header>
