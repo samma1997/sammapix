@@ -196,3 +196,25 @@ export const growthProblems = pgTable("growth_problems", {
 
 export type Problem = typeof growthProblems.$inferSelect;
 export type NewProblem = typeof growthProblems.$inferInsert;
+
+export const growthRedditIntelligence = pgTable("growth_reddit_intelligence", {
+  id: serial("id").primaryKey(),
+  subreddit: text("subreddit").notNull().unique(),
+  tier: text("tier").default("unknown"), // 'proven', 'testing', 'blocked', 'unknown'
+  minKarma: integer("min_karma"),
+  linksAllowed: boolean("links_allowed"),
+  selfPromoAllowed: boolean("self_promo_allowed"),
+  automodRules: text("automod_rules"), // JSON string of known rules
+  bestPostFormat: text("best_post_format"), // what works
+  avgUpvotes: integer("avg_upvotes").default(0),
+  totalPosts: integer("total_posts").default(0),
+  totalBlocked: integer("total_blocked").default(0),
+  bestTimeUtc: text("best_time_utc"), // "06:00-09:00"
+  notes: text("notes"),
+  lastTestedAt: timestamp("last_tested_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export type RedditIntelligence = typeof growthRedditIntelligence.$inferSelect;
+export type NewRedditIntelligence = typeof growthRedditIntelligence.$inferInsert;
