@@ -1,16 +1,36 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { growthDailyTodos, growthRedditIntelligence, growthRedditPosts, growthGscDaily } from "@/lib/db/schema";
+import { growthDailyTodos, growthGscDaily } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { eq, gte, desc, sql } from "drizzle-orm";
+import { gte, sql, eq, and } from "drizzle-orm";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
-// Verify cron secret
 function verifyCron(req: Request): boolean {
   const authHeader = req.headers.get("authorization");
   return authHeader === `Bearer ${process.env.CRON_SECRET}`;
+}
+
+// Search Reddit for FRESH threads (last 24h)
+async function searchRedditFresh(query: string, limit = 5): Promise<Array<{ title: string; subreddit: string; url: string; comments: number; score: number }>> {
+  try {
+    const res = await fetch(
+      `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=new&t=day&limit=${limit}`,
+      { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data?.data?.children ?? []).map((c: any) => ({
+      title: c.data.title,
+      subreddit: c.data.subreddit,
+      url: `https://www.reddit.com${c.data.permalink}`,
+      comments: c.data.num_comments,
+      score: c.data.score,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export async function POST(req: Request) {
@@ -20,89 +40,175 @@ export async function POST(req: Request) {
 
   const today = new Date().toISOString().slice(0, 10);
   const todos: Array<{
-    date: string;
-    type: string;
-    title: string;
-    description: string;
-    actionUrl?: string;
-    draftText?: string;
-    priority: number;
+    date: string; type: string; title: string; description: string;
+    actionUrl?: string; draftText?: string; priority: number;
   }> = [];
 
+  // Delete old todos for today (in case cron runs twice)
+  await db.delete(growthDailyTodos).where(eq(growthDailyTodos.date, today));
+
+  const apiKey = process.env.GEMINI_API_KEY;
+  const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+  const model = genAI?.getGenerativeModel({ model: "gemini-2.5-flash" });
+
   try {
-    // 1. REDDIT POSTS — Generate 2 karma-building post ideas
-    const provenSubs = await db.select().from(growthRedditIntelligence).where(eq(growthRedditIntelligence.tier, "proven"));
+    // ═══════════════════════════════════════════
+    // 1. REDDIT POSTS — 2 post karma con testo pronto
+    // ═══════════════════════════════════════════
+    if (model) {
+      const postResult = await model.generateContent(`Genera 2 post Reddit per fare karma su temi legati a immagini, foto, privacy digitale, produttività.
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (apiKey) {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+REGOLE FERREE:
+- Subreddit SOLO tra: DoesAnybodyElse, LifeProTips, AskReddit, todayilearned
+- Il testo deve suonare 100% umano, casuale, da esperienza personale
+- ZERO marketing, ZERO menzioni di prodotti
+- Ogni post deve poter fare 50+ upvote
+- Il campo "subreddit" deve contenere SOLO il nome (es. "LifeProTips", NON "r/LifeProTips")
+- Scrivi titolo e body in INGLESE (Reddit è inglese)
+- Body può essere vuoto per AskReddit e DoesAnybodyElse
 
-      // Generate Reddit post ideas
-      const subsInfo = provenSubs.map(s => `r/${s.subreddit}: ${s.bestPostFormat || "generic"}, ${s.notes || ""}`).join("\n");
+POST CHE HANNO FUNZIONATO IN PASSATO:
+- r/LifeProTips: "LPT: Before posting photos online, check if they contain GPS location data" → 1K upvote
+- r/DoesAnybodyElse: "DAE set their alarm 30 minutes early just to enjoy lying in bed?" → 144 upvote
 
-      const postResult = await model.generateContent(`Generate 2 Reddit post ideas for karma building. These posts should be about image/photo topics that naturally lead to discussions about image optimization, privacy, or photo workflow.
-
-Subreddits available:
-${subsInfo}
-
-Also consider: r/DoesAnybodyElse, r/LifeProTips, r/AskReddit, r/todayilearned
-
-Rules:
-- Posts must sound 100% human, casual, from personal experience
-- NO marketing, NO product mentions
-- Each post should potentially generate 50+ upvotes
-- Include the exact subreddit to post on
-- Include the complete post title and body text
-
-Return as JSON array:
-[{"subreddit": "...", "title": "...", "body": "...", "reason": "why this will work"}]
-
-Return ONLY the JSON array.`);
+Rispondi SOLO con un JSON array:
+[{"subreddit": "NomeSub", "title": "titolo post", "body": "testo o vuoto", "perche": "1 frase in italiano sul perché funzionerà"}]`);
 
       try {
-        const postText = postResult.response.text().trim();
-        const jsonMatch = postText.match(/\[[\s\S]*\]/);
-        if (jsonMatch) {
-          const posts = JSON.parse(jsonMatch[0]);
-          for (const post of posts.slice(0, 2)) {
+        const text = postResult.response.text().trim();
+        const match = text.match(/\[[\s\S]*\]/);
+        if (match) {
+          const posts = JSON.parse(match[0]);
+          for (const p of posts.slice(0, 2)) {
+            const sub = p.subreddit.replace(/^r\//, ""); // rimuovi r/ se c'è
             todos.push({
-              date: today,
-              type: "reddit_post",
-              title: `Posta su r/${post.subreddit}`,
-              description: post.reason || "Karma building post",
-              actionUrl: `https://www.reddit.com/r/${post.subreddit}/submit`,
-              draftText: `TITOLO: ${post.title}\n\nTESTO:\n${post.body || "(solo titolo)"}`,
-              priority: 8,
+              date: today, type: "reddit_post", priority: 9,
+              title: `Posta su r/${sub}`,
+              description: p.perche || p.reason || "",
+              actionUrl: `https://www.reddit.com/r/${sub}/submit`,
+              draftText: p.body ? `${p.title}\n\n${p.body}` : p.title,
             });
           }
         }
       } catch {}
+    }
 
-      // Generate Reddit comment ideas based on recent scraped posts
-      const recentPosts = await db.select().from(growthRedditPosts)
-        .where(eq(growthRedditPosts.status, "to_comment"))
-        .orderBy(desc(growthRedditPosts.relevanceScore))
-        .limit(5);
+    // ═══════════════════════════════════════════
+    // 2. REDDIT COMMENTI — cerca thread FRESCHI di oggi
+    // ═══════════════════════════════════════════
+    const queries = ["compress images", "image optimization", "remove metadata photos", "photo privacy", "resize images"];
+    const allThreads: Array<{ title: string; subreddit: string; url: string; comments: number }> = [];
 
-      for (const post of recentPosts.slice(0, 3)) {
-        todos.push({
-          date: today,
-          type: "reddit_comment",
-          title: `Commenta su r/${post.subreddit}`,
-          description: post.title,
-          actionUrl: post.url,
-          draftText: post.draftComment || "Genera commento dall'Assistente AI",
-          priority: 7,
-        });
+    for (const q of queries) {
+      await new Promise(r => setTimeout(r, 1500)); // rate limit
+      const threads = await searchRedditFresh(q, 3);
+      allThreads.push(...threads);
+    }
+
+    // Filtra: solo thread con pochi commenti (più facile essere visibili) e rilevanti
+    const commentable = allThreads
+      .filter(t => t.comments < 20 && t.comments >= 0)
+      .sort((a, b) => a.comments - b.comments)
+      .slice(0, 3);
+
+    if (model && commentable.length > 0) {
+      for (const thread of commentable) {
+        try {
+          const commentResult = await model.generateContent(`Scrivi un commento Reddit per questo post. Devi sembrare un utente vero.
+
+POST: "${thread.title}" su r/${thread.subreddit}
+
+REGOLE:
+- 2-3 frasi, casuale, da esperienza personale
+- Includi almeno un numero specifico
+- MAI menzionare SammaPix o qualsiasi prodotto
+- MAI usare emoji, bullet point, markdown
+- Lowercase ok, tono da Reddit
+
+Scrivi SOLO il commento, nient'altro.`);
+
+          const draft = commentResult.response.text().trim();
+          todos.push({
+            date: today, type: "reddit_comment", priority: 7,
+            title: `Commenta su r/${thread.subreddit}`,
+            description: thread.title.slice(0, 100),
+            actionUrl: thread.url,
+            draftText: draft,
+          });
+        } catch {}
       }
     }
 
-    // 2. DIRECTORY — Pick next directory to submit
-    const directoriesToDo = [
+    // ═══════════════════════════════════════════
+    // 3. BLOG — Suggerisci 1 articolo basato su ricerca Reddit
+    // ═══════════════════════════════════════════
+    if (model) {
+      // Usa i thread trovati + GSC keywords per suggerire un topic
+      const threadTitles = allThreads.slice(0, 10).map(t => `"${t.title}" (r/${t.subreddit})`).join("\n");
+
+      const weekAgo = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
+      const topKw = await db.select({
+        query: growthGscDaily.query,
+        clicks: sql<number>`sum(${growthGscDaily.clicks})`,
+        position: sql<number>`avg(${growthGscDaily.position})`,
+      }).from(growthGscDaily)
+        .where(and(gte(growthGscDaily.date, weekAgo), sql`${growthGscDaily.query} IS NOT NULL`))
+        .groupBy(growthGscDaily.query)
+        .orderBy(sql`sum(${growthGscDaily.clicks}) desc`)
+        .limit(10);
+
+      const kwList = topKw.filter(k => k.query).map(k => `"${k.query}" (pos ${(k.position || 0).toFixed(0)}, ${k.clicks || 0} click)`).join("\n");
+
+      const blogResult = await model.generateContent(`Suggerisci 1 articolo blog per SammaPix (tool immagini AI, 25+ tool browser-based).
+
+THREAD REDDIT FRESCHI DI OGGI:
+${threadTitles || "Nessun thread trovato"}
+
+KEYWORD GSC CHE PORTANO TRAFFICO:
+${kwList || "Nessuna keyword"}
+
+ARTICOLI GIÀ SCRITTI (da NON ripetere):
+- How to Check and Remove EXIF Data
+- Image Compression Statistics 2026
+- Best Image Format for Web 2026
+- How to Compress Images Without Losing Quality
+- TinyPNG Alternative
+- Browser-Based Image Tools Privacy Guide
+
+Suggerisci 1 articolo NUOVO che:
+1. Risponde a un problema REALE visto nei thread Reddit
+2. Può rankare per una keyword con volume di ricerca
+3. Porta traffico al tool SammaPix più rilevante
+
+Rispondi in italiano con:
+- Titolo articolo (in inglese, per il blog)
+- Keyword target
+- Tool SammaPix collegato
+- Perché scriverlo (1 frase)
+
+Formato: JSON {"title": "...", "keyword": "...", "tool": "...", "perche": "..."}`);
+
+      try {
+        const blogText = blogResult.response.text().trim();
+        const blogMatch = blogText.match(/\{[\s\S]*\}/);
+        if (blogMatch) {
+          const blog = JSON.parse(blogMatch[0]);
+          todos.push({
+            date: today, type: "blog", priority: 10,
+            title: `Scrivi blog: "${blog.title}"`,
+            description: `Keyword: ${blog.keyword} | Tool: ${blog.tool} | ${blog.perche}`,
+            draftText: `Apri Claude Code e scrivi:\n"Scrivi un blog post su: ${blog.title}. Keyword target: ${blog.keyword}. Collega al tool ${blog.tool}."`,
+          });
+        }
+      } catch {}
+    }
+
+    // ═══════════════════════════════════════════
+    // 4. DIRECTORY — 1 directory da submittare
+    // ═══════════════════════════════════════════
+    const directories = [
       { name: "There's An AI For That", url: "https://theresanaiforthat.com/submit/", da: 76 },
       { name: "Futurepedia", url: "https://www.futurepedia.io/submit-tool", da: 72 },
-      { name: "FutureTools", url: "https://www.futuretools.io/submit-a-tool", da: 55 },
       { name: "Toolify.ai", url: "https://www.toolify.ai/submit", da: 72 },
       { name: "AlternativeTo", url: "https://alternativeto.net/manage/submit/", da: 80 },
       { name: "F6S", url: "https://www.f6s.com/", da: 83 },
@@ -111,55 +217,55 @@ Return ONLY the JSON array.`);
       { name: "Tekpon", url: "https://tekpon.com/get-listed/", da: 71 },
       { name: "DevHunt", url: "https://devhunt.org/", da: 50 },
       { name: "BetaList", url: "https://betalist.com/submit", da: 74 },
-      { name: "Hashnode", url: "https://hashnode.com", da: 70 },
-      { name: "LinkedIn Company Page", url: "https://linkedin.com/company/setup/", da: 99 },
+      { name: "OpenTools", url: "https://opentools.ai/submit", da: 55 },
+      { name: "MicroLaunch", url: "https://microlaunch.net/submit", da: 51 },
     ];
-
-    // Pick a random directory (in production, track which ones are done)
-    const dayOfYear = Math.floor((Date.now() - new Date(2026, 0, 1).getTime()) / 86400000);
-    const dirIndex = dayOfYear % directoriesToDo.length;
-    const dir = directoriesToDo[dirIndex];
-
+    const dirIdx = Math.floor((Date.now() - new Date(2026, 0, 1).getTime()) / 86400000) % directories.length;
+    const dir = directories[dirIdx];
     todos.push({
-      date: today,
-      type: "directory",
-      title: `Submitta su ${dir.name} (DA ${dir.da})`,
-      description: `Submitta SammaPix su ${dir.name} per backlink. Usa le info prodotto standard.`,
+      date: today, type: "directory", priority: 5,
+      title: `Directory: ${dir.name} (DA ${dir.da})`,
+      description: "Apri Claude Chrome e usa il prompt standard di submission SammaPix.",
       actionUrl: dir.url,
-      priority: 6,
     });
 
-    // 3. BACKLINK — Suggest one backlink action
-    const backlinkActions = [
-      { title: "Cross-post ultimo articolo su Dev.to", desc: "Copia l'ultimo blog post su Dev.to con canonical URL a sammapix.com", url: "https://dev.to/new", priority: 5 },
-      { title: "Cross-post su Medium", desc: "Pubblica l'ultimo articolo su Medium con canonical URL", url: "https://medium.com/new-story", priority: 5 },
-      { title: "Cross-post su Hashnode", desc: "Pubblica l'ultimo articolo su Hashnode con canonical URL", url: "https://hashnode.com/draft", priority: 5 },
-      { title: "Rispondi su Quora", desc: "Cerca 'best image compressor' o 'remove exif data' su Quora e rispondi menzionando SammaPix", url: "https://www.quora.com/search?q=best+image+compressor", priority: 4 },
-      { title: "Controlla Featured.com per query HARO", desc: "Cerca query di giornalisti su image tools, privacy, o web performance", url: "https://featured.com", priority: 4 },
+    // ═══════════════════════════════════════════
+    // 5. LINKEDIN — 1 azione outreach/post
+    // ═══════════════════════════════════════════
+    const linkedinActions = [
+      { title: "LinkedIn: pubblica post build-in-public", description: "Condividi un risultato recente (es. 441K views su Reddit, nuovo tool, milestone utenti). Link nel primo commento, non nel post.", url: "https://www.linkedin.com/feed/", priority: 5 },
+      { title: "LinkedIn: crea Company Page SammaPix", description: "Se non l'hai ancora fatto, crea la company page. Backlink DA 99 gratis.", url: "https://www.linkedin.com/company/setup/new/", priority: 6 },
+      { title: "LinkedIn: connetti con 3 blogger tech", description: "Cerca 'image optimization blogger' o 'web performance' e connetti con 3 persone. NON pitchare subito, prima engage.", url: "https://www.linkedin.com/search/results/people/?keywords=image%20optimization%20blog", priority: 4 },
+      { title: "LinkedIn: commenta su 2 post di settore", description: "Cerca post su image optimization, web performance, o SaaS tools. Lascia commenti utili (non promo). Costruisci visibilità.", url: "https://www.linkedin.com/feed/", priority: 4 },
     ];
-    const blIndex = dayOfYear % backlinkActions.length;
-    const bl = backlinkActions[blIndex];
+    const liIdx = Math.floor((Date.now() - new Date(2026, 0, 1).getTime()) / 86400000) % linkedinActions.length;
+    const li = linkedinActions[liIdx];
+    todos.push({ date: today, type: "linkedin", ...li });
 
-    todos.push({
-      date: today,
-      type: "backlink",
-      title: bl.title,
-      description: bl.desc,
-      actionUrl: bl.url,
-      priority: bl.priority,
-    });
+    // ═══════════════════════════════════════════
+    // 6. BACKLINK — 1 azione backlink
+    // ═══════════════════════════════════════════
+    const backlinkActions = [
+      { title: "Cross-post ultimo articolo su Dev.to", description: "Importa l'ultimo blog con canonical URL a sammapix.com. Backlink DA 70+.", url: "https://dev.to/new", priority: 5 },
+      { title: "Cross-post su Medium", description: "Pubblica l'ultimo articolo con canonical URL a sammapix.com. Backlink DA 95.", url: "https://medium.com/new-story", priority: 5 },
+      { title: "Cross-post su Hashnode", description: "Importa articolo con canonical URL. Backlink DA 70+.", url: "https://hashnode.com/draft", priority: 5 },
+      { title: "Rispondi su Quora", description: "Cerca 'best image compressor' o 'remove exif data' e rispondi con menzione naturale di SammaPix.", url: "https://www.quora.com/search?q=best+image+compressor+free", priority: 4 },
+      { title: "Controlla Featured.com per HARO", description: "Cerca query di giornalisti su image tools, privacy, web performance. Rispondi per backlink DA 60-90.", url: "https://featured.com", priority: 4 },
+    ];
+    const blIdx = Math.floor((Date.now() - new Date(2026, 0, 1).getTime()) / 86400000) % backlinkActions.length;
+    const bl = backlinkActions[blIdx];
+    todos.push({ date: today, type: "backlink", ...bl });
 
-    // 4. GSC ALERTS — Check keyword movements
+    // ═══════════════════════════════════════════
+    // 7. GSC — keyword alert
+    // ═══════════════════════════════════════════
     const weekAgo = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
-
-    // This week vs last week position comparison would need more complex query
-    // For now, just note the current top keywords
     const topKeywords = await db.select({
       query: growthGscDaily.query,
       clicks: sql<number>`sum(${growthGscDaily.clicks})`,
       position: sql<number>`avg(${growthGscDaily.position})`,
     }).from(growthGscDaily)
-      .where(gte(growthGscDaily.date, weekAgo))
+      .where(and(gte(growthGscDaily.date, weekAgo), sql`${growthGscDaily.query} IS NOT NULL`))
       .groupBy(growthGscDaily.query)
       .orderBy(sql`sum(${growthGscDaily.clicks}) desc`)
       .limit(5);
@@ -167,40 +273,28 @@ Return ONLY the JSON array.`);
     if (topKeywords.length > 0) {
       const kwList = topKeywords
         .filter(k => k.query)
-        .map(k => `"${k.query}" pos ${(k.position || 0).toFixed(0)}`)
-        .join(", ");
-
+        .map(k => `"${k.query}" pos ${(k.position || 0).toFixed(0)} (${k.clicks || 0} click)`)
+        .join(" | ");
       if (kwList) {
         todos.push({
-          date: today,
-          type: "gsc_alert",
-          title: "Top keyword questa settimana",
+          date: today, type: "gsc_alert", priority: 3,
+          title: "Keyword top questa settimana",
           description: kwList,
-          priority: 3,
         });
       }
     }
 
-    // 5. BLOG suggestion (weekly, not daily)
-    if (new Date().getDay() === 1) { // Monday only
-      todos.push({
-        date: today,
-        type: "blog",
-        title: "Scrivi un articolo blog",
-        description: "Chiedi all'Assistente AI di suggerirti un topic basato sui problemi Reddit e sulle keyword GSC. Poi scrivi l'articolo con Claude Code.",
-        priority: 9,
-      });
-    }
-
-    // Save all todos to DB
+    // ═══════════════════════════════════════════
+    // SALVA
+    // ═══════════════════════════════════════════
     if (todos.length > 0) {
+      // Sort by priority desc before saving
+      todos.sort((a, b) => b.priority - a.priority);
       await db.insert(growthDailyTodos).values(todos);
     }
 
     return NextResponse.json({
-      ok: true,
-      date: today,
-      count: todos.length,
+      ok: true, date: today, count: todos.length,
       todos: todos.map(t => ({ type: t.type, title: t.title })),
     });
   } catch (err) {
