@@ -155,9 +155,12 @@ export const useImageStore = create<ImageStoreState>()(
 
         const outputExt = result.format === "jpeg" ? "jpg" : result.format;
         const baseName = getFilenameWithoutExtension(item.originalName);
+        const originalExt = item.originalName.split(".").pop()?.toLowerCase() || "";
         const compressedName = settings.convertToWebP
           ? `${baseName}.webp`
-          : item.originalName;
+          : outputExt !== originalExt
+            ? `${baseName}.${outputExt}`
+            : item.originalName;
 
         const compressedPreviewUrl = URL.createObjectURL(result.blob);
 
