@@ -33,7 +33,8 @@ interface GSCData {
   daily: { date: string; page: string; query: string; impressions: number; clicks: number; ctr: number; position: number }[];
   keywords: { query: string; impressions: number; clicks: number; ctr: number; position: number }[];
   pages: { page: string; impressions: number; clicks: number; ctr: number; position: number }[];
-  weekly: { impressions: number; clicks: number; ctr: number; position: number };
+  weekly?: { impressions: number; clicks: number; ctr: number; position: number };
+  weekStats?: { impressions: number; clicks: number; ctr: number; position: number };
 }
 
 type DateRange = 7 | 14 | 28 | 90;
@@ -658,25 +659,25 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
         <KpiCard
           icon={<Eye size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtNum(gsc.weekly?.impressions ?? 0) : "—"}
+          value={gsc ? fmtNum((gsc.weekly ?? gsc.weekStats)?.impressions ?? 0) : "—"}
           label="Impressioni 7gg"
           loading={gscLoading}
         />
         <KpiCard
           icon={<MousePointerClick size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtNum(gsc.weekly?.clicks ?? 0) : "—"}
+          value={gsc ? fmtNum((gsc.weekly ?? gsc.weekStats)?.clicks ?? 0) : "—"}
           label="Click 7gg"
           loading={gscLoading}
         />
         <KpiCard
           icon={<TrendingUp size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtPct(gsc.weekly?.ctr ?? 0) : "—"}
+          value={gsc ? fmtPct((gsc.weekly ?? gsc.weekStats)?.ctr ?? 0) : "—"}
           label="CTR"
           loading={gscLoading}
         />
         <KpiCard
           icon={<Globe size={16} strokeWidth={1.5} />}
-          value={gsc ? fmtPosition(gsc.weekly?.position ?? 0) : "—"}
+          value={gsc ? fmtPosition((gsc.weekly ?? gsc.weekStats)?.position ?? 0) : "—"}
           label="Posizione media"
           loading={gscLoading}
         />
