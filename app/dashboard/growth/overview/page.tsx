@@ -58,12 +58,12 @@ interface OverviewData {
   registeredUsers: number | null;
   proUsers: number | null;
   mrr: number | null;
-  redditKarma: string;
+  redditKarma: null;
 
   // Content Flywheel
   problemsCount: number;
   articlesCount: number;
-  backlinks: number;
+  backlinks: null;
   subredditsCount: number;
 
   // For insights
@@ -321,11 +321,13 @@ export default function OverviewPage() {
         problemsRes,
         blogRes,
         redditIntelRes,
+        stripeRes,
       ] = await Promise.allSettled([
         fetch("/api/growth/gsc/data"),
         fetch("/api/growth/problems"),
         fetch("/api/growth/blog/list"),
         fetch("/api/growth/reddit-intelligence"),
+        fetch("/api/growth/stripe"),
       ]);
 
       // ── GSC ──
@@ -407,6 +409,15 @@ export default function OverviewPage() {
         subredditsCount = records.filter((r) => r.tier !== "blocked").length;
       }
 
+      // ── Stripe ──
+      let proUsers = 0;
+      let mrr = 0;
+      if (stripeRes.status === "fulfilled" && stripeRes.value.ok) {
+        const s = await stripeRes.value.json();
+        proUsers = s.activeSubscriptions ?? 0;
+        mrr = s.mrr ?? 0;
+      }
+
       setData({
         impressions30d,
         clicks30d,
@@ -416,12 +427,12 @@ export default function OverviewPage() {
         gscConnected,
         dailyData,
         registeredUsers: null,
-        proUsers: null,
-        mrr: null,
-        redditKarma: "1,000+",
+        proUsers,
+        mrr,
+        redditKarma: null,
         problemsCount: problems.length,
         articlesCount,
-        backlinks: 1,
+        backlinks: null,
         subredditsCount,
         problems,
         topProblem,
@@ -501,42 +512,17 @@ export default function OverviewPage() {
 
       {/* ─── ROW 2: Business ─── */}
       <SectionLabel label="Business" />
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <KpiCard
-          icon={<Users size={16} strokeWidth={1.5} />}
-          value={data?.registeredUsers ?? "\u2014"}
-          label="Utenti registrati"
-          note={data?.registeredUsers === null ? "Collega" : undefined}
-          loading={loading}
-        />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         <KpiCard
           icon={<Crown size={16} strokeWidth={1.5} />}
-          value={data?.proUsers ?? "\u2014"}
-          label="Utenti Pro"
-          note={data?.proUsers === null ? "Collega" : undefined}
+          value={data?.proUsers ?? 0}
+          label="Abbonati Pro"
           loading={loading}
         />
         <KpiCard
           icon={<DollarSign size={16} strokeWidth={1.5} />}
-          value={data?.mrr != null ? `$${data.mrr}` : "$0"}
+          value={`$${data?.mrr ?? 0}`}
           label="MRR"
-          loading={loading}
-        />
-        <KpiCard
-          icon={<MessageSquare size={16} strokeWidth={1.5} />}
-          value={data?.redditKarma ?? "\u2014"}
-          label="Reddit karma"
-          loading={loading}
-        />
-      </div>
-
-      {/* ─── ROW 3: Content Flywheel ─── */}
-      <SectionLabel label="Content Flywheel" />
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <KpiCard
-          icon={<Database size={16} strokeWidth={1.5} />}
-          value={data?.problemsCount ?? 0}
-          label="Problemi trovati"
           loading={loading}
         />
         <KpiCard
@@ -545,16 +531,27 @@ export default function OverviewPage() {
           label="Articoli blog"
           loading={loading}
         />
+      </div>
+
+      {/* ─── ROW 3: Content Flywheel ─── */}
+      <SectionLabel label="Content Flywheel" />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         <KpiCard
-          icon={<LinkIcon size={16} strokeWidth={1.5} />}
-          value={data?.backlinks ?? 0}
-          label="Backlink"
+          icon={<Database size={16} strokeWidth={1.5} />}
+          value={data?.problemsCount ?? 0}
+          label="Problemi trovati"
           loading={loading}
         />
         <KpiCard
           icon={<Radar size={16} strokeWidth={1.5} />}
           value={data?.subredditsCount ?? 0}
-          label="Subreddit provati"
+          label="Subreddit monitorati"
+          loading={loading}
+        />
+        <KpiCard
+          icon={<Globe size={16} strokeWidth={1.5} />}
+          value={data?.gscConnected && data.impressions30d > 0 ? `${((data.clicks30d / data.impressions30d) * 100).toFixed(1)}%` : "\u2014"}
+          label="CTR"
           loading={loading}
         />
       </div>
