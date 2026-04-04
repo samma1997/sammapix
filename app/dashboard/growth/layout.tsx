@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
+  BarChart3,
   Radar,
   Database,
   FileText,
@@ -15,6 +16,7 @@ import { useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "/dashboard/growth/overview", icon: LayoutDashboard, accent: true },
+  { label: "Analitiche", href: "/dashboard/growth/analytics", icon: BarChart3 },
   { label: "Radar", href: "/dashboard/growth/radar", icon: Radar },
   { label: "Problemi", href: "/dashboard/growth/problems", icon: Database },
   { label: "Blog", href: "/dashboard/growth/blog", icon: FileText },
