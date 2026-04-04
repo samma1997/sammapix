@@ -69,6 +69,10 @@ interface OverviewData {
   // For insights
   problems: Problem[];
   topProblem: string | null;
+
+  // GA4 quick stats
+  topPages: { path: string; pageviews: number; users: number }[];
+  topSources: { source: string; medium: string; sessions: number }[];
 }
 
 /* ─── Skeleton ─── */
@@ -322,12 +326,14 @@ export default function OverviewPage() {
         blogRes,
         redditIntelRes,
         stripeRes,
+        ga4Res,
       ] = await Promise.allSettled([
         fetch("/api/growth/gsc/data"),
         fetch("/api/growth/problems"),
         fetch("/api/growth/blog/list"),
         fetch("/api/growth/reddit-intelligence"),
         fetch("/api/growth/stripe"),
+        fetch("/api/growth/analytics?days=28"),
       ]);
 
       // ── GSC ──
@@ -418,6 +424,15 @@ export default function OverviewPage() {
         mrr = s.mrr ?? 0;
       }
 
+      // ── GA4 ──
+      let topPages: { path: string; pageviews: number; users: number }[] = [];
+      let topSources: { source: string; medium: string; sessions: number }[] = [];
+      if (ga4Res.status === "fulfilled" && ga4Res.value.ok) {
+        const ga4 = await ga4Res.value.json();
+        topPages = (ga4.topPages ?? []).slice(0, 5);
+        topSources = (ga4.sources ?? []).slice(0, 3);
+      }
+
       setData({
         impressions30d,
         clicks30d,
@@ -436,6 +451,8 @@ export default function OverviewPage() {
         subredditsCount,
         problems,
         topProblem,
+        topPages,
+        topSources,
       });
 
       setLastUpdate(
@@ -573,6 +590,67 @@ export default function OverviewPage() {
           />
         )}
       </div>
+
+      {/* ─── GA4 Quick Stats ─── */}
+      {!loading && (data?.topPages?.length || data?.topSources?.length) ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          {/* Top 5 pagine */}
+          {data.topPages.length > 0 && (
+            <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
+              <h3 className="text-xs font-medium uppercase tracking-[0.08em] text-[#A3A3A3] mb-3">Top 5 pagine</h3>
+              <div className="space-y-2">
+                {data.topPages.map((p, i) => {
+                  const maxPv = data.topPages[0]?.pageviews || 1;
+                  return (
+                    <div key={p.path} className="flex items-center gap-2">
+                      <span className="text-[10px] text-[#A3A3A3] w-4 shrink-0">{i + 1}.</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2 mb-0.5">
+                          <span className="text-xs text-[#171717] dark:text-[#E5E5E5] truncate font-mono">{p.path}</span>
+                          <span className="text-[10px] text-[#737373] shrink-0">{p.pageviews.toLocaleString("it-IT")} views</span>
+                        </div>
+                        <div className="h-1 bg-[#F5F5F5] dark:bg-[#252525] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#6366F1]/30 rounded-full" style={{ width: `${(p.pageviews / maxPv) * 100}%` }} />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Top 3 sorgenti */}
+          {data.topSources.length > 0 && (
+            <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-4">
+              <h3 className="text-xs font-medium uppercase tracking-[0.08em] text-[#A3A3A3] mb-3">Sorgenti traffico</h3>
+              <div className="space-y-3">
+                {data.topSources.map((s) => {
+                  const maxSessions = data.topSources[0]?.sessions || 1;
+                  const mediumColor = s.medium === "organic" ? "text-green-600 dark:text-green-400"
+                    : s.medium === "referral" ? "text-amber-600 dark:text-amber-400"
+                    : s.medium === "social" ? "text-blue-600 dark:text-blue-400"
+                    : "text-[#737373]";
+                  return (
+                    <div key={`${s.source}-${s.medium}`}>
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">{s.source}</span>
+                          <span className={`text-[10px] font-medium uppercase tracking-wider ${mediumColor}`}>{s.medium}</span>
+                        </div>
+                        <span className="text-xs text-[#737373]">{s.sessions.toLocaleString("it-IT")} sessioni</span>
+                      </div>
+                      <div className="h-1.5 bg-[#F5F5F5] dark:bg-[#252525] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#171717] dark:bg-[#E5E5E5] rounded-full" style={{ width: `${(s.sessions / maxSessions) * 100}%` }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      ) : null}
 
       {/* ─── AI Insights ─── */}
       <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5 mb-6">
