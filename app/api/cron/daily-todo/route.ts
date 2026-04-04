@@ -164,6 +164,15 @@ SOLO il commento:`);
     todos.push({ date: today, type: "linkedin", ...li });
 
     // ═══════════════════════════════════════════
+    // 5. BLOG REMINDER — ricorda di scrivere un articolo
+    // ═══════════════════════════════════════════
+    todos.push({
+      date: today, type: "blog", priority: 8,
+      title: "Scrivi un articolo blog",
+      description: "Apri Claude Code e chiedi di fare ricerca mirata + scrivere l'articolo. Lui fa tutto: ricerca Reddit, scrittura, TTS, cover, push.",
+    });
+
+    // ═══════════════════════════════════════════
     // SALVA (ordinati per priorità)
     // ═══════════════════════════════════════════
     todos.sort((a, b) => b.priority - a.priority);

@@ -502,8 +502,63 @@ export default function OverviewPage() {
     return () => clearInterval(interval);
   }, [fetchAll]);
 
+  // Confetti animation
+  const [showConfetti, setShowConfetti] = useState(false);
+  function fireConfetti() {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 2000);
+  }
+
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 relative">
+      {/* ─── Confetti ─── */}
+      {showConfetti && (
+        <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+          {Array.from({ length: 60 }).map((_, i) => {
+            const colors = ["#6366F1", "#EC4899", "#F59E0B", "#10B981", "#3B82F6", "#EF4444", "#8B5CF6"];
+            const color = colors[i % colors.length];
+            const left = Math.random() * 100;
+            const delay = Math.random() * 0.5;
+            const size = 6 + Math.random() * 8;
+            const rotation = Math.random() * 360;
+            return (
+              <div
+                key={i}
+                className="absolute animate-confetti"
+                style={{
+                  left: `${left}%`,
+                  top: "-10px",
+                  width: `${size}px`,
+                  height: `${size * 0.6}px`,
+                  backgroundColor: color,
+                  borderRadius: "2px",
+                  transform: `rotate(${rotation}deg)`,
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${1.5 + Math.random()}s`,
+                }}
+              />
+            );
+          })}
+          <style>{`
+            @keyframes confetti-fall {
+              0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+              100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            }
+            .animate-confetti {
+              animation: confetti-fall 2s ease-out forwards;
+            }
+            @keyframes checkmark-draw {
+              0% { stroke-dashoffset: 12; }
+              100% { stroke-dashoffset: 0; }
+            }
+            .animate-checkmark path {
+              stroke-dasharray: 12;
+              animation: checkmark-draw 0.3s ease-out forwards;
+            }
+          `}</style>
+        </div>
+      )}
+
       {/* ─── Header ─── */}
       <div className="mb-8">
         <div className="flex items-center gap-2.5 mb-1">
@@ -649,14 +704,27 @@ export default function OverviewPage() {
                         body: JSON.stringify({ status: newStatus }),
                       });
                       setTodos(prev => prev.map(t => t.id === todo.id ? { ...t, status: newStatus } : t));
+                      if (newStatus === "done") {
+                        // Check if all todos are done after this one
+                        const remaining = todos.filter(t => t.id !== todo.id && t.status !== "done" && t.status !== "skipped");
+                        if (remaining.length === 0) {
+                          fireConfetti(); // All done! Big celebration
+                        } else {
+                          fireConfetti(); // Single task done
+                        }
+                      }
                     }}
-                    className={`mt-0.5 h-4 w-4 rounded border shrink-0 flex items-center justify-center transition-colors ${
+                    className={`mt-0.5 h-5 w-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-300 ${
                       isDone
-                        ? "bg-green-500 border-green-500 text-white"
-                        : "border-[#D4D4D4] dark:border-[#404040] hover:border-[#6366F1]"
+                        ? "bg-green-500 border-green-500 text-white scale-110"
+                        : "border-[#D4D4D4] dark:border-[#404040] hover:border-[#6366F1] hover:scale-105"
                     }`}
                   >
-                    {isDone && <span className="text-[10px]">✓</span>}
+                    {isDone && (
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="animate-checkmark">
+                        <path d="M2 5L4.5 7.5L8 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
                   </button>
 
                   {/* Content */}
