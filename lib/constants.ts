@@ -112,6 +112,11 @@ export const BLOG_SLUGS = [
   "image-compression-benchmark-2026",
   "passport-photo-requirements-2026",
   "ai-alt-text-accuracy-test-2026",
+  "compress-images-whatsapp-quality",
+  "batch-compress-images-no-signup-free",
+  "optimize-images-core-web-vitals-2026",
+  "heic-to-webp-converter-guide",
+  "image-optimization-checklist-2026",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
