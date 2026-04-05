@@ -1,5 +1,75 @@
 [
   {
+    "slug": "batch-compress-images-no-signup-free",
+    "title": "Batch Compress Images Free — No Signup, No Upload to Server (2026)",
+    "description": "Compress multiple images at once without signing up or uploading to any server. Browser-based batch compression keeps your files private and works off",
+    "keywords": [
+      "batch compress images free",
+      "compress images without signup",
+      "compress images no upload",
+      "browser based image compression",
+      "compress images offline"
+    ],
+    "publishedDate": "2026-04-05",
+    "url": "/blog/batch-compress-images-no-signup-free"
+  },
+  {
+    "slug": "compress-images-whatsapp-quality",
+    "title": "How to Compress Images for WhatsApp Without Losing Quality (2026)",
+    "description": "Learn how WhatsApp compresses your photos and the optimal strategy to send high quality images. Pre-compress to 200-300KB at 1920px for the best resul",
+    "keywords": [
+      "compress images for whatsapp",
+      "whatsapp image quality",
+      "send high quality photos whatsapp",
+      "whatsapp image compression",
+      "whatsapp photo quality loss"
+    ],
+    "publishedDate": "2026-04-05",
+    "url": "/blog/compress-images-whatsapp-quality"
+  },
+  {
+    "slug": "heic-to-webp-converter-guide",
+    "title": "HEIC to WebP Converter: Why You Should Skip JPG in 2026",
+    "description": "Converting HEIC to JPG is a mistake. HEIC to WebP preserves more quality, produces smaller files, and WebP has 97%+ browser support. Learn the optimal",
+    "keywords": [
+      "heic to webp converter",
+      "convert heic to webp",
+      "heic to webp online free",
+      "why convert heic to webp instead of jpg",
+      "iphone heic to webp"
+    ],
+    "publishedDate": "2026-04-05",
+    "url": "/blog/heic-to-webp-converter-guide"
+  },
+  {
+    "slug": "image-optimization-checklist-2026",
+    "title": "The Complete Image Optimization Checklist for 2026",
+    "description": "A definitive step-by-step image optimization checklist covering format selection, compression, EXIF removal, alt text, HTML implementation, CDN delive",
+    "keywords": [
+      "image optimization checklist",
+      "image optimization checklist 2026",
+      "website image checklist",
+      "image seo checklist",
+      "image performance checklist"
+    ],
+    "publishedDate": "2026-04-05",
+    "url": "/blog/image-optimization-checklist-2026"
+  },
+  {
+    "slug": "optimize-images-core-web-vitals-2026",
+    "title": "How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)",
+    "description": "A complete guide to optimizing images for Core Web Vitals. Learn how images affect LCP, CLS, and INP scores, with real benchmarks and a practical opti",
+    "keywords": [
+      "optimize images core web vitals",
+      "image optimization LCP",
+      "largest contentful paint images",
+      "core web vitals image guide",
+      "image CLS fix"
+    ],
+    "publishedDate": "2026-04-05",
+    "url": "/blog/optimize-images-core-web-vitals-2026"
+  },
+  {
     "slug": "check-remove-exif-data-photos",
     "title": "How to Check and Remove EXIF Data from Your Photos (2026 Guide)",
     "description": "Your phone embeds exact GPS coordinates into every photo you take. Learn how to check if your photos contain location data, which platforms strip it, ",

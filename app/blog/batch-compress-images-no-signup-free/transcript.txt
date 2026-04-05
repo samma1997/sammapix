@@ -1,0 +1,76 @@
+Batch Compress Images Free — No Signup, No Upload to Server.
+
+The problem with server-based image compression.
+
+When you use a tool like TinyPNG, iLoveIMG, or Compressor.io, your images are uploaded to their servers. The compression happens on their infrastructure, and the result is sent back to your browser for download. This round trip introduces several problems.
+
+First, there is the privacy concern. Your images temporarily exist on a third-party server. For personal photos, client work, medical images, or any sensitive content, this is a real risk. Even if the service claims to delete files after processing, you are trusting their infrastructure and their word.
+
+Second, there is the speed issue. Uploading a batch of 20 images at 3MB each means transferring 60MB upstream. On a typical home connection with 10 Mbps upload speed, that is 48 seconds just for the upload, before any compression even starts. Then the results need to be downloaded.
+
+Third, server-based tools impose limits because processing costs them money. TinyPNG allows 500 free compressions per month. iLoveIMG limits batch size to 15 files. These limits exist purely because of server costs, not because of any technical limitation in image compression itself.
+
+How browser-based image compression works.
+
+Modern web browsers are powerful enough to compress images locally without sending them anywhere. This is achieved through several browser APIs and JavaScript libraries.
+
+The Canvas API. The HTML5 Canvas API provides a toBlob method that can encode image data into JPEG, PNG, or WebP format at a specified quality level. When you load an image onto a canvas and export it at quality 0.8, the browser's native image encoder handles the compression. This is the same encoder used by the browser to render web pages, so it is highly optimized.
+
+The browser-image-compression library. Libraries like browser-image-compression, used by SammaPix, build on the Canvas API to add intelligent resizing, target file size optimization, and Web Worker support for non-blocking compression. The library processes images in a background thread so the UI remains responsive even during large batch operations.
+
+OffscreenCanvas and Web Workers. The OffscreenCanvas API allows canvas operations to run in a Web Worker thread, separate from the main UI thread. This means image compression can happen in the background while you continue interacting with the page. Chrome, Firefox, and Edge all support OffscreenCanvas as of 2025, with Safari adding support in Safari 16.4.
+
+Tool comparison: TinyPNG vs Squoosh vs iLoveIMG vs SammaPix.
+
+TinyPNG uses server-side processing, does not require signup for the free tier, supports up to 20 files per batch, has a monthly limit of 500 images, uploads files to their servers, offers automatic quality only, and outputs in the same format as input.
+
+Squoosh uses browser-based processing, does not require signup, supports only 1 file at a time, has no monthly limit, processes fully locally, offers full manual quality control, and supports multiple output formats.
+
+iLoveIMG uses server-side processing, does not require signup for the free tier, supports up to 15 files per batch, has limited batches per month, uploads files to their servers, offers automatic quality only, and outputs in the same format as input.
+
+SammaPix uses browser-based processing, does not require signup, supports up to 20 files per batch on the free tier, allows 50 images per day for free users, processes fully locally, offers full manual quality control, and supports JPEG, PNG, and WebP output.
+
+Why no-signup matters more than you think.
+
+Requiring an account for image compression is a dark pattern. Image compression is a CPU operation that can happen entirely in your browser. There is no technical need for a server, an account, or even an internet connection once the page has loaded.
+
+Tools that require signup do so for business reasons: to collect your email for marketing, to enforce usage tiers that push you toward paid plans, and to track your usage patterns. None of this is necessary for the core functionality of compressing an image.
+
+When evaluating image compression tools, consider the friction-to-value ratio. The best tools deliver value with the least friction. Browser-based tools inherently win on every friction dimension because the processing is free for the tool provider.
+
+The weight of images on the modern web.
+
+According to the HTTP Archive's 2025 Web Almanac, the median web page weighs approximately 2.5MB on desktop and 2.2MB on mobile. Images account for roughly 50% of that total page weight, making them the single largest component of most web pages.
+
+For context, the average page includes 30 image requests. Many of these images are served at resolutions far larger than their display dimensions, and many use suboptimal formats. The HTTP Archive data shows that 28% of image bytes on the web could be saved simply by serving images at the correct display size, and an additional 20% could be saved by converting to modern formats like WebP.
+
+This is why batch compression matters. If you are managing a website with hundreds of images, compressing them one at a time is impractical. A batch tool that processes 20 images in one operation makes the optimization workflow viable for real-world use.
+
+How to batch compress images in your browser.
+
+The workflow for batch compression in a browser-based tool is simple.
+
+Step 1: Open SammaPix Compress in your browser. No account needed.
+Step 2: Drag and drop up to 20 images at once or click to browse.
+Step 3: Set your quality level. 80 is recommended for web use.
+Step 4: All images are compressed simultaneously in the background.
+Step 5: Download each image individually or all at once.
+
+The entire process happens in your browser. If you open your browser's network inspector during compression, you will see zero outbound requests. Your images stay on your device from start to finish.
+
+Frequently Asked Questions.
+
+Do browser-based image compressors actually work offline?
+Yes, once the web page is fully loaded, browser-based compressors like SammaPix can work without an internet connection. The JavaScript compression engine runs entirely in your browser using the Canvas API and WebAssembly. Your images are processed locally and never sent to any server. However, you need to load the page initially with an internet connection.
+
+Is browser-based compression as good as server-side compression?
+For most practical purposes, yes. Modern browser engines are highly optimized. Browser-based tools using the Canvas API or libraries like browser-image-compression achieve compression ratios within 5 to 10% of server-side tools like MozJPEG. The difference is imperceptible in most use cases, and the privacy and speed benefits of local processing far outweigh the marginal quality difference.
+
+How many images can I batch compress at once in a browser?
+This depends on your device's available RAM and the size of your images. Most modern devices with 8GB or more of RAM can handle 50 to 100 images in a batch without issues. SammaPix processes images sequentially to avoid memory pressure, so even large batches complete reliably. If you hit memory limits, process images in smaller batches of 20 to 30.
+
+Why do most free image compressors require signup?
+Most server-based compressors require signup for two reasons: to enforce usage limits since server processing costs money per image, and to collect email addresses for marketing. Browser-based tools avoid this entirely because the processing happens on your device at zero cost to the tool provider. There is no technical reason to require an account for image compression.
+
+Are my images safe when using online compression tools?
+With server-based tools like TinyPNG or iLoveIMG, your images are uploaded to their servers for processing. While these companies have privacy policies, your files do temporarily exist on third-party infrastructure. With browser-based tools like SammaPix, your images never leave your device. The compression happens entirely in your browser's JavaScript engine, making it inherently more private.

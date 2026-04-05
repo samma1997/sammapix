@@ -1,0 +1,84 @@
+How to Optimize Images for Core Web Vitals: LCP, CLS and INP.
+
+Images and LCP: why your hero image is probably your bottleneck.
+
+Largest Contentful Paint measures how long it takes for the largest visible element in the viewport to finish rendering. According to HTTP Archive data from 2025, images are the LCP element on approximately 72% of mobile pages and 68% of desktop pages. In most cases, the LCP element is the hero image, a product photo, or the main content image.
+
+Google considers LCP good when it occurs within 2.5 seconds. An LCP between 2.5 and 4 seconds needs improvement, and above 4 seconds is poor. Since LCP is a direct ranking signal in Google Search, a slow LCP can measurably reduce your organic traffic.
+
+The LCP timing depends on four sub-phases: Time to First Byte, resource load delay, resource load duration, and element render delay. For images, the resource load duration is usually the dominant factor. A 500KB hero image on a 4G connection takes approximately 1.2 seconds to download. A 100KB optimized version takes about 0.24 seconds. That single optimization can be the difference between passing and failing the LCP threshold.
+
+Images and CLS: preventing layout shifts.
+
+Cumulative Layout Shift measures visual stability: how much the visible content shifts around during page load. A good CLS score is below 0.1. Images are one of the most common causes of layout shifts because when an image loads without reserved space, it pushes all content below it downward.
+
+The fix is straightforward: always include width and height attributes on every img element. This allows the browser to calculate the aspect ratio and reserve the correct space before the image downloads. In modern CSS, you can also use the aspect-ratio property.
+
+For responsive images, use width and height attributes to define the intrinsic dimensions, then apply CSS max-width 100% and height auto. The browser will use the width and height ratio to reserve space while the image scales responsively.
+
+Images and INP: decode time and main thread blocking.
+
+Interaction to Next Paint measures responsiveness: how quickly the page responds to user interactions. A good INP is below 200 milliseconds. While images are not the primary cause of poor INP, large images can contribute through main thread blocking during decode.
+
+When the browser decodes a large image, converting compressed bytes back into pixels, this work happens on the main thread and can block user interactions. A 4000 by 3000 JPEG takes significantly longer to decode than a 1200 by 900 version. AVIF images, while smaller on disk, have slower decode times than WebP or JPEG, which can negatively impact INP on lower-end mobile devices.
+
+The mitigation is to serve images at their display dimensions, use the content-visibility auto CSS property for off-screen images, and prefer WebP over AVIF when INP is a concern.
+
+Format comparison for Core Web Vitals: JPEG vs WebP vs AVIF.
+
+Choosing the right image format has a direct impact on all three Core Web Vitals metrics.
+
+For a typical 1200 by 800 photographic image at quality 80: JPEG produces a file of about 180KB with 12 milliseconds decode time and 100% browser support. WebP produces about 125KB, 30% smaller than JPEG, with 14 milliseconds decode time and 97% browser support. AVIF produces about 90KB, 50% smaller than JPEG, with 35 milliseconds decode time and 93% browser support.
+
+For most websites in 2026, WebP is the recommended default format. It offers the best balance of file size reduction, decode performance, and browser compatibility. AVIF is best reserved for sites where file size is the absolute priority and you can accept slower decode times.
+
+Compression benchmarks: what happens to LCP at different compression levels.
+
+Testing with a typical 1200 by 800 hero image on a simulated 4G connection shows clear results.
+
+An original 850KB image takes about 567 milliseconds to download and results in an estimated LCP of 3.2 seconds, rated needs improvement. A 50% reduction to 425KB brings the download to 283 milliseconds and LCP to 2.5 seconds, borderline good. A 70% reduction to 255KB brings the download to 170 milliseconds and LCP to 2.0 seconds, rated good. A 90% reduction to 85KB using WebP conversion brings the download to 57 milliseconds and LCP to 1.4 seconds, solidly good.
+
+The estimated LCP includes Time to First Byte of 600 milliseconds for a typical server, resource load delay, and render time.
+
+The complete image optimization workflow for CWV.
+
+Step 1, Resize: Scale the image to its actual display dimensions. If it displays at 600 pixels wide, do not serve a 2400 pixel version.
+
+Step 2, Convert format: Convert to WebP for the best balance of size and compatibility. Use the picture element with a JPEG fallback for the remaining 3% of browsers.
+
+Step 3, Compress: Apply compression at quality 75 to 85. This is the sweet spot where file size drops dramatically with no perceptible quality loss.
+
+Step 4, Implement lazy loading: Add loading lazy to all below-fold images. Keep loading eager and add fetchpriority high to the LCP image.
+
+Step 5, Set dimensions: Include width and height attributes on every img element to prevent CLS.
+
+How image optimization affects PageSpeed scores.
+
+Google PageSpeed Insights scores are a weighted combination of several performance metrics. LCP accounts for 25% of the total score, CLS for 25%, and INP for 30% as of the 2024 scoring update. Since images directly affect all three metrics, image optimization has an outsized impact on the final score.
+
+In practice, implementing the full image optimization workflow typically improves a PageSpeed mobile score by 15 to 30 points. For sites with many large unoptimized images, the improvement can be 40 or more points. This makes image optimization the single highest-leverage technical SEO task available.
+
+PageSpeed Insights also flags specific image-related opportunities: Serve images in next-gen formats, Properly size images, Efficiently encode images, and Defer offscreen images. Addressing all four of these recommendations eliminates the most common image-related audit failures.
+
+The business impact: fewer abandonments, higher rankings.
+
+According to Google's research published on web.dev, sites that pass all three Core Web Vitals thresholds experience 24% fewer page abandonments compared to sites that fail. This translates directly to more pageviews, longer sessions, and higher conversion rates.
+
+Vodafone reported a 31% improvement in LCP led to an 8% increase in sales. Yahoo Japan saw a 15% increase in pageviews after reducing CLS by 0.2. Netzwelt achieved a 2x increase in ad revenue after improving CWV scores. These case studies consistently show that performance improvements driven by image optimization deliver measurable business results.
+
+Frequently Asked Questions.
+
+What is a good LCP score for images?
+Google considers LCP good when it occurs within 2.5 seconds of page load. Since images are the LCP element on 72% of mobile pages, optimizing your hero image to load within this threshold is critical. Compressing images to under 200KB and using modern formats like WebP can typically bring LCP under 2 seconds on 4G connections.
+
+Does image format affect Core Web Vitals scores?
+Yes, significantly. WebP produces files 25 to 34% smaller than equivalent JPEG at the same visual quality, which directly improves LCP by reducing download time. AVIF can be 50% smaller than JPEG but has slower decode times, which can negatively impact INP on lower-end devices. For most sites in 2026, WebP offers the best balance of size, quality, decode speed, and browser support.
+
+How do I prevent images from causing CLS?
+Always include explicit width and height attributes on your img elements. This allows the browser to reserve the correct space before the image loads, preventing layout shifts. In CSS, use aspect-ratio or the width and height attributes. For responsive images, combine width and height attributes with CSS max-width 100% and height auto.
+
+Should I lazy load all images for better Core Web Vitals?
+No. Never lazy load your LCP image, typically the hero image or main content image above the fold. Lazy loading the LCP element delays its load, directly hurting your LCP score. Use loading eager or fetchpriority high for the LCP image. Lazy load all other images that are below the fold using loading lazy.
+
+How much does image optimization improve PageSpeed score?
+Image optimization is typically worth 15 to 30 points on a Google PageSpeed Insights score. For sites with many unoptimized images, the improvement can be even larger. Combining format conversion to WebP, proper sizing, compression, and lazy loading can take a site from a score of 40 to 50 to 80 to 90 on mobile.
