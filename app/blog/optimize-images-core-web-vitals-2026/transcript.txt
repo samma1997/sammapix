@@ -1,5 +1,3 @@
-How to Optimize Images for Core Web Vitals: LCP, CLS and INP.
-
 Images and LCP: why your hero image is probably your bottleneck.
 
 Largest Contentful Paint measures how long it takes for the largest visible element in the viewport to finish rendering. According to HTTP Archive data from 2025, images are the LCP element on approximately 72% of mobile pages and 68% of desktop pages. In most cases, the LCP element is the hero image, a product photo, or the main content image.

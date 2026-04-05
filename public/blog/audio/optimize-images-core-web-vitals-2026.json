@@ -1,0 +1,222 @@
+[
+  {
+    "start": 0,
+    "end": 4.73,
+    "text": "Images and LCP: why your hero image is probably your bottleneck."
+  },
+  {
+    "start": 4.73,
+    "end": 28.7,
+    "text": "Largest Contentful Paint measures how long it takes for the largest visible elem"
+  },
+  {
+    "start": 28.7,
+    "end": 46.97,
+    "text": "Google considers LCP good when it occurs within 2.5 seconds. An LCP between 2.5 "
+  },
+  {
+    "start": 46.97,
+    "end": 77.54,
+    "text": "The LCP timing depends on four sub-phases: Time to First Byte, resource load del"
+  },
+  {
+    "start": 77.54,
+    "end": 81.38,
+    "text": "Images and CLS: preventing layout shifts."
+  },
+  {
+    "start": 81.38,
+    "end": 99.84,
+    "text": "Cumulative Layout Shift measures visual stability: how much the visible content "
+  },
+  {
+    "start": 99.84,
+    "end": 117,
+    "text": "The fix is straightforward: always include width and height attributes on every "
+  },
+  {
+    "start": 117,
+    "end": 131.62,
+    "text": "For responsive images, use width and height attributes to define the intrinsic d"
+  },
+  {
+    "start": 131.62,
+    "end": 135.77,
+    "text": "Images and INP: decode time and main thread blocking."
+  },
+  {
+    "start": 135.77,
+    "end": 153.07,
+    "text": "Interaction to Next Paint measures responsiveness: how quickly the page responds"
+  },
+  {
+    "start": 153.07,
+    "end": 177.62,
+    "text": "When the browser decodes a large image, converting compressed bytes back into pi"
+  },
+  {
+    "start": 177.62,
+    "end": 188.59,
+    "text": "The mitigation is to serve images at their display dimensions, use the content-v"
+  },
+  {
+    "start": 188.59,
+    "end": 194.23,
+    "text": "Format comparison for Core Web Vitals: JPEG vs WebP vs AVIF."
+  },
+  {
+    "start": 194.23,
+    "end": 199.85,
+    "text": "Choosing the right image format has a direct impact on all three Core Web Vitals"
+  },
+  {
+    "start": 199.85,
+    "end": 230.74,
+    "text": "For a typical 1200 by 800 photographic image at quality 80: JPEG produces a file"
+  },
+  {
+    "start": 230.74,
+    "end": 249.17,
+    "text": "For most websites in 2026, WebP is the recommended default format. It offers the"
+  },
+  {
+    "start": 249.17,
+    "end": 254.47,
+    "text": "Compression benchmarks: what happens to LCP at different compression levels."
+  },
+  {
+    "start": 254.47,
+    "end": 261.38,
+    "text": "Testing with a typical 1200 by 800 hero image on a simulated 4G connection shows"
+  },
+  {
+    "start": 261.38,
+    "end": 300.98,
+    "text": "An original 850KB image takes about 567 milliseconds to download and results in "
+  },
+  {
+    "start": 300.98,
+    "end": 309.41,
+    "text": "The estimated LCP includes Time to First Byte of 600 milliseconds for a typical "
+  },
+  {
+    "start": 309.41,
+    "end": 313.78,
+    "text": "The complete image optimization workflow for CWV."
+  },
+  {
+    "start": 313.78,
+    "end": 324.77,
+    "text": "Step 1, Resize: Scale the image to its actual display dimensions. If it displays"
+  },
+  {
+    "start": 324.77,
+    "end": 336.31,
+    "text": "Step 2, Convert format: Convert to WebP for the best balance of size and compati"
+  },
+  {
+    "start": 336.31,
+    "end": 347.59,
+    "text": "Step 3, Compress: Apply compression at quality 75 to 85. This is the sweet spot "
+  },
+  {
+    "start": 347.59,
+    "end": 357.29,
+    "text": "Step 4, Implement lazy loading: Add loading lazy to all below-fold images. Keep "
+  },
+  {
+    "start": 357.29,
+    "end": 364.1,
+    "text": "Step 5, Set dimensions: Include width and height attributes on every img element"
+  },
+  {
+    "start": 364.1,
+    "end": 367.85,
+    "text": "How image optimization affects PageSpeed scores."
+  },
+  {
+    "start": 367.85,
+    "end": 389.62,
+    "text": "Google PageSpeed Insights scores are a weighted combination of several performan"
+  },
+  {
+    "start": 389.62,
+    "end": 408.91,
+    "text": "In practice, implementing the full image optimization workflow typically improve"
+  },
+  {
+    "start": 408.91,
+    "end": 425.95,
+    "text": "PageSpeed Insights also flags specific image-related opportunities: Serve images"
+  },
+  {
+    "start": 425.95,
+    "end": 430.1,
+    "text": "The business impact: fewer abandonments, higher rankings."
+  },
+  {
+    "start": 430.1,
+    "end": 446.28,
+    "text": "According to Google's research published on web.dev, sites that pass all three C"
+  },
+  {
+    "start": 446.28,
+    "end": 471.98,
+    "text": "Vodafone reported a 31% improvement in LCP led to an 8% increase in sales. Yahoo"
+  },
+  {
+    "start": 471.98,
+    "end": 474.55,
+    "text": "Frequently Asked Questions."
+  },
+  {
+    "start": 474.55,
+    "end": 477.84,
+    "text": "What is a good LCP score for images?"
+  },
+  {
+    "start": 477.84,
+    "end": 500.69,
+    "text": "Google considers LCP good when it occurs within 2.5 seconds of page load. Since "
+  },
+  {
+    "start": 500.69,
+    "end": 504.43,
+    "text": "Does image format affect Core Web Vitals scores?"
+  },
+  {
+    "start": 504.43,
+    "end": 532.46,
+    "text": "Yes, significantly. WebP produces files 25 to 34% smaller than equivalent JPEG a"
+  },
+  {
+    "start": 532.46,
+    "end": 536.09,
+    "text": "How do I prevent images from causing CLS?"
+  },
+  {
+    "start": 536.09,
+    "end": 558.41,
+    "text": "Always include explicit width and height attributes on your img elements. This a"
+  },
+  {
+    "start": 558.41,
+    "end": 562.54,
+    "text": "Should I lazy load all images for better Core Web Vitals?"
+  },
+  {
+    "start": 562.54,
+    "end": 584.95,
+    "text": "No. Never lazy load your LCP image, typically the hero image or main content ima"
+  },
+  {
+    "start": 584.95,
+    "end": 589.08,
+    "text": "How much does image optimization improve PageSpeed score?"
+  },
+  {
+    "start": 589.08,
+    "end": 609.02,
+    "text": "Image optimization is typically worth 15 to 30 points on a Google PageSpeed Insi"
+  }
+]
