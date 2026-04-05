@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { growthDailyTodos } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -6,11 +6,6 @@ import { eq } from "drizzle-orm";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
-
-function verifyCron(req: Request): boolean {
-  const authHeader = req.headers.get("authorization");
-  return authHeader === `Bearer ${process.env.CRON_SECRET}`;
-}
 
 async function searchRedditFresh(query: string, limit = 5): Promise<Array<{ title: string; subreddit: string; url: string; comments: number }>> {
   try {
@@ -31,8 +26,10 @@ async function searchRedditFresh(query: string, limit = 5): Promise<Array<{ titl
   }
 }
 
-export async function POST(req: Request) {
-  if (!verifyCron(req)) {
+export async function GET(request: NextRequest) {
+  const cronSecret = process.env.CRON_SECRET;
+  const authHeader = request.headers.get("authorization");
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
