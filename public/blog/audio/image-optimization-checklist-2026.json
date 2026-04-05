@@ -1,0 +1,277 @@
+[
+  {
+    "start": 0,
+    "end": 4.82,
+    "text": "Section 1: Before upload — preparing your images (8 steps)."
+  },
+  {
+    "start": 4.82,
+    "end": 27.12,
+    "text": "According to HTTP Archive's 2025 Web Almanac, images account for 42% of total pa"
+  },
+  {
+    "start": 27.12,
+    "end": 50.57,
+    "text": "The impact goes beyond page speed. Google's Core Web Vitals data shows that 72% "
+  },
+  {
+    "start": 50.57,
+    "end": 63.55,
+    "text": "This checklist covers every step of the image optimization process, from the mom"
+  },
+  {
+    "start": 63.55,
+    "end": 76.37,
+    "text": "The most impactful optimizations happen before an image ever touches your server"
+  },
+  {
+    "start": 76.37,
+    "end": 124.8,
+    "text": "Step 1. Resize to display dimensions, not original resolution. Never upload an i"
+  },
+  {
+    "start": 124.8,
+    "end": 175.54,
+    "text": "Step 2. Choose the right format. WebP for photos, PNG for graphics, SVG for icon"
+  },
+  {
+    "start": 175.54,
+    "end": 206.57,
+    "text": "Step 3. Compress at quality 78 to 82 for web. For lossy formats like JPEG and lo"
+  },
+  {
+    "start": 206.57,
+    "end": 238.94,
+    "text": "Step 4. Convert to WebP or AVIF for modern browsers. If your images are still in"
+  },
+  {
+    "start": 238.94,
+    "end": 271.32,
+    "text": "Step 5. Strip EXIF metadata for privacy and file size. Every photo from a smartp"
+  },
+  {
+    "start": 271.32,
+    "end": 305.14,
+    "text": "Step 6. Generate descriptive filenames, not IMG_4521.jpg. Search engines use fil"
+  },
+  {
+    "start": 305.14,
+    "end": 338.52,
+    "text": "Step 7. Write meaningful alt text for every image. Alt text serves three purpose"
+  },
+  {
+    "start": 338.52,
+    "end": 370.87,
+    "text": "Step 8. Create multiple sizes for responsive srcset. A single image size cannot "
+  },
+  {
+    "start": 370.87,
+    "end": 376.61,
+    "text": "Section 2: HTML implementation — the code that serves your images (5 steps)."
+  },
+  {
+    "start": 376.61,
+    "end": 391.54,
+    "text": "Optimized source files are only half the story. The HTML that delivers those ima"
+  },
+  {
+    "start": 391.54,
+    "end": 422.26,
+    "text": "Step 9. Add width and height attributes on every img element. Always include wid"
+  },
+  {
+    "start": 422.26,
+    "end": 455.74,
+    "text": "Step 10. Use srcset and sizes for responsive images. The srcset attribute tells "
+  },
+  {
+    "start": 455.74,
+    "end": 484.8,
+    "text": "Step 11. Use the picture element for format switching. The HTML picture element "
+  },
+  {
+    "start": 484.8,
+    "end": 513.62,
+    "text": "Step 12. Add loading lazy to below-fold images. Native lazy loading defers loadi"
+  },
+  {
+    "start": 513.62,
+    "end": 540.17,
+    "text": "Step 13. Add fetchpriority high to the LCP image. The fetchpriority attribute te"
+  },
+  {
+    "start": 540.17,
+    "end": 544.03,
+    "text": "Section 3: CSS and layout (3 steps)."
+  },
+  {
+    "start": 544.03,
+    "end": 556.32,
+    "text": "CSS controls how images are displayed and when the browser allocates resources f"
+  },
+  {
+    "start": 556.32,
+    "end": 585.34,
+    "text": "Step 14. Set max-width 100% and height auto on all images. This is the foundatio"
+  },
+  {
+    "start": 585.34,
+    "end": 626.09,
+    "text": "Step 15. Use aspect-ratio or padding-bottom hack for placeholders. While the ima"
+  },
+  {
+    "start": 626.09,
+    "end": 657.62,
+    "text": "Step 16. Use content-visibility auto for off-screen images. The content-visibili"
+  },
+  {
+    "start": 657.62,
+    "end": 662.18,
+    "text": "Section 4: Server and CDN delivery (3 steps)."
+  },
+  {
+    "start": 662.18,
+    "end": 674.71,
+    "text": "Even perfectly optimized images need to be delivered efficiently. Server configu"
+  },
+  {
+    "start": 674.71,
+    "end": 710.16,
+    "text": "Step 17. Set Cache-Control headers. Use max-age 31536000 for hashed filenames. I"
+  },
+  {
+    "start": 710.16,
+    "end": 741.67,
+    "text": "Step 18. Enable content negotiation using the Accept header for automatic format"
+  },
+  {
+    "start": 741.67,
+    "end": 773.38,
+    "text": "Step 19. Use a CDN for global delivery. A Content Delivery Network serves images"
+  },
+  {
+    "start": 773.38,
+    "end": 777.58,
+    "text": "Section 5: Monitoring and maintenance (3 steps)."
+  },
+  {
+    "start": 777.58,
+    "end": 792.07,
+    "text": "Image optimization is not a one-time task. New content is added, designs change,"
+  },
+  {
+    "start": 792.07,
+    "end": 820.85,
+    "text": "Step 20. Run PageSpeed Insights on key pages monthly. Google PageSpeed Insights "
+  },
+  {
+    "start": 820.85,
+    "end": 851.09,
+    "text": "Step 21. Check Core Web Vitals report in Search Console. Google Search Console p"
+  },
+  {
+    "start": 851.09,
+    "end": 890.23,
+    "text": "Step 22. Audit new images before publishing. Do not let your team upload unoptim"
+  },
+  {
+    "start": 890.23,
+    "end": 893.33,
+    "text": "The complete checklist, quick reference."
+  },
+  {
+    "start": 893.33,
+    "end": 923.3,
+    "text": "Before Upload: 1. Resize to display dimensions at 2x for Retina. 2. Choose the r"
+  },
+  {
+    "start": 923.3,
+    "end": 941.88,
+    "text": "HTML Implementation: 9. Add width and height on every img. 10. Use srcset and si"
+  },
+  {
+    "start": 941.88,
+    "end": 956.06,
+    "text": "CSS and Layout: 14. Set max-width 100% and height auto. 15. Use aspect-ratio for"
+  },
+  {
+    "start": 956.06,
+    "end": 971.83,
+    "text": "Server and CDN: 17. Set Cache-Control max-age 31536000. 18. Enable Accept-header"
+  },
+  {
+    "start": 971.83,
+    "end": 985.3,
+    "text": "Monitoring and Maintenance: 20. Run PageSpeed Insights monthly. 21. Check Core W"
+  },
+  {
+    "start": 985.3,
+    "end": 1011.96,
+    "text": "Key statistics: Images are 42% of total page weight. 72% of mobile pages have an"
+  },
+  {
+    "start": 1011.96,
+    "end": 1014.53,
+    "text": "Frequently Asked Questions."
+  },
+  {
+    "start": 1014.53,
+    "end": 1018.03,
+    "text": "What percentage of page weight comes from images?"
+  },
+  {
+    "start": 1018.03,
+    "end": 1040.86,
+    "text": "According to HTTP Archive data from 2025, images account for approximately 42% o"
+  },
+  {
+    "start": 1040.86,
+    "end": 1045.08,
+    "text": "What is the best image format for the web in 2026?"
+  },
+  {
+    "start": 1045.08,
+    "end": 1073.95,
+    "text": "WebP is the best default format. It offers 25 to 34% smaller file sizes than JPE"
+  },
+  {
+    "start": 1073.95,
+    "end": 1078.13,
+    "text": "Should I strip EXIF data from images before uploading?"
+  },
+  {
+    "start": 1078.13,
+    "end": 1096.9,
+    "text": "Yes, for two reasons. EXIF data can contain sensitive information including GPS "
+  },
+  {
+    "start": 1096.9,
+    "end": 1101.24,
+    "text": "What quality level should I use when compressing images for the web?"
+  },
+  {
+    "start": 1101.24,
+    "end": 1127.04,
+    "text": "For lossy formats like JPEG and WebP, quality 78 to 82 is the sweet spot for web"
+  },
+  {
+    "start": 1127.04,
+    "end": 1130.18,
+    "text": "How do I write good alt text for images?"
+  },
+  {
+    "start": 1130.18,
+    "end": 1145.83,
+    "text": "Describe the content and function concisely under 125 characters. Describe what "
+  },
+  {
+    "start": 1145.83,
+    "end": 1149.24,
+    "text": "How often should I audit my website's images?"
+  },
+  {
+    "start": 1149.24,
+    "end": 1172.09,
+    "text": "Run a full image audit quarterly using PageSpeed Insights and Lighthouse. After "
+  }
+]
