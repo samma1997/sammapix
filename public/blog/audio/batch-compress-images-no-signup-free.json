@@ -1,0 +1,247 @@
+[
+  {
+    "start": 0,
+    "end": 3.41,
+    "text": "The problem with server-based image compression."
+  },
+  {
+    "start": 3.41,
+    "end": 21.12,
+    "text": "When you use a tool like TinyPNG, iLoveIMG, or Compressor dot io, your images ar"
+  },
+  {
+    "start": 21.12,
+    "end": 52.82,
+    "text": "Privacy risk. Your images temporarily exist on a third-party server. For persona"
+  },
+  {
+    "start": 52.82,
+    "end": 79.99,
+    "text": "Speed bottleneck. Uploading a batch of 20 images at 3 megabytes each means trans"
+  },
+  {
+    "start": 79.99,
+    "end": 102.58,
+    "text": "Artificial limits. Server-based tools impose limits because processing costs the"
+  },
+  {
+    "start": 102.58,
+    "end": 105.86,
+    "text": "How browser-based image compression works."
+  },
+  {
+    "start": 105.86,
+    "end": 120.29,
+    "text": "Modern web browsers are powerful enough to compress images locally without sendi"
+  },
+  {
+    "start": 120.29,
+    "end": 146.26,
+    "text": "Layer 1: The Canvas API. The HTML5 Canvas API provides a toBlob method that can "
+  },
+  {
+    "start": 146.26,
+    "end": 164.59,
+    "text": "Layer 2: The browser-image-compression library. Libraries like browser-image-com"
+  },
+  {
+    "start": 164.59,
+    "end": 188.35,
+    "text": "Layer 3: OffscreenCanvas and Web Workers. The OffscreenCanvas API allows canvas "
+  },
+  {
+    "start": 188.35,
+    "end": 212.5,
+    "text": "Quality comparison: browser versus server. A common misconception is that server"
+  },
+  {
+    "start": 212.5,
+    "end": 218.18,
+    "text": "Tool comparison: TinyPNG versus Squoosh versus iLoveIMG versus SammaPix."
+  },
+  {
+    "start": 218.18,
+    "end": 234.58,
+    "text": "TinyPNG uses server-side processing, handles up to 20 files per batch, limits to"
+  },
+  {
+    "start": 234.58,
+    "end": 246.96,
+    "text": "Squoosh is browser-based and fully private, but processes only one file at a tim"
+  },
+  {
+    "start": 246.96,
+    "end": 259.8,
+    "text": "iLoveIMG uses server-side processing, handles up to 15 files per batch, with lim"
+  },
+  {
+    "start": 259.8,
+    "end": 282.58,
+    "text": "SammaPix is browser-based and fully private. It handles 20 files per batch on th"
+  },
+  {
+    "start": 282.58,
+    "end": 297.86,
+    "text": "The key takeaway: Squoosh and SammaPix are the only fully browser-based options."
+  },
+  {
+    "start": 297.86,
+    "end": 300.94,
+    "text": "Why no-signup matters more than you think."
+  },
+  {
+    "start": 300.94,
+    "end": 316.49,
+    "text": "Requiring an account for image compression is a dark pattern. Image compression "
+  },
+  {
+    "start": 316.49,
+    "end": 331.49,
+    "text": "Tools that require signup do so for business reasons: to collect your email for "
+  },
+  {
+    "start": 331.49,
+    "end": 346.92,
+    "text": "When evaluating image compression tools, consider the friction-to-value ratio. T"
+  },
+  {
+    "start": 346.92,
+    "end": 366.38,
+    "text": "This also applies to GDPR and privacy regulations. Under the GDPR, uploading ima"
+  },
+  {
+    "start": 366.38,
+    "end": 369.26,
+    "text": "The weight of images on the modern web."
+  },
+  {
+    "start": 369.26,
+    "end": 386.98,
+    "text": "According to the HTTP Archive's 2025 Web Almanac, the median web page weighs app"
+  },
+  {
+    "start": 386.98,
+    "end": 404.57,
+    "text": "28 percent of image bytes could be saved by serving images at their actual displ"
+  },
+  {
+    "start": 404.57,
+    "end": 419.98,
+    "text": "This is why batch compression matters. If you are managing a website with hundre"
+  },
+  {
+    "start": 419.98,
+    "end": 423.29,
+    "text": "How to batch compress images in your browser."
+  },
+  {
+    "start": 423.29,
+    "end": 430.97,
+    "text": "Step 1: Open SammaPix Compress in your browser. No account, no download, no inst"
+  },
+  {
+    "start": 430.97,
+    "end": 440.11,
+    "text": "Step 2: Drag and drop up to 20 images at once. Supports JPEG, PNG, WebP, GIF, AV"
+  },
+  {
+    "start": 440.11,
+    "end": 451.66,
+    "text": "Step 3: Set your quality level. 80 is the sweet spot for web use. It delivers 50"
+  },
+  {
+    "start": 451.66,
+    "end": 460.61,
+    "text": "Step 4: Watch the compression happen in real time. Each file shows its original "
+  },
+  {
+    "start": 460.61,
+    "end": 465.82,
+    "text": "Step 5: Download each image individually or all at once as a ZIP on Pro."
+  },
+  {
+    "start": 465.82,
+    "end": 475.32,
+    "text": "The entire process happens in your browser. If you open your browser's network i"
+  },
+  {
+    "start": 475.32,
+    "end": 478.82,
+    "text": "When server-side compression is the better choice."
+  },
+  {
+    "start": 478.82,
+    "end": 485.02,
+    "text": "Being honest about trade-offs: there are cases where server-side compression gen"
+  },
+  {
+    "start": 485.02,
+    "end": 502.01,
+    "text": "Automated pipelines. If you need to compress thousands of images automatically a"
+  },
+  {
+    "start": 502.01,
+    "end": 526.54,
+    "text": "Maximum compression with MozJPEG or AVIF. Server-side tools can use advanced cod"
+  },
+  {
+    "start": 526.54,
+    "end": 540.77,
+    "text": "WordPress and CMS plugins. If you run a WordPress site, plugins like ShortPixel "
+  },
+  {
+    "start": 540.77,
+    "end": 544.37,
+    "text": "Combining compression with other image operations."
+  },
+  {
+    "start": 544.37,
+    "end": 551.95,
+    "text": "Compression alone is rarely enough. The optimal image workflow for web content i"
+  },
+  {
+    "start": 551.95,
+    "end": 562.63,
+    "text": "Resize first, then compress. A 4000 pixel image resized to 1200 pixels before co"
+  },
+  {
+    "start": 562.63,
+    "end": 572.95,
+    "text": "Convert to WebP. WebP is 25 to 34 percent smaller than JPEG at equivalent visual"
+  },
+  {
+    "start": 572.95,
+    "end": 583.78,
+    "text": "Strip EXIF metadata. EXIF data like GPS coordinates, camera model, and timestamp"
+  },
+  {
+    "start": 583.78,
+    "end": 596.66,
+    "text": "Rename for SEO. Files named IMG underscore 4521 dot jpg contribute nothing to se"
+  },
+  {
+    "start": 596.66,
+    "end": 606.72,
+    "text": "The combined effect of resize plus format conversion plus compression can reduce"
+  },
+  {
+    "start": 606.72,
+    "end": 609.74,
+    "text": "Batch compression on mobile devices."
+  },
+  {
+    "start": 609.74,
+    "end": 625.94,
+    "text": "One of the biggest advantages of browser-based compression is that it works on a"
+  },
+  {
+    "start": 625.94,
+    "end": 641.86,
+    "text": "This is particularly useful for iPhone users. iPhones shoot in HEIC format by de"
+  },
+  {
+    "start": 641.86,
+    "end": 657.34,
+    "text": "Performance on mobile is solid. A modern iPhone or mid-range Android phone with "
+  }
+]
