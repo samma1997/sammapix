@@ -1,237 +1,232 @@
 [
   {
     "start": 0,
-    "end": 4.13,
-    "text": "How to Compress Images for WhatsApp Without Losing Quality."
-  },
-  {
-    "start": 4.13,
-    "end": 7.1,
+    "end": 2.98,
     "text": "How WhatsApp compresses your images."
   },
   {
-    "start": 7.1,
-    "end": 28.1,
+    "start": 2.98,
+    "end": 23.98,
     "text": "Every time you send a photo through WhatsApp as a regular image, the app applies"
   },
   {
-    "start": 28.1,
-    "end": 54.65,
+    "start": 23.98,
+    "end": 50.52,
     "text": "The compression process involves two transformations. First, WhatsApp resizes th"
   },
   {
-    "start": 54.65,
-    "end": 73.46,
+    "start": 50.52,
+    "end": 69.34,
     "text": "The result is that a 5MB photo from your phone arrives at the other end as an 80"
   },
   {
-    "start": 73.46,
-    "end": 78.5,
+    "start": 69.34,
+    "end": 74.38,
     "text": "WhatsApp compression by platform: iOS vs Android vs Desktop."
   },
   {
-    "start": 78.5,
-    "end": 88.58,
+    "start": 74.38,
+    "end": 84.46,
     "text": "WhatsApp does not apply identical compression across all platforms. Testing show"
   },
   {
-    "start": 88.58,
-    "end": 113.52,
+    "start": 84.46,
+    "end": 109.39,
     "text": "On iOS, the typical output size is 80 to 100KB with moderate compression. On And"
   },
   {
-    "start": 113.52,
-    "end": 127.18,
+    "start": 109.39,
+    "end": 123.05,
     "text": "The differences are subtle but measurable. Android users in particular will noti"
   },
   {
-    "start": 127.18,
-    "end": 131.69,
+    "start": 123.05,
+    "end": 127.56,
     "text": "Option 1: Send as document to preserve original quality."
   },
   {
-    "start": 131.69,
-    "end": 145.46,
+    "start": 127.56,
+    "end": 141.34,
     "text": "The simplest way to bypass WhatsApp compression entirely is to send your photo a"
   },
   {
-    "start": 145.46,
-    "end": 173.57,
+    "start": 141.34,
+    "end": 169.44,
     "text": "This transmits the original file with zero compression. The recipient gets the e"
   },
   {
-    "start": 173.57,
-    "end": 183.48,
+    "start": 169.44,
+    "end": 179.35,
     "text": "Sending as document is best reserved for situations where the recipient specific"
   },
   {
-    "start": 183.48,
-    "end": 187.73,
+    "start": 179.35,
+    "end": 183.6,
     "text": "Option 2: Pre-compress before sending (recommended)."
   },
   {
-    "start": 187.73,
-    "end": 201.5,
+    "start": 183.6,
+    "end": 197.38,
     "text": "The smarter approach is to compress the image yourself before sending it through"
   },
   {
-    "start": 201.5,
-    "end": 224.28,
+    "start": 197.38,
+    "end": 220.15,
     "text": "The logic is straightforward: if WhatsApp targets roughly 1600 pixels and 70 to "
   },
   {
-    "start": 224.28,
-    "end": 235.8,
+    "start": 220.15,
+    "end": 231.67,
     "text": "This approach gives you the best of both worlds: the image still appears inline "
   },
   {
-    "start": 235.8,
-    "end": 238.92,
+    "start": 231.67,
+    "end": 234.79,
     "text": "The optimal image settings for WhatsApp."
   },
   {
-    "start": 238.92,
-    "end": 246.41,
+    "start": 234.79,
+    "end": 242.28,
     "text": "Based on testing across multiple devices and WhatsApp versions, these are the id"
   },
   {
-    "start": 246.41,
-    "end": 258.26,
+    "start": 242.28,
+    "end": 254.14,
     "text": "Resolution: 1920 pixels on the longest side. This is slightly above WhatsApp's 1"
   },
   {
-    "start": 258.26,
-    "end": 267.82,
+    "start": 254.14,
+    "end": 263.69,
     "text": "Format: JPEG. WhatsApp converts to JPEG internally anyway, so starting with JPEG"
   },
   {
-    "start": 267.82,
-    "end": 280.66,
+    "start": 263.69,
+    "end": 276.53,
     "text": "Quality: 80. This produces a file size of approximately 200 to 300KB for a 1920 "
   },
   {
-    "start": 280.66,
-    "end": 293.16,
+    "start": 276.53,
+    "end": 289.03,
     "text": "Target file size: 200 to 300KB. Files in this range get treated gently by WhatsA"
   },
   {
-    "start": 293.16,
-    "end": 304.7,
+    "start": 289.03,
+    "end": 300.58,
     "text": "Avoid sending WebP or PNG files through WhatsApp. The app will convert them to J"
   },
   {
-    "start": 304.7,
-    "end": 308.21,
+    "start": 300.58,
+    "end": 304.08,
     "text": "Step-by-step workflow for WhatsApp images."
   },
   {
-    "start": 308.21,
-    "end": 312.82,
+    "start": 304.08,
+    "end": 308.69,
     "text": "Follow this workflow to consistently send sharp images through WhatsApp."
   },
   {
-    "start": 312.82,
-    "end": 318.24,
+    "start": 308.69,
+    "end": 314.11,
     "text": "Step 1: Open your image in SammaPix Compress or any browser-based compressor."
   },
   {
-    "start": 318.24,
-    "end": 326.4,
+    "start": 314.11,
+    "end": 322.27,
     "text": "Step 2: Set the maximum width to 1920 pixels. If the image is already smaller, l"
   },
   {
-    "start": 326.4,
-    "end": 330.94,
+    "start": 322.27,
+    "end": 326.81,
     "text": "Step 3: Set quality to 80 and output format to JPEG."
   },
   {
-    "start": 330.94,
-    "end": 338.47,
+    "start": 326.81,
+    "end": 334.34,
     "text": "Step 4: Download the compressed image. Verify it is between 200 to 300KB."
   },
   {
-    "start": 338.47,
-    "end": 343.66,
+    "start": 334.34,
+    "end": 339.53,
     "text": "Step 5: Send through WhatsApp as a regular photo, not as a document."
   },
   {
-    "start": 343.66,
-    "end": 352.68,
+    "start": 339.53,
+    "end": 348.55,
     "text": "This workflow takes about 10 seconds per image and the quality difference on the"
   },
   {
-    "start": 352.68,
-    "end": 355.68,
+    "start": 348.55,
+    "end": 351.55,
     "text": "WhatsApp image sharing: the numbers."
   },
   {
-    "start": 355.68,
-    "end": 372.17,
+    "start": 351.55,
+    "end": 368.04,
     "text": "WhatsApp is the most widely used messaging platform in the world with 2.78 billi"
   },
   {
-    "start": 372.17,
-    "end": 392.66,
+    "start": 368.04,
+    "end": 388.54,
     "text": "According to Meta, WhatsApp users share over 6.9 billion photos daily. That volu"
   },
   {
-    "start": 392.66,
-    "end": 407.78,
+    "start": 388.54,
+    "end": 403.66,
     "text": "For professional photographers, real estate agents, designers, and anyone who sh"
   },
   {
-    "start": 407.78,
-    "end": 410.35,
+    "start": 403.66,
+    "end": 406.22,
     "text": "Frequently Asked Questions."
   },
   {
-    "start": 410.35,
-    "end": 413.57,
+    "start": 406.22,
+    "end": 409.44,
     "text": "Why does WhatsApp reduce image quality?"
   },
   {
-    "start": 413.57,
-    "end": 435.38,
+    "start": 409.44,
+    "end": 431.26,
     "text": "WhatsApp compresses every image sent through its chat to reduce bandwidth usage "
   },
   {
-    "start": 435.38,
-    "end": 438.94,
+    "start": 431.26,
+    "end": 434.81,
     "text": "How can I send full quality photos on WhatsApp?"
   },
   {
-    "start": 438.94,
-    "end": 463.63,
+    "start": 434.81,
+    "end": 459.5,
     "text": "You have two options. First, you can send the image as a document. This preserve"
   },
   {
-    "start": 463.63,
-    "end": 466.82,
+    "start": 459.5,
+    "end": 462.7,
     "text": "What is the best image size for WhatsApp?"
   },
   {
-    "start": 466.82,
-    "end": 485.69,
+    "start": 462.7,
+    "end": 481.56,
     "text": "The optimal size for WhatsApp images is 1920 pixels on the longest side, compres"
   },
   {
-    "start": 485.69,
-    "end": 489.94,
+    "start": 481.56,
+    "end": 485.81,
     "text": "Does sending photos as documents on WhatsApp keep the quality?"
   },
   {
-    "start": 489.94,
-    "end": 511.39,
+    "start": 485.81,
+    "end": 507.26,
     "text": "Yes, sending a photo as a document preserves the original file exactly as-is wit"
   },
   {
-    "start": 511.39,
-    "end": 515.71,
+    "start": 507.26,
+    "end": 511.58,
     "text": "Does WhatsApp compress images differently on iPhone and Android?"
   },
   {
-    "start": 515.71,
-    "end": 540.41,
+    "start": 511.58,
+    "end": 536.28,
     "text": "Yes. WhatsApp on iOS tends to apply slightly less aggressive compression, result"
   }
 ]
