@@ -1,0 +1,312 @@
+[
+  {
+    "start": 0,
+    "end": 3.5,
+    "text": "Why every iPhone shoots HEIC by default."
+  },
+  {
+    "start": 3.5,
+    "end": 20.88,
+    "text": "Apple introduced HEIC, or High Efficiency Image Container, as the default photo "
+  },
+  {
+    "start": 20.88,
+    "end": 40.7,
+    "text": "The practical benefit is substantial: HEIC files are roughly 50% smaller than eq"
+  },
+  {
+    "start": 40.7,
+    "end": 60.96,
+    "text": "As of 2025, there are approximately 1.46 billion active iPhones worldwide accord"
+  },
+  {
+    "start": 60.96,
+    "end": 82.49,
+    "text": "If you have ever tried to upload an iPhone photo to a website and received an un"
+  },
+  {
+    "start": 82.49,
+    "end": 86.28,
+    "text": "Why converting HEIC to JPG is a mistake."
+  },
+  {
+    "start": 86.28,
+    "end": 96.05,
+    "text": "The most common workflow for using iPhone photos on the web is: take photo in HE"
+  },
+  {
+    "start": 96.05,
+    "end": 122.38,
+    "text": "HEIC is a lossy format. When the iPhone captures a photo, it applies HEVC compre"
+  },
+  {
+    "start": 122.38,
+    "end": 145.8,
+    "text": "This is called generation loss. Each time you re-encode lossy data into another "
+  },
+  {
+    "start": 145.8,
+    "end": 168.07,
+    "text": "Think of it like photocopying a photocopy. The original is sharp, but each copy "
+  },
+  {
+    "start": 168.07,
+    "end": 171.34,
+    "text": "HEIC to WebP: the advantages."
+  },
+  {
+    "start": 171.34,
+    "end": 189.36,
+    "text": "WebP uses the VP8 codec for lossy and VP8L codec for lossless compression, which"
+  },
+  {
+    "start": 189.36,
+    "end": 226.56,
+    "text": "Better compression efficiency means WebP produces smaller files than JPG at equi"
+  },
+  {
+    "start": 226.56,
+    "end": 248.74,
+    "text": "The bottom line: HEIC and WebP are both modern formats that speak the same langu"
+  },
+  {
+    "start": 248.74,
+    "end": 253.54,
+    "text": "File size comparison: HEIC vs JPG vs WebP."
+  },
+  {
+    "start": 253.54,
+    "end": 285.58,
+    "text": "For a typical iPhone 15 Pro photo at 4032 by 3024 pixels, 12 megapixels, convert"
+  },
+  {
+    "start": 285.58,
+    "end": 299.93,
+    "text": "The key insight: converting HEIC to JPG produces a file that is both larger and "
+  },
+  {
+    "start": 299.93,
+    "end": 316.03,
+    "text": "These numbers are based on typical photographic content. Images with lots of fin"
+  },
+  {
+    "start": 316.03,
+    "end": 319.61,
+    "text": "WebP browser support in 2026."
+  },
+  {
+    "start": 319.61,
+    "end": 338.04,
+    "text": "One of the historical arguments for converting to JPG was browser compatibility."
+  },
+  {
+    "start": 338.04,
+    "end": 361.15,
+    "text": "In 2026, that argument is obsolete. According to Can I Use data, WebP has over 9"
+  },
+  {
+    "start": 361.15,
+    "end": 379.85,
+    "text": "For the remaining 3% of browsers, you can serve a JPG fallback using the HTML pi"
+  },
+  {
+    "start": 379.85,
+    "end": 383.57,
+    "text": "HEIC on social media and messaging apps."
+  },
+  {
+    "start": 383.57,
+    "end": 399.14,
+    "text": "If you upload HEIC photos directly to social platforms, something happens behind"
+  },
+  {
+    "start": 399.14,
+    "end": 432.55,
+    "text": "Instagram. Instagram accepts HEIC uploads but immediately converts them to JPEG "
+  },
+  {
+    "start": 432.55,
+    "end": 455.09,
+    "text": "WhatsApp. WhatsApp compresses every image to roughly 70 to 100 kilobytes and res"
+  },
+  {
+    "start": 455.09,
+    "end": 481.54,
+    "text": "Facebook and Twitter/X. Both platforms accept HEIC and convert internally. Faceb"
+  },
+  {
+    "start": 481.54,
+    "end": 495.48,
+    "text": "The pattern is consistent across all platforms: if you let the platform handle c"
+  },
+  {
+    "start": 495.48,
+    "end": 500.47,
+    "text": "HEIC vs WebP vs AVIF: which modern format to choose."
+  },
+  {
+    "start": 500.47,
+    "end": 515.62,
+    "text": "WebP is not the only modern format. AVIF, or AV1 Image File Format, is even newe"
+  },
+  {
+    "start": 515.62,
+    "end": 557.45,
+    "text": "HEIC has about 18% browser support through Safari only. WebP has over 97% browse"
+  },
+  {
+    "start": 557.45,
+    "end": 582.98,
+    "text": "AVIF produces files 20 to 30% smaller than WebP at the same visual quality. Howe"
+  },
+  {
+    "start": 582.98,
+    "end": 598.8,
+    "text": "The practical recommendation: convert HEIC to WebP for web use today. If you can"
+  },
+  {
+    "start": 598.8,
+    "end": 601.94,
+    "text": "When JPG is still the right choice."
+  },
+  {
+    "start": 601.94,
+    "end": 622.8,
+    "text": "Despite WebP's clear advantages, there are a few scenarios where JPG remains the"
+  },
+  {
+    "start": 622.8,
+    "end": 629.14,
+    "text": "For all web-facing use cases in 2026, WebP is the correct choice over JPG."
+  },
+  {
+    "start": 629.14,
+    "end": 631.99,
+    "text": "The optimal conversion workflow."
+  },
+  {
+    "start": 631.99,
+    "end": 647.98,
+    "text": "For web use including blogs, websites, and e-commerce: convert HEIC to WebP at q"
+  },
+  {
+    "start": 647.98,
+    "end": 660.14,
+    "text": "For editing in Photoshop or Lightroom: convert HEIC to PNG lossless to preserve "
+  },
+  {
+    "start": 660.14,
+    "end": 672.79,
+    "text": "For archival storage: keep the original HEIC files since they are already effici"
+  },
+  {
+    "start": 672.79,
+    "end": 676.49,
+    "text": "Batch converting HEIC photos from your iPhone."
+  },
+  {
+    "start": 676.49,
+    "end": 688.68,
+    "text": "If you have dozens or hundreds of HEIC photos from a trip, event, or product sho"
+  },
+  {
+    "start": 688.68,
+    "end": 730.18,
+    "text": "The batch conversion process. First, transfer HEIC photos to your computer via A"
+  },
+  {
+    "start": 730.18,
+    "end": 748.9,
+    "text": "The entire process runs in your browser. No files are uploaded to any server, wh"
+  },
+  {
+    "start": 748.9,
+    "end": 752.88,
+    "text": "Privacy: removing location data during conversion."
+  },
+  {
+    "start": 752.88,
+    "end": 790.54,
+    "text": "Every HEIC photo taken on an iPhone contains embedded EXIF metadata. This includ"
+  },
+  {
+    "start": 790.54,
+    "end": 812.62,
+    "text": "When you convert HEIC to another format, some converters preserve this metadata "
+  },
+  {
+    "start": 812.62,
+    "end": 824.83,
+    "text": "The recommended approach is to include EXIF removal as a step in your conversion"
+  },
+  {
+    "start": 824.83,
+    "end": 844.8,
+    "text": "If you are managing images for a website and want to automate the naming as well"
+  },
+  {
+    "start": 844.8,
+    "end": 847.37,
+    "text": "Frequently Asked Questions."
+  },
+  {
+    "start": 847.37,
+    "end": 851.88,
+    "text": "Why is HEIC to WebP better than HEIC to JPG?"
+  },
+  {
+    "start": 851.88,
+    "end": 880.27,
+    "text": "Both HEIC and WebP use modern compression algorithms, while JPG uses technology "
+  },
+  {
+    "start": 880.27,
+    "end": 883.78,
+    "text": "Does every iPhone shoot in HEIC format?"
+  },
+  {
+    "start": 883.78,
+    "end": 905.74,
+    "text": "Every iPhone since the iPhone 7 running iOS 11 released in 2017 shoots in HEIC b"
+  },
+  {
+    "start": 905.74,
+    "end": 910.15,
+    "text": "Can all browsers display WebP images in 2026?"
+  },
+  {
+    "start": 910.15,
+    "end": 931.44,
+    "text": "WebP has over 97% global browser support as of 2026 according to Can I Use data."
+  },
+  {
+    "start": 931.44,
+    "end": 935.95,
+    "text": "When should I still convert HEIC to JPG instead of WebP?"
+  },
+  {
+    "start": 935.95,
+    "end": 954.6,
+    "text": "JPG is still the better choice when sending email attachments to clients with ve"
+  },
+  {
+    "start": 954.6,
+    "end": 958.37,
+    "text": "Can I convert HEIC to WebP on my iPhone?"
+  },
+  {
+    "start": 958.37,
+    "end": 982.94,
+    "text": "Yes. You can use a browser-based converter like SammaPix directly in Safari or C"
+  },
+  {
+    "start": 982.94,
+    "end": 987.26,
+    "text": "Does converting HEIC to WebP remove EXIF data?"
+  },
+  {
+    "start": 987.26,
+    "end": 1015.46,
+    "text": "It depends on the tool. Some converters strip EXIF metadata during conversion, w"
+  }
+]
