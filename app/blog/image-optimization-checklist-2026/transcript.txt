@@ -1,3 +1,9 @@
+According to HTTP Archive's 2025 Web Almanac, images account for 42% of total page weight on the median web page. On image-heavy sites like e-commerce or photography portfolios, that number can reach 60 to 70%. Images are the single largest contributor to page size and the single highest-leverage optimization target.
+
+The impact goes beyond page speed. Google's Core Web Vitals data shows that 72% of mobile pages have an image as the Largest Contentful Paint element. Sites that pass Core Web Vitals thresholds see 24% fewer user abandonments. And 28% of image bytes on the web are wasted simply by serving images at dimensions larger than their display size.
+
+This checklist covers every step of the image optimization process, from the moment you create an image to the moment a browser renders it on screen. It is organized into five sections with 22 actionable steps.
+
 Section 1: Before upload — preparing your images (8 steps).
 
 According to HTTP Archive's 2025 Web Almanac, images account for 42% of total page weight on the median web page. On image-heavy sites like e-commerce or photography portfolios, that number can reach 60 to 70%. Images are the single largest contributor to page size and the single highest-leverage optimization target.
