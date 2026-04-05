@@ -184,6 +184,8 @@ export default async function RootLayout({
                   "sameAs": [
                     "https://github.com/samma1997",
                     "https://twitter.com/lucasammarco",
+                    "https://www.linkedin.com/in/luca-sammarco-a88b8a148/",
+                    "https://dev.to/samma1997",
                   ],
                 },
                 {

@@ -139,7 +139,7 @@ export default function SmartTrialPrompt() {
 
           {/* Fine print */}
           <p className="text-center text-[11px] text-[#A3A3A3] dark:text-[#525252] mb-4">
-            No credit card required &middot; Cancel anytime
+            7-day free trial &middot; Cancel anytime
           </p>
 
           {/* Secondary CTA */}

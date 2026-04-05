@@ -399,7 +399,7 @@ export default function TryProPage() {
           <div className="space-y-6">
             {[
               { step: "1", title: "Sign up free", desc: "Create an account with Google or GitHub in one click." },
-              { step: "2", title: "Start your free trial", desc: "Full AI workflow unlocked instantly. No credit card required." },
+              { step: "2", title: "Start your 7-day free trial", desc: "Full AI workflow unlocked instantly. You won't be charged during the trial." },
               { step: "3", title: "Drop your photos and run the workflow", desc: "Batch process 500 files, 200 AI renames/day, platform presets, zero ads." },
               { step: "4", title: "Decide after your trial", desc: "Love it? Stay on Pro for $9/month. Not for you? No charge, ever." },
             ].map(({ step, title, desc }) => (
@@ -448,7 +448,7 @@ export default function TryProPage() {
             Start your AI photo workflow
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">
-            Free trial included. No credit card. Cancel anytime.
+            7-day free trial included. Cancel anytime before it ends.
           </p>
 
           <CheckoutButton size="lg" className="gap-2 px-8 py-3 text-base">
