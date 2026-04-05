@@ -1,100 +1,103 @@
-The Complete Image Optimization Checklist for 2026.
+Section 1: Before upload — preparing your images (8 steps).
 
-Section 1: Before upload — preparing your images.
+According to HTTP Archive's 2025 Web Almanac, images account for 42% of total page weight on the median web page. On image-heavy sites like e-commerce or photography portfolios, that number can reach 60 to 70%. Images are the single largest contributor to page size and the single highest-leverage optimization target.
 
-The most impactful optimizations happen before an image ever touches your server. Every image you add to a website should go through these steps.
+The impact goes beyond page speed. Google's Core Web Vitals data shows that 72% of mobile pages have an image as the Largest Contentful Paint element. Sites that pass Core Web Vitals thresholds see 24% fewer user abandonments. And 28% of image bytes on the web are wasted simply by serving images at dimensions larger than their display size.
 
-1. Resize to display dimensions.
+This checklist covers every step of the image optimization process, from the moment you create an image to the moment a browser renders it on screen. It is organized into five sections with 22 actionable steps.
 
-Never upload an image larger than its maximum display size. If an image displays at 800 pixels wide on desktop, serving a 4000 pixel original wastes bandwidth and processing time. Account for 2x device pixel ratio for Retina displays: if the display size is 800 pixels, serve a 1600 pixel image. Going beyond 2x provides no visible benefit on any current display.
+The most impactful optimizations happen before an image ever touches your server. Every image you add to a website should go through these eight steps. Skipping even one can undo the gains from the rest.
 
-For responsive layouts, generate multiple sizes using srcset. Common breakpoints: 400 pixels, 800 pixels, 1200 pixels, and 1600 pixels. This ensures every device downloads only the pixels it needs.
+Step 1. Resize to display dimensions, not original resolution. Never upload an image larger than its maximum display size. If an image displays at 800 pixels wide on desktop, serving a 4000 pixel original wastes bandwidth and processing time. 28% of image bytes on the web are wasted by oversized dimensions. Account for 2x device pixel ratio for Retina displays: if the display size is 800 pixels, serve a 1600 pixel image. Going beyond 2x provides no visible benefit on any current display. For responsive layouts, generate multiple sizes. Common breakpoints are 400 pixels, 800 pixels, 1200 pixels, and 1600 pixels.
 
-2. Choose the right format.
+Step 2. Choose the right format. WebP for photos, PNG for graphics, SVG for icons. Format selection has a dramatic impact on file size. WebP is 25 to 34% smaller than JPEG at equivalent quality with over 97% browser support. AVIF is up to 50% smaller than JPEG but has slower decode times and 93% browser support. For photographs and complex images, use WebP lossy as the default or AVIF for maximum compression. For screenshots, text, and UI elements, use PNG or WebP lossless. For logos and icons, use SVG whenever possible. For animated content, use WebP animated which replaces GIF at 50 to 80% smaller file sizes.
 
-Format selection has a dramatic impact on file size. For photographs and complex images, use WebP lossy as the default, or AVIF if you need maximum compression. For screenshots, text, and UI elements, use PNG or WebP lossless. For logos and icons, use SVG whenever possible. For animated content, use WebP animated which replaces GIF at 50 to 80% smaller file sizes.
+Step 3. Compress at quality 78 to 82 for web. For lossy formats like JPEG and lossy WebP, quality 78 to 82 is the sweet spot. Below 75, compression artifacts become noticeable. Above 85, file size increases significantly with minimal visual improvement. Quality 80 is the best general-purpose setting, providing 50 to 70% file size reduction with imperceptible quality loss on screen-sized displays.
 
-3. Compress at the right quality level.
+Step 4. Convert to WebP or AVIF for modern browsers. If your images are still in JPEG or PNG, converting to WebP is the single easiest win. WebP delivers 25 to 34% smaller files with no visible quality loss and supports transparency. AVIF pushes savings even further at up to 50% smaller than JPEG, but encode and decode is slower and browser support is at 93%. Use the picture element to serve AVIF with WebP and JPEG fallbacks.
 
-For lossy formats like JPEG and lossy WebP, quality 75 to 85 is the sweet spot. Below 75, artifacts become noticeable. Above 85, file size increases significantly with minimal visual improvement. Quality 80 is the best general-purpose setting, providing 60 to 70% file size reduction with imperceptible quality loss on screen-sized displays.
+Step 5. Strip EXIF metadata for privacy and file size. Every photo from a smartphone or camera contains EXIF metadata: GPS coordinates, device model, camera settings, timestamps, and sometimes even the owner's name. This data typically adds 10 to 50 kilobytes per image and creates serious privacy risks. A photo posted online with GPS data reveals the exact location where it was taken. Strip all EXIF data before uploading images to any public-facing website.
 
-4. Strip EXIF and metadata.
+Step 6. Generate descriptive filenames, not IMG_4521.jpg. Search engines use filenames as a signal for image content. A file named golden-retriever-playing-fetch.webp tells Google far more than IMG_4521.jpg. Use descriptive, lowercase, hyphen-separated filenames that include relevant keywords naturally. For large batches, AI-powered renaming tools can analyze image content and generate SEO-friendly names automatically.
 
-Every photo from a smartphone or camera contains EXIF metadata: GPS coordinates, device model, camera settings, timestamps, and sometimes even the owner's name. This data typically adds 10 to 50KB per image and creates privacy risks. A photo posted online with GPS data reveals the exact location where it was taken. Strip all EXIF data before uploading images to any public-facing website.
+Step 7. Write meaningful alt text for every image. Alt text serves three purposes: accessibility for screen readers, SEO since search engines use it to understand image content, and fallback display when images fail to load. Every informational image should have descriptive alt text under 125 characters. Decorative images should have an empty alt attribute. Good alt text describes the content, not the image itself. Golden retriever catching a frisbee in a park is better than dog photo.
 
-5. Add descriptive alt text.
+Step 8. Create multiple sizes for responsive srcset. A single image size cannot serve every device optimally. A 1600 pixel hero image is overkill for a 375 pixel mobile screen. Generate multiple sizes, typically 400, 800, 1200, and 1600 pixels wide, so the browser can select the best match via srcset. This can reduce image downloads by 40 to 60% on mobile devices compared to serving a single large image.
 
-Alt text serves three purposes: accessibility for screen readers, SEO since search engines use alt text to understand image content, and fallback display when images fail to load. Every informational image should have descriptive alt text under 125 characters. Decorative images should have an empty alt attribute. Good alt text describes the content of the image, not the image itself.
+Section 2: HTML implementation — the code that serves your images (5 steps).
 
-Section 2: HTML implementation — the code that serves your images.
+Optimized source files are only half the story. The HTML that delivers those images to the browser determines whether the user gets the right size, at the right time, in the right format. These five steps ensure your code matches your files.
 
-6. Use srcset and sizes for responsive images.
+Step 9. Add width and height attributes on every img element. Always include width and height attributes on img elements. This prevents Cumulative Layout Shift by allowing the browser to reserve the correct space before the image loads. Without these attributes, the page layout jumps when each image finishes loading, creating a jarring experience. Combine with CSS max-width 100% and height auto for responsive behavior while maintaining the aspect ratio reservation.
 
-The srcset attribute tells the browser which image sizes are available, and the sizes attribute tells it how large the image will display at each viewport width. Together, they allow the browser to select the optimal image for the user's device, downloading only the pixels needed. A common pattern is to generate images at 400, 800, 1200, and 1600 pixels wide.
+Step 10. Use srcset and sizes for responsive images. The srcset attribute tells the browser which image sizes are available, and the sizes attribute tells it how large the image will display at each viewport width. Together, they allow the browser to select the optimal image for the user's device, downloading only the pixels needed. A common pattern: generate images at 400, 800, 1200, and 1600 pixels wide. The browser selects the best match based on viewport width and device pixel ratio.
 
-7. Set explicit width and height.
+Step 11. Use the picture element for format switching. The HTML picture element allows you to serve modern formats like AVIF and WebP with automatic fallback to JPEG for older browsers. The browser evaluates source elements in order and uses the first format it supports. List AVIF first, then WebP, then JPEG as the final fallback. This ensures every user gets the best format their browser can handle without any JavaScript.
 
-Always include width and height attributes on img elements. This prevents Cumulative Layout Shift by allowing the browser to reserve space before the image loads. Combine with CSS max-width 100% and height auto for responsive behavior while maintaining the aspect ratio reservation.
+Step 12. Add loading lazy to below-fold images. Native lazy loading defers loading until the image is near the viewport, saving bandwidth and improving initial load time. Add loading lazy to all images below the fold. Critical rule: never lazy load the LCP image, usually the hero image above the fold. Lazy loading the LCP image is one of the most common performance mistakes and directly harms your Core Web Vitals score.
 
-8. Implement lazy loading correctly.
+Step 13. Add fetchpriority high to the LCP image. The fetchpriority attribute tells the browser to prioritize downloading the LCP image over other resources. Since 72% of mobile pages have an image as their LCP element, adding fetchpriority high to that image directly improves LCP time. Combine this with loading eager or simply omit the loading attribute, which defaults to eager.
 
-Add loading lazy to all images below the fold. This defers loading until the image is near the viewport, saving bandwidth and improving initial load time. Critical rule: never lazy load the LCP image. Use loading eager and fetchpriority high for the LCP image to ensure it loads as fast as possible.
+Section 3: CSS and layout (3 steps).
 
-9. Use the picture element for format fallbacks.
+CSS controls how images are displayed and when the browser allocates resources for them. These three CSS techniques prevent layout shifts, improve perceived performance, and reduce rendering overhead.
 
-The HTML picture element allows you to serve modern formats like WebP and AVIF with automatic fallback to JPEG for older browsers. The browser evaluates source elements in order and uses the first format it supports.
+Step 14. Set max-width 100% and height auto on all images. This is the foundation of responsive images in CSS. Without max-width 100%, images overflow their containers on small screens. Without height auto, the image distorts when the width is constrained. Together with the HTML width and height attributes from step 9, this preserves the aspect ratio while allowing the image to scale down responsively.
 
-Section 3: Server and CDN delivery.
+Step 15. Use aspect-ratio or padding-bottom hack for placeholders. While the image loads, the browser needs to reserve the correct amount of space. The modern approach is the CSS aspect-ratio property, for example aspect-ratio 16 / 9, which is supported in all modern browsers. The legacy approach uses the padding-bottom percentage hack, for example padding-bottom 56.25% for 16:9. Both approaches eliminate Cumulative Layout Shift by reserving the exact space before the image arrives. Combine with a low-contrast background color or a blurred placeholder for a polished loading experience.
 
-10. Set appropriate cache headers.
+Step 16. Use content-visibility auto for off-screen images. The content-visibility auto CSS property tells the browser to skip rendering elements that are far off-screen. When applied to image containers, the browser defers layout and paint work until the container is near the viewport. This reduces the initial rendering workload, especially on long pages with many images. Pair it with contain-intrinsic-size to provide a size estimate and prevent layout shifts when the element enters the viewport.
 
-Images rarely change after upload. Set aggressive cache headers with Cache-Control public, max-age 31536000, immutable for versioned image URLs. This tells browsers and CDN edge servers to cache the image for one year without revalidation.
+Section 4: Server and CDN delivery (3 steps).
 
-11. Enable content negotiation.
+Even perfectly optimized images need to be delivered efficiently. Server configuration and CDN setup determine how fast images reach the user and whether they get cached effectively for repeat visits.
 
-Configure your server or CDN to serve different image formats based on the browser's Accept header. When a browser requests image/webp, serve WebP. When it requests image/avif, serve AVIF. Fall back to JPEG otherwise. Cloudflare, AWS CloudFront, and most modern CDNs support this natively.
+Step 17. Set Cache-Control headers. Use max-age 31536000 for hashed filenames. Images rarely change after upload. Set aggressive cache headers: Cache-Control public, max-age 31536000, immutable for versioned image URLs. This tells browsers and CDN edge servers to cache the image for one year without revalidation, eliminating repeat downloads entirely. If your image URLs are not versioned, use shorter max-age values with ETag-based revalidation.
 
-12. Serve images from a CDN.
+Step 18. Enable content negotiation using the Accept header for automatic format serving. Configure your server or CDN to serve different image formats based on the browser's Accept header. When a browser sends Accept image/avif, serve AVIF. When it sends Accept image/webp, serve WebP. Fall back to JPEG otherwise. Cloudflare, AWS CloudFront, and most modern CDNs support this natively through image transformation features.
 
-A Content Delivery Network serves images from edge servers geographically close to the user, dramatically reducing latency. For a user in Tokyo accessing a server in New York, a CDN can reduce image load time by 200 to 400 milliseconds.
+Step 19. Use a CDN for global delivery. A Content Delivery Network serves images from edge servers geographically close to the user, dramatically reducing latency. For a user in Tokyo accessing a server in New York, a CDN can reduce image load time by 200 to 400 milliseconds. This directly improves LCP. Most CDNs also provide automatic image optimization at the edge, including resize, format conversion, and compression.
 
-Section 4: Monitoring and auditing.
+Section 5: Monitoring and maintenance (3 steps).
 
-13. Run PageSpeed Insights regularly.
+Image optimization is not a one-time task. New content is added, designs change, and standards evolve. Sites that pass Core Web Vitals thresholds see 24% fewer user abandonments according to Google.
 
-Google PageSpeed Insights provides both lab data and field data for your pages. Check your key pages monthly at minimum. Pay attention to the image-specific opportunities: Serve images in next-gen formats, Properly size images, Efficiently encode images, and Defer offscreen images.
+Step 20. Run PageSpeed Insights on key pages monthly. Google PageSpeed Insights provides both lab data from Lighthouse and field data from CrUX for your pages. Check your key pages monthly at minimum. Pay attention to the image-specific opportunities: Serve images in next-gen formats, Properly size images, Efficiently encode images, and Defer offscreen images. Each of these directly corresponds to a step in this checklist.
 
-14. Monitor Core Web Vitals in Search Console.
+Step 21. Check Core Web Vitals report in Search Console. Google Search Console provides a Core Web Vitals report showing real-world performance data from Chrome users. Monitor the LCP trend over time. If LCP degrades after a content update, it is almost always because new images were added without optimization. Set up a process to review CWV data weekly and create alerts if LCP exceeds 2.5 seconds on any page group.
 
-Google Search Console provides a Core Web Vitals report showing real-world performance data from Chrome users. Monitor the LCP trend over time. If LCP degrades after a content update, it is almost always because new images were added without optimization.
+Step 22. Audit new images before publishing. Do not let your team upload unoptimized images. For sites with content teams, unoptimized images uploaded by non-technical team members are the most common source of performance regression. Establish a pre-upload workflow: every image goes through resize, compress, format conversion, and alt text before it touches the CMS. For developer teams, integrate image optimization into your CI/CD pipeline. For content teams without technical access, use browser-based tools like SammaPix Compress to ensure every image is optimized before it reaches the CMS.
 
-15. Automate image optimization in your workflow.
+The complete checklist, quick reference.
 
-For sites with frequent content updates, manual optimization is unsustainable. Integrate image optimization into your build pipeline or establish a pre-upload workflow using browser-based tools like SammaPix.
+Before Upload: 1. Resize to display dimensions at 2x for Retina. 2. Choose the right format: WebP, PNG, or SVG. 3. Compress at quality 78 to 82. 4. Convert to WebP or AVIF. 5. Strip EXIF metadata. 6. Use descriptive filenames. 7. Write meaningful alt text. 8. Generate multiple sizes for srcset.
 
-The complete checklist summary.
+HTML Implementation: 9. Add width and height on every img. 10. Use srcset and sizes. 11. Use picture for format switching. 12. Add loading lazy to below-fold images. 13. Add fetchpriority high to LCP image.
 
-Before upload: Resize images to display dimensions at 2x for Retina. Choose the correct format. Compress at quality 75 to 85. Strip all EXIF metadata. Write descriptive alt text. Use SEO-friendly file names.
+CSS and Layout: 14. Set max-width 100% and height auto. 15. Use aspect-ratio for placeholders. 16. Use content-visibility auto for off-screen.
 
-HTML implementation: Use srcset and sizes for responsive images. Include width and height attributes on every img element. Add loading lazy to below-fold images. Use loading eager and fetchpriority high for the LCP image. Use the picture element for format fallbacks. Include alt attributes on all img elements.
+Server and CDN: 17. Set Cache-Control max-age 31536000. 18. Enable Accept-header content negotiation. 19. Use a CDN for global delivery.
 
-Server and CDN: Set cache headers for one year. Enable content negotiation for automatic format serving. Serve images through a CDN. Enable HTTP/2 or HTTP/3.
+Monitoring and Maintenance: 20. Run PageSpeed Insights monthly. 21. Check Core Web Vitals in Search Console. 22. Audit new images before publishing.
 
-Monitoring: Run PageSpeed Insights monthly. Monitor Core Web Vitals weekly. Audit new content after every publish. Automate image optimization in CI/CD.
+Key statistics: Images are 42% of total page weight. 72% of mobile pages have an image as the LCP element. Sites passing Core Web Vitals see 24% fewer abandonments. 28% of image bytes are wasted by oversized dimensions. WebP is 25 to 34% smaller than JPEG. AVIF is up to 50% smaller than JPEG.
 
 Frequently Asked Questions.
 
 What percentage of page weight comes from images?
-According to HTTP Archive data from 2025, images account for approximately 42% of total page weight on the median web page. On image-heavy sites like e-commerce or photography portfolios, this percentage can be 60 to 70%.
+According to HTTP Archive data from 2025, images account for approximately 42% of total page weight on the median web page. On image-heavy sites like e-commerce or photography portfolios, this percentage can be 60 to 70%. This makes images the single largest contributor to page size and the highest-leverage optimization target.
 
 What is the best image format for the web in 2026?
-WebP is the best default format. It offers 25 to 34% smaller file sizes than JPEG at equivalent quality, supports both lossy and lossless compression, handles transparency, and has over 97% browser support. AVIF offers even smaller files but has slower decode times.
+WebP is the best default format. It offers 25 to 34% smaller file sizes than JPEG at equivalent quality, supports both lossy and lossless compression, handles transparency, and has over 97% browser support. AVIF offers even smaller files, up to 50% smaller than JPEG, but has slower decode times and 93% browser support. Use WebP as your default and consider AVIF for bandwidth-critical applications.
 
 Should I strip EXIF data from images before uploading?
-Yes, for two reasons. EXIF data can contain sensitive information including GPS coordinates and device serial numbers. It also adds 10 to 50KB of unnecessary bytes to each file.
+Yes, for two reasons. EXIF data can contain sensitive information including GPS coordinates, device serial numbers, and timestamps. It also adds 10 to 50 kilobytes of unnecessary bytes to each file. Stripping it reduces file size and protects user privacy.
+
+What quality level should I use when compressing images for the web?
+For lossy formats like JPEG and WebP, quality 78 to 82 is the sweet spot for web use. Below 75, compression artifacts become noticeable. Above 85, file size increases significantly with minimal visible improvement. Quality 80 is the best general-purpose setting, delivering 50 to 70% file size reduction with imperceptible quality loss on screen-sized displays.
 
 How do I write good alt text for images?
 Describe the content and function concisely under 125 characters. Describe what the image shows, not what it is. Include relevant keywords naturally. For decorative images, use an empty alt attribute.
 
 How often should I audit my website's images?
-Run a full image audit quarterly using PageSpeed Insights and Lighthouse. After major content updates, run an immediate audit. Monitor Core Web Vitals in Search Console continuously and set up alerts if LCP exceeds 2.5 seconds.
+Run a full image audit quarterly using PageSpeed Insights and Lighthouse. After major content updates, run an immediate audit. Monitor Core Web Vitals in Search Console continuously and set up alerts if LCP exceeds 2.5 seconds. For large sites with frequent content updates, consider automated image optimization in your CI/CD pipeline.
