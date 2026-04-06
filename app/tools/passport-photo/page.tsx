@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import {
   ArrowLeft,
+  ArrowRight,
   Shield,
   CheckCircle2,
   Camera,
@@ -274,6 +275,29 @@ export default function PassportPhotoPage() {
       </section>
 
       <RelatedTools toolId="passport-photo" />
+
+      {/* ── Passport photo by country (hub link) ── */}
+      <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Passport photo by country
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              {name:"🇺🇸 US",slug:"us"},{name:"🇬🇧 UK",slug:"uk"},{name:"🇪🇺 EU/Schengen",slug:"eu"},
+              {name:"🇨🇦 Canada",slug:"canada"},{name:"🇮🇳 India",slug:"india"},{name:"🇦🇺 Australia",slug:"australia"},
+              {name:"🇯🇵 Japan",slug:"japan"},{name:"🇨🇳 China",slug:"china"},{name:"🇧🇷 Brazil",slug:"brazil"},
+            ].map(c => (
+              <Link key={c.slug} href={`/passport-photo/${c.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+                {c.name}
+              </Link>
+            ))}
+            <Link href="/passport-photo" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors">
+              All 140+ countries <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ============================================================ */}
       {/*  FAQ                                                         */}

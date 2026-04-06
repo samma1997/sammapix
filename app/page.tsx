@@ -593,17 +593,24 @@ export default function HomePage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {[
+              { name: "Compress to 100KB", href: "/compress-to/100kb" },
+              { name: "Compress to 200KB", href: "/compress-to/200kb" },
+              { name: "Compress to 50KB", href: "/compress-to/50kb" },
               { name: "Resize for Instagram", href: "/resize/instagram" },
               { name: "Resize for YouTube", href: "/resize/youtube-thumbnail" },
               { name: "Resize for TikTok", href: "/resize/tiktok" },
-              { name: "Resize for Pinterest", href: "/resize/pinterest" },
               { name: "Convert HEIC to JPG", href: "/convert/heic-to-jpg" },
               { name: "Convert PNG to WebP", href: "/convert/png-to-webp" },
-              { name: "Convert JPG to WebP", href: "/convert/jpg-to-webp" },
+              { name: "Passport Photo US", href: "/passport-photo/us" },
+              { name: "Passport Photo UK", href: "/passport-photo/uk" },
+              { name: "Optimize for Shopify", href: "/optimize-for/shopify" },
+              { name: "Image Size for Ads", href: "/image-size/google-ads" },
               { name: "SammaPix vs TinyPNG", href: "/vs/tinypng" },
-              { name: "SammaPix vs Squoosh", href: "/vs/squoosh" },
-              { name: "All conversions", href: "/convert" },
-              { name: "All resize formats", href: "/tools/resizepack" },
+              { name: "All compress sizes →", href: "/compress-to" },
+              { name: "All resize formats →", href: "/resize" },
+              { name: "All conversions →", href: "/convert" },
+              { name: "All optimizations →", href: "/optimize-for" },
+              { name: "All passport photos →", href: "/passport-photo" },
             ].map((link) => (
               <Link
                 key={link.href}

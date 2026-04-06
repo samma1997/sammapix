@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Shield, Layout, Archive, Maximize2 } from "lucide-react";
+import Link from "next/link";
+import { Shield, Layout, Archive, Maximize2, ArrowRight } from "lucide-react";
 import ToolHeader from "@/components/tools/ToolHeader";
 import ResizePackClient from "@/components/tools/ResizePackClient";
 import HowToUse from "@/components/tools/HowToUse";
@@ -188,6 +189,29 @@ export default function ResizePackPage() {
       </section>
 
       <RelatedTools toolId="resizepack" />
+
+      {/* ── Resize for specific platforms (hub link) ── */}
+      <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Resize for a specific platform
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              {name:"Instagram",slug:"instagram"},{name:"Facebook",slug:"facebook"},{name:"YouTube",slug:"youtube-thumbnail"},
+              {name:"LinkedIn",slug:"linkedin"},{name:"TikTok",slug:"tiktok"},{name:"Twitter/X",slug:"twitter"},
+              {name:"Pinterest",slug:"pinterest"},{name:"Shopify",slug:"shopify-product"},{name:"Etsy",slug:"etsy-listing"},
+            ].map(p => (
+              <Link key={p.slug} href={`/resize/${p.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+                {p.name}
+              </Link>
+            ))}
+            <Link href="/resize" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors">
+              All platforms <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* HowTo Schema */}
       <script

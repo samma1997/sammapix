@@ -324,6 +324,28 @@ export default function CompressPage() {
 
       <RelatedTools toolId="compress" />
 
+      {/* ── Compress to specific size (hub link) ── */}
+      <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Compress to a specific file size
+          </h2>
+          <p className="text-xs text-[#737373] mb-4">
+            Need to compress to an exact KB limit? Choose your target size:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {["20kb","50kb","100kb","200kb","500kb","1mb","2mb"].map(size => (
+              <Link key={size} href={`/compress-to/${size}`} className="inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+                {size.toUpperCase()}
+              </Link>
+            ))}
+            <Link href="/compress-to" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors">
+              All sizes <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ============================================================ */}
       {/*  FAQ — Visible + Schema                                      */}
       {/* ============================================================ */}
