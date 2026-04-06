@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Shield, Camera, CheckCircle2, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, Shield, Camera, CheckCircle2, Globe } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 import { getAllPassportPresets, getPassportPresetByCountry } from "@/lib/passport-presets";
 import PassportPhotoClient from "@/components/tools/PassportPhotoClient";
@@ -290,6 +290,42 @@ export default async function PassportPhotoCountryPage({
               View all {allPresets.length} countries &rarr;
             </Link>
           </p>
+        </section>
+
+        {/* Cross-category links */}
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-12">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            More tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/passport-photo"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 dark:border-[#6366F1]/20 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              All 140+ countries <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link
+              href="/compress-to/200kb"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Compress to 200KB
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link
+              href="/resize/passport"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Resize for Passport
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+            <Link
+              href="/blog/passport-photo-requirements-2026"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Guide: Passport Photo Requirements
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
         </section>
 
         {/* Related tools */}
