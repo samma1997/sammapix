@@ -1,0 +1,55 @@
+The complete comparison — which apps strip photo metadata?
+
+You strip EXIF data before sharing a photo, but does the platform strip it for you? The answer is more complicated than you think. Some apps strip metadata publicly but keep it internally. Others don't strip anything at all. And one popular app has a hidden mode that preserves one hundred percent of your GPS data.
+
+This guide covers twelve platforms with verified data. Not speculation, not outdated blog posts from 2020. Real, tested, fact-checked information for 2026.
+
+Here's the quick summary. Instagram, Facebook, Twitter, Discord, and Reddit all strip EXIF data for public viewers but keep your metadata internally. Signal strips everything and stores nothing. Telegram and iMessage do not strip metadata at all. Email preserves everything. And WhatsApp has three different behaviors depending on how you send the photo.
+
+The WhatsApp trap — document mode preserves everything.
+
+This is the finding most people don't know about. WhatsApp has three modes for sending photos, and each handles metadata differently.
+
+Photo mode is what most people use. You tap the camera icon, pick a photo, and send. In this mode, WhatsApp strips most EXIF data including GPS coordinates. This is safe for privacy.
+
+Document mode is the trap. When you send a photo as a document, which people do to preserve quality, WhatsApp preserves one hundred percent of the metadata. GPS coordinates, camera model, timestamps, software version, everything. The recipient can extract your exact location from the file. Most people have no idea this happens.
+
+Best quality mode was introduced to let users send higher resolution photos. Testing shows that GPS data is preserved in roughly twenty three percent of cases. That makes it unreliable for privacy. You can't trust it.
+
+The takeaway: if you care about privacy, always send photos as regular photos in WhatsApp, never as documents. Or better yet, strip the metadata before sending through any channel.
+
+Social media platforms — they strip it, but they keep it.
+
+Instagram, Facebook, and Twitter all strip EXIF metadata from the public copy of your photo. When someone downloads your image from these platforms, they won't find GPS coordinates or camera information. This protects you from random viewers.
+
+But here's what people miss: the platform itself has already ingested your full metadata the moment you uploaded. They use this data for advertising, geotagging, analytics, and targeting. As one highly upvoted Reddit comment put it, "just because they strip it for viewers doesn't mean the platform hasn't already saved your location data on their servers."
+
+Instagram compresses uploaded photos to roughly seventy to seventy five percent JPEG equivalent. Facebook does similar processing. Twitter strips and re-encodes. In all cases, the original metadata is retained by the company, not by the public.
+
+So social media protects you from strangers seeing your GPS, but not from the platform itself knowing exactly where every photo was taken.
+
+Messaging apps — the riskiest category.
+
+Signal is the gold standard. It strips all metadata from images before sending and stores nothing on its servers. If privacy matters, Signal is the only messaging app you can fully trust with photos.
+
+Telegram does not strip metadata by default. When you send a photo on Telegram, the recipient receives the file with all EXIF data intact, including GPS. You need to manually edit or strip before sending.
+
+iMessage preserves full metadata. Every photo sent via iMessage contains the original GPS coordinates, camera model, timestamps, and everything else. Most people assume Apple protects their privacy, but iMessage does not touch photo metadata at all.
+
+Email preserves everything. Whether you use Gmail, Outlook, or any other provider, attached photos are sent as original files with all metadata intact. Never email sensitive photos without stripping metadata first.
+
+The Reddit HEIC bug — when even platforms fail.
+
+Even platforms that strip metadata can fail. Reddit had a documented vulnerability, reported through HackerOne as report number 1069039, where uploading HEIC files preserved GPS metadata in the conversion to PNG. Anyone who downloaded the resulting image could see the exact location where the photo was taken.
+
+This was reported and fixed, but it proves an important point: you cannot rely on any platform to protect your metadata. The only reliable approach is to strip it yourself before uploading anywhere.
+
+How to protect yourself.
+
+There are three practical steps you can take right now.
+
+First, strip before sharing. Use a browser-based EXIF remover like SammaPix to check and remove metadata before uploading to any platform. Since it processes everything in your browser, your photos never leave your device.
+
+Second, use Signal for sensitive photos. It's the only major messaging app that strips all metadata and stores nothing server-side.
+
+Third, never use document mode on WhatsApp for photos. Always send as a regular photo if you care about privacy. Document mode preserves your exact GPS coordinates.
