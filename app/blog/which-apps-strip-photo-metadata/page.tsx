@@ -460,6 +460,28 @@ export default function WhichAppsStripPhotoMetadataPage() {
           This is the single most actionable tip in this article. If you use WhatsApp (and 2 billion people do), always send photos as photos — never as documents. Document mode preserves 100% of your metadata including exact GPS coordinates. If you need to send a high-quality version, strip the metadata first, then send as a document.
         </p>
 
+        {/* Related pages — internal links */}
+        <div className="mt-8 mb-4">
+          <p className="text-xs font-medium uppercase tracking-wider text-[#A3A3A3] mb-3">Related guides &amp; tools</p>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/blog/check-remove-exif-data-photos" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              How to Check &amp; Remove EXIF Data
+            </Link>
+            <Link href="/compress-to/100kb" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              Compress to 100KB
+            </Link>
+            <Link href="/compress-to/200kb" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              Compress to 200KB
+            </Link>
+            <Link href="/passport-photo/us" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              US Passport Photo
+            </Link>
+            <Link href="/convert/heic-to-jpg" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              Convert HEIC to JPG
+            </Link>
+          </div>
+        </div>
+
         {/* FAQ Section */}
         <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
           <h2 id="faq" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">

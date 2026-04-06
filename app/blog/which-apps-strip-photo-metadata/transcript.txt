@@ -1,4 +1,4 @@
-The complete comparison — which apps strip photo metadata?
+The short answer — a comparison table.
 
 You strip EXIF data before sharing a photo, but does the platform strip it for you? The answer is more complicated than you think. Some apps strip metadata publicly but keep it internally. Others don't strip anything at all. And one popular app has a hidden mode that preserves one hundred percent of your GPS data.
 
