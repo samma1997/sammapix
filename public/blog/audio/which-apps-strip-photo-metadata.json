@@ -1,0 +1,142 @@
+[
+  {
+    "start": 0,
+    "end": 4.03,
+    "text": "The complete comparison — which apps strip photo metadata?"
+  },
+  {
+    "start": 4.03,
+    "end": 25.58,
+    "text": "You strip EXIF data before sharing a photo, but does the platform strip it for y"
+  },
+  {
+    "start": 25.58,
+    "end": 38.5,
+    "text": "This guide covers twelve platforms with verified data. Not speculation, not outd"
+  },
+  {
+    "start": 38.5,
+    "end": 63.26,
+    "text": "Here's the quick summary. Instagram, Facebook, Twitter, Discord, and Reddit all "
+  },
+  {
+    "start": 63.26,
+    "end": 67.06,
+    "text": "The WhatsApp trap — document mode preserves everything."
+  },
+  {
+    "start": 67.06,
+    "end": 75.7,
+    "text": "This is the finding most people don't know about. WhatsApp has three modes for s"
+  },
+  {
+    "start": 75.7,
+    "end": 90.53,
+    "text": "Photo mode is what most people use. You tap the camera icon, pick a photo, and s"
+  },
+  {
+    "start": 90.53,
+    "end": 113.38,
+    "text": "Document mode is the trap. When you send a photo as a document, which people do "
+  },
+  {
+    "start": 113.38,
+    "end": 128.88,
+    "text": "Best quality mode was introduced to let users send higher resolution photos. Tes"
+  },
+  {
+    "start": 128.88,
+    "end": 140.45,
+    "text": "The takeaway: if you care about privacy, always send photos as regular photos in"
+  },
+  {
+    "start": 140.45,
+    "end": 144.6,
+    "text": "Social media platforms — they strip it, but they keep it."
+  },
+  {
+    "start": 144.6,
+    "end": 160.39,
+    "text": "Instagram, Facebook, and Twitter all strip EXIF metadata from the public copy of"
+  },
+  {
+    "start": 160.39,
+    "end": 181.51,
+    "text": "But here's what people miss: the platform itself has already ingested your full "
+  },
+  {
+    "start": 181.51,
+    "end": 198.94,
+    "text": "Instagram compresses uploaded photos to roughly seventy to seventy five percent "
+  },
+  {
+    "start": 198.94,
+    "end": 207.34,
+    "text": "So social media protects you from strangers seeing your GPS, but not from the pl"
+  },
+  {
+    "start": 207.34,
+    "end": 210.72,
+    "text": "Messaging apps — the riskiest category."
+  },
+  {
+    "start": 210.72,
+    "end": 224.09,
+    "text": "Signal is the gold standard. It strips all metadata from images before sending a"
+  },
+  {
+    "start": 224.09,
+    "end": 238.46,
+    "text": "Telegram does not strip metadata by default. When you send a photo on Telegram, "
+  },
+  {
+    "start": 238.46,
+    "end": 255.1,
+    "text": "iMessage preserves full metadata. Every photo sent via iMessage contains the ori"
+  },
+  {
+    "start": 255.1,
+    "end": 269.74,
+    "text": "Email preserves everything. Whether you use Gmail, Outlook, or any other provide"
+  },
+  {
+    "start": 269.74,
+    "end": 273.74,
+    "text": "The Reddit HEIC bug — when even platforms fail."
+  },
+  {
+    "start": 273.74,
+    "end": 295.22,
+    "text": "Even platforms that strip metadata can fail. Reddit had a documented vulnerabili"
+  },
+  {
+    "start": 295.22,
+    "end": 307.42,
+    "text": "This was reported and fixed, but it proves an important point: you cannot rely o"
+  },
+  {
+    "start": 307.42,
+    "end": 309.79,
+    "text": "How to protect yourself."
+  },
+  {
+    "start": 309.79,
+    "end": 313.39,
+    "text": "There are three practical steps you can take right now."
+  },
+  {
+    "start": 313.39,
+    "end": 328.01,
+    "text": "First, strip before sharing. Use a browser-based EXIF remover like SammaPix to c"
+  },
+  {
+    "start": 328.01,
+    "end": 337.06,
+    "text": "Second, use Signal for sensitive photos. It's the only major messaging app that "
+  },
+  {
+    "start": 337.06,
+    "end": 349.34,
+    "text": "Third, never use document mode on WhatsApp for photos. Always send as a regular "
+  }
+]
