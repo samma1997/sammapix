@@ -610,6 +610,7 @@ export default function HomePage() {
               { name: "All resize formats →", href: "/resize" },
               { name: "All conversions →", href: "/convert" },
               { name: "All optimizations →", href: "/optimize-for" },
+              { name: "All image sizes →", href: "/image-size" },
               { name: "All passport photos →", href: "/passport-photo" },
             ].map((link) => (
               <Link

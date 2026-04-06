@@ -146,6 +146,24 @@ export default function ImageSizeIndexPage() {
           </Link>
         ))}
       </div>
+
+      {/* ── Explore more ── */}
+      <div className="mt-12 pt-8 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">Explore more</h2>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { name: "Compress to size", href: "/compress-to" },
+            { name: "Resize for platforms", href: "/resize" },
+            { name: "Convert formats", href: "/convert" },
+            { name: "Optimize for CMS", href: "/optimize-for" },
+            { name: "Passport photos", href: "/passport-photo" },
+          ].map(l => (
+            <Link key={l.href} href={l.href} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              {l.name} <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
