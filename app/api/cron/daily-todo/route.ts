@@ -52,18 +52,27 @@ export async function GET(request: NextRequest) {
     if (model) {
       const postResult = await model.generateContent(`Genera 2 post Reddit per fare karma. Temi: immagini, foto, privacy digitale, produttività, tecnologia.
 
-REGOLE:
-- Subreddit SOLO tra: DoesAnybodyElse, LifeProTips, AskReddit, todayilearned
-- Suona 100% umano, casuale, da esperienza personale
+STRATEGIA: L'account ha 1200+ karma. FASE 3: 50% farming + 50% promozione SammaPix.
+
+Genera 2 post: 1 karma farming + 1 promozione SammaPix.
+
+POST 1 (KARMA FARMING):
+- Subreddit tra: DoesAnybodyElse, LifeProTips, AskReddit, todayilearned
+- 100% umano, casuale, da esperienza personale
 - ZERO marketing, ZERO prodotti
-- Deve poter fare 50+ upvote
-- Il campo "subreddit" contiene SOLO il nome senza r/ (es. "LifeProTips")
 - Titolo e body in INGLESE
-- Body vuoto per AskReddit e DoesAnybodyElse
+
+POST 2 (PROMOZIONE SAMMAPIX):
+- Subreddit tra: SideProject, webdev, photography, AskPhotography, selfhosted, InternetIsBeautiful
+- Angolo: "I built a free tool that..." oppure commento utile con menzione naturale di SammaPix
+- NON mettere link nel titolo. Link nel body o nel primo commento.
+- Menzionare: "25 tools, browser-based, no upload, free, privacy-first"
+- Suona come un dev/maker genuino, NON come marketing
 
 ESEMPI CHE HANNO FUNZIONATO:
-- LifeProTips: "LPT: Before posting photos online, check if they contain GPS location data" → 1K upvote
-- DoesAnybodyElse: "DAE set their alarm 30 minutes early just to enjoy lying in bed?" → 144 upvote
+- Karma: "LPT: Before posting photos online, check if they contain GPS location data" → 1.2K upvote
+- Promo: "I built Stirling-PDF but for images" → 1000 upvote su r/selfhosted
+- Promo: "Client-side passport photo maker with WASM" → 1279 upvote su r/webdev
 
 JSON array, NIENT'ALTRO:
 [{"subreddit": "NomeSub", "title": "titolo", "body": "testo o vuoto", "perche": "1 frase italiano"}]`);
