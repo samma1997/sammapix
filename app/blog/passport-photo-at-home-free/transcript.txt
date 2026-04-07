@@ -1,0 +1,45 @@
+What you need (spoiler: just your phone).
+
+You do not need a professional camera, a photo studio, or special lighting equipment. Here is everything you need to create a passport photo that passes government requirements. A phone with camera — any modern smartphone works, even a three-year-old budget phone has enough resolution. A white wall or plain background — a plain door or bedsheet works too. Natural light — stand near a window, avoid direct sunlight. A friend to take the photo — or use a timer and prop your phone at eye level. And the SammaPix Passport Photo tool, which is free and browser-based and handles cropping and background removal.
+
+That is it. No tripod, no ring light, no Photoshop. The whole process takes under five minutes.
+
+Step 1 — Take the photo right.
+
+The photo itself is the most important part. Get this right and everything else is automatic. Stand one to two meters from a white or light-colored wall. Face the camera straight on, no tilting your head. Neutral expression, mouth closed. Both ears visible, no hair covering them. No glasses — most countries now require this, and the US has required it since 2016. No shadows on your face or the background. Phone at eye level, not from above or below.
+
+Turn portrait mode off. Portrait mode creates depth blur which can cause rejection. Passport photos need flat, even lighting across your face and the background. If you are using a timer, prop the phone on a shelf or stack of books at eye level. The camera should be roughly one and a half meters away. Take several shots so you can pick the best one.
+
+Step 2 — Use SammaPix to make it compliant.
+
+Once you have a good photo, the rest is handled automatically. Go to sammapix.com/tools/passport-photo. Select your country from the dropdown — one hundred forty plus countries available. Upload your photo. The AI removes the background automatically and replaces it with pure white. The tool crops to the exact dimensions required by your country. Download the compliant photo. Done.
+
+No account needed. No watermark. The tool runs in your browser, so your photo never gets stored on any server.
+
+Country-specific requirements (the confusing part).
+
+Every country has its own passport photo specifications. This is where most people get confused and where most rejections happen. The US requires two by two inches at six hundred by six hundred pixels on a white background. The UK requires thirty-five by forty-five millimeters at four hundred twenty by five hundred forty pixels on light grey or white. The EU and Schengen area requires thirty-five by forty-five millimeters at four hundred thirteen by five hundred thirty-one pixels on white or light background. India requires thirty-five by forty-five millimeters at four hundred thirteen by five hundred thirty-one pixels on white, with a file size between ten and two hundred kilobytes. Canada requires fifty by seventy millimeters at five hundred ninety-one by eight hundred twenty-seven pixels on white. Australia requires thirty-five by forty-five millimeters at four hundred thirteen by five hundred thirty-one pixels on white. Japan requires thirty-five by forty-five millimeters at four hundred thirteen by five hundred thirty-one pixels on white. China requires thirty-three by forty-eight millimeters at three hundred ninety by five hundred sixty-seven pixels on white.
+
+Important note on India: the Indian domestic passport uses thirty-five by forty-five millimeters, not two by two inches. The two by two inch format is only for the Indian e-Visa application. Many guides online get this wrong. SammaPix has separate presets for both, so you always get the correct size.
+
+Common mistakes that get your photo rejected.
+
+Passport offices reject millions of photos every year. Shadow on face or background — use natural light from a window, not overhead lighting. Stand far enough from the wall to avoid casting a shadow behind you. Head too small or too large in frame — most countries require the head to be seventy to eighty percent of the photo height. SammaPix crops to this ratio automatically. Wrong background color — some countries require pure white, others accept light grey. SammaPix removes your background entirely and replaces it with the correct color. Glasses visible — the US has required no glasses since 2016, and most countries have followed since 2020. Remove glasses before taking the photo, even if they are prescription. Photo taken from above — holding the phone above your head changes facial proportions and makes your chin look smaller. Always shoot at eye level. Too much compression — India requires ten to two hundred kilobytes for passport uploads. Over-compressing loses detail and can cause rejection. Use SammaPix compress-to for exact file size control.
+
+How to compress for upload requirements.
+
+Some countries and exam forms require your passport photo to be within a specific file size range. This is especially common in India, where government portals and competitive exam applications have strict kilobyte limits. Indian passport online application: ten to two hundred kilobytes. JEE Main application: ten to two hundred kilobytes. NEET application: ten to two hundred kilobytes. UPSC application: ten to two hundred kilobytes.
+
+After creating your passport photo with SammaPix, you can use the compress to one hundred kilobytes or compress to two hundred kilobytes tools to hit the exact target. The compression is smart — it reduces file size while preserving enough detail for the photo to remain compliant.
+
+FAQ.
+
+Can I take a passport photo with my phone? Yes. Any modern smartphone camera is sufficient. The key is lighting, background, and correct dimensions. SammaPix handles the cropping, background removal, and compliance automatically.
+
+How much does a passport photo cost at a studio? Typically ten to fifteen dollars in the US, ten to fifteen euros in Europe, one hundred to two hundred rupees in India. SammaPix does it for free, directly in your browser.
+
+Does SammaPix work for Indian passport photos? Yes. SammaPix supports Indian passport at thirty-five by forty-five millimeters, Indian e-Visa at two by two inches, and exam forms including JEE, NEET, and UPSC with exact kilobyte compression.
+
+Do I need a white background? Most countries require white or light grey. SammaPix's AI automatically removes your background and replaces it with pure white, so any background works when you take the photo.
+
+Can I use the same photo for passport and visa? Not always. Different countries have different size requirements. SammaPix has presets for one hundred forty plus countries and visa types, so you can generate the correct format for each from the same original photo.
