@@ -1,0 +1,167 @@
+[
+  {
+    "start": 0,
+    "end": 2.78,
+    "text": "The credit-based plugin trap."
+  },
+  {
+    "start": 2.78,
+    "end": 51.48,
+    "text": "Most WordPress image optimization plugins use a credit system. You install the p"
+  },
+  {
+    "start": 51.48,
+    "end": 69.58,
+    "text": "The frustration is real. One Reddit thread with 46 upvotes and 71 comments is ti"
+  },
+  {
+    "start": 69.58,
+    "end": 85.8,
+    "text": "The core problem is simple. You are paying a monthly fee for something you can d"
+  },
+  {
+    "start": 85.8,
+    "end": 88.92,
+    "text": "The \"compress before upload\" workflow."
+  },
+  {
+    "start": 88.92,
+    "end": 135.72,
+    "text": "Here is the step-by-step process. It takes about 30 seconds per batch of images."
+  },
+  {
+    "start": 135.72,
+    "end": 145.8,
+    "text": "Optional bonus step: convert to WebP first using the SammaPix WebP converter for"
+  },
+  {
+    "start": 145.8,
+    "end": 158.14,
+    "text": "Everything happens client-side. Your images never leave your browser. There is n"
+  },
+  {
+    "start": 158.14,
+    "end": 161.95,
+    "text": "Real results — 3 test images before and after."
+  },
+  {
+    "start": 161.95,
+    "end": 203.69,
+    "text": "We tested three typical WordPress images through SammaPix Compress at 80 percent"
+  },
+  {
+    "start": 203.69,
+    "end": 221.21,
+    "text": "That product photo went from 4.2 megabytes to 310 kilobytes. On a blog page with"
+  },
+  {
+    "start": 221.21,
+    "end": 233.45,
+    "text": "Results vary depending on image content and complexity. Photos with lots of deta"
+  },
+  {
+    "start": 233.45,
+    "end": 237.74,
+    "text": "What about WebP? Should you convert too?"
+  },
+  {
+    "start": 237.74,
+    "end": 255.55,
+    "text": "Short answer: yes, if your WordPress is version 5.8 or later, which is virtually"
+  },
+  {
+    "start": 255.55,
+    "end": 285.77,
+    "text": "WebP has 97 percent browser support as of 2026 — every major browser including S"
+  },
+  {
+    "start": 285.77,
+    "end": 297.65,
+    "text": "The ideal workflow is: compress with SammaPix Compress, then convert to WebP wit"
+  },
+  {
+    "start": 297.65,
+    "end": 308.33,
+    "text": "You can also go directly from JPG or PNG to WebP using the JPG to WebP or PNG to"
+  },
+  {
+    "start": 308.33,
+    "end": 311.62,
+    "text": "But what about lazy loading and CDN?"
+  },
+  {
+    "start": 311.62,
+    "end": 323.47,
+    "text": "A common objection: \"I do not need to compress images because my CDN handles it\""
+  },
+  {
+    "start": 323.47,
+    "end": 335.62,
+    "text": "Lazy loading delays when an image loads, but does not reduce its file size. Your"
+  },
+  {
+    "start": 335.62,
+    "end": 353.38,
+    "text": "A CDN, or Content Delivery Network, caches your images on edge servers closer to"
+  },
+  {
+    "start": 353.38,
+    "end": 367.85,
+    "text": "Image compression is the only thing that actually reduces the bytes transferred."
+  },
+  {
+    "start": 367.85,
+    "end": 391.08,
+    "text": "The best approach is all three together: compress before upload plus lazy loadin"
+  },
+  {
+    "start": 391.08,
+    "end": 394.37,
+    "text": "When you DO need a plugin (and when you don't)."
+  },
+  {
+    "start": 394.37,
+    "end": 436.3,
+    "text": "Being honest: there are situations where a WordPress image optimization plugin m"
+  },
+  {
+    "start": 436.3,
+    "end": 449.62,
+    "text": "For new images going forward, compress before upload is always better. It is fre"
+  },
+  {
+    "start": 449.62,
+    "end": 465.6,
+    "text": "The sweet spot for most WordPress sites: use SammaPix to compress every new imag"
+  },
+  {
+    "start": 465.6,
+    "end": 468.17,
+    "text": "Frequently asked questions."
+  },
+  {
+    "start": 468.17,
+    "end": 489.96,
+    "text": "Do I still need an image optimization plugin if I compress before upload? For ne"
+  },
+  {
+    "start": 489.96,
+    "end": 510.02,
+    "text": "What quality setting should I use for WordPress? 80 percent is the sweet spot fo"
+  },
+  {
+    "start": 510.02,
+    "end": 531,
+    "text": "Should I upload WebP or JPEG to WordPress? WebP if your site uses WordPress 5.8 "
+  },
+  {
+    "start": 531,
+    "end": 546.1,
+    "text": "How many images can I compress at once with SammaPix? 20 images per batch on the"
+  },
+  {
+    "start": 546.1,
+    "end": 567.26,
+    "text": "Will compressing images affect my SEO? Positively. Smaller images mean faster pa"
+  }
+]
