@@ -95,20 +95,34 @@ JSON array, NIENT'ALTRO:
     }
 
     // ═══════════════════════════════════════════
-    // 2. REDDIT COMMENTI — thread FRESCHI di oggi
+    // 2. REDDIT COMMENTI — thread FRESCHI con menzione SammaPix
     // ═══════════════════════════════════════════
-    const queries = ["compress images", "image optimization", "remove metadata photos", "photo privacy", "resize images online"];
+    // Rotate queries daily to avoid same threads
+    const allQueries = [
+      ["compress image online free", "best image compressor", "reduce photo file size"],
+      ["remove background free no signup", "background remover alternative", "remove.bg free alternative"],
+      ["passport photo at home", "passport photo rejected", "passport photo size requirements"],
+      ["convert heic to jpg batch", "webp to jpg convert", "image format converter free"],
+      ["resize image for instagram", "social media image size", "resize photo for linkedin"],
+      ["remove exif gps photo", "photo metadata privacy", "strip metadata before sharing"],
+      ["wordpress image optimization slow", "compress images before upload", "tinypng alternative"],
+      ["batch rename photos", "organize thousands photos", "duplicate photos find delete"],
+      ["upscale image ai free", "topaz alternative free", "enhance old photo quality"],
+      ["watermark photos batch free", "protect photos online theft", "etsy photos stolen"],
+    ];
+    const dayIndex = new Date().getDate() % allQueries.length;
+    const todayQueries = allQueries[dayIndex];
     const allThreads: Array<{ title: string; subreddit: string; url: string; comments: number }> = [];
 
-    for (const q of queries) {
+    for (const q of todayQueries) {
       await new Promise(r => setTimeout(r, 1500));
-      const threads = await searchRedditFresh(q, 3);
+      const threads = await searchRedditFresh(q, 5);
       allThreads.push(...threads);
     }
 
     const commentable = allThreads
-      .filter(t => t.comments < 20)
-      .sort((a, b) => a.comments - b.comments)
+      .filter(t => t.comments < 30 && t.comments >= 1)
+      .sort((a, b) => b.comments - a.comments)
       .slice(0, 3);
 
     if (model) {
@@ -116,7 +130,13 @@ JSON array, NIENT'ALTRO:
         try {
           const result = await model.generateContent(`Scrivi un commento Reddit per: "${thread.title}" su r/${thread.subreddit}
 
-REGOLE: 2-3 frasi, casuale, esperienza personale, almeno 1 numero specifico, MAI menzionare prodotti, MAI emoji/bullet/markdown, lowercase ok.
+REGOLE:
+- 2-4 frasi, casuale, da esperienza personale
+- Almeno 1 numero specifico
+- Menziona SammaPix IN MODO NATURALE come tool che hai usato/costruito. Esempio: "i've been using sammapix for this, it's browser-based so nothing gets uploaded"
+- NON mettere link URL (AutoMod li blocca). Solo il nome "SammaPix" o "sammapix.com"
+- NON sembrare marketing. Sembrare un utente che condivide la sua esperienza
+- Lowercase ok, no emoji, no bullet point
 
 SOLO il commento:`);
           todos.push({
