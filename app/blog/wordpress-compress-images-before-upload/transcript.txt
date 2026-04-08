@@ -1,0 +1,65 @@
+The credit-based plugin trap.
+
+Most WordPress image optimization plugins use a credit system. You install the plugin, it compresses your images on their servers, and you pay per image or per megabyte. ShortPixel gives you 100 images per month free, then you pay per credit. A single blog post with 5 images burns through your monthly allowance in a few weeks. Imagify gives you 20 megabytes per month free, which is roughly 10 photos from a modern phone. One product shoot and you are done for the month. Smush Pro costs 49 dollars per month as part of the WPMU DEV bundle. The free version caps compression at 5 megabytes per image and strips lossy compression entirely. WP-Optimize has a limited free tier with basic compression and advanced features locked behind a paid plan.
+
+The frustration is real. One Reddit thread with 46 upvotes and 71 comments is titled "I am so tired of Credit Based Image Optimizers." Another comment with 30 upvotes puts it bluntly: "I don't understand why people put image optimizers on their websites instead of optimizing before upload."
+
+The core problem is simple. You are paying a monthly fee for something you can do once, for free, before you ever upload the image. Every image that hits your WordPress media library should already be optimized. The plugin becomes unnecessary.
+
+The "compress before upload" workflow.
+
+Here is the step-by-step process. It takes about 30 seconds per batch of images. First, export your images as usual — JPG from your camera, PNG from Canva or Figma, screenshots from your phone. Second, open SammaPix Compress — no account needed, runs entirely in your browser. Third, drop all images at once — batch up to 20 images in a single drop. Fourth, set quality to 80 percent — this is the sweet spot for web. Visually identical, dramatically smaller files. Fifth, download the compressed images — they are ready for WordPress. Sixth, upload to WordPress — your images are already optimized. No plugin processing, no credits spent, no waiting.
+
+Optional bonus step: convert to WebP first using the SammaPix WebP converter for an additional 25 to 35 percent file size reduction on top of the compression.
+
+Everything happens client-side. Your images never leave your browser. There is no upload queue, no server processing, and no file size limits beyond what your browser can handle.
+
+Real results — 3 test images before and after.
+
+We tested three typical WordPress images through SammaPix Compress at 80 percent quality, then converted the results to WebP. A product photo from an iPhone 15 went from 4.2 megabytes to 420 kilobytes after compression, and down to 310 kilobytes after WebP conversion — a 93 percent total savings. A blog header exported from Canva went from 1.8 megabytes to 195 kilobytes after compression, and down to 145 kilobytes after WebP — 92 percent savings. A team photo from a DSLR went from 8.7 megabytes to 680 kilobytes after compression, and down to 490 kilobytes after WebP — 94 percent savings.
+
+That product photo went from 4.2 megabytes to 310 kilobytes. On a blog page with 5 similar images, that is the difference between loading 21 megabytes of images and loading 1.5 megabytes. Your visitors notice that difference, and so does Google.
+
+Results vary depending on image content and complexity. Photos with lots of detail compress less than simple graphics. These are actual test results, not guarantees.
+
+What about WebP? Should you convert too?
+
+Short answer: yes, if your WordPress is version 5.8 or later, which is virtually every active WordPress site in 2026. WebP is a modern image format developed by Google that delivers 25 to 35 percent smaller files than optimized JPEG with no visible quality difference.
+
+WebP has 97 percent browser support as of 2026 — every major browser including Safari, Chrome, Firefox, and Edge. WordPress has supported WebP uploads natively since version 5.8, released July 2021. WebP saves 25 to 35 percent more than an already-optimized JPEG — that is free performance on top of compression. The only browsers that do not support WebP are Internet Explorer, which has been discontinued, and very old Safari versions.
+
+The ideal workflow is: compress with SammaPix Compress, then convert to WebP with the WebP converter, then upload to WordPress. Two steps, zero cost, maximum compression.
+
+You can also go directly from JPG or PNG to WebP using the JPG to WebP or PNG to WebP converters, which handle compression and format conversion in a single step.
+
+But what about lazy loading and CDN?
+
+A common objection: "I do not need to compress images because my CDN handles it" or "lazy loading takes care of performance." This is a misunderstanding of what each technology actually does.
+
+Lazy loading delays when an image loads, but does not reduce its file size. Your server still stores a 4 megabyte file, and the visitor still downloads 4 megabytes — just later in the page scroll.
+
+A CDN, or Content Delivery Network, caches your images on edge servers closer to the visitor, which reduces latency. But it serves exactly what you uploaded. A CDN does not compress your images — it delivers your 4 megabyte file faster from a closer location.
+
+Image compression is the only thing that actually reduces the bytes transferred. A 4 megabyte image compressed to 400 kilobytes saves 3.6 megabytes of bandwidth on every single page load, regardless of lazy loading or CDN.
+
+The best approach is all three together: compress before upload plus lazy loading plus CDN. Each solves a different problem. Compression reduces file size, lazy loading defers non-critical images, and CDN reduces latency. Skipping compression and relying on the other two is like putting racing tires on a truck — it helps, but you are still hauling unnecessary weight.
+
+When you DO need a plugin (and when you don't).
+
+Being honest: there are situations where a WordPress image optimization plugin makes sense. If you have 10,000 or more existing unoptimized images, a plugin can batch-process your entire media library retroactively. Running ShortPixel once to optimize your backlog, then canceling, is a valid strategy. If non-technical editors upload images daily, a plugin acts as a safety net to catch unoptimized uploads. If you need automatic WebP conversion on the fly, some plugins can serve WebP to supported browsers and fall back to JPEG for older ones. This is less relevant in 2026 with 97 percent WebP support, but still useful for edge cases.
+
+For new images going forward, compress before upload is always better. It is free, does not add a plugin dependency to your site, does not require server resources, and gives you full control over quality settings.
+
+The sweet spot for most WordPress sites: use SammaPix to compress every new image before upload, and if you have a large backlog of unoptimized images, run a plugin once to clean them up. Then uninstall the plugin. You do not need it running permanently.
+
+Frequently asked questions.
+
+Do I still need an image optimization plugin if I compress before upload? For new images, no. The plugin becomes redundant if you compress before uploading. For existing unoptimized images already on your server, a one-time plugin run can help batch-process them retroactively. After that, you can uninstall the plugin.
+
+What quality setting should I use for WordPress? 80 percent is the sweet spot for most photos. It reduces file size by around 90 percent with no visible quality loss on screen. Logos and graphics with text should use higher quality, 90 percent or above, or stay as PNG to preserve sharp edges.
+
+Should I upload WebP or JPEG to WordPress? WebP if your site uses WordPress 5.8 or later, which is every modern WordPress installation. WebP saves 25 to 35 percent more than optimized JPEG with no visible quality loss. WordPress has supported WebP natively since version 5.8.
+
+How many images can I compress at once with SammaPix? 20 images per batch on the free tier, 500 on Pro. All processing happens in your browser — no upload to servers, so your images stay private and compression is instant.
+
+Will compressing images affect my SEO? Positively. Smaller images mean faster page loads, which means better Core Web Vitals scores and higher Google rankings. Google has confirmed page speed is a ranking factor. A page that loads in 2 seconds instead of 5 seconds will rank better, all else being equal.
