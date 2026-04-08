@@ -95,29 +95,88 @@ JSON array, NIENT'ALTRO:
     }
 
     // ═══════════════════════════════════════════
-    // 2. REDDIT COMMENTI — thread FRESCHI con menzione SammaPix
+    // 2. REDDIT COMMENTI — scraping LIVE con query AI-generate
     // ═══════════════════════════════════════════
-    // Rotate queries daily to avoid same threads
-    const allQueries = [
-      ["compress image online free", "best image compressor", "reduce photo file size"],
-      ["remove background free no signup", "background remover alternative", "remove.bg free alternative"],
-      ["passport photo at home", "passport photo rejected", "passport photo size requirements"],
-      ["convert heic to jpg batch", "webp to jpg convert", "image format converter free"],
-      ["resize image for instagram", "social media image size", "resize photo for linkedin"],
-      ["remove exif gps photo", "photo metadata privacy", "strip metadata before sharing"],
-      ["wordpress image optimization slow", "compress images before upload", "tinypng alternative"],
-      ["batch rename photos", "organize thousands photos", "duplicate photos find delete"],
-      ["upscale image ai free", "topaz alternative free", "enhance old photo quality"],
-      ["watermark photos batch free", "protect photos online theft", "etsy photos stolen"],
-    ];
-    const dayIndex = new Date().getDate() % allQueries.length;
-    const todayQueries = allQueries[dayIndex];
+    // AI generates FRESH queries every day based on date + randomness
+    let todayQueries: string[] = [];
+    if (model) {
+      try {
+        const queryResult = await model.generateContent(`Today is ${today}. Generate 5 Reddit search queries to find FRESH threads where someone needs help with image tools.
+
+CONTEXT: SammaPix has these tools: compress (to exact KB), convert (HEIC/WebP/PNG/JPG/AVIF/JXL), resize (for 20+ social platforms), remove background (AI), strip EXIF metadata, passport photo (140+ countries), batch watermark, AI rename, duplicate finder, upscale, crop, PDF-to-image, image-to-text OCR.
+
+RULES:
+- Each query must be DIFFERENT from generic terms like "compress images" or "image optimization"
+- Use SPECIFIC pain points: "photo rejected", "file too large upload", "need to resize for", "how do I remove", "looking for free tool"
+- Mix topics: some privacy, some e-commerce, some photography, some web dev, some mobile/phone
+- Include at least 1 TRENDING topic (AI photo, privacy concern, platform update, new format)
+- Queries should find threads where people ASK FOR HELP, not news articles
+
+Return ONLY a JSON array of 5 strings, nothing else:
+["query 1", "query 2", "query 3", "query 4", "query 5"]`);
+
+        const qMatch = queryResult.response.text().trim().match(/\[[\s\S]*\]/);
+        if (qMatch) {
+          todayQueries = JSON.parse(qMatch[0]).slice(0, 5);
+        }
+      } catch {}
+    }
+    // Fallback if AI fails
+    if (todayQueries.length === 0) {
+      const fallback = [
+        "photo too large upload form", "remove background free batch", "passport photo rejected why",
+        "heic to jpg windows cant open", "compress image under 100kb", "resize image instagram quality loss",
+        "exif gps location privacy risk", "wordpress slow images fix", "topaz subscription alternative free",
+        "watermark photos etsy stolen", "upscale old photo ai free", "convert webp jpg annoying",
+      ];
+      const start = new Date().getDate() % (fallback.length - 4);
+      todayQueries = fallback.slice(start, start + 5);
+    }
     const allThreads: Array<{ title: string; subreddit: string; url: string; comments: number }> = [];
 
+    // Search with AI-generated queries
     for (const q of todayQueries) {
       await new Promise(r => setTimeout(r, 1500));
       const threads = await searchRedditFresh(q, 5);
       allThreads.push(...threads);
+    }
+
+    // Also scrape NEW posts from relevant subreddits (rotated daily)
+    const targetSubs = [
+      ["photography", "AskPhotography", "webdev"],
+      ["SideProject", "selfhosted", "Wordpress"],
+      ["shopify", "Etsy", "SEO"],
+      ["privacy", "degoogle", "opsec"],
+      ["graphic_design", "NewTubers", "Blogging"],
+      ["DataHoarder", "iphone", "macapps"],
+      ["upscaling", "postprocessing", "freelance"],
+    ];
+    const subIndex = new Date().getDate() % targetSubs.length;
+    for (const sub of targetSubs[subIndex]) {
+      try {
+        await new Promise(r => setTimeout(r, 1500));
+        const res = await fetch(
+          `https://www.reddit.com/r/${sub}/new.json?limit=10`,
+          { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          const posts = (data?.data?.children ?? [])
+            .map((c: any) => ({
+              title: c.data.title,
+              subreddit: c.data.subreddit,
+              url: `https://www.reddit.com${c.data.permalink}`,
+              comments: c.data.num_comments,
+            }))
+            .filter((p: any) => {
+              const t = p.title.toLowerCase();
+              return ["image", "photo", "compress", "resize", "convert", "background", "exif",
+                      "metadata", "privacy", "passport", "watermark", "upscale", "heic", "webp",
+                      "png", "jpg", "optimize", "tool", "free"].some(kw => t.includes(kw));
+            });
+          allThreads.push(...posts);
+        }
+      } catch {}
     }
 
     const commentable = allThreads
