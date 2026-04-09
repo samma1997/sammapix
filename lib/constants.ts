@@ -79,6 +79,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "compress-photos-indian-exam-applications",
   "wordpress-compress-images-before-upload",
   "passport-photo-at-home-free",
   "which-apps-strip-photo-metadata",
