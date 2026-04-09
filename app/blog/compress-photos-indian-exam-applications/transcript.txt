@@ -1,0 +1,73 @@
+Why exam forms keep rejecting your photo.
+
+You take a photo with your phone, try to upload it to the JEE or NEET application form, and it fails. No clear error message — sometimes just "file too large" or the upload silently does nothing. Here is why it keeps happening.
+
+File size mismatch — phone cameras produce photos at 3 to 8 megabytes. Exam forms want 50 to 200 kilobytes, that is 20 to 100 times smaller than what your phone outputs. Wrong dimensions — the required dimensions must be exact: 3.5 by 4.5 centimeters at 200 DPI equals 413 by 531 pixels. Your phone photo is likely 4000 by 3000 pixels or larger. Wrong format — iPhones save photos as HEIC by default. Exam forms need JPG. If you upload a HEIC file, the form will reject it without telling you why. Background problems — exam forms require a plain white background. Selfies taken against a wall, in a room, or outdoors will be rejected during verification even if the upload succeeds. Signature is different — the signature upload has completely different requirements, usually 10 to 30 kilobytes, different dimensions, and must be on white paper with blue or black ink. Vague error messages — NTA and other portals often show generic errors like "invalid file" or just fail silently. You have no idea which requirement you are violating.
+
+The good news: every single one of these problems is fixable in under 2 minutes with the right tool. You do not need to install an app or visit a photo studio.
+
+Exact requirements by exam.
+
+Here are the photo and signature upload requirements for the major Indian competitive exams, verified from official sources. JEE Main from NTA requires a photo between 10 and 200 kilobytes, signature between 10 and 100 kilobytes, dimensions 3.5 by 4.5 centimeters, JPG format, white background. NEET UG requires a photo between 10 and 200 kilobytes, signature between 4 and 30 kilobytes, dimensions 3.5 by 4.5 centimeters, JPG format, white background. GATE requires a photo between 10 and 200 kilobytes, dimensions 3.5 by 4.5 centimeters, JPG format, white background. SSC GD requires a photo between 20 and 50 kilobytes, dimensions 3.5 by 4.5 centimeters, JPG format, white background. UPSC CSE requires a photo between 20 and 300 kilobytes, signature requirements vary, dimensions vary by notification, JPG format, white background. CAT requires a photo with maximum 80 kilobytes, JPEG format, white background.
+
+UPSC requirements vary by notification. Always check the official bulletin for your specific exam session. The ranges above are typical but not guaranteed.
+
+JEE Main has conflicting sources showing 200 kilobytes versus 300 kilobytes maximum. We recommend targeting under 200 kilobytes to be safe — if the form accepts up to 300 kilobytes, your 200 kilobyte photo will still work.
+
+The safe strategy: compress your photo to under 100 kilobytes. This fits within every exam's requirements.
+
+Step-by-step — compress your photo in 2 minutes.
+
+Follow these seven steps exactly. You will go from a 5 megabyte phone photo to an exam-ready compressed JPG in under 2 minutes.
+
+First, take the photo correctly. Stand against a plain white wall, face the camera straight, both ears visible, no glasses, neutral expression. Use a friend or a phone timer on a shelf — not a selfie. The front camera distorts your face.
+
+Second, open SammaPix Compress. Go to sammapix.com/tools/compress in any browser on your phone or computer. No app install, no signup.
+
+Third, drop your photo. Drag the image file from your phone gallery or computer. On mobile, tap to select from your photo library.
+
+Fourth, set quality to 70 percent. Start at 70 percent. Check the output size shown below your image. If still above your exam's limit, reduce to 60 percent. For most exams, 70 percent gets you well under 200 kilobytes.
+
+Fifth, check the size. SammaPix shows the compressed file size instantly. Need exactly under 100 kilobytes? Use the dedicated Compress to 100KB tool instead — it automatically finds the right quality level for your exact target.
+
+Sixth, download. The compressed JPG downloads at the size you need. The filename stays the same so you know which file it is.
+
+Seventh, upload to the exam form. Done. The form accepts your photo on the first try. No more rejection, no more guessing.
+
+Everything happens in your browser. Your photo is never uploaded to any server — the compression runs locally on your device. This means it works even on slow connections.
+
+Compress to EXACT sizes (50KB, 100KB, 200KB).
+
+Guessing quality percentages is frustrating. SammaPix has dedicated pages that compress your photo to an exact target file size. You drop your photo, and the tool keeps reducing quality until it hits your target — automatically. No trial and error.
+
+Compress to 50KB — for SSC GD and other strict forms that cap at 50 kilobytes. Compress to 100KB — the safe target for JEE, NEET, and GATE. Fits within every exam's range. Compress to 200KB — for UPSC and more lenient forms that allow up to 200 to 300 kilobytes. Compress to 20KB — for signature files that need to be under 30 kilobytes.
+
+These tools keep reducing quality until the exact target is hit. You do not have to guess. Drop your photo, get a file at exactly the size you need.
+
+Signature compression — the often-forgotten part.
+
+Most students focus on the photo and forget about the signature upload. Signature requirements are stricter than photo requirements — NEET asks for 4 to 30 kilobytes, JEE Main for 10 to 100 kilobytes. A phone photo of your signature will be 2 to 5 megabytes. You need to compress it down to under 30 kilobytes.
+
+Sign on white paper with a blue or black ink pen — not pencil, not gel pen. Photograph or scan the signature with good lighting — avoid shadows across the paper. The background must be pure white. If your photo has a grayish background, the file size will be larger and it may be rejected. Crop tightly around the signature before compressing — remove all extra whitespace around the edges.
+
+Use Compress to 20KB for NEET signatures or Compress to 30KB if your exam allows a slightly larger file. The tool automatically finds the right quality to hit the target without making the signature unreadable.
+
+What about passport photo for the exam?
+
+Many Indian exams require a passport-size photo — 3.5 by 4.5 centimeters (35 by 45 millimeters). This is the Indian passport photo standard, not the US 2 by 2 inch format. Your phone photo needs to be cropped to these exact dimensions before compression.
+
+SammaPix has a dedicated India Passport Photo tool that crops your photo to the exact 3.5 by 4.5 centimeter dimensions and removes the background with AI, replacing it with pure white. You can also use the Passport Photo tool to select India as your country and get the right dimensions automatically.
+
+Important: the passport photo tool handles dimensions and background. You still need to compress the output file separately to meet the exam's file size requirement. Crop first with the passport tool, then compress with Compress to 100KB.
+
+Frequently asked questions.
+
+How do I compress my photo to exactly 100KB for JEE? Use sammapix.com/compress-to/100kb. Drop your photo, the tool automatically compresses to under 100 kilobytes while keeping maximum quality. No signup needed. It works on your phone browser too.
+
+Why does my photo keep getting rejected on the NTA website? Usually it is one of four things: file too large (over 200 kilobytes), wrong format (HEIC instead of JPG), wrong dimensions (not 3.5 by 4.5 centimeters), or background not white enough. Compress and crop your photo before uploading to fix all of these at once.
+
+Can I use SammaPix on my phone? Yes. SammaPix works in any mobile browser — Chrome, Safari, Samsung Internet. No app download needed. Open the website, select your photo from your gallery, and download the compressed version. Everything runs locally on your device.
+
+What is the difference between 50KB and 200KB quality? At 200 kilobytes a passport photo looks sharp and clear. At 50 kilobytes there is slight softness but it is still perfectly acceptable for exam forms. The compress-to tools preserve maximum quality at any target size — they only reduce quality as much as needed to hit the target.
+
+Do I need to compress my signature separately? Yes. Signature files have different size limits (usually 4 to 30 kilobytes) and different dimensions than the photo. Compress the signature as a separate file using the Compress to 20KB or Compress to 30KB tools.
