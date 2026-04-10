@@ -261,11 +261,11 @@ export default function BestFreeTopazAlternatives2026() {
         </ul>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          Upscayl is the closest thing to a free Topaz Gigapixel. It&rsquo;s a desktop app with a clean GUI that uses Real-ESRGAN models under the hood. You drag in your image, pick a scale factor, and it processes everything on your GPU.
+          <a href="https://upscayl.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">Upscayl</a> is the closest thing to a free Topaz Gigapixel. It&rsquo;s a desktop app with a clean GUI that uses Real-ESRGAN models under the hood. You drag in your image, pick a scale factor, and it processes everything on your GPU.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          With over 30,000 GitHub stars and active development, it&rsquo;s the most popular open-source upscaler available. The results at 2x are genuinely comparable to Topaz. At 4x, Topaz still has a slight edge on fine details like hair strands and small text, but the gap has narrowed significantly.
+          With over 30,000 stars on <a href="https://github.com/upscayl/upscayl" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">GitHub</a> and active development, it&rsquo;s the most popular open-source upscaler available. The results at 2x are genuinely comparable to Topaz. At 4x, Topaz still has a slight edge on fine details like hair strands and small text, but the gap has narrowed significantly.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-6">
@@ -294,7 +294,7 @@ export default function BestFreeTopazAlternatives2026() {
         </ul>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          Real-ESRGAN is the actual AI model that powers Upscayl and most other free upscalers. Developed by Tencent&rsquo;s ARC Lab, it&rsquo;s one of the most cited super-resolution papers in computer vision.
+          <a href="https://github.com/xinntao/Real-ESRGAN" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">Real-ESRGAN</a> is the actual AI model that powers Upscayl and most other free upscalers. Developed by Tencent&rsquo;s ARC Lab, it&rsquo;s one of the most cited super-resolution papers in computer vision.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -327,7 +327,7 @@ export default function BestFreeTopazAlternatives2026() {
         </ul>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          Waifu2x was one of the first neural network upscalers to go mainstream. It&rsquo;s been around since 2015 and is still excellent at what it was designed for: upscaling anime art, illustrations, and graphics with clean lines.
+          <a href="https://waifu2x.udp.jp/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">Waifu2x</a> was one of the first neural network upscalers to go mainstream. It&rsquo;s been around since 2015 and is still excellent at what it was designed for: upscaling anime art, illustrations, and graphics with clean lines.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -397,7 +397,7 @@ export default function BestFreeTopazAlternatives2026() {
         </ul>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          Bigjpg is a straightforward online upscaler that uses a Waifu2x-based model. The free tier gives you 20 images per month at up to 4x. The interface is minimal &mdash; upload, choose scale, download.
+          <a href="https://bigjpg.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">Bigjpg</a> is a straightforward online upscaler that uses a Waifu2x-based model. The free tier gives you 20 images per month at up to 4x. The interface is minimal &mdash; upload, choose scale, download.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
@@ -430,7 +430,7 @@ export default function BestFreeTopazAlternatives2026() {
         </ul>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          Pixelcut positions itself as an all-in-one tool for e-commerce sellers. The upscaler is part of a suite that includes background removal, product mockups, and batch editing. The AI upscaling quality is good, particularly for product photos on white backgrounds.
+          <a href="https://www.pixelcut.ai/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">Pixelcut</a> positions itself as an all-in-one tool for e-commerce sellers. The upscaler is part of a suite that includes background removal, product mockups, and batch editing. The AI upscaling quality is good, particularly for product photos on white backgrounds.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-6">
@@ -459,7 +459,7 @@ export default function BestFreeTopazAlternatives2026() {
         </ul>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          chaiNNer is a visual node-based editor for image processing. Think of it as a visual programming environment where you can chain together upscaling models, denoisers, sharpeners, and format converters into custom pipelines.
+          <a href="https://github.com/chaiNNer-org/chaiNNer" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">chaiNNer</a> is a visual node-based editor for image processing. Think of it as a visual programming environment where you can chain together upscaling models, denoisers, sharpeners, and format converters into custom pipelines.
         </p>
 
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
