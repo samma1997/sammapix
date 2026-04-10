@@ -1,0 +1,267 @@
+[
+  {
+    "start": 0,
+    "end": 2.76,
+    "text": "Why people are leaving Topaz"
+  },
+  {
+    "start": 2.76,
+    "end": 15.12,
+    "text": "Topaz Gigapixel AI was the gold standard for image upscaling. You paid once, nin"
+  },
+  {
+    "start": 15.12,
+    "end": 33.79,
+    "text": "As of 2026, Topaz Photo AI, which bundles Gigapixel, DeNoise, and Sharpen, costs"
+  },
+  {
+    "start": 33.79,
+    "end": 52.99,
+    "text": "The backlash was immediate. On Reddit alone, threads about Topaz alternatives ha"
+  },
+  {
+    "start": 52.99,
+    "end": 62.38,
+    "text": "If you're one of those users, or if you simply don't want to pay one hundred and"
+  },
+  {
+    "start": 62.38,
+    "end": 64.73,
+    "text": "The 7 alternatives"
+  },
+  {
+    "start": 64.73,
+    "end": 73.51,
+    "text": "I tested each tool on the same set of photos: portraits, landscapes, product sho"
+  },
+  {
+    "start": 73.51,
+    "end": 77.45,
+    "text": "1. Upscayl, best overall free alternative"
+  },
+  {
+    "start": 77.45,
+    "end": 92.64,
+    "text": "Upscayl is the closest thing to a free Topaz Gigapixel. It's a desktop app with "
+  },
+  {
+    "start": 92.64,
+    "end": 111.53,
+    "text": "With over thirty thousand GitHub stars and active development, it's the most pop"
+  },
+  {
+    "start": 111.53,
+    "end": 120.34,
+    "text": "Best for anyone who wants Topaz-quality results without paying. You need to inst"
+  },
+  {
+    "start": 120.34,
+    "end": 124.66,
+    "text": "2. Real-ESRGAN, the engine behind most free upscalers"
+  },
+  {
+    "start": 124.66,
+    "end": 136.56,
+    "text": "Real-ESRGAN is the actual AI model that powers Upscayl and most other free upsca"
+  },
+  {
+    "start": 136.56,
+    "end": 149.4,
+    "text": "If you're comfortable with the command line, using Real-ESRGAN directly gives yo"
+  },
+  {
+    "start": 149.4,
+    "end": 156.86,
+    "text": "Best for developers, photographers with large batches, and anyone who wants maxi"
+  },
+  {
+    "start": 156.86,
+    "end": 161.21,
+    "text": "3. Waifu2x, best for illustrations and anime"
+  },
+  {
+    "start": 161.21,
+    "end": 175.06,
+    "text": "Waifu2x was one of the first neural network upscalers to go mainstream. It's bee"
+  },
+  {
+    "start": 175.06,
+    "end": 188.38,
+    "text": "For photographs, Real-ESRGAN and Upscayl produce better results. But if you work"
+  },
+  {
+    "start": 188.38,
+    "end": 195.53,
+    "text": "Best for digital artists, manga readers, and anyone upscaling illustrations or g"
+  },
+  {
+    "start": 195.53,
+    "end": 199.73,
+    "text": "4. SammaPix, best for quick browser-based upscaling"
+  },
+  {
+    "start": 199.73,
+    "end": 217.58,
+    "text": "Full disclosure: this is our tool. SammaPix's upscaler uses high-quality browser"
+  },
+  {
+    "start": 217.58,
+    "end": 238.51,
+    "text": "That means it won't add fake sharpness or introduce artifacts. The trade-off is "
+  },
+  {
+    "start": 238.51,
+    "end": 248.16,
+    "text": "The advantage: zero installation, zero signup, and your images never leave your "
+  },
+  {
+    "start": 248.16,
+    "end": 258.74,
+    "text": "Best for quick upscaling for web, social media, or email without installing anyt"
+  },
+  {
+    "start": 258.74,
+    "end": 262.58,
+    "text": "5. Bigjpg, simple online AI upscaler"
+  },
+  {
+    "start": 262.58,
+    "end": 276.65,
+    "text": "Bigjpg is a straightforward online upscaler that uses a Waifu2x-based model. The"
+  },
+  {
+    "start": 276.65,
+    "end": 291.29,
+    "text": "Quality is decent for illustrations and clean photos. On noisy or heavily compre"
+  },
+  {
+    "start": 291.29,
+    "end": 298.15,
+    "text": "Best for occasional use when you need a quick AI upscale without installing anyt"
+  },
+  {
+    "start": 298.15,
+    "end": 302.47,
+    "text": "6. Pixelcut, best for e-commerce product photos"
+  },
+  {
+    "start": 302.47,
+    "end": 319.18,
+    "text": "Pixelcut positions itself as an all-in-one tool for e-commerce sellers. The upsc"
+  },
+  {
+    "start": 319.18,
+    "end": 327.46,
+    "text": "Best for e-commerce sellers who need upscaling as part of a product photo workfl"
+  },
+  {
+    "start": 327.46,
+    "end": 330.96,
+    "text": "7. chaiNNer, best for power users"
+  },
+  {
+    "start": 330.96,
+    "end": 344.26,
+    "text": "chaiNNer is a visual node-based editor for image processing. Think of it as a vi"
+  },
+  {
+    "start": 344.26,
+    "end": 360,
+    "text": "It supports more AI models than any other tool on this list: Real-ESRGAN, BSRGAN"
+  },
+  {
+    "start": 360,
+    "end": 367.8,
+    "text": "Best for power users who want to build custom upscaling workflows, test differen"
+  },
+  {
+    "start": 367.8,
+    "end": 370.13,
+    "text": "Which one should you use"
+  },
+  {
+    "start": 370.13,
+    "end": 377.59,
+    "text": "If you want the closest to Topaz quality, free: Upscayl. Install it, use it, don"
+  },
+  {
+    "start": 377.59,
+    "end": 384.22,
+    "text": "If you need to upscale hundreds of images in a batch: Real-ESRGAN command line o"
+  },
+  {
+    "start": 384.22,
+    "end": 391.44,
+    "text": "If you work with anime, manga, or illustrations: Waifu2x. It was built for this."
+  },
+  {
+    "start": 391.44,
+    "end": 399.67,
+    "text": "If you want to upscale a few images right now, no install: SammaPix. Open the br"
+  },
+  {
+    "start": 399.67,
+    "end": 406.49,
+    "text": "If you sell products on Amazon, Etsy, or Shopify: Pixelcut if you need a full pr"
+  },
+  {
+    "start": 406.49,
+    "end": 416.47,
+    "text": "If you're restoring old family photos: Upscayl at four-x with the Real-ESRGAN x4"
+  },
+  {
+    "start": 416.47,
+    "end": 433.3,
+    "text": "The bottom line: you no longer need to pay one hundred and ninety-nine dollars p"
+  },
+  {
+    "start": 433.3,
+    "end": 437.78,
+    "text": "Is there a truly free alternative to Topaz Gigapixel AI?"
+  },
+  {
+    "start": 437.78,
+    "end": 455.02,
+    "text": "Yes. Upscayl is a free, open-source desktop app that uses Real-ESRGAN models and"
+  },
+  {
+    "start": 455.02,
+    "end": 459.12,
+    "text": "Can free upscalers match Topaz Gigapixel quality?"
+  },
+  {
+    "start": 459.12,
+    "end": 476.93,
+    "text": "For photos at two-x, Real-ESRGAN-based tools like Upscayl produce results that a"
+  },
+  {
+    "start": 476.93,
+    "end": 480.86,
+    "text": "What happened to Topaz Gigapixel's one-time license?"
+  },
+  {
+    "start": 480.86,
+    "end": 501.46,
+    "text": "Topaz Labs transitioned from a one-time purchase of ninety-nine dollars to a sub"
+  },
+  {
+    "start": 501.46,
+    "end": 504.02,
+    "text": "Is Upscayl safe to use?"
+  },
+  {
+    "start": 504.02,
+    "end": 519.67,
+    "text": "Yes. Upscayl is open-source with the full source code available on GitHub. It pr"
+  },
+  {
+    "start": 519.67,
+    "end": 523.87,
+    "text": "Can I upscale images in my browser without installing anything?"
+  },
+  {
+    "start": 523.87,
+    "end": 541.22,
+    "text": "Yes. SammaPix offers browser-based image upscaling that runs entirely in your br"
+  }
+]
