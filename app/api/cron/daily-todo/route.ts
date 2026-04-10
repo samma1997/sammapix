@@ -152,10 +152,72 @@ JSON array of 10 strings only:
     const allThreads: Array<{ title: string; subreddit: string; url: string; comments: number; id: string }> = [];
     const seenIds = new Set<string>();
 
-    // Search with queries (10 queries × 8 results = up to 80 candidates)
-    for (const q of todayQueries) {
-      await new Promise(r => setTimeout(r, 1200));
-      const threads = await searchRedditFresh(q, 8);
+    // PRIMARY METHOD: In-subreddit search (restrict_sr=1) — finds relevant threads reliably
+    // This is much better than global Reddit search which returns irrelevant results
+    const subSearchPairs = [
+      // Group 1: Dev/Web (rotate 2 per day)
+      { sub: "webdev", queries: ["image optimization", "compress images", "page speed images", "webp avif"] },
+      { sub: "web_design", queries: ["image compression", "optimize images", "responsive images"] },
+      { sub: "Wordpress", queries: ["image optimization", "compress images", "slow site images"] },
+      // Group 2: Photography
+      { sub: "photography", queries: ["batch processing photos", "compress photos", "remove exif metadata"] },
+      { sub: "AskPhotography", queries: ["resize photos", "compress for web", "photo workflow tool"] },
+      { sub: "photoshop", queries: ["batch resize", "compress without losing quality", "alternative free"] },
+      // Group 3: Privacy/Self-hosted
+      { sub: "selfhosted", queries: ["image tool", "photo management", "browser based tool"] },
+      { sub: "degoogle", queries: ["image tool privacy", "photo editor no upload"] },
+      { sub: "privacy", queries: ["photo metadata gps", "exif data removal", "image privacy"] },
+      // Group 4: SaaS/Indie
+      { sub: "SideProject", queries: ["image tool", "photo tool", "free tool launched"] },
+      { sub: "buildinpublic", queries: ["saas tool", "image tool", "side project update"] },
+      // Group 5: Niche
+      { sub: "upscaling", queries: ["free upscaler", "topaz alternative", "browser upscale"] },
+      { sub: "graphic_design", queries: ["batch resize", "compress for web", "image format"] },
+      { sub: "lightroom", queries: ["export resize", "compress photos", "batch processing"] },
+      { sub: "Etsy", queries: ["product photo", "image size listing", "compress photos"] },
+    ];
+
+    // Pick 8 sub-query pairs per day (rotated)
+    const dayOfYear = Math.floor((Date.now() - new Date(2026, 0, 1).getTime()) / 86400000);
+    const shuffled = subSearchPairs.sort((a, b) => {
+      const ha = ((dayOfYear * 31 + a.sub.charCodeAt(0)) % 97);
+      const hb = ((dayOfYear * 31 + b.sub.charCodeAt(0)) % 97);
+      return ha - hb;
+    });
+    const todayPairs = shuffled.slice(0, 8);
+
+    for (const pair of todayPairs) {
+      // Pick 1-2 queries per sub
+      const qIdx = dayOfYear % pair.queries.length;
+      const query = pair.queries[qIdx];
+      try {
+        await new Promise(r => setTimeout(r, 1500));
+        const res = await fetch(
+          `https://www.reddit.com/r/${pair.sub}/search.json?q=${encodeURIComponent(query)}&restrict_sr=1&sort=new&t=month&limit=10`,
+          { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          for (const c of data?.data?.children ?? []) {
+            if (!seenIds.has(c.data.id)) {
+              seenIds.add(c.data.id);
+              allThreads.push({
+                title: c.data.title,
+                subreddit: c.data.subreddit,
+                url: `https://www.reddit.com${c.data.permalink}`,
+                comments: c.data.num_comments,
+                id: c.data.id,
+              });
+            }
+          }
+        }
+      } catch {}
+    }
+
+    // SECONDARY: Also use AI-generated global queries as backup
+    for (const q of todayQueries.slice(0, 5)) {
+      await new Promise(r => setTimeout(r, 1500));
+      const threads = await searchRedditFresh(q, 5);
       for (const t of threads) {
         if (!seenIds.has(t.id)) {
           seenIds.add(t.id);
@@ -164,18 +226,12 @@ JSON array of 10 strings only:
       }
     }
 
-    // Also scrape NEW posts from 5 subreddit groups (rotated daily)
-    const targetSubs = [
-      ["photography", "AskPhotography", "webdev", "web_design", "postprocessing"],
-      ["SideProject", "selfhosted", "Wordpress", "buildinpublic", "saas"],
-      ["shopify", "Etsy", "graphic_design", "fujifilm", "lightroom"],
-      ["privacy", "degoogle", "upscaling", "TopazLabs", "photoshop"],
-      ["DataHoarder", "WeddingPhotography", "GIMP", "nri", "webdesign"],
-    ];
-    const subIndex = new Date().getDate() % targetSubs.length;
-    for (const sub of targetSubs[subIndex]) {
+    // TERTIARY: Scrape /new from 3 random subs (catch fresh posts that search misses)
+    const newSubs = ["webdev", "photography", "AskPhotography", "SideProject", "selfhosted", "Wordpress", "graphic_design", "upscaling", "privacy", "photoshop"];
+    const todayNewSubs = newSubs.sort(() => (dayOfYear * 17 + newSubs.indexOf(newSubs[0])) % 2 - 0.5).slice(0, 3);
+    for (const sub of todayNewSubs) {
       try {
-        await new Promise(r => setTimeout(r, 1200));
+        await new Promise(r => setTimeout(r, 1500));
         const res = await fetch(
           `https://www.reddit.com/r/${sub}/new.json?limit=15`,
           { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
