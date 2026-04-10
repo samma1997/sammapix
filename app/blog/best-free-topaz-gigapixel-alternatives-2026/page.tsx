@@ -173,13 +173,13 @@ export default function BestFreeTopazAlternatives2026() {
         heroImage={
           <figure>
             <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80"
-              alt="Close-up comparison of image quality before and after upscaling — pixel-level detail visible"
+              src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80"
+              alt="Digital pixels and resolution enhancement concept — zoomed view of image data"
               className="w-full rounded-lg"
               loading="eager"
             />
             <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-              The subscription model changed everything for Topaz users — Photo by Agence Olloweb on Unsplash
+              When $199/year feels like too much for upscaling a few photos — Photo by Markus Spiske on Unsplash
             </figcaption>
           </figure>
         }
