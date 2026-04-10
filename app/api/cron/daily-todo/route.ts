@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { growthDailyTodos } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { eq } from "drizzle-orm";
+import { eq, and, lt } from "drizzle-orm";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -58,7 +58,10 @@ export async function GET(request: NextRequest) {
     actionUrl?: string; draftText?: string; priority: number;
   }> = [];
 
-  await db.delete(growthDailyTodos).where(eq(growthDailyTodos.date, today));
+  // Only delete cron-generated todos, keep manually inserted ones (priority >= 10)
+  await db.delete(growthDailyTodos).where(
+    and(eq(growthDailyTodos.date, today), lt(growthDailyTodos.priority, 10))
+  );
 
   const apiKey = process.env.GEMINI_API_KEY;
   const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
