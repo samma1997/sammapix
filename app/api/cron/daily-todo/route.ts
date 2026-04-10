@@ -7,10 +7,28 @@ import { eq } from "drizzle-orm";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
-async function searchRedditFresh(query: string, limit = 5): Promise<Array<{ title: string; subreddit: string; url: string; comments: number }>> {
+// ═══════════════════════════════════════════════════════════════════════
+// Subreddit categories — determines comment style (mention SammaPix or not)
+// ═══════════════════════════════════════════════════════════════════════
+const MENTION_OK_SUBS = new Set([
+  // GREEN — can mention SammaPix naturally
+  "sideproject", "buildinpublic", "saas", "upscaling", "topazlabs", "indiehackers",
+  // YELLOW — mention ok in comments (not posts)
+  "webdev", "askphotography", "photography", "web_design", "weddingphotography",
+  "photoshop", "lightroom", "gimp", "wordpress", "graphic_design", "degoogle",
+  "fujifilm", "nri", "webdesign",
+]);
+
+const NO_MENTION_SUBS = new Set([
+  // RED — never mention SammaPix, just be helpful to build presence
+  "privacy", "seo", "ecommerce", "shopify", "entrepreneur", "internetisbeautiful",
+  "discordapp", "india", "etsy", "datahoarder",
+]);
+
+async function searchRedditFresh(query: string, limit = 8): Promise<Array<{ title: string; subreddit: string; url: string; comments: number; id: string }>> {
   try {
     const res = await fetch(
-      `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=new&t=day&limit=${limit}`,
+      `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=new&t=week&limit=${limit}`,
       { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
     );
     if (!res.ok) return [];
@@ -20,6 +38,7 @@ async function searchRedditFresh(query: string, limit = 5): Promise<Array<{ titl
       subreddit: c.data.subreddit,
       url: `https://www.reddit.com${c.data.permalink}`,
       comments: c.data.num_comments,
+      id: c.data.id,
     }));
   } catch {
     return [];
@@ -47,32 +66,28 @@ export async function GET(request: NextRequest) {
 
   try {
     // ═══════════════════════════════════════════
-    // 1. REDDIT POSTS — 2 post karma con testo pronto
+    // 1. REDDIT POSTS — 2 post (1 karma + 1 curioso/genuino)
     // ═══════════════════════════════════════════
     if (model) {
-      const postResult = await model.generateContent(`Genera 2 post Reddit per fare karma. Temi: immagini, foto, privacy digitale, produttività, tecnologia.
+      const postResult = await model.generateContent(`Genera 2 post Reddit. L'account ha 2000+ karma.
 
-STRATEGIA: L'account ha 1200+ karma. FASE 3: 50% farming + 50% promozione SammaPix.
+POST 1 (KARMA — sub grande):
+- Subreddit: DoesAnybodyElse, LifeProTips, AskReddit, todayilearned, YouShouldKnow
+- Tema: qualcosa di curioso su foto, privacy, tecnologia, vita digitale
+- Stile: esperienza personale, scoperta inaspettata, "did you know..."
+- ZERO prodotti, ZERO marketing
+- Deve far dire "wow non lo sapevo" o "anche a me!"
 
-Genera 2 post: 1 karma farming + 1 promozione SammaPix.
+POST 2 (CURIOSO — sub tech):
+- Subreddit: SideProject o buildinpublic
+- NON dire "I built SammaPix". Invece scrivi qualcosa di CURIOSO:
+  - "TIL browser Canvas API can compress images better than most paid tools"
+  - "I benchmarked 10 image compressors and the browser-native one won"
+  - "Hot take: paying for image compression in 2026 is like paying for a calculator app"
+- Se la gente chiede "what tool?" rispondi nei commenti
+- Tono: developer genuino che condivide una scoperta, NON un pitch
 
-POST 1 (KARMA FARMING):
-- Subreddit tra: DoesAnybodyElse, LifeProTips, AskReddit, todayilearned
-- 100% umano, casuale, da esperienza personale
-- ZERO marketing, ZERO prodotti
-- Titolo e body in INGLESE
-
-POST 2 (PROMOZIONE SAMMAPIX):
-- Subreddit tra: SideProject, webdev, photography, AskPhotography, selfhosted, InternetIsBeautiful
-- Angolo: "I built a free tool that..." oppure commento utile con menzione naturale di SammaPix
-- NON mettere link nel titolo. Link nel body o nel primo commento.
-- Menzionare: "25 tools, browser-based, no upload, free, privacy-first"
-- Suona come un dev/maker genuino, NON come marketing
-
-ESEMPI CHE HANNO FUNZIONATO:
-- Karma: "LPT: Before posting photos online, check if they contain GPS location data" → 1.2K upvote
-- Promo: "I built Stirling-PDF but for images" → 1000 upvote su r/selfhosted
-- Promo: "Client-side passport photo maker with WASM" → 1279 upvote su r/webdev
+ENTRAMBI in INGLESE, tono Reddit (casual, lowercase ok, no corporate speak).
 
 JSON array, NIENT'ALTRO:
 [{"subreddit": "NomeSub", "title": "titolo", "body": "testo o vuoto", "perche": "1 frase italiano"}]`);
@@ -84,7 +99,7 @@ JSON array, NIENT'ALTRO:
             const sub = p.subreddit.replace(/^r\//, "");
             todos.push({
               date: today, type: "reddit_post", priority: 9,
-              title: `Posta su r/${sub}`,
+              title: `📝 Posta su r/${sub}`,
               description: p.perche || "",
               actionUrl: `https://www.reddit.com/r/${sub}/submit`,
               draftText: p.body ? `${p.title}\n\n${p.body}` : p.title,
@@ -95,68 +110,71 @@ JSON array, NIENT'ALTRO:
     }
 
     // ═══════════════════════════════════════════
-    // 2. REDDIT COMMENTI — scraping LIVE con query AI-generate
+    // 2. REDDIT COMMENTI — 12-15 commenti pronti da copiare
     // ═══════════════════════════════════════════
-    // AI generates FRESH queries every day based on date + randomness
     let todayQueries: string[] = [];
     if (model) {
       try {
-        const queryResult = await model.generateContent(`Today is ${today}. Generate 5 Reddit search queries to find FRESH threads where someone needs help with image tools.
+        const queryResult = await model.generateContent(`Today is ${today}. Generate 10 Reddit search queries to find FRESH threads where someone needs help with images/photos.
 
-CONTEXT: SammaPix has these tools: compress (to exact KB), convert (HEIC/WebP/PNG/JPG/AVIF/JXL), resize (for 20+ social platforms), remove background (AI), strip EXIF metadata, passport photo (140+ countries), batch watermark, AI rename, duplicate finder, upscale, crop, PDF-to-image, image-to-text OCR.
+CONTEXT: We have tools for: compress (to exact KB), convert (HEIC/WebP/PNG/JPG/AVIF/JXL), resize (20+ platforms), remove background, strip EXIF/GPS, passport photo (140 countries), watermark, AI rename, duplicate finder, upscale, crop, PDF-to-image, OCR.
 
 RULES:
-- Each query must be DIFFERENT from generic terms like "compress images" or "image optimization"
-- Use SPECIFIC pain points: "photo rejected", "file too large upload", "need to resize for", "how do I remove", "looking for free tool"
-- Mix topics: some privacy, some e-commerce, some photography, some web dev, some mobile/phone
-- Include at least 1 TRENDING topic (AI photo, privacy concern, platform update, new format)
-- Queries should find threads where people ASK FOR HELP, not news articles
+- SPECIFIC pain points, NOT generic ("compress images" is too broad)
+- Examples: "photo rejected application form", "file too large for upload", "heic cant open windows", "passport photo wrong size", "website slow because images", "topaz alternative free", "remove gps data before posting"
+- Mix: 3 privacy/EXIF, 2 compress/resize, 2 format conversion, 1 passport/ID, 1 upscale, 1 web performance
+- Find threads where people ASK FOR HELP
 
-Return ONLY a JSON array of 5 strings, nothing else:
-["query 1", "query 2", "query 3", "query 4", "query 5"]`);
+JSON array of 10 strings only:
+["query 1", "query 2", ...]`);
 
         const qMatch = queryResult.response.text().trim().match(/\[[\s\S]*\]/);
         if (qMatch) {
-          todayQueries = JSON.parse(qMatch[0]).slice(0, 5);
+          todayQueries = JSON.parse(qMatch[0]).slice(0, 10);
         }
       } catch {}
     }
-    // Fallback if AI fails
     if (todayQueries.length === 0) {
       const fallback = [
         "photo too large upload form", "remove background free batch", "passport photo rejected why",
         "heic to jpg windows cant open", "compress image under 100kb", "resize image instagram quality loss",
         "exif gps location privacy risk", "wordpress slow images fix", "topaz subscription alternative free",
         "watermark photos etsy stolen", "upscale old photo ai free", "convert webp jpg annoying",
+        "compress photo for application", "remove metadata before posting online", "image too big for email",
       ];
-      const start = new Date().getDate() % (fallback.length - 4);
-      todayQueries = fallback.slice(start, start + 5);
+      const start = new Date().getDate() % (fallback.length - 9);
+      todayQueries = fallback.slice(start, start + 10);
     }
-    const allThreads: Array<{ title: string; subreddit: string; url: string; comments: number }> = [];
 
-    // Search with AI-generated queries
+    const allThreads: Array<{ title: string; subreddit: string; url: string; comments: number; id: string }> = [];
+    const seenIds = new Set<string>();
+
+    // Search with queries (10 queries × 8 results = up to 80 candidates)
     for (const q of todayQueries) {
-      await new Promise(r => setTimeout(r, 1500));
-      const threads = await searchRedditFresh(q, 5);
-      allThreads.push(...threads);
+      await new Promise(r => setTimeout(r, 1200));
+      const threads = await searchRedditFresh(q, 8);
+      for (const t of threads) {
+        if (!seenIds.has(t.id)) {
+          seenIds.add(t.id);
+          allThreads.push(t);
+        }
+      }
     }
 
-    // Also scrape NEW posts from relevant subreddits (rotated daily)
+    // Also scrape NEW posts from 5 subreddit groups (rotated daily)
     const targetSubs = [
-      ["photography", "AskPhotography", "webdev"],
-      ["SideProject", "selfhosted", "Wordpress"],
-      ["shopify", "Etsy", "SEO"],
-      ["privacy", "degoogle", "opsec"],
-      ["graphic_design", "NewTubers", "Blogging"],
-      ["DataHoarder", "iphone", "macapps"],
-      ["upscaling", "postprocessing", "freelance"],
+      ["photography", "AskPhotography", "webdev", "web_design", "postprocessing"],
+      ["SideProject", "selfhosted", "Wordpress", "buildinpublic", "saas"],
+      ["shopify", "Etsy", "graphic_design", "fujifilm", "lightroom"],
+      ["privacy", "degoogle", "upscaling", "TopazLabs", "photoshop"],
+      ["DataHoarder", "WeddingPhotography", "GIMP", "nri", "webdesign"],
     ];
     const subIndex = new Date().getDate() % targetSubs.length;
     for (const sub of targetSubs[subIndex]) {
       try {
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise(r => setTimeout(r, 1200));
         const res = await fetch(
-          `https://www.reddit.com/r/${sub}/new.json?limit=10`,
+          `https://www.reddit.com/r/${sub}/new.json?limit=15`,
           { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
         );
         if (res.ok) {
@@ -167,43 +185,75 @@ Return ONLY a JSON array of 5 strings, nothing else:
               subreddit: c.data.subreddit,
               url: `https://www.reddit.com${c.data.permalink}`,
               comments: c.data.num_comments,
+              id: c.data.id,
             }))
             .filter((p: any) => {
+              if (seenIds.has(p.id)) return false;
               const t = p.title.toLowerCase();
               return ["image", "photo", "compress", "resize", "convert", "background", "exif",
                       "metadata", "privacy", "passport", "watermark", "upscale", "heic", "webp",
-                      "png", "jpg", "optimize", "tool", "free"].some(kw => t.includes(kw));
+                      "png", "jpg", "optimize", "tool", "free", "quality", "size", "format",
+                      "upload", "batch", "slow", "speed", "large"].some(kw => t.includes(kw));
             });
-          allThreads.push(...posts);
+          for (const p of posts) {
+            seenIds.add(p.id);
+            allThreads.push(p);
+          }
         }
       } catch {}
     }
 
+    // Filter & sort: prefer threads with few comments (our comment will be visible)
     const commentable = allThreads
-      .filter(t => t.comments < 30 && t.comments >= 1)
-      .sort((a, b) => b.comments - a.comments)
-      .slice(0, 3);
+      .filter(t => t.comments < 50 && t.comments >= 0)
+      .sort((a, b) => {
+        // Score: fewer comments = better (our comment is visible)
+        // But at least 1 comment = thread is alive
+        const scoreA = a.comments >= 1 && a.comments <= 10 ? 20 : a.comments === 0 ? 10 : 5;
+        const scoreB = b.comments >= 1 && b.comments <= 10 ? 20 : b.comments === 0 ? 10 : 5;
+        return scoreB - scoreA;
+      })
+      .slice(0, 15);
 
     if (model) {
       for (const thread of commentable) {
         try {
+          const subLower = thread.subreddit.toLowerCase();
+          const canMention = MENTION_OK_SUBS.has(subLower);
+          const noMention = NO_MENTION_SUBS.has(subLower);
+
+          let mentionInstruction: string;
+          if (noMention) {
+            mentionInstruction = `NON menzionare nessun prodotto o tool. Rispondi SOLO con un consiglio utile e genuino basato sulla tua esperienza. L'obiettivo è costruire reputazione nel sub, NON promuovere.`;
+          } else if (canMention) {
+            mentionInstruction = `Puoi menzionare "SammaPix" IN MODO NATURALE come tool che hai usato/costruito. Esempio: "i've been using sammapix for this, it does it in the browser so nothing gets uploaded". NON mettere link URL. Solo il nome.`;
+          } else {
+            mentionInstruction = `Rispondi con un consiglio utile. Se ha senso, menziona "SammaPix" come tool che usi, ma SOLO se è naturale. Se non c'entra, NON forzarlo.`;
+          }
+
           const result = await model.generateContent(`Scrivi un commento Reddit per: "${thread.title}" su r/${thread.subreddit}
 
-REGOLE:
-- 2-4 frasi, casuale, da esperienza personale
-- Almeno 1 numero specifico
-- Menziona SammaPix IN MODO NATURALE come tool che hai usato/costruito. Esempio: "i've been using sammapix for this, it's browser-based so nothing gets uploaded"
-- NON mettere link URL (AutoMod li blocca). Solo il nome "SammaPix" o "sammapix.com"
-- NON sembrare marketing. Sembrare un utente che condivide la sua esperienza
-- Lowercase ok, no emoji, no bullet point
+STILE:
+- 2-4 frasi, casuale, come un utente Reddit reale
+- Includi almeno 1 dettaglio specifico (numero, nome di formato, dimensione file, esperienza personale)
+- Sii CURIOSO e genuino, come se stessi condividendo qualcosa che hai scoperto
+- Lowercase ok, no emoji, no bullet point, no "Pro tip:", no "I'd recommend"
+- Se puoi, aggiungi una curiosità ("fun fact:", "the weird thing is...", "i actually tested this...")
 
-SOLO il commento:`);
+${mentionInstruction}
+
+SOLO il commento, nient'altro:`);
+
+          const draft = result.response.text().trim();
+          const priority = canMention ? 8 : noMention ? 5 : 6;
+          const label = noMention ? "💬 Presenza" : canMention ? "🎯 Menzione" : "💬 Commenta";
+
           todos.push({
-            date: today, type: "reddit_comment", priority: 7,
-            title: `Commenta su r/${thread.subreddit}`,
+            date: today, type: "reddit_comment", priority,
+            title: `${label} r/${thread.subreddit}`,
             description: thread.title.slice(0, 100),
             actionUrl: thread.url,
-            draftText: result.response.text().trim(),
+            draftText: draft,
           });
         } catch {}
       }
