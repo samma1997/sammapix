@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq, and, lt } from "drizzle-orm";
 
 export const runtime = "nodejs";
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 // ═══════════════════════════════════════════════════════════════════════
 // Subreddit categories — determines comment style (mention SammaPix or not)
@@ -191,7 +191,7 @@ JSON array of 10 strings only:
       const qIdx = dayOfYear % pair.queries.length;
       const query = pair.queries[qIdx];
       try {
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise(r => setTimeout(r, 1000));
         const res = await fetch(
           `https://www.reddit.com/r/${pair.sub}/search.json?q=${encodeURIComponent(query)}&restrict_sr=1&sort=new&t=month&limit=10`,
           { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
@@ -214,9 +214,9 @@ JSON array of 10 strings only:
       } catch {}
     }
 
-    // SECONDARY: Also use AI-generated global queries as backup
-    for (const q of todayQueries.slice(0, 5)) {
-      await new Promise(r => setTimeout(r, 1500));
+    // SECONDARY: 3 AI-generated global queries as backup
+    for (const q of todayQueries.slice(0, 3)) {
+      await new Promise(r => setTimeout(r, 1000));
       const threads = await searchRedditFresh(q, 5);
       for (const t of threads) {
         if (!seenIds.has(t.id)) {
@@ -224,42 +224,6 @@ JSON array of 10 strings only:
           allThreads.push(t);
         }
       }
-    }
-
-    // TERTIARY: Scrape /new from 3 random subs (catch fresh posts that search misses)
-    const newSubs = ["webdev", "photography", "AskPhotography", "SideProject", "selfhosted", "Wordpress", "graphic_design", "upscaling", "privacy", "photoshop"];
-    const todayNewSubs = newSubs.sort(() => (dayOfYear * 17 + newSubs.indexOf(newSubs[0])) % 2 - 0.5).slice(0, 3);
-    for (const sub of todayNewSubs) {
-      try {
-        await new Promise(r => setTimeout(r, 1500));
-        const res = await fetch(
-          `https://www.reddit.com/r/${sub}/new.json?limit=15`,
-          { headers: { "User-Agent": "SammaPix-Growth/2.0" }, signal: AbortSignal.timeout(10000) }
-        );
-        if (res.ok) {
-          const data = await res.json();
-          const posts = (data?.data?.children ?? [])
-            .map((c: any) => ({
-              title: c.data.title,
-              subreddit: c.data.subreddit,
-              url: `https://www.reddit.com${c.data.permalink}`,
-              comments: c.data.num_comments,
-              id: c.data.id,
-            }))
-            .filter((p: any) => {
-              if (seenIds.has(p.id)) return false;
-              const t = p.title.toLowerCase();
-              return ["image", "photo", "compress", "resize", "convert", "background", "exif",
-                      "metadata", "privacy", "passport", "watermark", "upscale", "heic", "webp",
-                      "png", "jpg", "optimize", "tool", "free", "quality", "size", "format",
-                      "upload", "batch", "slow", "speed", "large"].some(kw => t.includes(kw));
-            });
-          for (const p of posts) {
-            seenIds.add(p.id);
-            allThreads.push(p);
-          }
-        }
-      } catch {}
     }
 
     // Filter & sort: prefer threads with few comments (our comment will be visible)
@@ -272,7 +236,7 @@ JSON array of 10 strings only:
         const scoreB = b.comments >= 1 && b.comments <= 10 ? 20 : b.comments === 0 ? 10 : 5;
         return scoreB - scoreA;
       })
-      .slice(0, 15);
+      .slice(0, 12);
 
     if (model) {
       for (const thread of commentable) {
