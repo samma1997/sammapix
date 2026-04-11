@@ -1,0 +1,87 @@
+What Instagram actually does to your photos
+
+Every photo you upload to Instagram gets re-compressed. There are no exceptions. Instagram takes your file, resizes it if needed, re-encodes it as JPEG, and stores a much smaller version. The original is gone.
+
+How aggressive is this compression? Tests show that a 1.6 megabyte photo can be reduced to around 125 kilobytes. That's roughly a thirteen times reduction in file size. Instagram's compression is estimated to produce output equivalent to JPEG quality seventy to seventy-five percent, which is noticeably lower than what most cameras and editors export by default, usually ninety to one hundred percent.
+
+This is a known issue across the photography community. On Reddit, threads about Instagram quality loss appear almost weekly. It's been called a running gag among photographers. The frustration is real: you spend time editing a photo, it looks perfect on your screen, and then Instagram turns it into mush.
+
+Why some photos look worse than others
+
+Not all photos suffer equally. The compression algorithm is more destructive on certain types of content.
+
+Gradients and skies. Smooth color transitions get banded into visible steps. Sunset photos are the worst hit.
+
+Fine detail and texture. Hair, fabric, foliage, and skin texture get smeared. The photo looks plastic.
+
+Text and sharp edges. Any overlay text, logos, or graphics with hard lines get JPEG artifacts, the blocky halo effect.
+
+Dark or low-light photos. Noise in dark areas gets amplified by re-compression, creating ugly blotchy patches.
+
+Photos with large areas of solid color, like product shots on white backgrounds or flat graphic designs, tend to survive compression better. But anything with subtle detail, the kind of thing photographers actually care about, gets degraded.
+
+The fix: prepare your image before uploading
+
+You cannot prevent Instagram from re-compressing. But you can minimize the damage by giving Instagram a file that's already optimized, so it has less reason to compress aggressively.
+
+The key insight: Instagram's compression is worst when it has to resize AND re-compress. If you upload a four thousand pixel wide photo, Instagram first downscales it to ten eighty pixels, destroying detail in the process, then compresses the result. Two rounds of quality loss.
+
+If you upload at exactly the dimensions Instagram expects, in the format it expects, at a quality level close to what it outputs, the re-compression has minimal impact.
+
+The optimal settings are: JPEG format, ninety to ninety-five percent quality, sRGB color profile. For square feed posts, ten eighty by ten eighty pixels. For portrait, ten eighty by thirteen fifty. For landscape, ten eighty by five sixty-six. For Stories and Reels, ten eighty by nineteen twenty. Keep the file size under one megabyte, ideally three hundred to six hundred kilobytes.
+
+Why JPEG and not PNG? Instagram converts everything to JPEG internally. If you upload PNG, Instagram performs a more aggressive conversion, from a lossless format to a lossy one. Starting with a well-optimized JPEG means Instagram's re-compression has less work to do, and the quality delta is smaller.
+
+Step-by-step: optimize for Instagram in 30 seconds
+
+Step one. Resize to Instagram dimensions. Open the Instagram resizer, drop your photo, select the format you need, square, portrait, or landscape. It crops and resizes to the exact pixel dimensions.
+
+Step two. Compress to ninety to ninety-five percent JPEG. Open the compress tool, set quality to ninety percent. This brings the file size to three hundred to six hundred kilobytes without visible quality loss. Instagram will re-compress less aggressively when the file is already optimized.
+
+Step three. Check the color profile. Make sure your export uses sRGB. If you edit in Adobe RGB or ProPhoto RGB, Instagram will do a color space conversion that can shift your colors. Most phone photos are already sRGB.
+
+Step four. Upload from your phone. Transfer the optimized file to your phone and upload through the Instagram app. The desktop uploader sometimes applies additional compression.
+
+Everything in steps one and two runs in your browser. Your photos are never uploaded to any server. The processing happens on your device using client-side Canvas API, so there's no privacy concern.
+
+The hidden setting most people miss
+
+Instagram has a setting called Upload at highest quality that's buried in the app settings. It's off by default.
+
+Open Instagram, tap your profile, tap the menu. Go to Settings and privacy, then Media quality. Toggle Upload at highest quality to on.
+
+This doesn't prevent compression entirely. Instagram still re-encodes your photo. But it reduces the aggressiveness of the compression algorithm. Combined with the correct dimensions and format, this setting makes a noticeable difference.
+
+What not to do
+
+Don't upload at full camera resolution. A six thousand by four thousand photo from your camera gives Instagram maximum work to do. It resizes, re-encodes, and the result is worse than if you'd resized yourself.
+
+Don't upload PNG for photos. Instagram converts to JPEG anyway. Starting from PNG means a bigger quality drop. Use PNG only for graphics with sharp lines and text.
+
+Don't upload from desktop if possible. The desktop web uploader has been reported to apply additional compression. The mobile app gives better results.
+
+Don't over-sharpen. Sharpening amplifies the artifacts that JPEG compression creates. If you sharpen, do it subtly. Instagram's compression will make over-sharpened halos look terrible.
+
+Don't add text overlays before compressing. Text with hard edges is where JPEG compression is most visible. If you must add text, do it as the very last step after resizing.
+
+FAQ
+
+Why does Instagram make my photos blurry?
+
+Instagram re-compresses every photo you upload to reduce file size and bandwidth. A 1.6 megabyte photo can be compressed down to 125 kilobytes, a thirteen times reduction. This aggressive compression causes visible quality loss, especially in areas with fine detail, gradients, or text.
+
+What is the best image size for Instagram in 2026?
+
+For feed posts, upload at exactly ten eighty pixels wide. Ten eighty by ten eighty for square, ten eighty by thirteen fifty for portrait, ten eighty by five sixty-six for landscape. For Stories and Reels, use ten eighty by nineteen twenty. Uploading at these exact dimensions prevents Instagram from resizing your photo, which causes additional quality loss.
+
+Does Instagram's Upload at highest quality setting actually work?
+
+It helps, but it does not prevent compression entirely. The setting reduces the aggressiveness of Instagram's compression algorithm, but your photo is still re-encoded. The biggest quality gains come from uploading at the correct dimensions and format before Instagram touches the file.
+
+Should I upload JPEG or PNG to Instagram?
+
+JPEG at ninety to ninety-five percent quality in sRGB color profile. Instagram converts everything to JPEG internally, so uploading PNG just means Instagram does a more aggressive conversion. A well-optimized JPEG gives Instagram less reason to re-compress heavily.
+
+Can I fix Instagram quality loss after posting?
+
+No. Once Instagram has compressed your photo, the quality loss is permanent. The fix is preventive: prepare your image correctly before uploading. Delete the post and re-upload with the correct settings if the quality is unacceptable.
