@@ -1,0 +1,217 @@
+[
+  {
+    "start": 0,
+    "end": 3.43,
+    "text": "What Instagram actually does to your photos"
+  },
+  {
+    "start": 3.43,
+    "end": 18.7,
+    "text": "Every photo you upload to Instagram gets re-compressed. There are no exceptions."
+  },
+  {
+    "start": 18.7,
+    "end": 44.62,
+    "text": "How aggressive is this compression? Tests show that a 1.6 megabyte photo can be "
+  },
+  {
+    "start": 44.62,
+    "end": 64.3,
+    "text": "This is a known issue across the photography community. On Reddit, threads about"
+  },
+  {
+    "start": 64.3,
+    "end": 67.34,
+    "text": "Why some photos look worse than others"
+  },
+  {
+    "start": 67.34,
+    "end": 74.9,
+    "text": "Not all photos suffer equally. The compression algorithm is more destructive on "
+  },
+  {
+    "start": 74.9,
+    "end": 84.1,
+    "text": "Gradients and skies. Smooth color transitions get banded into visible steps. Sun"
+  },
+  {
+    "start": 84.1,
+    "end": 93.1,
+    "text": "Fine detail and texture. Hair, fabric, foliage, and skin texture get smeared. Th"
+  },
+  {
+    "start": 93.1,
+    "end": 102.07,
+    "text": "Text and sharp edges. Any overlay text, logos, or graphics with hard lines get J"
+  },
+  {
+    "start": 102.07,
+    "end": 110.21,
+    "text": "Dark or low-light photos. Noise in dark areas gets amplified by re-compression, "
+  },
+  {
+    "start": 110.21,
+    "end": 124.66,
+    "text": "Photos with large areas of solid color, like product shots on white backgrounds "
+  },
+  {
+    "start": 124.66,
+    "end": 128.18,
+    "text": "The fix: prepare your image before uploading"
+  },
+  {
+    "start": 128.18,
+    "end": 139.37,
+    "text": "You cannot prevent Instagram from re-compressing. But you can minimize the damag"
+  },
+  {
+    "start": 139.37,
+    "end": 157.15,
+    "text": "The key insight: Instagram's compression is worst when it has to resize AND re-c"
+  },
+  {
+    "start": 157.15,
+    "end": 167.04,
+    "text": "If you upload at exactly the dimensions Instagram expects, in the format it expe"
+  },
+  {
+    "start": 167.04,
+    "end": 194.52,
+    "text": "The optimal settings are: JPEG format, ninety to ninety-five percent quality, sR"
+  },
+  {
+    "start": 194.52,
+    "end": 215.69,
+    "text": "Why JPEG and not PNG? Instagram converts everything to JPEG internally. If you u"
+  },
+  {
+    "start": 215.69,
+    "end": 219.89,
+    "text": "Step-by-step: optimize for Instagram in 30 seconds"
+  },
+  {
+    "start": 219.89,
+    "end": 235.46,
+    "text": "Step one. Resize to Instagram dimensions. Open the Instagram resizer, drop your "
+  },
+  {
+    "start": 235.46,
+    "end": 255.82,
+    "text": "Step two. Compress to ninety to ninety-five percent JPEG. Open the compress tool"
+  },
+  {
+    "start": 255.82,
+    "end": 274.22,
+    "text": "Step three. Check the color profile. Make sure your export uses sRGB. If you edi"
+  },
+  {
+    "start": 274.22,
+    "end": 286.99,
+    "text": "Step four. Upload from your phone. Transfer the optimized file to your phone and"
+  },
+  {
+    "start": 286.99,
+    "end": 300.14,
+    "text": "Everything in steps one and two runs in your browser. Your photos are never uplo"
+  },
+  {
+    "start": 300.14,
+    "end": 303.1,
+    "text": "The hidden setting most people miss"
+  },
+  {
+    "start": 303.1,
+    "end": 310.7,
+    "text": "Instagram has a setting called Upload at highest quality that's buried in the ap"
+  },
+  {
+    "start": 310.7,
+    "end": 321.65,
+    "text": "Open Instagram, tap your profile, tap the menu. Go to Settings and privacy, then"
+  },
+  {
+    "start": 321.65,
+    "end": 337.39,
+    "text": "This doesn't prevent compression entirely. Instagram still re-encodes your photo"
+  },
+  {
+    "start": 337.39,
+    "end": 339.41,
+    "text": "What not to do"
+  },
+  {
+    "start": 339.41,
+    "end": 353.62,
+    "text": "Don't upload at full camera resolution. A six thousand by four thousand photo fr"
+  },
+  {
+    "start": 353.62,
+    "end": 367.7,
+    "text": "Don't upload PNG for photos. Instagram converts to JPEG anyway. Starting from PN"
+  },
+  {
+    "start": 367.7,
+    "end": 378.38,
+    "text": "Don't upload from desktop if possible. The desktop web uploader has been reporte"
+  },
+  {
+    "start": 378.38,
+    "end": 392.11,
+    "text": "Don't over-sharpen. Sharpening amplifies the artifacts that JPEG compression cre"
+  },
+  {
+    "start": 392.11,
+    "end": 404.35,
+    "text": "Don't add text overlays before compressing. Text with hard edges is where JPEG c"
+  },
+  {
+    "start": 404.35,
+    "end": 407.62,
+    "text": "Why does Instagram make my photos blurry?"
+  },
+  {
+    "start": 407.62,
+    "end": 427.34,
+    "text": "Instagram re-compresses every photo you upload to reduce file size and bandwidth"
+  },
+  {
+    "start": 427.34,
+    "end": 431.71,
+    "text": "What is the best image size for Instagram in 2026?"
+  },
+  {
+    "start": 431.71,
+    "end": 454.8,
+    "text": "For feed posts, upload at exactly ten eighty pixels wide. Ten eighty by ten eigh"
+  },
+  {
+    "start": 454.8,
+    "end": 459.14,
+    "text": "Does Instagram's Upload at highest quality setting actually work?"
+  },
+  {
+    "start": 459.14,
+    "end": 476.47,
+    "text": "It helps, but it does not prevent compression entirely. The setting reduces the "
+  },
+  {
+    "start": 476.47,
+    "end": 480.22,
+    "text": "Should I upload JPEG or PNG to Instagram?"
+  },
+  {
+    "start": 480.22,
+    "end": 497.93,
+    "text": "JPEG at ninety to ninety-five percent quality in sRGB color profile. Instagram c"
+  },
+  {
+    "start": 497.93,
+    "end": 501.58,
+    "text": "Can I fix Instagram quality loss after posting?"
+  },
+  {
+    "start": 501.58,
+    "end": 517.56,
+    "text": "No. Once Instagram has compressed your photo, the quality loss is permanent. The"
+  }
+]
