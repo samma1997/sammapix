@@ -42,3 +42,20 @@ launch/package-lock.json
 
 # service account keys
 *-key.json
+
+# strategy docs (contain embedded secrets from Claude sessions)
+GOOGLE_ADS_STRATEGY.md
+MARKETING_90_DAY_PLAN.md
+MULTI_CHANNEL_STRATEGY.md
+COST_ANALYSIS_MONTHLY_2026.md
+ANALISI_COSTI_COMPLETA.txt
+COMPETITOR_ANALYSIS.md
+
+# reddit/karma data (TOS violation if public)
+karma_data.json
+reddit-scraping-results.json
+reddit-scraping-filtered.json
+reddit_create_app.js
+
+# automation scripts
+playwright-video-recorder-setup.js

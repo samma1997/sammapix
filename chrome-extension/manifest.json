@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "SammaPix — Image Tools",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Scan, convert, compress, and clean images on any webpage. Save as JPG/PNG/WebP, strip EXIF/GPS, batch download. 100% client-side.",
-  "permissions": ["contextMenus", "activeTab", "scripting", "storage", "sidePanel"],
+  "permissions": ["contextMenus", "activeTab", "scripting", "storage", "sidePanel", "tabs"],
   "host_permissions": ["<all_urls>"],
   "icons": {
     "16": "icons/icon-16.png",

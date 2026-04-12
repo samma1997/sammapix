@@ -16,9 +16,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
 
-    const expectedUser = process.env.GROWTH_USERNAME || "samma";
-    const expectedPass = process.env.GROWTH_PASSWORD || "REDACTED";
-    const sessionSecret = process.env.GROWTH_SESSION_SECRET || "REDACTED";
+    const expectedUser = process.env.GROWTH_USERNAME;
+    const expectedPass = process.env.GROWTH_PASSWORD;
+    const sessionSecret = process.env.GROWTH_SESSION_SECRET;
+
+    if (!expectedUser || !expectedPass || !sessionSecret) {
+      return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 });
+    }
 
     if (username === expectedUser && password === expectedPass) {
       const response = NextResponse.json({ success: true });

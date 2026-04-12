@@ -5,305 +5,157 @@
 <title>SammaPix</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:#f8f8f8;color:#171717}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display',system-ui,sans-serif;background:#f2f2f7;color:#1c1c1e;-webkit-font-smoothing:antialiased}
 
-/* ═══ HEADER ═══ */
-.hdr{position:sticky;top:0;z-index:10;background:#171717;color:#fff;padding:14px 16px 12px}
+/* ═══ HEADER — frosted glass ═══ */
+.hdr{background:rgba(28,28,30,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:#fff;padding:16px 16px 14px}
 .hdr-row{display:flex;align-items:center;justify-content:space-between}
-.logo-wrap{display:flex;align-items:center;gap:8px}
-.logo-icon{width:26px;height:26px;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#171717}
-.logo-text{font-size:15px;font-weight:700;letter-spacing:-.3px}
-.hdr-badge{font-size:9px;padding:2px 7px;background:rgba(255,255,255,.15);border-radius:10px;color:rgba(255,255,255,.7)}
-.hdr-count{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px}
-.hdr-count b{color:#fff}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-icon{width:28px;height:28px;flex-shrink:0}
+.logo-text{font-size:16px;font-weight:700;letter-spacing:-.4px}
+.hdr-badge{font-size:10px;padding:3px 8px;background:rgba(255,255,255,.12);border-radius:12px;color:rgba(255,255,255,.6);font-weight:500}
+.hdr-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:6px;display:flex;align-items:center;gap:8px}
+.hdr-sub b{color:#fff;font-weight:600}
+.rescan-btn{background:rgba(255,255,255,.15);border:none;color:#fff;font-size:11px;padding:4px 12px;border-radius:14px;cursor:pointer;font-weight:500;transition:all .2s}
+.rescan-btn:hover{background:rgba(255,255,255,.25)}
+.rescan-btn:active{transform:scale(.95)}
 
-/* ═══ TABS ═══ */
-.tabs{position:sticky;top:56px;z-index:9;background:#fff;display:flex;border-bottom:1px solid #e5e5e5}
-.tab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:500;color:#a3a3a3;cursor:pointer;border-bottom:2px solid transparent;transition:.2s}
-.tab:hover{color:#525252}
-.tab.on{color:#171717;border-bottom-color:#171717;font-weight:600}
+/* ═══ TABS — iOS segmented control ═══ */
+.seg{position:sticky;top:0;z-index:19;background:rgba(242,242,247,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.06)}
+.seg-inner{display:flex;background:rgba(118,118,128,.12);border-radius:9px;padding:2px}
+.seg-btn{flex:1;padding:7px 4px;text-align:center;font-size:12px;font-weight:500;color:#8e8e93;cursor:pointer;border-radius:7px;transition:all .25s;user-select:none;border:none;background:none}
+.seg-btn:active{transform:scale(.97)}
+.seg-btn.on{background:#fff;color:#1c1c1e;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.08),0 0 1px rgba(0,0,0,.04)}
 
 /* ═══ FILTERS ═══ */
-.fbar{padding:8px 12px;display:flex;gap:4px;flex-wrap:wrap;background:#f8f8f8;border-bottom:1px solid #e5e5e5}
-.fb{padding:3px 9px;border:1px solid #e5e5e5;background:#fff;border-radius:20px;font-size:10px;cursor:pointer;color:#525252;transition:.15s}
-.fb:hover{border-color:#a3a3a3}
-.fb.on{background:#171717;color:#fff;border-color:#171717}
+.fbar{padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;background:transparent}
+.fb{padding:5px 12px;border:none;background:rgba(118,118,128,.12);border-radius:16px;font-size:11px;cursor:pointer;color:#8e8e93;transition:all .2s;font-weight:500}
+.fb:hover{background:rgba(118,118,128,.18)}
+.fb.on{background:#1c1c1e;color:#fff}
 
 /* ═══ GRID ═══ */
-.grid{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e5e5e5;position:relative;animation:pop .3s ease both}
-@keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
-.card:hover{border-color:#c4c4c4;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.card.sel{border-color:#6366f1;box-shadow:0 0 0 2px rgba(99,102,241,.12)}
-.ck{position:absolute;top:5px;left:5px;width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(255,255,255,.9);background:rgba(0,0,0,.3);backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;z-index:2;transition:.15s}
+.grid{padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#fff;border-radius:14px;overflow:hidden;border:none;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:all .2s;animation:pop .35s ease both}
+@keyframes pop{from{opacity:0;transform:scale(.93) translateY(8px)}to{opacity:1;transform:none}}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.1);transform:translateY(-1px)}
+.card.sel{box-shadow:0 0 0 2.5px #6366f1,0 2px 12px rgba(99,102,241,.2)}
+.ck{position:absolute;top:6px;left:6px;width:22px;height:22px;border-radius:12px;border:2px solid rgba(255,255,255,.9);background:rgba(0,0,0,.25);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;z-index:2;transition:all .2s}
+.ck:active{transform:scale(.9)}
 .card.sel .ck{background:#6366f1;border-color:#6366f1}
-.cimg{height:82px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.cimg img{max-width:100%;max-height:82px;object-fit:contain;transition:transform .2s}
-.card:hover .cimg img{transform:scale(1.03)}
-.ci{padding:6px 8px}
-.cm{display:flex;gap:3px;margin-bottom:4px}
-.bg{font-size:8px;padding:1px 5px;border-radius:10px;font-weight:600}
-.bg-f{background:#e0e7ff;color:#4338ca}
-.bg-d{background:#f0f0f0;color:#737373}
-.cbs{display:flex;gap:2px}
-.cbb{flex:1;padding:4px;border:1px solid #e5e5e5;background:#fff;border-radius:6px;font-size:9px;cursor:pointer;text-align:center;font-weight:500;color:#525252;transition:.15s}
-.cbb:hover{background:#f5f5f5;border-color:#a3a3a3}
-.cbb.p{background:#171717;color:#fff;border-color:#171717}
-.cbb.p:hover{background:#333}
+.cimg{height:90px;background:#f2f2f7;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cimg img{max-width:100%;max-height:90px;object-fit:cover;transition:transform .3s}
+.card:hover .cimg img{transform:scale(1.05)}
+.ci{padding:8px 10px}
+.cm{display:flex;gap:4px;margin-bottom:6px}
+.bg{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:600;letter-spacing:.02em}
+.bg-f{background:#eef2ff;color:#4f46e5}
+.bg-d{background:#f2f2f7;color:#8e8e93}
+.cbs{display:flex;gap:4px}
+.cbb{flex:1;padding:6px;border:none;background:#f2f2f7;border-radius:8px;font-size:10px;cursor:pointer;text-align:center;font-weight:600;color:#1c1c1e;transition:all .15s}
+.cbb:hover{background:#e5e5ea}
+.cbb:active{transform:scale(.95)}
+.cbb.p{background:#1c1c1e;color:#fff}
+.cbb.p:hover{background:#3a3a3c}
 
 /* ═══ BATCH ═══ */
-.batch{position:sticky;top:90px;background:#6366f1;color:#fff;padding:8px 12px;display:none;align-items:center;justify-content:space-between;z-index:8;font-size:11px;border-radius:0}
+.batch{position:sticky;top:115px;background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;padding:10px 14px;display:none;align-items:center;justify-content:space-between;z-index:8;font-size:12px;font-weight:500;border-radius:0}
 .batch.on{display:flex}
-.bb{padding:4px 9px;background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:6px;font-size:10px;cursor:pointer;font-weight:500}
+.bb{padding:5px 12px;background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:8px;font-size:11px;cursor:pointer;font-weight:600;transition:all .15s}
 .bb:hover{background:rgba(255,255,255,.3)}
+.bb:active{transform:scale(.95)}
 
 /* ═══ EXIF TAB ═══ */
-.elist{padding:8px}
-.ecard{background:#fff;border:1px solid #e5e5e5;border-radius:10px;margin-bottom:6px;overflow:hidden;animation:pop .3s ease both}
-.etop{display:flex;align-items:center;gap:8px;padding:8px 10px}
-.eth{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#f0f0f0}
+.elist{padding:10px}
+.ecard{background:#fff;border-radius:14px;margin-bottom:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);animation:pop .35s ease both}
+.etop{display:flex;align-items:center;gap:10px;padding:12px}
+.eth{width:48px;height:48px;border-radius:10px;object-fit:cover;background:#f2f2f7}
 .einfo{flex:1;min-width:0}
-.ename{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.edet{font-size:10px;color:#737373;margin-top:1px}
-.ewarn{display:flex;align-items:center;gap:5px;padding:6px 10px;background:#fef2f2;font-size:10px;color:#dc2626;font-weight:500}
-.esafe{display:flex;align-items:center;gap:5px;padding:6px 10px;background:#f0fdf4;font-size:10px;color:#16a34a;font-weight:500}
-.ebtn{width:100%;padding:8px;background:#171717;color:#fff;border:none;font-size:10px;font-weight:600;cursor:pointer;transition:.15s}
-.ebtn:hover{background:#333}
-.ebtn.done{background:#16a34a}
+.ename{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1c1c1e}
+.edet{font-size:11px;color:#8e8e93;margin-top:2px}
+/* EXIF data grid */
+.exif-data{padding:0 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.exif-item{display:flex;align-items:center;gap:6px;padding:5px 8px;background:#f2f2f7;border-radius:8px;font-size:10px}
+.exif-icon{font-size:12px;flex-shrink:0}
+.exif-label{color:#8e8e93;font-weight:500}
+.exif-val{color:#1c1c1e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exif-warn{display:flex;align-items:center;gap:6px;margin:0 12px 8px;padding:8px 10px;background:#fff3cd;border-radius:10px;font-size:11px;color:#856404;font-weight:500}
+.exif-safe{display:flex;align-items:center;gap:6px;margin:0 12px 8px;padding:8px 10px;background:#d1fae5;border-radius:10px;font-size:11px;color:#065f46;font-weight:500}
+.exif-none{display:flex;align-items:center;gap:6px;margin:0 12px 8px;padding:8px 10px;background:#f0fdf4;border-radius:10px;font-size:11px;color:#16a34a;font-weight:500}
+.ebtn{width:calc(100% - 24px);margin:0 12px 12px;padding:10px;background:#1c1c1e;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.ebtn:hover{background:#3a3a3c}
+.ebtn:active{transform:scale(.98)}
+.ebtn.done{background:#34c759}
+.exif-removed{text-decoration:line-through;color:#ae3b3b;opacity:.5}
 
 /* ═══ COMPRESS TAB ═══ */
-.clist{padding:8px}
-.ccard{background:#fff;border:1px solid #e5e5e5;border-radius:10px;margin-bottom:6px;padding:10px;animation:pop .3s ease both}
-.crow{display:flex;align-items:center;gap:8px}
-.cthu{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#f0f0f0}
+.clist{padding:10px}
+.ccard{background:#fff;border-radius:14px;margin-bottom:8px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);animation:pop .35s ease both}
+.crow{display:flex;align-items:center;gap:10px}
+.cthu{width:48px;height:48px;border-radius:10px;object-fit:cover;background:#f2f2f7}
 .cinf{flex:1;min-width:0}
-.cnm{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.csz{font-size:10px;color:#737373;margin-top:1px}
-.cbtn{padding:6px 12px;background:#171717;color:#fff;border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;transition:.15s}
-.cbtn:hover{background:#333}
-.cbtn.done{background:#16a34a}
-.cres{margin-top:6px;padding:6px 8px;background:#f0fdf4;border-radius:6px;font-size:10px;color:#16a34a;font-weight:500;display:none}
+.cnm{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.csz{font-size:11px;color:#8e8e93;margin-top:2px}
+.cbtn{padding:8px 16px;background:#1c1c1e;color:#fff;border:none;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s}
+.cbtn:hover{background:#3a3a3c}
+.cbtn:active{transform:scale(.95)}
+.cbtn.done{background:#34c759}
+.cres{margin-top:8px;padding:8px 10px;background:#d1fae5;border-radius:10px;font-size:11px;color:#065f46;font-weight:500;display:none}
 
 /* ═══ STATES ═══ */
-.empty{text-align:center;padding:48px 20px;color:#a3a3a3}
-.empty-i{font-size:40px;margin-bottom:8px;animation:bounce 2s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.empty h3{font-size:13px;color:#525252;margin-bottom:4px}
-.empty p{font-size:11px;line-height:1.4}
-.scanning{text-align:center;padding:36px;color:#a3a3a3}
-.scan-anim{width:32px;height:32px;border:3px solid #e5e5e5;border-top:3px solid #171717;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
+.empty{text-align:center;padding:60px 24px;color:#8e8e93}
+.empty-i{font-size:44px;margin-bottom:12px}
+.empty h3{font-size:15px;color:#1c1c1e;margin-bottom:6px;font-weight:600}
+.empty p{font-size:12px;line-height:1.6;color:#8e8e93}
+.scan-btn{display:inline-block;margin-top:16px;padding:12px 28px;background:#1c1c1e;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+.scan-btn:hover{background:#3a3a3c}
+.scan-btn:active{transform:scale(.96)}
+.scanning{text-align:center;padding:48px;color:#8e8e93}
+.scan-anim{width:28px;height:28px;border:2.5px solid #e5e5ea;border-top:2.5px solid #1c1c1e;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.toast{position:fixed;bottom:12px;left:12px;right:12px;background:#171717;color:#fff;padding:9px 14px;border-radius:10px;font-size:11px;z-index:100;text-align:center;transition:all .3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-.ftr{padding:10px 14px;border-top:1px solid #e5e5e5;background:#fff;text-align:center}
-.ftr a{font-size:10px;color:#6366f1;text-decoration:none;font-weight:500}
-.ftr-n{font-size:9px;color:#a3a3a3;margin-top:2px}
+.err-box{margin:12px;padding:16px;background:#fef2f2;border:none;border-radius:14px;font-size:12px;color:#991b1b;line-height:1.5}
+
+.toast{position:fixed;bottom:14px;left:14px;right:14px;background:rgba(28,28,30,.92);backdrop-filter:blur(20px);color:#fff;padding:12px 16px;border-radius:14px;font-size:12px;z-index:100;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.12);font-weight:500;animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.ftr{padding:14px 16px;border-top:1px solid rgba(0,0,0,.06);background:#fff;text-align:center}
+.ftr a{font-size:11px;color:#6366f1;text-decoration:none;font-weight:600}
+.ftr-n{font-size:10px;color:#8e8e93;margin-top:3px}
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <div class="hdr-row">
-    <div class="logo-wrap">
-      <div class="logo-icon">S</div>
-      <span class="logo-text">SammaPix</span>
-    </div>
-    <span class="hdr-badge" id="hbadge">v2.0</span>
+    <div class="logo-wrap"><svg class="logo-icon" viewBox="0 0 20 20" width="28" height="28"><rect x="2" y="2" width="3" height="3" fill="#fff" rx="0.5"/><rect x="6" y="2" width="3" height="3" fill="#fff" rx="0.5"/><rect x="10" y="2" width="3" height="3" fill="#fff" rx="0.5"/><rect x="14" y="2" width="3" height="3" fill="#fff" rx="0.5"/><rect x="2" y="6" width="3" height="3" fill="#fff" rx="0.5"/><rect x="14" y="6" width="3" height="3" fill="#fff" rx="0.5"/><rect x="2" y="10" width="3" height="3" fill="#fff" rx="0.5"/><rect x="14" y="10" width="3" height="3" fill="#fff" rx="0.5"/><rect x="2" y="14" width="3" height="3" fill="#fff" rx="0.5"/><rect x="6" y="14" width="3" height="3" fill="#fff" rx="0.5"/><rect x="10" y="14" width="3" height="3" fill="#fff" rx="0.5"/><rect x="14" y="14" width="3" height="3" fill="#fff" rx="0.5"/><rect x="6" y="6" width="3" height="3" fill="#fff" rx="0.5"/><rect x="10" y="6" width="3" height="3" fill="#fff" rx="0.5"/><rect x="6" y="10" width="3" height="3" fill="#fff" rx="0.5"/><rect x="10" y="10" width="3" height="3" fill="#fff" rx="0.5"/></svg><span class="logo-text">SammaPix</span></div>
+    <span class="hdr-badge">v3.0</span>
   </div>
-  <div class="hdr-count" id="hcount"></div>
+  <div class="hdr-sub" id="hcount"></div>
 </div>
-
-<div class="tabs">
-  <div class="tab on" data-t="dl">📥 Download</div>
-  <div class="tab" data-t="exif">🛡️ EXIF/GPS</div>
-  <div class="tab" data-t="comp">📦 Compress</div>
+<div class="seg">
+  <div class="seg-inner">
+    <button class="seg-btn on" id="tab-dl">Download</button>
+    <button class="seg-btn" id="tab-exif">EXIF/GPS</button>
+    <button class="seg-btn" id="tab-comp">Compress</button>
+  </div>
 </div>
-
 <div id="v-dl">
   <div class="fbar" id="fbar" style="display:none"></div>
-  <div class="batch" id="bat"><span id="batc">0</span><div style="display:flex;gap:3px"><button class="bb" onclick="bDl('image/jpeg','jpg',.95)">→JPG</button><button class="bb" onclick="bDl('image/png','png',1)">→PNG</button><button class="bb" onclick="bDl('image/webp','webp',.9)">→WebP</button><button class="bb" onclick="sel.clear();ren()">✕</button></div></div>
-  <div id="gw"></div>
+  <div class="batch" id="bat"><span id="batc">0</span><div style="display:flex;gap:4px"><button class="bb" id="b-jpg">JPG</button><button class="bb" id="b-png">PNG</button><button class="bb" id="b-webp">WebP</button><button class="bb" id="b-clr">Clear</button></div></div>
+  <div id="gw">
+    <div class="empty">
+      <div class="empty-i">📷</div>
+      <h3>Scan any webpage</h3>
+      <p>Find, download, compress and clean<br>all images on the current page.</p>
+      <button class="scan-btn" id="scan-main">Scan This Page</button>
+    </div>
+  </div>
 </div>
 <div id="v-exif" style="display:none"></div>
 <div id="v-comp" style="display:none"></div>
-
 <div class="ftr">
-  <a href="https://www.sammapix.com?ref=ext" target="_blank">All 27 tools on sammapix.com →</a>
-  <div class="ftr-n">🔒 Images never uploaded · 100% client-side</div>
+  <a href="https://www.sammapix.com?ref=ext" target="_blank">sammapix.com — 27 free tools</a>
+  <div class="ftr-n">100% client-side — images never leave your device</div>
 </div>
-
-<script>
-let all=[],sel=new Set(),filt="all",tab="dl";
-
-// Tabs
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));
-  t.classList.add("on"); tab=t.dataset.t;
-  document.getElementById("v-dl").style.display=tab==="dl"?"":"none";
-  document.getElementById("v-exif").style.display=tab==="exif"?"":"none";
-  document.getElementById("v-comp").style.display=tab==="comp"?"":"none";
-  if(tab==="exif")renExif(); if(tab==="comp")renComp();
-}));
-
-// ═══ SCAN via background ═══
-async function scan(){
-  document.getElementById("hcount").innerHTML="<b>Scanning...</b>";
-  document.getElementById("gw").innerHTML='<div class="scanning"><div class="scan-anim"></div>Finding images...</div>';
-
-  return new Promise(resolve=>{
-    chrome.runtime.sendMessage({action:"scan"},resp=>{
-      if(chrome.runtime.lastError||!resp){
-        document.getElementById("gw").innerHTML='<div class="empty"><div class="empty-i">⚠️</div><h3>Refresh the page</h3><p>Then click the SammaPix icon again.</p></div>';
-        document.getElementById("hcount").textContent="";
-        resolve(); return;
-      }
-      const raw=resp.images||[];
-      all=[]; sel.clear(); filt="all";
-
-      // Progressive rendering
-      const grid=document.createElement("div"); grid.className="grid"; grid.id="grid";
-      document.getElementById("gw").innerHTML="";
-      document.getElementById("gw").appendChild(grid);
-
-      let i=0;
-      function addNext(){
-        if(i>=raw.length){
-          document.getElementById("hcount").innerHTML=`<b>${all.length}</b> images found`;
-          if(all.length===0) document.getElementById("gw").innerHTML='<div class="empty"><div class="empty-i">📭</div><h3>No images on this page</h3></div>';
-          buildF(); resolve(); return;
-        }
-        const batch=Math.min(i+4,raw.length);
-        for(;i<batch;i++){
-          const img={...raw[i],fmt:gF(raw[i].src)};
-          all.push(img);
-          grid.insertAdjacentHTML("beforeend",cardH(img,all.length-1));
-          document.getElementById("hcount").innerHTML=`<b>${all.length}</b> images found`;
-        }
-        requestAnimationFrame(()=>setTimeout(addNext,50));
-      }
-      addNext();
-    });
-  });
-}
-
-function gF(u){const l=u.split("?")[0].toLowerCase();if(l.endsWith(".webp")||u.includes("fm=webp"))return"WebP";if(l.endsWith(".png"))return"PNG";if(l.endsWith(".jpg")||l.endsWith(".jpeg"))return"JPG";if(l.endsWith(".gif"))return"GIF";if(l.endsWith(".svg"))return"SVG";if(l.endsWith(".avif"))return"AVIF";return"IMG"}
-
-function cardH(img,idx){
-  const s=sel.has(img.src);
-  const dim=img.w&&img.h?`${img.w}×${img.h}`:"";
-  const e=x=>x.replace(/'/g,"\\'").replace(/"/g,"&quot;");
-  return`<div class="card${s?" sel":""}" style="animation-delay:${idx*30}ms">
-    <div class="ck" onclick="event.stopPropagation();tS('${e(img.src)}')">${s?"✓":""}</div>
-    <div class="cimg"><img src="${img.src}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=font-size:24px>🖼️</div>'"/></div>
-    <div class="ci"><div class="cm"><span class="bg bg-f">${img.fmt}</span>${dim?`<span class="bg bg-d">${dim}</span>`:""}</div>
-    <div class="cbs">
-      <button class="cbb p" onclick="dl('${e(img.src)}','image/jpeg','jpg',.95)">JPG</button>
-      <button class="cbb" onclick="dl('${e(img.src)}','image/png','png',1)">PNG</button>
-      <button class="cbb" onclick="dl('${e(img.src)}','image/webp','webp',.9)">WebP</button>
-    </div></div></div>`;
-}
-
-function buildF(){
-  const c={all:all.length};all.forEach(i=>{c[i.fmt]=(c[i.fmt]||0)+1});
-  const fb=document.getElementById("fbar");
-  if(all.length>0){fb.style.display="flex";fb.innerHTML=Object.entries(c).map(([f,n])=>`<button class="fb${filt===f?" on":""}" onclick="filt='${f}';ren()">${f==="all"?"All":f} (${n})</button>`).join("")}
-}
-
-function ren(){
-  const f=filt==="all"?all:all.filter(i=>i.fmt===filt);
-  const gw=document.getElementById("gw");
-  if(!f.length){gw.innerHTML='<div class="empty"><div class="empty-i">📭</div><h3>No images</h3></div>';return}
-  gw.innerHTML='<div class="grid">'+f.map((i,idx)=>cardH(i,idx)).join("")+"</div>";
-  document.getElementById("bat").classList.toggle("on",sel.size>0);
-  document.getElementById("batc").textContent=sel.size+" selected";
-  buildF();
-}
-
-function tS(s){if(sel.has(s))sel.delete(s);else sel.add(s);ren()}
-
-// ═══ EXIF ═══
-function renExif(){
-  const v=document.getElementById("v-exif");
-  if(!all.length){v.innerHTML='<div class="empty"><div class="empty-i">🛡️</div><h3>No images</h3></div>';return}
-  v.innerHTML='<div class="elist">'+all.slice(0,40).map((img,i)=>{
-    const e=x=>x.replace(/'/g,"\\'").replace(/"/g,"&quot;");
-    const nm=img.src.split("/").pop().split("?")[0].slice(0,28)||"image";
-    return`<div class="ecard" style="animation-delay:${i*40}ms"><div class="etop"><img class="eth" src="${img.src}" onerror="this.style.background='#f0f0f0'"/><div class="einfo"><div class="ename">${nm}</div><div class="edet">${img.fmt} · ${img.w}×${img.h}</div></div></div>
-    <div class="ewarn" id="ew-${i}">⚠️ May contain GPS, camera model, timestamps</div>
-    <button class="ebtn" id="eb-${i}" onclick="dlClean('${e(img.src)}',${i})">↓ Download clean copy (EXIF removed)</button></div>`
-  }).join("")+'</div>';
-}
-
-function dlClean(src,i){
-  dl(src,"image/jpeg","jpg",.95);
-  const w=document.getElementById("ew-"+i);if(w){w.className="esafe";w.innerHTML="✅ EXIF/GPS removed — clean copy downloaded"}
-  const b=document.getElementById("eb-"+i);if(b){b.textContent="✓ Done";b.className="ebtn done";b.disabled=true}
-}
-
-// ═══ COMPRESS ═══
-function renComp(){
-  const v=document.getElementById("v-comp");
-  if(!all.length){v.innerHTML='<div class="empty"><div class="empty-i">📦</div><h3>No images</h3></div>';return}
-  v.innerHTML='<div class="clist">'+all.filter(i=>i.fmt!=="SVG").slice(0,40).map((img,i)=>{
-    const e=x=>x.replace(/'/g,"\\'").replace(/"/g,"&quot;");
-    const nm=img.src.split("/").pop().split("?")[0].slice(0,24)||"image";
-    return`<div class="ccard" style="animation-delay:${i*40}ms"><div class="crow"><img class="cthu" src="${img.src}" onerror="this.style.background='#f0f0f0'"/><div class="cinf"><div class="cnm">${nm}</div><div class="csz">${img.fmt} · ${img.w}×${img.h}</div></div>
-    <button class="cbtn" id="cb-${i}" onclick="comp('${e(img.src)}',${i})">Compress</button></div>
-    <div class="cres" id="cr-${i}"></div></div>`
-  }).join("")+'</div>';
-}
-
-function comp(src,i){
-  const img=new Image();img.crossOrigin="anonymous";
-  const btn=document.getElementById("cb-"+i);if(btn){btn.textContent="...";btn.disabled=true}
-  img.onload=()=>{
-    const c=document.createElement("canvas");c.width=img.naturalWidth;c.height=img.naturalHeight;
-    c.getContext("2d").drawImage(img,0,0);
-    fetch(src).then(r=>r.blob()).then(orig=>{
-      c.toBlob(blob=>{
-        if(!blob){toast("⚠️ CORS");return}
-        const pct=Math.round((1-blob.size/orig.size)*100);
-        const u=URL.createObjectURL(blob);
-        let fn="image";try{fn=new URL(src).pathname.split("/").pop().split(".")[0]||"image"}catch{}
-        const a=document.createElement("a");a.href=u;a.download=fn+"-compressed.jpg";document.body.appendChild(a);a.click();a.remove();
-        const r=document.getElementById("cr-"+i);if(r){r.style.display="block";r.innerHTML=`✅ ${fB(orig.size)} → ${fB(blob.size)} <b>(${pct>0?"-"+pct:"+"+Math.abs(pct)}%)</b> · EXIF removed`}
-        if(btn){btn.textContent="✓ Done";btn.className="cbtn done"}
-        toast(`✅ -${pct}% compressed`);
-      },"image/jpeg",.8);
-    }).catch(()=>{
-      c.toBlob(b=>{if(!b)return;const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download="compressed.jpg";document.body.appendChild(a);a.click();a.remove();if(btn){btn.textContent="✓";btn.className="cbtn done"}toast("✅ Compressed")},"image/jpeg",.8);
-    });
-  };
-  img.onerror=()=>{toast("⚠️ CORS");if(btn){btn.textContent="Error";btn.disabled=false}};
-  img.src=src;
-}
-
-// ═══ DOWNLOAD ═══
-function dl(src,mime,ext,q){
-  const img=new Image();img.crossOrigin="anonymous";
-  img.onload=()=>{
-    const c=document.createElement("canvas");c.width=img.naturalWidth;c.height=img.naturalHeight;
-    c.getContext("2d").drawImage(img,0,0);
-    c.toBlob(b=>{
-      if(!b){toast("⚠️ CORS");return}
-      const u=URL.createObjectURL(b);
-      let fn="image";try{fn=new URL(src).pathname.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g,"")||"image"}catch{}
-      const a=document.createElement("a");a.href=u;a.download=fn+"."+ext;document.body.appendChild(a);a.click();a.remove();
-      setTimeout(()=>URL.revokeObjectURL(u),5000);
-      toast(`✅ ${ext.toUpperCase()} saved · EXIF removed`);
-    },mime,q);
-  };
-  img.onerror=()=>toast("⚠️ Can't load (CORS)");
-  img.src=src;
-}
-
-async function bDl(m,e,q){const s=[...sel];toast(`⏳ ${s.length} images...`);for(const x of s){dl(x,m,e,q);await new Promise(r=>setTimeout(r,500))}}
-
-function fB(b){if(b<1024)return b+"B";if(b<1048576)return Math.round(b/1024)+"KB";return(b/1048576).toFixed(1)+"MB"}
-function toast(m){const e=document.querySelector(".toast");if(e)e.remove();const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(()=>{t.style.opacity="0";setTimeout(()=>t.remove(),300)},2500)}
-
-// ═══ AUTO START ═══
-scan();
-</script>
+<script src="sidepanel.js"></script>
 </body>
 </html>
