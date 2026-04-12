@@ -2,299 +2,388 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SammaPix</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, sans-serif; background: #FAFAFA; color: #171717; min-height: 100vh; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#FAFAFA;color:#171717}
 
-    .header { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #E5E5E5; padding: 14px 16px; z-index: 10; }
-    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .logo { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
-    .scan-btn { padding: 6px 14px; background: #171717; color: #fff; border: none; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
-    .scan-btn:hover { background: #333; }
-    .scan-btn.scanning { background: #6366F1; }
-    .stats { display: flex; gap: 12px; font-size: 11px; color: #737373; }
-    .stat-num { font-weight: 700; color: #171717; }
+    .header{position:sticky;top:0;background:#fff;border-bottom:1px solid #E5E5E5;padding:12px 14px;z-index:10}
+    .header-row{display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:15px;font-weight:700}
+    .counter{font-size:11px;color:#737373}
+    .counter b{color:#171717}
 
-    .filters { position: sticky; top: 64px; background: #FAFAFA; padding: 8px 16px; display: none; gap: 6px; flex-wrap: wrap; z-index: 9; border-bottom: 1px solid #E5E5E5; }
-    .filter-btn { padding: 4px 10px; border: 1px solid #E5E5E5; background: #fff; border-radius: 6px; font-size: 11px; cursor: pointer; color: #525252; }
-    .filter-btn:hover { border-color: #A3A3A3; }
-    .filter-btn.active { background: #171717; color: #fff; border-color: #171717; }
+    /* Tabs */
+    .tabs{position:sticky;top:46px;background:#fff;display:flex;border-bottom:1px solid #E5E5E5;z-index:9;padding:0 8px}
+    .tab{flex:1;padding:9px 4px;text-align:center;font-size:11px;font-weight:500;color:#A3A3A3;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+    .tab:hover{color:#525252}
+    .tab.active{color:#171717;border-bottom-color:#171717}
 
-    .batch-bar { position: sticky; top: 100px; background: #171717; color: #fff; padding: 8px 16px; display: none; align-items: center; justify-content: space-between; z-index: 8; font-size: 12px; }
-    .batch-bar.visible { display: flex; }
-    .batch-btn { padding: 5px 10px; background: rgba(255,255,255,0.15); color: #fff; border: none; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 500; }
-    .batch-btn:hover { background: rgba(255,255,255,0.25); }
+    /* Filters (inside download tab) */
+    .filters{padding:8px 12px;display:flex;gap:4px;flex-wrap:wrap;background:#FAFAFA;border-bottom:1px solid #E5E5E5}
+    .fbtn{padding:3px 8px;border:1px solid #E5E5E5;background:#fff;border-radius:5px;font-size:10px;cursor:pointer;color:#525252}
+    .fbtn:hover{border-color:#A3A3A3}
+    .fbtn.active{background:#171717;color:#fff;border-color:#171717}
 
-    .grid { padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .card { background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #E5E5E5; position: relative; transition: border-color 0.15s; }
-    .card:hover { border-color: #A3A3A3; }
-    .card.selected { border-color: #6366F1; box-shadow: 0 0 0 2px rgba(99,102,241,0.15); }
-    .card-sel { position: absolute; top: 6px; left: 6px; width: 18px; height: 18px; border-radius: 5px; border: 2px solid rgba(255,255,255,0.8); background: rgba(0,0,0,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; z-index: 2; }
-    .card.selected .card-sel { background: #6366F1; border-color: #6366F1; }
-    .card-img { height: 90px; background: #F5F5F5; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; }
-    .card-img img { max-width: 100%; max-height: 90px; object-fit: contain; }
-    .card-info { padding: 6px 8px; }
-    .card-meta { display: flex; gap: 3px; margin-bottom: 5px; flex-wrap: wrap; }
-    .badge { font-size: 8px; padding: 1px 5px; border-radius: 3px; font-weight: 600; }
-    .badge-fmt { background: #E0E7FF; color: #4338CA; }
-    .badge-dim { background: #F5F5F5; color: #737373; }
-    .card-btns { display: flex; gap: 3px; }
-    .card-btn { flex: 1; padding: 4px; border: 1px solid #E5E5E5; background: #fff; border-radius: 5px; font-size: 9px; cursor: pointer; text-align: center; font-weight: 500; color: #525252; }
-    .card-btn:hover { background: #F5F5F5; }
-    .card-btn.pri { background: #171717; color: #fff; border-color: #171717; }
-    .card-btn.pri:hover { background: #333; }
+    /* Grid */
+    .grid{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .card{background:#fff;border-radius:8px;overflow:hidden;border:1px solid #E5E5E5;position:relative;transition:border .15s;animation:fadeIn .3s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .card:hover{border-color:#A3A3A3}
+    .card.selected{border-color:#6366F1;box-shadow:0 0 0 2px rgba(99,102,241,.12)}
+    .card-sel{position:absolute;top:5px;left:5px;width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(255,255,255,.8);background:rgba(0,0,0,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;z-index:2}
+    .card.selected .card-sel{background:#6366F1;border-color:#6366F1}
+    .cimg{height:80px;background:#F5F5F5;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .cimg img{max-width:100%;max-height:80px;object-fit:contain}
+    .cinfo{padding:5px 7px}
+    .cmeta{display:flex;gap:3px;margin-bottom:4px;flex-wrap:wrap}
+    .bg{font-size:8px;padding:1px 4px;border-radius:3px;font-weight:600}
+    .bg-f{background:#E0E7FF;color:#4338CA}
+    .bg-d{background:#F5F5F5;color:#737373}
+    .bg-s{background:#FEF3C7;color:#92400E}
+    .cbtns{display:flex;gap:2px}
+    .cb{flex:1;padding:3px;border:1px solid #E5E5E5;background:#fff;border-radius:4px;font-size:8px;cursor:pointer;text-align:center;font-weight:500;color:#525252}
+    .cb:hover{background:#F5F5F5}
+    .cb.pri{background:#171717;color:#fff;border-color:#171717}
+    .cb.pri:hover{background:#333}
 
-    .empty { text-align: center; padding: 60px 24px; color: #A3A3A3; }
-    .empty-icon { font-size: 40px; margin-bottom: 10px; }
-    .empty h3 { font-size: 14px; color: #525252; margin-bottom: 6px; }
-    .empty p { font-size: 12px; line-height: 1.5; }
-    .loading { text-align: center; padding: 40px; color: #A3A3A3; font-size: 13px; }
-    .spinner { width: 24px; height: 24px; border: 2px solid #E5E5E5; border-top: 2px solid #171717; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* Batch bar */
+    .batch{position:sticky;top:80px;background:#171717;color:#fff;padding:7px 12px;display:none;align-items:center;justify-content:space-between;z-index:8;font-size:11px}
+    .batch.on{display:flex}
+    .bb{padding:4px 8px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:5px;font-size:10px;cursor:pointer;font-weight:500}
+    .bb:hover{background:rgba(255,255,255,.25)}
 
-    .footer { padding: 10px 16px; border-top: 1px solid #E5E5E5; background: #fff; text-align: center; }
-    .footer a { font-size: 11px; color: #6366F1; text-decoration: none; font-weight: 500; }
-    .footer-note { font-size: 9px; color: #A3A3A3; margin-top: 3px; }
+    /* EXIF tab */
+    .exif-list{padding:8px}
+    .exif-card{background:#fff;border:1px solid #E5E5E5;border-radius:8px;margin-bottom:6px;overflow:hidden;animation:fadeIn .3s ease}
+    .exif-top{display:flex;align-items:center;gap:8px;padding:8px}
+    .exif-thumb{width:48px;height:48px;border-radius:6px;object-fit:cover;background:#F5F5F5}
+    .exif-info{flex:1;min-width:0}
+    .exif-name{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .exif-detail{font-size:10px;color:#737373;margin-top:2px}
+    .exif-warn{display:flex;align-items:center;gap:4px;padding:6px 8px;background:#FEF2F2;font-size:10px;color:#DC2626;font-weight:500}
+    .exif-safe{display:flex;align-items:center;gap:4px;padding:6px 8px;background:#F0FDF4;font-size:10px;color:#16A34A;font-weight:500}
+    .exif-btn{width:100%;padding:7px;background:#171717;color:#fff;border:none;font-size:10px;font-weight:600;cursor:pointer}
+    .exif-btn:hover{background:#333}
 
-    .toast { position: fixed; bottom: 16px; left: 16px; right: 16px; background: #171717; color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 12px; z-index: 100; text-align: center; transition: opacity 0.3s; }
+    /* Compress tab */
+    .comp-card{background:#fff;border:1px solid #E5E5E5;border-radius:8px;margin-bottom:6px;overflow:hidden;padding:8px;animation:fadeIn .3s ease}
+    .comp-row{display:flex;align-items:center;gap:8px}
+    .comp-thumb{width:48px;height:48px;border-radius:6px;object-fit:cover;background:#F5F5F5}
+    .comp-info{flex:1}
+    .comp-name{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .comp-size{font-size:10px;color:#737373;margin-top:2px}
+    .comp-btn{padding:5px 10px;background:#171717;color:#fff;border:none;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer}
+    .comp-btn:hover{background:#333}
+    .comp-result{margin-top:6px;padding:6px;background:#F0FDF4;border-radius:6px;font-size:10px;color:#16A34A;font-weight:500;display:none}
+
+    .empty{text-align:center;padding:40px 20px;color:#A3A3A3}
+    .empty-icon{font-size:36px;margin-bottom:8px}
+    .empty h3{font-size:13px;color:#525252;margin-bottom:4px}
+    .empty p{font-size:11px;line-height:1.4}
+
+    .toast{position:fixed;bottom:12px;left:12px;right:12px;background:#171717;color:#fff;padding:8px 14px;border-radius:8px;font-size:11px;z-index:100;text-align:center;transition:opacity .3s}
+    .footer{padding:8px 14px;border-top:1px solid #E5E5E5;background:#fff;text-align:center}
+    .footer a{font-size:10px;color:#6366F1;text-decoration:none;font-weight:500}
+    .footer-n{font-size:9px;color:#A3A3A3;margin-top:2px}
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="header-top">
-      <span class="logo">SammaPix</span>
-      <button class="scan-btn" id="scanBtn">🔍 Scan page</button>
-    </div>
-    <div class="stats" id="stats" style="display:none">
-      <span><span class="stat-num" id="statTotal">0</span> images</span>
-      <span><span class="stat-num" id="statFmts">0</span> formats</span>
-    </div>
-  </div>
 
+<div class="header">
+  <div class="header-row">
+    <span class="logo">SammaPix</span>
+    <span class="counter" id="counter"></span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="download">📥 Download</div>
+  <div class="tab" data-tab="exif">🛡️ EXIF/GPS</div>
+  <div class="tab" data-tab="compress">📦 Compress</div>
+</div>
+
+<div id="tab-download">
   <div class="filters" id="filters"></div>
-
-  <div class="batch-bar" id="batchBar">
-    <span id="batchCount">0 selected</span>
-    <div style="display:flex;gap:4px">
-      <button class="batch-btn" onclick="batchDl('image/jpeg','jpg',0.95)">→JPG</button>
-      <button class="batch-btn" onclick="batchDl('image/png','png',1)">→PNG</button>
-      <button class="batch-btn" onclick="batchDl('image/webp','webp',0.9)">→WebP</button>
-      <button class="batch-btn" onclick="selectedSet.clear();updateUI()">✕</button>
+  <div class="batch" id="batchBar">
+    <span id="batchCount">0</span>
+    <div style="display:flex;gap:3px">
+      <button class="bb" onclick="batchDl('image/jpeg','jpg',.95)">→JPG</button>
+      <button class="bb" onclick="batchDl('image/png','png',1)">→PNG</button>
+      <button class="bb" onclick="batchDl('image/webp','webp',.9)">→WebP</button>
+      <button class="bb" onclick="sel.clear();render()">✕</button>
     </div>
   </div>
+  <div id="grid-wrap"></div>
+</div>
 
-  <div id="content">
-    <div class="loading"><div class="spinner"></div>Scanning page...</div>
-  </div>
+<div id="tab-exif" style="display:none">
+  <div class="exif-list" id="exif-list"></div>
+</div>
 
-  <div class="footer">
-    <a href="https://www.sammapix.com?ref=ext-panel" target="_blank">All 27 tools on sammapix.com →</a>
-    <div class="footer-note">Images never uploaded · 100% client-side</div>
-  </div>
+<div id="tab-compress" style="display:none">
+  <div style="padding:8px" id="comp-list"></div>
+</div>
 
-  <script>
-    let allImages = [];
-    let selectedSet = new Set();
-    let filter = "all";
+<div class="footer">
+  <a href="https://www.sammapix.com?ref=ext" target="_blank">All 27 tools on sammapix.com →</a>
+  <div class="footer-n">100% client-side · Images never uploaded</div>
+</div>
 
-    // ═══ SCAN ═══
-    async function doScan() {
-      const btn = document.getElementById("scanBtn");
-      btn.textContent = "⏳ Scanning...";
-      btn.classList.add("scanning");
-      document.getElementById("content").innerHTML = '<div class="loading"><div class="spinner"></div>Scanning page...</div>';
+<script>
+let imgs=[], sel=new Set(), filt="all", activeTab="download";
 
-      try {
-        const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-        if (!tab || !tab.id) throw new Error("No tab");
+// ═══ TABS ═══
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    activeTab=t.dataset.tab;
+    document.getElementById("tab-download").style.display=activeTab==="download"?"":"none";
+    document.getElementById("tab-exif").style.display=activeTab==="exif"?"":"none";
+    document.getElementById("tab-compress").style.display=activeTab==="compress"?"":"none";
+    if(activeTab==="exif") renderExif();
+    if(activeTab==="compress") renderCompress();
+  });
+});
 
-        // Inject scan function directly — works even without content script preloaded
-        const results = await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: () => {
-            const imgs = new Map();
+// ═══ SCAN (auto, progressive) ═══
+async function scan(){
+  document.getElementById("counter").innerHTML="<b>Scanning...</b>";
+  document.getElementById("grid-wrap").innerHTML='<div class="empty"><div class="empty-icon">🔍</div><h3>Finding images...</h3></div>';
 
-            // <img> tags
-            document.querySelectorAll("img").forEach(el => {
-              const src = el.currentSrc || el.src;
-              if (!src || src.length < 10 || src.startsWith("data:image/svg") || imgs.has(src)) return;
-              const r = el.getBoundingClientRect();
-              if (r.width < 30 && r.height < 30) return;
-              imgs.set(src, {
-                src,
-                w: el.naturalWidth || Math.round(r.width),
-                h: el.naturalHeight || Math.round(r.height),
-                alt: el.alt || "",
-              });
-            });
+  try{
+    const [tab]=await chrome.tabs.query({active:true,lastFocusedWindow:true});
+    if(!tab?.id) throw 0;
 
-            // CSS background-image
-            document.querySelectorAll("*").forEach(el => {
-              const bg = getComputedStyle(el).backgroundImage;
-              if (!bg || bg === "none") return;
-              const m = bg.match(/url\(["']?(https?:\/\/[^"')]+)["']?\)/);
-              if (!m || imgs.has(m[1])) return;
-              const r = el.getBoundingClientRect();
-              if (r.width < 30 && r.height < 30) return;
-              imgs.set(m[1], { src: m[1], w: Math.round(r.width), h: Math.round(r.height), alt: "" });
-            });
-
-            // <picture> <source>
-            document.querySelectorAll("picture source[srcset]").forEach(el => {
-              const src = el.srcset.split(",")[0].trim().split(" ")[0];
-              if (src && !imgs.has(src)) imgs.set(src, { src, w: 0, h: 0, alt: "" });
-            });
-
-            return Array.from(imgs.values());
-          },
+    const r=await chrome.scripting.executeScript({
+      target:{tabId:tab.id},
+      func:()=>{
+        const m=new Map();
+        document.querySelectorAll("img").forEach(el=>{
+          const s=el.currentSrc||el.src;
+          if(!s||s.length<10||s.startsWith("data:image/svg")||m.has(s))return;
+          const r=el.getBoundingClientRect();
+          if(r.width<20&&r.height<20)return;
+          m.set(s,{src:s,w:el.naturalWidth||Math.round(r.width),h:el.naturalHeight||Math.round(r.height),alt:el.alt||""});
         });
-
-        allImages = (results[0]?.result || []).map(img => ({
-          ...img,
-          fmt: guessFmt(img.src),
-        }));
-
-        selectedSet.clear();
-        filter = "all";
-        updateUI();
-
-      } catch (err) {
-        document.getElementById("content").innerHTML =
-          '<div class="empty"><div class="empty-icon">⚠️</div><h3>Can\'t scan this page</h3><p>Refresh the page and try again.<br>Some pages (chrome://, extensions) can\'t be scanned.</p></div>';
+        document.querySelectorAll("*").forEach(el=>{
+          const bg=getComputedStyle(el).backgroundImage;
+          if(!bg||bg==="none")return;
+          const x=bg.match(/url\(["']?(https?:\/\/[^"')]+)["']?\)/);
+          if(!x||m.has(x[1]))return;
+          const r=el.getBoundingClientRect();
+          if(r.width<20&&r.height<20)return;
+          m.set(x[1],{src:x[1],w:Math.round(r.width),h:Math.round(r.height),alt:""});
+        });
+        return Array.from(m.values());
       }
+    });
 
-      btn.textContent = "🔍 Rescan";
-      btn.classList.remove("scanning");
-    }
+    const raw=r[0]?.result||[];
+    imgs=[];
+    document.getElementById("grid-wrap").innerHTML='<div class="grid" id="grid"></div>';
 
-    function guessFmt(url) {
-      const u = url.split("?")[0].toLowerCase();
-      if (u.endsWith(".webp") || url.includes("format=webp") || url.includes("fm=webp")) return "WebP";
-      if (u.endsWith(".png") || url.startsWith("data:image/png")) return "PNG";
-      if (u.endsWith(".jpg") || u.endsWith(".jpeg") || url.startsWith("data:image/jpeg")) return "JPG";
-      if (u.endsWith(".gif")) return "GIF";
-      if (u.endsWith(".svg") || url.startsWith("data:image/svg")) return "SVG";
-      if (u.endsWith(".avif") || url.includes("format=avif")) return "AVIF";
-      return "IMG";
-    }
-
-    // ═══ UI ═══
-    function updateUI() {
-      // Stats
-      document.getElementById("statTotal").textContent = allImages.length;
-      const fmts = [...new Set(allImages.map(i => i.fmt))];
-      document.getElementById("statFmts").textContent = fmts.length;
-      document.getElementById("stats").style.display = allImages.length > 0 ? "flex" : "none";
-
-      // Filters
-      const filtersEl = document.getElementById("filters");
-      if (allImages.length > 0) {
-        filtersEl.style.display = "flex";
-        const counts = { all: allImages.length };
-        allImages.forEach(i => { counts[i.fmt] = (counts[i.fmt] || 0) + 1; });
-        filtersEl.innerHTML = Object.entries(counts).map(([f, c]) =>
-          `<button class="filter-btn${filter === f ? ' active' : ''}" onclick="filter='${f}';updateUI()">${f === 'all' ? 'All' : f} (${c})</button>`
-        ).join("");
-      } else {
-        filtersEl.style.display = "none";
+    // Progressive loading — show images one by one
+    for(let i=0;i<raw.length;i++){
+      const img={...raw[i],fmt:gFmt(raw[i].src)};
+      imgs.push(img);
+      // Add card to grid
+      const grid=document.getElementById("grid");
+      if(grid&&(filt==="all"||img.fmt===filt)){
+        grid.insertAdjacentHTML("beforeend",cardHTML(img));
       }
-
-      // Batch bar
-      const bb = document.getElementById("batchBar");
-      bb.classList.toggle("visible", selectedSet.size > 0);
-      document.getElementById("batchCount").textContent = selectedSet.size + " selected";
-
-      // Grid
-      const filtered = filter === "all" ? allImages : allImages.filter(i => i.fmt === filter);
-      const content = document.getElementById("content");
-
-      if (filtered.length === 0) {
-        content.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><h3>No images found</h3><p>Try a different filter or scan another page.</p></div>';
-        return;
-      }
-
-      let html = '<div class="grid">';
-      for (const img of filtered) {
-        const sel = selectedSet.has(img.src);
-        const dim = img.w && img.h ? `${img.w}×${img.h}` : "";
-        html += `
-          <div class="card${sel ? ' selected' : ''}" data-src="${esc(img.src)}">
-            <div class="card-sel" onclick="event.stopPropagation();toggleSel('${esc(img.src)}')">${sel ? '✓' : ''}</div>
-            <div class="card-img"><img src="${img.src}" loading="lazy" onerror="this.parentElement.innerHTML='🖼️'" /></div>
-            <div class="card-info">
-              <div class="card-meta">
-                <span class="badge badge-fmt">${img.fmt}</span>
-                ${dim ? `<span class="badge badge-dim">${dim}</span>` : ''}
-              </div>
-              <div class="card-btns">
-                <button class="card-btn pri" onclick="dl('${esc(img.src)}','image/jpeg','jpg',0.95)">JPG</button>
-                <button class="card-btn" onclick="dl('${esc(img.src)}','image/png','png',1)">PNG</button>
-                <button class="card-btn" onclick="dl('${esc(img.src)}','image/webp','webp',0.9)">WebP</button>
-              </div>
-            </div>
-          </div>`;
-      }
-      html += '</div>';
-      content.innerHTML = html;
+      // Update counter
+      document.getElementById("counter").innerHTML=`<b>${imgs.length}</b> images`;
+      // Small delay for progressive feel
+      if(i%5===0) await new Promise(r=>setTimeout(r,30));
     }
 
-    function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, "&quot;"); }
-
-    function toggleSel(src) {
-      if (selectedSet.has(src)) selectedSet.delete(src);
-      else selectedSet.add(src);
-      updateUI();
+    if(imgs.length===0){
+      document.getElementById("grid-wrap").innerHTML='<div class="empty"><div class="empty-icon">📭</div><h3>No images found</h3><p>This page has no images.</p></div>';
     }
 
-    // ═══ DOWNLOAD ═══
-    function dl(src, mime, ext, q) {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = () => {
-        const c = document.createElement("canvas");
-        c.width = img.naturalWidth; c.height = img.naturalHeight;
-        c.getContext("2d").drawImage(img, 0, 0);
-        c.toBlob(blob => {
-          if (!blob) { toast("⚠️ CORS — can't process this image"); return; }
-          const u = URL.createObjectURL(blob);
-          let fn = "image";
-          try { const b = new URL(src).pathname.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g,""); if(b&&b.length>0&&b.length<80)fn=b; } catch{}
-          const a = document.createElement("a");
-          a.href = u; a.download = `${fn}.${ext}`;
-          document.body.appendChild(a); a.click(); a.remove();
-          setTimeout(() => URL.revokeObjectURL(u), 5000);
-          toast(`✅ Saved as ${ext.toUpperCase()} — EXIF removed`);
-        }, mime, q);
-      };
-      img.onerror = () => toast("⚠️ Can't load image (CORS)");
-      img.src = src;
-    }
+    buildFilters();
 
-    async function batchDl(mime, ext, q) {
-      const srcs = [...selectedSet];
-      toast(`⏳ Converting ${srcs.length} images...`);
-      for (const src of srcs) {
-        dl(src, mime, ext, q);
-        await new Promise(r => setTimeout(r, 600));
-      }
-    }
+  }catch(e){
+    document.getElementById("grid-wrap").innerHTML='<div class="empty"><div class="empty-icon">⚠️</div><h3>Can\'t scan</h3><p>Refresh the page and reopen SammaPix.</p></div>';
+    document.getElementById("counter").textContent="";
+  }
+}
 
-    function toast(msg) {
-      const existing = document.querySelector(".toast");
-      if (existing) existing.remove();
-      const t = document.createElement("div");
-      t.className = "toast";
-      t.textContent = msg;
-      document.body.appendChild(t);
-      setTimeout(() => { t.style.opacity = "0"; setTimeout(() => t.remove(), 300); }, 3000);
-    }
+function gFmt(u){
+  const l=u.split("?")[0].toLowerCase();
+  if(l.endsWith(".webp")||u.includes("format=webp")||u.includes("fm=webp"))return"WebP";
+  if(l.endsWith(".png")||u.startsWith("data:image/png"))return"PNG";
+  if(l.endsWith(".jpg")||l.endsWith(".jpeg")||u.startsWith("data:image/jpeg"))return"JPG";
+  if(l.endsWith(".gif"))return"GIF";
+  if(l.endsWith(".svg")||u.startsWith("data:image/svg"))return"SVG";
+  if(l.endsWith(".avif"))return"AVIF";
+  return"IMG";
+}
 
-    // ═══ INIT ═══
-    document.getElementById("scanBtn").addEventListener("click", doScan);
-    // Auto-scan after short delay
-    setTimeout(doScan, 300);
-  </script>
+function cardHTML(img){
+  const s=sel.has(img.src);
+  const dim=img.w&&img.h?`${img.w}×${img.h}`:"";
+  const e=x=>x.replace(/'/g,"\\'").replace(/"/g,"&quot;");
+  return`<div class="card${s?" selected":""}" data-s="${e(img.src)}">
+    <div class="card-sel" onclick="event.stopPropagation();tSel('${e(img.src)}')">${s?"✓":""}</div>
+    <div class="cimg"><img src="${img.src}" loading="lazy" onerror="this.parentElement.innerHTML='🖼️'"/></div>
+    <div class="cinfo"><div class="cmeta"><span class="bg bg-f">${img.fmt}</span>${dim?`<span class="bg bg-d">${dim}</span>`:""}</div>
+    <div class="cbtns">
+      <button class="cb pri" onclick="dl('${e(img.src)}','image/jpeg','jpg',.95)">JPG</button>
+      <button class="cb" onclick="dl('${e(img.src)}','image/png','png',1)">PNG</button>
+      <button class="cb" onclick="dl('${e(img.src)}','image/webp','webp',.9)">WebP</button>
+    </div></div></div>`;
+}
+
+function buildFilters(){
+  const c={all:imgs.length};
+  imgs.forEach(i=>{c[i.fmt]=(c[i.fmt]||0)+1});
+  document.getElementById("filters").innerHTML=Object.entries(c).map(([f,n])=>
+    `<button class="fbtn${filt===f?" active":""}" onclick="filt='${f}';render()">${f==="all"?"All":f} (${n})</button>`
+  ).join("");
+}
+
+function render(){
+  const f=filt==="all"?imgs:imgs.filter(i=>i.fmt===filt);
+  const gw=document.getElementById("grid-wrap");
+  if(f.length===0){gw.innerHTML='<div class="empty"><div class="empty-icon">📭</div><h3>No images</h3></div>';return}
+  gw.innerHTML='<div class="grid">'+f.map(i=>cardHTML(i)).join("")+'</div>';
+  document.getElementById("batchBar").classList.toggle("on",sel.size>0);
+  document.getElementById("batchCount").textContent=sel.size+" selected";
+}
+
+function tSel(s){if(sel.has(s))sel.delete(s);else sel.add(s);render()}
+
+// ═══ EXIF TAB ═══
+function renderExif(){
+  const list=document.getElementById("exif-list");
+  if(imgs.length===0){list.innerHTML='<div class="empty"><div class="empty-icon">🛡️</div><h3>No images</h3><p>Open on a page with images.</p></div>';return}
+  list.innerHTML=imgs.slice(0,30).map((img,i)=>{
+    const e=x=>x.replace(/'/g,"\\'").replace(/"/g,"&quot;");
+    const name=img.alt||img.src.split("/").pop().split("?")[0].slice(0,30)||"image";
+    return`<div class="exif-card">
+      <div class="exif-top">
+        <img class="exif-thumb" src="${img.src}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect fill=%22%23f5f5f5%22 width=%2248%22 height=%2248%22 rx=%226%22/></svg>'"/>
+        <div class="exif-info">
+          <div class="exif-name">${name}</div>
+          <div class="exif-detail">${img.fmt} · ${img.w}×${img.h}</div>
+        </div>
+      </div>
+      <div class="exif-warn">⚠️ May contain GPS location, camera model, date/time</div>
+      <button class="exif-btn" onclick="dlClean('${e(img.src)}',${i})">Download clean copy (EXIF removed) ↓</button>
+    </div>`
+  }).join("");
+}
+
+function dlClean(src,idx){
+  dl(src,"image/jpeg","jpg",0.95);
+  // Update UI to show cleaned
+  const cards=document.querySelectorAll(".exif-card");
+  if(cards[idx]){
+    const warn=cards[idx].querySelector(".exif-warn");
+    if(warn){warn.className="exif-safe";warn.innerHTML="✅ Clean copy downloaded — EXIF/GPS removed";}
+    const btn=cards[idx].querySelector(".exif-btn");
+    if(btn){btn.textContent="✓ Downloaded";btn.disabled=true;btn.style.background="#16A34A";}
+  }
+}
+
+// ═══ COMPRESS TAB ═══
+function renderCompress(){
+  const list=document.getElementById("comp-list");
+  if(imgs.length===0){list.innerHTML='<div class="empty"><div class="empty-icon">📦</div><h3>No images</h3></div>';return}
+  list.innerHTML=imgs.filter(i=>i.fmt!=="SVG").slice(0,30).map((img,i)=>{
+    const e=x=>x.replace(/'/g,"\\'").replace(/"/g,"&quot;");
+    const name=img.src.split("/").pop().split("?")[0].slice(0,25)||"image";
+    return`<div class="comp-card" id="comp-${i}">
+      <div class="comp-row">
+        <img class="comp-thumb" src="${img.src}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect fill=%22%23f5f5f5%22 width=%2248%22 height=%2248%22 rx=%226%22/></svg>'"/>
+        <div class="comp-info">
+          <div class="comp-name">${name}</div>
+          <div class="comp-size">${img.fmt} · ${img.w}×${img.h}</div>
+        </div>
+        <button class="comp-btn" onclick="compress('${e(img.src)}',${i})">Compress</button>
+      </div>
+      <div class="comp-result" id="comp-r-${i}"></div>
+    </div>`
+  }).join("");
+}
+
+function compress(src,idx){
+  const img=new Image();
+  img.crossOrigin="anonymous";
+  img.onload=()=>{
+    const c=document.createElement("canvas");
+    c.width=img.naturalWidth;c.height=img.naturalHeight;
+    c.getContext("2d").drawImage(img,0,0);
+    // Get original size
+    fetch(src).then(r=>r.blob()).then(orig=>{
+      c.toBlob(blob=>{
+        if(!blob){toast("⚠️ CORS");return}
+        const pct=Math.round((1-blob.size/orig.size)*100);
+        const u=URL.createObjectURL(blob);
+        let fn="image";try{const b=new URL(src).pathname.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g,"");if(b&&b.length>0)fn=b}catch{}
+        const a=document.createElement("a");a.href=u;a.download=fn+"-compressed.jpg";
+        document.body.appendChild(a);a.click();a.remove();
+        // Show result
+        const r=document.getElementById("comp-r-"+idx);
+        if(r){r.style.display="block";r.innerHTML=`✅ ${fmtB(orig.size)} → ${fmtB(blob.size)} <b>(${pct>0?"-"+pct:"+"+Math.abs(pct)}%)</b> — EXIF removed`;}
+        const btn=document.querySelector(`#comp-${idx} .comp-btn`);
+        if(btn){btn.textContent="✓ Done";btn.style.background="#16A34A";}
+        toast(`✅ Compressed: -${pct}%`);
+      },"image/jpeg",0.80);
+    }).catch(()=>{
+      c.toBlob(blob=>{
+        if(!blob){toast("⚠️ CORS");return}
+        const u=URL.createObjectURL(blob);
+        const a=document.createElement("a");a.href=u;a.download="compressed.jpg";
+        document.body.appendChild(a);a.click();a.remove();
+        toast("✅ Compressed & downloaded");
+      },"image/jpeg",0.80);
+    });
+  };
+  img.onerror=()=>toast("⚠️ Can't load (CORS)");
+  img.src=src;
+}
+
+// ═══ DOWNLOAD ═══
+function dl(src,mime,ext,q){
+  const img=new Image();
+  img.crossOrigin="anonymous";
+  img.onload=()=>{
+    const c=document.createElement("canvas");
+    c.width=img.naturalWidth;c.height=img.naturalHeight;
+    c.getContext("2d").drawImage(img,0,0);
+    c.toBlob(blob=>{
+      if(!blob){toast("⚠️ CORS");return}
+      const u=URL.createObjectURL(blob);
+      let fn="image";try{const b=new URL(src).pathname.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g,"");if(b&&b.length>0&&b.length<80)fn=b}catch{}
+      const a=document.createElement("a");a.href=u;a.download=fn+"."+ext;
+      document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(u),5000);
+      toast(`✅ ${ext.toUpperCase()} — EXIF removed`);
+    },mime,q);
+  };
+  img.onerror=()=>toast("⚠️ Can't load (CORS)");
+  img.src=src;
+}
+
+async function batchDl(mime,ext,q){
+  const s=[...sel];toast(`⏳ Converting ${s.length}...`);
+  for(const src of s){dl(src,mime,ext,q);await new Promise(r=>setTimeout(r,500))}
+}
+
+function fmtB(b){if(b<1024)return b+"B";if(b<1048576)return Math.round(b/1024)+"KB";return(b/1048576).toFixed(1)+"MB"}
+
+function toast(m){
+  const e=document.querySelector(".toast");if(e)e.remove();
+  const t=document.createElement("div");t.className="toast";t.textContent=m;
+  document.body.appendChild(t);setTimeout(()=>{t.style.opacity="0";setTimeout(()=>t.remove(),300)},2500);
+}
+
+// ═══ AUTO START ═══
+scan();
+</script>
 </body>
 </html>
