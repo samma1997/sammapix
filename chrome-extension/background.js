@@ -1,62 +1,97 @@
+// ═══════════════════════════════════════════════════════════════════
 // SammaPix Chrome Extension
-// 1. Right-click image → Save as JPG/PNG (works INSIDE extension, no site needed)
-// 2. Right-click image → Open in SammaPix tool (compress, resize, remove bg, etc.)
-// 3. Popup with quick access to all tools
+// Everything runs client-side via Canvas API — no uploads, no server
+//
+// Features that work INSIDE the extension (instant):
+//   - Save as JPG (strips all EXIF/GPS automatically)
+//   - Save as PNG (strips all EXIF/GPS automatically)
+//   - Save as WebP (smaller file, strips EXIF)
+//   - Compress image (80% quality JPG, ~90% size reduction)
+//
+// Features that open sammapix.com:
+//   - Remove Background (needs WASM model)
+//   - Resize for social media
+//   - Passport Photo
+//   - All 27 tools
+// ═══════════════════════════════════════════════════════════════════
 
 const BASE_URL = "https://www.sammapix.com";
-
-const TOOLS = [
-  { id: "compress", title: "Compress with SammaPix", path: "/tools/compress" },
-  { id: "resize", title: "Resize with SammaPix", path: "/tools/resizepack" },
-  { id: "convert-webp", title: "Convert to WebP", path: "/tools/webp" },
-  { id: "remove-bg", title: "Remove Background", path: "/tools/remove-bg" },
-  { id: "strip-exif", title: "Strip EXIF / GPS Data", path: "/tools/exif" },
-];
 
 // ═══════════════════════════════════════════
 // INSTALL: Create context menus
 // ═══════════════════════════════════════════
 chrome.runtime.onInstalled.addListener(() => {
-  // --- Quick Convert (works inside extension) ---
+  // ── INSTANT ACTIONS (work inside extension) ──
+
   chrome.contextMenus.create({
-    id: "sammapix-save-jpg",
-    title: "Save image as JPG",
+    id: "save-jpg-clean",
+    title: "📷 Save as JPG (EXIF/GPS removed)",
     contexts: ["image"],
   });
 
   chrome.contextMenus.create({
-    id: "sammapix-save-png",
-    title: "Save image as PNG",
+    id: "save-png-clean",
+    title: "📷 Save as PNG (EXIF/GPS removed)",
     contexts: ["image"],
   });
 
-  // --- Separator ---
   chrome.contextMenus.create({
-    id: "sammapix-sep1",
+    id: "save-webp",
+    title: "⚡ Save as WebP (smaller file, no EXIF)",
+    contexts: ["image"],
+  });
+
+  chrome.contextMenus.create({
+    id: "compress-jpg",
+    title: "📦 Compress & Save (80% quality JPG)",
+    contexts: ["image"],
+  });
+
+  // ── SEPARATOR ──
+
+  chrome.contextMenus.create({
+    id: "sep1",
     type: "separator",
     contexts: ["image"],
   });
 
-  // --- SammaPix Tools (opens site) ---
+  // ── SAMMAPIX TOOLS (open site) ──
+
   chrome.contextMenus.create({
-    id: "sammapix-parent",
-    title: "More SammaPix tools",
+    id: "parent-tools",
+    title: "🛠 More SammaPix tools",
     contexts: ["image"],
   });
 
-  for (const tool of TOOLS) {
+  const siteTools = [
+    { id: "remove-bg", title: "✂️ Remove Background (AI)", path: "/tools/remove-bg" },
+    { id: "resize", title: "📐 Resize for social media", path: "/tools/resizepack" },
+    { id: "passport", title: "📸 Passport Photo (140+ countries)", path: "/tools/passport-photo" },
+    { id: "crop", title: "🖼 Crop to ratio", path: "/tools/croproatio" },
+    { id: "upscale", title: "🔍 Upscale / Enhance", path: "/tools/upscale" },
+    { id: "watermark", title: "💧 Add Watermark", path: "/tools/stampit" },
+  ];
+
+  for (const tool of siteTools) {
     chrome.contextMenus.create({
-      id: `sammapix-${tool.id}`,
-      parentId: "sammapix-parent",
+      id: `tool-${tool.id}`,
+      parentId: "parent-tools",
       title: tool.title,
       contexts: ["image"],
     });
   }
 
   chrome.contextMenus.create({
-    id: "sammapix-all",
-    parentId: "sammapix-parent",
-    title: "All 27 tools →",
+    id: "tool-sep",
+    parentId: "parent-tools",
+    type: "separator",
+    contexts: ["image"],
+  });
+
+  chrome.contextMenus.create({
+    id: "tool-all",
+    parentId: "parent-tools",
+    title: "🚀 All 27 tools on sammapix.com",
     contexts: ["image"],
   });
 });
@@ -68,48 +103,59 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   const imageUrl = info.srcUrl;
   if (!imageUrl) return;
 
-  // --- Save as JPG / PNG (in-extension, no site needed) ---
-  if (info.menuItemId === "sammapix-save-jpg" || info.menuItemId === "sammapix-save-png") {
-    const format = info.menuItemId === "sammapix-save-jpg" ? "jpeg" : "png";
-    const ext = format === "jpeg" ? "jpg" : "png";
-    const mimeType = `image/${format}`;
+  // ── INSTANT ACTIONS ──
+  const instantActions = {
+    "save-jpg-clean": { mimeType: "image/jpeg", ext: "jpg", quality: 0.95 },
+    "save-png-clean": { mimeType: "image/png", ext: "png", quality: 1 },
+    "save-webp":      { mimeType: "image/webp", ext: "webp", quality: 0.90 },
+    "compress-jpg":   { mimeType: "image/jpeg", ext: "jpg", quality: 0.80 },
+  };
 
-    // Inject script into the active tab to convert the image via Canvas
+  if (instantActions[info.menuItemId]) {
+    const action = instantActions[info.menuItemId];
     try {
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: convertAndDownload,
-        args: [imageUrl, mimeType, ext],
+        args: [imageUrl, action.mimeType, action.ext, action.quality],
       });
     } catch (err) {
-      // Fallback: open in new tab with instructions
-      console.error("Script injection failed:", err);
-      chrome.tabs.create({ url: `${BASE_URL}/tools/webp?ref=chrome-extension&imageUrl=${encodeURIComponent(imageUrl)}` });
+      // CORS fallback → open sammapix.com
+      chrome.tabs.create({
+        url: `${BASE_URL}/tools/webp?ref=chrome-ext`,
+      });
     }
     return;
   }
 
-  // --- Open all tools ---
-  if (info.menuItemId === "sammapix-all") {
-    chrome.tabs.create({ url: BASE_URL + "?ref=chrome-extension" });
+  // ── SITE TOOLS ──
+  if (info.menuItemId === "tool-all") {
+    chrome.tabs.create({ url: `${BASE_URL}?ref=chrome-ext` });
     return;
   }
 
-  // --- Open specific tool ---
-  const toolId = info.menuItemId.replace("sammapix-", "");
-  const tool = TOOLS.find(t => t.id === toolId);
-  if (tool) {
-    chrome.tabs.create({
-      url: `${BASE_URL}${tool.path}?ref=chrome-extension`,
-    });
+  if (info.menuItemId.startsWith("tool-")) {
+    const toolId = info.menuItemId.replace("tool-", "");
+    const tool = [
+      { id: "remove-bg", path: "/tools/remove-bg" },
+      { id: "resize", path: "/tools/resizepack" },
+      { id: "passport", path: "/tools/passport-photo" },
+      { id: "crop", path: "/tools/croproatio" },
+      { id: "upscale", path: "/tools/upscale" },
+      { id: "watermark", path: "/tools/stampit" },
+    ].find(t => t.id === toolId);
+
+    if (tool) {
+      chrome.tabs.create({ url: `${BASE_URL}${tool.path}?ref=chrome-ext` });
+    }
   }
 });
 
 // ═══════════════════════════════════════════
-// INJECTED FUNCTION: Convert image via Canvas API
-// This runs inside the active tab's context
+// INJECTED: Convert image via Canvas API
+// Canvas automatically strips ALL EXIF/GPS metadata
 // ═══════════════════════════════════════════
-function convertAndDownload(imageUrl, mimeType, ext) {
+function convertAndDownload(imageUrl, mimeType, ext, quality) {
   const img = new Image();
   img.crossOrigin = "anonymous";
 
@@ -117,38 +163,51 @@ function convertAndDownload(imageUrl, mimeType, ext) {
     const canvas = document.createElement("canvas");
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
+
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
+    // Canvas.toBlob STRIPS all EXIF/GPS metadata automatically
+    // The exported image is clean — no location, no camera info, nothing
     canvas.toBlob((blob) => {
       if (!blob) {
-        alert("SammaPix: Could not convert this image (CORS restriction). Try right-click → More SammaPix tools → Convert to WebP.");
+        alert("SammaPix: Could not process this image (CORS restriction).\n\nTry: Right-click → More SammaPix tools → use the web version.");
         return;
       }
+
+      // Generate clean filename
+      let filename = "image";
+      try {
+        const path = new URL(imageUrl).pathname;
+        const base = path.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g, "");
+        if (base && base.length > 0 && base.length < 80) filename = base;
+      } catch {}
+
+      // Show size reduction for compress
+      const sizeKB = Math.round(blob.size / 1024);
+      const suffix = quality < 0.9 ? `-compressed-${sizeKB}kb` : "-clean";
+
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-
-      // Generate filename from URL or use default
-      let filename = "image";
-      try {
-        const urlPath = new URL(imageUrl).pathname;
-        const baseName = urlPath.split("/").pop().split(".")[0];
-        if (baseName && baseName.length > 0 && baseName.length < 100) {
-          filename = baseName;
-        }
-      } catch {}
-      a.download = `${filename}.${ext}`;
-
+      a.download = `${filename}${suffix}.${ext}`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, mimeType, 0.92);
+
+      // Brief notification
+      const toast = document.createElement("div");
+      toast.textContent = `✅ SammaPix: Saved as ${ext.toUpperCase()} (${sizeKB}KB) — EXIF/GPS removed`;
+      toast.style.cssText = "position:fixed;bottom:20px;right:20px;background:#171717;color:#fff;padding:12px 20px;border-radius:10px;font-family:system-ui;font-size:13px;z-index:999999;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:opacity 0.3s;";
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = "0"; setTimeout(() => toast.remove(), 300); }, 3000);
+
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    }, mimeType, quality);
   };
 
   img.onerror = () => {
-    alert("SammaPix: Could not load this image (CORS restriction). Try right-click → More SammaPix tools.");
+    alert("SammaPix: Could not load this image (CORS restriction).\n\nTry: Right-click → More SammaPix tools → use the web version.");
   };
 
   img.src = imageUrl;
