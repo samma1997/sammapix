@@ -18,13 +18,28 @@ const DELAY_MS = 2000;
 
 // Search queries for Google Custom Search
 const GOOGLE_SEARCH_QUERIES = [
+  // Compression & optimization
   "best image compression tools 2026",
   "best image optimizer online free",
-  "best webp converter tools",
   "tinypng alternatives 2026",
-  "best tools to resize images online",
   "compress images without losing quality tools",
+  // Background removal
+  "best background remover free 2026",
+  "remove.bg alternatives free",
+  "best ai background removal tools",
+  // Upscaling
+  "best free image upscaler 2026",
+  "topaz gigapixel alternatives free",
+  // Passport photo
+  "best passport photo tools free",
+  "passport photo maker online free",
+  // Resize & convert
+  "best tools to resize images online",
+  "best webp converter tools",
+  "best heic to jpg converter free",
+  // General
   "best image tools for web developers",
+  "best free photo editing tools online 2026",
 ];
 
 // Dev.to API tag queries — articles about image tooling
@@ -41,6 +56,10 @@ const HN_SEARCH_QUERIES = [
   "image optimization tools",
   "webp converter",
   "image tools web",
+  "background remover free",
+  "image upscaler browser",
+  "passport photo tool",
+  "client-side image processing",
 ];
 
 // Spam / irrelevant signals — skip if title contains any of these
