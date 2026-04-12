@@ -1,0 +1,232 @@
+[
+  {
+    "start": 0,
+    "end": 3.1,
+    "text": "Why people leave remove.bg"
+  },
+  {
+    "start": 3.1,
+    "end": 13.34,
+    "text": "Remove.bg is excellent at what it does. The AI is fast, handles hair well, and t"
+  },
+  {
+    "start": 13.34,
+    "end": 34.54,
+    "text": "The lowest plan is 25 credits for 9 euros, roughly 36 euro cents per image or ab"
+  },
+  {
+    "start": 34.54,
+    "end": 52.54,
+    "text": "On Reddit, the frustration is consistent. Threads on r/Etsy and r/ecommerce regu"
+  },
+  {
+    "start": 52.54,
+    "end": 66.38,
+    "text": "There's also a privacy angle. Remove.bg uploads your images to their servers for"
+  },
+  {
+    "start": 66.38,
+    "end": 68.74,
+    "text": "The 7 alternatives"
+  },
+  {
+    "start": 68.74,
+    "end": 80.59,
+    "text": "I tested each tool on the same set of images: product shots on white backgrounds"
+  },
+  {
+    "start": 80.59,
+    "end": 84.7,
+    "text": "1. SammaPix, browser-based, zero upload"
+  },
+  {
+    "start": 84.7,
+    "end": 102.5,
+    "text": "Full disclosure: this is our tool. SammaPix runs the RMBG 1.4 model directly in "
+  },
+  {
+    "start": 102.5,
+    "end": 123.98,
+    "text": "On product shots and standard portraits, the results are clean. Hair edges are h"
+  },
+  {
+    "start": 123.98,
+    "end": 133.61,
+    "text": "After removing the background, you can immediately compress the result, convert "
+  },
+  {
+    "start": 133.61,
+    "end": 137.33,
+    "text": "2. PhotoRoom, best for e-commerce sellers"
+  },
+  {
+    "start": 137.33,
+    "end": 156.17,
+    "text": "PhotoRoom is specifically built for e-commerce. The background removal is excell"
+  },
+  {
+    "start": 156.17,
+    "end": 162.43,
+    "text": "Best for e-commerce sellers who need product photos with staging, mockups, and c"
+  },
+  {
+    "start": 162.43,
+    "end": 166.9,
+    "text": "3. Pixian.ai, no subscription, pay per image"
+  },
+  {
+    "start": 166.9,
+    "end": 186.38,
+    "text": "Pixian.ai got significant attention on Hacker News, with 383 upvotes, for being "
+  },
+  {
+    "start": 186.38,
+    "end": 191.9,
+    "text": "Best for occasional high-resolution needs where you want to pay per image withou"
+  },
+  {
+    "start": 191.9,
+    "end": 196.51,
+    "text": "4. Clipdrop by Stability AI, best overall quality"
+  },
+  {
+    "start": 196.51,
+    "end": 214.1,
+    "text": "Clipdrop, backed by Stability AI, the team behind Stable Diffusion, offers some "
+  },
+  {
+    "start": 214.1,
+    "end": 221.16,
+    "text": "Best for users who want remove.bg-quality results for free with daily limits and"
+  },
+  {
+    "start": 221.16,
+    "end": 225.05,
+    "text": "5. Pixlr BG Remover, quick and simple"
+  },
+  {
+    "start": 225.05,
+    "end": 240.05,
+    "text": "Pixlr is a well-established browser-based photo editor. The background removal t"
+  },
+  {
+    "start": 240.05,
+    "end": 245.23,
+    "text": "Best for quick single-image background removal when you also need basic photo ed"
+  },
+  {
+    "start": 245.23,
+    "end": 249.7,
+    "text": "6. Canva Background Remover, if you already use Canva"
+  },
+  {
+    "start": 249.7,
+    "end": 266.26,
+    "text": "Canva's background remover is locked behind their Pro plan at 12.99 dollars per "
+  },
+  {
+    "start": 266.26,
+    "end": 272.35,
+    "text": "Best for existing Canva Pro subscribers who want background removal inside their"
+  },
+  {
+    "start": 272.35,
+    "end": 275.74,
+    "text": "7. rembg, open-source command line"
+  },
+  {
+    "start": 275.74,
+    "end": 294.55,
+    "text": "rembg is the open-source standard for background removal. With over 16,000 GitHu"
+  },
+  {
+    "start": 294.55,
+    "end": 301.3,
+    "text": "Best for developers and technical users who need unlimited batch processing with"
+  },
+  {
+    "start": 301.3,
+    "end": 303.62,
+    "text": "Which one should you use"
+  },
+  {
+    "start": 303.62,
+    "end": 312.14,
+    "text": "If you need privacy and batch processing, SammaPix. Everything stays on your dev"
+  },
+  {
+    "start": 312.14,
+    "end": 319.66,
+    "text": "If you sell on Etsy, Amazon, or Shopify, PhotoRoom. Product staging and mockups "
+  },
+  {
+    "start": 319.66,
+    "end": 328.34,
+    "text": "If you need the absolute best edge quality, Clipdrop or remove.bg. They handle w"
+  },
+  {
+    "start": 328.34,
+    "end": 336.53,
+    "text": "If you're a developer with large batches, rembg. Unlimited local processing, mul"
+  },
+  {
+    "start": 336.53,
+    "end": 343.94,
+    "text": "If you already pay for Canva Pro, use Canva's built-in remover. No reason to pay"
+  },
+  {
+    "start": 343.94,
+    "end": 352.73,
+    "text": "If you need a few high-res images occasionally, Pixian.ai at 5 cents per image. "
+  },
+  {
+    "start": 352.73,
+    "end": 356.35,
+    "text": "Is there a free alternative to remove.bg?"
+  },
+  {
+    "start": 356.35,
+    "end": 371.93,
+    "text": "Yes. SammaPix processes images entirely in your browser using AI with no upload "
+  },
+  {
+    "start": 371.93,
+    "end": 375.65,
+    "text": "How much does remove.bg actually cost?"
+  },
+  {
+    "start": 375.65,
+    "end": 389.76,
+    "text": "Remove.bg's lowest plan is 25 credits for 9 euros, about 36 euro cents per image"
+  },
+  {
+    "start": 389.76,
+    "end": 393.98,
+    "text": "Can free background removers handle hair and complex edges?"
+  },
+  {
+    "start": 393.98,
+    "end": 410.45,
+    "text": "Modern AI models like RMBG 1.4 and U2-Net handle hair, fur, and semi-transparent"
+  },
+  {
+    "start": 410.45,
+    "end": 414.29,
+    "text": "Which background remover is best for product photos?"
+  },
+  {
+    "start": 414.29,
+    "end": 425.14,
+    "text": "For products on solid backgrounds, most free tools work excellently. SammaPix, P"
+  },
+  {
+    "start": 425.14,
+    "end": 429.38,
+    "text": "Is it safe to upload photos to online background removers?"
+  },
+  {
+    "start": 429.38,
+    "end": 445.32,
+    "text": "Most tools upload images to servers. If privacy matters, use SammaPix, which is "
+  }
+]

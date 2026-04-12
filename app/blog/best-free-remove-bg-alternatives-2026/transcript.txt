@@ -1,0 +1,93 @@
+Why people leave remove.bg
+
+Remove.bg is excellent at what it does. The AI is fast, handles hair well, and the results are clean. The problem is the pricing.
+
+The lowest plan is 25 credits for 9 euros, roughly 36 euro cents per image or about 39 US cents. If you're an e-commerce seller processing 120 product photos for a new collection, that's over 43 euros for a single batch. The free preview exists, but it outputs low-resolution images with limited quality.
+
+On Reddit, the frustration is consistent. Threads on r/Etsy and r/ecommerce regularly feature sellers saying doing this one-by-one is pain and asking for free batch alternatives. The per-image pricing model feels outdated when AI models that perform comparably are now available for free.
+
+There's also a privacy angle. Remove.bg uploads your images to their servers for processing. If you're working with confidential product photos before a launch, or personal images, that's a consideration.
+
+The 7 alternatives
+
+I tested each tool on the same set of images: product shots on white backgrounds, portraits with hair detail, an object on a busy background, and a semi-transparent item. Here's what I found.
+
+1. SammaPix, browser-based, zero upload
+
+Full disclosure: this is our tool. SammaPix runs the RMBG 1.4 model directly in your browser via WebAssembly. The model downloads once, about 40 megabytes, then everything processes locally. Your images are never uploaded anywhere.
+
+On product shots and standard portraits, the results are clean. Hair edges are handled well for most cases. Where it falls short compared to remove.bg: very complex hair against busy backgrounds, and semi-transparent objects. The trade-off is worth it for most use cases, especially if you process in batch and don't want to pay per image.
+
+After removing the background, you can immediately compress the result, convert to WebP, or add a watermark, all without leaving the app or uploading to a server.
+
+2. PhotoRoom, best for e-commerce sellers
+
+PhotoRoom is specifically built for e-commerce. The background removal is excellent, and the app adds mockup backgrounds, shadows, and product staging. The free tier adds a small watermark. The mobile app is particularly strong, many Etsy and Depop sellers use it from their phones.
+
+Best for e-commerce sellers who need product photos with staging, mockups, and consistent backgrounds.
+
+3. Pixian.ai, no subscription, pay per image
+
+Pixian.ai got significant attention on Hacker News, with 383 upvotes, for being a no-subscription alternative. You pay only when you need full-resolution output, at 5 cents per image, which is 7 times cheaper than remove.bg. The quality is strong, particularly on product photos.
+
+Best for occasional high-resolution needs where you want to pay per image without a subscription.
+
+4. Clipdrop by Stability AI, best overall quality
+
+Clipdrop, backed by Stability AI, the team behind Stable Diffusion, offers some of the best AI-powered image editing tools available. The background removal quality rivals remove.bg on complex edges. The free tier has daily limits but outputs full resolution.
+
+Best for users who want remove.bg-quality results for free with daily limits and don't mind server-side processing.
+
+5. Pixlr BG Remover, quick and simple
+
+Pixlr is a well-established browser-based photo editor. The background removal tool is one of many features. Quality is decent for simple use cases but falls behind on complex edges. The free tier shows ads.
+
+Best for quick single-image background removal when you also need basic photo editing.
+
+6. Canva Background Remover, if you already use Canva
+
+Canva's background remover is locked behind their Pro plan at 12.99 dollars per month. If you already pay for Canva Pro for design work, it's a solid built-in feature. If you're paying 12.99 just for background removal, there are much cheaper options.
+
+Best for existing Canva Pro subscribers who want background removal inside their design workflow.
+
+7. rembg, open-source command line
+
+rembg is the open-source standard for background removal. With over 16,000 GitHub stars, it supports multiple AI models and can process entire folders in a single command. If you're comfortable with pip install rembg and the terminal, this gives you unlimited batch processing with no cost and no upload.
+
+Best for developers and technical users who need unlimited batch processing with full control over the AI model.
+
+Which one should you use
+
+If you need privacy and batch processing, SammaPix. Everything stays on your device, process up to 20 images at once.
+
+If you sell on Etsy, Amazon, or Shopify, PhotoRoom. Product staging and mockups built in.
+
+If you need the absolute best edge quality, Clipdrop or remove.bg. They handle wispy hair and transparency better.
+
+If you're a developer with large batches, rembg. Unlimited local processing, multiple models, scriptable.
+
+If you already pay for Canva Pro, use Canva's built-in remover. No reason to pay for another tool.
+
+If you need a few high-res images occasionally, Pixian.ai at 5 cents per image. No subscription, pay only when needed.
+
+FAQ
+
+Is there a free alternative to remove.bg?
+
+Yes. SammaPix processes images entirely in your browser using AI with no upload to any server. PhotoRoom, Pixlr, and Canva also offer free tiers, though they process on their servers and may add watermarks or limit resolution.
+
+How much does remove.bg actually cost?
+
+Remove.bg's lowest plan is 25 credits for 9 euros, about 36 euro cents per image or 39 US cents. Volume discounts bring the price down at higher tiers, but there is no truly free unlimited option.
+
+Can free background removers handle hair and complex edges?
+
+Modern AI models like RMBG 1.4 and U2-Net handle hair, fur, and semi-transparent objects surprisingly well. Remove.bg still has an edge on the most complex cases, but for standard use cases, free alternatives produce comparable results.
+
+Which background remover is best for product photos?
+
+For products on solid backgrounds, most free tools work excellently. SammaPix, PhotoRoom, and Pixian.ai all handle clean-edge products with near-perfect results.
+
+Is it safe to upload photos to online background removers?
+
+Most tools upload images to servers. If privacy matters, use SammaPix, which is browser-based with nothing uploaded, or rembg which runs locally via command line. This is especially important for confidential product photos or personal images.

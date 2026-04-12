@@ -79,6 +79,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "best-free-remove-bg-alternatives-2026",
   "instagram-image-quality-loss-fix",
   "best-free-topaz-gigapixel-alternatives-2026",
   "compress-photos-indian-exam-applications",
