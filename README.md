@@ -18,6 +18,10 @@ SammaPix is a free, open-source image optimization platform that runs entirely i
 
 Built for content creators, developers, and anyone who works with images at scale.
 
+<p align="center">
+  <img src="public/screenshots/tools-grid.png" alt="SammaPix Tools" width="100%">
+</p>
+
 **Key features:**
 
 - 100% client-side processing — images stay on your machine
@@ -88,6 +92,18 @@ Built for content creators, developers, and anyone who works with images at scal
 | HEIC | heic-convert / heic2any |
 | Batch download | JSZip + file-saver |
 | Testing | Playwright (E2E) |
+
+---
+
+<details>
+<summary><strong>Compress Tool</strong></summary>
+<img src="public/screenshots/compress-tool.png" alt="Compress Tool" width="100%">
+</details>
+
+<details>
+<summary><strong>Pricing</strong></summary>
+<img src="public/screenshots/pricing.png" alt="Pricing" width="100%">
+</details>
 
 ---
 
