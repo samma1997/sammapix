@@ -153,40 +153,62 @@ ONLY the message:`);
     // 4. BACKLINK ACTION — 1 azione concreta
     // ═══════════════════════════════════════════
     const backlinkActions = [
+      // --- DOFOLLOW backlink sources ---
       {
-        title: "\u{1F517} Broken link building: cerca link morti a SmushIt/PunyPNG",
-        description: 'Google: "smushit" OR "punypng" inurl:resources — trova pagine con link 404, contatta webmaster offrendo SammaPix come sostituto.',
-        url: 'https://www.google.com/search?q=%22smushit%22+OR+%22punypng%22+inurl%3Aresources',
+        title: "\u{1F525} Hacker Noon: pubblica articolo (DOFOLLOW backlink)",
+        description: "Hacker Noon dà backlink DOFOLLOW gratis. Scrivi un articolo tecnico tipo 'How browser Canvas API beats server-side image compression'. Submit su contribute.hackernoon.com.",
+        url: "https://contribute.hackernoon.com/",
       },
       {
-        title: "\u{1F517} HARO/Featured.com: rispondi a 1 query",
-        description: "Controlla email Featured.com. Rispondi a query su image editing, web performance, privacy. Firma: Luca Sammarco, founder of SammaPix.",
-        url: "https://featured.com",
+        title: "\u{1F517} Broken link building: SmushIt/PunyPNG/Webresizer",
+        description: 'Google: "smushit" OR "punypng" OR "webresizer" inurl:resources — trova pagine con link 404 a tool morti, contatta offrendo SammaPix.',
+        url: 'https://www.google.com/search?q=%22smushit%22+OR+%22punypng%22+OR+%22webresizer%22+inurl%3Aresources',
+      },
+      // --- Cross-posting con canonical ---
+      {
+        title: "\u{1F517} Dev.to: cross-posta ultimo articolo (canonical URL)",
+        description: "Usa: node scripts/crosspost-devto.mjs — crea draft su Dev.to con canonical a sammapix.com. Rileggi e pubblica. Aspetta 7gg dal post originale.",
+        url: "https://dev.to/dashboard",
       },
       {
-        title: "\u{1F517} Dev.to: pubblica articolo tecnico con canonical",
-        description: "Cross-posta un articolo dal blog SammaPix su Dev.to. MUST: impostare canonical_url al blog originale. Aspettare 7gg dopo pubblicazione originale.",
-        url: "https://dev.to/new",
+        title: "\u{1F517} Medium: importa ultimo articolo con canonical",
+        description: "Medium > Import a story > incolla URL del blog SammaPix. Medium setta automaticamente la canonical. Pubblica sotto 'Luca Sammarco'.",
+        url: "https://medium.com/p/import",
       },
+      // --- Q&A con menzione brand ---
       {
-        title: "\u{1F517} Quora: rispondi a 3 domande su image compression",
-        description: 'Cerca "best free image compressor" o "how to compress images without losing quality" su Quora. Rispondi genuinamente, menziona SammaPix alla fine.',
+        title: "\u{1F517} Quora: rispondi a 3 domande (image tools)",
+        description: 'Cerca "best free image compressor", "how to remove background free", "compress image without losing quality". Rispondi genuinamente, menziona SammaPix alla fine.',
         url: "https://www.quora.com/search?q=best+free+image+compressor",
       },
+      // --- Visual platforms ---
       {
-        title: "\u{1F517} Medium: scrivi articolo su image optimization",
-        description: "Pubblica su Medium un articolo tecnico tipo 'Browser-based image processing: why you don't need server uploads'. Link a SammaPix nel bio e nel testo.",
-        url: "https://medium.com/new-story",
+        title: "\u{1F4F8} Pinterest: crea 3-5 pin before/after",
+        description: "Crea pin con before/after di compress, bg removal, upscale. Ogni pin linka al tool specifico su sammapix.com. Pin description con keyword.",
+        url: "https://www.pinterest.com/pin-creation-tool/",
       },
+      // --- HARO/PR ---
       {
-        title: "\u{1F517} Commenta roundup competitor con menzione SammaPix",
-        description: "Trova un blog post tipo 'Best image compression tools 2026' e lascia un commento genuino: 'Great list! I'd also suggest checking out SammaPix...'",
+        title: "\u{1F517} HARO/Featured.com: rispondi a 1 query",
+        description: "Controlla email Featured.com. Rispondi a query su image editing, web performance, privacy, AI tools. Firma: Luca Sammarco, founder of SammaPix.",
+        url: "https://featured.com",
+      },
+      // --- Outreach ---
+      {
+        title: "\u{1F517} Commenta roundup competitor",
+        description: "Trova un blog 'Best image tools 2026' e lascia commento genuino. Google: best image compression tools 2026 OR best background remover 2026.",
         url: "https://www.google.com/search?q=best+image+compression+tools+2026",
       },
       {
         title: "\u{1F517} Cerca nuovi roundup da pitchare",
-        description: 'Google: "best image optimization tools 2026" OR "best free image compressor 2026" — trova nuovi articoli dove SammaPix non è listato. Aggiungi target in outreach DB.',
+        description: 'Google: "best image optimization tools 2026" OR "best background remover free" — trova articoli dove SammaPix manca. Aggiungi target in growth DB.',
         url: 'https://www.google.com/search?q=%22best+image+optimization+tools+2026%22',
+      },
+      // --- GEO ---
+      {
+        title: "\u{1F916} GEO check: cerca SammaPix su ChatGPT e Perplexity",
+        description: "Chiedi a ChatGPT e Perplexity: 'what are the best free image compression tools?' — verifica se SammaPix viene citato. Screenshot risultati.",
+        url: "https://chat.openai.com/",
       },
     ];
     const blAction = backlinkActions[dayOfYear % backlinkActions.length];
