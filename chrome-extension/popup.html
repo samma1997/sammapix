@@ -8,185 +8,259 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      width: 320px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      width: 300px;
+      font-family: system-ui, -apple-system, sans-serif;
       background: #fff;
       color: #171717;
     }
 
     .header {
-      padding: 16px 16px 12px;
-      border-bottom: 1px solid #E5E5E5;
+      padding: 16px 16px 14px;
+      border-bottom: 1px solid #F5F5F5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .header h1 {
-      font-size: 15px;
+    .header-left h1 {
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: -0.3px;
     }
 
-    .header p {
-      font-size: 11px;
-      color: #737373;
-      margin-top: 2px;
+    .header-left p {
+      font-size: 10px;
+      color: #A3A3A3;
+      margin-top: 1px;
     }
 
-    .tools {
-      padding: 8px;
+    .usage-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #F5F5F5;
+      color: #525252;
+      font-weight: 500;
     }
+
+    .usage-badge.warning {
+      background: #FEF2F2;
+      color: #DC2626;
+    }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #A3A3A3;
+      padding: 12px 16px 6px;
+    }
+
+    .tools { padding: 4px 8px; }
 
     .tool-btn {
       display: flex;
       align-items: center;
       gap: 10px;
       width: 100%;
-      padding: 10px 12px;
+      padding: 9px 10px;
       border: none;
       background: none;
       border-radius: 8px;
       cursor: pointer;
       text-align: left;
-      font-size: 13px;
-      color: #171717;
       transition: background 0.15s;
     }
 
-    .tool-btn:hover {
-      background: #F5F5F5;
-    }
+    .tool-btn:hover { background: #F5F5F5; }
 
     .tool-icon {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 14px;
       flex-shrink: 0;
     }
 
-    .tool-icon.compress { background: #DBEAFE; }
-    .tool-icon.resize { background: #D1FAE5; }
-    .tool-icon.convert { background: #FEF3C7; }
-    .tool-icon.removebg { background: #EDE9FE; }
-    .tool-icon.exif { background: #FEE2E2; }
-    .tool-icon.passport { background: #E0E7FF; }
+    .icon-blue { background: #DBEAFE; }
+    .icon-green { background: #D1FAE5; }
+    .icon-yellow { background: #FEF3C7; }
+    .icon-purple { background: #EDE9FE; }
+    .icon-red { background: #FEE2E2; }
+    .icon-indigo { background: #E0E7FF; }
 
     .tool-name {
+      font-size: 12px;
       font-weight: 500;
+      color: #171717;
     }
 
     .tool-desc {
-      font-size: 11px;
+      font-size: 10px;
       color: #A3A3A3;
       margin-top: 1px;
     }
 
+    .tool-badge {
+      margin-left: auto;
+      font-size: 8px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-instant {
+      background: #F0FDF4;
+      color: #16A34A;
+    }
+
+    .badge-web {
+      background: #F5F5F5;
+      color: #737373;
+    }
+
     .divider {
       height: 1px;
-      background: #E5E5E5;
+      background: #F5F5F5;
       margin: 4px 16px;
     }
 
     .footer {
-      padding: 8px 16px 12px;
-      text-align: center;
+      padding: 10px 16px 14px;
     }
 
-    .footer a {
-      font-size: 11px;
+    .footer-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #171717;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .footer-btn:hover { background: #333; }
+
+    .footer-sub {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 10px;
+      color: #A3A3A3;
+    }
+
+    .footer-sub a {
       color: #6366F1;
       text-decoration: none;
       font-weight: 500;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 9px;
-      padding: 1px 6px;
-      border-radius: 4px;
-      background: #F0FDF4;
-      color: #16A34A;
-      font-weight: 600;
-      margin-left: 6px;
-      letter-spacing: 0.3px;
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>SammaPix <span class="badge">FREE</span></h1>
-    <p>27 image tools — 100% in your browser, nothing uploaded</p>
+    <div class="header-left">
+      <h1>SammaPix</h1>
+      <p>Right-click any image to convert</p>
+    </div>
+    <span class="usage-badge" id="usage-badge">—/10</span>
   </div>
 
+  <div class="section-label">Instant — works in browser</div>
   <div class="tools">
     <button class="tool-btn" data-url="/tools/compress">
-      <div class="tool-icon compress">📦</div>
+      <div class="tool-icon icon-blue">📦</div>
       <div>
         <div class="tool-name">Compress</div>
-        <div class="tool-desc">Reduce file size without quality loss</div>
+        <div class="tool-desc">Reduce size, keep quality</div>
       </div>
-    </button>
-
-    <button class="tool-btn" data-url="/tools/resizepack">
-      <div class="tool-icon resize">📐</div>
-      <div>
-        <div class="tool-name">Resize</div>
-        <div class="tool-desc">Resize for any platform (Instagram, LinkedIn...)</div>
-      </div>
+      <span class="tool-badge badge-instant">INSTANT</span>
     </button>
 
     <button class="tool-btn" data-url="/tools/webp">
-      <div class="tool-icon convert">🔄</div>
+      <div class="tool-icon icon-yellow">🔄</div>
       <div>
-        <div class="tool-name">Convert to WebP</div>
-        <div class="tool-desc">Save 25-35% more than JPEG</div>
+        <div class="tool-name">Convert Format</div>
+        <div class="tool-desc">JPG, PNG, WebP, AVIF</div>
       </div>
-    </button>
-
-    <button class="tool-btn" data-url="/tools/remove-bg">
-      <div class="tool-icon removebg">✂️</div>
-      <div>
-        <div class="tool-name">Remove Background</div>
-        <div class="tool-desc">AI-powered, runs locally in your browser</div>
-      </div>
+      <span class="tool-badge badge-instant">INSTANT</span>
     </button>
 
     <button class="tool-btn" data-url="/tools/exif">
-      <div class="tool-icon exif">🛡️</div>
+      <div class="tool-icon icon-red">🛡️</div>
       <div>
         <div class="tool-name">Strip EXIF / GPS</div>
-        <div class="tool-desc">Remove location data before sharing</div>
+        <div class="tool-desc">Remove location & metadata</div>
       </div>
-    </button>
-
-    <button class="tool-btn" data-url="/tools/passport-photo">
-      <div class="tool-icon passport">📸</div>
-      <div>
-        <div class="tool-name">Passport Photo</div>
-        <div class="tool-desc">Compliant photos for 140+ countries</div>
-      </div>
+      <span class="tool-badge badge-instant">INSTANT</span>
     </button>
   </div>
 
   <div class="divider"></div>
 
+  <div class="section-label">AI-powered — on sammapix.com</div>
+  <div class="tools">
+    <button class="tool-btn" data-url="/tools/remove-bg">
+      <div class="tool-icon icon-purple">✂️</div>
+      <div>
+        <div class="tool-name">Remove Background</div>
+        <div class="tool-desc">AI-powered, client-side</div>
+      </div>
+      <span class="tool-badge badge-web">WEB</span>
+    </button>
+
+    <button class="tool-btn" data-url="/tools/resizepack">
+      <div class="tool-icon icon-green">📐</div>
+      <div>
+        <div class="tool-name">Resize for Social</div>
+        <div class="tool-desc">Instagram, LinkedIn, TikTok...</div>
+      </div>
+      <span class="tool-badge badge-web">WEB</span>
+    </button>
+
+    <button class="tool-btn" data-url="/tools/passport-photo">
+      <div class="tool-icon icon-indigo">📸</div>
+      <div>
+        <div class="tool-name">Passport Photo</div>
+        <div class="tool-desc">140+ countries</div>
+      </div>
+      <span class="tool-badge badge-web">WEB</span>
+    </button>
+  </div>
+
   <div class="footer">
-    <a href="https://www.sammapix.com" target="_blank">Open all 27 tools →</a>
+    <a class="footer-btn" href="https://www.sammapix.com?ref=ext-popup" target="_blank">
+      Open all 27 tools →
+    </a>
+    <div class="footer-sub">
+      100% free · No signup · <a href="https://www.sammapix.com/about" target="_blank">Privacy-first</a>
+    </div>
   </div>
 
   <script>
     const BASE = "https://www.sammapix.com";
 
+    // Load usage count
+    chrome.storage.local.get(["usageDate", "usageCount"], (data) => {
+      const today = new Date().toISOString().slice(0, 10);
+      const count = data.usageDate === today ? (data.usageCount || 0) : 0;
+      const badge = document.getElementById("usage-badge");
+      badge.textContent = `${count}/10 today`;
+      if (count >= 8) badge.classList.add("warning");
+    });
+
     document.querySelectorAll(".tool-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        const path = btn.dataset.url;
-        chrome.tabs.create({ url: `${BASE}${path}?ref=chrome-extension` });
+        chrome.tabs.create({ url: `${BASE}${btn.dataset.url}?ref=ext-popup` });
       });
     });
   </script>
