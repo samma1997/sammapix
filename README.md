@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="public/og-image.png" alt="SammaPix — Free Image Tools for Photographers" width="100%">
-</p>
-
 <h1 align="center">SammaPix</h1>
 <p align="center"><strong>27 free browser-based image tools — compress, convert, rename with AI, and more.</strong></p>
 
