@@ -171,3 +171,11 @@ E2E-TESTS-SUMMARY.md
 INDEX-E2E-TESTS.md
 PLAYWRIGHT-QUICK-REFERENCE.md
 TESTS-COMPLETE.md
+
+# Internal docs
+CLAUDE.md
+GROWTH_TODO.md
+YOUTUBE_VIDEOS_INDEX.md
+DEPLOY.md
+.vercel-deploy-trigger
+wrangler.toml
