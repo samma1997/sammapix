@@ -1,12 +1,16 @@
-# SammaPix
+<p align="center">
+  <img src="public/og-image.png" alt="SammaPix — Free Image Tools for Photographers" width="100%">
+</p>
 
-**27 free browser-based image tools — compress, convert, rename with AI, and more.**
+<h1 align="center">SammaPix</h1>
+<p align="center"><strong>27 free browser-based image tools — compress, convert, rename with AI, and more.</strong></p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://typescriptlang.org)
-[![Live Site](https://img.shields.io/badge/Live-sammapix.com-black)](https://www.sammapix.com)
-[![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-coming_soon-gray)](https://www.sammapix.com)
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-black.svg" alt="MIT License"></a>
+  <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"></a>
+  <a href="https://typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript"></a>
+  <a href="https://www.sammapix.com"><img src="https://img.shields.io/badge/Live-sammapix.com-6366f1" alt="Live Site"></a>
+</p>
 
 ---
 
