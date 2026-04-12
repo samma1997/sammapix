@@ -79,19 +79,18 @@ JSON, NIENT'ALTRO:
         const channel = hasLinkedin ? "LinkedIn" : hasEmail ? "Email" : "Web";
 
         let draftEmail = "";
-        if (model && (hasEmail || hasLinkedin)) {
+        if (model) {
           try {
-            const result = await model.generateContent(`Scrivi un messaggio di outreach breve (50-80 parole) per chiedere a ${target.contactName || "l'autore"} di includere SammaPix nel loro articolo "${target.articleTitle || "roundup"}".
+            const format = hasLinkedin ? "LinkedIn message (40-60 words)" : hasEmail ? "Email with subject line + body (50-80 words)" : "Comment or email (50-80 words) to leave on their article or send via contact form";
+            const result = await model.generateContent(`Write a short outreach message in ENGLISH to ask ${target.contactName || "the author"} to include SammaPix in their article "${target.articleTitle || "roundup"}".
 
-SammaPix: 27 browser-based image tools (compress, resize, convert, remove bg, passport photo, AI rename). Tutto gratis, client-side, zero upload.
+SammaPix: 27 browser-based image tools (compress, resize, convert, remove bg, passport photo, AI rename). Free, client-side, zero upload.
 
-Tono: professionale ma amichevole. Offrire VALORE (dati, test, screenshot).
-NON supplicare. NON essere generico.
+Format: ${format}
+Tone: professional but friendly. Offer VALUE (benchmark data, screenshots, test results).
+Do NOT beg. Do NOT be generic. Mention something specific from THEIR article.
 
-Se è LinkedIn: messaggio corto (40-60 parole).
-Se è email: subject + body.
-
-SOLO il messaggio:`);
+ONLY the message:`);
             draftEmail = result.response.text().trim();
           } catch {}
         }
@@ -100,7 +99,7 @@ SOLO il messaggio:`);
           date: today, type: "outreach", priority: 9,
           title: `\u{1F4E7} Outreach: ${target.siteName}${target.contactName ? ` (${target.contactName})` : ""}`,
           description: `${channel} — ${target.articleTitle || target.articleUrl || "roundup"}`,
-          actionUrl: hasLinkedin || (hasEmail ? `mailto:${hasEmail}` : target.articleUrl) || undefined,
+          actionUrl: hasLinkedin || (hasEmail ? `mailto:${hasEmail}` : null) || target.articleUrl || undefined,
           draftText: draftEmail || undefined,
         });
       }
