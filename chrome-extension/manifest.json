@@ -4,6 +4,7 @@
   "version": "2.0.0",
   "description": "Scan, convert, compress, and clean images on any webpage. Save as JPG/PNG/WebP, strip EXIF/GPS, batch download. 100% client-side.",
   "permissions": ["contextMenus", "activeTab", "scripting", "storage", "sidePanel"],
+  "host_permissions": ["<all_urls>"],
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",
@@ -21,12 +22,5 @@
   },
   "background": {
     "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content-script.js"],
-      "run_at": "document_idle"
-    }
-  ]
+  }
 }
