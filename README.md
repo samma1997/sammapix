@@ -6,6 +6,7 @@
   <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"></a>
   <a href="https://typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript"></a>
   <a href="https://www.sammapix.com"><img src="https://img.shields.io/badge/Live-sammapix.com-6366f1" alt="Live Site"></a>
+  <a href="https://github.com/samma1997/sammapix/actions/workflows/ci.yml"><img src="https://github.com/samma1997/sammapix/actions/workflows/ci.yml/badge.svg" alt="Build"></a>
 </p>
 
 ---
