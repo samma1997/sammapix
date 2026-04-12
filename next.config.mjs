@@ -86,8 +86,7 @@ const nextConfig = {
         headers: [
           // Anti-scraping: prevent Google/Bing from caching page copies
           { key: "X-Robots-Tag", value: "noarchive" },
-          // X-Frame-Options removed — using CSP frame-ancestors instead (supports multiple origins)
-          // Allows embedding from lucasammarco.com for portfolio showcase
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           {
             key: "Referrer-Policy",
