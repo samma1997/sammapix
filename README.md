@@ -19,7 +19,7 @@ SammaPix is a free, open-source image optimization platform that runs entirely i
 Built for content creators, developers, and anyone who works with images at scale.
 
 <p align="center">
-  <img src="public/screenshots/tools-grid.png" alt="SammaPix Tools" width="100%">
+  <img src="public/screenshots/hero-dark.png" alt="SammaPix — AI Photo Workflow" width="100%">
 </p>
 
 **Key features:**
@@ -95,14 +95,18 @@ Built for content creators, developers, and anyone who works with images at scal
 
 ---
 
+<p align="center">
+  <img src="public/screenshots/tools-dark.png" alt="27 Free Tools" width="100%">
+</p>
+
 <details>
-<summary><strong>Compress Tool</strong></summary>
-<img src="public/screenshots/compress-tool.png" alt="Compress Tool" width="100%">
+<summary><strong>Dashboard</strong></summary>
+<img src="public/screenshots/dashboard.png" alt="SammaPix Dashboard" width="100%">
 </details>
 
 <details>
-<summary><strong>Pricing</strong></summary>
-<img src="public/screenshots/pricing.png" alt="Pricing" width="100%">
+<summary><strong>AI Organize</strong></summary>
+<img src="public/screenshots/ai-organize.png" alt="AI Organize Tool" width="100%">
 </details>
 
 ---
