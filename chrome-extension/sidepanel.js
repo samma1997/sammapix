@@ -38,6 +38,64 @@ document.getElementById("b-png").addEventListener("click", function() { batchDl(
 document.getElementById("b-webp").addEventListener("click", function() { batchDl("image/webp","webp",0.9); });
 document.getElementById("b-clr").addEventListener("click", function() { selected.clear(); renderGrid(); });
 
+// ═══ DEDUPLICATION ═══
+function getBaseUrl(url) {
+  try {
+    var u = new URL(url);
+    var path = u.pathname;
+    // Strip common CDN resize suffixes from filename
+    path = path.replace(/-\d+x\d+(?=\.\w+$)/, "");   // -300x200.jpg
+    path = path.replace(/_thumb(?=\.\w+$)/, "");       // _thumb.jpg
+    path = path.replace(/-scaled(?=\.\w+$)/, "");      // -scaled.jpg
+    // Strip all query params related to sizing
+    u.search = "";
+    return u.origin + path;
+  } catch(e) {
+    // Fallback: strip query string and size patterns
+    return url.split("?")[0]
+      .replace(/-\d+x\d+(?=\.\w+$)/, "")
+      .replace(/_thumb(?=\.\w+$)/, "")
+      .replace(/-scaled(?=\.\w+$)/, "");
+  }
+}
+
+function extractWidth(url) {
+  // Try to extract width from URL params or filename patterns
+  var wMatch;
+  // ?w=800, &w=800, ?width=800, &width=800, ?resize=800
+  wMatch = url.match(/[?&](?:w|width|resize)=(\d+)/i);
+  if (wMatch) return parseInt(wMatch[1]);
+  // -800x600 in filename
+  wMatch = url.match(/-(\d+)x\d+(?=\.\w+)/);
+  if (wMatch) return parseInt(wMatch[1]);
+  // srcset descriptor like " 2x" parsed from natural width
+  return 0;
+}
+
+function deduplicateImages(raw) {
+  var groups = {};
+  for (var i = 0; i < raw.length; i++) {
+    var img = raw[i];
+    var base = getBaseUrl(img.src);
+    if (!groups[base]) {
+      groups[base] = img;
+    } else {
+      // Keep the one with the largest dimensions
+      var existingW = groups[base].w || extractWidth(groups[base].src);
+      var newW = img.w || extractWidth(img.src);
+      if (newW > existingW) {
+        groups[base] = img;
+      }
+    }
+  }
+  var result = [];
+  var keys = Object.keys(groups);
+  for (var k = 0; k < keys.length; k++) {
+    result.push(groups[keys[k]]);
+  }
+  return result;
+}
+
 // ═══ SCAN ═══
 async function doScan() {
   $hcount.innerHTML = "<b>Scanning...</b>";
@@ -119,6 +177,9 @@ async function doScan() {
     images = [];
     selected.clear();
     filter = "all";
+
+    // Deduplicate: same image in different sizes/srcset
+    raw = deduplicateImages(raw);
 
     if (raw.length === 0) {
       $gw.innerHTML = '<div class="empty"><div class="empty-i">📭</div><h3>No images found</h3><p>Try a page with photos or graphics.</p><button class="scan-btn" id="scan-retry">Scan Again</button></div>';
@@ -352,10 +413,21 @@ function renderGrid() {
     html += '</div></div></div>';
   }
   html += '</div>';
-  $gw.innerHTML = html;
+  var newGw = $gw.cloneNode(false);
+  newGw.innerHTML = html;
+  $gw.parentNode.replaceChild(newGw, $gw);
+  $gw = newGw;
   $gw.addEventListener("click", handleGridClick);
   $bat.className = selected.size > 0 ? "batch on" : "batch";
   $batc.textContent = selected.size + " selected";
+  // Add spacer after batch bar so cards aren't hidden behind it
+  var oldSpacer = document.querySelector(".batch-spacer");
+  if (oldSpacer) oldSpacer.remove();
+  if (selected.size > 0) {
+    var spacer = document.createElement("div");
+    spacer.className = "batch-spacer";
+    $gw.parentNode.insertBefore(spacer, $gw);
+  }
 }
 
 function handleGridClick(e) {
@@ -384,10 +456,29 @@ function buildFilters() {
     var key = keys[k];
     html += '<button class="fb' + (filter === key ? " on" : "") + '" data-filt="' + key + '">' + (key === "all" ? "All" : key) + ' (' + counts[key] + ')</button>';
   }
-  $fbar.innerHTML = html;
+  var visibleList = filter === "all" ? images : images.filter(function(i) { return i.fmt === filter; });
+  var allSelected = visibleList.length > 0 && visibleList.every(function(i) { return selected.has(i.src); });
+  html += '<button class="fb-selall" id="sel-all">' + (allSelected ? "Deselect All" : "Select All") + '</button>';
+
+  // Replace innerHTML and clone to remove old listeners
+  var newFbar = $fbar.cloneNode(false);
+  newFbar.innerHTML = html;
+  $fbar.parentNode.replaceChild(newFbar, $fbar);
+  $fbar = newFbar;
+
   $fbar.addEventListener("click", function(e) {
     var btn = e.target.closest("[data-filt]");
-    if (btn) { filter = btn.getAttribute("data-filt"); renderGrid(); buildFilters(); }
+    if (btn) { filter = btn.getAttribute("data-filt"); renderGrid(); buildFilters(); return; }
+    if (e.target.id === "sel-all" || e.target.closest("#sel-all")) {
+      var visible = filter === "all" ? images : images.filter(function(i) { return i.fmt === filter; });
+      var allSel = visible.length > 0 && visible.every(function(i) { return selected.has(i.src); });
+      if (allSel) {
+        visible.forEach(function(i) { selected.delete(i.src); });
+      } else {
+        visible.forEach(function(i) { selected.add(i.src); });
+      }
+      renderGrid(); buildFilters();
+    }
   });
 }
 
@@ -399,7 +490,22 @@ function renderExif() {
     return;
   }
 
-  var html = '<div class="elist">';
+  // Count images with EXIF
+  var withExif = 0, withGps = 0, clean = 0;
+  for (var c = 0; c < images.length; c++) {
+    var ex = exifCache[images[c].src];
+    if (ex && !ex.unknown && ex.hasExif) { withExif++; if (ex.hasGps) withGps++; }
+    else if (ex && !ex.unknown && !ex.hasExif) { clean++; }
+  }
+
+  var html = '<div style="padding:10px 10px 0;display:flex;gap:6px;flex-wrap:wrap;align-items:center">';
+  if (withExif > 0) html += '<span style="font-size:11px;color:#991b1b;font-weight:600;background:#fef2f2;padding:4px 10px;border-radius:10px">' + withExif + ' with metadata</span>';
+  if (withGps > 0) html += '<span style="font-size:11px;color:#92400e;font-weight:600;background:#fff3cd;padding:4px 10px;border-radius:10px">' + withGps + ' with GPS</span>';
+  if (clean > 0) html += '<span style="font-size:11px;color:#065f46;font-weight:600;background:#d1fae5;padding:4px 10px;border-radius:10px">' + clean + ' clean</span>';
+  html += '<button id="clean-all-btn" style="margin-left:auto;padding:6px 14px;background:#1c1c1e;color:#fff;border:none;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer">Clean All</button>';
+  html += '</div>';
+
+  html += '<div class="elist">';
   var max = Math.min(images.length, 30);
   for (var i = 0; i < max; i++) {
     var img = images[i];
@@ -437,20 +543,45 @@ function renderExif() {
     html += '</div>';
   }
   html += '</div>';
-  $vexif.innerHTML = html;
+  // Clone to prevent listener accumulation
+  var newExif = $vexif.cloneNode(false);
+  newExif.innerHTML = html;
+  newExif.style.display = $vexif.style.display;
+  $vexif.parentNode.replaceChild(newExif, $vexif);
+  $vexif = newExif;
 
   $vexif.addEventListener("click", function(e) {
+    // Clean All button
+    if (e.target.id === "clean-all-btn" || e.target.closest("#clean-all-btn")) {
+      var allBtns = $vexif.querySelectorAll("[data-clean]");
+      var count = 0;
+      allBtns.forEach(function(btn) {
+        if (btn.disabled) return;
+        var src = btn.getAttribute("data-clean");
+        var idx = btn.getAttribute("data-idx");
+        setTimeout(function() { downloadImage(src, "image/jpeg", "jpg", 0.95); }, count * 400);
+        var w = document.getElementById("ew-" + idx);
+        if (w) { w.className = "exif-safe"; w.innerHTML = "\u2705 All metadata removed"; }
+        var fields = document.getElementById("exif-fields-" + idx);
+        if (fields) { fields.querySelectorAll(".exif-val").forEach(function(v) { v.className = "exif-val exif-removed"; }); }
+        btn.textContent = "\u2713 Cleaned";
+        btn.className = "ebtn done";
+        btn.disabled = true;
+        count++;
+      });
+      toast("Cleaning " + count + " images...");
+      return;
+    }
+
     var btn = e.target.closest("[data-clean]");
     if (!btn || btn.disabled) return;
     var src = btn.getAttribute("data-clean");
     var idx = btn.getAttribute("data-idx");
     downloadImage(src, "image/jpeg", "jpg", 0.95);
 
-    // Before/after effect
     var w = document.getElementById("ew-" + idx);
     if (w) { w.className = "exif-safe"; w.innerHTML = "\u2705 All metadata removed \u2014 clean copy downloaded"; }
 
-    // Strike through EXIF fields
     var fields = document.getElementById("exif-fields-" + idx);
     if (fields) {
       var items = fields.querySelectorAll(".exif-val");
@@ -471,7 +602,11 @@ function renderComp() {
     return;
   }
   var compressable = images.filter(function(i) { return i.fmt !== "SVG"; });
-  var html = '<div class="clist">';
+  var html = '<div style="padding:10px 10px 0;display:flex;align-items:center;justify-content:space-between">';
+  html += '<span style="font-size:12px;color:#8e8e93;font-weight:500">' + compressable.length + ' compressable images</span>';
+  html += '<button id="comp-all-btn" style="padding:6px 14px;background:#1c1c1e;color:#fff;border:none;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer">Compress All</button>';
+  html += '</div>';
+  html += '<div class="clist">';
   var max = Math.min(compressable.length, 30);
   for (var i = 0; i < max; i++) {
     var img = compressable[i];
@@ -484,9 +619,29 @@ function renderComp() {
     html += '</div><div class="cres" id="cr-' + i + '"></div></div>';
   }
   html += '</div>';
-  $vcomp.innerHTML = html;
+  // Clone to prevent listener accumulation
+  var newComp = $vcomp.cloneNode(false);
+  newComp.innerHTML = html;
+  newComp.style.display = $vcomp.style.display;
+  $vcomp.parentNode.replaceChild(newComp, $vcomp);
+  $vcomp = newComp;
 
   $vcomp.addEventListener("click", function(e) {
+    // Compress All
+    if (e.target.id === "comp-all-btn" || e.target.closest("#comp-all-btn")) {
+      var allBtns = $vcomp.querySelectorAll("[data-comp]");
+      var count = 0;
+      allBtns.forEach(function(btn) {
+        if (btn.disabled) return;
+        setTimeout(function() {
+          compressImage(btn.getAttribute("data-comp"), parseInt(btn.getAttribute("data-idx")), btn);
+        }, count * 600);
+        count++;
+      });
+      toast("Compressing " + count + " images...");
+      return;
+    }
+
     var btn = e.target.closest("[data-comp]");
     if (!btn || btn.disabled) return;
     compressImage(btn.getAttribute("data-comp"), parseInt(btn.getAttribute("data-idx")), btn);

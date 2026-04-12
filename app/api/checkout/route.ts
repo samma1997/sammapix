@@ -15,7 +15,7 @@ const ALLOWED_ORIGINS = [
 const TRIAL_DAYS = 7;
 
 // Founding member coupon - first 200 subscribers get 43% off forever
-const FOUNDING_COUPON_ID = "FOUNDING200";
+const FOUNDING_COUPON_ID = process.env.STRIPE_FOUNDING_COUPON_ID || "";
 const FOUNDING_MAX = 200;
 
 export async function POST(req: NextRequest) {

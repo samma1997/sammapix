@@ -59,3 +59,31 @@ reddit_create_app.js
 
 # automation scripts
 playwright-video-recorder-setup.js
+
+# strategy & cost docs
+ANALISI_COSTI_*.txt
+ANALISI_COSTI_*.md
+COST_ANALYSIS_*.txt
+COST_ANALYSIS_*.md
+README_COST_ANALYSIS.md
+EMAIL_STRATEGY_*.md
+README_EMAIL_STRATEGY.md
+SAMMAPIX_EMAIL_STRATEGY.md
+KEYWORD_STRATEGY_*.md
+LINK_BUILDING_STRATEGY_*.md
+MARKETING_CONTENT_PLAN.md
+SEO_KEYWORD_STRATEGY.md
+TOOL_KEYWORD_STRATEGY_*.md
+VIDEO_STRATEGY_*.md
+REDDIT_KARMA.md
+reddit-scrape-*.md
+
+# karma farming scripts & data
+public/karma.html
+scripts/fetch-karma-farming.mjs
+scripts/fix-karma-comments.mjs
+scripts/load-karma-*.mjs
+
+# marketing materials (internal)
+marketing/
+scripts/seed-competitors.ts
