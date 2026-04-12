@@ -1,239 +1,285 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth/options";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import {
-  AI_OPS_FREE_PER_DAY,
-  AI_OPS_PRO_PER_DAY,
-  GEMINI_MODEL,
-} from "@/lib/constants";
+import { GEMINI_MODEL } from "@/lib/constants";
 import { z } from "zod";
 import { incrWithTTL, getInt } from "@/lib/redis";
-import { getCreditBalance, deductCredit } from "@/lib/credits";
 
 // ── Request schema ──────────────────────────────────────────────────────────
 
-const RequestSchema = z.object({
-  imageBase64: z.string().max(10_000_000),
-  mimeType: z.enum(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"]),
+const ImageInputSchema = z.object({
+  url: z.string().url().max(2048),
+  filename: z.string().max(255).optional(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
 });
 
-// ── In-memory fallback ──────────────────────────────────────────────────────
+const RequestSchema = z.object({
+  images: z.array(ImageInputSchema).min(1).max(20),
+});
 
-const memoryUsage = new Map<string, number>();
+// ── Types ───────────────────────────────────────────────────────────────────
 
-function todayStr(): string {
-  return new Date().toISOString().split("T")[0];
+type ImageInput = z.infer<typeof ImageInputSchema>;
+
+type CategoryResult = {
+  url: string;
+  category: string;
+  confidence: number;
+  tags: string[];
+};
+
+// ── Rate limiting (per IP, per minute) ─────────────────────────────────────
+
+const RATE_LIMIT = 10; // requests per minute per IP
+const RATE_WINDOW_SECONDS = 60;
+
+// In-memory fallback when Redis is not configured.
+// Not reliable across cold starts — best-effort guard only.
+const memoryUsage = new Map<string, { count: number; expiresAt: number }>();
+
+function getRateLimitKey(ip: string): string {
+  // Floor to current minute bucket
+  const minuteBucket = Math.floor(Date.now() / 60_000);
+  return `categorize_rl:${ip}:${minuteBucket}`;
 }
 
-function getRateLimitKey(email: string): string {
-  return `ai_ops:${email}:${todayStr()}`;
-}
-
-async function checkAndIncrement(
-  email: string,
-  limit: number
+async function checkAndIncrementIP(
+  ip: string
 ): Promise<{ allowed: boolean; used: number; remaining: number }> {
-  const key = getRateLimitKey(email);
-  const ttl = 60 * 60 * 26;
+  const key = getRateLimitKey(ip);
 
+  // Try Redis first
   const current = await getInt(key);
   const usedBefore = current ?? 0;
 
-  if (usedBefore >= limit) {
+  if (usedBefore >= RATE_LIMIT) {
     return { allowed: false, used: usedBefore, remaining: 0 };
   }
 
-  const newValue = await incrWithTTL(key, ttl);
+  const newValue = await incrWithTTL(key, RATE_WINDOW_SECONDS);
 
   if (newValue !== null) {
     return {
       allowed: true,
       used: newValue,
-      remaining: Math.max(0, limit - newValue),
+      remaining: Math.max(0, RATE_LIMIT - newValue),
     };
   }
 
-  const memKey = key;
-  const memUsed = memoryUsage.get(memKey) ?? 0;
-  if (memUsed >= limit) {
-    return { allowed: false, used: memUsed, remaining: 0 };
+  // Redis unavailable — fallback to in-memory per-minute map
+  const now = Date.now();
+  const entry = memoryUsage.get(key);
+
+  if (entry && now < entry.expiresAt) {
+    if (entry.count >= RATE_LIMIT) {
+      return { allowed: false, used: entry.count, remaining: 0 };
+    }
+    entry.count += 1;
+    return {
+      allowed: true,
+      used: entry.count,
+      remaining: Math.max(0, RATE_LIMIT - entry.count),
+    };
   }
-  const memNew = memUsed + 1;
-  memoryUsage.set(memKey, memNew);
-  return {
-    allowed: true,
-    used: memNew,
-    remaining: Math.max(0, limit - memNew),
-  };
+
+  // New minute bucket — create entry
+  memoryUsage.set(key, { count: 1, expiresAt: now + RATE_WINDOW_SECONDS * 1000 });
+  return { allowed: true, used: 1, remaining: RATE_LIMIT - 1 };
 }
+
+// ── Heuristic fallback (used when Gemini fails for an individual image) ─────
+
+const HINTS: Array<{ keywords: string[]; category: string; tags: string[] }> = [
+  { keywords: ["screenshot", "screen", "capture", "snip", "grab"], category: "Screenshot", tags: ["screenshot", "ui"] },
+  { keywords: ["icon", "logo", "badge", "favicon", "symbol", "mark"], category: "Icon/Logo", tags: ["icon", "logo"] },
+  { keywords: ["portrait", "headshot", "selfie", "face", "avatar", "profile"], category: "Portrait", tags: ["person", "portrait"] },
+  { keywords: ["food", "meal", "dish", "recipe", "eat", "drink", "coffee", "pizza", "burger"], category: "Food", tags: ["food"] },
+  { keywords: ["landscape", "nature", "sky", "mountain", "beach", "sunset", "forest", "outdoor"], category: "Landscape", tags: ["landscape", "nature"] },
+  { keywords: ["building", "architecture", "house", "office", "city", "interior", "room"], category: "Architecture", tags: ["architecture"] },
+  { keywords: ["product", "shop", "store", "item", "buy", "sale", "ecommerce"], category: "Product", tags: ["product"] },
+];
+
+function guessCategory(image: ImageInput): { category: string; confidence: number; tags: string[] } {
+  const name = (image.filename ?? "").toLowerCase();
+  const w = image.width ?? 0;
+  const h = image.height ?? 0;
+
+  for (const hint of HINTS) {
+    if (hint.keywords.some((kw) => name.includes(kw))) {
+      return { category: hint.category, confidence: 55, tags: hint.tags };
+    }
+  }
+
+  // Dimension-based heuristics when filename gives no signal
+  if (w > 0 && h > 0) {
+    const ratio = w / h;
+
+    // Very square and small → likely icon
+    if (w <= 256 && h <= 256 && ratio > 0.8 && ratio < 1.25) {
+      return { category: "Icon/Logo", confidence: 40, tags: ["icon"] };
+    }
+    // Wide and short → likely landscape or screenshot
+    if (ratio > 1.6) {
+      return { category: "Landscape", confidence: 35, tags: ["wide", "landscape"] };
+    }
+    // Tall → likely portrait
+    if (ratio < 0.75) {
+      return { category: "Portrait", confidence: 35, tags: ["portrait"] };
+    }
+  }
+
+  return { category: "Other", confidence: 30, tags: ["unknown"] };
+}
+
+// ── Valid categories ─────────────────────────────────────────────────────────
+
+const VALID_CATEGORIES = [
+  "Portrait",
+  "Landscape",
+  "Food",
+  "Architecture",
+  "Product",
+  "Art/Design",
+  "Screenshot",
+  "Icon/Logo",
+  "Other",
+] as const;
+
+// ── Gemini prompt ───────────────────────────────────────────────────────────
+
+const CATEGORIZE_PROMPT = `Categorize this image into exactly ONE of these categories: Portrait, Landscape, Food, Architecture, Product, Art/Design, Screenshot, Icon/Logo, Other.
+Also provide a confidence score from 0 to 100 and 2-3 short descriptive tags (lowercase, single words or short hyphenated phrases).
+Respond with ONLY valid JSON, no markdown, no code blocks:
+{"category":"...","confidence":0,"tags":["...","..."]}`;
 
 // ── Route handler ───────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
-  // 1. Auth
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
+  // 1. Gemini API key guard — fail fast before any processing
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
     return NextResponse.json(
-      { error: "Authentication required", code: "UNAUTHENTICATED" },
-      { status: 401 }
+      { error: "AI service unavailable", code: "SERVICE_UNAVAILABLE" },
+      { status: 503 }
     );
   }
 
-  const email = session.user.email;
-  const isPro = (session.user as { plan?: string }).plan === "pro";
-  const dailyLimit = isPro ? AI_OPS_PRO_PER_DAY : AI_OPS_FREE_PER_DAY;
+  // 2. Rate limit by IP (10 req/min, no auth required — Chrome extension use)
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown";
 
-  // 2. Origin check
-  if (process.env.NODE_ENV === "production") {
-    const origin = req.headers.get("origin");
-    const allowedOrigins = [
-      "https://sammapix.com",
-      "https://www.sammapix.com",
-    ];
-    if (origin && !allowedOrigins.some((o) => origin === o)) {
-      return NextResponse.json({ error: "Forbidden", code: "FORBIDDEN_ORIGIN" }, { status: 403 });
-    }
+  const rateCheck = await checkAndIncrementIP(ip);
+
+  if (!rateCheck.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Try again in a minute.", code: "RATE_LIMITED" },
+      {
+        status: 429,
+        headers: {
+          "X-RateLimit-Limit": String(RATE_LIMIT),
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": "60",
+          "Retry-After": "60",
+        },
+      }
+    );
   }
 
-  // 3. Parse body
+  // 3. Parse and validate request body
   let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON", code: "INVALID_JSON" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid JSON", code: "INVALID_JSON" },
+      { status: 400 }
+    );
   }
 
   const parsed = RequestSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: "Invalid request", code: "VALIDATION_ERROR", details: parsed.error.flatten() },
+      {
+        error: "Invalid request",
+        code: "VALIDATION_ERROR",
+        details: parsed.error.flatten(),
+      },
       { status: 400 }
     );
   }
 
-  const { imageBase64 } = parsed.data;
+  const { images } = parsed.data;
 
-  // 4. Gemini API key guard
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json({ error: "AI service unavailable", code: "SERVICE_UNAVAILABLE" }, { status: 503 });
-  }
+  // 4. Call Gemini for each image sequentially (avoids flooding the API)
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
-  // 5. Rate limit check
-  const rateCheck = await checkAndIncrement(email, dailyLimit);
+  const results: CategoryResult[] = [];
 
-  let creditsUsed = 0;
-  let creditsRemaining = 0;
-
-  if (!rateCheck.allowed) {
-    const creditResult = await deductCredit(email, 1);
-
-    if (!creditResult.success) {
-      return NextResponse.json(
+  for (const image of images) {
+    try {
+      const result = await model.generateContent([
+        CATEGORIZE_PROMPT,
         {
-          error: "Daily limit reached. Buy more AI credits.",
-          code: "RATE_LIMITED",
-          remaining: 0,
-          limit: dailyLimit,
-          resetAt: "midnight UTC",
-          buyCreditsUrl: "/dashboard/credits",
-          creditsRemaining: 0,
-        },
-        {
-          status: 429,
-          headers: {
-            "X-RateLimit-Limit": String(dailyLimit),
-            "X-RateLimit-Remaining": "0",
-            "X-RateLimit-Reset": "daily-utc-midnight",
-            "Retry-After": "86400",
+          fileData: {
+            mimeType: "image/jpeg",
+            fileUri: image.url,
           },
-        }
-      );
-    }
-
-    creditsUsed = 1;
-    creditsRemaining = creditResult.remaining;
-  } else {
-    creditsRemaining = await getCreditBalance(email);
-  }
-
-  // 6. Resize image
-  let finalBase64 = imageBase64;
-  try {
-    const inputBuffer = Buffer.from(imageBase64, "base64");
-    const sharp = (await import("sharp")).default;
-    const resized = await sharp(inputBuffer)
-      .resize(512, 512, { fit: "inside", withoutEnlargement: true })
-      .jpeg({ quality: 75 })
-      .toBuffer();
-    finalBase64 = resized.toString("base64");
-  } catch {
-    // Use original if resize fails
-  }
-
-  // 7. Call Gemini
-  try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
-
-    const prompt = `Analyze this image and categorize it into exactly one category.
-
-Return ONLY valid JSON (no markdown, no code blocks, just raw JSON):
-{"category":"one of the categories below","confidence":0.95}
-
-Valid categories (use exactly these strings):
-- landscape
-- portrait
-- food
-- architecture
-- screenshot
-- document
-- product
-- animal
-- art
-- other
-
-Rules:
-- Pick the single best matching category
-- confidence is a number between 0 and 1
-- If unsure, use "other" with lower confidence`;
-
-    const result = await model.generateContent([
-      prompt,
-      { inlineData: { data: finalBase64, mimeType: "image/jpeg" as const } },
-    ]);
-
-    const text = result.response.text();
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error("Invalid AI response: no JSON found");
-
-    const aiResult = JSON.parse(jsonMatch[0]) as { category?: string; confidence?: number };
-
-    const validCategories = ["landscape", "portrait", "food", "architecture", "screenshot", "document", "product", "animal", "art", "other"];
-    const category = validCategories.includes(aiResult.category ?? "") ? aiResult.category! : "other";
-    const confidence = typeof aiResult.confidence === "number" ? Math.min(1, Math.max(0, aiResult.confidence)) : 0.5;
-
-    return NextResponse.json(
-      {
-        data: { category, confidence },
-        remaining: rateCheck.allowed ? rateCheck.remaining : 0,
-        limit: dailyLimit,
-        plan: isPro ? "pro" : "free",
-        ...(creditsUsed > 0 && { creditsUsed }),
-        creditsRemaining,
-      },
-      {
-        headers: {
-          "X-RateLimit-Limit": String(dailyLimit),
-          "X-RateLimit-Remaining": String(rateCheck.allowed ? rateCheck.remaining : 0),
-          "X-RateLimit-Reset": "daily-utc-midnight",
         },
-      }
-    );
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    console.error("[ai/categorize] Error:", message);
-    return NextResponse.json({ error: "AI processing failed", code: "AI_ERROR" }, { status: 500 });
+      ]);
+
+      const text = result.response.text();
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error("No JSON found in Gemini response");
+
+      const aiResult = JSON.parse(jsonMatch[0]) as {
+        category?: string;
+        confidence?: number;
+        tags?: unknown;
+      };
+
+      const category =
+        typeof aiResult.category === "string" &&
+        (VALID_CATEGORIES as readonly string[]).includes(aiResult.category)
+          ? aiResult.category
+          : "Other";
+
+      const confidence =
+        typeof aiResult.confidence === "number"
+          ? Math.max(0, Math.min(100, Math.round(aiResult.confidence)))
+          : 50;
+
+      const tags =
+        Array.isArray(aiResult.tags)
+          ? (aiResult.tags as unknown[])
+              .filter((t): t is string => typeof t === "string")
+              .slice(0, 3)
+          : [];
+
+      results.push({ url: image.url, category, confidence, tags });
+    } catch (err) {
+      // Gemini failed for this image — apply heuristic fallback rather than
+      // failing the entire batch
+      const fallback = guessCategory(image);
+      console.error(
+        "[ai/categorize] Gemini error for %s — using heuristic fallback: %s",
+        image.url,
+        err instanceof Error ? err.message : String(err)
+      );
+      results.push({ url: image.url, ...fallback });
+    }
   }
+
+  return NextResponse.json(
+    { results },
+    {
+      headers: {
+        "X-RateLimit-Limit": String(RATE_LIMIT),
+        "X-RateLimit-Remaining": String(rateCheck.remaining),
+        "X-RateLimit-Reset": "60",
+      },
+    }
+  );
 }

@@ -42,3 +42,132 @@ launch/package-lock.json
 
 # service account keys
 *-key.json
+
+# strategy docs (contain embedded secrets from Claude sessions)
+GOOGLE_ADS_STRATEGY.md
+MARKETING_90_DAY_PLAN.md
+MULTI_CHANNEL_STRATEGY.md
+COST_ANALYSIS_MONTHLY_2026.md
+ANALISI_COSTI_COMPLETA.txt
+COMPETITOR_ANALYSIS.md
+
+# reddit/karma data (TOS violation if public)
+karma_data.json
+reddit-scraping-results.json
+reddit-scraping-filtered.json
+reddit_create_app.js
+
+# automation scripts
+playwright-video-recorder-setup.js
+
+# strategy & cost docs
+ANALISI_COSTI_*.txt
+ANALISI_COSTI_*.md
+COST_ANALYSIS_*.txt
+COST_ANALYSIS_*.md
+README_COST_ANALYSIS.md
+EMAIL_STRATEGY_*.md
+README_EMAIL_STRATEGY.md
+SAMMAPIX_EMAIL_STRATEGY.md
+KEYWORD_STRATEGY_*.md
+LINK_BUILDING_STRATEGY_*.md
+MARKETING_CONTENT_PLAN.md
+SEO_KEYWORD_STRATEGY.md
+TOOL_KEYWORD_STRATEGY_*.md
+VIDEO_STRATEGY_*.md
+REDDIT_KARMA.md
+reddit-scrape-*.md
+
+# karma farming scripts & data
+public/karma.html
+scripts/fetch-karma-farming.mjs
+scripts/fix-karma-comments.mjs
+scripts/load-karma-*.mjs
+
+# marketing materials (internal)
+marketing/
+scripts/seed-competitors.ts
+
+# Internal docs (not for public repo)
+*.txt
+!public/**/*.txt
+ACTION_ITEMS.*
+AUDIT-REPORT.*
+DELIVERY_SUMMARY.*
+DEPLOYMENT_CHECKLIST.*
+IMPLEMENTATION_*.*
+INDEX*.md
+LAUNCH.md
+MAINTENANCE.md
+METRICS_DASHBOARD.*
+PROGRESS.md
+ROADMAP-IDEAS.md
+START_HERE*.md
+SAMMAPIX_CONTEXT.md
+SESSION_EXPORT_*.md
+
+# Research & strategy docs
+*RESEARCH*.md
+*STRATEGY*.md
+*ANALYSIS*.md
+*OPTIMIZATION*.md
+*CHECKLIST*.md
+*SUMMARY*.md
+*REFERENCE*.md
+*PLAYBOOK*.md
+*GUIDE*.md
+*PLAN*.md
+*QUICK_START*.md
+*CONTENT_PLAN*.md
+*CONTENT_TEMPLATES*.md
+
+# SEO/GEO/Ads internal docs
+SEO_*.md
+GEO_*.md
+META_*.md
+GOOGLE*.md
+README-GOOGLE-ADS.md
+README_SOCIAL_RESEARCH.md
+README_YOUTUBE_VIDEOS.md
+REDDIT_POSTING_SCHEDULE.md
+BLOG_INTERNAL_LINKS_AUDIT.md
+DIRECTORY_SUBMISSIONS.md
+OUTREACH_PLAYBOOK.md
+EMERGING_OPPORTUNITIES.md
+COMPETITIVE_LANDSCAPE_RESEARCH.md
+
+# Email internal docs
+EMAIL_*.md
+
+# Google Ads files
+google-ads-*.md
+google-ads-*.txt
+
+# Test results
+test-results/
+
+# Launch/tools folders
+launch/
+tools/
+
+# Misc junk
+youtube-bulk-uploader.js
+verify-tests.sh
+reddit-wp-*.md
+FILE-MANIFEST.txt
+FILES_MODIFIED_AND_CREATED.txt
+CSS_SELECTOR_REFERENCE.md
+BROWSER_VIDEO_PROCESSING_RESEARCH.md
+MARKET-RESEARCH-PRICING.md
+COMPREHENSIVE_SOCIAL_MEDIA_POSTING_API_RESEARCH.md
+SOCIAL_MEDIA_API_RESEARCH_COMPLETE.txt
+SOCIAL_PLATFORMS_QUICK_REFERENCE.csv
+PLATFORM_SELECTION_DECISION_TREE.md
+API_USAGE_QUOTA_TRACKING.csv
+COST_SUMMARY_QUICK_REFERENCE.txt
+MONTHLY_COST_SIMULATOR.txt
+GROWTH_DASHBOARD_COST_ACTION_PLAN.md
+E2E-TESTS-SUMMARY.md
+INDEX-E2E-TESTS.md
+PLAYWRIGHT-QUICK-REFERENCE.md
+TESTS-COMPLETE.md

@@ -13,9 +13,9 @@ export async function checkGrowthAuth(): Promise<boolean> {
   // Check growth cookie first (works on subdomain)
   const cookieStore = await cookies();
   const growthSession = cookieStore.get("growth_session")?.value;
-  const expectedSecret = process.env.GROWTH_SESSION_SECRET || "REDACTED";
+  const expectedSecret = process.env.GROWTH_SESSION_SECRET;
 
-  if (growthSession === expectedSecret) {
+  if (expectedSecret && growthSession === expectedSecret) {
     return true;
   }
 

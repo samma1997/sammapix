@@ -1,24 +1,15 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
-import path from "path";
-import fs from "fs";
 
 let _client: BetaAnalyticsDataClient | null = null;
 
 function getClient(): BetaAnalyticsDataClient {
   if (!_client) {
-    // Option 1: GOOGLE_SERVICE_ACCOUNT_JSON env var (for Vercel/production)
     const jsonEnv = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
-    if (jsonEnv) {
-      const credentials = JSON.parse(jsonEnv);
-      _client = new BetaAnalyticsDataClient({ credentials });
-    } else {
-      // Option 2: Local key file (for development)
-      const keyPath = path.join(process.cwd(), "sammapix-analytics-key.json");
-      if (!fs.existsSync(keyPath)) {
-        throw new Error("GA4 credentials not found. Set GOOGLE_SERVICE_ACCOUNT_JSON env var or place sammapix-analytics-key.json in project root.");
-      }
-      _client = new BetaAnalyticsDataClient({ keyFilename: keyPath });
+    if (!jsonEnv) {
+      throw new Error("GA4 credentials not found. Set GOOGLE_SERVICE_ACCOUNT_JSON env var.");
     }
+    const credentials = JSON.parse(jsonEnv);
+    _client = new BetaAnalyticsDataClient({ credentials });
   }
   return _client;
 }

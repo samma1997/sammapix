@@ -226,7 +226,7 @@ export async function middleware(request: NextRequest) {
 
     // Check for growth session cookie
     const growthSession = request.cookies.get("growth_session")?.value;
-    const expectedSecret = process.env.GROWTH_SESSION_SECRET || "REDACTED";
+    const expectedSecret = process.env.GROWTH_SESSION_SECRET;
     if (growthSession !== expectedSecret) {
       // Not authenticated — show login page
       if (!pathname.startsWith("/growth-login")) {
