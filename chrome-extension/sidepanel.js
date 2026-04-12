@@ -3,6 +3,23 @@ var images = [];
 var selected = new Set();
 var filter = "all";
 var currentTab = "dl";
+var categoryData = {}; // src -> category
+var catFilter = "all";
+var isCategorizing = false;
+var googleUser = null; // { email, name, picture }
+
+// ═══ CATEGORY DEFINITIONS ═══
+var CATEGORIES = {
+  "Portrait":      { color: "#3b82f6", bg: "rgba(59,130,246,.12)" },
+  "Landscape":     { color: "#22c55e", bg: "rgba(34,197,94,.12)" },
+  "Food":          { color: "#f97316", bg: "rgba(249,115,22,.12)" },
+  "Architecture":  { color: "#64748b", bg: "rgba(100,116,139,.12)" },
+  "Product":       { color: "#a855f7", bg: "rgba(168,85,247,.12)" },
+  "Art/Design":    { color: "#ec4899", bg: "rgba(236,72,153,.12)" },
+  "Screenshot":    { color: "#6b7280", bg: "rgba(107,114,128,.12)" },
+  "Icon/Logo":     { color: "#f59e0b", bg: "rgba(245,158,11,.12)" },
+  "Other":         { color: "#a3a3a3", bg: "rgba(163,163,163,.12)" }
+};
 
 // ═══ DOM REFS ═══
 var $gw = document.getElementById("gw");
@@ -13,22 +30,110 @@ var $batc = document.getElementById("batc");
 var $vdl = document.getElementById("v-dl");
 var $vexif = document.getElementById("v-exif");
 var $vcomp = document.getElementById("v-comp");
+var $vai = document.getElementById("v-ai");
+var $userArea = document.getElementById("user-area");
+var $userPopup = document.getElementById("user-popup");
+
+// ═══ GOOGLE SIGN-IN ═══
+function initAuth() {
+  // Check stored user
+  chrome.storage.local.get(["sammapix_user"], function(result) {
+    if (result.sammapix_user) {
+      googleUser = result.sammapix_user;
+      renderUserAvatar();
+    }
+  });
+}
+
+function googleSignIn() {
+  chrome.identity.getAuthToken({ interactive: true }, function(token) {
+    if (chrome.runtime.lastError || !token) {
+      toast("Sign-in cancelled");
+      return;
+    }
+    // Fetch user info
+    fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+      headers: { Authorization: "Bearer " + token }
+    }).then(function(r) { return r.json(); }).then(function(info) {
+      googleUser = {
+        email: info.email || "",
+        name: info.name || info.email || "",
+        picture: info.picture || ""
+      };
+      chrome.storage.local.set({ sammapix_user: googleUser });
+      renderUserAvatar();
+      toast("Signed in as " + googleUser.email);
+      // Re-render AI tab if visible
+      if (currentTab === "ai") renderAiSort();
+    }).catch(function() {
+      toast("Could not fetch profile");
+    });
+  });
+}
+
+function googleSignOut() {
+  chrome.identity.getAuthToken({ interactive: false }, function(token) {
+    if (token) {
+      chrome.identity.removeCachedAuthToken({ token: token });
+    }
+    googleUser = null;
+    chrome.storage.local.remove(["sammapix_user"]);
+    renderUserAvatar();
+    $userPopup.className = "user-info-popup";
+    toast("Signed out");
+    if (currentTab === "ai") renderAiSort();
+  });
+}
+
+function renderUserAvatar() {
+  if (googleUser && googleUser.picture) {
+    $userArea.innerHTML = '<img class="user-avatar" id="avatar-btn" src="' + esc(googleUser.picture) + '" title="' + esc(googleUser.email) + '"/>';
+    document.getElementById("avatar-btn").addEventListener("click", toggleUserPopup);
+  } else if (googleUser && googleUser.email) {
+    var initials = googleUser.name ? googleUser.name.charAt(0).toUpperCase() : "U";
+    $userArea.innerHTML = '<div class="user-avatar" id="avatar-btn" style="display:flex;align-items:center;justify-content:center;background:#6366f1;color:#fff;font-size:11px;font-weight:700">' + initials + '</div>';
+    document.getElementById("avatar-btn").addEventListener("click", toggleUserPopup);
+  } else {
+    $userArea.innerHTML = "";
+  }
+}
+
+function toggleUserPopup() {
+  if ($userPopup.className.indexOf("on") > -1) {
+    $userPopup.className = "user-info-popup";
+  } else {
+    $userPopup.innerHTML = '<div class="user-info-name">' + esc(googleUser.name || "") + '</div><div class="user-info-email">' + esc(googleUser.email || "") + '</div><button class="signout-btn" id="signout-btn">Sign Out</button>';
+    $userPopup.className = "user-info-popup on";
+    document.getElementById("signout-btn").addEventListener("click", function() { googleSignOut(); });
+  }
+}
+
+// Close popup on outside click
+document.addEventListener("click", function(e) {
+  if (!e.target.closest("#user-popup") && !e.target.closest("#avatar-btn")) {
+    $userPopup.className = "user-info-popup";
+  }
+});
 
 // ═══ TAB SWITCHING — segmented control ═══
 document.getElementById("tab-dl").addEventListener("click", function() { switchTab("dl"); });
 document.getElementById("tab-exif").addEventListener("click", function() { switchTab("exif"); });
 document.getElementById("tab-comp").addEventListener("click", function() { switchTab("comp"); });
+document.getElementById("tab-ai").addEventListener("click", function() { switchTab("ai"); });
 
 function switchTab(t) {
   currentTab = t;
   document.getElementById("tab-dl").className = t === "dl" ? "seg-btn on" : "seg-btn";
   document.getElementById("tab-exif").className = t === "exif" ? "seg-btn on" : "seg-btn";
   document.getElementById("tab-comp").className = t === "comp" ? "seg-btn on" : "seg-btn";
+  document.getElementById("tab-ai").className = t === "ai" ? "seg-btn on" : "seg-btn";
   $vdl.style.display = t === "dl" ? "" : "none";
   $vexif.style.display = t === "exif" ? "" : "none";
   $vcomp.style.display = t === "comp" ? "" : "none";
+  $vai.style.display = t === "ai" ? "" : "none";
   if (t === "exif") renderExif();
   if (t === "comp") renderComp();
+  if (t === "ai") renderAiSort();
 }
 
 // ═══ BUTTONS ═══
@@ -43,15 +148,12 @@ function getBaseUrl(url) {
   try {
     var u = new URL(url);
     var path = u.pathname;
-    // Strip common CDN resize suffixes from filename
-    path = path.replace(/-\d+x\d+(?=\.\w+$)/, "");   // -300x200.jpg
-    path = path.replace(/_thumb(?=\.\w+$)/, "");       // _thumb.jpg
-    path = path.replace(/-scaled(?=\.\w+$)/, "");      // -scaled.jpg
-    // Strip all query params related to sizing
+    path = path.replace(/-\d+x\d+(?=\.\w+$)/, "");
+    path = path.replace(/_thumb(?=\.\w+$)/, "");
+    path = path.replace(/-scaled(?=\.\w+$)/, "");
     u.search = "";
     return u.origin + path;
   } catch(e) {
-    // Fallback: strip query string and size patterns
     return url.split("?")[0]
       .replace(/-\d+x\d+(?=\.\w+$)/, "")
       .replace(/_thumb(?=\.\w+$)/, "")
@@ -60,15 +162,11 @@ function getBaseUrl(url) {
 }
 
 function extractWidth(url) {
-  // Try to extract width from URL params or filename patterns
   var wMatch;
-  // ?w=800, &w=800, ?width=800, &width=800, ?resize=800
   wMatch = url.match(/[?&](?:w|width|resize)=(\d+)/i);
   if (wMatch) return parseInt(wMatch[1]);
-  // -800x600 in filename
   wMatch = url.match(/-(\d+)x\d+(?=\.\w+)/);
   if (wMatch) return parseInt(wMatch[1]);
-  // srcset descriptor like " 2x" parsed from natural width
   return 0;
 }
 
@@ -80,7 +178,6 @@ function deduplicateImages(raw) {
     if (!groups[base]) {
       groups[base] = img;
     } else {
-      // Keep the one with the largest dimensions
       var existingW = groups[base].w || extractWidth(groups[base].src);
       var newW = img.w || extractWidth(img.src);
       if (newW > existingW) {
@@ -119,7 +216,6 @@ async function doScan() {
         var m = {};
         var list = [];
 
-        // <img> tags
         var imgs = document.querySelectorAll("img");
         for (var i = 0; i < imgs.length; i++) {
           var el = imgs[i];
@@ -131,7 +227,6 @@ async function doScan() {
           list.push({ src: s, w: el.naturalWidth || Math.round(r.width), h: el.naturalHeight || Math.round(r.height), alt: el.alt || "" });
         }
 
-        // CSS backgrounds
         var els = document.querySelectorAll("div,section,header,footer,a,figure,article,main,aside,li,span");
         for (var j = 0; j < els.length; j++) {
           try {
@@ -146,7 +241,6 @@ async function doScan() {
           } catch(e) {}
         }
 
-        // srcset
         var sources = document.querySelectorAll("picture source, img[srcset]");
         for (var k = 0; k < sources.length; k++) {
           var srcset = sources[k].srcset;
@@ -160,7 +254,6 @@ async function doScan() {
           }
         }
 
-        // video poster
         var videos = document.querySelectorAll("video[poster]");
         for (var v = 0; v < videos.length; v++) {
           var ps = videos[v].poster;
@@ -177,12 +270,13 @@ async function doScan() {
     images = [];
     selected.clear();
     filter = "all";
+    categoryData = {};
+    catFilter = "all";
 
-    // Deduplicate: same image in different sizes/srcset
     raw = deduplicateImages(raw);
 
     if (raw.length === 0) {
-      $gw.innerHTML = '<div class="empty"><div class="empty-i">📭</div><h3>No images found</h3><p>Try a page with photos or graphics.</p><button class="scan-btn" id="scan-retry">Scan Again</button></div>';
+      $gw.innerHTML = '<div class="empty"><div class="empty-i">&#x1F4ED;</div><h3>No images found</h3><p>Try a page with photos or graphics.</p><button class="scan-btn" id="scan-retry">Scan Again</button></div>';
       document.getElementById("scan-retry").addEventListener("click", function() { doScan(); });
       $hcount.innerHTML = '<span>No images</span> <button class="rescan-btn" id="rescan-h">Rescan</button>';
       document.getElementById("rescan-h").addEventListener("click", function() { doScan(); });
@@ -200,7 +294,6 @@ async function doScan() {
     renderGrid();
     buildFilters();
 
-    // Try reading EXIF for first 20 images in background
     readExifBatch();
 
   } catch (err) {
@@ -208,7 +301,7 @@ async function doScan() {
   }
 }
 
-// ═══ EXIF READER — tries to read real EXIF data ═══
+// ═══ EXIF READER ═══
 var exifCache = {};
 
 function readExifBatch() {
@@ -227,7 +320,6 @@ function readExifFromUrl(url) {
     var exif = parseExifBasic(new Uint8Array(buf));
     exifCache[url] = exif;
   }).catch(function() {
-    // CORS blocked — mark as unknown
     exifCache[url] = { unknown: true };
   });
 }
@@ -235,120 +327,106 @@ function readExifFromUrl(url) {
 function parseExifBasic(data) {
   var result = { hasExif: false, fields: [] };
 
-  // Check JPEG SOI
-  if (data[0] !== 0xFF || data[1] !== 0xD8) return result;
+  if (data[0] === 0xFF && data[1] === 0xD8) {
+    var offset = 2;
+    while (offset < data.length - 4) {
+      if (data[offset] !== 0xFF) break;
+      var marker = data[offset + 1];
+      var len = (data[offset + 2] << 8) | data[offset + 3];
 
-  // Find APP1 marker (EXIF)
-  var offset = 2;
-  while (offset < data.length - 4) {
-    if (data[offset] !== 0xFF) break;
-    var marker = data[offset + 1];
-    var len = (data[offset + 2] << 8) | data[offset + 3];
+      if (marker === 0xE1) {
+        if (data[offset + 4] === 0x45 && data[offset + 5] === 0x78 &&
+            data[offset + 6] === 0x69 && data[offset + 7] === 0x66) {
+          result.hasExif = true;
 
-    if (marker === 0xE1) { // APP1 = EXIF
-      // Check "Exif\0\0"
-      if (data[offset + 4] === 0x45 && data[offset + 5] === 0x78 &&
-          data[offset + 6] === 0x69 && data[offset + 7] === 0x66) {
-        result.hasExif = true;
+          var tiffStart = offset + 10;
+          var bigEndian = data[tiffStart] === 0x4D;
 
-        // Parse TIFF header
-        var tiffStart = offset + 10;
-        var bigEndian = data[tiffStart] === 0x4D; // MM = big endian
-
-        function read16(pos) {
-          if (bigEndian) return (data[pos] << 8) | data[pos + 1];
-          return data[pos] | (data[pos + 1] << 8);
-        }
-        function read32(pos) {
-          if (bigEndian) return (data[pos] << 24) | (data[pos + 1] << 16) | (data[pos + 2] << 8) | data[pos + 3];
-          return data[pos] | (data[pos + 1] << 8) | (data[pos + 2] << 16) | (data[pos + 3] << 24);
-        }
-        function readStr(pos, length) {
-          var s = "";
-          for (var i = 0; i < length && pos + i < data.length; i++) {
-            var c = data[pos + i];
-            if (c === 0) break;
-            s += String.fromCharCode(c);
+          function read16(pos) {
+            if (bigEndian) return (data[pos] << 8) | data[pos + 1];
+            return data[pos] | (data[pos + 1] << 8);
           }
-          return s.trim();
-        }
+          function read32(pos) {
+            if (bigEndian) return (data[pos] << 24) | (data[pos + 1] << 16) | (data[pos + 2] << 8) | data[pos + 3];
+            return data[pos] | (data[pos + 1] << 8) | (data[pos + 2] << 16) | (data[pos + 3] << 24);
+          }
+          function readStr(pos, length) {
+            var s = "";
+            for (var i = 0; i < length && pos + i < data.length; i++) {
+              var c = data[pos + i];
+              if (c === 0) break;
+              s += String.fromCharCode(c);
+            }
+            return s.trim();
+          }
 
-        var ifdOffset = read32(tiffStart + 4);
-        var ifdPos = tiffStart + ifdOffset;
+          var ifdOffset = read32(tiffStart + 4);
+          var ifdPos = tiffStart + ifdOffset;
 
-        if (ifdPos + 2 < data.length) {
-          var entries = read16(ifdPos);
-          var gpsIfdPointer = 0;
+          if (ifdPos + 2 < data.length) {
+            var entries = read16(ifdPos);
+            var gpsIfdPointer = 0;
 
-          for (var e = 0; e < entries && e < 100; e++) {
-            var entryPos = ifdPos + 2 + (e * 12);
-            if (entryPos + 12 > data.length) break;
-            var tag = read16(entryPos);
-            var type = read16(entryPos + 2);
-            var count = read32(entryPos + 4);
-            var valueOffset = read32(entryPos + 8);
+            for (var e = 0; e < entries && e < 100; e++) {
+              var entryPos = ifdPos + 2 + (e * 12);
+              if (entryPos + 12 > data.length) break;
+              var tag = read16(entryPos);
+              var type = read16(entryPos + 2);
+              var count = read32(entryPos + 4);
+              var valueOffset = read32(entryPos + 8);
 
-            // Camera Make (0x010F)
-            if (tag === 0x010F) {
-              var strPos = count > 4 ? tiffStart + valueOffset : entryPos + 8;
-              var make = readStr(strPos, Math.min(count, 32));
-              if (make) result.fields.push({ icon: "\ud83d\udcf7", label: "Camera", value: make });
-            }
-            // Camera Model (0x0110)
-            if (tag === 0x0110) {
-              var strPos2 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
-              var model = readStr(strPos2, Math.min(count, 32));
-              if (model) result.fields.push({ icon: "\ud83d\udcf1", label: "Model", value: model });
-            }
-            // DateTime (0x0132)
-            if (tag === 0x0132) {
-              var strPos3 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
-              var dt = readStr(strPos3, 19);
-              if (dt) result.fields.push({ icon: "\ud83d\udcc5", label: "Date", value: dt });
-            }
-            // Software (0x0131)
-            if (tag === 0x0131) {
-              var strPos4 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
-              var sw = readStr(strPos4, Math.min(count, 32));
-              if (sw) result.fields.push({ icon: "\ud83d\udcbb", label: "Software", value: sw });
-            }
-            // ImageDescription (0x010E)
-            if (tag === 0x010E) {
-              var strPos5 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
-              var desc = readStr(strPos5, Math.min(count, 50));
-              if (desc) result.fields.push({ icon: "\ud83d\udcdd", label: "Description", value: desc });
-            }
-            // GPS IFD pointer (0x8825)
-            if (tag === 0x8825) {
-              gpsIfdPointer = valueOffset;
-            }
-            // XResolution (0x011A)
-            if (tag === 0x011A && type === 5) {
-              var rPos = tiffStart + valueOffset;
-              if (rPos + 8 <= data.length) {
-                var num = read32(rPos);
-                var den = read32(rPos + 4);
-                if (den > 0) result.fields.push({ icon: "\ud83d\udd0d", label: "DPI", value: Math.round(num/den) + "" });
+              if (tag === 0x010F) {
+                var strPos = count > 4 ? tiffStart + valueOffset : entryPos + 8;
+                var make = readStr(strPos, Math.min(count, 32));
+                if (make) result.fields.push({ icon: "\ud83d\udcf7", label: "Camera", value: make });
+              }
+              if (tag === 0x0110) {
+                var strPos2 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
+                var model = readStr(strPos2, Math.min(count, 32));
+                if (model) result.fields.push({ icon: "\ud83d\udcf1", label: "Model", value: model });
+              }
+              if (tag === 0x0132) {
+                var strPos3 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
+                var dt = readStr(strPos3, 19);
+                if (dt) result.fields.push({ icon: "\ud83d\udcc5", label: "Date", value: dt });
+              }
+              if (tag === 0x0131) {
+                var strPos4 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
+                var sw = readStr(strPos4, Math.min(count, 32));
+                if (sw) result.fields.push({ icon: "\ud83d\udcbb", label: "Software", value: sw });
+              }
+              if (tag === 0x010E) {
+                var strPos5 = count > 4 ? tiffStart + valueOffset : entryPos + 8;
+                var desc = readStr(strPos5, Math.min(count, 50));
+                if (desc) result.fields.push({ icon: "\ud83d\udcdd", label: "Description", value: desc });
+              }
+              if (tag === 0x8825) {
+                gpsIfdPointer = valueOffset;
+              }
+              if (tag === 0x011A && type === 5) {
+                var rPos = tiffStart + valueOffset;
+                if (rPos + 8 <= data.length) {
+                  var num = read32(rPos);
+                  var den = read32(rPos + 4);
+                  if (den > 0) result.fields.push({ icon: "\ud83d\udd0d", label: "DPI", value: Math.round(num/den) + "" });
+                }
               }
             }
-          }
 
-          // GPS data
-          if (gpsIfdPointer > 0) {
-            result.fields.push({ icon: "\ud83d\udccd", label: "GPS", value: "Location data found" });
-            result.hasGps = true;
+            if (gpsIfdPointer > 0) {
+              result.fields.push({ icon: "\ud83d\udccd", label: "GPS", value: "Location data found" });
+              result.hasGps = true;
+            }
           }
         }
+        break;
       }
-      break;
-    }
 
-    offset += 2 + len;
+      offset += 2 + len;
+    }
   }
 
-  // Check for PNG text chunks
   if (data[0] === 0x89 && data[1] === 0x50) {
-    // PNG — check for tEXt, iTXt chunks
     var pOffset = 8;
     while (pOffset + 8 < data.length) {
       var chunkLen = (data[pOffset] << 24) | (data[pOffset+1] << 16) | (data[pOffset+2] << 8) | data[pOffset+3];
@@ -393,7 +471,7 @@ function renderGrid() {
   var list = filter === "all" ? images : images.filter(function(i) { return i.fmt === filter; });
 
   if (list.length === 0) {
-    $gw.innerHTML = '<div class="empty"><div class="empty-i">📭</div><h3>No images match</h3></div>';
+    $gw.innerHTML = '<div class="empty"><div class="empty-i">&#x1F4ED;</div><h3>No images match</h3></div>';
     return;
   }
 
@@ -420,7 +498,6 @@ function renderGrid() {
   $gw.addEventListener("click", handleGridClick);
   $bat.className = selected.size > 0 ? "batch on" : "batch";
   $batc.textContent = selected.size + " selected";
-  // Add spacer after batch bar so cards aren't hidden behind it
   var oldSpacer = document.querySelector(".batch-spacer");
   if (oldSpacer) oldSpacer.remove();
   if (selected.size > 0) {
@@ -460,7 +537,6 @@ function buildFilters() {
   var allSelected = visibleList.length > 0 && visibleList.every(function(i) { return selected.has(i.src); });
   html += '<button class="fb-selall" id="sel-all">' + (allSelected ? "Deselect All" : "Select All") + '</button>';
 
-  // Replace innerHTML and clone to remove old listeners
   var newFbar = $fbar.cloneNode(false);
   newFbar.innerHTML = html;
   $fbar.parentNode.replaceChild(newFbar, $fbar);
@@ -482,7 +558,7 @@ function buildFilters() {
   });
 }
 
-// ═══ EXIF TAB — shows real metadata with before/after ═══
+// ═══ EXIF TAB ═══
 function renderExif() {
   if (images.length === 0) {
     $vexif.innerHTML = '<div class="empty"><div class="empty-i">\ud83d\udee1\ufe0f</div><h3>No images yet</h3><p>Scan a page first from the Download tab.</p><button class="scan-btn" id="scan-exif">Scan Now</button></div>';
@@ -490,7 +566,6 @@ function renderExif() {
     return;
   }
 
-  // Count images with EXIF
   var withExif = 0, withGps = 0, clean = 0;
   for (var c = 0; c < images.length; c++) {
     var ex = exifCache[images[c].src];
@@ -518,7 +593,6 @@ function renderExif() {
     html += '<div class="einfo"><div class="ename">' + esc(nm) + '</div>';
     html += '<div class="edet">' + img.fmt + (dim ? ' \u00b7 ' + dim : '') + '</div></div></div>';
 
-    // EXIF data display
     if (exif && !exif.unknown && exif.hasExif && exif.fields.length > 0) {
       html += '<div class="exif-data" id="exif-fields-' + i + '">';
       for (var f = 0; f < exif.fields.length; f++) {
@@ -535,7 +609,6 @@ function renderExif() {
     } else if (exif && !exif.unknown && !exif.hasExif) {
       html += '<div class="exif-none" id="ew-' + i + '">\u2705 No EXIF metadata detected \u2014 this image is clean</div>';
     } else {
-      // Unknown or not yet read
       html += '<div class="exif-warn" id="ew-' + i + '">\u2753 May contain GPS, camera, timestamps \u2014 download clean to be safe</div>';
     }
 
@@ -543,7 +616,6 @@ function renderExif() {
     html += '</div>';
   }
   html += '</div>';
-  // Clone to prevent listener accumulation
   var newExif = $vexif.cloneNode(false);
   newExif.innerHTML = html;
   newExif.style.display = $vexif.style.display;
@@ -551,7 +623,6 @@ function renderExif() {
   $vexif = newExif;
 
   $vexif.addEventListener("click", function(e) {
-    // Clean All button
     if (e.target.id === "clean-all-btn" || e.target.closest("#clean-all-btn")) {
       var allBtns = $vexif.querySelectorAll("[data-clean]");
       var count = 0;
@@ -619,7 +690,6 @@ function renderComp() {
     html += '</div><div class="cres" id="cr-' + i + '"></div></div>';
   }
   html += '</div>';
-  // Clone to prevent listener accumulation
   var newComp = $vcomp.cloneNode(false);
   newComp.innerHTML = html;
   newComp.style.display = $vcomp.style.display;
@@ -627,7 +697,6 @@ function renderComp() {
   $vcomp = newComp;
 
   $vcomp.addEventListener("click", function(e) {
-    // Compress All
     if (e.target.id === "comp-all-btn" || e.target.closest("#comp-all-btn")) {
       var allBtns = $vcomp.querySelectorAll("[data-comp]");
       var count = 0;
@@ -687,6 +756,402 @@ function compressImage(src, idx, btn) {
   img.src = src;
 }
 
+// ═══ AI SORT TAB ═══
+var aiMeta = {}; // src -> { confidence: 92, tags: ["nature","mountains"], source: "ai"|"heuristic" }
+
+// Heuristic fallback — used when API is unavailable
+function categorizeImageHeuristic(img) {
+  var src = img.src.toLowerCase();
+  var filename = "";
+  try { filename = new URL(src).pathname.split("/").pop().split("?")[0]; } catch(e) { filename = src.split("/").pop().split("?")[0]; }
+
+  var confidence = 60;
+
+  // Filename-based heuristics
+  if (/logo|icon|favicon|ico\b/.test(filename)) return { category: "Icon/Logo", confidence: 75 };
+  if (/screenshot|screen[-_]?cap|screen[-_]?shot/.test(filename)) return { category: "Screenshot", confidence: 75 };
+  if (/product|shop|item|sku|merch/.test(filename)) return { category: "Product", confidence: 70 };
+  if (/food|meal|dish|recipe|cook|restaurant|pizza|burger|cake|coffee/.test(filename)) return { category: "Food", confidence: 70 };
+  if (/architect|building|house|home|interior|room|kitchen|bathroom|exterior/.test(filename)) return { category: "Architecture", confidence: 70 };
+  if (/portrait|headshot|selfie|face|profile[-_]?pic/.test(filename)) return { category: "Portrait", confidence: 70 };
+  if (/landscape|panorama|scenic|nature|mountain|ocean|sunset|sunrise|beach|forest/.test(filename)) return { category: "Landscape", confidence: 70 };
+  if (/art|design|illustration|graphic|draw|paint|sketch|creative|mockup|ui[-_]?design/.test(filename)) return { category: "Art/Design", confidence: 70 };
+
+  // Dimension-based heuristics
+  var w = img.w || 0;
+  var h = img.h || 0;
+
+  if (w > 0 && h > 0) {
+    var ratio = w / h;
+
+    if (w <= 64 && h <= 64) return { category: "Icon/Logo", confidence: 80 };
+    if (w <= 128 && h <= 128 && ratio > 0.7 && ratio < 1.4) return { category: "Icon/Logo", confidence: 70 };
+    if (ratio > 2) return { category: "Landscape", confidence: 55 };
+    if (h > w * 1.5) return { category: "Portrait", confidence: 55 };
+
+    if ((w === 1920 && h === 1080) || (w === 1440 && h === 900) ||
+        (w === 1366 && h === 768) || (w === 2560 && h === 1440) ||
+        (w === 750 && h === 1334) || (w === 1170 && h === 2532) ||
+        (w === 1284 && h === 2778)) return { category: "Screenshot", confidence: 80 };
+
+    if (ratio > 0.85 && ratio < 1.15 && w >= 300 && w <= 1200) return { category: "Product", confidence: 50 };
+  }
+
+  // Alt text heuristics
+  var alt = (img.alt || "").toLowerCase();
+  if (/logo|brand|icon/.test(alt)) return { category: "Icon/Logo", confidence: 65 };
+  if (/product|buy|shop|price|\$/.test(alt)) return { category: "Product", confidence: 65 };
+  if (/photo|portrait|person|team|staff/.test(alt)) return { category: "Portrait", confidence: 65 };
+
+  return { category: "Other", confidence: 30 };
+}
+
+// Apply heuristic fallback for a list of images
+function applyHeuristicFallback(imgList) {
+  for (var i = 0; i < imgList.length; i++) {
+    var img = imgList[i];
+    var result = categorizeImageHeuristic(img);
+    categoryData[img.src] = result.category;
+    aiMeta[img.src] = { confidence: result.confidence, tags: [], source: "heuristic" };
+  }
+}
+
+// Batch API call to SammaPix AI categorization
+async function categorizeBatchViaAPI(batch) {
+  var payload = {
+    images: batch.map(function(img) {
+      var filename = "";
+      try { filename = new URL(img.src).pathname.split("/").pop().split("?")[0]; } catch(e) { filename = img.src.split("/").pop().split("?")[0]; }
+      return { url: img.src, filename: filename, width: img.w || 0, height: img.h || 0 };
+    })
+  };
+
+  var response = await fetch("https://www.sammapix.com/api/ai/categorize", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  if (response.status === 429) {
+    throw { type: "rate_limit" };
+  }
+  if (!response.ok) {
+    throw { type: "api_error", status: response.status };
+  }
+
+  return await response.json();
+}
+
+function runCategorization() {
+  if (isCategorizing || images.length === 0) return;
+  isCategorizing = true;
+
+  var progressBar = document.getElementById("ai-progress");
+  var progressFill = document.getElementById("ai-progress-fill");
+  var progressText = document.getElementById("ai-progress-text");
+  var catBtn = document.getElementById("ai-categorize-btn");
+
+  if (progressBar) progressBar.className = "ai-progress on";
+  if (progressText) { progressText.className = "ai-progress-text on"; progressText.textContent = "Categorizing with AI..."; }
+  if (catBtn) { catBtn.disabled = true; catBtn.innerHTML = '<div class="scan-anim" style="width:14px;height:14px;border-width:2px;margin:0"></div> Categorizing...'; }
+
+  var BATCH_SIZE = 10;
+  var batches = [];
+  for (var i = 0; i < images.length; i += BATCH_SIZE) {
+    batches.push(images.slice(i, i + BATCH_SIZE));
+  }
+
+  var totalBatches = batches.length;
+  var completedBatches = 0;
+  var aiCount = 0;
+  var heuristicCount = 0;
+  var usedFallback = false;
+
+  async function processBatches() {
+    for (var b = 0; b < batches.length; b++) {
+      var batch = batches[b];
+
+      try {
+        var result = await categorizeBatchViaAPI(batch);
+        var resultMap = {};
+
+        // Build a map from the API response
+        if (result && result.results && Array.isArray(result.results)) {
+          for (var r = 0; r < result.results.length; r++) {
+            var item = result.results[r];
+            if (item.url) resultMap[item.url] = item;
+          }
+        }
+
+        // Apply API results, fall back per-image if missing
+        for (var j = 0; j < batch.length; j++) {
+          var img = batch[j];
+          var apiResult = resultMap[img.src];
+          if (apiResult && apiResult.category) {
+            // Normalize category to match our CATEGORIES keys
+            var cat = apiResult.category;
+            if (!CATEGORIES[cat]) cat = "Other";
+            categoryData[img.src] = cat;
+            aiMeta[img.src] = {
+              confidence: apiResult.confidence || 90,
+              tags: apiResult.tags || [],
+              source: "ai"
+            };
+            aiCount++;
+          } else {
+            // API returned no result for this image — use heuristic
+            var hResult = categorizeImageHeuristic(img);
+            categoryData[img.src] = hResult.category;
+            aiMeta[img.src] = { confidence: hResult.confidence, tags: [], source: "heuristic" };
+            heuristicCount++;
+          }
+        }
+      } catch (err) {
+        // Fallback entire batch to heuristic
+        usedFallback = true;
+        if (err && err.type === "rate_limit") {
+          toast("Rate limited \u2014 try again in a minute");
+        } else {
+          toast("AI unavailable \u2014 using smart detection");
+        }
+
+        applyHeuristicFallback(batch);
+        heuristicCount += batch.length;
+
+        // If first batch fails, fall back ALL remaining batches immediately
+        for (var k = b + 1; k < batches.length; k++) {
+          applyHeuristicFallback(batches[k]);
+          heuristicCount += batches[k].length;
+          completedBatches++;
+        }
+
+        // Update progress to 100%
+        if (progressFill) progressFill.style.width = "100%";
+        if (progressText) progressText.textContent = "Smart detection complete";
+        break;
+      }
+
+      completedBatches++;
+      var pct = Math.round((completedBatches / totalBatches) * 100);
+      if (progressFill) progressFill.style.width = pct + "%";
+      if (progressText) progressText.textContent = "Categorizing with AI... " + completedBatches + "/" + totalBatches + " batches";
+    }
+
+    // Done
+    isCategorizing = false;
+    if (progressBar) progressBar.className = "ai-progress";
+    if (progressText) { progressText.className = "ai-progress-text"; }
+    if (catBtn) { catBtn.disabled = false; catBtn.innerHTML = '\u2728 Re-categorize All'; }
+    renderAiGrid();
+
+    if (aiCount > 0 && heuristicCount === 0) {
+      toast("\u2713 Categorized " + images.length + " images with AI");
+    } else if (aiCount > 0) {
+      toast("\u2713 " + aiCount + " by AI, " + heuristicCount + " by smart detection");
+    } else {
+      toast("\u2713 Categorized " + images.length + " images");
+    }
+  }
+
+  processBatches();
+}
+
+function renderAiSort() {
+  if (images.length === 0) {
+    $vai.innerHTML = '<div class="empty"><div class="empty-i">&#x1F9E0;</div><h3>No images yet</h3><p>Scan a page first from the Download tab,<br>then come here to AI-categorize them.</p><button class="scan-btn" id="scan-ai">Scan Now</button></div>';
+    var newAi = $vai;
+    document.getElementById("scan-ai").addEventListener("click", function() { switchTab("dl"); doScan(); });
+    return;
+  }
+
+  var hasCats = Object.keys(categoryData).length > 0;
+
+  var html = '<div class="ai-header">';
+
+  // Action bar
+  html += '<div class="ai-actions">';
+  html += '<button class="ai-categorize-btn" id="ai-categorize-btn">';
+  html += hasCats ? '\u2728 Re-categorize All' : '\u2728 Categorize All';
+  html += '</button>';
+  if (hasCats) {
+    html += '<button class="ai-dl-cat-btn" id="ai-dl-cat">Download by Category</button>';
+  }
+  html += '</div>';
+
+  // Progress bar
+  html += '<div class="ai-progress" id="ai-progress"><div class="ai-progress-fill" id="ai-progress-fill"></div></div>';
+  html += '<div class="ai-progress-text" id="ai-progress-text"></div>';
+  html += '</div>';
+
+  // Category filter bar (only if categorized)
+  if (hasCats) {
+    html += buildCatFilterBar();
+  }
+
+  // Grid
+  if (hasCats) {
+    html += buildAiGrid();
+  } else {
+    html += '<div style="text-align:center;padding:30px 24px;color:#8e8e93">';
+    html += '<div style="font-size:32px;margin-bottom:10px">&#x1F4CA;</div>';
+    html += '<p style="font-size:12px;line-height:1.6">Click <b>Categorize All</b> to sort ' + images.length + ' images<br>into categories using AI heuristics.</p>';
+    html += '</div>';
+  }
+
+  var newAi = $vai.cloneNode(false);
+  newAi.innerHTML = html;
+  newAi.style.display = $vai.style.display;
+  $vai.parentNode.replaceChild(newAi, $vai);
+  $vai = newAi;
+
+  // Event listeners
+  document.getElementById("ai-categorize-btn").addEventListener("click", function() { runCategorization(); });
+  var dlCatBtn = document.getElementById("ai-dl-cat");
+  if (dlCatBtn) dlCatBtn.addEventListener("click", function() { downloadByCategory(); });
+
+  // Category filter clicks
+  $vai.addEventListener("click", function(e) {
+    var cfb = e.target.closest("[data-catfilt]");
+    if (cfb) {
+      catFilter = cfb.getAttribute("data-catfilt");
+      renderAiSort();
+    }
+  });
+}
+
+function buildCatFilterBar() {
+  // Count categories
+  var counts = { all: 0 };
+  var catNames = Object.keys(CATEGORIES);
+  catNames.forEach(function(c) { counts[c] = 0; });
+
+  for (var i = 0; i < images.length; i++) {
+    var cat = categoryData[images[i].src];
+    if (cat) {
+      counts.all++;
+      counts[cat] = (counts[cat] || 0) + 1;
+    }
+  }
+
+  var html = '<div class="cat-fbar">';
+  // All filter
+  html += '<button class="cat-fb ' + (catFilter === "all" ? "on" : "off") + '" data-catfilt="all" style="' + (catFilter === "all" ? "background:#1c1c1e;color:#fff" : "") + '">All (' + counts.all + ')</button>';
+
+  catNames.forEach(function(cat) {
+    if (counts[cat] === 0) return;
+    var c = CATEGORIES[cat];
+    var isOn = catFilter === cat;
+    var style = isOn ? "background:" + c.color + ";color:#fff" : "";
+    html += '<button class="cat-fb ' + (isOn ? "on" : "off") + '" data-catfilt="' + cat + '" style="' + style + '">';
+    html += '<span class="cat-dot" style="background:' + c.color + '"></span>' + cat + ' (' + counts[cat] + ')';
+    html += '</button>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function buildAiGrid() {
+  var list = images.filter(function(img) {
+    if (!categoryData[img.src]) return false;
+    if (catFilter === "all") return true;
+    return categoryData[img.src] === catFilter;
+  });
+
+  if (list.length === 0) {
+    return '<div class="empty"><div class="empty-i">&#x1F50D;</div><h3>No images in this category</h3></div>';
+  }
+
+  var html = '<div class="ai-grid">';
+  for (var i = 0; i < list.length; i++) {
+    var img = list[i];
+    var cat = categoryData[img.src] || "Other";
+    var c = CATEGORIES[cat] || CATEGORIES["Other"];
+    var meta = aiMeta[img.src] || { confidence: 0, tags: [], source: "heuristic" };
+    var nm = "";
+    try { nm = new URL(img.src).pathname.split("/").pop().split("?")[0]; } catch(e) { nm = img.src.split("/").pop().split("?")[0]; }
+    nm = nm.substring(0, 28) || "image";
+    var dim = (img.w && img.h) ? img.w + "\u00d7" + img.h : "";
+
+    html += '<div class="ai-card" style="animation-delay:' + (i * 25) + 'ms">';
+    html += '<div class="cimg"><img src="' + esc(img.src) + '" loading="lazy"/></div>';
+    html += '<div class="ai-card-info">';
+    html += '<div class="ai-card-name">' + esc(nm) + '</div>';
+    html += '<div class="ai-card-tags">';
+    html += '<span class="cat-tag" style="background:' + c.color + '">';
+    if (meta.source === "ai") html += '<span class="ai-sparkle">\u2728</span> ';
+    html += cat;
+    if (meta.confidence > 0) html += ' <span class="cat-confidence">' + meta.confidence + '%</span>';
+    html += '</span>';
+    html += '<span class="bg bg-f">' + img.fmt + '</span>';
+    html += '</div>';
+    if (meta.tags && meta.tags.length > 0) {
+      html += '<div class="ai-card-aitags">' + meta.tags.map(function(t) { return esc(t); }).join(' \u00b7 ') + '</div>';
+    }
+    if (dim) html += '<div class="ai-card-dim">' + dim + '</div>';
+    html += '</div></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderAiGrid() {
+  // Re-render the full AI sort tab preserving state
+  renderAiSort();
+}
+
+function downloadByCategory() {
+  // Group images by category
+  var groups = {};
+  for (var i = 0; i < images.length; i++) {
+    var cat = categoryData[images[i].src];
+    if (!cat) continue;
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(images[i]);
+  }
+
+  var catNames = Object.keys(groups);
+  if (catNames.length === 0) { toast("No categorized images"); return; }
+
+  // Download all images, prefixed with category folder name
+  var total = 0;
+  var delay = 0;
+
+  catNames.forEach(function(cat) {
+    var catImages = groups[cat];
+    catImages.forEach(function(img) {
+      total++;
+      var safeCat = cat.replace(/[^a-zA-Z0-9]/g, "-");
+      setTimeout(function() {
+        downloadImageWithPrefix(img.src, safeCat);
+      }, delay);
+      delay += 400;
+    });
+  });
+
+  toast("Downloading " + total + " images by category...");
+}
+
+function downloadImageWithPrefix(src, prefix) {
+  var img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = function() {
+    var c = document.createElement("canvas");
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    c.getContext("2d").drawImage(img, 0, 0);
+    c.toBlob(function(b) {
+      if (!b) return;
+      var u = URL.createObjectURL(b);
+      var fn = "image";
+      try { fn = new URL(src).pathname.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g, "") || "image"; } catch(e) {}
+      var a = document.createElement("a"); a.href = u; a.download = prefix + "_" + fn + ".jpg";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function() { URL.revokeObjectURL(u); }, 5000);
+    }, "image/jpeg", 0.95);
+  };
+  img.onerror = function() {};
+  img.src = src;
+}
+
 // ═══ DOWNLOAD ═══
 function downloadImage(src, mime, ext, q) {
   var img = new Image();
@@ -735,5 +1200,6 @@ function toast(m) {
   setTimeout(function() { t.style.opacity = "0"; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 
-// ═══ AUTO SCAN ═══
+// ═══ INIT ═══
+initAuth();
 doScan();
