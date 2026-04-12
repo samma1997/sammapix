@@ -3,7 +3,7 @@
   "name": "SammaPix — Image Tools",
   "version": "1.0.0",
   "description": "Compress, resize, convert, and remove background from images — right from your browser. 100% client-side, nothing uploaded.",
-  "permissions": ["contextMenus", "activeTab"],
+  "permissions": ["contextMenus", "activeTab", "scripting"],
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",
