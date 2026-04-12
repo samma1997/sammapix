@@ -67,13 +67,34 @@ JSON, NIENT'ALTRO:
 
     // ═══════════════════════════════════════════
     // 2. OUTREACH — 2-3 target da contattare (PRIORITÀ ALTA)
+    //    Collegato all'ultimo articolo pubblicato
     // ═══════════════════════════════════════════
     try {
+      // Find our most recent blog post to reference in outreach
+      const { POSTS } = await import("@/lib/blog-posts");
+      const latestPost = POSTS[0]; // Always sorted newest first
+      const latestArticleUrl = latestPost ? `https://www.sammapix.com/blog/${latestPost.slug}` : null;
+      const latestArticleTitle = latestPost?.title || "";
+
+      // Try to match outreach targets to the latest article topic
       const targets = await db.select().from(growthOutreachTargets)
         .where(eq(growthOutreachTargets.status, "to_send"))
-        .limit(3);
+        .limit(10); // Fetch more, then pick best 3
 
-      for (const target of targets) {
+      // Score targets by relevance to latest article
+      const scored = targets.map(t => {
+        const titleLower = (t.articleTitle || "").toLowerCase();
+        const latestLower = latestArticleTitle.toLowerCase();
+        // Check keyword overlap
+        const latestWords = latestLower.split(/\W+/).filter(w => w.length > 3);
+        const matchCount = latestWords.filter(w => titleLower.includes(w)).length;
+        return { target: t, score: matchCount };
+      }).sort((a, b) => b.score - a.score);
+
+      // Pick top 3 (prioritize those matching latest article)
+      const picked = scored.slice(0, 3);
+
+      for (const { target, score } of picked) {
         const hasEmail = target.contactEmail;
         const hasLinkedin = target.contactLinkedin;
         const channel = hasLinkedin ? "LinkedIn" : hasEmail ? "Email" : "Web";
@@ -82,9 +103,12 @@ JSON, NIENT'ALTRO:
         if (model) {
           try {
             const format = hasLinkedin ? "LinkedIn message (40-60 words)" : hasEmail ? "Email with subject line + body (50-80 words)" : "Comment or email (50-80 words) to leave on their article or send via contact form";
+            const articleRef = score > 0 && latestArticleUrl
+              ? `\n\nIMPORTANT: We just published a related article at ${latestArticleUrl} ("${latestArticleTitle}") — reference it as proof we did thorough research and testing on this exact topic.`
+              : "";
             const result = await model.generateContent(`Write a short outreach message in ENGLISH to ask ${target.contactName || "the author"} to include SammaPix in their article "${target.articleTitle || "roundup"}".
 
-SammaPix: 27 browser-based image tools (compress, resize, convert, remove bg, passport photo, AI rename). Free, client-side, zero upload.
+SammaPix: 27 browser-based image tools (compress, resize, convert, remove bg, passport photo, AI rename). Free, client-side, zero upload.${articleRef}
 
 Format: ${format}
 Tone: professional but friendly. Offer VALUE (benchmark data, screenshots, test results).
@@ -95,9 +119,10 @@ ONLY the message:`);
           } catch {}
         }
 
+        const relevanceTag = score > 0 ? " \u{1F517}" : "";
         todos.push({
           date: today, type: "outreach", priority: 9,
-          title: `\u{1F4E7} Outreach: ${target.siteName}${target.contactName ? ` (${target.contactName})` : ""}`,
+          title: `\u{1F4E7} Outreach${relevanceTag}: ${target.siteName}${target.contactName ? ` (${target.contactName})` : ""}`,
           description: `${channel} — ${target.articleTitle || target.articleUrl || "roundup"}`,
           actionUrl: hasLinkedin || (hasEmail ? `mailto:${hasEmail}` : null) || target.articleUrl || undefined,
           draftText: draftEmail || undefined,
