@@ -108,10 +108,12 @@ for (const thread of commentable) {
       mentionInstruction = `Rispondi con un consiglio utile. Se ha senso, menziona "SammaPix", ma solo se naturale.`;
     }
 
-    const result = await model.generateContent(`Scrivi un commento Reddit per: "${thread.title}" su r/${thread.subreddit}
+    const result = await model.generateContent(`Write a Reddit comment for: "${thread.title}" on r/${thread.subreddit}
 
-STILE:
-- 2-4 frasi, casuale, come un utente Reddit reale
+IMPORTANT: Write in ENGLISH only. Never write in Italian or any other language.
+
+STYLE:
+- 2-4 sentences, casual, like a real Reddit user
 - Includi almeno 1 dettaglio specifico (numero, formato, dimensione, esperienza)
 - Sii CURIOSO e genuino, come se condividessi una scoperta
 - Lowercase ok, no emoji, no bullet point, no "Pro tip:", no "I'd recommend"
