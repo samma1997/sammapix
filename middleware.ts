@@ -217,6 +217,7 @@ export async function middleware(request: NextRequest) {
     // On growth subdomain: allow API, static, login page
     if (
       pathname.startsWith("/api/growth") ||
+      pathname.startsWith("/api/auth") ||
       pathname.startsWith("/_next/") ||
       pathname === "/favicon.ico" ||
       pathname === "/growth-login"
