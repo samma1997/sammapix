@@ -3,6 +3,7 @@ import { growthRedditPosts } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq } from "drizzle-orm";
 import { POSTS } from "@/lib/blog-posts";
+import { TARGET_KEYWORDS } from "@/lib/growth/keyword-targets";
 
 // ---------------------------------------------------------------------------
 // Reddit search queries — general search + subreddit-specific
@@ -679,15 +680,46 @@ export async function scrapeRedditPosts(): Promise<{
 }> {
   const stats = { scraped: 0, skipped: 0, errors: 0 };
 
+  // ── PHASE 0: Keyword-target queries (the SEO strategy drives scraping) ─────
+  // Pick keywords NOT yet at goal position — they are highest priority.
+  // Flatten redditQueries from all 17 keyword targets, deduplicate, cap at 15.
+  const keywordTargetQueries: string[] = [];
+  for (const kw of TARGET_KEYWORDS) {
+    for (const q of kw.redditQueries) {
+      if (!keywordTargetQueries.includes(q)) {
+        keywordTargetQueries.push(q);
+      }
+      if (keywordTargetQueries.length >= 15) break;
+    }
+    if (keywordTargetQueries.length >= 15) break;
+  }
+  console.log(`[reddit-scraper] Phase 0: ${keywordTargetQueries.length} keyword-target queries: ${keywordTargetQueries.join(", ")}`);
+
+  for (const query of keywordTargetQueries) {
+    try {
+      await new Promise((r) => setTimeout(r, 2000));
+      const posts = await fetchRedditSearch(query);
+      for (const post of posts) {
+        await savePostIfRelevant(post, stats);
+      }
+    } catch (err) {
+      console.error(`[reddit-scraper] Error on keyword-target query "${query}":`, err);
+      stats.errors++;
+    }
+  }
+  console.log(`[reddit-scraper] Phase 0 done: ${stats.scraped} new, ${stats.skipped} skipped`);
+
   // Generate dynamic blog-aware queries from the latest 5 blog posts
   console.log("[reddit-scraper] Generating blog-aware dynamic queries...");
   const dynamicQueries = await generateBlogAwareQueries();
   console.log(`[reddit-scraper] ${dynamicQueries.length} dynamic queries from blog: ${dynamicQueries.join(", ")}`);
 
-  // Merge: dynamic queries at the front, then static (deduplicated)
+  // Merge: dynamic queries next, then static (deduplicate against keyword-target queries too)
   const mergedQueries = [
-    ...dynamicQueries,
-    ...REDDIT_SEARCH_QUERIES.filter((q) => !dynamicQueries.includes(q)),
+    ...dynamicQueries.filter((q) => !keywordTargetQueries.includes(q)),
+    ...REDDIT_SEARCH_QUERIES.filter(
+      (q) => !dynamicQueries.includes(q) && !keywordTargetQueries.includes(q)
+    ),
   ];
 
   // PHASE 1: General Reddit search across all subreddits
