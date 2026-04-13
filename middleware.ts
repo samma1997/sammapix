@@ -248,9 +248,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // ── Main domain: block /dashboard/growth completely ──────────
+  // ── Main domain: /dashboard/growth requires NextAuth admin session ──────────
   if (pathname.startsWith("/dashboard/growth")) {
-    return new NextResponse("Not found", { status: 404 });
+    const sessionToken = request.cookies.get("next-auth.session-token")?.value ||
+                         request.cookies.get("__Secure-next-auth.session-token")?.value;
+    if (!sessionToken) {
+      return NextResponse.redirect(new URL("/api/auth/signin?callbackUrl=/dashboard/growth", request.url));
+    }
+    // Session exists — let the page's server-side auth (checkGrowthAuth) handle admin check
+    return NextResponse.next();
   }
 
   // ── Main domain: skip middleware for API routes (they have their own auth) ──

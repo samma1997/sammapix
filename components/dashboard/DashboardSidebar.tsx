@@ -253,7 +253,16 @@ export default function DashboardSidebar({
           Home
         </Link>
 
-        {/* Growth Dashboard removed — lives on growth.sammapix.com */}
+        {userEmail && ADMIN_EMAILS.includes(userEmail) && (
+          <Link
+            href="/dashboard/growth"
+            onClick={() => setMobileOpen(false)}
+            className={linkClasses("/dashboard/growth")}
+          >
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="m7 14 4-4 4 4 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            Growth HQ
+          </Link>
+        )}
 
         <div className="pt-3">
           <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
