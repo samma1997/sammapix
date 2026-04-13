@@ -1,18 +1,121 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { growthGscDaily } from "@/lib/db/schema";
 import { checkGrowthAuth } from "@/lib/growth/auth";
 import { sql } from "drizzle-orm";
 
 export const runtime = "nodejs";
+
+const TARGET_KEYWORDS = [
+  // Tool pages
+  { keyword: "compress images online free", target: 3, page: "/tools/compress", category: "tool" },
+  { keyword: "webp converter free", target: 3, page: "/tools/webp", category: "tool" },
+  { keyword: "heic to jpg free", target: 5, page: "/tools/heic", category: "tool" },
+  { keyword: "ai rename photos", target: 3, page: "/tools/ai-rename", category: "tool" },
+  { keyword: "remove exif data online", target: 5, page: "/tools/exif", category: "tool" },
+  { keyword: "batch resize images free", target: 5, page: "/tools/resizepack", category: "tool" },
+  { keyword: "remove background free", target: 10, page: "/tools/remove-bg", category: "tool" },
+  { keyword: "passport photo maker free", target: 5, page: "/tools/passport-photo", category: "tool" },
+  // Blog/comparison
+  { keyword: "tinypng alternative", target: 3, page: "/blog/best-tinypng-alternative-2026", category: "comparison" },
+  { keyword: "best image compression tools 2026", target: 5, page: "/blog/best-image-compression-tools-2026", category: "blog" },
+  { keyword: "avif vs webp vs jpeg", target: 5, page: "/blog/webp-vs-avif-vs-jpeg-comparison", category: "comparison" },
+  { keyword: "compress images without losing quality", target: 5, page: "/blog/compress-images-without-losing-quality", category: "blog" },
+  { keyword: "remove exif data from photos", target: 5, page: "/blog/remove-exif-protect-privacy", category: "blog" },
+  { keyword: "best free remove bg alternatives", target: 5, page: "/blog/best-free-remove-bg-alternatives-2026", category: "comparison" },
+  { keyword: "instagram image quality loss", target: 3, page: "/blog/instagram-image-quality-loss-fix", category: "blog" },
+  // Privacy angle
+  { keyword: "compress images no upload", target: 1, page: "/tools/compress", category: "tool" },
+  { keyword: "image tools browser based", target: 3, page: "/", category: "tool" },
+];
+
+function matchTargetKeyword(query: string): typeof TARGET_KEYWORDS[number] | null {
+  const q = query.toLowerCase().trim();
+  // Exact match first
+  const exact = TARGET_KEYWORDS.find(t => t.keyword === q);
+  if (exact) return exact;
+  // Partial match: check if at least 60% of target keyword words appear in the query or vice versa
+  for (const t of TARGET_KEYWORDS) {
+    const tWords = t.keyword.split(" ");
+    const qWords = q.split(" ");
+    const matchCount = tWords.filter(w => qWords.includes(w)).length;
+    if (matchCount >= Math.ceil(tWords.length * 0.6)) return t;
+    const reverseMatch = qWords.filter(w => tWords.includes(w)).length;
+    if (reverseMatch >= Math.ceil(qWords.length * 0.6) && reverseMatch >= 2) return t;
+  }
+  return null;
+}
+
+type OpportunityScore = "ACHIEVED" | "PAGE_1" | "QUICK_WIN" | "CTR_FIX" | "LONG_TERM" | "BUILDING";
+
+function calcOpportunity(pos: number, impressions: number, clicks: number): OpportunityScore {
+  if (pos <= 3) return "ACHIEVED";
+  if (pos <= 10) return "PAGE_1";
+  if (clicks === 0 && impressions > 5) return "CTR_FIX";
+  if (pos <= 20 && impressions >= 3) return "QUICK_WIN";
+  if (pos > 50) return "LONG_TERM";
+  return "BUILDING";
+}
 
 export async function GET() {
   const auth = await checkGrowthAuth();
   if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
 
   try {
-    // Aggregate keywords from GSC data
-    const keywords = await db.execute(sql`
+    // Get date range to calculate trends
+    const dateRange = await db.execute(sql`
+      SELECT MIN(date) as min_date, MAX(date) as max_date
+      FROM growth_gsc_daily
+      WHERE query IS NOT NULL AND query != ''
+    `);
+    const maxDate = dateRange.rows[0]?.max_date;
+    const minDate = dateRange.rows[0]?.min_date;
+
+    // Recent period aggregates (last 7 days of data)
+    const recentKeywords = await db.execute(sql`
+      WITH date_bounds AS (
+        SELECT MAX(date) as max_d FROM growth_gsc_daily WHERE query IS NOT NULL AND query != ''
+      ),
+      recent AS (
+        SELECT
+          query,
+          SUM(clicks::int) as clicks,
+          SUM(impressions::int) as impressions,
+          ROUND(AVG(position::numeric), 1) as avg_position,
+          ROUND(AVG(ctr::numeric), 4) as avg_ctr,
+          COUNT(*) as days_seen
+        FROM growth_gsc_daily, date_bounds
+        WHERE query IS NOT NULL AND query != ''
+          AND date::date > (date_bounds.max_d::date - interval '7 days')
+        GROUP BY query
+      ),
+      previous AS (
+        SELECT
+          query,
+          ROUND(AVG(position::numeric), 1) as avg_position,
+          SUM(impressions::int) as impressions
+        FROM growth_gsc_daily, date_bounds
+        WHERE query IS NOT NULL AND query != ''
+          AND date::date <= (date_bounds.max_d::date - interval '7 days')
+          AND date::date > (date_bounds.max_d::date - interval '14 days')
+        GROUP BY query
+      )
+      SELECT
+        r.query,
+        r.clicks,
+        r.impressions,
+        r.avg_position as current_position,
+        r.avg_ctr,
+        r.days_seen,
+        p.avg_position as previous_position,
+        p.impressions as previous_impressions
+      FROM recent r
+      LEFT JOIN previous p ON r.query = p.query
+      ORDER BY r.impressions DESC
+      LIMIT 200
+    `);
+
+    // Also get overall aggregates for all time
+    const allTimeKeywords = await db.execute(sql`
       SELECT
         query,
         SUM(clicks::int) as total_clicks,
@@ -24,8 +127,72 @@ export async function GET() {
       WHERE query IS NOT NULL AND query != ''
       GROUP BY query
       ORDER BY SUM(impressions::int) DESC
-      LIMIT 100
+      LIMIT 200
     `);
+
+    // Build keyword data with trends
+    const keywordMap = new Map<string, any>();
+
+    for (const r of allTimeKeywords.rows as any[]) {
+      keywordMap.set(r.query, {
+        query: r.query,
+        total_clicks: Number(r.total_clicks),
+        total_impressions: Number(r.total_impressions),
+        avg_position: Number(r.avg_position),
+        avg_ctr: Number(r.avg_ctr),
+        dates_seen: Number(r.dates_seen),
+        current_position: Number(r.avg_position),
+        previous_position: null,
+        trend: "stable" as "up" | "down" | "stable",
+        position_change: 0,
+        opportunity: "BUILDING" as OpportunityScore,
+        target_keyword: null as typeof TARGET_KEYWORDS[number] | null,
+      });
+    }
+
+    // Overlay recent data with trend info
+    for (const r of recentKeywords.rows as any[]) {
+      const existing = keywordMap.get(r.query);
+      if (existing) {
+        existing.current_position = Number(r.current_position);
+        existing.previous_position = r.previous_position ? Number(r.previous_position) : null;
+        if (existing.previous_position !== null) {
+          const change = existing.previous_position - existing.current_position;
+          existing.position_change = Math.round(change * 10) / 10;
+          if (change > 1) existing.trend = "up";
+          else if (change < -1) existing.trend = "down";
+          else existing.trend = "stable";
+        }
+      }
+    }
+
+    // Calculate opportunity and match targets
+    for (const [, kw] of keywordMap) {
+      kw.opportunity = calcOpportunity(kw.current_position, kw.total_impressions, kw.total_clicks);
+      kw.target_keyword = matchTargetKeyword(kw.query);
+    }
+
+    const keywords = Array.from(keywordMap.values());
+
+    // Build target keywords status
+    const targets = TARGET_KEYWORDS.map(t => {
+      // Find best matching GSC query
+      const matched = keywords.find(k => k.target_keyword?.keyword === t.keyword);
+      return {
+        ...t,
+        current_position: matched ? matched.current_position : null,
+        impressions: matched ? matched.total_impressions : 0,
+        clicks: matched ? matched.total_clicks : 0,
+        trend: matched ? matched.trend : "stable",
+        position_change: matched ? matched.position_change : 0,
+        status: matched
+          ? matched.current_position <= t.target
+            ? "achieved"
+            : "in_progress"
+          : "not_ranking",
+        matched_query: matched ? matched.query : null,
+      };
+    });
 
     // Aggregate pages from GSC data
     const pages = await db.execute(sql`
@@ -42,20 +209,19 @@ export async function GET() {
     `);
 
     return NextResponse.json({
-      keywords: keywords.rows.map((r: any) => ({
-        query: r.query,
-        total_clicks: Number(r.total_clicks),
-        total_impressions: Number(r.total_impressions),
-        avg_position: Number(r.avg_position),
-        avg_ctr: Number(r.avg_ctr),
-        dates_seen: Number(r.dates_seen),
-      })),
+      keywords,
+      targets,
       pages: pages.rows.map((r: any) => ({
         page: r.page,
         total_clicks: Number(r.total_clicks),
         total_impressions: Number(r.total_impressions),
         avg_position: Number(r.avg_position),
       })),
+      meta: {
+        date_range: { min: minDate, max: maxDate },
+        total_gsc_keywords: keywords.length,
+        target_count: TARGET_KEYWORDS.length,
+      },
     });
   } catch (e) {
     console.error("[seo/keywords] Error:", e);
