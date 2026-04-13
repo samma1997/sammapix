@@ -72,7 +72,7 @@ export default function SEOKeywordsPage() {
   const top3Keywords = keywords.filter((k) => k.avg_position <= 3).length;
 
   return (
-    <div>
+    <div className="max-w-5xl mx-auto px-4 py-6">
       <h1 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">
         🔍 Keyword Tracking
       </h1>
