@@ -406,6 +406,15 @@ export default function DashboardSidebar({
         {/* Profile popover menu */}
         {profileMenuOpen && (
           <div className="absolute bottom-full left-2 right-2 mb-1 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3)] py-1 z-50">
+            {userEmail && ADMIN_EMAILS.includes(userEmail) && (
+              <button
+                onClick={() => mobileNav("/dashboard/growth")}
+                className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#6366f1] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors duration-150 w-full text-left font-medium"
+              >
+                <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="m7 14 4-4 4 4 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                Growth HQ
+              </button>
+            )}
             <button
               onClick={() => mobileNav("/dashboard/settings")}
               className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors duration-150 w-full text-left"
