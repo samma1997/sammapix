@@ -550,8 +550,8 @@ function TodoSectionCard({
   section: TodoSection;
   onStatusChange: (id: number, status: string) => void;
 }) {
-  const [collapsed, setCollapsed] = useState(false);
   const pendingCount = section.items.filter((t) => t.status === "pending").length;
+  const [collapsed, setCollapsed] = useState(pendingCount === 0);
   const doneCount = section.items.filter((t) => t.status === "done").length;
 
   return (
