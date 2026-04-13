@@ -16,7 +16,7 @@ interface KeywordRow {
   trend: "up" | "down" | "stable";
   position_change: number;
   opportunity: "ACHIEVED" | "PAGE_1" | "QUICK_WIN" | "CTR_FIX" | "LONG_TERM" | "BUILDING";
-  target_keyword: { keyword: string; target: number; page: string; category: string } | null;
+  target_keyword: { keyword: string; target: number; page: string; category: string; explanation?: string } | null;
 }
 
 interface TargetRow {
@@ -24,6 +24,7 @@ interface TargetRow {
   target: number;
   page: string;
   category: string;
+  explanation?: string;
   current_position: number | null;
   impressions: number;
   clicks: number;
@@ -54,18 +55,33 @@ const positionBadge = (pos: number) => {
 };
 
 const opportunityConfig: Record<string, { label: string; icon: string; color: string; action: string }> = {
-  ACHIEVED: { label: "Achieved", icon: "\u{1F3C6}", color: "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400", action: "Maintain" },
-  PAGE_1: { label: "Page 1", icon: "\u{1F4C4}", color: "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400", action: "Push to top 3" },
-  QUICK_WIN: { label: "Quick Win", icon: "\u26A1", color: "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400", action: "Add internal links" },
-  CTR_FIX: { label: "Fix CTR", icon: "\u{1F527}", color: "bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400", action: "Rewrite title/meta" },
-  LONG_TERM: { label: "Long Term", icon: "\u{1F4DD}", color: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400", action: "Create content" },
-  BUILDING: { label: "Building", icon: "\u{1F4C8}", color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400", action: "Keep optimizing" },
+  ACHIEVED: { label: "Obiettivo raggiunto!", icon: "\u2705", color: "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400", action: "Monitora" },
+  PAGE_1: { label: "Siamo in prima pagina", icon: "\u{1F7E2}", color: "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400", action: "Migliora titolo" },
+  QUICK_WIN: { label: "Quasi in prima pagina", icon: "\u26A1", color: "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400", action: "Aggiungi link" },
+  CTR_FIX: { label: "Ci vedono ma non cliccano", icon: "\u{1F527}", color: "bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400", action: "Migliora titolo" },
+  LONG_TERM: { label: "Obiettivo a lungo termine", icon: "\u{1F550}", color: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400", action: "Scrivi articolo" },
+  BUILDING: { label: "In costruzione", icon: "\u{1F528}", color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400", action: "Cerca backlink" },
+};
+
+const opportunityTooltip: Record<string, string> = {
+  ACHIEVED: "Obiettivo raggiunto! Continuiamo a monitorare per mantenere la posizione.",
+  PAGE_1: "Siamo in prima pagina di Google. Possiamo migliorare ancora per salire nei primi 3.",
+  QUICK_WIN: "Siamo in posizione 11-20. Con 2-3 link interni possiamo arrivare in prima pagina!",
+  CTR_FIX: "Le persone ci vedono nei risultati ma non cliccano. Miglioriamo titolo e descrizione.",
+  LONG_TERM: "Siamo lontani dalla prima pagina. Servono molti backlink e contenuti.",
+  BUILDING: "Stiamo costruendo visibilita. Servono backlink e contenuti aggiuntivi.",
 };
 
 const trendArrow = (trend: string, change: number) => {
   if (trend === "up") return <span className="text-emerald-500 font-medium">{"\u2191"} {Math.abs(change).toFixed(1)}</span>;
   if (trend === "down") return <span className="text-red-500 font-medium">{"\u2193"} {Math.abs(change).toFixed(1)}</span>;
   return <span className="text-gray-400">{"\u2192"}</span>;
+};
+
+const sortLabels: Record<string, string> = {
+  impressions: "Visualizzazioni",
+  clicks: "Click",
+  position: "Posizione",
 };
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -78,6 +94,7 @@ export default function SEOKeywordsPage() {
   const [tab, setTab] = useState<TabType>("keywords");
   const [filter, setFilter] = useState<FilterType>("all");
   const [sort, setSort] = useState<"impressions" | "clicks" | "position">("impressions");
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     fetch("/api/growth/seo/keywords")
@@ -113,7 +130,6 @@ export default function SEOKeywordsPage() {
   }, [keywords, filter, sort]);
 
   const stats = useMemo(() => {
-    const targetKws = keywords.filter(k => k.target_keyword !== null);
     const onPage1 = keywords.filter(k => k.current_position <= 10).length;
     const quickWins = keywords.filter(k => k.opportunity === "QUICK_WIN").length;
     const avgPos = keywords.length > 0
@@ -133,14 +149,14 @@ export default function SEOKeywordsPage() {
   // ─── Filters config ────────────────────────────────────────────────────
 
   const filters: { key: FilterType; label: string; count?: number }[] = [
-    { key: "all", label: "All", count: keywords.length },
-    { key: "achieved", label: "\u{1F3C6} Achieved", count: keywords.filter(k => k.opportunity === "ACHIEVED").length },
-    { key: "page1", label: "\u{1F4C4} Page 1", count: keywords.filter(k => k.current_position > 3 && k.current_position <= 10).length },
-    { key: "quick_win", label: "\u26A1 Quick Wins", count: keywords.filter(k => k.opportunity === "QUICK_WIN").length },
-    { key: "improving", label: "\u{1F4C8} Improving", count: stats.improving },
-    { key: "declining", label: "\u{1F4C9} Declining", count: stats.declining },
-    { key: "targets", label: "\u{1F3AF} Targets", count: keywords.filter(k => k.target_keyword !== null).length },
-    { key: "ctr_fix", label: "\u{1F527} Fix CTR", count: keywords.filter(k => k.opportunity === "CTR_FIX").length },
+    { key: "all", label: "Tutte", count: keywords.length },
+    { key: "achieved", label: "\u{1F3C6} Raggiunte", count: keywords.filter(k => k.opportunity === "ACHIEVED").length },
+    { key: "page1", label: "\u{1F4C4} Prima pagina", count: keywords.filter(k => k.current_position > 3 && k.current_position <= 10).length },
+    { key: "quick_win", label: "\u26A1 Quasi ci siamo", count: keywords.filter(k => k.opportunity === "QUICK_WIN").length },
+    { key: "improving", label: "\u{1F4C8} In salita", count: stats.improving },
+    { key: "declining", label: "\u{1F4C9} In calo", count: stats.declining },
+    { key: "targets", label: "\u{1F3AF} Obiettivi", count: keywords.filter(k => k.target_keyword !== null).length },
+    { key: "ctr_fix", label: "\u{1F527} Da migliorare", count: keywords.filter(k => k.opportunity === "CTR_FIX").length },
   ];
 
   // ─── Loading ────────────────────────────────────────────────────────────
@@ -160,27 +176,88 @@ export default function SEOKeywordsPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-          SEO Strategy Dashboard
+          Parole Chiave SEO
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          Keyword tracking, trends, and actions from Google Search Console
+          Monitora le tue posizioni su Google e scopri dove migliorare
         </p>
       </div>
 
-      {/* ─── A. Strategy KPIs ──────────────────────────────────────────── */}
+      {/* ─── Help Section ──────────────────────────────────────────────── */}
+      <div className="mb-6">
+        <button
+          onClick={() => setShowHelp(!showHelp)}
+          className="flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+        >
+          <span className="text-base">{"\u2139\uFE0F"}</span>
+          Come leggere questa pagina
+          <svg
+            className={`w-4 h-4 transition-transform ${showHelp ? "rotate-180" : ""}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {showHelp && (
+          <div className="mt-3 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl p-5 space-y-3 text-sm text-gray-700 dark:text-gray-300">
+            <div>
+              <strong className="text-gray-900 dark:text-white">Posizione:</strong>{" "}
+              indica dove appari su Google. Posizione 1 = primo risultato. Posizione 10 = ultimo della prima pagina.
+              Posizione 11+ = seconda pagina (quasi nessuno ci arriva).
+            </div>
+            <div>
+              <strong className="text-gray-900 dark:text-white">Impressioni:</strong>{" "}
+              quante volte Google ha mostrato il tuo sito nei risultati di ricerca.
+            </div>
+            <div>
+              <strong className="text-gray-900 dark:text-white">Click:</strong>{" "}
+              quante persone hanno cliccato sul tuo risultato.
+            </div>
+            <div>
+              <strong className="text-gray-900 dark:text-white">Quick Win (Quasi ci siamo):</strong>{" "}
+              una parola chiave dove sei in posizione 11-20. Con piccole azioni (aggiungere link interni,
+              migliorare il contenuto) puoi salire in prima pagina.
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ─── A. KPI Strategici ─────────────────────────────────────────── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <KpiCard label="Target Keywords" value={stats.targetCount} subtitle="actively tracking" color="indigo" />
-        <KpiCard label="On Page 1" value={stats.onPage1} subtitle={`of ${stats.tracked} total`} color="blue" />
-        <KpiCard label="Quick Wins" value={stats.quickWins} subtitle="pos 11-20, push needed" color="amber" />
-        <KpiCard label="Avg Position" value={stats.avgPosition.toFixed(1)} subtitle="across all keywords" color="gray" />
+        <KpiCard
+          label="Parole chiave monitorate"
+          value={stats.targetCount}
+          subtitle="Le keyword su cui stiamo puntando"
+          color="indigo"
+        />
+        <KpiCard
+          label="In prima pagina Google"
+          value={stats.onPage1}
+          subtitle={`su ${stats.tracked} totali — le persone ci vedono quando cercano queste parole`}
+          color="blue"
+        />
+        <KpiCard
+          label="Quasi in prima pagina"
+          value={stats.quickWins}
+          subtitle="Posizione 11-20: con un piccolo sforzo arriviamo in top 10"
+          color="amber"
+        />
+        <KpiCard
+          label="Posizione media"
+          value={stats.avgPosition.toFixed(1)}
+          subtitle="Piu e basso, meglio e. Top 10 = prima pagina"
+          color="gray"
+        />
       </div>
 
       {/* ─── Tabs ──────────────────────────────────────────────────────── */}
       <div className="flex gap-2 mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
         {([
-          { key: "keywords" as TabType, label: "Keywords", count: keywords.length },
-          { key: "targets" as TabType, label: "Target Tracking", count: targets.length },
-          { key: "pages" as TabType, label: "Pages", count: pages.length },
+          { key: "keywords" as TabType, label: "Parole chiave", count: keywords.length },
+          { key: "targets" as TabType, label: "Obiettivi", count: targets.length },
+          { key: "pages" as TabType, label: "Pagine", count: pages.length },
         ]).map(t => (
           <button
             key={t.key}
@@ -199,7 +276,7 @@ export default function SEOKeywordsPage() {
       {/* ─── Keywords Tab ──────────────────────────────────────────────── */}
       {tab === "keywords" && (
         <>
-          {/* B. Smart Filters */}
+          {/* Filtri */}
           <div className="flex flex-wrap gap-2 mb-4">
             {filters.map(f => (
               <button
@@ -216,9 +293,9 @@ export default function SEOKeywordsPage() {
             ))}
           </div>
 
-          {/* Sort */}
+          {/* Ordinamento */}
           <div className="flex gap-2 mb-4 items-center">
-            <span className="text-xs text-gray-400">Sort:</span>
+            <span className="text-xs text-gray-400">Ordina per:</span>
             {(["impressions", "clicks", "position"] as const).map(s => (
               <button
                 key={s}
@@ -229,25 +306,25 @@ export default function SEOKeywordsPage() {
                     : "bg-gray-50 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
                 }`}
               >
-                {s.charAt(0).toUpperCase() + s.slice(1)}
+                {sortLabels[s]}
               </button>
             ))}
           </div>
 
-          {/* C. Keywords Table */}
+          {/* Tabella parole chiave */}
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-800 text-left bg-gray-50/50 dark:bg-gray-800/50">
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400">Keyword</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Position</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Trend</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Impr.</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Clicks</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">CTR</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Opportunity</th>
-                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400">Action</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400">Parola chiave</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Posizione su Google</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Tendenza</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Quante volte ci vedono</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Quante volte ci cliccano</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">% di click</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Cosa fare</th>
+                    <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400">Azione</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -262,7 +339,7 @@ export default function SEOKeywordsPage() {
                           <div className="font-medium text-gray-900 dark:text-gray-100">{k.query}</div>
                           {k.target_keyword && (
                             <div className="text-xs text-indigo-500 mt-0.5">
-                              {"\u{1F3AF}"} Target: top {k.target_keyword.target} on {k.target_keyword.page}
+                              {"\u{1F3AF}"} Obiettivo: top {k.target_keyword.target} su {k.target_keyword.page}
                             </div>
                           )}
                         </td>
@@ -284,7 +361,10 @@ export default function SEOKeywordsPage() {
                           {(k.avg_ctr * 100).toFixed(1)}%
                         </td>
                         <td className="px-4 py-3 text-center">
-                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${opp.color}`}>
+                          <span
+                            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${opp.color}`}
+                            title={opportunityTooltip[k.opportunity]}
+                          >
                             {opp.icon} {opp.label}
                           </span>
                         </td>
@@ -301,21 +381,20 @@ export default function SEOKeywordsPage() {
             </div>
             {filteredKeywords.length === 0 && (
               <div className="text-center py-16 text-gray-400 dark:text-gray-500">
-                No keywords match this filter.
+                Nessuna parola chiave corrisponde a questo filtro.
               </div>
             )}
           </div>
         </>
       )}
 
-      {/* ─── D. Target Keywords Tab ────────────────────────────────────── */}
+      {/* ─── D. Obiettivi ─────────────────────────────────────────────── */}
       {tab === "targets" && (
         <div className="space-y-3">
-          {/* Category groups */}
           {(["tool", "blog", "comparison"] as const).map(cat => {
             const catTargets = targets.filter(t => t.category === cat);
             if (catTargets.length === 0) return null;
-            const catLabel = cat === "tool" ? "Tool Pages" : cat === "blog" ? "Blog Posts" : "Comparison Pages";
+            const catLabel = cat === "tool" ? "Pagine Tool" : cat === "blog" ? "Articoli Blog" : "Pagine Confronto";
             return (
               <div key={cat}>
                 <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
@@ -332,17 +411,17 @@ export default function SEOKeywordsPage() {
         </div>
       )}
 
-      {/* ─── E. Pages Tab ──────────────────────────────────────────────── */}
+      {/* ─── E. Pagine ────────────────────────────────────────────────── */}
       {tab === "pages" && (
         <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100 dark:border-gray-800 text-left bg-gray-50/50 dark:bg-gray-800/50">
-                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400">Page</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Avg Position</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Impressions</th>
-                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Clicks</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400">Pagina</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-center">Posizione media</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Quante volte ci vedono</th>
+                  <th className="px-4 py-3 font-medium text-gray-500 dark:text-gray-400 text-right">Quante volte ci cliccano</th>
                 </tr>
               </thead>
               <tbody>
@@ -402,20 +481,20 @@ function KpiCard({ label, value, subtitle, color }: { label: string; value: stri
     <div className={`bg-white dark:bg-gray-900 border ${colorMap[color]} rounded-xl p-5 shadow-sm`}>
       <div className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">{label}</div>
       <div className={`text-3xl font-bold ${valueColorMap[color]} mb-1`}>{value}</div>
-      <div className="text-xs text-gray-400 dark:text-gray-500">{subtitle}</div>
+      <div className="text-xs text-gray-400 dark:text-gray-500 leading-relaxed">{subtitle}</div>
     </div>
   );
 }
 
 function TargetCard({ target }: { target: TargetRow }) {
   const statusConfig = {
-    achieved: { icon: "\u{1F3C6}", label: "Achieved", color: "text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-900/30" },
-    in_progress: { icon: "\u{1F504}", label: "In progress", color: "text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/30" },
-    not_ranking: { icon: "\u274C", label: "Not ranking", color: "text-red-500 bg-red-50 dark:text-red-400 dark:bg-red-900/30" },
+    achieved: { icon: "\u{1F3C6}", label: "Obiettivo raggiunto!", color: "text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-900/30" },
+    in_progress: { icon: "\u{1F504}", label: "In corso", color: "text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/30" },
+    not_ranking: { icon: "\u274C", label: "Non ancora visibile", color: "text-red-500 bg-red-50 dark:text-red-400 dark:bg-red-900/30" },
   };
   const sc = statusConfig[target.status];
 
-  // Progress bar: target is best possible, 100 is worst. Scale position to progress%.
+  // Progress bar
   const maxPos = 100;
   const progress = target.current_position !== null
     ? Math.max(0, Math.min(100, ((maxPos - target.current_position) / (maxPos - target.target)) * 100))
@@ -432,8 +511,12 @@ function TargetCard({ target }: { target: TargetRow }) {
       <div className="flex items-start justify-between gap-4 mb-3">
         <div className="flex-1 min-w-0">
           <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">{target.keyword}</div>
+          {target.explanation && (
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 italic">{target.explanation}</div>
+          )}
           <div className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 truncate">
-            {target.page} &middot; {target.category}
+            {target.page} &middot;{" "}
+            {target.category === "tool" ? "Pagina tool" : target.category === "blog" ? "Articolo blog" : "Confronto"}
           </div>
         </div>
         <span className={`flex-shrink-0 inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium ${sc.color}`}>
@@ -441,21 +524,24 @@ function TargetCard({ target }: { target: TargetRow }) {
         </span>
       </div>
 
-      {/* Position info */}
+      {/* Info posizione */}
       <div className="flex items-center gap-4 mb-2 text-sm">
         <div>
-          <span className="text-gray-500 dark:text-gray-400">Current: </span>
           {target.current_position !== null ? (
-            <span className={`font-bold ${positionBadge(target.current_position)} px-1.5 py-0.5 rounded-md text-xs`}>
-              {target.current_position.toFixed(1)}
-            </span>
+            <>
+              <span className="text-gray-500 dark:text-gray-400">Siamo in posizione </span>
+              <span className={`font-bold ${positionBadge(target.current_position)} px-1.5 py-0.5 rounded-md text-xs`}>
+                {target.current_position.toFixed(1)}
+              </span>
+              <span className="text-gray-500 dark:text-gray-400"> su Google</span>
+            </>
           ) : (
-            <span className="text-gray-400">--</span>
+            <span className="text-gray-400 text-xs">Non ancora visibile su Google — serve piu contenuto e backlink</span>
           )}
         </div>
         <div>
-          <span className="text-gray-500 dark:text-gray-400">Goal: </span>
-          <span className="font-bold text-indigo-600 dark:text-indigo-400">top {target.target}</span>
+          <span className="text-gray-500 dark:text-gray-400">Obiettivo: </span>
+          <span className="font-bold text-indigo-600 dark:text-indigo-400">primi {target.target}</span>
         </div>
         {target.trend !== "stable" && (
           <div className="text-xs">
@@ -464,12 +550,12 @@ function TargetCard({ target }: { target: TargetRow }) {
         )}
         {target.impressions > 0 && (
           <div className="text-xs text-gray-400 ml-auto">
-            {target.impressions} impr. &middot; {target.clicks} clicks
+            {target.impressions} volte visti &middot; {target.clicks} click
           </div>
         )}
       </div>
 
-      {/* Progress bar */}
+      {/* Barra progresso */}
       <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
         <div
           className={`h-2 rounded-full transition-all duration-500 ${progressBarColor}`}
@@ -477,8 +563,18 @@ function TargetCard({ target }: { target: TargetRow }) {
         />
       </div>
       <div className="flex justify-between mt-1">
-        <span className="text-[10px] text-gray-400">100+</span>
-        <span className="text-[10px] text-gray-400">Top {target.target}</span>
+        {target.current_position !== null ? (
+          <span className="text-[10px] text-gray-400">
+            Posizione {target.current_position.toFixed(0)} {"\u2192"} Obiettivo: top {target.target}
+          </span>
+        ) : (
+          <span className="text-[10px] text-gray-400">Non ancora indicizzato</span>
+        )}
+        {target.status === "achieved" && (
+          <span className="text-[10px] text-emerald-500 font-medium">
+            {"\u{1F3C6}"} Obiettivo raggiunto! Siamo tra i primi {target.target}
+          </span>
+        )}
       </div>
     </div>
   );
