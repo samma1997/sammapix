@@ -21,7 +21,7 @@ export default function GrowthLoginPage() {
           fetch("/api/growth/auth/google", { method: "POST" })
             .then((res) => {
               if (res.ok) {
-                window.location.href = "/dashboard/growth";
+                window.location.href = "https://www.sammapix.com/dashboard/growth";
               } else {
                 setError("Not authorized for Growth Dashboard");
               }
@@ -45,7 +45,7 @@ export default function GrowthLoginPage() {
       });
 
       if (res.ok) {
-        window.location.href = "/dashboard/growth";
+        window.location.href = "https://www.sammapix.com/dashboard/growth";
       } else {
         setError("Invalid credentials");
       }
@@ -59,7 +59,7 @@ export default function GrowthLoginPage() {
   function handleGoogle() {
     setGoogleLoading(true);
     setError("");
-    window.location.href = "/api/auth/signin/google?callbackUrl=" + encodeURIComponent("/growth-login");
+    window.location.href = "/api/auth/signin/google?callbackUrl=" + encodeURIComponent("https://www.sammapix.com/growth-login");
   }
 
   return (
