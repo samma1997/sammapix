@@ -299,6 +299,98 @@ sammapix.com`;
     }
 
     // ═══════════════════════════════════════════════════════════════
+    // 6b. SEO INTELLIGENCE — Actions based on REAL GSC data
+    //     Reads keyword positions and generates specific actions
+    // ═══════════════════════════════════════════════════════════════
+    try {
+      const { growthGscDaily } = await import("@/lib/db/schema");
+
+      // Quick Wins: keywords in position 11-20 with impressions > 2
+      const quickWins = await db.execute(sqlFn`
+        SELECT query, page, ROUND(AVG(position::numeric), 1) as pos, SUM(impressions::int) as imp
+        FROM growth_gsc_daily
+        WHERE query IS NOT NULL AND query != ''
+        GROUP BY query, page
+        HAVING AVG(position::numeric) BETWEEN 11 AND 20 AND SUM(impressions::int) >= 2
+        ORDER BY SUM(impressions::int) DESC
+        LIMIT 3
+      `);
+
+      if (quickWins.rows.length > 0) {
+        const qwList = quickWins.rows.map((r: any) =>
+          `"${r.query}" (pos ${r.pos}) → ${(r.page || "").replace("https://www.sammapix.com", "")}`
+        ).join("\n");
+
+        todos.push({
+          date: today, type: "gsc", priority: 9,
+          title: `⚡ Quick Win: ${quickWins.rows.length} keyword quasi in prima pagina`,
+          description: "Queste keyword sono in posizione 11-20. Aggiungi 2-3 link interni verso queste pagine da altri articoli del blog per spingerle in top 10.",
+          draftText: qwList + "\n\n--- AZIONE ---\nApri gli articoli blog correlati e aggiungi link interni verso le pagine sopra. Ogni link interno spinge la pagina su di 1-3 posizioni.",
+        });
+      }
+
+      // CTR Fix: high impressions but 0 clicks = bad title/meta
+      const ctrFix = await db.execute(sqlFn`
+        SELECT query, page, ROUND(AVG(position::numeric), 1) as pos, SUM(impressions::int) as imp, SUM(clicks::int) as clicks
+        FROM growth_gsc_daily
+        WHERE query IS NOT NULL AND query != ''
+        GROUP BY query, page
+        HAVING AVG(position::numeric) <= 15 AND SUM(impressions::int) >= 5 AND SUM(clicks::int) = 0
+        ORDER BY SUM(impressions::int) DESC
+        LIMIT 2
+      `);
+
+      if (ctrFix.rows.length > 0) {
+        const cfList = ctrFix.rows.map((r: any) =>
+          `"${r.query}" — pos ${r.pos}, ${r.imp} impressioni, 0 click → ${(r.page || "").replace("https://www.sammapix.com", "")}`
+        ).join("\n");
+
+        todos.push({
+          date: today, type: "gsc", priority: 8,
+          title: `🔧 CTR basso: ci vedono ma non cliccano`,
+          description: "Queste pagine appaiono su Google ma nessuno clicca. Il titolo o la descrizione non attirano. Migliora il title tag e la meta description.",
+          draftText: cfList + "\n\n--- AZIONE ---\nApri queste pagine e migliora:\n1. Title tag: aggiungi numeri, anno (2026), power words (Free, Best, Guide)\n2. Meta description: aggiungi una call-to-action chiara\n3. Aggiungi FAQ schema per occupare più spazio nei risultati",
+        });
+      }
+
+      // Declining: keywords that lost position recently
+      const declining = await db.execute(sqlFn`
+        WITH recent AS (
+          SELECT query, ROUND(AVG(position::numeric), 1) as pos
+          FROM growth_gsc_daily
+          WHERE date >= (CURRENT_DATE - INTERVAL '7 days')::text AND query IS NOT NULL
+          GROUP BY query
+        ),
+        older AS (
+          SELECT query, ROUND(AVG(position::numeric), 1) as pos
+          FROM growth_gsc_daily
+          WHERE date < (CURRENT_DATE - INTERVAL '7 days')::text AND date >= (CURRENT_DATE - INTERVAL '14 days')::text AND query IS NOT NULL
+          GROUP BY query
+        )
+        SELECT r.query, r.pos as current_pos, o.pos as old_pos, (r.pos - o.pos) as delta
+        FROM recent r JOIN older o ON r.query = o.query
+        WHERE r.pos > o.pos + 5
+        ORDER BY delta DESC
+        LIMIT 3
+      `);
+
+      if (declining.rows.length > 0) {
+        const decList = declining.rows.map((r: any) =>
+          `"${r.query}" — era pos ${r.old_pos}, ora pos ${r.current_pos} (⬇️ ${Math.round(r.delta)} posizioni)`
+        ).join("\n");
+
+        todos.push({
+          date: today, type: "gsc", priority: 7,
+          title: `📉 Keyword in calo: ${declining.rows.length} stanno scendendo`,
+          description: "Queste keyword hanno perso posizioni nell'ultima settimana. Potrebbe servire aggiornare il contenuto o aggiungere backlink.",
+          draftText: decList,
+        });
+      }
+    } catch (e) {
+      console.error("[daily-todo] GSC intelligence error:", e);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
     // 7. SOCIAL — LinkedIn + Quora (with specific questions)
     // ═══════════════════════════════════════════════════════════════
     const quoraQuestions = [
