@@ -336,7 +336,7 @@ function categorizeTodos(todos: TodoItem[]): TodoSection[] {
     { key: "content", icon: "\uD83D\uDCE2", label: "Content", color: "text-blue-400", borderColor: "border-blue-500/30", items: [] },
     { key: "social", icon: "\uD83D\uDCBC", label: "Social", color: "text-purple-400", borderColor: "border-purple-500/30", items: [] },
     { key: "seo", icon: "\uD83D\uDD0D", label: "SEO", color: "text-green-400", borderColor: "border-green-500/30", items: [] },
-    { key: "other", icon: "\uD83D\uDCCB", label: "Other", color: "text-[#A3A3A3]", borderColor: "border-[#2A2A2A]", items: [] },
+    { key: "other", icon: "\uD83D\uDCCB", label: "Other", color: "text-[#A3A3A3]", borderColor: "border-gray-200 dark:border-[#2A2A2A]", items: [] },
   ];
 
   const sectionMap = new Map(sections.map((s) => [s.key, s]));
@@ -395,7 +395,7 @@ function CopyButton({ text }: { text: string }) {
       className={`inline-flex items-center gap-1 text-[10px] px-2.5 py-1.5 rounded-[4px] font-medium transition-all duration-200 shrink-0 ${
         copied
           ? "bg-green-500/20 text-green-400 border border-green-500/30"
-          : "bg-[#252525] text-[#A3A3A3] border border-[#333] hover:text-[#E5E5E5] hover:border-[#444]"
+          : "bg-gray-50 dark:bg-[#252525] text-gray-500 dark:text-[#A3A3A3] border border-gray-200 dark:border-[#333] hover:text-gray-900 dark:hover:text-[#E5E5E5] hover:border-gray-300 dark:hover:border-[#444]"
       }`}
     >
       {copied ? <Check size={10} strokeWidth={2} /> : <Copy size={10} strokeWidth={1.5} />}
@@ -432,8 +432,8 @@ function TodoRow({
     <div
       className={`group rounded-[5px] border transition-all duration-200 ${
         isInactive
-          ? "opacity-40 border-[#252525]"
-          : "border-[#2A2A2A] hover:border-[#3A3A3A]"
+          ? "opacity-40 border-gray-200 dark:border-[#252525]"
+          : "border-gray-200 dark:border-[#2A2A2A] hover:border-gray-300 dark:hover:border-[#3A3A3A]"
       }`}
     >
       {/* Main row */}
@@ -444,7 +444,7 @@ function TodoRow({
           className={`h-[18px] w-[18px] rounded-full border-[1.5px] shrink-0 flex items-center justify-center transition-all duration-300 ${
             isDone
               ? "bg-green-500 border-green-500 text-white"
-              : "border-[#404040] hover:border-[#6366F1] hover:scale-110"
+              : "border-gray-300 dark:border-[#404040] hover:border-[#6366F1] hover:scale-110"
           }`}
         >
           {isDone && (
@@ -456,7 +456,7 @@ function TodoRow({
 
         {/* Title + subreddit badge */}
         <div className="flex-1 min-w-0 flex items-center gap-2">
-          <span className={`text-[13px] truncate ${isDone ? "line-through text-[#555]" : "text-[#E5E5E5]"}`}>
+          <span className={`text-[13px] truncate ${isDone ? "line-through text-gray-400 dark:text-[#555]" : "text-gray-900 dark:text-[#E5E5E5]"}`}>
             {todo.title}
           </span>
           {subredditMatch && (
@@ -468,7 +468,7 @@ function TodoRow({
 
         {/* Time estimate */}
         {!isInactive && (
-          <span className="text-[9px] text-[#555] shrink-0">{estimatedTime}</span>
+          <span className="text-[9px] text-gray-400 dark:text-[#555] shrink-0">{estimatedTime}</span>
         )}
 
         {/* Status badge for done/skipped */}
@@ -476,7 +476,7 @@ function TodoRow({
           <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 text-green-400 rounded shrink-0">done</span>
         )}
         {isSkipped && (
-          <span className="text-[9px] px-1.5 py-0.5 bg-[#252525] text-[#555] rounded shrink-0">skipped</span>
+          <span className="text-[9px] px-1.5 py-0.5 bg-gray-100 dark:bg-[#252525] text-gray-400 dark:text-[#555] rounded shrink-0">skipped</span>
         )}
 
         {/* Action buttons */}
@@ -496,7 +496,7 @@ function TodoRow({
             )}
             <button
               onClick={() => onStatusChange(todo.id, "skipped")}
-              className="inline-flex items-center gap-1 text-[10px] px-2 py-1.5 rounded-[4px] text-[#555] hover:text-[#888] transition-colors shrink-0"
+              className="inline-flex items-center gap-1 text-[10px] px-2 py-1.5 rounded-[4px] text-gray-400 dark:text-[#555] hover:text-gray-600 dark:hover:text-[#888] transition-colors shrink-0"
               title="Skip"
             >
               <SkipForward size={10} strokeWidth={1.5} />
@@ -508,7 +508,7 @@ function TodoRow({
         {todo.draftText && !isInactive && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className={`text-[#555] hover:text-[#888] transition-transform duration-200 shrink-0 ${expanded ? "rotate-180" : ""}`}
+            className={`text-gray-400 dark:text-[#555] hover:text-gray-600 dark:hover:text-[#888] transition-transform duration-200 shrink-0 ${expanded ? "rotate-180" : ""}`}
           >
             <ChevronDown size={14} strokeWidth={1.5} />
           </button>
@@ -524,7 +524,7 @@ function TodoRow({
         {todo.draftText && (
           <div className="px-3 pb-3 pt-0">
             <div className="relative">
-              <pre className="text-[11px] text-[#A3A3A3] bg-[#141414] border border-[#252525] p-3 rounded-[4px] whitespace-pre-wrap font-mono leading-relaxed max-h-[200px] overflow-y-auto">
+              <pre className="text-[11px] text-gray-500 dark:text-[#A3A3A3] bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#252525] p-3 rounded-[4px] whitespace-pre-wrap font-mono leading-relaxed max-h-[200px] overflow-y-auto">
                 {todo.draftText}
               </pre>
               <div className="absolute top-2 right-2">
@@ -532,7 +532,7 @@ function TodoRow({
               </div>
             </div>
             {todo.description && (
-              <p className="text-[10px] text-[#555] mt-2 leading-relaxed">{todo.description}</p>
+              <p className="text-[10px] text-gray-400 dark:text-[#555] mt-2 leading-relaxed">{todo.description}</p>
             )}
           </div>
         )}
@@ -555,14 +555,14 @@ function TodoSectionCard({
   const doneCount = section.items.filter((t) => t.status === "done").length;
 
   return (
-    <div className={`bg-[#1E1E1E] border ${section.borderColor} rounded-[6px] overflow-hidden transition-colors`}>
+    <div className={`bg-white dark:bg-[#1E1E1E] border ${section.borderColor} rounded-[6px] overflow-hidden transition-colors`}>
       {/* Section header */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#222] transition-colors"
+        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-[#222] transition-colors"
       >
         <span className="text-base">{section.icon}</span>
-        <span className="text-sm font-medium text-[#E5E5E5]">{section.label}</span>
+        <span className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">{section.label}</span>
 
         {/* Count badges */}
         {pendingCount > 0 && (
@@ -582,7 +582,7 @@ function TodoSectionCard({
         <ChevronDown
           size={16}
           strokeWidth={1.5}
-          className={`text-[#555] transition-transform duration-300 ${collapsed ? "-rotate-90" : ""}`}
+          className={`text-gray-400 dark:text-[#555] transition-transform duration-300 ${collapsed ? "-rotate-90" : ""}`}
         />
       </button>
 
@@ -648,20 +648,20 @@ function TodoSections({
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2.5">
-          <h2 className="text-sm font-medium text-[#E5E5E5]">Da fare oggi</h2>
+          <h2 className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">Da fare oggi</h2>
           {totalPending > 0 && (
             <span className="text-[10px] font-medium px-2 py-0.5 bg-[#6366F1]/15 text-[#818CF8] rounded-full">
               {totalPending} pending
             </span>
           )}
         </div>
-        <span className="text-[10px] text-[#555]">
+        <span className="text-[10px] text-gray-400 dark:text-[#555]">
           {totalDone}/{todos.length} completati
         </span>
       </div>
 
       {/* Progress bar */}
-      <div className="h-1 bg-[#252525] rounded-full overflow-hidden mb-4">
+      <div className="h-1 bg-gray-100 dark:bg-[#252525] rounded-full overflow-hidden mb-4">
         <div
           className="h-full bg-gradient-to-r from-[#6366F1] to-[#818CF8] rounded-full transition-all duration-500"
           style={{ width: `${todos.length > 0 ? (totalDone / todos.length) * 100 : 0}%` }}
