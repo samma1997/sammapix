@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { growthRedditPosts } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq } from "drizzle-orm";
+import { POSTS } from "@/lib/blog-posts";
 
 // ---------------------------------------------------------------------------
 // Reddit search queries — general search + subreddit-specific
@@ -604,6 +605,70 @@ async function fetchRedditSearch(
 }
 
 // ---------------------------------------------------------------------------
+// Generate blog-aware dynamic Reddit search queries from latest blog posts
+// ---------------------------------------------------------------------------
+
+async function generateBlogAwareQueries(): Promise<string[]> {
+  const latestPosts = POSTS.slice(0, 5);
+  const dynamicQueries: string[] = [];
+
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (apiKey) {
+    // Use Gemini to generate natural Reddit search queries from each blog title
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    for (const post of latestPosts) {
+      if (dynamicQueries.length >= 10) break;
+      try {
+        const result = await model.generateContent(
+          `Given this blog article title: '${post.title}', generate 3 Reddit search queries that people would use when looking for this topic. Return JSON array of strings. Short, natural queries like people would type on Reddit.`
+        );
+        const text = result.response.text().trim();
+        const match = text.match(/\[[\s\S]*?\]/);
+        if (match) {
+          const parsed: string[] = JSON.parse(match[0]);
+          for (const q of parsed) {
+            if (typeof q === "string" && q.trim()) {
+              dynamicQueries.push(q.trim());
+              if (dynamicQueries.length >= 10) break;
+            }
+          }
+        }
+      } catch (err) {
+        // Fallback: extract keywords from title manually
+        console.error(`[reddit-scraper] Gemini query gen failed for "${post.title}":`, err);
+        const words = post.title
+          .toLowerCase()
+          .replace(/[^a-z0-9 ]/g, " ")
+          .split(/\s+/)
+          .filter((w) => w.length > 3 && !["best", "free", "with", "that", "from", "this", "your", "have", "will", "been", "also"].includes(w));
+        const deduped = [...new Set(words)];
+        if (deduped.length >= 2) {
+          dynamicQueries.push(deduped.slice(0, 4).join(" "));
+        }
+      }
+    }
+  } else {
+    // No Gemini — extract keywords from title manually for all 5 posts
+    for (const post of latestPosts) {
+      if (dynamicQueries.length >= 10) break;
+      const words = post.title
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, " ")
+        .split(/\s+/)
+        .filter((w) => w.length > 3 && !["best", "free", "with", "that", "from", "this", "your", "have", "will", "been", "also", "tested"].includes(w));
+      const deduped = [...new Set(words)];
+      if (deduped.length >= 2) {
+        dynamicQueries.push(deduped.slice(0, 4).join(" "));
+      }
+    }
+  }
+
+  return dynamicQueries.slice(0, 10);
+}
+
+// ---------------------------------------------------------------------------
 // Main entry point — general search + subreddit-targeted search
 // ---------------------------------------------------------------------------
 
@@ -614,9 +679,20 @@ export async function scrapeRedditPosts(): Promise<{
 }> {
   const stats = { scraped: 0, skipped: 0, errors: 0 };
 
+  // Generate dynamic blog-aware queries from the latest 5 blog posts
+  console.log("[reddit-scraper] Generating blog-aware dynamic queries...");
+  const dynamicQueries = await generateBlogAwareQueries();
+  console.log(`[reddit-scraper] ${dynamicQueries.length} dynamic queries from blog: ${dynamicQueries.join(", ")}`);
+
+  // Merge: dynamic queries at the front, then static (deduplicated)
+  const mergedQueries = [
+    ...dynamicQueries,
+    ...REDDIT_SEARCH_QUERIES.filter((q) => !dynamicQueries.includes(q)),
+  ];
+
   // PHASE 1: General Reddit search across all subreddits
   console.log("[reddit-scraper] Phase 1: General search...");
-  for (const query of REDDIT_SEARCH_QUERIES) {
+  for (const query of mergedQueries) {
     try {
       await new Promise((r) => setTimeout(r, 2000));
       const posts = await fetchRedditSearch(query);
