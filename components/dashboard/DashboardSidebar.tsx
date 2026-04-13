@@ -254,14 +254,44 @@ export default function DashboardSidebar({
         </Link>
 
         {userEmail && ADMIN_EMAILS.includes(userEmail) && (
-          <Link
-            href="/dashboard/growth"
-            onClick={() => setMobileOpen(false)}
-            className={linkClasses("/dashboard/growth")}
-          >
-            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="m7 14 4-4 4 4 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            Growth HQ
-          </Link>
+          <>
+            <Link
+              href="/dashboard/growth/overview"
+              onClick={() => setMobileOpen(false)}
+              className={linkClasses("/dashboard/growth")}
+            >
+              <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="m7 14 4-4 4 4 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              Growth HQ
+            </Link>
+            {pathname.startsWith("/dashboard/growth") && (
+              <div className="ml-6 space-y-0.5">
+                <Link href="/dashboard/growth/overview" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/overview")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">📊</span> Overview
+                </Link>
+                <Link href="/dashboard/growth/analytics" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/analytics")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">📈</span> Analitiche
+                </Link>
+                <Link href="/dashboard/growth/utenti" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/utenti")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">👥</span> Utenti
+                </Link>
+                <Link href="/dashboard/growth/assistente" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/assistente")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">🤖</span> Assistente
+                </Link>
+                <Link href="/dashboard/growth/content" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/content")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">✍️</span> Content
+                </Link>
+                <Link href="/dashboard/growth/reddit" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/reddit")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">🔴</span> Reddit
+                </Link>
+                <Link href="/dashboard/growth/outreach" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/outreach")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">📧</span> Outreach
+                </Link>
+                <Link href="/dashboard/growth/seo" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/seo")}>
+                  <span className="h-4 w-4 shrink-0 text-center text-xs">🔍</span> SEO
+                </Link>
+              </div>
+            )}
+          </>
         )}
 
         <div className="pt-3">
