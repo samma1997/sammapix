@@ -13,20 +13,27 @@ export default function GrowthLoginPage() {
 
   // On mount, check if we already have a NextAuth session (returned from Google OAuth)
   useEffect(() => {
-    fetch("/api/auth/session")
+    // Check URL params for callback indicator
+    const params = new URLSearchParams(window.location.search);
+    const hasCallback = document.cookie.includes("next-auth.session-token") ||
+                        document.cookie.includes("__Secure-next-auth.session-token");
+
+    fetch("/api/auth/session", { credentials: "include" })
       .then((r) => r.json())
       .then((session) => {
         if (session?.user?.email) {
+          setGoogleLoading(true);
           // User is signed in with Google — set growth cookie
-          fetch("/api/growth/auth/google", { method: "POST" })
+          fetch("/api/growth/auth/google", { method: "POST", credentials: "include" })
             .then((res) => {
               if (res.ok) {
                 window.location.href = "https://www.sammapix.com/dashboard/growth";
               } else {
-                setError("Not authorized for Growth Dashboard");
+                setError("Your Google account is not authorized for the Growth Dashboard");
+                setGoogleLoading(false);
               }
             })
-            .catch(() => setError("Failed to authenticate"));
+            .catch(() => { setError("Failed to authenticate"); setGoogleLoading(false); });
         }
       })
       .catch(() => {});
