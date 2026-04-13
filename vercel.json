@@ -53,6 +53,10 @@
     {
       "path": "/api/cron/daily-todo",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/gsc-index-check",
+      "schedule": "0 7 * * *"
     }
   ],
   "redirects": [
