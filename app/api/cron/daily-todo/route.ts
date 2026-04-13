@@ -5,6 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq, and, lt, isNotNull, ne, desc, asc, sql as sqlFn } from "drizzle-orm";
 import { POSTS, type Post } from "@/lib/blog-posts";
 import { getUnpromotedBlogs } from "@/lib/growth/blog-promoter";
+import { TARGET_KEYWORDS, matchKeywordTarget, type KeywordTarget } from "@/lib/growth/keyword-targets";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -79,14 +80,25 @@ export async function GET(request: NextRequest) {
         const matchedBlog = findMatchingBlogPost(post.title || "");
         const blogUrl = matchedBlog ? `https://sammapix.com/blog/${matchedBlog.slug}` : null;
 
+        // Check if this post is relevant to a keyword target
+        const matchedKw = matchKeywordTarget(post.title || "");
+        const toolPageUrl = matchedKw ? `https://sammapix.com${matchedKw.page}` : null;
+
         let description = `Post reale trovato dal cron. Score: ${post.relevanceScore}. Copia il commento e rispondi al post.`;
         let draftText = post.draftComment || undefined;
 
         if (matchedBlog && blogUrl) {
           description += `\n\nPuoi linkare il tuo articolo: ${blogUrl}`;
-          // Append article reference to draft comment only if it doesn't already contain a sammapix.com link
           if (draftText && !draftText.includes("sammapix.com")) {
             draftText = `${draftText}\n\nI actually wrote a detailed guide on this: ${blogUrl}`;
+          }
+        }
+
+        // Add keyword context and tool page link suggestion
+        if (matchedKw) {
+          description += `\n\n🎯 Serve la keyword: "${matchedKw.keyword}" (target top ${matchedKw.target}, pagina: ${matchedKw.page})`;
+          if (toolPageUrl && draftText && !draftText.includes("sammapix.com")) {
+            description += `\nSuggerimento: includi link a ${toolPageUrl} nel commento per aiutare il ranking.`;
           }
         }
 
@@ -261,11 +273,77 @@ sammapix.com`;
       }
     } catch {}
 
-    todos.push({
-      date: today, type: "blog", priority: 6,
-      title: "✍️ Scrivi 1 articolo blog",
-      description: "Apri Claude Code e chiedi di scrivere un articolo SEO. Lui fa ricerca, scrive, genera audio, crea cover, pusha.",
-    });
+    // Smart blog suggestion: find weakest keyword target (not ranking or position > 30)
+    // by querying GSC for pages that match keyword target pages.
+    try {
+      // Get latest GSC positions for all pages — we'll filter to keyword targets in JS
+      const gscPageData = await db.execute(sqlFn`
+        SELECT
+          page,
+          ROUND(AVG(position::numeric), 1) as avg_position,
+          SUM(impressions::int) as impressions
+        FROM growth_gsc_daily
+        WHERE page IS NOT NULL AND page != ''
+        GROUP BY page
+      `);
+
+      // Build a map: page path -> avg position
+      const pagePositions = new Map<string, number>();
+      for (const row of gscPageData.rows as any[]) {
+        const pagePath = (row.page as string)
+          .replace("https://www.sammapix.com", "")
+          .replace("https://sammapix.com", "");
+        pagePositions.set(pagePath, Number(row.avg_position));
+      }
+
+      // Find the weakest blog/comparison keyword target
+      // Priority: not ranking > position > 30 > position > target
+      const blogKeywords = TARGET_KEYWORDS.filter(
+        (kw) => kw.category === "blog" || kw.category === "comparison"
+      );
+
+      let weakest: KeywordTarget | null = null;
+      let weakestPos = -1;
+
+      for (const kw of blogKeywords) {
+        const pos = pagePositions.get(kw.page);
+        if (pos === undefined) {
+          // Not ranking at all — highest priority
+          weakest = kw;
+          break;
+        }
+        if (pos > weakestPos) {
+          weakestPos = pos;
+          weakest = kw;
+        }
+      }
+
+      if (weakest) {
+        const posInfo = pagePositions.get(weakest.page);
+        const posLabel = posInfo !== undefined ? `posizione attuale: ${posInfo}` : "non ancora indicizzato";
+
+        todos.push({
+          date: today, type: "blog", priority: 6,
+          title: `✍️ Scrivi articolo: "${weakest.keyword}" (${posLabel})`,
+          description: `Keyword target: "${weakest.keyword}" — obiettivo top ${weakest.target}, pagina: ${weakest.page}.\n${weakest.explanation}\n\n🎯 Serve la keyword: "${weakest.keyword}" (${posLabel}, obiettivo top ${weakest.target})\n\nChiedi a Claude Code: "Scrivi un articolo SEO completo per la keyword '${weakest.keyword}', target page ${weakest.page}, seguendo le linee guida editoriali di SammaPix."`,
+          actionUrl: `https://www.sammapix.com${weakest.page}`,
+        });
+      } else {
+        // Fallback if no blog keywords found
+        todos.push({
+          date: today, type: "blog", priority: 6,
+          title: "✍️ Scrivi 1 articolo blog",
+          description: "Apri Claude Code e chiedi di scrivere un articolo SEO. Lui fa ricerca, scrive, genera audio, crea cover, pusha.",
+        });
+      }
+    } catch {
+      // Fallback if GSC query fails
+      todos.push({
+        date: today, type: "blog", priority: 6,
+        title: "✍️ Scrivi 1 articolo blog",
+        description: "Apri Claude Code e chiedi di scrivere un articolo SEO. Lui fa ricerca, scrive, genera audio, crea cover, pusha.",
+      });
+    }
 
     // ═══════════════════════════════════════════════════════════════
     // 6. SEO — GSC indexing with specific URLs

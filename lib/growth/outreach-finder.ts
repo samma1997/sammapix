@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { growthOutreachTargets } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { TARGET_KEYWORDS } from "@/lib/growth/keyword-targets";
 
 // ---------------------------------------------------------------------------
 // Outreach Finder — discovers new "best image tools" articles for link outreach
@@ -16,28 +17,36 @@ import { eq } from "drizzle-orm";
 const MAX_NEW_TARGETS = 20;
 const DELAY_MS = 2000;
 
+// ---------------------------------------------------------------------------
+// Keyword-target outreach queries — derived from TARGET_KEYWORDS.outreachQueries
+// These are the highest priority because they map directly to our SEO strategy.
+// Built at module load time so they're available to all source functions.
+// ---------------------------------------------------------------------------
+const KEYWORD_TARGET_OUTREACH_QUERIES: string[] = (() => {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const kw of TARGET_KEYWORDS) {
+    for (const q of kw.outreachQueries) {
+      if (!seen.has(q)) {
+        seen.add(q);
+        result.push(q);
+      }
+    }
+  }
+  return result;
+})();
+
 // Search queries for Google Custom Search
-const GOOGLE_SEARCH_QUERIES = [
-  // Compression & optimization
-  "best image compression tools 2026",
+// Keyword-target queries come FIRST (highest SEO priority), then static fallbacks.
+const GOOGLE_SEARCH_QUERIES: string[] = [
+  // ── Keyword-target driven (generated from TARGET_KEYWORDS.outreachQueries) ──
+  ...KEYWORD_TARGET_OUTREACH_QUERIES,
+  // ── Static fallbacks (only run if keyword targets don't fill the budget) ──
   "best image optimizer online free",
-  "tinypng alternatives 2026",
-  "compress images without losing quality tools",
-  // Background removal
-  "best background remover free 2026",
-  "remove.bg alternatives free",
   "best ai background removal tools",
-  // Upscaling
   "best free image upscaler 2026",
   "topaz gigapixel alternatives free",
-  // Passport photo
-  "best passport photo tools free",
-  "passport photo maker online free",
-  // Resize & convert
   "best tools to resize images online",
-  "best webp converter tools",
-  "best heic to jpg converter free",
-  // General
   "best image tools for web developers",
   "best free photo editing tools online 2026",
 ];
