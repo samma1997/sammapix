@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { growthDailyTodos, growthDirectorySubmissions, growthOutreachTargets, growthRedditPosts } from "@/lib/db/schema";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { eq, and, lt, isNotNull, ne, desc, asc, sql as sqlFn } from "drizzle-orm";
+import { POSTS, type Post } from "@/lib/blog-posts";
+import { getUnpromotedBlogs } from "@/lib/growth/blog-promoter";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -36,6 +38,8 @@ export async function GET(request: NextRequest) {
     // 1. REDDIT COMMENTS — from REAL posts in DB (with draft comments)
     //    These are posts scraped by growth-reddit cron where people
     //    ask about image compression, HEIC, etc.
+    //    Blog-aware: if a Reddit post matches a recent blog article,
+    //    inject a natural reference to the article in the draft comment.
     // ═══════════════════════════════════════════════════════════════
     try {
       const redditPosts = await db.select().from(growthRedditPosts)
@@ -49,13 +53,49 @@ export async function GET(request: NextRequest) {
         .orderBy(desc(growthRedditPosts.relevanceScore))
         .limit(3);
 
+      // Helper: check if a Reddit post title matches a blog post
+      function findMatchingBlogPost(redditTitle: string): Post | null {
+        const titleLower = redditTitle.toLowerCase();
+        const recentPosts = POSTS.slice(0, 10);
+        let bestMatch: Post | null = null;
+        let bestScore = 0;
+        for (const blogPost of recentPosts) {
+          const blogWords = blogPost.title
+            .toLowerCase()
+            .replace(/[^a-z0-9 ]/g, " ")
+            .split(/\s+/)
+            .filter((w) => w.length > 4 && !["about", "guide", "their", "there", "these", "those", "which", "while", "where"].includes(w));
+          const matchCount = blogWords.filter((w) => titleLower.includes(w)).length;
+          // Require at least 2 meaningful word matches
+          if (matchCount >= 2 && matchCount > bestScore) {
+            bestScore = matchCount;
+            bestMatch = blogPost;
+          }
+        }
+        return bestMatch;
+      }
+
       for (const post of redditPosts) {
+        const matchedBlog = findMatchingBlogPost(post.title || "");
+        const blogUrl = matchedBlog ? `https://sammapix.com/blog/${matchedBlog.slug}` : null;
+
+        let description = `Post reale trovato dal cron. Score: ${post.relevanceScore}. Copia il commento e rispondi al post.`;
+        let draftText = post.draftComment || undefined;
+
+        if (matchedBlog && blogUrl) {
+          description += `\n\nPuoi linkare il tuo articolo: ${blogUrl}`;
+          // Append article reference to draft comment only if it doesn't already contain a sammapix.com link
+          if (draftText && !draftText.includes("sammapix.com")) {
+            draftText = `${draftText}\n\nI actually wrote a detailed guide on this: ${blogUrl}`;
+          }
+        }
+
         todos.push({
           date: today, type: "reddit", priority: 9,
           title: `🔴 r/${post.subreddit} — rispondi a: "${(post.title || "").substring(0, 50)}..."`,
-          description: `Post reale trovato dal cron. Score: ${post.relevanceScore}. Copia il commento e rispondi al post.`,
+          description,
           actionUrl: post.url || `https://www.reddit.com/r/${post.subreddit}`,
-          draftText: post.draftComment || undefined,
+          draftText,
         });
       }
 
@@ -307,7 +347,35 @@ In ENGLISH. Just the post text, nothing else.`);
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // 8. WEEKLY — Monday only
+    // 8. BLOG PROMOTION — 1 unpromoted blog per day
+    //    Checks which blog posts have never been crossposted and
+    //    creates Dev.to + Hashnode promotion TODOs for one of them.
+    // ═══════════════════════════════════════════════════════════════
+    try {
+      const unpromotedBlogs = await getUnpromotedBlogs();
+      if (unpromotedBlogs.length > 0) {
+        const blogToPromote = unpromotedBlogs[0];
+        todos.push({
+          date: today, type: "content", priority: 8,
+          title: `📢 Crosspost su Dev.to: "${blogToPromote.title.substring(0, 60)}"`,
+          description: `Articolo mai promosso. Slug: ${blogToPromote.slug}. Vai su dev.to/new, incolla contenuto dal blog, aggiungi tag: image, webdev, tools, opensource.`,
+          actionUrl: "https://dev.to/new",
+          draftText: `https://www.sammapix.com/blog/${blogToPromote.slug}`,
+        });
+        todos.push({
+          date: today, type: "content", priority: 7,
+          title: `📢 Crosspost su Hashnode: "${blogToPromote.title.substring(0, 60)}"`,
+          description: `Stesso articolo su Hashnode. Slug: ${blogToPromote.slug}. Aggiungi canonical URL: https://www.sammapix.com/blog/${blogToPromote.slug}`,
+          actionUrl: "https://hashnode.com/post/create",
+          draftText: `https://www.sammapix.com/blog/${blogToPromote.slug}`,
+        });
+      }
+    } catch (e) {
+      console.error("[daily-todo] Blog promotion error:", e);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // 9. WEEKLY — Monday only
     // ═══════════════════════════════════════════════════════════════
     if (dayOfWeek === 1) {
       todos.push({
