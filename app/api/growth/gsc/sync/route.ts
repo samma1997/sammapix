@@ -1,15 +1,11 @@
-import { checkGrowthAuth } from "@/lib/growth/auth";
-import { NextResponse } from "next/server";
-
-
-
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { growthGscDaily } from "@/lib/db/schema";
 import { fetchGSCData } from "@/lib/growth/gsc-client";
-import { and, eq, isNull } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export const runtime = "nodejs";
-
+export const maxDuration = 60;
 
 function dateStr(daysAgo: number): string {
   const d = new Date();
@@ -17,61 +13,71 @@ function dateStr(daysAgo: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+async function doSync() {
+  // Sync last 5 days (GSC has 2-3 day delay)
+  const startDate = dateStr(5);
+  const endDate = dateStr(0);
+
+  const rows = await fetchGSCData(startDate, endDate);
+
+  if (rows.length === 0) {
+    return { synced: 0, message: "No GSC data returned." };
+  }
+
+  // Clear existing data for this range, then insert fresh
+  for (let d = 5; d >= 0; d--) {
+    await db.delete(growthGscDaily).where(eq(growthGscDaily.date, dateStr(d)));
+  }
+
+  let synced = 0;
+  for (const row of rows) {
+    await db.insert(growthGscDaily).values({
+      date: row.date,
+      page: row.page,
+      query: row.query,
+      impressions: row.impressions,
+      clicks: row.clicks,
+      ctr: row.ctr,
+      position: row.position,
+    });
+    synced++;
+  }
+
+  return { synced, startDate, endDate };
+}
+
+// Cron calls GET — authenticate with CRON_SECRET
+export async function GET(request: NextRequest) {
+  const cronSecret = process.env.CRON_SECRET;
+  const authHeader = request.headers.get("authorization");
+
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const result = await doSync();
+    return NextResponse.json(result);
+  } catch (err) {
+    console.error("[growth/gsc/sync]", err);
+    return NextResponse.json({ error: String(err) }, { status: 500 });
+  }
+}
+
+// Manual calls use POST with growth auth
 export async function POST() {
+  // Import dynamically to avoid issues in cron context
+  const { checkGrowthAuth } = await import("@/lib/growth/auth");
   const authorized = await checkGrowthAuth();
   if (!authorized) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const startDate = dateStr(3);
-  const endDate = dateStr(0);
-
   try {
-    const rows = await fetchGSCData(startDate, endDate);
-
-    if (rows.length === 0) {
-      return NextResponse.json({
-        synced: 0,
-        message: "No GSC data returned. GOOGLE_SERVICE_ACCOUNT_KEY may not be set.",
-      });
-    }
-
-    // Clear existing data for this date range first, then insert fresh
-    // This prevents duplicates completely
-    await db
-      .delete(growthGscDaily)
-      .where(
-        and(
-          eq(growthGscDaily.date, startDate),
-        )
-      );
-    // Also clear any dates in between
-    for (let d = 3; d >= 0; d--) {
-      await db.delete(growthGscDaily).where(eq(growthGscDaily.date, dateStr(d)));
-    }
-
-    let synced = 0;
-    for (const row of rows) {
-      await db.insert(growthGscDaily).values({
-        date: row.date,
-        page: row.page,
-        query: row.query,
-        impressions: row.impressions,
-        clicks: row.clicks,
-        ctr: row.ctr,
-        position: row.position,
-      });
-      synced++;
-    }
-
-    return NextResponse.json({ synced, startDate, endDate });
+    const result = await doSync();
+    return NextResponse.json(result);
   } catch (err) {
     console.error("[growth/gsc/sync POST]", err);
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: String(err) }, { status: 500 });
   }
-}
-
-// Allow cron GET calls too
-export async function GET() {
-  return POST();
 }
