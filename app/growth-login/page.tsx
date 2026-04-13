@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
 
 export default function GrowthLoginPage() {
   const [username, setUsername] = useState("");
@@ -11,20 +10,27 @@ export default function GrowthLoginPage() {
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const router = useRouter();
-  const { data: session } = useSession();
 
-  // If already signed in with Google (admin), redirect
-  if (session?.user?.email) {
-    // Set the growth cookie via API, then redirect
-    fetch("/api/growth/auth/google", { method: "POST" })
-      .then((res) => {
-        if (res.ok) {
-          router.push("/dashboard/growth");
-          router.refresh();
+  // On mount, check if we already have a NextAuth session (returned from Google OAuth)
+  useEffect(() => {
+    fetch("/api/auth/session")
+      .then((r) => r.json())
+      .then((session) => {
+        if (session?.user?.email) {
+          // User is signed in with Google — set growth cookie
+          fetch("/api/growth/auth/google", { method: "POST" })
+            .then((res) => {
+              if (res.ok) {
+                window.location.href = "/dashboard/growth";
+              } else {
+                setError("Not authorized for Growth Dashboard");
+              }
+            })
+            .catch(() => setError("Failed to authenticate"));
         }
       })
       .catch(() => {});
-  }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -39,8 +45,7 @@ export default function GrowthLoginPage() {
       });
 
       if (res.ok) {
-        router.push("/dashboard/growth");
-        router.refresh();
+        window.location.href = "/dashboard/growth";
       } else {
         setError("Invalid credentials");
       }
@@ -51,10 +56,10 @@ export default function GrowthLoginPage() {
     }
   }
 
-  async function handleGoogle() {
+  function handleGoogle() {
     setGoogleLoading(true);
     setError("");
-    await signIn("google", { callbackUrl: "/growth-login" });
+    window.location.href = "/api/auth/signin/google?callbackUrl=" + encodeURIComponent("/growth-login");
   }
 
   return (
