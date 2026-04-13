@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import {
   LayoutDashboard,
@@ -19,6 +19,11 @@ import {
   Brain,
   ArrowRight,
   AlertCircle,
+  ChevronDown,
+  Check,
+  Copy,
+  ExternalLink,
+  SkipForward,
 } from "lucide-react";
 
 /* ─── Types ─── */
@@ -302,6 +307,381 @@ function AiInsights({
   );
 }
 
+/* ─── Todo Types ─── */
+
+interface TodoItem {
+  id: number;
+  type: string;
+  title: string;
+  description: string;
+  actionUrl?: string;
+  draftText?: string;
+  status: string;
+  priority: number;
+}
+
+type TodoSection = {
+  key: string;
+  icon: string;
+  label: string;
+  color: string;
+  borderColor: string;
+  items: TodoItem[];
+};
+
+function categorizeTodos(todos: TodoItem[]): TodoSection[] {
+  const sections: TodoSection[] = [
+    { key: "reddit", icon: "\uD83D\uDD34", label: "Reddit", color: "text-red-400", borderColor: "border-red-500/30", items: [] },
+    { key: "directory", icon: "\uD83D\uDCC2", label: "Directory & Backlink", color: "text-amber-400", borderColor: "border-amber-500/30", items: [] },
+    { key: "content", icon: "\uD83D\uDCE2", label: "Content", color: "text-blue-400", borderColor: "border-blue-500/30", items: [] },
+    { key: "social", icon: "\uD83D\uDCBC", label: "Social", color: "text-purple-400", borderColor: "border-purple-500/30", items: [] },
+    { key: "seo", icon: "\uD83D\uDD0D", label: "SEO", color: "text-green-400", borderColor: "border-green-500/30", items: [] },
+    { key: "other", icon: "\uD83D\uDCCB", label: "Other", color: "text-[#A3A3A3]", borderColor: "border-[#2A2A2A]", items: [] },
+  ];
+
+  const sectionMap = new Map(sections.map((s) => [s.key, s]));
+
+  for (const todo of todos) {
+    const t = todo.type.toLowerCase();
+    const title = todo.title.toLowerCase();
+
+    if (t.includes("reddit")) {
+      sectionMap.get("reddit")!.items.push(todo);
+    } else if (t === "directory" || (t === "backlink" && !title.includes("dev.to") && !title.includes("hashnode") && !title.includes("medium"))) {
+      sectionMap.get("directory")!.items.push(todo);
+    } else if (t === "content" || t === "blog" || title.includes("dev.to") || title.includes("hashnode") || title.includes("medium")) {
+      sectionMap.get("content")!.items.push(todo);
+    } else if (t === "linkedin" || t === "social" || title.includes("quora") || title.includes("linkedin")) {
+      sectionMap.get("social")!.items.push(todo);
+    } else if (t === "gsc" || t === "seo" || t === "gsc_alert") {
+      sectionMap.get("seo")!.items.push(todo);
+    } else {
+      sectionMap.get("other")!.items.push(todo);
+    }
+  }
+
+  return sections.filter((s) => s.items.length > 0);
+}
+
+/* ─── Copy Button ─── */
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      setCopied(true);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className={`inline-flex items-center gap-1 text-[10px] px-2.5 py-1.5 rounded-[4px] font-medium transition-all duration-200 shrink-0 ${
+        copied
+          ? "bg-green-500/20 text-green-400 border border-green-500/30"
+          : "bg-[#252525] text-[#A3A3A3] border border-[#333] hover:text-[#E5E5E5] hover:border-[#444]"
+      }`}
+    >
+      {copied ? <Check size={10} strokeWidth={2} /> : <Copy size={10} strokeWidth={1.5} />}
+      {copied ? "Copied" : "Copy"}
+    </button>
+  );
+}
+
+/* ─── Single Todo Row ─── */
+
+function TodoRow({
+  todo,
+  onStatusChange,
+}: {
+  todo: TodoItem;
+  onStatusChange: (id: number, status: string) => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const isDone = todo.status === "done";
+  const isSkipped = todo.status === "skipped";
+  const isInactive = isDone || isSkipped;
+
+  const estimatedTime = todo.type.includes("reddit") ? "~2 min"
+    : todo.type === "directory" || todo.type === "backlink" ? "~3 min"
+    : todo.type === "blog" || todo.type === "content" ? "~15 min"
+    : todo.type === "linkedin" || todo.type === "social" ? "~3 min"
+    : todo.type === "gsc" || todo.type === "seo" || todo.type === "gsc_alert" ? "~1 min"
+    : "~5 min";
+
+  // Extract subreddit from title if Reddit type
+  const subredditMatch = todo.title.match(/r\/(\w+)/);
+
+  return (
+    <div
+      className={`group rounded-[5px] border transition-all duration-200 ${
+        isInactive
+          ? "opacity-40 border-[#252525]"
+          : "border-[#2A2A2A] hover:border-[#3A3A3A]"
+      }`}
+    >
+      {/* Main row */}
+      <div className="flex items-center gap-3 px-3 py-2.5">
+        {/* Checkbox */}
+        <button
+          onClick={() => onStatusChange(todo.id, isDone ? "pending" : "done")}
+          className={`h-[18px] w-[18px] rounded-full border-[1.5px] shrink-0 flex items-center justify-center transition-all duration-300 ${
+            isDone
+              ? "bg-green-500 border-green-500 text-white"
+              : "border-[#404040] hover:border-[#6366F1] hover:scale-110"
+          }`}
+        >
+          {isDone && (
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" className="animate-checkmark">
+              <path d="M2 5L4.5 7.5L8 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+        </button>
+
+        {/* Title + subreddit badge */}
+        <div className="flex-1 min-w-0 flex items-center gap-2">
+          <span className={`text-[13px] truncate ${isDone ? "line-through text-[#555]" : "text-[#E5E5E5]"}`}>
+            {todo.title}
+          </span>
+          {subredditMatch && (
+            <span className="text-[9px] px-1.5 py-0.5 bg-red-500/10 text-red-400 rounded font-mono shrink-0">
+              r/{subredditMatch[1]}
+            </span>
+          )}
+        </div>
+
+        {/* Time estimate */}
+        {!isInactive && (
+          <span className="text-[9px] text-[#555] shrink-0">{estimatedTime}</span>
+        )}
+
+        {/* Status badge for done/skipped */}
+        {isDone && (
+          <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 text-green-400 rounded shrink-0">done</span>
+        )}
+        {isSkipped && (
+          <span className="text-[9px] px-1.5 py-0.5 bg-[#252525] text-[#555] rounded shrink-0">skipped</span>
+        )}
+
+        {/* Action buttons */}
+        {!isInactive && (
+          <div className="flex items-center gap-1 shrink-0">
+            {todo.draftText && <CopyButton text={todo.draftText} />}
+            {todo.actionUrl && (
+              <a
+                href={todo.actionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1.5 rounded-[4px] font-medium bg-[#6366F1]/15 text-[#818CF8] border border-[#6366F1]/20 hover:bg-[#6366F1]/25 transition-colors shrink-0"
+              >
+                <ExternalLink size={10} strokeWidth={1.5} />
+                Open
+              </a>
+            )}
+            <button
+              onClick={() => onStatusChange(todo.id, "skipped")}
+              className="inline-flex items-center gap-1 text-[10px] px-2 py-1.5 rounded-[4px] text-[#555] hover:text-[#888] transition-colors shrink-0"
+              title="Skip"
+            >
+              <SkipForward size={10} strokeWidth={1.5} />
+            </button>
+          </div>
+        )}
+
+        {/* Expand toggle for draft text */}
+        {todo.draftText && !isInactive && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className={`text-[#555] hover:text-[#888] transition-transform duration-200 shrink-0 ${expanded ? "rotate-180" : ""}`}
+          >
+            <ChevronDown size={14} strokeWidth={1.5} />
+          </button>
+        )}
+      </div>
+
+      {/* Expanded draft text */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          expanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        {todo.draftText && (
+          <div className="px-3 pb-3 pt-0">
+            <div className="relative">
+              <pre className="text-[11px] text-[#A3A3A3] bg-[#141414] border border-[#252525] p-3 rounded-[4px] whitespace-pre-wrap font-mono leading-relaxed max-h-[200px] overflow-y-auto">
+                {todo.draftText}
+              </pre>
+              <div className="absolute top-2 right-2">
+                <CopyButton text={todo.draftText} />
+              </div>
+            </div>
+            {todo.description && (
+              <p className="text-[10px] text-[#555] mt-2 leading-relaxed">{todo.description}</p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Collapsible Section ─── */
+
+function TodoSectionCard({
+  section,
+  onStatusChange,
+}: {
+  section: TodoSection;
+  onStatusChange: (id: number, status: string) => void;
+}) {
+  const [collapsed, setCollapsed] = useState(false);
+  const pendingCount = section.items.filter((t) => t.status === "pending").length;
+  const doneCount = section.items.filter((t) => t.status === "done").length;
+
+  return (
+    <div className={`bg-[#1E1E1E] border ${section.borderColor} rounded-[6px] overflow-hidden transition-colors`}>
+      {/* Section header */}
+      <button
+        onClick={() => setCollapsed(!collapsed)}
+        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#222] transition-colors"
+      >
+        <span className="text-base">{section.icon}</span>
+        <span className="text-sm font-medium text-[#E5E5E5]">{section.label}</span>
+
+        {/* Count badges */}
+        {pendingCount > 0 && (
+          <span className="text-[10px] font-medium px-2 py-0.5 bg-[#6366F1]/15 text-[#818CF8] rounded-full">
+            {pendingCount}
+          </span>
+        )}
+        {doneCount > 0 && (
+          <span className="text-[10px] font-medium px-2 py-0.5 bg-green-500/10 text-green-400 rounded-full">
+            {doneCount} done
+          </span>
+        )}
+
+        <div className="flex-1" />
+
+        {/* Collapse arrow */}
+        <ChevronDown
+          size={16}
+          strokeWidth={1.5}
+          className={`text-[#555] transition-transform duration-300 ${collapsed ? "-rotate-90" : ""}`}
+        />
+      </button>
+
+      {/* Items */}
+      <div
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          collapsed ? "max-h-0" : "max-h-[2000px]"
+        }`}
+      >
+        <div className="px-3 pb-3 space-y-1">
+          {section.items
+            .sort((a, b) => {
+              // pending first, then done, then skipped
+              const order = { pending: 0, done: 1, skipped: 2 };
+              const ao = order[a.status as keyof typeof order] ?? 0;
+              const bo = order[b.status as keyof typeof order] ?? 0;
+              if (ao !== bo) return ao - bo;
+              return b.priority - a.priority;
+            })
+            .map((todo) => (
+              <TodoRow key={todo.id} todo={todo} onStatusChange={onStatusChange} />
+            ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main TODO Sections Container ─── */
+
+function TodoSections({
+  todos,
+  setTodos,
+  fireConfetti,
+}: {
+  todos: TodoItem[];
+  setTodos: React.Dispatch<React.SetStateAction<TodoItem[]>>;
+  fireConfetti: () => void;
+}) {
+  const sections = categorizeTodos(todos);
+  const totalPending = todos.filter((t) => t.status === "pending").length;
+  const totalDone = todos.filter((t) => t.status === "done").length;
+
+  const handleStatusChange = async (id: number, newStatus: string) => {
+    // Optimistic update
+    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, status: newStatus } : t)));
+
+    if (newStatus === "done") {
+      const remaining = todos.filter((t) => t.id !== id && t.status === "pending");
+      if (remaining.length <= 1) fireConfetti();
+      else fireConfetti();
+    }
+
+    await fetch(`/api/growth/todos/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus }),
+    });
+  };
+
+  return (
+    <div className="mb-6">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2.5">
+          <h2 className="text-sm font-medium text-[#E5E5E5]">Da fare oggi</h2>
+          {totalPending > 0 && (
+            <span className="text-[10px] font-medium px-2 py-0.5 bg-[#6366F1]/15 text-[#818CF8] rounded-full">
+              {totalPending} pending
+            </span>
+          )}
+        </div>
+        <span className="text-[10px] text-[#555]">
+          {totalDone}/{todos.length} completati
+        </span>
+      </div>
+
+      {/* Progress bar */}
+      <div className="h-1 bg-[#252525] rounded-full overflow-hidden mb-4">
+        <div
+          className="h-full bg-gradient-to-r from-[#6366F1] to-[#818CF8] rounded-full transition-all duration-500"
+          style={{ width: `${todos.length > 0 ? (totalDone / todos.length) * 100 : 0}%` }}
+        />
+      </div>
+
+      {/* Sections */}
+      <div className="space-y-2">
+        {sections.map((section) => (
+          <TodoSectionCard
+            key={section.key}
+            section={section}
+            onStatusChange={handleStatusChange}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Overview Page
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -312,7 +692,7 @@ export default function OverviewPage() {
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [activeUsers, setActiveUsers] = useState<number | null>(null);
   const [revenueHistory, setRevenueHistory] = useState<{ month: string; revenue: number }[]>([]);
-  const [todos, setTodos] = useState<{ id: number; type: string; title: string; description: string; actionUrl?: string; draftText?: string; status: string; priority: number }[]>([]);
+  const [todos, setTodos] = useState<TodoItem[]>([]);
 
   const fmt = (n: number): string => {
     if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
@@ -664,120 +1044,8 @@ export default function OverviewPage() {
         />
       </div>
 
-      {/* ─── Daily TODOs ─── */}
-      {todos.length > 0 && (
-        <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
-              Da fare oggi
-            </h2>
-            <span className="text-[10px] text-[#A3A3A3]">
-              {todos.filter(t => t.status === "done").length}/{todos.length} completati
-            </span>
-          </div>
-          <div className="space-y-2">
-            {todos.map((todo) => {
-              const typeIcons: Record<string, string> = {
-                reddit_post: "📝", reddit_comment: "💬", directory: "📂",
-                backlink: "🔗", blog: "✍️", gsc_alert: "📊", linkedin: "💼",
-              };
-              const isDone = todo.status === "done";
-              const isSkipped = todo.status === "skipped";
-              return (
-                <div
-                  key={todo.id}
-                  className={`flex items-start gap-3 p-3 rounded-[6px] border transition-colors ${
-                    isDone
-                      ? "bg-green-50/50 dark:bg-green-950/10 border-green-200 dark:border-green-900/30"
-                      : isSkipped
-                        ? "bg-[#FAFAFA] dark:bg-[#1A1A1A] border-[#E5E5E5] dark:border-[#2A2A2A] opacity-50"
-                        : "bg-white dark:bg-[#191919] border-[#E5E5E5] dark:border-[#2A2A2A] hover:border-[#D4D4D4]"
-                  }`}
-                >
-                  {/* Checkbox */}
-                  <button
-                    onClick={async () => {
-                      const newStatus = isDone ? "pending" : "done";
-                      await fetch(`/api/growth/todos/${todo.id}`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ status: newStatus }),
-                      });
-                      setTodos(prev => prev.map(t => t.id === todo.id ? { ...t, status: newStatus } : t));
-                      if (newStatus === "done") {
-                        // Check if all todos are done after this one
-                        const remaining = todos.filter(t => t.id !== todo.id && t.status !== "done" && t.status !== "skipped");
-                        if (remaining.length === 0) {
-                          fireConfetti(); // All done! Big celebration
-                        } else {
-                          fireConfetti(); // Single task done
-                        }
-                      }
-                    }}
-                    className={`mt-0.5 h-5 w-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-300 ${
-                      isDone
-                        ? "bg-green-500 border-green-500 text-white scale-110"
-                        : "border-[#D4D4D4] dark:border-[#404040] hover:border-[#6366F1] hover:scale-105"
-                    }`}
-                  >
-                    {isDone && (
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="animate-checkmark">
-                        <path d="M2 5L4.5 7.5L8 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </button>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-xs">{typeIcons[todo.type] || "📌"}</span>
-                      <span className={`text-sm font-medium ${isDone ? "line-through text-[#A3A3A3]" : "text-[#171717] dark:text-[#E5E5E5]"}`}>
-                        {todo.title}
-                      </span>
-                    </div>
-                    <p className="text-xs text-[#737373] leading-relaxed">{todo.description}</p>
-                    {todo.draftText && !isDone && (
-                      <details className="mt-2">
-                        <summary className="text-[10px] text-[#6366F1] cursor-pointer hover:underline">Mostra testo pronto</summary>
-                        <pre className="mt-1 text-xs text-[#525252] dark:text-[#A3A3A3] bg-[#FAFAFA] dark:bg-[#252525] p-2 rounded-[4px] whitespace-pre-wrap font-mono">{todo.draftText}</pre>
-                      </details>
-                    )}
-                  </div>
-
-                  {/* Action + Skip */}
-                  <div className="flex items-center gap-1 shrink-0">
-                    {todo.actionUrl && !isDone && (
-                      <a
-                        href={todo.actionUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] px-2 py-1 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-[4px] hover:opacity-80 transition-opacity"
-                      >
-                        Vai
-                      </a>
-                    )}
-                    {!isDone && !isSkipped && (
-                      <button
-                        onClick={async () => {
-                          await fetch(`/api/growth/todos/${todo.id}`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ status: "skipped" }),
-                          });
-                          setTodos(prev => prev.map(t => t.id === todo.id ? { ...t, status: "skipped" } : t));
-                        }}
-                        className="text-[10px] px-2 py-1 text-[#A3A3A3] hover:text-[#737373] transition-colors"
-                      >
-                        Salta
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {/* ─── Daily TODOs — Sectioned ─── */}
+      {todos.length > 0 && <TodoSections todos={todos} setTodos={setTodos} fireConfetti={fireConfetti} />}
 
       {/* ─── Chart: Impressions + Clicks 30d ─── */}
       <div className="bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-[6px] p-5 mb-6">
