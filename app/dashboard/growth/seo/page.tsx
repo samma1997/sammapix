@@ -130,10 +130,12 @@ export default function SEOKeywordsPage() {
   }, [keywords, filter, sort]);
 
   const stats = useMemo(() => {
-    const onPage1 = keywords.filter(k => k.current_position <= 10).length;
-    const quickWins = keywords.filter(k => k.opportunity === "QUICK_WIN").length;
-    const avgPos = keywords.length > 0
-      ? keywords.reduce((s, k) => s + k.current_position, 0) / keywords.length
+    // Only count keywords with 3+ impressions as meaningful
+    const meaningful = keywords.filter(k => k.total_impressions >= 3);
+    const onPage1 = meaningful.filter(k => k.current_position <= 10).length;
+    const quickWins = meaningful.filter(k => k.opportunity === "QUICK_WIN").length;
+    const avgPos = meaningful.length > 0
+      ? meaningful.reduce((s, k) => s + k.current_position, 0) / meaningful.length
       : 0;
     return {
       targetCount: targets.length,

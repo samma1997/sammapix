@@ -65,9 +65,11 @@ function matchTargetKeyword(query: string): typeof TARGET_KEYWORDS[number] | nul
 type OpportunityScore = "ACHIEVED" | "PAGE_1" | "QUICK_WIN" | "CTR_FIX" | "LONG_TERM" | "BUILDING";
 
 function calcOpportunity(pos: number, impressions: number, clicks: number): OpportunityScore {
-  if (pos <= 3) return "ACHIEVED";
-  if (pos <= 10) return "PAGE_1";
-  if (clicks === 0 && impressions > 5) return "CTR_FIX";
+  // Minimum threshold: keywords with only 1-2 impressions are noise, not signal
+  if (impressions <= 2) return "LONG_TERM";
+  if (pos <= 3 && impressions >= 3) return "ACHIEVED";
+  if (pos <= 10 && impressions >= 3) return "PAGE_1";
+  if (pos <= 15 && clicks === 0 && impressions >= 5) return "CTR_FIX";
   if (pos <= 20 && impressions >= 3) return "QUICK_WIN";
   if (pos > 50) return "LONG_TERM";
   return "BUILDING";
