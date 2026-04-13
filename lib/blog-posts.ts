@@ -10,6 +10,7 @@ export interface Post {
 }
 
 export const POSTS: Post[] = [
+  { slug: "webp-vs-avif-vs-jpeg-comparison", title: "AVIF vs WebP vs JPEG: Best Image Format 2026", description: "AVIF vs WebP vs JPEG compared with real benchmarks, browser support data, and an interactive tool. Find the right image format for your site in 2026.", date: "2026-04-13", tags: ["Performance"], coverImage: "/blog/covers/webp-vs-avif-vs-jpeg-comparison.webp" },
   { slug: "best-free-remove-bg-alternatives-2026", title: "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested", description: "Remove.bg charges \u20AC0.36 per image. Here are 7 free alternatives for background removal tested on real photos \u2014 product shots, portraits, and complex edges.", date: "2026-04-12", tags: ["Tools"], coverImage: "/blog/covers/best-free-remove-bg-alternatives-2026.webp" },
   { slug: "instagram-image-quality-loss-fix", title: "Why Instagram Ruins Your Photo Quality (And How to Fix It)", description: "Instagram compresses your photos up to 13x. Learn the exact settings — dimensions, format, color profile — to upload photos that actually look sharp. Free fix in 30 seconds.", date: "2026-04-11", tags: ["Performance"], coverImage: "/blog/covers/instagram-image-quality-loss-fix.webp" },
   { slug: "best-free-topaz-gigapixel-alternatives-2026", title: "Best Free Topaz Gigapixel Alternatives 2026: 7 Tools Tested", description: "Topaz Gigapixel AI went subscription ($199/year). Here are 7 free alternatives for image upscaling tested on real photos — with quality comparison and honest results.", date: "2026-04-10", tags: ["Tools"], coverImage: "/blog/covers/best-free-topaz-gigapixel-alternatives-2026.webp" },
@@ -49,7 +50,6 @@ export const POSTS: Post[] = [
   { slug: "free-image-optimization-tools-online", title: "Free Image Optimization Tools Online (2026)", description: "The best free online image optimization tools compared.", date: "2026-03-22", tags: ["Tools"], coverImage: "/blog/covers/free-image-optimization-tools-online.webp" },
   { slug: "how-to-speed-up-website-with-image-optimization", title: "How to Speed Up Your Website with Image Optimization", description: "Image optimization is the fastest way to improve your Core Web Vitals.", date: "2026-03-18", tags: ["Performance"], coverImage: "/blog/covers/how-to-speed-up-website-with-image-optimization.webp" },
   { slug: "sammapix-vs-tinypng-benchmark-2026", title: "SammaPix vs TinyPNG: Benchmark Comparison 2026", description: "We tested SammaPix against TinyPNG across 50 real-world images.", date: "2026-03-16", tags: ["Tools"], coverImage: "/blog/covers/sammapix-vs-tinypng-benchmark-2026.webp" },
-  { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG: Which Format Should You Use?", description: "A practical comparison of modern image formats for the web.", date: "2026-03-15", tags: ["Performance"], coverImage: "/blog/covers/webp-vs-avif-vs-jpeg-comparison.webp" },
 ];
 
 export const ALL_CATEGORIES: PostTag[] = ["Tools", "SEO", "Performance", "Privacy", "Workflow", "Creative"];
