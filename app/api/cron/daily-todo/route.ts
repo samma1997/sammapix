@@ -25,10 +25,16 @@ export async function GET(request: NextRequest) {
     actionUrl?: string; draftText?: string; priority: number;
   }> = [];
 
-  // Delete only cron-generated todos for today (keep manual ones with priority >= 10)
+  // Delete only cron-generated todos for TODAY (keep manual ones with priority >= 10)
   await db.delete(growthDailyTodos).where(
     and(eq(growthDailyTodos.date, today), lt(growthDailyTodos.priority, 10))
   );
+
+  // Mark yesterday's unfinished todos as "skipped" (not pending forever)
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  await db.update(growthDailyTodos)
+    .set({ status: "skipped" })
+    .where(and(eq(growthDailyTodos.date, yesterday), eq(growthDailyTodos.status, "pending")));
 
   const apiKey = process.env.GEMINI_API_KEY;
   const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
@@ -402,8 +408,8 @@ sammapix.com`;
         todos.push({
           date: today, type: "gsc", priority: 9,
           title: `⚡ Quick Win: ${quickWins.rows.length} keyword quasi in prima pagina`,
-          description: "Queste keyword sono in posizione 11-20. Aggiungi 2-3 link interni verso queste pagine da altri articoli del blog per spingerle in top 10.",
-          draftText: qwList + "\n\n--- AZIONE ---\nApri gli articoli blog correlati e aggiungi link interni verso le pagine sopra. Ogni link interno spinge la pagina su di 1-3 posizioni.",
+          description: "Queste keyword sono in posizione 11-20. Apri Claude Code e chiedi: 'aggiungi link interni per queste keyword quick win'. Lui trova gli articoli giusti e aggiunge i link.",
+          draftText: qwList + "\n\n--- COSA FARE ---\nApri Claude Code e scrivi:\n\"Aggiungi 2-3 link interni verso queste pagine dai blog post più rilevanti:\n" + qwList + "\"\n\nClaude trova automaticamente gli articoli correlati e inserisce i link.",
         });
       }
 
@@ -426,8 +432,8 @@ sammapix.com`;
         todos.push({
           date: today, type: "gsc", priority: 8,
           title: `🔧 CTR basso: ci vedono ma non cliccano`,
-          description: "Queste pagine appaiono su Google ma nessuno clicca. Il titolo o la descrizione non attirano. Migliora il title tag e la meta description.",
-          draftText: cfList + "\n\n--- AZIONE ---\nApri queste pagine e migliora:\n1. Title tag: aggiungi numeri, anno (2026), power words (Free, Best, Guide)\n2. Meta description: aggiungi una call-to-action chiara\n3. Aggiungi FAQ schema per occupare più spazio nei risultati",
+          description: "Queste pagine appaiono su Google ma nessuno clicca. Apri Claude Code e chiedi: 'migliora title tag e meta description per queste pagine con CTR basso'.",
+          draftText: cfList + "\n\n--- COSA FARE ---\nApri Claude Code e scrivi:\n\"Migliora title tag e meta description per queste pagine (CTR 0%):\n" + cfList + "\n\nAggiungi numeri, anno 2026, power words (Free, Best). Aggiungi FAQ schema.\"",
         });
       }
 
@@ -469,51 +475,28 @@ sammapix.com`;
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // 7. SOCIAL — LinkedIn + Quora (with specific questions)
+    // 7. SOCIAL — Quora only (1-2 times per week, not daily)
+    //    LinkedIn is NOT the right channel for SammaPix (global dev audience)
+    //    LinkedIn is for lucasammarco.com (Italian PMI B2B)
     // ═══════════════════════════════════════════════════════════════
-    const quoraQuestions = [
-      { q: "What is the best free image compression tool?", url: "https://www.quora.com/What-is-the-best-free-image-compression-tool" },
-      { q: "How do I convert HEIC to JPG for free?", url: "https://www.quora.com/How-do-I-convert-HEIC-to-JPG-for-free" },
-      { q: "How can I remove EXIF data from photos?", url: "https://www.quora.com/How-can-I-remove-EXIF-data-from-photos" },
-      { q: "What are the best free alternatives to TinyPNG?", url: "https://www.quora.com/What-are-the-best-free-alternatives-to-TinyPNG" },
-      { q: "How do I optimize images for web without losing quality?", url: "https://www.quora.com/How-do-I-optimize-images-for-web-without-losing-quality" },
-      { q: "What is the best free background remover?", url: "https://www.quora.com/What-is-the-best-free-background-remover" },
-    ];
-    const dayQuora = quoraQuestions.slice((new Date().getDate() * 2) % quoraQuestions.length, ((new Date().getDate() * 2) % quoraQuestions.length) + 2);
+    if (dayOfWeek === 1 || dayOfWeek === 4) { // Monday + Thursday only
+      const quoraQuestions = [
+        { q: "What is the best free image compression tool?", url: "https://www.quora.com/What-is-the-best-free-image-compression-tool" },
+        { q: "How do I convert HEIC to JPG for free?", url: "https://www.quora.com/How-do-I-convert-HEIC-to-JPG-for-free" },
+        { q: "How can I remove EXIF data from photos?", url: "https://www.quora.com/How-can-I-remove-EXIF-data-from-photos" },
+        { q: "What are the best free alternatives to TinyPNG?", url: "https://www.quora.com/What-are-the-best-free-alternatives-to-TinyPNG" },
+        { q: "How do I optimize images for web without losing quality?", url: "https://www.quora.com/How-do-I-optimize-images-for-web-without-losing-quality" },
+        { q: "What is the best free background remover?", url: "https://www.quora.com/What-is-the-best-free-background-remover" },
+      ];
+      const dayQuora = quoraQuestions.slice((new Date().getDate() * 2) % quoraQuestions.length, ((new Date().getDate() * 2) % quoraQuestions.length) + 2);
 
-    todos.push({
-      date: today, type: "social", priority: 7,
-      title: "🔗 Quora: rispondi a 2 domande specifiche",
-      description: dayQuora.map(q => q.q).join(" | "),
-      actionUrl: dayQuora[0]?.url,
-      draftText: dayQuora.map(q => `${q.url}\n→ ${q.q}`).join("\n\n"),
-    });
-
-    if (model) {
-      try {
-        const liResult = await model.generateContent(`Write a short LinkedIn post (60-80 words) about building SammaPix — a free, open-source image toolkit with 27 browser-based tools.
-
-Pick ONE angle:
-- A specific technical challenge you solved
-- A growth milestone or learning
-- A privacy insight about image tools
-- An open source community moment
-
-Tone: authentic, builder mentality, no buzzwords.
-End with a question to drive engagement.
-Say "link in first comment" instead of including a URL.
-
-In ENGLISH. Just the post text, nothing else.`);
-
-        const liText = liResult.response.text().trim();
-        todos.push({
-          date: today, type: "social", priority: 5,
-          title: "💼 LinkedIn: post build-in-public",
-          description: "Pubblica il testo. Metti link repo nel PRIMO COMMENTO.",
-          actionUrl: "https://www.linkedin.com/feed/",
-          draftText: liText + "\n\n---\nPRIMO COMMENTO: https://github.com/samma1997/sammapix",
-        });
-      } catch {}
+      todos.push({
+        date: today, type: "social", priority: 7,
+        title: "🔗 Quora: rispondi a 2 domande specifiche",
+        description: dayQuora.map(q => q.q).join(" | "),
+        actionUrl: dayQuora[0]?.url,
+        draftText: dayQuora.map(q => `${q.url}\n→ ${q.q}`).join("\n\n"),
+      });
     }
 
     // ═══════════════════════════════════════════════════════════════
