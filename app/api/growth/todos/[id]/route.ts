@@ -72,7 +72,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
         const emailMatch = (updated.description || "").match(/[\w.-]+@[\w.-]+\.\w+/);
         if (emailMatch) {
           await db.update(growthOutreachTargets)
-            .set({ status: "sent", sentAt: new Date().toISOString().slice(0, 10) })
+            .set({ status: "sent", sentAt: new Date() })
             .where(eq(growthOutreachTargets.contactEmail, emailMatch[0]));
         }
       }
