@@ -55,6 +55,14 @@
       "schedule": "0 6 * * *"
     }
   ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sammapix.com" }],
+      "destination": "https://www.sammapix.com/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
