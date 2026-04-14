@@ -932,7 +932,7 @@ export default function BestImageFormatForWeb2026Page() {
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-4">
               Converting images between formats does not require software
-              installation or cloud upload. SammaPix handles all conversions
+              installation or cloud upload. <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">SammaPix</Link> handles all conversions
               directly in your browser using the Canvas API- your images never
               leave your device.
             </p>

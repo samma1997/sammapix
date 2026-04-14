@@ -141,7 +141,7 @@ export default function CompleteGuideWebpFormatPage() {
                           Convert your photos to WebP- free
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-                          Drop your JPEGs, PNGs, and GIFs into SammaPix and get WebP files instantly. Batch processing, ZIP download, no upload required. Files never leave your browser.
+                          Drop your JPEGs, PNGs, and GIFs into <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">SammaPix</Link> and get WebP files instantly. Batch processing, ZIP download, no upload required. Files never leave your browser.
                         </p>
                         <Link
                           href="/tools/webp"
