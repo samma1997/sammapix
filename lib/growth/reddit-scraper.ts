@@ -709,24 +709,14 @@ export async function scrapeRedditPosts(): Promise<{
   }
   console.log(`[reddit-scraper] Phase 0 done: ${stats.scraped} new, ${stats.skipped} skipped`);
 
-  // Generate dynamic blog-aware queries from the latest 5 blog posts
-  console.log("[reddit-scraper] Generating blog-aware dynamic queries...");
-  const dynamicQueries = await generateBlogAwareQueries();
-  console.log(`[reddit-scraper] ${dynamicQueries.length} dynamic queries from blog: ${dynamicQueries.join(", ")}`);
-
-  // Merge: dynamic queries next, then static (deduplicate against keyword-target queries too)
-  const mergedQueries = [
-    ...dynamicQueries.filter((q) => !keywordTargetQueries.includes(q)),
-    ...REDDIT_SEARCH_QUERIES.filter(
-      (q) => !dynamicQueries.includes(q) && !keywordTargetQueries.includes(q)
-    ),
-  ];
-
-  // PHASE 1: General Reddit search across all subreddits
-  console.log("[reddit-scraper] Phase 1: General search...");
-  for (const query of mergedQueries) {
+  // PHASE 1: Top 5 static queries only (no Gemini — stay under Vercel Hobby 60s)
+  // Blog-aware dynamic queries removed: Gemini call alone takes 5-10s
+  console.log("[reddit-scraper] Phase 1: Top static queries...");
+  const topStatic = REDDIT_SEARCH_QUERIES.slice(0, 5);
+  for (const query of topStatic) {
+    if (keywordTargetQueries.includes(query)) continue;
     try {
-      await new Promise((r) => setTimeout(r, 1500));
+      await new Promise((r) => setTimeout(r, 1200));
       const posts = await fetchRedditSearch(query);
       for (const post of posts) {
         await savePostIfRelevant(post, stats);
@@ -738,25 +728,20 @@ export async function scrapeRedditPosts(): Promise<{
   }
   console.log(`[reddit-scraper] Phase 1 done: ${stats.scraped} new, ${stats.skipped} skipped`);
 
-  // PHASE 2: Targeted search in TOP 5 subreddits only (time-boxed)
-  // Full subreddit list was ~120 queries × 2s = 240s timeout.
-  // Now: only top 5 subreddits × 2 queries = 10 fetches × 2s = 20s
-  console.log("[reddit-scraper] Phase 2: Top subreddit search (time-boxed)...");
+  // PHASE 2: Top 3 subreddits × 1 query each (Vercel Hobby 60s budget)
+  console.log("[reddit-scraper] Phase 2: Top 3 subreddits...");
   const phase2Start = stats.scraped;
-  const topSubs = SUBREDDIT_SEARCHES.slice(0, 5); // webdev, web_design, frontend, Wordpress, webhosting
+  const topSubs = SUBREDDIT_SEARCHES.slice(0, 3);
   for (const { sub, queries } of topSubs) {
-    // Only first 2 queries per subreddit to stay in budget
-    for (const query of queries.slice(0, 2)) {
-      try {
-        await new Promise((r) => setTimeout(r, 1500));
-        const posts = await fetchRedditSearch(query, sub);
-        for (const post of posts) {
-          await savePostIfRelevant(post, stats);
-        }
-      } catch (err) {
-        console.error(`[reddit-scraper] Error on r/${sub} query "${query}":`, err);
-        stats.errors++;
+    try {
+      await new Promise((r) => setTimeout(r, 1200));
+      const posts = await fetchRedditSearch(queries[0], sub);
+      for (const post of posts) {
+        await savePostIfRelevant(post, stats);
       }
+    } catch (err) {
+      console.error(`[reddit-scraper] Error on r/${sub}:`, err);
+      stats.errors++;
     }
   }
   console.log(`[reddit-scraper] Phase 2 done: ${stats.scraped - phase2Start} new from top subreddits`);
