@@ -223,7 +223,7 @@ export default function WebpVsAvifVsJpegPage() {
               Convert your images to WebP - free, no upload
             </h3>
             <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
-              Drop any JPEG or PNG into SammaPix and convert it to WebP in seconds. Runs entirely in your browser. Your files never leave your device. Batch convert up to 20 images at once and download as a ZIP.
+              Drop any JPEG or PNG into <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">SammaPix</Link> and convert it to WebP in seconds. Runs entirely in your browser. Your files never leave your device. Batch convert up to 20 images at once and download as a ZIP.
             </p>
             <Link
               href="/tools/webp"
