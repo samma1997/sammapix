@@ -453,12 +453,15 @@ sammapix.com`;
       }
 
       // CTR Fix: high impressions but 0 clicks = bad title/meta
+      // Excludes branded/navigational queries (sammapix, www.) — zero click is normal for those
       const ctrFix = await db.execute(sqlFn`
         SELECT query, page, ROUND(AVG(position::numeric), 1) as pos, SUM(impressions::int) as imp, SUM(clicks::int) as clicks
         FROM growth_gsc_daily
         WHERE query IS NOT NULL AND query != ''
+          AND LOWER(query) NOT LIKE '%sammapix%'
+          AND LOWER(query) NOT LIKE '%www.%'
         GROUP BY query, page
-        HAVING AVG(position::numeric) <= 15 AND SUM(impressions::int) >= 5 AND SUM(clicks::int) = 0
+        HAVING AVG(position::numeric) <= 15 AND SUM(impressions::int) >= 10 AND SUM(clicks::int) = 0
         ORDER BY SUM(impressions::int) DESC
         LIMIT 2
       `);
@@ -478,22 +481,28 @@ sammapix.com`;
       }
 
       // Declining: keywords that lost position recently
+      // FILTERS: only keywords that WERE on page 1-3 (pos <= 30) and dropped significantly
+      // Excludes: branded queries (containing "sammapix"), keywords already beyond page 3
       const declining = await db.execute(sqlFn`
         WITH recent AS (
           SELECT query, ROUND(AVG(position::numeric), 1) as pos
           FROM growth_gsc_daily
           WHERE date >= (CURRENT_DATE - INTERVAL '7 days')::text AND query IS NOT NULL
+            AND LOWER(query) NOT LIKE '%sammapix%'
+            AND LOWER(query) NOT LIKE '%www.%'
           GROUP BY query
         ),
         older AS (
           SELECT query, ROUND(AVG(position::numeric), 1) as pos
           FROM growth_gsc_daily
           WHERE date < (CURRENT_DATE - INTERVAL '7 days')::text AND date >= (CURRENT_DATE - INTERVAL '14 days')::text AND query IS NOT NULL
+            AND LOWER(query) NOT LIKE '%sammapix%'
+            AND LOWER(query) NOT LIKE '%www.%'
           GROUP BY query
         )
         SELECT r.query, r.pos as current_pos, o.pos as old_pos, (r.pos - o.pos) as delta
         FROM recent r JOIN older o ON r.query = o.query
-        WHERE r.pos > o.pos + 5
+        WHERE o.pos <= 30 AND r.pos > o.pos + 5
         ORDER BY delta DESC
         LIMIT 3
       `);
