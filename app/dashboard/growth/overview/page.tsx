@@ -331,11 +331,12 @@ type TodoSection = {
 
 function categorizeTodos(todos: TodoItem[]): TodoSection[] {
   const sections: TodoSection[] = [
+    { key: "claude", icon: "\uD83E\uDD16", label: "Chiedi a Claude", color: "text-indigo-400", borderColor: "border-indigo-500/30", items: [] },
     { key: "reddit", icon: "\uD83D\uDD34", label: "Reddit", color: "text-red-400", borderColor: "border-red-500/30", items: [] },
     { key: "directory", icon: "\uD83D\uDCC2", label: "Directory & Backlink", color: "text-amber-400", borderColor: "border-amber-500/30", items: [] },
     { key: "content", icon: "\uD83D\uDCE2", label: "Content", color: "text-blue-400", borderColor: "border-blue-500/30", items: [] },
     { key: "social", icon: "\uD83D\uDCBC", label: "Social", color: "text-purple-400", borderColor: "border-purple-500/30", items: [] },
-    { key: "seo", icon: "\uD83D\uDD0D", label: "SEO", color: "text-green-400", borderColor: "border-green-500/30", items: [] },
+    { key: "seo", icon: "\uD83D\uDD0D", label: "SEO (manuale)", color: "text-green-400", borderColor: "border-green-500/30", items: [] },
     { key: "other", icon: "\uD83D\uDCCB", label: "Other", color: "text-[#A3A3A3]", borderColor: "border-gray-200 dark:border-[#2A2A2A]", items: [] },
   ];
 
@@ -345,7 +346,10 @@ function categorizeTodos(todos: TodoItem[]): TodoSection[] {
     const t = todo.type.toLowerCase();
     const title = todo.title.toLowerCase();
 
-    if (t.includes("reddit")) {
+    // Claude-delegatable tasks go to top section
+    if (t.includes("_claude")) {
+      sectionMap.get("claude")!.items.push(todo);
+    } else if (t.includes("reddit")) {
       sectionMap.get("reddit")!.items.push(todo);
     } else if (t === "directory" || (t === "backlink" && !title.includes("dev.to") && !title.includes("hashnode") && !title.includes("medium"))) {
       sectionMap.get("directory")!.items.push(todo);
@@ -353,7 +357,7 @@ function categorizeTodos(todos: TodoItem[]): TodoSection[] {
       sectionMap.get("content")!.items.push(todo);
     } else if (t === "linkedin" || t === "social" || title.includes("quora") || title.includes("linkedin")) {
       sectionMap.get("social")!.items.push(todo);
-    } else if (t === "gsc" || t === "seo" || t === "gsc_alert") {
+    } else if (t.startsWith("gsc") || t === "seo" || t === "gsc_alert") {
       sectionMap.get("seo")!.items.push(todo);
     } else {
       sectionMap.get("other")!.items.push(todo);
@@ -418,11 +422,13 @@ function TodoRow({
   const isSkipped = todo.status === "skipped";
   const isInactive = isDone || isSkipped;
 
-  const estimatedTime = todo.type.includes("reddit") ? "~2 min"
+  const isClaude = todo.type.includes("_claude");
+  const estimatedTime = isClaude ? "Copia prompt"
+    : todo.type.includes("reddit") ? "~2 min"
     : todo.type === "directory" || todo.type === "backlink" ? "~3 min"
-    : todo.type === "blog" || todo.type === "content" ? "~15 min"
+    : todo.type === "blog" || todo.type === "content" || todo.type === "content_claude" ? "~15 min"
     : todo.type === "linkedin" || todo.type === "social" ? "~3 min"
-    : todo.type === "gsc" || todo.type === "seo" || todo.type === "gsc_alert" ? "~1 min"
+    : todo.type.startsWith("gsc") || todo.type === "seo" || todo.type === "gsc_alert" ? "~1 min"
     : "~5 min";
 
   // Extract subreddit from title if Reddit type
@@ -466,8 +472,13 @@ function TodoRow({
           )}
         </div>
 
-        {/* Time estimate */}
-        {!isInactive && (
+        {/* Time estimate + Claude badge */}
+        {!isInactive && isClaude && (
+          <span className="text-[9px] px-1.5 py-0.5 bg-indigo-500/15 text-indigo-400 rounded font-medium shrink-0">
+            Claude
+          </span>
+        )}
+        {!isInactive && !isClaude && (
           <span className="text-[9px] text-gray-400 dark:text-[#555] shrink-0">{estimatedTime}</span>
         )}
 
