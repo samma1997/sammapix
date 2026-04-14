@@ -697,7 +697,7 @@ export async function scrapeRedditPosts(): Promise<{
 
   for (const query of keywordTargetQueries) {
     try {
-      await new Promise((r) => setTimeout(r, 2000));
+      await new Promise((r) => setTimeout(r, 1500));
       const posts = await fetchRedditSearch(query);
       for (const post of posts) {
         await savePostIfRelevant(post, stats);
@@ -726,7 +726,7 @@ export async function scrapeRedditPosts(): Promise<{
   console.log("[reddit-scraper] Phase 1: General search...");
   for (const query of mergedQueries) {
     try {
-      await new Promise((r) => setTimeout(r, 2000));
+      await new Promise((r) => setTimeout(r, 1500));
       const posts = await fetchRedditSearch(query);
       for (const post of posts) {
         await savePostIfRelevant(post, stats);
@@ -738,13 +738,17 @@ export async function scrapeRedditPosts(): Promise<{
   }
   console.log(`[reddit-scraper] Phase 1 done: ${stats.scraped} new, ${stats.skipped} skipped`);
 
-  // PHASE 2: Targeted search within specific subreddits
-  console.log("[reddit-scraper] Phase 2: Subreddit-targeted search...");
+  // PHASE 2: Targeted search in TOP 5 subreddits only (time-boxed)
+  // Full subreddit list was ~120 queries × 2s = 240s timeout.
+  // Now: only top 5 subreddits × 2 queries = 10 fetches × 2s = 20s
+  console.log("[reddit-scraper] Phase 2: Top subreddit search (time-boxed)...");
   const phase2Start = stats.scraped;
-  for (const { sub, queries } of SUBREDDIT_SEARCHES) {
-    for (const query of queries) {
+  const topSubs = SUBREDDIT_SEARCHES.slice(0, 5); // webdev, web_design, frontend, Wordpress, webhosting
+  for (const { sub, queries } of topSubs) {
+    // Only first 2 queries per subreddit to stay in budget
+    for (const query of queries.slice(0, 2)) {
       try {
-        await new Promise((r) => setTimeout(r, 2000));
+        await new Promise((r) => setTimeout(r, 1500));
         const posts = await fetchRedditSearch(query, sub);
         for (const post of posts) {
           await savePostIfRelevant(post, stats);
@@ -755,7 +759,7 @@ export async function scrapeRedditPosts(): Promise<{
       }
     }
   }
-  console.log(`[reddit-scraper] Phase 2 done: ${stats.scraped - phase2Start} new from subreddit searches`);
+  console.log(`[reddit-scraper] Phase 2 done: ${stats.scraped - phase2Start} new from top subreddits`);
 
   console.log(
     `[reddit-scraper] TOTAL: ${stats.scraped} new posts, ${stats.skipped} skipped, ${stats.errors} errors`
