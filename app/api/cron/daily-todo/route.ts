@@ -117,14 +117,46 @@ export async function GET(request: NextRequest) {
         });
       }
 
-      // If we got fewer than 2 Reddit posts from DB, add a generic search task
+      // If we got fewer than 2 Reddit posts from DB, try to find real posts via .json scraping
       if (redditPosts.length < 2) {
-        todos.push({
-          date: today, type: "reddit", priority: 8,
-          title: "✋ Reddit: cerca post nuovi su r/webdev + r/photography",
-          description: "Cerca post recenti dove qualcuno chiede di comprimere immagini, convertire HEIC, o rimuovere EXIF. Rispondi con valore — NO spam. Formula: Problema → Risposta diretta → Dati specifici → TL;DR.",
-          actionUrl: "https://www.reddit.com/r/webdev/search/?q=image+compression+OR+optimize+images&t=week&sort=new",
-        });
+        const subs = ["webdev", "photography", "web_design"];
+        const queries = ["image compression", "optimize images", "heic convert", "remove exif"];
+        let foundPost = false;
+
+        for (const sub of subs) {
+          if (foundPost) break;
+          for (const q of queries) {
+            if (foundPost) break;
+            try {
+              const searchUrl = `https://www.reddit.com/r/${sub}/search.json?q=${encodeURIComponent(q)}&restrict_sr=1&sort=new&t=week&limit=5`;
+              const r = await fetch(searchUrl, { headers: { "User-Agent": "SammaPix/1.0" } });
+              if (!r.ok) continue;
+              const data = await r.json();
+              const posts = data?.data?.children?.filter((c: any) =>
+                c.data.selftext && c.data.num_comments < 20 && !c.data.over_18
+              ) || [];
+              if (posts.length > 0) {
+                const p = posts[0].data;
+                todos.push({
+                  date: today, type: "reddit", priority: 8,
+                  title: `✋ r/${sub} — "${(p.title || "").substring(0, 55)}..."`,
+                  description: `Post reale trovato live. ${p.num_comments} commenti. Rispondi con valore — NO spam.\nFormula: Problema → Risposta diretta → Dati specifici → TL;DR.`,
+                  actionUrl: `https://www.reddit.com${p.permalink}`,
+                });
+                foundPost = true;
+              }
+            } catch {}
+          }
+        }
+
+        // Only if scraping failed completely, add a manual task (NO search page links)
+        if (!foundPost) {
+          todos.push({
+            date: today, type: "reddit", priority: 6,
+            title: "✋ Reddit: cerca post manualmente",
+            description: "Nessun post trovato automaticamente. Vai su r/webdev, r/photography, r/web_design e cerca post recenti su image compression, HEIC, EXIF. Rispondi con valore.",
+          });
+        }
       }
     } catch (e) {
       console.error("[daily-todo] Reddit error:", e);
@@ -140,13 +172,18 @@ export async function GET(request: NextRequest) {
 
 Subreddit: pick ONE from DoesAnybodyElse, LifeProTips, YouShouldKnow, todayilearned
 Topic: something surprising about digital photos, privacy, everyday technology
-Style: "TIL...", "YSK...", "LPT:...", "DAE..."
-ZERO products. ZERO marketing. Just a genuine discovery.
 
+CRITICAL SUBREDDIT RULES — you MUST follow these:
+- r/YouShouldKnow: body MUST start with "Why YSK:" followed by explanation. Title starts with "YSK:"
+- r/LifeProTips: title MUST start with "LPT:"
+- r/todayilearned: title MUST start with "TIL"
+- r/DoesAnybodyElse: title MUST start with "DAE"
+
+ZERO products. ZERO marketing. Just a genuine discovery.
 In ENGLISH. Casual Reddit tone.
 
 JSON only:
-{"subreddit": "SubName", "title": "post title", "body": "post body or empty", "why": "1 sentence in Italian explaining why this is good for karma"}`);
+{"subreddit": "SubName", "title": "post title", "body": "post body (REQUIRED — include Why YSK: if YouShouldKnow)", "why": "1 sentence in Italian explaining why this is good for karma"}`);
 
         const match = postResult.response.text().trim().match(/\{[\s\S]*\}/);
         if (match) {
