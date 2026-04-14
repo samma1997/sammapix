@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 const SLUG = "ai-alt-text-accuracy-test-2026";
-const POST_TITLE = "AI Alt Text Accuracy Test 2026: Gemini vs GPT-4o vs Claude";
+const POST_TITLE = "Best AI for Alt Text? 200-Image Test Results [2026]";
 const POST_DESCRIPTION =
-  "We tested 3 AI models on 200 real images across 5 categories. See which generates the most accurate, SEO-friendly, and accessible alt text, with real data and examples.";
+  "We tested Gemini, GPT-4o, and Claude on 200 real images. See which AI writes the best alt text — the winner surprised us. Full accuracy data inside.";
 const POST_DATE = "2026-04-02";
 const POST_DATE_FORMATTED = "April 2, 2026";
 const POST_URL = `${APP_URL}/blog/${SLUG}`;

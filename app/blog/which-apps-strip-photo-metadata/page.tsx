@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Which Apps Strip Photo Metadata? The Complete 2026 Guide",
+    "Which Apps Strip Photo Metadata? 12 Apps Tested [2026]",
   description:
-    "Fact-checked comparison of 12 platforms: which apps strip EXIF metadata from photos, which keep your GPS data internally, and the WhatsApp document mode trap most people miss.",
+    "We tested 12 apps for EXIF stripping. Some keep your GPS data hidden inside. See the full results — the WhatsApp document trick most people miss.",
   alternates: {
     canonical: `${APP_URL}/blog/which-apps-strip-photo-metadata`,
   },

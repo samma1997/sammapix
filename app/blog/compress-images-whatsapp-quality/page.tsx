@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Compress Images for WhatsApp Without Losing Quality (2026)",
+  title: "WhatsApp Image Quality Loss? Fix It Before Sending [2026]",
   description:
-    "Learn how WhatsApp compresses your photos and the optimal strategy to send high quality images. Pre-compress to 200-300KB at 1920px for the best results.",
+    "WhatsApp cuts 80% of your photo quality. Pre-compress to 200-300KB at 1920px and WhatsApp barely touches them. Free tool + tested method inside.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   },
