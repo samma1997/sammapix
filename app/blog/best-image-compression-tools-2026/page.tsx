@@ -8,14 +8,16 @@ export const metadata: Metadata = {
   title:
     "Best Free Image Compression Tools in 2026 - Compared",
   description:
-    "Honest comparison of the best free image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Pros, cons, and our verdict.",
+    "Honest comparison of the 6 best free PNG and image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG tested and ranked.",
   alternates: {
     canonical: `${APP_URL}/blog/best-image-compression-tools-2026`,
   },
   keywords: [
     "best image compression tools 2026",
+    "best png compression tools 2026",
     "free image compressor online",
     "compress images online free",
+    "compress png free",
     "tinypng alternative",
     "best image optimizer",
     "squoosh alternative",
