@@ -683,15 +683,14 @@ export async function scrapeRedditPosts(): Promise<{
   // ── PHASE 0: Keyword-target queries (the SEO strategy drives scraping) ─────
   // Pick keywords NOT yet at goal position — they are highest priority.
   // Flatten redditQueries from all 17 keyword targets, deduplicate, cap at 15.
+  // Vercel Hobby plan = 60s max. Budget: ~8 queries × 1.2s delay + fetch time = ~20s
   const keywordTargetQueries: string[] = [];
   for (const kw of TARGET_KEYWORDS) {
-    for (const q of kw.redditQueries) {
-      if (!keywordTargetQueries.includes(q)) {
-        keywordTargetQueries.push(q);
-      }
-      if (keywordTargetQueries.length >= 15) break;
+    if (keywordTargetQueries.length >= 8) break;
+    const q = kw.redditQueries[0]; // Only first query per keyword
+    if (q && !keywordTargetQueries.includes(q)) {
+      keywordTargetQueries.push(q);
     }
-    if (keywordTargetQueries.length >= 15) break;
   }
   console.log(`[reddit-scraper] Phase 0: ${keywordTargetQueries.length} keyword-target queries: ${keywordTargetQueries.join(", ")}`);
 
@@ -709,42 +708,8 @@ export async function scrapeRedditPosts(): Promise<{
   }
   console.log(`[reddit-scraper] Phase 0 done: ${stats.scraped} new, ${stats.skipped} skipped`);
 
-  // PHASE 1: Top 5 static queries only (no Gemini — stay under Vercel Hobby 60s)
-  // Blog-aware dynamic queries removed: Gemini call alone takes 5-10s
-  console.log("[reddit-scraper] Phase 1: Top static queries...");
-  const topStatic = REDDIT_SEARCH_QUERIES.slice(0, 5);
-  for (const query of topStatic) {
-    if (keywordTargetQueries.includes(query)) continue;
-    try {
-      await new Promise((r) => setTimeout(r, 1200));
-      const posts = await fetchRedditSearch(query);
-      for (const post of posts) {
-        await savePostIfRelevant(post, stats);
-      }
-    } catch (err) {
-      console.error(`[reddit-scraper] Error on query "${query}":`, err);
-      stats.errors++;
-    }
-  }
-  console.log(`[reddit-scraper] Phase 1 done: ${stats.scraped} new, ${stats.skipped} skipped`);
-
-  // PHASE 2: Top 3 subreddits × 1 query each (Vercel Hobby 60s budget)
-  console.log("[reddit-scraper] Phase 2: Top 3 subreddits...");
-  const phase2Start = stats.scraped;
-  const topSubs = SUBREDDIT_SEARCHES.slice(0, 3);
-  for (const { sub, queries } of topSubs) {
-    try {
-      await new Promise((r) => setTimeout(r, 1200));
-      const posts = await fetchRedditSearch(queries[0], sub);
-      for (const post of posts) {
-        await savePostIfRelevant(post, stats);
-      }
-    } catch (err) {
-      console.error(`[reddit-scraper] Error on r/${sub}:`, err);
-      stats.errors++;
-    }
-  }
-  console.log(`[reddit-scraper] Phase 2 done: ${stats.scraped - phase2Start} new from top subreddits`);
+  // Phase 1+2 removed — Vercel Hobby 60s limit.
+  // Phase 0 (keyword targets) covers the most important queries.
 
   console.log(
     `[reddit-scraper] TOTAL: ${stats.scraped} new posts, ${stats.skipped} skipped, ${stats.errors} errors`
