@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 const SLUG = "image-compression-statistics-2026";
-const POST_TITLE = "67 Image Compression Statistics for 2026 (With Sources)";
+const POST_TITLE = "67 Image Compression Stats You Need in 2026 [Verified Data]";
 const POST_DESCRIPTION =
-  "67 data-backed image compression and optimization statistics for 2026. Page weight, format adoption, Core Web Vitals, e-commerce conversion impact, and mobile performance. Every stat cited with its original source.";
+  "67 verified compression stats with sources. Page weight, WebP adoption, Core Web Vitals impact, e-commerce conversion data. Bookmark this — you'll need it.";
 const POST_DATE = "2026-04-02";
 const POST_DATE_FORMATTED = "April 2, 2026";
 const POST_URL = `${APP_URL}/blog/${SLUG}`;
