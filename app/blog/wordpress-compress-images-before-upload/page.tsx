@@ -462,6 +462,9 @@ export default function WordPressCompressImagesBeforeUploadPage() {
             <Link href="/blog/make-images-load-faster-website" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
               Guide: Make Images Load Faster
             </Link>
+            <Link href="/blog/best-free-remove-bg-alternatives-2026" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
+              Best Free Remove.bg Alternatives
+            </Link>
           </div>
         </div>
 
