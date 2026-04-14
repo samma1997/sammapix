@@ -365,27 +365,48 @@ sammapix.com`;
         const posInfo = pagePositions.get(weakest.page);
         const posLabel = posInfo !== undefined ? `posizione attuale: ${posInfo}` : "non ancora indicizzato";
 
-        const prompt = `Scrivi un articolo SEO completo per la keyword "${weakest.keyword}", target page ${weakest.page}.\nObiettivo: top ${weakest.target}. ${posLabel}.\nSegui le linee guida editoriali di SammaPix. Genera cover, audio, pusha su git.`;
-        todos.push({
-          date: today, type: "blog_claude", priority: 6,
-          title: `🤖 Scrivi articolo: "${weakest.keyword}" (${posLabel})`,
-          description: `${weakest.explanation}\nCopia il prompt e incollalo su Claude Code — scrive, genera cover, pusha.`,
-          draftText: prompt,
-        });
-      } else {
-        todos.push({
-          date: today, type: "blog_claude", priority: 6,
-          title: "🤖 Scrivi 1 articolo blog",
-          description: "Copia il prompt e incollalo su Claude Code.",
-          draftText: "Scrivi un articolo SEO per SammaPix sulla keyword più debole. Genera cover, audio, pusha su git.",
-        });
+        // Check if the page already exists — different action needed
+        const pageExists = POSTS.some(p => weakest!.page.includes(p.slug));
+        const toolPageExists = weakest.page.startsWith("/tools/");
+
+        if (pageExists || toolPageExists) {
+          // Page EXISTS but not ranking well → fix with internal links + content improvement
+          if (posInfo === undefined || posInfo > 30) {
+            const prompt = `L'articolo "${weakest.keyword}" esiste già (${weakest.page}) ma ha ${posLabel}.\n\nAggiungi 3-4 link interni da altri blog post verso ${weakest.page}. Poi migliora heading, aggiungi FAQ se mancano, aggiorna dati.`;
+            todos.push({
+              date: today, type: "gsc_claude", priority: 6,
+              title: `🤖 Spingi articolo: "${weakest.keyword}" (${posLabel})`,
+              description: `${weakest.explanation}\nArticolo esiste ma non ranka. Servono link interni e miglioramenti.`,
+              draftText: prompt,
+            });
+          } else {
+            // Already ranking decently — suggest content refresh
+            const prompt = `L'articolo "${weakest.keyword}" è a ${posLabel} (target top ${weakest.target}).\n\nMigliora il contenuto: aggiungi dati 2026 aggiornati, migliora heading per CTR, aggiungi internal link, verifica FAQ schema.`;
+            todos.push({
+              date: today, type: "gsc_claude", priority: 5,
+              title: `🤖 Migliora: "${weakest.keyword}" (${posLabel})`,
+              description: `${weakest.explanation}\nArticolo ranka ma sotto target. Aggiorna contenuto.`,
+              draftText: prompt,
+            });
+          }
+        } else {
+          // Page does NOT exist → write new article
+          const prompt = `Scrivi un articolo SEO completo per la keyword "${weakest.keyword}", target page ${weakest.page}.\nObiettivo: top ${weakest.target}. ${posLabel}.\nSegui le linee guida editoriali di SammaPix. Genera cover, audio, pusha su git.`;
+          todos.push({
+            date: today, type: "blog_claude", priority: 6,
+            title: `🤖 Scrivi articolo: "${weakest.keyword}" (${posLabel})`,
+            description: `${weakest.explanation}\nCopia il prompt e incollalo su Claude Code — scrive, genera cover, pusha.`,
+            draftText: prompt,
+          });
+        }
       }
     } catch {
+      // Fallback: generic suggestion
       todos.push({
-        date: today, type: "blog_claude", priority: 6,
-        title: "🤖 Scrivi 1 articolo blog",
+        date: today, type: "blog_claude", priority: 5,
+        title: "🤖 Migliora articolo blog più debole",
         description: "Copia il prompt e incollalo su Claude Code.",
-        draftText: "Scrivi un articolo SEO per SammaPix sulla keyword più debole. Genera cover, audio, pusha su git.",
+        draftText: "Trova l'articolo blog SammaPix con la keyword target più debole. Se esiste già, aggiungi link interni e migliora. Se non esiste, scrivilo.",
       });
     }
 
