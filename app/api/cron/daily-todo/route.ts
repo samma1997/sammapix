@@ -110,7 +110,7 @@ export async function GET(request: NextRequest) {
 
         todos.push({
           date: today, type: "reddit", priority: 9,
-          title: `🔴 r/${post.subreddit} — rispondi a: "${(post.title || "").substring(0, 50)}..."`,
+          title: `✋ r/${post.subreddit} — rispondi a: "${(post.title || "").substring(0, 50)}..."`,
           description,
           actionUrl: post.url || `https://www.reddit.com/r/${post.subreddit}`,
           draftText,
@@ -121,7 +121,7 @@ export async function GET(request: NextRequest) {
       if (redditPosts.length < 2) {
         todos.push({
           date: today, type: "reddit", priority: 8,
-          title: "🔴 Reddit: cerca post nuovi su r/webdev + r/photography",
+          title: "✋ Reddit: cerca post nuovi su r/webdev + r/photography",
           description: "Cerca post recenti dove qualcuno chiede di comprimere immagini, convertire HEIC, o rimuovere EXIF. Rispondi con valore — NO spam. Formula: Problema → Risposta diretta → Dati specifici → TL;DR.",
           actionUrl: "https://www.reddit.com/r/webdev/search/?q=image+compression+OR+optimize+images&t=week&sort=new",
         });
@@ -154,7 +154,7 @@ JSON only:
           const sub = p.subreddit.replace(/^r\//, "");
           todos.push({
             date: today, type: "reddit_post", priority: 7,
-            title: `📝 Karma r/${sub} — post genuino`,
+            title: `✋ Karma r/${sub} — post genuino`,
             description: p.why || "Post per costruire karma. Zero promozione.",
             actionUrl: `https://www.reddit.com/r/${sub}/submit`,
             draftText: p.body ? `${p.title}\n\n${p.body}` : p.title,
@@ -177,7 +177,7 @@ JSON only:
         const dir = nextDirs[0];
         todos.push({
           date: today, type: "directory", priority: 8,
-          title: `📂 Directory: ${dir.directoryName}`,
+          title: `✋ Directory: ${dir.directoryName}`,
           description: `Registra SammaPix su ${dir.directoryName}. Quando fatto, segna come completato — non apparirà più domani.`,
           actionUrl: dir.directoryUrl || undefined,
         });
@@ -187,7 +187,7 @@ JSON only:
           const dir2 = nextDirs[1];
           todos.push({
             date: today, type: "directory", priority: 6,
-            title: `📂 Directory: ${dir2.directoryName}`,
+            title: `✋ Directory: ${dir2.directoryName}`,
             description: `Bonus: registra anche su ${dir2.directoryName} se hai tempo.`,
             actionUrl: dir2.directoryUrl || undefined,
           });
@@ -245,7 +245,7 @@ sammapix.com`;
 
         todos.push({
           date: today, type: "outreach", priority: 8,
-          title: `📧 Email: ${target.contactName || target.siteName} (${target.siteName})`,
+          title: `✋ Email: ${target.contactName || target.siteName} (${target.siteName})`,
           description: `Invia a: ${target.contactEmail} — articolo: ${(target.articleTitle || "").substring(0, 60)}`,
           actionUrl: `mailto:${target.contactEmail}?subject=${encodeURIComponent(`Quick suggestion for your "${target.articleTitle}" article`)}`,
           draftText: emailDraft,
@@ -270,7 +270,7 @@ sammapix.com`;
           if (drafts.length > 0) {
             todos.push({
               date: today, type: "content", priority: 9,
-              title: `📢 Dev.to: pubblica ${Math.min(drafts.length, 5)} di ${drafts.length} draft`,
+              title: `✋ Dev.to: pubblica ${Math.min(drafts.length, 5)} di ${drafts.length} draft`,
               description: "Vai su dev.to/dashboard → click Edit → Publish. Ogni articolo = backlink DA 90.",
               actionUrl: "https://dev.to/dashboard",
             });
@@ -328,26 +328,27 @@ sammapix.com`;
         const posInfo = pagePositions.get(weakest.page);
         const posLabel = posInfo !== undefined ? `posizione attuale: ${posInfo}` : "non ancora indicizzato";
 
+        const prompt = `Scrivi un articolo SEO completo per la keyword "${weakest.keyword}", target page ${weakest.page}.\nObiettivo: top ${weakest.target}. ${posLabel}.\nSegui le linee guida editoriali di SammaPix. Genera cover, audio, pusha su git.`;
         todos.push({
-          date: today, type: "blog", priority: 6,
-          title: `✍️ Scrivi articolo: "${weakest.keyword}" (${posLabel})`,
-          description: `Keyword target: "${weakest.keyword}" — obiettivo top ${weakest.target}, pagina: ${weakest.page}.\n${weakest.explanation}\n\n🎯 Serve la keyword: "${weakest.keyword}" (${posLabel}, obiettivo top ${weakest.target})\n\nChiedi a Claude Code: "Scrivi un articolo SEO completo per la keyword '${weakest.keyword}', target page ${weakest.page}, seguendo le linee guida editoriali di SammaPix."`,
-          actionUrl: `https://www.sammapix.com${weakest.page}`,
+          date: today, type: "blog_claude", priority: 6,
+          title: `🤖 Scrivi articolo: "${weakest.keyword}" (${posLabel})`,
+          description: `${weakest.explanation}\nCopia il prompt e incollalo su Claude Code — scrive, genera cover, pusha.`,
+          draftText: prompt,
         });
       } else {
-        // Fallback if no blog keywords found
         todos.push({
-          date: today, type: "blog", priority: 6,
-          title: "✍️ Scrivi 1 articolo blog",
-          description: "Apri Claude Code e chiedi di scrivere un articolo SEO. Lui fa ricerca, scrive, genera audio, crea cover, pusha.",
+          date: today, type: "blog_claude", priority: 6,
+          title: "🤖 Scrivi 1 articolo blog",
+          description: "Copia il prompt e incollalo su Claude Code.",
+          draftText: "Scrivi un articolo SEO per SammaPix sulla keyword più debole. Genera cover, audio, pusha su git.",
         });
       }
     } catch {
-      // Fallback if GSC query fails
       todos.push({
-        date: today, type: "blog", priority: 6,
-        title: "✍️ Scrivi 1 articolo blog",
-        description: "Apri Claude Code e chiedi di scrivere un articolo SEO. Lui fa ricerca, scrive, genera audio, crea cover, pusha.",
+        date: today, type: "blog_claude", priority: 6,
+        title: "🤖 Scrivi 1 articolo blog",
+        description: "Copia il prompt e incollalo su Claude Code.",
+        draftText: "Scrivi un articolo SEO per SammaPix sulla keyword più debole. Genera cover, audio, pusha su git.",
       });
     }
 
@@ -367,17 +368,17 @@ sammapix.com`;
       ].slice(0, 10);
 
       todos.push({
-        date: today, type: "gsc", priority: 7,
-        title: "🔍 GSC: indicizza queste 10 pagine",
-        description: "Apri Search Console → URL Inspection → incolla → Request Indexing.",
+        date: today, type: "gsc_manual", priority: 7,
+        title: "✋ GSC: indicizza queste 10 pagine",
+        description: "Apri Search Console → URL Inspection → incolla ogni URL → Request Indexing. Solo tu puoi farlo, Google non ha API.",
         actionUrl: "https://search.google.com/search-console",
         draftText: urls.join("\n"),
       });
     } catch {
       todos.push({
-        date: today, type: "gsc", priority: 7,
-        title: "🔍 GSC: indicizza 10 pagine",
-        description: "Apri Google Search Console → Request Indexing per pagine tool e blog recenti.",
+        date: today, type: "gsc_manual", priority: 7,
+        title: "✋ GSC: indicizza 10 pagine",
+        description: "Apri Google Search Console → Request Indexing. Solo tu puoi farlo.",
         actionUrl: "https://search.google.com/search-console",
       });
     }
@@ -405,11 +406,12 @@ sammapix.com`;
           `"${r.query}" (pos ${r.pos}) → ${(r.page || "").replace("https://www.sammapix.com", "")}`
         ).join("\n");
 
+        const prompt = `Aggiungi 2-3 link interni verso queste pagine dai blog post più rilevanti:\n${qwList}`;
         todos.push({
-          date: today, type: "gsc", priority: 9,
-          title: `⚡ Quick Win: ${quickWins.rows.length} keyword quasi in prima pagina`,
-          description: "Queste keyword sono in posizione 11-20. Apri Claude Code e chiedi: 'aggiungi link interni per queste keyword quick win'. Lui trova gli articoli giusti e aggiunge i link.",
-          draftText: qwList + "\n\n--- COSA FARE ---\nApri Claude Code e scrivi:\n\"Aggiungi 2-3 link interni verso queste pagine dai blog post più rilevanti:\n" + qwList + "\"\n\nClaude trova automaticamente gli articoli correlati e inserisce i link.",
+          date: today, type: "gsc_claude", priority: 9,
+          title: `🤖 Quick Win: ${quickWins.rows.length} keyword quasi in prima pagina`,
+          description: "Keyword in posizione 11-20. Copia il prompt e incollalo su Claude Code — lui aggiunge i link interni automaticamente.",
+          draftText: prompt,
         });
       }
 
@@ -429,11 +431,12 @@ sammapix.com`;
           `"${r.query}" — pos ${r.pos}, ${r.imp} impressioni, 0 click → ${(r.page || "").replace("https://www.sammapix.com", "")}`
         ).join("\n");
 
+        const prompt = `Migliora title tag e meta description per queste pagine (CTR 0%):\n${cfList}\n\nAggiungi numeri, anno 2026, power words (Free, Best). Aggiungi FAQ schema.`;
         todos.push({
-          date: today, type: "gsc", priority: 8,
-          title: `🔧 CTR basso: ci vedono ma non cliccano`,
-          description: "Queste pagine appaiono su Google ma nessuno clicca. Apri Claude Code e chiedi: 'migliora title tag e meta description per queste pagine con CTR basso'.",
-          draftText: cfList + "\n\n--- COSA FARE ---\nApri Claude Code e scrivi:\n\"Migliora title tag e meta description per queste pagine (CTR 0%):\n" + cfList + "\n\nAggiungi numeri, anno 2026, power words (Free, Best). Aggiungi FAQ schema.\"",
+          date: today, type: "gsc_claude", priority: 8,
+          title: `🤖 CTR basso: ci vedono ma non cliccano`,
+          description: "Queste pagine appaiono su Google ma nessuno clicca. Copia il prompt e incollalo su Claude Code.",
+          draftText: prompt,
         });
       }
 
@@ -463,11 +466,12 @@ sammapix.com`;
           `"${r.query}" — era pos ${r.old_pos}, ora pos ${r.current_pos} (⬇️ ${Math.round(r.delta)} posizioni)`
         ).join("\n");
 
+        const prompt = `Queste keyword stanno perdendo posizioni, analizza e migliora il contenuto:\n${decList}\n\nPer ognuna: controlla la pagina, aggiungi contenuto, migliora heading, aggiungi link interni.`;
         todos.push({
-          date: today, type: "gsc", priority: 7,
-          title: `📉 Keyword in calo: ${declining.rows.length} stanno scendendo`,
-          description: "Queste keyword hanno perso posizioni nell'ultima settimana. Potrebbe servire aggiornare il contenuto o aggiungere backlink.",
-          draftText: decList,
+          date: today, type: "gsc_claude", priority: 7,
+          title: `🤖 Keyword in calo: ${declining.rows.length} stanno scendendo`,
+          description: "Keyword che hanno perso posizioni. Copia il prompt e incollalo su Claude Code.",
+          draftText: prompt,
         });
       }
     } catch (e) {
@@ -492,7 +496,7 @@ sammapix.com`;
 
       todos.push({
         date: today, type: "social", priority: 7,
-        title: "🔗 Quora: rispondi a 2 domande specifiche",
+        title: "✋ Quora: rispondi a 2 domande specifiche",
         description: dayQuora.map(q => q.q).join(" | "),
         actionUrl: dayQuora[0]?.url,
         draftText: dayQuora.map(q => `${q.url}\n→ ${q.q}`).join("\n\n"),
@@ -508,19 +512,14 @@ sammapix.com`;
       const unpromotedBlogs = await getUnpromotedBlogs();
       if (unpromotedBlogs.length > 0) {
         const blogToPromote = unpromotedBlogs[0];
+        const canonicalUrl = `https://www.sammapix.com/blog/${blogToPromote.slug}`;
+        const prompt = `Prepara il crosspost per Dev.to e Hashnode dell'articolo "${blogToPromote.title}".\nSlug: ${blogToPromote.slug}\nCanonical: ${canonicalUrl}\n\nLeggi l'articolo originale, adattalo per Dev.to (markdown, tag: image, webdev, tools, opensource) e Hashnode. Aggiungi canonical URL.`;
         todos.push({
-          date: today, type: "content", priority: 8,
-          title: `📢 Crosspost su Dev.to: "${blogToPromote.title.substring(0, 60)}"`,
-          description: `Articolo mai promosso. Slug: ${blogToPromote.slug}. Vai su dev.to/new, incolla contenuto dal blog, aggiungi tag: image, webdev, tools, opensource.`,
+          date: today, type: "content_claude", priority: 8,
+          title: `🤖 Crosspost: "${blogToPromote.title.substring(0, 55)}"`,
+          description: `Dev.to + Hashnode. Copia il prompt → Claude Code prepara tutto, tu poi incolli e pubblichi.`,
           actionUrl: "https://dev.to/new",
-          draftText: `https://www.sammapix.com/blog/${blogToPromote.slug}`,
-        });
-        todos.push({
-          date: today, type: "content", priority: 7,
-          title: `📢 Crosspost su Hashnode: "${blogToPromote.title.substring(0, 60)}"`,
-          description: `Stesso articolo su Hashnode. Slug: ${blogToPromote.slug}. Aggiungi canonical URL: https://www.sammapix.com/blog/${blogToPromote.slug}`,
-          actionUrl: "https://hashnode.com/post/create",
-          draftText: `https://www.sammapix.com/blog/${blogToPromote.slug}`,
+          draftText: prompt,
         });
       }
     } catch (e) {
@@ -532,9 +531,10 @@ sammapix.com`;
     // ═══════════════════════════════════════════════════════════════
     if (dayOfWeek === 1) {
       todos.push({
-        date: today, type: "project", priority: 9,
-        title: "🚀 Review settimanale: controlla metriche + PR status",
-        description: "Apri Growth Dashboard analytics. Controlla: visite, click GSC, star GitHub, PR accettate. Aggiorna piano se serve.",
+        date: today, type: "project_claude", priority: 9,
+        title: "🤖 Review settimanale: metriche + PR status",
+        description: "Copia il prompt → Claude Code analizza tutto e ti fa il report.",
+        draftText: "Fammi la review settimanale di SammaPix: controlla GSC (impressioni, click, posizioni keyword target), GitHub (star, PR), analytics. Dimmi cosa va bene e cosa no.",
       });
     }
 

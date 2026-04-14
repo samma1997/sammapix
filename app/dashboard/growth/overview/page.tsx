@@ -331,11 +331,12 @@ type TodoSection = {
 
 function categorizeTodos(todos: TodoItem[]): TodoSection[] {
   const sections: TodoSection[] = [
+    { key: "claude", icon: "\uD83E\uDD16", label: "Chiedi a Claude", color: "text-indigo-400", borderColor: "border-indigo-500/30", items: [] },
     { key: "reddit", icon: "\uD83D\uDD34", label: "Reddit", color: "text-red-400", borderColor: "border-red-500/30", items: [] },
     { key: "directory", icon: "\uD83D\uDCC2", label: "Directory & Backlink", color: "text-amber-400", borderColor: "border-amber-500/30", items: [] },
     { key: "content", icon: "\uD83D\uDCE2", label: "Content", color: "text-blue-400", borderColor: "border-blue-500/30", items: [] },
     { key: "social", icon: "\uD83D\uDCBC", label: "Social", color: "text-purple-400", borderColor: "border-purple-500/30", items: [] },
-    { key: "seo", icon: "\uD83D\uDD0D", label: "SEO", color: "text-green-400", borderColor: "border-green-500/30", items: [] },
+    { key: "seo", icon: "\uD83D\uDD0D", label: "SEO (manuale)", color: "text-green-400", borderColor: "border-green-500/30", items: [] },
     { key: "other", icon: "\uD83D\uDCCB", label: "Other", color: "text-[#A3A3A3]", borderColor: "border-gray-200 dark:border-[#2A2A2A]", items: [] },
   ];
 
@@ -345,7 +346,10 @@ function categorizeTodos(todos: TodoItem[]): TodoSection[] {
     const t = todo.type.toLowerCase();
     const title = todo.title.toLowerCase();
 
-    if (t.includes("reddit")) {
+    // Claude-delegatable tasks go to top section
+    if (t.includes("_claude")) {
+      sectionMap.get("claude")!.items.push(todo);
+    } else if (t.includes("reddit")) {
       sectionMap.get("reddit")!.items.push(todo);
     } else if (t === "directory" || (t === "backlink" && !title.includes("dev.to") && !title.includes("hashnode") && !title.includes("medium"))) {
       sectionMap.get("directory")!.items.push(todo);
@@ -353,7 +357,7 @@ function categorizeTodos(todos: TodoItem[]): TodoSection[] {
       sectionMap.get("content")!.items.push(todo);
     } else if (t === "linkedin" || t === "social" || title.includes("quora") || title.includes("linkedin")) {
       sectionMap.get("social")!.items.push(todo);
-    } else if (t === "gsc" || t === "seo" || t === "gsc_alert") {
+    } else if (t.startsWith("gsc") || t === "seo" || t === "gsc_alert") {
       sectionMap.get("seo")!.items.push(todo);
     } else {
       sectionMap.get("other")!.items.push(todo);
@@ -404,6 +408,29 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
+/* ─── Category Config ─── */
+
+const CATEGORY_CONFIG: Record<string, { bg: string; text: string; iconBg: string; darkBg: string; darkText: string }> = {
+  claude: { bg: "bg-indigo-50", text: "text-indigo-600", iconBg: "bg-indigo-100 dark:bg-indigo-900/40", darkBg: "dark:bg-indigo-950/30", darkText: "dark:text-indigo-400" },
+  reddit: { bg: "bg-red-50", text: "text-red-600", iconBg: "bg-red-100 dark:bg-red-900/40", darkBg: "dark:bg-red-950/30", darkText: "dark:text-red-400" },
+  directory: { bg: "bg-amber-50", text: "text-amber-600", iconBg: "bg-amber-100 dark:bg-amber-900/40", darkBg: "dark:bg-amber-950/30", darkText: "dark:text-amber-400" },
+  content: { bg: "bg-blue-50", text: "text-blue-600", iconBg: "bg-blue-100 dark:bg-blue-900/40", darkBg: "dark:bg-blue-950/30", darkText: "dark:text-blue-400" },
+  social: { bg: "bg-purple-50", text: "text-purple-600", iconBg: "bg-purple-100 dark:bg-purple-900/40", darkBg: "dark:bg-purple-950/30", darkText: "dark:text-purple-400" },
+  seo: { bg: "bg-green-50", text: "text-green-600", iconBg: "bg-green-100 dark:bg-green-900/40", darkBg: "dark:bg-green-950/30", darkText: "dark:text-green-400" },
+  other: { bg: "bg-gray-50", text: "text-gray-600", iconBg: "bg-gray-100 dark:bg-gray-800/40", darkBg: "dark:bg-gray-900/30", darkText: "dark:text-gray-400" },
+};
+
+function getCategoryForTodo(type: string): string {
+  const t = type.toLowerCase();
+  if (t.includes("_claude")) return "claude";
+  if (t.includes("reddit")) return "reddit";
+  if (t === "directory" || t === "backlink") return "directory";
+  if (t === "content" || t === "blog" || t === "content_claude") return "content";
+  if (t === "linkedin" || t === "social") return "social";
+  if (t.startsWith("gsc") || t === "seo" || t === "gsc_alert") return "seo";
+  return "other";
+}
+
 /* ─── Single Todo Row ─── */
 
 function TodoRow({
@@ -418,124 +445,147 @@ function TodoRow({
   const isSkipped = todo.status === "skipped";
   const isInactive = isDone || isSkipped;
 
-  const estimatedTime = todo.type.includes("reddit") ? "~2 min"
+  const isClaude = todo.type.includes("_claude");
+  const category = getCategoryForTodo(todo.type);
+  const catConfig = CATEGORY_CONFIG[category] || CATEGORY_CONFIG.other;
+
+  const estimatedTime = isClaude ? "Copia prompt"
+    : todo.type.includes("reddit") ? "~2 min"
     : todo.type === "directory" || todo.type === "backlink" ? "~3 min"
-    : todo.type === "blog" || todo.type === "content" ? "~15 min"
+    : todo.type === "blog" || todo.type === "content" || todo.type === "content_claude" ? "~15 min"
     : todo.type === "linkedin" || todo.type === "social" ? "~3 min"
-    : todo.type === "gsc" || todo.type === "seo" || todo.type === "gsc_alert" ? "~1 min"
+    : todo.type.startsWith("gsc") || todo.type === "seo" || todo.type === "gsc_alert" ? "~1 min"
     : "~5 min";
 
-  // Extract subreddit from title if Reddit type
-  const subredditMatch = todo.title.match(/r\/(\w+)/);
+  const categoryLabel = category === "claude" ? "Claude" : category === "reddit" ? "Reddit" : category === "directory" ? "Directory" : category === "content" ? "Content" : category === "social" ? "Social" : category === "seo" ? "SEO" : "Other";
 
   return (
     <div
-      className={`group rounded-[5px] border transition-all duration-200 ${
-        isInactive
-          ? "opacity-40 border-gray-200 dark:border-[#252525]"
-          : "border-gray-200 dark:border-[#2A2A2A] hover:border-gray-300 dark:hover:border-[#3A3A3A]"
+      className={`group border rounded-xl p-3.5 transition-all duration-200 ${
+        isDone
+          ? "border-emerald-100 bg-emerald-50/30 opacity-60 dark:border-emerald-900/30 dark:bg-emerald-950/10"
+          : isSkipped
+          ? "border-gray-100 bg-gray-50/30 opacity-40 dark:border-[#2A2A2A] dark:bg-[#1A1A1A]/30"
+          : "border-gray-200 dark:border-[#2A2A2A] hover:border-gray-300 dark:hover:border-[#3A3A3A] hover:shadow-sm bg-white dark:bg-[#1A1A1A]"
       }`}
     >
-      {/* Main row */}
-      <div className="flex items-center gap-3 px-3 py-2.5">
-        {/* Checkbox */}
-        <button
-          onClick={() => onStatusChange(todo.id, isDone ? "pending" : "done")}
-          className={`h-[18px] w-[18px] rounded-full border-[1.5px] shrink-0 flex items-center justify-center transition-all duration-300 ${
-            isDone
-              ? "bg-green-500 border-green-500 text-white"
-              : "border-gray-300 dark:border-[#404040] hover:border-[#6366F1] hover:scale-110"
-          }`}
-        >
-          {isDone && (
-            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" className="animate-checkmark">
-              <path d="M2 5L4.5 7.5L8 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          )}
-        </button>
-
-        {/* Title + subreddit badge */}
-        <div className="flex-1 min-w-0 flex items-center gap-2">
-          <span className={`text-[13px] truncate ${isDone ? "line-through text-gray-400 dark:text-[#555]" : "text-gray-900 dark:text-[#E5E5E5]"}`}>
-            {todo.title}
-          </span>
-          {subredditMatch && (
-            <span className="text-[9px] px-1.5 py-0.5 bg-red-500/10 text-red-400 rounded font-mono shrink-0">
-              r/{subredditMatch[1]}
-            </span>
+      <div className="flex gap-3">
+        {/* Left: Check/Skip stacked buttons */}
+        <div className="flex flex-col gap-1 shrink-0">
+          <button
+            onClick={() => onStatusChange(todo.id, isDone ? "pending" : "done")}
+            className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 ${
+              isDone
+                ? "bg-emerald-500 text-white"
+                : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/50"
+            }`}
+            title={isDone ? "Riapri" : "Completa"}
+          >
+            <Check size={14} strokeWidth={2.5} />
+          </button>
+          {!isInactive && (
+            <button
+              onClick={() => onStatusChange(todo.id, "skipped")}
+              className="w-7 h-7 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:bg-[#252525] dark:text-gray-500 dark:hover:bg-[#333] dark:hover:text-gray-300 transition-all duration-200"
+              title="Salta"
+            >
+              <SkipForward size={12} strokeWidth={2} />
+            </button>
           )}
         </div>
 
-        {/* Time estimate */}
-        {!isInactive && (
-          <span className="text-[9px] text-gray-400 dark:text-[#555] shrink-0">{estimatedTime}</span>
-        )}
+        {/* Right: Content */}
+        <div className="flex-1 min-w-0">
+          {/* Title */}
+          <p className={`text-sm font-semibold leading-snug ${isDone ? "line-through text-gray-400 dark:text-gray-600" : "text-gray-900 dark:text-gray-100"}`}>
+            {todo.title}
+          </p>
 
-        {/* Status badge for done/skipped */}
-        {isDone && (
-          <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 text-green-400 rounded shrink-0">done</span>
-        )}
-        {isSkipped && (
-          <span className="text-[9px] px-1.5 py-0.5 bg-gray-100 dark:bg-[#252525] text-gray-400 dark:text-[#555] rounded shrink-0">skipped</span>
-        )}
+          {/* Badges row */}
+          <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+            {/* Category badge */}
+            <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${catConfig.bg} ${catConfig.text} ${catConfig.darkBg} ${catConfig.darkText}`}>
+              {categoryLabel}
+            </span>
 
-        {/* Action buttons */}
-        {!isInactive && (
-          <div className="flex items-center gap-1 shrink-0">
-            {todo.draftText && <CopyButton text={todo.draftText} />}
-            {todo.actionUrl && (
-              <a
-                href={todo.actionUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1.5 rounded-[4px] font-medium bg-[#6366F1]/15 text-[#818CF8] border border-[#6366F1]/20 hover:bg-[#6366F1]/25 transition-colors shrink-0"
-              >
-                <ExternalLink size={10} strokeWidth={1.5} />
-                Open
-              </a>
+            {/* Priority badge (high priority) */}
+            {todo.priority >= 8 && (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-red-50 text-red-600 dark:bg-red-950/30 dark:text-red-400">
+                P{todo.priority}
+              </span>
             )}
+
+            {/* Claude badge for _claude types */}
+            {isClaude && (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/30 dark:text-indigo-400 flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1-8h-2V7h2v2z" fill="currentColor"/></svg>
+                Claude
+              </span>
+            )}
+
+            {/* Time estimate */}
+            {!isInactive && (
+              <span className="text-[10px] text-gray-400 dark:text-gray-500 flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {estimatedTime}
+              </span>
+            )}
+
+            {/* Status badges */}
+            {isDone && (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-950/30 dark:text-emerald-400">completato</span>
+            )}
+            {isSkipped && (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400">saltato</span>
+            )}
+          </div>
+
+          {/* Description (expandable) */}
+          {(todo.description || todo.draftText) && !isInactive && (
             <button
-              onClick={() => onStatusChange(todo.id, "skipped")}
-              className="inline-flex items-center gap-1 text-[10px] px-2 py-1.5 rounded-[4px] text-gray-400 dark:text-[#555] hover:text-gray-600 dark:hover:text-[#888] transition-colors shrink-0"
-              title="Skip"
+              onClick={() => setExpanded(!expanded)}
+              className="mt-2 text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 flex items-center gap-1 transition-colors"
             >
-              <SkipForward size={10} strokeWidth={1.5} />
+              <ChevronDown size={12} strokeWidth={2} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+              {expanded ? "Nascondi dettagli" : "Mostra dettagli"}
             </button>
-          </div>
-        )}
+          )}
 
-        {/* Expand toggle for draft text */}
-        {todo.draftText && !isInactive && (
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className={`text-gray-400 dark:text-[#555] hover:text-gray-600 dark:hover:text-[#888] transition-transform duration-200 shrink-0 ${expanded ? "rotate-180" : ""}`}
-          >
-            <ChevronDown size={14} strokeWidth={1.5} />
-          </button>
-        )}
-      </div>
-
-      {/* Expanded draft text */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          expanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        {todo.draftText && (
-          <div className="px-3 pb-3 pt-0">
-            <div className="relative">
-              <pre className="text-[11px] text-gray-500 dark:text-[#A3A3A3] bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#252525] p-3 rounded-[4px] whitespace-pre-wrap font-mono leading-relaxed max-h-[200px] overflow-y-auto">
-                {todo.draftText}
-              </pre>
-              <div className="absolute top-2 right-2">
-                <CopyButton text={todo.draftText} />
+          {/* Expanded content */}
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expanded ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+            {todo.draftText && (
+              <div className="relative">
+                <pre className="text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#222] border border-gray-100 dark:border-[#2A2A2A] p-3 rounded-lg whitespace-pre-wrap font-mono leading-relaxed max-h-[200px] overflow-y-auto">
+                  {todo.draftText}
+                </pre>
+                <div className="absolute top-2 right-2">
+                  <CopyButton text={todo.draftText} />
+                </div>
               </div>
-            </div>
+            )}
             {todo.description && (
-              <p className="text-[10px] text-gray-400 dark:text-[#555] mt-2 leading-relaxed">{todo.description}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">{todo.description}</p>
             )}
           </div>
-        )}
+
+          {/* Bottom row: URL, copy, due date */}
+          {!isInactive && (todo.actionUrl || todo.draftText) && (
+            <div className="flex items-center gap-2 mt-2">
+              {todo.draftText && <CopyButton text={todo.draftText} />}
+              {todo.actionUrl && (
+                <a
+                  href={todo.actionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-lg font-medium bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 hover:text-gray-900 dark:bg-[#252525] dark:text-gray-400 dark:border-[#333] dark:hover:bg-[#333] dark:hover:text-gray-200 transition-colors shrink-0"
+                >
+                  <ExternalLink size={10} strokeWidth={1.5} />
+                  Apri link
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -551,51 +601,59 @@ function TodoSectionCard({
   onStatusChange: (id: number, status: string) => void;
 }) {
   const pendingCount = section.items.filter((t) => t.status === "pending").length;
-  const [collapsed, setCollapsed] = useState(pendingCount === 0);
   const doneCount = section.items.filter((t) => t.status === "done").length;
+  const total = section.items.length;
+  const progress = total > 0 ? (doneCount / total) * 100 : 0;
+  const [collapsed, setCollapsed] = useState(pendingCount === 0);
+
+  const catConfig = CATEGORY_CONFIG[section.key] || CATEGORY_CONFIG.other;
 
   return (
-    <div className={`bg-white dark:bg-[#1E1E1E] border ${section.borderColor} rounded-[6px] overflow-hidden transition-colors`}>
+    <div className="bg-white dark:bg-[#1A1A1A] border border-gray-100 dark:border-[#2A2A2A] shadow-sm rounded-2xl overflow-hidden transition-colors">
       {/* Section header */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-[#222] transition-colors"
+        className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50/50 dark:hover:bg-[#222] transition-colors"
       >
-        <span className="text-base">{section.icon}</span>
-        <span className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">{section.label}</span>
+        {/* Category icon square */}
+        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${catConfig.iconBg} shrink-0`}>
+          <span className="text-base leading-none">{section.icon}</span>
+        </div>
 
-        {/* Count badges */}
-        {pendingCount > 0 && (
-          <span className="text-[10px] font-medium px-2 py-0.5 bg-[#6366F1]/15 text-[#818CF8] rounded-full">
-            {pendingCount}
-          </span>
-        )}
-        {doneCount > 0 && (
-          <span className="text-[10px] font-medium px-2 py-0.5 bg-green-500/10 text-green-400 rounded-full">
-            {doneCount} done
-          </span>
-        )}
+        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{section.label}</span>
+
+        {/* Completion count */}
+        <span className="text-xs text-gray-400 dark:text-gray-500">
+          {doneCount}/{total} completati
+        </span>
+
+        {/* Progress bar */}
+        <div className="w-[200px] h-1.5 bg-gray-100 dark:bg-[#252525] rounded-full overflow-hidden shrink-0 hidden sm:block">
+          <div
+            className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
 
         <div className="flex-1" />
 
         {/* Collapse arrow */}
         <ChevronDown
           size={16}
-          strokeWidth={1.5}
-          className={`text-gray-400 dark:text-[#555] transition-transform duration-300 ${collapsed ? "-rotate-90" : ""}`}
+          strokeWidth={2}
+          className={`text-gray-400 dark:text-gray-500 transition-transform duration-300 ${collapsed ? "-rotate-90" : ""}`}
         />
       </button>
 
       {/* Items */}
       <div
         className={`transition-all duration-300 ease-in-out overflow-hidden ${
-          collapsed ? "max-h-0" : "max-h-[2000px]"
+          collapsed ? "max-h-0" : "max-h-[3000px]"
         }`}
       >
-        <div className="px-3 pb-3 space-y-1">
+        <div className="px-4 pb-4 space-y-2">
           {section.items
             .sort((a, b) => {
-              // pending first, then done, then skipped
               const order = { pending: 0, done: 1, skipped: 2 };
               const ao = order[a.status as keyof typeof order] ?? 0;
               const bo = order[b.status as keyof typeof order] ?? 0;
@@ -622,18 +680,21 @@ function TodoSections({
   setTodos: React.Dispatch<React.SetStateAction<TodoItem[]>>;
   fireConfetti: () => void;
 }) {
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const sections = categorizeTodos(todos);
   const totalPending = todos.filter((t) => t.status === "pending").length;
   const totalDone = todos.filter((t) => t.status === "done").length;
+  const totalCompleted = todos.filter((t) => t.status === "done").length;
+  const overallProgress = todos.length > 0 ? (totalDone / todos.length) * 100 : 0;
+
+  // Count done today (items marked done that are in today's list)
+  const doneToday = totalDone;
 
   const handleStatusChange = async (id: number, newStatus: string) => {
-    // Optimistic update
     setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, status: newStatus } : t)));
 
     if (newStatus === "done") {
-      const remaining = todos.filter((t) => t.id !== id && t.status === "pending");
-      if (remaining.length <= 1) fireConfetti();
-      else fireConfetti();
+      fireConfetti();
     }
 
     await fetch(`/api/growth/todos/${id}`, {
@@ -643,34 +704,90 @@ function TodoSections({
     });
   };
 
+  // Available category keys from sections
+  const availableCategories = sections.map((s) => s.key);
+
+  // Filtered sections
+  const filteredSections = activeFilter === "all"
+    ? sections
+    : sections.filter((s) => s.key === activeFilter);
+
   return (
     <div className="mb-6">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2.5">
-          <h2 className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">Da fare oggi</h2>
-          {totalPending > 0 && (
-            <span className="text-[10px] font-medium px-2 py-0.5 bg-[#6366F1]/15 text-[#818CF8] rounded-full">
-              {totalPending} pending
-            </span>
-          )}
+      {/* KPI Summary Cards */}
+      <div className="grid grid-cols-3 gap-3 mb-5">
+        {/* Da fare */}
+        <div className="bg-white dark:bg-[#1A1A1A] border border-gray-100 dark:border-[#2A2A2A] rounded-2xl p-4 shadow-sm">
+          <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{totalPending}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Da fare</p>
         </div>
-        <span className="text-[10px] text-gray-400 dark:text-[#555]">
-          {totalDone}/{todos.length} completati
-        </span>
+        {/* Fatte oggi */}
+        <div className="bg-white dark:bg-[#1A1A1A] border border-gray-100 dark:border-[#2A2A2A] rounded-2xl p-4 shadow-sm">
+          <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{doneToday}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Fatte oggi</p>
+        </div>
+        {/* Totale completate */}
+        <div className="bg-white dark:bg-[#1A1A1A] border border-gray-100 dark:border-[#2A2A2A] rounded-2xl p-4 shadow-sm">
+          <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{totalCompleted}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Totale completate</p>
+        </div>
       </div>
 
-      {/* Progress bar */}
-      <div className="h-1 bg-gray-100 dark:bg-[#252525] rounded-full overflow-hidden mb-4">
-        <div
-          className="h-full bg-gradient-to-r from-[#6366F1] to-[#818CF8] rounded-full transition-all duration-500"
-          style={{ width: `${todos.length > 0 ? (totalDone / todos.length) * 100 : 0}%` }}
-        />
+      {/* Overall progress bar */}
+      <div className="mb-5">
+        <div className="flex items-center justify-between mb-1.5">
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Progresso giornaliero</h2>
+          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{Math.round(overallProgress)}%</span>
+        </div>
+        <div className="h-2 bg-gray-100 dark:bg-[#252525] rounded-full overflow-hidden">
+          <div
+            className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+            style={{ width: `${overallProgress}%` }}
+          />
+        </div>
       </div>
 
-      {/* Sections */}
-      <div className="space-y-2">
-        {sections.map((section) => (
+      {/* Filter pills */}
+      <div className="flex flex-wrap items-center gap-2 mb-4">
+        <button
+          onClick={() => setActiveFilter("all")}
+          className={`text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200 ${
+            activeFilter === "all"
+              ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
+              : "bg-gray-50 text-gray-600 hover:bg-gray-100 dark:bg-[#252525] dark:text-gray-400 dark:hover:bg-[#333]"
+          }`}
+        >
+          Tutti
+        </button>
+        {availableCategories.map((key) => {
+          const sec = sections.find((s) => s.key === key);
+          if (!sec) return null;
+          const pending = sec.items.filter((t) => t.status === "pending").length;
+          return (
+            <button
+              key={key}
+              onClick={() => setActiveFilter(key === activeFilter ? "all" : key)}
+              className={`text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200 flex items-center gap-1.5 ${
+                activeFilter === key
+                  ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
+                  : "bg-gray-50 text-gray-600 hover:bg-gray-100 dark:bg-[#252525] dark:text-gray-400 dark:hover:bg-[#333]"
+              }`}
+            >
+              <span>{sec.icon}</span>
+              {sec.label}
+              {pending > 0 && (
+                <span className={`text-[10px] ${activeFilter === key ? "text-gray-300 dark:text-gray-600" : "text-gray-400 dark:text-gray-500"}`}>
+                  {pending}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Section cards */}
+      <div className="space-y-3">
+        {filteredSections.map((section) => (
           <TodoSectionCard
             key={section.key}
             section={section}
