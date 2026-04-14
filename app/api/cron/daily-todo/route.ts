@@ -25,9 +25,14 @@ export async function GET(request: NextRequest) {
     actionUrl?: string; draftText?: string; priority: number;
   }> = [];
 
-  // Delete only cron-generated todos for TODAY (keep manual ones with priority >= 10)
+  // Delete only cron-generated todos for TODAY that are still PENDING
+  // Never delete "done" or "skipped" — user's progress is sacred
   await db.delete(growthDailyTodos).where(
-    and(eq(growthDailyTodos.date, today), lt(growthDailyTodos.priority, 10))
+    and(
+      eq(growthDailyTodos.date, today),
+      lt(growthDailyTodos.priority, 10),
+      eq(growthDailyTodos.status, "pending")
+    )
   );
 
   // Mark yesterday's unfinished todos as "skipped" (not pending forever)
