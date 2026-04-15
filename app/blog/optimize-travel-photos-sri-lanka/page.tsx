@@ -5,26 +5,28 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How I Optimized 71 Travel Photos from Sri Lanka in 5 Minutes",
+  title: "How to Organize Travel Photos: My Sri Lanka Workflow [2026]",
   description:
-    "I came home from Sri Lanka with 71 photos totaling 350MB+. Here's the exact browser-based workflow I used to compress, rename, and convert them all to WebP in under 5 minutes.",
+    "Back from Sri Lanka with 71 unsorted photos? Here's my exact workflow: organize by destination, AI-rename for SEO, compress, WebP convert — all free in browser.",
   alternates: {
     canonical: `${APP_URL}/blog/optimize-travel-photos-sri-lanka`,
   },
   keywords: [
+    "how to organize travel photos",
+    "organize travel photos by destination",
+    "ai organize photos",
+    "rename travel photos",
     "optimize travel photos for blog",
     "compress travel photos",
-    "image workflow photography",
-    "travel photo optimization",
-    "batch compress images",
-    "webp convert travel photos",
+    "travel photo workflow 2026",
     "browser image optimizer",
     "sri lanka travel photography",
+    "sri lanka photo guide",
   ],
   openGraph: {
-    title: "How I Optimized 71 Travel Photos from Sri Lanka in 5 Minutes",
+    title: "How to Organize Travel Photos: My Sri Lanka Workflow [2026]",
     description:
-      "71 photos, 350MB+, zero uploads to any server. The complete workflow I used to compress, AI-rename, and convert my Sri Lanka travel photos to web-ready WebP files.",
+      "71 photos, 350MB+, zero uploads. Complete travel photo organization workflow: AI-organize by destination, AI-rename, compress, convert to WebP.",
     url: `${APP_URL}/blog/optimize-travel-photos-sri-lanka`,
     type: "article",
     publishedTime: "2026-03-24",
@@ -138,7 +140,7 @@ export default function OptimizeTravelPhotosSriLankaPage() {
   return (
     <>
       <BlogArticleLayout
-        title="How I Optimized 71 Travel Photos from Sri Lanka in 5 Minutes"
+        title="How to Organize Travel Photos: My Sri Lanka Workflow [2026]"
         slug="optimize-travel-photos-sri-lanka"
         description="In March 2025 I spent 16 days traveling across Sri Lanka- from Colombo's temples to Ella's tea plantations to the southern coast. I came home with 71 photos totaling over 350MB. Here's the exact browser-based workflow I used to compress, AI-rename, and convert all of them to web-ready files in under 5 minutes, without uploading a single image to any server."
         date="2026-03-24"
@@ -148,6 +150,7 @@ export default function OptimizeTravelPhotosSriLankaPage() {
         headings={[
           { id: "the-trip", title: "The trip: 16 days across Sri Lanka" },
           { id: "the-problem", title: "The problem: 350MB of unsorted photos" },
+          { id: "step-organize", title: "Step 0: AI Organize - sort photos by destination" },
           { id: "the-workflow", title: "The 3-step workflow that fixed everything" },
           { id: "step-compress", title: "Step 1: Compress - 350MB down to 87MB" },
           { id: "step-rename", title: "Step 2: AI Rename - from IMG_3570 to SEO gold" },
@@ -265,7 +268,11 @@ export default function OptimizeTravelPhotosSriLankaPage() {
           load megabytes of images that browsers would struggle to render
           quickly. Google would penalize the page speed, visitors on mobile
           would bounce, and the filenames would contribute zero SEO value.
-          Not a great starting point.
+          Not a great starting point. (You can see the final result of this workflow on my{" "}
+          <Link href="/portfolio" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">
+            travel photography portfolio
+          </Link>
+          .)
         </p>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
@@ -273,6 +280,30 @@ export default function OptimizeTravelPhotosSriLankaPage() {
           one by one, then manually renamed each file. That process takes 30-45
           minutes for 71 files, and it is mind-numbingly boring. This time I
           tried a different approach.
+        </p>
+
+        <h2 id="step-organize" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
+          Step 0: AI Organize &mdash; sort photos by destination
+        </h2>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          Before optimizing anything, I had a bigger problem: my Sri Lanka photos were mixed in with hundreds of photos from other trips, family events, and screenshots. The first step was separating them.
+        </p>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          I used{" "}
+          <Link href="/tools/ai-organize" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">
+            SammaPix AI Organize
+          </Link>
+          {" "}to scan the entire folder. The tool reads each image, identifies the location and content using AI, and groups photos automatically. Within seconds my Sri Lanka photos were in their own folder, separated from everything else &mdash; temples in one group, beaches in another, tea plantations in a third.
+        </p>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          You can also use{" "}
+          <Link href="/tools/geosort" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">
+            GeoSort
+          </Link>
+          {" "}if your photos still have GPS metadata &mdash; it groups by exact location coordinates. AI Organize works even when EXIF has been stripped (which happens a lot if you shared photos via WhatsApp or social platforms first).
+        </p>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          End result: a clean Sri Lanka folder with 71 photos, ready for the optimization workflow. No manual sorting, no dragging files between folders.
         </p>
 
         <h2 id="the-workflow" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
