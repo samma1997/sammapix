@@ -270,7 +270,10 @@ export default function RemoveExifProtectPrivacyPage() {
           Do social platforms strip EXIF automatically?
         </h2>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Instagram, Facebook, and X (Twitter) do strip most EXIF metadata when you upload a photo through their apps. This sounds reassuring- but it is not a reliable privacy strategy.
+          Instagram, Facebook, and X (Twitter) do strip most EXIF metadata when you upload a photo through their apps. Discord, WhatsApp, and other platforms behave differently &mdash; see our{" "}
+          <Link href="/blog/which-apps-strip-photo-metadata" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#525252] hover:decoration-gray-600 dark:hover:decoration-[#A3A3A3] transition-colors">
+            complete comparison of 12 apps tested for metadata stripping
+          </Link>. This sounds reassuring- but it is not a reliable privacy strategy.
         </p>
         <ul className="space-y-2 mb-4 pl-4">
           {[
