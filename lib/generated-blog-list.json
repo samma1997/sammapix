@@ -1,5 +1,89 @@
 [
   {
+    "slug": "find-delete-duplicate-photos-free",
+    "title": "How to Find & Delete Duplicate Photos Free [2026 Guide]",
+    "description": "Your phone has hundreds of duplicate photos eating storage. Here",
+    "keywords": [
+      "find duplicate photos",
+      "duplicate photo finder free",
+      "delete duplicate photos",
+      "find similar images",
+      "remove duplicate photos"
+    ],
+    "publishedDate": "2026-04-16",
+    "url": "/blog/find-delete-duplicate-photos-free"
+  },
+  {
+    "slug": "ai-alt-text-accuracy-test-2026",
+    "title": "Methodology",
+    "description": "We tested Gemini 2.5 Flash, GPT-4o, and Claude 3.5 Sonnet on 200 real photographs across 5 categories. Full accuracy scores, SEO ratings, and accessib",
+    "keywords": [
+      "ai alt text generator",
+      "ai image description accuracy",
+      "gemini vs gpt-4o alt text",
+      "best ai for alt text",
+      "automated alt text quality"
+    ],
+    "publishedDate": "2026-04-14",
+    "url": "/blog/ai-alt-text-accuracy-test-2026"
+  },
+  {
+    "slug": "image-compression-benchmark-2026",
+    "title": "Methodology",
+    "description": "100 images, 10 tools, 4 quality levels. We measured file size reduction, SSIMULACRA 2 visual quality, processing speed, and privacy for every major co",
+    "keywords": [
+      "image compression benchmark 2026",
+      "tinypng vs squoosh",
+      "best image compression tool",
+      "image compression comparison test",
+      "tinypng alternative benchmark"
+    ],
+    "publishedDate": "2026-04-14",
+    "url": "/blog/image-compression-benchmark-2026"
+  },
+  {
+    "slug": "image-compression-statistics-2026",
+    "title": "Web performance & page weight",
+    "description": "67 cited statistics on image compression, format adoption, Core Web Vitals impact, and e-commerce conversion rates. The definitive reference for 2026.",
+    "keywords": [
+      "image compression statistics",
+      "image optimization stats 2026",
+      "web performance image data",
+      "webp adoption rate",
+      "avif adoption statistics"
+    ],
+    "publishedDate": "2026-04-14",
+    "url": "/blog/image-compression-statistics-2026"
+  },
+  {
+    "slug": "optimize-images-shopify-free-guide",
+    "title": "Why image optimization matters for Shopify",
+    "description": "",
+    "keywords": [
+      "optimize images for shopify",
+      "shopify image optimization",
+      "shopify compress images",
+      "image optimizer for shopify",
+      "bulk resize images shopify"
+    ],
+    "publishedDate": "2026-04-14",
+    "url": "/blog/optimize-images-shopify-free-guide"
+  },
+  {
+    "slug": "webp-vs-avif-vs-jpeg-comparison",
+    "title": "AVIF vs WebP vs JPEG: Best Image Format 2026",
+    "description": "AVIF vs WebP vs JPEG compared with real benchmarks, browser support data, and an interactive tool. Find the right image format for your site in 2026.",
+    "keywords": [
+      "avif vs webp vs jpeg",
+      "best image format 2026",
+      "webp vs jpeg quality",
+      "avif format support 2026",
+      "image format comparison"
+    ],
+    "publishedDate": "2026-04-13",
+    "url": "/blog/webp-vs-avif-vs-jpeg-comparison"
+  },
+  {
     "slug": "best-free-remove-bg-alternatives-2026",
     "title": "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested",
     "description": "Remove.bg charges \\u20AC0.36 per image. Here are 7 free alternatives for background removal tested on real photos \\u2014 product shots, portraits, and",
@@ -85,8 +169,8 @@
   },
   {
     "slug": "which-apps-strip-photo-metadata",
-    "title": "Which Apps Strip Photo Metadata? The Complete 2026 Guide",
-    "description": "Fact-checked comparison of 12 platforms: which apps strip EXIF metadata from photos, which keep your GPS data internally, and the WhatsApp document mo",
+    "title": "Which Apps Strip Photo Metadata? 12 Apps Tested [2026]",
+    "description": "We tested 12 apps for EXIF stripping. Some keep your GPS data hidden inside. See the full results — the WhatsApp document trick most people miss.",
     "keywords": [
       "which apps strip photo metadata",
       "does whatsapp remove exif",
@@ -113,8 +197,8 @@
   },
   {
     "slug": "compress-images-whatsapp-quality",
-    "title": "How to Compress Images for WhatsApp Without Losing Quality (2026)",
-    "description": "Learn how WhatsApp compresses your photos and the optimal strategy to send high quality images. Pre-compress to 200-300KB at 1920px for the best resul",
+    "title": "WhatsApp Image Quality Loss? Fix It Before Sending [2026]",
+    "description": "WhatsApp cuts 80% of your photo quality. Pre-compress to 200-300KB at 1920px and WhatsApp barely touches them. Free tool + tested method inside.",
     "keywords": [
       "compress images for whatsapp",
       "whatsapp image quality",
@@ -182,48 +266,6 @@
     "url": "/blog/check-remove-exif-data-photos"
   },
   {
-    "slug": "ai-alt-text-accuracy-test-2026",
-    "title": "Methodology",
-    "description": "We tested Gemini 2.5 Flash, GPT-4o, and Claude 3.5 Sonnet on 200 real photographs across 5 categories. Full accuracy scores, SEO ratings, and accessib",
-    "keywords": [
-      "ai alt text generator",
-      "ai image description accuracy",
-      "gemini vs gpt-4o alt text",
-      "best ai for alt text",
-      "automated alt text quality"
-    ],
-    "publishedDate": "2026-04-02",
-    "url": "/blog/ai-alt-text-accuracy-test-2026"
-  },
-  {
-    "slug": "image-compression-benchmark-2026",
-    "title": "Methodology",
-    "description": "100 images, 10 tools, 4 quality levels. We measured file size reduction, SSIMULACRA 2 visual quality, processing speed, and privacy for every major co",
-    "keywords": [
-      "image compression benchmark 2026",
-      "tinypng vs squoosh",
-      "best image compression tool",
-      "image compression comparison test",
-      "tinypng alternative benchmark"
-    ],
-    "publishedDate": "2026-04-02",
-    "url": "/blog/image-compression-benchmark-2026"
-  },
-  {
-    "slug": "image-compression-statistics-2026",
-    "title": "Web performance & page weight",
-    "description": "67 cited statistics on image compression, format adoption, Core Web Vitals impact, and e-commerce conversion rates. The definitive reference for 2026.",
-    "keywords": [
-      "image compression statistics",
-      "image optimization stats 2026",
-      "web performance image data",
-      "webp adoption rate",
-      "avif adoption statistics"
-    ],
-    "publishedDate": "2026-04-02",
-    "url": "/blog/image-compression-statistics-2026"
-  },
-  {
     "slug": "passport-photo-requirements-2026",
     "title": "Quick reference table: 20 countries",
     "description": "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo ma",
@@ -253,14 +295,14 @@
   },
   {
     "slug": "optimize-travel-photos-sri-lanka",
-    "title": "How I Optimized 71 Travel Photos from Sri Lanka in 5 Minutes",
-    "description": "I came home from Sri Lanka with 71 photos totaling 350MB+. Here",
+    "title": "How to Organize Travel Photos: My Sri Lanka Workflow [2026]",
+    "description": "Back from Sri Lanka with 71 unsorted photos? Here",
     "keywords": [
-      "optimize travel photos for blog",
-      "compress travel photos",
-      "image workflow photography",
-      "travel photo optimization",
-      "batch compress images"
+      "how to organize travel photos",
+      "organize travel photos by destination",
+      "ai organize photos",
+      "rename travel photos",
+      "optimize travel photos for blog"
     ],
     "publishedDate": "2026-03-24",
     "url": "/blog/optimize-travel-photos-sri-lanka"
@@ -306,20 +348,6 @@
     ],
     "publishedDate": "2026-03-22",
     "url": "/blog/sammapix-vs-tinypng-benchmark-2026"
-  },
-  {
-    "slug": "webp-vs-avif-vs-jpeg-comparison",
-    "title": "WebP vs AVIF vs JPEG: Which Image Format Should You Use in 2026?",
-    "description": "WebP vs AVIF vs JPEG compared for 2026: file size, browser support, encoding speed, and the exact format to use for every use case on the web.",
-    "keywords": [
-      "webp vs avif vs jpeg",
-      "best image format for web",
-      "webp vs jpeg quality",
-      "avif format support",
-      "image format comparison 2026"
-    ],
-    "publishedDate": "2026-03-22",
-    "url": "/blog/webp-vs-avif-vs-jpeg-comparison"
   },
   {
     "slug": "batch-rename-photos-ai",
@@ -618,13 +646,13 @@
   {
     "slug": "best-image-compression-tools-2026",
     "title": "Best Free Image Compression Tools in 2026 - Compared",
-    "description": "Honest comparison of the best free image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Pros, cons, a",
+    "description": "Honest comparison of the 6 best free PNG and image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG test",
     "keywords": [
       "best image compression tools 2026",
+      "best png compression tools 2026",
       "free image compressor online",
       "compress images online free",
-      "tinypng alternative",
-      "best image optimizer"
+      "compress png free"
     ],
     "publishedDate": "2026-01-15",
     "url": "/blog/best-image-compression-tools-2026"

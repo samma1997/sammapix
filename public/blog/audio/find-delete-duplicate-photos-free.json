@@ -1,0 +1,352 @@
+[
+  {
+    "start": 0,
+    "end": 3.1,
+    "text": "Ready to clean up your photo library?"
+  },
+  {
+    "start": 3.1,
+    "end": 6.41,
+    "text": "Your phone has more duplicates than you think"
+  },
+  {
+    "start": 6.41,
+    "end": 8.93,
+    "text": "What counts as a duplicate?"
+  },
+  {
+    "start": 8.93,
+    "end": 11.35,
+    "text": "Exact duplicates"
+  },
+  {
+    "start": 11.35,
+    "end": 13.49,
+    "text": "Near-duplicates"
+  },
+  {
+    "start": 13.49,
+    "end": 15.7,
+    "text": "Similar photos"
+  },
+  {
+    "start": 15.7,
+    "end": 18.96,
+    "text": "The 3 ways to find duplicate photos"
+  },
+  {
+    "start": 18.96,
+    "end": 21.46,
+    "text": "1. Manual review"
+  },
+  {
+    "start": 21.46,
+    "end": 24.41,
+    "text": "2. Desktop applications"
+  },
+  {
+    "start": 24.41,
+    "end": 27.29,
+    "text": "3. Browser-based tools"
+  },
+  {
+    "start": 27.29,
+    "end": 30.12,
+    "text": "How TwinHunt finds duplicates"
+  },
+  {
+    "start": 30.12,
+    "end": 32.88,
+    "text": "Step 1: Drop your photos"
+  },
+  {
+    "start": 32.88,
+    "end": 36.34,
+    "text": "Step 2: AI scans your library"
+  },
+  {
+    "start": 36.34,
+    "end": 40.08,
+    "text": "Step 3: Groups of similar photos appear"
+  },
+  {
+    "start": 40.08,
+    "end": 43.06,
+    "text": "Step 4: You pick which to keep"
+  },
+  {
+    "start": 43.06,
+    "end": 46.15,
+    "text": "Step 5: Download your cleaned set"
+  },
+  {
+    "start": 46.15,
+    "end": 50.35,
+    "text": "Real test: 500 photos, how many duplicates?"
+  },
+  {
+    "start": 50.35,
+    "end": 54.53,
+    "text": "Desktop apps vs browser-based: honest comparison"
+  },
+  {
+    "start": 54.53,
+    "end": 57.19,
+    "text": "Tips to prevent duplicates"
+  },
+  {
+    "start": 57.19,
+    "end": 59.26,
+    "text": "Related guides"
+  },
+  {
+    "start": 59.26,
+    "end": 71.23,
+    "text": "Drop your photos into TwinHunt and find every duplicate in minutes. Free, no sig"
+  },
+  {
+    "start": 71.23,
+    "end": 93.98,
+    "text": "Open your phone right now and check your photo count. If you are like most peopl"
+  },
+  {
+    "start": 93.98,
+    "end": 100.15,
+    "text": "Where do all these duplicates come from? The sources are more varied than you mi"
+  },
+  {
+    "start": 100.15,
+    "end": 120,
+    "text": "The math adds up fast. If you take 100 photos per month and 20% end up duplicate"
+  },
+  {
+    "start": 120,
+    "end": 128.66,
+    "text": "Not all duplicates are created equal. Understanding the difference matters becau"
+  },
+  {
+    "start": 128.66,
+    "end": 157.61,
+    "text": "These are byte-for-byte identical files. The image data, metadata, and file stru"
+  },
+  {
+    "start": 157.61,
+    "end": 186,
+    "text": "These are photos that look the same to your eyes but differ at the byte level. C"
+  },
+  {
+    "start": 186,
+    "end": 204.5,
+    "text": "These are photos of the same scene taken within seconds of each other. Burst sho"
+  },
+  {
+    "start": 204.5,
+    "end": 220.39,
+    "text": "Most people only think about exact duplicates when they hear \"duplicate photos.\""
+  },
+  {
+    "start": 220.39,
+    "end": 247.68,
+    "text": "You scroll through your library, spot photos that look the same, and delete the "
+  },
+  {
+    "start": 247.68,
+    "end": 280.78,
+    "text": "Apps like Gemini 2 (macOS, $20/year), CCleaner (Windows, $30/year), and Duplicat"
+  },
+  {
+    "start": 280.78,
+    "end": 310.82,
+    "text": "This is the newer approach and the one that makes the most sense for most people"
+  },
+  {
+    "start": 310.82,
+    "end": 333.38,
+    "text": "Why browser-based matters for privacy: Many \"free\" online duplicate finders ask "
+  },
+  {
+    "start": 333.38,
+    "end": 341.83,
+    "text": "Here is the step-by-step workflow from start to finish. The entire process takes"
+  },
+  {
+    "start": 341.83,
+    "end": 364.2,
+    "text": "Open TwinHunt in your browser. Drag a folder of photos onto the drop zone, or cl"
+  },
+  {
+    "start": 364.2,
+    "end": 388.9,
+    "text": "TwinHunt generates a perceptual hash for every image. This is a compact fingerpr"
+  },
+  {
+    "start": 388.9,
+    "end": 411.22,
+    "text": "Once scanning finishes, TwinHunt presents your duplicates organized into groups."
+  },
+  {
+    "start": 411.22,
+    "end": 432.38,
+    "text": "Review each group and select the copies you want to remove. You can accept TwinH"
+  },
+  {
+    "start": 432.38,
+    "end": 455.18,
+    "text": "After selecting the duplicates to remove, download the cleaned set of unique pho"
+  },
+  {
+    "start": 455.18,
+    "end": 467.83,
+    "text": "We ran TwinHunt on three real-world photo folders to see how many duplicates a t"
+  },
+  {
+    "start": 467.83,
+    "end": 498.05,
+    "text": "Total storage recovered: 1.2 GB across all three folders. The WhatsApp folder ha"
+  },
+  {
+    "start": 498.05,
+    "end": 521.95,
+    "text": "The breakdown between exact and near-duplicates was revealing. In the camera rol"
+  },
+  {
+    "start": 521.95,
+    "end": 530.23,
+    "text": "There is no single \"best\" tool for everyone. Here is a fair comparison of the fo"
+  },
+  {
+    "start": 530.23,
+    "end": 545.11,
+    "text": "Gemini 2 is excellent if you are on macOS and willing to pay. Its duplicate dete"
+  },
+  {
+    "start": 545.11,
+    "end": 559.9,
+    "text": "CCleaner gets the job done on Windows, but it comes with baggage. The installer "
+  },
+  {
+    "start": 559.9,
+    "end": 577.75,
+    "text": "Google Photos has built-in duplicate detection, but it requires uploading all yo"
+  },
+  {
+    "start": 577.75,
+    "end": 598.22,
+    "text": "TwinHunt fills the gap: free, works on any OS, finds near-duplicates, and keeps "
+  },
+  {
+    "start": 598.22,
+    "end": 609.96,
+    "text": "Cleaning up duplicates is satisfying, but preventing them from accumulating in t"
+  },
+  {
+    "start": 609.96,
+    "end": 633.6,
+    "text": "Storage analysis data consistently shows that 15-25% of photos on the average ph"
+  },
+  {
+    "start": 633.6,
+    "end": 662.88,
+    "text": "Not with browser-based tools. TwinHunt processes everything locally using your b"
+  },
+  {
+    "start": 662.88,
+    "end": 689.38,
+    "text": "Yes. TwinHunt uses perceptual hashing, which analyzes the visual content of each"
+  },
+  {
+    "start": 689.38,
+    "end": 722.64,
+    "text": "TwinHunt works with local files on your device. It does not connect to iCloud, G"
+  },
+  {
+    "start": 722.64,
+    "end": 752.74,
+    "text": "Results depend on your library, but most users recover 10-25% of their photo sto"
+  },
+  {
+    "start": 752.74,
+    "end": 786.14,
+    "text": "TwinHunt supports common image formats including JPEG, PNG, WebP, and HEIC. RAW "
+  },
+  {
+    "start": 786.14,
+    "end": 791.54,
+    "text": "Once your duplicates are gone, these guides help you optimize and organize what "
+  },
+  {
+    "start": 791.54,
+    "end": 835.46,
+    "text": "Open TwinHunt Compress Photos } > Your phone has more duplicates than you think "
+  },
+  {
+    "start": 835.46,
+    "end": 848.5,
+    "text": "WhatsApp and Telegram auto-saves. Messaging apps automatically save every photo "
+  },
+  {
+    "start": 848.5,
+    "end": 864.05,
+    "text": "Burst mode. Hold the shutter button and your phone captures 10 frames per second"
+  },
+  {
+    "start": 864.05,
+    "end": 876.89,
+    "text": "Screenshots of photos. You screenshot a photo to share it on Instagram Stories, "
+  },
+  {
+    "start": 876.89,
+    "end": 889.42,
+    "text": "Cloud sync overlaps. iCloud, Google Photos, Dropbox, and OneDrive can all sync t"
+  },
+  {
+    "start": 889.42,
+    "end": 900.19,
+    "text": "Editing without deleting originals. You crop a photo or apply a filter, your pho"
+  },
+  {
+    "start": 900.19,
+    "end": 1295.04,
+    "text": "SammaPix TwinHunt runs entirely in your browser. You do not install anything. Yo"
+  },
+  {
+    "start": 1295.04,
+    "end": 1319.04,
+    "text": "Use HEIC instead of JPG on iPhone. HEIC files are roughly half the size of equiv"
+  },
+  {
+    "start": 1319.04,
+    "end": 1336.46,
+    "text": "Cull burst shots immediately. After taking a burst, open the burst group right a"
+  },
+  {
+    "start": 1336.46,
+    "end": 1356.79,
+    "text": "Organize first, then deduplicate. Before running a duplicate scan, sort your pho"
+  },
+  {
+    "start": 1356.79,
+    "end": 1373.76,
+    "text": "Run a quarterly cleanup. Even with good habits, duplicates creep in. Set a calen"
+  },
+  {
+    "start": 1373.76,
+    "end": 1552.58,
+    "text": "TwinHunt processes everything locally using your browser's File API and Canvas A"
+  },
+  {
+    "start": 1552.58,
+    "end": 1564.3,
+    "text": "AI Organize — Automatically sort your photos into folders by content, scene type"
+  },
+  {
+    "start": 1564.3,
+    "end": 1574.88,
+    "text": "EXIF Viewer — Check and strip metadata from your photos. Useful for verifying wh"
+  },
+  {
+    "start": 1574.88,
+    "end": 1587.31,
+    "text": "How to Organize Travel Photos by Country — A complete guide to sorting travel ph"
+  }
+]
