@@ -100,6 +100,7 @@ export const BLOG_SLUGS = [
   "cull-photos-faster-workflow",
   "film-effects-digital-photos-free",
   "find-delete-duplicate-photos",
+  "find-delete-duplicate-photos-free",
   "image-sizes-social-media-2026",
   "iphone-heic-to-jpg-guide",
   "make-images-load-faster-website",
