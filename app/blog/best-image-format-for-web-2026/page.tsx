@@ -914,7 +914,14 @@ export default function BestImageFormatForWeb2026Page() {
                 SammaPix&apos;s image compression tool
               </Link>{" "}
              - it supports batch processing with per-format quality controls.
-              You can also check the{" "}
+              For a detailed guide on preserving quality during compression, read our{" "}
+              <Link
+                href="/blog/compress-images-without-losing-quality"
+                className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+              >
+                compress images without losing quality
+              </Link>{" "}
+              guide. You can also check the{" "}
               <a
                 href="https://web.dev/learn/images"
                 target="_blank"
