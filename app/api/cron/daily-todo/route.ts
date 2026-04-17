@@ -41,6 +41,20 @@ export async function GET(request: NextRequest) {
     .set({ status: "skipped" })
     .where(and(eq(growthDailyTodos.date, yesterday), eq(growthDailyTodos.status, "pending")));
 
+  // Load recently completed TODO draft texts to avoid repeating the same work
+  const sevenDaysAgo = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
+  const recentDone = await db.select({ title: growthDailyTodos.title, draftText: growthDailyTodos.draftText })
+    .from(growthDailyTodos)
+    .where(and(
+      eq(growthDailyTodos.status, "done"),
+      sqlFn`${growthDailyTodos.date} >= ${sevenDaysAgo}`,
+    ));
+  const recentDoneTexts = recentDone.map(t => `${t.title || ""} ${t.draftText || ""}`).join(" ").toLowerCase();
+
+  function wasRecentlyDone(keyword: string): boolean {
+    return recentDoneTexts.includes(keyword.toLowerCase());
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
   const model = genAI?.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -346,8 +360,9 @@ sammapix.com`;
 
       // Find the weakest blog/comparison keyword target
       // Priority: not ranking > position > 30 > position > target
+      // Skip keywords already actioned in last 7 days
       const blogKeywords = TARGET_KEYWORDS.filter(
-        (kw) => kw.category === "blog" || kw.category === "comparison"
+        (kw) => (kw.category === "blog" || kw.category === "comparison") && !wasRecentlyDone(kw.keyword)
       );
 
       let weakest: KeywordTarget | null = null;
@@ -465,17 +480,21 @@ sammapix.com`;
       `);
 
       if (quickWins.rows.length > 0) {
-        const qwList = quickWins.rows.map((r: any) =>
-          `"${r.query}" (pos ${r.pos}) → ${(r.page || "").replace("https://www.sammapix.com", "")}`
-        ).join("\n");
+        // Filter out keywords already actioned in last 7 days
+        const newQW = (quickWins.rows as any[]).filter((r: any) => !wasRecentlyDone(r.query));
+        if (newQW.length > 0) {
+          const qwList = newQW.map((r: any) =>
+            `"${r.query}" (pos ${r.pos}) → ${(r.page || "").replace("https://www.sammapix.com", "")}`
+          ).join("\n");
 
-        const prompt = `Aggiungi 2-3 link interni verso queste pagine dai blog post più rilevanti:\n${qwList}`;
-        todos.push({
-          date: today, type: "gsc_claude", priority: 9,
-          title: `🤖 Quick Win: ${quickWins.rows.length} keyword quasi in prima pagina`,
-          description: "Keyword in posizione 11-20. Copia il prompt e incollalo su Claude Code — lui aggiunge i link interni automaticamente.",
-          draftText: prompt,
-        });
+          const prompt = `Aggiungi 2-3 link interni verso queste pagine dai blog post più rilevanti:\n${qwList}`;
+          todos.push({
+            date: today, type: "gsc_claude", priority: 9,
+            title: `🤖 Quick Win: ${newQW.length} keyword quasi in prima pagina`,
+            description: "Keyword in posizione 11-20. Copia il prompt e incollalo su Claude Code — lui aggiunge i link interni automaticamente.",
+            draftText: prompt,
+          });
+        }
       }
 
       // CTR Fix: high impressions but 0 clicks = bad title/meta
@@ -493,17 +512,20 @@ sammapix.com`;
       `);
 
       if (ctrFix.rows.length > 0) {
-        const cfList = ctrFix.rows.map((r: any) =>
-          `"${r.query}" — pos ${r.pos}, ${r.imp} impressioni, 0 click → ${(r.page || "").replace("https://www.sammapix.com", "")}`
-        ).join("\n");
+        const newCTR = (ctrFix.rows as any[]).filter((r: any) => !wasRecentlyDone(r.query));
+        if (newCTR.length > 0) {
+          const cfList = newCTR.map((r: any) =>
+            `"${r.query}" — pos ${r.pos}, ${r.imp} impressioni, 0 click → ${(r.page || "").replace("https://www.sammapix.com", "")}`
+          ).join("\n");
 
-        const prompt = `Migliora title tag e meta description per queste pagine (CTR 0%):\n${cfList}\n\nAggiungi numeri, anno 2026, power words (Free, Best). Aggiungi FAQ schema.`;
-        todos.push({
-          date: today, type: "gsc_claude", priority: 8,
-          title: `🤖 CTR basso: ci vedono ma non cliccano`,
-          description: "Queste pagine appaiono su Google ma nessuno clicca. Copia il prompt e incollalo su Claude Code.",
-          draftText: prompt,
-        });
+          const prompt = `Migliora title tag e meta description per queste pagine (CTR 0%):\n${cfList}\n\nAggiungi numeri, anno 2026, power words (Free, Best). Aggiungi FAQ schema.`;
+          todos.push({
+            date: today, type: "gsc_claude", priority: 8,
+            title: `🤖 CTR basso: ci vedono ma non cliccano`,
+            description: "Queste pagine appaiono su Google ma nessuno clicca. Copia il prompt e incollalo su Claude Code.",
+            draftText: prompt,
+          });
+        }
       }
 
       // Declining: keywords that lost position recently
@@ -534,17 +556,20 @@ sammapix.com`;
       `);
 
       if (declining.rows.length > 0) {
-        const decList = declining.rows.map((r: any) =>
-          `"${r.query}" — era pos ${r.old_pos}, ora pos ${r.current_pos} (⬇️ ${Math.round(r.delta)} posizioni)`
-        ).join("\n");
+        const newDec = (declining.rows as any[]).filter((r: any) => !wasRecentlyDone(r.query));
+        if (newDec.length > 0) {
+          const decList = newDec.map((r: any) =>
+            `"${r.query}" — era pos ${r.old_pos}, ora pos ${r.current_pos} (⬇️ ${Math.round(r.delta)} posizioni)`
+          ).join("\n");
 
-        const prompt = `Queste keyword stanno perdendo posizioni, analizza e migliora il contenuto:\n${decList}\n\nPer ognuna: controlla la pagina, aggiungi contenuto, migliora heading, aggiungi link interni.`;
-        todos.push({
-          date: today, type: "gsc_claude", priority: 7,
-          title: `🤖 Keyword in calo: ${declining.rows.length} stanno scendendo`,
-          description: "Keyword che hanno perso posizioni. Copia il prompt e incollalo su Claude Code.",
-          draftText: prompt,
-        });
+          const prompt = `Queste keyword stanno perdendo posizioni, analizza e migliora il contenuto:\n${decList}\n\nPer ognuna: controlla la pagina, aggiungi contenuto, migliora heading, aggiungi link interni.`;
+          todos.push({
+            date: today, type: "gsc_claude", priority: 7,
+            title: `🤖 Keyword in calo: ${newDec.length} stanno scendendo`,
+            description: "Keyword che hanno perso posizioni. Copia il prompt e incollalo su Claude Code.",
+            draftText: prompt,
+          });
+        }
       }
     } catch (e) {
       console.error("[daily-todo] GSC intelligence error:", e);
