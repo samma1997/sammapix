@@ -289,6 +289,37 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* Featured on */}
+        <section className="mt-16 mb-8">
+          <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-[#A3A3A3] dark:text-[#525252] mb-4 text-center">
+            Featured on
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            {[
+              { name: "Product Hunt", url: "https://www.producthunt.com/" },
+              { name: "Dang.ai", url: "https://dang.ai/" },
+              { name: "G2", url: "https://www.g2.com/" },
+              { name: "SaaSHub", url: "https://www.saashub.com/" },
+              { name: "StackShare", url: "https://stackshare.io/" },
+              { name: "Dev.to", url: "https://dev.to/samma1997" },
+              { name: "Hashnode", url: "https://sammapix.hashnode.dev/" },
+              { name: "SourceForge", url: "https://sourceforge.net/" },
+              { name: "Futurepedia", url: "https://futurepedia.io/" },
+              { name: "BetaList", url: "https://betalist.com/" },
+            ].map((site) => (
+              <a
+                key={site.name}
+                href={site.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[#A3A3A3] dark:text-[#525252] hover:text-[#737373] dark:hover:text-[#737373] transition-colors"
+              >
+                {site.name}
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
