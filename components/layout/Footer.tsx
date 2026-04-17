@@ -268,7 +268,8 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-100 dark:border-[#2A2A2A] mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-400 dark:text-[#525252]">
-            &copy; 2026 SammaPix
+            &copy; 2026 SammaPix &middot;{" "}
+            <a href="https://dang.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-[#333] hover:text-gray-400 dark:hover:text-[#525252] transition-colors">Dang.ai</a>
           </p>
           <p className="text-xs text-gray-400 dark:text-[#525252]">
             by{" "}
