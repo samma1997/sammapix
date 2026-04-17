@@ -381,7 +381,10 @@ export default function WhichAppsStripPhotoMetadataPage() {
           So when people say &quot;Instagram strips EXIF data,&quot; what they really mean is: Instagram strips EXIF data <em>from the copy other users can download</em>. The platform itself has your complete metadata. You are protected from random viewers but not from the platform and anyone the platform shares data with.
         </p>
         <p className="text-sm text-[#737373] leading-relaxed mb-4">
-          If you want the platform itself to never have your GPS data, you need to strip it <em>before</em> uploading.
+          If you want the platform itself to never have your GPS data, you need to strip it <em>before</em> uploading. Beyond privacy, Instagram also{" "}
+          <Link href="/blog/instagram-image-quality-loss-fix" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">
+            compresses your photos aggressively, reducing quality by up to 13x
+          </Link>.
         </p>
 
         {/* Section: Messaging apps */}
