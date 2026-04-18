@@ -57,6 +57,10 @@
     {
       "path": "/api/cron/gsc-index-check",
       "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/backlink-auto",
+      "schedule": "0 9 * * *"
     }
   ],
   "redirects": [
