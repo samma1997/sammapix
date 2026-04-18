@@ -169,8 +169,8 @@ export default function BatchWatermarkPhotosFreeGuidePage() {
         heroImage={
           <figure>
             <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80"
-              alt="Photographer reviewing images on a laptop, representing the need for batch watermarking to protect photography work"
+              src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=80"
+              alt="Camera and photos on desk representing photography workflow and watermark protection"
               className="w-full rounded-lg"
               loading="eager"
             />
