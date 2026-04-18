@@ -229,23 +229,27 @@ JSON only:
         .limit(3);
 
       if (nextDirs.length > 0) {
-        // Pick first one (they're in order)
         const dir = nextDirs[0];
+        const dirNotes = (dir as any).notes || "";
+        const dirAction = dirNotes.includes("|") ? dirNotes.split("|").slice(1).join("|").trim() : `Registra SammaPix su ${dir.directoryName}. Metti link sammapix.com.`;
         todos.push({
           date: today, type: "directory", priority: 8,
-          title: `✋ Directory: ${dir.directoryName}`,
-          description: `Registra SammaPix su ${dir.directoryName}. Quando fatto, segna come completato — non apparirà più domani.`,
+          title: `✋ ${dir.directoryName}`,
+          description: dirAction + "\n\nQuando fatto, segna come completato — non apparirà più domani.",
           actionUrl: dir.directoryUrl || undefined,
+          draftText: `Nome: SammaPix\nURL: https://www.sammapix.com\nDescrizione: Free, open-source image toolkit. 27 browser-based tools: compress, convert, resize, AI rename, EXIF removal, background removal. 100% client-side — images never uploaded.\nGitHub: https://github.com/samma1997/sammapix`,
         });
 
-        // If there are more, add a second one
         if (nextDirs.length > 1) {
           const dir2 = nextDirs[1];
+          const dir2Notes = (dir2 as any).notes || "";
+          const dir2Action = dir2Notes.includes("|") ? dir2Notes.split("|").slice(1).join("|").trim() : `Registra anche su ${dir2.directoryName}.`;
           todos.push({
             date: today, type: "directory", priority: 6,
-            title: `✋ Directory: ${dir2.directoryName}`,
-            description: `Bonus: registra anche su ${dir2.directoryName} se hai tempo.`,
+            title: `✋ ${dir2.directoryName}`,
+            description: dir2Action,
             actionUrl: dir2.directoryUrl || undefined,
+            draftText: `Nome: SammaPix\nURL: https://www.sammapix.com\nDescrizione: Free, open-source image toolkit. 27 browser-based tools: compress, convert, resize, AI rename, EXIF removal, background removal. 100% client-side — images never uploaded.\nGitHub: https://github.com/samma1997/sammapix`,
           });
         }
       }
