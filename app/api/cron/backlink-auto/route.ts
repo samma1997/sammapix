@@ -4,18 +4,18 @@ import { POSTS } from "@/lib/blog-posts";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-// ─── API CREDENTIALS ───────────────────────────────────────────────
-const TELEGRAPH_TOKEN = "929120b3d57af394bcc55f14a34d795643bcf898c9745d5d9f23bd926710";
-const PASTEBIN_KEY = "WlC8C9dloEXfEPGVxejCTMmHi_vZedWX";
-const IA_ACCESS = "NOWdp2DEmtRyQ2nM";
-const IA_SECRET = "kgAZ2opM6EDeMIUw";
-const TUMBLR_CONSUMER_KEY = "wxn2JaaEV7N52dPD4efuXtPflJ5pJtcKW6HJ2muXyS4CqZMihO";
-const TUMBLR_CONSUMER_SECRET = "nv6bOMwiDNmVbLO6g01IRZOaUlpUHJRrdK6H8kaCbWo3d0fwor";
-const TUMBLR_TOKEN = "1uVCf2SjBGRkjObm6JHlJzl5ir3T844uvB8fcsDYVDDJG00dIq";
-const TUMBLR_TOKEN_SECRET = "xr0wqSkbHiw9AYbpAPvKhu8VM9jgwC8kxDIgdf5IVoHI6qhLX9";
-const TUMBLR_BLOG = "piantala97-blog";
-const LJ_USERNAME = "lucasammarcoweb";
-const LJ_PASSWORD = "g9Ggb,-meLZGV3L";
+// ─── API CREDENTIALS (from .env.local — NEVER hardcode) ────────────
+const TELEGRAPH_TOKEN = process.env.TELEGRAPH_TOKEN || "";
+const PASTEBIN_KEY = process.env.PASTEBIN_API_KEY || "";
+const IA_ACCESS = process.env.INTERNET_ARCHIVE_ACCESS || "";
+const IA_SECRET = process.env.INTERNET_ARCHIVE_SECRET || "";
+const TUMBLR_CONSUMER_KEY = process.env.TUMBLR_CONSUMER_KEY || "";
+const TUMBLR_CONSUMER_SECRET = process.env.TUMBLR_CONSUMER_SECRET || "";
+const TUMBLR_TOKEN = process.env.TUMBLR_TOKEN || "";
+const TUMBLR_TOKEN_SECRET = process.env.TUMBLR_TOKEN_SECRET || "";
+const TUMBLR_BLOG = process.env.TUMBLR_BLOG || "piantala97-blog";
+const LJ_USERNAME = process.env.LIVEJOURNAL_USER || "";
+const LJ_PASSWORD = process.env.LIVEJOURNAL_PASS || "";
 
 // ─── TOOL ROTATION ─────────────────────────────────────────────────
 const TOOL_PAGES = [
