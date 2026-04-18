@@ -116,7 +116,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com data:",
               // blob: is required for client-side image preview URLs (createObjectURL)
               // data: is required for base64 thumbnails sent to the AI rename API
-              "img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com https://siteground.com https://*.siteground.com https://picsum.photos https://fastly.picsum.photos https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://res.cloudinary.com https://images.unsplash.com https://www.facebook.com https://www.google.com https://www.googleadservices.com",
+              "img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com https://siteground.com https://*.siteground.com https://picsum.photos https://fastly.picsum.photos https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://res.cloudinary.com https://images.unsplash.com https://images.pexels.com https://www.facebook.com https://www.google.com https://www.googleadservices.com",
               // worker-src blob: is required for JSZip and browser-image-compression workers
               "worker-src 'self' blob: https://staticimgly.com https://*.staticimgly.com",
               // Nominatim geocoding is called server-side; client only hits /api/geocode
