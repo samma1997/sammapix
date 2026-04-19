@@ -14,7 +14,7 @@ const TUMBLR_CONSUMER_KEY = (process.env.TUMBLR_CONSUMER_KEY || "").trim();
 const TUMBLR_CONSUMER_SECRET = (process.env.TUMBLR_CONSUMER_SECRET || "").trim();
 const TUMBLR_TOKEN = (process.env.TUMBLR_TOKEN || "").trim();
 const TUMBLR_TOKEN_SECRET = (process.env.TUMBLR_TOKEN_SECRET || "").trim();
-const TUMBLR_BLOG = (process.env.TUMBLR_BLOG || "piantala97-blog").trim();
+const TUMBLR_BLOG = (process.env.TUMBLR_BLOG || "sammapix").trim(); // secondary blog sotto account info@lucasammarco.com
 const LJ_USERNAME = (process.env.LIVEJOURNAL_USER || "").trim();
 const LJ_PASSWORD = (process.env.LIVEJOURNAL_PASS || "").trim();
 
