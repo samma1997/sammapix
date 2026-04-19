@@ -5,17 +5,18 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 // ─── API CREDENTIALS (from .env.local — NEVER hardcode) ────────────
-const TELEGRAPH_TOKEN = process.env.TELEGRAPH_TOKEN || "";
-const PASTEBIN_KEY = process.env.PASTEBIN_API_KEY || "";
-const IA_ACCESS = process.env.INTERNET_ARCHIVE_ACCESS || "";
-const IA_SECRET = process.env.INTERNET_ARCHIVE_SECRET || "";
-const TUMBLR_CONSUMER_KEY = process.env.TUMBLR_CONSUMER_KEY || "";
-const TUMBLR_CONSUMER_SECRET = process.env.TUMBLR_CONSUMER_SECRET || "";
-const TUMBLR_TOKEN = process.env.TUMBLR_TOKEN || "";
-const TUMBLR_TOKEN_SECRET = process.env.TUMBLR_TOKEN_SECRET || "";
-const TUMBLR_BLOG = process.env.TUMBLR_BLOG || "piantala97-blog";
-const LJ_USERNAME = process.env.LIVEJOURNAL_USER || "";
-const LJ_PASSWORD = process.env.LIVEJOURNAL_PASS || "";
+// .trim() su TUTTE — Vercel aggiunge newline alle env var (bug noto)
+const TELEGRAPH_TOKEN = (process.env.TELEGRAPH_TOKEN || "").trim();
+const PASTEBIN_KEY = (process.env.PASTEBIN_API_KEY || "").trim();
+const IA_ACCESS = (process.env.INTERNET_ARCHIVE_ACCESS || "").trim();
+const IA_SECRET = (process.env.INTERNET_ARCHIVE_SECRET || "").trim();
+const TUMBLR_CONSUMER_KEY = (process.env.TUMBLR_CONSUMER_KEY || "").trim();
+const TUMBLR_CONSUMER_SECRET = (process.env.TUMBLR_CONSUMER_SECRET || "").trim();
+const TUMBLR_TOKEN = (process.env.TUMBLR_TOKEN || "").trim();
+const TUMBLR_TOKEN_SECRET = (process.env.TUMBLR_TOKEN_SECRET || "").trim();
+const TUMBLR_BLOG = (process.env.TUMBLR_BLOG || "piantala97-blog").trim();
+const LJ_USERNAME = (process.env.LIVEJOURNAL_USER || "").trim();
+const LJ_PASSWORD = (process.env.LIVEJOURNAL_PASS || "").trim();
 
 // ─── TOOL ROTATION ─────────────────────────────────────────────────
 const TOOL_PAGES = [
