@@ -197,6 +197,11 @@ Il report deve avere queste sezioni in MARKDOWN:
 4. Quarta azione specifica
 5. Quinta azione specifica
 
+## 5. Da consolidare nella bibbia
+(1-3 punti CONCRETI e OPERATIVI che vale la pena salvare permanentemente in sammapix-bibbia.md. Solo fatti tattici emersi in queste 2 settimane — es. "il cron X fallisce sempre su Y, già fixato", "la keyword Z ha superato la soglia, prioritizzare". MAI cambi di strategia o posizionamento. Se nulla merita, scrivi esattamente "Nulla di rilevante questo periodo.")
+- Punto 1
+- Punto 2
+
 Sii diretto, pratico, senza fuffa. Ogni azione deve essere specifica e fattibile (es. "Scrivi un articolo blog su X", non generico).
 
 NON rispondere in JSON. Scrivi SOLO in markdown.
