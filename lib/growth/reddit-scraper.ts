@@ -163,7 +163,7 @@ const MEDIUM_RELEVANCE_SUBREDDITS = new Set([
   "fulfillmentbyamazon",
 ]);
 
-interface RedditPost {
+export interface RedditPost {
   id: string;
   title: string;
   subreddit: string;
@@ -591,7 +591,7 @@ export async function scrapeDevToOpportunities(): Promise<{
 // ---------------------------------------------------------------------------
 // Helper: save a Reddit post to DB if relevant and not already saved
 // ---------------------------------------------------------------------------
-async function savePostIfRelevant(
+export async function savePostIfRelevant(
   post: RedditPost,
   stats: { scraped: number; skipped: number; errors: number },
 ): Promise<void> {
