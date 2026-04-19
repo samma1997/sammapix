@@ -49,15 +49,34 @@ if (!fs.existsSync(transcriptPath)) {
 
 const transcript = fs.readFileSync(transcriptPath, "utf-8");
 
-// Read page.tsx to extract title and description
+// Read page.tsx to extract title and description.
+// Supporta sia `title: "..."` sia `title: CONSTANT` risolvendo la costante
+// dalla stessa page.tsx (pattern `const POST_TITLE = "..."`).
 const pagePath = path.join(process.cwd(), `app/blog/${slug}/page.tsx`);
 const pageContent = fs.readFileSync(pagePath, "utf-8");
 
-const titleMatch = pageContent.match(/title:\s*\n?\s*"([^"]+)"/);
-const descMatch = pageContent.match(/description:\s*\n?\s*"([^"]+)"/);
+function extractField(field) {
+  // Prima prova: valore inline "..."
+  const inlineRe = new RegExp(`${field}:\\s*\\n?\\s*"([^"]+)"`);
+  const inlineMatch = pageContent.match(inlineRe);
+  if (inlineMatch) return inlineMatch[1];
 
-const title = titleMatch?.[1] || slug;
-const description = descMatch?.[1] || "";
+  // Seconda prova: riferimento a costante (es. title: POST_TITLE)
+  const constRefRe = new RegExp(`${field}:\\s*([A-Z_][A-Z0-9_]*)`);
+  const refMatch = pageContent.match(constRefRe);
+  if (refMatch) {
+    const constName = refMatch[1];
+    // Cerca la definizione della costante. Può essere multi-linea.
+    const constDefRe = new RegExp(`const\\s+${constName}\\s*=\\s*\\n?\\s*"([^"]+)"`);
+    const defMatch = pageContent.match(constDefRe);
+    if (defMatch) return defMatch[1];
+  }
+
+  return null;
+}
+
+const title = extractField("title") || slug;
+const description = extractField("description") || "";
 
 // Convert transcript to markdown
 const lines = transcript.split("\n");

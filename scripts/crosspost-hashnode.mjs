@@ -46,8 +46,19 @@ console.log(`  Publication: ${publication.title} (${publication.id})`);
 // Read content
 const transcript = fs.readFileSync(path.join(process.cwd(), `app/blog/${slug}/transcript.txt`), "utf-8");
 const pageContent = fs.readFileSync(path.join(process.cwd(), `app/blog/${slug}/page.tsx`), "utf-8");
-const title = pageContent.match(/title:\s*\n?\s*"([^"]+)"/)?.[1] || slug;
-const description = pageContent.match(/description:\s*\n?\s*"([^"]+)"/)?.[1] || "";
+// Supporta sia `title: "..."` sia `title: CONSTANT` (es. POST_TITLE).
+function extractField(field) {
+  const inlineMatch = pageContent.match(new RegExp(`${field}:\\s*\\n?\\s*"([^"]+)"`));
+  if (inlineMatch) return inlineMatch[1];
+  const refMatch = pageContent.match(new RegExp(`${field}:\\s*([A-Z_][A-Z0-9_]*)`));
+  if (refMatch) {
+    const defMatch = pageContent.match(new RegExp(`const\\s+${refMatch[1]}\\s*=\\s*\\n?\\s*"([^"]+)"`));
+    if (defMatch) return defMatch[1];
+  }
+  return null;
+}
+const title = extractField("title") || slug;
+const description = extractField("description") || "";
 
 // Convert transcript sections to markdown
 let markdown = "";
