@@ -58,6 +58,23 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Applebot-Extended",
         allow: "/",
       },
+      // Additional AI crawlers (2025+): TikTok/ByteDance, Meta, Amazon
+      {
+        userAgent: "Bytespider",
+        allow: "/",
+      },
+      {
+        userAgent: "Meta-ExternalAgent",
+        allow: "/",
+      },
+      {
+        userAgent: "Amazonbot",
+        allow: "/",
+      },
+      {
+        userAgent: "DuckAssistBot",
+        allow: "/",
+      },
       // Allow SEO crawlers — they index us in their databases so people
       // researching "best image tools" on Ahrefs/Semrush can find SammaPix
       {
@@ -90,12 +107,13 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "HTTrack",
         disallow: "/",
       },
-      // Default rule — all other crawlers get a crawl delay
+      // Default rule — all other crawlers. Ridotto a 5s da 10s per non
+      // rallentare AI bots emergenti non elencati esplicitamente sopra.
       {
         userAgent: "*",
         allow: "/",
         disallow: ["/api/", "/auth/", "/dashboard/", "/karma.html"],
-        crawlDelay: 10,
+        crawlDelay: 5,
       },
     ],
     sitemap: `${APP_URL}/sitemap.xml`,
