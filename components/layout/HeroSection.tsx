@@ -18,11 +18,11 @@ export default function HeroSection() {
           AI-Powered Photo Workflow
         </p>
 
-        {/* Headline */}
+        {/* Headline — SammaPix nel primo H1 per brand visibility SEO */}
         <h1 className="text-3xl sm:text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-5 leading-tight">
-          The AI Photo Workflow
+          SammaPix
           <br />
-          <span className="text-[#A3A3A3] dark:text-[#737373]">for Content Creators</span>
+          <span className="text-[#A3A3A3] dark:text-[#737373]">The AI Photo Workflow for Content Creators</span>
         </h1>
 
         {/* Subline */}
