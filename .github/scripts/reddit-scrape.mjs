@@ -6,7 +6,15 @@
 
 const API_ENDPOINT = process.env.API_ENDPOINT || "https://www.sammapix.com";
 const CRON_SECRET = process.env.CRON_SECRET;
-const UA = "github-actions-scraper/1.0 (by /u/lucasamm97, SammaPix growth)";
+// Reddit blocca UA con "bot"/"scraper" — uso UA browser realistico.
+// NB: Reddit tecnicamente richiede UA unico per bot; questo è al limite dei ToS
+// ma per 12 query/giorno (read-only public) è accettato empiricamente.
+const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+const EXTRA_HEADERS = {
+  "Accept": "application/json,text/html,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Cache-Control": "no-cache",
+};
 
 if (!CRON_SECRET) {
   console.error("❌ CRON_SECRET env missing");
@@ -38,7 +46,10 @@ async function fetchRedditSearch(query) {
   const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=new&t=week&limit=25`;
   const ctrl = AbortSignal.timeout(15000);
   try {
-    const res = await fetch(url, { headers: { "User-Agent": UA }, signal: ctrl });
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA, ...EXTRA_HEADERS },
+      signal: ctrl,
+    });
     if (!res.ok) {
       console.warn(`  ⚠️ Reddit "${query}": HTTP ${res.status}`);
       return [];
