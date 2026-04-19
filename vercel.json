@@ -61,6 +61,10 @@
     {
       "path": "/api/cron/backlink-auto",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/growth/strategy/review",
+      "schedule": "0 7 * * 1"
     }
   ],
   "redirects": [

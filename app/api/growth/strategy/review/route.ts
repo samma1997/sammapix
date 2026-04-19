@@ -1,5 +1,5 @@
 import { checkGrowthAuth } from "@/lib/growth/auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
 
@@ -19,7 +19,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { and, gte, eq, sql, isNull } from "drizzle-orm";
 
 export const runtime = "nodejs";
+export const maxDuration = 120;
 
+const RESEND_API_KEY = (process.env.RESEND_API_KEY || "").trim();
+const CRON_SECRET = (process.env.CRON_SECRET || "").trim();
+const EMAIL_TO = "marketing@alfiobardolla.com";
+const EMAIL_FROM = "SammaPix <info@lucasammarco.com>";
 
 function dateStr(daysAgo: number): string {
   const d = new Date();
@@ -27,12 +32,25 @@ function dateStr(daysAgo: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+// GET = cron Vercel automatico (lunedì 07:00 UTC) — auth via Bearer CRON_SECRET.
+// Stesso flusso di POST ma richiama direttamente runReview senza cookie growth.
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get("authorization");
+  if (!CRON_SECRET || authHeader !== `Bearer ${CRON_SECRET}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  return runReview({ fromCron: true });
+}
+
 export async function POST() {
   const authorized = await checkGrowthAuth();
   if (!authorized) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
+  return runReview({ fromCron: false });
+}
 
+async function runReview({ fromCron }: { fromCron: boolean }): Promise<NextResponse> {
   const periodEnd = dateStr(0);
   const periodStart = dateStr(14);
   const twoWeeksAgo = new Date();
@@ -236,9 +254,85 @@ ${dataContext}`;
       })
       .returning();
 
-    return NextResponse.json({ review });
+    // Email Resend — solo per esecuzioni cron (settimanali). Best-effort, fail silenzioso.
+    if (fromCron && RESEND_API_KEY) {
+      try {
+        const toConsolidate = extractSection(analysisText, "Da consolidare") || "_Nessun punto tattico rilevante._";
+        const working = extractSection(analysisText, "Cosa sta funzionando") || "";
+        const notWorking = extractSection(analysisText, "Cosa non funziona") || "";
+        const topActions = suggestions.slice(0, 5).map((s, i) => `${i + 1}. ${s}`).join("\n");
+
+        const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"/></head><body style="font-family:-apple-system,Helvetica,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#0a0a0a;background:#fff">
+<h1 style="color:#0a0a0a;border-bottom:2px solid #0a84ff;padding-bottom:10px;margin:0 0 6px">SammaPix Weekly Review</h1>
+<p style="color:#666;margin:0 0 24px">Periodo: ${periodStart} → ${periodEnd} — generato ${new Date().toISOString().slice(0, 10)}</p>
+
+<h2 style="color:#0a0a0a;margin-top:24px;font-size:18px">📌 Da consolidare nella bibbia</h2>
+<div style="background:#fff8eb;padding:16px;border-radius:8px;border-left:4px solid #ef7b11;white-space:pre-wrap;font-size:14px;line-height:1.6">${escapeHtml(toConsolidate)}</div>
+
+<h2 style="color:#0a0a0a;margin-top:28px;font-size:18px">🎯 Top 5 azioni prossime 2 settimane</h2>
+<div style="background:#f4f6ff;padding:16px;border-radius:8px;white-space:pre-wrap;font-size:14px;line-height:1.7">${escapeHtml(topActions || "Nessuna azione estratta.")}</div>
+
+<h2 style="color:#0a0a0a;margin-top:28px;font-size:18px">📊 Stats periodo</h2>
+<table style="width:100%;border-collapse:collapse;font-size:14px">
+  <tr><td style="padding:8px;border-bottom:1px solid #eee">GSC impressioni</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right"><strong>${impressions.toLocaleString("it-IT")}</strong></td></tr>
+  <tr><td style="padding:8px;border-bottom:1px solid #eee">GSC click</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right"><strong>${clicks}</strong></td></tr>
+  <tr><td style="padding:8px;border-bottom:1px solid #eee">GSC posizione media</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right">${avgPosition.toFixed(1)}</td></tr>
+  <tr><td style="padding:8px;border-bottom:1px solid #eee">Reddit commenti</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right">${redditComments}</td></tr>
+  <tr><td style="padding:8px;border-bottom:1px solid #eee">Outreach inviate</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right">${outreachSent}</td></tr>
+  <tr><td style="padding:8px;border-bottom:1px solid #eee">Backlink ottenuti</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right"><strong>${outreachLinked}</strong></td></tr>
+  <tr><td style="padding:8px">Brand visibility</td><td style="padding:8px;text-align:right">${brandFound}/${brandTotal || 7}</td></tr>
+</table>
+
+<details style="margin-top:28px">
+  <summary style="cursor:pointer;color:#0a84ff;font-weight:600">Leggi analisi completa (cosa funziona, cosa no, insight YouTube)</summary>
+  <div style="margin-top:12px;padding:12px;background:#fafafa;border-radius:8px;font-size:13px;line-height:1.6;white-space:pre-wrap">
+    <strong>Cosa sta funzionando:</strong>
+    ${escapeHtml(working)}
+
+    <strong>Cosa non funziona:</strong>
+    ${escapeHtml(notWorking)}
+  </div>
+</details>
+
+<hr style="margin-top:32px;border:none;border-top:1px solid #eee"/>
+<p style="color:#999;font-size:12px;margin-top:12px">Report generato ogni lunedì 07:00 UTC dal cron <code>/api/growth/strategy/review</code>. Apri Claude Code SammaPix per consolidare i punti in <code>sammapix-bibbia.md</code>.</p>
+</body></html>`;
+
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            from: EMAIL_FROM,
+            to: EMAIL_TO,
+            subject: `SammaPix weekly — ${periodEnd}`,
+            html,
+          }),
+        });
+      } catch (e) {
+        console.warn("[strategy/review] email send failed:", e);
+      }
+    }
+
+    return NextResponse.json({ review, emailSent: fromCron && !!RESEND_API_KEY });
   } catch (err) {
-    console.error("[growth/strategy/review POST]", err);
+    console.error("[growth/strategy/review]", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
+}
+
+function extractSection(md: string, heading: string): string | null {
+  const re = new RegExp(
+    `##\\s*\\d*\\.?\\s*${heading.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}[^\\n]*\\n([\\s\\S]*?)(?=\\n##\\s|$)`,
+    "i"
+  );
+  const match = md.match(re);
+  return match?.[1]?.trim() || null;
+}
+
+function escapeHtml(s: string): string {
+  return (s || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
