@@ -6,6 +6,59 @@ import { POSTS } from "@/lib/blog-posts";
 import { TARGET_KEYWORDS } from "@/lib/growth/keyword-targets";
 
 // ---------------------------------------------------------------------------
+// Reddit OAuth application-only — Vercel serverless IPs sono bannati da
+// www.reddit.com anonymous API. Serve token OAuth per usare oauth.reddit.com.
+// Credenziali: app registrata su https://www.reddit.com/prefs/apps/
+// Env: REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT (opzionale)
+// ---------------------------------------------------------------------------
+
+const REDDIT_CLIENT_ID = (process.env.REDDIT_CLIENT_ID || "").trim();
+const REDDIT_CLIENT_SECRET = (process.env.REDDIT_CLIENT_SECRET || "").trim();
+const REDDIT_USER_AGENT = (process.env.REDDIT_USER_AGENT || "web:com.sammapix.growth-bot:v2.0 (by /u/lucasamm97)").trim();
+
+let cachedToken: { value: string; expiresAt: number } | null = null;
+
+async function getRedditToken(): Promise<string | null> {
+  if (!REDDIT_CLIENT_ID || !REDDIT_CLIENT_SECRET) {
+    console.warn("[reddit-scraper] REDDIT_CLIENT_ID/SECRET mancanti — fallback anonymous (Vercel IPs bannati, ritorna 0 post)");
+    return null;
+  }
+  if (cachedToken && cachedToken.expiresAt > Date.now() + 60_000) {
+    return cachedToken.value;
+  }
+  try {
+    const basic = Buffer.from(`${REDDIT_CLIENT_ID}:${REDDIT_CLIENT_SECRET}`).toString("base64");
+    const res = await fetch("https://www.reddit.com/api/v1/access_token", {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${basic}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": REDDIT_USER_AGENT,
+      },
+      body: "grant_type=https://oauth.reddit.com/grants/installed_client&device_id=DO_NOT_TRACK_THIS_DEVICE",
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) {
+      console.error(`[reddit-scraper] Token request failed: HTTP ${res.status} ${await res.text().catch(() => "")}`);
+      return null;
+    }
+    const data = await res.json();
+    if (!data.access_token) {
+      console.error("[reddit-scraper] No access_token in response:", JSON.stringify(data).slice(0, 200));
+      return null;
+    }
+    cachedToken = {
+      value: data.access_token,
+      expiresAt: Date.now() + (data.expires_in || 3600) * 1000,
+    };
+    return cachedToken.value;
+  } catch (err) {
+    console.error("[reddit-scraper] Token fetch error:", err);
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Reddit search queries — general search + subreddit-specific
 // ---------------------------------------------------------------------------
 const REDDIT_SEARCH_QUERIES = [
@@ -589,15 +642,26 @@ async function fetchRedditSearch(
   query: string,
   subreddit?: string,
 ): Promise<RedditPost[]> {
-  const headers = { "User-Agent": "SammaPix-GrowthBot/2.0 (by SammaPix team)" };
+  // OAuth flow — Vercel IPs bannati da anonymous API, serve token.
+  const token = await getRedditToken();
+  const useOAuth = !!token;
+
+  const headers: Record<string, string> = {
+    "User-Agent": REDDIT_USER_AGENT,
+  };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  // oauth.reddit.com quando autenticati, www.reddit.com come fallback anonymous (che fallisce su Vercel).
+  const host = useOAuth ? "oauth.reddit.com" : "www.reddit.com";
+  const ext = useOAuth ? "" : ".json"; // OAuth endpoint non richiede .json
 
   const baseUrl = subreddit
-    ? `https://www.reddit.com/r/${subreddit}/search.json?q=${encodeURIComponent(query)}&restrict_sr=on&sort=new&t=month&limit=15`
-    : `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=new&t=week&limit=25`;
+    ? `https://${host}/r/${subreddit}/search${ext}?q=${encodeURIComponent(query)}&restrict_sr=on&sort=new&t=month&limit=15`
+    : `https://${host}/search${ext}?q=${encodeURIComponent(query)}&sort=new&t=week&limit=25`;
 
   const res = await fetch(baseUrl, { headers, signal: AbortSignal.timeout(10000) });
   if (!res.ok) {
-    console.error(`[reddit-scraper] Reddit search failed for "${query}" (sub:${subreddit ?? "all"}): HTTP ${res.status}`);
+    console.error(`[reddit-scraper] Reddit search failed for "${query}" (sub:${subreddit ?? "all"}, oauth:${useOAuth}): HTTP ${res.status}`);
     return [];
   }
 
