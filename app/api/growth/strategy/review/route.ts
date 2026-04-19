@@ -23,8 +23,8 @@ export const maxDuration = 120;
 
 const RESEND_API_KEY = (process.env.RESEND_API_KEY || "").trim();
 const CRON_SECRET = (process.env.CRON_SECRET || "").trim();
-const EMAIL_TO = "marketing@alfiobardolla.com";
-const EMAIL_FROM = "SammaPix <info@lucasammarco.com>";
+const EMAIL_TO = "lucasamm97@gmail.com";
+const EMAIL_FROM = "SammaPix Weekly <hello@sammapix.com>";
 
 function dateStr(daysAgo: number): string {
   const d = new Date();
