@@ -268,10 +268,10 @@ ${dataContext}`;
 <p style="color:#666;margin:0 0 24px">Periodo: ${periodStart} → ${periodEnd} — generato ${new Date().toISOString().slice(0, 10)}</p>
 
 <h2 style="color:#0a0a0a;margin-top:24px;font-size:18px">📌 Da consolidare nella bibbia</h2>
-<div style="background:#fff8eb;padding:16px;border-radius:8px;border-left:4px solid #ef7b11;white-space:pre-wrap;font-size:14px;line-height:1.6">${escapeHtml(toConsolidate)}</div>
+<div style="background:#fff8eb;padding:16px;border-radius:8px;border-left:4px solid #ef7b11;font-size:14px;line-height:1.6">${mdToHtml(toConsolidate)}</div>
 
 <h2 style="color:#0a0a0a;margin-top:28px;font-size:18px">🎯 Top 5 azioni prossime 2 settimane</h2>
-<div style="background:#f4f6ff;padding:16px;border-radius:8px;white-space:pre-wrap;font-size:14px;line-height:1.7">${escapeHtml(topActions || "Nessuna azione estratta.")}</div>
+<div style="background:#f4f6ff;padding:16px;border-radius:8px;font-size:14px;line-height:1.7">${mdToHtml(topActions || "Nessuna azione estratta.")}</div>
 
 <h2 style="color:#0a0a0a;margin-top:28px;font-size:18px">📊 Stats periodo</h2>
 <table style="width:100%;border-collapse:collapse;font-size:14px">
@@ -286,12 +286,11 @@ ${dataContext}`;
 
 <details style="margin-top:28px">
   <summary style="cursor:pointer;color:#0a84ff;font-weight:600">Leggi analisi completa (cosa funziona, cosa no, insight YouTube)</summary>
-  <div style="margin-top:12px;padding:12px;background:#fafafa;border-radius:8px;font-size:13px;line-height:1.6;white-space:pre-wrap">
-    <strong>Cosa sta funzionando:</strong>
-    ${escapeHtml(working)}
-
-    <strong>Cosa non funziona:</strong>
-    ${escapeHtml(notWorking)}
+  <div style="margin-top:12px;padding:12px;background:#fafafa;border-radius:8px;font-size:13px;line-height:1.6">
+    <strong style="display:block;margin-bottom:6px">Cosa sta funzionando:</strong>
+    ${mdToHtml(working)}
+    <strong style="display:block;margin-top:12px;margin-bottom:6px">Cosa non funziona:</strong>
+    ${mdToHtml(notWorking)}
   </div>
 </details>
 
@@ -335,4 +334,29 @@ function escapeHtml(s: string): string {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
+
+// Markdown → HTML base per email Resend. Ordine importante:
+// 1. Escape HTML per sicurezza
+// 2. Parse markdown (bold, italic, code, link, liste) su testo già escape-ato
+// 3. Newlines → <br>
+function mdToHtml(md: string): string {
+  let s = escapeHtml(md || "");
+  // **bold**
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
+  // *italic* (non matcha ** per evitare clash)
+  s = s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+  // `code`
+  s = s.replace(/`([^`\n]+)`/g, '<code style="background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:12px">$1</code>');
+  // [text](url) — gli & sono già escapati a &amp;, rispettare
+  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" style="color:#0a84ff;text-decoration:none">$1</a>');
+  // Liste: righe che iniziano con "- " o "* "
+  s = s.replace(/(^|\n)[-*]\s+([^\n]+)/g, '$1<li style="margin-bottom:4px">$2</li>');
+  // Wrappa <li> consecutivi in <ul>
+  s = s.replace(/(<li[^>]*>[^<]*<\/li>(?:\s*<li[^>]*>[^<]*<\/li>)*)/g, '<ul style="margin:8px 0;padding-left:20px">$1</ul>');
+  // Numbered list "1. text"
+  s = s.replace(/(^|\n)(\d+)\.\s+([^\n]+)/g, '$1<div style="margin-bottom:4px"><strong>$2.</strong> $3</div>');
+  // Newlines rimanenti
+  s = s.replace(/\n/g, "<br>\n");
+  return s;
 }
