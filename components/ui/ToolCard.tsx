@@ -77,6 +77,97 @@ export const IconWebP: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── PNG → JPG converter icon (size reduction badge pulse) ─────────────────
+export const IconPngToJpg: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes p2j-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes p2j-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      @keyframes p2j-transparency {
+        0%, 100% { opacity: 0.4; }
+        50%      { opacity: 0.9; }
+      }
+      .p2j-arrow { animation: p2j-arrow 2.4s ease-in-out infinite; }
+      .p2j-badge { transform-origin: 37px 38px; animation: p2j-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .p2j-check { animation: p2j-transparency 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* PNG box left — with tiny checker hint for transparency */}
+    <rect x="2" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <g className="p2j-check" style={{ opacity: 0.4 }}>
+      <rect x="4" y="10" width="3" height="3" fill={accent} fillOpacity="0.3"/>
+      <rect x="10" y="10" width="3" height="3" fill={accent} fillOpacity="0.3"/>
+      <rect x="4" y="25" width="3" height="3" fill={accent} fillOpacity="0.3"/>
+      <rect x="10" y="25" width="3" height="3" fill={accent} fillOpacity="0.3"/>
+    </g>
+    <text x="11" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PNG</text>
+    {/* Arrow */}
+    <g className="p2j-arrow">
+      <path d="M22 19 L26 19 M24 17 L26 19 L24 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* JPG box right — smaller visual weight to signal reduction */}
+    <rect x="27" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <text x="36.5" y="21" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+    {/* Size reduction badge */}
+    <g className="p2j-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">−80%</text>
+    </g>
+  </svg>
+);
+
+// ── WebP → JPG converter icon (compatibility "✓" badge) ───────────────────
+export const IconWebpToJpg: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes w2j-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes w2j-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      @keyframes w2j-check {
+        0%, 50%  { stroke-dashoffset: 16; }
+        80%, 100%{ stroke-dashoffset: 0; }
+      }
+      .w2j-arrow { animation: w2j-arrow 2.4s ease-in-out infinite; }
+      .w2j-badge { transform-origin: 37px 38px; animation: w2j-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .w2j-check path { stroke-dasharray: 16; animation: w2j-check 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* WebP box left */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <text x="11.5" y="21" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">WebP</text>
+    {/* Arrow */}
+    <g className="w2j-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* JPG box right */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <text x="37" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+    {/* Compatibility check badge */}
+    <g className="w2j-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <g className="w2j-check">
+        <path d="M30 38.5 L33 41 L38 35" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      </g>
+      <text x="42" y="40.3" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">OK</text>
+    </g>
+  </svg>
+);
+
 export const IconAIRename: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`

@@ -45,6 +45,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "compress-images-without-losing-quality",
     ],
   },
+  "webp-to-jpg": {
+    id: "webp-to-jpg",
+    name: "WebP to JPG",
+    shortDesc: "Convert WebP to JPG for universal compatibility",
+    slug: "/tools/webp-to-jpg",
+    category: "optimize",
+    relatedTools: ["webp", "png-to-jpg", "compress", "heic"],
+    relatedBlogSlugs: [
+      "best-image-format-for-web-2026",
+      "compress-images-without-losing-quality",
+    ],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",
