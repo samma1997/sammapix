@@ -7,7 +7,7 @@ import { getAllTrips } from "@/lib/destinations";
 export const metadata: Metadata = {
   title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
   description:
-    "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 29 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
+    "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 30 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
   keywords: [
     "luca sammarco",
     "digital product builder",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
     description:
-      "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 29 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
+      "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 30 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
     url: `${APP_URL}/about`,
     type: "website",
     images: [
@@ -233,7 +233,7 @@ export default function AboutPage() {
               photographers probably did too.
             </p>
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Today, SammaPix has 29 free tools used by photographers, bloggers, and developers in 40+ countries.
+              Today, SammaPix has 30 free tools used by photographers, bloggers, and developers in 40+ countries.
               Everything still runs in the browser. Your photos never leave your device. That was the promise from
               day one, and it hasn&apos;t changed.
             </p>
@@ -261,7 +261,7 @@ export default function AboutPage() {
                 {
                   title: "Build Digital Products",
                   description:
-                    "I design and develop SaaS tools, websites, and platforms. SammaPix is my latest product — 29 browser-based image tools used in 40+ countries.",
+                    "I design and develop SaaS tools, websites, and platforms. SammaPix is my latest product — 30 browser-based image tools used in 40+ countries.",
                 },
                 {
                   title: "Travel Photography",

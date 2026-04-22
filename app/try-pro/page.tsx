@@ -63,7 +63,7 @@ const ALL_TOOLS = [
 // ─── Free vs Pro comparison ────────────────────────────────────────────────────
 
 const COMPARISON = [
-  { feature: "All 29 tools",            free: "Yes",          pro: "Yes" },
+  { feature: "All 30 tools",            free: "Yes",          pro: "Yes" },
   { feature: "AI Workflow Pipeline",    free: "No",           pro: "Yes" },
   { feature: "Files per batch",         free: "20",           pro: "500" },
   { feature: "AI Rename per day",       free: "10",           pro: "200" },
@@ -316,11 +316,11 @@ export default function TryProPage() {
         </div>
       </section>
 
-      {/* ── All 29 tools ──────────────────────────────────────────────────── */}
+      {/* ── All 30 tools ──────────────────────────────────────────────────── */}
       <section className="py-16 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E]">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            29 tools. All included.
+            30 tools. All included.
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-8">
             Every tool works in your browser- no uploads, no installs.

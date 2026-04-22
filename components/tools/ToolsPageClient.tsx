@@ -8,6 +8,7 @@ import {
   IconWebP,
   IconPngToJpg,
   IconWebpToJpg,
+  IconWebpToPng,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -295,6 +296,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#10B981",
     badges: ["Free", "Compatibility"],
     Icon: IconWebpToJpg,
+    category: ["Optimize"],
+  },
+  {
+    name: "WebP to PNG",
+    href: "/tools/webp-to-png",
+    tagline: "Convert WebP to PNG — transparency preserved, lossless.",
+    accent: "#8B5CF6",
+    badges: ["Free", "Transparency"],
+    Icon: IconWebpToPng,
     category: ["Optimize"],
   },
   {
