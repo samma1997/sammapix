@@ -31,6 +31,7 @@ interface ConvertItem {
   resultUrl: string | null;
   resultSize: number;
   originalSize: number;
+  hadTransparency: boolean | null;
   error?: string;
 }
 
@@ -50,8 +51,36 @@ function replaceExt(name: string, newExt: string): string {
   return (dot === -1 ? name : name.slice(0, dot)) + "." + newExt;
 }
 
-// Converte PNG → JPG via Canvas (client-side puro, zero upload)
-async function convertPngToJpg(file: File, quality: number, background: string): Promise<Blob> {
+// Detect transparency samples (20×20 grid + 4 corner). 404 sample points.
+function detectTransparency(ctx: CanvasRenderingContext2D, w: number, h: number): boolean {
+  try {
+    const samples: Array<[number, number]> = [];
+    for (let yi = 0; yi < 20; yi++) {
+      for (let xi = 0; xi < 20; xi++) {
+        samples.push([
+          Math.min(w - 1, Math.floor((w / 20) * xi)),
+          Math.min(h - 1, Math.floor((h / 20) * yi)),
+        ]);
+      }
+    }
+    samples.push([0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1]);
+    for (const [sx, sy] of samples) {
+      const data = ctx.getImageData(sx, sy, 1, 1).data;
+      if (data[3] < 250) return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+// Converte PNG → JPG via Canvas (client-side puro, zero upload).
+// Restituisce anche un flag hadTransparency per avvisare l'utente che dati alpha vanno persi.
+async function convertPngToJpg(
+  file: File,
+  quality: number,
+  background: string
+): Promise<{ blob: Blob; hadTransparency: boolean }> {
   const url = URL.createObjectURL(file);
   try {
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -65,17 +94,25 @@ async function convertPngToJpg(file: File, quality: number, background: string):
     canvas.height = img.naturalHeight;
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("Canvas 2D non disponibile");
-    // JPG non supporta trasparenza — riempio lo sfondo (default bianco)
+
+    // Prima disegna su canvas vuoto per sample alpha — poi fai fill+redraw per JPG output
+    ctx.drawImage(img, 0, 0);
+    const hadTransparency = detectTransparency(ctx, canvas.width, canvas.height);
+
+    // Clear + fill bg + redraw (ordine corretto per JPG senza trasparenza)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = background;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0);
-    return await new Promise<Blob>((resolve, reject) => {
+
+    const blob = await new Promise<Blob>((resolve, reject) => {
       canvas.toBlob(
-        (blob) => (blob ? resolve(blob) : reject(new Error("Conversione JPG fallita"))),
+        (b) => (b ? resolve(b) : reject(new Error("Conversione JPG fallita"))),
         "image/jpeg",
         quality / 100
       );
     });
+    return { blob, hadTransparency };
   } finally {
     URL.revokeObjectURL(url);
   }
@@ -115,6 +152,7 @@ export default function PngToJpgClient() {
           resultUrl: null,
           resultSize: 0,
           originalSize: file.size,
+          hadTransparency: null,
         })
       );
       if (toAdd.length > 0) setItems((prev) => [...prev, ...toAdd]);
@@ -158,7 +196,7 @@ export default function PngToJpgClient() {
         prev.map((p) => (p.id === it.id ? { ...p, status: "processing" } : p))
       );
       try {
-        const blob = await convertPngToJpg(it.file, quality, bgColor);
+        const { blob, hadTransparency } = await convertPngToJpg(it.file, quality, bgColor);
         const url = URL.createObjectURL(blob);
         const done: ConvertItem = {
           ...it,
@@ -166,6 +204,7 @@ export default function PngToJpgClient() {
           resultBlob: blob,
           resultUrl: url,
           resultSize: blob.size,
+          hadTransparency,
         };
         updated.push(done);
         setItems((prev) => prev.map((p) => (p.id === it.id ? done : p)));
@@ -211,6 +250,11 @@ export default function PngToJpgClient() {
   const totalResultSize = items.reduce((sum, it) => sum + it.resultSize, 0);
   const saved = totalOriginalSize - totalResultSize;
   const savedPct = totalOriginalSize > 0 ? Math.round((saved / totalOriginalSize) * 100) : 0;
+
+  // Detect se alcuni PNG avevano transparency ora flattenata — suggerire WebP per alpha preservato
+  const doneItems = items.filter((it) => it.status === "done");
+  const lostAlpha = doneItems.filter((it) => it.hadTransparency === true);
+  const shouldSuggestWebp = lostAlpha.length > 0;
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
@@ -401,15 +445,44 @@ export default function PngToJpgClient() {
                 Converted {doneCount} of {items.length} PNG {items.length === 1 ? "file" : "files"}
               </span>
             </div>
-            {saved > 0 && (
-              <p className="text-xs text-[#525252] dark:text-[#A3A3A3]">
-                Total size: {formatBytes(totalOriginalSize)} → {formatBytes(totalResultSize)}{" "}
-                <span className="text-emerald-700 dark:text-emerald-400 font-semibold">
-                  ({savedPct > 0 ? "−" : "+"}
-                  {Math.abs(savedPct)}%)
-                </span>
-              </p>
-            )}
+            <p className="text-xs text-[#525252] dark:text-[#A3A3A3]">
+              Total size: {formatBytes(totalOriginalSize)} → {formatBytes(totalResultSize)}{" "}
+              <span
+                className={`font-semibold ${
+                  savedPct > 0
+                    ? "text-emerald-700 dark:text-emerald-400"
+                    : "text-[#A3A3A3]"
+                }`}
+              >
+                ({savedPct > 0 ? "−" : "+"}
+                {Math.abs(savedPct)}%)
+              </span>
+            </p>
+          </div>
+        )}
+
+        {/* WARNING: trasparenza persa → propone WebP */}
+        {uiState === "results" && shouldSuggestWebp && (
+          <div className="mt-3 p-4 bg-yellow-50 dark:bg-yellow-950/20 border-l-4 border-yellow-500 dark:border-yellow-600 rounded-md">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-yellow-700 dark:text-yellow-500 shrink-0 mt-0.5" strokeWidth={2} />
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+                  {lostAlpha.length === doneItems.length
+                    ? "Your PNG had transparency — now flattened on the chosen background"
+                    : `${lostAlpha.length} of your PNG${lostAlpha.length > 1 ? "s had" : " had"} transparency — flattened on ${background === "white" ? "white" : "black"} background`}
+                </p>
+                <p className="text-xs text-[#525252] dark:text-[#A3A3A3] mb-3 leading-relaxed">
+                  JPG cannot store alpha channel. If you need to preserve transparency, use WebP Converter instead — it is 25-35% smaller than PNG and keeps the alpha channel intact.
+                </p>
+                <a
+                  href="/tools/webp"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-yellow-900 dark:text-yellow-200 bg-yellow-200 dark:bg-yellow-900/40 px-3 py-1.5 rounded-md hover:bg-yellow-300 dark:hover:bg-yellow-900/60 transition-colors"
+                >
+                  Convert to WebP instead →
+                </a>
+              </div>
+            </div>
           </div>
         )}
 
