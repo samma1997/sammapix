@@ -319,6 +319,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     keywords: ["convert format", "change format", "webp", "modern format", "next gen", "jpg to webp", "png to webp", "save as webp"],
   },
   {
+    name: "PNG to JPG",
+    slug: "png-to-jpg",
+    href: "/dashboard/tools/png-to-jpg",
+    tagline: "Convert PNG to JPG. 70-90% smaller for photos. Batch up to 20 files.",
+    accent: "#6366F1",
+    badges: ["Free", "70-90% smaller"],
+    Icon: IconWebP,
+    category: ["Optimize"],
+    keywords: ["png to jpg", "png to jpeg", "convert png", "transparent png", "smaller png", "jpg export"],
+  },
+  {
     name: "HEIC Converter",
     slug: "heic",
     href: "/dashboard/tools/heic",

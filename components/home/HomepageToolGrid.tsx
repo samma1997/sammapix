@@ -189,6 +189,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   // Optimize
   { name: "Compress", href: "/tools/compress", tagline: "Shrink images up to 90% smaller.", accent: "#6366F1", badge: "Free", Icon: IconCompress, category: "Optimize" },
   { name: "WebP Converter", href: "/tools/webp", tagline: "Convert any image to WebP.", accent: "#10B981", badge: "Free", Icon: IconWebP, category: "Optimize" },
+  { name: "PNG to JPG", href: "/tools/png-to-jpg", tagline: "Convert PNG to JPG — 70-90% smaller.", accent: "#6366F1", badge: "Free", Icon: IconWebP, category: "Optimize", isNew: true },
   { name: "HEIC Converter", href: "/tools/heic", tagline: "iPhone HEIC to JPG or WebP.", accent: "#6366F1", badge: "Free", Icon: IconHEIC, category: "Optimize" },
   { name: "PDF to Image", href: "/tools/pdf-to-image", tagline: "Convert PDF pages to JPG or PNG.", accent: "#DC2626", badge: "Free", Icon: IconPdfToImage, category: "Optimize" },
   { name: "Batch Resize", href: "/tools/resizepack", tagline: "Resize for social media presets.", accent: "#14B8A6", badge: "Free", Icon: IconResizePack, category: "Optimize" },

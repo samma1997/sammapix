@@ -36,6 +36,7 @@ import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphon
 const toolGrid = [
   { Icon: IconCompress,  name: "Compress",   accent: "#6366F1" },
   { Icon: IconWebP,      name: "WebP",        accent: "#10B981" },
+  { Icon: IconWebP,      name: "PNG to JPG",  accent: "#6366F1" },
   { Icon: IconAIRename,  name: "AI Rename",   accent: "#8B5CF6" },
   { Icon: IconEXIF,      name: "EXIF Viewer", accent: "#EF4444" },
   { Icon: IconFilmLab,   name: "Film Filters",accent: "#F59E0B" },

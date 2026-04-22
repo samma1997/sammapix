@@ -8,7 +8,7 @@ import { TOOLS } from "@/lib/tools-metadata";
 export const metadata: Metadata = {
   title: "27 Free Image & Video Tools for Photographers & Developers",
   description:
-    "Complete suite of 27 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 28 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -95,7 +95,7 @@ export default function ToolsPage() {
             Everything you need to optimize, rename, resize and organize your images
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            27 free browser-based tools. No uploads, no signup needed for most tools.
+            28 free browser-based tools. No uploads, no signup needed for most tools.
           </p>
         </div>
       </section>

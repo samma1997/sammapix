@@ -30,6 +30,7 @@ import {
 
 const CompressClient = dynamic(() => import("@/components/tools/CompressClient"));
 const WebpClient = dynamic(() => import("@/components/tools/WebpClient"));
+const PngToJpgClient = dynamic(() => import("@/components/tools/PngToJpgClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -61,6 +62,7 @@ const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverter
 const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   compress:    CompressClient,
   webp:        WebpClient,
+  "png-to-jpg": PngToJpgClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -112,6 +114,7 @@ const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
 const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: string }> = {
   compress:    { Icon: IconCompress,   accent: "#6366F1" },
   webp:        { Icon: IconWebP,       accent: "#10B981" },
+  "png-to-jpg": { Icon: IconWebP,      accent: "#6366F1" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -200,6 +203,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download", desc: "Get WebP files ready for your site." },
     ],
     proTip: { text: "Combine with Compress for maximum file size reduction.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
+  },
+  "png-to-jpg": {
+    label: "PNG to JPG",
+    tagline: "Convert PNG to JPG. 70-90% smaller for photos.",
+    steps: [
+      { title: "Drop PNG files", desc: "Add PNG images (up to 20 per batch on Free, 200 on Pro)." },
+      { title: "Adjust settings", desc: "Set quality (50-100%) + background for transparent PNGs." },
+      { title: "Download", desc: "Get JPG files individually or all as ZIP." },
+    ],
+    proTip: { text: "For files that need transparency, convert to WebP instead.", linkLabel: "Go to WebP", linkHref: "/dashboard/tools/webp" },
   },
   "ai-rename": {
     label: "AI Rename",
