@@ -32,6 +32,7 @@ interface ConvertItem {
   resultUrl: string | null;
   resultSize: number;
   originalSize: number;
+  hasTransparency: boolean | null; // null = not yet detected
   error?: string;
 }
 
@@ -51,9 +52,12 @@ function replaceExt(name: string, newExt: string): string {
   return (dot === -1 ? name : name.slice(0, dot)) + "." + newExt;
 }
 
-// Converte WebP → PNG via Canvas (client-side puro, zero upload)
+// Converte WebP → PNG via Canvas (client-side puro, zero upload).
+// Ritorna ANCHE un flag hasTransparency che ci dice se il WebP aveva alpha.
 // PNG è lossless e supporta trasparenza → la preserviamo senza fill bg.
-async function convertWebpToPng(file: File): Promise<Blob> {
+async function convertWebpToPng(
+  file: File
+): Promise<{ blob: Blob; hasTransparency: boolean }> {
   const url = URL.createObjectURL(file);
   try {
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -69,12 +73,44 @@ async function convertWebpToPng(file: File): Promise<Blob> {
     if (!ctx) throw new Error("Canvas 2D non disponibile");
     // NO fillRect — lasciamo canvas trasparente, drawImage preserva alpha
     ctx.drawImage(img, 0, 0);
-    return await new Promise<Blob>((resolve, reject) => {
+
+    // Detect transparency: campiona l'alpha channel.
+    // Uso sampling perché getImageData su immagini enormi è costoso.
+    let hasTransparency = false;
+    try {
+      const w = canvas.width;
+      const h = canvas.height;
+      // Sampling grid 20×20 + 4 corners per catturare edge-trasparenti classici (stickers)
+      const samples: Array<[number, number]> = [];
+      for (let yi = 0; yi < 20; yi++) {
+        for (let xi = 0; xi < 20; xi++) {
+          samples.push([
+            Math.min(w - 1, Math.floor((w / 20) * xi)),
+            Math.min(h - 1, Math.floor((h / 20) * yi)),
+          ]);
+        }
+      }
+      samples.push([0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1]);
+      // Leggo tutti i sample in un blocco (1 getImageData per pixel = lento, ma 404 pixel ok)
+      for (const [sx, sy] of samples) {
+        const data = ctx.getImageData(sx, sy, 1, 1).data;
+        if (data[3] < 250) {
+          hasTransparency = true;
+          break;
+        }
+      }
+    } catch {
+      // se getImageData fallisce (tainted canvas, rarissimo client-side), assumi false
+      hasTransparency = false;
+    }
+
+    const blob = await new Promise<Blob>((resolve, reject) => {
       canvas.toBlob(
-        (blob) => (blob ? resolve(blob) : reject(new Error("Conversione PNG fallita"))),
+        (b) => (b ? resolve(b) : reject(new Error("Conversione PNG fallita"))),
         "image/png"
       );
     });
+    return { blob, hasTransparency };
   } finally {
     URL.revokeObjectURL(url);
   }
@@ -112,6 +148,7 @@ export default function WebpToPngClient() {
           resultUrl: null,
           resultSize: 0,
           originalSize: file.size,
+          hasTransparency: null,
         })
       );
       if (toAdd.length > 0) setItems((prev) => [...prev, ...toAdd]);
@@ -152,7 +189,7 @@ export default function WebpToPngClient() {
         prev.map((p) => (p.id === it.id ? { ...p, status: "processing" } : p))
       );
       try {
-        const blob = await convertWebpToPng(it.file);
+        const { blob, hasTransparency } = await convertWebpToPng(it.file);
         const url = URL.createObjectURL(blob);
         const done: ConvertItem = {
           ...it,
@@ -160,6 +197,7 @@ export default function WebpToPngClient() {
           resultBlob: blob,
           resultUrl: url,
           resultSize: blob.size,
+          hasTransparency,
         };
         updated.push(done);
         setItems((prev) => prev.map((p) => (p.id === it.id ? done : p)));
@@ -205,6 +243,13 @@ export default function WebpToPngClient() {
   const totalResultSize = items.reduce((sum, it) => sum + it.resultSize, 0);
   const sizeDelta = totalResultSize - totalOriginalSize;
   const sizeDeltaPct = totalOriginalSize > 0 ? Math.round((sizeDelta / totalOriginalSize) * 100) : 0;
+
+  // Rilevo file senza transparency (user probabilmente dovrebbe usare webp-to-jpg)
+  const doneItems = items.filter((it) => it.status === "done");
+  const opaqueItems = doneItems.filter((it) => it.hasTransparency === false);
+  const mostOpaque = doneItems.length > 0 && opaqueItems.length / doneItems.length >= 0.5;
+  // Warning forte se size è esploso (>4× = il PNG è assurdamente grande, tipico foto)
+  const hugeBloat = doneItems.length > 0 && totalResultSize > totalOriginalSize * 4;
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
@@ -352,19 +397,51 @@ export default function WebpToPngClient() {
             <div className="flex items-center gap-2 mb-2">
               <CheckCircle2 className="h-5 w-5 text-[#8B5CF6]" strokeWidth={2} />
               <span className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                Converted {doneCount} of {items.length} WebP {items.length === 1 ? "file" : "files"} — transparency preserved
+                Converted {doneCount} of {items.length} WebP {items.length === 1 ? "file" : "files"}
+                {opaqueItems.length === 0 ? " — transparency preserved" : ""}
               </span>
             </div>
             <p className="text-xs text-[#525252] dark:text-[#A3A3A3]">
               Total size: {formatBytes(totalOriginalSize)} → {formatBytes(totalResultSize)}{" "}
-              <span className="font-semibold text-[#8B5CF6]">
+              <span
+                className={`font-semibold ${
+                  hugeBloat ? "text-red-600 dark:text-red-400" : "text-[#8B5CF6]"
+                }`}
+              >
                 ({sizeDeltaPct >= 0 ? "+" : ""}
                 {sizeDeltaPct}%)
               </span>
             </p>
             <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] mt-1.5">
-              Note: PNG is typically 30-50% larger than WebP because it's lossless. Use PNG when you need universal compatibility or transparency — otherwise keep WebP.
+              Note: PNG is typically 30-50% larger than WebP because it&apos;s lossless. For photos without transparency, PNG can be 10-30× larger.
             </p>
+          </div>
+        )}
+
+        {/* WARNING: nessuna transparency nel source / size esploso → suggerisci JPG */}
+        {uiState === "results" && doneCount > 0 && (mostOpaque || hugeBloat) && (
+          <div className="mt-3 p-4 bg-yellow-50 dark:bg-yellow-950/20 border-l-4 border-yellow-500 dark:border-yellow-600 rounded-md">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-yellow-700 dark:text-yellow-500 shrink-0 mt-0.5" strokeWidth={2} />
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+                  {hugeBloat
+                    ? `Your PNG is ${sizeDeltaPct > 0 ? "+" + sizeDeltaPct : sizeDeltaPct}% larger than the WebP — probably not what you want`
+                    : `${opaqueItems.length === doneItems.length ? "All" : "Most"} of your WebPs have no transparency`}
+                </p>
+                <p className="text-xs text-[#525252] dark:text-[#A3A3A3] mb-3 leading-relaxed">
+                  {hugeBloat
+                    ? "This happens when converting photos (not graphics) to PNG. PNG is lossless and doesn't compress photos well. If you don't need transparency, WebP to JPG gives you files 70-90% smaller with quality visually identical."
+                    : "Without transparency, converting to JPG produces files 70-90% smaller while keeping visual quality intact. PNG makes sense only when you need the alpha channel."}
+                </p>
+                <a
+                  href="/tools/webp-to-jpg"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-yellow-900 dark:text-yellow-200 bg-yellow-200 dark:bg-yellow-900/40 px-3 py-1.5 rounded-md hover:bg-yellow-300 dark:hover:bg-yellow-900/60 transition-colors"
+                >
+                  Use WebP to JPG instead →
+                </a>
+              </div>
+            </div>
           </div>
         )}
 
