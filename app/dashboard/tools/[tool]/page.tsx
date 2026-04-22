@@ -12,6 +12,7 @@ import {
   IconWebpToJpg,
   IconWebpToPng,
   IconSvgToPng,
+  IconGifToMp4,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -38,6 +39,7 @@ const PngToJpgClient = dynamic(() => import("@/components/tools/PngToJpgClient")
 const WebpToJpgClient = dynamic(() => import("@/components/tools/WebpToJpgClient"));
 const WebpToPngClient = dynamic(() => import("@/components/tools/WebpToPngClient"));
 const SvgToPngClient = dynamic(() => import("@/components/tools/SvgToPngClient"));
+const GifToMp4Client = dynamic(() => import("@/components/tools/GifToMp4Client"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -73,6 +75,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "webp-to-jpg": WebpToJpgClient,
   "webp-to-png": WebpToPngClient,
   "svg-to-png":  SvgToPngClient,
+  "gif-to-mp4":  GifToMp4Client,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -128,6 +131,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "webp-to-jpg": { Icon: IconWebpToJpg, accent: "#10B981" },
   "webp-to-png": { Icon: IconWebpToPng, accent: "#8B5CF6" },
   "svg-to-png": { Icon: IconSvgToPng,  accent: "#F97316" },
+  "gif-to-mp4": { Icon: IconGifToMp4,  accent: "#EC4899" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -256,6 +260,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download", desc: "PNG files individually or all as ZIP. Alpha channel fully preserved." },
     ],
     proTip: { text: "For app icons, pick custom width 512 or 1024 px. Keep the SVG for web — it stays crisp at any zoom.", linkLabel: "Learn image formats", linkHref: "/blog/best-image-format-for-web-2026" },
+  },
+  "gif-to-mp4": {
+    label: "GIF to MP4",
+    tagline: "Animated GIF to MP4 or WebM — 80-90% smaller files.",
+    steps: [
+      { title: "Drop GIF files", desc: "Add .gif files (up to 10 per batch on Free, 100 on Pro). Max 50 MB each." },
+      { title: "Pick a quality preset", desc: "High (8 Mbps) / Balanced (3.5 Mbps) / Small (1.5 Mbps)." },
+      { title: "Download", desc: "MP4 where supported, WebM fallback otherwise. Individually or all as ZIP." },
+    ],
+    proTip: { text: "Keep the tab active during conversion — MediaRecorder throttles in background tabs.", linkLabel: "Compress more", linkHref: "/dashboard/tools/compress" },
   },
   "ai-rename": {
     label: "AI Rename",

@@ -80,6 +80,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "best-image-format-for-web-2026",
     ],
   },
+  "gif-to-mp4": {
+    id: "gif-to-mp4",
+    name: "GIF to MP4",
+    shortDesc: "Convert animated GIF to MP4 — 80-90% smaller",
+    slug: "/tools/gif-to-mp4",
+    category: "optimize",
+    relatedTools: ["compress", "webp", "resizepack", "pdf-to-image"],
+    relatedBlogSlugs: [
+      "best-image-format-for-web-2026",
+      "compress-images-without-losing-quality",
+    ],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",

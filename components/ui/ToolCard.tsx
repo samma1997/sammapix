@@ -180,6 +180,55 @@ export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── GIF → MP4 converter icon (film reel + size reduction) ────────────────
+export const IconGifToMp4: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes g2m-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes g2m-play {
+        0%, 50% { transform: scale(0.9); opacity: 0.6; }
+        75%     { transform: scale(1.08); opacity: 1; }
+        100%    { transform: scale(0.9); opacity: 0.6; }
+      }
+      @keyframes g2m-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .g2m-arrow { animation: g2m-arrow 2.4s ease-in-out infinite; }
+      .g2m-play  { transform-origin: 37px 19px; animation: g2m-play 2.4s ease-in-out infinite; }
+      .g2m-badge { transform-origin: 37px 38px; animation: g2m-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* GIF box left — with tiny sprocket holes (film reel hint) */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <circle cx="5" cy="11" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <circle cx="5" cy="27" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <circle cx="18" cy="11" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <circle cx="18" cy="27" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <text x="11.5" y="21.5" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">GIF</text>
+    {/* Arrow */}
+    <g className="g2m-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* MP4 box right with play triangle */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <g className="g2m-play">
+      <path d="M34 15 L34 23 L40 19 Z" fill={accent} fillOpacity="0.9"/>
+    </g>
+    <text x="37" y="28" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">MP4</text>
+    {/* Size reduction badge */}
+    <g className="g2m-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">−85%</text>
+    </g>
+  </svg>
+);
+
 // ── SVG → PNG converter icon (vector curves → pixel grid) ─────────────────
 export const IconSvgToPng: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

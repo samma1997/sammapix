@@ -10,6 +10,7 @@ import {
   IconWebpToJpg,
   IconWebpToPng,
   IconSvgToPng,
+  IconGifToMp4,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -315,6 +316,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#F97316",
     badges: ["Free", "Any size"],
     Icon: IconSvgToPng,
+    category: ["Optimize"],
+  },
+  {
+    name: "GIF to MP4",
+    href: "/tools/gif-to-mp4",
+    tagline: "Convert animated GIF to MP4 or WebM — 80-90% smaller files.",
+    accent: "#EC4899",
+    badges: ["Free", "Video"],
+    Icon: IconGifToMp4,
     category: ["Optimize"],
   },
   {
