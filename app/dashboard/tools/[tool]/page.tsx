@@ -10,6 +10,7 @@ import {
   IconWebP,
   IconPngToJpg,
   IconWebpToJpg,
+  IconWebpToPng,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -34,6 +35,7 @@ const CompressClient = dynamic(() => import("@/components/tools/CompressClient")
 const WebpClient = dynamic(() => import("@/components/tools/WebpClient"));
 const PngToJpgClient = dynamic(() => import("@/components/tools/PngToJpgClient"));
 const WebpToJpgClient = dynamic(() => import("@/components/tools/WebpToJpgClient"));
+const WebpToPngClient = dynamic(() => import("@/components/tools/WebpToPngClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -67,6 +69,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   webp:        WebpClient,
   "png-to-jpg": PngToJpgClient,
   "webp-to-jpg": WebpToJpgClient,
+  "webp-to-png": WebpToPngClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -120,6 +123,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   webp:        { Icon: IconWebP,       accent: "#10B981" },
   "png-to-jpg": { Icon: IconPngToJpg, accent: "#6366F1" },
   "webp-to-jpg": { Icon: IconWebpToJpg, accent: "#10B981" },
+  "webp-to-png": { Icon: IconWebpToPng, accent: "#8B5CF6" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -228,6 +232,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download", desc: "Get JPG files individually or all as ZIP." },
     ],
     proTip: { text: "Keep modern web images in WebP — it's 25-35% smaller. Convert only for legacy compatibility.", linkLabel: "Convert to WebP", linkHref: "/dashboard/tools/webp" },
+  },
+  "webp-to-png": {
+    label: "WebP to PNG",
+    tagline: "Convert WebP to PNG — lossless, transparency preserved.",
+    steps: [
+      { title: "Drop WebP files", desc: "Add WebP images (up to 20 per batch on Free, 200 on Pro). Transparent WebPs welcome." },
+      { title: "Automatic lossless conversion", desc: "PNG is lossless — no settings needed. Alpha channel preserved pixel-perfect." },
+      { title: "Download", desc: "Get PNG files individually or all as ZIP. Ready for any app." },
+    ],
+    proTip: { text: "If you don't need transparency, WebP to JPG produces 70-80% smaller files.", linkLabel: "WebP to JPG", linkHref: "/dashboard/tools/webp-to-jpg" },
   },
   "ai-rename": {
     label: "AI Rename",

@@ -124,6 +124,62 @@ export const IconPngToJpg: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── WebP → PNG converter icon (transparency layers preserved) ────────────
+export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes w2p-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes w2p-check-bg {
+        0%, 100% { opacity: 0.35; }
+        50%      { opacity: 0.9; }
+      }
+      @keyframes w2p-alpha {
+        0%, 45%  { opacity: 0; transform: scale(0.85); }
+        65%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.85); }
+      }
+      .w2p-arrow { animation: w2p-arrow 2.4s ease-in-out infinite; }
+      .w2p-bg-left { animation: w2p-check-bg 2.4s ease-in-out infinite; }
+      .w2p-bg-right { animation: w2p-check-bg 2.4s ease-in-out 0.3s infinite; }
+      .w2p-badge { transform-origin: 37px 38px; animation: w2p-alpha 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* WebP box left */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <g className="w2p-bg-left">
+      <rect x="4" y="24" width="3" height="3" fill={accent} fillOpacity="0.35"/>
+      <rect x="10" y="24" width="3" height="3" fill={accent} fillOpacity="0.35"/>
+      <rect x="16" y="24" width="3" height="3" fill={accent} fillOpacity="0.35"/>
+    </g>
+    <text x="11.5" y="19" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">WebP</text>
+    {/* Arrow */}
+    <g className="w2p-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PNG box right — with MORE visible checker pattern (transparency preserved) */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
+    <g className="w2p-bg-right">
+      <rect x="30" y="22" width="3" height="3" fill={accent} fillOpacity="0.35"/>
+      <rect x="36" y="22" width="3" height="3" fill={accent} fillOpacity="0.35"/>
+      <rect x="42" y="22" width="3" height="3" fill={accent} fillOpacity="0.35"/>
+      <rect x="30" y="25" width="3" height="3" fill={accent} fillOpacity="0.15"/>
+      <rect x="36" y="25" width="3" height="3" fill={accent} fillOpacity="0.15"/>
+      <rect x="42" y="25" width="3" height="3" fill={accent} fillOpacity="0.15"/>
+    </g>
+    <text x="37" y="19" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PNG</text>
+    {/* Badge: α (alpha) — transparency preserved signal */}
+    <g className="w2p-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="32" y="40.5" fontSize="6" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">α</text>
+      <text x="40" y="40.3" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">kept</text>
+    </g>
+  </svg>
+);
+
 // ── WebP → JPG converter icon (compatibility "✓" badge) ───────────────────
 export const IconWebpToJpg: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
