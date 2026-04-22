@@ -544,6 +544,18 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
           California&apos;s CCPA and similar state-level laws create disclosure and data deletion rights when personal data (including photos) is processed by third parties. Browser-based tools remove this complexity at the architectural level . No personal data is ever shared with a service provider to begin with.
         </p>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          The same architectural logic applies to documents. For merging PDFs (invoices, contracts,
+          medical records) that cannot be uploaded to third-party servers, see{" "}
+          <Link
+            href="/blog/merge-pdfs-privately-no-upload"
+            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+          >
+            Merge PDFs privately: no upload, no Adobe
+          </Link>
+          . The pdf-lib JavaScript library enables fully client-side merge in the same way Canvas
+          enables client-side image editing.
+        </p>
 
         <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
           <h2 id="faq" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">

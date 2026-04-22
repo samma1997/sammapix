@@ -1,0 +1,207 @@
+[
+  {
+    "start": 0,
+    "end": 3.02,
+    "text": "The uncomfortable truth about GIFs"
+  },
+  {
+    "start": 3.02,
+    "end": 30.34,
+    "text": "The Graphics Interchange Format was finalized by CompuServe in 1987. Its animati"
+  },
+  {
+    "start": 30.34,
+    "end": 52.39,
+    "text": "And yet animated GIF remains absolutely everywhere: support articles, product de"
+  },
+  {
+    "start": 52.39,
+    "end": 70.15,
+    "text": "Google, Twitter, Discord, Reddit, Facebook all figured this out years ago. They "
+  },
+  {
+    "start": 70.15,
+    "end": 73.73,
+    "text": "Why MP4 destroys GIF on file size"
+  },
+  {
+    "start": 73.73,
+    "end": 78.6,
+    "text": "Three structural differences explain the 10 to 20 times file size gap."
+  },
+  {
+    "start": 78.6,
+    "end": 103.49,
+    "text": "First: color palette. GIF uses indexed color — up to 256 colors per frame, chose"
+  },
+  {
+    "start": 103.49,
+    "end": 118.58,
+    "text": "MP4 with H.264 and WebM with VP9 use full 24-bit color (16.7 million colors) wit"
+  },
+  {
+    "start": 118.58,
+    "end": 137.14,
+    "text": "Second: frame compression. GIF stores every frame independently using LZW on the"
+  },
+  {
+    "start": 137.14,
+    "end": 163.44,
+    "text": "MP4 H.264 uses three frame types. I-frames are keyframes, full images every 1 to"
+  },
+  {
+    "start": 163.44,
+    "end": 181.46,
+    "text": "Third: entropy coding. H.264 uses CABAC, context-adaptive binary arithmetic codi"
+  },
+  {
+    "start": 181.46,
+    "end": 185.4,
+    "text": "Benchmark: 10 GIFs converted to MP4"
+  },
+  {
+    "start": 185.4,
+    "end": 204.26,
+    "text": "We ran 10 representative animated GIFs through SammaPix GIF to MP4 at the Balanc"
+  },
+  {
+    "start": 204.26,
+    "end": 242.45,
+    "text": "Screen recording tutorial: GIF 8.4 megabytes, MP4 410 kilobytes, 95 percent redu"
+  },
+  {
+    "start": 242.45,
+    "end": 251.3,
+    "text": "On a page with five animated GIFs this means going from 30 megabytes of motion c"
+  },
+  {
+    "start": 251.3,
+    "end": 255.7,
+    "text": "Every major platform already converts your GIF to MP4"
+  },
+  {
+    "start": 255.7,
+    "end": 291.79,
+    "text": "What actually happens when you upload an animated GIF to most websites in 2026. "
+  },
+  {
+    "start": 291.79,
+    "end": 303.1,
+    "text": "Uploading the MP4 directly lets you control quality and bitrate. Uploading a GIF"
+  },
+  {
+    "start": 303.1,
+    "end": 307.56,
+    "text": "MP4 vs WebM: which target format"
+  },
+  {
+    "start": 307.56,
+    "end": 330.02,
+    "text": "Both are modern video containers with modern codecs. MP4 H.264 has universal sup"
+  },
+  {
+    "start": 330.02,
+    "end": 341.26,
+    "text": "SammaPix picks MP4 when the browser can encode H.264 natively — Chrome, Edge, Sa"
+  },
+  {
+    "start": 341.26,
+    "end": 344.09,
+    "text": "Picking the right quality preset"
+  },
+  {
+    "start": 344.09,
+    "end": 367.06,
+    "text": "Three presets in the SammaPix converter. High at 8 megabits per second for scree"
+  },
+  {
+    "start": 367.06,
+    "end": 370.06,
+    "text": "Keeping the auto-play loop behavior"
+  },
+  {
+    "start": 370.06,
+    "end": 385.58,
+    "text": "GIFs auto-play and loop by default — no user interaction needed. MP4 auto-play i"
+  },
+  {
+    "start": 385.58,
+    "end": 402.12,
+    "text": "Muted is the critical one — without it every browser blocks autoplay to prevent "
+  },
+  {
+    "start": 402.12,
+    "end": 404.86,
+    "text": "When GIF is still the right choice"
+  },
+  {
+    "start": 404.86,
+    "end": 415.3,
+    "text": "Platforms that reject video uploads: certain older forum software, email newslet"
+  },
+  {
+    "start": 415.3,
+    "end": 425.88,
+    "text": "Tiny short loops: for a 1-second 100 by 100 pixel reaction the MP4 container ove"
+  },
+  {
+    "start": 425.88,
+    "end": 430.9,
+    "text": "Custom sticker packs: some chat platforms accept GIF stickers only."
+  },
+  {
+    "start": 430.9,
+    "end": 438.31,
+    "text": "Archival storage: GIF is simple, zero dependency, plays in absolutely everything"
+  },
+  {
+    "start": 438.31,
+    "end": 440.66,
+    "text": "The conversion workflow"
+  },
+  {
+    "start": 440.66,
+    "end": 470.06,
+    "text": "One: open SammaPix GIF to MP4 in Chrome, Edge, or Safari 17+. Two: drop up to 10"
+  },
+  {
+    "start": 470.06,
+    "end": 472.78,
+    "text": "Free browser-based converter"
+  },
+  {
+    "start": 472.78,
+    "end": 489.41,
+    "text": "SammaPix ships motion and image tools that all run 100 percent in your browser. "
+  },
+  {
+    "start": 489.41,
+    "end": 505.27,
+    "text": "Why is MP4 so much smaller than GIF? GIF stores every frame in full with 256 col"
+  },
+  {
+    "start": 505.27,
+    "end": 517.51,
+    "text": "Does Twitter auto-play MP4 like GIF? Yes. Twitter, Discord, Slack, Reddit, Faceb"
+  },
+  {
+    "start": 517.51,
+    "end": 529.15,
+    "text": "When should I still use GIF in 2026? Platforms that reject video, tiny short loo"
+  },
+  {
+    "start": 529.15,
+    "end": 541.97,
+    "text": "MP4 or WebM? MP4 H.264 is the safer default. SammaPix picks MP4 where supported,"
+  },
+  {
+    "start": 541.97,
+    "end": 553.51,
+    "text": "Can I convert without uploading my files? Yes. SammaPix GIF to MP4 runs 100 perc"
+  },
+  {
+    "start": 553.51,
+    "end": 565.18,
+    "text": "Does the animation quality suffer? At reasonable quality settings, no. MP4 suppo"
+  }
+]

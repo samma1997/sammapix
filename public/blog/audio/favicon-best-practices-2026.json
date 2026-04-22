@@ -1,0 +1,227 @@
+[
+  {
+    "start": 0,
+    "end": 4.03,
+    "text": "The 2026 minimum viable favicon setup"
+  },
+  {
+    "start": 4.03,
+    "end": 31.9,
+    "text": "Most favicon generators from 2015 produced 15 to 30 files because every browser "
+  },
+  {
+    "start": 31.9,
+    "end": 46.46,
+    "text": "Plus four HTML tags in the document head. That is the complete setup. Everything"
+  },
+  {
+    "start": 46.46,
+    "end": 49.7,
+    "text": "Every favicon size that still matters"
+  },
+  {
+    "start": 49.7,
+    "end": 108.12,
+    "text": "16 by 16 appears in browser tabs and bookmarks bar. Required. 32 by 32 for Retin"
+  },
+  {
+    "start": 108.12,
+    "end": 111.86,
+    "text": "SVG plus ICO: the hybrid approach"
+  },
+  {
+    "start": 111.86,
+    "end": 148.1,
+    "text": "SVG favicons are the future — one file, infinite resolution, CSS-themable. But a"
+  },
+  {
+    "start": 148.1,
+    "end": 161.86,
+    "text": "The hybrid approach solves this: modern browsers fetch and render the SVG first,"
+  },
+  {
+    "start": 161.86,
+    "end": 165.24,
+    "text": "The four HTML tags you actually need"
+  },
+  {
+    "start": 165.24,
+    "end": 180.22,
+    "text": "Three lines if you do not ship a PWA, four if you do. Anything more is ceremony "
+  },
+  {
+    "start": 180.22,
+    "end": 183.96,
+    "text": "Dark-mode favicons and why Safari is behind"
+  },
+  {
+    "start": 183.96,
+    "end": 197.54,
+    "text": "A black favicon on a dark browser tab disappears. A white favicon on a light tab"
+  },
+  {
+    "start": 197.54,
+    "end": 218.28,
+    "text": "This works in Chrome, Firefox, and Edge — the browser re-evaluates the SVG style"
+  },
+  {
+    "start": 218.28,
+    "end": 221.33,
+    "text": "PWA manifest icons"
+  },
+  {
+    "start": 221.33,
+    "end": 233.71,
+    "text": "If your site is installable as a Progressive Web App, the browser needs two PNGs"
+  },
+  {
+    "start": 233.71,
+    "end": 248.23,
+    "text": "The maskable purpose matters for Android — it tells the OS it can crop your icon"
+  },
+  {
+    "start": 248.23,
+    "end": 251.45,
+    "text": "iOS home screen and apple-touch-icon"
+  },
+  {
+    "start": 251.45,
+    "end": 259.92,
+    "text": "When someone taps Add to Home Screen in iOS Safari, iOS fetches apple-touch-icon"
+  },
+  {
+    "start": 259.92,
+    "end": 281.76,
+    "text": "iOS requires a 180 by 180 PNG without transparency and without rounded corners —"
+  },
+  {
+    "start": 281.76,
+    "end": 285.53,
+    "text": "Windows pinned sites and the tile.xml corpse"
+  },
+  {
+    "start": 285.53,
+    "end": 307.92,
+    "text": "Circa 2012 to 2019 Windows wanted you to ship browserconfig.xml with tile colors"
+  },
+  {
+    "start": 307.92,
+    "end": 317.06,
+    "text": "Skip the tile.xml and browserconfig.xml. If you inherited them from an old proje"
+  },
+  {
+    "start": 317.06,
+    "end": 321.1,
+    "text": "RSS readers, chat previews, and the long tail"
+  },
+  {
+    "start": 321.1,
+    "end": 340.15,
+    "text": "The long tail of favicon consumers: Feedly, Reeder, Inoreader, NetNewsWire, Slac"
+  },
+  {
+    "start": 340.15,
+    "end": 356.64,
+    "text": "What works reliably across the long tail: a 192 by 192 PNG served at slash icon "
+  },
+  {
+    "start": 356.64,
+    "end": 359.74,
+    "text": "How to force a favicon cache refresh"
+  },
+  {
+    "start": 359.74,
+    "end": 378.58,
+    "text": "You updated the favicon. It has been an hour. Nothing changed in the browser tab"
+  },
+  {
+    "start": 378.58,
+    "end": 393.7,
+    "text": "The only reliable fix is a query-string version: bump the version string every t"
+  },
+  {
+    "start": 393.7,
+    "end": 395.83,
+    "text": "Common pitfalls"
+  },
+  {
+    "start": 395.83,
+    "end": 407.5,
+    "text": "Too-detailed logo at 16 by 16: anti-aliasing turns any logo with thin lines into"
+  },
+  {
+    "start": 407.5,
+    "end": 416.95,
+    "text": "Transparent favicon on iOS: Safari composites a white background by default. Int"
+  },
+  {
+    "start": 416.95,
+    "end": 430.13,
+    "text": "ICO without the 16 by 16 variant: some ICO generators default to 32 plus only. B"
+  },
+  {
+    "start": 430.13,
+    "end": 440.54,
+    "text": "Missing sizes any on the ICO link: without it, Chrome and Firefox prefer the ICO"
+  },
+  {
+    "start": 440.54,
+    "end": 451.22,
+    "text": "SVG with external fonts or images: favicons load in a restricted context — exter"
+  },
+  {
+    "start": 451.22,
+    "end": 453.58,
+    "text": "The full build workflow"
+  },
+  {
+    "start": 453.58,
+    "end": 509.54,
+    "text": "One: design the logo as SVG. Square canvas with the logo centered and some paddi"
+  },
+  {
+    "start": 509.54,
+    "end": 513.31,
+    "text": "Total time: 15 minutes once you know the shape."
+  },
+  {
+    "start": 513.31,
+    "end": 516.36,
+    "text": "Free browser-based favicon tools"
+  },
+  {
+    "start": 516.36,
+    "end": 538.87,
+    "text": "SammaPix ships four tools covering the full favicon workflow. Favicon Generator "
+  },
+  {
+    "start": 538.87,
+    "end": 563.71,
+    "text": "What favicon sizes do I actually need in 2026? Minimum viable setup is three fil"
+  },
+  {
+    "start": 563.71,
+    "end": 580.13,
+    "text": "Can I use a single SVG as my entire favicon? Modern browsers accept it, but iOS "
+  },
+  {
+    "start": 580.13,
+    "end": 594.94,
+    "text": "How do I make a favicon that adapts to dark mode? Embed a CSS media query inside"
+  },
+  {
+    "start": 594.94,
+    "end": 607.22,
+    "text": "Why does my favicon not update when I change it? Browsers cache favicons aggress"
+  },
+  {
+    "start": 607.22,
+    "end": 627.82,
+    "text": "What is the difference between favicon.ico and apple-touch-icon? favicon.ico is "
+  },
+  {
+    "start": 627.82,
+    "end": 647.5,
+    "text": "Can I generate all favicon files from one SVG without installing any tool? Yes. "
+  }
+]

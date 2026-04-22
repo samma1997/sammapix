@@ -1,0 +1,232 @@
+[
+  {
+    "start": 0,
+    "end": 2.02,
+    "text": "The quick answer"
+  },
+  {
+    "start": 2.02,
+    "end": 23.35,
+    "text": "If you landed here looking for a one-line verdict, here it is: convert PNG to We"
+  },
+  {
+    "start": 23.35,
+    "end": 51.48,
+    "text": "PNG to JPG is a habit from 2005 that stuck around. The assumption was: PNG is lo"
+  },
+  {
+    "start": 51.48,
+    "end": 54.96,
+    "text": "Why people convert PNG in the first place"
+  },
+  {
+    "start": 54.96,
+    "end": 79.15,
+    "text": "PNG is a great format for what it does: lossless compression with full alpha tra"
+  },
+  {
+    "start": 79.15,
+    "end": 106.49,
+    "text": "So people convert. Common reasons: email attachments bounce on corporate mail se"
+  },
+  {
+    "start": 106.49,
+    "end": 114.84,
+    "text": "For all of these, the question is not should I convert — it is convert to what. "
+  },
+  {
+    "start": 114.84,
+    "end": 118.49,
+    "text": "The 3 problems with PNG to JPG"
+  },
+  {
+    "start": 118.49,
+    "end": 128.21,
+    "text": "Converting PNG to JPG is the default advice from 2005-era tutorials. In 2026 it "
+  },
+  {
+    "start": 128.21,
+    "end": 151.56,
+    "text": "One: JPG has no transparency. The JPEG specification from 1992 does not include "
+  },
+  {
+    "start": 151.56,
+    "end": 174.6,
+    "text": "Two: JPG compresses graphics poorly. JPG compression assumes your image content "
+  },
+  {
+    "start": 174.6,
+    "end": 191.69,
+    "text": "Three: same file size problem, bigger than it needs to be. Even for photos where"
+  },
+  {
+    "start": 191.69,
+    "end": 195.62,
+    "text": "Why WebP beats JPG from a PNG source"
+  },
+  {
+    "start": 195.62,
+    "end": 206.95,
+    "text": "WebP was released by Google in 2010 and steadily took over web image delivery. T"
+  },
+  {
+    "start": 206.95,
+    "end": 220.85,
+    "text": "First, two modes in one format. WebP supports both lossy (like JPG) and lossless"
+  },
+  {
+    "start": 220.85,
+    "end": 230.28,
+    "text": "Second, 8-bit alpha channel. Both lossy and lossless WebP preserve transparency,"
+  },
+  {
+    "start": 230.28,
+    "end": 243.77,
+    "text": "Third, better compression algorithm. WebP uses VP8 and WebP Lossless with predic"
+  },
+  {
+    "start": 243.77,
+    "end": 246.72,
+    "text": "Real benchmark on 50 images"
+  },
+  {
+    "start": 246.72,
+    "end": 260.69,
+    "text": "We ran a benchmark on 50 representative PNG images — 10 photographs, 10 screensh"
+  },
+  {
+    "start": 260.69,
+    "end": 302.78,
+    "text": "Photographs averaged 540 kilobytes as JPG and 408 kilobytes as WebP — 24 percent"
+  },
+  {
+    "start": 302.78,
+    "end": 317.64,
+    "text": "Across all 50 images, WebP averaged 32 percent smaller than JPG at equivalent qu"
+  },
+  {
+    "start": 317.64,
+    "end": 322.49,
+    "text": "The decision framework: PNG to JPG or PNG to WebP"
+  },
+  {
+    "start": 322.49,
+    "end": 327,
+    "text": "Four questions in order. First yes wins."
+  },
+  {
+    "start": 327,
+    "end": 338.83,
+    "text": "One: does the PNG have transparency that matters? Use WebP (preserves alpha) or "
+  },
+  {
+    "start": 338.83,
+    "end": 350.66,
+    "text": "Two: is the destination a modern browser or app? That is 99 percent of cases — u"
+  },
+  {
+    "start": 350.66,
+    "end": 361.99,
+    "text": "Three: is it specifically email attachment, print pipeline, or CMS that rejects "
+  },
+  {
+    "start": 361.99,
+    "end": 372.02,
+    "text": "Four: do you need pixel-perfect archival storage? Keep as PNG or use lossless We"
+  },
+  {
+    "start": 372.02,
+    "end": 374.47,
+    "text": "The transparency case"
+  },
+  {
+    "start": 374.47,
+    "end": 395.62,
+    "text": "If there is one mistake worth avoiding, it is converting a transparent PNG to JP"
+  },
+  {
+    "start": 395.62,
+    "end": 409.63,
+    "text": "SammaPix PNG to JPG detects this automatically: if the source has transparency, "
+  },
+  {
+    "start": 409.63,
+    "end": 413.21,
+    "text": "WebP browser support in 2026"
+  },
+  {
+    "start": 413.21,
+    "end": 453.6,
+    "text": "The old argument against WebP was: what if the user browser does not support it?"
+  },
+  {
+    "start": 453.6,
+    "end": 460.27,
+    "text": "If you are still using the picture element with a JPG fallback for IE11 users, i"
+  },
+  {
+    "start": 460.27,
+    "end": 463.9,
+    "text": "The rare cases where JPG is still correct"
+  },
+  {
+    "start": 463.9,
+    "end": 496.01,
+    "text": "JPG has a few legitimate niches in 2026. Email attachments to corporate recipien"
+  },
+  {
+    "start": 496.01,
+    "end": 504.86,
+    "text": "For these, the SammaPix PNG to JPG tool handles the conversion with quality cont"
+  },
+  {
+    "start": 504.86,
+    "end": 508.25,
+    "text": "The optimal PNG conversion workflow"
+  },
+  {
+    "start": 508.25,
+    "end": 537.46,
+    "text": "Step one: keep the PNG source. It is your lossless master. Step two: generate We"
+  },
+  {
+    "start": 537.46,
+    "end": 540,
+    "text": "Free browser-based tools"
+  },
+  {
+    "start": 540,
+    "end": 568.56,
+    "text": "Every PNG-related conversion SammaPix offers runs 100 percent in your browser us"
+  },
+  {
+    "start": 568.56,
+    "end": 582.91,
+    "text": "Should I convert PNG to JPG or WebP? WebP in almost every case. On our 50-image "
+  },
+  {
+    "start": 582.91,
+    "end": 595.25,
+    "text": "Does converting PNG to JPG lose transparency? Yes. JPG has no alpha channel, so "
+  },
+  {
+    "start": 595.25,
+    "end": 609.24,
+    "text": "When is PNG to JPG actually a good idea? Three scenarios: the PNG is a photograp"
+  },
+  {
+    "start": 609.24,
+    "end": 618.19,
+    "text": "Is WebP really supported everywhere in 2026? Yes — 97 percent plus global browse"
+  },
+  {
+    "start": 618.19,
+    "end": 631.18,
+    "text": "How much smaller is WebP than JPG from the same PNG? On average 32 percent small"
+  },
+  {
+    "start": 631.18,
+    "end": 644.66,
+    "text": "What tool should I use to convert PNG without uploading my files? SammaPix has t"
+  }
+]

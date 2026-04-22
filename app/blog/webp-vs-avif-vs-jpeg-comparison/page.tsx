@@ -1138,6 +1138,31 @@ for f in *.jpg; do cwebp -q 80 "$f" -o "\${f%.jpg}.webp"; done`}</pre>
           (by Google) and the command-line tool avifenc are both free. You can also use the interactive comparison widget above in this article to test how your specific images compress in each format.
         </p>
 
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          For format-specific conversion workflows see:{" "}
+          <Link
+            href="/blog/png-to-jpg-vs-webp-2026"
+            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+          >
+            PNG to JPG vs WebP benchmark
+          </Link>
+          ,{" "}
+          <Link
+            href="/blog/svg-to-png-complete-guide-developers"
+            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+          >
+            SVG to PNG for developers
+          </Link>
+          , and{" "}
+          <Link
+            href="/blog/gif-to-mp4-stop-using-gifs-2026"
+            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+          >
+            GIF to MP4 migration
+          </Link>
+          .
+        </p>
+
         <figure className="my-8">
           <img
             src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80"

@@ -41,6 +41,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["compress", "webp", "exif", "resizepack"],
     relatedBlogSlugs: [
+      "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
     ],
@@ -53,6 +54,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["webp", "png-to-jpg", "compress", "heic"],
     relatedBlogSlugs: [
+      "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
     ],
@@ -65,6 +67,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["webp", "webp-to-jpg", "png-to-jpg", "exif"],
     relatedBlogSlugs: [
+      "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
     ],
@@ -77,6 +80,8 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["png-to-jpg", "compress", "webp", "remove-bg"],
     relatedBlogSlugs: [
+      "svg-to-png-complete-guide-developers",
+      "favicon-best-practices-2026",
       "best-image-format-for-web-2026",
     ],
   },
@@ -88,6 +93,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["compress", "webp", "resizepack", "pdf-to-image"],
     relatedBlogSlugs: [
+      "gif-to-mp4-stop-using-gifs-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
     ],
@@ -100,6 +106,8 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["svg-to-png", "png-to-jpg", "compress", "resizepack"],
     relatedBlogSlugs: [
+      "favicon-best-practices-2026",
+      "svg-to-png-complete-guide-developers",
       "best-image-format-for-web-2026",
     ],
   },
@@ -110,7 +118,10 @@ export const TOOLS: Record<string, ToolMeta> = {
     slug: "/tools/pdf-merge",
     category: "optimize",
     relatedTools: ["jpg-to-pdf", "pdf-to-image", "compress", "blogdrop"],
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: [
+      "merge-pdfs-privately-no-upload",
+      "browser-based-image-tools-privacy-guide",
+    ],
   },
   "color-picker": {
     id: "color-picker",
@@ -119,7 +130,9 @@ export const TOOLS: Record<string, ToolMeta> = {
     slug: "/tools/color-picker",
     category: "edit",
     relatedTools: ["remove-bg", "filmlab", "stampit", "compress"],
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: [
+      "extract-brand-colors-from-image-2026",
+    ],
   },
   "ai-rename": {
     id: "ai-rename",

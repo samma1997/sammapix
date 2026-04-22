@@ -601,6 +601,24 @@ export default function CompleteGuideWebpFormatPage() {
               </div>
             </div>
 
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mt-6">
+              Converting from a specific source format? See the{" "}
+              <Link
+                href="/blog/png-to-jpg-vs-webp-2026"
+                className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+              >
+                PNG to JPG vs WebP benchmark
+              </Link>
+              {" "}and the{" "}
+              <Link
+                href="/blog/heic-to-webp-converter-guide"
+                className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+              >
+                HEIC to WebP guide
+              </Link>
+              .
+            </p>
+
       </BlogArticleLayout>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />

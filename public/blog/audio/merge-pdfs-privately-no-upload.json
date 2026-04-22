@@ -1,0 +1,167 @@
+[
+  {
+    "start": 0,
+    "end": 3.86,
+    "text": "The privacy problem with online PDF mergers"
+  },
+  {
+    "start": 3.86,
+    "end": 21.6,
+    "text": "Search merge PDF online and the top ten results are all variations of the same a"
+  },
+  {
+    "start": 21.6,
+    "end": 51.79,
+    "text": "Every one of those servers holds your documents for at least a few minutes, some"
+  },
+  {
+    "start": 51.79,
+    "end": 76.1,
+    "text": "For most casual use this is fine. Combining two photos of a grocery receipt — wh"
+  },
+  {
+    "start": 76.1,
+    "end": 79.49,
+    "text": "How browser-based PDF merge works"
+  },
+  {
+    "start": 79.49,
+    "end": 92.71,
+    "text": "Modern browsers are full application runtimes. They can read files from your dis"
+  },
+  {
+    "start": 92.71,
+    "end": 115.22,
+    "text": "SammaPix PDF Merge uses pdf-lib, an open-source PDF manipulation library written"
+  },
+  {
+    "start": 115.22,
+    "end": 137.74,
+    "text": "The entire operation happens inside your browser tab JavaScript sandbox. Open De"
+  },
+  {
+    "start": 137.74,
+    "end": 141.17,
+    "text": "How major PDF tools handle your files"
+  },
+  {
+    "start": 141.17,
+    "end": 174.67,
+    "text": "A quick audit of top-ranked PDF mergers in April 2026. iLovePDF: uploads server-"
+  },
+  {
+    "start": 174.67,
+    "end": 186.7,
+    "text": "The four server-based services are generally reputable and their claims are prob"
+  },
+  {
+    "start": 186.7,
+    "end": 189.58,
+    "text": "When PDF privacy matters"
+  },
+  {
+    "start": 189.58,
+    "end": 225.77,
+    "text": "Privacy concerns are not paranoia — they map to concrete, common situations. Fre"
+  },
+  {
+    "start": 225.77,
+    "end": 229.27,
+    "text": "Encrypted and password-protected PDFs"
+  },
+  {
+    "start": 229.27,
+    "end": 251.16,
+    "text": "PDF has two common encryption modes that often get conflated. Encrypted-for-view"
+  },
+  {
+    "start": 251.16,
+    "end": 261.55,
+    "text": "SammaPix PDF Merge loads PDFs with ignoreEncryption true which handles case 1 tr"
+  },
+  {
+    "start": 261.55,
+    "end": 264.29,
+    "text": "What gets preserved in the merge"
+  },
+  {
+    "start": 264.29,
+    "end": 297.34,
+    "text": "Text content: yes, pixel-perfect. Images and graphics: yes, pixel-perfect. Fonts"
+  },
+  {
+    "start": 297.34,
+    "end": 309.31,
+    "text": "For bookmark-heavy workflows a desktop tool like Adobe Acrobat or PDFsam is bett"
+  },
+  {
+    "start": 309.31,
+    "end": 312.14,
+    "text": "The merge workflow step by step"
+  },
+  {
+    "start": 312.14,
+    "end": 339.91,
+    "text": "One: open SammaPix PDF Merge. Any modern browser works. Two: drop up to 10 PDFs "
+  },
+  {
+    "start": 339.91,
+    "end": 342.77,
+    "text": "How to verify no upload happened"
+  },
+  {
+    "start": 342.77,
+    "end": 377.78,
+    "text": "Do not take our word for it. Verify yourself. One: open Chrome or Firefox DevToo"
+  },
+  {
+    "start": 377.78,
+    "end": 381.05,
+    "text": "Offline alternatives if you need desktop"
+  },
+  {
+    "start": 381.05,
+    "end": 410.5,
+    "text": "For larger batches, bookmark-preserving merges, or air-gapped environments, thes"
+  },
+  {
+    "start": 410.5,
+    "end": 413.5,
+    "text": "Free browser-based PDF tools"
+  },
+  {
+    "start": 413.5,
+    "end": 428.64,
+    "text": "SammaPix runs three complementary PDF tools, all client-side via pdf-lib. PDF Me"
+  },
+  {
+    "start": 428.64,
+    "end": 445.22,
+    "text": "Do most free PDF mergers upload my files? Yes — most of them. iLovePDF, SmallPDF"
+  },
+  {
+    "start": 445.22,
+    "end": 458.11,
+    "text": "Is merging PDFs in the browser secure for sensitive documents? Yes — provably mo"
+  },
+  {
+    "start": 458.11,
+    "end": 471.55,
+    "text": "How does pdf-lib handle encrypted PDFs? SammaPix loads with ignoreEncryption tru"
+  },
+  {
+    "start": 471.55,
+    "end": 479.18,
+    "text": "Can I reorder PDFs before merging? Yes. Drag rows up or down after upload."
+  },
+  {
+    "start": 479.18,
+    "end": 487.18,
+    "text": "What is the file size limit? Up to 100 megabytes per file, 10 files per batch on"
+  },
+  {
+    "start": 487.18,
+    "end": 501.1,
+    "text": "Does the merged PDF preserve bookmarks and form fields? Text images page layout "
+  }
+]
