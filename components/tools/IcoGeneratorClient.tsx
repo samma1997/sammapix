@@ -133,13 +133,15 @@ export default function IcoGeneratorClient() {
   const [isDragOver, setIsDragOver] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Cleanup preview URL on unmount
+  // Ref that always holds the current preview URL (closure-safe for unmount)
+  const sourcePreviewRef = useRef<string | null>(null);
+  useEffect(() => {
+    sourcePreviewRef.current = sourcePreview;
+  }, [sourcePreview]);
   useEffect(() => {
     return () => {
-      if (sourcePreview) URL.revokeObjectURL(sourcePreview);
+      if (sourcePreviewRef.current) URL.revokeObjectURL(sourcePreviewRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ── File handling ──────────────────────────────────────────────────────────
@@ -349,6 +351,8 @@ export default function IcoGeneratorClient() {
               <img
                 src={sourcePreview}
                 alt="Source"
+                width={80}
+                height={80}
                 className="max-w-full max-h-full object-contain"
               />
             </div>

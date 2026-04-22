@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { saveAs } from "file-saver";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -55,6 +56,7 @@ export default function PdfMergeClient() {
   const [resultBlob, setResultBlob] = useState<Blob | null>(null);
   const [resultSize, setResultSize] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [mergedFilesCount, setMergedFilesCount] = useState(0);
   const [showProBanner, setShowProBanner] = useState(false);
   const [sizeWarning, setSizeWarning] = useState<string | null>(null);
   const [mergeError, setMergeError] = useState<string | null>(null);
@@ -189,6 +191,7 @@ export default function PdfMergeClient() {
       setResultBlob(blob);
       setResultSize(blob.size);
       setTotalPages(pagesAccumulator);
+      setMergedFilesCount(items.length);
       setProgress(100);
       setUiState("done");
     } catch (err) {
@@ -206,13 +209,8 @@ export default function PdfMergeClient() {
 
   const handleDownload = useCallback(() => {
     if (!resultBlob) return;
-    const url = URL.createObjectURL(resultBlob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `sammapix-merged-${items.length}-files.pdf`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }, [resultBlob, items.length]);
+    saveAs(resultBlob, `sammapix-merged-${mergedFilesCount || items.length}-files.pdf`);
+  }, [resultBlob, mergedFilesCount, items.length]);
 
   // ── Reset ──────────────────────────────────────────────────────────────────
 
@@ -223,6 +221,7 @@ export default function PdfMergeClient() {
     setResultBlob(null);
     setResultSize(0);
     setTotalPages(0);
+    setMergedFilesCount(0);
     setShowProBanner(false);
     setSizeWarning(null);
     setMergeError(null);
@@ -457,7 +456,7 @@ export default function PdfMergeClient() {
               PDFs merged successfully
             </p>
             <p className="text-xs text-[#15803D] dark:text-[#86EFAC]">
-              {items.length} file{items.length !== 1 ? "s" : ""} &middot; {totalPages} page
+              {mergedFilesCount} file{mergedFilesCount !== 1 ? "s" : ""} &middot; {totalPages} page
               {totalPages !== 1 ? "s" : ""} &middot; {formatBytes(resultSize)}
             </p>
           </div>

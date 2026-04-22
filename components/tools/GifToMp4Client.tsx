@@ -150,23 +150,30 @@ async function gifToVideoBlob(
 
   recorder.start();
 
-  // Paint first frame
-  ctx.drawImage(first.image, 0, 0, width, height);
-  const firstDurationMs = (first.image.duration ?? 100_000) / 1000; // VideoFrame.duration is in µs
-  first.image.close();
-  onProgress?.(1, totalFrames);
+  // Paint first frame (try/finally to guarantee close)
+  let firstDurationMs: number;
+  try {
+    ctx.drawImage(first.image, 0, 0, width, height);
+    firstDurationMs = (first.image.duration ?? 100_000) / 1000; // VideoFrame.duration is in µs
+    onProgress?.(1, totalFrames);
+  } finally {
+    first.image.close();
+  }
 
   let elapsed = firstDurationMs;
 
-  // Decode and render remaining frames
+  // Decode and render remaining frames — try/finally to guarantee VideoFrame.close()
   for (let i = 1; i < totalFrames; i++) {
     const decoded = await decoder.decode({ frameIndex: i });
-    const dur = (decoded.image.duration ?? 100_000) / 1000;
-    await new Promise((r) => setTimeout(r, Math.max(1, Math.min(200, dur))));
-    ctx.drawImage(decoded.image, 0, 0, width, height);
-    decoded.image.close();
-    elapsed += dur;
-    onProgress?.(i + 1, totalFrames);
+    try {
+      const dur = (decoded.image.duration ?? 100_000) / 1000;
+      await new Promise((r) => setTimeout(r, Math.max(1, Math.min(200, dur))));
+      ctx.drawImage(decoded.image, 0, 0, width, height);
+      elapsed += dur;
+      onProgress?.(i + 1, totalFrames);
+    } finally {
+      decoded.image.close();
+    }
   }
 
   // Let the last frame remain on screen briefly before closing
@@ -285,6 +292,10 @@ export default function GifToMp4Client() {
     setProgress(0);
     setProgressLabel("");
 
+    // Determine output extension ONCE before the loop so all files share the same ext
+    const mimePick = pickSupportedVideoMime();
+    if (mimePick) setOutputExt(mimePick.ext as "mp4" | "webm");
+
     const updated = [...items];
 
     for (let i = 0; i < updated.length; i++) {
@@ -298,8 +309,6 @@ export default function GifToMp4Client() {
           setProgress(overall);
           setProgressLabel(`File ${i + 1}/${updated.length} — frame ${f}/${total || "?"}`);
         });
-
-        setOutputExt(result.ext as "mp4" | "webm");
 
         const resultUrl = URL.createObjectURL(result.blob);
         updated[i] = {
@@ -341,12 +350,12 @@ export default function GifToMp4Client() {
   );
 
   const handleDownloadAll = useCallback(async () => {
+    const done = items.filter((i) => i.status === "done" && i.resultBlob);
+    if (done.length === 0) return;
     if (!isPro) {
       setZipUpsellOpen(true);
       return;
     }
-    const done = items.filter((i) => i.status === "done" && i.resultBlob);
-    if (done.length === 0) return;
 
     const zip = new JSZip();
     for (const item of done) {
@@ -453,7 +462,7 @@ export default function GifToMp4Client() {
           </div>
 
           {/* Browser support note */}
-          {!hasImageDecoder() && typeof window !== "undefined" && (
+          {!hasImageDecoder() && (
             <div className="mt-3 flex items-start gap-2 px-4 py-3 border border-[#FDE68A] bg-[#FFFBEB] dark:bg-[#1C1700] dark:border-[#854D0E] rounded-md">
               <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0 mt-0.5" strokeWidth={1.5} />
               <p className="text-xs text-[#B45309] dark:text-[#D97706]">

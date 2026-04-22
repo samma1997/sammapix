@@ -211,6 +211,7 @@ export default function SvgToPngClient() {
 
   const handleConvert = useCallback(async () => {
     if (items.length === 0) return;
+    if (uiState !== "idle") return;
 
     setUiState("processing");
     setProgress(0);
@@ -285,7 +286,7 @@ export default function SvgToPngClient() {
 
     setProgress(100);
     setUiState("results");
-  }, [items, computeOutputSize, bgChoice]);
+  }, [items, computeOutputSize, bgChoice, uiState]);
 
   // ── Downloads ───────────────────────────────────────────────────────────────
 
@@ -296,12 +297,12 @@ export default function SvgToPngClient() {
   }, []);
 
   const handleDownloadAll = useCallback(async () => {
+    const done = items.filter((i) => i.status === "done" && i.resultBlob);
+    if (done.length === 0) return;
     if (!isPro) {
       setZipUpsellOpen(true);
       return;
     }
-    const done = items.filter((i) => i.status === "done" && i.resultBlob);
-    if (done.length === 0) return;
 
     const zip = new JSZip();
     for (const item of done) {

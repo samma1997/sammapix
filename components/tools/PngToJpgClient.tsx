@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import {
   RotateCcw,
   Download,
@@ -134,6 +134,18 @@ export default function PngToJpgClient() {
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Ref that tracks latest items for unmount cleanup (closure-safe)
+  const itemsRef = useRef<ConvertItem[]>([]);
+  useEffect(() => {
+    itemsRef.current = items;
+  }, [items]);
+  useEffect(() => {
+    return () => {
+      itemsRef.current.forEach((it) => {
+        if (it.resultUrl) URL.revokeObjectURL(it.resultUrl);
+      });
+    };
+  }, []);
 
   // ── Add files ───────────────────────────────────────────────────────────
   const addFiles = useCallback(
@@ -181,8 +193,9 @@ export default function PngToJpgClient() {
   };
 
   // ── Convert all ─────────────────────────────────────────────────────────
-  const convertAll = async () => {
+  const convertAll = useCallback(async () => {
     if (items.length === 0) return;
+    if (uiState !== "idle") return; // guard double-click
     setUiState("processing");
     setProgress(0);
 
@@ -217,7 +230,9 @@ export default function PngToJpgClient() {
       setProgress(Math.round(((i + 1) / items.length) * 100));
     }
     setUiState("results");
-  };
+    // items already updated via setItems; updated array unused but kept for potential debug
+    void updated;
+  }, [items, quality, background, uiState]);
 
   // ── Download ────────────────────────────────────────────────────────────
   const downloadSingle = (it: ConvertItem) => {
@@ -394,7 +409,8 @@ export default function PngToJpgClient() {
               {uiState === "idle" && (
                 <button
                   onClick={convertAll}
-                  className="flex-1 bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-4 py-2.5 rounded-md text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                  disabled={uiState !== "idle"}
+                  className="flex-1 bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-4 py-2.5 rounded-md text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Convert {items.length} PNG {items.length === 1 ? "file" : "files"} to JPG
                 </button>

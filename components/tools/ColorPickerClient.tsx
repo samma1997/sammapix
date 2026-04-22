@@ -161,13 +161,15 @@ export default function ColorPickerClient() {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Cleanup object URL on unmount
+  // Closure-safe unmount cleanup
+  const sourceUrlRef = useRef<string | null>(null);
+  useEffect(() => {
+    sourceUrlRef.current = sourceUrl;
+  }, [sourceUrl]);
   useEffect(() => {
     return () => {
-      if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+      if (sourceUrlRef.current) URL.revokeObjectURL(sourceUrlRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ── File handling ──────────────────────────────────────────────────────────
@@ -218,7 +220,9 @@ export default function ColorPickerClient() {
     const canvas = canvasRef.current;
     const img = new Image();
     img.crossOrigin = "anonymous";
+    let cancelled = false;
     img.onload = () => {
+      if (cancelled) return; // sourceUrl changed before decode finished
       const ratio = Math.min(DISPLAY_MAX / img.naturalWidth, DISPLAY_MAX / img.naturalHeight, 1);
       const dw = Math.round(img.naturalWidth * ratio);
       const dh = Math.round(img.naturalHeight * ratio);
@@ -231,17 +235,24 @@ export default function ColorPickerClient() {
       }
       ctx.clearRect(0, 0, dw, dh);
       ctx.drawImage(img, 0, 0, dw, dh);
+      if (cancelled) return;
       setDisplaySize({ w: dw, h: dh });
 
       try {
         const extracted = extractPalette(ctx, dw, dh, 6);
+        if (cancelled) return;
         setPalette(extracted);
       } catch (err) {
         console.error("palette extraction failed", err);
       }
     };
-    img.onerror = () => setError("Failed to load image. Try a different file.");
+    img.onerror = () => {
+      if (!cancelled) setError("Failed to load image. Try a different file.");
+    };
     img.src = sourceUrl;
+    return () => {
+      cancelled = true;
+    };
   }, [sourceUrl]);
 
   // ── Hover + pick ───────────────────────────────────────────────────────────
