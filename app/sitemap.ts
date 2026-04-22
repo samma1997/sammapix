@@ -105,6 +105,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const toolPages: MetadataRoute.Sitemap = [
     "/tools/compress",
     "/tools/webp",
+    "/tools/png-to-jpg",
     "/tools/ai-rename",
     "/tools/alt-text",
     "/tools/exif",

@@ -33,6 +33,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "compress-images-without-losing-quality",
     ],
   },
+  "png-to-jpg": {
+    id: "png-to-jpg",
+    name: "PNG to JPG",
+    shortDesc: "Convert PNG to JPG, 70-90% smaller",
+    slug: "/tools/png-to-jpg",
+    category: "optimize",
+    relatedTools: ["compress", "webp", "exif", "resizepack"],
+    relatedBlogSlugs: [
+      "best-image-format-for-web-2026",
+      "compress-images-without-losing-quality",
+    ],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",
