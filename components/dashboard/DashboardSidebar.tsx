@@ -52,8 +52,8 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "png-to-jpg", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname", "remove-bg", "upscale"],
+  developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale"],
 };
 
 // ─── Tool definitions ─────────────────────────────────────────────────────────
@@ -72,6 +72,11 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "PNG to JPG", slug: "png-to-jpg", href: "/dashboard/tools/png-to-jpg", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "WebP to JPG", slug: "webp-to-jpg", href: "/dashboard/tools/webp-to-jpg", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "WebP to PNG", slug: "webp-to-png", href: "/dashboard/tools/webp-to-png", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "SVG to PNG", slug: "svg-to-png", href: "/dashboard/tools/svg-to-png", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "GIF to MP4", slug: "gif-to-mp4", href: "/dashboard/tools/gif-to-mp4", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Favicon Generator", slug: "ico-generator", href: "/dashboard/tools/ico-generator", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Merge PDF", slug: "pdf-merge", href: "/dashboard/tools/pdf-merge", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Color Picker", slug: "color-picker", href: "/dashboard/tools/color-picker", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "HEIC Converter", slug: "heic", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Batch Resize", slug: "resizepack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Crop & Ratio", slug: "croproatio", href: "/dashboard/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
@@ -104,10 +109,10 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
-  { label: "Creative", slugs: ["filmlab", "stampit"] },
+  { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },
   { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
 

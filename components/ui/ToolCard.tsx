@@ -180,6 +180,275 @@ export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Color Picker icon (eyedropper + palette swatches) ────────────────────
+export const IconColorPicker: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes cp-drop {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-1.5px); }
+      }
+      @keyframes cp-pulse-1 {
+        0%, 100% { opacity: 0.45; }
+        50%      { opacity: 1; }
+      }
+      @keyframes cp-pulse-2 {
+        0%, 100% { opacity: 0.4; }
+        60%      { opacity: 1; }
+      }
+      @keyframes cp-pulse-3 {
+        0%, 100% { opacity: 0.5; }
+        70%      { opacity: 1; }
+      }
+      @keyframes cp-pulse-4 {
+        0%, 100% { opacity: 0.45; }
+        80%      { opacity: 1; }
+      }
+      .cp-drop     { transform-origin: 16px 18px; animation: cp-drop 1.8s ease-in-out infinite; }
+      .cp-sw-1     { animation: cp-pulse-1 2.4s ease-in-out infinite; }
+      .cp-sw-2     { animation: cp-pulse-2 2.4s ease-in-out infinite; }
+      .cp-sw-3     { animation: cp-pulse-3 2.4s ease-in-out infinite; }
+      .cp-sw-4     { animation: cp-pulse-4 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* Eyedropper shape on the left */}
+    <g className="cp-drop">
+      <path d="M10 22 L22 10 L25 13 L13 25 L10 22 Z" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5" strokeLinejoin="round"/>
+      <circle cx="11.5" cy="23.5" r="2.5" fill={accent}/>
+      <line x1="22" y1="10" x2="25" y2="13" stroke={accent} strokeWidth="2" strokeLinecap="round"/>
+    </g>
+    {/* Palette swatches stack (2x2) */}
+    <g className="cp-sw-1">
+      <rect x="27" y="8" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.8"/>
+    </g>
+    <g className="cp-sw-2">
+      <rect x="37" y="8" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.5"/>
+    </g>
+    <g className="cp-sw-3">
+      <rect x="27" y="18" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.6"/>
+    </g>
+    <g className="cp-sw-4">
+      <rect x="37" y="18" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.3"/>
+    </g>
+    {/* HEX badge */}
+    <rect x="22" y="34" width="24" height="9" rx="4.5" fill={accent}/>
+    <text x="34" y="40.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">HEX · RGB</text>
+  </svg>
+);
+
+// ── PDF Merge icon (stacked pages merge into one) ────────────────────────
+export const IconPdfMerge: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfm-slide-1 {
+        0%, 20%  { transform: translate(-4px, -3px); opacity: 0.35; }
+        55%, 70% { transform: translate(0, 0); opacity: 0.7; }
+        100%     { transform: translate(-4px, -3px); opacity: 0.35; }
+      }
+      @keyframes pdfm-slide-2 {
+        0%, 20%  { transform: translate(4px, 3px); opacity: 0.35; }
+        55%, 70% { transform: translate(0, 0); opacity: 0.7; }
+        100%     { transform: translate(4px, 3px); opacity: 0.35; }
+      }
+      @keyframes pdfm-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes pdfm-badge {
+        0%, 60%  { opacity: 0; transform: scale(0.8); }
+        75%, 92% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.8); }
+      }
+      .pdfm-p1    { animation: pdfm-slide-1 2.6s ease-in-out infinite; }
+      .pdfm-p2    { animation: pdfm-slide-2 2.6s ease-in-out infinite; }
+      .pdfm-arrow { animation: pdfm-arrow   2.6s ease-in-out infinite; }
+      .pdfm-badge { transform-origin: 37px 38px; animation: pdfm-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Two PDFs on the left that slide together */}
+    <g className="pdfm-p1">
+      <rect x="2" y="10" width="13" height="17" rx="1.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.25"/>
+      <line x1="4.5" y1="15" x2="12.5" y2="15" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+      <line x1="4.5" y1="18" x2="11" y2="18" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+    </g>
+    <g className="pdfm-p2">
+      <rect x="7" y="14" width="13" height="17" rx="1.5" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      <line x1="9.5" y1="19" x2="17.5" y2="19" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+      <line x1="9.5" y1="22" x2="16" y2="22" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+    </g>
+    {/* Arrow */}
+    <g className="pdfm-arrow">
+      <path d="M22 20 L26 20 M24 18 L26 20 L24 22" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Merged PDF on the right */}
+    <rect x="28" y="10" width="18" height="22" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <text x="37" y="24" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* Merged count badge */}
+    <g className="pdfm-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">1 file</text>
+    </g>
+  </svg>
+);
+
+// ── ICO generator icon (multi-size favicon stack) ────────────────────────
+export const IconIcoGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ico-size-16 {
+        0%, 25% { opacity: 0; transform: scale(0.6); }
+        35%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ico-size-32 {
+        0%, 45% { opacity: 0; transform: scale(0.6); }
+        55%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ico-size-48 {
+        0%, 65% { opacity: 0; transform: scale(0.6); }
+        75%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ico-star {
+        0%, 100% { transform: rotate(0deg); }
+        50%      { transform: rotate(72deg); }
+      }
+      .ico-16 { transform-origin: 10px 34px; animation: ico-size-16 2.8s ease-in-out infinite; }
+      .ico-32 { transform-origin: 22px 28px; animation: ico-size-32 2.8s ease-in-out infinite; }
+      .ico-48 { transform-origin: 36px 20px; animation: ico-size-48 2.8s ease-in-out infinite; }
+      .ico-star { transform-origin: 36px 20px; animation: ico-star 2.8s ease-in-out infinite; }
+    `}</style>
+    {/* Three squares stacked by size with star icon */}
+    <g className="ico-16" style={{ opacity: 0 }}>
+      <rect x="6" y="30" width="8" height="8" rx="1" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1"/>
+      <text x="10" y="36" fontSize="4" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">16</text>
+    </g>
+    <g className="ico-32" style={{ opacity: 0 }}>
+      <rect x="16" y="22" width="12" height="12" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="22" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">32</text>
+    </g>
+    <g className="ico-48" style={{ opacity: 0 }}>
+      <rect x="28" y="12" width="16" height="16" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+      <g className="ico-star">
+        <path d="M36 15 L37.5 18.5 L41.5 19 L38.5 21.5 L39.5 25.5 L36 23.5 L32.5 25.5 L33.5 21.5 L30.5 19 L34.5 18.5 Z" fill={accent}/>
+      </g>
+    </g>
+    {/* ICO badge */}
+    <rect x="4" y="40" width="22" height="7" rx="3.5" fill={accent}/>
+    <text x="15" y="45.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">ICO</text>
+  </svg>
+);
+
+// ── GIF → MP4 converter icon (film reel + size reduction) ────────────────
+export const IconGifToMp4: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes g2m-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes g2m-play {
+        0%, 50% { transform: scale(0.9); opacity: 0.6; }
+        75%     { transform: scale(1.08); opacity: 1; }
+        100%    { transform: scale(0.9); opacity: 0.6; }
+      }
+      @keyframes g2m-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .g2m-arrow { animation: g2m-arrow 2.4s ease-in-out infinite; }
+      .g2m-play  { transform-origin: 37px 19px; animation: g2m-play 2.4s ease-in-out infinite; }
+      .g2m-badge { transform-origin: 37px 38px; animation: g2m-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* GIF box left — with tiny sprocket holes (film reel hint) */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <circle cx="5" cy="11" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <circle cx="5" cy="27" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <circle cx="18" cy="11" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <circle cx="18" cy="27" r="0.8" fill={accent} fillOpacity="0.4"/>
+    <text x="11.5" y="21.5" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">GIF</text>
+    {/* Arrow */}
+    <g className="g2m-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* MP4 box right with play triangle */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <g className="g2m-play">
+      <path d="M34 15 L34 23 L40 19 Z" fill={accent} fillOpacity="0.9"/>
+    </g>
+    <text x="37" y="28" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">MP4</text>
+    {/* Size reduction badge */}
+    <g className="g2m-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">−85%</text>
+    </g>
+  </svg>
+);
+
+// ── SVG → PNG converter icon (vector curves → pixel grid) ─────────────────
+export const IconSvgToPng: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes s2p-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes s2p-curve {
+        0%, 100% { stroke-dashoffset: 0; }
+        50%      { stroke-dashoffset: -8; }
+      }
+      @keyframes s2p-pixel {
+        0%, 45%  { opacity: 0; transform: scale(0.7); }
+        65%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      @keyframes s2p-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .s2p-arrow { animation: s2p-arrow 2.4s ease-in-out infinite; }
+      .s2p-curve path { stroke-dasharray: 4 2; animation: s2p-curve 2.4s linear infinite; }
+      .s2p-pixel { transform-origin: 37px 19px; }
+      .s2p-pixel rect:nth-child(1) { animation: s2p-pixel 2.4s ease-in-out 0.1s infinite; }
+      .s2p-pixel rect:nth-child(2) { animation: s2p-pixel 2.4s ease-in-out 0.2s infinite; }
+      .s2p-pixel rect:nth-child(3) { animation: s2p-pixel 2.4s ease-in-out 0.3s infinite; }
+      .s2p-pixel rect:nth-child(4) { animation: s2p-pixel 2.4s ease-in-out 0.4s infinite; }
+      .s2p-badge { transform-origin: 37px 38px; animation: s2p-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* SVG box left — vector curve */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <g className="s2p-curve">
+      <path d="M5 24 Q 8 15, 12 19 T 18 22" stroke={accent} strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    </g>
+    <text x="11.5" y="14" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">SVG</text>
+    {/* Arrow */}
+    <g className="s2p-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PNG box right — pixel grid */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <g className="s2p-pixel" style={{ opacity: 0 }}>
+      <rect x="31" y="17" width="3" height="3" fill={accent} fillOpacity="0.7"/>
+      <rect x="34.5" y="17" width="3" height="3" fill={accent} fillOpacity="0.5"/>
+      <rect x="38" y="17" width="3" height="3" fill={accent} fillOpacity="0.6"/>
+      <rect x="41.5" y="17" width="3" height="3" fill={accent} fillOpacity="0.4"/>
+    </g>
+    <text x="37" y="27" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PNG</text>
+    {/* Scale badge */}
+    <g className="s2p-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="40.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">4K</text>
+    </g>
+  </svg>
+);
+
 // ── WebP → JPG converter icon (compatibility "✓" badge) ───────────────────
 export const IconWebpToJpg: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

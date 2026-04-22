@@ -1,0 +1,222 @@
+[
+  {
+    "start": 0,
+    "end": 3.17,
+    "text": "When you actually need to extract colors"
+  },
+  {
+    "start": 3.17,
+    "end": 48.48,
+    "text": "Five situations that come up constantly for designers and developers. Brand matc"
+  },
+  {
+    "start": 48.48,
+    "end": 56.09,
+    "text": "In every case the workflow is the same: load an image, sample pixels, output HEX"
+  },
+  {
+    "start": 56.09,
+    "end": 60.34,
+    "text": "HEX vs RGB vs HSL: when each wins"
+  },
+  {
+    "start": 60.34,
+    "end": 67.73,
+    "text": "All three notations describe the same color. The difference is ergonomics in the"
+  },
+  {
+    "start": 67.73,
+    "end": 94.68,
+    "text": "HEX example: hashtag A 8 5 5 F 7. Best for web CSS, design files, universal past"
+  },
+  {
+    "start": 94.68,
+    "end": 114.17,
+    "text": "HSL shines when building design tokens: if your primary is hsl 270 91 percent 65"
+  },
+  {
+    "start": 114.17,
+    "end": 117.34,
+    "text": "Single-pixel eyedropping for precision"
+  },
+  {
+    "start": 117.34,
+    "end": 129.14,
+    "text": "When you need exact match — a brand logo, a specific button color — eyedrop a si"
+  },
+  {
+    "start": 129.14,
+    "end": 142.32,
+    "text": "Hover preview makes this usable — you see the color under the cursor live, then "
+  },
+  {
+    "start": 142.32,
+    "end": 146.52,
+    "text": "Automatic palette extraction with k-means in plain English"
+  },
+  {
+    "start": 146.52,
+    "end": 161.04,
+    "text": "When the image has thousands of distinct colors — photograph, illustration, UI m"
+  },
+  {
+    "start": 161.04,
+    "end": 199.66,
+    "text": "The algorithm in plain English. One: sample about 10000 pixels from the image. T"
+  },
+  {
+    "start": 199.66,
+    "end": 205.99,
+    "text": "On a 2K by 2K image the whole thing runs in under 100 milliseconds in modern Jav"
+  },
+  {
+    "start": 205.99,
+    "end": 208.99,
+    "text": "Matching a client brand from a logo"
+  },
+  {
+    "start": 208.99,
+    "end": 219.53,
+    "text": "The most common use case. Client sends a logo PNG or JPG with no brand guide. Yo"
+  },
+  {
+    "start": 219.53,
+    "end": 254.45,
+    "text": "One: if the logo has a white or transparent background, open it directly in the "
+  },
+  {
+    "start": 254.45,
+    "end": 257.59,
+    "text": "Extracting a palette from a mood board"
+  },
+  {
+    "start": 257.59,
+    "end": 266.5,
+    "text": "Mood boards are collages — 5 to 50 reference images. The job is to pull a single"
+  },
+  {
+    "start": 266.5,
+    "end": 289.37,
+    "text": "One: composite the mood board into one flat image — screenshot of your Pinterest"
+  },
+  {
+    "start": 289.37,
+    "end": 292.32,
+    "text": "Photo-to-palette for landing pages"
+  },
+  {
+    "start": 292.32,
+    "end": 301.94,
+    "text": "Hero-photograph-driven landing pages work best when the UI colors harmonize with"
+  },
+  {
+    "start": 301.94,
+    "end": 320.04,
+    "text": "Most dominant color goes to page background tint, very desaturated version. Seco"
+  },
+  {
+    "start": 320.04,
+    "end": 326.42,
+    "text": "The palette extraction gives you the starting point; the designer judgment decid"
+  },
+  {
+    "start": 326.42,
+    "end": 330.31,
+    "text": "Accuracy limits: why your HEX might be off"
+  },
+  {
+    "start": 330.31,
+    "end": 339.29,
+    "text": "The extracted HEX is exactly what the browser renders for that pixel. But that m"
+  },
+  {
+    "start": 339.29,
+    "end": 347.4,
+    "text": "Color profile mismatch: logo saved in Adobe RGB displayed on an sRGB monitor ren"
+  },
+  {
+    "start": 347.4,
+    "end": 355.7,
+    "text": "JPEG compression: lossy compression shifts colors slightly. Sample from a PNG or"
+  },
+  {
+    "start": 355.7,
+    "end": 362.9,
+    "text": "Anti-aliasing on logo edges: pixels near shape edges blend with background — sam"
+  },
+  {
+    "start": 362.9,
+    "end": 374.86,
+    "text": "Pantone or CMYK originals: print brand guidelines often specify Pantone colors t"
+  },
+  {
+    "start": 374.86,
+    "end": 385.06,
+    "text": "Rule of thumb: extract the HEX, then ask the client — your brand guide has a spe"
+  },
+  {
+    "start": 385.06,
+    "end": 389.64,
+    "text": "Privacy: why uploading is unnecessary in 2026"
+  },
+  {
+    "start": 389.64,
+    "end": 406.27,
+    "text": "Most online color pickers upload your image to their server to process. For scre"
+  },
+  {
+    "start": 406.27,
+    "end": 416.5,
+    "text": "Browser Canvas API can do everything a server does — load image, read pixels, ru"
+  },
+  {
+    "start": 416.5,
+    "end": 419.23,
+    "text": "The color extraction workflow"
+  },
+  {
+    "start": 419.23,
+    "end": 461.95,
+    "text": "One: open SammaPix Color Picker in Chrome, Firefox, Safari, or Edge. Two: drop t"
+  },
+  {
+    "start": 461.95,
+    "end": 464.86,
+    "text": "Free browser-based color tools"
+  },
+  {
+    "start": 464.86,
+    "end": 481.82,
+    "text": "SammaPix ships four tools for color work. Color Picker for eyedrop plus palette."
+  },
+  {
+    "start": 481.82,
+    "end": 497.21,
+    "text": "How do I get the exact HEX code from a color in a photo? Load the image into a b"
+  },
+  {
+    "start": 497.21,
+    "end": 515.78,
+    "text": "What is the difference between HEX, RGB, and HSL? All three represent the same c"
+  },
+  {
+    "start": 515.78,
+    "end": 531.02,
+    "text": "How are dominant colors extracted from an image automatically? Through k-means c"
+  },
+  {
+    "start": 531.02,
+    "end": 545.52,
+    "text": "Can I extract brand colors from a competitor website? Yes — screenshot the homep"
+  },
+  {
+    "start": 545.52,
+    "end": 560.02,
+    "text": "Why does Chrome built-in eyedropper not work on images? The Chrome native EyeDro"
+  },
+  {
+    "start": 560.02,
+    "end": 575.47,
+    "text": "Is it safe to upload my brand logo to an online color picker? Depends on the too"
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "start": 0,
+    "end": 3.79,
+    "text": "When you actually need PNG instead of SVG"
+  },
+  {
+    "start": 3.79,
+    "end": 25.68,
+    "text": "SVG is the best format for most web content. A vector icon at 2 kilobytes render"
+  },
+  {
+    "start": 25.68,
+    "end": 43.56,
+    "text": "But there are five places where SVG does not work and you need PNG. First: app i"
+  },
+  {
+    "start": 43.56,
+    "end": 57.7,
+    "text": "Second: favicon fallback. Modern browsers accept SVG favicons but Safari on olde"
+  },
+  {
+    "start": 57.7,
+    "end": 70.27,
+    "text": "Third: email templates. Gmail, Outlook, Apple Mail strip SVG from HTML. The only"
+  },
+  {
+    "start": 70.27,
+    "end": 80.54,
+    "text": "Fourth: social uploads. Instagram, WhatsApp, Facebook, and most ad platforms rej"
+  },
+  {
+    "start": 80.54,
+    "end": 93.5,
+    "text": "Fifth: print and embedded documents. Word, PowerPoint, many PDF pipelines, and p"
+  },
+  {
+    "start": 93.5,
+    "end": 96.62,
+    "text": "viewBox math and intrinsic size"
+  },
+  {
+    "start": 96.62,
+    "end": 106.08,
+    "text": "The first thing a rasterizer needs to know is what size is this SVG naturally. T"
+  },
+  {
+    "start": 106.08,
+    "end": 128.76,
+    "text": "One: the width and height attributes on the root SVG. Two: if only one is presen"
+  },
+  {
+    "start": 128.76,
+    "end": 144.72,
+    "text": "Always declare both width and height on the root element. Skipping them leads to"
+  },
+  {
+    "start": 144.72,
+    "end": 149.5,
+    "text": "Scaling strategy: 1x, 2x, 3x, custom"
+  },
+  {
+    "start": 149.5,
+    "end": 185.18,
+    "text": "The output size is a function of intrinsic SVG size times scale factor. For a 10"
+  },
+  {
+    "start": 185.18,
+    "end": 202.51,
+    "text": "SammaPix SVG to PNG parses the intrinsic size from width, height, or viewBox aut"
+  },
+  {
+    "start": 202.51,
+    "end": 206.06,
+    "text": "Building a favicon pack from one SVG"
+  },
+  {
+    "start": 206.06,
+    "end": 232.99,
+    "text": "A modern favicon setup serves three files from one SVG master. First: favicon.sv"
+  },
+  {
+    "start": 232.99,
+    "end": 252.48,
+    "text": "The HTML is three link tags in the document head. Build the favicon.ico from you"
+  },
+  {
+    "start": 252.48,
+    "end": 255.53,
+    "text": "App icons for iOS and Android"
+  },
+  {
+    "start": 255.53,
+    "end": 274.54,
+    "text": "Both iOS and Google Play require a 1024 by 1024 master PNG — no transparency for"
+  },
+  {
+    "start": 274.54,
+    "end": 302.64,
+    "text": "iOS App Store: 1024 by 1024, no alpha, square. Google Play: 1024 by 1024, 32-bit"
+  },
+  {
+    "start": 302.64,
+    "end": 317.69,
+    "text": "If you export a single 1024 PNG from SVG you can downscale inside Xcode or Andro"
+  },
+  {
+    "start": 317.69,
+    "end": 320.64,
+    "text": "Open Graph and social previews"
+  },
+  {
+    "start": 320.64,
+    "end": 340.54,
+    "text": "Social platforms require a raster image with a specific aspect ratio. 1200 by 63"
+  },
+  {
+    "start": 340.54,
+    "end": 357.96,
+    "text": "You cannot generate this directly from a square SVG — the aspect ratio mismatch "
+  },
+  {
+    "start": 357.96,
+    "end": 361.18,
+    "text": "Transparency: keep it or flatten it"
+  },
+  {
+    "start": 361.18,
+    "end": 372.89,
+    "text": "PNG supports 8-bit alpha, same as SVG. By default the conversion preserves any t"
+  },
+  {
+    "start": 372.89,
+    "end": 383.47,
+    "text": "First: iOS App Store. Submitted app icons must not have alpha channel. A 1024 PN"
+  },
+  {
+    "start": 383.47,
+    "end": 396.38,
+    "text": "Second: email clients. Some legacy clients render transparent PNGs on a dark bac"
+  },
+  {
+    "start": 396.38,
+    "end": 399.5,
+    "text": "Print output: the DPI conversion"
+  },
+  {
+    "start": 399.5,
+    "end": 409.68,
+    "text": "Print pipelines do not think in pixels — they think in inches or millimetres at "
+  },
+  {
+    "start": 409.68,
+    "end": 445.8,
+    "text": "Common targets at 300 DPI offset printing standard. Business card 3.5 by 2 inche"
+  },
+  {
+    "start": 445.8,
+    "end": 447.94,
+    "text": "Common pitfalls"
+  },
+  {
+    "start": 447.94,
+    "end": 460.37,
+    "text": "External fonts — if your SVG references a Google Font via import, the rasterizer"
+  },
+  {
+    "start": 460.37,
+    "end": 469.61,
+    "text": "External images — image xlink href to an external file will not load cross-origi"
+  },
+  {
+    "start": 469.61,
+    "end": 478.8,
+    "text": "Script tags — rasterizers disable script inside SVG for security. Any JS-driven "
+  },
+  {
+    "start": 478.8,
+    "end": 486.34,
+    "text": "Filters — complex SVG filters render differently across rasterizers. Test the ou"
+  },
+  {
+    "start": 486.34,
+    "end": 502.13,
+    "text": "Huge viewBox — an SVG with viewBox 0 0 10000 10000 scaled 4x produces a 40000 by"
+  },
+  {
+    "start": 502.13,
+    "end": 506.38,
+    "text": "Size benchmarks: SVG vs PNG at scale"
+  },
+  {
+    "start": 506.38,
+    "end": 543.77,
+    "text": "We took a 2.1 kilobyte logo SVG and rasterized at five target sizes. 256 by 256:"
+  },
+  {
+    "start": 543.77,
+    "end": 559.34,
+    "text": "The SVG stays 2.1 kilobytes regardless of display size. The PNG grows quadratica"
+  },
+  {
+    "start": 559.34,
+    "end": 562.44,
+    "text": "Free browser-based SVG tools"
+  },
+  {
+    "start": 562.44,
+    "end": 579.89,
+    "text": "SammaPix ships three tools covering the full SVG workflow, all running locally i"
+  },
+  {
+    "start": 579.89,
+    "end": 595.68,
+    "text": "When do I actually need to convert SVG to PNG? When the destination does not acc"
+  },
+  {
+    "start": 595.68,
+    "end": 619.7,
+    "text": "What size PNG should I export from my SVG? Depends on the target. Favicons 16, 3"
+  },
+  {
+    "start": 619.7,
+    "end": 636.43,
+    "text": "How does the SVG viewBox affect the PNG output? The viewBox defines the SVG coor"
+  },
+  {
+    "start": 636.43,
+    "end": 647.42,
+    "text": "Will transparency be preserved when I convert SVG to PNG? Yes by default. PNG su"
+  },
+  {
+    "start": 647.42,
+    "end": 660.53,
+    "text": "Why is my PNG file much larger than the SVG source? Because SVG encodes shapes a"
+  },
+  {
+    "start": 660.53,
+    "end": 676.54,
+    "text": "Can I batch convert SVG to PNG in the browser? Yes. SammaPix SVG to PNG runs 100"
+  }
+]

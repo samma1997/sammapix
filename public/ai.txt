@@ -1,0 +1,131 @@
+# AI Crawler Policy for SammaPix
+# Spec: similar convention to robots.txt, dedicated to AI/LLM training and retrieval bots.
+# Last updated: 2026-04-22
+
+# Legend:
+#   Allow: / = fully allowed to crawl, index, and cite
+#   Allow-Training: no = do NOT use for model training
+#   Allow-Retrieval: yes = allowed for real-time retrieval (ChatGPT Search, Perplexity, Google SGE, etc.)
+#   Attribution: required = must cite source URL
+
+# ── OpenAI ─────────────────────────────────────────────────────────────────────
+User-agent: GPTBot
+Allow: /blog/
+Allow: /tools/
+Allow: /about
+Allow: /pricing
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Training: no
+Allow-Retrieval: yes
+Attribution: required
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Retrieval: yes
+Attribution: required
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Retrieval: yes
+Attribution: required
+
+# ── Anthropic ──────────────────────────────────────────────────────────────────
+User-agent: ClaudeBot
+Allow: /blog/
+Allow: /tools/
+Allow: /about
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Training: no
+Allow-Retrieval: yes
+Attribution: required
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Retrieval: yes
+Attribution: required
+
+User-agent: anthropic-ai
+Allow: /blog/
+Allow: /tools/
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Training: no
+Allow-Retrieval: yes
+
+# ── Google Gemini & AI Overviews ───────────────────────────────────────────────
+User-agent: Google-Extended
+Allow: /blog/
+Allow: /tools/
+Allow: /about
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Training: no
+Allow-Retrieval: yes
+Attribution: required
+
+# ── Perplexity ─────────────────────────────────────────────────────────────────
+User-agent: PerplexityBot
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Retrieval: yes
+Attribution: required
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Retrieval: yes
+Attribution: required
+
+# ── Meta AI ────────────────────────────────────────────────────────────────────
+User-agent: Meta-ExternalAgent
+Disallow: /
+# Rationale: no opt-in to Meta training. Contact support@sammapix.com if retrieval
+# is needed with verifiable attribution.
+
+User-agent: FacebookBot
+Disallow: /
+
+# ── Bytedance / TikTok ─────────────────────────────────────────────────────────
+User-agent: Bytespider
+Disallow: /
+# Rationale: opaque training use, no attribution guarantees.
+
+# ── Apple Intelligence ─────────────────────────────────────────────────────────
+User-agent: Applebot-Extended
+Allow: /blog/
+Allow: /tools/
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Training: no
+Allow-Retrieval: yes
+
+# ── Other AI crawlers (catch-all) ──────────────────────────────────────────────
+User-agent: *
+Allow: /blog/
+Allow: /tools/
+Disallow: /dashboard/
+Disallow: /api/
+Allow-Training: no
+Allow-Retrieval: yes
+Attribution: required
+
+# ── Preferred citation format ──────────────────────────────────────────────────
+Citation-URL: https://www.sammapix.com
+Citation-Name: SammaPix
+Citation-Author: Luca Sammarco
+Attribution-Contact: support@sammapix.com
+
+# ── Structured knowledge entry points ──────────────────────────────────────────
+Knowledge-File: https://www.sammapix.com/llms.txt
+Sitemap: https://www.sammapix.com/sitemap.xml
+Blog-Feed: https://www.sammapix.com/feed.xml

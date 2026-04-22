@@ -496,7 +496,15 @@ export default function BestImageFormatForWeb2026Page() {
               >
                 complete guide to WebP
               </Link>{" "}
-              for a deeper technical breakdown.
+              for a deeper technical breakdown. If you are specifically converting from PNG,
+              the{" "}
+              <Link
+                href="/blog/png-to-jpg-vs-webp-2026"
+                className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+              >
+                PNG to JPG vs WebP benchmark
+              </Link>{" "}
+              shows the exact tradeoffs on 50 real images.
             </p>
 
             {/* AVIF */}
@@ -601,6 +609,15 @@ export default function BestImageFormatForWeb2026Page() {
               reliably. If you are creating content for those platforms rather
               than your own website, GIF may remain the path of least resistance
              - at least until those platforms universally support animated WebP.
+              For the full technical argument and benchmark data on why MP4 ate
+              GIF on modern platforms see{" "}
+              <Link
+                href="/blog/gif-to-mp4-stop-using-gifs-2026"
+                className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+              >
+                GIF to MP4: Stop Using Animated GIFs in 2026
+              </Link>
+              .
             </p>
 
             {/* SVG */}
@@ -626,7 +643,22 @@ export default function BestImageFormatForWeb2026Page() {
               complex logo SVG might be 2–5 kilobytes- far smaller than any
               raster equivalent. They can be styled with CSS and animated with
               JavaScript. The only limitation is that SVG does not work for
-              photographic content- those require raster formats.
+              photographic content- those require raster formats. When you need
+              to ship PNG anyway (app icons, favicons, email, print) see the{" "}
+              <Link
+                href="/blog/svg-to-png-complete-guide-developers"
+                className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+              >
+                SVG to PNG developer guide
+              </Link>
+              {" "}and the{" "}
+              <Link
+                href="/blog/favicon-best-practices-2026"
+                className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+              >
+                favicon best practices guide
+              </Link>
+              .
             </p>
 
             {/* Comparison Table */}

@@ -11,7 +11,7 @@
  *  5. Download JPG
  */
 
-import React, { useState, useCallback, useRef, useMemo } from "react";
+import React, { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import {
   Upload,
   Download,
@@ -59,18 +59,28 @@ export default function PassportPhotoClient({ defaultCountry }: { defaultCountry
   }, [countrySearch]);
 
   /* ---- File selection ---- */
-  const handleFile = useCallback((f: File) => {
-    if (!f.type.startsWith("image/")) {
-      setError("Please select a valid image file (JPG, PNG, WebP).");
-      return;
-    }
-    setFile(f);
-    setPreview(URL.createObjectURL(f));
-    setResult(null);
-    setResultUrl(null);
-    setError(null);
-    setStage("upload");
-  }, []);
+  const handleFile = useCallback(
+    (f: File) => {
+      if (!f.type.startsWith("image/")) {
+        setError("Please select a valid image file (JPG, PNG, WebP).");
+        return;
+      }
+      if (f.size > 20 * 1024 * 1024) {
+        setError("File too large. Max 20 MB.");
+        return;
+      }
+      // Revoke previous URLs before creating new ones to prevent leaks
+      if (preview) URL.revokeObjectURL(preview);
+      if (resultUrl) URL.revokeObjectURL(resultUrl);
+      setFile(f);
+      setPreview(URL.createObjectURL(f));
+      setResult(null);
+      setResultUrl(null);
+      setError(null);
+      setStage("upload");
+    },
+    [preview, resultUrl]
+  );
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
@@ -106,7 +116,10 @@ export default function PassportPhotoClient({ defaultCountry }: { defaultCountry
       });
 
       setResult(res);
-      setResultUrl(URL.createObjectURL(res.blob));
+      setResultUrl((prev) => {
+        if (prev) URL.revokeObjectURL(prev);
+        return URL.createObjectURL(res.blob);
+      });
       setStage("done");
     } catch (err) {
       console.error("Passport photo generation failed:", err);
@@ -130,6 +143,8 @@ export default function PassportPhotoClient({ defaultCountry }: { defaultCountry
 
   /* ---- Reset ---- */
   const handleReset = useCallback(() => {
+    if (preview) URL.revokeObjectURL(preview);
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
     setFile(null);
     setPreview(null);
     setResult(null);
@@ -137,6 +152,15 @@ export default function PassportPhotoClient({ defaultCountry }: { defaultCountry
     setStage("upload");
     setProgress(0);
     setError(null);
+  }, [preview, resultUrl]);
+
+  /* ---- Cleanup on unmount ---- */
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+      if (resultUrl) URL.revokeObjectURL(resultUrl);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* ============================================================ */

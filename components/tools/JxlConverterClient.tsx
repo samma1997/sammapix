@@ -252,9 +252,17 @@ export default function JxlConverterClient() {
 
   const doneCount = items.filter((i) => i.status === "done").length;
   const hasItems = items.length > 0;
-  const totalSaved = items
-    .filter((i) => i.status === "done")
-    .reduce((sum, i) => sum + (i.originalSize - i.resultSize), 0);
+  const doneItems = items.filter((i) => i.status === "done");
+  const totalOriginalSize = doneItems.reduce((sum, i) => sum + i.originalSize, 0);
+  const totalResultSize = doneItems.reduce((sum, i) => sum + i.resultSize, 0);
+  const totalSaved = totalOriginalSize - totalResultSize;
+  // Bloat detection: output >1.5x source (to-jxl) or >2x source (from-jxl with PNG)
+  const hugeBloat =
+    doneItems.length > 0 &&
+    ((direction === "to-jxl" && totalResultSize > totalOriginalSize * 1.5) ||
+      (direction === "from-jxl" &&
+        outputFormat === "PNG" &&
+        totalResultSize > totalOriginalSize * 2));
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
@@ -545,6 +553,44 @@ export default function JxlConverterClient() {
               Start over
             </button>
           </div>
+
+          {/* Size bloat warning */}
+          {hugeBloat && (
+            <div className="flex items-start gap-3 px-4 py-3 border border-[#FDE68A] bg-[#FFFBEB] dark:bg-[#1C1700] dark:border-[#854D0E] rounded-md">
+              <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0 mt-0.5" strokeWidth={1.5} />
+              <div className="flex-1 text-xs">
+                <p className="font-medium text-[#92400E] dark:text-[#FCD34D] mb-0.5">
+                  {direction === "to-jxl"
+                    ? "Your JXL output is larger than the source"
+                    : "PNG output is much larger than the JXL source"}
+                </p>
+                <p className="text-[#B45309] dark:text-[#D97706]">
+                  {direction === "to-jxl" ? (
+                    <>
+                      JXL shines on photos &mdash; if your source is already a compressed
+                      JPEG, try{" "}
+                      <Link href="/tools/compress" className="underline font-medium">
+                        Compress Images
+                      </Link>{" "}
+                      instead to shrink without format change.
+                    </>
+                  ) : (
+                    <>
+                      PNG is lossless and huge. For photos pick{" "}
+                      <Link href="/tools/jxl" className="underline font-medium">
+                        JPG
+                      </Link>{" "}
+                      or{" "}
+                      <Link href="/tools/webp" className="underline font-medium">
+                        WebP
+                      </Link>{" "}
+                      output to stay small.
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Result list */}
           <div className="space-y-1.5">

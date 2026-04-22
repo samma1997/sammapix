@@ -10,6 +10,11 @@ import {
   IconPngToJpg,
   IconWebpToJpg,
   IconWebpToPng,
+  IconSvgToPng,
+  IconGifToMp4,
+  IconIcoGenerator,
+  IconPdfMerge,
+  IconColorPicker,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -195,6 +200,10 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "PNG to JPG", href: "/tools/png-to-jpg", tagline: "Convert PNG to JPG — 70-90% smaller.", accent: "#6366F1", badge: "Free", Icon: IconPngToJpg, category: "Optimize", isNew: true },
   { name: "WebP to JPG", href: "/tools/webp-to-jpg", tagline: "Convert WebP to JPG for compatibility.", accent: "#10B981", badge: "Free", Icon: IconWebpToJpg, category: "Optimize", isNew: true },
   { name: "WebP to PNG", href: "/tools/webp-to-png", tagline: "Convert WebP to PNG — transparency preserved.", accent: "#8B5CF6", badge: "Free", Icon: IconWebpToPng, category: "Optimize", isNew: true },
+  { name: "SVG to PNG", href: "/tools/svg-to-png", tagline: "Rasterize SVG vectors to PNG — any resolution.", accent: "#F97316", badge: "Free", Icon: IconSvgToPng, category: "Optimize", isNew: true },
+  { name: "GIF to MP4", href: "/tools/gif-to-mp4", tagline: "Animated GIF to MP4 — 80-90% smaller.", accent: "#EC4899", badge: "Free", Icon: IconGifToMp4, category: "Optimize", isNew: true },
+  { name: "Favicon Generator", href: "/tools/ico-generator", tagline: "Build multi-size favicon.ico from any image.", accent: "#0EA5E9", badge: "Free", Icon: IconIcoGenerator, category: "Optimize", isNew: true },
+  { name: "Merge PDF", href: "/tools/pdf-merge", tagline: "Combine PDFs into one — drag to reorder.", accent: "#DC2626", badge: "Free", Icon: IconPdfMerge, category: "Optimize", isNew: true },
   { name: "HEIC Converter", href: "/tools/heic", tagline: "iPhone HEIC to JPG or WebP.", accent: "#6366F1", badge: "Free", Icon: IconHEIC, category: "Optimize" },
   { name: "PDF to Image", href: "/tools/pdf-to-image", tagline: "Convert PDF pages to JPG or PNG.", accent: "#DC2626", badge: "Free", Icon: IconPdfToImage, category: "Optimize" },
   { name: "Batch Resize", href: "/tools/resizepack", tagline: "Resize for social media presets.", accent: "#14B8A6", badge: "Free", Icon: IconResizePack, category: "Optimize" },
@@ -211,6 +220,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   // Creative
   { name: "Film Filters", href: "/tools/filmlab", tagline: "14 analog film presets.", accent: "#F59E0B", badge: "Free", Icon: IconFilmLab, category: "Creative" },
   { name: "Watermark", href: "/tools/stampit", tagline: "Batch watermark with text or logo.", accent: "#06B6D4", badge: "Free", Icon: IconStampIt, category: "Creative" },
+  { name: "Color Picker", href: "/tools/color-picker", tagline: "Eyedrop HEX/RGB/HSL + auto palette from any image.", accent: "#A855F7", badge: "Free", Icon: IconColorPicker, category: "Creative", isNew: true },
 
   // Organize
   { name: "EXIF Viewer", href: "/tools/exif", tagline: "Strip GPS and all metadata.", accent: "#EF4444", badge: "Free", Icon: IconEXIF, category: "Organize" },

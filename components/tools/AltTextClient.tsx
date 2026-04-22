@@ -17,6 +17,10 @@ interface AltTextItem {
   edited: boolean;
 }
 
+// ── Constants ─────────────────────────────────────────────────────────────────
+
+const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB — same as image-to-text
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function generateId(): string {
@@ -86,6 +90,7 @@ export default function AltTextClient() {
   const [isDragging, setIsDragging] = useState(false);
   const [copiedAll, setCopiedAll] = useState(false);
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [sizeWarning, setSizeWarning] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isLoggedIn = Boolean(session?.user?.email);
@@ -97,8 +102,24 @@ export default function AltTextClient() {
       const imageFiles = files.filter((f) => f.type.startsWith("image/"));
       if (!imageFiles.length) return;
 
+      // Filter out oversized files & warn user
+      const oversized = imageFiles.filter((f) => f.size > MAX_FILE_SIZE);
+      const withinLimit = imageFiles.filter((f) => f.size <= MAX_FILE_SIZE);
+
+      if (oversized.length > 0) {
+        const names = oversized.map((f) => f.name).slice(0, 3).join(", ");
+        const more = oversized.length > 3 ? ` +${oversized.length - 3} more` : "";
+        setSizeWarning(
+          `${oversized.length} file${oversized.length !== 1 ? "s" : ""} skipped — over 20 MB limit: ${names}${more}`
+        );
+      } else {
+        setSizeWarning(null);
+      }
+
+      if (withinLimit.length === 0) return;
+
       const newItems: AltTextItem[] = await Promise.all(
-        imageFiles.map(async (file) => {
+        withinLimit.map(async (file) => {
           let thumbnailUrl = "";
           try {
             const result = await fileToBase64Thumbnail(file);
@@ -310,11 +331,28 @@ export default function AltTextClient() {
               Drop images here or click to upload
             </p>
             <p className="text-xs text-[#737373] mt-0.5">
-              JPG, PNG, WebP, GIF- multiple files supported
+              JPG, PNG, WebP, GIF &mdash; multiple files supported &middot; max 20 MB each
             </p>
           </div>
         </div>
       </div>
+
+      {/* Size warning banner */}
+      {sizeWarning && (
+        <div className="mt-3 flex items-start justify-between gap-3 px-4 py-3 border border-[#FDE68A] bg-[#FFFBEB] dark:bg-[#1C1700] dark:border-[#854D0E] rounded-md">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="h-4 w-4 text-[#D97706] shrink-0 mt-0.5" strokeWidth={1.5} />
+            <p className="text-xs text-[#B45309] dark:text-[#D97706]">{sizeWarning}</p>
+          </div>
+          <button
+            onClick={() => setSizeWarning(null)}
+            className="shrink-0 text-[#D97706] hover:text-[#92400E] text-xs font-medium"
+            aria-label="Dismiss"
+          >
+            &times;
+          </button>
+        </div>
+      )}
 
       {/* Actions bar */}
       {hasItems && (

@@ -79,6 +79,12 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "extract-brand-colors-from-image-2026",
+  "favicon-best-practices-2026",
+  "merge-pdfs-privately-no-upload",
+  "gif-to-mp4-stop-using-gifs-2026",
+  "svg-to-png-complete-guide-developers",
+  "png-to-jpg-vs-webp-2026",
   "batch-watermark-photos-free-guide",
   "best-free-remove-bg-alternatives-2026",
   "instagram-image-quality-loss-fix",

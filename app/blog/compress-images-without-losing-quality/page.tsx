@@ -317,7 +317,15 @@ export default function CompressImagesWithoutLosingQualityPage() {
           Format choice is as important as compression settings. Using the
           wrong format for a given image type can add hundreds of kilobytes
           unnecessarily. This is one of the most impactful decisions when
-          you want to reduce image size for the web.
+          you want to reduce image size for the web. For the specific PNG conversion
+          decision read our{" "}
+          <Link
+            href="/blog/png-to-jpg-vs-webp-2026"
+            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+          >
+            PNG to JPG vs WebP benchmark
+          </Link>
+          .
         </p>
 
         <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mt-6 mb-2">

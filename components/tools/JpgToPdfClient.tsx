@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -76,7 +75,7 @@ export default function JpgToPdfClient() {
   const [resultBlob, setResultBlob] = useState<Blob | null>(null);
   const [resultSize, setResultSize] = useState(0);
   const [showProBanner, setShowProBanner] = useState(false);
-  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
+  const [buildError, setBuildError] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragItem = useRef<number | null>(null);
@@ -278,7 +277,11 @@ export default function JpgToPdfClient() {
     } catch (err) {
       console.error("PDF build failed:", err);
       setUiState("idle");
-      alert("Failed to create PDF. Please try again.");
+      setBuildError(
+        err instanceof Error
+          ? err.message
+          : "Failed to create PDF. Try fewer images or smaller files."
+      );
     }
   }, [images, pageSize, orientation]);
 
@@ -304,6 +307,7 @@ export default function JpgToPdfClient() {
     setResultBlob(null);
     setResultSize(0);
     setShowProBanner(false);
+    setBuildError(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, [images]);
 
@@ -311,11 +315,27 @@ export default function JpgToPdfClient() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
-      <ProUpsellModal
-        open={zipUpsellOpen}
-        onClose={() => setZipUpsellOpen(false)}
-        trigger="zip"
-      />
+      {/* Build error banner */}
+      {buildError && (
+        <div className="mb-4 flex items-start justify-between gap-3 px-4 py-3 border border-[#FECACA] bg-[#FEF2F2] dark:bg-[#1C0000] dark:border-[#991B1B] rounded-md">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="h-4 w-4 text-[#DC2626] shrink-0 mt-0.5" strokeWidth={1.5} />
+            <div>
+              <p className="text-xs font-medium text-[#991B1B] dark:text-[#FCA5A5] mb-0.5">
+                PDF creation failed
+              </p>
+              <p className="text-xs text-[#B91C1C] dark:text-[#F87171]">{buildError}</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setBuildError(null)}
+            className="shrink-0 text-[#DC2626] hover:text-[#991B1B] text-xs font-medium"
+            aria-label="Dismiss error"
+          >
+            &times;
+          </button>
+        </div>
+      )}
 
       {/* ── Idle / image list ── */}
       {uiState !== "done" && (

@@ -41,6 +41,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["compress", "webp", "exif", "resizepack"],
     relatedBlogSlugs: [
+      "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
     ],
@@ -53,6 +54,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["webp", "png-to-jpg", "compress", "heic"],
     relatedBlogSlugs: [
+      "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
     ],
@@ -65,8 +67,71 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["webp", "webp-to-jpg", "png-to-jpg", "exif"],
     relatedBlogSlugs: [
+      "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
+    ],
+  },
+  "svg-to-png": {
+    id: "svg-to-png",
+    name: "SVG to PNG",
+    shortDesc: "Rasterize SVG vectors to PNG at any size",
+    slug: "/tools/svg-to-png",
+    category: "optimize",
+    relatedTools: ["png-to-jpg", "compress", "webp", "remove-bg"],
+    relatedBlogSlugs: [
+      "svg-to-png-complete-guide-developers",
+      "favicon-best-practices-2026",
+      "best-image-format-for-web-2026",
+    ],
+  },
+  "gif-to-mp4": {
+    id: "gif-to-mp4",
+    name: "GIF to MP4",
+    shortDesc: "Convert animated GIF to MP4 — 80-90% smaller",
+    slug: "/tools/gif-to-mp4",
+    category: "optimize",
+    relatedTools: ["compress", "webp", "resizepack", "pdf-to-image"],
+    relatedBlogSlugs: [
+      "gif-to-mp4-stop-using-gifs-2026",
+      "best-image-format-for-web-2026",
+      "compress-images-without-losing-quality",
+    ],
+  },
+  "ico-generator": {
+    id: "ico-generator",
+    name: "Favicon Generator",
+    shortDesc: "Multi-size favicon.ico from any image",
+    slug: "/tools/ico-generator",
+    category: "optimize",
+    relatedTools: ["svg-to-png", "png-to-jpg", "compress", "resizepack"],
+    relatedBlogSlugs: [
+      "favicon-best-practices-2026",
+      "svg-to-png-complete-guide-developers",
+      "best-image-format-for-web-2026",
+    ],
+  },
+  "pdf-merge": {
+    id: "pdf-merge",
+    name: "Merge PDF",
+    shortDesc: "Combine PDFs into one, drag to reorder",
+    slug: "/tools/pdf-merge",
+    category: "optimize",
+    relatedTools: ["jpg-to-pdf", "pdf-to-image", "compress", "blogdrop"],
+    relatedBlogSlugs: [
+      "merge-pdfs-privately-no-upload",
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
+  "color-picker": {
+    id: "color-picker",
+    name: "Color Picker",
+    shortDesc: "Eyedrop HEX/RGB/HSL + auto palette",
+    slug: "/tools/color-picker",
+    category: "edit",
+    relatedTools: ["remove-bg", "filmlab", "stampit", "compress"],
+    relatedBlogSlugs: [
+      "extract-brand-colors-from-image-2026",
     ],
   },
   "ai-rename": {

@@ -11,6 +11,11 @@ import {
   IconPngToJpg,
   IconWebpToJpg,
   IconWebpToPng,
+  IconSvgToPng,
+  IconGifToMp4,
+  IconIcoGenerator,
+  IconPdfMerge,
+  IconColorPicker,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -36,6 +41,11 @@ const WebpClient = dynamic(() => import("@/components/tools/WebpClient"));
 const PngToJpgClient = dynamic(() => import("@/components/tools/PngToJpgClient"));
 const WebpToJpgClient = dynamic(() => import("@/components/tools/WebpToJpgClient"));
 const WebpToPngClient = dynamic(() => import("@/components/tools/WebpToPngClient"));
+const SvgToPngClient = dynamic(() => import("@/components/tools/SvgToPngClient"));
+const GifToMp4Client = dynamic(() => import("@/components/tools/GifToMp4Client"));
+const IcoGeneratorClient = dynamic(() => import("@/components/tools/IcoGeneratorClient"));
+const PdfMergeClient = dynamic(() => import("@/components/tools/PdfMergeClient"));
+const ColorPickerClient = dynamic(() => import("@/components/tools/ColorPickerClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -70,6 +80,11 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "png-to-jpg": PngToJpgClient,
   "webp-to-jpg": WebpToJpgClient,
   "webp-to-png": WebpToPngClient,
+  "svg-to-png":  SvgToPngClient,
+  "gif-to-mp4":  GifToMp4Client,
+  "ico-generator": IcoGeneratorClient,
+  "pdf-merge":  PdfMergeClient,
+  "color-picker": ColorPickerClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -124,6 +139,11 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "png-to-jpg": { Icon: IconPngToJpg, accent: "#6366F1" },
   "webp-to-jpg": { Icon: IconWebpToJpg, accent: "#10B981" },
   "webp-to-png": { Icon: IconWebpToPng, accent: "#8B5CF6" },
+  "svg-to-png": { Icon: IconSvgToPng,  accent: "#F97316" },
+  "gif-to-mp4": { Icon: IconGifToMp4,  accent: "#EC4899" },
+  "ico-generator": { Icon: IconIcoGenerator, accent: "#0EA5E9" },
+  "pdf-merge": { Icon: IconPdfMerge,   accent: "#DC2626" },
+  "color-picker": { Icon: IconColorPicker, accent: "#A855F7" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -242,6 +262,56 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download", desc: "Get PNG files individually or all as ZIP. Ready for any app." },
     ],
     proTip: { text: "If you don't need transparency, WebP to JPG produces 70-80% smaller files.", linkLabel: "WebP to JPG", linkHref: "/dashboard/tools/webp-to-jpg" },
+  },
+  "svg-to-png": {
+    label: "SVG to PNG",
+    tagline: "Rasterize SVG vectors to PNG at any resolution.",
+    steps: [
+      { title: "Drop SVG files", desc: "Add .svg files (up to 20 per batch on Free, 200 on Pro)." },
+      { title: "Choose output size & background", desc: "Pick 1x-4x scale or enter custom width up to 8192 px. Transparent, white, or black background." },
+      { title: "Download", desc: "PNG files individually or all as ZIP. Alpha channel fully preserved." },
+    ],
+    proTip: { text: "For app icons, pick custom width 512 or 1024 px. Keep the SVG for web — it stays crisp at any zoom.", linkLabel: "Learn image formats", linkHref: "/blog/best-image-format-for-web-2026" },
+  },
+  "gif-to-mp4": {
+    label: "GIF to MP4",
+    tagline: "Animated GIF to MP4 or WebM — 80-90% smaller files.",
+    steps: [
+      { title: "Drop GIF files", desc: "Add .gif files (up to 10 per batch on Free, 100 on Pro). Max 50 MB each." },
+      { title: "Pick a quality preset", desc: "High (8 Mbps) / Balanced (3.5 Mbps) / Small (1.5 Mbps)." },
+      { title: "Download", desc: "MP4 where supported, WebM fallback otherwise. Individually or all as ZIP." },
+    ],
+    proTip: { text: "Keep the tab active during conversion — MediaRecorder throttles in background tabs.", linkLabel: "Compress more", linkHref: "/dashboard/tools/compress" },
+  },
+  "ico-generator": {
+    label: "Favicon Generator",
+    tagline: "Multi-size favicon.ico from PNG, SVG, JPG, WebP or GIF.",
+    steps: [
+      { title: "Upload source image", desc: "Square 512×512 PNG or SVG works best. JPG, WebP and GIF also supported." },
+      { title: "Pick sizes", desc: "16/32/48 recommended. Add 64/128/256 for HiDPI Windows shortcuts." },
+      { title: "Download favicon.ico", desc: "Drop it in your site root and add a single <link> tag to <head>." },
+    ],
+    proTip: { text: "Also ship a SVG favicon for modern browsers — smaller and perfect at any scale.", linkLabel: "SVG to PNG", linkHref: "/dashboard/tools/svg-to-png" },
+  },
+  "pdf-merge": {
+    label: "Merge PDF",
+    tagline: "Combine multiple PDFs into one — drag to reorder.",
+    steps: [
+      { title: "Drop PDF files", desc: "Up to 10 per batch on Free, 50 on Pro. Max 100 MB each." },
+      { title: "Drag rows to reorder", desc: "Set the final page order. Remove files you don't want." },
+      { title: "Merge and download", desc: "One combined PDF built locally in your browser." },
+    ],
+    proTip: { text: "Need to turn images into a PDF first? Use JPG to PDF, then merge.", linkLabel: "JPG to PDF", linkHref: "/dashboard/tools/jpg-to-pdf" },
+  },
+  "color-picker": {
+    label: "Color Picker",
+    tagline: "Eyedrop HEX/RGB/HSL from any image + auto 6-color palette.",
+    steps: [
+      { title: "Upload an image", desc: "JPG, PNG, WebP or GIF up to 20 MB." },
+      { title: "Hover and click", desc: "Preview the color under your cursor, click to pick." },
+      { title: "Copy HEX/RGB/HSL", desc: "Toggle format, copy with one click. Palette auto-generated." },
+    ],
+    proTip: { text: "Pull brand colors from a logo? Remove the background first for cleaner samples.", linkLabel: "Remove background", linkHref: "/dashboard/tools/remove-bg" },
   },
   "ai-rename": {
     label: "AI Rename",

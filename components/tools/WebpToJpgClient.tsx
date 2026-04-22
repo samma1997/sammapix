@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import {
   RotateCcw,
   Download,
@@ -133,6 +133,18 @@ export default function WebpToJpgClient() {
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Ref for closure-safe unmount cleanup
+  const itemsRef = useRef<ConvertItem[]>([]);
+  useEffect(() => {
+    itemsRef.current = items;
+  }, [items]);
+  useEffect(() => {
+    return () => {
+      itemsRef.current.forEach((it) => {
+        if (it.resultUrl) URL.revokeObjectURL(it.resultUrl);
+      });
+    };
+  }, []);
 
   // ── Add files ───────────────────────────────────────────────────────────
   const addFiles = useCallback(
@@ -180,8 +192,9 @@ export default function WebpToJpgClient() {
   };
 
   // ── Convert all ─────────────────────────────────────────────────────────
-  const convertAll = async () => {
+  const convertAll = useCallback(async () => {
     if (items.length === 0) return;
+    if (uiState !== "idle") return;
     setUiState("processing");
     setProgress(0);
 
@@ -215,7 +228,8 @@ export default function WebpToJpgClient() {
       setProgress(Math.round(((i + 1) / items.length) * 100));
     }
     setUiState("results");
-  };
+    void updated;
+  }, [items, quality, background, uiState]);
 
   // ── Download ────────────────────────────────────────────────────────────
   const downloadSingle = (it: ConvertItem) => {
@@ -391,7 +405,8 @@ export default function WebpToJpgClient() {
               {uiState === "idle" && (
                 <button
                   onClick={convertAll}
-                  className="flex-1 bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-4 py-2.5 rounded-md text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                  disabled={uiState !== "idle"}
+                  className="flex-1 bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-4 py-2.5 rounded-md text-sm font-medium hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Convert {items.length} WebP {items.length === 1 ? "file" : "files"} to JPG
                 </button>
@@ -446,12 +461,14 @@ export default function WebpToJpgClient() {
               Total size: {formatBytes(totalOriginalSize)} → {formatBytes(totalResultSize)}{" "}
               <span
                 className={`font-semibold ${
-                  saved > 0
+                  savedPct > 0
                     ? "text-emerald-700 dark:text-emerald-400"
-                    : "text-[#A3A3A3]"
+                    : savedPct < 0
+                      ? "text-amber-700 dark:text-amber-400"
+                      : "text-[#A3A3A3]"
                 }`}
               >
-                ({savedPct >= 0 ? "−" : "+"}
+                ({savedPct > 0 ? "−" : savedPct < 0 ? "+" : ""}
                 {Math.abs(savedPct)}%)
               </span>
             </p>
