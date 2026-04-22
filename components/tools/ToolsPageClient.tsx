@@ -12,6 +12,7 @@ import {
   IconSvgToPng,
   IconGifToMp4,
   IconIcoGenerator,
+  IconPdfMerge,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -335,6 +336,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Dev"],
     Icon: IconIcoGenerator,
+    category: ["Optimize"],
+  },
+  {
+    name: "Merge PDF",
+    href: "/tools/pdf-merge",
+    tagline: "Combine multiple PDFs into one — drag to reorder, no upload.",
+    accent: "#DC2626",
+    badges: ["Free", "Privacy"],
+    Icon: IconPdfMerge,
     category: ["Optimize"],
   },
   {

@@ -180,6 +180,62 @@ export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── PDF Merge icon (stacked pages merge into one) ────────────────────────
+export const IconPdfMerge: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfm-slide-1 {
+        0%, 20%  { transform: translate(-4px, -3px); opacity: 0.35; }
+        55%, 70% { transform: translate(0, 0); opacity: 0.7; }
+        100%     { transform: translate(-4px, -3px); opacity: 0.35; }
+      }
+      @keyframes pdfm-slide-2 {
+        0%, 20%  { transform: translate(4px, 3px); opacity: 0.35; }
+        55%, 70% { transform: translate(0, 0); opacity: 0.7; }
+        100%     { transform: translate(4px, 3px); opacity: 0.35; }
+      }
+      @keyframes pdfm-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes pdfm-badge {
+        0%, 60%  { opacity: 0; transform: scale(0.8); }
+        75%, 92% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.8); }
+      }
+      .pdfm-p1    { animation: pdfm-slide-1 2.6s ease-in-out infinite; }
+      .pdfm-p2    { animation: pdfm-slide-2 2.6s ease-in-out infinite; }
+      .pdfm-arrow { animation: pdfm-arrow   2.6s ease-in-out infinite; }
+      .pdfm-badge { transform-origin: 37px 38px; animation: pdfm-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Two PDFs on the left that slide together */}
+    <g className="pdfm-p1">
+      <rect x="2" y="10" width="13" height="17" rx="1.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.25"/>
+      <line x1="4.5" y1="15" x2="12.5" y2="15" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+      <line x1="4.5" y1="18" x2="11" y2="18" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+    </g>
+    <g className="pdfm-p2">
+      <rect x="7" y="14" width="13" height="17" rx="1.5" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      <line x1="9.5" y1="19" x2="17.5" y2="19" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+      <line x1="9.5" y1="22" x2="16" y2="22" stroke={accent} strokeWidth="0.75" strokeOpacity="0.8"/>
+    </g>
+    {/* Arrow */}
+    <g className="pdfm-arrow">
+      <path d="M22 20 L26 20 M24 18 L26 20 L24 22" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Merged PDF on the right */}
+    <rect x="28" y="10" width="18" height="22" rx="2" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <text x="37" y="24" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* Merged count badge */}
+    <g className="pdfm-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">1 file</text>
+    </g>
+  </svg>
+);
+
 // ── ICO generator icon (multi-size favicon stack) ────────────────────────
 export const IconIcoGenerator: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

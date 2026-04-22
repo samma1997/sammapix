@@ -103,6 +103,15 @@ export const TOOLS: Record<string, ToolMeta> = {
       "best-image-format-for-web-2026",
     ],
   },
+  "pdf-merge": {
+    id: "pdf-merge",
+    name: "Merge PDF",
+    shortDesc: "Combine PDFs into one, drag to reorder",
+    slug: "/tools/pdf-merge",
+    category: "optimize",
+    relatedTools: ["jpg-to-pdf", "pdf-to-image", "compress", "blogdrop"],
+    relatedBlogSlugs: [],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",

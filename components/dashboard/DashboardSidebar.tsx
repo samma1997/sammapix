@@ -75,6 +75,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "SVG to PNG", slug: "svg-to-png", href: "/dashboard/tools/svg-to-png", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "GIF to MP4", slug: "gif-to-mp4", href: "/dashboard/tools/gif-to-mp4", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Favicon Generator", slug: "ico-generator", href: "/dashboard/tools/ico-generator", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Merge PDF", slug: "pdf-merge", href: "/dashboard/tools/pdf-merge", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "HEIC Converter", slug: "heic", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Batch Resize", slug: "resizepack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Crop & Ratio", slug: "croproatio", href: "/dashboard/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
@@ -107,7 +108,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit"] },

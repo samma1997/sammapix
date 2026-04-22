@@ -111,6 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/svg-to-png",
     "/tools/gif-to-mp4",
     "/tools/ico-generator",
+    "/tools/pdf-merge",
     "/tools/ai-rename",
     "/tools/alt-text",
     "/tools/exif",

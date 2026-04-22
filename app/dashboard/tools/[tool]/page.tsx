@@ -14,6 +14,7 @@ import {
   IconSvgToPng,
   IconGifToMp4,
   IconIcoGenerator,
+  IconPdfMerge,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -42,6 +43,7 @@ const WebpToPngClient = dynamic(() => import("@/components/tools/WebpToPngClient
 const SvgToPngClient = dynamic(() => import("@/components/tools/SvgToPngClient"));
 const GifToMp4Client = dynamic(() => import("@/components/tools/GifToMp4Client"));
 const IcoGeneratorClient = dynamic(() => import("@/components/tools/IcoGeneratorClient"));
+const PdfMergeClient = dynamic(() => import("@/components/tools/PdfMergeClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -79,6 +81,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "svg-to-png":  SvgToPngClient,
   "gif-to-mp4":  GifToMp4Client,
   "ico-generator": IcoGeneratorClient,
+  "pdf-merge":  PdfMergeClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -136,6 +139,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "svg-to-png": { Icon: IconSvgToPng,  accent: "#F97316" },
   "gif-to-mp4": { Icon: IconGifToMp4,  accent: "#EC4899" },
   "ico-generator": { Icon: IconIcoGenerator, accent: "#0EA5E9" },
+  "pdf-merge": { Icon: IconPdfMerge,   accent: "#DC2626" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -284,6 +288,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download favicon.ico", desc: "Drop it in your site root and add a single <link> tag to <head>." },
     ],
     proTip: { text: "Also ship a SVG favicon for modern browsers — smaller and perfect at any scale.", linkLabel: "SVG to PNG", linkHref: "/dashboard/tools/svg-to-png" },
+  },
+  "pdf-merge": {
+    label: "Merge PDF",
+    tagline: "Combine multiple PDFs into one — drag to reorder.",
+    steps: [
+      { title: "Drop PDF files", desc: "Up to 10 per batch on Free, 50 on Pro. Max 100 MB each." },
+      { title: "Drag rows to reorder", desc: "Set the final page order. Remove files you don't want." },
+      { title: "Merge and download", desc: "One combined PDF built locally in your browser." },
+    ],
+    proTip: { text: "Need to turn images into a PDF first? Use JPG to PDF, then merge.", linkLabel: "JPG to PDF", linkHref: "/dashboard/tools/jpg-to-pdf" },
   },
   "ai-rename": {
     label: "AI Rename",
