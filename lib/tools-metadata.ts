@@ -69,6 +69,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "compress-images-without-losing-quality",
     ],
   },
+  "svg-to-png": {
+    id: "svg-to-png",
+    name: "SVG to PNG",
+    shortDesc: "Rasterize SVG vectors to PNG at any size",
+    slug: "/tools/svg-to-png",
+    category: "optimize",
+    relatedTools: ["png-to-jpg", "compress", "webp", "remove-bg"],
+    relatedBlogSlugs: [
+      "best-image-format-for-web-2026",
+    ],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",

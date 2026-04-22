@@ -11,6 +11,7 @@ import {
   IconPngToJpg,
   IconWebpToJpg,
   IconWebpToPng,
+  IconSvgToPng,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -36,6 +37,7 @@ const WebpClient = dynamic(() => import("@/components/tools/WebpClient"));
 const PngToJpgClient = dynamic(() => import("@/components/tools/PngToJpgClient"));
 const WebpToJpgClient = dynamic(() => import("@/components/tools/WebpToJpgClient"));
 const WebpToPngClient = dynamic(() => import("@/components/tools/WebpToPngClient"));
+const SvgToPngClient = dynamic(() => import("@/components/tools/SvgToPngClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -70,6 +72,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "png-to-jpg": PngToJpgClient,
   "webp-to-jpg": WebpToJpgClient,
   "webp-to-png": WebpToPngClient,
+  "svg-to-png":  SvgToPngClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -124,6 +127,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "png-to-jpg": { Icon: IconPngToJpg, accent: "#6366F1" },
   "webp-to-jpg": { Icon: IconWebpToJpg, accent: "#10B981" },
   "webp-to-png": { Icon: IconWebpToPng, accent: "#8B5CF6" },
+  "svg-to-png": { Icon: IconSvgToPng,  accent: "#F97316" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -242,6 +246,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download", desc: "Get PNG files individually or all as ZIP. Ready for any app." },
     ],
     proTip: { text: "If you don't need transparency, WebP to JPG produces 70-80% smaller files.", linkLabel: "WebP to JPG", linkHref: "/dashboard/tools/webp-to-jpg" },
+  },
+  "svg-to-png": {
+    label: "SVG to PNG",
+    tagline: "Rasterize SVG vectors to PNG at any resolution.",
+    steps: [
+      { title: "Drop SVG files", desc: "Add .svg files (up to 20 per batch on Free, 200 on Pro)." },
+      { title: "Choose output size & background", desc: "Pick 1x-4x scale or enter custom width up to 8192 px. Transparent, white, or black background." },
+      { title: "Download", desc: "PNG files individually or all as ZIP. Alpha channel fully preserved." },
+    ],
+    proTip: { text: "For app icons, pick custom width 512 or 1024 px. Keep the SVG for web — it stays crisp at any zoom.", linkLabel: "Learn image formats", linkHref: "/blog/best-image-format-for-web-2026" },
   },
   "ai-rename": {
     label: "AI Rename",

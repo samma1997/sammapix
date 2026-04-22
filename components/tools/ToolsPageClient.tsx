@@ -9,6 +9,7 @@ import {
   IconPngToJpg,
   IconWebpToJpg,
   IconWebpToPng,
+  IconSvgToPng,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -305,6 +306,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#8B5CF6",
     badges: ["Free", "Transparency"],
     Icon: IconWebpToPng,
+    category: ["Optimize"],
+  },
+  {
+    name: "SVG to PNG",
+    href: "/tools/svg-to-png",
+    tagline: "Rasterize SVG vectors to PNG at any resolution up to 8192 px.",
+    accent: "#F97316",
+    badges: ["Free", "Any size"],
+    Icon: IconSvgToPng,
     category: ["Optimize"],
   },
   {

@@ -180,6 +180,66 @@ export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── SVG → PNG converter icon (vector curves → pixel grid) ─────────────────
+export const IconSvgToPng: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes s2p-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes s2p-curve {
+        0%, 100% { stroke-dashoffset: 0; }
+        50%      { stroke-dashoffset: -8; }
+      }
+      @keyframes s2p-pixel {
+        0%, 45%  { opacity: 0; transform: scale(0.7); }
+        65%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      @keyframes s2p-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .s2p-arrow { animation: s2p-arrow 2.4s ease-in-out infinite; }
+      .s2p-curve path { stroke-dasharray: 4 2; animation: s2p-curve 2.4s linear infinite; }
+      .s2p-pixel { transform-origin: 37px 19px; }
+      .s2p-pixel rect:nth-child(1) { animation: s2p-pixel 2.4s ease-in-out 0.1s infinite; }
+      .s2p-pixel rect:nth-child(2) { animation: s2p-pixel 2.4s ease-in-out 0.2s infinite; }
+      .s2p-pixel rect:nth-child(3) { animation: s2p-pixel 2.4s ease-in-out 0.3s infinite; }
+      .s2p-pixel rect:nth-child(4) { animation: s2p-pixel 2.4s ease-in-out 0.4s infinite; }
+      .s2p-badge { transform-origin: 37px 38px; animation: s2p-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* SVG box left — vector curve */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <g className="s2p-curve">
+      <path d="M5 24 Q 8 15, 12 19 T 18 22" stroke={accent} strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    </g>
+    <text x="11.5" y="14" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">SVG</text>
+    {/* Arrow */}
+    <g className="s2p-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PNG box right — pixel grid */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <g className="s2p-pixel" style={{ opacity: 0 }}>
+      <rect x="31" y="17" width="3" height="3" fill={accent} fillOpacity="0.7"/>
+      <rect x="34.5" y="17" width="3" height="3" fill={accent} fillOpacity="0.5"/>
+      <rect x="38" y="17" width="3" height="3" fill={accent} fillOpacity="0.6"/>
+      <rect x="41.5" y="17" width="3" height="3" fill={accent} fillOpacity="0.4"/>
+    </g>
+    <text x="37" y="27" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PNG</text>
+    {/* Scale badge */}
+    <g className="s2p-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="40.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">4K</text>
+    </g>
+  </svg>
+);
+
 // ── WebP → JPG converter icon (compatibility "✓" badge) ───────────────────
 export const IconWebpToJpg: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
