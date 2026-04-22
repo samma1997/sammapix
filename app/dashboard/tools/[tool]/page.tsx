@@ -13,6 +13,7 @@ import {
   IconWebpToPng,
   IconSvgToPng,
   IconGifToMp4,
+  IconIcoGenerator,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -40,6 +41,7 @@ const WebpToJpgClient = dynamic(() => import("@/components/tools/WebpToJpgClient
 const WebpToPngClient = dynamic(() => import("@/components/tools/WebpToPngClient"));
 const SvgToPngClient = dynamic(() => import("@/components/tools/SvgToPngClient"));
 const GifToMp4Client = dynamic(() => import("@/components/tools/GifToMp4Client"));
+const IcoGeneratorClient = dynamic(() => import("@/components/tools/IcoGeneratorClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -76,6 +78,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "webp-to-png": WebpToPngClient,
   "svg-to-png":  SvgToPngClient,
   "gif-to-mp4":  GifToMp4Client,
+  "ico-generator": IcoGeneratorClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -132,6 +135,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "webp-to-png": { Icon: IconWebpToPng, accent: "#8B5CF6" },
   "svg-to-png": { Icon: IconSvgToPng,  accent: "#F97316" },
   "gif-to-mp4": { Icon: IconGifToMp4,  accent: "#EC4899" },
+  "ico-generator": { Icon: IconIcoGenerator, accent: "#0EA5E9" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -270,6 +274,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download", desc: "MP4 where supported, WebM fallback otherwise. Individually or all as ZIP." },
     ],
     proTip: { text: "Keep the tab active during conversion — MediaRecorder throttles in background tabs.", linkLabel: "Compress more", linkHref: "/dashboard/tools/compress" },
+  },
+  "ico-generator": {
+    label: "Favicon Generator",
+    tagline: "Multi-size favicon.ico from PNG, SVG, JPG, WebP or GIF.",
+    steps: [
+      { title: "Upload source image", desc: "Square 512×512 PNG or SVG works best. JPG, WebP and GIF also supported." },
+      { title: "Pick sizes", desc: "16/32/48 recommended. Add 64/128/256 for HiDPI Windows shortcuts." },
+      { title: "Download favicon.ico", desc: "Drop it in your site root and add a single <link> tag to <head>." },
+    ],
+    proTip: { text: "Also ship a SVG favicon for modern browsers — smaller and perfect at any scale.", linkLabel: "SVG to PNG", linkHref: "/dashboard/tools/svg-to-png" },
   },
   "ai-rename": {
     label: "AI Rename",

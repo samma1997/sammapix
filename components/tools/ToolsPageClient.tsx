@@ -11,6 +11,7 @@ import {
   IconWebpToPng,
   IconSvgToPng,
   IconGifToMp4,
+  IconIcoGenerator,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -325,6 +326,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EC4899",
     badges: ["Free", "Video"],
     Icon: IconGifToMp4,
+    category: ["Optimize"],
+  },
+  {
+    name: "Favicon Generator",
+    href: "/tools/ico-generator",
+    tagline: "Build multi-size favicon.ico from PNG, SVG, JPG, WebP or GIF.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Dev"],
+    Icon: IconIcoGenerator,
     category: ["Optimize"],
   },
   {

@@ -92,6 +92,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "compress-images-without-losing-quality",
     ],
   },
+  "ico-generator": {
+    id: "ico-generator",
+    name: "Favicon Generator",
+    shortDesc: "Multi-size favicon.ico from any image",
+    slug: "/tools/ico-generator",
+    category: "optimize",
+    relatedTools: ["svg-to-png", "png-to-jpg", "compress", "resizepack"],
+    relatedBlogSlugs: [
+      "best-image-format-for-web-2026",
+    ],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",

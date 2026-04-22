@@ -180,6 +180,55 @@ export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── ICO generator icon (multi-size favicon stack) ────────────────────────
+export const IconIcoGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ico-size-16 {
+        0%, 25% { opacity: 0; transform: scale(0.6); }
+        35%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ico-size-32 {
+        0%, 45% { opacity: 0; transform: scale(0.6); }
+        55%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ico-size-48 {
+        0%, 65% { opacity: 0; transform: scale(0.6); }
+        75%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ico-star {
+        0%, 100% { transform: rotate(0deg); }
+        50%      { transform: rotate(72deg); }
+      }
+      .ico-16 { transform-origin: 10px 34px; animation: ico-size-16 2.8s ease-in-out infinite; }
+      .ico-32 { transform-origin: 22px 28px; animation: ico-size-32 2.8s ease-in-out infinite; }
+      .ico-48 { transform-origin: 36px 20px; animation: ico-size-48 2.8s ease-in-out infinite; }
+      .ico-star { transform-origin: 36px 20px; animation: ico-star 2.8s ease-in-out infinite; }
+    `}</style>
+    {/* Three squares stacked by size with star icon */}
+    <g className="ico-16" style={{ opacity: 0 }}>
+      <rect x="6" y="30" width="8" height="8" rx="1" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1"/>
+      <text x="10" y="36" fontSize="4" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">16</text>
+    </g>
+    <g className="ico-32" style={{ opacity: 0 }}>
+      <rect x="16" y="22" width="12" height="12" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="22" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">32</text>
+    </g>
+    <g className="ico-48" style={{ opacity: 0 }}>
+      <rect x="28" y="12" width="16" height="16" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+      <g className="ico-star">
+        <path d="M36 15 L37.5 18.5 L41.5 19 L38.5 21.5 L39.5 25.5 L36 23.5 L32.5 25.5 L33.5 21.5 L30.5 19 L34.5 18.5 Z" fill={accent}/>
+      </g>
+    </g>
+    {/* ICO badge */}
+    <rect x="4" y="40" width="22" height="7" rx="3.5" fill={accent}/>
+    <text x="15" y="45.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">ICO</text>
+  </svg>
+);
+
 // ── GIF → MP4 converter icon (film reel + size reduction) ────────────────
 export const IconGifToMp4: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
