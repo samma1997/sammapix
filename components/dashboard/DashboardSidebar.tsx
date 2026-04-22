@@ -53,7 +53,7 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
   developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "batchname", "remove-bg", "upscale"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale"],
 };
 
 // ─── Tool definitions ─────────────────────────────────────────────────────────
@@ -76,6 +76,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "GIF to MP4", slug: "gif-to-mp4", href: "/dashboard/tools/gif-to-mp4", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Favicon Generator", slug: "ico-generator", href: "/dashboard/tools/ico-generator", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Merge PDF", slug: "pdf-merge", href: "/dashboard/tools/pdf-merge", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Color Picker", slug: "color-picker", href: "/dashboard/tools/color-picker", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "HEIC Converter", slug: "heic", href: "/dashboard/tools/heic", icon: <Tv className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Batch Resize", slug: "resizepack", href: "/dashboard/tools/resizepack", icon: <Scissors className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Crop & Ratio", slug: "croproatio", href: "/dashboard/tools/croproatio", icon: <Copy className="h-4 w-4" strokeWidth={1.5} /> },
@@ -111,7 +112,7 @@ const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
   { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
-  { label: "Creative", slugs: ["filmlab", "stampit"] },
+  { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },
   { label: "Organize", slugs: ["exif", "twinhunt", "geosort", "travelmap", "cull", "batchname"] },
 ];
 

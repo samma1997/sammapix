@@ -180,6 +180,61 @@ export const IconWebpToPng: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Color Picker icon (eyedropper + palette swatches) ────────────────────
+export const IconColorPicker: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes cp-drop {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-1.5px); }
+      }
+      @keyframes cp-pulse-1 {
+        0%, 100% { opacity: 0.45; }
+        50%      { opacity: 1; }
+      }
+      @keyframes cp-pulse-2 {
+        0%, 100% { opacity: 0.4; }
+        60%      { opacity: 1; }
+      }
+      @keyframes cp-pulse-3 {
+        0%, 100% { opacity: 0.5; }
+        70%      { opacity: 1; }
+      }
+      @keyframes cp-pulse-4 {
+        0%, 100% { opacity: 0.45; }
+        80%      { opacity: 1; }
+      }
+      .cp-drop     { transform-origin: 16px 18px; animation: cp-drop 1.8s ease-in-out infinite; }
+      .cp-sw-1     { animation: cp-pulse-1 2.4s ease-in-out infinite; }
+      .cp-sw-2     { animation: cp-pulse-2 2.4s ease-in-out infinite; }
+      .cp-sw-3     { animation: cp-pulse-3 2.4s ease-in-out infinite; }
+      .cp-sw-4     { animation: cp-pulse-4 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* Eyedropper shape on the left */}
+    <g className="cp-drop">
+      <path d="M10 22 L22 10 L25 13 L13 25 L10 22 Z" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5" strokeLinejoin="round"/>
+      <circle cx="11.5" cy="23.5" r="2.5" fill={accent}/>
+      <line x1="22" y1="10" x2="25" y2="13" stroke={accent} strokeWidth="2" strokeLinecap="round"/>
+    </g>
+    {/* Palette swatches stack (2x2) */}
+    <g className="cp-sw-1">
+      <rect x="27" y="8" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.8"/>
+    </g>
+    <g className="cp-sw-2">
+      <rect x="37" y="8" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.5"/>
+    </g>
+    <g className="cp-sw-3">
+      <rect x="27" y="18" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.6"/>
+    </g>
+    <g className="cp-sw-4">
+      <rect x="37" y="18" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.3"/>
+    </g>
+    {/* HEX badge */}
+    <rect x="22" y="34" width="24" height="9" rx="4.5" fill={accent}/>
+    <text x="34" y="40.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">HEX · RGB</text>
+  </svg>
+);
+
 // ── PDF Merge icon (stacked pages merge into one) ────────────────────────
 export const IconPdfMerge: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

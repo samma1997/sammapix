@@ -14,6 +14,7 @@ import {
   IconGifToMp4,
   IconIcoGenerator,
   IconPdfMerge,
+  IconColorPicker,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -219,6 +220,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   // Creative
   { name: "Film Filters", href: "/tools/filmlab", tagline: "14 analog film presets.", accent: "#F59E0B", badge: "Free", Icon: IconFilmLab, category: "Creative" },
   { name: "Watermark", href: "/tools/stampit", tagline: "Batch watermark with text or logo.", accent: "#06B6D4", badge: "Free", Icon: IconStampIt, category: "Creative" },
+  { name: "Color Picker", href: "/tools/color-picker", tagline: "Eyedrop HEX/RGB/HSL + auto palette from any image.", accent: "#A855F7", badge: "Free", Icon: IconColorPicker, category: "Creative", isNew: true },
 
   // Organize
   { name: "EXIF Viewer", href: "/tools/exif", tagline: "Strip GPS and all metadata.", accent: "#EF4444", badge: "Free", Icon: IconEXIF, category: "Organize" },

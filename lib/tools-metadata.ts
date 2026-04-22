@@ -112,6 +112,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["jpg-to-pdf", "pdf-to-image", "compress", "blogdrop"],
     relatedBlogSlugs: [],
   },
+  "color-picker": {
+    id: "color-picker",
+    name: "Color Picker",
+    shortDesc: "Eyedrop HEX/RGB/HSL + auto palette",
+    slug: "/tools/color-picker",
+    category: "edit",
+    relatedTools: ["remove-bg", "filmlab", "stampit", "compress"],
+    relatedBlogSlugs: [],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",

@@ -15,6 +15,7 @@ import {
   IconGifToMp4,
   IconIcoGenerator,
   IconPdfMerge,
+  IconColorPicker,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -44,6 +45,7 @@ const SvgToPngClient = dynamic(() => import("@/components/tools/SvgToPngClient")
 const GifToMp4Client = dynamic(() => import("@/components/tools/GifToMp4Client"));
 const IcoGeneratorClient = dynamic(() => import("@/components/tools/IcoGeneratorClient"));
 const PdfMergeClient = dynamic(() => import("@/components/tools/PdfMergeClient"));
+const ColorPickerClient = dynamic(() => import("@/components/tools/ColorPickerClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
@@ -82,6 +84,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "gif-to-mp4":  GifToMp4Client,
   "ico-generator": IcoGeneratorClient,
   "pdf-merge":  PdfMergeClient,
+  "color-picker": ColorPickerClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
   exif:        ExifClient,
@@ -140,6 +143,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "gif-to-mp4": { Icon: IconGifToMp4,  accent: "#EC4899" },
   "ico-generator": { Icon: IconIcoGenerator, accent: "#0EA5E9" },
   "pdf-merge": { Icon: IconPdfMerge,   accent: "#DC2626" },
+  "color-picker": { Icon: IconColorPicker, accent: "#A855F7" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
@@ -298,6 +302,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Merge and download", desc: "One combined PDF built locally in your browser." },
     ],
     proTip: { text: "Need to turn images into a PDF first? Use JPG to PDF, then merge.", linkLabel: "JPG to PDF", linkHref: "/dashboard/tools/jpg-to-pdf" },
+  },
+  "color-picker": {
+    label: "Color Picker",
+    tagline: "Eyedrop HEX/RGB/HSL from any image + auto 6-color palette.",
+    steps: [
+      { title: "Upload an image", desc: "JPG, PNG, WebP or GIF up to 20 MB." },
+      { title: "Hover and click", desc: "Preview the color under your cursor, click to pick." },
+      { title: "Copy HEX/RGB/HSL", desc: "Toggle format, copy with one click. Palette auto-generated." },
+    ],
+    proTip: { text: "Pull brand colors from a logo? Remove the background first for cleaner samples.", linkLabel: "Remove background", linkHref: "/dashboard/tools/remove-bg" },
   },
   "ai-rename": {
     label: "AI Rename",

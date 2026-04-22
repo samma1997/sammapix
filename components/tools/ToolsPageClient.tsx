@@ -13,6 +13,7 @@ import {
   IconGifToMp4,
   IconIcoGenerator,
   IconPdfMerge,
+  IconColorPicker,
   IconAIRename,
   IconEXIF,
   IconFilmLab,
@@ -346,6 +347,15 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy"],
     Icon: IconPdfMerge,
     category: ["Optimize"],
+  },
+  {
+    name: "Color Picker",
+    href: "/tools/color-picker",
+    tagline: "Eyedrop HEX/RGB/HSL from any image + auto 6-color palette.",
+    accent: "#A855F7",
+    badges: ["Free", "Design"],
+    Icon: IconColorPicker,
+    category: ["Creative"],
   },
   {
     name: "HEIC Converter",
