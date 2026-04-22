@@ -43,7 +43,7 @@ const title = pageContent.match(/title:\s*\n?\s*"([^"]+)"/)?.[1] || slug;
 let body = `# ${title}\n\n`;
 body += transcript;
 body += `\n\n---\n\n*Originally published at [sammapix.com](https://www.sammapix.com/blog/${slug})*\n\n`;
-body += `**Try SammaPix free:** [27 browser-based image tools](https://www.sammapix.com) — compress, resize, convert, remove background, and more. Everything runs in your browser.\n`;
+body += `**Try SammaPix free:** [35 browser-based image tools](https://www.sammapix.com) — compress, resize, convert, remove background, and more. Everything runs in your browser.\n`;
 
 // Post to Medium
 const postRes = await fetch(`https://api.medium.com/v1/users/${user.id}/posts`, {

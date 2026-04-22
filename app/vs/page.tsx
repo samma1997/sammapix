@@ -388,7 +388,7 @@ export default function VsHubPage() {
           Ready to try the alternative?
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">
-          30 free tools. No signup for core features. 100% browser-based.
+          35 free tools. No signup for core features. 100% browser-based.
           Your images never leave your device.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

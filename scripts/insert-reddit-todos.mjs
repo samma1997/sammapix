@@ -10,7 +10,7 @@ const todos = [
     title: "\u{1F3AF} Posta su r/SideProject \u2014 post curioso Canvas API",
     description: "Post tecnico/curioso: Canvas API batte SaaS da $20/mese. 27 tool. Chiedi feedback distribuzione.",
     action_url: "https://www.reddit.com/r/SideProject/submit",
-    draft_text: `TIL browser Canvas API can compress images better than most $20/month SaaS tools. So I built 27 tools on top of it.
+    draft_text: `TIL browser Canvas API can compress images better than most $20/month SaaS tools. So I built 35 tools on top of it.
 
 I've been down a rabbit hole for 8 months.
 
@@ -26,7 +26,7 @@ Turns out \u2014 a LOT:
 - Passport photos for 140+ countries (with AI crop)
 - Batch watermarking, AI rename, duplicate detection...
 
-27 tools total. Everything runs in your browser. Nothing ever touches a server. Zero cookies, zero tracking.
+35 tools total. Everything runs in your browser. Nothing ever touches a server. Zero cookies, zero tracking.
 
 The weird part? I'm at ~5 organic visits/day after 300+ pages and 44 blog posts. TinyPNG does ONE thing and gets millions.
 
@@ -42,10 +42,10 @@ Link: https://sammapix.com`,
     title: "\u{1F4DD} Posta su r/buildinpublic \u2014 300 pagine, 5 visite",
     description: "Building in public: prodotto finito, distribuzione no. Metriche reali.",
     action_url: "https://www.reddit.com/r/buildinpublic/submit",
-    draft_text: `Month 8 of my side project: 300+ pages, 27 tools, 44 blog posts. 5 organic visits per day.
+    draft_text: `Month 8 of my side project: 300+ pages, 35 tools, 44 blog posts. 5 organic visits per day.
 
 Numbers that look impressive on paper but mean nothing without distribution:
-- 27 browser-based image tools (compress, resize, convert, remove bg, passport photo...)
+- 35 browser-based image tools (compress, resize, convert, remove bg, passport photo...)
 - 308 indexable pages (programmatic SEO: /compress-to/50kb, /resize-for/instagram, etc.)
 - 44 blog articles with original data
 - Performance score: 97-99 on Lighthouse
@@ -75,7 +75,7 @@ Anyone else stuck in this "great product, zero traction" phase?`,
     action_url: "https://www.reddit.com/r/SaaS/",
     draft_text: `Looking for feedback on my freemium image toolkit (SammaPix)
 
-Quick context: 27 browser-based image tools (compress, resize, convert formats, remove background, passport photos, etc.). Everything runs client-side \u2014 no server processing costs.
+Quick context: 35 browser-based image tools (compress, resize, convert formats, remove background, passport photos, etc.). Everything runs client-side \u2014 no server processing costs.
 
 The interesting part from a SaaS perspective: my infrastructure cost is ~$24/month (Vercel hosting + Neon DB). The AI features (Gemini Flash for image renaming/alt text) add ~$0.60/month. Total: under $25/month to run a 27-tool SaaS.
 

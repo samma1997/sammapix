@@ -119,7 +119,7 @@ for (const line of lines) {
 // Add CTA at the end
 markdown += `\n\n---\n\n`;
 markdown += `*Originally published at [sammapix.com](https://www.sammapix.com/blog/${slug})*\n\n`;
-markdown += `**Try it free:** [SammaPix](https://www.sammapix.com) — 27 browser-based image tools. Compress, resize, convert, remove background, and more. Everything runs in your browser, nothing uploaded.\n`;
+markdown += `**Try it free:** [SammaPix](https://www.sammapix.com) — 35 browser-based image tools. Compress, resize, convert, remove background, and more. Everything runs in your browser, nothing uploaded.\n`;
 
 // Determine tags based on slug content
 const tagMap = {

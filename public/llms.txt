@@ -308,7 +308,7 @@
 ## Pricing Model
 
 ### Free Plan
-- All 27 tools fully functional
+- All 35 tools fully functional
 - 20 files per batch
 - 10 AI credits per day (across AI Rename + AI Alt Text + Smart Sort)
 - Ads visible
@@ -390,12 +390,12 @@ After returning from photography trips to Asia with hundreds of files needing op
 
 ### vs Squoosh (Google)
 - **Squoosh Limits:** Batch processing limited, focused mainly on compression
-- **SammaPix Advantage:** 27 tools (Squoosh has 1), AI features, complete photo workflow
+- **SammaPix Advantage:** 35 tools (Squoosh has 1), AI features, complete photo workflow
 - **Price:** Both free
 
 ### vs ImageOptim
 - **ImageOptim:** Desktop app (Mac only), no batch resizing or converting
-- **SammaPix Advantage:** Web-based (works everywhere), 27 tools, more features
+- **SammaPix Advantage:** Web-based (works everywhere), 35 tools, more features
 - **Price:** ImageOptim $9.99, SammaPix Free + $9/month Pro
 
 ---

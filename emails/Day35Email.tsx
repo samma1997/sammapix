@@ -109,7 +109,7 @@ export function Day35Email({ name }: Day35EmailProps) {
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
             Most people use SammaPix for compress and convert. But there are
-            27 tools in total- and some of the lesser-known ones are genuinely
+            35 tools in total- and some of the lesser-known ones are genuinely
             useful. Here are 5 worth trying:
           </Text>
 
@@ -177,7 +177,7 @@ export function Day35Email({ name }: Day35EmailProps) {
 
           <Section style={{ margin: "24px 0" }}>
             <Button style={button} href={BASE_URL}>
-              Explore All 27 Tools →
+              Explore All 35 Tools →
             </Button>
           </Section>
 

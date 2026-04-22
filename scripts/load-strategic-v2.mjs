@@ -36,7 +36,7 @@ const POSTS = [
     subreddit: "saasbuild",
     url: "https://www.reddit.com/r/saasbuild/submit?type=TEXT",
     relevanceScore: 200,
-    draftComment: `TITLE: I built a privacy-first image toolkit with 27 browser-based tools — $0 revenue, $24/mo costs, 308 SEO pages. Here's what's working and what's not.
+    draftComment: `TITLE: I built a privacy-first image toolkit with 35 browser-based tools — $0 revenue, $24/mo costs, 308 SEO pages. Here's what's working and what's not.
 
 FLAIR: SaaS Journey
 
@@ -46,7 +46,7 @@ I'm a travel photographer and web developer from Italy. After every trip I deal 
 
 So I built [SammaPix](https://sammapix.com). Everything runs in your browser. Your photos never leave your device.
 
-**27 tools so far:**
+**35 tools so far:**
 - Compress (JPG, PNG, WebP, GIF — up to 90% smaller)
 - Convert between formats (WebP, HEIC, AVIF, JXL)
 - AI rename for SEO (Gemini Flash generates descriptive filenames)
@@ -116,7 +116,7 @@ What's your photo organization system?`,
     subreddit: "Entrepreneur",
     url: "https://www.reddit.com/r/Entrepreneur/submit?type=TEXT",
     relevanceScore: 198,
-    draftComment: `TITLE: I built a SaaS with 27 tools and my server costs are $24/month because everything runs in the user's browser
+    draftComment: `TITLE: I built a SaaS with 35 tools and my server costs are $24/month because everything runs in the user's browser
 
 ---
 
@@ -133,7 +133,7 @@ Even background removal (which typically requires a GPU server) runs client-side
 
 **The tradeoff:** Some operations are slower client-side (background removal takes ~10s on mobile vs ~1s on a GPU server). But users trade speed for privacy, and many are happy to make that trade.
 
-**27 tools, 308 SEO pages, $24/month total cost.** The browser-first approach isn't just a privacy feature — it's a business model advantage.
+**35 tools, 308 SEO pages, $24/month total cost.** The browser-first approach isn't just a privacy feature — it's a business model advantage.
 
 Has anyone else built products where the client does the heavy lifting? Curious about other "serverless-first" approaches.`,
   },
@@ -148,7 +148,7 @@ Has anyone else built products where the client does the heavy lifting? Curious 
     relevanceScore: 197,
     draftComment: `NOTA: Postare di SABATO con flair "Showoff Saturday" — r/webdev permette self-promo solo il sabato.
 
-TITLE: [Showoff Saturday] I built 27 image tools that run 100% in your browser — no uploads, all WASM/Canvas API
+TITLE: [Showoff Saturday] I built 35 image tools that run 100% in your browser — no uploads, all WASM/Canvas API
 
 ---
 

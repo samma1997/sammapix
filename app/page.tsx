@@ -27,7 +27,7 @@ const HomepageToolGrid = dynamic(
 export const metadata = {
   title: "SammaPix — Free AI Photo Tools, Image Compressor & Optimizer",
   description:
-    "Compress, rename with AI, resize, convert -- all in one pipeline. 27 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert -- all in one pipeline. 35 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -43,7 +43,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert -- all in one pipeline. 27 free tools. No uploads.",
+      "Compress, rename with AI, resize, convert -- all in one pipeline. 35 free tools. No uploads.",
     url: "https://www.sammapix.com",
     type: "website",
     images: [
@@ -63,7 +63,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What tools does SammaPix offer?",
     answer:
-      "SammaPix includes 27 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
+      "SammaPix includes 35 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
   },
   {
     question: "How does SammaPix protect my privacy?",
@@ -73,7 +73,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is SammaPix really free?",
     answer:
-      "Yes. All 27 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
+      "Yes. All 35 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
   },
   {
     question: "What image formats are supported?",
@@ -98,7 +98,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What's the difference between Free and Pro?",
     answer:
-      "Free tier includes all 27 tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.",
+      "Free tier includes all 35 tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.",
   },
   {
     question: "How does image compression work without losing quality?",
@@ -212,7 +212,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 27 free browser-based tools.",
+          "AI-powered photo and video workflow platform for content creators. 35 free browser-based tools.",
         sameAs: [
           "https://www.instagram.com/lucasammarco.web/",
           "https://lucasammarco.com",

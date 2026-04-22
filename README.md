@@ -1,5 +1,5 @@
 <h1 align="center">SammaPix</h1>
-<p align="center"><strong>27 free browser-based image tools — compress, convert, rename with AI, and more.</strong></p>
+<p align="center"><strong>35 free browser-based image tools — compress, convert, rename with AI, and more.</strong></p>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-black.svg" alt="MIT License"></a>
@@ -22,7 +22,7 @@ Built for content creators, developers, and anyone who works with images at scal
 **Key features:**
 
 - 100% client-side processing — images stay on your machine
-- 27 tools across four categories (optimize, AI, creative, organize)
+- 35 tools across four categories (optimize, AI, creative, organize)
 - AI-powered rename, alt text generation, and photo sorting via Google Gemini
 - Batch processing with ZIP download
 - HEIC, WebP, PDF, and video format support

@@ -77,7 +77,7 @@ for (const line of lines) {
 }
 
 markdown += `\n\n---\n\n*Originally published at [sammapix.com](https://www.sammapix.com/blog/${slug})*\n`;
-markdown += `\n**Try SammaPix free:** [sammapix.com](https://www.sammapix.com) — 27 browser-based image tools.\n`;
+markdown += `\n**Try SammaPix free:** [sammapix.com](https://www.sammapix.com) — 35 browser-based image tools.\n`;
 
 // Determine tags
 const tagNames = ["image-optimization", "webdev", "tools"];

@@ -257,7 +257,7 @@ export default function BestImageCompressionTools2026Page() {
         ]}
         summary={[
           "SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG all produce good compression quality - the real differences are in privacy, batch limits, and workflow breadth.",
-          "SammaPix is the only tool that processes entirely in-browser with no file uploads, no batch limits, and 27 tools beyond just compression.",
+          "SammaPix is the only tool that processes entirely in-browser with no file uploads, no batch limits, and 35 tools beyond just compression.",
           "TinyPNG excels at PNG compression but limits free users to 20 files per session and uploads every image to its servers.",
           "Squoosh by Google is excellent for single-file compression with side-by-side quality comparison, but has no batch processing.",
         ]}
