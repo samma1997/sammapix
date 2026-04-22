@@ -212,7 +212,7 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                { icon: Sparkles, text: "All 27 tools included" },
+                { icon: Sparkles, text: "All 35 tools included" },
                 { icon: FileStack, text: "20 files per batch" },
                 { icon: Zap, text: "10 AI renames / day" },
                 { icon: Zap, text: "10 AI alt text / day" },

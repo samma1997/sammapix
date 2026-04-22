@@ -7,7 +7,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
   description:
-    "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser, no uploads, no file limits, 27 tools free. See the full comparison.",
+    "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser, no uploads, no file limits, 35 tools free. See the full comparison.",
   alternates: {
     canonical: `${APP_URL}/blog/best-tinypng-alternative-2026`,
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
     description:
-      "Honest comparison of TinyPNG vs SammaPix: privacy, batch limits, pricing, formats, and 27 tools vs 1. Which free image compressor is actually better in 2026?",
+      "Honest comparison of TinyPNG vs SammaPix: privacy, batch limits, pricing, formats, and 35 tools vs 1. Which free image compressor is actually better in 2026?",
     creator: "@lucasammarco",
   },
 };
@@ -49,7 +49,7 @@ const articleSchema = {
   "@type": "Article",
   headline: POST_TITLE,
   description:
-    "Looking for a TinyPNG alternative? SammaPix compresses images in your browser with no uploads, no file limits, and 27 tools, all free. Honest 2026 comparison.",
+    "Looking for a TinyPNG alternative? SammaPix compresses images in your browser with no uploads, no file limits, and 35 tools, all free. Honest 2026 comparison.",
   url: POST_URL,
   datePublished: POST_DATE,
   dateModified: POST_DATE,
@@ -168,7 +168,7 @@ export default function BestTinyPNGAlternative2026Page() {
         summary={[
           "TinyPNG is a trusted, well-executed single-purpose compressor - but its free tier limits (20 images, 5 MB max) create friction for real workflows.",
           "SammaPix processes everything in your browser - your files never leave your device, with no batch cap and no file size ceiling on the free tier.",
-          "Beyond compression, SammaPix offers 27 tools including WebP conversion, EXIF removal, AI renaming, and batch resize in one workflow.",
+          "Beyond compression, SammaPix offers 35 tools including WebP conversion, EXIF removal, AI renaming, and batch resize in one workflow.",
           "TinyPNG's paid API at $39/year targets developers; SammaPix Pro at $9/month is designed for individual photographers and creators.",
         ]}
         heroImage={

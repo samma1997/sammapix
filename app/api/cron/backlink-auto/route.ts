@@ -164,7 +164,7 @@ How to use:
 3. Adjust settings
 4. Download — done
 
-All 27 tools: https://www.sammapix.com
+All 35 tools: https://www.sammapix.com
 Open source: https://github.com/samma1997/sammapix
 
 Related guide: ${blog.title}
@@ -270,7 +270,7 @@ https://www.sammapix.com/blog/${blog.slug}`;
     const ljBody = `<?xml version="1.0"?><methodCall><methodName>LJ.XMLRPC.postevent</methodName><params><param><value><struct>` +
       `<member><name>username</name><value><string>${LJ_USERNAME}</string></value></member>` +
       `<member><name>password</name><value><string>${LJ_PASSWORD}</string></value></member>` +
-      `<member><name>event</name><value><string>&lt;h2&gt;${tool.name} — Free Online Tool&lt;/h2&gt;&lt;p&gt;${tool.desc}&lt;/p&gt;&lt;p&gt;Try it free: &lt;a href=&quot;https://www.sammapix.com${tool.path}&quot;&gt;sammapix.com${tool.path}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;All 27 tools: &lt;a href=&quot;https://www.sammapix.com&quot;&gt;sammapix.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Related: &lt;a href=&quot;https://www.sammapix.com/blog/${blog.slug}&quot;&gt;${blog.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}&lt;/a&gt;&lt;/p&gt;</string></value></member>` +
+      `<member><name>event</name><value><string>&lt;h2&gt;${tool.name} — Free Online Tool&lt;/h2&gt;&lt;p&gt;${tool.desc}&lt;/p&gt;&lt;p&gt;Try it free: &lt;a href=&quot;https://www.sammapix.com${tool.path}&quot;&gt;sammapix.com${tool.path}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;All 35 tools: &lt;a href=&quot;https://www.sammapix.com&quot;&gt;sammapix.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Related: &lt;a href=&quot;https://www.sammapix.com/blog/${blog.slug}&quot;&gt;${blog.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}&lt;/a&gt;&lt;/p&gt;</string></value></member>` +
       `<member><name>subject</name><value><string>${tool.name} — Free Browser-Based Tool</string></value></member>` +
       `<member><name>lineendings</name><value><string>unix</string></value></member>` +
       `<member><name>year</name><value><int>${now.getFullYear()}</int></value></member>` +
@@ -323,7 +323,7 @@ Everything runs client-side. Images never leave your device.
 
 ## Links
 - **Free tool**: https://www.sammapix.com${tool.path}
-- **All 27 tools**: https://www.sammapix.com
+- **All 35 tools**: https://www.sammapix.com
 - **Open source**: https://github.com/samma1997/sammapix
 - **Related**: [${blog.title}](https://www.sammapix.com/blog/${blog.slug})`;
 
