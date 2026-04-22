@@ -32,6 +32,15 @@ const TOOL_PAGES = [
   { name: "Film Filters", path: "/tools/filmlab", desc: "Add vintage film effects to digital photos. Grain, color shifts, light leaks — all browser-based." },
   { name: "Watermark", path: "/tools/stampit", desc: "Add watermark to multiple photos at once. Protect your work with text or logo overlays." },
   { name: "Crop Ratio", path: "/tools/croproatio", desc: "Crop images to perfect aspect ratios. 1:1, 16:9, 4:3, custom — with visual guides." },
+  // ── 8 new tools (added 22/4/2026) ─────────────────────────────────
+  { name: "PNG to JPG", path: "/tools/png-to-jpg", desc: "Convert PNG to JPG with quality slider and background color for transparent PNGs. Batch up to 20 files in your browser." },
+  { name: "WebP to JPG", path: "/tools/webp-to-jpg", desc: "Convert WebP to JPG for email, print, and legacy CMS compatibility. Detects and warns about transparency loss." },
+  { name: "WebP to PNG", path: "/tools/webp-to-png", desc: "Convert WebP to PNG losslessly with transparency preserved. Warns if output bloats more than 4x source." },
+  { name: "SVG to PNG", path: "/tools/svg-to-png", desc: "Rasterize SVG vectors to PNG at 1x-4x scale or custom width up to 8192 px. Ideal for app icons, favicons, print." },
+  { name: "GIF to MP4", path: "/tools/gif-to-mp4", desc: "Convert animated GIFs to MP4 or WebM for 80-90% smaller files. ImageDecoder + MediaRecorder, browser-only." },
+  { name: "Favicon Generator", path: "/tools/ico-generator", desc: "Build multi-size favicon.ico from PNG/SVG/JPG/WebP with sizes 16, 32, 48, 64, 128, 256 pixels." },
+  { name: "PDF Merge", path: "/tools/pdf-merge", desc: "Combine multiple PDFs into one with drag-to-reorder. Runs locally via pdf-lib, no upload, perfect for sensitive documents." },
+  { name: "Color Picker", path: "/tools/color-picker", desc: "Eyedrop HEX, RGB, or HSL from any image plus auto-extract 6-color dominant palette via k-means clustering." },
 ];
 
 function getDayContent(dayIndex: number) {
