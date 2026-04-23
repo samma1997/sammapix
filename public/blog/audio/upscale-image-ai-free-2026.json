@@ -1,0 +1,197 @@
+[
+  {
+    "start": 0,
+    "end": 3.02,
+    "text": "What AI upscaling actually is"
+  },
+  {
+    "start": 3.02,
+    "end": 22.2,
+    "text": "Traditional upscaling, bicubic or Lanczos, multiplies pixel count by interpolati"
+  },
+  {
+    "start": 22.2,
+    "end": 50.09,
+    "text": "AI upscaling does something fundamentally different. It takes a low-resolution i"
+  },
+  {
+    "start": 50.09,
+    "end": 66.67,
+    "text": "The critical word is plausible. The sharp eyebrow hairs in your upscaled portrai"
+  },
+  {
+    "start": 66.67,
+    "end": 69.48,
+    "text": "How Real-ESRGAN and friends work"
+  },
+  {
+    "start": 69.48,
+    "end": 85.61,
+    "text": "The dominant family of upscalers in 2026 descends from Real-ESRGAN (2021) — an i"
+  },
+  {
+    "start": 85.61,
+    "end": 112.56,
+    "text": "Generator: a deep convolutional network that takes the low-res input and outputs"
+  },
+  {
+    "start": 112.56,
+    "end": 133.9,
+    "text": "Successor models in 2024-2026, SwinIR, 4x-UltraSharp, HAT, DRCT, use transformer"
+  },
+  {
+    "start": 133.9,
+    "end": 138.12,
+    "text": "2x vs 4x vs 8x: the real tradeoff"
+  },
+  {
+    "start": 138.12,
+    "end": 168.12,
+    "text": "The multiplier is pixel dimensions per axis. A 1000 by 1000 input becomes: at 2x"
+  },
+  {
+    "start": 168.12,
+    "end": 181.34,
+    "text": "Rule of thumb: start at 2x. Upscale the 2x result to 4x only if the 2x is not bi"
+  },
+  {
+    "start": 181.34,
+    "end": 184.44,
+    "text": "Benchmark: 5 source types tested"
+  },
+  {
+    "start": 184.44,
+    "end": 195.58,
+    "text": "We ran Real-ESRGAN-style upscaling on five common source types, scoring looks go"
+  },
+  {
+    "start": 195.58,
+    "end": 234.41,
+    "text": "Portrait face: 2x scores 5, 4x scores 4. Best case — models trained heavily on f"
+  },
+  {
+    "start": 234.41,
+    "end": 237.14,
+    "text": "When to use AI upscaling"
+  },
+  {
+    "start": 237.14,
+    "end": 274.82,
+    "text": "Legitimate use cases. Old family photos: low-res scans, Polaroids, early digital"
+  },
+  {
+    "start": 274.82,
+    "end": 300.62,
+    "text": "Where AI upscaling is wrong. Forensic or legal: hallucinated detail has no evide"
+  },
+  {
+    "start": 300.62,
+    "end": 303.12,
+    "text": "The hallucination problem"
+  },
+  {
+    "start": 303.12,
+    "end": 325.97,
+    "text": "Every AI upscaler hallucinates. The question is how much and how confidently. On"
+  },
+  {
+    "start": 325.97,
+    "end": 353.69,
+    "text": "A famous case: in 2020 a researcher upscaled a low-res photo of Barack Obama usi"
+  },
+  {
+    "start": 353.69,
+    "end": 357.55,
+    "text": "Free AI upscalers in 2026 compared"
+  },
+  {
+    "start": 357.55,
+    "end": 397.8,
+    "text": "SammaPix Upscale: web via Replicate backend, 10 per day free, Real-ESRGAN 2x sla"
+  },
+  {
+    "start": 397.8,
+    "end": 400.39,
+    "text": "The right upscaling workflow"
+  },
+  {
+    "start": 400.39,
+    "end": 451.32,
+    "text": "One: keep the source. Never upscale in-place. The upscaled file is always additi"
+  },
+  {
+    "start": 451.32,
+    "end": 455.21,
+    "text": "Hardware limits: browser, desktop, cloud"
+  },
+  {
+    "start": 455.21,
+    "end": 466.18,
+    "text": "Browser tools SammaPix, BigJPG: limited by per-request timeout and GPU cost, typ"
+  },
+  {
+    "start": 466.18,
+    "end": 475.54,
+    "text": "Desktop with GPU Upscayl, ComfyUI: 50 to 100 megapixels possible on RTX 3060 plu"
+  },
+  {
+    "start": 475.54,
+    "end": 486.41,
+    "text": "Cloud API Replicate, fal.ai: scale to 100 plus megapixels, pay per second of GPU"
+  },
+  {
+    "start": 486.41,
+    "end": 490.34,
+    "text": "A cheaper alternative: shoot at target resolution"
+  },
+  {
+    "start": 490.34,
+    "end": 514.22,
+    "text": "The overlooked option: before reaching for AI upscaling, check if you can just g"
+  },
+  {
+    "start": 514.22,
+    "end": 523.22,
+    "text": "If you are compressing images for web performance, the smart path is compress wi"
+  },
+  {
+    "start": 523.22,
+    "end": 527.09,
+    "text": "Free browser-based upscaler plus companion tools"
+  },
+  {
+    "start": 527.09,
+    "end": 548.45,
+    "text": "SammaPix ships four tools relevant to an upscaling workflow. Upscale for the AI "
+  },
+  {
+    "start": 548.45,
+    "end": 570.19,
+    "text": "Does AI upscaling actually work in 2026 or is it marketing? It works within limi"
+  },
+  {
+    "start": 570.19,
+    "end": 591,
+    "text": "What is the difference between 2x, 4x, and 8x AI upscaling? Multiplier of pixel "
+  },
+  {
+    "start": 591,
+    "end": 609.53,
+    "text": "Is there a good free AI upscaler in 2026? Yes. SammaPix Upscale runs Real-ESRGAN"
+  },
+  {
+    "start": 609.53,
+    "end": 626.76,
+    "text": "What maximum resolution can I upscale to? SammaPix Upscale caps at 16 megapixels"
+  },
+  {
+    "start": 626.76,
+    "end": 639.02,
+    "text": "When should I use AI upscaling vs shooting in higher resolution? Always prefer n"
+  },
+  {
+    "start": 639.02,
+    "end": 652.75,
+    "text": "Will AI upscaling damage my photos quality? Upscaling produces a new file — the "
+  }
+]
