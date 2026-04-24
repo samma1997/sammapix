@@ -12,8 +12,8 @@ export const maxDuration = 300;
 // (quota ufficiale). Con maxDuration 300s e 1.2s/req possiamo fare fino a
 // ~200 URL per run. Terremo un margine per stare sotto i 250s di lavoro
 // effettivo (lasciando tempo per auth + sitemap ping + insert DB).
-const MAX_CHECKS_PER_RUN = 180;
-const RATE_LIMIT_MS = 1200;
+const MAX_CHECKS_PER_RUN = 400;
+const RATE_LIMIT_MS = 400;
 // Rinfresca un URL solo se non controllato negli ultimi N giorni (salvo URL nuovi)
 const STALE_AFTER_DAYS = 7;
 
@@ -126,9 +126,11 @@ export async function GET(request: NextRequest) {
     let indexed = 0;
     let notIndexed = 0;
     let errors = 0;
+    let processed = 0;
 
     for (const page of toCheck) {
       if (Date.now() > deadline) break;
+      processed++;
 
       try {
         const data = await inspectUrl(headers, page);
@@ -231,7 +233,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       sitemapSubmitted: true,
       sitePagesTotal: allPages.length,
-      checkedThisRun: toCheck.length,
+      queuedThisRun: toCheck.length,
+      processedThisRun: processed,
       runIndexed: indexed,
       runNotIndexed: notIndexed,
       runErrors: errors,
