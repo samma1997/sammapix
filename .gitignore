@@ -179,3 +179,4 @@ YOUTUBE_VIDEOS_INDEX.md
 DEPLOY.md
 .vercel-deploy-trigger
 wrangler.toml
+*.old.tsx.bak
