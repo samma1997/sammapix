@@ -8,6 +8,13 @@
       "when": 1775290049778,
       "tag": "0000_rainy_madripoor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777056243532,
+      "tag": "0001_lyrical_sugar_man",
+      "breakpoints": true
     }
   ]
 }

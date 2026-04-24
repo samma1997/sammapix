@@ -234,3 +234,26 @@ export const growthDailyTodos = pgTable("growth_daily_todos", {
 
 export type DailyTodo = typeof growthDailyTodos.$inferSelect;
 export type NewDailyTodo = typeof growthDailyTodos.$inferInsert;
+
+// ── Stato indicizzazione reale (GSC URL Inspection API) ────────────────────
+// Una riga per ogni URL del sito: verdetto Google reale (PASS / PARTIAL /
+// NEUTRAL / FAIL) + coverage state dettagliato. Popolato dal cron
+// /api/cron/gsc-index-check, rinfrescato ogni 7 giorni per URL.
+export const growthIndexingStatus = pgTable("growth_indexing_status", {
+  id: serial("id").primaryKey(),
+  page: text("page").notNull().unique(), // path, es. "/tools/compress"
+  verdict: text("verdict"), // PASS / PARTIAL / NEUTRAL / FAIL
+  coverageState: text("coverage_state"), // "Submitted and indexed", "Crawled - currently not indexed", "Discovered - currently not indexed", "URL is unknown to Google", ...
+  robotsTxtState: text("robots_txt_state"), // ALLOWED / DISALLOWED
+  indexingState: text("indexing_state"), // INDEXING_ALLOWED / BLOCKED_BY_META_TAG / BLOCKED_BY_HTTP_HEADER / ...
+  pageFetchState: text("page_fetch_state"), // SUCCESSFUL / SOFT_404 / BLOCKED_ROBOTS_TXT / ...
+  googleCanonical: text("google_canonical"),
+  userCanonical: text("user_canonical"),
+  lastCrawlTime: timestamp("last_crawl_time"), // quando Googlebot l'ha crawlato
+  referringUrls: text("referring_urls"), // JSON array prime 5
+  lastCheckedAt: timestamp("last_checked_at").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type IndexingStatus = typeof growthIndexingStatus.$inferSelect;
+export type NewIndexingStatus = typeof growthIndexingStatus.$inferInsert;

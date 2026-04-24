@@ -1,18 +1,90 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleAuth } from "google-auth-library";
-import { POSTS } from "@/lib/blog-posts";
+import { db } from "@/lib/db";
+import { growthIndexingStatus, growthDailyTodos } from "@/lib/db/schema";
+import { sql } from "drizzle-orm";
+import { getAllSitePages } from "@/lib/growth/site-pages";
 
 export const runtime = "nodejs";
-export const maxDuration = 120;
+export const maxDuration = 300;
 
-// Pages that MUST be indexed
-const CRITICAL_PAGES = [
-  "/", "/tools/compress", "/tools/webp", "/tools/heic", "/tools/ai-rename",
-  "/tools/exif", "/tools/resizepack", "/tools/remove-bg", "/tools/passport-photo",
-  "/tools/croproatio", "/tools/stampit", "/tools/filmlab", "/tools/batchname",
-  "/tools/twinhunt", "/tools/geosort", "/tools/travelmap", "/tools/cull",
-  "/pricing", "/about", "/blog",
-];
+// Quanti URL al massimo check per singolo run. GSC URL Inspection ~ 2000/day
+// (quota ufficiale). Con maxDuration 300s e 1.2s/req possiamo fare fino a
+// ~200 URL per run. Terremo un margine per stare sotto i 250s di lavoro
+// effettivo (lasciando tempo per auth + sitemap ping + insert DB).
+const MAX_CHECKS_PER_RUN = 180;
+const RATE_LIMIT_MS = 1200;
+// Rinfresca un URL solo se non controllato negli ultimi N giorni (salvo URL nuovi)
+const STALE_AFTER_DAYS = 7;
+
+async function getStaleOrNewPages(allPages: string[]): Promise<string[]> {
+  const existing = await db
+    .select({
+      page: growthIndexingStatus.page,
+      lastCheckedAt: growthIndexingStatus.lastCheckedAt,
+    })
+    .from(growthIndexingStatus);
+
+  const byPage = new Map<string, Date | null>();
+  for (const row of existing) {
+    byPage.set(row.page, row.lastCheckedAt);
+  }
+
+  const threshold = new Date();
+  threshold.setDate(threshold.getDate() - STALE_AFTER_DAYS);
+
+  const never: string[] = [];
+  const stale: { page: string; lastCheckedAt: Date }[] = [];
+
+  for (const page of allPages) {
+    const last = byPage.get(page);
+    if (last === undefined) {
+      never.push(page);
+    } else if (!last || last < threshold) {
+      stale.push({ page, lastCheckedAt: last ?? new Date(0) });
+    }
+  }
+
+  // Priorità: mai controllati prima (nuovi), poi quelli più vecchi.
+  stale.sort((a, b) => a.lastCheckedAt.getTime() - b.lastCheckedAt.getTime());
+  return [...never, ...stale.map((s) => s.page)];
+}
+
+interface InspectionResult {
+  inspectionResult?: {
+    indexStatusResult?: {
+      verdict?: string;
+      coverageState?: string;
+      robotsTxtState?: string;
+      indexingState?: string;
+      pageFetchState?: string;
+      googleCanonical?: string;
+      userCanonical?: string;
+      lastCrawlTime?: string;
+      referringUrls?: string[];
+    };
+  };
+}
+
+async function inspectUrl(
+  headers: Record<string, string>,
+  page: string
+): Promise<InspectionResult | null> {
+  const url = `https://www.sammapix.com${page}`;
+  const r = await fetch(
+    "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+    {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        inspectionUrl: url,
+        siteUrl: "sc-domain:sammapix.com",
+      }),
+    }
+  );
+  if (!r.ok) return null;
+  return (await r.json()) as InspectionResult;
+}
 
 export async function GET(request: NextRequest) {
   const cronSecret = process.env.CRON_SECRET;
@@ -39,91 +111,136 @@ export async function GET(request: NextRequest) {
       "Content-Type": "application/json",
     };
 
-    // 1. Submit sitemap (ping Google every day)
+    // 1. Ping sitemap (daily)
     await fetch(
       "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Asammapix.com/sitemaps/https%3A%2F%2Fwww.sammapix.com%2Fsitemap.xml",
       { method: "PUT", headers }
     );
 
-    // 2. Check critical pages + recent blog posts
-    const recentBlogs = POSTS.slice(0, 10).map((p) => `/blog/${p.slug}`);
-    const allPages = [...CRITICAL_PAGES, ...recentBlogs];
-    // Deduplicate
-    const uniquePages = [...new Set(allPages)];
+    // 2. Lista pagine da controllare (TUTTE le pagine del sito)
+    const allPages = getAllSitePages();
+    const toCheck = (await getStaleOrNewPages(allPages)).slice(0, MAX_CHECKS_PER_RUN);
 
-    const indexed: string[] = [];
-    const notIndexed: string[] = [];
-    const errors: string[] = [];
+    const deadline = Date.now() + 250_000; // Stop a 250s per non sforare maxDuration
 
-    for (const page of uniquePages) {
+    let indexed = 0;
+    let notIndexed = 0;
+    let errors = 0;
+
+    for (const page of toCheck) {
+      if (Date.now() > deadline) break;
+
       try {
-        const url = `https://www.sammapix.com${page}`;
-        const r = await fetch(
-          "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
-          {
-            method: "POST",
-            headers,
-            body: JSON.stringify({
-              inspectionUrl: url,
-              siteUrl: "sc-domain:sammapix.com",
-            }),
-          }
-        );
-
-        if (!r.ok) {
-          errors.push(page);
+        const data = await inspectUrl(headers, page);
+        if (!data) {
+          errors++;
+          await new Promise((r) => setTimeout(r, RATE_LIMIT_MS));
           continue;
         }
 
-        const data = await r.json();
-        const verdict =
-          data.inspectionResult?.indexStatusResult?.verdict || "NEUTRAL";
+        const res = data.inspectionResult?.indexStatusResult ?? {};
+        const verdict = res.verdict ?? "NEUTRAL";
+        if (verdict === "PASS") indexed++;
+        else notIndexed++;
 
-        if (verdict === "PASS") {
-          indexed.push(page);
-        } else {
-          notIndexed.push(page);
-        }
-
-        // Rate limit: 1.2s between requests
-        await new Promise((resolve) => setTimeout(resolve, 1200));
+        await db
+          .insert(growthIndexingStatus)
+          .values({
+            page,
+            verdict,
+            coverageState: res.coverageState ?? null,
+            robotsTxtState: res.robotsTxtState ?? null,
+            indexingState: res.indexingState ?? null,
+            pageFetchState: res.pageFetchState ?? null,
+            googleCanonical: res.googleCanonical ?? null,
+            userCanonical: res.userCanonical ?? null,
+            lastCrawlTime: res.lastCrawlTime ? new Date(res.lastCrawlTime) : null,
+            referringUrls: res.referringUrls ? JSON.stringify(res.referringUrls.slice(0, 5)) : null,
+            lastCheckedAt: new Date(),
+          })
+          .onConflictDoUpdate({
+            target: growthIndexingStatus.page,
+            set: {
+              verdict,
+              coverageState: res.coverageState ?? null,
+              robotsTxtState: res.robotsTxtState ?? null,
+              indexingState: res.indexingState ?? null,
+              pageFetchState: res.pageFetchState ?? null,
+              googleCanonical: res.googleCanonical ?? null,
+              userCanonical: res.userCanonical ?? null,
+              lastCrawlTime: res.lastCrawlTime ? new Date(res.lastCrawlTime) : null,
+              referringUrls: res.referringUrls ? JSON.stringify(res.referringUrls.slice(0, 5)) : null,
+              lastCheckedAt: new Date(),
+            },
+          });
       } catch {
-        errors.push(page);
+        errors++;
       }
+
+      await new Promise((r) => setTimeout(r, RATE_LIMIT_MS));
     }
 
-    // 3. If there are not-indexed pages, create a TODO
-    if (notIndexed.length > 0) {
+    // 3. Aggregato complessivo post-check
+    const stats = await db.execute(sql`
+      SELECT
+        COUNT(*) FILTER (WHERE verdict = 'PASS') AS indexed_total,
+        COUNT(*) FILTER (WHERE verdict != 'PASS' AND verdict IS NOT NULL) AS not_indexed_total,
+        COUNT(*) AS tracked_total
+      FROM growth_indexing_status
+    `);
+    const row = stats.rows[0] as {
+      indexed_total: number;
+      not_indexed_total: number;
+      tracked_total: number;
+    };
+
+    // 4. Todo se ci sono non-indicizzate (solo se ne esistono molte e non già creato oggi)
+    if (Number(row.not_indexed_total) > 0) {
       try {
-        const { db } = await import("@/lib/db");
-        const { growthDailyTodos } = await import("@/lib/db/schema");
         const today = new Date().toISOString().slice(0, 10);
+        const existing = await db.execute(sql`
+          SELECT id FROM growth_daily_todos
+          WHERE date = ${today} AND type = 'gsc' LIMIT 1
+        `);
+        if (existing.rows.length === 0) {
+          const topNotIndexed = await db.execute(sql`
+            SELECT page, coverage_state FROM growth_indexing_status
+            WHERE verdict != 'PASS'
+            ORDER BY last_checked_at DESC
+            LIMIT 20
+          `);
+          const urlList = (topNotIndexed.rows as Array<{ page: string; coverage_state: string }>)
+            .map((r) => `https://www.sammapix.com${r.page} — ${r.coverage_state || "?"}`)
+            .join("\n");
 
-        const urlList = notIndexed
-          .map((p) => `https://www.sammapix.com${p}`)
-          .join("\n");
-
-        await db.insert(growthDailyTodos).values({
-          date: today,
-          type: "gsc",
-          title: `🚨 ${notIndexed.length} pagine NON indicizzate su Google`,
-          description:
-            "Queste pagine non sono visibili su Google. Apri Search Console → URL Inspection → incolla ogni URL → Request Indexing.",
-          actionUrl: "https://search.google.com/search-console",
-          draftText: urlList,
-          priority: 10,
-          status: "pending",
-        });
+          await db.insert(growthDailyTodos).values({
+            date: today,
+            type: "gsc",
+            title: `🚨 ${row.not_indexed_total} pagine NON indicizzate su Google`,
+            description:
+              "Pagine rilevate da URL Inspection API non indicizzate. Apri Search Console → URL Inspection → Request Indexing.",
+            actionUrl: "https://search.google.com/search-console",
+            draftText: urlList,
+            priority: 10,
+            status: "pending",
+          });
+        }
       } catch {}
     }
 
     return NextResponse.json({
       sitemapSubmitted: true,
-      checked: uniquePages.length,
-      indexed: indexed.length,
-      notIndexed: notIndexed.length,
-      notIndexedPages: notIndexed,
-      errors: errors.length,
+      sitePagesTotal: allPages.length,
+      checkedThisRun: toCheck.length,
+      runIndexed: indexed,
+      runNotIndexed: notIndexed,
+      runErrors: errors,
+      aggregate: {
+        tracked: Number(row.tracked_total),
+        indexed: Number(row.indexed_total),
+        notIndexed: Number(row.not_indexed_total),
+        unchecked: allPages.length - Number(row.tracked_total),
+      },
     });
   } catch (err) {
     console.error("[gsc-index-check]", err);
