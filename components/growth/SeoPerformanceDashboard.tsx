@@ -755,9 +755,22 @@ function fullPageUrl(page: string): string {
   return page.startsWith("http") ? page : `https://www.sammapix.com${page}`;
 }
 
+type NotIndexedFilter =
+  | "all"
+  | "tool"
+  | "blog"
+  | "vs"
+  | "convert"
+  | "resize"
+  | "compress-to"
+  | "optimize-for"
+  | "image-size"
+  | "passport"
+  | "page";
+
 function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
   const [copiedPage, setCopiedPage] = useState<string | null>(null);
-  const [filter, setFilter] = useState<"all" | "tool" | "blog" | "page">("all");
+  const [filter, setFilter] = useState<NotIndexedFilter>("all");
 
   const copyUrl = async (page: string) => {
     try {
@@ -779,15 +792,13 @@ function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
     [pages, filter]
   );
 
-  const counts = useMemo(
-    () => ({
-      all: pages.length,
-      tool: pages.filter((p) => p.category === "tool").length,
-      blog: pages.filter((p) => p.category === "blog").length,
-      page: pages.filter((p) => p.category === "page").length,
-    }),
-    [pages]
-  );
+  const counts = useMemo<Record<string, number>>(() => {
+    const byCategory = pages.reduce<Record<string, number>>((acc, p) => {
+      acc[p.category] = (acc[p.category] ?? 0) + 1;
+      return acc;
+    }, {});
+    return { all: pages.length, ...byCategory };
+  }, [pages]);
 
   if (pages.length === 0) {
     return (
@@ -832,10 +843,17 @@ function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
 
       {/* Category filters */}
       <div className="px-5 py-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center gap-1 flex-wrap">
-        <SmallFilter active={filter === "all"} onClick={() => setFilter("all")} label="Tutte" count={counts.all} />
-        <SmallFilter active={filter === "tool"} onClick={() => setFilter("tool")} label="Tool" count={counts.tool} accent="blue" />
-        <SmallFilter active={filter === "blog"} onClick={() => setFilter("blog")} label="Blog" count={counts.blog} accent="purple" />
-        <SmallFilter active={filter === "page"} onClick={() => setFilter("page")} label="Altre" count={counts.page} accent="amber" />
+        <SmallFilter active={filter === "all"} onClick={() => setFilter("all")} label="Tutte" count={counts.all ?? 0} />
+        {counts.tool > 0 && <SmallFilter active={filter === "tool"} onClick={() => setFilter("tool")} label="Tool" count={counts.tool} accent="blue" />}
+        {counts.blog > 0 && <SmallFilter active={filter === "blog"} onClick={() => setFilter("blog")} label="Blog" count={counts.blog} accent="purple" />}
+        {counts.vs > 0 && <SmallFilter active={filter === "vs"} onClick={() => setFilter("vs")} label="VS" count={counts.vs} accent="orange" />}
+        {counts.convert > 0 && <SmallFilter active={filter === "convert"} onClick={() => setFilter("convert")} label="Convert" count={counts.convert} accent="emerald" />}
+        {counts.resize > 0 && <SmallFilter active={filter === "resize"} onClick={() => setFilter("resize")} label="Resize" count={counts.resize} accent="amber" />}
+        {counts["compress-to"] > 0 && <SmallFilter active={filter === "compress-to"} onClick={() => setFilter("compress-to")} label="Compress" count={counts["compress-to"]} accent="blue" />}
+        {counts["optimize-for"] > 0 && <SmallFilter active={filter === "optimize-for"} onClick={() => setFilter("optimize-for")} label="Optimize" count={counts["optimize-for"]} accent="purple" />}
+        {counts["image-size"] > 0 && <SmallFilter active={filter === "image-size"} onClick={() => setFilter("image-size")} label="Sizes" count={counts["image-size"]} accent="emerald" />}
+        {counts.passport > 0 && <SmallFilter active={filter === "passport"} onClick={() => setFilter("passport")} label="Passport" count={counts.passport} accent="amber" />}
+        {counts.page > 0 && <SmallFilter active={filter === "page"} onClick={() => setFilter("page")} label="Altre" count={counts.page} accent="amber" />}
       </div>
 
       <div className="px-5 py-2.5 bg-[#F5F5F5] dark:bg-[#252525] border-b border-[#E5E5E5] dark:border-[#2A2A2A] text-[11px] text-[#525252] dark:text-[#A3A3A3]">
@@ -858,11 +876,16 @@ function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
                 {item.page}
               </a>
               <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                {item.category === "tool"
-                  ? "🛠 Tool"
-                  : item.category === "blog"
-                  ? "📰 Blog"
-                  : "📄 Pagina"}
+                {item.category === "tool" && "🛠 Tool"}
+                {item.category === "blog" && "📰 Blog"}
+                {item.category === "vs" && "⚖ Comparison"}
+                {item.category === "convert" && "🔄 Convert"}
+                {item.category === "resize" && "📐 Resize preset"}
+                {item.category === "compress-to" && "🗜 Compress target"}
+                {item.category === "optimize-for" && "⚡ Optimize platform"}
+                {item.category === "image-size" && "📏 Image size"}
+                {item.category === "passport" && "🛂 Passport photo"}
+                {item.category === "page" && "📄 Pagina"}
               </p>
             </div>
             <span className="shrink-0 text-[10px] tabular-nums text-right">
