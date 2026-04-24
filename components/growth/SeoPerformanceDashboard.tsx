@@ -125,6 +125,7 @@ interface IndexingMeta {
   indexed_confirmed: number;
   not_indexed_confirmed: number;
   never_checked: number;
+  recently_requested?: number;
 }
 
 export default function SeoPerformanceDashboard() {
@@ -785,11 +786,14 @@ type NotIndexedFilter =
   | "passport"
   | "page";
 
-function NotIndexedPanel({ pages, meta }: { pages: NotIndexedPage[]; meta: IndexingMeta | null }) {
+function NotIndexedPanel({ pages: pagesProp, meta }: { pages: NotIndexedPage[]; meta: IndexingMeta | null }) {
   const [copiedPage, setCopiedPage] = useState<string | null>(null);
   const [filter, setFilter] = useState<NotIndexedFilter>("all");
   const [indexNowBusy, setIndexNowBusy] = useState(false);
   const [indexNowMsg, setIndexNowMsg] = useState<string | null>(null);
+  const [dismissed, setDismissed] = useState<Set<string>>(new Set());
+  // Stabilizza pagine: rimuovi quelle appena marcate come "richieste"
+  const pages = pagesProp.filter((p) => !dismissed.has(p.page));
 
   const submitIndexNow = async () => {
     if (indexNowBusy) return;
@@ -828,6 +832,18 @@ function NotIndexedPanel({ pages, meta }: { pages: NotIndexedPage[]; meta: Index
   const copyAndOpen = async (page: string) => {
     await copyUrl(page);
     window.open(GSC_PROPERTY_URL, "_blank", "noopener");
+    // Segna come "richiesta": per 7gg non riapparirà nel panel dal backend,
+    // e intanto sparisce subito dalla UI
+    try {
+      await fetch("/api/growth/seo/mark-requested", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ page }),
+      });
+      setDismissed((prev) => new Set(prev).add(page));
+    } catch {
+      /* ignore — l'utente vede comunque GSC aperto */
+    }
   };
 
   const filteredPages = useMemo(
