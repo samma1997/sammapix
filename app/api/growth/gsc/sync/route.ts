@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { growthGscDaily } from "@/lib/db/schema";
 import { fetchGSCData } from "@/lib/growth/gsc-client";
-import { eq } from "drizzle-orm";
+import { inArray } from "drizzle-orm";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 function dateStr(daysAgo: number): string {
   const d = new Date();
@@ -17,6 +17,7 @@ async function doSync() {
   // Sync last 5 days (GSC has 2-3 day delay)
   const startDate = dateStr(5);
   const endDate = dateStr(0);
+  const dates = Array.from({ length: 6 }, (_, i) => dateStr(5 - i));
 
   const rows = await fetchGSCData(startDate, endDate);
 
@@ -24,14 +25,12 @@ async function doSync() {
     return { synced: 0, message: "No GSC data returned." };
   }
 
-  // Clear existing data for this range, then insert fresh
-  for (let d = 5; d >= 0; d--) {
-    await db.delete(growthGscDaily).where(eq(growthGscDaily.date, dateStr(d)));
-  }
+  await db.delete(growthGscDaily).where(inArray(growthGscDaily.date, dates));
 
+  const CHUNK = 500;
   let synced = 0;
-  for (const row of rows) {
-    await db.insert(growthGscDaily).values({
+  for (let i = 0; i < rows.length; i += CHUNK) {
+    const batch = rows.slice(i, i + CHUNK).map((row) => ({
       date: row.date,
       page: row.page,
       query: row.query,
@@ -39,8 +38,9 @@ async function doSync() {
       clicks: row.clicks,
       ctr: row.ctr,
       position: row.position,
-    });
-    synced++;
+    }));
+    await db.insert(growthGscDaily).values(batch);
+    synced += batch.length;
   }
 
   return { synced, startDate, endDate };

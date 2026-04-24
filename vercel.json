@@ -7,6 +7,12 @@
     "app/api/heic-preview/route.ts": {
       "maxDuration": 30,
       "memory": 1024
+    },
+    "app/api/growth/gsc/sync/route.ts": {
+      "maxDuration": 300
+    },
+    "app/api/cron/gsc-index-check/route.ts": {
+      "maxDuration": 300
     }
   },
   "crons": [
