@@ -276,12 +276,6 @@ export default function DashboardSidebar({
                 <Link href="/dashboard/growth/overview" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/overview")}>
                   <span className="h-4 w-4 shrink-0 text-center text-xs">📊</span> Overview
                 </Link>
-                <Link href="/dashboard/growth/analytics" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/analytics")}>
-                  <span className="h-4 w-4 shrink-0 text-center text-xs">📈</span> Analitiche
-                </Link>
-                <Link href="/dashboard/growth/seo" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/seo")}>
-                  <span className="h-4 w-4 shrink-0 text-center text-xs">🔍</span> Keywords
-                </Link>
               </div>
             )}
           </>
