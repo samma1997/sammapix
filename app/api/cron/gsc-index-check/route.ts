@@ -13,7 +13,10 @@ export const maxDuration = 300;
 // ~200 URL per run. Terremo un margine per stare sotto i 250s di lavoro
 // effettivo (lasciando tempo per auth + sitemap ping + insert DB).
 const MAX_CHECKS_PER_RUN = 400;
-const RATE_LIMIT_MS = 400;
+// GSC URL Inspection risponde in ~6-7s; parallelizziamo per massimizzare
+// il throughput entro maxDuration. Tenere CONCURRENCY sotto 8 per evitare
+// 429 quota rate limiting (GSC quota: 600 QPM documentata).
+const CONCURRENCY = 6;
 // Rinfresca un URL solo se non controllato negli ultimi N giorni (salvo URL nuovi)
 const STALE_AFTER_DAYS = 7;
 
@@ -128,16 +131,12 @@ export async function GET(request: NextRequest) {
     let errors = 0;
     let processed = 0;
 
-    for (const page of toCheck) {
-      if (Date.now() > deadline) break;
-      processed++;
-
+    async function processOne(page: string) {
       try {
         const data = await inspectUrl(headers, page);
         if (!data) {
           errors++;
-          await new Promise((r) => setTimeout(r, RATE_LIMIT_MS));
-          continue;
+          return;
         }
 
         const res = data.inspectionResult?.indexStatusResult ?? {};
@@ -145,41 +144,49 @@ export async function GET(request: NextRequest) {
         if (verdict === "PASS") indexed++;
         else notIndexed++;
 
+        const values = {
+          page,
+          verdict,
+          coverageState: res.coverageState ?? null,
+          robotsTxtState: res.robotsTxtState ?? null,
+          indexingState: res.indexingState ?? null,
+          pageFetchState: res.pageFetchState ?? null,
+          googleCanonical: res.googleCanonical ?? null,
+          userCanonical: res.userCanonical ?? null,
+          lastCrawlTime: res.lastCrawlTime ? new Date(res.lastCrawlTime) : null,
+          referringUrls: res.referringUrls ? JSON.stringify(res.referringUrls.slice(0, 5)) : null,
+          lastCheckedAt: new Date(),
+        };
+
         await db
           .insert(growthIndexingStatus)
-          .values({
-            page,
-            verdict,
-            coverageState: res.coverageState ?? null,
-            robotsTxtState: res.robotsTxtState ?? null,
-            indexingState: res.indexingState ?? null,
-            pageFetchState: res.pageFetchState ?? null,
-            googleCanonical: res.googleCanonical ?? null,
-            userCanonical: res.userCanonical ?? null,
-            lastCrawlTime: res.lastCrawlTime ? new Date(res.lastCrawlTime) : null,
-            referringUrls: res.referringUrls ? JSON.stringify(res.referringUrls.slice(0, 5)) : null,
-            lastCheckedAt: new Date(),
-          })
+          .values(values)
           .onConflictDoUpdate({
             target: growthIndexingStatus.page,
             set: {
-              verdict,
-              coverageState: res.coverageState ?? null,
-              robotsTxtState: res.robotsTxtState ?? null,
-              indexingState: res.indexingState ?? null,
-              pageFetchState: res.pageFetchState ?? null,
-              googleCanonical: res.googleCanonical ?? null,
-              userCanonical: res.userCanonical ?? null,
-              lastCrawlTime: res.lastCrawlTime ? new Date(res.lastCrawlTime) : null,
-              referringUrls: res.referringUrls ? JSON.stringify(res.referringUrls.slice(0, 5)) : null,
-              lastCheckedAt: new Date(),
+              verdict: values.verdict,
+              coverageState: values.coverageState,
+              robotsTxtState: values.robotsTxtState,
+              indexingState: values.indexingState,
+              pageFetchState: values.pageFetchState,
+              googleCanonical: values.googleCanonical,
+              userCanonical: values.userCanonical,
+              lastCrawlTime: values.lastCrawlTime,
+              referringUrls: values.referringUrls,
+              lastCheckedAt: values.lastCheckedAt,
             },
           });
       } catch {
         errors++;
       }
+    }
 
-      await new Promise((r) => setTimeout(r, RATE_LIMIT_MS));
+    // Processa a ondate da CONCURRENCY, stoppa appena superiamo il deadline
+    for (let i = 0; i < toCheck.length; i += CONCURRENCY) {
+      if (Date.now() > deadline) break;
+      const batch = toCheck.slice(i, i + CONCURRENCY);
+      processed += batch.length;
+      await Promise.allSettled(batch.map((page) => processOne(page)));
     }
 
     // 3. Aggregato complessivo post-check
