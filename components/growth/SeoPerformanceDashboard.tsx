@@ -788,6 +788,32 @@ type NotIndexedFilter =
 function NotIndexedPanel({ pages, meta }: { pages: NotIndexedPage[]; meta: IndexingMeta | null }) {
   const [copiedPage, setCopiedPage] = useState<string | null>(null);
   const [filter, setFilter] = useState<NotIndexedFilter>("all");
+  const [indexNowBusy, setIndexNowBusy] = useState(false);
+  const [indexNowMsg, setIndexNowMsg] = useState<string | null>(null);
+
+  const submitIndexNow = async () => {
+    if (indexNowBusy) return;
+    setIndexNowBusy(true);
+    setIndexNowMsg(null);
+    try {
+      const res = await fetch("/api/growth/seo/indexnow", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: "not_indexed" }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setIndexNowMsg(`✓ ${data.submitted} URL notificati a Bing/Yandex (status ${data.status})`);
+      } else {
+        setIndexNowMsg(`✗ Errore: ${data.error ?? `status ${data.status}`}`);
+      }
+    } catch (err) {
+      setIndexNowMsg(`✗ ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setIndexNowBusy(false);
+      setTimeout(() => setIndexNowMsg(null), 8000);
+    }
+  };
 
   const copyUrl = async (page: string) => {
     try {
@@ -848,15 +874,30 @@ function NotIndexedPanel({ pages, meta }: { pages: NotIndexedPage[]; meta: Index
             Stato reale via GSC URL Inspection API · verdetto non-PASS oppure pagine senza dati
           </p>
         </div>
-        <a
-          href={GSC_PROPERTY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[11px] text-[#6366F1] hover:opacity-80 font-semibold shrink-0"
-        >
-          Apri GSC →
-        </a>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={submitIndexNow}
+            disabled={indexNowBusy || pages.length === 0}
+            className="px-2.5 py-1 rounded-md bg-[#6366F1] text-white text-[11px] font-semibold hover:bg-[#5558E3] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            title="Notifica Bing/Yandex/Seznam di queste pagine tramite IndexNow API"
+          >
+            {indexNowBusy ? "Invio..." : `Notifica IndexNow (${pages.length})`}
+          </button>
+          <a
+            href={GSC_PROPERTY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] text-[#6366F1] hover:opacity-80 font-semibold"
+          >
+            Apri GSC →
+          </a>
+        </div>
       </div>
+      {indexNowMsg && (
+        <div className="px-5 py-2 text-[11px] border-b border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#252525]">
+          {indexNowMsg}
+        </div>
+      )}
 
       {meta && (
         <div className="px-5 py-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A] grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px]">
