@@ -209,7 +209,8 @@ export async function GET() {
 
     const indexingRows = await db.execute(sql`
       SELECT page, verdict, coverage_state, indexing_state, robots_txt_state,
-             page_fetch_state, last_crawl_time, last_checked_at
+             page_fetch_state, last_crawl_time, last_checked_at,
+             indexing_requested_at
       FROM growth_indexing_status
     `);
 
@@ -222,47 +223,52 @@ export async function GET() {
       page_fetch_state: string | null;
       last_crawl_time: Date | null;
       last_checked_at: Date | null;
+      indexing_requested_at: Date | null;
     };
     const indexingMap = new Map<string, IndexingRow>();
     for (const row of indexingRows.rows as IndexingRow[]) {
       indexingMap.set(row.page, row);
     }
 
+    // Cooldown 7 giorni: pagine per cui è stato cliccato "Indicizza" non
+    // riappaiono nel panel per 7 giorni (tempo per Google di processarle).
+    const cooldownMs = 7 * 24 * 60 * 60 * 1000;
+    const cooldownThreshold = Date.now() - cooldownMs;
+    let recentlyRequested = 0;
+
     const not_indexed_pages = ALL_SITE_PAGES
       .map((page) => {
         const idx = indexingMap.get(page);
-        const impressions30d = pageImpressionsMap.get(page) ?? 0;
-        if (idx) {
-          // Dato reale disponibile
-          const isIndexed = idx.verdict === "PASS";
-          return {
-            page,
-            category: categorizePage(page),
-            impressions_30d: impressions30d,
-            verdict: idx.verdict,
-            coverage_state: idx.coverage_state,
-            indexing_state: idx.indexing_state,
-            last_crawl_time: idx.last_crawl_time,
-            last_checked_at: idx.last_checked_at,
-            source: "gsc_api" as const,
-            is_indexed: isIndexed,
-          };
+        if (!idx) {
+          // MAI controllata: non mostriamo (dati ambigui, meglio che il
+          // cron la checki alla prossima run).
+          return null;
         }
-        // Fallback: nessun dato URL Inspection, usiamo proxy impression
+        if (idx.verdict === "PASS") return null; // indicizzata → nascondi
+
+        // Richiesta manuale recente → nascondi temporaneamente
+        if (idx.indexing_requested_at) {
+          const t = new Date(idx.indexing_requested_at).getTime();
+          if (t > cooldownThreshold) {
+            recentlyRequested++;
+            return null;
+          }
+        }
+
         return {
           page,
           category: categorizePage(page),
-          impressions_30d: impressions30d,
-          verdict: null,
-          coverage_state: impressions30d > 0 ? "Assumed indexed (has impressions)" : "Unknown (never checked)",
-          indexing_state: null,
-          last_crawl_time: null,
-          last_checked_at: null,
-          source: "impression_proxy" as const,
-          is_indexed: impressions30d > 0,
+          impressions_30d: pageImpressionsMap.get(page) ?? 0,
+          verdict: idx.verdict,
+          coverage_state: idx.coverage_state,
+          indexing_state: idx.indexing_state,
+          last_crawl_time: idx.last_crawl_time,
+          last_checked_at: idx.last_checked_at,
+          source: "gsc_api" as const,
+          is_indexed: false,
         };
       })
-      .filter((p) => !p.is_indexed);
+      .filter((p): p is NonNullable<typeof p> => p !== null);
 
     // Metriche aggregate
     const tracked = indexingMap.size;
@@ -278,6 +284,7 @@ export async function GET() {
         indexed_confirmed: trackedIndexed,
         not_indexed_confirmed: tracked - trackedIndexed,
         never_checked: ALL_SITE_PAGES.length - tracked,
+        recently_requested: recentlyRequested,
       },
     });
   } catch (err) {

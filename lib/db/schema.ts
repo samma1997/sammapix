@@ -252,6 +252,7 @@ export const growthIndexingStatus = pgTable("growth_indexing_status", {
   lastCrawlTime: timestamp("last_crawl_time"), // quando Googlebot l'ha crawlato
   referringUrls: text("referring_urls"), // JSON array prime 5
   lastCheckedAt: timestamp("last_checked_at").defaultNow(),
+  indexingRequestedAt: timestamp("indexing_requested_at"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
