@@ -4,11 +4,7 @@ import { checkGrowthAuth } from "@/lib/growth/auth";
 import { sql } from "drizzle-orm";
 import { TARGET_KEYWORDS } from "@/lib/growth/keyword-targets";
 import { POSTS } from "@/lib/blog-posts";
-import { getAllPlatforms } from "@/lib/resize-platforms";
-import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
-import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
-import { getAllTargets } from "@/lib/compress-targets";
-import { getAllPassportPresets } from "@/lib/passport-presets";
+import { getAllSitePages, categorizePage } from "@/lib/growth/site-pages";
 
 export const runtime = "nodejs";
 
@@ -205,95 +201,84 @@ export async function GET() {
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 20);
 
-    // ── Pagine da indicizzare: TUTTE le pagine del sito senza impressioni ──
-    // Lista completa che matcha la sitemap (no hardcoded manuale).
-    const STATIC_PAGES = [
-      "/", "/tools", "/blog", "/pricing", "/about", "/privacy", "/glossary",
-      "/portfolio", "/convert", "/compress-to", "/resize", "/optimize-for",
-      "/image-size", "/passport-photo", "/vs",
-    ];
+    // ── Pagine da indicizzare: dati reali da URL Inspection API ────────────
+    // Fonte primaria: tabella growth_indexing_status (popolata dal cron
+    // gsc-index-check). Se una pagina non è ancora stata controllata, usiamo
+    // il proxy "0 impression in 30 giorni" come fallback.
+    const ALL_SITE_PAGES = getAllSitePages();
 
-    const TOOL_PAGES = [
-      "/tools/compress", "/tools/webp", "/tools/heic", "/tools/ai-rename",
-      "/tools/exif", "/tools/resizepack", "/tools/remove-bg", "/tools/passport-photo",
-      "/tools/croproatio", "/tools/stampit", "/tools/filmlab", "/tools/batchname",
-      "/tools/twinhunt", "/tools/geosort", "/tools/travelmap", "/tools/cull",
-      "/tools/alt-text", "/tools/image-to-text", "/tools/transcribe", "/tools/smartsort",
-      "/tools/ai-organize", "/tools/weblift", "/tools/blogdrop", "/tools/upscale",
-      "/tools/jxl", "/tools/jpg-to-pdf", "/tools/pdf-to-image",
-      "/tools/png-to-jpg", "/tools/webp-to-jpg", "/tools/webp-to-png",
-      "/tools/svg-to-png", "/tools/gif-to-mp4", "/tools/ico-generator",
-      "/tools/pdf-merge", "/tools/color-picker",
-    ];
+    const indexingRows = await db.execute(sql`
+      SELECT page, verdict, coverage_state, indexing_state, robots_txt_state,
+             page_fetch_state, last_crawl_time, last_checked_at
+      FROM growth_indexing_status
+    `);
 
-    const VS_PAGES = [
-      "/vs/tinypng", "/vs/squoosh", "/vs/imageoptim", "/vs/compressor-io",
-      "/vs/iloveimg", "/vs/vsco", "/vs/filterpixel", "/vs/shortpixel",
-      "/vs/canva", "/vs/photopea", "/vs/birme", "/vs/optimizilla",
-    ];
-
-    const CONVERT_PAGES = [
-      "/convert/heic-to-jpg", "/convert/heic-to-png", "/convert/png-to-webp",
-      "/convert/jpg-to-webp", "/convert/jpeg-to-webp", "/convert/webp-to-jpg",
-      "/convert/png-to-jpg", "/convert/gif-to-webp", "/convert/webp-to-png",
-      "/convert/avif-to-jpg", "/convert/tiff-to-jpg", "/convert/svg-to-png",
-      "/convert/bmp-to-jpg", "/convert/jpg-to-png", "/convert/png-to-ico",
-      "/convert/webp-to-gif", "/convert/raw-to-jpg", "/convert/tiff-to-png",
-      "/convert/bmp-to-png", "/convert/gif-to-jpg", "/convert/avif-to-png",
-      "/convert/heic-to-webp", "/convert/svg-to-jpg", "/convert/jxl-to-jpg",
-      "/convert/jxl-to-png", "/convert/jxl-to-webp", "/convert/jpg-to-jxl",
-      "/convert/png-to-jxl", "/convert/webp-to-jxl",
-    ];
-
-    const BLOG_PATHS = POSTS.map((p) => `/blog/${p.slug}`);
-
-    // Programmatic pages
-    const resizePaths = getAllPlatforms().map((p) => `/resize/${p.slug}`);
-    const compressPaths = getAllTargets().map((t) => `/compress-to/${t.slug}`);
-    const optimizePaths = getAllOptimizePlatforms().map((p) => `/optimize-for/${p.slug}`);
-    const imageSizePaths = getAllImageSizePlatforms().map((p) => `/image-size/${p.slug}`);
-    const passportPaths = getAllPassportPresets().map((p) => `/passport-photo/${p.country}`);
-
-    const ALL_IMPORTANT_PAGES = Array.from(
-      new Set([
-        ...STATIC_PAGES,
-        ...TOOL_PAGES,
-        ...VS_PAGES,
-        ...CONVERT_PAGES,
-        ...BLOG_PATHS,
-        ...resizePaths,
-        ...compressPaths,
-        ...optimizePaths,
-        ...imageSizePaths,
-        ...passportPaths,
-      ])
-    );
-
-    function categorize(page: string): string {
-      if (page.startsWith("/blog/")) return "blog";
-      if (page.startsWith("/tools/")) return "tool";
-      if (page.startsWith("/vs/")) return "vs";
-      if (page.startsWith("/convert/")) return "convert";
-      if (page.startsWith("/resize/")) return "resize";
-      if (page.startsWith("/compress-to/")) return "compress-to";
-      if (page.startsWith("/optimize-for/")) return "optimize-for";
-      if (page.startsWith("/image-size/")) return "image-size";
-      if (page.startsWith("/passport-photo/")) return "passport";
-      return "page";
+    type IndexingRow = {
+      page: string;
+      verdict: string | null;
+      coverage_state: string | null;
+      indexing_state: string | null;
+      robots_txt_state: string | null;
+      page_fetch_state: string | null;
+      last_crawl_time: Date | null;
+      last_checked_at: Date | null;
+    };
+    const indexingMap = new Map<string, IndexingRow>();
+    for (const row of indexingRows.rows as IndexingRow[]) {
+      indexingMap.set(row.page, row);
     }
 
-    const not_indexed_pages = ALL_IMPORTANT_PAGES
-      .filter((page) => (pageImpressionsMap.get(page) ?? 0) === 0)
-      .map((page) => ({
-        page,
-        category: categorize(page),
-        impressions_30d: 0,
-      }));
+    const not_indexed_pages = ALL_SITE_PAGES
+      .map((page) => {
+        const idx = indexingMap.get(page);
+        const impressions30d = pageImpressionsMap.get(page) ?? 0;
+        if (idx) {
+          // Dato reale disponibile
+          const isIndexed = idx.verdict === "PASS";
+          return {
+            page,
+            category: categorizePage(page),
+            impressions_30d: impressions30d,
+            verdict: idx.verdict,
+            coverage_state: idx.coverage_state,
+            indexing_state: idx.indexing_state,
+            last_crawl_time: idx.last_crawl_time,
+            last_checked_at: idx.last_checked_at,
+            source: "gsc_api" as const,
+            is_indexed: isIndexed,
+          };
+        }
+        // Fallback: nessun dato URL Inspection, usiamo proxy impression
+        return {
+          page,
+          category: categorizePage(page),
+          impressions_30d: impressions30d,
+          verdict: null,
+          coverage_state: impressions30d > 0 ? "Assumed indexed (has impressions)" : "Unknown (never checked)",
+          indexing_state: null,
+          last_crawl_time: null,
+          last_checked_at: null,
+          source: "impression_proxy" as const,
+          is_indexed: impressions30d > 0,
+        };
+      })
+      .filter((p) => !p.is_indexed);
+
+    // Metriche aggregate
+    const tracked = indexingMap.size;
+    const trackedIndexed = Array.from(indexingMap.values()).filter((v) => v.verdict === "PASS").length;
 
     return NextResponse.json({
       keyword_trends,
       discovered,
       not_indexed_pages,
+      indexing_meta: {
+        total_site_pages: ALL_SITE_PAGES.length,
+        tracked_by_gsc_api: tracked,
+        indexed_confirmed: trackedIndexed,
+        not_indexed_confirmed: tracked - trackedIndexed,
+        never_checked: ALL_SITE_PAGES.length - tracked,
+      },
     });
   } catch (err) {
     console.error("[growth/seo/trends]", err);

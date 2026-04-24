@@ -62,6 +62,13 @@ interface NotIndexedPage {
   page: string;
   category: string;
   impressions_30d: number;
+  verdict?: string | null;
+  coverage_state?: string | null;
+  indexing_state?: string | null;
+  last_crawl_time?: string | null;
+  last_checked_at?: string | null;
+  source?: "gsc_api" | "impression_proxy";
+  is_indexed?: boolean;
 }
 
 /* ─── Utils ───────────────────────────────────────────────────────── */
@@ -112,11 +119,20 @@ const ACTION_META: Record<string, { label: string; color: string }> = {
 
 /* ─── Main component ──────────────────────────────────────────────── */
 
+interface IndexingMeta {
+  total_site_pages: number;
+  tracked_by_gsc_api: number;
+  indexed_confirmed: number;
+  not_indexed_confirmed: number;
+  never_checked: number;
+}
+
 export default function SeoPerformanceDashboard() {
   const [summary, setSummary] = useState<SeoSummary | null>(null);
   const [trends, setTrends] = useState<KeywordTrend[]>([]);
   const [discovered, setDiscovered] = useState<DiscoveredKw[]>([]);
   const [notIndexedPages, setNotIndexedPages] = useState<NotIndexedPage[]>([]);
+  const [indexingMeta, setIndexingMeta] = useState<IndexingMeta | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
@@ -131,6 +147,7 @@ export default function SeoPerformanceDashboard() {
         setTrends(t.keyword_trends || []);
         setDiscovered(t.discovered || []);
         setNotIndexedPages(t.not_indexed_pages || []);
+        setIndexingMeta(t.indexing_meta || null);
       }
       setLastRefresh(new Date());
     } catch (err) {
@@ -212,7 +229,7 @@ export default function SeoPerformanceDashboard() {
       </div>
 
       {/* Row 4: Not-indexed panel */}
-      <NotIndexedPanel pages={notIndexedPages} />
+      <NotIndexedPanel pages={notIndexedPages} meta={indexingMeta} />
 
       {/* Live footer */}
       <div className="flex items-center justify-between text-[10px] text-[#A3A3A3] dark:text-[#737373] px-1">
@@ -768,7 +785,7 @@ type NotIndexedFilter =
   | "passport"
   | "page";
 
-function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
+function NotIndexedPanel({ pages, meta }: { pages: NotIndexedPage[]; meta: IndexingMeta | null }) {
   const [copiedPage, setCopiedPage] = useState<string | null>(null);
   const [filter, setFilter] = useState<NotIndexedFilter>("all");
 
@@ -828,7 +845,7 @@ function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
             </span>
           </h3>
           <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] mt-0.5">
-            Pagine del sito senza impressioni Google negli ultimi 30 giorni · potrebbero non essere indicizzate
+            Stato reale via GSC URL Inspection API · verdetto non-PASS oppure pagine senza dati
           </p>
         </div>
         <a
@@ -840,6 +857,27 @@ function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
           Apri GSC →
         </a>
       </div>
+
+      {meta && (
+        <div className="px-5 py-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A] grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px]">
+          <div>
+            <span className="text-[#A3A3A3] dark:text-[#737373]">Totale sito</span>
+            <strong className="ml-1 text-[#171717] dark:text-[#E5E5E5]">{meta.total_site_pages}</strong>
+          </div>
+          <div>
+            <span className="text-[#A3A3A3] dark:text-[#737373]">Indicizzate</span>
+            <strong className="ml-1 text-emerald-600 dark:text-emerald-400">{meta.indexed_confirmed}</strong>
+          </div>
+          <div>
+            <span className="text-[#A3A3A3] dark:text-[#737373]">NON indicizzate</span>
+            <strong className="ml-1 text-red-600 dark:text-red-400">{meta.not_indexed_confirmed}</strong>
+          </div>
+          <div>
+            <span className="text-[#A3A3A3] dark:text-[#737373]">Mai controllate</span>
+            <strong className="ml-1 text-amber-600 dark:text-amber-400">{meta.never_checked}</strong>
+          </div>
+        </div>
+      )}
 
       {/* Category filters */}
       <div className="px-5 py-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center gap-1 flex-wrap">
@@ -875,17 +913,31 @@ function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
               >
                 {item.page}
               </a>
-              <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
-                {item.category === "tool" && "🛠 Tool"}
-                {item.category === "blog" && "📰 Blog"}
-                {item.category === "vs" && "⚖ Comparison"}
-                {item.category === "convert" && "🔄 Convert"}
-                {item.category === "resize" && "📐 Resize preset"}
-                {item.category === "compress-to" && "🗜 Compress target"}
-                {item.category === "optimize-for" && "⚡ Optimize platform"}
-                {item.category === "image-size" && "📏 Image size"}
-                {item.category === "passport" && "🛂 Passport photo"}
-                {item.category === "page" && "📄 Pagina"}
+              <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] flex items-center gap-1.5 flex-wrap">
+                <span>
+                  {item.category === "tool" && "🛠 Tool"}
+                  {item.category === "blog" && "📰 Blog"}
+                  {item.category === "vs" && "⚖ Comparison"}
+                  {item.category === "convert" && "🔄 Convert"}
+                  {item.category === "resize" && "📐 Resize preset"}
+                  {item.category === "compress-to" && "🗜 Compress target"}
+                  {item.category === "optimize-for" && "⚡ Optimize platform"}
+                  {item.category === "image-size" && "📏 Image size"}
+                  {item.category === "passport" && "🛂 Passport photo"}
+                  {item.category === "page" && "📄 Pagina"}
+                </span>
+                {item.coverage_state && (
+                  <span
+                    className={`px-1 py-0.5 rounded text-[9px] font-semibold ${
+                      item.source === "gsc_api"
+                        ? "bg-red-50 text-red-700 dark:bg-red-400/15 dark:text-red-300"
+                        : "bg-amber-50 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300"
+                    }`}
+                    title={`Fonte: ${item.source === "gsc_api" ? "GSC URL Inspection API" : "Proxy: 0 impressioni 30gg"}`}
+                  >
+                    {item.coverage_state}
+                  </span>
+                )}
               </p>
             </div>
             <span className="shrink-0 text-[10px] tabular-nums text-right">
