@@ -58,6 +58,12 @@ interface DiscoveredKw {
   position: number;
 }
 
+interface NotIndexedPage {
+  page: string;
+  category: string;
+  impressions_30d: number;
+}
+
 /* ─── Utils ───────────────────────────────────────────────────────── */
 
 function fmt(n: number): string {
@@ -110,6 +116,7 @@ export default function SeoPerformanceDashboard() {
   const [summary, setSummary] = useState<SeoSummary | null>(null);
   const [trends, setTrends] = useState<KeywordTrend[]>([]);
   const [discovered, setDiscovered] = useState<DiscoveredKw[]>([]);
+  const [notIndexedPages, setNotIndexedPages] = useState<NotIndexedPage[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
@@ -123,6 +130,7 @@ export default function SeoPerformanceDashboard() {
       if (!t.error) {
         setTrends(t.keyword_trends || []);
         setDiscovered(t.discovered || []);
+        setNotIndexedPages(t.not_indexed_pages || []);
       }
       setLastRefresh(new Date());
     } catch (err) {
@@ -204,7 +212,7 @@ export default function SeoPerformanceDashboard() {
       </div>
 
       {/* Row 4: Not-indexed panel */}
-      <NotIndexedPanel trends={trends} />
+      <NotIndexedPanel pages={notIndexedPages} />
 
       {/* Live footer */}
       <div className="flex items-center justify-between text-[10px] text-[#A3A3A3] dark:text-[#737373] px-1">
@@ -747,8 +755,9 @@ function fullPageUrl(page: string): string {
   return page.startsWith("http") ? page : `https://www.sammapix.com${page}`;
 }
 
-function NotIndexedPanel({ trends }: { trends: KeywordTrend[] }) {
+function NotIndexedPanel({ pages }: { pages: NotIndexedPage[] }) {
   const [copiedPage, setCopiedPage] = useState<string | null>(null);
+  const [filter, setFilter] = useState<"all" | "tool" | "blog" | "page">("all");
 
   const copyUrl = async (page: string) => {
     try {
@@ -765,18 +774,22 @@ function NotIndexedPanel({ trends }: { trends: KeywordTrend[] }) {
     window.open(GSC_PROPERTY_URL, "_blank", "noopener");
   };
 
-  const notIndexed = trends.filter((t) => t.written && !t.page_indexed);
-  const uniquePages = new Map<string, KeywordTrend>();
-  for (const kw of notIndexed) {
-    if (!uniquePages.has(kw.page)) uniquePages.set(kw.page, kw);
-  }
+  const filteredPages = useMemo(
+    () => (filter === "all" ? pages : pages.filter((p) => p.category === filter)),
+    [pages, filter]
+  );
 
-  const all = Array.from(uniquePages.values()).map((t) => ({
-    kw: t,
-    status: "not_indexed" as const,
-  }));
+  const counts = useMemo(
+    () => ({
+      all: pages.length,
+      tool: pages.filter((p) => p.category === "tool").length,
+      blog: pages.filter((p) => p.category === "blog").length,
+      page: pages.filter((p) => p.category === "page").length,
+    }),
+    [pages]
+  );
 
-  if (all.length === 0) {
+  if (pages.length === 0) {
     return (
       <div className="relative rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] overflow-hidden">
         <span className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-40" />
@@ -800,11 +813,11 @@ function NotIndexedPanel({ trends }: { trends: KeywordTrend[] }) {
           <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
             🚨 Pagine da indicizzare
             <span className="ml-2 px-1.5 py-0.5 rounded bg-red-50 text-red-600 dark:bg-red-400/15 dark:text-red-400 text-[10px] font-bold uppercase tracking-wider">
-              {notIndexed.length} urgenti
+              {pages.length} urgenti
             </span>
           </h3>
           <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] mt-0.5">
-            Articolo scritto ma Google non lo mostra · click su una riga per aprire in GSC
+            Pagine del sito senza impressioni Google negli ultimi 30 giorni · potrebbero non essere indicizzate
           </p>
         </div>
         <a
@@ -817,63 +830,60 @@ function NotIndexedPanel({ trends }: { trends: KeywordTrend[] }) {
         </a>
       </div>
 
+      {/* Category filters */}
+      <div className="px-5 py-2 border-b border-[#E5E5E5] dark:border-[#2A2A2A] flex items-center gap-1 flex-wrap">
+        <SmallFilter active={filter === "all"} onClick={() => setFilter("all")} label="Tutte" count={counts.all} />
+        <SmallFilter active={filter === "tool"} onClick={() => setFilter("tool")} label="Tool" count={counts.tool} accent="blue" />
+        <SmallFilter active={filter === "blog"} onClick={() => setFilter("blog")} label="Blog" count={counts.blog} accent="purple" />
+        <SmallFilter active={filter === "page"} onClick={() => setFilter("page")} label="Altre" count={counts.page} accent="amber" />
+      </div>
+
       <div className="px-5 py-2.5 bg-[#F5F5F5] dark:bg-[#252525] border-b border-[#E5E5E5] dark:border-[#2A2A2A] text-[11px] text-[#525252] dark:text-[#A3A3A3]">
         💡 Click <strong className="text-[#6366F1]">Indicizza</strong> → URL copiato + GSC aperto. Su GSC incolla (Cmd+V) nella barra &ldquo;Ispezione URL&rdquo; e premi Invio, poi &ldquo;Richiedi indicizzazione&rdquo;.
       </div>
-      <ul className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
-        {all.map(({ kw, status }) => (
+      <ul className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A] max-h-[500px] overflow-y-auto">
+        {filteredPages.map((item) => (
           <li
-            key={kw.query}
+            key={item.page}
             className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 px-5 py-2.5 hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors"
           >
-            <span
-              className={`shrink-0 w-2 h-2 rounded-full ${
-                status === "not_indexed"
-                  ? "bg-red-400 animate-pulse"
-                  : "bg-amber-400"
-              }`}
-            />
+            <span className="shrink-0 w-2 h-2 rounded-full bg-red-400 animate-pulse" />
             <div className="min-w-0">
-              <p className="text-xs text-[#171717] dark:text-[#E5E5E5] truncate">
-                &ldquo;{kw.query}&rdquo;
-              </p>
               <a
-                href={kw.page}
+                href={fullPageUrl(item.page)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] text-[#A3A3A3] dark:text-[#737373] font-mono truncate block hover:text-[#6366F1]"
+                className="text-xs text-[#171717] dark:text-[#E5E5E5] font-mono truncate block hover:text-[#6366F1]"
               >
-                {kw.page}
+                {item.page}
               </a>
+              <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373]">
+                {item.category === "tool"
+                  ? "🛠 Tool"
+                  : item.category === "blog"
+                  ? "📰 Blog"
+                  : "📄 Pagina"}
+              </p>
             </div>
             <span className="shrink-0 text-[10px] tabular-nums text-right">
-              {kw.index_status ? (
-                <span
-                  className="text-red-500 dark:text-red-400 font-semibold block truncate max-w-[140px]"
-                  title={kw.index_status}
-                >
-                  {kw.index_status}
-                </span>
-              ) : (
-                <span className="text-red-500 dark:text-red-400 font-semibold">
-                  Non indicizzata
-                </span>
-              )}
+              <span className="text-red-500 dark:text-red-400 font-semibold">
+                0 impr/30gg
+              </span>
             </span>
             <div className="shrink-0 flex items-center gap-1">
               <button
-                onClick={() => copyUrl(kw.page)}
+                onClick={() => copyUrl(item.page)}
                 className={`inline-flex items-center gap-1 px-2 py-1 rounded-md border text-[10px] font-semibold transition-colors ${
-                  copiedPage === kw.page
+                  copiedPage === item.page
                     ? "bg-emerald-50 border-emerald-200 text-emerald-600 dark:bg-emerald-400/15 dark:border-emerald-400/30 dark:text-emerald-400"
                     : "bg-[#FAFAFA] dark:bg-[#252525] border-[#E5E5E5] dark:border-[#333] text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] hover:border-[#6366F1]/40"
                 }`}
                 title="Copia solo URL negli appunti"
               >
-                {copiedPage === kw.page ? "✓" : "📋 Copia"}
+                {copiedPage === item.page ? "✓" : "📋 Copia"}
               </button>
               <button
-                onClick={() => copyAndOpen(kw.page)}
+                onClick={() => copyAndOpen(item.page)}
                 className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-[#6366F1]/25 bg-[#6366F1]/10 text-[#6366F1] text-[10px] font-semibold hover:bg-[#6366F1]/20 transition-colors"
                 title="Copia URL + apri GSC"
               >

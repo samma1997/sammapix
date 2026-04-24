@@ -118,7 +118,7 @@ export async function GET() {
       dailyMap.get(q)!.push({ date: row.date, clicks: Number(row.clicks) });
     }
 
-    // ── Impressions per target page (proxy for indexed/not-indexed) ────────
+    // ── Impressions per page last 30d (proxy for indexed/not-indexed) ─────
     const pageRows = await db.execute(sql`
       SELECT
         page,
@@ -130,7 +130,9 @@ export async function GET() {
     `);
     const pageImpressionsMap = new Map<string, number>();
     for (const row of pageRows.rows as Array<{ page: string; impressions: number }>) {
-      pageImpressionsMap.set(row.page as string, Number(row.impressions));
+      const pagePath = (row.page as string).replace(/^https?:\/\/[^/]+/, "");
+      const prev = pageImpressionsMap.get(pagePath) ?? 0;
+      pageImpressionsMap.set(pagePath, prev + Number(row.impressions));
     }
 
     // ── Build keyword_trends from TARGET_KEYWORDS ──────────────────────────
@@ -149,11 +151,7 @@ export async function GET() {
       const written = isBlogPage ? blogSlugsSet.has(kw.page) : true;
 
       // page_indexed proxy: page has had impressions in last 30 days
-      const pageFullUrl = `https://www.sammapix.com${kw.page}`;
-      const pageImpressions =
-        pageImpressionsMap.get(pageFullUrl) ??
-        pageImpressionsMap.get(kw.page) ??
-        0;
+      const pageImpressions = pageImpressionsMap.get(kw.page) ?? 0;
       const pageIndexed = pageImpressions > 0;
 
       const action = computeAction(
@@ -202,9 +200,45 @@ export async function GET() {
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 20);
 
+    // ── Pagine da indicizzare: TUTTE le pagine importanti senza impressioni ─
+    // Pages che il sito ha ma Google non ha ancora rilevato (0 impressioni).
+    const CRITICAL_TOOL_PAGES = [
+      "/", "/tools/compress", "/tools/webp", "/tools/heic", "/tools/ai-rename",
+      "/tools/exif", "/tools/resizepack", "/tools/remove-bg", "/tools/passport-photo",
+      "/tools/croproatio", "/tools/stampit", "/tools/filmlab", "/tools/batchname",
+      "/tools/twinhunt", "/tools/geosort", "/tools/travelmap", "/tools/cull",
+      "/tools/alt-text", "/tools/image-to-text", "/tools/transcribe", "/tools/smartsort",
+      "/tools/ai-organize", "/tools/weblift", "/tools/blogdrop", "/tools/upscale",
+      "/tools/jxl", "/tools/jpg-to-pdf", "/tools/pdf-to-image",
+      // New tools (8, added 22/4/2026)
+      "/tools/png-to-jpg", "/tools/webp-to-jpg", "/tools/webp-to-png",
+      "/tools/svg-to-png", "/tools/gif-to-mp4", "/tools/ico-generator",
+      "/tools/pdf-merge", "/tools/color-picker",
+      "/pricing", "/about", "/blog",
+    ];
+    const BLOG_PATHS = POSTS.map((p) => `/blog/${p.slug}`);
+    const ALL_IMPORTANT_PAGES = Array.from(new Set([...CRITICAL_TOOL_PAGES, ...BLOG_PATHS]));
+
+    const not_indexed_pages = ALL_IMPORTANT_PAGES
+      .filter((page) => (pageImpressionsMap.get(page) ?? 0) === 0)
+      .map((page) => {
+        // Guess if this is a blog post vs tool page for category label
+        const isBlog = page.startsWith("/blog/");
+        const isTool = page.startsWith("/tools/");
+        let category = "page";
+        if (isBlog) category = "blog";
+        else if (isTool) category = "tool";
+        return {
+          page,
+          category,
+          impressions_30d: 0,
+        };
+      });
+
     return NextResponse.json({
       keyword_trends,
       discovered,
+      not_indexed_pages,
     });
   } catch (err) {
     console.error("[growth/seo/trends]", err);
