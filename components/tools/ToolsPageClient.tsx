@@ -530,9 +530,9 @@ const TOOLS: ToolWithCategory[] = [
   {
     name: "Batch Rename",
     href: "/tools/batchname",
-    tagline: "Rename files with a custom pattern. No AI, 100% client-side, unlimited.",
+    tagline: "13 tokens (EXIF dates, camera, ISO), find/replace with regex, case conversion. Unlimited.",
     accent: "#F59E0B",
-    badges: ["Free", "Unlimited"],
+    badges: ["Free", "EXIF", "Regex"],
     Icon: IconBatchName,
     category: ["Organize"],
   },
