@@ -138,6 +138,13 @@ export async function POST(req: NextRequest) {
   const directive =
     isPro && customDirective ? sanitizeDirective(customDirective) : "";
 
+  // [TEMP DIAGNOSTIC] remove after directive feature is verified in prod.
+  console.log(
+    `[ai-rename] email=${email} plan=${isPro ? "pro" : "free"} ` +
+      `customDirectiveReceived=${customDirective ? `"${customDirective.slice(0, 60)}"` : "none"} ` +
+      `directiveAppliedAfterGate=${directive ? `"${directive.slice(0, 60)}"` : "none"}`,
+  );
+
   // 4. Gemini API key guard
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
