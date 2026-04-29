@@ -228,7 +228,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Sort by Location", href: "/tools/geosort", tagline: "Sort photos by country.", accent: "#22C55E", badge: "Free", Icon: IconGeoSort, category: "Organize" },
   { name: "Photo Map", href: "/tools/travelmap", tagline: "Interactive map from photos.", accent: "#3B82F6", badge: "Free", Icon: IconTravelMap, category: "Organize" },
   { name: "Cull", href: "/tools/cull", tagline: "Rate and cull a shoot.", accent: "#F43F5E", badge: "Free", Icon: IconCull, category: "Organize" },
-  { name: "Batch Rename", href: "/tools/batchname", tagline: "Rename files with a pattern.", accent: "#F59E0B", badge: "Free", Icon: IconBatchName, category: "Organize" },
+  { name: "Batch Rename", href: "/tools/batchname", tagline: "Patterns, EXIF dates, find/replace.", accent: "#F59E0B", badge: "Free", Icon: IconBatchName, category: "Organize" },
 
   // New tools
   { name: "JPG to PDF", href: "/tools/jpg-to-pdf", tagline: "Merge images into a single PDF.", accent: "#DC2626", badge: "Free", Icon: IconJpgToPdf, category: "Optimize", isNew: true },

@@ -14,6 +14,8 @@ interface ImageSettings {
   convertToWebP: boolean;
   aiRenameEnabled: boolean;
   aiRenameLocale: string;
+  /** PRO-only freeform instruction injected into the AI rename prompt. Empty when unused. */
+  aiRenameDirective: string;
 }
 
 interface ImageStoreState {
@@ -40,6 +42,7 @@ interface ImageStoreState {
   setConvertToWebP: (value: boolean) => void;
   setAiRenameEnabled: (value: boolean) => void;
   setAiRenameLocale: (locale: string) => void;
+  setAiRenameDirective: (directive: string) => void;
   applyAiName: (id: string, name: string, altText?: string) => void;
   aiRenameFile: (id: string) => Promise<void>;
   aiRenameUsedToday: number;
@@ -57,6 +60,7 @@ export const useImageStore = create<ImageStoreState>()(
       convertToWebP: DEFAULT_CONVERT_WEBP,
       aiRenameEnabled: DEFAULT_AI_RENAME,
       aiRenameLocale: "en",
+      aiRenameDirective: "",
     },
     isProcessing: false,
     isZipping: false,
@@ -239,6 +243,12 @@ export const useImageStore = create<ImageStoreState>()(
       set((state) => { state.settings.aiRenameLocale = locale; });
     },
 
+    setAiRenameDirective: (directive: string) => {
+      // Hard cap to mirror server validation; strip newlines.
+      const cleaned = directive.replace(/[\r\n\t]+/g, " ").slice(0, 200);
+      set((state) => { state.settings.aiRenameDirective = cleaned; });
+    },
+
     applyAiName: (id: string, name: string, altText?: string) => {
       set((state) => {
         const item = state.items.find((i) => i.id === id);
@@ -340,6 +350,7 @@ export const useImageStore = create<ImageStoreState>()(
         const mimeType = "image/webp";
 
         const locale = get().settings.aiRenameLocale || "en";
+        const directive = get().settings.aiRenameDirective?.trim() || "";
 
         const response = await fetch("/api/ai/rename", {
           method: "POST",
@@ -350,6 +361,7 @@ export const useImageStore = create<ImageStoreState>()(
             mimeType,
             currentName: item.originalName,
             locale,
+            ...(directive ? { customDirective: directive } : {}),
           }),
         });
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Lock, Zap, FileImage, Sparkles, ArrowRight } from "lucide-react";
+import { Lock, Zap, FileImage, Sparkles, ArrowRight, Wand2 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -25,7 +25,17 @@ interface ToolInterfaceProps {
 }
 
 export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
-  const { items, aiRenameFile, initAiRenameCounter, aiRenameUsedToday, setConvertToWebP, setAiRenameEnabled, clearAll } = useImageStore();
+  const {
+    items,
+    aiRenameFile,
+    initAiRenameCounter,
+    aiRenameUsedToday,
+    setConvertToWebP,
+    setAiRenameEnabled,
+    clearAll,
+    settings,
+    setAiRenameDirective,
+  } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const pathname = usePathname();
@@ -59,6 +69,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [aiRenameFileId, setAiRenameFileId] = useState<string | undefined>();
   const [aiUpsellOpen, setAiUpsellOpen] = useState(false);
+  const [directiveUpsellOpen, setDirectiveUpsellOpen] = useState(false);
 
   const handleAiRenameClick = async (fileId?: string) => {
     if (!session) {
@@ -90,6 +101,21 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
           {hasFiles && (
             <div className="mt-3">
               <SettingsToolbar onAiRenameClick={() => handleAiRenameClick()} mode={defaultMode} />
+            </div>
+          )}
+
+          {/* Custom directive (PRO) — only on AI Rename tool */}
+          {defaultMode === "ai-rename" && hasFiles && (
+            <div className="mt-3">
+              <DirectiveBar
+                value={settings.aiRenameDirective}
+                onChange={setAiRenameDirective}
+                isPro={isPro}
+                onLockedClick={() => {
+                  trackEvent("upsell_view", { source: "ai_rename_directive" });
+                  setDirectiveUpsellOpen(true);
+                }}
+              />
             </div>
           )}
 
@@ -223,7 +249,138 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
         onClose={() => setAiUpsellOpen(false)}
         trigger="ai_rename"
       />
+
+      {/* Pro Upsell Modal - Custom directive PRO gate */}
+      <ProUpsellModal
+        open={directiveUpsellOpen}
+        onClose={() => setDirectiveUpsellOpen(false)}
+        trigger="ai_rename"
+      />
     </>
+  );
+}
+
+// ── Custom directive bar (PRO-only freeform AI bias) ────────────────────────
+
+interface DirectiveBarProps {
+  value: string;
+  onChange: (v: string) => void;
+  isPro: boolean;
+  onLockedClick: () => void;
+}
+
+const DIRECTIVE_EXAMPLES = [
+  "Always include the brand name if visible",
+  "Focus on color and material — ecommerce style",
+  "Pinterest aesthetic, max 4 words",
+  "Include city name for travel photos",
+];
+
+function DirectiveBar({ value, onChange, isPro, onLockedClick }: DirectiveBarProps) {
+  const [exampleIdx, setExampleIdx] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+
+  // Rotate placeholder examples every 4s when collapsed and empty
+  useEffect(() => {
+    if (expanded || value) return;
+    const id = setInterval(() => {
+      setExampleIdx((i) => (i + 1) % DIRECTIVE_EXAMPLES.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [expanded, value]);
+
+  const placeholder = DIRECTIVE_EXAMPLES[exampleIdx];
+  const charsLeft = 200 - value.length;
+
+  if (!isPro) {
+    return (
+      <button
+        type="button"
+        onClick={onLockedClick}
+        className="w-full flex items-center gap-2 px-3 py-2.5 rounded-md border border-dashed border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1E1E1E] text-left hover:border-[#A3A3A3] hover:bg-white dark:hover:bg-[#252525] transition-colors group"
+      >
+        <Lock className="h-3.5 w-3.5 text-[#A3A3A3] shrink-0" strokeWidth={1.5} />
+        <span className="text-xs text-[#737373] dark:text-[#A3A3A3] flex-1 truncate">
+          <span className="font-medium text-[#525252] dark:text-[#E5E5E5]">Custom AI directive</span>
+          {" — "}
+          <span className="italic">{placeholder}</span>
+        </span>
+        <span className="text-[10px] font-semibold uppercase tracking-wide text-[#6366F1] bg-[#6366F1]/10 px-2 py-0.5 rounded-full">
+          PRO
+        </span>
+      </button>
+    );
+  }
+
+  if (!expanded && !value) {
+    return (
+      <button
+        type="button"
+        onClick={() => setExpanded(true)}
+        className="w-full flex items-center gap-2 px-3 py-2.5 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] text-left hover:border-[#6366F1] transition-colors"
+      >
+        <Wand2 className="h-3.5 w-3.5 text-[#6366F1] shrink-0" strokeWidth={1.5} />
+        <span className="text-xs text-[#737373] dark:text-[#A3A3A3] flex-1 truncate">
+          Add a custom AI directive (e.g.{" "}
+          <span className="italic">{placeholder}</span>)
+        </span>
+        <ArrowRight className="h-3 w-3 text-[#A3A3A3]" strokeWidth={1.5} />
+      </button>
+    );
+  }
+
+  return (
+    <div className="rounded-md border border-[#6366F1]/40 bg-white dark:bg-[#1E1E1E] p-3 space-y-2">
+      <div className="flex items-center gap-2">
+        <Wand2 className="h-3.5 w-3.5 text-[#6366F1] shrink-0" strokeWidth={1.5} />
+        <label className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5] flex-1">
+          Custom AI directive
+        </label>
+        <span
+          className={`text-[10px] font-mono ${
+            charsLeft < 20 ? "text-amber-600" : "text-[#A3A3A3]"
+          }`}
+        >
+          {charsLeft}
+        </span>
+      </div>
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={2}
+        maxLength={200}
+        placeholder="e.g. Always include the brand name if visible. Focus on color, material, and product category for ecommerce listings."
+        className="w-full px-2.5 py-2 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded
+                   bg-[#FAFAFA] dark:bg-[#252525] text-[#171717] dark:text-[#E5E5E5]
+                   placeholder-[#A3A3A3] dark:placeholder-[#525252]
+                   focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent
+                   resize-none"
+      />
+      <div className="flex flex-wrap gap-1">
+        {DIRECTIVE_EXAMPLES.map((ex) => (
+          <button
+            key={ex}
+            type="button"
+            onClick={() => onChange(ex)}
+            className="text-[10px] text-[#6366F1] hover:underline"
+          >
+            {ex.length > 28 ? ex.slice(0, 28) + "..." : ex}
+          </button>
+        ))}
+        {value && (
+          <button
+            type="button"
+            onClick={() => onChange("")}
+            className="text-[10px] text-[#A3A3A3] hover:text-[#DC2626] ml-auto"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+      <p className="text-[10px] text-[#A3A3A3] leading-relaxed">
+        Applied to every AI rename in this batch. Max 200 characters.
+      </p>
+    </div>
   );
 }
 

@@ -209,7 +209,7 @@ export const TOOLS: Record<string, ToolMeta> = {
   batchname: {
     id: "batchname",
     name: "Batch Rename",
-    shortDesc: "Rename files with patterns",
+    shortDesc: "13 tokens, EXIF dates, find/replace, case",
     slug: "/tools/batchname",
     category: "organize",
     relatedTools: ["ai-rename", "twinhunt", "smartsort", "geosort"],

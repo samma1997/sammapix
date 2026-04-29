@@ -131,6 +131,25 @@ const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dt-bn-count { 0%, 33% { opacity: 1; } 34%, 66% { opacity: 0.4; } 67%, 100% { opacity: 1; } }
+      .dt-bn-n1 { animation: dt-bn-count 3s ease-in-out 0s infinite; }
+      .dt-bn-n2 { animation: dt-bn-count 3s ease-in-out 1s infinite; }
+      .dt-bn-n3 { animation: dt-bn-count 3s ease-in-out 2s infinite; }
+    `}</style>
+    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="dt-bn-n1" x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
+    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="dt-bn-n2" x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
+    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <text className="dt-bn-n3" x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
+    <path d="M38 14 L42 14 M38 24 L42 24 M38 34 L42 34" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4"/>
+    <path d="M40 10 L40 38" stroke={accent} strokeWidth="1" strokeLinecap="round" strokeOpacity="0.2"/>
+  </svg>
+);
+
 // ─── Tool icon + accent color map ────────────────────────────────────────────
 
 const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: string }> = {
@@ -160,7 +179,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   weblift:     { Icon: IconWebP,       accent: "#3B82F6" },
   blogdrop:    { Icon: IconCompress,   accent: "#8B5CF6" },
   transcribe:  { Icon: IconEXIF,       accent: "#0891B2" },
-  batchname:   { Icon: IconResizePack, accent: "#F59E0B" },
+  batchname:   { Icon: IconBatchName, accent: "#F59E0B" },
   "ai-organize": { Icon: IconAIRename, accent: "#8B5CF6" },
   "remove-bg":   { Icon: IconRemoveBg, accent: "#EC4899" },
   upscale:       { Icon: IconUpscale,  accent: "#8B5CF6" },
@@ -476,13 +495,13 @@ const TOOL_DATA: Record<string, ToolData> = {
   },
   batchname: {
     label: "Batch Rename",
-    tagline: "Rename files with a custom pattern. No AI needed.",
+    tagline: "13 pattern tokens, EXIF dates, find & replace, case conversion.",
     steps: [
-      { title: "Drop your files", desc: "Add any files you want to rename." },
-      { title: "Set your pattern", desc: "Use {001}, {date}, or {original} tokens." },
-      { title: "Download renamed", desc: "Get all files with new names." },
+      { title: "Drop your files", desc: "Add unlimited files. EXIF metadata reads automatically for photos." },
+      { title: "Pick mode + pattern", desc: "Pattern (e.g. {exif:date}-trip-{n:3}), Find & Replace (with regex), or Case Convert." },
+      { title: "Preview & download", desc: "Sort by date or name, preview every rename, then download single file or ZIP." },
     ],
-    proTip: { text: "Use {001} for auto-incrementing numbers.", linkLabel: "Try AI Rename", linkHref: "/dashboard/tools/ai-rename" },
+    proTip: { text: "ZIP download with multiple files requires Pro.", linkLabel: "Upgrade to Pro", linkHref: "/dashboard/upgrade" },
   },
   smartsort: {
     label: "AI Photo Sort",

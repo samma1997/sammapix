@@ -18,7 +18,20 @@ const RequestSchema = z.object({
   mimeType: z.enum(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"]),
   currentName: z.string().max(255).optional(),
   locale: z.string().max(10).optional(),
+  // PRO-only: custom directive injected into the AI prompt to bias the generated filename.
+  // Server enforces gating; sent values for non-PRO users are silently ignored.
+  customDirective: z.string().max(200).optional(),
 });
+
+// Strip newlines + control characters and clamp length — defense against prompt injection.
+function sanitizeDirective(raw: string): string {
+  return raw
+    .replace(/[\r\n\t]+/g, " ")
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\x00-\x1F\x7F]/g, "")
+    .slice(0, 200)
+    .trim();
+}
 
 // ── In-memory fallback (when Redis not configured) ──────────────────────────
 // Not reliable across cold starts- just a best-effort guard.
@@ -118,7 +131,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { imageBase64, locale = "en" } = parsed.data;
+  const { imageBase64, locale = "en", customDirective } = parsed.data;
+
+  // PRO gating: silently drop directive if user is not PRO.
+  // We do not error: free users may have it persisted in the UI as upsell hint.
+  const directive =
+    isPro && customDirective ? sanitizeDirective(customDirective) : "";
 
   // 4. Gemini API key guard
   const apiKey = process.env.GEMINI_API_KEY;
@@ -193,8 +211,12 @@ export async function POST(req: NextRequest) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
-    const prompt = `You are an SEO expert. Analyze this image carefully and generate an SEO-optimized filename and alt text.
+    const directiveBlock = directive
+      ? `\n[USER DIRECTIVE — apply this preference unless it conflicts with the technical rules below]\n${directive}\n[END USER DIRECTIVE]\n`
+      : "";
 
+    const prompt = `You are an SEO expert. Analyze this image carefully and generate an SEO-optimized filename and alt text.
+${directiveBlock}
 Return ONLY valid JSON (no markdown, no code blocks, just raw JSON):
 {"filename":"...","altText":"..."}
 
@@ -237,6 +259,7 @@ Examples:
         remaining: rateCheck.allowed ? rateCheck.remaining : 0,
         limit: dailyLimit,
         plan: isPro ? "pro" : "free",
+        directiveApplied: directive.length > 0,
         ...(creditsUsed > 0 && { creditsUsed }),
         creditsRemaining,
       },
