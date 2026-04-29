@@ -2,6 +2,8 @@
 
 export interface AiRenameStepOptions {
   locale?: string;
+  /** Optional PRO-only directive — biases the AI toward a specific naming style. */
+  customDirective?: string;
 }
 
 export interface AiRenameResult {
@@ -65,6 +67,7 @@ export async function runAiRenameStep(
       imageBase64: base64,
       mimeType,
       locale: options?.locale ?? "en",
+      ...(options?.customDirective ? { customDirective: options.customDirective } : {}),
     }),
   });
 
