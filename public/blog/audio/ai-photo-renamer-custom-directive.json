@@ -1,0 +1,207 @@
+[
+  {
+    "start": 0,
+    "end": 3.96,
+    "text": "The hidden problem with vanilla AI photo renamers"
+  },
+  {
+    "start": 3.96,
+    "end": 24.5,
+    "text": "Most AI photo renamers — including the standard SammaPix tool until April 2026 —"
+  },
+  {
+    "start": 24.5,
+    "end": 47.88,
+    "text": "A few real examples from a support email we received this week. The customer had"
+  },
+  {
+    "start": 47.88,
+    "end": 69.79,
+    "text": "The customer's exact words: Is there any way to give a directive on what title t"
+  },
+  {
+    "start": 69.79,
+    "end": 88.37,
+    "text": "The fix is straightforward: add an optional field where the user types a one-lin"
+  },
+  {
+    "start": 88.37,
+    "end": 91.15,
+    "text": "What is a custom AI directive?"
+  },
+  {
+    "start": 91.15,
+    "end": 109.08,
+    "text": "A custom AI directive is a single sentence (max 200 characters) that you append "
+  },
+  {
+    "start": 109.08,
+    "end": 132.86,
+    "text": "On the server side, the prompt the AI receives includes a labeled USER DIRECTIVE"
+  },
+  {
+    "start": 132.86,
+    "end": 163.85,
+    "text": "Why 200 characters and not 2000? Two reasons. First, every additional token in t"
+  },
+  {
+    "start": 163.85,
+    "end": 167.35,
+    "text": "5 directive recipes that actually work"
+  },
+  {
+    "start": 167.35,
+    "end": 180.17,
+    "text": "We tested over fifty directive variations on a fixed set of 30 mixed photos (pro"
+  },
+  {
+    "start": 180.17,
+    "end": 208.39,
+    "text": "Recipe one — brand-first for ecommerce or DTC. Always include the brand name if "
+  },
+  {
+    "start": 208.39,
+    "end": 234.53,
+    "text": "Recipe two — ecommerce attribute-rich. Ecommerce style: focus on color, material"
+  },
+  {
+    "start": 234.53,
+    "end": 260.4,
+    "text": "Recipe three — Pinterest aesthetic. Pinterest aesthetic naming, max 4 words, foc"
+  },
+  {
+    "start": 260.4,
+    "end": 285.5,
+    "text": "Recipe four — niche keyword anchor. Always include the keyword organic skincare "
+  },
+  {
+    "start": 285.5,
+    "end": 311.4,
+    "text": "Recipe five — travel plus location. Travel photo style: include location landmar"
+  },
+  {
+    "start": 311.4,
+    "end": 337.7,
+    "text": "Same image. Six different filenames. The directive is the only variable that cha"
+  },
+  {
+    "start": 337.7,
+    "end": 342.36,
+    "text": "Tutorial: how to use the Custom Directive field on SammaPix"
+  },
+  {
+    "start": 342.36,
+    "end": 348.91,
+    "text": "Three steps. End to end takes under two minutes after the first time you write y"
+  },
+  {
+    "start": 348.91,
+    "end": 370.44,
+    "text": "Step one — open the AI Renamer and add files. Visit sammapix dot com slash tools"
+  },
+  {
+    "start": 370.44,
+    "end": 390.24,
+    "text": "Step two — open the Custom AI directive bar. Below the language selector you wil"
+  },
+  {
+    "start": 390.24,
+    "end": 407.14,
+    "text": "The textarea has a live character counter (200 max), four quick-fill examples yo"
+  },
+  {
+    "start": 407.14,
+    "end": 429.05,
+    "text": "Step three — run Rename All and review. Click Rename All. Each file is sent to G"
+  },
+  {
+    "start": 429.05,
+    "end": 440.38,
+    "text": "When you are happy with the results, download the renamed files individually or "
+  },
+  {
+    "start": 440.38,
+    "end": 444.5,
+    "text": "Custom directive vs pattern tokens — when to use which"
+  },
+  {
+    "start": 444.5,
+    "end": 472.97,
+    "text": "A custom directive is not always the right tool. Sometimes you want deterministi"
+  },
+  {
+    "start": 472.97,
+    "end": 488.3,
+    "text": "Most professional workflows we have seen use both tools in sequence. AI Renamer "
+  },
+  {
+    "start": 488.3,
+    "end": 491.98,
+    "text": "Limits, gotchas, and what the AI ignores"
+  },
+  {
+    "start": 491.98,
+    "end": 499.87,
+    "text": "Custom directives are powerful but not magic. Five things worth knowing before y"
+  },
+  {
+    "start": 499.87,
+    "end": 524.5,
+    "text": "The AI silently overrides UPPERCASE, spaces, and special characters. If your dir"
+  },
+  {
+    "start": 524.5,
+    "end": 549.79,
+    "text": "Brand recognition is imperfect. The AI is great at reading clearly visible brand"
+  },
+  {
+    "start": 549.79,
+    "end": 568.08,
+    "text": "The directive does not affect alt text generation strategy. Currently the direct"
+  },
+  {
+    "start": 568.08,
+    "end": 588.94,
+    "text": "The directive cannot reference other files in the batch. Each photo is processed"
+  },
+  {
+    "start": 588.94,
+    "end": 611.21,
+    "text": "Prompt injection attempts are stripped. The directive is sanitized server-side: "
+  },
+  {
+    "start": 611.21,
+    "end": 629.5,
+    "text": "Once you understand these limits, the directive becomes a quiet force multiplier"
+  },
+  {
+    "start": 629.5,
+    "end": 653.23,
+    "text": "What is a custom AI directive when renaming photos? A custom AI directive is a f"
+  },
+  {
+    "start": 653.23,
+    "end": 684.67,
+    "text": "Why do I need a custom directive if the AI is already generating SEO-friendly na"
+  },
+  {
+    "start": 684.67,
+    "end": 708.89,
+    "text": "Is the Custom AI directive feature free on SammaPix? The Custom AI directive fie"
+  },
+  {
+    "start": 708.89,
+    "end": 732.91,
+    "text": "Can I write multi-line directives or use markdown? No. The directive field strip"
+  },
+  {
+    "start": 732.91,
+    "end": 762.91,
+    "text": "Will the AI ignore my directive if it contradicts the technical rules? Yes. The "
+  },
+  {
+    "start": 762.91,
+    "end": 794.98,
+    "text": "How does this compare to the free Batch Rename tool? Batch Rename is mechanical:"
+  }
+]

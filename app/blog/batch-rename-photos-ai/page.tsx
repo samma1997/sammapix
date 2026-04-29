@@ -212,6 +212,23 @@ export default function BatchRenamePhotosAIPage() {
       >
         {/* Article body content */}
 
+        <div className="mb-8 p-4 bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-400 dark:border-amber-600 rounded-r-md">
+          <p className="text-xs font-semibold text-amber-900 dark:text-amber-200 mb-1.5 uppercase tracking-wide">
+            Update — April 2026
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            The standard AI Rename approach below produces neutral
+            descriptive filenames. If you need to bias the AI toward a
+            specific naming style — brand-first, ecommerce, Pinterest
+            aesthetic, or with a niche keyword anchor — see our newer guide
+            on{" "}
+            <Link href="/blog/ai-photo-renamer-custom-directive" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">
+              AI photo renamer with custom directives
+            </Link>
+            .
+          </p>
+        </div>
+
         <h2 id="why-filenames-matter" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why image filenames matter for SEO (and why you are probably getting it wrong)
         </h2>

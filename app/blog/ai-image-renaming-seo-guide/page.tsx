@@ -211,6 +211,22 @@ export default function AiImageRenamingSeoGuidePage() {
       >
         {/* Article body content */}
 
+        <div className="mb-8 p-4 bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-400 dark:border-amber-600 rounded-r-md">
+          <p className="text-xs font-semibold text-amber-900 dark:text-amber-200 mb-1.5 uppercase tracking-wide">
+            Update — April 2026
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            Power users now have a way to bias the AI toward a specific
+            naming style (brand-first, ecommerce, Pinterest, niche keyword)
+            via custom directives. See our deep-dive on{" "}
+            <Link href="/blog/ai-photo-renamer-custom-directive" className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2">
+              AI photo renamer with custom directives
+            </Link>{" "}
+            for the five recipes that consistently outperform the vanilla
+            prompt.
+          </p>
+        </div>
+
         <h2 id="why-filenames-matter" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
           Why image filenames matter for SEO
         </h2>
