@@ -142,8 +142,9 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "ai",
     relatedTools: ["alt-text", "smartsort", "compress", "batchname"],
     relatedBlogSlugs: [
+      "ai-photo-renamer-custom-directive",
       "ai-image-renaming-seo-guide",
-      "image-seo-best-practices",
+      "batch-rename-photos-ai",
     ],
   },
   "alt-text": {
@@ -213,7 +214,11 @@ export const TOOLS: Record<string, ToolMeta> = {
     slug: "/tools/batchname",
     category: "organize",
     relatedTools: ["ai-rename", "twinhunt", "smartsort", "geosort"],
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: [
+      "ai-photo-renamer-custom-directive",
+      "batch-rename-photos-ai",
+      "ai-image-renaming-seo-guide",
+    ],
   },
   filmlab: {
     id: "filmlab",
