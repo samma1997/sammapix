@@ -153,5 +153,4 @@ export const ADMIN_EMAILS = [
   "luca@sammapix.com",
   "samma1997@gmail.com",
   "lucasamm97@gmail.com",
-  "marketing@alfiobardolla.com",
 ];

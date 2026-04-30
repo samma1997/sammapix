@@ -13,6 +13,9 @@
     },
     "app/api/cron/gsc-index-check/route.ts": {
       "maxDuration": 300
+    },
+    "app/api/cron/directory-discovery/route.ts": {
+      "maxDuration": 300
     }
   },
   "crons": [
@@ -67,6 +70,14 @@
     {
       "path": "/api/growth/strategy/review",
       "schedule": "0 7 * * 1"
+    },
+    {
+      "path": "/api/cron/directory-daily",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/directory-discovery",
+      "schedule": "0 3 * * 1"
     }
   ],
   "redirects": [
