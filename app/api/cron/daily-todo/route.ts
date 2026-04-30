@@ -435,6 +435,65 @@ sammapix.com`;
     }
 
     // ═══════════════════════════════════════════════════════════════
+    // 5b. DIRECTORY PICKS — 10 directory diverse ogni giorno
+    //     Selezionate top-DA, ruotate per data (deterministic)
+    // ═══════════════════════════════════════════════════════════════
+    try {
+      const allDirs = await db
+        .select()
+        .from(growthDirectorySubmissions)
+        .where(eq(growthDirectorySubmissions.status, "to_submit"));
+
+      if (allDirs.length > 0) {
+        const parseDA = (notes: string | null): number => {
+          if (!notes) return 0;
+          const m = notes.match(/DA[:\s]*(\d+)/i);
+          return m ? parseInt(m[1], 10) : 0;
+        };
+        const sorted = [...allDirs].sort(
+          (a, b) => parseDA(b.notes) - parseDA(a.notes)
+        );
+        const pool = sorted.slice(0, 200);
+
+        const todayDate = new Date();
+        const start = new Date(todayDate.getFullYear(), 0, 0);
+        const dayOfYear = Math.floor(
+          (todayDate.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+        );
+        let seed = todayDate.getFullYear() * 1000 + dayOfYear;
+        const rand = () => {
+          seed |= 0;
+          seed = (seed + 0x6d2b79f5) | 0;
+          let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+        const arr = [...pool];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rand() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        const picks = arr.slice(0, 10);
+        const draftLines = picks
+          .map((p) => `• ${p.directoryName} → ${p.directoryUrl}`)
+          .join("\n");
+
+        todos.push({
+          date: today,
+          type: "directory_picks",
+          priority: 6,
+          title: `🔗 10 directory picks di oggi (top DA)`,
+          description:
+            "Apri Directories nella dashboard, filtro 'Oggi', e marca le fatte. Anti-spam: max 10/gg.",
+          actionUrl: "/dashboard/growth/directories",
+          draftText: draftLines,
+        });
+      }
+    } catch (err) {
+      console.error("[daily-todo] directory picks failed:", err);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
     // 6. SEO — GSC indexing with specific URLs
     // ═══════════════════════════════════════════════════════════════
     try {

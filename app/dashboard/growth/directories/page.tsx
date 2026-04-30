@@ -23,12 +23,11 @@ export default function GrowthDirectoriesPage() {
             </span>
           </h1>
           <p className="mt-3 text-[#737373] dark:text-[#A3A3A3] text-base max-w-2xl leading-relaxed">
-            Lista directory dove registrare SammaPix. Quota settimanale anti-spam:{" "}
-            <span className="font-medium text-[#525252] dark:text-[#B5B5B5]">
-              50/sett.
-            </span>{" "}
-            Apri il link, registra il tuo profilo, marca come fatta. Le &ldquo;già fatte
-            in passato&rdquo; non contano nel conteggio.
+            Directory = siti dove ti iscrivi e metti il link sammapix.com. Ogni
+            giorno trovi <span className="font-medium text-[#525252] dark:text-[#B5B5B5]">10 picks diverse</span>{" "}
+            (alta DA, ruotate automaticamente). Anti-spam: target{" "}
+            <span className="font-medium text-[#525252] dark:text-[#B5B5B5]">50/sett.</span>{" "}
+            Le &ldquo;già fatte in passato&rdquo; non contano nel conteggio settimanale.
           </p>
         </div>
 

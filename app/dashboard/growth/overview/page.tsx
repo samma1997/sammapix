@@ -1,4 +1,3 @@
-import DirectoriesQuickStats from "@/components/growth/DirectoriesQuickStats";
 import SeoPerformanceDashboard from "@/components/growth/SeoPerformanceDashboard";
 
 export const metadata = {
@@ -26,11 +25,6 @@ export default function GrowthOverviewPage() {
           <p className="mt-3 text-[#737373] dark:text-[#A3A3A3] text-base max-w-2xl leading-relaxed">
             Keyword target (da posizionare) a fianco di quelle che portano traffico davvero. Clicca una riga per dettagli.
           </p>
-        </div>
-
-        {/* ── Quick stats row ───────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
-          <DirectoriesQuickStats />
         </div>
 
         {/* ── Dashboard ─────────────────────────────────────────────────── */}
