@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Which Apps Strip Photo Metadata? 12 Apps Tested [2026]",
+    "Which Apps Strip Photo Metadata? 12 Tested + WhatsApp Trap [2026]",
   description:
     "We tested 12 apps for EXIF stripping. Some keep your GPS data hidden inside. See the full results — the WhatsApp document trick most people miss.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "exif data social media",
   ],
   openGraph: {
-    title: "Which Apps Strip Photo Metadata? The Complete 2026 Guide",
+    title: "Which Apps Strip Photo Metadata? 12 Tested + WhatsApp Trap [2026]",
     description:
       "Fact-checked comparison of 12 platforms: which strip EXIF, which keep GPS internally, and the WhatsApp document mode trap nobody talks about.",
     url: `${APP_URL}/blog/which-apps-strip-photo-metadata`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Which Apps Strip Photo Metadata? The Complete 2026 Guide",
+    title: "Which Apps Strip Photo Metadata? 12 Tested + WhatsApp Trap [2026]",
     description:
       "12 platforms fact-checked: which strip EXIF, which keep your GPS, and the WhatsApp document mode trap most people miss.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-06";
 const POST_DATE_FORMATTED = "April 6, 2026";
 const POST_URL = `${APP_URL}/blog/which-apps-strip-photo-metadata`;
-const POST_TITLE = "Which Apps Strip Photo Metadata? The Complete 2026 Guide";
+const POST_TITLE = "Which Apps Strip Photo Metadata? 12 Tested + WhatsApp Trap [2026]";
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -205,6 +205,22 @@ export default function WhichAppsStripPhotoMetadataPage() {
           </div>
         }
       >
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            TL;DR — which apps actually strip EXIF
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            <strong>Strip everything (safe):</strong> Instagram, Facebook, X/Twitter, Telegram (default), iMessage.{" "}
+            <strong>Keep your GPS:</strong> Signal-attached photos, WhatsApp document mode, Reddit mobile, email clients.
+            The <strong>WhatsApp document trick</strong> bypasses normal stripping — most people don&apos;t know
+            this. To strip EXIF before posting,{" "}
+            <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              use the SammaPix EXIF stripper
+            </Link>{" "}
+            (free, browser, no upload).
+          </p>
+        </div>
+
         {/* Section: Comparison Table */}
         <h2 id="comparison-table" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
           The short answer — a comparison table

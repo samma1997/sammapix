@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested",
+  title: "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
   description:
     "Remove.bg charges \u20AC0.36 per image. Here are 7 free alternatives for background removal tested on real photos \u2014 product shots, portraits, and complex edges.",
   alternates: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "background remover no signup",
   ],
   openGraph: {
-    title: "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested",
+    title: "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
     description: "Remove.bg charges per image. 7 free alternatives tested on real photos with quality comparison.",
     url: `${APP_URL}/blog/best-free-remove-bg-alternatives-2026`,
     type: "article",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested",
+    title: "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
     description: "Remove.bg charges per image. 7 free alternatives tested on real photos.",
     creator: "@lucasammarco",
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-12";
 const POST_DATE_FORMATTED = "April 12, 2026";
 const POST_URL = `${APP_URL}/blog/best-free-remove-bg-alternatives-2026`;
-const POST_TITLE = "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested";
+const POST_TITLE = "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)";
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -160,6 +160,18 @@ export default function BestFreeRemoveBgAlternatives2026() {
           </div>
         }
       >
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            TL;DR — best free remove.bg alternative
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            <strong>SammaPix Clean Background</strong> (browser-based, zero upload) and{" "}
+            <strong>PhotoRoom</strong> (mobile) are the two free alternatives that match remove.bg
+            quality on product shots and portraits. We tested all 7 on real photos including
+            complex edges (hair, fur, transparent objects) — full ranking below.
+          </p>
+        </div>
+
         <h2 id="why-people-leave-removebg" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
           Why people leave remove.bg
         </h2>

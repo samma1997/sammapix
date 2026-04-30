@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Best Free Topaz Gigapixel Alternatives 2026: 7 Tools Tested",
+    "7 Free Topaz Gigapixel Alternatives Tested 2026 (Real Benchmark)",
   description:
     "Topaz Gigapixel AI went subscription ($199/year). Here are 7 free alternatives for image upscaling tested on real photos — with quality comparison and honest results.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "real esrgan alternative",
   ],
   openGraph: {
-    title: "Best Free Topaz Gigapixel Alternatives 2026: 7 Tools Tested",
+    title: "7 Free Topaz Gigapixel Alternatives Tested 2026 (Real Benchmark)",
     description:
       "Topaz went subscription. Here are 7 free alternatives for image upscaling — tested on real photos with quality comparison.",
     url: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Free Topaz Gigapixel Alternatives 2026: 7 Tools Tested",
+    title: "7 Free Topaz Gigapixel Alternatives Tested 2026 (Real Benchmark)",
     description:
       "Topaz went subscription. 7 free alternatives tested on real photos with honest quality comparison.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-10";
 const POST_DATE_FORMATTED = "April 10, 2026";
 const POST_URL = `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`;
-const POST_TITLE = "Best Free Topaz Gigapixel Alternatives 2026: 7 Tools Tested";
+const POST_TITLE = "7 Free Topaz Gigapixel Alternatives Tested 2026 (Real Benchmark)";
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -203,6 +203,18 @@ export default function BestFreeTopazAlternatives2026() {
           </div>
         }
       >
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            TL;DR — best free Topaz Gigapixel alternative
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            <strong>Upscayl</strong> (desktop) and <strong>SammaPix Enhance Resolution</strong> (browser, no install)
+            are the two free alternatives that get closest to Topaz Gigapixel quality on real photos.
+            Real-ESRGAN and Waifu2x come next for specific use cases. We tested all 7 on the same source images —
+            see the full comparison below.
+          </p>
+        </div>
+
         {/* ════════════════════════════════════════════════════════════ */}
         {/* WHY PEOPLE ARE LEAVING TOPAZ */}
         {/* ════════════════════════════════════════════════════════════ */}

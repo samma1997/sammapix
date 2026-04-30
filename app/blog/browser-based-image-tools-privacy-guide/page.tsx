@@ -478,6 +478,13 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
           The practical workflow for most photographers and web professionals is a combination: use browser-based tools for the compression, conversion, EXIF removal, and renaming steps where privacy matters, and use cloud tools selectively for AI-heavy tasks where the quality difference justifies the upload.
         </p>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          Background removal in particular has improved enough on the browser side that paying remove.bg is no longer the obvious answer — see our{" "}
+          <Link href="/blog/best-free-remove-bg-alternatives-2026" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">
+            comparison of 7 free remove.bg alternatives
+          </Link>{" "}
+          tested on real product shots and portraits.
+        </p>
 
         <h2 id="sammapix-workflow" className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3">
           A complete no-upload image workflow with SammaPix

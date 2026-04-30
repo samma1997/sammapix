@@ -115,7 +115,7 @@ async function fetchSearchAnalytics(
         startDate,
         endDate,
         dimensions,
-        rowLimit: 1000,
+        rowLimit: 5000,
       }),
     }
   );
@@ -171,6 +171,28 @@ export async function fetchGSCData(
       rows.push({
         date: row.keys[1] ?? startDate,
         page: "/", // query-level rows don't have a page
+        query: row.keys[0] ?? null,
+        impressions: row.impressions,
+        clicks: row.clicks,
+        ctr: row.ctr,
+        position: row.position,
+      });
+    }
+
+    // Fetch by query + page + date — combo granulare per quick-win analysis.
+    // GSC esclude le anonymized queries dalle combo, quindi questi sono solo
+    // i pair (query, page) realmente noti — perfetto per CTR optimization.
+    const byCombo = await fetchSearchAnalytics(
+      accessToken,
+      startDate,
+      endDate,
+      ["query", "page", "date"]
+    );
+
+    for (const row of byCombo.rows ?? []) {
+      rows.push({
+        date: row.keys[2] ?? startDate,
+        page: row.keys[1] ?? "/",
         query: row.keys[0] ?? null,
         impressions: row.impressions,
         clicks: row.clicks,
