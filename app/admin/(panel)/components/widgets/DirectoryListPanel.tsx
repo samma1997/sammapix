@@ -1,5 +1,6 @@
 "use client";
 
+import confetti from "canvas-confetti";
 import { useEffect, useMemo, useState } from "react";
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -144,16 +145,49 @@ export default function DirectoryListPanel() {
     load();
   }, []);
 
+  function fireConfetti(originX: number, originY: number) {
+    const colors = ["#6366f1", "#8b5cf6", "#a78bfa", "#10b981", "#f59e0b"];
+    // Burst 1: from click point
+    confetti({
+      particleCount: 90,
+      spread: 75,
+      startVelocity: 45,
+      origin: { x: originX, y: originY },
+      colors,
+      scalar: 1.1,
+      ticks: 220,
+    });
+    // Burst 2: from left + right corners shortly after
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 60,
+        origin: { x: 0, y: 0.7 },
+        colors,
+      });
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 60,
+        origin: { x: 1, y: 0.7 },
+        colors,
+      });
+    }, 180);
+  }
+
   async function patchStatus(
     id: number,
     status: DirStatus,
-    options?: { openTab?: string }
+    options?: { celebrate?: { x: number; y: number } }
   ) {
     if (busy !== null) return;
     setBusy(id);
-    if (options?.openTab) {
-      window.open(options.openTab, "_blank", "noopener,noreferrer");
+
+    if (options?.celebrate) {
+      fireConfetti(options.celebrate.x, options.celebrate.y);
     }
+
     const prev = raw;
     const optDate =
       status === "submitted" || status === "listed"
@@ -175,6 +209,16 @@ export default function DirectoryListPanel() {
     } finally {
       setBusy(null);
     }
+  }
+
+  function handleMessaClick(
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: number
+  ) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+    patchStatus(id, "submitted", { celebrate: { x, y } });
   }
 
   const items = useMemo<DirectoryItem[]>(() => {
@@ -289,10 +333,10 @@ export default function DirectoryListPanel() {
           >
             {stats.total} directory aggregate da fonti pubbliche.{" "}
             <span style={{ color: "var(--text)", fontWeight: 500 }}>
-              Lista completa qui sotto
-            </span>
-            ; in alto le {DAILY_PICKS} di oggi (rotazione automatica). Target{" "}
-            {WEEKLY_TARGET}/sett ({DAILY_PICKS}/giorno) per evitare spam.
+              Click sul nome per aprire,
+            </span>{" "}
+            poi marca &ldquo;Messa&rdquo; quando hai finito la submission.
+            Target {WEEKLY_TARGET}/sett ({DAILY_PICKS}/giorno) per evitare spam.
           </p>
         </div>
       </div>
@@ -378,9 +422,7 @@ export default function DirectoryListPanel() {
                 ) : (
                   <div className="flex gap-1.5">
                     <button
-                      onClick={() =>
-                        patchStatus(d.id, "submitted", { openTab: d.url })
-                      }
+                      onClick={(e) => handleMessaClick(e, d.id)}
                       disabled={busy === d.id}
                       className="text-[11px] font-semibold px-2.5 py-1 rounded-md transition disabled:opacity-50"
                       style={{ background: "var(--accent)", color: "#fff" }}
@@ -697,9 +739,7 @@ export default function DirectoryListPanel() {
                 ) : (
                   <div className="flex items-center gap-1.5 flex-shrink-0">
                     <button
-                      onClick={() =>
-                        patchStatus(d.id, "submitted", { openTab: d.url })
-                      }
+                      onClick={(e) => handleMessaClick(e, d.id)}
                       disabled={busy === d.id}
                       className="text-[11px] font-semibold px-2.5 py-1 rounded-md transition disabled:opacity-50"
                       style={{
