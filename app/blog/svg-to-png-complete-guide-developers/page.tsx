@@ -310,7 +310,16 @@ export default function SvgToPngCompleteGuideDevelopersPage() {
           Building a favicon pack from one SVG
         </h2>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          A modern favicon setup serves three files from one SVG master:
+          A modern favicon setup serves three files from one SVG master. For the full deep-dive on
+          favicon sizes, dark-mode variants, PWA manifest icons, and the exact 4 HTML tags to
+          paste in <code className="text-xs font-mono bg-gray-100 dark:bg-[#252525] px-1 rounded">&lt;head&gt;</code>, see our{" "}
+          <Link href="/blog/favicon-best-practices-2026" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">
+            favicon 2026 guide
+          </Link>
+          .
+        </p>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          The minimum setup serves three files from one SVG master:
         </p>
         <ol className="list-decimal pl-6 space-y-1.5 text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
           <li><strong className="text-gray-900 dark:text-[#E5E5E5]">favicon.svg</strong> — the original, served to modern browsers (Chrome/Firefox/Edge).</li>

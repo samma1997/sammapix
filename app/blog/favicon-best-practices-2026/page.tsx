@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Favicon Best Practices 2026: Sizes, SVG, Dark Mode, PWA",
+  title: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
   description:
-    "Every favicon size that matters in 2026, how to serve SVG + ICO together, dark mode variants, PWA manifest icons, and the four HTML tags to add to every site.",
+    "Every favicon size for 2026, SVG + ICO hybrid setup, dark mode, PWA manifest icons, and the 4 HTML tags to copy-paste in every site. Generator included.",
   alternates: {
     canonical: `${APP_URL}/blog/favicon-best-practices-2026`,
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "html favicon tags",
   ],
   openGraph: {
-    title: "Favicon Best Practices 2026: Sizes, SVG, Dark Mode, PWA",
+    title: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
     description:
       "All the favicon sizes, formats, HTML tags, and dark-mode tricks that matter in 2026. Free browser-based favicon builder included.",
     url: `${APP_URL}/blog/favicon-best-practices-2026`,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Favicon Best Practices 2026: Sizes, SVG, Dark Mode, PWA",
+  headline: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
   description:
     "A practical 2026 guide to favicons: every size that still matters, the four HTML tags to ship, SVG + ICO hybrid serving, dark-mode variants, PWA manifest icons, and common pitfalls.",
   url: `${APP_URL}/blog/favicon-best-practices-2026`,
@@ -78,7 +78,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "Favicon Best Practices 2026: Sizes, SVG, Dark Mode, PWA",
+      name: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
       item: `${APP_URL}/blog/favicon-best-practices-2026`,
     },
   ],
@@ -156,7 +156,7 @@ export default function FaviconBestPractices2026Page() {
       />
 
       <BlogArticleLayout
-        title="Favicon Best Practices 2026: Sizes, SVG, Dark Mode, PWA"
+        title="Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)"
         slug="favicon-best-practices-2026"
         description="The old answer to &lsquo;what favicon sizes do I need?&rsquo; was an endless grid of 15+ files. In 2026 modern browsers accept SVG natively, iOS ate Apple Touch Startup Image, and Windows tiles quietly died. Here is the minimum viable favicon setup plus everything you need to know about SVG + ICO, dark mode, PWA, and cache invalidation."
         date="2026-04-22"
@@ -226,6 +226,20 @@ export default function FaviconBestPractices2026Page() {
           </div>
         }
       >
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            TL;DR — minimum viable favicon 2026
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            Ship 4 files: <code className="text-xs font-mono">favicon.ico</code> (multi-size 16/32/48),{" "}
+            <code className="text-xs font-mono">icon.svg</code>,{" "}
+            <code className="text-xs font-mono">apple-touch-icon.png</code> (180×180),{" "}
+            <code className="text-xs font-mono">icon-512.png</code> (PWA). Add 4 HTML link tags in
+            your <code className="text-xs font-mono">&lt;head&gt;</code>. Done — covers every browser
+            including dark mode. Copy-paste code below.
+          </p>
+        </div>
+
         {/* ── Minimum setup ──────────────────────────────────────────────── */}
         <h2 id="minimum-setup" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           The 2026 minimum viable favicon setup
