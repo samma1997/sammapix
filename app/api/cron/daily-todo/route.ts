@@ -473,7 +473,7 @@ sammapix.com`;
           const j = Math.floor(rand() * (i + 1));
           [arr[i], arr[j]] = [arr[j], arr[i]];
         }
-        const picks = arr.slice(0, 10);
+        const picks = arr.slice(0, 5);
         const draftLines = picks
           .map((p) => `• ${p.directoryName} → ${p.directoryUrl}`)
           .join("\n");
@@ -482,9 +482,9 @@ sammapix.com`;
           date: today,
           type: "directory_picks",
           priority: 6,
-          title: `🔗 10 directory picks di oggi (top DA)`,
+          title: `🔗 5 directory picks di oggi (top DA)`,
           description:
-            "Apri Directories nella dashboard, filtro 'Oggi', e marca le fatte. Anti-spam: max 10/gg.",
+            "Apri Directories nella dashboard, falle in 30 min totali, marca 'Messa'. Target 35/sett (5/giorno).",
           actionUrl: "/dashboard/growth/directories",
           draftText: draftLines,
         });
