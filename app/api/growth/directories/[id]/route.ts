@@ -43,6 +43,11 @@ export async function PATCH(
   if (backlinkUrl !== undefined) updateData.backlinkUrl = backlinkUrl;
   if (notes !== undefined) updateData.notes = notes;
   if (status === "listed") updateData.listedAt = new Date();
+  // Aggiorna submittedAt al momento del Click "Messa" (cosi conta nel budget settimanale corrente).
+  // Per "already_done" / "skipped" / "to_submit" non lo tocchiamo (resta il valore di insert).
+  if (status === "submitted" || status === "listed") {
+    updateData.submittedAt = new Date();
+  }
 
   try {
     const [updated] = await db
