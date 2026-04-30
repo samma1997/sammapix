@@ -29,7 +29,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toast": "^1.2.15",
-    "@react-email/components": "^1.0.8",
+    "@react-email/components": "^1.0.12",
     "@react-email/render": "^2.0.4",
     "@stripe/stripe-js": "^8.9.0",
     "@types/canvas-confetti": "^1.9.0",
