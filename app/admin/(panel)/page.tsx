@@ -100,20 +100,7 @@ function DashCard({
   return (
     <Link
       href={href}
-      className="block rounded-2xl p-6 transition-all hover:-translate-y-0.5"
-      style={{
-        background: "var(--surface)",
-        border: "1px solid var(--border)",
-        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.03)",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "var(--accent-mid)";
-        e.currentTarget.style.boxShadow = "0 8px 24px rgba(99, 102, 241, 0.08)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--border)";
-        e.currentTarget.style.boxShadow = "0 1px 2px rgba(0, 0, 0, 0.03)";
-      }}
+      className="dash-card block rounded-2xl p-6 transition-all hover:-translate-y-0.5"
     >
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-lg font-bold" style={{ color: "var(--text)" }}>
