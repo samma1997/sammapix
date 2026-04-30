@@ -1,18 +1,39 @@
-/* ── Admin panel theme (dark + emerald accent, ispirato lucasammarco.com) ── */
+/* ── Admin panel theme — stile SammaPix (light di base, dark supportato) ── */
 .admin-shell {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-alt: #1f1f1f;
-  --border: rgba(255, 255, 255, 0.08);
-  --text: #f5f5f5;
-  --muted: rgba(255, 255, 255, 0.65);
-  --muted-light: rgba(255, 255, 255, 0.4);
-  --accent: #10b981;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f8f8f8;
+  --surface-elev: #ffffff;
+  --border: #e5e5e5;
+  --border-strong: #d4d4d4;
+  --text: #171717;
+  --muted: #737373;
+  --muted-light: #a3a3a3;
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.08);
+  --accent-mid: rgba(99, 102, 241, 0.18);
+  --success: #10b981;
+  --success-soft: rgba(16, 185, 129, 0.1);
+
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+}
+
+html.dark .admin-shell {
+  --bg: #191919;
+  --surface: #1f1f1f;
+  --surface-alt: #262626;
+  --surface-elev: #1f1f1f;
+  --border: #2a2a2a;
+  --border-strong: #333333;
+  --text: #e5e5e5;
+  --muted: #a3a3a3;
+  --muted-light: #737373;
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent-mid: rgba(99, 102, 241, 0.22);
 }
 
 .admin-shell .font-heading {
@@ -27,6 +48,6 @@
 }
 
 .admin-shell ::selection {
-  background: rgba(16, 185, 129, 0.3);
-  color: white;
+  background: var(--accent-mid);
+  color: var(--text);
 }
