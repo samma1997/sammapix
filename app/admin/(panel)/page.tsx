@@ -1,4 +1,5 @@
 import Link from "next/link";
+import WidgetDirectorySummary from "./components/widgets/WidgetDirectorySummary";
 
 export default function AdminDashboard() {
   return (
@@ -52,7 +53,8 @@ export default function AdminDashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl">
+        <WidgetDirectorySummary />
         <DashCard
           href="/admin/seo"
           title="SEO Performance"
@@ -61,7 +63,7 @@ export default function AdminDashboard() {
         <DashCard
           href="/admin/directory"
           title="Directory submission"
-          description="1483 directory aggregate. 5 picks/giorno, target 35/sett. Anti-spam pattern."
+          description="Pool aggregato (cresce ogni lunedì via cron discovery). 5 picks/giorno + email reminder, target 35/sett."
         />
       </div>
 
