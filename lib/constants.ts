@@ -149,4 +149,9 @@ export const ADBLOCK_DISMISS_DAYS = 7;
 export const GEMINI_MODEL = "gemini-2.5-flash";
 
 // Admin emails- allowed to access /admin/* routes
-export const ADMIN_EMAILS = ["luca@sammapix.com", "samma1997@gmail.com", "lucasamm97@gmail.com"];
+export const ADMIN_EMAILS = [
+  "luca@sammapix.com",
+  "samma1997@gmail.com",
+  "lucasamm97@gmail.com",
+  "marketing@alfiobardolla.com",
+];

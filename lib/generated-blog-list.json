@@ -1,5 +1,131 @@
 [
   {
+    "slug": "ai-photo-renamer-custom-directive",
+    "title": "AI Photo Renamer with Custom Directives",
+    "description": "How custom directives let you bias an AI photo renamer toward your naming style — brand-first, ecommerce, Pinterest, niche keywords.",
+    "keywords": [
+      "ai photo renamer custom directive",
+      "ai photo renamer custom prompt",
+      "ai filename custom instructions",
+      "ai rename brand name photos",
+      "ai ecommerce product rename"
+    ],
+    "publishedDate": "2026-04-29",
+    "url": "/blog/ai-photo-renamer-custom-directive"
+  },
+  {
+    "slug": "upscale-image-ai-free-2026",
+    "title": "AI Image Upscaler Free 2026: Real Benchmark 2x vs 4x vs 8x",
+    "description": "How AI image upscaling actually works in 2026, which models produce the best results, and how to upscale 2x/4x/8x for free without paying Topaz or ESR",
+    "keywords": [
+      "ai image upscaler",
+      "upscale image free",
+      "image upscaler 4x",
+      "ai photo enlarger",
+      "enhance image resolution"
+    ],
+    "publishedDate": "2026-04-23",
+    "url": "/blog/upscale-image-ai-free-2026"
+  },
+  {
+    "slug": "extract-brand-colors-from-image-2026",
+    "title": "Extract Brand Colors from Any Image: Free HEX/RGB/HSL Picker [2026]",
+    "description": "How to pull exact HEX, RGB, or HSL values from any image plus build a 6-color brand palette — free, in your browser, no upload. Includes the k-means l",
+    "keywords": [
+      "extract colors from image",
+      "image color picker",
+      "hex from image",
+      "rgb from image",
+      "hsl color picker"
+    ],
+    "publishedDate": "2026-04-22",
+    "url": "/blog/extract-brand-colors-from-image-2026"
+  },
+  {
+    "slug": "favicon-best-practices-2026",
+    "title": "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
+    "description": "Every favicon size for 2026, SVG + ICO hybrid setup, dark mode, PWA manifest icons, and the 4 HTML tags to copy-paste in every site. Generator include",
+    "keywords": [
+      "favicon best practices",
+      "favicon sizes 2026",
+      "favicon svg",
+      "favicon dark mode",
+      "favicon generator"
+    ],
+    "publishedDate": "2026-04-22",
+    "url": "/blog/favicon-best-practices-2026"
+  },
+  {
+    "slug": "gif-to-mp4-stop-using-gifs-2026",
+    "title": "GIF to MP4 Free Online 2026: Browser-Based, No Upload",
+    "description": "Convert GIF to MP4 free in your browser. 10-20x smaller files, same visual quality, no upload, no signup. Twitter, Discord, Slack — all auto-convert G",
+    "keywords": [
+      "gif to mp4",
+      "gif to mp4 converter",
+      "convert gif to mp4",
+      "animated gif to video",
+      "gif vs mp4"
+    ],
+    "publishedDate": "2026-04-22",
+    "url": "/blog/gif-to-mp4-stop-using-gifs-2026"
+  },
+  {
+    "slug": "merge-pdfs-privately-no-upload",
+    "title": "Merge PDFs Privately: No Upload, No Adobe [2026 Guide]",
+    "description": "Most free PDF mergers upload your files to a server. For invoices, contracts, and tax returns that is unacceptable. Here is how to merge PDFs entirely",
+    "keywords": [
+      "merge pdf online",
+      "combine pdf files",
+      "pdf merger no upload",
+      "merge pdf privately",
+      "free pdf merger"
+    ],
+    "publishedDate": "2026-04-22",
+    "url": "/blog/merge-pdfs-privately-no-upload"
+  },
+  {
+    "slug": "png-to-jpg-vs-webp-2026",
+    "title": "PNG to JPG vs WebP: Which One Should You Actually Use in 2026",
+    "description": "Should you convert PNG to JPG or WebP? Real benchmark on 50 images plus a decision framework. WebP beats JPG in 9 out of 10 cases — here is the comple",
+    "keywords": [
+      "png to jpg vs webp",
+      "when to convert png to jpg",
+      "png to webp converter",
+      "png to jpg when",
+      "png vs jpg vs webp"
+    ],
+    "publishedDate": "2026-04-22",
+    "url": "/blog/png-to-jpg-vs-webp-2026"
+  },
+  {
+    "slug": "svg-to-png-complete-guide-developers",
+    "title": "SVG to PNG: Complete Guide for Developers [2026]",
+    "description": "The developer guide to rasterizing SVG into PNG in 2026: intrinsic sizes, @2x/@3x scaling, favicon packs, transparency, and the pitfalls most tutorial",
+    "keywords": [
+      "svg to png",
+      "svg to png converter",
+      "rasterize svg",
+      "convert svg to png",
+      "svg to png high resolution"
+    ],
+    "publishedDate": "2026-04-22",
+    "url": "/blog/svg-to-png-complete-guide-developers"
+  },
+  {
+    "slug": "batch-watermark-photos-free-guide",
+    "title": "Why watermark your photos?",
+    "description": "",
+    "keywords": [
+      "batch watermark photos free",
+      "add watermark to multiple photos",
+      "bulk watermark tool",
+      "watermark photos online",
+      "batch watermark no photoshop"
+    ],
+    "publishedDate": "2026-04-18",
+    "url": "/blog/batch-watermark-photos-free-guide"
+  },
+  {
     "slug": "find-delete-duplicate-photos-free",
     "title": "How to Find & Delete Duplicate Photos Free [2026 Guide]",
     "description": "Your phone has hundreds of duplicate photos eating storage. Here",
@@ -85,7 +211,7 @@
   },
   {
     "slug": "best-free-remove-bg-alternatives-2026",
-    "title": "Best Free Remove.bg Alternatives 2026: 7 Background Removers Tested",
+    "title": "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
     "description": "Remove.bg charges \\u20AC0.36 per image. Here are 7 free alternatives for background removal tested on real photos \\u2014 product shots, portraits, and",
     "keywords": [
       "remove bg alternative free",
@@ -113,7 +239,7 @@
   },
   {
     "slug": "best-free-topaz-gigapixel-alternatives-2026",
-    "title": "Best Free Topaz Gigapixel Alternatives 2026: 7 Tools Tested",
+    "title": "7 Free Topaz Gigapixel Alternatives Tested 2026 (Real Benchmark)",
     "description": "Topaz Gigapixel AI went subscription ($199/year). Here are 7 free alternatives for image upscaling tested on real photos — with quality comparison and",
     "keywords": [
       "topaz gigapixel alternative free",
@@ -169,7 +295,7 @@
   },
   {
     "slug": "which-apps-strip-photo-metadata",
-    "title": "Which Apps Strip Photo Metadata? 12 Apps Tested [2026]",
+    "title": "Which Apps Strip Photo Metadata? 12 Tested + WhatsApp Trap [2026]",
     "description": "We tested 12 apps for EXIF stripping. Some keep your GPS data hidden inside. See the full results — the WhatsApp document trick most people miss.",
     "keywords": [
       "which apps strip photo metadata",
