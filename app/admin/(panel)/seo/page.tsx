@@ -6,9 +6,9 @@ export const metadata = {
 
 export default function AdminSeoPage() {
   return (
-    <div className="relative min-h-screen p-8 lg:p-10 overflow-hidden dark">
+    <div className="relative min-h-screen p-8 lg:p-10 overflow-hidden">
       <div
-        className="pointer-events-none absolute top-[-80px] right-[-60px] w-[420px] h-[420px] rounded-full opacity-[0.04] blur-[100px]"
+        className="pointer-events-none absolute top-[-80px] right-[-60px] w-[420px] h-[420px] rounded-full opacity-[0.05] blur-[100px]"
         style={{ background: "var(--accent)" }}
       />
 
@@ -16,8 +16,8 @@ export default function AdminSeoPage() {
         <div
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-5"
           style={{
-            background: "rgba(16, 185, 129, 0.08)",
-            border: "1px solid rgba(16, 185, 129, 0.15)",
+            background: "var(--accent-soft)",
+            border: "1px solid var(--accent-mid)",
           }}
         >
           <span
@@ -32,14 +32,14 @@ export default function AdminSeoPage() {
           </span>
         </div>
         <h1
-          className="font-heading text-4xl lg:text-5xl font-black tracking-tight leading-[1.08]"
+          className="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.08]"
           style={{ color: "var(--text)" }}
         >
           Performance{" "}
           <span
             style={{
               background:
-                "linear-gradient(90deg, var(--accent), rgba(110, 231, 183, 1))",
+                "linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}

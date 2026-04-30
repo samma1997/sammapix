@@ -82,32 +82,23 @@ export default function Sidebar() {
         <div
           className="relative inline-flex items-center justify-center w-10 h-10 rounded-xl mb-4"
           style={{
-            background: "rgba(16, 185, 129, 0.1)",
-            border: "1px solid rgba(16, 185, 129, 0.2)",
+            background:
+              "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)",
+            boxShadow: "0 4px 14px rgba(99, 102, 241, 0.25)",
           }}
         >
-          <span
-            className="font-heading text-lg font-black leading-none select-none"
-            style={{ color: "var(--accent)" }}
-          >
+          <span className="text-lg font-black leading-none select-none text-white">
             SP
           </span>
-          <span
-            className="absolute inset-x-0 top-0 h-px rounded-t-xl opacity-60"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, var(--accent), transparent)",
-            }}
-          />
         </div>
         <p
-          className="font-heading text-base font-black tracking-tight leading-none"
+          className="font-heading text-base font-bold tracking-tight leading-none"
           style={{ color: "var(--text)" }}
         >
           SammaPix
         </p>
         <p
-          className="text-[11px] mt-1 tracking-wide uppercase"
+          className="text-[11px] mt-1 tracking-wide uppercase font-medium"
           style={{ color: "var(--muted-light)" }}
         >
           Admin Panel
@@ -136,7 +127,7 @@ export default function Sidebar() {
                   style={
                     active
                       ? {
-                          background: "rgba(16, 185, 129, 0.1)",
+                          background: "var(--accent-soft)",
                           color: "var(--accent)",
                         }
                       : {
@@ -166,7 +157,7 @@ export default function Sidebar() {
                   <span className="leading-none">{item.label}</span>
                   {active && (
                     <span
-                      className="ml-auto w-1.5 h-1.5 rounded-full opacity-70"
+                      className="ml-auto w-1.5 h-1.5 rounded-full"
                       style={{ background: "var(--accent)" }}
                     />
                   )}
@@ -203,8 +194,8 @@ export default function Sidebar() {
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-150"
           style={{ color: "var(--muted-light)" }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(239, 68, 68, 0.05)";
-            e.currentTarget.style.color = "#f87171";
+            e.currentTarget.style.background = "rgba(239, 68, 68, 0.06)";
+            e.currentTarget.style.color = "#ef4444";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "transparent";

@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 
 /* ═══════════════════════════════════════════════════════════════════
-   DirectoryListPanel — port 1:1 da lucasammarco-com admin/directory
-   adattato a SammaPix (API /api/growth/directories, schema growth_directory_submissions)
+   DirectoryListPanel — stile SammaPix (light di base, accent indigo)
+   API: /api/growth/directories (Neon, growth_directory_submissions)
 ═══════════════════════════════════════════════════════════════════ */
 
 type DirStatus =
@@ -32,7 +32,6 @@ interface DirectoryItem {
   historical: boolean;
   submitted: boolean;
   submitted_this_week: boolean;
-  submitted_at?: string;
 }
 
 const TAG_LABELS: Record<string, string> = {
@@ -54,7 +53,7 @@ const DA_BUCKETS = [
   { label: "Tutte", min: 0 },
 ];
 
-const WEEKLY_TARGET = 35; // 5/giorno x 7
+const WEEKLY_TARGET = 35;
 const DAILY_PICKS = 5;
 
 /* ─── Helpers ─────────────────────────────────────────────────────── */
@@ -161,9 +160,7 @@ export default function DirectoryListPanel() {
         ? new Date().toISOString()
         : raw.find((r) => r.id === id)?.submittedAt ?? null;
     setRaw((s) =>
-      s.map((r) =>
-        r.id === id ? { ...r, status, submittedAt: optDate } : r
-      )
+      s.map((r) => (r.id === id ? { ...r, status, submittedAt: optDate } : r))
     );
     try {
       const res = await fetch(`/api/growth/directories/${id}`, {
@@ -201,7 +198,6 @@ export default function DirectoryListPanel() {
           !isHistorical &&
           (r.status === "submitted" || r.status === "listed") &&
           subTime >= weekStart,
-        submitted_at: r.submittedAt ?? undefined,
       };
     });
   }, [raw]);
@@ -213,11 +209,19 @@ export default function DirectoryListPanel() {
   }, [items]);
 
   const stats = useMemo(() => {
-    const submittedAll = items.filter((i) => i.submitted && !i.historical).length;
+    const submittedAll = items.filter(
+      (i) => i.submitted && !i.historical
+    ).length;
     const submittedThisWeek = items.filter((i) => i.submitted_this_week).length;
     const historical = items.filter((i) => i.historical).length;
     const pending = items.length - submittedAll - historical;
-    return { total: items.length, submittedAll, submittedThisWeek, historical, pending };
+    return {
+      total: items.length,
+      submittedAll,
+      submittedThisWeek,
+      historical,
+      pending,
+    };
   }, [items]);
 
   const dailyPicks = useMemo(() => {
@@ -247,15 +251,19 @@ export default function DirectoryListPanel() {
   return (
     <section
       className="rounded-2xl p-6 lg:p-8"
-      style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+      style={{
+        background: "var(--surface)",
+        border: "1px solid var(--border)",
+        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.03)",
+      }}
     >
       <div className="flex items-start justify-between gap-4 flex-wrap mb-6">
         <div>
           <div
             className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full mb-3"
             style={{
-              background: "rgba(16, 185, 129, 0.1)",
-              border: "1px solid rgba(16, 185, 129, 0.2)",
+              background: "var(--accent-soft)",
+              border: "1px solid var(--accent-mid)",
             }}
           >
             <span
@@ -275,7 +283,10 @@ export default function DirectoryListPanel() {
           >
             Directory di submission
           </h2>
-          <p className="mt-1.5 text-sm max-w-2xl" style={{ color: "var(--muted)" }}>
+          <p
+            className="mt-1.5 text-sm max-w-2xl"
+            style={{ color: "var(--muted)" }}
+          >
             {stats.total} directory aggregate da fonti pubbliche.{" "}
             <span style={{ color: "var(--text)", fontWeight: 500 }}>
               Lista completa qui sotto
@@ -292,8 +303,8 @@ export default function DirectoryListPanel() {
           className="mb-5 rounded-xl p-4"
           style={{
             background:
-              "linear-gradient(to bottom right, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.02))",
-            border: "1px solid rgba(16, 185, 129, 0.3)",
+              "linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(139, 92, 246, 0.03))",
+            border: "1px solid var(--accent-mid)",
           }}
         >
           <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
@@ -323,14 +334,14 @@ export default function DirectoryListPanel() {
                 key={d.id}
                 className="flex items-center gap-3 px-3 py-2 rounded-lg"
                 style={{
-                  background: "rgba(0, 0, 0, 0.2)",
-                  border: "1px solid rgba(16, 185, 129, 0.15)",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
                 }}
               >
                 <span
                   className="px-1.5 py-0.5 rounded text-[10px] font-bold flex-shrink-0"
                   style={{
-                    background: "rgba(16, 185, 129, 0.2)",
+                    background: "var(--accent-soft)",
                     color: "var(--accent)",
                   }}
                 >
@@ -358,8 +369,8 @@ export default function DirectoryListPanel() {
                   <span
                     className="text-[10px] font-semibold px-2 py-1 rounded"
                     style={{
-                      background: "rgba(16, 185, 129, 0.2)",
-                      color: "var(--accent)",
+                      background: "var(--success-soft)",
+                      color: "var(--success)",
                     }}
                   >
                     Fatta
@@ -372,7 +383,7 @@ export default function DirectoryListPanel() {
                       }
                       disabled={busy === d.id}
                       className="text-[11px] font-semibold px-2.5 py-1 rounded-md transition disabled:opacity-50"
-                      style={{ background: "var(--accent)", color: "#000" }}
+                      style={{ background: "var(--accent)", color: "#fff" }}
                     >
                       Messa
                     </button>
@@ -416,9 +427,9 @@ export default function DirectoryListPanel() {
               style={{
                 color:
                   weekProgress >= WEEKLY_TARGET
-                    ? "#fbbf24"
+                    ? "#f59e0b"
                     : weekProgress >= WEEKLY_TARGET * 0.7
-                      ? "var(--accent)"
+                      ? "var(--success)"
                       : "var(--text)",
               }}
             >
@@ -439,7 +450,10 @@ export default function DirectoryListPanel() {
             className="h-full transition-all"
             style={{
               width: `${weekPct}%`,
-              background: weekProgress >= WEEKLY_TARGET ? "#fbbf24" : "var(--accent)",
+              background:
+                weekProgress >= WEEKLY_TARGET
+                  ? "#f59e0b"
+                  : "linear-gradient(90deg, #6366f1, #8b5cf6)",
             }}
           />
         </div>
@@ -451,7 +465,7 @@ export default function DirectoryListPanel() {
             <strong style={{ color: "var(--text)" }}>{stats.pending}</strong> da fare
           </span>
           <span>
-            <strong style={{ color: "var(--accent)" }}>{stats.submittedAll}</strong>{" "}
+            <strong style={{ color: "var(--success)" }}>{stats.submittedAll}</strong>{" "}
             fatte (totale)
           </span>
           <span>
@@ -478,9 +492,9 @@ export default function DirectoryListPanel() {
                 style={
                   minDA === b.min
                     ? {
-                        background: "rgba(16, 185, 129, 0.2)",
+                        background: "var(--accent-soft)",
                         color: "var(--accent)",
-                        border: "1px solid rgba(16, 185, 129, 0.4)",
+                        border: "1px solid var(--accent-mid)",
                       }
                     : {
                         background: "var(--surface-alt)",
@@ -575,7 +589,7 @@ export default function DirectoryListPanel() {
           Caricamento...
         </div>
       ) : error ? (
-        <div className="text-sm py-8 text-center" style={{ color: "#f87171" }}>
+        <div className="text-sm py-8 text-center" style={{ color: "#ef4444" }}>
           {error}
         </div>
       ) : filtered.length === 0 ? (
@@ -595,9 +609,9 @@ export default function DirectoryListPanel() {
                 style={{
                   borderTop: idx > 0 ? "1px solid var(--border)" : "none",
                   background: d.historical
-                    ? "rgba(31, 31, 31, 0.5)"
+                    ? "var(--surface-alt)"
                     : d.submitted
-                      ? "rgba(16, 185, 129, 0.04)"
+                      ? "var(--success-soft)"
                       : "transparent",
                   opacity: d.historical ? 0.6 : 1,
                 }}
@@ -607,19 +621,19 @@ export default function DirectoryListPanel() {
                   style={{
                     background:
                       d.da >= 80
-                        ? "rgba(16, 185, 129, 0.2)"
+                        ? "var(--accent-soft)"
                         : d.da >= 60
-                          ? "rgba(96, 165, 250, 0.2)"
+                          ? "rgba(59, 130, 246, 0.1)"
                           : d.da >= 40
-                            ? "rgba(192, 132, 252, 0.15)"
+                            ? "rgba(168, 85, 247, 0.1)"
                             : "var(--surface-alt)",
                     color:
                       d.da >= 80
                         ? "var(--accent)"
                         : d.da >= 60
-                          ? "#93c5fd"
+                          ? "#3b82f6"
                           : d.da >= 40
-                            ? "#d8b4fe"
+                            ? "#a855f7"
                             : "var(--muted)",
                   }}
                 >
@@ -655,13 +669,13 @@ export default function DirectoryListPanel() {
                         background: d.historical
                           ? "var(--border)"
                           : d.submitted_this_week
-                            ? "rgba(16, 185, 129, 0.2)"
-                            : "rgba(96, 165, 250, 0.15)",
+                            ? "var(--success-soft)"
+                            : "rgba(59, 130, 246, 0.1)",
                         color: d.historical
                           ? "var(--muted)"
                           : d.submitted_this_week
-                            ? "var(--accent)"
-                            : "#93c5fd",
+                            ? "var(--success)"
+                            : "#3b82f6",
                       }}
                     >
                       {d.historical
@@ -689,9 +703,9 @@ export default function DirectoryListPanel() {
                       disabled={busy === d.id}
                       className="text-[11px] font-semibold px-2.5 py-1 rounded-md transition disabled:opacity-50"
                       style={{
-                        background: "rgba(16, 185, 129, 0.15)",
+                        background: "var(--accent-soft)",
                         color: "var(--accent)",
-                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        border: "1px solid var(--accent-mid)",
                       }}
                     >
                       Messa
@@ -734,8 +748,8 @@ export default function DirectoryListPanel() {
         <div
           className="rounded-lg p-3"
           style={{
-            background: "rgba(16, 185, 129, 0.04)",
-            border: "1px solid rgba(16, 185, 129, 0.15)",
+            background: "var(--accent-soft)",
+            border: "1px solid var(--accent-mid)",
             color: "var(--muted)",
           }}
         >
