@@ -136,7 +136,7 @@ export async function GET(request: NextRequest) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "SammaPix Admin <admin@sammapix.com>",
+          from: "Luca from SammaPix <hello@sammapix.com>",
           to: TO_EMAIL,
           subject: `Daily Picks: 5 directory di oggi (${todayStr})`,
           html,
