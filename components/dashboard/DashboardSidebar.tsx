@@ -262,26 +262,14 @@ export default function DashboardSidebar({
         </Link>
 
         {userEmail && ADMIN_EMAILS.includes(userEmail) && (
-          <>
-            <Link
-              href="/dashboard/growth/overview"
-              onClick={() => setMobileOpen(false)}
-              className={linkClasses("/dashboard/growth")}
-            >
-              <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="m7 14 4-4 4 4 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              Growth HQ
-            </Link>
-            {pathname.startsWith("/dashboard/growth") && (
-              <div className="ml-6 space-y-0.5">
-                <Link href="/dashboard/growth/overview" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/overview")}>
-                  <span className="h-4 w-4 shrink-0 text-center text-xs">📊</span> Overview
-                </Link>
-                <Link href="/dashboard/growth/directories" onClick={() => setMobileOpen(false)} className={linkClasses("/dashboard/growth/directories")}>
-                  <span className="h-4 w-4 shrink-0 text-center text-xs">🔗</span> Directories
-                </Link>
-              </div>
-            )}
-          </>
+          <Link
+            href="/admin"
+            onClick={() => setMobileOpen(false)}
+            className={linkClasses("/admin")}
+          >
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Admin Panel
+          </Link>
         )}
 
         <div className="pt-3">
@@ -428,11 +416,11 @@ export default function DashboardSidebar({
           <div className="absolute bottom-full left-2 right-2 mb-1 bg-white dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3)] py-1 z-50">
             {userEmail && ADMIN_EMAILS.includes(userEmail) && (
               <button
-                onClick={() => mobileNav("/dashboard/growth")}
-                className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#6366f1] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors duration-150 w-full text-left font-medium"
+                onClick={() => mobileNav("/admin")}
+                className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#10b981] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] transition-colors duration-150 w-full text-left font-medium"
               >
-                <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="m7 14 4-4 4 4 6-6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                Growth HQ
+                <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Admin Panel
               </button>
             )}
             <button
