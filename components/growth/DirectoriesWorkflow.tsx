@@ -3,13 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 
 /* ═══════════════════════════════════════════════════════════════════
-   DirectoriesWorkflow
-   UI per registrare SammaPix in directory esterne con quota settimanale
-   anti-spam (50/sett. = 2600/anno).
-   - 3 azioni per riga: "Apri & marca fatta" / "Già fatta in passato" / "Skip"
-   - "Già fatta in passato" NON conta nella quota settimanale
-   - Filtri: Da fare / Fatte questa settimana / Già fatte / Skipped / Tutte
-   - Sort per DA estratto dai notes
+   DirectoriesWorkflow — design ispirato a lucasammarco admin/directory.
+   - Daily picks: 5 directory diverse ogni giorno (deterministic)
+   - Budget settimanale 35/sett (5/gg) per evitare spam
+   - Filtri: DA bucket chips, Categoria dropdown, Search dominio
+   - Toggle: Nascondi gia messe / Nascondi storiche
+   - 'Messa' = adesso (conta budget) | 'Gia messa' = archivio (non conta)
 ═══════════════════════════════════════════════════════════════════ */
 
 type DirectoryStatus =
@@ -30,14 +29,23 @@ interface Directory {
   notes: string | null;
 }
 
-const WEEKLY_QUOTA = 50;
+const WEEKLY_TARGET = 35;
+const DAILY_PICKS_COUNT = 5;
+
+const DA_BUCKETS = [
+  { label: "DA 80+", min: 80 },
+  { label: "DA 60+", min: 60 },
+  { label: "DA 40+", min: 40 },
+  { label: "DA 30+", min: 30 },
+  { label: "Tutte", min: 0 },
+];
 
 /* ─── Helpers ─────────────────────────────────────────────────────── */
 
 function getStartOfWeek(): Date {
   const now = new Date();
   const day = now.getDay();
-  const diff = day === 0 ? -6 : 1 - day; // Lunedì = inizio settimana
+  const diff = day === 0 ? -6 : 1 - day;
   const start = new Date(now);
   start.setDate(now.getDate() + diff);
   start.setHours(0, 0, 0, 0);
@@ -46,205 +54,103 @@ function getStartOfWeek(): Date {
 
 function parseDA(notes: string | null): number {
   if (!notes) return 0;
-  const match = notes.match(/DA[:\s]*(\d+)/i);
-  return match ? parseInt(match[1], 10) : 0;
+  const m = notes.match(/DA[:\s]*(\d+)/i);
+  return m ? parseInt(m[1], 10) : 0;
 }
 
 function parseCategory(notes: string | null): string {
-  if (!notes) return "Altro";
-  const bracketMatch = notes.match(/\[([^\]]+)\]/);
-  if (bracketMatch) return bracketMatch[1];
-  const lowerNotes = notes.toLowerCase();
-  if (lowerNotes.includes("ai tool")) return "AI Tools";
-  if (lowerNotes.includes("saas") || lowerNotes.includes("software")) return "SaaS";
-  if (lowerNotes.includes("startup") || lowerNotes.includes("indie")) return "Startup";
-  if (lowerNotes.includes("profile")) return "Profile";
-  if (lowerNotes.includes("mighty")) return "Community";
-  return "Altro";
+  if (!notes) return "other";
+  const bracket = notes.match(/\[([^\]]+)\]/);
+  if (bracket) return bracket[1].toLowerCase().replace(/\s+/g, "_");
+  const lower = notes.toLowerCase();
+  if (lower.includes("ai tool")) return "ai_tools";
+  if (lower.includes("saas") || lower.includes("software")) return "saas";
+  if (lower.includes("startup") || lower.includes("indie")) return "startup";
+  if (lower.includes("profile")) return "profile";
+  if (lower.includes("mighty")) return "community";
+  return "directory";
+}
+
+function getHostname(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+function getDayOfYear(d: Date): number {
+  const start = new Date(d.getFullYear(), 0, 0);
+  return Math.floor((d.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+}
+
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const out = [...arr];
+  let s = seed;
+  const rand = () => {
+    s |= 0;
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
 }
 
 function isThisWeek(dateStr: string | null): boolean {
   if (!dateStr) return false;
   const date = new Date(dateStr);
-  const start = getStartOfWeek();
-  return date >= start;
-}
-
-/* ─── Daily picks (deterministic per day) ──────────────────────────── */
-function getDayOfYear(d: Date): number {
-  const start = new Date(d.getFullYear(), 0, 0);
-  const diff = d.getTime() - start.getTime();
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
-}
-
-// Mulberry32 seeded PRNG
-function seededRandom(seed: number) {
-  return function () {
-    seed |= 0;
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function getDailyPicks(directories: Directory[], count = 10): Directory[] {
-  const todo = directories.filter((d) => d.status === "to_submit");
-  // Top 200 by DA so high-quality bias
-  const pool = [...todo]
-    .sort((a, b) => parseDA(b.notes) - parseDA(a.notes))
-    .slice(0, 200);
-
-  const today = new Date();
-  const seed = today.getFullYear() * 1000 + getDayOfYear(today);
-  const rand = seededRandom(seed);
-  const arr = [...pool];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr.slice(0, count);
+  return date >= getStartOfWeek();
 }
 
 /* ─── Component ───────────────────────────────────────────────────── */
-
-type FilterTab =
-  | "today"
-  | "todo"
-  | "this_week"
-  | "already_done"
-  | "skipped"
-  | "all";
-type SortMode = "da_desc" | "name_asc" | "category";
 
 export default function DirectoriesWorkflow() {
   const [directories, setDirectories] = useState<Directory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState<FilterTab>("today");
-  const [sortMode, setSortMode] = useState<SortMode>("da_desc");
-  const [search, setSearch] = useState("");
-  const [updatingId, setUpdatingId] = useState<number | null>(null);
-  const [pageSize, setPageSize] = useState(50);
+  const [busyId, setBusyId] = useState<number | null>(null);
 
-  const loadDirectories = async () => {
+  // Filters
+  const [minDA, setMinDA] = useState(60);
+  const [tagFilter, setTagFilter] = useState<string>("all");
+  const [hideSubmitted, setHideSubmitted] = useState(true);
+  const [hideHistorical, setHideHistorical] = useState(true);
+  const [search, setSearch] = useState("");
+
+  const load = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const res = await fetch("/api/growth/directories", { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setDirectories(data.directories ?? []);
+      const j = await res.json();
+      setDirectories(j.directories ?? []);
       setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Errore caricamento");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Errore caricamento");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadDirectories();
+    load();
   }, []);
-
-  /* ─── Computed metrics ────────────────────────────────────────── */
-
-  const weeklyDone = useMemo(
-    () =>
-      directories.filter(
-        (d) =>
-          (d.status === "submitted" || d.status === "listed") &&
-          isThisWeek(d.submittedAt)
-      ).length,
-    [directories]
-  );
-
-  const totals = useMemo(() => {
-    const todo = directories.filter((d) => d.status === "to_submit").length;
-    const submitted = directories.filter((d) => d.status === "submitted").length;
-    const listed = directories.filter((d) => d.status === "listed").length;
-    const alreadyDone = directories.filter(
-      (d) => d.status === "already_done"
-    ).length;
-    const skipped = directories.filter((d) => d.status === "skipped").length;
-    return {
-      todo,
-      submitted,
-      listed,
-      alreadyDone,
-      skipped,
-      total: directories.length,
-    };
-  }, [directories]);
-
-  /* ─── Filtered + sorted list ──────────────────────────────────── */
-
-  const dailyPicks = useMemo(() => getDailyPicks(directories, 10), [directories]);
-  const dailyPicksDoneCount = useMemo(
-    () => dailyPicks.filter((d) => d.status !== "to_submit").length,
-    [dailyPicks]
-  );
-
-  const filtered = useMemo(() => {
-    let list = [...directories];
-
-    if (filter === "today") {
-      const ids = new Set(dailyPicks.map((d) => d.id));
-      list = list.filter((d) => ids.has(d.id));
-    } else if (filter === "todo") {
-      list = list.filter((d) => d.status === "to_submit");
-    } else if (filter === "this_week") {
-      list = list.filter(
-        (d) =>
-          (d.status === "submitted" || d.status === "listed") &&
-          isThisWeek(d.submittedAt)
-      );
-    } else if (filter === "already_done") {
-      list = list.filter((d) => d.status === "already_done");
-    } else if (filter === "skipped") {
-      list = list.filter((d) => d.status === "skipped");
-    }
-
-    if (search.trim()) {
-      const q = search.toLowerCase().trim();
-      list = list.filter(
-        (d) =>
-          d.directoryName.toLowerCase().includes(q) ||
-          d.directoryUrl.toLowerCase().includes(q) ||
-          (d.notes ?? "").toLowerCase().includes(q)
-      );
-    }
-
-    if (sortMode === "da_desc") {
-      list.sort((a, b) => parseDA(b.notes) - parseDA(a.notes));
-    } else if (sortMode === "name_asc") {
-      list.sort((a, b) => a.directoryName.localeCompare(b.directoryName));
-    } else if (sortMode === "category") {
-      list.sort((a, b) => {
-        const ca = parseCategory(a.notes);
-        const cb = parseCategory(b.notes);
-        if (ca !== cb) return ca.localeCompare(cb);
-        return parseDA(b.notes) - parseDA(a.notes);
-      });
-    }
-
-    return list;
-  }, [directories, filter, search, sortMode, dailyPicks]);
-
-  /* ─── Action handlers ─────────────────────────────────────────── */
 
   const updateStatus = async (
     dir: Directory,
     newStatus: DirectoryStatus,
     extra?: { openTab?: boolean }
   ) => {
-    if (updatingId !== null) return;
-    setUpdatingId(dir.id);
-
+    if (busyId !== null) return;
+    setBusyId(dir.id);
     if (extra?.openTab) {
       window.open(dir.directoryUrl, "_blank", "noopener,noreferrer");
     }
-
-    // Optimistic update
     const prev = directories;
     const optimisticDate =
       newStatus === "submitted" || newStatus === "listed"
@@ -257,7 +163,6 @@ export default function DirectoriesWorkflow() {
           : x
       )
     );
-
     try {
       const res = await fetch(`/api/growth/directories/${dir.id}`, {
         method: "PATCH",
@@ -265,334 +170,440 @@ export default function DirectoriesWorkflow() {
         body: JSON.stringify({ status: newStatus }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    } catch (err) {
-      console.error("[DirectoriesWorkflow] update failed", err);
+    } catch (e) {
       setDirectories(prev);
-      setError(err instanceof Error ? err.message : "Errore aggiornamento");
+      setError(e instanceof Error ? e.message : "Errore aggiornamento");
     } finally {
-      setUpdatingId(null);
+      setBusyId(null);
     }
   };
+
+  /* ─── Computed ────────────────────────────────────────────────── */
+
+  const enriched = useMemo(
+    () =>
+      directories.map((d) => ({
+        ...d,
+        da: parseDA(d.notes),
+        tag: parseCategory(d.notes),
+        domain: getHostname(d.directoryUrl),
+        isSubmitted:
+          d.status === "submitted" ||
+          d.status === "listed" ||
+          d.status === "already_done",
+        isHistorical: d.status === "already_done",
+        isThisWeek:
+          (d.status === "submitted" || d.status === "listed") &&
+          isThisWeek(d.submittedAt),
+      })),
+    [directories]
+  );
+
+  const totals = useMemo(() => {
+    const total = enriched.length;
+    const submittedAll = enriched.filter(
+      (d) => d.isSubmitted && !d.isHistorical
+    ).length;
+    const submittedThisWeek = enriched.filter((d) => d.isThisWeek).length;
+    const historical = enriched.filter((d) => d.isHistorical).length;
+    const pending = enriched.filter((d) => d.status === "to_submit").length;
+    return { total, submittedAll, submittedThisWeek, historical, pending };
+  }, [enriched]);
+
+  const dailyPicks = useMemo(() => {
+    const pending = enriched.filter((d) => d.status === "to_submit");
+    const pool = [...pending].sort((a, b) => b.da - a.da).slice(0, 200);
+    const today = new Date();
+    const seed = today.getFullYear() * 1000 + getDayOfYear(today);
+    return seededShuffle(pool, seed).slice(0, DAILY_PICKS_COUNT);
+  }, [enriched]);
+
+  const dailyPickIds = useMemo(
+    () => new Set(dailyPicks.map((d) => d.id)),
+    [dailyPicks]
+  );
+
+  const tagOptions = useMemo(() => {
+    const set = new Set<string>();
+    enriched.forEach((d) => set.add(d.tag));
+    return Array.from(set).sort();
+  }, [enriched]);
+
+  const filtered = useMemo(() => {
+    let out = enriched.filter((d) => d.da >= minDA);
+    if (tagFilter !== "all") out = out.filter((d) => d.tag === tagFilter);
+    if (hideHistorical) out = out.filter((d) => !d.isHistorical);
+    if (hideSubmitted) out = out.filter((d) => !d.isSubmitted);
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      out = out.filter(
+        (d) =>
+          d.domain.toLowerCase().includes(q) ||
+          d.directoryName.toLowerCase().includes(q)
+      );
+    }
+    out.sort((a, b) => b.da - a.da);
+    return out;
+  }, [enriched, minDA, tagFilter, hideHistorical, hideSubmitted, search]);
+
+  const weekProgress = totals.submittedThisWeek;
+  const weekPct = Math.min(100, (weekProgress / WEEKLY_TARGET) * 100);
 
   /* ─── UI ──────────────────────────────────────────────────────── */
 
-  const quotaPct = Math.min(100, (weeklyDone / WEEKLY_QUOTA) * 100);
-  const quotaColor =
-    weeklyDone >= WEEKLY_QUOTA
-      ? "from-emerald-500 to-emerald-400"
-      : weeklyDone >= WEEKLY_QUOTA * 0.6
-        ? "from-[#6366F1] to-emerald-400"
-        : "from-amber-500 to-[#6366F1]";
-
   return (
-    <div className="space-y-6">
-      {/* ─── Quota header ─────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1F1F1F] p-6 lg:p-7 shadow-sm">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] font-medium text-[#6366F1] tracking-wide uppercase">
-                Quota settimanale
-              </span>
+    <section className="rounded-2xl bg-white dark:bg-[#1F1F1F] border border-[#E5E5E5] dark:border-[#2A2A2A] p-6 lg:p-8">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4 flex-wrap mb-6">
+        <div>
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-300 tracking-wide uppercase">
+              Backlink Building
+            </span>
+          </div>
+          <h2 className="text-xl lg:text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">
+            Directory di submission
+          </h2>
+          <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3] max-w-2xl">
+            {totals.total} directory aggregate da fonti pubbliche.{" "}
+            <span className="text-[#171717] dark:text-[#E5E5E5] font-medium">
+              Lista completa qui sotto
+            </span>
+            ; in alto le {DAILY_PICKS_COUNT} di oggi (rotazione automatica). Target{" "}
+            {WEEKLY_TARGET}/sett ({DAILY_PICKS_COUNT}/giorno) per evitare spam.
+          </p>
+        </div>
+      </div>
+
+      {/* Daily picks */}
+      {dailyPicks.length > 0 && (
+        <div className="mb-5 rounded-xl bg-gradient-to-br from-emerald-400/[0.08] to-emerald-400/[0.02] border border-emerald-400/30 p-4">
+          <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
+            <div>
+              <p className="text-[10px] font-bold text-emerald-600 dark:text-emerald-300 uppercase tracking-wider mb-1">
+                Daily Picks: oggi tocca a queste
+              </p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                Selezione automatica del giorno (rotazione deterministica). Falle
+                in 30 min totali.
+              </p>
             </div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-[#171717] dark:text-[#E5E5E5]">
-              {weeklyDone}
-              <span className="text-[#737373] dark:text-[#A3A3A3] font-medium">
-                {" "}
-                / {WEEKLY_QUOTA}
-              </span>
-            </h2>
-            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mt-1">
-              Directory registrate da lunedì.{" "}
-              <span className="text-[#525252] dark:text-[#B5B5B5]">
-                {WEEKLY_QUOTA}/sett. = ritmo realistico, anti-spam.
-              </span>
-            </p>
+            <span className="text-[11px] text-[#737373] dark:text-[#A3A3A3]">
+              {new Date().toLocaleDateString("it-IT", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+              })}
+            </span>
           </div>
-          <div className="flex flex-wrap gap-3 text-xs lg:text-[13px]">
-            <StatChip label="Da fare" value={totals.todo} accent="blue" />
-            <StatChip
-              label="Submitted"
-              value={totals.submitted + totals.listed}
-              accent="green"
-            />
-            <StatChip label="Già fatte" value={totals.alreadyDone} accent="gray" />
-            <StatChip label="Skippate" value={totals.skipped} accent="gray" />
-            <StatChip label="Totale" value={totals.total} accent="indigo" />
+          <div className="space-y-1.5">
+            {dailyPicks.map((d) => (
+              <div
+                key={d.id}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg bg-black/5 dark:bg-black/20 border border-emerald-400/15"
+              >
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-400/20 text-emerald-700 dark:text-emerald-300 flex-shrink-0">
+                  DA {d.da}
+                </span>
+                <a
+                  href={d.directoryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-sm font-medium flex-1 truncate ${
+                    d.isSubmitted
+                      ? "text-[#A3A3A3] line-through"
+                      : "text-[#171717] dark:text-[#E5E5E5] hover:text-emerald-600 dark:hover:text-emerald-300"
+                  }`}
+                >
+                  {d.domain}
+                </a>
+                <span className="text-[10px] text-[#737373] dark:text-[#A3A3A3] hidden sm:inline">
+                  {d.tag}
+                </span>
+                {d.isSubmitted ? (
+                  <span className="text-[10px] font-semibold px-2 py-1 rounded bg-emerald-400/20 text-emerald-700 dark:text-emerald-300">
+                    Fatta
+                  </span>
+                ) : (
+                  <div className="flex gap-1.5">
+                    <button
+                      onClick={() =>
+                        updateStatus(d, "submitted", { openTab: true })
+                      }
+                      disabled={busyId === d.id}
+                      className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-emerald-400 text-black hover:bg-emerald-300 transition disabled:opacity-50"
+                    >
+                      Messa
+                    </button>
+                    <button
+                      onClick={() => updateStatus(d, "already_done")}
+                      disabled={busyId === d.id}
+                      className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#F5F5F5] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition disabled:opacity-50"
+                    >
+                      Gia messa
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        </div>
-        <div className="mt-5 h-2.5 w-full rounded-full bg-[#F5F5F5] dark:bg-[#262626] overflow-hidden">
-          <div
-            className={`h-full bg-gradient-to-r ${quotaColor} transition-all`}
-            style={{ width: `${quotaPct}%` }}
-          />
-        </div>
-      </div>
-
-      {/* ─── Filter + search + sort ───────────────────────────── */}
-      <div className="rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1F1F1F] p-4 lg:p-5">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex flex-wrap gap-2">
-            <FilterChip
-              label={`Oggi (${dailyPicksDoneCount}/${dailyPicks.length})`}
-              active={filter === "today"}
-              onClick={() => setFilter("today")}
-            />
-            <FilterChip
-              label={`Da fare (${totals.todo})`}
-              active={filter === "todo"}
-              onClick={() => setFilter("todo")}
-            />
-            <FilterChip
-              label={`Questa settimana (${weeklyDone})`}
-              active={filter === "this_week"}
-              onClick={() => setFilter("this_week")}
-            />
-            <FilterChip
-              label={`Già fatte (${totals.alreadyDone})`}
-              active={filter === "already_done"}
-              onClick={() => setFilter("already_done")}
-            />
-            <FilterChip
-              label={`Skippate (${totals.skipped})`}
-              active={filter === "skipped"}
-              onClick={() => setFilter("skipped")}
-            />
-            <FilterChip
-              label={`Tutte (${totals.total})`}
-              active={filter === "all"}
-              onClick={() => setFilter("all")}
-            />
-          </div>
-          <div className="flex flex-1 gap-2 lg:justify-end">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Cerca directory…"
-              className="flex-1 lg:max-w-xs px-3 py-2 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#171717] text-sm text-[#171717] dark:text-[#E5E5E5] placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#6366F1]"
-            />
-            <select
-              value={sortMode}
-              onChange={(e) => setSortMode(e.target.value as SortMode)}
-              className="px-3 py-2 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#171717] text-sm text-[#171717] dark:text-[#E5E5E5] focus:outline-none focus:border-[#6366F1]"
-            >
-              <option value="da_desc">DA (alta → bassa)</option>
-              <option value="name_asc">Nome A-Z</option>
-              <option value="category">Categoria</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── Status / error ───────────────────────────────────── */}
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 dark:border-red-900/30 dark:bg-red-950/20 p-4 text-sm text-red-700 dark:text-red-400">
-          {error}
         </div>
       )}
 
-      {/* ─── List ─────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1F1F1F] overflow-hidden">
-        {loading ? (
-          <div className="p-10 text-center text-[#737373] dark:text-[#A3A3A3]">
-            Caricamento directory…
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="p-10 text-center text-[#737373] dark:text-[#A3A3A3]">
-            Nessuna directory in questo filtro.
-          </div>
-        ) : (
-          <>
-            <div className="divide-y divide-[#F0F0F0] dark:divide-[#2A2A2A]">
-              {filtered.slice(0, pageSize).map((dir) => (
-                <DirectoryRow
-                  key={dir.id}
-                  dir={dir}
-                  updating={updatingId === dir.id}
-                  onMarkSubmitted={() =>
-                    updateStatus(dir, "submitted", { openTab: true })
-                  }
-                  onMarkAlreadyDone={() => updateStatus(dir, "already_done")}
-                  onSkip={() => updateStatus(dir, "skipped")}
-                  onRevert={() => updateStatus(dir, "to_submit")}
-                />
-              ))}
-            </div>
-            {filtered.length > pageSize && (
-              <div className="p-4 text-center border-t border-[#F0F0F0] dark:border-[#2A2A2A]">
-                <button
-                  onClick={() => setPageSize((s) => s + 50)}
-                  className="text-sm font-medium text-[#6366F1] hover:underline"
-                >
-                  Mostra altre 50 (di {filtered.length - pageSize} rimanenti)
-                </button>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/* ─── Sub-components ──────────────────────────────────────────────── */
-
-function StatChip({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: number;
-  accent: "blue" | "green" | "gray" | "indigo";
-}) {
-  const colors = {
-    blue: "border-blue-200 dark:border-blue-900/30 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-300",
-    green:
-      "border-emerald-200 dark:border-emerald-900/30 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300",
-    gray: "border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F8F8F8] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3]",
-    indigo:
-      "border-[#6366F1]/20 bg-[#6366F1]/5 dark:bg-[#6366F1]/10 text-[#6366F1]",
-  };
-  return (
-    <div className={`px-3 py-1.5 rounded-lg border ${colors[accent]}`}>
-      <span className="font-bold">{value}</span>{" "}
-      <span className="opacity-80">{label}</span>
-    </div>
-  );
-}
-
-function FilterChip({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
-        active
-          ? "bg-[#6366F1] text-white"
-          : "bg-[#F5F5F5] dark:bg-[#262626] text-[#525252] dark:text-[#B5B5B5] hover:bg-[#EEEEEE] dark:hover:bg-[#2F2F2F]"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
-
-function DirectoryRow({
-  dir,
-  updating,
-  onMarkSubmitted,
-  onMarkAlreadyDone,
-  onSkip,
-  onRevert,
-}: {
-  dir: Directory;
-  updating: boolean;
-  onMarkSubmitted: () => void;
-  onMarkAlreadyDone: () => void;
-  onSkip: () => void;
-  onRevert: () => void;
-}) {
-  const da = parseDA(dir.notes);
-  const category = parseCategory(dir.notes);
-  const hostname = (() => {
-    try {
-      return new URL(dir.directoryUrl).hostname.replace(/^www\./, "");
-    } catch {
-      return dir.directoryUrl;
-    }
-  })();
-
-  const statusBadge = {
-    to_submit: null,
-    submitted: { label: "Submitted", color: "bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300" },
-    listed: { label: "Listed", color: "bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300" },
-    already_done: { label: "Già fatta", color: "bg-[#F5F5F5] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3]" },
-    skipped: { label: "Skippata", color: "bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300" },
-  }[dir.status];
-
-  return (
-    <div className="p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center gap-4 hover:bg-[#FAFAFA] dark:hover:bg-[#1A1A1A] transition">
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <a
-            href={dir.directoryUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-[#171717] dark:text-[#E5E5E5] hover:text-[#6366F1] truncate"
-          >
-            {dir.directoryName}
-          </a>
-          {da > 0 && (
-            <span className="px-2 py-0.5 rounded-md bg-[#6366F1]/10 text-[#6366F1] text-[11px] font-semibold">
-              DA {da}
-            </span>
-          )}
-          <span className="px-2 py-0.5 rounded-md bg-[#F5F5F5] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3] text-[11px]">
-            {category}
+      {/* Budget settimanale */}
+      <div className="mb-5 rounded-xl bg-[#F8F8F8] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] p-4">
+        <div className="flex items-baseline justify-between mb-2">
+          <span className="text-xs font-semibold text-[#737373] dark:text-[#A3A3A3] uppercase tracking-wide">
+            Budget settimana corrente
           </span>
-          {statusBadge && (
-            <span
-              className={`px-2 py-0.5 rounded-md text-[11px] font-medium ${statusBadge.color}`}
+          <span className="text-sm">
+            <strong
+              className={
+                weekProgress >= WEEKLY_TARGET
+                  ? "text-amber-500"
+                  : weekProgress >= WEEKLY_TARGET * 0.7
+                    ? "text-emerald-600 dark:text-emerald-300"
+                    : "text-[#171717] dark:text-[#E5E5E5]"
+              }
             >
-              {statusBadge.label}
+              {weekProgress}/{WEEKLY_TARGET}
+            </strong>
+            <span className="text-[#737373] dark:text-[#A3A3A3] text-xs ml-1">
+              {weekProgress >= WEEKLY_TARGET
+                ? "(stop, riprendi lunedi)"
+                : "questa settimana"}
             </span>
-          )}
+          </span>
         </div>
-        <div className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-1 truncate">
-          {hostname}
+        <div className="h-2 rounded-full bg-[#E5E5E5] dark:bg-[#2A2A2A] overflow-hidden">
+          <div
+            className={`h-full transition-all ${
+              weekProgress >= WEEKLY_TARGET ? "bg-amber-400" : "bg-emerald-400"
+            }`}
+            style={{ width: `${weekPct}%` }}
+          />
         </div>
-        {dir.notes && (
-          <div className="text-xs text-[#A3A3A3] dark:text-[#737373] mt-1 line-clamp-2">
-            {dir.notes}
-          </div>
-        )}
+        <div className="mt-3 flex flex-wrap gap-3 text-xs text-[#737373] dark:text-[#A3A3A3]">
+          <span>
+            <strong className="text-[#171717] dark:text-[#E5E5E5]">
+              {totals.pending}
+            </strong>{" "}
+            da fare
+          </span>
+          <span>
+            <strong className="text-emerald-600 dark:text-emerald-300">
+              {totals.submittedAll}
+            </strong>{" "}
+            fatte (totale)
+          </span>
+          <span>
+            <strong>{totals.historical}</strong> archivio storico
+          </span>
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 lg:flex-nowrap lg:shrink-0">
-        {dir.status === "to_submit" ? (
-          <>
-            <button
-              onClick={onMarkSubmitted}
-              disabled={updating}
-              className="px-3 py-2 rounded-lg bg-[#6366F1] text-white text-xs font-semibold hover:bg-[#5558E0] disabled:opacity-50 transition"
-            >
-              {updating ? "..." : "Apri & marca fatta"}
-            </button>
-            <button
-              onClick={onMarkAlreadyDone}
-              disabled={updating}
-              className="px-3 py-2 rounded-lg bg-[#F5F5F5] dark:bg-[#262626] text-[#525252] dark:text-[#B5B5B5] text-xs font-medium hover:bg-[#EEEEEE] dark:hover:bg-[#2F2F2F] disabled:opacity-50 transition"
-            >
-              Già fatta
-            </button>
-            <button
-              onClick={onSkip}
-              disabled={updating}
-              className="px-3 py-2 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] dark:text-[#A3A3A3] text-xs font-medium hover:border-amber-400 hover:text-amber-600 disabled:opacity-50 transition"
-            >
-              Skip
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={onRevert}
-            disabled={updating}
-            className="px-3 py-2 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] dark:text-[#A3A3A3] text-xs font-medium hover:border-[#6366F1] hover:text-[#6366F1] disabled:opacity-50 transition"
+      {/* Filtri */}
+      <div className="flex flex-wrap gap-3 mb-5 items-end">
+        <div>
+          <label className="text-[10px] font-semibold text-[#737373] dark:text-[#A3A3A3] uppercase tracking-wide block mb-1.5">
+            DA minimo
+          </label>
+          <div className="flex gap-1 flex-wrap">
+            {DA_BUCKETS.map((b) => (
+              <button
+                key={b.min}
+                onClick={() => setMinDA(b.min)}
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                  minDA === b.min
+                    ? "bg-emerald-400/20 text-emerald-700 dark:text-emerald-300 border border-emerald-400/40"
+                    : "bg-[#F5F5F5] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] hover:border-[#6366F1]/30"
+                }`}
+              >
+                {b.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="text-[10px] font-semibold text-[#737373] dark:text-[#A3A3A3] uppercase tracking-wide block mb-1.5">
+            Categoria
+          </label>
+          <select
+            value={tagFilter}
+            onChange={(e) => setTagFilter(e.target.value)}
+            className="px-2.5 py-1.5 rounded-lg text-xs bg-[#F5F5F5] dark:bg-[#262626] text-[#171717] dark:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#2A2A2A] focus:border-[#6366F1]/50 outline-none"
           >
-            {updating ? "..." : "Riapri"}
-          </button>
-        )}
+            <option value="all">Tutte</option>
+            {tagOptions.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex-1 min-w-[180px]">
+          <label className="text-[10px] font-semibold text-[#737373] dark:text-[#A3A3A3] uppercase tracking-wide block mb-1.5">
+            Cerca dominio
+          </label>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="es: medium, blogger..."
+            className="w-full px-2.5 py-1.5 rounded-lg text-xs bg-[#F5F5F5] dark:bg-[#262626] text-[#171717] dark:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#2A2A2A] focus:border-[#6366F1]/50 outline-none placeholder-[#A3A3A3]"
+          />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="inline-flex items-center gap-2 cursor-pointer text-xs text-[#737373] dark:text-[#A3A3A3]">
+            <input
+              type="checkbox"
+              checked={hideSubmitted}
+              onChange={(e) => setHideSubmitted(e.target.checked)}
+              className="w-4 h-4 accent-emerald-400"
+            />
+            Nascondi gia messe
+          </label>
+          <label className="inline-flex items-center gap-2 cursor-pointer text-xs text-[#737373] dark:text-[#A3A3A3]">
+            <input
+              type="checkbox"
+              checked={hideHistorical}
+              onChange={(e) => setHideHistorical(e.target.checked)}
+              className="w-4 h-4 accent-emerald-400"
+            />
+            Nascondi storiche
+          </label>
+        </div>
       </div>
-    </div>
+
+      {/* Lista */}
+      {loading ? (
+        <div className="text-sm text-[#737373] dark:text-[#A3A3A3] py-8 text-center">
+          Caricamento...
+        </div>
+      ) : error ? (
+        <div className="text-sm text-red-500 py-8 text-center">{error}</div>
+      ) : filtered.length === 0 ? (
+        <div className="text-sm text-[#737373] dark:text-[#A3A3A3] py-8 text-center">
+          Nessuna directory corrisponde ai filtri.
+        </div>
+      ) : (
+        <div className="rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] overflow-hidden">
+          <div className="max-h-[600px] overflow-y-auto divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+            {filtered.slice(0, 200).map((d) => (
+              <div
+                key={d.id}
+                className={`flex items-center gap-3 px-4 py-2.5 transition ${
+                  d.isHistorical
+                    ? "bg-[#F8F8F8]/50 dark:bg-[#252525]/50 opacity-60"
+                    : d.isSubmitted
+                      ? "bg-emerald-400/[0.04]"
+                      : "hover:bg-[#F5F5F5] dark:hover:bg-[#262626]"
+                }`}
+              >
+                <span
+                  className={`px-1.5 py-0.5 rounded text-[10px] font-bold flex-shrink-0 ${
+                    d.da >= 80
+                      ? "bg-emerald-400/20 text-emerald-700 dark:text-emerald-300"
+                      : d.da >= 60
+                        ? "bg-blue-400/20 text-blue-700 dark:text-blue-300"
+                        : d.da >= 40
+                          ? "bg-purple-400/15 text-purple-700 dark:text-purple-300"
+                          : "bg-[#F5F5F5] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3]"
+                  }`}
+                >
+                  DA {d.da}
+                </span>
+                <a
+                  href={d.directoryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-sm font-medium flex-1 truncate ${
+                    d.isSubmitted
+                      ? "text-[#A3A3A3] line-through"
+                      : "text-[#171717] dark:text-[#E5E5E5] hover:text-emerald-600 dark:hover:text-emerald-300"
+                  }`}
+                >
+                  {d.domain}
+                </a>
+                <span className="text-[10px] text-[#737373] dark:text-[#A3A3A3] px-1.5 py-0.5 rounded bg-[#F5F5F5] dark:bg-[#262626] flex-shrink-0 hidden sm:inline">
+                  {d.tag}
+                </span>
+
+                {d.isSubmitted ? (
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <span
+                      className={`text-[10px] font-semibold px-2 py-1 rounded ${
+                        d.isHistorical
+                          ? "bg-[#E5E5E5] dark:bg-[#2A2A2A] text-[#737373] dark:text-[#A3A3A3]"
+                          : d.isThisWeek
+                            ? "bg-emerald-400/20 text-emerald-700 dark:text-emerald-300"
+                            : "bg-blue-400/15 text-blue-700 dark:text-blue-300"
+                      }`}
+                    >
+                      {d.isHistorical
+                        ? "Archivio"
+                        : d.isThisWeek
+                          ? "Questa sett."
+                          : "Fatta"}
+                    </span>
+                    <button
+                      onClick={() => updateStatus(d, "to_submit")}
+                      disabled={busyId === d.id}
+                      className="text-[10px] text-[#737373] dark:text-[#A3A3A3] hover:text-red-500 px-1.5 py-1 disabled:opacity-50"
+                      title="Annulla"
+                    >
+                      x
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <button
+                      onClick={() =>
+                        updateStatus(d, "submitted", { openTab: true })
+                      }
+                      disabled={busyId === d.id}
+                      className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-emerald-400/15 text-emerald-700 dark:text-emerald-300 border border-emerald-400/30 hover:bg-emerald-400/25 transition disabled:opacity-50"
+                    >
+                      Messa
+                    </button>
+                    <button
+                      onClick={() => updateStatus(d, "already_done")}
+                      disabled={busyId === d.id}
+                      className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#F5F5F5] dark:bg-[#262626] text-[#737373] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] hover:border-[#6366F1]/40 hover:text-[#171717] dark:hover:text-[#E5E5E5] transition disabled:opacity-50"
+                      title="Gia messa in passato (archivio, non conta nel budget)"
+                    >
+                      Gia messa
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          {filtered.length > 200 && (
+            <div className="px-4 py-2 text-[11px] text-[#737373] dark:text-[#A3A3A3] bg-[#F5F5F5] dark:bg-[#262626] border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+              Mostrate prime 200 di {filtered.length}. Affina i filtri per vedere
+              il resto.
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Legend */}
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] text-[#737373] dark:text-[#A3A3A3]">
+        <div className="rounded-lg bg-emerald-400/[0.04] border border-emerald-400/15 p-3">
+          <strong className="text-emerald-600 dark:text-emerald-300">
+            Messa
+          </strong>{" "}
+          = registrata adesso. Conta nel budget {WEEKLY_TARGET}/settimana.
+        </div>
+        <div className="rounded-lg bg-[#F5F5F5] dark:bg-[#262626] border border-[#E5E5E5] dark:border-[#2A2A2A] p-3">
+          <strong className="text-[#171717] dark:text-[#E5E5E5]">
+            Gia messa
+          </strong>{" "}
+          = fatta in passato (archivio). Non conta nel budget.
+        </div>
+      </div>
+    </section>
   );
 }
