@@ -1,0 +1,32 @@
+/* ── Admin panel theme (dark + emerald accent, ispirato lucasammarco.com) ── */
+.admin-shell {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-alt: #1f1f1f;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f5f5f5;
+  --muted: rgba(255, 255, 255, 0.65);
+  --muted-light: rgba(255, 255, 255, 0.4);
+  --accent: #10b981;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.admin-shell .font-heading {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.admin-shell input,
+.admin-shell select,
+.admin-shell textarea {
+  color: var(--text);
+}
+
+.admin-shell ::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: white;
+}
