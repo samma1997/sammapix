@@ -70,16 +70,58 @@ function isThisWeek(dateStr: string | null): boolean {
   return date >= start;
 }
 
+/* ─── Daily picks (deterministic per day) ──────────────────────────── */
+function getDayOfYear(d: Date): number {
+  const start = new Date(d.getFullYear(), 0, 0);
+  const diff = d.getTime() - start.getTime();
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+// Mulberry32 seeded PRNG
+function seededRandom(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function getDailyPicks(directories: Directory[], count = 10): Directory[] {
+  const todo = directories.filter((d) => d.status === "to_submit");
+  // Top 200 by DA so high-quality bias
+  const pool = [...todo]
+    .sort((a, b) => parseDA(b.notes) - parseDA(a.notes))
+    .slice(0, 200);
+
+  const today = new Date();
+  const seed = today.getFullYear() * 1000 + getDayOfYear(today);
+  const rand = seededRandom(seed);
+  const arr = [...pool];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr.slice(0, count);
+}
+
 /* ─── Component ───────────────────────────────────────────────────── */
 
-type FilterTab = "todo" | "this_week" | "already_done" | "skipped" | "all";
+type FilterTab =
+  | "today"
+  | "todo"
+  | "this_week"
+  | "already_done"
+  | "skipped"
+  | "all";
 type SortMode = "da_desc" | "name_asc" | "category";
 
 export default function DirectoriesWorkflow() {
   const [directories, setDirectories] = useState<Directory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState<FilterTab>("todo");
+  const [filter, setFilter] = useState<FilterTab>("today");
   const [sortMode, setSortMode] = useState<SortMode>("da_desc");
   const [search, setSearch] = useState("");
   const [updatingId, setUpdatingId] = useState<number | null>(null);
@@ -136,10 +178,19 @@ export default function DirectoriesWorkflow() {
 
   /* ─── Filtered + sorted list ──────────────────────────────────── */
 
+  const dailyPicks = useMemo(() => getDailyPicks(directories, 10), [directories]);
+  const dailyPicksDoneCount = useMemo(
+    () => dailyPicks.filter((d) => d.status !== "to_submit").length,
+    [dailyPicks]
+  );
+
   const filtered = useMemo(() => {
     let list = [...directories];
 
-    if (filter === "todo") {
+    if (filter === "today") {
+      const ids = new Set(dailyPicks.map((d) => d.id));
+      list = list.filter((d) => ids.has(d.id));
+    } else if (filter === "todo") {
       list = list.filter((d) => d.status === "to_submit");
     } else if (filter === "this_week") {
       list = list.filter(
@@ -177,7 +228,7 @@ export default function DirectoriesWorkflow() {
     }
 
     return list;
-  }, [directories, filter, search, sortMode]);
+  }, [directories, filter, search, sortMode, dailyPicks]);
 
   /* ─── Action handlers ─────────────────────────────────────────── */
 
@@ -283,6 +334,11 @@ export default function DirectoriesWorkflow() {
       <div className="rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1F1F1F] p-4 lg:p-5">
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex flex-wrap gap-2">
+            <FilterChip
+              label={`Oggi (${dailyPicksDoneCount}/${dailyPicks.length})`}
+              active={filter === "today"}
+              onClick={() => setFilter("today")}
+            />
             <FilterChip
               label={`Da fare (${totals.todo})`}
               active={filter === "todo"}
