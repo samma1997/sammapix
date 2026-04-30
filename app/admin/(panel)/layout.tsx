@@ -10,6 +10,9 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
+// Always render dynamically: getServerSession reads cookies/headers
+export const dynamic = "force-dynamic";
+
 export default async function AdminPanelLayout({
   children,
 }: {
