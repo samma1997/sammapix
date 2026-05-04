@@ -52,7 +52,7 @@ const articleSchema = {
     "Tired of Topaz's $199/year subscription? We tested 7 free upscalers on the same 50 photos: max scale (4x/8x), portrait quality, speed, browser vs install. The winner that beat Gigapixel on faces.",
   url: POST_URL,
   datePublished: POST_DATE,
-  dateModified: POST_DATE,
+  dateModified: "2026-05-04",
   author: {
     "@type": "Person",
     name: "Luca Sammarco",
@@ -214,6 +214,10 @@ export default function BestFreeTopazAlternatives2026() {
             see the full comparison below.
           </p>
         </div>
+
+        <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-6 italic">
+          Tested by <a href="/about" className="text-[#525252] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">Luca Sammarco</a>, builder of SammaPix — 7 tools tested on the same 4 source images, May 2026.
+        </p>
 
         {/* ════════════════════════════════════════════════════════════ */}
         {/* WHY PEOPLE ARE LEAVING TOPAZ */}

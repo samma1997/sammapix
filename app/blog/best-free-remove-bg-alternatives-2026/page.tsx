@@ -47,7 +47,7 @@ const articleSchema = {
   description: "Remove.bg charges \u20AC0.36 per image. Here are 7 free alternatives for background removal tested on real photos.",
   url: POST_URL,
   datePublished: POST_DATE,
-  dateModified: POST_DATE,
+  dateModified: "2026-05-04",
   author: { "@type": "Person", name: "Luca Sammarco", url: "https://www.sammapix.com/about", image: "https://www.sammapix.com/luca-sammarco.jpg", sameAs: ["https://lucasammarco.com", "https://github.com/samma1997"] },
   publisher: { "@type": "Organization", name: "SammaPix", url: APP_URL, logo: { "@type": "ImageObject", url: "https://sammapix.com/og-image.png" } },
   mainEntityOfPage: { "@type": "WebPage", "@id": POST_URL },
@@ -171,6 +171,10 @@ export default function BestFreeRemoveBgAlternatives2026() {
             complex edges (hair, fur, transparent objects) — full ranking below.
           </p>
         </div>
+
+        <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-6 italic">
+          Tested by <a href="/about" className="text-[#525252] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">Luca Sammarco</a>, builder of SammaPix — 7 background removers tested on real product shots and portraits, May 2026.
+        </p>
 
         <h2 id="why-people-leave-removebg" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-10 mb-4">
           Why people leave remove.bg

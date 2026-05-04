@@ -55,7 +55,7 @@ const articleSchema = {
   description: POST_DESCRIPTION,
   url: POST_URL,
   datePublished: POST_DATE,
-  dateModified: POST_DATE,
+  dateModified: "2026-05-04",
   author: {
     "@type": "Person",
     name: "Luca Sammarco",
@@ -235,7 +235,14 @@ export default function ImageCompressionBenchmark2026Page() {
         }
       >
 
+        <p className="text-xs text-gray-600 dark:text-[#A3A3A3] mb-6 italic">
+          Tested by <a href="/about" className="text-gray-700 dark:text-[#E5E5E5] underline underline-offset-2 hover:text-gray-900 dark:hover:text-white">Luca Sammarco</a>, builder of SammaPix — 100 real-world images × 10 tools × 4 quality levels = 4,000 measured compressions, May 2026. Raw data on <a href="https://github.com/samma1997/compression-benchmark-2026" className="text-gray-700 dark:text-[#E5E5E5] underline underline-offset-2" target="_blank" rel="noopener noreferrer">GitHub</a>.
+        </p>
+
         {/* Direct answer block for AI citation */}
+        <h3 id="quick-answer" className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3">
+          Quick answer
+        </h3>
         <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5 mb-8">
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-[#737373] mb-2">
             Key result
