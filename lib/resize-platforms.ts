@@ -924,7 +924,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "WhatsApp",
     displayName: "WhatsApp",
     titleKeyword: "WhatsApp",
-    seoTitle: "WhatsApp Image Size 2026: Status 1080×1920, Profile, Group — Free Resizer",
+    seoTitle: "WhatsApp Image Size 2026: Status, Profile, Group — Free",
     metaDescription:
       "Exact WhatsApp image sizes for 2026: Status 1080×1920 (9:16), Profile 500×500, Group Icon 192×192. Resize in your browser — no upload, no signup.",
     ogDescription:

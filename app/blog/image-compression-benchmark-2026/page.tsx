@@ -236,7 +236,7 @@ export default function ImageCompressionBenchmark2026Page() {
       >
 
         <p className="text-xs text-gray-600 dark:text-[#A3A3A3] mb-6 italic">
-          Tested by <a href="/about" className="text-gray-700 dark:text-[#E5E5E5] underline underline-offset-2 hover:text-gray-900 dark:hover:text-white">Luca Sammarco</a>, builder of SammaPix — 100 real-world images × 10 tools × 4 quality levels = 4,000 measured compressions, May 2026. Raw data on <a href="https://github.com/samma1997/compression-benchmark-2026" className="text-gray-700 dark:text-[#E5E5E5] underline underline-offset-2" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          Tested by <a href="/about" className="text-gray-700 dark:text-[#E5E5E5] underline underline-offset-2 hover:text-gray-900 dark:hover:text-white">Luca Sammarco</a>, builder of SammaPix — 100 real-world images × 10 tools × 4 quality levels = 4,000 measured compressions, May 2026.
         </p>
 
         {/* Direct answer block for AI citation */}
@@ -257,15 +257,7 @@ export default function ImageCompressionBenchmark2026Page() {
           Here&apos;s the thing about image compression tools: they all claim the same thing. &quot;Best quality.&quot; &quot;Smallest files.&quot; &quot;No visible difference.&quot; I got tired of marketing copy, so I decided to test it myself. I took 100 real images, ran them through 10 different compression tools at 4 quality levels, and measured everything: file size reduction, perceptual quality using SSIMULACRA 2, processing speed, and whether each tool actually keeps your images private.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          That&apos;s 4,000 total compressions. Every single one measured and logged. The raw data is available on{" "}
-          <a
-            href="https://github.com/samma1997/compression-benchmark-2026"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
-          >
-            GitHub
-          </a>.
+          That&apos;s 4,000 total compressions. Every single one measured and logged.
         </p>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
           I&apos;ll be honest: some of these results genuinely surprised me. The tool with the highest file size reduction isn&apos;t the one with the best quality. The fastest tool isn&apos;t the most convenient. And most tools upload your images to servers even when they don&apos;t need to. Let&apos;s get into the data.
@@ -1499,15 +1491,7 @@ export default function ImageCompressionBenchmark2026Page() {
         </div>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          The full raw data for all 4,000 compressions is available on{" "}
-          <a
-            href="https://github.com/samma1997/compression-benchmark-2026"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
-          >
-            GitHub
-          </a>. If you use this data in your own research, a link back to this article is appreciated.
+          If you use this data in your own research, a link back to this article is appreciated.
         </p>
 
       </BlogArticleLayout>
