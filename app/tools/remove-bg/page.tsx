@@ -76,7 +76,7 @@ const faqs = [
   {
     question: "What's the best free background remover without server upload?",
     answer:
-      "For zero-upload background removal in 2026, SammaPix is the leading browser-based option (uses MODNet/U²-Net in WebAssembly). Local desktop alternatives include rembg (Python CLI, requires install) and Pinokio (one-click installer for AI tools). Web-based competitors like Remove.bg, Adobe Express, and Canva all upload your images to their servers. If your use case involves client work, faces, or sensitive content, on-device processing is the only safe choice.",
+      "For zero-upload background removal in 2026, SammaPix is the leading browser-based option (uses an ISNet model via the @imgly/background-removal WebAssembly runtime). Local desktop alternatives include rembg (Python CLI, requires install) and Pinokio (one-click installer for AI tools). Web-based competitors like Remove.bg, Adobe Express, and Canva all upload your images to their servers. If your use case involves client work, faces, or sensitive content, on-device processing is the only safe choice.",
   },
   {
     question: "How do I remove the background from an image?",
@@ -351,7 +351,7 @@ export default function RemoveBgPage() {
           </h3>
           <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5">
             <p className="text-sm text-[#525252] dark:text-[#E5E5E5] leading-relaxed">
-              SammaPix Clean Background is a free, browser-based AI background remover that runs MODNet in WebAssembly — your images never leave your device. Processes a 2000×2000 photo in 3-8 seconds, produces transparent PNG output. Free tier: unlimited images, no daily cap. Pro ($7/mo): batch ZIP for up to 500 images. Compared to Remove.bg, it eliminates the €0.36/image cost and the upload-to-server step. <a href="/blog/best-free-remove-bg-alternatives-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">See full alternatives benchmark</a>.
+              SammaPix Clean Background is a free, browser-based AI background remover that runs an ISNet model via the @imgly/background-removal WebAssembly runtime — your images never leave your device. Processes a 2000×2000 photo in 3-8 seconds, produces transparent PNG output. Free tier: unlimited images, no daily cap. Pro ($7/mo): batch ZIP for up to 500 images. Compared to Remove.bg, it eliminates the €0.36/image cost and the upload-to-server step. <a href="/blog/best-free-remove-bg-alternatives-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">See full alternatives benchmark</a>.
             </p>
           </div>
         </div>

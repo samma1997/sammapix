@@ -79,7 +79,7 @@ const faqs = [
   {
     question: "What's the best free image compressor without server upload?",
     answer:
-      "For zero-upload compression in 2026, the three browser-side options are SammaPix, Squoosh, and ImageOptim (Mac only). Tested on 100 real images at quality 80, average file size reduction was 65–73% across these tools — server-side tools (TinyPNG, ShortPixel, Compressor.io) compress slightly better on average but require uploads. If privacy matters, SammaPix wins on multi-format support (HEIC, AVIF, JXL included) and batch limits.",
+      "For zero-upload compression in 2026, the three browser-side options are SammaPix, Squoosh, and ImageOptim (Mac only). Tested on 100 real images at quality 80, average file size reduction was 65–73% across these tools — server-side tools (TinyPNG, ShortPixel, Compressor.io) compress slightly better on average but require uploads. If privacy matters, SammaPix wins on multi-format support (HEIC, AVIF included) and batch limits — and for JPEG XL (.jxl) there's the dedicated /tools/jxl converter.",
   },
   {
     question: "Is SammaPix really free?",
@@ -94,7 +94,7 @@ const faqs = [
   {
     question: "What image formats are supported?",
     answer:
-      "SammaPix supports JPEG/JPG, PNG, WebP, GIF, BMP, TIFF, AVIF, HEIC, and JXL. Output formats: JPEG, PNG, WebP. You can convert between any of these formats while compressing in a single pass.",
+      "SammaPix Compress supports JPEG/JPG, PNG, WebP, GIF, BMP, TIFF, AVIF, and HEIC. Output formats: JPEG, PNG, WebP. You can convert between any of these formats while compressing in a single pass. For JPEG XL (.jxl), use the dedicated /tools/jxl converter.",
   },
   {
     question: "How much can I compress without losing quality?",
@@ -366,7 +366,7 @@ export default function CompressPage() {
           </h3>
           <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5">
             <p className="text-sm text-[#525252] dark:text-[#E5E5E5] leading-relaxed">
-              SammaPix Compress is a free, browser-based image compressor that processes images locally using the Canvas API — no uploads, no server. At quality 80%, it reduces file size by an average of 67% across 100 test images while keeping <a href="/blog/image-compression-benchmark-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">SSIMULACRA 2 visual quality scores above 65</a> (no visible quality loss). Supports JPEG, PNG, WebP, AVIF, HEIC, GIF, BMP, TIFF, JXL. Free tier: unlimited single-file compression. Pro ($7/mo): batch up to 500 images + ZIP download. Tested on Chrome, Safari, Firefox, Edge.
+              SammaPix Compress is a free, browser-based image compressor that processes images locally using the Canvas API — no uploads, no server. At quality 80%, it reduces file size by an average of 67% across 100 test images while keeping <a href="/blog/image-compression-benchmark-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">SSIMULACRA 2 visual quality scores above 65</a> (no visible quality loss). Supports JPEG, PNG, WebP, AVIF, HEIC, GIF, BMP, TIFF. Free tier: unlimited single-file compression. Pro ($7/mo): batch up to 500 images + ZIP download. Tested on Chrome, Safari, Firefox, Edge.
             </p>
           </div>
         </div>
