@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
+  title: "Favicon 2026: The 4 Sizes That Actually Matter (Skip the Other 18)",
   description:
-    "Every favicon size for 2026, SVG + ICO hybrid setup, dark mode, PWA manifest icons, and the 4 HTML tags to copy-paste in every site. Generator included.",
+    "Most favicon guides list 22 sizes. You only need 4. The exact PNG/SVG/ICO setup for crisp icons across Chrome, Safari, dark mode, iOS, and PWA — with the 4 HTML tags to copy-paste.",
   alternates: {
     canonical: `${APP_URL}/blog/favicon-best-practices-2026`,
   },
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "html favicon tags",
   ],
   openGraph: {
-    title: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
+    title: "Favicon 2026: The 4 Sizes That Actually Matter (Skip the Other 18)",
     description:
-      "All the favicon sizes, formats, HTML tags, and dark-mode tricks that matter in 2026. Free browser-based favicon builder included.",
+      "22 favicon sizes? You only need 4. The exact PNG/SVG/ICO setup with copy-paste HTML for every browser.",
     url: `${APP_URL}/blog/favicon-best-practices-2026`,
     type: "article",
     publishedTime: "2026-04-22",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
+  headline: "Favicon 2026: The 4 Sizes That Actually Matter (Skip the Other 18)",
   description:
-    "A practical 2026 guide to favicons: every size that still matters, the four HTML tags to ship, SVG + ICO hybrid serving, dark-mode variants, PWA manifest icons, and common pitfalls.",
+    "Most favicon guides list 22 sizes. You only need 4. The exact PNG/SVG/ICO setup for crisp icons across Chrome, Safari, dark mode, iOS, and PWA — with the 4 HTML tags to copy-paste.",
   url: `${APP_URL}/blog/favicon-best-practices-2026`,
   datePublished: "2026-04-22",
   dateModified: "2026-04-22",
@@ -78,7 +78,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
+      name: "Favicon 2026: The 4 Sizes That Actually Matter (Skip the Other 18)",
       item: `${APP_URL}/blog/favicon-best-practices-2026`,
     },
   ],
@@ -156,7 +156,7 @@ export default function FaviconBestPractices2026Page() {
       />
 
       <BlogArticleLayout
-        title="Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)"
+        title="Favicon 2026: The 4 Sizes That Actually Matter (Skip the Other 18)"
         slug="favicon-best-practices-2026"
         description="The old answer to &lsquo;what favicon sizes do I need?&rsquo; was an endless grid of 15+ files. In 2026 modern browsers accept SVG natively, iOS ate Apple Touch Startup Image, and Windows tiles quietly died. Here is the minimum viable favicon setup plus everything you need to know about SVG + ICO, dark mode, PWA, and cache invalidation."
         date="2026-04-22"

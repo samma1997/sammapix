@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Best Free Image Compression Tools in 2026 - Compared",
+    "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)",
   description:
-    "Honest comparison of the 6 best free PNG and image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG tested and ranked.",
+    "We tested 6 free image compressors on real photos: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, iLoveIMG. Compression %, quality, speed, privacy compared — the 3 we recommend depend on your use case.",
   alternates: {
     canonical: `${APP_URL}/blog/best-image-compression-tools-2026`,
   },
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "online image compressor comparison",
   ],
   openGraph: {
-    title: "Best Free Image Compression Tools in 2026 - Compared",
+    title: "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)",
     description:
-      "We tested every major free image compressor so you do not have to. Here is the honest breakdown- output quality, speed, privacy, and limits- for 2026.",
+      "6 free image compressors tested on real photos. Compression %, quality, speed, privacy compared. The 3 we recommend depend on your use case.",
     url: `${APP_URL}/blog/best-image-compression-tools-2026`,
     type: "article",
     publishedTime: "2026-01-15",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Free Image Compression Tools in 2026 - Compared",
+    title: "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)",
     description:
-      "Honest comparison of SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG. Which one is actually the best free image compressor in 2026?",
+      "6 image compressors tested. TinyPNG isn't #1. The 3 we actually recommend (depending on your use case).",
     creator: "@lucasammarco",
   },
 };
@@ -45,7 +45,7 @@ const POST_DATE = "2026-01-15";
 const POST_DATE_FORMATTED = "January 15, 2026";
 const POST_URL =
   `${APP_URL}/blog/best-image-compression-tools-2026`;
-const POST_TITLE = "Best Free Image Compression Tools in 2026 - Compared";
+const POST_TITLE = "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)";
 
 const articleSchema = {
   "@context": "https://schema.org",

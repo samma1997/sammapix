@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "WhatsApp Image Quality Loss? Fix It Before Sending [2026]",
+  title: "Why WhatsApp Ruins Photo Quality (3-Step Fix Before Sending) [2026]",
   description:
-    "WhatsApp cuts 80% of your photo quality. Pre-compress to 200-300KB at 1920px and WhatsApp barely touches them. Free tool + tested method inside.",
+    "WhatsApp slashes photo quality by 80% — even on iOS. The exact pre-upload settings (size, format, color profile) that survive its compression. Tested across iPhone, Android, and Web.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     "whatsapp image resolution",
   ],
   openGraph: {
-    title: "How to Compress Images for WhatsApp Without Losing Quality (2026)",
+    title: "Why WhatsApp Ruins Photo Quality (3-Step Fix Before Sending) [2026]",
     description:
-      "WhatsApp compresses every image you send. Learn how to pre-compress your photos so YOU control the quality, not WhatsApp's algorithm.",
+      "WhatsApp slashes 80% of photo quality. The 3-step pre-upload fix that survives its compression on iPhone, Android, Web.",
     url: `${APP_URL}/blog/compress-images-whatsapp-quality`,
     type: "article",
     publishedTime: "2026-04-05",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Compress Images for WhatsApp Without Losing Quality (2026)",
+    title: "Why WhatsApp Ruins Photo Quality (3-Step Fix Before Sending) [2026]",
     description:
-      "WhatsApp compresses every image you send. Learn how to pre-compress your photos so YOU control the quality.",
+      "WhatsApp ruins photos by 80%. The 3-step fix that survives compression on iPhone, Android, Web.",
     creator: "@lucasammarco",
   },
 };
@@ -44,7 +44,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "How to Compress Images for WhatsApp Without Losing Quality (2026)",
   description:
-    "Learn how WhatsApp compresses your photos and the optimal strategy to send high quality images without visible quality loss.",
+    "WhatsApp slashes photo quality by 80% — even on iOS. The exact pre-upload settings (size, format, color profile) that survive its compression. Tested across iPhone, Android, and Web.",
   url: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   datePublished: "2026-04-05",
   dateModified: "2026-04-05",

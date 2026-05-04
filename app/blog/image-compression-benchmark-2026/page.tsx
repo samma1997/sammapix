@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 const SLUG = "image-compression-benchmark-2026";
-const POST_TITLE = "Best Image Compressor? 10 Tools Tested on 100 Images [2026]";
+const POST_TITLE = "TinyPNG vs Squoosh vs 8 Others: 100-Image Benchmark [2026 Winner]";
 const POST_DESCRIPTION =
-  "TinyPNG vs Squoosh vs ShortPixel vs 7 others — tested on 100 real images. See compression %, quality scores, and speed. The winner wasn't what we expected.";
+  "We compressed 100 real images through 10 tools (TinyPNG, Squoosh, ShortPixel + 7 more) and measured everything: file size, SSIMULACRA 2 quality, speed. The winner saved 73% on average. (TinyPNG isn't first.)";
 const POST_DATE = "2026-04-02";
 const POST_DATE_FORMATTED = "April 2, 2026";
 const POST_URL = `${APP_URL}/blog/${SLUG}`;
