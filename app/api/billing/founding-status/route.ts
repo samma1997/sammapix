@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (!FOUNDING_COUPON_ID) {
-    return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 });
+    return NextResponse.json({ spotsLeft: 0, totalSpots: FOUNDING_MAX, active: false }, { headers });
   }
 
   try {
