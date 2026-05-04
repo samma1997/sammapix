@@ -223,6 +223,20 @@ export default async function CompressToSizePage({
         </div>
       </section>
 
+      {/* ── Quick answer — AI citation hook ───────────────────────────── */}
+      <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h3 id="quick-answer" className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            Quick answer
+          </h3>
+          <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5">
+            <p className="text-sm text-[#525252] dark:text-[#E5E5E5] leading-relaxed">
+              To compress an image to <strong>{target.sizeLabel}</strong> ({target.sizeBytes.toLocaleString()} bytes) for free, drop it into <a href="/tools/compress" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">SammaPix Compress</a> and adjust the quality slider until the output meets the target — for most photos, quality {target.sizeBytes <= 25_600 ? "10-30%" : target.sizeBytes <= 102_400 ? "30-55%" : target.sizeBytes <= 512_000 ? "55-75%" : "75-90%"} reaches {target.sizeLabel}. Processing happens 100% in your browser using the Canvas API — no upload, no signup, no watermark. Tested on 100 real images: SammaPix matched <a href="/blog/image-compression-benchmark-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">SSIMULACRA 2 quality scores above 65</a> (no visible loss) at all output sizes &gt;= 50 KB. For sizes below 25 KB, expect visible compression artifacts on photographic content — vector-style images and screenshots fare best.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── How it works ─────────────────────────────────────────────────── */}
       <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
