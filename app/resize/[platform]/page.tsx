@@ -27,7 +27,7 @@ export async function generateMetadata({
   const platform = getPlatform(slug);
   if (!platform) return {};
 
-  const title = `Resize Images for ${platform.displayName} Free Online`;
+  const title = platform.seoTitle ?? `Resize Images for ${platform.displayName} Free Online`;
   const canonical = getPlatformCanonical(slug);
 
   return {

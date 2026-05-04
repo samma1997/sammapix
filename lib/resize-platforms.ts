@@ -29,6 +29,8 @@ export interface ResizePlatform {
   related: string[];
   /** Open Graph description */
   ogDescription: string;
+  /** Optional override of the generated `Resize Images for X Free Online` SEO title */
+  seoTitle?: string;
 }
 
 function aspectRatio(w: number, h: number): string {
@@ -922,10 +924,11 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "WhatsApp",
     displayName: "WhatsApp",
     titleKeyword: "WhatsApp",
+    seoTitle: "WhatsApp Image Size 2026: Status 1080×1920, Profile, Group — Free Resizer",
     metaDescription:
-      "Resize images for WhatsApp — Profile 500×500, Status 1080×1920, Group Icon 192×192. Free online, no upload required.",
+      "Exact WhatsApp image sizes for 2026: Status 1080×1920 (9:16), Profile 500×500, Group Icon 192×192. Resize in your browser — no upload, no signup.",
     ogDescription:
-      "Resize photos for WhatsApp profile pictures, Status stories, and group icons. Exact dimensions, processed privately in your browser.",
+      "WhatsApp Status 1080×1920, Profile 500×500, Group Icon 192×192. Resize in browser, no upload required.",
     keywords: [
       "resize image for whatsapp",
       "whatsapp profile picture size",
