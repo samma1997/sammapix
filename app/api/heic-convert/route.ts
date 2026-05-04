@@ -85,8 +85,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  let formData: FormData;
   try {
-    const formData = await req.formData();
+    formData = await req.formData();
+  } catch {
+    return Response.json({ error: "Invalid request: expected multipart/form-data" }, { status: 400 });
+  }
+
+  try {
     const file = formData.get("file") as File | null;
     const format = (formData.get("format") as string | null)?.toUpperCase() ?? "JPEG";
     const qualityRaw = formData.get("quality");
