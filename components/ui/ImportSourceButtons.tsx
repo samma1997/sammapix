@@ -147,7 +147,7 @@ export default function ImportSourceButtons({
           zipInputRef.current?.click();
         }}
         disabled={disabled || isLoading}
-        className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-1.5 text-xs text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:border-[#D4D4D4] dark:hover:border-[#404040] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-2 text-xs min-h-[40px] sm:min-h-0 text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:border-[#D4D4D4] dark:hover:border-[#404040] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         title="Import images from a ZIP file"
       >
         {loading === "zip" ? (
@@ -167,7 +167,7 @@ export default function ImportSourceButtons({
             handleGoogleDrive();
           }}
           disabled={disabled || isLoading}
-          className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-1.5 text-xs text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:border-[#D4D4D4] dark:hover:border-[#404040] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-2 text-xs min-h-[40px] sm:min-h-0 text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:border-[#D4D4D4] dark:hover:border-[#404040] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           title="Import images from Google Drive"
         >
           {loading === "drive" ? (
@@ -188,7 +188,7 @@ export default function ImportSourceButtons({
             handleDropbox();
           }}
           disabled={disabled || isLoading}
-          className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-1.5 text-xs text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:border-[#D4D4D4] dark:hover:border-[#404040] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-1.5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md px-3 py-2 text-xs min-h-[40px] sm:min-h-0 text-[#525252] dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] hover:bg-[#F5F5F5] dark:hover:bg-[#252525] hover:border-[#D4D4D4] dark:hover:border-[#404040] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           title="Import images from Dropbox"
         >
           {loading === "dropbox" ? (

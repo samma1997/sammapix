@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 import { sendMetaEvent } from "@/lib/meta-conversions";
+import { sendGA4Event, parseGAClientId } from "@/lib/ga4-server";
 import { addCredits } from "@/lib/credits";
 import { saveGiftCode, markPaid } from "@/lib/gift-codes";
 import {
@@ -145,6 +146,24 @@ export async function POST(req: NextRequest) {
         console.log(
           `[stripe/webhook] +${creditsAmount} credits for ${userEmail} → new balance: ${newBalance}`
         );
+
+        // GA4 purchase event for credit pack
+        const gaClientId = parseGAClientId(metadata.ga_cookie) ?? userEmail;
+        const amountTotal = (session.amount_total ?? 0) / 100;
+        sendGA4Event({
+          clientId: gaClientId,
+          userId: userEmail,
+          events: [{
+            name: "purchase",
+            params: {
+              currency: session.currency?.toUpperCase() ?? "USD",
+              value: amountTotal,
+              transaction_id: session.id,
+              item_category: "credits",
+              item_name: `${creditsAmount}_credits`,
+            },
+          }],
+        }).catch(() => {});
       } else {
         // ----------------------------------------------------------------
         // Pro subscription checkout
@@ -207,6 +226,26 @@ export async function POST(req: NextRequest) {
           email: session.customer_email ?? undefined,
           customData: { currency: "USD", value: 9.00 },
         }).catch(() => {}); // fire-and-forget
+
+        // GA4 purchase event for Pro subscription.
+        // For trials, value=0 (no money charged yet) — we'll fire a separate
+        // purchase on invoice.paid when the trial converts.
+        const gaClientId = parseGAClientId(metadata.ga_cookie) ?? session.customer_email ?? "anonymous";
+        const subValue = isTrial ? 0 : (metadata.plan === "annual" ? 79 : 9);
+        sendGA4Event({
+          clientId: gaClientId,
+          userId: session.customer_email ?? undefined,
+          events: [{
+            name: isTrial ? "begin_trial" : "purchase",
+            params: {
+              currency: "USD",
+              value: subValue,
+              transaction_id: session.id,
+              item_category: "subscription",
+              item_name: metadata.plan === "annual" ? "pro_annual" : "pro_monthly",
+            },
+          }],
+        }).catch(() => {});
       }
       break;
     }
@@ -236,6 +275,38 @@ export async function POST(req: NextRequest) {
       const sub = event.data.object as Stripe.Subscription;
       console.log("[stripe/webhook] Subscription changed:", sub.id, "status:", sub.status);
       // Plan will be re-checked from Stripe at next login.
+      break;
+    }
+    case "invoice.paid": {
+      const invoice = event.data.object as Stripe.Invoice;
+      // Skip $0 invoices (trial start) — those are tracked as begin_trial above.
+      if ((invoice.amount_paid ?? 0) <= 0) break;
+      // Skip the very first invoice if it's tied to checkout (already counted).
+      // For trial conversions and recurring renewals, fire purchase.
+      if (invoice.billing_reason !== "subscription_cycle" && invoice.billing_reason !== "subscription_update") {
+        // first_invoice or subscription_create are already covered by checkout.session.completed
+        if (invoice.billing_reason === "subscription_create") break;
+      }
+      const expandedCustomer = typeof invoice.customer === "string" ? null : invoice.customer;
+      const paidCustomerEmail =
+        invoice.customer_email ??
+        (expandedCustomer && !expandedCustomer.deleted ? expandedCustomer.email ?? null : null);
+      const value = (invoice.amount_paid ?? 0) / 100;
+      sendGA4Event({
+        clientId: paidCustomerEmail ?? `cus_${invoice.customer}`,
+        userId: paidCustomerEmail ?? undefined,
+        events: [{
+          name: "purchase",
+          params: {
+            currency: (invoice.currency ?? "usd").toUpperCase(),
+            value,
+            transaction_id: invoice.id ?? `inv_${Date.now()}`,
+            item_category: "subscription_renewal",
+            item_name: invoice.billing_reason ?? "renewal",
+          },
+        }],
+      }).catch(() => {});
+      console.log(`[stripe/webhook] invoice.paid GA4 purchase fired: $${value} for ${paidCustomerEmail}`);
       break;
     }
     case "invoice.payment_failed": {

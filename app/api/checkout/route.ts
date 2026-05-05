@@ -43,16 +43,18 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Parse plan type and Meta cookies from request body
+  // Parse plan type and Meta + GA4 cookies from request body
   let plan: "monthly" | "annual" = "monthly";
   let fbp: string | undefined;
   let fbc: string | undefined;
+  let ga: string | undefined;
   let eventId: string | undefined;
   try {
     const body = await req.json().catch(() => ({}));
     if (body.plan === "annual") plan = "annual";
     if (body.fbp) fbp = String(body.fbp);
     if (body.fbc) fbc = String(body.fbc);
+    if (body.ga) ga = String(body.ga);
     if (body.eventId) eventId = String(body.eventId);
   } catch {
     // default to monthly
@@ -109,6 +111,9 @@ export async function POST(req: NextRequest) {
         userId: (session.user as { id?: string }).id ?? session.user.email,
         plan,
         founding_member: applyFoundingCoupon ? "true" : "false",
+        // Pass _ga cookie so the webhook can fire GA4 purchase event
+        // attributed to the originating browser session.
+        ...(ga ? { ga_cookie: ga } : {}),
       },
       subscription_data: {
         trial_period_days: TRIAL_DAYS,
