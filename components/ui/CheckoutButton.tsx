@@ -30,8 +30,11 @@ export default function CheckoutButton({
     const eventId = `ic_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 
     if (!session) {
-      // Not logged in → signin first, preserve plan intent in callbackUrl
-      router.push(`/api/auth/signin?callbackUrl=/dashboard/upgrade?plan=${encodeURIComponent(plan)}`);
+      // Not logged in → signin first, preserve plan intent.
+      // The whole callbackUrl must be encoded as a single value,
+      // otherwise the inner `?` is parsed as signin's own query separator.
+      const cb = encodeURIComponent(`/dashboard/upgrade?plan=${plan}`);
+      router.push(`/auth/signin?callbackUrl=${cb}`);
       return;
     }
 
