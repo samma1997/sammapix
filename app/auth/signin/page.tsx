@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { getProviders, signIn, ClientSafeProvider } from "next-auth/react";
 import { Github, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,22 @@ function GoogleIcon() {
   );
 }
 
+// Whitelist of internal paths allowed as callbackUrl post-signin.
+// Open-redirect protection: never trust the raw query string.
+function safeCallback(raw: string | null): string {
+  if (!raw) return "/dashboard";
+  try {
+    const decoded = decodeURIComponent(raw);
+    if (!decoded.startsWith("/") || decoded.startsWith("//")) return "/dashboard";
+    return decoded;
+  } catch {
+    return "/dashboard";
+  }
+}
+
 export default function SignInPage() {
+  const searchParams = useSearchParams();
+  const callbackUrl = safeCallback(searchParams.get("callbackUrl"));
   const [providers, setProviders] = useState<Record<
     string,
     ClientSafeProvider
@@ -42,7 +58,7 @@ export default function SignInPage() {
   const handleSignIn = async (providerId: string) => {
     setLoading(providerId);
     try {
-      await signIn(providerId, { callbackUrl: "/dashboard" });
+      await signIn(providerId, { callbackUrl });
     } catch {
       setLoading(null);
     }

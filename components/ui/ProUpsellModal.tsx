@@ -106,7 +106,8 @@ export default function ProUpsellModal({
   const handleCheckout = async () => {
     trackEvent("upsell_clicked", { trigger });
     if (!session) {
-      router.push("/api/auth/signin?callbackUrl=/dashboard/upgrade?plan=monthly");
+      const cb = encodeURIComponent("/dashboard/upgrade?plan=monthly");
+      router.push(`/auth/signin?callbackUrl=${cb}`);
       onClose();
       return;
     }
