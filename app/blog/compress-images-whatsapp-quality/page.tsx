@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Why WhatsApp Ruins Photo Quality (3-Step Fix Before Sending) [2026]",
+  title: "WhatsApp Image Compression Quality 2026: 3-Step Fix Before Sending",
   description:
-    "WhatsApp slashes photo quality by 80% — even on iOS. The exact pre-upload settings (size, format, color profile) that survive its compression. Tested across iPhone, Android, and Web.",
+    "WhatsApp image compression quality 2026: WhatsApp slashes photos by 80% — even on iOS, even at the 1600px resolution limit. The 3-step pre-upload fix (size, format, color profile) that survives compression. Tested on iPhone, Android, Web.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "whatsapp image resolution",
   ],
   openGraph: {
-    title: "Why WhatsApp Ruins Photo Quality (3-Step Fix Before Sending) [2026]",
+    title: "WhatsApp Image Compression Quality 2026: 3-Step Fix Before Sending",
     description:
       "WhatsApp slashes 80% of photo quality. The 3-step pre-upload fix that survives its compression on iPhone, Android, Web.",
     url: `${APP_URL}/blog/compress-images-whatsapp-quality`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Why WhatsApp Ruins Photo Quality (3-Step Fix Before Sending) [2026]",
+    title: "WhatsApp Image Compression Quality 2026: 3-Step Fix Before Sending",
     description:
       "WhatsApp ruins photos by 80%. The 3-step fix that survives compression on iPhone, Android, Web.",
     creator: "@lucasammarco",
