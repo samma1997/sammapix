@@ -58,9 +58,18 @@ export async function POST(req: NextRequest) {
     // default to monthly
   }
 
-  const priceId = plan === "annual"
-    ? (process.env.STRIPE_PRO_ANNUAL_PRICE_ID?.trim() || process.env.STRIPE_PRO_PRICE_ID!)
-    : process.env.STRIPE_PRO_PRICE_ID!;
+  // Resolve price ID. Refuse to silently bill annual at monthly rate if the
+  // annual price env var is missing — that would be involuntary fraud.
+  const monthlyPriceId = process.env.STRIPE_PRO_PRICE_ID?.trim();
+  const annualPriceId = process.env.STRIPE_PRO_ANNUAL_PRICE_ID?.trim();
+  const priceId = plan === "annual" ? annualPriceId : monthlyPriceId;
+  if (!priceId) {
+    console.error("[checkout] Missing price ID for plan:", plan, "monthly:", !!monthlyPriceId, "annual:", !!annualPriceId);
+    return NextResponse.json(
+      { error: "Selected plan is not available right now. Please try the other billing option.", code: "PRICE_UNAVAILABLE" },
+      { status: 400 }
+    );
+  }
 
   // Check if founding member coupon is still available
   let applyFoundingCoupon = false;

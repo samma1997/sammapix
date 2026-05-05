@@ -181,6 +181,11 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
         <div className="border-2 border-[#6366F1]/30 rounded-xl p-8 bg-white dark:bg-[#1E1E1E] ring-1 ring-[#6366F1]/10 mb-8">
           <div className="text-center mb-8">
             <div className="flex items-baseline justify-center gap-1.5">
+              {annual && (
+                <span className="text-2xl font-medium text-[#A3A3A3] line-through mr-1">
+                  $108
+                </span>
+              )}
               <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
                 ${annual ? "79" : "9"}
               </span>
@@ -188,6 +193,11 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
                 / {annual ? "year" : "month"}
               </span>
             </div>
+            {annual && (
+              <p className="mt-1 text-xs text-[#16A34A] font-semibold">
+                Save $29 vs monthly billing
+              </p>
+            )}
             <p className="mt-2 text-sm text-[#6366F1] font-medium">
               7 days free trial
             </p>

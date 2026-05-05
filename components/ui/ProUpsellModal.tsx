@@ -138,9 +138,16 @@ export default function ProUpsellModal({
     onClose();
   };
 
-  // Show credit-pack alternative only when the limit is AI ops or daily — those
-  // are the cases where a one-shot top-up makes sense.
-  const showCreditAlt = trigger === "ai_rename" || trigger === "daily" || trigger === "upscale_daily";
+  // Show credit-pack alternative when a one-shot top-up makes sense.
+  // Includes 'files' / 'batch' because hitting the batch limit is the most
+  // common upsell trigger and most users dropping >20 files are one-time
+  // jobs, not recurring Pro candidates.
+  const showCreditAlt =
+    trigger === "ai_rename" ||
+    trigger === "daily" ||
+    trigger === "upscale_daily" ||
+    trigger === "files" ||
+    trigger === "batch";
 
   return (
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
