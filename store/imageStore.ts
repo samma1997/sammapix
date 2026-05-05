@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { ProcessedFile, CompressOptions, FileStatus } from "@/types/image";
 import { generateId, sanitizeFilename, calculateSavings, getFilenameWithoutExtension } from "@/lib/utils";
 import { compressImage } from "@/lib/compress";
@@ -53,7 +54,8 @@ interface ImageStoreState {
 }
 
 export const useImageStore = create<ImageStoreState>()(
-  immer((set, get) => ({
+  persist(
+    immer((set, get) => ({
     items: [],
     settings: {
       quality: DEFAULT_QUALITY,
@@ -423,7 +425,17 @@ export const useImageStore = create<ImageStoreState>()(
         console.error("[aiRenameFile] failed:", errMsg);
       }
     },
-  }))
+  })),
+    {
+      name: "sammapix-settings",
+      storage: createJSONStorage(() => localStorage),
+      // Persist ONLY user preferences. Files, processing state, and live
+      // counters must NOT be hydrated from localStorage — they're either
+      // ephemeral (Blobs/URLs) or must come from the server (limits).
+      partialize: (state) => ({ settings: state.settings }),
+      version: 1,
+    }
+  )
 );
 
 /** Creates a max-{maxPx}px WebP thumbnail from any blob for AI analysis. */

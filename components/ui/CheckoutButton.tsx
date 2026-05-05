@@ -61,6 +61,7 @@ export default function CheckoutButton({
           plan,
           fbp: getCookie("_fbp"),
           fbc: getCookie("_fbc"),
+          ga: getCookie("_ga"),
           eventId,
         }),
       });
