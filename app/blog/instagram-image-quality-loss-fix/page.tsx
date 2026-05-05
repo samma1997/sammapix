@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Why Instagram Ruins Your Photo Quality (And How to Fix It)",
+    "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
   description:
     "Instagram compresses your photos up to 13x. Learn the exact settings — dimensions, format, color profile — to upload photos that actually look sharp. Free fix in 30 seconds.",
   alternates: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "instagram photo blurry after upload",
   ],
   openGraph: {
-    title: "Why Instagram Ruins Your Photo Quality (And How to Fix It)",
+    title: "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
     description:
       "Instagram compresses your photos up to 13x. Here are the exact settings to upload sharp photos every time.",
     url: `${APP_URL}/blog/instagram-image-quality-loss-fix`,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Why Instagram Ruins Your Photo Quality (And How to Fix It)",
+    title: "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
     description:
       "Instagram compresses photos up to 13x. The exact settings to keep them sharp — free fix.",
     creator: "@lucasammarco",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-11";
 const POST_DATE_FORMATTED = "April 11, 2026";
 const POST_URL = `${APP_URL}/blog/instagram-image-quality-loss-fix`;
-const POST_TITLE = "Why Instagram Ruins Your Photo Quality (And How to Fix It)";
+const POST_TITLE = "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]";
 
 const articleSchema = {
   "@context": "https://schema.org",

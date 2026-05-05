@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Topaz Gigapixel Pricing 2026: $199/year — Or Use 7 Free Alternatives",
+    "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)",
   description:
     "Tired of Topaz's $199/year subscription? We tested 7 free upscalers on the same 50 photos: max scale (4x/8x), portrait quality, speed, browser vs install. The winner that beat Gigapixel on faces.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "real esrgan alternative",
   ],
   openGraph: {
-    title: "Topaz Gigapixel Pricing 2026: $199/year — Or Use 7 Free Alternatives",
+    title: "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)",
     description:
       "Topaz wants $199/year. We tested 7 free upscalers on 50 real photos — see who wins on portraits, max scale, and speed.",
     url: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Topaz Gigapixel Pricing 2026: $199/year — Or Use 7 Free Alternatives",
+    title: "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)",
     description:
       "Topaz Gigapixel costs $199/yr. 7 free alternatives tested on 50 real photos — quality, scale, speed compared.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-10";
 const POST_DATE_FORMATTED = "April 10, 2026";
 const POST_URL = `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`;
-const POST_TITLE = "Topaz Gigapixel Pricing 2026: $199/year — Or Use 7 Free Alternatives";
+const POST_TITLE = "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)";
 
 const articleSchema = {
   "@context": "https://schema.org",
