@@ -449,6 +449,14 @@ export default function CompressImagesWhatsappQualityPage() {
           </table>
         </div>
 
+        <div className="mb-4 p-4 border border-[#6366F1]/20 dark:border-[#6366F1]/30 rounded-lg bg-[#EEF2FF]/40 dark:bg-[#6366F1]/5">
+          <p className="text-sm text-gray-700 dark:text-[#E5E5E5] leading-relaxed">
+            <strong>Need exact dimensions for Status, Profile, or Group icon?</strong> WhatsApp also has 3 specific image sizes beyond chat: Status <code className="text-xs px-1 py-0.5 bg-white dark:bg-[#1E1E1E] rounded">1080×1920</code>, Profile <code className="text-xs px-1 py-0.5 bg-white dark:bg-[#1E1E1E] rounded">500×500</code>, Group icon <code className="text-xs px-1 py-0.5 bg-white dark:bg-[#1E1E1E] rounded">192×192</code>. Use{" "}
+            <Link href="/resize/whatsapp" className="text-[#6366F1] font-semibold hover:underline">SammaPix WhatsApp Resizer</Link>{" "}
+            — auto-crops to the right ratio, no upload, no signup.
+          </p>
+        </div>
+
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
           <strong className="text-gray-800 dark:text-[#E5E5E5]">Important:</strong> Avoid sending WebP or PNG files through WhatsApp. The app will convert them to JPEG anyway, introducing an additional lossy compression step that degrades quality further. If your photos are in{" "}
           <Link href="/blog/iphone-heic-to-jpg-guide" className="text-[#6366F1] hover:underline">HEIC format from an iPhone</Link>,{" "}
