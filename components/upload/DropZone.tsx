@@ -14,9 +14,11 @@ import { trackEvent } from "@/lib/analytics";
 interface DropZoneProps {
   onFilesAdded?: (files: File[]) => void;
   className?: string;
+  /** Tool slug for analytics. Defaults to "compress" for backwards compat. */
+  toolName?: string;
 }
 
-export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
+export default function DropZone({ onFilesAdded, className, toolName = "compress" }: DropZoneProps) {
   const { addFiles, items } = useImageStore();
   const { data: session } = useSession();
 
@@ -31,7 +33,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
       if (valid.length > 0) {
         const currentCount = useImageStore.getState().items.length;
         addFiles(valid, maxFiles);
-        trackEvent("tool_used", { tool_name: "compress", files_count: valid.length });
+        trackEvent("tool_used", { tool_name: toolName, files_count: valid.length });
         // If user tried to add more files than remaining slots, they hit the limit
         if (currentCount + valid.length > maxFiles) {
           trackEvent("limit_hit", { limit_type: "files" });
@@ -39,7 +41,7 @@ export default function DropZone({ onFilesAdded, className }: DropZoneProps) {
         onFilesAdded?.(valid);
       }
     },
-    [addFiles, onFilesAdded, maxFiles]
+    [addFiles, onFilesAdded, maxFiles, toolName]
   );
 
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({

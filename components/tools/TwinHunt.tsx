@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -436,6 +437,8 @@ export default function TwinHunt() {
         f.name.toLowerCase().endsWith(".heif")
     );
     if (imageFiles.length < 2) return;
+
+    trackEvent("tool_used", { tool_name: "twinhunt", files_count: imageFiles.length });
 
     if (imageFiles.length > twinLimit && !isPro) {
       setPendingFiles(imageFiles);

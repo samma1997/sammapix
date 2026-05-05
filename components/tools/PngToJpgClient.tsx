@@ -14,6 +14,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ─────────────────────────────────────────────────────────────
 const MAX_FILES_FREE = 20;
@@ -153,6 +154,9 @@ export default function PngToJpgClient() {
       const arr = Array.from(files).filter((f) =>
         f.type === "image/png" || f.name.toLowerCase().endsWith(".png")
       );
+      if (arr.length > 0) {
+        trackEvent("tool_used", { tool_name: "png-to-jpg", files_count: arr.length });
+      }
       const remaining = fileLimit - items.length;
       if (arr.length > remaining && !isPro) setShowProBanner(true);
       const toAdd = arr.slice(0, remaining).map(

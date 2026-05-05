@@ -93,6 +93,8 @@ export default function UpscaleClient() {
       const file = accepted[0];
       if (!file) return;
 
+      trackEvent("tool_used", { tool_name: "upscale", files_count: 1 });
+
       // Clear previous
       setFiles((prev) => {
         prev.forEach((f) => {
