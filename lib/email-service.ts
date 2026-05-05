@@ -159,6 +159,33 @@ export async function sendProUpgradeEmail(to: string, name: string | null) {
   });
 }
 
+export async function sendTrialEndingSoonEmail(
+  to: string,
+  name: string | null,
+  daysLeft: number,
+) {
+  const greeting = name ? `Hi ${name},` : "Hi there,";
+  const html = `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#171717;line-height:1.6;max-width:520px;margin:0 auto;padding:32px 20px">
+<p style="margin:0 0 16px">${greeting}</p>
+<p style="margin:0 0 16px">Quick heads-up — your SammaPix Pro trial ends in <strong>${daysLeft} ${daysLeft === 1 ? "day" : "days"}</strong>.</p>
+<p style="margin:0 0 16px">If Pro is helping, you don't need to do anything. The card you added gets charged ${daysLeft === 1 ? "tomorrow" : "in " + daysLeft + " days"} and you keep:</p>
+<ul style="margin:0 0 20px;padding-left:20px;color:#525252">
+<li>500 files per batch (free is 20)</li>
+<li>200 AI ops per day (free is 10)</li>
+<li>50 MB max file size · ZIP download · No ads</li>
+</ul>
+<p style="margin:0 0 24px">If Pro isn't for you, no worries — you can cancel from <a href="https://www.sammapix.com/dashboard/settings" style="color:#6366F1">your settings</a> in 2 clicks. No question asked.</p>
+<p style="margin:0 0 8px;color:#737373;font-size:13px">— Luca, SammaPix</p>
+<p style="margin:0;color:#A3A3A3;font-size:12px">P.S. Reply to this email if anything is broken or confusing. I read every reply.</p>
+</body></html>`;
+  await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Your Pro trial ends in ${daysLeft} ${daysLeft === 1 ? "day" : "days"}`,
+    html,
+  });
+}
+
 export async function sendProCancelEmail(to: string, name: string | null) {
   const { ProCancelEmail } = await import("@/emails/ProCancelEmail");
   const html = await render(ProCancelEmail({ name: name ?? "there" }));

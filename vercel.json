@@ -78,6 +78,10 @@
     {
       "path": "/api/cron/directory-discovery",
       "schedule": "0 3 * * 1"
+    },
+    {
+      "path": "/api/cron/trial-monitor",
+      "schedule": "0 11 * * *"
     }
   ],
   "redirects": [
