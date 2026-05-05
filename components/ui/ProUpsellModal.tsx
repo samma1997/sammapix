@@ -24,7 +24,7 @@ interface ProUpsellModalProps {
 function getHeadline(trigger: UpsellTrigger): string {
   switch (trigger) {
     case "ai_rename":
-      return "You've hit today's AI rename limit";
+      return "You've hit today's AI limit — keep going with Pro";
     case "file_size":
       return "File too large for free plan";
     case "batch":
@@ -35,6 +35,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "Daily limit reached";
     case "zip":
       return "ZIP download is a Pro feature";
+    case "upscale_daily":
+      return "Daily upscale limit reached";
     default:
       return "You're processing like a pro";
   }
@@ -47,22 +49,24 @@ function getSubtext(
 ): string {
   switch (trigger) {
     case "ai_rename":
-      return "Free plan gets 10 AI credits per day. Pro gives you 500- enough for an entire shoot.";
+      return "Free plan: 10 AI ops per day. Pro gives you 200 — enough for an entire shoot. Or grab a one-shot credit pack if you only need extras occasionally.";
     case "file_size":
-      return "Free plan supports files up to 20 MB. Upgrade to Pro to handle files up to 50 MB.";
+      return "Free plan supports files up to 20 MB. Pro handles up to 50 MB.";
     case "batch":
-      return "You've hit the batch processing limit. Upgrade to Pro to handle up to 500 files at once.";
+      return "You've hit the batch limit. Pro handles up to 500 files at once.";
     case "steps":
-      return "Free plan allows up to 2 active steps per workflow. Upgrade to Pro for unlimited steps.";
+      return "Free allows 2 active steps per workflow. Pro unlocks unlimited steps.";
     case "daily":
-      return "Free plan allows 50 images per day. Upgrade to Pro for unlimited processing.";
+      return "Free plan: 50 images per day. Pro removes the daily cap.";
     case "zip":
-      return "ZIP batch download is available on Pro. Upgrade to download all your files in one click.";
+      return "ZIP batch download is a Pro feature. One click, all files in a single archive.";
+    case "upscale_daily":
+      return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
     default: {
       if (filesDropped && freeLimit) {
-        return `You dropped ${filesDropped} photos- free plan processes the first ${freeLimit}. Upgrade to handle 500 at once.`;
+        return `You dropped ${filesDropped} photos — free plan processes the first ${freeLimit}. Pro handles 500 at once.`;
       }
-      return `Free plan processes up to ${freeLimit ?? 100} files. Upgrade to handle 500 at once.`;
+      return `Free plan processes up to ${freeLimit ?? 100} files. Pro handles 500 at once.`;
     }
   }
 }
@@ -70,9 +74,9 @@ function getSubtext(
 // ── Features list ─────────────────────────────────────────────────────────────
 
 const FEATURES = [
-  "Up to 500 files per batch",
-  "500 AI credits per day",
-  "50 MB max file size · Zero ads",
+  "Up to 500 files per batch (free: 20)",
+  "200 AI ops per day (free: 10)",
+  "50 MB max file size · No ads · ZIP download",
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -102,7 +106,7 @@ export default function ProUpsellModal({
   const handleCheckout = async () => {
     trackEvent("upsell_clicked", { trigger });
     if (!session) {
-      router.push("/api/auth/signin?callbackUrl=/dashboard/upgrade");
+      router.push("/api/auth/signin?callbackUrl=/dashboard/upgrade?plan=monthly");
       onClose();
       return;
     }
@@ -126,6 +130,16 @@ export default function ProUpsellModal({
       setLoading(false);
     }
   };
+
+  const handleBuyCredits = () => {
+    trackEvent("upsell_credits_clicked", { trigger });
+    router.push("/pricing#credits");
+    onClose();
+  };
+
+  // Show credit-pack alternative only when the limit is AI ops or daily — those
+  // are the cases where a one-shot top-up makes sense.
+  const showCreditAlt = trigger === "ai_rename" || trigger === "daily" || trigger === "upscale_daily";
 
   return (
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
@@ -188,21 +202,31 @@ export default function ProUpsellModal({
             ))}
           </ul>
 
-          {/* Primary CTA */}
+          {/* Primary CTA \u2014 explicit free trial */}
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-3 disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
             ) : (
               <Zap className="h-4 w-4" strokeWidth={1.5} />
             )}
-            {loading ? "Redirecting to checkout..." : "Upgrade to Pro \u2014 $9/mo"}
+            {loading ? "Redirecting to checkout..." : "Start 7-day free trial \u2014 $9/mo after"}
           </button>
 
-          {/* Secondary CTA */}
+          {/* Credit pack alternative for AI-ops triggers */}
+          {showCreditAlt && (
+            <button
+              onClick={handleBuyCredits}
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2"
+            >
+              Or buy a one-shot credit pack from $5.99
+            </button>
+          )}
+
+          {/* Continue with first N files \u2014 only for files/batch triggers */}
           {showContinue && freeLimit && (
             <button
               onClick={onClose}
@@ -212,9 +236,9 @@ export default function ProUpsellModal({
             </button>
           )}
 
-          {/* Money-back guarantee */}
-          <p className="text-center text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-3">
-            30-day money-back guarantee
+          {/* Trust line \u2014 single row, slightly more visible */}
+          <p className="text-center text-xs text-[#737373] dark:text-[#A3A3A3] mt-3">
+            30-day money-back \u00b7 Cancel anytime
           </p>
         </Dialog.Content>
       </Dialog.Portal>
