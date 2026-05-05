@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   Zap,
@@ -18,20 +19,31 @@ interface DashboardUpgradeProps {
 }
 
 export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
-  const [loading, setLoading] = useState(false);
-  const [annual, setAnnual] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
+  const searchParams = useSearchParams();
+  const planParam = searchParams.get("plan");
+  const initialAnnual = planParam === "annual";
 
-  const handleCheckout = async () => {
+  const [loading, setLoading] = useState(false);
+  const [annual, setAnnual] = useState(initialAnnual);
+  const [error, setError] = useState<string | null>(null);
+  const [autoStarting, setAutoStarting] = useState<null | "annual" | "monthly">(
+    planParam === "annual" || planParam === "monthly" ? planParam : null
+  );
+  const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
+  const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleCheckout = async (planOverride?: "annual" | "monthly") => {
+    setAutoStarting(null);
+    if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
     setLoading(true);
     setError(null);
     try {
+      const planToSend = planOverride ?? (annual ? "annual" : "monthly");
       const res = await fetch("/api/checkout", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: annual ? "annual" : "monthly" }),
+        body: JSON.stringify({ plan: planToSend }),
       });
       const data = await res.json();
       if (data.url) {
@@ -46,9 +58,52 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
     }
   };
 
+  // Auto-checkout when arriving from /pricing or upsell modal with ?plan=X.
+  // Preserves intent across the signin redirect — eliminates the second click
+  // that was making Stripe sessions expire (ux-researcher A/B-1).
+  useEffect(() => {
+    if (!autoStarting) return;
+    autoTimerRef.current = setTimeout(() => {
+      handleCheckout(autoStarting);
+    }, 700);
+    return () => {
+      if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoStarting]);
+
+  const handleCancelAuto = () => {
+    if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
+    setAutoStarting(null);
+  };
+
   return (
     <div className="py-10 px-4 sm:px-8">
       <div className="max-w-2xl mx-auto">
+        {/* Auto-checkout banner — visible when arriving from /pricing or upsell with ?plan=X */}
+        {autoStarting && (
+          <div className="mb-6 flex items-center justify-between gap-3 px-4 py-3 rounded-lg border border-[#6366F1]/30 bg-[#EEF2FF] dark:bg-[#6366F1]/10">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="h-4 w-4 shrink-0 rounded-full border-2 border-[#6366F1] border-t-transparent animate-spin" />
+              <p className="text-sm text-[#171717] dark:text-[#E5E5E5] truncate">
+                Resuming your{" "}
+                <span className="font-semibold">
+                  {autoStarting === "annual" ? "Annual" : "Monthly"}
+                </span>{" "}
+                checkout…
+              </p>
+            </div>
+            <button
+              onClick={handleCancelAuto}
+              className="shrink-0 inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] transition-colors"
+              aria-label="Cancel auto-checkout"
+            >
+              <XIcon className="h-3 w-3" strokeWidth={2} />
+              Cancel
+            </button>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#6366F1]/10 dark:bg-[#6366F1]/20 text-[#6366F1] rounded-full text-xs font-medium mb-4">
@@ -161,7 +216,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
 
           {/* CTA */}
           <button
-            onClick={handleCheckout}
+            onClick={() => handleCheckout()}
             disabled={loading}
             className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-base font-semibold rounded-lg transition-colors duration-150 disabled:opacity-60 shadow-sm"
           >
