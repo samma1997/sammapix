@@ -6,7 +6,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Does WhatsApp Strip GPS? 12 Apps Tested (Instagram Removes, Signal Hides) [2026]",
+    "Does Instagram, Telegram & Signal Strip EXIF? 12 Apps Tested [2026]",
   description:
     "We sent the same photo through 12 apps and checked the EXIF: Instagram, WhatsApp, Signal, iMessage, Reddit, Telegram. The 4 apps secretly leaking your GPS — and the WhatsApp document trick that exposes everyone.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "exif data social media",
   ],
   openGraph: {
-    title: "Does WhatsApp Strip GPS? 12 Apps Tested (Instagram Removes, Signal Hides) [2026]",
+    title: "Does Instagram, Telegram & Signal Strip EXIF? 12 Apps Tested [2026]",
     description:
       "12 apps tested for EXIF/GPS stripping. The 4 secretly leaking your home address — and the WhatsApp document trick.",
     url: `${APP_URL}/blog/which-apps-strip-photo-metadata`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Does WhatsApp Strip GPS? 12 Apps Tested (Instagram Removes, Signal Hides) [2026]",
+    title: "Does Instagram, Telegram & Signal Strip EXIF? 12 Apps Tested [2026]",
     description:
       "Sent same photo to 12 apps. Checked the EXIF after. The 4 leaking your GPS — and the WhatsApp document trick.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-06";
 const POST_DATE_FORMATTED = "April 6, 2026";
 const POST_URL = `${APP_URL}/blog/which-apps-strip-photo-metadata`;
-const POST_TITLE = "Does WhatsApp Strip GPS? 12 Apps Tested (Instagram Removes, Signal Hides) [2026]";
+const POST_TITLE = "Does Instagram, Telegram & Signal Strip EXIF? 12 Apps Tested [2026]";
 
 const articleSchema = {
   "@context": "https://schema.org",

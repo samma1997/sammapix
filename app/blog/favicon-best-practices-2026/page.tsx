@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Favicon Best Practices 2026: 4 Sizes That Matter (SVG, Dark Mode, PWA)",
+  title: "Favicon Best Practices 2026: 4 Sizes + Animated Browser Support",
   description:
     "Most favicon guides list 22 sizes. You only need 4. The exact PNG/SVG/ICO setup for crisp icons across Chrome, Safari, dark mode, iOS, and PWA — with the 4 HTML tags to copy-paste.",
   alternates: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "html favicon tags",
   ],
   openGraph: {
-    title: "Favicon Best Practices 2026: 4 Sizes That Matter (SVG, Dark Mode, PWA)",
+    title: "Favicon Best Practices 2026: 4 Sizes + Animated Browser Support",
     description:
       "22 favicon sizes? You only need 4. The exact PNG/SVG/ICO setup with copy-paste HTML for every browser.",
     url: `${APP_URL}/blog/favicon-best-practices-2026`,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Favicon Best Practices 2026: 4 Sizes That Matter (SVG, Dark Mode, PWA)",
+  headline: "Favicon Best Practices 2026: 4 Sizes + Animated Browser Support",
   description:
     "Most favicon guides list 22 sizes. You only need 4. The exact PNG/SVG/ICO setup for crisp icons across Chrome, Safari, dark mode, iOS, and PWA — with the 4 HTML tags to copy-paste.",
   url: `${APP_URL}/blog/favicon-best-practices-2026`,
@@ -78,7 +78,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "Favicon Best Practices 2026: 4 Sizes That Matter (SVG, Dark Mode, PWA)",
+      name: "Favicon Best Practices 2026: 4 Sizes + Animated Browser Support",
       item: `${APP_URL}/blog/favicon-best-practices-2026`,
     },
   ],
@@ -156,7 +156,7 @@ export default function FaviconBestPractices2026Page() {
       />
 
       <BlogArticleLayout
-        title="Favicon Best Practices 2026: 4 Sizes That Matter (SVG, Dark Mode, PWA)"
+        title="Favicon Best Practices 2026: 4 Sizes + Animated Browser Support"
         slug="favicon-best-practices-2026"
         description="The old answer to &lsquo;what favicon sizes do I need?&rsquo; was an endless grid of 15+ files. In 2026 modern browsers accept SVG natively, iOS ate Apple Touch Startup Image, and Windows tiles quietly died. Here is the minimum viable favicon setup plus everything you need to know about SVG + ICO, dark mode, PWA, and cache invalidation."
         date="2026-04-22"

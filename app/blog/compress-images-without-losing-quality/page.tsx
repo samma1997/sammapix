@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Compress Images Without Losing Quality (2026)",
+  title: "Compress Images Without Losing Quality: Best Methods Tested 2026",
   description:
     "How to compress images without losing quality: lossy vs lossless, the best quality settings per format, and a practical workflow for web optimization.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "reduce image file size",
   ],
   openGraph: {
-    title: "Compress Images Without Losing Quality (2026)",
+    title: "Compress Images Without Losing Quality: Best Methods Tested 2026",
     description:
       "The complete guide to image compression: lossy vs lossless, PNG vs JPEG vs WebP, quality settings, and how to reduce file size without visible quality loss.",
     url: `${APP_URL}/blog/compress-images-without-losing-quality`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress Images Without Losing Quality (2026)",
+    title: "Compress Images Without Losing Quality: Best Methods Tested 2026",
     description:
       "The complete guide to image compression: lossy vs lossless, quality settings, and the best formats for every use case.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Compress Images Without Losing Quality (2026)",
+  headline: "Compress Images Without Losing Quality: Best Methods Tested 2026",
   description:
     "Learn how to compress images without losing quality. Compare lossy vs lossless compression, PNG vs JPEG vs WebP, and find the right quality settings for every use case.",
   url: `${APP_URL}/blog/compress-images-without-losing-quality`,
@@ -89,7 +89,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "Compress Images Without Losing Quality (2026)",
+      name: "Compress Images Without Losing Quality: Best Methods Tested 2026",
       item: `${APP_URL}/blog/compress-images-without-losing-quality`,
     },
   ],
@@ -146,7 +146,7 @@ export default function CompressImagesWithoutLosingQualityPage() {
   return (
     <>
       <BlogArticleLayout
-        title="Compress Images Without Losing Quality (2026)"
+        title="Compress Images Without Losing Quality: Best Methods Tested 2026"
         slug="compress-images-without-losing-quality"
         description="Image compression is one of the highest-leverage performance optimizations available to any website. A page that loads in 1.5 seconds gets significantly more conversions than one that loads in 3.5 seconds- and oversized images are the single most common reason for slow load times. This guide explains exactly how image compression works and how to reduce image size without any visible quality loss."
         date="2026-03-07"
