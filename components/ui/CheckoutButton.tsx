@@ -29,19 +29,21 @@ export default function CheckoutButton({
     // Generate event ID for Meta deduplication (client pixel + server CAPI)
     const eventId = `ic_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 
-    // Fire conversion events for ad platforms
+    if (!session) {
+      // Not logged in → signin first, preserve plan intent in callbackUrl
+      router.push(`/api/auth/signin?callbackUrl=/dashboard/upgrade?plan=${encodeURIComponent(plan)}`);
+      return;
+    }
+
+    // Fire conversion events ONLY for logged-in users actually hitting checkout —
+    // pre-signin clicks were inflating begin_checkout 50x with no real intent.
     if (typeof window !== "undefined") {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const w = window as any;
-      if (typeof w.fbq === "function") w.fbq("track", "InitiateCheckout", {}, { eventID: eventId });
-      if (typeof w.gtag === "function") w.gtag("event", "begin_checkout");
+      if (typeof w.fbq === "function") w.fbq("track", "InitiateCheckout", { plan }, { eventID: eventId });
+      if (typeof w.gtag === "function") w.gtag("event", "begin_checkout", { plan });
     }
 
-    if (!session) {
-      // Not logged in → signin, then redirect to dashboard upgrade
-      router.push("/api/auth/signin?callbackUrl=/dashboard/upgrade");
-      return;
-    }
     setLoading(true);
     try {
       // Read Meta cookies for Conversions API attribution
