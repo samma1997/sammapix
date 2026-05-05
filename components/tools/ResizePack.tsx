@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -589,6 +590,8 @@ export default function ResizePack() {
     (files: File[]) => {
       const imageFiles = files.filter((f) => f.type.startsWith("image/"));
       if (imageFiles.length === 0) return;
+
+      trackEvent("tool_used", { tool_name: "resizepack", files_count: imageFiles.length });
 
       if (imageFiles.length > limit && !isPro) {
         setUpsellFiles(imageFiles);

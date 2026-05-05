@@ -14,7 +14,7 @@ const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSug
 export default function AiRenameClient() {
   return (
     <>
-      <ToolInterface defaultMode="ai-rename" />
+      <ToolInterface defaultMode="ai-rename" toolName="ai-rename" />
 
       {/* Next-step suggestions- shown automatically when all files are done */}
       <section className="px-4 sm:px-6 pb-2">

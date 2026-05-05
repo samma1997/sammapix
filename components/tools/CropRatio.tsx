@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -523,6 +524,8 @@ export default function CropRatio() {
       const filtered = Array.from(raw).filter((f) => allowed.includes(f.type));
 
       if (filtered.length === 0) return;
+
+      trackEvent("tool_used", { tool_name: "croproatio", files_count: filtered.length });
 
       if (filtered.length > limit && !isPro) {
         setUpsellFiles(filtered);

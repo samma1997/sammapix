@@ -87,6 +87,7 @@ export default function RemoveBgClient() {
       setFiles((prev) => [...prev, ...newFiles]);
 
       trackEvent("remove_bg_files_added", { count: newFiles.length });
+      trackEvent("tool_used", { tool_name: "remove-bg", files_count: newFiles.length });
     },
     [files.length, maxFiles, maxFileSize]
   );

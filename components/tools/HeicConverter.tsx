@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { trackEvent } from "@/lib/analytics";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -377,6 +378,8 @@ export default function HeicConverter() {
     (raw: File[]) => {
       const heicFiles = raw.filter(isHeicFile);
       if (heicFiles.length === 0) return;
+
+      trackEvent("tool_used", { tool_name: "heic", files_count: heicFiles.length });
 
       if (!isPro && heicFiles.length > MAX_FILES_FREE) {
         setShowProBanner(true);

@@ -22,9 +22,11 @@ export type ToolMode = "compress" | "webp" | "ai-rename";
 
 interface ToolInterfaceProps {
   defaultMode?: ToolMode;
+  /** Tool slug for analytics tool_used events. */
+  toolName?: string;
 }
 
-export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
+export default function ToolInterface({ defaultMode, toolName }: ToolInterfaceProps) {
   const {
     items,
     aiRenameFile,
@@ -95,7 +97,7 @@ export default function ToolInterface({ defaultMode }: ToolInterfaceProps) {
         <div className="max-w-3xl mx-auto">
 
           {/* ── DropZone ── */}
-          <DropZone />
+          <DropZone toolName={toolName} />
 
           {/* Settings toolbar- appare dopo upload */}
           {hasFiles && (
