@@ -70,7 +70,7 @@ export const authOptions: AuthOptions = {
     },
   },
   events: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
       if (!user.email) return;
       const { addToAudience } = await import("@/lib/resend");
       const isNew = await addToAudience(user.email, user.name ?? null);
@@ -86,6 +86,22 @@ export const authOptions: AuthOptions = {
           sourceUrl: `${appUrl}/auth/signin`,
           email: user.email,
           customData: { status: "new_user" },
+        }).catch(() => {});
+
+        // Fire GA4 'sign_up' event server-side. The _ga cookie isn't
+        // accessible in NextAuth events callbacks, so we use email as
+        // client_id — GA4 will still attribute it to the same user
+        // across sessions via user_id matching.
+        const { sendGA4Event } = await import("@/lib/ga4-server");
+        sendGA4Event({
+          clientId: user.email,
+          userId: user.email,
+          events: [{
+            name: "sign_up",
+            params: {
+              method: account?.provider ?? "unknown",
+            },
+          }],
         }).catch(() => {});
       }
 
