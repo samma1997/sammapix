@@ -43,6 +43,37 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Anti-duplicate: refuse new checkout if this email already has an active or
+  // trialing subscription. Without this guard, a double-click could create two
+  // parallel subscriptions billed twice on trial-end (real case observed
+  // 2026-05-07 with mike@akolades.com).
+  try {
+    const existingCustomers = await stripe.customers.list({
+      email: session.user.email,
+      limit: 5,
+    });
+    for (const cus of existingCustomers.data) {
+      const subs = await stripe.subscriptions.list({
+        customer: cus.id,
+        status: "all",
+        limit: 5,
+      });
+      if (subs.data.some((s) => s.status === "trialing" || s.status === "active")) {
+        return NextResponse.json(
+          {
+            error: "You already have an active subscription. Manage it from your dashboard.",
+            code: "SUBSCRIPTION_EXISTS",
+            redirectTo: "/dashboard/settings",
+          },
+          { status: 409 }
+        );
+      }
+    }
+  } catch (err) {
+    // If Stripe lookup fails, log but don't block checkout (avoid lockout).
+    console.error("[checkout] Anti-duplicate check failed:", err instanceof Error ? err.message : err);
+  }
+
   // Parse plan type and Meta + GA4 cookies from request body
   let plan: "monthly" | "annual" = "monthly";
   let fbp: string | undefined;
