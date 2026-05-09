@@ -13,10 +13,11 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { removeBackground, RemoveBgResult } from "@/lib/remove-bg";
+import { removeBackground, RemoveBgResult, BackgroundColor } from "@/lib/remove-bg";
 import { MAX_FILES_FREE, MAX_FILES_PRO, MAX_FILE_SIZE_FREE, MAX_FILE_SIZE_PRO } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import { trackEvent } from "@/lib/analytics";
+import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -66,7 +67,12 @@ export default function RemoveBgClient() {
 
   const [files, setFiles] = useState<BgFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [bgColor, setBgColor] = useState<BackgroundColor>("transparent");
+  const [customHex, setCustomHex] = useState("#F5F5F5");
   const processingRef = useRef(false);
+
+  const isCustomActive = bgColor !== "transparent" && bgColor !== "white" && bgColor !== "black";
+  const isJpegOutput = bgColor !== "transparent";
 
   /* ── Drop handler ──────────────────────────────────────────────── */
   const onDrop = useCallback(
@@ -141,11 +147,15 @@ export default function RemoveBgClient() {
       );
 
       try {
-        const result = await removeBackground(item.file, (progress) => {
-          setFiles((prev) =>
-            prev.map((f) => (f.id === item.id ? { ...f, progress } : f))
-          );
-        });
+        const result = await removeBackground(
+          item.file,
+          (progress) => {
+            setFiles((prev) =>
+              prev.map((f) => (f.id === item.id ? { ...f, progress } : f))
+            );
+          },
+          bgColor
+        );
 
         const resultUrl = URL.createObjectURL(result.blob);
 
@@ -171,8 +181,8 @@ export default function RemoveBgClient() {
 
     processingRef.current = false;
     setIsProcessing(false);
-    trackEvent("remove_bg_complete");
-  }, [files]);
+    trackEvent("remove_bg_complete", { bg_color: bgColor });
+  }, [files, bgColor]);
 
   /* ── Download single ───────────────────────────────────────────── */
   const downloadFile = useCallback((item: BgFile) => {
@@ -180,7 +190,8 @@ export default function RemoveBgClient() {
     const a = document.createElement("a");
     a.href = item.resultUrl;
     const baseName = item.file.name.replace(/\.[^.]+$/, "");
-    a.download = `${baseName}-no-bg.png`;
+    const ext = item.result.blob.type === "image/jpeg" ? "jpg" : "png";
+    a.download = `${baseName}-no-bg.${ext}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -198,7 +209,8 @@ export default function RemoveBgClient() {
     for (const item of done) {
       if (!item.result) continue;
       const baseName = item.file.name.replace(/\.[^.]+$/, "");
-      zip.file(`${baseName}-no-bg.png`, item.result.blob);
+      const ext = item.result.blob.type === "image/jpeg" ? "jpg" : "png";
+      zip.file(`${baseName}-no-bg.${ext}`, item.result.blob);
     }
 
     const blob = await zip.generateAsync({ type: "blob" });
@@ -217,10 +229,11 @@ export default function RemoveBgClient() {
   const idleCount = files.filter((f) => f.status === "idle").length;
   const doneCount = files.filter((f) => f.status === "done").length;
   const allDone = hasFiles && files.every((f) => f.status === "done" || f.status === "error");
+  const previewItem = files.find((f) => f.status === "done" && f.resultUrl);
 
   /* ── Render ────────────────────────────────────────────────────── */
   return (
-    <section className="pt-6 pb-4 px-4 sm:px-6">
+    <section className="pt-3 pb-4 px-4 sm:px-6">
       <div className="max-w-3xl mx-auto">
         {/* ── DropZone ── */}
         <div
@@ -258,6 +271,82 @@ export default function RemoveBgClient() {
               JPG, PNG, WebP up to {isPro ? "50" : "20"} MB
             </p>
           </div>
+        </div>
+
+        {/* ── Background color picker ── */}
+        <div className="mt-3 flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mr-1">
+            Background:
+          </span>
+          {([
+            { value: "transparent", label: "Transparent", swatch: "checker" },
+            { value: "white", label: "White", swatch: "#FFFFFF" },
+            { value: "black", label: "Black", swatch: "#000000" },
+          ] as const).map((opt) => {
+            const active = bgColor === opt.value;
+            return (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setBgColor(opt.value)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-md border transition-colors",
+                  active
+                    ? "border-[#6366F1] bg-[#6366F1]/[0.06] text-[#6366F1]"
+                    : "border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]"
+                )}
+              >
+                <span
+                  className="h-3.5 w-3.5 rounded-sm border border-[#E5E5E5] dark:border-[#444]"
+                  style={
+                    opt.swatch === "checker"
+                      ? {
+                          backgroundImage:
+                            "linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%)",
+                          backgroundSize: "6px 6px",
+                          backgroundPosition: "0 0, 0 3px, 3px -3px, -3px 0px",
+                        }
+                      : { backgroundColor: opt.swatch }
+                  }
+                />
+                {opt.label}
+              </button>
+            );
+          })}
+          <button
+            type="button"
+            onClick={() => setBgColor(customHex)}
+            className={cn(
+              "inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-md border transition-colors",
+              isCustomActive
+                ? "border-[#6366F1] bg-[#6366F1]/[0.06] text-[#6366F1]"
+                : "border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A]"
+            )}
+          >
+            <span
+              className="h-3.5 w-3.5 rounded-sm border border-[#E5E5E5] dark:border-[#444]"
+              style={{ backgroundColor: customHex }}
+            />
+            Custom
+          </button>
+          {isCustomActive && (
+            <input
+              type="color"
+              value={customHex}
+              onChange={(e) => {
+                const v = e.target.value;
+                setCustomHex(v);
+                setBgColor(v);
+              }}
+              className="h-7 w-9 rounded border border-[#E5E5E5] dark:border-[#333] cursor-pointer bg-transparent"
+              aria-label="Custom background color"
+            />
+          )}
+          {isJpegOutput && (
+            <span className="text-[11px] text-[#A3A3A3] ml-auto">
+              Output: JPG
+            </span>
+          )}
         </div>
 
         {/* ── Action bar ── */}
@@ -299,6 +388,26 @@ export default function RemoveBgClient() {
             >
               Clear all
             </button>
+          </div>
+        )}
+
+        {/* ── Live preview (Before/After slider) ── */}
+        {previewItem && previewItem.resultUrl && (
+          <div className="mt-3 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] p-2">
+            <BeforeAfterSlider
+              beforeSrc={previewItem.previewUrl}
+              afterSrc={previewItem.resultUrl}
+              beforeLabel="Original"
+              afterLabel={
+                bgColor === "transparent"
+                  ? "No background"
+                  : bgColor === "white"
+                  ? "White bg"
+                  : bgColor === "black"
+                  ? "Black bg"
+                  : "Custom bg"
+              }
+            />
           </div>
         )}
 
@@ -353,7 +462,7 @@ export default function RemoveBgClient() {
                     </span>
                     {item.status === "done" && item.result && (
                       <span className="text-xs text-[#16A34A] font-medium">
-                        PNG {formatBytes(item.result.outputSize)}
+                        {item.result.blob.type === "image/jpeg" ? "JPG" : "PNG"} {formatBytes(item.result.outputSize)}
                       </span>
                     )}
                   </div>

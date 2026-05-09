@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Crop, Hand, FolderArchive, Shield } from "lucide-react";
+import { ArrowLeft, Crop, Hand, FolderArchive, Shield, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import CropRatioClient from "@/components/tools/CropRatioClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import CroproatioHeroDemo from "@/components/tools/CroproatioHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -9,25 +10,26 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Crop Image to Aspect Ratio Online Free",
+  title: "Crop Image with Drag-to-Resize Handles. Free, No Upload",
   description:
-    "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
+    "Free online image crop tool with drag-to-resize handles like Photoshop or Figma. 1:1, 4:5, 9:16, 16:9 presets or custom drag. Hold Shift to keep ratio. Batch process, zero uploads.",
   keywords: [
-    "crop image ratio",
-    "aspect ratio crop",
-    "crop tool online",
-    "instagram crop",
-    "batch crop images",
-    "image cropper",
-    "aspect ratio crop",
-    "batch crop images",
-    "instagram crop",
+    "crop image online drag",
+    "free photoshop crop alternative",
+    "figma style crop tool",
+    "crop image aspect ratio free",
+    "drag to resize crop",
+    "crop image online no upload",
+    "instagram story crop",
+    "youtube thumbnail crop",
+    "batch crop images online",
+    "image cropper drag handles",
   ],
   alternates: { canonical: `${APP_URL}/tools/croproatio` },
   openGraph: {
-    title: "Crop Image to Aspect Ratio Online Free",
+    title: "Crop Image with Drag-to-Resize Handles. Free, No Upload",
     description:
-      "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
+      "Free crop tool with drag-to-resize handles like Photoshop or Figma. Hold Shift to keep ratio. Batch process, zero uploads, no signup.",
     url: `${APP_URL}/tools/croproatio`,
     siteName: "SammaPix",
     type: "website",
@@ -42,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Crop Image to Aspect Ratio Online Free",
+    title: "Crop Image with Drag-to-Resize Handles. Free, No Upload",
     description:
-      "Crop to any ratio- 1:1, 4:5, 9:16, 16:9, custom. Instagram, TikTok, YouTube optimized. Batch process, zero uploads, free online.",
+      "Free crop tool with drag-to-resize handles like Photoshop or Figma. Hold Shift to keep ratio.",
   },
 };
 
@@ -74,12 +76,15 @@ const jsonLd = {
     ratingCount: "85",
   },
   featureList: [
+    "Drag-to-resize handles like Photoshop and Figma",
+    "Hold Shift to keep aspect ratio while resizing",
     "1:1 square ratio",
     "16:9 widescreen",
     "4:5 Instagram portrait",
     "9:16 Stories and Reels",
-    "Custom ratios",
+    "Custom ratios with free drag",
     "Batch processing",
+    "Browser-based, zero server upload",
   ],
 };
 
@@ -175,8 +180,8 @@ export default function CropRatioPage() {
               {
                 "@type": "HowToStep",
                 position: 3,
-                name: "Adjust crop and download",
-                text: "Drag the crop frame directly over your image preview to position it exactly and choose which area to keep. Download the cropped image individually, or batch-download all cropped images as a single ZIP file. Each image is cropped independently.",
+                name: "Resize with drag handles or download",
+                text: "Drag the corners or edges of the crop frame to resize it to any custom dimensions, exactly like in Photoshop or Figma. Hold the Shift key while dragging to keep the current aspect ratio locked. Drag the center of the frame to reposition it. When happy, download the cropped image individually or batch-download all images as a single ZIP file.",
                 url: `${APP_URL}/tools/croproatio`
               }
             ]
@@ -184,12 +189,68 @@ export default function CropRatioPage() {
         }}
       />
 
-      <ToolHeader
-        title="Crop & Ratio"
-        description="Drop your images, pick a ratio- 1:1, 4:5, 9:16, 16:9 or custom. Drag the frame to position the crop, then download individually or as a ZIP. Everything runs in your browser."
-        icon={Crop}
-        accentColor="#EC4899"
-      />
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#EC489915", border: "1px solid #EC489930" }}
+                aria-hidden="true"
+              >
+                <Crop className="h-[18px] w-[18px]" style={{ color: "#EC4899" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Crop to Ratio. Instagram, TikTok, YouTube
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Crop images to any aspect ratio with{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">drag-to-resize handles</strong>{" "}
+              like Photoshop or Figma. Pick a preset (1:1, 4:5, 9:16, 16:9), or
+              drag corners and edges to set custom dimensions. Hold{" "}
+              <kbd className="px-1 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] font-mono text-[11px]">Shift</kbd>{" "}
+              to keep the ratio. Batch process in your browser, no upload,
+              no signup.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Drag handles
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                4 social presets
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch ZIP
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Auto-cycling demo across 4 social aspect ratios ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <CroproatioHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <CropRatioClient />
@@ -199,15 +260,15 @@ export default function CropRatioPage() {
         steps={[
           {
             title: "Drop your image",
-            desc: "Upload one or multiple JPG, PNG or WebP photos- drag and drop or click to browse.",
+            desc: "Upload one or multiple JPG, PNG or WebP photos. Drag and drop or click to browse.",
           },
           {
-            title: "Select ratio",
-            desc: "Choose a preset like 1:1 (Instagram), 16:9 (YouTube), 4:5, 9:16 (Stories/Reels)- or type any custom ratio you need.",
+            title: "Pick a preset or freely drag",
+            desc: "Choose a preset (1:1 Instagram, 16:9 YouTube, 4:5, 9:16 Stories/Reels), or drag the corners and edges of the crop frame to set any custom dimensions. Hold Shift to keep the aspect ratio locked while resizing.",
           },
           {
-            title: "Adjust crop and download",
-            desc: "Drag the crop frame over your image to position it exactly, then download individually or as a ZIP.",
+            title: "Reposition and download",
+            desc: "Drag the center of the crop frame to reposition it on the image, then download individually or batch-download all cropped images as a ZIP.",
           },
         ]}
         proTip={{

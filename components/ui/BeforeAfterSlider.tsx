@@ -8,7 +8,11 @@ interface BeforeAfterSliderProps {
   afterSrc: string;
   beforeLabel?: string;
   afterLabel?: string;
+  beforeAlt?: string;
+  afterAlt?: string;
   className?: string;
+  autoAnimate?: boolean;
+  aspectRatio?: string;
 }
 
 export default function BeforeAfterSlider({
@@ -16,10 +20,15 @@ export default function BeforeAfterSlider({
   afterSrc,
   beforeLabel = "Original",
   afterLabel = "Compressed",
+  beforeAlt,
+  afterAlt,
   className,
+  autoAnimate = false,
+  aspectRatio = "16/9",
 }: BeforeAfterSliderProps) {
   const [position, setPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const updatePosition = useCallback((clientX: number) => {
@@ -33,7 +42,24 @@ export default function BeforeAfterSlider({
   const onMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsDragging(true);
+    setHasInteracted(true);
   };
+
+  // Auto-animation: smooth oscillation 22% ↔ 78% via requestAnimationFrame
+  useEffect(() => {
+    if (!autoAnimate || hasInteracted || isDragging) return;
+    let rafId: number;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = (now - start) / 1000;
+      // sine wave: period 4s, amplitude 28% around 50%
+      const next = 50 + Math.sin((elapsed * Math.PI) / 2) * 28;
+      setPosition(next);
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [autoAnimate, hasInteracted, isDragging]);
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
@@ -63,14 +89,17 @@ export default function BeforeAfterSlider({
         isDragging && "cursor-grabbing",
         className
       )}
-      style={{ aspectRatio: "16/9" }}
-      onMouseDown={(e) => updatePosition(e.clientX)}
+      style={{ aspectRatio }}
+      onMouseDown={(e) => {
+        updatePosition(e.clientX);
+        setHasInteracted(true);
+      }}
     >
       {/* After (compressed) - full width background */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={afterSrc}
-        alt={afterLabel}
+        alt={afterAlt ?? afterLabel}
         className="absolute inset-0 w-full h-full object-contain"
         draggable={false}
       />
@@ -83,7 +112,7 @@ export default function BeforeAfterSlider({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={beforeSrc}
-          alt={beforeLabel}
+          alt={beforeAlt ?? beforeLabel}
           className="absolute inset-0 w-full h-full object-contain"
           style={{ width: `${10000 / position}%`, maxWidth: "none" }}
           draggable={false}
@@ -99,7 +128,10 @@ export default function BeforeAfterSlider({
         <div
           className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-7 h-7 bg-white dark:bg-[#252525] rounded-full border border-gray-200 dark:border-[#444] shadow-md flex items-center justify-center cursor-grab active:cursor-grabbing"
           onMouseDown={onMouseDown}
-          onTouchStart={() => setIsDragging(true)}
+          onTouchStart={() => {
+            setIsDragging(true);
+            setHasInteracted(true);
+          }}
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path

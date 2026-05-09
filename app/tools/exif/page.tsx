@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import { ScanLine, Shield, MapPin, Download, ShieldOff } from "lucide-react";
+import { ArrowLeft, ScanLine, Shield, MapPin, Download, ShieldOff, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import ExifClient from "@/components/tools/ExifClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import ExifHeroDemo from "@/components/tools/ExifHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -116,12 +117,66 @@ export default function ExifPage() {
   return (
     <main>
       <MetaViewContent contentName="EXIF Viewer" contentId="exif" />
-      <ToolHeader
-        title="EXIF Viewer"
-        description="View all metadata in your photos - GPS location, camera, settings, and date. Remove GPS or strip all EXIF with one click. Nothing leaves your browser."
-        icon={ShieldOff}
-        accentColor="#EF4444"
-      />
+
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#EF444415", border: "1px solid #EF444430" }}
+                aria-hidden="true"
+              >
+                <ShieldOff className="h-[18px] w-[18px]" style={{ color: "#EF4444" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Remove EXIF Data. Protect Your Privacy
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              View every metadata field in your photos: GPS coordinates,
+              camera model, capture date, ISO settings. Remove GPS only or
+              strip all EXIF with one click before sharing online. 100%
+              browser-based, your photos never leave your device.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                GPS removal
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Strip all EXIF
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                HEIC support
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Animated mock UI: metadata viewer + strip animation ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <ExifHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* HowTo Schema */}
       <script

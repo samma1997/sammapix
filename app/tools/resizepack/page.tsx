@@ -1,9 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Shield, Layout, Archive, Maximize2, ArrowRight } from "lucide-react";
-import ToolHeader from "@/components/tools/ToolHeader";
+import { ArrowLeft, Shield, Layout, Archive, Maximize2, ArrowRight, CheckCircle2 } from "lucide-react";
 import ResizePackClient from "@/components/tools/ResizePackClient";
+import ResizepackHeroDemo from "@/components/tools/ResizepackHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -78,12 +78,66 @@ export default function ResizePackPage() {
   return (
     <main>
       <MetaViewContent contentName="ResizePack" contentId="resizepack" />
-      <ToolHeader
-        title="Batch Resize"
-        description="Batch resize images by pixel dimensions or percentage. Social media presets included. Download all as ZIP."
-        icon={Maximize2}
-        accentColor="#14B8A6"
-      />
+
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#14B8A615", border: "1px solid #14B8A630" }}
+                aria-hidden="true"
+              >
+                <Maximize2 className="h-[18px] w-[18px]" style={{ color: "#14B8A6" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Batch Resize. Instagram, Twitter, LinkedIn
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Resize 50+ images at once with one-click presets for Instagram
+              Post and Story, Twitter/X, LinkedIn, YouTube Thumbnail, and A4
+              print at 300 dpi. Or set custom pixel dimensions or percentage.
+              Everything runs in your browser, no upload, no signup.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                10+ social presets
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Custom px / %
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch ZIP
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Auto-cycling demo across 4 social platform presets ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <ResizepackHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <ResizePackClient />

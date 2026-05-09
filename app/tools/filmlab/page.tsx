@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Shield, Layers, Archive, Film } from "lucide-react";
-import ToolHeader from "@/components/tools/ToolHeader";
+import { ArrowLeft, Shield, Layers, Archive, Film, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import FilmLabClient from "@/components/tools/FilmLabClient";
+import FilmlabHeroDemo from "@/components/tools/FilmlabHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -10,7 +11,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Film Photo Filters Free Online - Vintage Effects",
+  title: "Film Photo Filters Free Online. Vintage, Cinematic, B&W",
   description:
     "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
   keywords: [
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/filmlab`,
   },
   openGraph: {
-    title: "Film Photo Filters Free Online - Vintage Effects",
+    title: "Film Photo Filters Free Online. Vintage, Cinematic, B&W",
     description:
       "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
     url: `${APP_URL}/tools/filmlab`,
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Film Photo Filters Free Online - Vintage Effects",
+    title: "Film Photo Filters Free Online. Vintage, Cinematic, B&W",
     description:
       "Apply film grain, vignette, fade instantly. Kodak Gold, Fuji, Cinematic presets. Batch process, live preview, free online.",
   },
@@ -77,12 +78,67 @@ export default function FilmLabPage() {
   return (
     <main>
       <MetaViewContent contentName="FilmLab" contentId="filmlab" />
-      <ToolHeader
-        title="Film Filters"
-        description="Film grain, vignette, fade and analog color grading. 6 film stock presets. Live preview. Batch process all photos."
-        icon={Film}
-        accentColor="#F59E0B"
-      />
+
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#F59E0B15", border: "1px solid #F59E0B30" }}
+                aria-hidden="true"
+              >
+                <Film className="h-[18px] w-[18px]" style={{ color: "#F59E0B" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Film Filters. Vintage, Cinematic, B&amp;W
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              14 analog film presets ready to apply: Kodak Gold, Fuji Pro 400H,
+              Ilford HP5, Cinematic Teal, Faded 70s and more. Fine-tune grain,
+              vignette, fade, temperature, contrast, saturation and split
+              toning. Batch process unlimited photos in your browser. No
+              upload, no signup.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                14 presets
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Live preview
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch ZIP
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Auto-cycling demo across 5 film presets ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <FilmlabHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <FilmLabClient />

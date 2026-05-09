@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowLeft, TrendingUp, Shield, FileImage, FileImage as WebpIcon } from "lucide-react";
+import { ArrowLeft, TrendingUp, Shield, FileImage, FileImage as WebpIcon, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import WebpClient from "@/components/tools/WebpClient";
+import WebpHeroDemo from "@/components/tools/WebpHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -77,33 +78,65 @@ export default function WebpPage() {
   return (
     <main>
       <MetaViewContent contentName="WebP Converter" contentId="webp" />
-      {/* Hero SEO */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        <div className="flex items-center gap-3 mb-3">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
-            aria-hidden="true"
-          >
-            <WebpIcon className="h-4.5 w-4.5" style={{ color: "#6366F1", width: 18, height: 18 }} strokeWidth={1.5} />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+                aria-hidden="true"
+              >
+                <WebpIcon className="h-[18px] w-[18px]" style={{ color: "#6366F1" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Convert to WebP. Free, No Upload
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Convert JPG, PNG, GIF and HEIC to WebP instantly. Cut file size
+              25–65% with the same visual quality, improve Core Web Vitals and
+              page speed. Everything runs in your browser. No upload, no signup,
+              batch processing for free.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Free forever
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No sign-up
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch ZIP
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">WebP Converter</h1>
+
+          {/* ── RIGHT: Auto-cycling demo with format conversion states ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <WebpHeroDemo />
+          </div>
         </div>
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed max-w-xl">
-          SammaPix WebP Converter is a free online tool that converts JPG, PNG,
-          and GIF images to WebP format instantly in your browser. WebP files are
-          25–34% smaller than JPEG at the same visual quality — no upload to any
-          server, no signup, and no file limits.
-        </p>
-      </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <WebpClient />
