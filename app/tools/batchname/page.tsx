@@ -1,7 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, Pencil, CheckCircle2 } from "lucide-react";
 import BatchNameClient from "@/components/tools/BatchNameClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import BatchnameHeroDemo from "@/components/tools/BatchnameHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -208,10 +210,64 @@ export default function BatchNamePage() {
         }}
       />
 
-      <ToolHeader
-        title="Batch Rename"
-        description="Rename hundreds of files in your browser. 13 pattern tokens, EXIF dates, find & replace, case conversion. No upload, no signup."
-      />
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          {/* ── LEFT ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#8B5CF615", border: "1px solid #8B5CF630" }}
+                aria-hidden="true"
+              >
+                <Pencil className="h-4 w-4" style={{ color: "#8B5CF6" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Batch Rename Files. Patterns, Free
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Bulk rename hundreds of files in seconds with{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">13 pattern tokens</strong>{" "}
+              — EXIF date taken, location, sequential counter, find & replace with regex, case conversion. Runs entirely in your browser.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                13 tokens
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                EXIF dates
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Regex find & replace
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Unlimited files
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT ── */}
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <BatchnameHeroDemo />
+          </div>
+        </div>
+      </section>
 
       <BatchNameClient />
 
