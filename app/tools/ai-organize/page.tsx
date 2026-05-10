@@ -1,12 +1,13 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, FolderOpen, Sparkles, CheckCircle2 } from "lucide-react";
 import AiOrganizeClient from "@/components/tools/AiOrganizeClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import AiOrganizeHeroDemo from "@/components/tools/AiOrganizeHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
-import { FolderOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title:
@@ -221,12 +222,65 @@ export default function AiOrganizePage() {
         }}
       />
 
-      <ToolHeader
-        title="AI Organize"
-        description="Drop any files — photos, PDFs, documents, videos. AI sorts them into smart folders, finds duplicates, and renames based on content."
-        icon={FolderOpen}
-        accentColor="#8B5CF6"
-      />
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#8B5CF615", border: "1px solid #8B5CF630" }}
+                aria-hidden="true"
+              >
+                <FolderOpen className="h-4 w-4" style={{ color: "#8B5CF6" }} strokeWidth={1.5} />
+              </div>
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                  AI Organize. Any File, Smart Folders
+                </h1>
+                <span className="inline-flex items-center text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-100 text-violet-700 dark:bg-violet-950/30 dark:text-violet-400 uppercase tracking-wide">
+                  AI
+                </span>
+              </div>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Drop <strong className="text-[#171717] dark:text-[#E5E5E5]">any files</strong> — photos, PDFs, documents, videos, audio. AI reads content and creates content-aware smart folders ("Tax 2026", "Travel · Italy", "Wedding · Smith"), finds duplicates, and auto-renames based on content.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Content-aware folders
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Duplicate detection
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Auto-rename
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Any file type
+              </span>
+            </div>
+          </div>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <AiOrganizeHeroDemo />
+          </div>
+        </div>
+      </section>
 
       <AiOrganizeClient />
 
