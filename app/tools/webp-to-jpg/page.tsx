@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowLeft, TrendingUp, Shield, FileImage } from "lucide-react";
+import { ArrowLeft, TrendingUp, Shield, FileImage, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import WebpToJpgClient from "@/components/tools/WebpToJpgClient";
+import WebpToJpgHeroDemo from "@/components/tools/WebpToJpgHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -75,39 +76,63 @@ export default function WebpToJpgPage() {
   return (
     <main>
       <MetaViewContent contentName="WebP to JPG Converter" contentId="webp-to-jpg" />
-      {/* Hero SEO */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        <div className="flex items-center gap-3 mb-3">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: "#10B98115", border: "1px solid #10B98130" }}
-            aria-hidden="true"
-          >
-            <FileImage
-              className="h-4.5 w-4.5"
-              style={{ color: "#10B981", width: 18, height: 18 }}
-              strokeWidth={1.5}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#10B98115", border: "1px solid #10B98130" }}
+                aria-hidden="true"
+              >
+                <FileImage className="h-4 w-4" style={{ color: "#10B981" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                WebP to JPG. Universal Compat
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Convert WebP to JPG instantly in your browser. Perfect when you need{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">universal compatibility</strong>{" "}
+              — Outlook, Photoshop CS6, Lightroom, legacy WordPress, email clients. No upload, no signup, no daily limits.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch up to 20
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Quality control
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                100% private
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                ZIP download
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
-            WebP to JPG Converter
-          </h1>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <WebpToJpgHeroDemo />
+          </div>
         </div>
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed max-w-xl">
-          SammaPix WebP to JPG Converter is a free online tool that converts WebP images to
-          JPG format instantly in your browser. Perfect when you need maximum compatibility with
-          older apps, email clients, or software that doesn&apos;t support WebP — no upload, no
-          signup, no file limits per day.
-        </p>
-      </div>
+      </section>
 
       {/* Tool */}
       <WebpToJpgClient />
