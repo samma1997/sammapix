@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import { MapPin, Shield, FolderOpen, Smartphone, FileText, Zap } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, MapPin, Shield, FolderOpen, Smartphone, FileText, Zap, CheckCircle2 } from "lucide-react";
 import GeoSortClientWrapper from "@/components/tools/GeoSortClientWrapper";
-import ToolHeader from "@/components/tools/ToolHeader";
+import GeoSortHeroDemo from "@/components/tools/GeoSortHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -98,12 +99,65 @@ export default function GeoSortPage() {
   return (
     <main>
       <MetaViewContent contentName="GeoSort" contentId="geosort" />
-      <ToolHeader
-        title="Sort by Location"
-        description="Drop your travel photos - GPS data is read locally and photos are organized into folders by country. Nothing leaves your device."
-        icon={MapPin}
-        accentColor="#22C55E"
-      />
+
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#22C55E15", border: "1px solid #22C55E30" }}
+                aria-hidden="true"
+              >
+                <MapPin className="h-4 w-4" style={{ color: "#22C55E" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Sort Photos by Country. ZIP Free
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Drop travel photos — GPS coordinates are read{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">locally in your browser</strong>{" "}
+              and reverse-geocoded with smart clustering (only 2-3 API calls per trip). Download as ZIP with subfolders <code className="text-[12px] bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1 rounded">Italy/</code>, <code className="text-[12px] bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1 rounded">Japan/</code>, <code className="text-[12px] bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1 rounded">France/</code>.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Auto-grouping
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Smart clustering
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                ZIP per country
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                JPG · HEIC
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Auto-cycling sort demo ── */}
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <GeoSortHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <GeoSortClientWrapper />
