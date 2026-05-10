@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import { MapPin, Globe, Navigation, Shield, Camera, Map } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, MapPin, Globe, Navigation, Shield, Camera, Map, CheckCircle2 } from "lucide-react";
 import TravelMapClientWrapper from "@/components/tools/TravelMapClientWrapper";
-import ToolHeader from "@/components/tools/ToolHeader";
+import TravelMapHeroDemo from "@/components/tools/TravelMapHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -128,12 +129,65 @@ export default function TravelMapPage() {
   return (
     <main>
       <MetaViewContent contentName="TravelMap" contentId="travelmap" />
-      <ToolHeader
-        title="Photo Map"
-        description="Drop your travel photos - GPS coordinates are read locally and plotted on an interactive map. See your journey, count countries, measure distance."
-        icon={Map}
-        accentColor="#3B82F6"
-      />
+
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#3B82F615", border: "1px solid #3B82F630" }}
+                aria-hidden="true"
+              >
+                <Map className="h-4 w-4" style={{ color: "#3B82F6" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Travel Photo Map. GPS Routes, Free
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Drop photos with GPS — coordinates are read{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">locally in your browser</strong>{" "}
+              and plotted on OpenStreetMap. Pins color-coded by country, connected by chronological dashed line.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                EXIF read locally
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Country auto-grouping
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Haversine km
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                JPG · HEIC
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Auto-cycling map demo with sequential pins ── */}
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <TravelMapHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <TravelMapClientWrapper />
