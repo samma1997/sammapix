@@ -1,7 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, Sparkles, CheckCircle2, Layers } from "lucide-react";
 import SmartSortClient from "@/components/tools/SmartSortClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import SmartSortHeroDemo from "@/components/tools/SmartSortHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -206,10 +208,65 @@ export default function SmartSortPage() {
         }}
       />
 
-      <ToolHeader
-        title="AI Photo Sort"
-        description="AI analyzes images and sorts them into categories automatically."
-      />
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#10B98115", border: "1px solid #10B98130" }}
+                aria-hidden="true"
+              >
+                <Layers className="h-4 w-4" style={{ color: "#10B981" }} strokeWidth={1.5} />
+              </div>
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                  AI Photo Sort. Auto-Categorize
+                </h1>
+                <span className="inline-flex items-center text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-100 text-violet-700 dark:bg-violet-950/30 dark:text-violet-400 uppercase tracking-wide">
+                  PRO
+                </span>
+              </div>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Drop images → <strong className="text-[#171717] dark:text-[#E5E5E5]">Gemini AI</strong> categorizes each into Landscape, Portrait, Food, Architecture, Animal, Document, Art and more. Each result includes a confidence score. Download as ZIP with folder structure.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                10 categories
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Confidence scores
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                ZIP folder structure
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                JPG · PNG · HEIC
+              </span>
+            </div>
+          </div>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <SmartSortHeroDemo />
+          </div>
+        </div>
+      </section>
 
       <SmartSortClient />
 
