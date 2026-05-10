@@ -9,6 +9,9 @@ const GOOGLE_ADS_ID = (process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "").trim();
 const GA4_ID = (process.env.NEXT_PUBLIC_GA4_ID ?? "").trim();
 const ADSENSE_PUB_ID = (process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim();
 const CLARITY_PROJECT_ID = (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? "").trim();
+// Cloudflare Google tag gateway: serve gtag.js + collect from first-party path
+// (bypass ad-blockers). When set, gtag loads via /<path>/gtag/js + transport_url.
+const TAG_GATEWAY_PATH = (process.env.NEXT_PUBLIC_TAG_GATEWAY_PATH ?? "").trim();
 
 /**
  * Defer script injection to idle time so tracking scripts never compete
@@ -59,11 +62,17 @@ function initGtag(adsId: string, ga4Id: string): void {
   const primaryId = adsId || ga4Id;
   if (!primaryId) return;
 
-  loadScript("https://www.googletagmanager.com/gtag/js?id=" + primaryId);
+  const gatewayPath = TAG_GATEWAY_PATH.replace(/\/+$/, "");
+  const loaderUrl = gatewayPath
+    ? gatewayPath + "/gtag/js?id=" + primaryId
+    : "https://www.googletagmanager.com/gtag/js?id=" + primaryId;
+  loadScript(loaderUrl);
 
   let configLines = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());";
-  if (adsId) configLines += "gtag('config','" + adsId + "');";
-  if (ga4Id) configLines += "gtag('config','" + ga4Id + "');";
+  const transportUrl = gatewayPath ? location.origin + gatewayPath : "";
+  const cfgOpts = transportUrl ? ",{transport_url:'" + transportUrl + "',first_party_collection:true}" : "";
+  if (adsId) configLines += "gtag('config','" + adsId + "'" + cfgOpts + ");";
+  if (ga4Id) configLines += "gtag('config','" + ga4Id + "'" + cfgOpts + ");";
 
   loadInlineScript(configLines);
 }
