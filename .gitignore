@@ -146,9 +146,9 @@ google-ads-*.txt
 # Test results
 test-results/
 
-# Launch/tools folders
+# Launch/tools folders (only top-level "tools/" — keep app/tools/, components/tools/)
 launch/
-tools/
+/tools/
 
 # Misc junk
 youtube-bulk-uploader.js
