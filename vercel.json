@@ -16,6 +16,9 @@
     },
     "app/api/cron/directory-discovery/route.ts": {
       "maxDuration": 300
+    },
+    "app/api/cron/health-check/route.ts": {
+      "maxDuration": 60
     }
   },
   "crons": [
@@ -82,6 +85,10 @@
     {
       "path": "/api/cron/trial-monitor",
       "schedule": "0 11 * * *"
+    },
+    {
+      "path": "/api/cron/health-check",
+      "schedule": "*/30 * * * *"
     }
   ],
   "redirects": [
