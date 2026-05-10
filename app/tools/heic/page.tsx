@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Smartphone, Layers, FileImage } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, Smartphone, Layers, FileImage, CheckCircle2 } from "lucide-react";
 import HeicClient from "@/components/tools/HeicClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import HeicHeroDemo from "@/components/tools/HeicHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -76,14 +77,64 @@ export default function HeicPage() {
   return (
     <main>
       <MetaViewContent contentName="HEIC Converter" contentId="heic" />
-      <ToolHeader
-        title="HEIC to JPG Converter — Free, No Signup"
-        description="SammaPix HEIC Converter is a free online tool that converts iPhone HEIC photos to JPG or WebP in seconds. HEIC files are 50% smaller than JPEG but most platforms can't open them — this tool batch-converts up to 20 files at once with adjustable quality (60–100%), no signup required."
-        icon={FileImage}
-        accentColor="#6366F1"
-      />
 
-      {/* Tool + Next Step suggestions */}
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+                aria-hidden="true"
+              >
+                <Smartphone className="h-4 w-4" style={{ color: "#6366F1" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                HEIC to JPG. iPhone Photos
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Convert iPhone HEIC photos to{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">JPG, PNG or WebP</strong>{" "}
+              in seconds. HEIC is 50% smaller but Windows / WhatsApp / Gmail / Photoshop don&apos;t open it. Batch up to 20 files, adjustable quality 60-100%. No upload, no signup.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                JPG · PNG · WebP
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch up to 20
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Quality 60-100
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                100% private
+              </span>
+            </div>
+          </div>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <HeicHeroDemo />
+          </div>
+        </div>
+      </section>
+
       <HeicClient />
 
       <HowToUse
