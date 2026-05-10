@@ -8,6 +8,7 @@ const META_PIXEL_ID = (process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "").trim();
 const GOOGLE_ADS_ID = (process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "").trim();
 const GA4_ID = (process.env.NEXT_PUBLIC_GA4_ID ?? "").trim();
 const ADSENSE_PUB_ID = (process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim();
+const CLARITY_PROJECT_ID = (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? "").trim();
 
 /**
  * Defer script injection to idle time so tracking scripts never compete
@@ -78,6 +79,19 @@ function initAdSense(pubId: string): void {
   });
 }
 
+function initClarity(projectId: string): void {
+  // Microsoft Clarity · heatmap + session recording.
+  // Carico il package dinamicamente per non bundle-larlo nell'initial JS.
+  deferToIdle(async () => {
+    try {
+      const Clarity = (await import("@microsoft/clarity")).default;
+      Clarity.init(projectId);
+    } catch {
+      // Silenzioso: se il package fallisce non rompiamo il sito
+    }
+  });
+}
+
 export default function CookieConsent() {
   const [consent, setConsentState] = useState<ConsentState>("pending");
   const [mounted, setMounted] = useState(false);
@@ -87,6 +101,7 @@ export default function CookieConsent() {
     if (META_PIXEL_ID) initMetaPixel(META_PIXEL_ID);
     if (GOOGLE_ADS_ID || GA4_ID) initGtag(GOOGLE_ADS_ID, GA4_ID);
     if (ADSENSE_PUB_ID) initAdSense(ADSENSE_PUB_ID);
+    if (CLARITY_PROJECT_ID) initClarity(CLARITY_PROJECT_ID);
   }, []);
 
   useEffect(() => {
