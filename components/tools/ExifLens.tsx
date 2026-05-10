@@ -559,7 +559,7 @@ export default function ExifLens() {
       .every((f) => f.status === "done-gps" || f.status === "done-exif" || f.status === "error");
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16">
       <ProUpsellModal
         open={upsellOpen}
         onClose={handleUpsellClose}

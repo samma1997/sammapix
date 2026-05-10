@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowLeft, Sparkles, Search, Clock } from "lucide-react";
+import { ArrowLeft, Sparkles, Search, Clock, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import AiRenameClient from "@/components/tools/AiRenameClient";
+import AiRenameHeroDemo from "@/components/tools/AiRenameHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -80,34 +81,65 @@ export default function AiRenamePage() {
   return (
     <main>
       <MetaViewContent contentName="AI Rename" contentId="ai-rename" />
-      {/* Hero SEO */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        <div className="flex items-center gap-3 mb-3">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
-            aria-hidden="true"
-          >
-            <Sparkles className="h-4.5 w-4.5" style={{ color: "#6366F1", width: 18, height: 18 }} strokeWidth={1.5} />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+                aria-hidden="true"
+              >
+                <Sparkles className="h-[18px] w-[18px]" style={{ color: "#6366F1" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                AI Rename. SEO Filenames in Seconds
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Turn generic names like <code className="text-[13px] bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#2A2A2A] px-1.5 py-0.5 rounded font-mono">IMG_4521.jpg</code> into descriptive,
+              keyword-rich filenames that rank in Google Images. Powered by
+              Google Gemini, batch process multiple photos in seconds. 10 free
+              renames per day, no credit card required.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Powered by Gemini
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                SEO-optimized
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch rename
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Under 3 seconds
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">AI Image Filename Generator for SEO</h1>
+
+          {/* ── RIGHT: Animated mock file list with typing rename effect ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <AiRenameHeroDemo />
+          </div>
         </div>
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed max-w-xl">
-          SammaPix AI Rename is a free tool that uses Google Gemini to
-          automatically generate SEO-friendly image filenames in under 3 seconds.
-          Turn generic names like IMG_4521.jpg into descriptive, keyword-rich
-          filenames that rank in Google Images — 10 free renames per day, no
-          credit card required.
-        </p>
-      </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <AiRenameClient />

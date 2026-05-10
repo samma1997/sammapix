@@ -35,6 +35,39 @@ interface CropOffset {
   y: number; // 0–1, default 0.5 (center)
 }
 
+/**
+ * Frame del crop espresso come percentuali (0-1) dell'immagine sorgente.
+ * Sostituisce il vecchio "ratio + offset" e abilita drag-to-resize libero
+ * (Photoshop/Figma-style). Rappresenta sia la posizione che la dimensione.
+ */
+interface CropFrame {
+  x: number; // 0–1, top-left X of the frame
+  y: number; // 0–1, top-left Y of the frame
+  w: number; // 0–1, frame width
+  h: number; // 0–1, frame height
+}
+
+const MIN_FRAME_SIZE = 0.1; // 10% min size to avoid disappearing handles
+
+/**
+ * Calcola il cropFrame iniziale "max fit centered" per un dato ratio
+ * sull'immagine specificata. Mantiene il ratio richiesto al massimo possibile.
+ */
+function computeMaxFitFrame(originalW: number, originalH: number, ratioW: number, ratioH: number): CropFrame {
+  const r = ratioW / ratioH;
+  const imgRatio = originalW / originalH;
+
+  if (imgRatio >= r) {
+    // Wider than target ratio → height is the constraint
+    const w = (originalH * r) / originalW;
+    return { x: (1 - w) / 2, y: 0, w, h: 1 };
+  } else {
+    // Taller than target ratio → width is the constraint
+    const h = (originalW / r) / originalH;
+    return { x: 0, y: (1 - h) / 2, w: 1, h };
+  }
+}
+
 interface RatioDef {
   label: string;
   w: number;
@@ -83,32 +116,15 @@ function loadImage(file: File): Promise<HTMLImageElement> {
 
 function cropImageToBlob(
   img: HTMLImageElement,
-  ratioW: number,
-  ratioH: number,
-  offset: CropOffset,
+  frame: CropFrame,
   maxDim?: number
 ): Promise<Blob> {
   return new Promise((resolve, reject) => {
-    const r = ratioW / ratioH;
-    const imgRatio = img.naturalWidth / img.naturalHeight;
-
-    let sx: number, sy: number, sw: number, sh: number;
-
-    if (imgRatio >= r) {
-      // Wider than target ratio- crop width, keep full height
-      sw = img.naturalHeight * r;
-      sh = img.naturalHeight;
-      const maxSx = img.naturalWidth - sw;
-      sx = maxSx * offset.x;
-      sy = 0;
-    } else {
-      // Taller than target ratio- crop height, keep full width
-      sw = img.naturalWidth;
-      sh = img.naturalWidth / r;
-      sx = 0;
-      const maxSy = img.naturalHeight - sh;
-      sy = maxSy * offset.y;
-    }
+    // Derive source-pixel rect from the normalized frame (0-1)
+    const sx = frame.x * img.naturalWidth;
+    const sy = frame.y * img.naturalHeight;
+    const sw = frame.w * img.naturalWidth;
+    const sh = frame.h * img.naturalHeight;
 
     let targetW = Math.round(sw);
     let targetH = Math.round(sh);
@@ -164,35 +180,49 @@ async function runWithConcurrency<T, R>(
   return results;
 }
 
-// ── CropPreview Component ───────────────────────────────────────────────────────
+// ── CropPreview Component (drag-to-move + drag-to-resize Photoshop-style) ─────
 
 interface CropPreviewProps {
   previewUrl: string;
   originalW: number;
   originalH: number;
-  ratioW: number;
-  ratioH: number;
-  offset: CropOffset;
-  onOffsetChange: (offset: CropOffset) => void;
+  ratioLabel: string; // displayed inside frame (es. "1:1", "16:9", "Custom")
+  frame: CropFrame;
+  onFrameChange: (frame: CropFrame, source: "move" | "resize-free" | "resize-locked") => void;
 }
+
+type DragMode =
+  | "move"
+  | "resize-nw"
+  | "resize-n"
+  | "resize-ne"
+  | "resize-e"
+  | "resize-se"
+  | "resize-s"
+  | "resize-sw"
+  | "resize-w";
+
+const HANDLE_CURSOR: Record<DragMode, string> = {
+  move: "grab",
+  "resize-nw": "nwse-resize",
+  "resize-n": "ns-resize",
+  "resize-ne": "nesw-resize",
+  "resize-e": "ew-resize",
+  "resize-se": "nwse-resize",
+  "resize-s": "ns-resize",
+  "resize-sw": "nesw-resize",
+  "resize-w": "ew-resize",
+};
 
 const CropPreview = ({
   previewUrl,
   originalW,
   originalH,
-  ratioW,
-  ratioH,
-  offset,
-  onOffsetChange,
+  ratioLabel,
+  frame,
+  onFrameChange,
 }: CropPreviewProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const dragStart = useRef<{
-    mouseX: number;
-    mouseY: number;
-    offsetX: number;
-    offsetY: number;
-  } | null>(null);
 
   // Scale so the full source image fits in the container
   const scaleToFit = Math.min(
@@ -203,102 +233,168 @@ const CropPreview = ({
   const displayW = Math.round(originalW * scaleToFit);
   const displayH = Math.round(originalH * scaleToFit);
 
-  // Calculate the source crop area (sw, sh)- same logic as cropImageToBlob
-  const r = ratioW / ratioH;
-  const imgRatio = originalW / originalH;
+  // Frame in display pixels (derived from normalized frame)
+  const frameLeft = Math.round(frame.x * displayW);
+  const frameTop = Math.round(frame.y * displayH);
+  const frameW = Math.round(frame.w * displayW);
+  const frameH = Math.round(frame.h * displayH);
 
-  let sw: number, sh: number;
-  if (imgRatio >= r) {
-    sw = originalH * r;
-    sh = originalH;
-  } else {
-    sw = originalW;
-    sh = originalW / r;
-  }
+  // Output dimensions in source pixels
+  const outputW = Math.round(frame.w * originalW);
+  const outputH = Math.round(frame.h * originalH);
 
-  // Frame in display pixels = source area × scaleToFit
-  const cropDisplayW = Math.round(sw * scaleToFit);
-  const cropDisplayH = Math.round(sh * scaleToFit);
+  // Drag state (refs to avoid re-renders during drag)
+  const dragMode = useRef<DragMode | null>(null);
+  const dragStart = useRef<{
+    mouseX: number;
+    mouseY: number;
+    frame: CropFrame;
+    aspect: number; // frame ratio at drag start, used for Shift-lock
+    shiftKey: boolean;
+  } | null>(null);
 
-  // Available space for frame movement
-  const maxOffsetDisplayX = displayW - cropDisplayW;
-  const maxOffsetDisplayY = displayH - cropDisplayH;
+  // Force re-render trigger (so cursor reflects modifier key)
+  const [, forceRerender] = useState(0);
 
-  // Frame position
-  const frameLeft = Math.round(offset.x * maxOffsetDisplayX);
-  const frameTop = Math.round(offset.y * maxOffsetDisplayY);
+  /** Clamp + min-size enforcement on a tentative frame */
+  const clampFrame = useCallback((f: CropFrame): CropFrame => {
+    const minSize = MIN_FRAME_SIZE;
+    let { x, y, w, h } = f;
 
-  const updateOffsetFromMouse = useCallback(
-    (clientX: number, clientY: number) => {
-      if (!dragStart.current || !containerRef.current) return;
-      const deltaX = clientX - dragStart.current.mouseX;
-      const deltaY = clientY - dragStart.current.mouseY;
+    // Min size
+    if (w < minSize) w = minSize;
+    if (h < minSize) h = minSize;
 
-      const newOffsetX =
-        maxOffsetDisplayX > 0
-          ? Math.max(
-              0,
-              Math.min(1, dragStart.current.offsetX + deltaX / maxOffsetDisplayX)
-            )
-          : 0.5;
-      const newOffsetY =
-        maxOffsetDisplayY > 0
-          ? Math.max(
-              0,
-              Math.min(1, dragStart.current.offsetY + deltaY / maxOffsetDisplayY)
-            )
-          : 0.5;
+    // Clamp size to image
+    if (w > 1) w = 1;
+    if (h > 1) h = 1;
 
-      onOffsetChange({ x: newOffsetX, y: newOffsetY });
+    // Clamp position so frame stays inside [0,1]
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x + w > 1) x = 1 - w;
+    if (y + h > 1) y = 1 - h;
+
+    return { x, y, w, h };
+  }, []);
+
+  const updateFromMouse = useCallback(
+    (clientX: number, clientY: number, shiftKey: boolean) => {
+      if (!dragStart.current || !containerRef.current || !dragMode.current) return;
+
+      const deltaXpx = clientX - dragStart.current.mouseX;
+      const deltaYpx = clientY - dragStart.current.mouseY;
+      const dx = deltaXpx / displayW; // normalized
+      const dy = deltaYpx / displayH;
+
+      const start = dragStart.current.frame;
+      const aspect = dragStart.current.aspect;
+      const shouldLock = shiftKey;
+      let next: CropFrame = { ...start };
+
+      if (dragMode.current === "move") {
+        next.x = start.x + dx;
+        next.y = start.y + dy;
+      } else {
+        // Resize logic: each handle anchors a fixed corner/edge
+        const mode = dragMode.current;
+        const affectsTop = mode === "resize-nw" || mode === "resize-n" || mode === "resize-ne";
+        const affectsBottom = mode === "resize-sw" || mode === "resize-s" || mode === "resize-se";
+        const affectsLeft = mode === "resize-nw" || mode === "resize-w" || mode === "resize-sw";
+        const affectsRight = mode === "resize-ne" || mode === "resize-e" || mode === "resize-se";
+
+        let newX = start.x;
+        let newY = start.y;
+        let newW = start.w;
+        let newH = start.h;
+
+        if (affectsLeft) {
+          newX = start.x + dx;
+          newW = start.w - dx;
+        }
+        if (affectsRight) {
+          newW = start.w + dx;
+        }
+        if (affectsTop) {
+          newY = start.y + dy;
+          newH = start.h - dy;
+        }
+        if (affectsBottom) {
+          newH = start.h + dy;
+        }
+
+        // Shift = lock to original aspect ratio (uses corner handles primarily)
+        if (shouldLock && (mode.includes("nw") || mode.includes("ne") || mode.includes("sw") || mode.includes("se"))) {
+          // Drive width by the larger of the two axes' relative deltas
+          const dwRel = Math.abs(newW - start.w) / Math.max(start.w, 0.001);
+          const dhRel = Math.abs(newH - start.h) / Math.max(start.h, 0.001);
+          if (dwRel >= dhRel) {
+            // Width drives, recompute height from aspect
+            const targetH = newW / aspect;
+            const dh = targetH - start.h;
+            if (affectsTop) newY = start.y - (dh - (start.h - newH));
+            newH = targetH;
+          } else {
+            const targetW = newH * aspect;
+            const dw = targetW - start.w;
+            if (affectsLeft) newX = start.x - (dw - (start.w - newW));
+            newW = targetW;
+          }
+        }
+
+        next = { x: newX, y: newY, w: newW, h: newH };
+
+        // Prevent inverted resize: if width/height go below min while dragging
+        // beyond the anchor, the clamp below will fix it
+      }
+
+      const clamped = clampFrame(next);
+      const sourceMode: "move" | "resize-free" | "resize-locked" =
+        dragMode.current === "move"
+          ? "move"
+          : shouldLock
+            ? "resize-locked"
+            : "resize-free";
+      onFrameChange(clamped, sourceMode);
     },
-    [maxOffsetDisplayX, maxOffsetDisplayY, onOffsetChange]
+    [displayW, displayH, clampFrame, onFrameChange]
   );
 
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      isDragging.current = true;
+  const startDrag = useCallback(
+    (mode: DragMode, clientX: number, clientY: number, shiftKey: boolean) => {
+      dragMode.current = mode;
       dragStart.current = {
-        mouseX: e.clientX,
-        mouseY: e.clientY,
-        offsetX: offset.x,
-        offsetY: offset.y,
+        mouseX: clientX,
+        mouseY: clientY,
+        frame: { ...frame },
+        aspect: frame.w / Math.max(frame.h, 0.001),
+        shiftKey,
       };
+      forceRerender((n) => n + 1);
     },
-    [offset]
+    [frame]
   );
 
-  const handleTouchStart = useCallback(
-    (e: React.TouchEvent<HTMLDivElement>) => {
-      const touch = e.touches[0];
-      isDragging.current = true;
-      dragStart.current = {
-        mouseX: touch.clientX,
-        mouseY: touch.clientY,
-        offsetX: offset.x,
-        offsetY: offset.y,
-      };
-    },
-    [offset]
-  );
-
+  // Global mouse/touch listeners
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current) return;
-      updateOffsetFromMouse(e.clientX, e.clientY);
+      if (!dragMode.current) return;
+      updateFromMouse(e.clientX, e.clientY, e.shiftKey);
     };
     const handleMouseUp = () => {
-      isDragging.current = false;
+      dragMode.current = null;
       dragStart.current = null;
+      forceRerender((n) => n + 1);
     };
     const handleTouchMove = (e: TouchEvent) => {
-      if (!isDragging.current) return;
+      if (!dragMode.current) return;
       const touch = e.touches[0];
-      updateOffsetFromMouse(touch.clientX, touch.clientY);
+      updateFromMouse(touch.clientX, touch.clientY, e.shiftKey);
     };
     const handleTouchEnd = () => {
-      isDragging.current = false;
+      dragMode.current = null;
       dragStart.current = null;
+      forceRerender((n) => n + 1);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -311,10 +407,42 @@ const CropPreview = ({
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [updateOffsetFromMouse]);
+  }, [updateFromMouse]);
+
+  // Render a corner or edge handle
+  const renderHandle = (
+    mode: DragMode,
+    style: React.CSSProperties,
+    type: "corner" | "edge"
+  ) => (
+    <div
+      key={mode}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        startDrag(mode, e.clientX, e.clientY, e.shiftKey);
+      }}
+      onTouchStart={(e) => {
+        const touch = e.touches[0];
+        startDrag(mode, touch.clientX, touch.clientY, false);
+      }}
+      className="absolute"
+      style={{
+        ...style,
+        cursor: HANDLE_CURSOR[mode],
+        background: type === "corner" ? "#FFFFFF" : "transparent",
+        border: type === "corner" ? "1px solid #6366F1" : "none",
+        boxShadow: type === "corner" ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
+        boxSizing: "border-box",
+      }}
+    />
+  );
+
+  const HANDLE = 12; // px size of corner handles
+  const half = HANDLE / 2;
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-3">
       <div
         ref={containerRef}
         className="relative select-none overflow-hidden rounded-md"
@@ -333,25 +461,23 @@ const CropPreview = ({
           draggable={false}
         />
 
-        {/* Dark overlay- top */}
+        {/* Dark overlays around the frame (4 sides) */}
         {frameTop > 0 && (
           <div
             className="absolute left-0 right-0 top-0 pointer-events-none"
             style={{ height: frameTop, background: "rgba(0,0,0,0.55)" }}
           />
         )}
-        {/* Dark overlay- bottom */}
-        {frameTop + cropDisplayH < displayH && (
+        {frameTop + frameH < displayH && (
           <div
             className="absolute left-0 right-0 pointer-events-none"
             style={{
-              top: frameTop + cropDisplayH,
+              top: frameTop + frameH,
               bottom: 0,
               background: "rgba(0,0,0,0.55)",
             }}
           />
         )}
-        {/* Dark overlay- left */}
         {frameLeft > 0 && (
           <div
             className="absolute pointer-events-none"
@@ -359,77 +485,110 @@ const CropPreview = ({
               top: frameTop,
               left: 0,
               width: frameLeft,
-              height: cropDisplayH,
+              height: frameH,
               background: "rgba(0,0,0,0.55)",
             }}
           />
         )}
-        {/* Dark overlay- right */}
-        {frameLeft + cropDisplayW < displayW && (
+        {frameLeft + frameW < displayW && (
           <div
             className="absolute pointer-events-none"
             style={{
               top: frameTop,
-              left: frameLeft + cropDisplayW,
+              left: frameLeft + frameW,
               right: 0,
-              height: cropDisplayH,
+              height: frameH,
               background: "rgba(0,0,0,0.55)",
             }}
           />
         )}
 
-        {/* Draggable crop frame */}
+        {/* Draggable crop frame body (move) */}
         <div
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            startDrag("move", e.clientX, e.clientY, e.shiftKey);
+          }}
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            startDrag("move", touch.clientX, touch.clientY, false);
+          }}
           className="absolute"
           style={{
             top: frameTop,
             left: frameLeft,
-            width: cropDisplayW,
-            height: cropDisplayH,
+            width: frameW,
+            height: frameH,
             border: "2px solid rgba(255,255,255,0.95)",
-            cursor: "grab",
+            cursor: dragMode.current === "move" ? "grabbing" : "grab",
             boxSizing: "border-box",
           }}
         >
-          {/* Ratio label centered */}
+          {/* Ratio + dimensions label centered */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <span
-              className="text-white text-[11px] font-semibold px-1.5 py-0.5 rounded"
-              style={{ background: "rgba(0,0,0,0.5)", letterSpacing: "0.02em" }}
+              className="text-white text-[11px] font-semibold px-1.5 py-0.5 rounded font-mono"
+              style={{ background: "rgba(0,0,0,0.6)", letterSpacing: "0.02em" }}
             >
-              {ratioW}:{ratioH}
+              {ratioLabel}{" "}
+              <span className="opacity-80 ml-1">
+                {outputW}×{outputH}
+              </span>
             </span>
           </div>
 
-          {/* Corner handles- 8×8 white squares */}
-          {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map(
-            (pos) => {
-              const isTop = pos.startsWith("top");
-              const isLeft = pos.endsWith("left");
-              return (
-                <div
-                  key={pos}
-                  className="absolute pointer-events-none"
-                  style={{
-                    width: 8,
-                    height: 8,
-                    background: "white",
-                    top: isTop ? -1 : undefined,
-                    bottom: !isTop ? -1 : undefined,
-                    left: isLeft ? -1 : undefined,
-                    right: !isLeft ? -1 : undefined,
-                  }}
-                />
-              );
-            }
+          {/* Edge handles (transparent strips, narrow) */}
+          {renderHandle(
+            "resize-n",
+            { top: -4, left: HANDLE, right: HANDLE, height: 8 },
+            "edge"
+          )}
+          {renderHandle(
+            "resize-s",
+            { bottom: -4, left: HANDLE, right: HANDLE, height: 8 },
+            "edge"
+          )}
+          {renderHandle(
+            "resize-w",
+            { left: -4, top: HANDLE, bottom: HANDLE, width: 8 },
+            "edge"
+          )}
+          {renderHandle(
+            "resize-e",
+            { right: -4, top: HANDLE, bottom: HANDLE, width: 8 },
+            "edge"
+          )}
+
+          {/* Corner handles (visible white squares with indigo border) */}
+          {renderHandle(
+            "resize-nw",
+            { top: -half, left: -half, width: HANDLE, height: HANDLE },
+            "corner"
+          )}
+          {renderHandle(
+            "resize-ne",
+            { top: -half, right: -half, width: HANDLE, height: HANDLE },
+            "corner"
+          )}
+          {renderHandle(
+            "resize-sw",
+            { bottom: -half, left: -half, width: HANDLE, height: HANDLE },
+            "corner"
+          )}
+          {renderHandle(
+            "resize-se",
+            { bottom: -half, right: -half, width: HANDLE, height: HANDLE },
+            "corner"
           )}
         </div>
       </div>
 
-      <p className="text-[11px] text-[#A3A3A3] text-center">
-        Drag the frame to choose which area to keep- same offset applies to all images
+      <p className="text-[11px] text-[#A3A3A3] text-center leading-relaxed">
+        Drag the frame to move · drag corners or edges to resize · hold{" "}
+        <kbd className="px-1 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] font-mono text-[10px]">
+          Shift
+        </kbd>{" "}
+        to keep ratio
       </p>
     </div>
   );
@@ -453,8 +612,12 @@ export default function CropRatio() {
   // Max output dimension (optional)
   const [maxDim, setMaxDim] = useState<string>("");
 
-  // Crop offset- shared across all images
-  const [cropOffset, setCropOffset] = useState<CropOffset>({ x: 0.5, y: 0.5 });
+  // Crop frame (normalized 0-1 over source image), shared across all images
+  const [cropFrame, setCropFrame] = useState<CropFrame>({ x: 0, y: 0, w: 1, h: 1 });
+
+  // Tracks whether user has manually resized via drag (so preset changes
+  // don't override their custom resize unless they explicitly click a preset).
+  const userResizedRef = useRef<boolean>(false);
 
   // Preview for first image
   const [cropPreviewUrl, setCropPreviewUrl] = useState<string | null>(null);
@@ -485,6 +648,54 @@ export default function CropRatio() {
       : { w: 1, h: 1, label: "1:1" };
   }, [selectedRatio, customW, customH]);
 
+  // ── Sync cropFrame when ratio changes (preset click or custom W/H input) ────
+  // Skip if user just resized manually via drag-to-resize (handled in onFrameChange).
+  useEffect(() => {
+    const firstFile = pendingFiles[0];
+    if (!firstFile) return;
+    if (userResizedRef.current) {
+      userResizedRef.current = false;
+      return;
+    }
+    const r = getRatio();
+    setCropFrame(computeMaxFitFrame(firstFile.originalW, firstFile.originalH, r.w, r.h));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedRatio, customW, customH, pendingFiles]);
+
+  /**
+   * Called when user drags inside CropPreview.
+   * - "move": just position changed, keep ratio info as-is
+   * - "resize-locked": user resized with Shift held, ratio is preserved
+   * - "resize-free": user resized without Shift → switch to Custom and update W/H
+   */
+  const handleFrameChange = useCallback(
+    (newFrame: CropFrame, source: "move" | "resize-free" | "resize-locked") => {
+      userResizedRef.current = true;
+      setCropFrame(newFrame);
+
+      if (source === "resize-free") {
+        // Free resize: derive new ratio from frame dimensions in source pixels
+        const firstFile = pendingFiles[0];
+        if (!firstFile) return;
+        const newW = Math.round(newFrame.w * firstFile.originalW);
+        const newH = Math.round(newFrame.h * firstFile.originalH);
+        // Reduce to lowest terms via GCD for cleaner display
+        const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b));
+        const g = gcd(newW, newH) || 1;
+        const reducedW = newW / g;
+        const reducedH = newH / g;
+        // If reduced numbers are unwieldy (>9999), use raw
+        const safeW = reducedW > 9999 ? newW : reducedW;
+        const safeH = reducedH > 9999 ? newH : reducedH;
+
+        setSelectedRatio("Custom");
+        setCustomW(Math.max(1, Math.round(safeW)));
+        setCustomH(Math.max(1, Math.round(safeH)));
+      }
+    },
+    [pendingFiles]
+  );
+
   // ── File acceptance ────────────────────────────────────────────────────────
 
   const actuallyAcceptFiles = useCallback(
@@ -512,10 +723,13 @@ export default function CropRatio() {
       setCropPreviewUrl(previewUrl);
 
       setPendingFiles(loaded);
-      setCropOffset({ x: 0.5, y: 0.5 });
+      // Initialize cropFrame to max-fit centered for the current ratio
+      const r = getRatio();
+      setCropFrame(computeMaxFitFrame(loaded[0].originalW, loaded[0].originalH, r.w, r.h));
+      userResizedRef.current = false;
       setUiState("config");
     },
-    []
+    [getRatio]
   );
 
   const acceptFiles = useCallback(
@@ -578,9 +792,7 @@ export default function CropRatio() {
 
   const handleProcess = useCallback(async () => {
     if (pendingFiles.length === 0) return;
-    const ratio = getRatio();
     const parsedMaxDim = maxDim ? parseInt(maxDim, 10) : undefined;
-    const offset = cropOffset;
 
     setUiState("processing");
     setProgress(0);
@@ -593,22 +805,11 @@ export default function CropRatio() {
       async ({ file, originalW, originalH }) => {
         try {
           const img = await loadImage(file);
-          const blob = await cropImageToBlob(img, ratio.w, ratio.h, offset, parsedMaxDim);
+          const blob = await cropImageToBlob(img, cropFrame, parsedMaxDim);
 
-          // Calculate actual output dimensions
-          const r = ratio.w / ratio.h;
-          const imgRatio = originalW / originalH;
-          let sw: number, sh: number;
-          if (imgRatio >= r) {
-            sw = originalH * r;
-            sh = originalH;
-          } else {
-            sw = originalW;
-            sh = originalW / r;
-          }
-
-          let resultW = Math.round(sw);
-          let resultH = Math.round(sh);
+          // Calculate actual output dimensions from cropFrame
+          let resultW = Math.round(cropFrame.w * originalW);
+          let resultH = Math.round(cropFrame.h * originalH);
           if (parsedMaxDim && Math.max(resultW, resultH) > parsedMaxDim) {
             const scale = parsedMaxDim / Math.max(resultW, resultH);
             resultW = Math.round(resultW * scale);
@@ -649,7 +850,7 @@ export default function CropRatio() {
 
     setResults(processed);
     setUiState("done");
-  }, [pendingFiles, getRatio, maxDim, cropOffset]);
+  }, [pendingFiles, maxDim, cropFrame]);
 
   // ── Reset ──────────────────────────────────────────────────────────────────
 
@@ -665,7 +866,8 @@ export default function CropRatio() {
     setPendingFiles([]);
     setResults([]);
     setProgress(0);
-    setCropOffset({ x: 0.5, y: 0.5 });
+    setCropFrame({ x: 0, y: 0, w: 1, h: 1 });
+    userResizedRef.current = false;
     setUiState("idle");
   }, [results]);
 
@@ -887,16 +1089,15 @@ export default function CropRatio() {
         {cropPreviewUrl && firstPending && (
           <div>
             <label className="block text-xs font-medium text-[#525252] dark:text-[#A3A3A3] uppercase tracking-wider mb-3">
-              Crop Position
+              Crop Frame
             </label>
             <CropPreview
               previewUrl={cropPreviewUrl}
               originalW={firstPending.originalW}
               originalH={firstPending.originalH}
-              ratioW={ratio.w}
-              ratioH={ratio.h}
-              offset={cropOffset}
-              onOffsetChange={setCropOffset}
+              ratioLabel={ratio.label}
+              frame={cropFrame}
+              onFrameChange={handleFrameChange}
             />
           </div>
         )}

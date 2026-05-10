@@ -14,6 +14,23 @@ export interface RemoveBgResult {
   outputSize: number;
 }
 
+/**
+ * Background output mode:
+ *   "transparent" → PNG with alpha (default, current behavior)
+ *   "white"       → JPG with #FFFFFF flat background (Amazon/Shopify-ready)
+ *   "black"       → JPG with #000000 flat background
+ *   any hex (#RRGGBB) → JPG with that flat background
+ */
+export type BackgroundColor = "transparent" | "white" | "black" | string;
+
+function resolveBgHex(bg: BackgroundColor): string | null {
+  if (bg === "transparent") return null;
+  if (bg === "white") return "#FFFFFF";
+  if (bg === "black") return "#000000";
+  if (/^#[0-9A-Fa-f]{6}$/.test(bg)) return bg;
+  return null; // unrecognized → fall back to transparent
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let cachedModel: any = null;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,7 +54,8 @@ async function loadModel() {
 
 export async function removeBackground(
   file: File,
-  onProgress?: (progress: number) => void
+  onProgress?: (progress: number) => void,
+  backgroundColor: BackgroundColor = "transparent"
 ): Promise<RemoveBgResult> {
   const originalSize = file.size;
   onProgress?.(5);
@@ -83,7 +101,23 @@ export async function removeBackground(
   ctx.putImageData(imageData, 0, 0);
   onProgress?.(95);
 
-  const blob = await canvas.convertToBlob({ type: "image/png" });
+  const bgHex = resolveBgHex(backgroundColor);
+  if (!bgHex) {
+    const blob = await canvas.convertToBlob({ type: "image/png" });
+    onProgress?.(100);
+    return { blob, originalSize, outputSize: blob.size };
+  }
+
+  // Composite alpha-cut subject onto solid background → JPEG
+  const outCanvas = new OffscreenCanvas(image.width, image.height);
+  const outCtx = outCanvas.getContext("2d")!;
+  outCtx.fillStyle = bgHex;
+  outCtx.fillRect(0, 0, image.width, image.height);
+  const transparentBitmap = canvas.transferToImageBitmap();
+  outCtx.drawImage(transparentBitmap, 0, 0);
+  transparentBitmap.close();
+
+  const blob = await outCanvas.convertToBlob({ type: "image/jpeg", quality: 0.92 });
   onProgress?.(100);
 
   return { blob, originalSize, outputSize: blob.size };

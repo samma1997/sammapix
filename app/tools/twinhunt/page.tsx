@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import { Copy, Search, Zap, HardDrive } from "lucide-react";
+import { ArrowLeft, Copy, Search, Zap, HardDrive, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import TwinHuntClient from "@/components/tools/TwinHuntClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import TwinhuntHeroDemo from "@/components/tools/TwinhuntHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -9,9 +10,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Find Duplicate Photos Online Free — AI Detection",
+  title: "Find Duplicate Photos Online Free. AI Perceptual Hashing",
   description:
-    "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based — your photos stay private.",
+    "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based, your photos stay private.",
   keywords: [
     "find duplicate photos",
     "duplicate photo finder",
@@ -42,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Find Duplicate Photos Online Free — AI Detection",
+    title: "Find Duplicate Photos Online Free. AI Perceptual Hashing",
     description:
-      "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based — your photos stay private.",
+      "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based, your photos stay private.",
   },
 };
 
@@ -120,12 +121,66 @@ export default function TwinHuntPage() {
   return (
     <main>
       <MetaViewContent contentName="TwinHunt" contentId="twinhunt" />
-      <ToolHeader
-        title="Find Duplicates"
-        description="Find duplicate and near-duplicate photos in your browser. Perceptual hashing compares visual content- not file bytes. Nothing uploaded, nothing stored."
-        icon={Copy}
-        accentColor="#F97316"
-      />
+
+      {/* Hero — Split layout: text left, animated demo right */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#F9731615", border: "1px solid #F9731630" }}
+                aria-hidden="true"
+              >
+                <Copy className="h-[18px] w-[18px]" style={{ color: "#F97316" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Find Duplicate Photos. Perceptual Hashing
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Spot duplicates and near-duplicates in your photo library using
+              pHash (Discrete Cosine Transform). Catches copies even after
+              resize, re-save or minor edits. Adjustable sensitivity. Reclaim
+              gigabytes of disk space. 100% browser-based, no upload.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Perceptual hash
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Near-duplicates
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                HEIC support
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Works offline
+              </span>
+            </div>
+          </div>
+
+          {/* ── RIGHT: Animated mock UI: scan + duplicate pair detection ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <TwinhuntHeroDemo />
+          </div>
+        </div>
+      </section>
 
       {/* Tool + Next Step suggestions */}
       <TwinHuntClient />

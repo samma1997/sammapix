@@ -275,7 +275,7 @@ export default function UpscaleClient() {
 
   return (
     <>
-      <section className="pt-6 pb-4 px-4 sm:px-6">
+      <section className="pt-3 pb-4 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           {/* ── DropZone ── */}
           {!hasFile && (

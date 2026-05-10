@@ -24,9 +24,11 @@ interface ToolInterfaceProps {
   defaultMode?: ToolMode;
   /** Tool slug for analytics tool_used events. */
   toolName?: string;
+  /** Reduce top padding to fit a split-hero pattern with animated demo above. */
+  compactHero?: boolean;
 }
 
-export default function ToolInterface({ defaultMode, toolName }: ToolInterfaceProps) {
+export default function ToolInterface({ defaultMode, toolName, compactHero }: ToolInterfaceProps) {
   const {
     items,
     aiRenameFile,
@@ -93,7 +95,7 @@ export default function ToolInterface({ defaultMode, toolName }: ToolInterfacePr
   return (
     <>
       {/* ── Tools section ── */}
-      <section className="pt-6 pb-4 px-4 sm:px-6">
+      <section className={cn(compactHero ? "pt-3" : "pt-6", "pb-4 px-4 sm:px-6")}>
         <div className="max-w-3xl mx-auto">
 
           {/* ── DropZone ── */}

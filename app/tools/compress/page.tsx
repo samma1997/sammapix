@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import CompressClient from "@/components/tools/CompressClient";
+import CompressHeroDemo from "@/components/tools/CompressHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
@@ -20,7 +21,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 export const metadata: Metadata = {
   title: "Compress Images Online Free",
   description:
-    "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
+    "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor. No upload to servers, free, unlimited. Try it now.",
   keywords: [
     "compress image online",
     "image compressor",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Compress Images Online Free",
     description:
-      "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
+      "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor. No upload to servers, free, unlimited. Try it now.",
     url: `${APP_URL}/tools/compress`,
     siteName: "SammaPix",
     type: "website",
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — Compress Images Online Free",
+        alt: "SammaPix Compress Images Online Free",
       },
     ],
   },
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Compress Images Online Free",
     description:
-      "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor — no upload to servers. Free, unlimited. Try it now.",
+      "Reduce image size by up to 90% without quality loss. Browser-based JPG, PNG & WebP compressor. No upload to servers, free, unlimited. Try it now.",
   },
 };
 
@@ -69,7 +70,7 @@ const faqs = [
   {
     question: "SammaPix vs TinyPNG: which is more private?",
     answer:
-      "SammaPix is significantly more private. TinyPNG uploads every image to its servers in San Francisco for compression. SammaPix compresses 100% in your browser using the Canvas API — your photos never leave your device. If your images contain client work, faces, GPS data, or anything sensitive, browser-side compression is the only safe choice. TinyPNG also has a 5MB free-tier file limit; SammaPix has no per-file limit on free.",
+      "SammaPix is significantly more private. TinyPNG uploads every image to its servers in San Francisco for compression. SammaPix compresses 100% in your browser using the Canvas API. Your photos never leave your device. If your images contain client work, faces, GPS data, or anything sensitive, browser-side compression is the only safe choice. TinyPNG also has a 5MB free-tier file limit; SammaPix has no per-file limit on free.",
   },
   {
     question: "How does SammaPix compare to Squoosh?",
@@ -79,7 +80,7 @@ const faqs = [
   {
     question: "What's the best free image compressor without server upload?",
     answer:
-      "For zero-upload compression in 2026, the three browser-side options are SammaPix, Squoosh, and ImageOptim (Mac only). Tested on 100 real images at quality 80, average file size reduction was 65–73% across these tools — server-side tools (TinyPNG, ShortPixel, Compressor.io) compress slightly better on average but require uploads. If privacy matters, SammaPix wins on multi-format support (HEIC, AVIF included) and batch limits — and for JPEG XL (.jxl) there's the dedicated /tools/jxl converter.",
+      "For zero-upload compression in 2026, the three browser-side options are SammaPix, Squoosh, and ImageOptim (Mac only). Tested on 100 real images at quality 80, average file size reduction was 65–73% across these tools. Server-side tools (TinyPNG, ShortPixel, Compressor.io) compress slightly better on average but require uploads. If privacy matters, SammaPix wins on multi-format support (HEIC, AVIF included) and batch limits, and for JPEG XL (.jxl) there's the dedicated /tools/jxl converter.",
   },
   {
     question: "Is SammaPix really free?",
@@ -89,7 +90,7 @@ const faqs = [
   {
     question: "Do my images get uploaded to a server?",
     answer:
-      "No. SammaPix compresses images entirely inside your browser using JavaScript and the Canvas API. Your files never leave your device — nothing is uploaded, stored, or tracked. Tested by inspecting network traffic: zero outbound image data.",
+      "No. SammaPix compresses images entirely inside your browser using JavaScript and the Canvas API. Your files never leave your device. Nothing is uploaded, stored, or tracked. Tested by inspecting network traffic: zero outbound image data.",
   },
   {
     question: "What image formats are supported?",
@@ -113,77 +114,73 @@ export default function CompressPage() {
       <MetaViewContent contentName="Compress" contentId="compress" />
 
       {/* ============================================================ */}
-      {/*  HERO — Conversion-focused, compact, above the tool          */}
+      {/*  HERO — Split layout: text left, animated demo right          */}
       {/* ============================================================ */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
         {/* Back link */}
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        {/* Icon + H1 */}
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{
-              backgroundColor: "#6366F115",
-              border: "1px solid #6366F130",
-            }}
-            aria-hidden="true"
-          >
-            <Minimize2
-              className="h-[18px] w-[18px]"
-              style={{ color: "#6366F1" }}
-              strokeWidth={1.5}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{
+                  backgroundColor: "#6366F115",
+                  border: "1px solid #6366F130",
+                }}
+                aria-hidden="true"
+              >
+                <Minimize2
+                  className="h-[18px] w-[18px]"
+                  style={{ color: "#6366F1" }}
+                  strokeWidth={1.5}
+                />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Compress Images Online. Free, No Upload
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Reduce image file size up to 90% without visible quality loss.
+              Adjust quality from 60 to 95 to find your sweet spot. Supports
+              JPG, PNG, WebP, GIF, AVIF and HEIC with batch processing for
+              500 files at once. Everything runs in your browser. No upload,
+              no signup.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Free forever
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No sign-up
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                20+ formats
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-            Compress Images Online — Free, No Upload
-          </h1>
-        </div>
 
-        {/* GEO answer box */}
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
-          SammaPix Compress is a free browser-based tool that reduces image file
-          size by up to 90% without visible quality loss. No upload required —
-          your files never leave your device. Supports JPG, PNG, WebP, GIF, AVIF,
-          and HEIC with batch processing for up to 500 images at once.
-        </p>
-
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            Free forever
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            No sign-up
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            No upload
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            20+ formats
-          </span>
+          {/* ── RIGHT: Auto-cycling demo with quality levels and size badges ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <CompressHeroDemo />
+          </div>
         </div>
       </section>
 
@@ -293,7 +290,7 @@ export default function CompressPage() {
               </h3>
               <p className="text-sm text-[#737373] leading-relaxed">
                 Your images never leave your browser. Everything is processed
-                locally with JavaScript — zero server uploads.
+                locally with JavaScript. Zero server uploads.
               </p>
             </div>
             {/* Card 2 */}
@@ -366,7 +363,7 @@ export default function CompressPage() {
           </h3>
           <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5">
             <p className="text-sm text-[#525252] dark:text-[#E5E5E5] leading-relaxed">
-              SammaPix Compress is a free, browser-based image compressor that processes images locally using the Canvas API — no uploads, no server. At quality 80%, it reduces file size by an average of 67% across 100 test images while keeping <a href="/blog/image-compression-benchmark-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">SSIMULACRA 2 visual quality scores above 65</a> (no visible quality loss). Supports JPEG, PNG, WebP, AVIF, HEIC, GIF, BMP, TIFF. Free tier: unlimited single-file compression. Pro ($7/mo): batch up to 500 images + ZIP download. Tested on Chrome, Safari, Firefox, Edge.
+              SammaPix Compress is a free, browser-based image compressor that processes images locally using the Canvas API. No uploads, no server. At quality 80%, it reduces file size by an average of 67% across 100 test images while keeping <a href="/blog/image-compression-benchmark-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">SSIMULACRA 2 visual quality scores above 65</a> (no visible quality loss). Supports JPEG, PNG, WebP, AVIF, HEIC, GIF, BMP, TIFF. Free tier: unlimited single-file compression. Pro ($7/mo): batch up to 500 images + ZIP download. Tested on Chrome, Safari, Firefox, Edge.
             </p>
           </div>
         </div>
@@ -410,13 +407,13 @@ export default function CompressPage() {
             Smaller images load faster and rank better on Google. SammaPix
             compresses your images directly in your browser using advanced
             algorithms that analyze each image and remove unnecessary data. You
-            control the quality with a simple slider — most images at the
+            control the quality with a simple slider. Most images at the
             default 80% setting show zero visible difference from the original
             while shrinking by 50–80%.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             Because everything stays on your device, there&apos;s zero privacy
-            risk — your photos never touch a server. You won&apos;t hit upload
+            risk: your photos never touch a server. You won&apos;t hit upload
             limits, and you&apos;ll get results instantly.
           </p>
           <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
@@ -478,7 +475,7 @@ export default function CompressPage() {
                 name: "SammaPix Image Compressor",
                 url: `${APP_URL}/tools/compress`,
                 description:
-                  "Free browser-based image compressor. Reduce JPG, PNG, WebP and GIF files up to 90% smaller without quality loss. Zero server upload — 100% private.",
+                  "Free browser-based image compressor. Reduce JPG, PNG, WebP and GIF files up to 90% smaller without quality loss. Zero server upload, 100% private.",
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web Browser",
                 offers: {
@@ -508,7 +505,7 @@ export default function CompressPage() {
                   "Batch file processing",
                   "ZIP download archive",
                   "100% browser-based processing",
-                  "No server upload — fully private",
+                  "No server upload, fully private",
                   "No sign-up required",
                 ],
               },

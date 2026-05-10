@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import RemoveBgClient from "@/components/tools/RemoveBgClient";
+import RemoveBgHeroDemo from "@/components/tools/RemoveBgHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — Remove Background from Image Free",
+        alt: "SammaPix Remove Background from Image Free",
       },
     ],
   },
@@ -66,7 +67,7 @@ const faqs = [
   {
     question: "SammaPix vs Remove.bg: what's the difference?",
     answer:
-      "Remove.bg charges €0.36 per image after the free tier and uploads every photo to its servers. SammaPix is 100% free with no per-image cost and runs the AI model entirely in your browser using WebAssembly — your images never leave your device. Quality is comparable on standard subjects (people, products, animals); Remove.bg still has a slight edge on complex hair detail, but the gap has closed significantly with on-device models in 2026. For batch work or sensitive content, SammaPix wins on cost and privacy.",
+      "Remove.bg charges €0.36 per image after the free tier and uploads every photo to its servers. SammaPix is 100% free with no per-image cost and runs the AI model entirely in your browser using WebAssembly. Your images never leave your device. Quality is comparable on standard subjects (people, products, animals); Remove.bg still has a slight edge on complex hair detail, but the gap has closed significantly with on-device models in 2026. For batch work or sensitive content, SammaPix wins on cost and privacy.",
   },
   {
     question: "SammaPix vs PhotoRoom: which is better for product shots?",
@@ -101,7 +102,7 @@ const faqs = [
   {
     question: "Is my image uploaded to a server?",
     answer:
-      "No. The AI model runs entirely in your browser using WebAssembly. Your images never leave your device — nothing is uploaded, stored, or tracked. Verifiable by inspecting your browser's network tab during use.",
+      "No. The AI model runs entirely in your browser using WebAssembly. Your images never leave your device. Nothing is uploaded, stored, or tracked. Verifiable by inspecting your browser's network tab during use.",
   },
 ];
 
@@ -114,77 +115,72 @@ export default function RemoveBgPage() {
       <MetaViewContent contentName="Remove Background" contentId="remove-bg" />
 
       {/* ============================================================ */}
-      {/*  HERO — Conversion-focused, compact, above the tool          */}
+      {/*  HERO — Split layout: text left, animated demo right          */}
       {/* ============================================================ */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
         {/* Back link */}
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        {/* Icon + H1 */}
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{
-              backgroundColor: "#EC489915",
-              border: "1px solid #EC489930",
-            }}
-            aria-hidden="true"
-          >
-            <Scissors
-              className="h-[18px] w-[18px]"
-              style={{ color: "#EC4899" }}
-              strokeWidth={1.5}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{
+                  backgroundColor: "#EC489915",
+                  border: "1px solid #EC489930",
+                }}
+                aria-hidden="true"
+              >
+                <Scissors
+                  className="h-[18px] w-[18px]"
+                  style={{ color: "#EC4899" }}
+                  strokeWidth={1.5}
+                />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Remove Background. Free, No Upload
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Free AI-powered tool that removes image backgrounds in under 5
+              seconds. Output a transparent PNG, or replace the background with
+              white, black, or any custom color. The AI model runs entirely in
+              your browser. No upload, no signup, no daily limits.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Free forever
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No sign-up
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                AI-powered
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-            Remove Background — Free, No Upload
-          </h1>
-        </div>
 
-        {/* GEO answer box */}
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
-          SammaPix Remove Background is a free AI-powered tool that removes image
-          backgrounds in under 5 seconds and outputs a transparent PNG. The AI
-          model runs entirely in your browser via WebAssembly — no upload to any
-          server, no signup required, and no daily limits.
-        </p>
-
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            Free forever
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            No sign-up
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            No upload
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            AI-powered
-          </span>
+          {/* ── RIGHT: Auto-cycling Before/After demo with all 4 bg modes ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <RemoveBgHeroDemo />
+          </div>
         </div>
       </section>
 
@@ -300,7 +296,7 @@ export default function RemoveBgPage() {
               </h3>
               <p className="text-sm text-[#737373] leading-relaxed">
                 Your images never leave your browser. The AI model runs locally
-                via WebAssembly — zero server uploads.
+                via WebAssembly. Zero server uploads.
               </p>
             </div>
             {/* Card 2 */}
@@ -351,7 +347,7 @@ export default function RemoveBgPage() {
           </h3>
           <div data-tts-skip className="bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-md p-5">
             <p className="text-sm text-[#525252] dark:text-[#E5E5E5] leading-relaxed">
-              SammaPix Clean Background is a free, browser-based AI background remover that runs an ISNet model via the @imgly/background-removal WebAssembly runtime — your images never leave your device. Processes a 2000×2000 photo in 3-8 seconds, produces transparent PNG output. Free tier: unlimited images, no daily cap. Pro ($7/mo): batch ZIP for up to 500 images. Compared to Remove.bg, it eliminates the €0.36/image cost and the upload-to-server step. <a href="/blog/best-free-remove-bg-alternatives-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">See full alternatives benchmark</a>.
+              SammaPix Clean Background is a free, browser-based AI background remover that runs an ISNet model via the @imgly/background-removal WebAssembly runtime. Your images never leave your device. Processes a 2000×2000 photo in 3-8 seconds, produces transparent PNG output. Free tier: unlimited images, no daily cap. Pro ($7/mo): batch ZIP for up to 500 images. Compared to Remove.bg, it eliminates the €0.36/image cost and the upload-to-server step. <a href="/blog/best-free-remove-bg-alternatives-2026" className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-white">See full alternatives benchmark</a>.
             </p>
           </div>
         </div>
@@ -397,14 +393,14 @@ export default function RemoveBgPage() {
             designing social media graphics, or building a presentation, a clean
             transparent background makes your images more versatile and
             professional. SammaPix uses a state-of-the-art AI model that runs
-            entirely in your browser — no uploads, no waiting for server
+            entirely in your browser. No uploads, no waiting for server
             processing, no privacy concerns.
           </p>
           <p className="text-sm text-[#737373] leading-relaxed mb-4">
             The AI model is downloaded once (~40 MB) and cached in your browser
             for instant processing on future visits. It handles complex
             backgrounds, fine hair details, semi-transparent objects, and
-            intricate edges with remarkable precision — all without sending your
+            intricate edges with remarkable precision, all without sending your
             images to any server.
           </p>
           <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
@@ -413,21 +409,21 @@ export default function RemoveBgPage() {
           <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
               <span className="text-[#EC4899] mt-0.5">-</span>
-              Product photography for e-commerce stores — clean white or
+              Product photography for e-commerce stores: clean white or
               transparent backgrounds sell more
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#EC4899] mt-0.5">-</span>
-              Social media graphics — overlay subjects on branded backgrounds
+              Social media graphics: overlay subjects on branded backgrounds
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#EC4899] mt-0.5">-</span>
-              Presentations and documents — professional cutouts without
+              Presentations and documents: professional cutouts without
               Photoshop
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#EC4899] mt-0.5">-</span>
-              Profile pictures and headshots — clean transparent or custom
+              Profile pictures and headshots: clean transparent or custom
               backgrounds
             </li>
           </ul>
@@ -448,7 +444,7 @@ export default function RemoveBgPage() {
                 name: "SammaPix Background Remover",
                 url: `${APP_URL}/tools/remove-bg`,
                 description:
-                  "Free browser-based AI background remover. Remove image backgrounds instantly and get transparent PNG files. Zero server upload — 100% private.",
+                  "Free browser-based AI background remover. Remove image backgrounds instantly and get transparent PNG files. Zero server upload, 100% private.",
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web Browser",
                 offers: {
@@ -478,7 +474,7 @@ export default function RemoveBgPage() {
                   "Batch file processing",
                   "ZIP download archive",
                   "100% browser-based processing",
-                  "No server upload — fully private",
+                  "No server upload, fully private",
                   "No sign-up required",
                 ],
               },
@@ -498,7 +494,7 @@ export default function RemoveBgPage() {
                     "@type": "HowToStep",
                     position: 1,
                     name: "Upload your image",
-                    text: "Drag and drop a JPG, PNG, or WebP file onto the upload area, or click to browse your computer. Your file stays on your device — nothing is uploaded to any server.",
+                    text: "Drag and drop a JPG, PNG, or WebP file onto the upload area, or click to browse your computer. Your file stays on your device. Nothing is uploaded to any server.",
                     url: `${APP_URL}/tools/remove-bg`,
                   },
                   {

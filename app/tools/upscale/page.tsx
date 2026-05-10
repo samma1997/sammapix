@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import UpscaleClient from "@/components/tools/UpscaleClient";
+import UpscaleHeroDemo from "@/components/tools/UpscaleHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix — AI Image Upscaler Free Online",
+        alt: "SammaPix AI Image Upscaler Free Online",
       },
     ],
   },
@@ -70,7 +71,7 @@ const faqs = [
   {
     question: "How does AI upscaling work?",
     answer:
-      "SammaPix uses advanced browser-based algorithms to intelligently upscale your images. The tool analyzes pixel patterns and applies high-quality interpolation to increase resolution while preserving sharpness. Everything runs directly in your browser — your images are never uploaded to any server.",
+      "SammaPix uses advanced browser-based algorithms to intelligently upscale your images. The tool analyzes pixel patterns and applies high-quality interpolation to increase resolution while preserving sharpness. Everything runs directly in your browser. Your images are never uploaded to any server.",
   },
   {
     question: "What's the maximum upscale factor?",
@@ -80,7 +81,7 @@ const faqs = [
   {
     question: "Will upscaling make my image blurry?",
     answer:
-      "SammaPix uses multi-pass upscaling with high-quality smoothing to minimize blur. For 4x upscaling, we apply two sequential 2x passes which produces significantly sharper results than a single 4x jump. The output quality depends on the source image — higher quality originals produce better upscaled results.",
+      "SammaPix uses multi-pass upscaling with high-quality smoothing to minimize blur. For 4x upscaling, we apply two sequential 2x passes which produces significantly sharper results than a single 4x jump. The output quality depends on the source image: higher quality originals produce better upscaled results.",
   },
   {
     question: "What formats are supported?",
@@ -121,75 +122,72 @@ export default function UpscalePage() {
       <MetaViewContent contentName="Upscale" contentId="upscale" />
 
       {/* ============================================================ */}
-      {/*  HERO — Conversion-focused, compact, above the tool          */}
+      {/*  HERO — Split layout: text left, animated demo right          */}
       {/* ============================================================ */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
         {/* Back link */}
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-3"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        {/* Icon + H1 */}
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{
-              backgroundColor: "#8B5CF615",
-              border: "1px solid #8B5CF630",
-            }}
-            aria-hidden="true"
-          >
-            <Maximize2
-              className="h-[18px] w-[18px]"
-              style={{ color: "#8B5CF6" }}
-              strokeWidth={1.5}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5"
+                style={{
+                  backgroundColor: "#8B5CF615",
+                  border: "1px solid #8B5CF630",
+                }}
+                aria-hidden="true"
+              >
+                <Maximize2
+                  className="h-[18px] w-[18px]"
+                  style={{ color: "#8B5CF6" }}
+                  strokeWidth={1.5}
+                />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                Enhance Resolution. AI Image Upscaler 2× &amp; 4×
+              </h1>
+            </div>
+
+            <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              Upscale low-resolution images 2× or 4× with multi-pass AI
+              enhancement. Recover sharp details from old photos, blurry
+              thumbnails, and low-res screenshots. All processing happens in
+              your browser. No upload, no signup, lossless PNG output.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Free to use
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No sign-up
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                No upload
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                2× &amp; 4× upscale
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-            Enhance Resolution — AI Image Upscaler
-          </h1>
-        </div>
 
-        {/* Subtext */}
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
-          Upscale images 2x or 4x instantly. Increase resolution without losing
-          quality — all processing happens in your browser.
-        </p>
-
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            Free to use
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            No sign-up
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            No upload
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            2x &amp; 4x upscale
-          </span>
+          {/* ── RIGHT: Auto-cycling demo with Original / 2× / 4× states ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <UpscaleHeroDemo />
+          </div>
         </div>
       </section>
 
@@ -311,7 +309,7 @@ export default function UpscalePage() {
               </h3>
               <p className="text-sm text-[#737373] leading-relaxed">
                 Your images never leave your browser. Everything is processed
-                locally with JavaScript — zero server uploads.
+                locally with JavaScript. Zero server uploads.
               </p>
             </div>
             {/* Card 2 */}
@@ -438,7 +436,7 @@ export default function UpscalePage() {
                 name: "SammaPix AI Image Upscaler",
                 url: `${APP_URL}/tools/upscale`,
                 description:
-                  "Free browser-based AI image upscaler. Enhance image resolution 2x or 4x without quality loss. Zero server upload — 100% private.",
+                  "Free browser-based AI image upscaler. Enhance image resolution 2x or 4x without quality loss. Zero server upload, 100% private.",
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web Browser",
                 offers: {
@@ -467,7 +465,7 @@ export default function UpscalePage() {
                   "Lossless PNG output",
                   "Supports JPG, PNG, WebP, GIF, AVIF, HEIC",
                   "100% browser-based processing",
-                  "No server upload — fully private",
+                  "No server upload, fully private",
                   "No sign-up required",
                 ],
               },
