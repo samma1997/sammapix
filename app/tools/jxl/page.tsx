@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowLeft, Shield, Zap, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Shield, Zap, Sparkles, CheckCircle2, FileImage } from "lucide-react";
 import Link from "next/link";
 import JxlConverterClient from "@/components/tools/JxlConverterClient";
+import JxlHeroDemo from "@/components/tools/JxlHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
@@ -133,50 +134,70 @@ export default function JxlConverterPage() {
       <MetaViewContent contentName="JXL Converter" contentCategory="tool" />
 
       <main className="min-h-screen bg-white dark:bg-[#191919]">
-        {/* Top nav bar */}
-        <div className="border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
-            <Link
-              href="/tools"
-              className="inline-flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-            >
-              <ArrowLeft className="h-3 w-3" strokeWidth={1.5} />
-              All Tools
-            </Link>
-          </div>
-        </div>
+        {/* Hero — Split layout: text left, animated demo right */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+            All tools
+          </Link>
 
-        {/* Hero */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-10 pb-8 text-center">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FEF3C7] dark:bg-[#78350F]/30 text-[#92400E] dark:text-[#FCD34D] text-[11px] font-semibold mb-4">
-            <Sparkles className="h-3 w-3" strokeWidth={2} />
-            Next-Gen Format
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-3">
-            JPEG XL (JXL) Converter
-          </h1>
-          <p className="text-sm text-[#737373] max-w-lg mx-auto leading-relaxed">
-            Convert JPEG XL files to JPG, PNG, or WebP &mdash; or convert your images to the
-            next-generation JXL format with 30&ndash;60% smaller file sizes. Powered by
-            WebAssembly, runs entirely in your browser.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+            {/* ── LEFT: Title + copy + trust badges ── */}
+            <div>
+              <div className="flex items-start gap-3 mb-2">
+                <div
+                  className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                  style={{ backgroundColor: "#F59E0B15", border: "1px solid #F59E0B30" }}
+                  aria-hidden="true"
+                >
+                  <FileImage className="h-4 w-4" style={{ color: "#F59E0B" }} strokeWidth={1.5} />
+                </div>
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                    JPEG XL Converter. -60% Free
+                  </h1>
+                  <span className="inline-flex items-center gap-1 text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#FEF3C7] text-[#92400E] dark:bg-[#78350F]/40 dark:text-[#FCD34D] uppercase tracking-wide">
+                    <Sparkles className="h-2.5 w-2.5" strokeWidth={2.5} />
+                    Next-Gen
+                  </span>
+                </div>
+              </div>
 
-          {/* Trust badges */}
-          <div className="flex items-center justify-center gap-4 mt-5 flex-wrap">
-            <span className="inline-flex items-center gap-1 text-[11px] text-[#737373]">
-              <Shield className="h-3 w-3" strokeWidth={1.5} />
-              100% Private
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] text-[#737373]">
-              <Zap className="h-3 w-3" strokeWidth={1.5} />
-              WASM-Powered
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] text-[#737373]">
-              <Sparkles className="h-3 w-3" strokeWidth={1.5} />
-              Encode + Decode
-            </span>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+                Convert JXL ↔ JPG / PNG / WebP. JPEG XL is the{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">next-gen image format</strong>{" "}
+                with 30-60% smaller files at the same quality. WebAssembly-powered, runs entirely in your browser.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  Encode + Decode
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  WASM-powered
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  No upload
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  Lossless option
+                </span>
+              </div>
+            </div>
+
+            {/* ── RIGHT: animated compression demo ── */}
+            <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+              <JxlHeroDemo />
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Tool */}
         <JxlConverterClient />
