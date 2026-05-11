@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowLeft, Shield, Zap, Layers, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Shield, Zap, Layers, CheckCircle2, FileText } from "lucide-react";
 import Link from "next/link";
 import JpgToPdfClient from "@/components/tools/JpgToPdfClient";
+import JpgToPdfHeroDemo from "@/components/tools/JpgToPdfHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
@@ -131,46 +132,61 @@ export default function JpgToPdfPage() {
       <MetaViewContent contentName="JPG to PDF" contentCategory="tool" />
 
       <main className="min-h-screen bg-white dark:bg-[#191919]">
-        {/* Top nav bar */}
-        <div className="border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
-            <Link
-              href="/tools"
-              className="inline-flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-            >
-              <ArrowLeft className="h-3 w-3" strokeWidth={1.5} />
-              All Tools
-            </Link>
-          </div>
-        </div>
+        {/* Hero — Split layout */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+            All tools
+          </Link>
 
-        {/* Hero */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-10 pb-8 text-center">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-3">
-            JPG to PDF Converter
-          </h1>
-          <p className="text-sm text-[#737373] max-w-lg mx-auto leading-relaxed">
-            Merge multiple JPG, PNG, or WebP images into a single PDF document.
-            Drag to reorder pages, choose your page size, and download instantly.
-            100% free and private &mdash; nothing leaves your browser.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+            <div>
+              <div className="flex items-start gap-3 mb-2">
+                <div
+                  className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                  style={{ backgroundColor: "#DC262615", border: "1px solid #DC262630" }}
+                  aria-hidden="true"
+                >
+                  <FileText className="h-4 w-4" style={{ color: "#DC2626" }} strokeWidth={1.5} />
+                </div>
+                <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                  JPG to PDF. A4 · Letter, Free
+                </h1>
+              </div>
 
-          {/* Trust badges */}
-          <div className="flex items-center justify-center gap-4 mt-5 flex-wrap">
-            <span className="inline-flex items-center gap-1 text-[11px] text-[#737373]">
-              <Shield className="h-3 w-3" strokeWidth={1.5} />
-              100% Private
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] text-[#737373]">
-              <Zap className="h-3 w-3" strokeWidth={1.5} />
-              Instant
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] text-[#737373]">
-              <Layers className="h-3 w-3" strokeWidth={1.5} />
-              Up to 200 pages
-            </span>
+              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+                Merge multiple JPG, PNG, or WebP images into a{" "}
+                <strong className="text-[#171717] dark:text-[#E5E5E5]">single PDF document</strong>. Drag to reorder pages, choose A4 or Letter size, download instantly. 100% private, runs in your browser.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  A4 · Letter
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  Drag to reorder
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  Up to 200 pages
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                  JPG · PNG · WebP
+                </span>
+              </div>
+            </div>
+
+            <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+              <JpgToPdfHeroDemo />
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Tool */}
         <JpgToPdfClient />
