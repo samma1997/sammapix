@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
 import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
+import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
 interface DashboardUpgradeProps {
   userEmail: string | null;
@@ -58,6 +59,10 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
     setError(null);
     try {
       const planToSend = planOverride ?? (annual ? "annual" : "monthly");
+      // Fire GA4/Meta begin_checkout — previously this flow (manual click
+      // and auto-resume after signin) was invisible to analytics, hiding
+      // the fact that users actually were arriving at Stripe.
+      fireBeginCheckoutEvent(planToSend);
       const res = await fetch("/api/checkout", {
         method: "POST",
         credentials: "include",

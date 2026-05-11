@@ -7,6 +7,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Zap, Check, X, Loader2 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
+import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -119,11 +120,16 @@ export default function ProUpsellModal({
   const handleCheckout = async () => {
     trackEvent("upsell_clicked", { trigger });
     if (!session) {
+      // Not logged in — defer the begin_checkout event to DashboardUpgrade
+      // (after signin) so we only fire it for users who actually return.
       const cb = encodeURIComponent("/dashboard/upgrade?plan=monthly");
       router.push(`/auth/signin?callbackUrl=${cb}`);
       onClose();
       return;
     }
+    // Logged-in users go straight to Stripe — fire begin_checkout here so
+    // GA4/Meta see the event (previously these flows were invisible).
+    fireBeginCheckoutEvent("monthly");
     setLoading(true);
     try {
       const res = await fetch("/api/checkout", {

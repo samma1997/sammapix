@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
 interface CheckoutButtonProps {
   className?: string;
@@ -26,9 +27,6 @@ export default function CheckoutButton({
   const handleClick = async () => {
     setError(null);
 
-    // Generate event ID for Meta deduplication (client pixel + server CAPI)
-    const eventId = `ic_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-
     if (!session) {
       // Not logged in → signin first, preserve plan intent.
       // The whole callbackUrl must be encoded as a single value,
@@ -40,12 +38,7 @@ export default function CheckoutButton({
 
     // Fire conversion events ONLY for logged-in users actually hitting checkout —
     // pre-signin clicks were inflating begin_checkout 50x with no real intent.
-    if (typeof window !== "undefined") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const w = window as any;
-      if (typeof w.fbq === "function") w.fbq("track", "InitiateCheckout", { plan }, { eventID: eventId });
-      if (typeof w.gtag === "function") w.gtag("event", "begin_checkout", { plan });
-    }
+    const eventId = fireBeginCheckoutEvent(plan);
 
     setLoading(true);
     try {
