@@ -1,11 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import ComboClient from "@/components/tools/ComboClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import BlogdropHeroDemo from "@/components/tools/BlogdropHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
-import { FileText } from "lucide-react";
+import { ArrowLeft, FileText, CheckCircle2 } from "lucide-react";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
@@ -71,12 +72,62 @@ export default function BlogDropPage() {
   return (
     <main>
       <MetaViewContent contentName="BlogDrop" contentId="blogdrop" />
-      <ToolHeader
-        title="Blog Ready"
-        description="Blog-ready images in one drop. Compress, resize, WebP, SEO names."
-        icon={FileText}
-        accentColor="#8B5CF6"
-      />
+
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#8B5CF615", border: "1px solid #8B5CF630" }}
+                aria-hidden="true"
+              >
+                <FileText className="h-4 w-4" style={{ color: "#8B5CF6" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                BlogDrop. WordPress-Ready Images
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Drop blog photos → get them{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">compressed, resized to 1200px, converted to WebP, with AI SEO filenames + alt text</strong>. One click, ready for WordPress, Ghost, Medium, Substack.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                4 steps · 1 click
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Resize to 1200px
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                AI alt text
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                90%+ smaller
+              </span>
+            </div>
+          </div>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <BlogdropHeroDemo />
+          </div>
+        </div>
+      </section>
 
       <ComboClient
         toolName="BlogDrop"
