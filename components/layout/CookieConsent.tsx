@@ -90,15 +90,18 @@ function initAdSense(pubId: string): void {
 
 function initClarity(projectId: string): void {
   // Microsoft Clarity · heatmap + session recording.
-  // Carico il package dinamicamente per non bundle-larlo nell'initial JS.
-  deferToIdle(async () => {
-    try {
-      const Clarity = (await import("@microsoft/clarity")).default;
-      Clarity.init(projectId);
-    } catch {
-      // Silenzioso: se il package fallisce non rompiamo il sito
-    }
-  });
+  // Usiamo lo snippet ufficiale Microsoft (script tag injection) invece del
+  // package npm @microsoft/clarity: il dynamic import in build production
+  // fallisce silenziosamente in alcuni casi e la dashboard non riceve dati.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((window as any).clarity) return;
+  loadInlineScript(
+    "(function(c,l,a,r,i,t,y){" +
+    "c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};" +
+    "t=l.createElement(r);t.async=1;t.src=\"https://www.clarity.ms/tag/\"+i;" +
+    "y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);" +
+    "})(window,document,\"clarity\",\"script\",\"" + projectId + "\");"
+  );
 }
 
 export default function CookieConsent() {
