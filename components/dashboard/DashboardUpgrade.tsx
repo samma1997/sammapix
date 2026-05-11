@@ -13,6 +13,8 @@ import {
   Coins,
   X as XIcon,
 } from "lucide-react";
+import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
+import FoundingSpotsCounter from "@/components/ui/FoundingSpotsCounter";
 
 interface DashboardUpgradeProps {
   userEmail: string | null;
@@ -31,6 +33,16 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
   );
   const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Founding deal status — drives discounted price + counter
+  const founding = useFoundingStatus();
+  const isFounding = !!(founding && founding.active && founding.spotsLeft > 0);
+  const monthlyBaseCents = 900;
+  const annualBaseCents = 7900;
+  const monthlyFinalCents = applyFoundingDiscount(monthlyBaseCents, founding);
+  const annualFinalCents = applyFoundingDiscount(annualBaseCents, founding);
+  const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
+  const annualFinal = (annualFinalCents / 100).toFixed(annualFinalCents % 100 === 0 ? 0 : 2);
 
   const handleCheckout = async (planOverride?: "annual" | "monthly") => {
     setAutoStarting(null);
@@ -129,22 +141,23 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           </p>
         </div>
 
-        {/* Founding Member banner */}
-        <div className="mb-8 border-2 border-[#6366F1]/30 dark:border-[#6366F1]/20 rounded-xl px-6 py-5 bg-[#EEF2FF]/50 dark:bg-[#6366F1]/5 text-center">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#6366F1] text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
-            Limited offer
+        {/* Founding Member banner — shows live counter when active */}
+        {isFounding && (
+          <div className="mb-8 border-2 border-[#6366F1]/30 dark:border-[#6366F1]/20 rounded-xl px-6 py-5 bg-[#EEF2FF]/50 dark:bg-[#6366F1]/5 text-center">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#6366F1] text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
+              Limited offer
+            </div>
+            <p className="text-lg font-bold text-[#171717] dark:text-[#E5E5E5] mb-1">
+              Founding Member Deal
+            </p>
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
+              Lock in{" "}
+              <span className="font-bold text-[#6366F1] text-base">${monthlyFinal}/month forever</span>
+              {" "}— {founding!.percentOff}% off, never expires.
+            </p>
+            <FoundingSpotsCounter />
           </div>
-          <p className="text-lg font-bold text-[#171717] dark:text-[#E5E5E5] mb-1">
-            Founding Member Deal
-          </p>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
-            First 200 Pro subscribers lock in{" "}
-            <span className="font-bold text-[#6366F1] text-base">~$5/month forever</span>.
-          </p>
-          <p className="text-xs text-[#A3A3A3] mt-2">
-            Early adopters get a permanent discount as a thank-you for believing early.
-          </p>
-        </div>
+        )}
 
         {/* Toggle */}
         <div className="flex justify-center mb-8">
@@ -180,26 +193,41 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
         {/* Price card */}
         <div className="border-2 border-[#6366F1]/30 rounded-xl p-8 bg-white dark:bg-[#1E1E1E] ring-1 ring-[#6366F1]/10 mb-8">
           <div className="text-center mb-8">
+            {isFounding && (
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#6366F1]/10 text-[#6366F1] rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
+                Founding member price
+              </div>
+            )}
             <div className="flex items-baseline justify-center gap-1.5">
-              {annual && (
+              {isFounding && (
+                <span className="text-2xl font-medium text-[#A3A3A3] line-through mr-1">
+                  ${annual ? "79" : "9"}
+                </span>
+              )}
+              {!isFounding && annual && (
                 <span className="text-2xl font-medium text-[#A3A3A3] line-through mr-1">
                   $108
                 </span>
               )}
               <span className="text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-                ${annual ? "79" : "9"}
+                ${annual ? annualFinal : monthlyFinal}
               </span>
               <span className="text-sm text-[#A3A3A3]">
                 / {annual ? "year" : "month"}
               </span>
             </div>
-            {annual && (
+            {isFounding && (
+              <p className="mt-1 text-xs text-[#16A34A] font-semibold">
+                {founding!.percentOff}% off forever — never expires
+              </p>
+            )}
+            {!isFounding && annual && (
               <p className="mt-1 text-xs text-[#16A34A] font-semibold">
                 Save $29 vs monthly billing
               </p>
             )}
             <p className="mt-2 text-sm text-[#6366F1] font-medium">
-              7 days free trial
+              7 days free trial · no charge during trial
             </p>
           </div>
 
@@ -235,9 +263,13 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             ) : (
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
-            {annual
-              ? "Start 7-day free trial — $79/year"
-              : "Start 7-day free trial — $9/month"
+            {isFounding
+              ? (annual
+                  ? `Lock $${annualFinal}/year forever — Start free trial`
+                  : `Lock $${monthlyFinal}/month forever — Start free trial`)
+              : (annual
+                  ? "Start 7-day free trial — $79/year"
+                  : "Start 7-day free trial — $9/month")
             }
           </button>
 

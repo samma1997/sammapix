@@ -35,6 +35,7 @@ import { cn } from "@/lib/utils";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 import MetaAddToWishlist from "@/components/tracking/MetaAddToWishlist";
 import dynamic from "next/dynamic";
+import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
 
 const FoundingSpotsCounter = dynamic(() => import("@/components/ui/FoundingSpotsCounter"), { ssr: false });
 import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
@@ -137,6 +138,14 @@ export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
   const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
 
+  // Founding deal — render discounted price when coupon is still available
+  const founding = useFoundingStatus();
+  const isFounding = !!(founding && founding.active && founding.spotsLeft > 0);
+  const monthlyFinalCents = applyFoundingDiscount(900, founding);
+  const annualFinalCents = applyFoundingDiscount(7900, founding);
+  const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
+  const annualFinal = (annualFinalCents / 100).toFixed(annualFinalCents % 100 === 0 ? 0 : 2);
+
   return (
     <div className="py-20 px-4 sm:px-6 bg-white dark:bg-[#191919] min-h-screen">
       <div className="max-w-3xl mx-auto">
@@ -237,7 +246,7 @@ export default function PricingPage() {
           {/* Pro card */}
           <div className="relative border border-[#6366F1]/40 dark:border-[#6366F1]/30 rounded-xl p-7 bg-white dark:bg-[#1E1E1E] flex flex-col ring-1 ring-[#6366F1]/15 dark:ring-[#6366F1]/10">
             <div className="absolute -top-3 left-6">
-              <Badge variant="black">Most popular</Badge>
+              <Badge variant="black">{isFounding ? "Founding price" : "Most popular"}</Badge>
             </div>
 
             <div className="mb-7">
@@ -245,14 +254,23 @@ export default function PricingPage() {
                 Pro
               </h2>
               <div className="flex items-baseline gap-1.5">
+                {isFounding && (
+                  <span className="text-2xl font-medium text-[#A3A3A3] line-through mr-1">
+                    ${annual ? "79" : "9"}
+                  </span>
+                )}
                 <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-                  ${annual ? "79" : "9"}
+                  ${annual ? annualFinal : monthlyFinal}
                 </span>
                 <span className="text-sm text-[#A3A3A3] dark:text-[#737373]">
                   {annual ? "/ year" : "/ month"}
                 </span>
               </div>
-              {annual ? (
+              {isFounding ? (
+                <p className="mt-1.5 text-sm text-[#16A34A] font-semibold">
+                  {founding!.percentOff}% off forever — never expires
+                </p>
+              ) : annual ? (
                 <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
                   Billed annually- save ~{savePercent}% vs monthly
                 </p>

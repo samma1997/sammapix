@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Zap, Check, X, Loader2 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -92,6 +93,12 @@ export default function ProUpsellModal({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
+
+  // Founding deal — show $5 price + spots-left urgency in CTA
+  const founding = useFoundingStatus();
+  const isFounding = !!(founding && founding.active && founding.spotsLeft > 0);
+  const monthlyFinalCents = applyFoundingDiscount(900, founding);
+  const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
 
   // Track upsell shown when modal opens
   const [tracked, setTracked] = useState(false);
@@ -199,7 +206,7 @@ export default function ProUpsellModal({
           </p>
 
           {/* Features */}
-          <ul className="space-y-2 mb-6">
+          <ul className="space-y-2 mb-4">
             {FEATURES.map((feature) => (
               <li key={feature} className="flex items-center gap-2.5">
                 <span className="flex-shrink-0 h-4 w-4 rounded-full bg-[#6366F1]/10 dark:bg-[#6366F1]/20 flex items-center justify-center">
@@ -209,6 +216,16 @@ export default function ProUpsellModal({
               </li>
             ))}
           </ul>
+
+          {/* Founding urgency line — visible only while spots remain */}
+          {isFounding && (
+            <div className="mb-3 px-2.5 py-1.5 rounded bg-[#FEF2F2] dark:bg-red-950/30 border border-red-200 dark:border-red-900/40 text-center">
+              <p className="text-[11px] font-medium text-red-700 dark:text-red-400">
+                <span className="font-bold">{founding!.spotsLeft}</span> of {founding!.totalSpots} founding spots left ·{" "}
+                <span className="font-bold">${monthlyFinal}/mo</span> locks forever
+              </p>
+            </div>
+          )}
 
           {/* Primary CTA \u2014 explicit free trial */}
           <button
@@ -221,7 +238,11 @@ export default function ProUpsellModal({
             ) : (
               <Zap className="h-4 w-4" strokeWidth={1.5} />
             )}
-            {loading ? "Redirecting to checkout..." : "Start 7-day free trial \u2014 $9/mo after"}
+            {loading
+              ? "Redirecting to checkout..."
+              : isFounding
+                ? `Lock $${monthlyFinal}/mo forever \u2014 Start trial`
+                : "Start 7-day free trial \u2014 $9/mo after"}
           </button>
 
           {/* Credit pack alternative for AI-ops triggers */}
