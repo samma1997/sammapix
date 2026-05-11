@@ -15,7 +15,7 @@ import {
   BarChart2,
   Coins,
 } from "lucide-react";
-import type { Persona } from "@/components/onboarding/OnboardingModal";
+import type { Persona } from "@/types/persona";
 
 const LS_PERSONA_KEY = "sammapix-persona";
 const LS_THEME_KEY = "theme";

@@ -42,7 +42,7 @@ import {
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
-import type { Persona } from "@/components/onboarding/OnboardingModal";
+import type { Persona } from "@/types/persona";
 
 const LS_PERSONA_KEY = "sammapix-persona";
 

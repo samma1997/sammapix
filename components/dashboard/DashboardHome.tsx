@@ -16,7 +16,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import type { Persona } from "@/components/onboarding/OnboardingModal";
+import type { Persona } from "@/types/persona";
 import DashboardReferralCard from "@/components/referral/DashboardReferralCard";
 import {
   ToolCard,
