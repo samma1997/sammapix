@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ArrowLeft, Maximize2, Shield, FileImage } from "lucide-react";
+import { ArrowLeft, Maximize2, Shield, FileImage, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import SvgToPngClient from "@/components/tools/SvgToPngClient";
+import SvgToPngHeroDemo from "@/components/tools/SvgToPngHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
@@ -75,38 +76,63 @@ export default function SvgToPngPage() {
   return (
     <main>
       <MetaViewContent contentName="SVG to PNG Converter" contentId="svg-to-png" />
-      {/* Hero SEO */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
+
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        <div className="flex items-center gap-3 mb-3">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: "#F9731615", border: "1px solid #F9731630" }}
-            aria-hidden="true"
-          >
-            <FileImage
-              className="h-4.5 w-4.5"
-              style={{ color: "#F97316", width: 18, height: 18 }}
-              strokeWidth={1.5}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#F9731615", border: "1px solid #F9731630" }}
+                aria-hidden="true"
+              >
+                <FileImage className="h-4 w-4" style={{ color: "#F97316" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                SVG to PNG. Up to 8192px Free
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Rasterize SVG vectors to PNG at{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">any resolution up to 8192px</strong>{" "}
+              — transparency preserved, batch up to 20 files. Perfect for app icons, retina assets, social previews. No upload.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Up to 8192×8192
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Transparency
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch up to 20
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                100% private
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
-            SVG to PNG Converter
-          </h1>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <SvgToPngHeroDemo />
+          </div>
         </div>
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed max-w-xl">
-          SammaPix SVG to PNG Converter is a free online tool that rasterizes SVG vectors to PNG
-          images at any resolution — up to 8192 px. Transparency preserved, batch up to 20 files,
-          no upload to any server.
-        </p>
-      </div>
+      </section>
 
       {/* Tool */}
       <SvgToPngClient />
