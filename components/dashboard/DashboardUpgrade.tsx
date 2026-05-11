@@ -34,9 +34,16 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
   const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Founding deal status — drives discounted price + counter
+  // Founding deal status — drives discounted price + counter.
+  // Require a real discount to avoid showing "lock $9/mo forever" when the
+  // cached API response from before the percentOff rollout is still served.
   const founding = useFoundingStatus();
-  const isFounding = !!(founding && founding.active && founding.spotsLeft > 0);
+  const isFounding = !!(
+    founding &&
+    founding.active &&
+    founding.spotsLeft > 0 &&
+    (founding.percentOff > 0 || founding.amountOff > 0)
+  );
   const monthlyBaseCents = 900;
   const annualBaseCents = 7900;
   const monthlyFinalCents = applyFoundingDiscount(monthlyBaseCents, founding);

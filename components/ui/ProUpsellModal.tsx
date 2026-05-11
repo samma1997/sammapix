@@ -94,9 +94,15 @@ export default function ProUpsellModal({
   const [loading, setLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
 
-  // Founding deal — show $5 price + spots-left urgency in CTA
+  // Founding deal — show $5 price + spots-left urgency in CTA.
+  // Gated on real discount so stale cached responses don't show "lock $9".
   const founding = useFoundingStatus();
-  const isFounding = !!(founding && founding.active && founding.spotsLeft > 0);
+  const isFounding = !!(
+    founding &&
+    founding.active &&
+    founding.spotsLeft > 0 &&
+    (founding.percentOff > 0 || founding.amountOff > 0)
+  );
   const monthlyFinalCents = applyFoundingDiscount(900, founding);
   const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
 

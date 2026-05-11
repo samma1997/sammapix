@@ -138,9 +138,15 @@ export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
   const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
 
-  // Founding deal — render discounted price when coupon is still available
+  // Founding deal — render discounted price when coupon is still available.
+  // Gated on real discount to avoid stale-cache fallback showing "lock $9".
   const founding = useFoundingStatus();
-  const isFounding = !!(founding && founding.active && founding.spotsLeft > 0);
+  const isFounding = !!(
+    founding &&
+    founding.active &&
+    founding.spotsLeft > 0 &&
+    (founding.percentOff > 0 || founding.amountOff > 0)
+  );
   const monthlyFinalCents = applyFoundingDiscount(900, founding);
   const annualFinalCents = applyFoundingDiscount(7900, founding);
   const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
