@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import ImageToTextClient from "@/components/tools/ImageToTextClient";
+import ImageToTextHeroDemo from "@/components/tools/ImageToTextHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
@@ -104,79 +105,64 @@ export default function ImageToTextPage() {
     <main>
       <MetaViewContent contentName="Image to Text" contentId="image-to-text" />
 
-      {/* ============================================================ */}
-      {/*  HERO                                                        */}
-      {/* ============================================================ */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
-        {/* Back link */}
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-5"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
         >
           <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           All tools
         </Link>
 
-        {/* Icon + H1 */}
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{
-              backgroundColor: "#6366F115",
-              border: "1px solid #6366F130",
-            }}
-            aria-hidden="true"
-          >
-            <FileText
-              className="h-[18px] w-[18px]"
-              style={{ color: "#6366F1" }}
-              strokeWidth={1.5}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+                aria-hidden="true"
+              >
+                <FileText className="h-4 w-4" style={{ color: "#6366F1" }} strokeWidth={1.5} />
+              </div>
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                  Image to Text. AI OCR, 50+ langs
+                </h1>
+                <span className="inline-flex items-center text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-100 text-violet-700 dark:bg-violet-950/30 dark:text-violet-400 uppercase tracking-wide">
+                  AI
+                </span>
+              </div>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Extract editable text from any image —{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">photo, screenshot, receipt, business card, scanned doc</strong>. AI-powered OCR with 50+ languages support (Italian, English, French, German, Japanese, Chinese...). Copy or download .txt instantly.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                50+ languages
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                AI accuracy
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Receipts · docs · cards
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Copy or .txt
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
-            Image to Text Converter
-          </h1>
-          <span className="inline-flex items-center text-[10px] font-medium px-2 py-0.5 rounded border bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-950/30 dark:text-violet-400 dark:border-violet-900 uppercase tracking-wide">
-            AI
-          </span>
-        </div>
 
-        {/* Subtext */}
-        <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3 max-w-xl">
-          Extract text from any image using AI-powered OCR. Upload a photo,
-          screenshot, or scanned document and get editable text in seconds.
-        </p>
-
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            Free to use
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            AI-powered accuracy
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            50+ languages
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <CheckCircle2
-              className="h-3.5 w-3.5 text-[#16A34A]"
-              strokeWidth={2}
-            />
-            Instant results
-          </span>
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <ImageToTextHeroDemo />
+          </div>
         </div>
       </section>
 
