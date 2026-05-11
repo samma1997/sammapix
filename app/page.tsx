@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/layout/HeroSection";
+import { TOOL_COUNT } from "@/lib/constants";
 
 const HomepageToolGrid = dynamic(
   () => import("@/components/home/HomepageToolGrid").then((mod) => ({ default: mod.HomepageToolGrid })),
@@ -43,7 +44,7 @@ export const metadata = {
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:
-      "Compress, rename with AI, resize, convert -- all in one pipeline. 35 free tools. No uploads.",
+      `Compress, rename with AI, resize, convert -- all in one pipeline. ${TOOL_COUNT} free tools. No uploads.`,
     url: "https://www.sammapix.com",
     type: "website",
     images: [
@@ -73,7 +74,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is SammaPix really free?",
     answer:
-      "Yes. All 35 tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.",
+      `Yes. All ${TOOL_COUNT} tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.`,
   },
   {
     question: "What image formats are supported?",
@@ -98,7 +99,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What's the difference between Free and Pro?",
     answer:
-      "Free tier includes all 35 tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.",
+      `Free tier includes all ${TOOL_COUNT} tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.`,
   },
   {
     question: "How does image compression work without losing quality?",

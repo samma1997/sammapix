@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { APP_URL } from "@/lib/constants";
+import { APP_URL, TOOL_COUNT } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
@@ -521,7 +521,7 @@ export default function FaviconBestPractices2026Page() {
           </table>
         </div>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Full set of 35 tools on the <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">SammaPix homepage</Link>.
+          Full set of {TOOL_COUNT} tools on the <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">SammaPix homepage</Link>.
         </p>
 
         {/* ── FAQ ────────────────────────────────────────────────────────── */}

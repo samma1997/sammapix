@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, X, ExternalLink } from "lucide-react";
-import { APP_URL } from "@/lib/constants";
+import { APP_URL, TOOL_COUNT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "SammaPix vs Competitors: Honest Free Image Tool Comparisons",
@@ -77,7 +77,7 @@ const competitors = [
     name: "Optimizilla",
     tagline: "Online image compressor",
     highlight:
-      "SammaPix supports 35 tools - Optimizilla only compresses",
+      `SammaPix supports ${TOOL_COUNT} tools - Optimizilla only compresses`,
     category: "Compression",
   },
   {
@@ -388,13 +388,13 @@ export default function VsHubPage() {
           Ready to try the alternative?
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">
-          35 free tools. No signup for core features. 100% browser-based.
+          {TOOL_COUNT} free tools. No signup for core features. 100% browser-based.
           Your images never leave your device.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/tools">
             <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
-              Explore all 35 tools
+              Explore all {TOOL_COUNT} tools
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
           </Link>

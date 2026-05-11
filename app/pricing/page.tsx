@@ -36,6 +36,7 @@ import CheckoutButton from "@/components/ui/CheckoutButton";
 import MetaAddToWishlist from "@/components/tracking/MetaAddToWishlist";
 import dynamic from "next/dynamic";
 import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
+import { TOOL_COUNT } from "@/lib/constants";
 
 const FoundingSpotsCounter = dynamic(() => import("@/components/ui/FoundingSpotsCounter"), { ssr: false });
 import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
@@ -227,7 +228,7 @@ export default function PricingPage() {
 
             <ul className="space-y-2.5 mb-8 flex-1">
               {[
-                { icon: Sparkles, text: "All 35 tools included" },
+                { icon: Sparkles, text: `All ${TOOL_COUNT} tools included` },
                 { icon: FileStack, text: "20 files per batch" },
                 { icon: Zap, text: "10 AI renames / day" },
                 { icon: Zap, text: "10 AI alt text / day" },

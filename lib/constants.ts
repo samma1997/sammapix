@@ -40,6 +40,52 @@ export const ACCEPTED_MIME_TYPES: Record<string, string[]> = {
 
 export const ACCEPTED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".heic", ".heif"];
 
+// ── Tool catalog ─────────────────────────────────────────────────────────────
+// Single source of truth for "how many tools we have". When you add a new
+// tool, append its slug here and TOOL_COUNT updates automatically across the
+// whole site (homepage, blog posts, schema, metadata, OG, etc.).
+//
+// Must match the folder name under `app/tools/<slug>/page.tsx`.
+export const TOOL_SLUGS = [
+  "ai-organize",
+  "ai-rename",
+  "alt-text",
+  "batchname",
+  "blogdrop",
+  "color-picker",
+  "compress",
+  "croproatio",
+  "cull",
+  "exif",
+  "filmlab",
+  "geosort",
+  "gif-to-mp4",
+  "heic",
+  "ico-generator",
+  "image-to-text",
+  "jpg-to-pdf",
+  "jxl",
+  "passport-photo",
+  "pdf-merge",
+  "pdf-to-image",
+  "png-to-jpg",
+  "remove-bg",
+  "resizepack",
+  "smartsort",
+  "stampit",
+  "svg-to-png",
+  "transcribe",
+  "travelmap",
+  "twinhunt",
+  "upscale",
+  "weblift",
+  "webp",
+  "webp-to-jpg",
+  "webp-to-png",
+] as const;
+
+export const TOOL_COUNT = TOOL_SLUGS.length;
+
 // Plan limits
 export const PLAN_LIMITS: Record<string, PlanLimits> = {
   free: {

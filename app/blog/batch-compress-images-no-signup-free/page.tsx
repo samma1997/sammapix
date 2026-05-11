@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { APP_URL } from "@/lib/constants";
+import { APP_URL, TOOL_COUNT } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
@@ -354,7 +354,7 @@ export default function BatchCompressImagesNoSignupFreePage() {
                 <td className="p-3 border border-gray-200 dark:border-[#2A2A2A] text-gray-600 dark:text-[#D4D4D4]">None (compression only)</td>
                 <td className="p-3 border border-gray-200 dark:border-[#2A2A2A] text-gray-600 dark:text-[#D4D4D4]">Resize only</td>
                 <td className="p-3 border border-gray-200 dark:border-[#2A2A2A] text-gray-600 dark:text-[#D4D4D4]">Resize, crop, convert</td>
-                <td className="p-3 border border-gray-200 dark:border-[#2A2A2A] text-gray-600 dark:text-[#D4D4D4]">35 tools (AI rename, filters, HEIC, EXIF, resize, crop...)</td>
+                <td className="p-3 border border-gray-200 dark:border-[#2A2A2A] text-gray-600 dark:text-[#D4D4D4]">{TOOL_COUNT} tools (AI rename, filters, HEIC, EXIF, resize, crop...)</td>
               </tr>
             </tbody>
           </table>

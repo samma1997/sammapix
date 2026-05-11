@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { APP_URL } from "@/lib/constants";
+import { APP_URL, TOOL_COUNT } from "@/lib/constants";
 import { getAllTrips } from "@/lib/destinations";
 
 export const metadata: Metadata = {
@@ -233,7 +233,7 @@ export default function AboutPage() {
               photographers probably did too.
             </p>
             <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Today, SammaPix has 35 free tools used by photographers, bloggers, and developers in 40+ countries.
+              Today, SammaPix has {TOOL_COUNT} free tools used by photographers, bloggers, and developers in 40+ countries.
               Everything still runs in the browser. Your photos never leave your device. That was the promise from
               day one, and it hasn&apos;t changed.
             </p>
@@ -261,7 +261,7 @@ export default function AboutPage() {
                 {
                   title: "Build Digital Products",
                   description:
-                    "I design and develop SaaS tools, websites, and platforms. SammaPix is my latest product — 30 browser-based image tools used in 40+ countries.",
+                    `I design and develop SaaS tools, websites, and platforms. SammaPix is my latest product — ${TOOL_COUNT} browser-based image tools used in 40+ countries.`,
                 },
                 {
                   title: "Travel Photography",

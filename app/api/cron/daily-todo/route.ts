@@ -6,6 +6,7 @@ import { eq, and, lt, isNotNull, ne, desc, asc, sql as sqlFn } from "drizzle-orm
 import { POSTS, type Post } from "@/lib/blog-posts";
 import { getUnpromotedBlogs } from "@/lib/growth/blog-promoter";
 import { TARGET_KEYWORDS, matchKeywordTarget, type KeywordTarget } from "@/lib/growth/keyword-targets";
+import { TOOL_COUNT } from "@/lib/constants";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -237,7 +238,7 @@ JSON only:
           title: `✋ ${dir.directoryName}`,
           description: dirAction + "\n\nQuando fatto, segna come completato — non apparirà più domani.",
           actionUrl: dir.directoryUrl || undefined,
-          draftText: `Nome: SammaPix\nURL: https://www.sammapix.com\nDescrizione: Free, open-source image toolkit. 35 browser-based tools: compress, convert, resize, AI rename, EXIF removal, background removal. 100% client-side — images never uploaded.\nGitHub: https://github.com/samma1997/sammapix`,
+          draftText: `Nome: SammaPix\nURL: https://www.sammapix.com\nDescrizione: Free, open-source image toolkit. ${TOOL_COUNT} browser-based tools: compress, convert, resize, AI rename, EXIF removal, background removal. 100% client-side — images never uploaded.\nGitHub: https://github.com/samma1997/sammapix`,
         });
 
         if (nextDirs.length > 1) {
@@ -249,7 +250,7 @@ JSON only:
             title: `✋ ${dir2.directoryName}`,
             description: dir2Action,
             actionUrl: dir2.directoryUrl || undefined,
-            draftText: `Nome: SammaPix\nURL: https://www.sammapix.com\nDescrizione: Free, open-source image toolkit. 35 browser-based tools: compress, convert, resize, AI rename, EXIF removal, background removal. 100% client-side — images never uploaded.\nGitHub: https://github.com/samma1997/sammapix`,
+            draftText: `Nome: SammaPix\nURL: https://www.sammapix.com\nDescrizione: Free, open-source image toolkit. ${TOOL_COUNT} browser-based tools: compress, convert, resize, AI rename, EXIF removal, background removal. 100% client-side — images never uploaded.\nGitHub: https://github.com/samma1997/sammapix`,
           });
         }
       }
@@ -293,7 +294,7 @@ Hi ${target.contactName || "there"},
 
 I came across your article "${target.articleTitle}" and wanted to suggest adding SammaPix (sammapix.com) to your list.
 
-It's a free, open-source image toolkit with 35 browser-based tools — compression, WebP conversion, AI rename, EXIF removal, and more. The key difference: everything runs 100% in the browser, so images never get uploaded to any server.${latestUrl ? `
+It's a free, open-source image toolkit with ${TOOL_COUNT} browser-based tools — compression, WebP conversion, AI rename, EXIF removal, and more. The key difference: everything runs 100% in the browser, so images never get uploaded to any server.${latestUrl ? `
 
 I just published a related guide: ${latestUrl}` : ""}
 
