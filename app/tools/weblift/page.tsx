@@ -1,11 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import ComboClient from "@/components/tools/ComboClient";
-import ToolHeader from "@/components/tools/ToolHeader";
+import WebliftHeroDemo from "@/components/tools/WebliftHeroDemo";
 import HowToUse from "@/components/tools/HowToUse";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { APP_URL } from "@/lib/constants";
-import { Globe } from "lucide-react";
+import { ArrowLeft, Globe, CheckCircle2 } from "lucide-react";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
@@ -70,12 +71,63 @@ export default function WebLiftPage() {
   return (
     <main>
       <MetaViewContent contentName="WebLift" contentId="weblift" />
-      <ToolHeader
-        title="Web Optimize"
-        description="Compress, convert to WebP, and AI-rename in one click."
-        icon={Globe}
-        accentColor="#3B82F6"
-      />
+
+      {/* Hero — Split layout */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-2"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
+          All tools
+        </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-8 items-center">
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#3B82F615", border: "1px solid #3B82F630" }}
+                aria-hidden="true"
+              >
+                <Globe className="h-4 w-4" style={{ color: "#3B82F6" }} strokeWidth={1.5} />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                WebLift. Web-Optimize in 1 Click
+              </h1>
+            </div>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Combo tool for web developers and content creators:{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">compress + convert to WebP + AI-rename</strong>{" "}
+              in a single workflow. SEO-friendly filenames (no more <code className="text-[12px] bg-[#F5F5F5] dark:bg-[#1E1E1E] px-1 rounded">IMG_4012.jpg</code>), bulk batch processing.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                3 steps · 1 click
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Bulk batch
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                WebP output
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                AI SEO filenames
+              </span>
+            </div>
+          </div>
+
+          <div className="max-w-[380px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <WebliftHeroDemo />
+          </div>
+        </div>
+      </section>
 
       <ComboClient
         toolName="WebLift"
