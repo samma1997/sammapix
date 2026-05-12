@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)",
+    "Best Free Topaz Gigapixel Alternative 2026 — 7 Apps Tested",
   description:
-    "Tired of Topaz's $199/year subscription? We tested 7 free upscalers on the same 50 photos: max scale (4x/8x), portrait quality, speed, browser vs install. The winner that beat Gigapixel on faces.",
+    "We tested 7 free Gigapixel alternatives on 50 real photos. One beats Topaz on faces, free + browser-only. Full quality vs speed benchmark inside.",
   alternates: {
     canonical: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     "real esrgan alternative",
   ],
   openGraph: {
-    title: "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)",
+    title: "Best Free Topaz Gigapixel Alternative 2026 — 7 Apps Tested",
     description:
-      "Topaz wants $199/year. We tested 7 free upscalers on 50 real photos — see who wins on portraits, max scale, and speed.",
+      "We tested 7 free Gigapixel alternatives on 50 real photos. One beats Topaz on faces — free + browser-only. Full benchmark inside.",
     url: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
     type: "article",
     publishedTime: "2026-04-10",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)",
+    title: "Best Free Topaz Gigapixel Alternative 2026 — 7 Apps Tested",
     description:
-      "Topaz Gigapixel costs $199/yr. 7 free alternatives tested on 50 real photos — quality, scale, speed compared.",
+      "7 free Gigapixel alternatives tested on 50 real photos. One beats Topaz on faces. Full benchmark.",
     creator: "@lucasammarco",
   },
 };
@@ -42,14 +42,14 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-10";
 const POST_DATE_FORMATTED = "April 10, 2026";
 const POST_URL = `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`;
-const POST_TITLE = "Topaz Gigapixel Pricing 2026 vs 7 Free Alternatives (Tested)";
+const POST_TITLE = "Best Free Topaz Gigapixel Alternative 2026 — 7 Apps Tested";
 
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: POST_TITLE,
   description:
-    "Tired of Topaz's $199/year subscription? We tested 7 free upscalers on the same 50 photos: max scale (4x/8x), portrait quality, speed, browser vs install. The winner that beat Gigapixel on faces.",
+    "We tested 7 free Topaz Gigapixel alternatives on 50 real photos. One beats Topaz on faces, free + browser-only. Full quality, max scale, and speed benchmark inside.",
   url: POST_URL,
   datePublished: POST_DATE,
   dateModified: "2026-05-04",
