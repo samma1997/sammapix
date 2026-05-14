@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { db, withDbRetry } from "@/lib/db";
 import { growthStrategyReviews } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
 
@@ -11,17 +11,19 @@ export const dynamic = "force-dynamic";
 // Pattern preso da lucasammarco.com /api/weekly-report-latest.
 export async function GET() {
   try {
-    const [latest] = await db
-      .select({
-        reviewDate: growthStrategyReviews.reviewDate,
-        periodStart: growthStrategyReviews.periodStart,
-        periodEnd: growthStrategyReviews.periodEnd,
-        analysisText: growthStrategyReviews.analysisText,
-        suggestions: growthStrategyReviews.suggestions,
-      })
-      .from(growthStrategyReviews)
-      .orderBy(desc(growthStrategyReviews.reviewDate))
-      .limit(1);
+    const [latest] = await withDbRetry(() =>
+      db
+        .select({
+          reviewDate: growthStrategyReviews.reviewDate,
+          periodStart: growthStrategyReviews.periodStart,
+          periodEnd: growthStrategyReviews.periodEnd,
+          analysisText: growthStrategyReviews.analysisText,
+          suggestions: growthStrategyReviews.suggestions,
+        })
+        .from(growthStrategyReviews)
+        .orderBy(desc(growthStrategyReviews.reviewDate))
+        .limit(1)
+    );
 
     if (!latest) {
       return NextResponse.json({ exists: false });

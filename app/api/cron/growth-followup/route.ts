@@ -23,7 +23,7 @@ async function generateFollowUpEmail(
   if (!apiKey) throw new Error("GEMINI_API_KEY not configured");
 
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const greeting = contactName ? `Hey ${contactName.split(" ")[0]},` : "Hey,";
   const articleRef = articleTitle
