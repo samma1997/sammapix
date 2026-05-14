@@ -5,7 +5,10 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 const SITE_URL = "https://www.sammapix.com";
-const ALERT_EMAIL = process.env.HEALTH_ALERT_EMAIL || "marketing@alfiobardolla.com";
+// Destinatario alert: imposta env HEALTH_ALERT_EMAIL in Vercel. Fallback
+// usa la stessa mailbox del FROM SammaPix per non disperdere alert su email
+// esterne se l'env non è settata.
+const ALERT_EMAIL = process.env.HEALTH_ALERT_EMAIL || "luca@sammapix.com";
 
 const CRITICAL_PAGES = ["/", "/tools", "/tools/exif", "/tools/remove-bg", "/pricing", "/blog", "/dashboard"];
 const CRITICAL_API = ["/api/auth/session", "/api/strategy-review-latest"];
