@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)",
+  title: "Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix",
   description:
-    "A complete guide to optimizing images for Core Web Vitals. Learn how images affect LCP, CLS, and INP scores, with real benchmarks and a practical optimization workflow.",
+    "Images are the LCP element in 72% of mobile pages. Step-by-step workflow to fix LCP, CLS, INP using WebP, AVIF, and lazy loading. Real benchmarks inside.",
   alternates: {
     canonical: `${APP_URL}/blog/optimize-images-core-web-vitals-2026`,
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "pagespeed image optimization",
   ],
   openGraph: {
-    title: "How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)",
+    title: "Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix",
     description:
       "Images are the LCP element in 72% of mobile pages. Learn exactly how to optimize them for Core Web Vitals with real benchmarks and a step-by-step workflow.",
     url: `${APP_URL}/blog/optimize-images-core-web-vitals-2026`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)",
+    title: "Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix",
     description:
       "Images are the LCP element in 72% of mobile pages. Optimize them for LCP, CLS and INP with this complete guide.",
     creator: "@lucasammarco",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)",
+  headline: "Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix",
   description:
     "A complete guide to optimizing images for Core Web Vitals with real benchmarks, format comparisons, and a step-by-step workflow.",
   url: `${APP_URL}/blog/optimize-images-core-web-vitals-2026`,
@@ -133,7 +133,7 @@ export default function OptimizeImagesCoreWebVitals2026Page() {
   return (
     <>
       <BlogArticleLayout
-        title="How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)"
+        title="Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix"
         slug="optimize-images-core-web-vitals-2026"
         description="Images are the Largest Contentful Paint element on 72% of mobile pages, making image optimization the single most impactful thing you can do for Core Web Vitals. This guide covers how images affect each CWV metric with real data, includes compression benchmarks showing exactly what happens to LCP at different optimization levels, and provides a complete workflow from resize to lazy load."
         date="2026-04-05"
