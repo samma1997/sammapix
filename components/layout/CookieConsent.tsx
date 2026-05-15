@@ -11,6 +11,10 @@ const ADSENSE_PUB_ID = (process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim();
 const CLARITY_PROJECT_ID = (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? "").trim();
 // Cloudflare Google tag gateway: serve gtag.js + collect from first-party path
 // (bypass ad-blockers). When set, gtag loads via /<path>/gtag/js + transport_url.
+// ⚠️ DISABILITATO il 15 maggio 2026 — il Worker Cloudflare /sxpulse rispondeva
+// 204 ma NON inoltrava a GA4. Risultato: 11-15 mag GA4 PV=0 per giorni.
+// Env var rimossa da Vercel production. Riattivare SOLO dopo aver verificato
+// che il Worker realmente proxa a google-analytics.com/g/collect.
 const TAG_GATEWAY_PATH = (process.env.NEXT_PUBLIC_TAG_GATEWAY_PATH ?? "").trim();
 
 /**
