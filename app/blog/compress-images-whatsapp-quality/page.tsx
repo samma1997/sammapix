@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "WhatsApp Image Compression Quality 2026: 3-Step Fix Before Sending",
+  title: "Does WhatsApp Compress Images? Yes — 3-Step Fix (2026)",
   description:
-    "WhatsApp image compression quality 2026: WhatsApp slashes photos by 80% — even on iOS, even at the 1600px resolution limit. The 3-step pre-upload fix (size, format, color profile) that survives compression. Tested on iPhone, Android, Web.",
+    "Yes — WhatsApp compresses photos by ~80% even at the 1600px limit. The 3-step pre-upload fix (size, format, color profile) that survives compression on iPhone, Android, Web.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     "whatsapp image resolution",
   ],
   openGraph: {
-    title: "WhatsApp Image Compression Quality 2026: 3-Step Fix Before Sending",
+    title: "Does WhatsApp Compress Images? Yes — 3-Step Fix (2026)",
     description:
-      "WhatsApp slashes 80% of photo quality. The 3-step pre-upload fix that survives its compression on iPhone, Android, Web.",
+      "Yes, WhatsApp compresses photos by ~80%. The 3-step pre-upload fix that survives compression on iPhone, Android, Web.",
     url: `${APP_URL}/blog/compress-images-whatsapp-quality`,
     type: "article",
     publishedTime: "2026-04-05",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "WhatsApp Image Compression Quality 2026: 3-Step Fix Before Sending",
+    title: "Does WhatsApp Compress Images? Yes — 3-Step Fix (2026)",
     description:
-      "WhatsApp ruins photos by 80%. The 3-step fix that survives compression on iPhone, Android, Web.",
+      "Yes, WhatsApp compresses photos by ~80%. The 3-step fix that survives it on iPhone, Android, Web.",
     creator: "@lucasammarco",
   },
 };
