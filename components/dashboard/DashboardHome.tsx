@@ -18,6 +18,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import type { Persona } from "@/types/persona";
 import DashboardReferralCard from "@/components/referral/DashboardReferralCard";
+import FoundingBanner from "@/components/dashboard/FoundingBanner";
 import {
   ToolCard,
   IconCompress,
@@ -878,6 +879,9 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 md:py-8 pb-16 space-y-4 md:space-y-8">
+
+      {/* Founding deal banner — only renders for free users while the coupon is active. */}
+      <FoundingBanner isPro={isPro} />
 
       {/* -- Welcome + Plan status -- */}
       <section>

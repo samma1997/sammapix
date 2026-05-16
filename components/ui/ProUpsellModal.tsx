@@ -11,7 +11,7 @@ import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip" | "upscale_daily";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -19,6 +19,8 @@ interface ProUpsellModalProps {
   trigger: UpsellTrigger;
   filesDropped?: number;
   freeLimit?: number;
+  /** When trigger === "power_user", number of distinct tools the user has explored. */
+  toolsExplored?: number;
 }
 
 // ── Copy per trigger ──────────────────────────────────────────────────────────
@@ -39,6 +41,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "ZIP download is a Pro feature";
     case "upscale_daily":
       return "Daily upscale limit reached";
+    case "power_user":
+      return "You're getting a lot out of SammaPix";
     default:
       return "You're processing like a pro";
   }
@@ -47,7 +51,8 @@ function getHeadline(trigger: UpsellTrigger): string {
 function getSubtext(
   trigger: UpsellTrigger,
   filesDropped?: number,
-  freeLimit?: number
+  freeLimit?: number,
+  toolsExplored?: number
 ): string {
   switch (trigger) {
     case "ai_rename":
@@ -64,6 +69,8 @@ function getSubtext(
       return "ZIP batch download is a Pro feature. One click, all files in a single archive.";
     case "upscale_daily":
       return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
+    case "power_user":
+      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 35 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
     default: {
       if (filesDropped && freeLimit) {
         return `You dropped ${filesDropped} photos — free plan processes the first ${freeLimit}. Pro handles 500 at once.`;
@@ -89,6 +96,7 @@ export default function ProUpsellModal({
   trigger,
   filesDropped,
   freeLimit,
+  toolsExplored,
 }: ProUpsellModalProps) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -214,7 +222,7 @@ export default function ProUpsellModal({
             id="upsell-description"
             className="text-center text-sm text-[#737373] dark:text-[#A3A3A3] mb-5 leading-relaxed"
           >
-            {getSubtext(trigger, filesDropped, freeLimit)}
+            {getSubtext(trigger, filesDropped, freeLimit, toolsExplored)}
           </p>
 
           {/* Features */}

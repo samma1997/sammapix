@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/layout/CookieConsent";
 import AntiCopy from "@/components/layout/AntiCopy";
 import CrossToolToast from "@/components/tools/CrossToolToast";
+import PowerUserUpgradeTrigger from "@/components/tools/PowerUserUpgradeTrigger";
 import { headers } from "next/headers";
 
 const inter = Inter({
@@ -149,6 +150,7 @@ export default async function RootLayout({
           <CookieConsent />
           <AntiCopy />
           <CrossToolToast />
+          <PowerUserUpgradeTrigger />
         </Providers>
         <Analytics />
         <script
