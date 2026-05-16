@@ -16,7 +16,8 @@ const COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const SHOW_DELAY_MS = 1200; // let the actual download start visibly first
 
 function extractToolId(pathname: string): string | null {
-  const match = pathname.match(/^\/tools\/([^/]+)/);
+  // Match both public (/tools/X) and authenticated (/dashboard/tools/X) routes.
+  const match = pathname.match(/^\/(?:dashboard\/)?tools\/([^/]+)/);
   return match?.[1] ?? null;
 }
 
