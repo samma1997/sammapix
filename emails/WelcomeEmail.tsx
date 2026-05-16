@@ -86,15 +86,71 @@ const footer = {
 };
 const hr = { borderColor: "#e5e5e5", margin: "28px 0" };
 
-interface WelcomeEmailProps {
-  name: string;
+interface FoundingProps {
+  active: boolean;
+  spotsLeft: number;
+  totalSpots: number;
+  percentOff: number;
+  monthlyPriceUsd: number;
 }
 
-export function WelcomeEmail({ name }: WelcomeEmailProps) {
+interface WelcomeEmailProps {
+  name: string;
+  founding?: FoundingProps;
+}
+
+const foundingCard = {
+  backgroundColor: "#FFF7ED",
+  border: "1px solid #FED7AA",
+  borderRadius: "8px",
+  padding: "16px 18px",
+  margin: "20px 0",
+};
+const foundingBadge = {
+  display: "inline-block",
+  backgroundColor: "#F97316",
+  color: "#ffffff",
+  fontSize: "11px",
+  fontWeight: "700" as const,
+  padding: "3px 8px",
+  borderRadius: "999px",
+  letterSpacing: "0.04em",
+  textTransform: "uppercase" as const,
+  margin: "0 0 8px",
+};
+const foundingHeading = {
+  fontSize: "16px",
+  fontWeight: "600" as const,
+  color: "#7C2D12",
+  margin: "0 0 6px",
+};
+const foundingBody = {
+  fontSize: "14px",
+  lineHeight: "1.55",
+  color: "#7C2D12",
+  margin: "0 0 12px",
+};
+const foundingButton = {
+  backgroundColor: "#F97316",
+  color: "#ffffff",
+  padding: "10px 18px",
+  borderRadius: "6px",
+  fontSize: "13px",
+  fontWeight: "600" as const,
+  textDecoration: "none",
+  display: "inline-block",
+};
+
+export function WelcomeEmail({ name, founding }: WelcomeEmailProps) {
+  const showFounding = founding?.active && founding.spotsLeft > 0;
+  const previewText = showFounding
+    ? `5 free AI renames + ${founding!.spotsLeft} Founding spots left at $${founding!.monthlyPriceUsd}/mo`
+    : "You have 5 free AI renames waiting for you";
+
   return (
     <Html lang="en">
       <Head />
-      <Preview>You have 5 free AI renames waiting for you</Preview>
+      <Preview>{previewText}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={logo}>
@@ -148,6 +204,31 @@ export function WelcomeEmail({ name }: WelcomeEmailProps) {
           <Text style={subtle}>
             No setup needed. Your files never leave your browser.
           </Text>
+
+          {showFounding ? (
+            <Section style={foundingCard}>
+              <Text style={foundingBadge}>
+                Founding offer · {founding!.spotsLeft} spots left
+              </Text>
+              <Heading style={foundingHeading}>
+                Lock $
+                {founding!.monthlyPriceUsd}
+                /month forever ({founding!.percentOff}% off)
+              </Heading>
+              <Text style={foundingBody}>
+                The first {founding!.totalSpots} users get all 35 tools for $
+                {founding!.monthlyPriceUsd}/mo — for life. No price increases,
+                even when we add new tools. Once the spots are gone, it goes
+                back to $9/mo.
+              </Text>
+              <Button
+                style={foundingButton}
+                href={`${BASE_URL}/dashboard/upgrade`}
+              >
+                Claim my Founding spot →
+              </Button>
+            </Section>
+          ) : null}
 
           <Hr style={hr} />
 

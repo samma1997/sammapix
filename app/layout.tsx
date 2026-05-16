@@ -7,6 +7,7 @@ import { APP_NAME, APP_URL } from "@/lib/constants";
 import { Analytics } from "@vercel/analytics/next";
 import CookieConsent from "@/components/layout/CookieConsent";
 import AntiCopy from "@/components/layout/AntiCopy";
+import CrossToolToast from "@/components/tools/CrossToolToast";
 import { headers } from "next/headers";
 
 const inter = Inter({
@@ -147,6 +148,7 @@ export default async function RootLayout({
           {/* Tracking scripts are loaded by CookieConsent after user consent */}
           <CookieConsent />
           <AntiCopy />
+          <CrossToolToast />
         </Providers>
         <Analytics />
         <script

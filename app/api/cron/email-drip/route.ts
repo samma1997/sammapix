@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { resend } from "@/lib/resend";
 import {
   sendDay2Email,
+  sendDay3Email,
   sendDay4Email,
   sendDay7Email,
   sendDay14Email,
@@ -11,14 +12,10 @@ import {
   sendDay49Email,
   sendDay63Email,
   sendDay77Email,
-  // Re-engagement emails (sendReEngageDay14Email, sendReEngageDay30Email) are
-  // available in email-service.ts but NOT wired into this cron job.
-  // They require tracking `last_active` date per user (not signup date).
-  // Future enhancement: add a separate cron that queries users where
-  // NOW() - last_active >= 14 days (or 30 days) and sends the appropriate
-  // re-engagement email. This requires a `last_active` column in the users
-  // table, updated on each login/tool usage.
+  sendReEngageDay14Email,
+  sendReEngageDay30Email,
 } from "@/lib/email-service";
+import { getUserPlan } from "@/lib/user-plan";
 
 export const runtime = "nodejs";
 
@@ -61,6 +58,14 @@ export async function GET(request: NextRequest) {
         if (daysSince === 2) {
           await sendDay2Email(contact.email, name);
           sent++;
+        } else if (daysSince === 3) {
+          // First explicit upsell. Only send to free users — paid users have
+          // already converted, no need to push them again.
+          const plan = await getUserPlan(contact.email).catch(() => "free");
+          if (plan === "free") {
+            await sendDay3Email(contact.email, name);
+            sent++;
+          }
         } else if (daysSince === 4) {
           await sendDay4Email(contact.email, name);
           sent++;
@@ -70,12 +75,30 @@ export async function GET(request: NextRequest) {
         } else if (daysSince === 14) {
           await sendDay14Email(contact.email, name);
           sent++;
+        } else if (daysSince === 17) {
+          // Re-engagement #1: 3 days after the Day 14 touchpoint. Only fires
+          // for users still on free — paid users skip this entire branch.
+          // Without a `last_active` column we use plan=free as the best proxy
+          // for "didn't convert yet" — better than no re-engagement at all.
+          const plan = await getUserPlan(contact.email).catch(() => "free");
+          if (plan === "free") {
+            await sendReEngageDay14Email(contact.email, name);
+            sent++;
+          }
         } else if (daysSince === 21) {
           await sendDay21Email(contact.email, name);
           sent++;
         } else if (daysSince === 30) {
           await sendDay30Email(contact.email, name);
           sent++;
+        } else if (daysSince === 33) {
+          // Re-engagement #2: 3 days after the Day 30 thank-you. Same plan=free
+          // gating — Pro users skip.
+          const plan = await getUserPlan(contact.email).catch(() => "free");
+          if (plan === "free") {
+            await sendReEngageDay30Email(contact.email, name);
+            sent++;
+          }
         } else if (daysSince === 35) {
           await sendDay35Email(contact.email, name);
           sent++;

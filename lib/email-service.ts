@@ -5,13 +5,56 @@ import type { WeeklyDigestContent } from "@/emails/WeeklyDigestEmail";
 
 const FROM = "SammaPix <hello@sammapix.com>";
 
+const MONTHLY_BASE_USD = 9;
+
+export interface FoundingEmailContext {
+  active: boolean;
+  spotsLeft: number;
+  totalSpots: number;
+  percentOff: number;
+  monthlyPriceUsd: number;
+}
+
+// Reads the Stripe Founding coupon at send-time so each email reflects current
+// inventory. Falls back to inactive on any error — emails MUST still ship.
+async function getFoundingStatusForEmail(): Promise<FoundingEmailContext> {
+  const inactive: FoundingEmailContext = {
+    active: false,
+    spotsLeft: 0,
+    totalSpots: 200,
+    percentOff: 0,
+    monthlyPriceUsd: MONTHLY_BASE_USD,
+  };
+  const couponId = process.env.STRIPE_FOUNDING_COUPON_ID;
+  if (!couponId) return inactive;
+  try {
+    const { stripe } = await import("@/lib/stripe");
+    const coupon = await stripe.coupons.retrieve(couponId);
+    const redeemed = coupon.times_redeemed ?? 0;
+    const max = coupon.max_redemptions ?? 200;
+    const spotsLeft = Math.max(0, max - redeemed);
+    const percentOff = coupon.percent_off ?? 0;
+    const active = !coupon.deleted && spotsLeft > 0 && percentOff > 0;
+    const monthlyPriceUsd = active
+      ? Math.round(MONTHLY_BASE_USD * (1 - percentOff / 100) * 100) / 100
+      : MONTHLY_BASE_USD;
+    return { active, spotsLeft, totalSpots: max, percentOff, monthlyPriceUsd };
+  } catch {
+    return inactive;
+  }
+}
+
 export async function sendWelcomeEmail(to: string, name: string | null) {
   const { WelcomeEmail } = await import("@/emails/WelcomeEmail");
-  const html = await render(WelcomeEmail({ name: name ?? "there" }));
+  const founding = await getFoundingStatusForEmail();
+  const html = await render(WelcomeEmail({ name: name ?? "there", founding }));
+  const subject = founding.active
+    ? `Your AI renames are ready — and ${founding.spotsLeft} Founding spots left at $${founding.monthlyPriceUsd}/mo`
+    : "Your AI rename credits are ready 🎨";
   await resend.emails.send({
     from: FROM,
     to,
-    subject: "Your AI rename credits are ready 🎨",
+    subject,
     html,
   });
 }
@@ -23,6 +66,24 @@ export async function sendDay2Email(to: string, name: string | null) {
     from: FROM,
     to,
     subject: "1 trick to make your images 30% lighter",
+    html,
+  });
+}
+
+// Day 3 — first explicit upsell with Founding deal. Moved here (was Day 21)
+// because waiting 3 weeks for the first paid mention killed conversion: most
+// signups went cold before ever seeing the Pro offer.
+export async function sendDay3Email(to: string, name: string | null) {
+  const { Day3Email } = await import("@/emails/Day3Email");
+  const founding = await getFoundingStatusForEmail();
+  const html = await render(Day3Email({ name: name ?? "there", founding }));
+  const subject = founding.active
+    ? `Lock $${founding.monthlyPriceUsd}/mo forever — ${founding.spotsLeft} Founding spots left`
+    : "Unlock all 35 tools for less than a coffee";
+  await resend.emails.send({
+    from: FROM,
+    to,
+    subject,
     html,
   });
 }
