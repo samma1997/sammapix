@@ -1,0 +1,227 @@
+[
+  {
+    "start": 0,
+    "end": 3.86,
+    "text": "Strip EXIF before sending — even on Signal"
+  },
+  {
+    "start": 3.86,
+    "end": 13.87,
+    "text": "The SammaPix EXIF Viewer shows every metadata tag in your photo and removes them"
+  },
+  {
+    "start": 13.87,
+    "end": 17.5,
+    "text": "TL;DR — does Signal strip EXIF?"
+  },
+  {
+    "start": 17.5,
+    "end": 47.78,
+    "text": "Yes for images, automatically — Signal is the only major messenger that does thi"
+  },
+  {
+    "start": 47.78,
+    "end": 49.82,
+    "text": "The short answer"
+  },
+  {
+    "start": 49.82,
+    "end": 84.43,
+    "text": "Signal is the messaging app that privacy-conscious users default to, and on the "
+  },
+  {
+    "start": 84.43,
+    "end": 123.82,
+    "text": "More importantly, Signal does not retain photo metadata on its servers. Most pla"
+  },
+  {
+    "start": 123.82,
+    "end": 126.19,
+    "text": "What the evidence shows"
+  },
+  {
+    "start": 126.19,
+    "end": 149.28,
+    "text": "Unlike Discord — where third-party reports converge but Signal has never formall"
+  },
+  {
+    "start": 149.28,
+    "end": 152.26,
+    "text": "The cross-reference of sources we mapped:"
+  },
+  {
+    "start": 152.26,
+    "end": 185.57,
+    "text": "The convergence is strong: image-mode uploads strip EXIF, file-mode uploads pres"
+  },
+  {
+    "start": 185.57,
+    "end": 188.95,
+    "text": "Signal vs WhatsApp vs Telegram"
+  },
+  {
+    "start": 188.95,
+    "end": 196.66,
+    "text": "The clearest way to see why Signal stands out is to put the three side-by-side o"
+  },
+  {
+    "start": 196.66,
+    "end": 229.03,
+    "text": "The two rows that matter most for metadata privacy: no server retention and open"
+  },
+  {
+    "start": 229.03,
+    "end": 231.79,
+    "text": "The file attachment escape hatch"
+  },
+  {
+    "start": 231.79,
+    "end": 253.1,
+    "text": "Signal's file attachment mode exists because users sometimes need to send a phot"
+  },
+  {
+    "start": 253.1,
+    "end": 276.12,
+    "text": "The problem is the same one we covered in our Discord analysis : users routinely"
+  },
+  {
+    "start": 276.12,
+    "end": 295.34,
+    "text": "The good news on Signal specifically is that the user interface clearly distingu"
+  },
+  {
+    "start": 295.34,
+    "end": 298.51,
+    "text": "The Android bug that adds new EXIF"
+  },
+  {
+    "start": 298.51,
+    "end": 327.53,
+    "text": "GitHub issue #12075 on Signal-Android (filed March 17, 2022) reports a surprisin"
+  },
+  {
+    "start": 327.53,
+    "end": 360.17,
+    "text": "The issue is marked closed but the specific tags Signal adds are not formally do"
+  },
+  {
+    "start": 360.17,
+    "end": 382.68,
+    "text": "For most users this is academic: any tags Signal adds during processing are like"
+  },
+  {
+    "start": 382.68,
+    "end": 385.56,
+    "text": "Why no server retention matters"
+  },
+  {
+    "start": 385.56,
+    "end": 399.6,
+    "text": "The single most important privacy property in the messaging-app space is not whe"
+  },
+  {
+    "start": 399.6,
+    "end": 428.45,
+    "text": "When you send a photo to Instagram, Facebook, or Discord, the platform receives "
+  },
+  {
+    "start": 428.45,
+    "end": 459.79,
+    "text": "Signal's architecture is fundamentally different. End-to-end encryption means Si"
+  },
+  {
+    "start": 459.79,
+    "end": 462.48,
+    "text": "Why you should still strip first"
+  },
+  {
+    "start": 462.48,
+    "end": 474.02,
+    "text": "Given everything above — Signal strips by default, never retains, is end-to-end "
+  },
+  {
+    "start": 474.02,
+    "end": 488.66,
+    "text": "The cost of stripping yourself is roughly thirty seconds per photo, and the bene"
+  },
+  {
+    "start": 488.66,
+    "end": 491.04,
+    "text": "The 30-second fix"
+  },
+  {
+    "start": 491.04,
+    "end": 516.62,
+    "text": "The same workflow works for every messaging app, including Signal. Open the Samm"
+  },
+  {
+    "start": 516.62,
+    "end": 533.93,
+    "text": "The whole tool runs client-side. Your photo never gets uploaded to a server — no"
+  },
+  {
+    "start": 533.93,
+    "end": 561.05,
+    "text": "For broader context on how every major messaging platform handles metadata, see "
+  },
+  {
+    "start": 561.05,
+    "end": 565.06,
+    "text": "Does Signal strip EXIF metadata from photos?"
+  },
+  {
+    "start": 565.06,
+    "end": 588.58,
+    "text": "Yes — Signal strips EXIF metadata from photos sent through the standard image fl"
+  },
+  {
+    "start": 588.58,
+    "end": 592.39,
+    "text": "Does Signal keep my photo metadata on its servers?"
+  },
+  {
+    "start": 592.39,
+    "end": 618.46,
+    "text": "No. Signal does not retain photo metadata on its servers — unlike Instagram, Fac"
+  },
+  {
+    "start": 618.46,
+    "end": 622.7,
+    "text": "Does Signal strip EXIF when I send a photo as a file?"
+  },
+  {
+    "start": 622.7,
+    "end": 648.43,
+    "text": "Probably not. The file attachment mode in Signal is the documented escape hatch "
+  },
+  {
+    "start": 648.43,
+    "end": 651.58,
+    "text": "Are there bugs in Signal's EXIF handling?"
+  },
+  {
+    "start": 651.58,
+    "end": 680.93,
+    "text": "Yes — at least one. GitHub issue #12075 on Signal-Android (filed March 2022) rep"
+  },
+  {
+    "start": 680.93,
+    "end": 685.2,
+    "text": "How is Signal different from WhatsApp and Telegram on metadata?"
+  },
+  {
+    "start": 685.2,
+    "end": 713.59,
+    "text": "Signal strips EXIF automatically by default and never stores it server-side. Wha"
+  },
+  {
+    "start": 713.59,
+    "end": 717.62,
+    "text": "Should I still strip EXIF before sending on Signal?"
+  },
+  {
+    "start": 717.62,
+    "end": 747.12,
+    "text": "Yes. Even though Signal is the gold standard for messaging privacy, there are th"
+  }
+]

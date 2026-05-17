@@ -1,0 +1,202 @@
+[
+  {
+    "start": 0,
+    "end": 3.55,
+    "text": "Strip EXIF before sending to Telegram"
+  },
+  {
+    "start": 3.55,
+    "end": 12.14,
+    "text": "The SammaPix EXIF Viewer shows every metadata tag and removes them with one clic"
+  },
+  {
+    "start": 12.14,
+    "end": 15.94,
+    "text": "TL;DR — does Telegram strip EXIF?"
+  },
+  {
+    "start": 15.94,
+    "end": 38.04,
+    "text": "Photo mode (default photo picker): Yes, EXIF stripped during compression. File m"
+  },
+  {
+    "start": 38.04,
+    "end": 40.08,
+    "text": "The short answer"
+  },
+  {
+    "start": 40.08,
+    "end": 65.74,
+    "text": "Telegram's EXIF behavior is the most context-dependent of any major messenger. W"
+  },
+  {
+    "start": 65.74,
+    "end": 93.5,
+    "text": "The mechanism is straightforward: when you send through the photo picker, Telegr"
+  },
+  {
+    "start": 93.5,
+    "end": 96.22,
+    "text": "Telegram's two upload modes"
+  },
+  {
+    "start": 96.22,
+    "end": 103.8,
+    "text": "To make the distinction concrete, here is what happens to the same source photo "
+  },
+  {
+    "start": 103.8,
+    "end": 124.82,
+    "text": "The pattern is binary and predictable: compression strips, lack of compression p"
+  },
+  {
+    "start": 124.82,
+    "end": 127.2,
+    "text": "What the evidence shows"
+  },
+  {
+    "start": 127.2,
+    "end": 141.12,
+    "text": "Unlike Discord (where third-party reports converge but Telegram has been silent)"
+  },
+  {
+    "start": 141.12,
+    "end": 169.34,
+    "text": "The convergence is unusually strong here — every source agrees, and Telegram's o"
+  },
+  {
+    "start": 169.34,
+    "end": 172.58,
+    "text": "Telegram's own bug tracker confirms it"
+  },
+  {
+    "start": 172.58,
+    "end": 191.83,
+    "text": "Telegram is unusual among messaging platforms in operating a public bug tracker "
+  },
+  {
+    "start": 191.83,
+    "end": 210.94,
+    "text": "The forensics community treats Telegram's file mode as a reliable way to preserv"
+  },
+  {
+    "start": 210.94,
+    "end": 213.84,
+    "text": "The cloud chat retention problem"
+  },
+  {
+    "start": 213.84,
+    "end": 234.29,
+    "text": "Even when Telegram strips EXIF from a compressed photo upload, there is a deeper"
+  },
+  {
+    "start": 234.29,
+    "end": 264.55,
+    "text": "For metadata privacy this matters because Telegram's servers hold the photos you"
+  },
+  {
+    "start": 264.55,
+    "end": 267.86,
+    "text": "Secret Chats — the privacy escape hatch"
+  },
+  {
+    "start": 267.86,
+    "end": 283.46,
+    "text": "Telegram does offer end-to-end encrypted conversations through the Secret Chats "
+  },
+  {
+    "start": 283.46,
+    "end": 309.98,
+    "text": "When you do use a Secret Chat, the EXIF behavior is the same as for regular chat"
+  },
+  {
+    "start": 309.98,
+    "end": 313.7,
+    "text": "The 5-second trap that most users fall into"
+  },
+  {
+    "start": 313.7,
+    "end": 325.1,
+    "text": "The single most common way Telegram users accidentally leak EXIF is by sharing p"
+  },
+  {
+    "start": 325.1,
+    "end": 353.76,
+    "text": "Both of these workflows are growing because Telegram users routinely want to pre"
+  },
+  {
+    "start": 353.76,
+    "end": 356.14,
+    "text": "The 30-second fix"
+  },
+  {
+    "start": 356.14,
+    "end": 376.87,
+    "text": "The cleanest way to remove the entire Telegram EXIF question is to strip metadat"
+  },
+  {
+    "start": 376.87,
+    "end": 402.91,
+    "text": "For context on how other messengers handle metadata, see our analysis of Signal "
+  },
+  {
+    "start": 402.91,
+    "end": 407.06,
+    "text": "Does Telegram strip EXIF metadata from photos?"
+  },
+  {
+    "start": 407.06,
+    "end": 433.75,
+    "text": "Only conditionally. Telegram strips EXIF when you send photos through the standa"
+  },
+  {
+    "start": 433.75,
+    "end": 437.9,
+    "text": "Does Telegram remove GPS coordinates from photos?"
+  },
+  {
+    "start": 437.9,
+    "end": 463.68,
+    "text": "For compressed image uploads, yes — GPS data is stripped along with the rest of "
+  },
+  {
+    "start": 463.68,
+    "end": 467.93,
+    "text": "What is the difference between Telegram photo mode and file mode?"
+  },
+  {
+    "start": 467.93,
+    "end": 495.55,
+    "text": "Photo mode (the default when you tap the camera icon or paperclip and select a p"
+  },
+  {
+    "start": 495.55,
+    "end": 499.51,
+    "text": "Does Telegram keep my photo metadata on its servers?"
+  },
+  {
+    "start": 499.51,
+    "end": 526.03,
+    "text": "Yes for cloud chats. Telegram stores your chat history on its servers (which is "
+  },
+  {
+    "start": 526.03,
+    "end": 531.12,
+    "text": "Can my Telegram contacts extract GPS coordinates from photos I send?"
+  },
+  {
+    "start": 531.12,
+    "end": 554.09,
+    "text": "If you sent the photo as a compressed image, no — the GPS data was stripped duri"
+  },
+  {
+    "start": 554.09,
+    "end": 558.84,
+    "text": "How can I check if a photo has EXIF before sending on Telegram?"
+  },
+  {
+    "start": 558.84,
+    "end": 586.44,
+    "text": "Use a browser-based EXIF viewer like the SammaPix EXIF Viewer . It shows every m"
+  }
+]

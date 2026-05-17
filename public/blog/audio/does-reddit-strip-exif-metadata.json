@@ -1,0 +1,177 @@
+[
+  {
+    "start": 0,
+    "end": 3.43,
+    "text": "Strip EXIF before posting on Reddit"
+  },
+  {
+    "start": 3.43,
+    "end": 12.02,
+    "text": "The SammaPix EXIF Viewer shows every metadata tag and removes them with one clic"
+  },
+  {
+    "start": 12.02,
+    "end": 15.6,
+    "text": "TL;DR — does Reddit strip EXIF?"
+  },
+  {
+    "start": 15.6,
+    "end": 47.95,
+    "text": "Yes in 2026 standard cases. Reddit re-encodes uploaded images and strips GPS, ca"
+  },
+  {
+    "start": 47.95,
+    "end": 49.99,
+    "text": "The short answer"
+  },
+  {
+    "start": 49.99,
+    "end": 76.03,
+    "text": "Reddit strips EXIF metadata from images uploaded through its standard 2026 pipel"
+  },
+  {
+    "start": 76.03,
+    "end": 115.2,
+    "text": "But Reddit is also the messaging-platform space's textbook example of how \"we st"
+  },
+  {
+    "start": 115.2,
+    "end": 117.58,
+    "text": "What the evidence shows"
+  },
+  {
+    "start": 117.58,
+    "end": 122.88,
+    "text": "Reddit's EXIF posture in 2026 is reinforced from multiple sources:"
+  },
+  {
+    "start": 122.88,
+    "end": 152.45,
+    "text": "The convergence is unambiguous for current behavior: Reddit strips EXIF in 2026 "
+  },
+  {
+    "start": 152.45,
+    "end": 157.44,
+    "text": "The HackerOne #1069039 HEIC bug"
+  },
+  {
+    "start": 157.44,
+    "end": 169.42,
+    "text": "The full title of HackerOne report #1069039 is \"GPS metadata preserved when conv"
+  },
+  {
+    "start": 169.42,
+    "end": 191.35,
+    "text": "The vulnerability was reported through Reddit's HackerOne program, accepted, and"
+  },
+  {
+    "start": 191.35,
+    "end": 194.21,
+    "text": "Why this bug matters for everyone"
+  },
+  {
+    "start": 194.21,
+    "end": 225.19,
+    "text": "Even though the specific HEIC bug is fixed, the report's real significance is wh"
+  },
+  {
+    "start": 225.19,
+    "end": 255.67,
+    "text": "Every other platform with a metadata-stripping policy has similar edge cases som"
+  },
+  {
+    "start": 255.67,
+    "end": 258.34,
+    "text": "Reddit's many upload paths"
+  },
+  {
+    "start": 258.34,
+    "end": 268.58,
+    "text": "Reddit has more distinct image upload paths than any other major social platform"
+  },
+  {
+    "start": 268.58,
+    "end": 286.42,
+    "text": "The HackerOne bug affected a specific intersection (HEIC + Safari + macOS + redd"
+  },
+  {
+    "start": 286.42,
+    "end": 289.13,
+    "text": "Third-party Reddit clients"
+  },
+  {
+    "start": 289.13,
+    "end": 319.68,
+    "text": "After Reddit's API pricing changes in 2023 most popular third-party clients (Apo"
+  },
+  {
+    "start": 319.68,
+    "end": 322.06,
+    "text": "The 30-second fix"
+  },
+  {
+    "start": 322.06,
+    "end": 346.51,
+    "text": "The argument for stripping metadata before uploading to Reddit is strong even in"
+  },
+  {
+    "start": 346.51,
+    "end": 369.58,
+    "text": "For more context on how other platforms handle metadata, see our analysis of Sig"
+  },
+  {
+    "start": 369.58,
+    "end": 373.49,
+    "text": "Does Reddit strip EXIF metadata from photos?"
+  },
+  {
+    "start": 373.49,
+    "end": 401.74,
+    "text": "Yes for standard uploads in 2026. Reddit re-encodes images submitted to the post"
+  },
+  {
+    "start": 401.74,
+    "end": 407.59,
+    "text": "What was the Reddit HEIC GPS bug (HackerOne #1069039)?"
+  },
+  {
+    "start": 407.59,
+    "end": 436.97,
+    "text": "In 2020, a security researcher reported through HackerOne that Reddit's image up"
+  },
+  {
+    "start": 436.97,
+    "end": 440.76,
+    "text": "Does Reddit keep my photo metadata on its servers?"
+  },
+  {
+    "start": 440.76,
+    "end": 465,
+    "text": "Reddit serves a re-encoded version of your photo through its CDN with EXIF strip"
+  },
+  {
+    "start": 465.5,
+    "end": 487.63,
+    "text": "The same image-processing pipeline handles both. However, Reddit has multiple up"
+  },
+  {
+    "start": 487.63,
+    "end": 491.95,
+    "text": "Can someone extract GPS from a photo I posted on Reddit?"
+  },
+  {
+    "start": 491.95,
+    "end": 509.23,
+    "text": "In standard cases, no — Reddit's CDN serves images with EXIF stripped. But the H"
+  },
+  {
+    "start": 509.23,
+    "end": 513.57,
+    "text": "How can I strip EXIF from a Reddit photo before uploading?"
+  },
+  {
+    "start": 513.57,
+    "end": 531,
+    "text": "Use a browser-based EXIF viewer like the SammaPix EXIF Viewer. Drop the photo, s"
+  }
+]

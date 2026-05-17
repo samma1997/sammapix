@@ -1,0 +1,212 @@
+[
+  {
+    "start": 0,
+    "end": 4.54,
+    "text": "Strip EXIF before sending to Discord — free, in your browser"
+  },
+  {
+    "start": 4.54,
+    "end": 14.54,
+    "text": "The SammaPix EXIF Viewer shows every metadata tag in your photo and removes them"
+  },
+  {
+    "start": 14.54,
+    "end": 18.19,
+    "text": "TL;DR — does Discord strip EXIF?"
+  },
+  {
+    "start": 18.19,
+    "end": 43.68,
+    "text": "Probably yes for direct image uploads (every third-party source agrees, but Disc"
+  },
+  {
+    "start": 43.68,
+    "end": 45.72,
+    "text": "The short answer"
+  },
+  {
+    "start": 45.72,
+    "end": 77.71,
+    "text": "Search for \"does Discord strip EXIF\" and you will find a dozen privacy blogs all"
+  },
+  {
+    "start": 77.71,
+    "end": 115.92,
+    "text": "That alone is the most important thing to understand. EXIF handling on Discord i"
+  },
+  {
+    "start": 115.92,
+    "end": 118.8,
+    "text": "What every source actually claims"
+  },
+  {
+    "start": 118.8,
+    "end": 135.41,
+    "text": "We compared what six third-party sources publicly assert about Discord's EXIF ha"
+  },
+  {
+    "start": 135.41,
+    "end": 160.78,
+    "text": "Two things stand out from this comparison. First, the consensus (Discord strips "
+  },
+  {
+    "start": 160.78,
+    "end": 179.76,
+    "text": "That is exactly the situation a privacy-conscious user should treat as a red fla"
+  },
+  {
+    "start": 179.76,
+    "end": 183.1,
+    "text": "What Discord has officially documented"
+  },
+  {
+    "start": 183.1,
+    "end": 217.46,
+    "text": "Discord's official support center has detailed help articles on uploading files,"
+  },
+  {
+    "start": 217.46,
+    "end": 242.33,
+    "text": "What Discord has formally documented are the upload mechanics around file types "
+  },
+  {
+    "start": 242.33,
+    "end": 244.87,
+    "text": "The file-attachment loophole"
+  },
+  {
+    "start": 244.87,
+    "end": 272.11,
+    "text": "The most consistent finding across all third-party reports is that file attachme"
+  },
+  {
+    "start": 272.11,
+    "end": 278.33,
+    "text": "This matters because two common workflows route through the file-attachment path"
+  },
+  {
+    "start": 278.33,
+    "end": 304.78,
+    "text": "For a user posting in a private friends-only server, the practical implication i"
+  },
+  {
+    "start": 304.78,
+    "end": 308.88,
+    "text": "Discord 2026 upload tiers (verified)"
+  },
+  {
+    "start": 308.88,
+    "end": 328.82,
+    "text": "Unlike the EXIF question, the file-size limits are officially documented. Discor"
+  },
+  {
+    "start": 328.82,
+    "end": 351.46,
+    "text": "The pricing matters indirectly for privacy: as upload limits grow, users send la"
+  },
+  {
+    "start": 351.46,
+    "end": 356.11,
+    "text": "Does Nitro change EXIF handling? No."
+  },
+  {
+    "start": 356.11,
+    "end": 382.49,
+    "text": "A common assumption in Discord communities is that paying for Nitro changes how "
+  },
+  {
+    "start": 382.49,
+    "end": 405.22,
+    "text": "The privacy implication is the opposite of what most users assume. If you have N"
+  },
+  {
+    "start": 405.22,
+    "end": 407.71,
+    "text": "The only way to be sure"
+  },
+  {
+    "start": 407.71,
+    "end": 419.16,
+    "text": "Given that Discord has not formally documented any EXIF stripping behavior, the "
+  },
+  {
+    "start": 419.16,
+    "end": 430.39,
+    "text": "This habit takes about thirty seconds per photo once you have done it once, and "
+  },
+  {
+    "start": 430.39,
+    "end": 432.77,
+    "text": "The 30-second fix"
+  },
+  {
+    "start": 432.77,
+    "end": 459.86,
+    "text": "If you only change one habit after reading this, make it this: never trust any p"
+  },
+  {
+    "start": 459.86,
+    "end": 491.62,
+    "text": "For deeper reading on how other messaging platforms handle metadata, see our bro"
+  },
+  {
+    "start": 491.62,
+    "end": 496.18,
+    "text": "Does Discord officially strip EXIF metadata from photos?"
+  },
+  {
+    "start": 496.18,
+    "end": 525.55,
+    "text": "Discord has never published official documentation confirming that it strips EXI"
+  },
+  {
+    "start": 525.55,
+    "end": 529.56,
+    "text": "Does Discord remove GPS coordinates from photos?"
+  },
+  {
+    "start": 529.56,
+    "end": 553.27,
+    "text": "Probably for direct image uploads — most third-party sources report that re-enco"
+  },
+  {
+    "start": 553.27,
+    "end": 557.76,
+    "text": "What is Discord's current file upload limit in 2026?"
+  },
+  {
+    "start": 557.76,
+    "end": 584.45,
+    "text": "Discord lowered the free upload limit from 25 MB to 10 MB in September 2024. Cur"
+  },
+  {
+    "start": 584.45,
+    "end": 588.34,
+    "text": "Does Discord Nitro handle EXIF differently?"
+  },
+  {
+    "start": 588.34,
+    "end": 615.79,
+    "text": "There is no evidence that Discord Nitro changes EXIF stripping behavior. Nitro r"
+  },
+  {
+    "start": 615.79,
+    "end": 620.64,
+    "text": "Can my Discord friends extract GPS coordinates from photos I send?"
+  },
+  {
+    "start": 620.64,
+    "end": 644.21,
+    "text": "If you sent the photo as a direct inline image, the GPS data was very likely str"
+  },
+  {
+    "start": 644.21,
+    "end": 648.41,
+    "text": "How can I check if a photo still has EXIF before sending?"
+  },
+  {
+    "start": 648.41,
+    "end": 674.06,
+    "text": "Use a browser-based EXIF viewer that runs locally on your device. The SammaPix E"
+  }
+]

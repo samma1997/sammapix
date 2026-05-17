@@ -1,0 +1,222 @@
+[
+  {
+    "start": 0,
+    "end": 4.15,
+    "text": "Strip EXIF before sending — works with iMessage too"
+  },
+  {
+    "start": 4.15,
+    "end": 14.98,
+    "text": "Drop the photo in the SammaPix EXIF Viewer, remove GPS and camera info with one "
+  },
+  {
+    "start": 14.98,
+    "end": 18.7,
+    "text": "TL;DR — does iMessage strip EXIF?"
+  },
+  {
+    "start": 18.7,
+    "end": 39,
+    "text": "No. iMessage preserves full EXIF including GPS. Three fixes: (1) take the photo "
+  },
+  {
+    "start": 39,
+    "end": 41.04,
+    "text": "The short answer"
+  },
+  {
+    "start": 41.04,
+    "end": 74.98,
+    "text": "Of all the major messaging apps, iMessage is the outlier on metadata. Where Sign"
+  },
+  {
+    "start": 74.98,
+    "end": 99.74,
+    "text": "This behavior is not documented anywhere in Apple's public privacy materials or "
+  },
+  {
+    "start": 99.74,
+    "end": 102.26,
+    "text": "Why iMessage is different"
+  },
+  {
+    "start": 102.26,
+    "end": 130.56,
+    "text": "Apple's design philosophy on iMessage treats it as a personal communication chan"
+  },
+  {
+    "start": 130.56,
+    "end": 152.14,
+    "text": "The trade-off is that iMessage users lose the implicit protection that most othe"
+  },
+  {
+    "start": 152.14,
+    "end": 171,
+    "text": "The practical implication: iMessage is a privacy-permissive channel, not a priva"
+  },
+  {
+    "start": 171,
+    "end": 173.69,
+    "text": "The in-Messages Camera trick"
+  },
+  {
+    "start": 173.69,
+    "end": 194.52,
+    "text": "A consistently observed iMessage behavior: photos taken with the small camera vi"
+  },
+  {
+    "start": 194.52,
+    "end": 222.53,
+    "text": "This is undocumented Apple behavior — there is no support article confirming it,"
+  },
+  {
+    "start": 222.53,
+    "end": 242.78,
+    "text": "The catch is that the in-Messages camera has fewer features than the main Camera"
+  },
+  {
+    "start": 242.78,
+    "end": 246.62,
+    "text": "The iOS 13+ share-sheet location toggle"
+  },
+  {
+    "start": 246.62,
+    "end": 256.1,
+    "text": "Starting with iOS 13 (released 2019), Apple added a per-share location toggle di"
+  },
+  {
+    "start": 256.1,
+    "end": 281.71,
+    "text": "This strips the GPS coordinates from the specific copy being shared without modi"
+  },
+  {
+    "start": 281.71,
+    "end": 296.57,
+    "text": "The Options menu also includes a toggle for \"All Photos Data\" which strips addit"
+  },
+  {
+    "start": 296.57,
+    "end": 300.38,
+    "text": "The permanent fix: disable Camera location"
+  },
+  {
+    "start": 300.38,
+    "end": 309.34,
+    "text": "The most thorough way to remove the iMessage EXIF problem is to stop your iPhone"
+  },
+  {
+    "start": 309.34,
+    "end": 316.46,
+    "text": "Settings &rarr; Privacy & Security &rarr; Location Services &rarr; Camera &rarr;"
+  },
+  {
+    "start": 316.46,
+    "end": 339.12,
+    "text": "With this setting, the iPhone Camera app no longer writes GPS coordinates into a"
+  },
+  {
+    "start": 339.62,
+    "end": 342.79,
+    "text": "iMessage encryption vs metadata"
+  },
+  {
+    "start": 342.79,
+    "end": 358.15,
+    "text": "Apple's privacy marketing for iMessage centers heavily on end-to-end encryption,"
+  },
+  {
+    "start": 358.15,
+    "end": 382.39,
+    "text": "But end-to-end encryption protects the photo from Apple's servers — it does not "
+  },
+  {
+    "start": 382.39,
+    "end": 402.14,
+    "text": "The implication: iMessage's encryption is genuinely valuable (it means Apple its"
+  },
+  {
+    "start": 402.14,
+    "end": 427.12,
+    "text": "Worth noting: if either party in an iMessage conversation has iMessage disabled,"
+  },
+  {
+    "start": 427.12,
+    "end": 430.36,
+    "text": "The 30-second fix that works anywhere"
+  },
+  {
+    "start": 430.36,
+    "end": 447.98,
+    "text": "The three iOS-specific workarounds above (in-Messages camera, share-sheet toggle"
+  },
+  {
+    "start": 447.98,
+    "end": 473.4,
+    "text": "Open the SammaPix EXIF Viewer in your browser. Drop the photo. See every metadat"
+  },
+  {
+    "start": 473.4,
+    "end": 499.15,
+    "text": "For more context on how other messengers handle metadata, see our analysis of Si"
+  },
+  {
+    "start": 499.15,
+    "end": 503.23,
+    "text": "Does iMessage strip EXIF metadata from photos?"
+  },
+  {
+    "start": 503.23,
+    "end": 530.97,
+    "text": "No. By default, iMessage does NOT strip EXIF metadata from photos. Every photo y"
+  },
+  {
+    "start": 530.97,
+    "end": 535.03,
+    "text": "Does iMessage send my GPS location with every photo?"
+  },
+  {
+    "start": 535.03,
+    "end": 558.52,
+    "text": "Yes — if you took the photo with the iPhone Camera app and location services for"
+  },
+  {
+    "start": 558.52,
+    "end": 562.89,
+    "text": "How do I strip GPS from a photo before sending on iMessage?"
+  },
+  {
+    "start": 562.89,
+    "end": 590.28,
+    "text": "iOS 13 and later added a per-share location toggle. When you tap Share on a phot"
+  },
+  {
+    "start": 590.28,
+    "end": 594.62,
+    "text": "Does taking a photo inside the Messages app strip EXIF?"
+  },
+  {
+    "start": 594.62,
+    "end": 614.3,
+    "text": "Yes. If you tap the camera icon inside an iMessage conversation and take a photo"
+  },
+  {
+    "start": 614.3,
+    "end": 618.69,
+    "text": "Does iMessage encryption protect my photo metadata from Apple?"
+  },
+  {
+    "start": 618.69,
+    "end": 639.19,
+    "text": "iMessage is end-to-end encrypted between Apple devices — Apple cannot read the c"
+  },
+  {
+    "start": 639.19,
+    "end": 643.32,
+    "text": "How is iMessage different from WhatsApp on photo privacy?"
+  },
+  {
+    "start": 643.32,
+    "end": 670.41,
+    "text": "iMessage preserves EXIF by default — every photo carries full metadata to the re"
+  }
+]
