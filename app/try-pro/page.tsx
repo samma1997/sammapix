@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/ToolCard";
 import CheckoutButton from "@/components/ui/CheckoutButton";
 import { TOOL_COUNT } from "@/lib/constants";
+import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
 
 // ─── Tool grid ─────────────────────────────────────────────────────────────────
 
@@ -114,9 +115,33 @@ const AUDIENCES = [
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function TryProPage() {
+  const founding = useFoundingStatus();
+  const isFounding = !!(
+    founding &&
+    founding.active &&
+    founding.spotsLeft > 0 &&
+    (founding.percentOff > 0 || founding.amountOff > 0)
+  );
+  const monthlyFinalCents = applyFoundingDiscount(900, founding);
+  const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
+
   return (
     <div className="bg-white dark:bg-[#191919] min-h-screen">
       <MetaAddToWishlist />
+
+      {/* Founding bar — sticky top, only when coupon active with spots left */}
+      {isFounding && (
+        <div className="bg-[#F97316] text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-center gap-2 text-xs sm:text-sm font-medium">
+            <Sparkles className="h-4 w-4" />
+            <span>
+              <strong>Founding offer</strong> &middot; lock $
+              {monthlyFinal}/mo forever &middot; only{" "}
+              <strong>{founding!.spotsLeft}</strong> of {founding!.totalSpots} spots left
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
@@ -150,7 +175,16 @@ export default function TryProPage() {
           </div>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#525252]">
-            Then $9/month &middot; Cancel anytime &middot; 30-day money-back guarantee
+            Then{" "}
+            {isFounding ? (
+              <>
+                <strong className="text-[#F97316]">${monthlyFinal}/mo forever</strong>{" "}
+                (Founding price, locked for life) &middot;
+              </>
+            ) : (
+              <>$9/month &middot;</>
+            )}{" "}
+            Cancel anytime &middot; 30-day money-back guarantee
           </p>
         </div>
       </section>
@@ -448,12 +482,19 @@ export default function TryProPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-3">
             Start your AI photo workflow
           </h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">
-            7-day free trial included. Cancel anytime before it ends.
-          </p>
+          {isFounding ? (
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">
+              Lock <strong className="text-[#F97316]">${monthlyFinal}/mo for life</strong>{" "}
+              today &middot; {founding!.spotsLeft} of {founding!.totalSpots} Founding spots left
+            </p>
+          ) : (
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">
+              7-day free trial included. Cancel anytime before it ends.
+            </p>
+          )}
 
           <CheckoutButton size="lg" className="gap-2 px-8 py-3 text-base">
-            Start free trial- $0 today
+            {isFounding ? `Claim Founding spot — $${monthlyFinal}/mo forever` : "Start free trial- $0 today"}
           </CheckoutButton>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#525252]">
