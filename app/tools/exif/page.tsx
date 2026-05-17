@@ -10,25 +10,29 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Remove EXIF Data Online Free",
+  title: "Remove EXIF Data Online — Free, No Upload [2026]",
   description:
-    "Strip GPS location, camera info & timestamps from photos instantly. Protect your privacy with batch EXIF removal. 100% browser-based, free.",
+    "Strip GPS coordinates, camera info & timestamps from JPG, PNG, HEIC photos. Batch EXIF remover, no upload, no signup, no watermark. Free forever.",
   keywords: [
     "remove exif data",
-    "remove gps from photos",
+    "remove exif data online",
     "exif remover",
-    "metadata remover",
+    "exif data remover",
+    "exif remover online",
+    "remove exif online",
     "strip exif",
+    "delete exif",
+    "clear exif",
+    "remove gps from photos",
     "remove location from photo",
-    "privacy tool",
     "metadata remover",
-    "location privacy",
+    "privacy tool",
   ],
   alternates: { canonical: `${APP_URL}/tools/exif` },
   openGraph: {
-    title: "Remove EXIF Data Online Free",
+    title: "Remove EXIF Data Online — Free, No Upload [2026]",
     description:
-      "Strip GPS location, camera info & timestamps from photos instantly. Protect your privacy with batch EXIF removal. 100% browser-based, free.",
+      "Strip GPS coordinates, camera info & timestamps from JPG, PNG, HEIC photos. Batch EXIF remover, no upload, no signup, no watermark. Free forever.",
     url: `${APP_URL}/tools/exif`,
     siteName: "SammaPix",
     type: "website",
@@ -43,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Remove EXIF Data Online Free",
+    title: "Remove EXIF Data Online — Free, No Upload [2026]",
     description:
-      "Strip GPS location, camera info & timestamps from photos instantly. Protect your privacy with batch EXIF removal. 100% browser-based, free.",
+      "Strip GPS coordinates, camera info & timestamps from JPG, PNG, HEIC photos. Batch EXIF remover, no upload, no signup, no watermark. Free forever.",
   },
 };
 
@@ -140,7 +144,7 @@ export default function ExifPage() {
                 <ShieldOff className="h-[18px] w-[18px]" style={{ color: "#EF4444" }} strokeWidth={1.5} />
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-                Remove EXIF Data. Protect Your Privacy
+                Remove EXIF Data Online — Free, No Upload
               </h1>
             </div>
 
