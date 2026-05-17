@@ -498,7 +498,7 @@ export default function TryProPage() {
           </CheckoutButton>
 
           <p className="mt-4 text-xs text-[#A3A3A3] dark:text-[#525252]">
-            Then $9/month or $79/year &middot; 30-day money-back guarantee
+            Then $9/month or $65/year (save 40%) &middot; 30-day money-back guarantee
           </p>
         </div>
       </section>

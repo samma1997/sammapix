@@ -149,7 +149,7 @@ export default function PricingPage() {
     (founding.percentOff > 0 || founding.amountOff > 0)
   );
   const monthlyFinalCents = applyFoundingDiscount(900, founding);
-  const annualFinalCents = applyFoundingDiscount(7900, founding);
+  const annualFinalCents = applyFoundingDiscount(6500, founding);
   const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
   const annualFinal = (annualFinalCents / 100).toFixed(annualFinalCents % 100 === 0 ? 0 : 2);
 
@@ -263,7 +263,7 @@ export default function PricingPage() {
               <div className="flex items-baseline gap-1.5">
                 {isFounding && (
                   <span className="text-2xl font-medium text-[#A3A3A3] line-through mr-1">
-                    ${annual ? "79" : "9"}
+                    ${annual ? "65" : "9"}
                   </span>
                 )}
                 <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
@@ -518,7 +518,7 @@ export default function PricingPage() {
             />
             <FaqItem
               q="What does Pro include?"
-              a="Pro ($9/month or $79/year) unlocks 200 AI credits/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
+              a="Pro ($9/month or $65/year — save 40%) unlocks 200 AI credits/day (renames + alt text), combo tools like WebLift and BlogDrop, batch processing up to 500 files, ZIP download, no ads, and priority support."
             />
             <FaqItem
               q="Why upgrade to Pro?"
@@ -633,7 +633,7 @@ export default function PricingPage() {
                   name: "What does Pro include?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Pro ($9/month or $79/year) unlocks 200 AI credits/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
+                    text: "Pro ($9/month or $65/year — save 40%) unlocks 200 AI credits/day (renames + alt text), the AI Workflow Pipeline with Blog, Instagram, and E-commerce presets, batch processing up to 500 files, ZIP download, no ads, and priority support.",
                   },
                 },
                 {

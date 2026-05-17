@@ -32,7 +32,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
   const [autoStarting, setAutoStarting] = useState<null | "annual" | "monthly">(
     planParam === "annual" || planParam === "monthly" ? planParam : null
   );
-  const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
+  const savePercent = Math.round((1 - 65 / (9 * 12)) * 100);
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Founding deal status — drives discounted price + counter.
@@ -46,7 +46,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
     (founding.percentOff > 0 || founding.amountOff > 0)
   );
   const monthlyBaseCents = 900;
-  const annualBaseCents = 7900;
+  const annualBaseCents = 6500;
   const monthlyFinalCents = applyFoundingDiscount(monthlyBaseCents, founding);
   const annualFinalCents = applyFoundingDiscount(annualBaseCents, founding);
   const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
@@ -213,7 +213,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             <div className="flex items-baseline justify-center gap-1.5">
               {isFounding && (
                 <span className="text-2xl font-medium text-[#A3A3A3] line-through mr-1">
-                  ${annual ? "79" : "9"}
+                  ${annual ? "65" : "9"}
                 </span>
               )}
               {!isFounding && annual && (
@@ -280,7 +280,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
                   ? `Lock $${annualFinal}/year forever — Start free trial`
                   : `Lock $${monthlyFinal}/month forever — Start free trial`)
               : (annual
-                  ? "Start 7-day free trial — $79/year"
+                  ? "Start 7-day free trial — $65/year"
                   : "Start 7-day free trial — $9/month")
             }
           </button>

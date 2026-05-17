@@ -231,7 +231,7 @@ export async function POST(req: NextRequest) {
         // For trials, value=0 (no money charged yet) — we'll fire a separate
         // purchase on invoice.paid when the trial converts.
         const gaClientId = parseGAClientId(metadata.ga_cookie) ?? session.customer_email ?? "anonymous";
-        const subValue = isTrial ? 0 : (metadata.plan === "annual" ? 79 : 9);
+        const subValue = isTrial ? 0 : (metadata.plan === "annual" ? 65 : 9);
         sendGA4Event({
           clientId: gaClientId,
           userId: session.customer_email ?? undefined,

@@ -145,7 +145,7 @@ const faqItems = [
   },
   {
     q: "Is the Custom AI directive feature free on SammaPix?",
-    a: "The Custom AI directive field on SammaPix is a Pro-only feature ($9/month or $79/year). Free users can still use the AI Renamer with the standard prompt — and they can use the free Batch Rename tool, which provides mechanical pattern-based renaming with 13 tokens including EXIF date taken, camera model, and ISO.",
+    a: "The Custom AI directive field on SammaPix is a Pro-only feature ($9/month or $65/year — save 40%). Free users can still use the AI Renamer with the standard prompt — and they can use the free Batch Rename tool, which provides mechanical pattern-based renaming with 13 tokens including EXIF date taken, camera model, and ISO.",
   },
   {
     q: "Can I write multi-line directives or use markdown?",

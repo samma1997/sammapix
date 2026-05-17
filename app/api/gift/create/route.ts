@@ -14,10 +14,10 @@ const ALLOWED_ORIGINS = [
   "https://staging-sammapix.vercel.app",
 ];
 
-// Gift plans: monthly ($9 for 1 month) or annual ($79 for 12 months)
+// Gift plans: monthly ($9 for 1 month) or annual ($65 for 12 months — 40% off vs monthly)
 const GIFT_PLANS = {
   monthly: { months: 1, amountCents: 900, label: "1 month" },
-  annual: { months: 12, amountCents: 7900, label: "1 year" },
+  annual: { months: 12, amountCents: 6500, label: "1 year" },
 } as const;
 
 const CreateGiftSchema = z.object({
