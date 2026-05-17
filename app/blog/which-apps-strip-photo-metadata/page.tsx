@@ -501,6 +501,33 @@ export default function WhichAppsStripPhotoMetadataPage() {
           </div>
         </div>
 
+        {/* Deep-dive cluster — per-app articles */}
+        <div className="mt-10 p-5 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#1A1A1A]">
+          <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+            Per-app deep dives
+          </h3>
+          <p className="text-sm text-[#737373] mb-4">
+            Want the long-form answer for one specific app? We have dedicated guides:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <Link href="/blog/does-discord-strip-exif-metadata" className="text-sm text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#6366F1]">
+              Does Discord strip EXIF metadata?
+            </Link>
+            <Link href="/blog/does-signal-strip-exif-metadata" className="text-sm text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#6366F1]">
+              Does Signal strip EXIF metadata?
+            </Link>
+            <Link href="/blog/does-telegram-strip-exif-metadata" className="text-sm text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#6366F1]">
+              Does Telegram strip EXIF metadata?
+            </Link>
+            <Link href="/blog/does-reddit-strip-exif-metadata" className="text-sm text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#6366F1]">
+              Does Reddit strip EXIF metadata?
+            </Link>
+            <Link href="/blog/does-imessage-strip-exif-metadata" className="text-sm text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 hover:text-[#6366F1]">
+              Does iMessage strip EXIF metadata?
+            </Link>
+          </div>
+        </div>
+
         {/* FAQ Section */}
         <div className="mt-10 pt-8 border-t border-gray-100 dark:border-[#2A2A2A]">
           <h2 id="faq" className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6">
