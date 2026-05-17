@@ -134,6 +134,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "extract-brand-colors-from-image-2026",
     ],
   },
+  "photo-enhance": {
+    id: "photo-enhance",
+    name: "AI Photo Enhancer",
+    shortDesc: "Sharpen blurry photos, upscale 2x with AI",
+    slug: "/tools/photo-enhance",
+    category: "ai",
+    relatedTools: ["upscale", "compress", "remove-bg", "webp"],
+    relatedBlogSlugs: [
+      "compress-images-without-losing-quality",
+      "best-free-topaz-gigapixel-alternatives-2026",
+    ],
+  },
   "ai-rename": {
     id: "ai-rename",
     name: "AI Rename",
