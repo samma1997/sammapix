@@ -296,7 +296,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-              Start here — pick your workflow
+              Start here: pick your workflow
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -307,7 +307,7 @@ export default function HomePage() {
                 Photographers & Travel Bloggers
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
-                Compress 500 photos, rename for SEO, sort by location — in minutes
+                Compress 500 photos, rename for SEO, sort by location. All in minutes.
               </p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {[
@@ -340,7 +340,7 @@ export default function HomePage() {
                 E-commerce & Product Sellers
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
-                Product photos ready for Shopify, Amazon, Etsy — batch optimized
+                Product photos ready for Shopify, Amazon, Etsy. Batch optimized.
               </p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {[
@@ -373,7 +373,7 @@ export default function HomePage() {
                 Web Developers & Bloggers
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
-                Optimize images for Core Web Vitals — WebP, compress, alt text
+                Optimize images for Core Web Vitals: WebP, compress, alt text.
               </p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {[
