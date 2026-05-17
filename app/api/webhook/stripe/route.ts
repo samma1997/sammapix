@@ -174,13 +174,37 @@ export async function POST(req: NextRequest) {
         // Track referral conversion — grant referrer a free Pro month
         if (session.customer_email) {
           try {
-            const { trackReferralConversion } = await import("@/lib/referral");
+            const { trackReferralConversion, checkAndRememberPaymentFingerprint } = await import("@/lib/referral");
             // Use the Stripe customer ID or metadata userId as the userId
             const refUserId = metadata.userId || (typeof session.customer === "string" ? session.customer : "");
             if (refUserId) {
-              const converted = await trackReferralConversion(refUserId);
-              if (converted) {
-                console.log("[stripe/webhook] Referral conversion tracked for:", refUserId);
+              // Anti-abuse: fetch payment-method fingerprint from the subscription
+              // and reject conversion-reward if the same card has already been used
+              // by another paying user (catches one-person multi-account farming).
+              let fingerprintOk = true;
+              try {
+                const subId = typeof session.subscription === "string" ? session.subscription : null;
+                if (subId) {
+                  const sub = await stripe.subscriptions.retrieve(subId, { expand: ["default_payment_method"] });
+                  const pm = sub.default_payment_method;
+                  const fp = pm && typeof pm !== "string" && pm.type === "card" && pm.card
+                    ? pm.card.fingerprint
+                    : null;
+                  if (fp) {
+                    fingerprintOk = await checkAndRememberPaymentFingerprint(refUserId, fp);
+                  }
+                }
+              } catch (fpErr) {
+                console.warn("[stripe/webhook] Fingerprint check skipped:", fpErr);
+              }
+
+              if (fingerprintOk) {
+                const converted = await trackReferralConversion(refUserId);
+                if (converted) {
+                  console.log("[stripe/webhook] Referral conversion tracked for:", refUserId);
+                }
+              } else {
+                console.warn("[stripe/webhook] Referral conversion BLOCKED (fingerprint reuse):", refUserId);
               }
             }
           } catch (err) {

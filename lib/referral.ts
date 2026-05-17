@@ -61,6 +61,118 @@ const MONTHLY_CAP = 50;
 const SIGNUP_OPS_BONUS_NEW_USER = 50;
 const SIGNUP_OPS_BONUS_REFERRER = 25;
 
+// Anti-abuse: max referral signups attributed from same IP in a 30-day window.
+// Prevents one person from creating multiple accounts via VPN switching.
+const IP_RATE_LIMIT_MONTHLY = 3;
+const IP_RATE_TTL_SECONDS = 30 * 24 * 60 * 60;
+
+// ---------------------------------------------------------------------------
+// Email normalization + disposable check
+// ---------------------------------------------------------------------------
+
+/**
+ * Normalize an email to its canonical form, defeating Gmail dots + alias tricks.
+ *   john.doe+anything@gmail.com → johndoe@gmail.com
+ *   J.O.H.N@googlemail.com     → john@gmail.com
+ * For non-Gmail providers, strip "+aliases" only (dots are significant elsewhere).
+ *
+ * Used during referral signup to detect duplicate accounts from one person.
+ */
+export function normalizeEmail(email: string): string {
+  const lower = email.trim().toLowerCase();
+  const at = lower.lastIndexOf("@");
+  if (at < 0) return lower;
+  let local = lower.slice(0, at);
+  let domain = lower.slice(at + 1);
+  // Strip +aliases everywhere (Gmail, FastMail, ProtonMail support these)
+  const plus = local.indexOf("+");
+  if (plus >= 0) local = local.slice(0, plus);
+  // Gmail: also strip dots and normalize googlemail.com → gmail.com
+  if (domain === "googlemail.com") domain = "gmail.com";
+  if (domain === "gmail.com") local = local.replace(/\./g, "");
+  return `${local}@${domain}`;
+}
+
+/**
+ * Check if an email belongs to a known disposable/throwaway provider
+ * (mailinator, 10minutemail, temp-mail, etc — 75K+ domains tracked).
+ */
+export function isDisposableEmail(email: string): boolean {
+  const at = email.lastIndexOf("@");
+  if (at < 0) return false;
+  const domain = email.slice(at + 1).trim().toLowerCase();
+  try {
+    // Dynamic import to keep the disposable-email-domains list out of the cold-start critical path
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const list = require("disposable-email-domains") as string[];
+    return list.includes(domain);
+  } catch {
+    return false; // List unavailable — fail-open so legit signups aren't blocked
+  }
+}
+
+/**
+ * IP rate-limiter for referral signups.
+ * Returns true if the IP is OK (under cap), false if exceeded.
+ * Increments the counter as a side effect when OK.
+ */
+async function checkIpRateLimit(ip: string): Promise<boolean> {
+  if (!ip) return true;
+  const key = `referral:ip_rate:${ip}`;
+  if (redisConfigured) {
+    const currentRaw = await redisExec<string | null>(["GET", key]);
+    const current = currentRaw ? parseInt(currentRaw, 10) : 0;
+    if (current >= IP_RATE_LIMIT_MONTHLY) {
+      console.warn(`[referral] IP rate limit exceeded for ${ip} (${current} signups in 30d)`);
+      return false;
+    }
+    await redisExec(["INCR", key]);
+    if (current === 0) await redisExec(["EXPIRE", key, String(IP_RATE_TTL_SECONDS)]);
+    return true;
+  }
+  // In-memory fallback (dev): not enforced, always OK
+  return true;
+}
+
+/**
+ * Check if any user we've seen before has the same normalized email.
+ * Returns the existing userId if duplicate found, null if email is new.
+ */
+async function findUserByNormalizedEmail(normalizedEmail: string): Promise<string | null> {
+  if (!redisConfigured) return null;
+  const key = `referral:norm_email:${normalizedEmail}`;
+  return redisExec<string | null>(["GET", key]);
+}
+
+/**
+ * Store the normalized-email → userId mapping for future dedupe checks.
+ */
+async function rememberNormalizedEmail(normalizedEmail: string, userId: string): Promise<void> {
+  if (!redisConfigured) return;
+  const key = `referral:norm_email:${normalizedEmail}`;
+  await redisExec(["SET", key, userId]);
+}
+
+/**
+ * Store the Stripe payment method fingerprint of a paying user, so future
+ * referral conversions using the same card can be flagged as same-person.
+ * Returns true if this fingerprint was never seen before (legit), false if dup.
+ */
+export async function checkAndRememberPaymentFingerprint(
+  userId: string,
+  fingerprint: string
+): Promise<boolean> {
+  if (!redisConfigured || !fingerprint) return true;
+  const key = `referral:fp:${fingerprint}`;
+  const existing = await redisExec<string | null>(["GET", key]);
+  if (existing && existing !== userId) {
+    console.warn(`[referral] Payment fingerprint reuse: ${fingerprint} (was ${existing}, now ${userId})`);
+    return false;
+  }
+  if (!existing) await redisExec(["SET", key, userId]);
+  return true;
+}
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -277,10 +389,31 @@ export async function trackReferralSignup(
     return false;
   }
 
+  // 3b. Disposable email block — never reward referrals from throwaway addresses.
+  if (isDisposableEmail(newUserEmail)) {
+    console.warn(`[referral] Disposable email blocked: ${newUserEmail}`);
+    return false;
+  }
+
+  // 3c. Normalized-email dedupe — catches Gmail dots/+ aliases as same person.
+  const normalized = normalizeEmail(newUserEmail);
+  const existingUserForEmail = await findUserByNormalizedEmail(normalized);
+  if (existingUserForEmail && existingUserForEmail !== newUserId) {
+    console.warn(
+      `[referral] Normalized email collision: ${normalized} previously bound to ${existingUserForEmail} (now ${newUserId})`
+    );
+    return false;
+  }
+
   // 4. Anti-fraud IP check
   if (newUserIp) {
     const fraudOk = await checkAntifraud(referralCode, newUserIp, null);
     if (!fraudOk) {
+      return false;
+    }
+    // 4b. IP rate limit: max N referral signups from same IP per 30-day window.
+    const ipOk = await checkIpRateLimit(newUserIp);
+    if (!ipOk) {
       return false;
     }
   }
@@ -326,6 +459,9 @@ export async function trackReferralSignup(
     if (newUserIp) {
       await storeUserIp(newUserId, newUserIp);
     }
+
+    // 11. Remember normalized email for future dedupe checks
+    await rememberNormalizedEmail(normalized, newUserId);
   } else {
     // In-memory fallback
     memStore.set(`referral:referred_by:${newUserId}`, referralCode);
