@@ -164,6 +164,54 @@ const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+const IconColorMatch: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes hp-cm-shift { 0%, 100% { fill-opacity: 0.18; } 50% { fill-opacity: 0.55; } }
+      @keyframes hp-cm-arrow { 0%, 100% { transform: translateX(0px); opacity: 0.7; } 50% { transform: translateX(2px); opacity: 1; } }
+      .hp-cm-rect-a { animation: hp-cm-shift 2.2s ease-in-out infinite; }
+      .hp-cm-rect-b { animation: hp-cm-shift 2.2s ease-in-out 0.6s infinite; }
+      .hp-cm-rect-c { animation: hp-cm-shift 2.2s ease-in-out 1.2s infinite; }
+      .hp-cm-arr { animation: hp-cm-arrow 1.8s ease-in-out infinite; }
+    `}</style>
+    <rect x="3" y="9" width="14" height="14" rx="2.5" fill={accent} fillOpacity="0.55" stroke={accent} strokeWidth="1.25"/>
+    <circle cx="8.5" cy="14" r="1.5" fill="white" fillOpacity="0.8"/>
+    <path d="M3 22 L8 17 L11 19 L13 17 L17 21 L17 23 Z" fill="white" fillOpacity="0.4"/>
+    <g className="hp-cm-arr">
+      <path d="M19 16 L23 16 M21 14 L23 16 L21 18" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    <rect className="hp-cm-rect-a" x="25" y="3" width="9" height="9" rx="1.5" fill={accent} stroke={accent} strokeWidth="0.75"/>
+    <rect className="hp-cm-rect-b" x="36" y="3" width="9" height="9" rx="1.5" fill={accent} stroke={accent} strokeWidth="0.75"/>
+    <rect className="hp-cm-rect-c" x="25" y="14" width="9" height="9" rx="1.5" fill={accent} stroke={accent} strokeWidth="0.75"/>
+    <rect x="36" y="14" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.4" stroke={accent} strokeWidth="0.75"/>
+    <rect x="25" y="25" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.4" stroke={accent} strokeWidth="0.75"/>
+    <rect x="36" y="25" width="9" height="9" rx="1.5" fill={accent} fillOpacity="0.4" stroke={accent} strokeWidth="0.75"/>
+    <rect x="25" y="36" width="20" height="8" rx="1.5" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="0.75"/>
+    <text x="35" y="42" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">MATCH</text>
+  </svg>
+);
+
+const IconPhotoEnhance: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes hp-pe-sharpen { 0%, 100% { filter: blur(0.6px); opacity: 0.85; } 50% { filter: blur(0); opacity: 1; } }
+      @keyframes hp-pe-sparkle { 0%, 100% { opacity: 0.3; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1); } }
+      .hp-pe-img { transform-origin: 18px 22px; animation: hp-pe-sharpen 2.4s ease-in-out infinite; }
+      .hp-pe-s1 { transform-origin: 38px 12px; animation: hp-pe-sparkle 1.6s ease-in-out 0s infinite; }
+      .hp-pe-s2 { transform-origin: 42px 28px; animation: hp-pe-sparkle 1.6s ease-in-out 0.4s infinite; }
+      .hp-pe-s3 { transform-origin: 34px 38px; animation: hp-pe-sparkle 1.6s ease-in-out 0.8s infinite; }
+    `}</style>
+    <g className="hp-pe-img">
+      <rect x="4" y="8" width="28" height="28" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="12" cy="16" r="2.5" fill={accent} fillOpacity="0.6"/>
+      <path d="M4 30 L13 21 L19 26 L24 22 L32 30" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    <g className="hp-pe-s1"><path d="M38 9 L39 12 L42 12 L40 14 L41 17 L38 15 L35 17 L36 14 L34 12 L37 12 Z" fill={accent}/></g>
+    <g className="hp-pe-s2"><path d="M42 26 L42.5 27.5 L44 28 L42.5 28.5 L42 30 L41.5 28.5 L40 28 L41.5 27.5 Z" fill={accent} fillOpacity="0.8"/></g>
+    <g className="hp-pe-s3"><path d="M34 36 L34.5 37 L36 37.5 L34.5 38 L34 39 L33.5 38 L32 37.5 L33.5 37 Z" fill={accent} fillOpacity="0.7"/></g>
+  </svg>
+);
+
 const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
@@ -210,6 +258,8 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Crop & Ratio", href: "/tools/croproatio", tagline: "Crop to exact ratios.", accent: "#EC4899", badge: "Free", Icon: IconCropRatio, category: "Optimize" },
 
   // AI-Powered
+  { name: "LUT Generator", href: "/tools/color-match", tagline: "Extract a 3D LUT from any photo + batch apply + export .cube.", accent: "#F59E0B", badge: "Free", Icon: IconColorMatch, category: "AI-Powered", isNew: true },
+  { name: "Batch Photo Enhancer", href: "/tools/photo-enhance", tagline: "Drop 20+ photos. AI cleans + upscales 2x in batch. Download ZIP.", accent: "#8B5CF6", badge: "Free", Icon: IconPhotoEnhance, category: "AI-Powered", isNew: true },
   { name: "AI Organize", href: "/tools/ai-organize", tagline: "Drop 100+ photos. AI sorts into folders, finds duplicates, renames for SEO.", accent: "#8B5CF6", badge: "Login required", Icon: IconAiOrganize, category: "AI-Powered", isNew: true },
   { name: "AI Rename", href: "/tools/ai-rename", tagline: "SEO-optimized filenames with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAIRename, category: "AI-Powered" },
   { name: "AI Alt Text", href: "/tools/alt-text", tagline: "Accessibility alt text with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAltText, category: "AI-Powered" },
@@ -249,7 +299,7 @@ export function HomepageToolGrid() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-            30 Free Tools
+            32 Free Tools
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
             Browser-based. No uploads, no account required for the basics.

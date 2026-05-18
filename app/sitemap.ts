@@ -135,6 +135,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/pdf-to-image",
     "/tools/remove-bg",
     "/tools/upscale",
+    "/tools/photo-enhance",
+    "/tools/color-match",
     "/tools/passport-photo",
     "/tools/jpg-to-pdf",
     "/tools/jxl",

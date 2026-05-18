@@ -129,9 +129,32 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Eyedrop HEX/RGB/HSL + auto palette",
     slug: "/tools/color-picker",
     category: "edit",
-    relatedTools: ["remove-bg", "filmlab", "stampit", "compress"],
+    relatedTools: ["color-match", "filmlab", "stampit", "compress"],
     relatedBlogSlugs: [
       "extract-brand-colors-from-image-2026",
+    ],
+  },
+  "color-match": {
+    id: "color-match",
+    name: "LUT Generator",
+    shortDesc: "Extract 3D LUT from photo, apply to batch, export .cube",
+    slug: "/tools/color-match",
+    category: "ai",
+    relatedTools: ["filmlab", "color-picker", "stampit", "photo-enhance"],
+    relatedBlogSlugs: [
+      "extract-brand-colors-from-image-2026",
+    ],
+  },
+  "photo-enhance": {
+    id: "photo-enhance",
+    name: "Batch Photo Enhancer",
+    shortDesc: "Drop 20+ photos, AI enhances in batch, download ZIP",
+    slug: "/tools/photo-enhance",
+    category: "ai",
+    relatedTools: ["upscale", "compress", "remove-bg", "webp"],
+    relatedBlogSlugs: [
+      "compress-images-without-losing-quality",
+      "best-free-topaz-gigapixel-alternatives-2026",
     ],
   },
   "ai-rename": {
@@ -226,7 +249,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Apply film-style color grading",
     slug: "/tools/filmlab",
     category: "edit",
-    relatedTools: ["stampit", "compress", "webp", "croproatio"],
+    relatedTools: ["color-match", "stampit", "compress", "croproatio"],
     relatedBlogSlugs: [],
   },
   stampit: {

@@ -7,7 +7,7 @@ import { getAllTrips } from "@/lib/destinations";
 export const metadata: Metadata = {
   title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
   description:
-    "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 30 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
+    "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 32 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
   keywords: [
     "luca sammarco",
     "digital product builder",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
     description:
-      "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 30 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
+      "I'm Luca Sammarco, Digital Product Builder and travel photographer. I built SammaPix — 32 free browser-based image tools used in 40+ countries. No uploads, no servers, everything runs in your browser.",
     url: `${APP_URL}/about`,
     type: "website",
     images: [

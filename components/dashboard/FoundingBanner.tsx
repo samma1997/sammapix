@@ -68,7 +68,7 @@ export default function FoundingBanner({ isPro }: FoundingBannerProps) {
               ) : null}
             </div>
             <p className="text-sm font-semibold text-[#7C2D12] dark:text-[#FED7AA]">
-              Lock ${monthlyPrice}/mo for life — all 35 tools, no price hikes
+              Lock ${monthlyPrice}/mo for life — all 32 tools, no price hikes
             </p>
             <p className="hidden sm:block text-xs text-[#9A3412] dark:text-[#FDBA74] mt-0.5">
               The first {founding.totalSpots} users keep this price forever. After spot {founding.totalSpots}, it&apos;s gone.
