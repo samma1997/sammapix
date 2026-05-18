@@ -651,11 +651,15 @@ export default function DashboardToolPage() {
     );
   }
 
+  // Wide tools (multi-zone layouts) need a wider header to align with their content.
+  const isWideTool = slug === "color-match" || slug === "photo-enhance";
+  const headerWidthClass = isWideTool ? "max-w-6xl" : "max-w-3xl";
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#191919]">
       {/* Tool header */}
       <div className="px-4 sm:px-6 pt-8 pb-6">
-        <div className="max-w-3xl mx-auto">
+        <div className={`${headerWidthClass} mx-auto`}>
           <Link
             href="/dashboard"
             className="inline-flex items-center gap-1 text-xs text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors mb-4"
