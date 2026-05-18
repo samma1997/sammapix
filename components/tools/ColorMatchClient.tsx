@@ -270,9 +270,9 @@ export default function ColorMatchClient() {
 
   return (
     <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6 items-stretch">
         {/* ─── REFERENCE ZONE ──────────────────────────────────────── */}
-        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-4 bg-white dark:bg-[#191919]">
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-4 bg-white dark:bg-[#191919] flex flex-col">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-7 h-7 rounded-md bg-[#F59E0B15] flex items-center justify-center">
               <Sparkles className="h-4 w-4 text-[#F59E0B]" strokeWidth={1.5} />
@@ -389,42 +389,43 @@ export default function ColorMatchClient() {
           </div>
         </div>
 
-        {/* ─── BATCH DROPZONE ─────────────────────────────────────── */}
-        <div>
+        {/* ─── BATCH ZONE ─────────────────────────────────────────── */}
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-4 bg-white dark:bg-[#191919] flex flex-col">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-7 h-7 rounded-md bg-[#F59E0B15] flex items-center justify-center">
+              <ImageLucide className="h-4 w-4 text-[#F59E0B]" strokeWidth={1.5} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                2. Photos to match
+              </p>
+              <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3]">
+                {files.length === 0
+                  ? `Up to ${maxFiles}. They inherit the reference look.`
+                  : `${files.length}/${maxFiles} loaded`}
+                {!isPro && files.length === 0 && " · Pro: 300"}
+              </p>
+            </div>
+          </div>
+
           <div
             {...batchDz.getRootProps()}
             className={cn(
-              "border border-dashed rounded-xl text-center transition-colors",
-              files.length === 0 ? "p-10 cursor-pointer" : "p-4 cursor-pointer",
-              "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#A3A3A3] dark:hover:border-[#525252]",
-              batchDz.isDragActive && "border-[#F59E0B] bg-[#FFFBEB]"
+              "border border-dashed rounded-lg text-center transition-colors flex-1 flex items-center justify-center cursor-pointer",
+              "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#F59E0B] hover:bg-[#FFFBEB] dark:hover:bg-[#3B2814]",
+              batchDz.isDragActive && "border-[#F59E0B] bg-[#FFFBEB] dark:bg-[#3B2814]",
+              files.length === 0 ? "min-h-[200px]" : "min-h-[80px]"
             )}
           >
             <input {...batchDz.getInputProps()} />
-            <div className="flex items-center justify-center gap-3">
-              <div
-                className={cn(
-                  "rounded-lg bg-[#F59E0B15] flex items-center justify-center flex-shrink-0",
-                  files.length === 0 ? "w-10 h-10" : "w-8 h-8"
-                )}
-              >
-                <ImageLucide
-                  className={cn(
-                    "text-[#F59E0B]",
-                    files.length === 0 ? "h-5 w-5" : "h-4 w-4"
-                  )}
-                  strokeWidth={1.5}
-                />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                  2. Photos to match
+            <div className="flex flex-col items-center gap-1.5 py-4">
+              <ImageLucide className="h-5 w-5 text-[#F59E0B]" strokeWidth={1.5} />
+              <div>
+                <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
+                  {files.length === 0 ? "Drop photos here" : `Add more (${maxFiles - files.length} slots left)`}
                 </p>
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
-                  {files.length === 0
-                    ? `Drop up to ${maxFiles} photos. They'll inherit the reference look.`
-                    : `Add more (${maxFiles - files.length} slots left)`}
-                  {!isPro && " · Pro: up to 300"}
+                <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] mt-0.5">
+                  JPG, PNG, WebP · multi-select OK
                 </p>
               </div>
             </div>
