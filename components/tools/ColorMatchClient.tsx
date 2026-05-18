@@ -269,7 +269,7 @@ export default function ColorMatchClient() {
   const canRun = !!lut && stats.idle > 0 && !running;
 
   return (
-    <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-8 sm:pb-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6 items-stretch">
         {/* ─── REFERENCE ZONE ──────────────────────────────────────── */}
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-4 bg-white dark:bg-[#191919] flex flex-col">

@@ -242,7 +242,7 @@ export default function ColorMatchPage() {
       <HowToUse steps={howToSteps} toolName="AI Color Match" />
 
       {/* USE CASES */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-5">
           Built for batch shoots
         </h2>
