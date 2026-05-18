@@ -70,7 +70,7 @@ function getSubtext(
     case "upscale_daily":
       return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
     case "power_user":
-      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 35 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
+      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 32 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
     default: {
       if (filesDropped && freeLimit) {
         return `You dropped ${filesDropped} photos — free plan processes the first ${freeLimit}. Pro handles 500 at once.`;

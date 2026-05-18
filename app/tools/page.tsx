@@ -53,7 +53,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 20+ browser-based image and video optimization tools",
+        description: "Suite of 32 browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -63,7 +63,7 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "20+ free browser-based image and video optimization tools",
+        description: "32 free browser-based image and video optimization tools",
         numberOfItems: toolsList.length,
         itemListElement: toolsList.map((tool, index) => ({
           "@type": "SoftwareApplication",

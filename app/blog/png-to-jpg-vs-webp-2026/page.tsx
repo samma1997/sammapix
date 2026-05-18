@@ -598,7 +598,7 @@ export default function PngToJpgVsWebp2026Page() {
           </table>
         </div>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Start at the <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">SammaPix homepage</Link> if you want the full set of 35 browser-based image tools.
+          Start at the <Link href="/" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3]">SammaPix homepage</Link> if you want the full set of 32 browser-based image tools.
         </p>
 
         {/* ── FAQ ────────────────────────────────────────────────────────── */}

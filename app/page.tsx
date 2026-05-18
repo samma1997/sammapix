@@ -28,7 +28,7 @@ const HomepageToolGrid = dynamic(
 export const metadata = {
   title: "SammaPix — Free AI Photo Tools, Image Compressor & Optimizer",
   description:
-    "Compress, rename with AI, resize, convert -- all in one pipeline. 35 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    "Compress, rename with AI, resize, convert -- all in one pipeline. 32 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
     "image compressor",
@@ -64,7 +64,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "What tools does SammaPix offer?",
     answer:
-      "SammaPix includes 35 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
+      "SammaPix includes 32 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
   },
   {
     question: "How does SammaPix protect my privacy?",
@@ -213,7 +213,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 35 free browser-based tools.",
+          "AI-powered photo and video workflow platform for content creators. 32 free browser-based tools.",
         sameAs: [
           "https://www.instagram.com/lucasammarco.web/",
           "https://lucasammarco.com",
