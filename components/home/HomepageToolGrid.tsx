@@ -231,7 +231,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Crop & Ratio", href: "/tools/croproatio", tagline: "Crop to exact ratios.", accent: "#EC4899", badge: "Free", Icon: IconCropRatio, category: "Optimize" },
 
   // AI-Powered
-  { name: "Photo Enhancer", href: "/tools/photo-enhance", tagline: "Sharpen blurry photos & upscale 2x with AI. Browser-based.", accent: "#8B5CF6", badge: "Free", Icon: IconPhotoEnhance, category: "AI-Powered", isNew: true },
+  { name: "Batch Photo Enhancer", href: "/tools/photo-enhance", tagline: "Drop 20+ photos. AI cleans + upscales 2x in batch. Download ZIP.", accent: "#8B5CF6", badge: "Free", Icon: IconPhotoEnhance, category: "AI-Powered", isNew: true },
   { name: "AI Organize", href: "/tools/ai-organize", tagline: "Drop 100+ photos. AI sorts into folders, finds duplicates, renames for SEO.", accent: "#8B5CF6", badge: "Login required", Icon: IconAiOrganize, category: "AI-Powered", isNew: true },
   { name: "AI Rename", href: "/tools/ai-rename", tagline: "SEO-optimized filenames with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAIRename, category: "AI-Powered" },
   { name: "AI Alt Text", href: "/tools/alt-text", tagline: "Accessibility alt text with AI.", accent: "#8B5CF6", badge: "Login required", Icon: IconAltText, category: "AI-Powered" },

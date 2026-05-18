@@ -136,8 +136,8 @@ export const TOOLS: Record<string, ToolMeta> = {
   },
   "photo-enhance": {
     id: "photo-enhance",
-    name: "AI Photo Enhancer",
-    shortDesc: "Sharpen blurry photos, upscale 2x with AI",
+    name: "Batch Photo Enhancer",
+    shortDesc: "Drop 20+ photos, AI enhances in batch, download ZIP",
     slug: "/tools/photo-enhance",
     category: "ai",
     relatedTools: ["upscale", "compress", "remove-bg", "webp"],
