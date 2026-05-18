@@ -518,6 +518,17 @@ export default function ColorMatchClient() {
         </div>
       )}
 
+      {/* ─── TIP for first use ──────────────────────────────────── */}
+      {refStats && files.length > 0 && stats.done === 0 && (
+        <div className="mt-3 mb-3 p-3 bg-[#FFFBEB] dark:bg-[#3B2814] border border-[#FDE68A] dark:border-[#78350F] rounded-md text-xs text-[#92400E] dark:text-[#FCD34D] leading-relaxed">
+          <strong>Tip:</strong> color match works best when the reference and the batch
+          have <strong>similar content</strong> (all outdoor, all food, all portraits, etc.).
+          Mixing very different scenes — e.g. a beach selfie as reference for animal photos —
+          will produce stylized but unrealistic results. Use the intensity slider (40-60%)
+          for a softer blend.
+        </div>
+      )}
+
       {/* ─── EMPTY STATE HINTS ──────────────────────────────────── */}
       {files.length === 0 && (
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
