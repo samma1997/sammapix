@@ -5,11 +5,9 @@ import {
   ArrowLeft,
   CheckCircle2,
   Sparkles,
-  Shield,
-  Zap,
-  ImageIcon,
 } from "lucide-react";
 import ColorMatchClient from "@/components/tools/ColorMatchClient";
+import ColorMatchHeroDemo from "@/components/tools/ColorMatchHeroDemo";
 import RelatedTools from "@/components/tools/RelatedTools";
 import HowToUse from "@/components/tools/HowToUse";
 import { APP_URL } from "@/lib/constants";
@@ -234,32 +232,7 @@ export default function ColorMatchPage() {
           </div>
 
           <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
-            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-5 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-              <div className="flex items-center gap-2 mb-3">
-                <Shield className="h-4 w-4 text-[#16A34A]" strokeWidth={1.5} />
-                <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
-                  Why this beats Lightroom presets
-                </p>
-              </div>
-              <ul className="space-y-2 text-xs text-[#525252] dark:text-[#A3A3A3]">
-                <li className="flex items-start gap-2">
-                  <Zap className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-[#F59E0B]" strokeWidth={1.5} />
-                  <span>No preset file to make — just point at the photo with the look you want.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Sparkles className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-[#F59E0B]" strokeWidth={1.5} />
-                  <span>Adapts per-photo. Each photo is matched on its own statistics, not a one-size-fits-all preset.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Shield className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-[#16A34A]" strokeWidth={1.5} />
-                  <span>Photos never leave your device. Zero upload, zero cloud.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <ImageIcon className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-[#F59E0B]" strokeWidth={1.5} />
-                  <span>Reinhard color transfer (peer-reviewed, deterministic, instant).</span>
-                </li>
-              </ul>
-            </div>
+            <ColorMatchHeroDemo />
           </div>
         </div>
       </section>
