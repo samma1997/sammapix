@@ -129,7 +129,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Eyedrop HEX/RGB/HSL + auto palette",
     slug: "/tools/color-picker",
     category: "edit",
-    relatedTools: ["remove-bg", "filmlab", "stampit", "compress"],
+    relatedTools: ["color-match", "filmlab", "stampit", "compress"],
     relatedBlogSlugs: [
       "extract-brand-colors-from-image-2026",
     ],
@@ -249,7 +249,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Apply film-style color grading",
     slug: "/tools/filmlab",
     category: "edit",
-    relatedTools: ["stampit", "compress", "webp", "croproatio"],
+    relatedTools: ["color-match", "stampit", "compress", "croproatio"],
     relatedBlogSlugs: [],
   },
   stampit: {

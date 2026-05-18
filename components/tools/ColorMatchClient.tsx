@@ -27,6 +27,8 @@ import {
   type LUTApplyResult,
 } from "@/lib/lut-engine";
 import { useSession } from "next-auth/react";
+import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 const ACCEPTED: Record<string, string[]> = {
   "image/jpeg": [".jpg", ".jpeg"],
@@ -85,6 +87,7 @@ export default function ColorMatchClient() {
 
   const [intensity, setIntensity] = useState(100);
   const [running, setRunning] = useState(false);
+  const [showUpsell, setShowUpsell] = useState(false);
   const cancelRef = useRef(false);
 
   // Cleanup on unmount
@@ -283,7 +286,23 @@ export default function ColorMatchClient() {
 
     setRunning(false);
     trackEvent("color_match_batch_done");
-  }, [lut, files.length, intensity]);
+
+    // Soft session tracking + upsell decision (no hard block).
+    const processedCount = filesRef.current.filter((f) => f.status === "done").length;
+    if (processedCount > 0) {
+      recordBatchRun("color_match", processedCount);
+      const isLoggedIn = !!session?.user?.email;
+      const decision = shouldShowUpsell("color_match", isLoggedIn, isPro);
+      if (decision.showModal) {
+        setShowUpsell(true);
+        trackEvent("upsell_shown", {
+          tool: "color_match",
+          reason: decision.reason ?? "unknown",
+          daily_batches: decision.current.dailyBatches,
+        });
+      }
+    }
+  }, [lut, files.length, intensity, session, isPro]);
 
   // ── Download one ───────────────────────────────────────────────────────
   const downloadOne = useCallback((f: BatchFile) => {
@@ -325,6 +344,12 @@ export default function ColorMatchClient() {
   const canRun = !!lut && stats.idle > 0 && !running;
 
   return (
+    <>
+    <ProUpsellModal
+      open={showUpsell}
+      onClose={() => setShowUpsell(false)}
+      trigger="daily"
+    />
     <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-8 sm:pb-10">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-5 mb-6 items-stretch">
         {/* ─── REFERENCE ZONE ──────────────────────────────────────── */}
@@ -776,5 +801,6 @@ export default function ColorMatchClient() {
         </div>
       )}
     </section>
+    </>
   );
 }

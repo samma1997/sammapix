@@ -307,10 +307,11 @@ export default function HomePage() {
                 Photographers & Travel Bloggers
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
-                Compress 500 photos, rename for SEO, sort by location. All in minutes.
+                One look across 500 photos, compressed and renamed for SEO. All in minutes.
               </p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {[
+                  { name: "Color Match", href: "/tools/color-match" },
                   { name: "Compress", href: "/tools/compress" },
                   { name: "AI Rename", href: "/tools/ai-rename" },
                   { name: "GeoSort", href: "/tools/geosort" },
