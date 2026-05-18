@@ -136,8 +136,8 @@ export const TOOLS: Record<string, ToolMeta> = {
   },
   "color-match": {
     id: "color-match",
-    name: "AI Color Match",
-    shortDesc: "Apply 1 photo's look to 50 photos in seconds",
+    name: "LUT Generator",
+    shortDesc: "Extract 3D LUT from photo, apply to batch, export .cube",
     slug: "/tools/color-match",
     category: "ai",
     relatedTools: ["filmlab", "color-picker", "stampit", "photo-enhance"],

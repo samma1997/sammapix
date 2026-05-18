@@ -16,29 +16,31 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "AI Color Match Free — Apply 1 Look to 50 Photos at Once",
+  title: "Free LUT Generator — Extract LUT from Photo & Apply to Batch (.cube)",
   description:
-    "Drop one reference photo + 50 target photos. The AI copies the reference's colors and tone to every photo in seconds. 100% browser-based, no upload, no signup. Perfect for wedding photographers, event shoots and Instagram feeds.",
+    "Drop one reference photo. SammaPix extracts a real 3D LUT (33x33x33) from its color profile, applies it to a batch of 50 photos, and exports the LUT as a standard .cube file for Lightroom, Premiere or DaVinci. Free, browser-based, no upload, no signup.",
   keywords: [
-    "ai color match",
-    "color transfer photos",
-    "batch color grading",
-    "match colors across photos",
-    "consistent color grading",
-    "free color match online",
-    "photographer color consistency",
-    "wedding photo color match",
-    "instagram feed color match",
-    "lightroom alternative free",
-    "reinhard color transfer online",
-    "copy color from one photo to another",
-    "batch photo color correction",
+    "free lut generator",
+    "extract lut from photo",
+    "convert photo to lut",
+    "create lut from image",
+    "lut from reference photo",
+    "free 3d lut creator",
+    "cube file generator",
+    "lightroom lut from photo",
+    "premiere lut from photo",
+    "davinci resolve lut generator",
+    "ai color match batch",
+    "consistent color grading photographer",
+    "batch lut apply photos",
+    "wedding photo lut match",
+    "instagram feed lut",
   ],
   alternates: { canonical: `${APP_URL}/tools/color-match` },
   openGraph: {
-    title: "AI Color Match Free — Apply 1 Look to 50 Photos at Once",
+    title: "Free LUT Generator — Extract LUT from Photo & Apply to Batch (.cube)",
     description:
-      "Match the color and tone of one reference photo across 50 photos in seconds. Browser-based, free, no signup.",
+      "Drop a reference photo. We extract a 3D LUT and apply it to 50 photos. Export as .cube for Lightroom/Premiere/DaVinci. Free, browser-based, no upload.",
     url: `${APP_URL}/tools/color-match`,
     siteName: "SammaPix",
     type: "website",
@@ -53,57 +55,62 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Color Match Free — Apply 1 Look to 50 Photos at Once",
+    title: "Free LUT Generator — Extract LUT from Photo & Apply to Batch",
     description:
-      "Drop 1 reference + 50 photos. Browser-based color matching in seconds.",
+      "Drop a reference photo, generate a 3D LUT, apply to 50 photos, export as .cube. Browser-based.",
   },
 };
 
 const faqs = [
   {
-    question: "How does color matching actually work?",
+    question: "How does extracting a LUT from one photo actually work?",
     answer:
-      "SammaPix uses Reinhard color transfer — a peer-reviewed algorithm published in 2001 that matches the statistical color distribution (mean and standard deviation) of one image to another in Lab color space. It runs in milliseconds per photo, entirely in your browser, with deterministic results. No AI model, no cloud, no upload.",
+      "We sample 3000 colors from your reference image, then build a 17×17×17 3D LUT (4913 grid points) where each grid point is the weighted average of the 24 nearest reference colors. The result is a real 3D LUT that, when applied to any photo, pulls its colors toward the reference's palette. We then smooth the LUT with a 3D box blur to remove noise and apply trilinear interpolation when running it on your photos — same math the pros use.",
   },
   {
-    question: "Will it preserve my photo's subject and composition?",
+    question: "Can I export the LUT to use in Lightroom or Premiere?",
     answer:
-      "Yes. Unlike neural style transfer (which can hallucinate new content), Reinhard color transfer only shifts the tonal distribution — the subject, edges, and structure are 100% preserved. The intensity slider lets you blend between the original and the fully-matched result.",
+      "Yes. Once the LUT is generated, click 'Download .cube' on the reference card. The file follows the standard Adobe .cube spec (LUT_3D_SIZE 17, domain 0-1) and works in Lightroom, Premiere, DaVinci Resolve, Photoshop, Final Cut Pro, FFmpeg, OBS, and basically every color-grading tool. No upload to our servers — the file is generated locally in your browser.",
+  },
+  {
+    question: "Will my photo's subject and composition be preserved?",
+    answer:
+      "100%. The LUT only remaps colors point-by-point in the RGB cube — it never touches structure, edges, or composition. Unlike neural style transfer (which hallucinates content), a 3D LUT is a deterministic color mapping. The intensity slider blends the LUT output with the original.",
   },
   {
     question: "Is it really free? Any signup needed?",
     answer:
-      "Yes, 100% free with no signup, no watermark, no upload. The math runs entirely in your browser. Free batch: up to 50 photos per session. Pro: 300 per session.",
+      "Yes, 100% free with no signup, no watermark, no upload. The LUT generation + batch apply run entirely in your browser. Free batch: up to 50 photos per session. Pro: 300 per session.",
   },
   {
-    question: "When does this work better than Lightroom presets?",
+    question: "When does the LUT generator work best?",
     answer:
-      "When you have one photo from a shoot with the perfect light/look and want every other photo in the batch to match it — without having to copy/paste settings one by one, or share a preset file. Drop the reference, drop the batch, get the same look across all of them.",
+      "When you want to transfer a 'look' — color palette, mood, tonality — from one photo to many. Best results when reference and target have a similar content type (all outdoor, all food, all portraits). Lowering the intensity slider (40-60%) gives a softer blend if reference and target are very different.",
   },
   {
-    question: "Will it work on photos with very different content?",
+    question: "How does this differ from a Lightroom preset?",
     answer:
-      "Color transfer works best when target and reference have a similar color theme (e.g. all outdoor, or all indoor, or all sunset). Matching a sunset to a snowy mountain will give weird results. Lower the intensity slider (e.g. 40-60%) to blend with the original colors.",
+      "A Lightroom preset is a set of slider values (exposure, vibrance, etc.). A 3D LUT is a direct color-to-color mapping — it doesn't care about your photo's exposure or histogram, it just remaps every input color to an output color. LUTs are more universal (they work on any photo, any software) but less surgical than presets. Many pros use both.",
   },
   {
-    question: "What format is the output?",
+    question: "What format is the output for the batch photos?",
     answer:
-      "Output matches the input format: JPEG for JPG/WebP inputs, PNG for PNG inputs. Resolution is preserved at 100%. Download individually or as a single ZIP.",
+      "Output matches the input format: JPEG for JPG/WebP, PNG for PNG. Full resolution preserved. Download individually or as a single ZIP.",
   },
 ];
 
 const howToSteps = [
   {
     title: "Drop a reference photo",
-    desc: "On the left — pick one photo whose color and tone you want to use as the target.",
+    desc: "We extract a 3D LUT from it in 2-3 seconds. The LUT is ready to download as .cube or apply to other photos.",
   },
   {
     title: "Drop the batch",
-    desc: "On the right — drop up to 50 photos that should inherit the reference's look.",
+    desc: "Up to 50 photos. They all inherit the reference's color profile via trilinear LUT interpolation.",
   },
   {
-    title: "Click Match",
-    desc: "All photos are processed in seconds (no upload, no AI model download). Download as ZIP.",
+    title: "Click Match (and/or Download .cube)",
+    desc: "Get the batch as ZIP, or download the standalone .cube file to use the LUT in Lightroom, Premiere or DaVinci.",
   },
 ];
 
@@ -118,11 +125,12 @@ const softwareSchema = {
     "Free browser-based color match. Copy the color profile of one reference photo to a batch of 50 photos in seconds.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   featureList: [
-    "Batch color transfer (up to 50 photos)",
-    "Reinhard color transfer in Lab color space",
-    "100% browser-based (no upload)",
+    "Extract 3D LUT from a single reference photo",
+    "Export as standard .cube (Lightroom/Premiere/DaVinci)",
+    "Apply LUT to batch of 50 photos in browser",
+    "Trilinear interpolation, 17x17x17 grid",
+    "100% browser-based, no upload",
     "Intensity slider for partial matching",
-    "Download as ZIP",
   ],
 };
 
@@ -193,33 +201,34 @@ export default function ColorMatchPage() {
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-                AI Color Match. One Look. 50 Photos. Seconds.
+                Free LUT Generator. Extract a 3D LUT From Any Photo
               </h1>
             </div>
 
             <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Drop one reference photo with the look you love, then drop 50 photos
-              from your shoot. The color, tone and mood of the reference are applied
-              to every single one in seconds. Wedding shoots, Instagram feeds,
-              event photography — all with one consistent look.
+              Drop one reference photo with the look you love. We build a real
+              3D LUT (17³ trilinear) from its color profile, apply it to a batch
+              of 50 photos, and let you export the LUT as a standard <code className="text-[#F59E0B] font-mono text-sm">.cube</code> file
+              for Lightroom, Premiere, DaVinci Resolve or Photoshop. Browser-based,
+              free, no upload, no signup.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Real 3D LUT (trilinear interp.)
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Export .cube for Lightroom/Premiere
+              </span>
               <span className="inline-flex items-center gap-1">
                 <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
                 Up to 50 photos (300 Pro)
               </span>
               <span className="inline-flex items-center gap-1">
                 <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
-                Milliseconds per photo
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
                 Browser-based, no upload
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
-                Download as ZIP
               </span>
             </div>
           </div>

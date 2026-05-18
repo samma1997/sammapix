@@ -17,11 +17,12 @@ import {
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import {
-  computeRefStatsFromFile,
-  matchColorsToReference,
-  type ColorStats,
-  type ColorMatchResult,
-} from "@/lib/color-match";
+  extractLUTFromReference,
+  applyLUTToFile,
+  downloadCubeFile,
+  type Lut3D,
+  type LUTApplyResult,
+} from "@/lib/lut-engine";
 import { useSession } from "next-auth/react";
 
 const ACCEPTED: Record<string, string[]> = {
@@ -43,7 +44,7 @@ interface BatchFile {
   status: Status;
   resultBlob?: Blob;
   resultUrl?: string;
-  result?: ColorMatchResult;
+  result?: LUTApplyResult;
   error?: string;
 }
 
@@ -65,8 +66,9 @@ export default function ColorMatchClient() {
 
   const [refFile, setRefFile] = useState<File | null>(null);
   const [refPreviewUrl, setRefPreviewUrl] = useState<string>("");
-  const [refStats, setRefStats] = useState<ColorStats | null>(null);
+  const [lut, setLut] = useState<Lut3D | null>(null);
   const [refLoading, setRefLoading] = useState(false);
+  const [refProgress, setRefProgress] = useState(0);
 
   const [files, setFiles] = useState<BatchFile[]>([]);
   const filesRef = useRef<BatchFile[]>([]);
@@ -100,20 +102,30 @@ export default function ColorMatchClient() {
       if (refPreviewUrl) URL.revokeObjectURL(refPreviewUrl);
       setRefFile(f);
       setRefPreviewUrl(URL.createObjectURL(f));
-      setRefStats(null);
+      setLut(null);
       setRefLoading(true);
+      setRefProgress(0);
       try {
-        const stats = await computeRefStatsFromFile(f);
-        setRefStats(stats);
-        trackEvent("color_match_reference_loaded");
+        const lut3d = await extractLUTFromReference(f, {
+          onProgress: (pct) => setRefProgress(pct),
+        });
+        setLut(lut3d);
+        trackEvent("color_match_lut_extracted", { size: lut3d.size });
       } catch (e) {
-        console.error("Reference stats failed", e);
+        console.error("LUT extraction failed", e);
       } finally {
         setRefLoading(false);
       }
     },
     [refPreviewUrl]
   );
+
+  const handleDownloadCube = useCallback(() => {
+    if (!lut || !refFile) return;
+    const base = refFile.name.replace(/\.[^.]+$/, "");
+    downloadCubeFile(lut, `sammapix-${base}.cube`);
+    trackEvent("color_match_cube_downloaded");
+  }, [lut, refFile]);
 
   const refDz = useDropzone({
     onDrop: onDropRef,
@@ -174,7 +186,7 @@ export default function ColorMatchClient() {
 
   // ── Run batch ──────────────────────────────────────────────────────────
   const runBatch = useCallback(async () => {
-    if (!refStats) return;
+    if (!lut) return;
     cancelRef.current = false;
     setRunning(true);
     trackEvent("color_match_batch_started", { count: files.length, intensity });
@@ -187,7 +199,7 @@ export default function ColorMatchClient() {
         prev.map((f) => (f.id === next.id ? { ...f, status: "processing" as const } : f))
       );
       try {
-        const result = await matchColorsToReference(next.file, refStats, intensityNorm);
+        const result = await applyLUTToFile(next.file, lut, intensityNorm);
         const url = URL.createObjectURL(result.blob);
         setFiles((prev) =>
           prev.map((f) =>
@@ -215,7 +227,7 @@ export default function ColorMatchClient() {
 
     setRunning(false);
     trackEvent("color_match_batch_done");
-  }, [refStats, files.length, intensity]);
+  }, [lut, files.length, intensity]);
 
   // ── Download one ───────────────────────────────────────────────────────
   const downloadOne = useCallback((f: BatchFile) => {
@@ -254,7 +266,7 @@ export default function ColorMatchClient() {
     return { total, done, errored, idle, pct };
   })();
 
-  const canRun = !!refStats && stats.idle > 0 && !running;
+  const canRun = !!lut && stats.idle > 0 && !running;
 
   return (
     <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
@@ -312,7 +324,8 @@ export default function ColorMatchClient() {
                     if (refPreviewUrl) URL.revokeObjectURL(refPreviewUrl);
                     setRefFile(null);
                     setRefPreviewUrl("");
-                    setRefStats(null);
+                    setLut(null);
+                    setRefProgress(0);
                   }}
                   className="absolute top-1.5 right-1.5 bg-black/60 hover:bg-black/80 text-white rounded-full p-1"
                   title="Remove"
@@ -323,11 +336,35 @@ export default function ColorMatchClient() {
               <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] truncate">
                 {refFile.name} · {formatBytes(refFile.size)}
               </p>
-              {refStats && (
-                <p className="inline-flex items-center gap-1 text-[11px] text-[#16A34A]">
-                  <CheckCircle2 className="h-3 w-3" strokeWidth={2} />
-                  Color profile extracted
-                </p>
+              {refLoading && (
+                <div className="text-[11px] text-[#92400E] dark:text-[#FCD34D]">
+                  <p className="inline-flex items-center gap-1.5">
+                    <Loader2 className="h-3 w-3 animate-spin" strokeWidth={2} />
+                    Building 3D LUT ({refProgress}%)
+                  </p>
+                  <div className="h-0.5 w-full bg-[#FEF3C7] dark:bg-[#3B2814] rounded mt-1 overflow-hidden">
+                    <div
+                      className="h-0.5 bg-[#F59E0B] rounded transition-all"
+                      style={{ width: `${refProgress}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+              {lut && (
+                <>
+                  <p className="inline-flex items-center gap-1 text-[11px] text-[#16A34A]">
+                    <CheckCircle2 className="h-3 w-3" strokeWidth={2} />
+                    LUT extracted ({lut.size}×{lut.size}×{lut.size})
+                  </p>
+                  <button
+                    onClick={handleDownloadCube}
+                    className="inline-flex items-center gap-1 text-[11px] font-medium text-[#92400E] dark:text-[#FCD34D] hover:underline mt-0.5"
+                    title="Download as standard .cube for Lightroom / Premiere / DaVinci"
+                  >
+                    <Download className="h-3 w-3" strokeWidth={2} />
+                    Download .cube
+                  </button>
+                </>
               )}
             </div>
           )}
@@ -409,9 +446,11 @@ export default function ColorMatchClient() {
                   <span className="text-[#DC2626]"> · {stats.errored} failed</span>
                 )}
               </p>
-              {!refStats && files.length > 0 && (
+              {!lut && files.length > 0 && (
                 <p className="text-[11px] text-[#92400E] dark:text-[#FCD34D] mt-0.5">
-                  Drop a reference photo on the left to start matching.
+                  {refLoading
+                    ? "Building LUT from your reference, hold on…"
+                    : "Drop a reference photo on the left to start matching."}
                 </p>
               )}
             </div>
@@ -519,7 +558,7 @@ export default function ColorMatchClient() {
       )}
 
       {/* ─── TIP for first use ──────────────────────────────────── */}
-      {refStats && files.length > 0 && stats.done === 0 && (
+      {lut && files.length > 0 && stats.done === 0 && (
         <div className="mt-3 mb-3 p-3 bg-[#FFFBEB] dark:bg-[#3B2814] border border-[#FDE68A] dark:border-[#78350F] rounded-md text-xs text-[#92400E] dark:text-[#FCD34D] leading-relaxed">
           <strong>Tip:</strong> color match works best when the reference and the batch
           have <strong>similar content</strong> (all outdoor, all food, all portraits, etc.).
