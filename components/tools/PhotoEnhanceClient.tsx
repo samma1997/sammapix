@@ -261,22 +261,46 @@ export default function PhotoEnhanceClient() {
     trackEvent("photo_enhance_deep_started");
 
     try {
-      // Convert file to base64 (strip data: prefix)
+      // Downscale to max 1024px and JPEG-compress before sending — keeps the
+      // request well under Vercel's 4.5 MB body limit and Gemini's input size cap.
+      const bitmap = await createImageBitmap(target.file);
+      const MAX_DIM = 1024;
+      const scale =
+        Math.max(bitmap.width, bitmap.height) > MAX_DIM
+          ? MAX_DIM / Math.max(bitmap.width, bitmap.height)
+          : 1;
+      const w = Math.round(bitmap.width * scale);
+      const h = Math.round(bitmap.height * scale);
+      const canvas = new OffscreenCanvas(w, h);
+      const ctx = canvas.getContext("2d")!;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(bitmap, 0, 0, w, h);
+      bitmap.close();
+      const jpegBlob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.85 });
       const dataUrl = await new Promise<string>((resolve, reject) => {
         const r = new FileReader();
         r.onload = () => resolve(r.result as string);
-        r.onerror = () => reject(new Error("Failed to read file"));
-        r.readAsDataURL(target.file);
+        r.onerror = () => reject(new Error("Failed to read"));
+        r.readAsDataURL(jpegBlob);
       });
       const base64 = dataUrl.split(",")[1];
-      const mimeType = target.file.type || "image/jpeg";
 
       const res = await fetch("/api/ai/deep-restore", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageBase64: base64, mimeType }),
+        body: JSON.stringify({ imageBase64: base64, mimeType: "image/jpeg" }),
       });
-      const json = await res.json();
+
+      // Always try to read response, even on error, so we surface the real reason.
+      const rawText = await res.text();
+      let json: { error?: string; code?: string; data?: { imageBase64: string; mimeType: string }; details?: string } = {};
+      try {
+        json = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        throw new Error(
+          `Server returned non-JSON (HTTP ${res.status}). ${rawText.slice(0, 120) || "Empty response."}`
+        );
+      }
       if (!res.ok) {
         const msg =
           json.code === "UNAUTHENTICATED"

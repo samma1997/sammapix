@@ -119,20 +119,41 @@ export async function POST(req: NextRequest) {
   }
 
   // 6. Call Gemini Nano Banana
+  const t0 = Date.now();
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: IMAGE_MODEL });
+
+    console.log(
+      `[deep-restore] start email=${email} model=${IMAGE_MODEL} payload_bytes=${imageBase64.length}`
+    );
 
     const result = await model.generateContent([
       { inlineData: { data: imageBase64, mimeType } },
       RESTORE_PROMPT,
     ]);
 
-    // Parse response → expect one part with inlineData containing the image
-    const parts = result.response.candidates?.[0]?.content?.parts ?? [];
+    const candidates = result.response.candidates ?? [];
+    const parts = candidates[0]?.content?.parts ?? [];
     const imagePart = parts.find((p) => p.inlineData?.data);
+    const textParts = parts.filter((p) => "text" in p && p.text).map((p) => p.text);
+
+    console.log(
+      `[deep-restore] response email=${email} candidates=${candidates.length} parts=${parts.length} ` +
+        `imagePart=${!!imagePart} textParts=${textParts.length} elapsed=${Date.now() - t0}ms ` +
+        `finishReason=${candidates[0]?.finishReason ?? "n/a"}`
+    );
+
     if (!imagePart?.inlineData?.data) {
-      throw new Error("AI did not return an image (model may have refused the edit).");
+      // The model returned only text or refused. Tell user what it actually said.
+      const refusalText = textParts.join(" ").slice(0, 200) || "model returned no image";
+      return NextResponse.json(
+        {
+          error: `Gemini returned no image (${candidates[0]?.finishReason ?? "no-reason"}). It said: "${refusalText}"`,
+          code: "NO_IMAGE_OUTPUT",
+        },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json(
@@ -153,10 +174,13 @@ export async function POST(req: NextRequest) {
       }
     );
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    console.error("[ai/deep-restore] Error:", message);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`[deep-restore] EXCEPTION email=${email} elapsed=${Date.now() - t0}ms`, message);
     return NextResponse.json(
-      { error: "Deep Restore failed. Try again or use Quick Enhance instead.", code: "AI_ERROR", details: message },
+      {
+        error: `Deep Restore failed: ${message.slice(0, 200)}`,
+        code: "AI_ERROR",
+      },
       { status: 500 }
     );
   }
