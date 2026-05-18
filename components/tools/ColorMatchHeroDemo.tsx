@@ -5,10 +5,10 @@ import Image from "next/image";
 
 interface Look {
   name: string;
-  ref: string; // path to reference image in /public
+  ref: string; // reference photo
   refAlt: string;
-  /** CSS filter applied to the target image to fake the LUT effect for the demo. */
-  targetFilter: string;
+  target: string; // pre-rendered target photo with the LUT already applied
+  targetAlt: string;
   badge: string;
 }
 
@@ -17,29 +17,28 @@ const LOOKS: Look[] = [
     name: "Warm sunset",
     ref: "/demo/color-match/ref-warm.jpg",
     refAlt: "Red hibiscus flower — warm-toned reference",
-    targetFilter:
-      "saturate(1.45) hue-rotate(-15deg) brightness(1.05) contrast(1.08) sepia(0.18)",
+    target: "/demo/color-match/target-warm.jpg",
+    targetAlt: "Golden retriever puppies with warm sunset color grading applied",
     badge: "#F97316",
   },
   {
     name: "Cinematic teal",
     ref: "/demo/color-match/ref-cold.jpg",
     refAlt: "Mountain lake with teal sky — cool-toned reference",
-    targetFilter:
-      "saturate(0.85) hue-rotate(155deg) brightness(0.95) contrast(1.15)",
+    target: "/demo/color-match/target-cold.jpg",
+    targetAlt: "Golden retriever puppies with cinematic teal color grading applied",
     badge: "#0E7490",
   },
   {
     name: "Vintage film",
     ref: "/demo/color-match/ref-vintage.jpg",
     refAlt: "Night sky with autumn tree — vintage film reference",
-    targetFilter:
-      "sepia(0.45) saturate(0.85) brightness(0.92) contrast(0.95) hue-rotate(-5deg)",
+    target: "/demo/color-match/target-vintage.jpg",
+    targetAlt: "Golden retriever puppies with vintage film color grading applied",
     badge: "#92400E",
   },
 ];
 
-const TARGET = "/demo/color-match/target.jpg";
 const CYCLE_MS = 3200;
 
 export default function ColorMatchHeroDemo() {
@@ -120,17 +119,21 @@ export default function ColorMatchHeroDemo() {
             </span>
           </div>
 
-          {/* Target with simulated LUT */}
+          {/* Target with applied LUT (pre-rendered) */}
           <div className="flex flex-col items-center gap-1.5">
             <div className="relative w-full aspect-square rounded-md overflow-hidden bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-              <Image
-                src={TARGET}
-                alt="Target photo recolored to match the reference"
-                fill
-                sizes="200px"
-                className="object-cover transition-[filter] duration-700"
-                style={{ filter: look.targetFilter }}
-              />
+              {LOOKS.map((l, i) => (
+                <Image
+                  key={l.target}
+                  src={l.target}
+                  alt={l.targetAlt}
+                  fill
+                  sizes="200px"
+                  className={`object-cover transition-opacity duration-700 ${
+                    i === idx ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
             </div>
             <p className="text-[10px] text-[#737373] dark:text-[#A3A3A3]">
               Matched
