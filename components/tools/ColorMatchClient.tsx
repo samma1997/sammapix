@@ -13,6 +13,8 @@ import {
   AlertCircle,
   X,
   Play,
+  FileText,
+  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
@@ -20,6 +22,7 @@ import {
   extractLUTFromReference,
   applyLUTToFile,
   downloadCubeFile,
+  loadLUTFromCubeFile,
   type Lut3D,
   type LUTApplyResult,
 } from "@/lib/lut-engine";
@@ -64,11 +67,15 @@ export default function ColorMatchClient() {
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const maxFiles = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
 
+  const [refSource, setRefSource] = useState<"photo" | "cube">("photo");
   const [refFile, setRefFile] = useState<File | null>(null);
   const [refPreviewUrl, setRefPreviewUrl] = useState<string>("");
+  const [cubeFile, setCubeFile] = useState<File | null>(null);
   const [lut, setLut] = useState<Lut3D | null>(null);
   const [refLoading, setRefLoading] = useState(false);
   const [refProgress, setRefProgress] = useState(0);
+  const [refError, setRefError] = useState("");
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const [files, setFiles] = useState<BatchFile[]>([]);
   const filesRef = useRef<BatchFile[]>([]);
@@ -126,6 +133,55 @@ export default function ColorMatchClient() {
     downloadCubeFile(lut, `sammapix-${base}.cube`);
     trackEvent("color_match_cube_downloaded");
   }, [lut, refFile]);
+
+  // ── .cube import dropzone ──────────────────────────────────────────────
+  const onDropCube = useCallback(async (accepted: File[]) => {
+    const f = accepted[0];
+    if (!f) return;
+    if (f.size > 10 * 1024 * 1024) {
+      setRefError("File too large (max 10 MB).");
+      return;
+    }
+    setCubeFile(f);
+    setRefLoading(true);
+    setRefError("");
+    setRefProgress(50);
+    try {
+      const parsed = await loadLUTFromCubeFile(f);
+      setLut(parsed);
+      setRefProgress(100);
+      trackEvent("color_match_cube_imported", { size: parsed.size });
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Failed to parse";
+      setRefError(msg);
+      setLut(null);
+    } finally {
+      setRefLoading(false);
+    }
+  }, []);
+
+  const cubeDz = useDropzone({
+    onDrop: onDropCube,
+    accept: { "application/octet-stream": [".cube"], "text/plain": [".cube"] },
+    multiple: false,
+    maxFiles: 1,
+  });
+
+  const switchRefSource = useCallback(
+    (source: "photo" | "cube") => {
+      if (source === refSource) return;
+      // Clear current state
+      if (refPreviewUrl) URL.revokeObjectURL(refPreviewUrl);
+      setRefFile(null);
+      setRefPreviewUrl("");
+      setCubeFile(null);
+      setLut(null);
+      setRefError("");
+      setRefProgress(0);
+      setRefSource(source);
+    },
+    [refSource, refPreviewUrl]
+  );
 
   const refDz = useDropzone({
     onDrop: onDropRef,
@@ -270,122 +326,240 @@ export default function ColorMatchClient() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-8 sm:pb-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-5 mb-6 items-stretch">
         {/* ─── REFERENCE ZONE ──────────────────────────────────────── */}
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-4 bg-white dark:bg-[#191919] flex flex-col">
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-7 h-7 rounded-md bg-[#F59E0B15] flex items-center justify-center">
+            <div className="w-7 h-7 rounded-md bg-[#F59E0B15] flex items-center justify-center flex-shrink-0">
               <Sparkles className="h-4 w-4 text-[#F59E0B]" strokeWidth={1.5} />
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                1. Reference photo
+                1. Look source
               </p>
               <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3]">
-                The look you want to copy
+                From a photo or a .cube file
               </p>
             </div>
           </div>
 
-          {!refFile ? (
-            <div
-              {...refDz.getRootProps()}
+          {/* Source toggle */}
+          <div className="flex p-0.5 rounded-md bg-[#F5F5F5] dark:bg-[#252525] mb-3">
+            <button
+              type="button"
+              onClick={() => switchRefSource("photo")}
               className={cn(
-                "border border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors",
-                "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#F59E0B] hover:bg-[#FFFBEB] dark:hover:bg-[#3B2814]",
-                refDz.isDragActive && "border-[#F59E0B] bg-[#FFFBEB] dark:bg-[#3B2814]"
+                "flex-1 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 text-[11px] font-medium rounded transition-colors",
+                refSource === "photo"
+                  ? "bg-white dark:bg-[#191919] text-[#171717] dark:text-[#E5E5E5] shadow-sm"
+                  : "text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
               )}
             >
-              <input {...refDz.getInputProps()} />
-              <Upload className="h-5 w-5 text-[#F59E0B] mx-auto mb-2" strokeWidth={1.5} />
-              <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
-                Drop reference image
-              </p>
-              <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] mt-0.5">
-                JPG, PNG, WebP
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              <div className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={refPreviewUrl}
-                  alt="Reference"
-                  className="w-full aspect-video object-cover rounded-lg bg-[#FAFAFA] dark:bg-[#1E1E1E]"
-                />
-                {refLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg">
-                    <Loader2 className="h-5 w-5 animate-spin text-white" strokeWidth={1.5} />
-                  </div>
-                )}
-                <button
-                  onClick={() => {
-                    if (refPreviewUrl) URL.revokeObjectURL(refPreviewUrl);
-                    setRefFile(null);
-                    setRefPreviewUrl("");
-                    setLut(null);
-                    setRefProgress(0);
-                  }}
-                  className="absolute top-1.5 right-1.5 bg-black/60 hover:bg-black/80 text-white rounded-full p-1"
-                  title="Remove"
+              <ImageLucide className="h-3 w-3" strokeWidth={1.8} />
+              From photo
+            </button>
+            <button
+              type="button"
+              onClick={() => switchRefSource("cube")}
+              className={cn(
+                "flex-1 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 text-[11px] font-medium rounded transition-colors",
+                refSource === "cube"
+                  ? "bg-white dark:bg-[#191919] text-[#171717] dark:text-[#E5E5E5] shadow-sm"
+                  : "text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+              )}
+            >
+              <FileText className="h-3 w-3" strokeWidth={1.8} />
+              From .cube
+            </button>
+          </div>
+
+          {/* CUBE MODE */}
+          {refSource === "cube" && (
+            <>
+              {!cubeFile ? (
+                <div
+                  {...cubeDz.getRootProps()}
+                  className={cn(
+                    "border border-dashed rounded-lg p-5 text-center cursor-pointer transition-colors flex-1 flex flex-col items-center justify-center",
+                    "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#F59E0B] hover:bg-[#FFFBEB] dark:hover:bg-[#3B2814]",
+                    cubeDz.isDragActive && "border-[#F59E0B] bg-[#FFFBEB] dark:bg-[#3B2814]"
+                  )}
                 >
-                  <X className="h-3.5 w-3.5" strokeWidth={2} />
-                </button>
-              </div>
-              <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] truncate">
-                {refFile.name} · {formatBytes(refFile.size)}
-              </p>
-              {refLoading && (
-                <div className="text-[11px] text-[#92400E] dark:text-[#FCD34D]">
-                  <p className="inline-flex items-center gap-1.5">
-                    <Loader2 className="h-3 w-3 animate-spin" strokeWidth={2} />
-                    Building 3D LUT ({refProgress}%)
+                  <input {...cubeDz.getInputProps()} />
+                  <FileText className="h-5 w-5 text-[#F59E0B] mb-1.5" strokeWidth={1.5} />
+                  <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
+                    Drop .cube file
                   </p>
-                  <div className="h-0.5 w-full bg-[#FEF3C7] dark:bg-[#3B2814] rounded mt-1 overflow-hidden">
-                    <div
-                      className="h-0.5 bg-[#F59E0B] rounded transition-all"
-                      style={{ width: `${refProgress}%` }}
-                    />
+                  <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] mt-0.5">
+                    From Lightroom / Premiere / VSCO / etc.
+                  </p>
+                </div>
+              ) : (
+                <div className="flex-1 flex flex-col gap-2">
+                  <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-3 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5] truncate">
+                          {cubeFile.name}
+                        </p>
+                        <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3]">
+                          {formatBytes(cubeFile.size)}
+                          {lut && ` · ${lut.size}×${lut.size}×${lut.size}`}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setCubeFile(null);
+                          setLut(null);
+                          setRefError("");
+                        }}
+                        className="text-[#A3A3A3] hover:text-[#DC2626]"
+                        title="Remove"
+                      >
+                        <X className="h-3.5 w-3.5" strokeWidth={2} />
+                      </button>
+                    </div>
+                    {refLoading && (
+                      <p className="text-[11px] text-[#92400E] dark:text-[#FCD34D] mt-1 inline-flex items-center gap-1.5">
+                        <Loader2 className="h-3 w-3 animate-spin" strokeWidth={2} />
+                        Parsing…
+                      </p>
+                    )}
+                    {lut && !refLoading && (
+                      <p className="text-[11px] text-[#16A34A] mt-1 inline-flex items-center gap-1">
+                        <CheckCircle2 className="h-3 w-3" strokeWidth={2} />
+                        LUT loaded, ready
+                      </p>
+                    )}
+                    {refError && (
+                      <p className="text-[11px] text-[#DC2626] mt-1">{refError}</p>
+                    )}
                   </div>
                 </div>
               )}
-              {lut && (
-                <>
-                  <p className="inline-flex items-center gap-1 text-[11px] text-[#16A34A]">
-                    <CheckCircle2 className="h-3 w-3" strokeWidth={2} />
-                    LUT extracted ({lut.size}×{lut.size}×{lut.size})
-                  </p>
-                  <button
-                    onClick={handleDownloadCube}
-                    className="inline-flex items-center gap-1 text-[11px] font-medium text-[#92400E] dark:text-[#FCD34D] hover:underline mt-0.5"
-                    title="Download as standard .cube for Lightroom / Premiere / DaVinci"
-                  >
-                    <Download className="h-3 w-3" strokeWidth={2} />
-                    Download .cube
-                  </button>
-                </>
-              )}
-            </div>
+            </>
           )}
 
-          {/* Intensity slider */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-1">
-              <span>Match intensity</span>
-              <span>{intensity}%</span>
-            </div>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={intensity}
-              onChange={(e) => setIntensity(Number(e.target.value))}
-              className="w-full accent-[#F59E0B]"
-            />
-            <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] mt-1">
-              0% = no change · 100% = full match
-            </p>
+          {/* PHOTO MODE */}
+          {refSource === "photo" && (
+            !refFile ? (
+              <div
+                {...refDz.getRootProps()}
+                className={cn(
+                  "border border-dashed rounded-lg p-5 text-center cursor-pointer transition-colors flex-1 flex flex-col items-center justify-center",
+                  "border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#1E1E1E] hover:border-[#F59E0B] hover:bg-[#FFFBEB] dark:hover:bg-[#3B2814]",
+                  refDz.isDragActive && "border-[#F59E0B] bg-[#FFFBEB] dark:bg-[#3B2814]"
+                )}
+              >
+                <input {...refDz.getInputProps()} />
+                <Upload className="h-5 w-5 text-[#F59E0B] mb-1.5" strokeWidth={1.5} />
+                <p className="text-xs font-medium text-[#171717] dark:text-[#E5E5E5]">
+                  Drop reference image
+                </p>
+                <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] mt-0.5">
+                  JPG, PNG, WebP
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={refPreviewUrl}
+                    alt="Reference"
+                    className="w-full aspect-video object-cover rounded-lg bg-[#FAFAFA] dark:bg-[#1E1E1E]"
+                  />
+                  {refLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg">
+                      <Loader2 className="h-5 w-5 animate-spin text-white" strokeWidth={1.5} />
+                    </div>
+                  )}
+                  <button
+                    onClick={() => {
+                      if (refPreviewUrl) URL.revokeObjectURL(refPreviewUrl);
+                      setRefFile(null);
+                      setRefPreviewUrl("");
+                      setLut(null);
+                      setRefProgress(0);
+                    }}
+                    className="absolute top-1.5 right-1.5 bg-black/60 hover:bg-black/80 text-white rounded-full p-1"
+                    title="Remove"
+                  >
+                    <X className="h-3.5 w-3.5" strokeWidth={2} />
+                  </button>
+                </div>
+                <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] truncate">
+                  {refFile.name} · {formatBytes(refFile.size)}
+                </p>
+                {refLoading && (
+                  <div className="text-[11px] text-[#92400E] dark:text-[#FCD34D]">
+                    <p className="inline-flex items-center gap-1.5">
+                      <Loader2 className="h-3 w-3 animate-spin" strokeWidth={2} />
+                      Building 3D LUT ({refProgress}%)
+                    </p>
+                    <div className="h-0.5 w-full bg-[#FEF3C7] dark:bg-[#3B2814] rounded mt-1 overflow-hidden">
+                      <div
+                        className="h-0.5 bg-[#F59E0B] rounded transition-all"
+                        style={{ width: `${refProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+                {lut && (
+                  <>
+                    <p className="inline-flex items-center gap-1 text-[11px] text-[#16A34A]">
+                      <CheckCircle2 className="h-3 w-3" strokeWidth={2} />
+                      LUT extracted ({lut.size}×{lut.size}×{lut.size})
+                    </p>
+                    <button
+                      onClick={handleDownloadCube}
+                      className="inline-flex items-center gap-1 text-[11px] font-medium text-[#92400E] dark:text-[#FCD34D] hover:underline mt-0.5"
+                      title="Download as standard .cube for Lightroom / Premiere / DaVinci"
+                    >
+                      <Download className="h-3 w-3" strokeWidth={2} />
+                      Download .cube
+                    </button>
+                  </>
+                )}
+              </div>
+            )
+          )}
+
+          {/* Advanced toggle */}
+          <div className="mt-auto pt-3">
+            <button
+              type="button"
+              onClick={() => setShowAdvanced((v) => !v)}
+              className="inline-flex items-center gap-1 text-[11px] text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+            >
+              <ChevronDown
+                className={cn(
+                  "h-3 w-3 transition-transform",
+                  showAdvanced ? "rotate-180" : ""
+                )}
+                strokeWidth={2}
+              />
+              Advanced
+            </button>
+            {showAdvanced && (
+              <div className="mt-2">
+                <div className="flex items-center justify-between text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-1">
+                  <span>Match intensity</span>
+                  <span className="font-mono">{intensity}%</span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={intensity}
+                  onChange={(e) => setIntensity(Number(e.target.value))}
+                  className="w-full accent-[#F59E0B]"
+                />
+                <p className="text-[10px] text-[#A3A3A3] dark:text-[#737373] mt-1">
+                  0% = no change · 100% = full match
+                </p>
+              </div>
+            )}
           </div>
         </div>
 

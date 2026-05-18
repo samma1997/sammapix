@@ -16,7 +16,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 export const metadata: Metadata = {
   title: "Free LUT Generator — Extract LUT from Photo & Apply to Batch (.cube)",
   description:
-    "Drop one reference photo. SammaPix extracts a real 3D LUT (33x33x33) from its color profile, applies it to a batch of 50 photos, and exports the LUT as a standard .cube file for Lightroom, Premiere or DaVinci. Free, browser-based, no upload, no signup.",
+    "Extract a 3D LUT from any photo OR upload your existing .cube file (Lightroom/Premiere/VSCO). Apply to a batch of 50 photos in seconds. Export as standard .cube. Free, browser-based, no upload, no signup.",
   keywords: [
     "free lut generator",
     "extract lut from photo",
@@ -199,16 +199,16 @@ export default function ColorMatchPage() {
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-                Free LUT Generator. Extract a 3D LUT From Any Photo
+                Free LUT Generator. Extract or Upload Your .cube
               </h1>
             </div>
 
             <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Drop one reference photo with the look you love. We build a real
-              3D LUT (17³ trilinear) from its color profile, apply it to a batch
-              of 50 photos, and let you export the LUT as a standard <code className="text-[#F59E0B] font-mono text-sm">.cube</code> file
-              for Lightroom, Premiere, DaVinci Resolve or Photoshop. Browser-based,
-              free, no upload, no signup.
+              Two ways to color-match a batch of 50 photos: <strong>extract</strong> a 3D LUT
+              from a single reference photo, or <strong>upload</strong> your existing{" "}
+              <code className="text-[#F59E0B] font-mono text-sm">.cube</code> file from
+              Lightroom, Premiere, VSCO, Mastin Labs, etc. Apply to the whole batch
+              with trilinear interpolation. Browser-based, free, no upload, no signup.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">

@@ -354,6 +354,95 @@ export function lutToCubeString(lut: Lut3D): string {
   return lines.join("\n");
 }
 
+/**
+ * Parse a `.cube` file (Adobe spec). Supports LUT_3D_SIZE only (no 1D LUT).
+ * Handles common variations: comments, DOMAIN_MIN/MAX, optional TITLE.
+ * Returns null on failure.
+ */
+export function parseCubeFile(text: string, fallbackTitle: string = "Imported LUT"): Lut3D | null {
+  const lines = text.split(/\r?\n/);
+  let size = 0;
+  let title = fallbackTitle;
+  let domainMin: [number, number, number] = [0, 0, 0];
+  let domainMax: [number, number, number] = [1, 1, 1];
+  const values: number[] = [];
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+
+    // Header keywords
+    if (line.startsWith("TITLE")) {
+      const m = line.match(/TITLE\s+"([^"]*)"|TITLE\s+(\S.+)$/i);
+      if (m) title = (m[1] ?? m[2] ?? title).trim();
+      continue;
+    }
+    if (line.startsWith("LUT_3D_SIZE")) {
+      const m = line.match(/LUT_3D_SIZE\s+(\d+)/i);
+      if (m) size = parseInt(m[1], 10);
+      continue;
+    }
+    if (line.startsWith("LUT_1D_SIZE")) {
+      return null; // 1D LUTs unsupported in this engine
+    }
+    if (line.startsWith("DOMAIN_MIN")) {
+      const m = line.match(/DOMAIN_MIN\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)/i);
+      if (m) domainMin = [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])];
+      continue;
+    }
+    if (line.startsWith("DOMAIN_MAX")) {
+      const m = line.match(/DOMAIN_MAX\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)/i);
+      if (m) domainMax = [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])];
+      continue;
+    }
+
+    // Data row: 3 floats
+    const parts = line.split(/\s+/);
+    if (parts.length >= 3) {
+      const r = parseFloat(parts[0]);
+      const g = parseFloat(parts[1]);
+      const b = parseFloat(parts[2]);
+      if (!Number.isNaN(r) && !Number.isNaN(g) && !Number.isNaN(b)) {
+        values.push(r, g, b);
+      }
+    }
+  }
+
+  if (size < 2 || size > 65) return null;
+  const expected = size * size * size * 3;
+  if (values.length < expected) return null;
+
+  // Normalize to [0,1] if domain is non-default
+  const data = new Float32Array(expected);
+  const rangeR = domainMax[0] - domainMin[0];
+  const rangeG = domainMax[1] - domainMin[1];
+  const rangeB = domainMax[2] - domainMin[2];
+  const needsNorm = rangeR !== 1 || rangeG !== 1 || rangeB !== 1 ||
+                    domainMin[0] !== 0 || domainMin[1] !== 0 || domainMin[2] !== 0;
+
+  for (let i = 0; i < expected; i += 3) {
+    if (needsNorm) {
+      data[i] = (values[i] - domainMin[0]) / rangeR;
+      data[i + 1] = (values[i + 1] - domainMin[1]) / rangeG;
+      data[i + 2] = (values[i + 2] - domainMin[2]) / rangeB;
+    } else {
+      data[i] = values[i];
+      data[i + 1] = values[i + 1];
+      data[i + 2] = values[i + 2];
+    }
+  }
+
+  return { size, data, title };
+}
+
+/** Load a .cube file from a File input and parse it. */
+export async function loadLUTFromCubeFile(file: File): Promise<Lut3D> {
+  const text = await file.text();
+  const lut = parseCubeFile(text, file.name.replace(/\.cube$/i, ""));
+  if (!lut) throw new Error("Invalid .cube file or unsupported format (only 3D LUTs supported).");
+  return lut;
+}
+
 export function downloadCubeFile(lut: Lut3D, filename: string = "sammapix-look.cube"): void {
   const text = lutToCubeString(lut);
   const blob = new Blob([text], { type: "text/plain" });
