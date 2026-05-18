@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Minimize2,
@@ -22,6 +22,9 @@ import {
 import { useSession } from "next-auth/react";
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
+import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
+import { trackEvent } from "@/lib/analytics";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -277,10 +280,46 @@ export default function NextStepSuggestions({
 
   const suggestionKeys = NEXT_STEPS_MAP[currentTool] ?? [];
 
+  // ── Session tracking + soft upsell ────────────────────────────────────────
+  // Fires exactly once per batch completion. Tracks daily/monthly usage in
+  // localStorage so we can ship a "monthly usage" widget later, and triggers
+  // the upsell modal when free users hit the daily threshold.
+  const [showUpsell, setShowUpsell] = useState(false);
+  const trackedBatchRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!allDone || displayCount === 0) {
+      trackedBatchRef.current = null;
+      return;
+    }
+    // Fingerprint this batch so we don't record twice if state churns.
+    const batchFp = items.map((i) => i.id ?? "").join("|") + `:${displayCount}`;
+    if (trackedBatchRef.current === batchFp) return;
+    trackedBatchRef.current = batchFp;
+
+    recordBatchRun(currentTool, displayCount);
+
+    const decision = shouldShowUpsell(currentTool, !!session?.user?.email, isPro);
+    if (decision.showModal) {
+      setShowUpsell(true);
+      trackEvent("upsell_shown", {
+        tool: currentTool,
+        reason: decision.reason ?? "unknown",
+        daily_batches: decision.current.dailyBatches,
+      });
+    }
+  }, [allDone, displayCount, currentTool, items, session, isPro]);
+
   // Nothing to show until all files are done
-  if (!allDone || suggestionKeys.length === 0) return null;
+  if (!allDone || suggestionKeys.length === 0) {
+    return showUpsell ? (
+      <ProUpsellModal open={showUpsell} onClose={() => setShowUpsell(false)} trigger="daily" />
+    ) : null;
+  }
 
   return (
+    <>
+    <ProUpsellModal open={showUpsell} onClose={() => setShowUpsell(false)} trigger="daily" />
     <div
       className={cn(
         "mt-4 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A]",
@@ -337,5 +376,6 @@ export default function NextStepSuggestions({
       <ShareButton />
 
     </div>
+    </>
   );
 }
