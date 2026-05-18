@@ -79,7 +79,7 @@ export async function sendDay3Email(to: string, name: string | null) {
   const html = await render(Day3Email({ name: name ?? "there", founding }));
   const subject = founding.active
     ? `Lock $${founding.monthlyPriceUsd}/mo forever — ${founding.spotsLeft} Founding spots left`
-    : "Unlock all 35 tools for less than a coffee";
+    : "Unlock all 32 tools for less than a coffee";
   await resend.emails.send({
     from: FROM,
     to,
