@@ -16,9 +16,9 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "AI Photo Enhancer Free Online — Improve Image Quality 2x",
+  title: "AI Photo Enhancer Free — Clean Up Compressed Photos & Upscale 2x",
   description:
-    "Enhance photo quality with AI. Sharpen blurry photos, remove JPEG compression artifacts, upscale 2x with super-resolution. 100% browser-based, no upload, no signup, free.",
+    "Free AI enhancer for compressed, grainy or low-resolution photos. Removes JPEG artifacts, sharpens soft details, and upscales 2x. 100% browser-based, no upload, no signup. Best for WhatsApp/messaging photos, screenshots and old scans.",
   keywords: [
     "ai photo enhancer",
     "ai photo enhancer free",
@@ -195,16 +195,22 @@ export default function PhotoEnhancePage() {
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-                AI Photo Enhancer. Sharpen, Restore Quality, Upscale 2x
+                AI Photo Enhancer. Clean Up Compressed Photos & Upscale 2x
               </h1>
             </div>
 
             <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Fix blurry photos, remove JPEG compression artifacts, and upscale
-              2x with AI super-resolution. Runs 100% in your browser. No upload,
-              no signup, no watermark. Works great on WhatsApp-compressed photos,
-              old scans, and low-res screenshots.
+              Remove JPEG compression artifacts, clean up grain, and upscale 2x
+              with AI super-resolution. Best on WhatsApp-compressed photos, low-res
+              screenshots, and grainy scans. Runs 100% in your browser. No upload,
+              no signup, no watermark.
             </p>
+
+            <div className="text-xs text-[#737373] dark:text-[#A3A3A3] bg-[#FFFBEB] dark:bg-[#3B2814] border border-[#FDE68A] dark:border-[#78350F] rounded-md px-3 py-2 mb-4 leading-relaxed">
+              <strong className="text-[#92400E] dark:text-[#FCD34D]">Honest limits:</strong>{" "}
+              this AI does not fix motion blur, defocus blur, or heavily damaged photos.
+              For that, you need a dedicated deblurring model (coming to Pro tier).
+            </div>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
               <span className="inline-flex items-center gap-1">
@@ -303,6 +309,33 @@ export default function PhotoEnhancePage() {
               Upscale 2x while staying sharp.
             </p>
           </div>
+        </div>
+
+        <div className="mt-6 p-4 border border-[#FECACA] dark:border-[#5B1F1F] bg-[#FEF2F2] dark:bg-[#2D1414] rounded-lg">
+          <p className="text-sm font-semibold text-[#991B1B] dark:text-[#FCA5A5] mb-1.5">
+            ❌ When NOT to use this tool
+          </p>
+          <ul className="text-xs text-[#7F1D1D] dark:text-[#FCA5A5] leading-relaxed space-y-1 list-disc pl-4">
+            <li>
+              <strong>Motion-blurred photos</strong> (someone or something moved while shooting) —
+              needs DeblurGAN-class model.
+            </li>
+            <li>
+              <strong>Defocus blur</strong> (out-of-focus subject) — same, requires dedicated model.
+            </li>
+            <li>
+              <strong>Heavily damaged old photos</strong> (scratches, tears, severe fading) — needs
+              CodeFormer or Bringing Old Photos Back to Life.
+            </li>
+            <li>
+              <strong>Photos already sharp</strong> — output will look almost identical to input.
+              The tool is for cleaning up <em>compression and grain</em>, not creative enhancement.
+            </li>
+          </ul>
+          <p className="text-xs text-[#7F1D1D] dark:text-[#FCA5A5] mt-2 leading-relaxed">
+            All of the above will be supported in a future <strong>Pro tier</strong> using
+            specialized server-side models.
+          </p>
         </div>
       </section>
 

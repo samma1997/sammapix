@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Upload,
@@ -22,7 +22,25 @@ const ACCEPTED: Record<string, string[]> = {
 };
 
 const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15 MB
-const MAX_INPUT_DIM_INFO = 1024;
+const MAX_INPUT_DIM_INFO = 768;
+
+// Fun messages that rotate during the long inference step so users know the
+// AI is still working — the actual ONNX inference is a single async call that
+// can't report fine-grained progress.
+const LOADING_MESSAGES = [
+  "Warming up the AI brain…",
+  "Counting every pixel by hand…",
+  "Asking the model to focus…",
+  "Smoothing JPEG artifacts…",
+  "Inventing sharper edges…",
+  "Squeezing details out of nothing…",
+  "Politely yelling at the GPU…",
+  "Adding extra crispness…",
+  "Polishing pixels one by one…",
+  "Telling the model not to hallucinate…",
+  "Reshaping reality, please hold…",
+  "Almost there, promise!",
+];
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -39,14 +57,60 @@ export default function PhotoEnhanceClient() {
   const [result, setResult] = useState<PhotoEnhanceResult | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [progress, setProgress] = useState(0);
+  const [displayProgress, setDisplayProgress] = useState(0);
+  const [loadingMsg, setLoadingMsg] = useState(LOADING_MESSAGES[0]);
   const [error, setError] = useState<string>("");
+  const animRef = useRef<number | null>(null);
+  const msgRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
       if (resultUrl) URL.revokeObjectURL(resultUrl);
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+      if (msgRef.current) clearInterval(msgRef.current);
     };
   }, [previewUrl, resultUrl]);
+
+  // Smoothly animate the visible progress bar so it never visibly stalls,
+  // even though the real progress jumps (5 → 35 → 45 → 85 → 95 → 100).
+  // Between 45 and 85 we drift slowly to simulate ongoing work.
+  useEffect(() => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    const tick = () => {
+      setDisplayProgress((current) => {
+        // Soft target: ease toward `progress`. Between 45-85 we cap drift at 84
+        // so the bar visibly creeps but never reaches the next milestone too soon.
+        const ceiling =
+          progress >= 85 ? progress : progress >= 45 ? Math.min(84, current + 0.18) : progress;
+        const diff = ceiling - current;
+        if (Math.abs(diff) < 0.05) return ceiling;
+        return current + diff * 0.08;
+      });
+      animRef.current = requestAnimationFrame(tick);
+    };
+    animRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, [progress]);
+
+  // Rotate the loading messages during the processing phase.
+  useEffect(() => {
+    if (status !== "processing") {
+      if (msgRef.current) clearInterval(msgRef.current);
+      return;
+    }
+    let i = 0;
+    setLoadingMsg(LOADING_MESSAGES[0]);
+    msgRef.current = setInterval(() => {
+      i = (i + 1) % LOADING_MESSAGES.length;
+      setLoadingMsg(LOADING_MESSAGES[i]);
+    }, 2400);
+    return () => {
+      if (msgRef.current) clearInterval(msgRef.current);
+    };
+  }, [status]);
 
   const reset = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -76,6 +140,7 @@ export default function PhotoEnhanceClient() {
       setResult(null);
       setStatus("idle");
       setProgress(0);
+      setDisplayProgress(0);
       setError("");
       trackEvent("photo_enhance_uploaded", { size: f.size });
     },
@@ -93,6 +158,7 @@ export default function PhotoEnhanceClient() {
     if (!file || status === "processing") return;
     setStatus("processing");
     setProgress(0);
+    setDisplayProgress(0);
     setError("");
     trackEvent("photo_enhance_started", { size: file.size });
 
@@ -199,20 +265,18 @@ export default function PhotoEnhanceClient() {
           {status === "processing" && (
             <div className="mb-3">
               <div className="flex items-center justify-between text-xs text-[#737373] dark:text-[#A3A3A3] mb-1.5">
-                <span className="inline-flex items-center gap-1.5">
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-                  {progress < 35
-                    ? "Loading AI model (first time only)…"
-                    : progress < 85
-                    ? "Enhancing photo…"
-                    : "Finalizing…"}
+                <span className="inline-flex items-center gap-1.5 min-w-0">
+                  <Loader2 className="h-3.5 w-3.5 animate-spin flex-shrink-0" strokeWidth={1.5} />
+                  <span className="truncate transition-opacity">
+                    {progress < 35 ? "Loading AI model (first time only)…" : loadingMsg}
+                  </span>
                 </span>
-                <span>{progress}%</span>
+                <span className="flex-shrink-0">{Math.round(displayProgress)}%</span>
               </div>
-              <div className="h-1 w-full bg-[#F5F5F5] dark:bg-[#252525] rounded">
+              <div className="h-1 w-full bg-[#F5F5F5] dark:bg-[#252525] rounded overflow-hidden">
                 <div
-                  className="h-1 bg-[#8B5CF6] rounded transition-all"
-                  style={{ width: `${progress}%` }}
+                  className="h-1 bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] rounded transition-all"
+                  style={{ width: `${displayProgress}%` }}
                 />
               </div>
             </div>
