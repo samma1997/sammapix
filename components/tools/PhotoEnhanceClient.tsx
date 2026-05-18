@@ -19,6 +19,8 @@ import { cn } from "@/lib/utils";
 import { enhancePhoto, type PhotoEnhanceResult } from "@/lib/photo-enhance";
 import { trackEvent } from "@/lib/analytics";
 import { useSession } from "next-auth/react";
+import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 const ACCEPTED: Record<string, string[]> = {
   "image/jpeg": [".jpg", ".jpeg"],
@@ -80,6 +82,7 @@ export default function PhotoEnhanceClient() {
   const [batchRunning, setBatchRunning] = useState(false);
   const [batchPaused, setBatchPaused] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState(LOADING_MESSAGES[0]);
+  const [showUpsell, setShowUpsell] = useState(false);
   const msgRef = useRef<NodeJS.Timeout | null>(null);
   const cancelRef = useRef(false);
 
@@ -233,8 +236,24 @@ export default function PhotoEnhanceClient() {
 
     setBatchRunning(false);
     trackEvent("photo_enhance_batch_done");
+
+    // Soft session tracking + upsell decision (no hard block).
+    const processedCount = filesRef.current.filter((f) => f.status === "done").length;
+    if (processedCount > 0) {
+      recordBatchRun("photo_enhance", processedCount);
+      const isLoggedIn = !!session?.user?.email;
+      const decision = shouldShowUpsell("photo_enhance", isLoggedIn, isPro);
+      if (decision.showModal) {
+        setShowUpsell(true);
+        trackEvent("upsell_shown", {
+          tool: "photo_enhance",
+          reason: decision.reason ?? "unknown",
+          daily_batches: decision.current.dailyBatches,
+        });
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [processSingle]);
+  }, [processSingle, session, isPro]);
 
   const stats = useMemo(() => {
     const total = files.length;
@@ -277,6 +296,12 @@ export default function PhotoEnhanceClient() {
   }, [files]);
 
   return (
+    <>
+    <ProUpsellModal
+      open={showUpsell}
+      onClose={() => setShowUpsell(false)}
+      trigger="daily"
+    />
     <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
       {/* ── DROPZONE (always visible, smaller when files present) ────── */}
       <div
@@ -510,5 +535,6 @@ export default function PhotoEnhanceClient() {
         </div>
       )}
     </section>
+    </>
   );
 }

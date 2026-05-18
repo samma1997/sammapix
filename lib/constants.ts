@@ -125,6 +125,8 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "apply-lut-batch-photos-free-2026",
+  "extract-lut-from-photo-free-2026",
   "does-imessage-strip-exif-metadata",
   "does-reddit-strip-exif-metadata",
   "does-telegram-strip-exif-metadata",

@@ -1,0 +1,242 @@
+[
+  {
+    "start": 0,
+    "end": 2.81,
+    "text": "The batch problem with LUTs"
+  },
+  {
+    "start": 3.31,
+    "end": 25.6,
+    "text": "The trouble starts when you need that look across 50, 200 or 500 photos. Wedding"
+  },
+  {
+    "start": 25.6,
+    "end": 40.63,
+    "text": "The honest answer is that there are four ways to apply a cube to a batch, and th"
+  },
+  {
+    "start": 41.13,
+    "end": 44.97,
+    "text": "For pure stills, no subscription, no install:"
+  },
+  {
+    "start": 45.47,
+    "end": 50.63,
+    "text": "Two. Click the From cube tab at the top of the left panel."
+  },
+  {
+    "start": 50.63,
+    "end": 56.58,
+    "text": "Three. Drop your cube file. It parses instantly."
+  },
+  {
+    "start": 56.58,
+    "end": 61.28,
+    "text": "Four. Drop up to 50 photos in the right panel."
+  },
+  {
+    "start": 61.28,
+    "end": 66.16,
+    "text": "Five. Click Match X photos and wait a few seconds."
+  },
+  {
+    "start": 66.16,
+    "end": 69.88,
+    "text": "Six. Click Download ZIP."
+  },
+  {
+    "start": 70.38,
+    "end": 74.14,
+    "text": "Method 1: SammaPix browser batch (free)"
+  },
+  {
+    "start": 74.14,
+    "end": 90.61,
+    "text": "The most common case. You have one cube file, you have a folder of stills (weddi"
+  },
+  {
+    "start": 90.61,
+    "end": 116.55,
+    "text": "What happens behind the scenes: the cube parser reads the Adobe headers (TITLE, "
+  },
+  {
+    "start": 117.05,
+    "end": 136.73,
+    "text": "Speed: trilinear interpolation in JavaScript is fast. On a modern laptop, expect"
+  },
+  {
+    "start": 137.23,
+    "end": 145.94,
+    "text": "The official Adobe workflow. Powerful, integrated with your existing catalog, bu"
+  },
+  {
+    "start": 145.94,
+    "end": 151.15,
+    "text": "One. In Lightroom Classic, switch to the Develop module."
+  },
+  {
+    "start": 151.15,
+    "end": 157.66,
+    "text": "Two. Click the Profile Browser icon (four squares) next to the Profile dropdown."
+  },
+  {
+    "start": 157.66,
+    "end": 168.34,
+    "text": "Three. Click plus, Import Profiles, and select your cube file. Lightroom interna"
+  },
+  {
+    "start": 168.34,
+    "end": 179.42,
+    "text": "Four. Apply the new profile to one photo. Tweak intensity (Amount slider, zero t"
+  },
+  {
+    "start": 179.42,
+    "end": 191.78,
+    "text": "Five. Select all the other photos in the filmstrip. Right-click the developed ph"
+  },
+  {
+    "start": 192.28,
+    "end": 212.23,
+    "text": "Where this shines: you can pair the LUT with per-photo exposure, white balance a"
+  },
+  {
+    "start": 212.73,
+    "end": 224.08,
+    "text": "For video, the workflow is different. Both Premiere and DaVinci treat a LUT as a"
+  },
+  {
+    "start": 224.08,
+    "end": 242.15,
+    "text": "Premiere: import all clips into a single sequence, select them all on the timeli"
+  },
+  {
+    "start": 242.15,
+    "end": 261.35,
+    "text": "DaVinci Resolve: in the Color page, select all clips in the timeline thumbnails,"
+  },
+  {
+    "start": 261.35,
+    "end": 266.2,
+    "text": "Method 4: FFmpeg command-line batch (free, scriptable)"
+  },
+  {
+    "start": 266.2,
+    "end": 277.96,
+    "text": "For developers and creators comfortable with the terminal, FFmpeg's lut3d filter"
+  },
+  {
+    "start": 277.96,
+    "end": 286.79,
+    "text": "Single file command: ffmpeg dash i input dot mp4 dash vf lut3d equals your dot c"
+  },
+  {
+    "start": 286.79,
+    "end": 296.54,
+    "text": "Batch loop in bash: for f in star dot mp4, do ffmpeg dash i quote f quote dash v"
+  },
+  {
+    "start": 296.54,
+    "end": 315.76,
+    "text": "FFmpeg uses tetrahedral interpolation by default (higher quality than trilinear)"
+  },
+  {
+    "start": 316.76,
+    "end": 325.28,
+    "text": "Lightroom Classic batch sync: 10 to 20 dollars per month, stills only with unlim"
+  },
+  {
+    "start": 325.28,
+    "end": 332.29,
+    "text": "Premiere multi-clip selection: 20 dollars per month, no stills, video only, setu"
+  },
+  {
+    "start": 332.29,
+    "end": 339.2,
+    "text": "DaVinci Resolve free: free, stills possible but clumsy, video supported, setup t"
+  },
+  {
+    "start": 340.2,
+    "end": 342.34,
+    "text": "Common pitfalls"
+  },
+  {
+    "start": 342.84,
+    "end": 355.48,
+    "text": "Pitfall two: cross-genre application. A LUT designed for moody indoor portraits "
+  },
+  {
+    "start": 355.48,
+    "end": 370.32,
+    "text": "Pitfall three: 100 percent intensity by default. Most commercial LUTs are design"
+  },
+  {
+    "start": 370.32,
+    "end": 383.78,
+    "text": "Pitfall four: forgetting white balance. If your shots have inconsistent white ba"
+  },
+  {
+    "start": 384.28,
+    "end": 389.25,
+    "text": "All four methods support intensity control, but with different mechanics."
+  },
+  {
+    "start": 389.25,
+    "end": 402.93,
+    "text": "SammaPix: an Advanced collapsible reveals a zero to 100 percent intensity slider"
+  },
+  {
+    "start": 402.93,
+    "end": 415.65,
+    "text": "Lightroom: the Profile Amount slider goes zero to 200, where 100 is the LUT's na"
+  },
+  {
+    "start": 415.65,
+    "end": 426.33,
+    "text": "Premiere: Creative tab has an Intensity slider zero to 100, applied per clip. To"
+  },
+  {
+    "start": 426.33,
+    "end": 438.52,
+    "text": "FFmpeg: no built-in intensity. Workaround: apply the LUT to a copy of the clip, "
+  },
+  {
+    "start": 438.52,
+    "end": 443.1,
+    "text": "Can I apply a cube LUT to multiple photos at once for free?"
+  },
+  {
+    "start": 443.1,
+    "end": 470.75,
+    "text": "Yes. SammaPix lets you drop one cube file plus up to 50 photos in your browser a"
+  },
+  {
+    "start": 470.75,
+    "end": 475.26,
+    "text": "Will my Mastin Labs or VSCO LUTs work in this batch workflow?"
+  },
+  {
+    "start": 475.26,
+    "end": 492.16,
+    "text": "Yes. Mastin Labs, VSCO, RNI, and any other commercial LUT pack ship cube files t"
+  },
+  {
+    "start": 492.16,
+    "end": 495.23,
+    "text": "Why not just use Lightroom's batch sync?"
+  },
+  {
+    "start": 495.23,
+    "end": 518.13,
+    "text": "Lightroom's batch sync works but requires a Lightroom subscription, importing th"
+  },
+  {
+    "start": 518.63,
+    "end": 550.48,
+    "text": "All standard sizes work. SammaPix parses LUT 3D SIZE from the header and applies"
+  },
+  {
+    "start": 551.98,
+    "end": 564.58,
+    "text": "Free users can batch up to 50 photos per session in SammaPix. Pro users get 300 "
+  }
+]
