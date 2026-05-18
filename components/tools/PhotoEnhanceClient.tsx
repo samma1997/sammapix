@@ -14,7 +14,6 @@ import {
   Pause,
   X,
   ImageIcon,
-  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enhancePhoto, type PhotoEnhanceResult } from "@/lib/photo-enhance";
@@ -58,8 +57,6 @@ interface EnhanceFile {
   resultUrl?: string;
   stats?: PhotoEnhanceResult;
   error?: string;
-  deepStatus?: "deep-processing" | "deep-done" | "deep-error";
-  deepError?: string;
 }
 
 let _counter = 0;
@@ -250,106 +247,6 @@ export default function PhotoEnhanceClient() {
   }, [files]);
 
   const allDone = stats.total > 0 && stats.idle === 0 && stats.processing === 0;
-
-  // ─── Deep restore (Gemini server AI) ────────────────────────────────────
-  const deepRestore = useCallback(async (target: EnhanceFile) => {
-    setFiles((prev) =>
-      prev.map((f) =>
-        f.id === target.id ? { ...f, deepStatus: "deep-processing" as const, deepError: undefined } : f
-      )
-    );
-    trackEvent("photo_enhance_deep_started");
-
-    try {
-      // Downscale to max 1024px and JPEG-compress before sending — keeps the
-      // request well under Vercel's 4.5 MB body limit and Gemini's input size cap.
-      const bitmap = await createImageBitmap(target.file);
-      const MAX_DIM = 1024;
-      const scale =
-        Math.max(bitmap.width, bitmap.height) > MAX_DIM
-          ? MAX_DIM / Math.max(bitmap.width, bitmap.height)
-          : 1;
-      const w = Math.round(bitmap.width * scale);
-      const h = Math.round(bitmap.height * scale);
-      const canvas = new OffscreenCanvas(w, h);
-      const ctx = canvas.getContext("2d")!;
-      ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(bitmap, 0, 0, w, h);
-      bitmap.close();
-      const jpegBlob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.85 });
-      const dataUrl = await new Promise<string>((resolve, reject) => {
-        const r = new FileReader();
-        r.onload = () => resolve(r.result as string);
-        r.onerror = () => reject(new Error("Failed to read"));
-        r.readAsDataURL(jpegBlob);
-      });
-      const base64 = dataUrl.split(",")[1];
-
-      const res = await fetch("/api/ai/deep-restore", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageBase64: base64, mimeType: "image/jpeg" }),
-      });
-
-      // Always try to read response, even on error, so we surface the real reason.
-      const rawText = await res.text();
-      let json: { error?: string; code?: string; data?: { imageBase64: string; mimeType: string }; details?: string } = {};
-      try {
-        json = rawText ? JSON.parse(rawText) : {};
-      } catch {
-        throw new Error(
-          `Server returned non-JSON (HTTP ${res.status}). ${rawText.slice(0, 120) || "Empty response."}`
-        );
-      }
-      if (!res.ok) {
-        const msg =
-          json.code === "UNAUTHENTICATED"
-            ? "Sign in to use Deep Restore."
-            : json.code === "RATE_LIMIT"
-            ? json.error
-            : json.code === "NOT_CONFIGURED"
-            ? "Deep Restore coming soon."
-            : json.error || "Deep Restore failed.";
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === target.id ? { ...f, deepStatus: "deep-error" as const, deepError: msg } : f
-          )
-        );
-        trackEvent("photo_enhance_deep_error", { code: json.code });
-        return;
-      }
-
-      // Decode base64 → Blob
-      const binary = atob(json.data.imageBase64);
-      const bytes = new Uint8Array(binary.length);
-      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-      const blob = new Blob([bytes], { type: json.data.mimeType || "image/png" });
-      const url = URL.createObjectURL(blob);
-
-      setFiles((prev) =>
-        prev.map((f) => {
-          if (f.id !== target.id) return f;
-          if (f.resultUrl) URL.revokeObjectURL(f.resultUrl);
-          return {
-            ...f,
-            status: "done" as const,
-            progress: 100,
-            resultBlob: blob,
-            resultUrl: url,
-            deepStatus: "deep-done" as const,
-          };
-        })
-      );
-      trackEvent("photo_enhance_deep_done");
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : "Network error";
-      setFiles((prev) =>
-        prev.map((f) =>
-          f.id === target.id ? { ...f, deepStatus: "deep-error" as const, deepError: msg } : f
-        )
-      );
-    }
-  }, []);
 
   // ─── Download single ─────────────────────────────────────────────────────
   const downloadOne = useCallback((f: EnhanceFile) => {
@@ -550,17 +447,9 @@ export default function PhotoEnhanceClient() {
                 {f.status === "processing" && (
                   <Loader2 className="h-4 w-4 animate-spin text-[#8B5CF6]" strokeWidth={1.5} />
                 )}
-                {f.status === "done" && f.deepStatus !== "deep-processing" && (
+                {f.status === "done" && (
                   <>
                     <CheckCircle2 className="h-4 w-4 text-[#16A34A]" strokeWidth={1.5} />
-                    <button
-                      onClick={() => deepRestore(f)}
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium border border-[#FCD34D] text-[#92400E] dark:text-[#FCD34D] dark:border-[#78350F] hover:bg-[#FFFBEB] dark:hover:bg-[#3B2814] transition-colors"
-                      title="Try advanced AI restoration (Gemini, 3 free/day)"
-                    >
-                      <Zap className="h-3 w-3" strokeWidth={1.5} />
-                      Deep restore
-                    </button>
                     <button
                       onClick={() => downloadOne(f)}
                       className="text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
@@ -569,17 +458,6 @@ export default function PhotoEnhanceClient() {
                       <Download className="h-4 w-4" strokeWidth={1.5} />
                     </button>
                   </>
-                )}
-                {f.deepStatus === "deep-processing" && (
-                  <span className="inline-flex items-center gap-1.5 text-[11px] text-[#92400E] dark:text-[#FCD34D]">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-                    Deep restoring…
-                  </span>
-                )}
-                {f.deepStatus === "deep-error" && (
-                  <span className="text-[11px] text-[#DC2626] max-w-[200px] truncate" title={f.deepError}>
-                    {f.deepError}
-                  </span>
                 )}
                 {f.status === "error" && (
                   <AlertCircle className="h-4 w-4 text-[#DC2626]" strokeWidth={1.5} />

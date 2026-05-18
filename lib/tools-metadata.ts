@@ -134,6 +134,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "extract-brand-colors-from-image-2026",
     ],
   },
+  "color-match": {
+    id: "color-match",
+    name: "AI Color Match",
+    shortDesc: "Apply 1 photo's look to 50 photos in seconds",
+    slug: "/tools/color-match",
+    category: "ai",
+    relatedTools: ["filmlab", "color-picker", "stampit", "photo-enhance"],
+    relatedBlogSlugs: [
+      "extract-brand-colors-from-image-2026",
+    ],
+  },
   "photo-enhance": {
     id: "photo-enhance",
     name: "Batch Photo Enhancer",
