@@ -462,6 +462,28 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
 
   // AI
   {
+    name: "LUT Generator",
+    slug: "color-match",
+    href: "/dashboard/tools/color-match",
+    tagline: "Extract 3D LUT from any photo, batch-apply to 50 photos, export .cube for Lightroom.",
+    accent: "#F59E0B",
+    badges: ["Free", "NEW"],
+    Icon: IconColorPicker,
+    category: ["AI"],
+    keywords: ["lut", "cube", "color match", "color grading", "extract lut", "color transfer", "lightroom lut", "premiere lut", "davinci lut", "match colors", "consistent look", "color palette"],
+  },
+  {
+    name: "Batch Photo Enhancer",
+    slug: "photo-enhance",
+    href: "/dashboard/tools/photo-enhance",
+    tagline: "AI clean compressed photos + 2x super-resolution on a batch. Runs in browser.",
+    accent: "#8B5CF6",
+    badges: ["Free", "NEW"],
+    Icon: IconUpscale,
+    category: ["AI"],
+    keywords: ["enhance photo", "fix blurry", "improve quality", "jpeg artifacts", "compression", "ai enhance", "super resolution", "swin2sr", "batch enhance"],
+  },
+  {
     name: "AI Rename",
     slug: "ai-rename",
     href: "/dashboard/tools/ai-rename",

@@ -70,6 +70,8 @@ const PassportPhotoClient = dynamic(() => import("@/components/tools/PassportPho
 const ImageToTextClient = dynamic(() => import("@/components/tools/ImageToTextClient"));
 const JpgToPdfClient = dynamic(() => import("@/components/tools/JpgToPdfClient"));
 const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverterClient"));
+const ColorMatchClient = dynamic(() => import("@/components/tools/ColorMatchClient"));
+const PhotoEnhanceClient = dynamic(() => import("@/components/tools/PhotoEnhanceClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -108,6 +110,8 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "image-to-text": ImageToTextClient,
   "jpg-to-pdf": JpgToPdfClient,
   jxl: JxlConverterClient,
+  "color-match": ColorMatchClient,
+  "photo-enhance": PhotoEnhanceClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -187,6 +191,8 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "image-to-text": { Icon: IconAIRename, accent: "#F59E0B" },
   "jpg-to-pdf": { Icon: IconJpgToPdf, accent: "#DC2626" },
   jxl: { Icon: IconJxl, accent: "#F59E0B" },
+  "color-match": { Icon: IconColorPicker, accent: "#F59E0B" },
+  "photo-enhance": { Icon: IconUpscale, accent: "#8B5CF6" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -582,6 +588,26 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Convert & download", desc: "Get converted files individually or as ZIP." },
     ],
     proTip: { text: "JPEG XL offers 30-60% better compression than JPEG.", linkLabel: "Try WebP Converter", linkHref: "/dashboard/tools/webp" },
+  },
+  "color-match": {
+    label: "LUT Generator",
+    tagline: "Extract a 3D LUT from any photo, apply to a batch, export .cube.",
+    steps: [
+      { title: "Pick source", desc: "Drop a reference photo or upload a .cube file." },
+      { title: "Drop the batch", desc: "Up to 50 photos (300 Pro). They inherit the look." },
+      { title: "Download ZIP or .cube", desc: "Get the batch processed, or the LUT for Lightroom." },
+    ],
+    proTip: { text: "Use FilmLab presets if you want a pre-baked look instead of extracting one.", linkLabel: "Go to FilmLab", linkHref: "/dashboard/tools/filmlab" },
+  },
+  "photo-enhance": {
+    label: "Batch Photo Enhancer",
+    tagline: "AI cleans JPEG artifacts + 2x super-resolution on a batch of photos.",
+    steps: [
+      { title: "Drop multiple photos", desc: "Up to 20 (100 Pro). All processed sequentially in your browser." },
+      { title: "Click Enhance", desc: "Swin2SR AI runs locally — no upload. ~5-12s per photo." },
+      { title: "Download ZIP", desc: "Grab all enhanced PNGs in a single archive." },
+    ],
+    proTip: { text: "Run Compress after to shrink the enhanced batch for the web.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
   },
 };
 

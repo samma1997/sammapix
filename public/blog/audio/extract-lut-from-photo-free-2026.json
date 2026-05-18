@@ -1,0 +1,262 @@
+[
+  {
+    "start": 0,
+    "end": 3.26,
+    "text": "What is a LUT (in plain English)"
+  },
+  {
+    "start": 3.26,
+    "end": 24.38,
+    "text": "A 3D LUT, short for three-dimensional lookup table, is a table that tells your e"
+  },
+  {
+    "start": 24.38,
+    "end": 46.97,
+    "text": "The format that won the industry is Adobe's .cube, a plain text file you can ope"
+  },
+  {
+    "start": 46.97,
+    "end": 62.45,
+    "text": "Because the format is so simple, every serious color tool reads it: Lightroom Cl"
+  },
+  {
+    "start": 62.45,
+    "end": 65.64,
+    "text": "Why extract a LUT from a photo"
+  },
+  {
+    "start": 65.64,
+    "end": 68.81,
+    "text": "Three scenarios where it's the right move."
+  },
+  {
+    "start": 68.81,
+    "end": 89.74,
+    "text": "First, you shot a series under changing light. A wedding starts in soft afternoo"
+  },
+  {
+    "start": 89.74,
+    "end": 109.8,
+    "text": "Second, you love how someone else's photo looks. You see a frame on Instagram or"
+  },
+  {
+    "start": 110.3,
+    "end": 113.11,
+    "text": "The quick method (30 seconds)"
+  },
+  {
+    "start": 113.11,
+    "end": 115.6,
+    "text": "If you just want the answer:"
+  },
+  {
+    "start": 115.6,
+    "end": 121.36,
+    "text": "One. Go to sammapix.com/tools/color-match."
+  },
+  {
+    "start": 121.36,
+    "end": 127.05,
+    "text": "Two. Drop your reference photo in the left panel using From photo mode."
+  },
+  {
+    "start": 128.55,
+    "end": 144.99,
+    "text": "That's it. Everything runs in your browser. The reference never leaves your devi"
+  },
+  {
+    "start": 145.49,
+    "end": 148.61,
+    "text": "Step one: pick a strong reference."
+  },
+  {
+    "start": 148.61,
+    "end": 162.6,
+    "text": "The reference photo is the single most important variable. The algorithm samples"
+  },
+  {
+    "start": 162.6,
+    "end": 181.3,
+    "text": "Good references: a single dominant lighting condition like golden hour, blue hou"
+  },
+  {
+    "start": 181.3,
+    "end": 204.48,
+    "text": "Bad references: photos with multiple competing light sources, blown highlights t"
+  },
+  {
+    "start": 204.48,
+    "end": 207.68,
+    "text": "Step two: drop into the generator."
+  },
+  {
+    "start": 208.18,
+    "end": 225.96,
+    "text": "You'll see a progress bar from 5 percent to 100 percent over two to three second"
+  },
+  {
+    "start": 225.96,
+    "end": 228.74,
+    "text": "Step three: download the cube."
+  },
+  {
+    "start": 229.24,
+    "end": 233.28,
+    "text": "Step four, optional: apply to a batch in the browser."
+  },
+  {
+    "start": 233.28,
+    "end": 248.83,
+    "text": "If you don't need the cube file itself and just want to apply the look to other "
+  },
+  {
+    "start": 248.83,
+    "end": 251.47,
+    "text": "How to use the cube in Lightroom"
+  },
+  {
+    "start": 251.47,
+    "end": 258.84,
+    "text": "Lightroom Classic and Camera Raw both support 3D LUTs through their Profile syst"
+  },
+  {
+    "start": 258.84,
+    "end": 264.14,
+    "text": "One. Open Lightroom Classic and switch to the Develop module."
+  },
+  {
+    "start": 265.14,
+    "end": 272.44,
+    "text": "Four. In the Profile Browser, click the plus icon in the top-right corner and ch"
+  },
+  {
+    "start": 272.44,
+    "end": 282.23,
+    "text": "Five. Select your cube file. Lightroom converts it to an xmp profile internally "
+  },
+  {
+    "start": 282.73,
+    "end": 297.25,
+    "text": "To apply the look to a batch: develop one photo with the new profile, right-clic"
+  },
+  {
+    "start": 297.75,
+    "end": 315,
+    "text": "Premiere Pro: drop a clip on the timeline, open the Lumetri Color panel, expand "
+  },
+  {
+    "start": 316,
+    "end": 318.55,
+    "text": "Common mistakes to avoid"
+  },
+  {
+    "start": 318.55,
+    "end": 333.07,
+    "text": "Mistake one: extracting from a heavily edited reference. If the reference alread"
+  },
+  {
+    "start": 333.57,
+    "end": 351.81,
+    "text": "Mistake three: skipping the intensity slider. Most extracted LUTs benefit from b"
+  },
+  {
+    "start": 351.81,
+    "end": 370.58,
+    "text": "Mistake four: ignoring contrast and exposure. A LUT remaps colors, not luminance"
+  },
+  {
+    "start": 370.58,
+    "end": 373.98,
+    "text": "When LUT extraction is the wrong tool"
+  },
+  {
+    "start": 373.98,
+    "end": 397.12,
+    "text": "When you need a signature commercial look. Mastin Labs, VSCO and RNI sell LUT pa"
+  },
+  {
+    "start": 397.62,
+    "end": 412.6,
+    "text": "When the photo is heavily damaged. Sampling colors from a scratched, faded or gr"
+  },
+  {
+    "start": 413.1,
+    "end": 418.93,
+    "text": "SammaPix LUT Generator is free, extracts from photo, exports cube file."
+  },
+  {
+    "start": 418.93,
+    "end": 425.82,
+    "text": "Lightroom Classic costs ten to twenty dollars per month, does not extract from p"
+  },
+  {
+    "start": 426.32,
+    "end": 434.24,
+    "text": "3D LUT Creator from Russia costs 99 dollars, has partial extraction capabilities"
+  },
+  {
+    "start": 434.24,
+    "end": 439.97,
+    "text": "IWLTBAP offers a free LUT pack, does not extract, ships pre-made cube files."
+  },
+  {
+    "start": 439.97,
+    "end": 447.24,
+    "text": "Mastin Labs and VSCO LUT packs cost 40 to 200 dollars, do not extract, ship pre-"
+  },
+  {
+    "start": 447.24,
+    "end": 461.28,
+    "text": "The honest take: SammaPix is the fastest free path from \"I like this photo's loo"
+  },
+  {
+    "start": 461.28,
+    "end": 465.32,
+    "text": "Can you really extract a LUT from just one photo?"
+  },
+  {
+    "start": 465.32,
+    "end": 489.77,
+    "text": "Yes. The algorithm samples thousands of colors from the reference, builds a 17 b"
+  },
+  {
+    "start": 489.77,
+    "end": 492.48,
+    "text": "What is a cube file exactly?"
+  },
+  {
+    "start": 492.48,
+    "end": 513.46,
+    "text": "A plain text 3D color lookup table defined by Adobe's spec. It contains a TITLE "
+  },
+  {
+    "start": 513.46,
+    "end": 518.09,
+    "text": "Does the extracted LUT match the original colorist's intent?"
+  },
+  {
+    "start": 518.09,
+    "end": 531.56,
+    "text": "Not perfectly. You get the \"feel\" of the reference's palette, not the exact curv"
+  },
+  {
+    "start": 532.06,
+    "end": 544.3,
+    "text": "Yes. Develop module, Profile Browser, plus icon, Import Profiles, select the cub"
+  },
+  {
+    "start": 544.8,
+    "end": 559.22,
+    "text": "Commercial packs from Mastin or VSCO are hand-crafted by colorists modeling spec"
+  },
+  {
+    "start": 559.22,
+    "end": 562.53,
+    "text": "Are there file size limits or upload fees?"
+  },
+  {
+    "start": 562.53,
+    "end": 576.81,
+    "text": "Everything runs in your browser. Nothing leaves your device. No per-photo fees, "
+  }
+]
