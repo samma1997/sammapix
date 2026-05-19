@@ -1,11 +1,11 @@
 {
   "name": "SammaPix — AI Photo Workflow",
   "short_name": "SammaPix",
-  "description": "Compress, rename with AI, resize, convert — all in one pipeline. 15 free browser-based tools.",
+  "description": "Compress, rename with AI, resize, convert — all in one pipeline. 32 free browser-based tools.",
   "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#171717",
+  "theme_color": "#8B5CF6",
   "orientation": "any",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
