@@ -927,7 +927,7 @@ export default function CropRatio() {
 
   if (uiState === "idle") {
     return (
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-16">
         <ProUpsellModal
           open={upsellOpen}
           onClose={handleUpsellClose}
@@ -983,7 +983,7 @@ export default function CropRatio() {
 
   if (uiState === "config") {
     return (
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16 space-y-8">
 
         {/* File count header */}
         <div className="flex items-center justify-between">

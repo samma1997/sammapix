@@ -232,7 +232,7 @@ export default function PdfMergeClient() {
   const aggregatePages = items.reduce((s, i) => s + i.pageCount, 0);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16">
       {/* Merge error banner */}
       {mergeError && (
         <div className="mb-4 flex items-start justify-between gap-3 px-4 py-3 border border-[#FECACA] bg-[#FEF2F2] dark:bg-[#1C0000] dark:border-[#991B1B] rounded-md">

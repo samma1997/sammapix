@@ -693,7 +693,7 @@ export default function TravelMapClient() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-16">
       <ProUpsellModal
         open={upsellOpen}
         onClose={handleUpsellClose}
