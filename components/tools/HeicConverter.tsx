@@ -568,7 +568,7 @@ export default function HeicConverter() {
   const hasUncompressed = files.some((f) => f.status === "done" && f.compressStatus === "idle");
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16">
       <ProUpsellModal
         open={showZipUpsell}
         onClose={() => setShowZipUpsell(false)}

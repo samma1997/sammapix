@@ -522,7 +522,7 @@ export default function StampIt() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-20">
       <ProUpsellModal
         open={upsellOpen}
         onClose={handleUpsellClose}

@@ -338,7 +338,7 @@ export default function SvgToPngClient() {
     doneItems.length > 0 && totalResultSize > totalOriginalSize * 20;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16">
       <ProUpsellModal
         open={zipUpsellOpen}
         onClose={() => setZipUpsellOpen(false)}
