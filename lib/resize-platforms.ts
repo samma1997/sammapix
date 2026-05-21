@@ -50,6 +50,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Instagram",
     displayName: "Instagram",
     titleKeyword: "Instagram",
+    seoTitle: "Instagram Image Size 2026: Post, Story, Reels — Free Online",
     metaDescription:
       "Resize images for Instagram- square post 1080×1080, portrait 1080×1350, landscape 1080×566, Story 1080×1920. Free online, no upload.",
     ogDescription:
@@ -102,6 +103,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Facebook",
     displayName: "Facebook",
     titleKeyword: "Facebook",
+    seoTitle: "Facebook Image Size 2026: Post, Cover, Profile — Free Online",
     metaDescription:
       "Resize images for Facebook- post 1200×630, cover 820×312, profile 170×170, Story 1080×1920. Free online, no upload.",
     ogDescription:
@@ -154,6 +156,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Twitter / X",
     displayName: "Twitter / X",
     titleKeyword: "Twitter and X",
+    seoTitle: "Twitter (X) Image Size 2026: Post, Header, Profile — Free",
     metaDescription:
       "Resize images for Twitter / X- post 1600×900, header 1500×500, profile 400×400. Free online, no upload required.",
     ogDescription:
@@ -205,6 +208,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "LinkedIn",
     displayName: "LinkedIn",
     titleKeyword: "LinkedIn",
+    seoTitle: "LinkedIn Image Size 2026: Post, Cover, Profile — Free Online",
     metaDescription:
       "Resize images for LinkedIn- post 1200×627, cover 1584×396, profile 400×400. Free online, no upload required.",
     ogDescription:
@@ -256,6 +260,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "YouTube",
     displayName: "YouTube",
     titleKeyword: "YouTube Thumbnail",
+    seoTitle: "YouTube Thumbnail Size 2026: 1280×720 — Free Online Resizer",
     metaDescription:
       "Resize images for YouTube- thumbnail 1280×720, channel banner 2560×1440, profile 800×800. Free online, no upload required.",
     ogDescription:
@@ -307,6 +312,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Pinterest",
     displayName: "Pinterest",
     titleKeyword: "Pinterest",
+    seoTitle: "Pinterest Pin Size 2026: Standard, Square, Long — Free Resizer",
     metaDescription:
       "Resize images for Pinterest- standard pin 1000×1500, square pin 1000×1000, long pin 1000×2100. Free online, no upload required.",
     ogDescription:
@@ -358,6 +364,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "TikTok",
     displayName: "TikTok",
     titleKeyword: "TikTok",
+    seoTitle: "TikTok Image Size 2026: Video, Profile, Cover — Free Resizer",
     metaDescription:
       "Resize images for TikTok- video frame 1080×1920, square 1080×1080, profile 200×200. Free online, no upload required.",
     ogDescription:
@@ -637,6 +644,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Threads",
     displayName: "Threads",
     titleKeyword: "Threads image sizes",
+    seoTitle: "Threads Image Size 2026: Post, Profile, Carousel — Free",
     metaDescription:
       "Resize images for Threads- profile photo 320×320, image post 1080×1350, carousel 1080×1080. Free online, no upload required.",
     ogDescription:
@@ -1145,6 +1153,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Shopify Product",
     displayName: "Shopify Product",
     titleKeyword: "Shopify Product Images",
+    seoTitle: "Shopify Image Size 2026: Product, Collection, Slideshow — Free",
     metaDescription:
       "Resize images for Shopify — Product 2048×2048, Collection 1024×1024, Slideshow 1920×1080. Free online tool, no upload required.",
     ogDescription:

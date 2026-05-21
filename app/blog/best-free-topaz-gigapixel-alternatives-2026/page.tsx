@@ -6,23 +6,25 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Topaz Gigapixel Pricing 2026 + 7 Free Alternatives Tested",
+    "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
   description:
     "Topaz Gigapixel costs $99-199 in 2026. We tested 7 free alternatives on 50 real photos — one beats Topaz on faces. Full pricing + benchmark inside.",
   alternates: {
     canonical: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
   },
   keywords: [
+    "topaz gigapixel ai alternatives 2026",
+    "topaz gigapixel ai pricing 2026",
+    "topaz gigapixel ai price 2026",
+    "topaz gigapixel ai free",
+    "topaz gigapixel ai vs alternatives 2026",
     "topaz gigapixel alternative free",
     "free image upscaler 2026",
-    "upscale image without topaz",
     "best free ai upscaler",
-    "topaz gigapixel free alternative",
-    "image upscaling free online",
     "real esrgan alternative",
   ],
   openGraph: {
-    title: "Topaz Gigapixel Pricing 2026 + 7 Free Alternatives Tested",
+    title: "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
     description:
       "Topaz Gigapixel costs $99-199 in 2026. We tested 7 free alternatives on 50 real photos — one beats Topaz on faces. Full benchmark inside.",
     url: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Topaz Gigapixel Pricing 2026 + 7 Free Alternatives Tested",
+    title: "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
     description:
       "Topaz Gigapixel pricing 2026 + 7 free alternatives tested on 50 photos. One beats Topaz on faces.",
     creator: "@lucasammarco",
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
 const POST_DATE = "2026-04-10";
 const POST_DATE_FORMATTED = "April 10, 2026";
 const POST_URL = `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`;
-const POST_TITLE = "Topaz Gigapixel Pricing 2026 + 7 Free Alternatives Tested";
+const POST_TITLE = "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested";
 
 const articleSchema = {
   "@context": "https://schema.org",
