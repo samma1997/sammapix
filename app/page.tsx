@@ -31,14 +31,10 @@ export const metadata = {
     "Compress, rename with AI, resize, convert -- all in one pipeline. 32 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
   keywords: [
     "ai photo workflow",
-    "image compressor",
     "free image tools",
-    "webp converter",
-    "ai image rename",
-    "batch resize",
-    "heic converter",
     "photo tools for content creators",
     "browser image processing",
+    "sammapix",
   ],
   alternates: { canonical: "https://www.sammapix.com" },
   openGraph: {
@@ -60,106 +56,50 @@ export const metadata = {
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
+// FAQ — Brand/general only.
+// Tool-specific FAQs (HEIC, WebP, EXIF, Find Duplicates, Film Filters, AI Rename,
+// AI Photo Sort, Web Optimize, image compression, batch Instagram) have been moved
+// to the dedicated tool pages to avoid SEO cannibalization of high-intent queries.
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
-    question: "What tools does SammaPix offer?",
+    question: "Is SammaPix really free?",
     answer:
-      "SammaPix includes 32 free browser-based tools across four categories. Optimize: Compress, WebP Converter, HEIC Converter, PDF to Image, Batch Resize, Crop & Ratio. AI-Powered: AI Organize (NEW -- drop 100+ photos and AI sorts into folders), AI Rename, AI Alt Text, AI Photo Sort, Transcribe, Web Optimize. Creative: Film Filters (14 film presets), Watermark. Organize: EXIF Viewer, Find Duplicates, Sort by Location, Photo Map, Cull, Batch Rename.",
+      `Yes. All ${TOOL_COUNT} tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI features, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.`,
   },
   {
     question: "How does SammaPix protect my privacy?",
     answer:
-      "Your privacy is our top priority. All image processing tools (Compress, WebP Converter, Resize, HEIC Converter, Film Filters, Watermark, EXIF Viewer, Find Duplicates, Batch Rename) run 100% in your browser -- your images never leave your device. For AI tools, only a small thumbnail is sent to Google Gemini, while full-resolution originals remain completely local and are never stored on any server. Zero uploads means zero data tracking.",
-  },
-  {
-    question: "Is SammaPix really free?",
-    answer:
-      `Yes. All ${TOOL_COUNT} tools are free forever with no watermarks. The free plan includes 20 files per batch and 10 AI credits per day. Pro ($9/month) unlocks unlimited AI renames and alt text, 500 files per batch, ZIP download, and the AI Workflow Pipeline. No credit card required for the free plan.`,
-  },
-  {
-    question: "What image formats are supported?",
-    answer:
-      "SammaPix supports JPG, PNG, WebP, GIF, HEIC (iPhone), and AVIF across all tools. The Transcribe tool also accepts video formats (MP4, WebM, MOV) and audio files (MP3, WAV, AAC). Output formats include WebP, JPG, and PNG depending on the tool.",
+      "Your privacy is our top priority. All processing happens 100% in your browser -- your images never leave your device. For AI tools, only a small thumbnail (max 512px) is temporarily sent to Google Gemini, while full-resolution originals remain completely local. Zero uploads, zero data tracking.",
   },
   {
     question: "Do I need to create an account?",
     answer:
-      "No account is needed for most tools -- Compress, WebP, HEIC, PDF to Image, Resize, Crop, Film Filters, Watermark, EXIF Viewer, and more work without any login. Only AI-powered tools (AI Organize, AI Rename, AI Alt Text, Transcribe) and combo tools that include AI steps require a free account to prevent API abuse.",
-  },
-  {
-    question: "How does AI Rename work?",
-    answer:
-      "AI Rename uses Google Gemini to analyze your photo and generate SEO-friendly filenames automatically. You can customize the naming pattern (date, keywords, numbers). For example, a photo of the Eiffel Tower becomes 'eiffel-tower-paris-travel-photo.jpg' instead of 'IMG_1234.jpg'. Free tier allows 10 AI renames per day; Pro unlocks unlimited.",
+      "No account is needed for most tools. Only AI-powered tools (AI Rename, AI Alt Text, Transcribe) and AI combo tools require a free account to prevent API abuse.",
   },
   {
     question: "Can I use SammaPix on mobile?",
     answer:
-      "Yes. SammaPix is fully responsive and works on iPhone, iPad, Android, and all mobile devices. All tools run directly in your mobile browser with no app download needed. Just open sammapix.com and start processing images on the go.",
+      "Yes. SammaPix is fully responsive and works on iPhone, iPad, Android, and all mobile devices. All tools run directly in your mobile browser -- no app download needed.",
   },
   {
     question: "What's the difference between Free and Pro?",
     answer:
-      `Free tier includes all ${TOOL_COUNT} tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads, and ads visible. Pro ($9/month) removes all limits: 500 files per batch, 200 AI renames daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.`,
-  },
-  {
-    question: "How does image compression work without losing quality?",
-    answer:
-      "SammaPix uses advanced lossy and lossless compression algorithms in your browser. You control the quality slider (1-100) -- higher values preserve more detail but increase file size. For most photos, 75-85 quality is imperceptible to the eye while cutting file size by 60-80%. Test with your own images to find the sweet spot.",
+      `Free tier includes all ${TOOL_COUNT} tools with limits: 20 files per batch, 10 AI credits daily, no ZIP downloads. Pro ($9/month) removes all limits: 500 files per batch, 200 AI operations daily, ZIP downloads, no ads, and AI Workflow Pipeline access. Both plans offer zero uploads and full browser-based processing.`,
   },
   {
     question: "Is there a file size limit?",
     answer:
-      "Individual files up to 100MB are supported. For batch processing, the total size of all files in one batch can reach 1GB on Free tier (20 files) and 2GB on Pro tier (500 files). Processing happens in your browser's memory, so very large batches may slow down older devices.",
+      "Individual files up to 100MB are supported. For batch processing, the total size can reach 1GB on Free tier (20 files) and 2GB on Pro tier (500 files). Processing happens in your browser's memory, so very large batches may slow down older devices.",
   },
   {
     question: "Does SammaPix work offline?",
     answer:
-      "Core tools (Compress, WebP, Resize, HEIC, Film Filters, Watermark, EXIF Viewer, Find Duplicates, Batch Rename) work offline once the page loads. AI-powered tools (AI Rename, AI Alt Text, Transcribe) require internet since they connect to Google Gemini. You'll get a clear error if offline on AI tools.",
-  },
-  {
-    question: "How do I convert HEIC to JPG?",
-    answer:
-      "Open sammapix.com, click HEIC Converter, drag your HEIC files (iPhone photos) into the dropzone, and set output quality. Download instantly as JPG, PNG, or WebP. No account needed, no file uploads to servers -- all conversion happens in your browser.",
-  },
-  {
-    question: "Can I batch process multiple images?",
-    answer:
-      "Yes. Drop up to 20 images per batch on Free tier or 500 on Pro. Apply the same settings (quality, dimensions, filters) to all files at once, then download individually or as a ZIP. Use Batch Resize for preset dimensions (Instagram, YouTube, etc.) or Batch Rename for pattern-based renaming.",
+      "Core processing tools work offline once the page loads. AI-powered tools require internet since they connect to Google Gemini. You'll get a clear error if offline on AI tools.",
   },
   {
     question: "Is my data stored on your servers?",
     answer:
-      "No. Your images are never uploaded to any server. All processing happens in your browser using your computer's processing power. For AI-powered tools, only a small thumbnail (max 512px) is temporarily sent to Google Gemini for analysis -- your original high-res files stay completely local. No storage, no tracking, no backups.",
-  },
-  {
-    question: "What is WebP and why should I use it?",
-    answer:
-      "WebP is a modern image format from Google that's 25-35% smaller than JPG while maintaining quality. It's supported by all modern browsers and recommended by Google for Core Web Vitals. Use SammaPix's WebP Converter or Web Optimize combo tool to convert your images -- you'll get faster page loads and better SEO rankings.",
-  },
-  {
-    question: "How does the Find Duplicates tool work?",
-    answer:
-      "Upload multiple photos and Find Duplicates analyzes them for visual similarity, identical copies, or near-duplicates. It identifies duplicate EXIF data, resolution, and visual fingerprints. Great for cleaning up your photo library after syncing from multiple devices or cameras.",
-  },
-  {
-    question: "Can I remove EXIF and GPS data from my photos?",
-    answer:
-      "Yes. Use the EXIF Viewer tool to see all embedded metadata, then use EXIF Remover to strip GPS coordinates, timestamps, camera model, and other privacy data. All processing happens in your browser -- cleaned photos are never stored or transmitted. Essential for protecting your location privacy before sharing photos online.",
-  },
-  {
-    question: "What is AI Photo Sort and how do I use it?",
-    answer:
-      "AI Photo Sort is a combo tool that analyzes your photo collection and organizes by detected content: faces, landscapes, food, pets, documents, text, etc. Upload 50+ photos and it suggests folders or tags. Great for travel photographers and content creators managing large libraries.",
-  },
-  {
-    question: "How do Film Filters work and can I customize them?",
-    answer:
-      "Film Filters applies 14 cinematic presets inspired by classic film stock (Kodachrome, Tri-X, Portra, etc.). Each filter adjusts contrast, saturation, and color grading. Apply to single photos or batch process entire galleries. Filters run in your browser with no quality loss.",
-  },
-  {
-    question: "What is Web Optimize and when should I use it?",
-    answer:
-      "Web Optimize is a combo tool that prepares images for websites: compresses for speed, converts to WebP, resizes for responsive layouts, and generates thumbnails. Perfect for developers and content creators needing Core Web Vitals-optimized assets without manual work.",
+      "No. Your images are never uploaded to any server. All processing happens in your browser using your device's processing power. No storage, no tracking, no backups.",
   },
 ];
 
@@ -232,18 +172,9 @@ export default function HomePage() {
         },
         knowsAbout: [
           "AI photo workflow",
-          "Image compression",
-          "WebP conversion",
-          "EXIF metadata removal",
-          "Image resizing",
-          "Batch image processing",
-          "AI image renaming",
-          "Image format conversion",
-          "HEIC conversion",
-          "Image optimization for web",
-          "Photography workflow optimization",
-          "Privacy-preserving image tools",
           "Browser-based image processing",
+          "Privacy-preserving image tools",
+          "Photography workflow optimization",
         ],
         contactPoint: {
           "@type": "ContactPoint",
