@@ -12,9 +12,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 const TOOL_URL = `${APP_URL}/tools/png-to-jpg`;
 
 export const metadata: Metadata = {
-  title: "PNG to JPG Converter — Free, Browser-Based",
+  title: "PNG to JPG Converter — Free Online, Batch, No Upload (2026)",
   description:
-    "Convert PNG to JPG online free. Batch up to 20 files, quality control, no signup, no upload. 100% in your browser — your files stay private.",
+    "Convert PNG to JPG free online. Batch convert up to 20 files, quality control 50-100%, no signup, no upload. 100% browser-based — files stay private.",
   keywords: [
     "png to jpg",
     "png to jpg converter",
@@ -98,7 +98,7 @@ export default function PngToJpgPage() {
                 <FileImage className="h-4 w-4" style={{ color: "#6366F1" }} strokeWidth={1.5} />
               </div>
               <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-                PNG to JPG. -90% Size Free
+                PNG to JPG Converter — Free, Batch, No Upload
               </h1>
             </div>
 
