@@ -24,6 +24,8 @@ export interface OptimizePlatform {
   faqs: OptimizeFaq[];
   related: string[];
   ogDescription: string;
+  /** Optional override of the default `Optimize Images for X Free Online` SEO title */
+  seoTitle?: string;
 }
 
 function aspectRatio(w: number, h: number): string {
@@ -43,6 +45,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Shopify",
     displayName: "Shopify",
     titleKeyword: "Shopify",
+    seoTitle: "Shopify Image Optimizer — Compress Product Photos Free 2026",
     metaDescription:
       "Optimize images for Shopify — compress product photos, collection banners and slideshow images to the exact sizes Shopify recommends. Free, browser-based, no upload required.",
     ogDescription:
@@ -120,6 +123,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "WordPress",
     displayName: "WordPress",
     titleKeyword: "WordPress",
+    seoTitle: "WordPress Image Optimizer — Compress Without Plugin (Free 2026)",
     metaDescription:
       "Optimize images for WordPress — compress featured images, WooCommerce products and media library files to speed up your site. Free, no plugin needed, runs in your browser.",
     ogDescription:
