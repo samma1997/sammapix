@@ -201,6 +201,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Wix",
     displayName: "Wix",
     titleKeyword: "Wix",
+    seoTitle: "Wix Image Optimizer — Compress Site Images Free (2026)",
     metaDescription:
       "Optimize images for Wix — compress hero banners, gallery photos and logo files to the right sizes. Speed up your Wix site without relying on auto-optimize alone.",
     ogDescription:
@@ -278,6 +279,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Etsy",
     displayName: "Etsy",
     titleKeyword: "Etsy",
+    seoTitle: "Etsy Image Optimizer — Compress Listing Photos Free (2026)",
     metaDescription:
       "Optimize images for Etsy — compress listing photos, shop banners and thumbnails to the exact sizes Etsy recommends. Improve search ranking with faster-loading, high-quality product images.",
     ogDescription:
@@ -355,6 +357,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Webflow",
     displayName: "Webflow",
     titleKeyword: "Webflow",
+    seoTitle: "Webflow Image Optimizer — Compress for Faster Load (2026 Free)",
     metaDescription:
       "Optimize images for Webflow — compress hero backgrounds, CMS thumbnails and responsive images to stay under Webflow's 4 MB limit. Browser-based, free, no signup required.",
     ogDescription:
@@ -432,6 +435,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Squarespace",
     displayName: "Squarespace",
     titleKeyword: "Squarespace",
+    seoTitle: "Squarespace Image Optimizer — Compress Site Images Free (2026)",
     metaDescription:
       "Optimize images for Squarespace — compress hero banners, blog covers, product photos and logos to the exact sizes Squarespace recommends. Free, browser-based, instant results.",
     ogDescription:
@@ -509,6 +513,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Ghost",
     displayName: "Ghost",
     titleKeyword: "Ghost",
+    seoTitle: "Ghost CMS Image Optimizer — Compress Post Photos Free (2026)",
     metaDescription:
       "Optimize images for Ghost CMS — compress feature images, post graphics and author avatars to the right dimensions. Free, browser-based, no plugins required.",
     ogDescription:
@@ -580,6 +585,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Magento",
     displayName: "Magento (Adobe Commerce)",
     titleKeyword: "Magento",
+    seoTitle: "Magento Image Optimizer — Compress Product Images Free (2026)",
     metaDescription:
       "Optimize images for Magento — compress product photos, swatch thumbnails and category banners to the exact sizes Adobe Commerce recommends. Free, instant, browser-based.",
     ogDescription:
@@ -651,6 +657,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "HubSpot",
     displayName: "HubSpot",
     titleKeyword: "HubSpot",
+    seoTitle: "HubSpot Image Optimizer — Compress Marketing Images Free (2026)",
     metaDescription:
       "Optimize images for HubSpot — compress blog thumbnails, email headers, landing page heroes and social images to the exact sizes HubSpot recommends. Free, browser-based.",
     ogDescription:
@@ -728,6 +735,7 @@ const ALL_OPTIMIZE_PLATFORMS: OptimizePlatform[] = [
     name: "Notion",
     displayName: "Notion",
     titleKeyword: "Notion",
+    seoTitle: "Notion Image Optimizer — Compress Workspace Images Free (2026)",
     metaDescription:
       "Optimize images for Notion — compress page covers, icons and embedded images to the right sizes. Prevent slow loading in shared Notion workspaces. Free, browser-based.",
     ogDescription:

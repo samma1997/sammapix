@@ -416,6 +416,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Discord",
     displayName: "Discord",
     titleKeyword: "Discord image sizes",
+    seoTitle: "Discord Image Size 2026: Avatar, Banner, Server Icon — Free",
     metaDescription:
       "Resize images for Discord- server icon 512×512, banner 960×540, emoji 128×128, sticker 320×320. Free online, no upload required.",
     ogDescription:
@@ -476,6 +477,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Slack",
     displayName: "Slack",
     titleKeyword: "Slack image sizes",
+    seoTitle: "Slack Image Size 2026: Profile, Workspace, Emoji — Free Online",
     metaDescription:
       "Resize images for Slack- workspace icon 132×132, profile photo 512×512, shared image 2000×2000, emoji 128×128. Free online tool.",
     ogDescription:
@@ -530,6 +532,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Twitch",
     displayName: "Twitch",
     titleKeyword: "Twitch image sizes",
+    seoTitle: "Twitch Image Size 2026: Banner, Panel, Profile — Free Online",
     metaDescription:
       "Resize images for Twitch- profile 256×256, offline banner 1920×1080, panel 320×160, emote 112×112. Free online, no upload.",
     ogDescription:
@@ -590,6 +593,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Telegram",
     displayName: "Telegram",
     titleKeyword: "Telegram image sizes",
+    seoTitle: "Telegram Image Size 2026: Channel, Group, Profile — Free Online",
     metaDescription:
       "Resize images for Telegram- profile photo 512×512, channel photo 512×512, sticker 512×512, inline result 300×200. Free online tool.",
     ogDescription:
@@ -698,6 +702,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Mastodon",
     displayName: "Mastodon",
     titleKeyword: "Mastodon image sizes",
+    seoTitle: "Mastodon Image Size 2026: Avatar, Header, Post — Free Online",
     metaDescription:
       "Resize images for Mastodon- avatar 400×400, header 1500×500, media attachment 1920×1080, custom emoji 50×50+. Free online tool.",
     ogDescription:
@@ -752,6 +757,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Passport Photo",
     displayName: "Passport Photo",
     titleKeyword: "passport photo size",
+    seoTitle: "Passport Photo Size 2026: 2x2, 35x45mm — Free Online Resizer",
     metaDescription:
       "Resize photos to passport size for any country. US 2x2\", EU 35x45mm, UK, India, China — free, instant, browser-based.",
     ogDescription:
@@ -814,6 +820,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Visa Photo",
     displayName: "Visa Photo",
     titleKeyword: "visa photo size",
+    seoTitle: "Visa Photo Size 2026: USA, Schengen, UK — Free Online Resizer",
     metaDescription:
       "Resize photos to visa application size for any country. US, Schengen, UK, India, China, Japan — free, instant, browser-based.",
     ogDescription:
@@ -876,6 +883,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Snapchat",
     displayName: "Snapchat",
     titleKeyword: "Snapchat",
+    seoTitle: "Snapchat Image Size 2026: Snap, Story, Profile — Free Online",
     metaDescription:
       "Resize images for Snapchat — Story 1080×1920, Spotlight 1080×1920, Profile 320×320, Geofilter 1080×2340. Free online, no upload required.",
     ogDescription:
@@ -988,6 +996,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Email Header",
     displayName: "Email Header",
     titleKeyword: "Email Headers and Newsletters",
+    seoTitle: "Email Header Size 2026: Newsletter, Banner — Free Online Resizer",
     metaDescription:
       "Resize images for email headers — Newsletter Banner 600×200, Email Banner 600×300, Signature Image 300×100. Free online, no upload required.",
     ogDescription:
@@ -1043,6 +1052,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "eBay",
     displayName: "eBay",
     titleKeyword: "eBay Listings",
+    seoTitle: "eBay Image Size 2026: Listing, Gallery, Auction — Free Online",
     metaDescription:
       "Resize images for eBay — Listing 1600×1600, Gallery 500×500, Zoom 1600×1600. Free online tool, no upload required.",
     ogDescription:
@@ -1098,6 +1108,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Amazon",
     displayName: "Amazon",
     titleKeyword: "Amazon Product Listings",
+    seoTitle: "Amazon Image Size 2026: Product Listing 2000x2000 — Free Resizer",
     metaDescription:
       "Resize images for Amazon — Main Image 2000×2000, Swatch 250×250, Zoom 2000×2000. Free online tool, no upload required.",
     ogDescription:
@@ -1209,6 +1220,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Etsy Listing",
     displayName: "Etsy Listing",
     titleKeyword: "Etsy Listings",
+    seoTitle: "Etsy Image Size 2026: Listing Photo, Banner, Shop Icon — Free",
     metaDescription:
       "Resize images for Etsy — Listing 2000×2000, Thumbnail 570×456, Shop Banner 1200×300. Free online tool, no upload required.",
     ogDescription:
@@ -1264,6 +1276,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Blog Header",
     displayName: "Blog Header",
     titleKeyword: "Blog Header Images",
+    seoTitle: "Blog Header Image Size 2026: 1200x630 OG, Hero — Free Resizer",
     metaDescription:
       "Resize images for blog headers — WordPress 1200×628, Medium 800×418, Ghost 1200×630. Free online tool, no upload required.",
     ogDescription:
