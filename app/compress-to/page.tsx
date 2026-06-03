@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { APP_URL, APP_NAME } from "@/lib/constants";
+import { getAllTargets } from "@/lib/compress-targets";
 
 export const metadata: Metadata = {
   title: `Compress Image to Exact File Size — Free Online | ${APP_NAME}`,
@@ -39,24 +40,49 @@ export const metadata: Metadata = {
   },
 };
 
-const SIZES = [
-  { slug: "3kb", label: "3 KB", description: "Compress to 3 KB for micro-thumbnails and favicons." },
-  { slug: "5kb", label: "5 KB", description: "Compress to 5 KB for email icons and tiny web assets." },
-  { slug: "8kb", label: "8 KB", description: "Compress to 8 KB for small thumbnails and badges." },
-  { slug: "10kb", label: "10 KB", description: "Compress to 10 KB for web thumbnails and avatars." },
-  { slug: "15kb", label: "15 KB", description: "Compress to 15 KB for small product thumbnails." },
-  { slug: "20kb", label: "20 KB", description: "Compress to 20 KB for exam forms and signature uploads." },
-  { slug: "25kb", label: "25 KB", description: "Compress to 25 KB for government document uploads." },
-  { slug: "30kb", label: "30 KB", description: "Compress to 30 KB for exam signature requirements." },
-  { slug: "40kb", label: "40 KB", description: "Compress to 40 KB for application form photos." },
-  { slug: "50kb", label: "50 KB", description: "Compress to 50 KB for JEE, NEET, and exam applications." },
-  { slug: "100kb", label: "100 KB", description: "Compress to 100 KB for passport and ID photo uploads." },
-  { slug: "200kb", label: "200 KB", description: "Compress to 200 KB for visa and government form uploads." },
-  { slug: "300kb", label: "300 KB", description: "Compress to 300 KB for certificate and document scans." },
-  { slug: "500kb", label: "500 KB", description: "Compress to 500 KB for high-quality web images." },
-  { slug: "1mb", label: "1 MB", description: "Compress to 1 MB for email attachments and sharing." },
-  { slug: "2mb", label: "2 MB", description: "Compress to 2 MB for LMS uploads and presentations." },
-];
+// Short blurbs per target. The list itself is derived from getAllTargets()
+// (lib/compress-targets.ts) so every new size appears here automatically —
+// no more orphan pages when targets are added.
+const DESCRIPTIONS: Record<string, string> = {
+  "1kb": "Compress to 1 KB for tracking pixels and sprite tiles.",
+  "2kb": "Compress to 2 KB for tiny favicons and notification badges.",
+  "3kb": "Compress to 3 KB for micro-thumbnails and favicons.",
+  "5kb": "Compress to 5 KB for email icons and tiny web assets.",
+  "8kb": "Compress to 8 KB for small thumbnails and badges.",
+  "10kb": "Compress to 10 KB for web thumbnails and avatars.",
+  "15kb": "Compress to 15 KB for small product thumbnails.",
+  "20kb": "Compress to 20 KB for exam forms and signature uploads.",
+  "25kb": "Compress to 25 KB for government document uploads.",
+  "30kb": "Compress to 30 KB for exam signature requirements.",
+  "35kb": "Compress to 35 KB for SSC, UPSC, and IBPS exam photos.",
+  "40kb": "Compress to 40 KB for application form photos.",
+  "45kb": "Compress to 45 KB for exam photos and signature uploads.",
+  "50kb": "Compress to 50 KB for JEE, NEET, and exam applications.",
+  "60kb": "Compress to 60 KB for profile photos and document scans.",
+  "70kb": "Compress to 70 KB for sharp avatars and blog thumbnails.",
+  "80kb": "Compress to 80 KB for web cards and OpenGraph previews.",
+  "100kb": "Compress to 100 KB for passport and ID photo uploads.",
+  "150kb": "Compress to 150 KB for crisp blog and social images.",
+  "200kb": "Compress to 200 KB for visa and government form uploads.",
+  "250kb": "Compress to 250 KB for blog heroes and editorial photos.",
+  "300kb": "Compress to 300 KB for certificate and document scans.",
+  "400kb": "Compress to 400 KB for portfolios and presentation slides.",
+  "500kb": "Compress to 500 KB for high-quality web images.",
+  "700kb": "Compress to 700 KB for full-screen heroes and galleries.",
+  "1mb": "Compress to 1 MB for email attachments and sharing.",
+  "2mb": "Compress to 2 MB for LMS uploads and presentations.",
+  "3mb": "Compress to 3 MB for print proofs and upload limits.",
+  "5mb": "Compress to 5 MB for archival photos and large prints.",
+};
+
+const SIZES = getAllTargets()
+  .slice()
+  .sort((a, b) => a.sizeBytes - b.sizeBytes)
+  .map((t) => ({
+    slug: t.slug,
+    label: t.sizeLabel,
+    description: DESCRIPTIONS[t.slug] ?? `Compress images to exactly ${t.sizeLabel}.`,
+  }));
 
 export default function CompressToIndexPage() {
   return (
