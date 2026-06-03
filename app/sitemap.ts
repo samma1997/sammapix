@@ -4,6 +4,7 @@ import { getAllPlatforms } from "@/lib/resize-platforms";
 import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
 import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
+import { getAllRatios } from "@/lib/crop-ratios";
 import { getAllPassportPresets } from "@/lib/passport-presets";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -270,6 +271,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // Programmatic crop pages — driven from lib/crop-ratios.ts
+  const cropPages: MetadataRoute.Sitemap = [
+    {
+      url: `${APP_URL}/crop`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    ...getAllRatios().map((r) => ({
+      url: `${APP_URL}/crop/${r.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
+  ];
+
   return [
     ...staticPages,
     ...toolPages,
@@ -282,5 +299,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...optimizeForPages,
     ...imageSizePages,
     ...passportPhotoPages,
+    ...cropPages,
   ];
 }
