@@ -101,6 +101,7 @@ export default function ProUpsellModal({
   const { data: session } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [creditsLoading, setCreditsLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
 
   // Founding deal — show $5 price + spots-left urgency in CTA.
@@ -159,10 +160,40 @@ export default function ProUpsellModal({
     }
   };
 
-  const handleBuyCredits = () => {
+  const handleBuyCredits = async () => {
     trackEvent("upsell_credits_clicked", { trigger });
-    router.push("/pricing#credits");
-    onClose();
+    // Not logged in (e.g. files/batch triggers): credit purchase needs an
+    // account, so fall back to the pricing credits section.
+    if (!session) {
+      router.push("/pricing#credits");
+      onClose();
+      return;
+    }
+    // Logged-in users go straight to a one-time Stripe checkout for the
+    // entry credit pack — no detour to /pricing. This is the low-friction
+    // path for episodic users who won't commit to a $9/mo subscription.
+    setCreditsLoading(true);
+    try {
+      const res = await fetch("/api/credits/purchase", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ packageId: "credits_100" }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        // Couldn't create checkout — fall back to the pricing page.
+        router.push("/pricing#credits");
+        onClose();
+      }
+    } catch {
+      router.push("/pricing#credits");
+      onClose();
+    } finally {
+      setCreditsLoading(false);
+    }
   };
 
   // Show credit-pack alternative when a one-shot top-up makes sense.
@@ -265,13 +296,19 @@ export default function ProUpsellModal({
                 : "Start 7-day free trial \u2014 $9/mo after"}
           </button>
 
-          {/* Credit pack alternative for AI-ops triggers */}
+          {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
           {showCreditAlt && (
             <button
               onClick={handleBuyCredits}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2"
+              disabled={creditsLoading}
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
             >
-              Or buy a one-shot credit pack from $5.99
+              {creditsLoading ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+              ) : null}
+              {creditsLoading
+                ? "Redirecting to checkout..."
+                : "Or buy 100 credits for $5.99 — one-time, never expire"}
             </button>
           )}
 
