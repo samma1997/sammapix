@@ -187,6 +187,8 @@ export const BLOG_SLUGS = [
   "optimize-images-core-web-vitals-2026",
   "heic-to-webp-converter-guide",
   "image-optimization-checklist-2026",
+  "optimize-images-shopify-free-guide",
+  "image-compression-statistics-2026",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
