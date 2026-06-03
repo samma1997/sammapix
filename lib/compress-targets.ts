@@ -786,6 +786,630 @@ const ALL_TARGETS: CompressTarget[] = [
     ],
     related: ["1mb", "500kb", "100kb"],
   },
+
+  // ─── 1 KB ────────────────────────────────────────────────────────────────
+  {
+    slug: "1kb",
+    sizeLabel: "1 KB",
+    sizeBytes: 1024,
+    metaDescription:
+      "Compress any image to 1 KB online for free. The absolute minimum file size — for 1×1 tracking pixels, sprite tiles, and ultra-minimal favicons. Runs in your browser, no upload.",
+    ogDescription:
+      "Free online tool to compress images to 1 KB. For tracking pixels, sprite tiles, and the smallest possible web assets.",
+    titleKeyword: "Compress Image to 1KB",
+    keywords: [
+      "compress image to 1kb",
+      "reduce image size to 1kb",
+      "1kb image compressor",
+      "1x1 tracking pixel image",
+      "smallest possible image file",
+      "compress favicon to 1kb",
+      "tiny png under 1kb",
+    ],
+    useCase:
+      "For 1×1 transparent tracking pixels, single-color sprite tiles, ultra-minimal favicons, and CSS background micro-textures that must add virtually nothing to page weight.",
+    tips: [
+      "A 1×1 px transparent PNG is naturally under 1 KB — you rarely need a tool unless you are embedding a visible micro-graphic.",
+      "For flat-color tiles, an 8-color indexed PNG at 16×16 px stays comfortably under 1 KB.",
+      "Strip every byte of metadata — at 1 KB, EXIF or color-profile data alone can double your file size.",
+      "SVG often beats raster at this scale: a simple icon as inline SVG can be a few hundred bytes and stays sharp at any zoom.",
+    ],
+    faqs: [
+      {
+        q: "Is a usable image even possible at 1 KB?",
+        a: "Only for 1×1 to 16×16 px graphics: tracking pixels, single-color tiles, or the simplest 2-3 color icons. Anything photographic is impossible at 1 KB — this size is for technical micro-assets, not pictures.",
+      },
+      {
+        q: "What is a 1 KB image used for?",
+        a: "The classic use is the email open-tracking pixel (a 1×1 transparent PNG). Other uses include CSS sprite spacer tiles, placeholder dots for lazy loading, and minimal favicons for performance-obsessed sites.",
+      },
+      {
+        q: "Which format is smallest at 1 KB?",
+        a: "For 1×1 or flat tiles, PNG with an 8-bit indexed palette is tiny. For simple shapes, inline SVG is often smaller still and scalable. JPEG cannot compete below ~3 KB because its header overhead alone approaches 1 KB.",
+      },
+      {
+        q: "How do I make a transparent 1×1 tracking pixel?",
+        a: "Create a 1×1 px canvas, set it fully transparent, and export as PNG — the result is around 70-100 bytes, well under 1 KB. No compression tool needed; the format minimum already wins.",
+      },
+    ],
+    related: ["2kb", "3kb", "5kb"],
+  },
+
+  // ─── 2 KB ────────────────────────────────────────────────────────────────
+  {
+    slug: "2kb",
+    sizeLabel: "2 KB",
+    sizeBytes: 2048,
+    metaDescription:
+      "Compress any image to 2 KB online for free. Perfect for tiny favicons, monochrome icons, and notification badges. Browser-based, private, no sign-up.",
+    ogDescription:
+      "Free online tool to compress images to 2 KB. Ideal for small favicons, flat icons, and notification badge graphics.",
+    titleKeyword: "Compress Image to 2KB",
+    keywords: [
+      "compress image to 2kb",
+      "reduce image size to 2kb",
+      "2kb image compressor",
+      "tiny favicon compressor",
+      "notification badge icon size",
+      "small icon under 2kb",
+      "compress logo to 2kb",
+    ],
+    useCase:
+      "For small favicons (16×16 to 32×32 px), monochrome UI icons, notification badge graphics, and flat-color logos that must stay feather-light.",
+    tips: [
+      "At 2 KB, keep dimensions at 32×32 px or below and use indexed-color PNG for crisp flat-color icons.",
+      "Two-tone or monochrome glyphs compress dramatically — a 32×32 menu icon often lands near 1 KB before you even touch the quality slider.",
+      "Remove the alpha channel if you do not need transparency — it can shave 20-30% off an already tiny PNG.",
+      "For multi-size favicons, generate separate 16×16 and 32×32 PNGs rather than one .ico to keep each request under 2 KB.",
+    ],
+    faqs: [
+      {
+        q: "What can I show at 2 KB?",
+        a: "Flat-color icons and small favicons up to 32×32 px look perfectly crisp at 2 KB. Simple two-color logos work too. Photographic content does not — reserve 2 KB for UI graphics with limited colors.",
+      },
+      {
+        q: "2 KB vs 3 KB vs 5 KB — what changes?",
+        a: "2 KB suits 16-32 px flat icons. 3 KB allows a slightly richer favicon or small avatar. 5 KB opens up tiny photographic thumbnails. The jump from 2 to 5 KB roughly doubles the dimensions you can keep sharp.",
+      },
+      {
+        q: "Best format for a 2 KB icon?",
+        a: "Indexed PNG (palette mode, 8-32 colors) is ideal for flat icons at 2 KB. Inline SVG is even smaller for geometric shapes and stays sharp at every resolution. Avoid JPEG at this size.",
+      },
+      {
+        q: "How do I compress a favicon to 2 KB?",
+        a: "Export at 32×32 px as PNG with 32 or fewer colors — this is usually already under 2 KB. If not, open it in SammaPix Compress and reduce the palette further; flat icons tolerate aggressive color reduction with no visible loss.",
+      },
+    ],
+    related: ["1kb", "3kb", "8kb"],
+  },
+
+  // ─── 35 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "35kb",
+    sizeLabel: "35 KB",
+    sizeBytes: 35840,
+    metaDescription:
+      "Compress any image to 35 KB online for free. The exact size required by many exam and government portals (SSC, UPSC, IBPS photo uploads). No sign-up, works in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 35 KB. Perfect for SSC, UPSC, IBPS and other exam form photo uploads with a 35 KB limit.",
+    titleKeyword: "Compress Image to 35KB",
+    keywords: [
+      "compress image to 35kb",
+      "reduce image size to 35kb",
+      "compress photo to 35kb",
+      "35kb image compressor",
+      "passport photo 35kb",
+      "compress image for exam form",
+      "ssc photo size 35kb",
+    ],
+    useCase:
+      "The exact target for many competitive-exam and government portals — SSC, UPSC, IBPS, and state recruitment forms frequently cap the candidate photo at 35 KB. Also used for ID document uploads with tight limits.",
+    tips: [
+      "Most exam portals want a 35 KB photo at 200×230 px (3.5×4.5 cm) — resize to those dimensions first, then compress at 60-70% quality to land right under 35 KB.",
+      "Keep the background plain white or light grey — flat backgrounds compress efficiently and most exam guidelines require them anyway.",
+      "Save as JPEG, not WebP — many government upload portals only accept JPEG/JPG for the photo field.",
+      "Strip EXIF metadata with our EXIF Remover before compressing — it frees a few extra KB so you can keep quality higher at 35 KB.",
+    ],
+    faqs: [
+      {
+        q: "How do I compress my photo to under 35 KB for an exam form?",
+        a: "Resize the photo to the required dimensions (commonly 200×230 px for Indian exam forms), then open SammaPix Compress and set quality to around 60-70% until the output reads 35 KB or less. Download as JPEG — this is the format most portals require.",
+      },
+      {
+        q: "Which exams require a 35 KB photo?",
+        a: "A 35 KB cap (or a 20-50 KB range) is common across SSC, UPSC, IBPS, railway (RRB), and many state public service commission portals. Always check the exact range in your specific notification, as some allow 20-50 KB and others fix 35 KB.",
+      },
+      {
+        q: "Will my exam photo still look clear at 35 KB?",
+        a: "Yes. At the small dimensions exam forms require (around 200×230 px), 35 KB preserves a clear, identifiable face. Compression only becomes visible if you try to keep the photo at full camera resolution — so always resize first.",
+      },
+      {
+        q: "The portal rejected my photo for being too large — what now?",
+        a: "Re-open the image in SammaPix, lower the quality slider a few more points, and confirm the output is comfortably under 35 KB (aim for 30-33 KB to leave margin). Also ensure the dimensions match the form's pixel requirements, as some portals check both.",
+      },
+    ],
+    related: ["20kb", "25kb", "45kb", "50kb"],
+  },
+
+  // ─── 45 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "45kb",
+    sizeLabel: "45 KB",
+    sizeBytes: 46080,
+    metaDescription:
+      "Compress any image to 45 KB online for free. Ideal for exam form photos, signature uploads, and ID portals with a 45 KB limit. Browser-based, no watermark.",
+    ogDescription:
+      "Free online tool to compress images to 45 KB. Great for exam form photos, signature scans, and government ID uploads.",
+    titleKeyword: "Compress Image to 45KB",
+    keywords: [
+      "compress image to 45kb",
+      "reduce image size to 45kb",
+      "compress photo to 45kb",
+      "45kb image compressor",
+      "compress signature to 45kb",
+      "exam photo 45kb",
+      "id upload image size",
+    ],
+    useCase:
+      "Ideal for exam application photos, scanned signatures, and ID-portal uploads that enforce a 45 KB ceiling — a slightly more forgiving limit than the common 20-35 KB exam caps.",
+    tips: [
+      "At 45 KB you can hold a 250×300 px photo at quality 70-78% with a clean, sharp face — a touch more headroom than 35 KB.",
+      "For scanned signatures, convert to greyscale before compressing — a signature has no color information, and greyscale JPEG at 45 KB is razor-sharp.",
+      "Resize to the portal's required pixel dimensions first; compressing a full-resolution scan straight to 45 KB causes unnecessary blur.",
+      "Export as JPEG for maximum portal compatibility — keep WebP for general web use, not government forms.",
+    ],
+    faqs: [
+      {
+        q: "How do I get my photo to exactly 45 KB?",
+        a: "Resize to the dimensions your form specifies, then compress at quality 70-78% in SammaPix until the output reads just under 45 KB. Aim for 42-44 KB to leave a safety margin against the portal's limit.",
+      },
+      {
+        q: "Is 45 KB better than 35 KB for an exam photo?",
+        a: "If your portal allows up to 45 KB, use it — the extra 10 KB gives a noticeably sharper face at the same dimensions. Only target 35 KB or 20 KB when the form explicitly caps you there.",
+      },
+      {
+        q: "How do I compress a signature scan to 45 KB?",
+        a: "Convert the signature to greyscale, crop tightly around the strokes, resize to the required width (often 140×60 px for exam forms), then compress. A signature this small reaches 45 KB at near-lossless quality.",
+      },
+      {
+        q: "What format should I use for a 45 KB upload?",
+        a: "JPEG for exam and government portals, since most only accept JPG. For a signature with flat color, PNG can also work and may look crisper — check which formats your specific portal accepts.",
+      },
+    ],
+    related: ["35kb", "50kb", "60kb", "30kb"],
+  },
+
+  // ─── 60 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "60kb",
+    sizeLabel: "60 KB",
+    sizeBytes: 61440,
+    metaDescription:
+      "Compress any image to 60 KB online for free. Perfect for profile photos, document uploads, and web thumbnails that need a balance of quality and size. No sign-up.",
+    ogDescription:
+      "Free online tool to compress images to 60 KB. Ideal for profile photos, ID document uploads, and crisp web thumbnails.",
+    titleKeyword: "Compress Image to 60KB",
+    keywords: [
+      "compress image to 60kb",
+      "reduce image size to 60kb",
+      "compress photo to 60kb",
+      "60kb image compressor",
+      "profile photo 60kb",
+      "compress document image",
+      "thumbnail compression online",
+    ],
+    useCase:
+      "Perfect for profile photos, document and ID uploads with a 60 KB cap, and crisp web thumbnails where you want more detail than a 50 KB file but still fast loading.",
+    tips: [
+      "At 60 KB a 450×450 px profile photo stays sharp at quality 72-80% — enough detail for LinkedIn-style headshots.",
+      "For scanned documents, compress in greyscale unless color is essential — a greyscale page at 60 KB is crisp and legible.",
+      "Crop out empty margins before compressing — fewer pixels means you can spend the 60 KB budget on the part that matters.",
+      "Use WebP for web display and JPEG for portal uploads — WebP at 60 KB looks like an 90 KB JPEG.",
+    ],
+    faqs: [
+      {
+        q: "Is 60 KB enough for a clear profile photo?",
+        a: "Yes. At display sizes up to 450×450 px, a 60 KB photo looks clean and professional. It is a common sweet spot for profile pictures that need to look sharp without slowing down a page full of avatars.",
+      },
+      {
+        q: "How do I compress a document scan to 60 KB?",
+        a: "Convert to greyscale, resize to about 1000 px on the long edge, and compress at quality 60-70% in SammaPix. Text stays legible and the file lands around 60 KB — ideal for portals that cap document uploads there.",
+      },
+      {
+        q: "60 KB vs 100 KB — which should I pick?",
+        a: "Choose 60 KB when a form limits you or when you have many images on a page and speed matters. Choose 100 KB when a single image needs maximum clarity, such as a hero photo or a detailed product shot.",
+      },
+      {
+        q: "What dimensions work best at 60 KB?",
+        a: "For square profile photos: 400-500 px. For document scans: up to 1000-1200 px on the long edge in greyscale. For rectangular thumbnails: around 500×350 px. Beyond these, 60 KB starts to show softness on detailed content.",
+      },
+    ],
+    related: ["50kb", "70kb", "80kb", "100kb"],
+  },
+
+  // ─── 70 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "70kb",
+    sizeLabel: "70 KB",
+    sizeBytes: 71680,
+    metaDescription:
+      "Compress any image to 70 KB online for free. Great for high-quality avatars, blog thumbnails, and form uploads with a 70 KB limit. Private, browser-based, no watermark.",
+    ogDescription:
+      "Free online tool to compress images to 70 KB. Perfect for sharp avatars, blog thumbnails, and 70 KB form uploads.",
+    titleKeyword: "Compress Image to 70KB",
+    keywords: [
+      "compress image to 70kb",
+      "reduce image size to 70kb",
+      "compress photo to 70kb",
+      "70kb image compressor",
+      "avatar image 70kb",
+      "blog thumbnail compression",
+      "compress image for upload",
+    ],
+    useCase:
+      "Great for high-quality avatars, blog and product thumbnails, and upload forms that enforce a 70 KB limit — enough budget to keep photographic detail crisp at medium dimensions.",
+    tips: [
+      "At 70 KB you can hold a 500×500 px photo at quality 78-84% — large, sharp avatars and detailed thumbnails.",
+      "For blog thumbnails at 600×400 px, 70 KB in WebP looks effectively lossless on screens.",
+      "If you have a batch of thumbnails, compress them all to 70 KB at once in SammaPix and download as a ZIP.",
+      "Progressive JPEG at 70 KB renders top-to-bottom as it loads, improving perceived speed on slower connections.",
+    ],
+    faqs: [
+      {
+        q: "How do I compress an image to 70 KB?",
+        a: "Open SammaPix Compress, drop the image, and lower the quality slider until the output reads 70 KB or just below. For larger source photos, resize to under 600 px first, then fine-tune the quality.",
+      },
+      {
+        q: "Is 70 KB good for a blog thumbnail?",
+        a: "Yes — at 500-700 px wide, a 70 KB image is sharp and loads quickly. It sits in the ideal range for thumbnail grids where you want quality without bloating total page weight.",
+      },
+      {
+        q: "70 KB vs 100 KB — is the difference visible?",
+        a: "At thumbnail and avatar sizes (under 600 px), the difference is negligible, so 70 KB saves bandwidth for free. At full-width display (1000 px+), 100 KB looks slightly cleaner on fine detail.",
+      },
+      {
+        q: "Which format is best at 70 KB?",
+        a: "WebP gives the sharpest result at 70 KB for photos. Use JPEG for upload forms that require it. PNG is only worth it for screenshots or flat graphics, not photographic thumbnails.",
+      },
+    ],
+    related: ["60kb", "80kb", "100kb", "50kb"],
+  },
+
+  // ─── 80 KB ───────────────────────────────────────────────────────────────
+  {
+    slug: "80kb",
+    sizeLabel: "80 KB",
+    sizeBytes: 81920,
+    metaDescription:
+      "Compress any image to 80 KB online for free. Ideal for web card images, product thumbnails, and OpenGraph previews. Fast, browser-based, no upload required.",
+    ogDescription:
+      "Free online tool to compress images to 80 KB. Perfect for web card images, product thumbnails, and social preview graphics.",
+    titleKeyword: "Compress Image to 80KB",
+    keywords: [
+      "compress image to 80kb",
+      "reduce image size to 80kb",
+      "compress photo to 80kb",
+      "80kb image compressor",
+      "web card image size",
+      "product thumbnail 80kb",
+      "opengraph image compression",
+    ],
+    useCase:
+      "Ideal for web card images, e-commerce product thumbnails, OpenGraph social-preview graphics, and any medium image where you want near-100 KB quality with a slightly lighter footprint.",
+    tips: [
+      "At 80 KB a 700×500 px card image stays crisp at quality 80-86% — great for blog cards and listing grids.",
+      "For OpenGraph previews (1200×630 px), 80 KB in WebP is light enough to load before the social crawler times out.",
+      "Tightly crop product shots to the item — removing background whitespace lets the 80 KB budget go to product detail.",
+      "Lazy-load card grids: with images at 80 KB each, even a 30-card page stays under 2.5 MB total.",
+    ],
+    faqs: [
+      {
+        q: "Is 80 KB enough for a product or card image?",
+        a: "Yes. At 600-800 px wide, an 80 KB image looks sharp in card layouts and product grids. It is a popular target for sites that want fast loading without dropping to thumbnail-level detail.",
+      },
+      {
+        q: "What is the best size for an OpenGraph image?",
+        a: "1200×630 px is the standard OpenGraph dimension. Compressing it to around 80 KB keeps social previews sharp on Twitter, LinkedIn, and Facebook while loading fast enough that crawlers reliably fetch it.",
+      },
+      {
+        q: "80 KB vs 100 KB — which should I use?",
+        a: "Use 80 KB for card grids and previews where many images load together. Use 100 KB for a standalone hero or feature image where a touch more clarity is worth the extra bytes. The visual gap is small.",
+      },
+      {
+        q: "How do I compress to 80 KB in bulk?",
+        a: "Drop all your images into SammaPix Compress, set the quality so output lands near 80 KB, compress the whole batch, and download as a ZIP — ideal for preparing a full set of card or product images at once.",
+      },
+    ],
+    related: ["70kb", "100kb", "150kb", "60kb"],
+  },
+
+  // ─── 150 KB ──────────────────────────────────────────────────────────────
+  {
+    slug: "150kb",
+    sizeLabel: "150 KB",
+    sizeBytes: 153600,
+    metaDescription:
+      "Compress any image to 150 KB online for free. Perfect for blog images, social posts, and retina thumbnails that need crisp quality. Browser-based, no sign-up.",
+    ogDescription:
+      "Free online tool to compress images to 150 KB. Ideal for sharp blog images, social media posts, and retina-ready thumbnails.",
+    titleKeyword: "Compress Image to 150KB",
+    keywords: [
+      "compress image to 150kb",
+      "reduce image size to 150kb",
+      "compress photo to 150kb",
+      "150kb image compressor",
+      "blog image 150kb",
+      "social media image compression",
+      "retina thumbnail size",
+    ],
+    useCase:
+      "Perfect for blog body images, social media posts, retina-ready thumbnails, and CMS image fields where you want noticeably better quality than 100 KB while staying lightweight.",
+    tips: [
+      "At 150 KB you can keep a 1400 px wide image at quality 80-86% — crisp on retina screens for blog and editorial layouts.",
+      "Square social posts (1080×1080 px) look flawless at 150 KB and load fast in feeds.",
+      "Use 150 KB as your default for in-article images — it balances Core Web Vitals against visible quality better than going all the way to 100 KB on large photos.",
+      "Serve a smaller srcset variant to mobile — a 150 KB desktop image can be a 60 KB mobile version at 800 px.",
+    ],
+    faqs: [
+      {
+        q: "Is 150 KB a good size for blog images?",
+        a: "Yes — it is one of the best defaults. At 1200-1400 px wide, a 150 KB image is sharp on retina displays and still loads quickly. Most quality-focused blogs keep body images in the 100-200 KB range.",
+      },
+      {
+        q: "How do I compress a photo to 150 KB?",
+        a: "Resize to your display width (1200-1400 px for blogs), then compress at quality 80-86% in SammaPix until output reads about 150 KB. WebP reaches this target at higher visual quality than JPEG.",
+      },
+      {
+        q: "150 KB vs 200 KB — which is better for web?",
+        a: "150 KB loads slightly faster and is plenty for most in-article images. Choose 200 KB only for hero or feature images where extra detail justifies the bytes. For grids and body content, 150 KB wins.",
+      },
+      {
+        q: "Will 150 KB pass Core Web Vitals?",
+        a: "Generally yes, especially with lazy loading and a properly sized srcset. Keeping individual images near or below 150 KB helps your Largest Contentful Paint (LCP) stay within Google's recommended threshold.",
+      },
+    ],
+    related: ["100kb", "200kb", "250kb", "80kb"],
+  },
+
+  // ─── 250 KB ──────────────────────────────────────────────────────────────
+  {
+    slug: "250kb",
+    sizeLabel: "250 KB",
+    sizeBytes: 256000,
+    metaDescription:
+      "Compress any image to 250 KB online for free. Great for high-quality blog heroes, editorial photos, and portfolio thumbnails. No watermark, no upload.",
+    ogDescription:
+      "Free online tool to compress images to 250 KB. Perfect for blog hero images, editorial photography, and portfolio previews.",
+    titleKeyword: "Compress Image to 250KB",
+    keywords: [
+      "compress image to 250kb",
+      "reduce image size to 250kb",
+      "compress photo to 250kb",
+      "250kb image compressor",
+      "blog hero image size",
+      "editorial photo compression",
+      "portfolio thumbnail 250kb",
+    ],
+    useCase:
+      "Great for high-quality blog hero images, editorial photography, magazine-style layouts, and portfolio thumbnails where fine detail and color depth matter but you still want a sub-300 KB file.",
+    tips: [
+      "At 250 KB you can hold a 1600-1800 px wide image at quality 84-90% — excellent for full-width blog heroes on retina displays.",
+      "Editorial and food photography benefit from WebP at 250 KB, which preserves smooth color gradients JPEG can band at lower sizes.",
+      "Pair a 250 KB desktop hero with a mobile srcset around 100 KB to keep phone load times fast.",
+      "Keep one 250 KB hero per page but use lighter 100-150 KB images for the body to protect overall page speed.",
+    ],
+    faqs: [
+      {
+        q: "Is 250 KB good for a blog hero image?",
+        a: "Yes. At 1600-1800 px wide, a 250 KB image looks near-lossless on high-resolution screens. It is a common target for editorial sites that want striking heroes without ballooning page weight.",
+      },
+      {
+        q: "How do I compress an image to 250 KB?",
+        a: "Resize to your hero width (around 1600-1800 px), then compress at quality 84-90% in SammaPix until the output reads about 250 KB. WebP usually hits the target with visibly cleaner detail than JPEG.",
+      },
+      {
+        q: "250 KB vs 300 KB — does it matter?",
+        a: "The visual difference is minimal at typical screen sizes, so 250 KB saves a little bandwidth. Go to 300 KB only when an image has very fine detail — close-up portraits, textured products — that benefits from the extra budget.",
+      },
+      {
+        q: "What resolution suits 250 KB best?",
+        a: "Landscape heroes: 1600-1800 px wide. Square images: 1300-1500 px. Portrait images: 1100-1300 px wide. These ranges land around 250 KB at high quality with sharp, detailed results.",
+      },
+    ],
+    related: ["200kb", "300kb", "500kb", "150kb"],
+  },
+
+  // ─── 400 KB ──────────────────────────────────────────────────────────────
+  {
+    slug: "400kb",
+    sizeLabel: "400 KB",
+    sizeBytes: 409600,
+    metaDescription:
+      "Compress any image to 400 KB online for free. Ideal for portfolio images, presentation slides, and high-detail product photos. Browser-based, private, no sign-up.",
+    ogDescription:
+      "Free online tool to compress images to 400 KB. Perfect for portfolio images, presentation decks, and detailed product photography.",
+    titleKeyword: "Compress Image to 400KB",
+    keywords: [
+      "compress image to 400kb",
+      "reduce image size to 400kb",
+      "compress photo to 400kb",
+      "400kb image compressor",
+      "portfolio image compression",
+      "presentation slide image size",
+      "product zoom image 400kb",
+    ],
+    useCase:
+      "Ideal for portfolio images, presentation slides, and high-detail product or zoom photos where you need strong fidelity but want to stay well under half a megabyte.",
+    tips: [
+      "At 400 KB you can keep a 1900-2200 px wide photo at quality 86-92% — excellent for portfolio galleries on large screens.",
+      "For presentation decks, target 400 KB per full-bleed slide image to keep a 20-slide deck comfortably emailable.",
+      "Product zoom views at 1800×1800 px and 400 KB let customers inspect texture and stitching without a slow load.",
+      "Always lazy-load 400 KB images and pair them with a lightweight thumbnail so only clicked images pull the full file.",
+    ],
+    faqs: [
+      {
+        q: "When should I compress to 400 KB instead of 200 KB?",
+        a: "Choose 400 KB when detail is the priority — portfolio photography, product zoom, or presentation visuals viewed full-screen. Use 200 KB for standard web images where loading speed outweighs pixel-level fidelity.",
+      },
+      {
+        q: "Is 400 KB too heavy for a web page?",
+        a: "For a single feature image, no. Avoid stacking several 400 KB images on one page, though — use thumbnails plus lazy loading and serve the full 400 KB version only on demand to protect page speed.",
+      },
+      {
+        q: "What resolution works best at 400 KB?",
+        a: "Landscape: 1900-2200 px wide at quality 86-92%. Square: 1700-1900 px. These ranges retain sharp detail and smooth gradients while landing around 400 KB.",
+      },
+      {
+        q: "How do I shrink a camera photo to 400 KB?",
+        a: "A phone photo is typically 4-8 MB. In SammaPix, resize to about 2000 px on the long edge and compress at quality 88% — this reduces it to roughly 400 KB while keeping near-original detail at screen resolution.",
+      },
+    ],
+    related: ["300kb", "500kb", "700kb", "200kb"],
+  },
+
+  // ─── 700 KB ──────────────────────────────────────────────────────────────
+  {
+    slug: "700kb",
+    sizeLabel: "700 KB",
+    sizeBytes: 716800,
+    metaDescription:
+      "Compress any image to 700 KB online for free. Great for full-screen hero banners, photography galleries, and high-resolution display images. No software needed.",
+    ogDescription:
+      "Free online tool to compress images to 700 KB. Ideal for full-screen heroes, photography galleries, and high-res display images.",
+    titleKeyword: "Compress Image to 700KB",
+    keywords: [
+      "compress image to 700kb",
+      "reduce image size to 700kb",
+      "compress photo to 700kb",
+      "700kb image compressor",
+      "full screen hero image size",
+      "photography gallery compression",
+      "high resolution image 700kb",
+    ],
+    useCase:
+      "Great for full-screen hero banners, photography galleries, high-resolution display images, and image-led landing pages where a single large visual carries the design.",
+    tips: [
+      "At 700 KB you can hold a 2400-2800 px wide image at quality 88-93% — sharp on 4K and ultrawide monitors.",
+      "Use 700 KB sparingly: one full-screen hero per page, never multiple, to keep Largest Contentful Paint acceptable.",
+      "WebP at 700 KB rivals a 1.4 MB JPEG — always prefer WebP for full-screen visuals when the browser supports it.",
+      "Combine with a low-res LQIP placeholder so users see an instant blurred preview while the 700 KB hero streams in.",
+    ],
+    faqs: [
+      {
+        q: "Is 700 KB acceptable for a web hero image?",
+        a: "For a single full-screen hero, yes — provided you lazy-load everything else and use a placeholder. At 2400 px+ wide it looks pristine on large displays. Just avoid putting more than one 700 KB image above the fold.",
+      },
+      {
+        q: "How do I compress a high-res photo to 700 KB?",
+        a: "In SammaPix, resize to around 2500 px on the long edge and compress at quality 88-92% until the output reads near 700 KB. WebP reaches this target with cleaner detail than JPEG at the same size.",
+      },
+      {
+        q: "700 KB vs 1 MB — which should I choose?",
+        a: "700 KB loads meaningfully faster and is usually indistinguishable from 1 MB at screen resolution. Reserve 1 MB for cases needing maximum fidelity, like print preview or extreme-zoom galleries.",
+      },
+      {
+        q: "Will a 700 KB image hurt my page speed?",
+        a: "Only if mishandled. With lazy loading, a properly sized srcset for mobile, and a single hero placement, a 700 KB image can coexist with good Core Web Vitals. Serving it to phones at full size is what causes problems — use responsive variants.",
+      },
+    ],
+    related: ["500kb", "1mb", "400kb", "2mb"],
+  },
+
+  // ─── 3 MB ────────────────────────────────────────────────────────────────
+  {
+    slug: "3mb",
+    sizeLabel: "3 MB",
+    sizeBytes: 3145728,
+    metaDescription:
+      "Compress any image to 3 MB online for free. Ideal for print-quality photos, professional proofs, and upload forms with a 3 MB limit. Private, browser-based processing.",
+    ogDescription:
+      "Free online tool to compress images to 3 MB. Perfect for print-quality photos, client proofs, and 3 MB upload limits.",
+    titleKeyword: "Compress Image to 3MB",
+    keywords: [
+      "compress image to 3mb",
+      "reduce image size to 3mb",
+      "compress photo to 3mb",
+      "3mb image compressor",
+      "compress image for upload limit",
+      "print quality photo compression",
+      "reduce photo to 3mb",
+    ],
+    useCase:
+      "Ideal for print-quality photos, professional client proofs, and upload forms that cap files at 3 MB — common on job portals, marketplaces, and document systems that reject anything larger.",
+    tips: [
+      "At 3 MB you can keep full-resolution (4000+ px) photos at quality 92-96% — essentially indistinguishable from the original.",
+      "Many job and marketplace portals reject files over 3 MB — drop just under the limit (around 2.8 MB) to be safe against rounding differences.",
+      "For print proofs, 3 MB at full resolution holds enough detail for sharp A4 prints at 200-300 DPI.",
+      "If your source is a 20-50 MB RAW or TIFF, export to JPEG first, then use SammaPix to bring it down to 3 MB without visible loss.",
+    ],
+    faqs: [
+      {
+        q: "How do I compress a photo to under 3 MB?",
+        a: "Open SammaPix Compress and lower the quality slider to around 90-94% — most high-resolution photos drop under 3 MB while staying visually identical. If needed, resize to about 4000 px on the long edge first.",
+      },
+      {
+        q: "Why do upload forms limit files to 3 MB?",
+        a: "Many portals (job applications, marketplaces, document systems) cap uploads at 3 MB to control storage and bandwidth. Compressing to just under the limit lets you submit a high-quality image without hitting the rejection threshold.",
+      },
+      {
+        q: "Will compressing to 3 MB reduce print quality?",
+        a: "Barely. At 3 MB and full resolution, the image keeps enough detail for high-quality prints up to A4 at 200-300 DPI. The difference from the uncompressed original is only visible under extreme magnification.",
+      },
+      {
+        q: "3 MB vs 2 MB — which is better?",
+        a: "If a form allows 3 MB, use it for a small fidelity gain on detailed images. For general web or email use, 2 MB or less is more practical and loads faster with no meaningful quality difference at screen resolution.",
+      },
+    ],
+    related: ["2mb", "1mb", "5mb", "700kb"],
+  },
+
+  // ─── 5 MB ────────────────────────────────────────────────────────────────
+  {
+    slug: "5mb",
+    sizeLabel: "5 MB",
+    sizeBytes: 5242880,
+    metaDescription:
+      "Compress any image to 5 MB online for free. For maximum-quality archival photos, large prints, and upload forms with a 5 MB limit. No upload — runs in your browser.",
+    ogDescription:
+      "Free online tool to compress images to 5 MB. Ideal for archival-quality photos, large prints, and 5 MB upload limits.",
+    titleKeyword: "Compress Image to 5MB",
+    keywords: [
+      "compress image to 5mb",
+      "reduce image size to 5mb",
+      "compress photo to 5mb",
+      "5mb image compressor",
+      "compress image for 5mb limit",
+      "archival photo compression",
+      "large print image size",
+    ],
+    useCase:
+      "For maximum-quality archival photos, large-format prints, and upload forms or applications that allow up to 5 MB — where you want to keep as much detail as possible while clearing the size limit.",
+    tips: [
+      "At 5 MB you can preserve very high resolution (5000+ px) at quality 94-97% — true archival quality with no visible compression.",
+      "Many portals that reject 'large' files cap at 5 MB — trim to around 4.7 MB to clear the limit with margin.",
+      "For large prints (A3 and up), 5 MB at full resolution supports sharp output at 200-300 DPI.",
+      "Only go to 5 MB when fidelity genuinely matters — for web and email, files this large slow loading with no on-screen benefit.",
+    ],
+    faqs: [
+      {
+        q: "When do I actually need a 5 MB image?",
+        a: "Use 5 MB for archival masters, large-format printing, or portals that explicitly allow it and where you want maximum detail. For websites and email, much smaller files (100 KB-1 MB) are the right choice.",
+      },
+      {
+        q: "How do I compress an image to under 5 MB?",
+        a: "In SammaPix, set quality to about 92-95% — most large photos drop under 5 MB while remaining visually identical to the original. If your source is a huge RAW or TIFF, export to JPEG first, then compress.",
+      },
+      {
+        q: "Does 5 MB keep print quality?",
+        a: "Yes. At full resolution and 5 MB, the image retains enough detail for high-quality large prints (A3 and beyond) at 200-300 DPI. Compression at this size is effectively invisible.",
+      },
+      {
+        q: "Is a 5 MB image okay to email?",
+        a: "Most providers allow up to 25 MB per email, so a single 5 MB image is fine. For multiple images, compress each smaller (500 KB-1 MB) to keep the total manageable and avoid spam filters.",
+      },
+    ],
+    related: ["3mb", "2mb", "1mb"],
+  },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
