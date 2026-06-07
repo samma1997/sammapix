@@ -21,13 +21,17 @@ const QUICK_CONVERT_LINKS = [
   { href: "/convert/heic-to-jpg", label: "HEIC to JPG" },
   { href: "/convert/png-to-webp", label: "PNG to WebP" },
   { href: "/convert/jpg-to-webp", label: "JPG to WebP" },
+  { href: "/compress-to", label: "Compress to Size" },
+  { href: "/convert", label: "All converters →" },
 ];
 
 const RESIZE_SOCIAL_LINKS = [
   { href: "/resize/instagram", label: "Instagram" },
-  { href: "/resize/facebook", label: "Facebook" },
+  { href: "/resize/whatsapp", label: "WhatsApp" },
+  { href: "/resize/tiktok", label: "TikTok" },
   { href: "/resize/youtube-thumbnail", label: "YouTube" },
-  { href: "/resize/twitter", label: "Twitter" },
+  { href: "/crop", label: "Crop by Ratio" },
+  { href: "/resize", label: "All sizes →" },
 ];
 
 const COMPANY_LINKS = [

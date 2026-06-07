@@ -221,6 +221,17 @@ export default function CropPhotoPerfectRatiosPage() {
           The six most common aspect ratios explained
         </h2>
 
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          Each ratio below has a dedicated free cropper that locks the crop box to the exact proportions — jump straight to{" "}
+          <Link href="/crop/1-1" className="text-[#6366F1] hover:underline">crop to 1:1</Link>,{" "}
+          <Link href="/crop/4-3" className="text-[#6366F1] hover:underline">4:3</Link>,{" "}
+          <Link href="/crop/3-2" className="text-[#6366F1] hover:underline">3:2</Link>,{" "}
+          <Link href="/crop/16-9" className="text-[#6366F1] hover:underline">16:9</Link>,{" "}
+          <Link href="/crop/9-16" className="text-[#6366F1] hover:underline">9:16</Link>, or{" "}
+          <Link href="/crop/5-4" className="text-[#6366F1] hover:underline">5:4</Link>. Or browse{" "}
+          <Link href="/crop" className="text-[#6366F1] hover:underline">all aspect ratios</Link>.
+        </p>
+
         <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mt-8 mb-3">
           1:1 - The square
         </h3>
