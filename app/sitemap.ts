@@ -180,7 +180,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Portfolio sub-pages
   const portfolioPages: MetadataRoute.Sitemap = [
     {
-      url: `${APP_URL}/about/sri-lanka-2025`,
+      url: `${APP_URL}/about/sri-lanka`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${APP_URL}/about/bali`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
