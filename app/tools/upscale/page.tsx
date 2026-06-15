@@ -20,10 +20,16 @@ import { APP_URL } from "@/lib/constants";
 import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 export const metadata: Metadata = {
-  title: "Upscale Image 2x & 4x Online Free",
+  title: "Free Topaz Gigapixel Alternative — AI Upscale 4x",
   description:
-    "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
+    "Topaz Gigapixel costs $99–199. SammaPix upscales images 2x or 4x free, in your browser — no install, no signup, images never leave your device.",
   keywords: [
+    "topaz gigapixel alternative",
+    "topaz gigapixel ai free",
+    "free alternative to topaz gigapixel",
+    "topaz gigapixel pricing 2026",
+    "free ai image upscaler",
+    "upscale image 4k free",
     "ai image upscaler",
     "upscale image",
     "enhance image quality",
@@ -41,9 +47,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/upscale`,
   },
   openGraph: {
-    title: "Upscale Image 2x & 4x Online Free",
+    title: "Free Topaz Gigapixel Alternative — AI Upscale 4x",
     description:
-      "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
+      "Topaz Gigapixel costs $99–199. SammaPix upscales images 2x or 4x free, in your browser — no install, no signup, images never leave your device.",
     url: `${APP_URL}/tools/upscale`,
     siteName: "SammaPix",
     type: "website",
@@ -52,15 +58,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix AI Image Upscaler Free Online",
+        alt: "SammaPix — Free Topaz Gigapixel Alternative, AI Image Upscaler Online",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Upscale Image 2x & 4x Online Free",
+    title: "Free Topaz Gigapixel Alternative — AI Upscale 4x",
     description:
-      "Enhance image resolution up to 4x with AI upscaling. Get sharp, detailed results in seconds. Browser-based, free, no signup or upload needed.",
+      "Topaz Gigapixel costs $99–199. SammaPix upscales images 2x or 4x free, in your browser — no install, no signup, images never leave your device.",
   },
 };
 
@@ -68,6 +74,21 @@ export const metadata: Metadata = {
 /*  FAQ data (used in both UI and JSON-LD)                            */
 /* ------------------------------------------------------------------ */
 const faqs = [
+  {
+    question: "How much does Topaz Gigapixel cost in 2026?",
+    answer:
+      "Topaz Gigapixel AI is now part of Topaz Photo AI, which costs $199/year or roughly $17–25/month as a subscription. A legacy one-time license was previously available at $99, but new purchases require a subscription. SammaPix offers the same core upscaling (2x and 4x) completely free, directly in your browser — no install, no signup.",
+  },
+  {
+    question: "Is there a free alternative to Topaz Gigapixel?",
+    answer:
+      "Yes. SammaPix upscales images 2x or 4x free in your browser with no installation or signup required. For AI super-resolution on heavily degraded images, Upscayl (free, open-source desktop app using Real-ESRGAN) is also an excellent free alternative that gets very close to Topaz quality at 2x.",
+  },
+  {
+    question: "Is SammaPix as good as Topaz Gigapixel?",
+    answer:
+      "Honest answer: for most web, social media, and print use cases at 2x, the results are comparable. Topaz Gigapixel uses proprietary AI super-resolution models that can recover fine detail from very degraded photos — SammaPix uses high-quality browser-based interpolation, which is faster and 100% private but does not hallucinate new detail. For thumbnails, product photos, and everyday upscaling, SammaPix is more than enough. For extreme 4x recovery of damaged old photos, Topaz or Upscayl will do better.",
+  },
   {
     question: "How does AI upscaling work?",
     answer:
@@ -153,15 +174,15 @@ export default function UpscalePage() {
                 />
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-                Enhance Resolution. AI Image Upscaler 2× &amp; 4×
+                Free Topaz Gigapixel Alternative — AI Upscale 2× &amp; 4×
               </h1>
             </div>
 
             <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Upscale low-resolution images 2× or 4× with multi-pass AI
-              enhancement. Recover sharp details from old photos, blurry
-              thumbnails, and low-res screenshots. All processing happens in
-              your browser. No upload, no signup, lossless PNG output.
+              Topaz Gigapixel costs $99–199. SammaPix upscales your images 2×
+              or 4× free — entirely in your browser with multi-pass enhancement.
+              No installation, no signup, no upload. Your images never leave
+              your device. Lossless PNG output.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">
@@ -253,6 +274,98 @@ export default function UpscalePage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  COMPARISON — SammaPix vs Topaz Gigapixel AI                */}
+      {/* ============================================================ */}
+      <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+            SammaPix vs Topaz Gigapixel AI
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">
+            Topaz Gigapixel moved to a subscription model in 2024. Here&rsquo;s how it compares to SammaPix for everyday upscaling.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden">
+              <thead>
+                <tr className="bg-[#F5F5F5] dark:bg-[#1E1E1E]">
+                  <th className="text-left px-4 py-3 text-[#171717] dark:text-[#E5E5E5] font-semibold border-b border-[#E5E5E5] dark:border-[#2A2A2A] w-[40%]">
+                    Feature
+                  </th>
+                  <th className="text-left px-4 py-3 text-[#737373] dark:text-[#A3A3A3] font-medium border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+                    Topaz Gigapixel AI
+                  </th>
+                  <th className="text-left px-4 py-3 text-[#8B5CF6] font-semibold border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
+                    SammaPix
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#E5E5E5] dark:divide-[#2A2A2A]">
+                {[
+                  {
+                    feature: "Price",
+                    topaz: "$99–199 one-time or $17–25/mo subscription",
+                    sammapix: "Free (5 upscales/day) — no credit card",
+                    highlight: true,
+                  },
+                  {
+                    feature: "Install required",
+                    topaz: "Desktop app (Windows / Mac)",
+                    sammapix: "Browser only — nothing to install",
+                    highlight: false,
+                  },
+                  {
+                    feature: "Privacy",
+                    topaz: "Local processing on your machine",
+                    sammapix: "100% in-browser — images never leave your device",
+                    highlight: false,
+                  },
+                  {
+                    feature: "Upscale 2x / 4x",
+                    topaz: "Yes",
+                    sammapix: "Yes",
+                    highlight: false,
+                  },
+                  {
+                    feature: "Signup needed",
+                    topaz: "Yes (Topaz account required)",
+                    sammapix: "No — open and go",
+                    highlight: false,
+                  },
+                  {
+                    feature: "AI super-resolution",
+                    topaz: "Yes — proprietary deep learning models",
+                    sammapix: "High-quality multi-pass interpolation (browser-based)",
+                    highlight: false,
+                  },
+                  {
+                    feature: "Best for",
+                    topaz: "Extreme detail recovery on degraded photos",
+                    sammapix: "Web, social media, product photos, everyday use",
+                    highlight: false,
+                  },
+                ].map(({ feature, topaz, sammapix, highlight }) => (
+                  <tr key={feature} className={highlight ? "bg-[#8B5CF6]/[0.03] dark:bg-[#8B5CF6]/[0.06]" : ""}>
+                    <td className="px-4 py-3 text-[#171717] dark:text-[#E5E5E5] font-medium text-sm">
+                      {feature}
+                    </td>
+                    <td className="px-4 py-3 text-[#737373] dark:text-[#A3A3A3] text-sm">
+                      {topaz}
+                    </td>
+                    <td className={`px-4 py-3 text-sm ${highlight ? "text-[#8B5CF6] font-semibold" : "text-[#737373] dark:text-[#A3A3A3]"}`}>
+                      {sammapix}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-[#A3A3A3] mt-3">
+            Honest note: Topaz uses proprietary AI super-resolution that can reconstruct fine detail from very degraded photos — SammaPix uses browser-based interpolation which is faster and fully private but won&rsquo;t invent missing pixels. For most web and social media use cases, the difference is negligible.
+          </p>
         </div>
       </section>
 
@@ -382,26 +495,26 @@ export default function UpscalePage() {
       <section className="py-12 px-4 sm:px-6 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
-            Why upscale images online?
+            Why look for a free Topaz Gigapixel alternative?
           </h2>
-          <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            Low-resolution images look pixelated when displayed on modern
-            high-DPI screens. Whether you need to enlarge a product photo for
-            your online store, upscale an old family photo, or increase the
-            resolution of a thumbnail for printing, SammaPix helps you enhance
-            image quality directly in your browser.
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+            Topaz Gigapixel AI used to cost a one-time fee of $99. In 2024,
+            Topaz Labs moved to a subscription model — Topaz Photo AI now costs
+            $199/year or roughly $17–25/month. Many photographers and designers
+            who simply need to upscale a photo for web or print don&rsquo;t
+            need enterprise-tier AI to do it.
           </p>
-          <p className="text-sm text-[#737373] leading-relaxed mb-4">
-            Unlike server-based upscalers that require you to upload your
-            images, SammaPix processes everything locally. Your photos never
-            leave your device, ensuring complete privacy. The upscaled output is
-            saved as lossless PNG, so no additional compression artifacts are
-            introduced.
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
+            SammaPix is a free browser-based alternative that handles the most
+            common upscaling jobs: enlarging product photos, prepping images for
+            print, making thumbnails sharper on Retina displays, and recovering
+            old low-resolution images. Everything runs in your browser — your
+            images never leave your device.
           </p>
           <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             When should you upscale images?
           </h3>
-          <ul className="text-sm text-[#737373] leading-relaxed space-y-2 list-none pl-0">
+          <ul className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed space-y-2 list-none pl-0">
             <li className="flex items-start gap-2">
               <span className="text-[#8B5CF6] mt-0.5">-</span>
               Before printing photos that were taken at low resolution
@@ -417,6 +530,10 @@ export default function UpscalePage() {
             <li className="flex items-start gap-2">
               <span className="text-[#8B5CF6] mt-0.5">-</span>
               To restore old or low-quality photos to a usable resolution
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-[#8B5CF6] mt-0.5">-</span>
+              When Topaz Gigapixel&rsquo;s $199/year subscription is more than you need
             </li>
           </ul>
         </div>
@@ -436,7 +553,7 @@ export default function UpscalePage() {
                 name: "SammaPix AI Image Upscaler",
                 url: `${APP_URL}/tools/upscale`,
                 description:
-                  "Free browser-based AI image upscaler. Enhance image resolution 2x or 4x without quality loss. Zero server upload, 100% private.",
+                  "Free browser-based Topaz Gigapixel alternative. Upscale images 2x or 4x without quality loss. Zero server upload, 100% private, no install required.",
                 applicationCategory: "PhotographyApplication",
                 operatingSystem: "Web Browser",
                 offers: {
@@ -461,12 +578,14 @@ export default function UpscalePage() {
                 },
                 featureList: [
                   "2x and 4x image upscaling",
+                  "Free alternative to Topaz Gigapixel AI",
                   "Multi-pass upscaling for sharper results",
                   "Lossless PNG output",
                   "Supports JPG, PNG, WebP, GIF, AVIF, HEIC",
                   "100% browser-based processing",
                   "No server upload, fully private",
                   "No sign-up required",
+                  "No installation required",
                 ],
               },
               {
