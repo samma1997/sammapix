@@ -28,7 +28,7 @@ import {
 } from "@/lib/lut-engine";
 import { useSession } from "next-auth/react";
 import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
-import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import ProUpsellModal, { type UpsellTrigger } from "@/components/ui/ProUpsellModal";
 
 const ACCEPTED: Record<string, string[]> = {
   "image/jpeg": [".jpg", ".jpeg"],
@@ -88,6 +88,8 @@ export default function ColorMatchClient() {
   const [intensity, setIntensity] = useState(100);
   const [running, setRunning] = useState(false);
   const [showUpsell, setShowUpsell] = useState(false);
+  const [upsellTrigger, setUpsellTrigger] = useState<UpsellTrigger>("daily");
+  const lutUpsellShown = useRef(false);
   const cancelRef = useRef(false);
 
   // Cleanup on unmount
@@ -135,7 +137,13 @@ export default function ColorMatchClient() {
     const base = refFile.name.replace(/\.[^.]+$/, "");
     downloadCubeFile(lut, `sammapix-${base}.cube`);
     trackEvent("color_match_cube_downloaded");
-  }, [lut, refFile]);
+    // Soft upsell: show once per session for free users after the download completes.
+    if (!isPro && !lutUpsellShown.current) {
+      lutUpsellShown.current = true;
+      setUpsellTrigger("lut_export");
+      setShowUpsell(true);
+    }
+  }, [lut, refFile, isPro]);
 
   // ── .cube import dropzone ──────────────────────────────────────────────
   const onDropCube = useCallback(async (accepted: File[]) => {
@@ -294,6 +302,7 @@ export default function ColorMatchClient() {
       const isLoggedIn = !!session?.user?.email;
       const decision = shouldShowUpsell("color_match", isLoggedIn, isPro);
       if (decision.showModal) {
+        setUpsellTrigger("daily");
         setShowUpsell(true);
         trackEvent("upsell_shown", {
           tool: "color_match",
@@ -348,7 +357,7 @@ export default function ColorMatchClient() {
     <ProUpsellModal
       open={showUpsell}
       onClose={() => setShowUpsell(false)}
-      trigger="daily"
+      trigger={upsellTrigger}
     />
     <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-8 sm:pb-10">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-5 mb-6 items-stretch">
