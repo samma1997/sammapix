@@ -205,6 +205,20 @@ export default function BestFreeTopazAlternatives2026() {
           </div>
         }
       >
+        {/* Above-the-fold CTA — instrada al tool transazionale */}
+        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 bg-[#8B5CF6]/[0.05] dark:bg-[#8B5CF6]/[0.08] border border-[#8B5CF6]/20 dark:border-[#8B5CF6]/30 rounded-md">
+          <p className="text-sm text-[#525252] dark:text-[#A3A3A3] flex-1">
+            Want to skip the comparison? Upscale your image free in your browser right now &mdash; no install, no signup.
+          </p>
+          <Link
+            href="/tools/upscale"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors whitespace-nowrap shrink-0"
+          >
+            Upscale free now
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </Link>
+        </div>
+
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
             TL;DR — best free Topaz Gigapixel alternative
