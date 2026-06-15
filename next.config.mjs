@@ -14,14 +14,22 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  // Increase static page generation timeout — /about/sri-lanka (GalleryGrid) needs more than 60s
+  staticPageGenerationTimeout: 180,
   // Exclude onnxruntime-node from serverless functions — it's 355MB and only
   // needed client-side by @huggingface/transformers (which uses onnxruntime-web)
-  serverExternalPackages: ["onnxruntime-node"],
+  // TF.js and upscaler are browser-only — exclude from all server bundles
+  serverExternalPackages: ["onnxruntime-node", "@tensorflow/tfjs", "upscaler", "@upscalerjs/esrgan-slim"],
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Prevent onnxruntime-node from being bundled into server functions
       config.externals = config.externals || [];
       config.externals.push("onnxruntime-node");
+      // Prevent TF.js from accidentally being pulled into the server bundle.
+      // AiUpscaleEngine is client-only (dynamic import + "use client" boundary).
+      config.externals.push("@tensorflow/tfjs");
+      config.externals.push("upscaler");
+      config.externals.push("@upscalerjs/esrgan-slim");
     }
     return config;
   },
