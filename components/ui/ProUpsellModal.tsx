@@ -11,7 +11,7 @@ import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user" | "lut_export";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -43,6 +43,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "Daily upscale limit reached";
     case "power_user":
       return "You're getting a lot out of SammaPix";
+    case "lut_export":
+      return "Love that LUT? Take it further with Pro";
     default:
       return "You're processing like a pro";
   }
@@ -71,6 +73,8 @@ function getSubtext(
       return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
     case "power_user":
       return `You've explored ${toolsExplored ?? 3}+ tools already — there are 32 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
+    case "lut_export":
+      return "Pro applies your LUT to up to 500 photos at once and exports unlimited .cube files. Free always includes single-photo exports — no change there.";
     default: {
       if (filesDropped && freeLimit) {
         return `You dropped ${filesDropped} photos — free plan processes the first ${freeLimit}. Pro handles 500 at once.`;
