@@ -1287,7 +1287,7 @@ export const trips: Trip[] = [
     continent: "Asia",
     startDate: "2025-03-09",
     endDate: "2025-03-25",
-    coverSrc: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/40-sigiriya-rock-fortress-panoramic-golden-hour-sri-lanka",
+    coverSrc: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/53-sri-lanka-train-journey-girl-window-portrait-red-blue",
     excerpt:
       "A 16-day journey through ancient temples, lush highlands, and coastal towns.",
     description:
