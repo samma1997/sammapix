@@ -32,6 +32,7 @@ import {
   IconPassportPhoto,
   IconJpgToPdf,
   IconJxl,
+  IconUnrar,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -72,6 +73,7 @@ const JpgToPdfClient = dynamic(() => import("@/components/tools/JpgToPdfClient")
 const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverterClient"));
 const ColorMatchClient = dynamic(() => import("@/components/tools/ColorMatchClient"));
 const PhotoEnhanceClient = dynamic(() => import("@/components/tools/PhotoEnhanceClient"));
+const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -112,6 +114,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   jxl: JxlConverterClient,
   "color-match": ColorMatchClient,
   "photo-enhance": PhotoEnhanceClient,
+  unrar: UnrarClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -193,6 +196,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   jxl: { Icon: IconJxl, accent: "#F59E0B" },
   "color-match": { Icon: IconColorPicker, accent: "#F59E0B" },
   "photo-enhance": { Icon: IconUpscale, accent: "#8B5CF6" },
+  unrar: { Icon: IconUnrar, accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -608,6 +612,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download ZIP", desc: "Grab all enhanced PNGs in a single archive." },
     ],
     proTip: { text: "Run Compress after to shrink the enhanced batch for the web.", linkLabel: "Go to Compress", linkHref: "/dashboard/tools/compress" },
+  },
+  unrar: {
+    label: "Open RAR Online",
+    tagline: "Extract RAR files in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop a .rar file", desc: "Drag & drop a RAR archive (up to 200 MB free). Supports RAR4 and RAR5." },
+      { title: "View and download", desc: "See the file list instantly. Click any file to download it individually." },
+      { title: "Export as ZIP (optional)", desc: "Click \"Download all as .zip\" to convert the entire RAR archive to ZIP." },
+    ],
+    proTip: { text: "Use EXIF Viewer after extracting to strip metadata from photos before sharing.", linkLabel: "EXIF Viewer", linkHref: "/dashboard/tools/exif" },
   },
 };
 

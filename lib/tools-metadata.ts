@@ -408,6 +408,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "webp-vs-avif-vs-jpeg-comparison",
     ],
   },
+  unrar: {
+    id: "unrar",
+    name: "Open RAR Online",
+    shortDesc: "Extract & view RAR files in-browser, no upload",
+    slug: "/tools/unrar",
+    category: "optimize",
+    relatedTools: ["pdf-merge", "exif", "compress", "jpg-to-pdf"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+      "merge-pdfs-privately-no-upload",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

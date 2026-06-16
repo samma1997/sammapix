@@ -72,7 +72,7 @@ function getSubtext(
     case "upscale_daily":
       return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
     case "power_user":
-      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 32 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
+      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 36 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
     case "lut_export":
       return "Pro applies your LUT to up to 500 photos at once and exports unlimited .cube files. Free always includes single-photo exports — no change there.";
     default: {

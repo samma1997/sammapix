@@ -47,6 +47,7 @@ import {
   IconRemoveBg,
   IconUpscale,
   IconPassportPhoto,
+  IconUnrar,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -721,6 +722,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconJxl,
     category: ["Optimize"],
     keywords: ["jxl", "jpeg xl", "jxl to jpg", "jxl to png", "convert jxl", "next gen format", "jxl converter", "open jxl"],
+  },
+  {
+    name: "Open RAR Online",
+    slug: "unrar",
+    href: "/dashboard/tools/unrar",
+    tagline: "Extract RAR files in-browser. View list, download files, convert to ZIP.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconUnrar,
+    category: ["Optimize"],
+    keywords: ["open rar", "unrar", "extract rar", "rar to zip", "open rar mac", "rar extractor", "rar opener", "view rar", "rar file", "archive extractor"],
   },
 ];
 
