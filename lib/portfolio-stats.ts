@@ -93,3 +93,29 @@ export async function getStats(ids: string[]): Promise<Record<string, PhotoStat>
   });
   return out;
 }
+
+/**
+ * Owner-only: scan all portfolio counters and return per-photo totals.
+ * Used by the admin stats view. Returns a map id → {downloads, likes} for every
+ * photo that has at least one recorded download or like.
+ */
+export async function getAllStats(): Promise<Record<string, PhotoStat>> {
+  const ids = new Set<string>();
+
+  async function scanPrefix(prefix: string, strip: string) {
+    let cursor = "0";
+    do {
+      const res = await redisExec<[string, string[]]>([
+        "SCAN", cursor, "MATCH", `${prefix}*`, "COUNT", 500,
+      ]);
+      if (!res) break;
+      cursor = res[0];
+      for (const k of res[1]) ids.add(k.slice(strip.length));
+    } while (cursor !== "0");
+  }
+
+  await scanPrefix("pf:dl:", "pf:dl:");
+  await scanPrefix("pf:like:", "pf:like:");
+
+  return getStats([...ids]);
+}
