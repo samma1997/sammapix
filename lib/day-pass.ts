@@ -65,7 +65,15 @@ export async function grantDayPass(email: string, hours = 24): Promise<void> {
   const expiryTs = Date.now() + ttlSeconds * 1000;
 
   if (redisConfigured) {
-    await redisExec(["SET", key, String(expiryTs), "EX", ttlSeconds]);
+    const result = await redisExec(["SET", key, String(expiryTs), "EX", ttlSeconds]);
+    if (result === null) {
+      // Money-path safety: the user PAID but Redis didn't persist the pass.
+      // Surface loudly so we can grant it manually instead of failing silently.
+      console.error(
+        `[day-pass] ⚠️ GRANT FAILED for ${email} — Redis SET returned null. User paid but has NO access. Manual grant required.`
+      );
+      return;
+    }
     console.log(`[day-pass] Granted ${hours}h pass for ${email} (expires ${new Date(expiryTs).toISOString()})`);
     return;
   }
