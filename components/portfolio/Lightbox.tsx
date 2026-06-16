@@ -244,8 +244,8 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
       aria-modal="true"
       aria-label={`Photo ${current + 1} of ${photos.length}${photo.caption ? `: ${photo.caption}` : ""}`}
     >
-      {/* Counter */}
-      <div className="absolute top-4 left-4 text-[#525252] text-xs tabular-nums select-none z-10">
+      {/* Counter (top-left, discreet) */}
+      <div className="absolute top-4 left-4 sm:top-5 sm:left-6 rounded-full bg-black/40 backdrop-blur-sm px-2.5 py-1 text-[#D4D4D4] text-xs tabular-nums select-none z-20">
         {current + 1} / {photos.length}
       </div>
 
@@ -260,58 +260,61 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
         tabIndex={-1}
       />
 
-      {/* Top-right controls: like + download + close */}
-      <div className="absolute top-3 right-4 flex items-center gap-2 sm:gap-3 z-10">
-        {/* Like (heart) */}
+      {/* Top-right controls: like + download CTA + close */}
+      <div className="absolute top-4 right-4 sm:top-5 sm:right-6 flex items-center gap-2 sm:gap-3 z-20">
+        {/* Like (heart) — outline pill, fills red when liked */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             void toggleLike(photo.id);
           }}
-          className={`flex items-center gap-1 transition-colors duration-150 p-1 ${
-            liked ? "text-[#F87171]" : "text-[#525252] hover:text-[#E5E5E5]"
+          className={`group flex h-10 items-center gap-1.5 rounded-full border px-3 text-sm font-medium backdrop-blur-sm transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+            liked
+              ? "border-[#F43F5E]/40 bg-[#F43F5E]/15 text-[#FB7185]"
+              : "border-white/20 bg-black/30 text-[#E5E5E5] hover:border-white/40 hover:bg-black/50"
           }`}
           aria-label={liked ? "Unlike this photo" : "Like this photo"}
           aria-pressed={liked}
           title={liked ? "Unlike" : "Like"}
         >
           <svg
-            width="22"
-            height="22"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill={liked ? "currentColor" : "none"}
             stroke="currentColor"
-            strokeWidth="1.8"
+            strokeWidth="1.9"
             strokeLinecap="round"
             strokeLinejoin="round"
             aria-hidden="true"
+            className="transition-transform duration-150 group-active:scale-90"
           >
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
           {stat.likes > 0 && (
-            <span className="text-xs tabular-nums select-none">{stat.likes}</span>
+            <span className="tabular-nums select-none">{stat.likes}</span>
           )}
         </button>
 
-        {/* Download */}
+        {/* Download — prominent on-brand CTA, the visual focal point */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             onDownloadClick();
           }}
-          className="text-[#525252] hover:text-[#E5E5E5] transition-colors duration-150 p-1"
+          className="flex h-10 items-center gap-2 rounded-lg bg-[#6366F1] px-4 text-sm font-medium text-white shadow-lg shadow-[#6366F1]/25 transition-all duration-150 hover:bg-[#5457E5] active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           aria-label="Download photo in high resolution for personal use"
           title="Download (high-res, personal use)"
         >
           <svg
-            width="22"
-            height="22"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.8"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
             aria-hidden="true"
@@ -320,39 +323,56 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
+          <span>Free download</span>
         </button>
 
-        {/* Close */}
+        {/* Close — discreet but reachable */}
         <button
           type="button"
-          className="text-[#525252] hover:text-[#E5E5E5] text-3xl leading-none transition-colors duration-150 p-1"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/30 text-[#D4D4D4] backdrop-blur-sm transition-all duration-150 hover:border-white/30 hover:bg-black/50 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           onClick={(e) => {
             e.stopPropagation();
             onClose();
           }}
           aria-label="Close lightbox"
         >
-          &times;
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
       </div>
 
       {/* Previous arrow (hidden while zoomed) */}
       {!isZoomed && current > 0 && (
         <button
-          className="absolute left-2 sm:left-4 text-[#525252] hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none z-10"
+          className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/30 text-[#D4D4D4] backdrop-blur-sm transition-all duration-150 hover:border-white/30 hover:bg-black/50 hover:text-white select-none z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           onClick={(e) => {
             e.stopPropagation();
             goPrev();
           }}
           aria-label="Previous photo"
         >
-          &#8249;
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
         </button>
       )}
 
-      {/* Photo + caption */}
+      {/* Photo — centred in the available space; info lives in a bottom bar
+          overlay so it never pushes the image off-centre (Pexels-like). */}
       <div
-        className="flex flex-col items-center gap-3 max-w-[90vw]"
+        className="flex items-center justify-center max-w-[92vw]"
         onClick={(e) => e.stopPropagation()}
       >
         {isZoomed ? (
@@ -389,83 +409,98 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             alt={photo.alt || "Travel photograph"}
             width={photo.width || 1200}
             height={photo.height || 800}
-            className="max-h-[75vh] w-auto object-contain rounded-sm cursor-zoom-in"
-            sizes="90vw"
+            className="max-h-[82vh] w-auto object-contain rounded-md cursor-zoom-in shadow-2xl shadow-black/40"
+            sizes="92vw"
             onClick={toggleZoom}
             priority
           />
         )}
-
-        {/* Caption + location + license note */}
-        <div className="text-center px-4">
-          {photo.caption && (
-            <p className="text-[#E5E5E5] text-sm font-medium leading-snug">
-              {photo.caption}
-            </p>
-          )}
-          {photo.location && (
-            <p className="text-[#A3A3A3] text-xs mt-1">{photo.location}</p>
-          )}
-
-          {/* Social counters (download / like) — discreet social proof */}
-          <div className="flex items-center justify-center gap-4 mt-2 text-[#737373] text-xs select-none">
-            <span className="inline-flex items-center gap-1" aria-label={`${stat.downloads} downloads`}>
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              <span className="tabular-nums">{stat.downloads}</span>
-            </span>
-            <span
-              className={`inline-flex items-center gap-1 ${liked ? "text-[#F87171]" : ""}`}
-              aria-label={`${stat.likes} likes`}
-            >
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill={liked ? "currentColor" : "none"}
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-              <span className="tabular-nums">{stat.likes}</span>
-            </span>
-          </div>
-
-          <p className="text-[#737373] text-xs mt-2 max-w-md mx-auto leading-relaxed">
-            Free for personal use — print it or set it as your wallpaper.
-            {" "}&copy; Luca Sammarco &middot; Not for commercial use.
-          </p>
-        </div>
       </div>
+
+      {/* Bottom info bar — caption, location, counters & license.
+          Rendered as a non-intrusive overlay on a subtle gradient so it
+          never shifts the image away from the optical centre. Hidden while
+          zoomed to keep the canvas clean. */}
+      {!isZoomed && (
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/70 via-black/35 to-transparent pb-5 pt-12 sm:pb-6 sm:pt-16"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="pointer-events-auto mx-auto flex max-w-3xl flex-col items-center px-4 text-center">
+            {photo.caption && (
+              <p className="text-[#FAFAFA] text-sm sm:text-base font-medium leading-snug">
+                {photo.caption}
+              </p>
+            )}
+            {photo.location && (
+              <p className="text-[#D4D4D4] text-xs sm:text-sm mt-1">{photo.location}</p>
+            )}
+
+            {/* Social counters (download / like) — discreet social proof */}
+            <div className="flex items-center justify-center gap-4 mt-2 text-[#A3A3A3] text-xs select-none">
+              <span className="inline-flex items-center gap-1" aria-label={`${stat.downloads} downloads`}>
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span className="tabular-nums">{stat.downloads}</span>
+              </span>
+              <span
+                className={`inline-flex items-center gap-1 ${liked ? "text-[#FB7185]" : ""}`}
+                aria-label={`${stat.likes} likes`}
+              >
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill={liked ? "currentColor" : "none"}
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <span className="tabular-nums">{stat.likes}</span>
+              </span>
+            </div>
+
+            {/* License note — clean, human copy. No em-dash. */}
+            <p className="text-[#C4C4C4] text-xs mt-2.5 leading-relaxed">
+              Free to download for personal use. Print it or set it as your wallpaper.
+            </p>
+            <p className="text-[#8A8A8A] text-[11px] mt-0.5 leading-relaxed">
+              &copy; Luca Sammarco &middot; Please don&apos;t use it commercially.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Next arrow (hidden while zoomed) */}
       {!isZoomed && current < photos.length - 1 && (
         <button
-          className="absolute right-2 sm:right-4 text-[#525252] hover:text-[#E5E5E5] text-4xl px-3 py-8 transition-colors duration-150 select-none z-10"
+          className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/30 text-[#D4D4D4] backdrop-blur-sm transition-all duration-150 hover:border-white/30 hover:bg-black/50 hover:text-white select-none z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           onClick={(e) => {
             e.stopPropagation();
             goNext();
           }}
           aria-label="Next photo"
         >
-          &#8250;
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
         </button>
       )}
 
@@ -495,49 +530,64 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           aria-describedby="pf-gate-desc"
         >
           <div
-            className="relative w-full max-w-sm rounded-xl border border-[#262626] bg-[#141414] p-5 shadow-2xl"
+            className="relative w-full max-w-sm rounded-2xl border border-[#262626] bg-[#141414] p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setShowGate(false)}
-              className="absolute top-2.5 right-3 text-[#525252] hover:text-[#E5E5E5] text-2xl leading-none transition-colors duration-150"
+              className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-[#737373] hover:bg-white/5 hover:text-[#E5E5E5] transition-colors duration-150"
               aria-label="Cancel download"
             >
-              &times;
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
+
+            {/* Brand-tinted download icon as the dialog's visual anchor */}
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#6366F1]/15 text-[#818CF8]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </div>
 
             <h2
               id="pf-gate-title"
-              className="text-[#F5F5F5] text-base font-semibold pr-6"
+              className="text-[#F5F5F5] text-lg font-semibold mt-4 pr-6"
             >
-              Free for personal use
+              Yours to enjoy, for free
             </h2>
             <p
               id="pf-gate-desc"
               className="text-[#A3A3A3] text-sm mt-2 leading-relaxed"
             >
-              Print it, set it as your wallpaper — enjoy it. Not for commercial
-              use. &copy; Luca Sammarco.
+              Print it, frame it, or set it as your wallpaper. Just keep it
+              personal: no commercial use. &copy; Luca Sammarco.
             </p>
 
-            <div className="mt-5 flex items-center justify-end gap-3">
-              <button
-                type="button"
-                onClick={() => setShowGate(false)}
-                className="text-[#737373] hover:text-[#E5E5E5] text-sm transition-colors duration-150 px-2 py-1.5"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                autoFocus
-                onClick={onAcceptLicense}
-                className="rounded-lg bg-[#E5E5E5] text-[#0A0A0A] text-sm font-medium px-4 py-2 hover:bg-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
-              >
-                Accept &amp; download
-              </button>
-            </div>
+            <button
+              type="button"
+              autoFocus
+              onClick={onAcceptLicense}
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-[#6366F1] px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-[#6366F1]/25 transition-all duration-150 hover:bg-[#5457E5] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Got it, download
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowGate(false)}
+              className="mt-2 w-full text-center text-[#737373] hover:text-[#E5E5E5] text-sm transition-colors duration-150 py-1.5"
+            >
+              Maybe later
+            </button>
           </div>
         </div>
       )}
