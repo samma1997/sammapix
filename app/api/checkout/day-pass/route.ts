@@ -24,15 +24,21 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
+  let email: string | undefined;
+  try {
+    const session = await getServerSession(authOptions);
+    email = session?.user?.email ?? undefined;
+  } catch {
+    email = undefined;
+  }
+  if (!email) {
     return NextResponse.json(
       { error: "Login required", code: "UNAUTHORIZED" },
       { status: 401 }
     );
   }
 
-  const email = session.user.email.trim();
+  email = email.trim();
 
   // Rate limit: 5 attempts per minute per authenticated user
   const rlCount = await incrWithTTL(`rl:daypass:${email}`, 60);
