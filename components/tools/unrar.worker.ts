@@ -31,11 +31,29 @@ self.onmessage = async (event: MessageEvent<AnyWorkerMessage>) => {
   const { buffer, password } = event.data;
 
   try {
-    // Lazy-load the WASM extractor only when needed
+    // Lazy-load the WASM extractor only when needed.
+    //
+    // IMPORTANTE: non lasciare che node-unrar-js risolva il path del .wasm
+    // autonomamente: in produzione Vercel i chunk JS vengono serviti da un
+    // URL con hash (es. /_next/static/chunks/...) e il `locateFile` di
+    // Emscripten cerca unrar.wasm in quella stessa directory → 404.
+    //
+    // Soluzione: fetch esplicito da /unrar.wasm (same-origin, file in public/)
+    // e passaggio del binario tramite il campo `wasmBinary` supportato
+    // nativamente dall'API di node-unrar-js v2 (→ Module["wasmBinary"]).
     const { createExtractorFromData } = await import("node-unrar-js");
+
+    const wasmResponse = await fetch("/unrar.wasm");
+    if (!wasmResponse.ok) {
+      throw new Error(
+        `Impossibile caricare unrar.wasm: HTTP ${wasmResponse.status}`
+      );
+    }
+    const wasmBinary = await wasmResponse.arrayBuffer();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extractor: any = await createExtractorFromData({
+      wasmBinary,
       data: buffer,
       password: password ?? undefined,
     });

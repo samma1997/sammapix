@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-blog-list.mjs",
+    "postinstall": "node scripts/copy-unrar-wasm.mjs",
+    "prebuild": "node scripts/generate-blog-list.mjs && node scripts/copy-unrar-wasm.mjs",
     "build": "NODE_OPTIONS='--max-old-space-size=8192' next build",
     "start": "next start",
     "lint": "next lint",
