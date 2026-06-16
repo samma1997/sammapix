@@ -1013,6 +1013,53 @@ export const IconJxl: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconUnrar — RAR archive extractor icon ───────────────────────────────────
+export const IconUnrar: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes unrar-zip {
+        0%, 20%  { transform: translateY(0px);   opacity: 0.9; }
+        55%      { transform: translateY(6px);   opacity: 1; }
+        80%, 100%{ transform: translateY(0px);   opacity: 0.9; }
+      }
+      @keyframes unrar-fly {
+        0%, 30%  { transform: translate(0, 0) scale(0.7); opacity: 0; }
+        55%, 75% { transform: translate(10px, -8px) scale(1); opacity: 1; }
+        95%, 100%{ transform: translate(10px, -8px) scale(1); opacity: 0; }
+      }
+      @keyframes unrar-badge {
+        0%, 100% { opacity: 0.6; transform: scale(0.95); }
+        50%       { opacity: 1;   transform: scale(1); }
+      }
+      .unrar-box  { transform-origin: 14px 28px; animation: unrar-zip 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .unrar-file { transform-origin: 8px 20px;  animation: unrar-fly 2.4s ease-in-out infinite; }
+      .unrar-bdg  { transform-origin: 38px 38px; animation: unrar-badge 2s ease-in-out infinite; }
+    `}</style>
+    {/* RAR archive box */}
+    <g className="unrar-box">
+      <rect x="4" y="14" width="22" height="26" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      {/* Zipper teeth */}
+      <rect x="12" y="14" width="4" height="3" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="12" y="20" width="4" height="3" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="12" y="26" width="4" height="3" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="15" y="36" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">RAR</text>
+    </g>
+    {/* Flying extracted file */}
+    <g className="unrar-file" style={{ opacity: 0 }}>
+      <rect x="2" y="14" width="12" height="14" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+      <circle cx="5.5" cy="18" r="1.2" fill={accent} fillOpacity="0.6"/>
+      <path d="M3 24 L6 21 L8 23 L11 19" stroke={accent} strokeWidth="1" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Arrow down from box */}
+    <path d="M30 24 L38 24 M34 21 L38 24 L34 27" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* ZIP output badge */}
+    <g className="unrar-bdg">
+      <rect x="30" y="30" width="16" height="12" rx="2.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="38.5" fontSize="5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">ZIP</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

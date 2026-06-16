@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Zap, Check, X, Loader2 } from "lucide-react";
+import { Zap, Check, X, Loader2, Clock } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
 import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
@@ -72,7 +72,7 @@ function getSubtext(
     case "upscale_daily":
       return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
     case "power_user":
-      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 32 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
+      return `You've explored ${toolsExplored ?? 3}+ tools already — there are 36 total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
     case "lut_export":
       return "Pro applies your LUT to up to 500 photos at once and exports unlimited .cube files. Free always includes single-photo exports — no change there.";
     default: {
@@ -106,6 +106,7 @@ export default function ProUpsellModal({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [creditsLoading, setCreditsLoading] = useState(false);
+  const [dayPassLoading, setDayPassLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
 
   // Founding deal — show $5 price + spots-left urgency in CTA.
@@ -197,6 +198,37 @@ export default function ProUpsellModal({
       onClose();
     } finally {
       setCreditsLoading(false);
+    }
+  };
+
+  const handleDayPass = async () => {
+    trackEvent("upsell_daypass_clicked", { trigger });
+    if (!session) {
+      const cb = encodeURIComponent("/pricing#day-pass");
+      router.push(`/auth/signin?callbackUrl=${cb}`);
+      onClose();
+      return;
+    }
+    setDayPassLoading(true);
+    try {
+      const res = await fetch("/api/checkout/day-pass", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = (await res.json()) as { url?: string; error?: string; code?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      } else if (data.code === "DAY_PASS_ALREADY_ACTIVE") {
+        router.push("/dashboard?daypass=active");
+        onClose();
+      } else {
+        alert(data.error ?? "Could not start checkout. Please try again.");
+      }
+    } catch (err) {
+      alert(`Network error: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setDayPassLoading(false);
     }
   };
 
@@ -315,6 +347,23 @@ export default function ProUpsellModal({
                 : "Or buy 100 credits for $5.99 — one-time, never expire"}
             </button>
           )}
+
+          {/* Day Pass \u2014 one-time 24h full access */}
+          <button
+            onClick={handleDayPass}
+            disabled={dayPassLoading}
+            className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
+            aria-label="Buy a Day Pass for $2.99 \u2014 24h full Pro access"
+          >
+            {dayPassLoading ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+            ) : (
+              <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+            )}
+            {dayPassLoading
+              ? "Redirecting to checkout..."
+              : "Just need it once? Day Pass $2.99 \u2014 24h full access"}
+          </button>
 
           {/* Continue with first N files \u2014 only for files/batch triggers */}
           {showContinue && freeLimit && (

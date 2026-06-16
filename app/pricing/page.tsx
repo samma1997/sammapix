@@ -29,6 +29,7 @@ import {
   IconPassportPhoto,
   IconJpgToPdf,
   IconJxl,
+  IconUnrar,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -39,7 +40,7 @@ import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundin
 import { TOOL_COUNT } from "@/lib/constants";
 
 const FoundingSpotsCounter = dynamic(() => import("@/components/ui/FoundingSpotsCounter"), { ssr: false });
-import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones } from "lucide-react";
+import { Download, Zap, FileStack, Package, Sparkles, MonitorDown, Ban, Headphones, Clock } from "lucide-react";
 
 // ─── Tool grid data ────────────────────────────────────────────────────────────
 
@@ -71,7 +72,50 @@ const toolGrid = [
   { Icon: IconAIRename,     name: "OCR",       accent: "#F59E0B" },
   { Icon: IconJpgToPdf,     name: "JPG to PDF", accent: "#DC2626" },
   { Icon: IconJxl,          name: "JXL",        accent: "#F59E0B" },
+  { Icon: IconUnrar,        name: "Open RAR",   accent: "#0EA5E9" },
 ] as const;
+
+// ─── Day Pass checkout button ──────────────────────────────────────────────────
+
+function DayPassButton() {
+  const [loading, setLoading] = React.useState(false);
+
+  const handleClick = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout/day-pass", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = (await res.json()) as { url?: string; error?: string; code?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      } else if (data.code === "UNAUTHORIZED") {
+        window.location.href = "/api/auth/signin?callbackUrl=/pricing";
+      } else if (data.code === "DAY_PASS_ALREADY_ACTIVE") {
+        window.location.href = "/dashboard?daypass=active";
+      } else {
+        alert(data.error ?? "Could not start checkout. Please try again.");
+      }
+    } catch {
+      alert("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={loading}
+      className="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-md bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors disabled:opacity-60"
+      aria-label="Buy Day Pass for $2.99"
+    >
+      {loading ? "Redirecting…" : "Get Day Pass — $2.99"}
+    </button>
+  );
+}
 
 // ─── Payment banners ───────────────────────────────────────────────────────────
 
@@ -211,7 +255,7 @@ export default function PricingPage() {
         </div>
 
         {/* ── Pricing cards ──────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
 
           {/* Free card */}
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-7 bg-white dark:bg-[#1E1E1E] flex flex-col">
@@ -315,6 +359,43 @@ export default function PricingPage() {
             </CheckoutButton>
             <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373]">
               30-day money-back · Cancel anytime
+            </p>
+          </div>
+
+          {/* Day Pass card */}
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-7 bg-white dark:bg-[#1E1E1E] flex flex-col">
+            <div className="mb-7">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#737373] mb-3">
+                Day Pass
+              </h2>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">$2.99</span>
+                <span className="text-sm text-[#A3A3A3] dark:text-[#737373]">/ 24h</span>
+              </div>
+              <p className="mt-1.5 text-sm text-[#737373] dark:text-[#A3A3A3]">
+                Need it once? No subscription.
+              </p>
+            </div>
+
+            <ul className="space-y-2.5 mb-8 flex-1">
+              {[
+                { icon: Clock,      text: "Full Pro access for 24 hours" },
+                { icon: FileStack,  text: "500 files per batch" },
+                { icon: Zap,        text: "200 AI credits during the pass" },
+                { icon: Package,    text: "ZIP download included" },
+                { icon: Ban,        text: "No ads while active" },
+                { icon: Sparkles,   text: "One-time payment, no renewal" },
+              ].map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-start gap-2 text-sm text-[#525252] dark:text-[#A3A3A3]">
+                  <Icon className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#D4D4D4] dark:text-[#525252]" strokeWidth={1.5} />
+                  {text}
+                </li>
+              ))}
+            </ul>
+
+            <DayPassButton />
+            <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373] mt-3">
+              Access starts immediately after payment
             </p>
           </div>
         </div>

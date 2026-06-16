@@ -141,6 +141,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/passport-photo",
     "/tools/jpg-to-pdf",
     "/tools/jxl",
+    "/tools/unrar",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
@@ -180,7 +181,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Portfolio sub-pages
   const portfolioPages: MetadataRoute.Sitemap = [
     {
-      url: `${APP_URL}/about/sri-lanka-2025`,
+      url: `${APP_URL}/about/sri-lanka`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${APP_URL}/about/bali`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,

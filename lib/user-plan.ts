@@ -7,6 +7,7 @@
  *   3. Default: "free"
  */
 import { stripe } from "@/lib/stripe";
+import { hasActiveDayPass } from "@/lib/day-pass";
 
 export async function getUserPlan(email: string | null | undefined): Promise<"free" | "pro"> {
   if (!email) return "free";
@@ -18,7 +19,10 @@ export async function getUserPlan(email: string | null | undefined): Promise<"fr
     .filter(Boolean);
   if (manualPro.includes(email.toLowerCase())) return "pro";
 
-  // 2. Stripe- check for active subscription
+  // 2. Day Pass — 24h one-time access (checked before Stripe to avoid API call)
+  if (await hasActiveDayPass(email)) return "pro";
+
+  // 3. Stripe- check for active subscription
   const stripeKey = process.env.STRIPE_SECRET_KEY ?? "";
   if (!stripeKey || stripeKey === "sk_test_..." || stripeKey.startsWith("sk_test_placeholder")) {
     return "free"; // Stripe not configured

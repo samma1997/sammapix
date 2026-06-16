@@ -30,6 +30,7 @@ import {
   IconPassportPhoto,
   IconJpgToPdf,
   IconJxl,
+  IconUnrar,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -261,6 +262,7 @@ type Category = "All" | "Optimize" | "AI" | "Creative" | "Organize" | "Workflows
 interface ToolWithCategory extends ToolCardData {
   category: Category[];
   isCombo?: boolean;
+  isNew?: boolean;
 }
 
 // ─── Tool data ────────────────────────────────────────────────────────────────
@@ -591,6 +593,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Next-Gen"],
     Icon: IconJxl,
     category: ["Optimize"],
+  },
+  {
+    name: "Open RAR Online",
+    href: "/tools/unrar",
+    tagline: "Extract RAR files in-browser. View file list, download individually, or export as ZIP.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconUnrar,
+    category: ["Optimize"],
+    isNew: true,
   },
 ];
 

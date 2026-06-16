@@ -82,27 +82,27 @@ const faqs = [
   {
     question: "Is there a free alternative to Topaz Gigapixel?",
     answer:
-      "Yes. SammaPix upscales images 2x or 4x free in your browser with no installation or signup required. For AI super-resolution on heavily degraded images, Upscayl (free, open-source desktop app using Real-ESRGAN) is also an excellent free alternative that gets very close to Topaz quality at 2x.",
+      "Yes. SammaPix uses a real ESRGAN neural network (the same class of AI model as Topaz) running directly in your browser — no installation or signup required. Free users get AI 2x upscaling. Upscayl (free, open-source desktop app) is another solid option for offline use.",
   },
   {
     question: "Is SammaPix as good as Topaz Gigapixel?",
     answer:
-      "Honest answer: for most web, social media, and print use cases at 2x, the results are comparable. Topaz Gigapixel uses proprietary AI super-resolution models that can recover fine detail from very degraded photos — SammaPix uses high-quality browser-based interpolation, which is faster and 100% private but does not hallucinate new detail. For thumbnails, product photos, and everyday upscaling, SammaPix is more than enough. For extreme 4x recovery of damaged old photos, Topaz or Upscayl will do better.",
+      "SammaPix now uses ESRGAN — the same neural network architecture behind most AI upscalers including Topaz. For 2x super-resolution on everyday photos, results are very close. Topaz Gigapixel's proprietary models trained on billions of images can recover more detail on heavily degraded or very small sources. For thumbnails, product photos, social media, and everyday upscaling, SammaPix AI produces excellent results — and it's entirely free at 2x.",
   },
   {
     question: "How does AI upscaling work?",
     answer:
-      "SammaPix uses advanced browser-based algorithms to intelligently upscale your images. The tool analyzes pixel patterns and applies high-quality interpolation to increase resolution while preserving sharpness. Everything runs directly in your browser. Your images are never uploaded to any server.",
+      "SammaPix runs a real ESRGAN (Enhanced Super-Resolution Generative Adversarial Network) model in your browser using TensorFlow.js. The model was trained to hallucinate realistic high-frequency detail — edges, textures, fine patterns — that simple interpolation cannot recover. It processes your image in overlapping patches to handle any size without running out of GPU memory. Everything runs locally in your browser; your images are never uploaded to any server.",
   },
   {
     question: "What's the maximum upscale factor?",
     answer:
-      "You can upscale images up to 4x their original resolution. For example, a 500x500 image becomes 2000x2000 at 4x. We recommend 2x for most use cases as it provides the best balance between size increase and quality retention. 4x is great for small thumbnails or icons that need to be enlarged significantly.",
+      "Free users get AI 2x upscaling (e.g. 500x500 → 1000x1000). Pro users get AI 4x (e.g. 500x500 → 2000x2000) and can process images up to 2500px on the longest side with full AI. 4x is ideal for small thumbnails, icons, or print preparation where maximum enlargement is needed.",
   },
   {
     question: "Will upscaling make my image blurry?",
     answer:
-      "SammaPix uses multi-pass upscaling with high-quality smoothing to minimize blur. For 4x upscaling, we apply two sequential 2x passes which produces significantly sharper results than a single 4x jump. The output quality depends on the source image: higher quality originals produce better upscaled results.",
+      "No — AI upscaling actively sharpens and reconstructs detail rather than blurring. ESRGAN is specifically trained to recover sharp edges and textures. The result is noticeably crisper than browser or Photoshop bicubic interpolation. For very degraded or noisy originals, the AI may occasionally introduce mild artifacts on extreme fine detail, but overall sharpness is substantially better than non-AI methods.",
   },
   {
     question: "What formats are supported?",
@@ -126,11 +126,11 @@ const howToSteps = [
   },
   {
     title: "Choose 2x or 4x",
-    desc: "Select how much to enlarge. 2x doubles dimensions, 4x quadruples them.",
+    desc: "Select the AI upscale factor. 2x is free. 4x (Pro) quadruples resolution using the same ESRGAN model.",
   },
   {
-    title: "Download enhanced image",
-    desc: "Click download to save the upscaled PNG. Original quality preserved.",
+    title: "Download AI-upscaled image",
+    desc: "Click download to save the lossless PNG. The AI model runs entirely in your browser — nothing is uploaded.",
   },
 ];
 
@@ -179,10 +179,10 @@ export default function UpscalePage() {
             </div>
 
             <p className="text-[15px] text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-4">
-              Topaz Gigapixel costs $99–199. SammaPix upscales your images 2×
-              or 4× free — entirely in your browser with multi-pass enhancement.
-              No installation, no signup, no upload. Your images never leave
-              your device. Lossless PNG output.
+              Topaz Gigapixel costs $99–199. SammaPix runs a real ESRGAN AI
+              model in your browser — the same neural network architecture —
+              and upscales your images 2× free. No installation, no signup,
+              no upload. Your images never leave your device.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#525252] dark:text-[#A3A3A3]">

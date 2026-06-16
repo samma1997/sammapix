@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { sendMetaEvent } from "@/lib/meta-conversions";
 import { sendGA4Event, parseGAClientId } from "@/lib/ga4-server";
 import { addCredits } from "@/lib/credits";
+import { grantDayPass } from "@/lib/day-pass";
 import { saveGiftCode, markPaid } from "@/lib/gift-codes";
 import {
   sendProUpgradeEmail,
@@ -161,6 +162,35 @@ export async function POST(req: NextRequest) {
               transaction_id: session.id,
               item_category: "credits",
               item_name: `${creditsAmount}_credits`,
+            },
+          }],
+        }).catch(() => {});
+      } else if (metadata.type === "day_pass") {
+        // ----------------------------------------------------------------
+        // Day Pass — 24h one-time access
+        // ----------------------------------------------------------------
+        const userEmail = metadata.userEmail;
+        if (!userEmail) {
+          console.error("[stripe/webhook] Day Pass metadata missing userEmail");
+          break;
+        }
+
+        await grantDayPass(userEmail);
+        console.log(`[stripe/webhook] Day Pass granted: ${userEmail}`);
+
+        // GA4 purchase event for Day Pass
+        const dpGaClientId = parseGAClientId(metadata.ga_cookie) ?? userEmail;
+        sendGA4Event({
+          clientId: dpGaClientId,
+          userId: userEmail,
+          events: [{
+            name: "purchase",
+            params: {
+              currency: "USD",
+              value: 2.99,
+              transaction_id: session.id,
+              item_category: "day_pass",
+              item_name: "day_pass_24h",
             },
           }],
         }).catch(() => {});

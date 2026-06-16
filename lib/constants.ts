@@ -82,6 +82,7 @@ export const TOOL_SLUGS = [
   "webp",
   "webp-to-jpg",
   "webp-to-png",
+  "unrar",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -116,6 +117,7 @@ export const DEFAULT_AI_RENAME = false;
 // Pricing
 export const PRICE_PRO_MONTHLY = 9;
 export const PRICE_PRO_YEARLY = 79;
+export const DAY_PASS_PRICE = 299; // $2.99 in cents
 
 // App info
 export const APP_NAME = "SammaPix";

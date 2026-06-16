@@ -158,6 +158,10 @@ export default async function TripPage({
           {" \u00b7 "}
           {trip.photos.length} photographs
         </p>
+        <p className="text-xs text-gray-400 mt-3 max-w-xl leading-relaxed">
+          Free for personal use \u2014 print it or set it as your wallpaper.{" "}
+          &copy; Luca Sammarco &middot; Not for commercial use.
+        </p>
       </div>
 
       {/* ------------------------------------------------------------------ */}
