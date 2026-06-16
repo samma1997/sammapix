@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Image from "next/image";
 import type { TripPhoto } from "@/lib/destinations";
 import { trackEvent } from "@/lib/analytics";
+import { usePortfolioSocial } from "@/hooks/usePortfolioSocial";
 
 interface LightboxProps {
   photos: TripPhoto[];
@@ -51,6 +52,15 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
   const scrollStart = useRef({ left: 0, top: 0 });
   const zoomContainerRef = useRef<HTMLDivElement>(null);
   const lastTap = useRef(0);
+  // License gate visibility (accept-before-download). Pending download URL is
+  // kept on the anchor itself; we only need a flag to render the dialog.
+  const [showGate, setShowGate] = useState(false);
+  const downloadAnchorRef = useRef<HTMLAnchorElement>(null);
+
+  // Social layer: counters, likes, license-accepted flag.
+  const ids = useMemo(() => photos.map((p) => p.id), [photos]);
+  const { getStat, isLiked, toggleLike, accepted, markAccepted, recordDownload } =
+    usePortfolioSocial(ids);
 
   const goNext = useCallback(() => {
     setIsZoomed(false);
@@ -70,6 +80,8 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
   // Keyboard navigation
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
+      // The gate dialog handles its own Escape (capture phase) and stops it.
+      if (showGate) return;
       if (e.key === "Escape") {
         if (isZoomed) setIsZoomed(false);
         else onClose();
@@ -81,7 +93,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [onClose, goNext, goPrev, isZoomed]);
+  }, [onClose, goNext, goPrev, isZoomed, showGate]);
 
   // Lock body scroll
   useEffect(() => {
@@ -108,13 +120,51 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
   const photo = photos[current];
   const { url: downloadUrl, filename: downloadName } = buildDownloadUrl(photo.src);
 
-  const handleDownload = useCallback(() => {
+  // Fire the actual browser download (via the hidden anchor) + record it.
+  const triggerDownload = useCallback(() => {
     try {
       trackEvent("portfolio_photo_download", { id: photo.id });
     } catch {
       /* analytics is best-effort */
     }
-  }, [photo.id]);
+    // Programmatically click the real <a download> so the file saves with the
+    // proper Cloudinary fl_attachment URL/filename.
+    downloadAnchorRef.current?.click();
+    // Record the download server-side (best-effort) and bump the counter.
+    void recordDownload(photo.id);
+  }, [photo.id, recordDownload]);
+
+  // Download click entry point: gate on first time, then go straight through.
+  const onDownloadClick = useCallback(() => {
+    if (accepted) {
+      triggerDownload();
+    } else {
+      setShowGate(true);
+    }
+  }, [accepted, triggerDownload]);
+
+  // User accepted the personal-use license in the gate dialog.
+  const onAcceptLicense = useCallback(() => {
+    markAccepted();
+    setShowGate(false);
+    triggerDownload();
+  }, [markAccepted, triggerDownload]);
+
+  // Close the gate on Escape without leaving the lightbox.
+  useEffect(() => {
+    if (!showGate) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        setShowGate(false);
+      }
+    };
+    window.addEventListener("keydown", handleKey, true);
+    return () => window.removeEventListener("keydown", handleKey, true);
+  }, [showGate]);
+
+  const stat = getStat(photo.id);
+  const liked = isLiked(photo.id);
 
   // Touch swipe (only when NOT zoomed; when zoomed the container scrolls/pans)
   const onTouchStart = (e: React.TouchEvent) => {
@@ -199,14 +249,57 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
         {current + 1} / {photos.length}
       </div>
 
-      {/* Top-right controls: download + close */}
-      <div className="absolute top-3 right-4 flex items-center gap-3 z-10">
-        <a
-          href={downloadUrl}
-          download={downloadName}
+      {/* Hidden real download anchor — clicked programmatically after the
+          license gate so the file saves with the proper Cloudinary URL. */}
+      <a
+        ref={downloadAnchorRef}
+        href={downloadUrl}
+        download={downloadName}
+        className="hidden"
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+
+      {/* Top-right controls: like + download + close */}
+      <div className="absolute top-3 right-4 flex items-center gap-2 sm:gap-3 z-10">
+        {/* Like (heart) */}
+        <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
-            handleDownload();
+            void toggleLike(photo.id);
+          }}
+          className={`flex items-center gap-1 transition-colors duration-150 p-1 ${
+            liked ? "text-[#F87171]" : "text-[#525252] hover:text-[#E5E5E5]"
+          }`}
+          aria-label={liked ? "Unlike this photo" : "Like this photo"}
+          aria-pressed={liked}
+          title={liked ? "Unlike" : "Like"}
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill={liked ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          {stat.likes > 0 && (
+            <span className="text-xs tabular-nums select-none">{stat.likes}</span>
+          )}
+        </button>
+
+        {/* Download */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDownloadClick();
           }}
           className="text-[#525252] hover:text-[#E5E5E5] transition-colors duration-150 p-1"
           aria-label="Download photo in high resolution for personal use"
@@ -227,8 +320,11 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-        </a>
+        </button>
+
+        {/* Close */}
         <button
+          type="button"
           className="text-[#525252] hover:text-[#E5E5E5] text-3xl leading-none transition-colors duration-150 p-1"
           onClick={(e) => {
             e.stopPropagation();
@@ -310,6 +406,48 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           {photo.location && (
             <p className="text-[#A3A3A3] text-xs mt-1">{photo.location}</p>
           )}
+
+          {/* Social counters (download / like) — discreet social proof */}
+          <div className="flex items-center justify-center gap-4 mt-2 text-[#737373] text-xs select-none">
+            <span className="inline-flex items-center gap-1" aria-label={`${stat.downloads} downloads`}>
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span className="tabular-nums">{stat.downloads}</span>
+            </span>
+            <span
+              className={`inline-flex items-center gap-1 ${liked ? "text-[#F87171]" : ""}`}
+              aria-label={`${stat.likes} likes`}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill={liked ? "currentColor" : "none"}
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              <span className="tabular-nums">{stat.likes}</span>
+            </span>
+          </div>
+
           <p className="text-[#737373] text-xs mt-2 max-w-md mx-auto leading-relaxed">
             Free for personal use — print it or set it as your wallpaper.
             {" "}&copy; Luca Sammarco &middot; Not for commercial use.
@@ -342,6 +480,67 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             href={photos[i].src}
           />
         ))}
+
+      {/* License gate (accept-before-download) — first download only */}
+      {showGate && (
+        <div
+          className="absolute inset-0 z-20 flex items-center justify-center bg-black/60 px-4"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowGate(false);
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pf-gate-title"
+          aria-describedby="pf-gate-desc"
+        >
+          <div
+            className="relative w-full max-w-sm rounded-xl border border-[#262626] bg-[#141414] p-5 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowGate(false)}
+              className="absolute top-2.5 right-3 text-[#525252] hover:text-[#E5E5E5] text-2xl leading-none transition-colors duration-150"
+              aria-label="Cancel download"
+            >
+              &times;
+            </button>
+
+            <h2
+              id="pf-gate-title"
+              className="text-[#F5F5F5] text-base font-semibold pr-6"
+            >
+              Free for personal use
+            </h2>
+            <p
+              id="pf-gate-desc"
+              className="text-[#A3A3A3] text-sm mt-2 leading-relaxed"
+            >
+              Print it, set it as your wallpaper — enjoy it. Not for commercial
+              use. &copy; Luca Sammarco.
+            </p>
+
+            <div className="mt-5 flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowGate(false)}
+                className="text-[#737373] hover:text-[#E5E5E5] text-sm transition-colors duration-150 px-2 py-1.5"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                autoFocus
+                onClick={onAcceptLicense}
+                className="rounded-lg bg-[#E5E5E5] text-[#0A0A0A] text-sm font-medium px-4 py-2 hover:bg-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+              >
+                Accept &amp; download
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
