@@ -42,6 +42,13 @@ export default function AboutPage() {
   const sriLanka = allTrips.find((t) => t.slug === "sri-lanka");
   const sriLankaPhotos = sriLanka ? sriLanka.photos : [];
 
+  // Real destination cards, ordered, using each trip's chosen cover (a people shot).
+  const realTrips = ["sri-lanka", "bali"]
+    .map((slug) => allTrips.find((t) => t.slug === slug))
+    .filter(Boolean) as typeof allTrips;
+  const coverThumb = (t: (typeof allTrips)[number]) =>
+    t.photos.find((p) => p.src === t.coverSrc)?.srcThumb ?? t.photos[0]?.srcThumb ?? "";
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -132,31 +139,35 @@ export default function AboutPage() {
 
             {/* Destination cards- vertical, like the old hero strip */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {/* Sri Lanka- real photos, clickable */}
-              <Link
-                href="/about/sri-lanka"
-                className="group relative overflow-hidden rounded-lg"
-                style={{ aspectRatio: "3/4" }}
-              >
-                <Image
-                  src={sriLanka?.photos[0]?.srcThumb ?? ""}
-                  alt="Sri Lanka travel photography 2025"
-                  fill
-                  className="object-cover brightness-80 group-hover:brightness-100 group-hover:scale-[1.03] transition-all duration-500"
-                  sizes="(max-width: 640px) 50vw, 20vw"
-                  unoptimized
-                  priority
-                />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <p className="text-white text-sm font-semibold">Sri Lanka</p>
-                  <p className="text-white/50 text-xs">2025 &middot; {sriLanka?.photos.length ?? 15} photos</p>
-                </div>
-              </Link>
+              {/* Real destinations- clickable */}
+              {realTrips.map((trip) => (
+                <Link
+                  key={trip.slug}
+                  href={`/about/${trip.slug}`}
+                  className="group relative overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "3/4" }}
+                >
+                  <Image
+                    src={coverThumb(trip)}
+                    alt={`${trip.destination} travel photography ${new Date(trip.startDate).getFullYear()}`}
+                    fill
+                    className="object-cover brightness-80 group-hover:brightness-100 group-hover:scale-[1.03] transition-all duration-500"
+                    sizes="(max-width: 640px) 50vw, 20vw"
+                    unoptimized
+                    priority
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <p className="text-white text-sm font-semibold">{trip.destination}</p>
+                    <p className="text-white/50 text-xs">
+                      {new Date(trip.startDate).getFullYear()} &middot; {trip.photos.length} photos
+                    </p>
+                  </div>
+                </Link>
+              ))}
 
               {/* Coming soon destinations- blurred */}
               {[
-                { name: "Bali", year: "2024", gradient: "from-emerald-900 to-emerald-700" },
                 { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
                 { name: "Thailand", year: "2024", gradient: "from-amber-900 to-amber-700" },
                 { name: "China", year: "2023", gradient: "from-sky-900 to-sky-700" },
