@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
   Camera,
   PenLine,
@@ -14,6 +15,7 @@ import {
   Download,
   X,
   Sparkles,
+  Clock,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Persona } from "@/types/persona";
@@ -768,6 +770,33 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const isPro = userPlan === "pro";
   const firstName = userName?.split(" ")[0] ?? "there";
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { update: updateSession } = useSession();
+
+  // Day Pass success banner state
+  const [showDayPassBanner, setShowDayPassBanner] = useState(false);
+  const [dayPassCanceled, setDayPassCanceled] = useState(false);
+
+  // On mount: detect ?daypass=active and force a session refresh so JWT picks
+  // up the new "pro" plan from getUserPlan without waiting 5 minutes.
+  useEffect(() => {
+    const dpParam = searchParams.get("daypass");
+    if (dpParam === "active") {
+      setShowDayPassBanner(true);
+      // Force session re-fetch so JWT reflects the new plan immediately
+      updateSession().catch(() => {});
+      // Clean up the query param from the URL without reloading the page
+      const url = new URL(window.location.href);
+      url.searchParams.delete("daypass");
+      window.history.replaceState({}, "", url.toString());
+    } else if (dpParam === "canceled") {
+      setDayPassCanceled(true);
+      const url = new URL(window.location.href);
+      url.searchParams.delete("daypass");
+      window.history.replaceState({}, "", url.toString());
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [persona, setPersona] = useState<Persona | null>(null);
   const [personaSkipped, setPersonaSkipped] = useState(false);
@@ -916,6 +945,38 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
 
       {/* Founding deal banner — only renders for free users while the coupon is active. */}
       <FoundingBanner isPro={isPro} />
+
+      {/* Day Pass active banner */}
+      {showDayPassBanner && (
+        <div className="flex items-start gap-3 rounded-md border border-[#6366F1]/30 dark:border-[#6366F1]/20 bg-[#EEF2FF]/60 dark:bg-[#6366F1]/10 px-4 py-3 text-sm text-[#4338CA] dark:text-[#A5B4FC]">
+          <Clock className="h-4 w-4 shrink-0 mt-0.5 text-[#6366F1]" strokeWidth={1.5} />
+          <span>
+            <span className="font-semibold">Day Pass active</span> — all Pro tools unlocked for 24 hours.
+            Enjoy the full experience.
+          </span>
+          <button
+            onClick={() => setShowDayPassBanner(false)}
+            className="ml-auto shrink-0 opacity-60 hover:opacity-100 transition-opacity"
+            aria-label="Dismiss Day Pass banner"
+          >
+            <X className="h-4 w-4" strokeWidth={1.5} />
+          </button>
+        </div>
+      )}
+
+      {/* Day Pass canceled banner */}
+      {dayPassCanceled && (
+        <div className="flex items-start gap-3 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525] px-4 py-3 text-sm text-[#737373] dark:text-[#A3A3A3]">
+          <span>Payment canceled. Your free plan is still active.</span>
+          <button
+            onClick={() => setDayPassCanceled(false)}
+            className="ml-auto shrink-0 opacity-60 hover:opacity-100 transition-opacity"
+            aria-label="Dismiss"
+          >
+            <X className="h-4 w-4" strokeWidth={1.5} />
+          </button>
+        </div>
+      )}
 
       {/* -- Welcome + Plan status -- */}
       <section>

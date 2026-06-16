@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth/options";
@@ -18,9 +19,11 @@ export default async function DashboardPage() {
   };
 
   return (
-    <DashboardHome
-      userName={user.name ?? null}
-      userPlan={user.plan ?? "free"}
-    />
+    <Suspense fallback={null}>
+      <DashboardHome
+        userName={user.name ?? null}
+        userPlan={user.plan ?? "free"}
+      />
+    </Suspense>
   );
 }
