@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { APP_URL, TOOL_COUNT } from "@/lib/constants";
 import { getAllTrips } from "@/lib/destinations";
+import { HeroPhotoStrip } from "@/components/portfolio/HeroPhotoStrip";
 
 export const metadata: Metadata = {
   title: "About Luca Sammarco — Digital Product Builder & Travel Photographer",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const allTrips = getAllTrips();
   const sriLanka = allTrips.find((t) => t.slug === "sri-lanka");
-  const heroPhotos = sriLanka ? sriLanka.photos.slice(0, 5) : [];
+  const sriLankaPhotos = sriLanka ? sriLanka.photos : [];
 
   const personSchema = {
     "@context": "https://schema.org",
@@ -90,25 +91,8 @@ export default function AboutPage() {
         style={{ height: "calc(70vh - 56px)" }}
         aria-label="Photo strip hero"
       >
-        {/* Five-column photo strip */}
-        <div className="flex h-full w-full gap-0.5">
-          {heroPhotos.map((photo, index) => (
-            <div
-              key={photo.id}
-              className="relative flex-1 overflow-hidden group"
-            >
-              <Image
-                src={photo.srcThumb}
-                alt={photo.alt}
-                fill
-                sizes="20vw"
-                className="object-cover brightness-75 group-hover:brightness-90 transition-all duration-500 ease-out"
-                unoptimized
-                priority={index < 3}
-              />
-            </div>
-          ))}
-        </div>
+        {/* Five-column photo strip (clickable → opens full Sri Lanka gallery) */}
+        <HeroPhotoStrip photos={sriLankaPhotos} visibleCount={5} />
 
         {/* Gradient overlay at bottom for text legibility */}
         <div
