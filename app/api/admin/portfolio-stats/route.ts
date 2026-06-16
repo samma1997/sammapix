@@ -13,8 +13,13 @@ export const runtime = "nodejs";
  * sorted by downloads (then likes). Also returns per-trip and grand totals.
  */
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  const email = session?.user?.email;
+  let email: string | null | undefined;
+  try {
+    const session = await getServerSession(authOptions);
+    email = session?.user?.email;
+  } catch {
+    email = null;
+  }
   if (!email || !ADMIN_EMAILS.includes(email)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
