@@ -10,7 +10,7 @@ const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Open RAR Online Free — Extract & View RAR Files",
+  title: "Open RAR Online Free: Extract & View RAR Files",
   description:
     "Open RAR files directly in your browser. View file list, download individual files, or convert the entire archive to ZIP. Files never leave your device.",
   keywords: [
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${APP_URL}/tools/unrar`,
-    title: "Open RAR Online Free — Extract & View RAR Files",
+    title: "Open RAR Online Free: Extract & View RAR Files",
     description:
       "Open RAR files directly in your browser. View file list, download individual files, or convert the entire archive to ZIP. Files never leave your device.",
     siteName: "SammaPix",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open RAR Online Free — Extract & View RAR Files",
+    title: "Open RAR Online Free: Extract & View RAR Files",
     description:
       "Open RAR files directly in your browser. View file list, download individual files, or convert the entire archive to ZIP. Files never leave your device.",
   },
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Open RAR Online — SammaPix",
+  name: "Open RAR Online · SammaPix",
   description:
-    "Free browser-based RAR extractor. Open RAR files, view contents, download files individually, and convert to ZIP — 100% in-browser, files never uploaded.",
+    "Free browser-based RAR extractor. Open RAR files, view contents, download files individually, and convert to ZIP. 100% in-browser, files never uploaded.",
   url: `${APP_URL}/tools/unrar`,
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Web Browser",
@@ -75,7 +75,7 @@ const softwareSchema = {
     "Download individual files from the RAR",
     "Convert entire RAR to ZIP in-browser",
     "Password-protected RAR support",
-    "100% client-side — files never uploaded",
+    "100% client-side, files never uploaded",
   ],
 };
 
@@ -224,7 +224,7 @@ export default function UnrarPage() {
         {/* Hero */}
         <section className="px-4 sm:px-6 pt-10 pb-4 max-w-3xl mx-auto text-center">
           <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
-            Open RAR Online — Free
+            Open RAR Online · Free
           </h1>
           <p className="text-sm sm:text-base text-[#737373] dark:text-[#A3A3A3] max-w-xl mx-auto mb-2">
             View and extract RAR files instantly in your browser. Download
@@ -234,7 +234,7 @@ export default function UnrarPage() {
             </strong>
           </p>
           <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
-            Supports RAR4, RAR5, password-protected archives — up to 200 MB free
+            Supports RAR4, RAR5, password-protected archives, up to 200 MB free
           </p>
         </section>
 
@@ -293,7 +293,7 @@ export default function UnrarPage() {
           </p>
 
           <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
-            RAR vs ZIP — what should you use?
+            RAR vs ZIP: what should you use?
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6 leading-relaxed">
             RAR typically achieves 5-15% better compression than ZIP and

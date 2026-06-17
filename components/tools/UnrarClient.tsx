@@ -585,7 +585,7 @@ export default function UnrarClient() {
           </p>
           <span className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#525252]">
             <Lock size={11} />
-            Files never leave your device — 100% in-browser
+            Files never leave your device. 100% in-browser
           </span>
           <p className="text-xs text-[#A3A3A3] dark:text-[#525252] mt-1">
             RAR4, RAR5, password-protected · Free up to 200 MB
@@ -606,7 +606,7 @@ export default function UnrarClient() {
               ? "Reading file…"
               : uiState === "listing"
               ? "Scanning archive…"
-              : `Extracting files — ${progress}%`}
+              : `Extracting files ${progress}%`}
           </p>
           {uiState === "extracting" && (
             <>
@@ -638,7 +638,7 @@ export default function UnrarClient() {
             />
             <p className="text-sm text-emerald-800 dark:text-emerald-300">
               <span className="font-semibold">Found {entries.length} file{entries.length !== 1 ? "s" : ""} inside</span>
-              {" "}({totalUnpackedMB} MB unpacked) — your archive is intact
+              {" "}({totalUnpackedMB} MB unpacked) · your archive is intact
             </p>
           </div>
 
@@ -679,7 +679,7 @@ export default function UnrarClient() {
               </div>
               <div className="flex-1">
                 <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">
-                  This archive is {fileSizeMB} MB — over the 200 MB free limit
+                  This archive is {fileSizeMB} MB, over the 200 MB free limit
                 </p>
                 <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-4">
                   Unlock extraction and download instantly. One pass, all tools, 24 hours.
@@ -689,7 +689,7 @@ export default function UnrarClient() {
                   className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold bg-[#6366F1] hover:bg-[#4F46E5] active:scale-[0.98] text-white rounded-xl transition-all shadow-sm"
                 >
                   <Zap size={15} strokeWidth={2} />
-                  Unlock &amp; extract — $2.99
+                  Unlock &amp; extract for $2.99
                 </button>
                 <p className="text-xs text-[#A3A3A3] dark:text-[#525252] mt-2">
                   24-hour Day Pass · No subscription · Instant unlock
@@ -720,7 +720,7 @@ export default function UnrarClient() {
                 Payment window timed out
               </p>
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
-                If you completed the payment, drop the file again — your pass is active.
+                If you completed the payment, drop the file again. Your pass is active.
               </p>
               <div className="flex justify-center gap-3">
                 <button
