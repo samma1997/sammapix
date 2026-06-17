@@ -126,7 +126,6 @@ export async function POST(req: NextRequest) {
   try {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
-      payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: session.user.email,
       // Stripe doesn't allow discounts + allow_promotion_codes together.
