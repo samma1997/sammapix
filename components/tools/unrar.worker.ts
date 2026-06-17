@@ -3,14 +3,17 @@
  * Web Worker that handles RAR extraction via node-unrar-js (WASM).
  * Runs off the main thread to avoid blocking the UI on large archives.
  *
- * Messages IN  → { type: "extract", buffer: ArrayBuffer, password?: string }
- * Messages OUT → { type: "progress" | "file" | "done" | "error" | "needs_password" }
+ * Messages IN  → { type: "extract" | "listonly", buffer: ArrayBuffer, password?: string }
+ * Messages OUT → { type: "filelist" | "file" | "done" | "error" | "needs_password" }
+ *
+ * "listonly" → posts "filelist" then stops (no extraction). Used by the gate
+ *              to show the file list before requiring payment on large archives.
  */
 
 export {};
 
 interface ExtractMessage {
-  type: "extract";
+  type: "extract" | "listonly";
   buffer: ArrayBuffer;
   password?: string;
 }
@@ -26,9 +29,10 @@ interface RarEntry {
 }
 
 self.onmessage = async (event: MessageEvent<AnyWorkerMessage>) => {
-  if (event.data.type !== "extract") return;
+  if (event.data.type !== "extract" && event.data.type !== "listonly") return;
 
   const { buffer, password } = event.data;
+  const listOnly = event.data.type === "listonly";
 
   try {
     // Lazy-load the WASM extractor only when needed.
@@ -90,6 +94,12 @@ self.onmessage = async (event: MessageEvent<AnyWorkerMessage>) => {
 
     // Send file list to UI so user can see it immediately
     self.postMessage({ type: "filelist", entries });
+
+    // If only listing was requested (gate preview), stop here
+    if (listOnly) {
+      self.postMessage({ type: "done" });
+      return;
+    }
 
     // Second pass — extract all files
     const total = entries.length;
