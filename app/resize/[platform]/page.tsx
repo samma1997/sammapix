@@ -9,6 +9,7 @@ import {
   getAspectRatio,
 } from "@/lib/resize-platforms";
 import { APP_URL } from "@/lib/constants";
+import ResizePlatformToolEmbed from "@/components/tools/ResizePlatformToolEmbed";
 
 // ─── Static params ─────────────────────────────────────────────────────────
 
@@ -209,6 +210,17 @@ export default async function ResizePlatformPage({
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ── Embedded resize tool ───────────────────────────────────────── */}
+      <section className="border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <ResizePlatformToolEmbed
+          platformPresets={platform.sizes.map((s) => ({
+            label: s.type,
+            width: s.width,
+            height: s.height,
+          }))}
+        />
       </section>
 
       {/* ── Sizes table ────────────────────────────────────────────────── */}
@@ -503,6 +515,19 @@ export default async function ResizePlatformPage({
           >
             Social Media Image Sizes 2026
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Portfolio teaser ───────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 py-8 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto flex items-center justify-end">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#737373] transition-colors"
+          >
+            Travel photography by Luca Sammarco
+            <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
           </Link>
         </div>
       </section>
