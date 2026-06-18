@@ -414,7 +414,19 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Extract & view RAR files in-browser, no upload",
     slug: "/tools/unrar",
     category: "optimize",
-    relatedTools: ["pdf-merge", "exif", "compress", "jpg-to-pdf"],
+    relatedTools: ["open-7z", "pdf-merge", "exif", "compress"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+      "merge-pdfs-privately-no-upload",
+    ],
+  },
+  "open-7z": {
+    id: "open-7z",
+    name: "Open 7z Online",
+    shortDesc: "Extract & view .7z files in-browser, convert to ZIP",
+    slug: "/tools/open-7z",
+    category: "optimize",
+    relatedTools: ["unrar", "pdf-merge", "exif", "compress"],
     relatedBlogSlugs: [
       "browser-based-image-tools-privacy-guide",
       "merge-pdfs-privately-no-upload",

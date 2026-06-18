@@ -30,6 +30,7 @@ import {
   IconJpgToPdf,
   IconJxl,
   IconUnrar,
+  IconOpen7z,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -73,6 +74,7 @@ const toolGrid = [
   { Icon: IconJpgToPdf,     name: "JPG to PDF", accent: "#DC2626" },
   { Icon: IconJxl,          name: "JXL",        accent: "#F59E0B" },
   { Icon: IconUnrar,        name: "Open RAR",   accent: "#0EA5E9" },
+  { Icon: IconOpen7z,       name: "Open 7z",    accent: "#8B5CF6" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

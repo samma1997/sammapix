@@ -33,6 +33,7 @@ import {
   IconJpgToPdf,
   IconJxl,
   IconUnrar,
+  IconOpen7z,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -115,6 +116,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "color-match": ColorMatchClient,
   "photo-enhance": PhotoEnhanceClient,
   unrar: UnrarClient,
+  "open-7z": dynamic(() => import("@/components/tools/Open7zClient")),
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -197,6 +199,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "color-match": { Icon: IconColorPicker, accent: "#F59E0B" },
   "photo-enhance": { Icon: IconUpscale, accent: "#8B5CF6" },
   unrar: { Icon: IconUnrar, accent: "#0EA5E9" },
+  "open-7z": { Icon: IconOpen7z, accent: "#8B5CF6" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -622,6 +625,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Export as ZIP (optional)", desc: "Click \"Download all as .zip\" to convert the entire RAR archive to ZIP." },
     ],
     proTip: { text: "Use EXIF Viewer after extracting to strip metadata from photos before sharing.", linkLabel: "EXIF Viewer", linkHref: "/dashboard/tools/exif" },
+  },
+  "open-7z": {
+    label: "Open 7z Online",
+    tagline: "Extract .7z files in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop a .7z file", desc: "Drag & drop a .7z archive (up to 200 MB free). Supports standard and password-protected archives." },
+      { title: "View and download", desc: "See the file list instantly. Click any file to download it individually." },
+      { title: "Export as ZIP (optional)", desc: "Click \"Download all as .zip\" to convert the entire .7z archive to ZIP." },
+    ],
+    proTip: { text: "Need to open a RAR archive instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
   },
 };
 
