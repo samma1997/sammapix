@@ -594,9 +594,20 @@ const CropPreview = ({
   );
 };
 
+// ── Props ──────────────────────────────────────────────────────────────────────
+
+export interface CropRatioProps {
+  /**
+   * When set, the ratio selector is pre-selected to this value on mount.
+   * Use the ratioLabel format (e.g. "16:9", "9:16", "1:1", "A4").
+   * Standalone /tools/croproatio behaviour is unchanged when omitted.
+   */
+  initialRatio?: string;
+}
+
 // ── Main Component ─────────────────────────────────────────────────────────────
 
-export default function CropRatio() {
+export default function CropRatio({ initialRatio }: CropRatioProps = {}) {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const limit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
@@ -604,8 +615,14 @@ export default function CropRatio() {
   const [uiState, setUiState] = useState<UIState>("idle");
   const [isDragOver, setIsDragOver] = useState(false);
 
-  // Ratio config
-  const [selectedRatio, setSelectedRatio] = useState<string>("1:1");
+  // Ratio config — seed from initialRatio when provided
+  const resolvedInitial = (() => {
+    if (!initialRatio) return "1:1";
+    // Accept ratioLabel directly (e.g. "16:9") or check if it matches a preset
+    const match = RATIOS.find((r) => r.label === initialRatio);
+    return match ? match.label : initialRatio;
+  })();
+  const [selectedRatio, setSelectedRatio] = useState<string>(resolvedInitial);
   const [customW, setCustomW] = useState<number>(4);
   const [customH, setCustomH] = useState<number>(3);
 

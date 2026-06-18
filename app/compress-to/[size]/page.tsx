@@ -8,6 +8,7 @@ import {
   getTargetCanonical,
 } from "@/lib/compress-targets";
 import { APP_URL } from "@/lib/constants";
+import CompressTargetToolEmbed from "@/components/tools/CompressTargetToolEmbed";
 
 // ─── Static params ─────────────────────────────────────────────────────────
 
@@ -205,13 +206,13 @@ export default async function CompressToSizePage({
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3">
-            <Link
-              href="/tools/compress"
+            <a
+              href="#tool"
               className="inline-flex items-center gap-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-md px-4 py-2 text-sm font-medium hover:bg-[#262626] dark:hover:bg-white transition-colors"
             >
-              Open Compress Tool
+              Compress to {target.sizeLabel} now
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
+            </a>
             <Link
               href="/tools/webp"
               className="inline-flex items-center gap-2 border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] rounded-md px-4 py-2 text-sm hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
@@ -221,6 +222,11 @@ export default async function CompressToSizePage({
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ── Embedded compress tool ─────────────────────────────────────── */}
+      <section id="tool" className="border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <CompressTargetToolEmbed targetKB={Math.round(target.sizeBytes / 1024)} />
       </section>
 
       {/* ── Quick answer — AI citation hook ───────────────────────────── */}
@@ -568,6 +574,18 @@ export default async function CompressToSizePage({
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
+        </div>
+      </section>
+      {/* ── Portfolio teaser ───────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 py-8 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto flex items-center justify-end">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#737373] transition-colors"
+          >
+            Travel photography by Luca Sammarco
+            <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
     </main>
