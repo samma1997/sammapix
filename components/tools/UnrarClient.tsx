@@ -331,8 +331,14 @@ export default function UnrarClient() {
       setPassword("");
       setPasswordInput("");
 
-      // Large file + not yet unlocked → show list preview, gate extraction
-      if (file.size > MAX_BYTES_FREE && !isPro) {
+      // Large file + not yet unlocked → show list preview, gate extraction.
+      // `?gate=test` lowers the threshold so the paywall flow can be tried with
+      // a normal-size .rar (does not affect regular visitors).
+      const testGate =
+        typeof window !== "undefined" &&
+        new URLSearchParams(window.location.search).get("gate") === "test";
+      const limitBytes = testGate ? 1024 * 1024 : MAX_BYTES_FREE;
+      if (file.size > limitBytes && !isPro) {
         startListOnly(file);
         trackEvent("unrar_gate_shown", { size_mb: Math.round(file.size / 1024 / 1024) });
         return;
