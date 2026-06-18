@@ -11,17 +11,22 @@ import {
   RotateCcw,
   ChevronRight,
   Loader2,
+  CheckCircle2,
+  Zap,
+  ExternalLink,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import { useSession } from "next-auth/react";
-import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { useSession, signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const MAX_BYTES_FREE = 200 * 1024 * 1024; // 200 MB
 const ACCEPT = ".rar,application/x-rar-compressed,application/vnd.rar";
+const POLL_INTERVAL_MS = 3000; // poll every 3s
+const POLL_MAX_MS = 5 * 60 * 1000; // give up after 5min
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -32,11 +37,26 @@ interface RarEntry {
   status: "pending" | "ready" | "error";
 }
 
+/**
+ * UIState machine:
+ *   idle            → user hasn't dropped a file yet
+ *   loading         → FileReader is reading the ArrayBuffer
+ *   listing         → worker is fetching WASM + running getFileList (listonly mode)
+ *   filelist_gate   → file list shown, extraction gated (>200 MB, not unlocked)
+ *   awaiting_payment → Stripe popup opened, polling Redis for Day Pass
+ *   extracting      → worker is running extract()
+ *   needs_password  → RAR is password-protected, waiting for input
+ *   results         → extraction done, files ready to download
+ *   error           → something went wrong
+ */
 type UIState =
   | "idle"
   | "loading"
-  | "needs_password"
+  | "listing"
+  | "filelist_gate"
+  | "awaiting_payment"
   | "extracting"
+  | "needs_password"
   | "results"
   | "error";
 
@@ -52,10 +72,18 @@ function basename(path: string): string {
   return path.replace(/\\/g, "/").split("/").pop() ?? path;
 }
 
+function totalBytes(entries: RarEntry[]): number {
+  return entries.reduce((sum, e) => sum + e.size, 0);
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function UnrarClient() {
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
+
+  // Plan detection — session JWT may lag up to 5 min; for the gate we also
+  // poll Redis live via /api/day-pass/status, so this is only the initial check.
   const isPro =
     (session?.user as { plan?: string } | undefined)?.plan === "pro";
 
@@ -67,10 +95,12 @@ export default function UnrarClient() {
   const [password, setPassword] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [dragOver, setDragOver] = useState(false);
-  const [upsellOpen, setUpsellOpen] = useState(false);
   const [zipBuilding, setZipBuilding] = useState(false);
+  const [pollTimedOut, setPollTimedOut] = useState(false);
 
   const workerRef = useRef<Worker | null>(null);
+  const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pollStartRef = useRef<number>(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // ── Worker lifecycle ──────────────────────────────────────────────────────
@@ -82,9 +112,37 @@ export default function UnrarClient() {
     }
   }, []);
 
-  useEffect(() => () => terminateWorker(), [terminateWorker]);
+  const stopPolling = useCallback(() => {
+    if (pollTimerRef.current) {
+      clearInterval(pollTimerRef.current);
+      pollTimerRef.current = null;
+    }
+  }, []);
 
-  // ── Extraction logic ──────────────────────────────────────────────────────
+  useEffect(() => {
+    return () => {
+      terminateWorker();
+      stopPolling();
+    };
+  }, [terminateWorker, stopPolling]);
+
+  // ── Handle ?daypass=active param (popup-blocked fallback) ─────────────────
+
+  useEffect(() => {
+    if (searchParams?.get("daypass") === "active") {
+      // User was redirected back here after successful payment (popup was blocked).
+      // They need to re-drop the file because the page refreshed.
+      setUiState("idle");
+      setErrorMsg("");
+      // We don't auto-extract here because the file is gone (page reloaded).
+      // We show a persistent banner handled via the param being present.
+    }
+  }, [searchParams]);
+
+  const justUnlockedViaRedirect =
+    searchParams?.get("daypass") === "active" && uiState === "idle";
+
+  // ── Full extraction logic (used after gate unlock + direct for small files) ─
 
   const startExtraction = useCallback(
     (file: File, pwd?: string) => {
@@ -112,7 +170,6 @@ export default function UnrarClient() {
         );
         workerRef.current = worker;
 
-        // Accumulate entries from worker messages
         const accEntries: RarEntry[] = [];
 
         worker.onmessage = (
@@ -129,18 +186,16 @@ export default function UnrarClient() {
           const { type } = ev.data;
 
           if (type === "filelist") {
-            // File list received — initialise entry array
             const list = ev.data.entries ?? [];
-            const initialEntries: RarEntry[] = list.map((e) => ({
-              name: e.name,
-              size: e.size,
+            const initialEntries: RarEntry[] = list.map((entry) => ({
+              name: entry.name,
+              size: entry.size,
               status: "pending",
             }));
             accEntries.push(...initialEntries);
             setEntries([...accEntries]);
           } else if (type === "file") {
-            // Individual file extracted
-            const idx = accEntries.findIndex((e) => e.name === ev.data.name);
+            const idx = accEntries.findIndex((entry) => entry.name === ev.data.name);
             if (idx !== -1) {
               accEntries[idx] = {
                 ...accEntries[idx],
@@ -171,10 +226,7 @@ export default function UnrarClient() {
           setUiState("error");
         };
 
-        // Transfer buffer to worker (zero-copy)
-        worker.postMessage({ type: "extract", buffer, password: pwd }, [
-          buffer,
-        ]);
+        worker.postMessage({ type: "extract", buffer, password: pwd }, [buffer]);
       };
 
       reader.onerror = () => {
@@ -187,7 +239,85 @@ export default function UnrarClient() {
     [terminateWorker]
   );
 
-  // ── File selection ────────────────────────────────────────────────────────
+  // ── Listonly pass: show file list without extracting ──────────────────────
+
+  const startListOnly = useCallback(
+    (file: File, pwd?: string) => {
+      terminateWorker();
+
+      setUiState("loading");
+      setProgress(0);
+      setEntries([]);
+      setErrorMsg("");
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const buffer = e.target?.result as ArrayBuffer;
+        if (!buffer) {
+          setErrorMsg("Failed to read file.");
+          setUiState("error");
+          return;
+        }
+
+        setUiState("listing");
+
+        const worker = new Worker(
+          new URL("./unrar.worker.ts", import.meta.url),
+          { type: "module" }
+        );
+        workerRef.current = worker;
+
+        worker.onmessage = (
+          ev: MessageEvent<{
+            type: string;
+            entries?: Array<{ name: string; size: number }>;
+            message?: string;
+          }>
+        ) => {
+          const { type } = ev.data;
+
+          if (type === "filelist") {
+            const list = ev.data.entries ?? [];
+            const initialEntries: RarEntry[] = list.map((entry) => ({
+              name: entry.name,
+              size: entry.size,
+              status: "pending",
+            }));
+            setEntries(initialEntries);
+          } else if (type === "done") {
+            terminateWorker();
+            setUiState("filelist_gate");
+          } else if (type === "needs_password") {
+            terminateWorker();
+            setUiState("needs_password");
+          } else if (type === "error") {
+            terminateWorker();
+            setErrorMsg(ev.data.message ?? "Could not read archive.");
+            setUiState("error");
+          }
+        };
+
+        worker.onerror = (err) => {
+          terminateWorker();
+          setErrorMsg(err.message ?? "Worker crashed.");
+          setUiState("error");
+        };
+
+        // Transfer buffer — listonly mode
+        worker.postMessage({ type: "listonly", buffer, password: pwd }, [buffer]);
+      };
+
+      reader.onerror = () => {
+        setErrorMsg("Could not read the file.");
+        setUiState("error");
+      };
+
+      reader.readAsArrayBuffer(file);
+    },
+    [terminateWorker]
+  );
+
+  // ── File selection gate ───────────────────────────────────────────────────
 
   const handleFile = useCallback(
     (file: File) => {
@@ -197,19 +327,21 @@ export default function UnrarClient() {
         return;
       }
 
-      // Size gate
-      if (file.size > MAX_BYTES_FREE && !isPro) {
-        setRarFile(file);
-        setUpsellOpen(true);
-        return;
-      }
-
       setRarFile(file);
       setPassword("");
       setPasswordInput("");
+
+      // Large file + not yet unlocked → show list preview, gate extraction
+      if (file.size > MAX_BYTES_FREE && !isPro) {
+        startListOnly(file);
+        trackEvent("unrar_gate_shown", { size_mb: Math.round(file.size / 1024 / 1024) });
+        return;
+      }
+
+      // Small file or already pro/day-pass → extract immediately
       startExtraction(file);
     },
-    [isPro, startExtraction]
+    [isPro, startExtraction, startListOnly]
   );
 
   const onDrop = useCallback(
@@ -243,6 +375,100 @@ export default function UnrarClient() {
     },
     [rarFile, passwordInput, startExtraction]
   );
+
+  // ── Day Pass unlock flow ──────────────────────────────────────────────────
+
+  /**
+   * Polls GET /api/day-pass/status every POLL_INTERVAL_MS.
+   * When active → stops, then auto-extracts the file still in memory.
+   */
+  const startPolling = useCallback(
+    (file: File, pwd?: string) => {
+      stopPolling();
+      setPollTimedOut(false);
+      pollStartRef.current = Date.now();
+
+      pollTimerRef.current = setInterval(async () => {
+        // Time-out guard
+        if (Date.now() - pollStartRef.current > POLL_MAX_MS) {
+          stopPolling();
+          setPollTimedOut(true);
+          return;
+        }
+
+        try {
+          const res = await fetch("/api/day-pass/status");
+          if (!res.ok) return; // transient error — keep polling
+          const data = (await res.json()) as { active: boolean };
+
+          if (data.active) {
+            stopPolling();
+            trackEvent("unrar_daypass_unlocked_poll");
+            // Auto-extract the file that is still in memory
+            startExtraction(file, pwd);
+          }
+        } catch {
+          // network hiccup — keep polling
+        }
+      }, POLL_INTERVAL_MS);
+    },
+    [stopPolling, startExtraction]
+  );
+
+  const handleUnlockClick = useCallback(async () => {
+    if (!rarFile) return;
+
+    // Step 1: ensure the user is logged in (Day Pass requires email)
+    if (!session?.user?.email) {
+      signIn(undefined, { callbackUrl: `/tools/unrar` });
+      return;
+    }
+
+    trackEvent("unrar_daypass_checkout_start");
+
+    try {
+      const res = await fetch("/api/checkout/day-pass", { method: "POST" });
+
+      if (res.status === 409) {
+        // Already has an active pass (edge case: session JWT not yet refreshed)
+        startExtraction(rarFile, password || undefined);
+        return;
+      }
+
+      if (!res.ok) {
+        const body = (await res.json()) as { error?: string };
+        setErrorMsg(body.error ?? "Could not start checkout. Please try again.");
+        setUiState("error");
+        return;
+      }
+
+      const { url } = (await res.json()) as { url: string };
+
+      // Open Stripe in a popup so the unrar tab stays alive (file stays in memory)
+      const popup = window.open(url, "_blank", "width=520,height=720,noopener,noreferrer");
+
+      if (popup) {
+        // Popup opened successfully — start polling
+        setUiState("awaiting_payment");
+        startPolling(rarFile, password || undefined);
+      } else {
+        // Popup was blocked by the browser — fall back to same-tab redirect.
+        // We append ?daypass=active as success_url (handled on mount).
+        // The checkout success_url on the Stripe session already points to /dashboard,
+        // but the user will be redirected back to /tools/unrar?daypass=active
+        // via the cancel_url-style redirect we construct here.
+        //
+        // Since we can't change the Stripe success_url (already set), we just
+        // redirect the user to Stripe. On return they'll land on /dashboard,
+        // but we show a banner in /tools/unrar if they come back manually.
+        // Best we can do without changing shared checkout config.
+        window.location.href = url;
+      }
+    } catch {
+      setErrorMsg("Network error. Please try again.");
+      setUiState("filelist_gate");
+    }
+  }, [rarFile, session, password, startExtraction, startPolling]);
 
   // ── Download helpers ──────────────────────────────────────────────────────
 
@@ -279,6 +505,7 @@ export default function UnrarClient() {
 
   const handleReset = useCallback(() => {
     terminateWorker();
+    stopPolling();
     setUiState("idle");
     setRarFile(null);
     setEntries([]);
@@ -286,23 +513,38 @@ export default function UnrarClient() {
     setErrorMsg("");
     setPassword("");
     setPasswordInput("");
-  }, [terminateWorker]);
+    setPollTimedOut(false);
+  }, [terminateWorker, stopPolling]);
 
   // ── Render helpers ────────────────────────────────────────────────────────
 
   const readyEntries = entries.filter((e) => e.status === "ready");
+  const fileSizeMB = rarFile ? (rarFile.size / 1024 / 1024).toFixed(0) : "0";
+  const totalUnpackedMB = (totalBytes(entries) / 1024 / 1024).toFixed(1);
 
   // ── JSX ───────────────────────────────────────────────────────────────────
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-4 pb-16">
-      {/* Pro upsell modal */}
-      <ProUpsellModal
-        open={upsellOpen}
-        onClose={() => setUpsellOpen(false)}
-        trigger="file_size"
-        freeLimit={200}
-      />
+
+      {/* ── Banner: popup-blocked redirect fallback ── */}
+      {justUnlockedViaRedirect && (
+        <div className="mb-4 flex items-start gap-3 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-xl">
+          <CheckCircle2
+            size={18}
+            className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5"
+            strokeWidth={1.5}
+          />
+          <div>
+            <p className="text-sm font-medium text-emerald-800 dark:text-emerald-300">
+              You&apos;re unlocked for 24 hours!
+            </p>
+            <p className="text-xs text-emerald-700 dark:text-emerald-400 mt-0.5">
+              Drop your .rar file again below to extract it instantly.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ── IDLE: dropzone ── */}
       {uiState === "idle" && (
@@ -343,7 +585,7 @@ export default function UnrarClient() {
           </p>
           <span className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#525252]">
             <Lock size={11} />
-            Files never leave your device — 100% in-browser
+            Files never leave your device. 100% in-browser
           </span>
           <p className="text-xs text-[#A3A3A3] dark:text-[#525252] mt-1">
             RAR4, RAR5, password-protected · Free up to 200 MB
@@ -351,8 +593,8 @@ export default function UnrarClient() {
         </div>
       )}
 
-      {/* ── LOADING / EXTRACTING ── */}
-      {(uiState === "loading" || uiState === "extracting") && (
+      {/* ── LOADING / LISTING / EXTRACTING ── */}
+      {(uiState === "loading" || uiState === "listing" || uiState === "extracting") && (
         <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-2xl p-8 text-center">
           <Loader2
             className="mx-auto mb-4 text-[#6366F1] animate-spin"
@@ -360,7 +602,11 @@ export default function UnrarClient() {
             strokeWidth={1.5}
           />
           <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-2">
-            {uiState === "loading" ? "Reading file…" : `Extracting files — ${progress}%`}
+            {uiState === "loading"
+              ? "Reading file…"
+              : uiState === "listing"
+              ? "Scanning archive…"
+              : `Extracting files ${progress}%`}
           </p>
           {uiState === "extracting" && (
             <>
@@ -375,6 +621,150 @@ export default function UnrarClient() {
                   {readyEntries.length} / {entries.length} files extracted
                 </p>
               )}
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ── FILELIST GATE: show list, block extraction ── */}
+      {uiState === "filelist_gate" && rarFile && (
+        <div className="space-y-4">
+          {/* Confirmation header */}
+          <div className="flex items-center gap-2.5 px-4 py-3 bg-[#F0FDF4] dark:bg-[#052E16]/40 border border-[#BBF7D0] dark:border-[#166534]/40 rounded-xl">
+            <CheckCircle2
+              size={16}
+              className="text-emerald-600 dark:text-emerald-400 shrink-0"
+              strokeWidth={1.5}
+            />
+            <p className="text-sm text-emerald-800 dark:text-emerald-300">
+              <span className="font-semibold">Found {entries.length} file{entries.length !== 1 ? "s" : ""} inside</span>
+              {" "}({totalUnpackedMB} MB unpacked) · your archive is intact
+            </p>
+          </div>
+
+          {/* File list preview */}
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden divide-y divide-[#F5F5F5] dark:divide-[#252525]">
+            {entries.slice(0, 8).map((entry) => (
+              <div
+                key={entry.name}
+                className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-[#191919]"
+              >
+                <FileText
+                  size={15}
+                  className="text-[#A3A3A3] shrink-0"
+                  strokeWidth={1.5}
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-[#171717] dark:text-[#E5E5E5] truncate">
+                    {basename(entry.name)}
+                  </p>
+                  <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
+                    {formatBytes(entry.size)}
+                  </p>
+                </div>
+              </div>
+            ))}
+            {entries.length > 8 && (
+              <div className="px-4 py-2.5 bg-[#FAFAFA] dark:bg-[#191919] text-xs text-[#A3A3A3] dark:text-[#525252]">
+                + {entries.length - 8} more file{entries.length - 8 !== 1 ? "s" : ""}
+              </div>
+            )}
+          </div>
+
+          {/* Gate card */}
+          <div className="border border-[#6366F1]/30 dark:border-[#6366F1]/20 bg-[#F5F3FF] dark:bg-[#1E1B4B]/30 rounded-2xl p-5">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#6366F1]/10 dark:bg-[#6366F1]/20 flex items-center justify-center shrink-0">
+                <Upload size={16} className="text-[#6366F1]" strokeWidth={1.5} />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-0.5">
+                  This archive is {fileSizeMB} MB, over the 200 MB free limit
+                </p>
+                <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-4">
+                  Unlock extraction and download instantly. One pass, all tools, 24 hours.
+                </p>
+                <button
+                  onClick={handleUnlockClick}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold bg-[#6366F1] hover:bg-[#4F46E5] active:scale-[0.98] text-white rounded-xl transition-all shadow-sm"
+                >
+                  <Zap size={15} strokeWidth={2} />
+                  Unlock &amp; extract for $2.99
+                </button>
+                <p className="text-xs text-[#A3A3A3] dark:text-[#525252] mt-2">
+                  24-hour Day Pass · No subscription · Instant unlock
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Reset */}
+          <div className="text-center">
+            <button
+              onClick={handleReset}
+              className="text-xs text-[#A3A3A3] dark:text-[#525252] hover:text-[#737373] dark:hover:text-[#A3A3A3] transition-colors"
+            >
+              Choose a different file
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── AWAITING PAYMENT ── */}
+      {uiState === "awaiting_payment" && rarFile && (
+        <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-2xl p-8 text-center space-y-4">
+          {pollTimedOut ? (
+            <>
+              <AlertCircle size={32} className="mx-auto text-amber-500" strokeWidth={1.5} />
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
+                Payment window timed out
+              </p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                If you completed the payment, drop the file again. Your pass is active.
+              </p>
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() => {
+                    setPollTimedOut(false);
+                    handleReset();
+                  }}
+                  className="px-4 py-2 text-sm font-medium border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] rounded-lg hover:bg-[#FAFAFA] dark:hover:bg-[#252525] transition-colors"
+                >
+                  Drop file again
+                </button>
+                <button
+                  onClick={handleUnlockClick}
+                  className="px-4 py-2 text-sm font-medium bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg transition-colors"
+                >
+                  Try again
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="relative mx-auto w-10 h-10">
+                <Loader2
+                  className="absolute inset-0 text-[#6366F1] animate-spin"
+                  size={40}
+                  strokeWidth={1.5}
+                />
+              </div>
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
+                Waiting for payment…
+              </p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">
+                Complete the checkout in the popup. Your file will extract automatically the moment the payment goes through.
+              </p>
+              <div className="inline-flex items-center gap-1.5 text-xs text-[#A3A3A3] dark:text-[#525252]">
+                <ExternalLink size={11} strokeWidth={1.5} />
+                Popup not showing?{" "}
+                <button
+                  onClick={handleUnlockClick}
+                  className="text-[#6366F1] hover:underline"
+                >
+                  Open checkout again
+                </button>
+              </div>
             </>
           )}
         </div>
@@ -528,7 +918,7 @@ export default function UnrarClient() {
         </div>
       )}
 
-      {/* ── CTA links (always visible below tool) ── */}
+      {/* ── CTA links (always visible below tool in idle/error) ── */}
       {(uiState === "idle" || uiState === "error") && (
         <div className="mt-6 flex flex-wrap gap-3 justify-center text-xs text-[#A3A3A3] dark:text-[#525252]">
           <span className="flex items-center gap-1">
