@@ -1,5 +1,33 @@
 [
   {
+    "slug": "apply-lut-batch-photos-free-2026",
+    "title": "How to Apply a LUT to a Batch of Photos Free [2026]",
+    "description": "Apply one .cube LUT to 50 photos at once. Free, no Lightroom needed. Compare batch workflows: SammaPix, Lightroom, Premiere, DaVinci, FFmpeg. Step-by-",
+    "keywords": [
+      "apply lut to batch photos",
+      "batch apply lut free",
+      "apply lut to multiple photos",
+      "apply cube file batch",
+      "batch color grading photos"
+    ],
+    "publishedDate": "2026-05-18",
+    "url": "/blog/apply-lut-batch-photos-free-2026"
+  },
+  {
+    "slug": "extract-lut-from-photo-free-2026",
+    "title": "How to Extract a LUT from a Photo Free [2026]",
+    "description": "Turn any photo into a real 3D LUT in 30 seconds. Free, browser-based, exports .cube for Lightroom and Premiere. Step-by-step guide with examples.",
+    "keywords": [
+      "extract lut from photo",
+      "create lut from image",
+      "free lut generator",
+      "photo to lut",
+      "lightroom lut from photo"
+    ],
+    "publishedDate": "2026-05-18",
+    "url": "/blog/extract-lut-from-photo-free-2026"
+  },
+  {
     "slug": "ai-photo-renamer-custom-directive",
     "title": "AI Photo Renamer with Custom Directives",
     "description": "How custom directives let you bias an AI photo renamer toward your naming style — brand-first, ecommerce, Pinterest, niche keywords.",
@@ -10,8 +38,120 @@
       "ai rename brand name photos",
       "ai ecommerce product rename"
     ],
-    "publishedDate": "2026-04-29",
+    "publishedDate": "2026-05-17",
     "url": "/blog/ai-photo-renamer-custom-directive"
+  },
+  {
+    "slug": "does-discord-strip-exif-metadata",
+    "title": "Does Discord Strip EXIF Metadata? Honest 2026 Answer",
+    "description": "Everyone claims Discord strips EXIF — but Discord has never documented it. We mapped what 6 sources say, the file-attachment loophole, and what to do ",
+    "keywords": [
+      "does discord strip exif metadata",
+      "discord exif data",
+      "discord image privacy",
+      "does discord remove gps",
+      "discord metadata leak"
+    ],
+    "publishedDate": "2026-05-17",
+    "url": "/blog/does-discord-strip-exif-metadata"
+  },
+  {
+    "slug": "does-imessage-strip-exif-metadata",
+    "title": "Does iMessage Strip EXIF Metadata? Honest 2026 Answer",
+    "description": "iMessage does NOT strip EXIF — your GPS coordinates travel with every photo. Here is the truth + the iOS toggle that fixes it in 5 seconds.",
+    "keywords": [
+      "does imessage strip exif",
+      "imessage exif metadata",
+      "imessage gps location",
+      "iphone photo metadata imessage",
+      "imessage photo privacy"
+    ],
+    "publishedDate": "2026-05-17",
+    "url": "/blog/does-imessage-strip-exif-metadata"
+  },
+  {
+    "slug": "does-reddit-strip-exif-metadata",
+    "title": "Does Reddit Strip EXIF Metadata? Honest 2026 Answer",
+    "description": "Reddit strips EXIF on most uploads — but a real HackerOne bug exposed GPS via HEIC conversion. The history, the current status, and what to do.",
+    "keywords": [
+      "does reddit strip exif",
+      "does reddit remove metadata",
+      "reddit exif gps",
+      "reddit photo privacy",
+      "reddit heic bug"
+    ],
+    "publishedDate": "2026-05-17",
+    "url": "/blog/does-reddit-strip-exif-metadata"
+  },
+  {
+    "slug": "does-signal-strip-exif-metadata",
+    "title": "Does Signal Strip EXIF Metadata? Honest 2026 Answer",
+    "description": "Signal is the only major messaging app that strips EXIF by default — and the only one that never keeps it server-side. Here is what is true and the op",
+    "keywords": [
+      "does signal strip exif",
+      "does signal strip metadata",
+      "signal exif removal",
+      "signal photo privacy",
+      "signal metadata gps"
+    ],
+    "publishedDate": "2026-05-17",
+    "url": "/blog/does-signal-strip-exif-metadata"
+  },
+  {
+    "slug": "does-telegram-strip-exif-metadata",
+    "title": "Does Telegram Strip EXIF Metadata? Honest 2026 Answer",
+    "description": "Telegram strips EXIF only when you compress — send as file and full GPS coordinates travel intact. The 5-second trap most users fall into, and how to ",
+    "keywords": [
+      "does telegram strip exif",
+      "does telegram remove metadata",
+      "telegram exif gps",
+      "telegram photo privacy",
+      "telegram file vs photo upload"
+    ],
+    "publishedDate": "2026-05-17",
+    "url": "/blog/does-telegram-strip-exif-metadata"
+  },
+  {
+    "slug": "image-compression-benchmark-2026",
+    "title": "Methodology",
+    "description": "100 images, 10 tools, 4 quality levels. We measured file size reduction, SSIMULACRA 2 visual quality, processing speed, and privacy for every major co",
+    "keywords": [
+      "image compression benchmark 2026",
+      "tinypng vs squoosh",
+      "best image compression tool",
+      "image compression comparison test",
+      "tinypng alternative benchmark"
+    ],
+    "publishedDate": "2026-05-17",
+    "url": "/blog/image-compression-benchmark-2026"
+  },
+  {
+    "slug": "optimize-images-shopify-free-guide",
+    "title": "Why image optimization matters for Shopify",
+    "description": "",
+    "keywords": [
+      "optimize images for shopify",
+      "shopify image optimization",
+      "shopify compress images",
+      "image optimizer for shopify",
+      "bulk resize images shopify"
+    ],
+    "publishedDate": "2026-05-08",
+    "url": "/blog/optimize-images-shopify-free-guide"
+  },
+  {
+    "slug": "image-compression-statistics-2026",
+    "title": "Web performance & page weight",
+    "description": "67 cited statistics on image compression, format adoption, Core Web Vitals impact, and e-commerce conversion rates. The definitive reference for 2026.",
+    "keywords": [
+      "image compression statistics",
+      "image optimization stats 2026",
+      "web performance image data",
+      "webp adoption rate",
+      "avif adoption statistics"
+    ],
+    "publishedDate": "2026-05-04",
+    "url": "/blog/image-compression-statistics-2026"
   },
   {
     "slug": "upscale-image-ai-free-2026",
@@ -43,8 +183,8 @@
   },
   {
     "slug": "favicon-best-practices-2026",
-    "title": "Favicon 2026: All Sizes, SVG + ICO, Dark Mode (Copy-Paste Code)",
-    "description": "Every favicon size for 2026, SVG + ICO hybrid setup, dark mode, PWA manifest icons, and the 4 HTML tags to copy-paste in every site. Generator include",
+    "title": "Favicon Best Practices 2026: 4 Sizes + Animated Browser Support",
+    "description": "Most favicon guides list 22 sizes. You only need 4. The exact PNG/SVG/ICO setup for crisp icons across Chrome, Safari, dark mode, iOS, and PWA — with ",
     "keywords": [
       "favicon best practices",
       "favicon sizes 2026",
@@ -154,48 +294,6 @@
     "url": "/blog/ai-alt-text-accuracy-test-2026"
   },
   {
-    "slug": "image-compression-benchmark-2026",
-    "title": "Methodology",
-    "description": "100 images, 10 tools, 4 quality levels. We measured file size reduction, SSIMULACRA 2 visual quality, processing speed, and privacy for every major co",
-    "keywords": [
-      "image compression benchmark 2026",
-      "tinypng vs squoosh",
-      "best image compression tool",
-      "image compression comparison test",
-      "tinypng alternative benchmark"
-    ],
-    "publishedDate": "2026-04-14",
-    "url": "/blog/image-compression-benchmark-2026"
-  },
-  {
-    "slug": "image-compression-statistics-2026",
-    "title": "Web performance & page weight",
-    "description": "67 cited statistics on image compression, format adoption, Core Web Vitals impact, and e-commerce conversion rates. The definitive reference for 2026.",
-    "keywords": [
-      "image compression statistics",
-      "image optimization stats 2026",
-      "web performance image data",
-      "webp adoption rate",
-      "avif adoption statistics"
-    ],
-    "publishedDate": "2026-04-14",
-    "url": "/blog/image-compression-statistics-2026"
-  },
-  {
-    "slug": "optimize-images-shopify-free-guide",
-    "title": "Why image optimization matters for Shopify",
-    "description": "",
-    "keywords": [
-      "optimize images for shopify",
-      "shopify image optimization",
-      "shopify compress images",
-      "image optimizer for shopify",
-      "bulk resize images shopify"
-    ],
-    "publishedDate": "2026-04-14",
-    "url": "/blog/optimize-images-shopify-free-guide"
-  },
-  {
     "slug": "webp-vs-avif-vs-jpeg-comparison",
     "title": "AVIF vs WebP vs JPEG: Best Image Format 2026",
     "description": "AVIF vs WebP vs JPEG compared with real benchmarks, browser support data, and an interactive tool. Find the right image format for your site in 2026.",
@@ -225,7 +323,7 @@
   },
   {
     "slug": "instagram-image-quality-loss-fix",
-    "title": "Why Instagram Ruins Your Photo Quality (And How to Fix It)",
+    "title": "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
     "description": "Instagram compresses your photos up to 13x. Learn the exact settings — dimensions, format, color profile — to upload photos that actually look sharp. ",
     "keywords": [
       "instagram image quality loss",
@@ -239,14 +337,14 @@
   },
   {
     "slug": "best-free-topaz-gigapixel-alternatives-2026",
-    "title": "7 Free Topaz Gigapixel Alternatives Tested 2026 (Real Benchmark)",
-    "description": "Topaz Gigapixel AI went subscription ($199/year). Here are 7 free alternatives for image upscaling tested on real photos — with quality comparison and",
+    "title": "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
+    "description": "Topaz Gigapixel costs $99-199 in 2026. We tested 7 free alternatives on 50 real photos — one beats Topaz on faces. Full pricing + benchmark inside.",
     "keywords": [
-      "topaz gigapixel alternative free",
-      "free image upscaler 2026",
-      "upscale image without topaz",
-      "best free ai upscaler",
-      "topaz gigapixel free alternative"
+      "topaz gigapixel ai alternatives 2026",
+      "topaz gigapixel ai pricing 2026",
+      "topaz gigapixel ai price 2026",
+      "topaz gigapixel ai free",
+      "topaz gigapixel ai vs alternatives 2026"
     ],
     "publishedDate": "2026-04-10",
     "url": "/blog/best-free-topaz-gigapixel-alternatives-2026"
@@ -295,8 +393,8 @@
   },
   {
     "slug": "which-apps-strip-photo-metadata",
-    "title": "Which Apps Strip Photo Metadata? 12 Tested + WhatsApp Trap [2026]",
-    "description": "We tested 12 apps for EXIF stripping. Some keep your GPS data hidden inside. See the full results — the WhatsApp document trick most people miss.",
+    "title": "Does Your Messaging App Strip EXIF Metadata? 12 Tested [2026]",
+    "description": "We sent the same photo through 12 messaging apps (Instagram, WhatsApp, Signal, Telegram, Discord) and checked the EXIF. The 4 secretly leaking your GP",
     "keywords": [
       "which apps strip photo metadata",
       "does whatsapp remove exif",
@@ -323,8 +421,8 @@
   },
   {
     "slug": "compress-images-whatsapp-quality",
-    "title": "WhatsApp Image Quality Loss? Fix It Before Sending [2026]",
-    "description": "WhatsApp cuts 80% of your photo quality. Pre-compress to 200-300KB at 1920px and WhatsApp barely touches them. Free tool + tested method inside.",
+    "title": "Does WhatsApp Compress Images? Yes — 3-Step Fix (2026)",
+    "description": "Yes — WhatsApp compresses photos by ~80% even at the 1600px limit. The 3-step pre-upload fix (size, format, color profile) that survives compression o",
     "keywords": [
       "compress images for whatsapp",
       "whatsapp image quality",
@@ -365,8 +463,8 @@
   },
   {
     "slug": "optimize-images-core-web-vitals-2026",
-    "title": "How to Optimize Images for Core Web Vitals: LCP, CLS and INP (2026 Guide)",
-    "description": "A complete guide to optimizing images for Core Web Vitals. Learn how images affect LCP, CLS, and INP scores, with real benchmarks and a practical opti",
+    "title": "Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix",
+    "description": "Images are the LCP element in 72% of mobile pages. Step-by-step workflow to fix LCP, CLS, INP using WebP, AVIF, and lazy loading. Real benchmarks insi",
     "keywords": [
       "optimize images core web vitals",
       "image optimization LCP",
@@ -506,7 +604,7 @@
   {
     "slug": "best-tinypng-alternative-2026",
     "title": "TinyPNG Alternative: Why Photographers Switch to SammaPix (2026)",
-    "description": "Looking for a TinyPNG alternative? SammaPix compresses JPG, PNG, WebP, GIF and AVIF in your browser, no uploads, no file limits, 35 tools free. See th",
+    "description": "TinyPNG is trusted and excellent at one thing. But if you need batch processing, privacy, format conversion, or AI renaming, SammaPix does more, free.",
     "keywords": [
       "tinypng alternative",
       "tinypng vs sammapix",
@@ -561,7 +659,7 @@
   },
   {
     "slug": "compress-images-without-losing-quality",
-    "title": "Compress Images Without Losing Quality (2026)",
+    "title": "Compress Images Without Losing Quality: 5 Methods Tested",
     "description": "How to compress images without losing quality: lossy vs lossless, the best quality settings per format, and a practical workflow for web optimization.",
     "keywords": [
       "compress images without losing quality",
@@ -771,8 +869,8 @@
   },
   {
     "slug": "best-image-compression-tools-2026",
-    "title": "Best Free Image Compression Tools in 2026 - Compared",
-    "description": "Honest comparison of the 6 best free PNG and image compression tools in 2026: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, and iLoveIMG test",
+    "title": "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn",
+    "description": "We tested 6 free image compressors on real photos: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, iLoveIMG. Compression %, quality, speed, pri",
     "keywords": [
       "best image compression tools 2026",
       "best png compression tools 2026",

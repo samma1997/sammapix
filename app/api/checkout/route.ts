@@ -5,6 +5,15 @@ import { stripe } from "@/lib/stripe";
 import { sendMetaEvent } from "@/lib/meta-conversions";
 import { incrWithTTL } from "@/lib/redis";
 
+/** Extract a stable IP string from the request (for guest rate-limiting). */
+function getClientIp(req: NextRequest): string {
+  return (
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
@@ -26,16 +35,22 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
-    return NextResponse.json(
-      { error: "Login required", code: "UNAUTHORIZED" },
-      { status: 401 }
-    );
+  // Session is optional — guest checkout supported (Stripe collects email).
+  // If logged in, we pre-fill the email and use it for rate-limiting / anti-duplicate.
+  let userEmail: string | undefined;
+  try {
+    const session = await getServerSession(authOptions);
+    userEmail = session?.user?.email?.trim() ?? undefined;
+  } catch {
+    userEmail = undefined;
   }
 
-  // Rate limit: 5 checkout attempts per minute per authenticated user
-  const rlCount = await incrWithTTL(`rl:checkout:${session.user.email}`, 60);
+  // Rate limit: 5 checkout attempts per minute.
+  // Authenticated users: keyed by email. Guests: keyed by IP.
+  const rlKey = userEmail
+    ? `rl:checkout:${userEmail}`
+    : `rl:checkout:ip:${getClientIp(req)}`;
+  const rlCount = await incrWithTTL(rlKey, 60);
   if (rlCount !== null && rlCount > 5) {
     return NextResponse.json(
       { error: "Too many requests", code: "RATE_LIMITED" },
@@ -44,34 +59,37 @@ export async function POST(req: NextRequest) {
   }
 
   // Anti-duplicate: refuse new checkout if this email already has an active or
-  // trialing subscription. Without this guard, a double-click could create two
-  // parallel subscriptions billed twice on trial-end (real case observed
-  // 2026-05-07 with mike@akolades.com).
-  try {
-    const existingCustomers = await stripe.customers.list({
-      email: session.user.email,
-      limit: 5,
-    });
-    for (const cus of existingCustomers.data) {
-      const subs = await stripe.subscriptions.list({
-        customer: cus.id,
-        status: "all",
+  // trialing subscription. Only possible for logged-in users (guests have no
+  // known email at this point — the webhook handles the post-payment check).
+  // Without this guard, a double-click could create two parallel subscriptions
+  // billed twice on trial-end (real case observed 2026-05-07 with mike@akolades.com).
+  if (userEmail) {
+    try {
+      const existingCustomers = await stripe.customers.list({
+        email: userEmail,
         limit: 5,
       });
-      if (subs.data.some((s) => s.status === "trialing" || s.status === "active")) {
-        return NextResponse.json(
-          {
-            error: "You already have an active subscription. Manage it from your dashboard.",
-            code: "SUBSCRIPTION_EXISTS",
-            redirectTo: "/dashboard/settings",
-          },
-          { status: 409 }
-        );
+      for (const cus of existingCustomers.data) {
+        const subs = await stripe.subscriptions.list({
+          customer: cus.id,
+          status: "all",
+          limit: 5,
+        });
+        if (subs.data.some((s) => s.status === "trialing" || s.status === "active")) {
+          return NextResponse.json(
+            {
+              error: "You already have an active subscription. Manage it from your dashboard.",
+              code: "SUBSCRIPTION_EXISTS",
+              redirectTo: "/dashboard/settings",
+            },
+            { status: 409 }
+          );
+        }
       }
+    } catch (err) {
+      // If Stripe lookup fails, log but don't block checkout (avoid lockout).
+      console.error("[checkout] Anti-duplicate check failed:", err instanceof Error ? err.message : err);
     }
-  } catch (err) {
-    // If Stripe lookup fails, log but don't block checkout (avoid lockout).
-    console.error("[checkout] Anti-duplicate check failed:", err instanceof Error ? err.message : err);
   }
 
   // Parse plan type and Meta + GA4 cookies from request body
@@ -127,7 +145,9 @@ export async function POST(req: NextRequest) {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
-      customer_email: session.user.email,
+      // Pre-fill email for logged-in users; Stripe Checkout collects it for guests.
+      // customer_creation: "always" ensures we get a Stripe Customer regardless.
+      ...(userEmail ? { customer_email: userEmail } : { customer_creation: "always" }),
       // Stripe doesn't allow discounts + allow_promotion_codes together.
       // If founding coupon is available, apply it automatically.
       // Otherwise, let users enter promo codes manually.
@@ -135,10 +155,11 @@ export async function POST(req: NextRequest) {
         ? { discounts: [{ coupon: FOUNDING_COUPON_ID }] }
         : { allow_promotion_codes: true }
       ),
-      success_url: `${appUrl}/dashboard?upgraded=true`,
+      // {CHECKOUT_SESSION_ID} is replaced by Stripe — lets /auth/complete log in the user automatically.
+      success_url: `${appUrl}/auth/complete?session_id={CHECKOUT_SESSION_ID}&dest=%2Fdashboard%3Fupgraded%3Dtrue`,
       cancel_url: `${appUrl}/dashboard/upgrade?canceled=true`,
       metadata: {
-        userId: (session.user as { id?: string }).id ?? session.user.email,
+        userId: userEmail ?? "",
         plan,
         founding_member: applyFoundingCoupon ? "true" : "false",
         // Pass _ga cookie so the webhook can fire GA4 purchase event
@@ -147,14 +168,14 @@ export async function POST(req: NextRequest) {
       },
       subscription_data: {
         trial_period_days: TRIAL_DAYS,
-        metadata: { userId: (session.user as { id?: string }).id ?? session.user.email },
+        metadata: { userId: userEmail ?? "" },
       },
     });
 
     sendMetaEvent({
       eventName: "InitiateCheckout",
       sourceUrl: `${appUrl}/dashboard/upgrade`,
-      email: session.user.email,
+      email: userEmail ?? "",
       ipAddress: (req as unknown as { ip?: string }).ip ?? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ?? undefined,
       userAgent: req.headers.get("user-agent") ?? undefined,
       fbp,

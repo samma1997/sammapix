@@ -87,7 +87,8 @@ export async function POST(req: NextRequest) {
       ...(email ? { customer_email: email } : {}),
       // Ensure Stripe always collects and stores the customer email (needed for guest grant).
       customer_creation: "always",
-      success_url: `${appUrl}/dashboard?daypass=active`,
+      // {CHECKOUT_SESSION_ID} è sostituito da Stripe — /auth/complete logga l'utente automaticamente.
+      success_url: `${appUrl}/auth/complete?session_id={CHECKOUT_SESSION_ID}&dest=%2Ftools%2Funrar%3Fdaypass%3Dactive`,
       cancel_url: `${appUrl}/dashboard?daypass=canceled`,
       metadata: {
         type: "day_pass",

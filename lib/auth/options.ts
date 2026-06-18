@@ -1,6 +1,7 @@
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 /** How often (ms) we re-check the user's plan from Stripe in the JWT callback. */
 const PLAN_REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
@@ -14,6 +15,58 @@ export const authOptions: AuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID ?? "",
       clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
+    }),
+    CredentialsProvider({
+      id: "stripe-checkout",
+      name: "Stripe Checkout",
+      credentials: {
+        session_id: { label: "Session ID", type: "text" },
+      },
+      async authorize(credentials) {
+        const sessionId = credentials?.session_id ?? "";
+
+        // Basic format validation — never trust the client
+        if (!sessionId.startsWith("cs_")) return null;
+
+        try {
+          // Monouso: impedisce riuso del session_id per creare più sessioni
+          const { exec: redisExec } = await import("@/lib/redis");
+          const usedKey = `stripe-login-used:${sessionId}`;
+          const alreadyUsed = await redisExec<string | null>(["GET", usedKey]);
+          if (alreadyUsed !== null) {
+            console.warn(`[stripe-checkout] session_id already used: ${sessionId.slice(0, 20)}...`);
+            return null;
+          }
+
+          const { stripe } = await import("@/lib/stripe");
+          const session = await stripe.checkout.sessions.retrieve(sessionId, {
+            expand: ["customer"],
+          });
+
+          // Accetta SOLO sessioni completate (copre pagamenti one-time + trial)
+          // payment_status può essere "no_payment_required" per i trial — NON filtrare su di esso
+          if (session.status !== "complete") return null;
+
+          const email = session.customer_details?.email?.trim();
+          if (!email) return null;
+
+          // Marca il session_id come usato (TTL 1h per pulizia automatica Redis)
+          await redisExec(["SET", usedKey, "1", "EX", 3600]);
+
+          return {
+            id: email,
+            email,
+            name: session.customer_details?.name ?? null,
+          };
+        } catch (err) {
+          // Mai throware — crasherebbe NextAuth. Logga e ritorna null.
+          console.error(
+            "[stripe-checkout] authorize error:",
+            err instanceof Error ? err.message : err
+          );
+          return null;
+        }
+      },
     }),
   ],
   session: {
