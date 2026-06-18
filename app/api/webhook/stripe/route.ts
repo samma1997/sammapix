@@ -167,16 +167,23 @@ export async function POST(req: NextRequest) {
         }).catch(() => {});
       } else if (metadata.type === "day_pass") {
         // ----------------------------------------------------------------
-        // Day Pass — 24h one-time access
+        // Day Pass — 24h one-time access (supports guest checkout)
+        // metadata.userEmail may be "" for guests who paid without logging in.
+        // In that case, fall back to the email Stripe collected at checkout.
         // ----------------------------------------------------------------
-        const userEmail = metadata.userEmail;
+        const userEmail =
+          (metadata.userEmail || session.customer_details?.email || session.customer_email || "").trim();
+
         if (!userEmail) {
-          console.error("[stripe/webhook] Day Pass metadata missing userEmail");
+          console.error(
+            "[stripe/webhook] Day Pass: cannot resolve email — metadata.userEmail empty and no customer_details.email on session",
+            session.id
+          );
           break;
         }
 
         await grantDayPass(userEmail);
-        console.log(`[stripe/webhook] Day Pass granted: ${userEmail}`);
+        console.log(`[stripe/webhook] Day Pass granted: ${userEmail} (session ${session.id})`);
 
         // GA4 purchase event for Day Pass
         const dpGaClientId = parseGAClientId(metadata.ga_cookie) ?? userEmail;

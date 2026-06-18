@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 
@@ -384,12 +384,16 @@ export default function UnrarClient() {
 
   // ── Day Pass unlock flow ──────────────────────────────────────────────────
 
+  /** Email resolved after a guest payment (shown in post-unlock note). */
+  const [guestEmail, setGuestEmail] = useState<string>("");
+
   /**
-   * Polls GET /api/day-pass/status every POLL_INTERVAL_MS.
-   * When active → stops, then auto-extracts the file still in memory.
+   * Polls GET /api/day-pass/checkout-status?session_id=<id> every POLL_INTERVAL_MS.
+   * Works for both guests and logged-in users — no session required.
+   * When paid → stops, grants pass (server-side), auto-extracts the file.
    */
   const startPolling = useCallback(
-    (file: File, pwd?: string) => {
+    (file: File, sessionId: string, pwd?: string) => {
       stopPolling();
       setPollTimedOut(false);
       pollStartRef.current = Date.now();
@@ -403,12 +407,16 @@ export default function UnrarClient() {
         }
 
         try {
-          const res = await fetch("/api/day-pass/status");
+          const res = await fetch(
+            `/api/day-pass/checkout-status?session_id=${encodeURIComponent(sessionId)}`
+          );
           if (!res.ok) return; // transient error — keep polling
-          const data = (await res.json()) as { active: boolean };
 
-          if (data.active) {
+          const data = (await res.json()) as { paid: boolean; email?: string };
+
+          if (data.paid) {
             stopPolling();
+            if (data.email) setGuestEmail(data.email);
             trackEvent("unrar_daypass_unlocked_poll");
             // Auto-extract the file that is still in memory
             startExtraction(file, pwd);
@@ -424,12 +432,7 @@ export default function UnrarClient() {
   const handleUnlockClick = useCallback(async () => {
     if (!rarFile) return;
 
-    // Step 1: ensure the user is logged in (Day Pass requires email)
-    if (!session?.user?.email) {
-      signIn(undefined, { callbackUrl: `/tools/unrar` });
-      return;
-    }
-
+    // No longer require login. Guests can pay directly; Stripe collects their email.
     trackEvent("unrar_daypass_checkout_start");
 
     try {
@@ -448,33 +451,25 @@ export default function UnrarClient() {
         return;
       }
 
-      const { url } = (await res.json()) as { url: string };
+      const { url, sessionId } = (await res.json()) as { url: string; sessionId: string };
 
       // Open Stripe in a popup so the unrar tab stays alive (file stays in memory)
       const popup = window.open(url, "_blank", "width=520,height=720,noopener,noreferrer");
 
       if (popup) {
-        // Popup opened successfully — start polling
+        // Popup opened successfully — start polling via session ID (no login needed)
         setUiState("awaiting_payment");
-        startPolling(rarFile, password || undefined);
+        startPolling(rarFile, sessionId, password || undefined);
       } else {
         // Popup was blocked by the browser — fall back to same-tab redirect.
-        // We append ?daypass=active as success_url (handled on mount).
-        // The checkout success_url on the Stripe session already points to /dashboard,
-        // but the user will be redirected back to /tools/unrar?daypass=active
-        // via the cancel_url-style redirect we construct here.
-        //
-        // Since we can't change the Stripe success_url (already set), we just
-        // redirect the user to Stripe. On return they'll land on /dashboard,
-        // but we show a banner in /tools/unrar if they come back manually.
-        // Best we can do without changing shared checkout config.
+        // On return they'll land on /dashboard; they can re-drop the file here.
         window.location.href = url;
       }
     } catch {
       setErrorMsg("Network error. Please try again.");
       setUiState("filelist_gate");
     }
-  }, [rarFile, session, password, startExtraction, startPolling]);
+  }, [rarFile, password, startExtraction, startPolling]);
 
   // ── Download helpers ──────────────────────────────────────────────────────
 
@@ -867,6 +862,23 @@ export default function UnrarClient() {
               </button>
             </div>
           </div>
+
+          {/* Guest post-unlock note: optional login to access pass on all tools */}
+          {guestEmail && !session?.user?.email && (
+            <div className="flex items-start gap-2 px-3 py-2.5 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/40 rounded-xl">
+              <Zap size={13} className="text-indigo-500 shrink-0 mt-0.5" strokeWidth={1.5} />
+              <p className="text-xs text-indigo-800 dark:text-indigo-300">
+                Your 24-hour pass is active.{" "}
+                <a
+                  href={`/auth/signin?callbackUrl=/tools/unrar`}
+                  className="font-medium underline underline-offset-2 hover:opacity-80 transition-opacity"
+                >
+                  Sign in with {guestEmail}
+                </a>{" "}
+                to use it across all tools.
+              </p>
+            </div>
+          )}
 
           {/* Privacy note */}
           <div className="flex items-center gap-2 px-3 py-2 bg-[#F5F5F5] dark:bg-[#252525] rounded-lg">

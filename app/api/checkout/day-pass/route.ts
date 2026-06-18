@@ -12,6 +12,15 @@ const ALLOWED_ORIGINS = [
   "https://staging-sammapix.vercel.app",
 ];
 
+/** Extract a stable IP string from the request (for guest rate-limiting). */
+function getClientIp(req: NextRequest): string {
+  return (
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
 export async function POST(req: NextRequest) {
   // CSRF: verify request originates from our own frontend in production
   if (process.env.NODE_ENV === "production") {
@@ -24,24 +33,19 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // Try to get session — but do NOT require it (guest checkout supported).
   let email: string | undefined;
   try {
     const session = await getServerSession(authOptions);
-    email = session?.user?.email ?? undefined;
+    email = session?.user?.email?.trim() ?? undefined;
   } catch {
     email = undefined;
   }
-  if (!email) {
-    return NextResponse.json(
-      { error: "Login required", code: "UNAUTHORIZED" },
-      { status: 401 }
-    );
-  }
 
-  email = email.trim();
-
-  // Rate limit: 5 attempts per minute per authenticated user
-  const rlCount = await incrWithTTL(`rl:daypass:${email}`, 60);
+  // Rate limit: 5 attempts per minute.
+  // Authenticated users: keyed by email. Guests: keyed by IP.
+  const rlKey = email ? `rl:daypass:${email}` : `rl:daypass:ip:${getClientIp(req)}`;
+  const rlCount = await incrWithTTL(rlKey, 60);
   if (rlCount !== null && rlCount > 5) {
     return NextResponse.json(
       { error: "Too many requests", code: "RATE_LIMITED" },
@@ -49,8 +53,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Anti-duplicate: prevent double-purchase while a pass is still active
-  if (await hasActiveDayPass(email)) {
+  // Anti-duplicate (logged-in users only): prevent double-purchase while a pass is active.
+  if (email && (await hasActiveDayPass(email))) {
     return NextResponse.json(
       {
         error: "You already have an active day pass",
@@ -79,16 +83,24 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      customer_email: email,
+      // If logged in, pre-fill email. If guest, Stripe Checkout collects it automatically.
+      ...(email ? { customer_email: email } : {}),
+      // Ensure Stripe always collects and stores the customer email (needed for guest grant).
+      customer_creation: "always",
       success_url: `${appUrl}/dashboard?daypass=active`,
       cancel_url: `${appUrl}/dashboard?daypass=canceled`,
       metadata: {
         type: "day_pass",
-        userEmail: email,
+        // For guests this is empty string; the webhook will fall back to
+        // session.customer_details.email (populated by Stripe after payment).
+        userEmail: email ?? "",
       },
     });
 
-    return NextResponse.json({ url: checkoutSession.url });
+    return NextResponse.json({
+      url: checkoutSession.url,
+      sessionId: checkoutSession.id,
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Stripe error";
     console.error("[checkout/day-pass] Stripe error:", message);
