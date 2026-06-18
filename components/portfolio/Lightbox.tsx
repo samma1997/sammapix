@@ -236,7 +236,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-[#0A0A0A] flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-[#0A0A0A] flex flex-col"
       onClick={onClose}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -372,7 +372,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
       {/* Photo — centred in the available space; info lives in a bottom bar
           overlay so it never pushes the image off-centre (Pexels-like). */}
       <div
-        className="flex items-center justify-center max-w-[92vw]"
+        className="flex-1 flex items-center justify-center w-full min-h-0 px-4 pt-16 pb-1"
         onClick={(e) => e.stopPropagation()}
       >
         {isZoomed ? (
@@ -409,7 +409,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             alt={photo.alt || "Travel photograph"}
             width={photo.width || 1200}
             height={photo.height || 800}
-            className="max-h-[82vh] w-auto object-contain rounded-md cursor-zoom-in shadow-2xl shadow-black/40"
+            className="max-h-full w-auto object-contain rounded-md cursor-zoom-in shadow-2xl shadow-black/40"
             sizes="92vw"
             onClick={toggleZoom}
             priority
@@ -423,10 +423,10 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           zoomed to keep the canvas clean. */}
       {!isZoomed && (
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/70 via-black/35 to-transparent pb-5 pt-12 sm:pb-6 sm:pt-16"
+          className="shrink-0 w-full px-4 pb-5 pt-2 sm:pb-6"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="pointer-events-auto mx-auto flex max-w-3xl flex-col items-center px-4 text-center">
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             {photo.caption && (
               <p className="text-[#FAFAFA] text-sm sm:text-base font-medium leading-snug">
                 {photo.caption}
