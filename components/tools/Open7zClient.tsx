@@ -23,8 +23,8 @@ import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
-const MAX_BYTES_FREE  = 200 * 1024 * 1024; // 200 MB
-const ACCEPT          = ".7z,application/x-7z-compressed";
+const MAX_BYTES_FREE   = 200 * 1024 * 1024; // 200 MB
+const ACCEPT           = ".7z,application/x-7z-compressed";
 const POLL_INTERVAL_MS = 3000;
 const POLL_MAX_MS      = 5 * 60 * 1000;
 
@@ -64,6 +64,48 @@ function totalBytes(entries: SevenZEntry[]): number {
   return entries.reduce((sum, e) => sum + e.size, 0);
 }
 
+// ── libarchive Archive type (minimal, avoids bundling type issues) ─────────────
+
+interface LibArchiveFile {
+  name: string;
+  size: number;
+  lastModified: number;
+  extract(): Promise<File>;
+}
+
+interface LibArchiveObj {
+  hasEncryptedData(): Promise<boolean>;
+  usePassword(pwd: string): Promise<void>;
+  getFilesArray(): Promise<Array<{ file: LibArchiveFile; path: string }>>;
+  extractFiles(
+    cb?: (item: { file: File; path: string }) => void
+  ): Promise<Record<string, unknown>>;
+  close(): Promise<void>;
+}
+
+// ── libarchive init (singleton, lazy) ────────────────────────────────────────
+
+let archiveReady = false;
+
+async function ensureArchiveInit(): Promise<void> {
+  if (archiveReady) return;
+  // Dynamic import keeps libarchive.js out of the initial bundle.
+  // Worker URL points to public/libarchive-worker.js (same-origin, Vercel-safe).
+  // libarchive.wasm is resolved by the worker via new URL("libarchive.wasm", import.meta.url)
+  // which correctly resolves to /libarchive.wasm since worker and wasm share the same public/ root.
+  const { Archive } = await import("libarchive.js");
+  Archive.init({
+    workerUrl: "/libarchive-worker.js",
+  });
+  archiveReady = true;
+}
+
+async function openArchive(file: File): Promise<LibArchiveObj> {
+  await ensureArchiveInit();
+  const { Archive } = await import("libarchive.js");
+  return (await Archive.open(file)) as unknown as LibArchiveObj;
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function Open7zClient() {
@@ -73,31 +115,25 @@ export default function Open7zClient() {
   const isPro =
     (session?.user as { plan?: string } | undefined)?.plan === "pro";
 
-  const [uiState, setUiState]           = useState<UIState>("idle");
-  const [archiveFile, setArchiveFile]   = useState<File | null>(null);
-  const [entries, setEntries]           = useState<SevenZEntry[]>([]);
-  const [progress, setProgress]         = useState(0);
-  const [errorMsg, setErrorMsg]         = useState("");
-  const [password, setPassword]         = useState("");
+  const [uiState, setUiState]             = useState<UIState>("idle");
+  const [archiveFile, setArchiveFile]     = useState<File | null>(null);
+  const [entries, setEntries]             = useState<SevenZEntry[]>([]);
+  const [progress, setProgress]           = useState(0);
+  const [errorMsg, setErrorMsg]           = useState("");
+  const [password, setPassword]           = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [dragOver, setDragOver]         = useState(false);
-  const [zipBuilding, setZipBuilding]   = useState(false);
-  const [pollTimedOut, setPollTimedOut] = useState(false);
-  const [guestEmail, setGuestEmail]     = useState("");
+  const [dragOver, setDragOver]           = useState(false);
+  const [zipBuilding, setZipBuilding]     = useState(false);
+  const [pollTimedOut, setPollTimedOut]   = useState(false);
+  const [guestEmail, setGuestEmail]       = useState("");
 
-  const workerRef    = useRef<Worker | null>(null);
+  // Cancelation ref — set to true to abort an ongoing extraction loop.
+  const cancelRef    = useRef(false);
   const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollStartRef = useRef<number>(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ── Worker lifecycle ──────────────────────────────────────────────────────
-
-  const terminateWorker = useCallback(() => {
-    if (workerRef.current) {
-      workerRef.current.terminate();
-      workerRef.current = null;
-    }
-  }, []);
+  // ── Cleanup ───────────────────────────────────────────────────────────────
 
   const stopPolling = useCallback(() => {
     if (pollTimerRef.current) {
@@ -106,12 +142,16 @@ export default function Open7zClient() {
     }
   }, []);
 
+  const cancelExtraction = useCallback(() => {
+    cancelRef.current = true;
+  }, []);
+
   useEffect(() => {
     return () => {
-      terminateWorker();
+      cancelExtraction();
       stopPolling();
     };
-  }, [terminateWorker, stopPolling]);
+  }, [cancelExtraction, stopPolling]);
 
   // ── Handle ?daypass=active redirect fallback ──────────────────────────────
 
@@ -125,183 +165,220 @@ export default function Open7zClient() {
   const justUnlockedViaRedirect =
     searchParams?.get("daypass") === "active" && uiState === "idle";
 
-  // ── Full extraction ───────────────────────────────────────────────────────
+  // ── Full extraction via libarchive.js ─────────────────────────────────────
 
   const startExtraction = useCallback(
-    (file: File, pwd?: string) => {
-      terminateWorker();
+    async (file: File, pwd?: string) => {
+      cancelRef.current = false;
       setUiState("loading");
       setProgress(0);
       setEntries([]);
       setErrorMsg("");
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const buffer = e.target?.result as ArrayBuffer;
-        if (!buffer) {
-          setErrorMsg("Failed to read file.");
-          setUiState("error");
-          return;
+      let archive: LibArchiveObj | null = null;
+
+      try {
+        archive = await openArchive(file);
+
+        // Check for encryption.
+        const isEncrypted = await archive.hasEncryptedData();
+        if (isEncrypted) {
+          if (!pwd) {
+            await archive.close();
+            setUiState("needs_password");
+            return;
+          }
+          await archive.usePassword(pwd);
         }
 
         setUiState("extracting");
 
-        const worker = new Worker(
-          new URL("./open7z.worker.ts", import.meta.url),
-          { type: "module" }
-        );
-        workerRef.current = worker;
+        // Collect file list first for progress display.
+        const filesArray = await archive.getFilesArray();
 
-        const accEntries: SevenZEntry[] = [];
+        if (cancelRef.current) {
+          await archive.close();
+          return;
+        }
 
-        worker.onmessage = (
-          ev: MessageEvent<{
-            type: string;
-            entries?: Array<{ name: string; size: number }>;
-            name?: string;
-            size?: number;
-            buffer?: ArrayBuffer;
-            progress?: number;
-            message?: string;
-          }>
-        ) => {
-          const { type } = ev.data;
-
-          if (type === "filelist") {
-            const list = ev.data.entries ?? [];
-            const initial: SevenZEntry[] = list.map((e) => ({
-              name: e.name,
-              size: e.size,
-              status: "pending",
-            }));
-            accEntries.push(...initial);
-            setEntries([...accEntries]);
-          } else if (type === "file") {
-            const idx = accEntries.findIndex((e) => e.name === ev.data.name);
-            if (idx !== -1) {
-              accEntries[idx] = {
-                ...accEntries[idx],
-                buffer: ev.data.buffer,
-                status: "ready",
-              };
-            }
-            setEntries([...accEntries]);
-            setProgress(ev.data.progress ?? 0);
-          } else if (type === "needs_password") {
-            terminateWorker();
-            setUiState("needs_password");
-          } else if (type === "done") {
-            terminateWorker();
-            setUiState("results");
-            setProgress(100);
-            trackEvent("open7z_extracted", { files: accEntries.length });
-          } else if (type === "error") {
-            terminateWorker();
-            setErrorMsg(ev.data.message ?? "Extraction failed.");
-            setUiState("error");
-          }
-        };
-
-        worker.onerror = (err) => {
-          terminateWorker();
-          setErrorMsg(err.message ?? "Worker crashed.");
+        const total = filesArray.length;
+        if (total === 0) {
+          // Empty or unreadable archive.
+          await archive.close();
+          setErrorMsg("No files found in the archive.");
           setUiState("error");
+          return;
+        }
+
+        // Build display names: libarchive returns { file, path } where path is
+        // the parent directory (e.g. "sx7z/") and file.name is the filename.
+        // Combine them to get the full relative path shown in the UI.
+        const entryName = (f: LibArchiveFile, path: string): string => {
+          const dir  = path && path !== "/" ? path : "";
+          const base = f.name;
+          // Avoid double slash if dir already ends with /
+          if (dir && !dir.endsWith("/")) return `${dir}/${base}`;
+          return `${dir}${base}`;
         };
 
-        worker.postMessage({ type: "extract", buffer, password: pwd }, [buffer]);
-      };
+        // Filter out entries that represent directories (size 0, name ends with /).
+        const fileEntries = filesArray.filter(
+          ({ file: f, path }) => !(entryName(f, path).endsWith("/") && f.size === 0)
+        );
+        const filteredTotal = fileEntries.length;
 
-      reader.onerror = () => {
-        setErrorMsg("Could not read the file.");
-        setUiState("error");
-      };
+        if (filteredTotal === 0) {
+          await archive.close();
+          setErrorMsg("No files found in the archive.");
+          setUiState("error");
+          return;
+        }
 
-      reader.readAsArrayBuffer(file);
+        // Seed the UI with pending entries so the list appears immediately.
+        const initial: SevenZEntry[] = fileEntries.map(({ file: f, path }) => ({
+          name: entryName(f, path),
+          size: f.size,
+          status: "pending",
+        }));
+        setEntries([...initial]);
+        trackEvent("open7z_extracting", { files: filteredTotal });
+
+        // Extract each file individually so we can stream progress to the UI.
+        const extracted: SevenZEntry[] = [...initial];
+        for (let i = 0; i < filteredTotal; i++) {
+          if (cancelRef.current) {
+            await archive.close();
+            return;
+          }
+          const { file: libFile, path } = fileEntries[i];
+          const name = entryName(libFile, path);
+          try {
+            const extractedFile: File = await libFile.extract();
+            const buf = await extractedFile.arrayBuffer();
+            extracted[i] = { name, size: buf.byteLength, buffer: buf, status: "ready" };
+          } catch {
+            extracted[i] = { ...extracted[i], status: "error" };
+          }
+          setEntries([...extracted]);
+          setProgress(Math.round(((i + 1) / filteredTotal) * 100));
+        }
+
+        await archive.close();
+
+        if (cancelRef.current) return;
+
+        setUiState("results");
+        setProgress(100);
+        trackEvent("open7z_extracted", { files: filteredTotal });
+
+      } catch (err: unknown) {
+        try { await archive?.close(); } catch { /* ignore */ }
+        if (cancelRef.current) return;
+
+        const msg = err instanceof Error ? err.message : "Extraction failed.";
+        // libarchive throws on wrong password — detect it.
+        if (
+          msg.toLowerCase().includes("password") ||
+          msg.toLowerCase().includes("encrypted") ||
+          msg.toLowerCase().includes("wrong")
+        ) {
+          setUiState("needs_password");
+        } else {
+          setErrorMsg(msg);
+          setUiState("error");
+        }
+      }
     },
-    [terminateWorker]
+    []
   );
 
   // ── List-only pass (gate preview) ─────────────────────────────────────────
 
   const startListOnly = useCallback(
-    (file: File, pwd?: string) => {
-      terminateWorker();
+    async (file: File, pwd?: string) => {
+      cancelRef.current = false;
       setUiState("loading");
       setProgress(0);
       setEntries([]);
       setErrorMsg("");
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const buffer = e.target?.result as ArrayBuffer;
-        if (!buffer) {
-          setErrorMsg("Failed to read file.");
-          setUiState("error");
-          return;
+      let archive: LibArchiveObj | null = null;
+
+      try {
+        archive = await openArchive(file);
+
+        const isEncrypted = await archive.hasEncryptedData();
+        if (isEncrypted) {
+          if (!pwd) {
+            await archive.close();
+            setUiState("needs_password");
+            return;
+          }
+          await archive.usePassword(pwd);
         }
 
         setUiState("listing");
 
-        const worker = new Worker(
-          new URL("./open7z.worker.ts", import.meta.url),
-          { type: "module" }
-        );
-        workerRef.current = worker;
+        const filesArray = await archive.getFilesArray();
+        await archive.close();
 
-        worker.onmessage = (
-          ev: MessageEvent<{
-            type: string;
-            entries?: Array<{ name: string; size: number }>;
-            message?: string;
-          }>
-        ) => {
-          const { type } = ev.data;
+        if (cancelRef.current) return;
 
-          if (type === "filelist") {
-            const list = ev.data.entries ?? [];
-            const initial: SevenZEntry[] = list.map((e) => ({
-              name: e.name,
-              size: e.size,
-              status: "pending",
-            }));
-            setEntries(initial);
-          } else if (type === "done") {
-            terminateWorker();
-            setUiState("filelist_gate");
-          } else if (type === "needs_password") {
-            terminateWorker();
-            setUiState("needs_password");
-          } else if (type === "error") {
-            terminateWorker();
-            setErrorMsg(ev.data.message ?? "Could not read archive.");
-            setUiState("error");
-          }
+        const buildName = (f: LibArchiveFile, path: string): string => {
+          const dir = path && path !== "/" ? path : "";
+          if (dir && !dir.endsWith("/")) return `${dir}/${f.name}`;
+          return `${dir}${f.name}`;
         };
 
-        worker.onerror = (err) => {
-          terminateWorker();
-          setErrorMsg(err.message ?? "Worker crashed.");
+        const list: SevenZEntry[] = filesArray
+          .filter(({ file: f, path }) => {
+            const n = buildName(f, path);
+            return !(n.endsWith("/") && f.size === 0);
+          })
+          .map(({ file: f, path }) => ({
+            name: buildName(f, path),
+            size: f.size,
+            status: "pending",
+          }));
+
+        setEntries(list);
+        setUiState("filelist_gate");
+
+      } catch (err: unknown) {
+        try { await archive?.close(); } catch { /* ignore */ }
+        if (cancelRef.current) return;
+        const msg = err instanceof Error ? err.message : "Could not read archive.";
+        if (
+          msg.toLowerCase().includes("password") ||
+          msg.toLowerCase().includes("encrypted")
+        ) {
+          setUiState("needs_password");
+        } else {
+          setErrorMsg(msg);
           setUiState("error");
-        };
-
-        worker.postMessage({ type: "listonly", buffer, password: pwd }, [buffer]);
-      };
-
-      reader.onerror = () => {
-        setErrorMsg("Could not read the file.");
-        setUiState("error");
-      };
-
-      reader.readAsArrayBuffer(file);
+        }
+      }
     },
-    [terminateWorker]
+    []
   );
 
   // ── File selection gate ───────────────────────────────────────────────────
 
   const handleFile = useCallback(
     (file: File) => {
-      if (!file.name.toLowerCase().endsWith(".7z")) {
+      const lname = file.name.toLowerCase();
+
+      // Multi-volume detection: .7z.001, .7z.002, etc.
+      if (/\.7z\.\d{3}$/.test(lname)) {
+        setErrorMsg(
+          "Multi-volume archives (.7z.001, .7z.002) are not supported in-browser. " +
+          "Reassemble all parts and use 7-Zip on desktop."
+        );
+        setUiState("error");
+        return;
+      }
+
+      if (!lname.endsWith(".7z")) {
         setErrorMsg("Please select a valid .7z file.");
         setUiState("error");
         return;
@@ -475,7 +552,7 @@ export default function Open7zClient() {
   // ── Reset ─────────────────────────────────────────────────────────────────
 
   const handleReset = useCallback(() => {
-    terminateWorker();
+    cancelExtraction();
     stopPolling();
     setUiState("idle");
     setArchiveFile(null);
@@ -485,7 +562,7 @@ export default function Open7zClient() {
     setPassword("");
     setPasswordInput("");
     setPollTimedOut(false);
-  }, [terminateWorker, stopPolling]);
+  }, [cancelExtraction, stopPolling]);
 
   // ── Render helpers ────────────────────────────────────────────────────────
 

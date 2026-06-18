@@ -19,7 +19,7 @@ const nextConfig = {
   // Exclude onnxruntime-node from serverless functions — it's 355MB and only
   // needed client-side by @huggingface/transformers (which uses onnxruntime-web)
   // TF.js and upscaler are browser-only — exclude from all server bundles
-  serverExternalPackages: ["onnxruntime-node", "@tensorflow/tfjs", "upscaler", "@upscalerjs/esrgan-slim"],
+  serverExternalPackages: ["onnxruntime-node", "@tensorflow/tfjs", "upscaler", "@upscalerjs/esrgan-slim", "libarchive.js"],
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Prevent onnxruntime-node from being bundled into server functions
@@ -74,6 +74,21 @@ const nextConfig = {
         source: "/_next/static/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      // libarchive.js assets — correct MIME types required
+      {
+        source: "/libarchive-worker.js",
+        headers: [
+          { key: "Content-Type", value: "application/javascript" },
+          { key: "Cache-Control", value: "public, max-age=604800" },
+        ],
+      },
+      {
+        source: "/libarchive.wasm",
+        headers: [
+          { key: "Content-Type", value: "application/wasm" },
+          { key: "Cache-Control", value: "public, max-age=604800" },
         ],
       },
       // Public assets — 1 week cache
