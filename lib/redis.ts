@@ -17,7 +17,13 @@ const token = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 const configured = Boolean(url && token);
 
-async function exec<T>(command: unknown[]): Promise<T | null> {
+/**
+ * Generic Redis command executor.
+ * Exported so other modules (e.g. auth providers) can issue arbitrary commands
+ * without duplicating the Upstash REST plumbing.
+ * Returns the `result` field from the Upstash REST response, or null if unavailable.
+ */
+export async function exec<T>(command: unknown[]): Promise<T | null> {
   if (!configured) return null;
   try {
     const res = await fetch(`${url}`, {
