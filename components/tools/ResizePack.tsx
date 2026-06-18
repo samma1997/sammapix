@@ -64,6 +64,23 @@ const PRESETS: SocialPreset[] = [
   { label: "A4 Print 300dpi", w: 2480, h: 3508 },
 ];
 
+// ── Props ──────────────────────────────────────────────────────────────────────
+
+export interface ResizePackProps {
+  /**
+   * Platform-specific quick-pick presets shown as pill buttons above the
+   * standard social presets. When provided, the first preset is also used
+   * to initialise the width/height inputs instead of the default 1080x1080.
+   */
+  platformPresets?: { label: string; width: number; height: number }[];
+  /** Override the initial width (defaults to 1080). Ignored if platformPresets
+   *  is provided — first preset wins. */
+  initialWidth?: number;
+  /** Override the initial height (defaults to 1080). Ignored if platformPresets
+   *  is provided — first preset wins. */
+  initialHeight?: number;
+}
+
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 function getImageDimensions(file: File): Promise<{ w: number; h: number }> {
@@ -475,10 +492,18 @@ const CropPreview = ({
 
 // ── Main Component ─────────────────────────────────────────────────────────────
 
-export default function ResizePack() {
+export default function ResizePack({
+  platformPresets,
+  initialWidth,
+  initialHeight,
+}: ResizePackProps = {}) {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const limit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+
+  // Derive initial w/h: platform first preset > explicit props > defaults
+  const defaultW = platformPresets?.[0]?.width ?? initialWidth ?? 1080;
+  const defaultH = platformPresets?.[0]?.height ?? initialHeight ?? 1080;
 
   const [uiState, setUiState] = useState<UIState>("idle");
   const [isDragOver, setIsDragOver] = useState(false);
@@ -486,8 +511,8 @@ export default function ResizePack() {
   // Config state
   const [mode, setMode] = useState<Mode>("pixel");
   const [fitMode, setFitMode] = useState<FitMode>("cover");
-  const [widthVal, setWidthVal] = useState<number>(1080);
-  const [heightVal, setHeightVal] = useState<number>(1080);
+  const [widthVal, setWidthVal] = useState<number>(defaultW);
+  const [heightVal, setHeightVal] = useState<number>(defaultH);
   const [lockAspect, setLockAspect] = useState(true);
   const [percentage, setPercentage] = useState<number>(50);
 
@@ -995,6 +1020,42 @@ export default function ResizePack() {
                     Aspect ratio is locked. Height auto-adjusts per file
                     based on its original ratio.
                   </p>
+                )}
+
+                {/* Platform quick-pick presets (only when injected from a /resize/[platform] page) */}
+                {platformPresets && platformPresets.length > 0 && (
+                  <div>
+                    <p className="text-[11px] text-[#A3A3A3] uppercase tracking-wide mb-2">
+                      Platform sizes
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {platformPresets.map((pp) => {
+                        const isActive =
+                          widthVal === pp.width &&
+                          heightVal === pp.height &&
+                          !lockAspect;
+                        return (
+                          <button
+                            key={`${pp.label}-${pp.width}x${pp.height}`}
+                            onClick={() =>
+                              applyPreset({ label: pp.label, w: pp.width, h: pp.height })
+                            }
+                            className={[
+                              "px-3 py-1.5 text-[11px] border rounded-md transition-colors",
+                              isActive
+                                ? "border-[#6366F1] bg-[#6366F1] text-white"
+                                : "border-[#6366F1]/30 dark:border-[#6366F1]/20 bg-white dark:bg-[#252525] text-[#6366F1] hover:bg-[#6366F1]/5",
+                            ].join(" ")}
+                          >
+                            {pp.label}
+                            <span className="ml-1.5 text-[10px] opacity-70">
+                              {pp.width}&times;{pp.height}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 )}
 
                 {/* Social presets */}
