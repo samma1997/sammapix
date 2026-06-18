@@ -145,9 +145,10 @@ export async function POST(req: NextRequest) {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
-      // Pre-fill email for logged-in users; Stripe Checkout collects it for guests.
-      // customer_creation: "always" ensures we get a Stripe Customer regardless.
-      ...(userEmail ? { customer_email: userEmail } : { customer_creation: "always" }),
+      // Pre-fill email for logged-in users; for guests omit it — in subscription
+      // mode Stripe Checkout collects the email and always creates the Customer
+      // itself (customer_creation is NOT valid for mode:"subscription").
+      ...(userEmail ? { customer_email: userEmail } : {}),
       // Stripe doesn't allow discounts + allow_promotion_codes together.
       // If founding coupon is available, apply it automatically.
       // Otherwise, let users enter promo codes manually.
