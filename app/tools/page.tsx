@@ -6,9 +6,9 @@ import { TOOLS } from "@/lib/tools-metadata";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "36 Free Image & Video Tools for Photographers & Developers",
+  title: "37 Free Image & Video Tools for Photographers & Developers",
   description:
-    "Complete suite of 36 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
+    "Complete suite of 37 free browser-based image and video tools. Compress JPG/PNG, convert WebP, PDF to image, AI rename, AI alt text, combo tools, remove EXIF, batch process, apply film effects. No uploads, no account needed for core tools.",
   keywords: [
     "free image tools",
     "image compressor",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://sammapix.com/tools" },
   openGraph: {
-    title: "36 Free Image & Video Tools for Photographers & Developers",
+    title: "37 Free Image & Video Tools for Photographers & Developers",
     description:
       "Compress, convert, rename, resize, remove EXIF, apply film effects, batch process and more. All in browser. No uploads. No account needed.",
     url: "https://sammapix.com/tools",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SammaPix. 36 Free Image & Video Tools",
+        alt: "SammaPix. 37 Free Image & Video Tools",
       },
     ],
   },
@@ -53,7 +53,7 @@ export default function ToolsPage() {
         "@type": "CollectionPage",
         name: "Free Image Tools for Photographers",
         url: "https://sammapix.com/tools",
-        description: "Suite of 36 browser-based image and video optimization tools",
+        description: "Suite of 37 browser-based image and video optimization tools",
         publisher: {
           "@type": "Organization",
           name: "SammaPix",
@@ -63,7 +63,7 @@ export default function ToolsPage() {
       {
         "@type": "ItemList",
         name: "SammaPix Tools",
-        description: "36 free browser-based image and video optimization tools",
+        description: "37 free browser-based image and video optimization tools",
         numberOfItems: toolsList.length,
         itemListElement: toolsList.map((tool, index) => ({
           "@type": "SoftwareApplication",
@@ -95,7 +95,7 @@ export default function ToolsPage() {
             Everything you need to optimize, rename, resize and organize your images
           </h1>
           <p className="text-sm text-gray-500 dark:text-[#737373] max-w-lg leading-relaxed">
-            36 free browser-based tools. No uploads, no signup needed for most tools.
+            37 free browser-based tools. No uploads, no signup needed for most tools.
           </p>
         </div>
       </section>

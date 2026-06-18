@@ -31,6 +31,7 @@ import {
   IconJpgToPdf,
   IconJxl,
   IconUnrar,
+  IconOpen7z,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -601,6 +602,15 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconUnrar,
+    category: ["Optimize"],
+  },
+  {
+    name: "Open 7z Online",
+    href: "/tools/open-7z",
+    tagline: "Extract .7z files in-browser. View file list, download individually, or export as ZIP. No Mac support needed.",
+    accent: "#8B5CF6",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconOpen7z,
     category: ["Optimize"],
     isNew: true,
   },

@@ -50,6 +50,7 @@ import {
   IconUpscale,
   IconPassportPhoto,
   IconUnrar,
+  IconOpen7z,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -735,6 +736,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconUnrar,
     category: ["Optimize"],
     keywords: ["open rar", "unrar", "extract rar", "rar to zip", "open rar mac", "rar extractor", "rar opener", "view rar", "rar file", "archive extractor"],
+  },
+  {
+    name: "Open 7z Online",
+    slug: "open-7z",
+    href: "/dashboard/tools/open-7z",
+    tagline: "Extract .7z files in-browser. View list, download files, convert to ZIP.",
+    accent: "#8B5CF6",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconOpen7z,
+    category: ["Optimize"],
+    keywords: ["open 7z", "extract 7z", "7z to zip", "open 7z mac", "7z extractor", "7z opener", "view 7z", "7z file", "7zip online", "7z extractor online"],
   },
 ];
 
