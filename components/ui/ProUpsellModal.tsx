@@ -133,16 +133,8 @@ export default function ProUpsellModal({
 
   const handleCheckout = async () => {
     trackEvent("upsell_clicked", { trigger });
-    if (!session) {
-      // Not logged in — defer the begin_checkout event to DashboardUpgrade
-      // (after signin) so we only fire it for users who actually return.
-      const cb = encodeURIComponent("/dashboard/upgrade?plan=monthly");
-      router.push(`/auth/signin?callbackUrl=${cb}`);
-      onClose();
-      return;
-    }
-    // Logged-in users go straight to Stripe — fire begin_checkout here so
-    // GA4/Meta see the event (previously these flows were invisible).
+    // Guest checkout: anyone can start. Stripe collects the email and
+    // /auth/complete signs them in passwordlessly after payment.
     fireBeginCheckoutEvent("monthly");
     setLoading(true);
     try {
@@ -203,12 +195,7 @@ export default function ProUpsellModal({
 
   const handleDayPass = async () => {
     trackEvent("upsell_daypass_clicked", { trigger });
-    if (!session) {
-      const cb = encodeURIComponent("/pricing#day-pass");
-      router.push(`/auth/signin?callbackUrl=${cb}`);
-      onClose();
-      return;
-    }
+    // Guest day pass: no login required. /auth/complete signs them in after pay.
     setDayPassLoading(true);
     try {
       const res = await fetch("/api/checkout/day-pass", {

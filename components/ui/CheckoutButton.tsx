@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
@@ -19,25 +17,14 @@ export default function CheckoutButton({
   children,
   plan = "monthly",
 }: CheckoutButtonProps) {
-  const { data: session } = useSession();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleClick = async () => {
     setError(null);
 
-    if (!session) {
-      // Not logged in → signin first, preserve plan intent.
-      // The whole callbackUrl must be encoded as a single value,
-      // otherwise the inner `?` is parsed as signin's own query separator.
-      const cb = encodeURIComponent(`/dashboard/upgrade?plan=${plan}`);
-      router.push(`/auth/signin?callbackUrl=${cb}`);
-      return;
-    }
-
-    // Fire conversion events ONLY for logged-in users actually hitting checkout —
-    // pre-signin clicks were inflating begin_checkout 50x with no real intent.
+    // Guest checkout: anyone can start. Stripe collects the email and
+    // /auth/complete signs the user in passwordlessly after payment.
     const eventId = fireBeginCheckoutEvent(plan);
 
     setLoading(true);
