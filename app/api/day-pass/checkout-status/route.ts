@@ -77,11 +77,11 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ paid: true, email });
   } catch (err) {
+    // Invalid/expired/unreachable session → treat as "not paid yet" so the
+    // poller waits gracefully instead of surfacing a 500. The webhook remains
+    // the backstop for the actual pass grant.
     const message = err instanceof Error ? err.message : "Stripe error";
     console.error("[day-pass/checkout-status] Stripe retrieve error:", message);
-    return NextResponse.json(
-      { paid: false, error: "Could not verify payment status" },
-      { status: 500 }
-    );
+    return NextResponse.json({ paid: false });
   }
 }
