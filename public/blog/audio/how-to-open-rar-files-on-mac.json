@@ -1,0 +1,192 @@
+[
+  {
+    "start": 0.5,
+    "end": 13.89,
+    "text": "If you double-click a .rar file on a Mac, one of two things happens: either noth"
+  },
+  {
+    "start": 13.89,
+    "end": 42,
+    "text": "macOS Archive Utility, the built-in tool Apple ships with every Mac, supports ZI"
+  },
+  {
+    "start": 42,
+    "end": 58.65,
+    "text": "This has been the situation since the earliest versions of macOS X. Unlike Windo"
+  },
+  {
+    "start": 58.65,
+    "end": 89.78,
+    "text": "RAR has two major versions in common use. RAR4 is the older format created befor"
+  },
+  {
+    "start": 89.78,
+    "end": 110.08,
+    "text": "ZIP files are a completely different story. macOS handles ZIP natively: double-c"
+  },
+  {
+    "start": 110.08,
+    "end": 113.71,
+    "text": "5 methods compared: which one is right for you?"
+  },
+  {
+    "start": 113.71,
+    "end": 126.76,
+    "text": "The short version: if you open RAR files regularly, install The Unarchiver once "
+  },
+  {
+    "start": 126.76,
+    "end": 130.56,
+    "text": "Method 1: The Unarchiver, best all-rounder"
+  },
+  {
+    "start": 131.06,
+    "end": 149.66,
+    "text": "To install: open the Mac App Store, search for The Unarchiver, and click Get. Wh"
+  },
+  {
+    "start": 149.66,
+    "end": 167.2,
+    "text": "The Unarchiver also handles 7z, tar.gz, tar.bz2, cab, lzh, and dozens of other a"
+  },
+  {
+    "start": 167.2,
+    "end": 171.57,
+    "text": "Method 2: Keka, for power users and archive creation"
+  },
+  {
+    "start": 171.57,
+    "end": 191.42,
+    "text": "Keka is a more fully-featured archiving app for Mac. Unlike The Unarchiver, Keka"
+  },
+  {
+    "start": 191.42,
+    "end": 209.92,
+    "text": "To use Keka: download it from keka.io, open the disk image, and drag Keka to App"
+  },
+  {
+    "start": 209.92,
+    "end": 214.34,
+    "text": "Method 3: SammaPix online, no installation needed"
+  },
+  {
+    "start": 214.34,
+    "end": 234.33,
+    "text": "If you received a single RAR file and have no intention of opening RAR files reg"
+  },
+  {
+    "start": 234.83,
+    "end": 248.72,
+    "text": "To use it: go to sammapix.com/tools/unrar in Safari or Chrome, drag and drop you"
+  },
+  {
+    "start": 248.72,
+    "end": 259.52,
+    "text": "The free plan handles archives up to 200 megabytes. Multi-volume archives (.part"
+  },
+  {
+    "start": 259.52,
+    "end": 263.6,
+    "text": "Method 4: Terminal with unar, for developers"
+  },
+  {
+    "start": 264.1,
+    "end": 269.43,
+    "text": "Method 5: Archive Utility, the built-in tool that does not work for RAR"
+  },
+  {
+    "start": 269.43,
+    "end": 293.65,
+    "text": "Archive Utility is the app macOS uses when you double-click a .zip file. If you "
+  },
+  {
+    "start": 293.65,
+    "end": 297.7,
+    "text": "How to open a password-protected RAR file on Mac"
+  },
+  {
+    "start": 297.7,
+    "end": 324.54,
+    "text": "All the methods above support password-protected RAR archives. In The Unarchiver"
+  },
+  {
+    "start": 325.54,
+    "end": 341.88,
+    "text": "You need all parts in the same folder, and you should open only the first part. "
+  },
+  {
+    "start": 342.38,
+    "end": 362.83,
+    "text": "For most everyday use cases, ZIP wins on compatibility. ZIP opens natively on Ma"
+  },
+  {
+    "start": 362.83,
+    "end": 372.96,
+    "text": "If you received a RAR and want to convert it to ZIP for easier sharing, extract "
+  },
+  {
+    "start": 372.96,
+    "end": 376.82,
+    "text": "What to do after extracting: working with the files"
+  },
+  {
+    "start": 376.82,
+    "end": 400.41,
+    "text": "If the RAR contained images, you might want to compress them before sharing. Sam"
+  },
+  {
+    "start": 400.41,
+    "end": 409.41,
+    "text": "If you also have a .7z file to open, the SammaPix 7Z Opener works the same way: "
+  },
+  {
+    "start": 409.41,
+    "end": 412.84,
+    "text": "Can macOS open RAR files natively?"
+  },
+  {
+    "start": 413.84,
+    "end": 435.11,
+    "text": "It depends on how the tool processes your file. SammaPix processes RAR files ent"
+  },
+  {
+    "start": 435.11,
+    "end": 439.28,
+    "text": "How do I open a password-protected RAR file on Mac?"
+  },
+  {
+    "start": 439.28,
+    "end": 461.58,
+    "text": "Most RAR extraction tools support password-protected archives. In The Unarchiver"
+  },
+  {
+    "start": 461.58,
+    "end": 464.99,
+    "text": "What is the difference between RAR and ZIP?"
+  },
+  {
+    "start": 464.99,
+    "end": 488.48,
+    "text": "ZIP is an open standard supported natively on every operating system. RAR is a p"
+  },
+  {
+    "start": 488.98,
+    "end": 509.65,
+    "text": "Use SammaPix RAR Opener at sammapix.com/tools/unrar. It runs entirely in your br"
+  },
+  {
+    "start": 509.65,
+    "end": 512.77,
+    "text": "What are multi-volume RAR files?"
+  },
+  {
+    "start": 512.77,
+    "end": 535.45,
+    "text": "Multi-volume RAR archives are large archives split across several files, typical"
+  },
+  {
+    "start": 535.95,
+    "end": 553.54,
+    "text": "Yes. The Unarchiver is completely free and available on the Mac App Store. It ha"
+  }
+]
