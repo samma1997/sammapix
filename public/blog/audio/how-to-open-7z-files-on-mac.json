@@ -1,0 +1,292 @@
+[
+  {
+    "start": 0,
+    "end": 3.34,
+    "text": "Why your Mac cannot open 7z files"
+  },
+  {
+    "start": 3.34,
+    "end": 19.08,
+    "text": "If you double-click a .7z file on a Mac, one of two things happens: either nothi"
+  },
+  {
+    "start": 19.58,
+    "end": 44.92,
+    "text": "7z files appear most commonly when downloading software packages, game mods, lar"
+  },
+  {
+    "start": 44.92,
+    "end": 48.33,
+    "text": "Why 7z compresses better than ZIP"
+  },
+  {
+    "start": 48.33,
+    "end": 88.56,
+    "text": "The core reason is the compression algorithm. ZIP uses DEFLATE, a combination of"
+  },
+  {
+    "start": 88.56,
+    "end": 91.24,
+    "text": "What about ZIP files on Mac?"
+  },
+  {
+    "start": 91.24,
+    "end": 111.31,
+    "text": "ZIP files are a completely different story. macOS handles ZIP natively: double-c"
+  },
+  {
+    "start": 111.31,
+    "end": 114.93,
+    "text": "5 methods compared: which one is right for you?"
+  },
+  {
+    "start": 115.43,
+    "end": 119.87,
+    "text": "Method 1: Keka (best all-rounder for 7z on Mac)"
+  },
+  {
+    "start": 119.87,
+    "end": 146.46,
+    "text": "Keka is the go-to archiving app for Mac power users, and it handles 7z better th"
+  },
+  {
+    "start": 146.46,
+    "end": 150.38,
+    "text": "Step-by-step: open a 7z file with Keka"
+  },
+  {
+    "start": 150.38,
+    "end": 159.23,
+    "text": "Step one: Download Keka from keka.io. Open the .dmg file and drag Keka to your A"
+  },
+  {
+    "start": 159.23,
+    "end": 173.9,
+    "text": "Step two: Set as default. Open Keka, go to Preferences, and set it as the defaul"
+  },
+  {
+    "start": 173.9,
+    "end": 183.3,
+    "text": "Step three: Drag your .7z file onto the Keka icon in the Dock, or onto the main "
+  },
+  {
+    "start": 183.3,
+    "end": 190,
+    "text": "Step four: Alternatively, right-click your .7z file in Finder and select Open Wi"
+  },
+  {
+    "start": 190,
+    "end": 200.37,
+    "text": "Step five: Done. The extracted folder appears in the same directory as the .7z f"
+  },
+  {
+    "start": 200.37,
+    "end": 203.63,
+    "text": "Creating 7z archives with Keka"
+  },
+  {
+    "start": 203.63,
+    "end": 225.14,
+    "text": "To compress files into a 7z archive using Keka, select the 7z format in the Keka"
+  },
+  {
+    "start": 225.64,
+    "end": 249.88,
+    "text": "Keka extracts: 7z, RAR versions 4 and 5, ZIP, tar.gz, tar.bz2, tar.xz, tar.zst, "
+  },
+  {
+    "start": 249.88,
+    "end": 254.2,
+    "text": "Method 2: The Unarchiver (lightweight and free on the App Store)"
+  },
+  {
+    "start": 254.2,
+    "end": 274.21,
+    "text": "The Unarchiver is the most popular free archive extractor on the Mac App Store, "
+  },
+  {
+    "start": 274.21,
+    "end": 278.48,
+    "text": "Step-by-step: open a 7z file with The Unarchiver"
+  },
+  {
+    "start": 278.48,
+    "end": 287.12,
+    "text": "Step one: Open the Mac App Store. Search for \"The Unarchiver\" and click Get. It "
+  },
+  {
+    "start": 287.12,
+    "end": 297.8,
+    "text": "Step two: Set as default. When you first launch The Unarchiver, check the file t"
+  },
+  {
+    "start": 298.3,
+    "end": 304.9,
+    "text": "Step four: Done. The extracted folder appears next to the .7z file."
+  },
+  {
+    "start": 304.9,
+    "end": 308.46,
+    "text": "The Unarchiver versus Keka for 7z"
+  },
+  {
+    "start": 308.96,
+    "end": 314.5,
+    "text": "Method 3: SammaPix online (no installation, ideal for one-time use)"
+  },
+  {
+    "start": 314.5,
+    "end": 335.31,
+    "text": "If you received a single .7z file and have no plans to open 7z archives regularl"
+  },
+  {
+    "start": 335.31,
+    "end": 337.68,
+    "text": "How it works technically"
+  },
+  {
+    "start": 337.68,
+    "end": 365.6,
+    "text": "SammaPix uses WebAssembly to run the 7-Zip engine directly in your browser. The "
+  },
+  {
+    "start": 365.6,
+    "end": 369.72,
+    "text": "Step-by-step: open a 7z file with SammaPix"
+  },
+  {
+    "start": 369.72,
+    "end": 376.44,
+    "text": "Step one: Go to sammapix.com/tools/open-7z in Safari or Chrome on your Mac."
+  },
+  {
+    "start": 376.94,
+    "end": 384.77,
+    "text": "Step three: Enter password if needed. If the archive is password-protected, a fi"
+  },
+  {
+    "start": 384.77,
+    "end": 392.06,
+    "text": "Step four: Browse the file list. You will see all files inside the archive with "
+  },
+  {
+    "start": 392.56,
+    "end": 401.49,
+    "text": "The free plan handles archives up to 200 MB. For very large archives, a Day Pass"
+  },
+  {
+    "start": 401.49,
+    "end": 404.54,
+    "text": "When SammaPix is not the right choice"
+  },
+  {
+    "start": 404.54,
+    "end": 427.89,
+    "text": "Multi-volume archives, the .7z.001 and .7z.002 style, are not supported in the b"
+  },
+  {
+    "start": 427.89,
+    "end": 433.39,
+    "text": "Method 4: Terminal with p7zip (for developers and command-line users)"
+  },
+  {
+    "start": 433.89,
+    "end": 439.5,
+    "text": "Install Homebrew first from brew.sh, then run: brew install p7zip"
+  },
+  {
+    "start": 439.5,
+    "end": 444.47,
+    "text": "To extract a 7z file: 7z x archive.7z"
+  },
+  {
+    "start": 444.47,
+    "end": 451.19,
+    "text": "To extract to a specific folder: 7z x archive.7z, then -o and the destination pa"
+  },
+  {
+    "start": 451.19,
+    "end": 458.63,
+    "text": "To extract a password-protected 7z: 7z x -p followed immediately by your passwor"
+  },
+  {
+    "start": 458.63,
+    "end": 463.67,
+    "text": "To list contents without extracting: 7z l archive.7z"
+  },
+  {
+    "start": 463.67,
+    "end": 477.06,
+    "text": "Note the difference between 7z e, which extracts flat with no folders, and 7z x,"
+  },
+  {
+    "start": 477.06,
+    "end": 482.63,
+    "text": "Method 5: Archive Utility (the built-in tool that does not work for 7z)"
+  },
+  {
+    "start": 482.63,
+    "end": 518.56,
+    "text": "This section exists because many guides list Archive Utility as a potential opti"
+  },
+  {
+    "start": 518.56,
+    "end": 522.69,
+    "text": "How to open a password-protected 7z file on Mac"
+  },
+  {
+    "start": 522.69,
+    "end": 538.31,
+    "text": "All the working methods above support password-protected 7z archives. 7z support"
+  },
+  {
+    "start": 538.31,
+    "end": 547.58,
+    "text": "With Keka: a password prompt appears before extraction begins. Keka also has a b"
+  },
+  {
+    "start": 547.58,
+    "end": 553.91,
+    "text": "With The Unarchiver: a dialog asks for the password as soon as the archive is de"
+  },
+  {
+    "start": 553.91,
+    "end": 565.58,
+    "text": "With SammaPix online: a password field appears automatically when you drop an en"
+  },
+  {
+    "start": 565.58,
+    "end": 573.83,
+    "text": "With Terminal p7zip: use 7z x then -p followed immediately by your password, no "
+  },
+  {
+    "start": 573.83,
+    "end": 581.01,
+    "text": "Multi-volume 7z archives: .7z.001, .7z.002"
+  },
+  {
+    "start": 581.01,
+    "end": 611.75,
+    "text": "Sometimes large files are split into multiple 7z parts. You need all parts in th"
+  },
+  {
+    "start": 611.75,
+    "end": 615.88,
+    "text": "7z vs ZIP vs RAR: when to use which"
+  },
+  {
+    "start": 615.88,
+    "end": 643.34,
+    "text": "For almost all everyday use cases, ZIP wins on compatibility because it opens na"
+  },
+  {
+    "start": 643.34,
+    "end": 654.88,
+    "text": "If you received a 7z and want to convert it to ZIP for easier sharing, extract i"
+  },
+  {
+    "start": 656.88,
+    "end": 670.13,
+    "text": "If you also need to open a RAR archive, the SammaPix RAR Opener works the same w"
+  }
+]

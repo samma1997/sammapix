@@ -193,6 +193,7 @@ export const BLOG_SLUGS = [
   "optimize-images-shopify-free-guide",
   "image-compression-statistics-2026",
   "how-to-open-rar-files-on-mac",
+  "how-to-open-7z-files-on-mac",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

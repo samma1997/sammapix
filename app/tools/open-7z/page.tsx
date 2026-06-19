@@ -271,6 +271,13 @@ export default function Open7zPage() {
             >
               Merge PDF
             </Link>
+            . For a full comparison of methods to open .7z files on Mac, read the{" "}
+            <Link
+              href="/blog/how-to-open-7z-files-on-mac"
+              className="text-[#6366F1] hover:underline"
+            >
+              complete guide: How to Open 7z Files on Mac
+            </Link>
             .
           </p>
 
