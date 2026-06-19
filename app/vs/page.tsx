@@ -201,7 +201,7 @@ export default function VsHubPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
       {/* Breadcrumb */}
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-gray-400 mb-10">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#737373] mb-10">
         <Link href="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
           SammaPix
         </Link>

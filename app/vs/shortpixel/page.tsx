@@ -60,14 +60,14 @@ const tableRows = [
 function Cell({ value }: { value: boolean | string }) {
   if (value === true) return <Check className="h-4 w-4 text-green-500 mx-auto" strokeWidth={2} />;
   if (value === false) return <X className="h-4 w-4 text-gray-300 mx-auto" strokeWidth={2} />;
-  return <span className="text-xs text-gray-600 font-medium">{value}</span>;
+  return <span className="text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">{value}</span>;
 }
 
 export default function VsShortPixelPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-gray-400 mb-10">
+      <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#737373] mb-10">
         <Link href="/" className="hover:text-gray-600 transition-colors">SammaPix</Link>
         <span>/</span>
         <span>vs ShortPixel</span>
@@ -75,18 +75,18 @@ export default function VsShortPixelPage() {
 
       {/* Hero */}
       <div className="text-center mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-full text-xs text-gray-500 dark:text-[#737373] font-medium mb-6">
           Honest comparison- no sponsored ranking
         </div>
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight mb-4 leading-tight">
           SammaPix vs ShortPixel
         </h1>
-        <p className="text-lg text-gray-500 max-w-xl mx-auto">
+        <p className="text-lg text-gray-500 dark:text-[#737373] max-w-xl mx-auto">
           ShortPixel is a well-known image compression service- but it sends your files to a server and runs on a credit system. SammaPix is completely free, processes everything in your browser, and adds AI-powered renaming.
         </p>
         <div className="mt-8">
           <Link href="/">
-            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#4F46E5] transition-colors">
               Try SammaPix free
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
@@ -96,41 +96,41 @@ export default function VsShortPixelPage() {
 
       {/* Quick verdict */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-14">
-        <div className="p-5 border border-indigo-200 bg-indigo-50/40 rounded-md">
+        <div className="p-5 border border-indigo-200 dark:border-[#6366F1]/30 bg-indigo-50/40 dark:bg-[#6366F1]/10 rounded-md">
           <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">Choose SammaPix if you…</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-[#A3A3A3]">
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want 100% free compression with no credit limits</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Care about privacy (files never leave your device)</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need AI-generated SEO filenames and alt text</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Don&apos;t want to create an account just to compress</li>
           </ul>
         </div>
-        <div className="p-5 border border-gray-200 bg-gray-50/60 rounded-md">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Choose ShortPixel if you…</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Use WordPress and need a plugin that auto-optimizes</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Need AVIF compression output</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Want CDN-delivered, automatically compressed images</li>
+        <div className="p-5 border border-gray-200 dark:border-[#2A2A2A] bg-gray-50/60 dark:bg-[#1E1E1E] rounded-md">
+          <p className="text-xs font-semibold text-gray-500 dark:text-[#737373] uppercase tracking-wide mb-2">Choose ShortPixel if you…</p>
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-[#A3A3A3]">
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Use WordPress and need a plugin that auto-optimizes</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Need AVIF compression output</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Want CDN-delivered, automatically compressed images</li>
           </ul>
         </div>
       </div>
 
       {/* Comparison table */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Feature comparison</h2>
-        <div className="border border-gray-200 rounded-md overflow-hidden">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">Feature comparison</h2>
+        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 font-medium text-gray-500 w-1/2">Feature</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-900 w-1/4">SammaPix</th>
-                <th className="text-center px-4 py-3 font-medium text-gray-500 w-1/4">ShortPixel</th>
+              <tr className="bg-gray-50 dark:bg-[#252525] border-b border-gray-200 dark:border-[#2A2A2A]">
+                <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-[#737373] w-1/2">Feature</th>
+                <th className="text-center px-4 py-3 font-semibold text-gray-900 dark:text-[#E5E5E5] w-1/4">SammaPix</th>
+                <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-[#737373] w-1/4">ShortPixel</th>
               </tr>
             </thead>
             <tbody>
               {tableRows.map((row, i) => (
-                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                  <td className="px-4 py-3 text-gray-600">{row.feature}</td>
+                <tr key={i} className={i % 2 === 0 ? "bg-white dark:bg-[#191919]" : "bg-gray-50/50 dark:bg-[#1E1E1E]"}>
+                  <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">{row.feature}</td>
                   <td className="px-4 py-3 text-center"><Cell value={row.sammapix} /></td>
                   <td className="px-4 py-3 text-center"><Cell value={row.shortpixel} /></td>
                 </tr>
@@ -142,41 +142,41 @@ export default function VsShortPixelPage() {
 
       {/* Key differences */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">The key differences</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">The key differences</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Lock className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               Privacy - ShortPixel uploads your images to its servers
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               ShortPixel&apos;s compression engine runs on their servers, which means every image you process is transmitted over the internet. SammaPix compresses and converts entirely in your browser using WebAssembly and the Canvas API. Your files stay on your device at all times- critical if you handle client photos, legal documents, or private images.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <FileImage className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <FileImage className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               Credits vs. truly free- a real difference for casual users
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               ShortPixel&apos;s free tier gives you 100 credits per month- each compressed image uses one credit. If you exceed the limit you need to buy more. SammaPix&apos;s compression is unlimited and free forever, no credit system, no account required. You can compress 500 images in a day and pay nothing.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
               AI rename- a feature ShortPixel doesn&apos;t offer
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-friendly filename and alt text description. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_7732.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">fresh-basil-pasta-recipe-close-up.webp</code>. ShortPixel focuses purely on compression and delivery- it has no AI rename feature at any price point.
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-friendly filename and alt text description. Upload <code className="text-xs bg-gray-100 dark:bg-[#252525] px-1 py-0.5 rounded">IMG_7732.jpg</code>, get back <code className="text-xs bg-gray-100 dark:bg-[#252525] px-1 py-0.5 rounded">fresh-basil-pasta-recipe-close-up.webp</code>. ShortPixel focuses purely on compression and delivery- it has no AI rename feature at any price point.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Zap className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               Where ShortPixel wins - WordPress and automation
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               ShortPixel&apos;s WordPress plugin is its strongest selling point. It automatically compresses every image you upload to WordPress, with no manual steps. If your entire workflow lives inside WordPress, ShortPixel is a natural fit. SammaPix is a browser-based tool designed for manual batch workflows- it has no WordPress plugin.
             </p>
           </div>
@@ -184,60 +184,60 @@ export default function VsShortPixelPage() {
       </div>
 
       {/* Who should switch */}
-      <div className="mb-14 p-6 border border-gray-200 rounded-md bg-gray-50/40">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Who should switch from ShortPixel to SammaPix?</h2>
-        <p className="text-sm text-gray-600 leading-relaxed mb-4">
+      <div className="mb-14 p-6 border border-gray-200 dark:border-[#2A2A2A] rounded-md bg-gray-50/40 dark:bg-[#1E1E1E]">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">Who should switch from ShortPixel to SammaPix?</h2>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-4">
           ShortPixel is a reliable paid service with a strong WordPress focus. Consider SammaPix if:
         </p>
-        <ul className="space-y-3 text-sm text-gray-600">
+        <ul className="space-y-3 text-sm text-gray-600 dark:text-[#A3A3A3]">
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You&apos;re hitting ShortPixel&apos;s monthly credit limits.</strong> SammaPix compression has no limits- process as many files as you need, for free.</span>
+            <span><strong className="text-gray-800 dark:text-[#E5E5E5]">You&apos;re hitting ShortPixel&apos;s monthly credit limits.</strong> SammaPix compression has no limits- process as many files as you need, for free.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You work with sensitive images.</strong> Legal, medical, or client photos should not be uploaded to third-party servers. SammaPix is 100% client-side.</span>
+            <span><strong className="text-gray-800 dark:text-[#E5E5E5]">You work with sensitive images.</strong> Legal, medical, or client photos should not be uploaded to third-party servers. SammaPix is 100% client-side.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You want SEO-optimized filenames automatically.</strong> ShortPixel compresses your images but keeps the original filenames. SammaPix can rename them with AI in the same workflow.</span>
+            <span><strong className="text-gray-800 dark:text-[#E5E5E5]">You want SEO-optimized filenames automatically.</strong> ShortPixel compresses your images but keeps the original filenames. SammaPix can rename them with AI in the same workflow.</span>
           </li>
           <li className="flex items-start gap-3">
             <Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} />
-            <span><strong className="text-gray-800">You don&apos;t use WordPress.</strong> For standalone websites, static sites, or manual workflows, a browser tool like SammaPix is faster and simpler.</span>
+            <span><strong className="text-gray-800 dark:text-[#E5E5E5]">You don&apos;t use WordPress.</strong> For standalone websites, static sites, or manual workflows, a browser tool like SammaPix is faster and simpler.</span>
           </li>
         </ul>
       </div>
 
       {/* Internal links */}
       <div className="mb-14">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Explore SammaPix tools</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">Explore SammaPix tools</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+          <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 dark:border-[#2A2A2A] rounded-md hover:bg-gray-50 transition-colors group">
             <div>
-              <p className="text-sm font-medium text-gray-900">Image Compressor</p>
-              <p className="text-xs text-gray-500 mt-0.5">Compress JPG, PNG, WebP- 100% free, no upload</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">Image Compressor</p>
+              <p className="text-xs text-gray-500 dark:text-[#737373] mt-0.5">Compress JPG, PNG, WebP- 100% free, no upload</p>
             </div>
-            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-[#737373] group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
-          <Link href="/tools/ai-rename" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+          <Link href="/tools/ai-rename" className="flex items-center justify-between p-4 border border-gray-200 dark:border-[#2A2A2A] rounded-md hover:bg-gray-50 transition-colors group">
             <div>
-              <p className="text-sm font-medium text-gray-900">AI Rename</p>
-              <p className="text-xs text-gray-500 mt-0.5">Generate SEO filenames and alt text with Gemini</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">AI Rename</p>
+              <p className="text-xs text-gray-500 dark:text-[#737373] mt-0.5">Generate SEO filenames and alt text with Gemini</p>
             </div>
-            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-[#737373] group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
         </div>
       </div>
 
       {/* Bottom CTA */}
-      <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Ready for a free ShortPixel alternative?</h2>
-        <p className="text-sm text-gray-500 mb-6">
+      <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md p-8 text-center bg-gray-50 dark:bg-[#1E1E1E]">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">Ready for a free ShortPixel alternative?</h2>
+        <p className="text-sm text-gray-500 dark:text-[#737373] mb-6">
           No signup required for compression. No credit limits. Files never leave your browser.
         </p>
         <Link href="/">
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+          <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#4F46E5] transition-colors">
             Open SammaPix
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </button>

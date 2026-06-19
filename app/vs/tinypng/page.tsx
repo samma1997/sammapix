@@ -59,14 +59,14 @@ const tableRows = [
 function Cell({ value }: { value: boolean | string }) {
   if (value === true) return <Check className="h-4 w-4 text-green-500 mx-auto" strokeWidth={2} />;
   if (value === false) return <X className="h-4 w-4 text-gray-300 mx-auto" strokeWidth={2} />;
-  return <span className="text-xs text-gray-600 font-medium">{value}</span>;
+  return <span className="text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">{value}</span>;
 }
 
 export default function VsTinyPngPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-gray-400 mb-10">
+      <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#737373] mb-10">
         <Link href="/" className="hover:text-gray-600 transition-colors">SammaPix</Link>
         <span>/</span>
         <span>vs TinyPNG</span>
@@ -74,18 +74,18 @@ export default function VsTinyPngPage() {
 
       {/* Hero */}
       <div className="text-center mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-full text-xs text-gray-500 dark:text-[#737373] font-medium mb-6">
           Honest comparison- no sponsored ranking
         </div>
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight mb-4 leading-tight">
           SammaPix vs TinyPNG
         </h1>
-        <p className="text-lg text-gray-500 max-w-xl mx-auto">
+        <p className="text-lg text-gray-500 dark:text-[#737373] max-w-xl mx-auto">
           Both are free. Both compress images. But only one converts to WebP, renames files with AI, and never uploads your photos to a server.
         </p>
         <div className="mt-8">
           <Link href="/">
-            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#4F46E5] transition-colors">
               Try SammaPix free
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
@@ -95,40 +95,40 @@ export default function VsTinyPngPage() {
 
       {/* Quick verdict */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-14">
-        <div className="p-5 border border-indigo-200 bg-indigo-50/40 rounded-md">
+        <div className="p-5 border border-indigo-200 dark:border-[#6366F1]/30 bg-indigo-50/40 dark:bg-[#6366F1]/10 rounded-md">
           <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">Choose SammaPix if you…</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-[#A3A3A3]">
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want WebP conversion built-in</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need AI-generated SEO filenames</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Care about privacy (100% client-side)</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want a quality slider (not fixed)</li>
           </ul>
         </div>
-        <div className="p-5 border border-gray-200 bg-gray-50/60 rounded-md">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Choose TinyPNG if you…</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Use WordPress and need a plugin</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Need API integration for automated pipelines</li>
+        <div className="p-5 border border-gray-200 dark:border-[#2A2A2A] bg-gray-50/60 dark:bg-[#1E1E1E] rounded-md">
+          <p className="text-xs font-semibold text-gray-500 dark:text-[#737373] uppercase tracking-wide mb-2">Choose TinyPNG if you…</p>
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-[#A3A3A3]">
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Use WordPress and need a plugin</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Need API integration for automated pipelines</li>
           </ul>
         </div>
       </div>
 
       {/* Comparison table */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Feature comparison</h2>
-        <div className="border border-gray-200 rounded-md overflow-hidden">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">Feature comparison</h2>
+        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 font-medium text-gray-500 w-1/2">Feature</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-900 w-1/4">SammaPix</th>
-                <th className="text-center px-4 py-3 font-medium text-gray-500 w-1/4">TinyPNG</th>
+              <tr className="bg-gray-50 dark:bg-[#252525] border-b border-gray-200 dark:border-[#2A2A2A]">
+                <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-[#737373] w-1/2">Feature</th>
+                <th className="text-center px-4 py-3 font-semibold text-gray-900 dark:text-[#E5E5E5] w-1/4">SammaPix</th>
+                <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-[#737373] w-1/4">TinyPNG</th>
               </tr>
             </thead>
             <tbody>
               {tableRows.map((row, i) => (
-                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                  <td className="px-4 py-3 text-gray-600">{row.feature}</td>
+                <tr key={i} className={i % 2 === 0 ? "bg-white dark:bg-[#191919]" : "bg-gray-50/50 dark:bg-[#1E1E1E]"}>
+                  <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">{row.feature}</td>
                   <td className="px-4 py-3 text-center"><Cell value={row.sammapix} /></td>
                   <td className="px-4 py-3 text-center"><Cell value={row.tinypng} /></td>
                 </tr>
@@ -140,101 +140,101 @@ export default function VsTinyPngPage() {
 
       {/* Real-world compression benchmark */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Real-world compression test</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">Real-world compression test</h2>
+        <p className="text-sm text-gray-500 dark:text-[#737373] mb-4">
           We tested both tools with the same 5 MB JPEG photo (4000x3000px, landscape). Results:
         </p>
-        <div className="border border-gray-200 rounded-md overflow-hidden">
+        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 font-medium text-gray-500">Metric</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-900">SammaPix</th>
-                <th className="text-center px-4 py-3 font-medium text-gray-500">TinyPNG</th>
+              <tr className="bg-gray-50 dark:bg-[#252525] border-b border-gray-200 dark:border-[#2A2A2A]">
+                <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-[#737373]">Metric</th>
+                <th className="text-center px-4 py-3 font-semibold text-gray-900 dark:text-[#E5E5E5]">SammaPix</th>
+                <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-[#737373]">TinyPNG</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white">
-                <td className="px-4 py-3 text-gray-600">Original file</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">5.0 MB JPEG</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">5.0 MB JPEG</td>
+              <tr className="bg-white dark:bg-[#191919]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Original file</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">5.0 MB JPEG</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">5.0 MB JPEG</td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 text-gray-600">Compressed output (JPEG)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">812 KB (84% smaller)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">856 KB (83% smaller)</td>
+              <tr className="bg-gray-50/50 dark:bg-[#1E1E1E]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Compressed output (JPEG)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">812 KB (84% smaller)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">856 KB (83% smaller)</td>
               </tr>
-              <tr className="bg-white">
-                <td className="px-4 py-3 text-gray-600">WebP output</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">624 KB (87% smaller)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-400 font-medium">N/A (not available)</td>
+              <tr className="bg-white dark:bg-[#191919]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">WebP output</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">624 KB (87% smaller)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-400 dark:text-[#737373] font-medium">N/A (not available)</td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 text-gray-600">Processing time</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">~1.2s (in-browser)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">~3.5s (upload + server)</td>
+              <tr className="bg-gray-50/50 dark:bg-[#1E1E1E]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Processing time</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">~1.2s (in-browser)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">~3.5s (upload + server)</td>
               </tr>
-              <tr className="bg-white">
-                <td className="px-4 py-3 text-gray-600">File uploaded to server?</td>
+              <tr className="bg-white dark:bg-[#191919]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">File uploaded to server?</td>
                 <td className="px-4 py-3 text-center"><Check className="h-4 w-4 text-green-500 mx-auto" strokeWidth={2} /><span className="text-xs text-green-600">No</span></td>
                 <td className="px-4 py-3 text-center"><X className="h-4 w-4 text-red-400 mx-auto" strokeWidth={2} /><span className="text-xs text-red-500">Yes</span></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-400 mt-3">
+        <p className="text-xs text-gray-400 dark:text-[#737373] mt-3">
           Test performed March 2026. Quality set to 80 on SammaPix. TinyPNG uses automatic quality. Results may vary depending on image content.
         </p>
       </div>
 
       {/* Verdict */}
-      <div className="mb-14 p-6 border border-indigo-200 bg-indigo-50/30 rounded-md">
-        <h2 className="text-lg font-semibold text-gray-900 mb-3">Verdict: SammaPix vs TinyPNG</h2>
-        <p className="text-sm text-gray-700 leading-relaxed mb-3">
+      <div className="mb-14 p-6 border border-indigo-200 dark:border-[#6366F1]/30 bg-indigo-50/30 dark:bg-[#6366F1]/10 rounded-md">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3">Verdict: SammaPix vs TinyPNG</h2>
+        <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed mb-3">
           <strong>SammaPix is better for</strong> users who want WebP conversion, AI-powered renaming, privacy (no server uploads), quality control, and a cheaper Pro plan ($9/mo vs $25/mo). It supports 27+ tools and 6 image formats including HEIC and AVIF.
         </p>
-        <p className="text-sm text-gray-700 leading-relaxed">
+        <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
           <strong>TinyPNG is better for</strong> WordPress users who need a plugin, teams that rely on TinyPNG&apos;s API for automated pipelines, and users who prefer a simpler single-purpose compressor.
         </p>
       </div>
 
       {/* Key differences */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">The key differences</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">The key differences</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Lock className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               Privacy- your files never leave your device
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               TinyPNG uploads your images to their servers for compression. SammaPix compresses and converts everything locally in your browser using WebAssembly and the Canvas API. Your files are never sent anywhere- this matters if you work with client photos, confidential screenshots, or private images.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <FileImage className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <FileImage className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               WebP conversion - TinyPNG doesn&apos;t do it for free
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               WebP is 25-34% smaller than JPEG at equivalent quality. It&apos;s supported by all modern browsers and improves Core Web Vitals. TinyPNG supports WebP input but doesn&apos;t convert JPG/PNG to WebP. SammaPix converts any image to WebP in one click, in-browser, for free.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
               AI rename- a feature TinyPNG doesn&apos;t have at all
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">IMG_4829.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">golden-retriever-puppy-playing-grass.webp</code>- automatically. This feature is free with a login (10/day), or unlimited on Pro.
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 dark:bg-[#252525] px-1 py-0.5 rounded">IMG_4829.jpg</code>, get back <code className="text-xs bg-gray-100 dark:bg-[#252525] px-1 py-0.5 rounded">golden-retriever-puppy-playing-grass.webp</code>- automatically. This feature is free with a login (10/day), or unlimited on Pro.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Zap className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               Price - SammaPix Pro is 3x cheaper
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               TinyPNG Pro starts at $25/month. SammaPix Pro is $9/month and includes unlimited AI rename (200/day), bulk processing up to 500 files, ZIP download, and no ads. For most users, the free plan is enough forever.
             </p>
           </div>
@@ -242,13 +242,13 @@ export default function VsTinyPngPage() {
       </div>
 
       {/* Bottom CTA */}
-      <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Ready to try a better alternative?</h2>
-        <p className="text-sm text-gray-500 mb-6">
+      <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md p-8 text-center bg-gray-50 dark:bg-[#1E1E1E]">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">Ready to try a better alternative?</h2>
+        <p className="text-sm text-gray-500 dark:text-[#737373] mb-6">
           No signup required for compression. Free forever for the core tools.
         </p>
         <Link href="/">
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+          <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#4F46E5] transition-colors">
             Open SammaPix
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </button>
@@ -257,28 +257,28 @@ export default function VsTinyPngPage() {
 
       {/* Related tools and pages */}
       <div className="mb-14">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Explore SammaPix further</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-4">Explore SammaPix further</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+          <Link href="/tools/compress" className="flex items-center justify-between p-4 border border-gray-200 dark:border-[#2A2A2A] rounded-md hover:bg-gray-50 transition-colors group">
             <div>
-              <p className="text-sm font-medium text-gray-900">Compress Images</p>
-              <p className="text-xs text-gray-500 mt-0.5">JPG, PNG, WebP compression</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">Compress Images</p>
+              <p className="text-xs text-gray-500 dark:text-[#737373] mt-0.5">JPG, PNG, WebP compression</p>
             </div>
-            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-[#737373] group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
-          <Link href="/convert/png-to-webp" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+          <Link href="/convert/png-to-webp" className="flex items-center justify-between p-4 border border-gray-200 dark:border-[#2A2A2A] rounded-md hover:bg-gray-50 transition-colors group">
             <div>
-              <p className="text-sm font-medium text-gray-900">Convert to WebP</p>
-              <p className="text-xs text-gray-500 mt-0.5">25-35% smaller files</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">Convert to WebP</p>
+              <p className="text-xs text-gray-500 dark:text-[#737373] mt-0.5">25-35% smaller files</p>
             </div>
-            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-[#737373] group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
-          <Link href="/blog/best-image-compression-tools-2026" className="flex items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors group">
+          <Link href="/blog/best-image-compression-tools-2026" className="flex items-center justify-between p-4 border border-gray-200 dark:border-[#2A2A2A] rounded-md hover:bg-gray-50 transition-colors group">
             <div>
-              <p className="text-sm font-medium text-gray-900">Guide: Best Tools 2026</p>
-              <p className="text-xs text-gray-500 mt-0.5">Complete comparison</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-[#E5E5E5]">Guide: Best Tools 2026</p>
+              <p className="text-xs text-gray-500 dark:text-[#737373] mt-0.5">Complete comparison</p>
             </div>
-            <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
+            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-[#737373] group-hover:text-gray-600 transition-colors" strokeWidth={1.5} />
           </Link>
         </div>
       </div>
