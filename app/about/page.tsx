@@ -43,7 +43,7 @@ export default function AboutPage() {
   const sriLankaPhotos = sriLanka ? sriLanka.photos : [];
 
   // Real destination cards, ordered, using each trip's chosen cover (a people shot).
-  const realTrips = ["sri-lanka", "bali"]
+  const realTrips = ["sri-lanka", "bali", "thailand"]
     .map((slug) => allTrips.find((t) => t.slug === slug))
     .filter(Boolean) as typeof allTrips;
   const coverThumb = (t: (typeof allTrips)[number]) =>
@@ -169,7 +169,6 @@ export default function AboutPage() {
               {/* Coming soon destinations- blurred */}
               {[
                 { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
-                { name: "Thailand", year: "2024", gradient: "from-amber-900 to-amber-700" },
                 { name: "China", year: "2023", gradient: "from-sky-900 to-sky-700" },
               ].map((dest) => (
                 <div

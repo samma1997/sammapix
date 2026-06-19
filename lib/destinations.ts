@@ -2309,7 +2309,7 @@ export const trips: Trip[] = [
     continent: "Asia",
     startDate: "2025-04-08",
     endDate: "2025-05-09",
-    coverSrc: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/thailand/61-kayan-woman-golden-neck-rings-chiang-rai-thailand",
+    coverSrc: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/thailand/67-kayan-long-neck-woman-portrait-chiang-rai-thailand",
     excerpt:
       "A month across Thailand, from the temples of Bangkok to the hill tribes of Chiang Rai and the islands of the Andaman coast.",
     description:
