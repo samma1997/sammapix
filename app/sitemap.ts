@@ -6,6 +6,7 @@ import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
 import { getAllRatios } from "@/lib/crop-ratios";
 import { getAllPassportPresets } from "@/lib/passport-presets";
+import { getAllTrips } from "@/lib/destinations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages with different priorities and change frequencies
@@ -180,20 +181,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Portfolio sub-pages
-  const portfolioPages: MetadataRoute.Sitemap = [
-    {
-      url: `${APP_URL}/about/sri-lanka`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${APP_URL}/about/bali`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-  ];
+  // About/trip pages- driven from lib/destinations.ts (auto-include new trips)
+  const portfolioPages: MetadataRoute.Sitemap = getAllTrips().map((t) => ({
+    url: `${APP_URL}/about/${t.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
 
   // Programmatic resize pages- driven from lib/resize-platforms.ts
   const resizePages: MetadataRoute.Sitemap = getAllPlatforms().map((p) => ({
