@@ -284,12 +284,23 @@ export default function UnrarPage() {
           <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
             Why RAR files are hard to open on Mac
           </h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6 leading-relaxed">
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
             macOS does not include a built-in RAR extractor. ZIP, gzip, and
             even 7z are supported natively, but RAR uses a proprietary
             compression algorithm owned by RARLAB. Most users resort to
             installing The Unarchiver or WinRAR. This browser-based tool
             removes the need for any installation.
+          </p>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6 leading-relaxed">
+            For a full comparison of all methods (including Terminal commands,
+            Keka, and multi-volume .part1.rar archives), read the complete{" "}
+            <Link
+              href="/blog/how-to-open-rar-files-on-mac"
+              className="text-[#6366F1] hover:underline"
+            >
+              guide to opening RAR files on Mac
+            </Link>
+            .
           </p>
 
           <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
