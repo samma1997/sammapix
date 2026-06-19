@@ -10,21 +10,17 @@ interface GalleryGridProps {
 }
 
 /**
- * True masonry layout: each photo keeps its natural aspect ratio.
- * Columns are balanced by cumulative height to avoid one column
- * being significantly taller than the others.
+ * Masonry layout che PRESERVA l'ordine cronologico.
+ * Round-robin: la foto i va nella colonna i % cols, quindi leggendo
+ * riga per riga (sinistra -> destra, alto -> basso) le foto restano
+ * nell'ordine dell'array (cronologico di scatto). Ogni foto mantiene
+ * il suo aspect ratio naturale.
  */
 function distributePhotos(photos: TripPhoto[], cols: number): TripPhoto[][] {
   const columns: TripPhoto[][] = Array.from({ length: cols }, () => []);
-  const heights: number[] = new Array(cols).fill(0);
-
-  for (const photo of photos) {
-    const ratio = (photo.height || 800) / (photo.width || 1200);
-    const minIdx = heights.indexOf(Math.min(...heights));
-    columns[minIdx].push(photo);
-    heights[minIdx] += ratio;
-  }
-
+  photos.forEach((photo, i) => {
+    columns[i % cols].push(photo);
+  });
   return columns;
 }
 
