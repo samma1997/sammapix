@@ -39,8 +39,19 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const allTrips = getAllTrips();
-  const sriLanka = allTrips.find((t) => t.slug === "sri-lanka");
-  const sriLankaPhotos = sriLanka ? sriLanka.photos : [];
+  // Hero background: photos mixed across all trips (interleaved, deterministic
+  // so SSR and client match), capped for performance.
+  const heroPhotos = (() => {
+    const out: (typeof allTrips)[number]["photos"] = [];
+    const max = Math.max(0, ...allTrips.map((t) => t.photos.length));
+    for (let i = 0; i < max && out.length < 24; i++) {
+      for (const t of allTrips) {
+        if (t.photos[i]) out.push(t.photos[i]);
+        if (out.length >= 24) break;
+      }
+    }
+    return out;
+  })();
 
   // Real destination cards, ordered, using each trip's chosen cover (a people shot).
   const realTrips = ["sri-lanka", "bali", "thailand"]
@@ -98,8 +109,8 @@ export default function AboutPage() {
         style={{ height: "calc(70vh - 56px)" }}
         aria-label="Photo strip hero"
       >
-        {/* Five-column photo strip (clickable → opens full Sri Lanka gallery) */}
-        <HeroPhotoStrip photos={sriLankaPhotos} visibleCount={5} />
+        {/* Animated marquee of photos mixed across all trips, scrolling behind the title */}
+        <HeroPhotoStrip photos={heroPhotos} />
 
         {/* Gradient overlay at bottom for text legibility */}
         <div

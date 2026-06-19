@@ -1,57 +1,52 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { Lightbox } from "./Lightbox";
 import type { TripPhoto } from "@/lib/destinations";
 
 interface HeroPhotoStripProps {
-  /** All photos of the trip (the lightbox navigates the full gallery). */
+  /** Photos to scroll in the background (mixed across trips). */
   photos: TripPhoto[];
-  /** How many photos to show in the strip (default 5). */
+  /** Kept for backwards compatibility, no longer used. */
   visibleCount?: number;
 }
 
 /**
- * The five-column hero strip on /about, made interactive.
- * Visual layout is identical to the previous static version — only
- * click-to-open-lightbox, cursor and a11y focus are added.
+ * Animated hero background: an infinite horizontal marquee of full-height
+ * photo panels that scroll slowly behind the title. Decorative (aria-hidden),
+ * pauses on hover. The list is duplicated once so the loop is seamless.
  */
-export function HeroPhotoStrip({ photos, visibleCount = 5 }: HeroPhotoStripProps) {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const strip = photos.slice(0, visibleCount);
+export function HeroPhotoStrip({ photos }: HeroPhotoStripProps) {
+  if (!photos.length) return null;
+
+  const loop = [...photos, ...photos];
+  // Constant visual speed: longer strips take proportionally longer.
+  const duration = Math.max(45, photos.length * 3);
 
   return (
-    <>
-      <div className="flex h-full w-full gap-0.5">
-        {strip.map((photo, index) => (
-          <button
-            key={photo.id}
-            type="button"
-            onClick={() => setLightboxIndex(index)}
-            className="relative flex-1 overflow-hidden group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-inset"
-            aria-label={`Open photo: ${photo.caption || photo.alt}`}
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <style>{`@keyframes heroMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+      <div
+        className="flex h-full w-max items-stretch will-change-transform hover:[animation-play-state:paused]"
+        style={{ animation: `heroMarquee ${duration}s linear infinite` }}
+      >
+        {loop.map((photo, i) => (
+          <div
+            key={`${photo.id}-${i}`}
+            className="relative h-full w-[44vw] sm:w-[28vw] md:w-[20vw] shrink-0 border-r border-black/30"
           >
             <Image
               src={photo.srcThumb}
-              alt={photo.alt}
+              alt=""
               fill
-              sizes="20vw"
-              className="object-cover brightness-75 group-hover:brightness-90 transition-all duration-500 ease-out"
+              sizes="28vw"
+              className="object-cover brightness-[0.62]"
               unoptimized
-              priority={index < 3}
+              priority={i < 5}
             />
-          </button>
+          </div>
         ))}
       </div>
-
-      {lightboxIndex !== null && (
-        <Lightbox
-          photos={photos}
-          initialIndex={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-        />
-      )}
-    </>
+    </div>
   );
 }
