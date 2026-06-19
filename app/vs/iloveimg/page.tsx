@@ -55,14 +55,14 @@ const tableRows: { feature: string; sammapix: boolean | string; iloveimg: boolea
 function Cell({ value }: { value: boolean | string }) {
   if (value === true) return <Check className="h-4 w-4 text-green-500 mx-auto" strokeWidth={2} />;
   if (value === false) return <X className="h-4 w-4 text-gray-300 mx-auto" strokeWidth={2} />;
-  return <span className="text-xs text-gray-600 font-medium">{value}</span>;
+  return <span className="text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">{value}</span>;
 }
 
 export default function VsILoveImgPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-gray-400 mb-10">
+      <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#737373] mb-10">
         <Link href="/" className="hover:text-gray-600 transition-colors">SammaPix</Link>
         <span>/</span>
         <span>vs iLoveIMG</span>
@@ -70,18 +70,18 @@ export default function VsILoveImgPage() {
 
       {/* Hero */}
       <div className="text-center mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs text-gray-500 font-medium mb-6">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 dark:bg-[#252525] border border-gray-200 dark:border-[#2A2A2A] rounded-full text-xs text-gray-500 dark:text-[#737373] font-medium mb-6">
           Honest comparison- no sponsored ranking
         </div>
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-[#E5E5E5] tracking-tight mb-4 leading-tight">
           SammaPix vs iLoveIMG
         </h1>
-        <p className="text-lg text-gray-500 max-w-xl mx-auto">
+        <p className="text-lg text-gray-500 dark:text-[#737373] max-w-xl mx-auto">
           iLoveIMG is a popular multi-tool suite, but it uploads files to remote servers, has a 200 MB free limit, and no AI features. Here&apos;s the full comparison.
         </p>
         <div className="mt-8">
           <Link href="/">
-            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+            <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#4F46E5] transition-colors">
               Try SammaPix free
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
@@ -91,41 +91,41 @@ export default function VsILoveImgPage() {
 
       {/* Quick verdict */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-14">
-        <div className="p-5 border border-indigo-200 bg-indigo-50/40 rounded-md">
+        <div className="p-5 border border-indigo-200 dark:border-[#6366F1]/30 bg-indigo-50/40 dark:bg-[#6366F1]/10 rounded-md">
           <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">Choose SammaPix if you…</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-[#A3A3A3]">
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Privacy matters- you don&apos;t want files uploaded to a server</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Need AI-generated SEO filenames and alt text</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want EXIF/GPS metadata removal</li>
             <li className="flex items-start gap-2"><Check className="h-4 w-4 text-indigo-500 mt-0.5 shrink-0" strokeWidth={2} /> Want faster processing (client-side is instant)</li>
           </ul>
         </div>
-        <div className="p-5 border border-gray-200 bg-gray-50/60 rounded-md">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Choose iLoveIMG if you…</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Need a full suite of image tools (resize, crop, watermark)</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Want to edit images as well as compress them</li>
-            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 mt-0.5 shrink-0" strokeWidth={2} /> Work with very large files over 20 MB</li>
+        <div className="p-5 border border-gray-200 dark:border-[#2A2A2A] bg-gray-50/60 dark:bg-[#1E1E1E] rounded-md">
+          <p className="text-xs font-semibold text-gray-500 dark:text-[#737373] uppercase tracking-wide mb-2">Choose iLoveIMG if you…</p>
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-[#A3A3A3]">
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Need a full suite of image tools (resize, crop, watermark)</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Want to edit images as well as compress them</li>
+            <li className="flex items-start gap-2"><Check className="h-4 w-4 text-gray-400 dark:text-[#737373] mt-0.5 shrink-0" strokeWidth={2} /> Work with very large files over 20 MB</li>
           </ul>
         </div>
       </div>
 
       {/* Comparison table */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Feature comparison</h2>
-        <div className="border border-gray-200 rounded-md overflow-hidden">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">Feature comparison</h2>
+        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 font-medium text-gray-500 w-1/2">Feature</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-900 w-1/4">SammaPix</th>
-                <th className="text-center px-4 py-3 font-medium text-gray-500 w-1/4">iLoveIMG</th>
+              <tr className="bg-gray-50 dark:bg-[#252525] border-b border-gray-200 dark:border-[#2A2A2A]">
+                <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-[#737373] w-1/2">Feature</th>
+                <th className="text-center px-4 py-3 font-semibold text-gray-900 dark:text-[#E5E5E5] w-1/4">SammaPix</th>
+                <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-[#737373] w-1/4">iLoveIMG</th>
               </tr>
             </thead>
             <tbody>
               {tableRows.map((row, i) => (
-                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                  <td className="px-4 py-3 text-gray-600">{row.feature}</td>
+                <tr key={i} className={i % 2 === 0 ? "bg-white dark:bg-[#191919]" : "bg-gray-50/50 dark:bg-[#1E1E1E]"}>
+                  <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">{row.feature}</td>
                   <td className="px-4 py-3 text-center"><Cell value={row.sammapix} /></td>
                   <td className="px-4 py-3 text-center"><Cell value={row.iloveimg} /></td>
                 </tr>
@@ -137,106 +137,106 @@ export default function VsILoveImgPage() {
 
       {/* Real-world compression benchmark */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Real-world compression test</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">Real-world compression test</h2>
+        <p className="text-sm text-gray-500 dark:text-[#737373] mb-4">
           We tested both tools with the same 5 MB JPEG photo (4000x3000px, landscape). Results:
         </p>
-        <div className="border border-gray-200 rounded-md overflow-hidden">
+        <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-4 py-3 font-medium text-gray-500">Metric</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-900">SammaPix</th>
-                <th className="text-center px-4 py-3 font-medium text-gray-500">iLoveIMG</th>
+              <tr className="bg-gray-50 dark:bg-[#252525] border-b border-gray-200 dark:border-[#2A2A2A]">
+                <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-[#737373]">Metric</th>
+                <th className="text-center px-4 py-3 font-semibold text-gray-900 dark:text-[#E5E5E5]">SammaPix</th>
+                <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-[#737373]">iLoveIMG</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white">
-                <td className="px-4 py-3 text-gray-600">Original file</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">5.0 MB JPEG</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">5.0 MB JPEG</td>
+              <tr className="bg-white dark:bg-[#191919]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Original file</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">5.0 MB JPEG</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">5.0 MB JPEG</td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 text-gray-600">Compressed JPEG output</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">812 KB (84% smaller)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">920 KB (82% smaller)</td>
+              <tr className="bg-gray-50/50 dark:bg-[#1E1E1E]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Compressed JPEG output</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">812 KB (84% smaller)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">920 KB (82% smaller)</td>
               </tr>
-              <tr className="bg-white">
-                <td className="px-4 py-3 text-gray-600">WebP output</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">624 KB (87% smaller)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">710 KB (86% smaller)</td>
+              <tr className="bg-white dark:bg-[#191919]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">WebP output</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">624 KB (87% smaller)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">710 KB (86% smaller)</td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 text-gray-600">Processing time</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">~1.2s (in-browser)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-600 font-medium">~4.8s (upload + server)</td>
+              <tr className="bg-gray-50/50 dark:bg-[#1E1E1E]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">Processing time</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">~1.2s (in-browser)</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-600 dark:text-[#A3A3A3] font-medium">~4.8s (upload + server)</td>
               </tr>
-              <tr className="bg-white">
-                <td className="px-4 py-3 text-gray-600">File uploaded to server?</td>
+              <tr className="bg-white dark:bg-[#191919]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">File uploaded to server?</td>
                 <td className="px-4 py-3 text-center"><Check className="h-4 w-4 text-green-500 mx-auto" strokeWidth={2} /><span className="text-xs text-green-600">No</span></td>
                 <td className="px-4 py-3 text-center"><X className="h-4 w-4 text-red-400 mx-auto" strokeWidth={2} /><span className="text-xs text-red-500">Yes</span></td>
               </tr>
-              <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 text-gray-600">EXIF metadata stripped?</td>
+              <tr className="bg-gray-50/50 dark:bg-[#1E1E1E]">
+                <td className="px-4 py-3 text-gray-600 dark:text-[#A3A3A3]">EXIF metadata stripped?</td>
                 <td className="px-4 py-3 text-center text-xs text-green-600 font-medium">Yes (automatic)</td>
-                <td className="px-4 py-3 text-center text-xs text-gray-400 font-medium">No</td>
+                <td className="px-4 py-3 text-center text-xs text-gray-400 dark:text-[#737373] font-medium">No</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-400 mt-3">
+        <p className="text-xs text-gray-400 dark:text-[#737373] mt-3">
           Test performed March 2026. SammaPix quality set to 80. iLoveIMG uses automatic quality. Results may vary depending on image content.
         </p>
       </div>
 
       {/* Verdict */}
-      <div className="mb-14 p-6 border border-indigo-200 bg-indigo-50/30 rounded-md">
-        <h2 className="text-lg font-semibold text-gray-900 mb-3">Verdict: SammaPix vs iLoveIMG</h2>
-        <p className="text-sm text-gray-700 leading-relaxed mb-3">
+      <div className="mb-14 p-6 border border-indigo-200 dark:border-[#6366F1]/30 bg-indigo-50/30 dark:bg-[#6366F1]/10 rounded-md">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3">Verdict: SammaPix vs iLoveIMG</h2>
+        <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed mb-3">
           <strong>SammaPix is better for</strong> users who care about privacy (files never leave the browser), need AI-powered renaming and alt text for SEO, want EXIF metadata removal, and prefer faster client-side processing. SammaPix compresses slightly more (84% vs 82% on JPEG) and is 4x faster because nothing is uploaded.
         </p>
-        <p className="text-sm text-gray-700 leading-relaxed">
+        <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
           <strong>iLoveIMG is better for</strong> users who need a full editing suite (crop, watermark, rotate, meme generator) and don&apos;t mind uploading files to a server. iLoveIMG offers 30+ tools including PDF conversion, which SammaPix does not.
         </p>
       </div>
 
       {/* Key differences */}
       <div className="mb-14">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">The key differences</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-6">The key differences</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Lock className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Lock className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               File privacy- iLoveIMG uploads your files to their servers
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               iLoveIMG transmits every image you process to their remote servers. While they state files are deleted after a few hours, your data still travels across the internet. SammaPix compresses and converts everything locally using WebAssembly and the Canvas API- your files never leave your device, making it the only truly private option.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-indigo-500" strokeWidth={1.5} />
               AI features- iLoveIMG has zero AI capabilities
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">DSC_0387.jpg</code>, get back <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">fresh-avocado-toast-sourdough-breakfast.webp</code>- automatically. iLoveIMG has no AI features at all; it is purely a manual tool.
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
+              SammaPix uses Google Gemini to analyze each image and generate an SEO-optimized filename and alt text. Upload <code className="text-xs bg-gray-100 dark:bg-[#252525] px-1 py-0.5 rounded">DSC_0387.jpg</code>, get back <code className="text-xs bg-gray-100 dark:bg-[#252525] px-1 py-0.5 rounded">fresh-avocado-toast-sourdough-breakfast.webp</code>- automatically. iLoveIMG has no AI features at all; it is purely a manual tool.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Zap className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Zap className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               EXIF removal- iLoveIMG doesn&apos;t offer it
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               Photos taken with smartphones embed GPS coordinates, device model, date, and other metadata directly in the file. SammaPix strips all EXIF data before download- protecting your privacy and reducing file size. iLoveIMG has no EXIF removal feature, so any metadata in your original file stays in the exported image.
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <Check className="h-4 w-4 text-gray-500" strokeWidth={1.5} />
+            <h3 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2 flex items-center gap-2">
+              <Check className="h-4 w-4 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
               Where iLoveIMG wins- full editing suite
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
               iLoveIMG is a comprehensive image toolbox offering resize, crop, rotate, watermark, add text, meme generator, and more. If you need to edit images in addition to compressing them- and you&apos;re not concerned about server-side processing- iLoveIMG provides a much broader range of tools than SammaPix currently offers.
             </p>
           </div>
@@ -244,13 +244,13 @@ export default function VsILoveImgPage() {
       </div>
 
       {/* Bottom CTA */}
-      <div className="border border-gray-200 rounded-md p-8 text-center bg-gray-50">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Need private, AI-powered image optimization?</h2>
-        <p className="text-sm text-gray-500 mb-6">
+      <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md p-8 text-center bg-gray-50 dark:bg-[#1E1E1E]">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-2">Need private, AI-powered image optimization?</h2>
+        <p className="text-sm text-gray-500 dark:text-[#737373] mb-6">
           SammaPix keeps your files in the browser and renames them with AI. Free, no signup for compression.
         </p>
         <Link href="/">
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors">
+          <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-[#6366F1] text-white text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#4F46E5] transition-colors">
             Open SammaPix
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </button>

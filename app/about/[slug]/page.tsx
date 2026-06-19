@@ -135,30 +135,30 @@ export default async function TripPage({
         {/* Breadcrumb */}
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs text-gray-400 mb-6"
+          className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#737373] mb-6"
         >
           <Link
             href="/about"
-            className="hover:text-gray-600 transition-colors"
+            className="hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors"
           >
             about
           </Link>
           <span aria-hidden="true">/</span>
-          <span className="text-gray-600">
+          <span className="text-gray-600 dark:text-[#A3A3A3]">
             {trip.destination.toLowerCase()}
           </span>
         </nav>
 
         {/* Titolo + date + contatore */}
-        <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-[#E5E5E5] tracking-tight">
           {trip.destination}
         </h1>
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-sm text-gray-400 dark:text-[#737373] mt-1">
           {formatDateRange(trip.startDate, trip.endDate)}
           {" \u00b7 "}
           {trip.photos.length} photographs
         </p>
-        <p className="text-xs text-gray-400 mt-3 max-w-xl leading-relaxed">
+        <p className="text-xs text-gray-400 dark:text-[#737373] mt-3 max-w-xl leading-relaxed">
           Free for personal use \u2014 print it or set it as your wallpaper.{" "}
           &copy; Luca Sammarco &middot; Not for commercial use.
         </p>
@@ -180,7 +180,7 @@ export default async function TripPage({
       <div className="px-4 sm:px-6 pb-16 max-w-6xl mx-auto">
         <Link
           href="/about"
-          className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
+          className="text-sm text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors"
         >
           &larr; back to about
         </Link>
