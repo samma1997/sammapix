@@ -364,9 +364,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "TikTok",
     displayName: "TikTok",
     titleKeyword: "TikTok",
-    seoTitle: "TikTok Image Size 2026: Video, Profile, Cover — Free Resizer",
+    seoTitle: "TikTok Image Size 2026: Video, Profile, Cover | Free Resizer",
     metaDescription:
-      "Resize images for TikTok- video frame 1080×1920, square 1080×1080, profile 200×200. Free online, no upload required.",
+      "Resize images for TikTok: video frame 1080×1920, square 1080×1080, profile 200×200. Free online, no upload required.",
     ogDescription:
       "Resize photos for TikTok to the correct vertical and square dimensions. Video cover, photo mode, profile picture- free and processed locally in your browser.",
     keywords: [
@@ -940,9 +940,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "WhatsApp",
     displayName: "WhatsApp",
     titleKeyword: "WhatsApp",
-    seoTitle: "WhatsApp Image Size 2026: Status, Profile, Group — Free",
+    seoTitle: "WhatsApp Image & Profile Pic Size (2026) + Free Resizer",
     metaDescription:
-      "Exact WhatsApp image sizes for 2026: Status 1080×1920 (9:16), Profile 500×500, Group Icon 192×192. Resize in your browser — no upload, no signup.",
+      "WhatsApp profile pic 500×500, Status 1080×1920, group icon 192×192. Resize to the exact size in your browser with no quality loss. Free, no upload, no signup.",
     ogDescription:
       "WhatsApp Status 1080×1920, Profile 500×500, Group Icon 192×192. Resize in browser, no upload required.",
     keywords: [
