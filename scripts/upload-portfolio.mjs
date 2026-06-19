@@ -48,9 +48,14 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 // ── Args ───────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
-const limitFlag = args.indexOf("--limit");
-const limit = limitFlag !== -1 ? parseInt(args[limitFlag + 1]) : null;
-const cleanArgs = args.filter((a, i) => a !== "--limit" && (limitFlag === -1 || i !== limitFlag + 1));
+function flagVal(name) {
+  const idx = args.indexOf(name);
+  return idx !== -1 ? parseInt(args[idx + 1]) : null;
+}
+const limit = flagVal("--limit");
+const skip = flagVal("--skip") ?? 0;
+const FLAGS = new Set(["--limit", "--skip"]);
+const cleanArgs = args.filter((a, i) => !FLAGS.has(a) && !FLAGS.has(args[i - 1]));
 const [folderArg, destination, country, year] = cleanArgs;
 
 if (!folderArg || !destination || !country || !year) {
@@ -139,19 +144,23 @@ async function reverseGeocode(lat, lon) {
   if (geocodeCache.has(key)) return geocodeCache.get(key);
 
   try {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=13&accept-language=en`;
     const res = await fetch(url, {
-      headers: { "User-Agent": "SammaPix Portfolio Builder/1.0" }
+      headers: { "User-Agent": "SammaPix Portfolio Builder/1.0", "Accept-Language": "en" }
     });
     const data = await res.json();
     const addr = data.address ?? {};
 
-    const location = [
-      addr.attraction || addr.tourism || addr.historic ||
-      addr.natural || addr.village || addr.town || addr.city_district,
-      addr.city || addr.town || addr.county,
-      addr.country,
-    ].filter(Boolean).join(", ");
+    // Scarta qualsiasi token in scrittura thai (Nominatim a volte ignora accept-language).
+    const hasThai = (s) => /[฀-๿]/.test(String(s || ""));
+    const clean = (s) => (s && !hasThai(s) ? s : null);
+    const city = clean(addr.city) || clean(addr.town) || clean(addr.county) ||
+      clean(addr.state_district) || clean(addr.suburb) || clean(addr.village);
+    const country = clean(addr.country) || "Thailand";
+    const location = [city, country]
+      .filter(Boolean)
+      .filter((v, i, a) => a.indexOf(v) === i)
+      .join(", ");
 
     geocodeCache.set(key, location || null);
     // Nominatim rate limit: 1 req/sec
@@ -220,11 +229,11 @@ Provide:
 
 1. ALT: Precise, keyword-rich alt text (max 125 chars). Include specific place name if identifiable.
 
-2. CAPTION: Short poetic caption (max 8 words, no period). Format: "Place — poetic description". E.g. "Sigiriya — the lion rock at dawn"
+2. CAPTION: Short poetic caption (max 8 words, no period). Format: "Place · poetic description" using a middle dot as separator. E.g. "Sigiriya · the lion rock at dawn". CRITICAL: never use an em-dash, en-dash, or hyphen as a separator anywhere in the caption.
 
-3. DESCRIPTION: Vivid, evocative 60-80 word description for SEO. Present tense. Specific details about light, atmosphere, cultural/geographical context. No first-person.
+3. DESCRIPTION: Vivid, evocative 60-80 word description for SEO. Present tense. Specific details about light, atmosphere, cultural/geographical context. No first-person. Do not invent facts you cannot see; stay grounded in what is visibly in the photo and the GPS location. Never use em-dashes or en-dashes; use commas instead.
 
-4. LOCATION: Specific location name (place, city/region, country). Use GPS hint if provided.
+4. LOCATION: Format as "Landmark, City, Country". Use the GPS city hint for the city and country. Name the specific landmark ONLY if clearly identifiable from the image (signage, famous architecture); if unsure, use just the city and country. Never guess a landmark name you are not confident about.
 
 5. FILENAME: SEO-optimized filename slug (hyphens, max 60 chars, no extension). E.g. sigiriya-rock-fortress-sunrise-sri-lanka
 
@@ -245,12 +254,19 @@ Respond ONLY with valid JSON:
     const text = result.response.text().trim();
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error("No JSON");
-    return JSON.parse(jsonMatch[0]);
+    const parsed = JSON.parse(jsonMatch[0]);
+    // ── Sanitize: Luca odia i trattini. Mai em/en-dash come separatore. ──
+    const toMiddot = (s) => String(s ?? "").replace(/\s*[—–]\s*/g, " · ").replace(/\s-\s/g, " · ").replace(/\s{2,}/g, " ").trim();
+    const toComma  = (s) => String(s ?? "").replace(/\s*[—–]\s*/g, ", ").replace(/\s-\s/g, ", ").replace(/\s{2,}/g, " ").trim();
+    parsed.caption = toMiddot(parsed.caption);
+    parsed.alt = toComma(parsed.alt);
+    parsed.description = toComma(parsed.description);
+    return parsed;
   } catch (err) {
     console.warn(`  ⚠️  AI fallback: ${err.message}`);
     return {
       alt: `Travel photography from ${destination}, ${country}`,
-      caption: `${destination} — photo ${index + 1}`,
+      caption: `${destination} · photo ${index + 1}`,
       description: `A travel photograph captured in ${destination}, ${country} in ${year}.`,
       location: gpsLocation || `${destination}, ${country}`,
       filename: `${slugify(destination)}-${String(index + 1).padStart(2, "0")}`,
@@ -311,13 +327,26 @@ async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif)
   // Auto-resize if over 10MB
   const uploadPath = await ensureUnderSizeLimit(filePath);
 
-  const result = await cloudinary.uploader.upload(uploadPath, {
-    public_id: publicId,
-    folder: `sammapix/portfolio/${slugify(destination)}`,
-    overwrite: false,
-    resource_type: "image",
-    context: contextStr,
-  });
+  let result;
+  let lastErr;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      result = await cloudinary.uploader.upload(uploadPath, {
+        public_id: publicId,
+        folder: `sammapix/portfolio/${slugify(destination)}`,
+        overwrite: false,
+        resource_type: "image",
+        context: contextStr,
+      });
+      break;
+    } catch (e) {
+      lastErr = e;
+      const msg = e?.message || e?.error?.message || JSON.stringify(e);
+      process.stdout.write(` [retry ${attempt}/3: ${msg}]`);
+      await new Promise((r) => setTimeout(r, 2000 * attempt));
+    }
+  }
+  if (!result) throw new Error(`Cloudinary upload failed: ${lastErr?.message || lastErr?.error?.message || JSON.stringify(lastErr)}`);
 
   const base = `sammapix/portfolio/${slugify(destination)}/${publicId}`;
 
@@ -344,17 +373,27 @@ async function uploadToCloudinary(filePath, publicId, aiData, gpsLocation, exif)
 async function main() {
   const sortedFiles = await scanAndSort(folder);
 
-  const filesToProcess = limit ? sortedFiles.slice(0, limit) : sortedFiles;
-
-  console.log(`\n🚀 Inizio elaborazione ${filesToProcess.length} foto${limit ? ` (test --limit ${limit})` : ""}`);
-  console.log(`🌍 ${destination}, ${country} (${year})\n`);
-
-  const photos = [];
   const outputDir = path.join(__dirname, "output");
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
 
-  for (let i = 0; i < filesToProcess.length; i++) {
-    const { filePath, exif } = filesToProcess[i];
+  // Resume: ricarica le foto gia elaborate (indici < skip) per non rigenerarle.
+  let photos = [];
+  if (skip > 0) {
+    const resumePath = path.join(outputDir, `${slugify(destination)}.json`);
+    if (fs.existsSync(resumePath)) {
+      try {
+        photos = (JSON.parse(fs.readFileSync(resumePath, "utf8")).photos ?? []).slice(0, skip);
+        console.log(`\n♻️  Resume: ${photos.length} foto gia elaborate ricaricate (skip ${skip}).`);
+      } catch {}
+    }
+  }
+
+  const endIdx = limit ? Math.min(skip + limit, sortedFiles.length) : sortedFiles.length;
+  console.log(`\n🚀 Elaboro foto ${skip + 1} → ${endIdx} di ${sortedFiles.length}`);
+  console.log(`🌍 ${destination}, ${country} (${year})\n`);
+
+  for (let i = skip; i < endIdx; i++) {
+    const { filePath, exif } = sortedFiles[i];
     const filename = path.basename(filePath);
     const prefix = destination.slice(0, 3).toLowerCase().replace(/[^a-z]/g, "");
     const id = `${prefix}-${String(i + 1).padStart(2, "0")}`;
@@ -389,7 +428,7 @@ async function main() {
       alt: aiData.alt,
       caption: aiData.caption,
       description: aiData.description,
-      location: gpsLocation || aiData.location,
+      location: aiData.location || gpsLocation,
       date: formatDate(exif?.date),
       width,
       height,
@@ -415,6 +454,7 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error("\n❌ Errore:", err.message);
+  console.error("\n❌ Errore:", err?.message || err?.error?.message || JSON.stringify(err) || err);
+  if (err?.stack) console.error(err.stack);
   process.exit(1);
 });
