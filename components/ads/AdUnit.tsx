@@ -40,7 +40,7 @@ export default function AdUnit({
   if (process.env.NODE_ENV !== "production") {
     return (
       <div
-        className={`flex items-center justify-center bg-gray-50 border border-dashed border-gray-200 rounded text-xs text-gray-400 ${className}`}
+        className={`flex items-center justify-center bg-gray-50 border border-dashed border-gray-200 rounded text-xs text-gray-400 dark:bg-[#1C1C1C] dark:border-[#2A2A2A] dark:text-[#737373] ${className}`}
         style={{ minHeight: 90 }}
       >
         Ad placeholder (dev)

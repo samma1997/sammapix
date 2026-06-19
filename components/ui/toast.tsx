@@ -33,10 +33,10 @@ function Toast({ id, message, variant = "default", onClose }: ToastProps) {
   return (
     <div
       className={cn(
-        "flex items-start gap-3 px-4 py-3 bg-white border border-gray-200 rounded-md shadow-sm",
-        "animate-slide-up text-sm text-gray-700 max-w-sm w-full",
-        variant === "error" && "border-red-200 bg-red-50",
-        variant === "success" && "border-green-200 bg-green-50"
+        "flex items-start gap-3 px-4 py-3 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-[#1F1F1F] dark:border-[#2A2A2A]",
+        "animate-slide-up text-sm text-gray-700 max-w-sm w-full dark:text-[#D4D4D4]",
+        variant === "error" && "border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/40",
+        variant === "success" && "border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/40"
       )}
       role="alert"
     >
@@ -44,7 +44,7 @@ function Toast({ id, message, variant = "default", onClose }: ToastProps) {
       <span className="flex-1 leading-snug">{message}</span>
       <button
         onClick={() => onClose(id)}
-        className="text-gray-400 hover:text-gray-600 transition-colors shrink-0"
+        className="text-gray-400 hover:text-gray-600 transition-colors shrink-0 dark:text-[#737373] dark:hover:text-[#A3A3A3]"
         aria-label="Close"
       >
         <X className="h-3.5 w-3.5" strokeWidth={1.5} />
