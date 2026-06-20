@@ -2,18 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { resend } from "@/lib/resend";
 import {
   sendDay2Email,
-  sendDay3Email,
-  sendDay4Email,
   sendDay7Email,
-  sendDay14Email,
-  sendDay21Email,
   sendDay30Email,
-  sendDay35Email,
-  sendDay49Email,
-  sendDay63Email,
-  sendDay77Email,
   sendReEngageDay14Email,
-  sendReEngageDay30Email,
 } from "@/lib/email-service";
 import { getUserPlan } from "@/lib/user-plan";
 
@@ -55,61 +46,25 @@ export async function GET(request: NextRequest) {
       const name = (contactAny.first_name as string) || (contactAny.firstName as string) || null;
 
       try {
+        // Lean cadence (trimmed from 13 to 4 touchpoints): bother users as
+        // little as possible. The protective trial reminder lives in its own
+        // cron (trial-monitor) and is intentionally NOT part of this funnel.
         if (daysSince === 2) {
           await sendDay2Email(contact.email, name);
-          sent++;
-        } else if (daysSince === 3) {
-          // First explicit upsell. Only send to free users — paid users have
-          // already converted, no need to push them again.
-          const plan = await getUserPlan(contact.email).catch(() => "free");
-          if (plan === "free") {
-            await sendDay3Email(contact.email, name);
-            sent++;
-          }
-        } else if (daysSince === 4) {
-          await sendDay4Email(contact.email, name);
           sent++;
         } else if (daysSince === 7) {
           await sendDay7Email(contact.email, name);
           sent++;
-        } else if (daysSince === 14) {
-          await sendDay14Email(contact.email, name);
-          sent++;
         } else if (daysSince === 17) {
-          // Re-engagement #1: 3 days after the Day 14 touchpoint. Only fires
-          // for users still on free — paid users skip this entire branch.
-          // Without a `last_active` column we use plan=free as the best proxy
-          // for "didn't convert yet" — better than no re-engagement at all.
+          // Single win-back: only for users still on free (best proxy for
+          // "didn't convert yet" without a last_active column). Pro users skip.
           const plan = await getUserPlan(contact.email).catch(() => "free");
           if (plan === "free") {
             await sendReEngageDay14Email(contact.email, name);
             sent++;
           }
-        } else if (daysSince === 21) {
-          await sendDay21Email(contact.email, name);
-          sent++;
         } else if (daysSince === 30) {
           await sendDay30Email(contact.email, name);
-          sent++;
-        } else if (daysSince === 33) {
-          // Re-engagement #2: 3 days after the Day 30 thank-you. Same plan=free
-          // gating — Pro users skip.
-          const plan = await getUserPlan(contact.email).catch(() => "free");
-          if (plan === "free") {
-            await sendReEngageDay30Email(contact.email, name);
-            sent++;
-          }
-        } else if (daysSince === 35) {
-          await sendDay35Email(contact.email, name);
-          sent++;
-        } else if (daysSince === 49) {
-          await sendDay49Email(contact.email, name);
-          sent++;
-        } else if (daysSince === 63) {
-          await sendDay63Email(contact.email, name);
-          sent++;
-        } else if (daysSince === 77) {
-          await sendDay77Email(contact.email, name);
           sent++;
         }
       } catch (err) {
