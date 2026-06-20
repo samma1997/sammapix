@@ -416,9 +416,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Discord",
     displayName: "Discord",
     titleKeyword: "Discord image sizes",
-    seoTitle: "Discord Image Size 2026: Avatar, Banner, Server Icon — Free",
+    seoTitle: "Discord Image Size 2026: Avatar, Banner, Server Icon | Free Resizer",
     metaDescription:
-      "Resize images for Discord- server icon 512×512, banner 960×540, emoji 128×128, sticker 320×320. Free online, no upload required.",
+      "Exact Discord image sizes: server icon 512×512, banner 960×540, emoji 128×128, sticker 320×320. Resize in your browser, no upload, no signup. Free.",
     ogDescription:
       "Resize photos for Discord servers and profiles. Server icon, banner, avatar, emoji, sticker- exact pixel dimensions, free and processed locally.",
     keywords: [
@@ -477,9 +477,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Slack",
     displayName: "Slack",
     titleKeyword: "Slack image sizes",
-    seoTitle: "Slack Image Size 2026: Profile, Workspace, Emoji — Free Online",
+    seoTitle: "Slack Image Size 2026: Profile, Workspace Icon, Emoji | Free Resizer",
     metaDescription:
-      "Resize images for Slack- workspace icon 132×132, profile photo 512×512, shared image 2000×2000, emoji 128×128. Free online tool.",
+      "Exact Slack image sizes: workspace icon 132×132, profile 512×512, emoji 128×128, shared image 2000×2000. Resize in your browser, no upload required. Free.",
     ogDescription:
       "Resize photos for Slack workspaces and profiles. Workspace icon, profile picture, shared images, custom emoji- exact dimensions, free and private.",
     keywords: [
@@ -593,9 +593,9 @@ const ALL_PLATFORMS: ResizePlatform[] = [
     name: "Telegram",
     displayName: "Telegram",
     titleKeyword: "Telegram image sizes",
-    seoTitle: "Telegram Image Size 2026: Channel, Group, Profile — Free Online",
+    seoTitle: "Telegram Image Size 2026: Profile, Channel, Sticker | Free Resizer",
     metaDescription:
-      "Resize images for Telegram- profile photo 512×512, channel photo 512×512, sticker 512×512, inline result 300×200. Free online tool.",
+      "Exact Telegram image sizes: profile 512×512, channel photo 512×512, sticker 512×512. Resize to the right size in your browser with no upload and no signup. Free.",
     ogDescription:
       "Resize photos for Telegram profiles, channels, and stickers. Exact pixel dimensions for every Telegram image type- free, fast, and processed locally.",
     keywords: [
