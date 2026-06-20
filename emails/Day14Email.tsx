@@ -141,10 +141,10 @@ export function Day14Email({ name }: Day14EmailProps) {
           <Hr style={hr} />
 
           <Section style={statsBox}>
-            <Text style={statNumber}>12,000+</Text>
+            <Text style={statNumber}>0</Text>
             <Text style={statLabel}>
-              images optimized by SammaPix users this week- processed
-              in-browser, files never uploaded.
+              files uploaded. Every image you process on SammaPix stays in your
+              browser, nothing is ever sent to a server.
             </Text>
           </Section>
 
