@@ -1,0 +1,167 @@
+[
+  {
+    "start": 0,
+    "end": 2.02,
+    "text": "The quick answer"
+  },
+  {
+    "start": 2.02,
+    "end": 22.56,
+    "text": "If you want the one line verdict for 2026: yes, you can use WebP, and yes, you c"
+  },
+  {
+    "start": 22.56,
+    "end": 48.58,
+    "text": "On a website where you serve images with the HTML picture element, you can use b"
+  },
+  {
+    "start": 48.58,
+    "end": 51.43,
+    "text": "What Can I Use actually answers"
+  },
+  {
+    "start": 51.43,
+    "end": 58.42,
+    "text": "The question can I use WebP hides two very different questions, and mixing them "
+  },
+  {
+    "start": 58.42,
+    "end": 85.58,
+    "text": "Question one: will a browser display it on my website? This is the question the "
+  },
+  {
+    "start": 85.58,
+    "end": 111.96,
+    "text": "Question two: will this specific file open on my device or app? This is a differ"
+  },
+  {
+    "start": 111.96,
+    "end": 115.54,
+    "text": "WebP browser support in 2026"
+  },
+  {
+    "start": 115.54,
+    "end": 153.36,
+    "text": "WebP was created by Google in 2010 and has had more than a decade to spread. The"
+  },
+  {
+    "start": 153.36,
+    "end": 170.71,
+    "text": "The practical takeaway: if a visitor is on any browser released after 2020, they"
+  },
+  {
+    "start": 170.71,
+    "end": 174.24,
+    "text": "AVIF browser support in 2026"
+  },
+  {
+    "start": 174.24,
+    "end": 198.02,
+    "text": "AVIF is the newer, more efficient format. It compresses better than WebP, often "
+  },
+  {
+    "start": 198.52,
+    "end": 213.86,
+    "text": "The 94 percent figure means roughly one in seventeen visitors might be on a devi"
+  },
+  {
+    "start": 213.86,
+    "end": 217.6,
+    "text": "WebP versus AVIF: which is safer to use"
+  },
+  {
+    "start": 217.6,
+    "end": 237.98,
+    "text": "If you can only commit to one format with no fallback, WebP is the safer pick in"
+  },
+  {
+    "start": 239.98,
+    "end": 242.84,
+    "text": "When a single file will not open"
+  },
+  {
+    "start": 242.84,
+    "end": 265.56,
+    "text": "The picture element solves websites. It does nothing for the everyday case: a fr"
+  },
+  {
+    "start": 265.56,
+    "end": 297.24,
+    "text": "The catch with most online converters is that they upload your image to a server"
+  },
+  {
+    "start": 297.74,
+    "end": 321.91,
+    "text": "Any iPhone running iOS 14 or later displays WebP, and any iPhone on iOS 16 or la"
+  },
+  {
+    "start": 321.91,
+    "end": 341.11,
+    "text": "Android has supported WebP at the system level since Android 4 and AVIF since An"
+  },
+  {
+    "start": 341.11,
+    "end": 344.66,
+    "text": "Why an app refuses a file your browser opens"
+  },
+  {
+    "start": 344.66,
+    "end": 364.61,
+    "text": "It is genuinely confusing the first time it happens: you double click a WebP and"
+  },
+  {
+    "start": 365.11,
+    "end": 368.06,
+    "text": "When not to use WebP or AVIF"
+  },
+  {
+    "start": 368.06,
+    "end": 405.91,
+    "text": "Modern formats are the right default, but there are a few situations where plain"
+  },
+  {
+    "start": 405.91,
+    "end": 409.41,
+    "text": "Free browser based converters, no upload"
+  },
+  {
+    "start": 409.41,
+    "end": 443.61,
+    "text": "Whether you need to create modern formats for your site or rescue a file that wi"
+  },
+  {
+    "start": 443.61,
+    "end": 462.02,
+    "text": "Can I use WebP in 2026? Yes. WebP has about 97 percent global browser support. E"
+  },
+  {
+    "start": 462.02,
+    "end": 478.12,
+    "text": "Can I use AVIF in 2026? Mostly yes, at about 94 percent support. Serve it with a"
+  },
+  {
+    "start": 478.12,
+    "end": 494.59,
+    "text": "Does Safari support WebP and AVIF? Yes to both. WebP since Safari 14 in 2020 and"
+  },
+  {
+    "start": 494.59,
+    "end": 510.76,
+    "text": "What happens if a browser does not support the format? With a picture element th"
+  },
+  {
+    "start": 510.76,
+    "end": 526.22,
+    "text": "Why can I not open a WebP or AVIF on my computer? Browsers decode these formats,"
+  },
+  {
+    "start": 526.22,
+    "end": 543.5,
+    "text": "Is converting WebP or AVIF to JPG lossy? Converting to JPG is lossy, but at high"
+  },
+  {
+    "start": 543.5,
+    "end": 559.34,
+    "text": "The short version of all of this: in 2026 you can use WebP everywhere and AVIF a"
+  }
+]

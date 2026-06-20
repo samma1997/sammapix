@@ -128,6 +128,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "can-i-use-webp-avif-browser-support-2026",
   "apply-lut-batch-photos-free-2026",
   "extract-lut-from-photo-free-2026",
   "does-imessage-strip-exif-metadata",
