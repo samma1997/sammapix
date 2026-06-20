@@ -2,6 +2,7 @@ import { resend } from "./resend";
 import { render } from "@react-email/render";
 import type { MilestoneType } from "@/emails/MilestoneEmail";
 import type { WeeklyDigestContent } from "@/emails/WeeklyDigestEmail";
+import { TOOL_COUNT } from "@/lib/constants";
 
 const FROM = "SammaPix <hello@sammapix.com>";
 
@@ -79,7 +80,7 @@ export async function sendDay3Email(to: string, name: string | null) {
   const html = await render(Day3Email({ name: name ?? "there", founding }));
   const subject = founding.active
     ? `Lock $${founding.monthlyPriceUsd}/mo forever — ${founding.spotsLeft} Founding spots left`
-    : "Unlock all 32 tools for less than a coffee";
+    : `Unlock all ${TOOL_COUNT} tools for less than a coffee`;
   await resend.emails.send({
     from: FROM,
     to,

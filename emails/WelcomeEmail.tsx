@@ -11,6 +11,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { TOOL_COUNT } from "@/lib/constants";
 
 const BASE_URL = "https://sammapix.com";
 
@@ -216,7 +217,7 @@ export function WelcomeEmail({ name, founding }: WelcomeEmailProps) {
                 /month forever ({founding!.percentOff}% off)
               </Heading>
               <Text style={foundingBody}>
-                The first {founding!.totalSpots} users get all 35 tools for $
+                The first {founding!.totalSpots} users get all {TOOL_COUNT} tools for $
                 {founding!.monthlyPriceUsd}/mo — for life. No price increases,
                 even when we add new tools. Once the spots are gone, it goes
                 back to $9/mo.

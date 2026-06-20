@@ -11,6 +11,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { TOOL_COUNT } from "@/lib/constants";
 
 const BASE_URL = "https://sammapix.com";
 
@@ -122,7 +123,7 @@ export function Day3Email({ name, founding }: Day3EmailProps) {
   const showFounding = founding?.active && founding.spotsLeft > 0;
   const previewText = showFounding
     ? `Lock $${founding!.monthlyPriceUsd}/mo forever — ${founding!.spotsLeft} Founding spots left`
-    : "Unlock all 35 tools for less than a coffee";
+    : `Unlock all ${TOOL_COUNT} tools for less than a coffee`;
 
   return (
     <Html lang="en">
@@ -135,7 +136,7 @@ export function Day3Email({ name, founding }: Day3EmailProps) {
           </Text>
 
           <Heading style={heading}>
-            You&apos;ve unlocked 5 tools. There are 30 more.
+            You&apos;ve unlocked 5 tools. There are {TOOL_COUNT - 5} more.
           </Heading>
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>

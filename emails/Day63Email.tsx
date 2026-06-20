@@ -12,6 +12,8 @@ import {
   Text,
 } from "@react-email/components";
 
+import { TOOL_COUNT } from "@/lib/constants";
+
 const BASE_URL = "https://sammapix.com";
 
 const main = {
@@ -106,68 +108,54 @@ const hr = { borderColor: "#e5e5e5", margin: "28px 0" };
 
 interface Day63EmailProps {
   name: string;
-  imagesProcessed?: number;
-  mbSaved?: number;
-  toolsUsed?: number;
 }
 
-export function Day63Email({
-  name,
-  imagesProcessed = 142,
-  mbSaved = 87,
-  toolsUsed = 4,
-}: Day63EmailProps) {
-  // Fun comparison: 1 floppy disk = 1.44 MB
-  const floppyDisks = Math.round(mbSaved / 1.44);
-
+export function Day63Email({ name }: Day63EmailProps) {
   return (
     <Html lang="en">
       <Head />
-      <Preview>Your images by the numbers- here&apos;s what you&apos;ve done</Preview>
+      <Preview>Why SammaPix is different- by the numbers</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={logo}>
             Samma<span style={logoAccent}>Pix</span>
           </Text>
 
-          <Heading style={heading}>Your images by the numbers</Heading>
+          <Heading style={heading}>SammaPix by the numbers</Heading>
 
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
-            You&apos;ve been using SammaPix for about two months now. Here&apos;s
-            a quick snapshot of what you&apos;ve accomplished:
+            You&apos;ve been with SammaPix for a couple of months now. Here&apos;s
+            what makes it different from every other image tool out there:
           </Text>
 
           <Section style={statsGrid}>
             <Section style={statBox}>
-              <Text style={statNumber}>{imagesProcessed.toLocaleString()}</Text>
-              <Text style={statLabel}>images processed</Text>
+              <Text style={statNumber}>{TOOL_COUNT}</Text>
+              <Text style={statLabel}>free tools</Text>
             </Section>
             <Section style={statBox}>
-              <Text style={statNumber}>{mbSaved} MB</Text>
-              <Text style={statLabel}>total size saved</Text>
+              <Text style={statNumber}>0</Text>
+              <Text style={statLabel}>files uploaded</Text>
             </Section>
             <Section style={statBox}>
-              <Text style={statNumber}>{toolsUsed}</Text>
-              <Text style={statLabel}>tools used</Text>
+              <Text style={statNumber}>100%</Text>
+              <Text style={statLabel}>in your browser</Text>
             </Section>
           </Section>
 
           <Section style={highlight}>
             <Text style={highlightText}>
-              <strong>Fun fact:</strong> {mbSaved} MB saved is the equivalent
-              of{" "}
-              <strong>
-                {floppyDisks} floppy disk{floppyDisks !== 1 ? "s" : ""}
-              </strong>
-              . Remember those?
+              <strong>The point:</strong> your photos never leave your device.
+              Every crop, compress and convert happens locally, so nothing is
+              ever stored on a server. Most tools online can&apos;t say that.
             </Text>
           </Section>
 
           <Text style={body}>
-            {toolsUsed < 8
-              ? `You've used ${toolsUsed} out of 35 tools so far. There are ${22 - toolsUsed} more waiting for you- from Photo Map to Film Filters to AI Photo Sort.`
-              : "You're a power user! You've explored a solid chunk of SammaPix's 35 tools. Keep going."}
+            You&apos;ve got all {TOOL_COUNT} tools at your fingertips, from Photo
+            Map to Film Filters to AI Photo Sort. If you haven&apos;t explored
+            them yet, now&apos;s a good time.
           </Text>
 
           <Section style={{ margin: "24px 0" }}>

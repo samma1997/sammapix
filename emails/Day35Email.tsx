@@ -11,6 +11,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { TOOL_COUNT } from "@/lib/constants";
 
 const BASE_URL = "https://sammapix.com";
 
@@ -109,7 +110,7 @@ export function Day35Email({ name }: Day35EmailProps) {
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
             Most people use SammaPix for compress and convert. But there are
-            35 tools in total- and some of the lesser-known ones are genuinely
+            {TOOL_COUNT} tools in total, and some of the lesser-known ones are genuinely
             useful. Here are 5 worth trying:
           </Text>
 
