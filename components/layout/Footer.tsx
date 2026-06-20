@@ -1,29 +1,31 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { getAllTrips } from "@/lib/destinations";
+import FooterPhotoStrip from "@/components/layout/FooterPhotoStrip";
 
 /**
- * A handful of travel photos for the footer strip. Pulled dynamically from the
- * trips so new journeys show up automatically. Decorative + below the fold, so
- * no SEO/LCP cost: lazy-loaded Cloudinary thumbnails, links to the portfolio.
+ * Build a varied pool of travel photos for the footer strip. We sample several
+ * evenly-spaced photos per trip so the client-side shuffle has real variety to
+ * pull from (different photos on every visit). Pulled dynamically from the trips
+ * so new journeys show up automatically.
  */
-function footerPhotos() {
+function footerPhotoPool() {
   const trips = getAllTrips();
   const out: { src: string; alt: string }[] = [];
-  // 2 photos per trip (cover + one more), interleaved, capped at 6.
-  const maxPer = 2;
-  for (let i = 0; i < maxPer; i++) {
-    for (const t of trips) {
-      const cover = t.photos.find((p) => p.src === t.coverSrc) ?? t.photos[0];
-      const photo = i === 0 ? cover : t.photos[Math.min(i * 7, t.photos.length - 1)];
-      if (photo && !out.some((o) => o.src === photo.srcThumb)) {
-        out.push({ src: photo.srcThumb, alt: `${t.destination} travel photography by Luca Sammarco` });
-      }
+  for (const t of trips) {
+    const n = t.photos.length;
+    if (!n) continue;
+    // Up to ~12 evenly-spaced photos per trip.
+    const step = Math.max(1, Math.floor(n / 12));
+    for (let i = 0; i < n; i += step) {
+      const photo = t.photos[i];
+      out.push({
+        src: photo.srcThumb,
+        alt: `${t.destination} travel photography by Luca Sammarco`,
+      });
     }
   }
-  return out.slice(0, 6);
+  return out;
 }
 
 const TOOL_LINKS = [
@@ -96,7 +98,7 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
-  const photos = footerPhotos();
+  const photoPool = footerPhotoPool();
   return (
     <footer className="border-t border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -296,50 +298,9 @@ export default function Footer() {
         </div>
 
         {/* Photography strip — humanizes the brand: these tools were built by a
-            travel photographer to handle his own photos. Decorative, below the
-            fold, lazy-loaded → no SEO/LCP cost. */}
-        {photos.length > 0 && (
-          <div className="border-t border-gray-100 dark:border-[#2A2A2A] mt-10 pt-8">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
-              <div>
-                <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5]">
-                  Photography by Luca
-                </p>
-                <p className="mt-1 text-[13px] text-gray-400 dark:text-[#737373] max-w-md leading-relaxed">
-                  I&apos;m a travel photographer. I built these tools to handle my own
-                  photos, here are a few of them.
-                </p>
-              </div>
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-white transition-colors duration-150 shrink-0"
-              >
-                See the full portfolio
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-              {photos.map((p) => (
-                <Link
-                  key={p.src}
-                  href="/portfolio"
-                  aria-label="View travel photography portfolio"
-                  className="group relative aspect-square overflow-hidden rounded-md bg-gray-100 dark:bg-[#1C1C1C]"
-                >
-                  <Image
-                    src={p.src}
-                    alt={p.alt}
-                    fill
-                    sizes="(max-width: 640px) 33vw, 16vw"
-                    loading="lazy"
-                    className="object-cover brightness-95 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500"
-                    unoptimized
-                  />
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+            travel photographer. Client component: shuffles for variety on every
+            visit and hides itself for logged-in users. */}
+        <FooterPhotoStrip photos={photoPool} />
 
         {/* Divider */}
         <div className="border-t border-gray-100 dark:border-[#2A2A2A] mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
