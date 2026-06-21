@@ -54,7 +54,7 @@ export default function AboutPage() {
   })();
 
   // Real destination cards, ordered, using each trip's chosen cover (a people shot).
-  const realTrips = ["sri-lanka", "bali", "thailand", "china"]
+  const realTrips = ["sri-lanka", "bali", "thailand", "shenzhen"]
     .map((slug) => allTrips.find((t) => t.slug === slug))
     .filter(Boolean) as typeof allTrips;
   const coverThumb = (t: (typeof allTrips)[number]) =>
