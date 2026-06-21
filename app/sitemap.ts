@@ -145,6 +145,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/unrar",
     "/tools/open-7z",
     "/tools/raw-converter",
+    "/tools/pdf-split",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

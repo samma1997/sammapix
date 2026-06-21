@@ -443,6 +443,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "pdf-split": {
+    id: "pdf-split",
+    name: "Split PDF",
+    shortDesc: "Extract pages or split a PDF into multiple files, in-browser",
+    slug: "/tools/pdf-split",
+    category: "optimize",
+    relatedTools: ["pdf-merge", "jpg-to-pdf", "pdf-to-image", "compress"],
+    relatedBlogSlugs: [
+      "merge-pdfs-privately-no-upload",
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

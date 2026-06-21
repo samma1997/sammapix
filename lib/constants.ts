@@ -85,6 +85,7 @@ export const TOOL_SLUGS = [
   "unrar",
   "open-7z",
   "raw-converter",
+  "pdf-split",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

@@ -289,6 +289,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Open RAR Online", href: "/tools/unrar", tagline: "Extract RAR files in-browser — no upload.", accent: "#0EA5E9", badge: "Free", Icon: IconUnrar, category: "Optimize" },
   { name: "Open 7z Online", href: "/tools/open-7z", tagline: "Extract .7z files in-browser — no Mac support needed.", accent: "#8B5CF6", badge: "Free", Icon: IconOpen7z, category: "Optimize", isNew: true },
   { name: "RAW Converter", href: "/tools/raw-converter", tagline: "CR2, NEF, ARW, DNG to JPG or WebP. In your browser, no upload.", accent: "#0D9488", badge: "Free", Icon: IconRawConverter, category: "Optimize", isNew: true },
+  { name: "Split PDF", href: "/tools/pdf-split", tagline: "Extract pages or split a PDF into multiple files. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfMerge, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
