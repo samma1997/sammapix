@@ -1105,6 +1105,20 @@ export const IconOpen7z: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconRawConverter: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    {/* Camera body */}
+    <rect x="8" y="16" width="32" height="22" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
+    {/* Top viewfinder bump */}
+    <path d="M18 16l2.5-4h7l2.5 4" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
+    {/* Aperture / lens */}
+    <circle cx="24" cy="27" r="6.5" stroke={accent} strokeWidth="2.2" fill="none" />
+    <circle cx="24" cy="27" r="2.2" fill={accent} />
+    {/* RAW dot indicator */}
+    <circle cx="34.5" cy="20.5" r="1.4" fill={accent} />
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
