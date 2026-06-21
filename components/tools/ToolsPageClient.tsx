@@ -625,6 +625,16 @@ const TOOLS: ToolWithCategory[] = [
     category: ["Optimize"],
     isNew: true,
   },
+  {
+    name: "Split PDF",
+    href: "/tools/pdf-split",
+    tagline: "Extract pages or split a PDF into multiple files. Drag, drop, done. 100% in your browser, no upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfMerge,
+    category: ["Optimize"],
+    isNew: true,
+  },
 ];
 
 // ─── Category tabs config ─────────────────────────────────────────────────────

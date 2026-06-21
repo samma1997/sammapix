@@ -16,6 +16,7 @@ import { APP_URL } from "@/lib/constants";
 // Client wrapper renders the converter + next-step suggestions. libraw-wasm is a
 // browser-only WASM module; the wrapper keeps this page a Server Component.
 import RawClient from "@/components/tools/RawClient";
+import RawConverterHeroDemo from "@/components/tools/RawConverterHeroDemo";
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
@@ -169,51 +170,59 @@ export default function RawConverterPage() {
           All tools
         </Link>
 
-        <div className="max-w-3xl">
-          <div className="flex items-start gap-3 mb-2">
-            <div
-              className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
-              style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
-              aria-hidden="true"
-            >
-              <Camera
-                className="h-4 w-4"
-                style={{ color: "#6366F1" }}
-                strokeWidth={1.5}
-              />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
+          {/* ── LEFT: Title + copy + trust badges ── */}
+          <div>
+            <div className="flex items-start gap-3 mb-2">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
+                style={{ backgroundColor: "#6366F115", border: "1px solid #6366F130" }}
+                aria-hidden="true"
+              >
+                <Camera
+                  className="h-4 w-4"
+                  style={{ color: "#6366F1" }}
+                  strokeWidth={1.5}
+                />
+              </div>
+              <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
+                RAW to JPG · Camera RAW Converter
+              </h1>
             </div>
-            <h1 className="text-xl sm:text-[26px] font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
-              RAW to JPG · Camera RAW Converter
-            </h1>
+
+            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Convert{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">
+                CR2, CR3, NEF, ARW, DNG, RAF, ORF, RW2, PEF, SRW
+              </strong>{" "}
+              and more to JPG or WebP instantly. Powered by{" "}
+              <strong className="text-[#171717] dark:text-[#E5E5E5]">libraw</strong> compiled to WebAssembly,
+              so decoding runs entirely in your browser · no upload, no signup, no file size cap on our side.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                CR2 · CR3 · NEF · ARW · DNG
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                JPG · WebP output
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                Batch up to 20 free
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
+                100% private · no upload
+              </span>
+            </div>
           </div>
 
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-3">
-            Convert{" "}
-            <strong className="text-[#171717] dark:text-[#E5E5E5]">
-              CR2, CR3, NEF, ARW, DNG, RAF, ORF, RW2, PEF, SRW
-            </strong>{" "}
-            and more to JPG or WebP instantly. Powered by{" "}
-            <strong className="text-[#171717] dark:text-[#E5E5E5]">libraw</strong> compiled to WebAssembly,
-            so decoding runs entirely in your browser · no upload, no signup, no file size cap on our side.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#525252] dark:text-[#A3A3A3]">
-            <span className="inline-flex items-center gap-1">
-              <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
-              CR2 · CR3 · NEF · ARW · DNG
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
-              JPG · WebP output
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
-              Batch up to 20 free
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <CheckCircle2 className="h-3.5 w-3.5 text-[#16A34A]" strokeWidth={2} />
-              100% private · no upload
-            </span>
+          {/* ── RIGHT: Auto-cycling RAW → JPG/WebP conversion demo ── */}
+          <div className="max-w-[460px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <RawConverterHeroDemo />
           </div>
         </div>
       </section>

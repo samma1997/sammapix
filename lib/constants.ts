@@ -85,6 +85,7 @@ export const TOOL_SLUGS = [
   "unrar",
   "open-7z",
   "raw-converter",
+  "pdf-split",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -129,6 +130,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "open-raw-files-browser-no-upload",
   "can-i-use-webp-avif-browser-support-2026",
   "apply-lut-batch-photos-free-2026",
   "extract-lut-from-photo-free-2026",

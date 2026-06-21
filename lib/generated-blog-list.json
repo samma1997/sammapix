@@ -1,5 +1,19 @@
 [
   {
+    "slug": "open-raw-files-browser-no-upload",
+    "title": "How to Open RAW Files in Your Browser (No Software, No Upload)",
+    "description": "Open CR2, NEF, ARW, RAF and other camera RAW files instantly in your browser. No Lightroom, no software install, no upload. Convert RAW to JPG locally",
+    "keywords": [
+      "open raw files",
+      "how to open cr2 file",
+      "how to open nef file",
+      "how to open arw file",
+      "open raw without software"
+    ],
+    "publishedDate": "2026-06-21",
+    "url": "/blog/open-raw-files-browser-no-upload"
+  },
+  {
     "slug": "can-i-use-webp-avif-browser-support-2026",
     "title": "Can I Use WebP & AVIF in 2026? Browser Support + Free Converter",
     "description": "Full WebP and AVIF browser support in 2026: Chrome, Safari, Firefox, Edge and mobile, with exact versions. Plus what to do when a browser cannot open ",
