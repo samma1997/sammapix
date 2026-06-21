@@ -38,6 +38,8 @@ const nextConfig = {
       { source: '/destinations', destination: '/about', permanent: true },
       { source: '/destinations/:slug', destination: '/about/:slug', permanent: true },
       { source: '/portfolio/:slug', destination: '/about/:slug', permanent: true },
+      // Renamed trip: China → Shenzhen (all photos shot in Shenzhen)
+      { source: '/about/china', destination: '/about/shenzhen', permanent: true },
       // Old blog slugs → new equivalents (301 permanent redirects)
       { source: '/blog/ai-image-renaming-seo', destination: '/blog/ai-image-renaming-seo-guide', permanent: true },
       { source: '/blog/tinypng-alternative', destination: '/vs/tinypng', permanent: true },

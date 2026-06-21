@@ -2493,8 +2493,8 @@ export const trips: Trip[] = [
     tags: ["temples", "culture", "portrait", "islands", "landscape", "street"],
   },
   {
-    slug: "china",
-    destination: "China",
+    slug: "shenzhen",
+    destination: "Shenzhen",
     country: "China",
     continent: "Asia",
     startDate: "2025-05-14",
