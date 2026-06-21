@@ -32,6 +32,7 @@ import {
   IconOpen7z,
   IconRawConverter,
   IconBlurCensor,
+  IconRedactPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -292,6 +293,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "RAW Converter", href: "/tools/raw-converter", tagline: "CR2, NEF, ARW, DNG to JPG or WebP. In your browser, no upload.", accent: "#0D9488", badge: "Free", Icon: IconRawConverter, category: "Optimize", isNew: true },
   { name: "Split PDF", href: "/tools/pdf-split", tagline: "Extract pages or split a PDF into multiple files. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfMerge, category: "Optimize", isNew: true },
   { name: "Blur & Censor", href: "/tools/blur-censor", tagline: "Blur or pixelate faces, plates and sensitive data. No upload.", accent: "#475569", badge: "Free", Icon: IconBlurCensor, category: "Creative", isNew: true },
+  { name: "Redact PDF", href: "/tools/redact-pdf", tagline: "Permanently black out sensitive text in a PDF. No upload.", accent: "#334155", badge: "Free", Icon: IconRedactPdf, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

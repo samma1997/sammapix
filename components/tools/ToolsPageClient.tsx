@@ -34,6 +34,7 @@ import {
   IconOpen7z,
   IconRawConverter,
   IconBlurCensor,
+  IconRedactPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -644,6 +645,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconBlurCensor,
     category: ["Creative"],
+    isNew: true,
+  },
+  {
+    name: "Redact PDF",
+    href: "/tools/redact-pdf",
+    tagline: "Permanently black out names, account numbers and sensitive text in a PDF. The hidden text is truly removed. No upload.",
+    accent: "#334155",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconRedactPdf,
+    category: ["Optimize"],
     isNew: true,
   },
 ];

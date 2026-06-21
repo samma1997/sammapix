@@ -1105,6 +1105,18 @@ export const IconOpen7z: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconRedactPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    {/* Document */}
+    <path d="M13 6h16l8 8v28a2 2 0 0 1-2 2H13a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
+    <path d="M29 6v8h8" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
+    {/* Redaction bars over text */}
+    <rect x="16" y="22" width="11" height="3.4" rx="1" fill={accent} />
+    <rect x="16" y="29" width="16" height="3.4" rx="1" fill={accent} />
+    <rect x="16" y="36" width="8" height="3.4" rx="1" fill={accent} />
+  </svg>
+);
+
 export const IconBlurCensor: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect x="7" y="9" width="34" height="30" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
