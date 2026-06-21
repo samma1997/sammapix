@@ -86,6 +86,7 @@ export const TOOL_SLUGS = [
   "open-7z",
   "raw-converter",
   "pdf-split",
+  "blur-censor",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

@@ -1105,6 +1105,18 @@ export const IconOpen7z: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconBlurCensor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="7" y="9" width="34" height="30" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
+    <circle cx="16" cy="18" r="2.6" fill={accent} />
+    <path d="M11 33l6-7 4 4" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <rect x="26" y="22" width="5" height="5" fill={accent} opacity="0.85" />
+    <rect x="31" y="22" width="5" height="5" fill={accent} opacity="0.45" />
+    <rect x="26" y="27" width="5" height="5" fill={accent} opacity="0.45" />
+    <rect x="31" y="27" width="5" height="5" fill={accent} opacity="0.85" />
+  </svg>
+);
+
 export const IconRawConverter: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     {/* Camera body */}

@@ -33,6 +33,7 @@ import {
   IconUnrar,
   IconOpen7z,
   IconRawConverter,
+  IconBlurCensor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -633,6 +634,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfMerge,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Blur & Censor",
+    href: "/tools/blur-censor",
+    tagline: "Blur or pixelate faces, license plates and sensitive data in a photo. 100% in your browser, nothing uploaded.",
+    accent: "#475569",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconBlurCensor,
+    category: ["Creative"],
     isNew: true,
   },
 ];
