@@ -216,13 +216,13 @@ export default function BlurFacesLicensePlatesPage() {
         heroImage={
           <figure>
             <img
-              src="https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/blog/raw-converter-bali-sony-a7c2-luca-sammarco"
-              alt="Street scene shot in Bali on a Sony A7C II. When strangers are clearly recognizable, blurring faces before posting is both courteous and, in many jurisdictions, legally prudent. Photo by Luca Sammarco."
-              className="w-full max-h-[520px] object-cover rounded-lg"
+              src="https://res.cloudinary.com/do9hrcwn1/image/upload/e_blur_faces:1200/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/sri-lanka/48-kandy-sri-lanka-elderly-man-portrait-local-cafe-life"
+              alt="A candid cafe scene I shot in Kandy, Sri Lanka, with the faces of the people blurred for privacy before sharing. Photo by Luca Sammarco."
+              className="w-full max-h-[560px] object-cover object-top rounded-lg"
               loading="eager"
             />
             <figcaption className="text-xs text-[#A3A3A3] mt-2 text-center">
-              A street scene I shot in Bali. When strangers are recognizable, I blur their faces before posting. Photo by Luca Sammarco.
+              A cafe in Kandy, Sri Lanka. I blurred the faces of the people who did not pose for the shot, the quick censor I do before posting street photos. Photo by Luca Sammarco.
             </figcaption>
           </figure>
         }
