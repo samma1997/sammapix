@@ -39,6 +39,7 @@ export default function CheckoutButton({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           plan,
+          source: typeof window !== "undefined" ? window.location.pathname : "",
           fbp: getCookie("_fbp"),
           fbc: getCookie("_fbc"),
           ga: getCookie("_ga"),

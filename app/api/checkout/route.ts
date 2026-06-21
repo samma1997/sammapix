@@ -98,6 +98,7 @@ export async function POST(req: NextRequest) {
   let fbc: string | undefined;
   let ga: string | undefined;
   let eventId: string | undefined;
+  let source: string | undefined;
   try {
     const body = await req.json().catch(() => ({}));
     if (body.plan === "annual") plan = "annual";
@@ -105,6 +106,9 @@ export async function POST(req: NextRequest) {
     if (body.fbc) fbc = String(body.fbc);
     if (body.ga) ga = String(body.ga);
     if (body.eventId) eventId = String(body.eventId);
+    // Where the user started checkout (tool/page or upsell context). Sanitized,
+    // kept short. Stored on metadata so we can see the source of every trial/sub.
+    if (body.source) source = String(body.source).replace(/[^a-zA-Z0-9/:_-]/g, "").slice(0, 80);
   } catch {
     // default to monthly
   }
@@ -163,13 +167,16 @@ export async function POST(req: NextRequest) {
         userId: userEmail ?? "",
         plan,
         founding_member: applyFoundingCoupon ? "true" : "false",
+        ...(source ? { source } : {}),
         // Pass _ga cookie so the webhook can fire GA4 purchase event
         // attributed to the originating browser session.
         ...(ga ? { ga_cookie: ga } : {}),
       },
       subscription_data: {
         trial_period_days: TRIAL_DAYS,
-        metadata: { userId: userEmail ?? "" },
+        // Persist source on the subscription itself so we can later see where
+        // each trial/paying customer originated from.
+        metadata: { userId: userEmail ?? "", ...(source ? { source } : {}) },
       },
     });
 

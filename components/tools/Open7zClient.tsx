@@ -481,7 +481,11 @@ export default function Open7zClient() {
     trackEvent("open7z_daypass_checkout_start");
 
     try {
-      const res = await fetch("/api/checkout/day-pass", { method: "POST" });
+      const res = await fetch("/api/checkout/day-pass", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ source: "/tools/open-7z" }),
+      });
 
       if (res.status === 409) {
         startExtraction(archiveFile, password || undefined);

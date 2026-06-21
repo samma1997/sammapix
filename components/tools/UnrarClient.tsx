@@ -436,7 +436,11 @@ export default function UnrarClient() {
     trackEvent("unrar_daypass_checkout_start");
 
     try {
-      const res = await fetch("/api/checkout/day-pass", { method: "POST" });
+      const res = await fetch("/api/checkout/day-pass", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ source: "/tools/unrar" }),
+      });
 
       if (res.status === 409) {
         // Already has an active pass (edge case: session JWT not yet refreshed)
