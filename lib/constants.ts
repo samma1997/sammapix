@@ -84,6 +84,7 @@ export const TOOL_SLUGS = [
   "webp-to-png",
   "unrar",
   "open-7z",
+  "raw-converter",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

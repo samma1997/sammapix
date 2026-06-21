@@ -32,6 +32,7 @@ import {
   IconJxl,
   IconUnrar,
   IconOpen7z,
+  IconRawConverter,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -611,6 +612,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#8B5CF6",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconOpen7z,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "RAW Converter",
+    href: "/tools/raw-converter",
+    tagline: "Convert camera RAW (CR2, NEF, ARW, DNG, RAF and more) to JPG or WebP. 100% in your browser, nothing uploaded.",
+    accent: "#0D9488",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconRawConverter,
     category: ["Optimize"],
     isNew: true,
   },

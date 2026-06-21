@@ -432,6 +432,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "merge-pdfs-privately-no-upload",
     ],
   },
+  "raw-converter": {
+    id: "raw-converter",
+    name: "RAW Converter",
+    shortDesc: "Convert camera RAW (CR2, NEF, ARW, DNG) to JPG or WebP in-browser",
+    slug: "/tools/raw-converter",
+    category: "optimize",
+    relatedTools: ["compress", "webp", "heic", "exif"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

@@ -55,6 +55,7 @@
     "jszip": "^3.10.1",
     "leaflet": "^1.9.4",
     "libarchive.js": "^2.0.2",
+    "libraw-wasm": "^1.5.0",
     "lucide-react": "^0.577.0",
     "next": "^15.5.14",
     "next-auth": "^4.24.13",
