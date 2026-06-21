@@ -42,6 +42,16 @@ export async function POST(req: NextRequest) {
     email = undefined;
   }
 
+  // Where the user started the Day Pass (tool/page or upsell context).
+  // Sanitized and kept short, stored on metadata so we know the source.
+  let source: string | undefined;
+  try {
+    const body = await req.json().catch(() => ({}));
+    if (body?.source) source = String(body.source).replace(/[^a-zA-Z0-9/:_-]/g, "").slice(0, 80);
+  } catch {
+    source = undefined;
+  }
+
   // Rate limit: 5 attempts per minute.
   // Authenticated users: keyed by email. Guests: keyed by IP.
   const rlKey = email ? `rl:daypass:${email}` : `rl:daypass:ip:${getClientIp(req)}`;
@@ -88,13 +98,19 @@ export async function POST(req: NextRequest) {
       // Ensure Stripe always collects and stores the customer email (needed for guest grant).
       customer_creation: "always",
       // {CHECKOUT_SESSION_ID} è sostituito da Stripe — /auth/complete logga l'utente automaticamente.
-      success_url: `${appUrl}/auth/complete?session_id={CHECKOUT_SESSION_ID}&dest=%2Ftools%2Funrar%3Fdaypass%3Dactive`,
+      // Redirect back to where the user started (the source page) if it's a safe
+      // internal path, otherwise fall back to the dashboard. (Previously this was
+      // hardcoded to /tools/unrar, which sent every buyer there regardless.)
+      success_url: `${appUrl}/auth/complete?session_id={CHECKOUT_SESSION_ID}&dest=${encodeURIComponent(
+        (source && source.startsWith("/") ? source : "/dashboard") + "?daypass=active"
+      )}`,
       cancel_url: `${appUrl}/dashboard?daypass=canceled`,
       metadata: {
         type: "day_pass",
         // For guests this is empty string; the webhook will fall back to
         // session.customer_details.email (populated by Stripe after payment).
         userEmail: email ?? "",
+        ...(source ? { source } : {}),
       },
     });
 

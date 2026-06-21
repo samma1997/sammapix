@@ -89,6 +89,7 @@ function DayPassButton() {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ source: "/pricing" }),
       });
       const data = (await res.json()) as { url?: string; error?: string; code?: string };
       if (data.url) {

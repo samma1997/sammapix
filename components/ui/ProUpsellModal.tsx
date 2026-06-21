@@ -131,6 +131,13 @@ export default function ProUpsellModal({
     setTracked(false);
   }
 
+  // Where this conversion started: the upsell trigger + the current page.
+  // Stored on Stripe metadata so we can see the source of every Day Pass / trial.
+  const checkoutSource = () => {
+    const path = typeof window !== "undefined" ? window.location.pathname : "";
+    return `upsell:${trigger}:${path}`;
+  };
+
   const handleCheckout = async () => {
     trackEvent("upsell_clicked", { trigger });
     // Guest checkout: anyone can start. Stripe collects the email and
@@ -142,7 +149,7 @@ export default function ProUpsellModal({
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: "monthly" }),
+        body: JSON.stringify({ plan: "monthly", source: checkoutSource() }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (data.url) {
@@ -202,6 +209,7 @@ export default function ProUpsellModal({
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ source: checkoutSource() }),
       });
       const data = (await res.json()) as { url?: string; error?: string; code?: string };
       if (data.url) {
