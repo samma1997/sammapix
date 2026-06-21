@@ -1149,14 +1149,75 @@ const CONVERSIONS: Record<string, ConversionData> = {
     ],
   },
 
+  "cr2-to-jpg": {
+    from: "CR2",
+    to: "JPG",
+    fromLabel: "CR2",
+    toLabel: "JPG",
+    toolPath: "/tools/raw-converter",
+    toolLabel: "Open RAW Converter",
+    tagline: "Convert Canon CR2 RAW photos to JPG, free, in your browser, no upload.",
+    whyCopy:
+      "CR2 is Canon's RAW format, used by EOS DSLRs and older mirrorless bodies. A CR2 holds the unprocessed sensor data with the full dynamic range your camera captured, which is great for editing but a problem for everything else: CR2 files are 20 to 40 MB each, will not open in most apps, and cannot be posted to social media, sent by email, or printed at a shop. Converting CR2 to JPG gives you a small, universal photo you can share anywhere, while a real RAW decoder applies the right white balance and tone curve so the result actually looks like your shot.",
+    qualityNote:
+      "A CR2 stores 14 bit colour and wide dynamic range that 8 bit JPG cannot fully hold. SammaPix decodes the CR2 with a proper RAW pipeline (camera white balance plus tone mapping) before exporting, so at quality 90 to 95 the JPG looks excellent for viewing, sharing and printing. Keep the CR2 originals if you plan to edit later.",
+    technicalNote:
+      "Your CR2 is decoded entirely in the browser by libraw compiled to WebAssembly, running in a Web Worker so the page stays responsive. The decoded pixels get white balance and tone mapping, are drawn to a Canvas, and exported as JPEG. The CR2 never leaves your device, nothing is uploaded.",
+    formatTable: [
+      {
+        format: "CR2 (Canon RAW)",
+        fileSize: "Very Large (20-40 MB)",
+        quality: "Maximum (14 bit sensor data)",
+        compatibility: "Canon software, editors",
+        useCase: "Professional capture and editing",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small (2-6 MB)",
+        quality: "High (8 bit, lossy)",
+        compatibility: "Universal",
+        useCase: "Sharing, web, email, print",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting CR2 to JPG lose quality?",
+        a: "You move from 14 bit RAW to 8 bit JPG, so some editing latitude is lost, but the visible photo looks excellent at quality 90 to 95. Keep your CR2 originals if you want to edit later; use the JPG for sharing and printing.",
+      },
+      {
+        q: "Is it safe to convert my CR2 files online?",
+        a: "With SammaPix, yes. The CR2 is decoded 100 percent inside your browser via a WebAssembly RAW decoder. Nothing is uploaded to any server, so even private or client work stays on your machine.",
+      },
+      {
+        q: "Can I convert many CR2 files at once?",
+        a: "Yes. Drop a batch of CR2 files and download all the JPGs as a ZIP. The free plan handles up to 20 files at a time.",
+      },
+      {
+        q: "Which Canon cameras produce CR2 files?",
+        a: "Most Canon EOS DSLRs (such as the 5D, 6D, 7D, 80D, Rebel and 1D series) and older EOS M mirrorless bodies shoot CR2. Newer Canon mirrorless cameras use the CR3 format instead.",
+      },
+    ],
+    related: ["raw-to-jpg", "heic-to-jpg", "jpg-to-webp"],
+    blogSlugs: [
+      { slug: "open-raw-files-browser-no-upload", title: "How to Open RAW Files in Your Browser, No Software, No Upload" },
+    ],
+  },
+
   "raw-to-jpg": {
     from: "RAW",
     to: "JPG",
     fromLabel: "RAW",
     toLabel: "JPG",
-    toolPath: "/tools/compress",
-    toolLabel: "Open Image Converter",
-    tagline: "Convert RAW camera files (CR2, NEF, ARW) to JPG- free, browser-based, no upload.",
+    toolPath: "/tools/raw-converter",
+    toolLabel: "Open RAW Converter",
+    tagline: "Convert RAW camera files (CR2, NEF, ARW) to JPG, free, browser-based, no upload.",
     whyCopy:
       "RAW files from cameras like Canon (CR2), Nikon (NEF), and Sony (ARW) contain unprocessed sensor data with maximum dynamic range and colour depth. However, RAW files are huge (20-60 MB each), cannot be viewed in most apps, and cannot be shared on social media or email. Converting RAW to JPG makes your photos instantly shareable at a fraction of the file size while preserving excellent visual quality.",
     qualityNote:

@@ -218,6 +218,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/convert/png-to-ico",
     "/convert/webp-to-gif",
     "/convert/raw-to-jpg",
+    "/convert/cr2-to-jpg",
     "/convert/tiff-to-png",
     "/convert/bmp-to-png",
     "/convert/gif-to-jpg",
