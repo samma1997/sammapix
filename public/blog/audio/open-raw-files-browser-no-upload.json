@@ -1,0 +1,177 @@
+[
+  {
+    "start": 0,
+    "end": 4.3,
+    "text": "The 40 megabyte ARW that my laptop could not open"
+  },
+  {
+    "start": 4.3,
+    "end": 28.61,
+    "text": "This morning in Bali I shot the portrait at the top of this page on my Sony A7C "
+  },
+  {
+    "start": 28.61,
+    "end": 49.34,
+    "text": "This is the situation every photographer faces: you have a card full of RAW file"
+  },
+  {
+    "start": 49.34,
+    "end": 77.33,
+    "text": "What I do: drag the ARW into SammaPix's browser RAW converter. It decodes the fi"
+  },
+  {
+    "start": 77.33,
+    "end": 87.02,
+    "text": "Below I will explain why RAW files are hard to open, which format your camera us"
+  },
+  {
+    "start": 87.02,
+    "end": 90.26,
+    "text": "What is a RAW file and why can't apps open it?"
+  },
+  {
+    "start": 90.26,
+    "end": 117.48,
+    "text": "When you press the shutter on a digital camera, the sensor captures light as raw"
+  },
+  {
+    "start": 117.48,
+    "end": 135.74,
+    "text": "In RAW mode, the camera skips all of that. It saves the raw sensor data directly"
+  },
+  {
+    "start": 135.74,
+    "end": 138.86,
+    "text": "Why most apps cannot open RAW files"
+  },
+  {
+    "start": 138.86,
+    "end": 165.79,
+    "text": "The problem is that there is no single universal RAW format. Canon invented thei"
+  },
+  {
+    "start": 165.79,
+    "end": 187.54,
+    "text": "To decode a Sony ARW from an A7C II correctly, software needs to know the exact "
+  },
+  {
+    "start": 188.04,
+    "end": 190.48,
+    "text": "How LibRaw solves this"
+  },
+  {
+    "start": 190.48,
+    "end": 215.3,
+    "text": "The open-source LibRaw library at libraw.org is a community-maintained database "
+  },
+  {
+    "start": 215.3,
+    "end": 221.11,
+    "text": "RAW formats by camera brand: CR2, NEF, ARW, RAF and more"
+  },
+  {
+    "start": 221.11,
+    "end": 233.68,
+    "text": "Canon uses CR2 for older cameras and CR3 for anything released after 2018, like "
+  },
+  {
+    "start": 233.68,
+    "end": 244.84,
+    "text": "Nikon uses NEF, and also NRW for compact cameras. Cameras like the Z8, Z9, and D"
+  },
+  {
+    "start": 244.84,
+    "end": 256.48,
+    "text": "Sony uses ARW across their full lineup, including the A7C II, A7R V, A7 IV, and "
+  },
+  {
+    "start": 256.48,
+    "end": 268.7,
+    "text": "Fujifilm uses RAF, used in the X-T5, X100VI, and GFX 100S. Files range from 25 t"
+  },
+  {
+    "start": 269.2,
+    "end": 278.92,
+    "text": "Olympus and OM System use ORF. Panasonic uses RW2. Pentax uses PEF or DNG."
+  },
+  {
+    "start": 278.92,
+    "end": 283.26,
+    "text": "All of these formats are supported by SammaPix RAW Converter."
+  },
+  {
+    "start": 283.26,
+    "end": 286.84,
+    "text": "How to open and convert a RAW file in the browser"
+  },
+  {
+    "start": 287.34,
+    "end": 291.13,
+    "text": "How to open a CR2 file from a Canon camera"
+  },
+  {
+    "start": 292.13,
+    "end": 295.76,
+    "text": "How to open a NEF file from a Nikon camera"
+  },
+  {
+    "start": 296.76,
+    "end": 300.74,
+    "text": "How to open an ARW file from a Sony camera"
+  },
+  {
+    "start": 301.24,
+    "end": 326.66,
+    "text": "Windows does not natively support ARW files from newer Sony cameras. Even Window"
+  },
+  {
+    "start": 326.66,
+    "end": 329.94,
+    "text": "RAW vs JPG: which to keep?"
+  },
+  {
+    "start": 329.94,
+    "end": 344.73,
+    "text": "Always keep your original RAW files. The JPG you create is a processed, lossy ve"
+  },
+  {
+    "start": 345.23,
+    "end": 364.98,
+    "text": "The tradeoff is storage. A full day shooting on my A7C II produces around 800 fi"
+  },
+  {
+    "start": 364.98,
+    "end": 373.84,
+    "text": "You can see the kind of photos these RAW files produce in my portfolio at sammap"
+  },
+  {
+    "start": 373.84,
+    "end": 377.68,
+    "text": "Why I never upload RAW files to random converters"
+  },
+  {
+    "start": 377.68,
+    "end": 395.84,
+    "text": "RAW files are information-dense. Your ARW or NEF contains GPS coordinates if you"
+  },
+  {
+    "start": 395.84,
+    "end": 409.28,
+    "text": "When you upload a RAW file to a random converter, you are handing all of that to"
+  },
+  {
+    "start": 409.78,
+    "end": 413.94,
+    "text": "Batch RAW conversion: converting multiple files at once"
+  },
+  {
+    "start": 413.94,
+    "end": 430.95,
+    "text": "The browser converter supports dropping multiple RAW files at once. They are pro"
+  },
+  {
+    "start": 430.95,
+    "end": 458.79,
+    "text": "For large batches of 100 or more files, a desktop application is faster. Free de"
+  }
+]
