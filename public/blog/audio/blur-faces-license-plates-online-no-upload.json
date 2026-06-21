@@ -1,0 +1,287 @@
+[
+  {
+    "start": 0,
+    "end": 3.14,
+    "text": "The street photography privacy problem"
+  },
+  {
+    "start": 3.64,
+    "end": 32.49,
+    "text": "Before any of those photos go online, I go through them and blur the faces where"
+  },
+  {
+    "start": 32.49,
+    "end": 58.39,
+    "text": "I built and use SammaPix's blur and censor tool for exactly this. It runs in the"
+  },
+  {
+    "start": 58.39,
+    "end": 61.56,
+    "text": "When you need to blur or censor a photo"
+  },
+  {
+    "start": 61.56,
+    "end": 71.44,
+    "text": "Blurring faces is the most obvious use case, but it is far from the only one. Th"
+  },
+  {
+    "start": 71.44,
+    "end": 74.23,
+    "text": "Street and travel photography"
+  },
+  {
+    "start": 74.23,
+    "end": 97.8,
+    "text": "Any time you post a street or travel photo where people are identifiable, you ar"
+  },
+  {
+    "start": 98.3,
+    "end": 119.54,
+    "text": "When you post photos of a car for sale on a marketplace, your license plate is v"
+  },
+  {
+    "start": 120.54,
+    "end": 122.91,
+    "text": "Screenshot redaction"
+  },
+  {
+    "start": 122.91,
+    "end": 146.05,
+    "text": "This is one of the highest-stakes uses. When you share a screenshot for support,"
+  },
+  {
+    "start": 146.55,
+    "end": 163.32,
+    "text": "Many parents are increasingly careful about posting identifiable photos of their"
+  },
+  {
+    "start": 163.32,
+    "end": 168.1,
+    "text": "Blur vs pixelate vs solid block: which is actually safe?"
+  },
+  {
+    "start": 168.1,
+    "end": 180.68,
+    "text": "This is the question most people skip, and it is the one that matters most if yo"
+  },
+  {
+    "start": 180.68,
+    "end": 225.68,
+    "text": "A Gaussian or box blur mixes neighbouring pixels together, creating a soft, out-"
+  },
+  {
+    "start": 226.18,
+    "end": 265.34,
+    "text": "Pixelation divides the selected area into large blocks and fills each block with"
+  },
+  {
+    "start": 265.34,
+    "end": 267.34,
+    "text": "Solid block"
+  },
+  {
+    "start": 267.34,
+    "end": 297.07,
+    "text": "Replacing the selected area with a flat colour, usually black, destroys all pixe"
+  },
+  {
+    "start": 298.07,
+    "end": 309.76,
+    "text": "Step 1: Open the tool at sammapix.com/tools/blur-censor. No account required. Wo"
+  },
+  {
+    "start": 309.76,
+    "end": 323.08,
+    "text": "Step 2: Drop or select your image. JPG, PNG, WebP and most common formats are su"
+  },
+  {
+    "start": 323.08,
+    "end": 338.01,
+    "text": "Step 3: Choose your censoring method: blur, pixelate or solid block. For faces i"
+  },
+  {
+    "start": 338.51,
+    "end": 352.72,
+    "text": "Step 5: Adjust blur strength if using blur. A higher radius destroys more inform"
+  },
+  {
+    "start": 352.72,
+    "end": 368.22,
+    "text": "Step 6: Export the image. The tool renders all censor regions onto the canvas an"
+  },
+  {
+    "start": 368.72,
+    "end": 372.13,
+    "text": "A note on what permanently destroyed means"
+  },
+  {
+    "start": 372.13,
+    "end": 391.62,
+    "text": "Some image editing tools, particularly layer-based apps like Photoshop, store ce"
+  },
+  {
+    "start": 391.62,
+    "end": 415.42,
+    "text": "SammaPix does not use layers. The blur or block effect is rendered directly onto"
+  },
+  {
+    "start": 415.42,
+    "end": 419.26,
+    "text": "What to censor: a practical guide by situation"
+  },
+  {
+    "start": 419.26,
+    "end": 422.7,
+    "text": "Street and travel photography before posting"
+  },
+  {
+    "start": 422.7,
+    "end": 449.02,
+    "text": "Check for faces, particularly anyone who is clearly the subject of the frame rat"
+  },
+  {
+    "start": 449.02,
+    "end": 451.66,
+    "text": "Selling a car or vehicle"
+  },
+  {
+    "start": 451.66,
+    "end": 468.8,
+    "text": "Before uploading any exterior photo of a car to a classified listing, block the "
+  },
+  {
+    "start": 468.8,
+    "end": 471.42,
+    "text": "Screenshots before sharing"
+  },
+  {
+    "start": 471.42,
+    "end": 496.47,
+    "text": "Before you send a screenshot anywhere, do a quick scan for: account numbers, IBA"
+  },
+  {
+    "start": 496.97,
+    "end": 524.38,
+    "text": "Search for blur face online and you will find dozens of tools. Most of them work"
+  },
+  {
+    "start": 524.88,
+    "end": 528.5,
+    "text": "How SammaPix processes your image differently"
+  },
+  {
+    "start": 529,
+    "end": 544.72,
+    "text": "You can verify this yourself. Open your browser's network inspector (F12, then t"
+  },
+  {
+    "start": 544.72,
+    "end": 549,
+    "text": "Blurring does not remove EXIF or GPS metadata"
+  },
+  {
+    "start": 549,
+    "end": 561.38,
+    "text": "This is a point that catches a lot of people out. Blurring or blocking the visib"
+  },
+  {
+    "start": 561.38,
+    "end": 580.53,
+    "text": "If your camera or phone wrote GPS coordinates to the EXIF data when you took the"
+  },
+  {
+    "start": 580.53,
+    "end": 596.08,
+    "text": "The complete workflow for a privacy-safe image export is: censor the visual cont"
+  },
+  {
+    "start": 596.08,
+    "end": 615.91,
+    "text": "Platforms like Instagram and Twitter strip EXIF metadata automatically before se"
+  },
+  {
+    "start": 615.91,
+    "end": 619.72,
+    "text": "Photography, privacy law and GDPR"
+  },
+  {
+    "start": 619.72,
+    "end": 631.56,
+    "text": "I am not a lawyer, and this is not legal advice. But since I shoot and publish i"
+  },
+  {
+    "start": 631.56,
+    "end": 635.44,
+    "text": "Photographs as personal data under GDPR"
+  },
+  {
+    "start": 636.44,
+    "end": 639.59,
+    "text": "Photography law outside the EU"
+  },
+  {
+    "start": 639.59,
+    "end": 682.52,
+    "text": "In the United States, photographing people in public is generally protected unde"
+  },
+  {
+    "start": 682.52,
+    "end": 686.29,
+    "text": "Is blurring a face enough to make it unrecognizable?"
+  },
+  {
+    "start": 686.29,
+    "end": 722,
+    "text": "A strong blur applied at a high radius is generally unrecognisable to the human "
+  },
+  {
+    "start": 722.5,
+    "end": 750.7,
+    "text": "Low-resolution pixelation can sometimes be partially reversed. A 2020 academic p"
+  },
+  {
+    "start": 750.7,
+    "end": 754.09,
+    "text": "Does SammaPix upload my photo to censor it?"
+  },
+  {
+    "start": 754.09,
+    "end": 786.42,
+    "text": "No. SammaPix's blur and censor tool runs entirely in your browser using the Canv"
+  },
+  {
+    "start": 786.42,
+    "end": 790.33,
+    "text": "Does blurring a photo remove the EXIF GPS data?"
+  },
+  {
+    "start": 791.33,
+    "end": 824.59,
+    "text": "This varies by country and context. In most jurisdictions, photographing people "
+  },
+  {
+    "start": 824.59,
+    "end": 829.61,
+    "text": "What is the difference between blur, pixelate and solid block for censoring?"
+  },
+  {
+    "start": 829.61,
+    "end": 866.45,
+    "text": "Blur applies a Gaussian or box blur filter that mixes neighbouring pixels togeth"
+  },
+  {
+    "start": 866.45,
+    "end": 869.62,
+    "text": "How do I blur a license plate in a photo?"
+  },
+  {
+    "start": 870.12,
+    "end": 873.52,
+    "text": "Can I blur multiple faces in one photo?"
+  },
+  {
+    "start": 873.52,
+    "end": 892.68,
+    "text": "Yes. SammaPix's blur and censor tool lets you draw as many blur or block regions"
+  }
+]

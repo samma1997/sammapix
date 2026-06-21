@@ -455,6 +455,28 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "blur-censor": {
+    id: "blur-censor",
+    name: "Blur & Censor",
+    shortDesc: "Blur, pixelate or block faces, plates and sensitive data in a photo",
+    slug: "/tools/blur-censor",
+    category: "edit",
+    relatedTools: ["exif", "stampit", "compress", "resizepack"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
+  "redact-pdf": {
+    id: "redact-pdf",
+    name: "Redact PDF",
+    shortDesc: "Permanently black out sensitive text in a PDF, in-browser",
+    slug: "/tools/redact-pdf",
+    category: "edit",
+    relatedTools: ["pdf-split", "pdf-merge", "blur-censor", "exif"],
+    relatedBlogSlugs: [
+      "merge-pdfs-privately-no-upload",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

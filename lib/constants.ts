@@ -86,6 +86,8 @@ export const TOOL_SLUGS = [
   "open-7z",
   "raw-converter",
   "pdf-split",
+  "blur-censor",
+  "redact-pdf",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -130,6 +132,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "blur-faces-license-plates-online-no-upload",
   "open-raw-files-browser-no-upload",
   "can-i-use-webp-avif-browser-support-2026",
   "apply-lut-batch-photos-free-2026",
