@@ -38,6 +38,8 @@ import {
   IconCompressVideo,
   IconConvertVideo,
   IconVideoToGif,
+  IconMuteVideo,
+  IconResizeVideo,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -688,6 +690,26 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconVideoToGif,
     category: ["Creative"],
+    isNew: true,
+  },
+  {
+    name: "Mute Video",
+    href: "/tools/mute-video",
+    tagline: "Remove the audio track from any video — instant, with no quality loss because the video is not re-encoded. 100% in your browser, no upload.",
+    accent: "#64748B",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconMuteVideo,
+    category: ["Creative"],
+    isNew: true,
+  },
+  {
+    name: "Resize Video",
+    href: "/tools/resize-video",
+    tagline: "Change a video's resolution to 1080p, 720p, 480p or 360p with the aspect ratio preserved. 100% in your browser, no upload.",
+    accent: "#2563EB",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconResizeVideo,
+    category: ["Optimize"],
     isNew: true,
   },
 ];

@@ -511,6 +511,28 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "mute-video": {
+    id: "mute-video",
+    name: "Mute Video",
+    shortDesc: "Remove the audio from a video in-browser, instant, no re-encode, no upload",
+    slug: "/tools/mute-video",
+    category: "edit",
+    relatedTools: ["compress-video", "convert-video", "resize-video", "video-to-gif"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
+  "resize-video": {
+    id: "resize-video",
+    name: "Resize Video",
+    shortDesc: "Change a video's resolution (1080p/720p/480p/360p) in-browser, no upload",
+    slug: "/tools/resize-video",
+    category: "optimize",
+    relatedTools: ["compress-video", "convert-video", "mute-video", "resizepack"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

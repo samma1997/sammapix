@@ -36,6 +36,8 @@ import {
   IconCompressVideo,
   IconConvertVideo,
   IconVideoToGif,
+  IconMuteVideo,
+  IconResizeVideo,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -300,6 +302,8 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Compress Video", href: "/tools/compress-video", tagline: "Shrink MP4, MOV, WebM up to 80%. WebCodecs-fast, no upload.", accent: "#7C3AED", badge: "Free", Icon: IconCompressVideo, category: "Optimize", isNew: true },
   { name: "Convert Video", href: "/tools/convert-video", tagline: "MOV, AVI, MKV, WebM to MP4 and back. Fast, no upload.", accent: "#0891B2", badge: "Free", Icon: IconConvertVideo, category: "Optimize", isNew: true },
   { name: "Video to GIF", href: "/tools/video-to-gif", tagline: "MP4, MOV, WebM to animated GIF. No upload, no watermark.", accent: "#E11D48", badge: "Free", Icon: IconVideoToGif, category: "Creative", isNew: true },
+  { name: "Mute Video", href: "/tools/mute-video", tagline: "Remove the audio from any video. Instant, no upload.", accent: "#64748B", badge: "Free", Icon: IconMuteVideo, category: "Creative", isNew: true },
+  { name: "Resize Video", href: "/tools/resize-video", tagline: "Change resolution to 1080p, 720p, 480p, 360p. No upload.", accent: "#2563EB", badge: "Free", Icon: IconResizeVideo, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
