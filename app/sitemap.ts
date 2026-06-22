@@ -148,6 +148,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/pdf-split",
     "/tools/blur-censor",
     "/tools/redact-pdf",
+    "/tools/compress-video",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

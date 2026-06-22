@@ -477,6 +477,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "merge-pdfs-privately-no-upload",
     ],
   },
+  "compress-video": {
+    id: "compress-video",
+    name: "Compress Video",
+    shortDesc: "Compress MP4, MOV, WebM, MKV up to 80% in-browser via WebCodecs, no upload",
+    slug: "/tools/compress-video",
+    category: "optimize",
+    relatedTools: ["gif-to-mp4", "compress", "resizepack", "webp"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

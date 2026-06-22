@@ -88,6 +88,7 @@ export const TOOL_SLUGS = [
   "pdf-split",
   "blur-censor",
   "redact-pdf",
+  "compress-video",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

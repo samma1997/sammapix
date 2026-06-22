@@ -35,6 +35,7 @@ import {
   IconRawConverter,
   IconBlurCensor,
   IconRedactPdf,
+  IconCompressVideo,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -654,6 +655,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#334155",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconRedactPdf,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Compress Video",
+    href: "/tools/compress-video",
+    tagline: "Shrink MP4, MOV, WebM and MKV up to 80% — WebCodecs-fast, with a live size preview and before/after compare. 100% in your browser, no upload.",
+    accent: "#7C3AED",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconCompressVideo,
     category: ["Optimize"],
     isNew: true,
   },
