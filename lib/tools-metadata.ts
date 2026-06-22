@@ -544,6 +544,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "extract-audio": {
+    id: "extract-audio",
+    name: "Extract Audio",
+    shortDesc: "Extract audio from a video as MP3 or M4A in-browser, no upload, no watermark",
+    slug: "/tools/extract-audio",
+    category: "edit",
+    relatedTools: ["convert-video", "compress-video", "mute-video", "trim-video"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

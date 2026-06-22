@@ -1253,6 +1253,29 @@ export const IconTrimVideo: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconExtractAudio: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-ea { 0%,100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+      .av-ea-b { transform-box: fill-box; transform-origin: center; }
+      .av-ea-1 { animation: av-ea 1s ease-in-out infinite; }
+      .av-ea-2 { animation: av-ea 1s ease-in-out 0.15s infinite; }
+      .av-ea-3 { animation: av-ea 1s ease-in-out 0.3s infinite; }
+      .av-ea-4 { animation: av-ea 1s ease-in-out 0.45s infinite; }
+    `}</style>
+    {/* Music note */}
+    <path d="M20 9v18" stroke={accent} strokeWidth="2.4" strokeLinecap="round" />
+    <path d="M20 9l10-2v16" stroke={accent} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <circle cx="16" cy="28" r="4" fill={accent} />
+    <circle cx="34" cy="25" r="4" fill={accent} />
+    {/* Equalizer bars */}
+    <rect className="av-ea-b av-ea-1" x="6" y="16" width="2.4" height="16" rx="1.2" fill={accent} opacity="0.5" />
+    <rect className="av-ea-b av-ea-2" x="10" y="16" width="2.4" height="16" rx="1.2" fill={accent} opacity="0.5" />
+    <rect className="av-ea-b av-ea-3" x="39" y="16" width="2.4" height="16" rx="1.2" fill={accent} opacity="0.5" />
+    <rect className="av-ea-b av-ea-4" x="43" y="16" width="2.4" height="16" rx="1.2" fill={accent} opacity="0.5" />
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

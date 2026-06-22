@@ -41,6 +41,7 @@ import {
   IconMuteVideo,
   IconResizeVideo,
   IconTrimVideo,
+  IconExtractAudio,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -720,6 +721,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#D97706",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconTrimVideo,
+    category: ["Creative"],
+    isNew: true,
+  },
+  {
+    name: "Extract Audio",
+    href: "/tools/extract-audio",
+    tagline: "Pull the audio out of any video as MP3 or M4A, 128 to 320 kbps. No watermark, 100% in your browser, no upload.",
+    accent: "#059669",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconExtractAudio,
     category: ["Creative"],
     isNew: true,
   },
