@@ -170,11 +170,17 @@ const IconAiOrganize: React.FC<{ accent: string }> = ({ accent }) => (
 
 const IconBatchName: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <style>{`
+      @keyframes hp-bn-row { 0%, 100% { fill-opacity: 0.1; } 50% { fill-opacity: 0.5; } }
+      .hp-bn-1 { animation: hp-bn-row 2.1s ease-in-out infinite; }
+      .hp-bn-2 { animation: hp-bn-row 2.1s ease-in-out 0.35s infinite; }
+      .hp-bn-3 { animation: hp-bn-row 2.1s ease-in-out 0.7s infinite; }
+    `}</style>
+    <rect className="hp-bn-1" x="6" y="4" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
     <text x="20" y="12" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">001</text>
-    <rect x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <rect className="hp-bn-2" x="6" y="18" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
     <text x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">002</text>
-    <rect x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <rect className="hp-bn-3" x="6" y="32" width="28" height="10" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
     <text x="20" y="40" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">003</text>
   </svg>
 );
@@ -229,13 +235,21 @@ const IconPhotoEnhance: React.FC<{ accent: string }> = ({ accent }) => (
 
 const IconSmartSort: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes hp-ss-arr { 0%,100% { transform: translateX(0); opacity: 0.4; } 50% { transform: translateX(3px); opacity: 1; } }
+      @keyframes hp-ss-binA { 0%,100% { fill-opacity: 0.08; } 30% { fill-opacity: 0.4; } }
+      @keyframes hp-ss-binB { 0%,100% { fill-opacity: 0.08; } 80% { fill-opacity: 0.4; } }
+      .hp-ss-arr { animation: hp-ss-arr 1.6s ease-in-out infinite; }
+      .hp-ss-binA { animation: hp-ss-binA 2.2s ease-in-out infinite; }
+      .hp-ss-binB { animation: hp-ss-binB 2.2s ease-in-out infinite; }
+    `}</style>
     <rect x="2" y="6" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
     <rect x="4" y="8" width="6" height="4" rx="1" fill={accent} fillOpacity="0.3"/>
     <rect x="2" y="22" width="14" height="12" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
-    <path d="M20 12 L26 8 M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
-    <rect x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <path className="hp-ss-arr" d="M20 12 L26 8 M20 28 L26 22" stroke={accent} strokeWidth="1.25" strokeLinecap="round" strokeOpacity="0.5"/>
+    <rect className="hp-ss-binA" x="28" y="4" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
     <text x="37" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">A</text>
-    <rect x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <rect className="hp-ss-binB" x="28" y="22" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
     <text x="37" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">B</text>
   </svg>
 );

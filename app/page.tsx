@@ -28,7 +28,7 @@ const HomepageToolGrid = dynamic(
 export const metadata = {
   title: "SammaPix — Free AI Photo Tools, Image Compressor & Optimizer",
   description:
-    "Compress, rename with AI, resize, convert -- all in one pipeline. 32 free browser-based tools. No uploads. No account needed. HEIC and video support included.",
+    `Compress, rename with AI, resize, convert -- all in one pipeline. ${TOOL_COUNT} free browser-based tools. No uploads. No account needed. HEIC and video support included.`,
   keywords: [
     "ai photo workflow",
     "free image tools",
@@ -153,7 +153,7 @@ export default function HomePage() {
         url: "https://sammapix.com",
         logo: "https://sammapix.com/icon.svg",
         description:
-          "AI-powered photo and video workflow platform for content creators. 32 free browser-based tools.",
+          `AI-powered photo and video workflow platform for content creators. ${TOOL_COUNT} free browser-based tools.`,
         sameAs: [
           "https://www.instagram.com/lucasammarco.web/",
           "https://lucasammarco.com",
