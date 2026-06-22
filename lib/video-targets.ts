@@ -216,6 +216,90 @@ const TARGETS: VideoTarget[] = [
     ],
     related: ["whatsapp", "email", "instagram"],
   },
+  {
+    slug: "twitter",
+    platform: "Twitter / X",
+    targetMB: null,
+    limitLabel: "upload-ready",
+    titleKeyword: "Compress Video for Twitter / X",
+    metaDescription:
+      "Compress a video to post on Twitter / X. Free, no upload, no signup. SammaPix shrinks your MP4 to upload faster and look sharp, right in your browser.",
+    ogDescription:
+      "Compress video for Twitter / X in your browser. Faster uploads, sharp quality, no upload, no signup.",
+    useCase:
+      "Twitter / X re-compresses big videos and limits length, which can leave your clip soft. Compress to a clean 1080p MP4 first so it uploads fast and keeps its quality.",
+    keywords: [
+      "compress video for twitter",
+      "compress video for x",
+      "twitter video size limit",
+      "reduce video size for twitter",
+      "twitter video quality",
+      "make video smaller for twitter",
+    ],
+    faqs: [
+      { q: "What are the video limits on Twitter / X?", a: "Twitter / X accepts MP4 with H.264 and caps length and size for most accounts. Compressing your clip to 1080p MP4 first keeps it under the limits and avoids the platform softening it with its own re-compression." },
+      { q: "How do I compress a video for Twitter / X?", a: "Drop your clip, keep the 1080p downscale on for 4K, and pick a balanced quality preset. SammaPix re-encodes it locally and shows the estimated size live." },
+      { q: "Is my video uploaded?", a: "No. Everything runs in your browser with WebCodecs. Your video never leaves your device." },
+      { q: "Why compress before posting?", a: "Smaller files upload faster, and giving Twitter / X a clean 1080p MP4 reduces how much its own compression degrades the result." },
+    ],
+    related: ["instagram", "whatsapp", "discord"],
+  },
+  {
+    slug: "facebook",
+    platform: "Facebook",
+    targetMB: null,
+    limitLabel: "upload-ready",
+    titleKeyword: "Compress Video for Facebook",
+    metaDescription:
+      "Compress a video for Facebook to upload faster and keep quality. Free, no upload, no signup. SammaPix re-encodes your MP4 right in your browser, nothing uploaded.",
+    ogDescription:
+      "Compress video for Facebook in your browser. Faster uploads, sharp quality, no upload, no signup.",
+    useCase:
+      "Big videos upload slowly to Facebook and get re-compressed anyway. Compress to a clean 1080p MP4 first so it uploads fast and holds its quality.",
+    keywords: [
+      "compress video for facebook",
+      "facebook video size",
+      "reduce video size for facebook",
+      "compress video facebook online",
+      "facebook video quality",
+      "make video smaller for facebook",
+    ],
+    faqs: [
+      { q: "What format does Facebook want for video?", a: "Facebook prefers MP4 with the H.264 codec at 1080p. SammaPix outputs exactly that, so your posts and reels upload cleanly and avoid extra re-compression." },
+      { q: "How do I compress a video for Facebook?", a: "Drop your clip, keep the 1080p downscale on for 4K footage, and pick a balanced quality preset. SammaPix re-encodes it locally and shows a before and after compare." },
+      { q: "Is my video uploaded to a server?", a: "No. Everything runs in your browser with WebCodecs. Your video never leaves your device." },
+      { q: "Why compress before uploading to Facebook?", a: "Smaller files upload faster, and a clean 1080p MP4 reduces how much Facebook's own compression degrades the final result." },
+    ],
+    related: ["instagram", "twitter", "whatsapp"],
+  },
+  {
+    slug: "slack",
+    platform: "Slack",
+    targetMB: null,
+    limitLabel: "under the limit",
+    titleKeyword: "Compress Video for Slack",
+    metaDescription:
+      "Compress a video to share on Slack. Free, no upload, no signup. SammaPix shrinks your MP4 to fit Slack's upload limit, right in your browser.",
+    ogDescription:
+      "Compress video for Slack in your browser. Fit the upload limit, no upload, no signup.",
+    useCase:
+      "Slack caps uploads, and a raw screen recording or phone clip can blow past it. Compress to a smaller MP4 so it shares in any channel or DM.",
+    keywords: [
+      "compress video for slack",
+      "slack video size limit",
+      "reduce video size for slack",
+      "compress screen recording for slack",
+      "slack file upload limit",
+      "make video smaller for slack",
+    ],
+    faqs: [
+      { q: "What is Slack's upload limit?", a: "Slack's free plan limits uploads, and screen recordings add up fast. Compressing to 1080p or 720p MP4 keeps your clip under the limit so it shares in any channel or DM." },
+      { q: "How do I compress a video for Slack?", a: "Drop your clip, keep the 1080p downscale on, and pick a balanced or small preset. SammaPix re-encodes it locally and shows the estimated size live so you know it will fit." },
+      { q: "Is my video uploaded?", a: "No. The compression runs entirely in your browser. Your file is never sent to a server." },
+      { q: "Best settings for a screen recording?", a: "Screen recordings compress very well. Try 1080p with the Small preset, or downscale to 720p for the lightest file while staying readable." },
+    ],
+    related: ["discord", "email", "whatsapp"],
+  },
 ];
 
 export function getAllVideoTargets(): VideoTarget[] {

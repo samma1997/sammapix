@@ -265,6 +265,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Programmatic compress-video-for pages — driven from lib/video-targets.ts
+  // (compress-video-for pages are driven from the registry below)
   const compressVideoForPages: MetadataRoute.Sitemap = getAllVideoTargets().map((t) => ({
     url: `${APP_URL}/compress-video/${t.slug}`,
     lastModified: new Date(),
