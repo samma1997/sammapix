@@ -1164,6 +1164,15 @@ export const IconConvertVideo: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconVideoToGif: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="7" y="11" width="34" height="26" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
+    <path d="M14 20v8M14 20h4M14 28h4v-3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M24 20v8" stroke={accent} strokeWidth="2" strokeLinecap="round" />
+    <path d="M30 28v-8h5M30 24h4" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
