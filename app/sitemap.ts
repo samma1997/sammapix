@@ -245,6 +245,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/convert/avi-to-mp4",
     "/convert/mkv-to-mp4",
     "/convert/webm-to-mp4",
+    "/convert/mp4-to-mp3",
+    "/convert/mov-to-mp3",
+    "/convert/webm-to-mp3",
+    "/convert/video-to-mp3",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

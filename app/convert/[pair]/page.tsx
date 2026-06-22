@@ -1985,6 +1985,112 @@ const CONVERSIONS: Record<string, ConversionData> = {
       { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
     ],
   },
+
+  "mp4-to-mp3": {
+    from: "MP4", to: "MP3", fromLabel: "MP4", toLabel: "MP3",
+    toolPath: "/tools/extract-audio", toolLabel: "Open Extract Audio",
+    tagline: "Extract the audio from an MP4 video and save it as MP3, free, no upload.",
+    whyCopy:
+      "Sometimes you only want the sound: a song from a music video, the audio of a lecture or podcast, a voice memo recorded as video. Converting MP4 to MP3 pulls just the audio stream out of the video and saves it as a small MP3 that plays on every device and music app, with no video weighing it down.",
+    qualityNote:
+      "The audio is decoded from the MP4 and re-encoded to MP3 at the bitrate you choose. At 320 kbps the result is effectively transparent for music; 128 kbps is plenty for voice and keeps the file tiny.",
+    technicalNote:
+      "SammaPix decodes the MP4's audio track with the WebCodecs API (via Mediabunny) and encodes it to MP3 with a built-in JavaScript MP3 encoder, all in your browser. The video is never uploaded.",
+    formatTable: [
+      { format: "MP3", fileSize: "Small", quality: "High (lossy)", compatibility: "Universal", useCase: "Music, podcasts, every player" },
+      { format: "M4A (AAC)", fileSize: "Smallest", quality: "High (lossy)", compatibility: "Apple, modern players", useCase: "Smaller files, Apple devices" },
+      { format: "WAV", fileSize: "Large", quality: "Lossless (PCM)", compatibility: "Universal", useCase: "Editing, mastering" },
+      { format: "MP4", fileSize: "Large", quality: "Video + audio", compatibility: "Universal", useCase: "The original video" },
+    ],
+    faqs: [
+      { q: "How do I convert MP4 to MP3 without uploading?", a: "Drop your MP4 into SammaPix's Extract Audio tool, choose MP3, and download. The audio is decoded and encoded to MP3 entirely in your browser, so the video never leaves your device." },
+      { q: "Does MP4 to MP3 lose quality?", a: "MP3 is a lossy format, so there is a re-encode. At 192 to 320 kbps the difference is inaudible for almost everyone, especially for voice and casual listening." },
+      { q: "Is there a watermark or a length limit?", a: "No watermark. Free covers files up to 500 MB, which is a long video; larger files are available with Pro or a Day Pass." },
+      { q: "Can I get M4A instead of MP3?", a: "Yes. The same tool also outputs M4A (AAC), which is slightly smaller at the same quality and ideal for Apple devices." },
+    ],
+    related: ["mov-to-mp3", "webm-to-mp3", "video-to-mp3"],
+    blogSlugs: [
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
+
+  "mov-to-mp3": {
+    from: "MOV", to: "MP3", fromLabel: "MOV", toLabel: "MP3",
+    toolPath: "/tools/extract-audio", toolLabel: "Open Extract Audio",
+    tagline: "Extract the audio from an iPhone MOV video as MP3, free, in your browser.",
+    whyCopy:
+      "MOV is the video format iPhones record. When you only need the sound, an interview, a song, a voice note filmed as video, converting MOV to MP3 saves just the audio as a small, universal file you can play anywhere or drop into a playlist.",
+    qualityNote:
+      "SammaPix decodes the MOV's audio and re-encodes it to MP3 at your chosen bitrate. 192 kbps is a great all-round choice; 320 kbps is effectively transparent for music.",
+    technicalNote:
+      "The MOV audio track is decoded with WebCodecs (via Mediabunny) and encoded to MP3 with a JavaScript encoder, all locally. Your video is never uploaded.",
+    formatTable: [
+      { format: "MP3", fileSize: "Small", quality: "High (lossy)", compatibility: "Universal", useCase: "Music, podcasts, every player" },
+      { format: "M4A (AAC)", fileSize: "Smallest", quality: "High (lossy)", compatibility: "Apple, modern players", useCase: "Smaller files, Apple devices" },
+      { format: "MOV", fileSize: "Large", quality: "Video + audio", compatibility: "Apple-centric", useCase: "The original iPhone video" },
+    ],
+    faqs: [
+      { q: "How do I get the audio out of an iPhone MOV?", a: "Drop the MOV into SammaPix's Extract Audio tool and choose MP3 or M4A. The audio is extracted in your browser and nothing is uploaded." },
+      { q: "Does it work with iPhone videos?", a: "Yes. MOV is the iPhone's native video format, and SammaPix reads it directly to pull out the audio." },
+      { q: "Is my video uploaded?", a: "No. The whole extraction runs locally in your browser with WebCodecs." },
+    ],
+    related: ["mp4-to-mp3", "webm-to-mp3", "video-to-mp3"],
+    blogSlugs: [
+      { slug: "how-to-convert-mov-to-mp4-no-upload", title: "How to Convert MOV to MP4 Without Uploading It" },
+    ],
+  },
+
+  "webm-to-mp3": {
+    from: "WebM", to: "MP3", fromLabel: "WebM", toLabel: "MP3",
+    toolPath: "/tools/extract-audio", toolLabel: "Open Extract Audio",
+    tagline: "Extract the audio from a WebM video as MP3, free, no upload.",
+    whyCopy:
+      "WebM is the format behind a lot of web and streaming video. When you want just the sound as a portable file, converting WebM to MP3 gives you a small, universal audio track that plays on any device or music app.",
+    qualityNote:
+      "The WebM audio is decoded and re-encoded to MP3 at the bitrate you pick. For voice, 128 kbps is plenty; for music, 256 to 320 kbps keeps it crisp.",
+    technicalNote:
+      "SammaPix decodes the WebM audio with WebCodecs (via Mediabunny) and encodes MP3 in the browser with a JavaScript encoder. Nothing is uploaded.",
+    formatTable: [
+      { format: "MP3", fileSize: "Small", quality: "High (lossy)", compatibility: "Universal", useCase: "Music, podcasts, every player" },
+      { format: "M4A (AAC)", fileSize: "Smallest", quality: "High (lossy)", compatibility: "Apple, modern players", useCase: "Smaller files, Apple devices" },
+      { format: "WebM", fileSize: "Medium", quality: "Video + audio", compatibility: "Modern browsers", useCase: "The original web video" },
+    ],
+    faqs: [
+      { q: "How do I convert WebM to MP3?", a: "Drop the WebM into SammaPix's Extract Audio tool, choose MP3, and download. It runs entirely in your browser with no upload." },
+      { q: "Will the quality be good?", a: "Yes. Choose 192 to 320 kbps for music. The re-encode to MP3 is inaudible at those bitrates for most listeners." },
+      { q: "Is my file uploaded?", a: "No. The extraction happens locally with WebCodecs. Your WebM never leaves your device." },
+    ],
+    related: ["mp4-to-mp3", "mov-to-mp3", "video-to-mp3"],
+    blogSlugs: [
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
+
+  "video-to-mp3": {
+    from: "Video", to: "MP3", fromLabel: "Video", toLabel: "MP3",
+    toolPath: "/tools/extract-audio", toolLabel: "Open Extract Audio",
+    tagline: "Extract the audio from any video as MP3, free, in your browser, no upload.",
+    whyCopy:
+      "Whatever the format, MP4, MOV, WebM or MKV, sometimes you only want the sound. Converting a video to MP3 strips out everything but the audio and saves it as a small, universal file you can play on any phone, speaker or music app.",
+    qualityNote:
+      "The audio is decoded from the video and re-encoded to MP3 at your chosen bitrate, from 128 kbps for voice up to 320 kbps for transparent music quality.",
+    technicalNote:
+      "SammaPix decodes the video's audio track with WebCodecs (via Mediabunny) and encodes MP3 in your browser with a JavaScript encoder. The video is never uploaded.",
+    formatTable: [
+      { format: "MP3", fileSize: "Small", quality: "High (lossy)", compatibility: "Universal", useCase: "Music, podcasts, every player" },
+      { format: "M4A (AAC)", fileSize: "Smallest", quality: "High (lossy)", compatibility: "Apple, modern players", useCase: "Smaller files, Apple devices" },
+      { format: "WAV", fileSize: "Large", quality: "Lossless (PCM)", compatibility: "Universal", useCase: "Editing, mastering" },
+    ],
+    faqs: [
+      { q: "How do I convert a video to MP3?", a: "Drop any MP4, MOV, WebM or MKV into SammaPix's Extract Audio tool, pick MP3, and download. The audio is extracted in your browser with nothing uploaded." },
+      { q: "Which video formats are supported?", a: "MP4, MOV, WebM, MKV and more. SammaPix reads the audio track directly from each." },
+      { q: "Is it free and private?", a: "Yes. It is free with no signup, no watermark, and the whole process runs locally in your browser." },
+    ],
+    related: ["mp4-to-mp3", "mov-to-mp3", "webm-to-mp3"],
+    blogSlugs: [
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------------------
