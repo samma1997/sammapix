@@ -1155,6 +1155,15 @@ export const IconCompressVideo: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconConvertVideo: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="7" y="13" width="34" height="22" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
+    <path d="M20 19.5l6 4.5-6 4.5z" fill={accent} />
+    <path d="M30 19a5 5 0 0 0-8 1m-1-3v3h3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M26 30a5 5 0 0 0 8-1m1 3v-3h-3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

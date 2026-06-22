@@ -34,6 +34,7 @@ import {
   IconBlurCensor,
   IconRedactPdf,
   IconCompressVideo,
+  IconConvertVideo,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -296,6 +297,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Blur & Censor", href: "/tools/blur-censor", tagline: "Blur or pixelate faces, plates and sensitive data. No upload.", accent: "#475569", badge: "Free", Icon: IconBlurCensor, category: "Creative", isNew: true },
   { name: "Redact PDF", href: "/tools/redact-pdf", tagline: "Permanently black out sensitive text in a PDF. No upload.", accent: "#334155", badge: "Free", Icon: IconRedactPdf, category: "Optimize", isNew: true },
   { name: "Compress Video", href: "/tools/compress-video", tagline: "Shrink MP4, MOV, WebM up to 80%. WebCodecs-fast, no upload.", accent: "#7C3AED", badge: "Free", Icon: IconCompressVideo, category: "Optimize", isNew: true },
+  { name: "Convert Video", href: "/tools/convert-video", tagline: "MOV, AVI, MKV, WebM to MP4 and back. Fast, no upload.", accent: "#0891B2", badge: "Free", Icon: IconConvertVideo, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
