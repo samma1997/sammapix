@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth/options";
 import { stripe } from "@/lib/stripe";
 import { incrWithTTL } from "@/lib/redis";
 import { hasActiveDayPass } from "@/lib/day-pass";
-import { DAY_PASS_PRICE } from "@/lib/constants";
+import { DAY_PASS_PRICE, DAY_PASS_VIDEO_PRICE } from "@/lib/constants";
 
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
@@ -45,12 +45,21 @@ export async function POST(req: NextRequest) {
   // Where the user started the Day Pass (tool/page or upsell context).
   // Sanitized and kept short, stored on metadata so we know the source.
   let source: string | undefined;
+  // Variant: "video" = premium Video Day Pass ($4.99). Default = standard ($2.99).
+  // Both grant the identical 24h full Pro access; the price differs by buyer context.
+  let isVideoVariant = false;
   try {
     const body = await req.json().catch(() => ({}));
     if (body?.source) source = String(body.source).replace(/[^a-zA-Z0-9/:_-]/g, "").slice(0, 80);
+    if (body?.variant === "video") isVideoVariant = true;
   } catch {
     source = undefined;
   }
+
+  const unitAmount = isVideoVariant ? DAY_PASS_VIDEO_PRICE : DAY_PASS_PRICE;
+  const passName = isVideoVariant
+    ? "SammaPix Video Day Pass — 24h unlimited access"
+    : "SammaPix Day Pass — 24h unlimited access";
 
   // Rate limit: 5 attempts per minute.
   // Authenticated users: keyed by email. Guests: keyed by IP.
@@ -84,11 +93,11 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "SammaPix Day Pass — 24h unlimited access",
+              name: passName,
               description:
-                "Unlocks all Pro features (500-file batches, 200 AI ops, ZIP download) for 24 hours. No subscription.",
+                "Unlocks all Pro features (large video compression, 500-file batches, 200 AI ops, ZIP download) for 24 hours. No subscription.",
             },
-            unit_amount: DAY_PASS_PRICE, // 299 cents = $2.99
+            unit_amount: unitAmount,
           },
           quantity: 1,
         },
@@ -107,6 +116,7 @@ export async function POST(req: NextRequest) {
       cancel_url: `${appUrl}/dashboard?daypass=canceled`,
       metadata: {
         type: "day_pass",
+        variant: isVideoVariant ? "video" : "standard",
         // For guests this is empty string; the webhook will fall back to
         // session.customer_details.email (populated by Stripe after payment).
         userEmail: email ?? "",

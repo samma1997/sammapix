@@ -1,0 +1,132 @@
+[
+  {
+    "start": 0,
+    "end": 3.12,
+    "text": "The 90 second clip that would not send"
+  },
+  {
+    "start": 3.12,
+    "end": 36.46,
+    "text": "You film something worth keeping. A first birthday, a product demo, a clip from "
+  },
+  {
+    "start": 36.46,
+    "end": 63.34,
+    "text": "There is a better way, and it has only become practical in the last couple of ye"
+  },
+  {
+    "start": 63.34,
+    "end": 66.29,
+    "text": "Why video files get so large"
+  },
+  {
+    "start": 66.29,
+    "end": 81,
+    "text": "A video is just a stream of still images shown quickly, plus a sound track. Thre"
+  },
+  {
+    "start": 81,
+    "end": 100.58,
+    "text": "Resolution is how many pixels are in each frame. 4K is 3840 by 2160, which is 8."
+  },
+  {
+    "start": 100.58,
+    "end": 112.56,
+    "text": "Bitrate is how much data the camera spends per second to describe the motion. Ph"
+  },
+  {
+    "start": 112.56,
+    "end": 120.98,
+    "text": "Frame rate is how many images per second, usually 30 or 60. Sixty frames doubles"
+  },
+  {
+    "start": 120.98,
+    "end": 158.59,
+    "text": "Put real numbers on it and the problem is obvious. A 4K clip at 60 frames a seco"
+  },
+  {
+    "start": 158.59,
+    "end": 162.43,
+    "text": "The two ways to compress a video, and why most are slow"
+  },
+  {
+    "start": 162.43,
+    "end": 196.63,
+    "text": "There are really only two places a video can be re-encoded: on a server, or on y"
+  },
+  {
+    "start": 196.63,
+    "end": 241.68,
+    "text": "The modern approach does the entire job locally. There are two ways to do this i"
+  },
+  {
+    "start": 241.68,
+    "end": 244.8,
+    "text": "How to compress a video in your browser"
+  },
+  {
+    "start": 244.8,
+    "end": 296.45,
+    "text": "The whole flow takes well under a minute for a typical clip. First, drop your vi"
+  },
+  {
+    "start": 296.45,
+    "end": 299.74,
+    "text": "Resolution is the single biggest lever"
+  },
+  {
+    "start": 299.74,
+    "end": 337.18,
+    "text": "If you only remember one thing from this article, make it this: for most uses, d"
+  },
+  {
+    "start": 337.18,
+    "end": 341.28,
+    "text": "Quality presets, bitrate, and what they actually do"
+  },
+  {
+    "start": 341.28,
+    "end": 383.86,
+    "text": "After resolution, the second lever is bitrate, the amount of data spent per seco"
+  },
+  {
+    "start": 383.86,
+    "end": 387.86,
+    "text": "Compress video for WhatsApp, email, and Slack"
+  },
+  {
+    "start": 387.86,
+    "end": 428.18,
+    "text": "Most of the time people compress a video to get under a specific limit. WhatsApp"
+  },
+  {
+    "start": 428.18,
+    "end": 433.44,
+    "text": "MP4 versus WebM versus AV1, which format to pick"
+  },
+  {
+    "start": 433.44,
+    "end": 478.37,
+    "text": "MP4 using the H264 codec plays on essentially every device, app, browser and soc"
+  },
+  {
+    "start": 478.37,
+    "end": 481.58,
+    "text": "Does compressing actually reduce quality?"
+  },
+  {
+    "start": 481.58,
+    "end": 524.04,
+    "text": "Honestly, yes, compression is a trade-off by definition. The real question is wh"
+  },
+  {
+    "start": 524.04,
+    "end": 527.02,
+    "text": "Why no upload matters for video"
+  },
+  {
+    "start": 527.02,
+    "end": 575.86,
+    "text": "Photos carry hidden metadata like GPS coordinates. Video carries all of that and"
+  }
+]
