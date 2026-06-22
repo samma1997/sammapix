@@ -4,6 +4,7 @@ import { getAllPlatforms } from "@/lib/resize-platforms";
 import { getAllOptimizePlatforms } from "@/lib/optimize-platforms";
 import { getAllImageSizePlatforms } from "@/lib/image-size-platforms";
 import { getAllTargets } from "@/lib/compress-targets";
+import { getAllVideoTargets } from "@/lib/video-targets";
 import { getAllRatios } from "@/lib/crop-ratios";
 import { getAllPassportPresets } from "@/lib/passport-presets";
 import { getAllTrips } from "@/lib/destinations";
@@ -249,6 +250,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  // Programmatic compress-video-for pages — driven from lib/video-targets.ts
+  const compressVideoForPages: MetadataRoute.Sitemap = getAllVideoTargets().map((t) => ({
+    url: `${APP_URL}/compress-video/${t.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   // Programmatic optimize-for pages — driven from lib/optimize-platforms.ts
   const optimizeForPages: MetadataRoute.Sitemap = getAllOptimizePlatforms().map(
     (p) => ({
@@ -304,6 +313,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...resizePages,
     ...convertPages,
     ...compressToPages,
+    ...compressVideoForPages,
     ...optimizeForPages,
     ...imageSizePages,
     ...passportPhotoPages,
