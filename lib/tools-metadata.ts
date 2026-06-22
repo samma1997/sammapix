@@ -485,6 +485,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["convert-video", "gif-to-mp4", "compress", "resizepack"],
     relatedBlogSlugs: [
+      "compress-video-online-no-upload",
       "browser-based-image-tools-privacy-guide",
     ],
   },
@@ -496,6 +497,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["compress-video", "gif-to-mp4", "webp-to-jpg", "heic"],
     relatedBlogSlugs: [
+      "how-to-convert-mov-to-mp4-no-upload",
       "browser-based-image-tools-privacy-guide",
     ],
   },
@@ -507,6 +509,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "edit",
     relatedTools: ["gif-to-mp4", "compress-video", "convert-video", "compress"],
     relatedBlogSlugs: [
+      "how-to-convert-video-to-gif-no-upload",
       "gif-to-mp4-stop-using-gifs-2026",
       "browser-based-image-tools-privacy-guide",
     ],
@@ -519,6 +522,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "edit",
     relatedTools: ["compress-video", "convert-video", "resize-video", "video-to-gif"],
     relatedBlogSlugs: [
+      "how-to-mute-a-video-remove-audio-no-upload",
       "browser-based-image-tools-privacy-guide",
     ],
   },
@@ -530,6 +534,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["compress-video", "convert-video", "mute-video", "resizepack"],
     relatedBlogSlugs: [
+      "how-to-resize-a-video-change-resolution-no-upload",
       "browser-based-image-tools-privacy-guide",
     ],
   },
@@ -541,6 +546,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "edit",
     relatedTools: ["compress-video", "convert-video", "video-to-gif", "mute-video"],
     relatedBlogSlugs: [
+      "how-to-trim-a-video-cut-a-clip-no-upload",
       "browser-based-image-tools-privacy-guide",
     ],
   },
@@ -552,6 +558,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "edit",
     relatedTools: ["convert-video", "compress-video", "mute-video", "trim-video"],
     relatedBlogSlugs: [
+      "how-to-extract-audio-from-video-mp4-to-mp3",
       "browser-based-image-tools-privacy-guide",
     ],
   },
