@@ -99,9 +99,32 @@ function targetBitrate(preset: Preset, w: number, h: number): number {
   return Math.round(clamp(BASE_1080P_BITRATE[preset] * scale, 300_000, 24_000_000));
 }
 
+// Video bitrate (bits/s) needed to land a whole file near targetMB, accounting
+// for the audio track and ~3% container overhead.
+function bitrateForTarget(targetMB: number, durationSec: number, hasAudio: boolean): number {
+  if (durationSec <= 0) return 1_000_000;
+  const audio = hasAudio ? 128_000 : 0;
+  const totalBits = targetMB * 1024 * 1024 * 8;
+  const video = (totalBits / durationSec) * 0.97 - audio;
+  return Math.max(150_000, Math.round(video));
+}
+
+// Named size targets for the "by size" mode (and programmatic /compress-video pages).
+const SIZE_TARGETS: { mb: number; label: string }[] = [
+  { mb: 8, label: "8 MB" },
+  { mb: 16, label: "16 MB" },
+  { mb: 25, label: "25 MB" },
+  { mb: 50, label: "50 MB" },
+];
+
+export interface CompressVideoClientProps {
+  /** When set, the tool opens in "by size" mode targeting this many MB. */
+  initialTargetMB?: number;
+}
+
 // ── Main Component ────────────────────────────────────────────────────────────
 
-export default function CompressVideoClient() {
+export default function CompressVideoClient({ initialTargetMB }: CompressVideoClientProps = {}) {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
 
@@ -114,6 +137,10 @@ export default function CompressVideoClient() {
   const [warn, setWarn] = useState<string | null>(null);
 
   // settings
+  const [sizeMode, setSizeMode] = useState<"quality" | "target">(
+    initialTargetMB ? "target" : "quality"
+  );
+  const [targetMB, setTargetMB] = useState<number>(initialTargetMB ?? 16);
   const [preset, setPreset] = useState<Preset>("balanced");
   const [downscale, setDownscale] = useState(false);
   const [codec, setCodec] = useState<OutCodec>("avc");
@@ -272,15 +299,27 @@ export default function CompressVideoClient() {
         ? { width: meta.width, height: meta.height }
         : { width: 0, height: 0 };
 
+  // Video bitrate to use, depending on the chosen mode.
+  const effectiveVideoBitrate =
+    meta && sizeMode === "target"
+      ? bitrateForTarget(targetMB, meta.durationSec, meta.hasAudio)
+      : targetBitrate(preset, outDims.width, outDims.height);
+
   const predictedBytes =
     meta && meta.durationSec > 0
-      ? Math.round(
-          ((targetBitrate(preset, outDims.width, outDims.height) +
-            (meta.hasAudio ? 128_000 : 0)) *
-            meta.durationSec) /
-            8
-        )
+      ? sizeMode === "target"
+        ? Math.round(targetMB * 1024 * 1024)
+        : Math.round(
+            ((effectiveVideoBitrate + (meta.hasAudio ? 128_000 : 0)) * meta.durationSec) / 8
+          )
       : 0;
+
+  // In target mode, warn when the math forces a bitrate too low for the resolution
+  // (blocky result) — the honest fix is to downscale rather than crush quality.
+  const targetTooLow =
+    meta != null &&
+    sizeMode === "target" &&
+    effectiveVideoBitrate < 0.6 * targetBitrate("small", outDims.width, outDims.height);
 
   // ── Compress ───────────────────────────────────────────────────────────────
   const handleCompress = useCallback(async () => {
@@ -301,7 +340,7 @@ export default function CompressVideoClient() {
       });
 
       const useCodec: OutCodec = codec === "av1" && av1Supported ? "av1" : "avc";
-      const bitrate = targetBitrate(preset, outDims.width, outDims.height);
+      const bitrate = effectiveVideoBitrate;
 
       const conversion = await MB.Conversion.init({
         input,
@@ -362,7 +401,7 @@ export default function CompressVideoClient() {
     } finally {
       cancelRef.current = null;
     }
-  }, [file, meta, preset, codec, av1Supported, downscale, outDims.width, outDims.height, resultUrl]);
+  }, [file, meta, codec, av1Supported, downscale, outDims.width, outDims.height, effectiveVideoBitrate, resultUrl]);
 
   const handleCancel = useCallback(() => {
     cancelRef.current?.();
@@ -524,30 +563,87 @@ export default function CompressVideoClient() {
 
           {/* Quality preset */}
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-white dark:bg-[#1E1E1E]">
-            <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2">Quality</p>
-            <div className="flex gap-2">
-              {(["high", "balanced", "small"] as const).map((opt) => {
-                const active = preset === opt;
-                return (
-                  <button
-                    key={opt}
-                    onClick={() => setPreset(opt)}
-                    className={[
-                      "flex-1 px-3 py-2 text-sm font-medium rounded-md border transition-colors",
-                      active
-                        ? "text-white"
-                        : "border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3]",
-                    ].join(" ")}
-                    style={active ? { backgroundColor: ACCENT, borderColor: ACCENT } : undefined}
-                  >
-                    <span className="block">{PRESET_LABEL[opt].label}</span>
-                    <span className="block text-[10px] opacity-70 font-normal">
-                      {PRESET_LABEL[opt].sub}
-                    </span>
-                  </button>
-                );
-              })}
+            {/* Mode toggle: by quality vs by target size */}
+            <div className="flex gap-1 mb-4 p-1 bg-[#F5F5F5] dark:bg-[#252525] rounded-md">
+              {([
+                { v: "quality" as const, label: "By quality" },
+                { v: "target" as const, label: "By target size" },
+              ]).map((m) => (
+                <button
+                  key={m.v}
+                  onClick={() => setSizeMode(m.v)}
+                  className={[
+                    "flex-1 px-3 py-1.5 text-xs font-medium rounded transition-colors",
+                    sizeMode === m.v
+                      ? "bg-white dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5] shadow-sm"
+                      : "text-[#737373] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
+                  ].join(" ")}
+                >
+                  {m.label}
+                </button>
+              ))}
             </div>
+
+            {sizeMode === "quality" ? (
+              <>
+                <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2">Quality</p>
+                <div className="flex gap-2">
+                  {(["high", "balanced", "small"] as const).map((opt) => {
+                    const active = preset === opt;
+                    return (
+                      <button
+                        key={opt}
+                        onClick={() => setPreset(opt)}
+                        className={[
+                          "flex-1 px-3 py-2 text-sm font-medium rounded-md border transition-colors",
+                          active
+                            ? "text-white"
+                            : "border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3]",
+                        ].join(" ")}
+                        style={active ? { backgroundColor: ACCENT, borderColor: ACCENT } : undefined}
+                      >
+                        <span className="block">{PRESET_LABEL[opt].label}</span>
+                        <span className="block text-[10px] opacity-70 font-normal">
+                          {PRESET_LABEL[opt].sub}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3] mb-2">
+                  Target size
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {SIZE_TARGETS.map((t) => {
+                    const active = targetMB === t.mb;
+                    return (
+                      <button
+                        key={t.mb}
+                        onClick={() => setTargetMB(t.mb)}
+                        className={[
+                          "flex-1 min-w-[64px] px-3 py-2 text-sm font-medium rounded-md border transition-colors",
+                          active
+                            ? "text-white"
+                            : "border-[#E5E5E5] dark:border-[#333] bg-white dark:bg-[#252525] text-[#525252] dark:text-[#A3A3A3] hover:border-[#A3A3A3]",
+                        ].join(" ")}
+                        style={active ? { backgroundColor: ACCENT, borderColor: ACCENT } : undefined}
+                      >
+                        {t.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                {targetTooLow && (
+                  <p className="text-[11px] text-[#B45309] dark:text-[#D97706] mt-2">
+                    {targetMB} MB is tight for this video. Keep the 1080p downscale on, or the result may
+                    look blocky.
+                  </p>
+                )}
+              </>
+            )}
 
             {/* Downscale toggle (only when source > 1080p) */}
             {(meta.height > 1080 || meta.width > 1920) && (
