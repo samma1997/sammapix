@@ -1107,95 +1107,149 @@ export const IconOpen7z: React.FC<{ accent: string }> = ({ accent }) => (
 
 export const IconRedactPdf: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-rdct { 0% { transform: scaleX(0); } 60%,100% { transform: scaleX(1); } }
+      .av-rdct { transform-box: fill-box; transform-origin: left; }
+      .av-rdct-1 { animation: av-rdct 2.4s ease-out infinite; }
+      .av-rdct-2 { animation: av-rdct 2.4s ease-out 0.25s infinite; }
+      .av-rdct-3 { animation: av-rdct 2.4s ease-out 0.5s infinite; }
+    `}</style>
     {/* Document */}
     <path d="M13 6h16l8 8v28a2 2 0 0 1-2 2H13a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
     <path d="M29 6v8h8" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
-    {/* Redaction bars over text */}
-    <rect x="16" y="22" width="11" height="3.4" rx="1" fill={accent} />
-    <rect x="16" y="29" width="16" height="3.4" rx="1" fill={accent} />
-    <rect x="16" y="36" width="8" height="3.4" rx="1" fill={accent} />
+    {/* Redaction bars sweeping over text */}
+    <rect className="av-rdct av-rdct-1" x="16" y="22" width="11" height="3.4" rx="1" fill={accent} />
+    <rect className="av-rdct av-rdct-2" x="16" y="29" width="16" height="3.4" rx="1" fill={accent} />
+    <rect className="av-rdct av-rdct-3" x="16" y="36" width="8" height="3.4" rx="1" fill={accent} />
   </svg>
 );
 
 export const IconBlurCensor: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-cns-a { 0%,100% { opacity: 0.85; } 50% { opacity: 0.35; } }
+      @keyframes av-cns-b { 0%,100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+      .av-cns-a { animation: av-cns-a 1.4s ease-in-out infinite; }
+      .av-cns-b { animation: av-cns-b 1.4s ease-in-out infinite; }
+    `}</style>
     <rect x="7" y="9" width="34" height="30" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
     <circle cx="16" cy="18" r="2.6" fill={accent} />
     <path d="M11 33l6-7 4 4" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <rect x="26" y="22" width="5" height="5" fill={accent} opacity="0.85" />
-    <rect x="31" y="22" width="5" height="5" fill={accent} opacity="0.45" />
-    <rect x="26" y="27" width="5" height="5" fill={accent} opacity="0.45" />
-    <rect x="31" y="27" width="5" height="5" fill={accent} opacity="0.85" />
+    <rect className="av-cns-a" x="26" y="22" width="5" height="5" fill={accent} />
+    <rect className="av-cns-b" x="31" y="22" width="5" height="5" fill={accent} />
+    <rect className="av-cns-b" x="26" y="27" width="5" height="5" fill={accent} />
+    <rect className="av-cns-a" x="31" y="27" width="5" height="5" fill={accent} />
   </svg>
 );
 
 export const IconRawConverter: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-raw-focus { 0%,100% { transform: scale(1); } 50% { transform: scale(1.8); } }
+      @keyframes av-raw-dot { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+      .av-raw-focus { transform-box: fill-box; transform-origin: center; animation: av-raw-focus 2.2s ease-in-out infinite; }
+      .av-raw-dot { animation: av-raw-dot 1.4s ease-in-out infinite; }
+    `}</style>
     {/* Camera body */}
     <rect x="8" y="16" width="32" height="22" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
     {/* Top viewfinder bump */}
     <path d="M18 16l2.5-4h7l2.5 4" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
     {/* Aperture / lens */}
     <circle cx="24" cy="27" r="6.5" stroke={accent} strokeWidth="2.2" fill="none" />
-    <circle cx="24" cy="27" r="2.2" fill={accent} />
-    {/* RAW dot indicator */}
-    <circle cx="34.5" cy="20.5" r="1.4" fill={accent} />
+    <circle className="av-raw-focus" cx="24" cy="27" r="2.2" fill={accent} />
+    {/* RAW recording dot */}
+    <circle className="av-raw-dot" cx="34.5" cy="20.5" r="1.4" fill={accent} />
   </svg>
 );
 
 export const IconCompressVideo: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-cv-l { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+      @keyframes av-cv-r { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-3px); } }
+      .av-cv-l { animation: av-cv-l 1.7s ease-in-out infinite; }
+      .av-cv-r { animation: av-cv-r 1.7s ease-in-out infinite; }
+    `}</style>
     {/* Video frame */}
     <rect x="7" y="13" width="34" height="22" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
     {/* Play triangle */}
     <path d="M21 19.5l7 4.5-7 4.5z" fill={accent} />
-    {/* Compression arrows (inward) */}
-    <path d="M4 24h5m0 0l-2-2m2 2l-2 2" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <path d="M44 24h-5m0 0l2-2m-2 2l2 2" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    {/* Compression arrows (pulse inward) */}
+    <path className="av-cv-l" d="M4 24h5m0 0l-2-2m2 2l-2 2" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path className="av-cv-r" d="M44 24h-5m0 0l2-2m-2 2l2 2" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 );
 
 export const IconConvertVideo: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-cvt-spin { to { transform: rotate(360deg); } }
+      .av-cvt-spin { transform-box: fill-box; transform-origin: center; animation: av-cvt-spin 3.2s linear infinite; }
+    `}</style>
     <rect x="7" y="13" width="34" height="22" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
     <path d="M20 19.5l6 4.5-6 4.5z" fill={accent} />
-    <path d="M30 19a5 5 0 0 0-8 1m-1-3v3h3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <path d="M26 30a5 5 0 0 0 8-1m1 3v-3h-3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <g className="av-cvt-spin">
+      <path d="M30 19a5 5 0 0 0-8 1m-1-3v3h3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M26 30a5 5 0 0 0 8-1m1 3v-3h-3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </g>
   </svg>
 );
 
 export const IconVideoToGif: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-gif-g { 0%,100% { opacity: 1; } 33%,66% { opacity: 0.3; } }
+      @keyframes av-gif-i { 0%,33%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+      @keyframes av-gif-f { 0%,66%,100% { opacity: 1; } 83% { opacity: 0.3; } }
+      .av-gif-g { animation: av-gif-g 1.5s steps(1) infinite; }
+      .av-gif-i { animation: av-gif-i 1.5s steps(1) infinite; }
+      .av-gif-f { animation: av-gif-f 1.5s steps(1) infinite; }
+    `}</style>
     <rect x="7" y="11" width="34" height="26" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
-    <path d="M14 20v8M14 20h4M14 28h4v-3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <path d="M24 20v8" stroke={accent} strokeWidth="2" strokeLinecap="round" />
-    <path d="M30 28v-8h5M30 24h4" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path className="av-gif-g" d="M14 20v8M14 20h4M14 28h4v-3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path className="av-gif-i" d="M24 20v8" stroke={accent} strokeWidth="2" strokeLinecap="round" />
+    <path className="av-gif-f" d="M30 28v-8h5M30 24h4" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 );
 
 export const IconMuteVideo: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-mute-x { 0%,100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.18); opacity: 1; } }
+      .av-mute-x { transform-box: fill-box; transform-origin: center; animation: av-mute-x 1.6s ease-in-out infinite; }
+    `}</style>
     <path d="M10 20h5l7-5v18l-7-5h-5z" stroke={accent} strokeWidth="2.2" strokeLinejoin="round" fill="none" />
-    <path d="M29 19l9 10M38 19l-9 10" stroke={accent} strokeWidth="2.2" strokeLinecap="round" />
+    <path className="av-mute-x" d="M29 19l9 10M38 19l-9 10" stroke={accent} strokeWidth="2.2" strokeLinecap="round" />
   </svg>
 );
 
 export const IconResizeVideo: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-rsz { 0%,100% { transform: scale(1); } 50% { transform: scale(0.7); } }
+      .av-rsz { transform-box: fill-box; transform-origin: center; animation: av-rsz 2s ease-in-out infinite; }
+    `}</style>
     <rect x="6" y="10" width="36" height="28" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
-    <rect x="14" y="17" width="20" height="14" rx="2" stroke={accent} strokeWidth="2" fill="none" opacity="0.6" />
+    <rect className="av-rsz" x="14" y="17" width="20" height="14" rx="2" stroke={accent} strokeWidth="2" fill="none" opacity="0.6" />
     <path d="M30 21l4-3m0 0h-3m3 0v3" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 );
 
 export const IconTrimVideo: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes av-trim-l { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+      @keyframes av-trim-r { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
+      .av-trim-l { animation: av-trim-l 1.9s ease-in-out infinite; }
+      .av-trim-r { animation: av-trim-r 1.9s ease-in-out infinite; }
+    `}</style>
     {/* Timeline */}
     <rect x="6" y="19" width="36" height="10" rx="2" stroke={accent} strokeWidth="2" fill="none" opacity="0.45" />
     {/* Selected region */}
     <rect x="17" y="17" width="14" height="14" rx="2" fill={accent} opacity="0.18" />
-    {/* Handles */}
-    <path d="M17 15v18M31 15v18" stroke={accent} strokeWidth="2.4" strokeLinecap="round" />
+    {/* Handles (slide) */}
+    <path className="av-trim-l" d="M17 15v18" stroke={accent} strokeWidth="2.4" strokeLinecap="round" />
+    <path className="av-trim-r" d="M31 15v18" stroke={accent} strokeWidth="2.4" strokeLinecap="round" />
   </svg>
 );
 

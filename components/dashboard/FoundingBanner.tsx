@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles, X } from "lucide-react";
+import { TOOL_COUNT } from "@/lib/constants";
 import { useFoundingStatus } from "@/lib/hooks/useFoundingStatus";
 
 // Sticky-on-top banner shown to free users when the Founding coupon is still
@@ -68,7 +69,7 @@ export default function FoundingBanner({ isPro }: FoundingBannerProps) {
               ) : null}
             </div>
             <p className="text-sm font-semibold text-[#7C2D12] dark:text-[#FED7AA]">
-              Lock ${monthlyPrice}/mo for life — all 32 tools, no price hikes
+              Lock ${monthlyPrice}/mo for life — all {TOOL_COUNT} tools, no price hikes
             </p>
             <p className="hidden sm:block text-xs text-[#9A3412] dark:text-[#FDBA74] mt-0.5">
               The first {founding.totalSpots} users keep this price forever. After spot {founding.totalSpots}, it&apos;s gone.

@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
+import { TOOL_COUNT } from "@/lib/constants";
 import {
   Minimize2,
   FileImage,
@@ -222,7 +223,7 @@ function ShareButton() {
       try {
         await navigator.share({
           title: "SammaPix - Free Image Tools",
-          text: "I just optimized my images with SammaPix \u2014 32 free browser-based tools, no uploads needed!",
+          text: `I just optimized my images with SammaPix \u2014 ${TOOL_COUNT} free browser-based tools, no uploads needed!`,
           url: window.location.href,
         });
       } catch {
