@@ -132,6 +132,8 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "redact-pdf-remove-sensitive-text-no-upload",
+  "split-pdf-privately-no-upload",
   "blur-faces-license-plates-online-no-upload",
   "open-raw-files-browser-no-upload",
   "can-i-use-webp-avif-browser-support-2026",

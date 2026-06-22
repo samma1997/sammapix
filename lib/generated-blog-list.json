@@ -28,6 +28,34 @@
     "url": "/blog/open-raw-files-browser-no-upload"
   },
   {
+    "slug": "redact-pdf-remove-sensitive-text-no-upload",
+    "title": "How to Redact a PDF (Permanently Remove Sensitive Text, No Upload)",
+    "description": "Permanently remove sensitive text from a PDF without uploading it. Learn why the black-box trick in Preview and Word is unsafe, how true redaction wor",
+    "keywords": [
+      "redact pdf",
+      "redact pdf free",
+      "how to redact a pdf",
+      "black out text in pdf",
+      "remove sensitive information from pdf"
+    ],
+    "publishedDate": "2026-06-21",
+    "url": "/blog/redact-pdf-remove-sensitive-text-no-upload"
+  },
+  {
+    "slug": "split-pdf-privately-no-upload",
+    "title": "How to Split a PDF Privately, No Upload, In Your Browser",
+    "description": "Split a PDF, extract pages, or separate a PDF into individual pages entirely in your browser. No upload, no server, no signup. Works with bank stateme",
+    "keywords": [
+      "split pdf",
+      "split pdf free",
+      "extract pdf pages",
+      "split pdf into pages",
+      "separate pdf pages"
+    ],
+    "publishedDate": "2026-06-21",
+    "url": "/blog/split-pdf-privately-no-upload"
+  },
+  {
     "slug": "can-i-use-webp-avif-browser-support-2026",
     "title": "Can I Use WebP & AVIF in 2026? Browser Support + Free Converter",
     "description": "Full WebP and AVIF browser support in 2026: Chrome, Safari, Firefox, Edge and mobile, with exact versions. Plus what to do when a browser cannot open ",

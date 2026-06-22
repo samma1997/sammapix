@@ -1,0 +1,202 @@
+[
+  {
+    "start": 0,
+    "end": 3.46,
+    "text": "The problem with every common PDF splitter"
+  },
+  {
+    "start": 3.46,
+    "end": 18.36,
+    "text": "Picture this: your accountant asks for a single invoice from last October. You h"
+  },
+  {
+    "start": 18.86,
+    "end": 46.56,
+    "text": "You got your page. But your bank statement, with your account number, your balan"
+  },
+  {
+    "start": 46.56,
+    "end": 71.71,
+    "text": "I built the SammaPix PDF Splitter specifically to solve this. It runs entirely i"
+  },
+  {
+    "start": 71.71,
+    "end": 74.3,
+    "text": "How to verify it yourself"
+  },
+  {
+    "start": 74.8,
+    "end": 77.8,
+    "text": "The three ways to split a PDF"
+  },
+  {
+    "start": 79.3,
+    "end": 103.76,
+    "text": "The third mode is splitting every N pages. This divides the PDF into equal chunk"
+  },
+  {
+    "start": 103.76,
+    "end": 117,
+    "text": "All three modes produce clean PDFs with no watermark. The extract-range and spli"
+  },
+  {
+    "start": 117.5,
+    "end": 121.75,
+    "text": "The process is the same regardless of which split mode you choose."
+  },
+  {
+    "start": 121.75,
+    "end": 132.48,
+    "text": "Step 1: Go to sammapix.com/tools/pdf-split in any modern browser: Chrome, Safari"
+  },
+  {
+    "start": 132.48,
+    "end": 141.55,
+    "text": "Step 2: Drop your PDF onto the tool or click to browse for it. The file is read "
+  },
+  {
+    "start": 141.55,
+    "end": 150.43,
+    "text": "Step 3: Choose your split mode. Select extract a page range, split into individu"
+  },
+  {
+    "start": 150.43,
+    "end": 170.16,
+    "text": "Step 4: Enter your parameters. For range extraction, type the pages you want. Fo"
+  },
+  {
+    "start": 170.66,
+    "end": 183.5,
+    "text": "Step 6: Download your output. The resulting PDF, or ZIP file for individual-page"
+  },
+  {
+    "start": 183.5,
+    "end": 186.31,
+    "text": "Page range syntax reference"
+  },
+  {
+    "start": 186.81,
+    "end": 190.43,
+    "text": "Who actually needs to split PDFs privately"
+  },
+  {
+    "start": 190.43,
+    "end": 199.48,
+    "text": "The privacy concern is not abstract. These are the real cases where uploading a "
+  },
+  {
+    "start": 199.98,
+    "end": 222.78,
+    "text": "Lawyers and legal professionals work with legal bundles that combine dozens of c"
+  },
+  {
+    "start": 222.78,
+    "end": 245.32,
+    "text": "HR and people operations professionals handle employment contracts, salary infor"
+  },
+  {
+    "start": 247.32,
+    "end": 269.76,
+    "text": "\"We delete your files within 1 hour\" means your file is on their servers for up "
+  },
+  {
+    "start": 269.76,
+    "end": 292.05,
+    "text": "\"We use encryption in transit\" means the file is protected while moving to their"
+  },
+  {
+    "start": 292.05,
+    "end": 320.64,
+    "text": "\"We do not share your files with third parties\" still allows for subprocessors. "
+  },
+  {
+    "start": 321.14,
+    "end": 326.03,
+    "text": "Upload-based tools vs browser-based tools: an honest comparison"
+  },
+  {
+    "start": 326.03,
+    "end": 330.81,
+    "text": "Let me compare the two approaches across the dimensions that actually matter."
+  },
+  {
+    "start": 330.81,
+    "end": 344.75,
+    "text": "On privacy: upload-based tools send your file to a remote server and you trust t"
+  },
+  {
+    "start": 344.75,
+    "end": 359.66,
+    "text": "On speed: upload-based tools depend on your upload speed and server load, and la"
+  },
+  {
+    "start": 359.66,
+    "end": 374.61,
+    "text": "On file size limits: free plans on upload-based tools often cap at 5 to 25 megab"
+  },
+  {
+    "start": 374.61,
+    "end": 383.22,
+    "text": "On signup: upload-based tools often require an account for anything beyond basic"
+  },
+  {
+    "start": 383.22,
+    "end": 391.6,
+    "text": "On watermarks: free plans on upload-based tools add watermarks. SammaPix adds no"
+  },
+  {
+    "start": 391.6,
+    "end": 402.35,
+    "text": "On working offline: upload-based tools require an internet connection throughout"
+  },
+  {
+    "start": 402.35,
+    "end": 416.42,
+    "text": "On GDPR compliance: upload-based tools may require a Data Processing Agreement f"
+  },
+  {
+    "start": 416.42,
+    "end": 421.05,
+    "text": "Split vs merge vs redact: which operation do you need?"
+  },
+  {
+    "start": 421.05,
+    "end": 426.62,
+    "text": "People sometimes confuse these three operations because they all involve changin"
+  },
+  {
+    "start": 428.12,
+    "end": 444.03,
+    "text": "Use Compress when the PDF is too large to send. After splitting out the pages yo"
+  },
+  {
+    "start": 444.03,
+    "end": 447.65,
+    "text": "Practical tips for splitting PDFs cleanly"
+  },
+  {
+    "start": 447.65,
+    "end": 454.97,
+    "text": "After building and using this tool for over a year, here are the non-obvious thi"
+  },
+  {
+    "start": 454.97,
+    "end": 471.27,
+    "text": "Count pages before you split. When you drop a PDF into the tool, it shows you th"
+  },
+  {
+    "start": 471.27,
+    "end": 505.37,
+    "text": "The PDF spec distinguishes page order from logical page numbers. Some PDFs, espe"
+  },
+  {
+    "start": 505.37,
+    "end": 528.75,
+    "text": "Splitting a scanned PDF preserves the scan quality. pdf-lib extracts pages by co"
+  },
+  {
+    "start": 529.25,
+    "end": 548.33,
+    "text": "If the output seems wrong: verify the page count first, check that you entered t"
+  }
+]
