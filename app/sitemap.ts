@@ -240,6 +240,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/convert/jpg-to-jxl",
     "/convert/png-to-jxl",
     "/convert/webp-to-jxl",
+    "/convert/mov-to-mp4",
+    "/convert/avi-to-mp4",
+    "/convert/mkv-to-mp4",
+    "/convert/webm-to-mp4",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
