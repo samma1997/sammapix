@@ -1143,6 +1143,18 @@ export const IconRawConverter: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconCompressVideo: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    {/* Video frame */}
+    <rect x="7" y="13" width="34" height="22" rx="4" stroke={accent} strokeWidth="2.2" fill="none" />
+    {/* Play triangle */}
+    <path d="M21 19.5l7 4.5-7 4.5z" fill={accent} />
+    {/* Compression arrows (inward) */}
+    <path d="M4 24h5m0 0l-2-2m2 2l-2 2" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M44 24h-5m0 0l2-2m-2 2l2 2" stroke={accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
