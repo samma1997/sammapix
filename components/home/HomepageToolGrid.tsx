@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { TOOL_COUNT } from "@/lib/constants";
 import {
   ToolCard,
   type ToolCardData,
@@ -314,24 +315,74 @@ const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Or
 
 export function HomepageToolGrid() {
   const [activeTab, setActiveTab] = useState<TabCategory>("Optimize");
+  const [query, setQuery] = useState("");
 
-  const filtered = ALL_HOMEPAGE_TOOLS.filter((t) => t.category === activeTab);
+  const q = query.trim().toLowerCase();
+  const isSearching = q.length > 0;
+  const filtered = isSearching
+    ? ALL_HOMEPAGE_TOOLS.filter((t) => {
+        const hay = `${t.name} ${t.tagline} ${t.category}`.toLowerCase();
+        // match if every word in the query appears somewhere
+        return q.split(/\s+/).every((w) => hay.includes(w));
+      })
+    : ALL_HOMEPAGE_TOOLS.filter((t) => t.category === activeTab);
 
   return (
     <section className="py-14 px-4 sm:px-6 bg-white dark:bg-[#191919]">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-6">
+        <style>{`
+          .hp-icon { transition: transform 0.2s ease; }
+          .group:hover .hp-icon { animation: hp-icon-pop 0.45s ease both; }
+          @keyframes hp-icon-pop {
+            0% { transform: scale(1) rotate(0deg); }
+            40% { transform: scale(1.18) rotate(-5deg); }
+            70% { transform: scale(1.04) rotate(3deg); }
+            100% { transform: scale(1.08) rotate(0deg); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .group:hover .hp-icon { animation: none; transform: scale(1.05); }
+          }
+        `}</style>
+
+        <div className="mb-5">
           <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">
-            32 Free Tools
+            {TOOL_COUNT} Free Tools
           </h2>
           <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">
             Browser-based. No uploads, no account required for the basics.
           </p>
         </div>
 
-        {/* Category tabs */}
+        {/* Search bar */}
+        <div className="relative mb-5">
+          <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A3A3A3]" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </span>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={`Search ${TOOL_COUNT} tools — try "compress", "mp4", "pdf"...`}
+            aria-label="Search tools"
+            className="w-full rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] py-2.5 pl-10 pr-9 text-sm text-[#171717] dark:text-[#E5E5E5] placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#A3A3A3] dark:focus:border-[#525252] transition-colors"
+          />
+          {isSearching && (
+            <button
+              onClick={() => setQuery("")}
+              aria-label="Clear search"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
+            </button>
+          )}
+        </div>
+
+        {/* Category tabs (hidden while searching) */}
         <div
-          className="flex gap-1.5 overflow-x-auto mb-6 pb-0.5"
+          className={`${isSearching ? "hidden" : "flex"} gap-1.5 overflow-x-auto mb-6 pb-0.5`}
           style={{ scrollbarWidth: "none" }}
           role="tablist"
           aria-label="Tool categories"
@@ -355,6 +406,24 @@ export function HomepageToolGrid() {
           ))}
         </div>
 
+        {/* Search results count */}
+        {isSearching && (
+          <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-3">
+            {filtered.length} {filtered.length === 1 ? "tool" : "tools"} for &ldquo;{query.trim()}&rdquo;
+          </p>
+        )}
+
+        {/* Empty state */}
+        {isSearching && filtered.length === 0 && (
+          <div className="text-center py-10 border border-dashed border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg">
+            <p className="text-sm text-[#525252] dark:text-[#A3A3A3] mb-1">No tool matches &ldquo;{query.trim()}&rdquo;</p>
+            <p className="text-xs text-[#A3A3A3]">
+              Try a different word, or{" "}
+              <Link href="/tools" className="text-[#6366F1] hover:underline">browse all {TOOL_COUNT} tools</Link>.
+            </p>
+          </div>
+        )}
+
         {/* Tool cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {filtered.map((tool) => (
@@ -365,7 +434,7 @@ export function HomepageToolGrid() {
             >
               <div className="flex items-start gap-3">
                 <div
-                  className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200"
+                  className="hp-icon w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: `${tool.accent}14` }}
                 >
                   <tool.Icon accent={tool.accent} />
