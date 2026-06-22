@@ -94,6 +94,7 @@ export const TOOL_SLUGS = [
   "mute-video",
   "resize-video",
   "trim-video",
+  "extract-audio",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
