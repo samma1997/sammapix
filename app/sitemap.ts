@@ -154,6 +154,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/video-to-gif",
     "/tools/mute-video",
     "/tools/resize-video",
+    "/tools/trim-video",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

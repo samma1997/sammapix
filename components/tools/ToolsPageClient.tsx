@@ -40,6 +40,7 @@ import {
   IconVideoToGif,
   IconMuteVideo,
   IconResizeVideo,
+  IconTrimVideo,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -710,6 +711,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconResizeVideo,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Trim Video",
+    href: "/tools/trim-video",
+    tagline: "Cut a clip from any video — set start and end with a live preview, export MP4. No watermark, 100% in your browser, no upload.",
+    accent: "#D97706",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconTrimVideo,
+    category: ["Creative"],
     isNew: true,
   },
 ];
