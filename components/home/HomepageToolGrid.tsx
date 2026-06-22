@@ -40,6 +40,9 @@ import {
   IconMuteVideo,
   IconResizeVideo,
   IconTrimVideo,
+  IconRemoveBg,
+  IconUpscale,
+  IconPassportPhoto,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -307,6 +310,11 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Mute Video", href: "/tools/mute-video", tagline: "Remove the audio from any video. Instant, no upload.", accent: "#64748B", badge: "Free", Icon: IconMuteVideo, category: "Creative", isNew: true },
   { name: "Resize Video", href: "/tools/resize-video", tagline: "Change resolution to 1080p, 720p, 480p, 360p. No upload.", accent: "#2563EB", badge: "Free", Icon: IconResizeVideo, category: "Optimize", isNew: true },
   { name: "Trim Video", href: "/tools/trim-video", tagline: "Cut a clip with a live preview. No upload, no watermark.", accent: "#D97706", badge: "Free", Icon: IconTrimVideo, category: "Creative", isNew: true },
+  { name: "Remove Background", href: "/tools/remove-bg", tagline: "Remove image backgrounds instantly with AI. 100% browser-based.", accent: "#EC4899", badge: "Free", Icon: IconRemoveBg, category: "AI-Powered" },
+  { name: "AI Upscale", href: "/tools/upscale", tagline: "AI upscale images 2x or 4x without losing quality.", accent: "#8B5CF6", badge: "Free", Icon: IconUpscale, category: "AI-Powered" },
+  { name: "Passport Photo", href: "/tools/passport-photo", tagline: "Auto crop + white background for passport and visa photos. 6 country presets.", accent: "#3B82F6", badge: "Free", Icon: IconPassportPhoto, category: "AI-Powered" },
+  { name: "Image to Text (OCR)", href: "/tools/image-to-text", tagline: "Extract text from images with AI-powered OCR. 50+ languages.", accent: "#F59E0B", badge: "Free", Icon: IconAltText, category: "AI-Powered" },
+  { name: "BlogDrop", href: "/tools/blogdrop", tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.", accent: "#8B5CF6", badge: "Free", Icon: IconWebLift, category: "Optimize", isCombo: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
