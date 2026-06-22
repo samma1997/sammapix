@@ -1872,6 +1872,119 @@ const CONVERSIONS: Record<string, ConversionData> = {
       { slug: "webp-vs-avif-vs-jpeg-comparison", title: "WebP vs AVIF vs JPEG Comparison" },
     ],
   },
+
+  "mov-to-mp4": {
+    from: "MOV", to: "MP4", fromLabel: "MOV", toLabel: "MP4",
+    toolPath: "/tools/convert-video", toolLabel: "Open Video Converter",
+    tagline: "Convert iPhone MOV videos to universal MP4, free, instant, no upload.",
+    whyCopy:
+      "MOV is Apple's QuickTime container, used by iPhones, iPads and Macs. It is excellent, but Windows apps, Android phones and many upload forms expect MP4. The good news: most iPhone MOV files already contain H.264 video, the same codec MP4 uses, so converting is usually just a rewrap of the existing stream into an MP4 container, which is near-instant and lossless.",
+    qualityNote:
+      "When the MOV already uses H.264, SammaPix copies the video stream straight into MP4 with zero quality loss (a remux, not a re-encode). Only HEVC or exotic sources are transcoded, using a high-quality setting.",
+    technicalNote:
+      "SammaPix converts the file entirely in your browser using the WebCodecs API with the Mediabunny library. When the codec fits the container it remuxes instantly, otherwise it transcodes to H.264 on your device. Your video is never uploaded.",
+    formatTable: [
+      { format: "MP4", fileSize: "Small to Medium", quality: "High (H.264)", compatibility: "Universal", useCase: "Sharing everywhere, web, social" },
+      { format: "MOV", fileSize: "Medium", quality: "High", compatibility: "Apple-centric", useCase: "iPhone capture, editing" },
+      { format: "WebM", fileSize: "Small", quality: "High (VP9)", compatibility: "Modern browsers", useCase: "Web embedding" },
+      { format: "MKV", fileSize: "Medium", quality: "High", compatibility: "Players, media servers", useCase: "Multi-track archives" },
+    ],
+    faqs: [
+      { q: "Does converting MOV to MP4 lose quality?", a: "Usually not at all. When the MOV contains H.264 video, SammaPix copies it into an MP4 container without re-encoding, so the result is identical in quality. A re-encode only happens for HEVC or unusual codecs, and then a high-quality setting is used." },
+      { q: "Is it really instant?", a: "For a typical iPhone MOV with H.264 video, yes. No frames are re-encoded; the existing video and audio are placed into an MP4 wrapper, so even a multi-minute clip converts in well under a second." },
+      { q: "Is my video uploaded to a server?", a: "No. The whole conversion runs in your browser with WebCodecs. Your file never leaves your device, which is faster and fully private." },
+      { q: "Why won't my MOV play on Windows or Android?", a: "MOV is Apple's container. The video inside is often standard H.264, but those platforms expect MP4. Converting to MP4 fixes playback everywhere without changing the actual video quality." },
+    ],
+    related: ["avi-to-mp4", "mkv-to-mp4", "webm-to-mp4"],
+    blogSlugs: [
+      { slug: "how-to-convert-mov-to-mp4-no-upload", title: "How to Convert MOV to MP4 Without Uploading It" },
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
+
+  "avi-to-mp4": {
+    from: "AVI", to: "MP4", fromLabel: "AVI", toLabel: "MP4",
+    toolPath: "/tools/convert-video", toolLabel: "Open Video Converter",
+    tagline: "Convert old AVI videos to modern MP4, free, in your browser, no upload.",
+    whyCopy:
+      "AVI is a legacy Microsoft container from the 1990s. It still shows up in old camcorder footage, screen recordings and downloads, but it is bulky and poorly supported on phones and the web. Converting AVI to MP4 with H.264 makes the file smaller and playable on every modern device and platform.",
+    qualityNote:
+      "AVI usually holds an older codec that MP4 does not accept, so SammaPix re-encodes the video to H.264 at a high-quality setting. The result looks faithful to the source while being far more compatible and often smaller.",
+    technicalNote:
+      "SammaPix decodes and re-encodes the AVI to H.264 MP4 entirely in your browser using the WebCodecs API with Mediabunny. Nothing is uploaded; the work happens on your device.",
+    formatTable: [
+      { format: "MP4", fileSize: "Small to Medium", quality: "High (H.264)", compatibility: "Universal", useCase: "Sharing everywhere, web, social" },
+      { format: "AVI", fileSize: "Large", quality: "Variable (older codecs)", compatibility: "Legacy Windows", useCase: "Old camcorder and archive video" },
+      { format: "MKV", fileSize: "Medium", quality: "High", compatibility: "Players, media servers", useCase: "Multi-track archives" },
+      { format: "WebM", fileSize: "Small", quality: "High (VP9)", compatibility: "Modern browsers", useCase: "Web embedding" },
+    ],
+    faqs: [
+      { q: "Why convert AVI to MP4?", a: "AVI is old and bulky and many phones, browsers and apps cannot play it. MP4 with H.264 plays everywhere and is usually a smaller file at the same quality." },
+      { q: "Will the quality drop?", a: "AVI codecs are not compatible with MP4, so a re-encode is needed. SammaPix uses a high-quality setting, so the result stays faithful to the source while gaining compatibility." },
+      { q: "Is my AVI uploaded anywhere?", a: "No. The conversion runs entirely in your browser with WebCodecs. The file never leaves your device." },
+    ],
+    related: ["mov-to-mp4", "mkv-to-mp4", "webm-to-mp4"],
+    blogSlugs: [
+      { slug: "how-to-convert-mov-to-mp4-no-upload", title: "How to Convert MOV to MP4 Without Uploading It" },
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
+
+  "mkv-to-mp4": {
+    from: "MKV", to: "MP4", fromLabel: "MKV", toLabel: "MP4",
+    toolPath: "/tools/convert-video", toolLabel: "Open Video Converter",
+    tagline: "Convert MKV videos to MP4 that plays everywhere, free, no upload.",
+    whyCopy:
+      "MKV (Matroska) is a flexible container popular for movies and multi-track video, but many phones, browsers, editors and upload forms do not accept it. Since MKV often holds H.264 video, converting to MP4 is frequently a quick rewrap that keeps the original quality while making the file universally playable.",
+    qualityNote:
+      "When the MKV contains H.264, SammaPix copies the stream into MP4 with no quality loss. If the codec is incompatible with MP4, it transcodes to H.264 at a high-quality setting.",
+    technicalNote:
+      "SammaPix remuxes or transcodes the MKV in your browser using WebCodecs with Mediabunny. The file is processed on your device and never uploaded.",
+    formatTable: [
+      { format: "MP4", fileSize: "Small to Medium", quality: "High (H.264)", compatibility: "Universal", useCase: "Sharing everywhere, web, social" },
+      { format: "MKV", fileSize: "Medium", quality: "High", compatibility: "Players, media servers", useCase: "Movies, multi-track archives" },
+      { format: "MOV", fileSize: "Medium", quality: "High", compatibility: "Apple-centric", useCase: "iPhone capture, editing" },
+      { format: "WebM", fileSize: "Small", quality: "High (VP9)", compatibility: "Modern browsers", useCase: "Web embedding" },
+    ],
+    faqs: [
+      { q: "Does MKV to MP4 reduce quality?", a: "Not when the MKV already uses H.264, because the stream is copied into MP4 unchanged. A re-encode only happens for codecs MP4 cannot hold, and then a high-quality setting is used." },
+      { q: "Why won't my MKV play?", a: "MKV is a flexible but less universally supported container. Many phones, browsers and editors expect MP4. Converting fixes playback while keeping the video intact." },
+      { q: "Is the conversion private?", a: "Yes. It runs entirely in your browser with WebCodecs. Your MKV is never uploaded to a server." },
+    ],
+    related: ["mov-to-mp4", "avi-to-mp4", "webm-to-mp4"],
+    blogSlugs: [
+      { slug: "how-to-convert-mov-to-mp4-no-upload", title: "How to Convert MOV to MP4 Without Uploading It" },
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
+
+  "webm-to-mp4": {
+    from: "WebM", to: "MP4", fromLabel: "WebM", toLabel: "MP4",
+    toolPath: "/tools/convert-video", toolLabel: "Open Video Converter",
+    tagline: "Convert WebM videos to MP4 for phones and editors, free, no upload.",
+    whyCopy:
+      "WebM is a web-first format using the VP8 or VP9 codec. It is great in browsers but is often rejected by phones, video editors, messaging apps and social uploads, which expect MP4. Converting WebM to MP4 with H.264 makes the clip play and import everywhere.",
+    qualityNote:
+      "WebM uses VP8 or VP9, which MP4 does not accept, so SammaPix re-encodes to H.264 at a high-quality setting. The result is visually faithful and far more compatible.",
+    technicalNote:
+      "SammaPix transcodes the WebM to H.264 MP4 in your browser using the WebCodecs API with Mediabunny. The video is processed locally and never uploaded.",
+    formatTable: [
+      { format: "MP4", fileSize: "Small to Medium", quality: "High (H.264)", compatibility: "Universal", useCase: "Phones, editors, social" },
+      { format: "WebM", fileSize: "Small", quality: "High (VP9)", compatibility: "Modern browsers", useCase: "Web embedding, streaming" },
+      { format: "MOV", fileSize: "Medium", quality: "High", compatibility: "Apple-centric", useCase: "iPhone capture, editing" },
+      { format: "MKV", fileSize: "Medium", quality: "High", compatibility: "Players, media servers", useCase: "Multi-track archives" },
+    ],
+    faqs: [
+      { q: "Why convert WebM to MP4?", a: "WebM plays in browsers but many phones, editors and apps do not accept it. MP4 with H.264 works everywhere, so converting makes your clip universally usable." },
+      { q: "Does converting WebM to MP4 lose quality?", a: "A re-encode is required because MP4 cannot hold VP8 or VP9. SammaPix uses a high-quality setting so the difference is not noticeable." },
+      { q: "Is my WebM uploaded?", a: "No. The conversion runs in your browser with WebCodecs. Nothing is sent to a server." },
+    ],
+    related: ["mov-to-mp4", "mkv-to-mp4", "avi-to-mp4"],
+    blogSlugs: [
+      { slug: "how-to-convert-mov-to-mp4-no-upload", title: "How to Convert MOV to MP4 Without Uploading It" },
+      { slug: "browser-based-image-tools-privacy-guide", title: "Browser-Based Privacy Tools Guide" },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------------------
