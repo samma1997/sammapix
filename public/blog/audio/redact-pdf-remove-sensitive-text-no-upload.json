@@ -1,0 +1,432 @@
+[
+  {
+    "start": 0,
+    "end": 3.05,
+    "text": "The dangerous mistake everyone makes"
+  },
+  {
+    "start": 3.05,
+    "end": 21.89,
+    "text": "You have a contract to share. There is a pricing section you cannot send. So you"
+  },
+  {
+    "start": 21.89,
+    "end": 52.03,
+    "text": "Except it is not hidden at all. Open that exported PDF. Click on the black box. "
+  },
+  {
+    "start": 52.03,
+    "end": 95.33,
+    "text": "This is not a hypothetical. In 2011, the U.S. District Court for the Northern Di"
+  },
+  {
+    "start": 95.33,
+    "end": 113.16,
+    "text": "The same failure mode applies whether you use Preview on Mac, Microsoft Word, Fo"
+  },
+  {
+    "start": 113.16,
+    "end": 116.52,
+    "text": "You can test this yourself in thirty seconds"
+  },
+  {
+    "start": 116.52,
+    "end": 145.51,
+    "text": "Take any PDF that has selectable text. Open it in Preview on Mac. Use the annota"
+  },
+  {
+    "start": 145.51,
+    "end": 167.02,
+    "text": "If you are using Windows, try the same with Microsoft Word or Edge's PDF annotat"
+  },
+  {
+    "start": 167.02,
+    "end": 170.02,
+    "text": "How true redaction actually works"
+  },
+  {
+    "start": 170.02,
+    "end": 188.23,
+    "text": "True redaction does not add a layer on top. It permanently destroys the underlyi"
+  },
+  {
+    "start": 188.23,
+    "end": 214.13,
+    "text": "The result is a PDF that looks identical to the original from a visual standpoin"
+  },
+  {
+    "start": 214.13,
+    "end": 216.98,
+    "text": "How SammaPix implements this"
+  },
+  {
+    "start": 216.98,
+    "end": 226.42,
+    "text": "I built SammaPix's PDF Redact tool to do exactly this, entirely inside your brow"
+  },
+  {
+    "start": 226.42,
+    "end": 239.02,
+    "text": "First: load and render. The PDF is loaded locally in your browser using a PDF re"
+  },
+  {
+    "start": 239.02,
+    "end": 251.21,
+    "text": "Second: mark regions. You draw rectangles over the content you want to remove. T"
+  },
+  {
+    "start": 251.21,
+    "end": 264.82,
+    "text": "Third: bake and flatten. When you confirm, the tool draws solid black rectangles"
+  },
+  {
+    "start": 264.82,
+    "end": 280.99,
+    "text": "Fourth: build a new PDF. Each Canvas is exported as a PNG image and assembled in"
+  },
+  {
+    "start": 280.99,
+    "end": 291.62,
+    "text": "Fifth: download locally. The output PDF is offered as a direct download from bro"
+  },
+  {
+    "start": 291.62,
+    "end": 306.24,
+    "text": "The entire process runs in your browser tab. No network request carries your doc"
+  },
+  {
+    "start": 306.24,
+    "end": 310.13,
+    "text": "Redaction methods compared: safe vs unsafe"
+  },
+  {
+    "start": 310.13,
+    "end": 317.64,
+    "text": "There are several methods people use to try to hide content in a PDF. Only one i"
+  },
+  {
+    "start": 317.64,
+    "end": 334.66,
+    "text": "Drawing a black box in the Preview or Acrobat annotation layer adds a visual ove"
+  },
+  {
+    "start": 334.66,
+    "end": 350.42,
+    "text": "Deleting text in Word or a PDF editor removes the text from that layer, but ofte"
+  },
+  {
+    "start": 350.42,
+    "end": 365.35,
+    "text": "Printing to paper and rescanning converts the document to a physical image, whic"
+  },
+  {
+    "start": 365.35,
+    "end": 383.45,
+    "text": "Flattening to image in the browser, which is what SammaPix does, renders each pa"
+  },
+  {
+    "start": 383.45,
+    "end": 401.62,
+    "text": "Adobe Acrobat Pro's dedicated Redact feature marks regions and then removes text"
+  },
+  {
+    "start": 401.62,
+    "end": 429.79,
+    "text": "An important note about Acrobat: even Acrobat Pro has two separate tools that lo"
+  },
+  {
+    "start": 429.79,
+    "end": 432.7,
+    "text": "What to redact by document type"
+  },
+  {
+    "start": 432.7,
+    "end": 438.79,
+    "text": "Knowing which fields to redact in each document type saves time and reduces the "
+  },
+  {
+    "start": 438.79,
+    "end": 451.63,
+    "text": "For contracts: redact pricing, payment terms, party names, proprietary clauses, "
+  },
+  {
+    "start": 451.63,
+    "end": 465.72,
+    "text": "For bank statements: redact the account number, sort code or IBAN, full balance,"
+  },
+  {
+    "start": 465.72,
+    "end": 480.91,
+    "text": "For medical records: redact the patient name, date of birth, NHS or insurance nu"
+  },
+  {
+    "start": 480.91,
+    "end": 496.94,
+    "text": "For HR files: redact salary, home address, national insurance or tax ID, unrelat"
+  },
+  {
+    "start": 496.94,
+    "end": 510.67,
+    "text": "For legal discovery documents: redact attorney-client privileged communications,"
+  },
+  {
+    "start": 510.67,
+    "end": 526.06,
+    "text": "For tax returns or financial filings: redact tax identification numbers, social "
+  },
+  {
+    "start": 526.06,
+    "end": 536.59,
+    "text": "These are general guidelines. The right answer always depends on why you are sha"
+  },
+  {
+    "start": 536.59,
+    "end": 540.5,
+    "text": "How to redact a PDF in your browser, step by step"
+  },
+  {
+    "start": 540.5,
+    "end": 548.54,
+    "text": "Here is the full walkthrough for using SammaPix PDF Redact to permanently remove"
+  },
+  {
+    "start": 548.54,
+    "end": 559.78,
+    "text": "Step 1: go to sammapix.com/tools/redact-pdf in any modern browser: Chrome, Safar"
+  },
+  {
+    "start": 559.78,
+    "end": 569.9,
+    "text": "Step 2: drop your PDF onto the tool or click to browse and select it. The file i"
+  },
+  {
+    "start": 569.9,
+    "end": 580.92,
+    "text": "Step 3: navigate to the page with sensitive content. The tool renders each page."
+  },
+  {
+    "start": 580.92,
+    "end": 598.9,
+    "text": "Step 4: draw rectangles over the content to remove. Click and drag on the page t"
+  },
+  {
+    "start": 598.9,
+    "end": 613.34,
+    "text": "Step 5: confirm and apply. When you have marked all the regions, click the redac"
+  },
+  {
+    "start": 613.34,
+    "end": 628.34,
+    "text": "Step 6: download the redacted PDF. The output file is offered as a direct downlo"
+  },
+  {
+    "start": 628.34,
+    "end": 631.39,
+    "text": "How to verify the redaction is real"
+  },
+  {
+    "start": 631.39,
+    "end": 664.3,
+    "text": "After downloading the redacted PDF, do two tests. First: open the file, try to c"
+  },
+  {
+    "start": 664.3,
+    "end": 667.8,
+    "text": "Why no-upload matters for the people who redact"
+  },
+  {
+    "start": 667.8,
+    "end": 691.56,
+    "text": "Think about who actually redacts documents for a living: lawyers, HR managers, a"
+  },
+  {
+    "start": 691.56,
+    "end": 694.63,
+    "text": "GDPR and the upload problem"
+  },
+  {
+    "start": 694.63,
+    "end": 733.94,
+    "text": "Under GDPR Article 28, if you transfer personal data to a third party for proces"
+  },
+  {
+    "start": 733.94,
+    "end": 737.93,
+    "text": "Attorney-client privilege and legal confidentiality"
+  },
+  {
+    "start": 737.93,
+    "end": 760.97,
+    "text": "Uploading a client document to a third-party server may constitute a disclosure "
+  },
+  {
+    "start": 760.97,
+    "end": 763.1,
+    "text": "Healthcare and HIPAA"
+  },
+  {
+    "start": 763.1,
+    "end": 792.02,
+    "text": "HIPAA in the United States requires that any service that processes Protected He"
+  },
+  {
+    "start": 792.02,
+    "end": 809.5,
+    "text": "I built SammaPix with the no-upload constraint as a first principle, not as a fe"
+  },
+  {
+    "start": 809.5,
+    "end": 813.53,
+    "text": "The part people forget: metadata is not redacted"
+  },
+  {
+    "start": 813.53,
+    "end": 842.02,
+    "text": "Redacting the visible content of a page removes the text you blacked out. It doe"
+  },
+  {
+    "start": 842.02,
+    "end": 867.62,
+    "text": "None of this is visible when you read the document. All of it is visible when so"
+  },
+  {
+    "start": 867.62,
+    "end": 884.02,
+    "text": "For complete privacy, redact the visible content first, then use SammaPix's EXIF"
+  },
+  {
+    "start": 884.02,
+    "end": 887.78,
+    "text": "Redact vs blur: which operation do you need?"
+  },
+  {
+    "start": 887.78,
+    "end": 895.22,
+    "text": "People sometimes use the words redact and blur interchangeably, but they refer t"
+  },
+  {
+    "start": 895.22,
+    "end": 922.66,
+    "text": "Use redact for text-based documents. If you are working with a PDF, a scanned fo"
+  },
+  {
+    "start": 922.66,
+    "end": 949.01,
+    "text": "Use blur and censor for photos and images. If you need to hide a face in a photo"
+  },
+  {
+    "start": 949.01,
+    "end": 972.24,
+    "text": "If your PDF contains both text and embedded photos and you need to redact a face"
+  },
+  {
+    "start": 972.24,
+    "end": 975.5,
+    "text": "The honest trade-off: image-based output"
+  },
+  {
+    "start": 975.5,
+    "end": 983.83,
+    "text": "True redaction through page flattening comes with one significant trade-off that"
+  },
+  {
+    "start": 983.83,
+    "end": 1003.01,
+    "text": "This means no text selection on any page. The non-redacted text is also part of "
+  },
+  {
+    "start": 1003.01,
+    "end": 1015.7,
+    "text": "It also means no text search within the file. Command-F or Control-F will not fi"
+  },
+  {
+    "start": 1015.7,
+    "end": 1030.37,
+    "text": "And the file size may be slightly larger. Images tend to be larger than text enc"
+  },
+  {
+    "start": 1030.37,
+    "end": 1055.54,
+    "text": "These are not bugs. They are the direct consequence of the mechanism that makes "
+  },
+  {
+    "start": 1055.54,
+    "end": 1059.58,
+    "text": "If you need selectable text on the non-redacted portions"
+  },
+  {
+    "start": 1059.58,
+    "end": 1086.1,
+    "text": "Adobe Acrobat Pro's redaction feature has an option to apply OCR after redacting"
+  },
+  {
+    "start": 1086.1,
+    "end": 1091.02,
+    "text": "Is drawing a black box over text in a PDF the same as redacting it?"
+  },
+  {
+    "start": 1091.02,
+    "end": 1125.26,
+    "text": "No. Drawing a black rectangle in Preview, Adobe Acrobat's annotation layer, Micr"
+  },
+  {
+    "start": 1125.26,
+    "end": 1128.31,
+    "text": "How does true PDF redaction work?"
+  },
+  {
+    "start": 1128.31,
+    "end": 1158.55,
+    "text": "True redaction works by rendering each page of the PDF as a flat image, drawing "
+  },
+  {
+    "start": 1158.55,
+    "end": 1162.37,
+    "text": "Can I redact a PDF without Adobe Acrobat?"
+  },
+  {
+    "start": 1162.37,
+    "end": 1185.77,
+    "text": "Yes. Adobe Acrobat Pro has a redaction feature, but it requires a paid subscript"
+  },
+  {
+    "start": 1185.77,
+    "end": 1189.51,
+    "text": "Does redacting a PDF remove metadata too?"
+  },
+  {
+    "start": 1189.51,
+    "end": 1213.13,
+    "text": "Redacting the visible content of a PDF does not automatically strip the file's m"
+  },
+  {
+    "start": 1213.13,
+    "end": 1217.78,
+    "text": "What is the difference between redacting a PDF and blurring a photo?"
+  },
+  {
+    "start": 1217.78,
+    "end": 1252.37,
+    "text": "Redaction is the right operation for text-based documents: contracts, statements"
+  },
+  {
+    "start": 1252.37,
+    "end": 1256.3,
+    "text": "Is it safe to use an online PDF redaction tool?"
+  },
+  {
+    "start": 1256.3,
+    "end": 1294.13,
+    "text": "It depends entirely on whether the tool uploads your file to a server. Most onli"
+  },
+  {
+    "start": 1294.13,
+    "end": 1298.02,
+    "text": "What are the most common documents people need to redact?"
+  },
+  {
+    "start": 1298.02,
+    "end": 1340.83,
+    "text": "The most common cases are: contracts, where you remove pricing, party names, or "
+  }
+]
