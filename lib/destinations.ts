@@ -4601,5 +4601,7 @@ export function getTripBySlug(slug: string): Trip | undefined {
 }
 
 export function getAllTrips(): Trip[] {
-  return trips;
+  // Newest trip first (by start date). Keeps the portfolio chronological and
+  // future-proof, so the most recent travels lead and the oldest (Sri Lanka) trails.
+  return [...trips].sort((a, b) => b.startDate.localeCompare(a.startDate));
 }
