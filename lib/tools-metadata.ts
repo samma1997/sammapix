@@ -499,6 +499,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "video-to-gif": {
+    id: "video-to-gif",
+    name: "Video to GIF",
+    shortDesc: "Convert MP4, MOV, WebM video to an animated GIF in-browser, no upload, no watermark",
+    slug: "/tools/video-to-gif",
+    category: "edit",
+    relatedTools: ["gif-to-mp4", "compress-video", "convert-video", "compress"],
+    relatedBlogSlugs: [
+      "gif-to-mp4-stop-using-gifs-2026",
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

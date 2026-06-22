@@ -90,6 +90,7 @@ export const TOOL_SLUGS = [
   "redact-pdf",
   "compress-video",
   "convert-video",
+  "video-to-gif",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

@@ -35,6 +35,7 @@ import {
   IconRedactPdf,
   IconCompressVideo,
   IconConvertVideo,
+  IconVideoToGif,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -298,6 +299,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Redact PDF", href: "/tools/redact-pdf", tagline: "Permanently black out sensitive text in a PDF. No upload.", accent: "#334155", badge: "Free", Icon: IconRedactPdf, category: "Optimize", isNew: true },
   { name: "Compress Video", href: "/tools/compress-video", tagline: "Shrink MP4, MOV, WebM up to 80%. WebCodecs-fast, no upload.", accent: "#7C3AED", badge: "Free", Icon: IconCompressVideo, category: "Optimize", isNew: true },
   { name: "Convert Video", href: "/tools/convert-video", tagline: "MOV, AVI, MKV, WebM to MP4 and back. Fast, no upload.", accent: "#0891B2", badge: "Free", Icon: IconConvertVideo, category: "Optimize", isNew: true },
+  { name: "Video to GIF", href: "/tools/video-to-gif", tagline: "MP4, MOV, WebM to animated GIF. No upload, no watermark.", accent: "#E11D48", badge: "Free", Icon: IconVideoToGif, category: "Creative", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

@@ -37,6 +37,7 @@ import {
   IconRedactPdf,
   IconCompressVideo,
   IconConvertVideo,
+  IconVideoToGif,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -677,6 +678,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconConvertVideo,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Video to GIF",
+    href: "/tools/video-to-gif",
+    tagline: "Turn MP4, MOV or WebM into a crisp animated GIF — width and frame-rate control, no watermark. 100% in your browser, no upload.",
+    accent: "#E11D48",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconVideoToGif,
+    category: ["Creative"],
     isNew: true,
   },
 ];
