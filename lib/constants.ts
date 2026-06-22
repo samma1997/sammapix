@@ -141,6 +141,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "how-to-resize-a-video-change-resolution-no-upload",
   "how-to-convert-mov-to-mp4-no-upload",
   "how-to-convert-video-to-gif-no-upload",
   "compress-video-online-no-upload",

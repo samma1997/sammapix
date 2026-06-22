@@ -1,0 +1,62 @@
+[
+  {
+    "start": 0,
+    "end": 3,
+    "text": "When a video has too many pixels"
+  },
+  {
+    "start": 3,
+    "end": 27.48,
+    "text": "Phones shoot in 4K by default now. That is wonderful for a big TV and a problem "
+  },
+  {
+    "start": 27.48,
+    "end": 30.38,
+    "text": "What resolution actually means"
+  },
+  {
+    "start": 30.38,
+    "end": 73.15,
+    "text": "Resolution is simply how many pixels are in each frame. 4K is 3840 by 2160, abou"
+  },
+  {
+    "start": 73.15,
+    "end": 75.6,
+    "text": "Why resize a video"
+  },
+  {
+    "start": 75.6,
+    "end": 103.63,
+    "text": "There are a few good reasons. Smaller files: it is the fastest way to shrink a v"
+  },
+  {
+    "start": 103.63,
+    "end": 106.73,
+    "text": "How to resize a video in your browser"
+  },
+  {
+    "start": 107.23,
+    "end": 109.92,
+    "text": "Which resolution should you pick"
+  },
+  {
+    "start": 109.92,
+    "end": 131.3,
+    "text": "For large screens where detail matters, use 1080p. For chat, social and email, 7"
+  },
+  {
+    "start": 131.8,
+    "end": 160.58,
+    "text": "These two get confused constantly. Resizing changes the dimensions, the number o"
+  },
+  {
+    "start": 160.58,
+    "end": 162.98,
+    "text": "Why no upload matters"
+  },
+  {
+    "start": 162.98,
+    "end": 183.02,
+    "text": "Resizing on a typical online tool means uploading your whole video, waiting for "
+  }
+]
