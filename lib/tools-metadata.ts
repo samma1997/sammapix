@@ -533,6 +533,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "trim-video": {
+    id: "trim-video",
+    name: "Trim Video",
+    shortDesc: "Cut a clip from a video (set start/end with live preview) in-browser, no upload",
+    slug: "/tools/trim-video",
+    category: "edit",
+    relatedTools: ["compress-video", "convert-video", "video-to-gif", "mute-video"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

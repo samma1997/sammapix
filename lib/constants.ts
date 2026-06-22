@@ -93,6 +93,7 @@ export const TOOL_SLUGS = [
   "video-to-gif",
   "mute-video",
   "resize-video",
+  "trim-video",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

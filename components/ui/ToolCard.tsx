@@ -1188,6 +1188,17 @@ export const IconResizeVideo: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconTrimVideo: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    {/* Timeline */}
+    <rect x="6" y="19" width="36" height="10" rx="2" stroke={accent} strokeWidth="2" fill="none" opacity="0.45" />
+    {/* Selected region */}
+    <rect x="17" y="17" width="14" height="14" rx="2" fill={accent} opacity="0.18" />
+    {/* Handles */}
+    <path d="M17 15v18M31 15v18" stroke={accent} strokeWidth="2.4" strokeLinecap="round" />
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

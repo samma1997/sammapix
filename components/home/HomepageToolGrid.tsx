@@ -38,6 +38,7 @@ import {
   IconVideoToGif,
   IconMuteVideo,
   IconResizeVideo,
+  IconTrimVideo,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -304,6 +305,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Video to GIF", href: "/tools/video-to-gif", tagline: "MP4, MOV, WebM to animated GIF. No upload, no watermark.", accent: "#E11D48", badge: "Free", Icon: IconVideoToGif, category: "Creative", isNew: true },
   { name: "Mute Video", href: "/tools/mute-video", tagline: "Remove the audio from any video. Instant, no upload.", accent: "#64748B", badge: "Free", Icon: IconMuteVideo, category: "Creative", isNew: true },
   { name: "Resize Video", href: "/tools/resize-video", tagline: "Change resolution to 1080p, 720p, 480p, 360p. No upload.", accent: "#2563EB", badge: "Free", Icon: IconResizeVideo, category: "Optimize", isNew: true },
+  { name: "Trim Video", href: "/tools/trim-video", tagline: "Cut a clip with a live preview. No upload, no watermark.", accent: "#D97706", badge: "Free", Icon: IconTrimVideo, category: "Creative", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
