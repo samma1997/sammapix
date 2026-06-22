@@ -11,7 +11,7 @@ import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user" | "lut_export";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "video_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user" | "lut_export";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -31,6 +31,8 @@ function getHeadline(trigger: UpsellTrigger): string {
       return "You've hit today's AI limit — keep going with Pro";
     case "file_size":
       return "File too large for free plan";
+    case "video_size":
+      return "Big video? Unlock it in seconds";
     case "batch":
       return "Batch limit reached";
     case "steps":
@@ -61,6 +63,8 @@ function getSubtext(
       return "Free plan: 10 AI ops per day. Pro gives you 200 — enough for an entire shoot. Or grab a one-shot credit pack if you only need extras occasionally.";
     case "file_size":
       return "Free plan supports files up to 20 MB. Pro handles up to 50 MB.";
+    case "video_size":
+      return "Free compresses videos up to 500 MB. Unlock large videos (up to several GB) with Pro, or grab a one-time Video Day Pass. Everything still runs in your browser, nothing uploaded.";
     case "batch":
       return "You've hit the batch limit. Pro handles up to 500 files at once.";
     case "steps":
@@ -90,6 +94,12 @@ const FEATURES = [
   "Up to 500 files per batch (free: 20)",
   "200 AI ops per day (free: 10)",
   "50 MB max file size · No ads · ZIP download",
+];
+
+const VIDEO_FEATURES = [
+  "Compress large videos (free: up to 500 MB)",
+  "Still 100% in your browser — nothing uploaded",
+  "Plus all Pro tools · No ads",
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -209,7 +219,10 @@ export default function ProUpsellModal({
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source: checkoutSource() }),
+        body: JSON.stringify({
+          source: checkoutSource(),
+          ...(trigger === "video_size" ? { variant: "video" } : {}),
+        }),
       });
       const data = (await res.json()) as { url?: string; error?: string; code?: string };
       if (data.url) {
@@ -237,6 +250,13 @@ export default function ProUpsellModal({
     trigger === "upscale_daily" ||
     trigger === "files" ||
     trigger === "batch";
+
+  // Video uses a premium Day Pass ($4.99) and a video-focused feature list.
+  const isVideoUpsell = trigger === "video_size";
+  const dayPassLabel = isVideoUpsell
+    ? "Just need it once? Video Day Pass $4.99 — 24h full access"
+    : "Just need it once? Day Pass $2.99 — 24h full access";
+  const featureList = isVideoUpsell ? VIDEO_FEATURES : FEATURES;
 
   return (
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
@@ -289,7 +309,7 @@ export default function ProUpsellModal({
 
           {/* Features */}
           <ul className="space-y-2 mb-4">
-            {FEATURES.map((feature) => (
+            {featureList.map((feature) => (
               <li key={feature} className="flex items-center gap-2.5">
                 <span className="flex-shrink-0 h-4 w-4 rounded-full bg-[#6366F1]/10 dark:bg-[#6366F1]/20 flex items-center justify-center">
                   <Check className="h-2.5 w-2.5 text-[#6366F1]" strokeWidth={2.5} />
@@ -348,16 +368,14 @@ export default function ProUpsellModal({
             onClick={handleDayPass}
             disabled={dayPassLoading}
             className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
-            aria-label="Buy a Day Pass for $2.99 \u2014 24h full Pro access"
+            aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 \u2014 24h full Pro access" : "Buy a Day Pass for $2.99 \u2014 24h full Pro access"}
           >
             {dayPassLoading ? (
               <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
             ) : (
               <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
             )}
-            {dayPassLoading
-              ? "Redirecting to checkout..."
-              : "Just need it once? Day Pass $2.99 \u2014 24h full access"}
+            {dayPassLoading ? "Redirecting to checkout..." : dayPassLabel}
           </button>
 
           {/* Continue with first N files \u2014 only for files/batch triggers */}
@@ -372,7 +390,7 @@ export default function ProUpsellModal({
 
           {/* Trust line \u2014 single row, slightly more visible */}
           <p className="text-center text-xs text-[#737373] dark:text-[#A3A3A3] mt-3">
-            30-day money-back \u00b7 Cancel anytime
+            30-day money-back &middot; Cancel anytime
           </p>
         </Dialog.Content>
       </Dialog.Portal>

@@ -124,6 +124,9 @@ export const DEFAULT_AI_RENAME = false;
 export const PRICE_PRO_MONTHLY = 9;
 export const PRICE_PRO_YEARLY = 79;
 export const DAY_PASS_PRICE = 299; // $2.99 in cents
+// Premium Video Day Pass — higher price for the high-value large-video buyer.
+// Grants the same 24h full Pro access as the standard Day Pass.
+export const DAY_PASS_VIDEO_PRICE = 499; // $4.99 in cents
 
 // App info
 export const APP_NAME = "SammaPix";
@@ -133,6 +136,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "compress-video-online-no-upload",
   "redact-pdf-remove-sensitive-text-no-upload",
   "split-pdf-privately-no-upload",
   "blur-faces-license-plates-online-no-upload",

@@ -14,12 +14,21 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const ACCENT = "#7C3AED"; // violet — distinct video accent
-const MAX_FILE_SIZE_DESKTOP = 500 * 1024 * 1024; // 500 MB
-const MAX_FILE_SIZE_MOBILE = 250 * 1024 * 1024; // 250 MB
+// Free tier: generous enough for casual/social clips, gates the large-video
+// power user. Marginal cost to us is zero (client-side), so the gate is purely
+// value-based monetization, not cost recovery.
+const FREE_LIMIT_DESKTOP = 500 * 1024 * 1024; // 500 MB free
+const FREE_LIMIT_MOBILE = 250 * 1024 * 1024; // 250 MB free
+// Hard technical ceiling even for Pro, bounded by browser RAM. Verified that
+// the WebCodecs + Mediabunny path handles 1.2 GB comfortably on desktop.
+const PAID_LIMIT_DESKTOP = 4 * 1024 * 1024 * 1024; // 4 GB (Pro)
+const PAID_LIMIT_MOBILE = 1024 * 1024 * 1024; // 1 GB (Pro, mobile RAM-bound)
 
 const ACCEPT_EXT = [".mp4", ".mov", ".webm", ".mkv", ".m4v", ".avi", ".3gp"];
 
@@ -93,7 +102,11 @@ function targetBitrate(preset: Preset, w: number, h: number): number {
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function CompressVideoClient() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string })?.plan === "pro";
+
   const [uiState, setUiState] = useState<UIState>("idle");
+  const [upsellOpen, setUpsellOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [meta, setMeta] = useState<VideoMeta | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -173,13 +186,26 @@ export default function CompressVideoClient() {
       return;
     }
 
-    const cap = isMobile() ? MAX_FILE_SIZE_MOBILE : MAX_FILE_SIZE_DESKTOP;
-    if (f.size > cap) {
+    const mobile = isMobile();
+    const freeLimit = mobile ? FREE_LIMIT_MOBILE : FREE_LIMIT_DESKTOP;
+    const hardLimit = mobile ? PAID_LIMIT_MOBILE : PAID_LIMIT_DESKTOP;
+
+    // Honest hard ceiling, bounded by device memory — applies even to Pro.
+    if (f.size > hardLimit) {
       setError(
-        `File too large (${formatBytes(f.size)}). Limit is ${formatBytes(cap)}${
-          isMobile() ? " on mobile — try desktop Chrome for big files." : "."
+        `This video is ${formatBytes(f.size)}. The most we can process ${
+          mobile ? "on a phone" : "in the browser"
+        } is ${formatBytes(hardLimit)}${
+          mobile ? ". Try desktop Chrome for very large files." : "."
         }`
       );
+      return;
+    }
+
+    // Above the free limit, non-Pro users get the upsell, never a dead end.
+    // A large video is a high-intent buyer, so this is the conversion moment.
+    if (f.size > freeLimit && !isPro) {
+      setUpsellOpen(true);
       return;
     }
 
@@ -217,7 +243,7 @@ export default function CompressVideoClient() {
           : "Could not read the video."
       );
     }
-  }, []);
+  }, [isPro]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
@@ -379,6 +405,12 @@ export default function CompressVideoClient() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16">
+      <ProUpsellModal
+        open={upsellOpen}
+        onClose={() => setUpsellOpen(false)}
+        trigger="video_size"
+      />
+
       {/* Unsupported-browser honest notice */}
       {supportChecked && !webcodecsOk && uiState === "idle" && (
         <div className="mb-4 flex items-start gap-2 px-4 py-3 border border-[#FDE68A] bg-[#FFFBEB] dark:bg-[#1C1700] dark:border-[#854D0E] rounded-md">
