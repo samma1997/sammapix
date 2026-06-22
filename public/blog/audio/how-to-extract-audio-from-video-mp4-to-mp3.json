@@ -1,0 +1,67 @@
+[
+  {
+    "start": 0,
+    "end": 2.54,
+    "text": "When you only want the sound"
+  },
+  {
+    "start": 2.54,
+    "end": 24.96,
+    "text": "You have a video, but the part you want is the audio: a song from a live perform"
+  },
+  {
+    "start": 24.96,
+    "end": 43.8,
+    "text": "That used to mean an app or an online converter that uploaded your whole video t"
+  },
+  {
+    "start": 43.8,
+    "end": 46.99,
+    "text": "What extracting audio actually means"
+  },
+  {
+    "start": 46.99,
+    "end": 74.98,
+    "text": "A video file is really two streams wrapped together: the moving picture and the "
+  },
+  {
+    "start": 74.98,
+    "end": 78.5,
+    "text": "MP3 or M4A: which to pick"
+  },
+  {
+    "start": 79,
+    "end": 82,
+    "text": "How to extract audio in your browser"
+  },
+  {
+    "start": 82,
+    "end": 113.52,
+    "text": "The flow is quick. First, drop your video: drag an MP4, MOV, WebM or MKV onto th"
+  },
+  {
+    "start": 113.52,
+    "end": 116.64,
+    "text": "Bitrate: how much quality do you need?"
+  },
+  {
+    "start": 116.64,
+    "end": 139.12,
+    "text": "Bitrate is how much data the audio uses per second. Higher means better quality "
+  },
+  {
+    "start": 139.62,
+    "end": 161.42,
+    "text": "People use this for saving a song from a music video or live performance to list"
+  },
+  {
+    "start": 161.42,
+    "end": 163.82,
+    "text": "Why no upload matters"
+  },
+  {
+    "start": 163.82,
+    "end": 187.48,
+    "text": "Most MP4 to MP3 sites upload your entire video to a server, transcode it there, "
+  }
+]
