@@ -36,6 +36,7 @@ import {
   IconBlurCensor,
   IconRedactPdf,
   IconCompressVideo,
+  IconConvertVideo,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -665,6 +666,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#7C3AED",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconCompressVideo,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Convert Video",
+    href: "/tools/convert-video",
+    tagline: "Convert MOV, AVI, MKV and WebM to MP4 (and back) — WebCodecs-fast with instant remux when the codec matches. 100% in your browser, no upload.",
+    accent: "#0891B2",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconConvertVideo,
     category: ["Optimize"],
     isNew: true,
   },

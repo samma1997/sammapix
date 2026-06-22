@@ -483,7 +483,18 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Compress MP4, MOV, WebM, MKV up to 80% in-browser via WebCodecs, no upload",
     slug: "/tools/compress-video",
     category: "optimize",
-    relatedTools: ["gif-to-mp4", "compress", "resizepack", "webp"],
+    relatedTools: ["convert-video", "gif-to-mp4", "compress", "resizepack"],
+    relatedBlogSlugs: [
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
+  "convert-video": {
+    id: "convert-video",
+    name: "Convert Video",
+    shortDesc: "Convert MOV, AVI, MKV, WebM to MP4 (and back) in-browser, no upload",
+    slug: "/tools/convert-video",
+    category: "optimize",
+    relatedTools: ["compress-video", "gif-to-mp4", "webp-to-jpg", "heic"],
     relatedBlogSlugs: [
       "browser-based-image-tools-privacy-guide",
     ],
