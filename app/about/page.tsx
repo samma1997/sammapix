@@ -53,10 +53,10 @@ export default function AboutPage() {
     return out;
   })();
 
-  // Real destination cards, ordered, using each trip's chosen cover (a people shot).
-  const realTrips = ["sri-lanka", "bali", "thailand", "shenzhen"]
-    .map((slug) => allTrips.find((t) => t.slug === slug))
-    .filter(Boolean) as typeof allTrips;
+  // Real destination cards, newest trip first (getAllTrips is already sorted by
+  // start date desc), using each trip's chosen cover (a people shot). Dynamic so
+  // new trips (like Bali 2026) appear automatically in the right order.
+  const realTrips = allTrips;
   const coverThumb = (t: (typeof allTrips)[number]) =>
     t.photos.find((p) => p.src === t.coverSrc)?.srcThumb ?? t.photos[0]?.srcThumb ?? "";
 
