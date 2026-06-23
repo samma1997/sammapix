@@ -108,34 +108,48 @@ async function generateAudioForSlug(slug) {
   const timing = [];
   let currentTime = 0;
 
+  // Race synthesize against a timeout so a hung EdgeTTS WebSocket can never
+  // stall the whole run; the segment is retried once, then skipped.
+  const SEG_TIMEOUT_MS = 25000;
+  const synthOnce = (text) =>
+    new Promise((resolve, reject) => {
+      const tts = new EdgeTTS();
+      const timer = setTimeout(() => reject(new Error(`timeout ${SEG_TIMEOUT_MS}ms`)), SEG_TIMEOUT_MS);
+      tts.synthesize(text, VOICE).then(
+        () => { clearTimeout(timer); resolve(tts.toBuffer()); },
+        (e) => { clearTimeout(timer); reject(e); }
+      );
+    });
+
   for (let i = 0; i < paragraphs.length; i++) {
     const text = paragraphs[i];
-    try {
-      const tts = new EdgeTTS();
-      await tts.synthesize(text, VOICE);
-      const buffer = tts.toBuffer();
+    let buffer = null;
+    for (let attempt = 1; attempt <= 2 && !buffer; attempt++) {
+      try {
+        buffer = await synthOnce(text);
+      } catch (err) {
+        if (attempt === 2) console.error(`  ❌ Segment ${i + 1} failed: ${err.message}`);
+        else await new Promise((r) => setTimeout(r, 600));
+      }
+    }
 
-      // Estimate duration from buffer size
-      // Edge TTS outputs ~24kbps audio, so duration ≈ bytes / (bitrate/8)
-      // More accurate: MP3 frames at 48kbps average → bytes / 6000
+    if (buffer) {
+      // Estimate duration from buffer size (~48kbps avg MP3 → bytes / 6000)
       const durationSec = buffer.length / 6000;
-
       timing.push({
         start: Math.round(currentTime * 100) / 100,
         end: Math.round((currentTime + durationSec) * 100) / 100,
         text: text.slice(0, 80),
       });
-
       audioBuffers.push(buffer);
       currentTime += durationSec;
-
-      if ((i + 1) % 10 === 0) {
-        process.stdout.write(`  ${i + 1}/${paragraphs.length}...\n`);
-      }
-    } catch (err) {
-      console.error(`  ❌ Segment ${i + 1} failed: ${err.message}`);
+    } else {
       // Add a small silence gap for failed segments
       currentTime += 0.5;
+    }
+
+    if ((i + 1) % 10 === 0) {
+      process.stdout.write(`  ${i + 1}/${paragraphs.length}...\n`);
     }
 
     // Small delay between API calls
