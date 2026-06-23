@@ -1,0 +1,947 @@
+[
+  {
+    "start": 0,
+    "end": 6.1,
+    "text": "Image Compression Benchmark 2026: We Tested 10 Tools on 100 Real Images"
+  },
+  {
+    "start": 6.1,
+    "end": 11.33,
+    "text": "By Luca Sammarco | April 2, 2026 | 18 min read"
+  },
+  {
+    "start": 11.33,
+    "end": 14.21,
+    "text": "Tags: Performance, Tools"
+  },
+  {
+    "start": 14.21,
+    "end": 16.1,
+    "text": "KEY RESULT"
+  },
+  {
+    "start": 16.1,
+    "end": 56.57,
+    "text": "In a benchmark of 100 real-world images compressed through 10 online tools at 4 "
+  },
+  {
+    "start": 56.57,
+    "end": 58.56,
+    "text": "KEY TAKEAWAYS"
+  },
+  {
+    "start": 59.06,
+    "end": 68.68,
+    "text": "- TinyPNG is the most consistent automatic compressor (68% avg reduction, qualit"
+  },
+  {
+    "start": 68.68,
+    "end": 81.38,
+    "text": "- ShortPixel achieves the highest file size reduction (76%) but is more aggressi"
+  },
+  {
+    "start": 81.38,
+    "end": 90.21,
+    "text": "- Only 2 of 10 tools (SammaPix and Squoosh) process images in the browser. The o"
+  },
+  {
+    "start": 90.21,
+    "end": 98.61,
+    "text": "- At quality 80%, every tool scored above 65 on SSIMULACRA 2, meaning virtually "
+  },
+  {
+    "start": 98.61,
+    "end": 100.53,
+    "text": "INTRODUCTION"
+  },
+  {
+    "start": 100.53,
+    "end": 130.22,
+    "text": "Here's the thing about image compression tools: they all claim the same thing. \""
+  },
+  {
+    "start": 130.22,
+    "end": 146.4,
+    "text": "That's 4,000 total compressions. Every single one measured and logged. The raw d"
+  },
+  {
+    "start": 146.4,
+    "end": 165.38,
+    "text": "I'll be honest: some of these results genuinely surprised me. The tool with the "
+  },
+  {
+    "start": 165.38,
+    "end": 167.42,
+    "text": "METHODOLOGY"
+  },
+  {
+    "start": 167.42,
+    "end": 190.75,
+    "text": "I selected 100 images split evenly across five categories: photos (20), UI scree"
+  },
+  {
+    "start": 190.75,
+    "end": 210.76,
+    "text": "Each image was compressed through all 10 tools at 4 quality levels: 90%, 80%, 70"
+  },
+  {
+    "start": 210.76,
+    "end": 214.46,
+    "text": "Every compressed output was scored on four metrics:"
+  },
+  {
+    "start": 214.46,
+    "end": 227.13,
+    "text": "- File size reduction (%): How much smaller the compressed file is compared to t"
+  },
+  {
+    "start": 227.13,
+    "end": 246.07,
+    "text": "- SSIMULACRA 2 score: A perceptual quality metric from Cloudinary that correlate"
+  },
+  {
+    "start": 246.07,
+    "end": 261.31,
+    "text": "- Processing speed: Total time from upload/drop to download availability, measur"
+  },
+  {
+    "start": 261.31,
+    "end": 271.99,
+    "text": "- Privacy: Whether the tool processes images locally (browser-based, no upload) "
+  },
+  {
+    "start": 271.99,
+    "end": 287.71,
+    "text": "For tools with automatic-only compression (TinyPNG, iLoveIMG, CompressJPEG), I r"
+  },
+  {
+    "start": 287.71,
+    "end": 290.08,
+    "text": "THE 10 TOOLS WE TESTED"
+  },
+  {
+    "start": 290.08,
+    "end": 301.32,
+    "text": "I picked these 10 based on search volume, industry reputation, and coverage in e"
+  },
+  {
+    "start": 301.32,
+    "end": 305.28,
+    "text": "| Tool          | Type          | Processing       | Quality control            "
+  },
+  {
+    "start": 305.28,
+    "end": 305.28,
+    "text": "|---------------|---------------|------------------|----------------------------"
+  },
+  {
+    "start": 305.28,
+    "end": 310.34,
+    "text": "| SammaPix      | Web app       | Browser (local)  | Quality slider             "
+  },
+  {
+    "start": 310.34,
+    "end": 316.65,
+    "text": "| TinyPNG       | Web app       | Server upload    | Automatic only             "
+  },
+  {
+    "start": 316.65,
+    "end": 322.58,
+    "text": "| Squoosh       | Web app       | Browser (local)  | Full manual control        "
+  },
+  {
+    "start": 322.58,
+    "end": 329.59,
+    "text": "| ShortPixel    | Web app + API | Server upload    | Lossy / Glossy / Lossless  "
+  },
+  {
+    "start": 329.59,
+    "end": 336.31,
+    "text": "| Compressor.io | Web app       | Server upload    | Lossy / Lossless toggle    "
+  },
+  {
+    "start": 336.31,
+    "end": 343.63,
+    "text": "| Kraken.io     | Web app + API | Server upload    | Lossy / Lossless + expert  "
+  },
+  {
+    "start": 343.63,
+    "end": 349.41,
+    "text": "| iLoveIMG      | Web app       | Server upload    | Automatic only             "
+  },
+  {
+    "start": 349.41,
+    "end": 355.46,
+    "text": "| Optimizilla   | Web app       | Server upload    | Quality slider per image   "
+  },
+  {
+    "start": 355.46,
+    "end": 361.1,
+    "text": "| ImageOptim    | Web app + Mac | Server upload    | Quality preset             "
+  },
+  {
+    "start": 361.1,
+    "end": 366.69,
+    "text": "| CompressJPEG  | Web app       | Server upload    | Quality slider             "
+  },
+  {
+    "start": 366.69,
+    "end": 370.2,
+    "text": "OVERALL RESULTS (Quality 80%)"
+  },
+  {
+    "start": 370.2,
+    "end": 375.62,
+    "text": "| Rank | Tool          | Size reduction | SSIMULACRA 2 | Speed (avg) | Privacy |"
+  },
+  {
+    "start": 375.62,
+    "end": 375.62,
+    "text": "|------|---------------|----------------|--------------|-------------|---------|"
+  },
+  {
+    "start": 375.62,
+    "end": 380.9,
+    "text": "| 1    | Squoosh       | 72%            | 78.4         | 2.1s        | Local   |"
+  },
+  {
+    "start": 380.9,
+    "end": 386.88,
+    "text": "| 2    | ShortPixel    | 76%            | 73.6         | 3.8s        | Upload  |"
+  },
+  {
+    "start": 386.88,
+    "end": 392.47,
+    "text": "| 3    | SammaPix      | 71%            | 74.2         | 1.4s        | Local   |"
+  },
+  {
+    "start": 392.47,
+    "end": 398.18,
+    "text": "| 4    | TinyPNG       | 68%            | 72.1         | 4.2s        | Upload  |"
+  },
+  {
+    "start": 398.18,
+    "end": 403.99,
+    "text": "| 5    | Kraken.io     | 69%            | 71.8         | 5.1s        | Upload  |"
+  },
+  {
+    "start": 403.99,
+    "end": 410.42,
+    "text": "| 6    | Compressor.io | 66%            | 73.9         | 3.6s        | Upload  |"
+  },
+  {
+    "start": 410.42,
+    "end": 416.71,
+    "text": "| 7    | Optimizilla   | 65%            | 71.5         | 4.7s        | Upload  |"
+  },
+  {
+    "start": 416.71,
+    "end": 422.49,
+    "text": "| 8    | ImageOptim    | 62%            | 76.3         | 3.2s        | Upload  |"
+  },
+  {
+    "start": 422.49,
+    "end": 428.23,
+    "text": "| 9    | iLoveIMG      | 64%            | 69.4         | 4.9s        | Upload  |"
+  },
+  {
+    "start": 428.23,
+    "end": 434.3,
+    "text": "| 10   | CompressJPEG  | 61%            | 68.7         | 5.4s        | Upload  |"
+  },
+  {
+    "start": 434.3,
+    "end": 444.16,
+    "text": "The ranking is based on a weighted composite: 40% quality (SSIMULACRA 2), 35% si"
+  },
+  {
+    "start": 444.16,
+    "end": 460.34,
+    "text": "ImageOptim has the second-highest quality score (76.3) but the lowest file size "
+  },
+  {
+    "start": 460.34,
+    "end": 463.22,
+    "text": "RESULTS BY IMAGE CATEGORY"
+  },
+  {
+    "start": 463.22,
+    "end": 468.07,
+    "text": "PHOTOS (20 images): landscapes, portraits, street photography"
+  },
+  {
+    "start": 468.57,
+    "end": 468.57,
+    "text": "|------------|-----------|--------------|"
+  },
+  {
+    "start": 468.57,
+    "end": 472.17,
+    "text": "| Squoosh    | 74%       | 80.2         |"
+  },
+  {
+    "start": 472.17,
+    "end": 476.44,
+    "text": "| ShortPixel | 79%       | 74.1         |"
+  },
+  {
+    "start": 476.44,
+    "end": 480.66,
+    "text": "| SammaPix   | 73%       | 75.8         |"
+  },
+  {
+    "start": 480.66,
+    "end": 485.13,
+    "text": "| TinyPNG    | 71%       | 73.4         |"
+  },
+  {
+    "start": 485.13,
+    "end": 489.23,
+    "text": "| ImageOptim | 64%       | 78.1         |"
+  },
+  {
+    "start": 489.23,
+    "end": 509.37,
+    "text": "Photos compress the best across the board. ShortPixel's 79% reduction on photos "
+  },
+  {
+    "start": 509.37,
+    "end": 514.94,
+    "text": "UI SCREENSHOTS (20 images): dashboards, app interfaces, web pages"
+  },
+  {
+    "start": 514.94,
+    "end": 518.27,
+    "text": "| Tool          | Reduction | SSIMULACRA 2 |"
+  },
+  {
+    "start": 518.27,
+    "end": 518.27,
+    "text": "|---------------|-----------|--------------|"
+  },
+  {
+    "start": 518.27,
+    "end": 522.16,
+    "text": "| Squoosh       | 68%       | 76.9         |"
+  },
+  {
+    "start": 522.16,
+    "end": 526.41,
+    "text": "| SammaPix      | 66%       | 73.1         |"
+  },
+  {
+    "start": 526.41,
+    "end": 530.75,
+    "text": "| TinyPNG       | 63%       | 71.8         |"
+  },
+  {
+    "start": 530.75,
+    "end": 534.9,
+    "text": "| ShortPixel    | 72%       | 70.4         |"
+  },
+  {
+    "start": 534.9,
+    "end": 539.58,
+    "text": "| Compressor.io | 61%       | 72.6         |"
+  },
+  {
+    "start": 539.58,
+    "end": 555.59,
+    "text": "Screenshots are harder to compress than photos. JPEG compression introduces visi"
+  },
+  {
+    "start": 555.59,
+    "end": 560.37,
+    "text": "E-COMMERCE PRODUCTS (20 images): product photos on white backgrounds"
+  },
+  {
+    "start": 560.87,
+    "end": 560.87,
+    "text": "|------------|-----------|--------------|"
+  },
+  {
+    "start": 560.87,
+    "end": 565.28,
+    "text": "| TinyPNG    | 72%       | 74.3         |"
+  },
+  {
+    "start": 565.28,
+    "end": 569.17,
+    "text": "| Squoosh    | 75%       | 79.1         |"
+  },
+  {
+    "start": 569.17,
+    "end": 573.37,
+    "text": "| ShortPixel | 78%       | 75.2         |"
+  },
+  {
+    "start": 573.37,
+    "end": 577.79,
+    "text": "| SammaPix   | 74%       | 75.6         |"
+  },
+  {
+    "start": 577.79,
+    "end": 582.28,
+    "text": "| Kraken.io  | 71%       | 73.5         |"
+  },
+  {
+    "start": 582.78,
+    "end": 588.2,
+    "text": "ILLUSTRATIONS (20 images): flat design, icons, vector-style graphics"
+  },
+  {
+    "start": 588.2,
+    "end": 591.54,
+    "text": "| Tool          | Reduction | SSIMULACRA 2 |"
+  },
+  {
+    "start": 591.54,
+    "end": 591.54,
+    "text": "|---------------|-----------|--------------|"
+  },
+  {
+    "start": 591.54,
+    "end": 595.33,
+    "text": "| Squoosh       | 71%       | 78.8         |"
+  },
+  {
+    "start": 595.33,
+    "end": 599.65,
+    "text": "| SammaPix      | 69%       | 74.0         |"
+  },
+  {
+    "start": 599.65,
+    "end": 604.14,
+    "text": "| TinyPNG       | 66%       | 71.4         |"
+  },
+  {
+    "start": 604.14,
+    "end": 608.36,
+    "text": "| ShortPixel    | 74%       | 72.8         |"
+  },
+  {
+    "start": 608.36,
+    "end": 612.94,
+    "text": "| Compressor.io | 65%       | 74.2         |"
+  },
+  {
+    "start": 612.94,
+    "end": 627.01,
+    "text": "Illustrations revealed the biggest quality differences between tools. Flat desig"
+  },
+  {
+    "start": 627.01,
+    "end": 632.24,
+    "text": "TEXT-HEAVY IMAGES (20 images): infographics, slides, documents"
+  },
+  {
+    "start": 632.24,
+    "end": 635.58,
+    "text": "| Tool       | Reduction | SSIMULACRA 2 |"
+  },
+  {
+    "start": 635.58,
+    "end": 635.58,
+    "text": "|------------|-----------|--------------|"
+  },
+  {
+    "start": 635.58,
+    "end": 639.61,
+    "text": "| Squoosh    | 69%       | 77.1         |"
+  },
+  {
+    "start": 639.61,
+    "end": 643.66,
+    "text": "| ImageOptim | 58%       | 76.8         |"
+  },
+  {
+    "start": 643.66,
+    "end": 648.13,
+    "text": "| SammaPix   | 67%       | 72.4         |"
+  },
+  {
+    "start": 648.13,
+    "end": 652.4,
+    "text": "| TinyPNG    | 64%       | 70.2         |"
+  },
+  {
+    "start": 652.4,
+    "end": 656.74,
+    "text": "| ShortPixel | 73%       | 68.7         |"
+  },
+  {
+    "start": 656.74,
+    "end": 673.64,
+    "text": "Text-heavy images are the acid test for compression quality. Small text is extre"
+  },
+  {
+    "start": 673.64,
+    "end": 676.23,
+    "text": "QUALITY LEVEL COMPARISON"
+  },
+  {
+    "start": 676.23,
+    "end": 686.98,
+    "text": "| Tool       | Q90 Red% | Q90 SS2 | Q80 Red% | Q80 SS2 | Q70 Red% | Q70 SS2 | Q6"
+  },
+  {
+    "start": 686.98,
+    "end": 686.98,
+    "text": "|------------|----------|---------|----------|---------|----------|---------|---"
+  },
+  {
+    "start": 686.98,
+    "end": 696.54,
+    "text": "| Squoosh    | 58%      | 84.2    | 72%      | 78.4    | 79%      | 71.6    | 84"
+  },
+  {
+    "start": 696.54,
+    "end": 706.57,
+    "text": "| ShortPixel | 62%      | 75.8    | 76%      | 73.6    | 82%      | 66.2    | 87"
+  },
+  {
+    "start": 706.57,
+    "end": 716.7,
+    "text": "| SammaPix   | 56%      | 82.6    | 71%      | 74.2    | 78%      | 67.1    | 83"
+  },
+  {
+    "start": 716.7,
+    "end": 726.7,
+    "text": "| Kraken.io  | 54%      | 79.4    | 69%      | 71.8    | 77%      | 65.3    | 82"
+  },
+  {
+    "start": 726.7,
+    "end": 736.74,
+    "text": "| Optimizilla| 51%      | 78.9    | 65%      | 71.5    | 74%      | 64.8    | 80"
+  },
+  {
+    "start": 736.74,
+    "end": 758.5,
+    "text": "The sweet spot is quality 80%. Every tool scored above 65 on SSIMULACRA 2, meani"
+  },
+  {
+    "start": 758.5,
+    "end": 776.38,
+    "text": "Key insight: Squoosh at quality 70% outperforms ShortPixel at quality 80% on vis"
+  },
+  {
+    "start": 776.88,
+    "end": 780.99,
+    "text": "| Rank | Tool          | Single image | 10 images (batch) | Why                 "
+  },
+  {
+    "start": 780.99,
+    "end": 780.99,
+    "text": "|------|---------------|--------------|--------------------|--------------------"
+  },
+  {
+    "start": 780.99,
+    "end": 786.7,
+    "text": "| 1    | SammaPix      | 1.4s         | 8.2s               | No upload, local WA"
+  },
+  {
+    "start": 786.7,
+    "end": 793.01,
+    "text": "| 2    | Squoosh       | 2.1s         | N/A (single only)  | No upload, local WA"
+  },
+  {
+    "start": 793.01,
+    "end": 798.51,
+    "text": "| 3    | ImageOptim    | 3.2s         | 18.4s              | Fast server, small "
+  },
+  {
+    "start": 798.51,
+    "end": 804.65,
+    "text": "| 4    | Compressor.io | 3.6s         | N/A (single only)  | Fast processing    "
+  },
+  {
+    "start": 804.65,
+    "end": 809.88,
+    "text": "| 5    | ShortPixel    | 3.8s         | 22.1s              | Server queue time  "
+  },
+  {
+    "start": 809.88,
+    "end": 815.52,
+    "text": "| 6    | TinyPNG       | 4.2s         | 14.8s              | Parallel processing"
+  },
+  {
+    "start": 816.02,
+    "end": 821.86,
+    "text": "| 8    | iLoveIMG      | 4.9s         | 19.7s              | Ad-heavy page slows"
+  },
+  {
+    "start": 821.86,
+    "end": 828.05,
+    "text": "| 9    | Kraken.io     | 5.1s         | 24.8s              | 1 MB limit slows wo"
+  },
+  {
+    "start": 828.05,
+    "end": 833.62,
+    "text": "| 10   | CompressJPEG  | 5.4s         | 28.1s              | Slow server respons"
+  },
+  {
+    "start": 833.62,
+    "end": 844.03,
+    "text": "Browser-based tools dominate speed because they skip the upload/download cycle e"
+  },
+  {
+    "start": 844.03,
+    "end": 846.65,
+    "text": "PRIVACY AND DATA HANDLING"
+  },
+  {
+    "start": 846.65,
+    "end": 852.24,
+    "text": "| Tool          | Upload required? | Data retention                  | Privacy s"
+  },
+  {
+    "start": 852.24,
+    "end": 852.24,
+    "text": "|---------------|------------------|---------------------------------|----------"
+  },
+  {
+    "start": 852.24,
+    "end": 859.15,
+    "text": "| SammaPix      | No upload        | Zero. Nothing leaves browser.   | 10/10    "
+  },
+  {
+    "start": 859.15,
+    "end": 865.78,
+    "text": "| Squoosh       | No upload        | Zero. Nothing leaves browser.   | 10/10    "
+  },
+  {
+    "start": 865.78,
+    "end": 870.43,
+    "text": "| TinyPNG       | Yes              | Deleted after compression        | 7/10    "
+  },
+  {
+    "start": 870.43,
+    "end": 874.78,
+    "text": "| ShortPixel    | Yes              | Deleted after 1 hour             | 7/10    "
+  },
+  {
+    "start": 874.78,
+    "end": 879.46,
+    "text": "| Compressor.io | Yes              | Deleted after processing          | 6/10   "
+  },
+  {
+    "start": 879.96,
+    "end": 884.9,
+    "text": "| ImageOptim    | Yes (web)        | Deleted after processing          | 6/10   "
+  },
+  {
+    "start": 884.9,
+    "end": 889.29,
+    "text": "| iLoveIMG      | Yes              | Deleted after 2 hours             | 6/10   "
+  },
+  {
+    "start": 889.79,
+    "end": 894.45,
+    "text": "| CompressJPEG  | Yes              | Unclear retention policy           | 4/10  "
+  },
+  {
+    "start": 894.45,
+    "end": 910,
+    "text": "Only 2 out of 10 tools keep your images private. SammaPix and Squoosh both use W"
+  },
+  {
+    "start": 910,
+    "end": 912.57,
+    "text": "FORMAT SUPPORT MATRIX"
+  },
+  {
+    "start": 912.57,
+    "end": 916.98,
+    "text": "| Tool          | JPEG | PNG | WebP | AVIF | GIF | SVG |"
+  },
+  {
+    "start": 916.98,
+    "end": 916.98,
+    "text": "|---------------|------|-----|------|------|-----|-----|"
+  },
+  {
+    "start": 916.98,
+    "end": 920.51,
+    "text": "| SammaPix      | Yes  | Yes | Yes  | No   | Yes | No  |"
+  },
+  {
+    "start": 920.51,
+    "end": 924.14,
+    "text": "| TinyPNG       | Yes  | Yes | Yes  | Yes  | No  | No  |"
+  },
+  {
+    "start": 924.14,
+    "end": 927.33,
+    "text": "| Squoosh       | Yes  | Yes | Yes  | Yes  | Yes | No  |"
+  },
+  {
+    "start": 927.33,
+    "end": 930.93,
+    "text": "| ShortPixel    | Yes  | Yes | Yes  | Yes  | Yes | No  |"
+  },
+  {
+    "start": 930.93,
+    "end": 935.03,
+    "text": "| Compressor.io | Yes  | Yes | Yes  | No   | Yes | Yes |"
+  },
+  {
+    "start": 935.03,
+    "end": 938.92,
+    "text": "| Kraken.io     | Yes  | Yes | Yes  | Yes  | Yes | Yes |"
+  },
+  {
+    "start": 938.92,
+    "end": 942.45,
+    "text": "| iLoveIMG      | Yes  | Yes | No   | No   | Yes | Yes |"
+  },
+  {
+    "start": 942.45,
+    "end": 946.19,
+    "text": "| Optimizilla   | Yes  | Yes | No   | No   | Yes | No  |"
+  },
+  {
+    "start": 946.19,
+    "end": 949.77,
+    "text": "| ImageOptim    | Yes  | Yes | No   | No   | Yes | No  |"
+  },
+  {
+    "start": 949.77,
+    "end": 953.49,
+    "text": "| CompressJPEG  | Yes  | Yes | No   | No   | Yes | No  |"
+  },
+  {
+    "start": 953.49,
+    "end": 955.84,
+    "text": "7 KEY FINDINGS"
+  },
+  {
+    "start": 956.34,
+    "end": 971.92,
+    "text": "At Q80, every tool scored above 65 on SSIMULACRA 2. Average reduction was 67%. G"
+  },
+  {
+    "start": 971.92,
+    "end": 976.38,
+    "text": "2. MozJPEG-based tools consistently outperform others"
+  },
+  {
+    "start": 976.38,
+    "end": 989.17,
+    "text": "Squoosh and SammaPix both use MozJPEG via WebAssembly, scoring 78.4 and 74.2 res"
+  },
+  {
+    "start": 989.17,
+    "end": 993.49,
+    "text": "3. Higher compression does not always mean lower quality"
+  },
+  {
+    "start": 993.49,
+    "end": 1009.48,
+    "text": "Squoosh at Q70 achieved 79% reduction with SS2 of 71.6. ShortPixel at Q80 achiev"
+  },
+  {
+    "start": 1009.48,
+    "end": 1013.1,
+    "text": "4. Text-heavy images need special handling"
+  },
+  {
+    "start": 1013.1,
+    "end": 1026.85,
+    "text": "Every tool performed worst on text-heavy images. Average SS2 dropped 4.3 points "
+  },
+  {
+    "start": 1026.85,
+    "end": 1031.96,
+    "text": "5. Browser-based tools are 2-4x faster than server-based ones"
+  },
+  {
+    "start": 1032.46,
+    "end": 1036.57,
+    "text": "6. \"Automatic\" compression quality varies wildly"
+  },
+  {
+    "start": 1036.57,
+    "end": 1052.31,
+    "text": "TinyPNG targets Q75-Q80 equivalent (smart). iLoveIMG was more aggressive, closer"
+  },
+  {
+    "start": 1052.31,
+    "end": 1056.03,
+    "text": "7. Most \"free\" tools have frustrating limits"
+  },
+  {
+    "start": 1056.03,
+    "end": 1074.51,
+    "text": "TinyPNG: 5 MB, 20 images. Kraken.io: 1 MB (useless for modern photos). ShortPixe"
+  },
+  {
+    "start": 1074.51,
+    "end": 1076.89,
+    "text": "WHICH TOOL SHOULD YOU USE?"
+  },
+  {
+    "start": 1076.89,
+    "end": 1079.86,
+    "text": "Best overall quality: Squoosh"
+  },
+  {
+    "start": 1079.86,
+    "end": 1090.66,
+    "text": "Best quality-to-size ratio. Full manual control. Use for important hero images. "
+  },
+  {
+    "start": 1090.66,
+    "end": 1093.98,
+    "text": "Best for batch processing: SammaPix"
+  },
+  {
+    "start": 1093.98,
+    "end": 1104.85,
+    "text": "Local processing, no upload, supports batch with ZIP download. Scored 74.2 on qu"
+  },
+  {
+    "start": 1104.85,
+    "end": 1108.42,
+    "text": "Best \"set it and forget it\": TinyPNG"
+  },
+  {
+    "start": 1108.42,
+    "end": 1120.38,
+    "text": "Zero configuration. Best-calibrated automatic algorithm. Great API. Skip when im"
+  },
+  {
+    "start": 1120.38,
+    "end": 1124.5,
+    "text": "Best for maximum file size reduction: ShortPixel"
+  },
+  {
+    "start": 1124.5,
+    "end": 1135.35,
+    "text": "76% average reduction (highest in test). WordPress plugin integration. Skip for "
+  },
+  {
+    "start": 1135.35,
+    "end": 1139.65,
+    "text": "Best for WordPress: ShortPixel or TinyPNG"
+  },
+  {
+    "start": 1139.65,
+    "end": 1147.74,
+    "text": "Both have excellent WordPress plugins. ShortPixel gives higher reduction, TinyPN"
+  },
+  {
+    "start": 1147.74,
+    "end": 1152.61,
+    "text": "Best for sensitive/confidential images: SammaPix or Squoosh"
+  },
+  {
+    "start": 1152.61,
+    "end": 1159.09,
+    "text": "Only options that process entirely in the browser. Zero data leaves your device."
+  },
+  {
+    "start": 1159.09,
+    "end": 1161.68,
+    "text": "HOW SAMMAPIX COMPARES"
+  },
+  {
+    "start": 1161.68,
+    "end": 1165.54,
+    "text": "Transparent breakdown of SammaPix in this benchmark:"
+  },
+  {
+    "start": 1165.54,
+    "end": 1173.39,
+    "text": "- Quality (74.2): Third place, behind Squoosh (78.4) and ImageOptim (76.3)."
+  },
+  {
+    "start": 1173.39,
+    "end": 1181.62,
+    "text": "- File size reduction (71%): Also third, behind ShortPixel (76%) and Squoosh (72"
+  },
+  {
+    "start": 1181.62,
+    "end": 1187.31,
+    "text": "- Speed (1.4s): First place. No upload means no waiting."
+  },
+  {
+    "start": 1187.31,
+    "end": 1191.27,
+    "text": "- Privacy (10/10): Tied for first with Squoosh."
+  },
+  {
+    "start": 1191.27,
+    "end": 1196.55,
+    "text": "- Batch support: Squoosh doesn't do batch. SammaPix does."
+  },
+  {
+    "start": 1196.55,
+    "end": 1208.26,
+    "text": "SammaPix isn't the best at any single metric except speed. But it's the only too"
+  },
+  {
+    "start": 1208.26,
+    "end": 1212.87,
+    "text": "Q: What is the best image compression tool in 2026?"
+  },
+  {
+    "start": 1212.87,
+    "end": 1232.77,
+    "text": "A: It depends on your priority. Squoosh delivers the best quality (SSIMULACRA 2:"
+  },
+  {
+    "start": 1232.77,
+    "end": 1237.28,
+    "text": "Q: Is TinyPNG still worth using in 2026?"
+  },
+  {
+    "start": 1237.28,
+    "end": 1252.35,
+    "text": "A: Yes. TinyPNG scored 72.1 on SSIMULACRA 2 with 68% reduction, the best automat"
+  },
+  {
+    "start": 1252.35,
+    "end": 1256.26,
+    "text": "Q: Which tool preserves the most visual quality?"
+  },
+  {
+    "start": 1256.26,
+    "end": 1268.22,
+    "text": "A: Squoosh (SSIMULACRA 2: 78.4). ImageOptim is second (76.3) but achieves lower "
+  },
+  {
+    "start": 1268.22,
+    "end": 1272.03,
+    "text": "Q: What is SSIMULACRA 2 and why does it matter?"
+  },
+  {
+    "start": 1272.03,
+    "end": 1291.18,
+    "text": "A: A perceptual quality metric by Cloudinary. Unlike PSNR, it correlates closely"
+  },
+  {
+    "start": 1291.18,
+    "end": 1294.64,
+    "text": "Q: Which tools process images locally?"
+  },
+  {
+    "start": 1294.64,
+    "end": 1304.29,
+    "text": "A: Only SammaPix and Squoosh. Both use WebAssembly. Verified via Chrome DevTools"
+  },
+  {
+    "start": 1304.29,
+    "end": 1308.54,
+    "text": "Q: How much can I compress without visible quality loss?"
+  },
+  {
+    "start": 1308.54,
+    "end": 1324.14,
+    "text": "A: At Q80%, all 10 tools scored above 65 on SSIMULACRA 2, meaning no visible los"
+  },
+  {
+    "start": 1324.14,
+    "end": 1333.11,
+    "text": "Raw data: https://github.com/samma1997/compression-benchmark-2026"
+  }
+]

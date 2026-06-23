@@ -1,0 +1,462 @@
+[
+  {
+    "start": 0,
+    "end": 5.3,
+    "text": "67 Image Compression Statistics for 2026 (With Sources)"
+  },
+  {
+    "start": 5.3,
+    "end": 24.1,
+    "text": "I spent two weeks pulling every credible image compression and optimization stat"
+  },
+  {
+    "start": 24.1,
+    "end": 42,
+    "text": "I've been building image optimization tools for the past year, and I got tired o"
+  },
+  {
+    "start": 42,
+    "end": 62.3,
+    "text": "So I pulled together every credible, current statistic I could find on image com"
+  },
+  {
+    "start": 62.3,
+    "end": 64.37,
+    "text": "Let's get into it."
+  },
+  {
+    "start": 64.37,
+    "end": 67.18,
+    "text": "Web performance and page weight"
+  },
+  {
+    "start": 67.18,
+    "end": 78.41,
+    "text": "These numbers tell you exactly how much weight images add to web pages and how t"
+  },
+  {
+    "start": 78.41,
+    "end": 98.38,
+    "text": "1. The median mobile homepage weighs 2.56 MB. Desktop is even heavier at 2.86 MB"
+  },
+  {
+    "start": 98.38,
+    "end": 125.69,
+    "text": "2. Images account for 36 to 37 percent of total page weight. On a median mobile "
+  },
+  {
+    "start": 125.69,
+    "end": 148.78,
+    "text": "3. Mobile page weight has grown 11.5 times since 2010. In July 2015, the median "
+  },
+  {
+    "start": 148.78,
+    "end": 167.11,
+    "text": "4. Mobile page weight grew 8.4 percent year over year in 2025. Desktop grew 7.3 "
+  },
+  {
+    "start": 167.11,
+    "end": 189,
+    "text": "5. The median mobile page loads 15 images. Desktop loads 17. Homepages specifica"
+  },
+  {
+    "start": 189,
+    "end": 210.41,
+    "text": "6. Image requests dropped 6 percent year over year. Fewer images, but each one i"
+  },
+  {
+    "start": 210.41,
+    "end": 232.46,
+    "text": "7. The median image on the web is just 12 KB. But that's misleading because it i"
+  },
+  {
+    "start": 232.46,
+    "end": 252.48,
+    "text": "8. Images make up 50 to 70 percent of a typical WordPress site's total page weig"
+  },
+  {
+    "start": 252.48,
+    "end": 270.53,
+    "text": "9. Total page requests increased 8 to 9 percent in 2025. Even though image reque"
+  },
+  {
+    "start": 270.53,
+    "end": 272.9,
+    "text": "Image format adoption"
+  },
+  {
+    "start": 272.9,
+    "end": 287.76,
+    "text": "The format wars are far from over. JPEG still dominates raw request counts, but "
+  },
+  {
+    "start": 287.76,
+    "end": 306.31,
+    "text": "10. JPEG still represents 32.4 percent of all image requests on the web. Down fr"
+  },
+  {
+    "start": 306.31,
+    "end": 326.06,
+    "text": "11. PNG accounts for 28.4 percent of image requests. Second most popular. Most o"
+  },
+  {
+    "start": 326.06,
+    "end": 344.98,
+    "text": "12. GIF is still at 16.8 percent of image requests. I honestly didn't expect thi"
+  },
+  {
+    "start": 344.98,
+    "end": 363.17,
+    "text": "13. WebP accounts for 12 percent of all image requests. That's up 34 percent fro"
+  },
+  {
+    "start": 363.17,
+    "end": 380.04,
+    "text": "14. WebP is used by 19.7 percent of all websites as of April 2026. Among the top"
+  },
+  {
+    "start": 380.04,
+    "end": 400.85,
+    "text": "15. AVIF represents just 1 percent of image requests but grew 386 percent in two"
+  },
+  {
+    "start": 400.85,
+    "end": 420.22,
+    "text": "16. AVIF is used by 1.3 percent of all websites as of April 2026. Among the top "
+  },
+  {
+    "start": 420.22,
+    "end": 436.9,
+    "text": "17. AVIF browser support reached 89 percent globally in 2025. By early 2026, it "
+  },
+  {
+    "start": 436.9,
+    "end": 456.84,
+    "text": "18. SVG accounts for 6.4 percent of image requests, up 36 percent since 2022. Mo"
+  },
+  {
+    "start": 456.84,
+    "end": 483.14,
+    "text": "19. JPEG XL has only 12 percent effective browser support as of 2026. Almost ent"
+  },
+  {
+    "start": 483.14,
+    "end": 485.57,
+    "text": "Compression effectiveness"
+  },
+  {
+    "start": 485.57,
+    "end": 497.35,
+    "text": "How much can you actually save by switching formats or optimizing properly? Thes"
+  },
+  {
+    "start": 497.35,
+    "end": 516.96,
+    "text": "20. WebP images are 25 to 34 percent smaller than equivalent JPEGs. Google's own"
+  },
+  {
+    "start": 516.96,
+    "end": 539.42,
+    "text": "21. AVIF files are roughly 50 percent smaller than JPEG at equivalent quality. O"
+  },
+  {
+    "start": 539.42,
+    "end": 560.16,
+    "text": "22. AVIF is 20 to 30 percent smaller than WebP at equivalent quality. Controlled"
+  },
+  {
+    "start": 560.16,
+    "end": 579.82,
+    "text": "23. WebP achieves a median of 1.3 bits per pixel; JPEG uses 2.0 bits per pixel. "
+  },
+  {
+    "start": 579.82,
+    "end": 599.86,
+    "text": "24. The web got 8 to 10 percent more compressed overall between 2022 and 2024. M"
+  },
+  {
+    "start": 599.86,
+    "end": 619.58,
+    "text": "25. Image CDNs that auto-convert to AVIF report 50 to 70 percent file size savin"
+  },
+  {
+    "start": 619.58,
+    "end": 638.64,
+    "text": "26. WordPress image optimization plugins reduce file sizes by 50 to 80 percent. "
+  },
+  {
+    "start": 638.64,
+    "end": 656.98,
+    "text": "27. Optimized images are on average 40 percent lighter than unoptimized ones. Th"
+  },
+  {
+    "start": 656.98,
+    "end": 675.72,
+    "text": "28. PNG lossless optimization typically reduces file size by 30 to 70 percent. W"
+  },
+  {
+    "start": 675.72,
+    "end": 694.3,
+    "text": "29. WebP supports both lossy and lossless compression, plus transparency. Lossle"
+  },
+  {
+    "start": 694.3,
+    "end": 697.22,
+    "text": "E-commerce and conversion impact"
+  },
+  {
+    "start": 697.22,
+    "end": 710.26,
+    "text": "This is where the money is. These stats show the direct line between image optim"
+  },
+  {
+    "start": 710.26,
+    "end": 734.02,
+    "text": "30. A 0.1-second improvement in load time increased retail conversions by 8.4 pe"
+  },
+  {
+    "start": 734.02,
+    "end": 754.34,
+    "text": "31. For travel sites, 0.1 seconds faster meant 10.1 percent more conversions. Tr"
+  },
+  {
+    "start": 754.34,
+    "end": 772.63,
+    "text": "32. A 100-millisecond delay in page load hurts conversion rates by 7 percent. Th"
+  },
+  {
+    "start": 772.63,
+    "end": 791.83,
+    "text": "33. 57 percent of shoppers abandon a page that takes longer than 3 seconds to lo"
+  },
+  {
+    "start": 791.83,
+    "end": 811.44,
+    "text": "34. A site that loads in 1 second converts 5 times higher than one loading in 10"
+  },
+  {
+    "start": 811.94,
+    "end": 830.78,
+    "text": "36. Sessions that converted had 38 percent fewer images than non-converting sess"
+  },
+  {
+    "start": 830.78,
+    "end": 850.6,
+    "text": "37. Image optimization cut load times by 65 percent and doubled conversions for "
+  },
+  {
+    "start": 850.6,
+    "end": 870.84,
+    "text": "38. 75 percent of online shoppers rely on product photos to make buying decision"
+  },
+  {
+    "start": 870.84,
+    "end": 893.54,
+    "text": "39. Each additional product image, up to 4 to 6 per product, increases conversio"
+  },
+  {
+    "start": 893.54,
+    "end": 915.07,
+    "text": "40. Products with user-generated images convert 4.6 times higher. Customer photo"
+  },
+  {
+    "start": 915.07,
+    "end": 934.6,
+    "text": "41. Pinterest increased sign-up conversions 40 percent by improving mobile page "
+  },
+  {
+    "start": 934.6,
+    "end": 936.91,
+    "text": "Mobile and bandwidth"
+  },
+  {
+    "start": 936.91,
+    "end": 949.34,
+    "text": "Mobile users outnumber desktop users on most sites. And on mobile, every kilobyt"
+  },
+  {
+    "start": 949.34,
+    "end": 972.76,
+    "text": "42. The gap between desktop and mobile page weight is only 13 percent. In 2024, "
+  },
+  {
+    "start": 972.76,
+    "end": 990.81,
+    "text": "43. An average website takes 1.9 seconds to render main content on mobile. But 4"
+  },
+  {
+    "start": 990.81,
+    "end": 1009.75,
+    "text": "44. Bounce probability increases 32 percent when load time goes from 1 to 3 seco"
+  },
+  {
+    "start": 1009.75,
+    "end": 1027.94,
+    "text": "45. 70 percent of mobile pages take more than 5 seconds to show above-the-fold c"
+  },
+  {
+    "start": 1027.94,
+    "end": 1047.67,
+    "text": "46. A 2-second delay increases bounce rates by 103 percent. Akamai found that tw"
+  },
+  {
+    "start": 1047.67,
+    "end": 1068.96,
+    "text": "47. 3G networks still average 3 to 8 megabits per second in real-world download "
+  },
+  {
+    "start": 1068.96,
+    "end": 1090.89,
+    "text": "48. The global average mobile download speed is 50 megabits per second. But that"
+  },
+  {
+    "start": 1090.89,
+    "end": 1110.93,
+    "text": "49. Mobile conversion rates peak at 2.4-second load times. Akamai recorded a pea"
+  },
+  {
+    "start": 1110.93,
+    "end": 1129.63,
+    "text": "50. Going from 400 to 6,000 page elements drops conversion probability by 95 per"
+  },
+  {
+    "start": 1129.63,
+    "end": 1149.09,
+    "text": "51. One second saved on mobile can boost conversions by up to 5.9 percent. That'"
+  },
+  {
+    "start": 1149.09,
+    "end": 1151.8,
+    "text": "SEO and Core Web Vitals"
+  },
+  {
+    "start": 1151.8,
+    "end": 1169.04,
+    "text": "Google uses Core Web Vitals as a ranking signal. Images directly affect LCP, whi"
+  },
+  {
+    "start": 1169.04,
+    "end": 1186.58,
+    "text": "52. Only 48 percent of mobile pages pass all three Core Web Vitals. Desktop is b"
+  },
+  {
+    "start": 1186.58,
+    "end": 1209.28,
+    "text": "53. 73 percent of mobile LCP elements are images. This is the stat that makes im"
+  },
+  {
+    "start": 1209.28,
+    "end": 1230.21,
+    "text": "54. Only 62 percent of mobile pages achieve a good LCP score, under 2.5 seconds."
+  },
+  {
+    "start": 1230.21,
+    "end": 1254.79,
+    "text": "55. 16 percent of mobile sites lazy-load their LCP image by mistake. This is a c"
+  },
+  {
+    "start": 1254.79,
+    "end": 1272.16,
+    "text": "56. Core Web Vitals mobile pass rates are improving by about 3 percent per year."
+  },
+  {
+    "start": 1272.16,
+    "end": 1294.34,
+    "text": "57. A good LCP score requires loading within 2.5 seconds at the 75th percentile."
+  },
+  {
+    "start": 1294.34,
+    "end": 1297.51,
+    "text": "Lazy loading and responsive images"
+  },
+  {
+    "start": 1297.51,
+    "end": 1308.86,
+    "text": "Compression is only part of the picture. How you load and serve images matters j"
+  },
+  {
+    "start": 1309.36,
+    "end": 1332.06,
+    "text": "59. 9.5 percent of pages incorrectly lazy-load their LCP image. A slight improve"
+  },
+  {
+    "start": 1332.06,
+    "end": 1353.16,
+    "text": "60. 42 percent of pages use srcset for responsive images. Up from 34 percent in "
+  },
+  {
+    "start": 1353.16,
+    "end": 1375.48,
+    "text": "61. Only 9.3 percent of pages use the picture element for format switching. The "
+  },
+  {
+    "start": 1375.48,
+    "end": 1397.3,
+    "text": "62. 32 percent of pages set explicit width and height on images. Up 4 percentage"
+  },
+  {
+    "start": 1397.3,
+    "end": 1418.49,
+    "text": "63. 91 percent of pages don't use lazy loading for iframes. Image lazy loading g"
+  },
+  {
+    "start": 1418.49,
+    "end": 1438.12,
+    "text": "64. Sentry's engineering team saw 22 percent faster UI performance after impleme"
+  },
+  {
+    "start": 1438.12,
+    "end": 1440.62,
+    "text": "Environmental impact"
+  },
+  {
+    "start": 1441.12,
+    "end": 1463.92,
+    "text": "65. An image-heavy site generates up to 30.39 grams of CO2 per page view. A text"
+  },
+  {
+    "start": 1463.92,
+    "end": 1488.52,
+    "text": "66. One company saved 26.6 tons of CO2 annually by optimizing images. That's equ"
+  },
+  {
+    "start": 1488.52,
+    "end": 1510.52,
+    "text": "67. Websites implementing image CDNs see a 30 to 50 percent improvement in load "
+  },
+  {
+    "start": 1510.52,
+    "end": 1513.14,
+    "text": "What to do with these numbers"
+  },
+  {
+    "start": 1513.14,
+    "end": 1520.27,
+    "text": "Statistics are useless if you don't act on them. Here's the short version of wha"
+  },
+  {
+    "start": 1520.27,
+    "end": 1528.4,
+    "text": "Compress everything. If your images aren't optimized, you're leaving 30 to 80 pe"
+  },
+  {
+    "start": 1528.4,
+    "end": 1539.83,
+    "text": "Switch to WebP at minimum. AVIF if you can. Even just converting to WebP saves 2"
+  },
+  {
+    "start": 1539.83,
+    "end": 1553.72,
+    "text": "Fix your LCP image loading. Remove loading equals lazy from your hero image. Add"
+  },
+  {
+    "start": 1553.72,
+    "end": 1565.58,
+    "text": "Use srcset and explicit dimensions. 42 percent of sites use srcset. Be in that g"
+  },
+  {
+    "start": 1565.58,
+    "end": 1577.99,
+    "text": "Lazy-load below-the-fold images. 67 percent of sites still don't use native lazy"
+  }
+]
