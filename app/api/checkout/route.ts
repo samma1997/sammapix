@@ -113,6 +113,10 @@ export async function POST(req: NextRequest) {
     // default to monthly
   }
 
+  // First-touch acquisition cookie (set on the visitor's first page view):
+  // where they ORIGINALLY arrived from, persisted on metadata as `entry`.
+  const entry = req.cookies.get("sx_ft")?.value?.replace(/[^a-zA-Z0-9/:_|.-]/g, "").slice(0, 90);
+
   // Resolve price ID. Refuse to silently bill annual at monthly rate if the
   // annual price env var is missing — that would be involuntary fraud.
   const monthlyPriceId = process.env.STRIPE_PRO_PRICE_ID?.trim();
@@ -168,6 +172,7 @@ export async function POST(req: NextRequest) {
         plan,
         founding_member: applyFoundingCoupon ? "true" : "false",
         ...(source ? { source } : {}),
+        ...(entry ? { entry } : {}),
         // Pass _ga cookie so the webhook can fire GA4 purchase event
         // attributed to the originating browser session.
         ...(ga ? { ga_cookie: ga } : {}),
@@ -176,7 +181,7 @@ export async function POST(req: NextRequest) {
         trial_period_days: TRIAL_DAYS,
         // Persist source on the subscription itself so we can later see where
         // each trial/paying customer originated from.
-        metadata: { userId: userEmail ?? "", ...(source ? { source } : {}) },
+        metadata: { userId: userEmail ?? "", ...(source ? { source } : {}), ...(entry ? { entry } : {}) },
       },
     });
 
