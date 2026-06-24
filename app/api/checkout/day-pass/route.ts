@@ -56,6 +56,11 @@ export async function POST(req: NextRequest) {
     source = undefined;
   }
 
+  // First-touch acquisition (where the buyer ORIGINALLY arrived from), set as a
+  // cookie on their first visit. Tells us "came from google/-> /resize/whatsapp"
+  // vs the `source` field which is only the tool page they paid on.
+  const entry = req.cookies.get("sx_ft")?.value?.replace(/[^a-zA-Z0-9/:_|.-]/g, "").slice(0, 90);
+
   const unitAmount = isVideoVariant ? DAY_PASS_VIDEO_PRICE : DAY_PASS_PRICE;
   const passName = isVideoVariant
     ? "SammaPix Video Day Pass — 24h unlimited access"
@@ -121,6 +126,7 @@ export async function POST(req: NextRequest) {
         // session.customer_details.email (populated by Stripe after payment).
         userEmail: email ?? "",
         ...(source ? { source } : {}),
+        ...(entry ? { entry } : {}),
       },
     });
 
