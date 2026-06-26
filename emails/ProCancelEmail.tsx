@@ -117,6 +117,18 @@ export function ProCancelEmail({ name }: ProCancelEmailProps) {
             just have fewer AI renames per day and smaller batch sizes.
           </Text>
 
+          <Section style={highlight}>
+            <Text style={highlightText}>
+              <strong>Only need Pro now and then?</strong> Skip the monthly plan.
+              Grab a <strong>Day Pass for $2.99</strong> and unlock everything
+              (big batches, large files, ZIP download, all AI ops) for 24 hours-
+              no subscription, no commitment. Perfect for the occasional heavy job.
+            </Text>
+            <Button style={{ ...button, marginTop: "12px" }} href={`${BASE_URL}/pricing`}>
+              Get a Day Pass when you need it →
+            </Button>
+          </Section>
+
           <Text style={body}>
             We&apos;d love to know what we could have done better. Your feedback
             helps us improve SammaPix for everyone.
