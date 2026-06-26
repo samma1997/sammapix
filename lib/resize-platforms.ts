@@ -407,7 +407,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
         a: "Yes, TikTok re-encodes all uploaded media. Starting with an image at exactly 1080 px wide gives TikTok no reason to upscale or downscale before its own compression, producing the sharpest possible output.",
       },
     ],
-    related: ["instagram", "pinterest", "youtube-thumbnail"],
+    related: ["twitter", "instagram", "youtube-thumbnail"],
   },
 
   // ─── DISCORD ──────────────────────────────────────────────────────────────
@@ -987,7 +987,7 @@ const ALL_PLATFORMS: ResizePlatform[] = [
         a: "WhatsApp crops and compresses profile photos. Upload a square image at exactly 500×500 px with the subject centered — this gives WhatsApp the least work to do and results in the sharpest profile picture.",
       },
     ],
-    related: ["snapchat", "instagram", "facebook"],
+    related: ["twitter", "discord", "instagram", "facebook"],
   },
 
   // ─── EMAIL HEADER ─────────────────────────────────────────────────────────
