@@ -85,10 +85,6 @@
     {
       "path": "/api/cron/trial-monitor",
       "schedule": "0 11 * * *"
-    },
-    {
-      "path": "/api/cron/health-check",
-      "schedule": "*/30 * * * *"
     }
   ],
   "redirects": [
