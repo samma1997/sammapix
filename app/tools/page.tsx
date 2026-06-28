@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "heic converter",
     "image optimizer",
   ],
-  alternates: { canonical: "https://sammapix.com/tools" },
+  alternates: { canonical: "https://www.sammapix.com/tools" },
   openGraph: {
     title: `${TOOL_COUNT} Free Image & Video Tools for Photographers & Developers`,
     description:
