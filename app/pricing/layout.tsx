@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "image editor pricing",
   ],
   alternates: {
-    canonical: "https://sammapix.com/pricing",
+    canonical: "https://www.sammapix.com/pricing",
   },
   openGraph: {
     title: "SammaPix Pricing — Free Forever, Pro $9/mo",

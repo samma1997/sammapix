@@ -269,6 +269,7 @@ export default function ProUpsellModal({
         <Dialog.Content
           className={[
             "fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2",
+            "max-h-[90vh] overflow-y-auto",
             "rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A]",
             "bg-white dark:bg-[#1E1E1E] p-6 shadow-lg",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",

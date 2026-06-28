@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Learn how to cull photos fast with a proven workflow: rating systems, keyboard shortcuts, side-by-side compare, keep rate benchmarks, and tips for weddings and events.",
   alternates: {
-    canonical: "https://sammapix.com/blog/cull-photos-faster-workflow",
+    canonical: "https://www.sammapix.com/blog/cull-photos-faster-workflow",
   },
   keywords: [
     "cull photos fast",
