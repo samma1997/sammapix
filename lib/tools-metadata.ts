@@ -404,6 +404,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["webp", "heic", "compress", "pdf-to-image"],
     relatedBlogSlugs: [
+      "what-is-a-jxl-file-how-to-open-convert",
       "best-image-format-for-web-2026",
       "webp-vs-avif-vs-jpeg-comparison",
     ],

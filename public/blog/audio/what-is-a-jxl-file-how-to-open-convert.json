@@ -1,0 +1,107 @@
+[
+  {
+    "start": 0,
+    "end": 3.12,
+    "text": "What a JXL file actually is."
+  },
+  {
+    "start": 3.12,
+    "end": 25.94,
+    "text": "A file ending in jxl is an image saved in the JPEG XL format. It was created by "
+  },
+  {
+    "start": 25.94,
+    "end": 55.54,
+    "text": "On paper it succeeds. JPEG XL produces smaller files than JPEG at the same visua"
+  },
+  {
+    "start": 55.54,
+    "end": 68.18,
+    "text": "So why have most people never heard of it? Because the thing that makes a format"
+  },
+  {
+    "start": 68.18,
+    "end": 71.3,
+    "text": "Why your jxl file will not open."
+  },
+  {
+    "start": 71.3,
+    "end": 105.34,
+    "text": "If you double click a jxl file and nothing happens, the file is not broken. Your"
+  },
+  {
+    "start": 105.34,
+    "end": 121.68,
+    "text": "So if someone on a Mac exported a photo as JPEG XL and sent it to you on Windows"
+  },
+  {
+    "start": 121.68,
+    "end": 125.66,
+    "text": "How to convert JXL to JPG with no upload."
+  },
+  {
+    "start": 125.66,
+    "end": 149.28,
+    "text": "The SammaPix JXL Converter decodes JPEG XL directly in your browser using WebAss"
+  },
+  {
+    "start": 149.28,
+    "end": 153.65,
+    "text": "JXL to PNG, WebP, and back to JXL."
+  },
+  {
+    "start": 153.65,
+    "end": 180.5,
+    "text": "Pick the output based on what you need. JXL to JPG is smallest and opens everywh"
+  },
+  {
+    "start": 180.5,
+    "end": 184.82,
+    "text": "JXL versus JPEG versus WebP versus AVIF."
+  },
+  {
+    "start": 184.82,
+    "end": 209.06,
+    "text": "On pure technical merit, JPEG XL is at the front of the pack, especially for hig"
+  },
+  {
+    "start": 209.06,
+    "end": 212.86,
+    "text": "JXL browser support in 2026."
+  },
+  {
+    "start": 212.86,
+    "end": 245.42,
+    "text": "The short story of JPEG XL is a story about politics, not technology. Chrome add"
+  },
+  {
+    "start": 245.42,
+    "end": 247.94,
+    "text": "Should you use JXL?"
+  },
+  {
+    "start": 247.94,
+    "end": 272.4,
+    "text": "For a website or anything you share publicly, no. Use WebP or AVIF, which look j"
+  },
+  {
+    "start": 272.4,
+    "end": 275.04,
+    "text": "Does converting lose quality?"
+  },
+  {
+    "start": 275.04,
+    "end": 303.29,
+    "text": "It depends on the target. Converting JXL to PNG is lossless: the result is pixel"
+  },
+  {
+    "start": 303.29,
+    "end": 305.9,
+    "text": "Common problems and fixes."
+  },
+  {
+    "start": 305.9,
+    "end": 334.9,
+    "text": "If double clicking the jxl does nothing, your system does not support JPEG XL, s"
+  }
+]
