@@ -1146,6 +1146,38 @@ export const IconZipCreator: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconTarGz — tar.gz extractor (compressed bundle popping open) ─────────────
+export const IconTarGz: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes tg-squeeze {
+        0%, 100% { transform: scaleX(1); }
+        50%      { transform: scaleX(0.82); }
+      }
+      @keyframes tg-out {
+        0%, 30%  { transform: translate(0,0) scale(0.5); opacity: 0; }
+        55%, 75% { transform: translate(13px,-9px) scale(1); opacity: 1; }
+        95%,100% { transform: translate(13px,-9px) scale(1); opacity: 0; }
+      }
+      .tg-box  { transform-origin: 16px 28px; animation: tg-squeeze 2.4s ease-in-out infinite; }
+      .tg-file { transform-origin: 6px 22px;  animation: tg-out 2.4s ease-in-out infinite; }
+    `}</style>
+    <g className="tg-box">
+      <rect x="6" y="14" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <line x1="6" y1="21" x2="26" y2="21" stroke={accent} strokeWidth="1.1" strokeOpacity="0.6"/>
+      <line x1="6" y1="27" x2="26" y2="27" stroke={accent} strokeWidth="1.1" strokeOpacity="0.6"/>
+      <line x1="6" y1="33" x2="26" y2="33" stroke={accent} strokeWidth="1.1" strokeOpacity="0.6"/>
+    </g>
+    <g className="tg-file" style={{ opacity: 0 }}>
+      <rect x="1" y="16" width="11" height="13" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+      <line x1="3" y1="21" x2="10" y2="21" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+      <line x1="3" y1="24" x2="8"  y2="24" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+    </g>
+    <path d="M29 30 L36 30 M32.5 27 L36 30 L32.5 33" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <text x="16" y="11" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">.GZ</text>
+  </svg>
+);
+
 export const IconRedactPdf: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`

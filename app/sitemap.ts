@@ -146,6 +146,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/unrar",
     "/tools/open-7z",
     "/tools/zip-creator",
+    "/tools/tar-gz",
     "/tools/raw-converter",
     "/tools/pdf-split",
     "/tools/blur-censor",
