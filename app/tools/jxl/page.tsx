@@ -263,6 +263,13 @@ export default function JxlConverterPage() {
               </div>
             </div>
           </div>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mt-4 text-center">
+            New to the format or stuck with a .jxl that will not open? Read{" "}
+            <Link href="/blog/what-is-a-jxl-file-how-to-open-convert" className="text-[#6366F1] hover:underline">
+              What Is a JXL File? How to Open &amp; Convert It
+            </Link>
+            .
+          </p>
         </section>
 
         {/* FAQ */}
