@@ -1,0 +1,97 @@
+[
+  {
+    "start": 0,
+    "end": 3.14,
+    "text": "Why batch rename, and how to name well."
+  },
+  {
+    "start": 3.14,
+    "end": 24.89,
+    "text": "A folder full of IMG underscore 4821, DSC 00342 and screenshot copies is a mess "
+  },
+  {
+    "start": 24.89,
+    "end": 46.85,
+    "text": "A good naming scheme usually has three parts: what, a base name like rossi weddi"
+  },
+  {
+    "start": 46.85,
+    "end": 50.11,
+    "text": "Three ways to batch rename, compared."
+  },
+  {
+    "start": 50.11,
+    "end": 70.66,
+    "text": "There are three practical methods: a browser tool with no upload, Windows Explor"
+  },
+  {
+    "start": 70.66,
+    "end": 73.82,
+    "text": "Method one, online with no upload."
+  },
+  {
+    "start": 73.82,
+    "end": 93.29,
+    "text": "The SammaPix Batch Rename tool builds new filenames from a pattern and reads eac"
+  },
+  {
+    "start": 93.29,
+    "end": 105.41,
+    "text": "To use it: open the batch rename tool, add your files, build the pattern by comb"
+  },
+  {
+    "start": 105.41,
+    "end": 109.37,
+    "text": "Rename photos by EXIF date, the killer trick."
+  },
+  {
+    "start": 109.37,
+    "end": 127.58,
+    "text": "Every photo your camera or phone takes stores the exact capture date and time in"
+  },
+  {
+    "start": 127.58,
+    "end": 151.82,
+    "text": "A folder mixing a phone photo and a camera photo will not sort by time. Rename b"
+  },
+  {
+    "start": 151.82,
+    "end": 155.3,
+    "text": "Numbering, find and replace, and case."
+  },
+  {
+    "start": 155.3,
+    "end": 188.76,
+    "text": "Sequential numbers add a counter with padding, like 001, 002, and you can set th"
+  },
+  {
+    "start": 188.76,
+    "end": 192.7,
+    "text": "Method two, Windows with Explorer and PowerRename."
+  },
+  {
+    "start": 192.7,
+    "end": 219.91,
+    "text": "For the simplest case, open File Explorer, select all the files, press F2, type "
+  },
+  {
+    "start": 219.91,
+    "end": 223.03,
+    "text": "Method three, Mac Finder rename."
+  },
+  {
+    "start": 223.03,
+    "end": 247.18,
+    "text": "macOS has a genuinely good built in batch renamer. Select the files in Finder, r"
+  },
+  {
+    "start": 247.18,
+    "end": 249.41,
+    "text": "Real scenarios."
+  },
+  {
+    "start": 249.41,
+    "end": 279.65,
+    "text": "A wedding or event photographer can rename the whole shoot to client name, date,"
+  }
+]

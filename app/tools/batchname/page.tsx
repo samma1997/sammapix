@@ -320,6 +320,13 @@ export default function BatchNamePage() {
               </p>
             </div>
           </div>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mt-6 text-center">
+            Want the full walkthrough, including renaming photos by EXIF date? Read{" "}
+            <Link href="/blog/how-to-batch-rename-photos-and-files-online" className="text-[#6366F1] hover:underline">
+              How to Batch Rename Photos &amp; Files
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

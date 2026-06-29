@@ -238,6 +238,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "organize",
     relatedTools: ["ai-rename", "twinhunt", "smartsort", "geosort"],
     relatedBlogSlugs: [
+      "how-to-batch-rename-photos-and-files-online",
       "ai-photo-renamer-custom-directive",
       "batch-rename-photos-ai",
       "ai-image-renaming-seo-guide",

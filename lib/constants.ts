@@ -225,6 +225,7 @@ export const BLOG_SLUGS = [
   "how-to-create-a-zip-file-online-no-upload",
   "how-to-open-tar-gz-files-online-no-upload",
   "what-is-a-jxl-file-how-to-open-convert",
+  "how-to-batch-rename-photos-and-files-online",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
