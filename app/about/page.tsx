@@ -177,28 +177,6 @@ export default function AboutPage() {
                 </Link>
               ))}
 
-              {/* Coming soon destinations- blurred */}
-              {[
-                { name: "Japan", year: "2023", gradient: "from-rose-900 to-rose-700" },
-              ].map((dest) => (
-                <div
-                  key={dest.name}
-                  className="relative overflow-hidden rounded-lg"
-                  style={{ aspectRatio: "3/4" }}
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-b ${dest.gradient} blur-[2px]`} />
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <p className="text-white/90 text-sm font-semibold tracking-wide">
-                      {dest.name}
-                    </p>
-                    <p className="text-white/40 text-xs mt-0.5">{dest.year}</p>
-                    <span className="mt-3 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/60 border border-white/20 rounded-full">
-                      Coming soon
-                    </span>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>
