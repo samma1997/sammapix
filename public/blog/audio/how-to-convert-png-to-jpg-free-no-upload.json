@@ -1,0 +1,92 @@
+[
+  {
+    "start": 0,
+    "end": 3.98,
+    "text": "Why convert PNG to JPG, and the cost."
+  },
+  {
+    "start": 3.98,
+    "end": 27.89,
+    "text": "PNG is a lossless format. It stores every pixel exactly, which is wonderful for "
+  },
+  {
+    "start": 27.89,
+    "end": 55.68,
+    "text": "JPG, also written JPEG, is lossy. It throws away detail the eye barely notices i"
+  },
+  {
+    "start": 55.68,
+    "end": 58.13,
+    "text": "The transparency gotcha."
+  },
+  {
+    "start": 58.13,
+    "end": 80.38,
+    "text": "This is the single thing that surprises people most. PNG supports transparency: "
+  },
+  {
+    "start": 80.38,
+    "end": 105.98,
+    "text": "So a logo that looked perfect floating on your website suddenly has an ugly whit"
+  },
+  {
+    "start": 105.98,
+    "end": 109.32,
+    "text": "Method one: online, no upload."
+  },
+  {
+    "start": 109.32,
+    "end": 132.05,
+    "text": "The SammaPix PNG to JPG converter does the conversion in your browser using the "
+  },
+  {
+    "start": 132.05,
+    "end": 135.48,
+    "text": "Convert PNG to JPG in bulk."
+  },
+  {
+    "start": 135.48,
+    "end": 159.67,
+    "text": "Converting one image is easy anywhere. The pain is a folder of fifty PNGs. The b"
+  },
+  {
+    "start": 159.67,
+    "end": 163.25,
+    "text": "Method two: Windows, Paint and Photos."
+  },
+  {
+    "start": 163.25,
+    "end": 184.92,
+    "text": "For a single file with no extra tools, open the PNG in Paint, click File, then S"
+  },
+  {
+    "start": 184.92,
+    "end": 187.82,
+    "text": "Method three: Mac, Preview."
+  },
+  {
+    "start": 187.82,
+    "end": 211.13,
+    "text": "On a Mac, open the PNG in Preview, choose File, then Export, and pick JPEG from "
+  },
+  {
+    "start": 211.13,
+    "end": 214.85,
+    "text": "PNG versus JPG: when to use which."
+  },
+  {
+    "start": 214.85,
+    "end": 234.26,
+    "text": "Use JPG for photographs, where its compression is efficient and the lack of tran"
+  },
+  {
+    "start": 234.26,
+    "end": 236.64,
+    "text": "When you should not convert."
+  },
+  {
+    "start": 236.64,
+    "end": 268.1,
+    "text": "Skip the conversion if the image is a logo, an icon, a screenshot with text, or "
+  }
+]

@@ -218,6 +218,14 @@ export default function PngToJpgPage() {
             </Link>
             .
           </p>
+          <p className="text-sm text-[#737373] leading-relaxed mt-4">
+            Want the full walkthrough, including bulk conversion and the built-in Windows and Mac
+            methods? Read{" "}
+            <Link href="/blog/how-to-convert-png-to-jpg-free-no-upload" className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]">
+              How to Convert PNG to JPG (Free, No Upload)
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
