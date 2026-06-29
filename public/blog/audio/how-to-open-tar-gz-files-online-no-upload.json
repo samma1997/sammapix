@@ -1,0 +1,107 @@
+[
+  {
+    "start": 0,
+    "end": 3.36,
+    "text": "What a tar.gz file actually is."
+  },
+  {
+    "start": 3.36,
+    "end": 27.17,
+    "text": "A tar.gz is two formats stacked together. First, tar, short for tape archive, bu"
+  },
+  {
+    "start": 27.17,
+    "end": 44.52,
+    "text": "You meet tar.gz constantly in the developer and Linux world: source code release"
+  },
+  {
+    "start": 44.52,
+    "end": 48.12,
+    "text": "Four ways to open tar.gz, compared."
+  },
+  {
+    "start": 48.12,
+    "end": 72.26,
+    "text": "There are four practical methods: a browser tool with no upload, the Windows tar"
+  },
+  {
+    "start": 72.26,
+    "end": 75.43,
+    "text": "Method one, online with no upload."
+  },
+  {
+    "start": 75.43,
+    "end": 99,
+    "text": "The SammaPix tar.gz Extractor reads the archive directly in your browser with th"
+  },
+  {
+    "start": 99,
+    "end": 107.98,
+    "text": "To use it: open the tar.gz Extractor, drop your tar.gz, tgz, tar or gz file, bro"
+  },
+  {
+    "start": 107.98,
+    "end": 112.08,
+    "text": "Method two, Windows with the tar command and 7-Zip."
+  },
+  {
+    "start": 112.08,
+    "end": 130.66,
+    "text": "Windows 11 ships with the tar command. Open Command Prompt or PowerShell in the "
+  },
+  {
+    "start": 130.66,
+    "end": 151.25,
+    "text": "Prefer a graphical app? Install 7-Zip. Right click the tar.gz, choose 7-Zip then"
+  },
+  {
+    "start": 151.25,
+    "end": 154.9,
+    "text": "Method three, Mac with double-click and Terminal."
+  },
+  {
+    "start": 154.9,
+    "end": 171.55,
+    "text": "On macOS this is easy: double click the tar.gz in Finder and Archive Utility unp"
+  },
+  {
+    "start": 171.55,
+    "end": 175.01,
+    "text": "Method four, Terminal on Linux and Mac."
+  },
+  {
+    "start": 175.01,
+    "end": 194.02,
+    "text": "To extract everything, run tar minus x z f file dot tar dot gz. To list contents"
+  },
+  {
+    "start": 194.02,
+    "end": 198.26,
+    "text": "tar versus gz versus tar.gz versus tgz."
+  },
+  {
+    "start": 198.26,
+    "end": 222.24,
+    "text": "A tar file is a bundle of files, not compressed. A gz file is a single gzip comp"
+  },
+  {
+    "start": 222.24,
+    "end": 224.81,
+    "text": "Common errors and fixes."
+  },
+  {
+    "start": 224.81,
+    "end": 249.29,
+    "text": "If you see tar is not recognized on Windows, you are likely on Windows 10, which"
+  },
+  {
+    "start": 249.29,
+    "end": 251.42,
+    "text": "After extracting."
+  },
+  {
+    "start": 251.42,
+    "end": 271.39,
+    "text": "Got images out of the archive? Compress them with the Image Compressor, or strip"
+  }
+]

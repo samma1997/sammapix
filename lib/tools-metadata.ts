@@ -444,6 +444,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "tar-gz": {
+    id: "tar-gz",
+    name: "Open tar.gz Online",
+    shortDesc: "Extract & view .tar.gz / .tgz / .gz files in-browser, convert to ZIP",
+    slug: "/tools/tar-gz",
+    category: "optimize",
+    relatedTools: ["open-7z", "unrar", "zip-creator", "compress"],
+    relatedBlogSlugs: [
+      "how-to-open-tar-gz-files-online-no-upload",
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
   "raw-converter": {
     id: "raw-converter",
     name: "RAW Converter",
