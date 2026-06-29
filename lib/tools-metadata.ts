@@ -432,6 +432,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "merge-pdfs-privately-no-upload",
     ],
   },
+  "zip-creator": {
+    id: "zip-creator",
+    name: "Create a ZIP File",
+    shortDesc: "Bundle files or a folder into one .zip, in-browser, no upload",
+    slug: "/tools/zip-creator",
+    category: "optimize",
+    relatedTools: ["open-7z", "unrar", "compress", "pdf-merge"],
+    relatedBlogSlugs: [
+      "how-to-create-a-zip-file-online-no-upload",
+      "browser-based-image-tools-privacy-guide",
+    ],
+  },
   "raw-converter": {
     id: "raw-converter",
     name: "RAW Converter",

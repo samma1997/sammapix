@@ -1105,6 +1105,47 @@ export const IconOpen7z: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconZipCreator — files bundled into a ZIP icon ───────────────────────────
+export const IconZipCreator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes zc-in {
+        0%, 10%  { transform: translate(0,0) scale(1);     opacity: 1; }
+        45%      { transform: translate(14px,6px) scale(0.5); opacity: 0.5; }
+        55%,100% { transform: translate(14px,6px) scale(0.5); opacity: 0; }
+      }
+      @keyframes zc-pull {
+        0%, 45%  { transform: translateY(0); }
+        70%      { transform: translateY(13px); }
+        90%,100% { transform: translateY(0); }
+      }
+      .zc-f1 { transform-origin: 10px 14px; animation: zc-in 2.6s ease-in-out infinite; }
+      .zc-f2 { transform-origin: 10px 24px; animation: zc-in 2.6s ease-in-out 0.3s infinite; }
+      .zc-zip { transform-origin: 33px 13px; animation: zc-pull 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Incoming files (fly into the zip) */}
+    <g className="zc-f1">
+      <rect x="4" y="9" width="12" height="14" rx="1.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.2"/>
+      <line x1="6.5" y1="14" x2="13.5" y2="14" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="6.5" y1="17" x2="11" y2="17" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    <g className="zc-f2">
+      <rect x="4" y="22" width="12" height="14" rx="1.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.2"/>
+      <line x1="6.5" y1="27" x2="13.5" y2="27" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="6.5" y1="30" x2="11" y2="30" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    {/* ZIP archive body */}
+    <rect x="26" y="10" width="18" height="30" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    {/* Zipper track + pull (animated) */}
+    <line x1="33" y1="10" x2="33" y2="40" stroke={accent} strokeWidth="1.5" strokeDasharray="2 2"/>
+    <g className="zc-zip">
+      <rect x="30.5" y="11" width="5" height="6" rx="1.2" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.2"/>
+    </g>
+    {/* ZIP label */}
+    <text x="35" y="37" fontSize="5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">ZIP</text>
+  </svg>
+);
+
 export const IconRedactPdf: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`

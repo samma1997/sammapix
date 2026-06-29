@@ -1,0 +1,127 @@
+[
+  {
+    "start": 0,
+    "end": 3.43,
+    "text": "Why create a ZIP file, and why in the browser."
+  },
+  {
+    "start": 3.43,
+    "end": 26.74,
+    "text": "A ZIP file is a single container that holds many files and folders together. The"
+  },
+  {
+    "start": 26.74,
+    "end": 45.48,
+    "text": "ZIP is the right format for this because it is supported everywhere. Windows, ma"
+  },
+  {
+    "start": 45.48,
+    "end": 76.3,
+    "text": "So why use a browser tool instead of your operating system? Two situations. Firs"
+  },
+  {
+    "start": 76.3,
+    "end": 79.34,
+    "text": "Four ways to create a ZIP, compared."
+  },
+  {
+    "start": 79.34,
+    "end": 101.45,
+    "text": "There are four practical methods: a browser tool with no upload, the Windows bui"
+  },
+  {
+    "start": 101.45,
+    "end": 104.62,
+    "text": "Method one, online with no upload."
+  },
+  {
+    "start": 104.62,
+    "end": 119.42,
+    "text": "The SammaPix ZIP Creator builds the archive directly in your browser using JavaS"
+  },
+  {
+    "start": 119.42,
+    "end": 137.33,
+    "text": "To use it: open the ZIP Creator, drag your files or a whole folder onto the page"
+  },
+  {
+    "start": 137.33,
+    "end": 140.18,
+    "text": "Method two, Windows built in."
+  },
+  {
+    "start": 140.18,
+    "end": 161.74,
+    "text": "Windows has made ZIP files since Windows XP. Select your files or folder, right "
+  },
+  {
+    "start": 161.74,
+    "end": 164.5,
+    "text": "Method three, Mac built in."
+  },
+  {
+    "start": 164.5,
+    "end": 184.08,
+    "text": "On a Mac, select your items in Finder, right click, and choose Compress. The arc"
+  },
+  {
+    "start": 184.08,
+    "end": 187.25,
+    "text": "Method four, 7-Zip or Keka."
+  },
+  {
+    "start": 187.25,
+    "end": 202.25,
+    "text": "When you need a password protected ZIP or the smallest possible file, install a "
+  },
+  {
+    "start": 202.25,
+    "end": 205.46,
+    "text": "How to zip a folder and keep the structure."
+  },
+  {
+    "start": 205.46,
+    "end": 232.99,
+    "text": "Zipping a folder preserves its internal structure: subfolders, nesting, and file"
+  },
+  {
+    "start": 232.99,
+    "end": 235.68,
+    "text": "Can you password protect a ZIP?"
+  },
+  {
+    "start": 235.68,
+    "end": 261.91,
+    "text": "Yes, but not with the built in tools. Neither the Windows right click zipper nor"
+  },
+  {
+    "start": 261.91,
+    "end": 265.2,
+    "text": "ZIP versus 7z versus RAR."
+  },
+  {
+    "start": 265.2,
+    "end": 290.23,
+    "text": "Choose ZIP when the recipient could be on any device. It opens natively everywhe"
+  },
+  {
+    "start": 290.23,
+    "end": 292.85,
+    "text": "Common problems and fixes."
+  },
+  {
+    "start": 292.85,
+    "end": 317.69,
+    "text": "If the ZIP is not smaller than the originals, that is expected for already compr"
+  },
+  {
+    "start": 317.69,
+    "end": 320.98,
+    "text": "Before you zip, shrink the files first."
+  },
+  {
+    "start": 320.98,
+    "end": 341.9,
+    "text": "Since photos and PDFs barely shrink inside a ZIP, the real size savings come fro"
+  }
+]

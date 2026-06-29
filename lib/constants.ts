@@ -84,6 +84,7 @@ export const TOOL_SLUGS = [
   "webp-to-png",
   "unrar",
   "open-7z",
+  "zip-creator",
   "raw-converter",
   "pdf-split",
   "blur-censor",
@@ -220,6 +221,7 @@ export const BLOG_SLUGS = [
   "image-compression-statistics-2026",
   "how-to-open-rar-files-on-mac",
   "how-to-open-7z-files-on-mac",
+  "how-to-create-a-zip-file-online-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
