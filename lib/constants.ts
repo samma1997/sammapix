@@ -228,6 +228,7 @@ export const BLOG_SLUGS = [
   "how-to-batch-rename-photos-and-files-online",
   "how-to-convert-png-to-jpg-free-no-upload",
   "how-to-convert-webp-to-jpg-free-no-upload",
+  "how-to-combine-jpg-images-into-one-pdf",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
