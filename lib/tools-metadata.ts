@@ -397,7 +397,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     slug: "/tools/jpg-to-pdf",
     category: "optimize",
     relatedTools: ["pdf-to-image", "compress", "resizepack", "croproatio"],
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: ["how-to-combine-jpg-images-into-one-pdf", "merge-pdfs-privately-no-upload"],
   },
   jxl: {
     id: "jxl",

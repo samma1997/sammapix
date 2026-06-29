@@ -225,6 +225,16 @@ export default function JpgToPdfPage() {
               </div>
             ))}
           </div>
+          <p className="text-sm text-[#737373] leading-relaxed text-center mt-8 max-w-2xl mx-auto">
+            Combining scans or receipts into one file? Our guide on{" "}
+            <Link
+              href="/blog/how-to-combine-jpg-images-into-one-pdf"
+              className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]"
+            >
+              how to combine multiple JPGs into one PDF
+            </Link>{" "}
+            covers page order, bulk batches, and keeping the file small enough to email.
+          </p>
         </section>
 
         {/* FAQ */}
