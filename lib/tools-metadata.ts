@@ -55,6 +55,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["webp", "png-to-jpg", "compress", "heic"],
     relatedBlogSlugs: [
+      "how-to-convert-webp-to-jpg-free-no-upload",
       "png-to-jpg-vs-webp-2026",
       "best-image-format-for-web-2026",
       "compress-images-without-losing-quality",
