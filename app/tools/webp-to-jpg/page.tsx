@@ -222,6 +222,17 @@ export default function WebpToJpgPage() {
             </Link>
             .
           </p>
+          <p className="text-sm text-[#737373] leading-relaxed mt-4">
+            Wondering why every image you download is a .webp lately, or how to handle it in
+            Photoshop? Read{" "}
+            <Link
+              href="/blog/how-to-convert-webp-to-jpg-free-no-upload"
+              className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]"
+            >
+              How to Convert WebP to JPG (Free, No Upload)
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

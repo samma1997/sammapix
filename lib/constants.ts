@@ -227,6 +227,7 @@ export const BLOG_SLUGS = [
   "what-is-a-jxl-file-how-to-open-convert",
   "how-to-batch-rename-photos-and-files-online",
   "how-to-convert-png-to-jpg-free-no-upload",
+  "how-to-convert-webp-to-jpg-free-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
