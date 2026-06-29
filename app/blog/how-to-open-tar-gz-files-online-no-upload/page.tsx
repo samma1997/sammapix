@@ -5,7 +5,7 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "How to Open tar.gz Files (Windows, Mac & Online) — 2026",
+  title: "How to Open tar.gz Files (Windows, Mac & Online) - 2026",
   description:
     "Open and extract .tar.gz, .tgz, .tar and .gz files. The fastest no-install method (browser, no upload), plus the Windows tar command, 7-Zip, and the Mac double-click. Updated 2026.",
   alternates: { canonical: `${APP_URL}/blog/how-to-open-tar-gz-files-online-no-upload` },
@@ -315,10 +315,10 @@ gunzip file.gz`}</pre>
           tar vs gz vs tar.gz vs tgz
         </h2>
         <ul className="mb-4">
-          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.tar</strong> — a bundle of files, not compressed.</li>
-          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.gz</strong> — a single gzip-compressed file (often one .tar, but can be any file).</li>
-          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.tar.gz</strong> — a tar bundle compressed with gzip. The common case.</li>
-          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.tgz</strong> — exactly the same as .tar.gz, just a shorter extension.</li>
+          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.tar</strong> - a bundle of files, not compressed.</li>
+          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.gz</strong> - a single gzip-compressed file (often one .tar, but can be any file).</li>
+          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.tar.gz</strong> - a tar bundle compressed with gzip. The common case.</li>
+          <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc"><strong className="text-gray-800 dark:text-[#E5E5E5]">.tgz</strong> - exactly the same as .tar.gz, just a shorter extension.</li>
         </ul>
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
           You will also see .tar.bz2 (bzip2) and .tar.xz (xz), which work the same way with stronger compression. The{" "}

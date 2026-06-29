@@ -7,7 +7,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "How to Create a ZIP File Online (Free, No Upload) — 2026",
+  title: "How to Create a ZIP File Online (Free, No Upload) - 2026",
   description:
     "Make a ZIP file online in your browser without uploading anything. Plus the built-in Windows and Mac methods, how to zip a folder, and when to use ZIP vs 7z. Updated 2026.",
   alternates: {
@@ -405,14 +405,14 @@ export default function HowToCreateZipOnlinePage() {
         </h2>
         <ul className="mb-4">
           <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-            <strong className="text-gray-800 dark:text-[#E5E5E5]">ZIP</strong> — choose it when the recipient could be on any device. It opens natively everywhere and is the default for email, chat, and upload forms.
+            <strong className="text-gray-800 dark:text-[#E5E5E5]">ZIP</strong> - choose it when the recipient could be on any device. It opens natively everywhere and is the default for email, chat, and upload forms.
           </li>
           <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-            <strong className="text-gray-800 dark:text-[#E5E5E5]">7z</strong> — choose it for maximum compression (software, source code, large text). The catch: macOS and Windows cannot open it without extra software. If you receive one, our{" "}
+            <strong className="text-gray-800 dark:text-[#E5E5E5]">7z</strong> - choose it for maximum compression (software, source code, large text). The catch: macOS and Windows cannot open it without extra software. If you receive one, our{" "}
             <Link href="/tools/open-7z" className="text-[#6366F1] hover:underline">Open 7z tool</Link> handles it in the browser.
           </li>
           <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
-            <strong className="text-gray-800 dark:text-[#E5E5E5]">RAR</strong> — common on Windows, with strong multi-volume support, but proprietary and not natively openable. Received one? Use our{" "}
+            <strong className="text-gray-800 dark:text-[#E5E5E5]">RAR</strong> - common on Windows, with strong multi-volume support, but proprietary and not natively openable. Received one? Use our{" "}
             <Link href="/tools/unrar" className="text-[#6366F1] hover:underline">Open RAR tool</Link>.
           </li>
         </ul>
