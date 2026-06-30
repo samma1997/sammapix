@@ -243,6 +243,16 @@ Welcome to today's tutorial.
 Today we are going to cover video transcription.`}
             </pre>
           </div>
+          <p className="text-sm text-[#737373] leading-relaxed text-center mt-8 max-w-2xl mx-auto">
+            New to subtitles? Our guide on{" "}
+            <Link
+              href="/blog/how-to-transcribe-video-generate-subtitles-free"
+              className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]"
+            >
+              how to transcribe a video and generate SRT subtitles
+            </Link>{" "}
+            explains the SRT format and how to add the captions to your video.
+          </p>
         </div>
       </section>
 
