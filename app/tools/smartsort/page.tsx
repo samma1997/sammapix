@@ -272,6 +272,19 @@ export default function SmartSortPage() {
 
       <HowToUse toolName="SmartSort" steps={howToSteps} proTip={proTip} />
 
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-10">
+        <p className="text-sm text-[#737373] leading-relaxed text-center">
+          Want the full workflow? Read{" "}
+          <Link
+            href="/blog/how-to-organize-photos-by-category-with-ai"
+            className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]"
+          >
+            how to automatically organize photos by category with AI
+          </Link>
+          , including what to do after sorting.
+        </p>
+      </section>
+
       <RelatedTools toolId="smartsort" />
 
       {/* FAQ */}

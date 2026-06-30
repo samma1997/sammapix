@@ -298,11 +298,11 @@ export const TOOLS: Record<string, ToolMeta> = {
   transcribe: {
     id: "transcribe",
     name: "Transcribe",
-    shortDesc: "Extract text from images with OCR",
+    shortDesc: "Transcribe video or audio to text and SRT subtitles",
     slug: "/tools/transcribe",
     category: "ai",
     relatedTools: ["image-to-text", "blogdrop", "ai-rename", "alt-text"],
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: ["how-to-transcribe-video-generate-subtitles-free"],
   },
   "image-to-text": {
     id: "image-to-text",
@@ -332,7 +332,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     slug: "/tools/smartsort",
     category: "ai",
     relatedTools: ["ai-rename", "geosort", "cull", "batchname"],
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: ["how-to-organize-photos-by-category-with-ai"],
   },
   croproatio: {
     id: "croproatio",

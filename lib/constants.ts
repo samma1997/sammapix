@@ -229,6 +229,8 @@ export const BLOG_SLUGS = [
   "how-to-convert-png-to-jpg-free-no-upload",
   "how-to-convert-webp-to-jpg-free-no-upload",
   "how-to-combine-jpg-images-into-one-pdf",
+  "how-to-organize-photos-by-category-with-ai",
+  "how-to-transcribe-video-generate-subtitles-free",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
