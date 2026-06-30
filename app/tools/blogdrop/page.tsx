@@ -173,6 +173,16 @@ export default function BlogDropPage() {
               </div>
             ))}
           </div>
+          <p className="text-sm text-[#737373] leading-relaxed text-center mt-8 max-w-2xl mx-auto">
+            Not sure what dimensions to use? Read{" "}
+            <Link
+              href="/blog/what-size-should-blog-images-be"
+              className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]"
+            >
+              what size blog images should be
+            </Link>{" "}
+            for the exact width, file size, and format to aim for.
+          </p>
         </div>
       </section>
 

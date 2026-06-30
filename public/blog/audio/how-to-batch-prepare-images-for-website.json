@@ -1,0 +1,52 @@
+[
+  {
+    "start": 0,
+    "end": 3,
+    "text": "The four jobs of a web-ready image."
+  },
+  {
+    "start": 3,
+    "end": 40.61,
+    "text": "A camera original is not a web image. Turning one into the other is really four "
+  },
+  {
+    "start": 40.61,
+    "end": 42.98,
+    "text": "The order that matters."
+  },
+  {
+    "start": 42.98,
+    "end": 75.02,
+    "text": "Order changes the result. Resize first. Most of an image's weight comes from its"
+  },
+  {
+    "start": 75.02,
+    "end": 77.86,
+    "text": "Running all four in one pass."
+  },
+  {
+    "start": 77.86,
+    "end": 99.79,
+    "text": "Doing this manually means four tools and four exports per image, which is fine f"
+  },
+  {
+    "start": 99.79,
+    "end": 102.89,
+    "text": "Why renaming belongs in the pipeline."
+  },
+  {
+    "start": 102.89,
+    "end": 135,
+    "text": "Renaming is the step people drop, because it feels separate from performance. It"
+  },
+  {
+    "start": 135,
+    "end": 137.88,
+    "text": "When a pipeline beats single tools."
+  },
+  {
+    "start": 137.88,
+    "end": 160.51,
+    "text": "A pipeline is for bulk preparation: a batch of product shots before a store uplo"
+  }
+]
