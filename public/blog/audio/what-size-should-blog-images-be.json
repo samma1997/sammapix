@@ -1,0 +1,67 @@
+[
+  {
+    "start": 0,
+    "end": 2.04,
+    "text": "The short answer."
+  },
+  {
+    "start": 2.04,
+    "end": 25.34,
+    "text": "A blog image has three numbers worth getting right: how wide it is, how heavy th"
+  },
+  {
+    "start": 25.34,
+    "end": 39.96,
+    "text": "For a featured or hero image, which is shown larger, go 1600 to 2000 pixels wide"
+  },
+  {
+    "start": 39.96,
+    "end": 42.84,
+    "text": "Width: how many pixels wide."
+  },
+  {
+    "start": 42.84,
+    "end": 76.22,
+    "text": "The trick is to match the image width to the space it actually fills, then accou"
+  },
+  {
+    "start": 76.22,
+    "end": 79.32,
+    "text": "File size: how many kilobytes."
+  },
+  {
+    "start": 79.32,
+    "end": 109.49,
+    "text": "Width is about sharpness, file size is about speed, and they are separate. Even "
+  },
+  {
+    "start": 109.49,
+    "end": 112.18,
+    "text": "Format: WebP first."
+  },
+  {
+    "start": 112.18,
+    "end": 137.02,
+    "text": "For photographs on a blog, WebP is the default in 2026. It is 25 to 35 percent s"
+  },
+  {
+    "start": 137.02,
+    "end": 139.68,
+    "text": "Hitting all three in one step."
+  },
+  {
+    "start": 139.68,
+    "end": 164.4,
+    "text": "Doing this by hand means three tools: one to resize, one to compress, one to con"
+  },
+  {
+    "start": 164.4,
+    "end": 167.28,
+    "text": "The mistakes that slow blogs down."
+  },
+  {
+    "start": 167.28,
+    "end": 198.02,
+    "text": "Three mistakes account for most slow blogs. The first is uploading the raw photo"
+  }
+]

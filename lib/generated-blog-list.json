@@ -1,5 +1,19 @@
 [
   {
+    "slug": "how-to-batch-prepare-images-for-website",
+    "title": "How to Batch-Prepare Images for Your Website (Resize, Compress, WebP, Rename)",
+    "description": "Preparing a folder of images for a website means four jobs: resize, compress, convert to WebP, and give them SEO filenames. This guide shows the order",
+    "keywords": [
+      "prepare images for website",
+      "image optimization pipeline",
+      "one click image optimize",
+      "batch optimize images",
+      "resize compress rename images"
+    ],
+    "publishedDate": "2026-06-30",
+    "url": "/blog/how-to-batch-prepare-images-for-website"
+  },
+  {
     "slug": "how-to-batch-rename-photos-and-files-online",
     "title": "How to Batch Rename Photos & Files (Windows, Mac & Online)",
     "description": "Rename hundreds of photos or files at once. The fastest no-install method (browser, no upload), how to rename by EXIF date, plus the built-in Windows ",
@@ -96,6 +110,20 @@
     ],
     "publishedDate": "2026-06-30",
     "url": "/blog/what-is-a-jxl-file-how-to-open-convert"
+  },
+  {
+    "slug": "what-size-should-blog-images-be",
+    "title": "What Size Should Blog Images Be? Dimensions, File Size & Format (2026)",
+    "description": "The practical spec for blog post images: how wide they should be in pixels, how small the file should be in KB, and which format to use. Plus the one-",
+    "keywords": [
+      "what size should blog images be",
+      "blog image size",
+      "best image size for blog post",
+      "blog featured image size",
+      "blog image dimensions"
+    ],
+    "publishedDate": "2026-06-30",
+    "url": "/blog/what-size-should-blog-images-be"
   },
   {
     "slug": "how-to-create-a-zip-file-online-no-upload",

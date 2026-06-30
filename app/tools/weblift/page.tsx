@@ -173,6 +173,16 @@ export default function WebLiftPage() {
               </div>
             ))}
           </div>
+          <p className="text-sm text-[#737373] leading-relaxed text-center mt-8 max-w-2xl mx-auto">
+            Want the full method? Read{" "}
+            <Link
+              href="/blog/how-to-batch-prepare-images-for-website"
+              className="underline underline-offset-2 decoration-[#E5E5E5] hover:decoration-[#171717] dark:hover:decoration-[#E5E5E5]"
+            >
+              how to batch-prepare images for your website
+            </Link>{" "}
+            covering resize, compress, WebP, and rename in one pass.
+          </p>
         </div>
       </section>
 

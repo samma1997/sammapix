@@ -292,6 +292,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "content",
     relatedTools: ["compress", "webp", "resizepack", "alt-text"],
     relatedBlogSlugs: [
+      "what-size-should-blog-images-be",
       "compress-images-without-losing-quality",
     ],
   },
@@ -321,6 +322,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     category: "optimize",
     relatedTools: ["compress", "webp", "resizepack", "ai-rename"],
     relatedBlogSlugs: [
+      "how-to-batch-prepare-images-for-website",
       "compress-images-without-losing-quality",
       "best-image-format-for-web-2026",
     ],
