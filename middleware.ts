@@ -365,7 +365,11 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!isProtected) {
-    const response = NextResponse.next();
+    // Expose the pathname to Server Components (root layout uses it to set
+    // <html lang> = "it" on the /it Italian section).
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-sp-pathname", pathname);
+    const response = NextResponse.next({ request: { headers: requestHeaders } });
     // Add anti-scraping headers to every response
     response.headers.set("X-Robots-Tag", "noarchive");
     return attachRefCookie(response, referralCookieResponse);

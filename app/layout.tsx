@@ -107,6 +107,11 @@ export default async function RootLayout({
   const hostname = headersList.get("host") || "";
   const isGrowthSubdomain = hostname.startsWith("growth.");
 
+  // Italian SEO section (/it) must render <html lang="it"> for correct
+  // hreflang signalling and accessibility. Pathname injected by middleware.
+  const pathname = headersList.get("x-sp-pathname") || "";
+  const htmlLang = pathname === "/it" || pathname.startsWith("/it/") ? "it" : "en";
+
   if (isGrowthSubdomain) {
     return (
       <html lang="en" className={inter.variable} suppressHydrationWarning>
@@ -125,7 +130,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}` }} />
         {/* Font is self-hosted via next/font/google — no external preconnect needed */}
