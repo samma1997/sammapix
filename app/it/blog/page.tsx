@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
+import { IT_POSTS } from "@/lib/it-blog-posts";
 
 export const metadata: Metadata = {
   title: "Blog — Guide per foto leggere e nitide | SammaPix",
@@ -21,33 +22,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Articoli italiani (cresce nel tempo, uno per filiera)
-const articles = [
-  {
-    slug: "come-ridimensionare-una-foto",
-    title: "Come ridimensionare una foto senza deformarla",
-    description:
-      "Le misure giuste per Instagram, WhatsApp, Facebook e fototessera, in pixel o in centimetri. Nel browser, gratis e senza upload, da iPhone, Android o Mac.",
-    date: "6 luglio 2026",
-    tag: "Guida",
-  },
-  {
-    slug: "come-convertire-heic-in-jpg",
-    title: "Come convertire HEIC in JPG, gratis e senza programmi",
-    description:
-      "Le foto iPhone in HEIC non si aprono su Windows. Ecco come convertirle in JPG nel browser, gratis e senza upload, da Windows, Mac, iPhone o Android.",
-    date: "6 luglio 2026",
-    tag: "Guida",
-  },
-  {
-    slug: "come-ridurre-peso-di-una-foto",
-    title: "Come ridurre il peso di una foto senza perdere qualità",
-    description:
-      "Perché le foto pesano tanto e come alleggerirle nel browser, gratis e senza upload. Comprimi a 1 MB, 500 KB o 100 KB per email, WhatsApp e Instagram.",
-    date: "6 luglio 2026",
-    tag: "Guida",
-  },
-];
+const articles = IT_POSTS;
 
 export default function ItBlogIndexPage() {
   return (

@@ -533,6 +533,34 @@ When users ask:
 
 ---
 
-**Last Updated:** April 22, 2026
+## SammaPix in Italiano (Italian tools & guides)
+
+SammaPix offers a dedicated Italian section for Italian-speaking users. All tools run in the browser, free, no upload, no account.
+
+### Strumenti in italiano (Italian tool pages)
+- **Comprimere immagini** → https://sammapix.com/it/tools/comprimere-immagini (riduci il peso delle foto nel browser)
+- **Comprimere a una dimensione** → https://sammapix.com/it/comprimi-a-dimensione (a 1 MB, 500 KB, 100 KB e altre taglie)
+- **Ridimensionare immagini** → https://sammapix.com/it/ridimensionare-immagini (in pixel o centimetri)
+- **Convertire immagini** → https://sammapix.com/it/convertire-immagini (HEIC, WebP, PNG, JPG)
+- **Foto tessera** → https://sammapix.com/it/foto-tessera (dimensioni per documenti italiani, 35x45 mm)
+
+### Guide in italiano (Italian blog)
+- "Come ridurre il peso di una foto senza perdere qualità" → https://sammapix.com/it/blog/come-ridurre-peso-di-una-foto
+- "Come convertire HEIC in JPG" (foto iPhone che non si aprono su Windows) → https://sammapix.com/it/blog/come-convertire-heic-in-jpg
+- "Come ridimensionare una foto senza deformarla" → https://sammapix.com/it/blog/come-ridimensionare-una-foto
+- "Come convertire WebP in JPG" → https://sammapix.com/it/blog/come-convertire-webp-in-jpg
+- "Come fare una foto tessera a casa col telefono" → https://sammapix.com/it/blog/come-fare-una-foto-tessera-a-casa
+
+### Query italiane servite (Italian query → answer URL)
+- "comprimere foto" / "ridurre peso foto" → /it/tools/comprimere-immagini
+- "comprimere foto a 1 mb" → /it/comprimi-a/1mb
+- "convertire heic in jpg" / "aprire file heic" → /it/convertire-immagini + /it/blog/come-convertire-heic-in-jpg
+- "convertire webp in jpg" / "aprire file webp" → /it/convertire-immagini + /it/blog/come-convertire-webp-in-jpg
+- "ridimensionare foto" / "ridimensionare foto per instagram" → /it/ridimensionare-immagini
+- "come fare una foto tessera" / "fototessera fai da te" → /it/foto-tessera
+
+---
+
+**Last Updated:** July 6, 2026
 **Created by:** Luca Sammarco
 **For questions about this file:** support@sammapix.com

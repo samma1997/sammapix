@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
+    "Free Image Upscaler That Beats $199 Topaz (2026 Tested)",
   description:
-    "Topaz Gigapixel costs $99-199 in 2026. We tested 7 free alternatives on 50 real photos — one beats Topaz on faces. Full pricing + benchmark inside.",
+    "Topaz costs $199/year. 7 free upscalers tested on real photos. 2x/4x upscaling in browser, no upload. Upscayl + SammaPix best quality.",
   alternates: {
     canonical: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
   },
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "real esrgan alternative",
   ],
   openGraph: {
-    title: "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
+    title: "Free Image Upscaler That Beats $199 Topaz (2026 Tested)",
     description:
-      "Topaz Gigapixel costs $99-199 in 2026. We tested 7 free alternatives on 50 real photos — one beats Topaz on faces. Full benchmark inside.",
+      "Topaz $199/year. 7 free upscalers tested on real photos. One beats Topaz on faces, costs $0.",
     url: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
     type: "article",
     publishedTime: "2026-04-10",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Topaz Gigapixel AI: Pricing 2026 + 7 Free Alternatives Tested",
+    title: "Free Image Upscaler That Beats $199 Topaz (2026 Tested)",
     description:
-      "Topaz Gigapixel pricing 2026 + 7 free alternatives tested on 50 photos. One beats Topaz on faces.",
+      "7 free upscalers tested. Beats $199 Topaz. Upscayl + SammaPix get best face/detail quality.",
     creator: "@lucasammarco",
   },
 };

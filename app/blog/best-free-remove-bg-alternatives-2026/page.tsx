@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
+  title: "Free Background Remover AI: Save \u20AC9/Month vs Remove.bg",
   description:
-    "Remove.bg charges \u20AC0.36 per image. Here are 7 free alternatives for background removal tested on real photos \u2014 product shots, portraits, and complex edges.",
+    "Remove.bg \u20AC0.36/image. 7 free alternatives tested. AI background removal in browser, no upload, no signup. Tested on real photos.",
   alternates: {
     canonical: `${APP_URL}/blog/best-free-remove-bg-alternatives-2026`,
   },
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     "background remover no signup",
   ],
   openGraph: {
-    title: "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
-    description: "Remove.bg charges per image. 7 free alternatives tested on real photos with quality comparison.",
+    title: "Free Background Remover AI: Save \u20AC9/Month vs Remove.bg",
+    description: "Remove.bg \u20AC9/month. 7 free alternatives tested on real photos. Browser-based, no upload.",
     url: `${APP_URL}/blog/best-free-remove-bg-alternatives-2026`,
     type: "article",
     publishedTime: "2026-04-12",
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "7 Free Remove.bg Alternatives Tested 2026 (Real Photos)",
-    description: "Remove.bg charges per image. 7 free alternatives tested on real photos.",
+    title: "Free Background Remover AI: Save \u20AC9/Month vs Remove.bg",
+    description: "7 free AI background removers tested. No upload, browser-based. Save \u20AC9/month.",
     creator: "@lucasammarco",
   },
 };

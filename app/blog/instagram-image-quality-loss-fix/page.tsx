@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
+    "Upload Perfectly Sharp Instagram Photos, 30-Second Fix (2026)",
   description:
-    "Instagram compresses your photos up to 13x. Learn the exact settings — dimensions, format, color profile — to upload photos that actually look sharp. Free fix in 30 seconds.",
+    "Instagram compresses 13x quality loss. Upload perfectly sharp: 1080px JPEG 90%, sRGB, highest quality setting. Free browser tool included.",
   alternates: {
     canonical: `${APP_URL}/blog/instagram-image-quality-loss-fix`,
   },
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "instagram photo blurry after upload",
   ],
   openGraph: {
-    title: "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
+    title: "Upload Perfectly Sharp Instagram Photos, 30-Second Fix (2026)",
     description:
-      "Instagram compresses your photos up to 13x. Here are the exact settings to upload sharp photos every time.",
+      "Instagram compresses 13x quality loss. Upload perfectly sharp: 1080px JPEG 90% sRGB.",
     url: `${APP_URL}/blog/instagram-image-quality-loss-fix`,
     type: "article",
     publishedTime: "2026-04-11",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Why Instagram Ruins Photo Quality + 30-Second Fix [2026]",
+    title: "Upload Perfectly Sharp Instagram Photos, 30-Second Fix (2026)",
     description:
-      "Instagram compresses photos up to 13x. The exact settings to keep them sharp — free fix.",
+      "Instagram compresses 13x. Upload perfectly sharp: 1080px JPEG 90% quality.",
     creator: "@lucasammarco",
   },
 };

@@ -236,6 +236,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "come-ridurre-peso-di-una-foto",
     "come-convertire-heic-in-jpg",
     "come-ridimensionare-una-foto",
+    "come-convertire-webp-in-jpg",
+    "come-fare-una-foto-tessera-a-casa",
   ].map((slug) => ({
     url: `${APP_URL}/it/blog/${slug}`,
     lastModified: new Date(),

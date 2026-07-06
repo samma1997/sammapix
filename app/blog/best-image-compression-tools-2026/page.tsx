@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)",
+    "6 Free Image Compressors Tested: Which Wins 2026?",
   description:
-    "We tested 6 free image compressors on real photos: SammaPix, TinyPNG, Squoosh, ImageOptim, Compressor.io, iLoveIMG. Compression %, quality, speed, privacy compared — the 3 we recommend depend on your use case.",
+    "6 tools tested: SammaPix, TinyPNG, Squoosh, more. Quality, speed, privacy, no-upload options compared. Browser-based best.",
   alternates: {
     canonical: `${APP_URL}/blog/best-image-compression-tools-2026`,
   },
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "online image compressor comparison",
   ],
   openGraph: {
-    title: "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)",
+    title: "6 Free Image Compressors Tested: Which Wins 2026?",
     description:
-      "6 free image compressors tested on real photos. Compression %, quality, speed, privacy compared. The 3 we recommend depend on your use case.",
+      "6 tools tested on real photos. Quality, speed, privacy, batch limits compared. See which one wins for your needs.",
     url: `${APP_URL}/blog/best-image-compression-tools-2026`,
     type: "article",
     publishedTime: "2026-01-15",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Image Compression Tools 2026: 6 Tested (TinyPNG Isn't #1)",
+    title: "6 Free Image Compressors Tested: Which Wins 2026?",
     description:
-      "6 image compressors tested. TinyPNG isn't #1. The 3 we actually recommend (depending on your use case).",
+      "6 tools tested on real photos. Quality, speed, privacy compared. Browser-based wins.",
     creator: "@lucasammarco",
   },
 };

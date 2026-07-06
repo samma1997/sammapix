@@ -14,6 +14,7 @@ import TextToSpeech from "./TextToSpeech";
 import ArticleSummary from "./ArticleSummary";
 import ShareBar from "./ShareBar";
 import RelatedArticles from "./RelatedArticles";
+import ItRelatedArticles from "./ItRelatedArticles";
 import AuthorBox from "./AuthorBox";
 
 interface BlogArticleLayoutProps {
@@ -134,12 +135,14 @@ export default function BlogArticleLayout({
             {/* CTA */}
             {ctaBlock && <div className="mt-12">{ctaBlock}</div>}
 
-            {/* Related articles (EN only for now: no Italian siblings yet) */}
-            {!isIt && (
-              <div className="mt-12">
+            {/* Related articles: Italian articles link to Italian siblings */}
+            <div className="mt-12">
+              {isIt ? (
+                <ItRelatedArticles currentSlug={slug} />
+              ) : (
                 <RelatedArticles currentSlug={slug} tags={tags} />
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {/* TOC sidebar - desktop only */}

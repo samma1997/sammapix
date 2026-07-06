@@ -5,9 +5,9 @@ import { APP_URL, TOOL_COUNT } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Batch Compress Images Free — No Signup, No Upload to Server (2026)",
+  title: "Batch Compress 20 Images Free, No Signup, No Upload",
   description:
-    "Compress multiple images at once without signing up or uploading to any server. Browser-based batch compression keeps your files private and works offline.",
+    "Compress 20 images in browser, no server upload, no account, no monthly limits. Private, fast, 50-80% smaller file sizes.",
   alternates: {
     canonical: `${APP_URL}/blog/batch-compress-images-no-signup-free`,
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     "compress multiple images at once",
   ],
   openGraph: {
-    title: "Batch Compress Images Free — No Signup, No Upload to Server (2026)",
+    title: "Batch Compress 20 Images Free, No Signup, No Upload",
     description:
-      "Most free image compressors upload your files to their servers. Browser-based tools like SammaPix process everything locally with zero privacy risk.",
+      "Compress up to 20 images at once. No server upload, no signup, no limits. Browser-based, completely private.",
     url: `${APP_URL}/blog/batch-compress-images-no-signup-free`,
     type: "article",
     publishedTime: "2026-04-05",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Batch Compress Images Free — No Signup, No Upload to Server (2026)",
+    title: "Batch Compress 20 Images Free, No Signup, No Upload",
     description:
-      "Most free image compressors upload your files to their servers. Browser-based tools process everything locally with zero privacy risk.",
+      "Compress 20 images free, no server upload, no account needed. Browser-based, private, 50-80% smaller.",
     creator: "@lucasammarco",
   },
 };

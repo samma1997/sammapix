@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Compress Images Without Losing Quality: 5 Methods Tested",
+  title: "Compress Images 60% Smaller Without Visible Quality Loss",
   description:
-    "How to compress images without losing quality: lossy vs lossless, the best quality settings per format, and a practical workflow for web optimization.",
+    "Quality 78-82 cuts 60-80% file size, imperceptible loss. Lossy vs lossless explained. Free browser tool, no upload required.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-without-losing-quality`,
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     "reduce image file size",
   ],
   openGraph: {
-    title: "Compress Images Without Losing Quality: 5 Methods Tested",
+    title: "Compress Images 60% Smaller Without Visible Quality Loss",
     description:
-      "The complete guide to image compression: lossy vs lossless, PNG vs JPEG vs WebP, quality settings, and how to reduce file size without visible quality loss.",
+      "Quality 78-82 gives 60-80% file size reduction with no visible difference. Lossy vs lossless, JPEG vs PNG vs WebP.",
     url: `${APP_URL}/blog/compress-images-without-losing-quality`,
     type: "article",
     publishedTime: "2026-03-07",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress Images Without Losing Quality: 5 Methods Tested",
+    title: "Compress Images 60% Smaller Without Visible Quality Loss",
     description:
-      "The complete guide to image compression: lossy vs lossless, quality settings, and the best formats for every use case.",
+      "Quality 78-82 reduces file size 60-80% with no visible difference. Best formats for web, SEO.",
     creator: "@lucasammarco",
   },
 };
