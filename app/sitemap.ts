@@ -165,6 +165,68 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // Italian (it) translated pages. Additive: English URLs above are unchanged.
+  // Each entry declares its language alternates for correct hreflang in the sitemap.
+  const italianPages: MetadataRoute.Sitemap = [
+    {
+      en: "",
+      it: "/it",
+    },
+    {
+      en: "/tools/compress",
+      it: "/it/tools/comprimere-immagini",
+    },
+    {
+      en: "/compress-to",
+      it: "/it/comprimi-a-dimensione",
+    },
+    {
+      en: "/resize",
+      it: "/it/ridimensionare-immagini",
+    },
+    {
+      en: "/convert",
+      it: "/it/convertire-immagini",
+    },
+    {
+      en: "/about",
+      it: "/it/chi-siamo",
+    },
+    {
+      en: "/portfolio",
+      it: "/it/portfolio",
+    },
+    {
+      en: "/passport-photo",
+      it: "/it/foto-tessera",
+    },
+  ].map(({ en, it }) => ({
+    url: `${APP_URL}${it}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+    alternates: {
+      languages: {
+        en: `${APP_URL}${en}`,
+        it: `${APP_URL}${it}`,
+      },
+    },
+  }));
+
+  // Italian compress-to size leaf pages (programmatic, from getAllTargets)
+  const italianCompressToLeaf: MetadataRoute.Sitemap = getAllTargets().map((t) => ({
+    url: `${APP_URL}/it/comprimi-a/${t.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+    alternates: {
+      languages: {
+        en: `${APP_URL}/compress-to/${t.slug}`,
+        it: `${APP_URL}/it/comprimi-a/${t.slug}`,
+      },
+    },
+  }));
+
   // VS comparison pages (12 total)
   const vsPages: MetadataRoute.Sitemap = [
     "/vs/tinypng",
@@ -324,6 +386,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages,
     ...toolPages,
+    ...italianPages,
+    ...italianCompressToLeaf,
     ...vsPages,
     ...blogPages,
     ...portfolioPages,

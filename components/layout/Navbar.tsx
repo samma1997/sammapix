@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { counterpartPath, localeFromPath } from "@/lib/i18n-routes";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -12,6 +14,10 @@ export default function Navbar() {
   const { data: session, status } = useSession();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isIt = localeFromPath(pathname) === "it";
+  const alt = counterpartPath(pathname);
+  const t = (en: string, it: string) => (isIt ? it : en);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -136,10 +142,10 @@ export default function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           <Link href="/tools" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            Tools
+            {t("Tools", "Strumenti")}
           </Link>
           <Link href="/pricing" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            Pricing
+            {t("Pricing", "Prezzi")}
           </Link>
           <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             Blog
@@ -148,7 +154,7 @@ export default function Navbar() {
             Portfolio
           </Link>
           <Link href="/about" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
-            About
+            {t("About", "Chi siamo")}
           </Link>
         </nav>
 
@@ -166,6 +172,15 @@ export default function Navbar() {
             </svg>
           </a>
           <ThemeToggle />
+          {alt && (
+            <Link
+              href={alt.href}
+              aria-label={alt.locale === "it" ? "Passa all'italiano" : "Switch to English"}
+              className="px-2 py-1 text-xs font-medium text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] border border-gray-200 dark:border-[#333] rounded transition-colors"
+            >
+              {alt.locale.toUpperCase()}
+            </Link>
+          )}
           {status === "authenticated" && session ? (
             <Link
               href="/dashboard"
@@ -180,13 +195,13 @@ export default function Navbar() {
             </Link>
           ) : (
             <Link href="/auth/signin">
-              <Button variant="ghost" size="sm">Sign in</Button>
+              <Button variant="ghost" size="sm">{t("Sign in", "Accedi")}</Button>
             </Link>
           )}
           {status !== "authenticated" && (
             <Link href="/api/auth/signin">
               <Button variant="primary" size="sm" className="gap-1">
-                Try free
+                {t("Try free", "Prova gratis")}
                 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
               </Button>
             </Link>
@@ -222,11 +237,11 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] animate-slide-down">
           <div className="px-4 py-3 flex flex-col gap-1">
-            <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Tools</Link>
-            <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Pricing</Link>
+            <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("Tools", "Strumenti")}</Link>
+            <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("Pricing", "Prezzi")}</Link>
             <Link href="/blog" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Blog</Link>
             <Link href="/portfolio" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Portfolio</Link>
-            <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>About</Link>
+            <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("About", "Chi siamo")}</Link>
 
             <div className="pt-2 border-t border-gray-100 dark:border-[#2A2A2A] mt-1 flex gap-2">
               {status === "authenticated" ? (
@@ -235,7 +250,7 @@ export default function Navbar() {
                 </Link>
               ) : (
                 <Link href="/auth/signin" className="flex-1" onClick={() => setMobileOpen(false)}>
-                  <Button variant="secondary" size="sm" className="w-full">Sign in</Button>
+                  <Button variant="secondary" size="sm" className="w-full">{t("Sign in", "Accedi")}</Button>
                 </Link>
               )}
               {(session?.user as { plan?: string } | undefined)?.plan !== "pro" && (

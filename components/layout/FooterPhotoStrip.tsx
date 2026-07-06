@@ -18,7 +18,14 @@ interface Photo {
  *   discovery touch aimed at new and anonymous visitors).
  * Decorative + below the fold + lazy-loaded → no SEO/LCP cost.
  */
-export default function FooterPhotoStrip({ photos }: { photos: Photo[] }) {
+export default function FooterPhotoStrip({
+  photos,
+  locale = "en",
+}: {
+  photos: Photo[];
+  locale?: string;
+}) {
+  const isIt = locale === "it";
   const { status } = useSession();
   // Deterministic first 6 for the initial render (SSR + first client paint),
   // then a random 6 after mount to avoid a hydration mismatch.
@@ -44,18 +51,19 @@ export default function FooterPhotoStrip({ photos }: { photos: Photo[] }) {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
         <div>
           <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5]">
-            Photography by Luca
+            {isIt ? "Fotografie di Luca" : "Photography by Luca"}
           </p>
           <p className="mt-1 text-[13px] text-gray-400 dark:text-[#737373] max-w-md leading-relaxed">
-            I&apos;m a travel photographer. I built these tools to handle my own
-            photos, here are a few of them.
+            {isIt
+              ? "Sono un fotografo di viaggio. Ho costruito questi strumenti per gestire le mie foto, qui ne trovi alcune."
+              : "I'm a travel photographer. I built these tools to handle my own photos, here are a few of them."}
           </p>
         </div>
         <Link
           href="/portfolio"
           className="inline-flex items-center gap-1.5 text-[13px] font-medium text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-white transition-colors duration-150 shrink-0"
         >
-          See the full portfolio
+          {isIt ? "Guarda tutto il portfolio" : "See the full portfolio"}
           <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
         </Link>
       </div>

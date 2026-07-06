@@ -2,6 +2,7 @@
 
 import React, { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
+import { usePathname } from "next/navigation";
 import { Upload, ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ACCEPTED_MIME_TYPES, PLAN_LIMITS } from "@/lib/constants";
@@ -26,6 +27,7 @@ export default function DropZone({ onFilesAdded, className, toolName = "compress
   const limits = useMemo(() => PLAN_LIMITS[plan] ?? PLAN_LIMITS.free, [plan]);
   const maxFiles = limits.maxFiles;
   const maxFileSize = limits.maxFileSizeBytes;
+  const isIt = usePathname().startsWith("/it");
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -95,33 +97,33 @@ export default function DropZone({ onFilesAdded, className, toolName = "compress
       <div className="text-center">
         {isDragReject ? (
           <p className="text-sm font-medium text-error">
-            File type not supported
+            {isIt ? "Tipo di file non supportato" : "File type not supported"}
           </p>
         ) : isDragActive ? (
           <p className="text-sm font-medium text-brand">
-            Drop to upload
+            {isIt ? "Rilascia per caricare" : "Drop to upload"}
           </p>
         ) : !canAddMore ? (
           <>
             <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5]">
-              Limit reached ({maxFiles} files max{plan === "free" ? " on free plan" : ""})
+              {isIt ? `Limite raggiunto (max ${maxFiles} file${plan === "free" ? " nel piano gratuito" : ""})` : `Limit reached (${maxFiles} files max${plan === "free" ? " on free plan" : ""})`}
             </p>
             {plan === "free" && (
               <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-                <a href="/dashboard/upgrade" className="text-brand hover:underline">Upgrade to Pro</a> to process up to {PLAN_LIMITS.pro.maxFiles} files
+                <a href="/dashboard/upgrade" className="text-brand hover:underline">{isIt ? "Passa a Pro" : "Upgrade to Pro"}</a> {isIt ? `per elaborare fino a ${PLAN_LIMITS.pro.maxFiles} file` : `to process up to ${PLAN_LIMITS.pro.maxFiles} files`}
               </p>
             )}
           </>
         ) : (
           <>
             <p className="text-sm font-medium text-gray-700 dark:text-[#E5E5E5]">
-              Drop images here or{" "}
+              {isIt ? "Trascina qui le immagini o " : "Drop images here or "}
               <span className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
-                click to upload
+                {isIt ? "clicca per caricare" : "click to upload"}
               </span>
             </p>
             <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-              PNG, JPG, WebP, GIF- up to {Math.round(maxFileSize / (1024 * 1024))}MB each
+              {isIt ? `PNG, JPG, WebP, GIF, fino a ${Math.round(maxFileSize / (1024 * 1024))}MB ciascuno` : `PNG, JPG, WebP, GIF- up to ${Math.round(maxFileSize / (1024 * 1024))}MB each`}
             </p>
             <div onClick={(e) => e.stopPropagation()}>
             <ImportSourceButtons
@@ -144,11 +146,11 @@ export default function DropZone({ onFilesAdded, className, toolName = "compress
         <div className="w-full max-w-xs">
           <div className="flex items-center justify-between mb-1">
             <span className="text-xs text-gray-400 dark:text-[#737373]">
-              {items.length} / {maxFiles} files
+              {items.length} / {maxFiles} {isIt ? "file" : "files"}
             </span>
             {plan === "free" && items.length >= 3 && (
               <a href="/dashboard/upgrade" className="text-xs text-indigo-500 hover:underline font-medium">
-                Upgrade for {PLAN_LIMITS.pro.maxFiles} →
+                {isIt ? `Sblocca ${PLAN_LIMITS.pro.maxFiles} →` : `Upgrade for ${PLAN_LIMITS.pro.maxFiles} →`}
               </a>
             )}
           </div>

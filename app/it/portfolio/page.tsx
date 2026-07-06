@@ -5,38 +5,37 @@ import type { Metadata } from "next";
 import { getAllTrips } from "@/lib/destinations";
 import { APP_URL } from "@/lib/constants";
 
+const EN_URL = `${APP_URL}/portfolio`;
+const IT_URL = `${APP_URL}/it/portfolio`;
+
 export const metadata: Metadata = {
-  title: "Portfolio - Luca Sammarco Photography",
+  title: "Portfolio - Fotografia di Luca Sammarco",
   description:
-    "Photography portfolio organized by travel destination. 71 curated travel photographs from Sri Lanka with stories from each journey.",
+    "Portfolio fotografico organizzato per destinazione di viaggio. Fotografie di viaggio curate da Sri Lanka, Bali, Giappone e altri paesi, con una storia per ogni viaggio.",
   alternates: {
-    canonical: `${APP_URL}/portfolio`,
-    languages: {
-      en: `${APP_URL}/portfolio`,
-      it: `${APP_URL}/it/portfolio`,
-      "x-default": `${APP_URL}/portfolio`,
-    },
+    canonical: IT_URL,
+    languages: { en: EN_URL, it: IT_URL, "x-default": EN_URL },
   },
   openGraph: {
-    title: "Portfolio - Luca Sammarco Photography",
+    title: "Portfolio - Fotografia di Luca Sammarco",
     description:
-      "Photography portfolio organized by travel destination. 71 curated travel photographs from Sri Lanka.",
-    url: `${APP_URL}/portfolio`,
+      "Portfolio fotografico organizzato per destinazione di viaggio. Fotografie di viaggio curate da tutto il mondo.",
+    url: IT_URL,
     type: "website",
+    locale: "it_IT",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix" }],
   },
 };
 
-export default function PortfolioPage() {
+export default function PortfolioItPage() {
   const trips = getAllTrips();
 
-  // Schema JSON-LD
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    name: "Travel Photography Portfolio - Luca Sammarco",
+    name: "Portfolio di fotografia di viaggio - Luca Sammarco",
     description:
-      "A curated collection of travel photographs organized by destination, covering Asia and beyond.",
+      "Una raccolta curata di fotografie di viaggio organizzate per destinazione, tra Asia e non solo.",
     author: {
       "@type": "Person",
       name: "Luca Sammarco",
@@ -50,10 +49,7 @@ export default function PortfolioPage() {
       about: {
         "@type": "Place",
         name: t.destination,
-        containedInPlace: {
-          "@type": "Country",
-          name: t.country,
-        },
+        containedInPlace: { "@type": "Country", name: t.country },
       },
     })),
   };
@@ -67,16 +63,11 @@ export default function PortfolioPage() {
 
       <div className="py-10 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-
-          {/* Page header- minimal, stile Notion */}
           <header className="mb-10">
-            <h1 className="text-sm font-normal text-gray-400 lowercase tracking-wide">
-              portfolio
-            </h1>
+            <h1 className="text-sm font-normal text-gray-400 lowercase tracking-wide">portfolio</h1>
             <div className="mt-3 h-px bg-gray-100 w-full" />
           </header>
 
-          {/* Trip grid- fotografico, card con immagine e overlay testo */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {trips.map((trip) => (
               <TripCard key={trip.slug} trip={trip} />
@@ -88,16 +79,8 @@ export default function PortfolioPage() {
   );
 }
 
-// -----------------------------------------------------------------------------
-// TripCard- solo foto di copertina con testo sovrapposto
-// -----------------------------------------------------------------------------
 interface TripCardProps {
-  trip: {
-    slug: string;
-    destination: string;
-    startDate: string;
-    coverSrc: string;
-  };
+  trip: { slug: string; destination: string; startDate: string; coverSrc: string };
 }
 
 function TripCard({ trip }: TripCardProps) {
@@ -111,24 +94,15 @@ function TripCard({ trip }: TripCardProps) {
     >
       <Image
         src={trip.coverSrc}
-        alt={`${trip.destination} travel photography ${year}`}
+        alt={`Fotografia di viaggio a ${trip.destination} ${year}`}
         fill
         sizes="(max-width: 640px) 50vw, 33vw"
         className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.02]"
         unoptimized
       />
-
-      {/* Gradient bottom overlay */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent"
-        aria-hidden="true"
-      />
-
-      {/* Testo overlay bottom */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 right-0 px-3 pb-3">
-        <p className="text-white text-sm font-bold leading-tight">
-          {trip.destination}
-        </p>
+        <p className="text-white text-sm font-bold leading-tight">{trip.destination}</p>
         <p className="text-white/60 text-xs mt-0.5">{year}</p>
       </div>
     </Link>

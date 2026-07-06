@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
 
@@ -541,6 +542,7 @@ export default function ResizePack({
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
+  const [softUpsellOpen, setSoftUpsellOpen] = useState(false);
 
   // Processing state
   const [processingTotal, setProcessingTotal] = useState(0);
@@ -761,6 +763,19 @@ export default function ResizePack({
 
       setEntries(results);
       setUiState("done");
+
+      // Soft session-based upsell (non-blocking). La soglia in shouldShowUpsell
+      // NON scatta su un singolo resize → nessun fastidio al traffico single-image.
+      const okCount = results.filter((r) => r.resultBlob !== null).length;
+      if (okCount > 0 && !isPro) {
+        recordBatchRun("resizepack", okCount);
+        const decision = shouldShowUpsell(
+          "resizepack",
+          !!session?.user?.email,
+          isPro
+        );
+        if (decision.showModal) setSoftUpsellOpen(true);
+      }
     },
     [
       pendingFiles,
@@ -769,6 +784,8 @@ export default function ResizePack({
       widthVal,
       heightVal,
       cropOffsets,
+      isPro,
+      session,
     ]
   );
 
@@ -855,6 +872,11 @@ export default function ResizePack({
         open={zipUpsellOpen}
         onClose={() => setZipUpsellOpen(false)}
         trigger="zip"
+      />
+      <ProUpsellModal
+        open={softUpsellOpen}
+        onClose={() => setSoftUpsellOpen(false)}
+        trigger="daily"
       />
 
       {/* ── Idle: Dropzone ─────────────────────────────────────────────────── */}

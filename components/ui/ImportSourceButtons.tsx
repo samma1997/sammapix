@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useRef } from "react";
 import { FolderArchive, Loader2 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import {
   extractImagesFromZip,
   pickFromGoogleDrive,
@@ -66,6 +67,7 @@ export default function ImportSourceButtons({
   disabled = false,
 }: ImportSourceButtonsProps) {
   const [loading, setLoading] = useState<ImportSource | null>(null);
+  const isIt = usePathname().startsWith("/it");
   const zipInputRef = useRef<HTMLInputElement>(null);
 
   const driveConfigured = ENABLE_GOOGLE_DRIVE && isGoogleDriveConfigured();
@@ -155,7 +157,7 @@ export default function ImportSourceButtons({
         ) : (
           <FolderArchive className="h-3.5 w-3.5" strokeWidth={1.5} />
         )}
-        <span>Import ZIP</span>
+        <span>{isIt ? "Importa ZIP" : "Import ZIP"}</span>
       </button>
 
       {/* Google Drive button — hidden until review approved */}

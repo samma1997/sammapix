@@ -20,13 +20,20 @@ const CompressClient = dynamic(
   () => import("@/components/tools/CompressClient"),
   {
     ssr: false,
-    loading: () => (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-16">
-        <div className="border-2 border-dashed border-[#D4D4D4] dark:border-[#444] rounded-lg p-12 text-center bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-          <p className="text-sm text-[#A3A3A3]">Loading compress tool...</p>
+    loading: () => {
+      // Client-only (ssr:false), so window is available.
+      const isIt =
+        typeof window !== "undefined" && window.location.pathname.startsWith("/it");
+      return (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-16">
+          <div className="border-2 border-dashed border-[#D4D4D4] dark:border-[#444] rounded-lg p-12 text-center bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+            <p className="text-sm text-[#A3A3A3]">
+              {isIt ? "Caricamento dello strumento..." : "Loading compress tool..."}
+            </p>
+          </div>
         </div>
-      </div>
-    ),
+      );
+    },
   }
 );
 

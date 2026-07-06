@@ -38,6 +38,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: `${APP_URL}/tools/compress`,
+    languages: {
+      en: `${APP_URL}/tools/compress`,
+      it: `${APP_URL}/it/tools/comprimere-immagini`,
+      "x-default": `${APP_URL}/tools/compress`,
+    },
   },
   openGraph: {
     title: "Compress Images Online Free",

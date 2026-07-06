@@ -184,7 +184,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
-  const savePercent = Math.round((1 - 79 / (9 * 12)) * 100);
+  const savePercent = Math.round((1 - 65 / (9 * 12)) * 100);
 
   // Founding deal — render discounted price when coupon is still available.
   // Gated on real discount to avoid stale-cache fallback showing "lock $9".
@@ -647,7 +647,7 @@ export default function PricingPage() {
                 {
                   "@type": "Offer",
                   "name": "Yearly",
-                  "price": "79",
+                  "price": "65",
                   "priceCurrency": "USD",
                   "priceValidUntil": "2027-12-31",
                   "availability": "https://schema.org/InStock",

@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: `${APP_URL}/resize`,
+    languages: {
+      en: `${APP_URL}/resize`,
+      it: `${APP_URL}/it/ridimensionare-immagini`,
+      "x-default": `${APP_URL}/resize`,
+    },
   },
   openGraph: {
     title: `Resize Images for Every Platform | ${APP_NAME}`,

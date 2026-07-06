@@ -34,7 +34,14 @@ export async function generateMetadata({
     title,
     description: target.metaDescription,
     keywords: target.keywords,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      languages: {
+        en: `${APP_URL}/compress-to/${slug}`,
+        it: `${APP_URL}/it/comprimi-a/${slug}`,
+        "x-default": `${APP_URL}/compress-to/${slug}`,
+      },
+    },
     openGraph: {
       title,
       description: target.ogDescription,

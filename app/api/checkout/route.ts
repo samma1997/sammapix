@@ -194,7 +194,7 @@ export async function POST(req: NextRequest) {
       fbp,
       fbc,
       eventId,
-      customData: { currency: "USD", value: plan === "annual" ? 60 : 7 },
+      customData: { currency: "USD", value: plan === "annual" ? 65 : 9 },
     }).catch(() => {});
 
     return NextResponse.json({ url: checkoutSession.url });

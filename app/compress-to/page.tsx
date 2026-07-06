@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: `${APP_URL}/compress-to`,
+    languages: {
+      en: `${APP_URL}/compress-to`,
+      it: `${APP_URL}/it/comprimi-a-dimensione`,
+      "x-default": `${APP_URL}/compress-to`,
+    },
   },
   openGraph: {
     title: `Compress Image to Exact File Size | ${APP_NAME}`,

@@ -9,7 +9,7 @@ import FooterPhotoStrip from "@/components/layout/FooterPhotoStrip";
  * pull from (different photos on every visit). Pulled dynamically from the trips
  * so new journeys show up automatically.
  */
-function footerPhotoPool() {
+function footerPhotoPool(locale: string) {
   const trips = getAllTrips();
   const out: { src: string; alt: string }[] = [];
   for (const t of trips) {
@@ -21,7 +21,10 @@ function footerPhotoPool() {
       const photo = t.photos[i];
       out.push({
         src: photo.srcThumb,
-        alt: `${t.destination} travel photography by Luca Sammarco`,
+        alt:
+          locale === "it"
+            ? `Fotografia di viaggio a ${t.destination} di Luca Sammarco`
+            : `${t.destination} travel photography by Luca Sammarco`,
       });
     }
   }
@@ -97,8 +100,49 @@ const SOCIAL_LINKS = [
   },
 ];
 
-export default function Footer() {
-  const photoPool = footerPhotoPool();
+const FOOTER_IT: Record<string, string> = {
+  // headings
+  Tools: "Strumenti",
+  "Quick Convert": "Conversioni rapide",
+  "Resize For": "Ridimensiona per",
+  Company: "Azienda",
+  Legal: "Note legali",
+  // tool labels
+  Compress: "Comprimi",
+  "WebP Convert": "Converti WebP",
+  "HEIC Converter": "Convertitore HEIC",
+  "AI Rename": "Rinomina con AI",
+  "EXIF Remover": "Rimuovi EXIF",
+  "Film Filters": "Filtri analogici",
+  Watermark: "Filigrana",
+  "Crop & Ratio": "Ritaglia e proporzioni",
+  "Find Duplicates": "Trova duplicati",
+  "Sort by Location": "Ordina per luogo",
+  "Photo Map": "Mappa foto",
+  "Batch Resize": "Ridimensiona in blocco",
+  Cull: "Selezione scatti",
+  // quick convert
+  "HEIC to JPG": "HEIC in JPG",
+  "PNG to WebP": "PNG in WebP",
+  "JPG to WebP": "JPG in WebP",
+  "Compress to Size": "Comprimi a dimensione",
+  "All converters →": "Tutti i convertitori →",
+  // resize social
+  "Crop by Ratio": "Ritaglia per proporzioni",
+  "All sizes →": "Tutte le dimensioni →",
+  // company
+  Pricing: "Prezzi",
+  About: "Chi siamo",
+  Glossary: "Glossario",
+  // legal
+  "Privacy Policy": "Privacy",
+  "Terms of Service": "Termini di servizio",
+};
+
+export default function Footer({ locale = "en" }: { locale?: string }) {
+  const isIt = locale === "it";
+  const tr = (s: string) => (isIt && FOOTER_IT[s] ? FOOTER_IT[s] : s);
+  const photoPool = footerPhotoPool(locale);
   return (
     <footer className="border-t border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#191919]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -179,9 +223,9 @@ export default function Footer() {
             </Link>
 
             <p className="mt-3 text-xs text-gray-400 dark:text-[#737373] leading-relaxed max-w-[220px]">
-              Free image tools for everyone.
+              {isIt ? "Strumenti foto gratuiti per tutti." : "Free image tools for everyone."}
               <br />
-              No signup, no watermarks.
+              {isIt ? "Nessuna registrazione, nessun watermark." : "No signup, no watermarks."}
             </p>
 
             {/* Social icons */}
@@ -204,7 +248,7 @@ export default function Footer() {
           {/* Tools column */}
           <div>
             <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
-              Tools
+              {tr("Tools")}
             </p>
             <ul className="flex flex-col gap-2">
               {TOOL_LINKS.map(({ href, label }) => (
@@ -213,7 +257,7 @@ export default function Footer() {
                     href={href}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
-                    {label}
+                    {tr(label)}
                   </Link>
                 </li>
               ))}
@@ -223,7 +267,7 @@ export default function Footer() {
           {/* Quick Convert column */}
           <div>
             <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
-              Quick Convert
+              {tr("Quick Convert")}
             </p>
             <ul className="flex flex-col gap-2">
               {QUICK_CONVERT_LINKS.map(({ href, label }) => (
@@ -232,7 +276,7 @@ export default function Footer() {
                     href={href}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
-                    {label}
+                    {tr(label)}
                   </Link>
                 </li>
               ))}
@@ -242,7 +286,7 @@ export default function Footer() {
           {/* Resize for Social column */}
           <div>
             <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
-              Resize For
+              {tr("Resize For")}
             </p>
             <ul className="flex flex-col gap-2">
               {RESIZE_SOCIAL_LINKS.map(({ href, label }) => (
@@ -251,7 +295,7 @@ export default function Footer() {
                     href={href}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
-                    {label}
+                    {tr(label)}
                   </Link>
                 </li>
               ))}
@@ -261,7 +305,7 @@ export default function Footer() {
           {/* Company column */}
           <div>
             <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
-              Company
+              {tr("Company")}
             </p>
             <ul className="flex flex-col gap-2">
               {COMPANY_LINKS.map(({ href, label }) => (
@@ -270,7 +314,7 @@ export default function Footer() {
                     href={href}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
-                    {label}
+                    {tr(label)}
                   </Link>
                 </li>
               ))}
@@ -280,7 +324,7 @@ export default function Footer() {
           {/* Legal column */}
           <div>
             <p className="text-xs font-medium text-gray-900 dark:text-[#E5E5E5] mb-3">
-              Legal
+              {tr("Legal")}
             </p>
             <ul className="flex flex-col gap-2">
               {LEGAL_LINKS.map(({ href, label }) => (
@@ -289,7 +333,7 @@ export default function Footer() {
                     href={href}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
-                    {label}
+                    {tr(label)}
                   </Link>
                 </li>
               ))}
@@ -300,7 +344,7 @@ export default function Footer() {
         {/* Photography strip — humanizes the brand: these tools were built by a
             travel photographer. Client component: shuffles for variety on every
             visit and hides itself for logged-in users. */}
-        <FooterPhotoStrip photos={photoPool} />
+        <FooterPhotoStrip photos={photoPool} locale={locale} />
 
         {/* Divider */}
         <div className="border-t border-gray-100 dark:border-[#2A2A2A] mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">

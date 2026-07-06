@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: `${APP_URL}/convert`,
+    languages: {
+      en: `${APP_URL}/convert`,
+      it: `${APP_URL}/it/convertire-immagini`,
+      "x-default": `${APP_URL}/convert`,
+    },
   },
   openGraph: {
     title: `Free Image Format Converter | ${APP_NAME}`,

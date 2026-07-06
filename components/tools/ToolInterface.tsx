@@ -44,6 +44,7 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
   const pathname = usePathname();
   const inDashboard = pathname.startsWith("/dashboard");
+  const isIt = pathname.startsWith("/it");
 
   // Clear files and force correct settings when switching between tool pages.
   // Without this, files from compress would persist when navigating to webp.
@@ -140,22 +141,22 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
               {(!defaultMode || defaultMode === "compress") && (
                 <FeatureCard
                   icon={<Zap className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                  title="Smart Compress"
-                  description="Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser - nothing uploaded."
+                  title={isIt ? "Compressione intelligente" : "Smart Compress"}
+                  description={isIt ? "Fino all'80% più leggere. JPG, PNG, WebP, GIF. Tutto nel browser, niente da caricare." : "Up to 80% smaller. JPG, PNG, WebP, GIF. All in your browser - nothing uploaded."}
                 />
               )}
               {(!defaultMode || defaultMode === "webp") && (
                 <FeatureCard
                   icon={<FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />}
-                  title="Convert to WebP"
-                  description="Google's next-gen format. 30% smaller than JPEG with same quality."
+                  title={isIt ? "Converti in WebP" : "Convert to WebP"}
+                  description={isIt ? "Il formato di nuova generazione di Google. 30% più leggero del JPEG a parità di qualità." : "Google's next-gen format. 30% smaller than JPEG with same quality."}
                 />
               )}
               {(!defaultMode || defaultMode === "ai-rename") && (
                 <FeatureCard
                   icon={<Sparkles className="h-5 w-5 text-brand" strokeWidth={1.5} />}
-                  title="AI Rename"
-                  description="Gemini reads your image and generates an SEO-optimized filename + alt text."
+                  title={isIt ? "Rinomina con AI" : "AI Rename"}
+                  description={isIt ? "Gemini analizza l'immagine e genera un nome file ottimizzato per la SEO e il testo alternativo." : "Gemini reads your image and generates an SEO-optimized filename + alt text."}
                   highlight
                 />
               )}
@@ -175,10 +176,10 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1">
-                    Your images never leave your browser
+                    {isIt ? "Le tue immagini non lasciano mai il browser" : "Your images never leave your browser"}
                   </h3>
                   <p className="text-sm text-gray-500 dark:text-[#737373]">
-                    All processing happens locally using your device&apos;s CPU. No uploads, no servers, no data retention. The only exception is AI Rename, which sends a thumbnail to Google Gemini for analysis.
+                    {isIt ? "Tutta l'elaborazione avviene in locale sulla CPU del tuo dispositivo. Nessun caricamento, nessun server, nessuna conservazione dei dati. L'unica eccezione è Rinomina con AI, che invia una miniatura a Google Gemini per l'analisi." : <>All processing happens locally using your device&apos;s CPU. No uploads, no servers, no data retention. The only exception is AI Rename, which sends a thumbnail to Google Gemini for analysis.</>}
                   </p>
                 </div>
               </div>
@@ -199,14 +200,14 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
         <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3 tracking-tight">
-              Need more? Go Pro.
+              {isIt ? "Ti serve di più? Passa a Pro." : "Need more? Go Pro."}
             </h2>
             <p className="text-gray-500 dark:text-[#737373] mb-6 text-sm leading-relaxed">
-              Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $9/month.
+              {isIt ? "File illimitati, 200 rinomine AI al giorno, download ZIP in blocco e zero pubblicità, tutto a 9$/mese." : "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $9/month."}
             </p>
             <Link href="/dashboard/upgrade">
               <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#E5E5E5] transition-colors">
-                View pricing
+                {isIt ? "Vedi i prezzi" : "View pricing"}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </button>
             </Link>

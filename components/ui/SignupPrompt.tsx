@@ -13,6 +13,7 @@ const SHOW_DELAY_MS = 30_000; // 30 seconds
 export default function SignupPrompt() {
   const { status } = useSession();
   const pathname = usePathname();
+  const isIt = pathname?.startsWith("/it");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -58,8 +59,12 @@ export default function SignupPrompt() {
       <div className="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         {/* Message */}
         <p className="text-sm text-[#D4D4D4] leading-snug">
-          <span className="font-semibold text-white">Sign up free</span>
-          {" "} - get your personal dashboard + AI tools (10 credits/day)
+          <span className="font-semibold text-white">
+            {isIt ? "Iscriviti gratis" : "Sign up free"}
+          </span>
+          {isIt
+            ? " e ottieni la tua dashboard personale + strumenti AI (10 crediti al giorno)"
+            : " - get your personal dashboard + AI tools (10 credits/day)"}
         </p>
 
         {/* Actions */}
@@ -68,7 +73,7 @@ export default function SignupPrompt() {
             href="/api/auth/signin"
             className="inline-flex items-center justify-center px-4 py-2 rounded-md bg-white text-[#171717] text-sm font-semibold hover:bg-[#E5E5E5] transition-colors whitespace-nowrap"
           >
-            Create account
+            {isIt ? "Crea account" : "Create account"}
           </Link>
           <button
             onClick={dismiss}

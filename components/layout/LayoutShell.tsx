@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -11,6 +12,17 @@ import ReferralWelcomeModal from "@/components/referral/ReferralWelcomeModal";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const locale = pathname.startsWith("/it") ? "it" : "en";
+
+  // Keep <html lang> in sync with the locale (root layout renders lang="en" by
+  // default; on /it pages we correct it so screen readers and search engines
+  // see Italian). Additive: English pages stay "en".
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = locale;
+    }
+  }, [locale]);
+
   const isDashboard = pathname.startsWith("/dashboard");
   const isGrowthLogin = pathname.startsWith("/growth-login");
   const isAdminPanel =
@@ -30,7 +42,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       <ReferralHeroBanner />
       <Navbar />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer locale={locale} />
       <SignupPrompt />
       <SmartTrialPrompt />
       <PWAInstallPrompt />

@@ -36,7 +36,7 @@ export const metadata = {
     "browser image processing",
     "sammapix",
   ],
-  alternates: { canonical: "https://www.sammapix.com" },
+  alternates: { canonical: "https://www.sammapix.com", languages: { en: "https://www.sammapix.com", it: "https://www.sammapix.com/it", "x-default": "https://www.sammapix.com" } },
   openGraph: {
     title: "SammaPix -- AI Photo Workflow for Content Creators",
     description:

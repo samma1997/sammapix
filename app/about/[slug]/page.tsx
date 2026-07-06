@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { getAllTrips } from "@/lib/destinations";
 import { getEnrichedTrip } from "@/lib/portfolio-data";
 import { GalleryGrid } from "@/components/portfolio/GalleryGrid";
+import { getPhotoBook } from "@/lib/photobooks";
+import PhotoBookSection from "@/components/portfolio/PhotoBookSection";
 
 // ---------------------------------------------------------------------------
 // Static params
@@ -86,6 +88,7 @@ export default async function TripPage({
   if (!trip) notFound();
 
   const year = new Date(trip.startDate).getFullYear();
+  const book = getPhotoBook(slug);
 
   // Schema JSON-LD
   const jsonLd = {
@@ -163,6 +166,11 @@ export default async function TripPage({
           &copy; Luca Sammarco &middot; Not for commercial use.
         </p>
       </div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Printed photo book — in alto, prima delle foto (solo trip col libro) */}
+      {/* ------------------------------------------------------------------ */}
+      {book && <PhotoBookSection book={book} />}
 
       {/* ------------------------------------------------------------------ */}
       {/* Gallery grid- 3 colonne desktop, 2 tablet, 1 mobile              */}

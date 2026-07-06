@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: `${APP_URL}/passport-photo`,
+    languages: {
+      en: `${APP_URL}/passport-photo`,
+      it: `${APP_URL}/it/foto-tessera`,
+      "x-default": `${APP_URL}/passport-photo`,
+    },
   },
   openGraph: {
     title: `Free Passport Photo Maker — 140+ Countries | ${APP_NAME}`,

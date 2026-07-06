@@ -180,3 +180,11 @@ DEPLOY.md
 .vercel-deploy-trigger
 wrangler.toml
 *.old.tsx.bak
+
+# Claude Code backup chat (personale)
+.claude/settings.local.json
+.retention-reports/
+
+# Analisi/output locali
+bali-ig-groups.json
+bali-ig-groups.md

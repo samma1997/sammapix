@@ -5784,13 +5784,13 @@ export const trips: Trip[] = [
     destination: "Bali 2026",
     country: "Indonesia",
     continent: "Asia",
-    startDate: "2026-06-07",
-    endDate: "2026-06-21",
+    startDate: "2026-05-13",
+    endDate: "2026-06-24",
     coverSrc: "https://res.cloudinary.com/do9hrcwn1/image/upload/c_limit,f_auto,q_auto,w_1200/v1/sammapix/portfolio/bali-2026/12-bali-street-vendor-scooter-portrait-food-cart-indonesia",
     excerpt:
-      "Two weeks of street photography across Bali in June 2026, the everyday rhythm of vendors, riders and golden hour corners far from the postcard.",
+      "A month and a half of street photography across Bali, from 13 May to 24 June 2026, the everyday rhythm of vendors, riders and golden hour corners far from the postcard.",
     description:
-      "Shot over five days in June 2026, this collection trades temples and beaches for the living texture of Bali, Indonesia: a shirtless builder grinning between bricks, a bakso cart rider waiting in the warm light, barbershops and noodle stalls and scooters threading the streets. It is a portrait of daily life, the people and small moments that make the island feel real, all captured on a Sony A7C II.",
+      "Shot over a month and a half in Bali, Indonesia, from 13 May to 24 June 2026, this collection trades temples and beaches for the living texture of the island: a shirtless builder grinning between bricks, a bakso cart rider waiting in the warm light, barbershops and noodle stalls and scooters threading the streets. It is a portrait of daily life, the people and small moments that make the island feel real, all captured on a Sony A7C II.",
     photoCount: baliPhotos2026.length,
     photos: baliPhotos2026,
     tags: ["street", "portrait", "culture", "daily life", "golden hour", "Indonesia"],
