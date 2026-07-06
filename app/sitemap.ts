@@ -234,6 +234,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Italian blog articles (net-new Italian content, no English equivalent)
   const italianBlog: MetadataRoute.Sitemap = [
     "come-ridurre-peso-di-una-foto",
+    "come-convertire-heic-in-jpg",
   ].map((slug) => ({
     url: `${APP_URL}/it/blog/${slug}`,
     lastModified: new Date(),

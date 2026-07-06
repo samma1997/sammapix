@@ -10,6 +10,11 @@ export const metadata: Metadata = {
     "Learn how to convert HEIC to JPG free without installing any software. Step-by-step guide covering iPhone camera settings, Mac Preview, and the fastest browser-based method.",
   alternates: {
     canonical: `${APP_URL}/blog/iphone-heic-to-jpg-guide`,
+    languages: {
+      en: `${APP_URL}/blog/iphone-heic-to-jpg-guide`,
+      it: `${APP_URL}/it/blog/come-convertire-heic-in-jpg`,
+      "x-default": `${APP_URL}/blog/iphone-heic-to-jpg-guide`,
+    },
   },
   keywords: [
     "convert heic to jpg free",

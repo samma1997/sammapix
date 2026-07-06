@@ -24,6 +24,14 @@ export const metadata: Metadata = {
 // Articoli italiani (cresce nel tempo, uno per filiera)
 const articles = [
   {
+    slug: "come-convertire-heic-in-jpg",
+    title: "Come convertire HEIC in JPG, gratis e senza programmi",
+    description:
+      "Le foto iPhone in HEIC non si aprono su Windows. Ecco come convertirle in JPG nel browser, gratis e senza upload, da Windows, Mac, iPhone o Android.",
+    date: "6 luglio 2026",
+    tag: "Guida",
+  },
+  {
     slug: "come-ridurre-peso-di-una-foto",
     title: "Come ridurre il peso di una foto senza perdere qualità",
     description:
