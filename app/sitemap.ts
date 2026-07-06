@@ -197,6 +197,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       it: "/it/portfolio",
     },
     {
+      en: "/blog",
+      it: "/it/blog",
+    },
+    {
       en: "/passport-photo",
       it: "/it/foto-tessera",
     },
@@ -225,6 +229,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         it: `${APP_URL}/it/comprimi-a/${t.slug}`,
       },
     },
+  }));
+
+  // Italian blog articles (net-new Italian content, no English equivalent)
+  const italianBlog: MetadataRoute.Sitemap = [
+    "come-ridurre-peso-di-una-foto",
+  ].map((slug) => ({
+    url: `${APP_URL}/it/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
   }));
 
   // VS comparison pages (12 total)
@@ -388,6 +402,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...toolPages,
     ...italianPages,
     ...italianCompressToLeaf,
+    ...italianBlog,
     ...vsPages,
     ...blogPages,
     ...portfolioPages,

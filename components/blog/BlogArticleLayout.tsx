@@ -28,6 +28,8 @@ interface BlogArticleLayoutProps {
   summary?: string[];
   heroImage?: React.ReactNode;
   ctaBlock?: React.ReactNode;
+  /** "it" renders the Italian blog shell (/it/blog base, localized labels, no EN related). Default "en". */
+  locale?: "en" | "it";
   children: React.ReactNode;
 }
 
@@ -43,10 +45,17 @@ export default function BlogArticleLayout({
   summary,
   heroImage,
   ctaBlock,
+  locale = "en",
   children,
 }: BlogArticleLayoutProps) {
   const articleRef = useRef<HTMLDivElement>(null);
-  const articleUrl = `https://www.sammapix.com/blog/${slug}`;
+  const isIt = locale === "it";
+  const blogBase = isIt ? "/it/blog" : "/blog";
+  const articleUrl = `https://www.sammapix.com${blogBase}/${slug}`;
+  const t = {
+    back: isIt ? "Torna al blog" : "Back to Blog",
+    readMin: isIt ? "min di lettura" : "min read",
+  };
 
   return (
     <>
@@ -58,10 +67,10 @@ export default function BlogArticleLayout({
           <div className="py-12">
             {/* Back link */}
             <Link
-              href="/blog"
+              href={blogBase}
               className="inline-flex items-center gap-1.5 text-sm text-[#A3A3A3] hover:text-[#525252] mb-8"
             >
-              <ArrowLeft className="h-3.5 w-3.5" /> Back to Blog
+              <ArrowLeft className="h-3.5 w-3.5" /> {t.back}
             </Link>
 
             <article>
@@ -80,7 +89,7 @@ export default function BlogArticleLayout({
                   <time className="text-[#A3A3A3]">{dateFormatted}</time>
                   <span className="text-[#D4D4D4]">&middot;</span>
                   <span className="text-[#A3A3A3]">
-                    {readingTime} min read
+                    {readingTime} {t.readMin}
                   </span>
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-semibold text-[#171717] dark:text-[#E5E5E5] tracking-tight leading-tight">
@@ -125,10 +134,12 @@ export default function BlogArticleLayout({
             {/* CTA */}
             {ctaBlock && <div className="mt-12">{ctaBlock}</div>}
 
-            {/* Related articles */}
-            <div className="mt-12">
-              <RelatedArticles currentSlug={slug} tags={tags} />
-            </div>
+            {/* Related articles (EN only for now: no Italian siblings yet) */}
+            {!isIt && (
+              <div className="mt-12">
+                <RelatedArticles currentSlug={slug} tags={tags} />
+              </div>
+            )}
           </div>
 
           {/* TOC sidebar - desktop only */}
