@@ -24,6 +24,14 @@ export const metadata: Metadata = {
 // Articoli italiani (cresce nel tempo, uno per filiera)
 const articles = [
   {
+    slug: "come-ridimensionare-una-foto",
+    title: "Come ridimensionare una foto senza deformarla",
+    description:
+      "Le misure giuste per Instagram, WhatsApp, Facebook e fototessera, in pixel o in centimetri. Nel browser, gratis e senza upload, da iPhone, Android o Mac.",
+    date: "6 luglio 2026",
+    tag: "Guida",
+  },
+  {
     slug: "come-convertire-heic-in-jpg",
     title: "Come convertire HEIC in JPG, gratis e senza programmi",
     description:
