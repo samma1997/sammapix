@@ -14,9 +14,13 @@ interface TimingSegment {
 interface TextToSpeechProps {
   slug: string;
   articleRef: React.RefObject<HTMLElement | null>;
+  locale?: "en" | "it";
 }
 
-export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
+export default function TextToSpeech({ slug, articleRef, locale = "en" }: TextToSpeechProps) {
+  const L = locale === "it"
+    ? { listen: "Ascolta l’articolo", unavailable: "Audio non disponibile", stop: "Ferma", play: "Riproduci", pause: "Pausa" }
+    : { listen: "Listen to article", unavailable: "Audio unavailable", stop: "Stop", play: "Play", pause: "Pause" };
   const [state, setState] = useState<TTSState>("idle");
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -173,7 +177,7 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
         <button
           onClick={handlePlayPause}
           className="p-1.5 rounded-full bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
-          aria-label={state === "playing" ? "Pause" : "Play"}
+          aria-label={state === "playing" ? L.pause : L.play}
         >
           {state === "playing" ? (
             <Pause size={14} strokeWidth={2} />
@@ -183,7 +187,7 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
         </button>
 
         {state === "idle" && (
-          <span className="text-[13px] text-[#737373]">Listen to article</span>
+          <span className="text-[13px] text-[#737373]">{L.listen}</span>
         )}
 
         {(state === "playing" || state === "paused") && (
@@ -207,13 +211,13 @@ export default function TextToSpeech({ slug, articleRef }: TextToSpeechProps) {
               onClick={handleStop}
               className="text-[11px] text-[#A3A3A3] hover:text-[#525252] transition-colors ml-1"
             >
-              Stop
+              {L.stop}
             </button>
           </div>
         )}
 
         {state === "error" && (
-          <span className="text-[13px] text-[#A3A3A3]">Audio unavailable</span>
+          <span className="text-[13px] text-[#A3A3A3]">{L.unavailable}</span>
         )}
       </div>
     </div>

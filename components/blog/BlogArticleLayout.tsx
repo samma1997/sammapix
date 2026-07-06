@@ -104,7 +104,7 @@ export default function BlogArticleLayout({
               {heroImage && <div className="my-8">{heroImage}</div>}
 
               {/* Text-to-Speech bar */}
-              <TextToSpeech slug={slug} articleRef={articleRef} />
+              <TextToSpeech slug={slug} articleRef={articleRef} locale={locale} />
 
               {/* TOC - mobile only */}
               <div className="xl:hidden mb-8">

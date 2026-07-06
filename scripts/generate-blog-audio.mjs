@@ -21,8 +21,12 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const AUDIO_DIR = path.join(__dirname, "../public/blog/audio");
-const BLOG_DIR = path.join(__dirname, "../app/blog");
-const VOICE = "en-US-GuyNeural";
+// --dir overrides the source folder (e.g. "../app/it/blog" for Italian articles)
+const dirArgIdx = process.argv.indexOf("--dir");
+const BLOG_DIR = path.join(__dirname, dirArgIdx !== -1 ? process.argv[dirArgIdx + 1] : "../app/blog");
+// --voice overrides the EdgeTTS voice (e.g. "it-IT-DiegoNeural" for Italian)
+const voiceArgIdx = process.argv.indexOf("--voice");
+const VOICE = voiceArgIdx !== -1 ? process.argv[voiceArgIdx + 1] : "en-US-GuyNeural";
 const BITRATE = 24000; // Edge TTS default ~24kbps for the output
 
 // Parse args
