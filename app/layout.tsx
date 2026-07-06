@@ -205,8 +205,11 @@ export default async function RootLayout({
                   "url": "https://sammapix.com",
                   "name": "SammaPix",
                   "publisher": { "@id": "https://sammapix.com/#organization" },
+                  "inLanguage": htmlLang,
                   "description":
-                    "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images- no signup needed.",
+                    htmlLang === "it"
+                      ? "L'ottimizzatore di immagini gratis più veloce. Comprimi, converti in WebP e rinomina le foto con AI, senza registrazione."
+                      : "The fastest free image optimizer. Compress, convert to WebP, and AI-rename your images- no signup needed.",
                   "potentialAction": {
                     "@type": "SearchAction",
                     "target": "https://sammapix.com/tools?q={search_term_string}",
