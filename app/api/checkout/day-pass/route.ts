@@ -128,6 +128,10 @@ export async function POST(req: NextRequest) {
         ...(source ? { source } : {}),
         ...(entry ? { entry } : {}),
       },
+      // Abandoned-cart recovery: if the buyer leaves after entering their email,
+      // Stripe automatically emails them a link to resume this day pass. Requires
+      // "abandoned cart emails" toggled on in Stripe Dashboard > Checkout settings.
+      after_expiration: { recovery: { enabled: true } },
     });
 
     return NextResponse.json({
