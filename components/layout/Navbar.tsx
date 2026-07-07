@@ -18,6 +18,7 @@ export default function Navbar() {
   const isIt = localeFromPath(pathname) === "it";
   const alt = counterpartPath(pathname);
   const t = (en: string, it: string) => (isIt ? it : en);
+  const pricingHref = isIt ? "/it/prezzi" : "/pricing";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -144,7 +145,7 @@ export default function Navbar() {
           <Link href="/tools" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             {t("Tools", "Strumenti")}
           </Link>
-          <Link href="/pricing" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
+          <Link href={pricingHref} className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
             {t("Pricing", "Prezzi")}
           </Link>
           <Link href="/blog" className="px-3 py-1.5 text-sm text-gray-500 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5] rounded transition-colors">
@@ -207,7 +208,7 @@ export default function Navbar() {
             </Link>
           )}
           {status === "authenticated" && (session?.user as { plan?: string })?.plan !== "pro" && (
-            <Link href="/pricing">
+            <Link href={pricingHref}>
               <Button variant="primary" size="sm" className="gap-1">
                 Go Pro
                 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
@@ -238,7 +239,7 @@ export default function Navbar() {
         <div className="md:hidden border-t border-gray-100 dark:border-[#2A2A2A] bg-white dark:bg-[#191919] animate-slide-down">
           <div className="px-4 py-3 flex flex-col gap-1">
             <Link href="/tools" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("Tools", "Strumenti")}</Link>
-            <Link href="/pricing" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("Pricing", "Prezzi")}</Link>
+            <Link href={pricingHref} className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("Pricing", "Prezzi")}</Link>
             <Link href="/blog" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Blog</Link>
             <Link href="/portfolio" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>Portfolio</Link>
             <Link href="/about" className="py-2 text-sm text-gray-600 dark:text-[#A3A3A3] hover:text-gray-900 dark:hover:text-[#E5E5E5]" onClick={() => setMobileOpen(false)}>{t("About", "Chi siamo")}</Link>
@@ -254,7 +255,7 @@ export default function Navbar() {
                 </Link>
               )}
               {(session?.user as { plan?: string } | undefined)?.plan !== "pro" && (
-                <Link href="/pricing" className="flex-1" onClick={() => setMobileOpen(false)}>
+                <Link href={pricingHref} className="flex-1" onClick={() => setMobileOpen(false)}>
                   <Button variant="primary" size="sm" className="w-full">Get Pro →</Button>
                 </Link>
               )}

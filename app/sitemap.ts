@@ -201,6 +201,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       it: "/it/blog",
     },
     {
+      en: "/pricing",
+      it: "/it/prezzi",
+    },
+    {
       en: "/passport-photo",
       it: "/it/foto-tessera",
     },

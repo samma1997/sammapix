@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Zap, Check, X, Loader2, Clock } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
@@ -26,7 +26,22 @@ interface ProUpsellModalProps {
 
 // ── Copy per trigger ──────────────────────────────────────────────────────────
 
-function getHeadline(trigger: UpsellTrigger): string {
+function getHeadline(trigger: UpsellTrigger, isIt = false): string {
+  if (isIt) {
+    switch (trigger) {
+      case "ai_rename": return "Hai raggiunto il limite AI di oggi, continua con Pro";
+      case "file_size": return "File troppo grande per il piano gratis";
+      case "video_size": return "Video pesante? Sbloccalo in pochi secondi";
+      case "batch": return "Limite batch raggiunto";
+      case "steps": return "Limite di passaggi raggiunto";
+      case "daily": return "Limite giornaliero raggiunto";
+      case "zip": return "Il download in ZIP è una funzione Pro";
+      case "upscale_daily": return "Limite di upscale giornaliero raggiunto";
+      case "power_user": return "Stai usando SammaPix alla grande";
+      case "lut_export": return "Ti piace quel LUT? Portalo oltre con Pro";
+      default: return "Stai lavorando da professionista";
+    }
+  }
   switch (trigger) {
     case "ai_rename":
       return "You've hit today's AI limit — keep going with Pro";
@@ -57,8 +72,27 @@ function getSubtext(
   trigger: UpsellTrigger,
   filesDropped?: number,
   freeLimit?: number,
-  toolsExplored?: number
+  toolsExplored?: number,
+  isIt = false
 ): string {
+  if (isIt) {
+    switch (trigger) {
+      case "ai_rename": return "Piano gratis: 10 operazioni AI al giorno. Pro te ne dà 200, abbastanza per un intero servizio.";
+      case "file_size": return "Il piano gratis supporta file fino a 20 MB. Pro arriva a 50 MB.";
+      case "video_size": return "Il gratis comprime video fino a 500 MB. Con Pro sblocchi i video grandi (fino a diversi GB), oppure prendi un Day Pass video singolo. Tutto resta nel browser, niente upload.";
+      case "batch": return "Hai raggiunto il limite del batch. Pro gestisce fino a 500 file insieme.";
+      case "steps": return "Il gratis permette 2 passaggi attivi per flusso. Pro li rende illimitati.";
+      case "daily": return "Piano gratis: 50 immagini al giorno. Pro toglie il limite giornaliero.";
+      case "zip": return "Il download in ZIP è una funzione Pro. Un clic, tutti i file in un unico archivio.";
+      case "upscale_daily": return "Il gratis limita gli upscale giornalieri. Pro toglie il limite e aggiunge la scala 4x e 8x.";
+      case "power_user": return `Hai già provato ${toolsExplored ?? 3} strumenti, ce ne sono ${TOOL_COUNT} in totale. Pro sblocca uso illimitato, nessun limite giornaliero e batch da 500 file.`;
+      case "lut_export": return "Pro applica il tuo LUT fino a 500 foto insieme ed esporta file .cube illimitati. Il gratis include sempre l'export su singola foto.";
+      default: {
+        if (filesDropped && freeLimit) return `Hai caricato ${filesDropped} foto, il piano gratis ne elabora le prime ${freeLimit}. Pro ne gestisce 500 insieme.`;
+        return `Il piano gratis elabora fino a ${freeLimit ?? 100} file. Pro ne gestisce 500 insieme.`;
+      }
+    }
+  }
   switch (trigger) {
     case "ai_rename":
       return "Free plan: 10 AI ops per day. Pro gives you 200 — enough for an entire shoot. Or grab a one-shot credit pack if you only need extras occasionally.";
@@ -115,6 +149,9 @@ export default function ProUpsellModal({
 }: ProUpsellModalProps) {
   const { data: session } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
+  const isIt = (pathname || "").startsWith("/it");
+  const pricingHref = isIt ? "/it/prezzi#credits" : "/pricing#credits";
   const [loading, setLoading] = useState(false);
   const [creditsLoading, setCreditsLoading] = useState(false);
   const [dayPassLoading, setDayPassLoading] = useState(false);
@@ -180,7 +217,7 @@ export default function ProUpsellModal({
     // Not logged in (e.g. files/batch triggers): credit purchase needs an
     // account, so fall back to the pricing credits section.
     if (!session) {
-      router.push("/pricing#credits");
+      router.push(pricingHref);
       onClose();
       return;
     }
@@ -200,11 +237,11 @@ export default function ProUpsellModal({
         window.location.href = data.url;
       } else {
         // Couldn't create checkout — fall back to the pricing page.
-        router.push("/pricing#credits");
+        router.push(pricingHref);
         onClose();
       }
     } catch {
-      router.push("/pricing#credits");
+      router.push(pricingHref);
       onClose();
     } finally {
       setCreditsLoading(false);
@@ -254,10 +291,26 @@ export default function ProUpsellModal({
 
   // Video uses a premium Day Pass ($4.99) and a video-focused feature list.
   const isVideoUpsell = trigger === "video_size";
-  const dayPassLabel = isVideoUpsell
-    ? "Just need it once? Video Day Pass $4.99 — 24h full access"
-    : "Just need it once? Day Pass $2.99 — 24h full access";
-  const featureList = isVideoUpsell ? VIDEO_FEATURES : FEATURES;
+  const FEATURES_IT = [
+    "Fino a 500 file per batch (gratis: 20)",
+    "200 operazioni AI al giorno (gratis: 10)",
+    "50 MB per file · Niente pubblicità · Download ZIP",
+  ];
+  const VIDEO_FEATURES_IT = [
+    "Comprimi video grandi (gratis: fino a 500 MB)",
+    "Sempre 100% nel browser, niente upload",
+    "Più tutti gli strumenti Pro · Niente pubblicità",
+  ];
+  const dayPassLabel = isIt
+    ? (isVideoUpsell
+        ? "Ti serve solo una volta? Day Pass video $4,99, accesso completo 24h"
+        : "Ti serve solo una volta? Day Pass $2,99, accesso completo 24h")
+    : (isVideoUpsell
+        ? "Just need it once? Video Day Pass $4.99 — 24h full access"
+        : "Just need it once? Day Pass $2.99 — 24h full access");
+  const featureList = isIt
+    ? (isVideoUpsell ? VIDEO_FEATURES_IT : FEATURES_IT)
+    : (isVideoUpsell ? VIDEO_FEATURES : FEATURES);
 
   return (
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
@@ -298,7 +351,7 @@ export default function ProUpsellModal({
 
           {/* Headline */}
           <Dialog.Title className="text-center text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            {getHeadline(trigger)}
+            {getHeadline(trigger, isIt)}
           </Dialog.Title>
 
           {/* Subtext */}
@@ -306,7 +359,7 @@ export default function ProUpsellModal({
             id="upsell-description"
             className="text-center text-sm text-[#737373] dark:text-[#A3A3A3] mb-5 leading-relaxed"
           >
-            {getSubtext(trigger, filesDropped, freeLimit, toolsExplored)}
+            {getSubtext(trigger, filesDropped, freeLimit, toolsExplored, isIt)}
           </p>
 
           {/* Features */}
@@ -343,10 +396,10 @@ export default function ProUpsellModal({
               <Zap className="h-4 w-4" strokeWidth={1.5} />
             )}
             {loading
-              ? "Redirecting to checkout..."
+              ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
               : isFounding
-                ? `Lock $${monthlyFinal}/mo forever \u2014 Start trial`
-                : "Start 7-day free trial \u2014 $9/mo after"}
+                ? (isIt ? `Blocca $${monthlyFinal}/mese per sempre \u2014 Inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
+                : (isIt ? "Inizia la prova gratis di 7 giorni \u2014 poi $9/mese" : "Start 7-day free trial \u2014 $9/mo after")}
           </button>
 
           {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
@@ -360,8 +413,8 @@ export default function ProUpsellModal({
                 <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
               ) : null}
               {creditsLoading
-                ? "Redirecting to checkout..."
-                : "Or buy 100 credits for $5.99 — one-time, never expire"}
+                ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                : (isIt ? "Oppure 100 crediti a $5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
             </button>
           )}
 
@@ -377,7 +430,7 @@ export default function ProUpsellModal({
             ) : (
               <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
             )}
-            {dayPassLoading ? "Redirecting to checkout..." : dayPassLabel}
+            {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
           </button>
 
           {/* Continue with first N files \u2014 only for files/batch triggers */}
@@ -386,13 +439,13 @@ export default function ProUpsellModal({
               onClick={onClose}
               className="w-full inline-flex items-center justify-center px-4 py-2 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
             >
-              Continue with first {freeLimit} files
+              {isIt ? `Continua con i primi ${freeLimit} file` : `Continue with first ${freeLimit} files`}
             </button>
           )}
 
           {/* Trust line \u2014 single row, slightly more visible */}
           <p className="text-center text-xs text-[#737373] dark:text-[#A3A3A3] mt-3">
-            30-day money-back &middot; Cancel anytime
+            {isIt ? "Rimborso entro 30 giorni \u00b7 Disdici quando vuoi" : "30-day money-back \u00b7 Cancel anytime"}
           </p>
         </Dialog.Content>
       </Dialog.Portal>
