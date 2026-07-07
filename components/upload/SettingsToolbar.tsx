@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { Sparkles, Zap } from "lucide-react";
 import { useImageStore } from "@/store/imageStore";
 import { Button } from "@/components/ui/button";
@@ -41,6 +42,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
   } = useImageStore();
 
   const { data: session } = useSession();
+  const isIt = (usePathname() || "").startsWith("/it");
   const hasQueuedItems = items.some((i) => i.status === "queued");
   const allDone = items.length > 0 && items.every((i) => i.status === "done" || i.status === "error");
   const remaining = Math.max(0, AI_OPS_FREE_PER_DAY - aiRenameUsedToday);
@@ -65,7 +67,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
         {mode !== "ai-rename" && (
           <div className="flex-1 min-w-[160px]">
             <Slider
-              label="Quality"
+              label={isIt ? "Qualità" : "Quality"}
               showValue
               min={1}
               max={100}
@@ -157,7 +159,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
                   {remaining}/{AI_OPS_FREE_PER_DAY}
                 </span>
               ) : (
-                <Badge variant="default">Login</Badge>
+                <Badge variant="default">{isIt ? "Accedi" : "Login"}</Badge>
               )}
             </label>
           )}
@@ -197,7 +199,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
           onClick={processAll}
         >
           {(() => {
-            const label = mode === "webp" ? "Convert all" : mode === "ai-rename" ? "Rename all" : "Compress all";
+            const label = mode === "webp" ? (isIt ? "Converti tutto" : "Convert all") : mode === "ai-rename" ? (isIt ? "Rinomina tutto" : "Rename all") : (isIt ? "Comprimi tutto" : "Compress all");
             if (isProcessing) return "...";
             if (allDone) return label;
             return <><Zap className="h-4 w-4" strokeWidth={1.5} />{label}</>;
