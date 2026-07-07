@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { APP_URL } from "@/lib/constants";
-import PrezziClient from "@/components/it/PrezziClient";
+import PricingView from "@/components/pricing/PricingView";
 
 const URL = `${APP_URL}/it/prezzi`;
 
 export const metadata: Metadata = {
-  title: "Prezzi SammaPix — Gratis per sempre, Pro $9/mese | SammaPix",
+  title: "Prezzi SammaPix — Gratis per sempre, Pro €8,99/mese | SammaPix",
   description:
-    "Tutti gli strumenti foto gratis nel browser, senza upload. Passa a Pro ($9/mese) per batch da 500 file, download ZIP e 200 crediti AI al giorno. Nessuna carta per provare.",
+    "Tutti gli strumenti foto gratis nel browser, senza upload. Passa a Pro (€8,99/mese) per batch da 500 file, download ZIP e 200 crediti AI al giorno. Nessuna carta per provare.",
   alternates: {
     canonical: URL,
     languages: { it: URL, en: `${APP_URL}/pricing`, "x-default": `${APP_URL}/pricing` },
   },
   openGraph: {
-    title: "Prezzi SammaPix — Gratis per sempre, Pro $9/mese",
+    title: "Prezzi SammaPix — Gratis per sempre, Pro €8,99/mese",
     description:
       "Strumenti foto gratis nel browser. Pro per più potenza. Nessuna carta per provare.",
     url: URL,
@@ -23,5 +23,5 @@ export const metadata: Metadata = {
 };
 
 export default function PrezziPage() {
-  return <PrezziClient />;
+  return <PricingView />;
 }
