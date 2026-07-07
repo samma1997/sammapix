@@ -11,6 +11,7 @@
  */
 
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import ToolInterface from "@/components/tools/ToolInterface";
 
 const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSuggestions"), { ssr: false });
@@ -21,6 +22,7 @@ export interface CompressClientProps {
 }
 
 export default function CompressClient({ targetKB }: CompressClientProps = {}) {
+  const isIt = (usePathname() || "").startsWith("/it");
   return (
     <>
       {/* Target size badge — only shown on /compress-to/[size] pages */}
@@ -29,11 +31,11 @@ export default function CompressClient({ targetKB }: CompressClientProps = {}) {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#F5F5F5] dark:bg-[#1E1E1E] border border-[#E5E5E5] dark:border-[#2A2A2A]">
             <span className="h-2 w-2 rounded-full bg-[#22C55E] shrink-0" />
             <span className="text-xs font-medium text-[#525252] dark:text-[#A3A3A3]">
-              Target: compress to{" "}
+              {isIt ? "Obiettivo: comprimi a" : "Target: compress to"}{" "}
               <strong className="text-[#171717] dark:text-[#E5E5E5]">
                 {targetKB >= 1024 ? `${targetKB / 1024} MB` : `${targetKB} KB`}
               </strong>
-              {" "}— adjust the quality slider until the output reaches this size
+              {" "}{isIt ? "— regola il cursore della qualità finché il risultato raggiunge questa dimensione" : "— adjust the quality slider until the output reaches this size"}
             </span>
           </div>
         </div>

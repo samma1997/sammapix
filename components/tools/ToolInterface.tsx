@@ -203,9 +203,9 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
               {isIt ? "Ti serve di più? Passa a Pro." : "Need more? Go Pro."}
             </h2>
             <p className="text-gray-500 dark:text-[#737373] mb-6 text-sm leading-relaxed">
-              {isIt ? "File illimitati, 200 rinomine AI al giorno, download ZIP in blocco e zero pubblicità, tutto a 9$/mese." : "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $9/month."}
+              {isIt ? "File illimitati, 200 rinomine AI al giorno, download ZIP in blocco e zero pubblicità, tutto a €8,99/mese." : "Unlimited files, 200 AI renames/day, bulk ZIP download, and zero ads- all for $9/month."}
             </p>
-            <Link href="/dashboard/upgrade">
+            <Link href={isIt ? "/it/prezzi" : "/dashboard/upgrade"}>
               <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-[#E5E5E5] transition-colors">
                 {isIt ? "Vedi i prezzi" : "View pricing"}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
