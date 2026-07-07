@@ -230,7 +230,7 @@ export default function ProUpsellModal({
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ packageId: "credits_100" }),
+        body: JSON.stringify({ packageId: "credits_100", ...(isIt ? { currency: "eur" } : {}) }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (data.url) {
@@ -303,8 +303,8 @@ export default function ProUpsellModal({
   ];
   const dayPassLabel = isIt
     ? (isVideoUpsell
-        ? "Ti serve solo una volta? Day Pass video $4,99, accesso completo 24h"
-        : "Ti serve solo una volta? Day Pass $2,99, accesso completo 24h")
+        ? "Ti serve solo una volta? Day Pass video €4,99, accesso completo 24h"
+        : "Ti serve solo una volta? Day Pass €2,99, accesso completo 24h")
     : (isVideoUpsell
         ? "Just need it once? Video Day Pass $4.99 — 24h full access"
         : "Just need it once? Day Pass $2.99 — 24h full access");
@@ -399,7 +399,7 @@ export default function ProUpsellModal({
               ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
               : isFounding
                 ? (isIt ? `Blocca $${monthlyFinal}/mese per sempre \u2014 Inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
-                : (isIt ? "Inizia la prova gratis di 7 giorni \u2014 poi $9/mese" : "Start 7-day free trial \u2014 $9/mo after")}
+                : (isIt ? "Inizia la prova gratis di 7 giorni \u2014 poi \u20ac8,99/mese" : "Start 7-day free trial \u2014 $9/mo after")}
           </button>
 
           {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
@@ -414,7 +414,7 @@ export default function ProUpsellModal({
               ) : null}
               {creditsLoading
                 ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                : (isIt ? "Oppure 100 crediti a $5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
+                : (isIt ? "Oppure 100 crediti a €5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
             </button>
           )}
 

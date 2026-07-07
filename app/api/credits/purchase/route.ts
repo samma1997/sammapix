@@ -38,9 +38,11 @@ export async function POST(req: NextRequest) {
   }
 
   let packageId: CreditPackageId;
+  let creditsCurrency: "usd" | "eur" = "usd";
   try {
-    const body = (await req.json()) as { packageId?: unknown };
+    const body = (await req.json()) as { packageId?: unknown; currency?: unknown };
     packageId = body.packageId as CreditPackageId;
+    if (body.currency === "eur") creditsCurrency = "eur";
   } catch {
     return NextResponse.json({ error: "Invalid request body", code: "INVALID_BODY" }, { status: 400 });
   }
@@ -61,7 +63,7 @@ export async function POST(req: NextRequest) {
       line_items: [
         {
           price_data: {
-            currency: "usd",
+            currency: creditsCurrency,
             product_data: {
               name: `SammaPix ${pkg.name}- ${pkg.credits} AI Credits`,
             },

@@ -10,7 +10,7 @@ export default function PrezziClient() {
   const [annual, setAnnual] = useState(false);
   const [loadingPass, setLoadingPass] = useState(false);
 
-  const savePercent = Math.round((1 - 65 / (9 * 12)) * 100);
+  const savePercent = Math.round((1 - 64.99 / (8.99 * 12)) * 100);
 
   async function handleDayPass() {
     setLoadingPass(true);
@@ -80,7 +80,7 @@ export default function PrezziClient() {
           <div className="rounded-2xl border border-gray-200 dark:border-[#2A2A2A] p-6">
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Free</h2>
             <div className="mt-2 mb-4">
-              <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5]">$0</span>
+              <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5]">€0</span>
               <span className="text-[#737373]"> per sempre</span>
             </div>
             <ul className="space-y-2 mb-6">
@@ -102,7 +102,7 @@ export default function PrezziClient() {
             </span>
             <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Pro</h2>
             <div className="mt-2 mb-4">
-              <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5]">${annual ? "65" : "9"}</span>
+              <span className="text-4xl font-bold text-[#171717] dark:text-[#E5E5E5]">€{annual ? "64,99" : "8,99"}</span>
               <span className="text-[#737373]">{annual ? " / anno" : " / mese"}</span>
               {annual && (
                 <p className="text-xs text-[#6366F1] mt-1">Fatturato annualmente, risparmi ~{savePercent}% sul mensile</p>
@@ -126,7 +126,7 @@ export default function PrezziClient() {
           <div className="flex items-start gap-3">
             <Zap className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" strokeWidth={2} />
             <div>
-              <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">Ti serve solo per oggi? Day Pass a $2,99</h3>
+              <h3 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">Ti serve solo per oggi? Day Pass a €2,99</h3>
               <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">Sblocca tutte le funzioni Pro per 24 ore. Nessun abbonamento.</p>
             </div>
           </div>
@@ -135,12 +135,12 @@ export default function PrezziClient() {
             disabled={loadingPass}
             className="shrink-0 px-4 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium transition-colors disabled:opacity-60"
           >
-            {loadingPass ? "Attendi…" : "Prendi il Day Pass — $2,99"}
+            {loadingPass ? "Attendi…" : "Prendi il Day Pass — €2,99"}
           </button>
         </div>
 
         <p className="text-center text-xs text-[#A3A3A3] mt-8">
-          Pagamento sicuro con Stripe. Puoi disdire quando vuoi. I prezzi sono in dollari USA.
+          Pagamento sicuro con Stripe. Puoi disdire quando vuoi. Prezzi in euro.
         </p>
       </div>
     </div>

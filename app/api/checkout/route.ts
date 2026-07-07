@@ -99,9 +99,13 @@ export async function POST(req: NextRequest) {
   let ga: string | undefined;
   let eventId: string | undefined;
   let source: string | undefined;
+  let currency: string | undefined;
   try {
     const body = await req.json().catch(() => ({}));
     if (body.plan === "annual") plan = "annual";
+    // EUR for the Italian section (prices carry a eur currency_option). Any other
+    // value falls through to the USD default, so English checkout is unchanged.
+    if (body.currency === "eur" || (typeof body.source === "string" && body.source.includes("/it"))) currency = "eur";
     if (body.fbp) fbp = String(body.fbp);
     if (body.fbc) fbc = String(body.fbc);
     if (body.ga) ga = String(body.ga);
@@ -153,6 +157,9 @@ export async function POST(req: NextRequest) {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
+      // Present EUR to Italian buyers (price has a eur currency_option). Omitted
+      // for everyone else -> Stripe uses the USD default. Additive, safe.
+      ...(currency ? { currency } : {}),
       // Pre-fill email for logged-in users; for guests omit it — in subscription
       // mode Stripe Checkout collects the email and always creates the Customer
       // itself (customer_creation is NOT valid for mode:"subscription").

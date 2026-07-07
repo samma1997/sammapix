@@ -62,6 +62,8 @@ export async function POST(req: NextRequest) {
   const entry = req.cookies.get("sx_ft")?.value?.replace(/[^a-zA-Z0-9/:_|.-]/g, "").slice(0, 90);
 
   const unitAmount = isVideoVariant ? DAY_PASS_VIDEO_PRICE : DAY_PASS_PRICE;
+  // EUR for Italian buyers (same numeric amount, e.g. 2,99), USD for everyone else.
+  const passCurrency = source && source.includes("/it") ? "eur" : "usd";
   const passName = isVideoVariant
     ? "SammaPix Video Day Pass — 24h unlimited access"
     : "SammaPix Day Pass — 24h unlimited access";
@@ -96,7 +98,7 @@ export async function POST(req: NextRequest) {
       line_items: [
         {
           price_data: {
-            currency: "usd",
+            currency: passCurrency,
             product_data: {
               name: passName,
               description:
