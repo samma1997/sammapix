@@ -19,7 +19,9 @@ export const runtime = "nodejs";
 // ---------------------------------------------------------------------------
 const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-const EVENT_TTL_SECONDS = 60 * 60 * 24; // 24 hours
+// 96h: must exceed Stripe's webhook retry window (~72h) so a retry after the
+// window can never re-process an event and double-grant credits/day-pass.
+const EVENT_TTL_SECONDS = 60 * 60 * 96;
 
 async function isEventProcessed(eventId: string): Promise<boolean> {
   if (!REDIS_URL || !REDIS_TOKEN) return false; // No Redis → skip dedup
@@ -100,6 +102,13 @@ export async function POST(req: NextRequest) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const metadata = session.metadata ?? {};
+
+      // Guard for delayed payment methods (SEPA, bank transfer): a one-time
+      // session can "complete" before the money clears. Never grant on unpaid.
+      if (session.mode === "payment" && session.payment_status !== "paid") {
+        console.warn("[stripe/webhook] session completed but not paid:", session.id);
+        break;
+      }
 
       if (metadata.type === "gift") {
         // ----------------------------------------------------------------

@@ -42,9 +42,9 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
   } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const inDashboard = pathname.startsWith("/dashboard");
-  const isIt = pathname.startsWith("/it");
+  const isIt = pathname === "/it" || pathname.startsWith("/it/");
 
   // Clear files and force correct settings when switching between tool pages.
   // Without this, files from compress would persist when navigating to webp.
