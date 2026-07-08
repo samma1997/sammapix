@@ -151,7 +151,7 @@ export default function CookieConsent() {
           <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] mb-1">{isIt ? "Preferenze cookie" : "Cookie preferences"}</p>
           <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
             {isIt ? "Usiamo i cookie per analisi e pubblicità, per migliorare la tua esperienza." : "We use cookies for analytics and advertising to improve your experience."}{" "}
-            <a href="/privacy#cookies" className="underline hover:text-[#6366F1]">
+            <a href={isIt ? "/it/privacy#cookies" : "/privacy#cookies"} className="underline hover:text-[#6366F1]">
               {isIt ? "Scopri di più" : "Learn more"}
             </a>
           </p>

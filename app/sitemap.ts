@@ -205,6 +205,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       it: "/it/prezzi",
     },
     {
+      en: "/privacy",
+      it: "/it/privacy",
+    },
+    {
+      en: "/terms",
+      it: "/it/termini",
+    },
+    {
       en: "/passport-photo",
       it: "/it/foto-tessera",
     },

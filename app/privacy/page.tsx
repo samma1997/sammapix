@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "SammaPix privacy policy. Most image processing happens entirely in your browser. Learn what data we collect, how we use it, and your GDPR rights.",
   alternates: {
     canonical: `${APP_URL}/privacy`,
+    languages: { en: `${APP_URL}/privacy`, it: `${APP_URL}/it/privacy`, "x-default": `${APP_URL}/privacy` },
   },
   openGraph: {
     title: "Privacy Policy",

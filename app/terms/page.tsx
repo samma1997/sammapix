@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "SammaPix terms of service. Free and Pro plans, payment terms, file processing disclaimers, AI tool usage, and governing law (Italy / EU).",
   alternates: {
     canonical: `${APP_URL}/terms`,
+    languages: { en: `${APP_URL}/terms`, it: `${APP_URL}/it/termini`, "x-default": `${APP_URL}/terms` },
   },
   openGraph: {
     title: "Terms of Service",

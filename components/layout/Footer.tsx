@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { counterpartPath } from "@/lib/i18n-routes";
 import { getAllTrips } from "@/lib/destinations";
 import FooterPhotoStrip from "@/components/layout/FooterPhotoStrip";
 
@@ -141,6 +142,9 @@ const FOOTER_IT: Record<string, string> = {
 
 export default function Footer({ locale = "en" }: { locale?: string }) {
   const isIt = locale === "it";
+  // Su pagine italiane, punta al link italiano se esiste (privacy, tool, prezzi...),
+  // altrimenti resta l'inglese (tool senza versione IT).
+  const locHref = (h: string) => (isIt ? counterpartPath(h)?.href ?? h : h);
   const tr = (s: string) => (isIt && FOOTER_IT[s] ? FOOTER_IT[s] : s);
   const photoPool = footerPhotoPool(locale);
   return (
@@ -233,7 +237,7 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
               {SOCIAL_LINKS.map(({ href, label, icon }) => (
                 <a
                   key={label}
-                  href={href}
+                  href={locHref(href)}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
@@ -254,7 +258,7 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
               {TOOL_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={locHref(href)}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
                     {tr(label)}
@@ -273,7 +277,7 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
               {QUICK_CONVERT_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={locHref(href)}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
                     {tr(label)}
@@ -292,7 +296,7 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
               {RESIZE_SOCIAL_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={locHref(href)}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
                     {tr(label)}
@@ -311,7 +315,7 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
               {COMPANY_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={locHref(href)}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
                     {tr(label)}
@@ -330,7 +334,7 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
               {LEGAL_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={locHref(href)}
                     className="text-[13px] text-gray-400 dark:text-[#737373] hover:text-gray-600 dark:hover:text-[#A3A3A3] transition-colors duration-150"
                   >
                     {tr(label)}

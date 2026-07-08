@@ -11,6 +11,8 @@ export const EN_TO_IT: Record<string, string> = {
   "/passport-photo": "/it/foto-tessera",
   "/pricing": "/it/prezzi",
   "/blog": "/it/blog",
+  "/privacy": "/it/privacy",
+  "/terms": "/it/termini",
 };
 
 export const IT_TO_EN: Record<string, string> = Object.fromEntries(
