@@ -9,6 +9,8 @@ export const EN_TO_IT: Record<string, string> = {
   "/about": "/it/chi-siamo",
   "/portfolio": "/it/portfolio",
   "/passport-photo": "/it/foto-tessera",
+  "/pricing": "/it/prezzi",
+  "/blog": "/it/blog",
 };
 
 export const IT_TO_EN: Record<string, string> = Object.fromEntries(
@@ -16,14 +18,14 @@ export const IT_TO_EN: Record<string, string> = Object.fromEntries(
 );
 
 export function localeFromPath(path: string): "it" | "en" {
-  return path.startsWith("/it") ? "it" : "en";
+  return path === "/it" || path.startsWith("/it/") ? "it" : "en";
 }
 
 /** URL della stessa pagina nell'altra lingua, o null se non tradotta. */
 export function counterpartPath(
   path: string
 ): { locale: "it" | "en"; href: string } | null {
-  if (path.startsWith("/it")) {
+  if (path === "/it" || path.startsWith("/it/")) {
     const en = IT_TO_EN[path];
     if (en) return { locale: "en", href: en };
     const mi = path.match(/^\/it\/comprimi-a\/(.+)$/);

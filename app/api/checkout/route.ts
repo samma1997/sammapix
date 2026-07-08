@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
     if (body.plan === "annual") plan = "annual";
     // EUR for the Italian section (prices carry a eur currency_option). Any other
     // value falls through to the USD default, so English checkout is unchanged.
-    if (body.currency === "eur" || (typeof body.source === "string" && body.source.includes("/it"))) currency = "eur";
+    if (body.currency === "eur" || (typeof body.source === "string" && (body.source === "/it" || body.source.startsWith("/it/")))) currency = "eur";
     if (body.fbp) fbp = String(body.fbp);
     if (body.fbc) fbc = String(body.fbc);
     if (body.ga) ga = String(body.ga);

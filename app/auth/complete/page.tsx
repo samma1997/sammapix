@@ -21,7 +21,9 @@ function CompleteInner() {
   const router = useRouter();
 
   const sessionId = searchParams.get("session_id") ?? "";
-  const dest = searchParams.get("dest") ?? "/dashboard";
+  const rawDest = searchParams.get("dest") ?? "/dashboard";
+  // Only allow internal relative paths (block open redirect to //evil.com etc).
+  const dest = rawDest.startsWith("/") && !rawDest.startsWith("//") ? rawDest : "/dashboard";
 
   const [status, setStatus] = useState<"loading" | "error">("loading");
   const [errorMsg, setErrorMsg] = useState<string>("");

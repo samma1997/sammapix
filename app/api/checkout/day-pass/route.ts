@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
 
   const unitAmount = isVideoVariant ? DAY_PASS_VIDEO_PRICE : DAY_PASS_PRICE;
   // EUR for Italian buyers (same numeric amount, e.g. 2,99), USD for everyone else.
-  const passCurrency = source && source.includes("/it") ? "eur" : "usd";
+  const passCurrency = source && (source === "/it" || source.startsWith("/it/")) ? "eur" : "usd";
   const passName = isVideoVariant
     ? "SammaPix Video Day Pass — 24h unlimited access"
     : "SammaPix Day Pass — 24h unlimited access";

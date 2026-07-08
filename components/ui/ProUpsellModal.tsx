@@ -166,8 +166,11 @@ export default function ProUpsellModal({
     founding.spotsLeft > 0 &&
     (founding.percentOff > 0 || founding.amountOff > 0)
   );
-  const monthlyFinalCents = applyFoundingDiscount(900, founding);
-  const monthlyFinal = (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
+  const monthlyFinalCents = applyFoundingDiscount(isIt ? 899 : 900, founding);
+  const monthlyFinal = isIt
+    ? (monthlyFinalCents / 100).toFixed(2).replace(".", ",")
+    : (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
+  const curr = isIt ? "€" : "$";
 
   // Track upsell shown when modal opens
   const [tracked, setTracked] = useState(false);
@@ -378,8 +381,8 @@ export default function ProUpsellModal({
           {isFounding && (
             <div className="mb-3 px-2.5 py-1.5 rounded bg-[#FEF2F2] dark:bg-red-950/30 border border-red-200 dark:border-red-900/40 text-center">
               <p className="text-[11px] font-medium text-red-700 dark:text-red-400">
-                <span className="font-bold">{founding!.spotsLeft}</span> of {founding!.totalSpots} founding spots left ·{" "}
-                <span className="font-bold">${monthlyFinal}/mo</span> locks forever
+                <span className="font-bold">{founding!.spotsLeft}</span> {isIt ? `di ${founding!.totalSpots} posti fondatori rimasti` : `of ${founding!.totalSpots} founding spots left`} ·{" "}
+                <span className="font-bold">{curr}{monthlyFinal}{isIt ? "/mese" : "/mo"}</span> {isIt ? "bloccato per sempre" : "locks forever"}
               </p>
             </div>
           )}
@@ -398,7 +401,7 @@ export default function ProUpsellModal({
             {loading
               ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
               : isFounding
-                ? (isIt ? `Blocca $${monthlyFinal}/mese per sempre \u2014 Inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
+                ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
                 : (isIt ? "Inizia la prova gratis di 7 giorni \u2014 poi \u20ac8,99/mese" : "Start 7-day free trial \u2014 $9/mo after")}
           </button>
 

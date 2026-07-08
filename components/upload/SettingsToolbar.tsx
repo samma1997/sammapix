@@ -95,7 +95,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
             </select>
             {session && (
               <span className="text-xs text-[#A3A3A3] ml-2">
-                {remaining}/{AI_OPS_FREE_PER_DAY} remaining
+                {remaining}/{AI_OPS_FREE_PER_DAY} {isIt ? "rimaste" : "remaining"}
               </span>
             )}
           </div>
@@ -120,7 +120,7 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
                   )}
                 />
               </div>
-              <span className="text-sm text-gray-600 dark:text-[#A3A3A3]">Convert to WebP</span>
+              <span className="text-sm text-gray-600 dark:text-[#A3A3A3]">{isIt ? "Converti in WebP" : "Convert to WebP"}</span>
             </label>
           )}
 
@@ -183,8 +183,8 @@ export default function SettingsToolbar({ onAiRenameClick, showWebPToggle = fals
 
           {showAiToggle && remaining === 0 && session && (
             <span className="text-[10px] text-red-500">
-              Limit reached &middot;{" "}
-              <a href="/dashboard/upgrade" className="underline">Go Pro</a>
+              {isIt ? "Limite raggiunto" : "Limit reached"} &middot;{" "}
+              <a href={isIt ? "/it/prezzi" : "/dashboard/upgrade"} className="underline">{isIt ? "Passa a Pro" : "Go Pro"}</a>
             </span>
           )}
         </div>
