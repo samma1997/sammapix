@@ -814,6 +814,7 @@ export default function PricingView() {
               "@context": "https://schema.org",
               "@type": "Product",
               "name": "SammaPix Pro",
+              "image": ["https://sammapix.com/og-image.png"],
               "description":
                 "AI Workflow Pipeline for photographers- batch processing, AI rename, alt text generation, and zero ads.",
               "brand": { "@type": "Brand", "name": "SammaPix" },
