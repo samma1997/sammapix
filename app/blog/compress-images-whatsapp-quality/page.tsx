@@ -5,9 +5,9 @@ import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 
 export const metadata: Metadata = {
-  title: "Send WhatsApp Photos Perfectly Sharp, 30-Second Fix (2026)",
+  title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
   description:
-    "WhatsApp compresses 80% quality loss. Fix: 1920px, JPEG 80%, sRGB. Pre-compress in browser, no upload. Perfectly sharp photos guaranteed.",
+    "Yes, WhatsApp compresses every photo you send. The fix: resize to 1920px and export at quality 80 before sending. Sharp results, free, no upload.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     "whatsapp image resolution",
   ],
   openGraph: {
-    title: "Send WhatsApp Photos Perfectly Sharp, 30-Second Fix (2026)",
+    title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
     description:
-      "WhatsApp compresses 80% quality loss. Pre-compress 1920px JPEG at 80% quality. Perfectly sharp photos in 30 seconds.",
+      "Yes, WhatsApp compresses every photo. The fix: resize to 1920px and export at quality 80 before sending. Sharp photos in 30 seconds.",
     url: `${APP_URL}/blog/compress-images-whatsapp-quality`,
     type: "article",
     publishedTime: "2026-04-05",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Send WhatsApp Photos Perfectly Sharp, 30-Second Fix (2026)",
+    title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
     description:
-      "WhatsApp compresses photos 80%. Perfectly sharp fix: 1920px JPEG quality 80%. Works iPhone, Android, Web.",
+      "Yes, WhatsApp compresses photos. The fix: resize to 1920px, export at quality 80. Works on iPhone, Android and Web.",
     creator: "@lucasammarco",
   },
 };

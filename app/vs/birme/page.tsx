@@ -5,8 +5,8 @@ import { Check, X, ArrowRight, Zap, Sparkles, Lock, FileImage } from "lucide-rea
 import SiteGroundBanner from "@/components/ads/SiteGroundBanner";
 
 export const metadata: Metadata = {
-  title: "SammaPix vs Birme - Bulk Image Resize & Optimize Comparison 2026",
-  description: "SammaPix vs Birme for bulk image resizing and optimization. SammaPix adds WebP conversion, AI rename, EXIF removal, and compression- all browser-based and free.",
+  title: "Birme Alternative: Free Bulk Resize + Compress, AI Rename",
+  description: "Birme's bulk resize is free. SammaPix does that plus WebP, AI rename, EXIF removal and compression, all browser-based and instant. No upload.",
   keywords: [
     "birme alternative",
     "bulk image resize free",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/vs/birme`,
   },
   openGraph: {
-    title: "SammaPix vs Birme - Bulk Image Tools Comparison 2026",
-    description: "Birme is handy for bulk resizing. SammaPix does that and more- compression, WebP conversion, AI rename, EXIF removal- all free in-browser.",
+    title: "Birme Alternative: Free Bulk Resize + Compress, AI Rename",
+    description: "Birme is handy for bulk resizing. SammaPix does that and more: compression, WebP, AI rename and EXIF removal, all free in-browser.",
     type: "website",
     url: `${APP_URL}/vs/birme`,
     images: [
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SammaPix vs Birme - Bulk Image Resize & Optimize Comparison 2026",
-    description: "SammaPix vs Birme for bulk image resizing and optimization. SammaPix adds WebP conversion, AI rename, EXIF removal, and compression- all browser-based and free.",
+    title: "Birme Alternative: Free Bulk Resize + Compress, AI Rename",
+    description: "Birme's bulk resize is free. SammaPix does that plus WebP, AI rename, EXIF removal and compression, all browser-based and instant. No upload.",
   },
 };
 
