@@ -543,6 +543,10 @@ export default function ResizePack({
   const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
   const [softUpsellOpen, setSoftUpsellOpen] = useState(false);
+  // Soft, non-blocking batch nudge shown after a single-image download.
+  // Covers the high-traffic single-use case (e.g. /resize/whatsapp) where the
+  // ZIP/batch upsell would otherwise never fire. Reuses the converting zip modal.
+  const [batchNudge, setBatchNudge] = useState(false);
 
   // Processing state
   const [processingTotal, setProcessingTotal] = useState(0);
@@ -800,7 +804,9 @@ export default function ResizePack({
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }, []);
+    // Soft, one-time batch nudge for free users after they grab a single file.
+    if (!isPro) setBatchNudge(true);
+  }, [isPro]);
 
   // ── ZIP download ──────────────────────────────────────────────────────────
   const handleDownloadZip = useCallback(async () => {
@@ -1362,6 +1368,33 @@ export default function ResizePack({
               )}
             </div>
           </div>
+
+          {/* Soft batch nudge (free users, after a single download) */}
+          {!isPro && batchNudge && (
+            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA] dark:bg-[#191919] flex items-center justify-between gap-3 flex-wrap">
+              <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
+                <span className="font-semibold text-[#171717] dark:text-[#E5E5E5]">More photos to resize?</span>{" "}
+                Pro resizes up to 500 at once and downloads them in a single ZIP.
+              </p>
+              <div className="flex gap-2 shrink-0">
+                <button
+                  onClick={() => {
+                    setBatchNudge(false);
+                    setZipUpsellOpen(true);
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
+                >
+                  Try Pro
+                </button>
+                <button
+                  onClick={() => setBatchNudge(false)}
+                  className="inline-flex items-center px-3 py-2 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+                >
+                  No thanks
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
