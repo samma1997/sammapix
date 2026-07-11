@@ -245,6 +245,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Italian blog articles (net-new Italian content, no English equivalent)
   const italianBlog: MetadataRoute.Sitemap = [
+    "come-togliere-lo-sfondo-da-una-foto",
     "come-ridurre-peso-di-una-foto",
     "come-convertire-heic-in-jpg",
     "come-ridimensionare-una-foto",

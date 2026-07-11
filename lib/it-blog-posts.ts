@@ -10,6 +10,14 @@ export interface ItPost {
 
 export const IT_POSTS: ItPost[] = [
   {
+    slug: "come-togliere-lo-sfondo-da-una-foto",
+    title: "Come togliere lo sfondo da una foto (gratis, online)",
+    description:
+      "Rimuovi lo sfondo da una foto nel browser, gratis e senza upload. Ottieni un PNG trasparente in pochi secondi, da iPhone, Android o computer.",
+    date: "11 luglio 2026",
+    tag: "Guida",
+  },
+  {
     slug: "come-fare-una-foto-tessera-a-casa",
     title: "Come fare una foto tessera a casa col telefono",
     description:

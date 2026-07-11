@@ -461,6 +461,7 @@ export default function ComeRidurrePesoFotoPage() {
 
         <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-8 mb-3">Guide correlate</h2>
         <ul className="list-disc pl-5 space-y-1">
+          <li><Link href="/it/blog/come-togliere-lo-sfondo-da-una-foto" className="underline">Come togliere lo sfondo da una foto</Link></li>
           <li><Link href="/it/blog/come-convertire-heic-in-jpg" className="underline">Come convertire HEIC in JPG</Link></li>
           <li><Link href="/it/blog/come-ridimensionare-una-foto" className="underline">Come ridimensionare una foto</Link></li>
         </ul>
