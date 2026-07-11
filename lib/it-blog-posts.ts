@@ -10,6 +10,22 @@ export interface ItPost {
 
 export const IT_POSTS: ItPost[] = [
   {
+    slug: "come-cancellare-i-metadati-di-una-foto",
+    title: "Come cancellare i metadati di una foto (GPS incluso)",
+    description:
+      "Ogni foto contiene posizione GPS, modello del telefono e ora. Ecco come rimuovere i metadati nascosti prima di condividerla, gratis e nel browser.",
+    date: "11 luglio 2026",
+    tag: "Guida",
+  },
+  {
+    slug: "come-convertire-una-foto-in-pdf",
+    title: "Convertire foto in PDF gratis, senza caricarle online",
+    description:
+      "Converti una o più foto in un unico PDF nel browser, senza registrazione e senza caricare le immagini su server esterni. Ideale per documenti personali.",
+    date: "11 luglio 2026",
+    tag: "Guida",
+  },
+  {
     slug: "come-togliere-lo-sfondo-da-una-foto",
     title: "Come togliere lo sfondo da una foto (gratis, online)",
     description:
