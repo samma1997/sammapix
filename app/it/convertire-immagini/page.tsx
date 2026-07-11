@@ -69,6 +69,7 @@ const CONVERSIONS = [
 ];
 
 const EXPLORE = [
+  { name: "Guida: come convertire HEIC in JPG", href: "/it/blog/come-convertire-heic-in-jpg" },
   { name: "Comprimi immagini", href: "/it/tools/comprimere-immagini" },
   { name: "Comprimi a dimensione", href: "/it/comprimi-a-dimensione" },
   { name: "Ridimensiona immagini", href: "/it/ridimensionare-immagini" },

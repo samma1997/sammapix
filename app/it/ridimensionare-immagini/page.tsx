@@ -68,10 +68,11 @@ const PLATFORMS = [
 ];
 
 const EXPLORE = [
+  { name: "Guida: come ridimensionare una foto", href: "/it/blog/come-ridimensionare-una-foto" },
   { name: "Comprimi a dimensione", href: "/it/comprimi-a-dimensione" },
   { name: "Comprimi immagini", href: "/it/tools/comprimere-immagini" },
-  { name: "Converti formato", href: "/convert" },
-  { name: "Foto tessera", href: "/tools/passport-photo" },
+  { name: "Converti formato", href: "/it/convertire-immagini" },
+  { name: "Foto tessera", href: "/it/foto-tessera" },
 ];
 
 export default function RidimensionareImmaginiPage() {

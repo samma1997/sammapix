@@ -76,11 +76,12 @@ const SIZES = getAllTargets()
   }));
 
 const EXPLORE = [
-  { name: "Ridimensiona per le piattaforme", href: "/resize" },
-  { name: "Converti formato", href: "/convert" },
+  { name: "Guida: come ridurre il peso di una foto", href: "/it/blog/come-ridurre-peso-di-una-foto" },
+  { name: "Ridimensiona le immagini", href: "/it/ridimensionare-immagini" },
+  { name: "Converti formato", href: "/it/convertire-immagini" },
+  { name: "Foto tessera", href: "/it/foto-tessera" },
   { name: "Ottimizza per CMS", href: "/optimize-for" },
   { name: "Guide alle dimensioni immagine", href: "/image-size" },
-  { name: "Foto tessera", href: "/tools/passport-photo" },
 ];
 
 export default function ComprimiADimensionePage() {
