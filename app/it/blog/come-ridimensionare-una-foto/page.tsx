@@ -333,6 +333,12 @@ export default function ComeRidimensionareUnaFotoPage() {
           oltre la misura originale, perché diventa sfocata. Parti sempre da una
           foto più grande di quella che ti serve.
         </p>
+
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-8 mb-3">Guide correlate</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><Link href="/it/blog/come-ridurre-peso-di-una-foto" className="underline">Come ridurre il peso di una foto</Link></li>
+          <li><Link href="/it/blog/come-convertire-heic-in-jpg" className="underline">Come convertire HEIC in JPG</Link></li>
+        </ul>
       </BlogArticleLayout>
     </>
   );

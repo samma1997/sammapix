@@ -350,6 +350,12 @@ export default function ComeConvertireHeicInJpgPage() {
           foto. Se preferisci puoi impostare l’iPhone perché scatti direttamente
           in JPG, dalle impostazioni della Fotocamera.
         </p>
+
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#E5E5E5] mt-8 mb-3">Guide correlate</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><Link href="/it/blog/come-ridurre-peso-di-una-foto" className="underline">Come ridurre il peso di una foto</Link></li>
+          <li><Link href="/it/blog/come-ridimensionare-una-foto" className="underline">Come ridimensionare una foto</Link></li>
+        </ul>
       </BlogArticleLayout>
     </>
   );
