@@ -26,9 +26,13 @@ interface ToolInterfaceProps {
   toolName?: string;
   /** Reduce top padding to fit a split-hero pattern with animated demo above. */
   compactHero?: boolean;
+  /** When true, hide the standalone marketing chrome (feature cards, privacy badge,
+   *  third-party ad, big Go-Pro CTA) so the tool can live inline inside an article.
+   *  The drop zone + the batch/ZIP Pro gate stay — that is the real conversion path. */
+  embedded?: boolean;
 }
 
-export default function ToolInterface({ defaultMode, toolName, compactHero }: ToolInterfaceProps) {
+export default function ToolInterface({ defaultMode, toolName, compactHero, embedded }: ToolInterfaceProps) {
   const {
     items,
     aiRenameFile,
@@ -134,7 +138,7 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
       </section>
 
       {/* ── Features ── */}
-      {!hasFiles && (
+      {!hasFiles && !embedded && (
         <section className="py-20 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-5xl mx-auto">
             <div className={cn("grid grid-cols-1 gap-6", defaultMode ? "sm:grid-cols-1 max-w-md mx-auto" : "sm:grid-cols-3")}>
@@ -166,7 +170,7 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
       )}
 
       {/* ── Privacy badge ── */}
-      {!hasFiles && (
+      {!hasFiles && !embedded && (
         <section className="py-12 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
             <div className="border border-gray-200 dark:border-[#2A2A2A] rounded-md p-6 bg-gray-50 dark:bg-[#1E1E1E]">
@@ -188,15 +192,17 @@ export default function ToolInterface({ defaultMode, toolName, compactHero }: To
         </section>
       )}
 
-      {/* ── SiteGround banner ── */}
-      <div className="px-4 sm:px-6 pb-6">
-        <div className="max-w-3xl mx-auto">
-          <SiteGroundBanner variant="web-hosting" />
+      {/* ── SiteGround banner ── (no third-party ad inside an article embed) */}
+      {!embedded && (
+        <div className="px-4 sm:px-6 pb-6">
+          <div className="max-w-3xl mx-auto">
+            <SiteGroundBanner variant="web-hosting" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ── CTA ── */}
-      {!hasFiles && !isPro && !inDashboard && (
+      {!hasFiles && !isPro && !inDashboard && !embedded && (
         <section className="py-16 px-4 sm:px-6 border-t border-gray-100 dark:border-[#2A2A2A]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-[#E5E5E5] mb-3 tracking-tight">

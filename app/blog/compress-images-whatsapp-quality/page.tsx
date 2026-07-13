@@ -213,7 +213,7 @@ export default function CompressImagesWhatsappQualityPage() {
           <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
             Drop your photos below to resize and compress them right here — free, in your browser, nothing uploaded. Then read on for the settings that keep them sharp.
           </p>
-          <CompressTargetToolEmbed />
+          <CompressTargetToolEmbed embedded />
         </div>
 
         {/* ── Section 1 ────────────────────────────────────── */}

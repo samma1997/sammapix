@@ -19,9 +19,11 @@ const NextStepSuggestions = dynamic(() => import("@/components/tools/NextStepSug
 export interface CompressClientProps {
   /** When set, shows a target-size badge above the tool. Standalone behaviour unchanged when omitted. */
   targetKB?: number;
+  /** When true, strips the standalone marketing chrome so the tool fits inline in an article. */
+  embedded?: boolean;
 }
 
-export default function CompressClient({ targetKB }: CompressClientProps = {}) {
+export default function CompressClient({ targetKB, embedded }: CompressClientProps = {}) {
   const isIt = (usePathname() || "").startsWith("/it");
   return (
     <>
@@ -41,7 +43,7 @@ export default function CompressClient({ targetKB }: CompressClientProps = {}) {
         </div>
       )}
 
-      <ToolInterface defaultMode="compress" toolName="compress" compactHero />
+      <ToolInterface defaultMode="compress" toolName="compress" compactHero embedded={embedded} />
 
       {/* Next-step suggestions- shown automatically when all files are done */}
       <section className="px-4 sm:px-6 pb-2">
