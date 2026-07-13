@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
+import CompressTargetToolEmbed from "@/components/tools/CompressTargetToolEmbed";
 
 export const metadata: Metadata = {
   title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
@@ -204,6 +205,17 @@ export default function CompressImagesWhatsappQualityPage() {
           </div>
         }
       >
+        {/* ── In-article tool: act first, read the "why" below ─────────────── */}
+        <div className="not-prose mb-10 rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#161616] p-4 sm:p-5">
+          <h2 className="text-base font-semibold text-gray-900 dark:text-[#E5E5E5] mb-1 tracking-tight">
+            Compress your photos for WhatsApp now
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-[#A3A3A3] mb-4">
+            Drop your photos below to resize and compress them right here — free, in your browser, nothing uploaded. Then read on for the settings that keep them sharp.
+          </p>
+          <CompressTargetToolEmbed />
+        </div>
+
         {/* ── Section 1 ────────────────────────────────────── */}
 
         <h2 id="how-whatsapp-compresses-images" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
