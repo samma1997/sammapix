@@ -191,10 +191,10 @@ export default function OptimizeImagesShopifyPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/tools/compress"
+                href="/optimize-for/shopify"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
-                Compress Images
+                Open the Shopify Image Optimizer
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </Link>
               <Link
@@ -300,11 +300,11 @@ export default function OptimizeImagesShopifyPage() {
           {" "}to convert your resized and compressed images. WebP files are typically 25&ndash;35% smaller than JPEG at the same visual quality. Upload the WebP files to Shopify &mdash; done.
         </p>
 
-        {/* Inline CTA */}
-        <Link href="/tools/compress" className="flex items-center justify-between gap-4 bg-[#171717] text-white rounded-md px-6 py-5 hover:bg-[#262626] transition-colors group mt-2 mb-8">
+        {/* Inline CTA — the all-in-one Shopify landing (transactional canonical) */}
+        <Link href="/optimize-for/shopify" className="flex items-center justify-between gap-4 bg-[#171717] text-white rounded-md px-6 py-5 hover:bg-[#262626] transition-colors group mt-2 mb-8">
           <div>
             <p className="text-xs font-medium text-[#A3A3A3] uppercase tracking-wide mb-1">Free tool &mdash; no Shopify app needed</p>
-            <p className="text-sm font-semibold text-white leading-snug">Compress your Shopify product images now &mdash; batch up to 20</p>
+            <p className="text-sm font-semibold text-white leading-snug">Optimize your Shopify images now &mdash; resize, compress &amp; WebP in one place</p>
           </div>
           <ArrowRight className="h-4 w-4 text-[#737373] group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" strokeWidth={1.5} />
         </Link>
