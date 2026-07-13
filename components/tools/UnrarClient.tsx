@@ -14,7 +14,10 @@ import {
   CheckCircle2,
   Zap,
   ExternalLink,
+  Copy,
+  Minimize2,
 } from "lucide-react";
+import Link from "next/link";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
@@ -891,6 +894,46 @@ export default function UnrarClient() {
               Files were extracted locally in your browser and are never uploaded.
             </p>
           </div>
+
+          {/* Cross-sell: route the extracted photos into the tools that convert.
+              Only shown when the archive actually contains images, so it stays
+              relevant. No paywall here — the batch upsell fires inside those
+              tools where it already converts. */}
+          {(() => {
+            const imgCount = readyEntries.filter((e) =>
+              /\.(jpe?g|png|webp|heic|heif|gif|bmp|tiff?)$/i.test(e.name)
+            ).length;
+            if (imgCount < 2) return null;
+            return (
+              <div className="px-4 py-3.5 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/40 rounded-xl">
+                <p className="text-xs font-semibold text-indigo-900 dark:text-indigo-200 mb-2.5">
+                  {imgCount} photo{imgCount !== 1 ? "s" : ""} inside — next step?
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href="/tools/twinhunt"
+                    onClick={() =>
+                      trackEvent("unrar_crosssell_click", { to: "twinhunt", images: imgCount })
+                    }
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-white dark:bg-[#191919] text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/40 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-950/50 transition-colors"
+                  >
+                    <Copy size={12} strokeWidth={1.5} />
+                    Find duplicate photos
+                  </Link>
+                  <Link
+                    href="/compress-to/1mb"
+                    onClick={() =>
+                      trackEvent("unrar_crosssell_click", { to: "compress", images: imgCount })
+                    }
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-white dark:bg-[#191919] text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/40 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-950/50 transition-colors"
+                  >
+                    <Minimize2 size={12} strokeWidth={1.5} />
+                    Compress photos
+                  </Link>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* File list */}
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden divide-y divide-[#F5F5F5] dark:divide-[#252525]">
