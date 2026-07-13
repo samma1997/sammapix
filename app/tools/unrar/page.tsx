@@ -85,6 +85,14 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
+      name: "How do I extract a RAR file online for free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Drop your .rar file onto this page and it extracts instantly in your browser. There is no WinRAR to install, no signup, and nothing is uploaded. It works as a free online RAR extractor on Windows, Mac, Chromebook or phone: open the archive, preview the files, and download them one by one or all at once as a ZIP.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Are my files uploaded to a server?",
       acceptedAnswer: {
         "@type": "Answer",
