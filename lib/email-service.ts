@@ -47,11 +47,10 @@ async function getFoundingStatusForEmail(): Promise<FoundingEmailContext> {
 
 export async function sendWelcomeEmail(to: string, name: string | null) {
   const { WelcomeEmail } = await import("@/emails/WelcomeEmail");
-  const founding = await getFoundingStatusForEmail();
-  const html = await render(WelcomeEmail({ name: name ?? "there", founding }));
-  const subject = founding.active
-    ? `Your AI renames are ready — and ${founding.spotsLeft} Founding spots left at $${founding.monthlyPriceUsd}/mo`
-    : "Your AI rename credits are ready 🎨";
+  const html = await render(WelcomeEmail({ name: name ?? "there" }));
+  // Value-first, zero sell. The user signed in to remove ads — confirm that,
+  // do not pitch a plan or a price on the very first email.
+  const subject = "You're in — no more ads on SammaPix";
   await resend.emails.send({
     from: FROM,
     to,

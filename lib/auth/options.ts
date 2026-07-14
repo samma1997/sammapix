@@ -74,18 +74,6 @@ export const authOptions: AuthOptions = {
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
   callbacks: {
-    // Capture every OAuth sign-in (Google/GitHub) into the Resend nurture
-    // audience. This is the missing funnel rung: free users who sign in to
-    // remove ads now enter the email drip and get nurtured toward a trial.
-    // Fire-and-forget — never block or fail the login on email-capture errors.
-    async signIn({ user, account }) {
-      if (user?.email && account?.provider && account.provider !== "credentials") {
-        import("@/lib/resend")
-          .then(({ addToAudience }) => addToAudience(user.email as string, user.name ?? null))
-          .catch(() => {});
-      }
-      return true;
-    },
     async jwt({ token, user }) {
       if (user?.email) {
         // First sign-in- always fetch plan immediately

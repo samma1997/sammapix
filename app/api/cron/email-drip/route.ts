@@ -4,7 +4,7 @@ import {
   sendDay2Email,
   sendDay7Email,
   sendDay30Email,
-  sendReEngageDay14Email,
+  sendDay14Email,
 } from "@/lib/email-service";
 import { getUserPlan } from "@/lib/user-plan";
 
@@ -56,11 +56,14 @@ export async function GET(request: NextRequest) {
           await sendDay7Email(contact.email, name);
           sent++;
         } else if (daysSince === 17) {
-          // Single win-back: only for users still on free (best proxy for
-          // "didn't convert yet" without a last_active column). Pro users skip.
+          // Neutral check-in (not a "we miss you" win-back): we have no
+          // reliable last-active signal, so we must NOT assume the user has
+          // been away — they may have used a tool yesterday. This asks a light
+          // question instead, safe for everyone and doubles as segmentation.
+          // Free users only; Pro users skip.
           const plan = await getUserPlan(contact.email).catch(() => "free");
           if (plan === "free") {
-            await sendReEngageDay14Email(contact.email, name);
+            await sendDay14Email(contact.email, name);
             sent++;
           }
         } else if (daysSince === 30) {

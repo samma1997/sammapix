@@ -11,7 +11,6 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { TOOL_COUNT } from "@/lib/constants";
 
 const BASE_URL = "https://sammapix.com";
 
@@ -87,112 +86,46 @@ const footer = {
 };
 const hr = { borderColor: "#e5e5e5", margin: "28px 0" };
 
-interface FoundingProps {
-  active: boolean;
-  spotsLeft: number;
-  totalSpots: number;
-  percentOff: number;
-  monthlyPriceUsd: number;
-}
-
+// `founding` is accepted for backwards compatibility with the caller but is
+// deliberately NOT used here: the welcome email confirms the value the user
+// signed up for (no ads) and sells nothing. Any paid offer is introduced far
+// later in the sequence, once we have earned it.
 interface WelcomeEmailProps {
   name: string;
-  founding?: FoundingProps;
+  founding?: unknown;
 }
 
-const foundingCard = {
-  backgroundColor: "#FFF7ED",
-  border: "1px solid #FED7AA",
-  borderRadius: "8px",
-  padding: "16px 18px",
-  margin: "20px 0",
-};
-const foundingBadge = {
-  display: "inline-block",
-  backgroundColor: "#F97316",
-  color: "#ffffff",
-  fontSize: "11px",
-  fontWeight: "700" as const,
-  padding: "3px 8px",
-  borderRadius: "999px",
-  letterSpacing: "0.04em",
-  textTransform: "uppercase" as const,
-  margin: "0 0 8px",
-};
-const foundingHeading = {
-  fontSize: "16px",
-  fontWeight: "600" as const,
-  color: "#7C2D12",
-  margin: "0 0 6px",
-};
-const foundingBody = {
-  fontSize: "14px",
-  lineHeight: "1.55",
-  color: "#7C2D12",
-  margin: "0 0 12px",
-};
-const foundingButton = {
-  backgroundColor: "#F97316",
-  color: "#ffffff",
-  padding: "10px 18px",
-  borderRadius: "6px",
-  fontSize: "13px",
-  fontWeight: "600" as const,
-  textDecoration: "none",
-  display: "inline-block",
-};
-
-export function WelcomeEmail({ name, founding }: WelcomeEmailProps) {
-  const showFounding = founding?.active && founding.spotsLeft > 0;
-  const previewText = showFounding
-    ? `5 free AI renames + ${founding!.spotsLeft} Founding spots left at $${founding!.monthlyPriceUsd}/mo`
-    : "You have 5 free AI renames waiting for you";
-
+export function WelcomeEmail({ name }: WelcomeEmailProps) {
   return (
     <Html lang="en">
       <Head />
-      <Preview>{previewText}</Preview>
+      <Preview>You&apos;re in. No ads on any tool, and everything stays free.</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={logo}>
             Samma<span style={logoAccent}>Pix</span>
           </Text>
 
-          <Heading style={heading}>Your AI rename credits are ready</Heading>
+          <Heading style={heading}>You&apos;re in. No more ads.</Heading>
           <Text style={body}>Hi {name},</Text>
           <Text style={body}>
-            Welcome to SammaPix! Here&apos;s what you can do right now (all
-            free):
+            Thanks for signing in. From now on you won&apos;t see any ads while
+            you use SammaPix. That&apos;s it, nothing to set up.
           </Text>
+          <Text style={body}>While you&apos;re here, all of this is free:</Text>
 
           <Section>
-            <Text style={listItem}>
-              ✓ Compress JPG, PNG, WebP- no quality loss
-            </Text>
-            <Text style={listItem}>
-              ✓ Convert any image to WebP (25–34% lighter than JPEG)
-            </Text>
-            <Text style={listItem}>
-              ✓ AI rename: paste an image, get an SEO filename like{" "}
-              <span
-                style={{
-                  fontFamily: "monospace",
-                  fontSize: "13px",
-                  backgroundColor: "#f5f5f5",
-                  padding: "1px 5px",
-                  borderRadius: "3px",
-                  color: "#171717",
-                }}
-              >
-                golden-retriever-puppy-playing-grass.webp
-              </span>
-            </Text>
+            <Text style={listItem}>✓ Compress JPG, PNG, WebP with no quality loss</Text>
+            <Text style={listItem}>✓ Resize for any platform (Instagram, WhatsApp, TikTok…)</Text>
+            <Text style={listItem}>✓ Convert to WebP, HEIC, PDF and 10+ formats</Text>
+            <Text style={listItem}>✓ Open RAR and 7z archives right in your browser</Text>
+            <Text style={listItem}>✓ Remove backgrounds and find duplicate photos</Text>
           </Section>
 
           <Section style={highlight}>
             <Text style={highlightText}>
-              You have <strong>5 free AI renames today</strong>. Sign in is
-              already done- just open the tool and click AI Rename.
+              Your files never leave your browser. No uploads, no servers, no
+              waiting.
             </Text>
           </Section>
 
@@ -202,58 +135,26 @@ export function WelcomeEmail({ name, founding }: WelcomeEmailProps) {
             </Button>
           </Section>
 
-          <Text style={subtle}>
-            No setup needed. Your files never leave your browser.
-          </Text>
-
-          {showFounding ? (
-            <Section style={foundingCard}>
-              <Text style={foundingBadge}>
-                Founding offer · {founding!.spotsLeft} spots left
-              </Text>
-              <Heading style={foundingHeading}>
-                Lock $
-                {founding!.monthlyPriceUsd}
-                /month forever ({founding!.percentOff}% off)
-              </Heading>
-              <Text style={foundingBody}>
-                The first {founding!.totalSpots} users get all {TOOL_COUNT} tools for $
-                {founding!.monthlyPriceUsd}/mo — for life. No price increases,
-                even when we add new tools. Once the spots are gone, it goes
-                back to $9/mo.
-              </Text>
-              <Button
-                style={foundingButton}
-                href={`${BASE_URL}/dashboard/upgrade`}
-              >
-                Claim my Founding spot →
-              </Button>
-            </Section>
-          ) : null}
+          <Text style={subtle}>No account setup, no card, nothing to install.</Text>
 
           <Hr style={hr} />
 
           <Text style={body}>
-            Over the next few days I&apos;ll share tips to get the most out of
-            SammaPix.
+            Over the next couple of weeks I&apos;ll send a few short tips to get
+            more out of your photos. Useful stuff, not spam. If it&apos;s not for
+            you, one click unsubscribes you, no hard feelings.
           </Text>
-          <Text style={{ ...body, margin: "0" }}> - Luca, founder</Text>
+          <Text style={{ ...body, margin: "0" }}>- Luca, founder</Text>
 
           <Hr style={hr} />
           <Text style={footer}>
-            You&apos;re receiving this because you signed up for SammaPix.{" "}
+            You&apos;re receiving this because you signed in to SammaPix.{" "}
             {"\n"}
-            <Link
-              href={`${BASE_URL}/unsubscribe`}
-              style={{ color: "#a3a3a3" }}
-            >
+            <Link href={`${BASE_URL}/unsubscribe`} style={{ color: "#a3a3a3" }}>
               Unsubscribe
             </Link>
             {" · "}
-            <Link
-              href={`${BASE_URL}/privacy`}
-              style={{ color: "#a3a3a3" }}
-            >
+            <Link href={`${BASE_URL}/privacy`} style={{ color: "#a3a3a3" }}>
               Privacy Policy
             </Link>
             {"\n"}SammaPix · sammapix.com
