@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import FreeSignupAdBar from "@/components/ads/FreeSignupAdBar";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
@@ -101,6 +102,7 @@ export default function UnrarClient() {
   const [dragOver, setDragOver] = useState(false);
   const [zipBuilding, setZipBuilding] = useState(false);
   const [pollTimedOut, setPollTimedOut] = useState(false);
+  const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const workerRef = useRef<Worker | null>(null);
   const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -491,6 +493,14 @@ export default function UnrarClient() {
   const downloadAllAsZip = useCallback(async () => {
     const ready = entries.filter((e) => e.status === "ready" && e.buffer);
     if (ready.length === 0) return;
+    // Bulk "download all as ZIP" is Pro (same proven gate that converts on the
+    // other tools). Individual file downloads stay free, so the core "extract
+    // my RAR" job is unchanged.
+    if (!isPro) {
+      trackEvent("unrar_zip_gate", { files: ready.length });
+      setZipUpsellOpen(true);
+      return;
+    }
     setZipBuilding(true);
     try {
       const zip = new JSZip();
@@ -508,7 +518,7 @@ export default function UnrarClient() {
     } finally {
       setZipBuilding(false);
     }
-  }, [entries, rarFile]);
+  }, [entries, rarFile, isPro]);
 
   // ── Reset ─────────────────────────────────────────────────────────────────
 
@@ -1010,6 +1020,13 @@ export default function UnrarClient() {
 
       {/* Free-signup capture: logged-out only, self-hides when signed in */}
       <FreeSignupAdBar tool="unrar" />
+
+      {/* Bulk ZIP download is Pro — individual downloads stay free */}
+      <ProUpsellModal
+        open={zipUpsellOpen}
+        onClose={() => setZipUpsellOpen(false)}
+        trigger="zip"
+      />
     </div>
   );
 }
