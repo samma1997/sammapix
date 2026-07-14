@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Lock, Zap, FileImage, Sparkles, ArrowRight, Wand2 } from "lucide-react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import DropZone from "@/components/upload/DropZone";
 import SettingsToolbar from "@/components/upload/SettingsToolbar";
@@ -192,11 +192,25 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
         </section>
       )}
 
-      {/* ── SiteGround banner ── (no third-party ad inside an article embed) */}
-      {!embedded && (
+      {/* ── Ads + free-signup capture ──
+          Signed-in users (free OR pro) get NO ads — that is the free perk that
+          hooks the sign-in. Logged-out users see the ad + a 1-click Google CTA
+          to remove it; signing in captures their email into the nurture drip.
+          Hidden entirely inside article embeds. */}
+      {!embedded && !session && (
         <div className="px-4 sm:px-6 pb-6">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto space-y-2.5">
             <SiteGroundBanner variant="web-hosting" />
+            <button
+              onClick={() => {
+                trackEvent("free_signup_click", { source: "remove_ads", tool: toolName ?? "" });
+                signIn("google", { callbackUrl: pathname || "/" });
+              }}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-[#A3A3A3] bg-white dark:bg-[#1E1E1E] border border-gray-200 dark:border-[#2A2A2A] rounded-md hover:border-gray-300 dark:hover:border-[#3A3A3A] hover:text-gray-900 dark:hover:text-[#E5E5E5] transition-colors"
+            >
+              {isIt ? "Accedi gratis con Google — togli le pubblicità" : "Sign in free with Google — remove ads"}
+              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </button>
           </div>
         </div>
       )}
