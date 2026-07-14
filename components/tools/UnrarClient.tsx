@@ -18,6 +18,7 @@ import {
   Minimize2,
 } from "lucide-react";
 import Link from "next/link";
+import FreeSignupAdBar from "@/components/ads/FreeSignupAdBar";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
@@ -1006,6 +1007,9 @@ export default function UnrarClient() {
           </span>
         </div>
       )}
+
+      {/* Free-signup capture: logged-out only, self-hides when signed in */}
+      <FreeSignupAdBar tool="unrar" />
     </div>
   );
 }

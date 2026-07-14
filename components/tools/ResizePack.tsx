@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import FreeSignupAdBar from "@/components/ads/FreeSignupAdBar";
 import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
@@ -1464,6 +1465,9 @@ export default function ResizePack({
           </div>
         </div>
       )}
+
+      {/* Free-signup capture: logged-out only, self-hides when signed in */}
+      <FreeSignupAdBar tool="resize" />
     </div>
   );
 }
