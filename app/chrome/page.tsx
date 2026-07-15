@@ -1,14 +1,5 @@
 import { Metadata } from "next";
-import { Fraunces } from "next/font/google";
 import ChromeLanding from "./ChromeLanding";
-
-const display = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "SammaPix for Chrome — Image Tools in Your Browser",
@@ -38,9 +29,9 @@ export default function ChromePage() {
   };
 
   return (
-    <div className={display.variable}>
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <ChromeLanding />
-    </div>
+    </>
   );
 }
