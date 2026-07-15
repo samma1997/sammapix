@@ -153,6 +153,22 @@ export default function PrivacyPage() {
           </p>
         </section>
 
+        {/* 2b. Browser extension */}
+        <section>
+          <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            2b. SammaPix Browser Extension
+          </h2>
+          <p>
+            The SammaPix browser extension (&quot;SammaPix — Image Tools&quot;) provides the same image tools inside your browser&apos;s side panel. Like the website, all image processing (compression, conversion, cropping, watermarking, blurring, EXIF/GPS cleaning) and archive extraction (RAR, 7z, ZIP) happen locally in your browser. Your images and files are never uploaded to our servers.
+          </p>
+          <p className="mt-3">
+            The extension can read the images of a web page only after you explicitly open the panel or trigger an action on that page. Those images are processed on your device and are never transmitted to us.
+          </p>
+          <p className="mt-3">
+            <span className="font-medium text-[#404040] dark:text-[#D4D4D4]">Authentication and quota.</span> For bulk actions only (download, compress or rename many images at once), the extension contacts your own SammaPix account at sammapix.com to check your daily image quota and Pro status. This request relies on your existing SammaPix login session (a first-party authentication cookie sent by your browser) and transmits only a count of images; it does not send the images themselves, your password, or your browsing history. This is the single item of data that leaves your device, and only to SammaPix itself. We do not sell or share it with third parties.
+          </p>
+        </section>
+
         {/* 3. Cloud storage integrations */}
         <section>
           <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
