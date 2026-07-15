@@ -5,12 +5,17 @@ import { stripe } from "@/lib/stripe";
 import { incrWithTTL } from "@/lib/redis";
 import { hasActiveDayPass } from "@/lib/day-pass";
 import { DAY_PASS_PRICE, DAY_PASS_VIDEO_PRICE } from "@/lib/constants";
+import { isExtensionOrigin, withExtensionCors } from "@/lib/api-security";
 
 const ALLOWED_ORIGINS = [
   "https://sammapix.com",
   "https://www.sammapix.com",
   "https://staging-sammapix.vercel.app",
 ];
+
+export async function OPTIONS(req: NextRequest) {
+  return withExtensionCors(req, new NextResponse(null, { status: 204 }));
+}
 
 /** Extract a stable IP string from the request (for guest rate-limiting). */
 function getClientIp(req: NextRequest): string {
@@ -22,14 +27,15 @@ function getClientIp(req: NextRequest): string {
 }
 
 export async function POST(req: NextRequest) {
-  // CSRF: verify request originates from our own frontend in production
+  // CSRF: verify request originates from our own frontend in production.
+  // The SammaPix browser extension (chrome-extension://) is also allowed.
   if (process.env.NODE_ENV === "production") {
     const origin = req.headers.get("origin");
-    if (origin && !ALLOWED_ORIGINS.some((o) => origin === o)) {
-      return NextResponse.json(
+    if (origin && !isExtensionOrigin(req) && !ALLOWED_ORIGINS.some((o) => origin === o)) {
+      return withExtensionCors(req, NextResponse.json(
         { error: "Forbidden", code: "FORBIDDEN_ORIGIN" },
         { status: 403 }
-      );
+      ));
     }
   }
 
@@ -136,10 +142,10 @@ export async function POST(req: NextRequest) {
       after_expiration: { recovery: { enabled: true } },
     });
 
-    return NextResponse.json({
+    return withExtensionCors(req, NextResponse.json({
       url: checkoutSession.url,
       sessionId: checkoutSession.id,
-    });
+    }));
   } catch (err) {
     const message = err instanceof Error ? err.message : "Stripe error";
     console.error("[checkout/day-pass] Stripe error:", message);
