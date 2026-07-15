@@ -16,8 +16,8 @@ function routeFile(f) {
   var k = detectKind(f);
   if (k === "image") window.ImageTool.openWith(f, f.name);
   else if (k === "archive") window.ArchiveWS.open(f);
-  else if (k === "pdf") { toast("PDF: apro sul sito"); openUrl(siteUrl("pdf-merge")); }
-  else toast("Formato non supportato (immagine, RAR, 7z, ZIP, PDF)");
+  else if (k === "pdf") { toast("PDF: opening on the web"); openUrl(siteUrl("pdf-merge")); }
+  else toast("Unsupported file (image, RAR, 7z, ZIP, PDF)");
 }
 document.addEventListener("dragover", function (e) { if (atHome) e.preventDefault(); });
 document.addEventListener("drop", function (e) {
@@ -52,20 +52,20 @@ function ic(name) {
 // ─── tool registry ───
 // native ids handled locally; tools with `site` open sammapix.com/tools/<site>
 var TOOLS = [
-  { g: "In primo piano", id: "compress",  lb: "Compress",  sub: "JPG · WebP",   tile: "t-indigo", col: "#5b5ef0", icon: "compress" },
-  { g: "In primo piano", id: "convert",   lb: "Convert",   sub: "WebP/PNG/JPG", tile: "t-teal",   col: "#12a594", icon: "convert" },
-  { g: "In primo piano", id: "unrar",     lb: "Open RAR",  sub: "estrai",       tile: "t-amber",  col: "#d98420", icon: "archive" },
-  { g: "In primo piano", id: "sevenzip",  lb: "7z · ZIP",  sub: "estrai",       tile: "t-amber",  col: "#d98420", icon: "archive" },
-  { g: "In primo piano", id: "heic",      lb: "HEIC → JPG", sub: "iPhone",      tile: "t-purple", col: "#8b5cf6", icon: "convert", site: "heic" },
-  { g: "In primo piano", id: "pdf",       lb: "PDF",       sub: "unisci/dividi", tile: "t-red",   col: "#e5484d", icon: "pdf", site: "pdf-merge" },
+  { g: "Featured", id: "compress",  lb: "Compress",  sub: "JPG · WebP",   tile: "t-indigo", col: "#5b5ef0", icon: "compress" },
+  { g: "Featured", id: "convert",   lb: "Convert",   sub: "WebP/PNG/JPG", tile: "t-teal",   col: "#12a594", icon: "convert" },
+  { g: "Featured", id: "unrar",     lb: "Open RAR",  sub: "extract",       tile: "t-amber",  col: "#d98420", icon: "archive" },
+  { g: "Featured", id: "sevenzip",  lb: "7z · ZIP",  sub: "extract",       tile: "t-amber",  col: "#d98420", icon: "archive" },
+  { g: "Featured", id: "heic",      lb: "HEIC → JPG", sub: "iPhone",      tile: "t-purple", col: "#8b5cf6", icon: "convert", site: "heic" },
+  { g: "Featured", id: "pdf",       lb: "PDF",       sub: "merge/split", tile: "t-red",   col: "#e5484d", icon: "pdf", site: "pdf-merge" },
 
-  { g: "Immagine", id: "crop",      lb: "Crop",       tile: "t-green", col: "#16a34a", icon: "crop" },
-  { g: "Immagine", id: "watermark", lb: "Watermark",  tile: "t-pink",  col: "#db2777", icon: "stamp" },
-  { g: "Immagine", id: "blur",      lb: "Blur",       tile: "t-slate", col: "#64748b", icon: "blur" },
-  { g: "Immagine", id: "exif",      lb: "Clean EXIF", tile: "t-green", col: "#16a34a", icon: "shield" },
-  { g: "Immagine", id: "page",      lb: "Da pagina",  tile: "t-cyan",  col: "#0891b2", icon: "image" },
+  { g: "Image", id: "crop",      lb: "Crop",       tile: "t-green", col: "#16a34a", icon: "crop" },
+  { g: "Image", id: "watermark", lb: "Watermark",  tile: "t-pink",  col: "#db2777", icon: "stamp" },
+  { g: "Image", id: "blur",      lb: "Blur",       tile: "t-slate", col: "#64748b", icon: "blur" },
+  { g: "Image", id: "exif",      lb: "Clean EXIF", tile: "t-green", col: "#16a34a", icon: "shield" },
+  { g: "Image", id: "page",      lb: "From page",  tile: "t-cyan",  col: "#0891b2", icon: "image" },
 
-  { g: "Altro", id: "all", lb: "Tutti i 52 tool", sub: "sul sito", tile: "t-gray", col: "#71717a", icon: "grid", site: "" }
+  { g: "More", id: "all", lb: "All 52 tools", sub: "on the web", tile: "t-gray", col: "#71717a", icon: "grid", site: "" }
 ];
 
 // ─── global toast ───
@@ -108,7 +108,7 @@ window.SP = {
 // ─── HOME ───
 function renderHome() {
   atHome = true;
-  var html = '<div class="search"><span class="mag">🔍</span><input id="q" placeholder="Cerca un tool…"></div>';
+  var html = '<div class="search"><span class="mag">🔍</span><input id="q" placeholder="Search tools…"></div>';
   var groups = {};
   TOOLS.forEach(function (t) { (groups[t.g] = groups[t.g] || []).push(t); });
   Object.keys(groups).forEach(function (g) {
@@ -119,7 +119,7 @@ function renderHome() {
     });
     html += '</div>';
   });
-  html += '<div class="foot"><a id="site-link">sammapix.com — 52 tool gratis →</a></div>';
+  html += '<div class="foot"><a id="site-link">sammapix.com — 52 free tools →</a></div>';
   $view.innerHTML = html;
 
   $view.querySelectorAll("[data-id]").forEach(function (el) {
@@ -140,7 +140,7 @@ function renderHome() {
 function route(id) {
   var t = TOOLS.find(function (x) { return x.id === id; });
   if (!t) return;
-  if (t.soon) { toast("In arrivo 🙌"); return; }
+  if (t.soon) { toast("Coming soon 🙌"); return; }
   if (t.site !== undefined) { openUrl(siteUrl(t.site)); return; }
   if (id === "unrar" || id === "sevenzip") { window.ArchiveWS.openPicker(); return; }
   if (id === "page") { window.PageWS.open(); return; }

@@ -7,13 +7,13 @@ window.ArchiveWS = (function () {
   var bd = null, files = [], curFile = null, worker = null, libInited = false, rarBuffer = null;
 
   function openPicker() {
-    var el = window.SP.toolShell("Estrai archivio", window.SP.home);
-    window.SP.dropzone(el, { icon: "🗜️", title: "Trascina un archivio", sub: "RAR · 7z · ZIP · TAR · GZ", accept: ".rar,.7z,.zip,.tar,.gz,.tgz,.bz2,.xz,.cbr,.cbz" }, function (f) { open(f); });
+    var el = window.SP.toolShell("Extract archive", window.SP.home);
+    window.SP.dropzone(el, { icon: "🗜️", title: "Drop an archive", sub: "RAR · 7z · ZIP · TAR · GZ", accept: ".rar,.7z,.zip,.tar,.gz,.tgz,.bz2,.xz,.cbr,.cbz" }, function (f) { open(f); });
   }
 
   function open(file) {
     curFile = file; files = []; rarBuffer = null;
-    bd = window.SP.toolShell("Estrai " + shortName(file.name), window.SP.home);
+    bd = window.SP.toolShell("Extract " + shortName(file.name), window.SP.home);
     bd.innerHTML = loading("Reading " + file.name + "…", 0);
     window.SP.addRecent(file.name, "🗜️", function () { open(file); });
     var ext = (file.name.split(".").pop() || "").toLowerCase();

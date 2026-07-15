@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SammaPix — Image Tools",
-  "version": "5.4.3",
+  "version": "5.5.0",
   "description": "Compress, convert, crop & clean images. Extract RAR/7z/ZIP. Grab all images from any page in bulk. 100% in your browser.",
   "permissions": [
     "contextMenus",

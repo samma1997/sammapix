@@ -11,8 +11,8 @@ window.ImageTool = (function () {
 
   function clone(cv) { var c = document.createElement("canvas"); c.width = cv.width; c.height = cv.height; c.getContext("2d").drawImage(cv, 0, 0); return c; }
   function pushHistory() { history.push(clone(work)); if (history.length > 15) history.shift(); refreshBar(); }
-  function undo() { if (!history.length) return; work = history.pop(); dRect = null; draw(); dim(); syncInputs(); refreshBar(); toast("Annullato"); }
-  function resetAll() { if (!original) return; if (work.width !== original.width || work.height !== original.height || history.length) pushHistory(); work = clone(original); dRect = null; draw(); dim(); syncInputs(); refreshBar(); toast("Ripristinato l'originale"); }
+  function undo() { if (!history.length) return; work = history.pop(); dRect = null; draw(); dim(); syncInputs(); refreshBar(); toast("Undone"); }
+  function resetAll() { if (!original) return; if (work.width !== original.width || work.height !== original.height || history.length) pushHistory(); work = clone(original); dRect = null; draw(); dim(); syncInputs(); refreshBar(); toast("Restored original"); }
   function refreshBar() { var u = document.getElementById("undo"), r = document.getElementById("reset"); if (u) u.disabled = history.length === 0; if (r) r.disabled = history.length === 0; }
   function syncInputs() { var rw = document.getElementById("rw"), rh = document.getElementById("rh"); if (rw) { rw.value = work.width; rh.value = work.height; } }
 
@@ -30,7 +30,7 @@ window.ImageTool = (function () {
     mode = m; saveFmt = Object.assign({}, MODES[m].fmt); work = null; dRect = null;
     bd = window.SP.toolShell(MODES[m].t, window.SP.home);
     var canBatch = (m === "compress" || m === "convert" || m === "resize" || m === "exif");
-    window.SP.dropzone(bd, { icon: MODES[m].i, title: "Trascina un'immagine", sub: canBatch ? "una o più immagini · o clicca" : "o clicca per sceglierla", accept: "image/*", multiple: canBatch }, function (f, files) {
+    window.SP.dropzone(bd, { icon: MODES[m].i, title: "Drop an image", sub: canBatch ? "one or more images · or click" : "or click to choose", accept: "image/*", multiple: canBatch }, function (f, files) {
       if (canBatch && files && files.length > 1) { batch(m, files); return; }
       name = clean(f.name); load(f);
     });
@@ -44,23 +44,23 @@ window.ImageTool = (function () {
 
   function load(blob) {
     origBytes = (blob && blob.size) || 0;
-    bd.innerHTML = '<div class="load"><div class="spin"></div>Carico…</div>';
+    bd.innerHTML = '<div class="load"><div class="spin"></div>Loading…</div>';
     createImageBitmap(blob).then(function (bmp) {
       work = document.createElement("canvas");
       work.width = bmp.width; work.height = bmp.height;
       work.getContext("2d").drawImage(bmp, 0, 0);
       if (bmp.close) bmp.close();
       original = clone(work); history = []; dRect = null; render();
-    }).catch(function () { bd.innerHTML = '<div class="err">Immagine non apribile.</div>'; });
+    }).catch(function () { bd.innerHTML = '<div class="err">Couldn\'t open this image.</div>'; });
   }
 
   function render() {
-    var h = '<div class="editbar"><button class="ebtn" id="undo" disabled>↶ Annulla</button><button class="ebtn" id="reset" disabled>Reset originale</button></div>';
+    var h = '<div class="editbar"><button class="ebtn" id="undo" disabled>↶ Undo</button><button class="ebtn" id="reset" disabled>Reset to original</button></div>';
     h += '<div class="canvwrap"><canvas id="cv"></canvas><div class="dim" id="dim"></div></div>';
     h += options(mode);
-    h += '<div class="opt"><h4>💾 Salva come</h4><div class="chips" id="fmt">' +
+    h += '<div class="opt"><h4>💾 Save as</h4><div class="chips" id="fmt">' +
       fchip("webp", "WebP") + fchip("jpg", "JPG") + fchip("png", "PNG") + '</div></div>';
-    h += '<button class="cta" id="save">↓ Salva immagine</button>';
+    h += '<button class="cta" id="save">↓ Save image</button>';
     bd.innerHTML = h;
     pv = document.getElementById("cv"); pvctx = pv.getContext("2d");
     draw(); dim();
@@ -68,30 +68,30 @@ window.ImageTool = (function () {
   }
 
   function options(m) {
-    if (m === "compress") return '<div class="opt"><h4>Qualità</h4>' +
-      '<div class="slabel"><span>Più leggero</span><span id="qv">80%</span></div>' +
+    if (m === "compress") return '<div class="opt"><h4>Quality</h4>' +
+      '<div class="slabel"><span>Smaller</span><span id="qv">80%</span></div>' +
       '<input class="slider" type="range" id="q" min="10" max="100" value="80">' +
-      '<div id="est" style="margin-top:10px;padding:9px 11px;background:var(--surface2);border-radius:10px;font-size:12px;font-weight:600;text-align:center">Calcolo…</div></div>';
-    if (m === "convert") return '<div class="opt"><h4>🔄 Converti</h4><div class="hint">Scegli il formato di uscita qui sotto in “Salva come”. WebP pesa meno, PNG è senza perdita, JPG è universale.</div></div>';
-    if (m === "resize") return '<div class="opt"><h4>📐 Dimensioni</h4><div class="chips" style="margin-bottom:8px">' +
+      '<div id="est" style="margin-top:10px;padding:9px 11px;background:var(--surface2);border-radius:10px;font-size:12px;font-weight:600;text-align:center">Calculating…</div></div>';
+    if (m === "convert") return '<div class="opt"><h4>🔄 Convert</h4><div class="hint">Pick the output format below in “Save as”. WebP is smaller, PNG is lossless, JPG is universal.</div></div>';
+    if (m === "resize") return '<div class="opt"><h4>📐 Size</h4><div class="chips" style="margin-bottom:8px">' +
       pchip("ig-post", "1080²") + pchip("ig-portrait", "1080×1350") + pchip("ig-story", "Story") + pchip("hd", "1920w") + pchip("half", "50%") + '</div>' +
       '<div class="row"><span class="lb">L</span><input type="number" id="rw" min="1"><span class="lb">A</span><input type="number" id="rh" min="1">' +
-      '<label class="lb"><input type="checkbox" id="lock" checked> blocca</label></div>' +
-      '<div class="slabel" style="margin:2px 0 6px"><span>Adatta (se il rapporto cambia)</span></div>' +
-      '<div class="chips" style="margin-bottom:10px">' + fitchip("cover", "Riempi") + fitchip("contain", "Contieni") + fitchip("stretch", "Stira") + '</div>' +
-      '<button class="cta sec" id="applyresize">Applica resize</button></div>';
-    if (m === "crop") return '<div class="opt"><h4>⛶ Ritaglia</h4>' +
-      '<div class="hint">Trascina sull\'immagine l\'area da tenere. Oppure parti da un rapporto e aggiustala.</div>' +
-      '<div class="chips" style="margin:9px 0">' + pchip("c-free", "Libero") + pchip("c-1-1", "1:1") + pchip("c-4-5", "4:5") + pchip("c-16-9", "16:9") + pchip("c-9-16", "9:16") + '</div>' +
-      '<button class="cta sec" id="applycrop">Applica ritaglio</button></div>';
-    if (m === "watermark") return '<div class="opt"><h4>©️ Filigrana</h4>' +
-      '<div class="row"><input type="text" id="wm" placeholder="Il tuo testo o @nome"></div>' +
-      '<div class="row"><span class="lb">Pos</span><select id="wmpos"><option value="br">Basso dx</option><option value="bl">Basso sx</option><option value="tr">Alto dx</option><option value="tl">Alto sx</option><option value="cc">Centro</option></select>' +
-      '<span class="lb">Dim</span><input type="number" id="wmsize" value="4" min="1" max="20" style="max-width:60px"></div>' +
-      '<button class="cta sec" id="applywm">Aggiungi filigrana</button></div>';
-    if (m === "blur") return '<div class="opt"><h4>🌫️ Blur / Censura</h4><div class="hint">Trascina un rettangolo sull\'immagine qui sopra, poi applica. Per volti, targhe, dati privati.</div>' +
-      '<button class="cta sec" id="applyblur">Censura area selezionata</button></div>';
-    if (m === "exif") return '<div class="opt"><h4>🛡️ Pulisci EXIF / GPS</h4><div class="hint">Il salvataggio riscrive l\'immagine rimuovendo tutti i metadati (posizione GPS, camera, data). Salva qui sotto.</div></div>';
+      '<label class="lb"><input type="checkbox" id="lock" checked> lock</label></div>' +
+      '<div class="slabel" style="margin:2px 0 6px"><span>Fit (if the ratio changes)</span></div>' +
+      '<div class="chips" style="margin-bottom:10px">' + fitchip("cover", "Fill") + fitchip("contain", "Fit") + fitchip("stretch", "Stretch") + '</div>' +
+      '<button class="cta sec" id="applyresize">Apply resize</button></div>';
+    if (m === "crop") return '<div class="opt"><h4>⛶ Crop</h4>' +
+      '<div class="hint">Drag the area to keep on the image. Or start from a ratio and adjust it.</div>' +
+      '<div class="chips" style="margin:9px 0">' + pchip("c-free", "Free") + pchip("c-1-1", "1:1") + pchip("c-4-5", "4:5") + pchip("c-16-9", "16:9") + pchip("c-9-16", "9:16") + '</div>' +
+      '<button class="cta sec" id="applycrop">Apply crop</button></div>';
+    if (m === "watermark") return '<div class="opt"><h4>©️ Watermark</h4>' +
+      '<div class="row"><input type="text" id="wm" placeholder="Your text or @handle"></div>' +
+      '<div class="row"><span class="lb">Pos</span><select id="wmpos"><option value="br">Bottom right</option><option value="bl">Bottom left</option><option value="tr">Top right</option><option value="tl">Top left</option><option value="cc">Center</option></select>' +
+      '<span class="lb">Size</span><input type="number" id="wmsize" value="4" min="1" max="20" style="max-width:60px"></div>' +
+      '<button class="cta sec" id="applywm">Add watermark</button></div>';
+    if (m === "blur") return '<div class="opt"><h4>🌫️ Blur / Censor</h4><div class="hint">Drag a box on the image above, then apply. For faces, plates, private info.</div>' +
+      '<button class="cta sec" id="applyblur">Censor selected area</button></div>';
+    if (m === "exif") return '<div class="opt"><h4>🛡️ Clean EXIF / GPS</h4><div class="hint">Saving re-writes the image removing all metadata (GPS location, camera, date). Save below.</div></div>';
     return "";
   }
 
@@ -167,8 +167,8 @@ window.ImageTool = (function () {
       rw.addEventListener("input", function () { if (lock.checked && rw.value) rh.value = Math.round(rw.value / ratio); });
       rh.addEventListener("input", function () { if (lock.checked && rh.value) rw.value = Math.round(rh.value * ratio); });
       document.getElementById("applyresize").addEventListener("click", function () {
-        var w = parseInt(rw.value), hh = parseInt(rh.value); if (!w || !hh) { toast("Dimensioni non valide"); return; }
-        resizeTo(w, hh); toast("Ridimensionata " + w + "×" + hh);
+        var w = parseInt(rw.value), hh = parseInt(rh.value); if (!w || !hh) { toast("Invalid size"); return; }
+        resizeTo(w, hh); toast("Resized " + w + "×" + hh);
       });
     }
     document.getElementById("undo").addEventListener("click", undo);
@@ -256,25 +256,25 @@ window.ImageTool = (function () {
   }
   function resizePreset(p) {
     var map = { "ig-post": [1080, 1080], "ig-portrait": [1080, 1350], "ig-story": [1080, 1920], "hd": [1920, Math.round(1920 * work.height / work.width)], "half": [Math.round(work.width / 2), Math.round(work.height / 2)] };
-    if (map[p]) { resizeTo(map[p][0], map[p][1]); toast("Ridimensionata"); }
+    if (map[p]) { resizeTo(map[p][0], map[p][1]); toast("Resized"); }
   }
   function cropRatio(p) { return { "c-1-1": 1, "c-4-5": 4 / 5, "c-16-9": 16 / 9, "c-9-16": 9 / 16 }[p] || 1; }
   function setCropBox(ar) {
     var w = work.width, h = work.height, cw = w, ch = h;
     if (w / h > ar) cw = h * ar; else ch = w / ar;
     dRect = { x: (w - cw) / 2, y: (h - ch) / 2, w: cw, h: ch }; draw();
-    toast("Trascina per aggiustare, poi Applica");
+    toast("Drag to adjust, then Apply");
   }
   function cropToRect() {
-    if (!dRect || dRect.w < 4 || dRect.h < 4) { toast("Trascina l'area da tenere"); return; }
+    if (!dRect || dRect.w < 4 || dRect.h < 4) { toast("Drag the area to keep"); return; }
     pushHistory();
     var r = { x: Math.round(dRect.x), y: Math.round(dRect.y), w: Math.round(dRect.w), h: Math.round(dRect.h) };
     var c = document.createElement("canvas"); c.width = r.w; c.height = r.h;
     c.getContext("2d").drawImage(work, r.x, r.y, r.w, r.h, 0, 0, r.w, r.h);
-    work = c; dRect = null; draw(); dim(); toast("Ritagliata " + r.w + "×" + r.h);
+    work = c; dRect = null; draw(); dim(); toast("Cropped " + r.w + "×" + r.h);
   }
   function watermark() {
-    var txt = (document.getElementById("wm").value || "").trim(); if (!txt) { toast("Scrivi il testo"); return; }
+    var txt = (document.getElementById("wm").value || "").trim(); if (!txt) { toast("Type the text"); return; }
     pushHistory();
     var pos = document.getElementById("wmpos").value, sizePct = parseFloat(document.getElementById("wmsize").value) || 4;
     var ctx = work.getContext("2d"), fs = Math.max(12, Math.round(work.width * sizePct / 100));
@@ -283,26 +283,26 @@ window.ImageTool = (function () {
     var pad = Math.round(fs * 0.6), m = ctx.measureText(txt), x, y;
     if (pos.indexOf("l") > -1) x = pad; else if (pos === "cc") x = (work.width - m.width) / 2; else x = work.width - m.width - pad;
     if (pos.indexOf("t") > -1) y = pad + fs; else if (pos === "cc") y = work.height / 2 + fs / 3; else y = work.height - pad;
-    ctx.strokeText(txt, x, y); ctx.fillText(txt, x, y); ctx.restore(); draw(); toast("Filigrana aggiunta");
+    ctx.strokeText(txt, x, y); ctx.fillText(txt, x, y); ctx.restore(); draw(); toast("Watermark added");
   }
   function censor() {
-    if (!dRect || dRect.w < 4 || dRect.h < 4) { toast("Trascina prima un rettangolo"); return; }
+    if (!dRect || dRect.w < 4 || dRect.h < 4) { toast("Drag a box first"); return; }
     pushHistory();
     var r = { x: Math.round(dRect.x), y: Math.round(dRect.y), w: Math.round(dRect.w), h: Math.round(dRect.h) }, ctx = work.getContext("2d");
     var sw = Math.max(1, Math.round(r.w / 14)), sh = Math.max(1, Math.round(r.h / 14));
     var t = document.createElement("canvas"); t.width = sw; t.height = sh;
     t.getContext("2d").drawImage(work, r.x, r.y, r.w, r.h, 0, 0, sw, sh);
     ctx.imageSmoothingEnabled = false; ctx.drawImage(t, 0, 0, sw, sh, r.x, r.y, r.w, r.h); ctx.imageSmoothingEnabled = true;
-    dRect = null; draw(); toast("Area censurata");
+    dRect = null; draw(); toast("Area censored");
   }
   function save() {
     work.toBlob(function (b) {
-      if (!b) { toast("Export fallito"); return; }
+      if (!b) { toast("Export failed"); return; }
       var u = URL.createObjectURL(b);
       var a = document.createElement("a"); a.href = u; a.download = name + "-sammapix." + saveFmt.e;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function () { URL.revokeObjectURL(u); }, 5000);
-      toast(saveFmt.e.toUpperCase() + " salvato (" + fmtKB(b.size) + ")");
+      toast(saveFmt.e.toUpperCase() + " saved (" + fmtKB(b.size) + ")");
     }, saveFmt.m, saveFmt.q);
   }
 
@@ -314,17 +314,17 @@ window.ImageTool = (function () {
     var arr = Array.prototype.slice.call(files);
     var cfg = { fmt: Object.assign({}, MODES[m].fmt), preset: (m === "resize" ? "ig-post" : null), fit: "cover" };
     var esc = window.SP.esc;
-    var h = '<div class="opt"><h4>' + arr.length + ' immagini · ' + MODES[m].t + '</h4>';
-    if (m === "compress") h += '<div class="slabel"><span>Qualità</span><span id="bq">80%</span></div><input class="slider" type="range" id="bqs" min="10" max="100" value="80">';
-    if (m === "resize") h += '<div class="hint" style="margin-bottom:8px">Dimensione di uscita:</div><div class="chips" style="margin-bottom:8px" id="bpreset">' +
+    var h = '<div class="opt"><h4>' + arr.length + ' images · ' + MODES[m].t + '</h4>';
+    if (m === "compress") h += '<div class="slabel"><span>Quality</span><span id="bq">80%</span></div><input class="slider" type="range" id="bqs" min="10" max="100" value="80">';
+    if (m === "resize") h += '<div class="hint" style="margin-bottom:8px">Output size:</div><div class="chips" style="margin-bottom:8px" id="bpreset">' +
       bchip("preset", "ig-post", "1080²", cfg) + bchip("preset", "ig-portrait", "1080×1350", cfg) + bchip("preset", "ig-story", "Story", cfg) + bchip("preset", "hd", "1920w", cfg) + bchip("preset", "half", "50%", cfg) + '</div>' +
-      '<div class="hint" style="margin-bottom:6px">Adatta:</div><div class="chips" id="bfit">' + bchip("fit", "cover", "Riempi", cfg) + bchip("fit", "contain", "Contieni", cfg) + bchip("fit", "stretch", "Stira", cfg) + '</div>';
+      '<div class="hint" style="margin-bottom:6px">Fit:</div><div class="chips" id="bfit">' + bchip("fit", "cover", "Fill", cfg) + bchip("fit", "contain", "Fit", cfg) + bchip("fit", "stretch", "Stretch", cfg) + '</div>';
     h += '</div>';
-    h += '<div class="opt"><h4>Salva come</h4><div class="chips" id="bfmt">' + bfmt("webp", "WebP", cfg) + bfmt("jpg", "JPG", cfg) + bfmt("png", "PNG", cfg) + '</div></div>';
-    h += '<div class="opt"><h4>File</h4>';
+    h += '<div class="opt"><h4>Save as</h4><div class="chips" id="bfmt">' + bfmt("webp", "WebP", cfg) + bfmt("jpg", "JPG", cfg) + bfmt("png", "PNG", cfg) + '</div></div>';
+    h += '<div class="opt"><h4>Files</h4>';
     arr.forEach(function (f) { h += '<div class="frow"><span class="fic">🖼️</span><div style="flex:1;min-width:0"><div class="nm">' + esc(f.name) + '</div><div class="sz">' + fmtKB(f.size) + '</div></div></div>'; });
     h += '</div>';
-    h += '<button class="cta" id="brun">↓ Processa tutte e scarica ZIP</button><div id="bprog" style="margin-top:10px;font-size:12px;font-weight:600;text-align:center;color:var(--dim)"></div>';
+    h += '<button class="cta" id="brun">↓ Process all & download ZIP</button><div id="bprog" style="margin-top:10px;font-size:12px;font-weight:600;text-align:center;color:var(--dim)"></div>';
     bd.innerHTML = h;
 
     var bqs = document.getElementById("bqs");
@@ -351,10 +351,10 @@ window.ImageTool = (function () {
     else { var s = Math.max(w / sw, hh / sh), cdw = sw * s, cdh = sh * s; ctx.drawImage(bmp, (w - cdw) / 2, (hh - cdh) / 2, cdw, cdh); }
   }
   async function runBatch(m, arr, cfg) {
-    if (typeof JSZip === "undefined") { toast("ZIP non disponibile"); return; }
+    if (typeof JSZip === "undefined") { toast("ZIP not available"); return; }
     var prog = document.getElementById("bprog"), zip = new JSZip(), used = {}, ok = 0;
     for (var i = 0; i < arr.length; i++) {
-      prog.textContent = "Elaboro " + (i + 1) + "/" + arr.length + "…";
+      prog.textContent = "Processing " + (i + 1) + "/" + arr.length + "…";
       try {
         var bmp = await createImageBitmap(arr[i]);
         var c = document.createElement("canvas");
@@ -367,13 +367,13 @@ window.ImageTool = (function () {
         zip.file(base + "-sammapix." + cfg.fmt.e, blob); ok++;
       } catch (e) {}
     }
-    if (!ok) { prog.textContent = "Nessuna immagine elaborata."; return; }
-    prog.textContent = "Creo lo ZIP…";
+    if (!ok) { prog.textContent = "No images processed."; return; }
+    prog.textContent = "Building ZIP…";
     var out = await zip.generateAsync({ type: "blob" });
     var u = URL.createObjectURL(out); var a = document.createElement("a"); a.href = u; a.download = "sammapix-batch.zip";
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 8000);
-    prog.textContent = "✓ ZIP pronto (" + ok + " immagini)";
-    toast("ZIP pronto (" + ok + ")");
+    prog.textContent = "✓ ZIP ready (" + ok + " images)";
+    toast("ZIP ready (" + ok + ")");
   }
 
   return { open: open, openWith: openWith };

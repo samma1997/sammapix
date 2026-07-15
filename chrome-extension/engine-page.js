@@ -35,11 +35,11 @@ window.PageWS = (function () {
   }
   function demoBanner() {
     var q = window.__demoQ || { auth: false };
-    var lbl = !q.auth ? "Non loggato" : q.plan === "pro" ? "Pro (illimitato)" : "Free " + q.used + "/" + q.limit;
+    var lbl = !q.auth ? "Signed out" : q.plan === "pro" ? "Pro (unlimited)" : "Free " + q.used + "/" + q.limit;
     return '<div style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:11px">' +
-      '🎬 <b>DEMO</b> · stato account: <b>' + lbl + '</b> · cambia stato per vedere i gate:' +
+      '🎬 <b>DEMO</b> · account status: <b>' + lbl + '</b> · switch state to see the gates:' +
       '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:7px">' +
-      demoBtn("out", "Non loggato") + demoBtn("mid", "Free 45/50") + demoBtn("full", "Free 50/50") + demoBtn("pro", "Pro") + '</div></div>';
+      demoBtn("out", "Signed out") + demoBtn("mid", "Free 45/50") + demoBtn("full", "Free 50/50") + demoBtn("pro", "Pro") + '</div></div>';
   }
   function demoBtn(k, label) { return '<button class="chip" data-demo="' + k + '" style="background:rgba(255,255,255,.2);border-color:transparent;color:#fff;font-size:10px;padding:5px 9px">' + label + '</button>'; }
   function setDemo(k) {
@@ -51,7 +51,7 @@ window.PageWS = (function () {
   }
 
   async function buyDayPass() {
-    if (window.__SP_DEV__) { toast("Demo: qui parte il checkout Day Pass su Stripe (diretto)"); return; }
+    if (window.__SP_DEV__) { toast("Demo: this launches the Day Pass Stripe checkout (direct)"); return; }
     try {
       var r = await fetch("https://www.sammapix.com/api/checkout/day-pass", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ source: "extension/page-bulk" }) });
       var j = await r.json();
@@ -60,16 +60,16 @@ window.PageWS = (function () {
   }
 
   async function open() {
-    bd = window.SP.toolShell("Immagini di questa pagina", window.SP.home);
+    bd = window.SP.toolShell("Images on this page", window.SP.home);
     if (window.__SP_DEV__) { return demoOpen(); }
-    bd.innerHTML = '<div class="load"><div class="spin"></div>Leggo le immagini della pagina…</div>';
+    bd.innerHTML = '<div class="load"><div class="spin"></div>Reading the page\'s images…</div>';
     try {
       images = await doScan();
       selected = new Set(images.map(function (i) { return i.src; })); // all selected by default
-      if (!images.length) { bd.innerHTML = '<div class="err">Nessuna immagine trovata in questa pagina.</div>'; return; }
+      if (!images.length) { bd.innerHTML = '<div class="err">No images found on this page.</div>'; return; }
       render();
     } catch (e) {
-      bd.innerHTML = '<div class="err">' + (e.message === "no-tab" ? "Apri prima un sito normale, poi riprova." : "Errore: " + esc(e.message || String(e))) + '</div>';
+      bd.innerHTML = '<div class="err">' + (e.message === "no-tab" ? "Open a normal website first, then try again." : "Error: " + esc(e.message || String(e))) + '</div>';
     }
   }
 
@@ -106,24 +106,24 @@ window.PageWS = (function () {
   }
 
   async function refresh() {
-    var cnt = document.getElementById("pcount"); if (cnt) cnt.textContent = "Aggiorno…";
+    var cnt = document.getElementById("pcount"); if (cnt) cnt.textContent = "Refreshing…";
     try {
       var fresh = await doScan();
       var have = {}; images.forEach(function (i) { have[i.src] = 1; });
       var added = 0;
       fresh.forEach(function (i) { if (!have[i.src]) { images.push(i); selected.add(i.src); added++; } });
       render();
-      toast(added ? "+" + added + " nuove immagini" : "Nessuna nuova (scorri la pagina e riprova)");
-    } catch (e) { toast("Aggiornamento non riuscito"); }
+      toast(added ? "+" + added + " new images" : "Nothing new (scroll the page and retry)");
+    } catch (e) { toast("Refresh failed"); }
   }
 
   function render() {
     var html = (window.__SP_DEV__ ? demoBanner() : '');
     html += '<div id="pquota" style="font-size:11px;color:var(--dim);font-weight:600;text-align:center;margin-bottom:8px">…</div>';
-    html += '<div class="topbar"><span id="pcount">' + selected.size + ' di ' + images.length + ' selezionate</span>' +
+    html += '<div class="topbar"><span id="pcount">' + selected.size + ' of ' + images.length + ' selected</span>' +
       '<div style="display:flex;gap:6px">' +
-      (window.__SP_DEV__ ? '' : '<button class="chip" id="prefresh" title="Ri-scansiona la pagina (dopo aver scrollato)">⟳ Aggiorna</button>') +
-      '<button class="chip" id="ptoggle">' + (selected.size === images.length ? "Deseleziona" : "Seleziona tutte") + '</button></div></div>';
+      (window.__SP_DEV__ ? '' : '<button class="chip" id="prefresh" title="Re-scan the page (after scrolling)">⟳ Refresh</button>') +
+      '<button class="chip" id="ptoggle">' + (selected.size === images.length ? "Deselect" : "Select all") + '</button></div></div>';
     html += '<div class="pgrid">';
     images.forEach(function (im, i) {
       var on = selected.has(im.src);
@@ -134,9 +134,9 @@ window.PageWS = (function () {
     });
     html += '</div>';
     html += '<div class="savebar" style="margin-top:8px;flex-wrap:wrap">' +
-      '<button class="cta sec" id="pdl" style="margin:0;flex:1">↓ Scarica ZIP</button>' +
-      '<button class="cta" id="pcomp" style="margin:0;flex:1">🗜️ Comprimi ZIP</button>' +
-      '<button class="cta sec" id="pren" style="margin:0;flex-basis:100%">✏️ Rinomina in blocco</button></div>';
+      '<button class="cta sec" id="pdl" style="margin:0;flex:1">↓ Download ZIP</button>' +
+      '<button class="cta" id="pcomp" style="margin:0;flex:1">🗜️ Compress ZIP</button>' +
+      '<button class="cta sec" id="pren" style="margin:0;flex-basis:100%">✏️ Bulk rename</button></div>';
     bd.innerHTML = html;
 
     bd.querySelectorAll("[data-i]").forEach(function (c) {
@@ -159,13 +159,13 @@ window.PageWS = (function () {
   }
 
   function renamePanel() {
-    if (!selected.size) { toast("Seleziona almeno un'immagine"); return; }
-    bd.innerHTML = '<div class="opt"><h4>✏️ Rinomina ' + selected.size + ' immagini</h4>' +
-      '<div class="row"><input type="text" id="rpat" value="foto-###" placeholder="es. vacanza-###"></div>' +
-      '<div class="hint">Usa <b>###</b> per il numero progressivo (foto-001, foto-002…). Scarichi uno ZIP con i nuovi nomi.</div>' +
-      '<button class="cta" id="rgo" style="margin-top:12px">↓ Scarica rinominate (ZIP)</button>' +
-      '<button class="cta sec" id="rback" style="margin-top:8px">‹ Indietro</button></div>';
-    document.getElementById("rgo").addEventListener("click", function () { bulk("rename", document.getElementById("rpat").value || "foto-###"); });
+    if (!selected.size) { toast("Select at least one image"); return; }
+    bd.innerHTML = '<div class="opt"><h4>✏️ Rename ' + selected.size + ' images</h4>' +
+      '<div class="row"><input type="text" id="rpat" value="photo-###" placeholder="e.g. holiday-###"></div>' +
+      '<div class="hint">Use <b>###</b> for the sequential number (photo-001, photo-002…). You\'ll download a ZIP with the new names.</div>' +
+      '<button class="cta" id="rgo" style="margin-top:12px">↓ Download renamed (ZIP)</button>' +
+      '<button class="cta sec" id="rback" style="margin-top:8px">‹ Back</button></div>';
+    document.getElementById("rgo").addEventListener("click", function () { bulk("rename", document.getElementById("rpat").value || "photo-###"); });
     document.getElementById("rback").addEventListener("click", render);
   }
   function applyPattern(pat, n) {
@@ -179,9 +179,9 @@ window.PageWS = (function () {
     var el = document.getElementById("pquota"); if (!el) return;
     var q = await getQuota();
     if (q.error) { el.textContent = ""; return; }
-    if (!q.auth) { el.innerHTML = '👤 Non hai fatto l\'accesso · <span style="color:var(--accent)">iscriviti gratis</span> per le azioni in blocco'; return; }
-    if (q.plan === "pro") { el.innerHTML = '⭐ Pro · immagini illimitate'; return; }
-    el.textContent = "Oggi: " + q.used + "/" + q.limit + " immagini (free)";
+    if (!q.auth) { el.innerHTML = '👤 You\'re not signed in · <span style="color:var(--accent)">sign up free</span> for bulk actions'; return; }
+    if (q.plan === "pro") { el.innerHTML = '⭐ Pro · unlimited images'; return; }
+    el.textContent = "Today: " + q.used + "/" + q.limit + " images (free)";
   }
 
   async function getQuota() {
@@ -204,24 +204,24 @@ window.PageWS = (function () {
 
   function gate(html) {
     bd.innerHTML = '<div style="text-align:center;padding:30px 18px"><div style="font-size:40px;margin-bottom:12px">🔒</div>' + html +
-      '<button class="cta sec" id="pback" style="margin-top:14px">‹ Torna alle immagini</button></div>';
+      '<button class="cta sec" id="pback" style="margin-top:14px">‹ Back to images</button></div>';
     document.getElementById("pback").addEventListener("click", render);
   }
 
   async function bulk(type, pattern) {
     var list = Array.from(selected);
-    if (!list.length) { toast("Seleziona almeno un'immagine"); return; }
+    if (!list.length) { toast("Select at least one image"); return; }
     // Regola unica sito+estensione: OGNI azione in blocco (scarica/comprimi/rinomina)
     // conta sulla quota 50/giorno. Pro = illimitato.
     var needsQuota = true;
     var q = await getQuota();
-    if (q.error) { toast("Non riesco a raggiungere il tuo account SammaPix"); return; }
+    if (q.error) { toast("Couldn't reach your SammaPix account"); return; }
     if (!q.auth) {
-      gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Continua con Google</div>' +
-        '<div style="font-size:12px;color:var(--dim);line-height:1.5">Le azioni in blocco (scarica, comprimi, rinomina) sono gratis con un account SammaPix: fino a 50 immagini al giorno, illimitate con Pro. Stessa quota del sito, un solo account.</div>' +
-        (window.__SP_DEV__ ? '<div style="font-size:10.5px;color:var(--dim);margin-top:10px">🎬 Demo: qui simulo il login. Nell\'estensione vera legge la tua sessione Google reale.</div>' : '') +
-        '<button class="cta" id="psignup" style="margin-top:14px">Continua con Google →</button>' +
-        '<button class="cta sec" id="pretry" style="margin-top:8px">Ho già fatto l\'accesso → Riprova</button>');
+      gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Continue with Google</div>' +
+        '<div style="font-size:12px;color:var(--dim);line-height:1.5">Bulk actions (download, compress, rename) are free with a SammaPix account: up to 50 images a day, unlimited with Pro. Same quota as the site, one account.</div>' +
+        (window.__SP_DEV__ ? '<div style="font-size:10.5px;color:var(--dim);margin-top:10px">🎬 Demo: login is simulated here. The real extension reads your actual Google session.</div>' : '') +
+        '<button class="cta" id="psignup" style="margin-top:14px">Continue with Google →</button>' +
+        '<button class="cta sec" id="pretry" style="margin-top:8px">I already signed in → Retry</button>');
       var b = document.getElementById("psignup"); if (b) b.addEventListener("click", function () {
         if (window.__SP_DEV__) { window.__demoQ = { auth: true, plan: "free", used: 0, limit: 50, remaining: 50 }; bulk(type, pattern); }
         else openUrl(SIGNUP);
@@ -233,10 +233,10 @@ window.PageWS = (function () {
       return;
     }
     if (needsQuota && q.plan !== "pro" && list.length > q.remaining) {
-      gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Limite giornaliero raggiunto</div>' +
-        '<div style="font-size:12px;color:var(--dim);line-height:1.5">Hai usato ' + q.used + '/' + q.limit + ' immagini oggi (ne hai selezionate ' + list.length + '). Continua senza limiti:</div>' +
-        '<button class="cta" id="pupg" style="margin-top:14px">⭐ Passa a Pro (sempre illimitato)</button>' +
-        '<button class="cta sec" id="pday" style="margin-top:8px">🎟️ Day Pass (illimitato solo oggi)</button>');
+      gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Daily limit reached</div>' +
+        '<div style="font-size:12px;color:var(--dim);line-height:1.5">You\'ve used ' + q.used + '/' + q.limit + ' images today (you selected ' + list.length + '). Keep going without limits:</div>' +
+        '<button class="cta" id="pupg" style="margin-top:14px">⭐ Upgrade to Pro (always unlimited)</button>' +
+        '<button class="cta sec" id="pday" style="margin-top:8px">🎟️ Day Pass (unlimited today only)</button>');
       var u = document.getElementById("pupg"); if (u) u.addEventListener("click", function () { openUrl(PRICING); });
       var dp = document.getElementById("pday"); if (dp) dp.addEventListener("click", buyDayPass);
       return;
@@ -245,9 +245,9 @@ window.PageWS = (function () {
   }
 
   async function run(type, list, pattern, needsQuota) {
-    if (typeof JSZip === "undefined") { toast("ZIP non disponibile"); return; }
-    var verb = type === "compress" ? "Comprimo" : type === "rename" ? "Rinomino" : "Scarico";
-    bd.innerHTML = '<div class="load"><div class="spin"></div>' + verb + ' ' + list.length + ' immagini…<div class="bar"><span id="pbar"></span></div></div>';
+    if (typeof JSZip === "undefined") { toast("ZIP not available"); return; }
+    var verb = type === "compress" ? "Compressing" : type === "rename" ? "Renaming" : "Downloading";
+    bd.innerHTML = '<div class="load"><div class="spin"></div>' + verb + ' ' + list.length + ' images…<div class="bar"><span id="pbar"></span></div></div>';
     var zip = new JSZip(), used = {}, ok = 0;
     for (var i = 0; i < list.length; i++) {
       try {
@@ -260,7 +260,7 @@ window.PageWS = (function () {
           var cb = await new Promise(function (r) { c.toBlob(r, "image/webp", 0.8); });
           zip.file(base + ".webp", cb || blob);
         } else if (type === "rename") {
-          zip.file(applyPattern(pattern || "foto-###", i + 1) + extOf(list[i]), blob);
+          zip.file(applyPattern(pattern || "photo-###", i + 1) + extOf(list[i]), blob);
         } else {
           zip.file(base + extOf(list[i]), blob);
         }
@@ -268,12 +268,12 @@ window.PageWS = (function () {
       } catch (e) {}
       var pb = document.getElementById("pbar"); if (pb) pb.style.width = Math.round((i + 1) / list.length * 100) + "%";
     }
-    if (!ok) { toast("Nessuna immagine scaricabile"); render(); return; }
+    if (!ok) { toast("No downloadable images"); render(); return; }
     var out = await zip.generateAsync({ type: "blob" });
-    var u = URL.createObjectURL(out); var a = document.createElement("a"); a.href = u; a.download = "sammapix-pagina.zip";
+    var u = URL.createObjectURL(out); var a = document.createElement("a"); a.href = u; a.download = "sammapix-page.zip";
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 8000);
     if (needsQuota) await consume(ok); // solo l'elaborazione conta sulla quota
-    toast("✓ ZIP pronto (" + ok + " immagini)");
+    toast("✓ ZIP ready (" + ok + " images)");
     render();
   }
 
