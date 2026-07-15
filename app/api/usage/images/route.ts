@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { incrWithTTL, getInt } from "@/lib/redis";
 import { DAILY_IMAGES_FREE, DAILY_IMAGES_PRO } from "@/lib/constants";
-import { validateOrigin } from "@/lib/api-security";
+import { validateOrigin, isExtensionOrigin, withExtensionCors } from "@/lib/api-security";
 
 // In-memory fallback for when Redis is not configured
 const memoryStore = new Map<string, number>();
@@ -20,13 +20,20 @@ const TTL_SECONDS = 26 * 60 * 60;
  * GET /api/usage/images
  * Returns current daily image usage for the authenticated user.
  */
+export async function OPTIONS(request: NextRequest) {
+  return withExtensionCors(request, new NextResponse(null, { status: 204 }));
+}
+
 export async function GET(request: NextRequest) {
-  const originError = validateOrigin(request);
-  if (originError) return originError;
+  const cors = (r: NextResponse) => withExtensionCors(request, r);
+  if (!isExtensionOrigin(request)) {
+    const originError = validateOrigin(request);
+    if (originError) return originError;
+  }
 
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
-    return NextResponse.json({ error: "Unauthorized", code: "UNAUTHORIZED" }, { status: 401 });
+    return cors(NextResponse.json({ error: "Unauthorized", code: "UNAUTHORIZED" }, { status: 401 }));
   }
 
   const isPro = (session.user as { plan?: string }).plan === "pro";
@@ -37,12 +44,12 @@ export async function GET(request: NextRequest) {
   const redisVal = await getInt(key);
   const used = redisVal ?? memoryStore.get(key) ?? 0;
 
-  return NextResponse.json({
+  return cors(NextResponse.json({
     used,
     limit,
     remaining: Math.max(0, limit - used),
     plan: isPro ? "pro" : "free",
-  });
+  }));
 }
 
 /**
@@ -51,8 +58,11 @@ export async function GET(request: NextRequest) {
  * Returns updated usage. Returns 429 if limit would be exceeded.
  */
 export async function POST(req: NextRequest) {
-  const originError = validateOrigin(req);
-  if (originError) return originError;
+  const cors = (r: NextResponse) => withExtensionCors(req, r);
+  if (!isExtensionOrigin(req)) {
+    const originError = validateOrigin(req);
+    if (originError) return originError;
+  }
 
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
@@ -80,14 +90,14 @@ export async function POST(req: NextRequest) {
   const current = currentRedis ?? memoryStore.get(key) ?? 0;
 
   if (current + count > limit) {
-    return NextResponse.json({
+    return cors(NextResponse.json({
       error: "Daily image limit reached. Upgrade to Pro for unlimited processing.",
       code: "DAILY_LIMIT_REACHED",
       used: current,
       limit,
       remaining: Math.max(0, limit - current),
       plan: isPro ? "pro" : "free",
-    }, { status: 429 });
+    }, { status: 429 }));
   }
 
   // Increment
@@ -104,10 +114,10 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  return NextResponse.json({
+  return cors(NextResponse.json({
     used: newValue!,
     limit,
     remaining: Math.max(0, limit - newValue!),
     plan: isPro ? "pro" : "free",
-  });
+  }));
 }

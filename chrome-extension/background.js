@@ -1,4 +1,4 @@
-// SammaPix Background — only handles side panel + context menus
+// SammaPix Background — side panel + right-click image menus
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -8,35 +8,43 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({ id: "compress", title: "Compress (80% quality)", contexts: ["image"] });
 });
 
+const ACTS = {
+  "save-jpg": { m: "image/jpeg", e: "jpg", q: 0.95 },
+  "save-png": { m: "image/png", e: "png", q: 1 },
+  "save-webp": { m: "image/webp", e: "webp", q: 0.9 },
+  "compress": { m: "image/jpeg", e: "jpg", q: 0.8 },
+};
+
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (!info.srcUrl) return;
-  const acts = {
-    "save-jpg": { m: "image/jpeg", e: "jpg", q: 0.95 },
-    "save-png": { m: "image/png", e: "png", q: 1 },
-    "save-webp": { m: "image/webp", e: "webp", q: 0.9 },
-    "compress": { m: "image/jpeg", e: "jpg", q: 0.8 },
-  };
-  const a = acts[info.menuItemId];
+  if (!info.srcUrl || !tab || !tab.id) return;
+  const a = ACTS[info.menuItemId];
   if (!a) return;
   try {
+    // Fetch the real bytes here in the extension context — host_permissions <all_urls>
+    // bypass CORS, so we can re-encode any image without tainting a canvas.
+    const resp = await fetch(info.srcUrl);
+    const blob = await resp.blob();
+    const bmp = await createImageBitmap(blob);
+    const canvas = new OffscreenCanvas(bmp.width, bmp.height);
+    canvas.getContext("2d").drawImage(bmp, 0, 0);
+    if (bmp.close) bmp.close();
+    const outBlob = await canvas.convertToBlob({ type: a.m, quality: a.q });
+    const dataUrl = await new Promise((res) => {
+      const fr = new FileReader();
+      fr.onload = () => res(fr.result);
+      fr.readAsDataURL(outBlob);
+    });
+    let fn = "image";
+    try { fn = new URL(info.srcUrl).pathname.split("/").pop().split(".")[0].replace(/[^a-zA-Z0-9_-]/g, "") || "image"; } catch {}
+    // Trigger the download from the page (side panel/worker can't click an <a>)
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      func: (url, mime, ext, q) => {
-        const img = new Image(); img.crossOrigin = "anonymous";
-        img.onload = () => {
-          const c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
-          c.getContext("2d").drawImage(img, 0, 0);
-          c.toBlob(b => {
-            if (!b) return;
-            const u = URL.createObjectURL(b);
-            const a = document.createElement("a"); a.href = u;
-            let fn = "image"; try { fn = new URL(url).pathname.split("/").pop().split(".")[0] || "image"; } catch {}
-            a.download = fn + "." + ext; document.body.appendChild(a); a.click(); a.remove();
-          }, mime, q);
-        };
-        img.src = url;
+      func: (durl, name) => {
+        const link = document.createElement("a");
+        link.href = durl; link.download = name;
+        document.body.appendChild(link); link.click(); link.remove();
       },
-      args: [info.srcUrl, a.m, a.e, a.q],
+      args: [dataUrl, fn + "." + a.e],
     });
-  } catch {}
+  } catch (e) {}
 });

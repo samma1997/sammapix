@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SammaPix — mockup</title>
+<style>
+:root{
+  --bg:#f6f6f9; --surface:#ffffff; --border:#ececf1; --text:#16161a; --dim:#8a8a95;
+  --accent:#6366f1; --shadow:0 1px 3px rgba(20,20,30,.06),0 6px 20px rgba(20,20,30,.04);
+}
+body.dark{
+  --bg:#161618; --surface:#1e1e22; --border:#2b2b31; --text:#ededf0; --dim:#8f8f99;
+  --accent:#818cf8; --shadow:0 1px 3px rgba(0,0,0,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+/* phone-width frame to simulate the side panel */
+.frame{max-width:380px;margin:0 auto;min-height:100vh;background:var(--bg);border-left:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column}
+
+.hd{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;background:var(--bg)}
+.hd-l{display:flex;align-items:center;gap:9px}
+.logo{width:26px;height:26px}
+.brand{font-size:16px;font-weight:750;letter-spacing:-.4px}
+.themebtn{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:20px;font-size:12px;padding:6px 12px;cursor:pointer;font-weight:600}
+
+.search{margin:2px 16px 14px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:10px 13px;box-shadow:var(--shadow)}
+.search input{border:none;background:none;outline:none;flex:1;font-size:13px;color:var(--text)}
+.search .mag{color:var(--dim);font-size:14px}
+
+.sect{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin:6px 18px 10px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px 10px;padding:0 14px 20px}
+.tool{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:14px 6px 11px;text-align:center;cursor:pointer;transition:transform .12s,box-shadow .2s,border-color .2s;box-shadow:var(--shadow)}
+.tool:hover{transform:translateY(-2px);border-color:transparent;box-shadow:0 6px 22px rgba(60,60,90,.14)}
+.tool:active{transform:scale(.96)}
+.tile{width:48px;height:48px;border-radius:15px;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:23px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.tool .lb{font-size:11px;font-weight:650;line-height:1.15;color:var(--text)}
+.tool .sub{font-size:9px;color:var(--dim);margin-top:2px}
+
+/* tile tints */
+.t-indigo{background:linear-gradient(145deg,#eef0ff,#dfe3ff)}.dark .t-indigo{background:linear-gradient(145deg,#2a2c4a,#1f2138)}
+.t-amber{background:linear-gradient(145deg,#fff2df,#ffe6c2)}.dark .t-amber{background:linear-gradient(145deg,#3a2e1a,#2a2113)}
+.t-teal{background:linear-gradient(145deg,#defaf3,#c3f3e6)}.dark .t-teal{background:linear-gradient(145deg,#123430,#0e2723)}
+.t-red{background:linear-gradient(145deg,#ffe6e6,#ffd0d0)}.dark .t-red{background:linear-gradient(145deg,#3a1e1e,#2a1414)}
+.t-blue{background:linear-gradient(145deg,#e2f0ff,#c9e3ff)}.dark .t-blue{background:linear-gradient(145deg,#16283f,#0f1d2e)}
+.t-purple{background:linear-gradient(145deg,#f2e8ff,#e6d3ff)}.dark .t-purple{background:linear-gradient(145deg,#2c1f42,#211632)}
+.t-green{background:linear-gradient(145deg,#e2f7e4,#c9efce)}.dark .t-green{background:linear-gradient(145deg,#152f1b,#0f2314)}
+.t-pink{background:linear-gradient(145deg,#ffe6f2,#ffd0e6)}.dark .t-pink{background:linear-gradient(145deg,#3a1e2e,#2a1420)}
+.t-slate{background:linear-gradient(145deg,#eceef2,#dde1e8)}.dark .t-slate{background:linear-gradient(145deg,#26282e,#1c1e23)}
+.t-cyan{background:linear-gradient(145deg,#defbff,#c2f2fb)}.dark .t-cyan{background:linear-gradient(145deg,#123236,#0e2528)}
+.t-gray{background:linear-gradient(145deg,#eeeef2,#e2e2e8)}.dark .t-gray{background:linear-gradient(145deg,#252529,#1b1b1f)}
+
+.foot{padding:6px 18px 24px;text-align:center}
+.foot a{font-size:11px;color:var(--accent);text-decoration:none;font-weight:650}
+
+/* ── detail screen ── */
+.detail{display:none;flex-direction:column;flex:1}
+.detail.on{display:flex}
+.grid-screen.off{display:none}
+.dhd{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.back{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:11px;padding:7px 12px;font-size:12px;font-weight:650;cursor:pointer}
+.dtitle{font-size:15px;font-weight:750}
+.dbody{padding:6px 16px 24px}
+.drop2{border:2px dashed var(--border);border-radius:18px;background:var(--surface);padding:40px 18px;text-align:center;box-shadow:var(--shadow)}
+.drop2 .i{font-size:38px;margin-bottom:10px}
+.drop2 h3{font-size:15px;margin-bottom:4px}
+.drop2 p{font-size:12px;color:var(--dim)}
+.opt{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-top:12px;box-shadow:var(--shadow)}
+.opt h4{font-size:12px;font-weight:700;margin-bottom:10px}
+.slider{width:100%;accent-color:var(--accent)}
+.chips{display:flex;gap:6px;margin-top:8px}
+.chip{padding:7px 12px;border:1px solid var(--border);background:var(--bg);border-radius:16px;font-size:11px;font-weight:650;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.cta{width:100%;margin-top:14px;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(99,102,241,.3)}
+.note{font-size:11px;color:var(--dim);text-align:center;margin-top:20px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="hd">
+    <div class="hd-l">
+      <svg class="logo" viewBox="0 0 20 20"><rect x="2" y="2" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="6" y="2" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="10" y="2" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="14" y="2" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="2" y="6" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="14" y="6" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="2" y="10" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="14" y="10" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="2" y="14" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="6" y="14" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="10" y="14" width="3" height="3" fill="#818cf8" rx="0.6"/><rect x="14" y="14" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="6" y="6" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="10" y="6" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="6" y="10" width="3" height="3" fill="#6366f1" rx="0.6"/><rect x="10" y="10" width="3" height="3" fill="#6366f1" rx="0.6"/></svg>
+      <span class="brand">SammaPix</span>
+    </div>
+    <button class="themebtn" id="theme">🌙 Scuro</button>
+  </div>
+
+  <!-- HOME GRID -->
+  <div class="grid-screen" id="home">
+    <div class="search"><span class="mag">🔍</span><input placeholder="Cerca un tool…"></div>
+    <div class="sect">In primo piano</div>
+    <div class="grid">
+      <div class="tool" data-t="Compress"><div class="tile t-indigo">🗜️</div><div class="lb">Compress</div><div class="sub">JPG · WebP</div></div>
+      <div class="tool" data-t="Open RAR"><div class="tile t-amber">📦</div><div class="lb">Open RAR</div><div class="sub">estrai</div></div>
+      <div class="tool" data-t="Convert"><div class="tile t-teal">🔄</div><div class="lb">Convert</div><div class="sub">WebP/PNG</div></div>
+      <div class="tool" data-t="PDF"><div class="tile t-red">📄</div><div class="lb">PDF</div><div class="sub">merge/split</div></div>
+      <div class="tool" data-t="Open 7z / ZIP"><div class="tile t-amber">🗜️</div><div class="lb">7z · ZIP</div><div class="sub">estrai</div></div>
+      <div class="tool" data-t="Resize"><div class="tile t-blue">📐</div><div class="lb">Resize</div><div class="sub">social</div></div>
+    </div>
+    <div class="sect">Immagine</div>
+    <div class="grid">
+      <div class="tool" data-t="Remove BG"><div class="tile t-purple">✂️</div><div class="lb">Remove BG</div></div>
+      <div class="tool" data-t="Crop"><div class="tile t-green">⛶</div><div class="lb">Crop</div></div>
+      <div class="tool" data-t="Watermark"><div class="tile t-pink">©️</div><div class="lb">Watermark</div></div>
+      <div class="tool" data-t="Blur / Censor"><div class="tile t-slate">🌫️</div><div class="lb">Blur</div></div>
+      <div class="tool" data-t="Clean EXIF"><div class="tile t-green">🛡️</div><div class="lb">Clean EXIF</div></div>
+      <div class="tool" data-t="Page images"><div class="tile t-cyan">🖼️</div><div class="lb">Da pagina</div></div>
+    </div>
+    <div class="sect">Altro</div>
+    <div class="grid">
+      <div class="tool" data-t="Screenshot"><div class="tile t-blue">📸</div><div class="lb">Screenshot</div></div>
+      <div class="tool" data-t="Color picker"><div class="tile t-pink">🎨</div><div class="lb">Color pick</div></div>
+      <div class="tool" data-t="Tutti i 52 tool"><div class="tile t-gray">➕</div><div class="lb">Tutti i tool</div><div class="sub">sul sito</div></div>
+    </div>
+    <div class="foot"><a href="#">sammapix.com — 52 tool gratis →</a></div>
+  </div>
+
+  <!-- DETAIL (esempio Compress) -->
+  <div class="detail" id="detail">
+    <div class="dhd"><button class="back" id="back">‹ Indietro</button><span class="dtitle" id="dtitle">Compress</span></div>
+    <div class="dbody" id="dbody"></div>
+  </div>
+</div>
+
+<script>
+var body=document.body, themeBtn=document.getElementById('theme');
+themeBtn.addEventListener('click',function(){
+  body.classList.toggle('dark');
+  themeBtn.textContent=body.classList.contains('dark')?'☀️ Chiaro':'🌙 Scuro';
+});
+var home=document.getElementById('home'), detail=document.getElementById('detail'), dtitle=document.getElementById('dtitle'), dbody=document.getElementById('dbody');
+function openTool(name){
+  dtitle.textContent=name;
+  if(name==='Compress'){
+    dbody.innerHTML='<div class="drop2"><div class="i">🗜️</div><h3>Trascina un\'immagine</h3><p>o clicca per sceglierla</p></div>'+
+      '<div class="opt"><h4>Qualità</h4><input class="slider" type="range" min="10" max="100" value="80"><div class="chips"><span class="chip on">WebP</span><span class="chip">JPG</span><span class="chip">PNG</span></div></div>'+
+      '<button class="cta">↓ Comprimi e salva</button>'+
+      '<div class="note">Esempio visivo. Se il look ti piace, questo tool funziona davvero (client-side).</div>';
+  } else {
+    dbody.innerHTML='<div class="drop2"><div class="i">🧩</div><h3>'+name+'</h3><p>Anteprima del flusso: trascini un file e questo tool lo lavora.</p></div>'+
+      '<button class="cta">Apri '+name+'</button>'+
+      '<div class="note">Mockup statico. Serve solo per validare struttura e look.</div>';
+  }
+  home.classList.add('off'); detail.classList.add('on');
+}
+document.querySelectorAll('[data-t]').forEach(function(el){ el.addEventListener('click',function(){ openTool(el.getAttribute('data-t')); }); });
+document.getElementById('back').addEventListener('click',function(){ detail.classList.remove('on'); home.classList.remove('off'); });
+</script>
+</body>
+</html>
