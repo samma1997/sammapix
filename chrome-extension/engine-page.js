@@ -211,8 +211,14 @@ window.PageWS = (function () {
   async function bulk(type, pattern) {
     var list = Array.from(selected);
     if (!list.length) { toast("Select at least one image"); return; }
-    // Regola unica sito+estensione: OGNI azione in blocco (scarica/comprimi/rinomina)
-    // conta sulla quota 50/giorno. Pro = illimitato.
+    // Optional host access: request <all_urls> at runtime (only when the user runs a
+    // bulk action) so the default install stays on narrow, faster-to-review permissions.
+    if (!window.__SP_DEV__ && chrome.permissions && chrome.permissions.request) {
+      var okHost = await chrome.permissions.request({ origins: ["<all_urls>"] });
+      if (!okHost) { toast("Allow site access to run bulk actions"); return; }
+    }
+    // One shared rule (site + extension): every bulk action counts toward the
+    // 50/day quota. Pro = unlimited.
     var needsQuota = true;
     var q = await getQuota();
     if (q.error) { toast("Couldn't reach your SammaPix account"); return; }

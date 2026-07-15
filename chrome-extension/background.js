@@ -20,8 +20,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   const a = ACTS[info.menuItemId];
   if (!a) return;
   try {
-    // Fetch the real bytes here in the extension context — host_permissions <all_urls>
-    // bypass CORS, so we can re-encode any image without tainting a canvas.
+    // Optional host access, requested at runtime (right-click is a user gesture).
+    // Keeps the default install on narrow permissions for a faster store review.
+    if (chrome.permissions && chrome.permissions.request) {
+      const okHost = await chrome.permissions.request({ origins: ["<all_urls>"] });
+      if (!okHost) return;
+    }
+    // Fetch the real bytes here in the extension context — the granted host access
+    // bypasses CORS, so we can re-encode any image without tainting a canvas.
     const resp = await fetch(info.srcUrl);
     const blob = await resp.blob();
     const bmp = await createImageBitmap(blob);

@@ -47,7 +47,8 @@ Free. Private. No uploads.
 The extension is an image utility: it lets users compress, convert, edit, clean and extract images and archives, and collect the images on the page they are viewing, processing everything locally in the browser.
 
 ## Giustificazione permessi (te la chiedono in review — copia le righe)
-- host_permissions "<all_urls>": needed to (a) fetch and process the images on whatever page the user chooses, and (b) contact the user's own SammaPix account at sammapix.com to check their daily quota / Pro status for bulk actions. Nothing is accessed until the user opens the panel or triggers an action.
+- host_permissions "https://sammapix.com/*": needed to contact the user's own SammaPix account to check their daily quota / Pro status for bulk actions.
+- optional_host_permissions "<all_urls>": requested AT RUNTIME, only when the user runs a bulk "grab from page" action or a right-click save on a cross-origin image, to fetch and process those images. The default install does not hold broad host access.
 - activeTab + scripting: to read the images of the tab the user is actively working on and to trigger downloads in that page.
 - contextMenus: to add the right-click "Save as JPG / PNG / WebP / Compress" options on images.
 - sidePanel: the whole tool UI lives in the browser side panel.
