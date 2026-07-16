@@ -4,8 +4,8 @@ Pacchetto da caricare: `~/Downloads/sammapix-extension-v5.6.0.zip` (versione 5.6
 
 ---
 
-## Nome (già nel manifest) — vedi opzioni ASO in fondo
-SammaPix — Image Tools
+## Nome (già nel manifest)
+SammaPix — Image Compressor & Tools
 
 ## Summary / Riepilogo breve (max 132 caratteri) — keyword-rich
 Image compressor & converter (JPG, PNG, WebP), RAR/7z/ZIP extractor, and bulk image downloader for any page. Free, no uploads.
