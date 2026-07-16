@@ -9,6 +9,7 @@ import { ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
+import { EXTENSION_LIVE } from "@/lib/constants";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -173,6 +174,14 @@ export default function Navbar() {
             </svg>
           </a>
           <ThemeToggle />
+          {EXTENSION_LIVE && (
+            <Link
+              href="/chrome"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#6366F1] dark:text-[#818cf8] border border-[#E5E5E5] dark:border-[#333] rounded-lg hover:bg-[#F5F3FF] dark:hover:bg-[#241d3a] transition-colors"
+            >
+              <span aria-hidden="true">🧩</span> {t("Chrome extension", "Estensione Chrome")}
+            </Link>
+          )}
           {alt && (
             <Link
               href={alt.href}

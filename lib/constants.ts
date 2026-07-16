@@ -7,6 +7,10 @@ export const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024; // 50MB
 export const MAX_FILES_FREE = 20;
 export const MAX_FILES_PRO = 500;
 
+// Flip to true the day the Chrome extension is published on the Web Store.
+// Controls whether the "Get the extension" navbar button and post-action prompts show.
+export const EXTENSION_LIVE = false;
+
 // Daily image processing limit (across ALL tools)
 export const DAILY_IMAGES_FREE = 50;
 export const DAILY_IMAGES_PRO = 999999; // unlimited
