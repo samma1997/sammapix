@@ -1,11 +1,15 @@
 // SammaPix Background — side panel + right-click image menus
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   chrome.contextMenus.create({ id: "save-jpg", title: "Save as JPG (remove EXIF)", contexts: ["image"] });
   chrome.contextMenus.create({ id: "save-png", title: "Save as PNG (remove EXIF)", contexts: ["image"] });
   chrome.contextMenus.create({ id: "save-webp", title: "Save as WebP (smaller)", contexts: ["image"] });
   chrome.contextMenus.create({ id: "compress", title: "Compress (80% quality)", contexts: ["image"] });
+  // First install → open the welcome page that teaches how to pin the extension.
+  if (details && details.reason === "install") {
+    chrome.tabs.create({ url: "https://www.sammapix.com/chrome/welcome?ref=ext-install" });
+  }
 });
 
 const ACTS = {
