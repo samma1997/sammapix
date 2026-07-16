@@ -91,6 +91,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   other: {
     "impact-site-verification": "ea5238e5-3e70-4cdb-b4d2-ebdd254df866",
+    "google-adsense-account": "ca-pub-4145672488138909",
   },
 };
 
