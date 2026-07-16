@@ -9,6 +9,7 @@ import SmartTrialPrompt from "@/components/ui/SmartTrialPrompt";
 import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
 import ReferralHeroBanner from "@/components/referral/ReferralHeroBanner";
 import ReferralWelcomeModal from "@/components/referral/ReferralWelcomeModal";
+import ExtensionAhaPrompt from "@/components/ExtensionAhaPrompt";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -48,6 +49,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       <SmartTrialPrompt />
       <PWAInstallPrompt />
       <ReferralWelcomeModal />
+      <ExtensionAhaPrompt />
     </>
   );
 }
