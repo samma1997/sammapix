@@ -513,10 +513,6 @@ export default function TarGzClient() {
               <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">{readyEntries.length} file{readyEntries.length !== 1 ? "s" : ""}</p>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={downloadAllAsZip} disabled={zipBuilding || readyEntries.length === 0} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-lg transition-colors disabled:opacity-50">
-                {zipBuilding ? <Loader2 size={12} strokeWidth={1.5} className="animate-spin" /> : <Download size={12} strokeWidth={1.5} />}
-                Download all as .zip
-              </button>
               <button onClick={handleReset} className="inline-flex items-center gap-1 px-3 py-1.5 text-xs text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg transition-colors">
                 <RotateCcw size={11} strokeWidth={1.5} /> New file
               </button>
@@ -538,6 +534,25 @@ export default function TarGzClient() {
             <Lock size={13} className="text-[#10B981] shrink-0" strokeWidth={1.5} />
             <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Files were extracted locally in your browser and are never uploaded.</p>
           </div>
+
+          {/* One-click ZIP — convenient path at the moment of value. On tar-gz
+              the ZIP is free for everyone (low-traffic tool, not worth gating),
+              so this is a pure convenience shortcut with no upsell claim. */}
+          {readyEntries.length > 1 && (
+            <div className="flex items-center gap-3 px-4 py-3.5 bg-white dark:bg-[#191919] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl">
+              <div className="w-9 h-9 rounded-lg bg-[#6366F1]/10 flex items-center justify-center shrink-0">
+                <FolderArchive size={17} className="text-[#6366F1]" strokeWidth={1.75} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">Save all {readyEntries.length} files at once</p>
+                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Bundle everything into one .zip — no clicking file by file.</p>
+              </div>
+              <button onClick={downloadAllAsZip} disabled={zipBuilding} className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 shrink-0">
+                {zipBuilding ? <Loader2 size={13} strokeWidth={1.75} className="animate-spin" /> : <Download size={13} strokeWidth={1.75} />}
+                Download .zip
+              </button>
+            </div>
+          )}
 
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden divide-y divide-[#F5F5F5] dark:divide-[#252525]">
             {entries.map((entry) => (
