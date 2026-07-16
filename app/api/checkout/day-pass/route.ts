@@ -67,6 +67,11 @@ export async function POST(req: NextRequest) {
   // vs the `source` field which is only the tool page they paid on.
   const entry = req.cookies.get("sx_ft")?.value?.replace(/[^a-zA-Z0-9/:_|.-]/g, "").slice(0, 90);
 
+  // GA4 client id (_ga cookie) so the webhook can attribute the Day Pass purchase
+  // to the originating session/source (e.g. ChatGPT, Perplexity). Read server-side
+  // so every Day Pass entry point is covered without touching the client.
+  const gaCookie = req.cookies.get("_ga")?.value;
+
   const unitAmount = isVideoVariant ? DAY_PASS_VIDEO_PRICE : DAY_PASS_PRICE;
   // EUR for Italian buyers (same numeric amount, e.g. 2,99), USD for everyone else.
   const passCurrency = source && (source === "/it" || source.startsWith("/it/")) ? "eur" : "usd";
@@ -135,6 +140,8 @@ export async function POST(req: NextRequest) {
         userEmail: email ?? "",
         ...(source ? { source } : {}),
         ...(entry ? { entry } : {}),
+        // _ga cookie → webhook fires GA4 purchase attributed to the buyer's session.
+        ...(gaCookie ? { ga_cookie: gaCookie } : {}),
       },
       // Abandoned-cart recovery: if the buyer leaves after entering their email,
       // Stripe automatically emails them a link to resume this day pass. Requires
