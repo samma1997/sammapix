@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title:
     "Topaz Gigapixel AI Free Alternative: 7 Options Tested (2026)",
   description:
-    "Topaz Gigapixel costs $199/year. Compare 7 free AI upscalers tested on real photos. 2x/4x upscaling in browser, zero upload. Best quality picks inside.",
+    "Topaz Gigapixel costs $199/year and a heavy install. Here are 7 free alternatives tested on real photos, with 2x and 4x AI upscaling right in your browser. No download, zero upload.",
   alternates: {
     canonical: `${APP_URL}/blog/best-free-topaz-gigapixel-alternatives-2026`,
   },
