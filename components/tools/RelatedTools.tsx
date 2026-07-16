@@ -1,14 +1,19 @@
 import Link from "next/link";
 import { getRelatedTools } from "@/lib/tools-metadata";
 import { ArrowRight } from "lucide-react";
+import ExtensionCta from "@/components/ExtensionCta";
 
 export default function RelatedTools({ toolId }: { toolId: string }) {
   const related = getRelatedTools(toolId);
-  if (related.length === 0) return null;
 
   return (
     <section className="mt-12 mb-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="mb-10">
+          <ExtensionCta variant="card" />
+        </div>
+        {related.length === 0 ? null : (
+        <>
         <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Related tools
         </h2>
@@ -34,6 +39,8 @@ export default function RelatedTools({ toolId }: { toolId: string }) {
             </Link>
           ))}
         </div>
+        </>
+        )}
       </div>
     </section>
   );
