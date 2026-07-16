@@ -35,14 +35,13 @@ export default function WelcomePage() {
         @media (prefers-reduced-motion:reduce){.w-arrow,.w-pin,.w-in{animation:none;opacity:1}}
       `}</style>
 
-      {/* Arrow pointing to the real Chrome puzzle icon (top-right) */}
-      <div className="hidden md:flex fixed top-3 right-16 z-40 items-start gap-2 w-arrow pointer-events-none">
-        <div className="mt-9 rounded-full bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-xs font-semibold px-3 py-1.5 shadow-lg whitespace-nowrap">
-          Pin me from the 🧩 up here
+      {/* Clean top-right hint: the extensions area is up in the browser toolbar */}
+      <div className="hidden md:flex fixed top-2.5 right-5 z-40 items-center gap-2 w-arrow pointer-events-none text-[#171717] dark:text-[#E5E5E5]">
+        <div className="rounded-full bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] text-[13px] font-semibold px-3.5 py-2 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.4)] whitespace-nowrap">
+          Find the <span className="align-middle">🧩</span> up here → pin SammaPix
         </div>
-        <svg width="70" height="80" viewBox="0 0 70 80" fill="none" aria-hidden="true">
-          <path d="M6 74 C 40 74, 60 55, 62 12" stroke="#171717" className="dark:stroke-[#E5E5E5]" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="1 7" />
-          <path d="M52 16 L63 8 L64 22" stroke="#171717" className="dark:stroke-[#E5E5E5]" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <svg width="24" height="28" viewBox="0 0 24 28" fill="none" aria-hidden="true">
+          <path d="M12 26 V5 M5 12 L12 5 L19 12" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
 
