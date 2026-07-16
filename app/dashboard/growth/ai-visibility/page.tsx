@@ -1,9 +1,20 @@
 import { exec } from "@/lib/redis";
+import { fetchAiTraffic, type AiTraffic } from "@/lib/growth/ga4-client";
 
 export const metadata = {
   title: "AI Visibility · Growth HQ · SammaPix",
 };
 export const dynamic = "force-dynamic";
+
+async function getGa4(): Promise<AiTraffic | null> {
+  try {
+    const pid = process.env.GA4_PROPERTY_ID;
+    if (!pid) return null;
+    return await fetchAiTraffic(pid, 365);
+  } catch {
+    return null;
+  }
+}
 
 const DAYS = 14;
 
@@ -70,8 +81,12 @@ const KIND_LABEL: Record<string, string> = {
 };
 
 export default async function AiVisibilityPage() {
-  const { rows, topRef, topBot, referralTotal, retrievalTotal, trainingTotal } = await getStats();
+  const [{ rows, topRef, topBot, referralTotal, retrievalTotal, trainingTotal }, ga4] = await Promise.all([
+    getStats(),
+    getGa4(),
+  ]);
   const empty = rows.length === 0;
+  const aiPct = ga4 && ga4.totalSessions ? ((ga4.aiSessions / ga4.totalSessions) * 100).toFixed(1) : "0";
 
   return (
     <div className="min-h-screen p-6 lg:p-10 bg-white dark:bg-[#191919]">
@@ -84,10 +99,58 @@ export default async function AiVisibilityPage() {
           Presenza nei motori AI
         </h1>
         <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-8 max-w-2xl">
-          Ultimi {DAYS} giorni. Misura quando ChatGPT, Perplexity, Gemini e Claude
-          pescano le tue pagine e quando un utente arriva cliccando il link dentro
-          una risposta AI. Il segnale verde (utente da AI) e' quello che puo' convertire.
+          Due viste: lo <strong className="text-[#171717] dark:text-[#E5E5E5]">storico</strong> (Google
+          Analytics, ultimo anno) per capire dove sei gia' arrivato, e il{" "}
+          <strong className="text-[#171717] dark:text-[#E5E5E5]">dettaglio live</strong> (da oggi) su
+          quali pagine i bot AI pescano e da dove arrivano gli utenti.
         </p>
+
+        {/* ── STORICO GA4 (ultimo anno) ── */}
+        <div className="mb-12">
+          <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            Storico ultimo anno · da dove arriva il traffico AI
+          </h2>
+          {!ga4 ? (
+            <p className="text-xs text-[#A3A3A3]">GA4 non disponibile in questo ambiente.</p>
+          ) : (
+            <>
+              <div className="flex flex-wrap items-end gap-8 mb-6">
+                <div>
+                  <p className="text-4xl font-bold text-[#6366F1]">{aiPct}%</p>
+                  <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-1">del traffico arriva dai motori AI</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                    {ga4.aiSessions.toLocaleString("it-IT")}
+                  </p>
+                  <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-1">
+                    sessioni da AI su {ga4.totalSessions.toLocaleString("it-IT")} totali
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {ga4.byEngine.map((e) => (
+                  <div key={e.engine} className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-4">
+                    <p className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">
+                      {e.sessions.toLocaleString("it-IT")}
+                    </p>
+                    <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-0.5">{e.engine}</p>
+                    <p className="text-[10px] text-[#A3A3A3] dark:text-[#525252]">{e.users} utenti</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-[#A3A3A3] dark:text-[#525252] mt-3">
+                GA4 conta solo chi accetta i cookie e ha JS, quindi il traffico AI reale e' anche piu' alto.
+                Le conversioni non compaiono qui perche' il Day Pass (Stripe) non e' ancora collegato a GA4.
+              </p>
+            </>
+          )}
+        </div>
+
+        {/* ── DETTAGLIO LIVE (da oggi) ── */}
+        <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+          Dettaglio live · ultimi {DAYS} giorni (dal lancio del tracking)
+        </h2>
 
         {empty ? (
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-2xl p-10 text-center">

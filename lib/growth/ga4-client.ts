@@ -160,6 +160,66 @@ export async function fetchGA4Summary(
   };
 }
 
+// ── AI traffic (motori generativi) ────────────────────────────────────────────
+// Isola le sessioni che arrivano dai motori AI. "bing" e' escluso di proposito:
+// come sessionSource e' quasi tutto ricerca Bing classica, non Copilot, e
+// gonfierebbe il dato. Contiamo solo fonti inequivocabilmente generative.
+const AI_ENGINES: { match: string; engine: string }[] = [
+  { match: "chatgpt", engine: "ChatGPT" },
+  { match: "openai", engine: "ChatGPT" },
+  { match: "perplexity", engine: "Perplexity" },
+  { match: "gemini", engine: "Gemini" },
+  { match: "bard", engine: "Gemini" },
+  { match: "claude", engine: "Claude" },
+  { match: "copilot", engine: "Copilot" },
+  { match: "you.com", engine: "You.com" },
+  { match: "poe.com", engine: "Poe" },
+  { match: "phind", engine: "Phind" },
+];
+
+export interface AiTraffic {
+  totalSessions: number;
+  aiSessions: number;
+  byEngine: { engine: string; sessions: number; users: number }[];
+}
+
+/** Traffico dai motori AI su `days` giorni (default 1 anno). */
+export async function fetchAiTraffic(propertyId: string, days = 365): Promise<AiTraffic> {
+  const client = getClient();
+  const dateRanges = [{ startDate: `${days}daysAgo`, endDate: "today" }];
+  const [totRes, srcRes] = await Promise.all([
+    client.runReport({ property: `properties/${propertyId}`, dateRanges, metrics: [{ name: "sessions" }] }),
+    client.runReport({
+      property: `properties/${propertyId}`,
+      dateRanges,
+      dimensions: [{ name: "sessionSource" }],
+      metrics: [{ name: "sessions" }, { name: "totalUsers" }],
+      orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+      limit: 300,
+    }),
+  ]);
+
+  const totalSessions = parseInt(totRes[0]?.rows?.[0]?.metricValues?.[0]?.value ?? "0");
+  const agg: Record<string, { sessions: number; users: number }> = {};
+  let aiSessions = 0;
+  for (const row of srcRes[0]?.rows ?? []) {
+    const source = (row.dimensionValues?.[0]?.value ?? "").toLowerCase();
+    const hit = AI_ENGINES.find((a) => source.includes(a.match));
+    if (!hit) continue;
+    const sessions = parseInt(row.metricValues?.[0]?.value ?? "0");
+    const users = parseInt(row.metricValues?.[1]?.value ?? "0");
+    agg[hit.engine] = agg[hit.engine] || { sessions: 0, users: 0 };
+    agg[hit.engine].sessions += sessions;
+    agg[hit.engine].users += users;
+    aiSessions += sessions;
+  }
+  const byEngine = Object.entries(agg)
+    .map(([engine, v]) => ({ engine, ...v }))
+    .sort((a, b) => b.sessions - a.sessions);
+
+  return { totalSessions, aiSessions, byEngine };
+}
+
 export async function fetchGA4Realtime(propertyId: string): Promise<{ activeUsers: number }> {
   const client = getClient();
 
