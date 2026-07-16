@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "SammaPix — Image Tools",
   "version": "5.6.0",
-  "description": "Compress, convert, crop & clean images. Extract RAR/7z/ZIP. Grab all images from any page in bulk. 100% in your browser.",
+  "description": "Image compressor & converter (JPG, PNG, WebP), RAR/7z/ZIP extractor, and bulk image downloader for any page. Free, no uploads.",
   "permissions": [
     "contextMenus",
     "activeTab",

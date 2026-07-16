@@ -1,14 +1,14 @@
 # SammaPix — Chrome Web Store: scheda pronta da copia-incolla (v5)
 
-Pacchetto da caricare: `~/Downloads/sammapix-extension-v5.4.3.zip` (versione 5.4.3)
+Pacchetto da caricare: `~/Downloads/sammapix-extension-v5.6.0.zip` (versione 5.6.0)
 
 ---
 
-## Nome (già nel manifest)
+## Nome (già nel manifest) — vedi opzioni ASO in fondo
 SammaPix — Image Tools
 
-## Summary / Riepilogo breve (max 132 caratteri)
-Compress, convert, crop & clean images. Extract RAR/7z/ZIP. Grab every image from a page in bulk. 100% in your browser.
+## Summary / Riepilogo breve (max 132 caratteri) — keyword-rich
+Image compressor & converter (JPG, PNG, WebP), RAR/7z/ZIP extractor, and bulk image downloader for any page. Free, no uploads.
 
 ## Categoria
 Photos (alternativa: Tools)
@@ -17,7 +17,7 @@ Photos (alternativa: Tools)
 English (United States)
 
 ## Descrizione dettagliata (copia tutto)
-SammaPix is a fast image toolbox that lives in your browser side panel. Open it on any page and get things done in seconds, without uploading anything.
+SammaPix is a free image toolbox in your browser side panel: an image compressor, converter, cropper and cleaner, an archive extractor (RAR, 7z, ZIP), and a bulk image downloader that grabs every image from any page. Everything runs locally — nothing is uploaded.
 
 IMAGE TOOLS (100% in your browser)
 • Compress JPG, PNG and WebP with a live size preview (see the saving before you save)
@@ -82,3 +82,22 @@ Generati pronti in `~/Downloads/sammapix-store-shots/` (vedi sotto). Ne bastano 
 - Archivi client-side (wasm): RAR (node-unrar-js) + 7z/ZIP/TAR (libarchive.js).
 - "Da pagina": scansiona le immagini della scheda attiva, azioni in blocco (scarica/comprimi/rinomina) con quota condivisa col sito (50/giorno free, illimitato Pro) via /api/usage/images.
 - I 52 tool completi (upscale, remove-bg, HEIC, PDF, video, AI) restano sul sito; l'estensione ci rimanda.
+
+---
+
+## 🔎 ASO — farsi trovare nello store
+
+### Keyword che la gente cerca (coperte da summary + descrizione)
+image compressor · compress image · compress jpg · compress png · image converter · convert to webp · png to jpg · webp converter · image downloader · download all images · download images from website · save all images · unrar · rar extractor · extract rar · open 7z · 7z extractor · extract zip · resize image · crop image · remove exif · image tools · photo tools
+
+### Nome (il fattore ASO #1) — 3 opzioni, scegli tu
+Il nome pesa tantissimo nella ricerca. "Image Tools" è generico; aggiungere una keyword forte aiuta:
+- **A)** `SammaPix — Image Compressor & Tools`  (aggiunge la keyword #1, resta brand-first)
+- **B)** `SammaPix — Compress, Convert & Download Images`  (copre 3 keyword, più "search-y")
+- **C)** `SammaPix — Image Tools`  (attuale, brand puro, meno scoperta)
+
+Nota: il nome viene dal `manifest.json`. Se cambi, lo aggiorno lì e ricostruisco lo ZIP (va nella prossima versione, non durante la revisione della v5.5).
+
+### Altri segnali ASO (nel tempo)
+- Recensioni positive (chiedi ai primi utenti) · numero di installazioni · categoria coerente (Photos).
+- Screenshot chiari (già pronti) e promo tile aumentano il CTR nello store.
