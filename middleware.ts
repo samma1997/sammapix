@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { detectAiBot, detectAiReferrer, trackAiHit } from "@/lib/ai-tracking";
 
 // Routes that require authentication
 const PROTECTED_PREFIXES = ["/dashboard", "/admin"];
@@ -220,7 +221,7 @@ function attachRefCookie(response: NextResponse, code: string | null): NextRespo
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 
-export async function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl;
   const ua = request.headers.get("user-agent") || "";
   const hostname = request.headers.get("host") || "";
@@ -285,6 +286,15 @@ export async function middleware(request: NextRequest) {
   // (Web Worker fetches of /libarchive-worker.js were getting 403'd here.)
   if (/\.(wasm|js|mjs|css|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|mp3|mp4|json|txt|xml|map)$/i.test(pathname)) {
     return NextResponse.next();
+  }
+
+  // ── AI visibility tracking (fire-and-forget, non blocca la response) ────────
+  // Registra i fetch dei bot AI e i referrer umani dai motori AI, per misurare
+  // la presenza di SammaPix in ChatGPT/Perplexity/Gemini. Vedi lib/ai-tracking.
+  const aiSignal =
+    detectAiBot(ua) || detectAiReferrer(request.headers.get("referer"));
+  if (aiSignal) {
+    event.waitUntil(trackAiHit(aiSignal, pathname));
   }
 
   // ── Referral cookie capture ──────────────────────────────────────────────
