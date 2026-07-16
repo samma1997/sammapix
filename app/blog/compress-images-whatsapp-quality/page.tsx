@@ -6,9 +6,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 import CompressTargetToolEmbed from "@/components/tools/CompressTargetToolEmbed";
 
 export const metadata: Metadata = {
-  title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
+  title: "Compress Images for WhatsApp Without Losing Quality (Free)",
   description:
-    "Yes, WhatsApp compresses every photo you send. The fix: resize to 1920px and export at quality 80 before sending. Sharp results, free, no upload.",
+    "Send WhatsApp photos that stay sharp. Resize to 1920px and export at quality 80 right in your browser, then send. Free, no signup, no upload. Works on iPhone, Android and Web.",
   alternates: {
     canonical: `${APP_URL}/blog/compress-images-whatsapp-quality`,
   },
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     "whatsapp image resolution",
   ],
   openGraph: {
-    title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
+    title: "Compress Images for WhatsApp Without Losing Quality (Free)",
     description:
-      "Yes, WhatsApp compresses every photo. The fix: resize to 1920px and export at quality 80 before sending. Sharp photos in 30 seconds.",
+      "WhatsApp wrecks photo quality. Fix it before you send: resize to 1920px at quality 80, right in your browser. Free, no upload, done in 30 seconds.",
     url: `${APP_URL}/blog/compress-images-whatsapp-quality`,
     type: "article",
     publishedTime: "2026-04-05",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Does WhatsApp Compress Images? Yes, Here's How to Keep Quality",
+    title: "Compress Images for WhatsApp Without Losing Quality (Free)",
     description:
-      "Yes, WhatsApp compresses photos. The fix: resize to 1920px, export at quality 80. Works on iPhone, Android and Web.",
+      "Stop WhatsApp from wrecking your photos. Resize to 1920px at quality 80 before sending. Free, in-browser, no upload. iPhone, Android and Web.",
     creator: "@lucasammarco",
   },
 };
