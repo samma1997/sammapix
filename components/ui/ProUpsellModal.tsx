@@ -306,11 +306,11 @@ export default function ProUpsellModal({
   ];
   const dayPassLabel = isIt
     ? (isVideoUpsell
-        ? "Ti serve solo una volta? Day Pass video €4,99, accesso completo 24h"
-        : "Ti serve solo una volta? Day Pass €2,99, accesso completo 24h")
+        ? "Day Pass video €4,99 — accesso completo 24h"
+        : "Day Pass €2,99 — accesso completo 24h")
     : (isVideoUpsell
-        ? "Just need it once? Video Day Pass $4.99 — 24h full access"
-        : "Just need it once? Day Pass $2.99 — 24h full access");
+        ? "Video Day Pass $4.99 — 24h full access"
+        : "Day Pass $2.99 — 24h full access");
   const featureList = isIt
     ? (isVideoUpsell ? VIDEO_FEATURES_IT : FEATURES_IT)
     : (isVideoUpsell ? VIDEO_FEATURES : FEATURES);
@@ -391,7 +391,7 @@ export default function ProUpsellModal({
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
@@ -402,7 +402,7 @@ export default function ProUpsellModal({
               ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
               : isFounding
                 ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
-                : (isIt ? "Inizia la prova gratis di 7 giorni \u2014 poi \u20ac8,99/mese" : "Start 7-day free trial \u2014 $9/mo after")}
+                : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
           </button>
 
           {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
@@ -425,7 +425,7 @@ export default function ProUpsellModal({
           <button
             onClick={handleDayPass}
             disabled={dayPassLoading}
-            className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
             aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 \u2014 24h full Pro access" : "Buy a Day Pass for $2.99 \u2014 24h full Pro access"}
           >
             {dayPassLoading ? (
