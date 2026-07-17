@@ -9,7 +9,7 @@ export const MAX_FILES_PRO = 500;
 
 // Flip to true the day the Chrome extension is published on the Web Store.
 // Controls whether the "Get the extension" navbar button and post-action prompts show.
-export const EXTENSION_LIVE = false;
+export const EXTENSION_LIVE = true;
 
 // Daily image processing limit (across ALL tools)
 export const DAILY_IMAGES_FREE = 50;

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 // TODO: swap for the real Chrome Web Store listing URL once approved.
-const STORE_URL = "https://chromewebstore.google.com/search/SammaPix";
+const STORE_URL = "https://chromewebstore.google.com/detail/hjapemceemgeefiojpngmnpblokkacgd";
 
 function Mark({ size = 24 }: { size?: number }) {
   return (

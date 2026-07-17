@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { EXTENSION_LIVE } from "@/lib/constants";
 
 // TODO: swap for the real Chrome Web Store listing URL once approved.
-const STORE_URL = "https://chromewebstore.google.com/search/SammaPix";
+const STORE_URL = "https://chromewebstore.google.com/detail/hjapemceemgeefiojpngmnpblokkacgd";
 
 /**
  * Mounted once (in LayoutShell). Listens for a `sp:tool-success` window event that
