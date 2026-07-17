@@ -63,7 +63,7 @@ export default function AdUnit({
   return (
     <ins
       className={`adsbygoogle block ${className}`}
-      data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID}
+      data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID || "ca-pub-4145672488138909"}
       data-ad-slot={adSlot}
       data-ad-format={adFormat}
       data-full-width-responsive="true"
