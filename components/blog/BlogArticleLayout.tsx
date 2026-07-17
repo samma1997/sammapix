@@ -12,6 +12,7 @@ import ReadingProgressBar from "./ReadingProgressBar";
 import TableOfContents from "./TableOfContents";
 import TextToSpeech from "./TextToSpeech";
 import ArticleSummary from "./ArticleSummary";
+import ArticleAd from "@/components/ads/ArticleAd";
 import ShareBar from "./ShareBar";
 import RelatedArticles from "./RelatedArticles";
 import ItRelatedArticles from "./ItRelatedArticles";
@@ -123,6 +124,9 @@ export default function BlogArticleLayout({
                 )}
               </div>
             </article>
+
+            {/* Annuncio a fine articolo (solo utenti non loggati) */}
+            <ArticleAd />
 
             {/* Share - desktop */}
             <div className="hidden sm:block">
