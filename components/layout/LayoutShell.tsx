@@ -9,6 +9,7 @@ import SmartTrialPrompt from "@/components/ui/SmartTrialPrompt";
 import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
 import ReferralHeroBanner from "@/components/referral/ReferralHeroBanner";
 import ReferralWelcomeModal from "@/components/referral/ReferralWelcomeModal";
+import ExtensionAhaPrompt from "@/components/ExtensionAhaPrompt";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,6 +26,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
 
   const isDashboard = pathname.startsWith("/dashboard");
   const isGrowthLogin = pathname.startsWith("/growth-login");
+  const isExtWelcome = pathname === "/chrome/welcome"; // focused onboarding, no site chrome
   const isAdminPanel =
     pathname === "/admin" ||
     pathname.startsWith("/admin/seo") ||
@@ -33,7 +35,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
   // On the growth subdomain, the root layout renders bare <html><body>{children}</body></html>
   // without mounting LayoutShell at all. The checks below are a safety net for edge cases
   // where the path starts with /dashboard, /growth-login, or /admin on the main domain.
-  if (isDashboard || isGrowthLogin || isAdminPanel) {
+  if (isDashboard || isGrowthLogin || isAdminPanel || isExtWelcome) {
     return <>{children}</>;
   }
 
@@ -47,6 +49,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       <SmartTrialPrompt />
       <PWAInstallPrompt />
       <ReferralWelcomeModal />
+      <ExtensionAhaPrompt />
     </>
   );
 }

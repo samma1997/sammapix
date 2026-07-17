@@ -1,11 +1,15 @@
 // SammaPix Background — side panel + right-click image menus
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   chrome.contextMenus.create({ id: "save-jpg", title: "Save as JPG (remove EXIF)", contexts: ["image"] });
   chrome.contextMenus.create({ id: "save-png", title: "Save as PNG (remove EXIF)", contexts: ["image"] });
   chrome.contextMenus.create({ id: "save-webp", title: "Save as WebP (smaller)", contexts: ["image"] });
   chrome.contextMenus.create({ id: "compress", title: "Compress (80% quality)", contexts: ["image"] });
+  // First install → open the welcome page that teaches how to pin the extension.
+  if (details && details.reason === "install") {
+    chrome.tabs.create({ url: "https://www.sammapix.com/chrome/welcome?ref=ext-install" });
+  }
 });
 
 const ACTS = {
@@ -20,8 +24,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   const a = ACTS[info.menuItemId];
   if (!a) return;
   try {
-    // Fetch the real bytes here in the extension context — host_permissions <all_urls>
-    // bypass CORS, so we can re-encode any image without tainting a canvas.
+    // Optional host access, requested at runtime (right-click is a user gesture).
+    // Keeps the default install on narrow permissions for a faster store review.
+    if (chrome.permissions && chrome.permissions.request) {
+      const okHost = await chrome.permissions.request({ origins: ["<all_urls>"] });
+      if (!okHost) return;
+    }
+    // Fetch the real bytes here in the extension context — the granted host access
+    // bypasses CORS, so we can re-encode any image without tainting a canvas.
     const resp = await fetch(info.srcUrl);
     const blob = await resp.blob();
     const bmp = await createImageBitmap(blob);
