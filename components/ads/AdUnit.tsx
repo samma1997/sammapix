@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 
 interface AdUnitProps {
   adSlot: string;
-  adFormat?: "auto" | "rectangle" | "horizontal";
+  adFormat?: "auto" | "rectangle" | "horizontal" | "vertical";
   className?: string;
 }
 

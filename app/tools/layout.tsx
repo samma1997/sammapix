@@ -1,4 +1,5 @@
 import ArticleAd from "@/components/ads/ArticleAd";
+import SidebarAds from "@/components/ads/SidebarAds";
 
 /**
  * Layout condiviso di tutte le pagine /tools/*.
@@ -14,6 +15,7 @@ export default function ToolsLayout({
 }) {
   return (
     <>
+      <SidebarAds />
       {children}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-10">
         <ArticleAd />
