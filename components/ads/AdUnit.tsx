@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 interface AdUnitProps {
   adSlot: string;
-  adFormat?: "auto" | "rectangle" | "horizontal";
+  adFormat?: "auto" | "rectangle" | "horizontal" | "vertical";
   className?: string;
 }
 
