@@ -592,6 +592,17 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "instagram-grid-splitter": {
+    id: "instagram-grid-splitter",
+    name: "Instagram Grid Splitter",
+    shortDesc: "Split a photo into a puzzle grid for Instagram (3×1, 3×2, 3×3), tiles numbered in posting order",
+    slug: "/tools/instagram-grid-splitter",
+    category: "edit",
+    relatedTools: ["croproatio", "resizepack", "compress", "stampit"],
+    relatedBlogSlugs: [
+      "resize-images-for-social-media",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

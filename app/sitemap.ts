@@ -164,6 +164,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/resize-video",
     "/tools/trim-video",
     "/tools/extract-audio",
+    "/tools/instagram-grid-splitter",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

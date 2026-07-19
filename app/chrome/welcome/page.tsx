@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { TOOL_COUNT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Welcome to SammaPix for Chrome",
@@ -133,7 +134,7 @@ export default function WelcomePage() {
             </ul>
             <p className="mt-6 text-sm text-[#737373] dark:text-[#A3A3A3]">
               100% in your browser, nothing uploaded. Prefer the web?{" "}
-              <Link href="/" className="text-[#6366F1] dark:text-[#818cf8] font-medium hover:underline">All 52 tools are on sammapix.com</Link>.
+              <Link href="/" className="text-[#6366F1] dark:text-[#818cf8] font-medium hover:underline">All {TOOL_COUNT} tools are on sammapix.com</Link>.
             </p>
           </div>
           <div className="relative mx-auto w-full max-w-[280px]">

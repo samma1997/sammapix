@@ -631,6 +631,23 @@ export const IconCropRatio: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Instagram Grid Splitter (3x3 grid, corner tiles pulse = posting order) ──
+export const IconInstagramGrid: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ig-cell { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+      .ig-cell { animation: ig-cell 2s ease-in-out infinite; }
+    `}</style>
+    <rect x="8" y="8" width="32" height="32" rx="4" fill={accent} fillOpacity="0.08" className="stroke-[#D4D4D4] dark:stroke-[#404040]" strokeWidth="1.2"/>
+    <line x1="18.67" y1="8" x2="18.67" y2="40" stroke={accent} strokeWidth="1.5" strokeOpacity="0.45"/>
+    <line x1="29.33" y1="8" x2="29.33" y2="40" stroke={accent} strokeWidth="1.5" strokeOpacity="0.45"/>
+    <line x1="8" y1="18.67" x2="40" y2="18.67" stroke={accent} strokeWidth="1.5" strokeOpacity="0.45"/>
+    <line x1="8" y1="29.33" x2="40" y2="29.33" stroke={accent} strokeWidth="1.5" strokeOpacity="0.45"/>
+    <rect className="ig-cell" x="30.33" y="30.33" width="8.67" height="8.67" rx="1" fill={accent}/>
+    <rect className="ig-cell" x="9" y="9" width="8.67" height="8.67" rx="1" fill={accent} style={{ animationDelay: "1s" }}/>
+  </svg>
+);
+
 export const IconTwinHunt: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
