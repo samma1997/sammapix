@@ -93,6 +93,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "How do I open a RAR file on a Mac?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "macOS can't open RAR files on its own (the built-in Archive Utility only handles ZIP). Drop your .rar onto this page and it extracts instantly in your browser on any Mac, with no WinRAR or extra app to install and nothing uploaded. It works the same on MacBook, iMac and Mac mini: open the archive, preview the files, and download them one by one or all at once as a ZIP.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Are my files uploaded to a server?",
       acceptedAnswer: {
         "@type": "Answer",
