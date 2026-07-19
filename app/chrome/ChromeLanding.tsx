@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { TOOL_COUNT } from "@/lib/constants";
 
 // TODO: swap for the real Chrome Web Store listing URL once approved.
 const STORE_URL = "https://chromewebstore.google.com/detail/hjapemceemgeefiojpngmnpblokkacgd";
@@ -185,7 +186,7 @@ export default function ChromeLanding() {
             <a href={STORE_URL} target="_blank" rel="noopener" className={`${BTN_PRIMARY} px-6 py-3 text-[15px]`}>Add to Chrome — free</a>
           </div>
           <p className="mt-6 text-sm text-[#737373] dark:text-[#A3A3A3]">
-            Prefer the web? All 52 tools live at{" "}
+            Prefer the web? All {TOOL_COUNT} tools live at{" "}
             <Link href="/" className="text-[#6366F1] dark:text-[#818cf8] font-medium hover:underline">sammapix.com</Link>.
           </p>
         </div>
