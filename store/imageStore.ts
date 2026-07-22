@@ -9,6 +9,7 @@ import { compressImage } from "@/lib/compress";
 import { downloadSingleFile, downloadAllAsZip } from "@/lib/zip";
 import { DEFAULT_QUALITY, DEFAULT_CONVERT_WEBP, DEFAULT_AI_RENAME, MAX_FILES_FREE } from "@/lib/constants";
 import { getUsedToday, setUsedToday } from "@/lib/aiRenameCounter";
+import { trackEvent } from "@/lib/analytics";
 
 interface ImageSettings {
   quality: number;
@@ -217,13 +218,26 @@ export const useImageStore = create<ImageStoreState>()(
 
     downloadFile: (id: string) => {
       const item = get().items.find((i) => i.id === id);
-      if (item) downloadSingleFile(item);
+      if (item) {
+        downloadSingleFile(item);
+        // Track download completion — previously untracked, so every non-upscale
+        // image tool (resize/compress/crop/webp...) was invisible past "tool_used".
+        trackEvent("download", {
+          mode: "single",
+          path: typeof window !== "undefined" ? window.location.pathname : "",
+        });
+      }
     },
 
     downloadAll: async () => {
       set((state) => { state.isZipping = true; });
       try {
         await downloadAllAsZip(get().items);
+        trackEvent("download", {
+          mode: "zip",
+          count: get().items.length,
+          path: typeof window !== "undefined" ? window.location.pathname : "",
+        });
       } finally {
         set((state) => { state.isZipping = false; });
       }
