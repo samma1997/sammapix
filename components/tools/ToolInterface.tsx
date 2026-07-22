@@ -15,7 +15,7 @@ const AiRenameModal = dynamic(() => import("@/components/ai/AiRenameModal"), { s
 const ProUpsellModal = dynamic(() => import("@/components/ui/ProUpsellModal"), { ssr: false });
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
-import { AI_OPS_FREE_PER_DAY } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
 
 export type ToolMode = "compress" | "webp" | "ai-rename";
@@ -79,6 +79,17 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
   const [aiRenameFileId, setAiRenameFileId] = useState<string | undefined>();
   const [aiUpsellOpen, setAiUpsellOpen] = useState(false);
   const [directiveUpsellOpen, setDirectiveUpsellOpen] = useState(false);
+  const [filesUpsellOpen, setFilesUpsellOpen] = useState(false);
+
+  // Free user hit the file/batch limit inside the DropZone. Instead of shipping
+  // them off to a monthly-subscription page (cold traffic never converts on that),
+  // open the upsell modal that leads with the $2.99 Day Pass — the comodità that
+  // matches one-shot intent.
+  const handleFilesLimit = () => {
+    if (isPro) return;
+    trackEvent("upsell_view", { source: "dropzone_limit", tool: toolName ?? "" });
+    setFilesUpsellOpen(true);
+  };
 
   const handleAiRenameClick = async (fileId?: string) => {
     if (!session) {
@@ -104,7 +115,7 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
         <div className="max-w-3xl mx-auto">
 
           {/* ── DropZone ── */}
-          <DropZone toolName={toolName} />
+          <DropZone toolName={toolName} onLimitReached={handleFilesLimit} />
 
           {/* Settings toolbar- appare dopo upload */}
           {hasFiles && (
@@ -263,6 +274,15 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
         open={directiveUpsellOpen}
         onClose={() => setDirectiveUpsellOpen(false)}
         trigger="ai_rename"
+      />
+
+      {/* Pro Upsell Modal - file/batch limit hit in the DropZone (leads with Day Pass) */}
+      <ProUpsellModal
+        open={filesUpsellOpen}
+        onClose={() => setFilesUpsellOpen(false)}
+        trigger="batch"
+        filesDropped={items.length}
+        freeLimit={MAX_FILES_FREE}
       />
     </>
   );
