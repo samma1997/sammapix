@@ -12,7 +12,7 @@ import { TOOL_COUNT } from "@/lib/constants";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "video_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user" | "lut_export";
+export type UpsellTrigger = "files" | "ai_rename" | "batch" | "file_size" | "video_size" | "steps" | "daily" | "zip" | "upscale_daily" | "power_user" | "lut_export" | "success";
 
 interface ProUpsellModalProps {
   open: boolean;
@@ -29,6 +29,7 @@ interface ProUpsellModalProps {
 function getHeadline(trigger: UpsellTrigger, isIt = false): string {
   if (isIt) {
     switch (trigger) {
+      case "success": return "Fatto, file pronti";
       case "ai_rename": return "Hai raggiunto il limite AI di oggi, continua con Pro";
       case "file_size": return "File troppo grande per il piano gratis";
       case "video_size": return "Video pesante? Sbloccalo in pochi secondi";
@@ -43,6 +44,8 @@ function getHeadline(trigger: UpsellTrigger, isIt = false): string {
     }
   }
   switch (trigger) {
+    case "success":
+      return "Done! Files ready";
     case "ai_rename":
       return "You've hit today's AI limit — keep going with Pro";
     case "file_size":
@@ -77,6 +80,7 @@ function getSubtext(
 ): string {
   if (isIt) {
     switch (trigger) {
+      case "success": return "Ti è piaciuta la velocità? Il Day Pass ti dà 24h senza limiti, batch grandi, download ZIP e niente pubblicità. Una tantum, nessun abbonamento.";
       case "ai_rename": return "Piano gratis: 10 operazioni AI al giorno. Pro te ne dà 200, abbastanza per un intero servizio.";
       case "file_size": return "Il piano gratis supporta file fino a 20 MB. Pro arriva a 50 MB.";
       case "video_size": return "Il gratis comprime video fino a 500 MB. Con Pro sblocchi i video grandi (fino a diversi GB), oppure prendi un Day Pass video singolo. Tutto resta nel browser, niente upload.";
@@ -94,6 +98,8 @@ function getSubtext(
     }
   }
   switch (trigger) {
+    case "success":
+      return "Loved the speed? A Day Pass gives you 24h with no limits, big batches, ZIP downloads and no ads — one-time, no subscription.";
     case "ai_rename":
       return "Free plan: 10 AI ops per day. Pro gives you 200 — enough for an entire shoot. Or grab a one-shot credit pack if you only need extras occasionally.";
     case "file_size":
@@ -387,63 +393,103 @@ export default function ProUpsellModal({
             </div>
           )}
 
-          {/* Primary CTA \u2014 explicit free trial */}
-          <button
-            onClick={handleCheckout}
-            disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
-          >
-            {loading ? (
-              <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-            ) : (
-              <Zap className="h-4 w-4" strokeWidth={1.5} />
-            )}
-            {loading
-              ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-              : isFounding
-                ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
-                : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
-          </button>
+          {/* ─ CTA buttons — order depends on trigger */}
+          {trigger === "success" ? (
+            <>
+              {/* SUCCESS: Day Pass is PRIMARY (black filled), trial is secondary */}
+              <button
+                onClick={handleDayPass}
+                disabled={dayPassLoading}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
+                aria-label="Buy a Day Pass for $2.99 — 24h full Pro access"
+              >
+                {dayPassLoading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+                )}
+                {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
+              </button>
 
-          {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
-          {showCreditAlt && (
-            <button
-              onClick={handleBuyCredits}
-              disabled={creditsLoading}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
-            >
-              {creditsLoading ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-              ) : null}
-              {creditsLoading
-                ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                : (isIt ? "Oppure 100 crediti a €5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
-            </button>
-          )}
+              <button
+                onClick={handleCheckout}
+                disabled={loading}
+                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
+              >
+                {loading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Zap className="h-4 w-4" strokeWidth={1.5} />
+                )}
+                {loading
+                  ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                  : isFounding
+                    ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
+                    : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
+              </button>
+              {/* No "Continue with first N files" and no credit-pack alt for success */}
+            </>
+          ) : (
+            <>
+              {/* DEFAULT: existing order \u2014 trial first, Day Pass third */}
+              <button
+                onClick={handleCheckout}
+                disabled={loading}
+                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
+              >
+                {loading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Zap className="h-4 w-4" strokeWidth={1.5} />
+                )}
+                {loading
+                  ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                  : isFounding
+                    ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
+                    : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
+              </button>
 
-          {/* Day Pass \u2014 one-time 24h full access */}
-          <button
-            onClick={handleDayPass}
-            disabled={dayPassLoading}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
-            aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 \u2014 24h full Pro access" : "Buy a Day Pass for $2.99 \u2014 24h full Pro access"}
-          >
-            {dayPassLoading ? (
-              <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-            ) : (
-              <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-            )}
-            {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
-          </button>
+              {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
+              {showCreditAlt && (
+                <button
+                  onClick={handleBuyCredits}
+                  disabled={creditsLoading}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
+                >
+                  {creditsLoading ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                  ) : null}
+                  {creditsLoading
+                    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                    : (isIt ? "Oppure 100 crediti a €5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
+                </button>
+              )}
 
-          {/* Continue with first N files \u2014 only for files/batch triggers */}
-          {showContinue && freeLimit && (
-            <button
-              onClick={onClose}
-              className="w-full inline-flex items-center justify-center px-4 py-2 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-            >
-              {isIt ? `Continua con i primi ${freeLimit} file` : `Continue with first ${freeLimit} files`}
-            </button>
+              {/* Day Pass \u2014 one-time 24h full access */}
+              <button
+                onClick={handleDayPass}
+                disabled={dayPassLoading}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
+                aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 \u2014 24h full Pro access" : "Buy a Day Pass for $2.99 \u2014 24h full Pro access"}
+              >
+                {dayPassLoading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+                )}
+                {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
+              </button>
+
+              {/* Continue with first N files \u2014 only for files/batch triggers */}
+              {showContinue && freeLimit && (
+                <button
+                  onClick={onClose}
+                  className="w-full inline-flex items-center justify-center px-4 py-2 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+                >
+                  {isIt ? `Continua con i primi ${freeLimit} file` : `Continue with first ${freeLimit} files`}
+                </button>
+              )}
+            </>
           )}
 
           {/* Trust line \u2014 single row, slightly more visible */}
