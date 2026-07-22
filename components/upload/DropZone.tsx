@@ -17,9 +17,12 @@ interface DropZoneProps {
   className?: string;
   /** Tool slug for analytics. Defaults to "compress" for backwards compat. */
   toolName?: string;
+  /** Free user hit the file limit. When provided, opens the Day Pass upsell modal
+   *  instead of linking to the monthly-subscription page. */
+  onLimitReached?: () => void;
 }
 
-export default function DropZone({ onFilesAdded, className, toolName = "compress" }: DropZoneProps) {
+export default function DropZone({ onFilesAdded, className, toolName = "compress", onLimitReached }: DropZoneProps) {
   const { addFiles, items } = useImageStore();
   const { data: session } = useSession();
 
@@ -109,9 +112,19 @@ export default function DropZone({ onFilesAdded, className, toolName = "compress
               {isIt ? `Limite raggiunto (max ${maxFiles} file${plan === "free" ? " nel piano gratuito" : ""})` : `Limit reached (${maxFiles} files max${plan === "free" ? " on free plan" : ""})`}
             </p>
             {plan === "free" && (
-              <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
-                <a href="/dashboard/upgrade" className="text-brand hover:underline">{isIt ? "Passa a Pro" : "Upgrade to Pro"}</a> {isIt ? `per elaborare fino a ${PLAN_LIMITS.pro.maxFiles} file` : `to process up to ${PLAN_LIMITS.pro.maxFiles} files`}
-              </p>
+              onLimitReached ? (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); onLimitReached(); }}
+                  className="text-xs mt-1 text-brand hover:underline font-medium"
+                >
+                  {isIt ? `Sblocca tutti i file ora · Day Pass €2,99 →` : `Unlock all files now · Day Pass $2.99 →`}
+                </button>
+              ) : (
+                <p className="text-xs text-gray-400 dark:text-[#737373] mt-1">
+                  <a href="/dashboard/upgrade" className="text-brand hover:underline">{isIt ? "Passa a Pro" : "Upgrade to Pro"}</a> {isIt ? `per elaborare fino a ${PLAN_LIMITS.pro.maxFiles} file` : `to process up to ${PLAN_LIMITS.pro.maxFiles} files`}
+                </p>
+              )
             )}
           </>
         ) : (
@@ -149,9 +162,19 @@ export default function DropZone({ onFilesAdded, className, toolName = "compress
               {items.length} / {maxFiles} {isIt ? "file" : "files"}
             </span>
             {plan === "free" && items.length >= 3 && (
-              <a href="/dashboard/upgrade" className="text-xs text-indigo-500 hover:underline font-medium">
-                {isIt ? `Sblocca ${PLAN_LIMITS.pro.maxFiles} →` : `Upgrade for ${PLAN_LIMITS.pro.maxFiles} →`}
-              </a>
+              onLimitReached ? (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); onLimitReached(); }}
+                  className="text-xs text-indigo-500 hover:underline font-medium"
+                >
+                  {isIt ? `Sblocca tutti · Day Pass €2,99 →` : `Unlock all · Day Pass $2.99 →`}
+                </button>
+              ) : (
+                <a href="/dashboard/upgrade" className="text-xs text-indigo-500 hover:underline font-medium">
+                  {isIt ? `Sblocca ${PLAN_LIMITS.pro.maxFiles} →` : `Upgrade for ${PLAN_LIMITS.pro.maxFiles} →`}
+                </a>
+              )
             )}
           </div>
           <div className="h-1 w-full bg-gray-200 dark:bg-[#3A3A3A] rounded-full overflow-hidden">
