@@ -12,9 +12,11 @@ import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 interface FileListProps {
   onAiRename?: (fileId: string) => void;
+  /** Called after any download completes (single file or ZIP batch). Non-blocking. */
+  onDownloadSuccess?: () => void;
 }
 
-export default function FileList({ onAiRename }: FileListProps) {
+export default function FileList({ onAiRename, onDownloadSuccess }: FileListProps) {
   const { items, clearAll, downloadAll, isZipping } = useImageStore();
   const isIt = (usePathname() || "").startsWith("/it");
   const { data: session } = useSession();
@@ -41,6 +43,8 @@ export default function FileList({ onAiRename }: FileListProps) {
       return;
     }
     await downloadAll();
+    // Notify parent that downloads completed — triggers success upsell if eligible
+    onDownloadSuccess?.();
   };
 
   return (
@@ -69,7 +73,7 @@ export default function FileList({ onAiRename }: FileListProps) {
       {/* File cards */}
       <div className="flex flex-col gap-2">
         {items.map((file) => (
-          <FileCard key={file.id} file={file} onAiRename={onAiRename} />
+          <FileCard key={file.id} file={file} onAiRename={onAiRename} onDownloadSuccess={onDownloadSuccess} />
         ))}
       </div>
 

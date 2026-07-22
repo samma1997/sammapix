@@ -17,6 +17,7 @@ import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
 import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 export type ToolMode = "compress" | "webp" | "ai-rename";
 
@@ -80,6 +81,17 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
   const [aiUpsellOpen, setAiUpsellOpen] = useState(false);
   const [directiveUpsellOpen, setDirectiveUpsellOpen] = useState(false);
   const [filesUpsellOpen, setFilesUpsellOpen] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
+
+  // Called after any download completes (single or batch). The download itself
+  // has already started before this is invoked — non-blocking by design.
+  const handleDownloadSuccess = () => {
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
+  };
 
   // Free user hit the file/batch limit inside the DropZone. Instead of shipping
   // them off to a monthly-subscription page (cold traffic never converts on that),
@@ -142,7 +154,7 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
           {/* File list- appare dopo upload */}
           {hasFiles && (
             <div className="mt-3">
-              <FileList onAiRename={handleAiRenameClick} />
+              <FileList onAiRename={handleAiRenameClick} onDownloadSuccess={handleDownloadSuccess} />
             </div>
           )}
         </div>
@@ -283,6 +295,13 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
         trigger="batch"
         filesDropped={items.length}
         freeLimit={MAX_FILES_FREE}
+      />
+
+      {/* Pro Upsell Modal - moment of value: shown after a successful download (Day Pass primary) */}
+      <ProUpsellModal
+        open={successUpsellOpen}
+        onClose={() => setSuccessUpsellOpen(false)}
+        trigger="success"
       />
     </>
   );

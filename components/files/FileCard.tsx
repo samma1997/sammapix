@@ -22,9 +22,11 @@ import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 interface FileCardProps {
   file: ProcessedFile;
   onAiRename?: (fileId: string) => void;
+  /** Called after a single-file download has been triggered (non-blocking, post-download). */
+  onDownloadSuccess?: () => void;
 }
 
-export default function FileCard({ file, onAiRename }: FileCardProps) {
+export default function FileCard({ file, onAiRename, onDownloadSuccess }: FileCardProps) {
   const { removeFile, downloadFile } = useImageStore();
   const [showComparison, setShowComparison] = useState(false);
 
@@ -174,7 +176,10 @@ export default function FileCard({ file, onAiRename }: FileCardProps) {
               variant="ghost"
               size="icon-sm"
               title="Download"
-              onClick={() => downloadFile(file.id)}
+              onClick={() => {
+                downloadFile(file.id);
+                onDownloadSuccess?.();
+              }}
             >
               <Download className="h-3.5 w-3.5 text-gray-500 dark:text-[#737373]" strokeWidth={1.5} />
             </Button>

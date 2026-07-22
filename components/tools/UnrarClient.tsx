@@ -25,6 +25,7 @@ import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -103,6 +104,17 @@ export default function UnrarClient() {
   const [zipBuilding, setZipBuilding] = useState(false);
   const [pollTimedOut, setPollTimedOut] = useState(false);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
+
+  // Show the "moment of value" upsell after a download if frequency capping passes.
+  // Called AFTER the download/extraction is complete — non-blocking.
+  const handleUnrarDownloadSuccess = () => {
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
+  };
 
   const workerRef = useRef<Worker | null>(null);
   const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -488,7 +500,10 @@ export default function UnrarClient() {
     const blob = new Blob([entry.buffer]);
     saveAs(blob, basename(entry.name));
     trackEvent("unrar_download_single", { name: entry.name });
-  }, []);
+    // Moment-of-value upsell: fires after the download is already in the user's hands
+    handleUnrarDownloadSuccess();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPro]);
 
   const downloadAllAsZip = useCallback(async () => {
     const ready = entries.filter((e) => e.status === "ready" && e.buffer);
@@ -513,6 +528,8 @@ export default function UnrarClient() {
         : "archive.zip";
       saveAs(blob, archiveName);
       trackEvent("unrar_download_zip", { files: ready.length });
+      // Moment-of-value upsell: user just got all their files — ideal conversion moment
+      handleUnrarDownloadSuccess();
     } catch {
       setErrorMsg("Failed to build ZIP.");
     } finally {
@@ -1050,6 +1067,13 @@ export default function UnrarClient() {
         open={zipUpsellOpen}
         onClose={() => setZipUpsellOpen(false)}
         trigger="zip"
+      />
+
+      {/* Moment-of-value upsell — shown after download, Day Pass primary */}
+      <ProUpsellModal
+        open={successUpsellOpen}
+        onClose={() => setSuccessUpsellOpen(false)}
+        trigger="success"
       />
     </div>
   );
