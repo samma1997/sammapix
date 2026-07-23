@@ -15,6 +15,7 @@ import {
   Lock,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
@@ -223,6 +224,8 @@ const CropPreview = ({
   onFrameChange,
 }: CropPreviewProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isItalian = pathname?.startsWith("/it");
 
   // Scale so the full source image fits in the container
   const scaleToFit = Math.min(
@@ -375,6 +378,44 @@ const CropPreview = ({
     [frame]
   );
 
+  /**
+   * Click-to-reposition: clicking anywhere in the container (outside the crop
+   * frame's drag body and handles) teleports the crop frame so its center lands
+   * on the click point, then immediately starts a "move" drag so the user can
+   * keep dragging if they hold the button.
+   */
+  const handleContainerPointerDown = useCallback(
+    (clientX: number, clientY: number, shiftKey: boolean) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const localX = clientX - rect.left;
+      const localY = clientY - rect.top;
+
+      // Convert click position to normalized coords
+      const normX = localX / displayW;
+      const normY = localY / displayH;
+
+      // New frame: center on click, keep current size
+      const newX = normX - frame.w / 2;
+      const newY = normY - frame.h / 2;
+
+      const repositioned = clampFrame({ x: newX, y: newY, w: frame.w, h: frame.h });
+      onFrameChange(repositioned, "move");
+
+      // Start a "move" drag from the new position so holding the button lets the user drag
+      dragMode.current = "move";
+      dragStart.current = {
+        mouseX: clientX,
+        mouseY: clientY,
+        frame: repositioned,
+        aspect: repositioned.w / Math.max(repositioned.h, 0.001),
+        shiftKey,
+      };
+      forceRerender((n) => n + 1);
+    },
+    [displayW, displayH, frame, clampFrame, onFrameChange]
+  );
+
   // Global mouse/touch listeners
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -431,14 +472,14 @@ const CropPreview = ({
         ...style,
         cursor: HANDLE_CURSOR[mode],
         background: type === "corner" ? "#FFFFFF" : "transparent",
-        border: type === "corner" ? "1px solid #6366F1" : "none",
-        boxShadow: type === "corner" ? "0 1px 4px rgba(0,0,0,0.4)" : "none",
+        border: type === "corner" ? "2px solid #6366F1" : "none",
+        boxShadow: type === "corner" ? "0 2px 8px rgba(0,0,0,0.55), 0 0 0 1px rgba(99,102,241,0.4)" : "none",
         boxSizing: "border-box",
       }}
     />
   );
 
-  const HANDLE = 12; // px size of corner handles
+  const HANDLE = 15; // px size of corner handles (increased for better visibility)
   const half = HANDLE / 2;
 
   return (
@@ -450,6 +491,40 @@ const CropPreview = ({
           width: displayW,
           height: displayH,
           background: "#0A0A0A",
+          cursor: "crosshair",
+        }}
+        onMouseDown={(e) => {
+          // Reposition only when clicking OUTSIDE the crop frame body
+          // (clicks inside the frame body are handled by the frame's own onMouseDown,
+          // which stops propagation to this container handler via bubbling check below)
+          if (!containerRef.current) return;
+          const rect = containerRef.current.getBoundingClientRect();
+          const localX = e.clientX - rect.left;
+          const localY = e.clientY - rect.top;
+          const insideFrame =
+            localX >= frameLeft &&
+            localX <= frameLeft + frameW &&
+            localY >= frameTop &&
+            localY <= frameTop + frameH;
+          if (!insideFrame) {
+            e.preventDefault();
+            handleContainerPointerDown(e.clientX, e.clientY, e.shiftKey);
+          }
+        }}
+        onTouchStart={(e) => {
+          if (!containerRef.current) return;
+          const touch = e.touches[0];
+          const rect = containerRef.current.getBoundingClientRect();
+          const localX = touch.clientX - rect.left;
+          const localY = touch.clientY - rect.top;
+          const insideFrame =
+            localX >= frameLeft &&
+            localX <= frameLeft + frameW &&
+            localY >= frameTop &&
+            localY <= frameTop + frameH;
+          if (!insideFrame) {
+            handleContainerPointerDown(touch.clientX, touch.clientY, false);
+          }
         }}
       >
         {/* Source image */}
@@ -461,7 +536,8 @@ const CropPreview = ({
           draggable={false}
         />
 
-        {/* Dark overlays around the frame (4 sides) */}
+        {/* Dark overlays around the frame (4 sides) — pointer-events-none so
+            clicks fall through to the container and trigger click-to-reposition */}
         {frameTop > 0 && (
           <div
             className="absolute left-0 right-0 top-0 pointer-events-none"
@@ -507,9 +583,11 @@ const CropPreview = ({
         <div
           onMouseDown={(e) => {
             e.preventDefault();
+            e.stopPropagation(); // prevent container click-to-reposition when dragging the frame
             startDrag("move", e.clientX, e.clientY, e.shiftKey);
           }}
           onTouchStart={(e) => {
+            e.stopPropagation(); // prevent container touch-reposition when dragging the frame
             const touch = e.touches[0];
             startDrag("move", touch.clientX, touch.clientY, false);
           }}
@@ -583,12 +661,24 @@ const CropPreview = ({
         </div>
       </div>
 
-      <p className="text-[11px] text-[#A3A3A3] text-center leading-relaxed">
-        Drag the frame to move · drag corners or edges to resize · hold{" "}
-        <kbd className="px-1 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] font-mono text-[10px]">
-          Shift
-        </kbd>{" "}
-        to keep ratio
+      <p className="text-[11px] text-[#737373] text-center leading-relaxed">
+        {isItalian ? (
+          <>
+            Clicca fuori dal riquadro per spostarlo · trascina il riquadro per muoverlo · angoli per ridimensionare · tieni{" "}
+            <kbd className="px-1 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] font-mono text-[10px]">
+              Shift
+            </kbd>{" "}
+            per mantenere il rapporto
+          </>
+        ) : (
+          <>
+            Click anywhere to reposition · drag the frame to move · corners to resize · hold{" "}
+            <kbd className="px-1 py-0.5 rounded border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-[#252525] font-mono text-[10px]">
+              Shift
+            </kbd>{" "}
+            to keep ratio
+          </>
+        )}
       </p>
     </div>
   );
