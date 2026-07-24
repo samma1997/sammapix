@@ -1149,6 +1149,222 @@ const CONVERSIONS: Record<string, ConversionData> = {
     ],
   },
 
+  "arw-to-jpg": {
+    from: "ARW",
+    to: "JPG",
+    fromLabel: "ARW",
+    toLabel: "JPG",
+    toolPath: "/tools/raw-converter",
+    toolLabel: "Open RAW Converter",
+    tagline: "Convert Sony ARW RAW photos to JPG — Free, No Upload, In-Browser.",
+    whyCopy:
+      "ARW is the RAW format used by Sony Alpha mirrorless and DSLR cameras (A7, A9, A6000 series and beyond). Each ARW file holds the raw sensor data at 12 or 14 bits per channel, giving you the full dynamic range from your shot. The problem is that ARW files are 20 to 50 MB each, cannot be opened in most apps or shared on social media as-is, and require Sony or Adobe software to develop. Converting ARW to JPG gives you a small, universally-compatible photo in seconds, while a proper RAW pipeline (camera white balance, tone mapping) ensures the result looks exactly like your shot — not a flat, muddy preview.",
+    qualityNote:
+      "ARW captures 14 bit colour and wide dynamic range that 8 bit JPG cannot fully represent. SammaPix decodes the ARW using a real RAW pipeline — camera white balance, demosaicing, tone mapping — before exporting. At quality 90 to 95 the JPG looks excellent for viewing, printing, and social sharing. Keep your ARW originals if you plan to edit later in Lightroom or Capture One.",
+    technicalNote:
+      "Your ARW file is decoded entirely in your browser by libraw compiled to WebAssembly, running inside a Web Worker so the page stays fully responsive. The decoded pixels are white-balanced, drawn to a Canvas, and exported as JPEG at your chosen quality. The ARW never leaves your device — no upload, no server, no size limit on our end.",
+    formatTable: [
+      {
+        format: "ARW (Sony RAW)",
+        fileSize: "Very Large (20–50 MB)",
+        quality: "Maximum (12–14 bit sensor data)",
+        compatibility: "Sony Imaging Edge, Adobe editors",
+        useCase: "Professional capture and editing",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small (2–8 MB)",
+        quality: "High (8 bit, lossy)",
+        compatibility: "Universal",
+        useCase: "Sharing, web, email, social media, print",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+      {
+        format: "DNG",
+        fileSize: "Large",
+        quality: "Maximum (Adobe universal RAW)",
+        compatibility: "Most RAW editors",
+        useCase: "Archival, cross-software compatibility",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting ARW to JPG lose quality?",
+        a: "You are moving from 14 bit RAW to 8 bit JPG, so some editing latitude is reduced, but the visible photo looks excellent at quality 90 to 95. The key is that SammaPix uses a real RAW decode (camera white balance + tone mapping), not a flat preview extraction. Keep your ARW files if you want to re-develop the image later.",
+      },
+      {
+        q: "Is it safe to convert my Sony ARW files in a browser?",
+        a: "Yes. SammaPix decodes the ARW 100 percent inside your browser via a WebAssembly build of libraw. Nothing is uploaded to any server, so your photos — including client work or personal shoots — never leave your device.",
+      },
+      {
+        q: "Which Sony cameras produce ARW files?",
+        a: "ARW is used by virtually every Sony Alpha camera: the A7 III/IV/V full-frame mirrorless series, A9 III, A6700, ZV-E1, RX100 series, and most Sony DSLTs and DSLRs. If your camera is Sony, it shoots ARW.",
+      },
+      {
+        q: "Can I batch convert multiple ARW files at once?",
+        a: "Yes. Drop a batch of ARW files on the RAW Converter, choose JPG, and download all the results as a ZIP. The free plan handles up to 20 files at a time; Pro raises the limit to 500.",
+      },
+      {
+        q: "How long does ARW to JPG conversion take?",
+        a: "A 24 MP ARW (roughly 25 MB) typically decodes in 5 to 15 seconds on a modern laptop, depending on your CPU. Decoding happens entirely on your device so there is no network wait. Larger sensors (50 MP+) may take up to 30 seconds per file.",
+      },
+    ],
+    related: ["nef-to-jpg", "cr2-to-jpg", "dng-to-jpg", "raw-to-jpg"],
+    blogSlugs: [
+      { slug: "open-raw-files-browser-no-upload", title: "How to Open RAW Files in Your Browser, No Software, No Upload" },
+    ],
+  },
+
+  "nef-to-jpg": {
+    from: "NEF",
+    to: "JPG",
+    fromLabel: "NEF",
+    toLabel: "JPG",
+    toolPath: "/tools/raw-converter",
+    toolLabel: "Open RAW Converter",
+    tagline: "Convert Nikon NEF RAW photos to JPG — Free, No Upload, In-Browser.",
+    whyCopy:
+      "NEF (Nikon Electronic Format) is Nikon's proprietary RAW format, used across the full Z-mount mirrorless and F-mount DSLR lineup — from the Z6 III to the D850 to entry-level Nikon bodies. NEF files contain the unprocessed sensor data at 12 or 14 bits per channel, which is great for post-processing but makes them large (15 to 50 MB), unreadable by most apps, and impossible to share on social media, email, or print services. Converting NEF to JPG gives you a compact, universally-compatible photo while applying the correct Nikon camera white balance so the result matches what you saw through the viewfinder.",
+    qualityNote:
+      "NEF files encode 12 or 14 bit sensor data with Nikon's proprietary white balance and picture control data. SammaPix applies the embedded camera white balance during RAW decode, then maps the full-range sensor data to an 8 bit JPG through tone mapping. At quality 90 to 95 the output looks excellent for all display and print purposes. Keep your NEF originals if you want to adjust exposure, shadows, or colour grading in Lightroom or Capture NX-D.",
+    technicalNote:
+      "Your NEF file is decoded entirely in your browser by libraw compiled to WebAssembly. Libraw reads Nikon's proprietary colour matrices and applies the embedded camera white balance, then the decoded RGB data is drawn onto a Canvas element and exported as JPEG. The entire process runs in a Web Worker so the page stays responsive. Your NEF never leaves your device.",
+    formatTable: [
+      {
+        format: "NEF (Nikon RAW)",
+        fileSize: "Very Large (15–50 MB)",
+        quality: "Maximum (12–14 bit sensor data)",
+        compatibility: "Nikon NX Studio, Adobe editors",
+        useCase: "Professional capture and editing",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small (2–7 MB)",
+        quality: "High (8 bit, lossy)",
+        compatibility: "Universal",
+        useCase: "Sharing, web, email, social media, print",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+      {
+        format: "DNG",
+        fileSize: "Large",
+        quality: "Maximum (Adobe universal RAW)",
+        compatibility: "Most RAW editors",
+        useCase: "Archival, cross-software compatibility",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does converting NEF to JPG lose quality?",
+        a: "Converting from 14 bit RAW to 8 bit JPG reduces editing latitude, but the visible photo looks excellent at quality 90 to 95. SammaPix applies the Nikon camera white balance during decode, so the output looks natural — not flat. Retain your NEF originals for future re-development.",
+      },
+      {
+        q: "Is it safe to convert my NEF files in a browser?",
+        a: "Yes. SammaPix uses a WebAssembly build of libraw that runs entirely inside your browser. Your NEF files are never uploaded to any server. The conversion is fully local and private, even if you disconnect from the internet after the page loads.",
+      },
+      {
+        q: "Which Nikon cameras produce NEF files?",
+        a: "Almost every Nikon camera that shoots RAW uses NEF: the Z-mount mirrorless series (Z6 III, Z7 II, Z8, Z9, Zf, Zfc), the F-mount DSLRs (D3500, D5600, D750, D850, D6), and many older Nikon digital cameras. The Nikon Z9 also offers a compressed NEF variant (NREC); SammaPix decodes both.",
+      },
+      {
+        q: "Can I convert multiple NEF files at once?",
+        a: "Yes. Drop a batch of NEF files on the RAW Converter and download all the JPGs in a ZIP. The free plan handles up to 20 files at a time; Pro handles up to 500.",
+      },
+      {
+        q: "Why does my NEF look different in SammaPix vs Nikon NX Studio?",
+        a: "Nikon NX Studio applies Nikon's proprietary Picture Control profiles (Standard, Vivid, Neutral, etc.) and in-camera noise reduction on top of the RAW data. SammaPix uses libraw with camera white balance and standard tone mapping, which may produce slightly different contrast or saturation compared to Nikon's own software. For professional editing, always develop NEF files in your preferred RAW editor and use SammaPix for quick sharing conversions.",
+      },
+    ],
+    related: ["arw-to-jpg", "cr2-to-jpg", "dng-to-jpg", "raw-to-jpg"],
+    blogSlugs: [
+      { slug: "open-raw-files-browser-no-upload", title: "How to Open RAW Files in Your Browser, No Software, No Upload" },
+    ],
+  },
+
+  "dng-to-jpg": {
+    from: "DNG",
+    to: "JPG",
+    fromLabel: "DNG",
+    toLabel: "JPG",
+    toolPath: "/tools/raw-converter",
+    toolLabel: "Open RAW Converter",
+    tagline: "Convert DNG RAW photos to JPG — Free, No Upload, In-Browser.",
+    whyCopy:
+      "DNG (Digital Negative) is Adobe's open and universal RAW format. It is used natively by DJI drones, Leica cameras, many smartphones (including Pixel and OnePlus in Pro mode), Ricoh/Pentax bodies, and some Hasselblad models. It is also the archival format that Lightroom offers when importing from proprietary RAW formats. DNG files are 10 to 40 MB and cannot be opened in most everyday apps. Converting DNG to JPG gives you a compact, share-ready photo that works everywhere — while the built-in demosaicing and white balance ensure the result looks accurate, not flat.",
+    qualityNote:
+      "DNG files can store 12 or 16 bit linear or gamma-encoded pixel data depending on the source. SammaPix reads the DNG's embedded colour data and white balance, performs demosaicing, applies tone mapping to the 8 bit JPG range, and exports at your chosen quality. At quality 90 to 95 the output is excellent for sharing, web, and print. Keep your DNG files if you need to make creative adjustments in Lightroom or any other DNG-compatible editor.",
+    technicalNote:
+      "DNG is decoded in your browser by libraw compiled to WebAssembly. Because DNG is an open standard based on TIFF, libraw reads it natively — including DNGs from DJI drones, Adobe-converted DNGs, and DNG-native cameras. Decoding runs in a Web Worker; the output pixel data is drawn on a Canvas and exported as JPEG. Your DNG never leaves your device.",
+    formatTable: [
+      {
+        format: "DNG (Adobe Digital Negative)",
+        fileSize: "Large (10–40 MB)",
+        quality: "Maximum (12–16 bit, open standard)",
+        compatibility: "Adobe Lightroom, most RAW editors",
+        useCase: "Archival, DJI drones, Leica, Pixel phones",
+      },
+      {
+        format: "JPG",
+        fileSize: "Small (1–6 MB)",
+        quality: "High (8 bit, lossy)",
+        compatibility: "Universal",
+        useCase: "Sharing, web, email, social media, print",
+      },
+      {
+        format: "WebP",
+        fileSize: "Smallest",
+        quality: "High (lossy or lossless)",
+        compatibility: "Modern browsers",
+        useCase: "Web performance",
+      },
+      {
+        format: "TIFF",
+        fileSize: "Very Large",
+        quality: "Lossless (16 bit available)",
+        compatibility: "Professional apps",
+        useCase: "Print production, professional editing",
+      },
+    ],
+    faqs: [
+      {
+        q: "What is a DNG file?",
+        a: "DNG (Digital Negative) is an open RAW format created by Adobe in 2004 as a universal alternative to proprietary RAW formats like NEF, ARW, and CR2. It is adopted natively by DJI drones, Leica M-series cameras, Google Pixel phones (Pro mode), and many other devices. Lightroom can also convert any proprietary RAW to DNG during import.",
+      },
+      {
+        q: "Does converting DNG to JPG lose quality?",
+        a: "You move from 12–16 bit RAW data to 8 bit JPG, so some editing headroom is reduced. The visible photo at quality 90 to 95 looks excellent for display, social sharing, and print. SammaPix applies the embedded white balance so the output looks natural. Keep the original DNG for future editing.",
+      },
+      {
+        q: "Can I convert DNG files from a DJI drone?",
+        a: "Yes. DJI drones (Mavic, Air, Mini, and Inspire series) all produce standard DNG files that libraw handles natively. The tone mapping is optimised for the wide dynamic range typical of aerial drone shots.",
+      },
+      {
+        q: "Is it safe to convert my DNG files in a browser?",
+        a: "Yes. The entire conversion runs inside your browser using a WebAssembly build of libraw. Your DNG files are never uploaded to any server. You can even disconnect from the internet after the page loads and the tool still works.",
+      },
+      {
+        q: "Can I convert multiple DNG files at once?",
+        a: "Yes. Drop a batch of DNG files on the RAW Converter, choose JPG, and download all results as a ZIP. The free plan handles up to 20 files; Pro handles up to 500.",
+      },
+    ],
+    related: ["arw-to-jpg", "nef-to-jpg", "cr2-to-jpg", "raw-to-jpg"],
+    blogSlugs: [
+      { slug: "open-raw-files-browser-no-upload", title: "How to Open RAW Files in Your Browser, No Software, No Upload" },
+    ],
+  },
+
   "cr2-to-jpg": {
     from: "CR2",
     to: "JPG",
@@ -1204,7 +1420,7 @@ const CONVERSIONS: Record<string, ConversionData> = {
         a: "Most Canon EOS DSLRs (such as the 5D, 6D, 7D, 80D, Rebel and 1D series) and older EOS M mirrorless bodies shoot CR2. Newer Canon mirrorless cameras use the CR3 format instead.",
       },
     ],
-    related: ["raw-to-jpg", "heic-to-jpg", "jpg-to-webp"],
+    related: ["arw-to-jpg", "nef-to-jpg", "dng-to-jpg", "raw-to-jpg"],
     blogSlugs: [
       { slug: "open-raw-files-browser-no-upload", title: "How to Open RAW Files in Your Browser, No Software, No Upload" },
     ],
@@ -1272,10 +1488,9 @@ const CONVERSIONS: Record<string, ConversionData> = {
         a: "Yes. Drop up to 20 RAW files at once on the free plan (500 on Pro) and SammaPix converts them all in parallel in your browser. Download all JPG results as a ZIP archive.",
       },
     ],
-    related: ["heic-to-jpg", "tiff-to-jpg", "jpg-to-webp"],
+    related: ["arw-to-jpg", "nef-to-jpg", "cr2-to-jpg", "dng-to-jpg"],
     blogSlugs: [
-      { slug: "compress-images-without-losing-quality", title: "Compress Images Without Losing Quality" },
-      { slug: "best-image-compression-tools-2026", title: "Best Image Compression Tools 2026" },
+      { slug: "open-raw-files-browser-no-upload", title: "How to Open RAW Files in Your Browser, No Software, No Upload" },
     ],
   },
 

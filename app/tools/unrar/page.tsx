@@ -155,6 +155,30 @@ const faqSchema = {
         text: "Yes. Extracting RAR files up to 200 MB is completely free. No signup required.",
       },
     },
+    {
+      "@type": "Question",
+      name: "Is this a free WinRAR alternative?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. SammaPix works as a free online WinRAR alternative: it opens and extracts RAR files directly in your browser, so there is no WinRAR to install and no license to buy. Drop your .rar file, preview the contents, and download the files, all free with nothing uploaded to a server.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I unzip a RAR file?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Although 'unzip' technically refers to ZIP archives, people use it for any archive. To unzip a RAR file, drop it onto this page: it opens instantly in your browser and you can download the files one by one or all at once as a ZIP. No WinRAR or extra software needed, and nothing is uploaded.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I open a RAR file without installing any software?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. This is a fully online RAR file opener with nothing to install. It runs in your browser on Windows, Mac, Linux, Chromebook and phones: just drop the .rar file and it extracts instantly, with your files never leaving your device.",
+      },
+    },
   ],
 };
 
