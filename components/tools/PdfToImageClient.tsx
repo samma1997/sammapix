@@ -319,11 +319,15 @@ export default function PdfToImageClient() {
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Keep the uploaded File so Convert works whether the PDF came from the file
+  // input OR from drag & drop (drop never populates fileInputRef).
+  const uploadedFileRef = useRef<File | null>(null);
 
   const handleFile = useCallback(
     async (file: File) => {
       if (!file || file.type !== "application/pdf") return;
 
+      uploadedFileRef.current = file;
       setPdfName(file.name);
       setUiState("loading");
       setProgressMessage("Loading PDF...");
@@ -408,8 +412,8 @@ export default function PdfToImageClient() {
     setUiState("converting");
     setProgress(0);
 
-    // Re-read the file from input
-    const file = fileInputRef.current?.files?.[0];
+    // Reuse the uploaded file (works for both file-input and drag & drop).
+    const file = uploadedFileRef.current;
     if (!file) {
       setUiState("results");
       return;
