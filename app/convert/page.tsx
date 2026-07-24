@@ -152,6 +152,30 @@ const CONVERSIONS = [
     description: "Convert RAW camera files (CR2, NEF, ARW) to shareable JPG.",
   },
   {
+    pair: "arw-to-jpg",
+    from: "ARW",
+    to: "JPG",
+    description: "Convert Sony ARW RAW photos to universally-compatible JPG.",
+  },
+  {
+    pair: "nef-to-jpg",
+    from: "NEF",
+    to: "JPG",
+    description: "Convert Nikon NEF RAW photos to shareable JPG.",
+  },
+  {
+    pair: "cr2-to-jpg",
+    from: "CR2",
+    to: "JPG",
+    description: "Convert Canon CR2 RAW photos to universally-compatible JPG.",
+  },
+  {
+    pair: "dng-to-jpg",
+    from: "DNG",
+    to: "JPG",
+    description: "Convert Adobe DNG RAW photos to shareable JPG.",
+  },
+  {
     pair: "tiff-to-png",
     from: "TIFF",
     to: "PNG",
