@@ -36,6 +36,7 @@ interface ConvertedPage {
   blob: Blob | null;
   objectUrl: string | null;
   errorMessage?: string;
+  selected: boolean;
 }
 
 type UIState = "idle" | "loading" | "converting" | "results";
@@ -152,16 +153,39 @@ interface PageCardProps {
   page: ConvertedPage;
   format: OutputFormat;
   onDownload: (page: ConvertedPage) => void;
+  onToggleSelect: (id: string) => void;
+  selectionActive: boolean;
 }
 
-const PageCard = ({ page, format, onDownload }: PageCardProps) => {
+const PageCard = ({ page, format, onDownload, onToggleSelect, selectionActive }: PageCardProps) => {
   const isConverting = page.status === "converting";
   const isDone = page.status === "done";
   const isError = page.status === "error";
   const isPending = page.status === "pending";
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E]">
+    <div
+      className={[
+        "flex items-center gap-3 px-4 py-3 border rounded-md bg-white dark:bg-[#1E1E1E] transition-colors",
+        selectionActive && isPending && !page.selected
+          ? "border-[#E5E5E5] dark:border-[#2A2A2A] opacity-50"
+          : "border-[#E5E5E5] dark:border-[#2A2A2A]",
+      ].join(" ")}
+    >
+      {/* Selection checkbox (only in pending/pre-convert state) */}
+      {selectionActive && isPending && (
+        <div className="shrink-0">
+          <input
+            type="checkbox"
+            id={`select-page-${page.id}`}
+            checked={page.selected}
+            onChange={() => onToggleSelect(page.id)}
+            aria-label={`Select page ${page.pageNumber}`}
+            className="w-4 h-4 rounded border-[#D4D4D4] dark:border-[#555] accent-[#171717] dark:accent-white cursor-pointer"
+          />
+        </div>
+      )}
+
       {/* Thumbnail or status icon */}
       <div className="shrink-0 w-10 h-12 flex items-center justify-center">
         {isDone && page.objectUrl ? (
@@ -229,13 +253,16 @@ const PageCard = ({ page, format, onDownload }: PageCardProps) => {
         {isError && (
           <XCircle className="h-4 w-4 text-[#DC2626]" strokeWidth={1.5} />
         )}
-        {(isPending || isConverting) && (
+        {/* During conversion: show spinner (selectionActive is false at that point) */}
+        {isConverting && (
           <div className="h-4 w-4 flex items-center justify-center">
-            {isConverting ? (
-              <Loader2 className="h-4 w-4 text-[#6366F1] animate-spin" strokeWidth={1.5} />
-            ) : (
-              <div className="h-3 w-3 rounded-full border-2 border-[#E5E5E5] dark:border-[#444]" />
-            )}
+            <Loader2 className="h-4 w-4 text-[#6366F1] animate-spin" strokeWidth={1.5} />
+          </div>
+        )}
+        {/* Pending & not in selection mode: show empty circle */}
+        {isPending && !selectionActive && (
+          <div className="h-4 w-4 flex items-center justify-center">
+            <div className="h-3 w-3 rounded-full border-2 border-[#E5E5E5] dark:border-[#444]" />
           </div>
         )}
       </div>
@@ -342,6 +369,7 @@ export default function PdfToImageClient() {
           status: "pending" as const,
           blob: null,
           objectUrl: null,
+          selected: true,
         }));
 
         setPages(initialPages);
@@ -374,7 +402,8 @@ export default function PdfToImageClient() {
   );
 
   const handleConvertAll = useCallback(async () => {
-    if (pages.length === 0) return;
+    const selectedPages = pages.filter((p) => p.selected && p.status === "pending");
+    if (selectedPages.length === 0) return;
 
     setUiState("converting");
     setProgress(0);
@@ -393,13 +422,20 @@ export default function PdfToImageClient() {
       const arrayBuffer = await file.arrayBuffer();
       const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
+      // Work on the full pages array but only convert selected ones
       const updated = [...pages];
+      const selectedIndices = updated
+        .map((p, i) => (p.selected && p.status === "pending" ? i : -1))
+        .filter((i) => i !== -1);
 
-      for (let i = 0; i < updated.length; i++) {
+      for (let si = 0; si < selectedIndices.length; si++) {
+        const i = selectedIndices[si];
         const pageNum = updated[i].pageNumber;
-        const pct = Math.round((i / updated.length) * 100);
+        const pct = Math.round((si / selectedIndices.length) * 100);
         setProgress(pct);
-        setProgressMessage(`Converting page ${pageNum} of ${updated.length}...`);
+        setProgressMessage(
+          `Converting page ${pageNum} (${si + 1} of ${selectedIndices.length} selected)...`
+        );
 
         updated[i] = { ...updated[i], status: "converting" };
         setPages([...updated]);
@@ -461,6 +497,20 @@ export default function PdfToImageClient() {
     }
   }, [pages, outputFormat, quality, scale]);
 
+  const handleToggleSelect = useCallback((id: string) => {
+    setPages((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, selected: !p.selected } : p))
+    );
+  }, []);
+
+  const handleSelectAll = useCallback(() => {
+    setPages((prev) => prev.map((p) => ({ ...p, selected: true })));
+  }, []);
+
+  const handleDeselectAll = useCallback(() => {
+    setPages((prev) => prev.map((p) => ({ ...p, selected: false })));
+  }, []);
+
   const handleDownloadSingle = useCallback((page: ConvertedPage) => {
     if (!page.blob) return;
     saveAs(page.blob, pageFileName(page.pageNumber, outputFormat));
@@ -509,6 +559,12 @@ export default function PdfToImageClient() {
   const allPending = pages.length > 0 && pages.every((p) => p.status === "pending");
   const isConverting = uiState === "converting";
   const showQualitySlider = outputFormat !== "PNG";
+
+  // Selection derived state — only meaningful in pre-convert (allPending) phase
+  const selectedCount = pages.filter((p) => p.selected && p.status === "pending").length;
+  const totalPendingCount = pages.filter((p) => p.status === "pending").length;
+  const allSelected = totalPendingCount > 0 && selectedCount === totalPendingCount;
+  const noneSelected = selectedCount === 0;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-16">
@@ -645,8 +701,38 @@ export default function PdfToImageClient() {
             <div className="flex items-center gap-3 px-4 py-3 rounded-md bg-[#F0FDF4] dark:bg-[#052E16] border border-[#BBF7D0] dark:border-[#166534]">
               <div className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0" />
               <p className="text-xs font-medium text-[#166534] dark:text-[#4ADE80]">
-                {pages.length} page{pages.length !== 1 ? "s" : ""} ready &mdash; choose settings and click Convert
+                {pages.length} page{pages.length !== 1 ? "s" : ""} ready &mdash; select which to convert, then click Convert
               </p>
+            </div>
+          )}
+
+          {/* Page selection controls (pre-convert only) */}
+          {uiState === "results" && allPending && (
+            <div className="flex items-center justify-between gap-3 px-1">
+              <span className="text-xs text-[#737373] dark:text-[#A3A3A3] tabular-nums">
+                <span className="font-semibold text-[#171717] dark:text-[#E5E5E5]">{selectedCount}</span>
+                {" of "}
+                <span className="font-semibold text-[#171717] dark:text-[#E5E5E5]">{totalPendingCount}</span>
+                {" page"}
+                {totalPendingCount !== 1 ? "s" : ""} selected
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleSelectAll}
+                  disabled={allSelected}
+                  className="text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors underline underline-offset-2"
+                >
+                  Select all
+                </button>
+                <span className="text-[#D4D4D4] dark:text-[#444] text-xs">/</span>
+                <button
+                  onClick={handleDeselectAll}
+                  disabled={noneSelected}
+                  className="text-xs text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors underline underline-offset-2"
+                >
+                  Deselect all
+                </button>
+              </div>
             </div>
           )}
 
@@ -726,10 +812,13 @@ export default function PdfToImageClient() {
           {uiState === "results" && allPending && (
             <button
               onClick={handleConvertAll}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors shadow-sm"
+              disabled={noneSelected}
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <FileImage className="h-4 w-4" strokeWidth={1.5} />
-              Convert {pages.length} page{pages.length !== 1 ? "s" : ""} to {outputFormat} &rarr;
+              {noneSelected
+                ? "Select at least one page"
+                : `Convert ${selectedCount} selected page${selectedCount !== 1 ? "s" : ""} to ${outputFormat} →`}
             </button>
           )}
 
@@ -741,6 +830,8 @@ export default function PdfToImageClient() {
                 page={p}
                 format={outputFormat}
                 onDownload={handleDownloadSingle}
+                onToggleSelect={handleToggleSelect}
+                selectionActive={allPending && uiState === "results"}
               />
             ))}
           </div>
