@@ -338,7 +338,7 @@ export default function UpscalePage() {
                   {
                     feature: "AI super-resolution",
                     topaz: "Yes — proprietary deep learning models",
-                    sammapix: "High-quality multi-pass interpolation (browser-based)",
+                    sammapix: "Yes — real ESRGAN neural network (browser-based)",
                     highlight: false,
                   },
                   {
@@ -364,7 +364,7 @@ export default function UpscalePage() {
             </table>
           </div>
           <p className="text-xs text-[#A3A3A3] mt-3">
-            Honest note: Topaz uses proprietary AI super-resolution that can reconstruct fine detail from very degraded photos — SammaPix uses browser-based interpolation which is faster and fully private but won&rsquo;t invent missing pixels. For most web and social media use cases, the difference is negligible.
+            Honest note: both use AI super-resolution. SammaPix runs a real ESRGAN neural network locally in your browser (fully private, no upload). Topaz&rsquo;s proprietary models are larger and trained on billions of images, so they recover more detail on heavily degraded or very small sources. For web, social media and everyday photos the difference is negligible.
           </p>
         </div>
       </section>
