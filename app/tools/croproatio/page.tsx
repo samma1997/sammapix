@@ -432,7 +432,7 @@ export default function CropRatioPage() {
               },
               {
                 q: "Does SammaPix upload my photos?",
-                a: "No. All cropping happens in your browser using the Canvas API. Your images never leave your device- no server, no upload, no data collection.",
+                a: "No. All cropping happens in your browser using the Canvas API. Your images never leave your device- no server, no upload. Your photos are never collected.",
               },
             ].map((faq) => (
               <div

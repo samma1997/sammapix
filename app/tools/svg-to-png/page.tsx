@@ -62,7 +62,7 @@ const features = [
     icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
     title: "Fully browser-based",
     description:
-      "SVG rasterization happens locally via the Canvas API. Your files never leave your device — no upload, no tracking, full privacy.",
+      "SVG rasterization happens locally via the Canvas API. Your files never leave your device — no upload, fully private.",
   },
   {
     icon: <FileImage className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,

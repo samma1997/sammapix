@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { getConsent, setConsent, type ConsentState } from "@/lib/consent";
 
 // Read env vars at module level (baked in at build time)
-const META_PIXEL_ID = (process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "").trim();
 const GOOGLE_ADS_ID = (process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "").trim();
 const GA4_ID = (process.env.NEXT_PUBLIC_GA4_ID ?? "").trim();
 const ADSENSE_PUB_ID = (process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim();
@@ -47,20 +46,8 @@ function loadInlineScript(code: string): void {
   });
 }
 
-function initMetaPixel(pixelId: string): void {
-  if ((window as any).fbq) return;
-  // Load fbevents.js first
-  loadScript("https://connect.facebook.net/en_US/fbevents.js");
-  // Init pixel via inline script
-  loadInlineScript(
-    "!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?" +
-    "n.callMethod.apply(n,arguments):n.queue.push(arguments)};" +
-    "if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';" +
-    "n.queue=[]}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');" +
-    "fbq('init','" + pixelId + "');" +
-    "fbq('track','PageView');"
-  );
-}
+// Meta (Facebook) Pixel rimosso 25lug: incoerente con l'angolo privacy del sito
+// (client-side, no upload). Il tracking resta GA4 + AdSense + Clarity, dietro consenso.
 
 function initGtag(adsId: string, ga4Id: string): void {
   if ((window as any).gtag) return;
@@ -116,7 +103,6 @@ export default function CookieConsent() {
 
   const loadAllTracking = useCallback(() => {
     if (typeof window === "undefined") return;
-    if (META_PIXEL_ID) initMetaPixel(META_PIXEL_ID);
     if (GOOGLE_ADS_ID || GA4_ID) initGtag(GOOGLE_ADS_ID, GA4_ID);
     if (ADSENSE_PUB_ID) initAdSense(ADSENSE_PUB_ID);
     if (CLARITY_PROJECT_ID) initClarity(CLARITY_PROJECT_ID);

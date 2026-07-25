@@ -95,7 +95,7 @@ const faqs = [
   {
     question: "Do my images get uploaded to a server?",
     answer:
-      "No. SammaPix compresses images entirely inside your browser using JavaScript and the Canvas API. Your files never leave your device. Nothing is uploaded, stored, or tracked. Tested by inspecting network traffic: zero outbound image data.",
+      "No. SammaPix compresses images entirely inside your browser using JavaScript and the Canvas API. Your files never leave your device. Nothing is uploaded or stored. Tested by inspecting network traffic: zero outbound image data.",
   },
   {
     question: "What image formats are supported?",
