@@ -233,14 +233,14 @@ export default function UnrarClient() {
             trackEvent("unrar_extracted", { files: accEntries.length });
           } else if (type === "error") {
             terminateWorker();
-            setErrorMsg(ev.data.message ?? "Extraction failed.");
+            setErrorMsg(ev.data.message ?? "This RAR couldn't be extracted. It may be corrupted, split into multiple parts (.part1.rar, .part2.rar…), or too large for your device. Try 7-Zip or WinRAR on desktop.");
             setUiState("error");
           }
         };
 
         worker.onerror = (err) => {
           terminateWorker();
-          setErrorMsg(err.message ?? "Worker crashed.");
+          setErrorMsg("This RAR couldn't be extracted. It may be corrupted, split into multiple parts (.part1.rar, .part2.rar…), or too large for your device's memory. For those, try 7-Zip or WinRAR on desktop.");
           setUiState("error");
         };
 
@@ -310,14 +310,14 @@ export default function UnrarClient() {
             setUiState("needs_password");
           } else if (type === "error") {
             terminateWorker();
-            setErrorMsg(ev.data.message ?? "Could not read archive.");
+            setErrorMsg(ev.data.message ?? "Couldn't read this archive. It may be corrupted, split into multiple parts (.part1.rar, .part2.rar…), or not a valid RAR. Try 7-Zip or WinRAR on desktop.");
             setUiState("error");
           }
         };
 
         worker.onerror = (err) => {
           terminateWorker();
-          setErrorMsg(err.message ?? "Worker crashed.");
+          setErrorMsg("This RAR couldn't be extracted. It may be corrupted, split into multiple parts (.part1.rar, .part2.rar…), or too large for your device's memory. For those, try 7-Zip or WinRAR on desktop.");
           setUiState("error");
         };
 
