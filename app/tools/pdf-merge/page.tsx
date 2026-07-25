@@ -63,7 +63,7 @@ const features = [
     icon: <Shield className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,
     title: "Fully browser-based",
     description:
-      "Merging runs locally via the pdf-lib library. Your documents never leave your device — no upload, no tracking.",
+      "Merging runs locally via the pdf-lib library. Your documents never leave your device — no upload.",
   },
   {
     icon: <FileText className="h-5 w-5 text-gray-700" strokeWidth={1.5} />,

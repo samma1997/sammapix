@@ -667,7 +667,7 @@ export default function PassportPhotoRequirements2026Page() {
         </ul>
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
-          Everything runs 100% in your browser. Your photo never leaves your device. no upload to any server, no data collection, no account required. This is especially important for identity documents where{" "}
+          Everything runs 100% in your browser. Your photo never leaves your device. No upload to any server, no account required. This is especially important for identity documents where{" "}
           <Link href="/blog/browser-based-image-tools-privacy-guide" className="text-indigo-600 dark:text-indigo-400 hover:underline">
             privacy matters
           </Link>

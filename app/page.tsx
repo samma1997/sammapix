@@ -69,7 +69,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "How does SammaPix protect my privacy?",
     answer:
-      "Your privacy is our top priority. All processing happens 100% in your browser -- your images never leave your device. For AI tools, only a small thumbnail (max 512px) is temporarily sent to Google Gemini, while full-resolution originals remain completely local. Zero uploads, zero data tracking.",
+      "Your privacy is our top priority. All processing happens 100% in your browser -- your images never leave your device. For AI tools, only a small thumbnail (max 512px) is temporarily sent to Google Gemini, while full-resolution originals remain completely local. Your files are never uploaded. Site analytics and ads run only with your cookie consent, and never touch your images.",
   },
   {
     question: "Do I need to create an account?",
@@ -99,7 +99,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "Is my data stored on your servers?",
     answer:
-      "No. Your images are never uploaded to any server. All processing happens in your browser using your device's processing power. No storage, no tracking, no backups.",
+      "No. Your images are never uploaded to any server. All processing happens in your browser using your device's processing power. Your images are never stored or backed up. (Site analytics run only with your cookie consent.)",
   },
 ];
 

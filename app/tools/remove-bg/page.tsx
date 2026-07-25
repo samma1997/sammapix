@@ -102,7 +102,7 @@ const faqs = [
   {
     question: "Is my image uploaded to a server?",
     answer:
-      "No. The AI model runs entirely in your browser using WebAssembly. Your images never leave your device. Nothing is uploaded, stored, or tracked. Verifiable by inspecting your browser's network tab during use.",
+      "No. The AI model runs entirely in your browser using WebAssembly. Your images never leave your device. Nothing is uploaded or stored. Verifiable by inspecting your browser's network tab during use.",
   },
 ];
 
