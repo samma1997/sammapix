@@ -63,7 +63,7 @@ var TOOLS = [
   { g: "Image", id: "watermark", lb: "Watermark",  tile: "t-pink",  col: "#db2777", icon: "stamp" },
   { g: "Image", id: "blur",      lb: "Blur",       tile: "t-slate", col: "#64748b", icon: "blur" },
   { g: "Image", id: "exif",      lb: "Clean EXIF", tile: "t-green", col: "#16a34a", icon: "shield" },
-  { g: "Image", id: "page",      lb: "From page",  tile: "t-cyan",  col: "#0891b2", icon: "image" },
+  // "From page" (id: page) is promoted to the home hero, not a tile — see renderHome().
 
   { g: "More", id: "all", lb: "All 52 tools", sub: "on the web", tile: "t-gray", col: "#71717a", icon: "grid", site: "" }
 ];
@@ -78,6 +78,23 @@ window.toast = function (m) {
 function esc(x) { return String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
 function openUrl(u) { if (chrome.tabs && chrome.tabs.create) chrome.tabs.create({ url: u }); else window.open(u, "_blank"); }
 function siteUrl(slug) { return "https://www.sammapix.com/" + (slug ? "tools/" + slug : "") + "?ref=ext&utm_source=extension&utm_medium=panel"; }
+
+// ─── anonymous usage telemetry (opt-out from the footer) ───
+// Sends a whitelisted, content-free event to the site, which forwards it to GA4.
+// No image data, no URLs, no personal info — only an anonymous local id + coarse tags.
+window.track = function (event, params) {
+  try {
+    if (window.__SP_DEV__) return;
+    if (localStorage.getItem("sp-stats") === "off") return;
+    var cid = localStorage.getItem("sp-cid");
+    if (!cid) { cid = "ext." + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); localStorage.setItem("sp-cid", cid); }
+    var body = Object.assign({ cid: cid, event: event }, params || {});
+    fetch("https://www.sammapix.com/api/ext/track", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body), keepalive: true
+    }).catch(function () {});
+  } catch (e) {}
+};
 
 // ─── shared nav + dropzone for engines ───
 window.SP = {
@@ -109,6 +126,9 @@ window.SP = {
 function renderHome() {
   atHome = true;
   var html = '<div class="search"><span class="mag">🔍</span><input id="q" placeholder="Search tools…"></div>';
+  html += '<div class="hero" id="grabpage"><div class="hero-ic">' + ic("image") + '</div>' +
+    '<div class="hero-tx"><div class="hero-t">Grab images from this page</div><div class="hero-s">Download, convert or rename them all at once</div></div>' +
+    '<div class="hero-go">→</div></div>';
   var groups = {};
   TOOLS.forEach(function (t) { (groups[t.g] = groups[t.g] || []).push(t); });
   Object.keys(groups).forEach(function (g) {
@@ -119,13 +139,23 @@ function renderHome() {
     });
     html += '</div>';
   });
-  html += '<div class="foot"><a id="site-link">sammapix.com — 52 free tools →</a></div>';
+  html += '<div class="foot"><a id="site-link">sammapix.com — all free tools →</a>' +
+    '<div style="margin-top:9px;font-size:10px;color:var(--dim)">Anonymous usage stats: <a id="stats-toggle" style="cursor:pointer;color:var(--accent);font-weight:650"></a></div></div>';
   $view.innerHTML = html;
 
   $view.querySelectorAll("[data-id]").forEach(function (el) {
     el.addEventListener("click", function () { route(el.getAttribute("data-id")); });
   });
   document.getElementById("site-link").addEventListener("click", function () { openUrl(siteUrl("")); });
+  var gp = document.getElementById("grabpage"); if (gp) gp.addEventListener("click", function () { route("page"); });
+  var stog = document.getElementById("stats-toggle");
+  if (stog) {
+    var lbl = function () { try { return localStorage.getItem("sp-stats") === "off" ? "off · turn on" : "on · turn off"; } catch (e) { return "on · turn off"; } };
+    stog.textContent = lbl();
+    stog.addEventListener("click", function () {
+      try { var off = localStorage.getItem("sp-stats") === "off"; localStorage.setItem("sp-stats", off ? "on" : "off"); stog.textContent = lbl(); toast(off ? "Usage stats on" : "Usage stats off"); } catch (e) {}
+    });
+  }
   var q = document.getElementById("q");
   q.addEventListener("input", function () {
     var v = q.value.toLowerCase();
@@ -138,12 +168,13 @@ function renderHome() {
 
 // ─── ROUTER ───
 function route(id) {
+  if (window.track) window.track("ext_tool_open", { tool: id });
+  if (id === "page") { window.PageWS.open(); return; }
   var t = TOOLS.find(function (x) { return x.id === id; });
   if (!t) return;
   if (t.soon) { toast("Coming soon 🙌"); return; }
   if (t.site !== undefined) { openUrl(siteUrl(t.site)); return; }
   if (id === "unrar" || id === "sevenzip") { window.ArchiveWS.openPicker(); return; }
-  if (id === "page") { window.PageWS.open(); return; }
   window.ImageTool.open(id); // compress, convert, crop, watermark, blur, exif
 }
 
@@ -162,3 +193,18 @@ function route(id) {
 })();
 
 renderHome();
+
+// If the user opened us via the page context-menu ("Grab all images on this page"),
+// jump straight to the From-page picker. Two paths: freshly opened (ask background) and
+// already open (live message).
+try {
+  chrome.runtime.sendMessage({ q: "pending" }, function (resp) {
+    if (chrome.runtime.lastError) return;
+    if (resp && resp.tool === "page" && window.PageWS) { if (window.track) window.track("ext_tool_open", { tool: "page" }); window.PageWS.open(); }
+  });
+  chrome.runtime.onMessage.addListener(function (msg) {
+    if (msg && msg.sp === "open" && msg.tool === "page" && window.PageWS) { if (window.track) window.track("ext_tool_open", { tool: "page" }); window.PageWS.open(); }
+  });
+} catch (e) {}
+
+if (window.track) window.track("ext_open");

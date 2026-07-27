@@ -53,6 +53,7 @@ window.PageWS = (function () {
   }
 
   async function buyDayPass() {
+    if (window.track) window.track("ext_daypass_click", { tool: "page" });
     if (window.__SP_DEV__) { toast("Demo: this launches the Day Pass Stripe checkout (direct)"); return; }
     try {
       var r = await fetch("https://www.sammapix.com/api/checkout/day-pass", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ source: "extension/page-bulk" }) });
@@ -286,6 +287,7 @@ window.PageWS = (function () {
       return;
     }
     if (needsQuota && q.plan !== "pro" && list.length > q.remaining) {
+      if (window.track) window.track("ext_upsell_shown", { tool: "page", plan: q.plan });
       gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Daily limit reached</div>' +
         '<div style="font-size:12px;color:var(--dim);line-height:1.5">You\'ve used ' + q.used + '/' + q.limit + ' images today (you selected ' + list.length + '). Keep going without limits:</div>' +
         '<button class="cta" id="pupg" style="margin-top:14px">⭐ Upgrade to Pro (always unlimited)</button>' +
@@ -337,6 +339,7 @@ window.PageWS = (function () {
     var u = URL.createObjectURL(dlBlob); var a = document.createElement("a"); a.href = u; a.download = dlName;
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 8000);
     if (needsQuota) await consume(ok); // solo l'elaborazione conta sulla quota
+    if (window.track) window.track("ext_page_grab", { count: ok, fmt: outFmt });
     toast(single ? "✓ Saved " + dlName : "✓ ZIP ready (" + ok + " images)");
     render();
   }
