@@ -149,6 +149,13 @@ function renderHome() {
     '<div class="hero-tx"><div class="hero-t">Grab images from this page</div><div class="hero-s">Download, convert or rename them all at once</div></div>' +
     '<div class="hero-go">→</div></div>';
   html += '<div id="homequota" style="display:none;font-size:10.5px;color:var(--dim);text-align:center;margin:-8px 16px 12px;font-weight:600"></div>';
+  var onbo = null; try { onbo = localStorage.getItem("sp-onboarded"); } catch (e) {}
+  if (!onbo) {
+    html += '<div class="onbo" id="onbo"><div class="onbo-t">👋 Two hidden shortcuts</div>' +
+      '<div class="onbo-r">🖱️ <b>Right-click any image</b> on the web → Save as JPG / PNG / WebP (strips EXIF)</div>' +
+      '<div class="onbo-r">🖱️ <b>Right-click a page</b> → Grab all its images at once</div>' +
+      '<button class="onbo-x" id="onbo-x">Got it</button></div>';
+  }
   var groups = {};
   TOOLS.forEach(function (t) { (groups[t.g] = groups[t.g] || []).push(t); });
   Object.keys(groups).forEach(function (g) {
@@ -177,6 +184,8 @@ function renderHome() {
     });
   }
   loadHomeQuota();
+  var ox = document.getElementById("onbo-x");
+  if (ox) ox.addEventListener("click", function () { try { localStorage.setItem("sp-onboarded", "1"); } catch (e) {} var o = document.getElementById("onbo"); if (o) o.remove(); });
   var q = document.getElementById("q");
   q.addEventListener("input", function () {
     var v = q.value.toLowerCase();
