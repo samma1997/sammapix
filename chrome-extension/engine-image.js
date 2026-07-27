@@ -42,6 +42,13 @@ window.ImageTool = (function () {
     load(blob);
   }
 
+  // Public entry for "drop several images on Home" → straight to batch compress.
+  function openBatch(files) {
+    mode = "compress"; saveFmt = Object.assign({}, MODES.compress.fmt);
+    bd = window.SP.toolShell("Compress " + files.length + " images", window.SP.home);
+    batch("compress", files);
+  }
+
   function load(blob) {
     origBytes = (blob && blob.size) || 0;
     bd.innerHTML = '<div class="load"><div class="spin"></div>Loading…</div>';
@@ -377,5 +384,5 @@ window.ImageTool = (function () {
     toast("ZIP ready (" + ok + ")");
   }
 
-  return { open: open, openWith: openWith };
+  return { open: open, openWith: openWith, openBatch: openBatch };
 })();

@@ -23,8 +23,11 @@ document.addEventListener("dragover", function (e) { if (atHome) e.preventDefaul
 document.addEventListener("drop", function (e) {
   if (!atHome) return;
   e.preventDefault();
-  var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-  if (f) routeFile(f);
+  var files = e.dataTransfer && e.dataTransfer.files;
+  if (!files || !files.length) return;
+  var imgs = Array.prototype.filter.call(files, function (f) { return detectKind(f) === "image"; });
+  if (imgs.length > 1) { if (window.track) window.track("ext_tool_open", { tool: "compress-batch" }); window.ImageTool.openBatch(imgs); return; }
+  routeFile(files[0]);
 });
 
 // ─── icons (clean inline SVG, colored via currentColor) ───
@@ -122,6 +125,22 @@ window.SP = {
   esc: esc
 };
 
+// Show today's image quota on Home (signed-in) so the limit — and the Day Pass —
+// is visible before the user hits the wall inside "from page".
+function loadHomeQuota() {
+  if (window.__SP_DEV__) return;
+  var el = document.getElementById("homequota"); if (!el) return;
+  fetch("https://www.sammapix.com/api/usage/images", { credentials: "include" }).then(function (r) {
+    if (r.status === 401) { el.style.display = ""; el.textContent = "Sign in on sammapix.com to unlock bulk page actions"; return null; }
+    return r.json();
+  }).then(function (j) {
+    if (!j) return;
+    el.style.display = "";
+    if (j.plan === "pro") el.innerHTML = "⭐ Pro · unlimited images";
+    else el.textContent = "Today: " + j.used + "/" + j.limit + " images used (free)";
+  }).catch(function () {});
+}
+
 // ─── HOME ───
 function renderHome() {
   atHome = true;
@@ -129,6 +148,7 @@ function renderHome() {
   html += '<div class="hero" id="grabpage"><div class="hero-ic">' + ic("image") + '</div>' +
     '<div class="hero-tx"><div class="hero-t">Grab images from this page</div><div class="hero-s">Download, convert or rename them all at once</div></div>' +
     '<div class="hero-go">→</div></div>';
+  html += '<div id="homequota" style="display:none;font-size:10.5px;color:var(--dim);text-align:center;margin:-8px 16px 12px;font-weight:600"></div>';
   var groups = {};
   TOOLS.forEach(function (t) { (groups[t.g] = groups[t.g] || []).push(t); });
   Object.keys(groups).forEach(function (g) {
@@ -156,6 +176,7 @@ function renderHome() {
       try { var off = localStorage.getItem("sp-stats") === "off"; localStorage.setItem("sp-stats", off ? "on" : "off"); stog.textContent = lbl(); toast(off ? "Usage stats on" : "Usage stats off"); } catch (e) {}
     });
   }
+  loadHomeQuota();
   var q = document.getElementById("q");
   q.addEventListener("input", function () {
     var v = q.value.toLowerCase();

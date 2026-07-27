@@ -13,6 +13,7 @@ window.PageWS = (function () {
   var bd = null, images = [], selected = null;
   var scanTabId = null, scanUrl = null, active = false, watching = false;
   var outFmt = "orig"; // orig | jpg | png | webp — download format from the page picker
+  try { var _sf = localStorage.getItem("sp-pagefmt"); if (_sf) outFmt = _sf; } catch (e) {} // remember last choice
 
   function esc(x) { return window.SP.esc(x); }
   function openUrl(u) { if (chrome.tabs && chrome.tabs.create) chrome.tabs.create({ url: u }); else window.open(u, "_blank"); }
@@ -195,6 +196,7 @@ window.PageWS = (function () {
     bd.querySelectorAll("[data-pf]").forEach(function (c) {
       c.addEventListener("click", function () {
         outFmt = c.getAttribute("data-pf");
+        try { localStorage.setItem("sp-pagefmt", outFmt); } catch (e) {}
         bd.querySelectorAll("[data-pf]").forEach(function (x) { x.classList.remove("on"); });
         c.classList.add("on");
       });
