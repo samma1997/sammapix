@@ -381,13 +381,34 @@ export async function POST(req: NextRequest) {
     }
     case "invoice.payment_failed": {
       const invoice = event.data.object as Stripe.Invoice;
-      console.log("[stripe/webhook] Payment failed for invoice:", invoice.id);
+      const attempt = invoice.attempt_count ?? 0;
+      console.log("[stripe/webhook] Payment failed for invoice:", invoice.id, "attempt:", attempt);
 
+      // Anti-abuse / anti-noise: instead of letting Stripe retry a dead card ~9
+      // times (noise + Stripe fraud-radar risk + churn abusers who never paid),
+      // cancel the subscription after 4 failed attempts. Real customers who fix
+      // their card do it in the first tries (observed: a real customer recovered
+      // at attempt 2), so this never touches them. isPro is active|trialing only,
+      // so access is already revoked the moment the sub goes past_due.
+      const subId =
+        typeof (invoice as { subscription?: string | Stripe.Subscription | null }).subscription === "string"
+          ? ((invoice as { subscription?: string }).subscription as string)
+          : ((invoice as { subscription?: Stripe.Subscription | null }).subscription?.id ?? null);
+      if (attempt >= 4 && subId) {
+        try {
+          await stripe.subscriptions.cancel(subId);
+          console.log(`[stripe/webhook] Cancelled sub ${subId} after ${attempt} failed attempts (anti-abuse)`);
+        } catch (err) {
+          console.error("[stripe/webhook] Failed to cancel sub after repeated failures:", err);
+        }
+      }
+
+      // Dunning email only on the first 3 attempts — never spam 9 emails.
       const failedCustomerId =
         typeof invoice.customer === "string"
           ? invoice.customer
           : invoice.customer?.id;
-      if (failedCustomerId) {
+      if (attempt <= 3 && failedCustomerId) {
         try {
           const failedCustomer = await stripe.customers.retrieve(failedCustomerId);
           if (!failedCustomer.deleted && failedCustomer.email) {
