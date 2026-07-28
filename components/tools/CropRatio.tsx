@@ -743,6 +743,8 @@ export default function CropRatio({ initialRatio }: CropRatioProps = {}) {
   const [upsellOpen, setUpsellOpen] = useState(false);
   const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
+  const successUpsellShownRef = useRef(false); // value-moment upsell: show once per session
 
   // Derived ratio
   const getRatio = useCallback((): { w: number; h: number; label: string } => {
@@ -990,7 +992,14 @@ export default function CropRatio({ initialRatio }: CropRatioProps = {}) {
     a.download = `${base}_cropped${ext}`;
     a.click();
     URL.revokeObjectURL(url);
-  }, []);
+    // Value moment: most crop visitors do a single crop+download (intent like
+    // "crop to a4") and never hit the batch upsell. Surface the Day Pass once,
+    // right after their first successful download.
+    if (!isPro && !successUpsellShownRef.current) {
+      successUpsellShownRef.current = true;
+      setSuccessUpsellOpen(true);
+    }
+  }, [isPro]);
 
   // ── Download ZIP ───────────────────────────────────────────────────────────
 
@@ -1261,6 +1270,12 @@ export default function CropRatio({ initialRatio }: CropRatioProps = {}) {
         open={zipUpsellOpen}
         onClose={() => setZipUpsellOpen(false)}
         trigger="zip"
+      />
+
+      <ProUpsellModal
+        open={successUpsellOpen}
+        onClose={() => setSuccessUpsellOpen(false)}
+        trigger="success"
       />
 
       {/* Toolbar */}
