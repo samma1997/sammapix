@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 import FreeSignupAdBar from "@/components/ads/FreeSignupAdBar";
 import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
@@ -544,10 +545,12 @@ export default function ResizePack({
   const [upsellFiles, setUpsellFiles] = useState<File[]>([]);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
   const [softUpsellOpen, setSoftUpsellOpen] = useState(false);
-  // Soft, non-blocking batch nudge shown after a single-image download.
-  // Covers the high-traffic single-use case (e.g. /resize/whatsapp) where the
-  // ZIP/batch upsell would otherwise never fire. Reuses the converting zip modal.
-  const [batchNudge, setBatchNudge] = useState(false);
+  // Value-moment upsell shown after a single-image download. Covers the
+  // high-traffic single-use case (e.g. /resize/whatsapp) where the ZIP/batch
+  // upsell would otherwise never fire. Uses the shared success-upsell system
+  // (Day Pass, one-time, no ads) — the pitch that converts on mono-use traffic,
+  // not the batch/ZIP pitch that mono-use resizers never need.
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   // Processing state
   const [processingTotal, setProcessingTotal] = useState(0);
@@ -805,8 +808,13 @@ export default function ResizePack({
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-    // Soft, one-time batch nudge for free users after they grab a single file.
-    if (!isPro) setBatchNudge(true);
+    // Value-moment: after the download starts, offer the Day Pass (non-blocking).
+    // Shared frequency cap: 2nd lifetime download onwards, once per 24h.
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
   }, [isPro]);
 
   // ── ZIP download ──────────────────────────────────────────────────────────
@@ -884,6 +892,12 @@ export default function ResizePack({
         open={softUpsellOpen}
         onClose={() => setSoftUpsellOpen(false)}
         trigger="daily"
+      />
+      {/* Value-moment: shown after a single download (Day Pass primary) */}
+      <ProUpsellModal
+        open={successUpsellOpen}
+        onClose={() => setSuccessUpsellOpen(false)}
+        trigger="success"
       />
 
       {/* ── Idle: Dropzone ─────────────────────────────────────────────────── */}
@@ -1369,33 +1383,6 @@ export default function ResizePack({
               )}
             </div>
           </div>
-
-          {/* Soft batch nudge (free users, after a single download) */}
-          {!isPro && batchNudge && (
-            <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4 bg-[#FAFAFA] dark:bg-[#191919] flex items-center justify-between gap-3 flex-wrap">
-              <p className="text-sm text-[#525252] dark:text-[#A3A3A3]">
-                <span className="font-semibold text-[#171717] dark:text-[#E5E5E5]">More photos to resize?</span>{" "}
-                Pro resizes up to 500 at once and downloads them in a single ZIP.
-              </p>
-              <div className="flex gap-2 shrink-0">
-                <button
-                  onClick={() => {
-                    setBatchNudge(false);
-                    setZipUpsellOpen(true);
-                  }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] text-white dark:bg-white dark:text-[#171717] text-sm font-medium rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors"
-                >
-                  Try Pro
-                </button>
-                <button
-                  onClick={() => setBatchNudge(false)}
-                  className="inline-flex items-center px-3 py-2 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
-                >
-                  No thanks
-                </button>
-              </div>
-            </div>
-          )}
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
