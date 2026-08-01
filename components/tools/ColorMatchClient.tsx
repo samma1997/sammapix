@@ -138,9 +138,12 @@ export default function ColorMatchClient() {
     downloadCubeFile(lut, `sammapix-${base}.cube`);
     trackEvent("color_match_cube_downloaded");
     // Soft upsell: show once per session for free users after the download completes.
+    // Chi estrae un singolo LUT è mono-uso: il pitch "batch 500 foto" (lut_export)
+    // non lo tocca (89 mostrati / 1 click). Uso il pitch "success" (Day Pass una
+    // tantum, niente ads) come sul crop, l'unico che converte sul traffico mono-uso.
     if (!isPro && !lutUpsellShown.current) {
       lutUpsellShown.current = true;
-      setUpsellTrigger("lut_export");
+      setUpsellTrigger("success");
       setShowUpsell(true);
     }
   }, [lut, refFile, isPro]);
