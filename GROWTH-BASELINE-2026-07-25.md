@@ -63,6 +63,9 @@ crop/16-9 89% (PRE-fix 23/7) · compress-to 75% · unrar 29% · passport 33% · 
 | 28/7 | Momento del valore sul CROP (Day Pass dopo download singolo, trigger success) | vendite Day Pass dal crop | giorni |
 | 1/8 | Upsell color-match: pitch da "batch 500 foto" a "success" (Day Pass) | CTR upsell color-match (era 89 mostrati/1 click in 14gg) | giorni |
 | 1/8 | CTR compress-to: title template + meta 4 tagli grossi (velocita'/taglia esatta) | CTR /compress-to/* a pari posizione | 2-3 settimane |
+| 1/8 | Value-moment su RESIZE (era pitch batch/ZIP -> ora Day Pass success, sistema condiviso). Compress-to gia' coperto | Day Pass da resize/*. PROMOSSO A MAIN (5cc22ce) | giorni |
+| 1/8 | LUT generator: SCARTATO (pagina color-match gia' ottimizzata LUT, nuovo URL = cannibalizzazione). Tetto = autorita', non nome | — | — |
+| 1/8 | Backlink turnkey: BACKLINK-LUCA-TODO.md (Reddit/HN pronti + 3 email reali + submit). Luca esegue | autorita' -> posizioni | 1-3 mesi |
 
 **NB 28/7 — vena cambiata:** unrar -68 click WoW (a posizione INVARIATA pos ~6,7 → volatilità, non danno nostro). CROP è la vena in crescita con posizioni transazionali forti (crop to a4 pos 2,9 CTR 25%; crop 3:4 pos 2,9 CTR 27%) ma monetizzava zero (mono-uso, upsell solo su batch). Fix: momento del valore sul download singolo. **PROMOSSO A MAIN 28/7 (commit 67efc67), in produzione.** Re-check ~4-6 ago: Day Pass con source `upsell:success:/crop/*` in Stripe (stripe-session-source.mjs / stripe-daypass-audit.mjs).
 
