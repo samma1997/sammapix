@@ -27,7 +27,7 @@ export async function generateMetadata({
   const target = getTarget(slug);
   if (!target) return {};
 
-  const title = `${target.titleKeyword} Online Free: No Upload, No Signup`;
+  const title = `${target.titleKeyword} Online: Free, No Upload, Exact Size`;
   const canonical = getTargetCanonical(slug);
 
   return {
