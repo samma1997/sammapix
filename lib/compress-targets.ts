@@ -697,7 +697,7 @@ const ALL_TARGETS: CompressTarget[] = [
     sizeLabel: "1 MB",
     sizeBytes: 1048576,
     metaDescription:
-      "Compress any image to 1 MB online for free. Ideal for print-ready web images, high-resolution product photos, and professional portfolios. No software to install.",
+      "Compress an image to 1 MB in seconds, free and right in your browser. No upload, no signup, no watermark. Drop a photo and hit your exact target size instantly.",
     ogDescription:
       "Free online tool to compress images to 1 MB. Perfect for high-res product photos, print-ready images, and professional portfolios.",
     titleKeyword: "Compress Image to 1MB",
@@ -745,7 +745,7 @@ const ALL_TARGETS: CompressTarget[] = [
     sizeLabel: "2 MB",
     sizeBytes: 2097152,
     metaDescription:
-      "Compress any image to 2 MB online for free. Best for high-quality prints, professional photography, and large display images. Private, browser-based processing.",
+      "Compress an image to 2 MB in seconds, free and 100% in your browser. No upload, no signup, no watermark. Drop a photo and hit your exact target size instantly.",
     ogDescription:
       "Free online tool to compress images to 2 MB. Ideal for professional photography, high-quality prints, and large-format displays.",
     titleKeyword: "Compress Image to 2MB",
@@ -1273,7 +1273,7 @@ const ALL_TARGETS: CompressTarget[] = [
     sizeLabel: "700 KB",
     sizeBytes: 716800,
     metaDescription:
-      "Compress any image to 700 KB online for free. Great for full-screen hero banners, photography galleries, and high-resolution display images. No software needed.",
+      "Compress an image to 700 KB in seconds, free and right in your browser. No upload, no signup, no watermark. Drop a photo and hit your exact target size instantly.",
     ogDescription:
       "Free online tool to compress images to 700 KB. Ideal for full-screen heroes, photography galleries, and high-res display images.",
     titleKeyword: "Compress Image to 700KB",
@@ -1321,7 +1321,7 @@ const ALL_TARGETS: CompressTarget[] = [
     sizeLabel: "3 MB",
     sizeBytes: 3145728,
     metaDescription:
-      "Compress any image to 3 MB online for free. Ideal for print-quality photos, professional proofs, and upload forms with a 3 MB limit. Private, browser-based processing.",
+      "Compress an image to 3 MB in seconds, free and 100% in your browser. Perfect for forms with a 3 MB upload limit. No upload, no signup, no quality guesswork.",
     ogDescription:
       "Free online tool to compress images to 3 MB. Perfect for print-quality photos, client proofs, and 3 MB upload limits.",
     titleKeyword: "Compress Image to 3MB",
