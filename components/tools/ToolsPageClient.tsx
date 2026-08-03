@@ -44,6 +44,7 @@ import {
   IconResizeVideo,
   IconTrimVideo,
   IconExtractAudio,
+  IconPdfCompress,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -663,6 +664,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfMerge,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Compress PDF",
+    href: "/tools/pdf-compress",
+    tagline: "Reduce PDF file size with Low/Medium/High quality presets. See before/after size instantly. 100% in your browser, no upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfCompress,
     category: ["Optimize"],
     isNew: true,
   },

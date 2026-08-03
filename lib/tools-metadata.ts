@@ -485,6 +485,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "browser-based-image-tools-privacy-guide",
     ],
   },
+  "pdf-compress": {
+    id: "pdf-compress",
+    name: "Compress PDF",
+    shortDesc: "Reduce PDF file size in-browser, no upload",
+    slug: "/tools/pdf-compress",
+    category: "optimize",
+    relatedTools: ["pdf-split", "pdf-merge", "compress"],
+    relatedBlogSlugs: [
+      "compress-pdf-online-no-upload",
+      "reduce-pdf-file-size-for-email",
+    ],
+  },
   "blur-censor": {
     id: "blur-censor",
     name: "Blur & Censor",

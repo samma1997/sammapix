@@ -1366,6 +1366,49 @@ export const IconExtractAudio: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconPdfCompress: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdc-squeeze {
+        0%, 25%  { transform: scaleY(1); }
+        55%       { transform: scaleY(0.68); }
+        75%       { transform: scaleY(1); }
+        100%      { transform: scaleY(1); }
+      }
+      @keyframes pdc-badge {
+        0%, 50%   { opacity: 0; transform: scale(0.5); }
+        68%, 88%  { opacity: 1; transform: scale(1); }
+        98%, 100% { opacity: 0; transform: scale(0.5); }
+      }
+      @keyframes pdc-arrow {
+        0%, 40%  { transform: translateY(0px); opacity: 0.4; }
+        65%       { transform: translateY(3px); opacity: 1; }
+        85%, 100%{ transform: translateY(0px); opacity: 0.4; }
+      }
+      .pdc-doc  { transform-origin: 15px 24px; animation: pdc-squeeze 2.6s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdc-badge { transform-origin: 38px 30px; animation: pdc-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdc-arr  { animation: pdc-arrow 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Documento PDF che si comprime */}
+    <g className="pdc-doc">
+      <rect x="4" y="6" width="22" height="30" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="11" width="14" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="15" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="8" y="19" width="12" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="15" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Frecce di compressione verso il basso */}
+    <g className="pdc-arr">
+      <path d="M28 20 L32 20 M30 18 L32 20 L30 22" stroke={accent} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Badge con percentuale riduzione */}
+    <g className="pdc-badge" style={{ opacity: 0 }}>
+      <rect x="30" y="22" width="16" height="16" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="32" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">−60%</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

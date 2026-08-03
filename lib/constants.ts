@@ -68,6 +68,7 @@ export const TOOL_SLUGS = [
   "ico-generator",
   "image-to-text",
   "instagram-grid-splitter",
+  "pdf-compress",
   "jpg-to-pdf",
   "jxl",
   "passport-photo",

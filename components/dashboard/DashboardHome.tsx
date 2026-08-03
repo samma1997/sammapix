@@ -51,6 +51,7 @@ import {
   IconPassportPhoto,
   IconUnrar,
   IconOpen7z,
+  IconPdfCompress,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -747,6 +748,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconOpen7z,
     category: ["Optimize"],
     keywords: ["open 7z", "extract 7z", "7z to zip", "open 7z mac", "7z extractor", "7z opener", "view 7z", "7z file", "7zip online", "7z extractor online"],
+  },
+  {
+    name: "Compress PDF",
+    slug: "pdf-compress",
+    href: "/dashboard/tools/pdf-compress",
+    tagline: "Reduce PDF file size with Low/Medium/High quality presets. See before/after. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfCompress,
+    category: ["Optimize"],
+    keywords: ["compress pdf", "reduce pdf size", "shrink pdf", "pdf compressor", "smaller pdf", "pdf for email", "pdf file size", "make pdf smaller", "pdf optimizer"],
   },
 ];
 

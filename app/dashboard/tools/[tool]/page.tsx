@@ -34,6 +34,7 @@ import {
   IconJxl,
   IconUnrar,
   IconOpen7z,
+  IconPdfCompress,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -75,6 +76,7 @@ const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverter
 const ColorMatchClient = dynamic(() => import("@/components/tools/ColorMatchClient"));
 const PhotoEnhanceClient = dynamic(() => import("@/components/tools/PhotoEnhanceClient"));
 const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
+const PdfCompressClient = dynamic(() => import("@/components/tools/PdfCompressClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -117,6 +119,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "photo-enhance": PhotoEnhanceClient,
   unrar: UnrarClient,
   "open-7z": dynamic(() => import("@/components/tools/Open7zClient")),
+  "pdf-compress": PdfCompressClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -200,6 +203,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "photo-enhance": { Icon: IconUpscale, accent: "#8B5CF6" },
   unrar: { Icon: IconUnrar, accent: "#0EA5E9" },
   "open-7z": { Icon: IconOpen7z, accent: "#8B5CF6" },
+  "pdf-compress": { Icon: IconPdfCompress, accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -635,6 +639,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Export as ZIP (optional)", desc: "Click \"Download all as .zip\" to convert the entire .7z archive to ZIP." },
     ],
     proTip: { text: "Need to open a RAR archive instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "pdf-compress": {
+    label: "Compress PDF",
+    tagline: "Reduce PDF file size in your browser. See before/after, no upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF file (up to 100 MB). Reads page count instantly, no upload." },
+      { title: "Choose quality level", desc: "Pick Low for maximum compression, Medium for balance, or High for minimal loss." },
+      { title: "Download compressed PDF", desc: "See the before/after file size and percentage reduction, then download." },
+    ],
+    proTip: { text: "Need fewer pages instead? Split the PDF to keep only what you need.", linkLabel: "PDF Split", linkHref: "/dashboard/tools/pdf-split" },
   },
 };
 
