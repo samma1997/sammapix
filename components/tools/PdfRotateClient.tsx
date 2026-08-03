@@ -190,7 +190,9 @@ export default function PdfRotateClient() {
 
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        // pdfjs-dist v5 richiede il parametro `canvas` in render(), senza lancia
+        // "Object.defineProperty called on non-object". Stesso pattern di PdfToImageClient.
+        await page.render({ canvasContext: ctx, canvas, viewport }).promise;
 
         rendered.push(canvas);
       }
