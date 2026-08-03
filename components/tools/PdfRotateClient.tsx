@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 import { trackEvent } from "@/lib/analytics";
 
 // ── Constants ────────────────────────────────────────────────────────────────
@@ -296,11 +297,6 @@ export default function PdfRotateClient() {
         rotated_pages: rotatedPageCount,
         output_kb: Math.round(outputBytes.byteLength / 1024),
       });
-
-      // Show pro upsell after use for free users
-      if (!isPro) {
-        setTimeout(() => setShowProModal(true), 1200);
-      }
     } catch (err) {
       console.error("PDF rotate failed:", err);
       setUiState("ready");
@@ -325,7 +321,13 @@ export default function PdfRotateClient() {
     a.download = `${baseName}-rotated.pdf`;
     a.click();
     URL.revokeObjectURL(url);
-  }, [resultBytes, sourceFile, pageCount]);
+    // Momento del valore: upsell Day Pass onesto dopo il download (dal 2°, cooldown 24h).
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setShowProModal(true);
+    }
+  }, [resultBytes, sourceFile, pageCount, isPro]);
 
   // ── Reset ───────────────────────────────────────────────────────────────────
 
@@ -347,8 +349,7 @@ export default function PdfRotateClient() {
       <ProUpsellModal
         open={showProModal}
         onClose={() => setShowProModal(false)}
-        trigger="file_size"
-        freeLimit={100}
+        trigger="success"
       />
 
       {/* Error banners */}

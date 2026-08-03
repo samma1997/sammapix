@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { trackEvent } from "@/lib/analytics";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Costanti ────────────────────────────────────────────────────────────────────
 
@@ -256,11 +257,6 @@ export default function PdfCompressClient() {
         pages: pageCount,
         reduced,
       });
-
-      // Mostra upsell pro dopo l'uso, per utenti free
-      if (!isPro) {
-        setTimeout(() => setShowProModal(true), 1200);
-      }
     } catch (err) {
       console.error("PDF compress failed:", err);
       setUiState("idle");
@@ -285,7 +281,14 @@ export default function PdfCompressClient() {
     a.download = `${baseName}-compressed.pdf`;
     a.click();
     URL.revokeObjectURL(url);
-  }, [compressedBytes, sourceFile, quality]);
+    // Momento del valore: upsell Day Pass ONESTO dopo il download, con frequenza
+    // limitata (dal 2° download, cooldown 24h). Niente falso "file troppo grande".
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setShowProModal(true);
+    }
+  }, [compressedBytes, sourceFile, quality, isPro]);
 
   // ── Reset ───────────────────────────────────────────────────────────────────
 
@@ -311,8 +314,7 @@ export default function PdfCompressClient() {
       <ProUpsellModal
         open={showProModal}
         onClose={() => setShowProModal(false)}
-        trigger="file_size"
-        freeLimit={100}
+        trigger="success"
       />
 
       {/* Banner errore compressione */}
