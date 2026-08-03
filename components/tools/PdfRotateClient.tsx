@@ -168,9 +168,8 @@ export default function PdfRotateClient() {
       setSourceFile(file);
       setPageCount(count);
 
-      // Render thumbnails with pdf.js. Build LEGACY: il build moderno "pdfjs-dist"
-      // esplode sotto webpack dev ("Object.defineProperty called on non-object").
-      const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+      // Render thumbnails with pdf.js. Interop ESM gestita da transpilePackages (next.config).
+      const pdfjsLib = await import("pdfjs-dist");
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const pdfDoc = await pdfjsLib.getDocument({ data: buffer }).promise;

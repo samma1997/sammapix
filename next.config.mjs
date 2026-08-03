@@ -20,6 +20,9 @@ const nextConfig = {
   // needed client-side by @huggingface/transformers (which uses onnxruntime-web)
   // TF.js and upscaler are browser-only — exclude from all server bundles
   serverExternalPackages: ["onnxruntime-node", "@tensorflow/tfjs", "upscaler", "@upscalerjs/esrgan-slim", "libarchive.js"],
+  // pdfjs-dist v5 e' ESM-only e sotto webpack esplode con "Object.defineProperty
+  // called on non-object". transpilePackages lo fa passare dalla pipeline SWC di Next.
+  transpilePackages: ["pdfjs-dist"],
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Prevent onnxruntime-node from being bundled into server functions

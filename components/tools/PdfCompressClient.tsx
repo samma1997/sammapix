@@ -142,11 +142,9 @@ export default function PdfCompressClient() {
     setNoReduction(false);
 
     try {
-      // 1. Carica pdf.js per rasterizzare le pagine. USA IL BUILD LEGACY: il build
-      // moderno "pdfjs-dist" esplode sotto webpack dev con "Object.defineProperty
-      // called on non-object". Il legacy è transpilato per i bundler. Stessa versione,
-      // quindi il worker (5.5.207) resta compatibile.
-      const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+      // 1. Carica pdf.js per rasterizzare le pagine. L'interop ESM di pdfjs-dist v5
+      // sotto webpack e' gestito da transpilePackages in next.config.mjs.
+      const pdfjsLib = await import("pdfjs-dist");
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const arrayBuffer = await sourceFile.arrayBuffer();
