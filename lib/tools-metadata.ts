@@ -723,6 +723,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "add-caption-to-photo-free",
     ],
   },
+  "image-to-base64": {
+    id: "image-to-base64",
+    name: "Image to Base64",
+    shortDesc: "Convert any image to a Base64 / Data URI string — or decode back. No upload",
+    slug: "/tools/image-to-base64",
+    category: "edit",
+    relatedTools: ["svg-to-png", "ico-generator", "compress"],
+    relatedBlogSlugs: [
+      "image-to-base64-online",
+      "base64-to-image-converter",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

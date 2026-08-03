@@ -41,6 +41,7 @@ import {
   IconAddBorder,
   IconRoundImage,
   IconAddText,
+  IconImageToBase64,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -94,7 +95,8 @@ const toolGrid = [
   { Icon: IconFlipImage,     name: "Flip Image",       accent: "#0EA5E9" },
   { Icon: IconAddBorder,     name: "Add Border",       accent: "#0EA5E9" },
   { Icon: IconRoundImage,   name: "Round Image",      accent: "#0EA5E9" },
-  { Icon: IconAddText,      name: "Add Text",         accent: "#0EA5E9" },
+  { Icon: IconAddText,        name: "Add Text",         accent: "#0EA5E9" },
+  { Icon: IconImageToBase64,  name: "Image to Base64",  accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

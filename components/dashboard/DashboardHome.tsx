@@ -61,6 +61,7 @@ import {
   IconAddBorder,
   IconRoundImage,
   IconAddText,
+  IconImageToBase64,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -867,6 +868,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconAddText,
     category: ["Optimize", "Creative"],
     keywords: ["add text to image", "add text to photo", "write on image", "image caption maker", "text on picture", "add words to photo", "add caption to photo free", "text overlay image", "photo text editor online", "watermark text photo"],
+  },
+  {
+    name: "Image to Base64",
+    slug: "image-to-base64",
+    href: "/dashboard/tools/image-to-base64",
+    tagline: "Encode any image to a Base64 Data URI — or decode a base64 string back to an image. Copy as CSS, HTML or plain string. No upload.",
+    accent: "#6366F1",
+    badges: ["Free", "Dev", "No upload"],
+    Icon: IconImageToBase64,
+    category: ["Optimize", "Creative"],
+    keywords: ["image to base64", "base64 image", "data uri", "encode image", "base64 to image", "embed image css", "embed image html", "inline image", "base64 string", "base64 converter", "data uri generator", "base64 decoder"],
   },
 ];
 

@@ -1825,6 +1825,60 @@ export const IconAddText: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Image to Base64 icon (image morphs into base64 character stream) ──────────
+export const IconImageToBase64: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes b64-imgfade {
+        0%, 20%  { opacity: 1; }
+        50%      { opacity: 0.3; }
+        80%, 100%{ opacity: 1; }
+      }
+      @keyframes b64-chars {
+        0%, 15%  { opacity: 0; transform: translateX(-4px); }
+        45%, 78% { opacity: 1; transform: translateX(0px); }
+        95%, 100%{ opacity: 0; transform: translateX(4px); }
+      }
+      @keyframes b64-arrow {
+        0%, 20% { transform: translateX(-2px); opacity: 0.4; }
+        55%     { transform: translateX(2px); opacity: 1; }
+        80%, 100%{ transform: translateX(-2px); opacity: 0.4; }
+      }
+      @keyframes b64-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.7); }
+        60%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .b64-img   { animation: b64-imgfade 2.6s ease-in-out infinite; }
+      .b64-chars { transform-origin: 36px 22px; animation: b64-chars 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .b64-arrow { animation: b64-arrow 2.6s ease-in-out infinite; }
+      .b64-badge { transform-origin: 38px 40px; animation: b64-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Left: image thumbnail */}
+    <g className="b64-img">
+      <rect x="2" y="8" width="20" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="8" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M2 24 L8 18 L13 22 L17 17 L22 23" stroke={accent} strokeWidth="1.15" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Center arrow */}
+    <g className="b64-arrow">
+      <path d="M24 19 L28 19 M26 17 L28 19 L26 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Right: base64 character stream */}
+    <g className="b64-chars" style={{ opacity: 0 }}>
+      <rect x="30" y="8" width="16" height="22" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="16" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">iVBO</text>
+      <text x="38" y="21" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">Rw0K</text>
+      <text x="38" y="26" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">GgoA</text>
+    </g>
+    {/* Badge: "b64" */}
+    <g className="b64-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="36" width="20" height="9" rx="4.5" fill={accent}/>
+      <text x="36" y="42.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">base64</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

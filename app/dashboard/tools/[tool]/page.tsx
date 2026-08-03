@@ -44,6 +44,7 @@ import {
   IconAddBorder,
   IconRoundImage,
   IconAddText,
+  IconImageToBase64,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -95,6 +96,7 @@ const FlipImageClient = dynamic(() => import("@/components/tools/FlipImageClient
 const AddBorderClient = dynamic(() => import("@/components/tools/AddBorderClient"));
 const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClient"));
 const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToImageClient"));
+const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase64Client"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -147,6 +149,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "add-border":       AddBorderClient,
   "round-image":      RoundImageClient,
   "add-text-to-image": AddTextToImageClient,
+  "image-to-base64": ImageToBase64Client,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -240,6 +243,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "add-border":       { Icon: IconAddBorder,      accent: "#0EA5E9" },
   "round-image":      { Icon: IconRoundImage,     accent: "#0EA5E9" },
   "add-text-to-image": { Icon: IconAddText,       accent: "#0EA5E9" },
+  "image-to-base64":   { Icon: IconImageToBase64, accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -775,6 +779,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the result", desc: "Click Add text to image to render at full resolution, then download. Output format matches input. Files never leave your browser." },
     ],
     proTip: { text: "For captions, set text to bottom-center with white color and black outline 3 px for maximum readability on any background.", linkLabel: "Try Watermark", linkHref: "/dashboard/tools/stampit" },
+  },
+  "image-to-base64": {
+    label: "Image to Base64",
+    tagline: "Encode any image to a Base64 Data URI — or decode a base64 string back to an image. Files never leave your browser.",
+    steps: [
+      { title: "Drop your image", desc: "Add any JPG, PNG, WebP, SVG or other image (max 10 MB). Encoding runs instantly via FileReader in your browser — no upload." },
+      { title: "Choose output format", desc: "Select from four formats: full Data URI, plain base64 string, CSS background-image rule, or an HTML <img> tag. Switch between them in one click." },
+      { title: "Copy and use", desc: "Click Copy to send the string to your clipboard. Paste it directly into your CSS file, HTML template or API payload. Use the decode tab to preview a base64 string as an image." },
+    ],
+    proTip: { text: "Compress the image first to reduce the base64 string size by up to 80%.", linkLabel: "Compress Images", linkHref: "/dashboard/tools/compress" },
   },
 };
 

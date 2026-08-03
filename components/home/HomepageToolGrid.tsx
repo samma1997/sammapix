@@ -57,6 +57,7 @@ import {
   IconAddBorder,
   IconRoundImage,
   IconAddText,
+  IconImageToBase64,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -357,6 +358,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Passport Photo", href: "/tools/passport-photo", tagline: "Auto crop + white background for passport and visa photos. 6 country presets.", accent: "#3B82F6", badge: "Free", Icon: IconPassportPhoto, category: "AI-Powered" },
   { name: "Image to Text (OCR)", href: "/tools/image-to-text", tagline: "Extract text from images with AI-powered OCR. 50+ languages.", accent: "#F59E0B", badge: "Free", Icon: IconAltText, category: "AI-Powered" },
   { name: "BlogDrop", href: "/tools/blogdrop", tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.", accent: "#8B5CF6", badge: "Free", Icon: IconWebLift, category: "Optimize", isCombo: true },
+  { name: "Image to Base64", href: "/tools/image-to-base64", tagline: "Encode any image to a Base64 Data URI. Copy as CSS, HTML or plain string. No upload.", accent: "#6366F1", badge: "Free", Icon: IconImageToBase64, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

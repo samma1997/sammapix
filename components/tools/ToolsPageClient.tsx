@@ -54,6 +54,7 @@ import {
   IconAddBorder,
   IconRoundImage,
   IconAddText,
+  IconImageToBase64,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -864,6 +865,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconExtractAudio,
     category: ["Creative"],
+    isNew: true,
+  },
+  {
+    name: "Image to Base64",
+    href: "/tools/image-to-base64",
+    tagline: "Encode any image to a Base64 Data URI — or decode a base64 string back to an image. CSS, HTML, JSON ready. 100% in your browser, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "Dev", "No upload"],
+    Icon: IconImageToBase64,
+    category: ["Creative", "Optimize"],
     isNew: true,
   },
 ];
