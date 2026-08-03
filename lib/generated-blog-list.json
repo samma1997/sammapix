@@ -42,6 +42,20 @@
     "url": "/blog/reduce-pdf-file-size-for-email"
   },
   {
+    "slug": "remove-pdf-password-restrictions",
+    "title": "How to Remove PDF Restrictions (Printing, Copying, Editing) [2026]",
+    "description": "Enable printing, copying, and editing on a restricted PDF — free, in your browser, no upload. Explains owner-password vs user-password. Cannot crack o",
+    "keywords": [
+      "remove pdf restrictions",
+      "enable printing on pdf",
+      "remove pdf permissions",
+      "pdf won",
+      ",\n    "
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/remove-pdf-password-restrictions"
+  },
+  {
     "slug": "rotate-pdf-online-no-upload",
     "title": "Rotate a PDF Online Without Uploading It [2026]",
     "description": "Rotate a PDF page by page or all at once — 90, 180, or 270 degrees. Runs entirely in your browser via pdf.js + pdf-lib. The rotation is permanent and ",
@@ -54,6 +68,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/rotate-pdf-online-no-upload"
+  },
+  {
+    "slug": "unlock-pdf-online-no-upload",
+    "title": "Unlock a PDF Online Without Uploading It [2026]",
+    "description": "Remove PDF restrictions (printing, copying, editing) in your browser with no file upload. Powered by pdf-lib. Honest about what it can and cannot unlo",
+    "keywords": [
+      "unlock pdf online",
+      "unlock pdf free",
+      "unlock pdf no upload",
+      "unlock pdf browser",
+      "remove pdf restrictions online"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/unlock-pdf-online-no-upload"
   },
   {
     "slug": "passport-photo-requirements-2026",
