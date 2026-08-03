@@ -1656,6 +1656,46 @@ export const IconRotateImage: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconFlipImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes fi-mirror {
+        0%   { transform: scaleX(1); }
+        40%  { transform: scaleX(-1); }
+        55%  { transform: scaleX(-1); }
+        95%  { transform: scaleX(1); }
+        100% { transform: scaleX(1); }
+      }
+      @keyframes fi-axis {
+        0%, 30%  { opacity: 0.2; }
+        45%, 60% { opacity: 1; }
+        90%, 100%{ opacity: 0.2; }
+      }
+      @keyframes fi-badge {
+        0%, 42%  { opacity: 0; transform: scale(0.7); }
+        57%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .fi-frame  { transform-origin: 24px 22px; animation: fi-mirror 2.6s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .fi-axis   { animation: fi-axis 2.6s ease-in-out infinite; }
+      .fi-badge  { transform-origin: 24px 40px; animation: fi-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Axis / mirror line */}
+    <line className="fi-axis" x1="24" y1="3" x2="24" y2="41" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeLinecap="round"/>
+    {/* Photo frame that flips horizontally */}
+    <g className="fi-frame">
+      <rect x="6" y="7" width="34" height="26" rx="3.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="14" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M6 28 L14 20 L20 25 L28 17 L40 26" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* H badge */}
+    <g className="fi-badge" style={{ opacity: 0 }}>
+      <rect x="12" y="35" width="24" height="10" rx="5" fill={accent}/>
+      <text x="24" y="42.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">MIRROR</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

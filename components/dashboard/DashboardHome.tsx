@@ -57,6 +57,7 @@ import {
   IconPdfPageNumbers,
   IconPdfProtect,
   IconRotateImage,
+  IconFlipImage,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -819,6 +820,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconRotateImage,
     category: ["Optimize", "Creative"],
     keywords: ["rotate image", "rotate photo", "rotate picture", "turn image sideways", "rotate jpg", "rotate png", "rotate 90 degrees", "rotate 180 degrees", "batch rotate", "fix sideways photo", "straighten photo", "image rotation"],
+  },
+  {
+    name: "Flip Image",
+    slug: "flip-image",
+    href: "/dashboard/tools/flip-image",
+    tagline: "Mirror JPG, PNG and WebP horizontally or vertically. Batch flip up to 200 files on Pro. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconFlipImage,
+    category: ["Optimize", "Creative"],
+    keywords: ["flip image", "mirror image", "mirror photo", "flip photo horizontal", "flip photo vertical", "flip picture", "mirror picture", "flip image online", "batch flip images", "flip image free", "mirror image online", "flip horizontally", "flip vertically"],
   },
 ];
 

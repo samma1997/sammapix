@@ -108,6 +108,7 @@ export const TOOL_SLUGS = [
   "pdf-page-numbers",
   "pdf-protect",
   "rotate-image",
+  "flip-image",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

@@ -50,6 +50,7 @@ import {
   IconPdfPageNumbers,
   IconPdfProtect,
   IconRotateImage,
+  IconFlipImage,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -729,6 +730,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Batch", "No upload"],
     Icon: IconRotateImage,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Flip Image",
+    href: "/tools/flip-image",
+    tagline: "Mirror JPG, PNG and WebP images horizontally or vertically. Batch flip up to 20 files, download as ZIP. 100% in your browser, no upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconFlipImage,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

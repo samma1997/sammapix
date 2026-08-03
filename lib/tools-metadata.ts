@@ -675,6 +675,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "how-to-rotate-a-photo-free",
     ],
   },
+  "flip-image": {
+    id: "flip-image",
+    name: "Flip Image",
+    shortDesc: "Mirror photos horizontally or vertically — batch, no upload",
+    slug: "/tools/flip-image",
+    category: "edit",
+    relatedTools: ["rotate-image", "croproatio", "resizepack"],
+    relatedBlogSlugs: [
+      "flip-image-online-no-upload",
+      "mirror-photo-online-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

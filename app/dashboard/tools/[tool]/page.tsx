@@ -40,6 +40,7 @@ import {
   IconPdfPageNumbers,
   IconPdfProtect,
   IconRotateImage,
+  IconFlipImage,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -87,6 +88,7 @@ const PdfUnlockClient = dynamic(() => import("@/components/tools/PdfUnlockClient
 const PdfPageNumbersClient = dynamic(() => import("@/components/tools/PdfPageNumbersClient"));
 const PdfProtectClient = dynamic(() => import("@/components/tools/PdfProtectClient"));
 const RotateImageClient = dynamic(() => import("@/components/tools/RotateImageClient"));
+const FlipImageClient = dynamic(() => import("@/components/tools/FlipImageClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -135,6 +137,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-page-numbers": PdfPageNumbersClient,
   "pdf-protect":      PdfProtectClient,
   "rotate-image":     RotateImageClient,
+  "flip-image":       FlipImageClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -224,6 +227,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-page-numbers": { Icon: IconPdfPageNumbers, accent: "#EF4444" },
   "pdf-protect":      { Icon: IconPdfProtect,     accent: "#EF4444" },
   "rotate-image":     { Icon: IconRotateImage,    accent: "#0EA5E9" },
+  "flip-image":       { Icon: IconFlipImage,      accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -719,6 +723,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download rotated images", desc: "Click Rotate, then download each image individually or grab all as a ZIP archive." },
     ],
     proTip: { text: "After rotating, crop to an exact ratio for social media or print.", linkLabel: "Try Crop to Ratio", linkHref: "/dashboard/tools/croproatio" },
+  },
+  "flip-image": {
+    label: "Flip Image",
+    tagline: "Mirror photos horizontally or vertically. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose flip direction", desc: "Click Flip Horizontal to mirror left-right, Flip Vertical to mirror top-bottom, or enable both at once." },
+      { title: "Download flipped images", desc: "Click Flip, then download each image individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "Need to rotate after flipping? Rotate Image supports any angle from -180° to +180°.", linkLabel: "Try Rotate Image", linkHref: "/dashboard/tools/rotate-image" },
   },
 };
 
