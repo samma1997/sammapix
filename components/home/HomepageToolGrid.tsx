@@ -60,6 +60,7 @@ import {
   IconImageToBase64,
   IconCollageMaker,
   IconRemovePdfPages,
+  IconPdfWatermark,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -363,6 +364,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Image to Base64", href: "/tools/image-to-base64", tagline: "Encode any image to a Base64 Data URI. Copy as CSS, HTML or plain string. No upload.", accent: "#6366F1", badge: "Free", Icon: IconImageToBase64, category: "Optimize", isNew: true },
   { name: "Photo Collage Maker", href: "/tools/collage-maker", tagline: "Combine 2-9 photos into a grid collage. 8 layouts, custom gap and color. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconCollageMaker, category: "Creative", isNew: true },
   { name: "Delete PDF Pages", href: "/tools/remove-pdf-pages", tagline: "Remove pages from a PDF by clicking thumbnails. Range input supported. No upload.", accent: "#EF4444", badge: "Free", Icon: IconRemovePdfPages, category: "Optimize", isNew: true },
+  { name: "Watermark PDF", href: "/tools/pdf-watermark", tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfWatermark, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

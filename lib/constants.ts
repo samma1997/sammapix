@@ -115,6 +115,7 @@ export const TOOL_SLUGS = [
   "image-to-base64",
   "collage-maker",
   "remove-pdf-pages",
+  "pdf-watermark",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

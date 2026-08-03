@@ -1998,6 +1998,57 @@ export const IconRemovePdfPages: React.FC<{ accent: string }> = ({ accent }) => 
   </svg>
 );
 
+// ── PDF Watermark icon (PDF page with diagonal stamp that fades in) ──────────
+export const IconPdfWatermark: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfw-stamp {
+        0%, 20%  { opacity: 0; transform: scale(1.2) rotate(-40deg); }
+        45%, 80% { opacity: 1; transform: scale(1) rotate(-40deg); }
+        95%, 100%{ opacity: 0; transform: scale(0.9) rotate(-40deg); }
+      }
+      @keyframes pdfw-line1 {
+        0%, 10%  { opacity: 0.2; }
+        50%, 90% { opacity: 0.6; }
+        100%     { opacity: 0.2; }
+      }
+      @keyframes pdfw-line2 {
+        0%, 20%  { opacity: 0.2; }
+        60%, 90% { opacity: 0.5; }
+        100%     { opacity: 0.2; }
+      }
+      .pdfw-stamp { transform-origin: 24px 24px; animation: pdfw-stamp 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdfw-l1    { animation: pdfw-line1 2.6s ease-in-out infinite; }
+      .pdfw-l2    { animation: pdfw-line2 2.6s ease-in-out 0.15s infinite; }
+    `}</style>
+    {/* PDF document background */}
+    <rect x="6" y="4" width="28" height="36" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Folded corner */}
+    <path d="M28 4 L34 10 L28 10 Z" fill={accent} fillOpacity="0.25"/>
+    {/* Document content lines */}
+    <g className="pdfw-l1">
+      <rect x="10" y="16" width="16" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+      <rect x="10" y="20" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+    </g>
+    <g className="pdfw-l2">
+      <rect x="10" y="24" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.35"/>
+      <rect x="10" y="28" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    </g>
+    {/* Diagonal watermark stamp (text "WMK" rotated) */}
+    <g className="pdfw-stamp" style={{ opacity: 0 }}>
+      <rect x="8" y="20" width="24" height="8" rx="1.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25" strokeDasharray="2 1"/>
+      <text x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace" letterSpacing="1">WATERMARK</text>
+    </g>
+    {/* PDF label badge */}
+    <rect x="6" y="38" width="14" height="6" rx="3" fill={accent}/>
+    <text x="13" y="43" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* Stamp icon bottom right */}
+    <circle cx="38" cy="40" r="8" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <path d="M34 42 L38 38 L42 42" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="34" y="42" width="8" height="2" rx="1" fill={accent} fillOpacity="0.6"/>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

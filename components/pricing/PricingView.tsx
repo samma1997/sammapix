@@ -44,6 +44,7 @@ import {
   IconImageToBase64,
   IconCollageMaker,
   IconRemovePdfPages,
+  IconPdfWatermark,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -101,6 +102,7 @@ const toolGrid = [
   { Icon: IconImageToBase64,  name: "Image to Base64",  accent: "#6366F1" },
   { Icon: IconCollageMaker,   name: "Collage Maker",    accent: "#0EA5E9" },
   { Icon: IconRemovePdfPages, name: "Delete PDF Pages", accent: "#EF4444" },
+  { Icon: IconPdfWatermark,  name: "Watermark PDF",    accent: "#EF4444" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

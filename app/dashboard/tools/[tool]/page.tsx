@@ -47,6 +47,7 @@ import {
   IconImageToBase64,
   IconCollageMaker,
   IconRemovePdfPages,
+  IconPdfWatermark,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -101,6 +102,7 @@ const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToI
 const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase64Client"));
 const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMakerClient"));
 const RemovePdfPagesClient = dynamic(() => import("@/components/tools/RemovePdfPagesClient"));
+const PdfWatermarkClient = dynamic(() => import("@/components/tools/PdfWatermarkClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -156,6 +158,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "image-to-base64": ImageToBase64Client,
   "collage-maker": CollageMakerClient,
   "remove-pdf-pages": RemovePdfPagesClient,
+  "pdf-watermark":    PdfWatermarkClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -252,6 +255,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "image-to-base64":   { Icon: IconImageToBase64, accent: "#6366F1" },
   "collage-maker":     { Icon: IconCollageMaker,  accent: "#0EA5E9" },
   "remove-pdf-pages":  { Icon: IconRemovePdfPages, accent: "#EF4444" },
+  "pdf-watermark":     { Icon: IconPdfWatermark,   accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -807,6 +811,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Create and download", desc: "Click Create collage. A preview appears instantly. Download as JPG (smaller) or PNG (lossless) at 720, 1080, 1440 or 2048 px." },
     ],
     proTip: { text: "For Instagram carousel grids, use a 3×3 layout at 1080 px with 0 gap and cover mode for a seamless puzzle effect.", linkLabel: "Try Instagram Grid Splitter", linkHref: "/dashboard/tools/instagram-grid-splitter" },
+  },
+  "pdf-watermark": {
+    label: "Watermark PDF",
+    tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The file is read instantly in your browser — nothing is uploaded." },
+      { title: "Choose watermark type and settings", desc: "Select Text (CONFIDENTIAL, DRAFT, custom) or Image (PNG/JPG logo). Set color, opacity, rotation and position: Center, Tile or Bottom." },
+      { title: "Download the watermarked PDF", desc: "Click Add Watermark. The stamp is applied on every page and the file downloads immediately." },
+    ],
+    proTip: { text: "Need to add a password after watermarking? Protect PDF keeps your watermarked document secure.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
   },
   "remove-pdf-pages": {
     label: "Delete PDF Pages",

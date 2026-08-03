@@ -64,6 +64,7 @@ import {
   IconImageToBase64,
   IconCollageMaker,
   IconRemovePdfPages,
+  IconPdfWatermark,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -903,6 +904,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconRemovePdfPages,
     category: ["Optimize"],
     keywords: ["delete pdf pages", "remove pdf pages", "pdf page remover", "delete page pdf", "remove page from pdf", "pdf editor", "pdf page delete"],
+  },
+  {
+    name: "Watermark PDF",
+    slug: "pdf-watermark",
+    href: "/dashboard/tools/pdf-watermark",
+    tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfWatermark,
+    category: ["Optimize"],
+    keywords: ["watermark pdf", "add watermark to pdf", "pdf watermark", "stamp pdf", "confidential pdf", "draft watermark", "pdf logo watermark", "watermark document", "stamp confidential", "pdf stamp"],
   },
 ];
 

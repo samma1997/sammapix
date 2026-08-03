@@ -57,6 +57,7 @@ import {
   IconImageToBase64,
   IconCollageMaker,
   IconRemovePdfPages,
+  IconPdfWatermark,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -896,6 +897,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "No upload"],
     Icon: IconRemovePdfPages,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Watermark PDF",
+    href: "/tools/pdf-watermark",
+    tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile mode. 100% in your browser, no upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfWatermark,
     category: ["Optimize"],
     isNew: true,
   },

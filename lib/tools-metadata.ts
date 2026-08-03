@@ -663,6 +663,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "add-password-to-pdf-free",
     ],
   },
+  "pdf-watermark": {
+    id: "pdf-watermark",
+    name: "Watermark PDF",
+    shortDesc: "Add text or image watermarks to every PDF page in-browser — opacity, rotation, tile, no upload",
+    slug: "/tools/pdf-watermark",
+    category: "optimize",
+    relatedTools: ["pdf-page-numbers", "pdf-protect", "stampit"],
+    relatedBlogSlugs: [
+      "add-watermark-to-pdf-online",
+      "watermark-pdf-no-upload",
+    ],
+  },
   "rotate-image": {
     id: "rotate-image",
     name: "Rotate Image",
