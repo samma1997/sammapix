@@ -142,8 +142,11 @@ export default function PdfCompressClient() {
     setNoReduction(false);
 
     try {
-      // 1. Carica pdf.js per rasterizzare le pagine (stesso worker di PdfToImageClient)
-      const pdfjsLib = await import("pdfjs-dist");
+      // 1. Carica pdf.js per rasterizzare le pagine. USA IL BUILD LEGACY: il build
+      // moderno "pdfjs-dist" esplode sotto webpack dev con "Object.defineProperty
+      // called on non-object". Il legacy è transpilato per i bundler. Stessa versione,
+      // quindi il worker (5.5.207) resta compatibile.
+      const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const arrayBuffer = await sourceFile.arrayBuffer();
