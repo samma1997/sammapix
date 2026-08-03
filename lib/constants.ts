@@ -155,6 +155,8 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "rotate-image-online-no-upload",
+  "how-to-rotate-a-photo-free",
   "password-protect-pdf-online-no-upload",
   "add-password-to-pdf-free",
   "add-page-numbers-to-pdf-online",
