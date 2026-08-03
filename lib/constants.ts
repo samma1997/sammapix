@@ -290,6 +290,8 @@ export const BLOG_SLUGS = [
   "organize-pdf-pages-no-upload",
   "crop-pdf-online-free",
   "crop-pdf-margins-no-upload",
+  "flatten-pdf-online-free",
+  "flatten-pdf-form-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
