@@ -275,6 +275,8 @@ export const BLOG_SLUGS = [
   "how-to-batch-prepare-images-for-website",
   "photo-collage-maker-online",
   "image-grid-maker-free",
+  "delete-pages-from-pdf-online",
+  "remove-pdf-pages-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
