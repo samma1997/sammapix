@@ -46,6 +46,13 @@ import {
   IconAddText,
   IconImageToBase64,
   IconCollageMaker,
+  IconRemovePdfPages,
+  IconPdfWatermark,
+  IconPdfSign,
+  IconPdfOrganize,
+  IconCropPdf,
+  IconFlattenPdf,
+  IconTxtToPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -99,6 +106,13 @@ const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClie
 const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToImageClient"));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase64Client"));
 const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMakerClient"));
+const RemovePdfPagesClient = dynamic(() => import("@/components/tools/RemovePdfPagesClient"));
+const PdfWatermarkClient = dynamic(() => import("@/components/tools/PdfWatermarkClient"));
+const PdfSignClient = dynamic(() => import("@/components/tools/PdfSignClient"));
+const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeClient"));
+const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
+const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
+const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -153,6 +167,13 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "add-text-to-image": AddTextToImageClient,
   "image-to-base64": ImageToBase64Client,
   "collage-maker": CollageMakerClient,
+  "remove-pdf-pages": RemovePdfPagesClient,
+  "pdf-watermark":    PdfWatermarkClient,
+  "pdf-sign":         PdfSignClient,
+  "pdf-organize":     PdfOrganizeClient,
+  "crop-pdf":         CropPdfClient,
+  "flatten-pdf":      FlattenPdfClient,
+  "txt-to-pdf":       TxtToPdfClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -248,6 +269,13 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "add-text-to-image": { Icon: IconAddText,       accent: "#0EA5E9" },
   "image-to-base64":   { Icon: IconImageToBase64, accent: "#6366F1" },
   "collage-maker":     { Icon: IconCollageMaker,  accent: "#0EA5E9" },
+  "remove-pdf-pages":  { Icon: IconRemovePdfPages, accent: "#EF4444" },
+  "pdf-watermark":     { Icon: IconPdfWatermark,   accent: "#EF4444" },
+  "pdf-sign":          { Icon: IconPdfSign,        accent: "#EF4444" },
+  "pdf-organize":      { Icon: IconPdfOrganize,    accent: "#EF4444" },
+  "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
+  "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
+  "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -803,6 +831,76 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Create and download", desc: "Click Create collage. A preview appears instantly. Download as JPG (smaller) or PNG (lossless) at 720, 1080, 1440 or 2048 px." },
     ],
     proTip: { text: "For Instagram carousel grids, use a 3×3 layout at 1080 px with 0 gap and cover mode for a seamless puzzle effect.", linkLabel: "Try Instagram Grid Splitter", linkHref: "/dashboard/tools/instagram-grid-splitter" },
+  },
+  "pdf-watermark": {
+    label: "Watermark PDF",
+    tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The file is read instantly in your browser — nothing is uploaded." },
+      { title: "Choose watermark type and settings", desc: "Select Text (CONFIDENTIAL, DRAFT, custom) or Image (PNG/JPG logo). Set color, opacity, rotation and position: Center, Tile or Bottom." },
+      { title: "Download the watermarked PDF", desc: "Click Add Watermark. The stamp is applied on every page and the file downloads immediately." },
+    ],
+    proTip: { text: "Need to add a password after watermarking? Protect PDF keeps your watermarked document secure.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "pdf-sign": {
+    label: "Sign PDF",
+    tagline: "Add a visual signature to any PDF page in your browser. No upload, no account.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Page thumbnails render instantly in your browser — nothing is uploaded." },
+      { title: "Draw or upload your signature", desc: "Choose Draw to sign with mouse/touch on the canvas, or Upload to use a PNG/JPG of your handwritten signature. Select the target page and position." },
+      { title: "Download the signed PDF", desc: "Click Sign PDF. The signature is embedded as an image on your chosen page and the file downloads immediately. Visual signature only — not a cryptographic digital signature." },
+    ],
+    proTip: { text: "After signing, add a password to protect the document from edits.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "pdf-organize": {
+    label: "Organize PDF Pages",
+    tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. Rebuilt locally — no upload, no quality loss.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Thumbnails of every page are rendered instantly in your browser — nothing is uploaded." },
+      { title: "Rearrange the pages", desc: "Drag page thumbnails into the order you want. Or use the arrow buttons on each card to move a page up, down, to the top, or to the bottom." },
+      { title: "Save and download", desc: "Click Save reordered PDF. The rebuilt PDF downloads immediately with your custom page order and no quality loss." },
+    ],
+    proTip: { text: "Need to delete unwanted pages too? Use Delete PDF Pages after organizing.", linkLabel: "Delete PDF Pages", linkHref: "/dashboard/tools/remove-pdf-pages" },
+  },
+  "remove-pdf-pages": {
+    label: "Delete PDF Pages",
+    tagline: "Remove specific pages from a PDF in your browser. Click thumbnails or type a range. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Thumbnails of every page are rendered instantly in your browser — nothing is uploaded." },
+      { title: "Mark pages for deletion", desc: "Click any page thumbnail to mark it with a red overlay. Or type a range like \"2, 5-7\" in the quick-select box. Click again to unmark." },
+      { title: "Remove and download", desc: "Click Remove N pages. A new PDF with only the pages you kept downloads immediately. At least 1 page must remain." },
+    ],
+    proTip: { text: "After removing pages, compress the resulting PDF to reduce its file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "crop-pdf": {
+    label: "Crop PDF",
+    tagline: "Trim Top, Right, Bottom, Left margins from every PDF page in your browser. Live preview. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). A live preview of the first page renders instantly in your browser — nothing is uploaded." },
+      { title: "Set the margins", desc: "Use the sliders or type values for Top, Right, Bottom, and Left. Choose points (pt) or percentage (%). The red crop rectangle on the preview updates live." },
+      { title: "Download the cropped PDF", desc: "Click Crop PDF. The margins are removed from every page using PDF CropBox/MediaBox and the file downloads immediately. Text stays fully selectable." },
+    ],
+    proTip: { text: "After cropping, compress the PDF to reduce file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "txt-to-pdf": {
+    label: "TXT to PDF",
+    tagline: "Convert any .txt file or pasted text to a PDF in your browser. Word-wrap, A4/Letter, Courier or Helvetica. No upload.",
+    steps: [
+      { title: "Load your text", desc: "Drop a .txt file or switch to Paste mode and paste your text directly." },
+      { title: "Choose options", desc: "Pick A4 or Letter page size, Courier or Helvetica font, font size and margins." },
+      { title: "Download the PDF", desc: "Click Convert to PDF. Text is word-wrapped, paginated and downloads immediately." },
+    ],
+    proTip: { text: "Add page numbers to your converted PDF with PDF Page Numbers.", linkLabel: "PDF Page Numbers", linkHref: "/dashboard/tools/pdf-page-numbers" },
+  },
+  "flatten-pdf": {
+    label: "Flatten PDF",
+    tagline: "Merge form fields into the page — filled values become permanent, non-editable. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The tool reads the file in your browser and instantly detects whether it has interactive form fields — nothing is uploaded." },
+      { title: "Click Flatten PDF", desc: "pdf-lib merges all text boxes, checkboxes, radio buttons and dropdowns into the static page content. If no fields are found, it honestly tells you and still produces a clean re-saved copy." },
+      { title: "Download the flattened PDF", desc: "Click Download. The filled values are now a permanent part of every page and the document looks identical on every PDF reader and printer." },
+    ],
+    proTip: { text: "After flattening, add a password to prevent any further editing of the document.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
   },
 };
 

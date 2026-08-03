@@ -70,6 +70,20 @@
     "url": "/blog/add-password-to-pdf-free"
   },
   {
+    "slug": "add-signature-to-pdf-no-upload",
+    "title": "How to Add a Signature to a PDF Without Uploading It [2026]",
+    "description": "Insert a visual signature on a PDF entirely in your browser — draw by hand on a canvas or upload a signature image, positioned precisely on any page v",
+    "keywords": [
+      "add signature to pdf",
+      "draw signature on pdf",
+      "insert signature in pdf",
+      "add signature to pdf no upload",
+      "add signature to pdf without uploading"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/add-signature-to-pdf-no-upload"
+  },
+  {
     "slug": "add-text-to-image-online",
     "title": "Add Text to an Image Online Free [2026]",
     "description": "Add text to any image online — entirely in your browser via Canvas. Choose font, size, color, outline, and position. Live preview. No upload, no serve",
@@ -82,6 +96,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/add-text-to-image-online"
+  },
+  {
+    "slug": "add-watermark-to-pdf-online",
+    "title": "Add a Watermark to a PDF Online Free [2026]",
+    "description": "Stamp any PDF with a text watermark (CONFIDENTIAL, DRAFT, your name) or a logo image — entirely in your browser via pdf-lib. No upload, no server, no ",
+    "keywords": [
+      "add watermark to pdf online",
+      "pdf watermark online",
+      "stamp pdf confidential",
+      "stamp pdf draft",
+      "watermark pdf free"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/add-watermark-to-pdf-online"
   },
   {
     "slug": "base64-to-image-converter",
@@ -112,6 +140,20 @@
     "url": "/blog/compress-pdf-online-no-upload"
   },
   {
+    "slug": "convert-text-to-pdf-no-upload",
+    "title": "How to Convert a Text File to PDF Without Uploading [2026]",
+    "description": "Convert any .txt file or pasted text to a shareable PDF in your browser — no upload, no server, no signup. Monospace Courier font preserves log and co",
+    "keywords": [
+      "notepad to pdf",
+      "txt to pdf converter",
+      "text to pdf no upload",
+      "convert text file to pdf",
+      "text to pdf without uploading"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/convert-text-to-pdf-no-upload"
+  },
+  {
     "slug": "crop-image-into-circle-online",
     "title": "Crop an Image into a Circle Online Free [2026]",
     "description": "Crop any image into a perfect circle online — entirely in your browser via Canvas. No upload, no server, no signup. Output is a transparent PNG. Batch",
@@ -124,6 +166,76 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/crop-image-into-circle-online"
+  },
+  {
+    "slug": "crop-pdf-margins-no-upload",
+    "title": "How to Remove White Margins from a PDF (No Upload) [2026]",
+    "description": "Remove white margins from scanned PDFs or optimize for e-reader reading — entirely in your browser via pdf-lib setCropBox. Per-side crop, live pdf.js ",
+    "keywords": [
+      "remove white margins pdf",
+      "crop pdf margins",
+      "crop scanned pdf",
+      "trim pdf white space",
+      "remove margins from pdf"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/crop-pdf-margins-no-upload"
+  },
+  {
+    "slug": "crop-pdf-online-free",
+    "title": "Crop a PDF Online Free (Trim Margins) [2026]",
+    "description": "Crop PDF margins per side — top, right, bottom, left — entirely in your browser via pdf-lib setCropBox. Preview with pdf.js. No upload, no signup, no ",
+    "keywords": [
+      "crop pdf online",
+      "crop pdf",
+      "trim pdf margins",
+      "crop pdf free",
+      "crop pdf online free"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/crop-pdf-online-free"
+  },
+  {
+    "slug": "delete-pages-from-pdf-online",
+    "title": "Delete Pages from a PDF Online Free [2026]",
+    "description": "Remove one page or a range of pages from any PDF — entirely in your browser via pdf.js + pdf-lib. Thumbnail preview, range selection (e.g. 2, 5-7), no",
+    "keywords": [
+      "delete pages from pdf",
+      "remove pdf pages",
+      "delete pdf page online",
+      "remove pages from pdf online free",
+      "delete pages from pdf online"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/delete-pages-from-pdf-online"
+  },
+  {
+    "slug": "flatten-pdf-form-no-upload",
+    "title": "How to Flatten a PDF Form (No Upload) [2026]",
+    "description": "Flatten a fillable PDF form entirely in your browser — no upload, no server, no signup. pdf-lib form.flatten() locks all form fields permanently. Fiel",
+    "keywords": [
+      "flatten pdf form",
+      "flatten fillable pdf",
+      "lock pdf form fields",
+      "flatten pdf form no upload",
+      "make pdf form non-editable"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/flatten-pdf-form-no-upload"
+  },
+  {
+    "slug": "flatten-pdf-online-free",
+    "title": "Flatten a PDF Online Free (No Upload) [2026]",
+    "description": "Make any PDF non-editable by flattening it in your browser — no upload, no server, no signup. pdf-lib form.flatten() converts form fields into permane",
+    "keywords": [
+      "flatten pdf online",
+      "flatten pdf",
+      "make pdf non-editable",
+      "flatten pdf free",
+      "flatten pdf form fields"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/flatten-pdf-online-free"
   },
   {
     "slug": "flip-image-online-no-upload",
@@ -224,6 +336,20 @@
     "url": "/blog/number-pdf-pages-no-upload"
   },
   {
+    "slug": "organize-pdf-pages-no-upload",
+    "title": "How to Organize PDF Pages Without Uploading [2026]",
+    "description": "Organize, move, and rearrange PDF pages entirely in your browser — drag and drop visual thumbnails, no file upload, no server. Powered by pdf.js and p",
+    "keywords": [
+      "organize pdf pages",
+      "move pdf pages",
+      "change pdf page order",
+      "organize pdf pages no upload",
+      "rearrange pdf pages without uploading"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/organize-pdf-pages-no-upload"
+  },
+  {
     "slug": "password-protect-pdf-online-no-upload",
     "title": "Password Protect a PDF Online Without Uploading It [2026]",
     "description": "Add an open password to any PDF in your browser — no upload, no server, no signup. Encryption runs 100% client-side via @cantoo/pdf-lib. Honest about ",
@@ -266,6 +392,20 @@
     "url": "/blog/reduce-pdf-file-size-for-email"
   },
   {
+    "slug": "remove-pdf-pages-no-upload",
+    "title": "Remove Pages from a PDF Without Uploading It [2026]",
+    "description": "Delete pages from contracts, bank statements, and confidential PDFs entirely in your browser. No upload, no server, no signup. Remove blank pages, dup",
+    "keywords": [
+      "remove pdf pages no upload",
+      "delete pdf pages private",
+      "remove blank page from pdf",
+      "remove pages from pdf without uploading",
+      "delete pdf pages browser"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/remove-pdf-pages-no-upload"
+  },
+  {
     "slug": "remove-pdf-password-restrictions",
     "title": "How to Remove PDF Restrictions (Printing, Copying, Editing) [2026]",
     "description": "Enable printing, copying, and editing on a restricted PDF — free, in your browser, no upload. Explains owner-password vs user-password. Cannot crack o",
@@ -278,6 +418,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/remove-pdf-password-restrictions"
+  },
+  {
+    "slug": "reorder-pdf-pages-online",
+    "title": "Reorder PDF Pages Online Free [2026]",
+    "description": "Rearrange, sort, and reorder PDF pages entirely in your browser — drag and drop thumbnail grid powered by pdf.js and pdf-lib. Move pages up, down, to ",
+    "keywords": [
+      "reorder pdf pages",
+      "rearrange pdf pages",
+      "sort pdf pages",
+      "reorder pdf pages online",
+      "rearrange pdf pages online free"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/reorder-pdf-pages-online"
   },
   {
     "slug": "rotate-image-online-no-upload",
@@ -322,6 +476,34 @@
     "url": "/blog/round-image-corners-free"
   },
   {
+    "slug": "sign-pdf-online-free",
+    "title": "Sign a PDF Online Free (No Upload) [2026]",
+    "description": "Add a visual signature to any PDF entirely in your browser — draw it by hand on a canvas or upload a signature image. Powered by pdf-lib. No upload, n",
+    "keywords": [
+      "sign pdf online",
+      "sign pdf free",
+      "esign pdf",
+      "sign pdf online free",
+      "add signature to pdf online"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/sign-pdf-online-free"
+  },
+  {
+    "slug": "txt-to-pdf-online-free",
+    "title": "Convert TXT to PDF Online Free (No Upload) [2026]",
+    "description": "Convert a .txt file or pasted text to a PDF in your browser. Runs via pdf-lib locally — the file never leaves your device. Choose font, page size, and",
+    "keywords": [
+      "txt to pdf",
+      "convert text to pdf",
+      "text file to pdf",
+      "txt to pdf online free",
+      "txt to pdf converter"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/txt-to-pdf-online-free"
+  },
+  {
     "slug": "unlock-pdf-online-no-upload",
     "title": "Unlock a PDF Online Without Uploading It [2026]",
     "description": "Remove PDF restrictions (printing, copying, editing) in your browser with no file upload. Powered by pdf-lib. Honest about what it can and cannot unlo",
@@ -334,6 +516,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/unlock-pdf-online-no-upload"
+  },
+  {
+    "slug": "watermark-pdf-no-upload",
+    "title": "Watermark a PDF Without Uploading It [2026]",
+    "description": "Add a CONFIDENTIAL, DRAFT, or logo watermark to a PDF entirely in your browser via pdf-lib. No file upload, no server, no signup. Diagonal tile, opaci",
+    "keywords": [
+      "watermark pdf no upload",
+      "add logo to pdf",
+      "draft stamp pdf",
+      "watermark pdf without uploading",
+      "confidential watermark pdf"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/watermark-pdf-no-upload"
   },
   {
     "slug": "passport-photo-requirements-2026",

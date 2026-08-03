@@ -59,6 +59,13 @@ import {
   IconAddText,
   IconImageToBase64,
   IconCollageMaker,
+  IconRemovePdfPages,
+  IconPdfWatermark,
+  IconPdfSign,
+  IconPdfOrganize,
+  IconCropPdf,
+  IconFlattenPdf,
+  IconTxtToPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -361,6 +368,13 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "BlogDrop", href: "/tools/blogdrop", tagline: "Blog-ready images in one drop. Compress, resize, WebP, SEO names.", accent: "#8B5CF6", badge: "Free", Icon: IconWebLift, category: "Optimize", isCombo: true },
   { name: "Image to Base64", href: "/tools/image-to-base64", tagline: "Encode any image to a Base64 Data URI. Copy as CSS, HTML or plain string. No upload.", accent: "#6366F1", badge: "Free", Icon: IconImageToBase64, category: "Optimize", isNew: true },
   { name: "Photo Collage Maker", href: "/tools/collage-maker", tagline: "Combine 2-9 photos into a grid collage. 8 layouts, custom gap and color. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconCollageMaker, category: "Creative", isNew: true },
+  { name: "Delete PDF Pages", href: "/tools/remove-pdf-pages", tagline: "Remove pages from a PDF by clicking thumbnails. Range input supported. No upload.", accent: "#EF4444", badge: "Free", Icon: IconRemovePdfPages, category: "Optimize", isNew: true },
+  { name: "Watermark PDF", href: "/tools/pdf-watermark", tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfWatermark, category: "Optimize", isNew: true },
+  { name: "Sign PDF", href: "/tools/pdf-sign", tagline: "Draw or upload a signature and embed it on any PDF page. No upload, no account.", accent: "#EF4444", badge: "Free", Icon: IconPdfSign, category: "Optimize", isNew: false },
+  { name: "Organize PDF Pages", href: "/tools/pdf-organize", tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. No upload, no quality loss.", accent: "#EF4444", badge: "Free", Icon: IconPdfOrganize, category: "Optimize", isNew: true },
+  { name: "Crop PDF", href: "/tools/crop-pdf", tagline: "Trim Top/Right/Bottom/Left margins from every PDF page. Live preview. Points or %. No upload.", accent: "#EF4444", badge: "Free", Icon: IconCropPdf, category: "Optimize", isNew: true },
+  { name: "Flatten PDF", href: "/tools/flatten-pdf", tagline: "Merge form fields into the page — filled values become permanent and non-editable. No upload.", accent: "#EF4444", badge: "Free", Icon: IconFlattenPdf, category: "Optimize", isNew: true },
+  { name: "TXT to PDF", href: "/tools/txt-to-pdf", tagline: "Convert .txt files or pasted text to PDF. Word-wrap, A4/Letter, Courier or Helvetica. No upload.", accent: "#EF4444", badge: "Free", Icon: IconTxtToPdf, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

@@ -114,6 +114,13 @@ export const TOOL_SLUGS = [
   "add-text-to-image",
   "image-to-base64",
   "collage-maker",
+  "remove-pdf-pages",
+  "pdf-watermark",
+  "pdf-sign",
+  "flatten-pdf",
+  "pdf-organize",
+  "crop-pdf",
+  "txt-to-pdf",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -274,6 +281,20 @@ export const BLOG_SLUGS = [
   "how-to-batch-prepare-images-for-website",
   "photo-collage-maker-online",
   "image-grid-maker-free",
+  "delete-pages-from-pdf-online",
+  "remove-pdf-pages-no-upload",
+  "add-watermark-to-pdf-online",
+  "watermark-pdf-no-upload",
+  "sign-pdf-online-free",
+  "add-signature-to-pdf-no-upload",
+  "reorder-pdf-pages-online",
+  "organize-pdf-pages-no-upload",
+  "crop-pdf-online-free",
+  "crop-pdf-margins-no-upload",
+  "flatten-pdf-online-free",
+  "flatten-pdf-form-no-upload",
+  "txt-to-pdf-online-free",
+  "convert-text-to-pdf-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

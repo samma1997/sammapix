@@ -1948,6 +1948,270 @@ export const IconCollageMaker: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconRemovePdfPages: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes rpdf-slide {
+        0%, 20%  { transform: translateY(0px); opacity: 1; }
+        55%      { transform: translateY(10px); opacity: 0; }
+        56%      { transform: translateY(-8px); opacity: 0; }
+        80%, 100%{ transform: translateY(0px); opacity: 1; }
+      }
+      @keyframes rpdf-x {
+        0%, 30%  { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+        55%, 75% { opacity: 1; transform: scale(1) rotate(0deg); }
+        90%, 100%{ opacity: 0; transform: scale(0.5) rotate(15deg); }
+      }
+      @keyframes rpdf-check {
+        0%, 70%  { opacity: 0; transform: scale(0.6); }
+        85%, 95% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      .rpdf-page { transform-origin: 15px 26px; animation: rpdf-slide 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .rpdf-x    { transform-origin: 36px 18px; animation: rpdf-x 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .rpdf-chk  { transform-origin: 15px 40px; animation: rpdf-check 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document body */}
+    <rect x="4" y="4" width="24" height="32" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Page lines */}
+    <rect x="8" y="10" width="8" height="2" rx="1" fill={accent} fillOpacity="0.35"/>
+    <rect x="8" y="14" width="14" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    <rect x="8" y="18" width="11" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    {/* Sliding page being deleted */}
+    <g className="rpdf-page">
+      <rect x="6" y="22" width="18" height="10" rx="1.5" fill={accent} fillOpacity="0.20" stroke={accent} strokeWidth="1.25"/>
+      <rect x="8" y="25" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="28" width="7" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    </g>
+    {/* Red X badge — shown while deleting */}
+    <g className="rpdf-x" style={{ opacity: 0 }}>
+      <circle cx="36" cy="18" r="9" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+      <path d="M32 14 L40 22 M40 14 L32 22" stroke={accent} strokeWidth="2.2" strokeLinecap="round"/>
+    </g>
+    {/* Green check — pages remaining */}
+    <g className="rpdf-chk" style={{ opacity: 0 }}>
+      <circle cx="36" cy="38" r="8" fill="#16A34A" fillOpacity="0.15" stroke="#16A34A" strokeWidth="1.5"/>
+      <path d="M32 38 L35 41 L40 35" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PDF label */}
+    <text x="16" y="41" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+  </svg>
+);
+
+// ── PDF Watermark icon (PDF page with diagonal stamp that fades in) ──────────
+export const IconPdfWatermark: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfw-stamp {
+        0%, 20%  { opacity: 0; transform: scale(1.2) rotate(-40deg); }
+        45%, 80% { opacity: 1; transform: scale(1) rotate(-40deg); }
+        95%, 100%{ opacity: 0; transform: scale(0.9) rotate(-40deg); }
+      }
+      @keyframes pdfw-line1 {
+        0%, 10%  { opacity: 0.2; }
+        50%, 90% { opacity: 0.6; }
+        100%     { opacity: 0.2; }
+      }
+      @keyframes pdfw-line2 {
+        0%, 20%  { opacity: 0.2; }
+        60%, 90% { opacity: 0.5; }
+        100%     { opacity: 0.2; }
+      }
+      .pdfw-stamp { transform-origin: 24px 24px; animation: pdfw-stamp 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdfw-l1    { animation: pdfw-line1 2.6s ease-in-out infinite; }
+      .pdfw-l2    { animation: pdfw-line2 2.6s ease-in-out 0.15s infinite; }
+    `}</style>
+    {/* PDF document background */}
+    <rect x="6" y="4" width="28" height="36" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Folded corner */}
+    <path d="M28 4 L34 10 L28 10 Z" fill={accent} fillOpacity="0.25"/>
+    {/* Document content lines */}
+    <g className="pdfw-l1">
+      <rect x="10" y="16" width="16" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+      <rect x="10" y="20" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+    </g>
+    <g className="pdfw-l2">
+      <rect x="10" y="24" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.35"/>
+      <rect x="10" y="28" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    </g>
+    {/* Diagonal watermark stamp (text "WMK" rotated) */}
+    <g className="pdfw-stamp" style={{ opacity: 0 }}>
+      <rect x="8" y="20" width="24" height="8" rx="1.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25" strokeDasharray="2 1"/>
+      <text x="20" y="26" fontSize="6" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace" letterSpacing="1">WATERMARK</text>
+    </g>
+    {/* PDF label badge */}
+    <rect x="6" y="38" width="14" height="6" rx="3" fill={accent}/>
+    <text x="13" y="43" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* Stamp icon bottom right */}
+    <circle cx="38" cy="40" r="8" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <path d="M34 42 L38 38 L42 42" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="34" y="42" width="8" height="2" rx="1" fill={accent} fillOpacity="0.6"/>
+  </svg>
+);
+
+export const IconPdfSign: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfsign-pen {
+        0%, 15%  { transform: translate(0px, 0px); opacity: 0.3; }
+        40%      { transform: translate(14px, -4px); opacity: 1; }
+        65%      { transform: translate(22px, 2px); opacity: 1; }
+        80%, 100%{ transform: translate(26px, 6px); opacity: 0.3; }
+      }
+      @keyframes pdfsign-line {
+        0%, 15%  { stroke-dashoffset: 32; opacity: 0; }
+        40%      { stroke-dashoffset: 16; opacity: 0.8; }
+        70%      { stroke-dashoffset: 0; opacity: 1; }
+        90%, 100%{ stroke-dashoffset: 0; opacity: 0.4; }
+      }
+      @keyframes pdfsign-dot {
+        0%, 60%  { r: 0; opacity: 0; }
+        75%      { r: 2; opacity: 1; }
+        90%, 100%{ r: 1.5; opacity: 0.6; }
+      }
+      .pdfsign-pen  { transform-origin: 10px 38px; animation: pdfsign-pen 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdfsign-line { stroke-dasharray: 32; animation: pdfsign-line 2.4s ease-in-out infinite; }
+      .pdfsign-dot  { animation: pdfsign-dot 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* Document */}
+    <rect x="4" y="4" width="28" height="36" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Folded corner */}
+    <path d="M26 4 L32 10 L26 10 Z" fill={accent} fillOpacity="0.25"/>
+    {/* Document lines */}
+    <rect x="8" y="14" width="16" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <rect x="8" y="18" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <rect x="8" y="22" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.25"/>
+    {/* Signature baseline */}
+    <line x1="8" y1="36" x2="28" y2="36" stroke={accent} strokeWidth="0.75" strokeOpacity="0.3" strokeDasharray="1.5 1.5"/>
+    {/* Animated signature stroke */}
+    <path
+      className="pdfsign-line"
+      d="M8 34 Q12 28 16 32 Q20 36 24 30 Q27 26 30 32"
+      stroke={accent}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+    />
+    {/* Animated dot (pen tip) */}
+    <circle className="pdfsign-dot" cx="30" cy="32" r="0" fill={accent}/>
+    {/* Pen icon (animated) */}
+    <g className="pdfsign-pen">
+      <rect x="6" y="34" width="7" height="3" rx="0.75" fill={accent} fillOpacity="0.7" transform="rotate(-35 9 35.5)"/>
+      <polygon points="6,37 7.5,40.5 9,37" fill={accent} fillOpacity="0.9" transform="rotate(-35 7.5 38.5)"/>
+    </g>
+    {/* PDF badge */}
+    <rect x="34" y="36" width="12" height="8" rx="4" fill={accent}/>
+    <text x="40" y="42" fontSize="4" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">PDF</text>
+  </svg>
+);
+
+// ─── IconPdfOrganize — pages that swap positions ──────────────────────────────
+
+export const IconPdfOrganize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdforg-swap {
+        0%, 15%  { transform: translateY(0px);   opacity: 1; }
+        40%      { transform: translateY(-10px);  opacity: 1; }
+        65%      { transform: translateY(-10px);  opacity: 0.9; }
+        90%, 100%{ transform: translateY(0px);   opacity: 1; }
+      }
+      @keyframes pdforg-swap2 {
+        0%, 15%  { transform: translateY(0px);   opacity: 1; }
+        40%      { transform: translateY(10px);   opacity: 1; }
+        65%      { transform: translateY(10px);   opacity: 0.9; }
+        90%, 100%{ transform: translateY(0px);   opacity: 1; }
+      }
+      @keyframes pdforg-arrow-up {
+        0%, 25%  { opacity: 0; transform: translateY(4px); }
+        50%, 70% { opacity: 1; transform: translateY(0px); }
+        90%, 100%{ opacity: 0; transform: translateY(-4px); }
+      }
+      @keyframes pdforg-arrow-dn {
+        0%, 25%  { opacity: 0; transform: translateY(-4px); }
+        50%, 70% { opacity: 1; transform: translateY(0px); }
+        90%, 100%{ opacity: 0; transform: translateY(4px); }
+      }
+      .pdforg-p1   { transform-origin: 10px 14px; animation: pdforg-swap  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdforg-p2   { transform-origin: 10px 30px; animation: pdforg-swap2 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdforg-arru { transform-origin: 40px 18px; animation: pdforg-arrow-up 2.6s ease-in-out infinite; }
+      .pdforg-arrd { transform-origin: 40px 30px; animation: pdforg-arrow-dn 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Page 1 (top) — moves up */}
+    <g className="pdforg-p1">
+      <rect x="4" y="6" width="26" height="16" rx="2.5" fill={accent} fillOpacity="0.14" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="10" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.5"/>
+      <rect x="8" y="13" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.35"/>
+      <rect x="8" y="16" width="8" height="1.5" rx="0.75" fill={accent} fillOpacity="0.25"/>
+      {/* Badge "1" */}
+      <rect x="24" y="7" width="4" height="4" rx="1" fill={accent}/>
+      <text x="26" y="10.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">1</text>
+    </g>
+    {/* Page 2 (bottom) — moves down */}
+    <g className="pdforg-p2">
+      <rect x="4" y="26" width="26" height="16" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+      <rect x="8" y="30" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="33" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+      <rect x="8" y="36" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.2"/>
+      {/* Badge "2" */}
+      <rect x="24" y="27" width="4" height="4" rx="1" fill={accent} fillOpacity="0.5"/>
+      <text x="26" y="30.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">2</text>
+    </g>
+    {/* Animated arrows on the right */}
+    <g className="pdforg-arru">
+      <path d="M40 22 L40 14 M37 17 L40 14 L43 17" stroke={accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    <g className="pdforg-arrd">
+      <path d="M40 26 L40 34 M37 31 L40 34 L43 31" stroke={accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+  </svg>
+);
+
+// ─── IconCropPdf — PDF page with crop corners that close in ──────────────────
+
+export const IconCropPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfcrop-tl { 0%,15%{transform:translate(0,0)} 50%{transform:translate(4px,4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-tr { 0%,15%{transform:translate(0,0)} 50%{transform:translate(-4px,4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-bl { 0%,15%{transform:translate(0,0)} 50%{transform:translate(4px,-4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-br { 0%,15%{transform:translate(0,0)} 50%{transform:translate(-4px,-4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-rect { 0%,15%{opacity:0.2;stroke-dashoffset:80} 50%{opacity:1;stroke-dashoffset:0} 85%,100%{opacity:0.2;stroke-dashoffset:80} }
+      .pdfcrop-tl-h{animation:pdfcrop-tl 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:9px 10px}
+      .pdfcrop-tr-h{animation:pdfcrop-tr 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:32px 10px}
+      .pdfcrop-bl-h{animation:pdfcrop-bl 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:9px 33px}
+      .pdfcrop-br-h{animation:pdfcrop-br 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:32px 33px}
+      .pdfcrop-rect-h{stroke-dasharray:80;animation:pdfcrop-rect 2.4s ease-in-out infinite}
+    `}</style>
+    {/* PDF document base */}
+    <rect x="4" y="4" width="28" height="36" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    <path d="M24 4 L32 12 L24 12 Z" fill={accent} fillOpacity="0.22"/>
+    <rect x="8" y="16" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.25"/>
+    <rect x="8" y="20" width="16" height="1.5" rx="0.75" fill={accent} fillOpacity="0.18"/>
+    <rect x="8" y="24" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.15"/>
+    {/* Animated crop rect */}
+    <rect className="pdfcrop-rect-h" x="8" y="14" width="24" height="22" rx="1" stroke={accent} strokeWidth="1.5" fill="none"/>
+    {/* Animated corner handles */}
+    <g className="pdfcrop-tl-h">
+      <rect x="6" y="12" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="6" y="12" width="1.5" height="6" rx="0.5" fill={accent}/>
+    </g>
+    <g className="pdfcrop-tr-h">
+      <rect x="29" y="12" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="33.5" y="12" width="1.5" height="6" rx="0.5" fill={accent}/>
+    </g>
+    <g className="pdfcrop-bl-h">
+      <rect x="6" y="34.5" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="6" y="31" width="1.5" height="5.5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="pdfcrop-br-h">
+      <rect x="29" y="34.5" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="33.5" y="31" width="1.5" height="5.5" rx="0.5" fill={accent}/>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
@@ -1983,6 +2247,99 @@ function ToolBadge({ label }: { label: string }) {
     </span>
   );
 }
+
+// ─── IconFlattenPdf — stacked layers collapsing into one flat layer ───────────
+
+export const IconFlattenPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes flatpdf-top {
+        0%, 15%  { transform: translateY(-8px); opacity: 0.35; }
+        55%, 80% { transform: translateY(0px);  opacity: 1; }
+        100%     { transform: translateY(-8px); opacity: 0.35; }
+      }
+      @keyframes flatpdf-mid {
+        0%, 25%  { transform: translateY(-4px); opacity: 0.55; }
+        55%, 80% { transform: translateY(0px);  opacity: 1; }
+        100%     { transform: translateY(-4px); opacity: 0.55; }
+      }
+      @keyframes flatpdf-lock {
+        0%, 55% { opacity: 0; transform: scale(0.6); }
+        72%, 90%{ opacity: 1; transform: scale(1); }
+        100%    { opacity: 0; transform: scale(0.6); }
+      }
+      .flatpdf-top  { transform-origin: 24px 18px; animation: flatpdf-top  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .flatpdf-mid  { transform-origin: 24px 22px; animation: flatpdf-mid  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .flatpdf-lock { transform-origin: 36px 36px; animation: flatpdf-lock 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Base layer (static, most opaque) */}
+    <rect x="8" y="32" width="32" height="5" rx="1.5" fill={accent} fillOpacity="0.9"/>
+    {/* Middle layer */}
+    <g className="flatpdf-mid">
+      <rect x="8" y="24" width="32" height="5" rx="1.5" fill={accent} fillOpacity="0.55" stroke={accent} strokeWidth="0.75"/>
+    </g>
+    {/* Top layer */}
+    <g className="flatpdf-top">
+      <rect x="8" y="16" width="32" height="5" rx="1.5" fill={accent} fillOpacity="0.28" stroke={accent} strokeWidth="0.75"/>
+    </g>
+    {/* Lock badge */}
+    <g className="flatpdf-lock" style={{ opacity: 0 }}>
+      <rect x="28" y="28" width="16" height="12" rx="3" fill={accent}/>
+      <text x="36" y="37" fontSize="5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">FLAT</text>
+    </g>
+  </svg>
+);
+
+// ─── IconTxtToPdf — .txt file with text lines that morph into a PDF doc ────────
+
+export const IconTxtToPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes txtp-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes txtp-line1 {
+        0%, 100% { transform: scaleX(1);    opacity: 0.55; }
+        50%      { transform: scaleX(0.75); opacity: 1; }
+      }
+      @keyframes txtp-line2 {
+        0%, 100% { transform: scaleX(0.8);  opacity: 0.45; }
+        50%      { transform: scaleX(1);    opacity: 0.9; }
+      }
+      @keyframes txtp-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .txtp-arrow { animation: txtp-arrow 2.4s ease-in-out infinite; }
+      .txtp-l1 { transform-origin: 4px 14px; animation: txtp-line1 2.4s ease-in-out infinite; }
+      .txtp-l2 { transform-origin: 4px 18px; animation: txtp-line2 2.4s ease-in-out 0.3s infinite; }
+      .txtp-l3 { transform-origin: 4px 22px; animation: txtp-line1 2.4s ease-in-out 0.6s infinite; }
+      .txtp-badge { transform-origin: 37px 38px; animation: txtp-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* TXT doc left — with animated text lines */}
+    <rect x="2" y="6" width="19" height="24" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <text x="11.5" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">TXT</text>
+    <g className="txtp-l1"><line x1="5" y1="17" x2="18" y2="17" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/></g>
+    <g className="txtp-l2"><line x1="5" y1="20.5" x2="16" y2="20.5" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/></g>
+    <g className="txtp-l3"><line x1="5" y1="24" x2="18" y2="24" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/></g>
+    {/* Arrow */}
+    <g className="txtp-arrow">
+      <path d="M23 18 L27 18 M25 16 L27 18 L25 20" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PDF doc right */}
+    <rect x="28" y="6" width="18" height="24" rx="2.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <text x="37" y="21" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* "PDF" badge pop */}
+    <g className="txtp-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">done</text>
+    </g>
+  </svg>
+);
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 

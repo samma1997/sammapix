@@ -177,6 +177,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/add-text-to-image",
     "/tools/image-to-base64",
     "/tools/collage-maker",
+    "/tools/remove-pdf-pages",
+    "/tools/pdf-watermark",
+    "/tools/pdf-sign",
+    "/tools/pdf-organize",
+    "/tools/crop-pdf",
+    "/tools/flatten-pdf",
+    "/tools/txt-to-pdf",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
