@@ -278,6 +278,8 @@ export const BLOG_SLUGS = [
   "image-grid-maker-free",
   "delete-pages-from-pdf-online",
   "remove-pdf-pages-no-upload",
+  "add-watermark-to-pdf-online",
+  "watermark-pdf-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
