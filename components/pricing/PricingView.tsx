@@ -49,6 +49,7 @@ import {
   IconPdfOrganize,
   IconCropPdf,
   IconFlattenPdf,
+  IconTxtToPdf,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -111,6 +112,7 @@ const toolGrid = [
   { Icon: IconPdfOrganize,   name: "Organize PDF",     accent: "#EF4444" },
   { Icon: IconCropPdf,       name: "Crop PDF",         accent: "#EF4444" },
   { Icon: IconFlattenPdf,    name: "Flatten PDF",      accent: "#EF4444" },
+  { Icon: IconTxtToPdf,      name: "TXT to PDF",       accent: "#EF4444" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

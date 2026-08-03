@@ -120,6 +120,7 @@ export const TOOL_SLUGS = [
   "flatten-pdf",
   "pdf-organize",
   "crop-pdf",
+  "txt-to-pdf",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

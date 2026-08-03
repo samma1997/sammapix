@@ -2290,6 +2290,57 @@ export const IconFlattenPdf: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconTxtToPdf — .txt file with text lines that morph into a PDF doc ────────
+
+export const IconTxtToPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes txtp-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes txtp-line1 {
+        0%, 100% { transform: scaleX(1);    opacity: 0.55; }
+        50%      { transform: scaleX(0.75); opacity: 1; }
+      }
+      @keyframes txtp-line2 {
+        0%, 100% { transform: scaleX(0.8);  opacity: 0.45; }
+        50%      { transform: scaleX(1);    opacity: 0.9; }
+      }
+      @keyframes txtp-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .txtp-arrow { animation: txtp-arrow 2.4s ease-in-out infinite; }
+      .txtp-l1 { transform-origin: 4px 14px; animation: txtp-line1 2.4s ease-in-out infinite; }
+      .txtp-l2 { transform-origin: 4px 18px; animation: txtp-line2 2.4s ease-in-out 0.3s infinite; }
+      .txtp-l3 { transform-origin: 4px 22px; animation: txtp-line1 2.4s ease-in-out 0.6s infinite; }
+      .txtp-badge { transform-origin: 37px 38px; animation: txtp-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* TXT doc left — with animated text lines */}
+    <rect x="2" y="6" width="19" height="24" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <text x="11.5" y="13" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">TXT</text>
+    <g className="txtp-l1"><line x1="5" y1="17" x2="18" y2="17" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/></g>
+    <g className="txtp-l2"><line x1="5" y1="20.5" x2="16" y2="20.5" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/></g>
+    <g className="txtp-l3"><line x1="5" y1="24" x2="18" y2="24" stroke={accent} strokeWidth="1.2" strokeLinecap="round"/></g>
+    {/* Arrow */}
+    <g className="txtp-arrow">
+      <path d="M23 18 L27 18 M25 16 L27 18 L25 20" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PDF doc right */}
+    <rect x="28" y="6" width="18" height="24" rx="2.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.5"/>
+    <text x="37" y="21" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* "PDF" badge pop */}
+    <g className="txtp-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">done</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

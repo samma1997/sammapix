@@ -801,6 +801,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["croproatio", "pdf-compress", "pdf-organize"],
     relatedBlogSlugs: ["crop-pdf-online-free", "crop-pdf-margins-no-upload"],
   },
+  "txt-to-pdf": {
+    id: "txt-to-pdf",
+    name: "TXT to PDF",
+    shortDesc: "Convert .txt files to PDF in-browser — word-wrap, A4/Letter, Courier/Helvetica, no upload",
+    slug: "/tools/txt-to-pdf",
+    category: "optimize",
+    relatedTools: ["jpg-to-pdf", "pdf-page-numbers", "pdf-compress"],
+    relatedBlogSlugs: ["txt-to-pdf-online-free", "convert-text-to-pdf-no-upload"],
+  },
   "flatten-pdf": {
     id: "flatten-pdf",
     name: "Flatten PDF",

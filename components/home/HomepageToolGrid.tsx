@@ -65,6 +65,7 @@ import {
   IconPdfOrganize,
   IconCropPdf,
   IconFlattenPdf,
+  IconTxtToPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -373,6 +374,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Organize PDF Pages", href: "/tools/pdf-organize", tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. No upload, no quality loss.", accent: "#EF4444", badge: "Free", Icon: IconPdfOrganize, category: "Optimize", isNew: true },
   { name: "Crop PDF", href: "/tools/crop-pdf", tagline: "Trim Top/Right/Bottom/Left margins from every PDF page. Live preview. Points or %. No upload.", accent: "#EF4444", badge: "Free", Icon: IconCropPdf, category: "Optimize", isNew: true },
   { name: "Flatten PDF", href: "/tools/flatten-pdf", tagline: "Merge form fields into the page — filled values become permanent and non-editable. No upload.", accent: "#EF4444", badge: "Free", Icon: IconFlattenPdf, category: "Optimize", isNew: true },
+  { name: "TXT to PDF", href: "/tools/txt-to-pdf", tagline: "Convert .txt files or pasted text to PDF. Word-wrap, A4/Letter, Courier or Helvetica. No upload.", accent: "#EF4444", badge: "Free", Icon: IconTxtToPdf, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

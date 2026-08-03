@@ -62,6 +62,7 @@ import {
   IconPdfOrganize,
   IconCropPdf,
   IconFlattenPdf,
+  IconTxtToPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -951,6 +952,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconFlattenPdf,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "TXT to PDF",
+    href: "/tools/txt-to-pdf",
+    tagline: "Convert any .txt file or pasted text to a PDF in your browser. Word-wrap, A4/Letter, Courier or Helvetica, custom margins. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconTxtToPdf,
     category: ["Optimize"],
     isNew: true,
   },

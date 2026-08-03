@@ -69,6 +69,7 @@ import {
   IconPdfOrganize,
   IconCropPdf,
   IconFlattenPdf,
+  IconTxtToPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -963,6 +964,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconFlattenPdf,
     category: ["Optimize"],
     keywords: ["flatten pdf", "flatten pdf online", "flatten pdf form", "make pdf non-editable", "flatten fillable pdf", "lock pdf form fields", "flatten pdf free", "pdf flatten fields browser"],
+  },
+  {
+    name: "TXT to PDF",
+    slug: "txt-to-pdf",
+    href: "/dashboard/tools/txt-to-pdf",
+    tagline: "Convert .txt files or pasted text to PDF in your browser. Word-wrap, A4/Letter, Courier or Helvetica. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconTxtToPdf,
+    category: ["Optimize"],
+    keywords: ["txt to pdf", "convert text to pdf", "text file to pdf", "txt to pdf converter", "notepad to pdf", "txt to pdf no upload", "plain text to pdf", "convert txt to pdf browser"],
   },
 ];
 

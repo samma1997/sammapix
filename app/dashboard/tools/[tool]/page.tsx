@@ -52,6 +52,7 @@ import {
   IconPdfOrganize,
   IconCropPdf,
   IconFlattenPdf,
+  IconTxtToPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -111,6 +112,7 @@ const PdfSignClient = dynamic(() => import("@/components/tools/PdfSignClient"));
 const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeClient"));
 const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
 const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
+const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -171,6 +173,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-organize":     PdfOrganizeClient,
   "crop-pdf":         CropPdfClient,
   "flatten-pdf":      FlattenPdfClient,
+  "txt-to-pdf":       TxtToPdfClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -272,6 +275,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-organize":      { Icon: IconPdfOrganize,    accent: "#EF4444" },
   "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
   "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
+  "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -877,6 +881,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the cropped PDF", desc: "Click Crop PDF. The margins are removed from every page using PDF CropBox/MediaBox and the file downloads immediately. Text stays fully selectable." },
     ],
     proTip: { text: "After cropping, compress the PDF to reduce file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "txt-to-pdf": {
+    label: "TXT to PDF",
+    tagline: "Convert any .txt file or pasted text to a PDF in your browser. Word-wrap, A4/Letter, Courier or Helvetica. No upload.",
+    steps: [
+      { title: "Load your text", desc: "Drop a .txt file or switch to Paste mode and paste your text directly." },
+      { title: "Choose options", desc: "Pick A4 or Letter page size, Courier or Helvetica font, font size and margins." },
+      { title: "Download the PDF", desc: "Click Convert to PDF. Text is word-wrapped, paginated and downloads immediately." },
+    ],
+    proTip: { text: "Add page numbers to your converted PDF with PDF Page Numbers.", linkLabel: "PDF Page Numbers", linkHref: "/dashboard/tools/pdf-page-numbers" },
   },
   "flatten-pdf": {
     label: "Flatten PDF",
