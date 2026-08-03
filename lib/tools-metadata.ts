@@ -792,6 +792,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["pdf-protect", "pdf-watermark", "redact-pdf"],
     relatedBlogSlugs: ["sign-pdf-online-free", "add-signature-to-pdf-no-upload"],
   },
+  "crop-pdf": {
+    id: "crop-pdf",
+    name: "Crop PDF",
+    shortDesc: "Trim PDF margins in-browser — Top/Right/Bottom/Left in pt or %, no upload",
+    slug: "/tools/crop-pdf",
+    category: "optimize",
+    relatedTools: ["croproatio", "pdf-compress", "pdf-organize"],
+    relatedBlogSlugs: ["crop-pdf-online-free", "crop-pdf-margins-no-upload"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

@@ -118,6 +118,7 @@ export const TOOL_SLUGS = [
   "pdf-watermark",
   "pdf-sign",
   "pdf-organize",
+  "crop-pdf",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

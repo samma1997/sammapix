@@ -50,6 +50,7 @@ import {
   IconPdfWatermark,
   IconPdfSign,
   IconPdfOrganize,
+  IconCropPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -107,6 +108,7 @@ const RemovePdfPagesClient = dynamic(() => import("@/components/tools/RemovePdfP
 const PdfWatermarkClient = dynamic(() => import("@/components/tools/PdfWatermarkClient"));
 const PdfSignClient = dynamic(() => import("@/components/tools/PdfSignClient"));
 const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeClient"));
+const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -165,6 +167,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-watermark":    PdfWatermarkClient,
   "pdf-sign":         PdfSignClient,
   "pdf-organize":     PdfOrganizeClient,
+  "crop-pdf":         CropPdfClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -264,6 +267,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-watermark":     { Icon: IconPdfWatermark,   accent: "#EF4444" },
   "pdf-sign":          { Icon: IconPdfSign,        accent: "#EF4444" },
   "pdf-organize":      { Icon: IconPdfOrganize,    accent: "#EF4444" },
+  "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -859,6 +863,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Remove and download", desc: "Click Remove N pages. A new PDF with only the pages you kept downloads immediately. At least 1 page must remain." },
     ],
     proTip: { text: "After removing pages, compress the resulting PDF to reduce its file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "crop-pdf": {
+    label: "Crop PDF",
+    tagline: "Trim Top, Right, Bottom, Left margins from every PDF page in your browser. Live preview. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). A live preview of the first page renders instantly in your browser — nothing is uploaded." },
+      { title: "Set the margins", desc: "Use the sliders or type values for Top, Right, Bottom, and Left. Choose points (pt) or percentage (%). The red crop rectangle on the preview updates live." },
+      { title: "Download the cropped PDF", desc: "Click Crop PDF. The margins are removed from every page using PDF CropBox/MediaBox and the file downloads immediately. Text stays fully selectable." },
+    ],
+    proTip: { text: "After cropping, compress the PDF to reduce file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
   },
 };
 

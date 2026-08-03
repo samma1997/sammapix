@@ -63,6 +63,7 @@ import {
   IconPdfWatermark,
   IconPdfSign,
   IconPdfOrganize,
+  IconCropPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -369,6 +370,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Watermark PDF", href: "/tools/pdf-watermark", tagline: "Stamp CONFIDENTIAL, DRAFT or your logo on every PDF page. Opacity, rotation, tile. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfWatermark, category: "Optimize", isNew: true },
   { name: "Sign PDF", href: "/tools/pdf-sign", tagline: "Draw or upload a signature and embed it on any PDF page. No upload, no account.", accent: "#EF4444", badge: "Free", Icon: IconPdfSign, category: "Optimize", isNew: false },
   { name: "Organize PDF Pages", href: "/tools/pdf-organize", tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. No upload, no quality loss.", accent: "#EF4444", badge: "Free", Icon: IconPdfOrganize, category: "Optimize", isNew: true },
+  { name: "Crop PDF", href: "/tools/crop-pdf", tagline: "Trim Top/Right/Bottom/Left margins from every PDF page. Live preview. Points or %. No upload.", accent: "#EF4444", badge: "Free", Icon: IconCropPdf, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

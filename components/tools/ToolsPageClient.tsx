@@ -60,6 +60,7 @@ import {
   IconPdfWatermark,
   IconPdfSign,
   IconPdfOrganize,
+  IconCropPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -929,6 +930,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No Signup"],
     Icon: IconPdfOrganize,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Crop PDF",
+    href: "/tools/crop-pdf",
+    tagline: "Trim Top, Right, Bottom, Left margins from every PDF page in your browser. Live preview. Points or %. No upload, no account.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No Signup"],
+    Icon: IconCropPdf,
     category: ["Optimize"],
     isNew: true,
   },

@@ -67,6 +67,7 @@ import {
   IconPdfWatermark,
   IconPdfSign,
   IconPdfOrganize,
+  IconCropPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -939,6 +940,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfOrganize,
     category: ["Optimize"],
     keywords: ["organize pdf pages", "reorder pdf pages", "rearrange pdf pages", "sort pdf pages", "move pdf pages", "pdf page organizer", "change pdf page order", "reorder pdf online free"],
+  },
+  {
+    name: "Crop PDF",
+    slug: "crop-pdf",
+    href: "/dashboard/tools/crop-pdf",
+    tagline: "Trim Top/Right/Bottom/Left margins from every PDF page. Live preview. Points or %. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No Signup"],
+    Icon: IconCropPdf,
+    category: ["Optimize"],
+    keywords: ["crop pdf", "crop pdf online", "trim pdf margins", "remove white margins pdf", "crop pdf pages", "crop pdf free", "pdf margin cutter", "reduce pdf margins", "pdf crop tool"],
   },
 ];
 

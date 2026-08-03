@@ -2168,6 +2168,50 @@ export const IconPdfOrganize: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconCropPdf — PDF page with crop corners that close in ──────────────────
+
+export const IconCropPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfcrop-tl { 0%,15%{transform:translate(0,0)} 50%{transform:translate(4px,4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-tr { 0%,15%{transform:translate(0,0)} 50%{transform:translate(-4px,4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-bl { 0%,15%{transform:translate(0,0)} 50%{transform:translate(4px,-4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-br { 0%,15%{transform:translate(0,0)} 50%{transform:translate(-4px,-4px)} 85%,100%{transform:translate(0,0)} }
+      @keyframes pdfcrop-rect { 0%,15%{opacity:0.2;stroke-dashoffset:80} 50%{opacity:1;stroke-dashoffset:0} 85%,100%{opacity:0.2;stroke-dashoffset:80} }
+      .pdfcrop-tl-h{animation:pdfcrop-tl 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:9px 10px}
+      .pdfcrop-tr-h{animation:pdfcrop-tr 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:32px 10px}
+      .pdfcrop-bl-h{animation:pdfcrop-bl 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:9px 33px}
+      .pdfcrop-br-h{animation:pdfcrop-br 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite;transform-origin:32px 33px}
+      .pdfcrop-rect-h{stroke-dasharray:80;animation:pdfcrop-rect 2.4s ease-in-out infinite}
+    `}</style>
+    {/* PDF document base */}
+    <rect x="4" y="4" width="28" height="36" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    <path d="M24 4 L32 12 L24 12 Z" fill={accent} fillOpacity="0.22"/>
+    <rect x="8" y="16" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.25"/>
+    <rect x="8" y="20" width="16" height="1.5" rx="0.75" fill={accent} fillOpacity="0.18"/>
+    <rect x="8" y="24" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.15"/>
+    {/* Animated crop rect */}
+    <rect className="pdfcrop-rect-h" x="8" y="14" width="24" height="22" rx="1" stroke={accent} strokeWidth="1.5" fill="none"/>
+    {/* Animated corner handles */}
+    <g className="pdfcrop-tl-h">
+      <rect x="6" y="12" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="6" y="12" width="1.5" height="6" rx="0.5" fill={accent}/>
+    </g>
+    <g className="pdfcrop-tr-h">
+      <rect x="29" y="12" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="33.5" y="12" width="1.5" height="6" rx="0.5" fill={accent}/>
+    </g>
+    <g className="pdfcrop-bl-h">
+      <rect x="6" y="34.5" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="6" y="31" width="1.5" height="5.5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="pdfcrop-br-h">
+      <rect x="29" y="34.5" width="6" height="1.5" rx="0.5" fill={accent}/>
+      <rect x="33.5" y="31" width="1.5" height="5.5" rx="0.5" fill={accent}/>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
