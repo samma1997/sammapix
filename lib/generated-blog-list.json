@@ -84,6 +84,20 @@
     "url": "/blog/add-text-to-image-online"
   },
   {
+    "slug": "base64-to-image-converter",
+    "title": "Base64 to Image: Decode & Download Free [2026]",
+    "description": "Paste any Base64 string or Data URI and decode it back to a previewable, downloadable PNG or JPG — 100% in your browser. No upload, no server, no sign",
+    "keywords": [
+      "base64 to image",
+      "decode base64 image",
+      "base64 to png",
+      "base64 to jpg",
+      "base64 image decoder"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/base64-to-image-converter"
+  },
+  {
     "slug": "compress-pdf-online-no-upload",
     "title": "Compress a PDF Online Without Uploading It [2026]",
     "description": "Compress a PDF in your browser with zero upload. Runs via pdf.js + pdf-lib locally. Ideal for scanned PDFs and image-heavy files. Honest about text-on",
@@ -152,6 +166,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/how-to-rotate-pdf-pages-permanently"
+  },
+  {
+    "slug": "image-to-base64-online",
+    "title": "Convert an Image to Base64 Online Free [2026]",
+    "description": "Encode any image to Base64, Data URI, CSS background-image, or HTML img src — 100% in your browser via FileReader. No upload, no server, no signup. Re",
+    "keywords": [
+      "image to base64",
+      "encode image base64",
+      "image to data uri",
+      "base64 encode image online",
+      "image to base64 online"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/image-to-base64-online"
   },
   {
     "slug": "mirror-photo-online-free",
