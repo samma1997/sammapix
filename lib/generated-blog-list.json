@@ -14,6 +14,20 @@
     "url": "/blog/add-page-numbers-to-pdf-online"
   },
   {
+    "slug": "add-password-to-pdf-free",
+    "title": "How to Add a Password to a PDF Free [2026]",
+    "description": "Add a password to any PDF free, entirely in your browser. No upload to unknown sites. Explains open password vs owner password, the risk of uploading ",
+    "keywords": [
+      "add password to pdf",
+      "encrypt pdf online",
+      "put password on pdf",
+      "add password to pdf free",
+      "encrypt pdf free"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/add-password-to-pdf-free"
+  },
+  {
     "slug": "compress-pdf-online-no-upload",
     "title": "Compress a PDF Online Without Uploading It [2026]",
     "description": "Compress a PDF in your browser with zero upload. Runs via pdf.js + pdf-lib locally. Ideal for scanned PDFs and image-heavy files. Honest about text-on",
@@ -54,6 +68,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/number-pdf-pages-no-upload"
+  },
+  {
+    "slug": "password-protect-pdf-online-no-upload",
+    "title": "Password Protect a PDF Online Without Uploading It [2026]",
+    "description": "Add an open password to any PDF in your browser — no upload, no server, no signup. Encryption runs 100% client-side via @cantoo/pdf-lib. Honest about ",
+    "keywords": [
+      "password protect pdf online",
+      "protect pdf with password",
+      "lock pdf online",
+      "password protect pdf free",
+      "encrypt pdf online"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/password-protect-pdf-online-no-upload"
   },
   {
     "slug": "reduce-pdf-file-size-for-email",
