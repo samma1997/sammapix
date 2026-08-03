@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import { APP_URL } from "@/lib/constants";
 import RelatedTools from "@/components/tools/RelatedTools";
-import dynamic from "next/dynamic";
-
-const PdfOrganizeClient = dynamic(
-  () => import("@/components/tools/PdfOrganizeClient"),
-  { ssr: false }
-);
+import PdfOrganizeClient from "@/components/tools/PdfOrganizeClient";
 
 // ── SEO metadata ──────────────────────────────────────────────────────────────
 
