@@ -687,6 +687,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "mirror-photo-online-free",
     ],
   },
+  "add-border": {
+    id: "add-border",
+    name: "Add Border to Image",
+    shortDesc: "Add a colored border or frame to photos — batch, no upload",
+    slug: "/tools/add-border",
+    category: "edit",
+    relatedTools: ["rotate-image", "flip-image", "croproatio"],
+    relatedBlogSlugs: [
+      "add-border-to-image-online",
+      "add-frame-to-photo-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

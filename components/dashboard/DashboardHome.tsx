@@ -58,6 +58,7 @@ import {
   IconPdfProtect,
   IconRotateImage,
   IconFlipImage,
+  IconAddBorder,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -831,6 +832,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconFlipImage,
     category: ["Optimize", "Creative"],
     keywords: ["flip image", "mirror image", "mirror photo", "flip photo horizontal", "flip photo vertical", "flip picture", "mirror picture", "flip image online", "batch flip images", "flip image free", "mirror image online", "flip horizontally", "flip vertically"],
+  },
+  {
+    name: "Add Border to Image",
+    slug: "add-border",
+    href: "/dashboard/tools/add-border",
+    tagline: "Add a colored border or frame to photos. Custom color, width 1-200 px, per-side mode. Batch + ZIP. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconAddBorder,
+    category: ["Optimize", "Creative"],
+    keywords: ["add border to image", "add frame to photo", "image border online", "white border photo", "black border image", "polaroid border", "photo frame free", "picture border", "add border no upload", "batch border images", "custom border color"],
   },
 ];
 

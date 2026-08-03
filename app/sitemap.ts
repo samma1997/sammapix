@@ -172,6 +172,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/pdf-protect",
     "/tools/rotate-image",
     "/tools/flip-image",
+    "/tools/add-border",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

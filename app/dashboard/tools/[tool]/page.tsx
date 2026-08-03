@@ -41,6 +41,7 @@ import {
   IconPdfProtect,
   IconRotateImage,
   IconFlipImage,
+  IconAddBorder,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -89,6 +90,7 @@ const PdfPageNumbersClient = dynamic(() => import("@/components/tools/PdfPageNum
 const PdfProtectClient = dynamic(() => import("@/components/tools/PdfProtectClient"));
 const RotateImageClient = dynamic(() => import("@/components/tools/RotateImageClient"));
 const FlipImageClient = dynamic(() => import("@/components/tools/FlipImageClient"));
+const AddBorderClient = dynamic(() => import("@/components/tools/AddBorderClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -138,6 +140,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-protect":      PdfProtectClient,
   "rotate-image":     RotateImageClient,
   "flip-image":       FlipImageClient,
+  "add-border":       AddBorderClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -228,6 +231,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-protect":      { Icon: IconPdfProtect,     accent: "#EF4444" },
   "rotate-image":     { Icon: IconRotateImage,    accent: "#0EA5E9" },
   "flip-image":       { Icon: IconFlipImage,      accent: "#0EA5E9" },
+  "add-border":       { Icon: IconAddBorder,      accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -733,6 +737,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download flipped images", desc: "Click Flip, then download each image individually or grab all as a ZIP archive." },
     ],
     proTip: { text: "Need to rotate after flipping? Rotate Image supports any angle from -180° to +180°.", linkLabel: "Try Rotate Image", linkHref: "/dashboard/tools/rotate-image" },
+  },
+  "add-border": {
+    label: "Add Border to Image",
+    tagline: "Add a colored border or frame to photos. Custom color and width. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose color and width", desc: "Set border width with the slider (1-200 px). Pick a preset color or use the color picker. Toggle advanced mode for per-side control." },
+      { title: "Download bordered images", desc: "Click Add border, then download each image individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "For a polaroid effect, enable advanced mode and set bottom border wider than the others with white color.", linkLabel: "Try Flip Image", linkHref: "/dashboard/tools/flip-image" },
   },
 };
 

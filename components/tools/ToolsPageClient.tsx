@@ -51,6 +51,7 @@ import {
   IconPdfProtect,
   IconRotateImage,
   IconFlipImage,
+  IconAddBorder,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -740,6 +741,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Batch", "No upload"],
     Icon: IconFlipImage,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Add Border to Image",
+    href: "/tools/add-border",
+    tagline: "Add a colored border or frame to photos. Custom color, width 1-200 px, per-side advanced mode, batch + ZIP. 100% in your browser, no upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconAddBorder,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

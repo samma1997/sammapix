@@ -1696,6 +1696,44 @@ export const IconFlipImage: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconAddBorder: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ab-frame {
+        0%, 20%  { stroke-width: 1.5; }
+        50%      { stroke-width: 5; }
+        80%, 100%{ stroke-width: 1.5; }
+      }
+      @keyframes ab-grow {
+        0%, 20%  { transform: scale(1); }
+        50%      { transform: scale(0.82); }
+        80%, 100%{ transform: scale(1); }
+      }
+      @keyframes ab-badge {
+        0%, 42%  { opacity: 0; transform: scale(0.7); }
+        57%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .ab-border { animation: ab-frame 2.4s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .ab-inner  { transform-origin: 24px 22px; animation: ab-grow 2.4s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .ab-badge  { transform-origin: 38px 38px; animation: ab-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Outer border rect — animates stroke-width to simulate growing border */}
+    <rect className="ab-border" x="3" y="3" width="42" height="36" rx="4" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.5"/>
+    {/* Inner image that shrinks as border grows */}
+    <g className="ab-inner">
+      <rect x="8" y="8" width="32" height="26" rx="2.5" fill={accent} fillOpacity="0.14" stroke={accent} strokeWidth="0.75"/>
+      <circle cx="15" cy="15" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M8 28 L16 20 L22 25 L28 18 L40 27" stroke={accent} strokeWidth="1.15" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Badge bottom right: "+" border label */}
+    <g className="ab-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="20" height="10" rx="5" fill={accent}/>
+      <text x="36" y="41.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">+border</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
