@@ -157,6 +157,8 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "add-border-to-image-online",
+  "add-frame-to-photo-free",
   "flip-image-online-no-upload",
   "mirror-photo-online-free",
   "rotate-image-online-no-upload",
