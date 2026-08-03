@@ -1,5 +1,61 @@
 [
   {
+    "slug": "compress-pdf-online-no-upload",
+    "title": "Compress a PDF Online Without Uploading It [2026]",
+    "description": "Compress a PDF in your browser with zero upload. Runs via pdf.js + pdf-lib locally. Ideal for scanned PDFs and image-heavy files. Honest about text-on",
+    "keywords": [
+      "compress pdf online",
+      "compress pdf no upload",
+      "compress pdf without uploading",
+      "compress pdf private",
+      "compress pdf browser"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/compress-pdf-online-no-upload"
+  },
+  {
+    "slug": "reduce-pdf-file-size-for-email",
+    "title": "How to Reduce PDF File Size for Email [2026]",
+    "description": "PDF too big to send by email? Compress it in your browser — no upload, no signup. Works best on scanned PDFs and image-heavy files. See before/after s",
+    "keywords": [
+      "reduce pdf size for email",
+      "compress pdf for email",
+      "pdf too big to email",
+      "shrink pdf for email",
+      "reduce pdf file size"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/reduce-pdf-file-size-for-email"
+  },
+  {
+    "slug": "passport-photo-requirements-2026",
+    "title": "Quick reference table: 20 countries",
+    "description": "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo ma",
+    "keywords": [
+      "passport photo size",
+      "passport photo requirements 2026",
+      "passport photo dimensions",
+      "visa photo size",
+      "passport photo maker free"
+    ],
+    "publishedDate": "2026-07-25",
+    "url": "/blog/passport-photo-requirements-2026"
+  },
+  {
+    "slug": "optimize-images-shopify-free-guide",
+    "title": "Why image optimization matters for Shopify",
+    "description": "",
+    "keywords": [
+      "optimize images for shopify",
+      "shopify image optimization",
+      "shopify compress images",
+      "image optimizer for shopify",
+      "bulk resize images shopify"
+    ],
+    "publishedDate": "2026-07-14",
+    "url": "/blog/optimize-images-shopify-free-guide"
+  },
+  {
     "slug": "how-to-batch-prepare-images-for-website",
     "title": "How to Batch-Prepare Images for Your Website (Resize, Compress, WebP, Rename)",
     "description": "Preparing a folder of images for a website means four jobs: resize, compress, convert to WebP, and give them SEO filenames. This guide shows the order",
@@ -476,20 +532,6 @@
     "url": "/blog/image-compression-benchmark-2026"
   },
   {
-    "slug": "optimize-images-shopify-free-guide",
-    "title": "Why image optimization matters for Shopify",
-    "description": "",
-    "keywords": [
-      "optimize images for shopify",
-      "shopify image optimization",
-      "shopify compress images",
-      "image optimizer for shopify",
-      "bulk resize images shopify"
-    ],
-    "publishedDate": "2026-05-08",
-    "url": "/blog/optimize-images-shopify-free-guide"
-  },
-  {
     "slug": "image-compression-statistics-2026",
     "title": "Web performance & page weight",
     "description": "67 cited statistics on image compression, format adoption, Core Web Vitals impact, and e-commerce conversion rates. The definitive reference for 2026.",
@@ -687,8 +729,8 @@
   },
   {
     "slug": "best-free-topaz-gigapixel-alternatives-2026",
-    "title": "Free Image Upscaler That Beats $199 Topaz (2026 Tested)",
-    "description": "Topaz costs $199/year. 7 free upscalers tested on real photos. 2x/4x upscaling in browser, no upload. Upscayl + SammaPix best quality.",
+    "title": "Topaz Gigapixel AI Free Alternative: 7 Options Tested (2026)",
+    "description": "Topaz Gigapixel costs $199/year and a heavy install. Here are 7 free alternatives tested on real photos, with 2x and 4x AI upscaling right in your bro",
     "keywords": [
       "topaz gigapixel ai alternatives 2026",
       "topaz gigapixel ai pricing 2026",
@@ -771,8 +813,8 @@
   },
   {
     "slug": "compress-images-whatsapp-quality",
-    "title": "Send WhatsApp Photos Perfectly Sharp, 30-Second Fix (2026)",
-    "description": "WhatsApp compresses 80% quality loss. Fix: 1920px, JPEG 80%, sRGB. Pre-compress in browser, no upload. Perfectly sharp photos guaranteed.",
+    "title": "Compress Images for WhatsApp Without Losing Quality (Free)",
+    "description": "Send WhatsApp photos that stay sharp. Resize to 1920px and export at quality 80 right in your browser, then send. Free, no signup, no upload. Works on",
     "keywords": [
       "compress images for whatsapp",
       "whatsapp image quality",
@@ -838,20 +880,6 @@
     ],
     "publishedDate": "2026-04-04",
     "url": "/blog/check-remove-exif-data-photos"
-  },
-  {
-    "slug": "passport-photo-requirements-2026",
-    "title": "Quick reference table: 20 countries",
-    "description": "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo ma",
-    "keywords": [
-      "passport photo size",
-      "passport photo requirements 2026",
-      "passport photo dimensions",
-      "visa photo size",
-      "passport photo maker free"
-    ],
-    "publishedDate": "2026-04-02",
-    "url": "/blog/passport-photo-requirements-2026"
   },
   {
     "slug": "ai-rename-travel-photos-seo-results",
