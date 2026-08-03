@@ -42,6 +42,13 @@ window.ImageTool = (function () {
     load(blob);
   }
 
+  // Public entry for "drop several images on Home" → straight to batch compress.
+  function openBatch(files) {
+    mode = "compress"; saveFmt = Object.assign({}, MODES.compress.fmt);
+    bd = window.SP.toolShell("Compress " + files.length + " images", window.SP.home);
+    batch("compress", files);
+  }
+
   function load(blob) {
     origBytes = (blob && blob.size) || 0;
     bd.innerHTML = '<div class="load"><div class="spin"></div>Loading…</div>';
@@ -55,7 +62,7 @@ window.ImageTool = (function () {
   }
 
   function render() {
-    var h = '<div class="editbar"><button class="ebtn" id="undo" disabled>↶ Undo</button><button class="ebtn" id="reset" disabled>Reset to original</button></div>';
+    var h = '<div class="editbar"><button class="ebtn" id="undo" disabled>↶ Undo</button><button class="ebtn" id="reset" disabled>Reset</button><button class="ebtn" id="newimg">＋ New image</button></div>';
     h += '<div class="canvwrap"><canvas id="cv"></canvas><div class="dim" id="dim"></div></div>';
     h += options(mode);
     h += '<div class="opt"><h4>💾 Save as</h4><div class="chips" id="fmt">' +
@@ -173,6 +180,7 @@ window.ImageTool = (function () {
     }
     document.getElementById("undo").addEventListener("click", undo);
     document.getElementById("reset").addEventListener("click", resetAll);
+    document.getElementById("newimg").addEventListener("click", function () { open(mode); }); // pick another file, same tool
     refreshBar();
     var acr = document.getElementById("applycrop"); if (acr) acr.addEventListener("click", cropToRect);
     var awm = document.getElementById("applywm"); if (awm) awm.addEventListener("click", watermark);
@@ -376,5 +384,5 @@ window.ImageTool = (function () {
     toast("ZIP ready (" + ok + ")");
   }
 
-  return { open: open, openWith: openWith };
+  return { open: open, openWith: openWith, openBatch: openBatch };
 })();

@@ -1,6 +1,8 @@
 # SammaPix — Chrome Web Store: scheda pronta da copia-incolla (v5)
 
-Pacchetto da caricare: `~/Downloads/sammapix-extension-v5.6.0.zip` (versione 5.6.0)
+Pacchetto da caricare: `~/Downloads/sammapix-extension-v5.7.1.zip` (versione 5.7.1)
+
+> NB scheda store (titolo/descrizione/screenshot) si aggiorna dalla dashboard SENZA ricaricare il package. Il package nuovo serve solo per il codice (onboarding, from-page hero, telemetria, download singolo).
 
 ---
 

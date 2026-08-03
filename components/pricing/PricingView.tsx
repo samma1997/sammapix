@@ -31,6 +31,18 @@ import {
   IconJxl,
   IconUnrar,
   IconOpen7z,
+  IconPdfCompress,
+  IconPdfRotate,
+  IconPdfUnlock,
+  IconPdfPageNumbers,
+  IconPdfProtect,
+  IconRotateImage,
+  IconFlipImage,
+  IconAddBorder,
+  IconRoundImage,
+  IconAddText,
+  IconImageToBase64,
+  IconCollageMaker,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -75,6 +87,18 @@ const toolGrid = [
   { Icon: IconJxl,          name: "JXL",        accent: "#F59E0B" },
   { Icon: IconUnrar,        name: "Open RAR",   accent: "#0EA5E9" },
   { Icon: IconOpen7z,       name: "Open 7z",    accent: "#8B5CF6" },
+  { Icon: IconPdfCompress,  name: "Compress PDF", accent: "#EF4444" },
+  { Icon: IconPdfRotate,   name: "Rotate PDF",   accent: "#EF4444" },
+  { Icon: IconPdfUnlock,   name: "Unlock PDF",   accent: "#EF4444" },
+  { Icon: IconPdfPageNumbers, name: "PDF Page Numbers", accent: "#EF4444" },
+  { Icon: IconPdfProtect,     name: "Protect PDF",      accent: "#EF4444" },
+  { Icon: IconRotateImage,   name: "Rotate Image",     accent: "#0EA5E9" },
+  { Icon: IconFlipImage,     name: "Flip Image",       accent: "#0EA5E9" },
+  { Icon: IconAddBorder,     name: "Add Border",       accent: "#0EA5E9" },
+  { Icon: IconRoundImage,   name: "Round Image",      accent: "#0EA5E9" },
+  { Icon: IconAddText,        name: "Add Text",         accent: "#0EA5E9" },
+  { Icon: IconImageToBase64,  name: "Image to Base64",  accent: "#6366F1" },
+  { Icon: IconCollageMaker,   name: "Collage Maker",    accent: "#0EA5E9" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

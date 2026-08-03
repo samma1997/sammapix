@@ -68,6 +68,7 @@ export const TOOL_SLUGS = [
   "ico-generator",
   "image-to-text",
   "instagram-grid-splitter",
+  "pdf-compress",
   "jpg-to-pdf",
   "jxl",
   "passport-photo",
@@ -102,6 +103,17 @@ export const TOOL_SLUGS = [
   "resize-video",
   "trim-video",
   "extract-audio",
+  "pdf-rotate",
+  "pdf-unlock",
+  "pdf-page-numbers",
+  "pdf-protect",
+  "rotate-image",
+  "flip-image",
+  "add-border",
+  "round-image",
+  "add-text-to-image",
+  "image-to-base64",
+  "collage-maker",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -149,6 +161,28 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "image-to-base64-online",
+  "base64-to-image-converter",
+  "add-text-to-image-online",
+  "add-caption-to-photo-free",
+  "crop-image-into-circle-online",
+  "round-image-corners-free",
+  "add-border-to-image-online",
+  "add-frame-to-photo-free",
+  "flip-image-online-no-upload",
+  "mirror-photo-online-free",
+  "rotate-image-online-no-upload",
+  "how-to-rotate-a-photo-free",
+  "password-protect-pdf-online-no-upload",
+  "add-password-to-pdf-free",
+  "add-page-numbers-to-pdf-online",
+  "number-pdf-pages-no-upload",
+  "unlock-pdf-online-no-upload",
+  "remove-pdf-password-restrictions",
+  "rotate-pdf-online-no-upload",
+  "how-to-rotate-pdf-pages-permanently",
+  "compress-pdf-online-no-upload",
+  "reduce-pdf-file-size-for-email",
   "how-to-mute-a-video-remove-audio-no-upload",
   "how-to-trim-a-video-cut-a-clip-no-upload",
   "how-to-extract-audio-from-video-mp4-to-mp3",
@@ -238,6 +272,8 @@ export const BLOG_SLUGS = [
   "how-to-transcribe-video-generate-subtitles-free",
   "what-size-should-blog-images-be",
   "how-to-batch-prepare-images-for-website",
+  "photo-collage-maker-online",
+  "image-grid-maker-free",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

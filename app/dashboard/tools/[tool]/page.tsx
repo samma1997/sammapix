@@ -34,6 +34,18 @@ import {
   IconJxl,
   IconUnrar,
   IconOpen7z,
+  IconPdfCompress,
+  IconPdfRotate,
+  IconPdfUnlock,
+  IconPdfPageNumbers,
+  IconPdfProtect,
+  IconRotateImage,
+  IconFlipImage,
+  IconAddBorder,
+  IconRoundImage,
+  IconAddText,
+  IconImageToBase64,
+  IconCollageMaker,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -75,6 +87,18 @@ const JxlConverterClient = dynamic(() => import("@/components/tools/JxlConverter
 const ColorMatchClient = dynamic(() => import("@/components/tools/ColorMatchClient"));
 const PhotoEnhanceClient = dynamic(() => import("@/components/tools/PhotoEnhanceClient"));
 const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
+const PdfCompressClient = dynamic(() => import("@/components/tools/PdfCompressClient"));
+const PdfRotateClient = dynamic(() => import("@/components/tools/PdfRotateClient"));
+const PdfUnlockClient = dynamic(() => import("@/components/tools/PdfUnlockClient"));
+const PdfPageNumbersClient = dynamic(() => import("@/components/tools/PdfPageNumbersClient"));
+const PdfProtectClient = dynamic(() => import("@/components/tools/PdfProtectClient"));
+const RotateImageClient = dynamic(() => import("@/components/tools/RotateImageClient"));
+const FlipImageClient = dynamic(() => import("@/components/tools/FlipImageClient"));
+const AddBorderClient = dynamic(() => import("@/components/tools/AddBorderClient"));
+const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClient"));
+const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToImageClient"));
+const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase64Client"));
+const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMakerClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -117,6 +141,18 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "photo-enhance": PhotoEnhanceClient,
   unrar: UnrarClient,
   "open-7z": dynamic(() => import("@/components/tools/Open7zClient")),
+  "pdf-compress": PdfCompressClient,
+  "pdf-rotate":   PdfRotateClient,
+  "pdf-unlock":   PdfUnlockClient,
+  "pdf-page-numbers": PdfPageNumbersClient,
+  "pdf-protect":      PdfProtectClient,
+  "rotate-image":     RotateImageClient,
+  "flip-image":       FlipImageClient,
+  "add-border":       AddBorderClient,
+  "round-image":      RoundImageClient,
+  "add-text-to-image": AddTextToImageClient,
+  "image-to-base64": ImageToBase64Client,
+  "collage-maker": CollageMakerClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -200,6 +236,18 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "photo-enhance": { Icon: IconUpscale, accent: "#8B5CF6" },
   unrar: { Icon: IconUnrar, accent: "#0EA5E9" },
   "open-7z": { Icon: IconOpen7z, accent: "#8B5CF6" },
+  "pdf-compress": { Icon: IconPdfCompress, accent: "#EF4444" },
+  "pdf-rotate":   { Icon: IconPdfRotate,   accent: "#EF4444" },
+  "pdf-unlock":   { Icon: IconPdfUnlock,   accent: "#EF4444" },
+  "pdf-page-numbers": { Icon: IconPdfPageNumbers, accent: "#EF4444" },
+  "pdf-protect":      { Icon: IconPdfProtect,     accent: "#EF4444" },
+  "rotate-image":     { Icon: IconRotateImage,    accent: "#0EA5E9" },
+  "flip-image":       { Icon: IconFlipImage,      accent: "#0EA5E9" },
+  "add-border":       { Icon: IconAddBorder,      accent: "#0EA5E9" },
+  "round-image":      { Icon: IconRoundImage,     accent: "#0EA5E9" },
+  "add-text-to-image": { Icon: IconAddText,       accent: "#0EA5E9" },
+  "image-to-base64":   { Icon: IconImageToBase64, accent: "#6366F1" },
+  "collage-maker":     { Icon: IconCollageMaker,  accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -635,6 +683,126 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Export as ZIP (optional)", desc: "Click \"Download all as .zip\" to convert the entire .7z archive to ZIP." },
     ],
     proTip: { text: "Need to open a RAR archive instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "pdf-compress": {
+    label: "Compress PDF",
+    tagline: "Reduce PDF file size in your browser. See before/after, no upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF file (up to 100 MB). Reads page count instantly, no upload." },
+      { title: "Choose quality level", desc: "Pick Low for maximum compression, Medium for balance, or High for minimal loss." },
+      { title: "Download compressed PDF", desc: "See the before/after file size and percentage reduction, then download." },
+    ],
+    proTip: { text: "Need fewer pages instead? Split the PDF to keep only what you need.", linkLabel: "PDF Split", linkHref: "/dashboard/tools/pdf-split" },
+  },
+  "pdf-rotate": {
+    label: "Rotate PDF",
+    tagline: "Rotate PDF pages in your browser. Text stays selectable, no upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Thumbnails of every page are rendered instantly in your browser." },
+      { title: "Choose rotations", desc: "Rotate all pages at once (90° CW, CCW, 180°) or rotate individual pages using the per-page buttons." },
+      { title: "Apply and download", desc: "Click Apply rotations. Text stays fully selectable — rotation is metadata, not rasterization." },
+    ],
+    proTip: { text: "Need to reduce the file size too? Compress PDF works great after rotating.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "pdf-unlock": {
+    label: "Unlock PDF",
+    tagline: "Remove PDF usage restrictions in your browser. No upload, no password cracking.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB) that opens freely but has printing, copying or editing locked." },
+      { title: "Read the honest note", desc: "Works on owner-password restrictions only. Cannot bypass a password required to open the file." },
+      { title: "Download the unlocked PDF", desc: "Click Remove Restrictions. The unlocked PDF downloads directly — printing, copying and editing re-enabled." },
+    ],
+    proTip: { text: "Want to reduce the size of your unlocked PDF too? Compress PDF is next.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "pdf-page-numbers": {
+    label: "PDF Page Numbers",
+    tagline: "Add page numbers to every page of a PDF in your browser. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The file is read instantly in your browser — no server upload." },
+      { title: "Choose position and format", desc: "Pick one of 6 positions and one of 3 formats (number only, number/total, Page X of N). Adjust font size and margin if needed." },
+      { title: "Download the numbered PDF", desc: "Click Add Page Numbers. Page numbers are stamped as real text on every page and the file downloads instantly." },
+    ],
+    proTip: { text: "Want to reduce the file size of your numbered PDF? Compress PDF works great after.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "pdf-protect": {
+    label: "Password Protect PDF",
+    tagline: "Add a password to any PDF in your browser. Encrypted locally — never uploaded.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Reads the file instantly in your browser — nothing is sent to any server." },
+      { title: "Set and confirm a password", desc: "Enter a password and confirm it. Both fields must match. The password will be required by any PDF viewer to open the file." },
+      { title: "Download the protected PDF", desc: "Click Protect PDF. Encryption runs locally and the protected file downloads to your device immediately." },
+    ],
+    proTip: { text: "Want to remove a password from a PDF instead? Unlock PDF can remove owner-password restrictions.", linkLabel: "Unlock PDF", linkHref: "/dashboard/tools/pdf-unlock" },
+  },
+  "rotate-image": {
+    label: "Rotate Image",
+    tagline: "Rotate photos 90°, 180° or any custom angle. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose a rotation angle", desc: "Click 90° CW, 90° CCW, or 180° for standard rotations. Use the slider for any angle from -180° to +180°." },
+      { title: "Download rotated images", desc: "Click Rotate, then download each image individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "After rotating, crop to an exact ratio for social media or print.", linkLabel: "Try Crop to Ratio", linkHref: "/dashboard/tools/croproatio" },
+  },
+  "flip-image": {
+    label: "Flip Image",
+    tagline: "Mirror photos horizontally or vertically. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose flip direction", desc: "Click Flip Horizontal to mirror left-right, Flip Vertical to mirror top-bottom, or enable both at once." },
+      { title: "Download flipped images", desc: "Click Flip, then download each image individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "Need to rotate after flipping? Rotate Image supports any angle from -180° to +180°.", linkLabel: "Try Rotate Image", linkHref: "/dashboard/tools/rotate-image" },
+  },
+  "add-border": {
+    label: "Add Border to Image",
+    tagline: "Add a colored border or frame to photos. Custom color and width. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose color and width", desc: "Set border width with the slider (1-200 px). Pick a preset color or use the color picker. Toggle advanced mode for per-side control." },
+      { title: "Download bordered images", desc: "Click Add border, then download each image individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "For a polaroid effect, enable advanced mode and set bottom border wider than the others with white color.", linkLabel: "Try Flip Image", linkHref: "/dashboard/tools/flip-image" },
+  },
+  "round-image": {
+    label: "Round Image",
+    tagline: "Circle crop or rounded corners with transparent PNG output. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose shape and radius", desc: "Select Circle for a perfect circular crop, or Rounded corners and adjust the corner radius with the slider (4–400 px)." },
+      { title: "Download transparent PNGs", desc: "Click Round images, then download each PNG individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "For profile pictures use Circle mode. For card thumbnails, try Rounded corners at 32–80 px.", linkLabel: "Try Add Border", linkHref: "/dashboard/tools/add-border" },
+  },
+  "add-text-to-image": {
+    label: "Add Text to Image",
+    tagline: "Write text on any photo. Font, size, color, outline, position grid, live preview. Files never leave your browser.",
+    steps: [
+      { title: "Drop your image", desc: "Add one JPG, PNG or WebP file. The tool works on a single image so you can customize the text for each photo." },
+      { title: "Type text and set style", desc: "Enter your text, choose font family, size (10-200 px), text color, outline color and width. Enable shadow for readability. Pick position from the 9-point grid and fine-tune with X/Y offset sliders." },
+      { title: "Download the result", desc: "Click Add text to image to render at full resolution, then download. Output format matches input. Files never leave your browser." },
+    ],
+    proTip: { text: "For captions, set text to bottom-center with white color and black outline 3 px for maximum readability on any background.", linkLabel: "Try Watermark", linkHref: "/dashboard/tools/stampit" },
+  },
+  "image-to-base64": {
+    label: "Image to Base64",
+    tagline: "Encode any image to a Base64 Data URI — or decode a base64 string back to an image. Files never leave your browser.",
+    steps: [
+      { title: "Drop your image", desc: "Add any JPG, PNG, WebP, SVG or other image (max 10 MB). Encoding runs instantly via FileReader in your browser — no upload." },
+      { title: "Choose output format", desc: "Select from four formats: full Data URI, plain base64 string, CSS background-image rule, or an HTML <img> tag. Switch between them in one click." },
+      { title: "Copy and use", desc: "Click Copy to send the string to your clipboard. Paste it directly into your CSS file, HTML template or API payload. Use the decode tab to preview a base64 string as an image." },
+    ],
+    proTip: { text: "Compress the image first to reduce the base64 string size by up to 80%.", linkLabel: "Compress Images", linkHref: "/dashboard/tools/compress" },
+  },
+  "collage-maker": {
+    label: "Photo Collage Maker",
+    tagline: "Combine 2-9 photos into a grid collage. 8 layouts, custom gap and color. Files never leave your browser.",
+    steps: [
+      { title: "Load your photos", desc: "Drop 2-9 JPG, PNG or WebP photos onto the upload area. Up to 20 photos on Free, 200 on Pro. Compatible grid layouts appear automatically." },
+      { title: "Choose layout and settings", desc: "Pick a grid preset (2×2, 3×3, etc.), set gap between cells, pick a background color, and choose Cover (fill & crop) or Contain (show full photo) fit mode." },
+      { title: "Create and download", desc: "Click Create collage. A preview appears instantly. Download as JPG (smaller) or PNG (lossless) at 720, 1080, 1440 or 2048 px." },
+    ],
+    proTip: { text: "For Instagram carousel grids, use a 3×3 layout at 1080 px with 0 gap and cover mode for a seamless puzzle effect.", linkLabel: "Try Instagram Grid Splitter", linkHref: "/dashboard/tools/instagram-grid-splitter" },
   },
 };
 

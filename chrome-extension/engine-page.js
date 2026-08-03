@@ -11,6 +11,9 @@ window.PageWS = (function () {
   var PRICING = "https://www.sammapix.com/pricing" + UTM;
   var DAYPASS = "https://www.sammapix.com/pricing" + UTM + "#daypass";
   var bd = null, images = [], selected = null;
+  var scanTabId = null, scanUrl = null, active = false, watching = false;
+  var outFmt = "orig"; // orig | jpg | png | webp — download format from the page picker
+  try { var _sf = localStorage.getItem("sp-pagefmt"); if (_sf) outFmt = _sf; } catch (e) {} // remember last choice
 
   function esc(x) { return window.SP.esc(x); }
   function openUrl(u) { if (chrome.tabs && chrome.tabs.create) chrome.tabs.create({ url: u }); else window.open(u, "_blank"); }
@@ -51,6 +54,7 @@ window.PageWS = (function () {
   }
 
   async function buyDayPass() {
+    if (window.track) window.track("ext_daypass_click", { tool: "page" });
     if (window.__SP_DEV__) { toast("Demo: this launches the Day Pass Stripe checkout (direct)"); return; }
     try {
       var r = await fetch("https://www.sammapix.com/api/checkout/day-pass", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ source: "extension/page-bulk" }) });
@@ -60,7 +64,8 @@ window.PageWS = (function () {
   }
 
   async function open() {
-    bd = window.SP.toolShell("Images on this page", window.SP.home);
+    active = true; startWatch();
+    bd = window.SP.toolShell("Images on this page", function () { active = false; window.SP.home(); });
     if (window.__SP_DEV__) { return demoOpen(); }
     bd.innerHTML = '<div class="load"><div class="spin"></div>Reading the page\'s images…</div>';
     try {
@@ -76,6 +81,7 @@ window.PageWS = (function () {
   async function doScan() {
     var tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
     if (!tabs || !tabs[0] || !(tabs[0].url || "").startsWith("http")) throw new Error("no-tab");
+    scanTabId = tabs[0].id; scanUrl = tabs[0].url;
     var res = await chrome.scripting.executeScript({
       target: { tabId: tabs[0].id },
       func: function () {
@@ -105,24 +111,56 @@ window.PageWS = (function () {
     return (res && res[0] && res[0].result) || [];
   }
 
-  async function refresh() {
-    var cnt = document.getElementById("pcount"); if (cnt) cnt.textContent = "Refreshing…";
+  // Re-scan the active tab. Same page → merge (lazy-loaded images after scroll).
+  // Different page (user switched tab) → replace the list with the new page.
+  async function rescan() {
+    var cnt = document.getElementById("pcount"); if (cnt) cnt.textContent = "Scanning…";
+    var tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    var t = tabs && tabs[0];
+    if (!t || !(t.url || "").startsWith("http")) { toast("Open a normal website first, then scan"); return; }
+    var samePage = (t.id === scanTabId && t.url === scanUrl);
     try {
-      var fresh = await doScan();
-      var have = {}; images.forEach(function (i) { have[i.src] = 1; });
-      var added = 0;
-      fresh.forEach(function (i) { if (!have[i.src]) { images.push(i); selected.add(i.src); added++; } });
-      render();
-      toast(added ? "+" + added + " new images" : "Nothing new (scroll the page and retry)");
-    } catch (e) { toast("Refresh failed"); }
+      var fresh = await doScan(); // updates scanTabId/scanUrl to the current page
+      if (samePage) {
+        var have = {}; images.forEach(function (i) { have[i.src] = 1; });
+        var added = 0;
+        fresh.forEach(function (i) { if (!have[i.src]) { images.push(i); selected.add(i.src); added++; } });
+        render();
+        toast(added ? "+" + added + " new images" : "Nothing new (scroll the page and retry)");
+      } else {
+        images = fresh;
+        selected = new Set(images.map(function (i) { return i.src; }));
+        render();
+        toast(images.length ? "Scanned this page (" + images.length + " images)" : "No images on this page");
+      }
+    } catch (e) { toast("Scan failed"); }
+  }
+
+  // While the picker is open, notice when the user moves to another page/tab
+  // so we can offer a one-click re-scan of what they're actually looking at.
+  function startWatch() {
+    if (watching) return; watching = true;
+    chrome.tabs.onActivated.addListener(maybeStale);
+    chrome.tabs.onUpdated.addListener(function (id, ch, tab) { if (tab && tab.active && ch.url) maybeStale(); });
+  }
+  async function maybeStale() {
+    if (!active || window.__SP_DEV__) return;
+    var el = document.getElementById("pstale"); if (!el) return;
+    try {
+      var tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      var t = tabs && tabs[0];
+      var stale = t && (t.url || "").startsWith("http") && (t.id !== scanTabId || t.url !== scanUrl);
+      el.style.display = stale ? "flex" : "none";
+    } catch (e) {}
   }
 
   function render() {
     var html = (window.__SP_DEV__ ? demoBanner() : '');
     html += '<div id="pquota" style="font-size:11px;color:var(--dim);font-weight:600;text-align:center;margin-bottom:8px">…</div>';
+    html += '<div id="pstale" style="display:none;align-items:center;gap:8px;background:rgba(217,132,32,.12);border:1px solid rgba(217,132,32,.4);border-radius:11px;padding:9px 11px;margin-bottom:9px;font-size:11px;font-weight:650;color:var(--text)">📄 You\'re on a different page now<button class="chip" id="pstalescan" style="margin-left:auto">⟳ Scan this page</button></div>';
     html += '<div class="topbar"><span id="pcount">' + selected.size + ' of ' + images.length + ' selected</span>' +
       '<div style="display:flex;gap:6px">' +
-      (window.__SP_DEV__ ? '' : '<button class="chip" id="prefresh" title="Re-scan the page (after scrolling)">⟳ Refresh</button>') +
+      (window.__SP_DEV__ ? '' : '<button class="chip" id="prefresh" title="Re-scan the current page">⟳ Rescan</button>') +
       '<button class="chip" id="ptoggle">' + (selected.size === images.length ? "Deselect" : "Select all") + '</button></div></div>';
     html += '<div class="pgrid">';
     images.forEach(function (im, i) {
@@ -133,9 +171,12 @@ window.PageWS = (function () {
         '<div style="position:absolute;top:5px;left:5px;width:18px;height:18px;border-radius:9px;background:' + (on ? "var(--accent)" : "rgba(0,0,0,.35)") + ';color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center">' + (on ? "✓" : "") + '</div></div>';
     });
     html += '</div>';
+    html += '<div class="opt" style="padding:11px 12px;margin-bottom:8px"><div class="slabel" style="margin-bottom:7px"><span>Download as</span></div><div class="chips" id="pfmt">' +
+      pfchip("orig", "Original") + pfchip("jpg", "JPG") + pfchip("png", "PNG") + pfchip("webp", "WebP") + '</div>' +
+      '<div class="hint" style="margin-top:7px">Original keeps the file untouched · WebP is the smallest · JPG/PNG re-encode.</div></div>';
+    var one = selected.size === 1;
     html += '<div class="savebar" style="margin-top:8px;flex-wrap:wrap">' +
-      '<button class="cta sec" id="pdl" style="margin:0;flex:1">↓ Download ZIP</button>' +
-      '<button class="cta" id="pcomp" style="margin:0;flex:1">🗜️ Compress ZIP</button>' +
+      '<button class="cta" id="pdl" style="margin:0;flex:1">↓ ' + (one ? "Download" : "Download ZIP") + '</button>' +
       '<button class="cta sec" id="pren" style="margin:0;flex-basis:100%">✏️ Bulk rename</button></div>';
     bd.innerHTML = html;
 
@@ -151,11 +192,20 @@ window.PageWS = (function () {
       render();
     });
     document.getElementById("pdl").addEventListener("click", function () { bulk("download"); });
-    document.getElementById("pcomp").addEventListener("click", function () { bulk("compress"); });
     document.getElementById("pren").addEventListener("click", renamePanel);
-    var rf = document.getElementById("prefresh"); if (rf) rf.addEventListener("click", refresh);
+    bd.querySelectorAll("[data-pf]").forEach(function (c) {
+      c.addEventListener("click", function () {
+        outFmt = c.getAttribute("data-pf");
+        try { localStorage.setItem("sp-pagefmt", outFmt); } catch (e) {}
+        bd.querySelectorAll("[data-pf]").forEach(function (x) { x.classList.remove("on"); });
+        c.classList.add("on");
+      });
+    });
+    var rf = document.getElementById("prefresh"); if (rf) rf.addEventListener("click", rescan);
+    var st = document.getElementById("pstalescan"); if (st) st.addEventListener("click", rescan);
     if (window.__SP_DEV__) bd.querySelectorAll("[data-demo]").forEach(function (b) { b.addEventListener("click", function () { setDemo(b.getAttribute("data-demo")); }); });
     refreshQuota();
+    maybeStale();
   }
 
   function renamePanel() {
@@ -224,7 +274,7 @@ window.PageWS = (function () {
     if (q.error) { toast("Couldn't reach your SammaPix account"); return; }
     if (!q.auth) {
       gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Continue with Google</div>' +
-        '<div style="font-size:12px;color:var(--dim);line-height:1.5">Bulk actions (download, compress, rename) are free with a SammaPix account: up to 50 images a day, unlimited with Pro. Same quota as the site, one account.</div>' +
+        '<div style="font-size:12px;color:var(--dim);line-height:1.5">Bulk actions (download, convert, rename) are free with a SammaPix account: up to 50 images a day, unlimited with Pro. Same quota as the site, one account.</div>' +
         (window.__SP_DEV__ ? '<div style="font-size:10.5px;color:var(--dim);margin-top:10px">🎬 Demo: login is simulated here. The real extension reads your actual Google session.</div>' : '') +
         '<button class="cta" id="psignup" style="margin-top:14px">Continue with Google →</button>' +
         '<button class="cta sec" id="pretry" style="margin-top:8px">I already signed in → Retry</button>');
@@ -239,6 +289,7 @@ window.PageWS = (function () {
       return;
     }
     if (needsQuota && q.plan !== "pro" && list.length > q.remaining) {
+      if (window.track) window.track("ext_upsell_shown", { tool: "page", plan: q.plan });
       gate('<div style="font-size:15px;font-weight:700;margin-bottom:6px">Daily limit reached</div>' +
         '<div style="font-size:12px;color:var(--dim);line-height:1.5">You\'ve used ' + q.used + '/' + q.limit + ' images today (you selected ' + list.length + '). Keep going without limits:</div>' +
         '<button class="cta" id="pupg" style="margin-top:14px">⭐ Upgrade to Pro (always unlimited)</button>' +
@@ -251,38 +302,52 @@ window.PageWS = (function () {
   }
 
   async function run(type, list, pattern, needsQuota) {
-    if (typeof JSZip === "undefined") { toast("ZIP not available"); return; }
-    var verb = type === "compress" ? "Compressing" : type === "rename" ? "Renaming" : "Downloading";
-    bd.innerHTML = '<div class="load"><div class="spin"></div>' + verb + ' ' + list.length + ' images…<div class="bar"><span id="pbar"></span></div></div>';
-    var zip = new JSZip(), used = {}, ok = 0;
+    // Single file (and not a rename job) → download the file directly, no ZIP.
+    var single = (list.length === 1 && type !== "rename");
+    if (!single && typeof JSZip === "undefined") { toast("ZIP not available"); return; }
+    var converting = (type !== "rename" && outFmt !== "orig");
+    var verb = type === "rename" ? "Renaming" : converting ? "Converting" : "Downloading";
+    bd.innerHTML = '<div class="load"><div class="spin"></div>' + verb + ' ' + list.length + ' image' + (list.length > 1 ? "s" : "") + '…<div class="bar"><span id="pbar"></span></div></div>';
+    var zip = single ? null : new JSZip(), used = {}, ok = 0, lastBlob = null, lastName = "";
     for (var i = 0; i < list.length; i++) {
       try {
         var resp = await fetch(list[i]); var blob = await resp.blob();
         var base = nameOf(list[i]); if (used[base]) base = base + "-" + (used[base]++); else used[base] = 1;
-        if (type === "compress") {
+        var outName, outBlob;
+        if (type === "rename") {
+          outName = applyPattern(pattern || "photo-###", i + 1) + extOf(list[i]); outBlob = blob;
+        } else if (outFmt === "orig") {
+          outName = base + extOf(list[i]); outBlob = blob;
+        } else {
+          var enc = encFmt(outFmt);
           var bmp = await createImageBitmap(blob);
           var c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
-          c.getContext("2d").drawImage(bmp, 0, 0); if (bmp.close) bmp.close();
-          var cb = await new Promise(function (r) { c.toBlob(r, "image/webp", 0.8); });
-          zip.file(base + ".webp", cb || blob);
-        } else if (type === "rename") {
-          zip.file(applyPattern(pattern || "photo-###", i + 1) + extOf(list[i]), blob);
-        } else {
-          zip.file(base + extOf(list[i]), blob);
+          var cx = c.getContext("2d");
+          if (enc.m === "image/jpeg") { cx.fillStyle = "#ffffff"; cx.fillRect(0, 0, c.width, c.height); } // JPG has no alpha
+          cx.drawImage(bmp, 0, 0); if (bmp.close) bmp.close();
+          outBlob = await new Promise(function (r) { c.toBlob(r, enc.m, enc.q); }) || blob;
+          outName = base + "." + enc.e;
         }
+        if (single) { lastBlob = outBlob; lastName = outName; }
+        else zip.file(outName, outBlob);
         ok++;
       } catch (e) {}
       var pb = document.getElementById("pbar"); if (pb) pb.style.width = Math.round((i + 1) / list.length * 100) + "%";
     }
     if (!ok) { toast("No downloadable images"); render(); return; }
-    var out = await zip.generateAsync({ type: "blob" });
-    var u = URL.createObjectURL(out); var a = document.createElement("a"); a.href = u; a.download = "sammapix-page.zip";
+    var dlBlob, dlName;
+    if (single) { dlBlob = lastBlob; dlName = lastName; }
+    else { dlBlob = await zip.generateAsync({ type: "blob" }); dlName = "sammapix-page.zip"; }
+    var u = URL.createObjectURL(dlBlob); var a = document.createElement("a"); a.href = u; a.download = dlName;
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 8000);
     if (needsQuota) await consume(ok); // solo l'elaborazione conta sulla quota
-    toast("✓ ZIP ready (" + ok + " images)");
+    if (window.track) window.track("ext_page_grab", { count: ok, fmt: outFmt });
+    toast(single ? "✓ Saved " + dlName : "✓ ZIP ready (" + ok + " images)");
     render();
   }
 
+  function pfchip(v, label) { return '<button class="chip' + (outFmt === v ? " on" : "") + '" data-pf="' + v + '">' + label + '</button>'; }
+  function encFmt(f) { return f === "png" ? { m: "image/png", e: "png", q: 1 } : f === "jpg" ? { m: "image/jpeg", e: "jpg", q: 0.85 } : { m: "image/webp", e: "webp", q: 0.8 }; }
   function nameOf(src) { try { return (new URL(src).pathname.split("/").pop().split(".")[0] || "img").replace(/[^a-zA-Z0-9_-]/g, "") || "img"; } catch (e) { return "img"; } }
   function extOf(src) { try { var e = new URL(src).pathname.split(".").pop().toLowerCase(); return /^(jpe?g|png|webp|gif|bmp|svg|avif)$/.test(e) ? "." + e : ".jpg"; } catch (e) { return ".jpg"; } }
 

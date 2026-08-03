@@ -1366,6 +1366,588 @@ export const IconExtractAudio: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconPdfCompress: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdc-squeeze {
+        0%, 25%  { transform: scaleY(1); }
+        55%       { transform: scaleY(0.68); }
+        75%       { transform: scaleY(1); }
+        100%      { transform: scaleY(1); }
+      }
+      @keyframes pdc-badge {
+        0%, 50%   { opacity: 0; transform: scale(0.5); }
+        68%, 88%  { opacity: 1; transform: scale(1); }
+        98%, 100% { opacity: 0; transform: scale(0.5); }
+      }
+      @keyframes pdc-arrow {
+        0%, 40%  { transform: translateY(0px); opacity: 0.4; }
+        65%       { transform: translateY(3px); opacity: 1; }
+        85%, 100%{ transform: translateY(0px); opacity: 0.4; }
+      }
+      .pdc-doc  { transform-origin: 15px 24px; animation: pdc-squeeze 2.6s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdc-badge { transform-origin: 38px 30px; animation: pdc-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdc-arr  { animation: pdc-arrow 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Documento PDF che si comprime */}
+    <g className="pdc-doc">
+      <rect x="4" y="6" width="22" height="30" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="11" width="14" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="15" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="8" y="19" width="12" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="15" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Frecce di compressione verso il basso */}
+    <g className="pdc-arr">
+      <path d="M28 20 L32 20 M30 18 L32 20 L30 22" stroke={accent} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Badge con percentuale riduzione */}
+    <g className="pdc-badge" style={{ opacity: 0 }}>
+      <rect x="30" y="22" width="16" height="16" rx="3" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="32" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">−60%</text>
+    </g>
+  </svg>
+);
+
+// ── PDF Rotate icon (PDF page rotating with circular arrow) ──────────────────
+export const IconPdfRotate: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdr-spin {
+        0%   { transform: rotate(0deg); }
+        60%  { transform: rotate(270deg); }
+        80%  { transform: rotate(270deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes pdr-doc {
+        0%, 20% { transform: rotate(0deg); opacity: 1; }
+        60%, 80% { transform: rotate(90deg); opacity: 1; }
+        100%     { transform: rotate(0deg); opacity: 1; }
+      }
+      @keyframes pdr-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.6); }
+        72%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      .pdr-arrow { transform-origin: 36px 24px; animation: pdr-spin 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdr-doc   { transform-origin: 15px 22px; animation: pdr-doc 2.8s ease-in-out infinite; }
+      .pdr-badge { transform-origin: 37px 40px; animation: pdr-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document on the left, rotates */}
+    <g className="pdr-doc">
+      <rect x="4" y="8" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="17" width="8" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="8" y="21" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="14" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Circular arrow on the right */}
+    <g className="pdr-arrow">
+      <path
+        d="M28 18 A9 9 0 1 1 27.5 33"
+        stroke={accent} strokeWidth="2" fill="none" strokeLinecap="round"
+      />
+      <path d="M24 32 L28.5 34 L27 29" stroke={accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </g>
+    {/* 90° badge */}
+    <g className="pdr-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="38" width="22" height="8" rx="4" fill={accent}/>
+      <text x="37" y="44" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">90°</text>
+    </g>
+  </svg>
+);
+
+// ── PDF Unlock icon (padlock that opens — accent rosso cluster PDF) ───────────
+export const IconPdfUnlock: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdu-doc {
+        0%, 20% { transform: translateX(0px); }
+        55%      { transform: translateX(4px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes pdu-shackle {
+        0%, 25%  { transform: translateY(0px) rotate(0deg); }
+        55%      { transform: translateY(-4px) rotate(-18deg); }
+        80%, 100%{ transform: translateY(0px) rotate(0deg); }
+      }
+      @keyframes pdu-badge {
+        0%, 50%  { opacity: 0; transform: scale(0.5); }
+        68%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.5); }
+      }
+      .pdu-doc     { animation: pdu-doc 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdu-shackle { transform-origin: 32px 21px; animation: pdu-shackle 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdu-badge   { transform-origin: 38px 40px; animation: pdu-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document — slides right as it gets unlocked */}
+    <g className="pdu-doc">
+      <rect x="2" y="8" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="6" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="6" y="17" width="8" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="6" y="21" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="12" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Lock body — stays fixed */}
+    <rect x="26" y="24" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+    {/* Keyhole */}
+    <circle cx="35" cy="29.5" r="2" fill={accent} fillOpacity="0.7"/>
+    <rect x="34" y="30.5" width="2" height="4" rx="1" fill={accent} fillOpacity="0.7"/>
+    {/* Shackle — rotates open */}
+    <g className="pdu-shackle">
+      <path
+        d="M30 24 L30 20 C30 16.5 40 16.5 40 20 L40 24"
+        stroke={accent} strokeWidth="2" strokeLinecap="round" fill="none"
+      />
+    </g>
+    {/* Unlocked badge */}
+    <g className="pdu-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="38" width="22" height="8" rx="4" fill={accent}/>
+      <text x="37" y="44" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">FREE</text>
+    </g>
+  </svg>
+);
+
+// ── PDF Page Numbers icon (document + "1 2 3" digits appearing in sequence) ──
+export const IconPdfPageNumbers: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ppn-n1 {
+        0%, 10%  { opacity: 0; transform: translateY(3px); }
+        25%, 75% { opacity: 1; transform: translateY(0px); }
+        88%, 100%{ opacity: 0; transform: translateY(3px); }
+      }
+      @keyframes ppn-n2 {
+        0%, 25%  { opacity: 0; transform: translateY(3px); }
+        40%, 75% { opacity: 1; transform: translateY(0px); }
+        88%, 100%{ opacity: 0; transform: translateY(3px); }
+      }
+      @keyframes ppn-n3 {
+        0%, 40%  { opacity: 0; transform: translateY(3px); }
+        55%, 75% { opacity: 1; transform: translateY(0px); }
+        88%, 100%{ opacity: 0; transform: translateY(3px); }
+      }
+      @keyframes ppn-line {
+        0%, 80%  { transform: scaleX(1); }
+        88%, 100%{ transform: scaleX(0.6); }
+      }
+      .ppn-n1 { transform-origin: 12px 34px; animation: ppn-n1 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ppn-n2 { transform-origin: 22px 34px; animation: ppn-n2 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ppn-n3 { transform-origin: 32px 34px; animation: ppn-n3 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ppn-ln { transform-origin: left center; animation: ppn-line 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* PDF document */}
+    <rect x="4" y="4" width="30" height="38" rx="3" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Content lines */}
+    <rect x="9" y="10" width="20" height="2" rx="1" fill={accent} fillOpacity="0.35"/>
+    <rect x="9" y="15" width="15" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    <rect x="9" y="20" width="18" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    <rect x="9" y="25" width="12" height="2" rx="1" fill={accent} fillOpacity="0.20"/>
+    {/* Bottom rule */}
+    <g className="ppn-ln">
+      <line x1="9" y1="33" x2="29" y2="33" stroke={accent} strokeWidth="0.75" strokeDasharray="2 1.5" strokeLinecap="round" strokeOpacity="0.5"/>
+    </g>
+    {/* Animated "1 2 3" digits */}
+    <g className="ppn-n1" style={{ opacity: 0 }}>
+      <text x="12" y="38" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">1</text>
+    </g>
+    <g className="ppn-n2" style={{ opacity: 0 }}>
+      <text x="22" y="38" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">2</text>
+    </g>
+    <g className="ppn-n3" style={{ opacity: 0 }}>
+      <text x="32" y="38" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">3</text>
+    </g>
+    {/* Hash badge in top-right corner */}
+    <circle cx="40" cy="10" r="6" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <text x="40" y="13.5" fontSize="7" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">#</text>
+  </svg>
+);
+
+// ── PDF Protect icon (document + lock CLOSING over it — opposite of Unlock) ───
+export const IconPdfProtect: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdp-doc {
+        0%, 20%  { transform: translateX(0px); }
+        50%       { transform: translateX(-3px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes pdp-shackle {
+        0%, 15%  { transform: translateY(-5px); }
+        50%, 88% { transform: translateY(0px); }
+        100%     { transform: translateY(-5px); }
+      }
+      @keyframes pdp-shield {
+        0%, 40%  { opacity: 0; transform: scale(0.5); }
+        60%, 85% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.5); }
+      }
+      .pdp-doc     { animation: pdp-doc 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdp-shackle { transform-origin: 32px 22px; animation: pdp-shackle 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdp-shield  { transform-origin: 37px 41px; animation: pdp-shield 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document — nudges left as lock closes over it */}
+    <g className="pdp-doc">
+      <rect x="2" y="8" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="6" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="6" y="17" width="8" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="6" y="21" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="12" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Lock body — fixed position */}
+    <rect x="26" y="24" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+    {/* Keyhole */}
+    <circle cx="35" cy="29.5" r="2" fill={accent} fillOpacity="0.7"/>
+    <rect x="34" y="30.5" width="2" height="4" rx="1" fill={accent} fillOpacity="0.7"/>
+    {/* Shackle — drops DOWN (closing) — opposite of Unlock which opens upward */}
+    <g className="pdp-shackle">
+      <path
+        d="M30 24 L30 20 C30 16.5 40 16.5 40 20 L40 24"
+        stroke={accent} strokeWidth="2" strokeLinecap="round" fill="none"
+      />
+    </g>
+    {/* "LOCK" badge that pops in when done */}
+    <g className="pdp-shield" style={{ opacity: 0 }}>
+      <rect x="26" y="38" width="22" height="8" rx="4" fill={accent}/>
+      <text x="37" y="44" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">LOCK</text>
+    </g>
+  </svg>
+);
+
+// ── Rotate Image icon (photo frame rotating with circular arrow) ──────────────
+export const IconRotateImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ri-spin {
+        0%   { transform: rotate(0deg); }
+        75%  { transform: rotate(270deg); }
+        100% { transform: rotate(270deg); }
+      }
+      @keyframes ri-arrow {
+        0%, 60%  { opacity: 0; transform: scale(0.6); }
+        78%, 92% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ri-badge {
+        0%, 65%  { opacity: 0; transform: scale(0.7); }
+        80%, 93% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .ri-frame  { transform-origin: 20px 20px; animation: ri-spin 2.4s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .ri-arrow  { transform-origin: 38px 12px; animation: ri-arrow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ri-badge  { transform-origin: 38px 38px; animation: ri-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Rotating photo frame */}
+    <g className="ri-frame">
+      <rect x="6" y="6" width="28" height="28" rx="4" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="13" cy="13" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M6 28 L14 20 L20 25 L26 18 L34 26" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Circular arrow (CW) in top-right — pops in after rotation */}
+    <g className="ri-arrow" style={{ opacity: 0 }}>
+      <path d="M34 8 A6 6 0 1 1 44 14" stroke={accent} strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M44 11 L44 14 L41 14" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </g>
+    {/* 90° badge bottom-right */}
+    <g className="ri-badge" style={{ opacity: 0 }}>
+      <rect x="28" y="32" width="18" height="10" rx="5" fill={accent}/>
+      <text x="37" y="39.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">90°</text>
+    </g>
+  </svg>
+);
+
+export const IconFlipImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes fi-mirror {
+        0%   { transform: scaleX(1); }
+        40%  { transform: scaleX(-1); }
+        55%  { transform: scaleX(-1); }
+        95%  { transform: scaleX(1); }
+        100% { transform: scaleX(1); }
+      }
+      @keyframes fi-axis {
+        0%, 30%  { opacity: 0.2; }
+        45%, 60% { opacity: 1; }
+        90%, 100%{ opacity: 0.2; }
+      }
+      @keyframes fi-badge {
+        0%, 42%  { opacity: 0; transform: scale(0.7); }
+        57%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .fi-frame  { transform-origin: 24px 22px; animation: fi-mirror 2.6s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .fi-axis   { animation: fi-axis 2.6s ease-in-out infinite; }
+      .fi-badge  { transform-origin: 24px 40px; animation: fi-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Axis / mirror line */}
+    <line className="fi-axis" x1="24" y1="3" x2="24" y2="41" stroke={accent} strokeWidth="1.5" strokeDasharray="3 2" strokeLinecap="round"/>
+    {/* Photo frame that flips horizontally */}
+    <g className="fi-frame">
+      <rect x="6" y="7" width="34" height="26" rx="3.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="14" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M6 28 L14 20 L20 25 L28 17 L40 26" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* H badge */}
+    <g className="fi-badge" style={{ opacity: 0 }}>
+      <rect x="12" y="35" width="24" height="10" rx="5" fill={accent}/>
+      <text x="24" y="42.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">MIRROR</text>
+    </g>
+  </svg>
+);
+
+export const IconRoundImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ri-morph {
+        0%, 15%  { rx: 4; ry: 4; }
+        40%, 60% { rx: 24; ry: 24; }
+        85%, 100%{ rx: 4; ry: 4; }
+      }
+      @keyframes ri-badge {
+        0%, 38%  { opacity: 0; transform: scale(0.6); }
+        55%, 85% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ri-checker {
+        0%, 100% { opacity: 0.25; }
+        50%      { opacity: 0.55; }
+      }
+      .rim-sq  { animation: ri-morph 2.6s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .rim-bdg { transform-origin: 37px 37px; animation: ri-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .rim-chk { animation: ri-checker 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Transparency checkerboard behind the shape */}
+    <g className="rim-chk">
+      <rect x="6" y="6" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="20" y="6" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="34" y="6" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="13" y="13" width="7" height="7" fill={accent} fillOpacity="0.10"/>
+      <rect x="27" y="13" width="7" height="7" fill={accent} fillOpacity="0.10"/>
+      <rect x="6" y="20" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="34" y="20" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+    </g>
+    {/* Morphing shape: square → circle (animated rx/ry via CSS) */}
+    <rect
+      className="rim-sq"
+      x="6" y="6" width="36" height="36"
+      fill={accent} fillOpacity="0.22"
+      stroke={accent} strokeWidth="1.75"
+      rx="4" ry="4"
+    />
+    {/* Mini mountain landscape inside */}
+    <circle cx="16" cy="17" r="3" fill={accent} fillOpacity="0.5"/>
+    <path d="M6 32 L14 23 L20 28 L26 19 L42 32Z" fill={accent} fillOpacity="0.3"/>
+    {/* Badge: circle / rounded corners indicator */}
+    <g className="rim-bdg" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="40.5" fontSize="4.8" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">⬤ circle</text>
+    </g>
+  </svg>
+);
+
+export const IconAddBorder: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ab-frame {
+        0%, 20%  { stroke-width: 1.5; }
+        50%      { stroke-width: 5; }
+        80%, 100%{ stroke-width: 1.5; }
+      }
+      @keyframes ab-grow {
+        0%, 20%  { transform: scale(1); }
+        50%      { transform: scale(0.82); }
+        80%, 100%{ transform: scale(1); }
+      }
+      @keyframes ab-badge {
+        0%, 42%  { opacity: 0; transform: scale(0.7); }
+        57%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .ab-border { animation: ab-frame 2.4s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .ab-inner  { transform-origin: 24px 22px; animation: ab-grow 2.4s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .ab-badge  { transform-origin: 38px 38px; animation: ab-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Outer border rect — animates stroke-width to simulate growing border */}
+    <rect className="ab-border" x="3" y="3" width="42" height="36" rx="4" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.5"/>
+    {/* Inner image that shrinks as border grows */}
+    <g className="ab-inner">
+      <rect x="8" y="8" width="32" height="26" rx="2.5" fill={accent} fillOpacity="0.14" stroke={accent} strokeWidth="0.75"/>
+      <circle cx="15" cy="15" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M8 28 L16 20 L22 25 L28 18 L40 27" stroke={accent} strokeWidth="1.15" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Badge bottom right: "+" border label */}
+    <g className="ab-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="20" height="10" rx="5" fill={accent}/>
+      <text x="36" y="41.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">+border</text>
+    </g>
+  </svg>
+);
+
+export const IconAddText: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes at-img {
+        0%, 20%  { opacity: 0.6; }
+        50%      { opacity: 1; }
+        80%, 100%{ opacity: 0.6; }
+      }
+      @keyframes at-text {
+        0%, 15%  { transform: translateY(6px); opacity: 0; }
+        40%, 75% { transform: translateY(0px); opacity: 1; }
+        95%, 100%{ transform: translateY(6px); opacity: 0; }
+      }
+      @keyframes at-cursor {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0; }
+      }
+      .at-img  { animation: at-img 2.6s ease-in-out infinite; }
+      .at-text { transform-origin: 24px 34px; animation: at-text 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .at-cur  { animation: at-cursor 0.8s step-end infinite; }
+    `}</style>
+    {/* Photo frame */}
+    <g className="at-img">
+      <rect x="4" y="4" width="40" height="28" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
+      {/* Sun */}
+      <circle cx="12" cy="11" r="3.5" fill={accent} fillOpacity="0.5"/>
+      {/* Mountains */}
+      <path d="M4 24 L14 14 L22 20 L30 11 L44 22 L44 32 L4 32Z" fill={accent} fillOpacity="0.18"/>
+    </g>
+    {/* Text line appearing at bottom */}
+    <g className="at-text" style={{ opacity: 0 }}>
+      <rect x="4" y="34" width="32" height="10" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="0.75"/>
+      <text x="8" y="41.5" fontSize="6" fill={accent} fontWeight="700" fontFamily="Arial,sans-serif">Hello World</text>
+      <rect className="at-cur" x="37" y="36" width="1.5" height="6" rx="0.75" fill={accent}/>
+    </g>
+    {/* "A" badge top-right */}
+    <circle cx="39" cy="9" r="6" fill={accent}/>
+    <text x="39" y="12.5" fontSize="8" fill="white" textAnchor="middle" fontWeight="800" fontFamily="Arial,sans-serif">A</text>
+  </svg>
+);
+
+// ── Image to Base64 icon (image morphs into base64 character stream) ──────────
+export const IconImageToBase64: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes b64-imgfade {
+        0%, 20%  { opacity: 1; }
+        50%      { opacity: 0.3; }
+        80%, 100%{ opacity: 1; }
+      }
+      @keyframes b64-chars {
+        0%, 15%  { opacity: 0; transform: translateX(-4px); }
+        45%, 78% { opacity: 1; transform: translateX(0px); }
+        95%, 100%{ opacity: 0; transform: translateX(4px); }
+      }
+      @keyframes b64-arrow {
+        0%, 20% { transform: translateX(-2px); opacity: 0.4; }
+        55%     { transform: translateX(2px); opacity: 1; }
+        80%, 100%{ transform: translateX(-2px); opacity: 0.4; }
+      }
+      @keyframes b64-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.7); }
+        60%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .b64-img   { animation: b64-imgfade 2.6s ease-in-out infinite; }
+      .b64-chars { transform-origin: 36px 22px; animation: b64-chars 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .b64-arrow { animation: b64-arrow 2.6s ease-in-out infinite; }
+      .b64-badge { transform-origin: 38px 40px; animation: b64-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Left: image thumbnail */}
+    <g className="b64-img">
+      <rect x="2" y="8" width="20" height="22" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="8" cy="14" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M2 24 L8 18 L13 22 L17 17 L22 23" stroke={accent} strokeWidth="1.15" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Center arrow */}
+    <g className="b64-arrow">
+      <path d="M24 19 L28 19 M26 17 L28 19 L26 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Right: base64 character stream */}
+    <g className="b64-chars" style={{ opacity: 0 }}>
+      <rect x="30" y="8" width="16" height="22" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="16" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">iVBO</text>
+      <text x="38" y="21" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">Rw0K</text>
+      <text x="38" y="26" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">GgoA</text>
+    </g>
+    {/* Badge: "b64" */}
+    <g className="b64-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="36" width="20" height="9" rx="4.5" fill={accent}/>
+      <text x="36" y="42.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">base64</text>
+    </g>
+  </svg>
+);
+
+// ── Photo Collage Maker icon (grid cells composing into one image) ─────────
+export const IconCollageMaker: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes cm-cell-1 {
+        0%, 15%  { opacity: 0; transform: scale(0.7) translate(-3px, -3px); }
+        35%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(-3px, -3px); }
+      }
+      @keyframes cm-cell-2 {
+        0%, 25%  { opacity: 0; transform: scale(0.7) translate(3px, -3px); }
+        45%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(3px, -3px); }
+      }
+      @keyframes cm-cell-3 {
+        0%, 35%  { opacity: 0; transform: scale(0.7) translate(-3px, 3px); }
+        55%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(-3px, 3px); }
+      }
+      @keyframes cm-cell-4 {
+        0%, 45%  { opacity: 0; transform: scale(0.7) translate(3px, 3px); }
+        65%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(3px, 3px); }
+      }
+      @keyframes cm-badge {
+        0%, 62%  { opacity: 0; transform: scale(0.6); }
+        78%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      .cm-c1 { transform-origin: 12px 12px; animation: cm-cell-1 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-c2 { transform-origin: 26px 12px; animation: cm-cell-2 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-c3 { transform-origin: 12px 26px; animation: cm-cell-3 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-c4 { transform-origin: 26px 26px; animation: cm-cell-4 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-badge { transform-origin: 36px 38px; animation: cm-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Outer frame */}
+    <rect x="2" y="2" width="38" height="38" rx="3" fill={accent} fillOpacity="0.07" stroke={accent} strokeWidth="1.5"/>
+    {/* Top-left cell */}
+    <g className="cm-c1">
+      <rect x="4" y="4" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="8" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M4 17 L9 12 L13 15 L20 9 L20 20 L4 20Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Top-right cell */}
+    <g className="cm-c2">
+      <rect x="22" y="4" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="26" cy="8" r="2.5" fill={accent} fillOpacity="0.4"/>
+      <path d="M22 17 L27 13 L32 16 L38 11 L38 20 L22 20Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Bottom-left cell */}
+    <g className="cm-c3">
+      <rect x="4" y="22" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="26" r="2.5" fill={accent} fillOpacity="0.45"/>
+      <path d="M4 35 L10 29 L14 32 L20 26 L20 38 L4 38Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Bottom-right cell */}
+    <g className="cm-c4">
+      <rect x="22" y="22" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="26" cy="26" r="2.5" fill={accent} fillOpacity="0.35"/>
+      <path d="M22 35 L28 30 L33 33 L38 27 L38 38 L22 38Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Completion badge */}
+    <g className="cm-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="20" height="10" rx="5" fill={accent}/>
+      <text x="36" y="41.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">DONE</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

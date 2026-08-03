@@ -97,7 +97,9 @@ export async function extractImageThumbnail(file: File): Promise<string> {
 
 export async function extractPdfThumbnail(file: File): Promise<string | null> {
   try {
-    const pdfjsLib = await import("pdfjs-dist");
+    // pdfjs-dist v5 ESM rompe sotto webpack: build nativo da /public (webpackIgnore).
+    const pdfjsUrl = "/pdf.min.mjs";
+    const pdfjsLib = (await import(/* webpackIgnore: true */ pdfjsUrl)) as unknown as typeof import("pdfjs-dist");
     pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
     const arrayBuffer = await file.arrayBuffer();
