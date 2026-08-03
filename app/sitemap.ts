@@ -176,6 +176,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/round-image",
     "/tools/add-text-to-image",
     "/tools/image-to-base64",
+    "/tools/collage-maker",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

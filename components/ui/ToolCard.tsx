@@ -1879,6 +1879,75 @@ export const IconImageToBase64: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Photo Collage Maker icon (grid cells composing into one image) ─────────
+export const IconCollageMaker: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes cm-cell-1 {
+        0%, 15%  { opacity: 0; transform: scale(0.7) translate(-3px, -3px); }
+        35%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(-3px, -3px); }
+      }
+      @keyframes cm-cell-2 {
+        0%, 25%  { opacity: 0; transform: scale(0.7) translate(3px, -3px); }
+        45%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(3px, -3px); }
+      }
+      @keyframes cm-cell-3 {
+        0%, 35%  { opacity: 0; transform: scale(0.7) translate(-3px, 3px); }
+        55%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(-3px, 3px); }
+      }
+      @keyframes cm-cell-4 {
+        0%, 45%  { opacity: 0; transform: scale(0.7) translate(3px, 3px); }
+        65%, 80% { opacity: 1; transform: scale(1) translate(0,0); }
+        100%     { opacity: 0; transform: scale(0.7) translate(3px, 3px); }
+      }
+      @keyframes cm-badge {
+        0%, 62%  { opacity: 0; transform: scale(0.6); }
+        78%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      .cm-c1 { transform-origin: 12px 12px; animation: cm-cell-1 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-c2 { transform-origin: 26px 12px; animation: cm-cell-2 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-c3 { transform-origin: 12px 26px; animation: cm-cell-3 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-c4 { transform-origin: 26px 26px; animation: cm-cell-4 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cm-badge { transform-origin: 36px 38px; animation: cm-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Outer frame */}
+    <rect x="2" y="2" width="38" height="38" rx="3" fill={accent} fillOpacity="0.07" stroke={accent} strokeWidth="1.5"/>
+    {/* Top-left cell */}
+    <g className="cm-c1">
+      <rect x="4" y="4" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="8" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M4 17 L9 12 L13 15 L20 9 L20 20 L4 20Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Top-right cell */}
+    <g className="cm-c2">
+      <rect x="22" y="4" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="26" cy="8" r="2.5" fill={accent} fillOpacity="0.4"/>
+      <path d="M22 17 L27 13 L32 16 L38 11 L38 20 L22 20Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Bottom-left cell */}
+    <g className="cm-c3">
+      <rect x="4" y="22" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="8" cy="26" r="2.5" fill={accent} fillOpacity="0.45"/>
+      <path d="M4 35 L10 29 L14 32 L20 26 L20 38 L4 38Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Bottom-right cell */}
+    <g className="cm-c4">
+      <rect x="22" y="22" width="16" height="16" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="26" cy="26" r="2.5" fill={accent} fillOpacity="0.35"/>
+      <path d="M22 35 L28 30 L33 33 L38 27 L38 38 L22 38Z" fill={accent} fillOpacity="0.2"/>
+    </g>
+    {/* Completion badge */}
+    <g className="cm-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="20" height="10" rx="5" fill={accent}/>
+      <text x="36" y="41.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">DONE</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

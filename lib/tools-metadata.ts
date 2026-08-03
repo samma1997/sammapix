@@ -735,6 +735,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "base64-to-image-converter",
     ],
   },
+  "collage-maker": {
+    id: "collage-maker",
+    name: "Photo Collage Maker",
+    shortDesc: "Combine 2-9 photos into a grid collage — 8 layouts, no upload",
+    slug: "/tools/collage-maker",
+    category: "edit",
+    relatedTools: ["instagram-grid-splitter", "add-border", "croproatio", "resizepack"],
+    relatedBlogSlugs: [
+      "photo-collage-maker-online",
+      "image-grid-maker-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

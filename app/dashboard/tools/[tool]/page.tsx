@@ -45,6 +45,7 @@ import {
   IconRoundImage,
   IconAddText,
   IconImageToBase64,
+  IconCollageMaker,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -97,6 +98,7 @@ const AddBorderClient = dynamic(() => import("@/components/tools/AddBorderClient
 const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClient"));
 const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToImageClient"));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase64Client"));
+const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMakerClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -150,6 +152,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "round-image":      RoundImageClient,
   "add-text-to-image": AddTextToImageClient,
   "image-to-base64": ImageToBase64Client,
+  "collage-maker": CollageMakerClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -244,6 +247,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "round-image":      { Icon: IconRoundImage,     accent: "#0EA5E9" },
   "add-text-to-image": { Icon: IconAddText,       accent: "#0EA5E9" },
   "image-to-base64":   { Icon: IconImageToBase64, accent: "#6366F1" },
+  "collage-maker":     { Icon: IconCollageMaker,  accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -789,6 +793,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy and use", desc: "Click Copy to send the string to your clipboard. Paste it directly into your CSS file, HTML template or API payload. Use the decode tab to preview a base64 string as an image." },
     ],
     proTip: { text: "Compress the image first to reduce the base64 string size by up to 80%.", linkLabel: "Compress Images", linkHref: "/dashboard/tools/compress" },
+  },
+  "collage-maker": {
+    label: "Photo Collage Maker",
+    tagline: "Combine 2-9 photos into a grid collage. 8 layouts, custom gap and color. Files never leave your browser.",
+    steps: [
+      { title: "Load your photos", desc: "Drop 2-9 JPG, PNG or WebP photos onto the upload area. Up to 20 photos on Free, 200 on Pro. Compatible grid layouts appear automatically." },
+      { title: "Choose layout and settings", desc: "Pick a grid preset (2×2, 3×3, etc.), set gap between cells, pick a background color, and choose Cover (fill & crop) or Contain (show full photo) fit mode." },
+      { title: "Create and download", desc: "Click Create collage. A preview appears instantly. Download as JPG (smaller) or PNG (lossless) at 720, 1080, 1440 or 2048 px." },
+    ],
+    proTip: { text: "For Instagram carousel grids, use a 3×3 layout at 1080 px with 0 gap and cover mode for a seamless puzzle effect.", linkLabel: "Try Instagram Grid Splitter", linkHref: "/dashboard/tools/instagram-grid-splitter" },
   },
 };
 

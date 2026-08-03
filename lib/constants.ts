@@ -113,6 +113,7 @@ export const TOOL_SLUGS = [
   "round-image",
   "add-text-to-image",
   "image-to-base64",
+  "collage-maker",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

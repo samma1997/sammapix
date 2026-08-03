@@ -62,6 +62,7 @@ import {
   IconRoundImage,
   IconAddText,
   IconImageToBase64,
+  IconCollageMaker,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -879,6 +880,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconImageToBase64,
     category: ["Optimize", "Creative"],
     keywords: ["image to base64", "base64 image", "data uri", "encode image", "base64 to image", "embed image css", "embed image html", "inline image", "base64 string", "base64 converter", "data uri generator", "base64 decoder"],
+  },
+  {
+    name: "Photo Collage Maker",
+    slug: "collage-maker",
+    href: "/dashboard/tools/collage-maker",
+    tagline: "Combine 2-9 photos into a grid collage. 8 layouts, custom gap, color. Download JPG or PNG. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "No upload"],
+    Icon: IconCollageMaker,
+    category: ["Creative"],
+    keywords: ["collage", "photo collage", "grid", "combine photos", "picture grid", "image grid", "collage maker", "photo grid", "merge photos", "photo mosaic", "multi photo"],
   },
 ];
 

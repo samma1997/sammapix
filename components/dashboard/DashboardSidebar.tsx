@@ -41,6 +41,7 @@ import {
   TrendingUp,
   FolderArchive,
   Type,
+  LayoutGrid,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
@@ -55,7 +56,7 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
   developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker"],
 };
 
 // ─── Tool definitions ─────────────────────────────────────────────────────────
@@ -116,6 +117,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Round Image", slug: "round-image", href: "/dashboard/tools/round-image", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Add Text to Image", slug: "add-text-to-image", href: "/dashboard/tools/add-text-to-image", icon: <Type className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Image to Base64", slug: "image-to-base64", href: "/dashboard/tools/image-to-base64", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Photo Collage Maker", slug: "collage-maker", href: "/dashboard/tools/collage-maker", icon: <LayoutGrid className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Compress PDF", slug: "pdf-compress", href: "/dashboard/tools/pdf-compress", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Rotate PDF", slug: "pdf-rotate", href: "/dashboard/tools/pdf-rotate", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Unlock PDF", slug: "pdf-unlock", href: "/dashboard/tools/pdf-unlock", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },

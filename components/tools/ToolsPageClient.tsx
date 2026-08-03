@@ -55,6 +55,7 @@ import {
   IconRoundImage,
   IconAddText,
   IconImageToBase64,
+  IconCollageMaker,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -875,6 +876,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Dev", "No upload"],
     Icon: IconImageToBase64,
     category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Photo Collage Maker",
+    href: "/tools/collage-maker",
+    tagline: "Combine 2-9 photos into a grid collage. 8 layouts, custom gap, color, cover/contain. Download as JPG or PNG. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "No upload"],
+    Icon: IconCollageMaker,
+    category: ["Creative"],
     isNew: true,
   },
 ];
