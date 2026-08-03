@@ -272,6 +272,8 @@ export const BLOG_SLUGS = [
   "how-to-transcribe-video-generate-subtitles-free",
   "what-size-should-blog-images-be",
   "how-to-batch-prepare-images-for-website",
+  "photo-collage-maker-online",
+  "image-grid-maker-free",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
