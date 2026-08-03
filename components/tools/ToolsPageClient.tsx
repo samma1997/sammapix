@@ -45,6 +45,7 @@ import {
   IconTrimVideo,
   IconExtractAudio,
   IconPdfCompress,
+  IconPdfRotate,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -674,6 +675,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfCompress,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Rotate PDF",
+    href: "/tools/pdf-rotate",
+    tagline: "Rotate PDF pages per-page or all at once. Text stays selectable — rotation is metadata, not rasterization. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfRotate,
     category: ["Optimize"],
     isNew: true,
   },

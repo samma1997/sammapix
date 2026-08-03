@@ -48,6 +48,7 @@ import {
   IconUpscale,
   IconPassportPhoto,
   IconPdfCompress,
+  IconPdfRotate,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -334,6 +335,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Trim Video", href: "/tools/trim-video", tagline: "Cut a clip with a live preview. No upload, no watermark.", accent: "#D97706", badge: "Free", Icon: IconTrimVideo, category: "Creative", isNew: true },
   { name: "Extract Audio", href: "/tools/extract-audio", tagline: "Video to MP3 or M4A. No upload, no watermark.", accent: "#059669", badge: "Free", Icon: IconExtractAudio, category: "Creative", isNew: true },
   { name: "Instagram Grid Splitter", href: "/tools/instagram-grid-splitter", tagline: "Split a photo into a 3×3 puzzle grid, tiles numbered for posting.", accent: "#EC4899", badge: "Free", Icon: IconInstagramGrid, category: "Creative", isNew: true },
+  { name: "Rotate PDF", href: "/tools/pdf-rotate", tagline: "Rotate PDF pages per-page or all at once. Text stays selectable. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfRotate, category: "Optimize", isNew: true },
   { name: "Remove Background", href: "/tools/remove-bg", tagline: "Remove image backgrounds instantly with AI. 100% browser-based.", accent: "#EC4899", badge: "Free", Icon: IconRemoveBg, category: "AI-Powered" },
   { name: "AI Upscale", href: "/tools/upscale", tagline: "AI upscale images 2x or 4x without losing quality.", accent: "#8B5CF6", badge: "Free", Icon: IconUpscale, category: "AI-Powered" },
   { name: "Passport Photo", href: "/tools/passport-photo", tagline: "Auto crop + white background for passport and visa photos. 6 country presets.", accent: "#3B82F6", badge: "Free", Icon: IconPassportPhoto, category: "AI-Powered" },

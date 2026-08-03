@@ -497,6 +497,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "reduce-pdf-file-size-for-email",
     ],
   },
+  "pdf-rotate": {
+    id: "pdf-rotate",
+    name: "Rotate PDF",
+    shortDesc: "Rotate PDF pages in-browser — text stays selectable",
+    slug: "/tools/pdf-rotate",
+    category: "optimize",
+    relatedTools: ["pdf-split", "pdf-merge", "pdf-compress"],
+    relatedBlogSlugs: [
+      "rotate-pdf-online-no-upload",
+      "how-to-rotate-pdf-pages-permanently",
+    ],
+  },
   "blur-censor": {
     id: "blur-censor",
     name: "Blur & Censor",

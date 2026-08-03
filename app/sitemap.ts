@@ -166,6 +166,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/extract-audio",
     "/tools/instagram-grid-splitter",
     "/tools/pdf-compress",
+    "/tools/pdf-rotate",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

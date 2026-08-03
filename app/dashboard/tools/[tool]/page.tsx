@@ -35,6 +35,7 @@ import {
   IconUnrar,
   IconOpen7z,
   IconPdfCompress,
+  IconPdfRotate,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -77,6 +78,7 @@ const ColorMatchClient = dynamic(() => import("@/components/tools/ColorMatchClie
 const PhotoEnhanceClient = dynamic(() => import("@/components/tools/PhotoEnhanceClient"));
 const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
 const PdfCompressClient = dynamic(() => import("@/components/tools/PdfCompressClient"));
+const PdfRotateClient = dynamic(() => import("@/components/tools/PdfRotateClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -120,6 +122,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   unrar: UnrarClient,
   "open-7z": dynamic(() => import("@/components/tools/Open7zClient")),
   "pdf-compress": PdfCompressClient,
+  "pdf-rotate":   PdfRotateClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -204,6 +207,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   unrar: { Icon: IconUnrar, accent: "#0EA5E9" },
   "open-7z": { Icon: IconOpen7z, accent: "#8B5CF6" },
   "pdf-compress": { Icon: IconPdfCompress, accent: "#EF4444" },
+  "pdf-rotate":   { Icon: IconPdfRotate,   accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -649,6 +653,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download compressed PDF", desc: "See the before/after file size and percentage reduction, then download." },
     ],
     proTip: { text: "Need fewer pages instead? Split the PDF to keep only what you need.", linkLabel: "PDF Split", linkHref: "/dashboard/tools/pdf-split" },
+  },
+  "pdf-rotate": {
+    label: "Rotate PDF",
+    tagline: "Rotate PDF pages in your browser. Text stays selectable, no upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Thumbnails of every page are rendered instantly in your browser." },
+      { title: "Choose rotations", desc: "Rotate all pages at once (90° CW, CCW, 180°) or rotate individual pages using the per-page buttons." },
+      { title: "Apply and download", desc: "Click Apply rotations. Text stays fully selectable — rotation is metadata, not rasterization." },
+    ],
+    proTip: { text: "Need to reduce the file size too? Compress PDF works great after rotating.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
   },
 };
 

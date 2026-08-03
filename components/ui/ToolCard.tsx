@@ -1409,6 +1409,54 @@ export const IconPdfCompress: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── PDF Rotate icon (PDF page rotating with circular arrow) ──────────────────
+export const IconPdfRotate: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdr-spin {
+        0%   { transform: rotate(0deg); }
+        60%  { transform: rotate(270deg); }
+        80%  { transform: rotate(270deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes pdr-doc {
+        0%, 20% { transform: rotate(0deg); opacity: 1; }
+        60%, 80% { transform: rotate(90deg); opacity: 1; }
+        100%     { transform: rotate(0deg); opacity: 1; }
+      }
+      @keyframes pdr-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.6); }
+        72%, 88% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      .pdr-arrow { transform-origin: 36px 24px; animation: pdr-spin 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdr-doc   { transform-origin: 15px 22px; animation: pdr-doc 2.8s ease-in-out infinite; }
+      .pdr-badge { transform-origin: 37px 40px; animation: pdr-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document on the left, rotates */}
+    <g className="pdr-doc">
+      <rect x="4" y="8" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="17" width="8" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="8" y="21" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="14" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Circular arrow on the right */}
+    <g className="pdr-arrow">
+      <path
+        d="M28 18 A9 9 0 1 1 27.5 33"
+        stroke={accent} strokeWidth="2" fill="none" strokeLinecap="round"
+      />
+      <path d="M24 32 L28.5 34 L27 29" stroke={accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </g>
+    {/* 90° badge */}
+    <g className="pdr-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="38" width="22" height="8" rx="4" fill={accent}/>
+      <text x="37" y="44" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">90°</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

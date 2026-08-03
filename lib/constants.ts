@@ -103,6 +103,7 @@ export const TOOL_SLUGS = [
   "resize-video",
   "trim-video",
   "extract-audio",
+  "pdf-rotate",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

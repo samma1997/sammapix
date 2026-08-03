@@ -52,6 +52,7 @@ import {
   IconUnrar,
   IconOpen7z,
   IconPdfCompress,
+  IconPdfRotate,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -759,6 +760,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfCompress,
     category: ["Optimize"],
     keywords: ["compress pdf", "reduce pdf size", "shrink pdf", "pdf compressor", "smaller pdf", "pdf for email", "pdf file size", "make pdf smaller", "pdf optimizer"],
+  },
+  {
+    name: "Rotate PDF",
+    slug: "pdf-rotate",
+    href: "/dashboard/tools/pdf-rotate",
+    tagline: "Rotate PDF pages per-page or all at once. Text stays selectable. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfRotate,
+    category: ["Optimize"],
+    keywords: ["rotate pdf", "turn pdf sideways", "fix pdf orientation", "pdf rotation", "rotate scanned pdf", "rotate single page pdf", "rotate pdf and save", "rotate pdf free"],
   },
 ];
 
