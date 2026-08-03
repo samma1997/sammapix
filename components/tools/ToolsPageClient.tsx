@@ -52,6 +52,7 @@ import {
   IconRotateImage,
   IconFlipImage,
   IconAddBorder,
+  IconRoundImage,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -751,6 +752,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Batch", "No upload"],
     Icon: IconAddBorder,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Round Image",
+    href: "/tools/round-image",
+    tagline: "Circle crop or rounded corners with transparent PNG output. Batch + ZIP. 100% in your browser, no upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconRoundImage,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

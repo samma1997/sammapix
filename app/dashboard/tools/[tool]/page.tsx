@@ -42,6 +42,7 @@ import {
   IconRotateImage,
   IconFlipImage,
   IconAddBorder,
+  IconRoundImage,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -91,6 +92,7 @@ const PdfProtectClient = dynamic(() => import("@/components/tools/PdfProtectClie
 const RotateImageClient = dynamic(() => import("@/components/tools/RotateImageClient"));
 const FlipImageClient = dynamic(() => import("@/components/tools/FlipImageClient"));
 const AddBorderClient = dynamic(() => import("@/components/tools/AddBorderClient"));
+const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -141,6 +143,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "rotate-image":     RotateImageClient,
   "flip-image":       FlipImageClient,
   "add-border":       AddBorderClient,
+  "round-image":      RoundImageClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -232,6 +235,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "rotate-image":     { Icon: IconRotateImage,    accent: "#0EA5E9" },
   "flip-image":       { Icon: IconFlipImage,      accent: "#0EA5E9" },
   "add-border":       { Icon: IconAddBorder,      accent: "#0EA5E9" },
+  "round-image":      { Icon: IconRoundImage,     accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -747,6 +751,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download bordered images", desc: "Click Add border, then download each image individually or grab all as a ZIP archive." },
     ],
     proTip: { text: "For a polaroid effect, enable advanced mode and set bottom border wider than the others with white color.", linkLabel: "Try Flip Image", linkHref: "/dashboard/tools/flip-image" },
+  },
+  "round-image": {
+    label: "Round Image",
+    tagline: "Circle crop or rounded corners with transparent PNG output. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose shape and radius", desc: "Select Circle for a perfect circular crop, or Rounded corners and adjust the corner radius with the slider (4–400 px)." },
+      { title: "Download transparent PNGs", desc: "Click Round images, then download each PNG individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "For profile pictures use Circle mode. For card thumbnails, try Rounded corners at 32–80 px.", linkLabel: "Try Add Border", linkHref: "/dashboard/tools/add-border" },
   },
 };
 

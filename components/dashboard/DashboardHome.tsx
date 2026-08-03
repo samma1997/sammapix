@@ -59,6 +59,7 @@ import {
   IconRotateImage,
   IconFlipImage,
   IconAddBorder,
+  IconRoundImage,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -843,6 +844,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconAddBorder,
     category: ["Optimize", "Creative"],
     keywords: ["add border to image", "add frame to photo", "image border online", "white border photo", "black border image", "polaroid border", "photo frame free", "picture border", "add border no upload", "batch border images", "custom border color"],
+  },
+  {
+    name: "Round Image",
+    slug: "round-image",
+    href: "/dashboard/tools/round-image",
+    tagline: "Circle crop or rounded corners with transparent PNG output. Batch + ZIP. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconRoundImage,
+    category: ["Optimize", "Creative"],
+    keywords: ["round image", "circle crop image", "crop image into circle", "round profile picture", "rounded corners image", "circle avatar maker", "transparent png circle", "make image round", "circular image online", "round corners photo free"],
   },
 ];
 

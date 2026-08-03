@@ -110,6 +110,7 @@ export const TOOL_SLUGS = [
   "rotate-image",
   "flip-image",
   "add-border",
+  "round-image",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

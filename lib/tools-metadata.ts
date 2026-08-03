@@ -699,6 +699,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "add-frame-to-photo-free",
     ],
   },
+  "round-image": {
+    id: "round-image",
+    name: "Round Image",
+    shortDesc: "Circle crop or rounded corners — transparent PNG, batch, no upload",
+    slug: "/tools/round-image",
+    category: "edit",
+    relatedTools: ["croproatio", "add-border", "remove-bg"],
+    relatedBlogSlugs: [
+      "crop-image-into-circle-online",
+      "round-image-corners-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

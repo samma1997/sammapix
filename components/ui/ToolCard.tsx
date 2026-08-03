@@ -1696,6 +1696,56 @@ export const IconFlipImage: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconRoundImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ri-morph {
+        0%, 15%  { rx: 4; ry: 4; }
+        40%, 60% { rx: 24; ry: 24; }
+        85%, 100%{ rx: 4; ry: 4; }
+      }
+      @keyframes ri-badge {
+        0%, 38%  { opacity: 0; transform: scale(0.6); }
+        55%, 85% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ri-checker {
+        0%, 100% { opacity: 0.25; }
+        50%      { opacity: 0.55; }
+      }
+      .rim-sq  { animation: ri-morph 2.6s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .rim-bdg { transform-origin: 37px 37px; animation: ri-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .rim-chk { animation: ri-checker 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Transparency checkerboard behind the shape */}
+    <g className="rim-chk">
+      <rect x="6" y="6" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="20" y="6" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="34" y="6" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="13" y="13" width="7" height="7" fill={accent} fillOpacity="0.10"/>
+      <rect x="27" y="13" width="7" height="7" fill={accent} fillOpacity="0.10"/>
+      <rect x="6" y="20" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+      <rect x="34" y="20" width="7" height="7" fill={accent} fillOpacity="0.18"/>
+    </g>
+    {/* Morphing shape: square → circle (animated rx/ry via CSS) */}
+    <rect
+      className="rim-sq"
+      x="6" y="6" width="36" height="36"
+      fill={accent} fillOpacity="0.22"
+      stroke={accent} strokeWidth="1.75"
+      rx="4" ry="4"
+    />
+    {/* Mini mountain landscape inside */}
+    <circle cx="16" cy="17" r="3" fill={accent} fillOpacity="0.5"/>
+    <path d="M6 32 L14 23 L20 28 L26 19 L42 32Z" fill={accent} fillOpacity="0.3"/>
+    {/* Badge: circle / rounded corners indicator */}
+    <g className="rim-bdg" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="40.5" fontSize="4.8" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">⬤ circle</text>
+    </g>
+  </svg>
+);
+
 export const IconAddBorder: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
