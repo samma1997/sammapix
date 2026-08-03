@@ -2248,6 +2248,48 @@ function ToolBadge({ label }: { label: string }) {
   );
 }
 
+// ─── IconFlattenPdf — stacked layers collapsing into one flat layer ───────────
+
+export const IconFlattenPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes flatpdf-top {
+        0%, 15%  { transform: translateY(-8px); opacity: 0.35; }
+        55%, 80% { transform: translateY(0px);  opacity: 1; }
+        100%     { transform: translateY(-8px); opacity: 0.35; }
+      }
+      @keyframes flatpdf-mid {
+        0%, 25%  { transform: translateY(-4px); opacity: 0.55; }
+        55%, 80% { transform: translateY(0px);  opacity: 1; }
+        100%     { transform: translateY(-4px); opacity: 0.55; }
+      }
+      @keyframes flatpdf-lock {
+        0%, 55% { opacity: 0; transform: scale(0.6); }
+        72%, 90%{ opacity: 1; transform: scale(1); }
+        100%    { opacity: 0; transform: scale(0.6); }
+      }
+      .flatpdf-top  { transform-origin: 24px 18px; animation: flatpdf-top  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .flatpdf-mid  { transform-origin: 24px 22px; animation: flatpdf-mid  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .flatpdf-lock { transform-origin: 36px 36px; animation: flatpdf-lock 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Base layer (static, most opaque) */}
+    <rect x="8" y="32" width="32" height="5" rx="1.5" fill={accent} fillOpacity="0.9"/>
+    {/* Middle layer */}
+    <g className="flatpdf-mid">
+      <rect x="8" y="24" width="32" height="5" rx="1.5" fill={accent} fillOpacity="0.55" stroke={accent} strokeWidth="0.75"/>
+    </g>
+    {/* Top layer */}
+    <g className="flatpdf-top">
+      <rect x="8" y="16" width="32" height="5" rx="1.5" fill={accent} fillOpacity="0.28" stroke={accent} strokeWidth="0.75"/>
+    </g>
+    {/* Lock badge */}
+    <g className="flatpdf-lock" style={{ opacity: 0 }}>
+      <rect x="28" y="28" width="16" height="12" rx="3" fill={accent}/>
+      <text x="36" y="37" fontSize="5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">FLAT</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

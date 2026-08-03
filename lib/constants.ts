@@ -117,6 +117,7 @@ export const TOOL_SLUGS = [
   "remove-pdf-pages",
   "pdf-watermark",
   "pdf-sign",
+  "flatten-pdf",
   "pdf-organize",
   "crop-pdf",
 ] as const;

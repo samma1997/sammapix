@@ -68,6 +68,7 @@ import {
   IconPdfSign,
   IconPdfOrganize,
   IconCropPdf,
+  IconFlattenPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -951,6 +952,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconCropPdf,
     category: ["Optimize"],
     keywords: ["crop pdf", "crop pdf online", "trim pdf margins", "remove white margins pdf", "crop pdf pages", "crop pdf free", "pdf margin cutter", "reduce pdf margins", "pdf crop tool"],
+  },
+  {
+    name: "Flatten PDF",
+    slug: "flatten-pdf",
+    href: "/dashboard/tools/flatten-pdf",
+    tagline: "Merge form fields into the page — filled values become permanent and non-editable. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconFlattenPdf,
+    category: ["Optimize"],
+    keywords: ["flatten pdf", "flatten pdf online", "flatten pdf form", "make pdf non-editable", "flatten fillable pdf", "lock pdf form fields", "flatten pdf free", "pdf flatten fields browser"],
   },
 ];
 

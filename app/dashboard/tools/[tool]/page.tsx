@@ -51,6 +51,7 @@ import {
   IconPdfSign,
   IconPdfOrganize,
   IconCropPdf,
+  IconFlattenPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -109,6 +110,7 @@ const PdfWatermarkClient = dynamic(() => import("@/components/tools/PdfWatermark
 const PdfSignClient = dynamic(() => import("@/components/tools/PdfSignClient"));
 const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeClient"));
 const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
+const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -168,6 +170,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-sign":         PdfSignClient,
   "pdf-organize":     PdfOrganizeClient,
   "crop-pdf":         CropPdfClient,
+  "flatten-pdf":      FlattenPdfClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -268,6 +271,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-sign":          { Icon: IconPdfSign,        accent: "#EF4444" },
   "pdf-organize":      { Icon: IconPdfOrganize,    accent: "#EF4444" },
   "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
+  "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -873,6 +877,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the cropped PDF", desc: "Click Crop PDF. The margins are removed from every page using PDF CropBox/MediaBox and the file downloads immediately. Text stays fully selectable." },
     ],
     proTip: { text: "After cropping, compress the PDF to reduce file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "flatten-pdf": {
+    label: "Flatten PDF",
+    tagline: "Merge form fields into the page — filled values become permanent, non-editable. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The tool reads the file in your browser and instantly detects whether it has interactive form fields — nothing is uploaded." },
+      { title: "Click Flatten PDF", desc: "pdf-lib merges all text boxes, checkboxes, radio buttons and dropdowns into the static page content. If no fields are found, it honestly tells you and still produces a clean re-saved copy." },
+      { title: "Download the flattened PDF", desc: "Click Download. The filled values are now a permanent part of every page and the document looks identical on every PDF reader and printer." },
+    ],
+    proTip: { text: "After flattening, add a password to prevent any further editing of the document.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
   },
 };
 

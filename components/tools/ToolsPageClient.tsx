@@ -61,6 +61,7 @@ import {
   IconPdfSign,
   IconPdfOrganize,
   IconCropPdf,
+  IconFlattenPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -940,6 +941,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No Signup"],
     Icon: IconCropPdf,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Flatten PDF",
+    href: "/tools/flatten-pdf",
+    tagline: "Merge form fields into the page so filled values become permanent and non-editable. PDF looks the same on every reader. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconFlattenPdf,
     category: ["Optimize"],
     isNew: true,
   },

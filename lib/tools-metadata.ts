@@ -801,6 +801,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["croproatio", "pdf-compress", "pdf-organize"],
     relatedBlogSlugs: ["crop-pdf-online-free", "crop-pdf-margins-no-upload"],
   },
+  "flatten-pdf": {
+    id: "flatten-pdf",
+    name: "Flatten PDF",
+    shortDesc: "Merge form fields into the page — filled values become permanent, no upload",
+    slug: "/tools/flatten-pdf",
+    category: "optimize",
+    relatedTools: ["pdf-protect", "pdf-watermark", "pdf-compress"],
+    relatedBlogSlugs: ["flatten-pdf-online-free", "flatten-pdf-form-no-upload"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {
