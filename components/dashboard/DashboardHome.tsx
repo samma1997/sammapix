@@ -63,6 +63,7 @@ import {
   IconAddText,
   IconImageToBase64,
   IconCollageMaker,
+  IconRemovePdfPages,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -891,6 +892,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconCollageMaker,
     category: ["Creative"],
     keywords: ["collage", "photo collage", "grid", "combine photos", "picture grid", "image grid", "collage maker", "photo grid", "merge photos", "photo mosaic", "multi photo"],
+  },
+  {
+    name: "Delete PDF Pages",
+    slug: "remove-pdf-pages",
+    href: "/dashboard/tools/remove-pdf-pages",
+    tagline: "Remove specific pages from a PDF. Click thumbnails to mark, range input supported. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "No upload"],
+    Icon: IconRemovePdfPages,
+    category: ["Optimize"],
+    keywords: ["delete pdf pages", "remove pdf pages", "pdf page remover", "delete page pdf", "remove page from pdf", "pdf editor", "pdf page delete"],
   },
 ];
 

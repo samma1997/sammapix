@@ -56,6 +56,7 @@ import {
   IconAddText,
   IconImageToBase64,
   IconCollageMaker,
+  IconRemovePdfPages,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -886,6 +887,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "No upload"],
     Icon: IconCollageMaker,
     category: ["Creative"],
+    isNew: true,
+  },
+  {
+    name: "Delete PDF Pages",
+    href: "/tools/remove-pdf-pages",
+    tagline: "Remove specific pages from a PDF. Click thumbnails to mark for deletion. Range input supported. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "No upload"],
+    Icon: IconRemovePdfPages,
+    category: ["Optimize"],
     isNew: true,
   },
 ];

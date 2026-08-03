@@ -747,6 +747,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "image-grid-maker-free",
     ],
   },
+  "remove-pdf-pages": {
+    id: "remove-pdf-pages",
+    name: "Delete PDF Pages",
+    shortDesc: "Remove specific pages from a PDF in-browser — click thumbnails, no upload",
+    slug: "/tools/remove-pdf-pages",
+    category: "optimize",
+    relatedTools: ["pdf-split", "pdf-rotate", "pdf-compress"],
+    relatedBlogSlugs: [
+      "delete-pages-from-pdf-online",
+      "remove-pdf-pages-no-upload",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

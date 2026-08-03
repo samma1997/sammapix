@@ -1948,6 +1948,56 @@ export const IconCollageMaker: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconRemovePdfPages: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes rpdf-slide {
+        0%, 20%  { transform: translateY(0px); opacity: 1; }
+        55%      { transform: translateY(10px); opacity: 0; }
+        56%      { transform: translateY(-8px); opacity: 0; }
+        80%, 100%{ transform: translateY(0px); opacity: 1; }
+      }
+      @keyframes rpdf-x {
+        0%, 30%  { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+        55%, 75% { opacity: 1; transform: scale(1) rotate(0deg); }
+        90%, 100%{ opacity: 0; transform: scale(0.5) rotate(15deg); }
+      }
+      @keyframes rpdf-check {
+        0%, 70%  { opacity: 0; transform: scale(0.6); }
+        85%, 95% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      .rpdf-page { transform-origin: 15px 26px; animation: rpdf-slide 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .rpdf-x    { transform-origin: 36px 18px; animation: rpdf-x 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .rpdf-chk  { transform-origin: 15px 40px; animation: rpdf-check 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document body */}
+    <rect x="4" y="4" width="24" height="32" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Page lines */}
+    <rect x="8" y="10" width="8" height="2" rx="1" fill={accent} fillOpacity="0.35"/>
+    <rect x="8" y="14" width="14" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    <rect x="8" y="18" width="11" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    {/* Sliding page being deleted */}
+    <g className="rpdf-page">
+      <rect x="6" y="22" width="18" height="10" rx="1.5" fill={accent} fillOpacity="0.20" stroke={accent} strokeWidth="1.25"/>
+      <rect x="8" y="25" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="28" width="7" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    </g>
+    {/* Red X badge — shown while deleting */}
+    <g className="rpdf-x" style={{ opacity: 0 }}>
+      <circle cx="36" cy="18" r="9" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+      <path d="M32 14 L40 22 M40 14 L32 22" stroke={accent} strokeWidth="2.2" strokeLinecap="round"/>
+    </g>
+    {/* Green check — pages remaining */}
+    <g className="rpdf-chk" style={{ opacity: 0 }}>
+      <circle cx="36" cy="38" r="8" fill="#16A34A" fillOpacity="0.15" stroke="#16A34A" strokeWidth="1.5"/>
+      <path d="M32 38 L35 41 L40 35" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PDF label */}
+    <text x="16" y="41" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

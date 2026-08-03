@@ -46,6 +46,7 @@ import {
   IconAddText,
   IconImageToBase64,
   IconCollageMaker,
+  IconRemovePdfPages,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -99,6 +100,7 @@ const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClie
 const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToImageClient"));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase64Client"));
 const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMakerClient"));
+const RemovePdfPagesClient = dynamic(() => import("@/components/tools/RemovePdfPagesClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -153,6 +155,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "add-text-to-image": AddTextToImageClient,
   "image-to-base64": ImageToBase64Client,
   "collage-maker": CollageMakerClient,
+  "remove-pdf-pages": RemovePdfPagesClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -248,6 +251,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "add-text-to-image": { Icon: IconAddText,       accent: "#0EA5E9" },
   "image-to-base64":   { Icon: IconImageToBase64, accent: "#6366F1" },
   "collage-maker":     { Icon: IconCollageMaker,  accent: "#0EA5E9" },
+  "remove-pdf-pages":  { Icon: IconRemovePdfPages, accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -803,6 +807,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Create and download", desc: "Click Create collage. A preview appears instantly. Download as JPG (smaller) or PNG (lossless) at 720, 1080, 1440 or 2048 px." },
     ],
     proTip: { text: "For Instagram carousel grids, use a 3×3 layout at 1080 px with 0 gap and cover mode for a seamless puzzle effect.", linkLabel: "Try Instagram Grid Splitter", linkHref: "/dashboard/tools/instagram-grid-splitter" },
+  },
+  "remove-pdf-pages": {
+    label: "Delete PDF Pages",
+    tagline: "Remove specific pages from a PDF in your browser. Click thumbnails or type a range. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Thumbnails of every page are rendered instantly in your browser — nothing is uploaded." },
+      { title: "Mark pages for deletion", desc: "Click any page thumbnail to mark it with a red overlay. Or type a range like \"2, 5-7\" in the quick-select box. Click again to unmark." },
+      { title: "Remove and download", desc: "Click Remove N pages. A new PDF with only the pages you kept downloads immediately. At least 1 page must remain." },
+    ],
+    proTip: { text: "After removing pages, compress the resulting PDF to reduce its file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
   },
 };
 
