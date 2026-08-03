@@ -266,6 +266,20 @@
     "url": "/blog/number-pdf-pages-no-upload"
   },
   {
+    "slug": "organize-pdf-pages-no-upload",
+    "title": "How to Organize PDF Pages Without Uploading [2026]",
+    "description": "Organize, move, and rearrange PDF pages entirely in your browser — drag and drop visual thumbnails, no file upload, no server. Powered by pdf.js and p",
+    "keywords": [
+      "organize pdf pages",
+      "move pdf pages",
+      "change pdf page order",
+      "organize pdf pages no upload",
+      "rearrange pdf pages without uploading"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/organize-pdf-pages-no-upload"
+  },
+  {
     "slug": "password-protect-pdf-online-no-upload",
     "title": "Password Protect a PDF Online Without Uploading It [2026]",
     "description": "Add an open password to any PDF in your browser — no upload, no server, no signup. Encryption runs 100% client-side via @cantoo/pdf-lib. Honest about ",
@@ -334,6 +348,20 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/remove-pdf-password-restrictions"
+  },
+  {
+    "slug": "reorder-pdf-pages-online",
+    "title": "Reorder PDF Pages Online Free [2026]",
+    "description": "Rearrange, sort, and reorder PDF pages entirely in your browser — drag and drop thumbnail grid powered by pdf.js and pdf-lib. Move pages up, down, to ",
+    "keywords": [
+      "reorder pdf pages",
+      "rearrange pdf pages",
+      "sort pdf pages",
+      "reorder pdf pages online",
+      "rearrange pdf pages online free"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/reorder-pdf-pages-online"
   },
   {
     "slug": "rotate-image-online-no-upload",
