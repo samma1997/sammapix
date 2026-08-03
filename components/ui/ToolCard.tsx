@@ -1508,6 +1508,61 @@ export const IconPdfUnlock: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── PDF Page Numbers icon (document + "1 2 3" digits appearing in sequence) ──
+export const IconPdfPageNumbers: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ppn-n1 {
+        0%, 10%  { opacity: 0; transform: translateY(3px); }
+        25%, 75% { opacity: 1; transform: translateY(0px); }
+        88%, 100%{ opacity: 0; transform: translateY(3px); }
+      }
+      @keyframes ppn-n2 {
+        0%, 25%  { opacity: 0; transform: translateY(3px); }
+        40%, 75% { opacity: 1; transform: translateY(0px); }
+        88%, 100%{ opacity: 0; transform: translateY(3px); }
+      }
+      @keyframes ppn-n3 {
+        0%, 40%  { opacity: 0; transform: translateY(3px); }
+        55%, 75% { opacity: 1; transform: translateY(0px); }
+        88%, 100%{ opacity: 0; transform: translateY(3px); }
+      }
+      @keyframes ppn-line {
+        0%, 80%  { transform: scaleX(1); }
+        88%, 100%{ transform: scaleX(0.6); }
+      }
+      .ppn-n1 { transform-origin: 12px 34px; animation: ppn-n1 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ppn-n2 { transform-origin: 22px 34px; animation: ppn-n2 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ppn-n3 { transform-origin: 32px 34px; animation: ppn-n3 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ppn-ln { transform-origin: left center; animation: ppn-line 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* PDF document */}
+    <rect x="4" y="4" width="30" height="38" rx="3" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Content lines */}
+    <rect x="9" y="10" width="20" height="2" rx="1" fill={accent} fillOpacity="0.35"/>
+    <rect x="9" y="15" width="15" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    <rect x="9" y="20" width="18" height="2" rx="1" fill={accent} fillOpacity="0.25"/>
+    <rect x="9" y="25" width="12" height="2" rx="1" fill={accent} fillOpacity="0.20"/>
+    {/* Bottom rule */}
+    <g className="ppn-ln">
+      <line x1="9" y1="33" x2="29" y2="33" stroke={accent} strokeWidth="0.75" strokeDasharray="2 1.5" strokeLinecap="round" strokeOpacity="0.5"/>
+    </g>
+    {/* Animated "1 2 3" digits */}
+    <g className="ppn-n1" style={{ opacity: 0 }}>
+      <text x="12" y="38" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">1</text>
+    </g>
+    <g className="ppn-n2" style={{ opacity: 0 }}>
+      <text x="22" y="38" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">2</text>
+    </g>
+    <g className="ppn-n3" style={{ opacity: 0 }}>
+      <text x="32" y="38" fontSize="6" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">3</text>
+    </g>
+    {/* Hash badge in top-right corner */}
+    <circle cx="40" cy="10" r="6" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+    <text x="40" y="13.5" fontSize="7" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">#</text>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

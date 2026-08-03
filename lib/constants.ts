@@ -105,6 +105,7 @@ export const TOOL_SLUGS = [
   "extract-audio",
   "pdf-rotate",
   "pdf-unlock",
+  "pdf-page-numbers",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

@@ -639,6 +639,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "remove-pdf-password-restrictions",
     ],
   },
+  "pdf-page-numbers": {
+    id: "pdf-page-numbers",
+    name: "PDF Page Numbers",
+    shortDesc: "Add page numbers to a PDF in-browser — 6 positions, 3 formats, no upload",
+    slug: "/tools/pdf-page-numbers",
+    category: "optimize",
+    relatedTools: ["pdf-compress", "pdf-rotate", "pdf-split"],
+    relatedBlogSlugs: [
+      "add-page-numbers-to-pdf-online",
+      "number-pdf-pages-no-upload",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

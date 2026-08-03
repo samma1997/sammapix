@@ -54,6 +54,7 @@ import {
   IconPdfCompress,
   IconPdfRotate,
   IconPdfUnlock,
+  IconPdfPageNumbers,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -783,6 +784,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfUnlock,
     category: ["Optimize"],
     keywords: ["unlock pdf", "remove pdf password", "pdf restrictions", "enable printing pdf", "copy text from pdf", "pdf permissions", "remove owner password pdf", "unlock pdf online free"],
+  },
+  {
+    name: "PDF Page Numbers",
+    slug: "pdf-page-numbers",
+    href: "/dashboard/tools/pdf-page-numbers",
+    tagline: "Add page numbers to every page of a PDF in your browser. 6 positions, 3 formats. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfPageNumbers,
+    category: ["Optimize"],
+    keywords: ["add page numbers to pdf", "number pdf pages", "insert page numbers pdf", "pdf page numbering", "pdf pagination", "pdf page counter", "add folio numbers pdf"],
   },
 ];
 

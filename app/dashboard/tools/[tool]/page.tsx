@@ -37,6 +37,7 @@ import {
   IconPdfCompress,
   IconPdfRotate,
   IconPdfUnlock,
+  IconPdfPageNumbers,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -81,6 +82,7 @@ const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
 const PdfCompressClient = dynamic(() => import("@/components/tools/PdfCompressClient"));
 const PdfRotateClient = dynamic(() => import("@/components/tools/PdfRotateClient"));
 const PdfUnlockClient = dynamic(() => import("@/components/tools/PdfUnlockClient"));
+const PdfPageNumbersClient = dynamic(() => import("@/components/tools/PdfPageNumbersClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -126,6 +128,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-compress": PdfCompressClient,
   "pdf-rotate":   PdfRotateClient,
   "pdf-unlock":   PdfUnlockClient,
+  "pdf-page-numbers": PdfPageNumbersClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -212,6 +215,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-compress": { Icon: IconPdfCompress, accent: "#EF4444" },
   "pdf-rotate":   { Icon: IconPdfRotate,   accent: "#EF4444" },
   "pdf-unlock":   { Icon: IconPdfUnlock,   accent: "#EF4444" },
+  "pdf-page-numbers": { Icon: IconPdfPageNumbers, accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -677,6 +681,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the unlocked PDF", desc: "Click Remove Restrictions. The unlocked PDF downloads directly — printing, copying and editing re-enabled." },
     ],
     proTip: { text: "Want to reduce the size of your unlocked PDF too? Compress PDF is next.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "pdf-page-numbers": {
+    label: "PDF Page Numbers",
+    tagline: "Add page numbers to every page of a PDF in your browser. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The file is read instantly in your browser — no server upload." },
+      { title: "Choose position and format", desc: "Pick one of 6 positions and one of 3 formats (number only, number/total, Page X of N). Adjust font size and margin if needed." },
+      { title: "Download the numbered PDF", desc: "Click Add Page Numbers. Page numbers are stamped as real text on every page and the file downloads instantly." },
+    ],
+    proTip: { text: "Want to reduce the file size of your numbered PDF? Compress PDF works great after.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
   },
 };
 

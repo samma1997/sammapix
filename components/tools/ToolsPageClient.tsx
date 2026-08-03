@@ -47,6 +47,7 @@ import {
   IconPdfCompress,
   IconPdfRotate,
   IconPdfUnlock,
+  IconPdfPageNumbers,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -696,6 +697,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfUnlock,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "PDF Page Numbers",
+    href: "/tools/pdf-page-numbers",
+    tagline: "Add page numbers to every page of a PDF in your browser. Choose position (bottom-center, top-right…), format (1, 1/N, Page 1 of N) and font size. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfPageNumbers,
     category: ["Optimize"],
     isNew: true,
   },
