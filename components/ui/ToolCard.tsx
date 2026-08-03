@@ -2106,6 +2106,68 @@ export const IconPdfSign: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconPdfOrganize — pages that swap positions ──────────────────────────────
+
+export const IconPdfOrganize: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdforg-swap {
+        0%, 15%  { transform: translateY(0px);   opacity: 1; }
+        40%      { transform: translateY(-10px);  opacity: 1; }
+        65%      { transform: translateY(-10px);  opacity: 0.9; }
+        90%, 100%{ transform: translateY(0px);   opacity: 1; }
+      }
+      @keyframes pdforg-swap2 {
+        0%, 15%  { transform: translateY(0px);   opacity: 1; }
+        40%      { transform: translateY(10px);   opacity: 1; }
+        65%      { transform: translateY(10px);   opacity: 0.9; }
+        90%, 100%{ transform: translateY(0px);   opacity: 1; }
+      }
+      @keyframes pdforg-arrow-up {
+        0%, 25%  { opacity: 0; transform: translateY(4px); }
+        50%, 70% { opacity: 1; transform: translateY(0px); }
+        90%, 100%{ opacity: 0; transform: translateY(-4px); }
+      }
+      @keyframes pdforg-arrow-dn {
+        0%, 25%  { opacity: 0; transform: translateY(-4px); }
+        50%, 70% { opacity: 1; transform: translateY(0px); }
+        90%, 100%{ opacity: 0; transform: translateY(4px); }
+      }
+      .pdforg-p1   { transform-origin: 10px 14px; animation: pdforg-swap  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdforg-p2   { transform-origin: 10px 30px; animation: pdforg-swap2 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdforg-arru { transform-origin: 40px 18px; animation: pdforg-arrow-up 2.6s ease-in-out infinite; }
+      .pdforg-arrd { transform-origin: 40px 30px; animation: pdforg-arrow-dn 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Page 1 (top) — moves up */}
+    <g className="pdforg-p1">
+      <rect x="4" y="6" width="26" height="16" rx="2.5" fill={accent} fillOpacity="0.14" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="10" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.5"/>
+      <rect x="8" y="13" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.35"/>
+      <rect x="8" y="16" width="8" height="1.5" rx="0.75" fill={accent} fillOpacity="0.25"/>
+      {/* Badge "1" */}
+      <rect x="24" y="7" width="4" height="4" rx="1" fill={accent}/>
+      <text x="26" y="10.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">1</text>
+    </g>
+    {/* Page 2 (bottom) — moves down */}
+    <g className="pdforg-p2">
+      <rect x="4" y="26" width="26" height="16" rx="2.5" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+      <rect x="8" y="30" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.4"/>
+      <rect x="8" y="33" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+      <rect x="8" y="36" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.2"/>
+      {/* Badge "2" */}
+      <rect x="24" y="27" width="4" height="4" rx="1" fill={accent} fillOpacity="0.5"/>
+      <text x="26" y="30.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">2</text>
+    </g>
+    {/* Animated arrows on the right */}
+    <g className="pdforg-arru">
+      <path d="M40 22 L40 14 M37 17 L40 14 L43 17" stroke={accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    <g className="pdforg-arrd">
+      <path d="M40 26 L40 34 M37 31 L40 34 L43 31" stroke={accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

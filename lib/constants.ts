@@ -117,6 +117,7 @@ export const TOOL_SLUGS = [
   "remove-pdf-pages",
   "pdf-watermark",
   "pdf-sign",
+  "pdf-organize",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

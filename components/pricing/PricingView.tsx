@@ -46,6 +46,7 @@ import {
   IconRemovePdfPages,
   IconPdfWatermark,
   IconPdfSign,
+  IconPdfOrganize,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -105,6 +106,7 @@ const toolGrid = [
   { Icon: IconRemovePdfPages, name: "Delete PDF Pages", accent: "#EF4444" },
   { Icon: IconPdfWatermark,  name: "Watermark PDF",    accent: "#EF4444" },
   { Icon: IconPdfSign,       name: "Sign PDF",         accent: "#EF4444" },
+  { Icon: IconPdfOrganize,   name: "Organize PDF",     accent: "#EF4444" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

@@ -771,6 +771,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "remove-pdf-pages-no-upload",
     ],
   },
+  "pdf-organize": {
+    id: "pdf-organize",
+    name: "Organize PDF Pages",
+    shortDesc: "Drag or arrow-button to reorder PDF pages — no upload",
+    slug: "/tools/pdf-organize",
+    category: "optimize",
+    relatedTools: ["pdf-split", "remove-pdf-pages", "pdf-merge"],
+    relatedBlogSlugs: [
+      "reorder-pdf-pages-online",
+      "organize-pdf-pages-no-upload",
+    ],
+  },
   "pdf-sign": {
     id: "pdf-sign",
     name: "Sign PDF",

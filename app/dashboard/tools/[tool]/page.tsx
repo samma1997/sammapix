@@ -49,6 +49,7 @@ import {
   IconRemovePdfPages,
   IconPdfWatermark,
   IconPdfSign,
+  IconPdfOrganize,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -105,6 +106,7 @@ const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMaker
 const RemovePdfPagesClient = dynamic(() => import("@/components/tools/RemovePdfPagesClient"));
 const PdfWatermarkClient = dynamic(() => import("@/components/tools/PdfWatermarkClient"));
 const PdfSignClient = dynamic(() => import("@/components/tools/PdfSignClient"));
+const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -162,6 +164,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "remove-pdf-pages": RemovePdfPagesClient,
   "pdf-watermark":    PdfWatermarkClient,
   "pdf-sign":         PdfSignClient,
+  "pdf-organize":     PdfOrganizeClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -260,6 +263,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "remove-pdf-pages":  { Icon: IconRemovePdfPages, accent: "#EF4444" },
   "pdf-watermark":     { Icon: IconPdfWatermark,   accent: "#EF4444" },
   "pdf-sign":          { Icon: IconPdfSign,        accent: "#EF4444" },
+  "pdf-organize":      { Icon: IconPdfOrganize,    accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -835,6 +839,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the signed PDF", desc: "Click Sign PDF. The signature is embedded as an image on your chosen page and the file downloads immediately. Visual signature only — not a cryptographic digital signature." },
     ],
     proTip: { text: "After signing, add a password to protect the document from edits.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "pdf-organize": {
+    label: "Organize PDF Pages",
+    tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. Rebuilt locally — no upload, no quality loss.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Thumbnails of every page are rendered instantly in your browser — nothing is uploaded." },
+      { title: "Rearrange the pages", desc: "Drag page thumbnails into the order you want. Or use the arrow buttons on each card to move a page up, down, to the top, or to the bottom." },
+      { title: "Save and download", desc: "Click Save reordered PDF. The rebuilt PDF downloads immediately with your custom page order and no quality loss." },
+    ],
+    proTip: { text: "Need to delete unwanted pages too? Use Delete PDF Pages after organizing.", linkLabel: "Delete PDF Pages", linkHref: "/dashboard/tools/remove-pdf-pages" },
   },
   "remove-pdf-pages": {
     label: "Delete PDF Pages",

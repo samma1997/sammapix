@@ -66,6 +66,7 @@ import {
   IconRemovePdfPages,
   IconPdfWatermark,
   IconPdfSign,
+  IconPdfOrganize,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -927,6 +928,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfSign,
     category: ["Optimize"],
     keywords: ["sign pdf", "add signature to pdf", "esign pdf", "draw signature pdf", "pdf signature", "sign pdf online", "pdf sign free", "electronic signature pdf", "pdf e-sign", "sign document online"],
+  },
+  {
+    name: "Organize PDF Pages",
+    slug: "pdf-organize",
+    href: "/dashboard/tools/pdf-organize",
+    tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. No upload, no quality loss.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No Signup"],
+    Icon: IconPdfOrganize,
+    category: ["Optimize"],
+    keywords: ["organize pdf pages", "reorder pdf pages", "rearrange pdf pages", "sort pdf pages", "move pdf pages", "pdf page organizer", "change pdf page order", "reorder pdf online free"],
   },
 ];
 

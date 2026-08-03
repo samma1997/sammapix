@@ -59,6 +59,7 @@ import {
   IconRemovePdfPages,
   IconPdfWatermark,
   IconPdfSign,
+  IconPdfOrganize,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -918,6 +919,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No Signup"],
     Icon: IconPdfSign,
+    category: ["Optimize"],
+    isNew: false,
+  },
+  {
+    name: "Organize PDF Pages",
+    href: "/tools/pdf-organize",
+    tagline: "Drag thumbnails or use arrow buttons to reorder PDF pages. Rebuilt locally with pdf-lib — no upload, no quality loss.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No Signup"],
+    Icon: IconPdfOrganize,
     category: ["Optimize"],
     isNew: true,
   },

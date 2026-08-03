@@ -180,6 +180,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/remove-pdf-pages",
     "/tools/pdf-watermark",
     "/tools/pdf-sign",
+    "/tools/pdf-organize",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

@@ -127,11 +127,12 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Delete PDF Pages", slug: "remove-pdf-pages", href: "/dashboard/tools/remove-pdf-pages", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Watermark PDF", slug: "pdf-watermark", href: "/dashboard/tools/pdf-watermark", icon: <Stamp className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Sign PDF", slug: "pdf-sign", href: "/dashboard/tools/pdf-sign", icon: <PenLine className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Organize PDF Pages", slug: "pdf-organize", href: "/dashboard/tools/pdf-organize", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "pdf-split", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "pdf-split", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },
