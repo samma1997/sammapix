@@ -153,6 +153,8 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "add-page-numbers-to-pdf-online",
+  "number-pdf-pages-no-upload",
   "unlock-pdf-online-no-upload",
   "remove-pdf-password-restrictions",
   "rotate-pdf-online-no-upload",
