@@ -111,6 +111,7 @@ export const TOOL_SLUGS = [
   "flip-image",
   "add-border",
   "round-image",
+  "add-text-to-image",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

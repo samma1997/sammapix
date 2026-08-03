@@ -56,6 +56,7 @@ import {
   IconFlipImage,
   IconAddBorder,
   IconRoundImage,
+  IconAddText,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -350,6 +351,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Flip Image", href: "/tools/flip-image", tagline: "Mirror photos horizontally or vertically. Batch + ZIP. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconFlipImage, category: "Optimize", isNew: true },
   { name: "Add Border to Image", href: "/tools/add-border", tagline: "Add a colored border or frame to photos. Custom color + width. Batch + ZIP. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconAddBorder, category: "Optimize", isNew: true },
   { name: "Round Image", href: "/tools/round-image", tagline: "Circle crop or rounded corners. Transparent PNG output. Batch + ZIP. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconRoundImage, category: "Optimize", isNew: true },
+  { name: "Add Text to Image", href: "/tools/add-text-to-image", tagline: "Write text on any photo. Font, color, outline, position grid. Live preview. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconAddText, category: "Optimize", isNew: true },
   { name: "Remove Background", href: "/tools/remove-bg", tagline: "Remove image backgrounds instantly with AI. 100% browser-based.", accent: "#EC4899", badge: "Free", Icon: IconRemoveBg, category: "AI-Powered" },
   { name: "AI Upscale", href: "/tools/upscale", tagline: "AI upscale images 2x or 4x without losing quality.", accent: "#8B5CF6", badge: "Free", Icon: IconUpscale, category: "AI-Powered" },
   { name: "Passport Photo", href: "/tools/passport-photo", tagline: "Auto crop + white background for passport and visa photos. 6 country presets.", accent: "#3B82F6", badge: "Free", Icon: IconPassportPhoto, category: "AI-Powered" },

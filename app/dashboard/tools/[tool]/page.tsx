@@ -43,6 +43,7 @@ import {
   IconFlipImage,
   IconAddBorder,
   IconRoundImage,
+  IconAddText,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -93,6 +94,7 @@ const RotateImageClient = dynamic(() => import("@/components/tools/RotateImageCl
 const FlipImageClient = dynamic(() => import("@/components/tools/FlipImageClient"));
 const AddBorderClient = dynamic(() => import("@/components/tools/AddBorderClient"));
 const RoundImageClient = dynamic(() => import("@/components/tools/RoundImageClient"));
+const AddTextToImageClient = dynamic(() => import("@/components/tools/AddTextToImageClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -144,6 +146,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "flip-image":       FlipImageClient,
   "add-border":       AddBorderClient,
   "round-image":      RoundImageClient,
+  "add-text-to-image": AddTextToImageClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -236,6 +239,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "flip-image":       { Icon: IconFlipImage,      accent: "#0EA5E9" },
   "add-border":       { Icon: IconAddBorder,      accent: "#0EA5E9" },
   "round-image":      { Icon: IconRoundImage,     accent: "#0EA5E9" },
+  "add-text-to-image": { Icon: IconAddText,       accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -761,6 +765,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download transparent PNGs", desc: "Click Round images, then download each PNG individually or grab all as a ZIP archive." },
     ],
     proTip: { text: "For profile pictures use Circle mode. For card thumbnails, try Rounded corners at 32–80 px.", linkLabel: "Try Add Border", linkHref: "/dashboard/tools/add-border" },
+  },
+  "add-text-to-image": {
+    label: "Add Text to Image",
+    tagline: "Write text on any photo. Font, size, color, outline, position grid, live preview. Files never leave your browser.",
+    steps: [
+      { title: "Drop your image", desc: "Add one JPG, PNG or WebP file. The tool works on a single image so you can customize the text for each photo." },
+      { title: "Type text and set style", desc: "Enter your text, choose font family, size (10-200 px), text color, outline color and width. Enable shadow for readability. Pick position from the 9-point grid and fine-tune with X/Y offset sliders." },
+      { title: "Download the result", desc: "Click Add text to image to render at full resolution, then download. Output format matches input. Files never leave your browser." },
+    ],
+    proTip: { text: "For captions, set text to bottom-center with white color and black outline 3 px for maximum readability on any background.", linkLabel: "Try Watermark", linkHref: "/dashboard/tools/stampit" },
   },
 };
 

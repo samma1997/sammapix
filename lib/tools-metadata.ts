@@ -711,6 +711,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "round-image-corners-free",
     ],
   },
+  "add-text-to-image": {
+    id: "add-text-to-image",
+    name: "Add Text to Image",
+    shortDesc: "Write text on any photo — font, color, outline, position. No upload",
+    slug: "/tools/add-text-to-image",
+    category: "edit",
+    relatedTools: ["stampit", "add-border", "croproatio"],
+    relatedBlogSlugs: [
+      "add-text-to-image-online",
+      "add-caption-to-photo-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

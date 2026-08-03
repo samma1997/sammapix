@@ -40,6 +40,7 @@ import {
   ChevronUp,
   TrendingUp,
   FolderArchive,
+  Type,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
@@ -53,8 +54,8 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "rotate-image", "flip-image", "add-border", "round-image"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image"],
+  developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image"],
 };
 
 // ─── Tool definitions ─────────────────────────────────────────────────────────
@@ -113,6 +114,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Flip Image", slug: "flip-image", href: "/dashboard/tools/flip-image", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Add Border", slug: "add-border", href: "/dashboard/tools/add-border", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Round Image", slug: "round-image", href: "/dashboard/tools/round-image", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Add Text to Image", slug: "add-text-to-image", href: "/dashboard/tools/add-text-to-image", icon: <Type className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Compress PDF", slug: "pdf-compress", href: "/dashboard/tools/pdf-compress", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Rotate PDF", slug: "pdf-rotate", href: "/dashboard/tools/pdf-rotate", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Unlock PDF", slug: "pdf-unlock", href: "/dashboard/tools/pdf-unlock", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
@@ -122,7 +124,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "rotate-image", "flip-image", "add-border", "round-image"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },

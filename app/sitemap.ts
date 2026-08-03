@@ -174,6 +174,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/flip-image",
     "/tools/add-border",
     "/tools/round-image",
+    "/tools/add-text-to-image",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

@@ -53,6 +53,7 @@ import {
   IconFlipImage,
   IconAddBorder,
   IconRoundImage,
+  IconAddText,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -762,6 +763,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Batch", "No upload"],
     Icon: IconRoundImage,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Add Text to Image",
+    href: "/tools/add-text-to-image",
+    tagline: "Write text on any photo — font, size, color, outline, 9-point position grid, live preview. 100% in your browser, no upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "No upload"],
+    Icon: IconAddText,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

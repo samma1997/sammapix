@@ -60,6 +60,7 @@ import {
   IconFlipImage,
   IconAddBorder,
   IconRoundImage,
+  IconAddText,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -855,6 +856,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconRoundImage,
     category: ["Optimize", "Creative"],
     keywords: ["round image", "circle crop image", "crop image into circle", "round profile picture", "rounded corners image", "circle avatar maker", "transparent png circle", "make image round", "circular image online", "round corners photo free"],
+  },
+  {
+    name: "Add Text to Image",
+    slug: "add-text-to-image",
+    href: "/dashboard/tools/add-text-to-image",
+    tagline: "Write text on any photo. Font, size, color, outline, 9-position grid, live preview. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "No upload"],
+    Icon: IconAddText,
+    category: ["Optimize", "Creative"],
+    keywords: ["add text to image", "add text to photo", "write on image", "image caption maker", "text on picture", "add words to photo", "add caption to photo free", "text overlay image", "photo text editor online", "watermark text photo"],
   },
 ];
 

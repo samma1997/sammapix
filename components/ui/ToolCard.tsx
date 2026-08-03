@@ -1784,6 +1784,47 @@ export const IconAddBorder: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconAddText: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes at-img {
+        0%, 20%  { opacity: 0.6; }
+        50%      { opacity: 1; }
+        80%, 100%{ opacity: 0.6; }
+      }
+      @keyframes at-text {
+        0%, 15%  { transform: translateY(6px); opacity: 0; }
+        40%, 75% { transform: translateY(0px); opacity: 1; }
+        95%, 100%{ transform: translateY(6px); opacity: 0; }
+      }
+      @keyframes at-cursor {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0; }
+      }
+      .at-img  { animation: at-img 2.6s ease-in-out infinite; }
+      .at-text { transform-origin: 24px 34px; animation: at-text 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .at-cur  { animation: at-cursor 0.8s step-end infinite; }
+    `}</style>
+    {/* Photo frame */}
+    <g className="at-img">
+      <rect x="4" y="4" width="40" height="28" rx="3" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
+      {/* Sun */}
+      <circle cx="12" cy="11" r="3.5" fill={accent} fillOpacity="0.5"/>
+      {/* Mountains */}
+      <path d="M4 24 L14 14 L22 20 L30 11 L44 22 L44 32 L4 32Z" fill={accent} fillOpacity="0.18"/>
+    </g>
+    {/* Text line appearing at bottom */}
+    <g className="at-text" style={{ opacity: 0 }}>
+      <rect x="4" y="34" width="32" height="10" rx="2" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="0.75"/>
+      <text x="8" y="41.5" fontSize="6" fill={accent} fontWeight="700" fontFamily="Arial,sans-serif">Hello World</text>
+      <rect className="at-cur" x="37" y="36" width="1.5" height="6" rx="0.75" fill={accent}/>
+    </g>
+    {/* "A" badge top-right */}
+    <circle cx="39" cy="9" r="6" fill={accent}/>
+    <text x="39" y="12.5" fontSize="8" fill="white" textAnchor="middle" fontWeight="800" fontFamily="Arial,sans-serif">A</text>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {
