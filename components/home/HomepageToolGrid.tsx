@@ -51,6 +51,7 @@ import {
   IconPdfRotate,
   IconPdfUnlock,
   IconPdfPageNumbers,
+  IconPdfProtect,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -340,6 +341,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Rotate PDF", href: "/tools/pdf-rotate", tagline: "Rotate PDF pages per-page or all at once. Text stays selectable. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfRotate, category: "Optimize", isNew: true },
   { name: "Unlock PDF", href: "/tools/pdf-unlock", tagline: "Remove PDF printing, copying and editing restrictions. No upload, no password cracking.", accent: "#EF4444", badge: "Free", Icon: IconPdfUnlock, category: "Optimize", isNew: true },
   { name: "PDF Page Numbers", href: "/tools/pdf-page-numbers", tagline: "Add page numbers to every PDF page in your browser. 6 positions, 3 formats. No upload.", accent: "#EF4444", badge: "Free", Icon: IconPdfPageNumbers, category: "Optimize", isNew: true },
+  { name: "Password Protect PDF", href: "/tools/pdf-protect", tagline: "Add a password to any PDF in your browser. Encrypted locally, never uploaded.", accent: "#EF4444", badge: "Free", Icon: IconPdfProtect, category: "Optimize", isNew: true },
   { name: "Remove Background", href: "/tools/remove-bg", tagline: "Remove image backgrounds instantly with AI. 100% browser-based.", accent: "#EC4899", badge: "Free", Icon: IconRemoveBg, category: "AI-Powered" },
   { name: "AI Upscale", href: "/tools/upscale", tagline: "AI upscale images 2x or 4x without losing quality.", accent: "#8B5CF6", badge: "Free", Icon: IconUpscale, category: "AI-Powered" },
   { name: "Passport Photo", href: "/tools/passport-photo", tagline: "Auto crop + white background for passport and visa photos. 6 country presets.", accent: "#3B82F6", badge: "Free", Icon: IconPassportPhoto, category: "AI-Powered" },

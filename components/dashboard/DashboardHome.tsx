@@ -55,6 +55,7 @@ import {
   IconPdfRotate,
   IconPdfUnlock,
   IconPdfPageNumbers,
+  IconPdfProtect,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -795,6 +796,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfPageNumbers,
     category: ["Optimize"],
     keywords: ["add page numbers to pdf", "number pdf pages", "insert page numbers pdf", "pdf page numbering", "pdf pagination", "pdf page counter", "add folio numbers pdf"],
+  },
+  {
+    name: "Password Protect PDF",
+    slug: "pdf-protect",
+    href: "/dashboard/tools/pdf-protect",
+    tagline: "Add a password to any PDF in your browser. Encrypted locally — never uploaded. Free, instant.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfProtect,
+    category: ["Optimize"],
+    keywords: ["password protect pdf", "add password to pdf", "encrypt pdf", "lock pdf", "pdf password free", "protect pdf online", "pdf encryption", "secure pdf", "add open password pdf"],
   },
 ];
 

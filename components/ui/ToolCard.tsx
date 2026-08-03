@@ -1563,6 +1563,57 @@ export const IconPdfPageNumbers: React.FC<{ accent: string }> = ({ accent }) => 
   </svg>
 );
 
+// ── PDF Protect icon (document + lock CLOSING over it — opposite of Unlock) ───
+export const IconPdfProtect: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdp-doc {
+        0%, 20%  { transform: translateX(0px); }
+        50%       { transform: translateX(-3px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes pdp-shackle {
+        0%, 15%  { transform: translateY(-5px); }
+        50%, 88% { transform: translateY(0px); }
+        100%     { transform: translateY(-5px); }
+      }
+      @keyframes pdp-shield {
+        0%, 40%  { opacity: 0; transform: scale(0.5); }
+        60%, 85% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.5); }
+      }
+      .pdp-doc     { animation: pdp-doc 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdp-shackle { transform-origin: 32px 22px; animation: pdp-shackle 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdp-shield  { transform-origin: 37px 41px; animation: pdp-shield 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document — nudges left as lock closes over it */}
+    <g className="pdp-doc">
+      <rect x="2" y="8" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="6" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="6" y="17" width="8" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="6" y="21" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="12" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Lock body — fixed position */}
+    <rect x="26" y="24" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+    {/* Keyhole */}
+    <circle cx="35" cy="29.5" r="2" fill={accent} fillOpacity="0.7"/>
+    <rect x="34" y="30.5" width="2" height="4" rx="1" fill={accent} fillOpacity="0.7"/>
+    {/* Shackle — drops DOWN (closing) — opposite of Unlock which opens upward */}
+    <g className="pdp-shackle">
+      <path
+        d="M30 24 L30 20 C30 16.5 40 16.5 40 20 L40 24"
+        stroke={accent} strokeWidth="2" strokeLinecap="round" fill="none"
+      />
+    </g>
+    {/* "LOCK" badge that pops in when done */}
+    <g className="pdp-shield" style={{ opacity: 0 }}>
+      <rect x="26" y="38" width="22" height="8" rx="4" fill={accent}/>
+      <text x="37" y="44" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">LOCK</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

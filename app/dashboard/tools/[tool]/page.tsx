@@ -38,6 +38,7 @@ import {
   IconPdfRotate,
   IconPdfUnlock,
   IconPdfPageNumbers,
+  IconPdfProtect,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -83,6 +84,7 @@ const PdfCompressClient = dynamic(() => import("@/components/tools/PdfCompressCl
 const PdfRotateClient = dynamic(() => import("@/components/tools/PdfRotateClient"));
 const PdfUnlockClient = dynamic(() => import("@/components/tools/PdfUnlockClient"));
 const PdfPageNumbersClient = dynamic(() => import("@/components/tools/PdfPageNumbersClient"));
+const PdfProtectClient = dynamic(() => import("@/components/tools/PdfProtectClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -129,6 +131,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-rotate":   PdfRotateClient,
   "pdf-unlock":   PdfUnlockClient,
   "pdf-page-numbers": PdfPageNumbersClient,
+  "pdf-protect":      PdfProtectClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -216,6 +219,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-rotate":   { Icon: IconPdfRotate,   accent: "#EF4444" },
   "pdf-unlock":   { Icon: IconPdfUnlock,   accent: "#EF4444" },
   "pdf-page-numbers": { Icon: IconPdfPageNumbers, accent: "#EF4444" },
+  "pdf-protect":      { Icon: IconPdfProtect,     accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -691,6 +695,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the numbered PDF", desc: "Click Add Page Numbers. Page numbers are stamped as real text on every page and the file downloads instantly." },
     ],
     proTip: { text: "Want to reduce the file size of your numbered PDF? Compress PDF works great after.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "pdf-protect": {
+    label: "Password Protect PDF",
+    tagline: "Add a password to any PDF in your browser. Encrypted locally — never uploaded.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Reads the file instantly in your browser — nothing is sent to any server." },
+      { title: "Set and confirm a password", desc: "Enter a password and confirm it. Both fields must match. The password will be required by any PDF viewer to open the file." },
+      { title: "Download the protected PDF", desc: "Click Protect PDF. Encryption runs locally and the protected file downloads to your device immediately." },
+    ],
+    proTip: { text: "Want to remove a password from a PDF instead? Unlock PDF can remove owner-password restrictions.", linkLabel: "Unlock PDF", linkHref: "/dashboard/tools/pdf-unlock" },
   },
 };
 

@@ -113,11 +113,12 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Rotate PDF", slug: "pdf-rotate", href: "/dashboard/tools/pdf-rotate", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Unlock PDF", slug: "pdf-unlock", href: "/dashboard/tools/pdf-unlock", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "PDF Page Numbers", slug: "pdf-page-numbers", href: "/dashboard/tools/pdf-page-numbers", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Protect PDF", slug: "pdf-protect", href: "/dashboard/tools/pdf-protect", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },

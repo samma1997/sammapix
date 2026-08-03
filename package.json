@@ -19,6 +19,7 @@
     "@anthropic-ai/sdk": "^0.80.0",
     "@auth/drizzle-adapter": "^1.11.1",
     "@breezystack/lamejs": "^1.2.7",
+    "@cantoo/pdf-lib": "^2.8.1",
     "@google-analytics/data": "^5.2.1",
     "@google/generative-ai": "^0.24.1",
     "@huggingface/transformers": "^4.0.1",

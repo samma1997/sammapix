@@ -48,6 +48,7 @@ import {
   IconPdfRotate,
   IconPdfUnlock,
   IconPdfPageNumbers,
+  IconPdfProtect,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -707,6 +708,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfPageNumbers,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Password Protect PDF",
+    href: "/tools/pdf-protect",
+    tagline: "Add a password to any PDF in your browser. Encryption runs locally — your file and password are never uploaded. Free, instant, private.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfProtect,
     category: ["Optimize"],
     isNew: true,
   },

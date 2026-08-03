@@ -1,0 +1,317 @@
+[
+  {
+    "start": 0,
+    "end": 3.77,
+    "text": "Compress your PDF right now, no upload needed"
+  },
+  {
+    "start": 3.77,
+    "end": 7.92,
+    "text": "The problem: every PDF compressor uploads your file"
+  },
+  {
+    "start": 7.92,
+    "end": 10.73,
+    "text": "What \"no upload\" actually means"
+  },
+  {
+    "start": 10.73,
+    "end": 14.74,
+    "text": "How browser-based PDF compression actually works"
+  },
+  {
+    "start": 14.74,
+    "end": 18.48,
+    "text": "What this tool compresses well — and where it is honest"
+  },
+  {
+    "start": 18.48,
+    "end": 22.82,
+    "text": "How to compress a PDF without uploading it, step by step"
+  },
+  {
+    "start": 22.82,
+    "end": 27.07,
+    "text": "Choosing the right quality level: Low, Medium, or High"
+  },
+  {
+    "start": 27.07,
+    "end": 30.79,
+    "text": "Low — smallest file, visible quality loss"
+  },
+  {
+    "start": 30.79,
+    "end": 34.87,
+    "text": "Medium — balanced (recommended for most use cases)"
+  },
+  {
+    "start": 34.87,
+    "end": 38.64,
+    "text": "High — near-original quality, moderate reduction"
+  },
+  {
+    "start": 38.64,
+    "end": 43.87,
+    "text": "Browser-based vs upload-based PDF compressors: honest comparison"
+  },
+  {
+    "start": 43.87,
+    "end": 46.75,
+    "text": "How to verify no upload happens"
+  },
+  {
+    "start": 46.75,
+    "end": 49.27,
+    "text": "When to use a different tool"
+  },
+  {
+    "start": 49.27,
+    "end": 53.35,
+    "text": "You need the text to remain selectable after compression"
+  },
+  {
+    "start": 53.35,
+    "end": 56.64,
+    "text": "The PDF is already well-compressed"
+  },
+  {
+    "start": 56.64,
+    "end": 59.81,
+    "text": "The PDF needs to be split first"
+  },
+  {
+    "start": 59.81,
+    "end": 63.19,
+    "text": "Other PDF tools that run in your browser"
+  },
+  {
+    "start": 63.19,
+    "end": 79.44,
+    "text": "SammaPix PDF Compress runs entirely in your browser via pdf.js and pdf-lib. Choo"
+  },
+  {
+    "start": 79.44,
+    "end": 103.37,
+    "text": "You have a 25 MB scanned invoice. Your client expects a PDF under 5 MB. You sear"
+  },
+  {
+    "start": 103.37,
+    "end": 120.6,
+    "text": "The compression worked. But your invoice, which may contain payment terms, clien"
+  },
+  {
+    "start": 120.6,
+    "end": 141,
+    "text": "For photos and generic content this is a minor concern. For scanned contracts, t"
+  },
+  {
+    "start": 141,
+    "end": 172.85,
+    "text": "When you drop a PDF into SammaPix PDF Compress, your browser reads the file usin"
+  },
+  {
+    "start": 172.85,
+    "end": 182.59,
+    "text": "Understanding the mechanism explains both the strengths and the honest limitatio"
+  },
+  {
+    "start": 182.59,
+    "end": 203.98,
+    "text": "This is called rasterization: the PDF content is converted to a raster image (pi"
+  },
+  {
+    "start": 203.98,
+    "end": 213.02,
+    "text": "Not all PDFs are the same internally. The compression results vary significantly"
+  },
+  {
+    "start": 213.02,
+    "end": 239.57,
+    "text": "The honest limitation to understand: because this tool rasterizes pages, the tex"
+  },
+  {
+    "start": 239.57,
+    "end": 242.9,
+    "text": "Compress your PDF in your browser now"
+  },
+  {
+    "start": 242.9,
+    "end": 256.46,
+    "text": "Ideal for scanned documents, invoices, and image-heavy PDFs. See the before and "
+  },
+  {
+    "start": 256.46,
+    "end": 260.42,
+    "text": "The full process takes under a minute for most PDFs:"
+  },
+  {
+    "start": 260.42,
+    "end": 268.99,
+    "text": "The three quality levels control the JPEG encoding quality applied to each raste"
+  },
+  {
+    "start": 268.99,
+    "end": 292.01,
+    "text": "Low produces the most aggressive compression. Text remains readable, but images "
+  },
+  {
+    "start": 292.01,
+    "end": 312.1,
+    "text": "Medium reduces file size by 50 to 70 percent while keeping pages visually clean "
+  },
+  {
+    "start": 312.1,
+    "end": 332.66,
+    "text": "High preserves image quality close to the original. Visible difference from the "
+  },
+  {
+    "start": 332.66,
+    "end": 339.19,
+    "text": "Here is an objective comparison across the dimensions that matter for someone ch"
+  },
+  {
+    "start": 339.19,
+    "end": 345.91,
+    "text": "You do not need to take my word for it. Here is how to verify this yourself in u"
+  },
+  {
+    "start": 345.91,
+    "end": 355.75,
+    "text": "This is the same verification method that security researchers use to audit tool"
+  },
+  {
+    "start": 355.75,
+    "end": 358.85,
+    "text": "Your PDF stays on your device"
+  },
+  {
+    "start": 358.85,
+    "end": 371.62,
+    "text": "No upload, no account, no server. Works on scanned invoices, photo PDFs, and bro"
+  },
+  {
+    "start": 371.62,
+    "end": 380.33,
+    "text": "Browser-based rasterization compression is excellent for some use cases and the "
+  },
+  {
+    "start": 380.33,
+    "end": 389.14,
+    "text": "If the PDF is a legal document, a signed contract, or a report where recipients "
+  },
+  {
+    "start": 389.14,
+    "end": 413.81,
+    "text": "If the file was already processed by iLovePDF or a similar tool, the internal im"
+  },
+  {
+    "start": 413.81,
+    "end": 435.96,
+    "text": "Sometimes the fastest way to reduce a PDF's size is to remove pages you do not n"
+  },
+  {
+    "start": 435.96,
+    "end": 444.86,
+    "text": "SammaPix offers a full suite of browser-based PDF tools, all with no upload and "
+  },
+  {
+    "start": 444.86,
+    "end": 448.18,
+    "text": "All your PDF needs, all in-browser"
+  },
+  {
+    "start": 448.18,
+    "end": 462.12,
+    "text": "Compress, split, merge, and convert PDFs without uploading them anywhere. All to"
+  },
+  {
+    "start": 462.12,
+    "end": 591.19,
+    "text": "Open PDF Compress, Free Split PDF Merge PDFs } > The problem: every PDF compress"
+  },
+  {
+    "start": 591.19,
+    "end": 608.93,
+    "text": "Each canvas is exported as a JPEG. The canvas is converted to a JPEG image at th"
+  },
+  {
+    "start": 608.93,
+    "end": 620.78,
+    "text": "pdf-lib assembles a new PDF. Each JPEG is embedded as a full-page image in a new"
+  },
+  {
+    "start": 620.78,
+    "end": 630.94,
+    "text": "The result is offered for download. The new PDF is stored as a Blob in browser m"
+  },
+  {
+    "start": 630.94,
+    "end": 647.52,
+    "text": "Open PDF Compress, Free How to compress a PDF without uploading it, step by step"
+  },
+  {
+    "start": 647.52,
+    "end": 658.1,
+    "text": "Drop your PDF onto the dropzone or click to browse for it. The file is loaded in"
+  },
+  {
+    "start": 658.1,
+    "end": 668.95,
+    "text": "Select a quality level: Low, Medium, or High. Medium is the recommended starting"
+  },
+  {
+    "start": 668.95,
+    "end": 685.08,
+    "text": "Click Compress. pdf.js renders each page and pdf-lib assembles the output PDF. T"
+  },
+  {
+    "start": 685.08,
+    "end": 696.62,
+    "text": "Review the result. The tool shows you the compressed file size before you downlo"
+  },
+  {
+    "start": 696.62,
+    "end": 707.4,
+    "text": "Download the compressed PDF. Click Download. The file is served from browser mem"
+  },
+  {
+    "start": 707.4,
+    "end": 719.93,
+    "text": "Open DevTools. Press F12 (Windows/Linux) or Command Option I (Mac) in your brows"
+  },
+  {
+    "start": 719.93,
+    "end": 729.36,
+    "text": "Go to the Network tab. Click on the Network panel in DevTools. If you see a list"
+  },
+  {
+    "start": 729.36,
+    "end": 736.27,
+    "text": "Drop your PDF and click Compress. Watch the Network panel as the tool processes "
+  },
+  {
+    "start": 736.27,
+    "end": 750.14,
+    "text": "Observe: no outgoing requests. You will see no network activity during compressi"
+  },
+  {
+    "start": 750.14,
+    "end": 860.86,
+    "text": "Open PDF Compress, Free PDF too big to email? When to use a different tool Brows"
+  },
+  {
+    "start": 860.86,
+    "end": 872.06,
+    "text": "PDF Split: extract specific pages, split into individual pages, or divide into c"
+  },
+  {
+    "start": 872.06,
+    "end": 880.27,
+    "text": "PDF Merge: combine multiple PDFs into one. Covered in How to merge PDFs privatel"
+  },
+  {
+    "start": 880.27,
+    "end": 889.03,
+    "text": "JPG to PDF: combine one or more images into a PDF. Useful for creating a documen"
+  }
+]

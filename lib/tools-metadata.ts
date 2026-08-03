@@ -651,6 +651,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "number-pdf-pages-no-upload",
     ],
   },
+  "pdf-protect": {
+    id: "pdf-protect",
+    name: "Password Protect PDF",
+    shortDesc: "Add an open-password to a PDF in-browser — encrypted locally, no upload",
+    slug: "/tools/pdf-protect",
+    category: "optimize",
+    relatedTools: ["pdf-unlock", "pdf-compress", "pdf-split"],
+    relatedBlogSlugs: [
+      "password-protect-pdf-online-no-upload",
+      "add-password-to-pdf-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {
