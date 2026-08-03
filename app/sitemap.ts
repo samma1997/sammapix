@@ -170,6 +170,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/pdf-unlock",
     "/tools/pdf-page-numbers",
     "/tools/pdf-protect",
+    "/tools/rotate-image",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

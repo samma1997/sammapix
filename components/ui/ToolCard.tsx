@@ -1614,6 +1614,48 @@ export const IconPdfProtect: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Rotate Image icon (photo frame rotating with circular arrow) ──────────────
+export const IconRotateImage: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ri-spin {
+        0%   { transform: rotate(0deg); }
+        75%  { transform: rotate(270deg); }
+        100% { transform: rotate(270deg); }
+      }
+      @keyframes ri-arrow {
+        0%, 60%  { opacity: 0; transform: scale(0.6); }
+        78%, 92% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.6); }
+      }
+      @keyframes ri-badge {
+        0%, 65%  { opacity: 0; transform: scale(0.7); }
+        80%, 93% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .ri-frame  { transform-origin: 20px 20px; animation: ri-spin 2.4s cubic-bezier(0.32,0.72,0,1) infinite; }
+      .ri-arrow  { transform-origin: 38px 12px; animation: ri-arrow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ri-badge  { transform-origin: 38px 38px; animation: ri-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Rotating photo frame */}
+    <g className="ri-frame">
+      <rect x="6" y="6" width="28" height="28" rx="4" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="13" cy="13" r="2.5" fill={accent} fillOpacity="0.5"/>
+      <path d="M6 28 L14 20 L20 25 L26 18 L34 26" stroke={accent} strokeWidth="1.25" fill="none" strokeLinecap="round"/>
+    </g>
+    {/* Circular arrow (CW) in top-right — pops in after rotation */}
+    <g className="ri-arrow" style={{ opacity: 0 }}>
+      <path d="M34 8 A6 6 0 1 1 44 14" stroke={accent} strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M44 11 L44 14 L41 14" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </g>
+    {/* 90° badge bottom-right */}
+    <g className="ri-badge" style={{ opacity: 0 }}>
+      <rect x="28" y="32" width="18" height="10" rx="5" fill={accent}/>
+      <text x="37" y="39.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">90°</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

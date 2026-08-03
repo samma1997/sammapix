@@ -663,6 +663,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "add-password-to-pdf-free",
     ],
   },
+  "rotate-image": {
+    id: "rotate-image",
+    name: "Rotate Image",
+    shortDesc: "Rotate photos 90°, 180° or any custom angle — batch, no upload",
+    slug: "/tools/rotate-image",
+    category: "edit",
+    relatedTools: ["croproatio", "resizepack", "compress", "blur-censor"],
+    relatedBlogSlugs: [
+      "rotate-image-online-no-upload",
+      "how-to-rotate-a-photo-free",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

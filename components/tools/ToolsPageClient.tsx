@@ -49,6 +49,7 @@ import {
   IconPdfUnlock,
   IconPdfPageNumbers,
   IconPdfProtect,
+  IconRotateImage,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -719,6 +720,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfProtect,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Rotate Image",
+    href: "/tools/rotate-image",
+    tagline: "Rotate JPG, PNG and WebP images 90° CW, CCW, 180° or any custom angle. Batch rotate up to 20 files, download as ZIP. 100% in your browser, no upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconRotateImage,
+    category: ["Creative", "Optimize"],
     isNew: true,
   },
   {

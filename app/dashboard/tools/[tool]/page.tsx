@@ -39,6 +39,7 @@ import {
   IconPdfUnlock,
   IconPdfPageNumbers,
   IconPdfProtect,
+  IconRotateImage,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -85,6 +86,7 @@ const PdfRotateClient = dynamic(() => import("@/components/tools/PdfRotateClient
 const PdfUnlockClient = dynamic(() => import("@/components/tools/PdfUnlockClient"));
 const PdfPageNumbersClient = dynamic(() => import("@/components/tools/PdfPageNumbersClient"));
 const PdfProtectClient = dynamic(() => import("@/components/tools/PdfProtectClient"));
+const RotateImageClient = dynamic(() => import("@/components/tools/RotateImageClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -132,6 +134,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "pdf-unlock":   PdfUnlockClient,
   "pdf-page-numbers": PdfPageNumbersClient,
   "pdf-protect":      PdfProtectClient,
+  "rotate-image":     RotateImageClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -220,6 +223,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "pdf-unlock":   { Icon: IconPdfUnlock,   accent: "#EF4444" },
   "pdf-page-numbers": { Icon: IconPdfPageNumbers, accent: "#EF4444" },
   "pdf-protect":      { Icon: IconPdfProtect,     accent: "#EF4444" },
+  "rotate-image":     { Icon: IconRotateImage,    accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -705,6 +709,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the protected PDF", desc: "Click Protect PDF. Encryption runs locally and the protected file downloads to your device immediately." },
     ],
     proTip: { text: "Want to remove a password from a PDF instead? Unlock PDF can remove owner-password restrictions.", linkLabel: "Unlock PDF", linkHref: "/dashboard/tools/pdf-unlock" },
+  },
+  "rotate-image": {
+    label: "Rotate Image",
+    tagline: "Rotate photos 90°, 180° or any custom angle. Files never leave your browser.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files (up to 20 per batch on Free, 200 on Pro). No size limit up to 50 MB per file." },
+      { title: "Choose a rotation angle", desc: "Click 90° CW, 90° CCW, or 180° for standard rotations. Use the slider for any angle from -180° to +180°." },
+      { title: "Download rotated images", desc: "Click Rotate, then download each image individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "After rotating, crop to an exact ratio for social media or print.", linkLabel: "Try Crop to Ratio", linkHref: "/dashboard/tools/croproatio" },
   },
 };
 

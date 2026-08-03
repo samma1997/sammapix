@@ -36,6 +36,7 @@ import {
   IconPdfUnlock,
   IconPdfPageNumbers,
   IconPdfProtect,
+  IconRotateImage,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -85,6 +86,7 @@ const toolGrid = [
   { Icon: IconPdfUnlock,   name: "Unlock PDF",   accent: "#EF4444" },
   { Icon: IconPdfPageNumbers, name: "PDF Page Numbers", accent: "#EF4444" },
   { Icon: IconPdfProtect,     name: "Protect PDF",      accent: "#EF4444" },
+  { Icon: IconRotateImage,   name: "Rotate Image",     accent: "#0EA5E9" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

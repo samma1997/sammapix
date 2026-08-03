@@ -56,6 +56,7 @@ import {
   IconPdfUnlock,
   IconPdfPageNumbers,
   IconPdfProtect,
+  IconRotateImage,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -807,6 +808,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfProtect,
     category: ["Optimize"],
     keywords: ["password protect pdf", "add password to pdf", "encrypt pdf", "lock pdf", "pdf password free", "protect pdf online", "pdf encryption", "secure pdf", "add open password pdf"],
+  },
+  {
+    name: "Rotate Image",
+    slug: "rotate-image",
+    href: "/dashboard/tools/rotate-image",
+    tagline: "Rotate JPG, PNG and WebP 90°, 180° or any custom angle. Batch rotate up to 200 files on Pro. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Batch", "No upload"],
+    Icon: IconRotateImage,
+    category: ["Optimize", "Creative"],
+    keywords: ["rotate image", "rotate photo", "rotate picture", "turn image sideways", "rotate jpg", "rotate png", "rotate 90 degrees", "rotate 180 degrees", "batch rotate", "fix sideways photo", "straighten photo", "image rotation"],
   },
 ];
 
