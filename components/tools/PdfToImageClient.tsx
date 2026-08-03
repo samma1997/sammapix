@@ -334,10 +334,10 @@ export default function PdfToImageClient() {
       setProgress(0);
 
       try {
-        // Dynamic import to avoid SSR issues.
-        // Worker is served from /public/pdf.worker.min.mjs to avoid CORS
-        // issues with module workers required by pdfjs-dist v5.
-        const pdfjsLib = await import("pdfjs-dist");
+        // pdfjs-dist v5 ESM rompe sotto webpack ("Object.defineProperty on non-object").
+        // Carico il build nativo servito da /public con webpackIgnore (come il worker).
+        const pdfjsUrl = "/pdf.min.mjs";
+        const pdfjsLib = (await import(/* webpackIgnore: true */ pdfjsUrl)) as unknown as typeof import("pdfjs-dist");
         pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
         const arrayBuffer = await file.arrayBuffer();
@@ -420,7 +420,9 @@ export default function PdfToImageClient() {
     }
 
     try {
-      const pdfjsLib = await import("pdfjs-dist");
+      // pdfjs-dist v5 ESM rompe sotto webpack: build nativo da /public (webpackIgnore).
+      const pdfjsUrl = "/pdf.min.mjs";
+      const pdfjsLib = (await import(/* webpackIgnore: true */ pdfjsUrl)) as unknown as typeof import("pdfjs-dist");
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const arrayBuffer = await file.arrayBuffer();
