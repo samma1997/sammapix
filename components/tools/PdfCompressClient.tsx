@@ -73,6 +73,10 @@ export default function PdfCompressClient() {
   // Modale pro upsell
   const [showProModal, setShowProModal] = useState(false);
 
+  // True quando la rasterizzazione NON riduce (PDF gia' ottimizzato / solo testo):
+  // teniamo l'originale e lo diciamo onestamente, mai un file piu' grande.
+  const [noReduction, setNoReduction] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // ── Carica PDF ──────────────────────────────────────────────────────────────
@@ -135,6 +139,7 @@ export default function PdfCompressClient() {
     setProgress(0);
     setCompressError(null);
     setCompressedBytes(null);
+    setNoReduction(false);
 
     try {
       // 1. Carica pdf.js per rasterizzare le pagine (stesso worker di PdfToImageClient)
@@ -219,14 +224,27 @@ export default function PdfCompressClient() {
       const outputBytes = await outputDoc.save();
       setProgress(100);
 
-      setCompressedBytes(new Uint8Array(outputBytes));
+      // GUARD: un tool "comprimi" non deve MAI restituire un file piu' grande.
+      // Se la rasterizzazione non conviene (PDF gia' ottimizzato o solo testo),
+      // teniamo l'originale e lo comunichiamo onestamente.
+      let finalBytes = new Uint8Array(outputBytes);
+      let reduced = true;
+      if (outputBytes.byteLength >= originalSize) {
+        const originalBuf = await sourceFile.arrayBuffer();
+        finalBytes = new Uint8Array(originalBuf);
+        reduced = false;
+      }
+
+      setNoReduction(!reduced);
+      setCompressedBytes(finalBytes);
       setUiState("done");
 
       trackEvent("pdf_compress_complete", {
         quality,
         original_kb: Math.round(originalSize / 1024),
-        compressed_kb: Math.round(outputBytes.byteLength / 1024),
+        compressed_kb: Math.round(finalBytes.byteLength / 1024),
         pages: pageCount,
+        reduced,
       });
 
       // Mostra upsell pro dopo l'uso, per utenti free
@@ -270,6 +288,7 @@ export default function PdfCompressClient() {
     setCompressError(null);
     setLoadError(null);
     setOriginalSize(0);
+    setNoReduction(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, []);
 
@@ -494,11 +513,27 @@ export default function PdfCompressClient() {
       {uiState === "done" && compressedBytes && (
         <div className="space-y-4">
           {/* Card risultato con before/after */}
-          <div className="border border-[#BBF7D0] dark:border-[#166534] bg-[#F0FDF4] dark:bg-[#052E16] rounded-lg p-6">
+          <div
+            className={`border rounded-lg p-6 ${
+              noReduction
+                ? "border-[#FDE68A] dark:border-[#854D0E] bg-[#FFFBEB] dark:bg-[#1C1700]"
+                : "border-[#BBF7D0] dark:border-[#166534] bg-[#F0FDF4] dark:bg-[#052E16]"
+            }`}
+          >
             <div className="flex items-center gap-2 mb-4">
-              <CheckCircle2 className="h-5 w-5 text-[#16A34A] shrink-0" strokeWidth={1.5} />
-              <p className="text-sm font-semibold text-[#166534] dark:text-[#4ADE80]">
-                Compressed successfully
+              {noReduction ? (
+                <AlertCircle className="h-5 w-5 text-[#D97706] shrink-0" strokeWidth={1.5} />
+              ) : (
+                <CheckCircle2 className="h-5 w-5 text-[#16A34A] shrink-0" strokeWidth={1.5} />
+              )}
+              <p
+                className={`text-sm font-semibold ${
+                  noReduction
+                    ? "text-[#B45309] dark:text-[#D97706]"
+                    : "text-[#166534] dark:text-[#4ADE80]"
+                }`}
+              >
+                {noReduction ? "Already optimized, kept your original" : "Compressed successfully"}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-3 text-center">
@@ -516,11 +551,22 @@ export default function PdfCompressClient() {
               </div>
               <div className="p-3 rounded-md bg-white dark:bg-[#052E16] border border-[#D1FAE5] dark:border-[#166534]">
                 <p className="text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-1">Reduction</p>
-                <p className="text-sm font-semibold text-[#16A34A] dark:text-[#4ADE80] tabular-nums">
-                  {reductionPct(originalSize, compressedSize)}
+                <p
+                  className={`text-sm font-semibold tabular-nums ${
+                    noReduction ? "text-[#B45309] dark:text-[#D97706]" : "text-[#16A34A] dark:text-[#4ADE80]"
+                  }`}
+                >
+                  {noReduction ? "0%" : reductionPct(originalSize, compressedSize)}
                 </p>
               </div>
             </div>
+            {noReduction && (
+              <p className="mt-3 text-xs text-[#B45309] dark:text-[#D97706] leading-relaxed">
+                Rasterizing this PDF would have made it larger (it is likely text-only or already
+                optimized), so we kept your original file untouched. Your download is the original,
+                unchanged.
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2">
