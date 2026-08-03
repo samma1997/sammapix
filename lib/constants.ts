@@ -281,6 +281,8 @@ export const BLOG_SLUGS = [
   "remove-pdf-pages-no-upload",
   "add-watermark-to-pdf-online",
   "watermark-pdf-no-upload",
+  "sign-pdf-online-free",
+  "add-signature-to-pdf-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
