@@ -168,8 +168,10 @@ export default function PdfRotateClient() {
       setSourceFile(file);
       setPageCount(count);
 
-      // Render thumbnails with pdf.js. Interop ESM gestita da transpilePackages (next.config).
-      const pdfjsLib = await import("pdfjs-dist");
+      // Render thumbnails con pdf.js caricato via import NATIVO (webpackIgnore) dal
+      // build in /public: webpack rompe l'ESM di pdfjs-dist v5. Vedi PdfCompressClient.
+      const pdfjsUrl = "/pdf.min.mjs";
+      const pdfjsLib = (await import(/* webpackIgnore: true */ pdfjsUrl)) as unknown as typeof import("pdfjs-dist");
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const pdfDoc = await pdfjsLib.getDocument({ data: buffer }).promise;

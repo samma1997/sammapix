@@ -142,9 +142,12 @@ export default function PdfCompressClient() {
     setNoReduction(false);
 
     try {
-      // 1. Carica pdf.js per rasterizzare le pagine. L'interop ESM di pdfjs-dist v5
-      // sotto webpack e' gestito da transpilePackages in next.config.mjs.
-      const pdfjsLib = await import("pdfjs-dist");
+      // 1. Carica pdf.js dal build servito in /public via import NATIVO (webpackIgnore).
+      // Webpack rompe l'ESM di pdfjs-dist v5 ("Object.defineProperty called on non-object"
+      // in __webpack_require__.r), quindi lo bypassiamo: il browser importa pdf.min.mjs
+      // direttamente. Il tipo arriva da typeof import (solo compile-time, niente bundling).
+      const pdfjsUrl = "/pdf.min.mjs";
+      const pdfjsLib = (await import(/* webpackIgnore: true */ pdfjsUrl)) as unknown as typeof import("pdfjs-dist");
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       const arrayBuffer = await sourceFile.arrayBuffer();
