@@ -53,6 +53,7 @@ import {
   IconOpen7z,
   IconPdfCompress,
   IconPdfRotate,
+  IconPdfUnlock,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -771,6 +772,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfRotate,
     category: ["Optimize"],
     keywords: ["rotate pdf", "turn pdf sideways", "fix pdf orientation", "pdf rotation", "rotate scanned pdf", "rotate single page pdf", "rotate pdf and save", "rotate pdf free"],
+  },
+  {
+    name: "Unlock PDF",
+    slug: "pdf-unlock",
+    href: "/dashboard/tools/pdf-unlock",
+    tagline: "Remove PDF usage restrictions (printing, copying, editing) in your browser. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfUnlock,
+    category: ["Optimize"],
+    keywords: ["unlock pdf", "remove pdf password", "pdf restrictions", "enable printing pdf", "copy text from pdf", "pdf permissions", "remove owner password pdf", "unlock pdf online free"],
   },
 ];
 

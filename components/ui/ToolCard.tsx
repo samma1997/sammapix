@@ -1457,6 +1457,57 @@ export const IconPdfRotate: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── PDF Unlock icon (padlock that opens — accent rosso cluster PDF) ───────────
+export const IconPdfUnlock: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdu-doc {
+        0%, 20% { transform: translateX(0px); }
+        55%      { transform: translateX(4px); }
+        80%, 100%{ transform: translateX(0px); }
+      }
+      @keyframes pdu-shackle {
+        0%, 25%  { transform: translateY(0px) rotate(0deg); }
+        55%      { transform: translateY(-4px) rotate(-18deg); }
+        80%, 100%{ transform: translateY(0px) rotate(0deg); }
+      }
+      @keyframes pdu-badge {
+        0%, 50%  { opacity: 0; transform: scale(0.5); }
+        68%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.5); }
+      }
+      .pdu-doc     { animation: pdu-doc 2.8s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pdu-shackle { transform-origin: 32px 21px; animation: pdu-shackle 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdu-badge   { transform-origin: 38px 40px; animation: pdu-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* PDF document — slides right as it gets unlocked */}
+    <g className="pdu-doc">
+      <rect x="2" y="8" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <rect x="6" y="13" width="12" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+      <rect x="6" y="17" width="8" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <rect x="6" y="21" width="10" height="2" rx="1" fill={accent} fillOpacity="0.3"/>
+      <text x="12" y="30" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    </g>
+    {/* Lock body — stays fixed */}
+    <rect x="26" y="24" width="18" height="14" rx="2.5" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+    {/* Keyhole */}
+    <circle cx="35" cy="29.5" r="2" fill={accent} fillOpacity="0.7"/>
+    <rect x="34" y="30.5" width="2" height="4" rx="1" fill={accent} fillOpacity="0.7"/>
+    {/* Shackle — rotates open */}
+    <g className="pdu-shackle">
+      <path
+        d="M30 24 L30 20 C30 16.5 40 16.5 40 20 L40 24"
+        stroke={accent} strokeWidth="2" strokeLinecap="round" fill="none"
+      />
+    </g>
+    {/* Unlocked badge */}
+    <g className="pdu-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="38" width="22" height="8" rx="4" fill={accent}/>
+      <text x="37" y="44" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">FREE</text>
+    </g>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

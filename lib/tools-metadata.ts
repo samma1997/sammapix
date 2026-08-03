@@ -627,6 +627,18 @@ export const TOOLS: Record<string, ToolMeta> = {
       "resize-images-for-social-media",
     ],
   },
+  "pdf-unlock": {
+    id: "pdf-unlock",
+    name: "Unlock PDF",
+    shortDesc: "Remove PDF restrictions (printing, copying, editing) in-browser, no upload",
+    slug: "/tools/pdf-unlock",
+    category: "optimize",
+    relatedTools: ["pdf-compress", "pdf-split", "pdf-merge"],
+    relatedBlogSlugs: [
+      "unlock-pdf-online-no-upload",
+      "remove-pdf-password-restrictions",
+    ],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

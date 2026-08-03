@@ -46,6 +46,7 @@ import {
   IconExtractAudio,
   IconPdfCompress,
   IconPdfRotate,
+  IconPdfUnlock,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -685,6 +686,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfRotate,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Unlock PDF",
+    href: "/tools/pdf-unlock",
+    tagline: "Remove PDF usage restrictions (printing, copying, editing) in your browser. Owner-password locks removed instantly. No upload.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconPdfUnlock,
     category: ["Optimize"],
     isNew: true,
   },

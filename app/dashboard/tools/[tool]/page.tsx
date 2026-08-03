@@ -36,6 +36,7 @@ import {
   IconOpen7z,
   IconPdfCompress,
   IconPdfRotate,
+  IconPdfUnlock,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -79,6 +80,7 @@ const PhotoEnhanceClient = dynamic(() => import("@/components/tools/PhotoEnhance
 const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
 const PdfCompressClient = dynamic(() => import("@/components/tools/PdfCompressClient"));
 const PdfRotateClient = dynamic(() => import("@/components/tools/PdfRotateClient"));
+const PdfUnlockClient = dynamic(() => import("@/components/tools/PdfUnlockClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -123,6 +125,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "open-7z": dynamic(() => import("@/components/tools/Open7zClient")),
   "pdf-compress": PdfCompressClient,
   "pdf-rotate":   PdfRotateClient,
+  "pdf-unlock":   PdfUnlockClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -208,6 +211,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "open-7z": { Icon: IconOpen7z, accent: "#8B5CF6" },
   "pdf-compress": { Icon: IconPdfCompress, accent: "#EF4444" },
   "pdf-rotate":   { Icon: IconPdfRotate,   accent: "#EF4444" },
+  "pdf-unlock":   { Icon: IconPdfUnlock,   accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -663,6 +667,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Apply and download", desc: "Click Apply rotations. Text stays fully selectable — rotation is metadata, not rasterization." },
     ],
     proTip: { text: "Need to reduce the file size too? Compress PDF works great after rotating.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  "pdf-unlock": {
+    label: "Unlock PDF",
+    tagline: "Remove PDF usage restrictions in your browser. No upload, no password cracking.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB) that opens freely but has printing, copying or editing locked." },
+      { title: "Read the honest note", desc: "Works on owner-password restrictions only. Cannot bypass a password required to open the file." },
+      { title: "Download the unlocked PDF", desc: "Click Remove Restrictions. The unlocked PDF downloads directly — printing, copying and editing re-enabled." },
+    ],
+    proTip: { text: "Want to reduce the size of your unlocked PDF too? Compress PDF is next.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
   },
 };
 
