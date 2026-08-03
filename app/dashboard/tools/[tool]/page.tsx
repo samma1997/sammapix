@@ -48,6 +48,7 @@ import {
   IconCollageMaker,
   IconRemovePdfPages,
   IconPdfWatermark,
+  IconPdfSign,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -103,6 +104,7 @@ const ImageToBase64Client = dynamic(() => import("@/components/tools/ImageToBase
 const CollageMakerClient = dynamic(() => import("@/components/tools/CollageMakerClient"));
 const RemovePdfPagesClient = dynamic(() => import("@/components/tools/RemovePdfPagesClient"));
 const PdfWatermarkClient = dynamic(() => import("@/components/tools/PdfWatermarkClient"));
+const PdfSignClient = dynamic(() => import("@/components/tools/PdfSignClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -159,6 +161,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "collage-maker": CollageMakerClient,
   "remove-pdf-pages": RemovePdfPagesClient,
   "pdf-watermark":    PdfWatermarkClient,
+  "pdf-sign":         PdfSignClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -256,6 +259,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "collage-maker":     { Icon: IconCollageMaker,  accent: "#0EA5E9" },
   "remove-pdf-pages":  { Icon: IconRemovePdfPages, accent: "#EF4444" },
   "pdf-watermark":     { Icon: IconPdfWatermark,   accent: "#EF4444" },
+  "pdf-sign":          { Icon: IconPdfSign,        accent: "#EF4444" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -821,6 +825,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the watermarked PDF", desc: "Click Add Watermark. The stamp is applied on every page and the file downloads immediately." },
     ],
     proTip: { text: "Need to add a password after watermarking? Protect PDF keeps your watermarked document secure.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "pdf-sign": {
+    label: "Sign PDF",
+    tagline: "Add a visual signature to any PDF page in your browser. No upload, no account.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). Page thumbnails render instantly in your browser — nothing is uploaded." },
+      { title: "Draw or upload your signature", desc: "Choose Draw to sign with mouse/touch on the canvas, or Upload to use a PNG/JPG of your handwritten signature. Select the target page and position." },
+      { title: "Download the signed PDF", desc: "Click Sign PDF. The signature is embedded as an image on your chosen page and the file downloads immediately. Visual signature only — not a cryptographic digital signature." },
+    ],
+    proTip: { text: "After signing, add a password to protect the document from edits.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
   },
   "remove-pdf-pages": {
     label: "Delete PDF Pages",

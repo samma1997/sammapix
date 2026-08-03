@@ -179,6 +179,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/collage-maker",
     "/tools/remove-pdf-pages",
     "/tools/pdf-watermark",
+    "/tools/pdf-sign",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

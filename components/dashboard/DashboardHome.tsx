@@ -65,6 +65,7 @@ import {
   IconCollageMaker,
   IconRemovePdfPages,
   IconPdfWatermark,
+  IconPdfSign,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -915,6 +916,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPdfWatermark,
     category: ["Optimize"],
     keywords: ["watermark pdf", "add watermark to pdf", "pdf watermark", "stamp pdf", "confidential pdf", "draft watermark", "pdf logo watermark", "watermark document", "stamp confidential", "pdf stamp"],
+  },
+  {
+    name: "Sign PDF",
+    slug: "pdf-sign",
+    href: "/dashboard/tools/pdf-sign",
+    tagline: "Draw or upload a signature and embed it on any PDF page. No upload, no account.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No Signup"],
+    Icon: IconPdfSign,
+    category: ["Optimize"],
+    keywords: ["sign pdf", "add signature to pdf", "esign pdf", "draw signature pdf", "pdf signature", "sign pdf online", "pdf sign free", "electronic signature pdf", "pdf e-sign", "sign document online"],
   },
 ];
 

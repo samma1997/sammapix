@@ -771,6 +771,15 @@ export const TOOLS: Record<string, ToolMeta> = {
       "remove-pdf-pages-no-upload",
     ],
   },
+  "pdf-sign": {
+    id: "pdf-sign",
+    name: "Sign PDF",
+    shortDesc: "Draw or upload a signature and embed it on any PDF page — no upload",
+    slug: "/tools/pdf-sign",
+    category: "optimize",
+    relatedTools: ["pdf-protect", "pdf-watermark", "redact-pdf"],
+    relatedBlogSlugs: ["sign-pdf-online-free", "add-signature-to-pdf-no-upload"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

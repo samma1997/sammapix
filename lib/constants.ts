@@ -116,6 +116,7 @@ export const TOOL_SLUGS = [
   "collage-maker",
   "remove-pdf-pages",
   "pdf-watermark",
+  "pdf-sign",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

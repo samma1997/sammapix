@@ -2049,6 +2049,63 @@ export const IconPdfWatermark: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconPdfSign: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pdfsign-pen {
+        0%, 15%  { transform: translate(0px, 0px); opacity: 0.3; }
+        40%      { transform: translate(14px, -4px); opacity: 1; }
+        65%      { transform: translate(22px, 2px); opacity: 1; }
+        80%, 100%{ transform: translate(26px, 6px); opacity: 0.3; }
+      }
+      @keyframes pdfsign-line {
+        0%, 15%  { stroke-dashoffset: 32; opacity: 0; }
+        40%      { stroke-dashoffset: 16; opacity: 0.8; }
+        70%      { stroke-dashoffset: 0; opacity: 1; }
+        90%, 100%{ stroke-dashoffset: 0; opacity: 0.4; }
+      }
+      @keyframes pdfsign-dot {
+        0%, 60%  { r: 0; opacity: 0; }
+        75%      { r: 2; opacity: 1; }
+        90%, 100%{ r: 1.5; opacity: 0.6; }
+      }
+      .pdfsign-pen  { transform-origin: 10px 38px; animation: pdfsign-pen 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .pdfsign-line { stroke-dasharray: 32; animation: pdfsign-line 2.4s ease-in-out infinite; }
+      .pdfsign-dot  { animation: pdfsign-dot 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* Document */}
+    <rect x="4" y="4" width="28" height="36" rx="2.5" fill={accent} fillOpacity="0.10" stroke={accent} strokeWidth="1.5"/>
+    {/* Folded corner */}
+    <path d="M26 4 L32 10 L26 10 Z" fill={accent} fillOpacity="0.25"/>
+    {/* Document lines */}
+    <rect x="8" y="14" width="16" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <rect x="8" y="18" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <rect x="8" y="22" width="14" height="1.5" rx="0.75" fill={accent} fillOpacity="0.25"/>
+    {/* Signature baseline */}
+    <line x1="8" y1="36" x2="28" y2="36" stroke={accent} strokeWidth="0.75" strokeOpacity="0.3" strokeDasharray="1.5 1.5"/>
+    {/* Animated signature stroke */}
+    <path
+      className="pdfsign-line"
+      d="M8 34 Q12 28 16 32 Q20 36 24 30 Q27 26 30 32"
+      stroke={accent}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+    />
+    {/* Animated dot (pen tip) */}
+    <circle className="pdfsign-dot" cx="30" cy="32" r="0" fill={accent}/>
+    {/* Pen icon (animated) */}
+    <g className="pdfsign-pen">
+      <rect x="6" y="34" width="7" height="3" rx="0.75" fill={accent} fillOpacity="0.7" transform="rotate(-35 9 35.5)"/>
+      <polygon points="6,37 7.5,40.5 9,37" fill={accent} fillOpacity="0.9" transform="rotate(-35 7.5 38.5)"/>
+    </g>
+    {/* PDF badge */}
+    <rect x="34" y="36" width="12" height="8" rx="4" fill={accent}/>
+    <text x="40" y="42" fontSize="4" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">PDF</text>
+  </svg>
+);
+
 // ─── Badge Component ──────────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<string, string> = {

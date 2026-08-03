@@ -58,6 +58,7 @@ import {
   IconCollageMaker,
   IconRemovePdfPages,
   IconPdfWatermark,
+  IconPdfSign,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -907,6 +908,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconPdfWatermark,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Sign PDF",
+    href: "/tools/pdf-sign",
+    tagline: "Draw or upload a signature and embed it on any PDF page. 100% in your browser — no upload, no account, no Adobe.",
+    accent: "#EF4444",
+    badges: ["Free", "Privacy", "No Signup"],
+    Icon: IconPdfSign,
     category: ["Optimize"],
     isNew: true,
   },
