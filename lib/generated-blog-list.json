@@ -154,6 +154,34 @@
     "url": "/blog/crop-image-into-circle-online"
   },
   {
+    "slug": "crop-pdf-margins-no-upload",
+    "title": "How to Remove White Margins from a PDF (No Upload) [2026]",
+    "description": "Remove white margins from scanned PDFs or optimize for e-reader reading — entirely in your browser via pdf-lib setCropBox. Per-side crop, live pdf.js ",
+    "keywords": [
+      "remove white margins pdf",
+      "crop pdf margins",
+      "crop scanned pdf",
+      "trim pdf white space",
+      "remove margins from pdf"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/crop-pdf-margins-no-upload"
+  },
+  {
+    "slug": "crop-pdf-online-free",
+    "title": "Crop a PDF Online Free (Trim Margins) [2026]",
+    "description": "Crop PDF margins per side — top, right, bottom, left — entirely in your browser via pdf-lib setCropBox. Preview with pdf.js. No upload, no signup, no ",
+    "keywords": [
+      "crop pdf online",
+      "crop pdf",
+      "trim pdf margins",
+      "crop pdf free",
+      "crop pdf online free"
+    ],
+    "publishedDate": "2026-08-03",
+    "url": "/blog/crop-pdf-online-free"
+  },
+  {
     "slug": "delete-pages-from-pdf-online",
     "title": "Delete Pages from a PDF Online Free [2026]",
     "description": "Remove one page or a range of pages from any PDF — entirely in your browser via pdf.js + pdf-lib. Thumbnail preview, range selection (e.g. 2, 5-7), no",
