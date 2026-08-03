@@ -206,9 +206,13 @@ export default function PdfCompressClient() {
         const base64 = jpegDataUrl.split(",")[1];
         const jpegBytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
 
-        // Embed l'immagine nel PDF e crea una pagina delle stesse dimensioni originali
+        // Embed l'immagine nel PDF e crea una pagina delle stesse dimensioni originali.
+        // pdfPage e' una pagina pdf.js (NON pdf-lib): non ha getSize(). Le dimensioni
+        // originali in punti PDF = viewport a scala 1.
         const jpegImage = await outputDoc.embedJpg(jpegBytes);
-        const { width: origW, height: origH } = pdfPage.getSize();
+        const unscaled = pdfPage.getViewport({ scale: 1 });
+        const origW = unscaled.width;
+        const origH = unscaled.height;
 
         const page = outputDoc.addPage([origW, origH]);
         page.drawImage(jpegImage, {
