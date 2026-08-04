@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Convert TAR to ZIP Online Free (No Upload) [2026]",
   description:
-    "Convert any .tar, .tar.gz, .tgz, .tar.bz2, or .tar.xz archive to ZIP entirely in your browser — no upload, no terminal, no 7-Zip install. libarchive.wasm extracts locally, JSZip repackages. Free, no signup.",
+    "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, TAR.XZ to ZIP. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/tar-to-zip-online`,
   },

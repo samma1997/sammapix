@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "How to Open an ISO File Without Burning or Mounting [2026]",
   description:
-    "Open an .iso file and access the files inside without burning a disc or mounting a virtual drive. ISO9660 read entirely in your browser — no upload, no install, no Daemon Tools. Free.",
+    "Open ISO files without burning or mounting. Browse files in your browser. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/open-iso-file-online`,
   },

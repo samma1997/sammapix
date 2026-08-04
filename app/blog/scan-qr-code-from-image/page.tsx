@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "How to Scan a QR Code from a Screenshot or Picture (No Camera) [2026]",
+  title: "Scan QR Code from Screenshot (No Camera) [2026]",
   description:
-    "Scan and decode a QR code from a screenshot, picture, or photo — no camera needed, no upload. jsQR reads the image locally in your browser. Covers WhatsApp, email, PDF, and second-screen use cases. Free, no signup.",
+    "Decode QR codes from images. No camera, no upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/scan-qr-code-from-image`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "scan qr code from screen",
   ],
   openGraph: {
-    title: "How to Scan a QR Code from a Screenshot or Picture (No Camera) [2026]",
+    title: "Scan QR Code from Screenshot (No Camera) [2026]",
     description:
       "Decode a QR code from a screenshot, photo, or image file — no camera needed, no upload. jsQR runs locally in your browser. Free, no signup.",
     url: `${APP_URL}/blog/scan-qr-code-from-image`,

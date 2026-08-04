@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Extract an APK File Online Free (No Upload) [2026]",
   description:
-    "Extract any APK or XAPK file in your browser — no upload, no Android required. JSZip reads the ZIP-format archive locally. Browse AndroidManifest.xml, classes.dex, res/, assets/. Free, no signup.",
+    "Extract APK files in your browser. Browse app data. No upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/extract-apk-online`,
   },

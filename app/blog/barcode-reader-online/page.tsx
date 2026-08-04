@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Barcode Reader Online — Decode EAN, UPC, CODE128, QR from an Image [2026]",
+  title: "Barcode Reader Online — Decode Barcodes Free [2026]",
   description:
-    "Read and decode any barcode from a photo or screenshot entirely in your browser — EAN-13, EAN-8, UPC-A, CODE128, CODE39, ITF, QR. ZXing runs locally. No upload, no server, no signup. Free.",
+    "Decode barcodes from photos. EAN, UPC, CODE128, QR. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/barcode-reader-online`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "decode barcode from photo",
   ],
   openGraph: {
-    title: "Barcode Reader Online — Decode EAN, UPC, CODE128, QR from an Image [2026]",
+    title: "Barcode Reader Online — Decode Barcodes Free [2026]",
     description:
       "Decode any barcode from a photo or screenshot in your browser. EAN-13, UPC-A, CODE128, CODE39, QR. ZXing runs locally. No upload, no server, free.",
     url: `${APP_URL}/blog/barcode-reader-online`,

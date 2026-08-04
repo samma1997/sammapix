@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Free QR Code Generator Online — No Signup, No Expiry [2026]",
   description:
-    "Generate a QR code from any URL, text, Wi-Fi, email, or vCard entirely in your browser — no signup, no account, no expiry. Download PNG or SVG. Free for commercial use. 100% client-side, no upload.",
+    "Create QR codes from URLs, text, email, Wi-Fi. Download PNG/SVG. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/qr-code-generator-online`,
   },

@@ -7,7 +7,7 @@ import Link from "next/link";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "7Z to ZIP Online Free: No Upload",
+  title: "7Z to ZIP Online Free: No Software Needed, No Upload",
   description:
     "Convert 7Z to ZIP instantly in your browser. Extract your 7Z archive and repackage as ZIP — no upload, no install. Works on Mac, Windows, Linux. Free.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${APP_URL}/tools/7z-to-zip`,
-    title: "7Z to ZIP Online Free: No Upload",
+    title: "7Z to ZIP Online Free: No Software Needed, No Upload",
     description:
       "Convert 7Z to ZIP instantly in your browser. No upload, no install. Free.",
     images: [{ url: `${APP_URL}/og-image.png`, width: 1200, height: 630 }],

@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "How to Convert TAR to ZIP Without Software (No Upload) [2026]",
+  title: "Convert TAR to ZIP Online Free [2026]",
   description:
-    "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, and TAR.XZ to ZIP in your browser without uploading the file and without installing 7-Zip or any other software. libarchive.wasm extracts locally, JSZip repackages. Free, no signup.",
+    "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, TAR.XZ to ZIP. No upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/convert-tar-to-zip-no-upload`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "tar to zip no install",
   ],
   openGraph: {
-    title: "How to Convert TAR to ZIP Without Software (No Upload) [2026]",
+    title: "Convert TAR to ZIP Online Free [2026]",
     description:
       "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, and TAR.XZ to ZIP in your browser — no upload, no software install. libarchive.wasm + JSZip run locally. Verify with DevTools. Free.",
     url: `${APP_URL}/blog/convert-tar-to-zip-no-upload`,

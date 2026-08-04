@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "How to Open an IPA File Online Without Installing Anything [2026]",
+  title: "Open IPA File Online (No Xcode Needed) [2026]",
   description:
-    "Open an .ipa file and browse its contents without Xcode, without a Mac, and without installing anything. An IPA is a renamed ZIP — view Info.plist, assets, frameworks right in your browser. No upload. Free.",
+    "Open IPA files in your browser. Browse iOS app files. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/open-ipa-file-online`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "view ipa file",
   ],
   openGraph: {
-    title: "How to Open an IPA File Online Without Installing Anything [2026]",
+    title: "Open IPA File Online (No Xcode Needed) [2026]",
     description:
       "An IPA is just a ZIP file renamed. Open it in your browser to browse Info.plist, assets, and frameworks — no Xcode, no Mac, no upload. Free.",
     url: `${APP_URL}/blog/open-ipa-file-online`,

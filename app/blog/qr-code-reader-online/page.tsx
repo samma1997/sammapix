@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "QR Code Reader Online — Decode a QR Code from an Image Free [2026]",
+  title: "QR Code Reader Online — Decode Free [2026]",
   description:
-    "Read and decode any QR code from an image or screenshot entirely in your browser — no upload, no camera required. jsQR runs locally. See the decoded URL, text, or contact details instantly. Free, no signup.",
+    "Read QR codes from images. No camera, no upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/qr-code-reader-online`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "online qr code scanner",
   ],
   openGraph: {
-    title: "QR Code Reader Online — Decode a QR Code from an Image Free [2026]",
+    title: "QR Code Reader Online — Decode Free [2026]",
     description:
       "Read and decode a QR code from any image or screenshot in your browser. No upload, no camera. jsQR runs locally. Free, no signup.",
     url: `${APP_URL}/blog/qr-code-reader-online`,

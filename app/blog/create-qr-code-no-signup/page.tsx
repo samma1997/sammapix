@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Create a QR Code Without Signing Up — No Account, No Expiry [2026]",
+  title: "Create QR Code Free — No Account, No Expiry [2026]",
   description:
-    "Create a QR code without an account, email, or registration. Your data stays in your browser — no upload, no server. Download PNG or SVG. Free, no expiry. Find out why most generators require signup and why this one does not.",
+    "Create QR codes without signup. Download PNG/SVG. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/create-qr-code-no-signup`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "qr code free no watermark",
   ],
   openGraph: {
-    title: "Create a QR Code Without Signing Up — No Account, No Expiry [2026]",
+    title: "Create QR Code Free — No Account, No Expiry [2026]",
     description:
       "No account, no email, no registration. QR code generated entirely in your browser — data never leaves your device. PNG and SVG. No expiry. Free.",
     url: `${APP_URL}/blog/create-qr-code-no-signup`,

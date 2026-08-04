@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "How to Open a .mcworld File (Minecraft World) [2026]",
   description:
-    "Open and extract a .mcworld file in your browser — no upload, no Minecraft required. A .mcworld is a renamed ZIP. JSZip reads it locally: browse chunks, level data, and assets. Free.",
+    "Extract .mcworld files in your browser. Browse world data and assets. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/open-minecraft-mcworld-file`,
   },

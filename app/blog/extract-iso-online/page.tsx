@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Extract an ISO File Online Free (No Upload) [2026]",
   description:
-    "Extract files from any ISO disc image in your browser — no upload, no mounting, no burning. ISO9660 supported. Browse files, download individually or as ZIP. Free, no signup.",
+    "Extract ISO disc images in your browser. Browse and download files. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/extract-iso-online`,
   },

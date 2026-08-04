@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "How to Generate a SHA-256 or MD5 Checksum Online Without Uploading [2026]",
   description:
-    "Generate a SHA-256 or MD5 checksum from text or a file in your browser — no upload, no server. Step-by-step: verify a download, compare checksums, understand the difference between MD5 and SHA-256. Free.",
+    "Generate SHA-256 or MD5 checksums. Verify downloads. No upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/generate-sha256-md5-online`,
   },

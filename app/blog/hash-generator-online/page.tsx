@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Free Hash Generator Online — MD5, SHA-256, SHA-512 from Text or File [2026]",
+  title: "Hash Generator Online — MD5, SHA, SHA-512 Free [2026]",
   description:
-    "Generate MD5, SHA-1, SHA-256, SHA-384, or SHA-512 hashes from any text or file entirely in your browser. No upload, no account. Web Crypto API runs locally. Free.",
+    "Generate MD5, SHA-256, SHA-512 hashes. No upload, no account. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/hash-generator-online`,
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "browser hash tool",
   ],
   openGraph: {
-    title: "Free Hash Generator Online — MD5, SHA-256, SHA-512 from Text or File [2026]",
+    title: "Hash Generator Online — MD5, SHA, SHA-512 Free [2026]",
     description:
       "Generate MD5, SHA-1, SHA-256, SHA-384, or SHA-512 hashes from text or a file in your browser. No upload, no server, no account. Web Crypto API. Free.",
     url: `${APP_URL}/blog/hash-generator-online`,

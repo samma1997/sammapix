@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Extract an IPA File Online Free (No Upload) [2026]",
   description:
-    "Extract any iOS IPA file in your browser — no upload, no Xcode, no Mac required. An IPA is a ZIP archive. JSZip reads it locally: browse Payload/, Info.plist, assets, frameworks. Free, no signup.",
+    "Extract iOS IPA files in your browser. Browse app files. No upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/extract-ipa-online`,
   },

@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "How to Scan a Barcode from an Image or Photo (No Scanner App) [2026]",
+  title: "Scan Barcode from Image (No App Needed) [2026]",
   description:
-    "Scan and decode a barcode from a product picture, screenshot, or photo — no scanner app, no camera, no upload. ZXing reads the image locally in your browser. EAN-13, UPC, CODE128, QR. Free, no signup.",
+    "Scan barcodes from photos. No app, no camera. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/scan-barcode-from-image`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "decode ean from photo",
   ],
   openGraph: {
-    title: "How to Scan a Barcode from an Image or Photo (No Scanner App) [2026]",
+    title: "Scan Barcode from Image (No App Needed) [2026]",
     description:
       "Scan a barcode from any product picture, screenshot, or photo in your browser. No scanner app, no upload. ZXing runs locally. EAN-13, UPC, CODE128, QR. Free.",
     url: `${APP_URL}/blog/scan-barcode-from-image`,

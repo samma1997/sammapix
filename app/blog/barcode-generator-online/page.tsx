@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Free Barcode Generator Online — CODE128, EAN-13, UPC, QR [2026]",
+  title: "Barcode Generator Online — Free Code128, EAN [2026]",
   description:
-    "Generate a barcode from any value entirely in your browser — CODE128, EAN-13, EAN-8, UPC-A, CODE39, ITF-14. Download PNG or SVG. No signup, no upload, no server. Free for commercial and retail use.",
+    "Generate CODE128, EAN-13, UPC barcodes. Download PNG/SVG. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/barcode-generator-online`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "barcode png svg download",
   ],
   openGraph: {
-    title: "Free Barcode Generator Online — CODE128, EAN-13, UPC, QR [2026]",
+    title: "Barcode Generator Online — Free Code128, EAN [2026]",
     description:
       "Generate barcodes from any value in your browser. CODE128, EAN-13, EAN-8, UPC-A, CODE39, ITF-14. Download PNG or SVG. No signup, no upload. Free for commercial use.",
     url: `${APP_URL}/blog/barcode-generator-online`,

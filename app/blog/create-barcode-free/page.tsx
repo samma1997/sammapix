@@ -7,9 +7,9 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Create a Barcode for Free Without Signup — Browser-Based [2026]",
+  title: "Create Barcode Free — No Signup Required [2026]",
   description:
-    "Create a barcode for free without signing up. Choose the right format, enter your value, download PNG or SVG. No upload, no server, no account. Works for inventory, retail labels, and asset tagging.",
+    "Generate barcodes without account. Choose format, download PNG/SVG. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/create-barcode-free`,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "generate barcode no upload",
   ],
   openGraph: {
-    title: "Create a Barcode for Free Without Signup — Browser-Based [2026]",
+    title: "Create Barcode Free — No Signup Required [2026]",
     description:
       "Create a barcode for free without an account. Choose the right format for your use case, enter your value, download PNG or SVG. No upload, no server. Works for inventory, retail, and asset labels.",
     url: `${APP_URL}/blog/create-barcode-free`,
