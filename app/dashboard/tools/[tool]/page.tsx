@@ -67,6 +67,19 @@ import {
   IconHashGenerator,
   IconUrlEncodeDecode,
   IconPasswordGenerator,
+  IconCompressVideo,
+  IconConvertVideo,
+  IconVideoToGif,
+  IconMuteVideo,
+  IconResizeVideo,
+  IconTrimVideo,
+  IconExtractAudio,
+  IconZipCreator,
+  IconTarGz,
+  IconRawConverter,
+  IconRedactPdf,
+  IconBlurCensor,
+  IconInstagramGrid,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -141,6 +154,20 @@ const BarcodeReaderClient = dynamic(() => import("@/components/tools/BarcodeRead
 const HashGeneratorClient = dynamic(() => import("@/components/tools/HashGeneratorClient"));
 const UrlEncodeDecodeClient = dynamic(() => import("@/components/tools/UrlEncodeDecodeClient"));
 const PasswordGeneratorClient = dynamic(() => import("@/components/tools/PasswordGeneratorClient"));
+const ConvertVideoClient = dynamic(() => import("@/components/tools/ConvertVideoClient"));
+const CompressVideoClient = dynamic(() => import("@/components/tools/CompressVideoClient"));
+const VideoToGifClient = dynamic(() => import("@/components/tools/VideoToGifClient"));
+const MuteVideoClient = dynamic(() => import("@/components/tools/MuteVideoClient"));
+const ResizeVideoClient = dynamic(() => import("@/components/tools/ResizeVideoClient"));
+const TrimVideoClient = dynamic(() => import("@/components/tools/TrimVideoClient"));
+const ExtractAudioClient = dynamic(() => import("@/components/tools/ExtractAudioClient"));
+const ZipCreatorClient = dynamic(() => import("@/components/tools/ZipCreatorClient"));
+const TarGzClient = dynamic(() => import("@/components/tools/TarGzClient"));
+const RawClient = dynamic(() => import("@/components/tools/RawClient"));
+const PdfSplitClient = dynamic(() => import("@/components/tools/PdfSplitClient"));
+const BlurCensorClientWrap = dynamic(() => import("@/components/tools/BlurCensorClientWrap"));
+const RedactPdfClient = dynamic(() => import("@/components/tools/RedactPdfClient"));
+const InstagramGridSplitterClient = dynamic(() => import("@/components/tools/InstagramGridSplitterClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -216,6 +243,20 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "hash-generator":      HashGeneratorClient,
   "url-encode-decode":   UrlEncodeDecodeClient,
   "password-generator":  PasswordGeneratorClient,
+  "convert-video":          ConvertVideoClient,
+  "compress-video":         CompressVideoClient,
+  "video-to-gif":           VideoToGifClient,
+  "mute-video":             MuteVideoClient,
+  "resize-video":           ResizeVideoClient,
+  "trim-video":             TrimVideoClient,
+  "extract-audio":          ExtractAudioClient,
+  "zip-creator":            ZipCreatorClient,
+  "tar-gz":                 TarGzClient,
+  "raw-converter":          RawClient,
+  "pdf-split":              PdfSplitClient,
+  "blur-censor":            BlurCensorClientWrap,
+  "redact-pdf":             RedactPdfClient,
+  "instagram-grid-splitter": InstagramGridSplitterClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -332,6 +373,20 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "hash-generator":      { Icon: IconHashGenerator,        accent: "#6366F1" },
   "url-encode-decode":   { Icon: IconUrlEncodeDecode,      accent: "#6366F1" },
   "password-generator":  { Icon: IconPasswordGenerator,    accent: "#6366F1" },
+  "convert-video":           { Icon: IconConvertVideo,          accent: "#0891B2" },
+  "compress-video":          { Icon: IconCompressVideo,         accent: "#7C3AED" },
+  "video-to-gif":            { Icon: IconVideoToGif,            accent: "#E11D48" },
+  "mute-video":              { Icon: IconMuteVideo,             accent: "#64748B" },
+  "resize-video":            { Icon: IconResizeVideo,           accent: "#2563EB" },
+  "trim-video":              { Icon: IconTrimVideo,             accent: "#D97706" },
+  "extract-audio":           { Icon: IconExtractAudio,          accent: "#059669" },
+  "zip-creator":             { Icon: IconZipCreator,            accent: "#0EA5E9" },
+  "tar-gz":                  { Icon: IconTarGz,                 accent: "#0EA5E9" },
+  "raw-converter":           { Icon: IconRawConverter,          accent: "#F59E0B" },
+  "pdf-split":               { Icon: IconRemovePdfPages,        accent: "#EF4444" },
+  "blur-censor":             { Icon: IconBlurCensor,            accent: "#8B5CF6" },
+  "redact-pdf":              { Icon: IconRedactPdf,             accent: "#EF4444" },
+  "instagram-grid-splitter": { Icon: IconInstagramGrid,         accent: "#EC4899" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1097,6 +1152,152 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy and save", desc: "Click Copy next to any password to copy it instantly. Click Regenerate for a new one. Store it immediately in your password manager." },
     ],
     proTip: { text: "Aim for 20+ characters with all four sets enabled — that gives ~130 bits of entropy, effectively unbreakable.", linkLabel: "Hash Generator", linkHref: "/dashboard/tools/hash-generator" },
+  },
+  // ── Video tools ────────────────────────────────────────────────────────────
+  "convert-video": {
+    label: "Convert Video",
+    tagline: "Convert MOV, AVI, MKV and WebM to MP4 (and back) in your browser. No upload, no signup.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV, AVI, MKV or WebM file. The file never leaves your device." },
+      { title: "Choose output format", desc: "Pick your target format. When only the container changes, the conversion is near-instant with zero quality loss." },
+      { title: "Download", desc: "Click Convert and download the converted video as a standard MP4 or WebM file." },
+    ],
+    proTip: { text: "Need to shrink the file too? Run Compress Video after converting.", linkLabel: "Compress Video", linkHref: "/dashboard/tools/compress-video" },
+  },
+  "compress-video": {
+    label: "Compress Video",
+    tagline: "Shrink MP4, MOV, WebM and MKV up to 80% in your browser. Live size preview. No upload.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV, WebM or MKV file. The file is read entirely in your browser — nothing is uploaded." },
+      { title: "Choose a quality preset", desc: "Pick a bitrate preset (Low/Balanced/High). The live size estimate updates as you select." },
+      { title: "Compress and download", desc: "Click Compress and download the smaller video. See before/after file size and percentage reduction." },
+    ],
+    proTip: { text: "Dropping to 720p before compressing removes up to 75% of data on its own. Try Resize Video first.", linkLabel: "Resize Video", linkHref: "/dashboard/tools/resize-video" },
+  },
+  "video-to-gif": {
+    label: "Video to GIF",
+    tagline: "Convert MP4, MOV and WebM to animated GIF in your browser. No upload, no watermark.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV or WebM file. WebCodecs decodes frames locally — your video never leaves your device." },
+      { title: "Set start, end and FPS", desc: "Trim the clip to the part you want. Lower FPS keeps the GIF smaller; higher FPS looks smoother." },
+      { title: "Download the GIF", desc: "Click Convert and download a crisp animated GIF with no watermark." },
+    ],
+    proTip: { text: "Keep GIFs under 5 seconds for social media. Trim the clip tight before converting.", linkLabel: "Trim Video", linkHref: "/dashboard/tools/trim-video" },
+  },
+  "mute-video": {
+    label: "Mute Video",
+    tagline: "Remove the audio from a video in your browser. Instant, no re-encode, no upload.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV, WebM or MKV file. Nothing is uploaded — the operation runs entirely in your browser." },
+      { title: "Click Mute", desc: "The audio track is dropped instantly. The video stream is copied untouched, so quality stays identical and it finishes in seconds." },
+      { title: "Download the muted video", desc: "Get the same video without any audio track, ready to post or edit further." },
+    ],
+    proTip: { text: "Remove background noise or copyrighted music before posting. Combine with Trim Video to keep just the clip you need.", linkLabel: "Trim Video", linkHref: "/dashboard/tools/trim-video" },
+  },
+  "resize-video": {
+    label: "Resize Video",
+    tagline: "Change video resolution to 1080p, 720p, 480p or 360p in your browser. No upload.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV, WebM or MKV file. Everything runs in your browser via WebCodecs — no server upload." },
+      { title: "Choose a resolution preset", desc: "Pick 1080p, 720p, 480p or 360p. Aspect ratio is always preserved, so nothing gets stretched." },
+      { title: "Download the resized video", desc: "Click Resize and download the smaller-resolution video. Lower resolution also means a much smaller file size." },
+    ],
+    proTip: { text: "Run Compress Video after resizing for additional file size reduction beyond what the resolution change alone gives you.", linkLabel: "Compress Video", linkHref: "/dashboard/tools/compress-video" },
+  },
+  "trim-video": {
+    label: "Trim Video",
+    tagline: "Cut a clip from any video with a live preview in your browser. No upload, no watermark.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV or WebM file. Nothing is uploaded — trimming runs entirely in your browser via WebCodecs." },
+      { title: "Set start and end points", desc: "Drag the sliders to the part you want to keep. Hit Preview clip to play back just that segment before exporting." },
+      { title: "Export the clip", desc: "Click Export and download the trimmed clip as a standard MP4. No watermark, ever." },
+    ],
+    proTip: { text: "After trimming, convert to GIF for sharing on social media.", linkLabel: "Video to GIF", linkHref: "/dashboard/tools/video-to-gif" },
+  },
+  "extract-audio": {
+    label: "Extract Audio",
+    tagline: "Pull the audio from a video as MP3 or M4A in your browser. No upload, no signup.",
+    steps: [
+      { title: "Drop your video", desc: "Add an MP4, MOV or WebM file. The audio is decoded entirely on your device — nothing is uploaded." },
+      { title: "Choose format and bitrate", desc: "Pick MP3 (universal) or M4A (smaller, modern). Select bitrate from 128 to 320 kbps." },
+      { title: "Download the audio", desc: "Click Extract and download the audio file. Plays on every device and app." },
+    ],
+    proTip: { text: "Choose 192 kbps for a good balance of quality and file size. 320 kbps is only worth it for studio-quality sources.", linkLabel: "Transcribe Audio", linkHref: "/dashboard/tools/transcribe" },
+  },
+  // ── Archive tools ──────────────────────────────────────────────────────────
+  "zip-creator": {
+    label: "ZIP Creator",
+    tagline: "Bundle files or a whole folder into a single ZIP in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop files or a folder", desc: "Drag files or an entire folder onto the upload area. The full folder structure is preserved inside the ZIP." },
+      { title: "Name your archive", desc: "Type a name for the ZIP file, or keep the default." },
+      { title: "Download the ZIP", desc: "Click Create ZIP and download. The archive opens natively on Windows, macOS, Linux and mobile." },
+    ],
+    proTip: { text: "Need to open an existing ZIP or RAR? Use Open RAR Online or Open 7Z Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "tar-gz": {
+    label: "Open tar.gz",
+    tagline: "Open and extract .tar.gz, .tgz, .tar and .gz files in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your archive", desc: "Drag & drop a .tar.gz, .tgz, .tar, .gz or .tar.bz2 file. libarchive (WebAssembly) reads it entirely in your browser — no upload." },
+      { title: "Browse the contents", desc: "See the full file list with names and sizes. No software installation needed." },
+      { title: "Download files or export as ZIP", desc: "Click any file to download it individually, or export the whole archive as a ZIP." },
+    ],
+    proTip: { text: "Need to convert a RAR or 7Z archive to ZIP? SammaPix has dedicated converters for those too.", linkLabel: "RAR to ZIP", linkHref: "/dashboard/tools/rar-to-zip" },
+  },
+  // ── RAW converter ──────────────────────────────────────────────────────────
+  "raw-converter": {
+    label: "RAW Converter",
+    tagline: "Convert CR2, CR3, NEF, ARW, DNG, RAF and more to JPG or WebP in your browser. No upload.",
+    steps: [
+      { title: "Drop your RAW files", desc: "Add CR2, CR3, NEF, ARW, DNG, RAF, ORF, RW2, PEF or SRW files. libraw (WebAssembly) reads them locally — nothing is uploaded." },
+      { title: "Choose output format", desc: "Select JPG or WebP. Adjust quality as needed." },
+      { title: "Download converted images", desc: "Download each converted file individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "Convert to WebP for 25% smaller files than JPG while keeping excellent quality.", linkLabel: "WebP Converter", linkHref: "/dashboard/tools/webp" },
+  },
+  // ── PDF tools ──────────────────────────────────────────────────────────────
+  "pdf-split": {
+    label: "Split PDF",
+    tagline: "Split a PDF into individual pages, extract a range, or divide every N pages. No upload.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The file is read instantly in your browser — nothing is uploaded." },
+      { title: "Choose split mode", desc: "Split into all individual pages, extract a custom range (e.g. 2-5, 8), or divide every N pages into chunks." },
+      { title: "Download the split files", desc: "Each split is downloaded as a separate PDF. Use the ZIP button to grab all of them at once." },
+    ],
+    proTip: { text: "After splitting, compress each PDF to reduce file size further.", linkLabel: "Compress PDF", linkHref: "/dashboard/tools/pdf-compress" },
+  },
+  // ── Privacy / editing tools ────────────────────────────────────────────────
+  "blur-censor": {
+    label: "Blur & Censor",
+    tagline: "Blur faces, censor regions and hide sensitive info in photos. No upload, privacy-first.",
+    steps: [
+      { title: "Drop your image", desc: "Add a JPG, PNG or WebP photo. The image is processed entirely in your browser — nothing is uploaded." },
+      { title: "Draw blur or censor regions", desc: "Select Blur (gaussian), Pixelate or Black Box mode, then drag rectangles over faces, plates, or any sensitive area. Adjust intensity with the slider." },
+      { title: "Download the censored image", desc: "Click Apply and download the result. The original is never modified." },
+    ],
+    proTip: { text: "For documents with sensitive text, use Redact PDF to permanently black out content from a PDF.", linkLabel: "Redact PDF", linkHref: "/dashboard/tools/redact-pdf" },
+  },
+  "redact-pdf": {
+    label: "Redact PDF",
+    tagline: "Permanently black out sensitive text in a PDF in your browser. No upload, content truly removed.",
+    steps: [
+      { title: "Drop your PDF", desc: "Add a PDF (up to 100 MB). The file is read instantly in your browser — nothing is sent to any server." },
+      { title: "Draw redaction boxes", desc: "Click and drag to draw black boxes over names, SSNs, account numbers or any sensitive content. Boxes can be repositioned before applying." },
+      { title: "Download the redacted PDF", desc: "Click Apply Redactions. The selected areas are permanently replaced with black boxes and the file downloads immediately." },
+    ],
+    proTip: { text: "Need to blur faces in a photo instead? Use Blur & Censor for images.", linkLabel: "Blur & Censor", linkHref: "/dashboard/tools/blur-censor" },
+  },
+  // ── Social tools ───────────────────────────────────────────────────────────
+  "instagram-grid-splitter": {
+    label: "Instagram Grid Splitter",
+    tagline: "Split a photo into an Instagram puzzle grid (3x1, 3x2, 3x3). Download numbered tiles as ZIP.",
+    steps: [
+      { title: "Drop your image", desc: "Add a JPG or PNG. The image is processed entirely in your browser — nothing is uploaded." },
+      { title: "Choose grid layout", desc: "Pick 3x1, 3x2, 3x3 or a custom grid. Preview the cut lines on your photo." },
+      { title: "Download tiles as ZIP", desc: "Tiles are numbered in the correct posting order. Download them as a ZIP and post starting from the last tile." },
+    ],
+    proTip: { text: "Post tiles in reverse order (last tile first) so the grid looks correct on your profile.", linkLabel: "Photo Collage Maker", linkHref: "/dashboard/tools/collage-maker" },
   },
 };
 
