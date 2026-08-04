@@ -54,6 +54,7 @@ import {
   IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
+  IconIpaExtractor,
   IconIsoExtractor,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
@@ -122,6 +123,7 @@ const toolGrid = [
   { Icon: IconSevenZToZip,          name: "7Z to ZIP",            accent: "#0EA5E9" },
   { Icon: IconMinecraftExtractor,   name: "Minecraft Extractor",  accent: "#0EA5E9" },
   { Icon: IconApkExtractor,         name: "APK Extractor",         accent: "#0EA5E9" },
+  { Icon: IconIpaExtractor,         name: "IPA Extractor",         accent: "#0EA5E9" },
   { Icon: IconIsoExtractor,         name: "ISO Extractor",         accent: "#0EA5E9" },
 ] as const;
 

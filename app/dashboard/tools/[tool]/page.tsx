@@ -57,6 +57,7 @@ import {
   IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
+  IconIpaExtractor,
   IconIsoExtractor,
 } from "@/components/ui/ToolCard";
 
@@ -122,6 +123,7 @@ const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient")
 const SevenZToZipClient = dynamic(() => import("@/components/tools/SevenZToZipClient"));
 const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
+const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
 const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
@@ -188,6 +190,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "7z-to-zip":            SevenZToZipClient,
   "minecraft-extractor":  MinecraftExtractorClient,
   "apk-extractor":        ApkExtractorClient,
+  "ipa-extractor":        IpaExtractorClient,
   "iso-extractor":        IsoExtractorClient,
 };
 
@@ -295,6 +298,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "7z-to-zip":            { Icon: IconSevenZToZip,          accent: "#0EA5E9" },
   "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
+  "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
   "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
 };
 
@@ -961,6 +965,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once." },
     ],
     proTip: { text: "Need to open a RAR or 7z archive? SammaPix has dedicated tools for those too.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "ipa-extractor": {
+    label: "IPA Extractor",
+    tagline: "An IPA is a ZIP archive. Open and extract the contents of an iOS .ipa app package in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your IPA file", desc: "Drag & drop a .ipa file. IPA packages are standard ZIP archives — this tool opens them entirely in your browser without any upload." },
+      { title: "Browse the contents", desc: "See every file and folder inside: Payload/, Info.plist, frameworks, asset catalogs, resources, and META-INF signature data. When Info.plist is XML-encoded, the app name and bundle ID are displayed automatically." },
+      { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once (Day Pass or Pro)." },
+    ],
+    proTip: { text: "Need to open an Android APK? SammaPix has a dedicated tool for that too.", linkLabel: "APK Extractor", linkHref: "/dashboard/tools/apk-extractor" },
   },
   "iso-extractor": {
     label: "ISO Extractor",

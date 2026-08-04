@@ -125,6 +125,7 @@ export const TOOL_SLUGS = [
   "7z-to-zip",
   "minecraft-extractor",
   "apk-extractor",
+  "ipa-extractor",
   "iso-extractor",
 ] as const;
 
@@ -308,6 +309,8 @@ export const BLOG_SLUGS = [
   "open-minecraft-mcworld-file",
   "extract-apk-online",
   "open-apk-file-online",
+  "extract-iso-online",
+  "open-iso-file-online",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

@@ -74,6 +74,7 @@ import {
   IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
+  IconIpaExtractor,
   IconIsoExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
@@ -1024,6 +1025,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconApkExtractor,
     category: ["Optimize"],
     keywords: ["extract apk", "open apk file", "apk extractor", "unzip apk", "view apk contents", "apk to zip", "xapk extractor", "open apk online", "apk file viewer"],
+  },
+  {
+    name: "IPA Extractor",
+    slug: "ipa-extractor",
+    href: "/dashboard/tools/ipa-extractor",
+    tagline: "An IPA is a ZIP archive. Open and extract the contents of an iOS .ipa app package in your browser — no upload, no install.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconIpaExtractor,
+    category: ["Optimize"],
+    keywords: ["extract ipa", "open ipa file", "ipa extractor", "unzip ipa", "ipa to zip", "open ipa online", "ios app extractor", "ipa file viewer"],
   },
   {
     name: "ISO Extractor",

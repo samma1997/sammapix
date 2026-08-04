@@ -828,6 +828,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["unrar", "open-7z", "minecraft-extractor"],
     relatedBlogSlugs: ["extract-apk-online", "open-apk-file-online"],
   },
+  "ipa-extractor": {
+    id: "ipa-extractor",
+    name: "IPA Extractor",
+    shortDesc: "Open & extract iOS IPA files in-browser — view contents, no upload",
+    slug: "/tools/ipa-extractor",
+    category: "optimize",
+    relatedTools: ["apk-extractor", "open-7z", "unrar"],
+    relatedBlogSlugs: ["extract-ipa-online", "open-ipa-file-online"],
+  },
   "iso-extractor": {
     id: "iso-extractor",
     name: "ISO Extractor",

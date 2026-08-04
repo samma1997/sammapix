@@ -56,6 +56,20 @@
     "url": "/blog/extract-apk-online"
   },
   {
+    "slug": "extract-iso-online",
+    "title": "Extract an ISO File Online Free (No Upload) [2026]",
+    "description": "Extract files from any ISO disc image in your browser — no upload, no mounting, no burning. ISO9660 supported. Browse files, download individually or ",
+    "keywords": [
+      "extract iso",
+      "extract iso online",
+      "extract iso file",
+      "iso extractor",
+      "open iso file online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/extract-iso-online"
+  },
+  {
     "slug": "extract-mcpack-online",
     "title": "Open and Extract a .mcpack File Online Free [2026]",
     "description": "Extract any .mcpack file in your browser — no upload, no Minecraft required. JSZip reads the ZIP-format archive locally. Browse textures, manifests, a",
@@ -82,6 +96,20 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/open-apk-file-online"
+  },
+  {
+    "slug": "open-iso-file-online",
+    "title": "How to Open an ISO File Without Burning or Mounting [2026]",
+    "description": "Open an .iso file and access the files inside without burning a disc or mounting a virtual drive. ISO9660 read entirely in your browser — no upload, n",
+    "keywords": [
+      "open iso file",
+      "how to open iso",
+      "open iso without burning",
+      "open iso file online",
+      "iso to zip"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/open-iso-file-online"
   },
   {
     "slug": "open-minecraft-mcworld-file",

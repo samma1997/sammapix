@@ -2636,6 +2636,68 @@ export const IconIsoExtractor: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IPA Extractor ───────────────────────────────────────────────────────────
+
+export const IconIpaExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ipa-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-44deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes ipa-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-10px); opacity: 1; }
+        80%      { transform: translateY(-10px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes ipa-file2 {
+        0%, 32%  { transform: translateY(0px); opacity: 0; }
+        62%      { transform: translateY(-15px); opacity: 1; }
+        80%      { transform: translateY(-15px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes ipa-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.6); }
+        65%, 82% { opacity: 1; transform: scale(1); }
+        95%, 100%{ opacity: 0; transform: scale(0.6); }
+      }
+      .ipa-lid   { transform-origin: 24px 17px; transform-box: fill-box; animation: ipa-lid 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ipa-file1 { transform-origin: 19px 32px; transform-box: fill-box; animation: ipa-file1 2.6s ease-in-out infinite; }
+      .ipa-file2 { transform-origin: 29px 32px; transform-box: fill-box; animation: ipa-file2 2.6s ease-in-out 0.1s infinite; }
+      .ipa-badge { transform-origin: 36px 12px; transform-box: fill-box; animation: ipa-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Box body */}
+    <rect x="6" y="21" width="36" height="21" rx="3" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+    {/* Horizontal shelf line */}
+    <line x1="6" y1="30" x2="42" y2="30" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    {/* Files flying out — iOS-app-like rounded rects */}
+    <g className="ipa-file1" style={{ opacity: 0 }}>
+      <rect x="12" y="26" width="10" height="13" rx="3" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      {/* Home screen icon dots */}
+      <circle cx="17" cy="30" r="1.2" fill={accent} fillOpacity="0.7"/>
+      <circle cx="17" cy="34" r="1.2" fill={accent} fillOpacity="0.5"/>
+    </g>
+    <g className="ipa-file2" style={{ opacity: 0 }}>
+      <rect x="26" y="26" width="10" height="13" rx="3" fill={accent} fillOpacity="0.45" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="31" cy="30" r="1.2" fill={accent} fillOpacity="0.7"/>
+      <circle cx="31" cy="34" r="1.2" fill={accent} fillOpacity="0.5"/>
+    </g>
+    {/* Lid */}
+    <g className="ipa-lid">
+      <rect x="4" y="12" width="40" height="12" rx="3" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+      {/* IPA label on lid */}
+      <text x="24" y="21" fontSize="6" fill={accent} fillOpacity="0.85" textAnchor="middle" fontWeight="700" fontFamily="monospace">.ipa</text>
+    </g>
+    {/* Badge with iOS logo shape pops when open */}
+    <g className="ipa-badge" style={{ opacity: 0 }}>
+      <circle cx="36" cy="12" r="6" fill={accent}/>
+      <text x="36" y="15" fontSize="4" fill="white" textAnchor="middle" fontWeight="700" fontFamily="sans-serif">iOS</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
