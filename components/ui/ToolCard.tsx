@@ -2795,6 +2795,47 @@ export const IconQrCodeGenerator: React.FC<{ accent: string }> = ({ accent }) =>
   </svg>
 );
 
+export const IconQrCodeReader: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes qrread-scan {
+        0%   { transform: translateY(-9px); opacity: 0; }
+        12%  { opacity: 1; }
+        88%  { opacity: 1; }
+        100% { transform: translateY(9px); opacity: 0; }
+      }
+      @keyframes qrread-dot {
+        0%, 100% { opacity: 0.3; }
+        50%       { opacity: 1; }
+      }
+      .qrr-sc { animation: qrread-scan 2s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .qrr-d1 { animation: qrread-dot 2s ease-in-out infinite; }
+      .qrr-d2 { animation: qrread-dot 2s ease-in-out 0.2s infinite; }
+      .qrr-d3 { animation: qrread-dot 2s ease-in-out 0.4s infinite; }
+      .qrr-d4 { animation: qrread-dot 2s ease-in-out 0.1s infinite; }
+    `}</style>
+    {/* Top-left finder */}
+    <rect x="3" y="3" width="14" height="14" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <rect x="6" y="6" width="8" height="8" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="8" y="8" width="4" height="4" rx="0.5" fill={accent}/>
+    {/* Top-right finder */}
+    <rect x="31" y="3" width="14" height="14" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <rect x="34" y="6" width="8" height="8" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="36" y="8" width="4" height="4" rx="0.5" fill={accent}/>
+    {/* Bottom-left finder */}
+    <rect x="3" y="31" width="14" height="14" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <rect x="6" y="34" width="8" height="8" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="8" y="36" width="4" height="4" rx="0.5" fill={accent}/>
+    {/* Data dots (bottom-right) */}
+    <rect className="qrr-d1" x="31" y="31" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.8"/>
+    <rect className="qrr-d2" x="37" y="31" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.6"/>
+    <rect className="qrr-d3" x="31" y="37" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.7"/>
+    <rect className="qrr-d4" x="37" y="37" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.9"/>
+    {/* Animated scanner line */}
+    <line className="qrr-sc" x1="1" y1="24" x2="47" y2="24" stroke={accent} strokeWidth="1.75" strokeLinecap="round"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

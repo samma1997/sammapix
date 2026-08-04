@@ -58,6 +58,7 @@ import {
   IconIpaExtractor,
   IconIsoExtractor,
   IconQrCodeGenerator,
+  IconQrCodeReader,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -129,6 +130,7 @@ const toolGrid = [
   { Icon: IconIpaExtractor,         name: "IPA Extractor",         accent: "#0EA5E9" },
   { Icon: IconIsoExtractor,         name: "ISO Extractor",         accent: "#0EA5E9" },
   { Icon: IconQrCodeGenerator,      name: "QR Code Generator",     accent: "#6366F1" },
+  { Icon: IconQrCodeReader,         name: "QR Code Reader",         accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

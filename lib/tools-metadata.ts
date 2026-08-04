@@ -888,8 +888,17 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Create QR codes for URL, text, Wi-Fi, email — PNG + SVG, no upload",
     slug: "/tools/qr-code-generator",
     category: "edit",
-    relatedTools: ["image-to-base64", "add-text-to-image", "stampit"],
+    relatedTools: ["qr-code-reader", "image-to-base64", "add-text-to-image", "stampit"],
     relatedBlogSlugs: ["qr-code-generator-online", "create-qr-code-no-signup"],
+  },
+  "qr-code-reader": {
+    id: "qr-code-reader",
+    name: "QR Code Reader",
+    shortDesc: "Decode any QR code from an image or camera — no upload, no app",
+    slug: "/tools/qr-code-reader",
+    category: "edit",
+    relatedTools: ["qr-code-generator", "image-to-base64", "exif"],
+    relatedBlogSlugs: ["qr-code-reader-online", "scan-qr-code-from-image"],
   },
 };
 

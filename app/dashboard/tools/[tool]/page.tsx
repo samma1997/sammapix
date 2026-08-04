@@ -61,6 +61,7 @@ import {
   IconIpaExtractor,
   IconIsoExtractor,
   IconQrCodeGenerator,
+  IconQrCodeReader,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -129,6 +130,7 @@ const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractor
 const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
 const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
 const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGeneratorClient"));
+const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReaderClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -198,6 +200,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "ipa-extractor":        IpaExtractorClient,
   "iso-extractor":        IsoExtractorClient,
   "qr-code-generator":   QrCodeGeneratorClient,
+  "qr-code-reader":      QrCodeReaderClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -308,6 +311,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
   "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
   "qr-code-generator":   { Icon: IconQrCodeGenerator,      accent: "#6366F1" },
+  "qr-code-reader":      { Icon: IconQrCodeReader,         accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1013,6 +1017,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download PNG or SVG", desc: "Click Download PNG for an image ready for web or print, or Download SVG for a vector that scales perfectly on posters and packaging." },
     ],
     proTip: { text: "For print use, pick error correction H (30%) and download SVG — the code stays scannable even if partially covered by a logo.", linkLabel: "Add text to images", linkHref: "/dashboard/tools/add-text-to-image" },
+  },
+  "qr-code-reader": {
+    label: "QR Code Reader",
+    tagline: "Decode any QR code from an image file or your camera — no upload, no app, 100% in your browser.",
+    steps: [
+      { title: "Upload an image or open the camera", desc: "Drag and drop a PNG, JPG, WebP or GIF containing a QR code, or switch to the Camera tab to scan a physical QR code live." },
+      { title: "Automatic decoding", desc: "The tool reads the pixel data from your image using jsQR and decodes the QR code instantly in your browser. Nothing is sent to any server." },
+      { title: "Copy or open the result", desc: "The decoded content appears immediately. Click Copy to grab it, or click Open URL if the QR encodes a web address." },
+    ],
+    proTip: { text: "Need to create a QR code? SammaPix has a free generator too.", linkLabel: "QR Code Generator", linkHref: "/dashboard/tools/qr-code-generator" },
   },
 };
 

@@ -129,6 +129,7 @@ export const TOOL_SLUGS = [
   "ipa-extractor",
   "iso-extractor",
   "qr-code-generator",
+  "qr-code-reader",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -317,6 +318,8 @@ export const BLOG_SLUGS = [
   "open-ipa-file-online",
   "tar-to-zip-online",
   "convert-tar-to-zip-no-upload",
+  "qr-code-generator-online",
+  "create-qr-code-no-signup",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

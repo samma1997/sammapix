@@ -78,6 +78,7 @@ import {
   IconIpaExtractor,
   IconIsoExtractor,
   IconQrCodeGenerator,
+  IconQrCodeReader,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1071,6 +1072,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconQrCodeGenerator,
     category: ["Optimize", "Creative"],
     keywords: ["qr code generator", "create qr code", "qr code free", "qr code no signup", "wifi qr code", "qr code png svg", "qr code maker", "generate qr code online"],
+  },
+  {
+    name: "QR Code Reader",
+    slug: "qr-code-reader",
+    href: "/dashboard/tools/qr-code-reader",
+    tagline: "Decode any QR code from an image or your camera. URL, Wi-Fi, text and more — 100% in your browser, no upload, no app.",
+    accent: "#6366F1",
+    badges: ["Free", "Image or Camera", "No upload"],
+    Icon: IconQrCodeReader,
+    category: ["Optimize", "Creative"],
+    keywords: ["qr code reader", "decode qr code", "scan qr from image", "read qr code", "qr scanner online", "qr code decoder", "scan qr screenshot", "qr code reader no upload"],
   },
 ];
 

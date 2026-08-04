@@ -71,6 +71,7 @@ import {
   IconIpaExtractor,
   IconIsoExtractor,
   IconQrCodeGenerator,
+  IconQrCodeReader,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1050,6 +1051,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "PNG + SVG", "No upload"],
     Icon: IconQrCodeGenerator,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "QR Code Reader",
+    href: "/tools/qr-code-reader",
+    tagline: "Decode any QR code from an image or your camera — URL, Wi-Fi, text and more. 100% in your browser, no upload, no app needed.",
+    accent: "#6366F1",
+    badges: ["Free", "Image or Camera", "No upload"],
+    Icon: IconQrCodeReader,
     category: ["Creative", "Optimize"],
     isNew: true,
   },
