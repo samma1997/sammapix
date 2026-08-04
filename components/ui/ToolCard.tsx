@@ -2899,6 +2899,41 @@ export const IconBarcodeReader: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconHashGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes hgen-scroll {
+        0%   { transform: translateY(0px); opacity: 1; }
+        78%  { transform: translateY(-11px); opacity: 0.25; }
+        79%  { transform: translateY(11px); opacity: 0; }
+        100% { transform: translateY(0px); opacity: 1; }
+      }
+      @keyframes hgen-bar {
+        0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+        50%      { opacity: 1; transform: scaleX(1); }
+      }
+      .hgen-hex { animation: hgen-scroll 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .hgen-b1  { transform-origin: 2px 42px; animation: hgen-bar 1.8s ease-in-out 0s infinite; }
+      .hgen-b2  { transform-origin: 14px 42px; animation: hgen-bar 1.8s ease-in-out 0.2s infinite; }
+      .hgen-b3  { transform-origin: 30px 42px; animation: hgen-bar 1.8s ease-in-out 0.4s infinite; }
+    `}</style>
+    {/* Hash symbol # (background) */}
+    <text x="2" y="33" fontSize="30" fill={accent} fontWeight="800" fontFamily="monospace" fillOpacity="0.12">#</text>
+    <text x="2" y="33" fontSize="30" fill={accent} fontWeight="800" fontFamily="monospace" stroke={accent} strokeWidth="0.5" fillOpacity="0.9">#</text>
+    {/* Scrolling hex digits */}
+    <g className="hgen-hex">
+      <text x="29" y="13" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.9">a4f2</text>
+      <text x="29" y="20" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">9c1e</text>
+      <text x="29" y="27" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.55">b7d0</text>
+      <text x="29" y="34" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.35">3f8a</text>
+    </g>
+    {/* Animated bars */}
+    <rect className="hgen-b1" x="2"  y="40" width="10" height="3" rx="1.5" fill={accent} fillOpacity="0.5"/>
+    <rect className="hgen-b2" x="14" y="40" width="13" height="3" rx="1.5" fill={accent} fillOpacity="0.5"/>
+    <rect className="hgen-b3" x="29" y="40" width="17" height="3" rx="1.5" fill={accent} fillOpacity="0.5"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

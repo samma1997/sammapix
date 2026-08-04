@@ -81,6 +81,7 @@ import {
   IconQrCodeGenerator,
   IconQrCodeReader,
   IconBarcodeReader,
+  IconHashGenerator,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1107,6 +1108,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconBarcodeReader,
     category: ["Optimize", "Creative"],
     keywords: ["barcode reader", "scan barcode from image", "decode ean upc", "read barcode picture", "barcode scanner online", "ean 13 reader", "upc decoder", "barcode reader no upload"],
+  },
+  {
+    name: "Hash Generator",
+    slug: "hash-generator",
+    href: "/dashboard/tools/hash-generator",
+    tagline: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or any file — 100% in your browser, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "SHA-256 / MD5", "No upload"],
+    Icon: IconHashGenerator,
+    category: ["Optimize", "Creative"],
+    keywords: ["hash generator", "sha256 generator", "md5 hash online", "file checksum", "sha512 generator", "sha1 hash", "file hash browser", "hash text online", "checksum calculator", "hash no upload"],
   },
 ];
 

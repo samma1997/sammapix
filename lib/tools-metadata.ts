@@ -918,6 +918,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["barcode-generator", "qr-code-reader", "qr-code-generator"],
     relatedBlogSlugs: ["barcode-reader-online", "scan-barcode-from-image"],
   },
+  "hash-generator": {
+    id: "hash-generator",
+    name: "Hash Generator",
+    shortDesc: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or a file — no upload",
+    slug: "/tools/hash-generator",
+    category: "edit",
+    relatedTools: ["image-to-base64", "qr-code-generator", "password-generator"],
+    relatedBlogSlugs: ["hash-generator-online", "generate-sha256-md5-online"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

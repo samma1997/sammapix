@@ -64,6 +64,7 @@ import {
   IconQrCodeGenerator,
   IconQrCodeReader,
   IconBarcodeReader,
+  IconHashGenerator,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -135,6 +136,7 @@ const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/BarcodeG
 const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGeneratorClient"));
 const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReaderClient"));
 const BarcodeReaderClient = dynamic(() => import("@/components/tools/BarcodeReaderClient"));
+const HashGeneratorClient = dynamic(() => import("@/components/tools/HashGeneratorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -207,6 +209,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "qr-code-generator":   QrCodeGeneratorClient,
   "qr-code-reader":      QrCodeReaderClient,
   "barcode-reader":      BarcodeReaderClient,
+  "hash-generator":      HashGeneratorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -320,6 +323,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "qr-code-generator":   { Icon: IconQrCodeGenerator,      accent: "#6366F1" },
   "qr-code-reader":      { Icon: IconQrCodeReader,         accent: "#6366F1" },
   "barcode-reader":      { Icon: IconBarcodeReader,        accent: "#6366F1" },
+  "hash-generator":      { Icon: IconHashGenerator,        accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1055,6 +1059,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy the decoded value", desc: "The barcode value and format (e.g. EAN-13, CODE128) appear instantly. Click Copy to copy the value to your clipboard." },
     ],
     proTip: { text: "Need to generate a barcode instead? SammaPix has a free Barcode Generator.", linkLabel: "Barcode Generator", linkHref: "/dashboard/tools/barcode-generator" },
+  },
+  "hash-generator": {
+    label: "Hash Generator",
+    tagline: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or any file — 100% client-side, no upload.",
+    steps: [
+      { title: "Choose Text or File mode", desc: "Switch to Text to hash a string (updates live as you type) or to File to hash any local file up to 500 MB." },
+      { title: "Select algorithms", desc: "Tick which hash functions you need. SHA-256 is recommended for integrity checks. MD5 is provided for legacy use only." },
+      { title: "Copy your hash", desc: "Each result appears in a monospace row with its own Copy button. Click to copy the hex digest to your clipboard." },
+    ],
+    proTip: { text: "SHA-256 is the modern standard. Use MD5 only for legacy checksums or file deduplication — it is not secure for cryptography.", linkLabel: "Learn more", linkHref: "/tools/hash-generator" },
   },
 };
 

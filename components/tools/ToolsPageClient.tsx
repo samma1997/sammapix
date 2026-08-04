@@ -74,6 +74,7 @@ import {
   IconQrCodeGenerator,
   IconQrCodeReader,
   IconBarcodeReader,
+  IconHashGenerator,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1083,6 +1084,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "EAN / UPC / CODE128", "No upload"],
     Icon: IconBarcodeReader,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Hash Generator",
+    href: "/tools/hash-generator",
+    tagline: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or a file instantly. No upload — runs entirely in your browser.",
+    accent: "#6366F1",
+    badges: ["Free", "SHA-256 / MD5", "No upload"],
+    Icon: IconHashGenerator,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

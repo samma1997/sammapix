@@ -45,6 +45,7 @@ import {
   PenLine,
   Crop,
   ScanLine,
+  Hash,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
@@ -58,7 +59,7 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader"],
+  developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator"],
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker"],
 };
 
@@ -144,11 +145,12 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "QR Code Generator", slug: "qr-code-generator", href: "/dashboard/tools/qr-code-generator", icon: <LayoutGrid className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "QR Code Reader", slug: "qr-code-reader", href: "/dashboard/tools/qr-code-reader", icon: <ScanLine className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Barcode Reader", slug: "barcode-reader", href: "/dashboard/tools/barcode-reader", icon: <ScanLine className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Hash Generator", slug: "hash-generator", href: "/dashboard/tools/hash-generator", icon: <Hash className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "rar-to-zip", "7z-to-zip", "tar-to-zip", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "pdf-split", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "crop-pdf", "flatten-pdf", "txt-to-pdf", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-generator", "qr-code-reader", "barcode-reader"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "rar-to-zip", "7z-to-zip", "tar-to-zip", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "pdf-split", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "crop-pdf", "flatten-pdf", "txt-to-pdf", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-generator", "qr-code-reader", "barcode-reader", "hash-generator"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },
