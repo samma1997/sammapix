@@ -128,6 +128,7 @@ export const TOOL_SLUGS = [
   "apk-extractor",
   "ipa-extractor",
   "iso-extractor",
+  "qr-code-generator",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

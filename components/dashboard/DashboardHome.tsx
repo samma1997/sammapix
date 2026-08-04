@@ -77,6 +77,7 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconQrCodeGenerator,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1059,6 +1060,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconIsoExtractor,
     category: ["Optimize"],
     keywords: ["extract iso", "open iso file", "iso extractor", "browse iso contents", "iso to zip", "open iso online", "iso image extractor", "no mount iso", "iso file viewer"],
+  },
+  {
+    name: "QR Code Generator",
+    slug: "qr-code-generator",
+    href: "/dashboard/tools/qr-code-generator",
+    tagline: "Generate QR codes for URL, text, Wi-Fi and email. Download PNG or SVG. 100% in your browser — no upload, no account.",
+    accent: "#6366F1",
+    badges: ["Free", "PNG + SVG", "No upload"],
+    Icon: IconQrCodeGenerator,
+    category: ["Optimize", "Creative"],
+    keywords: ["qr code generator", "create qr code", "qr code free", "qr code no signup", "wifi qr code", "qr code png svg", "qr code maker", "generate qr code online"],
   },
 ];
 

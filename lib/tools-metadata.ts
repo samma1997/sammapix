@@ -882,6 +882,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["pdf-protect", "pdf-watermark", "pdf-compress"],
     relatedBlogSlugs: ["flatten-pdf-online-free", "flatten-pdf-form-no-upload"],
   },
+  "qr-code-generator": {
+    id: "qr-code-generator",
+    name: "QR Code Generator",
+    shortDesc: "Create QR codes for URL, text, Wi-Fi, email — PNG + SVG, no upload",
+    slug: "/tools/qr-code-generator",
+    category: "edit",
+    relatedTools: ["image-to-base64", "add-text-to-image", "stampit"],
+    relatedBlogSlugs: ["qr-code-generator-online", "create-qr-code-no-signup"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

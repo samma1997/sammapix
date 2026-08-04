@@ -60,6 +60,7 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconQrCodeGenerator,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -127,6 +128,7 @@ const MinecraftExtractorClient = dynamic(() => import("@/components/tools/Minecr
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
 const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
 const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
+const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGeneratorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -195,6 +197,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "apk-extractor":        ApkExtractorClient,
   "ipa-extractor":        IpaExtractorClient,
   "iso-extractor":        IsoExtractorClient,
+  "qr-code-generator":   QrCodeGeneratorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -304,6 +307,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
   "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
   "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
+  "qr-code-generator":   { Icon: IconQrCodeGenerator,      accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -999,6 +1003,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Download all as ZIP' (Day Pass or Pro) to export everything at once with folder structure preserved." },
     ],
     proTip: { text: "Need to open a 7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
+  },
+  "qr-code-generator": {
+    label: "QR Code Generator",
+    tagline: "Generate QR codes for URLs, text, Wi-Fi networks and email addresses — download PNG or SVG.",
+    steps: [
+      { title: "Choose a content type", desc: "Select URL, Text, Wi-Fi or Email from the preset tabs. Each preset builds the correct QR data format automatically." },
+      { title: "Enter your content and tweak options", desc: "Type the URL or text, set error correction level, size, margin and colors. The preview updates live as you type." },
+      { title: "Download PNG or SVG", desc: "Click Download PNG for an image ready for web or print, or Download SVG for a vector that scales perfectly on posters and packaging." },
+    ],
+    proTip: { text: "For print use, pick error correction H (30%) and download SVG — the code stays scannable even if partially covered by a logo.", linkLabel: "Add text to images", linkHref: "/dashboard/tools/add-text-to-image" },
   },
 };
 

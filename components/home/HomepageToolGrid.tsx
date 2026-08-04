@@ -73,6 +73,7 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconQrCodeGenerator,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -389,6 +390,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "APK Extractor", href: "/tools/apk-extractor", tagline: "An APK is a ZIP archive. Open and extract its contents in your browser — no upload, no tools to install.", accent: "#0EA5E9", badge: "Free", Icon: IconApkExtractor, category: "Optimize", isNew: true },
   { name: "IPA Extractor", href: "/tools/ipa-extractor", tagline: "An IPA is a ZIP archive. Open and extract the contents of an iOS .ipa app package in your browser — no upload, no install.", accent: "#0EA5E9", badge: "Free", Icon: IconIpaExtractor, category: "Optimize", isNew: true },
   { name: "ISO Extractor", href: "/tools/iso-extractor", tagline: "Browse and extract files from an ISO disc image in your browser — no upload, no need to mount or burn it.", accent: "#0EA5E9", badge: "Free", Icon: IconIsoExtractor, category: "Optimize", isNew: true },
+  { name: "QR Code Generator", href: "/tools/qr-code-generator", tagline: "Generate QR codes for URL, text, Wi-Fi and email. PNG + SVG download. 100% in your browser — no upload, no account.", accent: "#6366F1", badge: "Free", Icon: IconQrCodeGenerator, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

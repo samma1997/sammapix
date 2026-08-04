@@ -70,6 +70,7 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconQrCodeGenerator,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1040,6 +1041,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconIsoExtractor,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "QR Code Generator",
+    href: "/tools/qr-code-generator",
+    tagline: "Generate QR codes for URL, plain text, Wi-Fi and email. Download PNG or SVG. 100% in your browser — no upload, no account, no watermark.",
+    accent: "#6366F1",
+    badges: ["Free", "PNG + SVG", "No upload"],
+    Icon: IconQrCodeGenerator,
+    category: ["Creative", "Optimize"],
     isNew: true,
   },
 ];

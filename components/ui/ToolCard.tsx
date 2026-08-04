@@ -2757,6 +2757,44 @@ export const IconIpaExtractor: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── QR Code Generator icon (finder patterns assemble on loop) ────────────────
+export const IconQrCodeGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes qr-tl { 0%,20%{opacity:0;transform:scale(0.4)}45%,80%{opacity:1;transform:scale(1)}95%,100%{opacity:0;transform:scale(0.4)} }
+      @keyframes qr-tr { 0%,30%{opacity:0;transform:scale(0.4)}55%,85%{opacity:1;transform:scale(1)}98%,100%{opacity:0;transform:scale(0.4)} }
+      @keyframes qr-bl { 0%,10%{opacity:0;transform:scale(0.4)}35%,75%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(0.4)} }
+      @keyframes qr-dt { 0%,40%{opacity:0;transform:scale(0.4)}65%,90%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0.4)} }
+      .qr-tl{transform-origin:12px 12px;animation:qr-tl 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite}
+      .qr-tr{transform-origin:36px 12px;animation:qr-tr 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.15s infinite}
+      .qr-bl{transform-origin:12px 36px;animation:qr-bl 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.3s infinite}
+      .qr-dt{transform-origin:30px 30px;animation:qr-dt 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.08s infinite}
+    `}</style>
+    <g className="qr-tl">
+      <rect x="4" y="4" width="17" height="17" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="8" width="9" height="9" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="10" y="10" width="5" height="5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="qr-tr">
+      <rect x="27" y="4" width="17" height="17" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <rect x="31" y="8" width="9" height="9" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="33" y="10" width="5" height="5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="qr-bl">
+      <rect x="4" y="27" width="17" height="17" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="31" width="9" height="9" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="10" y="33" width="5" height="5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="qr-dt">
+      <rect x="27" y="27" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.8"/>
+      <rect x="34" y="27" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.6"/>
+      <rect x="27" y="34" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.5"/>
+      <rect x="34" y="34" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.9"/>
+      <rect x="30.5" y="30.5" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.35"/>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
