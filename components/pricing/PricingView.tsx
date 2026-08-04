@@ -57,6 +57,7 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconBarcodeGenerator,
   IconQrCodeGenerator,
   IconQrCodeReader,
 } from "@/components/ui/ToolCard";
@@ -129,6 +130,7 @@ const toolGrid = [
   { Icon: IconApkExtractor,         name: "APK Extractor",         accent: "#0EA5E9" },
   { Icon: IconIpaExtractor,         name: "IPA Extractor",         accent: "#0EA5E9" },
   { Icon: IconIsoExtractor,         name: "ISO Extractor",         accent: "#0EA5E9" },
+  { Icon: IconBarcodeGenerator,     name: "Barcode Generator",      accent: "#6366F1" },
   { Icon: IconQrCodeGenerator,      name: "QR Code Generator",     accent: "#6366F1" },
   { Icon: IconQrCodeReader,         name: "QR Code Reader",         accent: "#6366F1" },
 ] as const;

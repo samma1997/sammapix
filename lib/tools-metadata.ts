@@ -882,6 +882,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["pdf-protect", "pdf-watermark", "pdf-compress"],
     relatedBlogSlugs: ["flatten-pdf-online-free", "flatten-pdf-form-no-upload"],
   },
+  "barcode-generator": {
+    id: "barcode-generator",
+    name: "Barcode Generator",
+    shortDesc: "Generate CODE128, EAN-13, UPC-A, CODE39 and more barcodes — PNG + SVG, no upload",
+    slug: "/tools/barcode-generator",
+    category: "edit",
+    relatedTools: ["qr-code-generator", "qr-code-reader", "image-to-base64"],
+    relatedBlogSlugs: ["barcode-generator-online", "create-barcode-free"],
+  },
   "qr-code-generator": {
     id: "qr-code-generator",
     name: "QR Code Generator",

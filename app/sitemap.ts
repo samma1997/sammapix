@@ -191,6 +191,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/tar-to-zip",
     "/tools/iso-extractor",
     "/tools/ipa-extractor",
+    "/tools/barcode-generator",
     "/tools/qr-code-generator",
     "/tools/qr-code-reader",
   ].map((route) => ({

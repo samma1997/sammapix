@@ -60,6 +60,7 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconBarcodeGenerator,
   IconQrCodeGenerator,
   IconQrCodeReader,
 } from "@/components/ui/ToolCard";
@@ -129,6 +130,7 @@ const MinecraftExtractorClient = dynamic(() => import("@/components/tools/Minecr
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
 const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
 const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
+const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/BarcodeGeneratorClient"));
 const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGeneratorClient"));
 const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReaderClient"));
 
@@ -199,6 +201,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "apk-extractor":        ApkExtractorClient,
   "ipa-extractor":        IpaExtractorClient,
   "iso-extractor":        IsoExtractorClient,
+  "barcode-generator":   BarcodeGeneratorClient,
   "qr-code-generator":   QrCodeGeneratorClient,
   "qr-code-reader":      QrCodeReaderClient,
 };
@@ -310,6 +313,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
   "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
   "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
+  "barcode-generator":   { Icon: IconBarcodeGenerator,     accent: "#6366F1" },
   "qr-code-generator":   { Icon: IconQrCodeGenerator,      accent: "#6366F1" },
   "qr-code-reader":      { Icon: IconQrCodeReader,         accent: "#6366F1" },
 };
@@ -1007,6 +1011,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Download all as ZIP' (Day Pass or Pro) to export everything at once with folder structure preserved." },
     ],
     proTip: { text: "Need to open a 7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
+  },
+  "barcode-generator": {
+    label: "Barcode Generator",
+    tagline: "Generate CODE128, EAN-13, UPC-A, CODE39, ITF-14 and more barcodes entirely in your browser — download PNG or SVG, no upload, no account.",
+    steps: [
+      { title: "Choose a format", desc: "Select the barcode standard that matches your use case from the dropdown — CODE128 for general text, EAN-13 for retail products internationally, UPC-A for North American retail, or ITF-14 for shipping cartons." },
+      { title: "Enter your value and adjust options", desc: "Type the text or number to encode. Adjust bar height, bar width, colors and whether to show the human-readable text beneath the bars. The preview updates live as you type." },
+      { title: "Download PNG or SVG", desc: "Click Download PNG for a high-resolution raster image, or Download SVG for a scalable vector that stays crisp on product labels, large-format prints and packaging artwork." },
+    ],
+    proTip: { text: "Need QR codes instead of barcodes? SammaPix has a free QR Code Generator too.", linkLabel: "QR Code Generator", linkHref: "/dashboard/tools/qr-code-generator" },
   },
   "qr-code-generator": {
     label: "QR Code Generator",

@@ -2795,6 +2795,35 @@ export const IconQrCodeGenerator: React.FC<{ accent: string }> = ({ accent }) =>
   </svg>
 );
 
+export const IconBarcodeGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes bc-b1 { 0%,100%{transform:scaleY(0.6);opacity:0.5} 40%,60%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b2 { 0%,100%{transform:scaleY(0.5);opacity:0.4} 35%,65%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b3 { 0%,100%{transform:scaleY(0.7);opacity:0.6} 45%,55%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b4 { 0%,100%{transform:scaleY(0.4);opacity:0.35} 30%,70%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b5 { 0%,100%{transform:scaleY(0.65);opacity:0.55} 38%,62%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b6 { 0%,100%{transform:scaleY(0.5);opacity:0.45} 42%,58%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b7 { 0%,100%{transform:scaleY(0.6);opacity:0.5} 36%,64%{transform:scaleY(1);opacity:1} }
+      .bc-b1{transform-origin:center 28px;animation:bc-b1 2.4s cubic-bezier(0.34,1.4,0.64,1) 0s infinite}
+      .bc-b2{transform-origin:center 28px;animation:bc-b2 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.15s infinite}
+      .bc-b3{transform-origin:center 28px;animation:bc-b3 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.3s infinite}
+      .bc-b4{transform-origin:center 28px;animation:bc-b4 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.08s infinite}
+      .bc-b5{transform-origin:center 28px;animation:bc-b5 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.22s infinite}
+      .bc-b6{transform-origin:center 28px;animation:bc-b6 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.38s infinite}
+      .bc-b7{transform-origin:center 28px;animation:bc-b7 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.05s infinite}
+    `}</style>
+    <rect className="bc-b1" x="4"  y="10" width="4"   height="36" rx="1" fill={accent}/>
+    <rect className="bc-b2" x="10" y="10" width="2"   height="36" rx="0.5" fill={accent} fillOpacity="0.8"/>
+    <rect className="bc-b3" x="14" y="10" width="5"   height="36" rx="1" fill={accent}/>
+    <rect className="bc-b4" x="21" y="10" width="2.5" height="36" rx="0.5" fill={accent} fillOpacity="0.75"/>
+    <rect className="bc-b5" x="25" y="10" width="4"   height="36" rx="1" fill={accent}/>
+    <rect className="bc-b6" x="31" y="10" width="2"   height="36" rx="0.5" fill={accent} fillOpacity="0.8"/>
+    <rect className="bc-b7" x="35" y="10" width="3"   height="36" rx="1" fill={accent}/>
+    <rect             x="40" y="10" width="4"   height="36" rx="1" fill={accent} opacity="0.9"/>
+  </svg>
+);
+
 export const IconQrCodeReader: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
