@@ -336,23 +336,78 @@ export default function CompressPage() {
 
       <RelatedTools toolId="compress" />
 
-      {/* ── Compress to specific size (hub link) ── */}
+      {/* ── Compress to a specific file size — hub-and-spoke internal linking ── */}
       <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
             Compress to a specific file size
           </h2>
           <p className="text-xs text-[#737373] mb-4">
-            Need to compress to an exact KB limit? Choose your target size:
+            Need to hit an exact KB or MB limit? Pick your target — each page handles that precise size automatically.
           </p>
-          <div className="flex flex-wrap gap-2">
-            {["20kb","50kb","100kb","200kb","500kb","1mb","2mb"].map(size => (
-              <Link key={size} href={`/compress-to/${size}`} className="inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
-                {size.toUpperCase()}
+
+          {/* Popular sizes — highest GSC demand first */}
+          <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wide mb-2">Most popular</p>
+          <div className="flex flex-wrap gap-2 mb-5">
+            {[
+              { slug: "2mb",   label: "Compress to 2MB"   },
+              { slug: "3mb",   label: "Compress to 3MB"   },
+              { slug: "1mb",   label: "Compress to 1MB"   },
+              { slug: "700kb", label: "Compress to 700KB" },
+              { slug: "500kb", label: "Compress to 500KB" },
+              { slug: "200kb", label: "Compress to 200KB" },
+              { slug: "100kb", label: "Compress to 100KB" },
+              { slug: "50kb",  label: "Compress to 50KB"  },
+            ].map(({ slug, label }) => (
+              <Link
+                key={slug}
+                href={`/compress-to/${slug}`}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-[#6366F1]/25 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors font-medium"
+              >
+                {label}
               </Link>
             ))}
-            <Link href="/compress-to" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors">
-              All sizes <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+          </div>
+
+          {/* All sizes — complete list */}
+          <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wide mb-2">All sizes</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { slug: "1kb",   label: "1 KB"  },
+              { slug: "2kb",   label: "2 KB"  },
+              { slug: "3kb",   label: "3 KB"  },
+              { slug: "5kb",   label: "5 KB"  },
+              { slug: "8kb",   label: "8 KB"  },
+              { slug: "10kb",  label: "10 KB" },
+              { slug: "15kb",  label: "15 KB" },
+              { slug: "20kb",  label: "20 KB" },
+              { slug: "25kb",  label: "25 KB" },
+              { slug: "30kb",  label: "30 KB" },
+              { slug: "35kb",  label: "35 KB" },
+              { slug: "40kb",  label: "40 KB" },
+              { slug: "45kb",  label: "45 KB" },
+              { slug: "60kb",  label: "60 KB" },
+              { slug: "70kb",  label: "70 KB" },
+              { slug: "80kb",  label: "80 KB" },
+              { slug: "150kb", label: "150 KB"},
+              { slug: "250kb", label: "250 KB"},
+              { slug: "300kb", label: "300 KB"},
+              { slug: "400kb", label: "400 KB"},
+              { slug: "5mb",   label: "5 MB"  },
+            ].map(({ slug, label }) => (
+              <Link
+                key={slug}
+                href={`/compress-to/${slug}`}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#A3A3A3] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+            <Link
+              href="/compress-to"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Browse all <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
             </Link>
           </div>
         </div>

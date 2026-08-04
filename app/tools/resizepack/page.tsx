@@ -244,24 +244,72 @@ export default function ResizePackPage() {
 
       <RelatedTools toolId="resizepack" />
 
-      {/* ── Resize for specific platforms (hub link) ── */}
+      {/* ── Resize for a specific platform — hub-and-spoke internal linking ── */}
       <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
             Resize for a specific platform
           </h2>
-          <div className="flex flex-wrap gap-2">
+          <p className="text-xs text-[#737373] mb-4">
+            Each page below sets the exact pixel dimensions required by that platform — no guesswork.
+          </p>
+
+          {/* Top platforms — highest GSC demand first */}
+          <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wide mb-2">Most popular</p>
+          <div className="flex flex-wrap gap-2 mb-5">
             {[
-              {name:"Instagram",slug:"instagram"},{name:"Facebook",slug:"facebook"},{name:"YouTube",slug:"youtube-thumbnail"},
-              {name:"LinkedIn",slug:"linkedin"},{name:"TikTok",slug:"tiktok"},{name:"Twitter/X",slug:"twitter"},
-              {name:"Pinterest",slug:"pinterest"},{name:"Shopify",slug:"shopify-product"},{name:"Etsy",slug:"etsy-listing"},
-            ].map(p => (
-              <Link key={p.slug} href={`/resize/${p.slug}`} className="inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors">
-                {p.name}
+              { slug: "discord",          name: "Resize for Discord"    },
+              { slug: "tiktok",           name: "Resize for TikTok"     },
+              { slug: "whatsapp",         name: "Resize for WhatsApp"   },
+              { slug: "slack",            name: "Resize for Slack"      },
+              { slug: "telegram",         name: "Resize for Telegram"   },
+              { slug: "instagram",        name: "Resize for Instagram"  },
+              { slug: "youtube-thumbnail",name: "Resize for YouTube"    },
+              { slug: "twitter",          name: "Resize for Twitter/X"  },
+            ].map(({ slug, name }) => (
+              <Link
+                key={slug}
+                href={`/resize/${slug}`}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-[#14B8A6]/25 rounded-md text-[#14B8A6] hover:bg-[#14B8A6]/5 bg-white dark:bg-[#1E1E1E] transition-colors font-medium"
+              >
+                {name}
               </Link>
             ))}
-            <Link href="/resize" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#6366F1]/30 rounded-md text-[#6366F1] hover:bg-[#6366F1]/5 bg-white dark:bg-[#1E1E1E] transition-colors">
-              All platforms <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+          </div>
+
+          {/* All platforms */}
+          <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wide mb-2">All platforms</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { slug: "facebook",       name: "Facebook"         },
+              { slug: "linkedin",       name: "LinkedIn"         },
+              { slug: "pinterest",      name: "Pinterest"        },
+              { slug: "snapchat",       name: "Snapchat"         },
+              { slug: "threads",        name: "Threads"          },
+              { slug: "mastodon",       name: "Mastodon"         },
+              { slug: "twitch",         name: "Twitch"           },
+              { slug: "email-header",   name: "Email Header"     },
+              { slug: "passport",       name: "Passport Photo"   },
+              { slug: "visa",           name: "Visa Photo"       },
+              { slug: "shopify-product",name: "Shopify Product"  },
+              { slug: "etsy-listing",   name: "Etsy Listing"     },
+              { slug: "amazon",         name: "Amazon"           },
+              { slug: "ebay",           name: "eBay"             },
+              { slug: "blog-header",    name: "Blog Header"      },
+            ].map(({ slug, name }) => (
+              <Link
+                key={slug}
+                href={`/resize/${slug}`}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#A3A3A3] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {name}
+              </Link>
+            ))}
+            <Link
+              href="/resize"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#14B8A6]/30 rounded-md text-[#14B8A6] hover:bg-[#14B8A6]/5 bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Browse all <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
             </Link>
           </div>
         </div>
