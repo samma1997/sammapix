@@ -235,7 +235,7 @@ export default function QrCodeGeneratorOnlinePage() {
         description="Most 'free' QR code generators online are not actually free — they create dynamic QR codes hosted on their servers, lock the SVG behind a paywall, or delete your code when your trial ends. Here is a clear explanation of how QR codes work, why static QR codes never expire, and how to generate one for free in your browser with no account required."
         date={POST_DATE}
         dateFormatted={POST_DATE_FORMATTED}
-        tags={["Tools", "Design"]}
+        tags={["Tools", "Creative"]}
         readingTime={9}
         headings={[
           { id: "what-is-a-qr-code", title: "What is a QR code and how does it encode data" },

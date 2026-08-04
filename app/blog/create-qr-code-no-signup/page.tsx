@@ -235,7 +235,7 @@ export default function CreateQrCodeNoSignupPage() {
         description="You want a QR code for your menu, your business card, or your Wi-Fi. You open a generator. It asks for your email. Then it asks you to create an account. Then it tells you the SVG download requires a paid plan. Here is why that happens — and how to generate a QR code privately in your browser without any of it."
         date={POST_DATE}
         dateFormatted={POST_DATE_FORMATTED}
-        tags={["Tools", "Design"]}
+        tags={["Tools", "Creative"]}
         readingTime={8}
         headings={[
           { id: "why-signup-required", title: "Why most QR code generators require an account" },

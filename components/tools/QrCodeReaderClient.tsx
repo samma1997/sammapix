@@ -64,7 +64,6 @@ export default function QrCodeReaderClient() {
   const [cameraCopied, setCameraCopied] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const rafRef = useRef<number | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -100,18 +99,20 @@ export default function QrCodeReaderClient() {
         img.src = objectUrl;
       });
 
-      const canvas = canvasRef.current;
-      if (!canvas) throw new Error("Canvas not available.");
+      // Offscreen canvas (robust: avoids display:none getImageData quirks)
+      const canvas = document.createElement("canvas");
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
 
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
       if (!ctx) throw new Error("Canvas context not available.");
       ctx.drawImage(img, 0, 0);
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const jsQR = (await import("jsqr")).default;
-      const qrResult = jsQR(imageData.data, imageData.width, imageData.height);
+      const qrResult = jsQR(imageData.data, imageData.width, imageData.height, {
+        inversionAttempts: "attemptBoth",
+      });
 
       if (qrResult) {
         setResult(qrResult.data);
@@ -211,18 +212,23 @@ export default function QrCodeReaderClient() {
       setCameraState("scanning");
       trackEvent("tool_used", { tool_name: "qr-code-reader", mode: "camera" });
 
+      const scanCanvas = document.createElement("canvas");
       const scanFrame = async () => {
         if (!video || video.paused || video.ended) return;
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext("2d");
+        if (!video.videoWidth || !video.videoHeight) {
+          rafRef.current = requestAnimationFrame(scanFrame);
+          return;
+        }
+        scanCanvas.width = video.videoWidth;
+        scanCanvas.height = video.videoHeight;
+        const ctx = scanCanvas.getContext("2d", { willReadFrequently: true });
         if (!ctx) return;
         ctx.drawImage(video, 0, 0);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const imageData = ctx.getImageData(0, 0, scanCanvas.width, scanCanvas.height);
         const jsQR = (await import("jsqr")).default;
-        const found = jsQR(imageData.data, imageData.width, imageData.height);
+        const found = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "attemptBoth",
+        });
         if (found) {
           setCameraResult(found.data);
           stopCamera();
@@ -246,8 +252,6 @@ export default function QrCodeReaderClient() {
 
   return (
     <section className="pt-6 pb-4 px-4 sm:px-6">
-      {/* Hidden canvas used for decoding */}
-      <canvas ref={canvasRef} className="hidden" aria-hidden="true" />
 
       <div className="max-w-2xl mx-auto">
 
