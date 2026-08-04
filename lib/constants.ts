@@ -330,6 +330,8 @@ export const BLOG_SLUGS = [
   "create-barcode-free",
   "barcode-reader-online",
   "scan-barcode-from-image",
+  "hash-generator-online",
+  "generate-sha256-md5-online",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

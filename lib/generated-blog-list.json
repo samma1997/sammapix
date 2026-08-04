@@ -168,6 +168,34 @@
     "url": "/blog/extract-mcpack-online"
   },
   {
+    "slug": "generate-sha256-md5-online",
+    "title": "How to Generate a SHA-256 or MD5 Checksum Online Without Uploading [2026]",
+    "description": "Generate a SHA-256 or MD5 checksum from text or a file in your browser — no upload, no server. Step-by-step: verify a download, compare checksums, und",
+    "keywords": [
+      "generate sha256",
+      "md5 checksum online",
+      "verify file hash",
+      "checksum no upload",
+      "sha256 online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/generate-sha256-md5-online"
+  },
+  {
+    "slug": "hash-generator-online",
+    "title": "Free Hash Generator Online — MD5, SHA-256, SHA-512 from Text or File [2026]",
+    "description": "Generate MD5, SHA-1, SHA-256, SHA-384, or SHA-512 hashes from any text or file entirely in your browser. No upload, no account. Web Crypto API runs lo",
+    "keywords": [
+      "hash generator",
+      "hash generator online",
+      "sha256 generator",
+      "md5 hash online",
+      "file hash online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/hash-generator-online"
+  },
+  {
     "slug": "open-apk-file-online",
     "title": "How to Open an APK File Without Installing It [2026]",
     "description": "An APK is a ZIP archive — open it in your browser to view AndroidManifest.xml, resources, and assets without installing the app. JSZip runs locally, n",
