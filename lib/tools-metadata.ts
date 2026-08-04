@@ -924,8 +924,17 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or a file — no upload",
     slug: "/tools/hash-generator",
     category: "edit",
-    relatedTools: ["image-to-base64", "qr-code-generator", "password-generator"],
+    relatedTools: ["image-to-base64", "qr-code-generator", "url-encode-decode"],
     relatedBlogSlugs: ["hash-generator-online", "generate-sha256-md5-online"],
+  },
+  "url-encode-decode": {
+    id: "url-encode-decode",
+    name: "URL Encoder / Decoder",
+    shortDesc: "Encode or decode URL percent-encoded text in your browser — no upload",
+    slug: "/tools/url-encode-decode",
+    category: "edit",
+    relatedTools: ["hash-generator", "image-to-base64", "qr-code-generator"],
+    relatedBlogSlugs: ["url-encode-decode-online", "url-encoder-decoder-tool"],
   },
 };
 

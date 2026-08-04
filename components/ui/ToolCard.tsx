@@ -2934,6 +2934,49 @@ export const IconHashGenerator: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconUrlEncodeDecode: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ued-tc-out {
+        0%, 15% { opacity: 1; transform: translateX(0px); }
+        35%      { opacity: 0; transform: translateX(-5px); }
+        100%     { opacity: 0; }
+      }
+      @keyframes ued-tc-in {
+        0%, 33% { opacity: 0; transform: translateX(5px); }
+        53%, 85%{ opacity: 1; transform: translateX(0px); }
+        100%    { opacity: 0; }
+      }
+      @keyframes ued-tc-arr {
+        0%, 25%  { transform: translateX(-1px); opacity: 0.45; }
+        50%      { transform: translateX(2px);  opacity: 1; }
+        80%, 100%{ transform: translateX(-1px); opacity: 0.45; }
+      }
+      .ued-tc-plain { animation: ued-tc-out 2.6s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .ued-tc-pct   { animation: ued-tc-in  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ued-tc-arr   { animation: ued-tc-arr  2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Input box */}
+    <rect x="2" y="16" width="16" height="16" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <g className="ued-tc-plain">
+      <text x="10" y="27" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace" textAnchor="middle">url</text>
+    </g>
+    {/* Arrow */}
+    <g className="ued-tc-arr">
+      <path d="M20 24 L24 24 M22.5 22 L24 24 L22.5 26" stroke={accent} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Output box */}
+    <rect x="26" y="13" width="20" height="22" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <g className="ued-tc-pct" style={{ opacity: 0 }}>
+      <text x="36" y="22" fontSize="5" fill={accent} fontWeight="800" fontFamily="monospace" textAnchor="middle">%2F</text>
+      <text x="36" y="29" fontSize="5" fill={accent} fontWeight="800" fontFamily="monospace" textAnchor="middle">%3A</text>
+    </g>
+    {/* Two-way arrows at bottom */}
+    <path d="M8 38 L18 38 M15 36 L18 38 L15 40" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.5"/>
+    <path d="M30 38 L40 38 M33 36 L30 38 L33 40" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.5"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

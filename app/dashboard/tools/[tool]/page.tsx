@@ -65,6 +65,7 @@ import {
   IconQrCodeReader,
   IconBarcodeReader,
   IconHashGenerator,
+  IconUrlEncodeDecode,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -137,6 +138,7 @@ const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGen
 const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReaderClient"));
 const BarcodeReaderClient = dynamic(() => import("@/components/tools/BarcodeReaderClient"));
 const HashGeneratorClient = dynamic(() => import("@/components/tools/HashGeneratorClient"));
+const UrlEncodeDecodeClient = dynamic(() => import("@/components/tools/UrlEncodeDecodeClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -210,6 +212,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "qr-code-reader":      QrCodeReaderClient,
   "barcode-reader":      BarcodeReaderClient,
   "hash-generator":      HashGeneratorClient,
+  "url-encode-decode":   UrlEncodeDecodeClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -324,6 +327,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "qr-code-reader":      { Icon: IconQrCodeReader,         accent: "#6366F1" },
   "barcode-reader":      { Icon: IconBarcodeReader,        accent: "#6366F1" },
   "hash-generator":      { Icon: IconHashGenerator,        accent: "#6366F1" },
+  "url-encode-decode":   { Icon: IconUrlEncodeDecode,      accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1069,6 +1073,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy your hash", desc: "Each result appears in a monospace row with its own Copy button. Click to copy the hex digest to your clipboard." },
     ],
     proTip: { text: "SHA-256 is the modern standard. Use MD5 only for legacy checksums or file deduplication — it is not secure for cryptography.", linkLabel: "Learn more", linkHref: "/tools/hash-generator" },
+  },
+  "url-encode-decode": {
+    label: "URL Encoder / Decoder",
+    tagline: "Encode or decode URL percent-encoded text instantly in your browser — no upload, no signup.",
+    steps: [
+      { title: "Choose Encode or Decode mode", desc: "Click Encode to convert plain text to percent-encoded form, or Decode to convert percent-encoded text back to readable form." },
+      { title: "Select mode and type input", desc: "Pick encodeURIComponent (default, for query params) or encodeURI (for a full URL). Type or paste your text — output updates live." },
+      { title: "Copy or Swap", desc: "Click Copy to copy the output to your clipboard. Use Swap to pipe the output back as input in the opposite mode." },
+    ],
+    proTip: { text: "Use encodeURIComponent for query string values — it encodes & = ? # and more. Use encodeURI only when encoding a complete URL.", linkLabel: "Image to Base64", linkHref: "/dashboard/tools/image-to-base64" },
   },
 };
 

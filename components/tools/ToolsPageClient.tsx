@@ -75,6 +75,7 @@ import {
   IconQrCodeReader,
   IconBarcodeReader,
   IconHashGenerator,
+  IconUrlEncodeDecode,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1094,6 +1095,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "SHA-256 / MD5", "No upload"],
     Icon: IconHashGenerator,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "URL Encoder / Decoder",
+    href: "/tools/url-encode-decode",
+    tagline: "Encode or decode URL percent-encoded text instantly in your browser. Supports encodeURIComponent and encodeURI. No upload, no signup.",
+    accent: "#6366F1",
+    badges: ["Free", "encodeURIComponent", "No upload"],
+    Icon: IconUrlEncodeDecode,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

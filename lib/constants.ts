@@ -133,6 +133,7 @@ export const TOOL_SLUGS = [
   "qr-code-reader",
   "barcode-reader",
   "hash-generator",
+  "url-encode-decode",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

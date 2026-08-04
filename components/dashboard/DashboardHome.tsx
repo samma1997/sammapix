@@ -82,6 +82,7 @@ import {
   IconQrCodeReader,
   IconBarcodeReader,
   IconHashGenerator,
+  IconUrlEncodeDecode,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1119,6 +1120,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconHashGenerator,
     category: ["Optimize", "Creative"],
     keywords: ["hash generator", "sha256 generator", "md5 hash online", "file checksum", "sha512 generator", "sha1 hash", "file hash browser", "hash text online", "checksum calculator", "hash no upload"],
+  },
+  {
+    name: "URL Encoder / Decoder",
+    slug: "url-encode-decode",
+    href: "/dashboard/tools/url-encode-decode",
+    tagline: "Encode or decode URL percent-encoded text instantly in your browser. encodeURIComponent + encodeURI. No upload.",
+    accent: "#6366F1",
+    badges: ["Free", "encodeURIComponent", "No upload"],
+    Icon: IconUrlEncodeDecode,
+    category: ["Optimize", "Creative"],
+    keywords: ["url encode", "url decode", "percent encoding", "encode url online", "decode url", "url encoder", "url decoder", "encodeURIComponent", "encodeURI", "percent encode", "query string", "url encoding tool"],
   },
 ];
 

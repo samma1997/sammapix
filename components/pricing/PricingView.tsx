@@ -62,6 +62,7 @@ import {
   IconQrCodeReader,
   IconBarcodeReader,
   IconHashGenerator,
+  IconUrlEncodeDecode,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -137,6 +138,7 @@ const toolGrid = [
   { Icon: IconQrCodeReader,         name: "QR Code Reader",         accent: "#6366F1" },
   { Icon: IconBarcodeReader,        name: "Barcode Reader",         accent: "#6366F1" },
   { Icon: IconHashGenerator,        name: "Hash Generator",         accent: "#6366F1" },
+  { Icon: IconUrlEncodeDecode,      name: "URL Encoder / Decoder",  accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────
