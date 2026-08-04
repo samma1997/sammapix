@@ -2341,6 +2341,422 @@ export const IconTxtToPdf: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── TAR → ZIP icon — TAR box splits (streams) into a ZIP box via animated arrow ─
+export const IconTarToZip: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes t2z-arrow {
+        0%, 15%  { transform: translateX(-3px); opacity: 0.25; }
+        50%      { transform: translateX(3px);  opacity: 1; }
+        80%      { transform: translateX(0px);  opacity: 0.25; }
+        100%     { transform: translateX(-3px); opacity: 0.25; }
+      }
+      @keyframes t2z-src-fade {
+        0%, 20%  { opacity: 1; }
+        55%, 100%{ opacity: 0.45; }
+      }
+      @keyframes t2z-zip-grow {
+        0%, 30%  { opacity: 0.35; transform: scale(0.88); }
+        65%, 88% { opacity: 1;    transform: scale(1); }
+        100%     { opacity: 0.35; transform: scale(0.88); }
+      }
+      @keyframes t2z-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.7); }
+        72%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      @keyframes t2z-stripe {
+        0%, 20%  { opacity: 0.7; }
+        55%, 100%{ opacity: 0.2; }
+      }
+      .t2z-arrow  { animation: t2z-arrow 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .t2z-src    { animation: t2z-src-fade 2.4s ease-in-out infinite; }
+      .t2z-zip    { transform-origin: 36px 18px; animation: t2z-zip-grow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .t2z-badge  { transform-origin: 37px 38px; animation: t2z-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .t2z-stripe { animation: t2z-stripe 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* TAR box left — with horizontal tape stripes */}
+    <g className="t2z-src">
+      <rect x="2" y="8" width="18" height="22" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="11" y="20" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">TAR</text>
+      {/* Stripes indicating layers/compression */}
+      <line className="t2z-stripe" x1="4" y1="23" x2="18" y2="23" stroke={accent} strokeWidth="1" strokeOpacity="0.5"/>
+      <line className="t2z-stripe" x1="4" y1="26" x2="18" y2="26" stroke={accent} strokeWidth="1" strokeOpacity="0.35"/>
+    </g>
+    {/* Animated arrow */}
+    <g className="t2z-arrow">
+      <path d="M22 19 L26 19 M24 17 L26 19 L24 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* ZIP box right */}
+    <g className="t2z-zip" style={{ opacity: 0.35 }}>
+      <rect x="27" y="8" width="19" height="22" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="36.5" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    </g>
+    {/* "any OS" badge pop */}
+    <g className="t2z-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">any OS</text>
+    </g>
+  </svg>
+);
+
+// ── RAR → ZIP converter icon (RAR box morphs into ZIP box via animated arrow) ─
+export const IconRarToZip: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes r2z-arrow {
+        0%, 15%  { transform: translateX(-3px); opacity: 0.25; }
+        50%      { transform: translateX(3px);  opacity: 1; }
+        80%      { transform: translateX(0px);  opacity: 0.25; }
+        100%     { transform: translateX(-3px); opacity: 0.25; }
+      }
+      @keyframes r2z-rar-fade {
+        0%, 20%  { opacity: 1; }
+        55%, 100%{ opacity: 0.45; }
+      }
+      @keyframes r2z-zip-grow {
+        0%, 30%  { opacity: 0.35; transform: scale(0.88); }
+        65%, 88% { opacity: 1;    transform: scale(1); }
+        100%     { opacity: 0.35; transform: scale(0.88); }
+      }
+      @keyframes r2z-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.7); }
+        72%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .r2z-arrow { animation: r2z-arrow 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .r2z-rar   { animation: r2z-rar-fade 2.4s ease-in-out infinite; }
+      .r2z-zip   { transform-origin: 36px 18px; animation: r2z-zip-grow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .r2z-badge { transform-origin: 37px 38px; animation: r2z-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* RAR box left */}
+    <g className="r2z-rar">
+      <rect x="2" y="8" width="18" height="22" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="11" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">RAR</text>
+    </g>
+    {/* Animated arrow */}
+    <g className="r2z-arrow">
+      <path d="M22 19 L26 19 M24 17 L26 19 L24 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* ZIP box right */}
+    <g className="r2z-zip" style={{ opacity: 0.35 }}>
+      <rect x="27" y="8" width="19" height="22" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="36.5" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    </g>
+    {/* "universal" badge pop */}
+    <g className="r2z-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">any OS</text>
+    </g>
+  </svg>
+);
+
+// ── 7Z to ZIP icon — 7Z box + animated arrow + ZIP box growing ────────────────
+export const IconSevenZToZip: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes s2z-arrow {
+        0%, 15%  { transform: translateX(-3px); opacity: 0.25; }
+        50%      { transform: translateX(3px);  opacity: 1; }
+        80%      { transform: translateX(0px);  opacity: 0.25; }
+        100%     { transform: translateX(-3px); opacity: 0.25; }
+      }
+      @keyframes s2z-src-fade {
+        0%, 20%  { opacity: 1; }
+        55%, 100%{ opacity: 0.45; }
+      }
+      @keyframes s2z-zip-grow {
+        0%, 30%  { opacity: 0.35; transform: scale(0.88); }
+        65%, 88% { opacity: 1;    transform: scale(1); }
+        100%     { opacity: 0.35; transform: scale(0.88); }
+      }
+      @keyframes s2z-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.7); }
+        72%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .s2z-arrow { animation: s2z-arrow 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .s2z-src   { animation: s2z-src-fade 2.4s ease-in-out infinite; }
+      .s2z-zip   { transform-origin: 36px 18px; animation: s2z-zip-grow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .s2z-badge { transform-origin: 37px 38px; animation: s2z-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* 7Z box left */}
+    <g className="s2z-src">
+      <rect x="2" y="8" width="18" height="22" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="11" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">7Z</text>
+    </g>
+    {/* Animated arrow */}
+    <g className="s2z-arrow">
+      <path d="M22 19 L26 19 M24 17 L26 19 L24 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* ZIP box right */}
+    <g className="s2z-zip" style={{ opacity: 0.35 }}>
+      <rect x="27" y="8" width="19" height="22" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="36.5" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    </g>
+    {/* "any OS" badge pop */}
+    <g className="s2z-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">any OS</text>
+    </g>
+  </svg>
+);
+
+// ── Minecraft File Extractor icon — block/box opens revealing files ────────────
+export const IconMinecraftExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes mc-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-42deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes mc-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-9px); opacity: 1; }
+        80%      { transform: translateY(-9px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes mc-file2 {
+        0%, 32%  { transform: translateY(0px); opacity: 0; }
+        60%      { transform: translateY(-14px); opacity: 1; }
+        80%      { transform: translateY(-14px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes mc-shine {
+        0%, 45%  { opacity: 0; }
+        60%, 78% { opacity: 0.55; }
+        90%, 100%{ opacity: 0; }
+      }
+      .mc-lid   { transform-origin: 24px 16px; transform-box: fill-box; animation: mc-lid 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .mc-file1 { transform-origin: 20px 32px; transform-box: fill-box; animation: mc-file1 2.6s ease-in-out infinite; }
+      .mc-file2 { transform-origin: 28px 32px; transform-box: fill-box; animation: mc-file2 2.6s ease-in-out 0.08s infinite; }
+      .mc-shine { animation: mc-shine 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Box body */}
+    <rect x="6" y="20" width="36" height="22" rx="3" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+    {/* Pixel-style grid lines on body (Minecraft aesthetic) */}
+    <line x1="6" y1="29" x2="42" y2="29" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    <line x1="24" y1="20" x2="24" y2="42" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    {/* Files flying out */}
+    <g className="mc-file1" style={{ opacity: 0 }}>
+      <rect x="13" y="25" width="10" height="13" rx="1.5" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      <line x1="16" y1="29" x2="20" y2="29" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="16" y1="32" x2="20" y2="32" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    <g className="mc-file2" style={{ opacity: 0 }}>
+      <rect x="25" y="25" width="10" height="13" rx="1.5" fill={accent} fillOpacity="0.45" stroke={accent} strokeWidth="1.25"/>
+      <line x1="28" y1="29" x2="32" y2="29" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="28" y1="32" x2="32" y2="32" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    {/* Lid */}
+    <g className="mc-lid">
+      <rect x="4" y="11" width="40" height="12" rx="3" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      {/* Pixel dots on lid */}
+      <rect x="10" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="16" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="22" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="28" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="34" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+    </g>
+    {/* Shine on open */}
+    <ellipse className="mc-shine" cx="24" cy="21" rx="10" ry="2" fill={accent} fillOpacity="0.3"/>
+  </svg>
+);
+
+// ── APK Extractor icon — Android-generic box opening with files ───────────────
+export const IconApkExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes apk-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-44deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes apk-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-10px); opacity: 1; }
+        80%      { transform: translateY(-10px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes apk-file2 {
+        0%, 32%  { transform: translateY(0px); opacity: 0; }
+        60%      { transform: translateY(-15px); opacity: 1; }
+        80%      { transform: translateY(-15px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes apk-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.6); }
+        65%, 82% { opacity: 1; transform: scale(1); }
+        95%, 100%{ opacity: 0; transform: scale(0.6); }
+      }
+      .apk-lid   { transform-origin: 24px 17px; transform-box: fill-box; animation: apk-lid 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .apk-file1 { transform-origin: 19px 32px; transform-box: fill-box; animation: apk-file1 2.6s ease-in-out infinite; }
+      .apk-file2 { transform-origin: 29px 32px; transform-box: fill-box; animation: apk-file2 2.6s ease-in-out 0.09s infinite; }
+      .apk-badge { transform-origin: 36px 12px; transform-box: fill-box; animation: apk-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Box body */}
+    <rect x="6" y="21" width="36" height="21" rx="3" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+    {/* Horizontal shelf line */}
+    <line x1="6" y1="30" x2="42" y2="30" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    {/* Files flying out */}
+    <g className="apk-file1" style={{ opacity: 0 }}>
+      <rect x="12" y="26" width="10" height="13" rx="1.5" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      <line x1="15" y1="30" x2="19" y2="30" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="15" y1="33" x2="19" y2="33" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    <g className="apk-file2" style={{ opacity: 0 }}>
+      <rect x="26" y="26" width="10" height="13" rx="1.5" fill={accent} fillOpacity="0.45" stroke={accent} strokeWidth="1.25"/>
+      <line x1="29" y1="30" x2="33" y2="30" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="29" y1="33" x2="33" y2="33" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    {/* Lid */}
+    <g className="apk-lid">
+      <rect x="4" y="12" width="40" height="12" rx="3" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+      {/* APK label on lid */}
+      <text x="24" y="21" fontSize="6" fill={accent} fillOpacity="0.85" textAnchor="middle" fontWeight="700" fontFamily="monospace">.apk</text>
+    </g>
+    {/* Badge "ZIP" pops when open */}
+    <g className="apk-badge" style={{ opacity: 0 }}>
+      <circle cx="36" cy="12" r="6" fill={accent}/>
+      <text x="36" y="15" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    </g>
+  </svg>
+);
+
+// ─── ISO Extractor ────────────────────────────────────────────────────────────
+
+export const IconIsoExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes iso-spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes iso-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-48deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes iso-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-11px); opacity: 1; }
+        82%      { transform: translateY(-11px); opacity: 1; }
+        96%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes iso-file2 {
+        0%, 33%  { transform: translateY(0px); opacity: 0; }
+        60%      { transform: translateY(-16px); opacity: 1; }
+        82%      { transform: translateY(-16px); opacity: 1; }
+        96%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes iso-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.55); }
+        65%, 80% { opacity: 1; transform: scale(1); }
+        96%, 100%{ opacity: 0; transform: scale(0.55); }
+      }
+      .iso-disc-ring { transform-origin: 14px 14px; transform-box: fill-box; animation: iso-spin 3s linear infinite; }
+      .iso-lid  { transform-origin: 24px 18px; transform-box: fill-box; animation: iso-lid 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .iso-f1   { transform-origin: 19px 33px; transform-box: fill-box; animation: iso-file1 2.8s ease-in-out infinite; }
+      .iso-f2   { transform-origin: 29px 33px; transform-box: fill-box; animation: iso-file2 2.8s ease-in-out 0.1s infinite; }
+      .iso-badge{ transform-origin: 36px 11px; transform-box: fill-box; animation: iso-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Disc in lid — spins */}
+    <g className="iso-disc-ring">
+      <circle cx="14" cy="14" r="7" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.4"/>
+      <circle cx="14" cy="14" r="2.2" fill={accent} fillOpacity="0.5"/>
+      {/* Reflective arc */}
+      <path d="M10 10 A6 6 0 0 1 18 10" stroke={accent} strokeWidth="1" strokeLinecap="round" strokeOpacity="0.55" fill="none"/>
+    </g>
+    {/* Box body */}
+    <rect x="6" y="22" width="36" height="20" rx="3" fill={accent} fillOpacity="0.14" stroke={accent} strokeWidth="1.5"/>
+    <line x1="6" y1="30" x2="42" y2="30" stroke={accent} strokeWidth="0.7" strokeOpacity="0.3"/>
+    {/* Files flying out */}
+    <g className="iso-f1" style={{ opacity: 0 }}>
+      <rect x="12" y="27" width="10" height="12" rx="1.5" fill={accent} fillOpacity="0.28" stroke={accent} strokeWidth="1.2"/>
+      <line x1="15" y1="31" x2="19" y2="31" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="15" y1="34" x2="19" y2="34" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    <g className="iso-f2" style={{ opacity: 0 }}>
+      <rect x="26" y="27" width="10" height="12" rx="1.5" fill={accent} fillOpacity="0.42" stroke={accent} strokeWidth="1.2"/>
+      <line x1="29" y1="31" x2="33" y2="31" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="29" y1="34" x2="33" y2="34" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    {/* Lid flips open */}
+    <g className="iso-lid">
+      <rect x="4" y="13" width="40" height="12" rx="3" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+      <text x="24" y="22" fontSize="5.5" fill={accent} fillOpacity="0.9" textAnchor="middle" fontWeight="700" fontFamily="monospace">.iso</text>
+    </g>
+    {/* Badge "ISO" pops */}
+    <g className="iso-badge" style={{ opacity: 0 }}>
+      <circle cx="36" cy="11" r="6" fill={accent}/>
+      <text x="36" y="14" fontSize="4" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">ISO</text>
+    </g>
+  </svg>
+);
+
+// ─── IPA Extractor ───────────────────────────────────────────────────────────
+
+export const IconIpaExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ipa-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-44deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes ipa-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-10px); opacity: 1; }
+        80%      { transform: translateY(-10px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes ipa-file2 {
+        0%, 32%  { transform: translateY(0px); opacity: 0; }
+        62%      { transform: translateY(-15px); opacity: 1; }
+        80%      { transform: translateY(-15px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes ipa-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.6); }
+        65%, 82% { opacity: 1; transform: scale(1); }
+        95%, 100%{ opacity: 0; transform: scale(0.6); }
+      }
+      .ipa-lid   { transform-origin: 24px 17px; transform-box: fill-box; animation: ipa-lid 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ipa-file1 { transform-origin: 19px 32px; transform-box: fill-box; animation: ipa-file1 2.6s ease-in-out infinite; }
+      .ipa-file2 { transform-origin: 29px 32px; transform-box: fill-box; animation: ipa-file2 2.6s ease-in-out 0.1s infinite; }
+      .ipa-badge { transform-origin: 36px 12px; transform-box: fill-box; animation: ipa-badge 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Box body */}
+    <rect x="6" y="21" width="36" height="21" rx="3" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+    {/* Horizontal shelf line */}
+    <line x1="6" y1="30" x2="42" y2="30" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    {/* Files flying out — iOS-app-like rounded rects */}
+    <g className="ipa-file1" style={{ opacity: 0 }}>
+      <rect x="12" y="26" width="10" height="13" rx="3" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      {/* Home screen icon dots */}
+      <circle cx="17" cy="30" r="1.2" fill={accent} fillOpacity="0.7"/>
+      <circle cx="17" cy="34" r="1.2" fill={accent} fillOpacity="0.5"/>
+    </g>
+    <g className="ipa-file2" style={{ opacity: 0 }}>
+      <rect x="26" y="26" width="10" height="13" rx="3" fill={accent} fillOpacity="0.45" stroke={accent} strokeWidth="1.25"/>
+      <circle cx="31" cy="30" r="1.2" fill={accent} fillOpacity="0.7"/>
+      <circle cx="31" cy="34" r="1.2" fill={accent} fillOpacity="0.5"/>
+    </g>
+    {/* Lid */}
+    <g className="ipa-lid">
+      <rect x="4" y="12" width="40" height="12" rx="3" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+      {/* IPA label on lid */}
+      <text x="24" y="21" fontSize="6" fill={accent} fillOpacity="0.85" textAnchor="middle" fontWeight="700" fontFamily="monospace">.ipa</text>
+    </g>
+    {/* Badge with iOS logo shape pops when open */}
+    <g className="ipa-badge" style={{ opacity: 0 }}>
+      <circle cx="36" cy="12" r="6" fill={accent}/>
+      <text x="36" y="15" fontSize="4" fill="white" textAnchor="middle" fontWeight="700" fontFamily="sans-serif">iOS</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

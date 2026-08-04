@@ -53,6 +53,13 @@ import {
   IconCropPdf,
   IconFlattenPdf,
   IconTxtToPdf,
+  IconRarToZip,
+  IconSevenZToZip,
+  IconTarToZip,
+  IconMinecraftExtractor,
+  IconApkExtractor,
+  IconIpaExtractor,
+  IconIsoExtractor,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -113,6 +120,13 @@ const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeCl
 const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
 const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
 const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
+const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient"));
+const SevenZToZipClient = dynamic(() => import("@/components/tools/SevenZToZipClient"));
+const TarToZipClient = dynamic(() => import("@/components/tools/TarToZipClient"));
+const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
+const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
+const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
+const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -174,6 +188,13 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "crop-pdf":         CropPdfClient,
   "flatten-pdf":      FlattenPdfClient,
   "txt-to-pdf":       TxtToPdfClient,
+  "rar-to-zip":           RarToZipClient,
+  "7z-to-zip":            SevenZToZipClient,
+  "tar-to-zip":           TarToZipClient,
+  "minecraft-extractor":  MinecraftExtractorClient,
+  "apk-extractor":        ApkExtractorClient,
+  "ipa-extractor":        IpaExtractorClient,
+  "iso-extractor":        IsoExtractorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -276,6 +297,13 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
   "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
   "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
+  "rar-to-zip":           { Icon: IconRarToZip,             accent: "#0EA5E9" },
+  "7z-to-zip":            { Icon: IconSevenZToZip,          accent: "#0EA5E9" },
+  "tar-to-zip":           { Icon: IconTarToZip,             accent: "#0EA5E9" },
+  "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
+  "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
+  "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
+  "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -901,6 +929,76 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the flattened PDF", desc: "Click Download. The filled values are now a permanent part of every page and the document looks identical on every PDF reader and printer." },
     ],
     proTip: { text: "After flattening, add a password to prevent any further editing of the document.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "minecraft-extractor": {
+    label: "Minecraft File Extractor",
+    tagline: "Open .mcpack, .mcworld and .mctemplate files in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your Minecraft file", desc: "Drag & drop a .mcpack, .mcworld or .mctemplate file. It is a ZIP archive — this tool opens it entirely in your browser." },
+      { title: "Browse the contents", desc: "See every file and folder inside: manifest.json, textures, models, sounds and scripts. No Minecraft installation needed." },
+      { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once." },
+    ],
+    proTip: { text: "Need to open a RAR archive? Open RAR Online handles .rar files the same way.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "rar-to-zip": {
+    label: "RAR to ZIP",
+    tagline: "Convert RAR to ZIP in your browser. Extract + repackage, no upload.",
+    steps: [
+      { title: "Drop your RAR file", desc: "Drag and drop a .rar file (RAR4 or RAR5, with or without password). Up to 200 MB free." },
+      { title: "Extraction and repackaging", desc: "libarchive (WebAssembly) extracts the RAR contents in your browser, then JSZip repackages them into a ZIP preserving the full folder structure." },
+      { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
+    ],
+    proTip: { text: "Need to open the RAR and download files individually instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "7z-to-zip": {
+    label: "7Z to ZIP",
+    tagline: "Convert 7Z to ZIP in your browser. Extract + repackage, no upload.",
+    steps: [
+      { title: "Drop your 7Z file", desc: "Drag and drop a .7z file (with or without password). Up to 200 MB free. Multi-volume archives (.7z.001) are not supported." },
+      { title: "Extraction and repackaging", desc: "libarchive (WebAssembly) extracts the 7Z contents in your browser, then JSZip repackages them into a ZIP preserving the full folder structure." },
+      { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
+    ],
+    proTip: { text: "Need to open the 7Z and download files individually instead? Use Open 7Z Online.", linkLabel: "Open 7Z Online", linkHref: "/dashboard/tools/open-7z" },
+  },
+  "tar-to-zip": {
+    label: "TAR to ZIP",
+    tagline: "Convert TAR archives to ZIP in your browser. Supports .tar, .tar.gz, .tgz, .tar.bz2, .tar.xz — no upload.",
+    steps: [
+      { title: "Drop your TAR file", desc: "Drag and drop a .tar, .tar.gz, .tgz, .tar.bz2, or .tar.xz file. Up to 200 MB free. libarchive detects the compression automatically." },
+      { title: "Extraction and repackaging", desc: "libarchive (WebAssembly) decompresses and extracts the TAR contents in your browser, then JSZip repackages them into a ZIP preserving the full folder structure." },
+      { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
+    ],
+    proTip: { text: "Need to convert a RAR or 7Z archive instead? SammaPix has dedicated tools for those too.", linkLabel: "RAR to ZIP", linkHref: "/dashboard/tools/rar-to-zip" },
+  },
+  "apk-extractor": {
+    label: "APK Extractor",
+    tagline: "An APK is a ZIP archive. Open and extract its contents in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your APK file", desc: "Drag & drop a .apk or .xapk file. Both are ZIP archives — this tool opens them entirely in your browser without any upload." },
+      { title: "Browse the contents", desc: "See every file and folder inside: AndroidManifest.xml, classes.dex, resources.arsc, res/, assets/, META-INF/ and lib/. Note: binary files are shown as-is, not decompiled." },
+      { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once." },
+    ],
+    proTip: { text: "Need to open a RAR or 7z archive? SammaPix has dedicated tools for those too.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "ipa-extractor": {
+    label: "IPA Extractor",
+    tagline: "An IPA is a ZIP archive. Open and extract the contents of an iOS .ipa app package in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your IPA file", desc: "Drag & drop a .ipa file. IPA packages are standard ZIP archives — this tool opens them entirely in your browser without any upload." },
+      { title: "Browse the contents", desc: "See every file and folder inside: Payload/, Info.plist, frameworks, asset catalogs, resources, and META-INF signature data. When Info.plist is XML-encoded, the app name and bundle ID are displayed automatically." },
+      { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once (Day Pass or Pro)." },
+    ],
+    proTip: { text: "Need to open an Android APK? SammaPix has a dedicated tool for that too.", linkLabel: "APK Extractor", linkHref: "/dashboard/tools/apk-extractor" },
+  },
+  "iso-extractor": {
+    label: "ISO Extractor",
+    tagline: "Browse and extract files from an ISO disc image in your browser. No upload, no mounting, no software to install.",
+    steps: [
+      { title: "Drop your ISO file", desc: "Drag & drop a .iso disc image. libarchive (WebAssembly) reads the ISO9660 filesystem directly in your browser — your file never leaves your device." },
+      { title: "Browse the contents", desc: "See every file and folder stored on the disc. Works with ISO9660 images (Linux distros, Windows installers, software CDs, game discs). UDF-only discs may not be readable." },
+      { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Download all as ZIP' (Day Pass or Pro) to export everything at once with folder structure preserved." },
+    ],
+    proTip: { text: "Need to open a 7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
   },
 };
 

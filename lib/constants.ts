@@ -121,6 +121,13 @@ export const TOOL_SLUGS = [
   "pdf-organize",
   "crop-pdf",
   "txt-to-pdf",
+  "rar-to-zip",
+  "7z-to-zip",
+  "tar-to-zip",
+  "minecraft-extractor",
+  "apk-extractor",
+  "ipa-extractor",
+  "iso-extractor",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -295,6 +302,20 @@ export const BLOG_SLUGS = [
   "flatten-pdf-form-no-upload",
   "txt-to-pdf-online-free",
   "convert-text-to-pdf-no-upload",
+  "7z-to-zip-online",
+  "convert-7z-to-zip-no-upload",
+  "rar-to-zip-online",
+  "convert-rar-to-zip-no-upload",
+  "extract-mcpack-online",
+  "open-minecraft-mcworld-file",
+  "extract-apk-online",
+  "open-apk-file-online",
+  "extract-iso-online",
+  "open-iso-file-online",
+  "extract-ipa-online",
+  "open-ipa-file-online",
+  "tar-to-zip-online",
+  "convert-tar-to-zip-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

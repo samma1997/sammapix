@@ -66,6 +66,13 @@ import {
   IconCropPdf,
   IconFlattenPdf,
   IconTxtToPdf,
+  IconRarToZip,
+  IconSevenZToZip,
+  IconTarToZip,
+  IconMinecraftExtractor,
+  IconApkExtractor,
+  IconIpaExtractor,
+  IconIsoExtractor,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -375,6 +382,13 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Crop PDF", href: "/tools/crop-pdf", tagline: "Trim Top/Right/Bottom/Left margins from every PDF page. Live preview. Points or %. No upload.", accent: "#EF4444", badge: "Free", Icon: IconCropPdf, category: "Optimize", isNew: true },
   { name: "Flatten PDF", href: "/tools/flatten-pdf", tagline: "Merge form fields into the page — filled values become permanent and non-editable. No upload.", accent: "#EF4444", badge: "Free", Icon: IconFlattenPdf, category: "Optimize", isNew: true },
   { name: "TXT to PDF", href: "/tools/txt-to-pdf", tagline: "Convert .txt files or pasted text to PDF. Word-wrap, A4/Letter, Courier or Helvetica. No upload.", accent: "#EF4444", badge: "Free", Icon: IconTxtToPdf, category: "Optimize", isNew: true },
+  { name: "RAR to ZIP", href: "/tools/rar-to-zip", tagline: "Convert RAR to ZIP in your browser — extract and repackage. Folder structure preserved. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconRarToZip, category: "Optimize", isNew: true },
+  { name: "7Z to ZIP", href: "/tools/7z-to-zip", tagline: "Convert 7Z to ZIP in your browser — extract and repackage. Folder structure preserved. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconSevenZToZip, category: "Optimize", isNew: true },
+  { name: "TAR to ZIP", href: "/tools/tar-to-zip", tagline: "Convert TAR archives (.tar, .tar.gz, .tgz, .tar.bz2, .tar.xz) to ZIP in your browser. Folder structure preserved. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconTarToZip, category: "Optimize", isNew: true },
+  { name: "Minecraft File Extractor", href: "/tools/minecraft-extractor", tagline: "Open .mcpack, .mcworld and .mctemplate in your browser. View contents, download files or export as ZIP. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconMinecraftExtractor, category: "Optimize", isNew: true },
+  { name: "APK Extractor", href: "/tools/apk-extractor", tagline: "An APK is a ZIP archive. Open and extract its contents in your browser — no upload, no tools to install.", accent: "#0EA5E9", badge: "Free", Icon: IconApkExtractor, category: "Optimize", isNew: true },
+  { name: "IPA Extractor", href: "/tools/ipa-extractor", tagline: "An IPA is a ZIP archive. Open and extract the contents of an iOS .ipa app package in your browser — no upload, no install.", accent: "#0EA5E9", badge: "Free", Icon: IconIpaExtractor, category: "Optimize", isNew: true },
+  { name: "ISO Extractor", href: "/tools/iso-extractor", tagline: "Browse and extract files from an ISO disc image in your browser — no upload, no need to mount or burn it.", accent: "#0EA5E9", badge: "Free", Icon: IconIsoExtractor, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
