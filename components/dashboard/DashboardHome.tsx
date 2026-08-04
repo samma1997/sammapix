@@ -71,6 +71,7 @@ import {
   IconFlattenPdf,
   IconTxtToPdf,
   IconRarToZip,
+  IconMinecraftExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -987,6 +988,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconRarToZip,
     category: ["Optimize"],
     keywords: ["rar to zip", "convert rar to zip", "rar to zip online", "change rar to zip", "rar to zip free", "open rar as zip", "rar converter", "rar to zip no upload", "rar to zip mac"],
+  },
+  {
+    name: "Minecraft File Extractor",
+    slug: "minecraft-extractor",
+    href: "/dashboard/tools/minecraft-extractor",
+    tagline: "Open .mcpack, .mcworld and .mctemplate files in your browser. View contents, download files or export as ZIP. No upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconMinecraftExtractor,
+    category: ["Optimize"],
+    keywords: ["mcpack extractor", "open mcworld", "extract mcpack", "minecraft pack extractor", "mctemplate", "mcworld to zip", "open minecraft file", "mcpack viewer", "minecraft extractor online"],
   },
 ];
 

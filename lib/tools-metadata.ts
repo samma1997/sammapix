@@ -810,6 +810,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["jpg-to-pdf", "pdf-page-numbers", "pdf-compress"],
     relatedBlogSlugs: ["txt-to-pdf-online-free", "convert-text-to-pdf-no-upload"],
   },
+  "minecraft-extractor": {
+    id: "minecraft-extractor",
+    name: "Minecraft File Extractor",
+    shortDesc: "Open .mcpack / .mcworld / .mctemplate files in-browser, no upload",
+    slug: "/tools/minecraft-extractor",
+    category: "optimize",
+    relatedTools: ["unrar", "open-7z", "rar-to-zip"],
+    relatedBlogSlugs: ["extract-mcpack-online", "open-minecraft-mcworld-file"],
+  },
   "rar-to-zip": {
     id: "rar-to-zip",
     name: "RAR to ZIP",

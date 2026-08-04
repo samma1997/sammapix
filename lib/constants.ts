@@ -122,6 +122,7 @@ export const TOOL_SLUGS = [
   "crop-pdf",
   "txt-to-pdf",
   "rar-to-zip",
+  "minecraft-extractor",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

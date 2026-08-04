@@ -64,6 +64,7 @@ import {
   IconFlattenPdf,
   IconTxtToPdf,
   IconRarToZip,
+  IconMinecraftExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -973,6 +974,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconRarToZip,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Minecraft File Extractor",
+    href: "/tools/minecraft-extractor",
+    tagline: "Open .mcpack, .mcworld and .mctemplate files in your browser. View contents, download individual files or export as ZIP. No upload, no Minecraft needed.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconMinecraftExtractor,
     category: ["Optimize"],
     isNew: true,
   },

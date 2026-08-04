@@ -54,6 +54,7 @@ import {
   IconFlattenPdf,
   IconTxtToPdf,
   IconRarToZip,
+  IconMinecraftExtractor,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -115,6 +116,7 @@ const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
 const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
 const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
 const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient"));
+const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -176,7 +178,8 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "crop-pdf":         CropPdfClient,
   "flatten-pdf":      FlattenPdfClient,
   "txt-to-pdf":       TxtToPdfClient,
-  "rar-to-zip":       RarToZipClient,
+  "rar-to-zip":           RarToZipClient,
+  "minecraft-extractor":  MinecraftExtractorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -279,7 +282,8 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
   "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
   "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
-  "rar-to-zip":        { Icon: IconRarToZip,       accent: "#0EA5E9" },
+  "rar-to-zip":           { Icon: IconRarToZip,             accent: "#0EA5E9" },
+  "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -905,6 +909,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the flattened PDF", desc: "Click Download. The filled values are now a permanent part of every page and the document looks identical on every PDF reader and printer." },
     ],
     proTip: { text: "After flattening, add a password to prevent any further editing of the document.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "minecraft-extractor": {
+    label: "Minecraft File Extractor",
+    tagline: "Open .mcpack, .mcworld and .mctemplate files in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your Minecraft file", desc: "Drag & drop a .mcpack, .mcworld or .mctemplate file. It is a ZIP archive — this tool opens it entirely in your browser." },
+      { title: "Browse the contents", desc: "See every file and folder inside: manifest.json, textures, models, sounds and scripts. No Minecraft installation needed." },
+      { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once." },
+    ],
+    proTip: { text: "Need to open a RAR archive? Open RAR Online handles .rar files the same way.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
   },
   "rar-to-zip": {
     label: "RAR to ZIP",

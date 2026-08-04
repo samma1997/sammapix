@@ -2392,6 +2392,68 @@ export const IconRarToZip: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Minecraft File Extractor icon — block/box opens revealing files ────────────
+export const IconMinecraftExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes mc-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-42deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes mc-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-9px); opacity: 1; }
+        80%      { transform: translateY(-9px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes mc-file2 {
+        0%, 32%  { transform: translateY(0px); opacity: 0; }
+        60%      { transform: translateY(-14px); opacity: 1; }
+        80%      { transform: translateY(-14px); opacity: 1; }
+        95%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes mc-shine {
+        0%, 45%  { opacity: 0; }
+        60%, 78% { opacity: 0.55; }
+        90%, 100%{ opacity: 0; }
+      }
+      .mc-lid   { transform-origin: 24px 16px; transform-box: fill-box; animation: mc-lid 2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .mc-file1 { transform-origin: 20px 32px; transform-box: fill-box; animation: mc-file1 2.6s ease-in-out infinite; }
+      .mc-file2 { transform-origin: 28px 32px; transform-box: fill-box; animation: mc-file2 2.6s ease-in-out 0.08s infinite; }
+      .mc-shine { animation: mc-shine 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Box body */}
+    <rect x="6" y="20" width="36" height="22" rx="3" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+    {/* Pixel-style grid lines on body (Minecraft aesthetic) */}
+    <line x1="6" y1="29" x2="42" y2="29" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    <line x1="24" y1="20" x2="24" y2="42" stroke={accent} strokeWidth="0.75" strokeOpacity="0.35"/>
+    {/* Files flying out */}
+    <g className="mc-file1" style={{ opacity: 0 }}>
+      <rect x="13" y="25" width="10" height="13" rx="1.5" fill={accent} fillOpacity="0.3" stroke={accent} strokeWidth="1.25"/>
+      <line x1="16" y1="29" x2="20" y2="29" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="16" y1="32" x2="20" y2="32" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    <g className="mc-file2" style={{ opacity: 0 }}>
+      <rect x="25" y="25" width="10" height="13" rx="1.5" fill={accent} fillOpacity="0.45" stroke={accent} strokeWidth="1.25"/>
+      <line x1="28" y1="29" x2="32" y2="29" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="28" y1="32" x2="32" y2="32" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    {/* Lid */}
+    <g className="mc-lid">
+      <rect x="4" y="11" width="40" height="12" rx="3" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      {/* Pixel dots on lid */}
+      <rect x="10" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="16" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="22" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="28" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+      <rect x="34" y="15" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.5"/>
+    </g>
+    {/* Shine on open */}
+    <ellipse className="mc-shine" cx="24" cy="21" rx="10" ry="2" fill={accent} fillOpacity="0.3"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
