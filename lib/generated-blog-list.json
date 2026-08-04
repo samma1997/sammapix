@@ -14,6 +14,20 @@
     "url": "/blog/7z-to-zip-online"
   },
   {
+    "slug": "barcode-generator-online",
+    "title": "Free Barcode Generator Online — CODE128, EAN-13, UPC, QR [2026]",
+    "description": "Generate a barcode from any value entirely in your browser — CODE128, EAN-13, EAN-8, UPC-A, CODE39, ITF-14. Download PNG or SVG. No signup, no upload,",
+    "keywords": [
+      "barcode generator",
+      "free barcode generator",
+      "ean barcode generator",
+      "code128 generator",
+      "barcode generator online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/barcode-generator-online"
+  },
+  {
     "slug": "convert-7z-to-zip-no-upload",
     "title": "How to Convert 7Z to ZIP Without Software [2026]",
     "description": "Convert 7Z to ZIP in your browser without uploading the file anywhere and without installing 7-Zip. libarchive.wasm extracts locally, JSZip repackages",
@@ -54,6 +68,20 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/convert-tar-to-zip-no-upload"
+  },
+  {
+    "slug": "create-barcode-free",
+    "title": "Create a Barcode for Free Without Signup — Browser-Based [2026]",
+    "description": "Create a barcode for free without signing up. Choose the right format, enter your value, download PNG or SVG. No upload, no server, no account. Works ",
+    "keywords": [
+      "create barcode",
+      "barcode maker",
+      "make barcode free",
+      "barcode no signup",
+      "create barcode free"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/create-barcode-free"
   },
   {
     "slug": "create-qr-code-no-signup",

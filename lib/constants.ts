@@ -131,6 +131,7 @@ export const TOOL_SLUGS = [
   "barcode-generator",
   "qr-code-generator",
   "qr-code-reader",
+  "barcode-reader",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -323,6 +324,8 @@ export const BLOG_SLUGS = [
   "create-qr-code-no-signup",
   "qr-code-reader-online",
   "scan-qr-code-from-image",
+  "barcode-generator-online",
+  "create-barcode-free",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
