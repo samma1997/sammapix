@@ -140,7 +140,7 @@ export default function MinecraftExtractorClient() {
       setEntries(parsed);
       setUiState("results");
       trackEvent("minecraft_extractor_opened", {
-        ext: file.name.split(".").pop(),
+        ext: file.name.split(".").pop() ?? "",
         files: parsed.filter((e) => !e.isDir).length,
       });
     } catch {
