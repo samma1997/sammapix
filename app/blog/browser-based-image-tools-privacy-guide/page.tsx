@@ -381,7 +381,7 @@ export default function BrowserBasedImageToolsPrivacyGuidePage() {
               { label: "WebP Convert", href: "/tools/webp" },
               { label: "EXIF Remover", href: "/tools/exif" },
               { label: "AI Rename", href: "/tools/ai-rename" },
-              { label: "Resize", href: "/tools/resize" },
+              { label: "Resize", href: "/tools/resizepack" },
             ].map(({ label, href }) => (
               <Link key={label} href={href} className="text-[11px] font-medium bg-[#F5F5F5] dark:bg-[#252525] text-gray-700 dark:text-[#A3A3A3] px-2.5 py-1 rounded border border-[#E5E5E5] dark:border-[#333] hover:border-[#A3A3A3] dark:hover:border-[#444] transition-colors">{label}</Link>
             ))}
