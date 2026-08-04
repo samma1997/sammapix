@@ -134,6 +134,7 @@ export const TOOL_SLUGS = [
   "barcode-reader",
   "hash-generator",
   "url-encode-decode",
+  "password-generator",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -332,6 +333,8 @@ export const BLOG_SLUGS = [
   "scan-barcode-from-image",
   "hash-generator-online",
   "generate-sha256-md5-online",
+  "url-encode-decode-online",
+  "url-encoder-decoder-tool",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

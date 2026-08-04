@@ -936,6 +936,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["hash-generator", "image-to-base64", "qr-code-generator"],
     relatedBlogSlugs: ["url-encode-decode-online", "url-encoder-decoder-tool"],
   },
+  "password-generator": {
+    id: "password-generator",
+    name: "Password Generator",
+    shortDesc: "Generate strong, random passwords in your browser — CSPRNG, no upload",
+    slug: "/tools/password-generator",
+    category: "edit",
+    relatedTools: ["hash-generator", "url-encode-decode", "qr-code-generator"],
+    relatedBlogSlugs: ["password-generator-online", "strong-password-generator"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

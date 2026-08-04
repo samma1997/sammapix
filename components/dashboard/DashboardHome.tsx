@@ -83,6 +83,7 @@ import {
   IconBarcodeReader,
   IconHashGenerator,
   IconUrlEncodeDecode,
+  IconPasswordGenerator,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1131,6 +1132,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconUrlEncodeDecode,
     category: ["Optimize", "Creative"],
     keywords: ["url encode", "url decode", "percent encoding", "encode url online", "decode url", "url encoder", "url decoder", "encodeURIComponent", "encodeURI", "percent encode", "query string", "url encoding tool"],
+  },
+  {
+    name: "Password Generator",
+    slug: "password-generator",
+    href: "/dashboard/tools/password-generator",
+    tagline: "Generate strong, random passwords using CSPRNG (crypto.getRandomValues). Choose length, character sets, see entropy in bits. Nothing is ever sent anywhere.",
+    accent: "#6366F1",
+    badges: ["Free", "CSPRNG", "No upload"],
+    Icon: IconPasswordGenerator,
+    category: ["Optimize", "Creative"],
+    keywords: ["password generator", "strong password", "random password", "secure password generator", "password maker", "generate password", "crypto password", "password entropy", "password generator no signup", "password no upload"],
   },
 ];
 

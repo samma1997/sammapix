@@ -79,6 +79,7 @@ import {
   IconBarcodeReader,
   IconHashGenerator,
   IconUrlEncodeDecode,
+  IconPasswordGenerator,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -401,6 +402,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Barcode Reader", href: "/tools/barcode-reader", tagline: "Decode EAN-13, UPC-A, CODE128, CODE39, QR and more from an image or camera. No upload, no app, 100% in your browser.", accent: "#6366F1", badge: "Free", Icon: IconBarcodeReader, category: "Optimize", isNew: true },
   { name: "Hash Generator", href: "/tools/hash-generator", tagline: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or a file. 100% in your browser — no upload, no account.", accent: "#6366F1", badge: "Free", Icon: IconHashGenerator, category: "Optimize", isNew: true },
   { name: "URL Encoder / Decoder", href: "/tools/url-encode-decode", tagline: "Encode or decode URL percent-encoded text instantly in your browser. encodeURIComponent + encodeURI. No upload, no signup.", accent: "#6366F1", badge: "Free", Icon: IconUrlEncodeDecode, category: "Optimize", isNew: true },
+  { name: "Password Generator", href: "/tools/password-generator", tagline: "Generate strong, random passwords using crypto.getRandomValues. Choose length, character sets, see entropy in bits. Nothing is ever sent anywhere.", accent: "#6366F1", badge: "Free", Icon: IconPasswordGenerator, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

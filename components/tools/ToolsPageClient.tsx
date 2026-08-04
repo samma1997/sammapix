@@ -76,6 +76,7 @@ import {
   IconBarcodeReader,
   IconHashGenerator,
   IconUrlEncodeDecode,
+  IconPasswordGenerator,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1105,6 +1106,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "encodeURIComponent", "No upload"],
     Icon: IconUrlEncodeDecode,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Password Generator",
+    href: "/tools/password-generator",
+    tagline: "Generate strong, random passwords in your browser using CSPRNG (crypto.getRandomValues). Choose length, character sets, see entropy in bits. Nothing is ever sent anywhere.",
+    accent: "#6366F1",
+    badges: ["Free", "CSPRNG", "No upload"],
+    Icon: IconPasswordGenerator,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

@@ -2977,6 +2977,49 @@ export const IconUrlEncodeDecode: React.FC<{ accent: string }> = ({ accent }) =>
   </svg>
 );
 
+export const IconPasswordGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pg-ic-chars {
+        0%   { transform: translateY(0px);  opacity: 1; }
+        78%  { transform: translateY(-14px); opacity: 0.15; }
+        79%  { transform: translateY(14px);  opacity: 0; }
+        100% { transform: translateY(0px);  opacity: 1; }
+      }
+      @keyframes pg-ic-glow {
+        0%, 100% { opacity: 0.4; r: 3; }
+        50%      { opacity: 1;   r: 4; }
+      }
+      @keyframes pg-ic-shake {
+        0%, 80%, 100% { transform: translateX(0); }
+        85%           { transform: translateX(-1.5px); }
+        90%           { transform: translateX(1.5px); }
+        95%           { transform: translateX(-1px); }
+      }
+      .pg-ic-chars { animation: pg-ic-chars 2.6s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pg-ic-glow  { animation: pg-ic-glow  2.6s ease-in-out infinite; }
+      .pg-ic-lock  { animation: pg-ic-shake 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Lock shackle */}
+    <g className="pg-ic-lock">
+      <path d="M17 22V17a7 7 0 0114 0v5" stroke={accent} strokeWidth="1.75" strokeLinecap="round" fill="none"/>
+      {/* Lock body */}
+      <rect x="10" y="22" width="28" height="20" rx="4" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.75"/>
+      {/* Keyhole */}
+      <circle cx="24" cy="31" r="2.5" fill={accent} fillOpacity="0.85"/>
+      <rect x="22.75" y="31.5" width="2.5" height="3.5" rx="1" fill={accent} fillOpacity="0.85"/>
+    </g>
+    {/* Scrolling chars top-right */}
+    <g className="pg-ic-chars">
+      <text x="34" y="10" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.9">A#</text>
+      <text x="34" y="16.5" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.65">9!</text>
+      <text x="34" y="23" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.4">z@</text>
+    </g>
+    {/* Glowing dot */}
+    <circle className="pg-ic-glow" cx="38" cy="5" r="3" fill={accent} fillOpacity="0.7"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

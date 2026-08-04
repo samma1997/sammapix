@@ -66,6 +66,7 @@ import {
   IconBarcodeReader,
   IconHashGenerator,
   IconUrlEncodeDecode,
+  IconPasswordGenerator,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -139,6 +140,7 @@ const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReader
 const BarcodeReaderClient = dynamic(() => import("@/components/tools/BarcodeReaderClient"));
 const HashGeneratorClient = dynamic(() => import("@/components/tools/HashGeneratorClient"));
 const UrlEncodeDecodeClient = dynamic(() => import("@/components/tools/UrlEncodeDecodeClient"));
+const PasswordGeneratorClient = dynamic(() => import("@/components/tools/PasswordGeneratorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -213,6 +215,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "barcode-reader":      BarcodeReaderClient,
   "hash-generator":      HashGeneratorClient,
   "url-encode-decode":   UrlEncodeDecodeClient,
+  "password-generator":  PasswordGeneratorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -328,6 +331,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "barcode-reader":      { Icon: IconBarcodeReader,        accent: "#6366F1" },
   "hash-generator":      { Icon: IconHashGenerator,        accent: "#6366F1" },
   "url-encode-decode":   { Icon: IconUrlEncodeDecode,      accent: "#6366F1" },
+  "password-generator":  { Icon: IconPasswordGenerator,    accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1083,6 +1087,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy or Swap", desc: "Click Copy to copy the output to your clipboard. Use Swap to pipe the output back as input in the opposite mode." },
     ],
     proTip: { text: "Use encodeURIComponent for query string values — it encodes & = ? # and more. Use encodeURI only when encoding a complete URL.", linkLabel: "Image to Base64", linkHref: "/dashboard/tools/image-to-base64" },
+  },
+  "password-generator": {
+    label: "Password Generator",
+    tagline: "Generate strong, random passwords using CSPRNG. Choose length, character sets, see entropy. Nothing is sent anywhere.",
+    steps: [
+      { title: "Set length and character sets", desc: "Use the slider (4-64 chars, default 20). Enable uppercase, lowercase, numbers and symbols. Optionally exclude ambiguous chars like l, 1, I, O, 0." },
+      { title: "Check the strength meter", desc: "The entropy in bits updates live. Aim for 90+ bits (Very strong) for important accounts like email, banking or a password manager master password." },
+      { title: "Copy and save", desc: "Click Copy next to any password to copy it instantly. Click Regenerate for a new one. Store it immediately in your password manager." },
+    ],
+    proTip: { text: "Aim for 20+ characters with all four sets enabled — that gives ~130 bits of entropy, effectively unbreakable.", linkLabel: "Hash Generator", linkHref: "/dashboard/tools/hash-generator" },
   },
 };
 
