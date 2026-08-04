@@ -54,6 +54,7 @@ import {
   IconFlattenPdf,
   IconTxtToPdf,
   IconRarToZip,
+  IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
 } from "@/components/ui/ToolCard";
@@ -117,6 +118,7 @@ const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
 const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
 const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
 const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient"));
+const SevenZToZipClient = dynamic(() => import("@/components/tools/SevenZToZipClient"));
 const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
 
@@ -181,6 +183,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "flatten-pdf":      FlattenPdfClient,
   "txt-to-pdf":       TxtToPdfClient,
   "rar-to-zip":           RarToZipClient,
+  "7z-to-zip":            SevenZToZipClient,
   "minecraft-extractor":  MinecraftExtractorClient,
   "apk-extractor":        ApkExtractorClient,
 };
@@ -286,6 +289,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
   "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
   "rar-to-zip":           { Icon: IconRarToZip,             accent: "#0EA5E9" },
+  "7z-to-zip":            { Icon: IconSevenZToZip,          accent: "#0EA5E9" },
   "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
 };
@@ -933,6 +937,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
     ],
     proTip: { text: "Need to open the RAR and download files individually instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "7z-to-zip": {
+    label: "7Z to ZIP",
+    tagline: "Convert 7Z to ZIP in your browser. Extract + repackage, no upload.",
+    steps: [
+      { title: "Drop your 7Z file", desc: "Drag and drop a .7z file (with or without password). Up to 200 MB free. Multi-volume archives (.7z.001) are not supported." },
+      { title: "Extraction and repackaging", desc: "libarchive (WebAssembly) extracts the 7Z contents in your browser, then JSZip repackages them into a ZIP preserving the full folder structure." },
+      { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
+    ],
+    proTip: { text: "Need to open the 7Z and download files individually instead? Use Open 7Z Online.", linkLabel: "Open 7Z Online", linkHref: "/dashboard/tools/open-7z" },
   },
   "apk-extractor": {
     label: "APK Extractor",

@@ -67,6 +67,7 @@ import {
   IconFlattenPdf,
   IconTxtToPdf,
   IconRarToZip,
+  IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
 } from "@/components/ui/ToolCard";
@@ -379,6 +380,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Flatten PDF", href: "/tools/flatten-pdf", tagline: "Merge form fields into the page — filled values become permanent and non-editable. No upload.", accent: "#EF4444", badge: "Free", Icon: IconFlattenPdf, category: "Optimize", isNew: true },
   { name: "TXT to PDF", href: "/tools/txt-to-pdf", tagline: "Convert .txt files or pasted text to PDF. Word-wrap, A4/Letter, Courier or Helvetica. No upload.", accent: "#EF4444", badge: "Free", Icon: IconTxtToPdf, category: "Optimize", isNew: true },
   { name: "RAR to ZIP", href: "/tools/rar-to-zip", tagline: "Convert RAR to ZIP in your browser — extract and repackage. Folder structure preserved. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconRarToZip, category: "Optimize", isNew: true },
+  { name: "7Z to ZIP", href: "/tools/7z-to-zip", tagline: "Convert 7Z to ZIP in your browser — extract and repackage. Folder structure preserved. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconSevenZToZip, category: "Optimize", isNew: true },
   { name: "Minecraft File Extractor", href: "/tools/minecraft-extractor", tagline: "Open .mcpack, .mcworld and .mctemplate in your browser. View contents, download files or export as ZIP. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconMinecraftExtractor, category: "Optimize", isNew: true },
   { name: "APK Extractor", href: "/tools/apk-extractor", tagline: "An APK is a ZIP archive. Open and extract its contents in your browser — no upload, no tools to install.", accent: "#0EA5E9", badge: "Free", Icon: IconApkExtractor, category: "Optimize", isNew: true },
 ];

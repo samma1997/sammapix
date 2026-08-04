@@ -114,6 +114,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Open RAR Online", slug: "unrar", href: "/dashboard/tools/unrar", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Open 7z Online", slug: "open-7z", href: "/dashboard/tools/open-7z", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "RAR to ZIP", slug: "rar-to-zip", href: "/dashboard/tools/rar-to-zip", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "7Z to ZIP", slug: "7z-to-zip", href: "/dashboard/tools/7z-to-zip", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Minecraft Extractor", slug: "minecraft-extractor", href: "/dashboard/tools/minecraft-extractor", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "APK Extractor", slug: "apk-extractor", href: "/dashboard/tools/apk-extractor", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Rotate Image", slug: "rotate-image", href: "/dashboard/tools/rotate-image", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
@@ -139,7 +140,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
 
 // Category groupings for All Tools section
 const TOOL_CATEGORIES: { label: string; slugs: string[] }[] = [
-  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "rar-to-zip", "minecraft-extractor", "apk-extractor", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "pdf-split", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "crop-pdf", "flatten-pdf", "txt-to-pdf", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64"] },
+  { label: "Optimize", slugs: ["compress", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "gif-to-mp4", "ico-generator", "pdf-merge", "heic", "jxl", "resizepack", "croproatio", "remove-bg", "upscale", "jpg-to-pdf", "unrar", "open-7z", "rar-to-zip", "7z-to-zip", "minecraft-extractor", "apk-extractor", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-page-numbers", "pdf-protect", "pdf-split", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "crop-pdf", "flatten-pdf", "txt-to-pdf", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64"] },
   { label: "AI", slugs: ["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "passport-photo", "image-to-text"] },
   { label: "Multi-step", slugs: ["weblift", "blogdrop"] },
   { label: "Creative", slugs: ["filmlab", "stampit", "color-picker"] },

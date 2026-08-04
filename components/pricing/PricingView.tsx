@@ -51,6 +51,7 @@ import {
   IconFlattenPdf,
   IconTxtToPdf,
   IconRarToZip,
+  IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
 } from "@/components/ui/ToolCard";
@@ -117,6 +118,7 @@ const toolGrid = [
   { Icon: IconFlattenPdf,    name: "Flatten PDF",      accent: "#EF4444" },
   { Icon: IconTxtToPdf,      name: "TXT to PDF",       accent: "#EF4444" },
   { Icon: IconRarToZip,             name: "RAR to ZIP",           accent: "#0EA5E9" },
+  { Icon: IconSevenZToZip,          name: "7Z to ZIP",            accent: "#0EA5E9" },
   { Icon: IconMinecraftExtractor,   name: "Minecraft Extractor",  accent: "#0EA5E9" },
   { Icon: IconApkExtractor,         name: "APK Extractor",         accent: "#0EA5E9" },
 ] as const;

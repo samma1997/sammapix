@@ -2392,6 +2392,57 @@ export const IconRarToZip: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── 7Z to ZIP icon — 7Z box + animated arrow + ZIP box growing ────────────────
+export const IconSevenZToZip: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes s2z-arrow {
+        0%, 15%  { transform: translateX(-3px); opacity: 0.25; }
+        50%      { transform: translateX(3px);  opacity: 1; }
+        80%      { transform: translateX(0px);  opacity: 0.25; }
+        100%     { transform: translateX(-3px); opacity: 0.25; }
+      }
+      @keyframes s2z-src-fade {
+        0%, 20%  { opacity: 1; }
+        55%, 100%{ opacity: 0.45; }
+      }
+      @keyframes s2z-zip-grow {
+        0%, 30%  { opacity: 0.35; transform: scale(0.88); }
+        65%, 88% { opacity: 1;    transform: scale(1); }
+        100%     { opacity: 0.35; transform: scale(0.88); }
+      }
+      @keyframes s2z-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.7); }
+        72%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      .s2z-arrow { animation: s2z-arrow 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .s2z-src   { animation: s2z-src-fade 2.4s ease-in-out infinite; }
+      .s2z-zip   { transform-origin: 36px 18px; animation: s2z-zip-grow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .s2z-badge { transform-origin: 37px 38px; animation: s2z-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* 7Z box left */}
+    <g className="s2z-src">
+      <rect x="2" y="8" width="18" height="22" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="11" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">7Z</text>
+    </g>
+    {/* Animated arrow */}
+    <g className="s2z-arrow">
+      <path d="M22 19 L26 19 M24 17 L26 19 L24 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* ZIP box right */}
+    <g className="s2z-zip" style={{ opacity: 0.35 }}>
+      <rect x="27" y="8" width="19" height="22" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="36.5" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    </g>
+    {/* "any OS" badge pop */}
+    <g className="s2z-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">any OS</text>
+    </g>
+  </svg>
+);
+
 // ── Minecraft File Extractor icon — block/box opens revealing files ────────────
 export const IconMinecraftExtractor: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

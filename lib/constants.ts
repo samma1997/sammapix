@@ -122,6 +122,7 @@ export const TOOL_SLUGS = [
   "crop-pdf",
   "txt-to-pdf",
   "rar-to-zip",
+  "7z-to-zip",
   "minecraft-extractor",
   "apk-extractor",
 ] as const;
