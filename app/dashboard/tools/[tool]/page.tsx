@@ -57,6 +57,7 @@ import {
   IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
+  IconIsoExtractor,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -121,6 +122,7 @@ const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient")
 const SevenZToZipClient = dynamic(() => import("@/components/tools/SevenZToZipClient"));
 const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
+const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -186,6 +188,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "7z-to-zip":            SevenZToZipClient,
   "minecraft-extractor":  MinecraftExtractorClient,
   "apk-extractor":        ApkExtractorClient,
+  "iso-extractor":        IsoExtractorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -292,6 +295,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "7z-to-zip":            { Icon: IconSevenZToZip,          accent: "#0EA5E9" },
   "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
+  "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -957,6 +961,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once." },
     ],
     proTip: { text: "Need to open a RAR or 7z archive? SammaPix has dedicated tools for those too.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "iso-extractor": {
+    label: "ISO Extractor",
+    tagline: "Browse and extract files from an ISO disc image in your browser. No upload, no mounting, no software to install.",
+    steps: [
+      { title: "Drop your ISO file", desc: "Drag & drop a .iso disc image. libarchive (WebAssembly) reads the ISO9660 filesystem directly in your browser — your file never leaves your device." },
+      { title: "Browse the contents", desc: "See every file and folder stored on the disc. Works with ISO9660 images (Linux distros, Windows installers, software CDs, game discs). UDF-only discs may not be readable." },
+      { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Download all as ZIP' (Day Pass or Pro) to export everything at once with folder structure preserved." },
+    ],
+    proTip: { text: "Need to open a 7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
   },
 };
 

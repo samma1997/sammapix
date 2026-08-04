@@ -67,6 +67,7 @@ import {
   IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
+  IconIsoExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1006,6 +1007,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconApkExtractor,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "ISO Extractor",
+    href: "/tools/iso-extractor",
+    tagline: "Browse and extract files from an ISO disc image in your browser — no upload, no need to mount or burn it. ISO9660 supported.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconIsoExtractor,
     category: ["Optimize"],
     isNew: true,
   },

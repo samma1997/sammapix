@@ -125,6 +125,7 @@ export const TOOL_SLUGS = [
   "7z-to-zip",
   "minecraft-extractor",
   "apk-extractor",
+  "iso-extractor",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

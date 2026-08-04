@@ -74,6 +74,7 @@ import {
   IconSevenZToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
+  IconIsoExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1023,6 +1024,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconApkExtractor,
     category: ["Optimize"],
     keywords: ["extract apk", "open apk file", "apk extractor", "unzip apk", "view apk contents", "apk to zip", "xapk extractor", "open apk online", "apk file viewer"],
+  },
+  {
+    name: "ISO Extractor",
+    slug: "iso-extractor",
+    href: "/dashboard/tools/iso-extractor",
+    tagline: "Browse and extract files from an ISO disc image in your browser — no upload, no need to mount or burn it.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconIsoExtractor,
+    category: ["Optimize"],
+    keywords: ["extract iso", "open iso file", "iso extractor", "browse iso contents", "iso to zip", "open iso online", "iso image extractor", "no mount iso", "iso file viewer"],
   },
 ];
 

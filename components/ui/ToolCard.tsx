@@ -2565,6 +2565,77 @@ export const IconApkExtractor: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── ISO Extractor ────────────────────────────────────────────────────────────
+
+export const IconIsoExtractor: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes iso-spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes iso-lid {
+        0%, 20%  { transform: rotateX(0deg); }
+        55%, 80% { transform: rotateX(-48deg); }
+        100%     { transform: rotateX(0deg); }
+      }
+      @keyframes iso-file1 {
+        0%, 25%  { transform: translateY(0px); opacity: 0; }
+        55%      { transform: translateY(-11px); opacity: 1; }
+        82%      { transform: translateY(-11px); opacity: 1; }
+        96%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes iso-file2 {
+        0%, 33%  { transform: translateY(0px); opacity: 0; }
+        60%      { transform: translateY(-16px); opacity: 1; }
+        82%      { transform: translateY(-16px); opacity: 1; }
+        96%, 100%{ transform: translateY(0px); opacity: 0; }
+      }
+      @keyframes iso-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.55); }
+        65%, 80% { opacity: 1; transform: scale(1); }
+        96%, 100%{ opacity: 0; transform: scale(0.55); }
+      }
+      .iso-disc-ring { transform-origin: 14px 14px; transform-box: fill-box; animation: iso-spin 3s linear infinite; }
+      .iso-lid  { transform-origin: 24px 18px; transform-box: fill-box; animation: iso-lid 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .iso-f1   { transform-origin: 19px 33px; transform-box: fill-box; animation: iso-file1 2.8s ease-in-out infinite; }
+      .iso-f2   { transform-origin: 29px 33px; transform-box: fill-box; animation: iso-file2 2.8s ease-in-out 0.1s infinite; }
+      .iso-badge{ transform-origin: 36px 11px; transform-box: fill-box; animation: iso-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Disc in lid — spins */}
+    <g className="iso-disc-ring">
+      <circle cx="14" cy="14" r="7" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.4"/>
+      <circle cx="14" cy="14" r="2.2" fill={accent} fillOpacity="0.5"/>
+      {/* Reflective arc */}
+      <path d="M10 10 A6 6 0 0 1 18 10" stroke={accent} strokeWidth="1" strokeLinecap="round" strokeOpacity="0.55" fill="none"/>
+    </g>
+    {/* Box body */}
+    <rect x="6" y="22" width="36" height="20" rx="3" fill={accent} fillOpacity="0.14" stroke={accent} strokeWidth="1.5"/>
+    <line x1="6" y1="30" x2="42" y2="30" stroke={accent} strokeWidth="0.7" strokeOpacity="0.3"/>
+    {/* Files flying out */}
+    <g className="iso-f1" style={{ opacity: 0 }}>
+      <rect x="12" y="27" width="10" height="12" rx="1.5" fill={accent} fillOpacity="0.28" stroke={accent} strokeWidth="1.2"/>
+      <line x1="15" y1="31" x2="19" y2="31" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="15" y1="34" x2="19" y2="34" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    <g className="iso-f2" style={{ opacity: 0 }}>
+      <rect x="26" y="27" width="10" height="12" rx="1.5" fill={accent} fillOpacity="0.42" stroke={accent} strokeWidth="1.2"/>
+      <line x1="29" y1="31" x2="33" y2="31" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+      <line x1="29" y1="34" x2="33" y2="34" stroke={accent} strokeWidth="1" strokeLinecap="round"/>
+    </g>
+    {/* Lid flips open */}
+    <g className="iso-lid">
+      <rect x="4" y="13" width="40" height="12" rx="3" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+      <text x="24" y="22" fontSize="5.5" fill={accent} fillOpacity="0.9" textAnchor="middle" fontWeight="700" fontFamily="monospace">.iso</text>
+    </g>
+    {/* Badge "ISO" pops */}
+    <g className="iso-badge" style={{ opacity: 0 }}>
+      <circle cx="36" cy="11" r="6" fill={accent}/>
+      <text x="36" y="14" fontSize="4" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">ISO</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

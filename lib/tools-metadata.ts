@@ -828,6 +828,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["unrar", "open-7z", "minecraft-extractor"],
     relatedBlogSlugs: ["extract-apk-online", "open-apk-file-online"],
   },
+  "iso-extractor": {
+    id: "iso-extractor",
+    name: "ISO Extractor",
+    shortDesc: "Browse and extract files from an ISO disc image — no upload, no mount needed",
+    slug: "/tools/iso-extractor",
+    category: "optimize",
+    relatedTools: ["open-7z", "unrar", "7z-to-zip"],
+    relatedBlogSlugs: ["extract-iso-online", "open-iso-file-online"],
+  },
   "rar-to-zip": {
     id: "rar-to-zip",
     name: "RAR to ZIP",
