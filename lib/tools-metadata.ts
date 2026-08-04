@@ -819,6 +819,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["unrar", "open-7z", "rar-to-zip"],
     relatedBlogSlugs: ["extract-mcpack-online", "open-minecraft-mcworld-file"],
   },
+  "apk-extractor": {
+    id: "apk-extractor",
+    name: "APK Extractor",
+    shortDesc: "Open & extract Android APK files in-browser — view contents, no upload",
+    slug: "/tools/apk-extractor",
+    category: "optimize",
+    relatedTools: ["unrar", "open-7z", "minecraft-extractor"],
+    relatedBlogSlugs: ["extract-apk-online", "open-apk-file-online"],
+  },
   "rar-to-zip": {
     id: "rar-to-zip",
     name: "RAR to ZIP",

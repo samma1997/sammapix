@@ -65,6 +65,7 @@ import {
   IconTxtToPdf,
   IconRarToZip,
   IconMinecraftExtractor,
+  IconApkExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -984,6 +985,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#0EA5E9",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconMinecraftExtractor,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "APK Extractor",
+    href: "/tools/apk-extractor",
+    tagline: "An APK is a ZIP archive. Open and extract its contents in your browser — no upload, no tools to install.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconApkExtractor,
     category: ["Optimize"],
     isNew: true,
   },

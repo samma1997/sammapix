@@ -52,6 +52,7 @@ import {
   IconTxtToPdf,
   IconRarToZip,
   IconMinecraftExtractor,
+  IconApkExtractor,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -117,6 +118,7 @@ const toolGrid = [
   { Icon: IconTxtToPdf,      name: "TXT to PDF",       accent: "#EF4444" },
   { Icon: IconRarToZip,             name: "RAR to ZIP",           accent: "#0EA5E9" },
   { Icon: IconMinecraftExtractor,   name: "Minecraft Extractor",  accent: "#0EA5E9" },
+  { Icon: IconApkExtractor,         name: "APK Extractor",         accent: "#0EA5E9" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

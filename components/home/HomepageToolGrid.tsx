@@ -68,6 +68,7 @@ import {
   IconTxtToPdf,
   IconRarToZip,
   IconMinecraftExtractor,
+  IconApkExtractor,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -379,6 +380,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "TXT to PDF", href: "/tools/txt-to-pdf", tagline: "Convert .txt files or pasted text to PDF. Word-wrap, A4/Letter, Courier or Helvetica. No upload.", accent: "#EF4444", badge: "Free", Icon: IconTxtToPdf, category: "Optimize", isNew: true },
   { name: "RAR to ZIP", href: "/tools/rar-to-zip", tagline: "Convert RAR to ZIP in your browser — extract and repackage. Folder structure preserved. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconRarToZip, category: "Optimize", isNew: true },
   { name: "Minecraft File Extractor", href: "/tools/minecraft-extractor", tagline: "Open .mcpack, .mcworld and .mctemplate in your browser. View contents, download files or export as ZIP. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconMinecraftExtractor, category: "Optimize", isNew: true },
+  { name: "APK Extractor", href: "/tools/apk-extractor", tagline: "An APK is a ZIP archive. Open and extract its contents in your browser — no upload, no tools to install.", accent: "#0EA5E9", badge: "Free", Icon: IconApkExtractor, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

@@ -154,6 +154,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/zip-creator",
     "/tools/tar-gz",
     "/tools/minecraft-extractor",
+    "/tools/apk-extractor",
     "/tools/raw-converter",
     "/tools/pdf-split",
     "/tools/blur-censor",

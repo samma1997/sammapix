@@ -55,6 +55,7 @@ import {
   IconTxtToPdf,
   IconRarToZip,
   IconMinecraftExtractor,
+  IconApkExtractor,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -117,6 +118,7 @@ const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClie
 const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
 const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient"));
 const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
+const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -180,6 +182,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "txt-to-pdf":       TxtToPdfClient,
   "rar-to-zip":           RarToZipClient,
   "minecraft-extractor":  MinecraftExtractorClient,
+  "apk-extractor":        ApkExtractorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -284,6 +287,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
   "rar-to-zip":           { Icon: IconRarToZip,             accent: "#0EA5E9" },
   "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
+  "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -929,6 +933,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
     ],
     proTip: { text: "Need to open the RAR and download files individually instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
+  },
+  "apk-extractor": {
+    label: "APK Extractor",
+    tagline: "An APK is a ZIP archive. Open and extract its contents in your browser. Files never leave your device.",
+    steps: [
+      { title: "Drop your APK file", desc: "Drag & drop a .apk or .xapk file. Both are ZIP archives — this tool opens them entirely in your browser without any upload." },
+      { title: "Browse the contents", desc: "See every file and folder inside: AndroidManifest.xml, classes.dex, resources.arsc, res/, assets/, META-INF/ and lib/. Note: binary files are shown as-is, not decompiled." },
+      { title: "Download what you need", desc: "Click any file to download it individually, or use 'Download all as ZIP' to export everything at once." },
+    ],
+    proTip: { text: "Need to open a RAR or 7z archive? SammaPix has dedicated tools for those too.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
   },
 };
 

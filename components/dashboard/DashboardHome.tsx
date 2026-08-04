@@ -72,6 +72,7 @@ import {
   IconTxtToPdf,
   IconRarToZip,
   IconMinecraftExtractor,
+  IconApkExtractor,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -999,6 +1000,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconMinecraftExtractor,
     category: ["Optimize"],
     keywords: ["mcpack extractor", "open mcworld", "extract mcpack", "minecraft pack extractor", "mctemplate", "mcworld to zip", "open minecraft file", "mcpack viewer", "minecraft extractor online"],
+  },
+  {
+    name: "APK Extractor",
+    slug: "apk-extractor",
+    href: "/dashboard/tools/apk-extractor",
+    tagline: "An APK is a ZIP archive. Open and extract its contents in your browser — no upload, no tools to install.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconApkExtractor,
+    category: ["Optimize"],
+    keywords: ["extract apk", "open apk file", "apk extractor", "unzip apk", "view apk contents", "apk to zip", "xapk extractor", "open apk online", "apk file viewer"],
   },
 ];
 
