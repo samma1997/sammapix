@@ -14,6 +14,34 @@
     "url": "/blog/convert-rar-to-zip-no-upload"
   },
   {
+    "slug": "extract-mcpack-online",
+    "title": "Open and Extract a .mcpack File Online Free [2026]",
+    "description": "Extract any .mcpack file in your browser — no upload, no Minecraft required. JSZip reads the ZIP-format archive locally. Browse textures, manifests, a",
+    "keywords": [
+      "extract mcpack",
+      "open mcpack",
+      "mcpack extractor",
+      "open mcpack file",
+      "mcpack file opener"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/extract-mcpack-online"
+  },
+  {
+    "slug": "open-minecraft-mcworld-file",
+    "title": "How to Open a .mcworld File (Minecraft World) [2026]",
+    "description": "Open and extract a .mcworld file in your browser — no upload, no Minecraft required. A .mcworld is a renamed ZIP. JSZip reads it locally: browse chunk",
+    "keywords": [
+      "open mcworld file",
+      "extract mcworld",
+      "mcworld to zip",
+      "open minecraft world file",
+      "mcworld file opener"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/open-minecraft-mcworld-file"
+  },
+  {
     "slug": "rar-to-zip-online",
     "title": "Convert RAR to ZIP Online Free (No Upload) [2026]",
     "description": "Convert any RAR file to ZIP entirely in your browser — no upload, no WinRAR, no server. libarchive.wasm extracts locally, JSZip repackages. Verifiable",

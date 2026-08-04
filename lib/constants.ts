@@ -299,6 +299,8 @@ export const BLOG_SLUGS = [
   "convert-text-to-pdf-no-upload",
   "rar-to-zip-online",
   "convert-rar-to-zip-no-upload",
+  "extract-mcpack-online",
+  "open-minecraft-mcworld-file",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
