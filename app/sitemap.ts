@@ -184,6 +184,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/crop-pdf",
     "/tools/flatten-pdf",
     "/tools/txt-to-pdf",
+    "/tools/rar-to-zip",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

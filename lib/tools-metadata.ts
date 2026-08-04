@@ -810,6 +810,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["jpg-to-pdf", "pdf-page-numbers", "pdf-compress"],
     relatedBlogSlugs: ["txt-to-pdf-online-free", "convert-text-to-pdf-no-upload"],
   },
+  "rar-to-zip": {
+    id: "rar-to-zip",
+    name: "RAR to ZIP",
+    shortDesc: "Convert RAR archives to ZIP in-browser — extract + repackage, no upload",
+    slug: "/tools/rar-to-zip",
+    category: "optimize",
+    relatedTools: ["unrar", "open-7z", "zip-creator"],
+    relatedBlogSlugs: ["rar-to-zip-online", "convert-rar-to-zip-no-upload"],
+  },
   "flatten-pdf": {
     id: "flatten-pdf",
     name: "Flatten PDF",

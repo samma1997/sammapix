@@ -63,6 +63,7 @@ import {
   IconCropPdf,
   IconFlattenPdf,
   IconTxtToPdf,
+  IconRarToZip,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -962,6 +963,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconTxtToPdf,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "RAR to ZIP",
+    href: "/tools/rar-to-zip",
+    tagline: "Convert RAR to ZIP in your browser — extract and repackage with folder structure preserved. No upload. RAR is proprietary; ZIP opens on any OS.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconRarToZip,
     category: ["Optimize"],
     isNew: true,
   },

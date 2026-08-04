@@ -70,6 +70,7 @@ import {
   IconCropPdf,
   IconFlattenPdf,
   IconTxtToPdf,
+  IconRarToZip,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -975,6 +976,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconTxtToPdf,
     category: ["Optimize"],
     keywords: ["txt to pdf", "convert text to pdf", "text file to pdf", "txt to pdf converter", "notepad to pdf", "txt to pdf no upload", "plain text to pdf", "convert txt to pdf browser"],
+  },
+  {
+    name: "RAR to ZIP",
+    slug: "rar-to-zip",
+    href: "/dashboard/tools/rar-to-zip",
+    tagline: "Convert RAR archives to ZIP in your browser. Extract + repackage, folder structure preserved, no upload.",
+    accent: "#0EA5E9",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconRarToZip,
+    category: ["Optimize"],
+    keywords: ["rar to zip", "convert rar to zip", "rar to zip online", "change rar to zip", "rar to zip free", "open rar as zip", "rar converter", "rar to zip no upload", "rar to zip mac"],
   },
 ];
 

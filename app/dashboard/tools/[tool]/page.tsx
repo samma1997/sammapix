@@ -53,6 +53,7 @@ import {
   IconCropPdf,
   IconFlattenPdf,
   IconTxtToPdf,
+  IconRarToZip,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -113,6 +114,7 @@ const PdfOrganizeClient = dynamic(() => import("@/components/tools/PdfOrganizeCl
 const CropPdfClient = dynamic(() => import("@/components/tools/CropPdfClient"));
 const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClient"));
 const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
+const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -174,6 +176,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "crop-pdf":         CropPdfClient,
   "flatten-pdf":      FlattenPdfClient,
   "txt-to-pdf":       TxtToPdfClient,
+  "rar-to-zip":       RarToZipClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -276,6 +279,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "crop-pdf":          { Icon: IconCropPdf,        accent: "#EF4444" },
   "flatten-pdf":       { Icon: IconFlattenPdf,     accent: "#EF4444" },
   "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
+  "rar-to-zip":        { Icon: IconRarToZip,       accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -901,6 +905,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the flattened PDF", desc: "Click Download. The filled values are now a permanent part of every page and the document looks identical on every PDF reader and printer." },
     ],
     proTip: { text: "After flattening, add a password to prevent any further editing of the document.", linkLabel: "Password Protect PDF", linkHref: "/dashboard/tools/pdf-protect" },
+  },
+  "rar-to-zip": {
+    label: "RAR to ZIP",
+    tagline: "Convert RAR to ZIP in your browser. Extract + repackage, no upload.",
+    steps: [
+      { title: "Drop your RAR file", desc: "Drag and drop a .rar file (RAR4 or RAR5, with or without password). Up to 200 MB free." },
+      { title: "Extraction and repackaging", desc: "libarchive (WebAssembly) extracts the RAR contents in your browser, then JSZip repackages them into a ZIP preserving the full folder structure." },
+      { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
+    ],
+    proTip: { text: "Need to open the RAR and download files individually instead? Use Open RAR Online.", linkLabel: "Open RAR Online", linkHref: "/dashboard/tools/unrar" },
   },
 };
 

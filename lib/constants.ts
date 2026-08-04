@@ -121,6 +121,7 @@ export const TOOL_SLUGS = [
   "pdf-organize",
   "crop-pdf",
   "txt-to-pdf",
+  "rar-to-zip",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
