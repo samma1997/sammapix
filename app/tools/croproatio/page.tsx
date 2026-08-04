@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowLeft, Crop, Hand, FolderArchive, Shield, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Crop, Hand, FolderArchive, Shield, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import CropRatioClient from "@/components/tools/CropRatioClient";
 import CroproatioHeroDemo from "@/components/tools/CroproatioHeroDemo";
@@ -447,6 +447,66 @@ export default function CropRatioPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Crop to a specific ratio or size — hub-and-spoke internal linking ── */}
+      <section className="px-4 sm:px-6 py-10 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
+            Crop to a specific ratio or size
+          </h2>
+          <p className="text-xs text-[#737373] mb-4">
+            Each page below locks your crop frame to the exact ratio and explains the ideal export dimensions for that use case.
+          </p>
+
+          {/* Top ratios — highest GSC demand first (a4 CTR 6.7%, 16:9, 4:3, 9:16 in testa) */}
+          <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wide mb-2">Most popular</p>
+          <div className="flex flex-wrap gap-2 mb-5">
+            {[
+              { slug: "a4",   label: "Crop to A4"   },
+              { slug: "16-9", label: "Crop to 16:9"  },
+              { slug: "4-3",  label: "Crop to 4:3"   },
+              { slug: "9-16", label: "Crop to 9:16"  },
+              { slug: "3-4",  label: "Crop to 3:4"   },
+              { slug: "2-3",  label: "Crop to 2:3"   },
+              { slug: "1-1",  label: "Crop to 1:1"   },
+            ].map(({ slug, label }) => (
+              <Link
+                key={slug}
+                href={`/crop/${slug}`}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-[#EC4899]/25 rounded-md text-[#EC4899] hover:bg-[#EC4899]/5 bg-white dark:bg-[#1E1E1E] transition-colors font-medium"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+
+          {/* All ratios */}
+          <p className="text-[11px] font-medium text-[#A3A3A3] uppercase tracking-wide mb-2">All ratios</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { slug: "4-5",  label: "4:5"   },
+              { slug: "3-2",  label: "3:2"   },
+              { slug: "5-4",  label: "5:4"   },
+              { slug: "21-9", label: "21:9"  },
+              { slug: "2-1",  label: "2:1"   },
+            ].map(({ slug, label }) => (
+              <Link
+                key={slug}
+                href={`/crop/${slug}`}
+                className="inline-flex items-center px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#A3A3A3] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+            <Link
+              href="/crop"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#EC4899]/30 rounded-md text-[#EC4899] hover:bg-[#EC4899]/5 bg-white dark:bg-[#1E1E1E] transition-colors"
+            >
+              Browse all <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+            </Link>
           </div>
         </div>
       </section>
