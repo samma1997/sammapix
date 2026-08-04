@@ -35,6 +35,7 @@ async function decodeCanvasWithZxing(
     BinaryBitmap,
     MultiFormatReader,
     NotFoundException,
+    DecodeHintType,
   } = await import("@zxing/library");
 
   const luminanceSource = new HTMLCanvasElementLuminanceSource(canvas);
@@ -42,8 +43,14 @@ async function decodeCanvasWithZxing(
   const bitmap = new BinaryBitmap(binarizer);
   const reader = new MultiFormatReader();
 
+  // TRY_HARDER: scan more than the center row. Barcodes rendered with a text
+  // label below the bars put the vertical center on the text/margin, so a
+  // single center-row scan misses the bars entirely without this hint.
+  const hints = new Map();
+  hints.set(DecodeHintType.TRY_HARDER, true);
+
   try {
-    const result = reader.decode(bitmap);
+    const result = reader.decode(bitmap, hints);
     return {
       text: result.getText(),
       format: result.getBarcodeFormat().toString(),
@@ -273,8 +280,11 @@ export default function BarcodeReaderClient() {
         BinaryBitmap,
         MultiFormatReader,
         NotFoundException,
+        DecodeHintType,
       } = await import("@zxing/library");
       const coreReader = new MultiFormatReader();
+      const camHints = new Map();
+      camHints.set(DecodeHintType.TRY_HARDER, true);
 
       const scanFrame = () => {
         if (!video || video.paused || video.ended) return;
@@ -289,7 +299,7 @@ export default function BarcodeReaderClient() {
         try {
           const luminanceSource = new HTMLCanvasElementLuminanceSource(scanCanvas);
           const bitmap = new BinaryBitmap(new HybridBinarizer(luminanceSource));
-          const result = coreReader.decode(bitmap);
+          const result = coreReader.decode(bitmap, camHints);
           setCameraResult(result.getText());
           setCameraFormat(formatLabel(result.getBarcodeFormat().toString()));
           stopCamera();
