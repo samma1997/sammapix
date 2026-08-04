@@ -28,6 +28,20 @@
     "url": "/blog/barcode-generator-online"
   },
   {
+    "slug": "barcode-reader-online",
+    "title": "Barcode Reader Online — Decode EAN, UPC, CODE128, QR from an Image [2026]",
+    "description": "Read and decode any barcode from a photo or screenshot entirely in your browser — EAN-13, EAN-8, UPC-A, CODE128, CODE39, ITF, QR. ZXing runs locally. ",
+    "keywords": [
+      "barcode reader online",
+      "barcode reader",
+      "decode barcode",
+      "read barcode from image",
+      "read ean from image"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/barcode-reader-online"
+  },
+  {
     "slug": "convert-7z-to-zip-no-upload",
     "title": "How to Convert 7Z to ZIP Without Software [2026]",
     "description": "Convert 7Z to ZIP in your browser without uploading the file anywhere and without installing 7-Zip. libarchive.wasm extracts locally, JSZip repackages",
@@ -250,6 +264,20 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/rar-to-zip-online"
+  },
+  {
+    "slug": "scan-barcode-from-image",
+    "title": "How to Scan a Barcode from an Image or Photo (No Scanner App) [2026]",
+    "description": "Scan and decode a barcode from a product picture, screenshot, or photo — no scanner app, no camera, no upload. ZXing reads the image locally in your b",
+    "keywords": [
+      "scan barcode from image",
+      "barcode from photo",
+      "read barcode from picture",
+      "scan barcode from screenshot",
+      "decode barcode from image"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/scan-barcode-from-image"
   },
   {
     "slug": "scan-qr-code-from-image",

@@ -327,6 +327,8 @@ export const BLOG_SLUGS = [
   "scan-qr-code-from-image",
   "barcode-generator-online",
   "create-barcode-free",
+  "barcode-reader-online",
+  "scan-barcode-from-image",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
