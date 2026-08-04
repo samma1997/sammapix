@@ -35,6 +35,8 @@ export const metadata: Metadata = {
       "Generate CODE128, EAN-13, EAN-8, UPC-A, CODE39 and ITF-14 barcodes in your browser. Download PNG or SVG. No upload, no account, no watermark.",
     url: TOOL_URL,
     type: "website",
+    siteName: "SammaPix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix — free browser tools, no upload" }],
     locale: "en_US",
   },
   twitter: {

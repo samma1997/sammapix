@@ -33,6 +33,8 @@ export const metadata: Metadata = {
       "Generate QR codes for URLs, text, Wi-Fi networks and email addresses. Download PNG or SVG. 100% in your browser — your data is never uploaded.",
     url: TOOL_URL,
     type: "website",
+    siteName: "SammaPix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix — free browser tools, no upload" }],
     locale: "en_US",
   },
   twitter: {

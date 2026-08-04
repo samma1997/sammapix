@@ -35,6 +35,8 @@ export const metadata: Metadata = {
       "Generate cryptographic hashes from text or files directly in your browser. MD5, SHA-1, SHA-256, SHA-384, SHA-512. Nothing is ever uploaded.",
     url: TOOL_URL,
     type: "website",
+    siteName: "SammaPix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix — free browser tools, no upload" }],
     locale: "en_US",
   },
   twitter: {

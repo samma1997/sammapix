@@ -33,6 +33,8 @@ export const metadata: Metadata = {
       "Upload an image or use your camera to decode any QR code instantly. URL, Wi-Fi, text, contact — all decoded in your browser, nothing uploaded.",
     url: TOOL_URL,
     type: "website",
+    siteName: "SammaPix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix — free browser tools, no upload" }],
     locale: "en_US",
   },
   twitter: {

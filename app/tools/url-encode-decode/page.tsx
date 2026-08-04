@@ -35,6 +35,8 @@ export const metadata: Metadata = {
       "Encode or decode URL percent-encoded text instantly in your browser. Supports encodeURIComponent (query params) and encodeURI (full URLs). Nothing is ever uploaded.",
     url: TOOL_URL,
     type: "website",
+    siteName: "SammaPix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix — free browser tools, no upload" }],
     locale: "en_US",
   },
   twitter: {

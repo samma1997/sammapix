@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Browse and extract files from an ISO disc image in your browser — no upload, no need to mount or burn it.",
     images: [
       {
-        url: `${APP_URL}/og/tools/iso-extractor.png`,
+        url: `${APP_URL}/og-image.png`,
         width: 1200,
         height: 630,
       },

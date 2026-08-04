@@ -35,6 +35,8 @@ export const metadata: Metadata = {
       "Upload an image containing a barcode and decode it instantly in your browser. EAN-13, UPC-A, CODE128, QR and more — nothing is uploaded.",
     url: TOOL_URL,
     type: "website",
+    siteName: "SammaPix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SammaPix — free browser tools, no upload" }],
     locale: "en_US",
   },
   twitter: {

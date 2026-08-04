@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "7Z to ZIP Online Free: No Upload",
     description:
       "Convert 7Z to ZIP instantly in your browser. No upload, no install. Free.",
-    images: [{ url: `${APP_URL}/og/tools/7z-to-zip.png`, width: 1200, height: 630 }],
+    images: [{ url: `${APP_URL}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",

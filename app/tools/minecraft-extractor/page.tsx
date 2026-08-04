@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Extract Minecraft .mcpack, .mcworld and .mctemplate files in your browser. No upload, no Minecraft needed.",
     images: [
       {
-        url: `${APP_URL}/og/tools/minecraft-extractor.png`,
+        url: `${APP_URL}/og-image.png`,
         width: 1200,
         height: 630,
       },
