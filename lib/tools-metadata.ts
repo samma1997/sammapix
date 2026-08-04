@@ -909,6 +909,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["qr-code-generator", "image-to-base64", "exif"],
     relatedBlogSlugs: ["qr-code-reader-online", "scan-qr-code-from-image"],
   },
+  "barcode-reader": {
+    id: "barcode-reader",
+    name: "Barcode Reader",
+    shortDesc: "Decode EAN, UPC, CODE128, QR and more from an image — no upload, no app",
+    slug: "/tools/barcode-reader",
+    category: "edit",
+    relatedTools: ["barcode-generator", "qr-code-reader", "qr-code-generator"],
+    relatedBlogSlugs: ["barcode-reader-online", "scan-barcode-from-image"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

@@ -76,6 +76,7 @@ import {
   IconBarcodeGenerator,
   IconQrCodeGenerator,
   IconQrCodeReader,
+  IconBarcodeReader,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -395,6 +396,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Barcode Generator", href: "/tools/barcode-generator", tagline: "Generate CODE128, EAN-13, UPC-A, CODE39 and more barcodes. Download PNG or SVG. 100% in your browser — no upload.", accent: "#6366F1", badge: "Free", Icon: IconBarcodeGenerator, category: "Optimize", isNew: true },
   { name: "QR Code Generator", href: "/tools/qr-code-generator", tagline: "Generate QR codes for URL, text, Wi-Fi and email. PNG + SVG download. 100% in your browser — no upload, no account.", accent: "#6366F1", badge: "Free", Icon: IconQrCodeGenerator, category: "Optimize", isNew: true },
   { name: "QR Code Reader", href: "/tools/qr-code-reader", tagline: "Decode any QR code from an image or your camera. URL, Wi-Fi, text and more. No upload, no app, 100% in your browser.", accent: "#6366F1", badge: "Free", Icon: IconQrCodeReader, category: "Optimize", isNew: true },
+  { name: "Barcode Reader", href: "/tools/barcode-reader", tagline: "Decode EAN-13, UPC-A, CODE128, CODE39, QR and more from an image or camera. No upload, no app, 100% in your browser.", accent: "#6366F1", badge: "Free", Icon: IconBarcodeReader, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

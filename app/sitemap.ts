@@ -194,6 +194,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/barcode-generator",
     "/tools/qr-code-generator",
     "/tools/qr-code-reader",
+    "/tools/barcode-reader",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

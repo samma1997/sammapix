@@ -63,6 +63,7 @@ import {
   IconBarcodeGenerator,
   IconQrCodeGenerator,
   IconQrCodeReader,
+  IconBarcodeReader,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -133,6 +134,7 @@ const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractor
 const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/BarcodeGeneratorClient"));
 const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGeneratorClient"));
 const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReaderClient"));
+const BarcodeReaderClient = dynamic(() => import("@/components/tools/BarcodeReaderClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -204,6 +206,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "barcode-generator":   BarcodeGeneratorClient,
   "qr-code-generator":   QrCodeGeneratorClient,
   "qr-code-reader":      QrCodeReaderClient,
+  "barcode-reader":      BarcodeReaderClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -316,6 +319,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "barcode-generator":   { Icon: IconBarcodeGenerator,     accent: "#6366F1" },
   "qr-code-generator":   { Icon: IconQrCodeGenerator,      accent: "#6366F1" },
   "qr-code-reader":      { Icon: IconQrCodeReader,         accent: "#6366F1" },
+  "barcode-reader":      { Icon: IconBarcodeReader,        accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1041,6 +1045,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy or open the result", desc: "The decoded content appears immediately. Click Copy to grab it, or click Open URL if the QR encodes a web address." },
     ],
     proTip: { text: "Need to create a QR code? SammaPix has a free generator too.", linkLabel: "QR Code Generator", linkHref: "/dashboard/tools/qr-code-generator" },
+  },
+  "barcode-reader": {
+    label: "Barcode Reader",
+    tagline: "Decode EAN-13, UPC-A, CODE128, CODE39, QR and more from an image or your camera — no upload, no app, 100% in your browser.",
+    steps: [
+      { title: "Upload an image or open the camera", desc: "Drag and drop a PNG, JPG, WebP or GIF containing a barcode, or switch to the Camera tab to scan a physical barcode in real time." },
+      { title: "Automatic decoding", desc: "The tool draws your image on an offscreen canvas, extracts pixel data, and runs the ZXing decoder entirely in your browser. Nothing is sent to any server." },
+      { title: "Copy the decoded value", desc: "The barcode value and format (e.g. EAN-13, CODE128) appear instantly. Click Copy to copy the value to your clipboard." },
+    ],
+    proTip: { text: "Need to generate a barcode instead? SammaPix has a free Barcode Generator.", linkLabel: "Barcode Generator", linkHref: "/dashboard/tools/barcode-generator" },
   },
 };
 

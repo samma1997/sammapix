@@ -73,6 +73,7 @@ import {
   IconBarcodeGenerator,
   IconQrCodeGenerator,
   IconQrCodeReader,
+  IconBarcodeReader,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1072,6 +1073,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "Image or Camera", "No upload"],
     Icon: IconQrCodeReader,
+    category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Barcode Reader",
+    href: "/tools/barcode-reader",
+    tagline: "Decode EAN-13, UPC-A, CODE128, CODE39, ITF, QR Code and more from an image or your camera. 100% in your browser — no upload, no app.",
+    accent: "#6366F1",
+    badges: ["Free", "EAN / UPC / CODE128", "No upload"],
+    Icon: IconBarcodeReader,
     category: ["Creative", "Optimize"],
     isNew: true,
   },

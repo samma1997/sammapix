@@ -43,6 +43,7 @@
     "@types/qrcode": "^1.5.6",
     "@upscalerjs/esrgan-slim": "^1.0.0",
     "@vercel/analytics": "^1.6.1",
+    "@zxing/library": "^0.21.3",
     "browser-image-compression": "^2.0.2",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",

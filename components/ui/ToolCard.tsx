@@ -2865,6 +2865,40 @@ export const IconQrCodeReader: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconBarcodeReader: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes brdr-scan {
+        0%   { transform: translateY(-9px); opacity: 0; }
+        12%  { opacity: 1; }
+        88%  { opacity: 1; }
+        100% { transform: translateY(9px); opacity: 0; }
+      }
+      @keyframes brdr-bar {
+        0%, 100% { opacity: 0.35; }
+        50%       { opacity: 1; }
+      }
+      .brdr-sc { animation: brdr-scan 2s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .brdr-b1 { animation: brdr-bar 2s ease-in-out infinite; }
+      .brdr-b2 { animation: brdr-bar 2s ease-in-out 0.15s infinite; }
+      .brdr-b3 { animation: brdr-bar 2s ease-in-out 0.3s infinite; }
+      .brdr-b4 { animation: brdr-bar 2s ease-in-out 0.05s infinite; }
+      .brdr-b5 { animation: brdr-bar 2s ease-in-out 0.25s infinite; }
+    `}</style>
+    {/* Barcode bars — varied widths to look like a real EAN-style barcode */}
+    <rect className="brdr-b1" x="4"  y="9" width="3"  height="30" rx="1" fill={accent} fillOpacity="0.9"/>
+    <rect className="brdr-b2" x="9"  y="9" width="5"  height="30" rx="1" fill={accent} fillOpacity="0.7"/>
+    <rect className="brdr-b3" x="16" y="9" width="2"  height="30" rx="1" fill={accent} fillOpacity="0.9"/>
+    <rect              x="20" y="9" width="4"  height="30" rx="1" fill={accent} fillOpacity="0.5"/>
+    <rect className="brdr-b4" x="26" y="9" width="3"  height="30" rx="1" fill={accent} fillOpacity="0.85"/>
+    <rect              x="31" y="9" width="2"  height="30" rx="1" fill={accent} fillOpacity="0.5"/>
+    <rect className="brdr-b5" x="35" y="9" width="5"  height="30" rx="1" fill={accent} fillOpacity="0.75"/>
+    <rect              x="42" y="9" width="2"  height="30" rx="1" fill={accent} fillOpacity="0.9"/>
+    {/* Animated scanner line */}
+    <line className="brdr-sc" x1="2" y1="24" x2="46" y2="24" stroke={accent} strokeWidth="1.75" strokeLinecap="round"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

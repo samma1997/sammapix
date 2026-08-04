@@ -80,6 +80,7 @@ import {
   IconBarcodeGenerator,
   IconQrCodeGenerator,
   IconQrCodeReader,
+  IconBarcodeReader,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1095,6 +1096,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconQrCodeReader,
     category: ["Optimize", "Creative"],
     keywords: ["qr code reader", "decode qr code", "scan qr from image", "read qr code", "qr scanner online", "qr code decoder", "scan qr screenshot", "qr code reader no upload"],
+  },
+  {
+    name: "Barcode Reader",
+    slug: "barcode-reader",
+    href: "/dashboard/tools/barcode-reader",
+    tagline: "Decode EAN-13, UPC-A, CODE128, CODE39, QR and more from an image or camera — 100% in your browser, no upload, no app.",
+    accent: "#6366F1",
+    badges: ["Free", "EAN / UPC / CODE128", "No upload"],
+    Icon: IconBarcodeReader,
+    category: ["Optimize", "Creative"],
+    keywords: ["barcode reader", "scan barcode from image", "decode ean upc", "read barcode picture", "barcode scanner online", "ean 13 reader", "upc decoder", "barcode reader no upload"],
   },
 ];
 
