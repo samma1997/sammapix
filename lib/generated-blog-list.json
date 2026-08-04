@@ -266,6 +266,20 @@
     "url": "/blog/passport-photo-requirements-2026"
   },
   {
+    "slug": "password-generator-online",
+    "title": "Free Password Generator Online — No Upload [2026]",
+    "description": "Generate strong random passwords in your browser. No upload, no server. crypto.getRandomValues, strength meter, custom options. Free.",
+    "keywords": [
+      "password generator",
+      "password generator online",
+      "strong password generator",
+      "random password generator",
+      "secure password generator"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/password-generator-online"
+  },
+  {
     "slug": "qr-code-generator-online",
     "title": "Free QR Code Generator Online — No Signup, No Expiry [2026]",
     "description": "Generate a QR code from any URL, text, Wi-Fi, email, or vCard entirely in your browser — no signup, no account, no expiry. Download PNG or SVG. Free f",
@@ -334,6 +348,20 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/scan-qr-code-from-image"
+  },
+  {
+    "slug": "strong-password-generator",
+    "title": "Strong Password Generator — Length Wins [2026]",
+    "description": "Why password length beats complexity. Generate secure 16+ char passwords in your browser. No upload, no server. Free, instantly.",
+    "keywords": [
+      "strong password generator",
+      "how to create strong password",
+      "secure password",
+      "password length",
+      "strong password"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/strong-password-generator"
   },
   {
     "slug": "tar-to-zip-online",

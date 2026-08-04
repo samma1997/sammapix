@@ -335,6 +335,8 @@ export const BLOG_SLUGS = [
   "generate-sha256-md5-online",
   "url-encode-decode-online",
   "url-encoder-decoder-tool",
+  "password-generator-online",
+  "strong-password-generator",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
