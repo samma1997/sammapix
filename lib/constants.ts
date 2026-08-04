@@ -296,6 +296,8 @@ export const BLOG_SLUGS = [
   "flatten-pdf-form-no-upload",
   "txt-to-pdf-online-free",
   "convert-text-to-pdf-no-upload",
+  "rar-to-zip-online",
+  "convert-rar-to-zip-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
