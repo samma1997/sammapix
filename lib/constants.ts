@@ -128,6 +128,13 @@ export const TOOL_SLUGS = [
   "apk-extractor",
   "ipa-extractor",
   "iso-extractor",
+  "barcode-generator",
+  "qr-code-generator",
+  "qr-code-reader",
+  "barcode-reader",
+  "hash-generator",
+  "url-encode-decode",
+  "password-generator",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -316,6 +323,20 @@ export const BLOG_SLUGS = [
   "open-ipa-file-online",
   "tar-to-zip-online",
   "convert-tar-to-zip-no-upload",
+  "qr-code-generator-online",
+  "create-qr-code-no-signup",
+  "qr-code-reader-online",
+  "scan-qr-code-from-image",
+  "barcode-generator-online",
+  "create-barcode-free",
+  "barcode-reader-online",
+  "scan-barcode-from-image",
+  "hash-generator-online",
+  "generate-sha256-md5-online",
+  "url-encode-decode-online",
+  "url-encoder-decoder-tool",
+  "password-generator-online",
+  "strong-password-generator",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

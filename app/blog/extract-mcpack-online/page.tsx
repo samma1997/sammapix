@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Open and Extract a .mcpack File Online Free [2026]",
   description:
-    "Extract any .mcpack file in your browser — no upload, no Minecraft required. JSZip reads the ZIP-format archive locally. Browse textures, manifests, and assets. Free, no signup.",
+    "Extract .mcpack files in your browser. Browse textures and assets. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/extract-mcpack-online`,
   },

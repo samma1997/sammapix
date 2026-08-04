@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "How to Convert RAR to ZIP Without Uploading [2026]",
   description:
-    "Convert RAR to ZIP in your browser without uploading the file anywhere. libarchive.wasm extracts locally, JSZip repackages. ZIP opens natively on Windows, Mac, Linux, iOS, Android. Free, no WinRAR, no signup.",
+    "Convert RAR to ZIP in your browser. No server, no signup. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/convert-rar-to-zip-no-upload`,
   },

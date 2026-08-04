@@ -57,6 +57,13 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconBarcodeGenerator,
+  IconQrCodeGenerator,
+  IconQrCodeReader,
+  IconBarcodeReader,
+  IconHashGenerator,
+  IconUrlEncodeDecode,
+  IconPasswordGenerator,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -127,6 +134,13 @@ const toolGrid = [
   { Icon: IconApkExtractor,         name: "APK Extractor",         accent: "#0EA5E9" },
   { Icon: IconIpaExtractor,         name: "IPA Extractor",         accent: "#0EA5E9" },
   { Icon: IconIsoExtractor,         name: "ISO Extractor",         accent: "#0EA5E9" },
+  { Icon: IconBarcodeGenerator,     name: "Barcode Generator",      accent: "#6366F1" },
+  { Icon: IconQrCodeGenerator,      name: "QR Code Generator",     accent: "#6366F1" },
+  { Icon: IconQrCodeReader,         name: "QR Code Reader",         accent: "#6366F1" },
+  { Icon: IconBarcodeReader,        name: "Barcode Reader",         accent: "#6366F1" },
+  { Icon: IconHashGenerator,        name: "Hash Generator",         accent: "#6366F1" },
+  { Icon: IconUrlEncodeDecode,      name: "URL Encoder / Decoder",  accent: "#6366F1" },
+  { Icon: IconPasswordGenerator,    name: "Password Generator",     accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

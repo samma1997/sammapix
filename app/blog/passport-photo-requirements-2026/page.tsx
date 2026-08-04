@@ -445,7 +445,7 @@ export default function PassportPhotoRequirements2026Page() {
 
         <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-6">
           Key patterns: the most common photo size worldwide is <strong className="text-gray-900 dark:text-[#E5E5E5]">35x45mm</strong> (used by 14 of these 20 countries). The US and India use the 2x2 inch (51x51mm) format. Canada, Brazil, and Turkey use larger formats. If you need to resize your photo to any of these dimensions, you can use the{" "}
-          <Link href="/tools/resize" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+          <Link href="/tools/resizepack" className="text-indigo-600 dark:text-indigo-400 hover:underline">
             SammaPix resize tool
           </Link>{" "}
           . It&apos;s free and runs entirely in your browser.
@@ -564,7 +564,7 @@ export default function PassportPhotoRequirements2026Page() {
               <p className="text-sm font-semibold text-gray-900 dark:text-[#E5E5E5]">Crop and resize to exact specifications</p>
               <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed">
                 Use the{" "}
-                <Link href="/tools/crop" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                <Link href="/tools/croproatio" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                   SammaPix crop tool
                 </Link>{" "}
                 to crop your photo to the correct aspect ratio, then resize it to the exact pixel dimensions required by your country. For the US, that&apos;s 600x600px. For 35x45mm countries at 300 DPI, that&apos;s 413x531px.

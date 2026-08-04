@@ -191,6 +191,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/tar-to-zip",
     "/tools/iso-extractor",
     "/tools/ipa-extractor",
+    "/tools/barcode-generator",
+    "/tools/qr-code-generator",
+    "/tools/qr-code-reader",
+    "/tools/barcode-reader",
+    "/tools/hash-generator",
+    "/tools/url-encode-decode",
+    "/tools/password-generator",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

@@ -7,7 +7,7 @@ import Link from "next/link";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "RAR to ZIP Online Free: No Upload",
+  title: "RAR to ZIP Online Free: No WinRAR Required Anymore",
   description:
     "Convert RAR to ZIP instantly in your browser. Extract your RAR and repackage as ZIP — no upload, no install. Works on Mac, Windows, Linux. Free.",
   keywords: [
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${APP_URL}/tools/rar-to-zip`,
-    title: "RAR to ZIP Online Free: No Upload",
+    title: "RAR to ZIP Online Free: No WinRAR Required Anymore",
     description:
       "Convert RAR to ZIP instantly in your browser. No upload, no install. Free.",
-    images: [{ url: `${APP_URL}/og/tools/rar-to-zip.png`, width: 1200, height: 630 }],
+    images: [{ url: `${APP_URL}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",

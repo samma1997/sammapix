@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "How to Open an APK File Without Installing It [2026]",
   description:
-    "An APK is a ZIP archive — open it in your browser to view AndroidManifest.xml, resources, and assets without installing the app. JSZip runs locally, no upload. Honest: extracts files, does not decompile bytecode. Free.",
+    "View APK files in your browser. Browse app data. No upload. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/open-apk-file-online`,
   },

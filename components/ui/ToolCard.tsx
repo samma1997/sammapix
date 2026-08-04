@@ -2757,6 +2757,269 @@ export const IconIpaExtractor: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── QR Code Generator icon (finder patterns assemble on loop) ────────────────
+export const IconQrCodeGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes qr-tl { 0%,20%{opacity:0;transform:scale(0.4)}45%,80%{opacity:1;transform:scale(1)}95%,100%{opacity:0;transform:scale(0.4)} }
+      @keyframes qr-tr { 0%,30%{opacity:0;transform:scale(0.4)}55%,85%{opacity:1;transform:scale(1)}98%,100%{opacity:0;transform:scale(0.4)} }
+      @keyframes qr-bl { 0%,10%{opacity:0;transform:scale(0.4)}35%,75%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(0.4)} }
+      @keyframes qr-dt { 0%,40%{opacity:0;transform:scale(0.4)}65%,90%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0.4)} }
+      .qr-tl{transform-origin:12px 12px;animation:qr-tl 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite}
+      .qr-tr{transform-origin:36px 12px;animation:qr-tr 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.15s infinite}
+      .qr-bl{transform-origin:12px 36px;animation:qr-bl 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.3s infinite}
+      .qr-dt{transform-origin:30px 30px;animation:qr-dt 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.08s infinite}
+    `}</style>
+    <g className="qr-tl">
+      <rect x="4" y="4" width="17" height="17" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="8" width="9" height="9" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="10" y="10" width="5" height="5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="qr-tr">
+      <rect x="27" y="4" width="17" height="17" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <rect x="31" y="8" width="9" height="9" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="33" y="10" width="5" height="5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="qr-bl">
+      <rect x="4" y="27" width="17" height="17" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <rect x="8" y="31" width="9" height="9" rx="1" fill={accent} fillOpacity="0.5"/>
+      <rect x="10" y="33" width="5" height="5" rx="0.5" fill={accent}/>
+    </g>
+    <g className="qr-dt">
+      <rect x="27" y="27" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.8"/>
+      <rect x="34" y="27" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.6"/>
+      <rect x="27" y="34" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.5"/>
+      <rect x="34" y="34" width="5" height="5" rx="0.75" fill={accent} fillOpacity="0.9"/>
+      <rect x="30.5" y="30.5" width="3" height="3" rx="0.5" fill={accent} fillOpacity="0.35"/>
+    </g>
+  </svg>
+);
+
+export const IconBarcodeGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes bc-b1 { 0%,100%{transform:scaleY(0.6);opacity:0.5} 40%,60%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b2 { 0%,100%{transform:scaleY(0.5);opacity:0.4} 35%,65%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b3 { 0%,100%{transform:scaleY(0.7);opacity:0.6} 45%,55%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b4 { 0%,100%{transform:scaleY(0.4);opacity:0.35} 30%,70%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b5 { 0%,100%{transform:scaleY(0.65);opacity:0.55} 38%,62%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b6 { 0%,100%{transform:scaleY(0.5);opacity:0.45} 42%,58%{transform:scaleY(1);opacity:1} }
+      @keyframes bc-b7 { 0%,100%{transform:scaleY(0.6);opacity:0.5} 36%,64%{transform:scaleY(1);opacity:1} }
+      .bc-b1{transform-origin:center 28px;animation:bc-b1 2.4s cubic-bezier(0.34,1.4,0.64,1) 0s infinite}
+      .bc-b2{transform-origin:center 28px;animation:bc-b2 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.15s infinite}
+      .bc-b3{transform-origin:center 28px;animation:bc-b3 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.3s infinite}
+      .bc-b4{transform-origin:center 28px;animation:bc-b4 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.08s infinite}
+      .bc-b5{transform-origin:center 28px;animation:bc-b5 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.22s infinite}
+      .bc-b6{transform-origin:center 28px;animation:bc-b6 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.38s infinite}
+      .bc-b7{transform-origin:center 28px;animation:bc-b7 2.4s cubic-bezier(0.34,1.4,0.64,1) 0.05s infinite}
+    `}</style>
+    <rect className="bc-b1" x="4"  y="10" width="4"   height="36" rx="1" fill={accent}/>
+    <rect className="bc-b2" x="10" y="10" width="2"   height="36" rx="0.5" fill={accent} fillOpacity="0.8"/>
+    <rect className="bc-b3" x="14" y="10" width="5"   height="36" rx="1" fill={accent}/>
+    <rect className="bc-b4" x="21" y="10" width="2.5" height="36" rx="0.5" fill={accent} fillOpacity="0.75"/>
+    <rect className="bc-b5" x="25" y="10" width="4"   height="36" rx="1" fill={accent}/>
+    <rect className="bc-b6" x="31" y="10" width="2"   height="36" rx="0.5" fill={accent} fillOpacity="0.8"/>
+    <rect className="bc-b7" x="35" y="10" width="3"   height="36" rx="1" fill={accent}/>
+    <rect             x="40" y="10" width="4"   height="36" rx="1" fill={accent} opacity="0.9"/>
+  </svg>
+);
+
+export const IconQrCodeReader: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes qrread-scan {
+        0%   { transform: translateY(-9px); opacity: 0; }
+        12%  { opacity: 1; }
+        88%  { opacity: 1; }
+        100% { transform: translateY(9px); opacity: 0; }
+      }
+      @keyframes qrread-dot {
+        0%, 100% { opacity: 0.3; }
+        50%       { opacity: 1; }
+      }
+      .qrr-sc { animation: qrread-scan 2s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .qrr-d1 { animation: qrread-dot 2s ease-in-out infinite; }
+      .qrr-d2 { animation: qrread-dot 2s ease-in-out 0.2s infinite; }
+      .qrr-d3 { animation: qrread-dot 2s ease-in-out 0.4s infinite; }
+      .qrr-d4 { animation: qrread-dot 2s ease-in-out 0.1s infinite; }
+    `}</style>
+    {/* Top-left finder */}
+    <rect x="3" y="3" width="14" height="14" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <rect x="6" y="6" width="8" height="8" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="8" y="8" width="4" height="4" rx="0.5" fill={accent}/>
+    {/* Top-right finder */}
+    <rect x="31" y="3" width="14" height="14" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <rect x="34" y="6" width="8" height="8" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="36" y="8" width="4" height="4" rx="0.5" fill={accent}/>
+    {/* Bottom-left finder */}
+    <rect x="3" y="31" width="14" height="14" rx="2" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <rect x="6" y="34" width="8" height="8" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="8" y="36" width="4" height="4" rx="0.5" fill={accent}/>
+    {/* Data dots (bottom-right) */}
+    <rect className="qrr-d1" x="31" y="31" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.8"/>
+    <rect className="qrr-d2" x="37" y="31" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.6"/>
+    <rect className="qrr-d3" x="31" y="37" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.7"/>
+    <rect className="qrr-d4" x="37" y="37" width="4" height="4" rx="0.75" fill={accent} fillOpacity="0.9"/>
+    {/* Animated scanner line */}
+    <line className="qrr-sc" x1="1" y1="24" x2="47" y2="24" stroke={accent} strokeWidth="1.75" strokeLinecap="round"/>
+  </svg>
+);
+
+export const IconBarcodeReader: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes brdr-scan {
+        0%   { transform: translateY(-9px); opacity: 0; }
+        12%  { opacity: 1; }
+        88%  { opacity: 1; }
+        100% { transform: translateY(9px); opacity: 0; }
+      }
+      @keyframes brdr-bar {
+        0%, 100% { opacity: 0.35; }
+        50%       { opacity: 1; }
+      }
+      .brdr-sc { animation: brdr-scan 2s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .brdr-b1 { animation: brdr-bar 2s ease-in-out infinite; }
+      .brdr-b2 { animation: brdr-bar 2s ease-in-out 0.15s infinite; }
+      .brdr-b3 { animation: brdr-bar 2s ease-in-out 0.3s infinite; }
+      .brdr-b4 { animation: brdr-bar 2s ease-in-out 0.05s infinite; }
+      .brdr-b5 { animation: brdr-bar 2s ease-in-out 0.25s infinite; }
+    `}</style>
+    {/* Barcode bars — varied widths to look like a real EAN-style barcode */}
+    <rect className="brdr-b1" x="4"  y="9" width="3"  height="30" rx="1" fill={accent} fillOpacity="0.9"/>
+    <rect className="brdr-b2" x="9"  y="9" width="5"  height="30" rx="1" fill={accent} fillOpacity="0.7"/>
+    <rect className="brdr-b3" x="16" y="9" width="2"  height="30" rx="1" fill={accent} fillOpacity="0.9"/>
+    <rect              x="20" y="9" width="4"  height="30" rx="1" fill={accent} fillOpacity="0.5"/>
+    <rect className="brdr-b4" x="26" y="9" width="3"  height="30" rx="1" fill={accent} fillOpacity="0.85"/>
+    <rect              x="31" y="9" width="2"  height="30" rx="1" fill={accent} fillOpacity="0.5"/>
+    <rect className="brdr-b5" x="35" y="9" width="5"  height="30" rx="1" fill={accent} fillOpacity="0.75"/>
+    <rect              x="42" y="9" width="2"  height="30" rx="1" fill={accent} fillOpacity="0.9"/>
+    {/* Animated scanner line */}
+    <line className="brdr-sc" x1="2" y1="24" x2="46" y2="24" stroke={accent} strokeWidth="1.75" strokeLinecap="round"/>
+  </svg>
+);
+
+export const IconHashGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes hgen-scroll {
+        0%   { transform: translateY(0px); opacity: 1; }
+        78%  { transform: translateY(-11px); opacity: 0.25; }
+        79%  { transform: translateY(11px); opacity: 0; }
+        100% { transform: translateY(0px); opacity: 1; }
+      }
+      @keyframes hgen-bar {
+        0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+        50%      { opacity: 1; transform: scaleX(1); }
+      }
+      .hgen-hex { animation: hgen-scroll 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .hgen-b1  { transform-origin: 2px 42px; animation: hgen-bar 1.8s ease-in-out 0s infinite; }
+      .hgen-b2  { transform-origin: 14px 42px; animation: hgen-bar 1.8s ease-in-out 0.2s infinite; }
+      .hgen-b3  { transform-origin: 30px 42px; animation: hgen-bar 1.8s ease-in-out 0.4s infinite; }
+    `}</style>
+    {/* Hash symbol # (background) */}
+    <text x="2" y="33" fontSize="30" fill={accent} fontWeight="800" fontFamily="monospace" fillOpacity="0.12">#</text>
+    <text x="2" y="33" fontSize="30" fill={accent} fontWeight="800" fontFamily="monospace" stroke={accent} strokeWidth="0.5" fillOpacity="0.9">#</text>
+    {/* Scrolling hex digits */}
+    <g className="hgen-hex">
+      <text x="29" y="13" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.9">a4f2</text>
+      <text x="29" y="20" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.7">9c1e</text>
+      <text x="29" y="27" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.55">b7d0</text>
+      <text x="29" y="34" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.35">3f8a</text>
+    </g>
+    {/* Animated bars */}
+    <rect className="hgen-b1" x="2"  y="40" width="10" height="3" rx="1.5" fill={accent} fillOpacity="0.5"/>
+    <rect className="hgen-b2" x="14" y="40" width="13" height="3" rx="1.5" fill={accent} fillOpacity="0.5"/>
+    <rect className="hgen-b3" x="29" y="40" width="17" height="3" rx="1.5" fill={accent} fillOpacity="0.5"/>
+  </svg>
+);
+
+export const IconUrlEncodeDecode: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ued-tc-out {
+        0%, 15% { opacity: 1; transform: translateX(0px); }
+        35%      { opacity: 0; transform: translateX(-5px); }
+        100%     { opacity: 0; }
+      }
+      @keyframes ued-tc-in {
+        0%, 33% { opacity: 0; transform: translateX(5px); }
+        53%, 85%{ opacity: 1; transform: translateX(0px); }
+        100%    { opacity: 0; }
+      }
+      @keyframes ued-tc-arr {
+        0%, 25%  { transform: translateX(-1px); opacity: 0.45; }
+        50%      { transform: translateX(2px);  opacity: 1; }
+        80%, 100%{ transform: translateX(-1px); opacity: 0.45; }
+      }
+      .ued-tc-plain { animation: ued-tc-out 2.6s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .ued-tc-pct   { animation: ued-tc-in  2.6s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ued-tc-arr   { animation: ued-tc-arr  2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Input box */}
+    <rect x="2" y="16" width="16" height="16" rx="2" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.25"/>
+    <g className="ued-tc-plain">
+      <text x="10" y="27" fontSize="6" fill={accent} fontWeight="700" fontFamily="monospace" textAnchor="middle">url</text>
+    </g>
+    {/* Arrow */}
+    <g className="ued-tc-arr">
+      <path d="M20 24 L24 24 M22.5 22 L24 24 L22.5 26" stroke={accent} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Output box */}
+    <rect x="26" y="13" width="20" height="22" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <g className="ued-tc-pct" style={{ opacity: 0 }}>
+      <text x="36" y="22" fontSize="5" fill={accent} fontWeight="800" fontFamily="monospace" textAnchor="middle">%2F</text>
+      <text x="36" y="29" fontSize="5" fill={accent} fontWeight="800" fontFamily="monospace" textAnchor="middle">%3A</text>
+    </g>
+    {/* Two-way arrows at bottom */}
+    <path d="M8 38 L18 38 M15 36 L18 38 L15 40" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.5"/>
+    <path d="M30 38 L40 38 M33 36 L30 38 L33 40" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.5"/>
+  </svg>
+);
+
+export const IconPasswordGenerator: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes pg-ic-chars {
+        0%   { transform: translateY(0px);  opacity: 1; }
+        78%  { transform: translateY(-14px); opacity: 0.15; }
+        79%  { transform: translateY(14px);  opacity: 0; }
+        100% { transform: translateY(0px);  opacity: 1; }
+      }
+      @keyframes pg-ic-glow {
+        0%, 100% { opacity: 0.4; r: 3; }
+        50%      { opacity: 1;   r: 4; }
+      }
+      @keyframes pg-ic-shake {
+        0%, 80%, 100% { transform: translateX(0); }
+        85%           { transform: translateX(-1.5px); }
+        90%           { transform: translateX(1.5px); }
+        95%           { transform: translateX(-1px); }
+      }
+      .pg-ic-chars { animation: pg-ic-chars 2.6s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .pg-ic-glow  { animation: pg-ic-glow  2.6s ease-in-out infinite; }
+      .pg-ic-lock  { animation: pg-ic-shake 2.6s ease-in-out infinite; }
+    `}</style>
+    {/* Lock shackle */}
+    <g className="pg-ic-lock">
+      <path d="M17 22V17a7 7 0 0114 0v5" stroke={accent} strokeWidth="1.75" strokeLinecap="round" fill="none"/>
+      {/* Lock body */}
+      <rect x="10" y="22" width="28" height="20" rx="4" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.75"/>
+      {/* Keyhole */}
+      <circle cx="24" cy="31" r="2.5" fill={accent} fillOpacity="0.85"/>
+      <rect x="22.75" y="31.5" width="2.5" height="3.5" rx="1" fill={accent} fillOpacity="0.85"/>
+    </g>
+    {/* Scrolling chars top-right */}
+    <g className="pg-ic-chars">
+      <text x="34" y="10" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.9">A#</text>
+      <text x="34" y="16.5" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.65">9!</text>
+      <text x="34" y="23" fontSize="5.5" fill={accent} fontWeight="700" fontFamily="monospace" fillOpacity="0.4">z@</text>
+    </g>
+    {/* Glowing dot */}
+    <circle className="pg-ic-glow" cx="38" cy="5" r="3" fill={accent} fillOpacity="0.7"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

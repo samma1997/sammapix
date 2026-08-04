@@ -256,7 +256,7 @@ export default function Page() {
           Controlla l&apos;anteprima e scarica il file: ottieni un PNG con canale alfa, cioè con
           lo sfondo davvero trasparente. Puoi incollarlo su qualsiasi sfondo senza bordi bianchi.
           Se hai elaborato più foto, con il piano Pro le scarichi tutte in un unico archivio ZIP.
-          Vuoi anche <Link href="/tools/crop" className="underline">ritagliare</Link> o{" "}
+          Vuoi anche <Link href="/tools/croproatio" className="underline">ritagliare</Link> o{" "}
           <Link href="/it/ridimensionare-immagini" className="underline">ridimensionare</Link> il
           risultato? Bastano pochi secondi in più.
         </p>

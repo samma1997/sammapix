@@ -14,6 +14,34 @@
     "url": "/blog/7z-to-zip-online"
   },
   {
+    "slug": "barcode-generator-online",
+    "title": "Free Barcode Generator Online — CODE128, EAN-13, UPC, QR [2026]",
+    "description": "Generate a barcode from any value entirely in your browser — CODE128, EAN-13, EAN-8, UPC-A, CODE39, ITF-14. Download PNG or SVG. No signup, no upload,",
+    "keywords": [
+      "barcode generator",
+      "free barcode generator",
+      "ean barcode generator",
+      "code128 generator",
+      "barcode generator online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/barcode-generator-online"
+  },
+  {
+    "slug": "barcode-reader-online",
+    "title": "Barcode Reader Online — Decode EAN, UPC, CODE128, QR from an Image [2026]",
+    "description": "Read and decode any barcode from a photo or screenshot entirely in your browser — EAN-13, EAN-8, UPC-A, CODE128, CODE39, ITF, QR. ZXing runs locally. ",
+    "keywords": [
+      "barcode reader online",
+      "barcode reader",
+      "decode barcode",
+      "read barcode from image",
+      "read ean from image"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/barcode-reader-online"
+  },
+  {
     "slug": "convert-7z-to-zip-no-upload",
     "title": "How to Convert 7Z to ZIP Without Software [2026]",
     "description": "Convert 7Z to ZIP in your browser without uploading the file anywhere and without installing 7-Zip. libarchive.wasm extracts locally, JSZip repackages",
@@ -54,6 +82,34 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/convert-tar-to-zip-no-upload"
+  },
+  {
+    "slug": "create-barcode-free",
+    "title": "Create a Barcode for Free Without Signup — Browser-Based [2026]",
+    "description": "Create a barcode for free without signing up. Choose the right format, enter your value, download PNG or SVG. No upload, no server, no account. Works ",
+    "keywords": [
+      "create barcode",
+      "barcode maker",
+      "make barcode free",
+      "barcode no signup",
+      "create barcode free"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/create-barcode-free"
+  },
+  {
+    "slug": "create-qr-code-no-signup",
+    "title": "Create a QR Code Without Signing Up — No Account, No Expiry [2026]",
+    "description": "Create a QR code without an account, email, or registration. Your data stays in your browser — no upload, no server. Download PNG or SVG. Free, no exp",
+    "keywords": [
+      "qr code no signup",
+      "qr code generator no registration",
+      "create qr code without account",
+      "qr code no login",
+      "qr code generator free no sign up"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/create-qr-code-no-signup"
   },
   {
     "slug": "extract-apk-online",
@@ -112,6 +168,34 @@
     "url": "/blog/extract-mcpack-online"
   },
   {
+    "slug": "generate-sha256-md5-online",
+    "title": "How to Generate a SHA-256 or MD5 Checksum Online Without Uploading [2026]",
+    "description": "Generate a SHA-256 or MD5 checksum from text or a file in your browser — no upload, no server. Step-by-step: verify a download, compare checksums, und",
+    "keywords": [
+      "generate sha256",
+      "md5 checksum online",
+      "verify file hash",
+      "checksum no upload",
+      "sha256 online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/generate-sha256-md5-online"
+  },
+  {
+    "slug": "hash-generator-online",
+    "title": "Free Hash Generator Online — MD5, SHA-256, SHA-512 from Text or File [2026]",
+    "description": "Generate MD5, SHA-1, SHA-256, SHA-384, or SHA-512 hashes from any text or file entirely in your browser. No upload, no account. Web Crypto API runs lo",
+    "keywords": [
+      "hash generator",
+      "hash generator online",
+      "sha256 generator",
+      "md5 hash online",
+      "file hash online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/hash-generator-online"
+  },
+  {
     "slug": "open-apk-file-online",
     "title": "How to Open an APK File Without Installing It [2026]",
     "description": "An APK is a ZIP archive — open it in your browser to view AndroidManifest.xml, resources, and assets without installing the app. JSZip runs locally, n",
@@ -168,6 +252,62 @@
     "url": "/blog/open-minecraft-mcworld-file"
   },
   {
+    "slug": "passport-photo-requirements-2026",
+    "title": "Quick reference table: 20 countries",
+    "description": "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo ma",
+    "keywords": [
+      "passport photo size",
+      "passport photo requirements 2026",
+      "passport photo dimensions",
+      "visa photo size",
+      "passport photo maker free"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/passport-photo-requirements-2026"
+  },
+  {
+    "slug": "password-generator-online",
+    "title": "Free Password Generator Online — No Upload [2026]",
+    "description": "Generate strong random passwords in your browser. No upload, no server. crypto.getRandomValues, strength meter, custom options. Free.",
+    "keywords": [
+      "password generator",
+      "password generator online",
+      "strong password generator",
+      "random password generator",
+      "secure password generator"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/password-generator-online"
+  },
+  {
+    "slug": "qr-code-generator-online",
+    "title": "Free QR Code Generator Online — No Signup, No Expiry [2026]",
+    "description": "Generate a QR code from any URL, text, Wi-Fi, email, or vCard entirely in your browser — no signup, no account, no expiry. Download PNG or SVG. Free f",
+    "keywords": [
+      "qr code generator",
+      "free qr code generator",
+      "qr code online",
+      "qr code generator online",
+      "qr code maker"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/qr-code-generator-online"
+  },
+  {
+    "slug": "qr-code-reader-online",
+    "title": "QR Code Reader Online — Decode a QR Code from an Image Free [2026]",
+    "description": "Read and decode any QR code from an image or screenshot entirely in your browser — no upload, no camera required. jsQR runs locally. See the decoded U",
+    "keywords": [
+      "qr code reader",
+      "qr code reader online",
+      "decode qr code",
+      "read qr from image",
+      "qr code decoder"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/qr-code-reader-online"
+  },
+  {
     "slug": "rar-to-zip-online",
     "title": "Convert RAR to ZIP Online Free (No Upload) [2026]",
     "description": "Convert any RAR file to ZIP entirely in your browser — no upload, no WinRAR, no server. libarchive.wasm extracts locally, JSZip repackages. Verifiable",
@@ -182,6 +322,48 @@
     "url": "/blog/rar-to-zip-online"
   },
   {
+    "slug": "scan-barcode-from-image",
+    "title": "How to Scan a Barcode from an Image or Photo (No Scanner App) [2026]",
+    "description": "Scan and decode a barcode from a product picture, screenshot, or photo — no scanner app, no camera, no upload. ZXing reads the image locally in your b",
+    "keywords": [
+      "scan barcode from image",
+      "barcode from photo",
+      "read barcode from picture",
+      "scan barcode from screenshot",
+      "decode barcode from image"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/scan-barcode-from-image"
+  },
+  {
+    "slug": "scan-qr-code-from-image",
+    "title": "How to Scan a QR Code from a Screenshot or Picture (No Camera) [2026]",
+    "description": "Scan and decode a QR code from a screenshot, picture, or photo — no camera needed, no upload. jsQR reads the image locally in your browser. Covers Wha",
+    "keywords": [
+      "scan qr from image",
+      "qr code from screenshot",
+      "read qr code from picture",
+      "scan qr code without camera",
+      "decode qr from photo"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/scan-qr-code-from-image"
+  },
+  {
+    "slug": "strong-password-generator",
+    "title": "Strong Password Generator — Length Wins [2026]",
+    "description": "Why password length beats complexity. Generate secure 16+ char passwords in your browser. No upload, no server. Free, instantly.",
+    "keywords": [
+      "strong password generator",
+      "how to create strong password",
+      "secure password",
+      "password length",
+      "strong password"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/strong-password-generator"
+  },
+  {
     "slug": "tar-to-zip-online",
     "title": "Convert TAR to ZIP Online Free (No Upload) [2026]",
     "description": "Convert any .tar, .tar.gz, .tgz, .tar.bz2, or .tar.xz archive to ZIP entirely in your browser — no upload, no terminal, no 7-Zip install. libarchive.w",
@@ -194,6 +376,34 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/tar-to-zip-online"
+  },
+  {
+    "slug": "url-encode-decode-online",
+    "title": "URL Encode / Decode Online Free — Percent-Encoding Explained [2026]",
+    "description": "Encode or decode any URL online for free. Understand percent-encoding, reserved characters (%20 %2F %3F %26), encodeURIComponent vs encodeURI, and whe",
+    "keywords": [
+      "url encode",
+      "url decode",
+      "url encoder decoder",
+      "percent encoding",
+      "url encode online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/url-encode-decode-online"
+  },
+  {
+    "slug": "url-encoder-decoder-tool",
+    "title": "URL Encoder Decoder Tool — Encode & Decode URLs Online Without Installing Anything [2026]",
+    "description": "Encode or decode a URL online without installing any software. Step-by-step guide: encode a parameter with spaces and special characters, decode a rec",
+    "keywords": [
+      "url encoder tool",
+      "decode url string",
+      "encode url parameter",
+      "url decoder online",
+      "url encode decode online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/url-encoder-decoder-tool"
   },
   {
     "slug": "add-border-to-image-online",
@@ -726,20 +936,6 @@
     ],
     "publishedDate": "2026-08-03",
     "url": "/blog/watermark-pdf-no-upload"
-  },
-  {
-    "slug": "passport-photo-requirements-2026",
-    "title": "Quick reference table: 20 countries",
-    "description": "Exact passport photo requirements for 20+ countries: dimensions, file size, background color, head height. Plus a free browser-based passport photo ma",
-    "keywords": [
-      "passport photo size",
-      "passport photo requirements 2026",
-      "passport photo dimensions",
-      "visa photo size",
-      "passport photo maker free"
-    ],
-    "publishedDate": "2026-07-25",
-    "url": "/blog/passport-photo-requirements-2026"
   },
   {
     "slug": "optimize-images-shopify-free-guide",

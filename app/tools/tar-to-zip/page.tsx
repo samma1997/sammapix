@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Convert TAR to ZIP Online Free: No Upload",
     description:
       "Convert TAR archives to ZIP in your browser. Supports .tar, .tar.gz, .tgz, .tar.bz2, .tar.xz. No upload. Free.",
-    images: [{ url: `${APP_URL}/og/tools/tar-to-zip.png`, width: 1200, height: 630 }],
+    images: [{ url: `${APP_URL}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",

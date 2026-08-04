@@ -60,6 +60,13 @@ import {
   IconApkExtractor,
   IconIpaExtractor,
   IconIsoExtractor,
+  IconBarcodeGenerator,
+  IconQrCodeGenerator,
+  IconQrCodeReader,
+  IconBarcodeReader,
+  IconHashGenerator,
+  IconUrlEncodeDecode,
+  IconPasswordGenerator,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -127,6 +134,13 @@ const MinecraftExtractorClient = dynamic(() => import("@/components/tools/Minecr
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
 const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
 const IsoExtractorClient = dynamic(() => import("@/components/tools/IsoExtractorClient"));
+const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/BarcodeGeneratorClient"));
+const QrCodeGeneratorClient = dynamic(() => import("@/components/tools/QrCodeGeneratorClient"));
+const QrCodeReaderClient = dynamic(() => import("@/components/tools/QrCodeReaderClient"));
+const BarcodeReaderClient = dynamic(() => import("@/components/tools/BarcodeReaderClient"));
+const HashGeneratorClient = dynamic(() => import("@/components/tools/HashGeneratorClient"));
+const UrlEncodeDecodeClient = dynamic(() => import("@/components/tools/UrlEncodeDecodeClient"));
+const PasswordGeneratorClient = dynamic(() => import("@/components/tools/PasswordGeneratorClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -195,6 +209,13 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "apk-extractor":        ApkExtractorClient,
   "ipa-extractor":        IpaExtractorClient,
   "iso-extractor":        IsoExtractorClient,
+  "barcode-generator":   BarcodeGeneratorClient,
+  "qr-code-generator":   QrCodeGeneratorClient,
+  "qr-code-reader":      QrCodeReaderClient,
+  "barcode-reader":      BarcodeReaderClient,
+  "hash-generator":      HashGeneratorClient,
+  "url-encode-decode":   UrlEncodeDecodeClient,
+  "password-generator":  PasswordGeneratorClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -304,6 +325,13 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
   "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
   "iso-extractor":        { Icon: IconIsoExtractor,         accent: "#0EA5E9" },
+  "barcode-generator":   { Icon: IconBarcodeGenerator,     accent: "#6366F1" },
+  "qr-code-generator":   { Icon: IconQrCodeGenerator,      accent: "#6366F1" },
+  "qr-code-reader":      { Icon: IconQrCodeReader,         accent: "#6366F1" },
+  "barcode-reader":      { Icon: IconBarcodeReader,        accent: "#6366F1" },
+  "hash-generator":      { Icon: IconHashGenerator,        accent: "#6366F1" },
+  "url-encode-decode":   { Icon: IconUrlEncodeDecode,      accent: "#6366F1" },
+  "password-generator":  { Icon: IconPasswordGenerator,    accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -999,6 +1027,76 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Download all as ZIP' (Day Pass or Pro) to export everything at once with folder structure preserved." },
     ],
     proTip: { text: "Need to open a 7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
+  },
+  "barcode-generator": {
+    label: "Barcode Generator",
+    tagline: "Generate CODE128, EAN-13, UPC-A, CODE39, ITF-14 and more barcodes entirely in your browser — download PNG or SVG, no upload, no account.",
+    steps: [
+      { title: "Choose a format", desc: "Select the barcode standard that matches your use case from the dropdown — CODE128 for general text, EAN-13 for retail products internationally, UPC-A for North American retail, or ITF-14 for shipping cartons." },
+      { title: "Enter your value and adjust options", desc: "Type the text or number to encode. Adjust bar height, bar width, colors and whether to show the human-readable text beneath the bars. The preview updates live as you type." },
+      { title: "Download PNG or SVG", desc: "Click Download PNG for a high-resolution raster image, or Download SVG for a scalable vector that stays crisp on product labels, large-format prints and packaging artwork." },
+    ],
+    proTip: { text: "Need QR codes instead of barcodes? SammaPix has a free QR Code Generator too.", linkLabel: "QR Code Generator", linkHref: "/dashboard/tools/qr-code-generator" },
+  },
+  "qr-code-generator": {
+    label: "QR Code Generator",
+    tagline: "Generate QR codes for URLs, text, Wi-Fi networks and email addresses — download PNG or SVG.",
+    steps: [
+      { title: "Choose a content type", desc: "Select URL, Text, Wi-Fi or Email from the preset tabs. Each preset builds the correct QR data format automatically." },
+      { title: "Enter your content and tweak options", desc: "Type the URL or text, set error correction level, size, margin and colors. The preview updates live as you type." },
+      { title: "Download PNG or SVG", desc: "Click Download PNG for an image ready for web or print, or Download SVG for a vector that scales perfectly on posters and packaging." },
+    ],
+    proTip: { text: "For print use, pick error correction H (30%) and download SVG — the code stays scannable even if partially covered by a logo.", linkLabel: "Add text to images", linkHref: "/dashboard/tools/add-text-to-image" },
+  },
+  "qr-code-reader": {
+    label: "QR Code Reader",
+    tagline: "Decode any QR code from an image file or your camera — no upload, no app, 100% in your browser.",
+    steps: [
+      { title: "Upload an image or open the camera", desc: "Drag and drop a PNG, JPG, WebP or GIF containing a QR code, or switch to the Camera tab to scan a physical QR code live." },
+      { title: "Automatic decoding", desc: "The tool reads the pixel data from your image using jsQR and decodes the QR code instantly in your browser. Nothing is sent to any server." },
+      { title: "Copy or open the result", desc: "The decoded content appears immediately. Click Copy to grab it, or click Open URL if the QR encodes a web address." },
+    ],
+    proTip: { text: "Need to create a QR code? SammaPix has a free generator too.", linkLabel: "QR Code Generator", linkHref: "/dashboard/tools/qr-code-generator" },
+  },
+  "barcode-reader": {
+    label: "Barcode Reader",
+    tagline: "Decode EAN-13, UPC-A, CODE128, CODE39, QR and more from an image or your camera — no upload, no app, 100% in your browser.",
+    steps: [
+      { title: "Upload an image or open the camera", desc: "Drag and drop a PNG, JPG, WebP or GIF containing a barcode, or switch to the Camera tab to scan a physical barcode in real time." },
+      { title: "Automatic decoding", desc: "The tool draws your image on an offscreen canvas, extracts pixel data, and runs the ZXing decoder entirely in your browser. Nothing is sent to any server." },
+      { title: "Copy the decoded value", desc: "The barcode value and format (e.g. EAN-13, CODE128) appear instantly. Click Copy to copy the value to your clipboard." },
+    ],
+    proTip: { text: "Need to generate a barcode instead? SammaPix has a free Barcode Generator.", linkLabel: "Barcode Generator", linkHref: "/dashboard/tools/barcode-generator" },
+  },
+  "hash-generator": {
+    label: "Hash Generator",
+    tagline: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or any file — 100% client-side, no upload.",
+    steps: [
+      { title: "Choose Text or File mode", desc: "Switch to Text to hash a string (updates live as you type) or to File to hash any local file up to 500 MB." },
+      { title: "Select algorithms", desc: "Tick which hash functions you need. SHA-256 is recommended for integrity checks. MD5 is provided for legacy use only." },
+      { title: "Copy your hash", desc: "Each result appears in a monospace row with its own Copy button. Click to copy the hex digest to your clipboard." },
+    ],
+    proTip: { text: "SHA-256 is the modern standard. Use MD5 only for legacy checksums or file deduplication — it is not secure for cryptography.", linkLabel: "Learn more", linkHref: "/tools/hash-generator" },
+  },
+  "url-encode-decode": {
+    label: "URL Encoder / Decoder",
+    tagline: "Encode or decode URL percent-encoded text instantly in your browser — no upload, no signup.",
+    steps: [
+      { title: "Choose Encode or Decode mode", desc: "Click Encode to convert plain text to percent-encoded form, or Decode to convert percent-encoded text back to readable form." },
+      { title: "Select mode and type input", desc: "Pick encodeURIComponent (default, for query params) or encodeURI (for a full URL). Type or paste your text — output updates live." },
+      { title: "Copy or Swap", desc: "Click Copy to copy the output to your clipboard. Use Swap to pipe the output back as input in the opposite mode." },
+    ],
+    proTip: { text: "Use encodeURIComponent for query string values — it encodes & = ? # and more. Use encodeURI only when encoding a complete URL.", linkLabel: "Image to Base64", linkHref: "/dashboard/tools/image-to-base64" },
+  },
+  "password-generator": {
+    label: "Password Generator",
+    tagline: "Generate strong, random passwords using CSPRNG. Choose length, character sets, see entropy. Nothing is sent anywhere.",
+    steps: [
+      { title: "Set length and character sets", desc: "Use the slider (4-64 chars, default 20). Enable uppercase, lowercase, numbers and symbols. Optionally exclude ambiguous chars like l, 1, I, O, 0." },
+      { title: "Check the strength meter", desc: "The entropy in bits updates live. Aim for 90+ bits (Very strong) for important accounts like email, banking or a password manager master password." },
+      { title: "Copy and save", desc: "Click Copy next to any password to copy it instantly. Click Regenerate for a new one. Store it immediately in your password manager." },
+    ],
+    proTip: { text: "Aim for 20+ characters with all four sets enabled — that gives ~130 bits of entropy, effectively unbreakable.", linkLabel: "Hash Generator", linkHref: "/dashboard/tools/hash-generator" },
   },
 };
 

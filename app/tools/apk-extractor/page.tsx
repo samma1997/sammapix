@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Open any .apk or .xapk file in your browser. View contents, download individual files or export as ZIP. No upload.",
     images: [
       {
-        url: `${APP_URL}/og/tools/apk-extractor.png`,
+        url: `${APP_URL}/og-image.png`,
         width: 1200,
         height: 630,
       },

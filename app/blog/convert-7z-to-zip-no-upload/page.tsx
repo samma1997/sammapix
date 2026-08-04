@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "How to Convert 7Z to ZIP Without Software [2026]",
   description:
-    "Convert 7Z to ZIP in your browser without uploading the file anywhere and without installing 7-Zip. libarchive.wasm extracts locally, JSZip repackages. ZIP opens natively on Windows, Mac, Linux, iOS, Android. Free, no signup.",
+    "Convert 7Z to ZIP in your browser. No server, no signup. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/convert-7z-to-zip-no-upload`,
   },

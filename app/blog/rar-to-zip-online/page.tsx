@@ -9,7 +9,7 @@ import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
 export const metadata: Metadata = {
   title: "Convert RAR to ZIP Online Free (No Upload) [2026]",
   description:
-    "Convert any RAR file to ZIP entirely in your browser — no upload, no WinRAR, no server. libarchive.wasm extracts locally, JSZip repackages. Verifiable via DevTools. Free, no signup.",
+    "Convert RAR to ZIP in your browser. No server, no signup. Free.",
   alternates: {
     canonical: `${APP_URL}/blog/rar-to-zip-online`,
   },
