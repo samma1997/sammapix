@@ -312,6 +312,10 @@ export const BLOG_SLUGS = [
   "open-apk-file-online",
   "extract-iso-online",
   "open-iso-file-online",
+  "extract-ipa-online",
+  "open-ipa-file-online",
+  "tar-to-zip-online",
+  "convert-tar-to-zip-no-upload",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
