@@ -123,6 +123,7 @@ export const TOOL_SLUGS = [
   "txt-to-pdf",
   "rar-to-zip",
   "7z-to-zip",
+  "tar-to-zip",
   "minecraft-extractor",
   "apk-extractor",
   "ipa-extractor",

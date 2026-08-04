@@ -2341,6 +2341,65 @@ export const IconTxtToPdf: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── TAR → ZIP icon — TAR box splits (streams) into a ZIP box via animated arrow ─
+export const IconTarToZip: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes t2z-arrow {
+        0%, 15%  { transform: translateX(-3px); opacity: 0.25; }
+        50%      { transform: translateX(3px);  opacity: 1; }
+        80%      { transform: translateX(0px);  opacity: 0.25; }
+        100%     { transform: translateX(-3px); opacity: 0.25; }
+      }
+      @keyframes t2z-src-fade {
+        0%, 20%  { opacity: 1; }
+        55%, 100%{ opacity: 0.45; }
+      }
+      @keyframes t2z-zip-grow {
+        0%, 30%  { opacity: 0.35; transform: scale(0.88); }
+        65%, 88% { opacity: 1;    transform: scale(1); }
+        100%     { opacity: 0.35; transform: scale(0.88); }
+      }
+      @keyframes t2z-badge {
+        0%, 55%  { opacity: 0; transform: scale(0.7); }
+        72%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.7); }
+      }
+      @keyframes t2z-stripe {
+        0%, 20%  { opacity: 0.7; }
+        55%, 100%{ opacity: 0.2; }
+      }
+      .t2z-arrow  { animation: t2z-arrow 2.4s cubic-bezier(0.4,0,0.2,1) infinite; }
+      .t2z-src    { animation: t2z-src-fade 2.4s ease-in-out infinite; }
+      .t2z-zip    { transform-origin: 36px 18px; animation: t2z-zip-grow 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .t2z-badge  { transform-origin: 37px 38px; animation: t2z-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .t2z-stripe { animation: t2z-stripe 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* TAR box left — with horizontal tape stripes */}
+    <g className="t2z-src">
+      <rect x="2" y="8" width="18" height="22" rx="2.5" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+      <text x="11" y="20" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">TAR</text>
+      {/* Stripes indicating layers/compression */}
+      <line className="t2z-stripe" x1="4" y1="23" x2="18" y2="23" stroke={accent} strokeWidth="1" strokeOpacity="0.5"/>
+      <line className="t2z-stripe" x1="4" y1="26" x2="18" y2="26" stroke={accent} strokeWidth="1" strokeOpacity="0.35"/>
+    </g>
+    {/* Animated arrow */}
+    <g className="t2z-arrow">
+      <path d="M22 19 L26 19 M24 17 L26 19 L24 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* ZIP box right */}
+    <g className="t2z-zip" style={{ opacity: 0.35 }}>
+      <rect x="27" y="8" width="19" height="22" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="36.5" y="22" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">ZIP</text>
+    </g>
+    {/* "any OS" badge pop */}
+    <g className="t2z-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">any OS</text>
+    </g>
+  </svg>
+);
+
 // ── RAR → ZIP converter icon (RAR box morphs into ZIP box via animated arrow) ─
 export const IconRarToZip: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

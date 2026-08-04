@@ -864,6 +864,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["open-7z", "unrar", "rar-to-zip"],
     relatedBlogSlugs: ["7z-to-zip-online", "convert-7z-to-zip-no-upload"],
   },
+  "tar-to-zip": {
+    id: "tar-to-zip",
+    name: "TAR to ZIP",
+    shortDesc: "Convert TAR archives (.tar, .tar.gz, .tgz, .tar.bz2, .tar.xz) to ZIP in-browser, no upload",
+    slug: "/tools/tar-to-zip",
+    category: "optimize",
+    relatedTools: ["7z-to-zip", "rar-to-zip", "open-7z"],
+    relatedBlogSlugs: ["tar-to-zip-online", "convert-tar-to-zip-no-upload"],
+  },
   "flatten-pdf": {
     id: "flatten-pdf",
     name: "Flatten PDF",

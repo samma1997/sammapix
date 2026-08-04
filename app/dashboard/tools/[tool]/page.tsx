@@ -55,6 +55,7 @@ import {
   IconTxtToPdf,
   IconRarToZip,
   IconSevenZToZip,
+  IconTarToZip,
   IconMinecraftExtractor,
   IconApkExtractor,
   IconIpaExtractor,
@@ -121,6 +122,7 @@ const FlattenPdfClient = dynamic(() => import("@/components/tools/FlattenPdfClie
 const TxtToPdfClient = dynamic(() => import("@/components/tools/TxtToPdfClient"));
 const RarToZipClient = dynamic(() => import("@/components/tools/RarToZipClient"));
 const SevenZToZipClient = dynamic(() => import("@/components/tools/SevenZToZipClient"));
+const TarToZipClient = dynamic(() => import("@/components/tools/TarToZipClient"));
 const MinecraftExtractorClient = dynamic(() => import("@/components/tools/MinecraftExtractorClient"));
 const ApkExtractorClient = dynamic(() => import("@/components/tools/ApkExtractorClient"));
 const IpaExtractorClient = dynamic(() => import("@/components/tools/IpaExtractorClient"));
@@ -188,6 +190,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "txt-to-pdf":       TxtToPdfClient,
   "rar-to-zip":           RarToZipClient,
   "7z-to-zip":            SevenZToZipClient,
+  "tar-to-zip":           TarToZipClient,
   "minecraft-extractor":  MinecraftExtractorClient,
   "apk-extractor":        ApkExtractorClient,
   "ipa-extractor":        IpaExtractorClient,
@@ -296,6 +299,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "txt-to-pdf":        { Icon: IconTxtToPdf,       accent: "#EF4444" },
   "rar-to-zip":           { Icon: IconRarToZip,             accent: "#0EA5E9" },
   "7z-to-zip":            { Icon: IconSevenZToZip,          accent: "#0EA5E9" },
+  "tar-to-zip":           { Icon: IconTarToZip,             accent: "#0EA5E9" },
   "minecraft-extractor":  { Icon: IconMinecraftExtractor,   accent: "#0EA5E9" },
   "apk-extractor":        { Icon: IconApkExtractor,         accent: "#0EA5E9" },
   "ipa-extractor":        { Icon: IconIpaExtractor,         accent: "#0EA5E9" },
@@ -955,6 +959,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
     ],
     proTip: { text: "Need to open the 7Z and download files individually instead? Use Open 7Z Online.", linkLabel: "Open 7Z Online", linkHref: "/dashboard/tools/open-7z" },
+  },
+  "tar-to-zip": {
+    label: "TAR to ZIP",
+    tagline: "Convert TAR archives to ZIP in your browser. Supports .tar, .tar.gz, .tgz, .tar.bz2, .tar.xz — no upload.",
+    steps: [
+      { title: "Drop your TAR file", desc: "Drag and drop a .tar, .tar.gz, .tgz, .tar.bz2, or .tar.xz file. Up to 200 MB free. libarchive detects the compression automatically." },
+      { title: "Extraction and repackaging", desc: "libarchive (WebAssembly) decompresses and extracts the TAR contents in your browser, then JSZip repackages them into a ZIP preserving the full folder structure." },
+      { title: "Download the ZIP", desc: "Click Download ZIP. The archive opens natively on Windows, macOS, Linux and mobile — no extra software needed." },
+    ],
+    proTip: { text: "Need to convert a RAR or 7Z archive instead? SammaPix has dedicated tools for those too.", linkLabel: "RAR to ZIP", linkHref: "/dashboard/tools/rar-to-zip" },
   },
   "apk-extractor": {
     label: "APK Extractor",
