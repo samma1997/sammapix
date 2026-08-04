@@ -14,6 +14,20 @@
     "url": "/blog/convert-rar-to-zip-no-upload"
   },
   {
+    "slug": "extract-apk-online",
+    "title": "Extract an APK File Online Free (No Upload) [2026]",
+    "description": "Extract any APK or XAPK file in your browser — no upload, no Android required. JSZip reads the ZIP-format archive locally. Browse AndroidManifest.xml,",
+    "keywords": [
+      "extract apk",
+      "apk extractor",
+      "open apk file",
+      "apk extractor online",
+      "extract apk online"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/extract-apk-online"
+  },
+  {
     "slug": "extract-mcpack-online",
     "title": "Open and Extract a .mcpack File Online Free [2026]",
     "description": "Extract any .mcpack file in your browser — no upload, no Minecraft required. JSZip reads the ZIP-format archive locally. Browse textures, manifests, a",
@@ -26,6 +40,20 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/extract-mcpack-online"
+  },
+  {
+    "slug": "open-apk-file-online",
+    "title": "How to Open an APK File Without Installing It [2026]",
+    "description": "An APK is a ZIP archive — open it in your browser to view AndroidManifest.xml, resources, and assets without installing the app. JSZip runs locally, n",
+    "keywords": [
+      "open apk file",
+      "view apk contents",
+      "unzip apk",
+      "what is inside an apk",
+      "apk file viewer"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/open-apk-file-online"
   },
   {
     "slug": "open-minecraft-mcworld-file",
