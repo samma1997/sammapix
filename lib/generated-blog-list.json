@@ -196,6 +196,20 @@
     "url": "/blog/qr-code-generator-online"
   },
   {
+    "slug": "qr-code-reader-online",
+    "title": "QR Code Reader Online — Decode a QR Code from an Image Free [2026]",
+    "description": "Read and decode any QR code from an image or screenshot entirely in your browser — no upload, no camera required. jsQR runs locally. See the decoded U",
+    "keywords": [
+      "qr code reader",
+      "qr code reader online",
+      "decode qr code",
+      "read qr from image",
+      "qr code decoder"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/qr-code-reader-online"
+  },
+  {
     "slug": "rar-to-zip-online",
     "title": "Convert RAR to ZIP Online Free (No Upload) [2026]",
     "description": "Convert any RAR file to ZIP entirely in your browser — no upload, no WinRAR, no server. libarchive.wasm extracts locally, JSZip repackages. Verifiable",
@@ -208,6 +222,20 @@
     ],
     "publishedDate": "2026-08-04",
     "url": "/blog/rar-to-zip-online"
+  },
+  {
+    "slug": "scan-qr-code-from-image",
+    "title": "How to Scan a QR Code from a Screenshot or Picture (No Camera) [2026]",
+    "description": "Scan and decode a QR code from a screenshot, picture, or photo — no camera needed, no upload. jsQR reads the image locally in your browser. Covers Wha",
+    "keywords": [
+      "scan qr from image",
+      "qr code from screenshot",
+      "read qr code from picture",
+      "scan qr code without camera",
+      "decode qr from photo"
+    ],
+    "publishedDate": "2026-08-04",
+    "url": "/blog/scan-qr-code-from-image"
   },
   {
     "slug": "tar-to-zip-online",
