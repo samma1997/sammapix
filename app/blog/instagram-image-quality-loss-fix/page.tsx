@@ -319,7 +319,11 @@ export default function InstagramImageQualityLossFixPage() {
             <Link href="/resize/instagram" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">
               Instagram resizer
             </Link>
-            , drop your photo, select the format you need (square, portrait, or landscape). It crops and resizes to the exact pixel dimensions.
+            , drop your photo, select the format you need (square, portrait, or landscape). It crops and resizes to the exact pixel dimensions. For portrait posts specifically, you can also{" "}
+            <Link href="/crop/4-5" className="underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors">
+              crop to 4:5 ratio
+            </Link>{" "}
+            first so your composition is right before resizing.
           </li>
           <li className="text-sm text-[#737373] leading-relaxed">
             <strong className="text-[#171717] dark:text-[#E5E5E5]">Compress to 90&ndash;95% JPEG</strong> &mdash; open the{" "}

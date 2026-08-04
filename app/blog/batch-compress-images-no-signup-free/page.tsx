@@ -531,7 +531,11 @@ export default function BatchCompressImagesNoSignupFreePage() {
         <ul className="mb-4">
           <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
             <strong className="text-gray-800 dark:text-[#E5E5E5]">Resize first, then compress.</strong> A 4000px image resized to 1200px before compression saves significantly more than compression alone. Use{" "}
-            <Link href="/tools/resizepack" className="text-[#6366F1] hover:underline">Batch Resize</Link>.
+            <Link href="/tools/resizepack" className="text-[#6366F1] hover:underline">Batch Resize</Link>. When you have a hard file-size ceiling — for example an exam application that requires images under{" "}
+            <Link href="/compress-to/500kb" className="text-[#6366F1] hover:underline">500KB</Link>{" "}
+            or a form that caps uploads at{" "}
+            <Link href="/compress-to/1mb" className="text-[#6366F1] hover:underline">1MB</Link>{" "}
+            — use the dedicated size-target pages to hit the limit precisely in one step.
           </li>
           <li className="text-sm text-gray-600 dark:text-[#A3A3A3] ml-5 mb-1.5 list-disc">
             <strong className="text-gray-800 dark:text-[#E5E5E5]">Convert to WebP.</strong> WebP is 25-34% smaller than JPEG at equivalent visual quality, with 97%+ browser support. Use{" "}

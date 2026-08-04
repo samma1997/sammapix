@@ -465,7 +465,9 @@ export default function CompressImagesWhatsappQualityPage() {
           <p className="text-sm text-gray-700 dark:text-[#E5E5E5] leading-relaxed">
             <strong>Need exact dimensions for Status, Profile, or Group icon?</strong> WhatsApp also has 3 specific image sizes beyond chat: Status <code className="text-xs px-1 py-0.5 bg-white dark:bg-[#1E1E1E] rounded">1080×1920</code>, Profile <code className="text-xs px-1 py-0.5 bg-white dark:bg-[#1E1E1E] rounded">500×500</code>, Group icon <code className="text-xs px-1 py-0.5 bg-white dark:bg-[#1E1E1E] rounded">192×192</code>. Use{" "}
             <Link href="/resize/whatsapp" className="text-[#6366F1] font-semibold hover:underline">SammaPix WhatsApp Resizer</Link>{" "}
-            — auto-crops to the right ratio, no upload, no signup.
+            — auto-crops to the right ratio, no upload, no signup. If your photo is already sized correctly but still too heavy, use the{" "}
+            <Link href="/compress-to/2mb" className="text-[#6366F1] font-semibold hover:underline">compress to 2MB tool</Link>{" "}
+            to bring it exactly into the sweet spot WhatsApp handles with minimal further compression.
           </p>
         </div>
 
