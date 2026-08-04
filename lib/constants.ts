@@ -299,6 +299,8 @@ export const BLOG_SLUGS = [
   "flatten-pdf-form-no-upload",
   "txt-to-pdf-online-free",
   "convert-text-to-pdf-no-upload",
+  "7z-to-zip-online",
+  "convert-7z-to-zip-no-upload",
   "rar-to-zip-online",
   "convert-rar-to-zip-no-upload",
   "extract-mcpack-online",
