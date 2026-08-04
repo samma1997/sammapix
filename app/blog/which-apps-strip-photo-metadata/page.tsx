@@ -207,17 +207,14 @@ export default function WhichAppsStripPhotoMetadataPage() {
       >
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
-            TL;DR — which apps actually strip EXIF
+            Quick Answer
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            <strong>Strip everything (safe):</strong> Instagram, Facebook, X/Twitter, Telegram (default), iMessage.{" "}
-            <strong>Keep your GPS:</strong> Signal-attached photos, WhatsApp document mode, Reddit mobile, email clients.
-            The <strong>WhatsApp document trick</strong> bypasses normal stripping — most people don&apos;t know
-            this. To strip EXIF before posting,{" "}
+            Most social platforms (Instagram, Facebook, X/Twitter, Reddit) strip EXIF metadata from public-facing copies but retain the original — including GPS — internally. Signal strips all metadata and stores nothing server-side. WhatsApp strips in photo mode but preserves 100% of EXIF including GPS when a photo is sent as a document. iMessage, email, and Telegram in file mode preserve full metadata by default. To guarantee your GPS is removed before sharing on any platform,{" "}
             <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
-              use the SammaPix EXIF stripper
+              use the SammaPix EXIF tool
             </Link>{" "}
-            (free, browser, no upload).
+            (free, runs in your browser, no upload).
           </p>
         </div>
 

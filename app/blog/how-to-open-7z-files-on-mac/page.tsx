@@ -238,6 +238,20 @@ export default function HowToOpen7zFilesOnMacPage() {
         }
       >
 
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            macOS does not support 7z archives natively. The simplest no-install option is{" "}
+            <Link href="/tools/open-7z" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix 7z Opener
+            </Link>
+            : open it in your browser, drop the .7z file, and extract or download without installing anything. For regular use, The Unarchiver (free, Mac App Store) integrates with Finder and handles 7z, RAR, and most other formats in one click.
+          </p>
+        </div>
+
         {/* ── Section 1: Why Mac cannot open 7z ─────────────────────────── */}
 
         <h2 id="why-mac-cant-open-7z" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">

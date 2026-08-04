@@ -216,16 +216,14 @@ export default function DoesDiscordStripExifMetadataPage() {
       >
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
-            TL;DR — does Discord strip EXIF?
+            Quick Answer
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            <strong>Probably yes for direct image uploads</strong> (every third-party source agrees, but Discord has never officially documented it).{" "}
-            <strong>Probably no for file attachments</strong> (paperclip uploads and &quot;send as file&quot; appear to preserve metadata byte-for-byte).{" "}
-            <strong>Discord Nitro:</strong> raises file size, does not change EXIF behavior. Because there is no formal guarantee, the only reliable approach is to{" "}
+            Discord most likely strips EXIF from direct image uploads (drag-and-drop, camera roll picker) during re-encoding, though Discord has never officially documented this behavior. File attachments sent via the paperclip menu or &quot;send as file&quot; are preserved byte-for-byte, including GPS coordinates. Discord Nitro raises upload limits but does not change EXIF handling. Because there is no formal privacy guarantee, the only reliable approach is to{" "}
             <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
-              strip EXIF before uploading
+              strip EXIF yourself before uploading with SammaPix
             </Link>
-            .
+            {" "}(free, runs in your browser, no upload).
           </p>
         </div>
 

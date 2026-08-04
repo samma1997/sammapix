@@ -216,17 +216,14 @@ export default function DoesTelegramStripExifMetadataPage() {
       >
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
-            TL;DR — does Telegram strip EXIF?
+            Quick Answer
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            <strong>Photo mode (default photo picker):</strong> Yes, EXIF stripped during compression.{" "}
-            <strong>File mode (send as document):</strong> No, full EXIF preserved including GPS.{" "}
-            <strong>Cloud chats (default):</strong> Photos stored on Telegram&apos;s servers.{" "}
-            <strong>Secret Chats:</strong> End-to-end encrypted, not stored. The safe habit is to{" "}
+            It depends on the send mode. Telegram strips EXIF when you use the default photo picker (compressed image path). Send the same photo as a file or document and all metadata — including GPS coordinates — is preserved intact; Telegram&apos;s own public bug tracker (bug #19150) documents this distinction. Cloud chats store photos on Telegram&apos;s servers; only Secret Chats are end-to-end encrypted with no server retention. To avoid relying on the right mode choice,{" "}
             <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
-              strip EXIF before sending
+              strip EXIF before sending with SammaPix
             </Link>
-            {" "}so the mode choice does not matter.
+            {" "}(free, browser, no upload).
           </p>
         </div>
 

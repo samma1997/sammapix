@@ -190,6 +190,21 @@ export default function RemoveExifProtectPrivacyPage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To remove EXIF data from a photo and protect your privacy, use{" "}
+            <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix EXIF tool
+            </Link>
+            : drop the photo in your browser, inspect every metadata tag (GPS, camera model, timestamps), and remove all or selected tags with one click — the file never leaves your device. EXIF data embedded in your photos can expose your precise home address, the camera you own, and the exact time you were somewhere; stripping it before sharing online is the only reliable way to prevent this.
+          </p>
+        </div>
+
         {/* Privacy warning callout */}
         <div className="flex items-start gap-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md px-4 py-4 mb-8">
           <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-500 mt-0.5 shrink-0" strokeWidth={1.5} />

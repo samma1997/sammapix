@@ -195,6 +195,21 @@ export default function HowToOpenTarGzPage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            A .tar.gz file is a compressed archive that macOS cannot extract natively if it contains many nested folders. The fastest way to open one online without installing software is{" "}
+            <Link href="/tools/tar-gz" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix tar.gz Opener
+            </Link>
+            : drop the file in your browser, browse the contents, and download individual files or the full extraction — no upload to a server, everything runs locally. On macOS, double-clicking a .tar.gz in Finder also works for simple archives using the built-in Archive Utility.
+          </p>
+        </div>
+
         <h2 id="what-is-targz" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           What a tar.gz file actually is
         </h2>

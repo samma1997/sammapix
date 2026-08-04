@@ -187,12 +187,14 @@ export default function DoesRedditStripExifMetadataPage() {
       >
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
-            TL;DR — does Reddit strip EXIF?
+            Quick Answer
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            <strong>Yes in 2026 standard cases.</strong> Reddit re-encodes uploaded images and strips GPS, camera model, timestamps.{" "}
-            <strong>But Reddit has a documented history of bugs</strong> — HackerOne #1069039 (2020) leaked GPS via HEIC-to-PNG conversion.{" "}
-            <strong>Reddit also retains the original upload internally.</strong> Only the CDN-served version is clean. Strip EXIF yourself before posting — the only path that does not depend on platform behavior staying correct.
+            Yes, Reddit strips EXIF (including GPS) from images in standard 2026 uploads by re-encoding them on its CDN. However, Reddit had a documented vulnerability (HackerOne #1069039, 2020) where HEIC files uploaded via Safari on macOS leaked GPS coordinates through the PNG conversion step. Reddit also retains your original upload internally — only the public-facing CDN copy is metadata-clean. Strip EXIF before posting with{" "}
+            <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix EXIF tool
+            </Link>
+            {" "}to ensure your data is removed regardless of future platform bugs (free, browser, no upload).
           </p>
         </div>
 

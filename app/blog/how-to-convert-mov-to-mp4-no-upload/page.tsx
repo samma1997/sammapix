@@ -194,6 +194,21 @@ export default function MovToMp4Article() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To convert MOV to MP4 without uploading your video, use{" "}
+            <Link href="/tools/convert-video" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix Video Converter
+            </Link>
+            : drop the .mov file in your browser and it converts locally using WebCodecs — the file never leaves your device. MOV is Apple&apos;s container format and plays perfectly on Mac but often fails on Windows, Android, and most upload forms that require MP4. The conversion takes seconds for short clips.
+          </p>
+        </div>
+
         <h2 id="the-mov-that-wont-play" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">The MOV that would not play</h2>
         <p className="text-[15px] leading-7 text-gray-700 dark:text-[#B5B5B5] mb-4">
           You film something on your iPhone, AirDrop or send it to someone, and they reply: &ldquo;it will not open.&rdquo;

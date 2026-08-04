@@ -238,6 +238,20 @@ export default function HowToOpenRarFilesOnMacPage() {
         }
       >
 
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            macOS does not support RAR natively — double-clicking a .rar file will do nothing or show an error. The fastest no-install solution is{" "}
+            <Link href="/tools/unrar" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix RAR Opener
+            </Link>
+            : drop the file in your browser, preview contents, and download files or a ZIP — no software installation needed, supports RAR4 and RAR5. If you open RAR files regularly, The Unarchiver (free, Mac App Store) integrates with Finder and handles multi-volume archives.
+          </p>
+        </div>
+
         {/* ── Section 1: Why Mac cannot open RAR ─────────────────────────── */}
 
         <h2 id="why-mac-cant-open-rar" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">

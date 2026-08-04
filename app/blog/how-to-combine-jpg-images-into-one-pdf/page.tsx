@@ -190,6 +190,21 @@ export default function HowToCombineJpgIntoPdfPage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To combine JPG images into one PDF without uploading them, use{" "}
+            <Link href="/tools/jpg-to-pdf" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix JPG to PDF
+            </Link>
+            : add your images, drag to reorder them, and download a single PDF — all processing runs locally in your browser. This is the fastest option for combining scanned documents, receipts, or photos into a single file for email or submission forms.
+          </p>
+        </div>
+
         <h2 id="why-combine" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why combine JPGs into one PDF
         </h2>

@@ -207,6 +207,20 @@ export default function HowToCreateZipOnlinePage() {
         }
       >
 
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To create a ZIP file online without uploading your files to a server, use{" "}
+            <Link href="/tools/zip-creator" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix ZIP Creator
+            </Link>
+            : add multiple files in your browser, and the ZIP is assembled locally on your device — nothing leaves your machine. On macOS, right-clicking selected files in Finder and choosing &quot;Compress&quot; also creates a ZIP instantly with no software needed.
+          </p>
+        </div>
+
         {/* ── Section 1 ─────────────────────────────────────────────────── */}
         <h2 id="why-zip" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why create a ZIP file (and why in the browser)
