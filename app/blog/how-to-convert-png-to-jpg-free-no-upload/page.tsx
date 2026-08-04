@@ -192,6 +192,21 @@ export default function HowToConvertPngToJpgPage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To convert PNG to JPG for free without uploading your image, use{" "}
+            <Link href="/tools/png-to-jpg" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix PNG to JPG
+            </Link>
+            : drop the file in your browser and the conversion runs locally — nothing leaves your device. PNG files are lossless and typically 5-10x larger than the equivalent JPG photo; converting saves storage and speeds up email and web uploads. Quality is adjustable so you control the size/quality tradeoff.
+          </p>
+        </div>
+
         <h2 id="why-convert" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why convert PNG to JPG (and the cost)
         </h2>

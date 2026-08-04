@@ -180,6 +180,21 @@ export default function HowToTranscribeVideoPage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To transcribe a video and generate subtitles for free, use{" "}
+            <Link href="/tools/transcribe" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix Transcribe
+            </Link>
+            : upload a video or audio file and get a full transcript plus SRT subtitle file in minutes, powered by Whisper AI. Most social video is watched on mute, so subtitles directly improve reach — transcribing manually takes 4-6 minutes of typing per minute of audio, making an automated tool essential for any video longer than 30 seconds.
+          </p>
+        </div>
+
         <h2 id="why" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why you need a transcript and subtitles
         </h2>

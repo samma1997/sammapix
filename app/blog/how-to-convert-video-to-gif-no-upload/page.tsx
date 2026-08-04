@@ -211,6 +211,21 @@ export default function VideoToGifArticle() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To convert a video clip to GIF without uploading, use{" "}
+            <Link href="/tools/video-to-gif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix Video to GIF
+            </Link>
+            : drop an MP4 or MOV, select the clip range and frame rate, and the GIF is generated locally in your browser. GIFs work best for short loops under 5 seconds at 15fps or less — beyond that, file size grows fast and MP4 is a better choice for most platforms.
+          </p>
+        </div>
+
         <h2 id="the-loop-you-want" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           The three-second loop you want to share
         </h2>

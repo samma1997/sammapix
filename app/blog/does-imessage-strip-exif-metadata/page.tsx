@@ -187,12 +187,12 @@ export default function DoesImessageStripExifMetadataPage() {
       >
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
-            TL;DR — does iMessage strip EXIF?
+            Quick Answer
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            <strong>No.</strong> iMessage preserves full EXIF including GPS. Three fixes: <strong>(1)</strong> take the photo inside Messages (the small in-app camera strips metadata), <strong>(2)</strong> use iOS 13+ share sheet &rarr; Options &rarr; Location off, or <strong>(3)</strong>{" "}
-            <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">strip EXIF yourself first</Link>
-            {" "}— the only fix that works the same on every app, every device.
+            No. iMessage does not strip EXIF metadata — every photo you send carries full GPS coordinates, camera model, and timestamps to the recipient. Apple has never documented this behavior in any privacy whitepaper. Three workarounds: take the photo using the small in-app camera inside Messages (those are stripped), use the iOS 13+ share-sheet Location toggle, or{" "}
+            <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">strip EXIF with SammaPix</Link>
+            {" "}before sending — the only approach that works identically on every app and device (free, browser, no upload).
           </p>
         </div>
 

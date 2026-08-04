@@ -209,6 +209,21 @@ export default function IphoneHeicToJpgGuidePage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To convert iPhone HEIC photos to JPG without installing software, use{" "}
+            <Link href="/tools/heic" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix HEIC to JPG
+            </Link>
+            : drop the .heic files in your browser and download JPGs instantly — conversion runs locally, nothing is uploaded. HEIC (High Efficiency Image Container) is Apple&apos;s default format since iOS 11; it produces photos roughly half the size of JPG at the same quality, but most Windows software, older apps, and many upload forms do not support it.
+          </p>
+        </div>
+
         {/* Article body content */}
 
 

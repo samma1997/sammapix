@@ -216,17 +216,14 @@ export default function DoesSignalStripExifMetadataPage() {
       >
         <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
           <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
-            TL;DR — does Signal strip EXIF?
+            Quick Answer
           </p>
           <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
-            <strong>Yes for images, automatically</strong> — Signal is the only major messenger that does this by default.{" "}
-            <strong>No for files</strong> — sending a photo via the file attachment menu preserves all EXIF.{" "}
-            <strong>No server retention</strong> — unlike Instagram/Facebook/Discord, Signal does not keep the original on its servers.{" "}
-            <strong>One known bug</strong> (Signal-Android #12075): the app may add new EXIF tags during processing. The safe habit:{" "}
+            Yes — Signal automatically strips all EXIF metadata from photos before sending, and unlike Instagram or Discord it does not retain the original on its servers. The exception is the file attachment path: if you send a photo via the paperclip menu instead of the image picker, the full original file travels intact. A known Android bug (Signal-Android #12075) may also add new EXIF tags during processing. For guaranteed metadata removal, strip before sending with{" "}
             <Link href="/tools/exif" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
-              strip EXIF before sending
+              SammaPix EXIF tool
             </Link>
-            , every time, every app.
+            {" "}(free, browser, no upload) — it takes 30 seconds and removes the dependency on Signal&apos;s behavior.
           </p>
         </div>
 

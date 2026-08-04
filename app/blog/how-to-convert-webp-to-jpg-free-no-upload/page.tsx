@@ -191,6 +191,21 @@ export default function HowToConvertWebpToJpgPage() {
           </div>
         }
       >
+
+        {/* ── Quick Answer ──────────────────────────────────────────────── */}
+        <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1E1E1E] border-l-4 border-[#6366F1] rounded-r-md">
+          <p className="text-xs font-semibold text-[#6366F1] mb-1.5 uppercase tracking-wide">
+            Quick Answer
+          </p>
+          <p className="text-sm text-gray-700 dark:text-[#A3A3A3] leading-relaxed">
+            To convert WebP to JPG free without uploading, use{" "}
+            <Link href="/tools/webp-to-jpg" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+              SammaPix WebP to JPG
+            </Link>
+            : drop the .webp file in your browser and download a JPG instantly — conversion runs locally, no file leaves your device. WebP is a modern format (25-35% smaller than JPG) used by Google and most CDNs, which is why downloaded images often end in .webp instead of .jpg and refuse to open in older software.
+          </p>
+        </div>
+
         <h2 id="why-webp" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           Why your downloads are WebP now
         </h2>
