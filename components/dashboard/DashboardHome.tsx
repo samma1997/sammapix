@@ -1280,17 +1280,29 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   }
 
   async function handleUpgradeClick() {
+    if (checkoutLoading) return;
     setCheckoutLoading(true);
     try {
-      const res = await fetch("/api/checkout", { method: "POST", credentials: "include" });
-      const data = (await res.json()) as { url?: string; error?: string };
-      if (data.url) {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: "monthly" }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
+      if (res.ok && data.url) {
         window.location.href = data.url;
-      } else {
-        router.push("/dashboard/upgrade");
+        return;
       }
-    } catch {
-      router.push("/dashboard/upgrade");
+      // Any failure (no url / error / non-JSON): never leave the user stuck.
+      // Hard navigation to the upgrade page (more reliable than router.push here).
+      // eslint-disable-next-line no-console
+      console.error("[upgrade] checkout unavailable:", res.status, data?.error);
+      window.location.href = "/dashboard/upgrade";
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("[upgrade] checkout error:", err);
+      window.location.href = "/dashboard/upgrade";
     } finally {
       setCheckoutLoading(false);
     }
