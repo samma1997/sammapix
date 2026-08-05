@@ -1690,14 +1690,17 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Upgrade to Pro</h3>
                 <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Unlimited AI, no ads, ZIP downloads. $9/mo.</p>
               </div>
-              <button
-                onClick={handleUpgradeClick}
-                disabled={checkoutLoading}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 disabled:opacity-60 transition-colors shrink-0"
+              {/* Real link (not a JS-only button): navigates reliably even if
+                  client JS/hydration hiccups on mobile. The upgrade page
+                  auto-starts the Stripe checkout from ?plan=monthly. */}
+              <Link
+                href="/dashboard/upgrade?plan=monthly"
+                prefetch={false}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 transition-colors shrink-0"
               >
-                {checkoutLoading ? "Redirecting..." : "Upgrade to Pro"}
-                {!checkoutLoading && <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />}
-              </button>
+                Upgrade to Pro
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </Link>
             </div>
           </div>
         </section>
