@@ -7,7 +7,11 @@ import { getConsent, setConsent, type ConsentState } from "@/lib/consent";
 // Read env vars at module level (baked in at build time)
 const GOOGLE_ADS_ID = (process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "").trim();
 const GA4_ID = (process.env.NEXT_PUBLIC_GA4_ID ?? "").trim();
-const ADSENSE_PUB_ID = (process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim();
+// Default al pub id reale SammaPix: prima era gated su NEXT_PUBLIC_ADSENSE_PUB_ID
+// che in prod NON era settata → lo script AdSense non partiva MAI → zero ads/incassi
+// (le AdUnit erano montate ma la libreria non si caricava). Ora si carica sempre
+// (dopo consenso). Stesso fallback di components/ads/AdUnit.tsx.
+const ADSENSE_PUB_ID = ((process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim() || "ca-pub-4145672488138909");
 const CLARITY_PROJECT_ID = (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? "").trim();
 // Cloudflare Google tag gateway: serve gtag.js + collect from first-party path
 // (bypass ad-blockers). When set, gtag loads via /<path>/gtag/js + transport_url.
