@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -76,6 +78,7 @@ export default function JpgToPdfClient() {
   const [resultSize, setResultSize] = useState(0);
   const [showProBanner, setShowProBanner] = useState(false);
   const [buildError, setBuildError] = useState<string | null>(null);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragItem = useRef<number | null>(null);
@@ -295,7 +298,12 @@ export default function JpgToPdfClient() {
     a.download = `sammapix-merged-${images.length}-pages.pdf`;
     a.click();
     URL.revokeObjectURL(url);
-  }, [resultBlob, images.length]);
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
+  }, [resultBlob, images.length, isPro]);
 
   // ── Reset ───────────────────────────────────────────────────────────────────
 
@@ -622,6 +630,10 @@ export default function JpgToPdfClient() {
             </button>
           </div>
         </div>
+      )}
+
+      {successUpsellOpen && (
+        <ProUpsellModal open={successUpsellOpen} onClose={() => setSuccessUpsellOpen(false)} trigger="success" />
       )}
     </div>
   );

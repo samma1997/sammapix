@@ -16,6 +16,7 @@ import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -83,6 +84,7 @@ export default function JxlConverterClient() {
   const [progress, setProgress] = useState(0);
   const [showProBanner, setShowProBanner] = useState(false);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -214,8 +216,13 @@ export default function JxlConverterClient() {
       const ext = getOutputExt(direction, outputFormat);
       const baseName = item.file.name.replace(/\.[^.]+$/, "");
       saveAs(item.resultBlob, `${baseName}.${ext}`);
+      const dlCount = incrementDownloadCount();
+      if (shouldShowSuccessUpsell(isPro, dlCount)) {
+        markSuccessUpsellShown();
+        setSuccessUpsellOpen(true);
+      }
     },
-    [direction, outputFormat]
+    [direction, outputFormat, isPro]
   );
 
   const handleDownloadAll = useCallback(async () => {
@@ -271,6 +278,9 @@ export default function JxlConverterClient() {
         onClose={() => setZipUpsellOpen(false)}
         trigger="zip"
       />
+      {successUpsellOpen && (
+        <ProUpsellModal open={successUpsellOpen} onClose={() => setSuccessUpsellOpen(false)} trigger="success" />
+      )}
 
       {/* Direction toggle */}
       <div className="flex items-center justify-center gap-2 mb-6">
