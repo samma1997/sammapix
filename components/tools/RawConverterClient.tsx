@@ -19,6 +19,7 @@ import { useSession } from "next-auth/react";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { trackEvent } from "@/lib/analytics";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -333,6 +334,7 @@ export default function RawConverterClient() {
   const [showProBanner, setShowProBanner] = useState(false);
   const [showZipUpsell, setShowZipUpsell] = useState(false);
   const [showFilesUpsell, setShowFilesUpsell] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -460,8 +462,13 @@ export default function RawConverterClient() {
         file_size: file.outputBlob.size,
       });
       saveAs(file.outputBlob, outputFileName(file.original, file.outputFormat));
+      const dlCount = incrementDownloadCount();
+      if (shouldShowSuccessUpsell(isPro, dlCount)) {
+        markSuccessUpsellShown();
+        setSuccessUpsellOpen(true);
+      }
     },
-    []
+    [isPro]
   );
 
   const handleDownloadAll = useCallback(async () => {
@@ -520,6 +527,9 @@ export default function RawConverterClient() {
         filesDropped={files.length}
         freeLimit={MAX_FILES_FREE}
       />
+      {successUpsellOpen && (
+        <ProUpsellModal open={successUpsellOpen} onClose={() => setSuccessUpsellOpen(false)} trigger="success" />
+      )}
 
       {/* ── Idle dropzone ── */}
       {uiState === "idle" && (

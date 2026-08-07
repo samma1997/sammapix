@@ -15,6 +15,7 @@ import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -113,6 +114,7 @@ export default function SvgToPngClient() {
   const [showProBanner, setShowProBanner] = useState(false);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
   const [sizeWarning, setSizeWarning] = useState<string | null>(null);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -294,7 +296,12 @@ export default function SvgToPngClient() {
     if (!item.resultBlob) return;
     const baseName = item.file.name.replace(/\.[^.]+$/, "");
     saveAs(item.resultBlob, `${baseName}.png`);
-  }, []);
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
+  }, [isPro]);
 
   const handleDownloadAll = useCallback(async () => {
     const done = items.filter((i) => i.status === "done" && i.resultBlob);
@@ -344,6 +351,9 @@ export default function SvgToPngClient() {
         onClose={() => setZipUpsellOpen(false)}
         trigger="zip"
       />
+      {successUpsellOpen && (
+        <ProUpsellModal open={successUpsellOpen} onClose={() => setSuccessUpsellOpen(false)} trigger="success" />
+      )}
 
       {/* Dropzone */}
       {uiState === "idle" && (

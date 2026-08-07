@@ -15,6 +15,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Constants ─────────────────────────────────────────────────────────────
 const MAX_FILES_FREE = 20;
@@ -128,6 +129,7 @@ export default function WebpToPngClient() {
   const [progress, setProgress] = useState(0);
   const [showProBanner, setShowProBanner] = useState(false);
   const [zipUpsellOpen, setZipUpsellOpen] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   // Ref for closure-safe unmount cleanup
@@ -230,6 +232,11 @@ export default function WebpToPngClient() {
   const downloadSingle = (it: ConvertItem) => {
     if (!it.resultBlob) return;
     saveAs(it.resultBlob, replaceExt(it.file.name, "png"));
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
   };
 
   const downloadAll = async () => {
@@ -477,6 +484,9 @@ export default function WebpToPngClient() {
             trigger="zip"
             freeLimit={5}
           />
+        )}
+        {successUpsellOpen && (
+          <ProUpsellModal open={successUpsellOpen} onClose={() => setSuccessUpsellOpen(false)} trigger="success" />
         )}
       </div>
     </section>

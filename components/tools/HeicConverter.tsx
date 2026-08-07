@@ -19,6 +19,7 @@ import { useSession } from "next-auth/react";
 import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { trackEvent } from "@/lib/analytics";
+import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -371,6 +372,7 @@ export default function HeicConverter() {
   const [progressMessage, setProgressMessage] = useState("");
   const [showProBanner, setShowProBanner] = useState(false);
   const [showZipUpsell, setShowZipUpsell] = useState(false);
+  const [successUpsellOpen, setSuccessUpsellOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -532,7 +534,12 @@ export default function HeicConverter() {
     const blob = file.compressedBlob ?? file.outputBlob;
     if (!blob) return;
     saveAs(blob, outputFileName(file.original, file.outputFormat));
-  }, []);
+    const dlCount = incrementDownloadCount();
+    if (shouldShowSuccessUpsell(isPro, dlCount)) {
+      markSuccessUpsellShown();
+      setSuccessUpsellOpen(true);
+    }
+  }, [isPro]);
 
   const handleDownloadAll = useCallback(async () => {
     if (!isPro) {
@@ -574,6 +581,9 @@ export default function HeicConverter() {
         onClose={() => setShowZipUpsell(false)}
         trigger="zip"
       />
+      {successUpsellOpen && (
+        <ProUpsellModal open={successUpsellOpen} onClose={() => setSuccessUpsellOpen(false)} trigger="success" />
+      )}
 
       {/* ── Idle dropzone ── */}
       {uiState === "idle" && (
