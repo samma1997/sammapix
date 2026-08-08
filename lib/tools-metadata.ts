@@ -47,6 +47,15 @@ export const TOOLS: Record<string, ToolMeta> = {
       "compress-images-without-losing-quality",
     ],
   },
+  "avif-to-jpg": {
+    id: "avif-to-jpg",
+    name: "AVIF to JPG",
+    shortDesc: "Convert AVIF images to JPG",
+    slug: "/tools/avif-to-jpg",
+    category: "optimize",
+    relatedTools: ["webp-to-jpg", "png-to-jpg", "heic", "compress"],
+    relatedBlogSlugs: [],
+  },
   "webp-to-jpg": {
     id: "webp-to-jpg",
     name: "WebP to JPG",

@@ -136,6 +136,7 @@ export const TOOL_SLUGS = [
   "hash-generator",
   "url-encode-decode",
   "password-generator",
+  "avif-to-jpg",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

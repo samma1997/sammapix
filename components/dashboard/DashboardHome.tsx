@@ -85,6 +85,7 @@ import {
   IconUrlEncodeDecode,
   IconPasswordGenerator,
   IconAiLabel,
+  IconAvifToJpg,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1155,6 +1156,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconAiLabel,
     category: ["AI", "Creative"],
     keywords: ["made with ai label", "ai disclosure", "eu ai act", "ai generated label", "ai watermark", "ai content label", "disclosure label", "ai transparency", "ai tag image", "eu ai act article 50"],
+  },
+  {
+    name: "AVIF to JPG",
+    slug: "avif-to-jpg",
+    href: "/dashboard/tools/avif-to-jpg",
+    tagline: "Convert AVIF to JPG in your browser — open any .avif file without software. Batch up to 20, quality control, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "Batch"],
+    Icon: IconAvifToJpg,
+    category: ["Optimize"],
+    keywords: ["avif to jpg", "open avif file", "avif converter", "convert avif", "avif to jpeg", "avif won't open", "avif compatibility", "avif image", "avif format", "avif browser"],
   },
 ];
 

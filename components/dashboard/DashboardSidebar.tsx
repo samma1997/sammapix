@@ -85,9 +85,9 @@ const LS_PERSONA_KEY = "sammapix-persona";
 
 const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
-  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "ai-label"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "ai-label", "avif-to-jpg"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator"],
+  developer: ["compress", "webp", "png-to-jpg", "avif-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator"],
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker", "ai-label"],
 };
 
@@ -125,6 +125,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "PNG to JPG", slug: "png-to-jpg", href: "/dashboard/tools/png-to-jpg", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "WebP to JPG", slug: "webp-to-jpg", href: "/dashboard/tools/webp-to-jpg", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "WebP to PNG", slug: "webp-to-png", href: "/dashboard/tools/webp-to-png", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "AVIF to JPG", slug: "avif-to-jpg", href: "/dashboard/tools/avif-to-jpg", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "SVG to PNG", slug: "svg-to-png", href: "/dashboard/tools/svg-to-png", icon: <FileImage className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "JXL Converter", slug: "jxl", href: "/dashboard/tools/jxl", icon: <Sparkles className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "JPG to PDF", slug: "jpg-to-pdf", href: "/dashboard/tools/jpg-to-pdf", icon: <FileOutput className="h-4 w-4" strokeWidth={1.5} /> },
@@ -222,7 +223,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "Convert",
     icon: <RefreshCw className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["heic", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "svg-to-png", "jxl", "jpg-to-pdf", "gif-to-mp4", "image-to-base64", "raw-converter", "pdf-to-image"],
+    slugs: ["heic", "webp", "png-to-jpg", "webp-to-jpg", "webp-to-png", "avif-to-jpg", "svg-to-png", "jxl", "jpg-to-pdf", "gif-to-mp4", "image-to-base64", "raw-converter", "pdf-to-image"],
   },
   {
     label: "PDF",
