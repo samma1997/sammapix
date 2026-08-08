@@ -78,6 +78,7 @@ import {
   IconUrlEncodeDecode,
   IconPasswordGenerator,
   IconAiLabel,
+  IconAvifToJpg,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1128,6 +1129,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "EU AI Act", "No upload"],
     Icon: IconAiLabel,
     category: ["AI", "Creative"],
+    isNew: true,
+  },
+  {
+    name: "AVIF to JPG",
+    href: "/tools/avif-to-jpg",
+    tagline: "Convert AVIF images to JPG in your browser — open any .avif file without software. Batch up to 20, quality control, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "Batch"],
+    Icon: IconAvifToJpg,
+    category: ["Optimize"],
     isNew: true,
   },
 ];

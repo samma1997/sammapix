@@ -3060,6 +3060,52 @@ export const IconAiLabel: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── AVIF → JPG converter icon (AVIF badge morphs to JPG badge) ───────────────
+export const IconAvifToJpg: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes avif2jpg-arrow {
+        0%, 20% { transform: translateX(-3px); opacity: 0.3; }
+        55%      { transform: translateX(3px); opacity: 1; }
+        80%      { transform: translateX(0px); opacity: 0.3; }
+        100%     { transform: translateX(-3px); opacity: 0.3; }
+      }
+      @keyframes avif2jpg-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      @keyframes avif2jpg-glow {
+        0%, 100% { opacity: 0.7; }
+        50%      { opacity: 1; }
+      }
+      .avif2jpg-arrow { animation: avif2jpg-arrow 2.4s ease-in-out infinite; }
+      .avif2jpg-badge { transform-origin: 37px 38px; animation: avif2jpg-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .avif2jpg-glow  { animation: avif2jpg-glow 2.4s ease-in-out infinite; }
+    `}</style>
+    {/* AVIF box left */}
+    <rect x="2" y="8" width="19" height="22" rx="3" fill={accent} fillOpacity="0.18" stroke={accent} strokeWidth="1.5"/>
+    <g className="avif2jpg-glow">
+      <text x="11.5" y="17" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">AVIF</text>
+    </g>
+    {/* Small image preview inside AVIF box */}
+    <circle cx="8" cy="23" r="1.8" fill={accent} fillOpacity="0.4"/>
+    <path d="M4 27 L8 23 L12 26 L16 22 L21 26" stroke={accent} strokeWidth="1.1" fill="none" strokeLinecap="round"/>
+    {/* Arrow */}
+    <g className="avif2jpg-arrow">
+      <path d="M23 19 L27 19 M25 17 L27 19 L25 21" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* JPG box right */}
+    <rect x="28" y="8" width="18" height="22" rx="3" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.5"/>
+    <text x="37" y="21" fontSize="6.5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+    {/* Compat badge */}
+    <g className="avif2jpg-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="37" y="41" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">Open</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

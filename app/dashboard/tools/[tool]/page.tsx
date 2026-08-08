@@ -81,6 +81,7 @@ import {
   IconBlurCensor,
   IconInstagramGrid,
   IconAiLabel,
+  IconAvifToJpg,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -170,6 +171,7 @@ const BlurCensorClientWrap = dynamic(() => import("@/components/tools/BlurCensor
 const RedactPdfClient = dynamic(() => import("@/components/tools/RedactPdfClient"));
 const InstagramGridSplitterClient = dynamic(() => import("@/components/tools/InstagramGridSplitterClient"));
 const AiLabelClient = dynamic(() => import("@/components/tools/AiLabelClient"));
+const AvifToJpgClient = dynamic(() => import("@/components/tools/AvifToJpgClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -260,6 +262,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "redact-pdf":             RedactPdfClient,
   "instagram-grid-splitter": InstagramGridSplitterClient,
   "ai-label":                AiLabelClient,
+  "avif-to-jpg":             AvifToJpgClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -391,6 +394,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "redact-pdf":              { Icon: IconRedactPdf,             accent: "#EF4444" },
   "instagram-grid-splitter": { Icon: IconInstagramGrid,         accent: "#EC4899" },
   "ai-label":                { Icon: IconAiLabel,               accent: "#6366F1" },
+  "avif-to-jpg":             { Icon: IconAvifToJpg,             accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1313,6 +1317,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download labeled images", desc: "Click Add label. Download each image individually or grab all as a ZIP archive. Original format and resolution preserved." },
     ],
     proTip: { text: "For social media, use bottom-right position with solid style — visible but non-intrusive. Pair with Watermark for logo overlays.", linkLabel: "Try Watermark", linkHref: "/dashboard/tools/stampit" },
+  },
+  "avif-to-jpg": {
+    label: "AVIF to JPG",
+    tagline: "Convert AVIF to JPG in your browser — open any .avif file without software.",
+    steps: [
+      { title: "Drop your AVIF files", desc: "Add .avif files (up to 20 per batch on Free, 200 on Pro). AVIF is decoded natively by your browser — nothing is uploaded." },
+      { title: "Adjust quality and background", desc: "Set JPG quality (50–100%). For AVIF files with transparency, choose white or black background — JPG does not support an alpha channel." },
+      { title: "Download JPG files", desc: "Click Convert. Download each JPG individually or grab all as a ZIP archive." },
+    ],
+    proTip: { text: "AVIF is 40-50% smaller than JPG at the same quality. Keep AVIF for web — convert to JPG only when you need legacy app compatibility.", linkLabel: "Convert to WebP", linkHref: "/dashboard/tools/webp" },
   },
 };
 
