@@ -12,6 +12,14 @@ export const metadata: Metadata = {
     "Add a Made with AI badge to any image in seconds, free, with no upload. Step-by-step guide covering EU AI Act Article 50 disclosure, label styles, batch export, and best practices for creators and marketers.",
   alternates: {
     canonical: `${APP_URL}/blog/how-to-add-made-with-ai-label`,
+    languages: {
+      en: `${APP_URL}/blog/how-to-add-made-with-ai-label`,
+      it: `${APP_URL}/it/blog/come-aggiungere-etichetta-ai-foto`,
+      de: `${APP_URL}/de/blog/made-with-ai-label-hinzufuegen`,
+      fr: `${APP_URL}/fr/blog/ajouter-label-made-with-ai`,
+      es: `${APP_URL}/es/blog/anadir-etiqueta-made-with-ai`,
+      "x-default": `${APP_URL}/blog/how-to-add-made-with-ai-label`,
+    },
   },
   keywords: [
     "how to add made with ai label",

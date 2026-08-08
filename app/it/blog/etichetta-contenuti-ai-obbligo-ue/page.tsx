@@ -14,7 +14,14 @@ export const metadata: Metadata = {
     "Dal 2 agosto 2026 l'Art. 50 dell'AI Act UE impone obblighi di trasparenza sui contenuti generati dall'IA. Ecco chi deve etichettare cosa, le eccezioni e come conformarsi gratis.",
   alternates: {
     canonical: URL,
-    languages: { it: URL, en: EN_URL, "x-default": `${APP_URL}/blog` },
+    languages: {
+      en: `${APP_URL}/blog/eu-ai-act-label-ai-content`,
+      it: `${APP_URL}/it/blog/etichetta-contenuti-ai-obbligo-ue`,
+      de: `${APP_URL}/de/blog/eu-ai-act-ki-inhalte-kennzeichnen`,
+      fr: `${APP_URL}/fr/blog/ai-act-etiqueter-contenu-ia`,
+      es: `${APP_URL}/es/blog/ley-ia-etiquetar-contenido-ia`,
+      "x-default": `${APP_URL}/blog/eu-ai-act-label-ai-content`,
+    },
   },
   keywords: [
     "etichetta contenuti ai obbligo",
