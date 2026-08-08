@@ -198,6 +198,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/hash-generator",
     "/tools/url-encode-decode",
     "/tools/password-generator",
+    "/tools/ai-label",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

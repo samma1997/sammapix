@@ -51,6 +51,7 @@ export const ACCEPTED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".
 //
 // Must match the folder name under `app/tools/<slug>/page.tsx`.
 export const TOOL_SLUGS = [
+  "ai-label",
   "ai-organize",
   "ai-rename",
   "alt-text",

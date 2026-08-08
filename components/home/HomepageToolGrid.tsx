@@ -80,6 +80,7 @@ import {
   IconHashGenerator,
   IconUrlEncodeDecode,
   IconPasswordGenerator,
+  IconAiLabel,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -403,6 +404,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Hash Generator", href: "/tools/hash-generator", tagline: "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or a file. 100% in your browser — no upload, no account.", accent: "#6366F1", badge: "Free", Icon: IconHashGenerator, category: "Optimize", isNew: true },
   { name: "URL Encoder / Decoder", href: "/tools/url-encode-decode", tagline: "Encode or decode URL percent-encoded text instantly in your browser. encodeURIComponent + encodeURI. No upload, no signup.", accent: "#6366F1", badge: "Free", Icon: IconUrlEncodeDecode, category: "Optimize", isNew: true },
   { name: "Password Generator", href: "/tools/password-generator", tagline: "Generate strong, random passwords using crypto.getRandomValues. Choose length, character sets, see entropy in bits. Nothing is ever sent anywhere.", accent: "#6366F1", badge: "Free", Icon: IconPasswordGenerator, category: "Optimize", isNew: true },
+  { name: "Made with AI Label", href: "/tools/ai-label", tagline: "Add a visible AI disclosure label. EU AI Act Art. 50(4) compliant. Custom text, 5 positions, 3 styles. No upload.", accent: "#6366F1", badge: "Free", Icon: IconAiLabel, category: "AI-Powered", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];

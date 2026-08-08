@@ -85,10 +85,10 @@ const LS_PERSONA_KEY = "sammapix-persona";
 
 const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
-  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor"],
+  blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "ai-label"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
   developer: ["compress", "webp", "png-to-jpg", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator"],
-  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker"],
+  social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker", "ai-label"],
 };
 
 // ─── Tool definitions ─────────────────────────────────────────────────────────
@@ -190,6 +190,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "AI Photo Sort", slug: "smartsort", href: "/dashboard/tools/smartsort", icon: <SortAsc className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "AI Organize", slug: "ai-organize", href: "/dashboard/tools/ai-organize", icon: <Sparkles className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Image to Text", slug: "image-to-text", href: "/dashboard/tools/image-to-text", icon: <ScanText className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Made with AI Label", slug: "ai-label", href: "/dashboard/tools/ai-label", icon: <Sparkles className="h-4 w-4" strokeWidth={1.5} /> },
 
   // ── Organize & Privacy ─────────────────────────────────────────────────────
   { name: "EXIF Viewer", slug: "exif", href: "/dashboard/tools/exif", icon: <ScanEye className="h-4 w-4" strokeWidth={1.5} /> },
@@ -246,7 +247,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "AI",
     icon: <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["ai-rename", "alt-text", "smartsort", "ai-organize", "image-to-text"],
+    slugs: ["ai-rename", "alt-text", "smartsort", "ai-organize", "image-to-text", "ai-label"],
   },
   {
     label: "Organize & Privacy",

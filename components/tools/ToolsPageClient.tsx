@@ -77,6 +77,7 @@ import {
   IconHashGenerator,
   IconUrlEncodeDecode,
   IconPasswordGenerator,
+  IconAiLabel,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1117,6 +1118,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "CSPRNG", "No upload"],
     Icon: IconPasswordGenerator,
     category: ["Creative", "Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Made with AI Label",
+    href: "/tools/ai-label",
+    tagline: "Add a visible AI disclosure label to images. Comply with EU AI Act Article 50(4). Custom text, 5 positions, 3 styles. Browser-based, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "EU AI Act", "No upload"],
+    Icon: IconAiLabel,
+    category: ["AI", "Creative"],
     isNew: true,
   },
 ];

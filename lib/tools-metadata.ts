@@ -945,6 +945,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["hash-generator", "url-encode-decode", "qr-code-generator"],
     relatedBlogSlugs: ["password-generator-online", "strong-password-generator"],
   },
+  "ai-label": {
+    id: "ai-label",
+    name: "Made with AI Label",
+    shortDesc: "Add an AI disclosure label to images",
+    slug: "/tools/ai-label",
+    category: "ai",
+    relatedTools: ["remove-bg", "add-text-to-image", "exif", "stampit"],
+    relatedBlogSlugs: [],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {
