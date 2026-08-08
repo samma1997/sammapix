@@ -80,6 +80,7 @@ import {
   IconRedactPdf,
   IconBlurCensor,
   IconInstagramGrid,
+  IconAiLabel,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -168,6 +169,7 @@ const PdfSplitClient = dynamic(() => import("@/components/tools/PdfSplitClient")
 const BlurCensorClientWrap = dynamic(() => import("@/components/tools/BlurCensorClientWrap"));
 const RedactPdfClient = dynamic(() => import("@/components/tools/RedactPdfClient"));
 const InstagramGridSplitterClient = dynamic(() => import("@/components/tools/InstagramGridSplitterClient"));
+const AiLabelClient = dynamic(() => import("@/components/tools/AiLabelClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -257,6 +259,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "blur-censor":            BlurCensorClientWrap,
   "redact-pdf":             RedactPdfClient,
   "instagram-grid-splitter": InstagramGridSplitterClient,
+  "ai-label":                AiLabelClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -387,6 +390,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "blur-censor":             { Icon: IconBlurCensor,            accent: "#8B5CF6" },
   "redact-pdf":              { Icon: IconRedactPdf,             accent: "#EF4444" },
   "instagram-grid-splitter": { Icon: IconInstagramGrid,         accent: "#EC4899" },
+  "ai-label":                { Icon: IconAiLabel,               accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1298,6 +1302,17 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download tiles as ZIP", desc: "Tiles are numbered in the correct posting order. Download them as a ZIP and post starting from the last tile." },
     ],
     proTip: { text: "Post tiles in reverse order (last tile first) so the grid looks correct on your profile.", linkLabel: "Photo Collage Maker", linkHref: "/dashboard/tools/collage-maker" },
+  },
+  // ── AI disclosure ──────────────────────────────────────────────────────────
+  "ai-label": {
+    label: "Made with AI Label",
+    tagline: "Add a visible AI disclosure label to images. EU AI Act Article 50(4). No upload.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG or WebP files. Up to 20 per batch on Free, 200 on Pro. Everything runs in your browser — nothing is uploaded." },
+      { title: "Customize the label", desc: "Choose text preset (Made with AI, AI-generated, AI-assisted) or type custom text. Set position, style (solid/subtle/outline), and size. A live preview updates on the first image." },
+      { title: "Download labeled images", desc: "Click Add label. Download each image individually or grab all as a ZIP archive. Original format and resolution preserved." },
+    ],
+    proTip: { text: "For social media, use bottom-right position with solid style — visible but non-intrusive. Pair with Watermark for logo overlays.", linkLabel: "Try Watermark", linkHref: "/dashboard/tools/stampit" },
   },
 };
 

@@ -84,6 +84,7 @@ import {
   IconHashGenerator,
   IconUrlEncodeDecode,
   IconPasswordGenerator,
+  IconAiLabel,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1143,6 +1144,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconPasswordGenerator,
     category: ["Optimize", "Creative"],
     keywords: ["password generator", "strong password", "random password", "secure password generator", "password maker", "generate password", "crypto password", "password entropy", "password generator no signup", "password no upload"],
+  },
+  {
+    name: "Made with AI Label",
+    slug: "ai-label",
+    href: "/dashboard/tools/ai-label",
+    tagline: "Add a visible AI disclosure label to images. EU AI Act Article 50(4) compliant. Custom text, 5 positions, 3 styles. Browser-based, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "EU AI Act", "No upload"],
+    Icon: IconAiLabel,
+    category: ["AI", "Creative"],
+    keywords: ["made with ai label", "ai disclosure", "eu ai act", "ai generated label", "ai watermark", "ai content label", "disclosure label", "ai transparency", "ai tag image", "eu ai act article 50"],
   },
 ];
 

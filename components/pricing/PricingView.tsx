@@ -64,6 +64,7 @@ import {
   IconHashGenerator,
   IconUrlEncodeDecode,
   IconPasswordGenerator,
+  IconAiLabel,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -141,6 +142,7 @@ const toolGrid = [
   { Icon: IconHashGenerator,        name: "Hash Generator",         accent: "#6366F1" },
   { Icon: IconUrlEncodeDecode,      name: "URL Encoder / Decoder",  accent: "#6366F1" },
   { Icon: IconPasswordGenerator,    name: "Password Generator",     accent: "#6366F1" },
+  { Icon: IconAiLabel,              name: "Made with AI Label",     accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

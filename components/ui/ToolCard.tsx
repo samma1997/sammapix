@@ -3020,6 +3020,46 @@ export const IconPasswordGenerator: React.FC<{ accent: string }> = ({ accent }) 
   </svg>
 );
 
+// ── Made with AI Label icon — photo frame with an "✦ AI" badge that slides in ──
+
+export const IconAiLabel: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ail-frame {
+        0%, 100% { opacity: 0.85; transform: scale(1); }
+        50%       { opacity: 1;    transform: scale(1.03); }
+      }
+      @keyframes ail-badge-in {
+        0%, 15%  { opacity: 0; transform: translateY(5px) scale(0.75); }
+        45%, 80% { opacity: 1; transform: translateY(0px) scale(1); }
+        100%     { opacity: 0; transform: translateY(5px) scale(0.75); }
+      }
+      @keyframes ail-sparkle {
+        0%, 100% { opacity: 0.3; transform: scale(0.6); }
+        50%       { opacity: 1;   transform: scale(1); }
+      }
+      .ail-frame   { transform-origin: 20px 20px; animation: ail-frame   2.4s ease-in-out infinite; }
+      .ail-badge   { transform-origin: 30px 38px; animation: ail-badge-in 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ail-spark   { transform-origin: 42px 10px; animation: ail-sparkle  1.8s ease-in-out 0.3s infinite; }
+    `}</style>
+    {/* Photo frame */}
+    <g className="ail-frame">
+      <rect x="4" y="6" width="32" height="26" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <circle cx="11" cy="13" r="2.5" fill={accent} fillOpacity="0.45"/>
+      <path d="M4 24 L12 17 L18 21 L24 16 L36 23 L36 32 L4 32Z" fill={accent} fillOpacity="0.18"/>
+    </g>
+    {/* AI disclosure pill badge sliding in */}
+    <g className="ail-badge" style={{ opacity: 0 }}>
+      <rect x="8" y="34" width="28" height="10" rx="5" fill={accent}/>
+      <text x="22" y="41.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">✦ AI</text>
+    </g>
+    {/* Sparkle top-right */}
+    <g className="ail-spark">
+      <path d="M42 8 L43 11 L46 12 L43 13 L42 16 L41 13 L38 12 L41 11 Z" fill={accent} fillOpacity="0.7"/>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
