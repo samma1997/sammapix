@@ -111,7 +111,7 @@ export default async function RootLayout({
   // Italian SEO section (/it) must render <html lang="it"> for correct
   // hreflang signalling and accessibility. Pathname injected by middleware.
   const pathname = headersList.get("x-sp-pathname") || "";
-  const htmlLang = pathname === "/it" || pathname.startsWith("/it/") ? "it" : "en";
+  const htmlLang = (pathname.match(/^\/(it|de|fr|es)(\/|$)/)?.[1]) || "en";
   // Paese visitatore (iniettato dal middleware) → il banner cookie decide se
   // richiedere consenso (UE/UK/CH) o caricare le ads subito (resto del mondo).
   const country = headersList.get("x-sp-country") || "";
