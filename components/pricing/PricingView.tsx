@@ -66,6 +66,7 @@ import {
   IconPasswordGenerator,
   IconAiLabel,
   IconAvifToJpg,
+  IconConvertToAvif,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -145,6 +146,7 @@ const toolGrid = [
   { Icon: IconPasswordGenerator,    name: "Password Generator",     accent: "#6366F1" },
   { Icon: IconAiLabel,              name: "Made with AI Label",     accent: "#6366F1" },
   { Icon: IconAvifToJpg,           name: "AVIF to JPG",            accent: "#6366F1" },
+  { Icon: IconConvertToAvif,      name: "Convert to AVIF",        accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

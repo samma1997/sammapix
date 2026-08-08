@@ -200,6 +200,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/password-generator",
     "/tools/ai-label",
     "/tools/avif-to-jpg",
+    "/tools/convert-to-avif",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

@@ -79,6 +79,7 @@ import {
   IconPasswordGenerator,
   IconAiLabel,
   IconAvifToJpg,
+  IconConvertToAvif,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1138,6 +1139,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "No upload", "Batch"],
     Icon: IconAvifToJpg,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Convert to AVIF",
+    href: "/tools/convert-to-avif",
+    tagline: "Convert JPG, PNG, WebP to AVIF — 40-60% smaller than JPEG at the same quality. Perfect for web performance. Batch, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "Web"],
+    Icon: IconConvertToAvif,
     category: ["Optimize"],
     isNew: true,
   },
