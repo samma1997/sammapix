@@ -303,6 +303,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // EU AI Act articles in DE / FR / ES (compliance content, EU multilingual test)
+  const euLangBlog: MetadataRoute.Sitemap = [
+    ["de", "eu-ai-act-ki-inhalte-kennzeichnen"],
+    ["de", "made-with-ai-label-hinzufuegen"],
+    ["fr", "ai-act-etiqueter-contenu-ia"],
+    ["fr", "ajouter-label-made-with-ai"],
+    ["es", "ley-ia-etiquetar-contenido-ia"],
+    ["es", "anadir-etiqueta-made-with-ai"],
+  ].map(([loc, slug]) => ({
+    url: `${APP_URL}/${loc}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   // VS comparison pages (12 total)
   const vsPages: MetadataRoute.Sitemap = [
     "/vs/tinypng",
@@ -468,6 +483,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...italianPages,
     ...italianCompressToLeaf,
     ...italianBlog,
+    ...euLangBlog,
     ...vsPages,
     ...blogPages,
     ...portfolioPages,

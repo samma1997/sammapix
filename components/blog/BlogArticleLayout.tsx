@@ -31,7 +31,7 @@ interface BlogArticleLayoutProps {
   heroImage?: React.ReactNode;
   ctaBlock?: React.ReactNode;
   /** "it" renders the Italian blog shell (/it/blog base, localized labels, no EN related). Default "en". */
-  locale?: "en" | "it";
+  locale?: "en" | "it" | "de" | "fr" | "es";
   children: React.ReactNode;
 }
 
@@ -52,7 +52,7 @@ export default function BlogArticleLayout({
 }: BlogArticleLayoutProps) {
   const articleRef = useRef<HTMLDivElement>(null);
   const isIt = locale === "it";
-  const blogBase = isIt ? "/it/blog" : "/blog";
+  const blogBase = locale === "en" ? "/blog" : `/${locale}/blog`;
   const articleUrl = `https://www.sammapix.com${blogBase}/${slug}`;
   const t = {
     back: isIt ? "Torna al blog" : "Back to Blog",
@@ -106,7 +106,7 @@ export default function BlogArticleLayout({
               {heroImage && <div className="my-8">{heroImage}</div>}
 
               {/* Text-to-Speech bar */}
-              <TextToSpeech slug={slug} articleRef={articleRef} locale={locale} />
+              <TextToSpeech slug={slug} articleRef={articleRef} locale={locale === "it" ? "it" : "en"} />
 
               {/* TOC - mobile only */}
               <div className="xl:hidden mb-8">
