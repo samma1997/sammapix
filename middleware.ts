@@ -379,6 +379,10 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
     // <html lang> = "it" on the /it Italian section).
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-sp-pathname", pathname);
+    // Paese del visitatore (Cloudflare in front → cf-ipcountry; fallback Vercel).
+    // Serve al banner cookie per caricare le ads SUBITO fuori UE/UK (consenso
+    // opt-in non richiesto per legge lì) e gate solo per SEE/UK/CH.
+    requestHeaders.set("x-sp-country", request.headers.get("cf-ipcountry") || request.headers.get("x-vercel-ip-country") || "");
     const response = NextResponse.next({ request: { headers: requestHeaders } });
     // Add anti-scraping headers to every response
     response.headers.set("X-Robots-Tag", "noarchive");

@@ -112,6 +112,9 @@ export default async function RootLayout({
   // hreflang signalling and accessibility. Pathname injected by middleware.
   const pathname = headersList.get("x-sp-pathname") || "";
   const htmlLang = pathname === "/it" || pathname.startsWith("/it/") ? "it" : "en";
+  // Paese visitatore (iniettato dal middleware) → il banner cookie decide se
+  // richiedere consenso (UE/UK/CH) o caricare le ads subito (resto del mondo).
+  const country = headersList.get("x-sp-country") || "";
 
   if (isGrowthSubdomain) {
     return (
@@ -154,7 +157,7 @@ export default async function RootLayout({
         <Providers>
           <LayoutShell>{children}</LayoutShell>
           {/* Tracking scripts are loaded by CookieConsent after user consent */}
-          <CookieConsent />
+          <CookieConsent country={country} />
           <AntiCopy />
           <CrossToolToast />
           <PowerUserUpgradeTrigger />

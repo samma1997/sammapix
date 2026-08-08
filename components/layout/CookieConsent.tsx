@@ -13,6 +13,14 @@ const GA4_ID = (process.env.NEXT_PUBLIC_GA4_ID ?? "").trim();
 // (dopo consenso). Stesso fallback di components/ads/AdUnit.tsx.
 const ADSENSE_PUB_ID = ((process.env.NEXT_PUBLIC_ADSENSE_PUB_ID ?? "").trim() || "ca-pub-4145672488138909");
 const CLARITY_PROJECT_ID = (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? "").trim();
+
+// Regioni dove il consenso opt-in è richiesto per legge (GDPR/ePrivacy): EEA + UK + CH.
+// Fuori da qui (India, USA, resto del mondo = grosso del traffico SammaPix) le ads/
+// analytics si caricano subito senza banner bloccante → +impression, zero rischio legale.
+const CONSENT_REQUIRED = new Set([
+  "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT",
+  "LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH",
+]);
 // Cloudflare Google tag gateway: serve gtag.js + collect from first-party path
 // (bypass ad-blockers). When set, gtag loads via /<path>/gtag/js + transport_url.
 // ⚠️ DISABILITATO il 15 maggio 2026 — il Worker Cloudflare /sxpulse rispondeva
@@ -100,10 +108,13 @@ function initClarity(projectId: string): void {
   );
 }
 
-export default function CookieConsent() {
+export default function CookieConsent({ country = "" }: { country?: string }) {
   const [consent, setConsentState] = useState<ConsentState>("pending");
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  // Serve consenso opt-in solo in UE/UK/CH. Paese sconosciuto (raro dietro Cloudflare)
+  // → trattato come fuori-UE (carica): CF popola cf-ipcountry per il traffico reale.
+  const needsConsent = CONSENT_REQUIRED.has((country || "").toUpperCase());
 
   const loadAllTracking = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -115,9 +126,16 @@ export default function CookieConsent() {
   useEffect(() => {
     setMounted(true);
     const saved = getConsent();
+    if (!needsConsent) {
+      // Fuori UE/UK/CH: nessun opt-in richiesto → carica subito (a meno di rifiuto esplicito).
+      if (saved === "rejected") { setConsentState("rejected"); return; }
+      loadAllTracking();
+      setConsentState("accepted");
+      return;
+    }
     setConsentState(saved);
     if (saved === "accepted") loadAllTracking();
-  }, [loadAllTracking]);
+  }, [loadAllTracking, needsConsent]);
 
   const handleAccept = () => {
     setConsent("accepted");
