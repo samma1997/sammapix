@@ -82,6 +82,7 @@ import {
   IconInstagramGrid,
   IconAiLabel,
   IconAvifToJpg,
+  IconConvertToAvif,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -172,6 +173,7 @@ const RedactPdfClient = dynamic(() => import("@/components/tools/RedactPdfClient
 const InstagramGridSplitterClient = dynamic(() => import("@/components/tools/InstagramGridSplitterClient"));
 const AiLabelClient = dynamic(() => import("@/components/tools/AiLabelClient"));
 const AvifToJpgClient = dynamic(() => import("@/components/tools/AvifToJpgClient"));
+const ConvertToAvifClient = dynamic(() => import("@/components/tools/ConvertToAvifClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -263,6 +265,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "instagram-grid-splitter": InstagramGridSplitterClient,
   "ai-label":                AiLabelClient,
   "avif-to-jpg":             AvifToJpgClient,
+  "convert-to-avif":         ConvertToAvifClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -395,6 +398,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "instagram-grid-splitter": { Icon: IconInstagramGrid,         accent: "#EC4899" },
   "ai-label":                { Icon: IconAiLabel,               accent: "#6366F1" },
   "avif-to-jpg":             { Icon: IconAvifToJpg,             accent: "#6366F1" },
+  "convert-to-avif":         { Icon: IconConvertToAvif,         accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1327,6 +1331,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download JPG files", desc: "Click Convert. Download each JPG individually or grab all as a ZIP archive." },
     ],
     proTip: { text: "AVIF is 40-50% smaller than JPG at the same quality. Keep AVIF for web — convert to JPG only when you need legacy app compatibility.", linkLabel: "Convert to WebP", linkHref: "/dashboard/tools/webp" },
+  },
+  "convert-to-avif": {
+    label: "Convert to AVIF",
+    tagline: "Convert JPG, PNG, WebP to AVIF — 40-60% smaller than JPEG at the same quality.",
+    steps: [
+      { title: "Drop your images", desc: "Add JPG, PNG, or WebP files (up to 20 per batch on Free, 200 on Pro). All encoding happens in your browser — nothing is uploaded." },
+      { title: "Set quality", desc: "Use the quality slider (10–90%). The default 50% already produces excellent results — AVIF at 50% matches JPEG at 85% while being 3-4x smaller." },
+      { title: "Download AVIF files", desc: "Click Convert. Download each AVIF individually or grab all as a ZIP archive. Use them directly on your website." },
+    ],
+    proTip: { text: "AVIF supports transparency (alpha channel) — transparent PNGs convert without losing their background. Try quality 50 for the best size/quality balance.", linkLabel: "Compare formats", linkHref: "/dashboard/tools/webp" },
   },
 };
 

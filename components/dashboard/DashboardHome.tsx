@@ -86,6 +86,7 @@ import {
   IconPasswordGenerator,
   IconAiLabel,
   IconAvifToJpg,
+  IconConvertToAvif,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1167,6 +1168,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconAvifToJpg,
     category: ["Optimize"],
     keywords: ["avif to jpg", "open avif file", "avif converter", "convert avif", "avif to jpeg", "avif won't open", "avif compatibility", "avif image", "avif format", "avif browser"],
+  },
+  {
+    name: "Convert to AVIF",
+    slug: "convert-to-avif",
+    href: "/dashboard/tools/convert-to-avif",
+    tagline: "Convert JPG, PNG, WebP to AVIF — 40-60% smaller than JPEG at the same quality. Better Core Web Vitals, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "Web"],
+    Icon: IconConvertToAvif,
+    category: ["Optimize"],
+    keywords: ["convert to avif", "jpg to avif", "png to avif", "webp to avif", "avif converter", "make images smaller avif", "avif format", "avif web", "image to avif", "avif compression"],
   },
 ];
 

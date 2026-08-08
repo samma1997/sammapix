@@ -56,6 +56,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["webp-to-jpg", "png-to-jpg", "heic", "compress"],
     relatedBlogSlugs: [],
   },
+  "convert-to-avif": {
+    id: "convert-to-avif",
+    name: "Convert to AVIF",
+    shortDesc: "Convert images to AVIF, smaller for web",
+    slug: "/tools/convert-to-avif",
+    category: "optimize",
+    relatedTools: ["avif-to-jpg", "webp", "compress", "png-to-jpg"],
+    relatedBlogSlugs: [],
+  },
   "webp-to-jpg": {
     id: "webp-to-jpg",
     name: "WebP to JPG",

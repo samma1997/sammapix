@@ -3106,6 +3106,53 @@ export const IconAvifToJpg: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── JPG/PNG badge shrinking into small AVIF badge with down-size arrow ────────
+export const IconConvertToAvif: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes c2avif-shrink {
+        0%, 20%  { transform: scale(1); opacity: 1; }
+        55%      { transform: scale(0.72); opacity: 0.7; }
+        75%      { transform: scale(1); opacity: 1; }
+        100%     { transform: scale(1); opacity: 1; }
+      }
+      @keyframes c2avif-arrow {
+        0%, 20%  { transform: translateY(-2px); opacity: 0.3; }
+        55%      { transform: translateY(3px); opacity: 1; }
+        80%      { transform: translateY(0px); opacity: 0.3; }
+        100%     { transform: translateY(-2px); opacity: 0.3; }
+      }
+      @keyframes c2avif-badge {
+        0%, 45%  { opacity: 0; transform: scale(0.8); }
+        65%, 88% { opacity: 1; transform: scale(1); }
+        98%, 100%{ opacity: 0; transform: scale(0.8); }
+      }
+      .c2avif-src  { transform-origin: 13px 12px; animation: c2avif-shrink 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .c2avif-arr  { animation: c2avif-arrow 2.8s ease-in-out infinite; }
+      .c2avif-badge { transform-origin: 37px 38px; animation: c2avif-badge 2.8s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Source box left (JPG) — shrinks */}
+    <g className="c2avif-src">
+      <rect x="2" y="4" width="22" height="20" rx="3" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.5"/>
+      <text x="13" y="16" fontSize="6" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">JPG</text>
+    </g>
+    {/* Down arrow */}
+    <g className="c2avif-arr">
+      <path d="M13 26 L13 30 M11 28 L13 30 L15 28" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* Output box right (AVIF) — destination */}
+    <rect x="26" y="8" width="20" height="22" rx="3" fill={accent} fillOpacity="0.22" stroke={accent} strokeWidth="1.5"/>
+    <text x="36" y="17" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">AVIF</text>
+    <circle cx="30" cy="24" r="1.5" fill={accent} fillOpacity="0.5"/>
+    <path d="M27 28 L31 24 L34 27 L38 23 L46 27" stroke={accent} strokeWidth="1.1" fill="none" strokeLinecap="round"/>
+    {/* Size-reduction badge */}
+    <g className="c2avif-badge" style={{ opacity: 0 }}>
+      <rect x="25" y="34" width="22" height="9" rx="4.5" fill={accent}/>
+      <text x="36" y="41" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">−50%</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
