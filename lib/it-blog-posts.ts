@@ -10,6 +10,22 @@ export interface ItPost {
 
 export const IT_POSTS: ItPost[] = [
   {
+    slug: "etichetta-contenuti-ai-obbligo-ue",
+    title: "AI Act: devi etichettare i contenuti AI? Guida 2026",
+    description:
+      "Dal 2 agosto 2026 l'AI Act UE (Art. 50) chiede una disclosure visibile sui contenuti generati dall'IA. Chi deve farlo, le eccezioni, e come conformarsi gratis nel browser.",
+    date: "8 agosto 2026",
+    tag: "Guida",
+  },
+  {
+    slug: "come-aggiungere-etichetta-ai-foto",
+    title: "Come aggiungere l'etichetta Made with AI alle foto",
+    description:
+      "Aggiungi l'etichetta Made with AI alle tue immagini, gratis e nel browser, senza upload. Passo passo per conformarti all'obbligo di disclosure dell'AI Act UE.",
+    date: "8 agosto 2026",
+    tag: "Guida",
+  },
+  {
     slug: "come-cancellare-i-metadati-di-una-foto",
     title: "Come cancellare i metadati di una foto (GPS incluso)",
     description:

@@ -286,6 +286,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Italian blog articles (net-new Italian content, no English equivalent)
   const italianBlog: MetadataRoute.Sitemap = [
+    "etichetta-contenuti-ai-obbligo-ue",
+    "come-aggiungere-etichetta-ai-foto",
     "come-cancellare-i-metadati-di-una-foto",
     "come-convertire-una-foto-in-pdf",
     "come-togliere-lo-sfondo-da-una-foto",

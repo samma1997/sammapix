@@ -184,6 +184,7 @@ export const APP_DESCRIPTION =
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
   "eu-ai-act-label-ai-content",
+  "how-to-add-made-with-ai-label",
   "image-to-base64-online",
   "base64-to-image-converter",
   "add-text-to-image-online",
