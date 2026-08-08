@@ -13,7 +13,14 @@ export const metadata: Metadata = {
     "Guida pratica per etichettare le foto generate con IA: disclosure AI Act Art. 50, passo passo col tool gratuito, consigli per creator, marketer e aziende.",
   alternates: {
     canonical: URL,
-    languages: { it: URL, "x-default": `${APP_URL}/blog` },
+    languages: {
+      en: `${APP_URL}/blog/how-to-add-made-with-ai-label`,
+      it: `${APP_URL}/it/blog/come-aggiungere-etichetta-ai-foto`,
+      de: `${APP_URL}/de/blog/made-with-ai-label-hinzufuegen`,
+      fr: `${APP_URL}/fr/blog/ajouter-label-made-with-ai`,
+      es: `${APP_URL}/es/blog/anadir-etiqueta-made-with-ai`,
+      "x-default": `${APP_URL}/blog/how-to-add-made-with-ai-label`,
+    },
   },
   keywords: [
     "come aggiungere etichetta made with ai",

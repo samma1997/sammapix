@@ -10,6 +10,14 @@ export const metadata: Metadata = {
     "EU AI Act Article 50 requires visible disclosure on AI-generated images, audio and video since 2 August 2026. Who must comply, what counts as a label, and how to do it free.",
   alternates: {
     canonical: `${APP_URL}/blog/eu-ai-act-label-ai-content`,
+    languages: {
+      en: `${APP_URL}/blog/eu-ai-act-label-ai-content`,
+      it: `${APP_URL}/it/blog/etichetta-contenuti-ai-obbligo-ue`,
+      de: `${APP_URL}/de/blog/eu-ai-act-ki-inhalte-kennzeichnen`,
+      fr: `${APP_URL}/fr/blog/ai-act-etiqueter-contenu-ia`,
+      es: `${APP_URL}/es/blog/ley-ia-etiquetar-contenido-ia`,
+      "x-default": `${APP_URL}/blog/eu-ai-act-label-ai-content`,
+    },
   },
   keywords: [
     "eu ai act label ai content",
