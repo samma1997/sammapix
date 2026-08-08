@@ -1,5 +1,6 @@
 import ArticleAd from "@/components/ads/ArticleAd";
 import SidebarAds from "@/components/ads/SidebarAds";
+import TopLeaderboardAd from "@/components/ads/TopLeaderboardAd";
 
 /**
  * Layout condiviso del cluster /convert/*.
@@ -17,6 +18,7 @@ export default function ClusterAdsLayout({
   return (
     <>
       <SidebarAds />
+      <TopLeaderboardAd />
       {children}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-10">
         <ArticleAd />
