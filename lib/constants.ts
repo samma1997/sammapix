@@ -138,6 +138,7 @@ export const TOOL_SLUGS = [
   "password-generator",
   "avif-to-jpg",
   "convert-to-avif",
+  "ai-label-video",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

@@ -969,7 +969,16 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Add an AI disclosure label to images",
     slug: "/tools/ai-label",
     category: "ai",
-    relatedTools: ["remove-bg", "add-text-to-image", "exif", "stampit"],
+    relatedTools: ["ai-label-video", "add-text-to-image", "exif", "stampit"],
+    relatedBlogSlugs: [],
+  },
+  "ai-label-video": {
+    id: "ai-label-video",
+    name: "Made with AI Label for Video",
+    shortDesc: "Add a Made with AI label to videos",
+    slug: "/tools/ai-label-video",
+    category: "ai",
+    relatedTools: ["ai-label", "compress-video", "convert-video", "trim-video"],
     relatedBlogSlugs: [],
   },
 };
