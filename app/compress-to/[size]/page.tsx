@@ -584,6 +584,34 @@ export default async function CompressToSizePage({
         </div>
       </section>
       {/* ── Portfolio teaser ───────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-0 mb-4">
+            Related guides
+          </h2>
+          <ul className="space-y-2">
+            <li>
+              <Link href="/blog/resize-photo-to-20kb" className="inline-flex items-center gap-1.5 text-sm text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors">
+                How to resize a photo to an exact KB (20KB, 50KB, 100KB)
+                <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/resize-photo-signature-indian-exams" className="inline-flex items-center gap-1.5 text-sm text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors">
+                Resize photo &amp; signature for Indian exams (UPSC, SSC)
+                <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/compress-images-whatsapp-quality" className="inline-flex items-center gap-1.5 text-sm text-[#525252] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors">
+                Compress images for WhatsApp without losing quality
+                <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section className="px-4 sm:px-6 py-8 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto flex items-center justify-end">
           <Link
