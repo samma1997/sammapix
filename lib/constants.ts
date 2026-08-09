@@ -186,6 +186,7 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "avif-vs-webp-vs-jpeg-benchmark-2026",
   "what-are-content-credentials-c2pa",
   "how-to-check-if-image-is-ai-generated",
   "eu-ai-act-label-ai-content",
