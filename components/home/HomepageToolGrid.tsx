@@ -83,6 +83,7 @@ import {
   IconAiLabel,
   IconAvifToJpg,
   IconConvertToAvif,
+  IconAiLabelVideo,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -407,6 +408,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "URL Encoder / Decoder", href: "/tools/url-encode-decode", tagline: "Encode or decode URL percent-encoded text instantly in your browser. encodeURIComponent + encodeURI. No upload, no signup.", accent: "#6366F1", badge: "Free", Icon: IconUrlEncodeDecode, category: "Optimize", isNew: true },
   { name: "Password Generator", href: "/tools/password-generator", tagline: "Generate strong, random passwords using crypto.getRandomValues. Choose length, character sets, see entropy in bits. Nothing is ever sent anywhere.", accent: "#6366F1", badge: "Free", Icon: IconPasswordGenerator, category: "Optimize", isNew: true },
   { name: "Made with AI Label", href: "/tools/ai-label", tagline: "Add a visible AI disclosure label. EU AI Act Art. 50(4) compliant. Custom text, 5 positions, 3 styles. No upload.", accent: "#6366F1", badge: "Free", Icon: IconAiLabel, category: "AI-Powered", isNew: true },
+  { name: "Made with AI Label for Video", href: "/tools/ai-label-video", tagline: "Burn a Made with AI disclosure label into every frame of AI-generated video. Sora, Veo, Kling. EU AI Act Article 50. No upload.", accent: "#6366F1", badge: "Free", Icon: IconAiLabelVideo, category: "AI-Powered", isNew: true },
   { name: "AVIF to JPG", href: "/tools/avif-to-jpg", tagline: "Open any .avif file — convert AVIF to JPG in your browser. Batch up to 20, no upload.", accent: "#6366F1", badge: "Free", Icon: IconAvifToJpg, category: "Optimize", isNew: true },
   { name: "Convert to AVIF", href: "/tools/convert-to-avif", tagline: "Convert JPG, PNG, WebP to AVIF — 40-60% smaller than JPEG. Better Core Web Vitals, no upload.", accent: "#6366F1", badge: "Free", Icon: IconConvertToAvif, category: "Optimize", isNew: true },
 ];

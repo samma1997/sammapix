@@ -67,6 +67,7 @@ import {
   IconAiLabel,
   IconAvifToJpg,
   IconConvertToAvif,
+  IconAiLabelVideo,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -147,6 +148,7 @@ const toolGrid = [
   { Icon: IconAiLabel,              name: "Made with AI Label",     accent: "#6366F1" },
   { Icon: IconAvifToJpg,           name: "AVIF to JPG",            accent: "#6366F1" },
   { Icon: IconConvertToAvif,      name: "Convert to AVIF",        accent: "#6366F1" },
+  { Icon: IconAiLabelVideo,       name: "AI Label for Video",      accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

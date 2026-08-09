@@ -80,6 +80,7 @@ import {
   IconAiLabel,
   IconAvifToJpg,
   IconConvertToAvif,
+  IconAiLabelVideo,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1150,6 +1151,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "No upload", "Web"],
     Icon: IconConvertToAvif,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Made with AI Label for Video",
+    href: "/tools/ai-label-video",
+    tagline: "Burn a visible Made with AI disclosure label into every frame of AI-generated video. EU AI Act Article 50 compliant. No upload, WebCodecs-fast.",
+    accent: "#6366F1",
+    badges: ["Free", "EU AI Act", "No upload"],
+    Icon: IconAiLabelVideo,
+    category: ["AI", "Creative"],
     isNew: true,
   },
 ];

@@ -83,6 +83,7 @@ import {
   IconAiLabel,
   IconAvifToJpg,
   IconConvertToAvif,
+  IconAiLabelVideo,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -174,6 +175,7 @@ const InstagramGridSplitterClient = dynamic(() => import("@/components/tools/Ins
 const AiLabelClient = dynamic(() => import("@/components/tools/AiLabelClient"));
 const AvifToJpgClient = dynamic(() => import("@/components/tools/AvifToJpgClient"));
 const ConvertToAvifClient = dynamic(() => import("@/components/tools/ConvertToAvifClient"));
+const AiLabelVideoClient = dynamic(() => import("@/components/tools/AiLabelVideoClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -266,6 +268,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "ai-label":                AiLabelClient,
   "avif-to-jpg":             AvifToJpgClient,
   "convert-to-avif":         ConvertToAvifClient,
+  "ai-label-video":          AiLabelVideoClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -399,6 +402,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "ai-label":                { Icon: IconAiLabel,               accent: "#6366F1" },
   "avif-to-jpg":             { Icon: IconAvifToJpg,             accent: "#6366F1" },
   "convert-to-avif":         { Icon: IconConvertToAvif,         accent: "#6366F1" },
+  "ai-label-video":          { Icon: IconAiLabelVideo,          accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1341,6 +1345,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download AVIF files", desc: "Click Convert. Download each AVIF individually or grab all as a ZIP archive. Use them directly on your website." },
     ],
     proTip: { text: "AVIF supports transparency (alpha channel) — transparent PNGs convert without losing their background. Try quality 50 for the best size/quality balance.", linkLabel: "Compare formats", linkHref: "/dashboard/tools/webp" },
+  },
+  "ai-label-video": {
+    label: "Made with AI Label for Video",
+    tagline: "Burn a visible Made with AI disclosure label into AI-generated video. EU AI Act Article 50. No upload.",
+    steps: [
+      { title: "Drop your AI video", desc: "Add an MP4, MOV, WebM or MKV from Sora, Veo, Kling, Pika or any AI video tool. Everything runs in your browser via WebCodecs — nothing is uploaded." },
+      { title: "Choose label and placement", desc: "Pick a preset (Made with AI, AI-generated, AI-assisted) or type custom text. Set position (bottom-right, top-left, etc.) and size (S, M, L). A live preview on frame 0 shows exactly what the label looks like before encoding." },
+      { title: "Burn the label and download", desc: "Click Burn AI label. Every frame is re-encoded with the disclosure pill burned in permanently. Download the labeled MP4." },
+    ],
+    proTip: { text: "Burning the label into frames (rather than adding metadata only) ensures the disclosure survives social media re-uploads and screenshots — the legally safer approach.", linkLabel: "Label images too", linkHref: "/dashboard/tools/ai-label" },
   },
 };
 

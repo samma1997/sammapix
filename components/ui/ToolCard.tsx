@@ -3060,6 +3060,52 @@ export const IconAiLabel: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Made with AI Label for Video icon (video frame + pill slides in at corner) ─
+export const IconAiLabelVideo: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ailv-frame {
+        0%, 100% { opacity: 0.85; }
+        50%       { opacity: 1; }
+      }
+      @keyframes ailv-pill {
+        0%, 10%  { opacity: 0; transform: translateX(8px) scale(0.8); }
+        40%, 80% { opacity: 1; transform: translateX(0px) scale(1); }
+        100%     { opacity: 0; transform: translateX(8px) scale(0.8); }
+      }
+      @keyframes ailv-play {
+        0%, 100% { opacity: 0.5; transform: scale(0.9); }
+        50%       { opacity: 1;   transform: scale(1.05); }
+      }
+      .ailv-frame { animation: ailv-frame 2.4s ease-in-out infinite; }
+      .ailv-pill  { transform-origin: 34px 36px; animation: ailv-pill 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .ailv-play  { transform-origin: 18px 20px; animation: ailv-play 2s ease-in-out infinite; }
+    `}</style>
+    {/* Video frame */}
+    <g className="ailv-frame">
+      <rect x="2" y="6" width="44" height="30" rx="3" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      {/* Screen content lines */}
+      <rect x="6" y="10" width="36" height="22" rx="1.5" fill={accent} fillOpacity="0.07"/>
+    </g>
+    {/* Play triangle */}
+    <g className="ailv-play">
+      <path d="M13 16 L13 24 L21 20 Z" fill={accent} fillOpacity="0.55"/>
+    </g>
+    {/* AI pill badge sliding in from right */}
+    <g className="ailv-pill" style={{ opacity: 0 }}>
+      <rect x="22" y="31" width="22" height="8" rx="4" fill={accent}/>
+      <text x="33" y="37" fontSize="4.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">✦ AI</text>
+    </g>
+    {/* Progress/timeline bar at bottom of video frame */}
+    <rect x="2" y="38" width="44" height="2.5" rx="1.25" fill={accent} fillOpacity="0.15"/>
+    <rect x="2" y="38" width="20" height="2.5" rx="1.25" fill={accent} fillOpacity="0.55"/>
+    {/* Speaker dots below frame */}
+    <circle cx="8" cy="44" r="1.5" fill={accent} fillOpacity="0.3"/>
+    <circle cx="13" cy="44" r="1.5" fill={accent} fillOpacity="0.3"/>
+    <circle cx="18" cy="44" r="1.5" fill={accent} fillOpacity="0.3"/>
+  </svg>
+);
+
 // ── AVIF → JPG converter icon (AVIF badge morphs to JPG badge) ───────────────
 export const IconAvifToJpg: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

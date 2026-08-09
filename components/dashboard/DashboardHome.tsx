@@ -87,6 +87,7 @@ import {
   IconAiLabel,
   IconAvifToJpg,
   IconConvertToAvif,
+  IconAiLabelVideo,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1157,6 +1158,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconAiLabel,
     category: ["AI", "Creative"],
     keywords: ["made with ai label", "ai disclosure", "eu ai act", "ai generated label", "ai watermark", "ai content label", "disclosure label", "ai transparency", "ai tag image", "eu ai act article 50"],
+  },
+  {
+    name: "Made with AI Label for Video",
+    slug: "ai-label-video",
+    href: "/dashboard/tools/ai-label-video",
+    tagline: "Burn a visible Made with AI disclosure label into every frame of AI-generated video. Sora, Veo, Kling. EU AI Act Article 50 compliant. No upload.",
+    accent: "#6366F1",
+    badges: ["Free", "EU AI Act", "No upload"],
+    Icon: IconAiLabelVideo,
+    category: ["AI", "Creative"],
+    keywords: ["made with ai label video", "ai video disclosure", "label ai video eu ai act", "add made with ai to video", "sora veo ai label", "ai generated video watermark label", "eu ai act article 50 video", "ai transparency video"],
   },
   {
     name: "AVIF to JPG",
