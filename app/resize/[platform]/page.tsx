@@ -498,6 +498,28 @@ export default async function ResizePlatformPage({
         </div>
       </section>
 
+      {/* ── Resize for other platforms (sibling grid, internal linking) ──── */}
+      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-4">
+            Resize for another platform
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {getAllPlatforms()
+              .filter((sib) => sib.slug !== slug)
+              .map((sib) => (
+                <Link
+                  key={sib.slug}
+                  href={`/resize/${sib.slug}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors capitalize"
+                >
+                  {sib.slug.replace(/-/g, " ")}
+                </Link>
+              ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Blog reference ─────────────────────────────────────────────── */}
       <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
         <div className="max-w-3xl mx-auto">
