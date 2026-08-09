@@ -314,6 +314,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["fr", "ajouter-label-made-with-ai"],
     ["es", "ley-ia-etiquetar-contenido-ia"],
     ["es", "anadir-etiqueta-made-with-ai"],
+    ["fr", "photo-identite-taille-regles"],
+    ["de", "biometrisches-passbild-bewerbungsfoto"],
+    ["es", "foto-dni-pasaporte-tamano"],
   ].map(([loc, slug]) => ({
     url: `${APP_URL}/${loc}/blog/${slug}`,
     lastModified: new Date(),
