@@ -188,6 +188,9 @@ export const APP_DESCRIPTION =
 export const BLOG_SLUGS = [
   "eu-ai-act-label-ai-content",
   "how-to-add-made-with-ai-label",
+  "resize-photo-signature-indian-exams",
+  "upsc-photo-signature-size-2026",
+  "resize-photo-to-20kb",
   "image-to-base64-online",
   "base64-to-image-converter",
   "add-text-to-image-online",
