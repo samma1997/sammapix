@@ -100,7 +100,33 @@ function buildJsonLd(slug: string) {
     ],
   };
 
-  return [faqPage, breadcrumb];
+  const softwareApp = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${canonical}#app`,
+    name: `Image Resizer for ${platform.displayName}`,
+    applicationCategory: "PhotographyApplication",
+    operatingSystem: "Web Browser",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    description: platform.metaDescription,
+    url: canonical,
+    creator: { "@type": "Organization", name: "SammaPix", url: APP_URL },
+  };
+
+  const howTo = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": `${canonical}#howto`,
+    name: `How to resize an image for ${platform.displayName}`,
+    totalTime: "PT1M",
+    step: [
+      { "@type": "HowToStep", position: 1, name: "Open the tool", text: `Open the image resizer for ${platform.displayName} in your browser. Nothing is uploaded.` },
+      { "@type": "HowToStep", position: 2, name: "Drop your image", text: "Drag and drop your image or click to select it. It is processed locally on your device." },
+      { "@type": "HowToStep", position: 3, name: "Download", text: `Download your image at the correct size for ${platform.displayName}.` },
+    ],
+  };
+
+  return [faqPage, breadcrumb, softwareApp, howTo];
 }
 
 // ─── Page ───────────────────────────────────────────────────────────────────
