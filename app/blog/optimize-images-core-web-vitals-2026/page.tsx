@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
 
 export const metadata: Metadata = {
   title: "Optimize Images for Core Web Vitals 2026 — LCP, CLS, INP Fix",
@@ -727,6 +728,10 @@ export default function OptimizeImagesCoreWebVitals2026Page() {
             </div>
           ))}
         </section>
+            <div className="my-8">
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-2">Fast images deserve fast hosting. If you run or are building the site:</p>
+              <AffiliateBanner variant="siteground-hosting" />
+            </div>
       </BlogArticleLayout>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
