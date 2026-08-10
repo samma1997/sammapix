@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 import BlogArticleLayout from "@/components/blog/BlogArticleLayout";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
 
 export const metadata: Metadata = {
   title: "How to Speed Up Your Website with Image Optimization (Complete Guide)",
@@ -801,6 +802,10 @@ export default function SpeedUpWebsiteImageOptimizationPage() {
               <code className="mx-1 px-1.5 py-0.5 bg-gray-100 dark:bg-[#252525] rounded text-xs font-mono text-gray-800 dark:text-[#E5E5E5]">loading=&quot;lazy&quot;</code>
               also prevents unnecessary downloads on initial page load.
             </p>
+            <div className="my-8">
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-2">Fast images deserve fast hosting. If you run or are building the site:</p>
+              <AffiliateBanner variant="siteground-hosting" />
+            </div>
       </BlogArticleLayout>
 
       <script
