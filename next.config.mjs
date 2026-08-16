@@ -67,6 +67,9 @@ const nextConfig = {
       { protocol: "https", hostname: "picsum.photos" },
       { protocol: "https", hostname: "fastly.picsum.photos" },
       { protocol: "https", hostname: "res.cloudinary.com" },
+      // Blog hero photos (Unsplash/Pexels) — also used as /blog listing covers
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "images.pexels.com" },
     ],
   },
   async headers() {
