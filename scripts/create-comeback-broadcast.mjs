@@ -15,7 +15,8 @@ const KEY = process.env.RESEND_API_KEY;
 const AUDIENCE = process.env.RESEND_AUDIENCE_ID;
 const FROM = "Luca @ SammaPix <hello@sammapix.com>";
 const REPLY_TO = "lucasamm97@gmail.com";
-const PAY = "https://buy.stripe.com/eVqfZhgCO4h2bYj5NJbII02?prefilled_promo_code=COMEBACK55";
+// L'email punta alla landing /offer (contaore live + deal), che poi manda a Stripe.
+const PAY = "https://www.sammapix.com/offer";
 
 if (!KEY || !AUDIENCE) {
   console.error("Manca RESEND_API_KEY o RESEND_AUDIENCE_ID");
@@ -43,7 +44,7 @@ const html = `<!DOCTYPE html>
       <p style="margin:0 0 4px"><span style="font-size:16px;color:#A3A3A3;text-decoration:line-through;margin:0 8px 0 0">$108</span><span style="font-size:32px;font-weight:700;color:#171717;letter-spacing:-0.02em">$29</span></p>
       <p style="font-size:15px;color:#525252;margin:0 0 18px">for your <strong>first year</strong> of Pro</p>
       <a href="${PAY}" style="background:#6366F1;color:#ffffff;padding:14px 28px;border-radius:6px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block">Get Pro for $29 →</a>
-      <p style="font-size:13px;color:#a3a3a3;margin:14px 0 0">Discount applied automatically. Or use code <strong>COMEBACK55</strong> at checkout.</p>
+      <p style="font-size:13px;color:#a3a3a3;margin:14px 0 0">⏳ Offer ends <strong>August 24</strong>. Discount applied automatically (code <strong>COMEBACK55</strong>).</p>
     </div>
 
     <p style="font-size:13px;line-height:1.6;color:#a3a3a3;margin:0 0 16px">That's 73% off the normal $108/year (paid monthly). Renews at $65/year after the first year. Cancel anytime in two clicks, no questions asked.</p>
