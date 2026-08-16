@@ -211,6 +211,93 @@ const CONVERSIONS = [
     to: "JPG",
     description: "Rasterize SVG vector graphics to compact JPG images.",
   },
+  {
+    pair: "jxl-to-jpg",
+    from: "JXL",
+    to: "JPG",
+    description: "Convert next-gen JPEG XL (JXL) images to universally-compatible JPG.",
+  },
+  {
+    pair: "jxl-to-png",
+    from: "JXL",
+    to: "PNG",
+    description: "Convert JPEG XL (JXL) files to lossless PNG for editing.",
+  },
+  {
+    pair: "jxl-to-webp",
+    from: "JXL",
+    to: "WebP",
+    description: "Convert JPEG XL (JXL) images to optimized WebP for the web.",
+  },
+  {
+    pair: "jpg-to-jxl",
+    from: "JPG",
+    to: "JXL",
+    description: "Convert JPG photos to next-gen JPEG XL (JXL) format.",
+  },
+  {
+    pair: "png-to-jxl",
+    from: "PNG",
+    to: "JXL",
+    description: "Convert PNG images to smaller next-gen JPEG XL (JXL) files.",
+  },
+  {
+    pair: "webp-to-jxl",
+    from: "WebP",
+    to: "JXL",
+    description: "Convert WebP images to next-gen JPEG XL (JXL) format.",
+  },
+];
+
+const VIDEO_CONVERSIONS = [
+  {
+    pair: "mp4-to-mp3",
+    from: "MP4",
+    to: "MP3",
+    description: "Extract MP3 audio from MP4 video files.",
+  },
+  {
+    pair: "video-to-mp3",
+    from: "Video",
+    to: "MP3",
+    description: "Extract MP3 audio from any video file.",
+  },
+  {
+    pair: "mov-to-mp3",
+    from: "MOV",
+    to: "MP3",
+    description: "Extract MP3 audio from QuickTime MOV videos.",
+  },
+  {
+    pair: "webm-to-mp3",
+    from: "WebM",
+    to: "MP3",
+    description: "Extract MP3 audio from WebM video files.",
+  },
+  {
+    pair: "mov-to-mp4",
+    from: "MOV",
+    to: "MP4",
+    description: "Convert QuickTime MOV videos to universally-compatible MP4.",
+  },
+  {
+    pair: "webm-to-mp4",
+    from: "WebM",
+    to: "MP4",
+    description: "Convert WebM videos to widely-supported MP4.",
+  },
+  {
+    pair: "avi-to-mp4",
+    from: "AVI",
+    to: "MP4",
+    description: "Convert legacy AVI videos to modern MP4 format.",
+  },
+  {
+    pair: "mkv-to-mp4",
+    from: "MKV",
+    to: "MP4",
+    description: "Convert MKV videos to universally-compatible MP4.",
+  },
 ];
 
 export default function ConvertIndexPage() {
@@ -291,6 +378,36 @@ export default function ConvertIndexPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {CONVERSIONS.map(({ pair, from, to, description }) => (
+          <Link
+            key={pair}
+            href={`/convert/${pair}`}
+            className="group p-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#191919] hover:bg-[#FAFAFA] dark:hover:bg-[#1F1F1F] transition-colors"
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
+                {from} → {to}
+              </p>
+              <ArrowRight
+                className="h-3.5 w-3.5 text-[#A3A3A3] group-hover:text-[#525252] dark:group-hover:text-[#A3A3A3] transition-colors"
+                strokeWidth={1.5}
+              />
+            </div>
+            <p className="text-xs text-[#737373] leading-relaxed">{description}</p>
+          </Link>
+        ))}
+      </div>
+
+      {/* Video & audio conversions — separate section so the image-format
+          collection above stays semantically clean. These pair pages were
+          previously only reachable from a single blog link (near-orphaned). */}
+      <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mt-12 mb-3">
+        Video &amp; audio conversions
+      </h2>
+      <p className="text-sm text-[#737373] leading-relaxed mb-6">
+        Convert video and audio formats right in your browser. Nothing is uploaded.
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {VIDEO_CONVERSIONS.map(({ pair, from, to, description }) => (
           <Link
             key={pair}
             href={`/convert/${pair}`}
