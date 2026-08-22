@@ -19,7 +19,7 @@ const nextConfig = {
   // Exclude onnxruntime-node from serverless functions — it's 355MB and only
   // needed client-side by @huggingface/transformers (which uses onnxruntime-web)
   // TF.js and upscaler are browser-only — exclude from all server bundles
-  serverExternalPackages: ["onnxruntime-node", "@tensorflow/tfjs", "upscaler", "@upscalerjs/esrgan-slim", "libarchive.js"],
+  serverExternalPackages: ["onnxruntime-node", "@tensorflow/tfjs", "upscaler", "@upscalerjs/esrgan-slim", "libarchive.js", "three"],
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Prevent onnxruntime-node from being bundled into server functions

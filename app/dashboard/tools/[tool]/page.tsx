@@ -85,6 +85,7 @@ import {
   IconConvertToAvif,
   IconAiLabelVideo,
   IconJsonFormatter,
+  Icon3dViewer,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -178,6 +179,7 @@ const AvifToJpgClient = dynamic(() => import("@/components/tools/AvifToJpgClient
 const ConvertToAvifClient = dynamic(() => import("@/components/tools/ConvertToAvifClient"));
 const AiLabelVideoClient = dynamic(() => import("@/components/tools/AiLabelVideoClient"));
 const JsonFormatterClient = dynamic(() => import("@/components/tools/JsonFormatterClient"));
+const ThreeDViewerClient = dynamic(() => import("@/components/tools/ThreeDViewerClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -272,6 +274,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "convert-to-avif":         ConvertToAvifClient,
   "ai-label-video":          AiLabelVideoClient,
   "json-formatter":          JsonFormatterClient,
+  "3d-viewer":               ThreeDViewerClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -407,6 +410,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "convert-to-avif":         { Icon: IconConvertToAvif,         accent: "#6366F1" },
   "ai-label-video":          { Icon: IconAiLabelVideo,          accent: "#6366F1" },
   "json-formatter":          { Icon: IconJsonFormatter,         accent: "#6366F1" },
+  "3d-viewer":               { Icon: Icon3dViewer,              accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1369,6 +1373,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy the result", desc: "If valid, a green badge confirms 'Valid JSON' with the output byte size. Click Copy to grab the formatted JSON to your clipboard in one click." },
     ],
     proTip: { text: "Use the Hash Generator to compute a SHA-256 checksum of your JSON payload for integrity verification.", linkLabel: "Hash Generator", linkHref: "/dashboard/tools/hash-generator" },
+  },
+  "3d-viewer": {
+    label: "3D Model Viewer and Converter",
+    tagline: "View STL, OBJ, GLB, GLTF and PLY files in WebGL. Orbit controls, mesh stats, export to STL, OBJ, GLB or PLY. Nothing is ever uploaded.",
+    steps: [
+      { title: "Drop your 3D file", desc: "Drag and drop an STL, OBJ, GLB, GLTF or PLY file onto the drop zone, or click to open a file picker. The file is read locally by Three.js — nothing is sent to any server." },
+      { title: "Inspect the model", desc: "Drag to rotate, scroll to zoom, right-drag to pan. The stats panel shows triangle count, bounding box dimensions (mm or inch), approximate volume and surface area. Toggle units with the mm/inch button." },
+      { title: "Export or screenshot", desc: "Click STL, OBJ, GLB or PLY to download in that format. Click Screenshot to save the current WebGL canvas view as a PNG. All processing is local." },
+    ],
+    proTip: { text: "After converting to GLB you can drag it directly into Blender, Unity or Unreal Engine for further editing.", linkLabel: "View more tools", linkHref: "/dashboard/tools" },
   },
 };
 

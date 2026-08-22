@@ -89,6 +89,7 @@ import {
   IconConvertToAvif,
   IconAiLabelVideo,
   IconJsonFormatter,
+  Icon3dViewer,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -311,7 +312,7 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort"],
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname"],
-  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname"],
+  developer: ["compress", "webp", "resizepack", "exif", "croproatio", "batchname", "3d-viewer", "json-formatter"],
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
 };
 
@@ -1203,6 +1204,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconJsonFormatter,
     category: ["Optimize"],
     keywords: ["json formatter", "json validator", "json beautifier", "json minifier", "format json", "validate json", "json pretty print", "json lint", "json parser", "json formatter online", "json formatter no upload"],
+  },
+  {
+    name: "3D Model Viewer and Converter",
+    slug: "3d-viewer",
+    href: "/dashboard/tools/3d-viewer",
+    tagline: "View STL, OBJ, GLB, GLTF and PLY files in WebGL. Orbit controls, mesh stats (triangles, bounding box, volume), export to STL/OBJ/GLB/PLY. No upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "WebGL"],
+    Icon: Icon3dViewer,
+    category: ["Optimize"],
+    keywords: ["stl viewer", "3d model viewer", "stl to glb", "stl to obj", "obj viewer", "glb viewer", "ply viewer", "3d model converter", "view stl online", "gltf viewer", "stl file viewer", "convert stl"],
   },
 ];
 

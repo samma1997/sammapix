@@ -87,7 +87,7 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "ai-label", "ai-label-video", "avif-to-jpg", "convert-to-avif"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "png-to-jpg", "avif-to-jpg", "convert-to-avif", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator", "json-formatter"],
+  developer: ["compress", "webp", "png-to-jpg", "avif-to-jpg", "convert-to-avif", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator", "json-formatter", "3d-viewer"],
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker", "ai-label", "ai-label-video"],
 };
 
@@ -186,6 +186,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Favicon Generator", slug: "ico-generator", href: "/dashboard/tools/ico-generator", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Color Picker", slug: "color-picker", href: "/dashboard/tools/color-picker", icon: <Code className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "JSON Formatter", slug: "json-formatter", href: "/dashboard/tools/json-formatter", icon: <Code className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "3D Model Viewer", slug: "3d-viewer", href: "/dashboard/tools/3d-viewer", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
 
   // ── AI ─────────────────────────────────────────────────────────────────────
   { name: "AI Rename", slug: "ai-rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
@@ -246,7 +247,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "Generate & Dev",
     icon: <Code className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["qr-code-generator", "qr-code-reader", "barcode-generator", "barcode-reader", "hash-generator", "password-generator", "url-encode-decode", "ico-generator", "color-picker", "json-formatter"],
+    slugs: ["qr-code-generator", "qr-code-reader", "barcode-generator", "barcode-reader", "hash-generator", "password-generator", "url-encode-decode", "ico-generator", "color-picker", "json-formatter", "3d-viewer"],
   },
   {
     label: "AI",

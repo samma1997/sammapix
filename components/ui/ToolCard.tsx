@@ -3230,6 +3230,47 @@ export const IconJsonFormatter: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── 3D Viewer Icon ───────────────────────────────────────────────────────────
+
+export const Icon3dViewer: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes tdv-spin  { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+      @keyframes tdv-edge  { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.85; } }
+      @keyframes tdv-dot   { 0%, 100% { r: 1.5px; opacity: 0.5; } 50% { r: 2.5px; opacity: 1; } }
+      .tdv-e1  { animation: tdv-edge 2.4s ease-in-out 0.00s infinite; }
+      .tdv-e2  { animation: tdv-edge 2.4s ease-in-out 0.30s infinite; }
+      .tdv-e3  { animation: tdv-edge 2.4s ease-in-out 0.60s infinite; }
+      .tdv-e4  { animation: tdv-edge 2.4s ease-in-out 0.90s infinite; }
+      .tdv-e5  { animation: tdv-edge 2.4s ease-in-out 1.20s infinite; }
+      .tdv-e6  { animation: tdv-edge 2.4s ease-in-out 1.50s infinite; }
+      .tdv-d1  { animation: tdv-dot   2.4s ease-in-out 0.00s infinite; }
+      .tdv-d2  { animation: tdv-dot   2.4s ease-in-out 0.40s infinite; }
+      .tdv-d3  { animation: tdv-dot   2.4s ease-in-out 0.80s infinite; }
+      .tdv-d4  { animation: tdv-dot   2.4s ease-in-out 1.20s infinite; }
+    `}</style>
+    {/* Hexagonal face (top) */}
+    <path
+      d="M24 5 L38 13 L38 29 L24 37 L10 29 L10 13 Z"
+      stroke={accent} strokeWidth="1.5" fill={accent} fillOpacity="0.08" strokeLinejoin="round"
+    />
+    {/* Inner cross-hatch lines suggesting wireframe depth */}
+    <line className="tdv-e1" x1="24" y1="5" x2="24" y2="37" stroke={accent} strokeWidth="0.8" strokeOpacity="0.4"/>
+    <line className="tdv-e2" x1="10" y1="13" x2="38" y2="29" stroke={accent} strokeWidth="0.8" strokeOpacity="0.4"/>
+    <line className="tdv-e3" x1="38" y1="13" x2="10" y2="29" stroke={accent} strokeWidth="0.8" strokeOpacity="0.4"/>
+    {/* Orbit ring (ellipse around the model) */}
+    <ellipse className="tdv-e4" cx="24" cy="38" rx="14" ry="5" stroke={accent} strokeWidth="1.2" strokeDasharray="3 2" fill="none" strokeOpacity="0.5"/>
+    {/* Orbit dot travelling around */}
+    <circle className="tdv-d1" cx="10" cy="38" r="2" fill={accent}/>
+    {/* Corner vertex dots */}
+    <circle className="tdv-d2" cx="24" cy="5" r="2" fill={accent}/>
+    <circle className="tdv-d3" cx="38" cy="13" r="2" fill={accent}/>
+    <circle className="tdv-d4" cx="10" cy="29" r="2" fill={accent}/>
+    {/* Bottom shadow line */}
+    <line className="tdv-e5" x1="16" y1="43" x2="32" y2="43" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.3"/>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {
