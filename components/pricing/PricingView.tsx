@@ -69,6 +69,7 @@ import {
   IconConvertToAvif,
   IconAiLabelVideo,
   IconJsonFormatter,
+  Icon3dViewer,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -151,6 +152,7 @@ const toolGrid = [
   { Icon: IconConvertToAvif,      name: "Convert to AVIF",        accent: "#6366F1" },
   { Icon: IconAiLabelVideo,       name: "AI Label for Video",      accent: "#6366F1" },
   { Icon: IconJsonFormatter,      name: "JSON Formatter",          accent: "#6366F1" },
+  { Icon: Icon3dViewer,           name: "3D Model Viewer",         accent: "#6366F1" },
 ] as const;
 
 // ─── Day Pass checkout button ──────────────────────────────────────────────────

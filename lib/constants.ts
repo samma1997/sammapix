@@ -140,6 +140,7 @@ export const TOOL_SLUGS = [
   "convert-to-avif",
   "ai-label-video",
   "json-formatter",
+  "3d-viewer",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -354,6 +355,7 @@ export const BLOG_SLUGS = [
   "url-encoder-decoder-tool",
   "password-generator-online",
   "strong-password-generator",
+  "how-to-view-and-convert-stl-files-online",
   "how-to-format-json-online-free",
   "common-json-errors-and-how-to-fix-them",
 ] as const;

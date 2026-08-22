@@ -82,6 +82,7 @@ import {
   IconConvertToAvif,
   IconAiLabelVideo,
   IconJsonFormatter,
+  Icon3dViewer,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1171,6 +1172,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#6366F1",
     badges: ["Free", "No upload", "Developer"],
     Icon: IconJsonFormatter,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "3D Model Viewer and Converter",
+    href: "/tools/3d-viewer",
+    tagline: "View STL, OBJ, GLB, GLTF and PLY files in WebGL. Orbit controls, mesh stats, export to STL/OBJ/GLB/PLY. 100% client-side, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "WebGL"],
+    Icon: Icon3dViewer,
     category: ["Optimize"],
     isNew: true,
   },

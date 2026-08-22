@@ -990,6 +990,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["hash-generator", "url-encode-decode", "image-to-base64", "barcode-reader"],
     relatedBlogSlugs: [],
   },
+  "3d-viewer": {
+    id: "3d-viewer",
+    name: "3D Model Viewer and Converter",
+    shortDesc: "View STL, OBJ, GLB, GLTF and PLY files in WebGL — convert and export",
+    slug: "/tools/3d-viewer",
+    category: "edit",
+    relatedTools: ["svg-to-png", "image-to-base64", "json-formatter", "hash-generator"],
+    relatedBlogSlugs: [],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {
