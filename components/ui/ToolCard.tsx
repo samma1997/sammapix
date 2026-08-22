@@ -3271,6 +3271,128 @@ export const Icon3dViewer: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconExtractJar — JAR/WAR Java archive extractor ─────────────────────────
+export const IconExtractJar: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes jar-lid {
+        0%, 20%  { transform: translateY(0px) rotate(0deg);   opacity: 0.9; }
+        50%      { transform: translateY(-5px) rotate(-8deg); opacity: 1; }
+        80%, 100%{ transform: translateY(0px) rotate(0deg);   opacity: 0.9; }
+      }
+      @keyframes jar-file {
+        0%, 25%  { transform: translate(0, 0) scale(0.6); opacity: 0; }
+        55%, 72% { transform: translate(12px, -10px) scale(1); opacity: 1; }
+        92%, 100%{ transform: translate(12px, -10px) scale(1); opacity: 0; }
+      }
+      @keyframes jar-badge {
+        0%, 100% { opacity: 0.6; transform: scale(0.93); }
+        50%       { opacity: 1;   transform: scale(1.0); }
+      }
+      .jar-lid  { transform-origin: 14px 16px; animation: jar-lid  2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .jar-file { transform-origin: 6px 22px;  animation: jar-file 2.4s ease-in-out infinite; }
+      .jar-bdg  { transform-origin: 38px 38px; animation: jar-badge 2s ease-in-out infinite; }
+    `}</style>
+    {/* Archive box body */}
+    <rect x="4" y="16" width="22" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    {/* Archive lid (animated) */}
+    <g className="jar-lid">
+      <rect x="4" y="10" width="22" height="8" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="15" y="17" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">JAR</text>
+    </g>
+    {/* Flying extracted file */}
+    <g className="jar-file" style={{ opacity: 0 }}>
+      <rect x="1" y="16" width="11" height="13" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+      <line x1="3" y1="21" x2="10" y2="21" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+      <line x1="3" y1="24" x2="8"  y2="24" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+    </g>
+    {/* Arrow right */}
+    <path d="M29 28 L37 28 M33 25 L37 28 L33 31" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* ZIP badge */}
+    <g className="jar-bdg">
+      <rect x="30" y="30" width="16" height="12" rx="2.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="38.5" fontSize="5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">ZIP</text>
+    </g>
+  </svg>
+);
+
+// ─── IconOpenGz — GZ file opener (squeeze animation) ─────────────────────────
+export const IconOpenGz: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes gz-squeeze {
+        0%, 100% { transform: scaleX(1); }
+        50%      { transform: scaleX(0.82); }
+      }
+      @keyframes gz-out {
+        0%, 30%  { transform: translate(0,0) scale(0.5); opacity: 0; }
+        55%, 75% { transform: translate(13px,-9px) scale(1); opacity: 1; }
+        95%,100% { transform: translate(13px,-9px) scale(1); opacity: 0; }
+      }
+      .gz-box  { transform-origin: 16px 28px; animation: gz-squeeze 2.4s ease-in-out infinite; }
+      .gz-file { transform-origin: 6px 22px;  animation: gz-out 2.4s ease-in-out infinite; }
+    `}</style>
+    <g className="gz-box">
+      <rect x="6" y="14" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+      <line x1="6" y1="21" x2="26" y2="21" stroke={accent} strokeWidth="1.1" strokeOpacity="0.6"/>
+      <line x1="6" y1="27" x2="26" y2="27" stroke={accent} strokeWidth="1.1" strokeOpacity="0.6"/>
+      <line x1="6" y1="33" x2="26" y2="33" stroke={accent} strokeWidth="1.1" strokeOpacity="0.6"/>
+    </g>
+    <g className="gz-file" style={{ opacity: 0 }}>
+      <rect x="1" y="16" width="11" height="13" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+      <line x1="3" y1="21" x2="10" y2="21" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+      <line x1="3" y1="24" x2="8"  y2="24" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+    </g>
+    <path d="M29 30 L36 30 M32.5 27 L36 30 L32.5 33" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <text x="16" y="11" fontSize="5.5" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">.GZ</text>
+  </svg>
+);
+
+// ─── IconOpenXz — XZ file opener (LZMA animation) ────────────────────────────
+export const IconOpenXz: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes xz-lid {
+        0%, 20%  { transform: translateY(0px) rotate(0deg);   opacity: 0.9; }
+        50%      { transform: translateY(-5px) rotate(-8deg); opacity: 1; }
+        80%, 100%{ transform: translateY(0px) rotate(0deg);   opacity: 0.9; }
+      }
+      @keyframes xz-file {
+        0%, 25%  { transform: translate(0, 0) scale(0.6); opacity: 0; }
+        55%, 72% { transform: translate(12px, -10px) scale(1); opacity: 1; }
+        92%, 100%{ transform: translate(12px, -10px) scale(1); opacity: 0; }
+      }
+      @keyframes xz-badge {
+        0%, 100% { opacity: 0.6; transform: scale(0.93); }
+        50%       { opacity: 1;   transform: scale(1.0); }
+      }
+      .xz-lid  { transform-origin: 14px 16px; animation: xz-lid  2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .xz-file { transform-origin: 6px 22px;  animation: xz-file 2.4s ease-in-out infinite; }
+      .xz-bdg  { transform-origin: 38px 38px; animation: xz-badge 2s ease-in-out infinite; }
+    `}</style>
+    {/* Archive box body */}
+    <rect x="4" y="16" width="22" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    {/* Archive lid (animated) */}
+    <g className="xz-lid">
+      <rect x="4" y="10" width="22" height="8" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="15" y="17" fontSize="6" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">XZ</text>
+    </g>
+    {/* Flying extracted file */}
+    <g className="xz-file" style={{ opacity: 0 }}>
+      <rect x="1" y="16" width="11" height="13" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+      <line x1="3" y1="21" x2="10" y2="21" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+      <line x1="3" y1="24" x2="8"  y2="24" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+    </g>
+    {/* Arrow right */}
+    <path d="M29 28 L37 28 M33 25 L37 28 L33 31" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* ZIP badge */}
+    <g className="xz-bdg">
+      <rect x="30" y="30" width="16" height="12" rx="2.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="38.5" fontSize="5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">ZIP</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

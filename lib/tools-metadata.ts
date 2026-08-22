@@ -999,6 +999,33 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["svg-to-png", "image-to-base64", "json-formatter", "hash-generator"],
     relatedBlogSlugs: [],
   },
+  "extract-jar": {
+    id: "extract-jar",
+    name: "JAR File Extractor",
+    shortDesc: "Open and extract Java .jar and .war archives in-browser, view contents, no upload",
+    slug: "/tools/extract-jar",
+    category: "optimize",
+    relatedTools: ["apk-extractor", "open-7z", "unrar", "zip-creator"],
+    relatedBlogSlugs: ["how-to-open-jar-files-online"],
+  },
+  "open-gz": {
+    id: "open-gz",
+    name: "GZ File Opener",
+    shortDesc: "Open and extract .gz and .gzip files in-browser, plain GZ and tar.gz supported, no upload",
+    slug: "/tools/open-gz",
+    category: "optimize",
+    relatedTools: ["tar-gz", "open-xz", "open-7z", "unrar"],
+    relatedBlogSlugs: ["how-to-open-gz-files-online"],
+  },
+  "open-xz": {
+    id: "open-xz",
+    name: "XZ File Opener",
+    shortDesc: "Open and extract .xz files (LZMA2) in-browser, plain XZ and tar.xz supported, no upload",
+    slug: "/tools/open-xz",
+    category: "optimize",
+    relatedTools: ["open-gz", "tar-gz", "open-7z", "unrar"],
+    relatedBlogSlugs: ["how-to-open-xz-files-online"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

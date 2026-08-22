@@ -141,6 +141,9 @@ export const TOOL_SLUGS = [
   "ai-label-video",
   "json-formatter",
   "3d-viewer",
+  "extract-jar",
+  "open-gz",
+  "open-xz",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -358,6 +361,9 @@ export const BLOG_SLUGS = [
   "how-to-view-and-convert-stl-files-online",
   "how-to-format-json-online-free",
   "common-json-errors-and-how-to-fix-them",
+  "how-to-open-jar-files-online",
+  "how-to-open-gz-files-online",
+  "how-to-open-xz-files-online",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

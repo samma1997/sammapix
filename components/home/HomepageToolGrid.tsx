@@ -86,6 +86,9 @@ import {
   IconAiLabelVideo,
   IconJsonFormatter,
   Icon3dViewer,
+  IconExtractJar,
+  IconOpenGz,
+  IconOpenXz,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -415,6 +418,9 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Convert to AVIF", href: "/tools/convert-to-avif", tagline: "Convert JPG, PNG, WebP to AVIF — 40-60% smaller than JPEG. Better Core Web Vitals, no upload.", accent: "#6366F1", badge: "Free", Icon: IconConvertToAvif, category: "Optimize", isNew: true },
   { name: "JSON Formatter & Validator", href: "/tools/json-formatter", tagline: "Beautify, minify and validate JSON in your browser. Error line and column shown. No upload, no account.", accent: "#6366F1", badge: "Free", Icon: IconJsonFormatter, category: "Optimize", isNew: true },
   { name: "3D Model Viewer and Converter", href: "/tools/3d-viewer", tagline: "View STL, OBJ, GLB, GLTF and PLY files in WebGL. Orbit controls, mesh stats, export formats. No upload.", accent: "#6366F1", badge: "Free", Icon: Icon3dViewer, category: "Optimize", isNew: true },
+  { name: "JAR File Extractor", href: "/tools/extract-jar", tagline: "Open and extract Java .jar and .war archives in your browser. No Java install, no upload.", accent: "#6366F1", badge: "Free", Icon: IconExtractJar, category: "Optimize", isNew: true },
+  { name: "GZ File Opener", href: "/tools/open-gz", tagline: "Open and extract .gz and .gzip files in your browser. Plain GZ and tar.gz supported. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconOpenGz, category: "Optimize", isNew: true },
+  { name: "XZ File Opener", href: "/tools/open-xz", tagline: "Open and extract .xz files (LZMA2) in your browser. Plain XZ and tar.xz supported. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconOpenXz, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
