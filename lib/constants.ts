@@ -139,6 +139,7 @@ export const TOOL_SLUGS = [
   "avif-to-jpg",
   "convert-to-avif",
   "ai-label-video",
+  "json-formatter",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -353,6 +354,8 @@ export const BLOG_SLUGS = [
   "url-encoder-decoder-tool",
   "password-generator-online",
   "strong-password-generator",
+  "how-to-format-json-online-free",
+  "common-json-errors-and-how-to-fix-them",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

@@ -81,6 +81,7 @@ import {
   IconAvifToJpg,
   IconConvertToAvif,
   IconAiLabelVideo,
+  IconJsonFormatter,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1161,6 +1162,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "EU AI Act", "No upload"],
     Icon: IconAiLabelVideo,
     category: ["AI", "Creative"],
+    isNew: true,
+  },
+  {
+    name: "JSON Formatter & Validator",
+    href: "/tools/json-formatter",
+    tagline: "Beautify, minify and validate JSON in your browser. Error line and column shown. Drag a .json file or paste — 100% client-side, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "Developer"],
+    Icon: IconJsonFormatter,
+    category: ["Optimize"],
     isNew: true,
   },
 ];

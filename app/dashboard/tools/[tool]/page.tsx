@@ -84,6 +84,7 @@ import {
   IconAvifToJpg,
   IconConvertToAvif,
   IconAiLabelVideo,
+  IconJsonFormatter,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -176,6 +177,7 @@ const AiLabelClient = dynamic(() => import("@/components/tools/AiLabelClient"));
 const AvifToJpgClient = dynamic(() => import("@/components/tools/AvifToJpgClient"));
 const ConvertToAvifClient = dynamic(() => import("@/components/tools/ConvertToAvifClient"));
 const AiLabelVideoClient = dynamic(() => import("@/components/tools/AiLabelVideoClient"));
+const JsonFormatterClient = dynamic(() => import("@/components/tools/JsonFormatterClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -269,6 +271,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "avif-to-jpg":             AvifToJpgClient,
   "convert-to-avif":         ConvertToAvifClient,
   "ai-label-video":          AiLabelVideoClient,
+  "json-formatter":          JsonFormatterClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -403,6 +406,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "avif-to-jpg":             { Icon: IconAvifToJpg,             accent: "#6366F1" },
   "convert-to-avif":         { Icon: IconConvertToAvif,         accent: "#6366F1" },
   "ai-label-video":          { Icon: IconAiLabelVideo,          accent: "#6366F1" },
+  "json-formatter":          { Icon: IconJsonFormatter,         accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1355,6 +1359,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Burn the label and download", desc: "Click Burn AI label. Every frame is re-encoded with the disclosure pill burned in permanently. Download the labeled MP4." },
     ],
     proTip: { text: "Burning the label into frames (rather than adding metadata only) ensures the disclosure survives social media re-uploads and screenshots — the legally safer approach.", linkLabel: "Label images too", linkHref: "/dashboard/tools/ai-label" },
+  },
+  "json-formatter": {
+    label: "JSON Formatter & Validator",
+    tagline: "Beautify, minify and validate JSON instantly in your browser — error line and column shown. No upload, no account.",
+    steps: [
+      { title: "Paste or drop your JSON", desc: "Paste a JSON string into the input area, or drag and drop a .json file directly onto it. Everything runs locally in your browser — nothing is sent to any server." },
+      { title: "Choose Beautify or Minify", desc: "Select Beautify to pretty-print with 2-space, 4-space or tab indentation. Select Minify to collapse to a single line for smaller payloads. Output updates live as you type." },
+      { title: "Copy the result", desc: "If valid, a green badge confirms 'Valid JSON' with the output byte size. Click Copy to grab the formatted JSON to your clipboard in one click." },
+    ],
+    proTip: { text: "Use the Hash Generator to compute a SHA-256 checksum of your JSON payload for integrity verification.", linkLabel: "Hash Generator", linkHref: "/dashboard/tools/hash-generator" },
   },
 };
 

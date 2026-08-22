@@ -981,6 +981,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["ai-label", "compress-video", "convert-video", "trim-video"],
     relatedBlogSlugs: [],
   },
+  "json-formatter": {
+    id: "json-formatter",
+    name: "JSON Formatter & Validator",
+    shortDesc: "Format, beautify, minify and validate JSON in your browser — no upload",
+    slug: "/tools/json-formatter",
+    category: "edit",
+    relatedTools: ["hash-generator", "url-encode-decode", "image-to-base64", "barcode-reader"],
+    relatedBlogSlugs: [],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

@@ -3199,6 +3199,37 @@ export const IconConvertToAvif: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+export const IconJsonFormatter: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes jf-tc-brace { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+      @keyframes jf-tc-line  { 0%, 100% { transform: scaleX(0.4); opacity: 0.25; } 50% { transform: scaleX(1); opacity: 1; } }
+      @keyframes jf-tc-indent { 0%, 100% { transform: translateX(-5px); opacity: 0; } 35%, 65% { transform: translateX(0); opacity: 1; } }
+      .jf-tc-b  { animation: jf-tc-brace  2.4s ease-in-out infinite; }
+      .jf-tc-l1 { transform-origin: 16px 17px; animation: jf-tc-line 2.4s ease-in-out 0.10s infinite; }
+      .jf-tc-l2 { transform-origin: 16px 23px; animation: jf-tc-line 2.4s ease-in-out 0.28s infinite; }
+      .jf-tc-l3 { transform-origin: 16px 29px; animation: jf-tc-line 2.4s ease-in-out 0.46s infinite; }
+      .jf-tc-i1 { transform-origin: 38px 20px; animation: jf-tc-indent 2.4s ease-in-out 0.18s infinite; }
+      .jf-tc-i2 { transform-origin: 38px 26px; animation: jf-tc-indent 2.4s ease-in-out 0.38s infinite; }
+      .jf-tc-i3 { transform-origin: 36px 32px; animation: jf-tc-indent 2.4s ease-in-out 0.55s infinite; }
+    `}</style>
+    {/* Left opening brace */}
+    <text className="jf-tc-b" x="3" y="32" fontSize="22" fill={accent} fontWeight="700" fontFamily="monospace">{`{`}</text>
+    {/* Messy unindented lines — left side */}
+    <rect className="jf-tc-l1" x="14" y="15" width="11" height="2.5" rx="1.25" fill={accent} fillOpacity="0.65"/>
+    <rect className="jf-tc-l2" x="14" y="21" width="7"  height="2.5" rx="1.25" fill={accent} fillOpacity="0.45"/>
+    <rect className="jf-tc-l3" x="14" y="27" width="9"  height="2.5" rx="1.25" fill={accent} fillOpacity="0.6"/>
+    {/* Arrow right */}
+    <path d="M26 24 L30 24 M28.5 22 L30 24 L28.5 26" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.65"/>
+    {/* Indented clean lines — right side */}
+    <rect className="jf-tc-i1" x="34" y="17" width="11" height="2.5" rx="1.25" fill={accent} fillOpacity="0.85"/>
+    <rect className="jf-tc-i2" x="32" y="24" width="13" height="2.5" rx="1.25" fill={accent} fillOpacity="0.65"/>
+    <rect className="jf-tc-i3" x="34" y="31" width="9"  height="2.5" rx="1.25" fill={accent} fillOpacity="0.85"/>
+    {/* Right closing brace */}
+    <text className="jf-tc-b" x="44" y="38" fontSize="10" fill={accent} fontWeight="700" fontFamily="monospace">{`}`}</text>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

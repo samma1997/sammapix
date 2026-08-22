@@ -88,6 +88,7 @@ import {
   IconAvifToJpg,
   IconConvertToAvif,
   IconAiLabelVideo,
+  IconJsonFormatter,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -1191,6 +1192,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconConvertToAvif,
     category: ["Optimize"],
     keywords: ["convert to avif", "jpg to avif", "png to avif", "webp to avif", "avif converter", "make images smaller avif", "avif format", "avif web", "image to avif", "avif compression"],
+  },
+  {
+    name: "JSON Formatter & Validator",
+    slug: "json-formatter",
+    href: "/dashboard/tools/json-formatter",
+    tagline: "Beautify, minify and validate JSON in your browser. Error line and column shown. Drag a .json file or paste — 100% client-side, no upload.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload", "Developer"],
+    Icon: IconJsonFormatter,
+    category: ["Optimize"],
+    keywords: ["json formatter", "json validator", "json beautifier", "json minifier", "format json", "validate json", "json pretty print", "json lint", "json parser", "json formatter online", "json formatter no upload"],
   },
 ];
 

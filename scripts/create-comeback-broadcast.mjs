@@ -26,6 +26,7 @@ if (!KEY || !AUDIENCE) {
 const html = `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="background:#ffffff;margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0">You have never had an offer from us. Here is the best one: all 90 tools, subscribers only, 7 days.</div>
   <div style="margin:0 auto;padding:40px 24px;max-width:520px">
     <p style="font-size:18px;font-weight:600;color:#171717;letter-spacing:-0.02em;margin:0 0 32px">Samma<span style="color:#6366F1">Pix</span></p>
 
@@ -66,7 +67,7 @@ const create = await fetch(`${API}/broadcasts`, {
     audience_id: AUDIENCE,
     from: FROM,
     reply_to: REPLY_TO,
-    subject: "Your first year of Pro: $29 (subscribers only)",
+    subject: "$29 for your first year of Pro (7 days only)",
     name: "Comeback annual $29 - subscriber broadcast Aug 2026",
     html,
   }),
