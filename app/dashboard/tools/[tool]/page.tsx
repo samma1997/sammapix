@@ -86,6 +86,9 @@ import {
   IconAiLabelVideo,
   IconJsonFormatter,
   Icon3dViewer,
+  IconExtractJar,
+  IconOpenGz,
+  IconOpenXz,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -180,6 +183,9 @@ const ConvertToAvifClient = dynamic(() => import("@/components/tools/ConvertToAv
 const AiLabelVideoClient = dynamic(() => import("@/components/tools/AiLabelVideoClient"));
 const JsonFormatterClient = dynamic(() => import("@/components/tools/JsonFormatterClient"));
 const ThreeDViewerClient = dynamic(() => import("@/components/tools/ThreeDViewerClient"));
+const ExtractJarClient  = dynamic(() => import("@/components/tools/ExtractJarClient"));
+const OpenGzClient      = dynamic(() => import("@/components/tools/OpenGzClient"));
+const OpenXzClient      = dynamic(() => import("@/components/tools/OpenXzClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -275,6 +281,9 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "ai-label-video":          AiLabelVideoClient,
   "json-formatter":          JsonFormatterClient,
   "3d-viewer":               ThreeDViewerClient,
+  "extract-jar":             ExtractJarClient,
+  "open-gz":                 OpenGzClient,
+  "open-xz":                 OpenXzClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -411,6 +420,9 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "ai-label-video":          { Icon: IconAiLabelVideo,          accent: "#6366F1" },
   "json-formatter":          { Icon: IconJsonFormatter,         accent: "#6366F1" },
   "3d-viewer":               { Icon: Icon3dViewer,              accent: "#6366F1" },
+  "extract-jar":             { Icon: IconExtractJar,            accent: "#6366F1" },
+  "open-gz":                 { Icon: IconOpenGz,                accent: "#0EA5E9" },
+  "open-xz":                 { Icon: IconOpenXz,                accent: "#0EA5E9" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1383,6 +1395,36 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Export or screenshot", desc: "Click STL, OBJ, GLB or PLY to download in that format. Click Screenshot to save the current WebGL canvas view as a PNG. All processing is local." },
     ],
     proTip: { text: "After converting to GLB you can drag it directly into Blender, Unity or Unreal Engine for further editing.", linkLabel: "View more tools", linkHref: "/dashboard/tools" },
+  },
+  "extract-jar": {
+    label: "JAR File Extractor",
+    tagline: "A JAR is a ZIP archive. Open and extract its contents in your browser. No Java install, no upload, files never leave your device.",
+    steps: [
+      { title: "Drop your JAR or WAR file", desc: "Drag and drop a .jar or .war file. Both are ZIP archives — libarchive (WebAssembly) opens them entirely in your browser without any upload." },
+      { title: "Browse the contents", desc: "See every file and folder inside: compiled .class files, META-INF/MANIFEST.MF, resources (.properties, .xml, .json), embedded images, and for WAR files the WEB-INF/ directory with web.xml." },
+      { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once with folder structure preserved." },
+    ],
+    proTip: { text: "Need to open an Android APK or iOS IPA? SammaPix has dedicated tools for those too.", linkLabel: "APK Extractor", linkHref: "/dashboard/tools/apk-extractor" },
+  },
+  "open-gz": {
+    label: "GZ File Opener",
+    tagline: "Open .gz and .gzip files in your browser. Plain GZ (single file) and tar.gz (multiple files) both supported. Files never leave your device.",
+    steps: [
+      { title: "Drop your GZ file", desc: "Drag and drop a .gz or .gzip file. libarchive (WebAssembly) decompresses it entirely in your browser — your file never leaves your device. Up to 200 MB free." },
+      { title: "Browse the contents", desc: "See every file and folder inside. Plain .gz files decompress to a single file. .tar.gz bundles decompress to the full directory tree stored in the tarball." },
+      { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once." },
+    ],
+    proTip: { text: "Need to open a .tar.xz or .xz archive? SammaPix has a dedicated XZ File Opener.", linkLabel: "XZ File Opener", linkHref: "/dashboard/tools/open-xz" },
+  },
+  "open-xz": {
+    label: "XZ File Opener",
+    tagline: "Open .xz files (LZMA2 compression) in your browser. Plain XZ and tar.xz both supported. Files never leave your device.",
+    steps: [
+      { title: "Drop your XZ file", desc: "Drag and drop a .xz file. libarchive (WebAssembly) decompresses it using the LZMA2 algorithm entirely in your browser. Nothing is uploaded. Up to 200 MB free." },
+      { title: "Browse the contents", desc: "See every file and folder inside. Plain .xz compresses a single file. .tar.xz bundles decompress to the full directory tree, just like Linux kernel tarballs." },
+      { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once." },
+    ],
+    proTip: { text: "Need to open a .gz or .tar.gz archive? SammaPix has a dedicated GZ File Opener.", linkLabel: "GZ File Opener", linkHref: "/dashboard/tools/open-gz" },
   },
 };
 

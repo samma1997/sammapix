@@ -87,7 +87,7 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   photographer: ["cull", "compress", "ai-rename", "filmlab", "geosort", "travelmap", "exif", "weblift", "smartsort", "remove-bg", "upscale"],
   blogger: ["compress", "ai-rename", "alt-text", "webp", "blogdrop", "resizepack", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "ai-label", "ai-label-video", "avif-to-jpg", "convert-to-avif"],
   ecommerce: ["compress", "ai-rename", "resizepack", "stampit", "webp", "batchname", "remove-bg", "passport-photo"],
-  developer: ["compress", "webp", "png-to-jpg", "avif-to-jpg", "convert-to-avif", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator", "json-formatter", "3d-viewer"],
+  developer: ["compress", "webp", "png-to-jpg", "avif-to-jpg", "convert-to-avif", "svg-to-png", "ico-generator", "resizepack", "exif", "croproatio", "batchname", "image-to-text", "upscale", "unrar", "open-7z", "minecraft-extractor", "apk-extractor", "ipa-extractor", "iso-extractor", "extract-jar", "open-gz", "open-xz", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "image-to-base64", "barcode-generator", "qr-code-reader", "barcode-reader", "hash-generator", "url-encode-decode", "password-generator", "json-formatter", "3d-viewer"],
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "gif-to-mp4", "color-picker", "batchname", "remove-bg", "upscale", "rotate-image", "flip-image", "add-border", "round-image", "add-text-to-image", "collage-maker", "ai-label", "ai-label-video"],
 };
 
@@ -174,6 +174,9 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "APK Extractor", slug: "apk-extractor", href: "/dashboard/tools/apk-extractor", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "IPA Extractor", slug: "ipa-extractor", href: "/dashboard/tools/ipa-extractor", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Minecraft Extractor", slug: "minecraft-extractor", href: "/dashboard/tools/minecraft-extractor", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "JAR File Extractor", slug: "extract-jar", href: "/dashboard/tools/extract-jar", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "GZ File Opener", slug: "open-gz", href: "/dashboard/tools/open-gz", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "XZ File Opener", slug: "open-xz", href: "/dashboard/tools/open-xz", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
 
   // ── Generate & Dev ─────────────────────────────────────────────────────────
   { name: "QR Code Generator", slug: "qr-code-generator", href: "/dashboard/tools/qr-code-generator", icon: <QrCode className="h-4 w-4" strokeWidth={1.5} /> },
@@ -242,7 +245,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "Archive",
     icon: <FolderArchive className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["unrar", "open-7z", "rar-to-zip", "7z-to-zip", "tar-to-zip", "tar-gz", "zip-creator", "iso-extractor", "apk-extractor", "ipa-extractor", "minecraft-extractor"],
+    slugs: ["unrar", "open-7z", "rar-to-zip", "7z-to-zip", "tar-to-zip", "tar-gz", "zip-creator", "iso-extractor", "apk-extractor", "ipa-extractor", "minecraft-extractor", "extract-jar", "open-gz", "open-xz"],
   },
   {
     label: "Generate & Dev",
