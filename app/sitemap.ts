@@ -202,6 +202,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/avif-to-jpg",
     "/tools/convert-to-avif",
     "/tools/ai-label-video",
+    "/tools/json-formatter",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

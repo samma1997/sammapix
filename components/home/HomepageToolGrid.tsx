@@ -84,6 +84,7 @@ import {
   IconAvifToJpg,
   IconConvertToAvif,
   IconAiLabelVideo,
+  IconJsonFormatter,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -411,6 +412,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Made with AI Label for Video", href: "/tools/ai-label-video", tagline: "Burn a Made with AI disclosure label into every frame of AI-generated video. Sora, Veo, Kling. EU AI Act Article 50. No upload.", accent: "#6366F1", badge: "Free", Icon: IconAiLabelVideo, category: "AI-Powered", isNew: true },
   { name: "AVIF to JPG", href: "/tools/avif-to-jpg", tagline: "Open any .avif file — convert AVIF to JPG in your browser. Batch up to 20, no upload.", accent: "#6366F1", badge: "Free", Icon: IconAvifToJpg, category: "Optimize", isNew: true },
   { name: "Convert to AVIF", href: "/tools/convert-to-avif", tagline: "Convert JPG, PNG, WebP to AVIF — 40-60% smaller than JPEG. Better Core Web Vitals, no upload.", accent: "#6366F1", badge: "Free", Icon: IconConvertToAvif, category: "Optimize", isNew: true },
+  { name: "JSON Formatter & Validator", href: "/tools/json-formatter", tagline: "Beautify, minify and validate JSON in your browser. Error line and column shown. No upload, no account.", accent: "#6366F1", badge: "Free", Icon: IconJsonFormatter, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
