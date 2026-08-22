@@ -1,13 +1,16 @@
 /**
- * POST /api/vote  — cast a vote for the next tool to build
- * GET  /api/vote  — read current vote tallies
+ * POST /api/vote  — cast votes for one or more tools, plus an optional open suggestion
+ * GET  /api/vote  — read current vote tallies (no suggestions exposed publicly)
  *
- * Anti-spam: one vote per IP per tool per 24h (Redis SET NX EX).
- * No auth required — this endpoint is for the email subscriber audience.
+ * Anti-spam:
+ *   - Per IP per tool per 24 h: SET NX EX 86400
+ *   - Per IP suggestion per hour: SET NX EX 3600
  *
  * Redis keys used:
  *   tool_votes              — Hash: { [toolKey]: voteCount }
- *   vote_ip:<ip>:<tool>     — String "1" with TTL 86400s (per-IP dedup)
+ *   vote_ip:<ip>:<tool>     — String "1" TTL 86400 s (per-tool dedup)
+ *   vote_ip:<ip>:suggestion — String "1" TTL 3600 s (suggestion rate guard)
+ *   tool_suggestions        — List (capped at 1000) of JSON { text, ts }
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -28,33 +31,69 @@ const ALLOWED_TOOLS = new Set([
   "epoch",
 ]);
 
-// ── POST: cast a vote ────────────────────────────────────────────────────────
+// ── POST: cast votes (multi-select) + optional suggestion ────────────────────
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const body = (await request.json()) as { tool?: unknown };
-    const tool = typeof body.tool === "string" ? body.tool.trim() : "";
+    const body = (await request.json()) as {
+      tools?: unknown;
+      suggestion?: unknown;
+    };
 
-    if (!ALLOWED_TOOLS.has(tool)) {
-      return NextResponse.json({ ok: false, error: "invalid_tool" }, { status: 400 });
+    // Validate and filter the tools array
+    const rawTools = Array.isArray(body.tools) ? body.tools : [];
+    const validTools = rawTools
+      .filter((t): t is string => typeof t === "string")
+      .map((t) => t.trim())
+      .filter((t) => ALLOWED_TOOLS.has(t));
+
+    // Validate suggestion
+    const rawSuggestion =
+      typeof body.suggestion === "string" ? body.suggestion : "";
+    // Strip control chars, trim, cap at 300 chars
+    const suggestion = rawSuggestion
+      .replace(/[\x00-\x1F\x7F]/g, " ")
+      .trim()
+      .slice(0, 300);
+
+    if (validTools.length === 0 && suggestion.length === 0) {
+      return NextResponse.json({ ok: false, error: "nothing_to_record" }, { status: 400 });
     }
 
-    // Extract IP for per-IP dedup (works behind Vercel / Cloudflare)
+    // Extract IP
     const ip =
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
       request.headers.get("x-real-ip") ??
       "unknown";
 
-    const guardKey = `vote_ip:${ip}:${tool}`;
-
-    // SET NX EX: returns "OK" on first set, null if already exists
-    const guard = await exec<string>(["SET", guardKey, "1", "NX", "EX", "86400"]);
-
-    if (guard !== null) {
-      // First vote from this IP for this tool today — count it
-      await exec<number>(["HINCRBY", "tool_votes", tool, "1"]);
+    // Record each valid tool vote (per-IP-per-tool guard)
+    for (const tool of validTools) {
+      const guardKey = `vote_ip:${ip}:${tool}`;
+      const guard = await exec<string>(["SET", guardKey, "1", "NX", "EX", "86400"]);
+      if (guard !== null) {
+        // Only count if the guard key was freshly created (not already voted)
+        await exec<number>(["HINCRBY", "tool_votes", tool, "1"]);
+      }
     }
-    // If guard is null the vote already exists — silently succeed (no double-count)
+
+    // Record suggestion if present and IP guard allows
+    if (suggestion.length > 0) {
+      const suggestionGuardKey = `vote_ip:${ip}:suggestion`;
+      const suggGuard = await exec<string>([
+        "SET",
+        suggestionGuardKey,
+        "1",
+        "NX",
+        "EX",
+        "3600",
+      ]);
+      if (suggGuard !== null) {
+        const entry = JSON.stringify({ text: suggestion, ts: Date.now() });
+        await exec(["LPUSH", "tool_suggestions", entry]);
+        // Cap list at 1000 entries
+        await exec(["LTRIM", "tool_suggestions", "0", "999"]);
+      }
+    }
 
     return NextResponse.json({ ok: true });
   } catch {
@@ -63,7 +102,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 }
 
-// ── GET: read tallies ────────────────────────────────────────────────────────
+// ── GET: read tallies (suggestions are NOT exposed publicly) ─────────────────
 
 export async function GET(): Promise<NextResponse> {
   try {
