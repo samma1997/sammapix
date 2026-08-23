@@ -47,6 +47,9 @@ export function downloadBlob(blob: Blob, filename: string): void {
   link.click();
   document.body.removeChild(link);
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  // Signal that the user actually got their result — used by CoffeePopup to
+  // show its nudge only AFTER a real download (task completed, value delivered).
+  try { window.dispatchEvent(new CustomEvent("sx:file-downloaded")); } catch {}
 }
 
 export async function downloadAllAsZip(files: ProcessedFile[]): Promise<void> {
