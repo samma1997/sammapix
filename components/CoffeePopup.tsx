@@ -13,6 +13,20 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { trackEvent } from "@/lib/analytics";
+
+// Fire GA4 event + increment the Redis funnel counter (aggregate, anonymous).
+function track(event: "shown" | "coffee" | "instagram" | "close" | "dont_show") {
+  try { trackEvent(`coffee_popup_${event}`); } catch {}
+  try {
+    fetch("/api/coffee-event", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event }),
+      keepalive: true,
+    });
+  } catch {}
+}
 
 const COFFEE_URL = "https://buy.stripe.com/28EcN53Q2bJufav8ZVbII03";
 const INSTAGRAM_URL = "https://www.instagram.com/lucasammarco.web/";
@@ -63,7 +77,7 @@ export default function CoffeePopup() {
       if (await isPayingUser()) return;
       if (shown || !canShow()) return; // re-check after the async gap
       shown = true;
-      setTimeout(() => setOpen(true), AFTER_DOWNLOAD_MS);
+      setTimeout(() => { setOpen(true); track("shown"); }, AFTER_DOWNLOAD_MS);
     };
     window.addEventListener("sx:file-downloaded", onDownload);
     return () => window.removeEventListener("sx:file-downloaded", onDownload);
@@ -82,10 +96,11 @@ export default function CoffeePopup() {
     setTimeout(() => setOpen(false), 220);
   };
 
-  const close = () => animateOut(doSnooze); // X: comes back in 14 days
-  const dontShow = () => animateOut(permanentDone); // permanent
+  const close = () => { track("close"); animateOut(doSnooze); }; // X: comes back in 14 days
+  const dontShow = () => { track("dont_show"); animateOut(permanentDone); }; // permanent
 
   const onCoffee = () => {
+    track("coffee");
     permanentDone();
     window.open(COFFEE_URL, "_blank", "noopener,noreferrer");
     setOpen(false);
@@ -159,7 +174,7 @@ export default function CoffeePopup() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={permanentDone}
+              onClick={() => { track("instagram"); permanentDone(); }}
               className="group flex items-center gap-3 w-full bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white text-sm font-semibold px-4 py-3 rounded-xl hover:opacity-95 transition-opacity"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 shrink-0">
