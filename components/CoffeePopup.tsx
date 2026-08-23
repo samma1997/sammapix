@@ -12,6 +12,7 @@
  */
 
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 const COFFEE_URL = "https://buy.stripe.com/28EcN53Q2bJufav8ZVbII03";
 const INSTAGRAM_URL = "https://www.instagram.com/lucasammarco.web/";
@@ -24,6 +25,8 @@ const SNOOZE_MS = 14 * 24 * 60 * 60 * 1000; // soft dismiss hides it for 14 days
 export default function CoffeePopup() {
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
+  const { data: session } = useSession();
+  const isPro = (session?.user as { plan?: string } | undefined)?.plan === "pro";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -39,17 +42,32 @@ export default function CoffeePopup() {
       }
     };
 
+    // Never nag people who pay: Pro subscribers or active Day Pass holders.
+    const isPayingUser = async (): Promise<boolean> => {
+      if (isPro) return true;
+      try {
+        const r = await fetch("/api/day-pass/status");
+        if (r.ok) {
+          const j = await r.json();
+          if (j?.active) return true;
+        }
+      } catch {}
+      return false;
+    };
+
     // Show ONLY after the user actually downloaded their result (task done,
-    // value delivered). Fired by downloadBlob() / incrementDownloadCount().
+    // value delivered). Fired by downloadBlob(). Never for paying users.
     let shown = false;
-    const onDownload = () => {
+    const onDownload = async () => {
       if (shown || !canShow()) return;
+      if (await isPayingUser()) return;
+      if (shown || !canShow()) return; // re-check after the async gap
       shown = true;
       setTimeout(() => setOpen(true), AFTER_DOWNLOAD_MS);
     };
     window.addEventListener("sx:file-downloaded", onDownload);
     return () => window.removeEventListener("sx:file-downloaded", onDownload);
-  }, []);
+  }, [isPro]);
 
   const permanentDone = () => {
     try { localStorage.setItem(KEY_COFFEE_DONE, "1"); } catch {}
