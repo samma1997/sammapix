@@ -93,6 +93,7 @@ import {
   IconExtractJar,
   IconOpenGz,
   IconOpenXz,
+  IconWordToPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -998,6 +999,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconTxtToPdf,
     category: ["Optimize"],
     keywords: ["txt to pdf", "convert text to pdf", "text file to pdf", "txt to pdf converter", "notepad to pdf", "txt to pdf no upload", "plain text to pdf", "convert txt to pdf browser"],
+  },
+  {
+    name: "Word to PDF",
+    slug: "word-to-pdf",
+    href: "/dashboard/tools/word-to-pdf",
+    tagline: "Convert .docx files to PDF in your browser. Preserves headings, paragraphs, lists and images. Nothing uploaded. Free for single files.",
+    accent: "#6366F1",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconWordToPdf,
+    category: ["Optimize"],
+    keywords: ["word to pdf", "docx to pdf", "convert word to pdf free", "word to pdf no upload", "docx to pdf converter", "word document to pdf", "convert docx to pdf online"],
   },
   {
     name: "RAR to ZIP",

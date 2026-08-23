@@ -1026,6 +1026,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["open-gz", "tar-gz", "open-7z", "unrar"],
     relatedBlogSlugs: ["how-to-open-xz-files-online"],
   },
+  "word-to-pdf": {
+    id: "word-to-pdf",
+    name: "Word to PDF",
+    shortDesc: "Convert .docx files to PDF in-browser — nothing uploaded, free for single files",
+    slug: "/tools/word-to-pdf",
+    category: "edit",
+    relatedTools: ["txt-to-pdf", "jpg-to-pdf", "pdf-compress", "pdf-merge"],
+    relatedBlogSlugs: ["how-to-convert-word-to-pdf-online-free"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {

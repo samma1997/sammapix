@@ -144,6 +144,7 @@ export const TOOL_SLUGS = [
   "extract-jar",
   "open-gz",
   "open-xz",
+  "word-to-pdf",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;
@@ -364,6 +365,7 @@ export const BLOG_SLUGS = [
   "how-to-open-jar-files-online",
   "how-to-open-gz-files-online",
   "how-to-open-xz-files-online",
+  "how-to-convert-word-to-pdf-online-free",
 ] as const;
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];

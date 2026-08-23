@@ -89,6 +89,7 @@ import {
   IconExtractJar,
   IconOpenGz,
   IconOpenXz,
+  IconWordToPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -186,6 +187,7 @@ const ThreeDViewerClient = dynamic(() => import("@/components/tools/ThreeDViewer
 const ExtractJarClient  = dynamic(() => import("@/components/tools/ExtractJarClient"));
 const OpenGzClient      = dynamic(() => import("@/components/tools/OpenGzClient"));
 const OpenXzClient      = dynamic(() => import("@/components/tools/OpenXzClient"));
+const WordToPdfClient   = dynamic(() => import("@/components/tools/WordToPdfClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -284,6 +286,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "extract-jar":             ExtractJarClient,
   "open-gz":                 OpenGzClient,
   "open-xz":                 OpenXzClient,
+  "word-to-pdf":             WordToPdfClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -423,6 +426,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "extract-jar":             { Icon: IconExtractJar,            accent: "#6366F1" },
   "open-gz":                 { Icon: IconOpenGz,                accent: "#0EA5E9" },
   "open-xz":                 { Icon: IconOpenXz,                accent: "#0EA5E9" },
+  "word-to-pdf":             { Icon: IconWordToPdf,             accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1425,6 +1429,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once." },
     ],
     proTip: { text: "Need to open a .gz or .tar.gz archive? SammaPix has a dedicated GZ File Opener.", linkLabel: "GZ File Opener", linkHref: "/dashboard/tools/open-gz" },
+  },
+  "word-to-pdf": {
+    label: "Word to PDF",
+    tagline: "Convert .docx files to PDF entirely in your browser. Rendered with docx-preview, paginated with jsPDF. Nothing is ever uploaded.",
+    steps: [
+      { title: "Drop your .docx file", desc: "Drag and drop a Word document (.docx). The file is read locally via the browser File API — nothing is sent to any server. Standard .docx (Office Open XML) is supported; legacy .doc is not." },
+      { title: "Preview and convert", desc: "The tool renders your document with docx-preview: headings, paragraphs, bold/italic, bullet lists, numbered lists, and embedded images. Click Convert to PDF to generate a downloadable PDF file." },
+      { title: "Download your PDF", desc: "Click Download to save the PDF. For multiple files, use batch mode and download all as a ZIP (Day Pass or Pro). Your document never leaves your browser." },
+    ],
+    proTip: { text: "Need to merge multiple PDFs after converting? Use Merge PDF to combine them into one document.", linkLabel: "Merge PDF", linkHref: "/dashboard/tools/pdf-merge" },
   },
 };
 

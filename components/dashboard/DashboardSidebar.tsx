@@ -150,6 +150,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Crop PDF", slug: "crop-pdf", href: "/dashboard/tools/crop-pdf", icon: <Crop className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Flatten PDF", slug: "flatten-pdf", href: "/dashboard/tools/flatten-pdf", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "TXT to PDF", slug: "txt-to-pdf", href: "/dashboard/tools/txt-to-pdf", icon: <FileOutput className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Word to PDF", slug: "word-to-pdf", href: "/dashboard/tools/word-to-pdf", icon: <FileOutput className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Redact PDF", slug: "redact-pdf", href: "/dashboard/tools/redact-pdf", icon: <FileX className="h-4 w-4" strokeWidth={1.5} /> },
 
   // ── Video ──────────────────────────────────────────────────────────────────
@@ -235,7 +236,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "PDF",
     icon: <FileText className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["pdf-merge", "pdf-split", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-protect", "pdf-page-numbers", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "crop-pdf", "flatten-pdf", "txt-to-pdf", "redact-pdf"],
+    slugs: ["pdf-merge", "pdf-split", "pdf-compress", "pdf-rotate", "pdf-unlock", "pdf-protect", "pdf-page-numbers", "remove-pdf-pages", "pdf-watermark", "pdf-sign", "pdf-organize", "crop-pdf", "flatten-pdf", "txt-to-pdf", "word-to-pdf", "redact-pdf"],
   },
   {
     label: "Video",

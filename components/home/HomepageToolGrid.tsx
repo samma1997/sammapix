@@ -89,6 +89,7 @@ import {
   IconExtractJar,
   IconOpenGz,
   IconOpenXz,
+  IconWordToPdf,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -421,6 +422,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "JAR File Extractor", href: "/tools/extract-jar", tagline: "Open and extract Java .jar and .war archives in your browser. No Java install, no upload.", accent: "#6366F1", badge: "Free", Icon: IconExtractJar, category: "Optimize", isNew: true },
   { name: "GZ File Opener", href: "/tools/open-gz", tagline: "Open and extract .gz and .gzip files in your browser. Plain GZ and tar.gz supported. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconOpenGz, category: "Optimize", isNew: true },
   { name: "XZ File Opener", href: "/tools/open-xz", tagline: "Open and extract .xz files (LZMA2) in your browser. Plain XZ and tar.xz supported. No upload.", accent: "#0EA5E9", badge: "Free", Icon: IconOpenXz, category: "Optimize", isNew: true },
+  { name: "Word to PDF", href: "/tools/word-to-pdf", tagline: "Convert .docx files to PDF in your browser. Nothing uploaded, free for single files. Batch with Day Pass.", accent: "#6366F1", badge: "Free", Icon: IconWordToPdf, category: "Optimize", isNew: true },
 ];
 
 const TAB_CATEGORIES: TabCategory[] = ["Optimize", "AI-Powered", "Creative", "Organize"];
