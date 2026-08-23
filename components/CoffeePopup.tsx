@@ -18,7 +18,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/lucasammarco.web/";
 
 const KEY_COFFEE_DONE = "sx_coffee_done"; // permanent: clicked, or "don't show again"
 const KEY_COFFEE_SNOOZE = "sx_coffee_snooze"; // timestamp: hidden until then (X / snooze)
-const APPEAR_DELAY_MS = 12000; // a few seconds in, not on load
+const AFTER_DOWNLOAD_MS = 1500; // show shortly AFTER the download completes
 const SNOOZE_MS = 14 * 24 * 60 * 60 * 1000; // soft dismiss hides it for 14 days
 
 export default function CoffeePopup() {
@@ -27,15 +27,28 @@ export default function CoffeePopup() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    try {
-      if (localStorage.getItem(KEY_COFFEE_DONE)) return;
-      const snooze = parseInt(localStorage.getItem(KEY_COFFEE_SNOOZE) ?? "0", 10);
-      if (snooze && Date.now() < snooze) return;
-      const t = setTimeout(() => setOpen(true), APPEAR_DELAY_MS);
-      return () => clearTimeout(t);
-    } catch {
-      /* localStorage blocked — do nothing */
-    }
+
+    const canShow = () => {
+      try {
+        if (localStorage.getItem(KEY_COFFEE_DONE)) return false;
+        const snooze = parseInt(localStorage.getItem(KEY_COFFEE_SNOOZE) ?? "0", 10);
+        if (snooze && Date.now() < snooze) return false;
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    // Show ONLY after the user actually downloaded their result (task done,
+    // value delivered). Fired by downloadBlob() / incrementDownloadCount().
+    let shown = false;
+    const onDownload = () => {
+      if (shown || !canShow()) return;
+      shown = true;
+      setTimeout(() => setOpen(true), AFTER_DOWNLOAD_MS);
+    };
+    window.addEventListener("sx:file-downloaded", onDownload);
+    return () => window.removeEventListener("sx:file-downloaded", onDownload);
   }, []);
 
   const permanentDone = () => {
