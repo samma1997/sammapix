@@ -70,6 +70,7 @@ import {
   IconAiLabelVideo,
   IconJsonFormatter,
   Icon3dViewer,
+  IconWordToPdf,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -133,6 +134,7 @@ const toolGrid = [
   { Icon: IconCropPdf,       name: "Crop PDF",         accent: "#EF4444" },
   { Icon: IconFlattenPdf,    name: "Flatten PDF",      accent: "#EF4444" },
   { Icon: IconTxtToPdf,      name: "TXT to PDF",       accent: "#EF4444" },
+  { Icon: IconWordToPdf,     name: "Word to PDF",      accent: "#6366F1" },
   { Icon: IconRarToZip,             name: "RAR to ZIP",           accent: "#0EA5E9" },
   { Icon: IconSevenZToZip,          name: "7Z to ZIP",            accent: "#0EA5E9" },
   { Icon: IconTarToZip,             name: "TAR to ZIP",           accent: "#0EA5E9" },

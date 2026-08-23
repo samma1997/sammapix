@@ -1,8 +1,274 @@
 [
   {
+    "slug": "how-to-convert-word-to-pdf-online-free",
+    "title": "How to Convert Word to PDF Online (Free, No Upload)",
+    "description": "Convert .docx files to PDF in your browser without uploading them anywhere. Why Adobe and Smallpdf upload your file, how to do it privately, formattin",
+    "keywords": [
+      "word to pdf online free",
+      "convert word to pdf no upload",
+      "docx to pdf free",
+      "word to pdf converter",
+      "convert docx to pdf online"
+    ],
+    "publishedDate": "2026-08-23",
+    "url": "/blog/how-to-convert-word-to-pdf-online-free"
+  },
+  {
+    "slug": "how-to-open-gz-files-online",
+    "title": "How to Open GZ Files Online (Free, No Upload) [2026]",
+    "description": "Open and extract .gz and .gzip files directly in your browser. Works for both plain GZ files and tar.gz archives. No install, no upload. Updated 2026.",
+    "keywords": [
+      "how to open gz file",
+      "open gz file online",
+      "gz file opener",
+      "extract gz file",
+      "open gzip file"
+    ],
+    "publishedDate": "2026-08-23",
+    "url": "/blog/how-to-open-gz-files-online"
+  },
+  {
+    "slug": "how-to-open-jar-files-online",
+    "title": "How to Open JAR Files Online (Free, No Upload) [2026]",
+    "description": "Open and extract Java .jar and .war files directly in your browser. View class files, resources, and manifests without installing Java. Updated 2026.",
+    "keywords": [
+      "how to open jar file",
+      "open jar file online",
+      "jar file extractor",
+      "extract jar file",
+      "view jar contents"
+    ],
+    "publishedDate": "2026-08-23",
+    "url": "/blog/how-to-open-jar-files-online"
+  },
+  {
+    "slug": "how-to-open-xz-files-online",
+    "title": "How to Open XZ Files Online (Free, No Upload) [2026]",
+    "description": "Open and extract .xz files directly in your browser. Plain XZ and tar.xz archives both supported. No install, no upload. Updated 2026.",
+    "keywords": [
+      "how to open xz file",
+      "open xz file online",
+      "xz file opener",
+      "extract xz file",
+      "open tar.xz"
+    ],
+    "publishedDate": "2026-08-23",
+    "url": "/blog/how-to-open-xz-files-online"
+  },
+  {
+    "slug": "common-json-errors-and-how-to-fix-them",
+    "title": "Common JSON Errors and How to Fix Them (2026)",
+    "description": "Reference guide to every common JSON.parse error: Unexpected token, Unexpected end of input, trailing comma, unquoted keys, single quotes, duplicate k",
+    "keywords": [
+      "json parse error",
+      "unexpected token json",
+      "unexpected end of input json",
+      "json syntax error",
+      "json trailing comma error"
+    ],
+    "publishedDate": "2026-08-22",
+    "url": "/blog/common-json-errors-and-how-to-fix-them"
+  },
+  {
+    "slug": "how-to-format-json-online-free",
+    "title": "How to Format and Validate JSON Online Free (No Upload) [2026]",
+    "description": "Format, prettify, and validate any JSON string instantly in your browser. No upload, no server, no account. Covers trailing commas, unquoted keys, sin",
+    "keywords": [
+      "format json online",
+      "json formatter online free",
+      "json prettify online",
+      "validate json online",
+      "json beautify online"
+    ],
+    "publishedDate": "2026-08-22",
+    "url": "/blog/how-to-format-json-online-free"
+  },
+  {
+    "slug": "how-to-view-and-convert-stl-files-online",
+    "title": "How to View and Convert STL Files Online (Free, No Upload) [2026]",
+    "description": "View STL, OBJ, GLB and PLY files in your browser with a WebGL viewer. Convert STL to OBJ or GLB for Blender and the web. No upload, no software instal",
+    "keywords": [
+      "view stl file online",
+      "open stl file browser",
+      "stl to obj converter",
+      "stl to glb online",
+      "glb viewer online free"
+    ],
+    "publishedDate": "2026-08-22",
+    "url": "/blog/how-to-view-and-convert-stl-files-online"
+  },
+  {
+    "slug": "avif-vs-webp-vs-jpeg-benchmark-2026",
+    "title": "AVIF vs WebP vs JPEG: Real Benchmark (2026)",
+    "description": "We encoded 5 real photos to JPEG, WebP, and AVIF matching SSIM 0.98. AVIF is 27% smaller than JPEG and 29% smaller than WebP at equal visual quality.",
+    "keywords": [
+      "avif vs webp vs jpeg",
+      "avif vs webp",
+      "image format benchmark 2026",
+      "is avif smaller than webp",
+      "best image format for web 2026"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/avif-vs-webp-vs-jpeg-benchmark-2026"
+  },
+  {
+    "slug": "canada-passport-photo-requirements-2026",
+    "title": "Canadian passport photo specs at a glance",
+    "description": "Exact IRCC specs for Canadian passport photos: 50x70mm, white background, face 31 to 36mm, neutral expression, no glasses. Free browser tool, no uploa",
+    "keywords": [
+      "canada passport photo size",
+      "50x70mm passport photo",
+      "canadian passport photo requirements",
+      "ircc photo specs",
+      "canada passport photo online"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/canada-passport-photo-requirements-2026"
+  },
+  {
+    "slug": "dv-lottery-photo-requirements",
+    "title": "DV Lottery Photo Requirements 2026 (Green Card)",
+    "description": "Exact DV Lottery photo requirements for 2026: 600x600 px JPEG, 240 KB max, white background, no glasses. Free tool to resize and compress without disq",
+    "keywords": [
+      "dv lottery photo requirements",
+      "green card lottery photo size",
+      "diversity visa photo 600x600",
+      "dv lottery photo 2026",
+      "green card photo rules"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/dv-lottery-photo-requirements"
+  },
+  {
+    "slug": "how-to-check-if-image-is-ai-generated",
+    "title": "How to Check if an Image Is AI-Generated (2026)",
+    "description": "A practical, layered guide: Content Credentials (C2PA), SynthID watermarks, EXIF metadata clues, and visual tells. Honest about what works and what do",
+    "keywords": [
+      "how to check if image is ai generated",
+      "is this image ai",
+      "detect ai image",
+      "ai image checker",
+      "check content credentials"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/how-to-check-if-image-is-ai-generated"
+  },
+  {
+    "slug": "resize-photo-signature-indian-exams",
+    "title": "Resize Photo & Signature for Indian Exams (2026 Guide)",
+    "description": "Exact pixel and KB specs for UPSC, SSC, IBPS, RRB, NEET, and state PSC applications. Step-by-step guide to resize your photo and signature to the righ",
+    "keywords": [
+      "resize photo for exam",
+      "photo and signature size for upsc",
+      "ssc photo signature size",
+      "resize signature to 20kb",
+      "exam photo size 200x230"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/resize-photo-signature-indian-exams"
+  },
+  {
+    "slug": "resize-photo-to-20kb",
+    "title": "How to Resize a Photo to 20KB Online Free (No Upload)",
+    "description": "Need a photo under 20KB for a government form or exam portal? This guide shows the exact steps to compress any image to 10KB, 20KB, 50KB, 100KB, or 20",
+    "keywords": [
+      "resize photo to 20kb",
+      "compress image to 20kb",
+      "photo size 20kb",
+      "reduce image to 50kb",
+      "resize jpg to 100kb"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/resize-photo-to-20kb"
+  },
+  {
+    "slug": "uk-passport-photo-requirements-2026",
+    "title": "UK Passport Photo Requirements 2026 (Size & Rules)",
+    "description": "Official UK passport photo size is 45x35mm printed; digital must be at least 600x750px. Background must be plain light grey or cream. Full checklist i",
+    "keywords": [
+      "uk passport photo size",
+      "45x35mm passport photo",
+      "british passport photo requirements",
+      "uk passport photo online",
+      "passport photo 600x750"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/uk-passport-photo-requirements-2026"
+  },
+  {
+    "slug": "upsc-photo-signature-size-2026",
+    "title": "UPSC Photo & Signature Size 2026 (Exact Specs)",
+    "description": "UPSC photo: 200x230 px, 20-300 KB, JPEG, white background. Signature: 350-500 px wide, 20-100 KB, JPEG. Free browser tool to resize and compress both ",
+    "keywords": [
+      "upsc photo size",
+      "upsc signature size",
+      "upsc photo 200x230",
+      "upsc photo kb",
+      "upsc signature 20kb"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/upsc-photo-signature-size-2026"
+  },
+  {
+    "slug": "us-passport-photo-requirements-2026",
+    "title": "US Passport Photo Requirements 2026 (2x2, Exact)",
+    "description": "Exact US passport photo requirements for 2026: 2x2 inch size, 600x600 px minimum, white background, face 1 to 1 3/8 inch, no glasses. Free online tool",
+    "keywords": [
+      "us passport photo size",
+      "2x2 passport photo",
+      "passport photo requirements 2026",
+      "600x600 passport photo",
+      "passport photo white background"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/us-passport-photo-requirements-2026"
+  },
+  {
+    "slug": "what-are-content-credentials-c2pa",
+    "title": "What Are Content Credentials (C2PA)? 2026 Guide",
+    "description": "Content Credentials (C2PA) are tamper-evident provenance records built into media files. Learn how they differ from EXIF and SynthID, how to view them",
+    "keywords": [
+      "content credentials",
+      "c2pa",
+      "what is c2pa",
+      "content credentials explained",
+      "ai image provenance"
+    ],
+    "publishedDate": "2026-08-09",
+    "url": "/blog/what-are-content-credentials-c2pa"
+  },
+  {
+    "slug": "eu-ai-act-label-ai-content",
+    "title": "EU AI Act: Do You Have to Label AI Content? (2026)",
+    "description": "EU AI Act Article 50 requires visible disclosure on AI-generated images, audio and video since 2 August 2026. Who must comply, what counts as a label,",
+    "keywords": [
+      "eu ai act label ai content",
+      "do i have to disclose ai generated content",
+      "made with ai label requirement",
+      "ai act article 50",
+      "label ai images eu"
+    ],
+    "publishedDate": "2026-08-08",
+    "url": "/blog/eu-ai-act-label-ai-content"
+  },
+  {
+    "slug": "how-to-add-made-with-ai-label",
+    "title": "How to Add a Made with AI Label to Images (Free)",
+    "description": "Add a Made with AI badge to any image in seconds, free, with no upload. Step-by-step guide covering EU AI Act Article 50 disclosure, label styles, bat",
+    "keywords": [
+      "how to add made with ai label",
+      "label ai generated images",
+      "made with ai badge free",
+      "add ai disclosure to photo",
+      "watermark ai image eu"
+    ],
+    "publishedDate": "2026-08-08",
+    "url": "/blog/how-to-add-made-with-ai-label"
+  },
+  {
     "slug": "7z-to-zip-online",
     "title": "Convert 7Z to ZIP Online Free (No Upload) [2026]",
-    "description": "Convert any 7Z archive to ZIP entirely in your browser — no upload, no 7-Zip install, no server. libarchive.wasm extracts locally, JSZip repackages. V",
+    "description": "Convert 7Z to ZIP in your browser. No server, no signup. Free.",
     "keywords": [
       "7z to zip",
       "convert 7z to zip",
@@ -15,8 +281,8 @@
   },
   {
     "slug": "barcode-generator-online",
-    "title": "Free Barcode Generator Online — CODE128, EAN-13, UPC, QR [2026]",
-    "description": "Generate a barcode from any value entirely in your browser — CODE128, EAN-13, EAN-8, UPC-A, CODE39, ITF-14. Download PNG or SVG. No signup, no upload,",
+    "title": "Barcode Generator Online — Free Code128, EAN [2026]",
+    "description": "Generate CODE128, EAN-13, UPC barcodes. Download PNG/SVG. Free.",
     "keywords": [
       "barcode generator",
       "free barcode generator",
@@ -29,8 +295,8 @@
   },
   {
     "slug": "barcode-reader-online",
-    "title": "Barcode Reader Online — Decode EAN, UPC, CODE128, QR from an Image [2026]",
-    "description": "Read and decode any barcode from a photo or screenshot entirely in your browser — EAN-13, EAN-8, UPC-A, CODE128, CODE39, ITF, QR. ZXing runs locally. ",
+    "title": "Barcode Reader Online — Decode Barcodes Free [2026]",
+    "description": "Decode barcodes from photos. EAN, UPC, CODE128, QR. Free.",
     "keywords": [
       "barcode reader online",
       "barcode reader",
@@ -44,7 +310,7 @@
   {
     "slug": "convert-7z-to-zip-no-upload",
     "title": "How to Convert 7Z to ZIP Without Software [2026]",
-    "description": "Convert 7Z to ZIP in your browser without uploading the file anywhere and without installing 7-Zip. libarchive.wasm extracts locally, JSZip repackages",
+    "description": "Convert 7Z to ZIP in your browser. No server, no signup. Free.",
     "keywords": [
       "7z to zip converter",
       "extract 7z to zip",
@@ -58,7 +324,7 @@
   {
     "slug": "convert-rar-to-zip-no-upload",
     "title": "How to Convert RAR to ZIP Without Uploading [2026]",
-    "description": "Convert RAR to ZIP in your browser without uploading the file anywhere. libarchive.wasm extracts locally, JSZip repackages. ZIP opens natively on Wind",
+    "description": "Convert RAR to ZIP in your browser. No server, no signup. Free.",
     "keywords": [
       "rar to zip converter",
       "change rar to zip",
@@ -71,8 +337,8 @@
   },
   {
     "slug": "convert-tar-to-zip-no-upload",
-    "title": "How to Convert TAR to ZIP Without Software (No Upload) [2026]",
-    "description": "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, and TAR.XZ to ZIP in your browser without uploading the file and without installing 7-Zip or any other software. li",
+    "title": "Convert TAR to ZIP Online Free [2026]",
+    "description": "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, TAR.XZ to ZIP. No upload. Free.",
     "keywords": [
       "tar to zip converter",
       "tgz to zip",
@@ -85,8 +351,8 @@
   },
   {
     "slug": "create-barcode-free",
-    "title": "Create a Barcode for Free Without Signup — Browser-Based [2026]",
-    "description": "Create a barcode for free without signing up. Choose the right format, enter your value, download PNG or SVG. No upload, no server, no account. Works ",
+    "title": "Create Barcode Free — No Signup Required [2026]",
+    "description": "Generate barcodes without account. Choose format, download PNG/SVG. Free.",
     "keywords": [
       "create barcode",
       "barcode maker",
@@ -99,8 +365,8 @@
   },
   {
     "slug": "create-qr-code-no-signup",
-    "title": "Create a QR Code Without Signing Up — No Account, No Expiry [2026]",
-    "description": "Create a QR code without an account, email, or registration. Your data stays in your browser — no upload, no server. Download PNG or SVG. Free, no exp",
+    "title": "Create QR Code Free — No Account, No Expiry [2026]",
+    "description": "Create QR codes without signup. Download PNG/SVG. Free.",
     "keywords": [
       "qr code no signup",
       "qr code generator no registration",
@@ -114,7 +380,7 @@
   {
     "slug": "extract-apk-online",
     "title": "Extract an APK File Online Free (No Upload) [2026]",
-    "description": "Extract any APK or XAPK file in your browser — no upload, no Android required. JSZip reads the ZIP-format archive locally. Browse AndroidManifest.xml,",
+    "description": "Extract APK files in your browser. Browse app data. No upload. Free.",
     "keywords": [
       "extract apk",
       "apk extractor",
@@ -128,7 +394,7 @@
   {
     "slug": "extract-ipa-online",
     "title": "Extract an IPA File Online Free (No Upload) [2026]",
-    "description": "Extract any iOS IPA file in your browser — no upload, no Xcode, no Mac required. An IPA is a ZIP archive. JSZip reads it locally: browse Payload/, Inf",
+    "description": "Extract iOS IPA files in your browser. Browse app files. No upload. Free.",
     "keywords": [
       "extract ipa",
       "extract ipa online",
@@ -142,7 +408,7 @@
   {
     "slug": "extract-iso-online",
     "title": "Extract an ISO File Online Free (No Upload) [2026]",
-    "description": "Extract files from any ISO disc image in your browser — no upload, no mounting, no burning. ISO9660 supported. Browse files, download individually or ",
+    "description": "Extract ISO disc images in your browser. Browse and download files. Free.",
     "keywords": [
       "extract iso",
       "extract iso online",
@@ -156,7 +422,7 @@
   {
     "slug": "extract-mcpack-online",
     "title": "Open and Extract a .mcpack File Online Free [2026]",
-    "description": "Extract any .mcpack file in your browser — no upload, no Minecraft required. JSZip reads the ZIP-format archive locally. Browse textures, manifests, a",
+    "description": "Extract .mcpack files in your browser. Browse textures and assets. Free.",
     "keywords": [
       "extract mcpack",
       "open mcpack",
@@ -170,7 +436,7 @@
   {
     "slug": "generate-sha256-md5-online",
     "title": "How to Generate a SHA-256 or MD5 Checksum Online Without Uploading [2026]",
-    "description": "Generate a SHA-256 or MD5 checksum from text or a file in your browser — no upload, no server. Step-by-step: verify a download, compare checksums, und",
+    "description": "Generate SHA-256 or MD5 checksums. Verify downloads. No upload. Free.",
     "keywords": [
       "generate sha256",
       "md5 checksum online",
@@ -183,8 +449,8 @@
   },
   {
     "slug": "hash-generator-online",
-    "title": "Free Hash Generator Online — MD5, SHA-256, SHA-512 from Text or File [2026]",
-    "description": "Generate MD5, SHA-1, SHA-256, SHA-384, or SHA-512 hashes from any text or file entirely in your browser. No upload, no account. Web Crypto API runs lo",
+    "title": "Hash Generator Online — MD5, SHA, SHA-512 Free [2026]",
+    "description": "Generate MD5, SHA-256, SHA-512 hashes. No upload, no account. Free.",
     "keywords": [
       "hash generator",
       "hash generator online",
@@ -198,7 +464,7 @@
   {
     "slug": "open-apk-file-online",
     "title": "How to Open an APK File Without Installing It [2026]",
-    "description": "An APK is a ZIP archive — open it in your browser to view AndroidManifest.xml, resources, and assets without installing the app. JSZip runs locally, n",
+    "description": "View APK files in your browser. Browse app data. No upload. Free.",
     "keywords": [
       "open apk file",
       "view apk contents",
@@ -211,8 +477,8 @@
   },
   {
     "slug": "open-ipa-file-online",
-    "title": "How to Open an IPA File Online Without Installing Anything [2026]",
-    "description": "Open an .ipa file and browse its contents without Xcode, without a Mac, and without installing anything. An IPA is a renamed ZIP — view Info.plist, as",
+    "title": "Open IPA File Online (No Xcode Needed) [2026]",
+    "description": "Open IPA files in your browser. Browse iOS app files. Free.",
     "keywords": [
       "open ipa file",
       "how to open ipa",
@@ -226,7 +492,7 @@
   {
     "slug": "open-iso-file-online",
     "title": "How to Open an ISO File Without Burning or Mounting [2026]",
-    "description": "Open an .iso file and access the files inside without burning a disc or mounting a virtual drive. ISO9660 read entirely in your browser — no upload, n",
+    "description": "Open ISO files without burning or mounting. Browse files in your browser. Free.",
     "keywords": [
       "open iso file",
       "how to open iso",
@@ -240,7 +506,7 @@
   {
     "slug": "open-minecraft-mcworld-file",
     "title": "How to Open a .mcworld File (Minecraft World) [2026]",
-    "description": "Open and extract a .mcworld file in your browser — no upload, no Minecraft required. A .mcworld is a renamed ZIP. JSZip reads it locally: browse chunk",
+    "description": "Extract .mcworld files in your browser. Browse world data and assets. Free.",
     "keywords": [
       "open mcworld file",
       "extract mcworld",
@@ -282,7 +548,7 @@
   {
     "slug": "qr-code-generator-online",
     "title": "Free QR Code Generator Online — No Signup, No Expiry [2026]",
-    "description": "Generate a QR code from any URL, text, Wi-Fi, email, or vCard entirely in your browser — no signup, no account, no expiry. Download PNG or SVG. Free f",
+    "description": "Create QR codes from URLs, text, email, Wi-Fi. Download PNG/SVG. Free.",
     "keywords": [
       "qr code generator",
       "free qr code generator",
@@ -295,8 +561,8 @@
   },
   {
     "slug": "qr-code-reader-online",
-    "title": "QR Code Reader Online — Decode a QR Code from an Image Free [2026]",
-    "description": "Read and decode any QR code from an image or screenshot entirely in your browser — no upload, no camera required. jsQR runs locally. See the decoded U",
+    "title": "QR Code Reader Online — Decode Free [2026]",
+    "description": "Read QR codes from images. No camera, no upload. Free.",
     "keywords": [
       "qr code reader",
       "qr code reader online",
@@ -310,7 +576,7 @@
   {
     "slug": "rar-to-zip-online",
     "title": "Convert RAR to ZIP Online Free (No Upload) [2026]",
-    "description": "Convert any RAR file to ZIP entirely in your browser — no upload, no WinRAR, no server. libarchive.wasm extracts locally, JSZip repackages. Verifiable",
+    "description": "Convert RAR to ZIP in your browser. No server, no signup. Free.",
     "keywords": [
       "rar to zip",
       "convert rar to zip",
@@ -323,8 +589,8 @@
   },
   {
     "slug": "scan-barcode-from-image",
-    "title": "How to Scan a Barcode from an Image or Photo (No Scanner App) [2026]",
-    "description": "Scan and decode a barcode from a product picture, screenshot, or photo — no scanner app, no camera, no upload. ZXing reads the image locally in your b",
+    "title": "Scan Barcode from Image (No App Needed) [2026]",
+    "description": "Scan barcodes from photos. No app, no camera. Free.",
     "keywords": [
       "scan barcode from image",
       "barcode from photo",
@@ -337,8 +603,8 @@
   },
   {
     "slug": "scan-qr-code-from-image",
-    "title": "How to Scan a QR Code from a Screenshot or Picture (No Camera) [2026]",
-    "description": "Scan and decode a QR code from a screenshot, picture, or photo — no camera needed, no upload. jsQR reads the image locally in your browser. Covers Wha",
+    "title": "Scan QR Code from Screenshot (No Camera) [2026]",
+    "description": "Decode QR codes from images. No camera, no upload. Free.",
     "keywords": [
       "scan qr from image",
       "qr code from screenshot",
@@ -366,7 +632,7 @@
   {
     "slug": "tar-to-zip-online",
     "title": "Convert TAR to ZIP Online Free (No Upload) [2026]",
-    "description": "Convert any .tar, .tar.gz, .tgz, .tar.bz2, or .tar.xz archive to ZIP entirely in your browser — no upload, no terminal, no 7-Zip install. libarchive.w",
+    "description": "Convert TAR, TAR.GZ, TGZ, TAR.BZ2, TAR.XZ to ZIP. Free.",
     "keywords": [
       "tar to zip",
       "tar.gz to zip",

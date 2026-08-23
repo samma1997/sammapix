@@ -3393,6 +3393,48 @@ export const IconOpenXz: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Word to PDF icon (DOCX page with arrow morphing to PDF badge) ─────────────
+export const IconWordToPdf: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes w2p-arrow {
+        0%, 20% { transform: translateX(-2px); opacity: 0.3; }
+        55%      { transform: translateX(2px);  opacity: 1; }
+        80%      { transform: translateX(0px);  opacity: 0.3; }
+        100%     { transform: translateX(-2px); opacity: 0.3; }
+      }
+      @keyframes w2p-badge {
+        0%, 45%  { opacity: 0;   transform: scale(0.8); }
+        65%, 88% { opacity: 1;   transform: scale(1);   }
+        98%,100% { opacity: 0;   transform: scale(0.8); }
+      }
+      .w2p-arrow { animation: w2p-arrow 2.4s ease-in-out infinite; }
+      .w2p-badge { transform-origin: 38px 34px; animation: w2p-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* DOCX page */}
+    <rect x="2" y="4" width="20" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    <path d="M16 4 L16 10 L22 10" fill="none" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <line x1="5" y1="14" x2="17" y2="14" stroke={accent} strokeWidth="1.1" strokeLinecap="round"/>
+    <line x1="5" y1="17" x2="17" y2="17" stroke={accent} strokeWidth="1.1" strokeLinecap="round"/>
+    <line x1="5" y1="20" x2="13" y2="20" stroke={accent} strokeWidth="1.1" strokeLinecap="round"/>
+    <text x="12" y="29" fontSize="4.5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">DOCX</text>
+    {/* Arrow */}
+    <g className="w2p-arrow">
+      <path d="M24 17 L28 17 M26 15 L28 17 L26 19" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    {/* PDF page */}
+    <rect x="28" y="4" width="18" height="24" rx="2.5" fill="#EF4444" fillOpacity="0.12" stroke="#EF4444" strokeWidth="1.5"/>
+    <path d="M41 4 L41 9 L46 9" fill="none" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <line x1="31" y1="13" x2="43" y2="13" stroke="#EF4444" strokeWidth="1.1" strokeLinecap="round"/>
+    <line x1="31" y1="16" x2="43" y2="16" stroke="#EF4444" strokeWidth="1.1" strokeLinecap="round"/>
+    {/* PDF badge */}
+    <g className="w2p-badge" style={{ opacity: 0 }}>
+      <rect x="27" y="30" width="19" height="10" rx="3" fill="#EF4444"/>
+      <text x="36.5" y="37.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">PDF</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

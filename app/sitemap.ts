@@ -204,6 +204,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/ai-label-video",
     "/tools/json-formatter",
     "/tools/3d-viewer",
+    "/tools/extract-jar",
+    "/tools/open-gz",
+    "/tools/open-xz",
+    "/tools/word-to-pdf",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

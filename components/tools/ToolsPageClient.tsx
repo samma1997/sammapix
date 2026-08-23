@@ -86,6 +86,7 @@ import {
   IconExtractJar,
   IconOpenGz,
   IconOpenXz,
+  IconWordToPdf,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -985,6 +986,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#EF4444",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconTxtToPdf,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Word to PDF",
+    href: "/tools/word-to-pdf",
+    tagline: "Convert .docx files to PDF entirely in your browser. Preserves formatting, tables, and images. Nothing is uploaded — 100% private.",
+    accent: "#6366F1",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconWordToPdf,
     category: ["Optimize"],
     isNew: true,
   },
