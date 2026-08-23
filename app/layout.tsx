@@ -10,6 +10,7 @@ import AntiCopy from "@/components/layout/AntiCopy";
 import CrossToolToast from "@/components/tools/CrossToolToast";
 import PowerUserUpgradeTrigger from "@/components/tools/PowerUserUpgradeTrigger";
 import AttributionTracker from "@/components/AttributionTracker";
+import CoffeePopup from "@/components/CoffeePopup";
 import { headers } from "next/headers";
 
 const inter = Inter({
@@ -162,6 +163,7 @@ export default async function RootLayout({
           <CrossToolToast />
           <PowerUserUpgradeTrigger />
           <AttributionTracker />
+          <CoffeePopup />
         </Providers>
         <Analytics />
         <script
