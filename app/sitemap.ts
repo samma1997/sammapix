@@ -208,6 +208,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/open-gz",
     "/tools/open-xz",
     "/tools/word-to-pdf",
+    "/tools/open-cab",
   ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),

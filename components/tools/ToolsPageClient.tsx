@@ -87,6 +87,7 @@ import {
   IconOpenGz,
   IconOpenXz,
   IconWordToPdf,
+  IconOpenCab,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -666,6 +667,16 @@ const TOOLS: ToolWithCategory[] = [
     accent: "#8B5CF6",
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconOpen7z,
+    category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "CAB File Opener",
+    href: "/tools/open-cab",
+    tagline: "Extract Windows Cabinet .cab files in-browser. View drivers, installer files, and Windows Update packages. No upload.",
+    accent: "#8B5CF6",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconOpenCab,
     category: ["Optimize"],
     isNew: true,
   },

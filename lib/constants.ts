@@ -145,6 +145,7 @@ export const TOOL_SLUGS = [
   "open-gz",
   "open-xz",
   "word-to-pdf",
+  "open-cab",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

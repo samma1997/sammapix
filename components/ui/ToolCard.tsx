@@ -3393,6 +3393,51 @@ export const IconOpenXz: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ─── IconOpenCab — Windows Cabinet extractor icon ─────────────────────────────
+export const IconOpenCab: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes cab-lid {
+        0%, 20%  { transform: translateY(0px) rotate(0deg);   opacity: 0.9; }
+        50%      { transform: translateY(-5px) rotate(-8deg); opacity: 1; }
+        80%, 100%{ transform: translateY(0px) rotate(0deg);   opacity: 0.9; }
+      }
+      @keyframes cab-file {
+        0%, 25%  { transform: translate(0, 0) scale(0.6); opacity: 0; }
+        55%, 72% { transform: translate(12px, -10px) scale(1); opacity: 1; }
+        92%, 100%{ transform: translate(12px, -10px) scale(1); opacity: 0; }
+      }
+      @keyframes cab-badge {
+        0%, 100% { opacity: 0.6; transform: scale(0.93); }
+        50%       { opacity: 1;   transform: scale(1.0); }
+      }
+      .cab-lid  { transform-origin: 14px 16px; animation: cab-lid  2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+      .cab-file { transform-origin: 6px 22px;  animation: cab-file 2.4s ease-in-out infinite; }
+      .cab-bdg  { transform-origin: 38px 38px; animation: cab-badge 2s ease-in-out infinite; }
+    `}</style>
+    {/* Archive box body */}
+    <rect x="4" y="16" width="22" height="26" rx="2.5" fill={accent} fillOpacity="0.12" stroke={accent} strokeWidth="1.5"/>
+    {/* Archive lid (animated) */}
+    <g className="cab-lid">
+      <rect x="4" y="10" width="22" height="8" rx="2.5" fill={accent} fillOpacity="0.25" stroke={accent} strokeWidth="1.5"/>
+      <text x="15" y="17" fontSize="5" fill={accent} textAnchor="middle" fontWeight="900" fontFamily="monospace">CAB</text>
+    </g>
+    {/* Flying extracted file */}
+    <g className="cab-file" style={{ opacity: 0 }}>
+      <rect x="1" y="16" width="11" height="13" rx="1.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1"/>
+      <line x1="3" y1="21" x2="10" y2="21" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+      <line x1="3" y1="24" x2="8"  y2="24" stroke={accent} strokeWidth="0.9" strokeLinecap="round"/>
+    </g>
+    {/* Arrow right */}
+    <path d="M29 28 L37 28 M33 25 L37 28 L33 31" stroke={accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* ZIP badge */}
+    <g className="cab-bdg">
+      <rect x="30" y="30" width="16" height="12" rx="2.5" fill={accent} fillOpacity="0.2" stroke={accent} strokeWidth="1.25"/>
+      <text x="38" y="38.5" fontSize="5" fill={accent} textAnchor="middle" fontWeight="800" fontFamily="monospace">ZIP</text>
+    </g>
+  </svg>
+);
+
 // ── Word to PDF icon (DOCX page with arrow morphing to PDF badge) ─────────────
 export const IconWordToPdf: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

@@ -1035,6 +1035,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["txt-to-pdf", "jpg-to-pdf", "pdf-compress", "pdf-merge"],
     relatedBlogSlugs: ["how-to-convert-word-to-pdf-online-free"],
   },
+  "open-cab": {
+    id: "open-cab",
+    name: "CAB File Opener",
+    shortDesc: "Open and extract Windows Cabinet .cab files in-browser, no upload, works on Mac and Linux",
+    slug: "/tools/open-cab",
+    category: "optimize",
+    relatedTools: ["open-7z", "unrar", "tar-gz", "zip-creator"],
+    relatedBlogSlugs: ["how-to-open-cab-files-online"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {
