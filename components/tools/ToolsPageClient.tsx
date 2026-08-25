@@ -88,6 +88,7 @@ import {
   IconOpenXz,
   IconWordToPdf,
   IconOpenCab,
+  IconAspectRatio,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -678,6 +679,16 @@ const TOOLS: ToolWithCategory[] = [
     badges: ["Free", "Privacy", "No upload"],
     Icon: IconOpenCab,
     category: ["Optimize"],
+    isNew: true,
+  },
+  {
+    name: "Aspect Ratio Calculator",
+    href: "/tools/aspect-ratio",
+    tagline: "Convert any aspect ratio to exact pixels (9:16, 16:9, 4:3) and back.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload"],
+    Icon: IconAspectRatio,
+    category: ["Creative"],
     isNew: true,
   },
   {

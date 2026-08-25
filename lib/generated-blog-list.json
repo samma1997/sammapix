@@ -1,5 +1,19 @@
 [
   {
+    "slug": "aspect-ratio-in-pixels-guide",
+    "title": "Aspect Ratio in Pixels: 9:16, 16:9, 4:3 and More [2026]",
+    "description": "Complete reference for aspect ratio pixel sizes. 9:16 = 1080x1920, 16:9 = 1920x1080, 4:3 = 1024x768. Includes per-platform sizes for Reels, TikTok, Yo",
+    "keywords": [
+      "aspect ratio in pixels",
+      "9:16 in pixels",
+      "16:9 in pixels",
+      "4:3 in pixels",
+      "9:16 size"
+    ],
+    "publishedDate": "2026-08-25",
+    "url": "/blog/aspect-ratio-in-pixels-guide"
+  },
+  {
     "slug": "how-to-open-cab-files-online",
     "title": "How to Open CAB Files Online (Free, No Upload) [2026]",
     "description": "Open and extract Windows .cab (Cabinet) files directly in your browser. Pull a driver, an .inf, or a single file out of a CAB without installing anyth",

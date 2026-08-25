@@ -91,6 +91,7 @@ import {
   IconOpenXz,
   IconWordToPdf,
   IconOpenCab,
+  IconAspectRatio,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -190,6 +191,7 @@ const OpenGzClient      = dynamic(() => import("@/components/tools/OpenGzClient"
 const OpenXzClient      = dynamic(() => import("@/components/tools/OpenXzClient"));
 const WordToPdfClient   = dynamic(() => import("@/components/tools/WordToPdfClient"));
 const OpenCabClient     = dynamic(() => import("@/components/tools/OpenCabClient"));
+const AspectRatioClient = dynamic(() => import("@/components/tools/AspectRatioClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -290,6 +292,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "open-xz":                 OpenXzClient,
   "word-to-pdf":             WordToPdfClient,
   "open-cab":                OpenCabClient,
+  "aspect-ratio":            AspectRatioClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -431,6 +434,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "open-xz":                 { Icon: IconOpenXz,                accent: "#0EA5E9" },
   "word-to-pdf":             { Icon: IconWordToPdf,             accent: "#6366F1" },
   "open-cab":                { Icon: IconOpenCab,               accent: "#8B5CF6" },
+  "aspect-ratio":            { Icon: IconAspectRatio,           accent: "#6366F1" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1433,6 +1437,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once." },
     ],
     proTip: { text: "Need to open a .7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
+  },
+  "aspect-ratio": {
+    label: "Aspect Ratio Calculator",
+    tagline: "Convert any aspect ratio to exact pixel dimensions, or convert pixels to a simplified ratio. Supports 9:16, 16:9, 4:3, 1:1, 4:5, 3:2, 21:9, and more.",
+    steps: [
+      { title: "Pick a mode", desc: "Choose Ratio to pixels (most common), Pixels to ratio, or Resize keeping ratio using the tab bar at the top of the calculator." },
+      { title: "Enter your values", desc: "Select the ratio from the dropdown (e.g. 9:16) and type one dimension. The other is calculated instantly. Or enter width and height to get the simplified ratio." },
+      { title: "Copy or navigate", desc: "Copy the result with one click, or follow the direct link to the crop or resize tool for that ratio." },
+    ],
+    proTip: { text: "Need to crop your image to the exact ratio you just calculated? Use the crop tool.", linkLabel: "Crop Image", linkHref: "/crop/9-16" },
   },
   "open-xz": {
     label: "XZ File Opener",

@@ -1044,6 +1044,15 @@ export const TOOLS: Record<string, ToolMeta> = {
     relatedTools: ["open-7z", "unrar", "tar-gz", "zip-creator"],
     relatedBlogSlugs: ["how-to-open-cab-files-online"],
   },
+  "aspect-ratio": {
+    id: "aspect-ratio",
+    name: "Aspect Ratio Calculator",
+    shortDesc: "Convert any aspect ratio to pixel dimensions or pixels back to a ratio. 9:16, 16:9, 4:3, 1:1, 4:5, 3:2, 21:9 and more.",
+    slug: "/tools/aspect-ratio",
+    category: "optimize",
+    relatedTools: ["croproatio", "resizepack", "compress"],
+    relatedBlogSlugs: ["aspect-ratio-in-pixels-guide"],
+  },
 };
 
 export function getRelatedTools(toolId: string, max = 4): ToolMeta[] {
