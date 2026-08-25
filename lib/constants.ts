@@ -146,6 +146,7 @@ export const TOOL_SLUGS = [
   "open-xz",
   "word-to-pdf",
   "open-cab",
+  "aspect-ratio",
 ] as const;
 
 export const TOOL_COUNT = TOOL_SLUGS.length;

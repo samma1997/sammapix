@@ -74,6 +74,7 @@ import {
   FileX,
   Grid,
   Split,
+  Calculator,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
@@ -192,6 +193,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   { name: "Color Picker", slug: "color-picker", href: "/dashboard/tools/color-picker", icon: <Code className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "JSON Formatter", slug: "json-formatter", href: "/dashboard/tools/json-formatter", icon: <Code className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "3D Model Viewer", slug: "3d-viewer", href: "/dashboard/tools/3d-viewer", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Aspect Ratio Calculator", slug: "aspect-ratio", href: "/dashboard/tools/aspect-ratio", icon: <Calculator className="h-4 w-4" strokeWidth={1.5} /> },
 
   // ── AI ─────────────────────────────────────────────────────────────────────
   { name: "AI Rename", slug: "ai-rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
@@ -252,7 +254,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "Generate & Dev",
     icon: <Code className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["qr-code-generator", "qr-code-reader", "barcode-generator", "barcode-reader", "hash-generator", "password-generator", "url-encode-decode", "ico-generator", "color-picker", "json-formatter", "3d-viewer"],
+    slugs: ["qr-code-generator", "qr-code-reader", "barcode-generator", "barcode-reader", "hash-generator", "password-generator", "url-encode-decode", "ico-generator", "color-picker", "json-formatter", "3d-viewer", "aspect-ratio"],
   },
   {
     label: "AI",

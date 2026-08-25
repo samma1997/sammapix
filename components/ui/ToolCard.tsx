@@ -3480,6 +3480,41 @@ export const IconWordToPdf: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+// ── Aspect Ratio Calculator icon (nested rectangles with ratio badge) ────────
+export const IconAspectRatio: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes ar-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.6; }
+        50%       { transform: scale(0.88); opacity: 1; }
+      }
+      @keyframes ar-badge {
+        0%, 40%  { opacity: 0; transform: scale(0.8); }
+        60%, 90% { opacity: 1; transform: scale(1); }
+        100%     { opacity: 0; transform: scale(0.8); }
+      }
+      .ar-outer { transform-origin: 24px 22px; animation: ar-pulse 2.4s ease-in-out infinite; }
+      .ar-badge  { transform-origin: 38px 38px; animation: ar-badge 2.4s cubic-bezier(0.34,1.4,0.64,1) infinite; }
+    `}</style>
+    {/* Outer frame */}
+    <g className="ar-outer">
+      <rect x="4" y="8" width="40" height="28" rx="3" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.5"/>
+      {/* Inner proportional frame (16:9 hint) */}
+      <rect x="10" y="14" width="28" height="16" rx="2" fill={accent} fillOpacity="0.15" stroke={accent} strokeWidth="1.25"/>
+      {/* Corner handles */}
+      <rect x="8" y="12" width="4" height="4" rx="1" fill={accent}/>
+      <rect x="36" y="12" width="4" height="4" rx="1" fill={accent}/>
+      <rect x="8" y="28" width="4" height="4" rx="1" fill={accent}/>
+      <rect x="36" y="28" width="4" height="4" rx="1" fill={accent}/>
+    </g>
+    {/* Ratio badge */}
+    <g className="ar-badge" style={{ opacity: 0 }}>
+      <rect x="26" y="34" width="20" height="10" rx="3" fill={accent}/>
+      <text x="36" y="41.5" fontSize="5.5" fill="white" textAnchor="middle" fontWeight="800" fontFamily="monospace">16:9</text>
+    </g>
+  </svg>
+);
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
 export const ToolCard: React.FC<{ tool: ToolCardData }> = ({ tool }) => {

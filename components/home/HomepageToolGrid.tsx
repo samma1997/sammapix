@@ -91,6 +91,7 @@ import {
   IconOpenXz,
   IconWordToPdf,
   IconOpenCab,
+  IconAspectRatio,
 } from "@/components/ui/ToolCard";
 
 // ─── Local icons (same as in ToolsPageClient) ────────────────────────────────
@@ -363,6 +364,7 @@ const ALL_HOMEPAGE_TOOLS: HomepageTool[] = [
   { name: "Open RAR Online", href: "/tools/unrar", tagline: "Extract RAR files in-browser — no upload.", accent: "#0EA5E9", badge: "Free", Icon: IconUnrar, category: "Optimize" },
   { name: "Open 7z Online", href: "/tools/open-7z", tagline: "Extract .7z files in-browser — no Mac support needed.", accent: "#8B5CF6", badge: "Free", Icon: IconOpen7z, category: "Optimize", isNew: true },
   { name: "CAB File Opener", href: "/tools/open-cab", tagline: "Extract Windows Cabinet .cab files in-browser — drivers, installers, updates.", accent: "#8B5CF6", badge: "Free", Icon: IconOpenCab, category: "Optimize", isNew: true },
+  { name: "Aspect Ratio Calculator", href: "/tools/aspect-ratio", tagline: "Convert any aspect ratio to exact pixels (9:16, 16:9, 4:3) and back.", accent: "#6366F1", badge: "Free", Icon: IconAspectRatio, category: "Creative", isNew: true },
   { name: "Create a ZIP File", href: "/tools/zip-creator", tagline: "Bundle files or a folder into one .zip — no upload.", accent: "#8B5CF6", badge: "Free", Icon: IconZipCreator, category: "Optimize", isNew: true },
   { name: "Open tar.gz Online", href: "/tools/tar-gz", tagline: "Extract .tar.gz / .tgz / .gz in-browser — no upload.", accent: "#8B5CF6", badge: "Free", Icon: IconTarGz, category: "Optimize", isNew: true },
   { name: "RAW Converter", href: "/tools/raw-converter", tagline: "CR2, NEF, ARW, DNG to JPG or WebP. In your browser, no upload.", accent: "#0D9488", badge: "Free", Icon: IconRawConverter, category: "Optimize", isNew: true },

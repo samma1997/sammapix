@@ -108,6 +108,7 @@ import {
   IconRawConverter,
   IconInstagramGrid,
   IconOpenCab,
+  IconAspectRatio,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -815,6 +816,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconOpenCab,
     category: ["Optimize"],
     keywords: ["open cab file", "extract cab", "cab extractor", "windows cabinet", "cab to zip", "open cab mac", "cab file viewer", "open cab online", "cab extractor online", "driver cab extractor"],
+  },
+  {
+    name: "Aspect Ratio Calculator",
+    slug: "aspect-ratio",
+    href: "/dashboard/tools/aspect-ratio",
+    tagline: "Convert any aspect ratio to exact pixels (9:16, 16:9, 4:3) and back. No upload needed.",
+    accent: "#6366F1",
+    badges: ["Free", "No upload"],
+    Icon: IconAspectRatio,
+    category: ["Creative"],
+    keywords: ["aspect ratio", "9:16 in px", "16:9 pixels", "ratio calculator", "pixels to ratio", "resolution calculator", "9:16 size", "4:3 in pixels", "ratio to pixels", "image dimensions"],
   },
   {
     name: "Compress PDF",
