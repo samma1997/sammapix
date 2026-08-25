@@ -71,6 +71,7 @@ import {
   IconJsonFormatter,
   Icon3dViewer,
   IconWordToPdf,
+  IconOpenCab,
 } from "@/components/ui/ToolCard";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -115,6 +116,7 @@ const toolGrid = [
   { Icon: IconJxl,          name: "JXL",        accent: "#F59E0B" },
   { Icon: IconUnrar,        name: "Open RAR",   accent: "#0EA5E9" },
   { Icon: IconOpen7z,       name: "Open 7z",    accent: "#8B5CF6" },
+  { Icon: IconOpenCab,      name: "Open CAB",   accent: "#8B5CF6" },
   { Icon: IconPdfCompress,  name: "Compress PDF", accent: "#EF4444" },
   { Icon: IconPdfRotate,   name: "Rotate PDF",   accent: "#EF4444" },
   { Icon: IconPdfUnlock,   name: "Unlock PDF",   accent: "#EF4444" },

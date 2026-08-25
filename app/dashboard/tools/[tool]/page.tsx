@@ -90,6 +90,7 @@ import {
   IconOpenGz,
   IconOpenXz,
   IconWordToPdf,
+  IconOpenCab,
 } from "@/components/ui/ToolCard";
 
 // ─── Lazy-load tool components to keep bundle lean ──────────────────────────
@@ -188,6 +189,7 @@ const ExtractJarClient  = dynamic(() => import("@/components/tools/ExtractJarCli
 const OpenGzClient      = dynamic(() => import("@/components/tools/OpenGzClient"));
 const OpenXzClient      = dynamic(() => import("@/components/tools/OpenXzClient"));
 const WordToPdfClient   = dynamic(() => import("@/components/tools/WordToPdfClient"));
+const OpenCabClient     = dynamic(() => import("@/components/tools/OpenCabClient"));
 
 // ─── Tool component map ──────────────────────────────────────────────────────
 
@@ -287,6 +289,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "open-gz":                 OpenGzClient,
   "open-xz":                 OpenXzClient,
   "word-to-pdf":             WordToPdfClient,
+  "open-cab":                OpenCabClient,
 };
 
 // ─── Extra icons not in ToolCard.tsx ──────────────────────────────────────────
@@ -427,6 +430,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "open-gz":                 { Icon: IconOpenGz,                accent: "#0EA5E9" },
   "open-xz":                 { Icon: IconOpenXz,                accent: "#0EA5E9" },
   "word-to-pdf":             { Icon: IconWordToPdf,             accent: "#6366F1" },
+  "open-cab":                { Icon: IconOpenCab,               accent: "#8B5CF6" },
 };
 
 // ─── Combo tool configs ──────────────────────────────────────────────────────
@@ -1419,6 +1423,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once." },
     ],
     proTip: { text: "Need to open a .tar.xz or .xz archive? SammaPix has a dedicated XZ File Opener.", linkLabel: "XZ File Opener", linkHref: "/dashboard/tools/open-xz" },
+  },
+  "open-cab": {
+    label: "CAB File Opener",
+    tagline: "Open Windows Cabinet .cab files in your browser. Driver packages, Windows Update files, and legacy installers. Files never leave your device.",
+    steps: [
+      { title: "Drop your CAB file", desc: "Drag and drop a .cab file. libarchive (WebAssembly) decompresses it entirely in your browser — your file never leaves your device. Up to 200 MB free." },
+      { title: "Browse the contents", desc: "See every file and folder inside. Common contents include .inf and .sys driver files, .dll libraries, and installer payloads." },
+      { title: "Download what you need", desc: "Click any file to download it individually for free, or use 'Save all as ZIP' (Day Pass or Pro) to export everything at once." },
+    ],
+    proTip: { text: "Need to open a .7z or RAR archive? SammaPix has dedicated tools for those too.", linkLabel: "Open 7z Online", linkHref: "/dashboard/tools/open-7z" },
   },
   "open-xz": {
     label: "XZ File Opener",

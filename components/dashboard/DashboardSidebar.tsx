@@ -166,6 +166,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   // ── Archive ────────────────────────────────────────────────────────────────
   { name: "Open RAR Online", slug: "unrar", href: "/dashboard/tools/unrar", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Open 7z Online", slug: "open-7z", href: "/dashboard/tools/open-7z", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "CAB File Opener", slug: "open-cab", href: "/dashboard/tools/open-cab", icon: <FolderArchive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "RAR to ZIP", slug: "rar-to-zip", href: "/dashboard/tools/rar-to-zip", icon: <Archive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "7Z to ZIP", slug: "7z-to-zip", href: "/dashboard/tools/7z-to-zip", icon: <Archive className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "TAR to ZIP", slug: "tar-to-zip", href: "/dashboard/tools/tar-to-zip", icon: <Archive className="h-4 w-4" strokeWidth={1.5} /> },
@@ -246,7 +247,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "Archive",
     icon: <FolderArchive className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["unrar", "open-7z", "rar-to-zip", "7z-to-zip", "tar-to-zip", "tar-gz", "zip-creator", "iso-extractor", "apk-extractor", "ipa-extractor", "minecraft-extractor", "extract-jar", "open-gz", "open-xz"],
+    slugs: ["unrar", "open-7z", "open-cab", "rar-to-zip", "7z-to-zip", "tar-to-zip", "tar-gz", "zip-creator", "iso-extractor", "apk-extractor", "ipa-extractor", "minecraft-extractor", "extract-jar", "open-gz", "open-xz"],
   },
   {
     label: "Generate & Dev",

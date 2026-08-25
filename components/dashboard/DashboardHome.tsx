@@ -107,6 +107,7 @@ import {
   IconTarGz,
   IconRawConverter,
   IconInstagramGrid,
+  IconOpenCab,
   type ToolCardData,
 } from "@/components/ui/ToolCard";
 
@@ -803,6 +804,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconOpen7z,
     category: ["Optimize"],
     keywords: ["open 7z", "extract 7z", "7z to zip", "open 7z mac", "7z extractor", "7z opener", "view 7z", "7z file", "7zip online", "7z extractor online"],
+  },
+  {
+    name: "CAB File Opener",
+    slug: "open-cab",
+    href: "/dashboard/tools/open-cab",
+    tagline: "Extract Windows Cabinet .cab files in-browser. View drivers, installers, and update packages. No upload.",
+    accent: "#8B5CF6",
+    badges: ["Free", "Privacy", "No upload"],
+    Icon: IconOpenCab,
+    category: ["Optimize"],
+    keywords: ["open cab file", "extract cab", "cab extractor", "windows cabinet", "cab to zip", "open cab mac", "cab file viewer", "open cab online", "cab extractor online", "driver cab extractor"],
   },
   {
     name: "Compress PDF",
