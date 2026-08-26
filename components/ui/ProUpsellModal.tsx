@@ -159,6 +159,7 @@ export default function ProUpsellModal({
   const isIt = (pathname || "").startsWith("/it");
   const pricingHref = isIt ? "/it/prezzi#credits" : "/pricing#credits";
   const [loading, setLoading] = useState(false);
+  const [annualLoading, setAnnualLoading] = useState(false);
   const [creditsLoading, setCreditsLoading] = useState(false);
   const [dayPassLoading, setDayPassLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
@@ -177,6 +178,15 @@ export default function ProUpsellModal({
     ? (monthlyFinalCents / 100).toFixed(2).replace(".", ",")
     : (monthlyFinalCents / 100).toFixed(monthlyFinalCents % 100 === 0 ? 0 : 2);
   const curr = isIt ? "€" : "$";
+
+  // Annual option: the same founding coupon applies at checkout (plan "annual"),
+  // and it is genuinely cheaper than paying monthly for a year, so the savings
+  // claim is honest. Surfaced as a subtle secondary link, not a competing button.
+  const annualFinalCents = applyFoundingDiscount(isIt ? 6499 : 6500, founding);
+  const annualFinal = isIt
+    ? (annualFinalCents / 100).toFixed(2).replace(".", ",")
+    : (annualFinalCents / 100).toFixed(annualFinalCents % 100 === 0 ? 0 : 2);
+  const annualSavePct = Math.round((1 - annualFinalCents / (monthlyFinalCents * 12)) * 100);
 
   // Track upsell shown when modal opens
   const [tracked, setTracked] = useState(false);
@@ -218,6 +228,30 @@ export default function ProUpsellModal({
       alert(`Network error: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAnnual = async () => {
+    trackEvent("upsell_annual_clicked", { trigger });
+    fireBeginCheckoutEvent("annual");
+    setAnnualLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: "annual", source: checkoutSource() }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(`Checkout error: ${data.error ?? "no URL returned"}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setAnnualLoading(false);
     }
   };
 
@@ -427,6 +461,20 @@ export default function ProUpsellModal({
                     ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
                     : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
               </button>
+
+              {annualSavePct > 0 && (
+                <button
+                  onClick={handleAnnual}
+                  disabled={annualLoading}
+                  className="w-full inline-flex items-center justify-center gap-1 px-4 py-1.5 text-[11px] font-medium text-[#6366F1] hover:text-[#4F46E5] transition-colors mb-2 disabled:opacity-60"
+                >
+                  {annualLoading
+                    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                    : (isIt
+                        ? `Oppure paga annuale ${curr}${annualFinal}/anno \u00b7 risparmi ~${annualSavePct}%`
+                        : `Or pay yearly ${curr}${annualFinal}/yr \u00b7 save ~${annualSavePct}%`)}
+                </button>
+              )}
               {/* No "Continue with first N files" and no credit-pack alt for success */}
             </>
           ) : (
@@ -448,6 +496,20 @@ export default function ProUpsellModal({
                     ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
                     : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
               </button>
+
+              {annualSavePct > 0 && (
+                <button
+                  onClick={handleAnnual}
+                  disabled={annualLoading}
+                  className="w-full inline-flex items-center justify-center gap-1 px-4 py-1.5 text-[11px] font-medium text-[#6366F1] hover:text-[#4F46E5] transition-colors mb-2 disabled:opacity-60"
+                >
+                  {annualLoading
+                    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                    : (isIt
+                        ? `Oppure paga annuale ${curr}${annualFinal}/anno · risparmi ~${annualSavePct}%`
+                        : `Or pay yearly ${curr}${annualFinal}/yr · save ~${annualSavePct}%`)}
+                </button>
+              )}
 
               {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
               {showCreditAlt && (
