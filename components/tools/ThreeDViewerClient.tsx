@@ -432,12 +432,18 @@ export default function ThreeDViewerClient() {
         >((resolve, reject) => {
           loader.parse(buffer, "", resolve, reject);
         });
+        // Bake node transforms into the geometry — GLB/GLTF often store the
+        // mesh scale/rotation/position on the node, not the geometry. Ignoring
+        // it renders the model at the wrong scale/orientation.
+        gltf.scene.updateMatrixWorld(true);
         gltf.scene.traverse((child) => {
           if (!geometry && (child as import("three").Mesh).isMesh) {
-            geometry = (
+            const g = (
               (child as import("three").Mesh)
                 .geometry as import("three").BufferGeometry
             ).clone();
+            g.applyMatrix4((child as import("three").Mesh).matrixWorld);
+            geometry = g;
           }
         });
       } else if (ext === "ply") {
@@ -935,18 +941,67 @@ export default function ThreeDViewerClient() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-4">
           {/* Left: viewer + drop zone */}
           <div className="space-y-3">
-            {!fileName && (
-              <div
-                onDragOver={onDragOver}
-                onDragLeave={onDragLeave}
-                onDrop={onDrop}
-                className={`relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors cursor-pointer min-h-[300px] ${
-                  isDragging
-                    ? "border-[#6366F1] bg-[#6366F1]/5"
-                    : "border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#111] hover:border-[#6366F1]/60"
-                }`}
-              >
-                <label className="flex flex-col items-center gap-3 cursor-pointer w-full h-full p-10">
+            {/* Drop zone is rendered as an overlay inside the persistent mount below */}
+
+            {/* Toolbar — only once a file is loaded */}
+            {fileName && (
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-xs font-mono text-[#525252] dark:text-[#A3A3A3] truncate max-w-[240px]">
+                    {fileName}
+                  </span>
+                  <label className="cursor-pointer inline-flex items-center gap-1 text-xs text-[#6366F1] hover:underline">
+                    <input
+                      type="file"
+                      accept=".stl,.obj,.glb,.gltf,.ply"
+                      className="sr-only"
+                      onChange={onFileChange}
+                    />
+                    Change file
+                  </label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={resetView}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] text-xs text-[#525252] dark:text-[#A3A3A3] hover:border-[#6366F1]/60 transition-colors"
+                    title="Reset camera view"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    Reset view
+                  </button>
+                  <button
+                    onClick={takeScreenshot}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] text-xs text-[#525252] dark:text-[#A3A3A3] hover:border-[#6366F1]/60 transition-colors"
+                    title="Save PNG screenshot"
+                  >
+                    <Camera className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    Screenshot
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Persistent viewer mount — ALWAYS rendered so the WebGL canvas is
+                created at the correct size and survives the empty -> loaded swap.
+                Previously two conditional divs shared this ref, so the canvas was
+                built inside a hidden 1x1 node and lost when a file loaded (blank
+                viewport, stats still worked). The drop zone is now an overlay. */}
+            <div
+              ref={mountRef}
+              onDragOver={onDragOver}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
+              className="relative w-full rounded-xl overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A]"
+              style={{ height: 420 }}
+            >
+              {!fileName && (
+                <label
+                  className={`absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 cursor-pointer border-2 border-dashed rounded-xl transition-colors ${
+                    isDragging
+                      ? "border-[#6366F1] bg-[#6366F1]/5"
+                      : "border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#111] hover:border-[#6366F1]/60"
+                  }`}
+                >
                   <input
                     type="file"
                     accept=".stl,.obj,.glb,.gltf,.ply"
@@ -968,78 +1023,22 @@ export default function ThreeDViewerClient() {
                     </p>
                   </div>
                 </label>
-              </div>
-            )}
-
-            {fileName && (
-              <>
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-xs font-mono text-[#525252] dark:text-[#A3A3A3] truncate max-w-[240px]">
-                      {fileName}
-                    </span>
-                    <label className="cursor-pointer inline-flex items-center gap-1 text-xs text-[#6366F1] hover:underline">
-                      <input
-                        type="file"
-                        accept=".stl,.obj,.glb,.gltf,.ply"
-                        className="sr-only"
-                        onChange={onFileChange}
-                      />
-                      Change file
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={resetView}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] text-xs text-[#525252] dark:text-[#A3A3A3] hover:border-[#6366F1]/60 transition-colors"
-                      title="Reset camera view"
-                    >
-                      <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
-                      Reset view
-                    </button>
-                    <button
-                      onClick={takeScreenshot}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] text-xs text-[#525252] dark:text-[#A3A3A3] hover:border-[#6366F1]/60 transition-colors"
-                      title="Save PNG screenshot"
-                    >
-                      <Camera className="h-3.5 w-3.5" strokeWidth={1.5} />
-                      Screenshot
-                    </button>
+              )}
+              {loading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
+                  <div className="text-sm text-white font-medium animate-pulse">
+                    Loading model...
                   </div>
                 </div>
-
-                <div
-                  ref={mountRef}
-                  className="relative w-full rounded-xl overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A]"
-                  style={{ height: 420 }}
-                >
-                  {loading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-                      <div className="text-sm text-white font-medium animate-pulse">
-                        Loading model...
-                      </div>
-                    </div>
-                  )}
-                  {error && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-[#1a1a2e] z-10">
-                      <div className="text-sm text-red-400 text-center max-w-xs px-4">
-                        {error}
-                      </div>
-                    </div>
-                  )}
+              )}
+              {error && (
+                <div className="absolute inset-0 flex items-center justify-center bg-[#1a1a2e] z-20">
+                  <div className="text-sm text-red-400 text-center max-w-xs px-4">
+                    {error}
+                  </div>
                 </div>
-              </>
-            )}
-
-            {/* Hidden mount when no file loaded */}
-            {!fileName && (
-              <div
-                ref={mountRef}
-                className="hidden"
-                style={{ height: 1, width: 1 }}
-                aria-hidden="true"
-              />
-            )}
+              )}
+            </div>
 
             {/* Export buttons — free single export */}
             {fileName && !loading && !error && (
