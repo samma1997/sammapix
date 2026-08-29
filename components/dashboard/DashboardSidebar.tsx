@@ -75,6 +75,7 @@ import {
   Grid,
   Split,
   Calculator,
+  Workflow,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
@@ -215,6 +216,8 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   // ── Multi-step (kept in ALL_SIDEBAR_TOOLS for getToolBySlug lookups) ────────
   { name: "Web Optimize", slug: "weblift", href: "/dashboard/tools/weblift", icon: <Layers className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Blog Ready", slug: "blogdrop", href: "/dashboard/tools/blogdrop", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Workflow Builder", slug: "workflow-builder", href: "/dashboard/workflow", icon: <Workflow className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Node Studio", slug: "node-studio", href: "/dashboard/studio", icon: <Workflow className="h-4 w-4" strokeWidth={1.5} /> },
 ];
 
 // ─── Category definitions ─────────────────────────────────────────────────────
@@ -268,6 +271,10 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   },
 ];
 
+// Niche categories tucked under a collapsed "More" group to keep the sidebar
+// focused on the core image/PDF workflow. All tools stay reachable (search + URL).
+const MORE_CATEGORY_LABELS = new Set(["Archive", "Generate & Dev"]);
+
 // Tools that use AI (show badge)
 const AI_TOOL_SLUGS = new Set(["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "image-to-text", "passport-photo"]);
 
@@ -308,6 +315,9 @@ export default function DashboardSidebar({
 
   // Accordion state: set of open category labels
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set());
+
+  // Whether the collapsed "More" group (niche categories) is expanded
+  const [showMore, setShowMore] = useState(false);
 
   // Search query
   const [searchQuery, setSearchQuery] = useState("");
@@ -368,7 +378,7 @@ export default function DashboardSidebar({
     : [];
 
   // Search results — all tools matching query, flat, excluding multi-step
-  const multiStepSlugs = new Set(["weblift", "blogdrop"]);
+  const multiStepSlugs = new Set(["node-studio"]);
   const searchableTools = ALL_SIDEBAR_TOOLS.filter((t) => !multiStepSlugs.has(t.slug));
   const trimmedQuery = searchQuery.trim().toLowerCase();
   const searchResults = trimmedQuery
@@ -386,6 +396,51 @@ export default function DashboardSidebar({
       ? "bg-[#F5F5F5] dark:bg-[#2A2A2A] text-[#171717] dark:text-[#E5E5E5] font-medium"
       : "text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]",
   ].join(" ");
+
+  // Render one collapsible tool category (used for both core and "More" groups)
+  const renderCategory = (category: ToolCategory) => {
+    const isOpen = openCategories.has(category.label);
+    const tools = category.slugs
+      .map((s) => getToolBySlug(s))
+      .filter(Boolean) as SidebarTool[];
+    return (
+      <div key={category.label}>
+        <button
+          onClick={() => toggleCategory(category.label)}
+          className="flex items-center gap-2 w-full px-2.5 py-1.5 rounded-md text-sm transition-colors duration-150 text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+        >
+          <span className="shrink-0">{category.icon}</span>
+          <span className="flex-1 text-left font-medium">{category.label}</span>
+          <span className="text-[9px] font-medium text-[#A3A3A3] dark:text-[#525252] mr-1">
+            {tools.length}
+          </span>
+          {isOpen ? (
+            <ChevronUp className="h-3 w-3 shrink-0 text-[#A3A3A3]" strokeWidth={2} />
+          ) : (
+            <ChevronDown className="h-3 w-3 shrink-0 text-[#A3A3A3]" strokeWidth={2} />
+          )}
+        </button>
+        {isOpen && (
+          <div className="ml-3 border-l border-[#E5E5E5] dark:border-[#2A2A2A] pl-1 mb-0.5">
+            {tools.map((tool) => (
+              <Link
+                key={tool.slug}
+                href={tool.href}
+                onClick={() => setMobileOpen(false)}
+                className={linkClasses(tool.href)}
+              >
+                <span className="shrink-0">{tool.icon}</span>
+                {tool.name}
+                {AI_TOOL_SLUGS.has(tool.slug) && (
+                  <span className="ml-auto text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
+                )}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
@@ -464,7 +519,7 @@ export default function DashboardSidebar({
           <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
             Multi-step
           </p>
-          {(["weblift", "blogdrop"] as const).map((slug) => {
+          {(["node-studio"] as const).map((slug) => {
             const tool = getToolBySlug(slug);
             if (!tool) return null;
             return (
@@ -551,57 +606,29 @@ export default function DashboardSidebar({
               </div>
             )}
 
-            {/* ── ALL TOOLS — 8 accordion categories ── */}
+            {/* ── ALL TOOLS — core categories + collapsed "More" group ── */}
             <div className="pt-3">
               <p className="px-2.5 mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252]">
                 All Tools
               </p>
-              {TOOL_CATEGORIES.map((category) => {
-                const isOpen = openCategories.has(category.label);
-                const tools = category.slugs
-                  .map((s) => getToolBySlug(s))
-                  .filter(Boolean) as SidebarTool[];
-                return (
-                  <div key={category.label}>
-                    {/* Accordion header */}
-                    <button
-                      onClick={() => toggleCategory(category.label)}
-                      className="flex items-center gap-2 w-full px-2.5 py-1.5 rounded-md text-sm transition-colors duration-150 text-[#525252] dark:text-[#A3A3A3] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
-                    >
-                      <span className="shrink-0">{category.icon}</span>
-                      <span className="flex-1 text-left font-medium">{category.label}</span>
-                      <span className="text-[9px] font-medium text-[#A3A3A3] dark:text-[#525252] mr-1">
-                        {tools.length}
-                      </span>
-                      {isOpen ? (
-                        <ChevronUp className="h-3 w-3 shrink-0 text-[#A3A3A3]" strokeWidth={2} />
-                      ) : (
-                        <ChevronDown className="h-3 w-3 shrink-0 text-[#A3A3A3]" strokeWidth={2} />
-                      )}
-                    </button>
 
-                    {/* Accordion body */}
-                    {isOpen && (
-                      <div className="ml-3 border-l border-[#E5E5E5] dark:border-[#2A2A2A] pl-1 mb-0.5">
-                        {tools.map((tool) => (
-                          <Link
-                            key={tool.slug}
-                            href={tool.href}
-                            onClick={() => setMobileOpen(false)}
-                            className={linkClasses(tool.href)}
-                          >
-                            <span className="shrink-0">{tool.icon}</span>
-                            {tool.name}
-                            {AI_TOOL_SLUGS.has(tool.slug) && (
-                              <span className="ml-auto text-[8px] font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-1.5 py-0.5 rounded">AI</span>
-                            )}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+              {/* Core categories */}
+              {TOOL_CATEGORIES.filter((c) => !MORE_CATEGORY_LABELS.has(c.label)).map(renderCategory)}
+
+              {/* More: niche categories, collapsed by default */}
+              <button
+                onClick={() => setShowMore((v) => !v)}
+                className="flex items-center gap-2 w-full px-2.5 py-1.5 mt-1 rounded-md text-sm transition-colors duration-150 text-[#A3A3A3] dark:text-[#525252] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+              >
+                <span className="flex-1 text-left font-medium">More</span>
+                {showMore ? (
+                  <ChevronUp className="h-3 w-3 shrink-0" strokeWidth={2} />
+                ) : (
+                  <ChevronDown className="h-3 w-3 shrink-0" strokeWidth={2} />
+                )}
+              </button>
+              {showMore &&
+                TOOL_CATEGORIES.filter((c) => MORE_CATEGORY_LABELS.has(c.label)).map(renderCategory)}
             </div>
           </>
         )}

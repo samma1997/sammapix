@@ -16,7 +16,17 @@ import {
   X,
   Sparkles,
   Clock,
+  Wand2,
+  Star,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
+import {
+  getRecentSlugs,
+  getFavoriteSlugs,
+  toggleFavorite,
+} from "@/lib/dashboard/tool-history";
+import { CATEGORY_ORDER, categoryForSlug } from "@/lib/dashboard/tool-categories";
 import type { LucideIcon } from "lucide-react";
 import type { Persona } from "@/types/persona";
 import DashboardReferralCard from "@/components/referral/DashboardReferralCard";
@@ -302,6 +312,9 @@ const IconAiOrganize: React.FC<{ accent: string }> = ({ accent }) => (
 const LS_PERSONA_KEY = "sammapix-persona";
 const LS_INSTALL_DISMISSED_KEY = "sammapix-install-banner-dismissed";
 
+/** Slugs surfaced in the top "Workflows" row — kept out of the grid to avoid duplicates. */
+const WORKFLOW_FEATURED = new Set<string>(["weblift", "blogdrop"]);
+
 // ─── Persona config ───────────────────────────────────────────────────────────
 
 const PERSONA_LABELS: Record<Persona, { label: string; Icon: LucideIcon }> = {
@@ -335,17 +348,17 @@ const PERSONA_TOOL_MAP: Record<Persona, string[]> = {
   social: ["compress", "resizepack", "croproatio", "filmlab", "stampit", "batchname"],
 };
 
-// ─── Category types ──────────────────────────────────────────────────────────
+// ─── Category tabs ────────────────────────────────────────────────────────────
 
-type Category = "All" | "Optimize" | "AI" | "Creative" | "Organize" | "Workflows";
-
-const CATEGORIES: Category[] = ["All", "Optimize", "AI", "Creative", "Organize", "Workflows"];
+/** All tab labels for the Browse-all filter bar: "All" + the 8 sidebar categories. */
+const CATEGORIES: string[] = ["All", ...CATEGORY_ORDER];
 
 // ─── Tool data (matching /tools page style with dashboard hrefs) ─────────────
 
 interface DashToolEntry extends ToolCardData {
   slug: string;
-  category: Category[];
+  /** Legacy field kept for backwards compatibility — not used for filtering. */
+  category: string[];
   isCombo?: boolean;
   /** Extra keywords for smart search — matches user intent, not just tool name */
   keywords: string[];
@@ -1524,8 +1537,25 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const [showPersonaSelector, setShowPersonaSelector] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
+  const [credits, setCredits] = useState<number | null>(null);
+
+  // Fetch AI credit balance (welcome gift shows here so users know they have it)
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/credits/balance", { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (alive && d && typeof d.credits === "number") setCredits(d.credits); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
   const [query, setQuery] = useState("");
   const [searchPlaceholder, setSearchPlaceholder] = useState("What do you want to do? (e.g. make photos smaller)");
+
+  // Recently used + favorites (from localStorage, updated via event)
+  const [recentSlugs, setRecentSlugs] = useState<string[]>([]);
+  const [favSlugs, setFavSlugs] = useState<string[]>([]);
+  // "Browse all" section: collapsed by default when there are recent tools, expanded otherwise (for new users)
+  const [browseOpen, setBrowseOpen] = useState(false);
 
   // Rotate search placeholder suggestions
   useEffect(() => {
@@ -1537,7 +1567,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     }, 3500);
     return () => clearInterval(interval);
   }, [query]);
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [activeCategory, setActiveCategory] = useState<string>("All");
 
   const loadPersona = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -1558,6 +1588,21 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     loadPersona();
     const dismissed = localStorage.getItem(LS_INSTALL_DISMISSED_KEY);
     if (!dismissed) setShowInstallBanner(true);
+
+    // Load initial recents + favs
+    const recent = getRecentSlugs();
+    setRecentSlugs(recent);
+    setFavSlugs(getFavoriteSlugs());
+    // Collapse browse-all only if the user already has recent tools
+    setBrowseOpen(recent.length === 0);
+
+    // Keep in sync when tools are used or starred (from any tab / the tool page)
+    function onToolsChanged() {
+      setRecentSlugs(getRecentSlugs());
+      setFavSlugs(getFavoriteSlugs());
+    }
+    window.addEventListener("sammapix-tools-changed", onToolsChanged);
+    return () => window.removeEventListener("sammapix-tools-changed", onToolsChanged);
   }, [loadPersona]);
 
   // Dispatch custom event when persona changes so sidebar can react
@@ -1630,9 +1675,9 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
       return result; // handled separately below
     }
 
-    // Filter by category
+    // Filter by category — uses the centralised slug->category map
     if (activeCategory !== "All") {
-      result = result.filter((t) => t.category.includes(activeCategory));
+      result = result.filter((t) => categoryForSlug(t.slug) === activeCategory);
     }
 
     // Filter by search query (matches name, tagline, AND smart keywords)
@@ -1656,14 +1701,50 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
   const isSearching = query.trim().length > 0;
   const isFiltering = activeCategory !== "All" || isSearching;
 
+  // Tools already featured in the Workflows row — hidden from the grid when the
+  // row is visible (!isFiltering) to avoid showing them twice. They still appear
+  // in search/category results (row hidden there).
+  const gridTools = isFiltering
+    ? ALL_DASH_TOOLS
+    : ALL_DASH_TOOLS.filter((t) => !WORKFLOW_FEATURED.has(t.slug));
+
   // Persona-based recommended/other split
   const recommendedSlugs = persona ? PERSONA_TOOL_MAP[persona] : [];
   const recommendedTools = persona
-    ? ALL_DASH_TOOLS.filter((t) => recommendedSlugs.includes(t.slug))
+    ? gridTools.filter((t) => recommendedSlugs.includes(t.slug))
     : [];
   const otherTools = persona
-    ? ALL_DASH_TOOLS.filter((t) => !recommendedSlugs.includes(t.slug))
+    ? gridTools.filter((t) => !recommendedSlugs.includes(t.slug))
     : [];
+
+  // ─── Derived data for new sections ────────────────────────────────────────
+
+  // Map slugs to tool entries (ignoring unknown slugs)
+  const recentTools = useMemo(
+    () =>
+      recentSlugs
+        .slice(0, 8)
+        .map((s) => ALL_DASH_TOOLS.find((t) => t.slug === s))
+        .filter((t): t is DashToolEntry => t !== undefined),
+    [recentSlugs]
+  );
+
+  const favoriteTools = useMemo(
+    () =>
+      favSlugs
+        .map((s) => ALL_DASH_TOOLS.find((t) => t.slug === s))
+        .filter((t): t is DashToolEntry => t !== undefined),
+    [favSlugs]
+  );
+
+  // ─── Star toggle handler (does NOT need state — event dispatches re-render) ──
+  function handleToggleFav(e: React.MouseEvent, slug: string) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(slug);
+    // getFavoriteSlugs() is re-read inside the event listener already
+    setFavSlugs(getFavoriteSlugs());
+  }
 
   if (!mounted) {
     return (
@@ -1673,13 +1754,53 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
     );
   }
 
-  return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 md:py-8 pb-16 space-y-4 md:space-y-8">
+  // ─── Shared helper: renders a ToolCard wrapped with a star-overlay ────────
+  function ToolCardWithStar({ tool }: { tool: DashToolEntry }) {
+    const fav = favSlugs.includes(tool.slug);
+    return (
+      <div key={tool.slug} className="relative h-full group/card">
+        {/* MULTI-STEP badge */}
+        {tool.isCombo && (
+          <span
+            className="absolute top-3 left-3 z-10 text-[9px] font-bold uppercase tracking-widest
+                       bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
+          >
+            MULTI-STEP
+          </span>
+        )}
+        {/* Star favourite button */}
+        <button
+          onClick={(e) => handleToggleFav(e, tool.slug)}
+          aria-label={fav ? "Remove from favourites" : "Add to favourites"}
+          className={`
+            absolute top-3 right-3 z-10 p-1 rounded-full
+            transition-all duration-150
+            ${fav
+              ? "opacity-100 text-[#F59E0B]"
+              : "opacity-0 group-hover/card:opacity-100 text-[#A3A3A3] dark:text-[#525252] hover:text-[#F59E0B]"
+            }
+            bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-sm
+            hover:scale-110 active:scale-95
+          `}
+        >
+          <Star
+            className="h-3.5 w-3.5"
+            strokeWidth={1.5}
+            fill={fav ? "#F59E0B" : "none"}
+          />
+        </button>
+        <ToolCard tool={tool} />
+      </div>
+    );
+  }
 
-      {/* Founding deal banner — only renders for free users while the coupon is active. */}
+  return (
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 md:py-8 pb-16 space-y-6 md:space-y-8">
+
+      {/* ── Founding deal banner ── */}
       <FoundingBanner isPro={isPro} />
 
-      {/* Day Pass active banner */}
+      {/* ── Day Pass active banner ── */}
       {showDayPassBanner && (
         <div className="flex items-start gap-3 rounded-md border border-[#6366F1]/30 dark:border-[#6366F1]/20 bg-[#EEF2FF]/60 dark:bg-[#6366F1]/10 px-4 py-3 text-sm text-[#4338CA] dark:text-[#A5B4FC]">
           <Clock className="h-4 w-4 shrink-0 mt-0.5 text-[#6366F1]" strokeWidth={1.5} />
@@ -1697,7 +1818,7 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
         </div>
       )}
 
-      {/* Day Pass canceled banner */}
+      {/* ── Day Pass canceled banner ── */}
       {dayPassCanceled && (
         <div className="flex items-start gap-3 rounded-md border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#FAFAFA] dark:bg-[#252525] px-4 py-3 text-sm text-[#737373] dark:text-[#A3A3A3]">
           <span>Payment canceled. Your free plan is still active.</span>
@@ -1711,40 +1832,14 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
         </div>
       )}
 
-      {/* -- Welcome + Plan status -- */}
+      {/* ─────────────────────────────────────────────────────────────────────────
+          1. HEADER — compact welcome + plan chip + AI limits
+      ───────────────────────────────────────────────────────────────────────── */}
       <section>
-        <div className="flex items-start justify-between gap-4 mb-5">
-          <div>
-            <h1 className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-1.5">
-              Welcome back, {firstName}
-            </h1>
-            {persona && !showPersonaSelector &&
-              (() => {
-                const { label, Icon } = PERSONA_LABELS[persona];
-                return (
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-widest text-[#6366F1] bg-[#6366F1]/8 dark:bg-[#6366F1]/15 px-2 py-0.5 rounded">
-                      <Icon className="h-3 w-3" strokeWidth={1.5} />
-                      {label}
-                    </span>
-                    <button
-                      onClick={handleChangeRole}
-                      className="text-xs text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#A3A3A3] underline-offset-2 hover:underline transition-colors"
-                    >
-                      Change
-                    </button>
-                  </div>
-                );
-              })()}
-            {personaSkipped && !showPersonaSelector && (
-              <button
-                onClick={handleChangeRole}
-                className="text-xs text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#A3A3A3] underline-offset-2 hover:underline transition-colors"
-              >
-                Set your role to get recommendations
-              </button>
-            )}
-          </div>
+        <div className="flex items-center justify-between gap-4 mb-2">
+          <h1 className="text-xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight">
+            Welcome back, {firstName}
+          </h1>
           <div className="flex items-center gap-2 shrink-0">
             {isPro ? (
               <span className="flex items-center gap-1 text-[11px] font-semibold bg-[#171717] dark:bg-white text-white dark:text-[#171717] px-2 py-0.5 rounded">
@@ -1759,47 +1854,141 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
           </div>
         </div>
 
-        {/* AI limits */}
-        <div className="flex items-center gap-2 text-xs text-[#737373] mb-4">
+        {/* Persona chip row */}
+        <div className="flex items-center gap-2 flex-wrap mb-2">
+          {persona && !showPersonaSelector && (() => {
+            const { label, Icon } = PERSONA_LABELS[persona];
+            return (
+              <>
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-widest text-[#6366F1] bg-[#6366F1]/8 dark:bg-[#6366F1]/15 px-2 py-0.5 rounded">
+                  <Icon className="h-3 w-3" strokeWidth={1.5} />
+                  {label}
+                </span>
+                <button
+                  onClick={handleChangeRole}
+                  className="text-[11px] text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#A3A3A3] underline-offset-2 hover:underline transition-colors"
+                >
+                  Change
+                </button>
+              </>
+            );
+          })()}
+          {personaSkipped && !showPersonaSelector && (
+            <button
+              onClick={handleChangeRole}
+              className="text-[11px] text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#A3A3A3] underline-offset-2 hover:underline transition-colors"
+            >
+              Set your role to get recommendations
+            </button>
+          )}
+        </div>
+
+        {/* AI limits row */}
+        <div className="flex items-center gap-2 text-xs text-[#737373]">
           <Sparkles className="h-3.5 w-3.5 text-[#8B5CF6]" strokeWidth={1.5} />
           <span>
-            AI tools: {isPro ? "unlimited" : "10/day"} {!isPro && " -- "}
+            AI tools: {isPro ? "unlimited" : "10/day"}
+            {credits !== null && credits > 0 && (
+              <>
+                {" · "}
+                <Link href="/dashboard/credits" className="text-[#8B5CF6] font-medium hover:underline">
+                  {credits} AI credits
+                </Link>
+              </>
+            )}
             {!isPro && (
-              <button onClick={handleUpgradeClick} disabled={checkoutLoading} className="text-[#6366F1] hover:underline">
-                {checkoutLoading ? "Redirecting..." : "Upgrade for unlimited"}
-              </button>
+              <>
+                {" — "}
+                <button
+                  onClick={handleUpgradeClick}
+                  disabled={checkoutLoading}
+                  className="text-[#6366F1] hover:underline"
+                >
+                  {checkoutLoading ? "Redirecting..." : "Upgrade for unlimited"}
+                </button>
+              </>
             )}
           </span>
         </div>
+      </section>
 
-        {/* Install app banner */}
-        {showInstallBanner && (
-          <div className="mb-5 flex items-start gap-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg px-4 py-3 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
-            <Download className="h-4 w-4 text-[#A3A3A3] dark:text-[#525252] shrink-0 mt-0.5" strokeWidth={1.5} />
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] leading-snug">Install SammaPix app</p>
-              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-0.5 leading-snug">
-                Add to your desktop for instant access. Click the install icon in your browser&apos;s address bar.
-              </p>
-            </div>
-            <button
-              onClick={() => { localStorage.setItem(LS_INSTALL_DISMISSED_KEY, "1"); setShowInstallBanner(false); }}
-              aria-label="Dismiss install banner"
-              className="shrink-0 p-1 rounded text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
-            >
-              <X className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </button>
+      {/* ─────────────────────────────────────────────────────────────────────────
+          2. RECENTLY USED (max 8, only when non-empty)
+      ───────────────────────────────────────────────────────────────────────── */}
+      {recentTools.length > 0 && (
+        <section>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-3">
+            Recently Used
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {recentTools.map((tool) => (
+              <ToolCardWithStar key={tool.slug} tool={tool} />
+            ))}
           </div>
-        )}
+        </section>
+      )}
 
-        {/* Inline persona selector */}
-        {showPersonaSelector && (
-          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-5 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+      {/* ─────────────────────────────────────────────────────────────────────────
+          3. FAVOURITES (only when non-empty)
+      ───────────────────────────────────────────────────────────────────────── */}
+      {favoriteTools.length > 0 && (
+        <section>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#F59E0B] mb-3">
+            Favourites
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {favoriteTools.map((tool) => (
+              <ToolCardWithStar key={tool.slug} tool={tool} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────────────────
+          4. RECOMMENDED FOR YOU (persona-based)
+      ───────────────────────────────────────────────────────────────────────── */}
+      {!showPersonaSelector && (
+        <section>
+          {persona ? (
+            <>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6366F1] mb-3">
+                Recommended for you
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {recommendedTools.map((tool) => (
+                  <ToolCardWithStar key={tool.slug} tool={tool} />
+                ))}
+              </div>
+            </>
+          ) : (
+            /* No persona set yet — quiet invite */
+            <div className="flex items-center gap-3 rounded-xl border border-dashed border-[#E5E5E5] dark:border-[#2A2A2A] px-4 py-3">
+              <Sparkles className="h-4 w-4 text-[#A3A3A3] shrink-0" strokeWidth={1.5} />
+              <span className="text-sm text-[#737373] dark:text-[#A3A3A3]">
+                Set your role for tailored picks.{" "}
+                <button
+                  onClick={handleChangeRole}
+                  className="text-[#6366F1] hover:underline font-medium"
+                >
+                  Set role
+                </button>
+              </span>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────────────────
+          Inline persona selector (non-blocking, shows when showPersonaSelector)
+      ───────────────────────────────────────────────────────────────────────── */}
+      {showPersonaSelector && (
+        <section>
+          <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-5 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
             <h2 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">
               What do you use SammaPix for?
             </h2>
             <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mb-4">
-              We will show you the most relevant tools for your workflow.
+              Optional — pick your role and we highlight the most relevant tools first.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {PERSONAS.map(({ id, label, description, Icon }) => (
@@ -1823,178 +2012,177 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
               Skip for now
             </button>
           </div>
-        )}
-      </section>
-
-      {/* -- Referral card -- */}
-      <DashboardReferralCard userPlan={isPro ? "pro" : "free"} />
-
-      {/* -- Sticky search bar + Category tabs -- */}
-      <section className="fixed top-12 left-0 right-0 md:sticky md:top-0 md:left-auto md:right-auto z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm px-4 sm:px-6 md:-mx-6 pt-2 pb-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
-        <div className="flex flex-col gap-2.5">
-          {/* Search input */}
-          <div className="relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A3A3A3] dark:text-[#525252] pointer-events-none">
-              <SearchIcon />
-            </span>
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={searchPlaceholder}
-              aria-label="Search tools — describe what you want to do"
-              className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-[#2A2A2A]
-                         bg-[#FAFAFA] dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5]
-                         placeholder-[#A3A3A3] dark:placeholder-[#525252]
-                         focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent
-                         shadow-sm transition-all"
-            />
-          </div>
-
-          {/* Category tabs */}
-          <div
-            className="flex gap-1.5 overflow-x-auto pb-0.5"
-            style={{ scrollbarWidth: "none" }}
-            role="tablist"
-            aria-label="Filter tools by category"
-          >
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                role="tab"
-                aria-selected={activeCategory === cat}
-                onClick={() => {
-                  setActiveCategory(cat);
-                  setQuery("");
-                }}
-                className={`
-                  flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all
-                  ${activeCategory === cat
-                    ? "bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717]"
-                    : "bg-transparent text-gray-500 dark:text-[#737373] hover:bg-gray-100 dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
-                  }
-                `}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Spacer for fixed search bar on mobile */}
-      <div className="h-20 md:h-0" aria-hidden="true" />
-
-      {/* -- Tool grid -- */}
-      {isFiltering ? (
-        /* Filtered/searched view */
-        <section>
-          <p className="text-xs text-gray-400 dark:text-[#525252] mb-5">
-            {isSearching
-              ? `${filteredTools.length} result${filteredTools.length !== 1 ? "s" : ""} for "${query}"`
-              : `${filteredTools.length} tool${filteredTools.length !== 1 ? "s" : ""} in ${activeCategory}`}
-          </p>
-
-          {filteredTools.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {filteredTools.map((tool) => (
-                <div key={tool.slug} className="relative h-full">
-                  {tool.isCombo && (
-                    <span
-                      className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
-                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
-                    >
-                      MULTI-STEP
-                    </span>
-                  )}
-                  <ToolCard tool={tool} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="py-16 text-center">
-              <p className="text-sm text-gray-500 dark:text-[#737373]">
-                No tools found. Try a different search.
-              </p>
-              <button
-                onClick={() => { setQuery(""); setActiveCategory("All"); }}
-                className="mt-4 text-xs text-[#6366F1] hover:underline"
-              >
-                Clear search
-              </button>
-            </div>
-          )}
-        </section>
-      ) : persona && !showPersonaSelector ? (
-        /* Persona-filtered view with recommended + others */
-        <>
-          <section>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6366F1] mb-4">
-              Recommended for you
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {recommendedTools.map((tool) => (
-                <div key={tool.slug} className="relative h-full">
-                  {tool.isCombo && (
-                    <span
-                      className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
-                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
-                    >
-                      MULTI-STEP
-                    </span>
-                  )}
-                  <ToolCard tool={tool} />
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] mb-4">
-              All other tools
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {otherTools.map((tool) => (
-                <div key={tool.slug} className="relative h-full opacity-60 hover:opacity-100 transition-opacity">
-                  {tool.isCombo && (
-                    <span
-                      className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
-                                 bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
-                    >
-                      MULTI-STEP
-                    </span>
-                  )}
-                  <ToolCard tool={tool} />
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      ) : (
-        /* Default: all tools */
-        <section>
-          <p className="text-xs text-gray-400 dark:text-[#525252] mb-5">
-            {ALL_DASH_TOOLS.length} tools
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {ALL_DASH_TOOLS.map((tool) => (
-              <div key={tool.slug} className="relative h-full">
-                {tool.isCombo && (
-                  <span
-                    className="absolute top-3 right-3 z-10 text-[9px] font-bold uppercase tracking-widest
-                               bg-[#525252] dark:bg-[#737373] text-white px-2 py-0.5 rounded-full pointer-events-none"
-                  >
-                    MULTI-STEP
-                  </span>
-                )}
-                <ToolCard tool={tool} />
-              </div>
-            ))}
-          </div>
         </section>
       )}
 
-      {/* -- Upgrade pitch for free users -- */}
+      {/* ─────────────────────────────────────────────────────────────────────────
+          5. NODE STUDIO — single card in evidenza
+      ───────────────────────────────────────────────────────────────────────── */}
+      <section>
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6366F1] mb-3">
+          Node Studio
+        </p>
+        <Link
+          href="/dashboard/studio"
+          className="group relative flex items-center gap-4 rounded-xl border border-[#6366F1]/40 bg-gradient-to-r from-[#6366F1]/6 to-transparent dark:from-[#6366F1]/12 p-4 hover:border-[#6366F1]/70 hover:shadow-[0_2px_16px_rgba(99,102,241,0.12)] transition-all duration-200"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#6366F1]/15">
+            <Wand2 className="h-5 w-5 text-[#6366F1]" strokeWidth={1.5} />
+          </span>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">Node Studio</span>
+              <span className="text-[9px] font-bold uppercase tracking-widest bg-[#6366F1] text-white px-2 py-0.5 rounded-full">
+                Multi-step
+              </span>
+            </div>
+            <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-snug">
+              Connect tools on a visual canvas. Output of one block feeds the next.
+            </p>
+          </div>
+          <ArrowRight className="h-4 w-4 text-[#6366F1] ml-auto shrink-0 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" strokeWidth={1.5} />
+        </Link>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────────────────
+          6. BROWSE ALL TOOLS — collapsible
+      ───────────────────────────────────────────────────────────────────────── */}
+      <section>
+        {/* Collapsible header */}
+        <button
+          onClick={() => setBrowseOpen((v) => !v)}
+          className="w-full flex items-center justify-between gap-3 group mb-3"
+          aria-expanded={browseOpen}
+        >
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#A3A3A3] dark:text-[#525252] group-hover:text-[#737373] dark:group-hover:text-[#A3A3A3] transition-colors">
+            Browse all {gridTools.length} tools
+          </p>
+          {browseOpen
+            ? <ChevronUp className="h-3.5 w-3.5 text-[#A3A3A3] dark:text-[#525252]" strokeWidth={1.5} />
+            : <ChevronDown className="h-3.5 w-3.5 text-[#A3A3A3] dark:text-[#525252]" strokeWidth={1.5} />
+          }
+        </button>
+
+        {browseOpen && (
+          <>
+            {/* ── Sticky search bar + Category tabs (inside Browse All) ── */}
+            <div className="fixed top-12 left-0 right-0 md:sticky md:top-0 md:left-auto md:right-auto z-30 bg-white dark:bg-[#191919] md:bg-white/95 md:dark:bg-[#191919]/95 md:backdrop-blur-sm px-4 sm:px-6 md:-mx-6 pt-2 pb-2 border-b border-[#E5E5E5] dark:border-[#333] md:border-b-0">
+              <div className="flex flex-col gap-2.5">
+                <div className="relative">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A3A3A3] dark:text-[#525252] pointer-events-none">
+                    <SearchIcon />
+                  </span>
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder={searchPlaceholder}
+                    aria-label="Search tools — describe what you want to do"
+                    className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-[#2A2A2A]
+                               bg-[#FAFAFA] dark:bg-[#1E1E1E] text-[#171717] dark:text-[#E5E5E5]
+                               placeholder-[#A3A3A3] dark:placeholder-[#525252]
+                               focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent
+                               shadow-sm transition-all"
+                  />
+                </div>
+                <div
+                  className="flex gap-1.5 overflow-x-auto pb-0.5"
+                  style={{ scrollbarWidth: "none" }}
+                  role="tablist"
+                  aria-label="Filter tools by category"
+                >
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      role="tab"
+                      aria-selected={activeCategory === cat}
+                      onClick={() => { setActiveCategory(cat); setQuery(""); }}
+                      className={`
+                        flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all
+                        ${activeCategory === cat
+                          ? "bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717]"
+                          : "bg-transparent text-gray-500 dark:text-[#737373] hover:bg-gray-100 dark:hover:bg-[#2A2A2A] hover:text-[#171717] dark:hover:text-[#E5E5E5]"
+                        }
+                      `}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Spacer for fixed bar on mobile */}
+            <div className="h-20 md:h-0" aria-hidden="true" />
+
+            {/* Grid */}
+            {isFiltering ? (
+              <div>
+                <p className="text-xs text-gray-400 dark:text-[#525252] mb-4">
+                  {isSearching
+                    ? `${filteredTools.length} result${filteredTools.length !== 1 ? "s" : ""} for "${query}"`
+                    : `${filteredTools.length} tool${filteredTools.length !== 1 ? "s" : ""} in ${activeCategory}`}
+                </p>
+                {filteredTools.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {filteredTools.map((tool) => (
+                      <ToolCardWithStar key={tool.slug} tool={tool} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="py-12 text-center">
+                    <p className="text-sm text-gray-500 dark:text-[#737373]">No tools found. Try a different search.</p>
+                    <button
+                      onClick={() => { setQuery(""); setActiveCategory("All"); }}
+                      className="mt-4 text-xs text-[#6366F1] hover:underline"
+                    >
+                      Clear search
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                <p className="text-xs text-gray-400 dark:text-[#525252] mb-4">
+                  {gridTools.length} tools
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {gridTools.map((tool) => (
+                    <ToolCardWithStar key={tool.slug} tool={tool} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────────────────
+          7. FOOTER — install + referral + upgrade
+      ───────────────────────────────────────────────────────────────────────── */}
+      <div className="pt-2 space-y-4 border-t border-[#F0F0F0] dark:border-[#222]">
+        {showInstallBanner && (
+          <div className="flex items-start gap-3 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg px-4 py-3 bg-[#FAFAFA] dark:bg-[#1E1E1E]">
+            <Download className="h-4 w-4 text-[#A3A3A3] dark:text-[#525252] shrink-0 mt-0.5" strokeWidth={1.5} />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5] leading-snug">Install SammaPix app</p>
+              <p className="text-xs text-[#737373] dark:text-[#A3A3A3] mt-0.5 leading-snug">
+                Add to your desktop for instant access. Click the install icon in your browser&apos;s address bar.
+              </p>
+            </div>
+            <button
+              onClick={() => { localStorage.setItem(LS_INSTALL_DISMISSED_KEY, "1"); setShowInstallBanner(false); }}
+              aria-label="Dismiss install banner"
+              className="shrink-0 p-1 rounded text-[#A3A3A3] hover:text-[#525252] dark:hover:text-[#E5E5E5] hover:bg-[#F5F5F5] dark:hover:bg-[#2A2A2A] transition-colors"
+            >
+              <X className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </button>
+          </div>
+        )}
+
+        <DashboardReferralCard userPlan={isPro ? "pro" : "free"} />
+      </div>
+
       {!isPro && (
         <section>
           <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg p-4">
@@ -2003,9 +2191,6 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Upgrade to Pro</h3>
                 <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Unlimited AI, no ads, ZIP downloads. $9/mo.</p>
               </div>
-              {/* Real link (not a JS-only button): navigates reliably even if
-                  client JS/hydration hiccups on mobile. The upgrade page
-                  auto-starts the Stripe checkout from ?plan=monthly. */}
               <Link
                 href="/dashboard/upgrade?plan=monthly"
                 prefetch={false}

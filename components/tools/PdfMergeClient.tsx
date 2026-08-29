@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { saveAs } from "file-saver";
+import { resolveFileLimit } from "@/lib/constants";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -47,7 +48,8 @@ function formatBytes(bytes: number): string {
 export default function PdfMergeClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const fileLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const isAuthenticated = Boolean(session?.user);
+  const fileLimit = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
 
   const [items, setItems] = useState<PdfItem[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);

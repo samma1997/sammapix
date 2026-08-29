@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
+import { recordToolUse } from "@/lib/dashboard/tool-history";
 import Link from "next/link";
 import HowToUse from "@/components/tools/HowToUse";
 import {
@@ -1488,6 +1489,11 @@ function ComboWrapper({ config }: { config: ComboConfig }) {
 export default function DashboardToolPage() {
   const params = useParams();
   const slug = params.tool as string;
+
+  // Record tool usage for "Recently Used" section in dashboard home
+  useEffect(() => {
+    if (slug) recordToolUse(slug);
+  }, [slug]);
 
   // Check if it's a combo tool
   const comboConfig = COMBO_CONFIGS[slug];

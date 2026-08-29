@@ -284,7 +284,7 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
   // Files served from /public (wasm modules, web-worker scripts, images, fonts…)
   // must never be rate-limited or bot-blocked, or in-browser tools break.
   // (Web Worker fetches of /libarchive-worker.js were getting 403'd here.)
-  if (/\.(wasm|js|mjs|css|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|mp3|mp4|json|txt|xml|map)$/i.test(pathname)) {
+  if (/\.(wasm|js|mjs|css|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|mp3|mp4|json|txt|xml|map|hdr|exr)$/i.test(pathname)) {
     return NextResponse.next();
   }
 

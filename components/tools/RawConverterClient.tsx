@@ -16,7 +16,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import { MAX_FILES_FREE, MAX_FILES_PRO, resolveFileLimit } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { trackEvent } from "@/lib/analytics";
 import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
@@ -322,7 +322,8 @@ const PrivacyBadge = () => (
 export default function RawConverterClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const fileLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const isAuthenticated = Boolean(session?.user);
+  const fileLimit = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
 
   const [uiState, setUiState] = useState<UIState>("idle");
   const [files, setFiles] = useState<ConvertedFile[]>([]);

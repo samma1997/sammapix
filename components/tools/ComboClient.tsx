@@ -8,7 +8,7 @@ import { saveAs } from "file-saver";
 import { Upload, Download, CheckCircle2, Loader2, Circle, AlertCircle, Lock, Sparkles, Play } from "lucide-react";
 import ImportSourceButtons from "@/components/ui/ImportSourceButtons";
 import type { PipelineStep as EnginePipelineStep, PipelineStepId } from "@/lib/pipeline-engine";
-import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE, MAX_FILES_PRO } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE, MAX_FILES_PRO, resolveFileLimit } from "@/lib/constants";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 
 // ─── Language options for AI Rename ─────────────────────────────────────────
@@ -194,7 +194,7 @@ export default function ComboClient({ toolName, steps: initialSteps, requiresLog
 
   const isAuthenticated = !!session?.user;
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const fileLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const fileLimit = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
 
   // Free users: max 2 active steps
   const FREE_MAX_STEPS = 2;

@@ -6,8 +6,34 @@ import CredentialsProvider from "next-auth/providers/credentials";
 /** How often (ms) we re-check the user's plan from Stripe in the JWT callback. */
 const PLAN_REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
+/**
+ * Login di sviluppo — attiva SOLO fuori produzione (npm run dev in locale).
+ * Serve a testare la dashboard senza dover configurare gli URI OAuth di Google
+ * per la porta locale. In produzione NON viene MAI aggiunto al set di provider,
+ * quindi non esiste alcuna scorciatoia di accesso sul sito live.
+ */
+const devProviders =
+  process.env.NODE_ENV !== "production"
+    ? [
+        CredentialsProvider({
+          id: "dev-login",
+          name: "Dev Login (solo locale)",
+          credentials: {
+            email: { label: "Email", type: "text" },
+          },
+          async authorize(credentials) {
+            if (process.env.NODE_ENV === "production") return null;
+            const email = credentials?.email?.trim().toLowerCase();
+            if (!email || !email.includes("@")) return null;
+            return { id: email, email, name: email.split("@")[0] };
+          },
+        }),
+      ]
+    : [];
+
 export const authOptions: AuthOptions = {
   providers: [
+    ...devProviders,
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
@@ -80,6 +106,17 @@ export const authOptions: AuthOptions = {
         const { getUserPlan } = await import("@/lib/user-plan");
         token.plan = await getUserPlan(user.email);
         token.planCheckedAt = Date.now();
+
+        // One-time welcome gift: grant free AI credits on the very first sign-in.
+        // Idempotent (SET NX marker), fire-and-forget so it never blocks login.
+        try {
+          const { grantSignupBonusOnce } = await import("@/lib/credits");
+          const { SIGNUP_BONUS_CREDITS } = await import("@/lib/constants");
+          const granted = await grantSignupBonusOnce(user.email, SIGNUP_BONUS_CREDITS);
+          if (granted) console.log(`[signup-bonus] +${SIGNUP_BONUS_CREDITS} AI credits for ${user.email}`);
+        } catch (err) {
+          console.error("[signup-bonus] grant failed:", err instanceof Error ? err.message : err);
+        }
       } else if (token.email) {
         // Subsequent JWT refreshes- re-check plan every PLAN_REFRESH_INTERVAL_MS
         const lastChecked = (token.planCheckedAt as number) ?? 0;

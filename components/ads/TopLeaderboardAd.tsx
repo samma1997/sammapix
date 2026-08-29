@@ -14,6 +14,8 @@ import AdUnit from "@/components/ads/AdUnit";
 export default function TopLeaderboardAd() {
   const { status } = useSession();
   if (status !== "unauthenticated") return null;
+  // In development the ad renders nothing, so don't reserve the empty band.
+  if (process.env.NODE_ENV !== "production") return null;
 
   return (
     <div className="hidden md:block max-w-5xl mx-auto px-4 sm:px-6 pt-4">
