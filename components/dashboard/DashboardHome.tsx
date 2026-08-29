@@ -2189,10 +2189,10 @@ export default function DashboardHome({ userName, userPlan }: DashboardHomeProps
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">Upgrade to Pro</h3>
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Unlimited AI, no ads, ZIP downloads. $9/mo.</p>
+                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">Unlimited AI, no ads, ZIP downloads. Go annual and save ~40%.</p>
               </div>
               <Link
-                href="/dashboard/upgrade?plan=monthly"
+                href="/dashboard/upgrade"
                 prefetch={false}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-[#6366F1] text-[#6366F1] rounded-md hover:bg-[#6366F1]/5 dark:hover:bg-[#6366F1]/10 transition-colors shrink-0"
               >

@@ -286,7 +286,8 @@ export default function PricingView() {
   const pathname = rawPathname ?? "";
   const isIt = pathname.startsWith("/it");
 
-  const [annual, setAnnual] = useState(false);
+  // Default to annual (better LTV, fixes churn); monthly stays one click away.
+  const [annual, setAnnual] = useState(true);
   const savePercent = Math.round((1 - 65 / (9 * 12)) * 100);
 
   // Founding deal — render discounted price when coupon is still available.

@@ -24,7 +24,8 @@ interface DashboardUpgradeProps {
 export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
   const searchParams = useSearchParams();
   const planParam = searchParams.get("plan");
-  const initialAnnual = planParam === "annual";
+  // Default to annual (better LTV, fixes churn) unless the user explicitly asked monthly.
+  const initialAnnual = planParam !== "monthly";
 
   const [loading, setLoading] = useState(false);
   const [annual, setAnnual] = useState(initialAnnual);
